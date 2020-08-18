@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VisioForge.NetCore.VideoCapture.TRIAL" Version="12.0.55.0" />
+    <PackageReference Include="VisioForge.NetCore.VideoCapture.TRIAL" Version="12.0.56.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -132,19 +132,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.0.55</Version>
+<Version>12.0.56</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.0.55</Version>
+<Version>12.0.56</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.0.55</Version>
+<Version>12.0.56</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.0.55</Version>
+<Version>12.0.56</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL">
-<Version>12.0.55</Version>
+<Version>12.0.56</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
