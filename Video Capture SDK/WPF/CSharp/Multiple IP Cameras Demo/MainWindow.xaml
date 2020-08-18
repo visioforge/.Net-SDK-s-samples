@@ -1,0 +1,77 @@
+﻿<Window x:Class="Multiple_IP_Cameras_Demo_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Multiple_IP_Cameras_Demo_WPF"
+        xmlns:wpf="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
+        mc:Ignorable="d"
+        Title="Video Capture SDK .Net - Multiple IP Cameras Demo" Height="727" Width="1209" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="280" Margin="10,10,0,0" VerticalAlignment="Top" Width="380" Background="Black">
+            <wpf:VideoCapture x:Name="videoCapture1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Left" Height="280" Margin="410,10,0,0" VerticalAlignment="Top" Width="380" Background="Black">
+            <wpf:VideoCapture x:Name="videoCapture2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+        </Grid>
+        <TextBox x:Name="edURL1" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
+        <Button x:Name="btStart1" Content="Start" HorizontalAlignment="Left" Margin="10,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStart1_Click" />
+        <Button x:Name="btStop1" Content="Stop" HorizontalAlignment="Left" Margin="90,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStop1_Click"/>
+        <TextBox x:Name="edURL2" HorizontalAlignment="Left" Margin="410,295,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
+        <Button x:Name="btStart2" Content="Start" HorizontalAlignment="Left" Margin="411,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStart2_Click" />
+        <Button x:Name="btStop2" Content="Stop" HorizontalAlignment="Left" Margin="491,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStop2_Click" />
+
+        <Grid HorizontalAlignment="Left" Height="280" Margin="10,350,0,0" VerticalAlignment="Top" Width="380" Background="Black">
+            <wpf:VideoCapture x:Name="videoCapture3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+        </Grid>
+
+        <Grid HorizontalAlignment="Left" Height="280" Margin="410,350,0,0" VerticalAlignment="Top" Width="380" Background="Black">
+            <wpf:VideoCapture x:Name="videoCapture4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+        </Grid>
+
+        <TextBox x:Name="edURL3" HorizontalAlignment="Left" Margin="10,635,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
+        <Button x:Name="btStart3" Content="Start" HorizontalAlignment="Left" Margin="10,658,0,0" VerticalAlignment="Top" Width="75" Click="btStart3_Click" />
+        <Button x:Name="btStop3" Content="Stop" HorizontalAlignment="Left" Margin="90,658,0,0" VerticalAlignment="Top" Width="75" Click="btStop3_Click"/>
+        <TextBox x:Name="edURL4" HorizontalAlignment="Left" Margin="410,635,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
+        <Button x:Name="btStart4" Content="Start" HorizontalAlignment="Left" Margin="411,658,0,0" VerticalAlignment="Top" Width="75" Click="btStart4_Click" />
+        <Button x:Name="btStop4" Content="Stop" HorizontalAlignment="Left" Margin="491,658,0,0" VerticalAlignment="Top" Width="75" Click="btStop4_Click" />
+        <Grid HorizontalAlignment="Left" Height="23" Margin="235,325,0,0" VerticalAlignment="Top" Width="155">
+            <RadioButton x:Name="rbPreview1" Content="Preview" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton x:Name="rbCapture1" Content="Capture" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="23" Margin="635,325,0,0" VerticalAlignment="Top" Width="155">
+            <RadioButton x:Name="rbPreview2" Content="Preview" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton x:Name="rbCapture2" Content="Capture" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="23" Margin="235,661,0,0" VerticalAlignment="Top" Width="155">
+            <RadioButton x:Name="rbPreview3" Content="Preview" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton x:Name="rbCapture3" Content="Capture" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="23" Margin="635,661,0,0" VerticalAlignment="Top" Width="155">
+            <RadioButton x:Name="rbPreview4" Content="Preview" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton x:Name="rbCapture4" Content="Capture" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Label x:Name="label" Content="Engine" HorizontalAlignment="Left" Margin="805,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbEngine" HorizontalAlignment="Left" Margin="805,36,0,0" VerticalAlignment="Top" Width="155" SelectedIndex="2">
+            <ComboBoxItem Content="Auto (VLC engine)" />
+            <ComboBoxItem Content="Auto (FFMPEG engine)" />
+            <ComboBoxItem Content="Auto (LAV engine)" />
+            <ComboBoxItem Content="Auto (LAV engine, GPU)" />
+            <ComboBoxItem Content="RTSP (Live555 engine)" />
+            <ComboBoxItem Content="HTTP (FFMPEG engine)" />
+            <ComboBoxItem Content="MMS - WMV" />
+            <ComboBoxItem Content="RTSP - UDP (FFMPEG engine)" />
+            <ComboBoxItem Content="RTSP - TCP (FFMPEG engine)" />
+            <ComboBoxItem Content="RTSP over HTTP (FFMPEG engine)" />
+            <ComboBoxItem Content="HTTP MJPEG Low Latency"/>
+            <ComboBoxItem Content="RTSP Low Latency TCP"/>
+            <ComboBoxItem Content="RTSP Low Latency UDP"/>
+        </ComboBox>
+        <Label x:Name="label1" Content="Output files will be saved into My Videos folder" HorizontalAlignment="Left" Margin="805,79,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edLog" HorizontalAlignment="Left" Height="300" Margin="805,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="371"/>
+        <Label x:Name="label2" Content="Log" HorizontalAlignment="Left" Margin="805,114,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbDebug" Content="Debug" HorizontalAlignment="Left" Margin="1120,120,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

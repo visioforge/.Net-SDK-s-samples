@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoEditMVC", "VideoEditMVC.csproj", "{AE1CD4A8-7F3A-40EC-A132-57B6F2BB3634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE1CD4A8-7F3A-40EC-A132-57B6F2BB3634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE1CD4A8-7F3A-40EC-A132-57B6F2BB3634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE1CD4A8-7F3A-40EC-A132-57B6F2BB3634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE1CD4A8-7F3A-40EC-A132-57B6F2BB3634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61B157CB-CC8B-44A7-AEC8-203AC74E4145}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,107 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Audio Capture Demo VB (NuGet)", "WinForms\VB.Net\Audio Capture\Audio Capture Demo VB (NuGet).vbproj", "{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DV Capture Demo VB (NuGet)", "WinForms\VB.Net\DV Capture\DV Capture Demo VB (NuGet).vbproj", "{C598DCFC-B94C-475F-ACF8-5A03C43926F3}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IP Capture Demo VB (NuGet)", "WinForms\VB.Net\IP Capture\IP Capture Demo VB (NuGet).vbproj", "{479447F5-0D55-4314-A0BB-CD4635F1A618}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Main Demo VC VB (NuGet)", "WinForms\VB.Net\Main Demo\Main Demo VC VB (NuGet).vbproj", "{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Screen Capture Demo VB (NuGet)", "WinForms\VB.Net\Screen Capture\Screen Capture Demo VB (NuGet).vbproj", "{74E6041D-20BD-4642-9F9F-6D2542B4E40F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Simple Video Capture Demo VB (NuGet)", "WinForms\VB.Net\Simple Video Capture\Simple Video Capture Demo VB (NuGet).vbproj", "{02905B55-4A30-433A-B937-B2580332EB80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{03B9AD83-EBE3-4D5B-B74C-F69A902DA90E}"
+	ProjectSection(SolutionItems) = preProject
+		README_NUGET.txt = README_NUGET.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Debug|x86.ActiveCfg = Debug|x86
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Debug|x86.Build.0 = Debug|x86
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Release|x86.ActiveCfg = Release|x86
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9}.Release|x86.Build.0 = Release|x86
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Debug|x86.ActiveCfg = Debug|x86
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Debug|x86.Build.0 = Debug|x86
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Release|x86.ActiveCfg = Release|x86
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3}.Release|x86.Build.0 = Release|x86
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Debug|x86.ActiveCfg = Debug|x86
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Debug|x86.Build.0 = Debug|x86
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Release|x86.ActiveCfg = Release|x86
+		{479447F5-0D55-4314-A0BB-CD4635F1A618}.Release|x86.Build.0 = Release|x86
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Debug|x86.ActiveCfg = Debug|x86
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Debug|x86.Build.0 = Debug|x86
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Release|x86.ActiveCfg = Release|x86
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23}.Release|x86.Build.0 = Release|x86
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Debug|x86.ActiveCfg = Debug|x86
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Debug|x86.Build.0 = Debug|x86
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Release|x86.ActiveCfg = Release|x86
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F}.Release|x86.Build.0 = Release|x86
+		{02905B55-4A30-433A-B937-B2580332EB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02905B55-4A30-433A-B937-B2580332EB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02905B55-4A30-433A-B937-B2580332EB80}.Debug|x86.ActiveCfg = Debug|x86
+		{02905B55-4A30-433A-B937-B2580332EB80}.Debug|x86.Build.0 = Debug|x86
+		{02905B55-4A30-433A-B937-B2580332EB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02905B55-4A30-433A-B937-B2580332EB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02905B55-4A30-433A-B937-B2580332EB80}.Release|x86.ActiveCfg = Release|x86
+		{02905B55-4A30-433A-B937-B2580332EB80}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FCD389-3B42-46FC-9956-076CF43F2600} = {06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}
+		{ACD23D54-6F2A-438A-ACCA-4D7BF0C301B9} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{C598DCFC-B94C-475F-ACF8-5A03C43926F3} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{479447F5-0D55-4314-A0BB-CD4635F1A618} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{44E478B6-EEF3-4AD3-915B-A0FE60B49F23} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{74E6041D-20BD-4642-9F9F-6D2542B4E40F} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{02905B55-4A30-433A-B937-B2580332EB80} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Reflector0DestinationAssemblyName = 
+		Reflector0DestinationVersion = 4.51.0.0
+		Reflector0DestinationName = DirectEncodeNET
+		Reflector0DestinationLocation = E:\_my_projects\_projects\MediaFramework.Net\VisioForge.MediaFramework\DirectEncodeNET.dll
+		Reflector0SourceAssemblyName = 
+		Reflector0SourceVersion = 4.51.0.0
+		Reflector0SourceName = DirectEncodeNET
+		Reflector0SourceLocation = E:\_my_projects\_projects\MediaFramework.Net\vidcap_converted\DirectEncodeNET.dll
+		SolutionGuid = {83E0FE87-A19F-494A-A992-482A3E006CF5}
+	EndGlobalSection
+EndGlobal

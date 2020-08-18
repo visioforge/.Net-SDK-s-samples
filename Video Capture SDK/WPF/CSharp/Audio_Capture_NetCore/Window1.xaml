@@ -1,0 +1,121 @@
+﻿<Window x:Class="Audio_Capture.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Audio Capture Demo - Video Capture SDK .Net" Height="640" Width="427" IsEnabled="True" Loaded="Form1_Load" ResizeMode="CanMinimize" 
+    Icon="visioforge_main_icon.ico">
+    <Grid>
+        <TabControl Margin="15,12,0,0" Name="tabControl1" HorizontalAlignment="Left" Width="391" Height="544" VerticalAlignment="Top">
+            <TabItem Header="Input &amp; Output Devices" IsEnabled="True" Name="tabPage1" IsSelected="True">
+                <Grid Height="510" VerticalAlignment="Stretch">
+                    <Label Height="25" Margin="16,14,0,0" x:Name="label23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" Content="Input device"/>
+                    <ComboBox Height="23" Margin="19,38,0,0" Name="cbAudioInputDevice" VerticalAlignment="Top" Width="265" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" />
+                    <Button Height="23" Margin="294,38,0,0" Name="btAudioInputDeviceSettings" VerticalAlignment="Top" Click="btAudioInputDeviceSettings_Click" HorizontalAlignment="Left" Width="65">Settings</Button>
+                    <Label Height="24" Margin="19,66,0,0" x:Name="label22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Content="Input line"/>
+                    <Label Height="24" Margin="19,122,0,0" Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">Input format</Label>
+                    <ComboBox Height="23" Margin="19,94,0,0" Name="cbAudioInputLine" VerticalAlignment="Top" HorizontalAlignment="Left" Width="265" SelectionChanged="cbAudioInputLine_SelectedIndexChanged" />
+                    <ComboBox Height="23" Margin="19,146,0,0" Name="cbAudioInputFormat" VerticalAlignment="Top" StaysOpenOnEdit="True" SelectionChanged="cbAudioInputFormat_SelectedIndexChanged" HorizontalAlignment="Left" Width="265" />
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="207,128,0,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="75" Click="cbUseBestAudioInputFormat_CheckedChanged">Use best</CheckBox>
+                    <Label Margin="19,234,0,0" Name="label15" HorizontalAlignment="Left" Width="120" Height="25" VerticalAlignment="Top">Audio output device</Label>
+                    <ComboBox Margin="19,264,0,0" Name="cbAudioOutputDevice" Height="24" VerticalAlignment="Top" SelectionChanged="cbAudioOutputDevice_SelectedIndexChanged" HorizontalAlignment="Left" Width="340" />
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="276,243,0,0" Name="cbPlayAudio" VerticalAlignment="Top" Width="81" IsChecked="True">Play Audio</CheckBox>
+                    <Label HorizontalAlignment="Left" Margin="30,300,0,0" Name="label1" Width="59" Height="28" VerticalAlignment="Top">Volume</Label>
+                    <Label Margin="207,300,0,0" Name="label2" HorizontalAlignment="Left" Width="59" Height="28" VerticalAlignment="Top">Balance</Label>
+                    <Slider Margin="89,300,0,0" Name="tbAudioVolume" HorizontalAlignment="Left" Width="100" Maximum="100" Minimum="20" Value="80" ValueChanged="tbAudioVolume_Scroll" Height="28" VerticalAlignment="Top" />
+                    <Slider HorizontalAlignment="Left" Margin="257,300,0,0" Name="tbAudioBalance" Width="100" Maximum="100" Minimum="-100" ValueChanged="tbAudioBalance_Scroll" Height="28" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Output" Name="tabPage2" IsSelected="True">
+                <Grid>
+                    <Label Height="28" Margin="10,10,0,0" Name="label7" VerticalAlignment="Top" HorizontalAlignment="Left" Width="48">Format</Label>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="10,139,0,0" Name="label8" VerticalAlignment="Top" Width="62">File name</Label>
+                    <ComboBox Height="23" Margin="10,38,0,0" Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="251" SelectedIndex="1" SelectionChanged="cbOutputFormat_SelectionChanged">
+                        <ComboBoxItem>PCM/ACM</ComboBoxItem>
+                        <ComboBoxItem>MP3</ComboBoxItem>
+                        <ComboBoxItem>WMA</ComboBoxItem>
+                        <ComboBoxItem>Ogg Vorbis</ComboBoxItem>
+                        <ComboBoxItem>FLAC</ComboBoxItem>
+                        <ComboBoxItem>Speex</ComboBoxItem>
+                        <ComboBoxItem>M4A (AAC)</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Height="23" Margin="10,167,0,0" Name="edOutput" VerticalAlignment="Top" HorizontalAlignment="Left" Width="332" />
+                    <Button Height="23" HorizontalAlignment="Left" Margin="347,167,0,0" Name="btSelectOutput" VerticalAlignment="Top" Width="28" Click="btSelectOutput_Click">...</Button>
+                    <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="btOutputConfigure_Click"/>
+                    <Label Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Effects" Name="tabPage5" OverridesDefaultStyle="False" IsSelected="True" >
+                <Grid>
+                    <TabControl Margin="12,9,0,0" Name="tabControl4" Height="449" VerticalAlignment="Top" HorizontalAlignment="Left" Width="356">
+                        <TabItem IsSelected="True" Header="Amplify">
+                            <Grid>
+                                <CheckBox Height="16" HorizontalAlignment="Left" Margin="22,16,0,0" Name="cbAudAmplifyEnabled" VerticalAlignment="Top" Width="120" Click="cbAudAmplifyEnabled_CheckedChanged">Enabled</CheckBox>
+                                <Slider Height="27" Margin="22,67,0,0" Name="tbAudAmplifyAmp" VerticalAlignment="Top" Maximum="4000" Value="1000" ValueChanged="tbAudAmplifyAmp_Scroll" HorizontalAlignment="Left" Width="271" />
+                                <Label Height="23" Margin="22,42,0,0" Name="label16" VerticalAlignment="Top" HorizontalAlignment="Left" Width="51">Volume</Label>
+                                <Label Height="23" HorizontalAlignment="Left" Margin="266,42,0,0" Name="label17" VerticalAlignment="Top" Width="51">400%</Label>
+                                <Label Height="23" HorizontalAlignment="Left" Margin="86,42,0,0" Name="label18" VerticalAlignment="Top" Width="51">100%</Label>
+                            </Grid>
+                        </TabItem>
+                        <TabItem IsSelected="True" Header="Equalizer" IsEnabled="True">
+                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <CheckBox Height="16" HorizontalAlignment="Left" Margin="22,16,0,0" Name="cbAudEqualizerEnabled" VerticalAlignment="Top" Width="120" Checked="cbAudEqualizerEnabled_CheckedChanged">Enabled</CheckBox>
+                                <Slider Height="123" HorizontalAlignment="Left" Margin="40,50,0,0" Name="tbAudEq0" VerticalAlignment="Top" Width="24" Maximum="100" Minimum="-100" Orientation="Vertical" ValueChanged="tbAudEq0_Scroll" />
+                                <Slider Height="123" HorizontalAlignment="Left" Margin="65,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq1" Orientation="Vertical" VerticalAlignment="Top" Width="24" ValueChanged="tbAudEq1_Scroll" />
+                                <Slider HorizontalAlignment="Left" Margin="90,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq2" Orientation="Vertical" Width="24" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq2_Scroll" />
+                                <Slider Margin="115,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq3" Orientation="Vertical" Height="123.447" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" ValueChanged="tbAudEq3_Scroll" />
+                                <Slider Margin="140,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq4" Orientation="Vertical" Height="123.447" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" ValueChanged="tbAudEq4_Scroll" />
+                                <Slider Margin="165,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq5" Orientation="Vertical" HorizontalAlignment="Left" Width="24" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq5_Scroll" />
+                                <Slider Margin="190,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq6" Orientation="Vertical" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq6_Scroll" HorizontalAlignment="Left" Width="24" />
+                                <Slider HorizontalAlignment="Left" Margin="215,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq7" Orientation="Vertical" Width="24" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq7_Scroll" />
+                                <Slider HorizontalAlignment="Left" Margin="240,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq8" Orientation="Vertical" Width="24" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq8_Scroll" />
+                                <Slider HorizontalAlignment="Left" Margin="265,50,0,0" Maximum="100" Minimum="-100" Name="tbAudEq9" Orientation="Vertical" Width="24" Height="123.447" VerticalAlignment="Top" ValueChanged="tbAudEq9_Scroll" />
+                                <Label Margin="35,169,0,0" Name="label19" HorizontalAlignment="Left" Width="24" Height="27" VerticalAlignment="Top">60</Label>
+                                <Label HorizontalAlignment="Left" Margin="60,169,0,0" Name="label20" Width="32" HorizontalContentAlignment="Center" Height="27" VerticalAlignment="Top">170</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="85,169,0,0" Name="label21" Width="32" Height="27" VerticalAlignment="Top">310</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="110,169,0,0" Name="label24" Width="32" Height="27" VerticalAlignment="Top">600</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="160,169,0,0" Name="label26" Width="32" Height="27" VerticalAlignment="Top">3K</Label>
+                                <Label HorizontalContentAlignment="Center" Margin="135,169,0,0" Name="label27" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="32">1K</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="235,169,0,0" Name="label28" Width="32" Height="27" VerticalAlignment="Top">14K</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="210,169,0,0" Name="label29" Width="32" Height="27" VerticalAlignment="Top">12K</Label>
+                                <Label HorizontalContentAlignment="Center" Margin="185,169,0,0" Name="label30" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="32">6K</Label>
+                                <Label HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="260,169,0,0" Name="label31" Width="32" Height="27" VerticalAlignment="Top">16K</Label>
+                                <ComboBox Height="23" Margin="69,214,0,0" Name="cbAudEqualizerPreset" VerticalAlignment="Top" SelectionChanged="cbAudEqualizerPreset_SelectedIndexChanged" Width="165" HorizontalAlignment="Left" />
+                                <Label Height="25.447" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,212,0,0" Name="label32" VerticalAlignment="Top" Width="54">Preset</Label>
+                                <Button Height="23" HorizontalAlignment="Left" Margin="240,214,0,0" Name="btAudEqRefresh" VerticalAlignment="Top" Width="75" Click="btAudEqRefresh_Click">Refresh</Button>
+                                <Label Content="0" Height="27" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="160,26,0,0" Name="label39" VerticalAlignment="Top" Width="32" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem IsSelected="True" Header="True Bass">
+                            <Grid>
+                                <CheckBox Height="16" Margin="22,16,228,0" Name="cbAudTrueBassEnabled" VerticalAlignment="Top" Checked="cbAudTrueBassEnabled_CheckedChanged">Enabled</CheckBox>
+                                <Slider Height="37" Margin="93,53,37,0" Name="tbAudTrueBass" VerticalAlignment="Top" IsSelectionRangeEnabled="False" Maximum="10000" TickPlacement="BottomRight" TickFrequency="250" ValueChanged="tbAudTrueBass_Scroll" />
+                                <Label Height="28" Margin="22,50,0,0" Name="label33" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60">Volume</Label>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Sound 3D" IsEnabled="True" IsSelected="True" >
+                            <Grid>
+                                <CheckBox Height="16" Margin="22,16,228,0" Name="cbAudSound3DEnabled" VerticalAlignment="Top" Checked="cbAudSound3DEnabled_CheckedChanged">Enabled</CheckBox>
+                                <Slider Height="46" Margin="22,81,52,0" Name="tbAud3DSound" VerticalAlignment="Top" Maximum="10000" TickFrequency="250" TickPlacement="BottomRight" ValueChanged="tbAud3DSound_Scroll" />
+                                <Label Height="28" Margin="21,55,0,0" Name="label38" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120">3D amplification</Label>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log" IsEnabled="True" Name="tabPage4" IsSelected="True" >
+                <Grid>
+                    <TextBox Margin="11,31,0,0" Name="mmLog" TextWrapping="Wrap" Height="475" VerticalAlignment="Top" HorizontalAlignment="Left" Width="364" />
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="274,10,0,0" Name="cbDebugMode" VerticalAlignment="Top" Width="101">Debug Mode</CheckBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Height="23" HorizontalAlignment="Left" Margin="247,567,0,0" Name="btStart" VerticalAlignment="Top" Width="75" ContentStringFormat="btStart" Click="btStart_Click">Start</Button>
+        <Button ContentStringFormat="btStop" Height="23" HorizontalAlignment="Left" Margin="331,567,0,0" Name="btStop" VerticalAlignment="Top" Width="75" Click="btStop_Click">Stop</Button>
+        <Label Height="25" HorizontalAlignment="Right" Name="llVideoTutorials" VerticalAlignment="Top" Width="90" MouseDown="llVideoTutorials_MouseDown" FontWeight="Bold" Foreground="#FF001BBE" Margin="0,0,15,0">Video tutorial</Label>
+        <ComboBox x:Name="cbMode" HorizontalAlignment="Left" Margin="15,567,0,0" VerticalAlignment="Top" Width="74" SelectedIndex="0">
+            <ComboBoxItem>Preview</ComboBoxItem>
+            <ComboBoxItem>Capture</ComboBoxItem>
+        </ComboBox>
+        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="103,570,0,0" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Top" Width="139"/>
+    </Grid>
+</Window>

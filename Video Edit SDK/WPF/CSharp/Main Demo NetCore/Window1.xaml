@@ -1,0 +1,960 @@
+﻿<Window x:Class="Main_Demo.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="VisioForge Video Edit SDK .Net Main Demo" Height="835" Width="975" Loaded="Form1_Load" 
+        Closed="Window_Closed" xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI.NetCore" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="720*" />
+            <RowDefinition Height="76*" />
+        </Grid.RowDefinitions>
+        <CheckBox x:Name="cbTelemetry" Content="Telemetry" HorizontalAlignment="Left" Margin="280,658,0,0" VerticalAlignment="Top" IsChecked="True"/>
+
+        <TabControl Height="620" HorizontalAlignment="Left" Margin="12,12,0,0" x:Name="tabControl1" VerticalAlignment="Top" Width="382">
+            <TabItem Header="Output" >
+                <Grid>
+                    <TabControl Height="460" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="tabControl2" VerticalAlignment="Top" Width="360">
+                        <TabItem Header="Main">
+                            <Grid>
+                                <Label Content="Format" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="label21" VerticalAlignment="Top" Width="51" />
+                                <ComboBox Height="23" Margin="10,38,0,0" x:Name="cbOutputVideoFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="334" SelectionChanged="CbOutputVideoFormat_SelectionChanged">
+                                    <ComboBoxItem Content="AVI" />
+                                    <ComboBoxItem Content="MKV (Matroska)" />
+                                    <ComboBoxItem Content="WMV (Windows Media Video)" />
+                                    <ComboBoxItem Content="DV" />
+                                    <ComboBoxItem Content="PCM/ACM" />
+                                    <ComboBoxItem Content="MP3" />
+                                    <ComboBoxItem Content="M4A (AAC)" />
+                                    <ComboBoxItem Content="WMA (Windows Media Audio)" />
+                                    <ComboBoxItem Content="Ogg Vorbis" />
+                                    <ComboBoxItem Content="FLAC" />
+                                    <ComboBoxItem Content="Speex" />
+                                    <ComboBoxItem Content="Custom format" />
+                                    <ComboBoxItem Content="WebM" />
+                                    <ComboBoxItem Content="FFMPEG (DLL)" />
+                                    <ComboBoxItem Content="FFMPEG (external exe) (BETA)" />
+                                    <ComboBoxItem Content="MP4 v8/v10" />
+                                    <ComboBoxItem Content="MP4 v11" />
+                                    <ComboBoxItem Content="Animated GIF" />
+                                    <ComboBoxItem Content="Encrypted video" />
+                                </ComboBox>
+                                <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,130,0,0" x:Name="label22" VerticalAlignment="Top" Width="62" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,158,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="304" Text="c:\capture.avi" />
+                                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,158,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
+                                <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="BtOutputConfigure_Click" />
+                                <Label x:Name="label1" Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Resolution / frame rate">
+                            <Grid>
+                                <Label Content="x" Height="28" HorizontalAlignment="Left" Margin="125,17,0,0" x:Name="label32" VerticalAlignment="Top" />
+                                <CheckBox Content="Resize" Height="16" HorizontalAlignment="Left" Margin="15,22,0,0" x:Name="cbResize" VerticalAlignment="Top" Width="53" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="86,19,0,0" x:Name="edWidth" VerticalAlignment="Top" Width="33" Text="768" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="147,19,0,0" x:Name="edHeight" Text="576" VerticalAlignment="Top" Width="33" />
+                                <Label Content="Frame rate (Use 0 to have original, set before adding files)" Height="28" HorizontalAlignment="Left" Margin="10,54,0,0" x:Name="label33" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="15,82,0,0" x:Name="cbFrameRate" VerticalAlignment="Top" Width="55">
+                                    <ComboBoxItem Content="0" />
+                                    <ComboBoxItem Content="1" />
+                                    <ComboBoxItem Content="2" />
+                                    <ComboBoxItem Content="5" />
+                                    <ComboBoxItem Content="10" />
+                                    <ComboBoxItem Content="12" />
+                                    <ComboBoxItem Content="15" />
+                                    <ComboBoxItem Content="20" />
+                                    <ComboBoxItem Content="25" />
+                                    <ComboBoxItem Content="30" />
+                                </ComboBox>
+                                <Label Content="Rotation" Height="28" HorizontalAlignment="Left" Margin="10,126,0,0" x:Name="label47" VerticalAlignment="Top" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="86,131,0,0" x:Name="cbRotate" VerticalAlignment="Top" Width="115">
+                                    <ComboBoxItem Content="0" />
+                                    <ComboBoxItem Content="90" />
+                                    <ComboBoxItem Content="180" />
+                                    <ComboBoxItem Content="270" />
+                                </ComboBox>
+                                <CheckBox Content="Crop" Height="16" HorizontalAlignment="Left" Margin="15,181,0,0" x:Name="cbCrop" VerticalAlignment="Top" />
+                                <Label Content="Top" Height="25" HorizontalAlignment="Left" Margin="140,202,0,0" x:Name="label181_Copy" VerticalAlignment="Top" Width="31" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="199,203,0,0" x:Name="edCropTop" Text="50" VerticalAlignment="Top" Width="35" />
+                                <Label Content="Left" Height="23" Margin="39,202,0,0" x:Name="label182_Copy" VerticalAlignment="Top" HorizontalAlignment="Left" Width="31" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="86,202,0,0" x:Name="edCropLeft" Text="50" VerticalAlignment="Top" Width="35" />
+                                <Label Content="Bottom" Height="25" HorizontalAlignment="Left" Margin="140,231,0,0" x:Name="label183_Copy" VerticalAlignment="Top" Width="53" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="86,232,0,0" x:Name="edCropRight" Text="50" VerticalAlignment="Top" Width="35" />
+                                <Label Content="Right" Height="29" HorizontalAlignment="Left" Margin="39,231,0,0" x:Name="label184_Copy" VerticalAlignment="Top" Width="43" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="199,232,0,0" x:Name="edCropBottom" Text="50" VerticalAlignment="Top" Width="35" />
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Video processing" x:Name="tabItem14">
+                <Grid>
+                    <TabControl Height="542" HorizontalAlignment="Left" x:Name="tabControl6" VerticalAlignment="Top" Width="372" Margin="0,10,0,0">
+                        <TabItem Header="Effects" x:Name="tabItem15">
+                            <Grid>
+                                <TabControl Height="292" HorizontalAlignment="Left" Margin="6,202,0,0" x:Name="tabControl7" VerticalAlignment="Top" Width="350">
+                                    <TabItem Header="Text Logo" x:Name="tabItem16">
+                                        <Grid>
+                                            <ListBox x:Name="lbTextLogos" HorizontalAlignment="Left" Height="217" VerticalAlignment="Top" Width="338" Margin="10,10,0,0"/>
+                                            <Button x:Name="btTextLogoAdd" Content="Add" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="74" Click="BtTextLogoAdd_Click"/>
+                                            <Button x:Name="btTextLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="89,232,0,0" VerticalAlignment="Top" Width="76" Click="BtTextLogoEdit_Click"/>
+                                            <Button x:Name="btTextLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="274,232,0,0" VerticalAlignment="Top" Width="74" Click="BtTextLogoRemove_Click"/>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Image Logo" x:Name="tabItem23">
+                                        <Grid>
+                                            <ListBox x:Name="lbImageLogos" HorizontalAlignment="Left" Height="217" VerticalAlignment="Top" Width="338" Margin="10,10,0,0"/>
+                                            <Button x:Name="btImageLogoAdd" Content="Add" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="74" Click="BtImageLogoAdd_Click"/>
+                                            <Button x:Name="btImageLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="89,232,0,0" VerticalAlignment="Top" Width="76" Click="BtImageLogoEdit_Click"/>
+                                            <Button x:Name="btImageLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="274,232,0,0" VerticalAlignment="Top" Width="74" Click="BtImageLogoRemove_Click"/>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Zoom" x:Name="tabItem9">
+                                        <Grid>
+                                            <CheckBox x:Name="cbZoomEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="cbZoomEnabled_Checked" Unchecked="cbZoomEnabled_Checked"/>
+                                            <GroupBox Header="Zoom" Height="127" HorizontalAlignment="Left" Margin="72.4,42.2,0,0" VerticalAlignment="Top" Width="200" >
+                                                <Grid>
+                                                    <Button Content="Up" Height="23" HorizontalAlignment="Left" Margin="62,12,0,0" x:Name="btEffZoomShiftUp" VerticalAlignment="Top" Width="65" Click="btEffZoomShiftUp_Click"  />
+                                                    <Button Content="Down" Height="23" HorizontalAlignment="Left" Margin="62,70,0,0" x:Name="btEffZoomShiftDown" VerticalAlignment="Top" Width="65" Click="btEffZoomShiftDown_Click"  />
+                                                    <Button Content="L" Height="59" HorizontalAlignment="Left" Margin="34,24,0,0" x:Name="btEffZoomShiftLeft" VerticalAlignment="Top" Width="24" Click="btEffZoomShiftLeft_Click"  />
+                                                    <Button Content="R" Height="59" HorizontalAlignment="Left" Margin="131,24,0,0" x:Name="btEffZoomShiftRight" VerticalAlignment="Top" Width="24" Click="btEffZoomShiftRight_Click" />
+                                                    <Button Content="+" Height="23" HorizontalAlignment="Left" Margin="62,42,0,0" x:Name="btEffZoomIn" VerticalAlignment="Top" Width="30" Click="btEffZoomIn_Click"  />
+                                                    <Button Content="-" Height="23" HorizontalAlignment="Left" Margin="97,42,0,0" x:Name="btEffZoomOut" VerticalAlignment="Top" Width="30" Click="btEffZoomOut_Click" />
+                                                </Grid>
+                                            </GroupBox>
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Pan" HorizontalAlignment="Left" Height="19.96" VerticalAlignment="Top" Width="55.32">
+                                        <Grid>
+                                            <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,6,0,0" x:Name="cbPan" VerticalAlignment="Top" Checked="cbPan_Checked" Unchecked="cbPan_Checked" />
+                                            <GroupBox Header="Duration" Height="54" HorizontalAlignment="Left" Margin="10,22,0,0"  VerticalAlignment="Top" Width="206">
+                                                <Grid>
+                                                    <Label Content="Start" Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="41" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="147,8,0,0" x:Name="edPanStopTime" Text="15000" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Stop" Height="25" HorizontalAlignment="Left" Margin="111,5,0,0" VerticalAlignment="Top" Width="35" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="46,8,0,0" x:Name="edPanStartTime" Text="5000" VerticalAlignment="Top" Width="35" />
+                                                </Grid>
+                                            </GroupBox>
+                                            <GroupBox Header="Source rect" Height="85.2" HorizontalAlignment="Left" Margin="10,72,0,0"  VerticalAlignment="Top" Width="206">
+                                                <Grid>
+                                                    <Label Content="Left" Height="23" HorizontalAlignment="Left" Margin="0,5.4,0,0" VerticalAlignment="Top" Width="31" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="36,7.4,0,0" x:Name="edPanSourceLeft" Text="0" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Top" Height="25" HorizontalAlignment="Left" Margin="0,34.4,0,0" VerticalAlignment="Top" Width="31" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="36,36.4,0,0" x:Name="edPanSourceTop" Text="0" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Heigth" Height="25" HorizontalAlignment="Left" Margin="76,34.4,0,0" VerticalAlignment="Top" Width="45" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="127,36.4,0,0" x:Name="edPanSourceHeight" Text="480" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Width" Height="25" HorizontalAlignment="Left" Margin="76,5.4,0,0" VerticalAlignment="Top" Width="44" />
+                                                    <TextBox HorizontalAlignment="Left" Margin="127,7.4,0,0" x:Name="edPanSourceWidth" Text="640" Width="35" Height="23" VerticalAlignment="Top" />
+                                                </Grid>
+                                            </GroupBox>
+                                            <GroupBox Header="Destination rect" Height="85.2" HorizontalAlignment="Left" Margin="10,155,0,0"  VerticalAlignment="Top" Width="206">
+                                                <Grid>
+                                                    <Label Content="Left" Height="23" HorizontalAlignment="Left" Margin="0,5.4,0,0" VerticalAlignment="Top" Width="31" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="36,7.4,0,0" x:Name="edPanDestLeft" Text="0" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Top" Height="25" HorizontalAlignment="Left" Margin="0,34.4,0,0" VerticalAlignment="Top" Width="31" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="36,36.4,0,0" x:Name="edPanDestTop" Text="0" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Heigth" Height="25" HorizontalAlignment="Left" Margin="76,34.4,0,0" VerticalAlignment="Top" Width="45" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="127,36.4,0,0" x:Name="edPanDestHeight" Text="240" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Width" Height="25" HorizontalAlignment="Left" Margin="76,5.4,0,0" VerticalAlignment="Top" Width="44" />
+                                                    <TextBox HorizontalAlignment="Left" Margin="127,7.4,0,0" x:Name="edPanDestWidth" Text="320" Width="35" Height="23" VerticalAlignment="Top" />
+                                                </Grid>
+                                            </GroupBox>
+
+
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Fade-in/out" HorizontalAlignment="Left" Height="19.96" VerticalAlignment="Top" Width="75.32">
+                                        <Grid>
+                                            <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,6,0,0" x:Name="cbFadeInOut" VerticalAlignment="Top" Checked="cbFadeInOut_Checked" Unchecked="cbFadeInOut_Checked"
+                                                      />
+                                            <GroupBox Header="Duration" Height="54" HorizontalAlignment="Left" Margin="10,22,0,0"  VerticalAlignment="Top" Width="206">
+                                                <Grid>
+                                                    <Label Content="Start" Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="41" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="147,8,0,0" x:Name="edFadeInOutStopTime" Text="15000" VerticalAlignment="Top" Width="35" />
+                                                    <Label Content="Stop" Height="25" HorizontalAlignment="Left" Margin="111,5,0,0" VerticalAlignment="Top" Width="35" />
+                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="46,8,0,0" x:Name="edFadeInOutStartTime" Text="5000" VerticalAlignment="Top" Width="35" />
+                                                </Grid>
+                                            </GroupBox>
+                                            <RadioButton x:Name="rbFadeIn" Content="Fade-in" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                            <RadioButton x:Name="rbFadeOut" Content="Fade-out" HorizontalAlignment="Left" Margin="111,81,0,0" VerticalAlignment="Top"/>
+                                        </Grid>
+                                    </TabItem>
+                                </TabControl>
+                                <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="cbEffects" VerticalAlignment="Top" IsChecked="True" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="44,61,0,0" Maximum="255" x:Name="tbLightness" VerticalAlignment="Top" Width="100" ValueChanged="tbLightness_Scroll" />
+                                <Label Content="Lightness" HorizontalAlignment="Left" Margin="69,34,0,0" x:Name="label92" Width="86" Height="28" VerticalAlignment="Top" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="212,61,0,0" Maximum="255" x:Name="tbSaturation" VerticalAlignment="Top" Width="100" Value="255" ValueChanged="tbSaturation_Scroll" />
+                                <Label Content="Saturation" HorizontalAlignment="Left" Margin="235,34,0,0" x:Name="label93" Width="86" Height="28" VerticalAlignment="Top" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="44,127,0,0" Maximum="255" x:Name="tbContrast" VerticalAlignment="Top" Width="100" ValueChanged="tbContrast_Scroll" />
+                                <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="65,100,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="212,127,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbDarkness_Scroll" />
+                                <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="235,100,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
+                                <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="29,172,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged" />
+                                <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="114,172,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
+                                <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="195,172,0,0" VerticalAlignment="Top" Checked="CbFlipX_Checked" Unchecked="CbFlipX_Checked"/>
+                                <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="272,172,0,0" VerticalAlignment="Top" Checked="CbFlipY_Checked" Unchecked="CbFlipY_Checked"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Deinterlace" x:Name="tabItem24">
+                            <Grid>
+                                <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="22,16,0,0" x:Name="cbDeinterlace" VerticalAlignment="Top" />
+                                <RadioButton Content="Content Adaptive Vertical Temporal (CAVT)" Height="16" HorizontalAlignment="Left" Margin="36,51,0,0" x:Name="rbDeintCAVTEnabled" VerticalAlignment="Top" IsChecked="True" />
+                                <RadioButton Content="Blend" Height="16" HorizontalAlignment="Left" Margin="36,141,0,0" x:Name="rbDeintBlendEnabled" VerticalAlignment="Top" />
+                                <RadioButton Content="Triangle" Height="16" HorizontalAlignment="Left" Margin="36,276,0,0" x:Name="rbDeintTriangleEnabled" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="109,78,0,0" x:Name="edDeintCAVTThreshold" VerticalAlignment="Top" Width="58" Text="20" />
+                                <Label Content="Threshold" Height="28" HorizontalAlignment="Left" Margin="46,76,0,0" x:Name="label96" VerticalAlignment="Top" />
+                                <Label Content="[0-255]" Height="28" HorizontalAlignment="Left" Margin="113,98,0,0" x:Name="label97" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="109,168,0,0" x:Name="edDeintBlendThreshold1" VerticalAlignment="Top" Width="58" Text="5" />
+                                <Label Content="Threshold 1" Height="28" Margin="19,166,0,0" x:Name="label98" VerticalAlignment="Top" HorizontalAlignment="Left" Width="85" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="109,197,0,0" x:Name="edDeintBlendThreshold2" VerticalAlignment="Top" Width="58" Text="9" />
+                                <Label Content="Threshold 2" Height="28" HorizontalAlignment="Left" Margin="19,194,0,0" x:Name="label99" VerticalAlignment="Top" Width="85" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="258,168,0,0" x:Name="edDeintBlendConstants1" VerticalAlignment="Top" Width="58" Text="3" />
+                                <Label Content="Constants 1" HorizontalAlignment="Left" Margin="184,166,0,0" x:Name="label100" Height="28" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="258,197,0,0" x:Name="edDeintBlendConstants2" VerticalAlignment="Top" Width="58" Text="9" />
+                                <Label Content="Constants 2" Height="28" HorizontalAlignment="Left" Margin="184,194,0,0" x:Name="label101" VerticalAlignment="Top" Width="72" />
+                                <Label Content="[0-255]" Height="28" HorizontalAlignment="Left" Margin="113,223,0,0" x:Name="label102" VerticalAlignment="Top" />
+                                <Label Content="[0.0-1.0]" Height="28" HorizontalAlignment="Left" Margin="258,226,0,0" x:Name="label103" VerticalAlignment="Top" />
+                                <Label Content="/ 10" Height="28" HorizontalAlignment="Left" Margin="322,166,0,0" x:Name="label104" VerticalAlignment="Top" />
+                                <Label Content="/ 10" Height="28" HorizontalAlignment="Left" Margin="322,194,0,0" x:Name="label105" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="100,305,0,0" x:Name="edDeintTriangleWeight" VerticalAlignment="Top" Width="58" Text="180" />
+                                <Label Content="Weight" Height="28" HorizontalAlignment="Left" Margin="46,303,0,0" x:Name="label106" VerticalAlignment="Top" Width="62" />
+                                <Label Content="[0-255]" Height="28" HorizontalAlignment="Left" Margin="105,331,0,0" x:Name="label107" VerticalAlignment="Top" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Denoise" x:Name="tabItem25">
+                            <Grid>
+                                <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="20,16,0,0" x:Name="cbDenoise" VerticalAlignment="Top" />
+                                <RadioButton Content="Mosquito" Height="16" HorizontalAlignment="Left" Margin="57,57,0,0" x:Name="rbDenoiseMosquito" VerticalAlignment="Top" IsChecked="True" />
+                                <RadioButton Content="Content Adaptive Spatio-Temporal (CAST)" Height="16" HorizontalAlignment="Left" Margin="57,84,0,0" x:Name="rbDenoiseCAST" VerticalAlignment="Top" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="GPU Effects">
+                            <Grid>
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="28,63,0,0" Maximum="255" x:Name="tbGPULightness" VerticalAlignment="Top" Width="100" ValueChanged="tbGPULightness_ValueChanged" />
+                                <Label Content="Lightness" HorizontalAlignment="Left" Margin="49,35,0,0" Width="86" Height="28" VerticalAlignment="Top" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="196,58,0,0" Maximum="255" x:Name="tbGPUSaturation" VerticalAlignment="Top" Width="100" Value="255" ValueChanged="tbGPUSaturation_ValueChanged"  />
+                                <Label Content="Saturation" HorizontalAlignment="Left" Margin="219,35,0,0" Width="86" Height="28" VerticalAlignment="Top" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="28,113,0,0" Maximum="255" x:Name="tbGPUContrast" VerticalAlignment="Top" Width="100" Value="255" ValueChanged="tbGPUContrast_ValueChanged" />
+                                <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="49,86,0,0" VerticalAlignment="Top" Width="60" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="196,113,0,0" Maximum="255" x:Name="tbGPUDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbGPUDarkness_ValueChanged"  />
+                                <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="219,86,0,0" VerticalAlignment="Top" Width="86" />
+                                <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="28,158,0,0" x:Name="cbGPUGreyscale" VerticalAlignment="Top" Click="cbGPUGreyscale_Click"  />
+                                <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="196,158,0,0" x:Name="cbGPUInvert" VerticalAlignment="Top" Click="cbGPUInvert_Click" />
+                                <CheckBox Content="Night vision" Height="16" HorizontalAlignment="Left" Margin="28,179,0,0" x:Name="cbGPUNightVision" VerticalAlignment="Top" Click="cbGPUNightVision_Click"  />
+                                <CheckBox Content="Pixelate" Height="16" HorizontalAlignment="Left" Margin="196,179,0,0" x:Name="cbGPUPixelate" VerticalAlignment="Top" Click="cbGPUPixelate_Click" />
+                                <CheckBox Content="Denoise" Height="16" HorizontalAlignment="Left" Margin="28,200,0,0" x:Name="cbGPUDenoise" VerticalAlignment="Top" Click="cbGPUDenoise_Click"  />
+                                <CheckBox Content="Deinterlace" Height="16" HorizontalAlignment="Left" Margin="196,200,0,0" x:Name="cbGPUDeinterlace" VerticalAlignment="Top" Click="cbGPUDeinterlace_Click" />
+                                <CheckBox Content="Old movie" Height="16" HorizontalAlignment="Left" Margin="196,221,0,0" x:Name="cbGPUOldMovie" VerticalAlignment="Top" Click="cbGPUOldMovie_Click" />
+                                <CheckBox x:Name="cbVideoEffectsGPUEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="28,280,0,0" Maximum="30" x:Name="tbGPUBlur" VerticalAlignment="Top" Width="100" ValueChanged="tbGPUBlur_ValueChanged" />
+                                <Label Content="Blur" Height="28" HorizontalAlignment="Left" Margin="49,253,0,0" VerticalAlignment="Top" Width="60" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Chroma key" x:Name="tabItem35">
+                            <Grid>
+                                <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="cbChromaKeyEnabled" VerticalAlignment="Top" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="10,65,0,0" Maximum="200" x:Name="tbChromaKeyThresholdSensitivity" VerticalAlignment="Top" Width="100" Value="180" />
+                                <Label Content="Threshold sensitivity" Height="28" HorizontalAlignment="Left" Margin="10,37,0,0" x:Name="label1111" VerticalAlignment="Top" Width="144" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="10,124,0,0" Maximum="1000" x:Name="tbChromaKeySmoothing" VerticalAlignment="Top" Width="100" Value="80" />
+                                <Label Content="Smoothing" Height="28" HorizontalAlignment="Left" Margin="10,96,0,0" x:Name="labe1l112" VerticalAlignment="Top" Width="86" />
+                                <Label Content="Image background file" Height="29" HorizontalAlignment="Left" Margin="10,212,0,0" x:Name="label1115" VerticalAlignment="Top" Width="131" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" Text="c:\Samples\pics\1.jpg" />
+                                <Button Click="btChromaKeySelectBGImage_Click" Content="..." Height="23" HorizontalAlignment="Left" Margin="336,241,0,0" x:Name="btChromaKeySelectBGImage" VerticalAlignment="Top" Width="24" />
+                                <Label Content="Color" Height="23" HorizontalAlignment="Left" Margin="10,167,0,0" x:Name="label1116" VerticalAlignment="Top" Width="59" />
+                                <Rectangle Fill="#FF80DA80" Height="29" HorizontalAlignment="Left" Margin="78,167,0,0" x:Name="pnChromaKeyColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnChromaKeyColor_MouseDown" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Object detection" x:Name="tabItem36">
+                            <Grid>
+                                <TabControl Height="420" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="tabControl17" VerticalAlignment="Top" Width="340">
+                                    <TabItem Header="Motion detection" x:Name="tabItem64">
+                                        <Grid>
+                                            <CheckBox Content="Enabled, detect objects" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="cbAFMotionDetection" VerticalAlignment="Top" Checked="cbAFMotionDetection_Checked" />
+                                            <CheckBox Content="Highlight" Height="16" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="cbAFMotionHighlight" VerticalAlignment="Top" Checked="cbAFMotionHighlight_Checked" />
+                                            <Label Content="Much more motion detection options available in API" Height="28" HorizontalAlignment="Left" Margin="10,79,0,0" x:Name="label238" VerticalAlignment="Top" />
+                                            <Label Content="Motion level" Height="28" HorizontalAlignment="Left" Margin="10,272,0,0" x:Name="label239" VerticalAlignment="Top" />
+                                            <ProgressBar Height="18" HorizontalAlignment="Left" Margin="10,306,0,0" x:Name="pbAFMotionLevel" VerticalAlignment="Top" Width="292" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Effects" x:Name="tabItem65">
+                                        <Grid>
+                                            <Label Content="You can add various effects using " Height="28" HorizontalAlignment="Left" Margin="16,15,0,0" x:Name="label240" VerticalAlignment="Top" />
+                                            <Label Content="OnVideoFrameBuffer event. " Height="28" HorizontalAlignment="Left" Margin="16,45,0,0" x:Name="label241" VerticalAlignment="Top" />
+                                        </Grid>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="3rd-party filters" x:Name="tabItem27">
+                            <Grid>
+                                <Label Content="Filters" Height="28" HorizontalAlignment="Left" Margin="22,15,0,0" x:Name="label117" VerticalAlignment="Top" Width="81" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="18,43,0,0" x:Name="cbFilters" VerticalAlignment="Top" Width="261" SelectionChanged="cbFilters_SelectedIndexChanged" />
+                                <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="287,43,0,0" x:Name="btFilterSettings" VerticalAlignment="Top" Width="65" Click="btFilterSettings_Click" />
+                                <Button Content="Add" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="18,74,0,0" x:Name="btFilterAdd" VerticalAlignment="Top" Width="65" Click="btFilterAdd_Click" />
+                                <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="22,303,0,0" x:Name="btFilterSettings2" VerticalAlignment="Top" Width="65" Click="btFilterSettings2_Click" />
+                                <Button Content="Delete all" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="287,303,0,0" x:Name="btFilterDeleteAll" VerticalAlignment="Top" Width="65" Click="btFilterDeleteAll_Click" />
+                                <Label Content="Current filters" Height="28" HorizontalAlignment="Left" Margin="22,103,0,0" x:Name="label118" VerticalAlignment="Top" Width="91" />
+                                <ListBox Height="163" HorizontalAlignment="Left" Margin="18,130,0,0" x:Name="lbFilters" VerticalAlignment="Top" Width="334" SelectionChanged="lbFilters_SelectionChanged" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Subtitles" >
+                            <Grid>
+                                <CheckBox x:Name="cbSubtitlesEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label55" Content="File name" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edSubtitlesFilename" HorizontalAlignment="Left" Height="23" Margin="10,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="319"/>
+                                <Button x:Name="btSubtitlesSelectFile" Content="..." HorizontalAlignment="Left" Margin="334,55,0,0" VerticalAlignment="Top" Width="22" Click="btSubtitlesSelectFile_Click"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Audio processing">
+                <Grid>
+                    <TabControl Height="638" HorizontalAlignment="Left" Margin="2,2,0,0" VerticalAlignment="Top" Width="368">
+                        <TabItem Header="Effects" x:Name="tabItem28">
+                            <Grid>
+                                <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="17,14,0,0" x:Name="cbAudioEffectsEnabled" VerticalAlignment="Top" />
+                                <TabControl Height="480" HorizontalAlignment="Left" Margin="10,34,0,0" x:Name="tabControl9" VerticalAlignment="Top" Width="363">
+                                    <TabItem Header="Amplify" x:Name="tabItem29">
+                                        <Grid>
+                                            <CheckBox Click="cbAudAmplifyEnabled_CheckedChanged" Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="16,20,217,0" x:Name="cbAudAmplifyEnabled" VerticalAlignment="Top" Width="120" />
+                                            <Slider Height="21" HorizontalAlignment="Left" Margin="28,78,0,0" Maximum="4000" x:Name="tbAudAmplifyAmp" Value="1000" ValueChanged="tbAudAmplifyAmp_Scroll" VerticalAlignment="Top" Width="291" />
+                                            <Label Content="Volume" Height="23" HorizontalAlignment="Left" Margin="28,55,0,0" x:Name="label119" VerticalAlignment="Top" Width="51" />
+                                            <Label Content="400%" Height="23" HorizontalAlignment="Right" Margin="0,55,15,0" x:Name="label120" VerticalAlignment="Top" Width="51" />
+                                            <Label Content="100%" Height="23" HorizontalAlignment="Left" Margin="92,55,0,0" x:Name="label121" VerticalAlignment="Top" Width="51" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Equlizer" x:Name="tabItem30">
+                                        <Grid>
+                                            <CheckBox Click="cbAudEqualizerEnabled_CheckedChanged" Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="16,20,217,0" x:Name="cbAudEqualizerEnabled" VerticalAlignment="Top" Width="120" />
+                                            <Slider Height="123" HorizontalAlignment="Left" Margin="51,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq0" Orientation="Vertical" ValueChanged="tbAudEq0_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123" HorizontalAlignment="Left" Margin="76,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq1" Orientation="Vertical" ValueChanged="tbAudEq1_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Left" Margin="101,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq2" Orientation="Vertical" ValueChanged="tbAudEq2_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Left" Margin="126,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq3" Orientation="Vertical" ValueChanged="tbAudEq3_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Left" Margin="151,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq4" Orientation="Vertical" ValueChanged="tbAudEq4_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Left" Margin="176,38,0,0" Maximum="100" Minimum="-100" x:Name="tbAudEq5" Orientation="Vertical" ValueChanged="tbAudEq5_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" Margin="201,38,124,0" Maximum="100" Minimum="-100" x:Name="tbAudEq6" Orientation="Vertical" ValueChanged="tbAudEq6_Scroll" VerticalAlignment="Top" />
+                                            <Slider Height="123.447" HorizontalAlignment="Right" Margin="0,38,103,0" Maximum="100" Minimum="-100" x:Name="tbAudEq7" Orientation="Vertical" ValueChanged="tbAudEq7_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Right" Margin="0,38,78,0" Maximum="100" Minimum="-100" x:Name="tbAudEq8" Orientation="Vertical" ValueChanged="tbAudEq8_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Slider Height="123.447" HorizontalAlignment="Right" Margin="0,38,53,0" Maximum="100" Minimum="-100" x:Name="tbAudEq9" Orientation="Vertical" ValueChanged="tbAudEq9_Scroll" VerticalAlignment="Top" Width="24" />
+                                            <Label Content="60" Height="24" HorizontalAlignment="Left" Margin="47,164,0,0" x:Name="label122" VerticalAlignment="Top" Width="26" />
+                                            <ComboBox Height="23" Margin="16,0,93,187" x:Name="cbAudEqualizerPreset" SelectionChanged="cbAudEqualizerPreset_SelectedIndexChanged" VerticalAlignment="Bottom" />
+                                            <Label Content="Preset" Height="25.447" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="8,0,0,211" x:Name="label132" VerticalAlignment="Bottom" Width="54" />
+                                            <Button Click="btAudEqRefresh_Click" Content="Refresh" Height="23" HorizontalAlignment="Right" Margin="0,0,12,187" x:Name="btAudEqRefresh" VerticalAlignment="Bottom" Width="75" />
+                                            <Label Content="170" Height="24" HorizontalAlignment="Left" Margin="70,164,0,0" x:Name="label108" VerticalAlignment="Top" Width="32" />
+                                            <Label Content="310" Height="24" HorizontalAlignment="Left" Margin="97,164,0,0" x:Name="label109" VerticalAlignment="Top" Width="32" />
+                                            <Label Content="600" Height="24" HorizontalAlignment="Left" Margin="121,164,0,0" x:Name="label110" VerticalAlignment="Top" Width="32" />
+                                            <Label Content="1K" Height="24" HorizontalAlignment="Left" Margin="149,164,0,0" x:Name="label113" VerticalAlignment="Top" Width="26" />
+                                            <Label Content="3K" Height="24" HorizontalAlignment="Left" Margin="172,164,0,0" x:Name="label114" VerticalAlignment="Top" Width="26" />
+                                            <Label Content="6K" Height="24" HorizontalAlignment="Right" Margin="0,164,128,0" x:Name="label123" VerticalAlignment="Top" Width="26" />
+                                            <Label Content="12K" Height="24" HorizontalAlignment="Left" Margin="221,164,0,0" x:Name="label124" VerticalAlignment="Top" Width="32" />
+                                            <Label Content="14K" Height="24" HorizontalAlignment="Left" Margin="246,164,0,0" x:Name="label125" VerticalAlignment="Top" Width="32" />
+                                            <Label Content="16K" Height="24" HorizontalAlignment="Left" Margin="271,164,0,0" x:Name="label126" VerticalAlignment="Top" Width="32" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Dynamic amplify" x:Name="tabItem31">
+                                        <Grid>
+                                            <CheckBox Click="cbAudDynamicAmplifyEnabled_CheckedChanged" Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="16,20,217,0" x:Name="cbAudDynamicAmplifyEnabled" VerticalAlignment="Top" />
+                                            <Slider Height="23" HorizontalAlignment="Left" Margin="28,75,0,0" Maximum="2000" Minimum="100" x:Name="tbAudDynAmp" ValueChanged="tbAudDynAmp_Scroll" VerticalAlignment="Top" Width="270" />
+                                            <Label Content="Maximum amplification" Height="28" HorizontalAlignment="Left" Margin="28,42,0,0" x:Name="label133" VerticalAlignment="Top" Width="152" />
+                                            <Slider Height="23" HorizontalAlignment="Left" Margin="28,165,0,0" Maximum="10000" Minimum="10" x:Name="tbAudAttack" ValueChanged="tbAudAttack_Scroll" VerticalAlignment="Top" Width="270" />
+                                            <Label Content="Attack" Height="28" HorizontalAlignment="Left" Margin="28,137,0,0" x:Name="label134" VerticalAlignment="Top" Width="86" />
+                                            <Slider Height="23" HorizontalAlignment="Left" Margin="28,255,0,0" Maximum="10000" Minimum="10" x:Name="tbAudRelease" ValueChanged="tbAudRelease_Scroll" VerticalAlignment="Top" Width="270" />
+                                            <Label Content="Release time" Height="28" HorizontalAlignment="Left" Margin="28,231,0,0" x:Name="label135" VerticalAlignment="Top" Width="86" />
+                                            <Label Content="0" Height="28" HorizontalAlignment="Left" Margin="304,70,0,0" x:Name="label244" VerticalAlignment="Top" />
+                                            <Label Content="0" Height="28" HorizontalAlignment="Left" Margin="304,160,0,0" x:Name="label246" VerticalAlignment="Top" />
+                                            <Label Content="0" Height="28" HorizontalAlignment="Left" Margin="304,250,0,0" x:Name="label248" VerticalAlignment="Top" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="Sound 3D" x:Name="tabItem33">
+                                        <Grid>
+                                            <CheckBox Click="cbAudSound3DEnabled_CheckedChanged" Content="Enabled" Height="16" Margin="16,20,217,0" x:Name="cbAudSound3DEnabled" VerticalAlignment="Top" />
+                                            <Slider Height="46" Margin="17,71,18,0" Maximum="10000" x:Name="tbAud3DSound" TickFrequency="250" TickPlacement="BottomRight" ValueChanged="tbAud3DSound_Scroll" VerticalAlignment="Top" />
+                                            <Label Content="3D amplification" Height="28" HorizontalAlignment="Left" Margin="17,42,0,0" x:Name="label140" VerticalAlignment="Top" Width="120" />
+                                        </Grid>
+                                    </TabItem>
+                                    <TabItem Header="True Bass" x:Name="tabItem34">
+                                        <Grid>
+                                            <CheckBox Click="cbAudTrueBassEnabled_CheckedChanged" Content="Enabled" Height="16" Margin="16,20,217,0" x:Name="cbAudTrueBassEnabled" VerticalAlignment="Top" />
+                                            <Slider Height="37" IsSelectionRangeEnabled="False" Margin="16,73,26,0" Maximum="10000" x:Name="tbAudTrueBass" TickFrequency="250" TickPlacement="BottomRight" ValueChanged="tbAudTrueBass_Scroll" VerticalAlignment="Top" />
+                                            <Label Content="Volume" Height="28" HorizontalAlignment="Left" Margin="16,42,0,0" x:Name="label141" VerticalAlignment="Top" Width="74" />
+                                        </Grid>
+                                    </TabItem>
+                                </TabControl>
+                                <Label x:Name="label51" Content="Much more effects available using API" HorizontalAlignment="Left" Margin="162,8,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Enhancement">
+                            <Grid>
+                                <CheckBox x:Name="cbAudioEnhancementEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbAudioNormalize" Content="Normalize" HorizontalAlignment="Left" Margin="53,39.12,0,0" VerticalAlignment="Top" Checked="cbAudioNormalize_Checked" Unchecked="cbAudioNormalize_Checked"/>
+                                <CheckBox x:Name="cbAudioAutoGain" Content="Auto gain" HorizontalAlignment="Left" Margin="181,39.12,0,0" VerticalAlignment="Top" Checked="cbAudioAutoGain_Checked" Unchecked="cbAudioAutoGain_Checked"/>
+                                <GroupBox Header="Input gains (dB)" HorizontalAlignment="Left" Margin="10,59.218,0,0" VerticalAlignment="Top" Height="168.96" Width="356">
+                                    <Grid>
+                                        <Slider x:Name="tbAudioInputGainL" HorizontalAlignment="Left" Margin="13.418,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainL_ValueChanged"/>
+                                        <Label Content="L" HorizontalAlignment="Left" Margin="13.418,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioInputGainL" Content="0.0" HorizontalAlignment="Left" Margin="10,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioInputGainC" HorizontalAlignment="Left" Margin="70.053,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainC_ValueChanged"/>
+                                        <Label Content="C" HorizontalAlignment="Left" Margin="70.053,10,0,0" VerticalAlignment="Top" Width="29.023"/>
+                                        <Label x:Name="lbAudioInputGainC" Content="0.0" HorizontalAlignment="Left" Margin="66.908,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioInputGainR" HorizontalAlignment="Left" Margin="126.689,35.96,0,0" VerticalAlignment="Top" Width="35.234" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainR_ValueChanged"/>
+                                        <Label Content="R" HorizontalAlignment="Left" Margin="126.689,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioInputGainR" Content="0.0" HorizontalAlignment="Left" Margin="123.543,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioInputGainSL" HorizontalAlignment="Left" Margin="183.324,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainSL_ValueChanged"/>
+                                        <Label Content="SL" HorizontalAlignment="Left" Margin="181.324,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioInputGainSL" Content="0.0" HorizontalAlignment="Left" Margin="180.179,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioInputGainSR" HorizontalAlignment="Left" Margin="239.959,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainSR_ValueChanged"/>
+                                        <Label Content="SR" HorizontalAlignment="Left" Margin="237.959,10,0,0" VerticalAlignment="Top" Width="29.023"/>
+                                        <Label x:Name="lbAudioInputGainSR" Content="0.0" HorizontalAlignment="Left" Margin="236.814,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioInputGainLFE" HorizontalAlignment="Left" Margin="296.595,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioInputGainLFE_ValueChanged"/>
+                                        <Label Content="LFE" HorizontalAlignment="Left" Margin="293.595,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioInputGainLFE" Content="0.0" HorizontalAlignment="Left" Margin="293.595,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Output gains (dB)" HorizontalAlignment="Left" Margin="10,233.178,0,0" VerticalAlignment="Top" Height="168.96" Width="356">
+                                    <Grid>
+                                        <Slider x:Name="tbAudioOutputGainL" HorizontalAlignment="Left" Margin="13.418,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainL_ValueChanged"/>
+                                        <Label Content="L" HorizontalAlignment="Left" Margin="13.418,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioOutputGainL" Content="0.0" HorizontalAlignment="Left" Margin="10,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioOutputGainC" HorizontalAlignment="Left" Margin="70.053,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainC_ValueChanged"/>
+                                        <Label Content="C" HorizontalAlignment="Left" Margin="70.053,10,0,0" VerticalAlignment="Top" Width="29.023"/>
+                                        <Label x:Name="lbAudioOutputGainC" Content="0.0" HorizontalAlignment="Left" Margin="66.908,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioOutputGainR" HorizontalAlignment="Left" Margin="126.689,35.96,0,0" VerticalAlignment="Top" Width="35.234" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainR_ValueChanged"/>
+                                        <Label Content="R" HorizontalAlignment="Left" Margin="126.689,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioOutputGainR" Content="0.0" HorizontalAlignment="Left" Margin="123.543,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioOutputGainSL" HorizontalAlignment="Left" Margin="183.324,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainSL_ValueChanged"/>
+                                        <Label Content="SL" HorizontalAlignment="Left" Margin="181.324,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioOutputGainSL" Content="0.0" HorizontalAlignment="Left" Margin="180.179,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioOutputGainSR" HorizontalAlignment="Left" Margin="239.959,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainSR_ValueChanged"/>
+                                        <Label Content="SR" HorizontalAlignment="Left" Margin="237.959,10,0,0" VerticalAlignment="Top" Width="29.023"/>
+                                        <Label x:Name="lbAudioOutputGainSR" Content="0.0" HorizontalAlignment="Left" Margin="236.814,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                        <Slider x:Name="tbAudioOutputGainLFE" HorizontalAlignment="Left" Margin="296.595,35.96,0,0" VerticalAlignment="Top" Width="35.235" Height="87" Orientation="Vertical" Minimum="-200" Maximum="200" ValueChanged="tbAudioOutputGainLFE_ValueChanged"/>
+                                        <Label Content="LFE" HorizontalAlignment="Left" Margin="293.595,10,0,0" VerticalAlignment="Top" Width="29.022"/>
+                                        <Label x:Name="lbAudioOutputGainLFE" Content="0.0" HorizontalAlignment="Left" Margin="293.595,122.96,0,0" VerticalAlignment="Top" Width="47.363"/>
+                                    </Grid>
+                                </GroupBox>
+                                <Label Content="Time shift" HorizontalAlignment="Left" Margin="10,423.12,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbAudioTimeshift" Content="0 ms" HorizontalAlignment="Left" Margin="190,423.12,0,0" VerticalAlignment="Top"/>
+                                <Slider x:Name="tbAudioTimeshift" HorizontalAlignment="Left" Margin="86,429,0,0" VerticalAlignment="Top" Width="99" Maximum="3000" ValueChanged="tbAudioTimeshift_ValueChanged"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Channel mapper">
+                            <Grid>
+                                <CheckBox x:Name="cbAudioChannelMapperEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label138" Content="Output channels count (0 to use original channels count)" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edAudioChannelMapperOutputChannels" HorizontalAlignment="Left" Height="23" Margin="10,79,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="62"/>
+                                <Label x:Name="label139" Content="Routes" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
+                                <ListBox x:Name="lbAudioChannelMapperRoutes" HorizontalAlignment="Left" Height="113" Margin="10,145,0,0" VerticalAlignment="Top" Width="342"/>
+                                <Button x:Name="btAudioChannelMapperClear" Content="Clear" HorizontalAlignment="Left" Margin="277,263,0,0" VerticalAlignment="Top" Width="75" Click="btAudioChannelMapperClear_Click"/>
+                                <GroupBox x:Name="groupBox" Header="Add new route" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top" Height="185" Width="342">
+                                    <Grid>
+                                        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Source channel" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="edAudioChannelMapperSourceChannel" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
+                                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="118,10,0,0" TextWrapping="Wrap" Text="Target channel" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="edAudioChannelMapperTargetChannel" HorizontalAlignment="Left" Height="23" Margin="118,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
+                                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="236,10,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
+                                        <Slider x:Name="tbAudioChannelMapperVolume" HorizontalAlignment="Left" Margin="236,31,0,0" VerticalAlignment="Top" Width="70" Maximum="2000" Minimum="100" Value="1000"/>
+                                        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="236,54,0,0" TextWrapping="Wrap" Text="10% - 200%" VerticalAlignment="Top"/>
+                                        <Button x:Name="btAudioChannelMapperAddNewRoute" Content="Add" HorizontalAlignment="Left" Margin="134,116,0,0" VerticalAlignment="Top" Width="75" Click="btAudioChannelMapperAddNewRoute_Click"/>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Transitions" x:Name="tiTransitions">
+                <Grid>
+                    <Label Content="Selected" Height="28" HorizontalAlignment="Left" Margin="18,15,0,0" x:Name="label111" VerticalAlignment="Top" />
+                    <ListBox Height="156" HorizontalAlignment="Left" Margin="18,38,0,0" x:Name="lbTransitions" VerticalAlignment="Top" Width="337" />
+                    <GroupBox Header="Add transition" Height="166" HorizontalAlignment="Left" Margin="18,210,0,0" x:Name="groupBox2" VerticalAlignment="Top" Width="337">
+                        <Grid>
+                            <Label Content="Name" Height="28" HorizontalAlignment="Left" Margin="11,12,0,0" x:Name="label112" VerticalAlignment="Top" />
+                            <ComboBox Height="23" Margin="17,38,56,0" x:Name="cbTransitionName" VerticalAlignment="Top" />
+                            <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="275,38,0,0" x:Name="btAddTransition" VerticalAlignment="Top" Width="35" Click="btAddTransition_Click" />
+                            <Label Content="Start time" Height="28" HorizontalAlignment="Left" Margin="17,79,0,0" x:Name="label115" VerticalAlignment="Top" />
+                            <TextBox HorizontalAlignment="Left" Margin="85,81,0,0" x:Name="edTransStartTime" Width="37" Text="4000" Height="23" VerticalAlignment="Top" />
+                            <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="128,79,0,0" x:Name="label116" VerticalAlignment="Top" />
+                            <Label Content="Stop time" Height="28" HorizontalAlignment="Left" Margin="17,108,0,0" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="85,110,0,0" x:Name="edTransStopTime" Text="6000" VerticalAlignment="Top" Width="37" />
+                            <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="128,108,0,0" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Display" x:Name="tiDisplay">
+                <Grid>
+                    <Button x:Name="btFullScreen" Content="Full screen" HorizontalAlignment="Left" Margin="54.163,320.21,0,0" VerticalAlignment="Top" Width="75" Height="28.96" Click="btFullScreen_Click"/>
+                    <GroupBox Header="Video Renderer" Height="100" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="groupBox26" VerticalAlignment="Top" Width="142">
+                        <Grid>
+                            <RadioButton Content="WPF" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="rbWPF" VerticalAlignment="Top" IsChecked="True" Checked="rbVR_Checked" />
+                            <RadioButton Content="None" Height="16" HorizontalAlignment="Left" Margin="10,52,0,0" x:Name="rbNone" VerticalAlignment="Top" Checked="rbVR_Checked" />
+                            <RadioButton Content="Direct2D" Height="16" HorizontalAlignment="Left" Margin="10,31,0,0" x:Name="rbDirect2D" VerticalAlignment="Top" Checked="rbVR_Checked"  />
+                        </Grid>
+                    </GroupBox>
+                    <CheckBox Content="Stretch video" Height="16" HorizontalAlignment="Left" Margin="167,22,0,0" x:Name="cbStretch" VerticalAlignment="Top" Checked="cbStretch_Checked" Unchecked="cbStretch_Checked" />
+                    <CheckBox x:Name="cbScreenFlipVertical" Content="Flip vertical" HorizontalAlignment="Left" Margin="167,43,0,0" VerticalAlignment="Top" Checked="cbScreenFlipVertical_Checked" Unchecked="cbScreenFlipVertical_Checked" IsEnabled="False"/>
+                    <CheckBox x:Name="cbScreenFlipHorizontal" Content="Flip horizontal" HorizontalAlignment="Left" Margin="167,63.098,0,0" VerticalAlignment="Top" Checked="cbScreenFlipHorizontal_Checked" Unchecked="cbScreenFlipHorizontal_Checked" IsEnabled="False"/>
+                    <Label Content="Rotate" HorizontalAlignment="Left" Margin="167,84.04,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDirect2DRotate" HorizontalAlignment="Left" Margin="167,110,0,0" VerticalAlignment="Top" Width="95.215" SelectionChanged="cbDirect2DRotate_SelectionChanged" IsEnabled="False">
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="90" />
+                        <ComboBoxItem Content="180" />
+                        <ComboBoxItem Content="270" />
+                    </ComboBox>
+                    <Rectangle Fill="Black" Height="29" HorizontalAlignment="Left" Margin="286,136.96,0,0" x:Name="pnVideoRendererBGColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnVideoRendererBGColor_MouseDown" />
+                    <Label Content="Background color" Height="28" HorizontalAlignment="Left" Margin="167,136.96,0,0" VerticalAlignment="Top" />
+                    <GroupBox x:Name="pnZoom" Header="Zoom" HorizontalAlignment="Left" Margin="10,193.25,0,0" VerticalAlignment="Top" Height="121.96" Width="161" IsEnabled="False">
+                        <Grid>
+                            <Button x:Name="btZoomShiftUp" Content="Up" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Width="69" Click="btZoomShiftUp_Click"/>
+                            <Button x:Name="btZoomShiftDown" Content="Down" HorizontalAlignment="Left" Margin="42,72.96,0,0" VerticalAlignment="Top" Width="69" Click="btZoomShiftDown_Click"/>
+                            <Button x:Name="btZoomShiftLeft" Content="L" HorizontalAlignment="Left" Margin="11,11,0,0" VerticalAlignment="Top" Width="26" Height="81.92" Click="btZoomShiftLeft_Click"/>
+                            <Button x:Name="btZoomShiftRight" Content="R" HorizontalAlignment="Left" Margin="116,11,0,0" VerticalAlignment="Top" Width="26" Height="81.92" Click="btZoomShiftRight_Click"/>
+                            <Button x:Name="btZoomIn" Content="+" HorizontalAlignment="Left" Margin="42,35.96,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btZoomIn_Click"/>
+                            <Button x:Name="btZoomOut" Content="-" HorizontalAlignment="Left" Margin="79,35.96,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btZoomOut_Click"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Motion detection" x:Name="tabItem38">
+                <Grid>
+                    <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="12,10,0,0" x:Name="cbMotDetEnabled" VerticalAlignment="Top" />
+                    <TabControl Height="464" HorizontalAlignment="Left" Margin="10,39,0,0" x:Name="tabControl11" VerticalAlignment="Top" Width="340">
+                        <TabItem Header="Output matrix" x:Name="tabItem41">
+                            <Grid>
+                                <TextBox Height="247" HorizontalAlignment="Left" Margin="15,18,0,0" x:Name="mmMotDetMatrix" VerticalAlignment="Top" Width="296" />
+                                <Label Content="Motion level" Height="23" HorizontalAlignment="Left" Margin="15,271,0,0" x:Name="label181" VerticalAlignment="Top" Width="89" />
+                                <ProgressBar Height="21" HorizontalAlignment="Left" Margin="15,292,0,0" x:Name="pbMotionLevel" VerticalAlignment="Top" Width="296" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Settings" x:Name="tabItem42">
+                            <Grid>
+                                <GroupBox Header="Compare settings" Height="118" HorizontalAlignment="Left" Margin="4,8,0,0" x:Name="groupBox18" VerticalAlignment="Top" Width="320">
+                                    <Grid>
+                                        <CheckBox Content="Red" Height="16" HorizontalAlignment="Left" Margin="30,20,0,0" x:Name="cbCompareRed" VerticalAlignment="Top" />
+                                        <CheckBox Content="Green" Height="16" HorizontalAlignment="Left" Margin="98,20,0,0" x:Name="cbCompareGreen" VerticalAlignment="Top" />
+                                        <CheckBox Content="Blue" Height="16" HorizontalAlignment="Left" Margin="171,20,0,0" x:Name="cbCompareBlue" VerticalAlignment="Top" />
+                                        <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="236,20,0,0" x:Name="cbCompareGreyscale" VerticalAlignment="Top" />
+                                        <Label Content="Frame interval" Height="28" HorizontalAlignment="Left" Margin="89,52,0,0" x:Name="label182" VerticalAlignment="Top" Width="96" />
+                                        <TextBox Height="23" HorizontalAlignment="Left" Margin="185,54,0,0" x:Name="edMotDetFrameInterval" Text="5" VerticalAlignment="Top" Width="50" />
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Color highlight" Height="101" HorizontalAlignment="Left" Margin="4,124,0,0" x:Name="groupBox19" VerticalAlignment="Top" Width="320">
+                                    <Grid>
+                                        <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="13,6,0,0" x:Name="cbMotDetHLEnabled" VerticalAlignment="Top" />
+                                        <Slider Height="23" HorizontalAlignment="Left" Margin="62,47,0,0" Maximum="255" x:Name="tbMotDetHLThreshold" VerticalAlignment="Top" Width="100" Value="5" />
+                                        <Label Content="Threshold" Height="28" HorizontalAlignment="Left" Margin="71,20,0,0" x:Name="label183" VerticalAlignment="Top" Width="86" />
+                                        <Label Content="Color" Height="28" HorizontalAlignment="Left" Margin="195,20,0,0" x:Name="label184" VerticalAlignment="Top" Width="81" />
+                                        <ComboBox Height="23" HorizontalAlignment="Left" Margin="195,45,0,0" x:Name="cbMotDetHLColor" VerticalAlignment="Top" Width="96">
+                                            <ComboBoxItem Content="Red" />
+                                            <ComboBoxItem Content="Green" />
+                                            <ComboBoxItem Content="Blue" />
+                                        </ComboBox>
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Drop frames" Height="88" HorizontalAlignment="Left" Margin="7,223,0,0" x:Name="groupBox20" VerticalAlignment="Top" Width="317">
+                                    <Grid>
+                                        <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,12,0,0" x:Name="cbMotDetDropFramesEnabled" VerticalAlignment="Top" />
+                                        <Slider Height="23" HorizontalAlignment="Left" Margin="126,35,0,0" Maximum="255" x:Name="tbMotDetDropFramesThreshold" VerticalAlignment="Top" Width="100" Value="5" />
+                                        <Label Content="Threshold" Height="28" HorizontalAlignment="Left" Margin="135,8,0,0" x:Name="label185" VerticalAlignment="Top" Width="86" />
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Matrix" Height="81" HorizontalAlignment="Left" Margin="9,312,0,0" x:Name="groupBox21" VerticalAlignment="Top" Width="315">
+                                    <Grid>
+                                        <TextBox Height="23" HorizontalAlignment="Left" Margin="59,16,0,0" x:Name="edMotDetMatrixWidth" Text="10" VerticalAlignment="Top" Width="58" />
+                                        <Label Content="Width" Height="28" HorizontalAlignment="Left" Margin="8,15,0,0" x:Name="label186" VerticalAlignment="Top" Width="72" />
+                                        <TextBox Height="23" HorizontalAlignment="Left" Margin="190,16,0,0" x:Name="edMotDetMatrixHeight" Text="10" VerticalAlignment="Top" Width="58" />
+                                        <Label Content="Height" Height="28" HorizontalAlignment="Left" Margin="142,14,0,0" x:Name="label187" VerticalAlignment="Top" Width="72" />
+                                    </Grid>
+                                </GroupBox>
+                                <Button Click="btMotDetUpdateSettings_Click" Content="Update settings" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,403,12,0" x:Name="btMotDetUpdateSettings" VerticalAlignment="Top" Width="114" />
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Barcode reader"  Height="19.96" VerticalAlignment="Top" >
+                <Grid>
+                    <Label Content="Barcode type" HorizontalAlignment="Left" Margin="16,48.32,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbBarcodeDetectionEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="20.8,20.88,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edBarcode" HorizontalAlignment="Left" Height="23" Margin="20.8,135.64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="328.8"/>
+                    <ComboBox x:Name="cbBarcodeType" HorizontalAlignment="Left" Margin="20.8,74.28,0,0" VerticalAlignment="Top" Width="184">
+                        <ComboBoxItem Content="Autodetect"/>
+                        <ComboBoxItem Content="UPC-A"/>
+                        <ComboBoxItem Content="UPC-E"/>
+                        <ComboBoxItem Content="EAN-8"/>
+                        <ComboBoxItem Content="EAN-13"/>
+                        <ComboBoxItem Content="Code 39"/>
+                        <ComboBoxItem Content="Code 93"/>
+                        <ComboBoxItem Content="Code 128"/>
+                        <ComboBoxItem Content="ITF"/>
+                        <ComboBoxItem Content="CodaBar"/>
+                        <ComboBoxItem Content="RSS-14"/>
+                        <ComboBoxItem Content="Data matrix"/>
+                        <ComboBoxItem Content="Aztec"/>
+                        <ComboBoxItem Content="QR"/>
+                        <ComboBoxItem Content="PDF-417"/>
+                    </ComboBox>
+                    <Label Content="Detected barcode" HorizontalAlignment="Left" Margin="18,109.68,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Metadata" HorizontalAlignment="Left" Margin="18,173.68,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edBarcodeMetadata" HorizontalAlignment="Left" Height="112.6" Margin="20.8,199.64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="328.8"/>
+                    <Button x:Name="btBarcodeReset" Content="Restart" HorizontalAlignment="Left" Margin="20.8,325.68,0,0" VerticalAlignment="Top" Width="62.245" Click="btBarcodeReset_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Network streaming" Height="19.96" VerticalAlignment="Top" >
+                <Grid>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="cbNetworkStreaming" VerticalAlignment="Top" Content="Network streaming" />
+                    <ComboBox x:Name="cbNetworkStreamingMode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="356" Margin="10,31,0,0">
+                        <ComboBoxItem Content="Windows Media Video"/>
+                        <ComboBoxItem Content="RTSP"/>
+                        <ComboBoxItem Content="RTMP to Adobe Media Server / Wowza"/>
+                        <ComboBoxItem Content="UDP"/>
+                        <ComboBoxItem Content="Smooth Streaming to Microsoft IIS"/>
+                        <ComboBoxItem Content="Output to external virtual devices"/>
+                    </ComboBox>
+
+                    <CheckBox Content="Stream audio" Height="16" HorizontalAlignment="Left" Margin="22,526.12,0,0" x:Name="cbNetworkStreamingAudioEnabled" VerticalAlignment="Top" />
+
+                    <TabControl Height="449" HorizontalAlignment="Left" Margin="6,64,0,0" x:Name="tabControl20" VerticalAlignment="Top" Width="360">
+                        <TabItem Header="Windows Media Video">
+                            <Grid>
+                                <RadioButton Content="Use external profile" Height="16" HorizontalAlignment="Left" Margin="10,33,0,0" x:Name="rbNetworkStreamingUseExternalProfile" VerticalAlignment="Top" />
+                                <RadioButton Content="Use WMV settings from capture tab" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="10,11,0,0" x:Name="rbNetworkStreamingUseMainWMVSettings" VerticalAlignment="Top" />
+                                <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="44,61,0,0" x:Name="label142" VerticalAlignment="Top" Width="62" />
+                                <TextBox Height="23" Margin="117,63,36,0" x:Name="edNetworkStreamingWMVProfile" Text="c:\WM.prx" VerticalAlignment="Top" />
+                                <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,62,6,0" x:Name="btSelectWMVProfileNetwork" VerticalAlignment="Top" Width="24" Click="btSelectWMVProfileNetwork_Click" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="123,98,0,0" x:Name="edMaximumClients" Text="10" VerticalAlignment="Top" Width="31" />
+                                <Label Content="Maximum clients" Height="28" HorizontalAlignment="Left" Margin="11,96,0,0" x:Name="label143" VerticalAlignment="Top" Width="110" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="254,98,0,0" x:Name="edWMVNetworkPort" Text="100" VerticalAlignment="Top" Width="33" />
+                                <Label Content="Network port" Height="28" HorizontalAlignment="Left" Margin="169,96,0,0"  VerticalAlignment="Top" Width="86" />
+                                <Label Content="Clients" Height="23" HorizontalAlignment="Left" Margin="11,129,0,0"  VerticalAlignment="Top" Width="62" />
+                                <Button Content="Refresh" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,258,5,0" x:Name="btRefreshClients" VerticalAlignment="Top" Width="65" Click="btRefreshClients_Click" />
+                                <ListBox Height="94" Margin="11,158,5,0" x:Name="lbNetworkClients" VerticalAlignment="Top" />
+                                <Label Content="You can use Windows Media Player for testing." Height="28" HorizontalAlignment="Left" Margin="10,257,0,0" VerticalAlignment="Top" Width="320" />
+                                <Label Content="Connection URL" Height="23" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="96" Margin="9,347,0,0" />
+                                <TextBox Height="23" HorizontalAlignment="Left" x:Name="edNetworkURL" VerticalAlignment="Top" Width="337" Margin="10,368,0,0" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="RTSP">
+                            <Grid>
+                                <Label Content="MP4 output settings will be used" HorizontalAlignment="Left" Margin="22,319.04,0,0" VerticalAlignment="Top"/>
+                                <Label Content="URL" HorizontalAlignment="Left" Margin="22,14,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNetworkRTSPURL" HorizontalAlignment="Left" Height="23" Margin="22,40,0,0" TextWrapping="Wrap" Text="rtsp://localhost:5554/vfstream" VerticalAlignment="Top" Width="308"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="RTMP">
+                            <Grid>
+                                <RadioButton x:Name="rbNetworkRTMPFFMPEG" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,23,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                <RadioButton x:Name="rbNetworkRTMPFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,42.96,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="54,321,0,0" VerticalAlignment="Top"/>
+                                <Label Content="URL" HorizontalAlignment="Left" Margin="22,267,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNetworkRTMPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" VerticalAlignment="Top" Width="308"/>
+                                <Label x:Name="lbDownloadFFMPEG_Copy1" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,83,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
+                                <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,104,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="UDP">
+                            <Grid>
+                                <RadioButton x:Name="rbNetworkUDPFFMPEG" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,23,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                <RadioButton x:Name="rbNetworkUDPFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,42.96,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="54,321,0,0" VerticalAlignment="Top"/>
+                                <Label Content="URL" HorizontalAlignment="Left" Margin="22,267,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNetworkUDPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="udp://127.0.0.1:10000" VerticalAlignment="Top" Width="308"/>
+                                <Label x:Name="lbDownloadFFMPEG_Copy" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,85,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="IIS Smooth Streaming">
+                            <Grid>
+                                <RadioButton x:Name="rbNetworkSSSoftware" Content="H264 / AAC using software encoder" HorizontalAlignment="Left" Margin="22,23,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="22,319.04,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Publishing point URL" HorizontalAlignment="Left" Margin="22,141,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNetworkSSURL" HorizontalAlignment="Left" Height="23" Margin="22,167,0,0" TextWrapping="Wrap" Text="http://localhost/LiveSmoothStream.isml" VerticalAlignment="Top" Width="308"/>
+                                <Label Content="IIS Smooth Streaming usage manual" Height="29" HorizontalAlignment="Left" Margin="22,212,0,0" x:Name="label1291_Copy" VerticalAlignment="Top" FontWeight="Bold"
+                                	Foreground="#FF0016CF" MouseDown="label1291_Copy_MouseDown" />
+                                <RadioButton x:Name="rbNetworkSSFFMPEGDefault" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,44,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                <RadioButton x:Name="rbNetworkSSFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,64,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbDownloadFFMPEG_Copy2" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,241,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="External" x:Name="tabItem71">
+                            <Grid>
+                                <Label Content="Streaming to Adobe Flash Media Server" Height="29" HorizontalAlignment="Left" Margin="23,10,0,0" x:Name="label1291" VerticalAlignment="Top" FontWeight="Bold"
+               Foreground="#FF0016CF" MouseDown="label1291_MouseDown" />
+                                <Label Content="Streaming using Microsoft Expression Encoder" Height="29" HorizontalAlignment="Left" Margin="23,40,0,0" VerticalAlignment="Top" FontWeight="Bold"
+               Foreground="#FF0016CF" MouseDown="Label_MouseDown_1" />
+                            </Grid>
+                        </TabItem>
+
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Virtual camera" Height="19.96" VerticalAlignment="Top">
+                <Grid>
+                    <CheckBox x:Name="cbVirtualCamera" Content="Enable streaming" HorizontalAlignment="Left" Margin="22,18.08,0,0" VerticalAlignment="Top"/>
+                    <Label Content="You are can use VisioForge Virtual Camera device" HorizontalAlignment="Left" Margin="22,47.08,0,0" VerticalAlignment="Top"/>
+                    <Label Content="to see streamed video" HorizontalAlignment="Left" Margin="22,73.04,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Virtual Camera SDK license required." HorizontalAlignment="Left" Margin="22,117.12,0,0" VerticalAlignment="Top"/>
+                    <Label Content="TRIAL limitation - 5000 frames to stream." HorizontalAlignment="Left" Margin="22,143.08,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Decklink" Height="19.96" VerticalAlignment="Top" >
+                <Grid>
+                    <CheckBox x:Name="cbDecklinkOutput" Content="Enable output to Decklink card" HorizontalAlignment="Left" Margin="22,18.08,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbDecklinkDV" Content="DV output" HorizontalAlignment="Left" Margin="43,48.08,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Dual link mode" HorizontalAlignment="Left" Margin="32,81.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputDualLink" HorizontalAlignment="Left" Margin="32,107.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Default"/>
+                        <ComboBoxItem Content="Enabled"/>
+                        <ComboBoxItem Content="Disabled"/>
+                    </ComboBox>
+                    <Label Content="Analog output" HorizontalAlignment="Left" Margin="206,81.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputAnalog" HorizontalAlignment="Left" Margin="206,107.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Auto"/>
+                        <ComboBoxItem Content="Component"/>
+                        <ComboBoxItem Content="Composite"/>
+                        <ComboBoxItem Content="S-Video"/>
+                    </ComboBox>
+                    <Label Content="Single field output" HorizontalAlignment="Left" Margin="32,127.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputSingleField" HorizontalAlignment="Left" Margin="32,153.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Default"/>
+                        <ComboBoxItem Content="Enabled"/>
+                        <ComboBoxItem Content="Disabled"/>
+                    </ComboBox>
+                    <Label Content="NTSC standard" HorizontalAlignment="Left" Margin="206,127.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputNTSC" HorizontalAlignment="Left" Margin="206,153.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="USA"/>
+                        <ComboBoxItem Content="Japan"/>
+                    </ComboBox>
+                    <Label Content="Black to deck" HorizontalAlignment="Left" Margin="32,181.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputBlackToDeck" HorizontalAlignment="Left" Margin="32,207.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Default"/>
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="Digital"/>
+                        <ComboBoxItem Content="Analogue"/>
+                    </ComboBox>
+                    <Label Content="Component levels" HorizontalAlignment="Left" Margin="206,181.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputComponentLevels" HorizontalAlignment="Left" Margin="206,207.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="SMPTE"/>
+                        <ComboBoxItem Content="Betacam"/>
+                    </ComboBox>
+                    <Label Content="Down conversion mode" HorizontalAlignment="Left" Margin="32,227.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputDownConversion" HorizontalAlignment="Left" Margin="32,253.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Default"/>
+                        <ComboBoxItem Content="Disabled"/>
+                        <ComboBoxItem Content="Letterbox 16:9"/>
+                        <ComboBoxItem Content="Anamorphic"/>
+                        <ComboBoxItem Content="Anamorphic center"/>
+                    </ComboBox>
+                    <Label Content="HDTV pulldown" HorizontalAlignment="Left" Margin="32,309.08,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputHDTVPulldown" HorizontalAlignment="Left" Margin="32,335.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                        <ComboBoxItem Content="Default"/>
+                        <ComboBoxItem Content="Enabled"/>
+                        <ComboBoxItem Content="Disabled"/>
+                    </ComboBox>
+                    <CheckBox x:Name="cbDecklinkOutputDownConversionAnalogOutput" Content="Analog output used" HorizontalAlignment="Left" Margin="32,280,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Encryption" Height="19.96" VerticalAlignment="Top" >
+                <Grid>
+                    <GroupBox Header="Video / audio format" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Height="75" Width="356">
+                        <Grid>
+                            <RadioButton x:Name="rbEncryptedH264SW" Content="Use MP4 H264 / ACC output format" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <RadioButton x:Name="rbEncryptedH264CUDA" Content="Use MP4 H264 CUDA / AAC output format" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Method" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="71" Width="356">
+                        <Grid>
+                            <RadioButton x:Name="rbEncryptionModeAES128" Content="AES-128 (v8 encryption SDK output)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <RadioButton x:Name="rbEncryptionModeAES256" Content="AES-256 (v9 encryption SDK output)" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="True"/>
+
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Encryption key type" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top" Height="227" Width="356">
+                        <Grid>
+                            <RadioButton x:Name="rbEncryptionKeyString" Content="String" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <RadioButton x:Name="rbEncryptionKeyFile" Content="File (v9 SDK)" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+                            <RadioButton x:Name="rbEncryptionKeyBinary" Content="Binary data (v9 SDK)" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="edEncryptionKeyString" HorizontalAlignment="Left" Height="23" Margin="30,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="304"/>
+                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" Text="c:\keyfile.txt" VerticalAlignment="Top" Width="277"/>
+                            <Button x:Name="btEncryptionOpenFile" Content="..." HorizontalAlignment="Left" Margin="312,87,0,0" VerticalAlignment="Top" Width="22" Height="22" Click="btEncryptionOpenFile_Click"/>
+                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" Text="enter hex data" VerticalAlignment="Top" Width="304"/>
+                            <Label Content="You can assign byte[] using API" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
+
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tags" Height="19.96" VerticalAlignment="Top" >
+                <Grid>
+                    <CheckBox x:Name="cbTagEnabled" Content="Write tags to output file" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                    <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="499" Margin="10,39,0,0" VerticalAlignment="Top" Width="356">
+                        <TabItem Header="Common">
+                            <Grid>
+                                <Label x:Name="label48" Content="Title" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagTitle" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Sample output file" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label_Copy" Content="Artists" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagArtists" HorizontalAlignment="Left" Height="23" Margin="10,86,0,0" TextWrapping="Wrap" Text="Sample artist" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label_Copy1" Content="Album" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagAlbum" HorizontalAlignment="Left" Height="23" Margin="10,137,0,0" TextWrapping="Wrap" Text="Sample album" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label_Copy2" Content="Comment" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagComment" HorizontalAlignment="Left" Height="23" Margin="10,186,0,0" TextWrapping="Wrap" Text="No comments" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label_Copy3" Content="Track ID" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagTrackID" HorizontalAlignment="Left" Height="23" Margin="10,237,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="118"/>
+                                <Label x:Name="label_Copy4" Content="Copyright" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagCopyright" HorizontalAlignment="Left" Height="23" Margin="10,286,0,0" TextWrapping="Wrap" Text="VisioForge" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label_Copy5" Content="Year" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagYear" HorizontalAlignment="Left" Height="23" Margin="10,336,0,0" TextWrapping="Wrap" Text="2015" VerticalAlignment="Top" Width="118"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Special">
+                            <Grid>
+                                <Label Content="Composers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagComposers"  HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="Sample composer" VerticalAlignment="Top" Width="330"/>
+                                <Label  Content="Genre" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Lyrics" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edTagLyrics"  HorizontalAlignment="Left" Height="23" Margin="10,137,0,0" TextWrapping="Wrap" Text="Yo-ho-ho and the buttle of rum" VerticalAlignment="Top" Width="330"/>
+                                <ComboBox x:Name="cbTagGenre" HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Width="330"/>
+                                <Label x:Name="label49" Content="Cover (click to select)" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="label50" Content="Many other tags are available using API" HorizontalAlignment="Left" Margin="65,391,0,0" VerticalAlignment="Top"/>
+                                <Grid HorizontalAlignment="Left" Height="166" Margin="10,191,0,0" VerticalAlignment="Top" Width="182" MouseDown="Grid_MouseDown" Background="Black">
+                                    <Image x:Name="imgTagCover" Margin="0,0,0,0" MouseDown="Grid_MouseDown"/>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="Stop" Height="23" HorizontalAlignment="Left" Margin="879,0,0,32" x:Name="btStop" VerticalAlignment="Bottom" Width="62" FontWeight="Bold" Click="btStop_Click" Grid.Row="1" />
+        <Button Content="Start" Height="23" HorizontalAlignment="Left" Margin="813,0,0,32" x:Name="btStart" VerticalAlignment="Bottom" Width="61" FontWeight="Bold" Click="btStart_Click" Grid.Row="1" />
+        <Label Content="Watch tutorials" Height="29" HorizontalAlignment="Left" Margin="14,43,0,0" x:Name="label129" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF"
+               MouseDown="linkLabel1_LinkClicked" Grid.Row="1" />
+
+        <CheckBox Content="Debug mode" Height="16" HorizontalAlignment="Left" Margin="63,658,0,0" x:Name="cbDebugMode" VerticalAlignment="Top" Click="cbDebugMode_Click" />
+
+        <TextBox Height="86" HorizontalAlignment="Left" Margin="12,679,0,0" x:Name="mmLog" VerticalAlignment="Top" Width="382" Grid.RowSpan="2" />
+        <Label Content="Log" Height="28" HorizontalAlignment="Left" Margin="14.428,653,0,0" x:Name="label144" VerticalAlignment="Top" />
+        <RadioButton Content="Convert video or audio" Height="16" HorizontalAlignment="Left" Margin="12,637,0,0" x:Name="rbConvert" VerticalAlignment="Top" IsChecked="True" />
+        <RadioButton Content="Preview mode" Height="16" HorizontalAlignment="Left" Margin="168,637,0,0" x:Name="rbPreview" VerticalAlignment="Top" />
+        <Slider Height="23" HorizontalAlignment="Left" Margin="411,0,0,32" x:Name="tbSeeking" VerticalAlignment="Bottom" Width="396" ValueChanged="tbSeeking_ValueChanged" Grid.Row="1" />
+        <ProgressBar Height="21" HorizontalAlignment="Left" Margin="411,0,0,5" x:Name="pbProgress" VerticalAlignment="Bottom" Width="396" Grid.Row="1" />
+        <TabControl HorizontalAlignment="Left" Height="339" Margin="411,13,0,0" VerticalAlignment="Top" Width="530">
+            <TabItem Header="Edit">
+                <Grid>
+                    <Label Content="Input files" Height="28" HorizontalAlignment="Left" Margin="3,2,0,0" x:Name="label127" VerticalAlignment="Top" />
+                    <ListBox Height="100" HorizontalAlignment="Left" Margin="3,29,0,0" x:Name="lbFiles" VerticalAlignment="Top" Width="444" />
+                    <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="452,29,0,0" x:Name="btAddInputFile" VerticalAlignment="Top" Width="62" Click="btAddInputFile_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="452,64,0,0" x:Name="btClearList" VerticalAlignment="Top" Width="62" Click="btClearList_Click" />
+                    <Label Content="You must set this parameters before you add the file" Height="28" HorizontalAlignment="Left" Margin="3,135,0,0" x:Name="label145" VerticalAlignment="Top" />
+                    <GroupBox Header="Input file" Height="148.04" HorizontalAlignment="Left" Margin="3,163,0,0" x:Name="groupBox6" VerticalAlignment="Top" Width="306">
+                        <Grid>
+                            <CheckBox Content="Add full file" Height="16" HorizontalAlignment="Left" Margin="12,14,0,0" x:Name="cbAddFullFile" VerticalAlignment="Top" IsChecked="True" />
+                            <Label Content="Start time" Height="28" HorizontalAlignment="Left" Margin="6,36,0,0" x:Name="label146" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="74,38,0,0" x:Name="edStartTime" Text="4000" VerticalAlignment="Top" Width="37" />
+                            <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="112,36,0,0" x:Name="label147" VerticalAlignment="Top" />
+                            <Label Content="Stop time" Height="28" HorizontalAlignment="Left" Margin="148,36,0,0" x:Name="label148" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="216,38,0,0" x:Name="edStopTime" Text="6000" VerticalAlignment="Top" Width="37" />
+                            <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="254,36,0,0" x:Name="label149" VerticalAlignment="Top" />
+                            <Label Content="Playback speed" Height="28" HorizontalAlignment="Left" Margin="6,76,0,0" x:Name="label150" VerticalAlignment="Top" />
+                            <Slider Height="23" HorizontalAlignment="Left" Margin="112,81,0,0" x:Name="tbSpeed" VerticalAlignment="Top" Width="141" Maximum="500" Value="100" ValueChanged="tbSpeed_ValueChanged" />
+                            <Label Content="100%" Height="28" HorizontalAlignment="Left" Margin="148,97.08,0,0" x:Name="lbSpeed" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Timeline" Height="148.04" HorizontalAlignment="Left" Margin="315,163,0,0" x:Name="groupBox8" VerticalAlignment="Top" Width="199">
+                        <Grid>
+                            <CheckBox Content="Insert after previous file" Height="16" HorizontalAlignment="Left" Margin="14,14,0,0" x:Name="cbInsertAfterPreviousFile" VerticalAlignment="Top" IsChecked="True" />
+                            <Label Content="Insert time" Height="28" HorizontalAlignment="Left" Margin="14,36,0,0" x:Name="label153" VerticalAlignment="Top" />
+                            <TextBox Height="23" HorizontalAlignment="Left" Margin="82,38,0,0" x:Name="edInsertTime" Text="4000" VerticalAlignment="Top" Width="37" />
+                            <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="120,36,0,0" x:Name="label154" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cut file (w/o reencoding)">
+                <Grid>
+                    <Label Content="Source file" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edSourceFileToCut" HorizontalAlignment="Left" Height="23" Margin="93,12.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392"/>
+                    <Button x:Name="btAddInputFile2" Content="..." HorizontalAlignment="Left" Margin="490,13,0,0" VerticalAlignment="Top" Width="24" Height="22.96" Click="btAddInputFile2_Click"/>
+                    <Label Content="Start time" Height="28" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="93,53,0,0" x:Name="edStartTimeCut" Text="0" VerticalAlignment="Top" Width="37" />
+                    <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="130,51,0,0"  VerticalAlignment="Top" />
+                    <Label Content="Stop time" Height="28" HorizontalAlignment="Left" Margin="199,51,0,0"  VerticalAlignment="Top" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="267,53,0,0" x:Name="edStopTimeCut" Text="5000" VerticalAlignment="Top" Width="37" />
+                    <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="305,51,0,0" VerticalAlignment="Top" />
+                    <Label x:Name="label" Content="Specify time before adding source file" HorizontalAlignment="Left" Margin="94,81,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Output file" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edOutputFileCut" HorizontalAlignment="Left" Height="23" Margin="93,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <Button x:Name="btSelectOutputCut" Content="..." HorizontalAlignment="Left" Margin="490,135,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btSelectOutputCut_Click"/>
+                    <Button x:Name="btStartCut" Content="Start" HorizontalAlignment="Left" Margin="20,204,0,0" VerticalAlignment="Top" Width="75" Click="btStartCut_Click"/>
+                    <Button x:Name="btStopCut" Content="Stop" HorizontalAlignment="Left" Margin="100,204,0,0" VerticalAlignment="Top" Width="75" Click="btStopCut_Click"/>
+                    <Label x:Name="label52" Content="Better to specify start time based on keyframe" HorizontalAlignment="Left" Margin="20,253,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Join files (w/o reencoding)">
+                <Grid>
+                    <Label Content="Input files" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <ListBox Height="51" HorizontalAlignment="Left" Margin="15,38,0,0" x:Name="lbFiles2" VerticalAlignment="Top" Width="432" />
+                    <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="452,38,0,0" x:Name="btAddInputFile3" VerticalAlignment="Top" Width="62" Click="btAddInputFile3_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="452,66,0,0" x:Name="btClearList3" VerticalAlignment="Top" Width="62" Click="btClearList3_Click" />
+                    <Label Content="Output file" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edOutputFileJoin" HorizontalAlignment="Left" Height="23" Margin="93,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <Button x:Name="btSelectOutputJoin" Content="..." HorizontalAlignment="Left" Margin="490,108,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btSelectOutputJoin_Click"/>
+                    <Button x:Name="btStartJoin" Content="Start" HorizontalAlignment="Left" Margin="15,155,0,0" VerticalAlignment="Top" Width="75" Click="btStartJoin_Click"/>
+                    <Button x:Name="btStopJoin" Content="Stop" HorizontalAlignment="Left" Margin="95,155,0,0" VerticalAlignment="Top" Width="75" Click="btStopJoin_Click"/>
+                    <Label x:Name="label2" Content="Source files should have identical video and audio stream parameters" HorizontalAlignment="Left" Margin="15,207,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Mux streams (w/o reencoding)">
+                <Grid>
+                    <Label Content="Input streams" Height="28" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" />
+                    <ListBox x:Name="lbMuxStreamsList" Height="77" HorizontalAlignment="Left" Margin="15,94,0,0" VerticalAlignment="Top" Width="499" />
+                    <Button x:Name="btMuxStreamsAdd" Content="Add" Height="23" HorizontalAlignment="Left" Margin="452,37,0,0" VerticalAlignment="Top" Width="62" Click="btMuxStreamsAdd_Click" />
+                    <Button x:Name="btMuxStreamsClear" Content="Clear" Height="23" HorizontalAlignment="Left" Margin="452,180,0,0" VerticalAlignment="Top" Width="62" Click="btMuxStreamsClear_Click" />
+                    <Label Content="Output file" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edMuxStreamsOutputFile"  HorizontalAlignment="Left" Height="23" Margin="93,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <Button x:Name="btMuxStreamsSelectOutput"  Content="..." HorizontalAlignment="Left" Margin="490,232,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btMuxStreamsSelectOutput_Click" />
+                    <Button x:Name="btStartMux" Content="Start" HorizontalAlignment="Left" Margin="15,279,0,0" VerticalAlignment="Top" Width="75" Click="btStartMux_Click"/>
+                    <Button x:Name="btStopMux" Content="Stop" HorizontalAlignment="Left" Margin="95,279,0,0" VerticalAlignment="Top" Width="75" Click="btStopMux_Click" />
+                    <CheckBox x:Name="cbMuxStreamsShortest" Content="Set file duration to shortest stream" HorizontalAlignment="Left" Margin="15,185,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label53" Content="Source file" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edMuxStreamsSourceFile" HorizontalAlignment="Left" Height="23" Margin="15,38,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="313"/>
+                    <Button x:Name="btMuxStreamsSelectFile" Content="..." HorizontalAlignment="Left" Margin="333,39,0,0" VerticalAlignment="Top" Width="21" Click="btMuxStreamsSelectFile_Click"/>
+                    <Label x:Name="label54" Content="Type or index" HorizontalAlignment="Left" Margin="359,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbMuxStreamsType" HorizontalAlignment="Left" Margin="359,38,0,0" VerticalAlignment="Top" Width="82" SelectedIndex="0">
+                        <ComboBoxItem Content="Video" />
+                        <ComboBoxItem Content="Audio" />
+                        <ComboBoxItem Content="0" />
+                        <ComboBoxItem Content="1" />
+                        <ComboBoxItem Content="2" />
+                        <ComboBoxItem Content="3" />
+                        <ComboBoxItem Content="4" />
+                        <ComboBoxItem Content="5" />
+                        <ComboBoxItem Content="6" />
+                        <ComboBoxItem Content="7" />
+                    </ComboBox>
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+        <CheckBox x:Name="cbLicensing" Content="Licensing info" HorizontalAlignment="Left" Margin="168,658,0,0" VerticalAlignment="Top"/>
+        <my:VideoEdit HorizontalAlignment="Stretch" 
+                          Margin="411,360,25,70"
+                          Background="Black"
+                          Grid.RowSpan="2"
+                          x:Name="VideoEdit1" 
+                          VerticalAlignment="Stretch" 
+                          OnError="VideoEdit1_OnError" 
+                          OnProgress="VideoEdit1_OnProgress" 
+                          OnStart="VideoEdit1_OnStart" 
+                          OnStop="VideoEdit1_OnStop" 
+                          OnMotionDetectionEx="VideoEdit1_OnObjectDetection" 
+                          OnMotionDetection="VideoEdit1_OnMotion" 
+                          OnBarcodeDetected="VideoEdit1_OnBarcodeDetected" 
+                          MouseDown="VideoEdit1_MouseDown"
+                          OnLicenseRequired="VideoEdit1_OnLicenseRequired"
+                          OnFFMPEGInfo="VideoEdit1_OnFFMPEGInfo" />
+
+    </Grid>
+</Window>

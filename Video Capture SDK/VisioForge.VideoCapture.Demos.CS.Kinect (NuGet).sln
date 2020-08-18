@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{EA0E8887-9E3A-4617-AB41-7FE409391A68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect Demo (NuGet)", "WinForms\CSharp\Kinect Demo\Kinect Demo (NuGet).csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect 2 Demo (NuGet)", "WinForms\CSharp\Kinect 2 Demo\Kinect 2 Demo (NuGet).csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8878E307-C736-4C3B-81AB-6BC3F6658032}"
+	ProjectSection(SolutionItems) = preProject
+		README_NUGET.txt = README_NUGET.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Debug|x86.ActiveCfg = Debug|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Debug|x86.Build.0 = Debug|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Release|x86.ActiveCfg = Release|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}.Release|x86.Build.0 = Release|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Debug|x86.ActiveCfg = Debug|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Debug|x86.Build.0 = Debug|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Release|x86.ActiveCfg = Release|x86
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FCD389-3B42-46FC-9956-076CF43F2600} = {06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}
+		{EA0E8887-9E3A-4617-AB41-7FE409391A68} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
+		{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
+	EndGlobalSection
+EndGlobal

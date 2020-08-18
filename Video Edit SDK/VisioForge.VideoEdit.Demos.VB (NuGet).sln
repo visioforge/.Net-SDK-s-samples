@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Main Demo VE VB (NuGet)", "WinForms\VB.Net\Main Demo\Main Demo VE VB (NuGet).vbproj", "{DB65F5CF-D6F2-4278-BC75-ED30CF980520}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D759C8A-FD30-4D40-8298-35AC6FB91D2A}"
+	ProjectSection(SolutionItems) = preProject
+		README_NUGET.txt = README_NUGET.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Debug|x86.ActiveCfg = Debug|x86
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Debug|x86.Build.0 = Debug|x86
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Release|x86.ActiveCfg = Release|x86
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FCD389-3B42-46FC-9956-076CF43F2600} = {06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}
+		{DB65F5CF-D6F2-4278-BC75-ED30CF980520} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Reflector0SourceLocation = E:\_my_projects\_projects\MediaFramework.Net\vidcap_converted\DirectEncodeNET.dll
+		Reflector0SourceName = DirectEncodeNET
+		Reflector0SourceVersion = 4.51.0.0
+		Reflector0SourceAssemblyName = 
+		Reflector0DestinationLocation = E:\_my_projects\_projects\MediaFramework.Net\VisioForge.MediaFramework\DirectEncodeNET.dll
+		Reflector0DestinationName = DirectEncodeNET
+		Reflector0DestinationVersion = 4.51.0.0
+		Reflector0DestinationAssemblyName = 
+		SolutionGuid = {FA2A8F6C-98EF-49B6-9F5B-1648A00B0F11}
+	EndGlobalSection
+EndGlobal

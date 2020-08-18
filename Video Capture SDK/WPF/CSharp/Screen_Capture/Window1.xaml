@@ -1,0 +1,111 @@
+﻿<Window x:Class="Screen_Capture.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Screen Capture Demo - Video Capture SDK .Net" Height="526" Width="859" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI" Icon="visioforge_main_icon.ico" >
+    <Grid>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,406,10" Name="btStart" VerticalAlignment="Bottom" Width="75" Click="btStart_Click" FontWeight="Bold">Start</Button>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,326,10" Name="btStop" VerticalAlignment="Bottom" Width="75" Click="btStop_Click" FontWeight="Bold">Stop</Button>
+        <TabControl Margin="10,10,0,0" x:Name="tcMain" HorizontalAlignment="Left" Width="347" Height="437" VerticalAlignment="Top">
+            <TabItem Header="Input" IsSelected="True" Name="tabPage1">
+                <Grid>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="12,297,0,0" Name="label23" VerticalAlignment="Top" Width="120">Audio input device</Label>
+                    <ComboBox Height="23" Margin="12,323,0,0" Name="cbAudioInputDevice" VerticalAlignment="Top" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" Width="241" />
+                    <Button Height="23" HorizontalAlignment="Left" Margin="258,323,0,0" Name="btAudioInputDeviceSettings" VerticalAlignment="Top" Width="75" Click="btAudioInputDeviceSettings_Click">Settings</Button>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,15,0,0" Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True">Full Screen</RadioButton>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,41,0,0" Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89">Custom Area</RadioButton>
+                    <Label Height="26" Margin="138,10,26,0" Name="label1" VerticalAlignment="Top">You can update left/top position</Label>
+                    <Label Height="28" Margin="138,29,35,0" Name="label2" VerticalAlignment="Top">and mouse cursor  capturing</Label>
+                    <Label Height="28" Margin="138,47,81,0" Name="label3" VerticalAlignment="Top">on-the-fly</Label>
+                    <TextBox Margin="103,96,0,0" Name="edScreenLeft" Height="22.723" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39" Text="0" />
+                    <Label Height="28" Margin="32,96,0,0" Name="label15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Left</Label>
+                    <TextBox Height="22.723" HorizontalAlignment="Left" Margin="103,121,0,0" Name="edScreenRight" VerticalAlignment="Top" Width="39" Text="640" />
+                    <Label Height="28" HorizontalAlignment="Left" Margin="32,121,0,0" Name="label22" VerticalAlignment="Top" Width="41">Right</Label>
+                    <TextBox Height="22.723" HorizontalAlignment="Left" Margin="200,96,0,0" Name="edScreenTop" VerticalAlignment="Top" Width="39" Text="0" />
+                    <Label Height="28" Margin="148,94,0,0" Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Top</Label>
+                    <TextBox Height="22.723" HorizontalAlignment="Left" Margin="200,121,0,0" Name="edScreenBottom" VerticalAlignment="Top" Width="39" Text="480" />
+                    <Label Height="28" Margin="149,121,0,0" Name="label26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54">Bottom</Label>
+                    <TextBox HorizontalAlignment="Left" Margin="103,157,0,0" Name="edScreenFrameRate" Width="39" Height="22.723" VerticalAlignment="Top" Text="10" />
+                    <Label HorizontalAlignment="Left" Margin="32,155,0,0" Name="label27" Width="67" Height="27.723" VerticalAlignment="Top">Frame rate</Label>
+                    <Label Margin="149,155,0,0" Name="label28" Height="27.723" VerticalAlignment="Top" HorizontalAlignment="Left" Width="47">fps</Label>
+                    <Button HorizontalAlignment="Left" Margin="235,62,0,0" Name="btScreenCaptureUpdate" Width="75" Height="23" VerticalAlignment="Top" Click="btScreenCaptureUpdate_Click">Update</Button>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,231,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,281,0,0" Name="cbRecordAudio" VerticalAlignment="Top" Width="131">Record Audio</CheckBox>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="12,352,0,0" Name="label29" VerticalAlignment="Top" Width="120">Input line</Label>
+                    <ComboBox Margin="12,374,0,0" Name="cbAudioInputLine" HorizontalAlignment="Left" Width="160" Height="23" VerticalAlignment="Top" SelectionChanged="cbAudioInputLine_SelectedIndexChanged" />
+                    <Label Height="28" Margin="177,352,0,0" Name="label30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76">Input format</Label>
+                    <ComboBox Height="23" Margin="177,374,0,0" Name="cbAudioInputFormat" VerticalAlignment="Top" SelectionChanged="cbAudioInputFormat_SelectedIndexChanged" HorizontalAlignment="Left" Width="156" />
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="266,358,0,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="65" Checked="cbUseBestAudioInputFormat_CheckedChanged">Use best</CheckBox>
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
+                    <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,189,0,0" Name="label55" VerticalAlignment="Top" />
+                    <CheckBox x:Name="cbScreenCapture_DesktopDuplication" Content="Enable Desktop Duplication" HorizontalAlignment="Left" Margin="12,257,0,0" VerticalAlignment="Top"/>
+                    <RadioButton Content="Capture window" Height="16" HorizontalAlignment="Right" Margin="0,183,39,0" x:Name="rbScreenCaptureWindow" VerticalAlignment="Top" />
+                    <Button Content="Select" Height="23" HorizontalAlignment="Left" Margin="225,205,0,0" x:Name="btScreenSourceWindowSelect" VerticalAlignment="Top" Width="75" Click="btScreenSourceWindowSelect_Click" />
+                    <Label Content="(no window selected)" Height="28" HorizontalAlignment="Left" Margin="200,231,0,0" x:Name="lbScreenSourceWindowText" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Output" IsSelected="True">
+                <Grid>
+                    <Label Content="Format" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="51" />
+                    <ComboBox Height="23" Margin="10,33,0,0" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="323" SelectionChanged="cbOutputFormat_SelectionChanged">
+                        <ComboBoxItem Content="AVI" />
+                        <ComboBoxItem Content="MKV (Matroska)" />
+                        <ComboBoxItem Content="WMV (Windows Media Video)" />
+                        <ComboBoxItem Content="DV" />
+                        <ComboBoxItem Content="WebM" />
+                        <ComboBoxItem Content="FFMPEG (DLL)" />
+                        <ComboBoxItem Content="FFMPEG (EXE)" />
+                        <ComboBoxItem Content="MP4 v8/v10" />
+                        <ComboBoxItem Content="MP4 v11" />
+                        <ComboBoxItem Content="Animated GIF" />
+                        <ComboBoxItem Content="Encrypted video" />
+                        <ComboBoxItem Content="MPEG-TS" />
+                        <ComboBoxItem Content="MOV" />
+                    </ComboBox>
+                    <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="62" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="292" Text="c:\capture.avi" />
+                    <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,176,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
+                    <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="btOutputConfigure_Click"/>
+                    <Label Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Video effects" IsSelected="True">
+                <Grid>
+                    <ListBox x:Name="lbLogos" HorizontalAlignment="Left" Height="119" VerticalAlignment="Top" Width="325" Margin="10,36,0,0"/>
+                    <Button x:Name="btImageLogoAdd" Content="Add image logo" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="95" Click="BtImageLogoAdd_Click" />
+                    <Button x:Name="btTextLogoAdd" Content="Add text logo" HorizontalAlignment="Left" Margin="110,160,0,0" VerticalAlignment="Top" Width="90" Click="BtTextLogoAdd_Click" />
+                    <Button x:Name="btLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="230,160,0,0" VerticalAlignment="Top" Width="50" Click="BtLogoEdit_Click"/>
+                    <Button x:Name="btLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="285,160,0,0" VerticalAlignment="Top" Width="50" Click="BtLogoRemove_Click" />
+                    <Label x:Name="label" Content="Image / text logos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="46,220,0,0" Maximum="255" x:Name="tbLightness" VerticalAlignment="Top" Width="100" ValueChanged="tbLightness_Scroll" />
+                    <Label Content="Lightness" HorizontalAlignment="Left" Margin="71,193,0,0" x:Name="label92" Width="86" Height="28" VerticalAlignment="Top" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="214,220,0,0" Maximum="255" x:Name="tbSaturation" VerticalAlignment="Top" Width="100" Value="255" ValueChanged="tbSaturation_Scroll" />
+                    <Label Content="Saturation" HorizontalAlignment="Left" Margin="237,193,0,0" x:Name="label93" Width="86" Height="28" VerticalAlignment="Top" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="46,286,0,0" Maximum="255" x:Name="tbContrast" VerticalAlignment="Top" Width="100" ValueChanged="tbContrast_Scroll" />
+                    <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="67,259,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="214,286,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbDarkness_Scroll" />
+                    <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="237,259,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
+                    <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="21,330,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged"  />
+                    <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="96,330,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
+                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,330,0,0" VerticalAlignment="Top" Checked="CbFlipX_Checked" Unchecked="CbFlipX_Checked"/>
+                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,330,0,0" VerticalAlignment="Top" Checked="CbFlipY_Checked" Unchecked="CbFlipY_Checked"/>
+                    <Label x:Name="label4" Content="More effects and settings available in Main Demo" HorizontalAlignment="Left" Margin="32,373,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log" IsSelected="True">
+                <Grid>
+                    <TextBox Margin="10,31,0,0" x:Name="mmLog" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="370" Width="323" />
+                    <CheckBox Height="16" HorizontalAlignment="Right" Margin="0,10,232,0" x:Name="cbDebugMode" VerticalAlignment="Top" Width="101" Content="Debug Mode"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Content="Video tutorial" FontWeight="Bold" Foreground="#FF0035BC" HorizontalAlignment="Right" Margin="0,3,10,0" Name="label33" Width="89" MouseUp="llVideoTutorials_LinkClicked" Height="26" VerticalAlignment="Top" />
+        <my:VideoCapture Margin="368,32,10,123" Name="VideoCapture1" OnError="VideoCapture1_OnError" Background="Black" OnLicenseRequired="VideoCapture1_OnLicenseRequired"/>
+        <Label Content="Much more features available in Main Demo" HorizontalAlignment="Left" Margin="370,3,0,0" VerticalAlignment="Top"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="10,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True" Content="Preview"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="108,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"/>
+        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="218,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
+        <Button Content="Resume" Margin="0,0,165,10" x:Name="btResume" Click="BtResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
+        <Button Content="Pause" Margin="0,0,228,10" x:Name="btPause" Click="BtPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
+        <Button Content="Save screenshot" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" Click="btSaveScreenshot_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118" />
+    </Grid>
+</Window>
