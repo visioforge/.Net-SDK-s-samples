@@ -24,7 +24,7 @@ namespace read_file_info
         {
             InitializeComponent();
 
-            RedistCheck.ConfigureLocalRedist(out var _);
+            CustomRedist.ConfigureLocalRedist(out var _);
         }
 
         private void btOpenFile_Click(object sender, EventArgs e)
