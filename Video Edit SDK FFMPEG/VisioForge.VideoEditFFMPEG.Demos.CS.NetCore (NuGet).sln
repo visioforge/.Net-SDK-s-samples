@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F434-47CE-A231-2FC3F089F75B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE FFMPEG NetCore (NuGet)", "WinForms\CSharp\Main Demo\Main Demo VE FFMPEG NetCore (NuGet).csproj", "{F18B52D7-0597-445B-9DCB-CA429E9B34BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo FFMPEG VE WPF NetCore (NuGet)", "WPF\CSharp\Main Demo NetCore\Main Demo FFMPEG VE WPF NetCore (NuGet).csproj", "{A3DDED72-E1D3-412F-8F4C-88B5933A265A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Debug|x86.ActiveCfg = Debug|x86
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Debug|x86.Build.0 = Debug|x86
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Release|x86.ActiveCfg = Release|x86
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF}.Release|x86.Build.0 = Release|x86
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Debug|x86.ActiveCfg = Debug|x86
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Debug|x86.Build.0 = Debug|x86
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Release|x86.ActiveCfg = Release|x86
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12FCD389-3B42-46FC-9956-076CF43F2600} = {06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}
+		{BEB35102-F434-47CE-A231-2FC3F089F75B} = {06E594FA-BCB0-4C8C-AEB2-F0FE6E09DA1F}
+		{F18B52D7-0597-445B-9DCB-CA429E9B34BF} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{A3DDED72-E1D3-412F-8F4C-88B5933A265A} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
+	EndGlobalSection
+EndGlobal
