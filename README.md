@@ -4,14 +4,15 @@ Call Build on required project to restore NuGet packages for project and build i
 
 Most of demo applications contains NuGet unmanaged redist packages, specific to used SDK and platform.
 
-# .Net SDK's samples
-VisioForge .Net SDK's samples:
+# Product pages
 
 [Video Capture SDK .Net](https://www.visioforge.com/video-capture-sdk-net)
 
 [Video Edit SDK .Net](https://www.visioforge.com/video-edit-sdk-net)
 
 [Media Player SDK .Net](https://www.visioforge.com/media-player-sdk-net)
+
+# Helpful links
 
 [NuGet packages that contains required assemblies](https://www.nuget.org/packages?q=visioforge)
 
