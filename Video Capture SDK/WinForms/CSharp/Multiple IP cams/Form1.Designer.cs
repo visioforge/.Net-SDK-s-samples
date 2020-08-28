@@ -82,6 +82,7 @@ namespace multiple_ap_cams
             this.videoCapture1.BDA_Source = null;
             this.videoCapture1.ChromaKey = null;
             this.videoCapture1.Custom_Source = null;
+            this.videoCapture1.CustomRedist_Auto = true;
             this.videoCapture1.CustomRedist_Enabled = false;
             this.videoCapture1.CustomRedist_Path = null;
             this.videoCapture1.Debug_Dir = "";
@@ -128,7 +129,7 @@ namespace multiple_ap_cams
             this.videoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.videoCapture1.SeparateCapture_GMFMode = true;
             this.videoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.videoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.videoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.videoCapture1.Size = new System.Drawing.Size(295, 228);
             this.videoCapture1.Start_DelayEnabled = false;
             this.videoCapture1.TabIndex = 0;
@@ -158,6 +159,8 @@ namespace multiple_ap_cams
             this.videoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.videoCapture1.Video_Effects_Enabled = false;
             this.videoCapture1.Video_Effects_GPU_Enabled = false;
+            this.videoCapture1.Video_Effects_MergeImageLogos = false;
+            this.videoCapture1.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_X = 16;
             videoRendererSettingsWinForms1.Aspect_Ratio_Y = 9;
@@ -218,6 +221,7 @@ namespace multiple_ap_cams
             this.videoCapture2.BDA_Source = null;
             this.videoCapture2.ChromaKey = null;
             this.videoCapture2.Custom_Source = null;
+            this.videoCapture2.CustomRedist_Auto = true;
             this.videoCapture2.CustomRedist_Enabled = false;
             this.videoCapture2.CustomRedist_Path = null;
             this.videoCapture2.Debug_Dir = "";
@@ -264,7 +268,7 @@ namespace multiple_ap_cams
             this.videoCapture2.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.videoCapture2.SeparateCapture_GMFMode = true;
             this.videoCapture2.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.videoCapture2.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.videoCapture2.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.videoCapture2.Size = new System.Drawing.Size(295, 228);
             this.videoCapture2.Start_DelayEnabled = false;
             this.videoCapture2.TabIndex = 1;
@@ -294,6 +298,8 @@ namespace multiple_ap_cams
             this.videoCapture2.Video_Effects_AllowMultipleStreams = false;
             this.videoCapture2.Video_Effects_Enabled = false;
             this.videoCapture2.Video_Effects_GPU_Enabled = false;
+            this.videoCapture2.Video_Effects_MergeImageLogos = false;
+            this.videoCapture2.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms2.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms2.Aspect_Ratio_X = 16;
             videoRendererSettingsWinForms2.Aspect_Ratio_Y = 9;
@@ -378,7 +384,7 @@ namespace multiple_ap_cams
             this.edURL1.Name = "edURL1";
             this.edURL1.Size = new System.Drawing.Size(260, 20);
             this.edURL1.TabIndex = 7;
-            this.edURL1.Text = "http://212.162.177.75/mjpg/video.mjpg";
+            this.edURL1.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // edURL2
             // 
@@ -386,7 +392,7 @@ namespace multiple_ap_cams
             this.edURL2.Name = "edURL2";
             this.edURL2.Size = new System.Drawing.Size(260, 20);
             this.edURL2.TabIndex = 9;
-            this.edURL2.Text = "http://212.162.177.75/mjpg/video.mjpg";
+            this.edURL2.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label2
             // 

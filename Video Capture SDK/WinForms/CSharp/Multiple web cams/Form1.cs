@@ -8,6 +8,7 @@ namespace multiple_ap_cams
 
     using VisioForge.Controls.UI.WinForms;
     using VisioForge.Types;
+    using VisioForge.Types.OutputFormat;
 
     public partial class Form1 : Form
     {
@@ -22,6 +23,9 @@ namespace multiple_ap_cams
 
         private async void btStart1_Click(object sender, EventArgs e)
         {
+            videoCapture1.Debug_Mode = cbDebugMode.Checked;
+            videoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+
             videoCapture1.Video_CaptureDevice = cbCamera1.Text;
 
             var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
@@ -30,34 +34,23 @@ namespace multiple_ap_cams
                 return;
             }
 
-            var formats = deviceItem.VideoFormats;
             videoCapture1.Video_CaptureDevice_Format_UseBest = false;
-            foreach (var format in formats)
+            if (cbVideoInputFormat1.SelectedIndex != -1)
             {
-                if (format.Contains("1280x720"))
-                {
-                    videoCapture1.Video_CaptureDevice_Format = format;
-                    break;
-                }
-                else if (format.Contains("1920x1080"))
-                {
-                    videoCapture1.Video_CaptureDevice_Format = format;
-                    break;
-                }
-            }
-
-            var frameRates = deviceItem.VideoFrameRates;
-            if (frameRates.Contains("25"))
-            {
-                videoCapture1.Video_CaptureDevice_FrameRate = 25;
-            }
-            else if (frameRates.Contains("30"))
-            {
-                videoCapture1.Video_CaptureDevice_FrameRate = 30;
+                videoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat1.Text;
             }
             else
             {
-                videoCapture1.Video_CaptureDevice_FrameRate = Convert.ToInt32(frameRates[frameRates.Count - 1]);
+                videoCapture1.Video_CaptureDevice_Format = string.Empty;
+            }
+
+            if (cbFrameRate1.SelectedIndex != -1)
+            {
+                videoCapture1.Video_CaptureDevice_FrameRate = Convert.ToInt32(cbFrameRate1.Text);
+            }
+            else
+            {
+                videoCapture1.Video_CaptureDevice_FrameRate = 25;
             }
 
             videoCapture1.OnError += VideoCapture1OnOnError;
@@ -90,6 +83,9 @@ namespace multiple_ap_cams
 
         private async void btStart2_Click(object sender, EventArgs e)
         {
+            videoCapture2.Debug_Mode = cbDebugMode.Checked;
+            videoCapture2.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+
             videoCapture2.Video_CaptureDevice = cbCamera2.Text;
 
             var deviceItem = videoCapture2.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
@@ -98,34 +94,23 @@ namespace multiple_ap_cams
                 return;
             }
 
-            var formats = deviceItem.VideoFormats;
             videoCapture2.Video_CaptureDevice_Format_UseBest = false;
-            foreach (var format in formats)
+            if (cbVideoInputFormat2.SelectedIndex != -1)
             {
-                if (format.Contains("1280x720"))
-                {
-                    videoCapture2.Video_CaptureDevice_Format = format;
-                    break;
-                }
-                else if (format.Contains("1920x1080"))
-                {
-                    videoCapture2.Video_CaptureDevice_Format = format;
-                    break;
-                }
-            }
-
-            var frameRates = deviceItem.VideoFrameRates;
-            if (frameRates.Contains("25"))
-            {
-                videoCapture2.Video_CaptureDevice_FrameRate = 25;
-            }
-            else if (frameRates.Contains("30"))
-            {
-                videoCapture2.Video_CaptureDevice_FrameRate = 30;
+                videoCapture2.Video_CaptureDevice_Format = cbVideoInputFormat2.Text;
             }
             else
             {
-                videoCapture2.Video_CaptureDevice_FrameRate = Convert.ToInt32(frameRates[frameRates.Count - 1]);
+                videoCapture2.Video_CaptureDevice_Format = string.Empty;
+            }
+
+            if (cbFrameRate2.SelectedIndex != -1)
+            {
+                videoCapture2.Video_CaptureDevice_FrameRate = Convert.ToInt32(cbFrameRate2.Text);
+            }
+            else
+            {
+                videoCapture2.Video_CaptureDevice_FrameRate = 25;
             }
 
             videoCapture2.OnError += VideoCapture2OnOnError;
@@ -241,6 +226,78 @@ namespace multiple_ap_cams
                                     {
                                         lbTimestamp2.Text = "Recording time: " + ts.ToString(@"hh\:mm\:ss");
                                     }));
+            }
+        }
+
+        private void cbCamera1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCamera1.SelectedIndex != -1)
+            {
+                cbVideoInputFormat1.Items.Clear();
+
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                foreach (string format in deviceItem.VideoFormats)
+                {
+                    cbVideoInputFormat1.Items.Add(format);
+                }
+
+                if (cbVideoInputFormat1.Items.Count > 0)
+                {
+                    cbVideoInputFormat1.SelectedIndex = 0;
+                }
+
+                cbFrameRate1.Items.Clear();
+
+                foreach (string frameRate in deviceItem.VideoFrameRates)
+                {
+                    cbFrameRate1.Items.Add(frameRate);
+                }
+
+                if (cbFrameRate1.Items.Count > 0)
+                {
+                    cbFrameRate1.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void cbCamera2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCamera2.SelectedIndex != -1)
+            {
+                cbVideoInputFormat2.Items.Clear();
+
+                var deviceItem = videoCapture2.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                foreach (string format in deviceItem.VideoFormats)
+                {
+                    cbVideoInputFormat2.Items.Add(format);
+                }
+
+                if (cbVideoInputFormat2.Items.Count > 0)
+                {
+                    cbVideoInputFormat2.SelectedIndex = 0;
+                }
+
+                cbFrameRate2.Items.Clear();
+
+                foreach (string frameRate in deviceItem.VideoFrameRates)
+                {
+                    cbFrameRate2.Items.Add(frameRate);
+                }
+
+                if (cbFrameRate2.Items.Count > 0)
+                {
+                    cbFrameRate2.SelectedIndex = 0;
+                }
             }
         }
     }
