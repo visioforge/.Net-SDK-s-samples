@@ -69,6 +69,7 @@
             this.btStart = new System.Windows.Forms.Button();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.cbAudioCapture = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -88,6 +89,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbAudioCapture);
             this.tabPage1.Controls.Add(this.cbScreenCapture_DesktopDuplication);
             this.tabPage1.Controls.Add(this.cbScreenCaptureDisplayIndex);
             this.tabPage1.Controls.Add(this.label93);
@@ -481,6 +483,7 @@
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -527,7 +530,7 @@
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(478, 312);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 78;
@@ -557,6 +560,8 @@
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_X = 16;
             videoRendererSettingsWinForms1.Aspect_Ratio_Y = 9;
@@ -585,6 +590,16 @@
             this.VideoCapture1.VLC_Path = null;
             this.VideoCapture1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoCapture1_OnError);
             this.VideoCapture1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoCapture1_OnLicenseRequired);
+            // 
+            // cbAudioCapture
+            // 
+            this.cbAudioCapture.AutoSize = true;
+            this.cbAudioCapture.Location = new System.Drawing.Point(234, 212);
+            this.cbAudioCapture.Name = "cbAudioCapture";
+            this.cbAudioCapture.Size = new System.Drawing.Size(185, 17);
+            this.cbAudioCapture.TabIndex = 80;
+            this.cbAudioCapture.Text = "Capture audio from default device";
+            this.cbAudioCapture.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -651,6 +666,7 @@
         private System.Windows.Forms.TextBox edOutput;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox cbAudioCapture;
     }
 }
 

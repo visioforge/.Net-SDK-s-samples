@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSnippets", "CodeSnippet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info NetCore (NuGet)", "WinForms\CSharp\_CodeSnippets\read-file-info\read-file-info NetCore (NuGet).csproj", "{959CB72B-0CEF-43C9-B2B6-A09026F5251F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "youtube-player NetCore (NuGet)", "WinForms\CSharp\_CodeSnippets\youtube-player\youtube-player NetCore (NuGet).csproj", "{710F02CE-16D1-41B4-B6DA-5573B838A8E3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Player Demo NetCore (NuGet)", "WinForms\CSharp\Audio Player\Audio Player Demo NetCore (NuGet).csproj", "{D82B8438-1C90-44DA-A93A-1370353925E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVD Player Demo NetCore (NuGet)", "WinForms\CSharp\DVD Player\DVD Player Demo NetCore (NuGet).csproj", "{6202A45C-7D1C-494E-9144-377C881BB9E6}"
@@ -37,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VR 360 Demo NetCore (NuGet)
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP WPF NetCore (NuGet)", "WPF\CSharp\Main Demo NetCore\Main Demo MP WPF NetCore (NuGet).csproj", "{75804C0C-DADF-49F7-902B-054B7F341E52}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo NetCore (NuGet)", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo NetCore (NuGet).csproj", "{9CFA0390-4757-4164-8E4A-72A46283B1E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,14 +53,6 @@ Global
 		{959CB72B-0CEF-43C9-B2B6-A09026F5251F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{959CB72B-0CEF-43C9-B2B6-A09026F5251F}.Release|x86.ActiveCfg = Release|Any CPU
 		{959CB72B-0CEF-43C9-B2B6-A09026F5251F}.Release|x86.Build.0 = Release|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Debug|x86.Build.0 = Debug|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Release|x86.ActiveCfg = Release|Any CPU
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3}.Release|x86.Build.0 = Release|Any CPU
 		{D82B8438-1C90-44DA-A93A-1370353925E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D82B8438-1C90-44DA-A93A-1370353925E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82B8438-1C90-44DA-A93A-1370353925E2}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -157,13 +149,20 @@ Global
 		{75804C0C-DADF-49F7-902B-054B7F341E52}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75804C0C-DADF-49F7-902B-054B7F341E52}.Release|x86.ActiveCfg = Release|Any CPU
 		{75804C0C-DADF-49F7-902B-054B7F341E52}.Release|x86.Build.0 = Release|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Debug|x86.Build.0 = Debug|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{959CB72B-0CEF-43C9-B2B6-A09026F5251F} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
-		{710F02CE-16D1-41B4-B6DA-5573B838A8E3} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 		{D82B8438-1C90-44DA-A93A-1370353925E2} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{6202A45C-7D1C-494E-9144-377C881BB9E6} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{EBF35397-628C-4024-8545-F1A1D8F6D0D9} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
@@ -176,6 +175,7 @@ Global
 		{A3F9FF8D-0612-4ED1-859F-880AF4104900} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{D4F99DFA-C385-44CF-BCE8-E31C83D408BC} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{75804C0C-DADF-49F7-902B-054B7F341E52} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
+		{9CFA0390-4757-4164-8E4A-72A46283B1E9} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -60,9 +60,23 @@ namespace screen_capture
             screenSource.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.Checked;
             VideoCapture1.Screen_Capture_Source = screenSource;
 
-            // disable audio
-            VideoCapture1.Audio_PlayAudio = false;
-            VideoCapture1.Audio_RecordAudio = false;
+            // audio capture
+            if (cbAudioCapture.Checked)
+            {
+                VideoCapture1.Audio_PlayAudio = false;
+                VideoCapture1.Audio_RecordAudio = true;
+
+                // select first audio device with default parameters
+                if (VideoCapture1.Audio_CaptureDevicesInfo.Any())
+                {
+                    VideoCapture1.Audio_CaptureDevice = VideoCapture1.Audio_CaptureDevicesInfo[0].Name;
+                }
+            }
+            else
+            {
+                VideoCapture1.Audio_PlayAudio = false;
+                VideoCapture1.Audio_RecordAudio = false;
+            }
 
             // configure output
             if (cbCapture.Checked)
