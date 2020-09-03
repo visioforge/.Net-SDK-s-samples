@@ -2459,7 +2459,7 @@ namespace VideoEdit_CS_Demo
                                    {
                                        if (cbLicensing.Checked)
                                        {
-                                           mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message
+                                           mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message
                                                          + Environment.NewLine;
                                        }
                                    }));

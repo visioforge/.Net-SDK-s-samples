@@ -696,7 +696,7 @@ namespace Screen_Capture
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)

@@ -4452,7 +4452,7 @@ namespace Main_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private delegate void FFMPEGInfoDelegate(string message);
@@ -5825,6 +5825,18 @@ namespace Main_Demo
         private void tbChromaKeySmoothing_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ConfigureChromaKey();
+        }
+
+        private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
+            Process.Start(startInfo);
+        }
+
+        private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }

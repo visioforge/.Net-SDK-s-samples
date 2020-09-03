@@ -175,7 +175,7 @@ namespace multiple_ap_cams
             {
                 Invoke((Action)(() =>
                 {
-                    mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                    mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                 }));
             }
         }
@@ -186,7 +186,7 @@ namespace multiple_ap_cams
             {
                 Invoke((Action)(() =>
                 {
-                    mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                    mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                 }));
             }
         }

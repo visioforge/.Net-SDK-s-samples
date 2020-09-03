@@ -203,7 +203,7 @@ namespace multiple_video_streams
 
         private void videoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void UpdateRecordingTime()

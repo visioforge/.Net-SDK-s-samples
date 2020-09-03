@@ -101,8 +101,10 @@ namespace Video_Player_Demo
 
         private async void btStop_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
+
             await MediaPlayer1.StopAsync();
-            timer1.Enabled = false;
+            
             tbTimeline.Value = 0;
         }
 
@@ -171,7 +173,7 @@ namespace Video_Player_Demo
                                    {
                                        if (cbLicensing.Checked)
                                        {
-                                           mmError.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                                           mmError.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                                        }
                                    }));
         }
@@ -184,6 +186,18 @@ namespace Video_Player_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btStop_Click(null, null);
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
+            Process.Start(startInfo);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }

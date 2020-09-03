@@ -21,7 +21,7 @@ namespace Two_Windows_Demo
         {
             if (cbLicensing.Checked)
             {
-                mmError.Text += "LICENSING:" + Environment.NewLine + message + Environment.NewLine;
+                mmError.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + message + Environment.NewLine;
             }
         }
 

@@ -196,7 +196,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private async Sub btStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStart.Click
+    Private Async Sub btStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStart.Click
 
         If (onvifControl IsNot Nothing) Then
             onvifControl.Disconnect()
@@ -341,17 +341,17 @@ Public Class Form1
             End Select
         End If
 
-        VideoCapture1.Video_Effects_Enabled = true
+        VideoCapture1.Video_Effects_Enabled = True
         VideoCapture1.Video_Effects_Clear()
         lbLogos.Items.Clear()
         ConfigureVideoEffects()
 
-       await VideoCapture1.StartAsync()
+        Await VideoCapture1.StartAsync()
 
         tcMain.SelectedIndex = 3
         tmRecording.Start()
     End Sub
-    Private async Sub btStop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStop.Click
+    Private Async Sub btStop_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStop.Click
 
         tmRecording.Stop()
         Await VideoCapture1.StopAsync()
@@ -368,8 +368,8 @@ Public Class Form1
     Private Sub Log(msg As String)
         If (IsHandleCreated) Then
             Invoke(Sub()
-                mmLog.Text = mmLog.Text + msg + Environment.NewLine
-            End Sub)
+                       mmLog.Text = mmLog.Text + msg + Environment.NewLine
+                   End Sub)
         End If
     End Sub
 
@@ -377,13 +377,13 @@ Public Class Form1
         Log(e.Message)
     End Sub
 
-    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs)  Handles VideoCapture1.OnLicenseRequired
-        Log(e.Message)
+    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
+        Log("(NOT ERROR) " + e.Message)
     End Sub
 
     Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
 
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86)
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
         Process.Start(startInfo)
 
     End Sub
@@ -594,11 +594,11 @@ Public Class Form1
         End Select
     End Sub
 
-    Private async Sub btResume_Click(sender As Object, e As EventArgs) Handles btResume.Click
+    Private Async Sub btResume_Click(sender As Object, e As EventArgs) Handles btResume.Click
         Await VideoCapture1.ResumeAsync()
     End Sub
 
-    Private async Sub btPause_Click(sender As Object, e As EventArgs) Handles btPause.Click
+    Private Async Sub btPause_Click(sender As Object, e As EventArgs) Handles btPause.Click
         Await VideoCapture1.PauseAsync()
     End Sub
 
@@ -720,7 +720,7 @@ Public Class Form1
     End Sub
 
     Private Sub ConfigureVideoEffects()
-        
+
         'Other effects
         If tbLightness.Value > 0 Then
             tbLightness_Scroll(Nothing, Nothing)
@@ -754,7 +754,7 @@ Public Class Form1
             cbFlipY_CheckedChanged(Nothing, Nothing)
         End If
     End Sub
-    
+
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
         Dim intf As IVFVideoEffectLightness
@@ -819,7 +819,7 @@ Public Class Form1
         End If
 
     End Sub
-    
+
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
         Dim intf As IVFVideoEffectGrayscale
@@ -835,7 +835,7 @@ Public Class Form1
         End If
 
     End Sub
-    
+
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
         Dim intf As IVFVideoEffectInvert
@@ -851,7 +851,7 @@ Public Class Form1
         End If
 
     End Sub
-    
+
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
         Dim flip As IVFVideoEffectFlipDown
         Dim effect = VideoCapture1.Video_Effects_Get("FlipDown")
@@ -881,10 +881,10 @@ Public Class Form1
     End Sub
 
     Private Sub btImageLogoAdd_Click(sender As Object, e As EventArgs) Handles btImageLogoAdd.Click
-        Dim dlg = new ImageLogoSettingsDialog()
+        Dim dlg = New ImageLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoCapture1)
-        Dim effect = new VFVideoEffectImageLogo(true, effectName)
+        Dim effect = New VFVideoEffectImageLogo(True, effectName)
 
         VideoCapture1.Video_Effects_Add(effect)
         lbLogos.Items.Add(effect.Name)
@@ -936,6 +936,10 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub linkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
+        Process.Start(startInfo)
+    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

@@ -7,7 +7,7 @@ Public Class Form2
     Public Sub LogLicensing(message As String)
 
         If cbLicensing.Checked Then
-            mmError.Text = mmError.Text + "LICENSING:" + Environment.NewLine + message + Environment.NewLine
+            mmError.Text = mmError.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + message + Environment.NewLine
         End If
 
     End Sub

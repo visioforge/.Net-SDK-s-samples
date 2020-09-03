@@ -412,7 +412,7 @@
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void btOutputConfigure_Click(object sender, EventArgs e)

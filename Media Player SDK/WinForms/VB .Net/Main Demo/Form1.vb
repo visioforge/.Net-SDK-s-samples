@@ -2650,7 +2650,7 @@ Public Class Form1
 
         BeginInvoke(Sub()
                         If cbLicensing.Checked Then
-                            mmLog.Text = mmLog.Text + "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
+                            mmLog.Text = mmLog.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
                         End If
                     End Sub)
 
@@ -3072,6 +3072,16 @@ Public Class Form1
             pnChromaKeyColor.BackColor = colorDialog1.Color
             ConfigureChromaKey()
         End If
+    End Sub
+
+    Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub linkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel2.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
+        Process.Start(startInfo)
     End Sub
 End Class
 

@@ -134,7 +134,7 @@ Public Class Form1
 
         Invoke(Sub()
                    If cbLicensing.Checked Then
-                       mmError.Text = mmError.Text + "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
+                       mmError.Text = mmError.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
                    End If
                End Sub)
 

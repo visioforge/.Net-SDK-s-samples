@@ -4101,7 +4101,7 @@ Public Class Form1
     End Sub
 
     Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
-        Log(e.Message)
+        Log("(NOT ERROR) " + e.Message)
     End Sub
 
     Private Delegate Sub FFMPEGInfoDelegate(ByVal message As String)
@@ -5138,6 +5138,16 @@ Public Class Form1
             edChromaKeyImage.Text = openFileDialog1.FileName
             ConfigureChromaKey()
         End If
+    End Sub
+
+    Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
+        Process.Start(startInfo)
     End Sub
 End Class
 

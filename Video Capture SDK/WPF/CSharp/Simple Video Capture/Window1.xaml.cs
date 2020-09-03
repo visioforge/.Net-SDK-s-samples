@@ -222,7 +222,7 @@ namespace Simple_Video_Capture
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void tbAudioVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

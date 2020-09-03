@@ -32,7 +32,7 @@ namespace Video_Player_Demo
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
+            VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms3 = new VisioForge.Types.VideoRendererSettingsWinForms();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbBalance1 = new System.Windows.Forms.TrackBar();
@@ -64,6 +64,10 @@ namespace Video_Player_Demo
             this.MediaPlayer1 = new VisioForge.Controls.UI.WinForms.MediaPlayer();
             this.Label2 = new System.Windows.Forms.Label();
             this.cbSourceMode = new System.Windows.Forms.ComboBox();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
@@ -380,6 +384,7 @@ namespace Video_Player_Demo
             this.MediaPlayer1.Custom_Splitter = null;
             this.MediaPlayer1.Custom_Video_Decoder = null;
             this.MediaPlayer1.CustomParameters = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("MediaPlayer1.CustomParameters")));
+            this.MediaPlayer1.CustomRedist_Auto = true;
             this.MediaPlayer1.CustomRedist_Enabled = false;
             this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
@@ -419,25 +424,27 @@ namespace Video_Player_Demo
             this.MediaPlayer1.TabIndex = 34;
             this.MediaPlayer1.Video_Effects_Enabled = false;
             this.MediaPlayer1.Video_Effects_GPU_Enabled = false;
-            videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
-            videoRendererSettingsWinForms1.Aspect_Ratio_X = 0;
-            videoRendererSettingsWinForms1.Aspect_Ratio_Y = 0;
-            videoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Black;
-            videoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.Auto;
-            videoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = null;
-            videoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = true;
-            videoRendererSettingsWinForms1.Flip_Horizontal = false;
-            videoRendererSettingsWinForms1.Flip_Vertical = false;
-            videoRendererSettingsWinForms1.RotationAngle = 0;
-            videoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox;
-            videoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.EVR;
-            videoRendererSettingsWinForms1.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.EVR;
-            videoRendererSettingsWinForms1.Zoom_Ratio = 0;
-            videoRendererSettingsWinForms1.Zoom_ShiftX = 0;
-            videoRendererSettingsWinForms1.Zoom_ShiftY = 0;
-            this.MediaPlayer1.Video_Renderer = videoRendererSettingsWinForms1;
+            videoRendererSettingsWinForms3.Aspect_Ratio_Override = false;
+            videoRendererSettingsWinForms3.Aspect_Ratio_X = 0;
+            videoRendererSettingsWinForms3.Aspect_Ratio_Y = 0;
+            videoRendererSettingsWinForms3.BackgroundColor = System.Drawing.Color.Black;
+            videoRendererSettingsWinForms3.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.Auto;
+            videoRendererSettingsWinForms3.Deinterlace_VMR9_Mode = null;
+            videoRendererSettingsWinForms3.Deinterlace_VMR9_UseDefault = true;
+            videoRendererSettingsWinForms3.Flip_Horizontal = false;
+            videoRendererSettingsWinForms3.Flip_Vertical = false;
+            videoRendererSettingsWinForms3.RotationAngle = 0;
+            videoRendererSettingsWinForms3.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox;
+            videoRendererSettingsWinForms3.Video_Renderer = VisioForge.Types.VFVideoRenderer.EVR;
+            videoRendererSettingsWinForms3.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.EVR;
+            videoRendererSettingsWinForms3.Zoom_Ratio = 0;
+            videoRendererSettingsWinForms3.Zoom_ShiftX = 0;
+            videoRendererSettingsWinForms3.Zoom_ShiftY = 0;
+            this.MediaPlayer1.Video_Renderer = videoRendererSettingsWinForms3;
             this.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = false;
             this.MediaPlayer1.Video_Stream_Index = 0;
+            this.MediaPlayer1.Virtual_Camera_Output_Enabled = false;
+            this.MediaPlayer1.Virtual_Camera_Output_LicenseKey = null;
             this.MediaPlayer1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.MediaPlayer1_OnError);
             this.MediaPlayer1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.MediaPlayer1_OnLicenseRequired);
             this.MediaPlayer1.OnStop += new System.EventHandler<VisioForge.Types.MediaPlayerStopEventArgs>(this.MediaPlayer1_OnStop);
@@ -469,11 +476,55 @@ namespace Video_Player_Demo
             this.cbSourceMode.Size = new System.Drawing.Size(221, 21);
             this.cbSourceMode.TabIndex = 51;
             // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(565, 334);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel2.TabIndex = 89;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "x64";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(535, 334);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel7.TabIndex = 88;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "x86";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(433, 334);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(97, 13);
+            this.label25.TabIndex = 87;
+            this.label25.Text = "to use VLC engine ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(433, 313);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(234, 13);
+            this.label20.TabIndex = 86;
+            this.label20.Text = "Please install VLC redist EXE or NuGet package";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 499);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabel7);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.cbSourceMode);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.groupBox4);
@@ -538,6 +589,10 @@ namespace Video_Player_Demo
         private System.Windows.Forms.ComboBox cbSourceMode;
         private System.Windows.Forms.CheckBox cbLicensing;
         private System.Windows.Forms.Button btPreviousFrame;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label20;
     }
 }
 

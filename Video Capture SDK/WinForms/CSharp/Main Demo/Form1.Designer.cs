@@ -1128,6 +1128,9 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -9400,6 +9403,9 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.linkLabel3);
+            this.tabPage144.Controls.Add(this.label22);
+            this.tabPage144.Controls.Add(this.linkLabel7);
             this.tabPage144.Controls.Add(this.edIPUrl);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
@@ -9430,7 +9436,7 @@ namespace VideoCapture_CSharp_Demo
             this.edIPUrl.Name = "edIPUrl";
             this.edIPUrl.Size = new System.Drawing.Size(360, 20);
             this.edIPUrl.TabIndex = 80;
-            this.edIPUrl.Text = "http://help.visioforge.com/video.mp4";
+            this.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label165
             // 
@@ -9453,7 +9459,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btShowIPCamDatabase
             // 
-            this.btShowIPCamDatabase.Location = new System.Drawing.Point(280, 219);
+            this.btShowIPCamDatabase.Location = new System.Drawing.Point(298, 218);
             this.btShowIPCamDatabase.Name = "btShowIPCamDatabase";
             this.btShowIPCamDatabase.Size = new System.Drawing.Size(135, 23);
             this.btShowIPCamDatabase.TabIndex = 77;
@@ -13038,6 +13044,37 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(373, 195);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel3.TabIndex = 85;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "x64";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(10, 195);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(327, 13);
+            this.label22.TabIndex = 84;
+            this.label22.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(343, 195);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel7.TabIndex = 83;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "x86";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -14461,6 +14498,9 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.TrackBar tbChromaKeyThresholdSensitivity;
         private System.Windows.Forms.Label label213;
         private System.Windows.Forms.CheckBox cbChromaKeyEnabled;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.LinkLabel linkLabel7;
     }
 }
 

@@ -35,6 +35,10 @@ namespace Media_Player_Demo
             VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage20 = new System.Windows.Forms.TabPage();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.rbGPUDirect3D = new System.Windows.Forms.RadioButton();
             this.rbGPUDXVANative = new System.Windows.Forms.RadioButton();
@@ -796,6 +800,10 @@ namespace Media_Player_Demo
             // 
             // tabPage20
             // 
+            this.tabPage20.Controls.Add(this.linkLabel2);
+            this.tabPage20.Controls.Add(this.linkLabel7);
+            this.tabPage20.Controls.Add(this.label25);
+            this.tabPage20.Controls.Add(this.label20);
             this.tabPage20.Controls.Add(this.groupBox6);
             this.tabPage20.Location = new System.Drawing.Point(4, 22);
             this.tabPage20.Name = "tabPage20";
@@ -804,6 +812,46 @@ namespace Media_Player_Demo
             this.tabPage20.TabIndex = 15;
             this.tabPage20.Text = "Source mode";
             this.tabPage20.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(114, 149);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel2.TabIndex = 85;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "x64";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(84, 149);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel7.TabIndex = 84;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "x86";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(13, 149);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.TabIndex = 83;
+            this.label25.Text = "VLC engine ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 128);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(266, 13);
+            this.label20.TabIndex = 82;
+            this.label20.Text = "Please install VLC redist EXE or NuGet package to use";
             // 
             // groupBox6
             // 
@@ -7172,6 +7220,7 @@ namespace Media_Player_Demo
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage20.ResumeLayout(false);
+            this.tabPage20.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -7973,5 +8022,9 @@ namespace Media_Player_Demo
         private System.Windows.Forms.TrackBar tbGPUBlur;
         private System.Windows.Forms.RadioButton rbVirtualCameraOutput;
         private System.Windows.Forms.Panel pnChromaKeyColor;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabel7;
     }
 }

@@ -296,7 +296,7 @@ namespace DVD_Player_Demo
                                    {
                                        if (cbLicensing.Checked)
                                        {
-                                           mmError.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                                           mmError.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                                        }
                                    }));
 

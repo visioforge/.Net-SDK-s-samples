@@ -501,7 +501,7 @@ namespace Separate_Capture_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void SetMP4Output(ref VFMP4v8v10Output mp4Output)

@@ -2543,7 +2543,7 @@ namespace Main_Demo
             {
                 if (cbLicensing.IsChecked == true)
                 {
-                    mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                    mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                 }
             }));
         }
@@ -3038,6 +3038,18 @@ namespace Main_Demo
         private void tbChromaKeySmoothing_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ConfigureChromaKey();
+        }
+
+        private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
+            Process.Start(startInfo);
+        }
+
+        private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }

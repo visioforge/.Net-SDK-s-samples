@@ -9,7 +9,7 @@
                     <TabControl HorizontalAlignment="Left" Height="331" Margin="10,10,0,0" VerticalAlignment="Top" Width="514">
                         <TabItem Header="Main">
                             <Grid>
-                                <TextBox Height="23" Margin="22,34,10,0" Name="edIPUrl" Text="http://help.visioforge.com/video.mp4" VerticalAlignment="Top" />
+                                <TextBox Height="23" Margin="22,34,10,0" Name="edIPUrl" Text="rtsp://192.168.1.101:554/stream1" VerticalAlignment="Top" />
                                 <Label Content="URL" Height="23" HorizontalAlignment="Left" Margin="16,10,0,0" Name="label220" VerticalAlignment="Top" Width="55" />
 
                                 <Label Content="Engine" Height="35" HorizontalAlignment="Left" Margin="16,67,0,0" Name="label223" VerticalAlignment="Top" Width="55" />
@@ -33,14 +33,16 @@
                                     <ComboBoxItem Content="RTSP Low Latency UDP"/>
                                     <ComboBoxItem Content="NDI" />
                                 </ComboBox>
-                                <Label x:Name="lbVLCRedist" Content="Please install VisioForge VLC redist to use VLC engine " HorizontalAlignment="Left" Margin="10,267,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist_MouseLeftButtonDown"/>
                                 <Button x:Name="btShowIPCamDatabase" Content="Show IP cam database" HorizontalAlignment="Left" Margin="350,273,0,0" VerticalAlignment="Top" Width="148" Click="btShowIPCamDatabase_Click"/>
                                 <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="287,73,0,0" VerticalAlignment="Top"/>
-                                <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="22,195,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="20,195,0,0" VerticalAlignment="Top"/>
                                 <Label Content="Force frame rate" HorizontalAlignment="Left" Margin="22,154,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edIPForcedFramerate" HorizontalAlignment="Left" Height="23" Margin="136,157,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
                                 <Label Content="Force frame rate ID" HorizontalAlignment="Left" Margin="201,155,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edIPForcedFramerateID" HorizontalAlignment="Left" Height="23" Margin="315,158,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
+                                <Label x:Name="label2" Content="Please install VLC redist EXE or NuGet package to use VLC engine " HorizontalAlignment="Left" Margin="20,228,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbVLCRedist" Content="x86" HorizontalAlignment="Left" Margin="383,228,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist_MouseLeftButtonDown"/>
+                                <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="418,228,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="VLC">

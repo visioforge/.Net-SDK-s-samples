@@ -131,6 +131,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl15.SuspendLayout();
@@ -183,6 +185,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.linkLabel1);
+            this.tabPage144.Controls.Add(this.label1);
             this.tabPage144.Controls.Add(this.edIPUrl);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
@@ -214,7 +218,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.edIPUrl.Name = "edIPUrl";
             this.edIPUrl.Size = new System.Drawing.Size(360, 20);
             this.edIPUrl.TabIndex = 80;
-            this.edIPUrl.Text = "http://help.visioforge.com/video.mp4";
+            this.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label165
             // 
@@ -237,7 +241,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // 
             // btShowIPCamDatabase
             // 
-            this.btShowIPCamDatabase.Location = new System.Drawing.Point(282, 210);
+            this.btShowIPCamDatabase.Location = new System.Drawing.Point(294, 259);
             this.btShowIPCamDatabase.Name = "btShowIPCamDatabase";
             this.btShowIPCamDatabase.Size = new System.Drawing.Size(135, 23);
             this.btShowIPCamDatabase.TabIndex = 77;
@@ -248,12 +252,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // linkLabel7
             // 
             this.linkLabel7.AutoSize = true;
-            this.linkLabel7.Location = new System.Drawing.Point(12, 215);
+            this.linkLabel7.Location = new System.Drawing.Point(344, 198);
             this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(264, 13);
+            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
             this.linkLabel7.TabIndex = 76;
             this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "Please install VisioForge VLC redist to use VLC engine ";
+            this.linkLabel7.Text = "x86";
             this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
             // 
             // cbIPDisconnect
@@ -1062,6 +1066,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -1108,7 +1113,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(429, 354);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 93;
@@ -1138,6 +1143,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_X = 0;
             videoRendererSettingsWinForms1.Aspect_Ratio_Y = 0;
@@ -1219,6 +1226,26 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.lbTimestamp.Size = new System.Drawing.Size(126, 13);
             this.lbTimestamp.TabIndex = 102;
             this.lbTimestamp.Text = "Recording time: 00:00:00";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 198);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(327, 13);
+            this.label1.TabIndex = 81;
+            this.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(374, 198);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel1.TabIndex = 82;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "x64";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 
@@ -1357,6 +1384,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.ListBox lbLogos;
         private System.Windows.Forms.Button btImageLogoAdd;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

@@ -512,7 +512,7 @@ namespace VideoEdit_CS_Demo
         {
             if (cbLicensing.Checked)
             {
-                mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
             }
         }
 

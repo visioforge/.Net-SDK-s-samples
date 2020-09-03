@@ -544,7 +544,7 @@ Public Class Form1
     Private Sub VideoEdit1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoEdit1.OnLicenseRequired
 
         If cbLicensing.Checked Then
-            mmLog.Text = mmLog.Text + "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
+            mmLog.Text = mmLog.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
         End If
 
     End Sub

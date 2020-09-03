@@ -536,7 +536,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)

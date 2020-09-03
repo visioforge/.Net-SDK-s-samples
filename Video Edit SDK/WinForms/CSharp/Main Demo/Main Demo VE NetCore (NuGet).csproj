@@ -19,37 +19,37 @@
 
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x64">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x86">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL">
-<Version>12.0.67</Version>
+<Version>12.0.68</Version>
     </PackageReference>
   </ItemGroup>
 

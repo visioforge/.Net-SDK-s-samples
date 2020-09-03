@@ -658,7 +658,7 @@ namespace DVCapture
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private async void BtPause_Click(object sender, RoutedEventArgs e)

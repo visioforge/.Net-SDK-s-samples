@@ -2799,7 +2799,7 @@ namespace Media_Player_Demo
         {
             BeginInvoke((Action)(() =>
                                         {
-                                            mmLog.Text += "LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
+                                            mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
                                         }));
         }
 
@@ -3352,6 +3352,18 @@ namespace Media_Player_Demo
                 pnChromaKeyColor.BackColor = colorDialog1.Color;
                 ConfigureChromaKey();
             }
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
+            Process.Start(startInfo);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }

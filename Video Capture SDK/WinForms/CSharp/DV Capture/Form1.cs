@@ -583,7 +583,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private async void btResume_Click(object sender, EventArgs e)

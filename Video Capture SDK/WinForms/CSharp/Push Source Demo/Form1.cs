@@ -456,7 +456,7 @@ namespace Push_Source_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void btSelectOutput_Click(object sender, EventArgs e)

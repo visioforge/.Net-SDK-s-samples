@@ -1137,7 +1137,7 @@
                     <TabControl HorizontalAlignment="Left" Height="331" Margin="0,13,0,0" VerticalAlignment="Top" Width="514">
                         <TabItem Header="Main">
                             <Grid>
-                                <TextBox Height="23" Margin="53,10,10,0" x:Name="edIPUrl" Text="http://help.visioforge.com/video.mp4" VerticalAlignment="Top" />
+                                <TextBox Height="23" Margin="53,10,10,0" x:Name="edIPUrl" Text="rtsp://192.168.1.101:554/stream1" VerticalAlignment="Top" />
                                 <Label Content="URL" Height="23" HorizontalAlignment="Left" Margin="4,6,0,0" x:Name="label220" VerticalAlignment="Top" Width="55" />
 
                                 <Label Content="Type" Height="35" HorizontalAlignment="Left" Margin="4,42,0,0" x:Name="label223" VerticalAlignment="Top" Width="55" />
@@ -1161,13 +1161,16 @@
                                     <ComboBoxItem Content="RTSP Low Latency UDP"/>
                                     <ComboBoxItem Content="NDI" />
                                 </ComboBox>
-                                <Button x:Name="btShowIPCamDatabase" Content="Show IP cam database" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="148" Click="btShowIPCamDatabase_Click"/>
+                                <Button x:Name="btShowIPCamDatabase" Content="Show IP cam database" HorizontalAlignment="Left" Margin="350,273,0,0" VerticalAlignment="Top" Width="148" Click="btShowIPCamDatabase_Click"/>
                                 <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="275,48,0,0" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
                                 <Label Content="Force frame rate" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edIPForcedFramerate" HorizontalAlignment="Left" Height="23" Margin="124,132,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
                                 <Label Content="Force frame rate ID" HorizontalAlignment="Left" Margin="189,130,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edIPForcedFramerateID" HorizontalAlignment="Left" Height="23" Margin="303,133,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
+                                <Label x:Name="label2" Content="Please install VLC redist EXE or NuGet package to use VLC engine " HorizontalAlignment="Left" Margin="20,228,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbVLCRedist" Content="x86" HorizontalAlignment="Left" Margin="383,228,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist_MouseLeftButtonDown"/>
+                                <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="418,228,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="VLC">

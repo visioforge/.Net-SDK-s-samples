@@ -1226,7 +1226,7 @@ namespace Decklink_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

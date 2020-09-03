@@ -3967,7 +3967,7 @@ namespace VideoCapture_CSharp_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void VideoCapture1_OnTVTunerTuneChannels(object sender, TVTunerTuneChannelsEventArgs e)
@@ -6213,6 +6213,18 @@ namespace VideoCapture_CSharp_Demo
                 pnChromaKeyColor.BackColor = colorDialog1.Color;
                 ConfigureChromaKey();
             }
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
+            Process.Start(startInfo);
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }

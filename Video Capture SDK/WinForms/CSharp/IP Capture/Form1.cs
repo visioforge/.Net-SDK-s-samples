@@ -356,12 +356,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
-            Log(e.Message);
+            Log("(NOT ERROR) " + e.Message);
         }
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86);
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
             Process.Start(startInfo);
         }
 
@@ -1267,6 +1267,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     darkness.Value = tbDarkness.Value;
                 }
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
+            Process.Start(startInfo);
         }
     }
 }
