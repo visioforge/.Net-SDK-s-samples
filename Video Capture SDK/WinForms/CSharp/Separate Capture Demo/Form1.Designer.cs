@@ -157,6 +157,7 @@
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -876,6 +877,7 @@
             this.cbOutputFormat.Name = "cbOutputFormat";
             this.cbOutputFormat.Size = new System.Drawing.Size(348, 21);
             this.cbOutputFormat.TabIndex = 122;
+            this.cbOutputFormat.SelectedIndexChanged += new System.EventHandler(this.cbOutputFormat_SelectedIndexChanged);
             // 
             // label4
             // 
