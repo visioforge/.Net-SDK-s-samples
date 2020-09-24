@@ -3,24 +3,22 @@
 // ReSharper disable StyleCop.SA1601
 // ReSharper disable UseObjectOrCollectionInitializer
 
-using System.IO;
-using VisioForge.Controls.UI;
-using VisioForge.Controls.UI.Dialogs.OutputFormats;
-using VisioForge.Controls.UI.Dialogs.VideoEffects;
-using VisioForge.Types.VideoEffects;
-
 namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.UI;
+    using VisioForge.Controls.UI.Dialogs.OutputFormats;
+    using VisioForge.Controls.UI.Dialogs.VideoEffects;
     using VisioForge.Shared.IPCameraDB;
     using VisioForge.Tools;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.Sources;
+    using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -402,7 +400,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 }
 
                 var deviceInfo = onvifControl.GetDeviceInformation();
-                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                if (deviceInfo != null)
+                {
+                    lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                }
 
                 cbONVIFProfile.Items.Clear();
                 var profiles = onvifControl.GetProfiles();
@@ -422,7 +423,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 edIPPassword.Text = edONVIFPassword.Text;
 
                 onvifPtzRanges = onvifControl.PTZ_GetRanges();
-                onvifControl.PTZ_SetAbsolute(0, 0, 0);
+                onvifControl.PTZ_SetHome();
 
                 onvifPtzX = 0;
                 onvifPtzY = 0;
@@ -439,6 +440,15 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     onvifControl = null;
                 }
             }
+#endif
+        }
+
+        private void cbONVIFProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+#if NETCOREAPP
+            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
+#else
+            edONVIFLiveVideoURL.Text = edIPUrl.Text = onvifControl?.GetVideoURL(cbONVIFProfile.SelectedIndex);
 #endif
         }
 
@@ -715,7 +725,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(),
+                aviSettingsDialog = new AVISettingsDialog(
+                    VideoCapture1.Video_Codecs.ToArray(),
                     VideoCapture1.Audio_Codecs.ToArray());
             }
 
@@ -743,7 +754,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(),
+                aviSettingsDialog = new AVISettingsDialog(
+                    VideoCapture1.Video_Codecs.ToArray(),
                     VideoCapture1.Audio_Codecs.ToArray());
             }
 

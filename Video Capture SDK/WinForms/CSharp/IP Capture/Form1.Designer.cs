@@ -20,7 +20,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             if (disposing && (components != null))
             {
                 components.Dispose();
-
+                
 #if !NETCOREAPP
                 if (onvifControl != null)
                 {
@@ -47,6 +47,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
             this.edIPUrl = new System.Windows.Forms.TextBox();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
@@ -131,8 +133,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl15.SuspendLayout();
@@ -211,6 +211,26 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage144.TabIndex = 0;
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(374, 198);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel1.TabIndex = 82;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "x64";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 198);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(327, 13);
+            this.label1.TabIndex = 81;
+            this.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
             // 
             // edIPUrl
             // 
@@ -482,7 +502,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.edONVIFURL.Name = "edONVIFURL";
             this.edONVIFURL.Size = new System.Drawing.Size(326, 20);
             this.edONVIFURL.TabIndex = 71;
-            this.edONVIFURL.Text = "http://192.168.1.200/onvif/device_service";
+            this.edONVIFURL.Text = "http://192.168.1.101:2020/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 
@@ -595,6 +615,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.cbONVIFProfile.Name = "cbONVIFProfile";
             this.cbONVIFProfile.Size = new System.Drawing.Size(346, 21);
             this.cbONVIFProfile.TabIndex = 4;
+            this.cbONVIFProfile.SelectedIndexChanged += new System.EventHandler(this.cbONVIFProfile_SelectedIndexChanged);
             // 
             // label510
             // 
@@ -1226,26 +1247,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.lbTimestamp.Size = new System.Drawing.Size(126, 13);
             this.lbTimestamp.TabIndex = 102;
             this.lbTimestamp.Text = "Recording time: 00:00:00";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 198);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(327, 13);
-            this.label1.TabIndex = 81;
-            this.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(374, 198);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(24, 13);
-            this.linkLabel1.TabIndex = 82;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "x64";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // Form1
             // 

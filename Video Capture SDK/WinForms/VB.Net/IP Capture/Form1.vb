@@ -422,8 +422,8 @@ Public Class Form1
 
             cbONVIFProfile.Items.Clear()
 
-            Dim profiles As VisioForge.MediaFramework.deviceio.Profile() = onvifControl.GetProfiles()
-            For Each profile As VisioForge.MediaFramework.deviceio.Profile In profiles
+            Dim profiles As VisioForge.MediaFramework.ONVIF.Profile() = onvifControl.GetProfiles()
+            For Each profile As VisioForge.MediaFramework.ONVIF.Profile In profiles
                 cbONVIFProfile.Items.Add($"{profile.Name}")
             Next
 
