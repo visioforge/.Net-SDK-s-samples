@@ -827,7 +827,6 @@ namespace VideoCapture_CSharp_Demo
             {
                 VideoCapture1.Push_Source = new PushSourceSettings
                 {
-                    VideoPresent = true,
                     VideoWidth = 640,
                     VideoHeight = 480,
                     VideoFrameRate = 25.0f

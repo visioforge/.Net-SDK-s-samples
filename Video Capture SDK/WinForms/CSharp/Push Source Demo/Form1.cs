@@ -296,7 +296,6 @@ namespace Push_Source_Demo
             var bmp = new Bitmap(Properties.Resources._1);
             VideoCapture1.Push_Source = new PushSourceSettings
             {
-                VideoPresent = true,
                 VideoWidth = bmp.Width,
                 VideoHeight = bmp.Height,
                 VideoFrameRate = 25.0f
