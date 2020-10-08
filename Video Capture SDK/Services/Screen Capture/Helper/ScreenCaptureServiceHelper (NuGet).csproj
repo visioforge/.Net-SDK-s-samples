@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ScreenCaptureServiceHelper</RootNamespace>
     <AssemblyName>ScreenCaptureServiceHelper</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -28,8 +28,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -136,13 +134,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

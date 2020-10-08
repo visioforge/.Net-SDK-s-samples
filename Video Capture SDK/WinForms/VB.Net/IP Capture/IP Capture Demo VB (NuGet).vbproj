@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,7 +11,7 @@
     <RootNamespace>VF_SDK_VB.NET_IP_Camera_Demo</RootNamespace>
     <AssemblyName>VF SDK VB.NET IP Camera Demo</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -33,8 +33,6 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    
-    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -116,6 +114,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -158,49 +157,49 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

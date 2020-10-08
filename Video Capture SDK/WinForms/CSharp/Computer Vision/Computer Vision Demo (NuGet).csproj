@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Computer_Vision_Demo</RootNamespace>
     <AssemblyName>Computer Vision Demo</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -123,22 +123,22 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.CV.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL">
-<Version>12.0.78</Version>
+<Version>12.0.79</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

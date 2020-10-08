@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>VE_Main_Demo_CLI</RootNamespace>
     <AssemblyName>VE Main Demo CLI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
