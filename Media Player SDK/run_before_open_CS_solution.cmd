@@ -1,28 +1,28 @@
-@echo off
-:: BatchGotAdmin
-::-------------------------------------
-REM  --> Check for permissions
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+@REM @echo off
+@REM :: BatchGotAdmin
+@REM ::-------------------------------------
+@REM REM  --> Check for permissions
+@REM >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
-REM --> If error flag set, we do not have admin.
-if '%errorlevel%' NEQ '0' (
-    echo Requesting administrative privileges...
-    goto UACPrompt
-) else ( goto gotAdmin )
+@REM REM --> If error flag set, we do not have admin.
+@REM if '%errorlevel%' NEQ '0' (
+@REM     echo Requesting administrative privileges...
+@REM     goto UACPrompt
+@REM ) else ( goto gotAdmin )
 
-:UACPrompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-    set params = %*:"="
-    echo UAC.ShellExecute "cmd.exe", "/c %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+@REM :UACPrompt
+@REM     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+@REM     set params = %*:"="
+@REM     echo UAC.ShellExecute "cmd.exe", "/c %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
-    "%temp%\getadmin.vbs"
-    del "%temp%\getadmin.vbs"
-    exit /B
+@REM     "%temp%\getadmin.vbs"
+@REM     del "%temp%\getadmin.vbs"
+@REM     exit /B
 
-:gotAdmin
-    pushd "%CD%"
-    CD /D "%~dp0"
-::--------------------------------------
+@REM :gotAdmin
+@REM     pushd "%CD%"
+@REM     CD /D "%~dp0"
+@REM ::--------------------------------------
 
 
 
@@ -85,3 +85,5 @@ cd ..
 cd ..
 
 cd ..
+
+pause
