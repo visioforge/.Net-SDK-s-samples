@@ -6,7 +6,6 @@ Imports VisioForge.Controls.UI
 Imports VisioForge.Controls.UI.Dialogs.OutputFormats
 Imports VisioForge.Controls.UI.Dialogs.VideoEffects
 Imports VisioForge.Types
-Imports VisioForge.Controls.UI.WinForms
 Imports VisioForge.Tools
 Imports VisioForge.Types.OutputFormat
 Imports VisioForge.Types.VideoEffects
@@ -18,22 +17,11 @@ Public Class Form1
 
     Dim movSettingsDialog As MFSettingsDialog
 
-
     Dim mp4V10SettingsDialog As MP4v10SettingsDialog
 
     Dim aviSettingsDialog As AVISettingsDialog
 
     Dim wmvSettingsDialog As WMVSettingsDialog
-
-    Dim dvSettingsDialog As DVSettingsDialog
-
-    Dim mp3SettingsDialog As MP3SettingsDialog
-
-    Dim webmSettingsDialog As WebMSettingsDialog
-
-    Dim ffmpegDLLSettingsDialog As FFMPEGDLLSettingsDialog
-
-    Dim ffmpegEXESettingsDialog As FFMPEGEXESettingsDialog
 
     Dim gifSettingsDialog As GIFSettingsDialog
 
@@ -327,36 +315,12 @@ Public Class Form1
         mp4V10SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGDLLOutput)
-        If (ffmpegDLLSettingsDialog Is Nothing) Then
-            ffmpegDLLSettingsDialog = New FFMPEGDLLSettingsDialog()
-        End If
-
-        ffmpegDLLSettingsDialog.SaveSettings(ffmpegDLLOutput)
-    End Sub
-
-    Private Sub SetFFMPEGEXEOutput(ByRef ffmpegOutput As VFFFMPEGEXEOutput)
-        If (ffmpegEXESettingsDialog Is Nothing) Then
-            ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
-        End If
-
-        ffmpegEXESettingsDialog.SaveSettings(ffmpegOutput)
-    End Sub
-
     Private Sub SetGIFOutput(ByRef gifOutput As VFAnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
         End If
 
         gifSettingsDialog.SaveSettings(gifOutput)
-    End Sub
-
-    Private Sub SetWebMOutput(ByRef webmOutput As VFWebMOutput)
-        If (webmSettingsDialog Is Nothing) Then
-            webmSettingsDialog = New WebMSettingsDialog()
-        End If
-
-        webmSettingsDialog.SaveSettings(webmOutput)
     End Sub
 
     Private Sub SetWMVOutput(ByRef wmvOutput As VFWMVOutput)
@@ -366,22 +330,6 @@ Public Class Form1
 
         wmvSettingsDialog.WMA = False
         wmvSettingsDialog.SaveSettings(wmvOutput)
-    End Sub
-
-    Private Sub SetMP3Output(ByRef mp3Output As VFMP3Output)
-        If (mp3SettingsDialog Is Nothing) Then
-            mp3SettingsDialog = New MP3SettingsDialog()
-        End If
-
-        mp3SettingsDialog.SaveSettings(mp3Output)
-    End Sub
-
-    Private Sub SetDVOutput(ByRef dvOutput As VFDVOutput)
-        If (dvSettingsDialog Is Nothing) Then
-            dvSettingsDialog = New DVSettingsDialog()
-        End If
-
-        dvSettingsDialog.SaveSettings(dvOutput)
     End Sub
 
     Private Sub SetAVIOutput(ByRef aviOutput As VFAVIOutput)
@@ -396,27 +344,9 @@ Public Class Form1
         If (aviOutput.Audio_UseMP3Encoder) Then
 
             Dim mp3Output = New VFMP3Output()
-            SetMP3Output(mp3Output)
             aviOutput.MP3 = mp3Output
         End If
     End Sub
-
-    Private Sub SetMKVOutput(ByRef mkvOutput As VFMKVv1Output)
-        If (aviSettingsDialog Is Nothing) Then
-            aviSettingsDialog = New AVISettingsDialog(
-                VideoCapture1.Video_Codecs.ToArray(),
-                VideoCapture1.Audio_Codecs.ToArray())
-        End If
-
-        aviSettingsDialog.SaveSettings(mkvOutput)
-
-        If (mkvOutput.Audio_UseMP3Encoder) Then
-            Dim mp3Output = New VFMP3Output()
-            SetMP3Output(mp3Output)
-            mkvOutput.MP3 = mp3Output
-        End If
-    End Sub
-
 
     Private Async Sub btStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStart.Click
         mmLog.Clear()
@@ -463,55 +393,27 @@ Public Class Form1
                     SetAVIOutput(aviOutput)
                     VideoCapture1.Output_Format = aviOutput
                 Case 1
-                    Dim mkvOutput = New VFMKVv1Output()
-                    SetMKVOutput(mkvOutput)
-                    VideoCapture1.Output_Format = mkvOutput
-                Case 2
-
                     Dim wmvOutput = New VFWMVOutput()
                     SetWMVOutput(wmvOutput)
                     VideoCapture1.Output_Format = wmvOutput
-                Case 3
-                    Dim dvOutput = New VFDVOutput()
-                    SetDVOutput(dvOutput)
-                    VideoCapture1.Output_Format = dvOutput
-                Case 4
-                    Dim webmOutput = New VFWebMOutput()
-                    SetWebMOutput(webmOutput)
-                    VideoCapture1.Output_Format = webmOutput
-                Case 5
-                    Dim ffmpegDLLOutput = New VFFFMPEGDLLOutput()
-                    SetFFMPEGDLLOutput(ffmpegDLLOutput)
-                    VideoCapture1.Output_Format = ffmpegDLLOutput
-                Case 6
-                    Dim ffmpegOutput = New VFFFMPEGEXEOutput()
-                    SetFFMPEGEXEOutput(ffmpegOutput)
-                    VideoCapture1.Output_Format = ffmpegOutput
-                Case 7
+                Case 2
                     Dim mp4Output = New VFMP4v8v10Output()
                     SetMP4v10Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
-                Case 8
+                Case 3
                     Dim mp4Output = New VFMP4v11Output()
                     SetMP4v11Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
-                Case 9
+                Case 4
                     Dim gifOutput = New VFAnimatedGIFOutput()
                     SetGIFOutput(gifOutput)
 
                     VideoCapture1.Output_Format = gifOutput
-                Case 10
-                    Dim encOutput = New VFMP4v8v10Output()
-                    SetMP4v10Output(encOutput)
-                    encOutput.Encryption = True
-                    encOutput.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC
-
-                    VideoCapture1.Output_Format = encOutput
-                Case 11
+                Case 5
                     Dim tsOutput = New VFMPEGTSOutput()
                     SetMPEGTSOutput(tsOutput)
                     VideoCapture1.Output_Format = tsOutput
-                Case 12
+                Case 6
                     Dim movOutput = New VFMOVOutput()
                     SetMOVOutput(movOutput)
                     VideoCapture1.Output_Format = movOutput
@@ -557,7 +459,7 @@ Public Class Form1
         screenshotSaveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                                                 "\\VisioForge\\"
 
-        cbOutputFormat.SelectedIndex = 7
+        cbOutputFormat.SelectedIndex = 2
 
         For i As Int32 = 0 To VideoCapture1.Video_CaptureDevicesInfo.Count - 1
             cbVideoInputDevice.Items.Add(VideoCapture1.Video_CaptureDevicesInfo.Item(i).Name)
@@ -642,34 +544,21 @@ Public Class Form1
         Log("(NOT ERROR) " + e.Message)
     End Sub
 
-    Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles cbOutputFormat.SelectedIndexChanged
+    Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 1
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv")
-            Case 2
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv")
+            Case 2
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 3
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 4
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm")
-            Case 5
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 6
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 7
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
-            Case 8
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
-            Case 9
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif")
-            Case 10
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc")
-            Case 11
+            Case 5
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ts")
-            Case 12
+            Case 6
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mov")
         End Select
     End Sub
@@ -700,80 +589,42 @@ Public Class Form1
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
                 If (aviSettingsDialog Is Nothing) Then
-                    aviSettingsDialog = New AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(),
-                                                              VideoCapture1.Audio_Codecs.ToArray())
+                    aviSettingsDialog = New AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray())
                 End If
 
                 aviSettingsDialog.ShowDialog(Me)
             Case 1
-                If (aviSettingsDialog Is Nothing) Then
-                    aviSettingsDialog = New AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(),
-                                                              VideoCapture1.Audio_Codecs.ToArray())
-                End If
-
-                aviSettingsDialog.ShowDialog(Me)
-            Case 2
                 If (wmvSettingsDialog Is Nothing) Then
                     wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
                 End If
 
                 wmvSettingsDialog.WMA = False
                 wmvSettingsDialog.ShowDialog(Me)
-            Case 3
-                If (dvSettingsDialog Is Nothing) Then
-                    dvSettingsDialog = New DVSettingsDialog()
-                End If
-
-                dvSettingsDialog.ShowDialog(Me)
-            Case 4
-                If (webmSettingsDialog Is Nothing) Then
-                    webmSettingsDialog = New WebMSettingsDialog()
-                End If
-
-                webmSettingsDialog.ShowDialog(Me)
-            Case 5
-                If (ffmpegDLLSettingsDialog Is Nothing) Then
-                    ffmpegDLLSettingsDialog = New FFMPEGDLLSettingsDialog()
-                End If
-
-                ffmpegDLLSettingsDialog.ShowDialog(Me)
-            Case 6
-                If (ffmpegEXESettingsDialog Is Nothing) Then
-                    ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
-                End If
-
-                ffmpegEXESettingsDialog.ShowDialog(Me)
-            Case 7
+            Case 2
                 If (mp4V10SettingsDialog Is Nothing) Then
                     mp4V10SettingsDialog = New MP4v10SettingsDialog()
                 End If
 
                 mp4V10SettingsDialog.ShowDialog(Me)
-            Case 8
+            Case 3
                 If (mp4v11SettingsDialog Is Nothing) Then
                     mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
                 End If
 
                 mp4v11SettingsDialog.ShowDialog(Me)
-            Case 9
+            Case 4
                 If (gifSettingsDialog Is Nothing) Then
                     gifSettingsDialog = New GIFSettingsDialog()
                 End If
 
                 gifSettingsDialog.ShowDialog(Me)
-            Case 10
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
-                End If
-
-                mp4V10SettingsDialog.ShowDialog(Me)
-            Case 11
+            Case 5
                 If (mpegTSSettingsDialog Is Nothing) Then
                     mpegTSSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MPEGTS)
                 End If
 
                 mpegTSSettingsDialog.ShowDialog(Me)
-            Case 12
+            Case 6
                 If (movSettingsDialog Is Nothing) Then
                     movSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MOV)
                 End If

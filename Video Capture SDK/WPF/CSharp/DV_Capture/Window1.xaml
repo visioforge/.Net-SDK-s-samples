@@ -49,18 +49,13 @@
                 <Grid>
                     <Label Content="Format" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="51" />
                     <ComboBox Height="23" Margin="10,33,0,0" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="323" SelectionChanged="cbOutputFormat_SelectionChanged">
-                        <ComboBoxItem Content="AVI" />
-                        <ComboBoxItem Content="MKV (Matroska)" />
-                        <ComboBoxItem Content="WMV (Windows Media Video)" />
                         <ComboBoxItem Content="DV" />
                         <ComboBoxItem Content="DV (Without reencoding)" />
-                        <ComboBoxItem Content="WebM" />
-                        <ComboBoxItem Content="FFMPEG (DLL)" />
-                        <ComboBoxItem Content="FFMPEG (EXE)" />
-                        <ComboBoxItem Content="MP4 v8/v10" />
-                        <ComboBoxItem Content="MP4 v11" />
+                        <ComboBoxItem Content="AVI" />
+                        <ComboBoxItem Content="WMV (Windows Media Video)" />
+                        <ComboBoxItem Content="MP4 (v10 engine)" />
+                        <ComboBoxItem Content="MP4 (v11 engine, CPU/GPU)" />
                         <ComboBoxItem Content="Animated GIF" />
-                        <ComboBoxItem Content="Encrypted video" />
                         <ComboBoxItem Content="MPEG-TS" />
                         <ComboBoxItem Content="MOV" />
                     </ComboBox>
@@ -109,7 +104,7 @@
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Right" Margin="0,0,74,39" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom"/>
         <Button Content="Resume" Height="23" HorizontalAlignment="Right" Margin="0,0,147,10" x:Name="btResume" VerticalAlignment="Bottom" Width="58" Click="BtResume_Click"  />
         <Button Content="Pause" Height="23" HorizontalAlignment="Right" Margin="0,0,210,10" x:Name="btPause" VerticalAlignment="Bottom" Width="62" Click="BtPause_Click"  />
-        <Button Content="Save screenshot" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" x:Name="btSaveScreenshot_Copy" VerticalAlignment="Bottom" Width="118" Click="btSaveScreenshot_Click" />
+        <Button Content="Save snapshot" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" x:Name="btSaveScreenshot_Copy" VerticalAlignment="Bottom" Width="118" Click="btSaveScreenshot_Click" />
         <Label Content="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,0,123,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

@@ -48,16 +48,10 @@
                     <Label Content="Format" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="51" />
                     <ComboBox Height="23" Margin="10,33,0,0" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="323" SelectionChanged="cbOutputFormat_SelectionChanged">
                         <ComboBoxItem Content="AVI" />
-                        <ComboBoxItem Content="MKV (Matroska)" />
                         <ComboBoxItem Content="WMV (Windows Media Video)" />
-                        <ComboBoxItem Content="DV" />
-                        <ComboBoxItem Content="WebM" />
-                        <ComboBoxItem Content="FFMPEG (DLL)" />
-                        <ComboBoxItem Content="FFMPEG (EXE)" />
-                        <ComboBoxItem Content="MP4 v8/v10" />
-                        <ComboBoxItem Content="MP4 v11" />
+                        <ComboBoxItem Content="MP4 (v10 engine)" />
+                        <ComboBoxItem Content="MP4 (v11 engine, CPU/GPU)" />
                         <ComboBoxItem Content="Animated GIF" />
-                        <ComboBoxItem Content="Encrypted video" />
                         <ComboBoxItem Content="MPEG-TS" />
                         <ComboBoxItem Content="MOV" />
                     </ComboBox>
@@ -106,6 +100,6 @@
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="218,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
         <Button Content="Resume" Margin="0,0,165,10" x:Name="btResume" Click="BtResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
         <Button Content="Pause" Margin="0,0,228,10" x:Name="btPause" Click="BtPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
-        <Button Content="Save screenshot" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" Click="btSaveScreenshot_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118" />
+        <Button Content="Save snapshot" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" Click="btSaveScreenshot_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118" />
     </Grid>
 </Window>

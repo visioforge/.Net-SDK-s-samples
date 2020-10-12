@@ -676,7 +676,7 @@
                     <CheckBox x:Name="cbTelemetry" Content="Telemetry" HorizontalAlignment="Left" Margin="228,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Screenshot" x:Name="tabItem44">
+            <TabItem Header="Snapshot" x:Name="tabItem44">
                 <Grid>
                     <TabControl Height="124" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="tabControl13" VerticalAlignment="Top" Width="355">
                         <TabItem Header="Main" x:Name="tabItem45">

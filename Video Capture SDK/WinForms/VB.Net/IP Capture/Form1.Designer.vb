@@ -33,6 +33,9 @@ Partial Class Form1
         Me.tabPage1 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.label1 = New System.Windows.Forms.Label()
+        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.edIPUrl = New System.Windows.Forms.TextBox()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
@@ -116,9 +119,6 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
-        Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.label1 = New System.Windows.Forms.Label()
-        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.tcMain.SuspendLayout()
         Me.tabPage1.SuspendLayout()
         Me.tabControl15.SuspendLayout()
@@ -197,6 +197,35 @@ Partial Class Form1
         Me.tabPage144.TabIndex = 0
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = True
+        '
+        'linkLabel1
+        '
+        Me.linkLabel1.AutoSize = True
+        Me.linkLabel1.Location = New System.Drawing.Point(374, 214)
+        Me.linkLabel1.Name = "linkLabel1"
+        Me.linkLabel1.Size = New System.Drawing.Size(24, 13)
+        Me.linkLabel1.TabIndex = 85
+        Me.linkLabel1.TabStop = True
+        Me.linkLabel1.Text = "x64"
+        '
+        'label1
+        '
+        Me.label1.AutoSize = True
+        Me.label1.Location = New System.Drawing.Point(11, 214)
+        Me.label1.Name = "label1"
+        Me.label1.Size = New System.Drawing.Size(327, 13)
+        Me.label1.TabIndex = 84
+        Me.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine "
+        '
+        'linkLabel7
+        '
+        Me.linkLabel7.AutoSize = True
+        Me.linkLabel7.Location = New System.Drawing.Point(344, 214)
+        Me.linkLabel7.Name = "linkLabel7"
+        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
+        Me.linkLabel7.TabIndex = 83
+        Me.linkLabel7.TabStop = True
+        Me.linkLabel7.Text = "x86"
         '
         'edIPUrl
         '
@@ -635,7 +664,7 @@ Partial Class Form1
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputFormat.FormattingEnabled = True
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe)", "MP4 v8/v10", "MP4 v11", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4 (v10 engine)", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(12, 30)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(279, 21)
@@ -1004,6 +1033,7 @@ Partial Class Form1
         Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
+        Me.VideoCapture1.Debug_DisableMessageDialogs = False
         Me.VideoCapture1.Debug_Mode = False
         Me.VideoCapture1.Debug_Telemetry = False
         Me.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.[Auto]
@@ -1123,7 +1153,7 @@ Partial Class Form1
         Me.btSaveScreenshot.Name = "btSaveScreenshot"
         Me.btSaveScreenshot.Size = New System.Drawing.Size(127, 23)
         Me.btSaveScreenshot.TabIndex = 106
-        Me.btSaveScreenshot.Text = "Save screenshot"
+        Me.btSaveScreenshot.Text = "Save snapshot"
         Me.btSaveScreenshot.UseVisualStyleBackColor = True
         '
         'btResume
@@ -1145,35 +1175,6 @@ Partial Class Form1
         Me.btPause.TabIndex = 104
         Me.btPause.Text = "Pause"
         Me.btPause.UseVisualStyleBackColor = True
-        '
-        'linkLabel1
-        '
-        Me.linkLabel1.AutoSize = True
-        Me.linkLabel1.Location = New System.Drawing.Point(374, 214)
-        Me.linkLabel1.Name = "linkLabel1"
-        Me.linkLabel1.Size = New System.Drawing.Size(24, 13)
-        Me.linkLabel1.TabIndex = 85
-        Me.linkLabel1.TabStop = True
-        Me.linkLabel1.Text = "x64"
-        '
-        'label1
-        '
-        Me.label1.AutoSize = True
-        Me.label1.Location = New System.Drawing.Point(11, 214)
-        Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(327, 13)
-        Me.label1.TabIndex = 84
-        Me.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine "
-        '
-        'linkLabel7
-        '
-        Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(344, 214)
-        Me.linkLabel7.Name = "linkLabel7"
-        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
-        Me.linkLabel7.TabIndex = 83
-        Me.linkLabel7.TabStop = True
-        Me.linkLabel7.Text = "x86"
         '
         'Form1
         '

@@ -256,6 +256,9 @@ Partial Class Form1
         Me.tabPage48 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.edIPUrl = New System.Windows.Forms.TextBox()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
@@ -370,12 +373,12 @@ Partial Class Form1
         Me.TabPage104 = New System.Windows.Forms.TabPage()
         Me.btBDAChannelScanningStart = New System.Windows.Forms.Button()
         Me.lvBDAChannels = New System.Windows.Forms.ListView()
-        Me.columnHeader1 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader2 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader3 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader4 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader5 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader6 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.columnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.label342 = New System.Windows.Forms.Label()
         Me.tabPage49 = New System.Windows.Forms.TabPage()
         Me.tabControl20 = New System.Windows.Forms.TabControl()
@@ -1116,9 +1119,6 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -3675,6 +3675,35 @@ Partial Class Form1
         Me.tabPage144.TabIndex = 0
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = True
+        '
+        'LinkLabel3
+        '
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Location = New System.Drawing.Point(376, 184)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(24, 13)
+        Me.LinkLabel3.TabIndex = 88
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "x64"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(13, 184)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(327, 13)
+        Me.Label2.TabIndex = 87
+        Me.Label2.Text = "Please install VLC redist EXE or NuGet package to use VLC engine "
+        '
+        'linkLabel7
+        '
+        Me.linkLabel7.AutoSize = True
+        Me.linkLabel7.Location = New System.Drawing.Point(346, 184)
+        Me.linkLabel7.Name = "linkLabel7"
+        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
+        Me.linkLabel7.TabIndex = 86
+        Me.linkLabel7.TabStop = True
+        Me.linkLabel7.Text = "x86"
         '
         'edIPUrl
         '
@@ -12477,6 +12506,7 @@ Partial Class Form1
         Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
+        Me.VideoCapture1.Debug_DisableMessageDialogs = False
         Me.VideoCapture1.Debug_Mode = False
         Me.VideoCapture1.Debug_Telemetry = False
         Me.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.[Auto]
@@ -12586,7 +12616,7 @@ Partial Class Form1
         Me.btSaveScreenshot.Name = "btSaveScreenshot"
         Me.btSaveScreenshot.Size = New System.Drawing.Size(116, 23)
         Me.btSaveScreenshot.TabIndex = 95
-        Me.btSaveScreenshot.Text = "Save screenshot"
+        Me.btSaveScreenshot.Text = "Save snapshot"
         Me.btSaveScreenshot.UseVisualStyleBackColor = True
         '
         'lbTimestamp
@@ -12598,35 +12628,6 @@ Partial Class Form1
         Me.lbTimestamp.Size = New System.Drawing.Size(126, 13)
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
-        '
-        'LinkLabel3
-        '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(376, 184)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(24, 13)
-        Me.LinkLabel3.TabIndex = 88
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "x64"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 184)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(327, 13)
-        Me.Label2.TabIndex = 87
-        Me.Label2.Text = "Please install VLC redist EXE or NuGet package to use VLC engine "
-        '
-        'linkLabel7
-        '
-        Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(346, 184)
-        Me.linkLabel7.Name = "linkLabel7"
-        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
-        Me.linkLabel7.TabIndex = 86
-        Me.linkLabel7.TabStop = True
-        Me.linkLabel7.Text = "x86"
         '
         'Form1
         '

@@ -161,6 +161,7 @@
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -864,13 +865,9 @@
             this.cbOutputFormat.FormattingEnabled = true;
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
-            "MKV (Matroska)",
             "WMV (Windows Media Video)",
-            "DV",
-            "WebM",
-            "MP4 v8/v10",
-            "MP4 v11",
-            "Encrypted video",
+            "MP4 (Legacy)",
+            "MP4 ",
             "MPEG-TS",
             "MOV"});
             this.cbOutputFormat.Location = new System.Drawing.Point(16, 33);

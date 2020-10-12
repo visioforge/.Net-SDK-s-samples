@@ -798,8 +798,8 @@ Partial Class Form1
         'cbOutputFormat
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutputFormat.FormattingEnabled = true
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe)", "MP4 v8/v10", "MP4 v11", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.FormattingEnabled = True
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4 (v10 engine)", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(16, 30)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(279, 21)
@@ -807,7 +807,7 @@ Partial Class Form1
         '
         'label4
         '
-        Me.label4.AutoSize = true
+        Me.label4.AutoSize = True
         Me.label4.Location = New System.Drawing.Point(13, 142)
         Me.label4.Name = "label4"
         Me.label4.Size = New System.Drawing.Size(52, 13)
@@ -816,7 +816,7 @@ Partial Class Form1
         '
         'label7
         '
-        Me.label7.AutoSize = true
+        Me.label7.AutoSize = True
         Me.label7.Location = New System.Drawing.Point(13, 13)
         Me.label7.Name = "label7"
         Me.label7.Size = New System.Drawing.Size(39, 13)
@@ -829,26 +829,26 @@ Partial Class Form1
         '
         'llVideoTutorials
         '
-        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.llVideoTutorials.AutoSize = true
+        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.llVideoTutorials.AutoSize = True
         Me.llVideoTutorials.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.llVideoTutorials.Location = New System.Drawing.Point(749, 4)
         Me.llVideoTutorials.Name = "llVideoTutorials"
         Me.llVideoTutorials.Size = New System.Drawing.Size(68, 13)
         Me.llVideoTutorials.TabIndex = 92
-        Me.llVideoTutorials.TabStop = true
+        Me.llVideoTutorials.TabStop = True
         Me.llVideoTutorials.Text = "Video tutorial"
         '
         'VideoCapture1
         '
-        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = false
-        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = False
+        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VideoCapture1.Audio_CaptureDevice = ""
         Me.VideoCapture1.Audio_CaptureDevice_CustomLatency = 0
         Me.VideoCapture1.Audio_CaptureDevice_Format = ""
-        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = true
+        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = True
         Me.VideoCapture1.Audio_CaptureDevice_Line = ""
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice = Nothing
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice_Format = Nothing
@@ -856,32 +856,34 @@ Partial Class Form1
         Me.VideoCapture1.Audio_CaptureSourceFilter = Nothing
         Me.VideoCapture1.Audio_Channel_Mapper = Nothing
         Me.VideoCapture1.Audio_Decoder = Nothing
-        Me.VideoCapture1.Audio_Effects_Enabled = false
-        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = false
-        Me.VideoCapture1.Audio_Enhancer_Enabled = false
+        Me.VideoCapture1.Audio_Effects_Enabled = False
+        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = False
+        Me.VideoCapture1.Audio_Enhancer_Enabled = False
         Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
         Me.VideoCapture1.Audio_PCM_Converter = Nothing
-        Me.VideoCapture1.Audio_PlayAudio = true
-        Me.VideoCapture1.Audio_RecordAudio = true
-        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = false
+        Me.VideoCapture1.Audio_PlayAudio = True
+        Me.VideoCapture1.Audio_RecordAudio = True
+        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = False
         Me.VideoCapture1.Audio_VUMeter_Pro_Volume = 100
         Me.VideoCapture1.BackColor = System.Drawing.Color.Black
-        Me.VideoCapture1.Barcode_Reader_Enabled = false
+        Me.VideoCapture1.Barcode_Reader_Enabled = False
         Me.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
         Me.VideoCapture1.BDA_Source = Nothing
         Me.VideoCapture1.ChromaKey = Nothing
         Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Enabled = false
+        Me.VideoCapture1.CustomRedist_Auto = True
+        Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
-        Me.VideoCapture1.Debug_Mode = false
-        Me.VideoCapture1.Debug_Telemetry = false
+        Me.VideoCapture1.Debug_DisableMessageDialogs = False
+        Me.VideoCapture1.Debug_Mode = False
+        Me.VideoCapture1.Debug_Telemetry = False
         Me.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.[Auto]
         Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.[Auto]
-        Me.VideoCapture1.Decklink_Input_IREUSA = false
-        Me.VideoCapture1.Decklink_Input_SMPTE = false
+        Me.VideoCapture1.Decklink_Input_IREUSA = False
+        Me.VideoCapture1.Decklink_Input_SMPTE = False
         Me.VideoCapture1.Decklink_Output = Nothing
         Me.VideoCapture1.Decklink_Source = Nothing
         Me.VideoCapture1.DirectCapture_Muxer = Nothing
@@ -895,33 +897,33 @@ Partial Class Form1
         Me.VideoCapture1.MPEG_Audio_Decoder = ""
         Me.VideoCapture1.MPEG_Demuxer = Nothing
         Me.VideoCapture1.MPEG_Video_Decoder = ""
-        Me.VideoCapture1.MultiScreen_Enabled = false
+        Me.VideoCapture1.MultiScreen_Enabled = False
         Me.VideoCapture1.Name = "VideoCapture1"
-        Me.VideoCapture1.Network_Streaming_Audio_Enabled = false
-        Me.VideoCapture1.Network_Streaming_Enabled = false
+        Me.VideoCapture1.Network_Streaming_Audio_Enabled = False
+        Me.VideoCapture1.Network_Streaming_Enabled = False
         Me.VideoCapture1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV
         Me.VideoCapture1.Network_Streaming_Network_Port = 100
         Me.VideoCapture1.Network_Streaming_Output = Nothing
         Me.VideoCapture1.Network_Streaming_URL = ""
         Me.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10
-        Me.VideoCapture1.OSD_Enabled = false
+        Me.VideoCapture1.OSD_Enabled = False
         Me.VideoCapture1.Output_Filename = ""
         Me.VideoCapture1.Output_Format = Nothing
-        Me.VideoCapture1.PIP_AddSampleGrabbers = false
+        Me.VideoCapture1.PIP_AddSampleGrabbers = False
         Me.VideoCapture1.PIP_ChromaKeySettings = Nothing
         Me.VideoCapture1.PIP_Mode = VisioForge.Types.VFPIPMode.Custom
         Me.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.VFPIPResizeQuality.RQ_NN
         Me.VideoCapture1.Push_Source = Nothing
         Me.VideoCapture1.Screen_Capture_Source = Nothing
-        Me.VideoCapture1.SeparateCapture_AutostartCapture = false
-        Me.VideoCapture1.SeparateCapture_Enabled = false
+        Me.VideoCapture1.SeparateCapture_AutostartCapture = False
+        Me.VideoCapture1.SeparateCapture_Enabled = False
         Me.VideoCapture1.SeparateCapture_Filename_Mask = "output %yyyy-%MM-%dd %hh-%mm-%ss.%ext"
-        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0,Long)
-        Me.VideoCapture1.SeparateCapture_GMFMode = true
+        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0, Long)
+        Me.VideoCapture1.SeparateCapture_GMFMode = True
         Me.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal
-        Me.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero
+        Me.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00")
         Me.VideoCapture1.Size = New System.Drawing.Size(427, 322)
-        Me.VideoCapture1.Start_DelayEnabled = false
+        Me.VideoCapture1.Start_DelayEnabled = False
         Me.VideoCapture1.TabIndex = 93
         Me.VideoCapture1.Tags = Nothing
         Me.VideoCapture1.Timeshift_Settings = Nothing
@@ -937,27 +939,29 @@ Partial Class Form1
         Me.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D
         Me.VideoCapture1.Video_CaptureDevice = ""
         Me.VideoCapture1.Video_CaptureDevice_Format = ""
-        Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = true
+        Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = True
         Me.VideoCapture1.Video_CaptureDevice_FrameRate = 0R
         Me.VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_Name = ""
-        Me.VideoCapture1.Video_CaptureDevice_IsAudioSource = false
+        Me.VideoCapture1.Video_CaptureDevice_IsAudioSource = False
         Me.VideoCapture1.Video_CaptureDevice_Path = Nothing
-        Me.VideoCapture1.Video_CaptureDevice_UseClosedCaptions = false
-        Me.VideoCapture1.Video_CaptureDevice_UseRAWSampleGrabber = false
+        Me.VideoCapture1.Video_CaptureDevice_UseClosedCaptions = False
+        Me.VideoCapture1.Video_CaptureDevice_UseRAWSampleGrabber = False
         Me.VideoCapture1.Video_Crop = Nothing
         Me.VideoCapture1.Video_Decoder = Nothing
-        Me.VideoCapture1.Video_Effects_AllowMultipleStreams = false
-        Me.VideoCapture1.Video_Effects_Enabled = false
-        Me.VideoCapture1.Video_Effects_GPU_Enabled = false
-        VideoRendererSettingsWinForms1.Aspect_Ratio_Override = false
+        Me.VideoCapture1.Video_Effects_AllowMultipleStreams = False
+        Me.VideoCapture1.Video_Effects_Enabled = False
+        Me.VideoCapture1.Video_Effects_GPU_Enabled = False
+        Me.VideoCapture1.Video_Effects_MergeImageLogos = False
+        Me.VideoCapture1.Video_Effects_MergeTextLogos = False
+        VideoRendererSettingsWinForms1.Aspect_Ratio_Override = False
         VideoRendererSettingsWinForms1.Aspect_Ratio_X = 0
         VideoRendererSettingsWinForms1.Aspect_Ratio_Y = 0
         VideoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Black
         VideoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
         VideoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = true
-        VideoRendererSettingsWinForms1.Flip_Horizontal = false
-        VideoRendererSettingsWinForms1.Flip_Vertical = false
+        VideoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = True
+        VideoRendererSettingsWinForms1.Flip_Horizontal = False
+        VideoRendererSettingsWinForms1.Flip_Vertical = False
         VideoRendererSettingsWinForms1.RotationAngle = 0
         VideoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
         VideoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.EVR
@@ -967,19 +971,19 @@ Partial Class Form1
         VideoRendererSettingsWinForms1.Zoom_ShiftY = 0
         Me.VideoCapture1.Video_Renderer = VideoRendererSettingsWinForms1
         Me.VideoCapture1.Video_Resize = Nothing
-        Me.VideoCapture1.Video_ResizeOrCrop_Enabled = false
+        Me.VideoCapture1.Video_ResizeOrCrop_Enabled = False
         Me.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone
-        Me.VideoCapture1.Video_Sample_Grabber_Enabled = false
-        Me.VideoCapture1.Video_Sample_Grabber_UseForVideoEffects = false
-        Me.VideoCapture1.Video_Still_Frames_Grabber_Enabled = false
-        Me.VideoCapture1.Virtual_Camera_Output_Enabled = false
+        Me.VideoCapture1.Video_Sample_Grabber_Enabled = False
+        Me.VideoCapture1.Video_Sample_Grabber_UseForVideoEffects = False
+        Me.VideoCapture1.Video_Still_Frames_Grabber_Enabled = False
+        Me.VideoCapture1.Virtual_Camera_Output_Enabled = False
         Me.VideoCapture1.Virtual_Camera_Output_LicenseKey = Nothing
         Me.VideoCapture1.VLC_Path = Nothing
         '
         'label34
         '
-        Me.label34.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.label34.AutoSize = true
+        Me.label34.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.label34.AutoSize = True
         Me.label34.Location = New System.Drawing.Point(484, 4)
         Me.label34.Name = "label34"
         Me.label34.Size = New System.Drawing.Size(214, 13)
@@ -988,8 +992,8 @@ Partial Class Form1
         '
         'lbTimestamp
         '
-        Me.lbTimestamp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lbTimestamp.AutoSize = true
+        Me.lbTimestamp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lbTimestamp.AutoSize = True
         Me.lbTimestamp.Location = New System.Drawing.Point(534, 359)
         Me.lbTimestamp.Name = "lbTimestamp"
         Me.lbTimestamp.Size = New System.Drawing.Size(126, 13)
@@ -998,36 +1002,36 @@ Partial Class Form1
         '
         'rbCapture
         '
-        Me.rbCapture.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.rbCapture.AutoSize = true
+        Me.rbCapture.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rbCapture.AutoSize = True
         Me.rbCapture.Location = New System.Drawing.Point(458, 357)
         Me.rbCapture.Name = "rbCapture"
         Me.rbCapture.Size = New System.Drawing.Size(62, 17)
         Me.rbCapture.TabIndex = 105
         Me.rbCapture.Text = "Capture"
-        Me.rbCapture.UseVisualStyleBackColor = true
+        Me.rbCapture.UseVisualStyleBackColor = True
         '
         'rbPreview
         '
-        Me.rbPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.rbPreview.AutoSize = true
-        Me.rbPreview.Checked = true
+        Me.rbPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rbPreview.AutoSize = True
+        Me.rbPreview.Checked = True
         Me.rbPreview.Location = New System.Drawing.Point(389, 357)
         Me.rbPreview.Name = "rbPreview"
         Me.rbPreview.Size = New System.Drawing.Size(63, 17)
         Me.rbPreview.TabIndex = 104
-        Me.rbPreview.TabStop = true
+        Me.rbPreview.TabStop = True
         Me.rbPreview.Text = "Preview"
-        Me.rbPreview.UseVisualStyleBackColor = true
+        Me.rbPreview.UseVisualStyleBackColor = True
         '
         'btSaveScreenshot
         '
-        Me.btSaveScreenshot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btSaveScreenshot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btSaveScreenshot.Location = New System.Drawing.Point(690, 387)
         Me.btSaveScreenshot.Name = "btSaveScreenshot"
         Me.btSaveScreenshot.Size = New System.Drawing.Size(127, 23)
         Me.btSaveScreenshot.TabIndex = 109
-        Me.btSaveScreenshot.Text = "Save screenshot"
+        Me.btSaveScreenshot.Text = "Save snapshot"
         Me.btSaveScreenshot.UseVisualStyleBackColor = true
         '
         'btResume

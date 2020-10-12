@@ -42,7 +42,6 @@ namespace VideoCapture_CSharp_Demo
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label8 = new System.Windows.Forms.Label();
@@ -794,6 +793,9 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage48 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.edIPUrl = new System.Windows.Forms.TextBox();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
@@ -1124,13 +1126,10 @@ namespace VideoCapture_CSharp_Demo
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1470,8 +1469,8 @@ namespace VideoCapture_CSharp_Demo
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe)",
-            "MP4 v8/v10",
-            "MP4 v11",
+            "MP4 (v10 engine)",
+            "MP4 (v11 engine, CPU/GPU)",
             "Animated GIF",
             "Encrypted video",
             "MPEG-TS",
@@ -9430,6 +9429,37 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
             // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(373, 195);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel3.TabIndex = 85;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "x64";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(10, 195);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(327, 13);
+            this.label22.TabIndex = 84;
+            this.label22.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(343, 195);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
+            this.linkLabel7.TabIndex = 83;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "x86";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
             // edIPUrl
             // 
             this.edIPUrl.Location = new System.Drawing.Point(55, 15);
@@ -12869,7 +12899,7 @@ namespace VideoCapture_CSharp_Demo
             this.btSaveScreenshot.Name = "btSaveScreenshot";
             this.btSaveScreenshot.Size = new System.Drawing.Size(116, 23);
             this.btSaveScreenshot.TabIndex = 78;
-            this.btSaveScreenshot.Text = "Save screenshot";
+            this.btSaveScreenshot.Text = "Save snapshot";
             this.btSaveScreenshot.UseVisualStyleBackColor = true;
             this.btSaveScreenshot.Click += new System.EventHandler(this.btSaveScreenshot_Click);
             // 
@@ -12929,6 +12959,7 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -13043,37 +13074,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(373, 195);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(24, 13);
-            this.linkLabel3.TabIndex = 85;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "x64";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 195);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(327, 13);
-            this.label22.TabIndex = 84;
-            this.label22.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
-            // 
-            // linkLabel7
-            // 
-            this.linkLabel7.AutoSize = true;
-            this.linkLabel7.Location = new System.Drawing.Point(343, 195);
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(24, 13);
-            this.linkLabel7.TabIndex = 83;
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "x86";
-            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
             // 
             // Form1
             // 

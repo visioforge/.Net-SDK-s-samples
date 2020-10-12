@@ -27,7 +27,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim VideoRendererSettingsWinForms2 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
+        Dim VideoRendererSettingsWinForms1 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
         Me.tabControl3 = New System.Windows.Forms.TabControl()
         Me.tabPage10 = New System.Windows.Forms.TabPage()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
@@ -76,6 +76,10 @@ Partial Class Form1
         Me.tbTimeline = New System.Windows.Forms.TrackBar()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage20 = New System.Windows.Forms.TabPage()
+        Me.linkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
+        Me.label25 = New System.Windows.Forms.Label()
+        Me.label20 = New System.Windows.Forms.Label()
         Me.groupBox6 = New System.Windows.Forms.GroupBox()
         Me.rbGPUDirect3D = New System.Windows.Forms.RadioButton()
         Me.rbGPUDXVANative = New System.Windows.Forms.RadioButton()
@@ -608,10 +612,6 @@ Partial Class Form1
         Me.label14 = New System.Windows.Forms.Label()
         Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.MediaPlayer1 = New VisioForge.Controls.UI.WinForms.MediaPlayer()
-        Me.linkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
-        Me.label25 = New System.Windows.Forms.Label()
-        Me.label20 = New System.Windows.Forms.Label()
         Me.tabControl3.SuspendLayout()
         Me.tabPage10.SuspendLayout()
         Me.tabPage9.SuspendLayout()
@@ -834,14 +834,14 @@ Partial Class Form1
         Me.tabPage9.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPage9.Size = New System.Drawing.Size(301, 120)
         Me.tabPage9.TabIndex = 1
-        Me.tabPage9.Text = "Screenshot"
+        Me.tabPage9.Text = "Snapshot"
         Me.tabPage9.UseVisualStyleBackColor = True
         '
         'tabControl13
         '
         Me.tabControl13.Controls.Add(Me.tabPage54)
         Me.tabControl13.Controls.Add(Me.tabPage55)
-        Me.tabControl13.Location = New System.Drawing.Point(2, 2)
+        Me.tabControl13.Location = New System.Drawing.Point(3, 3)
         Me.tabControl13.Name = "tabControl13"
         Me.tabControl13.SelectedIndex = 0
         Me.tabControl13.Size = New System.Drawing.Size(293, 111)
@@ -1269,6 +1269,44 @@ Partial Class Form1
         Me.TabPage20.TabIndex = 15
         Me.TabPage20.Text = "Source mode"
         Me.TabPage20.UseVisualStyleBackColor = True
+        '
+        'linkLabel2
+        '
+        Me.linkLabel2.AutoSize = True
+        Me.linkLabel2.Location = New System.Drawing.Point(113, 154)
+        Me.linkLabel2.Name = "linkLabel2"
+        Me.linkLabel2.Size = New System.Drawing.Size(24, 13)
+        Me.linkLabel2.TabIndex = 89
+        Me.linkLabel2.TabStop = True
+        Me.linkLabel2.Text = "x64"
+        '
+        'linkLabel7
+        '
+        Me.linkLabel7.AutoSize = True
+        Me.linkLabel7.Location = New System.Drawing.Point(83, 154)
+        Me.linkLabel7.Name = "linkLabel7"
+        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
+        Me.linkLabel7.TabIndex = 88
+        Me.linkLabel7.TabStop = True
+        Me.linkLabel7.Text = "x86"
+        '
+        'label25
+        '
+        Me.label25.AutoSize = True
+        Me.label25.Location = New System.Drawing.Point(12, 154)
+        Me.label25.Name = "label25"
+        Me.label25.Size = New System.Drawing.Size(65, 13)
+        Me.label25.TabIndex = 87
+        Me.label25.Text = "VLC engine "
+        '
+        'label20
+        '
+        Me.label20.AutoSize = True
+        Me.label20.Location = New System.Drawing.Point(12, 133)
+        Me.label20.Name = "label20"
+        Me.label20.Size = New System.Drawing.Size(266, 13)
+        Me.label20.TabIndex = 86
+        Me.label20.Text = "Please install VLC redist EXE or NuGet package to use"
         '
         'groupBox6
         '
@@ -6771,6 +6809,7 @@ Partial Class Form1
         Me.MediaPlayer1.CustomRedist_Path = Nothing
         Me.MediaPlayer1.Debug_DeepCleanUp = False
         Me.MediaPlayer1.Debug_Dir = Nothing
+        Me.MediaPlayer1.Debug_DisableMessageDialogs = False
         Me.MediaPlayer1.Debug_Mode = False
         Me.MediaPlayer1.Debug_Telemetry = False
         Me.MediaPlayer1.Encryption_Key = ""
@@ -6806,65 +6845,27 @@ Partial Class Form1
         Me.MediaPlayer1.TabIndex = 25
         Me.MediaPlayer1.Video_Effects_Enabled = False
         Me.MediaPlayer1.Video_Effects_GPU_Enabled = False
-        VideoRendererSettingsWinForms2.Aspect_Ratio_Override = False
-        VideoRendererSettingsWinForms2.Aspect_Ratio_X = 0
-        VideoRendererSettingsWinForms2.Aspect_Ratio_Y = 0
-        VideoRendererSettingsWinForms2.BackgroundColor = System.Drawing.Color.Empty
-        VideoRendererSettingsWinForms2.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
-        VideoRendererSettingsWinForms2.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms2.Deinterlace_VMR9_UseDefault = False
-        VideoRendererSettingsWinForms2.Flip_Horizontal = False
-        VideoRendererSettingsWinForms2.Flip_Vertical = False
-        VideoRendererSettingsWinForms2.RotationAngle = 0
-        VideoRendererSettingsWinForms2.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
-        VideoRendererSettingsWinForms2.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer
-        VideoRendererSettingsWinForms2.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer
-        VideoRendererSettingsWinForms2.Zoom_Ratio = 0
-        VideoRendererSettingsWinForms2.Zoom_ShiftX = 0
-        VideoRendererSettingsWinForms2.Zoom_ShiftY = 0
-        Me.MediaPlayer1.Video_Renderer = VideoRendererSettingsWinForms2
+        VideoRendererSettingsWinForms1.Aspect_Ratio_Override = False
+        VideoRendererSettingsWinForms1.Aspect_Ratio_X = 0
+        VideoRendererSettingsWinForms1.Aspect_Ratio_Y = 0
+        VideoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Empty
+        VideoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
+        VideoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = Nothing
+        VideoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = False
+        VideoRendererSettingsWinForms1.Flip_Horizontal = False
+        VideoRendererSettingsWinForms1.Flip_Vertical = False
+        VideoRendererSettingsWinForms1.RotationAngle = 0
+        VideoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
+        VideoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer
+        VideoRendererSettingsWinForms1.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer
+        VideoRendererSettingsWinForms1.Zoom_Ratio = 0
+        VideoRendererSettingsWinForms1.Zoom_ShiftX = 0
+        VideoRendererSettingsWinForms1.Zoom_ShiftY = 0
+        Me.MediaPlayer1.Video_Renderer = VideoRendererSettingsWinForms1
         Me.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = False
         Me.MediaPlayer1.Video_Stream_Index = 0
         Me.MediaPlayer1.Virtual_Camera_Output_Enabled = False
         Me.MediaPlayer1.Virtual_Camera_Output_LicenseKey = Nothing
-        '
-        'linkLabel2
-        '
-        Me.linkLabel2.AutoSize = True
-        Me.linkLabel2.Location = New System.Drawing.Point(113, 154)
-        Me.linkLabel2.Name = "linkLabel2"
-        Me.linkLabel2.Size = New System.Drawing.Size(24, 13)
-        Me.linkLabel2.TabIndex = 89
-        Me.linkLabel2.TabStop = True
-        Me.linkLabel2.Text = "x64"
-        '
-        'linkLabel7
-        '
-        Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(83, 154)
-        Me.linkLabel7.Name = "linkLabel7"
-        Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
-        Me.linkLabel7.TabIndex = 88
-        Me.linkLabel7.TabStop = True
-        Me.linkLabel7.Text = "x86"
-        '
-        'label25
-        '
-        Me.label25.AutoSize = True
-        Me.label25.Location = New System.Drawing.Point(12, 154)
-        Me.label25.Name = "label25"
-        Me.label25.Size = New System.Drawing.Size(65, 13)
-        Me.label25.TabIndex = 87
-        Me.label25.Text = "VLC engine "
-        '
-        'label20
-        '
-        Me.label20.AutoSize = True
-        Me.label20.Location = New System.Drawing.Point(12, 133)
-        Me.label20.Name = "label20"
-        Me.label20.Size = New System.Drawing.Size(266, 13)
-        Me.label20.TabIndex = 86
-        Me.label20.Text = "Please install VLC redist EXE or NuGet package to use"
         '
         'Form1
         '

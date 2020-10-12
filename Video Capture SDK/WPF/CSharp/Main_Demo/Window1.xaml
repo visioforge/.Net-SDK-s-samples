@@ -1627,7 +1627,7 @@
         <Label Content="Watch tutorials" Height="29" HorizontalAlignment="Left" Margin="298,653,0,0" x:Name="label129" VerticalAlignment="Top" FontWeight="Bold"
 			Foreground="#FF0016CF" MouseDown="linkLabel1_LinkClicked" />
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Right" Margin="0,0,426,48" TextWrapping="Wrap" Text="Recording time: 00:00:00" Height="16" VerticalAlignment="Bottom"/>
-        <Button Content="Save screenshot" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,0,183,45" x:Name="btSaveScreenshot" VerticalAlignment="Bottom" Width="126" Click="btSaveScreenshot_Click" />
+        <Button Content="Save snapshot" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,0,183,45" x:Name="btSaveScreenshot" VerticalAlignment="Bottom" Width="126" Click="btSaveScreenshot_Click" />
         <my:VideoCapture
                              Margin="411,410,20,73" 
                              Background="Black" 

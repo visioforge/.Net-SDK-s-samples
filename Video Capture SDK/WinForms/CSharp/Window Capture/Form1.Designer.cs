@@ -102,9 +102,11 @@ namespace Window_Capture
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -148,7 +150,7 @@ namespace Window_Capture
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(180, 131);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 113;
@@ -178,6 +180,8 @@ namespace Window_Capture
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_X = 0;
             videoRendererSettingsWinForms1.Aspect_Ratio_Y = 0;
@@ -361,16 +365,10 @@ namespace Window_Capture
             this.cbOutputFormat.FormattingEnabled = true;
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
-            "MKV (Matroska)",
             "WMV (Windows Media Video)",
-            "DV",
-            "WebM",
-            "FFMPEG (DLL)",
-            "FFMPEG (external exe)",
-            "MP4 v8/v10",
-            "MP4 v11",
+            "MP4 (v10 engine)",
+            "MP4 (v11 engine, CPU/GPU)",
             "Animated GIF",
-            "Encrypted video",
             "MPEG-TS",
             "MOV"});
             this.cbOutputFormat.Location = new System.Drawing.Point(11, 29);

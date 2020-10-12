@@ -6788,7 +6788,7 @@ namespace Media_Player_Demo
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage9.Size = new System.Drawing.Size(301, 120);
             this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "Screenshot";
+            this.tabPage9.Text = "Snapshot";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
             // tabControl13
@@ -7124,6 +7124,7 @@ namespace Media_Player_Demo
             this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
             this.MediaPlayer1.Debug_Dir = null;
+            this.MediaPlayer1.Debug_DisableMessageDialogs = false;
             this.MediaPlayer1.Debug_Mode = false;
             this.MediaPlayer1.Debug_Telemetry = false;
             this.MediaPlayer1.Encryption_Key = "";

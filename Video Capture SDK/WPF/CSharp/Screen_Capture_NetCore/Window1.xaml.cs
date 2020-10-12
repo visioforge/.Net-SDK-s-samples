@@ -3,8 +3,6 @@
 // ReSharper disable StyleCop.SA1601
 // ReSharper disable RedundantNameQualifier
 
-using VisioForge.Controls.UI;
-
 namespace Screen_Capture
 {
     using System;
@@ -17,6 +15,7 @@ namespace Screen_Capture
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.Dialogs;
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
@@ -41,17 +40,7 @@ namespace Screen_Capture
 
         private AVISettingsDialog aviSettingsDialog;
 
-        private MP3SettingsDialog mp3SettingsDialog;
-
         private WMVSettingsDialog wmvSettingsDialog;
-
-        private DVSettingsDialog dvSettingsDialog;
-
-        private WebMSettingsDialog webmSettingsDialog;
-
-        private FFMPEGDLLSettingsDialog ffmpegDLLSettingsDialog;
-
-        private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
         private GIFSettingsDialog gifSettingsDialog;
 
@@ -190,17 +179,7 @@ namespace Screen_Capture
 
             mp4V10SettingsDialog.SaveSettings(ref mp4Output);
         }
-
-        private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
-        {
-            if (ffmpegEXESettingsDialog == null)
-            {
-                ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
-            }
-
-            ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
-        }
-
+        
         private void SetWMVOutput(ref VFWMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -211,27 +190,7 @@ namespace Screen_Capture
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-
-        private void SetWebMOutput(ref VFWebMOutput webmOutput)
-        {
-            if (webmSettingsDialog == null)
-            {
-                webmSettingsDialog = new WebMSettingsDialog();
-            }
-
-            webmSettingsDialog.SaveSettings(ref webmOutput);
-        }
-
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGDLLOutput ffmpegDLLOutput)
-        {
-            if (ffmpegDLLSettingsDialog == null)
-            {
-                ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
-            }
-
-            ffmpegDLLSettingsDialog.SaveSettings(ref ffmpegDLLOutput);
-        }
-
+        
         private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
         {
             if (mp4v11SettingsDialog == null)
@@ -271,17 +230,7 @@ namespace Screen_Capture
 
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
-
-        private void SetDVOutput(ref VFDVOutput dvOutput)
-        {
-            if (dvSettingsDialog == null)
-            {
-                dvSettingsDialog = new DVSettingsDialog();
-            }
-
-            dvSettingsDialog.SaveSettings(ref dvOutput);
-        }
-
+        
         private void SetAVIOutput(ref VFAVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -296,40 +245,10 @@ namespace Screen_Capture
             if (aviOutput.Audio_UseMP3Encoder)
             {
                 var mp3Output = new VFMP3Output();
-                SetMP3Output(ref mp3Output);
                 aviOutput.MP3 = mp3Output;
             }
         }
-
-        private void SetMP3Output(ref VFMP3Output mp3Output)
-        {
-            if (mp3SettingsDialog == null)
-            {
-                mp3SettingsDialog = new MP3SettingsDialog();
-            }
-
-            mp3SettingsDialog.SaveSettings(ref mp3Output);
-        }
-
-        private void SetMKVOutput(ref VFMKVv1Output mkvOutput)
-        {
-            if (aviSettingsDialog == null)
-            {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
-            }
-
-            aviSettingsDialog.SaveSettings(ref mkvOutput);
-
-            if (mkvOutput.Audio_UseMP3Encoder)
-            {
-                var mp3Output = new VFMP3Output();
-                SetMP3Output(ref mp3Output);
-                mkvOutput.MP3 = mp3Output;
-            }
-        }
-
+        
         private ScreenCaptureSourceSettings CreateScreenCaptureSource(int screenID, bool forcedFullScreen)
         {
             var source = new ScreenCaptureSourceSettings();
@@ -460,53 +379,13 @@ namespace Screen_Capture
                         }
                     case 1:
                         {
-                            var mkvOutput = new VFMKVv1Output();
-                            SetMKVOutput(ref mkvOutput);
-                            VideoCapture1.Output_Format = mkvOutput;
-
-                            break;
-                        }
-                    case 2:
-                        {
                             var wmvOutput = new VFWMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             VideoCapture1.Output_Format = wmvOutput;
 
                             break;
                         }
-                    case 3:
-                        {
-                            var dvOutput = new VFDVOutput();
-                            SetDVOutput(ref dvOutput);
-                            VideoCapture1.Output_Format = dvOutput;
-
-                            break;
-                        }
-                    case 4:
-                        {
-                            var webmOutput = new VFWebMOutput();
-                            SetWebMOutput(ref webmOutput);
-                            VideoCapture1.Output_Format = webmOutput;
-
-                            break;
-                        }
-                    case 5:
-                        {
-                            var ffmpegDLLOutput = new VFFFMPEGDLLOutput();
-                            SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
-                            VideoCapture1.Output_Format = ffmpegDLLOutput;
-
-                            break;
-                        }
-                    case 6:
-                        {
-                            var ffmpegOutput = new VFFFMPEGEXEOutput();
-                            SetFFMPEGEXEOutput(ref ffmpegOutput);
-                            VideoCapture1.Output_Format = ffmpegOutput;
-
-                            break;
-                        }
-                    case 7:
+                    case 2:
                         {
                             var mp4Output = new VFMP4v8v10Output();
                             SetMP4Output(ref mp4Output);
@@ -514,7 +393,7 @@ namespace Screen_Capture
 
                             break;
                         }
-                    case 8:
+                    case 3:
                         {
                             var mp4Output = new VFMP4v11Output();
                             SetMP4v11Output(ref mp4Output);
@@ -522,7 +401,7 @@ namespace Screen_Capture
 
                             break;
                         }
-                    case 9:
+                    case 4:
                         {
                             var gifOutput = new VFAnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
@@ -531,18 +410,7 @@ namespace Screen_Capture
 
                             break;
                         }
-                    case 10:
-                        {
-                            var encOutput = new VFMP4v8v10Output();
-                            SetMP4Output(ref encOutput);
-                            encOutput.Encryption = true;
-                            encOutput.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC;
-
-                            VideoCapture1.Output_Format = encOutput;
-
-                            break;
-                        }
-                    case 11:
+                    case 5:
                         {
                             var tsOutput = new VFMPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
@@ -550,7 +418,7 @@ namespace Screen_Capture
 
                             break;
                         }
-                    case 12:
+                    case 6:
                         {
                             var movOutput = new VFMOVOutput();
                             SetMOVOutput(ref movOutput);
@@ -653,7 +521,7 @@ namespace Screen_Capture
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            cbOutputFormat.SelectedIndex = 7;
+            cbOutputFormat.SelectedIndex = 2;
 
             foreach (var device in VideoCapture1.Audio_CaptureDevicesInfo)
             {
@@ -743,17 +611,6 @@ namespace Screen_Capture
                     }
                 case 1:
                     {
-                        if (aviSettingsDialog == null)
-                        {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
-                        }
-
-                        aviSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 2:
-                    {
                         if (wmvSettingsDialog == null)
                         {
                             wmvSettingsDialog = new WMVSettingsDialog(VideoCapture1);
@@ -764,51 +621,7 @@ namespace Screen_Capture
 
                         break;
                     }
-                case 3:
-                    {
-                        if (dvSettingsDialog == null)
-                        {
-                            dvSettingsDialog = new DVSettingsDialog();
-                        }
-
-                        dvSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 4:
-                    {
-                        if (webmSettingsDialog == null)
-                        {
-                            webmSettingsDialog = new WebMSettingsDialog();
-                        }
-
-                        webmSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 5:
-                    {
-                        if (ffmpegDLLSettingsDialog == null)
-                        {
-                            ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
-                        }
-
-                        ffmpegDLLSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 6:
-                    {
-                        if (ffmpegEXESettingsDialog == null)
-                        {
-                            ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
-                        }
-
-                        ffmpegEXESettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 7:
+                case 2:
                     {
                         if (mp4V10SettingsDialog == null)
                         {
@@ -819,7 +632,7 @@ namespace Screen_Capture
 
                         break;
                     }
-                case 8:
+                case 3:
                     {
                         if (mp4v11SettingsDialog == null)
                         {
@@ -830,7 +643,7 @@ namespace Screen_Capture
 
                         break;
                     }
-                case 9:
+                case 4:
                     {
                         if (gifSettingsDialog == null)
                         {
@@ -841,18 +654,7 @@ namespace Screen_Capture
 
                         break;
                     }
-                case 10:
-                    {
-                        if (mp4V10SettingsDialog == null)
-                        {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
-                        }
-
-                        mp4V10SettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 11:
+                case 5:
                     {
                         if (mpegTSSettingsDialog == null)
                         {
@@ -863,7 +665,7 @@ namespace Screen_Capture
 
                         break;
                     }
-                case 12:
+                case 6:
                     {
                         if (movSettingsDialog == null)
                         {
@@ -888,67 +690,37 @@ namespace Screen_Capture
                     }
                 case 1:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv");
                         break;
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
                         break;
                     }
                 case 5:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                        break;
-                    }
-                case 6:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                        break;
-                    }
-                case 7:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                        break;
-                    }
-                case 8:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                        break;
-                    }
-                case 9:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
-                        break;
-                    }
-                case 10:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
-                        break;
-                    }
-                case 11:
-                    {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ts");
                         break;
                     }
-                case 12:
+                case 6:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mov");
                         break;
                     }
             }
         }
-        
+
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVFVideoEffectGrayscale grayscale;

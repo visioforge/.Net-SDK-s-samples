@@ -210,7 +210,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(370, 369);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Input";
@@ -529,7 +529,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(370, 369);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Output";
@@ -577,18 +577,13 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOutputFormat.FormattingEnabled = true;
             this.cbOutputFormat.Items.AddRange(new object[] {
-            "AVI",
-            "MKV (Matroska)",
-            "WMV (Windows Media Video)",
             "DV",
             "DV (Without reencoding)",
-            "WebM",
-            "FFMPEG (DLL)",
-            "FFMPEG (external exe)",
-            "MP4 v8/v10",
-            "MP4 v11",
+            "AVI",
+            "WMV (Windows Media Video)",
+            "MP4 (v10 engine)",
+            "MP4 (v11 engine, CPU/GPU)",
             "Animated GIF",
-            "Encrypted video",
             "MPEG-TS",
             "MOV"});
             this.cbOutputFormat.Location = new System.Drawing.Point(12, 30);
@@ -639,7 +634,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(370, 369);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Video effects";
@@ -651,7 +646,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.cbDeinterlaceCAVT.Checked = true;
             this.cbDeinterlaceCAVT.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbDeinterlaceCAVT.Location = new System.Drawing.Point(19, 318);
-            this.cbDeinterlaceCAVT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbDeinterlaceCAVT.Margin = new System.Windows.Forms.Padding(2);
             this.cbDeinterlaceCAVT.Name = "cbDeinterlaceCAVT";
             this.cbDeinterlaceCAVT.Size = new System.Drawing.Size(117, 17);
             this.cbDeinterlaceCAVT.TabIndex = 105;
@@ -853,7 +848,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.tabPage4.Controls.Add(this.mmLog);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(370, 369);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Log";
@@ -931,9 +926,11 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -977,7 +974,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(422, 318);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 93;
@@ -1007,6 +1004,8 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
             videoRendererSettingsWinForms1.Aspect_Ratio_X = 16;
             videoRendererSettingsWinForms1.Aspect_Ratio_Y = 9;
@@ -1053,7 +1052,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.btSaveScreenshot.Name = "btSaveScreenshot";
             this.btSaveScreenshot.Size = new System.Drawing.Size(127, 23);
             this.btSaveScreenshot.TabIndex = 99;
-            this.btSaveScreenshot.Text = "Save screenshot";
+            this.btSaveScreenshot.Text = "Save snapshot";
             this.btSaveScreenshot.UseVisualStyleBackColor = true;
             this.btSaveScreenshot.Click += new System.EventHandler(this.btSaveScreenshot_Click);
             // 
