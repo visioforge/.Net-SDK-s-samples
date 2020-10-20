@@ -54,16 +54,16 @@
 
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.1.0</Version>
+<Version>12.1.2</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.1.0</Version>
+<Version>12.1.2</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.1.0</Version>
+<Version>12.1.2</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoEdit">
-<Version>12.1.0</Version>
+<Version>12.1.2</Version>
     </PackageReference>
   </ItemGroup>
 
