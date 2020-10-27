@@ -106,19 +106,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.1.3</Version>
+<Version>12.1.6</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.1.3</Version>
+<Version>12.1.6</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.3</Version>
+<Version>12.1.6</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.3</Version>
+<Version>12.1.6</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.3</Version>
+<Version>12.1.6</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
