@@ -50,13 +50,13 @@
 
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.1.6</Version>
+<Version>12.1.7</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.1.6</Version>
+<Version>12.1.7</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture">
-<Version>12.1.6</Version>
+<Version>12.1.7</Version>
     </PackageReference>
   </ItemGroup>
 
