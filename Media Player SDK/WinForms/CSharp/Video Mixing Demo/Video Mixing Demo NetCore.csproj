@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="12.1.7.0" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="12.1.9.0" />
   </ItemGroup>
 
   <ItemGroup>

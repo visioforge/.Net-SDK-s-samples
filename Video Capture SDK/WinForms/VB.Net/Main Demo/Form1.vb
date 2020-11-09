@@ -5,7 +5,6 @@ Imports System.IO
 Imports System.Linq
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
-Imports System.Runtime.InteropServices
 Imports VisioForge.Controls.UI
 Imports VisioForge.Controls.UI.Dialogs
 Imports VisioForge.Controls.UI.Dialogs.OutputFormats
@@ -1729,6 +1728,12 @@ Public Class Form1
                 VideoCapture1.Network_Streaming_Output = ffmpegOutput
                 VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text
             Case 3
+                VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI
+
+                Dim ndiOutput As VFNDIOutput = New VFNDIOutput(edNDIName.Text)
+                VideoCapture1.Network_Streaming_Output = ndiOutput
+                edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}"
+            Case 4
                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE
 
                 Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
@@ -1744,7 +1749,7 @@ Public Class Form1
                 VideoCapture1.Network_Streaming_Output = ffmpegOutput
 
                 VideoCapture1.Network_Streaming_URL = edNetworkUDPURL.Text
-            Case 4
+            Case 5
                 If (rbNetworkSSSoftware.Checked) Then
                     VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW
 
@@ -1768,7 +1773,7 @@ Public Class Form1
                 End If
 
                 VideoCapture1.Network_Streaming_URL = edNetworkSSURL.Text
-            Case 5
+            Case 6
                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.HLS
 
                 Dim hls As VFHLSOutput = New VFHLSOutput()
@@ -1779,7 +1784,7 @@ Public Class Form1
                 hls.HLS.Custom_HTTP_Server_Enabled = cbHLSEmbeddedHTTPServerEnabled.Checked
                 hls.HLS.Custom_HTTP_Server_Port = Convert.ToInt32(edHLSEmbeddedHTTPServerPort.Text)
                 VideoCapture1.Network_Streaming_Output = hls
-            Case 6
+            Case 7
                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.External
         End Select
 
@@ -1860,7 +1865,7 @@ Public Class Form1
     Private Function SelectIPCameraSource() As IPCameraSourceSettings
 
         Dim settings As IPCameraSourceSettings = New IPCameraSourceSettings()
-        settings.URL = edIPUrl.Text
+        settings.URL = cbIPURL.Text
 
         Select Case (cbIPCameraType.SelectedIndex)
 
@@ -4449,7 +4454,7 @@ Public Class Form1
             End If
 
             edONVIFLiveVideoURL.Text = onvifControl.GetVideoURL()
-            edIPUrl.Text = edONVIFLiveVideoURL.Text
+            cbIPURL.Text = edONVIFLiveVideoURL.Text
 
             edIPLogin.Text = edONVIFLogin.Text
             edIPPassword.Text = edONVIFPassword.Text
@@ -5148,6 +5153,24 @@ Public Class Form1
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
         Process.Start(startInfo)
+    End Sub
+
+    Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked, linkLabel6.LinkClicked
+        Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub btListNDISources_Click(sender As Object, e As EventArgs) Handles btListNDISources.Click
+        cbIPURL.Items.Clear()
+
+        Dim lst As Uri() = VideoCapture1.IP_Camera_NDI_ListSources()
+        For Each uri As Uri In lst
+            cbIPURL.Items.Add(uri)
+        Next
+
+        If (cbIPURL.Items.Count > 0) Then
+            cbIPURL.SelectedIndex = 0
+        End If
     End Sub
 End Class
 

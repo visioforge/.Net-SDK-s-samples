@@ -33,10 +33,13 @@ Partial Class Form1
         Me.tabPage1 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.cbIPURL = New System.Windows.Forms.ComboBox()
+        Me.btListNDISources = New System.Windows.Forms.Button()
+        Me.lbNDI = New System.Windows.Forms.LinkLabel()
+        Me.label25 = New System.Windows.Forms.Label()
         Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.label1 = New System.Windows.Forms.Label()
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
-        Me.edIPUrl = New System.Windows.Forms.TextBox()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
         Me.btShowIPCamDatabase = New System.Windows.Forms.Button()
@@ -171,10 +174,13 @@ Partial Class Form1
         '
         'tabPage144
         '
+        Me.tabPage144.Controls.Add(Me.cbIPURL)
+        Me.tabPage144.Controls.Add(Me.btListNDISources)
+        Me.tabPage144.Controls.Add(Me.lbNDI)
+        Me.tabPage144.Controls.Add(Me.label25)
         Me.tabPage144.Controls.Add(Me.linkLabel1)
         Me.tabPage144.Controls.Add(Me.label1)
         Me.tabPage144.Controls.Add(Me.linkLabel7)
-        Me.tabPage144.Controls.Add(Me.edIPUrl)
         Me.tabPage144.Controls.Add(Me.label165)
         Me.tabPage144.Controls.Add(Me.cbIPCameraONVIF)
         Me.tabPage144.Controls.Add(Me.btShowIPCamDatabase)
@@ -198,10 +204,47 @@ Partial Class Form1
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = True
         '
+        'cbIPURL
+        '
+        Me.cbIPURL.FormattingEnabled = True
+        Me.cbIPURL.Location = New System.Drawing.Point(56, 15)
+        Me.cbIPURL.Name = "cbIPURL"
+        Me.cbIPURL.Size = New System.Drawing.Size(360, 21)
+        Me.cbIPURL.TabIndex = 91
+        Me.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1"
+        '
+        'btListNDISources
+        '
+        Me.btListNDISources.Location = New System.Drawing.Point(293, 91)
+        Me.btListNDISources.Name = "btListNDISources"
+        Me.btListNDISources.Size = New System.Drawing.Size(123, 23)
+        Me.btListNDISources.TabIndex = 90
+        Me.btListNDISources.Text = "List NDI sources"
+        Me.btListNDISources.UseVisualStyleBackColor = True
+        '
+        'lbNDI
+        '
+        Me.lbNDI.AutoSize = True
+        Me.lbNDI.Location = New System.Drawing.Point(260, 218)
+        Me.lbNDI.Name = "lbNDI"
+        Me.lbNDI.Size = New System.Drawing.Size(86, 13)
+        Me.lbNDI.TabIndex = 89
+        Me.lbNDI.TabStop = True
+        Me.lbNDI.Text = "vendor's website"
+        '
+        'label25
+        '
+        Me.label25.AutoSize = True
+        Me.label25.Location = New System.Drawing.Point(11, 218)
+        Me.label25.Name = "label25"
+        Me.label25.Size = New System.Drawing.Size(257, 13)
+        Me.label25.TabIndex = 88
+        Me.label25.Text = "To use NDI please install NDI SDK for Windows from"
+        '
         'linkLabel1
         '
         Me.linkLabel1.AutoSize = True
-        Me.linkLabel1.Location = New System.Drawing.Point(374, 214)
+        Me.linkLabel1.Location = New System.Drawing.Point(374, 195)
         Me.linkLabel1.Name = "linkLabel1"
         Me.linkLabel1.Size = New System.Drawing.Size(24, 13)
         Me.linkLabel1.TabIndex = 85
@@ -211,7 +254,7 @@ Partial Class Form1
         'label1
         '
         Me.label1.AutoSize = True
-        Me.label1.Location = New System.Drawing.Point(11, 214)
+        Me.label1.Location = New System.Drawing.Point(11, 195)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(327, 13)
         Me.label1.TabIndex = 84
@@ -220,20 +263,12 @@ Partial Class Form1
         'linkLabel7
         '
         Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(344, 214)
+        Me.linkLabel7.Location = New System.Drawing.Point(344, 195)
         Me.linkLabel7.Name = "linkLabel7"
         Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
         Me.linkLabel7.TabIndex = 83
         Me.linkLabel7.TabStop = True
         Me.linkLabel7.Text = "x86"
-        '
-        'edIPUrl
-        '
-        Me.edIPUrl.Location = New System.Drawing.Point(56, 15)
-        Me.edIPUrl.Name = "edIPUrl"
-        Me.edIPUrl.Size = New System.Drawing.Size(360, 20)
-        Me.edIPUrl.TabIndex = 80
-        Me.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1"
         '
         'label165
         '
@@ -1269,7 +1304,6 @@ End Sub
     Private WithEvents btONVIFConnect As Button
     Private WithEvents cbDebugMode As CheckBox
     Private WithEvents mmLog As TextBox
-    Private WithEvents edIPUrl As TextBox
     Private WithEvents label165 As Label
     Private WithEvents edONVIFPassword As TextBox
     Private WithEvents Label379 As Label
@@ -1311,4 +1345,8 @@ End Sub
     Private WithEvents linkLabel1 As LinkLabel
     Private WithEvents label1 As Label
     Private WithEvents linkLabel7 As LinkLabel
+    Private WithEvents lbNDI As LinkLabel
+    Private WithEvents label25 As Label
+    Private WithEvents btListNDISources As Button
+    Private WithEvents cbIPURL As ComboBox
 End Class

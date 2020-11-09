@@ -14,6 +14,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
     using VisioForge.Shared.IPCameraDB;
+    using VisioForge.Shared.NDI;
     using VisioForge.Tools;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
@@ -113,7 +114,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = edIPUrl.Text
+                URL = cbIPURL.Text
             };
 
             switch (cbIPCameraType.SelectedIndex)
@@ -356,7 +357,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     cbONVIFProfile.SelectedIndex = 0;
                 }
 
-                edONVIFLiveVideoURL.Text = edIPUrl.Text = onvifControl.GetVideoURL();
+                edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl.GetVideoURL();
 
                 edIPLogin.Text = edONVIFLogin.Text;
                 edIPPassword.Text = edONVIFPassword.Text;
@@ -387,7 +388,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 #if NETCOREAPP
             MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
 #else
-            edONVIFLiveVideoURL.Text = edIPUrl.Text = onvifControl?.GetVideoURL(cbONVIFProfile.SelectedIndex);
+            edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl?.GetVideoURL(cbONVIFProfile.SelectedIndex);
 #endif
         }
 
@@ -1059,6 +1060,28 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
+        }
+
+        private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
+            Process.Start(startInfo);
+        }
+
+        private void btListNDISources_Click(object sender, EventArgs e)
+        {
+            cbIPURL.Items.Clear();
+
+            var lst = VideoCapture1.IP_Camera_NDI_ListSources();
+            foreach (var uri in lst)
+            {
+                cbIPURL.Items.Add(uri);
+            }
+
+            if (cbIPURL.Items.Count > 0)
+            {
+                cbIPURL.SelectedIndex = 0;
+            }
         }
     }
 }

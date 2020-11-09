@@ -240,7 +240,7 @@ namespace IP_Capture
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = edIPUrl.Text
+                URL = cbIPURL.Text
             };
 
             switch (cbIPCameraType.SelectedIndex)
@@ -509,7 +509,7 @@ namespace IP_Capture
                 var deviceInfo = onvifControl.GetDeviceInformation();
                 lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
 
-                edONVIFLiveVideoURL.Text = edIPUrl.Text = onvifControl.GetVideoURL();
+                edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl.GetVideoURL();
 
                 edIPLogin.Text = edONVIFLogin.Text;
                 edIPPassword.Text = edONVIFPassword.Text;
@@ -1065,6 +1065,28 @@ namespace IP_Capture
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
+        }
+
+        private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
+            Process.Start(startInfo);
+        }
+
+        private void btListNDISources_Click(object sender, RoutedEventArgs e)
+        {
+            cbIPURL.Items.Clear();
+
+            var lst = VideoCapture1.IP_Camera_NDI_ListSources();
+            foreach (var uri in lst)
+            {
+                cbIPURL.Items.Add(uri);
+            }
+
+            if (cbIPURL.Items.Count > 0)
+            {
+                cbIPURL.SelectedIndex = 0;
+            }
         }
     }
 }

@@ -718,7 +718,7 @@ namespace Main_Demo
         {
             settings = new IPCameraSourceSettings
             {
-                URL = edIPUrl.Text
+                URL = cbIPURL.Text
             };
 
             switch (cbIPCameraType.SelectedIndex)
@@ -1195,6 +1195,17 @@ namespace Main_Demo
 
                     case 3:
                         {
+                            VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI;
+
+                            var ndiOutput = new VFNDIOutput(edNDIName.Text);
+                            VideoCapture1.Network_Streaming_Output = ndiOutput;
+                            edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}";
+
+                            break;
+                        }
+
+                    case 4:
+                        {
                             VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE;
 
                             var ffmpegOutput = new VFFFMPEGEXEOutput();
@@ -1217,7 +1228,7 @@ namespace Main_Demo
                             break;
                         }
 
-                    case 4:
+                    case 5:
                         {
                             if (rbNetworkSSSoftware.IsChecked == true)
                             {
@@ -1251,7 +1262,7 @@ namespace Main_Demo
 
                             break;
                         }
-                    case 5:
+                    case 6:
                         {
                             VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.HLS;
 
@@ -1271,7 +1282,7 @@ namespace Main_Demo
 
                             break;
                         }
-                    case 6:
+                    case 7:
                         {
                             VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.External;
 
@@ -4843,7 +4854,7 @@ namespace Main_Demo
                 var deviceInfo = onvifControl.GetDeviceInformation();
                 lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
 
-                edONVIFLiveVideoURL.Text = edIPUrl.Text = onvifControl.GetVideoURL();
+                edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl.GetVideoURL();
 
                 edIPLogin.Text = edONVIFLogin.Text;
                 edIPPassword.Text = edONVIFPassword.Text;
@@ -5837,6 +5848,28 @@ namespace Main_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
+        }
+
+        private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
+            Process.Start(startInfo);
+        }
+
+        private void btListNDISources_Click(object sender, RoutedEventArgs e)
+        {
+            cbIPURL.Items.Clear();
+
+            var lst = VideoCapture1.IP_Camera_NDI_ListSources();
+            foreach (var uri in lst)
+            {
+                cbIPURL.Items.Add(uri);
+            }
+
+            if (cbIPURL.Items.Count > 0)
+            {
+                cbIPURL.SelectedIndex = 0;
+            }
         }
     }
 }

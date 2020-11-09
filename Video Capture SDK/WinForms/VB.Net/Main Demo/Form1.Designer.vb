@@ -256,10 +256,11 @@ Partial Class Form1
         Me.tabPage48 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.lbNDI = New System.Windows.Forms.LinkLabel()
+        Me.label25 = New System.Windows.Forms.Label()
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
-        Me.edIPUrl = New System.Windows.Forms.TextBox()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
         Me.btShowIPCamDatabase = New System.Windows.Forms.Button()
@@ -866,7 +867,7 @@ Partial Class Form1
         Me.tabPage7 = New System.Windows.Forms.TabPage()
         Me.cbNetworkStreamingMode = New System.Windows.Forms.ComboBox()
         Me.tabControl5 = New System.Windows.Forms.TabControl()
-        Me.TabPage24 = New System.Windows.Forms.TabPage()
+        Me.tpWMV = New System.Windows.Forms.TabPage()
         Me.label48 = New System.Windows.Forms.Label()
         Me.edNetworkURL = New System.Windows.Forms.TextBox()
         Me.edWMVNetworkPort = New System.Windows.Forms.TextBox()
@@ -882,11 +883,11 @@ Partial Class Form1
         Me.btSelectWMVProfileNetwork = New System.Windows.Forms.Button()
         Me.edNetworkStreamingWMVProfile = New System.Windows.Forms.TextBox()
         Me.label44 = New System.Windows.Forms.Label()
-        Me.TabPage107 = New System.Windows.Forms.TabPage()
+        Me.tpRTSP = New System.Windows.Forms.TabPage()
         Me.edNetworkRTSPURL = New System.Windows.Forms.TextBox()
         Me.label367 = New System.Windows.Forms.Label()
         Me.label366 = New System.Windows.Forms.Label()
-        Me.TabPage108 = New System.Windows.Forms.TabPage()
+        Me.tpRTMP = New System.Windows.Forms.TabPage()
         Me.cbNetworkRTMPFFMPEGUsePipes = New System.Windows.Forms.CheckBox()
         Me.linkLabel11 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel8 = New System.Windows.Forms.LinkLabel()
@@ -895,7 +896,12 @@ Partial Class Form1
         Me.edNetworkRTMPURL = New System.Windows.Forms.TextBox()
         Me.label368 = New System.Windows.Forms.Label()
         Me.label369 = New System.Windows.Forms.Label()
-        Me.TabPage128 = New System.Windows.Forms.TabPage()
+        Me.tpNDI = New System.Windows.Forms.TabPage()
+        Me.label31 = New System.Windows.Forms.Label()
+        Me.edNDIURL = New System.Windows.Forms.TextBox()
+        Me.edNDIName = New System.Windows.Forms.TextBox()
+        Me.label30 = New System.Windows.Forms.Label()
+        Me.tpUDP = New System.Windows.Forms.TabPage()
         Me.cbNetworkUDPFFMPEGUsePipes = New System.Windows.Forms.CheckBox()
         Me.label314 = New System.Windows.Forms.Label()
         Me.label313 = New System.Windows.Forms.Label()
@@ -905,7 +911,7 @@ Partial Class Form1
         Me.label372 = New System.Windows.Forms.Label()
         Me.rbNetworkUDPFFMPEGCustom = New System.Windows.Forms.RadioButton()
         Me.rbNetworkUDPFFMPEG = New System.Windows.Forms.RadioButton()
-        Me.TabPage109 = New System.Windows.Forms.TabPage()
+        Me.tpSSF = New System.Windows.Forms.TabPage()
         Me.cbNetworkSSUsePipes = New System.Windows.Forms.CheckBox()
         Me.linkLabel10 = New System.Windows.Forms.LinkLabel()
         Me.rbNetworkSSFFMPEGCustom = New System.Windows.Forms.RadioButton()
@@ -915,7 +921,7 @@ Partial Class Form1
         Me.label370 = New System.Windows.Forms.Label()
         Me.label371 = New System.Windows.Forms.Label()
         Me.rbNetworkSSSoftware = New System.Windows.Forms.RadioButton()
-        Me.TabPage147 = New System.Windows.Forms.TabPage()
+        Me.tpHLS = New System.Windows.Forms.TabPage()
         Me.label19 = New System.Windows.Forms.Label()
         Me.edHLSEmbeddedHTTPServerPort = New System.Windows.Forms.TextBox()
         Me.cbHLSEmbeddedHTTPServerEnabled = New System.Windows.Forms.CheckBox()
@@ -932,7 +938,7 @@ Partial Class Form1
         Me.btSelectHLSOutputFolder = New System.Windows.Forms.Button()
         Me.edHLSOutputFolder = New System.Windows.Forms.TextBox()
         Me.Label500 = New System.Windows.Forms.Label()
-        Me.TabPage56 = New System.Windows.Forms.TabPage()
+        Me.tpExternal = New System.Windows.Forms.TabPage()
         Me.linkLabel4 = New System.Windows.Forms.LinkLabel()
         Me.linkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.cbNetworkStreamingAudioEnabled = New System.Windows.Forms.CheckBox()
@@ -1119,6 +1125,10 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
+        Me.cbIPURL = New System.Windows.Forms.ComboBox()
+        Me.btListNDISources = New System.Windows.Forms.Button()
+        Me.linkLabel6 = New System.Windows.Forms.LinkLabel()
+        Me.label38 = New System.Windows.Forms.Label()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -1290,13 +1300,14 @@ Partial Class Form1
         CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).BeginInit
         Me.tabPage7.SuspendLayout
         Me.tabControl5.SuspendLayout
-        Me.TabPage24.SuspendLayout
-        Me.TabPage107.SuspendLayout
-        Me.TabPage108.SuspendLayout
-        Me.TabPage128.SuspendLayout
-        Me.TabPage109.SuspendLayout
-        Me.TabPage147.SuspendLayout
-        Me.TabPage56.SuspendLayout
+        Me.tpWMV.SuspendLayout
+        Me.tpRTSP.SuspendLayout
+        Me.tpRTMP.SuspendLayout
+        Me.tpNDI.SuspendLayout
+        Me.tpUDP.SuspendLayout
+        Me.tpSSF.SuspendLayout
+        Me.tpHLS.SuspendLayout
+        Me.tpExternal.SuspendLayout
         Me.tabPage28.SuspendLayout
         Me.groupBox19.SuspendLayout
         Me.tabControl6.SuspendLayout
@@ -3649,10 +3660,13 @@ Partial Class Form1
         '
         'tabPage144
         '
+        Me.tabPage144.Controls.Add(Me.cbIPURL)
+        Me.tabPage144.Controls.Add(Me.btListNDISources)
+        Me.tabPage144.Controls.Add(Me.lbNDI)
+        Me.tabPage144.Controls.Add(Me.label25)
         Me.tabPage144.Controls.Add(Me.LinkLabel3)
         Me.tabPage144.Controls.Add(Me.Label2)
         Me.tabPage144.Controls.Add(Me.linkLabel7)
-        Me.tabPage144.Controls.Add(Me.edIPUrl)
         Me.tabPage144.Controls.Add(Me.label165)
         Me.tabPage144.Controls.Add(Me.cbIPCameraONVIF)
         Me.tabPage144.Controls.Add(Me.btShowIPCamDatabase)
@@ -3676,10 +3690,29 @@ Partial Class Form1
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = True
         '
+        'lbNDI
+        '
+        Me.lbNDI.AutoSize = True
+        Me.lbNDI.Location = New System.Drawing.Point(262, 185)
+        Me.lbNDI.Name = "lbNDI"
+        Me.lbNDI.Size = New System.Drawing.Size(86, 13)
+        Me.lbNDI.TabIndex = 90
+        Me.lbNDI.TabStop = True
+        Me.lbNDI.Text = "vendor's website"
+        '
+        'label25
+        '
+        Me.label25.AutoSize = True
+        Me.label25.Location = New System.Drawing.Point(13, 185)
+        Me.label25.Name = "label25"
+        Me.label25.Size = New System.Drawing.Size(257, 13)
+        Me.label25.TabIndex = 89
+        Me.label25.Text = "To use NDI please install NDI SDK for Windows from"
+        '
         'LinkLabel3
         '
         Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(376, 184)
+        Me.LinkLabel3.Location = New System.Drawing.Point(376, 158)
         Me.LinkLabel3.Name = "LinkLabel3"
         Me.LinkLabel3.Size = New System.Drawing.Size(24, 13)
         Me.LinkLabel3.TabIndex = 88
@@ -3689,7 +3722,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 184)
+        Me.Label2.Location = New System.Drawing.Point(13, 158)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(327, 13)
         Me.Label2.TabIndex = 87
@@ -3698,20 +3731,12 @@ Partial Class Form1
         'linkLabel7
         '
         Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(346, 184)
+        Me.linkLabel7.Location = New System.Drawing.Point(346, 158)
         Me.linkLabel7.Name = "linkLabel7"
         Me.linkLabel7.Size = New System.Drawing.Size(24, 13)
         Me.linkLabel7.TabIndex = 86
         Me.linkLabel7.TabStop = True
         Me.linkLabel7.Text = "x86"
-        '
-        'edIPUrl
-        '
-        Me.edIPUrl.Location = New System.Drawing.Point(58, 12)
-        Me.edIPUrl.Name = "edIPUrl"
-        Me.edIPUrl.Size = New System.Drawing.Size(360, 20)
-        Me.edIPUrl.TabIndex = 80
-        Me.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1"
         '
         'label165
         '
@@ -3744,7 +3769,7 @@ Partial Class Form1
         'cbIPDisconnect
         '
         Me.cbIPDisconnect.AutoSize = True
-        Me.cbIPDisconnect.Location = New System.Drawing.Point(16, 157)
+        Me.cbIPDisconnect.Location = New System.Drawing.Point(295, 88)
         Me.cbIPDisconnect.Name = "cbIPDisconnect"
         Me.cbIPDisconnect.Size = New System.Drawing.Size(136, 17)
         Me.cbIPDisconnect.TabIndex = 75
@@ -3836,7 +3861,7 @@ Partial Class Form1
         Me.cbIPAudioCapture.AutoSize = True
         Me.cbIPAudioCapture.Checked = True
         Me.cbIPAudioCapture.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbIPAudioCapture.Location = New System.Drawing.Point(169, 157)
+        Me.cbIPAudioCapture.Location = New System.Drawing.Point(295, 65)
         Me.cbIPAudioCapture.Name = "cbIPAudioCapture"
         Me.cbIPAudioCapture.Size = New System.Drawing.Size(92, 17)
         Me.cbIPAudioCapture.TabIndex = 62
@@ -9898,7 +9923,7 @@ Partial Class Form1
         '
         Me.cbNetworkStreamingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNetworkStreamingMode.FormattingEnabled = True
-        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP to Adobe Media Server / Wowza", "UDP", "Smooth Streaming to Microsoft IIS", "HTTP Live Streaming (HLS)", "Output to external virtual devices"})
+        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP to Adobe Media Server / Wowza", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "HTTP Live Streaming (HLS)", "Output to external virtual devices"})
         Me.cbNetworkStreamingMode.Location = New System.Drawing.Point(19, 38)
         Me.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode"
         Me.cbNetworkStreamingMode.Size = New System.Drawing.Size(276, 21)
@@ -9906,43 +9931,44 @@ Partial Class Form1
         '
         'tabControl5
         '
-        Me.tabControl5.Controls.Add(Me.TabPage24)
-        Me.tabControl5.Controls.Add(Me.TabPage107)
-        Me.tabControl5.Controls.Add(Me.TabPage108)
-        Me.tabControl5.Controls.Add(Me.TabPage128)
-        Me.tabControl5.Controls.Add(Me.TabPage109)
-        Me.tabControl5.Controls.Add(Me.TabPage147)
-        Me.tabControl5.Controls.Add(Me.TabPage56)
+        Me.tabControl5.Controls.Add(Me.tpWMV)
+        Me.tabControl5.Controls.Add(Me.tpRTSP)
+        Me.tabControl5.Controls.Add(Me.tpRTMP)
+        Me.tabControl5.Controls.Add(Me.tpNDI)
+        Me.tabControl5.Controls.Add(Me.tpUDP)
+        Me.tabControl5.Controls.Add(Me.tpSSF)
+        Me.tabControl5.Controls.Add(Me.tpHLS)
+        Me.tabControl5.Controls.Add(Me.tpExternal)
         Me.tabControl5.Location = New System.Drawing.Point(7, 73)
         Me.tabControl5.Name = "tabControl5"
         Me.tabControl5.SelectedIndex = 0
         Me.tabControl5.Size = New System.Drawing.Size(292, 382)
         Me.tabControl5.TabIndex = 25
         '
-        'TabPage24
+        'tpWMV
         '
-        Me.TabPage24.Controls.Add(Me.label48)
-        Me.TabPage24.Controls.Add(Me.edNetworkURL)
-        Me.TabPage24.Controls.Add(Me.edWMVNetworkPort)
-        Me.TabPage24.Controls.Add(Me.label47)
-        Me.TabPage24.Controls.Add(Me.btRefreshClients)
-        Me.TabPage24.Controls.Add(Me.lbNetworkClients)
-        Me.TabPage24.Controls.Add(Me.rbNetworkStreamingUseExternalProfile)
-        Me.TabPage24.Controls.Add(Me.rbNetworkStreamingUseMainWMVSettings)
-        Me.TabPage24.Controls.Add(Me.label81)
-        Me.TabPage24.Controls.Add(Me.label80)
-        Me.TabPage24.Controls.Add(Me.edMaximumClients)
-        Me.TabPage24.Controls.Add(Me.label46)
-        Me.TabPage24.Controls.Add(Me.btSelectWMVProfileNetwork)
-        Me.TabPage24.Controls.Add(Me.edNetworkStreamingWMVProfile)
-        Me.TabPage24.Controls.Add(Me.label44)
-        Me.TabPage24.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage24.Name = "TabPage24"
-        Me.TabPage24.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage24.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage24.TabIndex = 0
-        Me.TabPage24.Text = "WMV"
-        Me.TabPage24.UseVisualStyleBackColor = True
+        Me.tpWMV.Controls.Add(Me.label48)
+        Me.tpWMV.Controls.Add(Me.edNetworkURL)
+        Me.tpWMV.Controls.Add(Me.edWMVNetworkPort)
+        Me.tpWMV.Controls.Add(Me.label47)
+        Me.tpWMV.Controls.Add(Me.btRefreshClients)
+        Me.tpWMV.Controls.Add(Me.lbNetworkClients)
+        Me.tpWMV.Controls.Add(Me.rbNetworkStreamingUseExternalProfile)
+        Me.tpWMV.Controls.Add(Me.rbNetworkStreamingUseMainWMVSettings)
+        Me.tpWMV.Controls.Add(Me.label81)
+        Me.tpWMV.Controls.Add(Me.label80)
+        Me.tpWMV.Controls.Add(Me.edMaximumClients)
+        Me.tpWMV.Controls.Add(Me.label46)
+        Me.tpWMV.Controls.Add(Me.btSelectWMVProfileNetwork)
+        Me.tpWMV.Controls.Add(Me.edNetworkStreamingWMVProfile)
+        Me.tpWMV.Controls.Add(Me.label44)
+        Me.tpWMV.Location = New System.Drawing.Point(4, 22)
+        Me.tpWMV.Name = "tpWMV"
+        Me.tpWMV.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpWMV.Size = New System.Drawing.Size(284, 356)
+        Me.tpWMV.TabIndex = 0
+        Me.tpWMV.Text = "WMV"
+        Me.tpWMV.UseVisualStyleBackColor = True
         '
         'label48
         '
@@ -10078,18 +10104,18 @@ Partial Class Form1
         Me.label44.TabIndex = 18
         Me.label44.Text = "File name"
         '
-        'TabPage107
+        'tpRTSP
         '
-        Me.TabPage107.Controls.Add(Me.edNetworkRTSPURL)
-        Me.TabPage107.Controls.Add(Me.label367)
-        Me.TabPage107.Controls.Add(Me.label366)
-        Me.TabPage107.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage107.Name = "TabPage107"
-        Me.TabPage107.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage107.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage107.TabIndex = 2
-        Me.TabPage107.Text = "RTSP"
-        Me.TabPage107.UseVisualStyleBackColor = True
+        Me.tpRTSP.Controls.Add(Me.edNetworkRTSPURL)
+        Me.tpRTSP.Controls.Add(Me.label367)
+        Me.tpRTSP.Controls.Add(Me.label366)
+        Me.tpRTSP.Location = New System.Drawing.Point(4, 22)
+        Me.tpRTSP.Name = "tpRTSP"
+        Me.tpRTSP.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpRTSP.Size = New System.Drawing.Size(284, 356)
+        Me.tpRTSP.TabIndex = 2
+        Me.tpRTSP.Text = "RTSP"
+        Me.tpRTSP.UseVisualStyleBackColor = True
         '
         'edNetworkRTSPURL
         '
@@ -10117,23 +10143,23 @@ Partial Class Form1
         Me.label366.TabIndex = 7
         Me.label366.Text = "MP4 output settings will be used"
         '
-        'TabPage108
+        'tpRTMP
         '
-        Me.TabPage108.Controls.Add(Me.cbNetworkRTMPFFMPEGUsePipes)
-        Me.TabPage108.Controls.Add(Me.linkLabel11)
-        Me.TabPage108.Controls.Add(Me.LinkLabel8)
-        Me.TabPage108.Controls.Add(Me.rbNetworkRTMPFFMPEGCustom)
-        Me.TabPage108.Controls.Add(Me.rbNetworkRTMPFFMPEG)
-        Me.TabPage108.Controls.Add(Me.edNetworkRTMPURL)
-        Me.TabPage108.Controls.Add(Me.label368)
-        Me.TabPage108.Controls.Add(Me.label369)
-        Me.TabPage108.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage108.Name = "TabPage108"
-        Me.TabPage108.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage108.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage108.TabIndex = 3
-        Me.TabPage108.Text = "RTMP"
-        Me.TabPage108.UseVisualStyleBackColor = True
+        Me.tpRTMP.Controls.Add(Me.cbNetworkRTMPFFMPEGUsePipes)
+        Me.tpRTMP.Controls.Add(Me.linkLabel11)
+        Me.tpRTMP.Controls.Add(Me.LinkLabel8)
+        Me.tpRTMP.Controls.Add(Me.rbNetworkRTMPFFMPEGCustom)
+        Me.tpRTMP.Controls.Add(Me.rbNetworkRTMPFFMPEG)
+        Me.tpRTMP.Controls.Add(Me.edNetworkRTMPURL)
+        Me.tpRTMP.Controls.Add(Me.label368)
+        Me.tpRTMP.Controls.Add(Me.label369)
+        Me.tpRTMP.Location = New System.Drawing.Point(4, 22)
+        Me.tpRTMP.Name = "tpRTMP"
+        Me.tpRTMP.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpRTMP.Size = New System.Drawing.Size(284, 356)
+        Me.tpRTMP.TabIndex = 3
+        Me.tpRTMP.Text = "RTMP"
+        Me.tpRTMP.UseVisualStyleBackColor = True
         '
         'cbNetworkRTMPFFMPEGUsePipes
         '
@@ -10213,24 +10239,73 @@ Partial Class Form1
         Me.label369.TabIndex = 12
         Me.label369.Text = "Format settings located on output format tab"
         '
-        'TabPage128
+        'tpNDI
         '
-        Me.TabPage128.Controls.Add(Me.cbNetworkUDPFFMPEGUsePipes)
-        Me.TabPage128.Controls.Add(Me.label314)
-        Me.TabPage128.Controls.Add(Me.label313)
-        Me.TabPage128.Controls.Add(Me.LinkLabel9)
-        Me.TabPage128.Controls.Add(Me.label484)
-        Me.TabPage128.Controls.Add(Me.edNetworkUDPURL)
-        Me.TabPage128.Controls.Add(Me.label372)
-        Me.TabPage128.Controls.Add(Me.rbNetworkUDPFFMPEGCustom)
-        Me.TabPage128.Controls.Add(Me.rbNetworkUDPFFMPEG)
-        Me.TabPage128.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage128.Name = "TabPage128"
-        Me.TabPage128.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage128.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage128.TabIndex = 5
-        Me.TabPage128.Text = "UDP"
-        Me.TabPage128.UseVisualStyleBackColor = True
+        Me.tpNDI.Controls.Add(Me.linkLabel6)
+        Me.tpNDI.Controls.Add(Me.label38)
+        Me.tpNDI.Controls.Add(Me.label31)
+        Me.tpNDI.Controls.Add(Me.edNDIURL)
+        Me.tpNDI.Controls.Add(Me.edNDIName)
+        Me.tpNDI.Controls.Add(Me.label30)
+        Me.tpNDI.Location = New System.Drawing.Point(4, 22)
+        Me.tpNDI.Name = "tpNDI"
+        Me.tpNDI.Size = New System.Drawing.Size(284, 356)
+        Me.tpNDI.TabIndex = 7
+        Me.tpNDI.Text = "NDI"
+        Me.tpNDI.UseVisualStyleBackColor = True
+        '
+        'label31
+        '
+        Me.label31.AutoSize = True
+        Me.label31.Location = New System.Drawing.Point(14, 68)
+        Me.label31.Name = "label31"
+        Me.label31.Size = New System.Drawing.Size(86, 13)
+        Me.label31.TabIndex = 38
+        Me.label31.Text = "Connection URL"
+        '
+        'edNDIURL
+        '
+        Me.edNDIURL.Location = New System.Drawing.Point(17, 84)
+        Me.edNDIURL.Name = "edNDIURL"
+        Me.edNDIURL.ReadOnly = True
+        Me.edNDIURL.Size = New System.Drawing.Size(243, 20)
+        Me.edNDIURL.TabIndex = 37
+        '
+        'edNDIName
+        '
+        Me.edNDIName.Location = New System.Drawing.Point(17, 32)
+        Me.edNDIName.Name = "edNDIName"
+        Me.edNDIName.Size = New System.Drawing.Size(243, 20)
+        Me.edNDIName.TabIndex = 36
+        Me.edNDIName.Text = "Main"
+        '
+        'label30
+        '
+        Me.label30.AutoSize = True
+        Me.label30.Location = New System.Drawing.Point(14, 16)
+        Me.label30.Name = "label30"
+        Me.label30.Size = New System.Drawing.Size(35, 13)
+        Me.label30.TabIndex = 35
+        Me.label30.Text = "Name"
+        '
+        'tpUDP
+        '
+        Me.tpUDP.Controls.Add(Me.cbNetworkUDPFFMPEGUsePipes)
+        Me.tpUDP.Controls.Add(Me.label314)
+        Me.tpUDP.Controls.Add(Me.label313)
+        Me.tpUDP.Controls.Add(Me.LinkLabel9)
+        Me.tpUDP.Controls.Add(Me.label484)
+        Me.tpUDP.Controls.Add(Me.edNetworkUDPURL)
+        Me.tpUDP.Controls.Add(Me.label372)
+        Me.tpUDP.Controls.Add(Me.rbNetworkUDPFFMPEGCustom)
+        Me.tpUDP.Controls.Add(Me.rbNetworkUDPFFMPEG)
+        Me.tpUDP.Location = New System.Drawing.Point(4, 22)
+        Me.tpUDP.Name = "tpUDP"
+        Me.tpUDP.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpUDP.Size = New System.Drawing.Size(284, 356)
+        Me.tpUDP.TabIndex = 5
+        Me.tpUDP.Text = "UDP"
+        Me.tpUDP.UseVisualStyleBackColor = True
         '
         'cbNetworkUDPFFMPEGUsePipes
         '
@@ -10318,24 +10393,24 @@ Partial Class Form1
         Me.rbNetworkUDPFFMPEG.Text = "H264 / AAC using FFMPEG EXE"
         Me.rbNetworkUDPFFMPEG.UseVisualStyleBackColor = True
         '
-        'TabPage109
+        'tpSSF
         '
-        Me.TabPage109.Controls.Add(Me.cbNetworkSSUsePipes)
-        Me.TabPage109.Controls.Add(Me.linkLabel10)
-        Me.TabPage109.Controls.Add(Me.rbNetworkSSFFMPEGCustom)
-        Me.TabPage109.Controls.Add(Me.rbNetworkSSFFMPEGDefault)
-        Me.TabPage109.Controls.Add(Me.linkLabel5)
-        Me.TabPage109.Controls.Add(Me.edNetworkSSURL)
-        Me.TabPage109.Controls.Add(Me.label370)
-        Me.TabPage109.Controls.Add(Me.label371)
-        Me.TabPage109.Controls.Add(Me.rbNetworkSSSoftware)
-        Me.TabPage109.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage109.Name = "TabPage109"
-        Me.TabPage109.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage109.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage109.TabIndex = 4
-        Me.TabPage109.Text = "IIS Smooth Streaming"
-        Me.TabPage109.UseVisualStyleBackColor = True
+        Me.tpSSF.Controls.Add(Me.cbNetworkSSUsePipes)
+        Me.tpSSF.Controls.Add(Me.linkLabel10)
+        Me.tpSSF.Controls.Add(Me.rbNetworkSSFFMPEGCustom)
+        Me.tpSSF.Controls.Add(Me.rbNetworkSSFFMPEGDefault)
+        Me.tpSSF.Controls.Add(Me.linkLabel5)
+        Me.tpSSF.Controls.Add(Me.edNetworkSSURL)
+        Me.tpSSF.Controls.Add(Me.label370)
+        Me.tpSSF.Controls.Add(Me.label371)
+        Me.tpSSF.Controls.Add(Me.rbNetworkSSSoftware)
+        Me.tpSSF.Location = New System.Drawing.Point(4, 22)
+        Me.tpSSF.Name = "tpSSF"
+        Me.tpSSF.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpSSF.Size = New System.Drawing.Size(284, 356)
+        Me.tpSSF.TabIndex = 4
+        Me.tpSSF.Text = "IIS Smooth Streaming"
+        Me.tpSSF.UseVisualStyleBackColor = True
         '
         'cbNetworkSSUsePipes
         '
@@ -10425,31 +10500,31 @@ Partial Class Form1
         Me.rbNetworkSSSoftware.Text = "H264 / AAC using software encoder / NVENC"
         Me.rbNetworkSSSoftware.UseVisualStyleBackColor = True
         '
-        'TabPage147
+        'tpHLS
         '
-        Me.TabPage147.Controls.Add(Me.label19)
-        Me.TabPage147.Controls.Add(Me.edHLSEmbeddedHTTPServerPort)
-        Me.TabPage147.Controls.Add(Me.cbHLSEmbeddedHTTPServerEnabled)
-        Me.TabPage147.Controls.Add(Me.cbHLSMode)
-        Me.TabPage147.Controls.Add(Me.label6)
-        Me.TabPage147.Controls.Add(Me.lbHLSConfigure)
-        Me.TabPage147.Controls.Add(Me.label532)
-        Me.TabPage147.Controls.Add(Me.label531)
-        Me.TabPage147.Controls.Add(Me.label530)
-        Me.TabPage147.Controls.Add(Me.label529)
-        Me.TabPage147.Controls.Add(Me.edHLSSegmentCount)
-        Me.TabPage147.Controls.Add(Me.label519)
-        Me.TabPage147.Controls.Add(Me.edHLSSegmentDuration)
-        Me.TabPage147.Controls.Add(Me.btSelectHLSOutputFolder)
-        Me.TabPage147.Controls.Add(Me.edHLSOutputFolder)
-        Me.TabPage147.Controls.Add(Me.Label500)
-        Me.TabPage147.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage147.Name = "TabPage147"
-        Me.TabPage147.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage147.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage147.TabIndex = 6
-        Me.TabPage147.Text = "HLS"
-        Me.TabPage147.UseVisualStyleBackColor = True
+        Me.tpHLS.Controls.Add(Me.label19)
+        Me.tpHLS.Controls.Add(Me.edHLSEmbeddedHTTPServerPort)
+        Me.tpHLS.Controls.Add(Me.cbHLSEmbeddedHTTPServerEnabled)
+        Me.tpHLS.Controls.Add(Me.cbHLSMode)
+        Me.tpHLS.Controls.Add(Me.label6)
+        Me.tpHLS.Controls.Add(Me.lbHLSConfigure)
+        Me.tpHLS.Controls.Add(Me.label532)
+        Me.tpHLS.Controls.Add(Me.label531)
+        Me.tpHLS.Controls.Add(Me.label530)
+        Me.tpHLS.Controls.Add(Me.label529)
+        Me.tpHLS.Controls.Add(Me.edHLSSegmentCount)
+        Me.tpHLS.Controls.Add(Me.label519)
+        Me.tpHLS.Controls.Add(Me.edHLSSegmentDuration)
+        Me.tpHLS.Controls.Add(Me.btSelectHLSOutputFolder)
+        Me.tpHLS.Controls.Add(Me.edHLSOutputFolder)
+        Me.tpHLS.Controls.Add(Me.Label500)
+        Me.tpHLS.Location = New System.Drawing.Point(4, 22)
+        Me.tpHLS.Name = "tpHLS"
+        Me.tpHLS.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpHLS.Size = New System.Drawing.Size(284, 356)
+        Me.tpHLS.TabIndex = 6
+        Me.tpHLS.Text = "HLS"
+        Me.tpHLS.UseVisualStyleBackColor = True
         '
         'label19
         '
@@ -10594,17 +10669,17 @@ Partial Class Form1
         Me.Label500.TabIndex = 11
         Me.Label500.Text = "Output folder for video files and playlist"
         '
-        'TabPage56
+        'tpExternal
         '
-        Me.TabPage56.Controls.Add(Me.linkLabel4)
-        Me.TabPage56.Controls.Add(Me.linkLabel2)
-        Me.TabPage56.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage56.Name = "TabPage56"
-        Me.TabPage56.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage56.Size = New System.Drawing.Size(284, 356)
-        Me.TabPage56.TabIndex = 1
-        Me.TabPage56.Text = "External"
-        Me.TabPage56.UseVisualStyleBackColor = True
+        Me.tpExternal.Controls.Add(Me.linkLabel4)
+        Me.tpExternal.Controls.Add(Me.linkLabel2)
+        Me.tpExternal.Location = New System.Drawing.Point(4, 22)
+        Me.tpExternal.Name = "tpExternal"
+        Me.tpExternal.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpExternal.Size = New System.Drawing.Size(284, 356)
+        Me.tpExternal.TabIndex = 1
+        Me.tpExternal.Text = "External"
+        Me.tpExternal.UseVisualStyleBackColor = True
         '
         'linkLabel4
         '
@@ -12629,9 +12704,46 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
+        'cbIPURL
+        '
+        Me.cbIPURL.FormattingEnabled = True
+        Me.cbIPURL.Location = New System.Drawing.Point(58, 11)
+        Me.cbIPURL.Name = "cbIPURL"
+        Me.cbIPURL.Size = New System.Drawing.Size(360, 21)
+        Me.cbIPURL.TabIndex = 92
+        Me.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1"
+        '
+        'btListNDISources
+        '
+        Me.btListNDISources.Location = New System.Drawing.Point(16, 209)
+        Me.btListNDISources.Name = "btListNDISources"
+        Me.btListNDISources.Size = New System.Drawing.Size(123, 23)
+        Me.btListNDISources.TabIndex = 91
+        Me.btListNDISources.Text = "List NDI sources"
+        Me.btListNDISources.UseVisualStyleBackColor = True
+        '
+        'linkLabel6
+        '
+        Me.linkLabel6.AutoSize = True
+        Me.linkLabel6.Location = New System.Drawing.Point(14, 131)
+        Me.linkLabel6.Name = "linkLabel6"
+        Me.linkLabel6.Size = New System.Drawing.Size(86, 13)
+        Me.linkLabel6.TabIndex = 91
+        Me.linkLabel6.TabStop = True
+        Me.linkLabel6.Text = "vendor's website"
+        '
+        'label38
+        '
+        Me.label38.AutoSize = True
+        Me.label38.Location = New System.Drawing.Point(14, 118)
+        Me.label38.Name = "label38"
+        Me.label38.Size = New System.Drawing.Size(257, 13)
+        Me.label38.TabIndex = 90
+        Me.label38.Text = "To use NDI please install NDI SDK for Windows from"
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(808, 713)
         Me.Controls.Add(Me.VideoCapture1)
@@ -12647,327 +12759,329 @@ Partial Class Form1
         Me.Controls.Add(Me.tabControl1)
         Me.Controls.Add(Me.lbTimestamp)
         Me.Controls.Add(Me.btSaveScreenshot)
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
         Me.Tag = "0"
         Me.Text = "VisioForge Video Capture SDK .Net - Main Demo"
-        Me.tabControl12.ResumeLayout(false)
-        Me.tabPage53.ResumeLayout(false)
+        Me.tabControl12.ResumeLayout(False)
+        Me.tabPage53.ResumeLayout(False)
         Me.tabPage53.PerformLayout
-        Me.tabControl10.ResumeLayout(false)
-        Me.tabPage46.ResumeLayout(false)
-        Me.tabControl2.ResumeLayout(false)
-        Me.tabPage8.ResumeLayout(false)
+        Me.tabControl10.ResumeLayout(False)
+        Me.tabPage46.ResumeLayout(False)
+        Me.tabControl2.ResumeLayout(False)
+        Me.tabPage8.ResumeLayout(False)
         Me.tabPage8.PerformLayout
-        Me.tabPage52.ResumeLayout(false)
+        Me.tabPage52.ResumeLayout(False)
         Me.tabPage52.PerformLayout
-        Me.tabPage10.ResumeLayout(false)
-        Me.tabControl3.ResumeLayout(false)
-        Me.tabPage14.ResumeLayout(false)
+        Me.tabPage10.ResumeLayout(False)
+        Me.tabControl3.ResumeLayout(False)
+        Me.tabPage14.ResumeLayout(False)
         Me.tabPage14.PerformLayout
-        Me.tabPage15.ResumeLayout(false)
+        Me.tabPage15.ResumeLayout(False)
         Me.tabPage15.PerformLayout
-        Me.groupBox1.ResumeLayout(false)
+        Me.groupBox1.ResumeLayout(False)
         Me.groupBox1.PerformLayout
-        Me.tabPage21.ResumeLayout(false)
+        Me.tabPage21.ResumeLayout(False)
         Me.tabPage21.PerformLayout
-        Me.tabPage33.ResumeLayout(false)
+        Me.tabPage33.ResumeLayout(False)
         Me.tabPage33.PerformLayout
-        Me.tabPage11.ResumeLayout(false)
-        Me.groupBox21.ResumeLayout(false)
+        Me.tabPage11.ResumeLayout(False)
+        Me.groupBox21.ResumeLayout(False)
         Me.groupBox21.PerformLayout
-        Me.groupBox2.ResumeLayout(false)
-        Me.tabPage57.ResumeLayout(false)
+        Me.groupBox2.ResumeLayout(False)
+        Me.tabPage57.ResumeLayout(False)
         Me.tabPage57.PerformLayout
-        CType(Me.tbAdjSaturation,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAdjHue,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAdjContrast,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAdjBrightness,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage3.ResumeLayout(false)
+        CType(Me.tbAdjSaturation, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAdjHue, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAdjContrast, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAdjBrightness, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout
-        CType(Me.tbCCFocus,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbCCZoom,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbCCTilt,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbCCPan,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage9.ResumeLayout(false)
-        Me.tabControl19.ResumeLayout(false)
-        Me.tabPage96.ResumeLayout(false)
+        CType(Me.tbCCFocus, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbCCZoom, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbCCTilt, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbCCPan, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage9.ResumeLayout(False)
+        Me.tabControl19.ResumeLayout(False)
+        Me.tabPage96.ResumeLayout(False)
         Me.tabPage96.PerformLayout
-        Me.tabPage97.ResumeLayout(false)
+        Me.tabPage97.ResumeLayout(False)
         Me.tabPage97.PerformLayout
-        CType(Me.tbAudioBalance,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioVolume,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage98.ResumeLayout(false)
+        CType(Me.tbAudioBalance, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioVolume, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage98.ResumeLayout(False)
         Me.tabPage98.PerformLayout
-        Me.TabPage111.ResumeLayout(false)
+        Me.TabPage111.ResumeLayout(False)
         Me.TabPage111.PerformLayout
-        CType(Me.tbVUMeterBoost,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbVUMeterAmplification,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage99.ResumeLayout(false)
+        CType(Me.tbVUMeterBoost, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbVUMeterAmplification, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage99.ResumeLayout(False)
         Me.tabPage99.PerformLayout
-        Me.tabPage47.ResumeLayout(false)
+        Me.tabPage47.ResumeLayout(False)
         Me.tabPage47.PerformLayout
-        Me.tabPage48.ResumeLayout(false)
-        Me.tabControl15.ResumeLayout(false)
-        Me.tabPage144.ResumeLayout(false)
+        Me.tabPage48.ResumeLayout(False)
+        Me.tabControl15.ResumeLayout(False)
+        Me.tabPage144.ResumeLayout(False)
         Me.tabPage144.PerformLayout
-        Me.tabPage146.ResumeLayout(false)
+        Me.tabPage146.ResumeLayout(False)
         Me.tabPage146.PerformLayout
-        Me.tabPage145.ResumeLayout(false)
+        Me.tabPage145.ResumeLayout(False)
         Me.tabPage145.PerformLayout
-        Me.groupBox42.ResumeLayout(false)
-        Me.TabPage61.ResumeLayout(false)
+        Me.groupBox42.ResumeLayout(False)
+        Me.TabPage61.ResumeLayout(False)
         Me.TabPage61.PerformLayout
-        Me.TabPage66.ResumeLayout(false)
-        Me.tabControl22.ResumeLayout(false)
-        Me.tabPage82.ResumeLayout(false)
+        Me.TabPage66.ResumeLayout(False)
+        Me.tabControl22.ResumeLayout(False)
+        Me.tabPage82.ResumeLayout(False)
         Me.tabPage82.PerformLayout
-        Me.tabPage83.ResumeLayout(false)
-        Me.tabControl23.ResumeLayout(false)
-        Me.tabPage84.ResumeLayout(false)
+        Me.tabPage83.ResumeLayout(False)
+        Me.tabControl23.ResumeLayout(False)
+        Me.tabPage84.ResumeLayout(False)
         Me.tabPage84.PerformLayout
-        Me.tabPage85.ResumeLayout(false)
+        Me.tabPage85.ResumeLayout(False)
         Me.tabPage85.PerformLayout
-        Me.tabPage86.ResumeLayout(false)
-        Me.groupBox35.ResumeLayout(false)
+        Me.tabPage86.ResumeLayout(False)
+        Me.groupBox35.ResumeLayout(False)
         Me.groupBox35.PerformLayout
-        Me.groupBox36.ResumeLayout(false)
+        Me.groupBox36.ResumeLayout(False)
         Me.groupBox36.PerformLayout
-        Me.tabPage87.ResumeLayout(false)
+        Me.tabPage87.ResumeLayout(False)
         Me.tabPage87.PerformLayout
-        Me.TabPage104.ResumeLayout(false)
+        Me.TabPage104.ResumeLayout(False)
         Me.TabPage104.PerformLayout
-        Me.tabPage49.ResumeLayout(false)
-        Me.tabControl20.ResumeLayout(false)
-        Me.tabPage67.ResumeLayout(false)
-        Me.tabControl21.ResumeLayout(false)
-        Me.tabPage78.ResumeLayout(false)
+        Me.tabPage49.ResumeLayout(False)
+        Me.tabControl20.ResumeLayout(False)
+        Me.tabPage67.ResumeLayout(False)
+        Me.tabControl21.ResumeLayout(False)
+        Me.tabPage78.ResumeLayout(False)
         Me.tabPage78.PerformLayout
-        Me.groupBox30.ResumeLayout(false)
+        Me.groupBox30.ResumeLayout(False)
         Me.groupBox30.PerformLayout
-        Me.tabPage79.ResumeLayout(false)
-        Me.groupBox31.ResumeLayout(false)
+        Me.tabPage79.ResumeLayout(False)
+        Me.groupBox31.ResumeLayout(False)
         Me.groupBox31.PerformLayout
-        Me.tabPage80.ResumeLayout(false)
-        Me.groupBox32.ResumeLayout(false)
+        Me.tabPage80.ResumeLayout(False)
+        Me.groupBox32.ResumeLayout(False)
         Me.groupBox32.PerformLayout
-        Me.TabPage93.ResumeLayout(false)
+        Me.TabPage93.ResumeLayout(False)
         Me.TabPage93.PerformLayout
-        Me.groupBox44.ResumeLayout(false)
+        Me.groupBox44.ResumeLayout(False)
         Me.groupBox44.PerformLayout
-        Me.tabPage77.ResumeLayout(false)
+        Me.tabPage77.ResumeLayout(False)
         Me.tabPage77.PerformLayout
-        Me.groupBox34.ResumeLayout(false)
+        Me.groupBox34.ResumeLayout(False)
         Me.groupBox34.PerformLayout
-        CType(Me.tbPIPTransparency,System.ComponentModel.ISupportInitialize).EndInit
-        Me.groupBox33.ResumeLayout(false)
+        CType(Me.tbPIPTransparency, System.ComponentModel.ISupportInitialize).EndInit
+        Me.groupBox33.ResumeLayout(False)
         Me.groupBox33.PerformLayout
-        Me.groupBox20.ResumeLayout(false)
+        Me.groupBox20.ResumeLayout(False)
         Me.groupBox20.PerformLayout
-        Me.TabPage113.ResumeLayout(false)
+        Me.TabPage113.ResumeLayout(False)
         Me.TabPage113.PerformLayout
-        CType(Me.tbPIPChromaKeyTolerance2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbPIPChromaKeyTolerance1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage50.ResumeLayout(false)
+        CType(Me.tbPIPChromaKeyTolerance2, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbPIPChromaKeyTolerance1, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage50.ResumeLayout(False)
         Me.tabPage50.PerformLayout
-        Me.tabPage51.ResumeLayout(false)
-        Me.tabControl26.ResumeLayout(false)
-        Me.tabPage115.ResumeLayout(false)
+        Me.tabPage51.ResumeLayout(False)
+        Me.tabControl26.ResumeLayout(False)
+        Me.tabPage115.ResumeLayout(False)
         Me.tabPage115.PerformLayout
-        Me.groupBox28.ResumeLayout(false)
-        Me.groupBox13.ResumeLayout(false)
+        Me.groupBox28.ResumeLayout(False)
+        Me.groupBox13.ResumeLayout(False)
         Me.groupBox13.PerformLayout
-        Me.tabPage116.ResumeLayout(false)
+        Me.tabPage116.ResumeLayout(False)
         Me.tabPage116.PerformLayout
-        Me.TabPage23.ResumeLayout(false)
+        Me.TabPage23.ResumeLayout(False)
         Me.TabPage23.PerformLayout
-        Me.groupBox8.ResumeLayout(false)
+        Me.groupBox8.ResumeLayout(False)
         Me.groupBox8.PerformLayout
-        Me.TabPage123.ResumeLayout(false)
-        Me.tabControl28.ResumeLayout(false)
-        Me.tabPage125.ResumeLayout(false)
+        Me.TabPage123.ResumeLayout(False)
+        Me.tabControl28.ResumeLayout(False)
+        Me.tabPage125.ResumeLayout(False)
         Me.tabPage125.PerformLayout
-        Me.tabPage126.ResumeLayout(false)
+        Me.tabPage126.ResumeLayout(False)
         Me.tabPage126.PerformLayout
-        Me.tabControl1.ResumeLayout(false)
-        Me.tabPage1.ResumeLayout(false)
+        Me.tabControl1.ResumeLayout(False)
+        Me.tabPage1.ResumeLayout(False)
         Me.tabPage1.PerformLayout
-        Me.tabPage2.ResumeLayout(false)
-        Me.tabControl17.ResumeLayout(false)
-        Me.tabPage68.ResumeLayout(false)
+        Me.tabPage2.ResumeLayout(False)
+        Me.tabControl17.ResumeLayout(False)
+        Me.tabPage68.ResumeLayout(False)
         Me.tabPage68.PerformLayout
-        Me.tabControl7.ResumeLayout(false)
-        Me.tabPage29.ResumeLayout(false)
+        Me.tabControl7.ResumeLayout(False)
+        Me.tabPage29.ResumeLayout(False)
         Me.tabPage29.PerformLayout
-        Me.tabPage42.ResumeLayout(false)
+        Me.tabPage42.ResumeLayout(False)
         Me.tabPage42.PerformLayout
-        Me.TabPage88.ResumeLayout(false)
+        Me.TabPage88.ResumeLayout(False)
         Me.TabPage88.PerformLayout
-        Me.groupBox37.ResumeLayout(false)
-        Me.TabPage91.ResumeLayout(false)
+        Me.groupBox37.ResumeLayout(False)
+        Me.TabPage91.ResumeLayout(False)
         Me.TabPage91.PerformLayout
-        Me.groupBox40.ResumeLayout(false)
+        Me.groupBox40.ResumeLayout(False)
         Me.groupBox40.PerformLayout
-        Me.groupBox39.ResumeLayout(false)
+        Me.groupBox39.ResumeLayout(False)
         Me.groupBox39.PerformLayout
-        Me.groupBox38.ResumeLayout(false)
+        Me.groupBox38.ResumeLayout(False)
         Me.groupBox38.PerformLayout
-        Me.TabPage101.ResumeLayout(false)
+        Me.TabPage101.ResumeLayout(False)
         Me.TabPage101.PerformLayout
-        Me.groupBox45.ResumeLayout(false)
+        Me.groupBox45.ResumeLayout(False)
         Me.groupBox45.PerformLayout
-        Me.TabPage112.ResumeLayout(false)
+        Me.TabPage112.ResumeLayout(False)
         Me.TabPage112.PerformLayout
-        CType(Me.tbLiveRotationAngle,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbContrast,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbDarkness,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbLightness,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbSaturation,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage69.ResumeLayout(false)
+        CType(Me.tbLiveRotationAngle, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage69.ResumeLayout(False)
         Me.tabPage69.PerformLayout
-        Me.TabPage59.ResumeLayout(false)
+        Me.TabPage59.ResumeLayout(False)
         Me.TabPage59.PerformLayout
-        Me.TabPage63.ResumeLayout(false)
+        Me.TabPage63.ResumeLayout(False)
         Me.TabPage63.PerformLayout
-        CType(Me.tbGPUBlur,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbGPUContrast,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbGPUDarkness,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbGPULightness,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbGPUSaturation,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage92.ResumeLayout(false)
+        CType(Me.tbGPUBlur, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUContrast, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUDarkness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPULightness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUSaturation, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage92.ResumeLayout(False)
         Me.TabPage92.PerformLayout
-        Me.TabPage60.ResumeLayout(false)
+        Me.TabPage60.ResumeLayout(False)
         Me.TabPage60.PerformLayout
-        CType(Me.tbChromaKeySmoothing,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbChromaKeyThresholdSensitivity,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage70.ResumeLayout(false)
+        CType(Me.tbChromaKeySmoothing, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbChromaKeyThresholdSensitivity, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage70.ResumeLayout(False)
         Me.tabPage70.PerformLayout
-        Me.tabControl14.ResumeLayout(false)
-        Me.tabPage27.ResumeLayout(false)
+        Me.tabControl14.ResumeLayout(False)
+        Me.tabPage27.ResumeLayout(False)
         Me.tabPage27.PerformLayout
-        Me.tabControl18.ResumeLayout(false)
-        Me.tabPage71.ResumeLayout(false)
+        Me.tabControl18.ResumeLayout(False)
+        Me.tabPage71.ResumeLayout(False)
         Me.tabPage71.PerformLayout
-        CType(Me.tbAudAmplifyAmp,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage72.ResumeLayout(false)
+        CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage72.ResumeLayout(False)
         Me.tabPage72.PerformLayout
-        CType(Me.tbAudEq9,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq8,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq7,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq6,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq5,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq4,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudEq0,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage73.ResumeLayout(false)
+        CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq8, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq7, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq6, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq5, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq4, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq3, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq2, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq1, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq0, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage73.ResumeLayout(False)
         Me.tabPage73.PerformLayout
-        CType(Me.tbAudRelease,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudAttack,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudDynAmp,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage75.ResumeLayout(false)
+        CType(Me.tbAudRelease, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudAttack, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudDynAmp, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage75.ResumeLayout(False)
         Me.tabPage75.PerformLayout
-        CType(Me.tbAud3DSound,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage76.ResumeLayout(false)
+        CType(Me.tbAud3DSound, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage76.ResumeLayout(False)
         Me.tabPage76.PerformLayout
-        CType(Me.tbAudTrueBass,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage124.ResumeLayout(false)
+        CType(Me.tbAudTrueBass, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage124.ResumeLayout(False)
         Me.TabPage124.PerformLayout
-        CType(Me.tbAudioTimeshift,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox3.ResumeLayout(false)
+        CType(Me.tbAudioTimeshift, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout
-        CType(Me.tbAudioOutputGainLFE,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioOutputGainSR,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioOutputGainSL,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioOutputGainR,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioOutputGainC,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioOutputGainL,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox7.ResumeLayout(false)
+        CType(Me.tbAudioOutputGainLFE, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainSR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainSL, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainC, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainL, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout
-        CType(Me.tbAudioInputGainLFE,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioInputGainSR,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioInputGainSL,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioInputGainR,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioInputGainC,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.tbAudioInputGainL,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage22.ResumeLayout(false)
+        CType(Me.tbAudioInputGainLFE, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainSR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainSL, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainC, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainL, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage22.ResumeLayout(False)
         Me.TabPage22.PerformLayout
-        Me.groupBox41.ResumeLayout(false)
+        Me.groupBox41.ResumeLayout(False)
         Me.groupBox41.PerformLayout
-        CType(Me.tbAudioChannelMapperVolume,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tabPage7.ResumeLayout(false)
+        CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPage7.ResumeLayout(False)
         Me.tabPage7.PerformLayout
-        Me.tabControl5.ResumeLayout(false)
-        Me.TabPage24.ResumeLayout(false)
-        Me.TabPage24.PerformLayout
-        Me.TabPage107.ResumeLayout(false)
-        Me.TabPage107.PerformLayout
-        Me.TabPage108.ResumeLayout(false)
-        Me.TabPage108.PerformLayout
-        Me.TabPage128.ResumeLayout(false)
-        Me.TabPage128.PerformLayout
-        Me.TabPage109.ResumeLayout(false)
-        Me.TabPage109.PerformLayout
-        Me.TabPage147.ResumeLayout(false)
-        Me.TabPage147.PerformLayout
-        Me.TabPage56.ResumeLayout(false)
-        Me.TabPage56.PerformLayout
-        Me.tabPage28.ResumeLayout(false)
+        Me.tabControl5.ResumeLayout(False)
+        Me.tpWMV.ResumeLayout(False)
+        Me.tpWMV.PerformLayout
+        Me.tpRTSP.ResumeLayout(False)
+        Me.tpRTSP.PerformLayout
+        Me.tpRTMP.ResumeLayout(False)
+        Me.tpRTMP.PerformLayout
+        Me.tpNDI.ResumeLayout(False)
+        Me.tpNDI.PerformLayout
+        Me.tpUDP.ResumeLayout(False)
+        Me.tpUDP.PerformLayout
+        Me.tpSSF.ResumeLayout(False)
+        Me.tpSSF.PerformLayout
+        Me.tpHLS.ResumeLayout(False)
+        Me.tpHLS.PerformLayout
+        Me.tpExternal.ResumeLayout(False)
+        Me.tpExternal.PerformLayout
+        Me.tabPage28.ResumeLayout(False)
         Me.tabPage28.PerformLayout
-        Me.groupBox19.ResumeLayout(false)
-        Me.tabControl6.ResumeLayout(false)
-        Me.tabPage30.ResumeLayout(false)
+        Me.groupBox19.ResumeLayout(False)
+        Me.tabControl6.ResumeLayout(False)
+        Me.tabPage30.ResumeLayout(False)
         Me.tabPage30.PerformLayout
-        Me.tabPage31.ResumeLayout(false)
+        Me.tabPage31.ResumeLayout(False)
         Me.tabPage31.PerformLayout
-        Me.tabPage32.ResumeLayout(false)
+        Me.tabPage32.ResumeLayout(False)
         Me.tabPage32.PerformLayout
-        CType(Me.tbOSDTranspLevel,System.ComponentModel.ISupportInitialize).EndInit
-        Me.groupBox15.ResumeLayout(false)
+        CType(Me.tbOSDTranspLevel, System.ComponentModel.ISupportInitialize).EndInit
+        Me.groupBox15.ResumeLayout(False)
         Me.groupBox15.PerformLayout
-        Me.tabPage43.ResumeLayout(false)
+        Me.tabPage43.ResumeLayout(False)
         Me.tabPage43.PerformLayout
-        Me.tabControl9.ResumeLayout(false)
-        Me.tabPage44.ResumeLayout(false)
+        Me.tabControl9.ResumeLayout(False)
+        Me.tabPage44.ResumeLayout(False)
         Me.tabPage44.PerformLayout
-        Me.tabPage45.ResumeLayout(false)
-        Me.groupBox25.ResumeLayout(false)
+        Me.tabPage45.ResumeLayout(False)
+        Me.groupBox25.ResumeLayout(False)
         Me.groupBox25.PerformLayout
-        CType(Me.tbMotDetHLThreshold,System.ComponentModel.ISupportInitialize).EndInit
-        Me.groupBox27.ResumeLayout(false)
+        CType(Me.tbMotDetHLThreshold, System.ComponentModel.ISupportInitialize).EndInit
+        Me.groupBox27.ResumeLayout(False)
         Me.groupBox27.PerformLayout
-        Me.groupBox26.ResumeLayout(false)
+        Me.groupBox26.ResumeLayout(False)
         Me.groupBox26.PerformLayout
-        CType(Me.tbMotDetDropFramesThreshold,System.ComponentModel.ISupportInitialize).EndInit
-        Me.groupBox24.ResumeLayout(false)
+        CType(Me.tbMotDetDropFramesThreshold, System.ComponentModel.ISupportInitialize).EndInit
+        Me.groupBox24.ResumeLayout(False)
         Me.groupBox24.PerformLayout
-        Me.TabPage26.ResumeLayout(false)
+        Me.TabPage26.ResumeLayout(False)
         Me.TabPage26.PerformLayout
-        Me.TabPage25.ResumeLayout(false)
+        Me.TabPage25.ResumeLayout(False)
         Me.TabPage25.PerformLayout
-        Me.TabPage100.ResumeLayout(false)
+        Me.TabPage100.ResumeLayout(False)
         Me.TabPage100.PerformLayout
-        Me.TabPage102.ResumeLayout(false)
+        Me.TabPage102.ResumeLayout(False)
         Me.TabPage102.PerformLayout
-        Me.TabPage105.ResumeLayout(false)
-        Me.groupBox48.ResumeLayout(false)
+        Me.TabPage105.ResumeLayout(False)
+        Me.groupBox48.ResumeLayout(False)
         Me.groupBox48.PerformLayout
-        Me.groupBox47.ResumeLayout(false)
+        Me.groupBox47.ResumeLayout(False)
         Me.groupBox47.PerformLayout
-        Me.groupBox43.ResumeLayout(false)
+        Me.groupBox43.ResumeLayout(False)
         Me.groupBox43.PerformLayout
-        Me.TabPage106.ResumeLayout(false)
+        Me.TabPage106.ResumeLayout(False)
         Me.TabPage106.PerformLayout
-        Me.TabPage141.ResumeLayout(false)
+        Me.TabPage141.ResumeLayout(False)
         Me.TabPage141.PerformLayout
-        Me.TabControl32.ResumeLayout(false)
-        Me.TabPage142.ResumeLayout(false)
+        Me.TabControl32.ResumeLayout(False)
+        Me.TabPage142.ResumeLayout(False)
         Me.TabPage142.PerformLayout
-        Me.TabPage143.ResumeLayout(false)
+        Me.TabPage143.ResumeLayout(False)
         Me.TabPage143.PerformLayout
-        CType(Me.imgTagCover,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        CType(Me.imgTagCover, System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(False)
         Me.PerformLayout
 
 End Sub
@@ -13394,7 +13508,7 @@ End Sub
     Private WithEvents edPIPLeft As System.Windows.Forms.TextBox
     Private WithEvents label131 As System.Windows.Forms.Label
     Private WithEvents tabControl5 As System.Windows.Forms.TabControl
-    Private WithEvents TabPage24 As System.Windows.Forms.TabPage
+    Private WithEvents tpWMV As System.Windows.Forms.TabPage
     Private WithEvents edWMVNetworkPort As System.Windows.Forms.TextBox
     Private WithEvents label47 As System.Windows.Forms.Label
     Private WithEvents btRefreshClients As System.Windows.Forms.Button
@@ -13408,7 +13522,7 @@ End Sub
     Private WithEvents btSelectWMVProfileNetwork As System.Windows.Forms.Button
     Private WithEvents edNetworkStreamingWMVProfile As System.Windows.Forms.TextBox
     Private WithEvents label44 As System.Windows.Forms.Label
-    Private WithEvents TabPage56 As System.Windows.Forms.TabPage
+    Private WithEvents tpExternal As System.Windows.Forms.TabPage
     Private WithEvents cbNetworkStreamingAudioEnabled As System.Windows.Forms.CheckBox
     Private WithEvents cbNetworkStreaming As System.Windows.Forms.CheckBox
     Friend WithEvents TabPage66 As System.Windows.Forms.TabPage
@@ -13641,12 +13755,12 @@ End Sub
     Private WithEvents label365 As System.Windows.Forms.Label
     Private WithEvents label48 As System.Windows.Forms.Label
     Private WithEvents edNetworkURL As System.Windows.Forms.TextBox
-    Friend WithEvents TabPage107 As System.Windows.Forms.TabPage
+    Friend WithEvents tpRTSP As System.Windows.Forms.TabPage
     Private WithEvents edNetworkRTSPURL As System.Windows.Forms.TextBox
     Private WithEvents label367 As System.Windows.Forms.Label
     Private WithEvents label366 As System.Windows.Forms.Label
-    Friend WithEvents TabPage108 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage109 As System.Windows.Forms.TabPage
+    Friend WithEvents tpRTMP As System.Windows.Forms.TabPage
+    Friend WithEvents tpSSF As System.Windows.Forms.TabPage
     Private WithEvents edNetworkSSURL As System.Windows.Forms.TextBox
     Private WithEvents label370 As System.Windows.Forms.Label
     Private WithEvents label371 As System.Windows.Forms.Label
@@ -13785,7 +13899,7 @@ End Sub
     Private WithEvents edNetworkRTMPURL As System.Windows.Forms.TextBox
     Private WithEvents label368 As System.Windows.Forms.Label
     Private WithEvents label369 As System.Windows.Forms.Label
-    Friend WithEvents TabPage128 As System.Windows.Forms.TabPage
+    Friend WithEvents tpUDP As System.Windows.Forms.TabPage
     Private WithEvents label484 As System.Windows.Forms.Label
     Private WithEvents edNetworkUDPURL As System.Windows.Forms.TextBox
     Private WithEvents label372 As System.Windows.Forms.Label
@@ -13948,7 +14062,6 @@ End Sub
     Private WithEvents label517 As Label
     Private WithEvents edCustomVideoSourceURL As TextBox
     Private WithEvents label516 As Label
-    Private WithEvents edIPUrl As TextBox
     Private WithEvents label165 As Label
     Private WithEvents edONVIFPassword As TextBox
     Private WithEvents Label379 As Label
@@ -13957,7 +14070,7 @@ End Sub
     Private WithEvents edONVIFURL As TextBox
     Private WithEvents cbMultiscreenDrawOnExternalDisplays As CheckBox
     Private WithEvents cbMultiscreenDrawOnPanels As CheckBox
-    Friend WithEvents TabPage147 As TabPage
+    Friend WithEvents tpHLS As TabPage
     Private WithEvents lbHLSConfigure As LinkLabel
     Private WithEvents label532 As Label
     Private WithEvents label531 As Label
@@ -14060,4 +14173,15 @@ End Sub
     Private WithEvents LinkLabel3 As LinkLabel
     Private WithEvents Label2 As Label
     Private WithEvents linkLabel7 As LinkLabel
+    Private WithEvents lbNDI As LinkLabel
+    Private WithEvents label25 As Label
+    Friend WithEvents tpNDI As TabPage
+    Private WithEvents label31 As Label
+    Private WithEvents edNDIURL As TextBox
+    Private WithEvents edNDIName As TextBox
+    Private WithEvents label30 As Label
+    Private WithEvents cbIPURL As ComboBox
+    Private WithEvents btListNDISources As Button
+    Private WithEvents linkLabel6 As LinkLabel
+    Private WithEvents label38 As Label
 End Class

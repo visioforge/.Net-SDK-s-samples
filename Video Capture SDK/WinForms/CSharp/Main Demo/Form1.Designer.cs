@@ -42,6 +42,7 @@ namespace VideoCapture_CSharp_Demo
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label8 = new System.Windows.Forms.Label();
@@ -361,7 +362,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.cbNetworkStreamingMode = new System.Windows.Forms.ComboBox();
             this.tabControl5 = new System.Windows.Forms.TabControl();
-            this.tabPage23 = new System.Windows.Forms.TabPage();
+            this.tpWMV = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
             this.edNetworkURL = new System.Windows.Forms.TextBox();
             this.edWMVNetworkPort = new System.Windows.Forms.TextBox();
@@ -377,11 +378,11 @@ namespace VideoCapture_CSharp_Demo
             this.btSelectWMVProfileNetwork = new System.Windows.Forms.Button();
             this.edNetworkStreamingWMVProfile = new System.Windows.Forms.TextBox();
             this.label44 = new System.Windows.Forms.Label();
-            this.tabPage108 = new System.Windows.Forms.TabPage();
+            this.tpRTSP = new System.Windows.Forms.TabPage();
             this.edNetworkRTSPURL = new System.Windows.Forms.TextBox();
             this.label367 = new System.Windows.Forms.Label();
             this.label366 = new System.Windows.Forms.Label();
-            this.tabPage109 = new System.Windows.Forms.TabPage();
+            this.tpRTMP = new System.Windows.Forms.TabPage();
             this.cbNetworkRTMPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
             this.linkLabel11 = new System.Windows.Forms.LinkLabel();
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
@@ -390,7 +391,12 @@ namespace VideoCapture_CSharp_Demo
             this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
             this.label368 = new System.Windows.Forms.Label();
             this.label369 = new System.Windows.Forms.Label();
-            this.tabPage138 = new System.Windows.Forms.TabPage();
+            this.tpNDI = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
+            this.edNDIURL = new System.Windows.Forms.TextBox();
+            this.edNDIName = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tpUDP = new System.Windows.Forms.TabPage();
             this.cbNetworkUDPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
             this.label314 = new System.Windows.Forms.Label();
             this.label313 = new System.Windows.Forms.Label();
@@ -400,7 +406,7 @@ namespace VideoCapture_CSharp_Demo
             this.label372 = new System.Windows.Forms.Label();
             this.rbNetworkUDPFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
-            this.tabPage110 = new System.Windows.Forms.TabPage();
+            this.tpSSF = new System.Windows.Forms.TabPage();
             this.cbNetworkSSUsePipes = new System.Windows.Forms.CheckBox();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.rbNetworkSSFFMPEGCustom = new System.Windows.Forms.RadioButton();
@@ -410,7 +416,7 @@ namespace VideoCapture_CSharp_Demo
             this.label370 = new System.Windows.Forms.Label();
             this.label371 = new System.Windows.Forms.Label();
             this.rbNetworkSSSoftware = new System.Windows.Forms.RadioButton();
-            this.tabPage104 = new System.Windows.Forms.TabPage();
+            this.tpHLS = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
             this.edHLSEmbeddedHTTPServerPort = new System.Windows.Forms.TextBox();
             this.cbHLSEmbeddedHTTPServerEnabled = new System.Windows.Forms.CheckBox();
@@ -427,7 +433,7 @@ namespace VideoCapture_CSharp_Demo
             this.btSelectHLSOutputFolder = new System.Windows.Forms.Button();
             this.edHLSOutputFolder = new System.Windows.Forms.TextBox();
             this.label380 = new System.Windows.Forms.Label();
-            this.tabPage24 = new System.Windows.Forms.TabPage();
+            this.tpNSExternal = new System.Windows.Forms.TabPage();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.cbNetworkStreamingAudioEnabled = new System.Windows.Forms.CheckBox();
@@ -793,10 +799,13 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage48 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.cbIPURL = new System.Windows.Forms.ComboBox();
+            this.btListNDISources = new System.Windows.Forms.Button();
+            this.lbNDI = new System.Windows.Forms.LinkLabel();
+            this.label25 = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label22 = new System.Windows.Forms.Label();
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.edIPUrl = new System.Windows.Forms.TextBox();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
             this.btShowIPCamDatabase = new System.Windows.Forms.Button();
@@ -1126,10 +1135,12 @@ namespace VideoCapture_CSharp_Demo
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.label38 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1211,13 +1222,14 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage107.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabControl5.SuspendLayout();
-            this.tabPage23.SuspendLayout();
-            this.tabPage108.SuspendLayout();
-            this.tabPage109.SuspendLayout();
-            this.tabPage138.SuspendLayout();
-            this.tabPage110.SuspendLayout();
-            this.tabPage104.SuspendLayout();
-            this.tabPage24.SuspendLayout();
+            this.tpWMV.SuspendLayout();
+            this.tpRTSP.SuspendLayout();
+            this.tpRTMP.SuspendLayout();
+            this.tpNDI.SuspendLayout();
+            this.tpUDP.SuspendLayout();
+            this.tpSSF.SuspendLayout();
+            this.tpHLS.SuspendLayout();
+            this.tpNSExternal.SuspendLayout();
             this.tabPage28.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.tabControl6.SuspendLayout();
@@ -4789,6 +4801,7 @@ namespace VideoCapture_CSharp_Demo
             "Windows Media Video",
             "RTSP",
             "RTMP to Adobe Media Server / Wowza",
+            "NDI",
             "UDP",
             "Smooth Streaming to Microsoft IIS",
             "HTTP Live Streaming (HLS)",
@@ -4800,43 +4813,44 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabControl5
             // 
-            this.tabControl5.Controls.Add(this.tabPage23);
-            this.tabControl5.Controls.Add(this.tabPage108);
-            this.tabControl5.Controls.Add(this.tabPage109);
-            this.tabControl5.Controls.Add(this.tabPage138);
-            this.tabControl5.Controls.Add(this.tabPage110);
-            this.tabControl5.Controls.Add(this.tabPage104);
-            this.tabControl5.Controls.Add(this.tabPage24);
+            this.tabControl5.Controls.Add(this.tpWMV);
+            this.tabControl5.Controls.Add(this.tpRTSP);
+            this.tabControl5.Controls.Add(this.tpRTMP);
+            this.tabControl5.Controls.Add(this.tpNDI);
+            this.tabControl5.Controls.Add(this.tpUDP);
+            this.tabControl5.Controls.Add(this.tpSSF);
+            this.tabControl5.Controls.Add(this.tpHLS);
+            this.tabControl5.Controls.Add(this.tpNSExternal);
             this.tabControl5.Location = new System.Drawing.Point(6, 73);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
             this.tabControl5.Size = new System.Drawing.Size(292, 382);
             this.tabControl5.TabIndex = 18;
             // 
-            // tabPage23
+            // tpWMV
             // 
-            this.tabPage23.Controls.Add(this.label48);
-            this.tabPage23.Controls.Add(this.edNetworkURL);
-            this.tabPage23.Controls.Add(this.edWMVNetworkPort);
-            this.tabPage23.Controls.Add(this.label47);
-            this.tabPage23.Controls.Add(this.btRefreshClients);
-            this.tabPage23.Controls.Add(this.lbNetworkClients);
-            this.tabPage23.Controls.Add(this.rbNetworkStreamingUseExternalProfile);
-            this.tabPage23.Controls.Add(this.rbNetworkStreamingUseMainWMVSettings);
-            this.tabPage23.Controls.Add(this.label81);
-            this.tabPage23.Controls.Add(this.label80);
-            this.tabPage23.Controls.Add(this.edMaximumClients);
-            this.tabPage23.Controls.Add(this.label46);
-            this.tabPage23.Controls.Add(this.btSelectWMVProfileNetwork);
-            this.tabPage23.Controls.Add(this.edNetworkStreamingWMVProfile);
-            this.tabPage23.Controls.Add(this.label44);
-            this.tabPage23.Location = new System.Drawing.Point(4, 22);
-            this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage23.Size = new System.Drawing.Size(284, 356);
-            this.tabPage23.TabIndex = 0;
-            this.tabPage23.Text = "WMV";
-            this.tabPage23.UseVisualStyleBackColor = true;
+            this.tpWMV.Controls.Add(this.label48);
+            this.tpWMV.Controls.Add(this.edNetworkURL);
+            this.tpWMV.Controls.Add(this.edWMVNetworkPort);
+            this.tpWMV.Controls.Add(this.label47);
+            this.tpWMV.Controls.Add(this.btRefreshClients);
+            this.tpWMV.Controls.Add(this.lbNetworkClients);
+            this.tpWMV.Controls.Add(this.rbNetworkStreamingUseExternalProfile);
+            this.tpWMV.Controls.Add(this.rbNetworkStreamingUseMainWMVSettings);
+            this.tpWMV.Controls.Add(this.label81);
+            this.tpWMV.Controls.Add(this.label80);
+            this.tpWMV.Controls.Add(this.edMaximumClients);
+            this.tpWMV.Controls.Add(this.label46);
+            this.tpWMV.Controls.Add(this.btSelectWMVProfileNetwork);
+            this.tpWMV.Controls.Add(this.edNetworkStreamingWMVProfile);
+            this.tpWMV.Controls.Add(this.label44);
+            this.tpWMV.Location = new System.Drawing.Point(4, 22);
+            this.tpWMV.Name = "tpWMV";
+            this.tpWMV.Padding = new System.Windows.Forms.Padding(3);
+            this.tpWMV.Size = new System.Drawing.Size(284, 356);
+            this.tpWMV.TabIndex = 0;
+            this.tpWMV.Text = "WMV";
+            this.tpWMV.UseVisualStyleBackColor = true;
             // 
             // label48
             // 
@@ -4974,18 +4988,18 @@ namespace VideoCapture_CSharp_Demo
             this.label44.TabIndex = 18;
             this.label44.Text = "File name";
             // 
-            // tabPage108
+            // tpRTSP
             // 
-            this.tabPage108.Controls.Add(this.edNetworkRTSPURL);
-            this.tabPage108.Controls.Add(this.label367);
-            this.tabPage108.Controls.Add(this.label366);
-            this.tabPage108.Location = new System.Drawing.Point(4, 22);
-            this.tabPage108.Name = "tabPage108";
-            this.tabPage108.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage108.Size = new System.Drawing.Size(284, 356);
-            this.tabPage108.TabIndex = 2;
-            this.tabPage108.Text = "RTSP";
-            this.tabPage108.UseVisualStyleBackColor = true;
+            this.tpRTSP.Controls.Add(this.edNetworkRTSPURL);
+            this.tpRTSP.Controls.Add(this.label367);
+            this.tpRTSP.Controls.Add(this.label366);
+            this.tpRTSP.Location = new System.Drawing.Point(4, 22);
+            this.tpRTSP.Name = "tpRTSP";
+            this.tpRTSP.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRTSP.Size = new System.Drawing.Size(284, 356);
+            this.tpRTSP.TabIndex = 2;
+            this.tpRTSP.Text = "RTSP";
+            this.tpRTSP.UseVisualStyleBackColor = true;
             // 
             // edNetworkRTSPURL
             // 
@@ -5013,23 +5027,23 @@ namespace VideoCapture_CSharp_Demo
             this.label366.TabIndex = 2;
             this.label366.Text = "MP4 output settings will be used";
             // 
-            // tabPage109
+            // tpRTMP
             // 
-            this.tabPage109.Controls.Add(this.cbNetworkRTMPFFMPEGUsePipes);
-            this.tabPage109.Controls.Add(this.linkLabel11);
-            this.tabPage109.Controls.Add(this.linkLabel8);
-            this.tabPage109.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
-            this.tabPage109.Controls.Add(this.rbNetworkRTMPFFMPEG);
-            this.tabPage109.Controls.Add(this.edNetworkRTMPURL);
-            this.tabPage109.Controls.Add(this.label368);
-            this.tabPage109.Controls.Add(this.label369);
-            this.tabPage109.Location = new System.Drawing.Point(4, 22);
-            this.tabPage109.Name = "tabPage109";
-            this.tabPage109.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage109.Size = new System.Drawing.Size(284, 356);
-            this.tabPage109.TabIndex = 3;
-            this.tabPage109.Text = "RTMP";
-            this.tabPage109.UseVisualStyleBackColor = true;
+            this.tpRTMP.Controls.Add(this.cbNetworkRTMPFFMPEGUsePipes);
+            this.tpRTMP.Controls.Add(this.linkLabel11);
+            this.tpRTMP.Controls.Add(this.linkLabel8);
+            this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
+            this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEG);
+            this.tpRTMP.Controls.Add(this.edNetworkRTMPURL);
+            this.tpRTMP.Controls.Add(this.label368);
+            this.tpRTMP.Controls.Add(this.label369);
+            this.tpRTMP.Location = new System.Drawing.Point(4, 22);
+            this.tpRTMP.Name = "tpRTMP";
+            this.tpRTMP.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRTMP.Size = new System.Drawing.Size(284, 356);
+            this.tpRTMP.TabIndex = 3;
+            this.tpRTMP.Text = "RTMP";
+            this.tpRTMP.UseVisualStyleBackColor = true;
             // 
             // cbNetworkRTMPFFMPEGUsePipes
             // 
@@ -5111,24 +5125,74 @@ namespace VideoCapture_CSharp_Demo
             this.label369.TabIndex = 7;
             this.label369.Text = "Format settings located on output format tab";
             // 
-            // tabPage138
+            // tpNDI
             // 
-            this.tabPage138.Controls.Add(this.cbNetworkUDPFFMPEGUsePipes);
-            this.tabPage138.Controls.Add(this.label314);
-            this.tabPage138.Controls.Add(this.label313);
-            this.tabPage138.Controls.Add(this.linkLabel9);
-            this.tabPage138.Controls.Add(this.label484);
-            this.tabPage138.Controls.Add(this.edNetworkUDPURL);
-            this.tabPage138.Controls.Add(this.label372);
-            this.tabPage138.Controls.Add(this.rbNetworkUDPFFMPEGCustom);
-            this.tabPage138.Controls.Add(this.rbNetworkUDPFFMPEG);
-            this.tabPage138.Location = new System.Drawing.Point(4, 22);
-            this.tabPage138.Name = "tabPage138";
-            this.tabPage138.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage138.Size = new System.Drawing.Size(284, 356);
-            this.tabPage138.TabIndex = 5;
-            this.tabPage138.Text = "UDP";
-            this.tabPage138.UseVisualStyleBackColor = true;
+            this.tpNDI.Controls.Add(this.linkLabel6);
+            this.tpNDI.Controls.Add(this.label38);
+            this.tpNDI.Controls.Add(this.label31);
+            this.tpNDI.Controls.Add(this.edNDIURL);
+            this.tpNDI.Controls.Add(this.edNDIName);
+            this.tpNDI.Controls.Add(this.label30);
+            this.tpNDI.Location = new System.Drawing.Point(4, 22);
+            this.tpNDI.Name = "tpNDI";
+            this.tpNDI.Padding = new System.Windows.Forms.Padding(3);
+            this.tpNDI.Size = new System.Drawing.Size(284, 356);
+            this.tpNDI.TabIndex = 7;
+            this.tpNDI.Text = "NDI";
+            this.tpNDI.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(16, 64);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(86, 13);
+            this.label31.TabIndex = 34;
+            this.label31.Text = "Connection URL";
+            // 
+            // edNDIURL
+            // 
+            this.edNDIURL.Location = new System.Drawing.Point(19, 80);
+            this.edNDIURL.Name = "edNDIURL";
+            this.edNDIURL.ReadOnly = true;
+            this.edNDIURL.Size = new System.Drawing.Size(243, 20);
+            this.edNDIURL.TabIndex = 33;
+            // 
+            // edNDIName
+            // 
+            this.edNDIName.Location = new System.Drawing.Point(19, 28);
+            this.edNDIName.Name = "edNDIName";
+            this.edNDIName.Size = new System.Drawing.Size(243, 20);
+            this.edNDIName.TabIndex = 1;
+            this.edNDIName.Text = "Main";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(16, 12);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(35, 13);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "Name";
+            // 
+            // tpUDP
+            // 
+            this.tpUDP.Controls.Add(this.cbNetworkUDPFFMPEGUsePipes);
+            this.tpUDP.Controls.Add(this.label314);
+            this.tpUDP.Controls.Add(this.label313);
+            this.tpUDP.Controls.Add(this.linkLabel9);
+            this.tpUDP.Controls.Add(this.label484);
+            this.tpUDP.Controls.Add(this.edNetworkUDPURL);
+            this.tpUDP.Controls.Add(this.label372);
+            this.tpUDP.Controls.Add(this.rbNetworkUDPFFMPEGCustom);
+            this.tpUDP.Controls.Add(this.rbNetworkUDPFFMPEG);
+            this.tpUDP.Location = new System.Drawing.Point(4, 22);
+            this.tpUDP.Name = "tpUDP";
+            this.tpUDP.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUDP.Size = new System.Drawing.Size(284, 356);
+            this.tpUDP.TabIndex = 5;
+            this.tpUDP.Text = "UDP";
+            this.tpUDP.UseVisualStyleBackColor = true;
             // 
             // cbNetworkUDPFFMPEGUsePipes
             // 
@@ -5217,24 +5281,24 @@ namespace VideoCapture_CSharp_Demo
             this.rbNetworkUDPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
             this.rbNetworkUDPFFMPEG.UseVisualStyleBackColor = true;
             // 
-            // tabPage110
+            // tpSSF
             // 
-            this.tabPage110.Controls.Add(this.cbNetworkSSUsePipes);
-            this.tabPage110.Controls.Add(this.linkLabel10);
-            this.tabPage110.Controls.Add(this.rbNetworkSSFFMPEGCustom);
-            this.tabPage110.Controls.Add(this.rbNetworkSSFFMPEGDefault);
-            this.tabPage110.Controls.Add(this.linkLabel5);
-            this.tabPage110.Controls.Add(this.edNetworkSSURL);
-            this.tabPage110.Controls.Add(this.label370);
-            this.tabPage110.Controls.Add(this.label371);
-            this.tabPage110.Controls.Add(this.rbNetworkSSSoftware);
-            this.tabPage110.Location = new System.Drawing.Point(4, 22);
-            this.tabPage110.Name = "tabPage110";
-            this.tabPage110.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage110.Size = new System.Drawing.Size(284, 356);
-            this.tabPage110.TabIndex = 4;
-            this.tabPage110.Text = "IIS Smooth Streaming";
-            this.tabPage110.UseVisualStyleBackColor = true;
+            this.tpSSF.Controls.Add(this.cbNetworkSSUsePipes);
+            this.tpSSF.Controls.Add(this.linkLabel10);
+            this.tpSSF.Controls.Add(this.rbNetworkSSFFMPEGCustom);
+            this.tpSSF.Controls.Add(this.rbNetworkSSFFMPEGDefault);
+            this.tpSSF.Controls.Add(this.linkLabel5);
+            this.tpSSF.Controls.Add(this.edNetworkSSURL);
+            this.tpSSF.Controls.Add(this.label370);
+            this.tpSSF.Controls.Add(this.label371);
+            this.tpSSF.Controls.Add(this.rbNetworkSSSoftware);
+            this.tpSSF.Location = new System.Drawing.Point(4, 22);
+            this.tpSSF.Name = "tpSSF";
+            this.tpSSF.Padding = new System.Windows.Forms.Padding(3);
+            this.tpSSF.Size = new System.Drawing.Size(284, 356);
+            this.tpSSF.TabIndex = 4;
+            this.tpSSF.Text = "IIS Smooth Streaming";
+            this.tpSSF.UseVisualStyleBackColor = true;
             // 
             // cbNetworkSSUsePipes
             // 
@@ -5326,31 +5390,31 @@ namespace VideoCapture_CSharp_Demo
             this.rbNetworkSSSoftware.Text = "H264 / AAC using software encoder / NVENC";
             this.rbNetworkSSSoftware.UseVisualStyleBackColor = true;
             // 
-            // tabPage104
+            // tpHLS
             // 
-            this.tabPage104.Controls.Add(this.label19);
-            this.tabPage104.Controls.Add(this.edHLSEmbeddedHTTPServerPort);
-            this.tabPage104.Controls.Add(this.cbHLSEmbeddedHTTPServerEnabled);
-            this.tabPage104.Controls.Add(this.cbHLSMode);
-            this.tabPage104.Controls.Add(this.label6);
-            this.tabPage104.Controls.Add(this.lbHLSConfigure);
-            this.tabPage104.Controls.Add(this.label532);
-            this.tabPage104.Controls.Add(this.label531);
-            this.tabPage104.Controls.Add(this.label530);
-            this.tabPage104.Controls.Add(this.label529);
-            this.tabPage104.Controls.Add(this.edHLSSegmentCount);
-            this.tabPage104.Controls.Add(this.label519);
-            this.tabPage104.Controls.Add(this.edHLSSegmentDuration);
-            this.tabPage104.Controls.Add(this.btSelectHLSOutputFolder);
-            this.tabPage104.Controls.Add(this.edHLSOutputFolder);
-            this.tabPage104.Controls.Add(this.label380);
-            this.tabPage104.Location = new System.Drawing.Point(4, 22);
-            this.tabPage104.Name = "tabPage104";
-            this.tabPage104.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage104.Size = new System.Drawing.Size(284, 356);
-            this.tabPage104.TabIndex = 6;
-            this.tabPage104.Text = "HLS";
-            this.tabPage104.UseVisualStyleBackColor = true;
+            this.tpHLS.Controls.Add(this.label19);
+            this.tpHLS.Controls.Add(this.edHLSEmbeddedHTTPServerPort);
+            this.tpHLS.Controls.Add(this.cbHLSEmbeddedHTTPServerEnabled);
+            this.tpHLS.Controls.Add(this.cbHLSMode);
+            this.tpHLS.Controls.Add(this.label6);
+            this.tpHLS.Controls.Add(this.lbHLSConfigure);
+            this.tpHLS.Controls.Add(this.label532);
+            this.tpHLS.Controls.Add(this.label531);
+            this.tpHLS.Controls.Add(this.label530);
+            this.tpHLS.Controls.Add(this.label529);
+            this.tpHLS.Controls.Add(this.edHLSSegmentCount);
+            this.tpHLS.Controls.Add(this.label519);
+            this.tpHLS.Controls.Add(this.edHLSSegmentDuration);
+            this.tpHLS.Controls.Add(this.btSelectHLSOutputFolder);
+            this.tpHLS.Controls.Add(this.edHLSOutputFolder);
+            this.tpHLS.Controls.Add(this.label380);
+            this.tpHLS.Location = new System.Drawing.Point(4, 22);
+            this.tpHLS.Name = "tpHLS";
+            this.tpHLS.Padding = new System.Windows.Forms.Padding(3);
+            this.tpHLS.Size = new System.Drawing.Size(284, 356);
+            this.tpHLS.TabIndex = 6;
+            this.tpHLS.Text = "HLS";
+            this.tpHLS.UseVisualStyleBackColor = true;
             // 
             // label19
             // 
@@ -5500,17 +5564,17 @@ namespace VideoCapture_CSharp_Demo
             this.label380.TabIndex = 0;
             this.label380.Text = "Output folder for video files and playlist";
             // 
-            // tabPage24
+            // tpNSExternal
             // 
-            this.tabPage24.Controls.Add(this.linkLabel4);
-            this.tabPage24.Controls.Add(this.linkLabel2);
-            this.tabPage24.Location = new System.Drawing.Point(4, 22);
-            this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage24.Size = new System.Drawing.Size(284, 356);
-            this.tabPage24.TabIndex = 1;
-            this.tabPage24.Text = "External virtual devices";
-            this.tabPage24.UseVisualStyleBackColor = true;
+            this.tpNSExternal.Controls.Add(this.linkLabel4);
+            this.tpNSExternal.Controls.Add(this.linkLabel2);
+            this.tpNSExternal.Location = new System.Drawing.Point(4, 22);
+            this.tpNSExternal.Name = "tpNSExternal";
+            this.tpNSExternal.Padding = new System.Windows.Forms.Padding(3);
+            this.tpNSExternal.Size = new System.Drawing.Size(284, 356);
+            this.tpNSExternal.TabIndex = 1;
+            this.tpNSExternal.Text = "External virtual devices";
+            this.tpNSExternal.UseVisualStyleBackColor = true;
             // 
             // linkLabel4
             // 
@@ -9402,10 +9466,13 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.cbIPURL);
+            this.tabPage144.Controls.Add(this.btListNDISources);
+            this.tabPage144.Controls.Add(this.lbNDI);
+            this.tabPage144.Controls.Add(this.label25);
             this.tabPage144.Controls.Add(this.linkLabel3);
             this.tabPage144.Controls.Add(this.label22);
             this.tabPage144.Controls.Add(this.linkLabel7);
-            this.tabPage144.Controls.Add(this.edIPUrl);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
             this.tabPage144.Controls.Add(this.btShowIPCamDatabase);
@@ -9429,10 +9496,49 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
             // 
+            // cbIPURL
+            // 
+            this.cbIPURL.FormattingEnabled = true;
+            this.cbIPURL.Location = new System.Drawing.Point(55, 14);
+            this.cbIPURL.Name = "cbIPURL";
+            this.cbIPURL.Size = new System.Drawing.Size(373, 21);
+            this.cbIPURL.TabIndex = 89;
+            this.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1";
+            // 
+            // btListNDISources
+            // 
+            this.btListNDISources.Location = new System.Drawing.Point(13, 218);
+            this.btListNDISources.Name = "btListNDISources";
+            this.btListNDISources.Size = new System.Drawing.Size(123, 23);
+            this.btListNDISources.TabIndex = 88;
+            this.btListNDISources.Text = "List NDI sources";
+            this.btListNDISources.UseVisualStyleBackColor = true;
+            this.btListNDISources.Click += new System.EventHandler(this.btListNDISources_Click);
+            // 
+            // lbNDI
+            // 
+            this.lbNDI.AutoSize = true;
+            this.lbNDI.Location = new System.Drawing.Point(259, 194);
+            this.lbNDI.Name = "lbNDI";
+            this.lbNDI.Size = new System.Drawing.Size(86, 13);
+            this.lbNDI.TabIndex = 87;
+            this.lbNDI.TabStop = true;
+            this.lbNDI.Text = "vendor\'s website";
+            this.lbNDI.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(10, 194);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(257, 13);
+            this.label25.TabIndex = 86;
+            this.label25.Text = "To use NDI please install NDI SDK for Windows from";
+            // 
             // linkLabel3
             // 
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(373, 195);
+            this.linkLabel3.Location = new System.Drawing.Point(373, 166);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(24, 13);
             this.linkLabel3.TabIndex = 85;
@@ -9443,7 +9549,7 @@ namespace VideoCapture_CSharp_Demo
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 195);
+            this.label22.Location = new System.Drawing.Point(10, 166);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(327, 13);
             this.label22.TabIndex = 84;
@@ -9452,21 +9558,13 @@ namespace VideoCapture_CSharp_Demo
             // linkLabel7
             // 
             this.linkLabel7.AutoSize = true;
-            this.linkLabel7.Location = new System.Drawing.Point(343, 195);
+            this.linkLabel7.Location = new System.Drawing.Point(343, 166);
             this.linkLabel7.Name = "linkLabel7";
             this.linkLabel7.Size = new System.Drawing.Size(24, 13);
             this.linkLabel7.TabIndex = 83;
             this.linkLabel7.TabStop = true;
             this.linkLabel7.Text = "x86";
             this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
-            // 
-            // edIPUrl
-            // 
-            this.edIPUrl.Location = new System.Drawing.Point(55, 15);
-            this.edIPUrl.Name = "edIPUrl";
-            this.edIPUrl.Size = new System.Drawing.Size(360, 20);
-            this.edIPUrl.TabIndex = 80;
-            this.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label165
             // 
@@ -9489,7 +9587,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btShowIPCamDatabase
             // 
-            this.btShowIPCamDatabase.Location = new System.Drawing.Point(298, 218);
+            this.btShowIPCamDatabase.Location = new System.Drawing.Point(293, 218);
             this.btShowIPCamDatabase.Name = "btShowIPCamDatabase";
             this.btShowIPCamDatabase.Size = new System.Drawing.Size(135, 23);
             this.btShowIPCamDatabase.TabIndex = 77;
@@ -9500,7 +9598,7 @@ namespace VideoCapture_CSharp_Demo
             // cbIPDisconnect
             // 
             this.cbIPDisconnect.AutoSize = true;
-            this.cbIPDisconnect.Location = new System.Drawing.Point(13, 167);
+            this.cbIPDisconnect.Location = new System.Drawing.Point(292, 98);
             this.cbIPDisconnect.Name = "cbIPDisconnect";
             this.cbIPDisconnect.Size = new System.Drawing.Size(136, 17);
             this.cbIPDisconnect.TabIndex = 75;
@@ -9509,7 +9607,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // edIPForcedFramerateID
             // 
-            this.edIPForcedFramerateID.Location = new System.Drawing.Point(265, 140);
+            this.edIPForcedFramerateID.Location = new System.Drawing.Point(265, 134);
             this.edIPForcedFramerateID.Margin = new System.Windows.Forms.Padding(2);
             this.edIPForcedFramerateID.Name = "edIPForcedFramerateID";
             this.edIPForcedFramerateID.Size = new System.Drawing.Size(32, 20);
@@ -9519,7 +9617,7 @@ namespace VideoCapture_CSharp_Demo
             // label344
             // 
             this.label344.AutoSize = true;
-            this.label344.Location = new System.Drawing.Point(163, 142);
+            this.label344.Location = new System.Drawing.Point(163, 136);
             this.label344.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label344.Name = "label344";
             this.label344.Size = new System.Drawing.Size(98, 13);
@@ -9528,7 +9626,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // edIPForcedFramerate
             // 
-            this.edIPForcedFramerate.Location = new System.Drawing.Point(112, 140);
+            this.edIPForcedFramerate.Location = new System.Drawing.Point(112, 134);
             this.edIPForcedFramerate.Margin = new System.Windows.Forms.Padding(2);
             this.edIPForcedFramerate.Name = "edIPForcedFramerate";
             this.edIPForcedFramerate.Size = new System.Drawing.Size(32, 20);
@@ -9538,7 +9636,7 @@ namespace VideoCapture_CSharp_Demo
             // label295
             // 
             this.label295.AutoSize = true;
-            this.label295.Location = new System.Drawing.Point(10, 142);
+            this.label295.Location = new System.Drawing.Point(10, 136);
             this.label295.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label295.Name = "label295";
             this.label295.Size = new System.Drawing.Size(84, 13);
@@ -9605,7 +9703,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbIPAudioCapture.AutoSize = true;
             this.cbIPAudioCapture.Checked = true;
             this.cbIPAudioCapture.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbIPAudioCapture.Location = new System.Drawing.Point(166, 167);
+            this.cbIPAudioCapture.Location = new System.Drawing.Point(292, 75);
             this.cbIPAudioCapture.Name = "cbIPAudioCapture";
             this.cbIPAudioCapture.Size = new System.Drawing.Size(92, 17);
             this.cbIPAudioCapture.TabIndex = 62;
@@ -13075,6 +13173,26 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.Location = new System.Drawing.Point(16, 128);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(86, 13);
+            this.linkLabel6.TabIndex = 89;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "vendor\'s website";
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(16, 115);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(257, 13);
+            this.label38.TabIndex = 88;
+            this.label38.Text = "To use NDI please install NDI SDK for Windows from";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -13211,20 +13329,22 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             this.tabControl5.ResumeLayout(false);
-            this.tabPage23.ResumeLayout(false);
-            this.tabPage23.PerformLayout();
-            this.tabPage108.ResumeLayout(false);
-            this.tabPage108.PerformLayout();
-            this.tabPage109.ResumeLayout(false);
-            this.tabPage109.PerformLayout();
-            this.tabPage138.ResumeLayout(false);
-            this.tabPage138.PerformLayout();
-            this.tabPage110.ResumeLayout(false);
-            this.tabPage110.PerformLayout();
-            this.tabPage104.ResumeLayout(false);
-            this.tabPage104.PerformLayout();
-            this.tabPage24.ResumeLayout(false);
-            this.tabPage24.PerformLayout();
+            this.tpWMV.ResumeLayout(false);
+            this.tpWMV.PerformLayout();
+            this.tpRTSP.ResumeLayout(false);
+            this.tpRTSP.PerformLayout();
+            this.tpRTMP.ResumeLayout(false);
+            this.tpRTMP.PerformLayout();
+            this.tpNDI.ResumeLayout(false);
+            this.tpNDI.PerformLayout();
+            this.tpUDP.ResumeLayout(false);
+            this.tpUDP.PerformLayout();
+            this.tpSSF.ResumeLayout(false);
+            this.tpSSF.PerformLayout();
+            this.tpHLS.ResumeLayout(false);
+            this.tpHLS.PerformLayout();
+            this.tpNSExternal.ResumeLayout(false);
+            this.tpNSExternal.PerformLayout();
             this.tabPage28.ResumeLayout(false);
             this.tabPage28.PerformLayout();
             this.groupBox19.ResumeLayout(false);
@@ -13768,7 +13888,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.TextBox edNewFilename;
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.TabControl tabControl5;
-        private System.Windows.Forms.TabPage tabPage23;
+        private System.Windows.Forms.TabPage tpWMV;
         private System.Windows.Forms.Button btRefreshClients;
         private System.Windows.Forms.ListBox lbNetworkClients;
         private System.Windows.Forms.RadioButton rbNetworkStreamingUseExternalProfile;
@@ -13780,7 +13900,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Button btSelectWMVProfileNetwork;
         private System.Windows.Forms.TextBox edNetworkStreamingWMVProfile;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.TabPage tabPage24;
+        private System.Windows.Forms.TabPage tpNSExternal;
         private System.Windows.Forms.TextBox edWMVNetworkPort;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.TabPage tabPage66;
@@ -14098,18 +14218,18 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label363;
         private System.Windows.Forms.TextBox edFaceTrackingFaces;
         private System.Windows.Forms.Label label364;
-        private System.Windows.Forms.TabPage tabPage108;
+        private System.Windows.Forms.TabPage tpRTSP;
         private System.Windows.Forms.Label label366;
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.TextBox edNetworkURL;
         private System.Windows.Forms.TextBox edNetworkRTSPURL;
         private System.Windows.Forms.Label label367;
         private System.Windows.Forms.ComboBox cbNetworkStreamingMode;
-        private System.Windows.Forms.TabPage tabPage109;
+        private System.Windows.Forms.TabPage tpRTMP;
         private System.Windows.Forms.TextBox edNetworkRTMPURL;
         private System.Windows.Forms.Label label368;
         private System.Windows.Forms.Label label369;
-        private System.Windows.Forms.TabPage tabPage110;
+        private System.Windows.Forms.TabPage tpSSF;
         private System.Windows.Forms.TextBox edNetworkSSURL;
         private System.Windows.Forms.Label label370;
         private System.Windows.Forms.Label label371;
@@ -14234,7 +14354,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.TrackBar tbAudioInputGainL;
         private System.Windows.Forms.Label label451;
         private System.Windows.Forms.CheckBox cbScreenCapture_DesktopDuplication;
-        private System.Windows.Forms.TabPage tabPage138;
+        private System.Windows.Forms.TabPage tpUDP;
         private System.Windows.Forms.RadioButton rbNetworkUDPFFMPEGCustom;
         private System.Windows.Forms.RadioButton rbNetworkUDPFFMPEG;
         private System.Windows.Forms.TextBox edNetworkUDPURL;
@@ -14329,7 +14449,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.LinkLabel linkLabel11;
         private System.Windows.Forms.Label label314;
         private System.Windows.Forms.Label label313;
-        private System.Windows.Forms.TabPage tabPage104;
+        private System.Windows.Forms.TabPage tpHLS;
         private System.Windows.Forms.Button btMPEGDemuxSettings;
         private System.Windows.Forms.ComboBox cbMPEGDemuxer;
         private System.Windows.Forms.Label label315;
@@ -14404,7 +14524,6 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.TextBox edCustomAudioSourceURL;
         private System.Windows.Forms.Label label517;
         private System.Windows.Forms.TextBox edONVIFURL;
-        private System.Windows.Forms.TextBox edIPUrl;
         private System.Windows.Forms.Label label165;
         private System.Windows.Forms.TextBox edONVIFPassword;
         private System.Windows.Forms.Label label378;
@@ -14501,6 +14620,17 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.LinkLabel lbNDI;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TabPage tpNDI;
+        private System.Windows.Forms.TextBox edNDIName;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox edNDIURL;
+        private System.Windows.Forms.ComboBox cbIPURL;
+        private System.Windows.Forms.Button btListNDISources;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.Label label38;
     }
 }
 

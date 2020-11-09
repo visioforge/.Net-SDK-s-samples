@@ -47,9 +47,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.cbIPURL = new System.Windows.Forms.ComboBox();
+            this.btListNDISources = new System.Windows.Forms.Button();
+            this.lbNDI = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.edIPUrl = new System.Windows.Forms.TextBox();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
             this.btShowIPCamDatabase = new System.Windows.Forms.Button();
@@ -185,9 +188,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.cbIPURL);
+            this.tabPage144.Controls.Add(this.btListNDISources);
+            this.tabPage144.Controls.Add(this.lbNDI);
+            this.tabPage144.Controls.Add(this.label6);
             this.tabPage144.Controls.Add(this.linkLabel1);
             this.tabPage144.Controls.Add(this.label1);
-            this.tabPage144.Controls.Add(this.edIPUrl);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
             this.tabPage144.Controls.Add(this.btShowIPCamDatabase);
@@ -212,6 +218,45 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
             // 
+            // cbIPURL
+            // 
+            this.cbIPURL.FormattingEnabled = true;
+            this.cbIPURL.Location = new System.Drawing.Point(57, 10);
+            this.cbIPURL.Name = "cbIPURL";
+            this.cbIPURL.Size = new System.Drawing.Size(360, 21);
+            this.cbIPURL.TabIndex = 86;
+            this.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1";
+            // 
+            // btListNDISources
+            // 
+            this.btListNDISources.Location = new System.Drawing.Point(294, 86);
+            this.btListNDISources.Name = "btListNDISources";
+            this.btListNDISources.Size = new System.Drawing.Size(123, 23);
+            this.btListNDISources.TabIndex = 85;
+            this.btListNDISources.Text = "List NDI sources";
+            this.btListNDISources.UseVisualStyleBackColor = true;
+            this.btListNDISources.Click += new System.EventHandler(this.btListNDISources_Click);
+            // 
+            // lbNDI
+            // 
+            this.lbNDI.AutoSize = true;
+            this.lbNDI.Location = new System.Drawing.Point(260, 220);
+            this.lbNDI.Name = "lbNDI";
+            this.lbNDI.Size = new System.Drawing.Size(86, 13);
+            this.lbNDI.TabIndex = 84;
+            this.lbNDI.TabStop = true;
+            this.lbNDI.Text = "vendor\'s website";
+            this.lbNDI.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 220);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(257, 13);
+            this.label6.TabIndex = 83;
+            this.label6.Text = "To use NDI please install NDI SDK for Windows from";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -231,14 +276,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.label1.Size = new System.Drawing.Size(327, 13);
             this.label1.TabIndex = 81;
             this.label1.Text = "Please install VLC redist EXE or NuGet package to use VLC engine ";
-            // 
-            // edIPUrl
-            // 
-            this.edIPUrl.Location = new System.Drawing.Point(57, 10);
-            this.edIPUrl.Name = "edIPUrl";
-            this.edIPUrl.Size = new System.Drawing.Size(360, 20);
-            this.edIPUrl.TabIndex = 80;
-            this.edIPUrl.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label165
             // 
@@ -1342,7 +1379,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.Label label510;
         private System.Windows.Forms.Label lbONVIFCameraInfo;
         private System.Windows.Forms.Button btONVIFConnect;
-        private System.Windows.Forms.TextBox edIPUrl;
         private System.Windows.Forms.Label label165;
         private System.Windows.Forms.TextBox edONVIFPassword;
         private System.Windows.Forms.Label label378;
@@ -1382,6 +1418,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lbNDI;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btListNDISources;
+        private System.Windows.Forms.ComboBox cbIPURL;
     }
 }
 

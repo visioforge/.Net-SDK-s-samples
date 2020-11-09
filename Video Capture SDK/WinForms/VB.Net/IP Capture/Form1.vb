@@ -194,7 +194,7 @@ Public Class Form1
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI
         End Select
 
-        VideoCapture1.IP_Camera_Source.URL = edIPUrl.Text
+        VideoCapture1.IP_Camera_Source.URL = cbIPURL.Text
         VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.Checked
         VideoCapture1.IP_Camera_Source.Login = edIPLogin.Text
         VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text
@@ -339,7 +339,7 @@ Public Class Form1
             End If
 
             edONVIFLiveVideoURL.Text = onvifControl.GetVideoURL()
-            edIPUrl.Text = edONVIFLiveVideoURL.Text
+            cbIPURL.Text = edONVIFLiveVideoURL.Text
 
             edIPLogin.Text = edONVIFLogin.Text
             edIPPassword.Text = edONVIFPassword.Text
@@ -798,6 +798,24 @@ Public Class Form1
     Private Sub linkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
         Process.Start(startInfo)
+    End Sub
+
+    Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked
+        Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub btListNDISources_Click(sender As Object, e As EventArgs) Handles btListNDISources.Click
+        cbIPURL.Items.Clear()
+
+        Dim lst As Uri() = VideoCapture1.IP_Camera_NDI_ListSources()
+        For Each uri As Uri In lst
+            cbIPURL.Items.Add(uri)
+        Next
+
+        If (cbIPURL.Items.Count > 0) Then
+            cbIPURL.SelectedIndex = 0
+        End If
     End Sub
 End Class
 

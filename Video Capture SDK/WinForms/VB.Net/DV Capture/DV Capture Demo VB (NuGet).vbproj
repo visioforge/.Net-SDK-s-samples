@@ -153,37 +153,37 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x64">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGEXE.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture">
-<Version>12.1.7</Version>
+<Version>12.1.9</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
