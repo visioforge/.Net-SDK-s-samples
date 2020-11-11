@@ -392,6 +392,8 @@ namespace VideoCapture_CSharp_Demo
             this.label368 = new System.Windows.Forms.Label();
             this.label369 = new System.Windows.Forms.Label();
             this.tpNDI = new System.Windows.Forms.TabPage();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.label38 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.edNDIURL = new System.Windows.Forms.TextBox();
             this.edNDIName = new System.Windows.Forms.TextBox();
@@ -1139,8 +1141,6 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.label38 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -5140,6 +5140,26 @@ namespace VideoCapture_CSharp_Demo
             this.tpNDI.TabIndex = 7;
             this.tpNDI.Text = "NDI";
             this.tpNDI.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.Location = new System.Drawing.Point(16, 128);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(86, 13);
+            this.linkLabel6.TabIndex = 89;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "vendor\'s website";
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(16, 115);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(257, 13);
+            this.label38.TabIndex = 88;
+            this.label38.Text = "To use NDI please install NDI SDK for Windows from";
             // 
             // label31
             // 
@@ -9660,7 +9680,8 @@ namespace VideoCapture_CSharp_Demo
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",
             "RTSP Low Latency UDP",
-            "NDI"});
+            "NDI",
+            "NDI (Legacy)"});
             this.cbIPCameraType.Location = new System.Drawing.Point(55, 50);
             this.cbIPCameraType.Name = "cbIPCameraType";
             this.cbIPCameraType.Size = new System.Drawing.Size(227, 21);
@@ -13172,26 +13193,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.Location = new System.Drawing.Point(16, 128);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(86, 13);
-            this.linkLabel6.TabIndex = 89;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "vendor\'s website";
-            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(16, 115);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(257, 13);
-            this.label38.TabIndex = 88;
-            this.label38.Text = "To use NDI please install NDI SDK for Windows from";
             // 
             // Form1
             // 

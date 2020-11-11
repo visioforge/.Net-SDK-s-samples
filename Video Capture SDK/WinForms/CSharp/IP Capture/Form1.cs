@@ -166,6 +166,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 case 12:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
                     break;
+                case 13:
+                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
+                    break;
             }
 
             VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.Checked;

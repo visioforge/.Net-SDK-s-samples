@@ -1170,6 +1170,7 @@
                                     <ComboBoxItem Content="RTSP Low Latency TCP"/>
                                     <ComboBoxItem Content="RTSP Low Latency UDP"/>
                                     <ComboBoxItem Content="NDI" />
+                                    <ComboBoxItem Content="NDI (Legacy)" />
                                 </ComboBox>
                                 <Button x:Name="btShowIPCamDatabase" Content="Show IP cam database" HorizontalAlignment="Left" Margin="350,273,0,0" VerticalAlignment="Top" Width="148" Click="btShowIPCamDatabase_Click"/>
                                 <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="350,42,0,0" VerticalAlignment="Top"/>

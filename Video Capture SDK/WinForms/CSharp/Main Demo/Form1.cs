@@ -2400,6 +2400,9 @@ namespace VideoCapture_CSharp_Demo
                 case 12:
                     settings.Type = VFIPSource.NDI;
                     break;
+                case 13:
+                    settings.Type = VFIPSource.NDI_Legacy;
+                    break;
             }
 
             settings.AudioCapture = cbIPAudioCapture.Checked;

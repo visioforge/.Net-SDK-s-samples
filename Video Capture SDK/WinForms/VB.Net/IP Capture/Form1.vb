@@ -192,6 +192,8 @@ Public Class Form1
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = True
             Case 12
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI
+            Case 13
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy
         End Select
 
         VideoCapture1.IP_Camera_Source.URL = cbIPURL.Text

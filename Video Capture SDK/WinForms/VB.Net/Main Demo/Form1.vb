@@ -1908,6 +1908,8 @@ Public Class Form1
                 settings.RTSP_LowLatency_UseUDP = True
             Case 12
                 settings.Type = VFIPSource.NDI
+            Case 13
+                settings.Type = VFIPSource.NDI_Legacy
         End Select
 
         settings.AudioCapture = cbIPAudioCapture.Checked

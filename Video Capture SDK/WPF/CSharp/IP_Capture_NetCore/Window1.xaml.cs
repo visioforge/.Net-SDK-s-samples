@@ -291,6 +291,9 @@ namespace IP_Capture
                 case 12:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
                     break;
+                case 13:
+                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
+                    break;
             }
 
             VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.IsChecked == true;

@@ -382,7 +382,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",
             "RTSP Low Latency UDP",
-            "NDI"});
+            "NDI",
+            "NDI (Legacy)"});
             this.cbIPCameraType.Location = new System.Drawing.Point(57, 41);
             this.cbIPCameraType.Name = "cbIPCameraType";
             this.cbIPCameraType.Size = new System.Drawing.Size(227, 21);
