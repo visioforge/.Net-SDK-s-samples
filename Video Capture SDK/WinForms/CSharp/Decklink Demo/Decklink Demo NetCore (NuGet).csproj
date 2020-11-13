@@ -19,19 +19,19 @@
 
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.1.14</Version>
+<Version>12.1.15</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.1.14</Version>
+<Version>12.1.15</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.1.14</Version>
+<Version>12.1.15</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.1.14</Version>
+<Version>12.1.15</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture">
-<Version>12.1.14</Version>
+<Version>12.1.15</Version>
     </PackageReference>
   </ItemGroup>
   
