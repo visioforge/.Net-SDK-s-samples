@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="12.1.15.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="12.1.17.0" />
   </ItemGroup>
 
   <ItemGroup>
