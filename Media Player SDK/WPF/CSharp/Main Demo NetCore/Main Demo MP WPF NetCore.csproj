@@ -59,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="12.1.18.0" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="12.1.19.0" />
   </ItemGroup>
 
   <ItemGroup>
