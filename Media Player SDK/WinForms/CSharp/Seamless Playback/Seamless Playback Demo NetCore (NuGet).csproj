@@ -22,19 +22,19 @@
 
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.1.23</Version>
+<Version>12.1.24</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.1.23</Version>
+<Version>12.1.24</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.23</Version>
+<Version>12.1.24</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.23</Version>
+<Version>12.1.24</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.23</Version>
+<Version>12.1.24</Version>
     </PackageReference>
   </ItemGroup>
 
