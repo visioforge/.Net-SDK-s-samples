@@ -135,28 +135,28 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.24</Version>
+<Version>12.1.25</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
