@@ -75,22 +75,22 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x86">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoEdit">
-<Version>12.1.25</Version>
+<Version>12.1.26</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
