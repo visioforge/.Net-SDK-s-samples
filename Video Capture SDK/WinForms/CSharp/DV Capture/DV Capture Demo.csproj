@@ -5,19 +5,15 @@
     <RootNamespace>VisioForge_SDK_4_DV_Capture_CSharp_Demo</RootNamespace>
     <AssemblyName>WinForms DV Capture Demo</AssemblyName>
     <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-    <FileUpgradeFlags />
-    <UpgradeBackupLocation />
     <AssemblyTitle>DV Capture CSharp Demo</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>DV Capture CSharp Demo</Product>
-    <Copyright>Copyright © VisioForge 2010</Copyright>
-    <AssemblyVersion>14.0.5.0</AssemblyVersion>
-    <FileVersion>14.0.6.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.0.7.0</AssemblyVersion>
+    <FileVersion>14.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <PostBuildEvent />
-    <PostBuildEvent />
-    <PostBuildEvent />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>

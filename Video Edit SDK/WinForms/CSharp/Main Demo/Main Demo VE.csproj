@@ -6,30 +6,14 @@
     <AssemblyName>WinForms Main Demo</AssemblyName>
     <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-    <FileUpgradeFlags />
-    <UpgradeBackupLocation />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Video Edit SDK .Net CSharp Demo</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>VisioForge Video Edit SDK .Net</Product>
     <Description>VisioForge Video Edit SDK .Net CSharp Demo</Description>
-    <Copyright>Copyright ©  2010</Copyright>
-    <AssemblyVersion>14.0.5.0</AssemblyVersion>
-    <FileVersion>14.0.6.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.0.7.0</AssemblyVersion>
+    <FileVersion>14.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -11,7 +11,7 @@
     <RootNamespace>VideoCapture_VBNet_Demo</RootNamespace>
     <AssemblyName>VideoCapture_VBNet_Demo</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileUpgradeFlags></FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />

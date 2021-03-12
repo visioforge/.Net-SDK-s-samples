@@ -22,9 +22,9 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <AssemblyTitle>Video Capture Demo</AssemblyTitle>
     <Product>Video Capture Demo</Product>
-    <Copyright>Copyright ©  2017</Copyright>
-    <AssemblyVersion>14.0.5.0</AssemblyVersion>
-    <FileVersion>14.0.6.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.0.7.0</AssemblyVersion>
+    <FileVersion>14.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

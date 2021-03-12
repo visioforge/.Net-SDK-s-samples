@@ -4,9 +4,10 @@
     <RootNamespace>Video_Mixing_Demo</RootNamespace>
     <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Video Mixing Demo</AssemblyTitle>
     <Product>Video Mixing Demo</Product>
-    <Copyright>Copyright ©  2018</Copyright>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
     <AssemblyVersion>14.0.7.0</AssemblyVersion>
     <FileVersion>14.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>

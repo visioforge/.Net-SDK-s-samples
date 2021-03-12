@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("VideoCapture_VBNet_Demo")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyCompany("VisioForge")> 
 <Assembly: AssemblyProduct("VideoCapture_VBNet_Demo")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2007")> 
+<Assembly: AssemblyCopyright("Copyright © VisioForge 2006-2021")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

@@ -11,7 +11,7 @@
     <RootNamespace>VF_SDK_VB.NET_Audio_Capture_Demo</RootNamespace>
     <AssemblyName>VF SDK VB.NET Audio Capture Demo</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileUpgradeFlags></FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
