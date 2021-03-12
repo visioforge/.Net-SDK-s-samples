@@ -57,7 +57,7 @@ namespace Video_Player_Demo
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
                     break;
                 case 2:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG;
+                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG;
                     break;
                 case 3:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_VLC;
@@ -91,7 +91,7 @@ namespace Video_Player_Demo
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
             MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
-            timer1.Enabled = true;
+            timer1.Start();
         }
 
         private void btNextFrame_Click(object sender, EventArgs e)

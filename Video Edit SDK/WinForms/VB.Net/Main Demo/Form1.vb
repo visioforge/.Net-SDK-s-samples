@@ -8,6 +8,7 @@ Imports VisioForge.Controls.UI.Dialogs.VideoEffects
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports VisioForge.Tools
+Imports VisioForge.Types.FFMPEGEXE
 Imports VisioForge.Types.GPUVideoEffects
 Imports VisioForge.Types.OutputFormat
 Imports VisioForge.Types.VideoEffects
@@ -600,7 +601,7 @@ Public Class Form1
 
                     If (rbNetworkUDPFFMPEG.Checked) Then
 
-                        ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                        ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
 
                     Else
 
@@ -608,20 +609,24 @@ Public Class Form1
 
                     End If
 
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV
+                    ffmpegOutput.OutputMuxer = OutputMuxer.FLV
 
                     VideoEdit1.Network_Streaming_Output = ffmpegOutput
                     VideoEdit1.Network_Streaming_URL = edNetworkRTMPURL.Text
-
                 Case 3
+                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI
 
+                    Dim ndiOutput = New VFNDIOutput(edNDIName.Text)
+                    VideoEdit1.Network_Streaming_Output = ndiOutput
+                    edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}"
+                Case 4
                     VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE
 
                     Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
 
                     If (rbNetworkUDPFFMPEG.Checked) Then
 
-                        ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                        ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
 
                     Else
 
@@ -629,13 +634,11 @@ Public Class Form1
 
                     End If
 
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS
                     VideoEdit1.Network_Streaming_Output = ffmpegOutput
 
                     VideoEdit1.Network_Streaming_URL = edNetworkUDPURL.Text
-
-                Case 4
-
+                Case 5
                     If (rbNetworkSSSoftware.Checked) Then
 
                         VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW
@@ -648,7 +651,7 @@ Public Class Form1
 
                         If (rbNetworkSSFFMPEGDefault.Checked) Then
 
-                            ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                            ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
 
                         Else
 
@@ -656,17 +659,14 @@ Public Class Form1
 
                         End If
 
-                        ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ISMV
+                        ffmpegOutput.OutputMuxer = OutputMuxer.ISMV
                         VideoEdit1.Network_Streaming_Output = ffmpegOutput
 
                     End If
 
                     VideoEdit1.Network_Streaming_URL = edNetworkSSURL.Text
-
-                Case 5
-
+                Case 6
                     VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.External
-
             End Select
 
             VideoEdit1.Network_Streaming_Audio_Enabled = cbNetworkStreamingAudioEnabled.Checked
@@ -2875,6 +2875,11 @@ Public Class Form1
             edChromaKeyImage.Text = openFileDialog1.FileName
             ConfigureChromaKey()
         End If
+    End Sub
+
+    Private Sub LinkLabel6_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel6.LinkClicked
+        Dim startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
+        Process.Start(startInfo)
     End Sub
 End Class
 

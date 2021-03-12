@@ -59,11 +59,7 @@
             <ComboBoxItem Content="Auto (LAV engine)" />
             <ComboBoxItem Content="Auto (LAV engine, GPU)" />
             <ComboBoxItem Content="RTSP (Live555 engine)" />
-            <ComboBoxItem Content="HTTP (FFMPEG engine)" />
             <ComboBoxItem Content="MMS - WMV" />
-            <ComboBoxItem Content="RTSP - UDP (FFMPEG engine)" />
-            <ComboBoxItem Content="RTSP - TCP (FFMPEG engine)" />
-            <ComboBoxItem Content="RTSP over HTTP (FFMPEG engine)" />
             <ComboBoxItem Content="HTTP MJPEG Low Latency"/>
             <ComboBoxItem Content="RTSP Low Latency TCP"/>
             <ComboBoxItem Content="RTSP Low Latency UDP"/>

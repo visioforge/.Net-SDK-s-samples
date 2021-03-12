@@ -10,22 +10,16 @@
 namespace Computer_Vision_Demo
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Diagnostics;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Windows.Forms;
 
     using VisioForge.Controls.CV;
     using VisioForge.Shared.MFP;
     using VisioForge.Types;
     using VisioForge.Types.Sources;
-    using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -272,34 +266,37 @@ namespace Computer_Vision_Demo
 
             if (cbFDMosaic.Checked)
             {
-                foreach (var face in faces)
+                if (faces != null)
                 {
-                    var rect = face.Position;
-                    rect.Top -= 10;
-                    if (rect.Top < 0)
+                    foreach (var face in faces)
                     {
-                        rect.Top = 0;
-                    }
+                        var rect = face.Position;
+                        rect.Top -= 10;
+                        if (rect.Top < 0)
+                        {
+                            rect.Top = 0;
+                        }
 
-                    rect.Left -= 10;
-                    if (rect.Left < 0)
-                    {
-                        rect.Left = 0;
-                    }
+                        rect.Left -= 10;
+                        if (rect.Left < 0)
+                        {
+                            rect.Left = 0;
+                        }
 
-                    rect.Bottom += 10;
-                    if (rect.Bottom > frame.Height)
-                    {
-                        rect.Bottom = frame.Height;
-                    }
+                        rect.Bottom += 10;
+                        if (rect.Bottom > frame.Height)
+                        {
+                            rect.Bottom = frame.Height;
+                        }
 
-                    rect.Right += 10;
-                    if (rect.Right > frame.Width)
-                    {
-                        rect.Right = frame.Width;
+                        rect.Right += 10;
+                        if (rect.Right > frame.Width)
+                        {
+                            rect.Right = frame.Width;
+                        }
+
+                        MFP.EffectMosaicROI(frame.Data, frame.Width, frame.Height, 45, rect);
                     }
-                    
-                    MFP.EffectMosaicROI(frame.Data, frame.Width, frame.Height, 45, rect);
                 }
             }
         }
@@ -369,19 +366,7 @@ namespace Computer_Vision_Demo
                     settings.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.HTTP_FFMPEG;
-                    break;
-                case 5:
                     settings.Type = VFIPSource.MMS_WMV;
-                    break;
-                case 6:
-                    settings.Type = VFIPSource.RTSP_UDP_FFMPEG;
-                    break;
-                case 7:
-                    settings.Type = VFIPSource.RTSP_TCP_FFMPEG;
-                    break;
-                case 8:
-                    settings.Type = VFIPSource.RTSP_HTTP_FFMPEG;
                     break;
             }
 

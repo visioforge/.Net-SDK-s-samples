@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>youtube_player</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <Compile Remove="obj_netcore\**" />
@@ -15,29 +13,26 @@
     <None Remove="obj\**" />
     <None Remove="obj_netcore\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.0.68</Version>
+      <Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.0.68</Version>
+      <Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.0.68</Version>
+      <Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.0.68</Version>
+      <Version>12.0.68</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL">
-<Version>12.0.68</Version>
+      <Version>12.0.68</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -45,12 +40,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
 </Project>

@@ -1,23 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>Multiple_IP_Cameras_Demo_WPF</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
     <Page Remove="obj\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="VisioForge.Controls.NetCore">
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Controls.NetCore.dll</HintPath>
@@ -41,24 +37,21 @@
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Types.NetCore.dll</HintPath>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="app.config" />
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.VideoCapture">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>

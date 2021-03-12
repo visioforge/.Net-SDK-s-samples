@@ -43,7 +43,7 @@ Public Class Form1
             Case 1
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS
             Case 2
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG
+                MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG
             Case 3
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_VLC
         End Select

@@ -43,7 +43,6 @@ namespace VideoCapture_CSharp_Demo
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label8 = new System.Windows.Forms.Label();
             this.btStop = new System.Windows.Forms.Button();
@@ -419,6 +418,7 @@ namespace VideoCapture_CSharp_Demo
             this.label371 = new System.Windows.Forms.Label();
             this.rbNetworkSSSoftware = new System.Windows.Forms.RadioButton();
             this.tpHLS = new System.Windows.Forms.TabPage();
+            this.edHLSURL = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.edHLSEmbeddedHTTPServerPort = new System.Windows.Forms.TextBox();
             this.cbHLSEmbeddedHTTPServerEnabled = new System.Windows.Forms.CheckBox();
@@ -754,17 +754,12 @@ namespace VideoCapture_CSharp_Demo
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage98 = new System.Windows.Forms.TabPage();
             this.cbVUMeter = new System.Windows.Forms.CheckBox();
-            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
             this.tabPage112 = new System.Windows.Forms.TabPage();
             this.tbVUMeterBoost = new System.Windows.Forms.TrackBar();
             this.label382 = new System.Windows.Forms.Label();
             this.label381 = new System.Windows.Forms.Label();
             this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
             this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
-            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabPage99 = new System.Windows.Forms.TabPage();
             this.rbAddAudioStreamsIndependent = new System.Windows.Forms.RadioButton();
             this.rbAddAudioStreamsMix = new System.Windows.Forms.RadioButton();
@@ -1141,6 +1136,11 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
+            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1363,7 +1363,7 @@ namespace VideoCapture_CSharp_Demo
             // btStop
             // 
             this.btStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btStop.Location = new System.Drawing.Point(734, 680);
             this.btStop.Name = "btStop";
             this.btStop.Size = new System.Drawing.Size(62, 23);
@@ -1375,7 +1375,7 @@ namespace VideoCapture_CSharp_Demo
             // btStart
             // 
             this.btStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btStart.Location = new System.Drawing.Point(669, 680);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(62, 23);
@@ -5048,6 +5048,8 @@ namespace VideoCapture_CSharp_Demo
             // cbNetworkRTMPFFMPEGUsePipes
             // 
             this.cbNetworkRTMPFFMPEGUsePipes.AutoSize = true;
+            this.cbNetworkRTMPFFMPEGUsePipes.Checked = true;
+            this.cbNetworkRTMPFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbNetworkRTMPFFMPEGUsePipes.Location = new System.Drawing.Point(20, 76);
             this.cbNetworkRTMPFFMPEGUsePipes.Name = "cbNetworkRTMPFFMPEGUsePipes";
             this.cbNetworkRTMPFFMPEGUsePipes.Size = new System.Drawing.Size(73, 17);
@@ -5217,6 +5219,8 @@ namespace VideoCapture_CSharp_Demo
             // cbNetworkUDPFFMPEGUsePipes
             // 
             this.cbNetworkUDPFFMPEGUsePipes.AutoSize = true;
+            this.cbNetworkUDPFFMPEGUsePipes.Checked = true;
+            this.cbNetworkUDPFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbNetworkUDPFFMPEGUsePipes.Location = new System.Drawing.Point(20, 76);
             this.cbNetworkUDPFFMPEGUsePipes.Name = "cbNetworkUDPFFMPEGUsePipes";
             this.cbNetworkUDPFFMPEGUsePipes.Size = new System.Drawing.Size(73, 17);
@@ -5323,6 +5327,8 @@ namespace VideoCapture_CSharp_Demo
             // cbNetworkSSUsePipes
             // 
             this.cbNetworkSSUsePipes.AutoSize = true;
+            this.cbNetworkSSUsePipes.Checked = true;
+            this.cbNetworkSSUsePipes.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbNetworkSSUsePipes.Location = new System.Drawing.Point(36, 86);
             this.cbNetworkSSUsePipes.Name = "cbNetworkSSUsePipes";
             this.cbNetworkSSUsePipes.Size = new System.Drawing.Size(182, 17);
@@ -5412,6 +5418,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tpHLS
             // 
+            this.tpHLS.Controls.Add(this.edHLSURL);
             this.tpHLS.Controls.Add(this.label19);
             this.tpHLS.Controls.Add(this.edHLSEmbeddedHTTPServerPort);
             this.tpHLS.Controls.Add(this.cbHLSEmbeddedHTTPServerEnabled);
@@ -5436,10 +5443,18 @@ namespace VideoCapture_CSharp_Demo
             this.tpHLS.Text = "HLS";
             this.tpHLS.UseVisualStyleBackColor = true;
             // 
+            // edHLSURL
+            // 
+            this.edHLSURL.Location = new System.Drawing.Point(19, 290);
+            this.edHLSURL.Name = "edHLSURL";
+            this.edHLSURL.Size = new System.Drawing.Size(252, 20);
+            this.edHLSURL.TabIndex = 16;
+            this.edHLSURL.Text = "http://localhost:81/playlist.m3u8";
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(16, 300);
+            this.label19.Location = new System.Drawing.Point(16, 315);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(16, 13);
             this.label19.TabIndex = 15;
@@ -5451,7 +5466,7 @@ namespace VideoCapture_CSharp_Demo
             this.edHLSEmbeddedHTTPServerPort.Name = "edHLSEmbeddedHTTPServerPort";
             this.edHLSEmbeddedHTTPServerPort.Size = new System.Drawing.Size(41, 20);
             this.edHLSEmbeddedHTTPServerPort.TabIndex = 14;
-            this.edHLSEmbeddedHTTPServerPort.Text = "80";
+            this.edHLSEmbeddedHTTPServerPort.Text = "81";
             // 
             // cbHLSEmbeddedHTTPServerEnabled
             // 
@@ -5671,7 +5686,7 @@ namespace VideoCapture_CSharp_Demo
             this.lbOSDLayers.FormattingEnabled = true;
             this.lbOSDLayers.Location = new System.Drawing.Point(15, 61);
             this.lbOSDLayers.Name = "lbOSDLayers";
-            this.lbOSDLayers.Size = new System.Drawing.Size(139, 124);
+            this.lbOSDLayers.Size = new System.Drawing.Size(139, 109);
             this.lbOSDLayers.TabIndex = 16;
             this.lbOSDLayers.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lbOSDLayers_ItemCheck);
             // 
@@ -5739,7 +5754,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btOSDImageDraw
             // 
-            this.btOSDImageDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btOSDImageDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btOSDImageDraw.Location = new System.Drawing.Point(178, 141);
             this.btOSDImageDraw.Name = "btOSDImageDraw";
             this.btOSDImageDraw.Size = new System.Drawing.Size(57, 23);
@@ -5911,7 +5926,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btOSDTextDraw
             // 
-            this.btOSDTextDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btOSDTextDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btOSDTextDraw.Location = new System.Drawing.Point(178, 141);
             this.btOSDTextDraw.Name = "btOSDTextDraw";
             this.btOSDTextDraw.Size = new System.Drawing.Size(57, 23);
@@ -5992,7 +6007,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btOSDLayerAdd
             // 
-            this.btOSDLayerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btOSDLayerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btOSDLayerAdd.Location = new System.Drawing.Point(31, 107);
             this.btOSDLayerAdd.Name = "btOSDLayerAdd";
             this.btOSDLayerAdd.Size = new System.Drawing.Size(56, 23);
@@ -6223,7 +6238,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btMotDetUpdateSettings
             // 
-            this.btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btMotDetUpdateSettings.Location = new System.Drawing.Point(138, 358);
             this.btMotDetUpdateSettings.Name = "btMotDetUpdateSettings";
             this.btMotDetUpdateSettings.Size = new System.Drawing.Size(107, 23);
@@ -8983,22 +8998,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbVUMeter.Text = "Enable VU Meter";
             this.cbVUMeter.UseVisualStyleBackColor = true;
             // 
-            // peakMeterCtrl1
-            // 
-            this.peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
-            this.peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
-            this.peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
-            this.peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
-            this.peakMeterCtrl1.Location = new System.Drawing.Point(128, 11);
-            this.peakMeterCtrl1.Name = "peakMeterCtrl1";
-            this.peakMeterCtrl1.Size = new System.Drawing.Size(105, 61);
-            this.peakMeterCtrl1.TabIndex = 102;
-            this.peakMeterCtrl1.Text = "peakMeterCtrl1";
-            // 
             // tabPage112
             // 
             this.tabPage112.Controls.Add(this.tbVUMeterBoost);
@@ -9066,48 +9065,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbVUMeterPro.TabIndex = 108;
             this.cbVUMeterPro.Text = "Enable VU meter Pro";
             this.cbVUMeterPro.UseVisualStyleBackColor = true;
-            // 
-            // waveformPainter2
-            // 
-            this.waveformPainter2.Boost = 1F;
-            this.waveformPainter2.Location = new System.Drawing.Point(102, 106);
-            this.waveformPainter2.Name = "waveformPainter2";
-            this.waveformPainter2.Size = new System.Drawing.Size(270, 60);
-            this.waveformPainter2.TabIndex = 113;
-            this.waveformPainter2.Text = "waveformPainter2";
-            // 
-            // waveformPainter1
-            // 
-            this.waveformPainter1.Boost = 1F;
-            this.waveformPainter1.Location = new System.Drawing.Point(102, 40);
-            this.waveformPainter1.Name = "waveformPainter1";
-            this.waveformPainter1.Size = new System.Drawing.Size(270, 60);
-            this.waveformPainter1.TabIndex = 112;
-            this.waveformPainter1.Text = "waveformPainter1";
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter2.Boost = 1F;
-            this.volumeMeter2.Location = new System.Drawing.Point(52, 40);
-            this.volumeMeter2.MaxDb = 18F;
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Size = new System.Drawing.Size(22, 126);
-            this.volumeMeter2.TabIndex = 111;
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter1.Boost = 1F;
-            this.volumeMeter1.Location = new System.Drawing.Point(24, 40);
-            this.volumeMeter1.MaxDb = 18F;
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Size = new System.Drawing.Size(22, 126);
-            this.volumeMeter1.TabIndex = 107;
             // 
             // tabPage99
             // 
@@ -9316,7 +9273,7 @@ namespace VideoCapture_CSharp_Demo
             // label93
             // 
             this.label93.AutoSize = true;
-            this.label93.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label93.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label93.Location = new System.Drawing.Point(16, 188);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(65, 13);
@@ -9363,7 +9320,7 @@ namespace VideoCapture_CSharp_Demo
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label43.Location = new System.Drawing.Point(16, 160);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(67, 13);
@@ -9415,7 +9372,7 @@ namespace VideoCapture_CSharp_Demo
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label26.Location = new System.Drawing.Point(161, 82);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(29, 13);
@@ -9433,7 +9390,7 @@ namespace VideoCapture_CSharp_Demo
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label24.Location = new System.Drawing.Point(47, 82);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(29, 13);
@@ -9672,11 +9629,7 @@ namespace VideoCapture_CSharp_Demo
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
             "RTSP (Live555 engine)",
-            "HTTP (FFMPEG engine)",
             "MMS - WMV",
-            "RTSP - UDP (FFMPEG engine)",
-            "RTSP - TCP (FFMPEG engine)",
-            "RTSP over HTTP (FFMPEG engine)",
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",
             "RTSP Low Latency UDP",
@@ -10324,7 +10277,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btDVBTTune
             // 
-            this.btDVBTTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btDVBTTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btDVBTTune.Location = new System.Drawing.Point(6, 185);
             this.btDVBTTune.Name = "btDVBTTune";
             this.btDVBTTune.Size = new System.Drawing.Size(46, 23);
@@ -10478,7 +10431,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btDVBSTune
             // 
-            this.btDVBSTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btDVBSTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btDVBSTune.Location = new System.Drawing.Point(6, 185);
             this.btDVBSTune.Name = "btDVBSTune";
             this.btDVBSTune.Size = new System.Drawing.Size(46, 23);
@@ -10776,7 +10729,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btBDADVBCTune
             // 
-            this.btBDADVBCTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btBDADVBCTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btBDADVBCTune.Location = new System.Drawing.Point(6, 185);
             this.btBDADVBCTune.Name = "btBDADVBCTune";
             this.btBDADVBCTune.Size = new System.Drawing.Size(46, 23);
@@ -10946,7 +10899,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btPIPAddDevice
             // 
-            this.btPIPAddDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btPIPAddDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btPIPAddDevice.Location = new System.Drawing.Point(11, 180);
             this.btPIPAddDevice.Name = "btPIPAddDevice";
             this.btPIPAddDevice.Size = new System.Drawing.Size(54, 23);
@@ -12553,7 +12506,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btSeparateCaptureStop
             // 
-            this.btSeparateCaptureStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btSeparateCaptureStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btSeparateCaptureStop.Location = new System.Drawing.Point(339, 113);
             this.btSeparateCaptureStop.Name = "btSeparateCaptureStop";
             this.btSeparateCaptureStop.Size = new System.Drawing.Size(92, 23);
@@ -12564,7 +12517,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // btSeparateCaptureStart
             // 
-            this.btSeparateCaptureStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btSeparateCaptureStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btSeparateCaptureStart.Location = new System.Drawing.Point(39, 113);
             this.btSeparateCaptureStart.Name = "btSeparateCaptureStart";
             this.btSeparateCaptureStart.Size = new System.Drawing.Size(92, 23);
@@ -13035,7 +12988,7 @@ namespace VideoCapture_CSharp_Demo
             // fontDialog1
             // 
             this.fontDialog1.Color = System.Drawing.Color.White;
-            this.fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold);
             this.fontDialog1.FontMustExist = true;
             this.fontDialog1.ShowColor = true;
             // 
@@ -13154,23 +13107,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
             this.VideoCapture1.Video_Effects_MergeImageLogos = false;
             this.VideoCapture1.Video_Effects_MergeTextLogos = false;
-            videoRendererSettingsWinForms1.Aspect_Ratio_Override = false;
-            videoRendererSettingsWinForms1.Aspect_Ratio_X = 0;
-            videoRendererSettingsWinForms1.Aspect_Ratio_Y = 0;
-            videoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Empty;
-            videoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.Auto;
-            videoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = null;
-            videoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = false;
-            videoRendererSettingsWinForms1.Flip_Horizontal = false;
-            videoRendererSettingsWinForms1.Flip_Vertical = false;
-            videoRendererSettingsWinForms1.RotationAngle = 0;
-            videoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox;
-            videoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer;
-            videoRendererSettingsWinForms1.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer;
-            videoRendererSettingsWinForms1.Zoom_Ratio = 0;
-            videoRendererSettingsWinForms1.Zoom_ShiftX = 0;
-            videoRendererSettingsWinForms1.Zoom_ShiftY = 0;
-            this.VideoCapture1.Video_Renderer = videoRendererSettingsWinForms1;
             this.VideoCapture1.Video_Resize = null;
             this.VideoCapture1.Video_ResizeOrCrop_Enabled = false;
             this.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
@@ -13193,6 +13129,64 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
+            // 
+            // peakMeterCtrl1
+            // 
+            this.peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
+            this.peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
+            this.peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
+            this.peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
+            this.peakMeterCtrl1.Location = new System.Drawing.Point(128, 11);
+            this.peakMeterCtrl1.Name = "peakMeterCtrl1";
+            this.peakMeterCtrl1.Size = new System.Drawing.Size(105, 61);
+            this.peakMeterCtrl1.TabIndex = 102;
+            this.peakMeterCtrl1.Text = "peakMeterCtrl1";
+            // 
+            // waveformPainter2
+            // 
+            this.waveformPainter2.Boost = 1F;
+            this.waveformPainter2.Location = new System.Drawing.Point(102, 106);
+            this.waveformPainter2.Name = "waveformPainter2";
+            this.waveformPainter2.Size = new System.Drawing.Size(270, 60);
+            this.waveformPainter2.TabIndex = 113;
+            this.waveformPainter2.Text = "waveformPainter2";
+            // 
+            // waveformPainter1
+            // 
+            this.waveformPainter1.Boost = 1F;
+            this.waveformPainter1.Location = new System.Drawing.Point(102, 40);
+            this.waveformPainter1.Name = "waveformPainter1";
+            this.waveformPainter1.Size = new System.Drawing.Size(270, 60);
+            this.waveformPainter1.TabIndex = 112;
+            this.waveformPainter1.Text = "waveformPainter1";
+            // 
+            // volumeMeter2
+            // 
+            this.volumeMeter2.Amplitude = 0F;
+            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
+            this.volumeMeter2.Boost = 1F;
+            this.volumeMeter2.Location = new System.Drawing.Point(52, 40);
+            this.volumeMeter2.MaxDb = 18F;
+            this.volumeMeter2.MinDb = -60F;
+            this.volumeMeter2.Name = "volumeMeter2";
+            this.volumeMeter2.Size = new System.Drawing.Size(22, 126);
+            this.volumeMeter2.TabIndex = 111;
+            // 
+            // volumeMeter1
+            // 
+            this.volumeMeter1.Amplitude = 0F;
+            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
+            this.volumeMeter1.Boost = 1F;
+            this.volumeMeter1.Location = new System.Drawing.Point(24, 40);
+            this.volumeMeter1.MaxDb = 18F;
+            this.volumeMeter1.MinDb = -60F;
+            this.volumeMeter1.Name = "volumeMeter1";
+            this.volumeMeter1.Size = new System.Drawing.Size(22, 126);
+            this.volumeMeter1.TabIndex = 107;
             // 
             // Form1
             // 
@@ -14632,6 +14626,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Button btListNDISources;
         private System.Windows.Forms.LinkLabel linkLabel6;
         private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox edHLSURL;
     }
 }
 

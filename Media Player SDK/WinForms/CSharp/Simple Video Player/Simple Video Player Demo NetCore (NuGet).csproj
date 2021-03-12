@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Video_Player_Demo</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <Compile Remove="obj_netcore\**" />
@@ -15,38 +13,35 @@
     <None Remove="obj\**" />
     <None Remove="obj_netcore\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="VisioForge.Controls.NetCore">
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Controls.NetCore.dll</HintPath>
@@ -70,7 +65,6 @@
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Types.NetCore.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -78,12 +72,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
 </Project>

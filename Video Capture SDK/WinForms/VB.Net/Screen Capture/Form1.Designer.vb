@@ -21,7 +21,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim VideoRendererSettingsWinForms1 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.btStop = New System.Windows.Forms.Button()
@@ -953,23 +952,6 @@ Partial Class Form1
         Me.VideoCapture1.Video_Effects_GPU_Enabled = False
         Me.VideoCapture1.Video_Effects_MergeImageLogos = False
         Me.VideoCapture1.Video_Effects_MergeTextLogos = False
-        VideoRendererSettingsWinForms1.Aspect_Ratio_Override = False
-        VideoRendererSettingsWinForms1.Aspect_Ratio_X = 0
-        VideoRendererSettingsWinForms1.Aspect_Ratio_Y = 0
-        VideoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Black
-        VideoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
-        VideoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = True
-        VideoRendererSettingsWinForms1.Flip_Horizontal = False
-        VideoRendererSettingsWinForms1.Flip_Vertical = False
-        VideoRendererSettingsWinForms1.RotationAngle = 0
-        VideoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
-        VideoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.EVR
-        VideoRendererSettingsWinForms1.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.EVR
-        VideoRendererSettingsWinForms1.Zoom_Ratio = 0
-        VideoRendererSettingsWinForms1.Zoom_ShiftX = 0
-        VideoRendererSettingsWinForms1.Zoom_ShiftY = 0
-        Me.VideoCapture1.Video_Renderer = VideoRendererSettingsWinForms1
         Me.VideoCapture1.Video_Resize = Nothing
         Me.VideoCapture1.Video_ResizeOrCrop_Enabled = False
         Me.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone

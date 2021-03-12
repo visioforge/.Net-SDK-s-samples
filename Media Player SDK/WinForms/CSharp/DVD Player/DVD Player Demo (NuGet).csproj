@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5D95E60B-D07E-4ACE-89E6-C28C09F4151B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -13,8 +11,7 @@
     <AssemblyName>DVD_Player_Demo</AssemblyName>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,19 +114,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.Base.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

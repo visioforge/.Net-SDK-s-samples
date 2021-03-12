@@ -26,7 +26,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim VideoRendererSettingsWinForms3 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
         Me.rbAudioFile = New System.Windows.Forms.RadioButton()
         Me.rbVideoWithoutAudio = New System.Windows.Forms.RadioButton()
         Me.rbVideoWithAudio = New System.Windows.Forms.RadioButton()
@@ -394,7 +393,6 @@ Partial Class Form1
         Me.MediaPlayer1.Encryption_Key = ""
         Me.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.[String]
         Me.MediaPlayer1.Face_Tracking = Nothing
-        Me.MediaPlayer1.FilenamesOrURL = CType(resources.GetObject("MediaPlayer1.FilenamesOrURL"),System.Collections.Generic.List(Of String))
         Me.MediaPlayer1.Info_UseLibMediaInfo = false
         Me.MediaPlayer1.Location = New System.Drawing.Point(12, 81)
         Me.MediaPlayer1.Loop = false
@@ -419,23 +417,6 @@ Partial Class Form1
         Me.MediaPlayer1.Play_DelayEnabled = false
         Me.MediaPlayer1.TabIndex = 58
         Me.MediaPlayer1.Video_Effects_Enabled = false
-        VideoRendererSettingsWinForms3.Aspect_Ratio_Override = false
-        VideoRendererSettingsWinForms3.Aspect_Ratio_X = 0
-        VideoRendererSettingsWinForms3.Aspect_Ratio_Y = 0
-        VideoRendererSettingsWinForms3.BackgroundColor = System.Drawing.Color.Black
-        VideoRendererSettingsWinForms3.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
-        VideoRendererSettingsWinForms3.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms3.Deinterlace_VMR9_UseDefault = true
-        VideoRendererSettingsWinForms3.Flip_Horizontal = false
-        VideoRendererSettingsWinForms3.Flip_Vertical = false
-        VideoRendererSettingsWinForms3.RotationAngle = 0
-        VideoRendererSettingsWinForms3.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
-        VideoRendererSettingsWinForms3.Video_Renderer = VisioForge.Types.VFVideoRenderer.EVR
-        VideoRendererSettingsWinForms3.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.EVR
-        VideoRendererSettingsWinForms3.Zoom_Ratio = 0
-        VideoRendererSettingsWinForms3.Zoom_ShiftX = 0
-        VideoRendererSettingsWinForms3.Zoom_ShiftY = 0
-        Me.MediaPlayer1.Video_Renderer = VideoRendererSettingsWinForms3
         Me.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = False
         Me.MediaPlayer1.Video_Stream_Index = 0
         '

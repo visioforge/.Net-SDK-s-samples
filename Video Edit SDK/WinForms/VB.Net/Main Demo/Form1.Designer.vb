@@ -25,7 +25,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim VideoRendererSettingsWinForms4 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.OpenDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -615,6 +614,13 @@ Partial Class Form1
         Me.Label496 = New System.Windows.Forms.Label()
         Me.edTagTrackID = New System.Windows.Forms.TextBox()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.LinkLabel6 = New System.Windows.Forms.LinkLabel()
+        Me.label11 = New System.Windows.Forms.Label()
+        Me.label12 = New System.Windows.Forms.Label()
+        Me.edNDIURL = New System.Windows.Forms.TextBox()
+        Me.edNDIName = New System.Windows.Forms.TextBox()
+        Me.label13 = New System.Windows.Forms.Label()
         Me.tabControl1.SuspendLayout
         Me.tabPage1.SuspendLayout
         Me.tabControl2.SuspendLayout
@@ -740,6 +746,7 @@ Partial Class Form1
         Me.tabPage54.SuspendLayout
         Me.TabPage74.SuspendLayout
         CType(Me.imgTagCover,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage5.SuspendLayout
         Me.SuspendLayout
         '
         'FontDialog1
@@ -4674,7 +4681,7 @@ Partial Class Form1
         '
         Me.cbNetworkStreamingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNetworkStreamingMode.FormattingEnabled = true
-        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP to Adobe Media Server / Wowza", "UDP", "Smooth Streaming to Microsoft IIS", "Output to external virtual devices"})
+        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP to Adobe Media Server / Wowza", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "Output to external virtual devices"})
         Me.cbNetworkStreamingMode.Location = New System.Drawing.Point(14, 36)
         Me.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode"
         Me.cbNetworkStreamingMode.Size = New System.Drawing.Size(276, 21)
@@ -4685,6 +4692,7 @@ Partial Class Form1
         Me.tabControl5.Controls.Add(Me.TabPage25)
         Me.tabControl5.Controls.Add(Me.TabPage47)
         Me.tabControl5.Controls.Add(Me.TabPage48)
+        Me.tabControl5.Controls.Add(Me.TabPage5)
         Me.tabControl5.Controls.Add(Me.TabPage67)
         Me.tabControl5.Controls.Add(Me.TabPage49)
         Me.tabControl5.Controls.Add(Me.TabPage56)
@@ -5869,6 +5877,7 @@ Partial Class Form1
         Me.VideoEdit1.CustomRedist_Enabled = false
         Me.VideoEdit1.CustomRedist_Path = Nothing
         Me.VideoEdit1.Debug_Dir = ""
+        Me.VideoEdit1.Debug_DisableMessageDialogs = false
         Me.VideoEdit1.Debug_Mode = false
         Me.VideoEdit1.Debug_Telemetry = false
         Me.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.[Auto]
@@ -5901,23 +5910,6 @@ Partial Class Form1
         Me.VideoEdit1.Video_Effects_GPU_Enabled = false
         Me.VideoEdit1.Video_FrameRate = 25R
         Me.VideoEdit1.Video_Preview_Enabled = true
-        VideoRendererSettingsWinForms4.Aspect_Ratio_Override = false
-        VideoRendererSettingsWinForms4.Aspect_Ratio_X = 0
-        VideoRendererSettingsWinForms4.Aspect_Ratio_Y = 0
-        VideoRendererSettingsWinForms4.BackgroundColor = System.Drawing.Color.Empty
-        VideoRendererSettingsWinForms4.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
-        VideoRendererSettingsWinForms4.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms4.Deinterlace_VMR9_UseDefault = false
-        VideoRendererSettingsWinForms4.Flip_Horizontal = false
-        VideoRendererSettingsWinForms4.Flip_Vertical = false
-        VideoRendererSettingsWinForms4.RotationAngle = 0
-        VideoRendererSettingsWinForms4.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
-        VideoRendererSettingsWinForms4.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer
-        VideoRendererSettingsWinForms4.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer
-        VideoRendererSettingsWinForms4.Zoom_Ratio = 0
-        VideoRendererSettingsWinForms4.Zoom_ShiftX = 0
-        VideoRendererSettingsWinForms4.Zoom_ShiftY = 0
-        Me.VideoEdit1.Video_Renderer = VideoRendererSettingsWinForms4
         Me.VideoEdit1.Video_Resize = false
         Me.VideoEdit1.Video_Resize_Height = 480
         Me.VideoEdit1.Video_Resize_Width = 640
@@ -6816,6 +6808,75 @@ Partial Class Form1
         Me.cbTelemetry.Text = "Telemetry"
         Me.cbTelemetry.UseVisualStyleBackColor = true
         '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.LinkLabel6)
+        Me.TabPage5.Controls.Add(Me.label11)
+        Me.TabPage5.Controls.Add(Me.label12)
+        Me.TabPage5.Controls.Add(Me.edNDIURL)
+        Me.TabPage5.Controls.Add(Me.edNDIName)
+        Me.TabPage5.Controls.Add(Me.label13)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(284, 344)
+        Me.TabPage5.TabIndex = 6
+        Me.TabPage5.Text = "NDI"
+        Me.TabPage5.UseVisualStyleBackColor = true
+        '
+        'LinkLabel6
+        '
+        Me.LinkLabel6.AutoSize = true
+        Me.LinkLabel6.Location = New System.Drawing.Point(15, 135)
+        Me.LinkLabel6.Name = "LinkLabel6"
+        Me.LinkLabel6.Size = New System.Drawing.Size(86, 13)
+        Me.LinkLabel6.TabIndex = 101
+        Me.LinkLabel6.TabStop = true
+        Me.LinkLabel6.Text = "vendor's website"
+        '
+        'label11
+        '
+        Me.label11.AutoSize = true
+        Me.label11.Location = New System.Drawing.Point(15, 122)
+        Me.label11.Name = "label11"
+        Me.label11.Size = New System.Drawing.Size(257, 13)
+        Me.label11.TabIndex = 100
+        Me.label11.Text = "To use NDI please install NDI SDK for Windows from"
+        '
+        'label12
+        '
+        Me.label12.AutoSize = true
+        Me.label12.Location = New System.Drawing.Point(15, 71)
+        Me.label12.Name = "label12"
+        Me.label12.Size = New System.Drawing.Size(86, 13)
+        Me.label12.TabIndex = 99
+        Me.label12.Text = "Connection URL"
+        '
+        'edNDIURL
+        '
+        Me.edNDIURL.Location = New System.Drawing.Point(18, 87)
+        Me.edNDIURL.Name = "edNDIURL"
+        Me.edNDIURL.ReadOnly = true
+        Me.edNDIURL.Size = New System.Drawing.Size(243, 20)
+        Me.edNDIURL.TabIndex = 98
+        '
+        'edNDIName
+        '
+        Me.edNDIName.Location = New System.Drawing.Point(18, 35)
+        Me.edNDIName.Name = "edNDIName"
+        Me.edNDIName.Size = New System.Drawing.Size(243, 20)
+        Me.edNDIName.TabIndex = 97
+        Me.edNDIName.Text = "Main"
+        '
+        'label13
+        '
+        Me.label13.AutoSize = true
+        Me.label13.Location = New System.Drawing.Point(15, 19)
+        Me.label13.Name = "label13"
+        Me.label13.Size = New System.Drawing.Size(35, 13)
+        Me.label13.TabIndex = 96
+        Me.label13.Text = "Name"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96!, 96!)
@@ -7024,6 +7085,8 @@ Partial Class Form1
         Me.TabPage74.ResumeLayout(false)
         Me.TabPage74.PerformLayout
         CType(Me.imgTagCover,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage5.ResumeLayout(false)
+        Me.TabPage5.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -7617,4 +7680,11 @@ End Sub
     Private WithEvents tbChromaKeyThresholdSensitivity As TrackBar
     Private WithEvents label213 As Label
     Private WithEvents cbChromaKeyEnabled As CheckBox
+    Friend WithEvents TabPage5 As TabPage
+    Private WithEvents LinkLabel6 As LinkLabel
+    Private WithEvents label11 As Label
+    Private WithEvents label12 As Label
+    Private WithEvents edNDIURL As TextBox
+    Private WithEvents edNDIName As TextBox
+    Private WithEvents label13 As Label
 End Class

@@ -62,28 +62,16 @@ namespace Multiple_IP_Cameras_Demo_WPF
                     videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 5:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.HTTP_FFMPEG;
-                    break;
-                case 6:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
                     break;
-                case 7:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_UDP_FFMPEG;
-                    break;
-                case 8:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_TCP_FFMPEG;
-                    break;
-                case 9:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_HTTP_FFMPEG;
-                    break;
-                case 10:
+                case 6:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     break;
-                case 11:
+                case 7:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 12:
+                case 8:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;

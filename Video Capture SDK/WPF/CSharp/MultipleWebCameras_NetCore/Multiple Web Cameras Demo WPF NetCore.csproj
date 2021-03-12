@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,18 +6,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>MultipleWebCameras</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
     <Page Remove="obj\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="VisioForge.Controls.NetCore">
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Controls.NetCore.dll</HintPath>
@@ -42,17 +38,14 @@
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Types.NetCore.dll</HintPath>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="app.config" />
     <None Remove="DV Capture Demo WPF.csproj.DotSettings" />
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="12.1.26.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.7" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>

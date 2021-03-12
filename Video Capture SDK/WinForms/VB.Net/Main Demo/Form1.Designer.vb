@@ -28,7 +28,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim VideoRendererSettingsWinForms1 As VisioForge.Types.VideoRendererSettingsWinForms = New VisioForge.Types.VideoRendererSettingsWinForms()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -926,6 +925,7 @@ Partial Class Form1
         Me.label371 = New System.Windows.Forms.Label()
         Me.rbNetworkSSSoftware = New System.Windows.Forms.RadioButton()
         Me.tpHLS = New System.Windows.Forms.TabPage()
+        Me.edHLSURL = New System.Windows.Forms.TextBox()
         Me.label19 = New System.Windows.Forms.Label()
         Me.edHLSEmbeddedHTTPServerPort = New System.Windows.Forms.TextBox()
         Me.cbHLSEmbeddedHTTPServerEnabled = New System.Windows.Forms.CheckBox()
@@ -3836,7 +3836,7 @@ Partial Class Form1
         '
         Me.cbIPCameraType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIPCameraType.FormattingEnabled = true
-        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "RTSP (Live555 engine)", "HTTP (FFMPEG engine)", "MMS - WMV", "RTSP - UDP (FFMPEG engine)", "RTSP - TCP (FFMPEG engine)", "RTSP over HTTP (FFMPEG engine)", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
+        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "RTSP (Live555 engine)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
         Me.cbIPCameraType.Location = New System.Drawing.Point(58, 40)
         Me.cbIPCameraType.Name = "cbIPCameraType"
         Me.cbIPCameraType.Size = New System.Drawing.Size(227, 21)
@@ -10182,6 +10182,8 @@ Partial Class Form1
         'cbNetworkRTMPFFMPEGUsePipes
         '
         Me.cbNetworkRTMPFFMPEGUsePipes.AutoSize = true
+        Me.cbNetworkRTMPFFMPEGUsePipes.Checked = true
+        Me.cbNetworkRTMPFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNetworkRTMPFFMPEGUsePipes.Location = New System.Drawing.Point(20, 77)
         Me.cbNetworkRTMPFFMPEGUsePipes.Name = "cbNetworkRTMPFFMPEGUsePipes"
         Me.cbNetworkRTMPFFMPEGUsePipes.Size = New System.Drawing.Size(73, 17)
@@ -10347,6 +10349,8 @@ Partial Class Form1
         'cbNetworkUDPFFMPEGUsePipes
         '
         Me.cbNetworkUDPFFMPEGUsePipes.AutoSize = true
+        Me.cbNetworkUDPFFMPEGUsePipes.Checked = true
+        Me.cbNetworkUDPFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNetworkUDPFFMPEGUsePipes.Location = New System.Drawing.Point(20, 83)
         Me.cbNetworkUDPFFMPEGUsePipes.Name = "cbNetworkUDPFFMPEGUsePipes"
         Me.cbNetworkUDPFFMPEGUsePipes.Size = New System.Drawing.Size(73, 17)
@@ -10452,6 +10456,8 @@ Partial Class Form1
         'cbNetworkSSUsePipes
         '
         Me.cbNetworkSSUsePipes.AutoSize = true
+        Me.cbNetworkSSUsePipes.Checked = true
+        Me.cbNetworkSSUsePipes.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNetworkSSUsePipes.Location = New System.Drawing.Point(42, 86)
         Me.cbNetworkSSUsePipes.Name = "cbNetworkSSUsePipes"
         Me.cbNetworkSSUsePipes.Size = New System.Drawing.Size(182, 17)
@@ -10539,6 +10545,7 @@ Partial Class Form1
         '
         'tpHLS
         '
+        Me.tpHLS.Controls.Add(Me.edHLSURL)
         Me.tpHLS.Controls.Add(Me.label19)
         Me.tpHLS.Controls.Add(Me.edHLSEmbeddedHTTPServerPort)
         Me.tpHLS.Controls.Add(Me.cbHLSEmbeddedHTTPServerEnabled)
@@ -10563,10 +10570,18 @@ Partial Class Form1
         Me.tpHLS.Text = "HLS"
         Me.tpHLS.UseVisualStyleBackColor = true
         '
+        'edHLSURL
+        '
+        Me.edHLSURL.Location = New System.Drawing.Point(12, 293)
+        Me.edHLSURL.Name = "edHLSURL"
+        Me.edHLSURL.Size = New System.Drawing.Size(252, 20)
+        Me.edHLSURL.TabIndex = 27
+        Me.edHLSURL.Text = "http://localhost:81/playlist.m3u8"
+        '
         'label19
         '
         Me.label19.AutoSize = true
-        Me.label19.Location = New System.Drawing.Point(9, 301)
+        Me.label19.Location = New System.Drawing.Point(9, 316)
         Me.label19.Name = "label19"
         Me.label19.Size = New System.Drawing.Size(16, 13)
         Me.label19.TabIndex = 26
@@ -10578,7 +10593,7 @@ Partial Class Form1
         Me.edHLSEmbeddedHTTPServerPort.Name = "edHLSEmbeddedHTTPServerPort"
         Me.edHLSEmbeddedHTTPServerPort.Size = New System.Drawing.Size(41, 20)
         Me.edHLSEmbeddedHTTPServerPort.TabIndex = 25
-        Me.edHLSEmbeddedHTTPServerPort.Text = "80"
+        Me.edHLSEmbeddedHTTPServerPort.Text = "81"
         '
         'cbHLSEmbeddedHTTPServerEnabled
         '
@@ -12694,23 +12709,6 @@ Partial Class Form1
         Me.VideoCapture1.Video_Effects_GPU_Enabled = false
         Me.VideoCapture1.Video_Effects_MergeImageLogos = false
         Me.VideoCapture1.Video_Effects_MergeTextLogos = false
-        VideoRendererSettingsWinForms1.Aspect_Ratio_Override = false
-        VideoRendererSettingsWinForms1.Aspect_Ratio_X = 0
-        VideoRendererSettingsWinForms1.Aspect_Ratio_Y = 0
-        VideoRendererSettingsWinForms1.BackgroundColor = System.Drawing.Color.Empty
-        VideoRendererSettingsWinForms1.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.[Auto]
-        VideoRendererSettingsWinForms1.Deinterlace_VMR9_Mode = Nothing
-        VideoRendererSettingsWinForms1.Deinterlace_VMR9_UseDefault = false
-        VideoRendererSettingsWinForms1.Flip_Horizontal = false
-        VideoRendererSettingsWinForms1.Flip_Vertical = false
-        VideoRendererSettingsWinForms1.RotationAngle = 0
-        VideoRendererSettingsWinForms1.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox
-        VideoRendererSettingsWinForms1.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer
-        VideoRendererSettingsWinForms1.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer
-        VideoRendererSettingsWinForms1.Zoom_Ratio = 0
-        VideoRendererSettingsWinForms1.Zoom_ShiftX = 0
-        VideoRendererSettingsWinForms1.Zoom_ShiftY = 0
-        Me.VideoCapture1.Video_Renderer = VideoRendererSettingsWinForms1
         Me.VideoCapture1.Video_Resize = Nothing
         Me.VideoCapture1.Video_ResizeOrCrop_Enabled = false
         Me.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone
@@ -14184,4 +14182,5 @@ End Sub
     Private WithEvents btListNDISources As Button
     Private WithEvents linkLabel6 As LinkLabel
     Private WithEvents label38 As Label
+    Private WithEvents edHLSURL As TextBox
 End Class

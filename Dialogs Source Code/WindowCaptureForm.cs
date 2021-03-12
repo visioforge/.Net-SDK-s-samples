@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="WindowCaptureForm.cs" company="VisioForge">
-//   VisioForge (c) 2006 - 2020
+//   VisioForge (c) 2006 - 2021
 // </copyright>
 // <summary>
 //   Defines the WindowCaptureForm type.

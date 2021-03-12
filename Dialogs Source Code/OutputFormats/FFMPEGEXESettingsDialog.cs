@@ -9,6 +9,8 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    using VisioForge.Types.FFMPEGEXE;
+
     public partial class FFMPEGEXESettingsDialog : Form
     {
         public FFMPEGEXESettingsDialog()
@@ -20,16 +22,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void LoadDefaults()
         {
-            cbFFEXEAspectRatio.SelectedIndex = 0;
-            cbFFEXEAudioBitrate.SelectedIndex = 8;
-            cbFFEXEAudioChannels.SelectedIndex = 0;
-            cbFFEXEAudioSampleRate.SelectedIndex = 0;
-            cbFFEXEProfile.SelectedIndex = 7;
-            cbFFEXEH264Mode.SelectedIndex = 0;
-            cbFFEXEH264Level.SelectedIndex = 0;
-            cbFFEXEH264Preset.SelectedIndex = 0;
-            cbFFEXEH264Profile.SelectedIndex = 0;
-            cbFFEXEVideoConstraint.SelectedIndex = 0;
+            cbAspectRatio.SelectedIndex = 0;
+            cbAudioBitrate.SelectedIndex = 8;
+            cbAudioChannels.SelectedIndex = 0;
+            cbAudioSampleRate.SelectedIndex = 0;
+            cbProfile.SelectedIndex = 7;
+            cbH264Mode.SelectedIndex = 0;
+            cbH264Level.SelectedIndex = 0;
+            cbH264Usage.SelectedIndex = 0;
+            cbH264Profile.SelectedIndex = 0;
+            cbVideoConstraint.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -40,509 +42,520 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// </param>
         public void LoadSettings(VFFFMPEGEXEOutput ffmpegOutput)
         {
-            cbFFMPEGEXEUsePipes.Checked = ffmpegOutput.UsePipe;
-            edFFEXECustomParametersAudio.Text = ffmpegOutput.Custom_AdditionalAudioArgs;
-            edFFEXECustomParametersVideo.Text = ffmpegOutput.Custom_AdditionalVideoArgs;
+            cbUsePipes.Checked = ffmpegOutput.UsePipe;
+            edCustomParametersAudio.Text = ffmpegOutput.Custom_AdditionalAudioArgs;
+            edCustomParametersVideo.Text = ffmpegOutput.Custom_AdditionalVideoArgs;
 
             if (string.IsNullOrEmpty(ffmpegOutput.Custom_AdditionalCommonArgs))
             {
-                cbFFEXEUseOnlyAdditionalParameters.Checked = true;
-                edFFEXECustomParametersCommon.Text = ffmpegOutput.Custom_AdditionalCommonArgs ;
+                cbUseOnlyAdditionalParameters.Checked = true;
+                edCustomParametersCommon.Text = ffmpegOutput.Custom_AdditionalCommonArgs;
             }
             else
             {
-                cbFFEXEUseOnlyAdditionalParameters.Checked = false;
-                edFFEXECustomParametersCommon.Text = ffmpegOutput.Custom_AllFFMPEGArgs;
+                cbUseOnlyAdditionalParameters.Checked = false;
+                edCustomParametersCommon.Text = ffmpegOutput.Custom_AllFFMPEGArgs;
             }
 
             switch (ffmpegOutput.OutputMuxer)
             {
-                case VFFFMPEGEXEOutputMuxer.Mobile3G2:
-                    cbFFEXEOutputFormat.SelectedIndex = 0;
+                case OutputMuxer.Mobile3G2:
+                    cbOutputFormat.SelectedIndex = 0;
                     break;
-                case VFFFMPEGEXEOutputMuxer.Mobile3GP:
-                    cbFFEXEOutputFormat.SelectedIndex = 1;
+                case OutputMuxer.Mobile3GP:
+                    cbOutputFormat.SelectedIndex = 1;
                     break;
-                case VFFFMPEGEXEOutputMuxer.AC3:
-                    cbFFEXEOutputFormat.SelectedIndex = 2;
+                case OutputMuxer.AC3:
+                    cbOutputFormat.SelectedIndex = 2;
                     break;
-                case VFFFMPEGEXEOutputMuxer.ADTS:
-                    cbFFEXEOutputFormat.SelectedIndex = 3;
+                case OutputMuxer.ADTS:
+                    cbOutputFormat.SelectedIndex = 3;
                     break;
-                case VFFFMPEGEXEOutputMuxer.AVI:
-                    cbFFEXEOutputFormat.SelectedIndex = 4;
+                case OutputMuxer.AVI:
+                    cbOutputFormat.SelectedIndex = 4;
                     break;
-                case VFFFMPEGEXEOutputMuxer.DTS:
-                    cbFFEXEOutputFormat.SelectedIndex = 5;
+                case OutputMuxer.DTS:
+                    cbOutputFormat.SelectedIndex = 5;
                     break;
-                case VFFFMPEGEXEOutputMuxer.DTSHD:
-                    cbFFEXEOutputFormat.SelectedIndex = 6;
+                case OutputMuxer.DTSHD:
+                    cbOutputFormat.SelectedIndex = 6;
                     break;
-                case VFFFMPEGEXEOutputMuxer.EAC3:
-                    cbFFEXEOutputFormat.SelectedIndex = 8;
+                case OutputMuxer.EAC3:
+                    cbOutputFormat.SelectedIndex = 8;
                     break;
-                case VFFFMPEGEXEOutputMuxer.F4V:
-                    cbFFEXEOutputFormat.SelectedIndex = 9;
+                case OutputMuxer.F4V:
+                    cbOutputFormat.SelectedIndex = 9;
                     break;
-                case VFFFMPEGEXEOutputMuxer.FLAC:
-                    cbFFEXEOutputFormat.SelectedIndex = 10;
+                case OutputMuxer.FLAC:
+                    cbOutputFormat.SelectedIndex = 10;
                     break;
-                case VFFFMPEGEXEOutputMuxer.FLV:
-                    cbFFEXEOutputFormat.SelectedIndex = 11;
+                case OutputMuxer.FLV:
+                    cbOutputFormat.SelectedIndex = 11;
                     break;
-                case VFFFMPEGEXEOutputMuxer.GIF:
-                    cbFFEXEOutputFormat.SelectedIndex = 12;
+                case OutputMuxer.GIF:
+                    cbOutputFormat.SelectedIndex = 12;
                     break;
-                case VFFFMPEGEXEOutputMuxer.H263:
-                    cbFFEXEOutputFormat.SelectedIndex = 13;
+                case OutputMuxer.H263:
+                    cbOutputFormat.SelectedIndex = 13;
                     break;
-                case VFFFMPEGEXEOutputMuxer.H264:
-                    cbFFEXEOutputFormat.SelectedIndex = 14;
+                case OutputMuxer.H264:
+                    cbOutputFormat.SelectedIndex = 14;
                     break;
-                case VFFFMPEGEXEOutputMuxer.HEVC:
-                    cbFFEXEOutputFormat.SelectedIndex = 15;
+                case OutputMuxer.HEVC:
+                    cbOutputFormat.SelectedIndex = 15;
                     break;
-                case VFFFMPEGEXEOutputMuxer.Matroska:
-                    cbFFEXEOutputFormat.SelectedIndex = 16;
+                case OutputMuxer.Matroska:
+                    cbOutputFormat.SelectedIndex = 16;
                     break;
-                case VFFFMPEGEXEOutputMuxer.M4V:
-                    cbFFEXEOutputFormat.SelectedIndex = 17;
+                case OutputMuxer.M4V:
+                    cbOutputFormat.SelectedIndex = 17;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MJPEG:
-                    cbFFEXEOutputFormat.SelectedIndex = 18;
+                case OutputMuxer.MJPEG:
+                    cbOutputFormat.SelectedIndex = 18;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MOV:
-                    cbFFEXEOutputFormat.SelectedIndex = 19;
+                case OutputMuxer.MOV:
+                    cbOutputFormat.SelectedIndex = 19;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MP2:
-                    cbFFEXEOutputFormat.SelectedIndex = 20;
+                case OutputMuxer.MP2:
+                    cbOutputFormat.SelectedIndex = 20;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MP3:
-                    cbFFEXEOutputFormat.SelectedIndex = 21;
+                case OutputMuxer.MP3:
+                    cbOutputFormat.SelectedIndex = 21;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MP4:
-                    cbFFEXEOutputFormat.SelectedIndex = 22;
+                case OutputMuxer.MP4:
+                    cbOutputFormat.SelectedIndex = 22;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MPEG:
-                    cbFFEXEOutputFormat.SelectedIndex = 23;
+                case OutputMuxer.MPEG:
+                    cbOutputFormat.SelectedIndex = 23;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MPEGTS:
-                    cbFFEXEOutputFormat.SelectedIndex = 24;
+                case OutputMuxer.MPEGTS:
+                    cbOutputFormat.SelectedIndex = 24;
                     break;
-                case VFFFMPEGEXEOutputMuxer.MXF:
-                    cbFFEXEOutputFormat.SelectedIndex = 25;
+                case OutputMuxer.MXF:
+                    cbOutputFormat.SelectedIndex = 25;
                     break;
-                case VFFFMPEGEXEOutputMuxer.OGG:
-                    cbFFEXEOutputFormat.SelectedIndex = 26;
+                case OutputMuxer.OGG:
+                    cbOutputFormat.SelectedIndex = 26;
                     break;
-                case VFFFMPEGEXEOutputMuxer.OPUS:
-                    cbFFEXEOutputFormat.SelectedIndex = 27;
+                case OutputMuxer.OPUS:
+                    cbOutputFormat.SelectedIndex = 27;
                     break;
-                case VFFFMPEGEXEOutputMuxer.PSP:
-                    cbFFEXEOutputFormat.SelectedIndex = 28;
+                case OutputMuxer.PSP:
+                    cbOutputFormat.SelectedIndex = 28;
                     break;
-                case VFFFMPEGEXEOutputMuxer.RAWVideo:
-                    cbFFEXEOutputFormat.SelectedIndex = 29;
+                case OutputMuxer.RAWVideo:
+                    cbOutputFormat.SelectedIndex = 29;
                     break;
-                case VFFFMPEGEXEOutputMuxer.SVCD:
-                    cbFFEXEOutputFormat.SelectedIndex = 30;
+                case OutputMuxer.SVCD:
+                    cbOutputFormat.SelectedIndex = 30;
                     break;
-                case VFFFMPEGEXEOutputMuxer.SWF:
-                    cbFFEXEOutputFormat.SelectedIndex = 31;
+                case OutputMuxer.SWF:
+                    cbOutputFormat.SelectedIndex = 31;
                     break;
-                case VFFFMPEGEXEOutputMuxer.TrueHD:
-                    cbFFEXEOutputFormat.SelectedIndex = 32;
+                case OutputMuxer.TrueHD:
+                    cbOutputFormat.SelectedIndex = 32;
                     break;
-                case VFFFMPEGEXEOutputMuxer.VC1:
-                    cbFFEXEOutputFormat.SelectedIndex = 33;
+                case OutputMuxer.VC1:
+                    cbOutputFormat.SelectedIndex = 33;
                     break;
-                case VFFFMPEGEXEOutputMuxer.VCD:
-                    cbFFEXEOutputFormat.SelectedIndex = 34;
+                case OutputMuxer.VCD:
+                    cbOutputFormat.SelectedIndex = 34;
                     break;
-                case VFFFMPEGEXEOutputMuxer.VOB:
-                    cbFFEXEOutputFormat.SelectedIndex = 7;
+                case OutputMuxer.VOB:
+                    cbOutputFormat.SelectedIndex = 7;
                     break;
-                case VFFFMPEGEXEOutputMuxer.WAV:
-                    cbFFEXEOutputFormat.SelectedIndex = 35;
+                case OutputMuxer.WAV:
+                    cbOutputFormat.SelectedIndex = 35;
                     break;
-                case VFFFMPEGEXEOutputMuxer.WebM:
-                    cbFFEXEOutputFormat.SelectedIndex = 36;
+                case OutputMuxer.WebM:
+                    cbOutputFormat.SelectedIndex = 36;
                     break;
-                case VFFFMPEGEXEOutputMuxer.WebP:
+                case OutputMuxer.WebP:
                     break;
-                case VFFFMPEGEXEOutputMuxer.WTV:
-                    cbFFEXEOutputFormat.SelectedIndex = 37;
+                case OutputMuxer.WTV:
+                    cbOutputFormat.SelectedIndex = 37;
                     break;
-                case VFFFMPEGEXEOutputMuxer.WV:
-                    cbFFEXEOutputFormat.SelectedIndex = 38;
+                case OutputMuxer.WV:
+                    cbOutputFormat.SelectedIndex = 38;
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            switch (ffmpegOutput.Video_Encoder)
+            switch (ffmpegOutput.Video.Encoder)
             {
-                case VFFFMPEGEXEVideoEncoder.Auto:
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
+                case VideoEncoder.Auto:
+                    cbVideoCodec.SelectedIndex = 0;
                     break;
-                case VFFFMPEGEXEVideoEncoder.DVVideo:
-                    cbFFEXEVideoCodec.SelectedIndex = 1;
+                case VideoEncoder.DVVideo:
+                    cbVideoCodec.SelectedIndex = 1;
                     break;
-                case VFFFMPEGEXEVideoEncoder.FLV1:
-                    cbFFEXEVideoCodec.SelectedIndex = 2;
+                case VideoEncoder.FLV1:
+                    cbVideoCodec.SelectedIndex = 2;
                     break;
-                case VFFFMPEGEXEVideoEncoder.GIF:
-                    cbFFEXEVideoCodec.SelectedIndex = 3;
+                case VideoEncoder.GIF:
+                    cbVideoCodec.SelectedIndex = 3;
                     break;
-                case VFFFMPEGEXEVideoEncoder.H263:
-                    cbFFEXEVideoCodec.SelectedIndex = 4;
+                case VideoEncoder.H263:
+                    cbVideoCodec.SelectedIndex = 4;
                     break;
-                case VFFFMPEGEXEVideoEncoder.H264:
-                    cbFFEXEVideoCodec.SelectedIndex = 5;
+                case VideoEncoder.H264:
+                    cbVideoCodec.SelectedIndex = 5;
                     break;
-                case VFFFMPEGEXEVideoEncoder.H264_QSV:
-                    cbFFEXEVideoCodec.SelectedIndex = 6;
+                case VideoEncoder.H264_QSV:
+                    cbVideoCodec.SelectedIndex = 6;
                     break;
-                case VFFFMPEGEXEVideoEncoder.HEVC:
-                    cbFFEXEVideoCodec.SelectedIndex = 7;
+                case VideoEncoder.HEVC:
+                    cbVideoCodec.SelectedIndex = 7;
                     break;
-                case VFFFMPEGEXEVideoEncoder.HEVC_QSV:
-                    cbFFEXEVideoCodec.SelectedIndex = 8;
+                case VideoEncoder.HEVC_QSV:
+                    cbVideoCodec.SelectedIndex = 8;
                     break;
-                case VFFFMPEGEXEVideoEncoder.HuffYUV:
-                    cbFFEXEVideoCodec.SelectedIndex = 9;
+                case VideoEncoder.HuffYUV:
+                    cbVideoCodec.SelectedIndex = 9;
                     break;
-                case VFFFMPEGEXEVideoEncoder.JPEG2000:
-                    cbFFEXEVideoCodec.SelectedIndex = 10;
+                case VideoEncoder.JPEG2000:
+                    cbVideoCodec.SelectedIndex = 10;
                     break;
-                case VFFFMPEGEXEVideoEncoder.JPEGLS:
-                    cbFFEXEVideoCodec.SelectedIndex = 11;
+                case VideoEncoder.JPEGLS:
+                    cbVideoCodec.SelectedIndex = 11;
                     break;
-                case VFFFMPEGEXEVideoEncoder.LJPEG:
-                    cbFFEXEVideoCodec.SelectedIndex = 12;
+                case VideoEncoder.LJPEG:
+                    cbVideoCodec.SelectedIndex = 12;
                     break;
-                case VFFFMPEGEXEVideoEncoder.MJPEG:
-                    cbFFEXEVideoCodec.SelectedIndex = 13;
+                case VideoEncoder.MJPEG:
+                    cbVideoCodec.SelectedIndex = 13;
                     break;
-                case VFFFMPEGEXEVideoEncoder.MPEG1Video:
-                    cbFFEXEVideoCodec.SelectedIndex = 14;
+                case VideoEncoder.MPEG1Video:
+                    cbVideoCodec.SelectedIndex = 14;
                     break;
-                case VFFFMPEGEXEVideoEncoder.MPEG2Video:
-                    cbFFEXEVideoCodec.SelectedIndex = 15;
+                case VideoEncoder.MPEG2Video:
+                    cbVideoCodec.SelectedIndex = 15;
                     break;
-                case VFFFMPEGEXEVideoEncoder.MPEG4:
-                    cbFFEXEVideoCodec.SelectedIndex = 16;
+                case VideoEncoder.MPEG4:
+                    cbVideoCodec.SelectedIndex = 16;
                     break;
-                case VFFFMPEGEXEVideoEncoder.PNG:
-                    cbFFEXEVideoCodec.SelectedIndex = 17;
+                case VideoEncoder.PNG:
+                    cbVideoCodec.SelectedIndex = 17;
                     break;
-                case VFFFMPEGEXEVideoEncoder.Theora:
-                    cbFFEXEVideoCodec.SelectedIndex = 18;
+                case VideoEncoder.Theora:
+                    cbVideoCodec.SelectedIndex = 18;
                     break;
-                case VFFFMPEGEXEVideoEncoder.VP8:
-                    cbFFEXEVideoCodec.SelectedIndex = 19;
+                case VideoEncoder.VP8:
+                    cbVideoCodec.SelectedIndex = 19;
                     break;
-                case VFFFMPEGEXEVideoEncoder.VP9:
-                    cbFFEXEVideoCodec.SelectedIndex = 20;
+                case VideoEncoder.VP9:
+                    cbVideoCodec.SelectedIndex = 20;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (ffmpegOutput.Video_AspectRatioW == 0 && ffmpegOutput.Video_AspectRatioH == 1)
+            if (ffmpegOutput.Video.AspectRatioW == 0 && ffmpegOutput.Video.AspectRatioH == 1)
             {
-                cbFFEXEAspectRatio.SelectedIndex = 0;
+                cbAspectRatio.SelectedIndex = 0;
             }
-            else if (ffmpegOutput.Video_AspectRatioW == 1 && ffmpegOutput.Video_AspectRatioH == 1)
+            else if (ffmpegOutput.Video.AspectRatioW == 1 && ffmpegOutput.Video.AspectRatioH == 1)
             {
-                cbFFEXEAspectRatio.SelectedIndex = 1;
+                cbAspectRatio.SelectedIndex = 1;
             }
-            else if (ffmpegOutput.Video_AspectRatioW == 4 && ffmpegOutput.Video_AspectRatioH == 3)
+            else if (ffmpegOutput.Video.AspectRatioW == 4 && ffmpegOutput.Video.AspectRatioH == 3)
             {
-                cbFFEXEAspectRatio.SelectedIndex = 2;
-            }
-            else
-            {
-                cbFFEXEAspectRatio.SelectedIndex = 3;
-            }
-
-            if (Convert.ToInt32(edFFEXEVideoWidth.Text) == 0 || Convert.ToInt32(edFFEXEVideoHeight.Text) == 0)
-            {
-                cbFFEXEVideoResolutionOriginal.Checked = true;
+                cbAspectRatio.SelectedIndex = 2;
             }
             else
             {
-                cbFFEXEVideoResolutionOriginal.Checked = false;
+                cbAspectRatio.SelectedIndex = 3;
             }
 
-            switch (ffmpegOutput.Video_Mode)
+            if (Convert.ToInt32(edVideoWidth.Text) == 0 || Convert.ToInt32(edVideoHeight.Text) == 0)
             {
-                case VFFFMPEGEXEVideoMode.CBR:
-                    rbFFEXEVideoModeCBR.Checked = true;
+                cbVideoResolutionOriginal.Checked = true;
+            }
+            else
+            {
+                cbVideoResolutionOriginal.Checked = false;
+            }
+
+            switch (ffmpegOutput.Video.BasicMode)
+            {
+                case VideoMode.CBR:
+                    rbVideoModeCBR.Checked = true;
                     break;
-                case VFFFMPEGEXEVideoMode.ABR:
-                    rbFFEXEVideoModeABR.Checked = true;
+                case VideoMode.ABR:
+                    rbVideoModeABR.Checked = true;
                     break;
-                case VFFFMPEGEXEVideoMode.Quality:
-                    rbFFEXEVideoModeQuality.Checked = true;
+                case VideoMode.Quality:
+                    rbVideoModeQuality.Checked = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            edFFEXEVideoTargetBitrate.Text = ((int)(ffmpegOutput.Video_Bitrate / 1000.0)).ToString();
-            edFFEXEVideoBitrateMax.Text = ((int)(ffmpegOutput.Video_MaxBitrate / 1000.0)).ToString();
-            edFFEXEVideoBitrateMin.Text = ((int)(ffmpegOutput.Video_MinBitrate / 1000.0)).ToString();
-            edFFEXEVBVBufferSize.Text = ffmpegOutput.Video_BufferSize.ToString();
-            edFFEXEVideoGOPSize.Text = ffmpegOutput.Video_GOPSize.ToString();
-            edFFEXEVideoBFramesCount.Text = ffmpegOutput.Video_BFrames.ToString();
-            cbFFEXEVideoInterlace.Checked = ffmpegOutput.Video_Interlace;
-            cbFFEXEVideoResolutionLetterbox.Checked = ffmpegOutput.Video_Letterbox;
-            tbFFEXEVideoQuality.Value = ffmpegOutput.Video_Quality;
-            tbFFEXEH264Quantizer.Value = ffmpegOutput.Video_H264_Quantizer;
-            cbFFEXEH264Mode.SelectedIndex = (int) ffmpegOutput.Video_H264_Mode;
-            cbFFEXEH264Preset.SelectedIndex = (int)ffmpegOutput.Video_H264_Preset;
-            cbFFEXEH264Profile.SelectedIndex = (int)ffmpegOutput.Video_H264_Profile;
-            cbFFEXEH264QuickTimeCompatibility.Checked = ffmpegOutput.Video_H264_QuickTime_Compatibility;
-            cbFFEXEH264ZeroTolerance.Checked = ffmpegOutput.Video_H264_ZeroTolerance;
-            cbFFEXEH264WebFastStart.Checked = ffmpegOutput.Video_H264_WebFastStart;
-            cbFFEXEVideoConstraint.SelectedIndex = (int)ffmpegOutput.Video_TVSystem;
+            edVideoTargetBitrate.Text = ((int)(ffmpegOutput.Video.Bitrate / 1000.0)).ToString();
+            edVideoBitrateMax.Text = ((int)(ffmpegOutput.Video.MaxBitrate / 1000.0)).ToString();
+            edVideoBitrateMin.Text = ((int)(ffmpegOutput.Video.MinBitrate / 1000.0)).ToString();
+            edVBVBufferSize.Text = ffmpegOutput.VideoBufferSize.ToString();
+            cbVideoInterlace.Checked = ffmpegOutput.Video.Interlace;
+            cbVideoResolutionLetterbox.Checked = ffmpegOutput.Video.Letterbox;
+            tbVideoQuality.Value = ffmpegOutput.Video.Quality;
+            cbVideoConstraint.SelectedIndex = (int)ffmpegOutput.Video.TVSystem;
 
-            switch (ffmpegOutput.Video_H264_Level)
+            if (ffmpegOutput.Video.GetType() == typeof(H264MFSettings)
+                || ffmpegOutput.Video.GetType() == typeof(HEVCMFSettings))
             {
-                case VFFFMPEGEXEH264Level.None:
-                    cbFFEXEH264Level.SelectedIndex = 0;
+                edVideoTargetBitrate.Enabled = true;
+                tbVideoQuality.Enabled = true;
+
+                var mf = (CommonMFSettings)ffmpegOutput.Video;
+                //edVideoGOPSize.Text = ffmpegOutput.Video.GOPSize.ToString();
+                //edVideoBFramesCount.Text = ffmpegOutput.Video.BFrames.ToString();
+                cbH264Mode.SelectedIndex = (int)mf.RateControl;
+                cbForceHWEncoding.Checked = mf.ForceHWEncoding;
+
+
+                //cbH264Usage.SelectedIndex = (int)ffmpegOutput.Video.H264_Preset;
+                //cbH264Profile.SelectedIndex = (int)ffmpegOutput.Video_H264_Profile;
+                //cbH264QuickTimeCompatibility.Checked = ffmpegOutput.Video_H264_QuickTime_Compatibility;
+                //cbH264ZeroTolerance.Checked = ffmpegOutput.Video_H264_ZeroTolerance;
+                //cbH264WebFastStart.Checked = ffmpegOutput.Video_X264_WebFastStart;
+
+                //switch (ffmpegOutput.Video_H264_Level)
+                //{
+                //    case H264Level.None:
+                //        cbH264Level.SelectedIndex = 0;
+                //        break;
+                //    case H264Level.Level1:
+                //        cbH264Level.SelectedIndex = 1;
+                //        break;
+                //    case H264Level.Level11:
+                //        cbH264Level.SelectedIndex = 2;
+                //        break;
+                //    case H264Level.Level12:
+                //        cbH264Level.SelectedIndex = 3;
+                //        break;
+                //    case H264Level.Level13:
+                //        cbH264Level.SelectedIndex = 4;
+                //        break;
+                //    case H264Level.Level2:
+                //        cbH264Level.SelectedIndex = 5;
+                //        break;
+                //    case H264Level.Level21:
+                //        cbH264Level.SelectedIndex = 6;
+                //        break;
+                //    case H264Level.Level22:
+                //        cbH264Level.SelectedIndex = 7;
+                //        break;
+                //    case H264Level.Level3:
+                //        cbH264Level.SelectedIndex = 8;
+                //        break;
+                //    case H264Level.Level31:
+                //        cbH264Level.SelectedIndex = 9;
+                //        break;
+                //    case H264Level.Level32:
+                //        cbH264Level.SelectedIndex = 10;
+                //        break;
+                //    case H264Level.Level4:
+                //        cbH264Level.SelectedIndex = 11;
+                //        break;
+                //    case H264Level.Level41:
+                //        cbH264Level.SelectedIndex = 12;
+                //        break;
+                //    case H264Level.Level42:
+                //        cbH264Level.SelectedIndex = 13;
+                //        break;
+                //    case H264Level.Level5:
+                //        cbH264Level.SelectedIndex = 14;
+                //        break;
+                //    case H264Level.Level51:
+                //        cbH264Level.SelectedIndex = 15;
+                //        break;
+                //    default:
+                //        throw new ArgumentOutOfRangeException();
+                //}
+            }
+
+            switch (ffmpegOutput.Audio.Encoder)
+            {
+                case AudioEncoder.Auto:
+                    cbAudioCodec.SelectedIndex = 0;
                     break;
-                case VFFFMPEGEXEH264Level.Level1:
-                    cbFFEXEH264Level.SelectedIndex = 1;
+                case AudioEncoder.AAC:
+                    cbAudioCodec.SelectedIndex = 1;
                     break;
-                case VFFFMPEGEXEH264Level.Level11:
-                    cbFFEXEH264Level.SelectedIndex = 2;
+                case AudioEncoder.AC3:
+                    cbAudioCodec.SelectedIndex = 2;
                     break;
-                case VFFFMPEGEXEH264Level.Level12:
-                    cbFFEXEH264Level.SelectedIndex = 3;
+                case AudioEncoder.adpcm_g722:
+                    cbAudioCodec.SelectedIndex = 3;
                     break;
-                case VFFFMPEGEXEH264Level.Level13:
-                    cbFFEXEH264Level.SelectedIndex = 4;
+                case AudioEncoder.adpcm_g726:
+                    cbAudioCodec.SelectedIndex = 4;
                     break;
-                case VFFFMPEGEXEH264Level.Level2:
-                    cbFFEXEH264Level.SelectedIndex = 5;
+                case AudioEncoder.adpcm_ms:
+                    cbAudioCodec.SelectedIndex = 5;
                     break;
-                case VFFFMPEGEXEH264Level.Level21:
-                    cbFFEXEH264Level.SelectedIndex = 6;
+                case AudioEncoder.ALAC:
+                    cbAudioCodec.SelectedIndex = 6;
                     break;
-                case VFFFMPEGEXEH264Level.Level22:
-                    cbFFEXEH264Level.SelectedIndex = 7;
+                case AudioEncoder.AMR_NB:
+                    cbAudioCodec.SelectedIndex = 7;
                     break;
-                case VFFFMPEGEXEH264Level.Level3:
-                    cbFFEXEH264Level.SelectedIndex = 8;
+                case AudioEncoder.AMR_WB:
+                    cbAudioCodec.SelectedIndex = 8;
                     break;
-                case VFFFMPEGEXEH264Level.Level31:
-                    cbFFEXEH264Level.SelectedIndex = 9;
+                case AudioEncoder.EAC3:
+                    cbAudioCodec.SelectedIndex = 9;
                     break;
-                case VFFFMPEGEXEH264Level.Level32:
-                    cbFFEXEH264Level.SelectedIndex = 10;
+                case AudioEncoder.FLAC:
+                    cbAudioCodec.SelectedIndex = 10;
                     break;
-                case VFFFMPEGEXEH264Level.Level4:
-                    cbFFEXEH264Level.SelectedIndex = 11;
+                case AudioEncoder.G723_1:
+                    cbAudioCodec.SelectedIndex = 11;
                     break;
-                case VFFFMPEGEXEH264Level.Level41:
-                    cbFFEXEH264Level.SelectedIndex = 12;
+                case AudioEncoder.MP2:
+                    cbAudioCodec.SelectedIndex = 12;
                     break;
-                case VFFFMPEGEXEH264Level.Level42:
-                    cbFFEXEH264Level.SelectedIndex = 13;
+                case AudioEncoder.MP3:
+                    cbAudioCodec.SelectedIndex = 13;
                     break;
-                case VFFFMPEGEXEH264Level.Level5:
-                    cbFFEXEH264Level.SelectedIndex = 14;
+                case AudioEncoder.OPUS:
+                    cbAudioCodec.SelectedIndex = 14;
                     break;
-                case VFFFMPEGEXEH264Level.Level51:
-                    cbFFEXEH264Level.SelectedIndex = 15;
+                case AudioEncoder.PCM_ALAW:
+                    cbAudioCodec.SelectedIndex = 15;
+                    break;
+                case AudioEncoder.PCM_F32BE:
+                    cbAudioCodec.SelectedIndex = 16;
+                    break;
+                case AudioEncoder.PCM_F32LE:
+                    cbAudioCodec.SelectedIndex = 17;
+                    break;
+                case AudioEncoder.PCM_F64BE:
+                    cbAudioCodec.SelectedIndex = 18;
+                    break;
+                case AudioEncoder.PCM_F64LE:
+                    cbAudioCodec.SelectedIndex = 19;
+                    break;
+                case AudioEncoder.PCM_MULAW:
+                    cbAudioCodec.SelectedIndex = 20;
+                    break;
+                case AudioEncoder.PCM_S16BE:
+                    cbAudioCodec.SelectedIndex = 21;
+                    break;
+                case AudioEncoder.PCM_S16BE_Planar:
+                    cbAudioCodec.SelectedIndex = 22;
+                    break;
+                case AudioEncoder.PCM_S16LE:
+                    cbAudioCodec.SelectedIndex = 23;
+                    break;
+                case AudioEncoder.PCM_S16LE_Planar:
+                    cbAudioCodec.SelectedIndex = 24;
+                    break;
+                case AudioEncoder.PCM_S24BE:
+                    cbAudioCodec.SelectedIndex = 25;
+                    break;
+                case AudioEncoder.PCM_S24daud:
+                    break;
+                case AudioEncoder.PCM_S24LE:
+                    cbAudioCodec.SelectedIndex = 26;
+                    break;
+                case AudioEncoder.PCM_S24LE_Planar:
+                    cbAudioCodec.SelectedIndex = 27;
+                    break;
+                case AudioEncoder.PCM_S32BE:
+                    cbAudioCodec.SelectedIndex = 28;
+                    break;
+                case AudioEncoder.PCM_S32LE:
+                    cbAudioCodec.SelectedIndex = 29;
+                    break;
+                case AudioEncoder.PCM_S32LE_Planar:
+                    cbAudioCodec.SelectedIndex = 30;
+                    break;
+                case AudioEncoder.PCM_S8:
+                    cbAudioCodec.SelectedIndex = 31;
+                    break;
+                case AudioEncoder.PCM_S8_Planar:
+                    cbAudioCodec.SelectedIndex = 32;
+                    break;
+                case AudioEncoder.PCM_U16BE:
+                    cbAudioCodec.SelectedIndex = 33;
+                    break;
+                case AudioEncoder.PCM_U16LE:
+                    cbAudioCodec.SelectedIndex = 34;
+                    break;
+                case AudioEncoder.PCM_U24BE:
+                    cbAudioCodec.SelectedIndex = 35;
+                    break;
+                case AudioEncoder.PCM_U24LE:
+                    cbAudioCodec.SelectedIndex = 36;
+                    break;
+                case AudioEncoder.PCM_U32BE:
+                    cbAudioCodec.SelectedIndex = 37;
+                    break;
+                case AudioEncoder.PCM_U32LE:
+                    cbAudioCodec.SelectedIndex = 38;
+                    break;
+                case AudioEncoder.PCM_U8:
+                    cbAudioCodec.SelectedIndex = 39;
+                    break;
+                case AudioEncoder.Speex:
+                    cbAudioCodec.SelectedIndex = 40;
+                    break;
+                case AudioEncoder.Vorbis:
+                    cbAudioCodec.SelectedIndex = 41;
+                    break;
+                case AudioEncoder.WavPack:
+                    cbAudioCodec.SelectedIndex = 42;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            switch (ffmpegOutput.Audio_Encoder)
+            if (ffmpegOutput.Audio.Channels == 0)
             {
-                case VFFFMPEGEXEAudioEncoder.Auto:
-                    cbFFEXEAudioCodec.SelectedIndex = 0;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.AAC:
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.AC3:
-                    cbFFEXEAudioCodec.SelectedIndex = 2;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.adpcm_g722:
-                    cbFFEXEAudioCodec.SelectedIndex = 3;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.adpcm_g726:
-                    cbFFEXEAudioCodec.SelectedIndex = 4;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.adpcm_ms:
-                    cbFFEXEAudioCodec.SelectedIndex = 5;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.ALAC:
-                    cbFFEXEAudioCodec.SelectedIndex = 6;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.AMR_NB:
-                    cbFFEXEAudioCodec.SelectedIndex = 7;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.AMR_WB:
-                    cbFFEXEAudioCodec.SelectedIndex = 8;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.EAC3:
-                    cbFFEXEAudioCodec.SelectedIndex = 9;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.FLAC:
-                    cbFFEXEAudioCodec.SelectedIndex = 10;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.G723_1:
-                    cbFFEXEAudioCodec.SelectedIndex = 11;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.MP2:
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.MP3:
-                    cbFFEXEAudioCodec.SelectedIndex = 13;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.OPUS:
-                    cbFFEXEAudioCodec.SelectedIndex = 14;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_ALAW:
-                    cbFFEXEAudioCodec.SelectedIndex = 15;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_F32BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 16;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_F32LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 17;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_F64BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 18;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_F64LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 19;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_MULAW:
-                    cbFFEXEAudioCodec.SelectedIndex = 20;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S16BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 21;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S16BE_Planar:
-                    cbFFEXEAudioCodec.SelectedIndex = 22;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S16LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 23;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S16LE_Planar:
-                    cbFFEXEAudioCodec.SelectedIndex = 24;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S24BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 25;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S24daud:
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S24LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 26;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S24LE_Planar:
-                    cbFFEXEAudioCodec.SelectedIndex = 27;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S32BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 28;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S32LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 29;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S32LE_Planar:
-                    cbFFEXEAudioCodec.SelectedIndex = 30;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S8:
-                    cbFFEXEAudioCodec.SelectedIndex = 31;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_S8_Planar:
-                    cbFFEXEAudioCodec.SelectedIndex = 32;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U16BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 33;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U16LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 34;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U24BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 35;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U24LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 36;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U32BE:
-                    cbFFEXEAudioCodec.SelectedIndex = 37;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U32LE:
-                    cbFFEXEAudioCodec.SelectedIndex = 38;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.PCM_U8:
-                    cbFFEXEAudioCodec.SelectedIndex = 39;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.Speex:
-                    cbFFEXEAudioCodec.SelectedIndex = 40;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.Vorbis:
-                    cbFFEXEAudioCodec.SelectedIndex = 41;
-                    break;
-                case VFFFMPEGEXEAudioEncoder.WavPack:
-                    cbFFEXEAudioCodec.SelectedIndex = 42;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (ffmpegOutput.Audio_Channels == 0)
-            {
-                cbFFEXEAudioChannels.SelectedIndex = 0;
+                cbAudioChannels.SelectedIndex = 0;
             }
             else
             {
-                cbFFEXEAudioChannels.Text = ffmpegOutput.Audio_Channels.ToString();
+                cbAudioChannels.Text = ffmpegOutput.Audio.Channels.ToString();
             }
 
-            if (ffmpegOutput.Audio_SampleRate == 0)
+            if (ffmpegOutput.Audio.SampleRate == 0)
             {
-                cbFFEXEAudioSampleRate.SelectedIndex = 0;
+                cbAudioSampleRate.SelectedIndex = 0;
             }
             else
             {
-                cbFFEXEAudioSampleRate.Text = ffmpegOutput.Audio_SampleRate.ToString();
+                cbAudioSampleRate.Text = ffmpegOutput.Audio.SampleRate.ToString();
             }
 
-            if (ffmpegOutput.Audio_Bitrate == 0)
+            if (ffmpegOutput.Audio.Bitrate == 0)
             {
-                cbFFEXEAudioBitrate.SelectedIndex = 0;
+                cbAudioBitrate.SelectedIndex = 0;
             }
             else
             {
-                cbFFEXEAudioBitrate.Text = ffmpegOutput.Audio_Bitrate.ToString();
+                cbAudioBitrate.Text = ffmpegOutput.Audio.Bitrate.ToString();
             }
-            
-            tbFFEXEAudioQuality.Value = ffmpegOutput.Audio_Quality;
 
-            switch (ffmpegOutput.Audio_Mode)
+            tbAudioQuality.Value = ffmpegOutput.Audio.Quality;
+
+            switch (ffmpegOutput.Audio.Mode)
             {
-                case VFFFMPEGEXEAudioMode.None:
-                case VFFFMPEGEXEAudioMode.CBR:
-                    rbFFEXEAudioModeCBR.Checked = true;
+                case AudioMode.None:
+                case AudioMode.CBR:
+                    rbAudioModeCBR.Checked = true;
                     break;
-                case VFFFMPEGEXEAudioMode.ABR:
-                    rbFFEXEAudioModeABR.Checked = true;
+                case AudioMode.ABR:
+                    rbAudioModeABR.Checked = true;
                     break;
-                case VFFFMPEGEXEAudioMode.Quality:
-                    rbFFEXEAudioModeQuality.Checked = true;
+                case AudioMode.Quality:
+                    rbAudioModeQuality.Checked = true;
                     break;
-                case VFFFMPEGEXEAudioMode.Lossless:
-                    rbFFEXEAudioModeLossless.Checked = true;
+                case AudioMode.Lossless:
+                    rbAudioModeLossless.Checked = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -551,656 +564,714 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         public void SaveSettings(ref VFFFMPEGEXEOutput ffmpegOutput)
         {
-            ffmpegOutput.UsePipe = cbFFMPEGEXEUsePipes.Checked;
-            ffmpegOutput.Custom_AdditionalAudioArgs = edFFEXECustomParametersAudio.Text;
-            ffmpegOutput.Custom_AdditionalVideoArgs = edFFEXECustomParametersVideo.Text;
+            ffmpegOutput.UsePipe = cbUsePipes.Checked;
+            ffmpegOutput.Custom_AdditionalAudioArgs = edCustomParametersAudio.Text;
+            ffmpegOutput.Custom_AdditionalVideoArgs = edCustomParametersVideo.Text;
 
-            if (cbFFEXEUseOnlyAdditionalParameters.Checked)
+            if (cbUseOnlyAdditionalParameters.Checked)
             {
-                ffmpegOutput.Custom_AllFFMPEGArgs = edFFEXECustomParametersCommon.Text;
+                ffmpegOutput.Custom_AllFFMPEGArgs = edCustomParametersCommon.Text;
             }
             else
             {
-                ffmpegOutput.Custom_AdditionalCommonArgs = edFFEXECustomParametersCommon.Text;
+                ffmpegOutput.Custom_AdditionalCommonArgs = edCustomParametersCommon.Text;
             }
 
-            switch (cbFFEXEOutputFormat.SelectedIndex)
+            switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
                     // 3G2
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.Mobile3G2;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.Mobile3G2;
                     break;
                 case 1:
                     // 3GP
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.Mobile3GP;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.Mobile3GP;
                     break;
                 case 2:
                     // AC3
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.AC3;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.AC3;
                     break;
                 case 3:
                     // ADTS
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ADTS;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.ADTS;
                     break;
                 case 4:
                     // AVI
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.AVI;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.AVI;
                     break;
                 case 5:
                     // DTS
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.DTS;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.DTS;
                     break;
                 case 6:
                     // DTS-HD
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.DTSHD;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.DTSHD;
                     break;
                 case 7:
                     // DVD (VOB)
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.VOB;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.VOB;
                     break;
                 case 8:
                     // E-AC3
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.EAC3;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.EAC3;
                     break;
                 case 9:
                     // F4V
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.F4V;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.F4V;
                     break;
                 case 10:
                     // FLAC
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLAC;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.FLAC;
                     break;
                 case 11:
                     // FLV
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.FLV;
                     break;
                 case 12:
                     // GIF
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.GIF;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.GIF;
                     break;
                 case 13:
                     // H263
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.H263;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.H263;
                     break;
                 case 14:
                     // H264
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.H264;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.H264;
                     break;
                 case 15:
                     // HEVC
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.HEVC;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.HEVC;
                     break;
                 case 16:
                     // Matroska
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.Matroska;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.Matroska;
                     break;
                 case 17:
                     // M4V
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.M4V;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.M4V;
                     break;
                 case 18:
                     // MJPEG
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MJPEG;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MJPEG;
                     break;
                 case 19:
                     // MOV
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MOV;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MOV;
                     break;
                 case 20:
                     // MP2
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MP2;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MP2;
                     break;
                 case 21:
                     // MP3
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MP3;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MP3;
                     break;
                 case 22:
                     // MP4
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MP4;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MP4;
                     break;
                 case 23:
                     // MPEG
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEG;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MPEG;
                     break;
                 case 24:
                     // MPEGTS
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS;
                     break;
                 case 25:
                     // MXF
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MXF;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.MXF;
                     break;
                 case 26:
                     // OGG
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.OGG;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.OGG;
                     break;
                 case 27:
                     // OPUS
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.OPUS;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.OPUS;
                     break;
                 case 28:
                     // PSP MP4
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.PSP;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.PSP;
                     break;
                 case 29:
                     // RAWVideo
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.RAWVideo;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.RAWVideo;
                     break;
                 case 30:
                     // SVCD
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.SVCD;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.SVCD;
                     break;
                 case 31:
                     // SWF
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.SWF;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.SWF;
                     break;
                 case 32:
                     // TrueHD
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.TrueHD;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.TrueHD;
                     break;
                 case 33:
                     // VC1
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.VC1;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.VC1;
                     break;
                 case 34:
                     // VCD
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.VCD;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.VCD;
                     break;
                 case 35:
                     // WAV
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.WAV;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.WAV;
                     break;
                 case 36:
                     // WebM
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.WebM;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.WebM;
                     break;
                 case 37:
                     // WTV
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.WTV;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.WTV;
                     break;
                 case 38:
                     // WV (WavPack)
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.WV;
+                    ffmpegOutput.OutputMuxer = OutputMuxer.WV;
                     break;
             }
 
-            switch (cbFFEXEVideoCodec.SelectedIndex)
+            var videoEncoderSettings = new BasicVideoSettings();
+            VideoEncoder videoEncoder;
+            switch (cbVideoCodec.SelectedIndex)
             {
                 case 0:
                     // Auto
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.Auto;
+                    videoEncoder = VideoEncoder.Auto;
                     break;
                 case 1:
                     // DV
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.DVVideo;
+                    videoEncoder = VideoEncoder.DVVideo;
                     break;
                 case 2:
                     // FLV1
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.FLV1;
+                    videoEncoder = VideoEncoder.FLV1;
                     break;
                 case 3:
                     // GIF
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.GIF;
+                    videoEncoder = VideoEncoder.GIF;
                     break;
                 case 4:
                     // H263
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.H263;
+                    videoEncoder = VideoEncoder.H263;
                     break;
                 case 5:
                     // H264
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.H264;
+                    videoEncoder = VideoEncoder.H264;
+                    videoEncoderSettings = new H264MFSettings();
                     break;
                 case 6:
                     // H264 QSV
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.H264_QSV;
+                    videoEncoder = VideoEncoder.H264_QSV;
                     break;
                 case 7:
-                    // HEVC
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.HEVC;
+                    // H264 NVENC
+                    videoEncoder = VideoEncoder.H264_NVENC;
+                    videoEncoderSettings = new H264NVENCSettings();
                     break;
                 case 8:
-                    // HEVC QSV
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.HEVC_QSV;
+                    // HEVC
+                    videoEncoder = VideoEncoder.HEVC;
+                    videoEncoderSettings = new HEVCMFSettings();
                     break;
                 case 9:
-                    // HuffYUV
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.HuffYUV;
+                    // HEVC QSV
+                    videoEncoder = VideoEncoder.HEVC_QSV;
                     break;
                 case 10:
-                    // JPEG 2000
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.JPEG2000;
+                    // HEVC NVENC
+                    videoEncoder = VideoEncoder.HEVC_NVENC;
+                    videoEncoderSettings = new HEVCNVENCSettings();
                     break;
                 case 11:
-                    // JPEG-LS
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.JPEGLS;
+                    // HuffYUV
+                    videoEncoder = VideoEncoder.HuffYUV;
                     break;
                 case 12:
-                    // LJPEG
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.LJPEG;
+                    // JPEG 2000
+                    videoEncoder = VideoEncoder.JPEG2000;
                     break;
                 case 13:
-                    // MJPEG
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.MJPEG;
+                    // JPEG-LS
+                    videoEncoder = VideoEncoder.JPEGLS;
                     break;
                 case 14:
-                    // MPEG-1
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.MPEG1Video;
+                    // LJPEG
+                    videoEncoder = VideoEncoder.LJPEG;
                     break;
                 case 15:
-                    // MPEG-2
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.MPEG2Video;
+                    // MJPEG
+                    videoEncoder = VideoEncoder.MJPEG;
                     break;
                 case 16:
-                    // MPEG-4
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.MPEG4;
+                    // MPEG-1
+                    videoEncoder = VideoEncoder.MPEG1Video;
                     break;
                 case 17:
-                    // PNG
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.PNG;
+                    // MPEG-2
+                    videoEncoder = VideoEncoder.MPEG2Video;
+                    videoEncoderSettings = new MPEG2Settings();
                     break;
                 case 18:
-                    // Theora
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.Theora;
+                    // MPEG-4
+                    videoEncoder = VideoEncoder.MPEG4;
                     break;
                 case 19:
-                    // VP8
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.VP8;
+                    // PNG
+                    videoEncoder = VideoEncoder.PNG;
                     break;
                 case 20:
+                    // Theora
+                    videoEncoder = VideoEncoder.Theora;
+                    break;
+                case 21:
+                    // VP8
+                    videoEncoder = VideoEncoder.VP8;
+                    break;
+                case 22:
                     // VP9
-                    ffmpegOutput.Video_Encoder = VFFFMPEGEXEVideoEncoder.VP9;
+                    videoEncoder = VideoEncoder.VP9;
+                    break;
+                default:
+                    videoEncoder = VideoEncoder.H264;
                     break;
             }
 
-            switch (cbFFEXEAspectRatio.SelectedIndex)
+            ffmpegOutput.Video = videoEncoderSettings;
+            ffmpegOutput.Video.Encoder = videoEncoder;
+
+            switch (cbAspectRatio.SelectedIndex)
             {
                 case 0:
-                    ffmpegOutput.Video_AspectRatioW = 0;
-                    ffmpegOutput.Video_AspectRatioH = 1;
+                    ffmpegOutput.Video.AspectRatioW = 0;
+                    ffmpegOutput.Video.AspectRatioH = 1;
                     break;
                 case 1:
-                    ffmpegOutput.Video_AspectRatioW = 1;
-                    ffmpegOutput.Video_AspectRatioH = 1;
+                    ffmpegOutput.Video.AspectRatioW = 1;
+                    ffmpegOutput.Video.AspectRatioH = 1;
                     break;
                 case 2:
-                    ffmpegOutput.Video_AspectRatioW = 4;
-                    ffmpegOutput.Video_AspectRatioH = 3;
+                    ffmpegOutput.Video.AspectRatioW = 4;
+                    ffmpegOutput.Video.AspectRatioH = 3;
                     break;
                 case 3:
-                    ffmpegOutput.Video_AspectRatioW = 16;
-                    ffmpegOutput.Video_AspectRatioH = 9;
+                    ffmpegOutput.Video.AspectRatioW = 16;
+                    ffmpegOutput.Video.AspectRatioH = 9;
                     break;
             }
 
-            if (cbFFEXEVideoResolutionOriginal.Checked)
+            if (cbVideoResolutionOriginal.Checked)
             {
-                ffmpegOutput.Video_Width = 0;
-                ffmpegOutput.Video_Height = 0;
+                ffmpegOutput.Video.Width = 0;
+                ffmpegOutput.Video.Height = 0;
             }
             else
             {
-                ffmpegOutput.Video_Width = Convert.ToInt32(edFFEXEVideoWidth.Text);
-                ffmpegOutput.Video_Height = Convert.ToInt32(edFFEXEVideoHeight.Text);
+                ffmpegOutput.Video.Width = Convert.ToInt32(edVideoWidth.Text);
+                ffmpegOutput.Video.Height = Convert.ToInt32(edVideoHeight.Text);
             }
 
-            if (rbFFEXEVideoModeCBR.Checked)
+            if (rbVideoModeCBR.Checked)
             {
-                ffmpegOutput.Video_Mode = VFFFMPEGEXEVideoMode.CBR;
+                ffmpegOutput.Video.BasicMode = VideoMode.CBR;
             }
-            else if (rbFFEXEVideoModeQuality.Checked)
+            else if (rbVideoModeQuality.Checked)
             {
-                ffmpegOutput.Video_Mode = VFFFMPEGEXEVideoMode.Quality;
+                ffmpegOutput.Video.BasicMode = VideoMode.Quality;
             }
-            else if (rbFFEXEVideoModeABR.Checked)
+            else if (rbVideoModeABR.Checked)
             {
-                ffmpegOutput.Video_Mode = VFFFMPEGEXEVideoMode.ABR;
+                ffmpegOutput.Video.BasicMode = VideoMode.ABR;
             }
 
-            ffmpegOutput.Video_Bitrate = Convert.ToInt32(edFFEXEVideoTargetBitrate.Text) * 1000;
-            ffmpegOutput.Video_MaxBitrate = Convert.ToInt32(edFFEXEVideoBitrateMax.Text) * 1000;
-            ffmpegOutput.Video_MinBitrate = Convert.ToInt32(edFFEXEVideoBitrateMin.Text) * 1000;
-            ffmpegOutput.Video_BufferSize = Convert.ToInt32(edFFEXEVBVBufferSize.Text);
-            ffmpegOutput.Video_GOPSize = Convert.ToInt32(edFFEXEVideoGOPSize.Text);
-            ffmpegOutput.Video_BFrames = Convert.ToInt32(edFFEXEVideoBFramesCount.Text);
-            ffmpegOutput.Video_Interlace = cbFFEXEVideoInterlace.Checked;
-            ffmpegOutput.Video_Letterbox = cbFFEXEVideoResolutionLetterbox.Checked;
-            ffmpegOutput.Video_Quality = tbFFEXEVideoQuality.Value;
+            ffmpegOutput.Video.Bitrate = Convert.ToInt32(edVideoTargetBitrate.Text) * 1000;
+            ffmpegOutput.Video.MaxBitrate = Convert.ToInt32(edVideoBitrateMax.Text) * 1000;
+            ffmpegOutput.Video.MinBitrate = Convert.ToInt32(edVideoBitrateMin.Text) * 1000;
+            ffmpegOutput.Video.Interlace = cbVideoInterlace.Checked;
+            ffmpegOutput.Video.Letterbox = cbVideoResolutionLetterbox.Checked;
+            ffmpegOutput.Video.Quality = tbVideoQuality.Value;
+            ffmpegOutput.Video.TVSystem = (TVSystem)cbVideoConstraint.SelectedIndex;
+            ffmpegOutput.VideoBufferSize = Convert.ToInt32(edVBVBufferSize.Text);
 
-            ffmpegOutput.Video_H264_Quantizer = tbFFEXEH264Quantizer.Value;
-            ffmpegOutput.Video_H264_Mode = (VFFFMPEGEXEH264Mode)cbFFEXEH264Mode.SelectedIndex;
-            ffmpegOutput.Video_H264_Preset = (VFFFMPEGEXEH264Preset)cbFFEXEH264Preset.SelectedIndex;
-            ffmpegOutput.Video_H264_Profile = (VFFFMPEGEXEH264Profile)cbFFEXEH264Profile.SelectedIndex;
-            ffmpegOutput.Video_H264_QuickTime_Compatibility = cbFFEXEH264QuickTimeCompatibility.Checked;
-            ffmpegOutput.Video_H264_ZeroTolerance = cbFFEXEH264ZeroTolerance.Checked;
-            ffmpegOutput.Video_H264_WebFastStart = cbFFEXEH264WebFastStart.Checked;
-            ffmpegOutput.Video_TVSystem = (VFFFMPEGEXETVSystem)cbFFEXEVideoConstraint.SelectedIndex;
-
-            switch (cbFFEXEH264Level.SelectedIndex)
+            if (ffmpegOutput.Video.GetType() == typeof(H264MFSettings)
+                || ffmpegOutput.Video.GetType() == typeof(HEVCMFSettings))
             {
-                case 0:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.None;
-                    break;
-                case 1:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level1;
-                    break;
-                case 2:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level11;
-                    break;
-                case 3:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level12;
-                    break;
-                case 4:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level13;
-                    break;
-                case 5:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level2;
-                    break;
-                case 6:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level21;
-                    break;
-                case 7:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level22;
-                    break;
-                case 8:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level3;
-                    break;
-                case 9:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level31;
-                    break;
-                case 10:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level32;
-                    break;
-                case 11:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level4;
-                    break;
-                case 12:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level41;
-                    break;
-                case 13:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level42;
-                    break;
-                case 14:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level5;
-                    break;
-                case 15:
-                    ffmpegOutput.Video_H264_Level = VFFFMPEGEXEH264Level.Level51;
-                    break;
+                var mf = (CommonMFSettings)ffmpegOutput.Video;
+
+                mf.ForceHWEncoding = cbForceHWEncoding.Checked;
+                mf.RateControl = (H264MFRateControl)cbH264Mode.SelectedIndex;
+                switch (cbH264Usage.SelectedIndex)
+                {
+                    case 0:
+                        mf.Scenario = H264MFScenario.Default;
+                        break;
+                    case 1:
+                        mf.Scenario = H264MFScenario.DisplayRemoting;
+                        break;
+                    case 2:
+                        mf.Scenario = H264MFScenario.VideoConference;
+                        break;
+                    case 3:
+                        mf.Scenario = H264MFScenario.Archive;
+                        break;
+                    case 4:
+                        mf.Scenario = H264MFScenario.LiveStreaming;
+                        break;
+                    case 5:
+                        mf.Scenario = H264MFScenario.CameraRecord;
+                        break;
+                    case 6:
+                        mf.Scenario = H264MFScenario.DisplayRemotingWithFeatureMap;
+                        break;
+                }
+
+                if (videoEncoderSettings.GetType() == typeof(MPEG2Settings))
+                {
+                    (videoEncoderSettings as MPEG2Settings).GOPSize = Convert.ToInt32(edVideoGOPSize.Text);
+                    (videoEncoderSettings as MPEG2Settings).BFrames = Convert.ToInt32(edVideoBFramesCount.Text);
+                }
+                
+                //ffmpegOutput.Video_X264_Quantizer = tbFFEXEH264Quantizer.Value;
+                //ffmpegOutput.Video_H264_Mode = (VFFFMPEGEXEH264Mode)cbFFEXEH264Mode.SelectedIndex;
+                //ffmpegOutput.Video_H264_Preset = (X264Preset)cbFFEXEH264Usage.SelectedIndex;
+                //ffmpegOutput.Video_H264_Profile = (H264Profile)cbFFEXEH264Profile.SelectedIndex;
+                //ffmpegOutput.Video_H264_QuickTime_Compatibility = cbFFEXEH264QuickTimeCompatibility.Checked;
+                //ffmpegOutput.Video_H264_ZeroTolerance = cbFFEXEH264ZeroTolerance.Checked;
+                //ffmpegOutput.Video_X264_WebFastStart = cbFFEXEH264WebFastStart.Checked;
+
+                //switch (cbFFEXEH264Level.SelectedIndex)
+                //{
+                //    case 0:
+                //        ffmpegOutput.Video_H264_Level = H264Level.None;
+                //        break;
+                //    case 1:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level1;
+                //        break;
+                //    case 2:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level11;
+                //        break;
+                //    case 3:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level12;
+                //        break;
+                //    case 4:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level13;
+                //        break;
+                //    case 5:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level2;
+                //        break;
+                //    case 6:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level21;
+                //        break;
+                //    case 7:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level22;
+                //        break;
+                //    case 8:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level3;
+                //        break;
+                //    case 9:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level31;
+                //        break;
+                //    case 10:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level32;
+                //        break;
+                //    case 11:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level4;
+                //        break;
+                //    case 12:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level41;
+                //        break;
+                //    case 13:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level42;
+                //        break;
+                //    case 14:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level5;
+                //        break;
+                //    case 15:
+                //        ffmpegOutput.Video_H264_Level = H264Level.Level51;
+                //        break;
+                //}
             }
 
-            switch (cbFFEXEAudioCodec.SelectedIndex)
+            switch (cbAudioCodec.SelectedIndex)
             {
                 case 0:
                     // Auto
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.Auto;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.Auto;
                     break;
                 case 1:
                     // AAC
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.AAC;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.AAC;
                     break;
                 case 2:
                     // AC3
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.AC3;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.AC3;
                     break;
                 case 3:
                     // G722
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.adpcm_g722;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_g722;
                     break;
                 case 4:
                     // G726
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.adpcm_g726;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_g726;
                     break;
                 case 5:
                     // ADPCM
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.adpcm_ms;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_ms;
                     break;
                 case 6:
                     // ALAC
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.ALAC;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.ALAC;
                     break;
                 case 7:
                     // AMR-NB
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.AMR_NB;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.AMR_NB;
                     break;
                 case 8:
                     // AMR-WB
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.AMR_WB;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.AMR_WB;
                     break;
                 case 9:
                     // E-AC3
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.EAC3;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.EAC3;
                     break;
                 case 10:
                     // FLAC
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.FLAC;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.FLAC;
                     break;
                 case 11:
                     // G723
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.G723_1;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.G723_1;
                     break;
                 case 12:
                     // MP2
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.MP2;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.MP2;
                     break;
                 case 13:
                     // MP3
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.MP3;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.MP3;
                     break;
                 case 14:
                     // OPUS
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.OPUS;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.OPUS;
                     break;
                 case 15:
                     // PCM ALAW
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_ALAW;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_ALAW;
                     break;
                 case 16:
                     // PCM F32BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_F32BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_F32BE;
                     break;
                 case 17:
                     // PCM F32LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_F32LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_F32LE;
                     break;
                 case 18:
                     // PCM F64BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_F64BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_F64BE;
                     break;
                 case 19:
                     // PCM F64LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_F64LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_F64LE;
                     break;
                 case 20:
                     // PCM MULAW
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_MULAW;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_MULAW;
                     break;
                 case 21:
                     // PCM S16BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S16BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S16BE;
                     break;
                 case 22:
                     // PCM S16BE Planar
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S16BE_Planar;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S16BE_Planar;
                     break;
                 case 23:
                     // PCM S16LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S16LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S16LE;
                     break;
                 case 24:
                     // PCM S16LE Planar
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S16LE_Planar;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S16LE_Planar;
                     break;
                 case 25:
                     // PCM S24BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S24BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S24BE;
                     break;
                 case 26:
                     // PCM S24LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S24LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S24LE;
                     break;
                 case 27:
                     // PCM S24LE Planar
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S24LE_Planar;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S24LE_Planar;
                     break;
                 case 28:
                     // PCM S32BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S32BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S32BE;
                     break;
                 case 29:
                     // PCM S32LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S32LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S32LE;
                     break;
                 case 30:
                     // PCM S32LE Planar
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S32LE_Planar;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S32LE_Planar;
                     break;
                 case 31:
                     // PCM S8
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S8;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S8;
                     break;
                 case 32:
                     // PCM S8 Planar
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_S8_Planar;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_S8_Planar;
                     break;
                 case 33:
                     // PCM U16BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U16BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U16BE;
                     break;
                 case 34:
                     // PCM U16LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U16LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U16LE;
                     break;
                 case 35:
                     // PCM U24BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U24BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U24BE;
                     break;
                 case 36:
                     // PCM U24LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U24LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U24LE;
                     break;
                 case 37:
                     // PCM U32BE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U32BE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U32BE;
                     break;
                 case 38:
                     // PCM U32LE
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U32LE;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U32LE;
                     break;
                 case 39:
                     // PCM U8
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.PCM_U8;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.PCM_U8;
                     break;
                 case 40:
                     // Speex
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.Speex;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.Speex;
                     break;
                 case 41:
                     // Vorbis
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.Vorbis;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.Vorbis;
                     break;
                 case 42:
                     // WavPack
-                    ffmpegOutput.Audio_Encoder = VFFFMPEGEXEAudioEncoder.WavPack;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.WavPack;
                     break;
             }
 
-            if (cbFFEXEAudioChannels.SelectedIndex == 0)
+            if (cbAudioChannels.SelectedIndex == 0)
             {
-                ffmpegOutput.Audio_Channels = 0;
+                ffmpegOutput.Audio.Channels = 0;
             }
             else
             {
-                ffmpegOutput.Audio_Channels = Convert.ToInt32(cbFFEXEAudioChannels.Text);
+                ffmpegOutput.Audio.Channels = Convert.ToInt32(cbAudioChannels.Text);
             }
 
-            if (cbFFEXEAudioSampleRate.SelectedIndex == 0)
+            if (cbAudioSampleRate.SelectedIndex == 0)
             {
-                ffmpegOutput.Audio_SampleRate = 0;
+                ffmpegOutput.Audio.SampleRate = 0;
             }
             else
             {
-                ffmpegOutput.Audio_SampleRate = Convert.ToInt32(cbFFEXEAudioSampleRate.Text);
+                ffmpegOutput.Audio.SampleRate = Convert.ToInt32(cbAudioSampleRate.Text);
             }
 
-            if (cbFFEXEAudioBitrate.SelectedIndex == 0)
+            if (cbAudioBitrate.SelectedIndex == 0)
             {
-                ffmpegOutput.Audio_Bitrate = 0;
+                ffmpegOutput.Audio.Bitrate = 0;
             }
             else
             {
-                ffmpegOutput.Audio_Bitrate = Convert.ToInt32(cbFFEXEAudioBitrate.Text) * 1000;
+                ffmpegOutput.Audio.Bitrate = Convert.ToInt32(cbAudioBitrate.Text) * 1000;
             }
 
-            ffmpegOutput.Audio_Quality = tbFFEXEAudioQuality.Value;
+            ffmpegOutput.Audio.Quality = tbAudioQuality.Value;
 
-            if (rbFFEXEAudioModeCBR.Checked)
+            if (rbAudioModeCBR.Checked)
             {
-                ffmpegOutput.Audio_Mode = VFFFMPEGEXEAudioMode.CBR;
+                ffmpegOutput.Audio.Mode = AudioMode.CBR;
             }
-            else if (rbFFEXEAudioModeQuality.Checked)
+            else if (rbAudioModeQuality.Checked)
             {
-                ffmpegOutput.Audio_Mode = VFFFMPEGEXEAudioMode.Quality;
+                ffmpegOutput.Audio.Mode = AudioMode.Quality;
             }
-            else if (rbFFEXEAudioModeABR.Checked)
+            else if (rbAudioModeABR.Checked)
             {
-                ffmpegOutput.Audio_Mode = VFFFMPEGEXEAudioMode.ABR;
+                ffmpegOutput.Audio.Mode = AudioMode.ABR;
             }
-            else if (rbFFEXEAudioModeLossless.Checked)
+            else if (rbAudioModeLossless.Checked)
             {
-                ffmpegOutput.Audio_Mode = VFFFMPEGEXEAudioMode.Lossless;
+                ffmpegOutput.Audio.Mode = AudioMode.Lossless;
             }
         }
 
         private void FFEXEDisableVideoMode()
         {
-            rbFFEXEVideoModeABR.Enabled = false;
-            rbFFEXEVideoModeABR.Checked = false;
-            rbFFEXEVideoModeCBR.Enabled = false;
-            rbFFEXEVideoModeCBR.Checked = false;
-            rbFFEXEVideoModeQuality.Enabled = false;
-            rbFFEXEVideoModeQuality.Checked = false;
+            rbVideoModeABR.Enabled = false;
+            rbVideoModeABR.Checked = false;
+            rbVideoModeCBR.Enabled = false;
+            rbVideoModeCBR.Checked = false;
+            rbVideoModeQuality.Enabled = false;
+            rbVideoModeQuality.Checked = false;
 
-            tbFFEXEVideoQuality.Enabled = false;
-            edFFEXEVideoTargetBitrate.Enabled = false;
-            edFFEXEVideoBitrateMax.Enabled = false;
-            edFFEXEVideoBitrateMin.Enabled = false;
+            tbVideoQuality.Enabled = false;
+            edVideoTargetBitrate.Enabled = false;
+            edVideoBitrateMax.Enabled = false;
+            edVideoBitrateMin.Enabled = false;
         }
 
         private void FFEXEEnableVideoCBR()
         {
-            rbFFEXEVideoModeCBR.Enabled = true;
-            rbFFEXEVideoModeCBR.Checked = true;
+            rbVideoModeCBR.Enabled = true;
+            rbVideoModeCBR.Checked = true;
 
-            edFFEXEVideoTargetBitrate.Enabled = true;
+            edVideoTargetBitrate.Enabled = true;
         }
 
         private void FFEXEEnableVideoABR()
         {
-            rbFFEXEVideoModeABR.Enabled = true;
-            rbFFEXEVideoModeABR.Checked = true;
+            rbVideoModeABR.Enabled = true;
+            rbVideoModeABR.Checked = true;
 
-            edFFEXEVideoTargetBitrate.Enabled = true;
-            edFFEXEVideoBitrateMax.Enabled = true;
-            edFFEXEVideoBitrateMin.Enabled = true;
+            edVideoTargetBitrate.Enabled = true;
+            edVideoBitrateMax.Enabled = true;
+            edVideoBitrateMin.Enabled = true;
         }
 
         private void FFEXEEnableVideoQuality()
         {
-            rbFFEXEVideoModeQuality.Enabled = true;
-            rbFFEXEVideoModeQuality.Checked = true;
+            rbVideoModeQuality.Enabled = true;
+            rbVideoModeQuality.Checked = true;
 
-            tbFFEXEVideoQuality.Enabled = true;
+            tbVideoQuality.Enabled = true;
         }
 
         private void cbFFEXEProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cbFFEXEProfile.SelectedIndex)
+            switch (cbProfile.SelectedIndex)
             {
                 // MPEG-1
                 case 0:
-                    cbFFEXEOutputFormat.SelectedIndex = 23;
+                    cbOutputFormat.SelectedIndex = 23;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 14;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 14;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1208,10 +1279,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MPEG-1 VCD
                 case 1:
-                    cbFFEXEOutputFormat.SelectedIndex = 34;
+                    cbOutputFormat.SelectedIndex = 34;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 14;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 14;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1220,10 +1291,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MPEG-2
                 case 2:
-                    cbFFEXEOutputFormat.SelectedIndex = 23;
+                    cbOutputFormat.SelectedIndex = 23;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 15;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 15;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1231,10 +1302,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MPEG-2 SVCD
                 case 3:
-                    cbFFEXEOutputFormat.SelectedIndex = 30;
+                    cbOutputFormat.SelectedIndex = 30;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 15;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 15;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1243,10 +1314,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MPEG-2 DVD
                 case 4:
-                    cbFFEXEOutputFormat.SelectedIndex = 7;
+                    cbOutputFormat.SelectedIndex = 7;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 15;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 15;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1255,10 +1326,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MPEG-2 TS
                 case 5:
-                    cbFFEXEOutputFormat.SelectedIndex = 24;
+                    cbOutputFormat.SelectedIndex = 24;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 15;
-                    cbFFEXEAudioCodec.SelectedIndex = 12;
+                    cbVideoCodec.SelectedIndex = 15;
+                    cbAudioCodec.SelectedIndex = 12;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1267,10 +1338,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // Flash Video (FLV)
                 case 6:
-                    cbFFEXEOutputFormat.SelectedIndex = 11;
+                    cbOutputFormat.SelectedIndex = 11;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 5;
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
+                    cbVideoCodec.SelectedIndex = 5;
+                    cbAudioCodec.SelectedIndex = 1;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1278,145 +1349,168 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 // MP4 H264 / AAC
                 case 7:
-                    cbFFEXEOutputFormat.SelectedIndex = 22;
+                    cbOutputFormat.SelectedIndex = 22;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 5;
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
+                    cbVideoCodec.SelectedIndex = 5;
+                    cbAudioCodec.SelectedIndex = 1;
+                    
+                    cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
+                    cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
+
+                    break;
+
+                // MP4 H264 / AAC QSV
+                case 8:
+                    cbOutputFormat.SelectedIndex = 22;
+
+                    cbVideoCodec.SelectedIndex = 6;
+                    cbAudioCodec.SelectedIndex = 1;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
-                // MP4 H264 / AAC QSV
-                case 8:
-                    cbFFEXEOutputFormat.SelectedIndex = 22;
+                // MP4 H264 / AAC NVENC
+                case 9:
+                    cbOutputFormat.SelectedIndex = 22;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 6;
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
+                    cbVideoCodec.SelectedIndex = 7;
+                    cbAudioCodec.SelectedIndex = 1;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // MP4 HEVC / AAC
-                case 9:
-                    cbFFEXEOutputFormat.SelectedIndex = 22;
+                case 10:
+                    cbOutputFormat.SelectedIndex = 22;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 7;
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
+                    cbVideoCodec.SelectedIndex = 7;
+                    cbAudioCodec.SelectedIndex = 1;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // MP4 HEVC / AAC QSV
-                case 10:
-                    cbFFEXEOutputFormat.SelectedIndex = 22;
+                case 11:
+                    cbOutputFormat.SelectedIndex = 22;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 8;
-                    cbFFEXEAudioCodec.SelectedIndex = 1;
+                    cbVideoCodec.SelectedIndex = 8;
+                    cbAudioCodec.SelectedIndex = 1;
+
+                    cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
+                    cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
+                    break;
+
+                // MP4 HEVC / AAC NVENC
+                case 12:
+                    cbOutputFormat.SelectedIndex = 22;
+
+                    cbVideoCodec.SelectedIndex = 10;
+                    cbAudioCodec.SelectedIndex = 1;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // WebM
-                case 11:
-                    cbFFEXEOutputFormat.SelectedIndex = 36;
+                case 13:
+                    cbOutputFormat.SelectedIndex = 36;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 19;
-                    cbFFEXEAudioCodec.SelectedIndex = 41;
+                    cbVideoCodec.SelectedIndex = 19;
+                    cbAudioCodec.SelectedIndex = 41;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // AVI
-                case 12:
-                    cbFFEXEOutputFormat.SelectedIndex = 4;
+                case 14:
+                    cbOutputFormat.SelectedIndex = 4;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 16;
-                    cbFFEXEAudioCodec.SelectedIndex = 13;
+                    cbVideoCodec.SelectedIndex = 16;
+                    cbAudioCodec.SelectedIndex = 13;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // OGG Vorbis
-                case 13:
-                    cbFFEXEOutputFormat.SelectedIndex = 26;
+                case 15:
+                    cbOutputFormat.SelectedIndex = 26;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
-                    cbFFEXEAudioCodec.SelectedIndex = 41;
+                    cbVideoCodec.SelectedIndex = 0;
+                    cbAudioCodec.SelectedIndex = 41;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // Opus
-                case 14:
-                    cbFFEXEOutputFormat.SelectedIndex = 27;
+                case 16:
+                    cbOutputFormat.SelectedIndex = 27;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
-                    cbFFEXEAudioCodec.SelectedIndex = 14;
+                    cbVideoCodec.SelectedIndex = 0;
+                    cbAudioCodec.SelectedIndex = 14;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // Speex
-                case 15:
-                    cbFFEXEOutputFormat.SelectedIndex = 26;
+                case 17:
+                    cbOutputFormat.SelectedIndex = 26;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
-                    cbFFEXEAudioCodec.SelectedIndex = 40;
+                    cbVideoCodec.SelectedIndex = 0;
+                    cbAudioCodec.SelectedIndex = 40;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // FLAC
-                case 16:
-                    cbFFEXEOutputFormat.SelectedIndex = 10;
+                case 18:
+                    cbOutputFormat.SelectedIndex = 10;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
-                    cbFFEXEAudioCodec.SelectedIndex = 10;
+                    cbVideoCodec.SelectedIndex = 0;
+                    cbAudioCodec.SelectedIndex = 10;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // MP3
-                case 17:
-                    cbFFEXEOutputFormat.SelectedIndex = 21;
+                case 19:
+                    cbOutputFormat.SelectedIndex = 21;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 0;
-                    cbFFEXEAudioCodec.SelectedIndex = 13;
+                    cbVideoCodec.SelectedIndex = 0;
+                    cbAudioCodec.SelectedIndex = 13;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
 
                 // DV
-                case 18:
-                    cbFFEXEOutputFormat.SelectedIndex = 4;
+                case 20:
+                    cbOutputFormat.SelectedIndex = 4;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 1;
-                    cbFFEXEAudioCodec.SelectedIndex = 23;
+                    cbVideoCodec.SelectedIndex = 1;
+                    cbAudioCodec.SelectedIndex = 23;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
 
-                    cbFFEXEAudioChannels.SelectedIndex = 1;
-                    cbFFEXEAudioSampleRate.SelectedIndex = 1;
+                    cbAudioChannels.SelectedIndex = 1;
+                    cbAudioSampleRate.SelectedIndex = 1;
                     break;
 
                 // Custom
-                case 19:
-                    cbFFEXEOutputFormat.SelectedIndex = 4;
+                case 21:
+                    cbOutputFormat.SelectedIndex = 4;
 
-                    cbFFEXEVideoCodec.SelectedIndex = 16;
-                    cbFFEXEAudioCodec.SelectedIndex = 13;
+                    cbVideoCodec.SelectedIndex = 16;
+                    cbAudioCodec.SelectedIndex = 13;
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1424,39 +1518,34 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
-        private void tbFFEXEH264Quantizer_Scroll(object sender, EventArgs e)
-        {
-            lbFFEXEH264Quantizer.Text = tbFFEXEH264Quantizer.Value.ToString();
-        }
-
         private void FFEXEDisableAudioMode()
         {
-            rbFFEXEAudioModeABR.Enabled = false;
-            rbFFEXEAudioModeABR.Checked = false;
-            rbFFEXEAudioModeCBR.Enabled = false;
-            rbFFEXEAudioModeCBR.Checked = false;
-            rbFFEXEAudioModeQuality.Enabled = false;
-            rbFFEXEAudioModeQuality.Checked = false;
-            rbFFEXEAudioModeLossless.Enabled = false;
-            rbFFEXEAudioModeLossless.Checked = false;
+            rbAudioModeABR.Enabled = false;
+            rbAudioModeABR.Checked = false;
+            rbAudioModeCBR.Enabled = false;
+            rbAudioModeCBR.Checked = false;
+            rbAudioModeQuality.Enabled = false;
+            rbAudioModeQuality.Checked = false;
+            rbAudioModeLossless.Enabled = false;
+            rbAudioModeLossless.Checked = false;
 
-            tbFFEXEAudioQuality.Enabled = false;
-            cbFFEXEAudioBitrate.Enabled = false;
+            tbAudioQuality.Enabled = false;
+            cbAudioBitrate.Enabled = false;
         }
 
         private void FFEXEEnableAudioCBR()
         {
-            rbFFEXEAudioModeCBR.Enabled = true;
-            rbFFEXEAudioModeCBR.Checked = true;
+            rbAudioModeCBR.Enabled = true;
+            rbAudioModeCBR.Checked = true;
 
-            cbFFEXEAudioBitrate.Enabled = true;
+            cbAudioBitrate.Enabled = true;
         }
 
         // ReSharper disable once UnusedMember.Local
         private void FFEXEEnableAudioABR()
         {
-            rbFFEXEAudioModeABR.Enabled = true;
-            rbFFEXEAudioModeABR.Checked = true;
+            rbAudioModeABR.Enabled = true;
+            rbAudioModeABR.Checked = true;
 
             // edFFEXEAudioTargetBitrate.Enabled = true;
             // edFFEXEAudioBitrateMax.Enabled = true;
@@ -1465,16 +1554,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void FFEXEEnableAudioQuality()
         {
-            rbFFEXEAudioModeQuality.Enabled = true;
-            rbFFEXEAudioModeQuality.Checked = true;
+            rbAudioModeQuality.Enabled = true;
+            rbAudioModeQuality.Checked = true;
 
-            tbFFEXEAudioQuality.Enabled = true;
+            tbAudioQuality.Enabled = true;
         }
 
         private void FFEXEEnableAudioLossless()
         {
-            rbFFEXEAudioModeLossless.Enabled = true;
-            rbFFEXEAudioModeLossless.Checked = true;
+            rbAudioModeLossless.Enabled = true;
+            rbAudioModeLossless.Checked = true;
 
             // tbFFEXEAudioQuality.Enabled = true;
         }
@@ -1484,7 +1573,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             FFEXEDisableAudioMode();
             lbFFEXEAudioNotes.Text = "Notes: None.";
 
-            switch (cbFFEXEAudioCodec.SelectedIndex)
+            switch (cbAudioCodec.SelectedIndex)
             {
                 // Auto / None
                 case 0:
@@ -1568,10 +1657,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         FFEXEEnableAudioQuality();
 
-                        tbFFEXEAudioQuality.Minimum = 0;
-                        tbFFEXEAudioQuality.Maximum = 12;
-                        tbFFEXEAudioQuality.Value = 5;
-                        lbFFEXEAudioQuality.Text = tbFFEXEAudioQuality.Value.ToString();
+                        tbAudioQuality.Minimum = 0;
+                        tbAudioQuality.Maximum = 12;
+                        tbAudioQuality.Value = 5;
+                        lbFFEXEAudioQuality.Text = tbAudioQuality.Value.ToString();
                     }
 
                     break;
@@ -1589,10 +1678,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableAudioQuality();
                         FFEXEEnableAudioCBR();
 
-                        tbFFEXEAudioQuality.Minimum = 0;
-                        tbFFEXEAudioQuality.Maximum = 9;
-                        tbFFEXEAudioQuality.Value = 0;
-                        lbFFEXEAudioQuality.Text = tbFFEXEAudioQuality.Value.ToString();
+                        tbAudioQuality.Minimum = 0;
+                        tbAudioQuality.Maximum = 9;
+                        tbAudioQuality.Value = 0;
+                        lbFFEXEAudioQuality.Text = tbAudioQuality.Value.ToString();
                     }
 
                     break;
@@ -1603,10 +1692,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableAudioQuality();
                         FFEXEEnableAudioCBR();
 
-                        tbFFEXEAudioQuality.Minimum = 0;
-                        tbFFEXEAudioQuality.Maximum = 9;
-                        tbFFEXEAudioQuality.Value = 4;
-                        lbFFEXEAudioQuality.Text = tbFFEXEAudioQuality.Value.ToString();
+                        tbAudioQuality.Minimum = 0;
+                        tbAudioQuality.Maximum = 9;
+                        tbAudioQuality.Value = 4;
+                        lbFFEXEAudioQuality.Text = tbAudioQuality.Value.ToString();
                     }
 
                     break;
@@ -1800,9 +1889,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableAudioQuality();
                         FFEXEEnableAudioCBR();
 
-                        tbFFEXEAudioQuality.Minimum = 0;
-                        tbFFEXEAudioQuality.Maximum = 10;
-                        tbFFEXEAudioQuality.Value = 5;
+                        tbAudioQuality.Minimum = 0;
+                        tbAudioQuality.Maximum = 10;
+                        tbAudioQuality.Value = 5;
                         tbFFEXEAudioQuality_Scroll(null, null);
                     }
 
@@ -1814,9 +1903,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableAudioQuality();
                         FFEXEEnableAudioCBR();
 
-                        tbFFEXEAudioQuality.Minimum = -1;
-                        tbFFEXEAudioQuality.Maximum = 10;
-                        tbFFEXEAudioQuality.Value = 5;
+                        tbAudioQuality.Minimum = -1;
+                        tbAudioQuality.Maximum = 10;
+                        tbAudioQuality.Value = 5;
                         tbFFEXEAudioQuality_Scroll(null, null);
                     }
 
@@ -1833,22 +1922,22 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void tbFFEXEAudioQuality_Scroll(object sender, EventArgs e)
         {
-            lbFFEXEAudioQuality.Text = tbFFEXEAudioQuality.Value.ToString();
+            lbFFEXEAudioQuality.Text = tbAudioQuality.Value.ToString();
         }
 
         private void cbFFEXEVideoCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
-            edFFEXEVBVBufferSize.Text = "0";
-            edFFEXEVideoGOPSize.Text = "0";
-            edFFEXEVideoBFramesCount.Text = "0";
-            tbFFEXEVideoQuality.Minimum = 1;
-            tbFFEXEVideoQuality.Maximum = 31;
+            edVBVBufferSize.Text = "0";
+            edVideoGOPSize.Text = "0";
+            edVideoBFramesCount.Text = "0";
+            tbVideoQuality.Minimum = 1;
+            tbVideoQuality.Maximum = 31;
 
             lbFFEXEVideoNotes.Text = "Notes: None.";
 
             FFEXEDisableVideoMode();
 
-            switch (cbFFEXEVideoCodec.SelectedIndex)
+            switch (cbVideoCodec.SelectedIndex)
             {
                 // Auto / None
                 case 0:
@@ -1863,7 +1952,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case 1:
                     {
                         lbFFEXEVideoNotes.Text = "Notes: Specify constraint settings for PAL or NTSC DV output.";
-                        cbFFEXEVideoConstraint.SelectedIndex = 1;
+                        cbVideoConstraint.SelectedIndex = 1;
                     }
 
                     break;
@@ -1894,14 +1983,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 // H264
                 case 5:
                     {
-                        cbFFEXEH264Mode.SelectedIndex = 0;
-                        cbFFEXEH264Level.SelectedIndex = 0;
-                        cbFFEXEH264Preset.SelectedIndex = 0;
-                        cbFFEXEH264Profile.SelectedIndex = 0;
-                        tbFFEXEH264Quantizer.Value = 23;
-                        cbFFEXEH264QuickTimeCompatibility.Checked = true;
-                        cbFFEXEH264ZeroTolerance.Checked = false;
-                        cbFFEXEH264WebFastStart.Checked = false;
+                        cbH264Mode.SelectedIndex = 0;
+                        cbH264Level.SelectedIndex = 0;
+                        cbH264Usage.SelectedIndex = 0;
+                        cbH264Profile.SelectedIndex = 0;
+                        cbH264QuickTimeCompatibility.Checked = true;
+                        cbH264ZeroTolerance.Checked = false;
+                        cbH264WebFastStart.Checked = false;
+
+                        edVideoTargetBitrate.Enabled = true;
+                        tbVideoQuality.Enabled = true;
                     }
 
                     break;
@@ -1909,14 +2000,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 // H264 QSV
                 case 6:
                     {
-                        cbFFEXEH264Mode.SelectedIndex = 0;
-                        cbFFEXEH264Level.SelectedIndex = 0;
-                        cbFFEXEH264Preset.SelectedIndex = 0;
-                        cbFFEXEH264Profile.SelectedIndex = 0;
-                        tbFFEXEH264Quantizer.Value = 23;
-                        cbFFEXEH264QuickTimeCompatibility.Checked = true;
-                        cbFFEXEH264ZeroTolerance.Checked = false;
-                        cbFFEXEH264WebFastStart.Checked = false;
+                        cbH264Mode.SelectedIndex = 0;
+                        cbH264Level.SelectedIndex = 0;
+                        cbH264Usage.SelectedIndex = 0;
+                        cbH264Profile.SelectedIndex = 0;
+                        cbH264QuickTimeCompatibility.Checked = true;
+                        cbH264ZeroTolerance.Checked = false;
+                        cbH264WebFastStart.Checked = false;
                     }
 
                     break;
@@ -1924,14 +2014,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 // HEVC
                 case 7:
                     {
-                        cbFFEXEH264Mode.SelectedIndex = 0;
-                        cbFFEXEH264Level.SelectedIndex = 0;
-                        cbFFEXEH264Preset.SelectedIndex = 0;
-                        cbFFEXEH264Profile.SelectedIndex = 0;
-                        tbFFEXEH264Quantizer.Value = 23;
-                        cbFFEXEH264QuickTimeCompatibility.Checked = true;
-                        cbFFEXEH264ZeroTolerance.Checked = false;
-                        cbFFEXEH264WebFastStart.Checked = false;
+                        cbH264Mode.SelectedIndex = 0;
+                        cbH264Level.SelectedIndex = 0;
+                        cbH264Usage.SelectedIndex = 0;
+                        cbH264Profile.SelectedIndex = 0;
+                        cbH264QuickTimeCompatibility.Checked = true;
+                        cbH264ZeroTolerance.Checked = false;
+                        cbH264WebFastStart.Checked = false;
+
+                        edVideoTargetBitrate.Enabled = true;
+                        tbVideoQuality.Enabled = true;
                     }
 
                     break;
@@ -1939,14 +2031,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 // HEVC QSV
                 case 8:
                     {
-                        cbFFEXEH264Mode.SelectedIndex = 0;
-                        cbFFEXEH264Level.SelectedIndex = 0;
-                        cbFFEXEH264Preset.SelectedIndex = 0;
-                        cbFFEXEH264Profile.SelectedIndex = 0;
-                        tbFFEXEH264Quantizer.Value = 23;
-                        cbFFEXEH264QuickTimeCompatibility.Checked = true;
-                        cbFFEXEH264ZeroTolerance.Checked = false;
-                        cbFFEXEH264WebFastStart.Checked = false;
+                        cbH264Mode.SelectedIndex = 0;
+                        cbH264Level.SelectedIndex = 0;
+                        cbH264Usage.SelectedIndex = 0;
+                        cbH264Profile.SelectedIndex = 0;
+                        cbH264QuickTimeCompatibility.Checked = true;
+                        cbH264ZeroTolerance.Checked = false;
+                        cbH264WebFastStart.Checked = false;
                     }
 
                     break;
@@ -1984,7 +2075,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     {
                         FFEXEEnableVideoQuality();
 
-                        tbFFEXEVideoQuality.Value = 4;
+                        tbVideoQuality.Value = 4;
                         tbFFEXEVideoQuality_Scroll(null, null);
                     }
 
@@ -1995,9 +2086,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     {
                         FFEXEEnableVideoCBR();
 
-                        edFFEXEVideoBitrateMin.Text = "1000";
-                        edFFEXEVideoBitrateMax.Text = "2000";
-                        edFFEXEVideoTargetBitrate.Text = "1800";
+                        edVideoBitrateMin.Text = "1000";
+                        edVideoBitrateMax.Text = "2000";
+                        edVideoTargetBitrate.Text = "1800";
                     }
 
                     break;
@@ -2007,12 +2098,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     {
                         FFEXEEnableVideoCBR();
 
-                        edFFEXEVideoBitrateMin.Text = "2000";
-                        edFFEXEVideoBitrateMax.Text = "5000";
-                        edFFEXEVideoTargetBitrate.Text = "4000";
+                        edVideoBitrateMin.Text = "2000";
+                        edVideoBitrateMax.Text = "5000";
+                        edVideoTargetBitrate.Text = "4000";
 
-                        edFFEXEVideoGOPSize.Text = "45";
-                        edFFEXEVideoBFramesCount.Text = "2";
+                        edVideoGOPSize.Text = "45";
+                        edVideoBFramesCount.Text = "2";
                     }
 
                     break;
@@ -2022,9 +2113,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     {
                         FFEXEEnableVideoCBR();
 
-                        edFFEXEVideoBitrateMin.Text = "2000";
-                        edFFEXEVideoBitrateMax.Text = "5000";
-                        edFFEXEVideoTargetBitrate.Text = "4000";
+                        edVideoBitrateMin.Text = "2000";
+                        edVideoBitrateMax.Text = "5000";
+                        edVideoTargetBitrate.Text = "4000";
                     }
 
                     break;
@@ -2041,12 +2132,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     {
                         FFEXEEnableVideoQuality();
 
-                        tbFFEXEVideoQuality.Minimum = 0;
-                        tbFFEXEVideoQuality.Maximum = 10;
-                        tbFFEXEVideoQuality.Value = 7;
+                        tbVideoQuality.Minimum = 0;
+                        tbVideoQuality.Maximum = 10;
+                        tbVideoQuality.Value = 7;
                         tbFFEXEVideoQuality_Scroll(null, null);
 
-                        edFFEXEVideoTargetBitrate.Text = "2000";
+                        edVideoTargetBitrate.Text = "2000";
                     }
 
                     break;
@@ -2057,12 +2148,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableVideoQuality();
                         FFEXEEnableVideoCBR();
 
-                        tbFFEXEVideoQuality.Minimum = 4;
-                        tbFFEXEVideoQuality.Maximum = 63;
-                        tbFFEXEVideoQuality.Value = 10;
+                        tbVideoQuality.Minimum = 4;
+                        tbVideoQuality.Maximum = 63;
+                        tbVideoQuality.Value = 10;
                         tbFFEXEVideoQuality_Scroll(null, null);
 
-                        edFFEXEVideoTargetBitrate.Text = "2000";
+                        edVideoTargetBitrate.Text = "2000";
                     }
 
                     break;
@@ -2073,12 +2164,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         FFEXEEnableVideoQuality();
                         FFEXEEnableVideoCBR();
 
-                        tbFFEXEVideoQuality.Minimum = 4;
-                        tbFFEXEVideoQuality.Maximum = 63;
-                        tbFFEXEVideoQuality.Value = 10;
+                        tbVideoQuality.Minimum = 4;
+                        tbVideoQuality.Maximum = 63;
+                        tbVideoQuality.Value = 10;
                         tbFFEXEVideoQuality_Scroll(null, null);
 
-                        edFFEXEVideoTargetBitrate.Text = "2000";
+                        edVideoTargetBitrate.Text = "2000";
                     }
 
                     break;
@@ -2087,14 +2178,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void tbFFEXEVideoQuality_Scroll(object sender, EventArgs e)
         {
-            lbFFEXEVideoQuality.Text = tbFFEXEVideoQuality.Value.ToString();
+            lbFFEXEVideoQuality.Text = tbVideoQuality.Value.ToString();
         }
 
         private void cbFFEXEH264Mode_SelectedIndexChanged(object sender, EventArgs e)
         {
             FFEXEDisableVideoMode();
 
-            switch (cbFFEXEH264Mode.SelectedIndex)
+            switch (cbH264Mode.SelectedIndex)
             {
                 case 0:
                     // CRF

@@ -10,6 +10,7 @@ namespace Media_Player_Demo
     using System.Drawing;
     using System.Globalization;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI;
@@ -19,6 +20,7 @@ namespace Media_Player_Demo
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Types.GPUVideoEffects;
+    using VisioForge.Types.OutputFormat;
     using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
@@ -451,7 +453,7 @@ namespace Media_Player_Demo
             SetSourceMode();
 
             if ((MediaPlayer1.Source_Mode == VFMediaPlayerSource.File_DS) ||
-                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.File_FFMPEG) ||
+                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.FFMPEG) ||
                 (MediaPlayer1.Source_Mode == VFMediaPlayerSource.LAV) ||
                 (MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS))
             {
@@ -864,7 +866,7 @@ namespace Media_Player_Demo
 
                     break;
                 case 2:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG;
+                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG;
                     break;
                 case 3:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
@@ -883,22 +885,15 @@ namespace Media_Player_Demo
                     LoadToMemory();
                     break;
                 case 8:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_FFMPEG;
-                    LoadToMemory();
-                    break;
-                case 9:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.MMS_WMV_DS;
                     break;
-                case 10:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_FFMPEG;
-                    break;
-                case 11:
+                case 9:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_VLC;
                     break;
-                case 12:
+                case 10:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS;
                     break;
-                case 13:
+                case 11:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.CustomSource;
 
                     if (!string.IsNullOrEmpty(edCustomSourceFilter.Text))
@@ -908,7 +903,7 @@ namespace Media_Player_Demo
 
                     break;
 
-                case 14:
+                case 12:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.MIDI;
                     break;
             }
@@ -1228,6 +1223,15 @@ namespace Media_Player_Demo
 
             MediaPlayer1.Virtual_Camera_Output_Enabled = rbVirtualCameraOutput.Checked;
 
+            if (rbNDIStreaming.Checked)
+            {
+                MediaPlayer1.NDI_Output = new VFNDIOutput("Main");
+            }
+            else
+            {
+                MediaPlayer1.NDI_Output = null;
+            }
+
             MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
             MediaPlayer1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
             MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
@@ -1338,9 +1342,7 @@ namespace Media_Player_Demo
             // Motion detection-ex
             ConfigureMotionDetectionEx();
 
-            MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = MediaPlayer1.Video_Effects_Enabled;
-
-            //MediaPlayer1.Play(cbRunAsync.Checked);
+            MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = true;
 
             await MediaPlayer1.PlayAsync().ConfigureAwait(true);
 
@@ -1378,21 +1380,21 @@ namespace Media_Player_Demo
                     {
                         MediaPlayer1.Audio_OutputDevice_Balance_Set(1, tbBalance2.Value);
                         MediaPlayer1.Audio_OutputDevice_Volume_Set(1, tbVolume2.Value);
-                        MediaPlayer1.Audio_Streams_Set(1, false); // disable stream
+                        await MediaPlayer1.Audio_Streams_SetAsync(1, false); // disable stream
                     }
 
                     if (count > 2)
                     {
                         MediaPlayer1.Audio_OutputDevice_Balance_Set(2, tbBalance3.Value);
                         MediaPlayer1.Audio_OutputDevice_Volume_Set(2, tbVolume3.Value);
-                        MediaPlayer1.Audio_Streams_Set(2, false); // disable stream
+                        await MediaPlayer1.Audio_Streams_SetAsync(2, false); // disable stream
                     }
 
                     if (count > 3)
                     {
                         MediaPlayer1.Audio_OutputDevice_Balance_Set(3, tbBalance4.Value);
                         MediaPlayer1.Audio_OutputDevice_Volume_Set(3, tbVolume4.Value);
-                        MediaPlayer1.Audio_Streams_Set(3, false); // disable stream
+                        await MediaPlayer1.Audio_Streams_SetAsync(3, false); // disable stream
                     }
                 }
                 else
@@ -1478,9 +1480,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
-        private void cbAudioStream1_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioStream1_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(0, cbAudioStream1.Checked);
+            await MediaPlayer1.Audio_Streams_SetAsync(0, cbAudioStream1.Checked);
             if (cbAudioStream1.Checked)
             {
                 tbVolume1_Scroll(null, null);
@@ -1494,9 +1496,9 @@ namespace Media_Player_Demo
             }
         }
 
-        private void cbAudioStream2_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioStream2_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(1, cbAudioStream2.Checked);
+            await MediaPlayer1.Audio_Streams_SetAsync(1, cbAudioStream2.Checked);
             if (cbAudioStream2.Checked)
             {
                 tbVolume2_Scroll(null, null);
@@ -1510,9 +1512,9 @@ namespace Media_Player_Demo
             }
         }
 
-        private void cbAudioStream3_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioStream3_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(2, cbAudioStream3.Checked);
+            await MediaPlayer1.Audio_Streams_SetAsync(2, cbAudioStream3.Checked);
             if (cbAudioStream3.Checked)
             {
                 tbVolume3_Scroll(null, null);
@@ -1526,9 +1528,9 @@ namespace Media_Player_Demo
             }
         }
 
-        private void cbAudioStream4_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioStream4_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(3, cbAudioStream4.Checked);
+            await MediaPlayer1.Audio_Streams_SetAsync(3, cbAudioStream4.Checked);
             if (cbAudioStream4.Checked)
             {
                 tbVolume4_Scroll(null, null);

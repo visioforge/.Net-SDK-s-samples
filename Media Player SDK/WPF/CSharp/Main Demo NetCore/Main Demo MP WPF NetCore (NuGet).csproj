@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,7 +6,6 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <Compile Remove="obj_netcore\**" />
@@ -15,7 +13,6 @@
     <EmbeddedResource Remove="obj_netcore\**" />
     <None Remove="obj\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
@@ -24,11 +21,9 @@
     <Page Remove="obj\**" />
     <Page Remove="obj_netcore\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="VisioForge.Controls.NetCore">
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Controls.NetCore.dll</HintPath>
@@ -52,39 +47,36 @@
       <HintPath>..\..\..\..\..\Redist\DotNetCore\VisioForge.Types.NetCore.dll</HintPath>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="app.config" />
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEGDLL.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer">
-<Version>12.1.26</Version>
+      <Version>12.1.26</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>

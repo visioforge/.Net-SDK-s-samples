@@ -606,6 +606,7 @@
                         <ComboBoxItem Content="Windows Media Video"/>
                         <ComboBoxItem Content="RTSP"/>
                         <ComboBoxItem Content="RTMP to Adobe Media Server / Wowza"/>
+                        <ComboBoxItem Content="NDI"/>
                         <ComboBoxItem Content="UDP"/>
                         <ComboBoxItem Content="Smooth Streaming to Microsoft IIS"/>
                         <ComboBoxItem Content="Output to external virtual devices"/>
@@ -649,6 +650,17 @@
                                 <TextBox x:Name="edNetworkRTMPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" VerticalAlignment="Top" Width="308"/>
                                 <Label x:Name="lbDownloadFFMPEG_Copy1" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,83,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
                                 <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,104,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="NDI">
+                            <Grid>
+                                <Label x:Name="label3" Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNDIName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="Main" VerticalAlignment="Top" Width="334"/>
+                                <Label x:Name="label4" Content="Connection URL" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edNDIURL" HorizontalAlignment="Left" Height="23" Margin="10,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334" IsReadOnly="True"/>
+                                <Label x:Name="label5" Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbNDI" Content="vendor's website" HorizontalAlignment="Left" Margin="14,154,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="Blue" MouseLeftButtonUp="lbNDI_MouseLeftButtonUp"/>
+
                             </Grid>
                         </TabItem>
                         <TabItem Header="UDP">

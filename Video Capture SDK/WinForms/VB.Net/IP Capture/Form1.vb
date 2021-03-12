@@ -159,31 +159,21 @@ Public Class Form1
         VideoCapture1.IP_Camera_Source = New IPCameraSourceSettings()
 
         Select Case (cbIPCameraType.SelectedIndex)
-
-            Case 0 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC
-
-            Case 1 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG
-
-            Case 2 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
-
-            Case 3 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555
-
-            Case 4 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_FFMPEG
-
-            Case 5 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
-
-            Case 6 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_UDP_FFMPEG
-
-            Case 7 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_TCP_FFMPEG
-
-            Case 8 : VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_HTTP_FFMPEG
-
+            Case 0 :
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC
+            Case 1 : 
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG
+            Case 2 : 
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
+            Case 3 : 
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555
+            Case 5 : 
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
             Case 9
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
                 VideoCapture1.Audio_RecordAudio = False
                 VideoCapture1.Audio_PlayAudio = False
-
             Case 10
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = False

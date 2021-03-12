@@ -747,15 +747,13 @@
         <ComboBox x:Name="cbSourceMode" Margin="491,134,25,0" VerticalAlignment="Top">
             <ComboBoxItem Content="File / Network stream (decode using LAV)"/>
             <ComboBoxItem Content="File / Network stream (decode using GPU)"/>
-            <ComboBoxItem Content="File (decode using FFMPEG)"/>
+            <ComboBoxItem Content="File / Network stream (decode using FFMPEG)"/>
             <ComboBoxItem Content="File (decode using DirectShow)"/>
             <ComboBoxItem Content="File (decode using VLC)"/>
             <ComboBoxItem Content="DVD"/>
             <ComboBoxItem Content="Blu-Ray"/>
             <ComboBoxItem Content="File from memory (decode using DirectShow)"/>
-            <ComboBoxItem Content="File from memory (decode using FFMPEG)"/>
             <ComboBoxItem Content="MMS / WMV (network stream)"/>
-            <ComboBoxItem Content="HTTP / RTSP / RTMP (decode using FFMPEG)"/>
             <ComboBoxItem Content="HTTP / RTSP / RTMP (decode using VLC)"/>
             <ComboBoxItem Content="Encrypted file (decode using DirectShow)"/>
             <ComboBoxItem Content="MIDI / KAR"/>

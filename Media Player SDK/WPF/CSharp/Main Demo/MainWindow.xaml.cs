@@ -498,7 +498,7 @@ namespace Main_Demo
             SetSourceMode();
 
             if ((MediaPlayer1.Source_Mode == VFMediaPlayerSource.File_DS) ||
-                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.File_FFMPEG) ||
+                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.FFMPEG) ||
                 (MediaPlayer1.Source_Mode == VFMediaPlayerSource.LAV) ||
                 (MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS))
             {
@@ -758,7 +758,7 @@ namespace Main_Demo
 
                     break;
                 case 2:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG;
+                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG;
                     break;
                 case 3:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
@@ -777,22 +777,15 @@ namespace Main_Demo
                     LoadToMemory();
                     break;
                 case 8:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_FFMPEG;
-                    LoadToMemory();
-                    break;
-                case 9:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.MMS_WMV_DS;
                     break;
-                case 10:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_FFMPEG;
-                    break;
-                case 11:
+                case 9:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_VLC;
                     break;
-                case 12:
+                case 10:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS;
                     break;
-                case 13:
+                case 11:
                     MediaPlayer1.Source_Mode = VFMediaPlayerSource.MIDI;
                     break;
             }
@@ -999,10 +992,6 @@ namespace Main_Demo
                 MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.Binary;
                 MediaPlayer1.Encryption_Key = MediaPlayer.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
-
-            MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = MediaPlayer1.Video_Effects_Enabled;
-
-            //MediaPlayer1.Play(cbRunAsync.IsChecked == true);
 
             await MediaPlayer1.PlayAsync().ConfigureAwait(true);
 
@@ -1284,9 +1273,9 @@ namespace Main_Demo
             MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title);
         }
 
-        private void cbAudioStream1_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioStream1_Checked(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(0, cbAudioStream1.IsChecked == true);
+            await MediaPlayer1.Audio_Streams_SetAsync(0, cbAudioStream1.IsChecked == true);
             if (cbAudioStream1.IsChecked == true)
             {
                 tbVolume1_ValueChanged(null, null);
@@ -1300,9 +1289,9 @@ namespace Main_Demo
             }
         }
 
-        private void cbAudioStream2_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioStream2_Checked(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(1, cbAudioStream2.IsChecked == true);
+            await MediaPlayer1.Audio_Streams_SetAsync(1, cbAudioStream2.IsChecked == true);
             if (cbAudioStream2.IsChecked == true)
             {
                 tbVolume2_ValueChanged(null, null);
@@ -1316,9 +1305,9 @@ namespace Main_Demo
             }
         }
 
-        private void cbAudioStream3_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioStream3_Checked(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(2, cbAudioStream3.IsChecked == true);
+            await MediaPlayer1.Audio_Streams_SetAsync(2, cbAudioStream3.IsChecked == true);
             if (cbAudioStream3.IsChecked == true)
             {
                 tbVolume3_ValueChanged(null, null);
@@ -1332,9 +1321,9 @@ namespace Main_Demo
             }
         }
 
-        private void cbAudioStream4_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioStream4_Checked(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Audio_Streams_Set(3, cbAudioStream4.IsChecked == true);
+            await MediaPlayer1.Audio_Streams_SetAsync(3, cbAudioStream4.IsChecked == true);
             if (cbAudioStream4.IsChecked == true)
             {
                 tbVolume4_ValueChanged(null, null);

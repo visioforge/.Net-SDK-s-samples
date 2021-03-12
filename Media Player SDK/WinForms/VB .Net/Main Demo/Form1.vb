@@ -580,7 +580,7 @@ Public Class Form1
         SetSourceMode()
 
         If ((MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS) Or
-            (MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG) Or
+            (MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG) Or
             (MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV) Or
             (MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS)) Then
 
@@ -953,7 +953,7 @@ Public Class Form1
                     MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.Direct3D11
                 End If
             Case 2
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_FFMPEG
+                MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG
             Case 3
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS
             Case 4
@@ -966,17 +966,12 @@ Public Class Form1
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS
                 LoadToMemory()
             Case 8
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_FFMPEG
-                LoadToMemory()
-            Case 9
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.MMS_WMV_DS
-            Case 10
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_FFMPEG
-            Case 11
+            Case 9
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_VLC
-            Case 12
+            Case 10
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS
-            Case 13
+            Case 11
                 MediaPlayer1.Source_Mode = VFMediaPlayerSource.MIDI
         End Select
     End Sub
@@ -1284,6 +1279,8 @@ Public Class Form1
         ' Video effects
         AddVideoEffects()
 
+        MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = true
+
         ' Barcode detection
         MediaPlayer1.Barcode_Reader_Enabled = cbBarcodeDetectionEnabled.Checked
         MediaPlayer1.Barcode_Reader_Type = cbBarcodeType.SelectedIndex
@@ -1454,9 +1451,9 @@ Public Class Form1
         Await MediaPlayer1.Video_Renderer_UpdateAsync()
     End Sub
 
-    Private Sub cbAudioStream1_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream1.CheckedChanged
+    Private async Sub cbAudioStream1_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream1.CheckedChanged
 
-        MediaPlayer1.Audio_Streams_Set(0, cbAudioStream1.Checked)
+        Await MediaPlayer1.Audio_Streams_SetAsync(0, cbAudioStream1.Checked)
         If (cbAudioStream1.Checked) Then
 
             tbVolume1_Scroll(sender, e)
@@ -1471,9 +1468,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioStream2_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream2.CheckedChanged
+    Private async Sub cbAudioStream2_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream2.CheckedChanged
 
-        MediaPlayer1.Audio_Streams_Set(1, cbAudioStream2.Checked)
+        Await MediaPlayer1.Audio_Streams_SetAsync(1, cbAudioStream2.Checked)
 
         If (cbAudioStream2.Checked) Then
 
@@ -1489,9 +1486,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioStream3_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream3.CheckedChanged
+    Private async Sub cbAudioStream3_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream3.CheckedChanged
 
-        MediaPlayer1.Audio_Streams_Set(2, cbAudioStream3.Checked)
+        Await MediaPlayer1.Audio_Streams_SetAsync(2, cbAudioStream3.Checked)
 
         If (cbAudioStream3.Checked) Then
 
@@ -1507,9 +1504,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioStream4_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream4.CheckedChanged
+    Private async Sub cbAudioStream4_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioStream4.CheckedChanged
 
-        MediaPlayer1.Audio_Streams_Set(3, cbAudioStream4.Checked)
+        Await MediaPlayer1.Audio_Streams_SetAsync(3, cbAudioStream4.Checked)
 
         If (cbAudioStream4.Checked) Then
 

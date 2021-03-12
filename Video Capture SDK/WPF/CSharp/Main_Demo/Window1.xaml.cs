@@ -30,6 +30,7 @@ namespace Main_Demo
     using VisioForge.Shared.IPCameraDB;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.FFMPEGEXE;
     using VisioForge.Types.GPUVideoEffects;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.Sources;
@@ -736,36 +737,24 @@ namespace Main_Demo
                     settings.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.HTTP_FFMPEG;
-                    break;
-                case 5:
                     settings.Type = VFIPSource.MMS_WMV;
                     break;
-                case 6:
-                    settings.Type = VFIPSource.RTSP_UDP_FFMPEG;
-                    break;
-                case 7:
-                    settings.Type = VFIPSource.RTSP_TCP_FFMPEG;
-                    break;
-                case 8:
-                    settings.Type = VFIPSource.RTSP_HTTP_FFMPEG;
-                    break;
-                case 9:
+                case 5:
                     settings.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     cbIPAudioCapture.IsChecked = false;
                     break;
-                case 10:
+                case 6:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 11:
+                case 7:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 12:
+                case 8:
                     settings.Type = VFIPSource.NDI;
                     break;
-                case 13:
+                case 9:
                     settings.Type = VFIPSource.NDI_Legacy;
                     break;
             }
@@ -1180,14 +1169,14 @@ namespace Main_Demo
 
                             if (rbNetworkUDPFFMPEG.IsChecked == true)
                             {
-                                ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                             }
                             else
                             {
                                 SetFFMPEGEXEOutput(ref ffmpegOutput);
                             }
 
-                            ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV;
+                            ffmpegOutput.OutputMuxer = OutputMuxer.FLV;
                             ffmpegOutput.UsePipe = cbNetworkRTMPFFMPEGUsePipes.IsChecked == true;
 
                             VideoCapture1.Network_Streaming_Output = ffmpegOutput;
@@ -1215,14 +1204,14 @@ namespace Main_Demo
 
                             if (rbNetworkUDPFFMPEG.IsChecked == true)
                             {
-                                ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                             }
                             else
                             {
                                 SetFFMPEGEXEOutput(ref ffmpegOutput);
                             }
 
-                            ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS;
+                            ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS;
                             ffmpegOutput.UsePipe = cbNetworkUDPFFMPEGUsePipes.IsChecked == true;
                             VideoCapture1.Network_Streaming_Output = ffmpegOutput;
 
@@ -1249,14 +1238,14 @@ namespace Main_Demo
 
                                 if (rbNetworkSSFFMPEGDefault.IsChecked == true)
                                 {
-                                    ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                    ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                                 }
                                 else
                                 {
                                     SetFFMPEGEXEOutput(ref ffmpegOutput);
                                 }
 
-                                ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ISMV;
+                                ffmpegOutput.OutputMuxer = OutputMuxer.ISMV;
                                 ffmpegOutput.UsePipe = cbNetworkSSUsePipes.IsChecked == true;
                                 VideoCapture1.Network_Streaming_Output = ffmpegOutput;
                             }
@@ -1282,6 +1271,15 @@ namespace Main_Demo
                                 }
                             };
                             VideoCapture1.Network_Streaming_Output = hls;
+
+                            if (cbHLSEmbeddedHTTPServerEnabled.IsChecked == true)
+                            {
+                                edHLSURL.Text = $"http://localhost:{edHLSEmbeddedHTTPServerPort.Text}/playlist.m3u8";
+                            }
+                            else
+                            {
+                                edHLSURL.Text = string.Empty;
+                            }
 
                             break;
                         }
@@ -3060,16 +3058,17 @@ namespace Main_Demo
             cbPIPFormat.IsEnabled = cbPIPFormatUseBest.IsChecked != true;
         }
 
-        private void btPIPUpdate_Click(object sender, RoutedEventArgs e)
+        private async void btPIPUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (cbPIPDevices.SelectedIndex != -1)
             {
-                VideoCapture1.PIP_Sources_SetSourcePosition(
+                await VideoCapture1.PIP_Sources_SetSourcePositionAsync(
                     cbPIPDevices.SelectedIndex,
-                    Convert.ToInt32(edPIPLeft.Text),
-                    Convert.ToInt32(edPIPTop.Text),
-                    Convert.ToInt32(edPIPWidth.Text),
-                    Convert.ToInt32(edPIPHeight.Text));
+                    new Rectangle(
+                        Convert.ToInt32(edPIPLeft.Text),
+                        Convert.ToInt32(edPIPTop.Text),
+                        Convert.ToInt32(edPIPWidth.Text),
+                        Convert.ToInt32(edPIPHeight.Text)));
             }
             else
             {
@@ -3599,11 +3598,11 @@ namespace Main_Demo
             VideoCapture1.PIP_CustomOutputSize_Set(Convert.ToInt32(edPIPOutputWidth.Text), Convert.ToInt32(edPIPOutputHeight.Text));
         }
 
-        private void btPIPSet_Click(object sender, RoutedEventArgs e)
+        private async void btPIPSet_Click(object sender, RoutedEventArgs e)
         {
             if (cbPIPDevices.SelectedIndex != -1)
             {
-                VideoCapture1.PIP_Sources_SetSourceSettings(cbPIPDevices.SelectedIndex, (int)tbPIPTransparency.Value, false, false);
+                await VideoCapture1.PIP_Sources_SetSourceSettingsAsync(cbPIPDevices.SelectedIndex, (int)tbPIPTransparency.Value, false, false);
             }
             else
             {

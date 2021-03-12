@@ -25,6 +25,7 @@ namespace Main_Demo
     using VisioForge.Controls.UI.WPF;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.FFMPEGEXE;
     using VisioForge.Types.GPUVideoEffects;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.VideoEffects;
@@ -512,22 +513,31 @@ namespace Main_Demo
 
                             if (rbNetworkUDPFFMPEG.IsChecked == true)
                             {
-                                ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                             }
                             else
                             {
                                 SetFFMPEGEXEOutput(ref ffmpegOutput);
                             }
 
-                            ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV;
+                            ffmpegOutput.OutputMuxer = OutputMuxer.FLV;
 
                             VideoEdit1.Network_Streaming_Output = ffmpegOutput;
                             VideoEdit1.Network_Streaming_URL = edNetworkRTMPURL.Text;
 
                             break;
                         }
-
                     case 3:
+                        {
+                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI;
+
+                            var ndiOutput = new VFNDIOutput(edNDIName.Text);
+                            VideoEdit1.Network_Streaming_Output = ndiOutput;
+                            edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}";
+
+                            break;
+                        }
+                    case 4:
                         {
                             VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE;
 
@@ -535,22 +545,21 @@ namespace Main_Demo
 
                             if (rbNetworkUDPFFMPEG.IsChecked == true)
                             {
-                                ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                             }
                             else
                             {
                                 SetFFMPEGEXEOutput(ref ffmpegOutput);
                             }
 
-                            ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS;
+                            ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS;
                             VideoEdit1.Network_Streaming_Output = ffmpegOutput;
 
                             VideoEdit1.Network_Streaming_URL = edNetworkUDPURL.Text;
 
                             break;
                         }
-
-                    case 4:
+                    case 5:
                         {
                             if (rbNetworkSSSoftware.IsChecked == true)
                             {
@@ -564,14 +573,14 @@ namespace Main_Demo
 
                                 if (rbNetworkSSFFMPEGDefault.IsChecked == true)
                                 {
-                                    ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                    ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                                 }
                                 else
                                 {
                                     SetFFMPEGEXEOutput(ref ffmpegOutput);
                                 }
 
-                                ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ISMV;
+                                ffmpegOutput.OutputMuxer = OutputMuxer.ISMV;
                                 VideoEdit1.Network_Streaming_Output = ffmpegOutput;
                             }
 
@@ -579,8 +588,7 @@ namespace Main_Demo
 
                             break;
                         }
-
-                    case 5:
+                    case 6:
                         {
                             VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.External;
 
@@ -3354,6 +3362,12 @@ namespace Main_Demo
             {
                 pnChromaKeyColor.Fill = new SolidColorBrush(ColorConv(colorDialog1.Color));
             }
+        }
+
+        private void lbNDI_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
+            Process.Start(startInfo);
         }
     }
 }

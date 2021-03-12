@@ -1,12 +1,25 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
-using VisioForge.Controls.VideoCapture;
-using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AVISettingsDialog.cs" company="VisioForge">
+//   VisioForge (c) 2006 - 2021
+// </copyright>
+// <summary>
+//   Defines the AVISettingsDialog type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    using System;
+    using System.Diagnostics;
+    using System.Windows.Forms;
+
+    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Types;
+    using VisioForge.Types.OutputFormat;
+
+    /// <summary>
+    /// AVI settings dialog.
+    /// </summary>
     public partial class AVISettingsDialog : Form
     {
         private readonly string[] _videoCodecs;

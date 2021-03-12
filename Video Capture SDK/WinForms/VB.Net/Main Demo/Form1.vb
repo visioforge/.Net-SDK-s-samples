@@ -15,6 +15,7 @@ Imports VisioForge.Types.VideoEffects
 Imports VisioForge.Types.GPUVideoEffects
 Imports VisioForge.Shared
 Imports VisioForge.Tools
+Imports VisioForge.Types.FFMPEGEXE
 
 Public Class Form1
 
@@ -1717,12 +1718,12 @@ Public Class Form1
                 Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
 
                 If (rbNetworkUDPFFMPEG.Checked) Then
-                    ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                    ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
                 Else
                     SetFFMPEGEXEOutput(ffmpegOutput)
                 End If
 
-                ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV
+                ffmpegOutput.OutputMuxer = OutputMuxer.FLV
                 ffmpegOutput.UsePipe = cbNetworkRTMPFFMPEGUsePipes.Checked
 
                 VideoCapture1.Network_Streaming_Output = ffmpegOutput
@@ -1739,12 +1740,12 @@ Public Class Form1
                 Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
 
                 If (rbNetworkUDPFFMPEG.Checked) Then
-                    ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                    ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
                 Else
                     SetFFMPEGEXEOutput(ffmpegOutput)
                 End If
 
-                ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS
+                ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS
                 ffmpegOutput.UsePipe = cbNetworkUDPFFMPEGUsePipes.Checked
                 VideoCapture1.Network_Streaming_Output = ffmpegOutput
 
@@ -1762,12 +1763,12 @@ Public Class Form1
                     Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
 
                     If (rbNetworkSSFFMPEGDefault.Checked) Then
-                        ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, True)
+                        ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, True)
                     Else
                         SetFFMPEGEXEOutput(ffmpegOutput)
                     End If
 
-                    ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ISMV
+                    ffmpegOutput.OutputMuxer = OutputMuxer.ISMV
                     ffmpegOutput.UsePipe = cbNetworkSSUsePipes.Checked
                     VideoCapture1.Network_Streaming_Output = ffmpegOutput
                 End If
@@ -1784,6 +1785,12 @@ Public Class Form1
                 hls.HLS.Custom_HTTP_Server_Enabled = cbHLSEmbeddedHTTPServerEnabled.Checked
                 hls.HLS.Custom_HTTP_Server_Port = Convert.ToInt32(edHLSEmbeddedHTTPServerPort.Text)
                 VideoCapture1.Network_Streaming_Output = hls
+
+                If (cbHLSEmbeddedHTTPServerEnabled.Checked) Then
+                    edHLSURL.Text = $"http://localhost:{edHLSEmbeddedHTTPServerPort.Text}/playlist.m3u8"
+                Else
+                    edHLSURL.Text = String.Empty
+                End If
             Case 7
                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.External
         End Select
@@ -1868,47 +1875,28 @@ Public Class Form1
         settings.URL = cbIPURL.Text
 
         Select Case (cbIPCameraType.SelectedIndex)
-
             Case 0
                 settings.Type = VFIPSource.Auto_VLC
-
             Case 1
                 settings.Type = VFIPSource.Auto_FFMPEG
-
             Case 2
                 settings.Type = VFIPSource.Auto_LAV
-
             Case 3
                 settings.Type = VFIPSource.RTSP_Live555
-
             Case 4
-                settings.Type = VFIPSource.HTTP_FFMPEG
-
-            Case 5
                 settings.Type = VFIPSource.MMS_WMV
-
-            Case 6
-                settings.Type = VFIPSource.RTSP_UDP_FFMPEG
-
-            Case 7
-                settings.Type = VFIPSource.RTSP_TCP_FFMPEG
-
-            Case 8
-                settings.Type = VFIPSource.RTSP_HTTP_FFMPEG
-
-            Case 9
+            Case 5
                 settings.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
-
-            Case 10
+            Case 6
                 settings.Type = VFIPSource.RTSP_LowLatency
                 settings.RTSP_LowLatency_UseUDP = False
-            Case 11
+            Case 7
                 settings.Type = VFIPSource.RTSP_LowLatency
                 settings.RTSP_LowLatency_UseUDP = True
-            Case 12
+            Case 8
                 settings.Type = VFIPSource.NDI
-            Case 13
+            Case 9
                 settings.Type = VFIPSource.NDI_Legacy
         End Select
 

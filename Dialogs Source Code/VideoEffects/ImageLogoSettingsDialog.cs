@@ -1,15 +1,28 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using VisioForge.Controls.MediaPlayer;
-using VisioForge.Controls.VideoCapture;
-using VisioForge.Controls.VideoEdit;
-using VisioForge.Types.VideoEffects;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ImageLogoSettingsDialog.cs" company="VisioForge">
+//   VisioForge (c) 2006 - 2021
+// </copyright>
+// <summary>
+//   Image logo settings dialog.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 {
+    using System;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.IO;
+    using System.Windows.Forms;
+
+    using VisioForge.Controls.MediaPlayer;
+    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Types.VideoEffects;
+
+    /// <summary>
+    /// Image logo settings dialog.
+    /// </summary>
     public partial class ImageLogoSettingsDialog : Form, IVFVideoEffectsSettingsDialog
     {
         private const string NAME = "ImageLogo";
@@ -62,54 +75,69 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             EffectUpdate(_intf);
         }
 
-        public string GenerateNewEffectName(VideoCaptureCore core)
+        public string GenerateNewEffectName(IVideoCaptureCore core)
         {
+            if (core == null)
+            {
+                throw new Exception("core is null");
+            }
+
             string name = NAME;
 
-            var eff = core?.Video_Effects_Get(name);
+            var eff = core.GetCore()?.Video_Effects_Get(name);
             if (eff != null)
             {
                 int k = 2;
                 while (eff != null)
                 {
                     name = $"{NAME} {k++}";
-                    eff = core.Video_Effects_Get(name);
+                    eff = core.GetCore().Video_Effects_Get(name);
                 }
             }
 
             return name;
         }
 
-        public string GenerateNewEffectName(VideoEditCore core)
+        public string GenerateNewEffectName(IVideoEditCore core)
         {
+            if (core == null)
+            {
+                throw new Exception("core is null");
+            }
+
             string name = NAME;
 
-            var eff = core?.Video_Effects_Get(name);
+            var eff = core.GetCore()?.Video_Effects_Get(name);
             if (eff != null)
             {
                 int k = 2;
                 while (eff != null)
                 {
                     name = $"{NAME} {k++}";
-                    eff = core.Video_Effects_Get(name);
+                    eff = core.GetCore().Video_Effects_Get(name);
                 }
             }
 
             return name;
         }
 
-        public string GenerateNewEffectName(MediaPlayerCore core)
+        public string GenerateNewEffectName(IMediaPlayerCore core)
         {
+            if (core == null)
+            {
+                throw new Exception("core is null");
+            }
+
             string name = NAME;
 
-            var eff = core?.Video_Effects_Get(name);
+            var eff = core.GetCore()?.Video_Effects_Get(name);
             if (eff != null)
             {
                 int k = 2;
                 while (eff != null)
                 {
                     name = $"{NAME} {k++}";
-                    eff = core.Video_Effects_Get(name);
+                    eff = core.GetCore().Video_Effects_Get(name);
                 }
             }
 

@@ -25,6 +25,7 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Shared.IPCameraDB;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.FFMPEGEXE;
     using VisioForge.Types.GPUVideoEffects;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.Sources;
@@ -701,8 +702,6 @@ namespace VideoCapture_CSharp_Demo
         /// </param>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            //VideoCapture1.VLC_Path = @"c:\Projects\_Projects\MediaFrameworkDotNet\_SHARED_DLL_VLC\x86\";// Environment.GetEnvironmentVariable("VFVLCPATH");
-
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
             VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
             VideoCapture1.Debug_Telemetry = cbTelemetry.Checked;
@@ -1405,11 +1404,6 @@ namespace VideoCapture_CSharp_Demo
 
         private void ConfigureVideoRenderer()
         {
-            if (VideoCapture1.Video_Renderer == null)
-            {
-                VideoCapture1.Video_Renderer = new VideoRendererSettingsWinForms();
-            }
-
             if (rbVMR9.Checked)
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
@@ -2150,14 +2144,14 @@ namespace VideoCapture_CSharp_Demo
 
                         if (rbNetworkUDPFFMPEG.Checked)
                         {
-                            ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                            ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                         }
                         else
                         {
                             SetFFMPEGEXEOutput(ref ffmpegOutput);
                         }
 
-                        ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.FLV;
+                        ffmpegOutput.OutputMuxer = OutputMuxer.FLV;
                         ffmpegOutput.UsePipe = cbNetworkRTMPFFMPEGUsePipes.Checked;
 
                         VideoCapture1.Network_Streaming_Output = ffmpegOutput;
@@ -2185,14 +2179,14 @@ namespace VideoCapture_CSharp_Demo
 
                         if (rbNetworkUDPFFMPEG.Checked)
                         {
-                            ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                            ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                         }
                         else
                         {
                             SetFFMPEGEXEOutput(ref ffmpegOutput);
                         }
 
-                        ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.MPEGTS;
+                        ffmpegOutput.OutputMuxer = OutputMuxer.MPEGTS;
                         ffmpegOutput.UsePipe = cbNetworkUDPFFMPEGUsePipes.Checked;
                         VideoCapture1.Network_Streaming_Output = ffmpegOutput;
 
@@ -2219,14 +2213,14 @@ namespace VideoCapture_CSharp_Demo
 
                             if (rbNetworkSSFFMPEGDefault.Checked)
                             {
-                                ffmpegOutput.FillDefaults(VFFFMPEGEXEDefaultsProfile.MP4_H264_AAC, true);
+                                ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                             }
                             else
                             {
                                 SetFFMPEGEXEOutput(ref ffmpegOutput);
                             }
 
-                            ffmpegOutput.OutputMuxer = VFFFMPEGEXEOutputMuxer.ISMV;
+                            ffmpegOutput.OutputMuxer = OutputMuxer.ISMV;
                             ffmpegOutput.UsePipe = cbNetworkSSUsePipes.Checked;
                             VideoCapture1.Network_Streaming_Output = ffmpegOutput;
                         }
@@ -2254,6 +2248,15 @@ namespace VideoCapture_CSharp_Demo
                         };
 
                         VideoCapture1.Network_Streaming_Output = hls;
+
+                        if (cbHLSEmbeddedHTTPServerEnabled.Checked)
+                        {
+                            edHLSURL.Text = $"http://localhost:{edHLSEmbeddedHTTPServerPort.Text}/playlist.m3u8";
+                        }
+                        else
+                        {
+                            edHLSURL.Text = string.Empty;
+                        }
 
                         break;
                     }
@@ -2368,39 +2371,28 @@ namespace VideoCapture_CSharp_Demo
                 case 3:
                     settings.Type = VFIPSource.RTSP_Live555;
                     break;
-                case 4:
-                    settings.Type = VFIPSource.HTTP_FFMPEG;
                     break;
-                case 5:
+                case 4:
                     settings.Type = VFIPSource.MMS_WMV;
                     break;
-                case 6:
-                    settings.Type = VFIPSource.RTSP_UDP_FFMPEG;
-                    break;
-                case 7:
-                    settings.Type = VFIPSource.RTSP_TCP_FFMPEG;
-                    break;
-                case 8:
-                    settings.Type = VFIPSource.RTSP_HTTP_FFMPEG;
-                    break;
-                case 9:
+                case 5:
                     {
                         settings.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                         cbIPAudioCapture.Checked = false;
                     }
                     break;
-                case 10:
+                case 6:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 11:
+                case 7:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 12:
+                case 8:
                     settings.Type = VFIPSource.NDI;
                     break;
-                case 13:
+                case 9:
                     settings.Type = VFIPSource.NDI_Legacy;
                     break;
             }
@@ -2783,11 +2775,6 @@ namespace VideoCapture_CSharp_Demo
             cbScreenFlipHorizontal.Enabled = cbFlipHorizontal1.Enabled = cbFlipHorizontal2.Enabled = cbFlipHorizontal3.Enabled = flipAvailable;
             cbDirect2DRotate.Enabled = rbDirect2D.Checked;
 
-            if (VideoCapture1.Video_Renderer == null)
-            {
-                VideoCapture1.Video_Renderer = new VideoRendererSettingsWinForms();
-            }
-
             if (rbVMR9.Checked)
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
@@ -2964,11 +2951,6 @@ namespace VideoCapture_CSharp_Demo
 
         private async void cbStretch_CheckedChanged(object sender, EventArgs e)
         {
-            if (VideoCapture1.Video_Renderer == null)
-            {
-                VideoCapture1.Video_Renderer = new VideoRendererSettingsWinForms();
-            }
-
             if (cbStretch.Checked)
             {
                 VideoCapture1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch;
@@ -3436,11 +3418,6 @@ namespace VideoCapture_CSharp_Demo
 
         private async void cbScreenFlipVertical_CheckedChanged(object sender, EventArgs e)
         {
-            if (VideoCapture1.Video_Renderer == null)
-            {
-                VideoCapture1.Video_Renderer = new VideoRendererSettingsWinForms();
-            }
-
             VideoCapture1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
             await VideoCapture1.Video_Renderer_UpdateAsync();
         }
@@ -4695,11 +4672,6 @@ namespace VideoCapture_CSharp_Demo
 
         private async void cbDirect2DRotate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (VideoCapture1.Video_Renderer == null)
-            {
-                VideoCapture1.Video_Renderer = new VideoRendererSettingsWinForms();
-            }
-
             VideoCapture1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
             await VideoCapture1.Video_Renderer_UpdateAsync();
         }

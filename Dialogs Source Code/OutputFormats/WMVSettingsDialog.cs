@@ -1,36 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Forms;
-using VisioForge.Controls.VideoCapture;
-using VisioForge.Controls.VideoEdit;
-using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="WMVSettingsDialog.cs" company="VisioForge">
+//   VisioForge (c) 2006 - 2021
+// </copyright>
+// <summary>
+//   Defines the WMVSettingsDialog type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Windows.Forms;
+
+    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Types;
+    using VisioForge.Types.OutputFormat;
+
+    /// <summary>
+    /// WMV settings dialog.
+    /// </summary>
     public partial class WMVSettingsDialog : Form
     {
         private readonly VideoCaptureCore _coreVideoCapture;
 
         private readonly VideoEditCore _coreVideoEdit;
 
-        public bool WMA;
+        public bool WMA { get; set; }
 
-        public WMVSettingsDialog(VideoCaptureCore core)
+        public WMVSettingsDialog(IVideoCaptureCore core)
         {
             InitializeComponent();
 
-            _coreVideoCapture = core;
+            _coreVideoCapture = core.GetCore();
 
             LoadDefaults();
         }
 
-        public WMVSettingsDialog(VideoEditCore core)
+        public WMVSettingsDialog(IVideoEditCore core)
         {
             InitializeComponent();
 
-            _coreVideoEdit = core;
+            _coreVideoEdit = core.GetCore();
 
             LoadDefaults();
         }

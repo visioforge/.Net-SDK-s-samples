@@ -485,7 +485,7 @@
                                 <TextBox x:Name="edNetworkRTMPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" VerticalAlignment="Top" Width="308"/>
                                 <Label x:Name="lbDownloadFFMPEG_Copy" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,111,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
                                 <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,137,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
-                                <CheckBox x:Name="cbNetworkRTMPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbNetworkRTMPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="NDI">
@@ -508,7 +508,7 @@
                                 <Label x:Name="lbDownloadFFMPEG_Copy1" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,112,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
                                 <Label x:Name="label137" Content="For multicast UDP streaming use URL like" HorizontalAlignment="Left" Margin="22,270,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="label158" Content="udp://239.101.101.1:1234?ttl=1&amp;pkt_size=1316" HorizontalAlignment="Left" Margin="22,290,0,0" VerticalAlignment="Top"/>
-                                <CheckBox x:Name="cbNetworkUDPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbNetworkUDPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="IIS Smooth Streaming">
@@ -522,7 +522,7 @@
                                 <RadioButton x:Name="rbNetworkSSFFMPEGDefault" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,45,0,0" VerticalAlignment="Top" IsChecked="True"/>
                                 <RadioButton x:Name="rbNetworkSSFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,65,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbDownloadFFMPEG_Copy2" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="23,218,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
-                                <CheckBox x:Name="cbNetworkSSUsePipes" Content="Use pipes for FFMPEG streaming" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbNetworkSSUsePipes" Content="Use pipes for FFMPEG streaming" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="HLS">
@@ -544,8 +544,9 @@
                                     <ComboBoxItem>Event</ComboBoxItem>
                                 </ComboBox>
                                 <CheckBox x:Name="cbHLSEmbeddedHTTPServerEnabled" Content="Use embedded HTTP server with port" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edHLSEmbeddedHTTPServerPort" HorizontalAlignment="Left" Height="23" Margin="252,257,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="40"/>
-                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,291,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSEmbeddedHTTPServerPort" HorizontalAlignment="Left" Height="23" Margin="252,257,0,0" TextWrapping="Wrap" Text="81" VerticalAlignment="Top" Width="40"/>
+                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,284,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="External">
@@ -1161,11 +1162,7 @@
                                     <ComboBoxItem Content="Auto (FFMPEG engine)" />
                                     <ComboBoxItem Content="Auto (LAV engine)" />
                                     <ComboBoxItem Content="RTSP (Live555 engine)" />
-                                    <ComboBoxItem Content="HTTP (FFMPEG engine)" />
                                     <ComboBoxItem Content="MMS - WMV" />
-                                    <ComboBoxItem Content="RTSP - UDP (FFMPEG engine)" />
-                                    <ComboBoxItem Content="RTSP - TCP (FFMPEG engine)" />
-                                    <ComboBoxItem Content="RTSP over HTTP (FFMPEG engine)" />
                                     <ComboBoxItem Content="HTTP MJPEG Low Latency"/>
                                     <ComboBoxItem Content="RTSP Low Latency TCP"/>
                                     <ComboBoxItem Content="RTSP Low Latency UDP"/>

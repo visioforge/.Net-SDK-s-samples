@@ -31,7 +31,6 @@ namespace VideoEdit_CS_Demo
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms2 = new VisioForge.Types.VideoRendererSettingsWinForms();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -446,6 +445,13 @@ namespace VideoEdit_CS_Demo
             this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
             this.label368 = new System.Windows.Forms.Label();
             this.label369 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lbNDI = new System.Windows.Forms.LinkLabel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.edNDIURL = new System.Windows.Forms.TextBox();
+            this.edNDIName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabPage77 = new System.Windows.Forms.TabPage();
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
@@ -738,6 +744,7 @@ namespace VideoEdit_CS_Demo
             this.tabPage32.SuspendLayout();
             this.tabPage49.SuspendLayout();
             this.tabPage50.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage77.SuspendLayout();
             this.tabPage51.SuspendLayout();
             this.tabPage33.SuspendLayout();
@@ -4943,6 +4950,7 @@ namespace VideoEdit_CS_Demo
             "Windows Media Video",
             "RTSP",
             "RTMP to Adobe Media Server / Wowza",
+            "NDI",
             "UDP",
             "Smooth Streaming to Microsoft IIS",
             "Output to external virtual devices"});
@@ -4956,6 +4964,7 @@ namespace VideoEdit_CS_Demo
             this.tabControl5.Controls.Add(this.tabPage32);
             this.tabControl5.Controls.Add(this.tabPage49);
             this.tabControl5.Controls.Add(this.tabPage50);
+            this.tabControl5.Controls.Add(this.tabPage4);
             this.tabControl5.Controls.Add(this.tabPage77);
             this.tabControl5.Controls.Add(this.tabPage51);
             this.tabControl5.Controls.Add(this.tabPage33);
@@ -5251,6 +5260,76 @@ namespace VideoEdit_CS_Demo
             this.label369.Size = new System.Drawing.Size(214, 13);
             this.label369.TabIndex = 13;
             this.label369.Text = "Format settings located on output format tab";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.lbNDI);
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Controls.Add(this.label12);
+            this.tabPage4.Controls.Add(this.edNDIURL);
+            this.tabPage4.Controls.Add(this.edNDIName);
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(284, 352);
+            this.tabPage4.TabIndex = 6;
+            this.tabPage4.Text = "NDI";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lbNDI
+            // 
+            this.lbNDI.AutoSize = true;
+            this.lbNDI.Location = new System.Drawing.Point(15, 135);
+            this.lbNDI.Name = "lbNDI";
+            this.lbNDI.Size = new System.Drawing.Size(86, 13);
+            this.lbNDI.TabIndex = 95;
+            this.lbNDI.TabStop = true;
+            this.lbNDI.Text = "vendor\'s website";
+            this.lbNDI.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 122);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(257, 13);
+            this.label11.TabIndex = 94;
+            this.label11.Text = "To use NDI please install NDI SDK for Windows from";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 71);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(86, 13);
+            this.label12.TabIndex = 93;
+            this.label12.Text = "Connection URL";
+            // 
+            // edNDIURL
+            // 
+            this.edNDIURL.Location = new System.Drawing.Point(18, 87);
+            this.edNDIURL.Name = "edNDIURL";
+            this.edNDIURL.ReadOnly = true;
+            this.edNDIURL.Size = new System.Drawing.Size(243, 20);
+            this.edNDIURL.TabIndex = 92;
+            // 
+            // edNDIName
+            // 
+            this.edNDIName.Location = new System.Drawing.Point(18, 35);
+            this.edNDIName.Name = "edNDIName";
+            this.edNDIName.Size = new System.Drawing.Size(243, 20);
+            this.edNDIName.TabIndex = 91;
+            this.edNDIName.Text = "Main";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(15, 19);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 13);
+            this.label13.TabIndex = 90;
+            this.label13.Text = "Name";
             // 
             // tabPage77
             // 
@@ -7208,6 +7287,7 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
+            this.VideoEdit1.Debug_DisableMessageDialogs = false;
             this.VideoEdit1.Debug_Mode = false;
             this.VideoEdit1.Debug_Telemetry = false;
             this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
@@ -7240,23 +7320,6 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.Video_Effects_GPU_Enabled = false;
             this.VideoEdit1.Video_FrameRate = 25D;
             this.VideoEdit1.Video_Preview_Enabled = true;
-            videoRendererSettingsWinForms2.Aspect_Ratio_Override = false;
-            videoRendererSettingsWinForms2.Aspect_Ratio_X = 0;
-            videoRendererSettingsWinForms2.Aspect_Ratio_Y = 0;
-            videoRendererSettingsWinForms2.BackgroundColor = System.Drawing.Color.Empty;
-            videoRendererSettingsWinForms2.Deinterlace_EVR_Mode = VisioForge.Types.EVRDeinterlaceMode.Auto;
-            videoRendererSettingsWinForms2.Deinterlace_VMR9_Mode = null;
-            videoRendererSettingsWinForms2.Deinterlace_VMR9_UseDefault = false;
-            videoRendererSettingsWinForms2.Flip_Horizontal = false;
-            videoRendererSettingsWinForms2.Flip_Vertical = false;
-            videoRendererSettingsWinForms2.RotationAngle = 0;
-            videoRendererSettingsWinForms2.StretchMode = VisioForge.Types.VFVideoRendererStretchMode.Letterbox;
-            videoRendererSettingsWinForms2.Video_Renderer = VisioForge.Types.VFVideoRenderer.VideoRenderer;
-            videoRendererSettingsWinForms2.VideoRendererInternal = VisioForge.Types.VFVideoRendererInternal.VideoRenderer;
-            videoRendererSettingsWinForms2.Zoom_Ratio = 0;
-            videoRendererSettingsWinForms2.Zoom_ShiftX = 0;
-            videoRendererSettingsWinForms2.Zoom_ShiftY = 0;
-            this.VideoEdit1.Video_Renderer = videoRendererSettingsWinForms2;
             this.VideoEdit1.Video_Resize = false;
             this.VideoEdit1.Video_Resize_Height = 480;
             this.VideoEdit1.Video_Resize_Width = 640;
@@ -7448,6 +7511,8 @@ namespace VideoEdit_CS_Demo
             this.tabPage49.PerformLayout();
             this.tabPage50.ResumeLayout(false);
             this.tabPage50.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage77.ResumeLayout(false);
             this.tabPage77.PerformLayout();
             this.tabPage51.ResumeLayout(false);
@@ -8102,6 +8167,13 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.TrackBar tbChromaKeyThresholdSensitivity;
         private System.Windows.Forms.Label label213;
         private System.Windows.Forms.CheckBox cbChromaKeyEnabled;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.LinkLabel lbNDI;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox edNDIURL;
+        private System.Windows.Forms.TextBox edNDIName;
+        private System.Windows.Forms.Label label13;
     }
 }
 
