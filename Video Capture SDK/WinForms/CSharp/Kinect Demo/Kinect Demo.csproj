@@ -8,8 +8,8 @@
     <AssemblyTitle>Kinect Demo</AssemblyTitle>
     <Product>Kinect Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.0.9.0</AssemblyVersion>
-    <FileVersion>14.0.9.0</FileVersion>
+    <AssemblyVersion>14.0.10.0</AssemblyVersion>
+    <FileVersion>14.0.10.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -60,8 +60,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.9" />
-    <PackageReference Include="VisioForge.DotNet.Kinect.TRIAL" Version="14.0.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.10" />
+    <PackageReference Include="VisioForge.DotNet.Kinect.TRIAL" Version="14.0.10" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
