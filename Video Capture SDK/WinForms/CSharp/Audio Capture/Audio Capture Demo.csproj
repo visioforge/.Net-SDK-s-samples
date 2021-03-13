@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>VisioForge_SDK_4_Audio_Capture_CSharp</RootNamespace>
     <AssemblyName>WinForms Audio Capture Demo</AssemblyName>
-    <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>    
+    <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Audio Capture Demo CSharp</AssemblyTitle>

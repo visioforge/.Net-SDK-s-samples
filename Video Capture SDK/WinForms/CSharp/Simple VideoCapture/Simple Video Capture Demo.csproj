@@ -3,7 +3,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <OutputType>WinExe</OutputType>
     <RootNamespace>VisioForge_SDK_Video_Capture_Demo</RootNamespace>
-    <AssemblyName>WinForms Simple Video Capture Demo</AssemblyName>  
+    <AssemblyName>WinForms Simple Video Capture Demo</AssemblyName>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworks>net472;net5.0-windows;netcoreapp3.1</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>

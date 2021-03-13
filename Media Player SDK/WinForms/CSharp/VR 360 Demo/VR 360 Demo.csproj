@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>VR 360 Demo</AssemblyTitle>
     <Product>VR 360 Demo</Product>
-    <Copyright>Copyright (c) 2006-2021</Copyright>    
+    <Copyright>Copyright (c) 2006-2021</Copyright>
     <AssemblyVersion>14.0.7.0</AssemblyVersion>
     <FileVersion>14.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>

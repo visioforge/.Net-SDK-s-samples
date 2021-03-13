@@ -13,28 +13,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F43
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{3F3567FA-DE52-4B4A-90B2-CE0EE171BA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images (NuGet)", "WinForms\CSharp\Video from images\Video From Images (NuGet).csproj", "{C384417A-6BBD-497A-ADF1-4C1A2D8FD05B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images", "WinForms\CSharp\Video from images\Video From Images.csproj", "{C384417A-6BBD-497A-ADF1-4C1A2D8FD05B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{025921BD-26DB-4C30-9A95-3C545CF0AA33}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{A3B4C236-F0F6-4F4C-A339-2C0A2F128D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE CLI (NuGet)", "Console\CSharp\Main Demo CLI\Main Demo VE CLI (NuGet).csproj", "{9BBD5871-E18F-4494-82B7-B771774E75EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE CLI", "Console\CSharp\Main Demo CLI\Main Demo VE CLI.csproj", "{9BBD5871-E18F-4494-82B7-B771774E75EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images VE CLI (NuGet)", "Console\CSharp\Video From Images CLI\Video From Images VE CLI (NuGet).csproj", "{0631F2FB-54CB-4E8E-B0D6-D26FBFCDA408}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images VE CLI", "Console\CSharp\Video From Images CLI\Video From Images VE CLI.csproj", "{0631F2FB-54CB-4E8E-B0D6-D26FBFCDA408}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE (NuGet)", "WinForms\CSharp\Main Demo\Main Demo VE (NuGet).csproj", "{3EDD8396-3B02-40C2-8C2E-E7F1B361D984}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE", "WinForms\CSharp\Main Demo\Main Demo VE.csproj", "{3EDD8396-3B02-40C2-8C2E-E7F1B361D984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images In Memory Demo (NuGet)", "WinForms\CSharp\Video from images in memory\Video From Images In Memory Demo (NuGet).csproj", "{14581C24-A301-46FE-AEF7-8416CE94D255}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images In Memory Demo", "WinForms\CSharp\Video from images in memory\Video From Images In Memory Demo.csproj", "{14581C24-A301-46FE-AEF7-8416CE94D255}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE WPF (NuGet)", "WPF\CSharp\Main Demo\Main Demo VE WPF (NuGet).csproj", "{A78A3FEC-8284-41F7-9156-5EF8043E012B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VE WPF", "WPF\CSharp\Main Demo\Main Demo VE WPF.csproj", "{A78A3FEC-8284-41F7-9156-5EF8043E012B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6AEB7895-A6AA-472B-A4EC-0FFC83F5C3E4}"
-	ProjectSection(SolutionItems) = preProject
-		README_NUGET.txt = README_NUGET.txt
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Join Demo (NuGet)", "WinForms\CSharp\Video Join Demo\Video Join Demo (NuGet).csproj", "{8FAFA52C-9BE5-4D7A-8279-8A0C7B3B59C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Join Demo", "WinForms\CSharp\Video Join Demo\Video Join Demo.csproj", "{8FAFA52C-9BE5-4D7A-8279-8A0C7B3B59C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

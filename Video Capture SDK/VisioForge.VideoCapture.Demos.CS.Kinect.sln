@@ -9,14 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{EA0E8887-9E3A-4617-AB41-7FE409391A68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect Demo (NuGet)", "WinForms\CSharp\Kinect Demo\Kinect Demo (NuGet).csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect Demo", "WinForms\CSharp\Kinect Demo\Kinect Demo.csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect 2 Demo (NuGet)", "WinForms\CSharp\Kinect 2 Demo\Kinect 2 Demo (NuGet).csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8878E307-C736-4C3B-81AB-6BC3F6658032}"
-	ProjectSection(SolutionItems) = preProject
-		README_NUGET.txt = README_NUGET.txt
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect 2 Demo", "WinForms\CSharp\Kinect 2 Demo\Kinect 2 Demo.csproj", "{4F1415CA-1B26-427A-8520-9B6EFF3CEBAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
