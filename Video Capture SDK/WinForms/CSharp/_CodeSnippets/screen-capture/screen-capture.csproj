@@ -9,8 +9,8 @@
     <AssemblyTitle>screen-capture</AssemblyTitle>
     <Product>screen-capture</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.0.17.0</AssemblyVersion>
-    <FileVersion>14.0.17.0</FileVersion>
+    <AssemblyVersion>14.0.18.0</AssemblyVersion>
+    <FileVersion>14.0.18.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,6 +57,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.17" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.18" />
   </ItemGroup>
 </Project>
