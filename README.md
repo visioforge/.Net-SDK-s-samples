@@ -1,8 +1,8 @@
 # NuGet usage
 
-Call Build on required project to restore NuGet packages for project and build it. Or call build for entire solution.
+Call Build on the required project to restore NuGet packages for the project and build it. Or call build for the entire solution.
 
-Most of demo applications contains NuGet unmanaged redist packages, specific to used SDK and platform.
+Most demo applications contain NuGet unmanaged redist packages, specific to used SDK and platform.
 
 # Product pages
 
