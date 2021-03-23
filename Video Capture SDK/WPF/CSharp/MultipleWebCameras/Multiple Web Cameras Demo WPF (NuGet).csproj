@@ -9,8 +9,8 @@
     <AssemblyTitle>MultipleWebCameras</AssemblyTitle>
     <Product>MultipleWebCameras</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.0.21.0</AssemblyVersion>
-    <FileVersion>14.0.21.0</FileVersion>
+    <AssemblyVersion>14.0.23.0</AssemblyVersion>
+    <FileVersion>14.0.23.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -33,11 +33,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.0.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.0.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.0.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.0.21" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.0.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.0.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.0.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.0.23" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
