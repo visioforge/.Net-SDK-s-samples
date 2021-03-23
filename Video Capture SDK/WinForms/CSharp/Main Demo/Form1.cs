@@ -74,9 +74,7 @@ namespace VideoCapture_CSharp_Demo
 
         private GIFSettingsDialog gifSettingsDialog;
 
-#if !NETCOREAPP
         private ONVIFControl onvifControl;
-#endif
 
         private ONVIFPTZRanges onvifPtzRanges;
 
@@ -710,7 +708,6 @@ namespace VideoCapture_CSharp_Demo
             zoomShiftX = 0;
             zoomShiftY = 0;
 
-#if !NETCOREAPP
             if (onvifControl != null)
             {
                 onvifControl.Disconnect();
@@ -719,7 +716,6 @@ namespace VideoCapture_CSharp_Demo
 
                 btONVIFConnect.Text = "Connect";
             }
-#endif
 
             mmLog.Clear();
 
@@ -2370,7 +2366,6 @@ namespace VideoCapture_CSharp_Demo
                     break;
                 case 3:
                     settings.Type = VFIPSource.RTSP_Live555;
-                    break;
                     break;
                 case 4:
                     settings.Type = VFIPSource.MMS_WMV;
@@ -5266,9 +5261,6 @@ namespace VideoCapture_CSharp_Demo
 
         private void btONVIFConnect_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (btONVIFConnect.Text == "Connect")
             {
                 btONVIFConnect.Text = "Disconnect";
@@ -5296,7 +5288,10 @@ namespace VideoCapture_CSharp_Demo
                 }
 
                 var deviceInfo = onvifControl.GetDeviceInformation();
-                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                if (deviceInfo != null)
+                {
+                    lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                }
 
                 cbONVIFProfile.Items.Clear();
                 var profiles = onvifControl.GetProfiles();
@@ -5333,14 +5328,10 @@ namespace VideoCapture_CSharp_Demo
                     onvifControl = null;
                 }
             }
-#endif
         }
 
         private void btONVIFRight_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5355,23 +5346,15 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             onvifControl?.PTZ_SetAbsolute(0, 0, 0);
-#endif
         }
 
         private void btONVIFLeft_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5386,14 +5369,10 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFUp_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5408,14 +5387,10 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFDown_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5430,14 +5405,10 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFZoomIn_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5452,14 +5423,10 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFZoomOut_Click(object sender, EventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -5474,7 +5441,6 @@ namespace VideoCapture_CSharp_Demo
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void tbPIPChromaKeyTolerance1_Scroll(object sender, EventArgs e)

@@ -23,13 +23,11 @@ namespace VideoCapture_CSharp_Demo
                 components.Dispose();
             }
 
-#if !NETCOREAPP
             if (onvifControl != null)
             {
                 onvifControl.Dispose();
                 onvifControl = null;
             }
-#endif
 
             base.Dispose(disposing);
         }
@@ -754,12 +752,17 @@ namespace VideoCapture_CSharp_Demo
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage98 = new System.Windows.Forms.TabPage();
             this.cbVUMeter = new System.Windows.Forms.CheckBox();
+            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
             this.tabPage112 = new System.Windows.Forms.TabPage();
             this.tbVUMeterBoost = new System.Windows.Forms.TrackBar();
             this.label382 = new System.Windows.Forms.Label();
             this.label381 = new System.Windows.Forms.Label();
             this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
             this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
+            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabPage99 = new System.Windows.Forms.TabPage();
             this.rbAddAudioStreamsIndependent = new System.Windows.Forms.RadioButton();
             this.rbAddAudioStreamsMix = new System.Windows.Forms.RadioButton();
@@ -1136,11 +1139,6 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
-            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -8998,6 +8996,22 @@ namespace VideoCapture_CSharp_Demo
             this.cbVUMeter.Text = "Enable VU Meter";
             this.cbVUMeter.UseVisualStyleBackColor = true;
             // 
+            // peakMeterCtrl1
+            // 
+            this.peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
+            this.peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
+            this.peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
+            this.peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
+            this.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
+            this.peakMeterCtrl1.Location = new System.Drawing.Point(128, 11);
+            this.peakMeterCtrl1.Name = "peakMeterCtrl1";
+            this.peakMeterCtrl1.Size = new System.Drawing.Size(105, 61);
+            this.peakMeterCtrl1.TabIndex = 102;
+            this.peakMeterCtrl1.Text = "peakMeterCtrl1";
+            // 
             // tabPage112
             // 
             this.tabPage112.Controls.Add(this.tbVUMeterBoost);
@@ -9065,6 +9079,48 @@ namespace VideoCapture_CSharp_Demo
             this.cbVUMeterPro.TabIndex = 108;
             this.cbVUMeterPro.Text = "Enable VU meter Pro";
             this.cbVUMeterPro.UseVisualStyleBackColor = true;
+            // 
+            // waveformPainter2
+            // 
+            this.waveformPainter2.Boost = 1F;
+            this.waveformPainter2.Location = new System.Drawing.Point(102, 106);
+            this.waveformPainter2.Name = "waveformPainter2";
+            this.waveformPainter2.Size = new System.Drawing.Size(270, 60);
+            this.waveformPainter2.TabIndex = 113;
+            this.waveformPainter2.Text = "waveformPainter2";
+            // 
+            // waveformPainter1
+            // 
+            this.waveformPainter1.Boost = 1F;
+            this.waveformPainter1.Location = new System.Drawing.Point(102, 40);
+            this.waveformPainter1.Name = "waveformPainter1";
+            this.waveformPainter1.Size = new System.Drawing.Size(270, 60);
+            this.waveformPainter1.TabIndex = 112;
+            this.waveformPainter1.Text = "waveformPainter1";
+            // 
+            // volumeMeter2
+            // 
+            this.volumeMeter2.Amplitude = 0F;
+            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
+            this.volumeMeter2.Boost = 1F;
+            this.volumeMeter2.Location = new System.Drawing.Point(52, 40);
+            this.volumeMeter2.MaxDb = 18F;
+            this.volumeMeter2.MinDb = -60F;
+            this.volumeMeter2.Name = "volumeMeter2";
+            this.volumeMeter2.Size = new System.Drawing.Size(22, 126);
+            this.volumeMeter2.TabIndex = 111;
+            // 
+            // volumeMeter1
+            // 
+            this.volumeMeter1.Amplitude = 0F;
+            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
+            this.volumeMeter1.Boost = 1F;
+            this.volumeMeter1.Location = new System.Drawing.Point(24, 40);
+            this.volumeMeter1.MaxDb = 18F;
+            this.volumeMeter1.MinDb = -60F;
+            this.volumeMeter1.Name = "volumeMeter1";
+            this.volumeMeter1.Size = new System.Drawing.Size(22, 126);
+            this.volumeMeter1.TabIndex = 107;
             // 
             // tabPage99
             // 
@@ -9810,6 +9866,7 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFPassword.Name = "edONVIFPassword";
             this.edONVIFPassword.Size = new System.Drawing.Size(100, 20);
             this.edONVIFPassword.TabIndex = 70;
+            this.edONVIFPassword.Text = "dancer23";
             // 
             // label378
             // 
@@ -9826,6 +9883,7 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFLogin.Name = "edONVIFLogin";
             this.edONVIFLogin.Size = new System.Drawing.Size(100, 20);
             this.edONVIFLogin.TabIndex = 68;
+            this.edONVIFLogin.Text = "geneziz";
             // 
             // label379
             // 
@@ -9842,7 +9900,7 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFURL.Name = "edONVIFURL";
             this.edONVIFURL.Size = new System.Drawing.Size(326, 20);
             this.edONVIFURL.TabIndex = 29;
-            this.edONVIFURL.Text = "http://192.168.1.200/onvif/device_service";
+            this.edONVIFURL.Text = "http://192.168.1.219:8899/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 
@@ -13129,64 +13187,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
-            // 
-            // peakMeterCtrl1
-            // 
-            this.peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
-            this.peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
-            this.peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
-            this.peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
-            this.peakMeterCtrl1.Location = new System.Drawing.Point(128, 11);
-            this.peakMeterCtrl1.Name = "peakMeterCtrl1";
-            this.peakMeterCtrl1.Size = new System.Drawing.Size(105, 61);
-            this.peakMeterCtrl1.TabIndex = 102;
-            this.peakMeterCtrl1.Text = "peakMeterCtrl1";
-            // 
-            // waveformPainter2
-            // 
-            this.waveformPainter2.Boost = 1F;
-            this.waveformPainter2.Location = new System.Drawing.Point(102, 106);
-            this.waveformPainter2.Name = "waveformPainter2";
-            this.waveformPainter2.Size = new System.Drawing.Size(270, 60);
-            this.waveformPainter2.TabIndex = 113;
-            this.waveformPainter2.Text = "waveformPainter2";
-            // 
-            // waveformPainter1
-            // 
-            this.waveformPainter1.Boost = 1F;
-            this.waveformPainter1.Location = new System.Drawing.Point(102, 40);
-            this.waveformPainter1.Name = "waveformPainter1";
-            this.waveformPainter1.Size = new System.Drawing.Size(270, 60);
-            this.waveformPainter1.TabIndex = 112;
-            this.waveformPainter1.Text = "waveformPainter1";
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter2.Boost = 1F;
-            this.volumeMeter2.Location = new System.Drawing.Point(52, 40);
-            this.volumeMeter2.MaxDb = 18F;
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Size = new System.Drawing.Size(22, 126);
-            this.volumeMeter2.TabIndex = 111;
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter1.Boost = 1F;
-            this.volumeMeter1.Location = new System.Drawing.Point(24, 40);
-            this.volumeMeter1.MaxDb = 18F;
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Size = new System.Drawing.Size(22, 126);
-            this.volumeMeter1.TabIndex = 107;
             // 
             // Form1
             // 

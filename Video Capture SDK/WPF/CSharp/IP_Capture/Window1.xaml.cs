@@ -55,9 +55,7 @@ namespace IP_Capture
 
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-#if !NETCOREAPP
         private ONVIFControl onvifControl;
-#endif
 
         private ONVIFPTZRanges onvifPtzRanges;
 
@@ -212,7 +210,6 @@ namespace IP_Capture
         
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-#if !NETCOREAPP
             if (onvifControl != null)
             {
                 onvifControl.Disconnect();
@@ -221,8 +218,6 @@ namespace IP_Capture
 
                 btONVIFConnect.Content = "Connect";
             }
-
-#endif
 
             mmLog.Clear();
 
@@ -466,9 +461,6 @@ namespace IP_Capture
 
         private void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (btONVIFConnect.Content.ToString() == "Connect")
             {
                 btONVIFConnect.Content = "Disconnect";
@@ -533,15 +525,10 @@ namespace IP_Capture
                     onvifControl = null;
                 }
             }
-
-#endif
         }
 
         private void btONVIFRight_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -556,23 +543,15 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             onvifControl?.PTZ_SetAbsolute(0, 0, 0);
-#endif
         }
 
         private void btONVIFLeft_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -587,14 +566,10 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFUp_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -609,14 +584,10 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFDown_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -631,14 +602,10 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -653,14 +620,10 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
         {
-#if NETCOREAPP
-            MessageBox.Show("ONVIF not avauilable for .Net Core SDK build.");
-#else
             if (onvifControl == null || onvifPtzRanges == null)
             {
                 return;
@@ -675,7 +638,6 @@ namespace IP_Capture
             }
 
             onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
-#endif
         }
 
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)

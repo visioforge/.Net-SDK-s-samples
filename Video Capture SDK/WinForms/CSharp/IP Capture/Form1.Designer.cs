@@ -21,13 +21,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             {
                 components.Dispose();
                 
-#if !NETCOREAPP
                 if (onvifControl != null)
                 {
                     onvifControl.Dispose();
                     onvifControl = null;
                 }
-#endif
             }
 
             base.Dispose(disposing);
