@@ -1033,6 +1033,22 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 cbIPURL.SelectedIndex = 0;
             }
         }
+
+        private async void btListONVIFSources_Click(object sender, EventArgs e)
+        {
+            cbIPURL.Items.Clear();
+
+            var lst = await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(null, null);
+            foreach (var uri in lst)
+            {
+                cbIPURL.Items.Add(uri);
+            }
+
+            if (cbIPURL.Items.Count > 0)
+            {
+                cbIPURL.SelectedIndex = 0;
+            }
+        }
     }
 }
 

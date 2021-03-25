@@ -1039,6 +1039,22 @@ namespace IP_Capture
                 cbIPURL.SelectedIndex = 0;
             }
         }
+
+        private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
+        {
+            cbIPURL.Items.Clear();
+
+            var lst = await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(null, null);
+            foreach (var uri in lst)
+            {
+                cbIPURL.Items.Add(uri);
+            }
+
+            if (cbIPURL.Items.Count > 0)
+            {
+                cbIPURL.SelectedIndex = 0;
+            }
+        }
     }
 }
 

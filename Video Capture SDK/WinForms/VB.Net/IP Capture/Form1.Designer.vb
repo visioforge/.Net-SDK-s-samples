@@ -121,6 +121,7 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
+        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.tcMain.SuspendLayout
         Me.tabPage1.SuspendLayout
         Me.tabControl15.SuspendLayout
@@ -173,6 +174,7 @@ Partial Class Form1
         '
         'tabPage144
         '
+        Me.tabPage144.Controls.Add(Me.btListONVIFSources)
         Me.tabPage144.Controls.Add(Me.cbIPURL)
         Me.tabPage144.Controls.Add(Me.btListNDISources)
         Me.tabPage144.Controls.Add(Me.lbNDI)
@@ -214,7 +216,7 @@ Partial Class Form1
         '
         'btListNDISources
         '
-        Me.btListNDISources.Location = New System.Drawing.Point(293, 91)
+        Me.btListNDISources.Location = New System.Drawing.Point(293, 76)
         Me.btListNDISources.Name = "btListNDISources"
         Me.btListNDISources.Size = New System.Drawing.Size(123, 23)
         Me.btListNDISources.TabIndex = 90
@@ -1193,6 +1195,15 @@ Partial Class Form1
         Me.btPause.Text = "Pause"
         Me.btPause.UseVisualStyleBackColor = true
         '
+        'btListONVIFSources
+        '
+        Me.btListONVIFSources.Location = New System.Drawing.Point(293, 105)
+        Me.btListONVIFSources.Name = "btListONVIFSources"
+        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
+        Me.btListONVIFSources.TabIndex = 92
+        Me.btListONVIFSources.Text = "List ONVIF sources"
+        Me.btListONVIFSources.UseVisualStyleBackColor = true
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -1331,4 +1342,5 @@ End Sub
     Private WithEvents label25 As Label
     Private WithEvents btListNDISources As Button
     Private WithEvents cbIPURL As ComboBox
+    Private WithEvents btListONVIFSources As Button
 End Class

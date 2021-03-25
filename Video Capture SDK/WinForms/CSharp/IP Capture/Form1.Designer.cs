@@ -133,6 +133,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
+            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl15.SuspendLayout();
@@ -185,6 +186,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.btListONVIFSources);
             this.tabPage144.Controls.Add(this.cbIPURL);
             this.tabPage144.Controls.Add(this.btListNDISources);
             this.tabPage144.Controls.Add(this.lbNDI);
@@ -226,7 +228,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // 
             // btListNDISources
             // 
-            this.btListNDISources.Location = new System.Drawing.Point(294, 86);
+            this.btListNDISources.Location = new System.Drawing.Point(294, 97);
             this.btListNDISources.Name = "btListNDISources";
             this.btListNDISources.Size = new System.Drawing.Size(123, 23);
             this.btListNDISources.TabIndex = 85;
@@ -1257,6 +1259,16 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.lbTimestamp.TabIndex = 102;
             this.lbTimestamp.Text = "Recording time: 00:00:00";
             // 
+            // btListONVIFSources
+            // 
+            this.btListONVIFSources.Location = new System.Drawing.Point(294, 72);
+            this.btListONVIFSources.Name = "btListONVIFSources";
+            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
+            this.btListONVIFSources.TabIndex = 87;
+            this.btListONVIFSources.Text = "List ONVIF sources";
+            this.btListONVIFSources.UseVisualStyleBackColor = true;
+            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1399,6 +1411,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btListNDISources;
         private System.Windows.Forms.ComboBox cbIPURL;
+        private System.Windows.Forms.Button btListONVIFSources;
     }
 }
 

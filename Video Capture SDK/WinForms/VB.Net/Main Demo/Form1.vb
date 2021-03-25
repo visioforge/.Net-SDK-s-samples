@@ -5162,6 +5162,19 @@ Public Class Form1
             cbIPURL.SelectedIndex = 0
         End If
     End Sub
+
+    Private async Sub btListONVIFSources_Click(sender As Object, e As EventArgs) Handles btListONVIFSources.Click
+        cbIPURL.Items.Clear()
+
+        Dim lst As Uri() = Await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(Nothing, Nothing)
+        For Each uri As Uri In lst
+            cbIPURL.Items.Add(uri)
+        Next
+
+        If (cbIPURL.Items.Count > 0) Then
+            cbIPURL.SelectedIndex = 0
+        End If
+    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

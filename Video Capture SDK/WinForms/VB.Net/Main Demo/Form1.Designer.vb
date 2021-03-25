@@ -1129,6 +1129,7 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
+        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -3660,6 +3661,7 @@ Partial Class Form1
         '
         'tabPage144
         '
+        Me.tabPage144.Controls.Add(Me.btListONVIFSources)
         Me.tabPage144.Controls.Add(Me.cbIPURL)
         Me.tabPage144.Controls.Add(Me.btListNDISources)
         Me.tabPage144.Controls.Add(Me.lbNDI)
@@ -12739,6 +12741,15 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
+        'btListONVIFSources
+        '
+        Me.btListONVIFSources.Location = New System.Drawing.Point(145, 209)
+        Me.btListONVIFSources.Name = "btListONVIFSources"
+        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
+        Me.btListONVIFSources.TabIndex = 93
+        Me.btListONVIFSources.Text = "List ONVIF sources"
+        Me.btListONVIFSources.UseVisualStyleBackColor = true
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -14183,4 +14194,5 @@ End Sub
     Private WithEvents linkLabel6 As LinkLabel
     Private WithEvents label38 As Label
     Private WithEvents edHLSURL As TextBox
+    Private WithEvents btListONVIFSources As Button
 End Class

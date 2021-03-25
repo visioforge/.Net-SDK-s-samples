@@ -1139,6 +1139,7 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -9499,6 +9500,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage144
             // 
+            this.tabPage144.Controls.Add(this.btListONVIFSources);
             this.tabPage144.Controls.Add(this.cbIPURL);
             this.tabPage144.Controls.Add(this.btListNDISources);
             this.tabPage144.Controls.Add(this.lbNDI);
@@ -9866,7 +9868,6 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFPassword.Name = "edONVIFPassword";
             this.edONVIFPassword.Size = new System.Drawing.Size(100, 20);
             this.edONVIFPassword.TabIndex = 70;
-            this.edONVIFPassword.Text = "dancer23";
             // 
             // label378
             // 
@@ -9883,7 +9884,6 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFLogin.Name = "edONVIFLogin";
             this.edONVIFLogin.Size = new System.Drawing.Size(100, 20);
             this.edONVIFLogin.TabIndex = 68;
-            this.edONVIFLogin.Text = "geneziz";
             // 
             // label379
             // 
@@ -13188,6 +13188,16 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
+            // btListONVIFSources
+            // 
+            this.btListONVIFSources.Location = new System.Drawing.Point(144, 218);
+            this.btListONVIFSources.Name = "btListONVIFSources";
+            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
+            this.btListONVIFSources.TabIndex = 90;
+            this.btListONVIFSources.Text = "List ONVIF sources";
+            this.btListONVIFSources.UseVisualStyleBackColor = true;
+            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -14627,6 +14637,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.LinkLabel linkLabel6;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox edHLSURL;
+        private System.Windows.Forms.Button btListONVIFSources;
     }
 }
 
