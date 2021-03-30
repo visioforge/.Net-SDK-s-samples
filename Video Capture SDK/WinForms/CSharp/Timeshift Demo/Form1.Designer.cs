@@ -30,6 +30,7 @@ namespace VC_Timeshift_Demo
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -37,7 +38,7 @@ namespace VC_Timeshift_Demo
             this.label28 = new System.Windows.Forms.Label();
             this.cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.cbFramerate = new System.Windows.Forms.ComboBox();
+            this.cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat = new System.Windows.Forms.ComboBox();
             this.cbVideoInputDevice = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -74,7 +75,7 @@ namespace VC_Timeshift_Demo
             this.btStop = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -113,7 +114,7 @@ namespace VC_Timeshift_Demo
             this.tabPage1.Controls.Add(this.label28);
             this.tabPage1.Controls.Add(this.cbUseBestVideoInputFormat);
             this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.cbFramerate);
+            this.tabPage1.Controls.Add(this.cbVideoInputFrameRate);
             this.tabPage1.Controls.Add(this.cbVideoInputFormat);
             this.tabPage1.Controls.Add(this.cbVideoInputDevice);
             this.tabPage1.Controls.Add(this.label13);
@@ -154,14 +155,14 @@ namespace VC_Timeshift_Demo
             this.label18.TabIndex = 125;
             this.label18.Text = "Frame rate";
             // 
-            // cbFramerate
+            // cbVideoInputFrameRate
             // 
-            this.cbFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFramerate.FormattingEnabled = true;
-            this.cbFramerate.Location = new System.Drawing.Point(232, 81);
-            this.cbFramerate.Name = "cbFramerate";
-            this.cbFramerate.Size = new System.Drawing.Size(65, 21);
-            this.cbFramerate.TabIndex = 124;
+            this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoInputFrameRate.FormattingEnabled = true;
+            this.cbVideoInputFrameRate.Location = new System.Drawing.Point(232, 81);
+            this.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
+            this.cbVideoInputFrameRate.Size = new System.Drawing.Size(65, 21);
+            this.cbVideoInputFrameRate.TabIndex = 124;
             // 
             // cbVideoInputFormat
             // 
@@ -430,8 +431,13 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_Enabled = false;
+            this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
+            this.VideoCapture1.Debug_Telemetry = true;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
             this.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
             this.VideoCapture1.Decklink_Input_IREUSA = false;
@@ -458,6 +464,7 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.Network_Streaming_Output = null;
             this.VideoCapture1.Network_Streaming_URL = "";
             this.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10;
+            this.VideoCapture1.OSD_Enabled = false;
             this.VideoCapture1.Output_Filename = "C:\\Users\\roman\\Documents\\VisioForge\\output.avi";
             this.VideoCapture1.Output_Format = null;
             this.VideoCapture1.PIP_AddSampleGrabbers = false;
@@ -472,7 +479,7 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(439, 298);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 1;
@@ -501,6 +508,9 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.Video_Decoder = null;
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
+            this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             this.VideoCapture1.Video_Resize = null;
             this.VideoCapture1.Video_ResizeOrCrop_Enabled = false;
             this.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
@@ -549,9 +559,14 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Custom_Audio_Decoder = null;
             this.MediaPlayer1.Custom_Splitter = null;
             this.MediaPlayer1.Custom_Video_Decoder = null;
+            this.MediaPlayer1.CustomRedist_Auto = true;
+            this.MediaPlayer1.CustomRedist_Enabled = false;
+            this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
             this.MediaPlayer1.Debug_Dir = null;
+            this.MediaPlayer1.Debug_DisableMessageDialogs = false;
             this.MediaPlayer1.Debug_Mode = false;
+            this.MediaPlayer1.Debug_Telemetry = true;
             this.MediaPlayer1.Encryption_Key = "";
             this.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.String;
             this.MediaPlayer1.Face_Tracking = null;
@@ -560,10 +575,15 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Loop = false;
             this.MediaPlayer1.Loop_DoNotSeekToBeginning = false;
             this.MediaPlayer1.MaximalSpeedPlayback = false;
+            this.MediaPlayer1.MIDI_Renderer = null;
             this.MediaPlayer1.Motion_Detection = null;
             this.MediaPlayer1.Motion_DetectionEx = null;
             this.MediaPlayer1.MultiScreen_Enabled = false;
             this.MediaPlayer1.Name = "MediaPlayer1";
+            this.MediaPlayer1.NDI_Output = null;
+            this.MediaPlayer1.OSD_Enabled = false;
+            this.MediaPlayer1.Play_DelayEnabled = false;
+            this.MediaPlayer1.Play_PauseAtFirstFrame = false;
             this.MediaPlayer1.ReversePlayback_CacheSize = 0;
             this.MediaPlayer1.ReversePlayback_Enabled = false;
             this.MediaPlayer1.Selection_Active = false;
@@ -571,16 +591,19 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Selection_Stop = 0;
             this.MediaPlayer1.Size = new System.Drawing.Size(441, 303);
             this.MediaPlayer1.Source_Custom_CLSID = null;
+            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID;
             this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
             this.MediaPlayer1.Source_Stream = null;
             this.MediaPlayer1.Source_Stream_AudioPresent = true;
             this.MediaPlayer1.Source_Stream_Size = ((long)(0));
             this.MediaPlayer1.Source_Stream_VideoPresent = true;
-            this.MediaPlayer1.Play_DelayEnabled = false;
             this.MediaPlayer1.TabIndex = 8;
             this.MediaPlayer1.Video_Effects_Enabled = false;
+            this.MediaPlayer1.Video_Effects_GPU_Enabled = false;
             this.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = false;
             this.MediaPlayer1.Video_Stream_Index = 0;
+            this.MediaPlayer1.Virtual_Camera_Output_Enabled = false;
+            this.MediaPlayer1.Virtual_Camera_Output_LicenseKey = null;
             this.MediaPlayer1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.MediaPlayer1_OnError);
             // 
             // cbPlayerPlayAudio
@@ -719,7 +742,7 @@ namespace VC_Timeshift_Demo
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbFramerate;
+        private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
         private System.Windows.Forms.ComboBox cbVideoInputDevice;
         private System.Windows.Forms.Label label13;

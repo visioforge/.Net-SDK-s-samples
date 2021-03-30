@@ -40,7 +40,7 @@
             this.label28 = new System.Windows.Forms.Label();
             this.cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.cbVideoFrameRate = new System.Windows.Forms.ComboBox();
+            this.cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat = new System.Windows.Forms.ComboBox();
             this.cbVideoInputDevice = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -95,9 +95,11 @@
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
+            this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
+            this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
             this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -141,7 +143,7 @@
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
             this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(402, 301);
             this.VideoCapture1.Start_DelayEnabled = false;
             this.VideoCapture1.TabIndex = 0;
@@ -171,6 +173,8 @@
             this.VideoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.VideoCapture1.Video_Effects_Enabled = false;
             this.VideoCapture1.Video_Effects_GPU_Enabled = false;
+            this.VideoCapture1.Video_Effects_MergeImageLogos = false;
+            this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             this.VideoCapture1.Video_Resize = null;
             this.VideoCapture1.Video_ResizeOrCrop_Enabled = false;
             this.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
@@ -245,7 +249,7 @@
             this.tabPage1.Controls.Add(this.label28);
             this.tabPage1.Controls.Add(this.cbUseBestVideoInputFormat);
             this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.cbVideoFrameRate);
+            this.tabPage1.Controls.Add(this.cbVideoInputFrameRate);
             this.tabPage1.Controls.Add(this.cbVideoInputFormat);
             this.tabPage1.Controls.Add(this.cbVideoInputDevice);
             this.tabPage1.Controls.Add(this.label13);
@@ -286,14 +290,14 @@
             this.label18.TabIndex = 125;
             this.label18.Text = "Frame rate";
             // 
-            // cbVideoFrameRate
+            // cbVideoInputFrameRate
             // 
-            this.cbVideoFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbVideoFrameRate.FormattingEnabled = true;
-            this.cbVideoFrameRate.Location = new System.Drawing.Point(230, 85);
-            this.cbVideoFrameRate.Name = "cbVideoFrameRate";
-            this.cbVideoFrameRate.Size = new System.Drawing.Size(65, 21);
-            this.cbVideoFrameRate.TabIndex = 124;
+            this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoInputFrameRate.FormattingEnabled = true;
+            this.cbVideoInputFrameRate.Location = new System.Drawing.Point(230, 85);
+            this.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
+            this.cbVideoInputFrameRate.Size = new System.Drawing.Size(65, 21);
+            this.cbVideoInputFrameRate.TabIndex = 124;
             // 
             // cbVideoInputFormat
             // 
@@ -303,6 +307,7 @@
             this.cbVideoInputFormat.Name = "cbVideoInputFormat";
             this.cbVideoInputFormat.Size = new System.Drawing.Size(205, 21);
             this.cbVideoInputFormat.TabIndex = 123;
+            this.cbVideoInputFormat.SelectedIndexChanged += new System.EventHandler(this.cbVideoInputFormat_SelectedIndexChanged);
             // 
             // cbVideoInputDevice
             // 
@@ -506,7 +511,7 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbVideoFrameRate;
+        private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
         private System.Windows.Forms.ComboBox cbVideoInputDevice;
         private System.Windows.Forms.Label label13;

@@ -375,7 +375,7 @@ Public Class Form1
             Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
             If Not IsNothing(deviceItem) Then
                 Dim formats = deviceItem.VideoFormats
-                For Each item As String In formats
+                For Each item As VideoCaptureDeviceFormat In formats
                     cbVideoInputFormat.Items.Add(item)
                 Next
 
@@ -384,18 +384,7 @@ Public Class Form1
                 End If
 
                 cbVideoInputSelectedIndexChanged(sender, e)
-
-                cbFramerate.Items.Clear()
-
-                Dim frameRate = deviceItem.VideoFrameRates
-                For Each item As String In frameRate
-                    cbFramerate.Items.Add(item)
-                Next
-
-                If cbFramerate.Items.Count > 0 Then
-                    cbFramerate.SelectedIndex = 0
-                End If
-
+                
                 'currently device active, we can read TV Tuner name
                 Dim tvTuner = deviceItem.TVTuner
                 If tvTuner <> "" Then
@@ -529,7 +518,31 @@ Public Class Form1
 
     Private Sub cbVideoInputSelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
 
-        VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text
+        If (String.IsNullOrEmpty(cbVideoInputFormat.Text)) Then
+            Return
+        End If
+
+        If (cbVideoInputDevice.SelectedIndex <> -1) Then
+
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            If (deviceItem Is Nothing) Then
+                Return
+            End If
+
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.First()
+            If (videoFormat Is Nothing) Then
+                Return
+            End If
+
+            cbVideoInputFrameRate.Items.Clear()
+            For Each frameRate As Double In videoFormat.FrameRates
+                cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
+            Next
+
+            If (cbVideoInputFrameRate.Items.Count > 0) Then
+                cbVideoInputFrameRate.SelectedIndex = 0
+            End If
+        End If
 
     End Sub
 
@@ -1808,8 +1821,8 @@ Public Class Form1
 
         VideoCapture1.Video_CaptureDevice_UseClosedCaptions = cbUseClosedCaptions.Checked
 
-        If cbFramerate.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbFramerate.Text)
+        If cbVideoInputFrameRate.SelectedIndex <> -1 Then
+            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text)
         End If
 
         VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked
@@ -2661,25 +2674,14 @@ Public Class Form1
             Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.First()
             If Not IsNothing(deviceItem) Then
                 Dim formats = deviceItem.VideoFormats
-                For Each item As String In formats
+                For Each item As VideoCaptureDeviceFormat In formats
                     cbPIPFormat.Items.Add(item)
                 Next
 
                 If cbPIPFormat.Items.Count > 0 Then
                     cbPIPFormat.SelectedIndex = 0
                 End If
-
-                cbPIPFrameRate.Items.Clear()
-
-                Dim frameRate = deviceItem.VideoFrameRates
-                For Each item As String In frameRate
-                    cbPIPFrameRate.Items.Add(item)
-                Next
-
-                If cbPIPFrameRate.Items.Count > 0 Then
-                    cbPIPFrameRate.SelectedIndex = 0
-                End If
-
+                
                 cbPIPInput.Items.Clear()
 
                 VideoCapture1.PIP_Sources_Device_GetCrossbar(cbPIPDevice.Text)
@@ -3862,41 +3864,28 @@ Public Class Form1
     Private Sub cbCustomVideoSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomVideoSourceFilter.SelectedIndexChanged
 
         If (Not String.IsNullOrEmpty(cbCustomVideoSourceFilter.Text)) Then
-
             cbCustomVideoSourceFormat.Items.Clear()
             cbCustomVideoSourceFrameRate.Items.Clear()
 
-            Dim formats As List(Of String) = Nothing
-            Dim frameRates As List(Of String) = Nothing
+            Dim formats As List(Of VideoCaptureDeviceFormat) = Nothing
 
             If (cbCustomVideoSourceCategory.SelectedIndex = 0) Then
-
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetVideoFormats(
                     VFFilterCategory.VideoCaptureSource,
                     cbCustomVideoSourceFilter.Text,
                     VFMediaCategory.Video,
-                     formats,
-                     frameRates)
-
+                     formats)
             Else
-
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetVideoFormats(
                     VFFilterCategory.DirectShowFilters,
                     cbCustomVideoSourceFilter.Text,
                     VFMediaCategory.Video,
-                     formats,
-                     frameRates)
-
+                     formats)
             End If
 
-            For Each format As String In formats
-                cbCustomVideoSourceFormat.Items.Add(format)
+            For Each format As VideoCaptureDeviceFormat In formats
+                cbCustomVideoSourceFormat.Items.Add(format.Name)
             Next
-
-            For Each format As String In frameRates
-                cbCustomVideoSourceFrameRate.Items.Add(format)
-            Next
-
         End If
 
     End Sub
@@ -3904,35 +3893,27 @@ Public Class Form1
     Private Sub cbCustomAudioSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomAudioSourceFilter.SelectedIndexChanged
 
         If (Not String.IsNullOrEmpty(cbCustomAudioSourceFilter.Text)) Then
-
             cbCustomAudioSourceFormat.Items.Clear()
 
             Dim formats As List(Of String) = Nothing
-            Dim frameRates As List(Of String) = Nothing
 
             If (cbCustomAudioSourceCategory.SelectedIndex = 0) Then
-
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetAudioFormats(
                     VFFilterCategory.AudioCaptureSource,
                     cbCustomAudioSourceFilter.Text,
                     VFMediaCategory.Audio,
-                    formats,
-                    frameRates)
-
+                    formats)
             Else
-
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetAudioFormats(
                     VFFilterCategory.DirectShowFilters,
                     cbCustomAudioSourceFilter.Text,
                     VFMediaCategory.Audio,
-                     formats,
-                     frameRates)
+                     formats)
             End If
 
             For Each format As String In formats
                 cbCustomAudioSourceFormat.Items.Add(format)
             Next
-
         End If
 
     End Sub

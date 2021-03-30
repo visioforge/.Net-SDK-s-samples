@@ -870,7 +870,7 @@
                                 <Button Content="Signal" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="339,41,0,0" x:Name="btSignal" VerticalAlignment="Top" Width="65" Click="btSignal_Click" />
                                 <Label Content="Input format" Height="28" HorizontalAlignment="Left" Margin="36,76,0,0" x:Name="label175" VerticalAlignment="Top" Width="81" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="36,103,0,0" x:Name="cbVideoInputFormat" VerticalAlignment="Top" Width="225" SelectionChanged="cbVideoInputFormat_SelectedIndexChanged" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="268,103,0,0" x:Name="cbFramerate" VerticalAlignment="Top" Width="65" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="268,103,0,0" x:Name="cbVideoInputFrameRate" VerticalAlignment="Top" Width="65" />
                                 <CheckBox Content="Use best" Height="16" HorizontalAlignment="Left" Margin="199,81,0,0" x:Name="cbUseBestVideoInputFormat" VerticalAlignment="Top" Click="cbUseBestVideoInputFormat_CheckedChanged" />
                                 <Label Content="Frame rate" Height="28" HorizontalAlignment="Left" Margin="265,76,0,0" x:Name="label176" VerticalAlignment="Top" Width="86" />
                                 <Label Content="fps" Height="28" HorizontalAlignment="Left" Margin="338,100,0,0" x:Name="label177" VerticalAlignment="Top" Width="41" />

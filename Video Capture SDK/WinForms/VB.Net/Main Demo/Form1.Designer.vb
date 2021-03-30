@@ -50,7 +50,7 @@ Partial Class Form1
         Me.cbUseBestVideoInputFormat = New System.Windows.Forms.CheckBox()
         Me.btVideoCaptureDeviceSettings = New System.Windows.Forms.Button()
         Me.label18 = New System.Windows.Forms.Label()
-        Me.cbFramerate = New System.Windows.Forms.ComboBox()
+        Me.cbVideoInputFrameRate = New System.Windows.Forms.ComboBox()
         Me.cbVideoInputFormat = New System.Windows.Forms.ComboBox()
         Me.cbVideoInputDevice = New System.Windows.Forms.ComboBox()
         Me.label13 = New System.Windows.Forms.Label()
@@ -255,6 +255,7 @@ Partial Class Form1
         Me.tabPage48 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.cbIPURL = New System.Windows.Forms.ComboBox()
         Me.btListNDISources = New System.Windows.Forms.Button()
         Me.lbNDI = New System.Windows.Forms.LinkLabel()
@@ -1129,7 +1130,6 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
-        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -1467,7 +1467,7 @@ Partial Class Form1
         Me.tabPage8.Controls.Add(Me.cbUseBestVideoInputFormat)
         Me.tabPage8.Controls.Add(Me.btVideoCaptureDeviceSettings)
         Me.tabPage8.Controls.Add(Me.label18)
-        Me.tabPage8.Controls.Add(Me.cbFramerate)
+        Me.tabPage8.Controls.Add(Me.cbVideoInputFrameRate)
         Me.tabPage8.Controls.Add(Me.cbVideoInputFormat)
         Me.tabPage8.Controls.Add(Me.cbVideoInputDevice)
         Me.tabPage8.Controls.Add(Me.label13)
@@ -1526,14 +1526,14 @@ Partial Class Form1
         Me.label18.TabIndex = 116
         Me.label18.Text = "Frame rate"
         '
-        'cbFramerate
+        'cbVideoInputFrameRate
         '
-        Me.cbFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbFramerate.FormattingEnabled = true
-        Me.cbFramerate.Location = New System.Drawing.Point(237, 97)
-        Me.cbFramerate.Name = "cbFramerate"
-        Me.cbFramerate.Size = New System.Drawing.Size(65, 21)
-        Me.cbFramerate.TabIndex = 115
+        Me.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbVideoInputFrameRate.FormattingEnabled = true
+        Me.cbVideoInputFrameRate.Location = New System.Drawing.Point(237, 97)
+        Me.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate"
+        Me.cbVideoInputFrameRate.Size = New System.Drawing.Size(65, 21)
+        Me.cbVideoInputFrameRate.TabIndex = 115
         '
         'cbVideoInputFormat
         '
@@ -3691,6 +3691,15 @@ Partial Class Form1
         Me.tabPage144.TabIndex = 0
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = true
+        '
+        'btListONVIFSources
+        '
+        Me.btListONVIFSources.Location = New System.Drawing.Point(145, 209)
+        Me.btListONVIFSources.Name = "btListONVIFSources"
+        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
+        Me.btListONVIFSources.TabIndex = 93
+        Me.btListONVIFSources.Text = "List ONVIF sources"
+        Me.btListONVIFSources.UseVisualStyleBackColor = true
         '
         'cbIPURL
         '
@@ -12741,15 +12750,6 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
-        'btListONVIFSources
-        '
-        Me.btListONVIFSources.Location = New System.Drawing.Point(145, 209)
-        Me.btListONVIFSources.Name = "btListONVIFSources"
-        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
-        Me.btListONVIFSources.TabIndex = 93
-        Me.btListONVIFSources.Text = "List ONVIF sources"
-        Me.btListONVIFSources.UseVisualStyleBackColor = true
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -13114,7 +13114,7 @@ End Sub
     Private WithEvents cbUseBestVideoInputFormat As System.Windows.Forms.CheckBox
     Private WithEvents btVideoCaptureDeviceSettings As System.Windows.Forms.Button
     Private WithEvents label18 As System.Windows.Forms.Label
-    Private WithEvents cbFramerate As System.Windows.Forms.ComboBox
+    Private WithEvents cbVideoInputFrameRate As System.Windows.Forms.ComboBox
     Private WithEvents cbVideoInputFormat As System.Windows.Forms.ComboBox
     Private WithEvents cbVideoInputDevice As System.Windows.Forms.ComboBox
     Private WithEvents label13 As System.Windows.Forms.Label

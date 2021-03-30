@@ -88,6 +88,7 @@ namespace multiple_ap_cams
             this.videoCapture1.CustomRedist_Enabled = false;
             this.videoCapture1.CustomRedist_Path = null;
             this.videoCapture1.Debug_Dir = "";
+            this.videoCapture1.Debug_DisableMessageDialogs = false;
             this.videoCapture1.Debug_Mode = false;
             this.videoCapture1.Debug_Telemetry = false;
             this.videoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -209,6 +210,7 @@ namespace multiple_ap_cams
             this.videoCapture2.CustomRedist_Enabled = false;
             this.videoCapture2.CustomRedist_Path = null;
             this.videoCapture2.Debug_Dir = "";
+            this.videoCapture2.Debug_DisableMessageDialogs = false;
             this.videoCapture2.Debug_Mode = false;
             this.videoCapture2.Debug_Telemetry = false;
             this.videoCapture2.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -429,6 +431,7 @@ namespace multiple_ap_cams
             this.cbVideoInputFormat1.Name = "cbVideoInputFormat1";
             this.cbVideoInputFormat1.Size = new System.Drawing.Size(197, 21);
             this.cbVideoInputFormat1.TabIndex = 121;
+            this.cbVideoInputFormat1.SelectedIndexChanged += new System.EventHandler(this.cbVideoInputFormat1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -456,6 +459,7 @@ namespace multiple_ap_cams
             this.cbVideoInputFormat2.Name = "cbVideoInputFormat2";
             this.cbVideoInputFormat2.Size = new System.Drawing.Size(197, 21);
             this.cbVideoInputFormat2.TabIndex = 125;
+            this.cbVideoInputFormat2.SelectedIndexChanged += new System.EventHandler(this.cbVideoInputFormat2_SelectedIndexChanged);
             // 
             // Form1
             // 

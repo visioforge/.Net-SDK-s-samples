@@ -3,6 +3,8 @@
 // ReSharper disable StyleCop.SA1600
 // ReSharper disable InlineOutVariableDeclaration
 
+using System.Globalization;
+
 namespace Simple_Video_Capture
 {
     using System;
@@ -255,19 +257,7 @@ namespace Simple_Video_Capture
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectionChanged(null, null);
                 }
-
-                cbFramerate.Items.Clear();
-
-                foreach (var frameRate in deviceItem.VideoFrameRates)
-                {
-                    cbFramerate.Items.Add(frameRate);
-                }
-
-                if (cbFramerate.Items.Count > 0)
-                {
-                    cbFramerate.SelectedIndex = 0;
-                }
-
+                
                 cbUseAudioInputFromVideoCaptureDevice.IsEnabled = deviceItem.AudioOutput;
                 btVideoCaptureDeviceSettings.IsEnabled = deviceItem.DialogDefault;
             }
@@ -442,9 +432,9 @@ namespace Simple_Video_Capture
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
             VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
 
-            if (cbFramerate.SelectedIndex != -1)
+            if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_FrameRate = (float)Convert.ToDouble(cbFramerate.Text);
+                VideoCapture1.Video_FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
             }
 
             if (rbPreview.IsChecked  == true)
@@ -614,13 +604,35 @@ namespace Simple_Video_Capture
 
         private void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbVideoInputFormat.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
             {
-                VideoCapture1.Video_CaptureFormat = e.AddedItems[0].ToString();
+                return;
             }
-            else
+
+            if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureFormat = string.Empty;
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoInputFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoInputFrameRate.Items.Count > 0)
+                {
+                    cbVideoInputFrameRate.SelectedIndex = 0;
+                }
             }
         }
         

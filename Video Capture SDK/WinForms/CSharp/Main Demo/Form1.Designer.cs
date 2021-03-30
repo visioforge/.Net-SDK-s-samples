@@ -600,7 +600,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             this.btVideoCaptureDeviceSettings = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
-            this.cbFramerate = new System.Windows.Forms.ComboBox();
+            this.cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat = new System.Windows.Forms.ComboBox();
             this.cbVideoInputDevice = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -799,6 +799,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage48 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.cbIPURL = new System.Windows.Forms.ComboBox();
             this.btListNDISources = new System.Windows.Forms.Button();
             this.lbNDI = new System.Windows.Forms.LinkLabel();
@@ -1139,7 +1140,6 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -7306,7 +7306,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage8.Controls.Add(this.cbUseBestVideoInputFormat);
             this.tabPage8.Controls.Add(this.btVideoCaptureDeviceSettings);
             this.tabPage8.Controls.Add(this.label18);
-            this.tabPage8.Controls.Add(this.cbFramerate);
+            this.tabPage8.Controls.Add(this.cbVideoInputFrameRate);
             this.tabPage8.Controls.Add(this.cbVideoInputFormat);
             this.tabPage8.Controls.Add(this.cbVideoInputDevice);
             this.tabPage8.Controls.Add(this.label13);
@@ -7370,12 +7370,12 @@ namespace VideoCapture_CSharp_Demo
             // 
             // cbFramerate
             // 
-            this.cbFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFramerate.FormattingEnabled = true;
-            this.cbFramerate.Location = new System.Drawing.Point(237, 97);
-            this.cbFramerate.Name = "cbFramerate";
-            this.cbFramerate.Size = new System.Drawing.Size(65, 21);
-            this.cbFramerate.TabIndex = 115;
+            this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoInputFrameRate.FormattingEnabled = true;
+            this.cbVideoInputFrameRate.Location = new System.Drawing.Point(237, 97);
+            this.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
+            this.cbVideoInputFrameRate.Size = new System.Drawing.Size(65, 21);
+            this.cbVideoInputFrameRate.TabIndex = 115;
             // 
             // cbVideoInputFormat
             // 
@@ -9530,6 +9530,16 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage144.TabIndex = 0;
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
+            // 
+            // btListONVIFSources
+            // 
+            this.btListONVIFSources.Location = new System.Drawing.Point(144, 218);
+            this.btListONVIFSources.Name = "btListONVIFSources";
+            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
+            this.btListONVIFSources.TabIndex = 90;
+            this.btListONVIFSources.Text = "List ONVIF sources";
+            this.btListONVIFSources.UseVisualStyleBackColor = true;
+            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
             // 
             // cbIPURL
             // 
@@ -13188,16 +13198,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
-            // btListONVIFSources
-            // 
-            this.btListONVIFSources.Location = new System.Drawing.Point(144, 218);
-            this.btListONVIFSources.Name = "btListONVIFSources";
-            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
-            this.btListONVIFSources.TabIndex = 90;
-            this.btListONVIFSources.Text = "List ONVIF sources";
-            this.btListONVIFSources.UseVisualStyleBackColor = true;
-            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -13645,7 +13645,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Button btVideoCaptureDeviceSettings;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbFramerate;
+        private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
         private System.Windows.Forms.ComboBox cbVideoInputDevice;
         private System.Windows.Forms.Label label13;

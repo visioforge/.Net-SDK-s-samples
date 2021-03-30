@@ -400,7 +400,7 @@ namespace Main_Demo
                 var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem != null)
                 {
-                    foreach (string format in deviceItem.VideoFormats)
+                    foreach (var format in deviceItem.VideoFormats)
                     {
                         cbVideoInputFormat.Items.Add(format);
                     }
@@ -411,17 +411,17 @@ namespace Main_Demo
                         cbVideoInputFormat_SelectedIndexChanged(null, null);
                     }
 
-                    cbFramerate.Items.Clear();
+                    //cbFramerate.Items.Clear();
 
-                    foreach (string frameRate in deviceItem.VideoFrameRates)
-                    {
-                        cbFramerate.Items.Add(frameRate);
-                    }
+                    //foreach (string frameRate in deviceItem.VideoFrameRates)
+                    //{
+                    //    cbFramerate.Items.Add(frameRate);
+                    //}
 
-                    if (cbFramerate.Items.Count > 0)
-                    {
-                        cbFramerate.SelectedIndex = 0;
-                    }
+                    //if (cbFramerate.Items.Count > 0)
+                    //{
+                    //    cbFramerate.SelectedIndex = 0;
+                    //}
 
                     // currently device active, we can read TV Tuner name
                     var tvTuner = deviceItem.TVTuner;
@@ -1383,9 +1383,9 @@ namespace Main_Demo
 
                 try
                 {
-                    if (!string.IsNullOrEmpty(cbFramerate.Text))
+                    if (!string.IsNullOrEmpty(cbVideoInputFrameRate.Text))
                     {
-                        VideoCapture1.Video_FrameRate = Convert.ToDouble(cbFramerate.Text);
+                        VideoCapture1.Video_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
                     }
                 }
                 catch
@@ -2462,13 +2462,35 @@ namespace Main_Demo
 
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbVideoInputFormat.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
             {
-                VideoCapture1.Video_CaptureFormat = e.AddedItems[0].ToString();
+                return;
             }
-            else
+
+            if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureFormat = string.Empty;
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoInputFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoInputFrameRate.Items.Count > 0)
+                {
+                    cbVideoInputFrameRate.SelectedIndex = 0;
+                }
             }
         }
 
@@ -2942,9 +2964,9 @@ namespace Main_Demo
                 var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem != null)
                 {
-                    foreach (string format in deviceItem.VideoFormats)
+                    foreach (var format in deviceItem.VideoFormats)
                     {
-                        cbPIPFormat.Items.Add(format);
+                        cbPIPFormat.Items.Add(format.Name);
                     }
 
                     if (cbPIPFormat.Items.Count > 0)
@@ -2952,16 +2974,16 @@ namespace Main_Demo
                         cbPIPFormat.SelectedIndex = 0;
                     }
 
-                    cbPIPFrameRate.Items.Clear();
-                    foreach (string frameRate in deviceItem.VideoFrameRates)
-                    {
-                        cbPIPFrameRate.Items.Add(frameRate);
-                    }
+                    //cbPIPFrameRate.Items.Clear();
+                    //foreach (string frameRate in deviceItem.VideoFrameRates)
+                    //{
+                    //    cbPIPFrameRate.Items.Add(frameRate);
+                    //}
 
-                    if (cbPIPFrameRate.Items.Count > 0)
-                    {
-                        cbPIPFrameRate.SelectedIndex = 0;
-                    }
+                    //if (cbPIPFrameRate.Items.Count > 0)
+                    //{
+                    //    cbPIPFrameRate.SelectedIndex = 0;
+                    //}
 
                     cbPIPInput.Items.Clear();
 
@@ -4248,30 +4270,26 @@ namespace Main_Demo
                 return;
             }
 
-            List<string> formats;
-            List<string> frameRates;
+            List<VideoCaptureDeviceFormat> formats;
 
             if (cbCustomVideoSourceCategory.SelectedIndex == 0)
             {
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetVideoFormats(
                     VFFilterCategory.VideoCaptureSource,
                     value,
                     VFMediaCategory.Video,
-                    out formats,
-                    out frameRates);
+                    out formats);
             }
             else
             {
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetVideoFormats(
                     VFFilterCategory.DirectShowFilters,
                     value,
                     VFMediaCategory.Video,
-                    out formats,
-                    out frameRates);
+                    out formats);
             }
 
             cbCustomVideoSourceFormat.ItemsSource = formats;
-            cbCustomVideoSourceFrameRate.ItemsSource = frameRates;
         }
 
         private void cbCustomAudioSourceFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -4290,26 +4308,22 @@ namespace Main_Demo
             cbCustomAudioSourceFormat.Items.Clear();
 
             List<string> formats;
-            // ReSharper disable once NotAccessedVariable
-            List<string> frameRates;
 
             if (cbCustomAudioSourceCategory.SelectedIndex == 0)
             {
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetAudioFormats(
                     VFFilterCategory.AudioCaptureSource,
                     value,
                     VFMediaCategory.Audio,
-                    out formats,
-                    out frameRates);
+                    out formats);
             }
             else
             {
-                VideoCapture1.DirectShow_Filter_GetFormats(
+                VideoCapture1.DirectShow_Filter_GetAudioFormats(
                     VFFilterCategory.DirectShowFilters,
                     value,
                     VFMediaCategory.Audio,
-                    out formats,
-                    out frameRates);
+                    out formats);
             }
 
             foreach (var format in formats)

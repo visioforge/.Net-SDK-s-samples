@@ -16,7 +16,7 @@
                     <Label Height="30" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Width="120" Content="Video input format"></Label>
                     <ComboBox Height="23" Margin="10,86,0,0" Name="cbVideoInputFormat" VerticalAlignment="Top" SelectionChanged="cbVideoInputFormat_SelectedIndexChanged" HorizontalAlignment="Left" Width="233" />
                     <CheckBox Height="16" Margin="179,66,0,0" Name="cbUseBestVideoInputFormat" VerticalAlignment="Top" Checked="cbUseBestVideoInputFormat_CheckedChanged" HorizontalAlignment="Left" Width="62">Use best</CheckBox>
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="251,86,0,0" Name="cbFramerate" VerticalAlignment="Top" Width="75" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="251,86,0,0" x:Name="cbVideoInputFrameRate" VerticalAlignment="Top" Width="75" />
                     <Label HorizontalAlignment="Left" Margin="10,180,0,0" Name="label15" Width="120" Height="27" VerticalAlignment="Top">Audio output device</Label>
                     <ComboBox Height="24" Margin="10,204,0,0" Name="cbAudioOutputDevice" VerticalAlignment="Top" HorizontalAlignment="Left" Width="316" />
                     <Label Height="28" HorizontalAlignment="Left" Margin="16,234,0,0" Name="label1" VerticalAlignment="Top" Width="59">Volume</Label>

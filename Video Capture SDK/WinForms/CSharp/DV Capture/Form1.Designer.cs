@@ -56,7 +56,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             this.btVideoCaptureDeviceSettings = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
-            this.cbFramerate = new System.Windows.Forms.ComboBox();
+            this.cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat = new System.Windows.Forms.ComboBox();
             this.cbVideoInputDevice = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -195,7 +195,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.tabPage1.Controls.Add(this.cbUseBestVideoInputFormat);
             this.tabPage1.Controls.Add(this.btVideoCaptureDeviceSettings);
             this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.cbFramerate);
+            this.tabPage1.Controls.Add(this.cbVideoInputFrameRate);
             this.tabPage1.Controls.Add(this.cbVideoInputFormat);
             this.tabPage1.Controls.Add(this.cbVideoInputDevice);
             this.tabPage1.Controls.Add(this.label13);
@@ -395,14 +395,14 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.label18.TabIndex = 125;
             this.label18.Text = "Frame rate";
             // 
-            // cbFramerate
+            // cbVideoInputFrameRate
             // 
-            this.cbFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFramerate.FormattingEnabled = true;
-            this.cbFramerate.Location = new System.Drawing.Point(269, 89);
-            this.cbFramerate.Name = "cbFramerate";
-            this.cbFramerate.Size = new System.Drawing.Size(65, 21);
-            this.cbFramerate.TabIndex = 124;
+            this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoInputFrameRate.FormattingEnabled = true;
+            this.cbVideoInputFrameRate.Location = new System.Drawing.Point(269, 89);
+            this.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
+            this.cbVideoInputFrameRate.Size = new System.Drawing.Size(65, 21);
+            this.cbVideoInputFrameRate.TabIndex = 124;
             // 
             // cbVideoInputFormat
             // 
@@ -1135,7 +1135,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Button btVideoCaptureDeviceSettings;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbFramerate;
+        private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
         private System.Windows.Forms.ComboBox cbVideoInputDevice;
         private System.Windows.Forms.Label label13;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,25 +52,14 @@ namespace face_detection
             }
 
             cbVideoInputFormat.Items.Clear();
-            foreach (string format in deviceItem.VideoFormats)
+            foreach (var format in deviceItem.VideoFormats)
             {
-                cbVideoInputFormat.Items.Add(format);
+                cbVideoInputFormat.Items.Add(format.Name);
             }
 
             if (cbVideoInputFormat.Items.Count > 0)
             {
                 cbVideoInputFormat.SelectedIndex = 0;
-            }
-
-            cbVideoFrameRate.Items.Clear();
-            foreach (string frameRate in deviceItem.VideoFrameRates)
-            {
-                cbVideoFrameRate.Items.Add(frameRate);
-            }
-
-            if (cbVideoFrameRate.Items.Count > 0)
-            {
-                cbVideoFrameRate.SelectedIndex = 0;
             }
         }
 
@@ -85,7 +75,7 @@ namespace face_detection
             VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
             VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoFrameRate.Text);
+            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
 
             // disabe audio
             VideoCapture1.Audio_PlayAudio = false;
@@ -161,6 +151,40 @@ namespace face_detection
             {
                 edFaceTrackingFaces.Text += "(" + faceRectangle.Left + ", " + faceRectangle.Top + "), ("
                                             + faceRectangle.Width + ", " + faceRectangle.Height + ")" + Environment.NewLine;
+            }
+        }
+
+        private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
+            {
+                return;
+            }
+
+            if (cbVideoInputDevice.SelectedIndex != -1)
+            {
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoInputFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoInputFrameRate.Items.Count > 0)
+                {
+                    cbVideoInputFrameRate.SelectedIndex = 0;
+                }
             }
         }
     }

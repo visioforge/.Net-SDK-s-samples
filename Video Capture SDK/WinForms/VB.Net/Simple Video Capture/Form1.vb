@@ -1,5 +1,6 @@
 ' ReSharper disable InconsistentNaming
 
+Imports System.Globalization
 Imports System.IO
 Imports System.Linq
 Imports VisioForge.Controls.UI
@@ -141,7 +142,7 @@ Public Class Form1
             End If
 
             Dim formats = deviceItem.VideoFormats
-            For Each item As String In formats
+            For Each item As VideoCaptureDeviceFormat In formats
                 cbVideoInputFormat.Items.Add(item)
             Next
 
@@ -149,28 +150,37 @@ Public Class Form1
                 cbVideoInputFormat.SelectedIndex = 0
                 cbVideoInputFormat_SelectedIndexChanged(Nothing, Nothing)
             End If
-
-            cbFramerate.Items.Clear()
-            Dim frameRate = deviceItem.VideoFrameRates
-            For Each item As String In frameRate
-                cbFramerate.Items.Add(item)
-            Next
-
-            If cbFramerate.Items.Count > 0 Then
-                cbFramerate.SelectedIndex = 0
-            End If
-
+            
             cbUseAudioInputFromVideoCaptureDevice.Enabled = deviceItem.AudioOutput
             btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault
         End If
     End Sub
 
-    Private Sub cbVideoInputFormat_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles cbVideoInputFormat.SelectedIndexChanged
-        If cbVideoInputFormat.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text
-        Else
-            VideoCapture1.Video_CaptureDevice_Format = ""
+    Private Sub cbVideoInputFormat_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
+        If (String.IsNullOrEmpty(cbVideoInputFormat.Text)) Then
+            Return
+        End If
+
+        If (cbVideoInputDevice.SelectedIndex <> -1) Then
+
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            If (deviceItem Is Nothing) Then
+                Return
+            End If
+
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.First()
+            If (videoFormat Is Nothing) Then
+                Return
+            End If
+
+            cbVideoInputFrameRate.Items.Clear()
+            For Each frameRate As Double In videoFormat.FrameRates
+                cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
+            Next
+
+            If (cbVideoInputFrameRate.Items.Count > 0) Then
+                cbVideoInputFrameRate.SelectedIndex = 0
+            End If
         End If
     End Sub
 
@@ -377,8 +387,8 @@ Public Class Form1
         VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
         VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text
 
-        If cbFramerate.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice_FrameRate = CSng(Convert.ToDouble(cbFramerate.Text))
+        If cbVideoInputFrameRate.SelectedIndex <> -1 Then
+            VideoCapture1.Video_CaptureDevice_FrameRate = CSng(Convert.ToDouble(cbVideoInputFrameRate.Text))
         End If
 
         If (rbPreview.Checked) Then

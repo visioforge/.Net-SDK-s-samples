@@ -39,7 +39,7 @@ namespace Video_Capture_Demo
             int videoCaptureDeviceIndex = Convert.ToInt32(Console.ReadLine());
 
             // video formats
-            string videoFormat = string.Empty;
+            VideoCaptureDeviceFormat videoFormat = new VideoCaptureDeviceFormat(string.Empty);
             if (videoCaptureDevices[videoCaptureDeviceIndex].VideoFormats.Count > 0)
             {
                 Console.WriteLine(@"Video capture device formats: ");
@@ -54,18 +54,18 @@ namespace Video_Capture_Demo
             }
 
             // video frame rates
-            string videoFrameRate = string.Empty;
-            if (videoCaptureDevices[videoCaptureDeviceIndex].VideoFrameRates.Count > 0)
+            double videoFrameRate = 0;
+            if (videoFormat.FrameRates.Count > 0)
             {
                 Console.WriteLine(@"Video capture device frame rates: ");
-                for (int i = 0; i < videoCaptureDevices[videoCaptureDeviceIndex].VideoFrameRates.Count; i++)
+                for (int i = 0; i < videoFormat.FrameRates.Count; i++)
                 {
-                    Console.WriteLine(i + @": " + videoCaptureDevices[videoCaptureDeviceIndex].VideoFrameRates[i]);
+                    Console.WriteLine(i + @": " + videoFormat.FrameRates[i]);
                 }
 
                 Console.Write(@"Select video frame rate index: ");
                 int videoFrameRateIndex = Convert.ToInt32(Console.ReadLine());
-                videoFrameRate = videoCaptureDevices[videoCaptureDeviceIndex].VideoFrameRates[videoFrameRateIndex];
+                videoFrameRate = videoFormat.FrameRates[videoFrameRateIndex];
             }
 
             // get audio capture devices
@@ -122,14 +122,14 @@ namespace Video_Capture_Demo
             // set properties
             videoCapture.Video_CaptureDevice = videoCaptureDevices[videoCaptureDeviceIndex].Name;
 
-            if (string.IsNullOrEmpty(videoFormat))
+            if (string.IsNullOrEmpty(videoFormat.Name))
             {
                 videoCapture.Video_CaptureDevice_Format_UseBest = true;
             }
             else
             {
                 videoCapture.Video_CaptureDevice_Format_UseBest = false;
-                videoCapture.Video_CaptureDevice_Format = videoFormat;
+                videoCapture.Video_CaptureDevice_Format = videoFormat.Name;
             }
 
             videoCapture.Video_CaptureDevice_FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture); 

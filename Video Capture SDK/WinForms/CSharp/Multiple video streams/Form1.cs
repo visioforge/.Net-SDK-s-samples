@@ -3,6 +3,9 @@
 // ReSharper disable StyleCop.SA1600
 // ReSharper disable StyleCop.SA1601
 // ReSharper disable LocalizableElement
+
+using System.Globalization;
+
 namespace multiple_video_streams
 {
     using System;
@@ -116,12 +119,16 @@ namespace multiple_video_streams
                 return;
             }
 
-            var frameRates = deviceItem.VideoFrameRates;
+            var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat1.Text);
+            if (videoFormat == null)
+            {
+                return;
+            }
 
             cbVideoFrameRate1.Items.Clear();
-            foreach (var frameRate in frameRates)
+            foreach (var frameRate in videoFormat.FrameRates)
             {
-                cbVideoFrameRate1.Items.Add(frameRate);
+                cbVideoFrameRate1.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
             }
 
             if (cbVideoFrameRate1.Items.Count > 4)
@@ -153,12 +160,16 @@ namespace multiple_video_streams
                 return;
             }
 
-            var frameRates = deviceItem.VideoFrameRates;
+            var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat2.Text);
+            if (videoFormat == null)
+            {
+                return;
+            }
 
             cbVideoFrameRate2.Items.Clear();
-            foreach (var frameRate in frameRates)
+            foreach (var frameRate in videoFormat.FrameRates)
             {
-                cbVideoFrameRate2.Items.Add(frameRate);
+                cbVideoFrameRate2.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
             }
 
             if (cbVideoFrameRate2.Items.Count > 4)
@@ -222,6 +233,74 @@ namespace multiple_video_streams
                                     {
                                         lbTimestamp.Text = $"Recording time: " + ts.ToString(@"hh\:mm\:ss");
                                     }));
+            }
+        }
+
+        private void cbVideoFormat1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbVideoFormat1.Text))
+            {
+                return;
+            }
+
+            if (cbVideoFormat1.SelectedIndex != -1)
+            {
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat1.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoFrameRate1.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoFrameRate1.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoFrameRate1.Items.Count > 0)
+                {
+                    cbVideoFrameRate1.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void cbVideoFormat2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbVideoFormat2.Text))
+            {
+                return;
+            }
+
+            if (cbVideoFormat2.SelectedIndex != -2)
+            {
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat2.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoFrameRate2.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoFrameRate2.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoFrameRate2.Items.Count > 0)
+                {
+                    cbVideoFrameRate2.SelectedIndex = 0;
+                }
             }
         }
     }

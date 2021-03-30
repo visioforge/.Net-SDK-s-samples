@@ -1,5 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using System.Globalization;
+
 namespace multiple_ap_cams
 {
     using System;
@@ -241,26 +243,14 @@ namespace multiple_ap_cams
                     return;
                 }
 
-                foreach (string format in deviceItem.VideoFormats)
+                foreach (var format in deviceItem.VideoFormats)
                 {
-                    cbVideoInputFormat1.Items.Add(format);
+                    cbVideoInputFormat1.Items.Add(format.Name);
                 }
 
                 if (cbVideoInputFormat1.Items.Count > 0)
                 {
                     cbVideoInputFormat1.SelectedIndex = 0;
-                }
-
-                cbFrameRate1.Items.Clear();
-
-                foreach (string frameRate in deviceItem.VideoFrameRates)
-                {
-                    cbFrameRate1.Items.Add(frameRate);
-                }
-
-                if (cbFrameRate1.Items.Count > 0)
-                {
-                    cbFrameRate1.SelectedIndex = 0;
                 }
             }
         }
@@ -277,21 +267,77 @@ namespace multiple_ap_cams
                     return;
                 }
 
-                foreach (string format in deviceItem.VideoFormats)
+                foreach (var format in deviceItem.VideoFormats)
                 {
-                    cbVideoInputFormat2.Items.Add(format);
+                    cbVideoInputFormat2.Items.Add(format.Name);
                 }
 
                 if (cbVideoInputFormat2.Items.Count > 0)
                 {
                     cbVideoInputFormat2.SelectedIndex = 0;
                 }
+            }
+        }
+
+        private void cbVideoInputFormat1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbVideoInputFormat1.Text))
+            {
+                return;
+            }
+
+            if (cbCamera1.SelectedIndex != -1)
+            {
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat1.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbFrameRate1.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbFrameRate1.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbFrameRate1.Items.Count > 0)
+                {
+                    cbFrameRate1.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void cbVideoInputFormat2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbVideoInputFormat2.Text))
+            {
+                return;
+            }
+
+            if (cbCamera2.SelectedIndex != -2)
+            {
+                var deviceItem = videoCapture2.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat2.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
 
                 cbFrameRate2.Items.Clear();
-
-                foreach (string frameRate in deviceItem.VideoFrameRates)
+                foreach (var frameRate in videoFormat.FrameRates)
                 {
-                    cbFrameRate2.Items.Add(frameRate);
+                    cbFrameRate2.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
                 }
 
                 if (cbFrameRate2.Items.Count > 0)

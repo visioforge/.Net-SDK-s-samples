@@ -104,6 +104,7 @@ namespace multiple_video_streams
             this.cbVideoFormat1.Name = "cbVideoFormat1";
             this.cbVideoFormat1.Size = new System.Drawing.Size(186, 21);
             this.cbVideoFormat1.TabIndex = 9;
+            this.cbVideoFormat1.SelectedIndexChanged += new System.EventHandler(this.cbVideoFormat1_SelectedIndexChanged);
             // 
             // cbVideoFrameRate1
             // 
@@ -149,6 +150,7 @@ namespace multiple_video_streams
             this.cbVideoFormat2.Name = "cbVideoFormat2";
             this.cbVideoFormat2.Size = new System.Drawing.Size(186, 21);
             this.cbVideoFormat2.TabIndex = 12;
+            this.cbVideoFormat2.SelectedIndexChanged += new System.EventHandler(this.cbVideoFormat2_SelectedIndexChanged);
             // 
             // edLog
             // 
@@ -224,9 +226,11 @@ namespace multiple_video_streams
             this.videoCapture1.BDA_Source = null;
             this.videoCapture1.ChromaKey = null;
             this.videoCapture1.Custom_Source = null;
+            this.videoCapture1.CustomRedist_Auto = true;
             this.videoCapture1.CustomRedist_Enabled = false;
             this.videoCapture1.CustomRedist_Path = null;
             this.videoCapture1.Debug_Dir = "";
+            this.videoCapture1.Debug_DisableMessageDialogs = false;
             this.videoCapture1.Debug_Mode = false;
             this.videoCapture1.Debug_Telemetry = false;
             this.videoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
@@ -270,7 +274,7 @@ namespace multiple_video_streams
             this.videoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.videoCapture1.SeparateCapture_GMFMode = true;
             this.videoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
-            this.videoCapture1.SeparateCapture_TimeThreshold = TimeSpan.Zero;
+            this.videoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.videoCapture1.Size = new System.Drawing.Size(295, 228);
             this.videoCapture1.Start_DelayEnabled = false;
             this.videoCapture1.TabIndex = 0;
@@ -300,6 +304,8 @@ namespace multiple_video_streams
             this.videoCapture1.Video_Effects_AllowMultipleStreams = false;
             this.videoCapture1.Video_Effects_Enabled = false;
             this.videoCapture1.Video_Effects_GPU_Enabled = false;
+            this.videoCapture1.Video_Effects_MergeImageLogos = false;
+            this.videoCapture1.Video_Effects_MergeTextLogos = false;
             this.videoCapture1.Video_Resize = null;
             this.videoCapture1.Video_ResizeOrCrop_Enabled = false;
             this.videoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;

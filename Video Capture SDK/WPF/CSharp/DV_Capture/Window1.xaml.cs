@@ -1,5 +1,7 @@
 // ReSharper disable InconsistentNaming
 
+using System.Globalization;
+
 namespace DVCapture
 {
     using System;
@@ -162,32 +164,42 @@ namespace DVCapture
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-
-                cbFramerate.Items.Clear();
-
-                foreach (var frameRate in deviceItem.VideoFrameRates)
-                {
-                    cbFramerate.Items.Add(frameRate);
-                }
-
-                if (cbFramerate.Items.Count > 0)
-                {
-                    cbFramerate.SelectedIndex = 0;
-                }
-
+                
                 btVideoCaptureDeviceSettings.IsEnabled = deviceItem.DialogDefault;
             }
         }
 
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbVideoInputFormat.SelectedIndex != -1)
+            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
             {
-                VideoCapture1.Video_CaptureFormat = cbVideoInputFormat.Text;
+                return;
             }
-            else
+
+            if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureFormat = string.Empty;
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoInputFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoInputFrameRate.Items.Count > 0)
+                {
+                    cbVideoInputFrameRate.SelectedIndex = 0;
+                }
             }
         }
 
@@ -374,9 +386,9 @@ namespace DVCapture
             VideoCapture1.Video_CaptureFormat = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureFormat_UseBest = cbUseBestVideoInputFormat.IsChecked == true;
 
-            if (cbFramerate.SelectedIndex != -1)
+            if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_FrameRate = (float)Convert.ToDouble(cbFramerate.Text);
+                VideoCapture1.Video_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
             }
 
             if (rbPreview.IsChecked == true)

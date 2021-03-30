@@ -7,6 +7,8 @@
 
 // ReSharper disable LocalizableElement
 
+using System.Globalization;
+
 namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 {
     using System;
@@ -120,9 +122,9 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     return;
                 }
 
-                foreach (string format in deviceItem.VideoFormats)
+                foreach (var format in deviceItem.VideoFormats)
                 {
-                    cbVideoInputFormat.Items.Add(format);
+                    cbVideoInputFormat.Items.Add(format.Name);
                 }
 
                 if (cbVideoInputFormat.Items.Count > 0)
@@ -130,31 +132,42 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-
-                cbFramerate.Items.Clear();
-                foreach (string frameRate in deviceItem.VideoFrameRates)
-                {
-                    cbFramerate.Items.Add(frameRate);
-                }
-
-                if (cbFramerate.Items.Count > 0)
-                {
-                    cbFramerate.SelectedIndex = 0;
-                }
-
+                
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
         }
 
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbVideoInputFormat.SelectedIndex != -1)
+            if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
             {
-                VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
+                return;
             }
-            else
+
+            if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice_Format = string.Empty;
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbVideoInputFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbVideoInputFrameRate.Items.Count > 0)
+                {
+                    cbVideoInputFrameRate.SelectedIndex = 0;
+                }
             }
         }
 
@@ -346,9 +359,9 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
 
-            if (cbFramerate.SelectedIndex != -1)
+            if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice_FrameRate = (float)Convert.ToDouble(cbFramerate.Text);
+                VideoCapture1.Video_CaptureDevice_FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
             }
 
             if (rbPreview.Checked)

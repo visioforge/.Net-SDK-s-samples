@@ -55,7 +55,7 @@ namespace Computer_Vision_Demo
             this.label28 = new System.Windows.Forms.Label();
             this.cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.cbFramerate = new System.Windows.Forms.ComboBox();
+            this.cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat = new System.Windows.Forms.ComboBox();
             this.cbVideoInputDevice = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -192,7 +192,7 @@ namespace Computer_Vision_Demo
             this.tabPage1.Controls.Add(this.label28);
             this.tabPage1.Controls.Add(this.cbUseBestVideoInputFormat);
             this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.cbFramerate);
+            this.tabPage1.Controls.Add(this.cbVideoInputFrameRate);
             this.tabPage1.Controls.Add(this.cbVideoInputFormat);
             this.tabPage1.Controls.Add(this.cbVideoInputDevice);
             this.tabPage1.Controls.Add(this.label13);
@@ -395,14 +395,14 @@ namespace Computer_Vision_Demo
             this.label18.TabIndex = 125;
             this.label18.Text = "Frame rate";
             // 
-            // cbFramerate
+            // cbVideoInputFrameRate
             // 
-            this.cbFramerate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFramerate.FormattingEnabled = true;
-            this.cbFramerate.Location = new System.Drawing.Point(257, 143);
-            this.cbFramerate.Name = "cbFramerate";
-            this.cbFramerate.Size = new System.Drawing.Size(65, 21);
-            this.cbFramerate.TabIndex = 124;
+            this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoInputFrameRate.FormattingEnabled = true;
+            this.cbVideoInputFrameRate.Location = new System.Drawing.Point(257, 143);
+            this.cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
+            this.cbVideoInputFrameRate.Size = new System.Drawing.Size(65, 21);
+            this.cbVideoInputFrameRate.TabIndex = 124;
             // 
             // cbVideoInputFormat
             // 
@@ -412,6 +412,7 @@ namespace Computer_Vision_Demo
             this.cbVideoInputFormat.Name = "cbVideoInputFormat";
             this.cbVideoInputFormat.Size = new System.Drawing.Size(208, 21);
             this.cbVideoInputFormat.TabIndex = 123;
+            this.cbVideoInputFormat.SelectedIndexChanged += new System.EventHandler(this.cbVideoInputFormat_SelectedIndexChanged);
             // 
             // cbVideoInputDevice
             // 
@@ -1173,6 +1174,7 @@ namespace Computer_Vision_Demo
             this.MediaPlayer1.Motion_DetectionEx = null;
             this.MediaPlayer1.MultiScreen_Enabled = false;
             this.MediaPlayer1.Name = "MediaPlayer1";
+            this.MediaPlayer1.NDI_Output = null;
             this.MediaPlayer1.OSD_Enabled = false;
             this.MediaPlayer1.Play_DelayEnabled = false;
             this.MediaPlayer1.Play_PauseAtFirstFrame = false;
@@ -1249,7 +1251,7 @@ namespace Computer_Vision_Demo
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbFramerate;
+        private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
         private System.Windows.Forms.ComboBox cbVideoInputDevice;
         private System.Windows.Forms.Label label13;

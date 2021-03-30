@@ -1,5 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using System.Globalization;
+
 namespace MultipleWebCameras
 {
     using System;
@@ -49,8 +51,13 @@ namespace MultipleWebCameras
                 return;
             }
 
-            var frameRates = deviceItem.VideoFrameRates;
-            videoCapture1.Video_FrameRate = Convert.ToInt32(frameRates[frameRates.Count - 1]);
+            var videoFormat = deviceItem.VideoFormats.FirstOrDefault();
+            if (videoFormat == null)
+            {
+                return;
+            }
+
+            videoCapture1.Video_FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
 
             // videoCapture1.OnError += VideoCapture1OnOnError;
             videoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
@@ -75,8 +82,13 @@ namespace MultipleWebCameras
                 return;
             }
 
-            var frameRates = deviceItem.VideoFrameRates;
-            videoCapture2.Video_FrameRate = Convert.ToInt32(frameRates[frameRates.Count - 1]);
+            var videoFormat = deviceItem.VideoFormats.FirstOrDefault();
+            if (videoFormat == null)
+            {
+                return;
+            }
+
+            videoCapture2.Video_FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
 
             // videoCapture2.OnError += VideoCapture2OnOnError;
             videoCapture2.Mode = VFVideoCaptureMode.VideoPreview;

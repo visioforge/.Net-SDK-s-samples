@@ -14,7 +14,7 @@
                     <ComboBox Height="23" Margin="12,82,117,0" Name="cbVideoInputFormat" VerticalAlignment="Top" SelectionChanged="cbVideoInputFormat_SelectionChanged" />
                     <CheckBox Height="16" Margin="0,64,117,0" Name="cbUseBestVideoInputFormat" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71" Checked="cbUseBestVideoInputFormat_Checked" Unchecked="cbUseBestVideoInputFormat_Checked">Use best</CheckBox>
                     <Label Height="28" HorizontalAlignment="Left" Margin="285,59,0,0" Name="label3" VerticalAlignment="Top" Width="75">Frame rate</Label>
-                    <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,82,36,0" Name="cbFramerate" VerticalAlignment="Top" Width="75" />
+                    <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,82,36,0" x:Name="cbVideoInputFrameRate" VerticalAlignment="Top" Width="75" />
                     <Label Height="28" HorizontalAlignment="Right" Margin="0,80,0,0" Name="label4" VerticalAlignment="Top" Width="32">fps</Label>
                     <Label Height="28" HorizontalAlignment="Left" Margin="6,140,0,0" Name="label5" VerticalAlignment="Top" Width="120">Audio input device</Label>
                     <ComboBox Height="23" Margin="12,163,117,0" Name="cbAudioInputDevice" VerticalAlignment="Top" SelectionChanged="cbAudioInputDevice_SelectionChanged" />
