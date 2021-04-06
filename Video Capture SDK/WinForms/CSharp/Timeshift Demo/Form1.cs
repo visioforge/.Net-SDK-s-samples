@@ -286,15 +286,15 @@
             return span.ToString(@"hh\:mm\:ss");
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
-            var spanDur = MediaPlayer1.Duration_Time();
+            var spanDur = await MediaPlayer1.Duration_TimeAsync();
             lbDuration.Text = FormatTime(spanDur);
 
             tbTimeline.Maximum = (int)spanDur.TotalSeconds;
 
             TimeSpan spanPos;
-            var pos = MediaPlayer1.Position_Get_Time();
+            var pos = await MediaPlayer1.Position_Get_TimeAsync();
             if (pos < spanDur)
             {
                 spanPos = pos;
@@ -314,9 +314,9 @@
             timer1.Enabled = false;
         }
 
-        private void tbTimeline_MouseUp(object sender, MouseEventArgs e)
+        private async void tbTimeline_MouseUp(object sender, MouseEventArgs e)
         {
-            MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+            await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
 
             timer1.Enabled = true;
         }
