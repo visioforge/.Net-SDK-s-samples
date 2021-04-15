@@ -1,4 +1,7 @@
-﻿namespace VC_Timeshift_Demo
+﻿using VisioForge.Types.Sources;
+using VisioForge.Types.VideoEffects;
+
+namespace VC_Timeshift_Demo
 {
     using System;
     using System.Globalization;
@@ -19,6 +22,7 @@
         private void Form1_Load(object sender, EventArgs e)
         {
             Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            cbIPCameraType.SelectedIndex = 2;
 
             edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.avi";
 
@@ -188,21 +192,78 @@
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
             VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
 
-            VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
-
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
-            VideoCapture1.Audio_CaptureDevice_Format_UseBest = cbUseBestAudioInputFormat.Checked;
-
-            VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-            VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked;
-            VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
-
-            if (cbVideoInputFrameRate.SelectedIndex != -1)
+            if (rbVideoCaptureDevice.Checked)
             {
-                VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
+
+                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
+                VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
+                VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
+                VideoCapture1.Audio_CaptureDevice_Format_UseBest = cbUseBestAudioInputFormat.Checked;
+
+                VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
+                VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked;
+                VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
+                VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
+
+                if (cbVideoInputFrameRate.SelectedIndex != -1)
+                {
+                    VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                }
+            }
+            else
+            {
+                VideoCapture1.Mode = VFVideoCaptureMode.IPPreview;
+                VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
+                {
+                    URL = cbIPURL.Text
+                };
+
+                switch (cbIPCameraType.SelectedIndex)
+                {
+                    case 0:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC;
+                        break;
+                    case 1:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
+                        break;
+                    case 2:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                        break;
+                    case 3:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
+                        break;
+                    case 4:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                        break;
+                    case 5:
+                        {
+                            // audio not supported
+                            VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
+                            VideoCapture1.Audio_RecordAudio = false;
+                            VideoCapture1.Audio_PlayAudio = false;
+                            cbIPAudioCapture.Checked = false;
+                        }
+                        break;
+                    case 6:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                        VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
+                        break;
+                    case 7:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                        VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
+                        break;
+                    case 8:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
+                        break;
+                    case 9:
+                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
+                        break;
+                }
+
+                VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.Checked;
+                VideoCapture1.IP_Camera_Source.Login = edIPLogin.Text;
+                VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text;
             }
 
             VideoCapture1.Audio_RecordAudio = true;
@@ -231,8 +292,12 @@
                     break;
                 case 1:
                     {
+                        VideoCapture1.Mode = rbVideoCaptureDevice.Checked
+                            ? VFVideoCaptureMode.VideoCapture
+                            : VFVideoCaptureMode.IPCapture;
+
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        VideoCapture1.Mode = VFVideoCaptureMode.VideoCapture;
+                        
                         var output = new VFAVIOutput();
                         VideoCapture1.Output_Format = output;
                     }
@@ -240,8 +305,11 @@
                     break;
                 case 2:
                     {
+                        VideoCapture1.Mode = rbVideoCaptureDevice.Checked
+                            ? VFVideoCaptureMode.VideoCapture
+                            : VFVideoCaptureMode.IPCapture;
+
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        VideoCapture1.Mode = VFVideoCaptureMode.VideoCapture;
                         var output = new VFMP4v8v10Output();
                         VideoCapture1.Output_Format = output;
                     }
@@ -249,14 +317,21 @@
                     break;
                 case 3:
                     {
+                        VideoCapture1.Mode = rbVideoCaptureDevice.Checked
+                            ? VFVideoCaptureMode.VideoCapture
+                            : VFVideoCaptureMode.IPCapture;
+
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        VideoCapture1.Mode = VFVideoCaptureMode.VideoCapture;
                         var output = new VFWebMOutput();
                         VideoCapture1.Output_Format = output;
                     }
 
                     break;
             }
+
+            VideoCapture1.Video_Effects_Clear();
+            VideoCapture1.Video_Effects_Enabled = true;
+            VideoCapture1.Video_Effects_Add(new VFVideoEffectTextLogo(true) {Mode = TextLogoMode.Timestamp, Text = string.Empty, Left = 150, Top = 10});
 
             await VideoCapture1.StartAsync();
 
@@ -352,6 +427,11 @@
             MediaPlayer1.Source_Mode = VFMediaPlayerSource.Timeshift;
 
             await MediaPlayer1.PlayAsync();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

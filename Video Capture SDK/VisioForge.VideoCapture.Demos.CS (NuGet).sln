@@ -13,75 +13,73 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F43
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp", "CSharp", "{3F3567FA-DE52-4B4A-90B2-CE0EE171BA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Push Source Demo", "WinForms\CSharp\Push Source Demo\Push Source Demo (NuGet).csproj", "{49073487-E806-4B3C-9767-EB85E6EA71E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Push Source Demo (NuGet)", "WinForms\CSharp\Push Source Demo\Push Source Demo (NuGet).csproj", "{49073487-E806-4B3C-9767-EB85E6EA71E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EBAF07B6-9D0F-4E14-B9FA-522585B591A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{B477D9B3-B823-4727-8E81-2DBF9A5FFEAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timeshift Demo", "WinForms\CSharp\Timeshift Demo\Timeshift Demo (NuGet).csproj", "{97EC6046-7AFC-46CC-8CAB-116385DF67D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timeshift Demo (NuGet)", "WinForms\CSharp\Timeshift Demo\Timeshift Demo (NuGet).csproj", "{97EC6046-7AFC-46CC-8CAB-116385DF67D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TV Tuner Demo CLI", "Console\TV Tuner Demo\TV Tuner Demo CLI (NuGet).csproj", "{F3D05B45-15CB-412D-83B2-079C45192DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TV Tuner Demo CLI (NuGet)", "Console\TV Tuner Demo\TV Tuner Demo CLI (NuGet).csproj", "{F3D05B45-15CB-412D-83B2-079C45192DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Capture Demo CLI", "Console\Video Capture Demo\Video Capture Demo CLI (NuGet).csproj", "{25B3B9F4-5748-4381-8234-CA4E9FD3D95D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Capture Demo CLI (NuGet)", "Console\Video Capture Demo\Video Capture Demo CLI (NuGet).csproj", "{25B3B9F4-5748-4381-8234-CA4E9FD3D95D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPCaptureService", "Services\IP Capture\IPCaptureService (NuGet).csproj", "{CD81DB7A-F5FB-44FA-B57C-A35F99AB7352}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPCaptureService (NuGet)", "Services\IP Capture\IPCaptureService (NuGet).csproj", "{CD81DB7A-F5FB-44FA-B57C-A35F99AB7352}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenCaptureServiceHelper", "Services\Screen Capture\Helper\ScreenCaptureServiceHelper (NuGet).csproj", "{9CF98AB7-941E-4923-A3AA-478CF5CAF0FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCaptureServiceHelper (NuGet)", "Services\Screen Capture\Helper\ScreenCaptureServiceHelper (NuGet).csproj", "{9CF98AB7-941E-4923-A3AA-478CF5CAF0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenCaptureService", "Services\Screen Capture\Service\ScreenCaptureService (NuGet).csproj", "{D8D0FC78-4A50-485D-A018-84B947E95CDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCaptureService (NuGet)", "Services\Screen Capture\Service\ScreenCaptureService (NuGet).csproj", "{D8D0FC78-4A50-485D-A018-84B947E95CDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Capture Demo", "WinForms\CSharp\Audio Capture\Audio Capture Demo (NuGet).csproj", "{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo (NuGet)", "WinForms\CSharp\Audio Capture\Audio Capture Demo (NuGet).csproj", "{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer Vision Demo", "WinForms\CSharp\Computer Vision\Computer Vision Demo (NuGet).csproj", "{C273F859-81E6-46D4-AF8B-EA72A742D4BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo (NuGet)", "WinForms\CSharp\DV Capture\DV Capture Demo (NuGet).csproj", "{F88E5812-6E94-40C5-A757-65C940C78200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV Capture Demo", "WinForms\CSharp\DV Capture\DV Capture Demo (NuGet).csproj", "{F88E5812-6E94-40C5-A757-65C940C78200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo (NuGet)", "WinForms\CSharp\IP Capture\IP Capture Demo (NuGet).csproj", "{7BDA6A81-18C4-467E-BD5D-1C707A59DD64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IP Capture Demo", "WinForms\CSharp\IP Capture\IP Capture Demo (NuGet).csproj", "{7BDA6A81-18C4-467E-BD5D-1C707A59DD64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC (NuGet)", "WinForms\CSharp\Main Demo\Main Demo VC (NuGet).csproj", "{0812A4D7-6293-47FD-A566-86EC2FA36F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VC", "WinForms\CSharp\Main Demo\Main Demo VC (NuGet).csproj", "{0812A4D7-6293-47FD-A566-86EC2FA36F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo (NuGet)", "WinForms\CSharp\Multiple IP cams\Multiple IP Cameras Demo (NuGet).csproj", "{31ADBBE0-3CC2-4BFA-8C84-9760C63F0D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple IP Cameras Demo", "WinForms\CSharp\Multiple IP cams\Multiple IP Cameras Demo (NuGet).csproj", "{31ADBBE0-3CC2-4BFA-8C84-9760C63F0D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Video Streams Demo VC (NuGet)", "WinForms\CSharp\Multiple video streams\Multiple Video Streams Demo VC (NuGet).csproj", "{6C057FC4-6F3F-4887-86AE-FBC77E571F97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple Video Streams Demo VC", "WinForms\CSharp\Multiple video streams\Multiple Video Streams Demo VC (NuGet).csproj", "{6C057FC4-6F3F-4887-86AE-FBC77E571F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo (NuGet)", "WinForms\CSharp\Multiple web cams\Multiple Web Cameras Demo (NuGet).csproj", "{6F6AC56C-EFC4-4937-A3E4-5DC53C0C1397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple Web Cameras Demo", "WinForms\CSharp\Multiple web cams\Multiple Web Cameras Demo (NuGet).csproj", "{6F6AC56C-EFC4-4937-A3E4-5DC53C0C1397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo (NuGet)", "WinForms\CSharp\Simple VideoCapture\Simple Video Capture Demo (NuGet).csproj", "{C511144F-B38D-40BD-973F-DFEE916E5FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Video Capture Demo", "WinForms\CSharp\Simple VideoCapture\Simple Video Capture Demo (NuGet).csproj", "{C511144F-B38D-40BD-973F-DFEE916E5FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo (NuGet)", "WinForms\CSharp\Screen Capture\Screen Capture Demo (NuGet).csproj", "{4EBA8AEE-1D7A-4305-B6C9-DC29268E60EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screen Capture Demo", "WinForms\CSharp\Screen Capture\Screen Capture Demo (NuGet).csproj", "{4EBA8AEE-1D7A-4305-B6C9-DC29268E60EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo WPF (NuGet)", "WPF\CSharp\Audio_Capture\Audio Capture Demo WPF (NuGet).csproj", "{A7183E5F-CF7E-4E37-BBC2-CB7B01071EE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Capture Demo WPF", "WPF\CSharp\Audio_Capture\Audio Capture Demo WPF (NuGet).csproj", "{A7183E5F-CF7E-4E37-BBC2-CB7B01071EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo WPF (NuGet)", "WPF\CSharp\DV_Capture\DV Capture Demo WPF (NuGet).csproj", "{4FC5DFB2-C163-4D2E-9E74-809F8F9A4389}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DV Capture Demo WPF", "WPF\CSharp\DV_Capture\DV Capture Demo WPF (NuGet).csproj", "{4FC5DFB2-C163-4D2E-9E74-809F8F9A4389}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo WPF (NuGet)", "WPF\CSharp\IP_Capture\IP Capture Demo WPF (NuGet).csproj", "{3BABFA72-C8F6-417F-9060-2A51FD886E0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IP Capture Demo WPF", "WPF\CSharp\IP_Capture\IP Capture Demo WPF (NuGet).csproj", "{3BABFA72-C8F6-417F-9060-2A51FD886E0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC WPF (NuGet)", "WPF\CSharp\Main_Demo\Main Demo VC WPF (NuGet).csproj", "{17AF8B28-D59C-4159-B028-126440C315E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo VC WPF", "WPF\CSharp\Main_Demo\Main Demo VC WPF (NuGet).csproj", "{17AF8B28-D59C-4159-B028-126440C315E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo WPF (NuGet)", "WPF\CSharp\MultipleWebCameras\Multiple Web Cameras Demo WPF (NuGet).csproj", "{B4051FE1-34B9-47D2-9F58-51D962BAC89B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple Web Cameras Demo WPF", "WPF\CSharp\MultipleWebCameras\Multiple Web Cameras Demo WPF (NuGet).csproj", "{B4051FE1-34B9-47D2-9F58-51D962BAC89B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo WPF (NuGet)", "WPF\CSharp\Screen_Capture\Screen Capture Demo WPF (NuGet).csproj", "{05286135-3B62-466A-B51E-91E7315A0C60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screen Capture Demo WPF", "WPF\CSharp\Screen_Capture\Screen Capture Demo WPF (NuGet).csproj", "{05286135-3B62-466A-B51E-91E7315A0C60}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Video Capture Demo WPF", "WPF\CSharp\Simple Video Capture\Simple Video Capture Demo WPF (NuGet).csproj", "{D9E6C5A9-36CF-4F54-A93C-C7635BA4DF03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF (NuGet)", "WPF\CSharp\Simple Video Capture\Simple Video Capture Demo WPF (NuGet).csproj", "{D9E6C5A9-36CF-4F54-A93C-C7635BA4DF03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code snippets", "Code snippets", "{7251110F-2127-4FF3-89B5-9A1F3165B3C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "face-detection", "WinForms\CSharp\_CodeSnippets\face-detection\face-detection (NuGet).csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "face-detection (NuGet)", "WinForms\CSharp\_CodeSnippets\face-detection\face-detection (NuGet).csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-capture", "WinForms\CSharp\_CodeSnippets\screen-capture\screen-capture (NuGet).csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture (NuGet)", "WinForms\CSharp\_CodeSnippets\screen-capture\screen-capture (NuGet).csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "speaker-capture", "WinForms\CSharp\_CodeSnippets\speaker-capture\speaker-capture (NuGet).csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture (NuGet)", "WinForms\CSharp\_CodeSnippets\speaker-capture\speaker-capture (NuGet).csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webcam-preview", "WinForms\CSharp\_CodeSnippets\webcam-preview\webcam-preview (NuGet).csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview (NuGet)", "WinForms\CSharp\_CodeSnippets\webcam-preview\webcam-preview (NuGet).csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decklink Demo", "WinForms\CSharp\Decklink Demo\Decklink Demo (NuGet).csproj", "{3BC68568-542F-4C7A-80E2-379EFB06B49B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Demo (NuGet)", "WinForms\CSharp\Decklink Demo\Decklink Demo (NuGet).csproj", "{3BC68568-542F-4C7A-80E2-379EFB06B49B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Window Capture", "WinForms\CSharp\Window Capture\Window Capture (NuGet).csproj", "{77D9D9C9-C76A-4896-8024-C9413F5A76C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Window Capture (NuGet)", "WinForms\CSharp\Window Capture\Window Capture (NuGet).csproj", "{77D9D9C9-C76A-4896-8024-C9413F5A76C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple IP Cameras Demo WPF", "WPF\CSharp\Multiple IP Cameras Demo\Multiple IP Cameras Demo WPF (NuGet).csproj", "{9D93AA3F-12F7-46ED-87D3-7BAADDEDDAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo WPF (NuGet)", "WPF\CSharp\Multiple IP Cameras Demo\Multiple IP Cameras Demo WPF (NuGet).csproj", "{9D93AA3F-12F7-46ED-87D3-7BAADDEDDAAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images Demo", "WinForms\CSharp\Video From Images Demo\Video From Images Demo (NuGet).csproj", "{C19DFDB0-10C3-4E75-A332-0E658A0E9369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images Demo (NuGet)", "WinForms\CSharp\Video From Images Demo\Video From Images Demo (NuGet).csproj", "{C19DFDB0-10C3-4E75-A332-0E658A0E9369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,14 +153,6 @@ Global
 		{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}.Release|x86.ActiveCfg = Release|x86
 		{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}.Release|x86.Build.0 = Release|x86
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Debug|x86.ActiveCfg = Debug|x86
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Debug|x86.Build.0 = Debug|x86
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Release|x86.ActiveCfg = Release|x86
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD}.Release|x86.Build.0 = Release|x86
 		{F88E5812-6E94-40C5-A757-65C940C78200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F88E5812-6E94-40C5-A757-65C940C78200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F88E5812-6E94-40C5-A757-65C940C78200}.Debug|x86.ActiveCfg = Debug|x86
@@ -366,7 +356,6 @@ Global
 		{9CF98AB7-941E-4923-A3AA-478CF5CAF0FE} = {EBAF07B6-9D0F-4E14-B9FA-522585B591A2}
 		{D8D0FC78-4A50-485D-A018-84B947E95CDB} = {EBAF07B6-9D0F-4E14-B9FA-522585B591A2}
 		{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
-		{C273F859-81E6-46D4-AF8B-EA72A742D4BD} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
 		{F88E5812-6E94-40C5-A757-65C940C78200} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
 		{7BDA6A81-18C4-467E-BD5D-1C707A59DD64} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
 		{0812A4D7-6293-47FD-A566-86EC2FA36F2B} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
