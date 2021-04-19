@@ -112,6 +112,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 URL = cbIPURL.Text
             };
 
+            bool lavGPU = false;
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
@@ -124,12 +125,16 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
                     break;
                 case 3:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
+                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                    lavGPU = true;
                     break;
                 case 4:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 5:
+                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                    break;
+                case 6:
                     {
                         // audio not supported
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
@@ -138,18 +143,18 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                         cbIPAudioCapture.Checked = false;
                     }
                     break;
-                case 6:
+                case 7:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 7:
+                case 8:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 8:
+                case 9:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
                     break;
-                case 9:
+                case 10:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
                     break;
             }
@@ -159,6 +164,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text;
             VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked;
             VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
+
+            if (VideoCapture1.IP_Camera_Source.Type == VFIPSource.Auto_LAV)
+            {
+                VideoCapture1.IP_Camera_Source.LAV_GPU_Use = lavGPU;
+                VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack;
+            }
 
             if (cbIPCameraONVIF.Checked)
             {
@@ -242,8 +253,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
 
             VideoCapture1.Video_Effects_Enabled = true;
-            VideoCapture1.Video_Effects_Clear();
-            lbLogos.Items.Clear();
             ConfigureVideoEffects();
 
             await VideoCapture1.StartAsync();

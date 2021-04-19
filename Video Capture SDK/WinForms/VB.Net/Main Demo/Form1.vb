@@ -1887,6 +1887,7 @@ Public Class Form1
         Dim settings As IPCameraSourceSettings = New IPCameraSourceSettings()
         settings.URL = cbIPURL.Text
 
+        dim lavGPU As Boolean = false
         Select Case (cbIPCameraType.SelectedIndex)
             Case 0
                 settings.Type = VFIPSource.Auto_VLC
@@ -1895,21 +1896,23 @@ Public Class Form1
             Case 2
                 settings.Type = VFIPSource.Auto_LAV
             Case 3
-                settings.Type = VFIPSource.RTSP_Live555
+                settings.Type = VFIPSource.Auto_LAV
             Case 4
-                settings.Type = VFIPSource.MMS_WMV
+                settings.Type = VFIPSource.RTSP_Live555
             Case 5
+                settings.Type = VFIPSource.MMS_WMV
+            Case 6
                 settings.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
-            Case 6
-                settings.Type = VFIPSource.RTSP_LowLatency
-                settings.RTSP_LowLatency_UseUDP = False
             Case 7
                 settings.Type = VFIPSource.RTSP_LowLatency
-                settings.RTSP_LowLatency_UseUDP = True
+                settings.RTSP_LowLatency_UseUDP = False
             Case 8
-                settings.Type = VFIPSource.NDI
+                settings.Type = VFIPSource.RTSP_LowLatency
+                settings.RTSP_LowLatency_UseUDP = True
             Case 9
+                settings.Type = VFIPSource.NDI
+            Case 10
                 settings.Type = VFIPSource.NDI_Legacy
         End Select
 
@@ -1922,6 +1925,11 @@ Public Class Form1
         settings.Debug_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\ip_cam_log.txt"
         settings.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked
         settings.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text)
+
+        If (settings.Type = VFIPSource.Auto_LAV) Then
+            settings.LAV_GPU_Use = lavGPU
+            settings.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack
+        End If
 
         If (cbIPCameraONVIF.Checked) Then
             settings.ONVIF_Source = True

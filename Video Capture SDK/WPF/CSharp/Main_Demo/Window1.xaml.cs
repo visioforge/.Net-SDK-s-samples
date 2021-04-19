@@ -720,6 +720,7 @@ namespace Main_Demo
                 URL = cbIPURL.Text
             };
 
+            bool lavGPU = false;
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
@@ -732,27 +733,31 @@ namespace Main_Demo
                     settings.Type = VFIPSource.Auto_LAV;
                     break;
                 case 3:
-                    settings.Type = VFIPSource.RTSP_Live555;
+                    settings.Type = VFIPSource.Auto_LAV;
+                    lavGPU = true;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.MMS_WMV;
+                    settings.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 5:
+                    settings.Type = VFIPSource.MMS_WMV;
+                    break;
+                case 6:
                     settings.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     cbIPAudioCapture.IsChecked = false;
                     break;
-                case 6:
+                case 7:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 7:
+                case 8:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 8:
+                case 9:
                     settings.Type = VFIPSource.NDI;
                     break;
-                case 9:
+                case 10:
                     settings.Type = VFIPSource.NDI_Legacy;
                     break;
             }
@@ -766,6 +771,12 @@ namespace Main_Demo
             settings.Debug_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\ip_cam_log.txt";
             settings.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.IsChecked == true;
             settings.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
+
+            if (settings.Type == VFIPSource.Auto_LAV)
+            {
+                settings.LAV_GPU_Use = lavGPU;
+                settings.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack;
+            }
 
             if (cbIPCameraONVIF.IsChecked == true)
             {

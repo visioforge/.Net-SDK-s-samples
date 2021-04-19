@@ -158,6 +158,7 @@ Public Class Form1
         'source
         VideoCapture1.IP_Camera_Source = New IPCameraSourceSettings()
 
+        Dim lavGPU As Boolean = false
         Select Case (cbIPCameraType.SelectedIndex)
             Case 0 :
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC
@@ -166,23 +167,26 @@ Public Class Form1
             Case 2 : 
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
             Case 3 : 
+                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
+                lavGPU = true
+            Case 4 : 
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555
             Case 5 : 
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
-            Case 9
+            Case 6
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
                 VideoCapture1.Audio_RecordAudio = False
                 VideoCapture1.Audio_PlayAudio = False
-            Case 10
+            Case 7
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = False
-            Case 11
+            Case 8
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = True
-            Case 12
+            Case 9
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI
-            Case 13
+            Case 10
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy
         End Select
 
@@ -192,6 +196,11 @@ Public Class Form1
         VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text
         VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked
         VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text)
+
+        If (VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV) Then
+            VideoCapture1.IP_Camera_Source.LAV_GPU_Use = lavGPU
+            VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack
+        End If
 
         If (cbIPCameraONVIF.Checked) Then
             VideoCapture1.IP_Camera_Source.ONVIF_Source = True

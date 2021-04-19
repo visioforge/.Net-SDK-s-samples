@@ -2341,6 +2341,7 @@ namespace VideoCapture_CSharp_Demo
                 URL = cbIPURL.Text
             };
 
+            bool lavGPU = false;
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
@@ -2353,29 +2354,33 @@ namespace VideoCapture_CSharp_Demo
                     settings.Type = VFIPSource.Auto_LAV;
                     break;
                 case 3:
-                    settings.Type = VFIPSource.RTSP_Live555;
+                    settings.Type = VFIPSource.Auto_LAV;
+                    lavGPU = true;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.MMS_WMV;
+                    settings.Type = VFIPSource.RTSP_Live555;
                     break;
                 case 5:
+                    settings.Type = VFIPSource.MMS_WMV;
+                    break;
+                case 6:
                     {
                         settings.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                         cbIPAudioCapture.Checked = false;
                     }
                     break;
-                case 6:
+                case 7:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 7:
+                case 8:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 8:
+                case 9:
                     settings.Type = VFIPSource.NDI;
                     break;
-                case 9:
+                case 10:
                     settings.Type = VFIPSource.NDI_Legacy;
                     break;
             }
@@ -2391,6 +2396,12 @@ namespace VideoCapture_CSharp_Demo
             settings.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked;
             settings.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
 
+            if (settings.Type == VFIPSource.Auto_LAV)
+            {
+                settings.LAV_GPU_Use = lavGPU;
+                settings.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack;
+            }
+            
             if (lbVLCParameters.Items.Count > 0)
             {
                 var lst = new List<string>();
@@ -4582,7 +4593,8 @@ namespace VideoCapture_CSharp_Demo
             Process.Start(startInfo);
         }
 
-        private void VideoCapture1_OnNetworkSourceStop(object sender, EventArgs e)
+
+        private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             BeginInvoke(new NetworkStopDelegate(NetworkStopDelegateMethod));
         }

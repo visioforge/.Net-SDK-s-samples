@@ -44,6 +44,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl15 = new System.Windows.Forms.TabControl();
             this.tabPage144 = new System.Windows.Forms.TabPage();
+            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.cbIPURL = new System.Windows.Forms.ComboBox();
             this.btListNDISources = new System.Windows.Forms.Button();
             this.lbNDI = new System.Windows.Forms.LinkLabel();
@@ -133,7 +134,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.btListONVIFSources = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl15.SuspendLayout();
@@ -216,6 +216,16 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage144.TabIndex = 0;
             this.tabPage144.Text = "Main";
             this.tabPage144.UseVisualStyleBackColor = true;
+            // 
+            // btListONVIFSources
+            // 
+            this.btListONVIFSources.Location = new System.Drawing.Point(294, 72);
+            this.btListONVIFSources.Name = "btListONVIFSources";
+            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
+            this.btListONVIFSources.TabIndex = 87;
+            this.btListONVIFSources.Text = "List ONVIF sources";
+            this.btListONVIFSources.UseVisualStyleBackColor = true;
+            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
             // 
             // cbIPURL
             // 
@@ -372,6 +382,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             "Auto (VLC engine)",
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
+            "Auto (GPU decoding, LAV)",
             "RTSP (Live555 engine)",
             "MMS - WMV",
             "HTTP MJPEG Low Latency",
@@ -1258,16 +1269,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.lbTimestamp.Size = new System.Drawing.Size(126, 13);
             this.lbTimestamp.TabIndex = 102;
             this.lbTimestamp.Text = "Recording time: 00:00:00";
-            // 
-            // btListONVIFSources
-            // 
-            this.btListONVIFSources.Location = new System.Drawing.Point(294, 72);
-            this.btListONVIFSources.Name = "btListONVIFSources";
-            this.btListONVIFSources.Size = new System.Drawing.Size(123, 23);
-            this.btListONVIFSources.TabIndex = 87;
-            this.btListONVIFSources.Text = "List ONVIF sources";
-            this.btListONVIFSources.UseVisualStyleBackColor = true;
-            this.btListONVIFSources.Click += new System.EventHandler(this.btListONVIFSources_Click);
             // 
             // Form1
             // 

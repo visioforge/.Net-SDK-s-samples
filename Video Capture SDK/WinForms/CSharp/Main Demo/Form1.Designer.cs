@@ -7368,7 +7368,7 @@ namespace VideoCapture_CSharp_Demo
             this.label18.TabIndex = 116;
             this.label18.Text = "Frame rate";
             // 
-            // cbFramerate
+            // cbVideoInputFrameRate
             // 
             this.cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVideoInputFrameRate.FormattingEnabled = true;
@@ -9696,6 +9696,7 @@ namespace VideoCapture_CSharp_Demo
             "Auto (VLC engine)",
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
+            "Auto (GPU decoding, LAV)",
             "RTSP (Live555 engine)",
             "MMS - WMV",
             "HTTP MJPEG Low Latency",
@@ -13192,7 +13193,7 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnTVTunerTuneChannels += new System.EventHandler<VisioForge.Types.TVTunerTuneChannelsEventArgs>(this.VideoCapture1_OnTVTunerTuneChannels);
             this.VideoCapture1.OnAudioVUMeter += new System.EventHandler<VisioForge.Types.VUMeterEventArgs>(this.VideoCapture1_OnAudioVUMeter);
             this.VideoCapture1.OnAudioVUMeterProVolume += new System.EventHandler<VisioForge.Types.AudioLevelEventArgs>(this.VideoCapture1_OnAudioVUMeterProVolume);
-            this.VideoCapture1.OnNetworkSourceDisconnect += new System.EventHandler<System.EventArgs>(this.VideoCapture1_OnNetworkSourceStop);
+            this.VideoCapture1.OnNetworkSourceDisconnect += new System.EventHandler<System.EventArgs>(this.VideoCapture1_OnNetworkSourceDisconnect);
             this.VideoCapture1.OnMotionDetectionEx += new System.EventHandler<VisioForge.Types.MotionDetectionExEventArgs>(this.VideoCapture1_OnMotionDetectionEx);
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);

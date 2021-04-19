@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>IP Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.0.37.0</AssemblyVersion>
-    <FileVersion>14.0.37.0</FileVersion>
+    <AssemblyVersion>14.0.38.0</AssemblyVersion>
+    <FileVersion>14.0.38.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -38,13 +38,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.37" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.38" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.0.37" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.0.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.0.38" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.0.38" />
   </ItemGroup>
 </Project>

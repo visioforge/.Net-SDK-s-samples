@@ -32,6 +32,7 @@ Partial Class Form1
         Me.tabPage1 = New System.Windows.Forms.TabPage()
         Me.tabControl15 = New System.Windows.Forms.TabControl()
         Me.tabPage144 = New System.Windows.Forms.TabPage()
+        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.cbIPURL = New System.Windows.Forms.ComboBox()
         Me.btListNDISources = New System.Windows.Forms.Button()
         Me.lbNDI = New System.Windows.Forms.LinkLabel()
@@ -121,7 +122,6 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
-        Me.btListONVIFSources = New System.Windows.Forms.Button()
         Me.tcMain.SuspendLayout
         Me.tabPage1.SuspendLayout
         Me.tabControl15.SuspendLayout
@@ -204,6 +204,15 @@ Partial Class Form1
         Me.tabPage144.TabIndex = 0
         Me.tabPage144.Text = "Main"
         Me.tabPage144.UseVisualStyleBackColor = true
+        '
+        'btListONVIFSources
+        '
+        Me.btListONVIFSources.Location = New System.Drawing.Point(293, 105)
+        Me.btListONVIFSources.Name = "btListONVIFSources"
+        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
+        Me.btListONVIFSources.TabIndex = 92
+        Me.btListONVIFSources.Text = "List ONVIF sources"
+        Me.btListONVIFSources.UseVisualStyleBackColor = true
         '
         'cbIPURL
         '
@@ -351,7 +360,7 @@ Partial Class Form1
         '
         Me.cbIPCameraType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIPCameraType.FormattingEnabled = true
-        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "RTSP (Live555 engine)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
+        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "Auto (GPU decoding, LAV)", "RTSP (Live555 engine)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
         Me.cbIPCameraType.Location = New System.Drawing.Point(56, 45)
         Me.cbIPCameraType.Name = "cbIPCameraType"
         Me.cbIPCameraType.Size = New System.Drawing.Size(227, 21)
@@ -1194,15 +1203,6 @@ Partial Class Form1
         Me.btPause.TabIndex = 104
         Me.btPause.Text = "Pause"
         Me.btPause.UseVisualStyleBackColor = true
-        '
-        'btListONVIFSources
-        '
-        Me.btListONVIFSources.Location = New System.Drawing.Point(293, 105)
-        Me.btListONVIFSources.Name = "btListONVIFSources"
-        Me.btListONVIFSources.Size = New System.Drawing.Size(123, 23)
-        Me.btListONVIFSources.TabIndex = 92
-        Me.btListONVIFSources.Text = "List ONVIF sources"
-        Me.btListONVIFSources.UseVisualStyleBackColor = true
         '
         'Form1
         '
