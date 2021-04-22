@@ -31,7 +31,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            VisioForge.Types.VideoRendererSettingsWinForms videoRendererSettingsWinForms1 = new VisioForge.Types.VideoRendererSettingsWinForms();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.rbPreview = new System.Windows.Forms.RadioButton();
             this.btStop = new System.Windows.Forms.Button();
@@ -58,19 +57,6 @@
             this.edWidth = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbResize = new System.Windows.Forms.CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label47 = new System.Windows.Forms.Label();
-            this.edTransStopTime = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.edTransStartTime = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.btAddTransition = new System.Windows.Forms.Button();
-            this.cbTransitionName = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.lbTransitions = new System.Windows.Forms.ListBox();
-            this.label43 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.cbFlipY = new System.Windows.Forms.CheckBox();
             this.cbFlipX = new System.Windows.Forms.CheckBox();
@@ -103,8 +89,6 @@
             this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).BeginInit();
@@ -220,7 +204,6 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -247,7 +230,7 @@
             this.tabPage1.Controls.Add(this.cbResize);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(322, 376);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Output";
@@ -402,134 +385,6 @@
             this.cbResize.Text = "Resize";
             this.cbResize.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox5);
-            this.tabPage2.Controls.Add(this.lbTransitions);
-            this.tabPage2.Controls.Add(this.label43);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(322, 376);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Transitions";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label47);
-            this.groupBox5.Controls.Add(this.edTransStopTime);
-            this.groupBox5.Controls.Add(this.label48);
-            this.groupBox5.Controls.Add(this.label46);
-            this.groupBox5.Controls.Add(this.edTransStartTime);
-            this.groupBox5.Controls.Add(this.label45);
-            this.groupBox5.Controls.Add(this.btAddTransition);
-            this.groupBox5.Controls.Add(this.cbTransitionName);
-            this.groupBox5.Controls.Add(this.label44);
-            this.groupBox5.Location = new System.Drawing.Point(16, 113);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(251, 144);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Add transition";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(133, 110);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(20, 13);
-            this.label47.TabIndex = 8;
-            this.label47.Text = "ms";
-            // 
-            // edTransStopTime
-            // 
-            this.edTransStopTime.Location = new System.Drawing.Point(84, 107);
-            this.edTransStopTime.Name = "edTransStopTime";
-            this.edTransStopTime.Size = new System.Drawing.Size(43, 20);
-            this.edTransStopTime.TabIndex = 7;
-            this.edTransStopTime.Text = "5000";
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(12, 110);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(51, 13);
-            this.label48.TabIndex = 6;
-            this.label48.Text = "Stop time";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(133, 84);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(20, 13);
-            this.label46.TabIndex = 5;
-            this.label46.Text = "ms";
-            // 
-            // edTransStartTime
-            // 
-            this.edTransStartTime.Location = new System.Drawing.Point(84, 81);
-            this.edTransStartTime.Name = "edTransStartTime";
-            this.edTransStartTime.Size = new System.Drawing.Size(43, 20);
-            this.edTransStartTime.TabIndex = 4;
-            this.edTransStartTime.Text = "4000";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(12, 84);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(51, 13);
-            this.label45.TabIndex = 3;
-            this.label45.Text = "Start time";
-            // 
-            // btAddTransition
-            // 
-            this.btAddTransition.Location = new System.Drawing.Point(203, 42);
-            this.btAddTransition.Name = "btAddTransition";
-            this.btAddTransition.Size = new System.Drawing.Size(42, 23);
-            this.btAddTransition.TabIndex = 2;
-            this.btAddTransition.Text = "Add";
-            this.btAddTransition.UseVisualStyleBackColor = true;
-            this.btAddTransition.Click += new System.EventHandler(this.btAddTransition_Click);
-            // 
-            // cbTransitionName
-            // 
-            this.cbTransitionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTransitionName.FormattingEnabled = true;
-            this.cbTransitionName.Location = new System.Drawing.Point(15, 44);
-            this.cbTransitionName.Name = "cbTransitionName";
-            this.cbTransitionName.Size = new System.Drawing.Size(182, 21);
-            this.cbTransitionName.TabIndex = 1;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(12, 28);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(35, 13);
-            this.label44.TabIndex = 0;
-            this.label44.Text = "Name";
-            // 
-            // lbTransitions
-            // 
-            this.lbTransitions.FormattingEnabled = true;
-            this.lbTransitions.Location = new System.Drawing.Point(16, 25);
-            this.lbTransitions.Name = "lbTransitions";
-            this.lbTransitions.Size = new System.Drawing.Size(251, 82);
-            this.lbTransitions.TabIndex = 4;
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(13, 9);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(49, 13);
-            this.label43.TabIndex = 3;
-            this.label43.Text = "Selected";
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.cbFlipY);
@@ -553,7 +408,7 @@
             this.tabPage5.Controls.Add(this.label5);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(322, 376);
             this.tabPage5.TabIndex = 2;
             this.tabPage5.Text = "Video processing";
@@ -755,7 +610,7 @@
             this.tabPage3.Controls.Add(this.cbDebugMode);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(322, 376);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Log";
@@ -836,9 +691,11 @@
             this.VideoEdit1.Barcode_Reader_Enabled = false;
             this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
             this.VideoEdit1.ChromaKey = null;
+            this.VideoEdit1.CustomRedist_Auto = true;
             this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
+            this.VideoEdit1.Debug_DisableMessageDialogs = false;
             this.VideoEdit1.Debug_Mode = false;
             this.VideoEdit1.Debug_Telemetry = false;
             this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
@@ -906,10 +763,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).EndInit();
@@ -938,19 +791,6 @@
         private VisioForge.Controls.UI.WinForms.VideoEdit VideoEdit1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.TextBox edTransStopTime;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.TextBox edTransStartTime;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Button btAddTransition;
-        private System.Windows.Forms.ComboBox cbTransitionName;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.ListBox lbTransitions;
-        private System.Windows.Forms.Label label43;
         private System.Windows.Forms.ComboBox cbFrameRate;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox edHeight;

@@ -1130,7 +1130,7 @@ Public Class Form1
         id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text)
 
         'add transition
-        VideoEdit1.Video_Transition_Add(Convert.ToInt64(edTransStartTime.Text), Convert.ToInt64(edTransStopTime.Text), id)
+        VideoEdit1.Video_Transition_Add(TimeSpan.FromMilliseconds(Convert.ToInt64(edTransStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt64(edTransStopTime.Text)), id)
 
         'add to list
         lbTransitions.Items.Add(cbTransitionName.Text + "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")")

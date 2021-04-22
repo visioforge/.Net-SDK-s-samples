@@ -2314,7 +2314,7 @@ namespace Main_Demo
             int id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text);
 
             // add transition
-            VideoEdit1.Video_Transition_Add(Convert.ToInt32(edTransStartTime.Text), Convert.ToInt32(edTransStopTime.Text), id);
+            VideoEdit1.Video_Transition_Add(TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStopTime.Text)), id);
 
             // add to list
             lbTransitions.Items.Add(cbTransitionName.Text +

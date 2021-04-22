@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using VisioForge.Controls.UI;
 using VisioForge.Controls.UI.Dialogs.OutputFormats;
@@ -121,19 +122,6 @@ namespace Video_From_Images
             Process.Start(startInfo);
         }
 
-        private void btAddTransition_Click(object sender, EventArgs e)
-        {
-            // get id
-            int id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text);
-
-            // add transition
-            VideoEdit1.Video_Transition_Add(Convert.ToInt32(edTransStartTime.Text), Convert.ToInt32(edTransStopTime.Text), id);
-
-            // add to list
-            lbTransitions.Items.Add(cbTransitionName.Text +
-            "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
@@ -143,12 +131,6 @@ namespace Video_From_Images
 
             cbFrameRate.SelectedIndex = 7;
 
-            for (int i = 0; i < VideoEdit1.Video_Transition_Names().Count; i++)
-            {
-                cbTransitionName.Items.Add(VideoEdit1.Video_Transition_Names()[i]);
-            }
-
-            cbTransitionName.SelectedIndex = 0;
             cbOutputFormat.SelectedIndex = 7;
         }
 
@@ -424,8 +406,6 @@ namespace Video_From_Images
             ConfigureVideoEffects();
 
             await VideoEdit1.StartAsync();
-
-            lbTransitions.Items.Clear();
         }
 
         private async void btStop_Click(object sender, EventArgs e)
@@ -444,7 +424,11 @@ namespace Video_From_Images
 
         private void VideoEdit1_OnStop(object sender, VideoEditStopEventArgs e)
         {
-            Invoke((Action)(() => { ProgressBar1.Value = 0; }));
+            Invoke((Action)(() =>
+            {
+                ProgressBar1.Value = 0;
+                lbFiles.Items.Clear();
+            }));
 
             if (e.Successful)
             {
