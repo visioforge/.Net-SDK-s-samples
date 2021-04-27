@@ -129,18 +129,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.39" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.0.40" />
 
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.0.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.0.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.0.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.0.40" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
