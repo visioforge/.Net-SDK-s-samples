@@ -1140,6 +1140,7 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.btVirtualCameraRegister = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -6634,6 +6635,7 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage101
             // 
+            this.tabPage101.Controls.Add(this.btVirtualCameraRegister);
             this.tabPage101.Controls.Add(this.label328);
             this.tabPage101.Controls.Add(this.label327);
             this.tabPage101.Controls.Add(this.label326);
@@ -13097,6 +13099,7 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -13198,6 +13201,16 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
+            // 
+            // btVirtualCameraRegister
+            // 
+            this.btVirtualCameraRegister.Location = new System.Drawing.Point(20, 156);
+            this.btVirtualCameraRegister.Name = "btVirtualCameraRegister";
+            this.btVirtualCameraRegister.Size = new System.Drawing.Size(261, 23);
+            this.btVirtualCameraRegister.TabIndex = 5;
+            this.btVirtualCameraRegister.Text = "Click to register filters for NuGet SDK version";
+            this.btVirtualCameraRegister.UseVisualStyleBackColor = true;
+            this.btVirtualCameraRegister.Click += new System.EventHandler(this.btVirtualCameraRegister_Click);
             // 
             // Form1
             // 
@@ -14639,6 +14652,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox edHLSURL;
         private System.Windows.Forms.Button btListONVIFSources;
+        private System.Windows.Forms.Button btVirtualCameraRegister;
     }
 }
 

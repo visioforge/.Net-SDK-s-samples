@@ -686,6 +686,7 @@
                     <Label Content="to see streamed video" HorizontalAlignment="Left" Margin="22,73.04,0,0" VerticalAlignment="Top"/>
                     <Label Content="Virtual Camera SDK license required." HorizontalAlignment="Left" Margin="22,117.12,0,0" VerticalAlignment="Top"/>
                     <Label Content="TRIAL limitation - 5000 frames to stream." HorizontalAlignment="Left" Margin="22,143.08,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btVirtualCameraRegister" Content="Click to register filters for NuGet SDK version" HorizontalAlignment="Left" Margin="22,194,0,0" VerticalAlignment="Top" Width="334" Click="btVirtualCameraRegister_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Decklink" Height="19.96" VerticalAlignment="Top" >

@@ -342,17 +342,15 @@ Public Class Form1
 
         ' Decklink
         For Each device As DecklinkDeviceInfo In VideoCapture1.Decklink_CaptureDevices
-
             cbDecklinkCaptureDevice.Items.Add(device.Name)
         Next
 
         If (cbDecklinkCaptureDevice.Items.Count > 0) Then
-
             cbDecklinkCaptureDevice.SelectedIndex = 0
             cbDecklinkCaptureDevice_SelectedIndexChanged(Nothing, Nothing)
-
         End If
 
+        btVirtualCameraRegister.Enabled = Not VideoCapture1.DirectShow_Filters.Contains("VisioForge Virtual Camera")
     End Sub
 
 
@@ -5163,6 +5161,10 @@ Public Class Form1
         If (cbIPURL.Items.Count > 0) Then
             cbIPURL.SelectedIndex = 0
         End If
+    End Sub
+
+    Private Sub btVirtualCameraRegister_Click(sender As Object, e As EventArgs) Handles btVirtualCameraRegister.Click
+        btVirtualCameraRegister.Enabled = Not VideoCapture1.CustomRedist_VirtualCameraRegister()
     End Sub
 End Class
 

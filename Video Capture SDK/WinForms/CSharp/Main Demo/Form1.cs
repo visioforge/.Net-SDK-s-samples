@@ -431,6 +431,8 @@ namespace VideoCapture_CSharp_Demo
                 cbDecklinkCaptureDevice_SelectedIndexChanged(null, null);
             }
 
+            btVirtualCameraRegister.Enabled = !VideoCapture1.DirectShow_Filters.Contains("VisioForge Virtual Camera");
+
             Form1_SizeChanged(this, EventArgs.Empty);
         }
 
@@ -6212,6 +6214,11 @@ namespace VideoCapture_CSharp_Demo
             {
                 cbIPURL.SelectedIndex = 0;
             }
+        }
+
+        private void btVirtualCameraRegister_Click(object sender, EventArgs e)
+        {
+            btVirtualCameraRegister.Enabled = !VideoCapture1.CustomRedist_VirtualCameraRegister();
         }
     }
 }
