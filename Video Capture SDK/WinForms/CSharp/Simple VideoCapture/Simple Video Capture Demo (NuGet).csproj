@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.1.3.0</AssemblyVersion>
-    <FileVersion>14.1.3.0</FileVersion>
+    <AssemblyVersion>14.1.5.0</AssemblyVersion>
+    <FileVersion>14.1.5.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,11 +64,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.1.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.1.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.1.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.1.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.1.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.1.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.1.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.1.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.1.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.1.5" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
