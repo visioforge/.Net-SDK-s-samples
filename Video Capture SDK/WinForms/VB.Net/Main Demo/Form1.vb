@@ -25,7 +25,7 @@ Public Class Form1
 
     Dim movSettingsDialog As MFSettingsDialog
 
-    Dim mp4V10SettingsDialog As MP4v10SettingsDialog
+    Dim _mp4SettingsDialog As MP4SettingsDialog
 
     Dim aviSettingsDialog As AVISettingsDialog
 
@@ -900,8 +900,8 @@ Public Class Form1
                 ((outputFormat = VFVideoCaptureOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
                         (VideoCapture1.Network_Streaming_Enabled And (VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
 
-                Dim mp4Output As VFMP4v8v10Output = New VFMP4v8v10Output()
-                SetMP4v10Output(mp4Output)
+                Dim mp4Output As VFMP4Output = New VFMP4Output()
+                SetMP4Output(mp4Output)
 
                 If (outputFormat = VFVideoCaptureOutputFormat.Encrypted) Then
                     mp4Output.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC
@@ -1469,12 +1469,12 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
-    Private Sub SetMP4v10Output(ByRef mp4Output As VFMP4v8v10Output)
-        If (mp4V10SettingsDialog Is Nothing) Then
-            mp4V10SettingsDialog = New MP4v10SettingsDialog()
+    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
+        If (_mp4SettingsDialog Is Nothing) Then
+            _mp4SettingsDialog = New MP4SettingsDialog()
         End If
 
-        mp4V10SettingsDialog.SaveSettings(mp4Output)
+        _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
     Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGDLLOutput)
@@ -1718,8 +1718,8 @@ Public Class Form1
             Case 1
                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW
 
-                Dim mp4Output As VFMP4v8v10Output = New VFMP4v8v10Output()
-                SetMP4v10Output(mp4Output)
+                Dim mp4Output As VFMP4Output = New VFMP4Output()
+                SetMP4Output(mp4Output)
                 VideoCapture1.Network_Streaming_Output = mp4Output
 
                 VideoCapture1.Network_Streaming_URL = edNetworkRTSPURL.Text
@@ -1765,8 +1765,8 @@ Public Class Form1
                 If (rbNetworkSSSoftware.Checked) Then
                     VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW
 
-                    Dim mp4Output As VFMP4v8v10Output = New VFMP4v8v10Output()
-                    SetMP4v10Output(mp4Output)
+                    Dim mp4Output As VFMP4Output = New VFMP4Output()
+                    SetMP4Output(mp4Output)
                     VideoCapture1.Network_Streaming_Output = mp4Output
                 Else
                     VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_FFMPEG_EXE
@@ -4770,11 +4770,11 @@ Public Class Form1
 
                 ffmpegEXESettingsDialog.ShowDialog(Me)
             Case 22
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
+                If (_mp4SettingsDialog Is Nothing) Then
+                    _mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                mp4V10SettingsDialog.ShowDialog(Me)
+                _mp4SettingsDialog.ShowDialog(Me)
             Case 23
                 If (mp4v11SettingsDialog Is Nothing) Then
                     mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
@@ -4788,11 +4788,11 @@ Public Class Form1
 
                 gifSettingsDialog.ShowDialog(Me)
             Case 25
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
+                If (_mp4SettingsDialog Is Nothing) Then
+                    _mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                mp4V10SettingsDialog.ShowDialog(Me)
+                _mp4SettingsDialog.ShowDialog(Me)
             Case 26
                 If (mpegTSSettingsDialog Is Nothing) Then
                     mpegTSSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MPEGTS)

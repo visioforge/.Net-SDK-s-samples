@@ -1147,7 +1147,7 @@
             this.Name = "MP4v10SettingsDialog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MP4 v8/v10/Encrypted settings";
+            this.Text = "MP4/Encrypted settings";
             this.Load += new System.EventHandler(this.MP4v10SettingsDialog_Load);
             this.tabControl25.ResumeLayout(false);
             this.tabPage149.ResumeLayout(false);

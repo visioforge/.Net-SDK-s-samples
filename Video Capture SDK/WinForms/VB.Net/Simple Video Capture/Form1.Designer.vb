@@ -995,7 +995,7 @@ Partial Class Form1
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputFormat.FormattingEnabled = true
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4 (v10 engine)", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(16, 30)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(279, 21)

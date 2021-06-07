@@ -566,7 +566,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4 (v10 engine)",
+            "MP4",
             "MP4 (v11 engine, CPU/GPU)",
             "Animated GIF",
             "MPEG-TS",

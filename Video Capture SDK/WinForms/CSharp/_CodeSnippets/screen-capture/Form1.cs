@@ -82,7 +82,7 @@ namespace screen_capture
             if (cbCapture.Checked)
             {
                 VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
-                VideoCapture1.Output_Format = new VFMP4v8v10Output();
+                VideoCapture1.Output_Format = new VFMP4Output();
                 VideoCapture1.Output_Filename = edOutput.Text;
             }
             else

@@ -531,6 +531,7 @@ namespace VideoCapture_CSharp_Demo
             this.label89 = new System.Windows.Forms.Label();
             this.cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
             this.tabPage101 = new System.Windows.Forms.TabPage();
+            this.btVirtualCameraRegister = new System.Windows.Forms.Button();
             this.label328 = new System.Windows.Forms.Label();
             this.label327 = new System.Windows.Forms.Label();
             this.label326 = new System.Windows.Forms.Label();
@@ -1140,7 +1141,6 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.btVirtualCameraRegister = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1481,7 +1481,7 @@ namespace VideoCapture_CSharp_Demo
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe)",
-            "MP4 (v10 engine)",
+            "MP4",
             "MP4 (v11 engine, CPU/GPU)",
             "Animated GIF",
             "Encrypted video",
@@ -6648,6 +6648,16 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage101.TabIndex = 14;
             this.tabPage101.Text = "Virtual camera";
             this.tabPage101.UseVisualStyleBackColor = true;
+            // 
+            // btVirtualCameraRegister
+            // 
+            this.btVirtualCameraRegister.Location = new System.Drawing.Point(20, 156);
+            this.btVirtualCameraRegister.Name = "btVirtualCameraRegister";
+            this.btVirtualCameraRegister.Size = new System.Drawing.Size(261, 23);
+            this.btVirtualCameraRegister.TabIndex = 5;
+            this.btVirtualCameraRegister.Text = "Click to register filters for NuGet SDK version";
+            this.btVirtualCameraRegister.UseVisualStyleBackColor = true;
+            this.btVirtualCameraRegister.Click += new System.EventHandler(this.btVirtualCameraRegister_Click);
             // 
             // label328
             // 
@@ -13201,16 +13211,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoCapture1_OnBarcodeDetected);
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
-            // 
-            // btVirtualCameraRegister
-            // 
-            this.btVirtualCameraRegister.Location = new System.Drawing.Point(20, 156);
-            this.btVirtualCameraRegister.Name = "btVirtualCameraRegister";
-            this.btVirtualCameraRegister.Size = new System.Drawing.Size(261, 23);
-            this.btVirtualCameraRegister.TabIndex = 5;
-            this.btVirtualCameraRegister.Text = "Click to register filters for NuGet SDK version";
-            this.btVirtualCameraRegister.UseVisualStyleBackColor = true;
-            this.btVirtualCameraRegister.Click += new System.EventHandler(this.btVirtualCameraRegister_Click);
             // 
             // Form1
             // 

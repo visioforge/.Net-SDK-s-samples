@@ -1041,6 +1041,7 @@ Partial Class Form1
         Me.label89 = New System.Windows.Forms.Label()
         Me.cbBarcodeDetectionEnabled = New System.Windows.Forms.CheckBox()
         Me.TabPage100 = New System.Windows.Forms.TabPage()
+        Me.btVirtualCameraRegister = New System.Windows.Forms.Button()
         Me.label328 = New System.Windows.Forms.Label()
         Me.label327 = New System.Windows.Forms.Label()
         Me.label326 = New System.Windows.Forms.Label()
@@ -1130,7 +1131,6 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
-        Me.btVirtualCameraRegister = New System.Windows.Forms.Button()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -6914,7 +6914,7 @@ Partial Class Form1
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputFormat.FormattingEnabled = True
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture DV (DV devices only)", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (IP Cameras / H264 devices)", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe)", "MP4 v8/v10", "MP4 v11", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture DV (DV devices only)", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (IP Cameras / H264 devices)", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe)", "MP4", "MP4 v11 (CPU/GPU)", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(19, 33)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(275, 21)
@@ -11741,6 +11741,15 @@ Partial Class Form1
         Me.TabPage100.Text = "Virtual camera"
         Me.TabPage100.UseVisualStyleBackColor = True
         '
+        'btVirtualCameraRegister
+        '
+        Me.btVirtualCameraRegister.Location = New System.Drawing.Point(18, 157)
+        Me.btVirtualCameraRegister.Name = "btVirtualCameraRegister"
+        Me.btVirtualCameraRegister.Size = New System.Drawing.Size(261, 23)
+        Me.btVirtualCameraRegister.TabIndex = 8
+        Me.btVirtualCameraRegister.Text = "Click to register filters for NuGet SDK version"
+        Me.btVirtualCameraRegister.UseVisualStyleBackColor = True
+        '
         'label328
         '
         Me.label328.AutoSize = True
@@ -12752,15 +12761,6 @@ Partial Class Form1
         Me.lbTimestamp.Size = New System.Drawing.Size(126, 13)
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
-        '
-        'btVirtualCameraRegister
-        '
-        Me.btVirtualCameraRegister.Location = New System.Drawing.Point(18, 157)
-        Me.btVirtualCameraRegister.Name = "btVirtualCameraRegister"
-        Me.btVirtualCameraRegister.Size = New System.Drawing.Size(261, 23)
-        Me.btVirtualCameraRegister.TabIndex = 8
-        Me.btVirtualCameraRegister.Text = "Click to register filters for NuGet SDK version"
-        Me.btVirtualCameraRegister.UseVisualStyleBackColor = True
         '
         'Form1
         '

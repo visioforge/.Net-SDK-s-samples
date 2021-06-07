@@ -57,7 +57,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case MFSettingsDialogMode.Default:
                 case MFSettingsDialogMode.MP4v11:
                     {
-                        Text = "MP4 v11 settings";
+                        Text = "MP4 v11 (CPU/GPU) settings";
 
                         lbCustomMuxer.Visible = true;
                         cbCustomMuxer.Visible = true;
@@ -426,7 +426,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         Default,
 
         /// <summary>
-        /// MP4 v11.
+        /// MP4 v11 (CPU/GPU).
         /// </summary>
         MP4v11,
 

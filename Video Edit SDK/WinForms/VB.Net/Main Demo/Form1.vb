@@ -16,7 +16,7 @@ Imports VisioForge.Types.VideoEffects
 Public Class Form1
     Dim mp4v11SettingsDialog As MFSettingsDialog
 
-    Dim mp4V10SettingsDialog As MP4v10SettingsDialog
+    Dim _mp4SettingsDialog As MP4SettingsDialog
 
     Dim aviSettingsDialog As AVISettingsDialog
 
@@ -208,10 +208,6 @@ Public Class Form1
         Next
         cbTransitionName.SelectedIndex = 0
 
-        For i As Integer = 0 To VideoEdit1.Audio_Effects_Equalizer_Presets().Count - 1
-            cbAudEqualizerPreset.Items.Add(VideoEdit1.Audio_Effects_Equalizer_Presets().Item(i))
-        Next
-
         Dim genres As List(Of String) = New List(Of String)
         For Each s As String In VideoCapture.Tags_GetDefaultAudioGenres
             genres.Add(s)
@@ -356,12 +352,12 @@ Public Class Form1
         mp4v11SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetMP4v10Output(ByRef mp4Output As VFMP4v8v10Output)
-        If (mp4V10SettingsDialog Is Nothing) Then
-            mp4V10SettingsDialog = New MP4v10SettingsDialog()
+    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
+        If (_mp4SettingsDialog Is Nothing) Then
+            _mp4SettingsDialog = New MP4SettingsDialog()
         End If
 
-        mp4V10SettingsDialog.SaveSettings(mp4Output)
+        _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
     Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGDLLOutput)
@@ -768,7 +764,7 @@ Public Class Form1
                 SetFFMPEGEXEOutput(ffmpegOutput)
                 VideoEdit1.Output_Format = ffmpegOutput
             Case 15
-                outputFormat = VFVideoEditOutputFormat.MP4v8v10
+                outputFormat = VFVideoEditOutputFormat.MP4
             Case 16
                 outputFormat = VFVideoEditOutputFormat.MP4v11
 
@@ -785,12 +781,12 @@ Public Class Form1
                 outputFormat = VFVideoEditOutputFormat.Encrypted
         End Select
 
-        If ((outputFormat = VFVideoEditOutputFormat.MP4v8v10) Or
+        If ((outputFormat = VFVideoEditOutputFormat.MP4) Or
             ((outputFormat = VFVideoEditOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
                     (VideoEdit1.Network_Streaming_Enabled And (VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
 
-            Dim mp4Output As VFMP4v8v10Output = New VFMP4v8v10Output()
-            SetMP4v10Output(mp4Output)
+            Dim mp4Output As VFMP4Output = New VFMP4Output()
+            SetMP4Output(mp4Output)
 
             ' encryption
             If (outputFormat = VFVideoEditOutputFormat.Encrypted) Then
@@ -2656,11 +2652,11 @@ Public Class Form1
 
                 ffmpegEXESettingsDialog.ShowDialog(Me)
             Case 15
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
+                If (_mp4SettingsDialog Is Nothing) Then
+                    _mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                mp4V10SettingsDialog.ShowDialog(Me)
+                _mp4SettingsDialog.ShowDialog(Me)
             Case 16
                 If (mp4v11SettingsDialog Is Nothing) Then
                     mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
@@ -2674,11 +2670,11 @@ Public Class Form1
 
                 gifSettingsDialog.ShowDialog(Me)
             Case 18
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
+                If (_mp4SettingsDialog Is Nothing) Then
+                    _mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                mp4V10SettingsDialog.ShowDialog(Me)
+                _mp4SettingsDialog.ShowDialog(Me)
         End Select
     End Sub
 

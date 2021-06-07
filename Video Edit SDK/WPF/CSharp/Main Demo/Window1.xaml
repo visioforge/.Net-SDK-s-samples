@@ -33,8 +33,8 @@
                                     <ComboBoxItem Content="WebM" />
                                     <ComboBoxItem Content="FFMPEG (DLL)" />
                                     <ComboBoxItem Content="FFMPEG (external exe) (BETA)" />
-                                    <ComboBoxItem Content="MP4 v8/v10" />
-                                    <ComboBoxItem Content="MP4 v11" />
+                                    <ComboBoxItem Content="MP4" />
+                                    <ComboBoxItem Content="MP4 v11 (CPU/GPU)" />
                                     <ComboBoxItem Content="Animated GIF" />
                                     <ComboBoxItem Content="Encrypted video" />
                                 </ComboBox>

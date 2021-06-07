@@ -51,7 +51,7 @@ namespace IPCaptureService
             VideoCapture1.Output_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\service_output.wmv";
             VideoCapture1.Output_Filename = "d:\\ip_capture_output.mp4"; 
 
-            var mp4Output = new VFMP4v8v10Output();
+            var mp4Output = new VFMP4Output();
             mp4Output.MP4Mode = VFMP4Mode.v10;
             VideoCapture1.Output_Format = mp4Output;
 

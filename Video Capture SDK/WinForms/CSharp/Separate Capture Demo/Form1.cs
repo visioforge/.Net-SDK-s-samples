@@ -22,7 +22,7 @@ namespace Separate_Capture_Demo
 
         private MFSettingsDialog movSettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -202,7 +202,7 @@ namespace Separate_Capture_Demo
                     }
                 case 2:
                     {
-                        var mp4Output = new VFMP4v8v10Output();
+                        var mp4Output = new VFMP4Output();
                         SetMP4Output(ref mp4Output);
                         VideoCapture1.Output_Format = mp4Output;
 
@@ -468,14 +468,14 @@ namespace Separate_Capture_Demo
             Log("(NOT ERROR) " + e.Message);
         }
 
-        private void SetMP4Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetWMVOutput(ref VFWMVOutput wmvOutput)
@@ -603,12 +603,12 @@ namespace Separate_Capture_Demo
                     }
                 case 2:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }

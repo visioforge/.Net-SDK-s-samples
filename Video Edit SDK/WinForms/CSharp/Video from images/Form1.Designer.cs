@@ -248,8 +248,8 @@
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe) (BETA)",
-            "MP4 v8/v10",
-            "MP4 v11",
+            "MP4",
+            "MP4 v11 (CPU/GPU)",
             "Animated GIF",
             "Encrypted video"});
             this.cbOutputFormat.Location = new System.Drawing.Point(16, 109);

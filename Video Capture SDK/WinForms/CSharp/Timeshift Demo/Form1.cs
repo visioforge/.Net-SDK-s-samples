@@ -276,7 +276,7 @@ namespace VC_Timeshift_Demo
                 Player_AudioOutput_Enabled = cbPlayerPlayAudio.Checked
             };
 
-            var mp4Settings = new VFMP4v8v10Output
+            var mp4Settings = new VFMP4Output
                                   {
                                       Video =
                                           {
@@ -310,7 +310,7 @@ namespace VC_Timeshift_Demo
                             : VFVideoCaptureMode.IPCapture;
 
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        var output = new VFMP4v8v10Output();
+                        var output = new VFMP4Output();
                         VideoCapture1.Output_Format = output;
                     }
 

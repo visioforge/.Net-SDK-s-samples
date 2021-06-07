@@ -38,7 +38,7 @@ namespace Main_Demo
     {
         private MFSettingsDialog mp4v11SettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -140,12 +140,7 @@ namespace Main_Demo
             }
 
             cbTransitionName.SelectedIndex = 0;
-
-            for (int i = 0; i < VideoEdit1.Audio_Effects_Equalizer_Presets().Count; i++)
-            {
-                cbAudEqualizerPreset.Items.Add(VideoEdit1.Audio_Effects_Equalizer_Presets()[i]);
-            }
-
+            
             var genres = new List<string>();
             foreach (var genre in VideoCapture.Tags_GetDefaultVideoGenres())
             {
@@ -192,14 +187,14 @@ namespace Main_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
@@ -755,7 +750,7 @@ namespace Main_Demo
                         break;
                     }
                 case 15:
-                    outputFormat = VFVideoEditOutputFormat.MP4v8v10;
+                    outputFormat = VFVideoEditOutputFormat.MP4;
                     break;
                 case 16:
                     {
@@ -780,11 +775,11 @@ namespace Main_Demo
                     break;
             }
 
-            if ((outputFormat == VFVideoEditOutputFormat.MP4v8v10) ||
+            if ((outputFormat == VFVideoEditOutputFormat.MP4) ||
 ((outputFormat == VFVideoEditOutputFormat.Encrypted) && (rbEncryptedH264SW.IsChecked == true)) ||
                     (VideoEdit1.Network_Streaming_Enabled && (VideoEdit1.Network_Streaming_Format == VFNetworkStreamingFormat.RTSP_H264_AAC_SW)))
             {
-                var mp4Output = new VFMP4v8v10Output();
+                var mp4Output = new VFMP4Output();
                 SetMP4Output(ref mp4Output);
 
                 // encryption
@@ -3176,12 +3171,12 @@ namespace Main_Demo
                     }
                 case 15:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -3209,12 +3204,12 @@ namespace Main_Demo
                     }
                 case 18:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }

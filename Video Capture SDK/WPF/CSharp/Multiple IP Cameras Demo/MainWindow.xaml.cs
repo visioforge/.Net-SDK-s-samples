@@ -29,7 +29,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private VFMP4v8v10Output mp4Output = new VFMP4v8v10Output();
+        private VFMP4Output mp4Output = new VFMP4Output();
 
         public MainWindow()
         {

@@ -54,7 +54,7 @@ namespace Main_Demo
 
         private MFSettingsDialog movSettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -806,14 +806,14 @@ namespace Main_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
@@ -1161,7 +1161,7 @@ namespace Main_Demo
                         {
                             VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW;
 
-                            var mp4Output = new VFMP4v8v10Output();
+                            var mp4Output = new VFMP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Network_Streaming_Output = mp4Output;
 
@@ -1235,7 +1235,7 @@ namespace Main_Demo
                             {
                                 VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW;
 
-                                var mp4Output = new VFMP4v8v10Output();
+                                var mp4Output = new VFMP4Output();
                                 SetMP4Output(ref mp4Output);
                                 VideoCapture1.Network_Streaming_Output = mp4Output;
                             }
@@ -1702,7 +1702,7 @@ namespace Main_Demo
                          || (VideoCapture1.Network_Streaming_Enabled
                              && (VideoCapture1.Network_Streaming_Format == VFNetworkStreamingFormat.RTSP_H264_AAC_SW)))
                 {
-                    var mp4Output = new VFMP4v8v10Output();
+                    var mp4Output = new VFMP4Output();
                     SetMP4Output(ref mp4Output);
 
                     if (outputFormat == VFVideoCaptureOutputFormat.Encrypted)
@@ -5408,12 +5408,12 @@ namespace Main_Demo
                     }
                 case 22:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -5441,12 +5441,12 @@ namespace Main_Demo
                     }
                 case 25:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }

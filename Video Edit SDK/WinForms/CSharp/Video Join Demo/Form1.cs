@@ -14,7 +14,7 @@ namespace Video_Join_Demo
     {
         private MFSettingsDialog mp4v11SettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -291,12 +291,12 @@ namespace Video_Join_Demo
                     }
                 case 15:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -324,12 +324,12 @@ namespace Video_Join_Demo
                     }
                 case 18:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -570,8 +570,8 @@ namespace Video_Join_Demo
                     }
                 case 15:
                     {
-                        var mp4Output = new VFMP4v8v10Output();
-                        SetMP4v10Output(ref mp4Output);
+                        var mp4Output = new VFMP4Output();
+                        SetMP4Output(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
                         break;
                     }
@@ -653,14 +653,14 @@ namespace Video_Join_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4v10Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)

@@ -112,7 +112,7 @@
             VideoCapture1.Audio_RecordAudio = false;
 
             VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
-            VideoCapture1.Output_Format = new VFMP4v8v10Output();
+            VideoCapture1.Output_Format = new VFMP4Output();
             VideoCapture1.Output_Filename = edOutputFile.Text;
 
             VideoCapture1.Debug_Mode = cbDebug.Checked;

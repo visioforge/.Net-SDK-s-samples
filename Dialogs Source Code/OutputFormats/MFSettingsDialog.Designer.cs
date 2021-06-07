@@ -636,7 +636,7 @@
             this.Name = "MFSettingsDialog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MP4 v11 settings";
+            this.Text = "MP4 v11 (CPU/GPU) settings";
             this.Load += new System.EventHandler(this.MP4v11SettingsDialog_Load);
             this.tabControl24.ResumeLayout(false);
             this.tabPage111.ResumeLayout(false);

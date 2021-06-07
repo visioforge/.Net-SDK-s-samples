@@ -22,6 +22,11 @@ namespace Video_From_Images_CLI
 
         static void Main(string[] args)
         {
+            //var optionsz = new CommandLineOptions { InputFolder = "c:\\samples\\pics\\", OutputFile = "c:\\vf\\output.avi", Resolution = new[] { "1920", "1080" }, Duration = 2000, Format = "mp4" };
+            //var arguments = CommandLine.Parser.Default.FormatCommandLine(optionsz);
+
+
+
             var options = new CommandLineOptions();
             if (!VisioForge.Shared.CommandLine.Parser.Default.ParseArguments(args, options))
             {
@@ -90,7 +95,7 @@ namespace Video_From_Images_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    ve.Output_Format = new VFMP4v8v10Output();
+                    ve.Output_Format = new VFMP4Output();
                     break;
                 case "avi":
                     ve.Output_Format = new VFAVIOutput();
@@ -100,7 +105,7 @@ namespace Video_From_Images_CLI
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    ve.Output_Format = new VFMP4v8v10Output();
+                    ve.Output_Format = new VFMP4Output();
                     break;
             }
 

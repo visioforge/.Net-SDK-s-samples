@@ -44,7 +44,7 @@ namespace VideoCapture_CSharp_Demo
 
         private MFSettingsDialog movSettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -382,11 +382,6 @@ namespace VideoCapture_CSharp_Demo
 
             cbMPEGVideoDecoder_SelectedIndexChanged(null, null);
             cbMPEGAudioDecoder_SelectedIndexChanged(null, null);
-
-            foreach (string preset in VideoCapture1.Audio_Effects_Equalizer_Presets())
-            {
-                cbAudEqualizerPreset.Items.Add(preset);
-            }
 
             cbPIPMode.SelectedIndex = 0;
 
@@ -1042,7 +1037,7 @@ namespace VideoCapture_CSharp_Demo
                         }
                     case 22:
                         {
-                            var mp4Output = new VFMP4v8v10Output();
+                            var mp4Output = new VFMP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -1067,7 +1062,7 @@ namespace VideoCapture_CSharp_Demo
                         }
                     case 25:
                         {
-                            var encOutput = new VFMP4v8v10Output();
+                            var encOutput = new VFMP4Output();
                             SetMP4Output(ref encOutput);
                             encOutput.Encryption = true;
                             encOutput.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC;
@@ -1834,14 +1829,14 @@ namespace VideoCapture_CSharp_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
@@ -2113,7 +2108,7 @@ namespace VideoCapture_CSharp_Demo
                     {
                         VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW;
 
-                        var mp4Output = new VFMP4v8v10Output();
+                        var mp4Output = new VFMP4Output();
                         SetMP4Output(ref mp4Output);
                         VideoCapture1.Network_Streaming_Output = mp4Output;
 
@@ -2187,7 +2182,7 @@ namespace VideoCapture_CSharp_Demo
                         {
                             VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW;
 
-                            var mp4Output = new VFMP4v8v10Output();
+                            var mp4Output = new VFMP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Network_Streaming_Output = mp4Output;
                         }
@@ -5674,12 +5669,12 @@ namespace VideoCapture_CSharp_Demo
                     }
                 case 22:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -5707,12 +5702,12 @@ namespace VideoCapture_CSharp_Demo
                     }
                 case 25:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }

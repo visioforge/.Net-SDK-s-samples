@@ -20,7 +20,7 @@ Public Class Form1
 
     Dim movSettingsDialog As MFSettingsDialog
 
-    Dim mp4V10SettingsDialog As MP4v10SettingsDialog
+    Dim _mp4SettingsDialog As MP4SettingsDialog
 
     Dim aviSettingsDialog As AVISettingsDialog
 
@@ -254,12 +254,12 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
-    Private Sub SetMP4v10Output(ByRef mp4Output As VFMP4v8v10Output)
-        If (mp4V10SettingsDialog Is Nothing) Then
-            mp4V10SettingsDialog = New MP4v10SettingsDialog()
+    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
+        If (_mp4SettingsDialog Is Nothing) Then
+            _mp4SettingsDialog = New MP4SettingsDialog()
         End If
 
-        mp4V10SettingsDialog.SaveSettings(mp4Output)
+        _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
     Private Sub SetGIFOutput(ByRef gifOutput As VFAnimatedGIFOutput)
@@ -324,8 +324,8 @@ Public Class Form1
                     SetWMVOutput(wmvOutput)
                     VideoCapture1.Output_Format = wmvOutput
                 Case 4
-                    Dim mp4Output = New VFMP4v8v10Output()
-                    SetMP4v10Output(mp4Output)
+                    Dim mp4Output = New VFMP4Output()
+                    SetMP4Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 5
                     Dim mp4Output = New VFMP4v11Output()
@@ -407,11 +407,11 @@ Public Class Form1
                 wmvSettingsDialog.WMA = False
                 wmvSettingsDialog.ShowDialog(Me)
             Case 4
-                If (mp4V10SettingsDialog Is Nothing) Then
-                    mp4V10SettingsDialog = New MP4v10SettingsDialog()
+                If (_mp4SettingsDialog Is Nothing) Then
+                    _mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                mp4V10SettingsDialog.ShowDialog(Me)
+                _mp4SettingsDialog.ShowDialog(Me)
             Case 5
                 If (mp4v11SettingsDialog Is Nothing) Then
                     mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)

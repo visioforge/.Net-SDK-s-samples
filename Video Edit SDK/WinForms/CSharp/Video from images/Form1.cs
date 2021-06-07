@@ -21,7 +21,7 @@ namespace Video_From_Images
     {
         private MFSettingsDialog mp4v11SettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -134,14 +134,14 @@ namespace Video_From_Images
             cbOutputFormat.SelectedIndex = 7;
         }
 
-        private void SetMP4v10Output(ref VFMP4v8v10Output mp4Output)
+        private void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
@@ -363,8 +363,8 @@ namespace Video_From_Images
                         }
                     case 7:
                         {
-                            var mp4Output = new VFMP4v8v10Output();
-                            SetMP4v10Output(ref mp4Output);
+                            var mp4Output = new VFMP4Output();
+                            SetMP4Output(ref mp4Output);
                             VideoEdit1.Output_Format = mp4Output;
 
                             break;
@@ -388,8 +388,8 @@ namespace Video_From_Images
                         }
                     case 10:
                         {
-                            var encOutput = new VFMP4v8v10Output();
-                            SetMP4v10Output(ref encOutput);
+                            var encOutput = new VFMP4Output();
+                            SetMP4Output(ref encOutput);
                             encOutput.Encryption = true;
                             encOutput.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC;
 
@@ -602,12 +602,12 @@ namespace Video_From_Images
                     }
                 case 7:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -635,12 +635,12 @@ namespace Video_From_Images
                     }
                 case 10:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(this);
+                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }

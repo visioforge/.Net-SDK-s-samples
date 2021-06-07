@@ -900,8 +900,8 @@ namespace VideoEdit_CS_Demo
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe) (BETA)",
-            "MP4 v8/v10",
-            "MP4 v11",
+            "MP4",
+            "MP4 v11 (CPU/GPU)",
             "Animated GIF",
             "Encrypted video"});
             this.cbOutputVideoFormat.Location = new System.Drawing.Point(19, 34);
@@ -7284,6 +7284,7 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
             this.VideoEdit1.ChromaKey = null;
             this.VideoEdit1.CustomRedist_Auto = true;
+            this.VideoEdit1.CustomRedist_DisableDialog = false;
             this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
@@ -7326,6 +7327,7 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
             this.VideoEdit1.Video_Subtitles = null;
             this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
+            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
             this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
             this.VideoEdit1.OnFFMPEGInfo += new System.EventHandler<VisioForge.Types.FFMPEGInfoEventArgs>(this.VideoEdit1_OnFFMPEGInfo);
             this.VideoEdit1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoEdit1_OnLicenseRequired);
