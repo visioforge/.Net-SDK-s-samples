@@ -9923,7 +9923,7 @@ namespace VideoCapture_CSharp_Demo
             this.edONVIFURL.Name = "edONVIFURL";
             this.edONVIFURL.Size = new System.Drawing.Size(326, 20);
             this.edONVIFURL.TabIndex = 29;
-            this.edONVIFURL.Text = "http://192.168.1.219:8899/onvif/device_service";
+            this.edONVIFURL.Text = "http://192.168.1.64/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 

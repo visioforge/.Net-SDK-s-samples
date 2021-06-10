@@ -55,12 +55,15 @@ Public Class Form1
                 cbAudioInputLine.Items.Add(item)
             Next
 
-            cbAudioInputLine.SelectedIndex = 0
-            cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
-            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
-        End If
+            If cbAudioInputLine.Items.Count > 0 Then
+                cbAudioInputLine.SelectedIndex = 0
+                cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
+            End If
 
-        Dim defaultAudioRenderer = String.Empty
+            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
+            End If
+
+            Dim defaultAudioRenderer = String.Empty
         For i = 0 To VideoCapture1.Audio_OutputDevices.Count - 1
             cbAudioOutputDevice.Items.Add(VideoCapture1.Audio_OutputDevices.Item(i))
 

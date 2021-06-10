@@ -300,57 +300,72 @@ Public Class Form1
         IPCameraDB.ShowWindow()
     End Sub
 
-    Private Sub btONVIFConnect_Click(sender As Object, e As EventArgs) Handles btONVIFConnect.Click
+    Private Async Sub btONVIFConnect_Click(sender As Object, e As EventArgs) Handles btONVIFConnect.Click
 
         If (btONVIFConnect.Text = "Connect") Then
-            btONVIFConnect.Text = "Disconnect"
+            Dim connected As Boolean = False
 
-            If (onvifControl IsNot Nothing) Then
-                onvifControl.Disconnect()
-                onvifControl.Dispose()
-                onvifControl = Nothing
-            End If
+            Try
+                btONVIFConnect.Enabled = False
+                btONVIFConnect.Text = "Connecting"
 
-            If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
-                MessageBox.Show("Please specify IP camera user name and password.")
-                Exit Sub
-            End If
+                If (onvifControl IsNot Nothing) Then
+                    onvifControl.Disconnect()
+                    onvifControl.Dispose()
+                    onvifControl = Nothing
+                End If
 
-            onvifControl = New ONVIFControl()
-            Dim result = onvifControl.Connect(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text)
+                If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
+                    MessageBox.Show("Please specify IP camera user name and password.")
+                    Exit Sub
+                End If
 
-            If (Not result) Then
-                onvifControl = Nothing
-                MessageBox.Show("Unable to connect to ONVIF camera.")
-                Exit Sub
-            End If
+                onvifControl = New ONVIFControl()
+                Dim result = Await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text)
 
-            Dim deviceInfo = onvifControl.GetDeviceInformation()
-            lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}"
+                If (Not result) Then
+                    onvifControl = Nothing
+                    MessageBox.Show("Unable to connect to ONVIF camera.")
+                    Exit Sub
+                End If
 
-            cbONVIFProfile.Items.Clear()
+                Dim deviceInfo = Await onvifControl.GetDeviceInformationAsync()
+                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}"
 
-            Dim profiles As VisioForge.MediaFramework.ONVIF.Profile() = onvifControl.GetProfiles()
-            For Each profile As VisioForge.MediaFramework.ONVIF.Profile In profiles
-                cbONVIFProfile.Items.Add($"{profile.Name}")
-            Next
+                cbONVIFProfile.Items.Clear()
 
-            If (cbONVIFProfile.Items.Count > 0) Then
-                cbONVIFProfile.SelectedIndex = 0
-            End If
+                Dim profiles As VisioForge.MediaFramework.ONVIF.Profile() = Await onvifControl.GetProfilesAsync()
+                For Each profile As VisioForge.MediaFramework.ONVIF.Profile In profiles
+                    cbONVIFProfile.Items.Add($"{profile.Name}")
+                Next
 
-            edONVIFLiveVideoURL.Text = onvifControl.GetVideoURL()
-            cbIPURL.Text = edONVIFLiveVideoURL.Text
+                If (cbONVIFProfile.Items.Count > 0) Then
+                    cbONVIFProfile.SelectedIndex = 0
+                End If
 
-            edIPLogin.Text = edONVIFLogin.Text
-            edIPPassword.Text = edONVIFPassword.Text
+                edONVIFLiveVideoURL.Text = Await onvifControl.GetVideoURLAsync()
+                cbIPURL.Text = edONVIFLiveVideoURL.Text
 
-            onvifPtzRanges = onvifControl.PTZ_GetRanges()
-            onvifControl.PTZ_SetAbsolute(0, 0, 0)
+                edIPLogin.Text = edONVIFLogin.Text
+                edIPPassword.Text = edONVIFPassword.Text
 
-            onvifPtzX = 0
-            onvifPtzY = 0
-            onvifPtzZoom = 0
+                onvifPtzRanges = Await onvifControl.PTZ_GetRangesAsync()
+                Await onvifControl.PTZ_SetAbsoluteAsync(0, 0, 0)
+
+                onvifPtzX = 0
+                onvifPtzY = 0
+                onvifPtzZoom = 0
+
+                btONVIFConnect.Text = "Disconnect"
+            Catch ex As Exception
+
+            Finally
+                btONVIFConnect.Enabled = True
+
+                If (Not connected) Then
+                    btONVIFConnect.Text = "Connect"
+                End If
+            End Try
         Else
             btONVIFConnect.Text = "Connect"
 
@@ -360,7 +375,6 @@ Public Class Form1
                 onvifControl = Nothing
             End If
         End If
-
     End Sub
 
     Private Sub btONVIFRight_Click(sender As Object, e As EventArgs) Handles btONVIFRight.Click

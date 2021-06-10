@@ -14,7 +14,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
     {
         private MFSettingsDialog mfSettingsDialog;
 
-        private MP4v10SettingsDialog mp4V10SettingsDialog;
+        private MP4SettingsDialog mp4SettingsDialog;
 
         private AVISettingsDialog aviSettingsDialog;
 
@@ -198,23 +198,23 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
                 case VFVideoCaptureOutputFormat.MP4_CUDA:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(parent);
+                        this.mp4SettingsDialog.ShowDialog(parent);
 
                         break;
                     }
                 case VFVideoCaptureOutputFormat.MP4v8v10:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(parent);
+                        this.mp4SettingsDialog.ShowDialog(parent);
 
                         break;
                     }
@@ -231,12 +231,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
                 case VFVideoCaptureOutputFormat.Encrypted:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        mp4V10SettingsDialog.ShowDialog(parent);
+                        this.mp4SettingsDialog.ShowDialog(parent);
 
                         break;
                     }
@@ -327,14 +327,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        public void SetMP4Output(ref VFMP4v8v10Output mp4Output)
+        public void SetMP4Output(ref VFMP4Output mp4Output)
         {
-            if (mp4V10SettingsDialog == null)
+            if (this.mp4SettingsDialog == null)
             {
-                mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                this.mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            mp4V10SettingsDialog.SaveSettings(ref mp4Output);
+            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         public void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
@@ -667,12 +667,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
                 case VFVideoCaptureOutputFormat.MP4_CUDA:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        var mp4Output = new VFMP4v8v10Output();
+                        var mp4Output = new VFMP4Output();
                         SetMP4Output(ref mp4Output);
                         core.Output_Format = mp4Output;
 
@@ -680,12 +680,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
                 case VFVideoCaptureOutputFormat.MP4v8v10:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        var mp4Output = new VFMP4v8v10Output();
+                        var mp4Output = new VFMP4Output();
                         SetMP4Output(ref mp4Output);
                         core.Output_Format = mp4Output;
 
@@ -701,12 +701,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
                 case VFVideoCaptureOutputFormat.Encrypted:
                     {
-                        if (mp4V10SettingsDialog == null)
+                        if (this.mp4SettingsDialog == null)
                         {
-                            mp4V10SettingsDialog = new MP4v10SettingsDialog();
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        var mp4Output = new VFMP4v8v10Output();
+                        var mp4Output = new VFMP4Output();
                         SetMP4Output(ref mp4Output);
                         mp4Output.Encryption = true;
                         core.Output_Format = mp4Output;
@@ -843,10 +843,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     aviSettingsDialog = null;
                 }
 
-                if (mp4V10SettingsDialog != null)
+                if (this.mp4SettingsDialog != null)
                 {
-                    mp4V10SettingsDialog.Dispose();
-                    mp4V10SettingsDialog = null;
+                    this.mp4SettingsDialog.Dispose();
+                    this.mp4SettingsDialog = null;
                 }
                 
                 if (gifSettingsDialog != null)

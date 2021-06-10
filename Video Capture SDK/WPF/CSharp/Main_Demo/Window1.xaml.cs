@@ -4847,60 +4847,80 @@ namespace Main_Demo
             IPCameraDB.ShowWindow();
         }
 
-        private void btONVIFConnect_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
-            if (btONVIFConnect.Content.ToString() == "Connect")
+            if (btONVIFConnect.Content == "Connect")
             {
-                btONVIFConnect.Content = "Disconnect";
+                var connected = false;
 
-                if (onvifControl != null)
+                try
                 {
-                    onvifControl.Disconnect();
-                    onvifControl.Dispose();
-                    onvifControl = null;
-                }
+                    btONVIFConnect.IsEnabled = false;
+                    btONVIFConnect.Content = "Connecting";
 
-                if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
+                    if (onvifControl != null)
+                    {
+                        onvifControl.Disconnect();
+                        onvifControl.Dispose();
+                        onvifControl = null;
+                    }
+
+                    if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
+                    {
+                        MessageBox.Show("Please specify IP camera user name and password.");
+                        return;
+                    }
+
+                    onvifControl = new ONVIFControl();
+                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    if (!result)
+                    {
+                        onvifControl = null;
+                        MessageBox.Show("Unable to connect to ONVIF camera.");
+                        return;
+                    }
+
+                    var deviceInfo = await onvifControl.GetDeviceInformationAsync();
+                    if (deviceInfo != null)
+                    {
+                        lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                    }
+
+                    cbONVIFProfile.Items.Clear();
+                    var profiles = await onvifControl.GetProfilesAsync();
+                    foreach (var profile in profiles)
+                    {
+                        cbONVIFProfile.Items.Add($"{profile.Name}");
+                    }
+
+                    if (cbONVIFProfile.Items.Count > 0)
+                    {
+                        cbONVIFProfile.SelectedIndex = 0;
+                    }
+
+                    edONVIFLiveVideoURL.Text = cbIPURL.Text = await onvifControl.GetVideoURLAsync();
+
+                    edIPLogin.Text = edONVIFLogin.Text;
+                    edIPPassword.Text = edONVIFPassword.Text;
+
+                    onvifPtzRanges = await onvifControl.PTZ_GetRangesAsync();
+                    await onvifControl.PTZ_SetAbsoluteAsync(0, 0, 0);
+
+                    onvifPtzX = 0;
+                    onvifPtzY = 0;
+                    onvifPtzZoom = 0;
+
+                    btONVIFConnect.Content = "Disconnect";
+                }
+                finally
                 {
-                    MessageBox.Show("Please specify IP camera user name and password.");
-                    return;
+                    btONVIFConnect.IsEnabled = true;
+
+                    if (!connected)
+                    {
+                        btONVIFConnect.Content = "Connect";
+                    }
                 }
-
-                onvifControl = new ONVIFControl();
-                var result = onvifControl.Connect(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
-                if (!result)
-                {
-                    onvifControl = null;
-                    MessageBox.Show("Unable to connect to ONVIF camera.");
-                    return;
-                }
-
-                var deviceInfo = onvifControl.GetDeviceInformation();
-                lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
-
-                edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl.GetVideoURL();
-
-                edIPLogin.Text = edONVIFLogin.Text;
-                edIPPassword.Text = edONVIFPassword.Text;
-
-                cbONVIFProfile.Items.Clear();
-                var profiles = onvifControl.GetProfiles();
-                foreach (var profile in profiles)
-                {
-                    cbONVIFProfile.Items.Add($"{profile.Name}");
-                }
-
-                if (cbONVIFProfile.Items.Count > 0)
-                {
-                    cbONVIFProfile.SelectedIndex = 0;
-                }
-
-                onvifPtzRanges = onvifControl.PTZ_GetRanges();
-                onvifControl.PTZ_SetAbsolute(0, 0, 0);
-
-                onvifPtzX = 0;
-                onvifPtzY = 0;
-                onvifPtzZoom = 0;
             }
             else
             {
