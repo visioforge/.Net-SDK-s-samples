@@ -308,7 +308,7 @@ namespace IP_Capture
 
             if (cbIPDisconnect.IsChecked == true)
             {
-                VideoCapture1.IP_Camera_Source.DisconnectEventInterval = 5000;
+                VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
 
             if (rbPreview.IsChecked == true)
@@ -1085,6 +1085,17 @@ namespace IP_Capture
             {
                 cbIPURL.SelectedIndex = 0;
             }
+        }
+
+        private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke((Action)(
+                               async () =>
+                                   {
+                                       await VideoCapture1.StopAsync();
+
+                                       MessageBox.Show("Network source stopped or disconnected!");
+                                   }));
         }
     }
 }

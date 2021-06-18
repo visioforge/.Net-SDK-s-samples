@@ -792,7 +792,7 @@ namespace Main_Demo
 
             if (cbIPDisconnect.IsChecked == true)
             {
-                settings.DisconnectEventInterval = 5000;
+                settings.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
         }
 

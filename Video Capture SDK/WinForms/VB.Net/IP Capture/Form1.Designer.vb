@@ -1074,8 +1074,9 @@ Partial Class Form1
         Me.VideoCapture1.BDA_Source = Nothing
         Me.VideoCapture1.ChromaKey = Nothing
         Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Auto = true
-        Me.VideoCapture1.CustomRedist_Enabled = false
+        Me.VideoCapture1.CustomRedist_Auto = True
+        Me.VideoCapture1.CustomRedist_DisableDialog = False
+        Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
         Me.VideoCapture1.Debug_DisableMessageDialogs = false

@@ -119,12 +119,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.1.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.1.15" />
 
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="14.1.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="14.1.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.1.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.1.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="14.1.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="14.1.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.1.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.1.15" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

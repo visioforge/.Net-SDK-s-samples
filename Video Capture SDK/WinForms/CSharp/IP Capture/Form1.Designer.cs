@@ -1126,6 +1126,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -1216,6 +1217,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.VLC_Path = null;
             this.VideoCapture1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoCapture1_OnError);
             this.VideoCapture1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoCapture1_OnLicenseRequired);
+            this.VideoCapture1.OnNetworkSourceDisconnect += new System.EventHandler<System.EventArgs>(this.VideoCapture1_OnNetworkSourceDisconnect);
             // 
             // label2
             // 

@@ -143,7 +143,7 @@
 
         <my:VideoCapture Margin="560,31,10,41" Background="Black" x:Name="VideoCapture1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                              OnError="VideoCapture1_OnError"
-                             OnLicenseRequired="VideoCapture1_OnLicenseRequired" />
+                             OnLicenseRequired="VideoCapture1_OnLicenseRequired" OnNetworkSourceDisconnect="VideoCapture1_OnNetworkSourceDisconnect" />
 
         <Label Content="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,0,122,0" VerticalAlignment="Top" Grid.Column="1"/>
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="279,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>

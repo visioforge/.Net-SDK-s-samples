@@ -2422,7 +2422,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbIPDisconnect.Checked)
             {
-                settings.DisconnectEventInterval = 5000;
+                settings.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
         }
 
@@ -4593,16 +4593,13 @@ namespace VideoCapture_CSharp_Demo
 
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
-            BeginInvoke(new NetworkStopDelegate(NetworkStopDelegateMethod));
-        }
+            Invoke((Action)(
+                async () =>
+                    {
+                        await VideoCapture1.StopAsync();
 
-        private delegate void NetworkStopDelegate();
-
-        private async void NetworkStopDelegateMethod()
-        {
-            await VideoCapture1.StopAsync();
-
-            MessageBox.Show("Network source stopped or disconnected!");
+                        MessageBox.Show("Network source stopped or disconnected!");
+                    }));
         }
 
         private void VideoCapture1_OnAudioVUMeterProVolume(object sender, AudioLevelEventArgs e)

@@ -153,25 +153,25 @@ Public Class Form1
         VideoCapture1.Audio_RecordAudio = cbIPAudioCapture.Checked
         VideoCapture1.Audio_PlayAudio = cbIPAudioCapture.Checked
 
-        VideoCapture1.Video_Renderer_SetAuto
+        VideoCapture1.Video_Renderer_SetAuto()
 
         'source
         VideoCapture1.IP_Camera_Source = New IPCameraSourceSettings()
 
-        Dim lavGPU As Boolean = false
+        Dim lavGPU As Boolean = False
         Select Case (cbIPCameraType.SelectedIndex)
-            Case 0 :
+            Case 0
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC
-            Case 1 : 
+            Case 1
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG
-            Case 2 : 
+            Case 2
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
-            Case 3 : 
+            Case 3
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
-                lavGPU = true
-            Case 4 : 
+                lavGPU = True
+            Case 4
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555
-            Case 5 : 
+            Case 5
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
             Case 6
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency
@@ -196,18 +196,24 @@ Public Class Form1
         VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text
         VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked
         VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text)
+        VideoCapture1.IP_Camera_Source.ForcedFramerate = Convert.ToInt32(edIPForcedFramerate.Text)
+        VideoCapture1.IP_Camera_Source.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text(0)
 
-        If (VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV) Then
+        If VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV Then
             VideoCapture1.IP_Camera_Source.LAV_GPU_Use = lavGPU
             VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack
         End If
 
-        If (cbIPCameraONVIF.Checked) Then
+        If cbIPCameraONVIF.Checked Then
             VideoCapture1.IP_Camera_Source.ONVIF_Source = True
 
-            If (cbONVIFProfile.SelectedIndex <> -1) Then
+            If cbONVIFProfile.SelectedIndex <> -1 Then
                 VideoCapture1.IP_Camera_Source.ONVIF_SourceProfile = cbONVIFProfile.Text
             End If
+        End If
+
+        If cbIPDisconnect.Checked Then
+            VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10)
         End If
 
         If rbPreview.Checked Then
@@ -216,7 +222,7 @@ Public Class Form1
             VideoCapture1.Mode = VFVideoCaptureMode.IPCapture
             VideoCapture1.Output_Filename = edOutput.Text
 
-            Select Case (cbOutputFormat.SelectedIndex)
+            Select Case cbOutputFormat.SelectedIndex
                 Case 0
                     Dim aviOutput = New VFAVIOutput()
                     SetAVIOutput(aviOutput)
@@ -833,7 +839,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private async Sub btListONVIFSources_Click(sender As Object, e As EventArgs) Handles btListONVIFSources.Click
+    Private Async Sub btListONVIFSources_Click(sender As Object, e As EventArgs) Handles btListONVIFSources.Click
         cbIPURL.Items.Clear()
 
         Dim lst As Uri() = Await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(Nothing, Nothing)
@@ -844,6 +850,13 @@ Public Class Form1
         If (cbIPURL.Items.Count > 0) Then
             cbIPURL.SelectedIndex = 0
         End If
+    End Sub
+
+    Private Sub VideoCapture1_OnNetworkSourceDisconnect(sender As Object, e As EventArgs) Handles VideoCapture1.OnNetworkSourceDisconnect
+        Invoke(Async Sub()
+                   Await VideoCapture1.StopAsync()
+                   MessageBox.Show("Network source stopped or disconnected!")
+               End Sub)
     End Sub
 End Class
 

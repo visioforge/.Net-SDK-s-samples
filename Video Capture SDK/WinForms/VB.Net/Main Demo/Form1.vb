@@ -1938,7 +1938,7 @@ Public Class Form1
         End If
 
         If (cbIPDisconnect.Checked) Then
-            settings.DisconnectEventInterval = 5000
+            settings.DisconnectEventInterval = TimeSpan.FromSeconds(10)
         End If
 
         Return settings

@@ -164,6 +164,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text;
             VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked;
             VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
+            VideoCapture1.IP_Camera_Source.ForcedFramerate = Convert.ToInt32(edIPForcedFramerate.Text);
+            VideoCapture1.IP_Camera_Source.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text[0];
 
             if (VideoCapture1.IP_Camera_Source.Type == VFIPSource.Auto_LAV)
             {
@@ -179,6 +181,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 {
                     VideoCapture1.IP_Camera_Source.ONVIF_SourceProfile = cbONVIFProfile.Text;
                 }
+            }
+
+            if (cbIPDisconnect.Checked)
+            {
+                VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
 
             if (rbPreview.Checked)
@@ -1074,6 +1081,17 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             {
                 cbIPURL.SelectedIndex = 0;
             }
+        }
+
+        private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
+        {
+            Invoke((Action)(
+                               async () =>
+                                   {
+                                       await VideoCapture1.StopAsync();
+
+                                       MessageBox.Show("Network source stopped or disconnected!");
+                                   }));
         }
     }
 }
