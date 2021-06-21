@@ -1,0 +1,200 @@
+﻿<Window x:Class="Simple_Video_Capture.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:converters="clr-namespace:Simple_Video_Capture.Converters"
+        Title="{Binding Title}"
+        Height="512" Width="864" 
+        Loaded="Window_Loaded"
+        Icon="visioforge_main_icon.ico"
+        x:Name="mainWindow">
+    <Window.Resources>
+        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+
+        <Style x:Key="DefaultLabelStyle" TargetType="Label">
+            <Setter Property="Height" Value="28" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style x:Key="RightAlignedLabelStyle" TargetType="Label" BasedOn="{StaticResource DefaultLabelStyle}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="DefaultComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="23" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Margin="12,12,0,0" Name="tcMain" Width="408" Height="419" VerticalAlignment="Top" SelectedIndex="{Binding SelectedContentIndex, Mode=TwoWay}">
+            <TabItem Header="Devices" Name="tabItem1">
+                <Grid>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="6,6,0,0" Name="label1" Width="120">Video input device</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="12,29,117,0" Name="cbVideoInputDevice"
+                              ItemsSource="{Binding VideoInputDevices}" SelectedItem="{Binding SelectedVideoInputDevice, Mode=TwoWay}" DisplayMemberPath="Name"/>
+                    <Button Height="23" HorizontalAlignment="Right" Margin="0,29,36,0" Name="btVideoCaptureDeviceSettings" VerticalAlignment="Top" Width="75"
+                            IsEnabled="{Binding SelectedVideoInputDevice.DialogDefault}"
+                            Command="{Binding ConfigureVideoInputDeviceCommand}">Settings</Button>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="6,59,0,0" Name="label2" Width="120">Video input format</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="12,82,117,0" Name="cbVideoInputFormat"
+                              ItemsSource="{Binding SelectedVideoInputDevice.VideoFormats}"
+                              SelectedItem="{Binding SelectedVideoFormat, Mode=TwoWay}"
+                              IsEnabled="{Binding IsChecked, ElementName=cbUseBestVideoInputFormat, Converter={StaticResource InvertBooleanConverter}}"/>
+                    <CheckBox Height="16" Margin="0,64,117,0" Name="cbUseBestVideoInputFormat" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71"
+                              IsChecked="{Binding UseBestVideoInputFormat, Mode=TwoWay}">Use best</CheckBox>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="285,59,0,0" Name="label3" Width="75">Frame rate</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              HorizontalAlignment="Right" Margin="0,82,36,0" x:Name="cbVideoInputFrameRate" Width="75"
+                              ItemsSource="{Binding SelectedVideoFormat.FrameRates}"
+                              SelectedItem="{Binding SelectedFrameRate, Mode=TwoWay}" />
+                    
+                    <Label Style="{StaticResource RightAlignedLabelStyle}"
+                           Margin="0,80,0,0" Name="label4" Width="32">fps</Label>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="6,140,0,0" Name="label5" Width="120">Audio input device</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="12,163,117,0" Name="cbAudioInputDevice"
+                              ItemsSource="{Binding AudioInputDevices}"
+                              SelectedItem="{Binding SelectedAudioInputDevice, Mode=TwoWay}"
+                              DisplayMemberPath="Name"
+                              IsEnabled="{Binding IsChecked, ElementName=cbUseAudioInputFromVideoCaptureDevice, Converter={StaticResource InvertBooleanConverter}}" />
+
+                    <Button Height="23" HorizontalAlignment="Right" Margin="0,163,36,0" Name="btAudioInputDeviceSettings"
+                            VerticalAlignment="Top" Width="75"
+                            IsEnabled="{Binding CanConfigureAudioInputDevice}"
+                            Command="{Binding ConfigureAudioInputDeviceCommand}"
+                            Content="Settings"/>
+
+                    <CheckBox Height="16" Margin="161,145,0,0" Name="cbUseAudioInputFromVideoCaptureDevice" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"
+                              IsEnabled="{Binding SelectedVideoInputDevice.AudioOutput}"
+                              IsChecked="{Binding UseAudioInputFromVideoSource, Mode=TwoWay}">Use audio input from video source</CheckBox>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="6,191,0,0" Name="label6" Width="120" >Audio input line</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="12,214.04,0,0" Name="cbAudioInputLine" Width="166" HorizontalAlignment="Left"
+                              ItemsSource="{Binding SelectedAudioInputDevice.Lines}"
+                              SelectedItem="{Binding SelectedAudioInputLine, Mode=TwoWay}"/>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="190,191,128,0" Name="label7">Input format</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="0,214.04,36,0" HorizontalAlignment="Right" Width="166" Name="cbAudioInputFormat"
+                              ItemsSource="{Binding SelectedAudioInputDevice.Formats}"
+                              SelectedItem="{Binding SelectedAudioInputFormat, Mode=TwoWay}"
+                              IsEnabled="{Binding IsChecked, ElementName=cbUseBestAudioInputFormat, Converter={StaticResource InvertBooleanConverter}}" />
+                    <CheckBox Height="16" HorizontalAlignment="Right" Margin="0,196,38,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="71"
+                              IsChecked="{Binding UseBestAudioInputFormat, Mode=TwoWay}">Use best</CheckBox>
+
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="6,266.04,0,0" Name="label8" Width="120">Audio output device</Label>
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="12,289.04,36,0" Name="cbAudioOutputDevice"
+                              ItemsSource="{Binding AudioOutputDevices}"
+                              SelectedItem="{Binding SelectedAudioOutputDevice, Mode=TwoWay}"/>
+                    <CheckBox Height="16" HorizontalAlignment="Right" Margin="0,271,38,0" Name="cbRecordAudio"
+                              VerticalAlignment="Top" Width="125"
+                              IsChecked="{Binding RecordAudio, Mode=TwoWay}">Play/record audio</CheckBox>
+                    <Slider Height="22" Margin="88,333,0,0" Name="tbAudioVolume" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100"
+                            Maximum="{Binding MaxVolumeValue}" Minimum="{Binding MinVolumeValue}" Value="{Binding CurrentVolumeValue}"/>
+                    <Label Style="{StaticResource DefaultLabelStyle}"
+                           Margin="12,329.04,0,0" Name="label9" Width="70">Volume</Label>
+                    <Slider Height="22" HorizontalAlignment="Right" Margin="0,333,13,0" Name="tbAudioBalance" VerticalAlignment="Top" Width="100"
+                            Maximum="{Binding MaxBalanceValue}" Minimum="{Binding MinBalanceValue}" Value="{Binding CurrentBalanceValue}"/>
+                    <Label Style="{StaticResource RightAlignedLabelStyle}"
+                           Margin="0,329.04,119,0" Name="label10" Width="70">Balance</Label>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Output" Name="tabItem2">
+                <Grid>
+                    <Label Style="{StaticResource DefaultLabelStyle}" Content="Format" Margin="10,10,0,0" Width="51" />
+                    <ComboBox Style="{StaticResource DefaultComboBoxStyle}"
+                              Margin="10,33,0,0" x:Name="cbOutputFormat" Width="323" HorizontalAlignment="Left"
+                              ItemsSource="{Binding OutputFormats}" SelectedItem="{Binding SelectedOutputFormat, Mode=TwoWay}" DisplayMemberPath="Description"/>
+                    <Label Style="{StaticResource DefaultLabelStyle}" Content="File name" Margin="10,148,0,0" Width="62" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="353"
+                             Text="{Binding OutputFileName, Mode=TwoWay}" />
+                    <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,176,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24"
+                            Command="{Binding BrowseForOutputFileCommand}" />
+                    <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75"
+                            Command="{Binding ConfigureOutputFormatCommand}" />
+                    <Label Style="{StaticResource DefaultLabelStyle}" Content="You can use dialog or code to configure format settings" Margin="10,61,0,0" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Video effects" Name="tabItem3">
+                <Grid>
+                    <ListBox x:Name="lbLogos" HorizontalAlignment="Left" Height="119" VerticalAlignment="Top" Width="382" Margin="10,36,0,0"
+                             ItemsSource="{Binding Logos}" SelectedItem="{Binding SelectedLogo, Mode=TwoWay}" DisplayMemberPath="Name"/>
+                    <Button x:Name="btImageLogoAdd" Content="Add image logo" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="110"
+                            Command="{Binding AddImageLogoCommand}"/>
+                    <Button x:Name="btTextLogoAdd" Content="Add text logo" HorizontalAlignment="Left" Margin="125,160,0,0" VerticalAlignment="Top" Width="110" 
+                            Command="{Binding AddTextLogoCommand}"/>
+                    <Button x:Name="btLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="287,160,0,0" VerticalAlignment="Top" Width="50"
+                            Command="{Binding EditLogoCommand}"/>
+                    <Button x:Name="btLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="342,160,0,0" VerticalAlignment="Top" Width="50" 
+                            Command="{Binding RemoveLogoCommand}"/>
+                    <Label x:Name="label" Content="Image / text logos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="46,239,0,0" x:Name="tbLightness" VerticalAlignment="Top" Width="100"
+                            Minimum="{Binding MinLightnessValue}" Maximum="{Binding MaxLightnessValue}" Value="{Binding CurrentLightnessValue, Mode=TwoWay}"/>
+                    <Label Content="Lightness" HorizontalAlignment="Left" Margin="71,212,0,0" x:Name="label92" Width="86" Height="28" VerticalAlignment="Top" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="214,239,0,0" x:Name="tbSaturation" VerticalAlignment="Top" Width="100"
+                            Minimum="{Binding MinSaturationValue}" Maximum="{Binding MaxSaturationValue}" Value="{Binding CurrentSaturationValue, Mode=TwoWay}"/>
+                    <Label Content="Saturation" HorizontalAlignment="Left" Margin="237,212,0,0" x:Name="label93" Width="86" Height="28" VerticalAlignment="Top" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="46,286,0,0" x:Name="tbContrast" VerticalAlignment="Top" Width="100"
+                            Minimum="{Binding MinContrastValue}" Maximum="{Binding MaxContrastValue}" Value="{Binding CurrentContrastValue, Mode=TwoWay}"/>
+                    <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="67,259,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
+                    <Slider Height="23" HorizontalAlignment="Left" Margin="214,286,0,0" x:Name="tbDarkness" VerticalAlignment="Top" Width="100"
+                            Minimum="{Binding MinDarknessValue}" Maximum="{Binding MaxDarknessValue}" Value="{Binding CurrentDarknessValue, Mode=TwoWay}"/>
+                    <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="237,259,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
+                    <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="21,330,0,0" x:Name="cbGreyscale" VerticalAlignment="Top"
+                              IsChecked="{Binding GrayscaleEffectEnabled, Mode=TwoWay}" />
+                    <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="96,330,0,0" x:Name="cbInvert" VerticalAlignment="Top"
+                              IsChecked="{Binding InvertEffectEnabled, Mode=TwoWay}"/>
+                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,330,0,0" VerticalAlignment="Top"
+                              IsChecked="{Binding FlipXEffectEnabled, Mode=TwoWay}"/>
+                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,330,0,0" VerticalAlignment="Top"
+                              IsChecked="{Binding FlipYEffectEnabled, Mode=TwoWay}"/>
+                    <Label x:Name="label114" Content="More effects and settings available in Main Demo" HorizontalAlignment="Left" Margin="33,363,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbMergeTextLogos" Content="Merge text logos into one" HorizontalAlignment="Left" Margin="202,185,0,0" VerticalAlignment="Top"
+                              IsChecked="{Binding MergeTextLogos, Mode=TwoWay}"/>
+                    <CheckBox x:Name="cbMergeImageLogos" Content="Merge image logos into one" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"
+                              IsChecked="{Binding MergeImageLogos, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log" Name="tabItem5">
+                <Grid>
+                    <CheckBox x:Name="cbDebugMode" Height="17" Width="94" TabIndex="75" Margin="0,10,298,0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                              Content="Debug mode"
+                              IsChecked="{Binding DebugMode, Mode=TwoWay}"/>
+                    <TextBox x:Name="mmLog" TabIndex="74" Margin="10,32,10,10" TextWrapping="Wrap"
+                             Text="{Binding Log, Mode=TwoWay}"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="Stop" Name="btStop" Height="23" Width="62" TabIndex="54" Margin="0,0,295,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold"
+                Command="{Binding StopCommand}"/>
+        <Button Content="Start" Name="btStart" Height="23" Width="62" TabIndex="53" Margin="0,0,362,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold"
+                Command="{Binding StartCommand}"/>
+        <ContentControl prism:RegionManager.RegionName="VideoCaptureRegion" Margin="434,33,10,145" />
+        <Label Content="View video tutorials" Height="28" HorizontalAlignment="Right" Margin="0,0,17,0" Name="lbViewVideoTutorials" VerticalAlignment="Top" Foreground="Blue" FontWeight="Bold">
+            <Label.InputBindings>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding ViewVideoTutorialsCommand}" />
+            </Label.InputBindings>
+        </Label>
+        <Label Content="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,0,178,0" Height="26" VerticalAlignment="Top"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="17,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" Content="Preview"
+                     IsChecked="{Binding PreviewMode, Mode=TwoWay}"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="115,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"
+                     IsChecked="{Binding PreviewMode, Mode=TwoWay, Converter={StaticResource InvertBooleanConverter}}"/>
+        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="225,0,0,10" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="139"
+                   Text="{Binding RecordingTimeText}"/>
+        <Button Content="Resume" Margin="0,0,148,10" x:Name="btResume" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"
+                Command="{Binding ResumeCommand}"/>
+        <Button Content="Pause" Margin="0,0,211,10" x:Name="btPause" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"
+                Command="{Binding PauseCommand}"/>
+        <Button Content="Save snapshot" Margin="0,0,10,10" x:Name="btSaveScreenshot_Copy" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118"
+                Command="{Binding SaveSnapshotCommand}"/>
+    </Grid>
+</Window>
