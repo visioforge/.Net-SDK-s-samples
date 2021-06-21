@@ -119,7 +119,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.1.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.1.17" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
