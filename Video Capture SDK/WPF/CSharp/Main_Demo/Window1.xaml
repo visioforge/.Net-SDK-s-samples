@@ -562,7 +562,7 @@
                               VerticalAlignment="Top" Width="346">
                         <ComboBoxItem Content="Windows Media Video"/>
                         <ComboBoxItem Content="RTSP"/>
-                        <ComboBoxItem Content="RTMP to Adobe Media Server / Wowza"/>
+                        <ComboBoxItem Content="RTMP (including YouTube and Facebook)"/>
                         <ComboBoxItem Content="NDI"/>
                         <ComboBoxItem Content="UDP"/>
                         <ComboBoxItem Content="Smooth Streaming to Microsoft IIS"/>

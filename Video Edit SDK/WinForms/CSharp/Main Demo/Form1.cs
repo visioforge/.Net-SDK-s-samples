@@ -404,7 +404,7 @@ namespace VideoEdit_CS_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGDLLOutput ffmpegDLLOutput)
+        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
         {
             if (ffmpegDLLSettingsDialog == null)
             {
@@ -855,7 +855,7 @@ namespace VideoEdit_CS_Demo
                     {
                         outputFormat = VFVideoEditOutputFormat.FFMPEG_DLL;
 
-                        var ffmpegDLLOutput = new VFFFMPEGDLLOutput();
+                        var ffmpegDLLOutput = new VFFFMPEGOutput();
                         SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
                         VideoEdit1.Output_Format = ffmpegDLLOutput;
 

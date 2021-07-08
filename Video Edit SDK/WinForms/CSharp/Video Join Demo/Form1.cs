@@ -556,7 +556,7 @@ namespace Video_Join_Demo
                     }
                 case 13:
                     {
-                        var ffmpegDLLOutput = new VFFFMPEGDLLOutput();
+                        var ffmpegDLLOutput = new VFFFMPEGOutput();
                         SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
                         VideoEdit1.Output_Format = ffmpegDLLOutput;
                         break;
@@ -715,7 +715,7 @@ namespace Video_Join_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGDLLOutput ffmpegDLLOutput)
+        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
         {
             if (ffmpegDLLSettingsDialog == null)
             {

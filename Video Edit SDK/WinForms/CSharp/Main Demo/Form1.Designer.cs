@@ -4949,7 +4949,7 @@ namespace VideoEdit_CS_Demo
             this.cbNetworkStreamingMode.Items.AddRange(new object[] {
             "Windows Media Video",
             "RTSP",
-            "RTMP to Adobe Media Server / Wowza",
+            "RTMP (including YouTube and Facebook)",
             "NDI",
             "UDP",
             "Smooth Streaming to Microsoft IIS",

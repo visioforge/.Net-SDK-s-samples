@@ -605,7 +605,7 @@
                     <ComboBox x:Name="cbNetworkStreamingMode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="356" Margin="10,31,0,0">
                         <ComboBoxItem Content="Windows Media Video"/>
                         <ComboBoxItem Content="RTSP"/>
-                        <ComboBoxItem Content="RTMP to Adobe Media Server / Wowza"/>
+                        <ComboBoxItem Content="RTMP (including YouTube and Facebook)"/>
                         <ComboBoxItem Content="NDI"/>
                         <ComboBoxItem Content="UDP"/>
                         <ComboBoxItem Content="Smooth Streaming to Microsoft IIS"/>

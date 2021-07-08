@@ -1021,7 +1021,7 @@ namespace VideoCapture_CSharp_Demo
                         }
                     case 20:
                         {
-                            var ffmpegDLLOutput = new VFFFMPEGDLLOutput();
+                            var ffmpegDLLOutput = new VFFFMPEGOutput();
                             SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
                             VideoCapture1.Output_Format = ffmpegDLLOutput;
 
@@ -1891,7 +1891,7 @@ namespace VideoCapture_CSharp_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGDLLOutput ffmpegDLLOutput)
+        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
         {
             if (ffmpegDLLSettingsDialog == null)
             {

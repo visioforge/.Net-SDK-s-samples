@@ -9953,7 +9953,7 @@ Partial Class Form1
         '
         Me.cbNetworkStreamingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNetworkStreamingMode.FormattingEnabled = True
-        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP to Adobe Media Server / Wowza", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "HTTP Live Streaming (HLS)", "Output to external virtual devices"})
+        Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP (including YouTube and Facebook)", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "HTTP Live Streaming (HLS)", "Output to external virtual devices"})
         Me.cbNetworkStreamingMode.Location = New System.Drawing.Point(19, 38)
         Me.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode"
         Me.cbNetworkStreamingMode.Size = New System.Drawing.Size(276, 21)

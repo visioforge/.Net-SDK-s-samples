@@ -360,7 +360,7 @@ Public Class Form1
         _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGDLLOutput)
+    Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGOutput)
         If (ffmpegDLLSettingsDialog Is Nothing) Then
             ffmpegDLLSettingsDialog = New FFMPEGDLLSettingsDialog()
         End If
@@ -754,7 +754,7 @@ Public Class Form1
             Case 13
                 outputFormat = VFVideoEditOutputFormat.FFMPEG_DLL
 
-                Dim ffmpegDLLOutput = New VFFFMPEGDLLOutput()
+                Dim ffmpegDLLOutput = New VFFFMPEGOutput()
                 SetFFMPEGDLLOutput(ffmpegDLLOutput)
                 VideoEdit1.Output_Format = ffmpegDLLOutput
             Case 14
