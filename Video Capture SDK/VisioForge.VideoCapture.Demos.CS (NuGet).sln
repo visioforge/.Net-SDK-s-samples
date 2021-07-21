@@ -83,6 +83,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images Demo (NuG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF MVVM (NuGet)", "WPF\CSharp\Simple Video Capture MVVM\Simple Video Capture Demo WPF MVVM (NuGet).csproj", "{41BA20E5-405B-4EB2-BB5C-45906108E043}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snippets Demo VC (NuGet)", "WinForms\CSharp\Snippets Demo\Snippets Demo VC (NuGet).csproj", "{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -347,6 +349,14 @@ Global
 		{41BA20E5-405B-4EB2-BB5C-45906108E043}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41BA20E5-405B-4EB2-BB5C-45906108E043}.Release|x86.ActiveCfg = Release|Any CPU
 		{41BA20E5-405B-4EB2-BB5C-45906108E043}.Release|x86.Build.0 = Release|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -390,6 +400,7 @@ Global
 		{9D93AA3F-12F7-46ED-87D3-7BAADDEDDAAA} = {3F3567FA-DE52-4B4A-90B2-CE0EE171BA30}
 		{C19DFDB0-10C3-4E75-A332-0E658A0E9369} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
 		{41BA20E5-405B-4EB2-BB5C-45906108E043} = {3F3567FA-DE52-4B4A-90B2-CE0EE171BA30}
+		{0D40C368-A74D-4956-ABFA-A0F1A2C3598B} = {EA0E8887-9E3A-4617-AB41-7FE409391A68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

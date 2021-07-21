@@ -147,7 +147,6 @@
             this.MediaPlayer1.Virtual_Camera_Output_Enabled = false;
             this.MediaPlayer1.Virtual_Camera_Output_LicenseKey = null;
             this.MediaPlayer1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.MediaPlayer1_OnError);
-            this.MediaPlayer1.OnYouTubeVideoPlayback += new System.EventHandler<VisioForge.Types.YouTubeVideoPlaybackEventArgs>(this.MediaPlayer1_OnYouTubeVideoPlayback);
             // 
             // lbTime
             // 

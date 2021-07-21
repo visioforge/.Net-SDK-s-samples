@@ -74,17 +74,6 @@
                                    }));
         }
 
-        private void MediaPlayer1_OnYouTubeVideoPlayback(object sender, YouTubeVideoPlaybackEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       if (cbVideoStream.Items.Count > 0)
-                                       {
-                                           e.SelectedFormatIndex = cbVideoStream.SelectedIndex;
-                                       }
-                                   }));
-        }
-
         private async void BtReadFormats_Click(object sender, EventArgs e)
         {
             _videoInfoList.Clear();
@@ -100,14 +89,14 @@
             var video = await youtube.Videos.GetAsync(edURL.Text);
             var streamManifest = await youtube.Videos.Streams.GetManifestAsync(video.Id.Value);
 
-            var videos = streamManifest.GetVideo();
+            var videos = streamManifest.GetVideoOnlyStreams();
             foreach (var stream in videos)
             {
                 cbVideoStream.Items.Add(stream.ToString());
                 _videoInfoList.Add(stream);
             }
 
-            var audios = streamManifest.GetAudioOnly();
+            var audios = streamManifest.GetAudioOnlyStreams();
             foreach (var stream in audios)
             {
                 cbAudioStream.Items.Add(stream.ToString());
