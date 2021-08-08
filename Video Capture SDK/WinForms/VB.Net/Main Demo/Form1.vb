@@ -4122,13 +4122,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub FFMPEGDownloadLinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked, LinkLabel8.LinkClicked, linkLabel10.LinkClicked
-
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64)
-        Process.Start(startInfo)
-
-    End Sub
-
     Private Sub cbDecklinkCaptureDevice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDecklinkCaptureDevice.SelectedIndexChanged
 
         cbDecklinkCaptureVideoFormat.Items.Clear()

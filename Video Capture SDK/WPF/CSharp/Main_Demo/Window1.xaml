@@ -483,8 +483,7 @@
                                 <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="54,321,0,0" VerticalAlignment="Top"/>
                                 <Label Content="URL" HorizontalAlignment="Left" Margin="22,267,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edNetworkRTMPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" VerticalAlignment="Top" Width="308"/>
-                                <Label x:Name="lbDownloadFFMPEG_Copy" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,111,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
-                                <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,137,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
+                                <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,113,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
                                 <CheckBox x:Name="cbNetworkRTMPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             </Grid>
                         </TabItem>
@@ -505,7 +504,6 @@
                                 <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="54,335,0,0" VerticalAlignment="Top"/>
                                 <Label Content="URL" HorizontalAlignment="Left" Margin="22,221,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edNetworkUDPURL" HorizontalAlignment="Left" Height="23" Margin="22,247,0,0" TextWrapping="Wrap" Text="udp://127.0.0.1:10000" VerticalAlignment="Top" Width="308"/>
-                                <Label x:Name="lbDownloadFFMPEG_Copy1" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="22,112,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
                                 <Label x:Name="label137" Content="For multicast UDP streaming use URL like" HorizontalAlignment="Left" Margin="22,270,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="label158" Content="udp://239.101.101.1:1234?ttl=1&amp;pkt_size=1316" HorizontalAlignment="Left" Margin="22,290,0,0" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="cbNetworkUDPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top" IsChecked="True"/>
@@ -521,7 +519,6 @@
 									Foreground="#FF0016CF" MouseDown="label1291_Copy_MouseDown" />
                                 <RadioButton x:Name="rbNetworkSSFFMPEGDefault" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,45,0,0" VerticalAlignment="Top" IsChecked="True"/>
                                 <RadioButton x:Name="rbNetworkSSFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,65,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="lbDownloadFFMPEG_Copy2" Content="FFMPEG.exe redist required to be installed" HorizontalAlignment="Left" Margin="23,218,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_MouseLeftButtonDown"/>
                                 <CheckBox x:Name="cbNetworkSSUsePipes" Content="Use pipes for FFMPEG streaming" HorizontalAlignment="Left" Margin="45,85,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             </Grid>
                         </TabItem>

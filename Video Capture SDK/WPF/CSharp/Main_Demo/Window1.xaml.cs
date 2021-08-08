@@ -4520,12 +4520,6 @@ namespace Main_Demo
             }
         }
 
-        private void lbDownloadFFMPEG_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64);
-            Process.Start(startInfo);
-        }
-
         private void cbDecklinkCaptureDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string value;

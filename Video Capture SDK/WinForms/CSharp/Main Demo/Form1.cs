@@ -4991,12 +4991,6 @@ namespace VideoCapture_CSharp_Demo
             }
         }
 
-        private void FFMPEGDownloadLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64);
-            Process.Start(startInfo);
-        }
-
         private void btAudioChannelMapperAddNewRoute_Click(object sender, EventArgs e)
         {
             var item = new AudioChannelMapperItem

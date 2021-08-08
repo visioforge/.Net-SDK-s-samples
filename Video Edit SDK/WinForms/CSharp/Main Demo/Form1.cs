@@ -2615,12 +2615,6 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.FastEdit_Stop();
         }
 
-        private void FFMPEGDownloadLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64);
-            Process.Start(startInfo);
-        }
-
         private void btAudioChannelMapperClear_Click(object sender, EventArgs e)
         {
             audioChannelMapperItems.Clear();

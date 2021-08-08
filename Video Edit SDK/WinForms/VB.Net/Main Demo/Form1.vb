@@ -2301,13 +2301,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub FFMPEGDownloadLinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel3.LinkClicked, LinkLabel2.LinkClicked, linkLabel10.LinkClicked
-
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64)
-        Process.Start(startInfo)
-
-    End Sub
-
     Private Sub btAudioChannelMapperClear_Click(sender As Object, e As EventArgs) Handles btAudioChannelMapperClear.Click
 
         audioChannelMapperItems.Clear()

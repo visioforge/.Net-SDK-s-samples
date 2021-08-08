@@ -382,7 +382,6 @@ namespace VideoCapture_CSharp_Demo
             this.tpRTMP = new System.Windows.Forms.TabPage();
             this.cbNetworkRTMPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
             this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
             this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
@@ -399,7 +398,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbNetworkUDPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
             this.label314 = new System.Windows.Forms.Label();
             this.label313 = new System.Windows.Forms.Label();
-            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             this.label484 = new System.Windows.Forms.Label();
             this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
             this.label372 = new System.Windows.Forms.Label();
@@ -407,7 +405,6 @@ namespace VideoCapture_CSharp_Demo
             this.rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
             this.tpSSF = new System.Windows.Forms.TabPage();
             this.cbNetworkSSUsePipes = new System.Windows.Forms.CheckBox();
-            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.rbNetworkSSFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkSSFFMPEGDefault = new System.Windows.Forms.RadioButton();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
@@ -5031,7 +5028,6 @@ namespace VideoCapture_CSharp_Demo
             // 
             this.tpRTMP.Controls.Add(this.cbNetworkRTMPFFMPEGUsePipes);
             this.tpRTMP.Controls.Add(this.linkLabel11);
-            this.tpRTMP.Controls.Add(this.linkLabel8);
             this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
             this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEG);
             this.tpRTMP.Controls.Add(this.edNetworkRTMPURL);
@@ -5067,17 +5063,6 @@ namespace VideoCapture_CSharp_Demo
             this.linkLabel11.TabStop = true;
             this.linkLabel11.Text = "Network streaming to YouTube";
             this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel11_LinkClicked);
-            // 
-            // linkLabel8
-            // 
-            this.linkLabel8.AutoSize = true;
-            this.linkLabel8.Location = new System.Drawing.Point(17, 121);
-            this.linkLabel8.Name = "linkLabel8";
-            this.linkLabel8.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel8.TabIndex = 12;
-            this.linkLabel8.TabStop = true;
-            this.linkLabel8.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // rbNetworkRTMPFFMPEGCustom
             // 
@@ -5202,7 +5187,6 @@ namespace VideoCapture_CSharp_Demo
             this.tpUDP.Controls.Add(this.cbNetworkUDPFFMPEGUsePipes);
             this.tpUDP.Controls.Add(this.label314);
             this.tpUDP.Controls.Add(this.label313);
-            this.tpUDP.Controls.Add(this.linkLabel9);
             this.tpUDP.Controls.Add(this.label484);
             this.tpUDP.Controls.Add(this.edNetworkUDPURL);
             this.tpUDP.Controls.Add(this.label372);
@@ -5245,17 +5229,6 @@ namespace VideoCapture_CSharp_Demo
             this.label313.Size = new System.Drawing.Size(229, 13);
             this.label313.TabIndex = 13;
             this.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316";
-            // 
-            // linkLabel9
-            // 
-            this.linkLabel9.AutoSize = true;
-            this.linkLabel9.Location = new System.Drawing.Point(17, 129);
-            this.linkLabel9.Name = "linkLabel9";
-            this.linkLabel9.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel9.TabIndex = 12;
-            this.linkLabel9.TabStop = true;
-            this.linkLabel9.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // label484
             // 
@@ -5308,7 +5281,6 @@ namespace VideoCapture_CSharp_Demo
             // tpSSF
             // 
             this.tpSSF.Controls.Add(this.cbNetworkSSUsePipes);
-            this.tpSSF.Controls.Add(this.linkLabel10);
             this.tpSSF.Controls.Add(this.rbNetworkSSFFMPEGCustom);
             this.tpSSF.Controls.Add(this.rbNetworkSSFFMPEGDefault);
             this.tpSSF.Controls.Add(this.linkLabel5);
@@ -5335,17 +5307,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbNetworkSSUsePipes.TabIndex = 19;
             this.cbNetworkSSUsePipes.Text = "Use pipes for FFMPEG streaming";
             this.cbNetworkSSUsePipes.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel10
-            // 
-            this.linkLabel10.AutoSize = true;
-            this.linkLabel10.Location = new System.Drawing.Point(17, 211);
-            this.linkLabel10.Name = "linkLabel10";
-            this.linkLabel10.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel10.TabIndex = 18;
-            this.linkLabel10.TabStop = true;
-            this.linkLabel10.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // rbNetworkSSFFMPEGCustom
             // 
@@ -14442,11 +14403,8 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.ComboBox cbDecklinkCaptureDevice;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.LinkLabel linkLabel8;
-        private System.Windows.Forms.LinkLabel linkLabel9;
         private System.Windows.Forms.RadioButton rbNetworkSSFFMPEGDefault;
         private System.Windows.Forms.RadioButton rbNetworkSSFFMPEGCustom;
-        private System.Windows.Forms.LinkLabel linkLabel10;
         private System.Windows.Forms.TabPage tabPage93;
         private System.Windows.Forms.CheckBox cbAudioChannelMapperEnabled;
         private System.Windows.Forms.ListBox lbAudioChannelMapperRoutes;

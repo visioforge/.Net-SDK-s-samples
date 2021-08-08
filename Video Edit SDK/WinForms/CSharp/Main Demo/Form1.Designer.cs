@@ -439,7 +439,6 @@ namespace VideoEdit_CS_Demo
             this.label366 = new System.Windows.Forms.Label();
             this.tabPage50 = new System.Windows.Forms.TabPage();
             this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
             this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
@@ -453,13 +452,11 @@ namespace VideoEdit_CS_Demo
             this.edNDIName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabPage77 = new System.Windows.Forms.TabPage();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
             this.label372 = new System.Windows.Forms.Label();
             this.rbNetworkUDPFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
             this.tabPage51 = new System.Windows.Forms.TabPage();
-            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.rbNetworkSSFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkSSFFMPEGDefault = new System.Windows.Forms.RadioButton();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
@@ -5177,7 +5174,6 @@ namespace VideoEdit_CS_Demo
             // tabPage50
             // 
             this.tabPage50.Controls.Add(this.linkLabel11);
-            this.tabPage50.Controls.Add(this.linkLabel3);
             this.tabPage50.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
             this.tabPage50.Controls.Add(this.rbNetworkRTMPFFMPEG);
             this.tabPage50.Controls.Add(this.edNetworkRTMPURL);
@@ -5201,17 +5197,6 @@ namespace VideoEdit_CS_Demo
             this.linkLabel11.TabStop = true;
             this.linkLabel11.Text = "Network streaming to YouTube";
             this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel11_LinkClicked);
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(17, 87);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel3.TabIndex = 18;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // rbNetworkRTMPFFMPEGCustom
             // 
@@ -5333,7 +5318,6 @@ namespace VideoEdit_CS_Demo
             // 
             // tabPage77
             // 
-            this.tabPage77.Controls.Add(this.linkLabel7);
             this.tabPage77.Controls.Add(this.edNetworkUDPURL);
             this.tabPage77.Controls.Add(this.label372);
             this.tabPage77.Controls.Add(this.rbNetworkUDPFFMPEGCustom);
@@ -5345,17 +5329,6 @@ namespace VideoEdit_CS_Demo
             this.tabPage77.TabIndex = 5;
             this.tabPage77.Text = "UDP";
             this.tabPage77.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel7
-            // 
-            this.linkLabel7.AutoSize = true;
-            this.linkLabel7.Location = new System.Drawing.Point(15, 87);
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel7.TabIndex = 15;
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // edNetworkUDPURL
             // 
@@ -5398,7 +5371,6 @@ namespace VideoEdit_CS_Demo
             // 
             // tabPage51
             // 
-            this.tabPage51.Controls.Add(this.linkLabel10);
             this.tabPage51.Controls.Add(this.rbNetworkSSFFMPEGCustom);
             this.tabPage51.Controls.Add(this.rbNetworkSSFFMPEGDefault);
             this.tabPage51.Controls.Add(this.linkLabel6);
@@ -5413,17 +5385,6 @@ namespace VideoEdit_CS_Demo
             this.tabPage51.TabIndex = 4;
             this.tabPage51.Text = "IIS Smooth Streaming";
             this.tabPage51.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel10
-            // 
-            this.linkLabel10.AutoSize = true;
-            this.linkLabel10.Location = new System.Drawing.Point(17, 261);
-            this.linkLabel10.Name = "linkLabel10";
-            this.linkLabel10.Size = new System.Drawing.Size(207, 13);
-            this.linkLabel10.TabIndex = 23;
-            this.linkLabel10.TabStop = true;
-            this.linkLabel10.Text = "FFMPEG.exe redist required to be installed";
-            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FFMPEGDownloadLinkClicked);
             // 
             // rbNetworkSSFFMPEGCustom
             // 
@@ -8051,9 +8012,6 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.Label label167;
         private System.Windows.Forms.CheckBox cbMuxStreamsShortest;
         private System.Windows.Forms.Label label168;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel7;
-        private System.Windows.Forms.LinkLabel linkLabel10;
         private System.Windows.Forms.RadioButton rbNetworkSSFFMPEGCustom;
         private System.Windows.Forms.RadioButton rbNetworkSSFFMPEGDefault;
         private System.Windows.Forms.TabPage tabPage81;

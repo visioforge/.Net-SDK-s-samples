@@ -2610,12 +2610,6 @@ namespace Main_Demo
             VideoEdit1.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
-        private void lbDownloadFFMPEG_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistFFMPEGx86x64);
-            Process.Start(startInfo);
-        }
-
         private void lbDownloadFFMPEG_Copy3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NetworkStreamingToYouTube);
