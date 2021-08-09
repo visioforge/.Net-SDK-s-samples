@@ -892,7 +892,6 @@ Partial Class Form1
         Me.tpRTMP = New System.Windows.Forms.TabPage()
         Me.cbNetworkRTMPFFMPEGUsePipes = New System.Windows.Forms.CheckBox()
         Me.linkLabel11 = New System.Windows.Forms.LinkLabel()
-        Me.LinkLabel8 = New System.Windows.Forms.LinkLabel()
         Me.rbNetworkRTMPFFMPEGCustom = New System.Windows.Forms.RadioButton()
         Me.rbNetworkRTMPFFMPEG = New System.Windows.Forms.RadioButton()
         Me.edNetworkRTMPURL = New System.Windows.Forms.TextBox()
@@ -907,17 +906,11 @@ Partial Class Form1
         Me.label30 = New System.Windows.Forms.Label()
         Me.tpUDP = New System.Windows.Forms.TabPage()
         Me.cbNetworkUDPFFMPEGUsePipes = New System.Windows.Forms.CheckBox()
-        Me.label314 = New System.Windows.Forms.Label()
-        Me.label313 = New System.Windows.Forms.Label()
-        Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
         Me.label484 = New System.Windows.Forms.Label()
-        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
-        Me.label372 = New System.Windows.Forms.Label()
         Me.rbNetworkUDPFFMPEGCustom = New System.Windows.Forms.RadioButton()
         Me.rbNetworkUDPFFMPEG = New System.Windows.Forms.RadioButton()
         Me.tpSSF = New System.Windows.Forms.TabPage()
         Me.cbNetworkSSUsePipes = New System.Windows.Forms.CheckBox()
-        Me.linkLabel10 = New System.Windows.Forms.LinkLabel()
         Me.rbNetworkSSFFMPEGCustom = New System.Windows.Forms.RadioButton()
         Me.rbNetworkSSFFMPEGDefault = New System.Windows.Forms.RadioButton()
         Me.linkLabel5 = New System.Windows.Forms.LinkLabel()
@@ -1131,6 +1124,12 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
+        Me.label63 = New System.Windows.Forms.Label()
+        Me.label62 = New System.Windows.Forms.Label()
+        Me.label314 = New System.Windows.Forms.Label()
+        Me.label313 = New System.Windows.Forms.Label()
+        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
+        Me.label372 = New System.Windows.Forms.Label()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -10177,7 +10176,6 @@ Partial Class Form1
         '
         Me.tpRTMP.Controls.Add(Me.cbNetworkRTMPFFMPEGUsePipes)
         Me.tpRTMP.Controls.Add(Me.linkLabel11)
-        Me.tpRTMP.Controls.Add(Me.LinkLabel8)
         Me.tpRTMP.Controls.Add(Me.rbNetworkRTMPFFMPEGCustom)
         Me.tpRTMP.Controls.Add(Me.rbNetworkRTMPFFMPEG)
         Me.tpRTMP.Controls.Add(Me.edNetworkRTMPURL)
@@ -10212,16 +10210,6 @@ Partial Class Form1
         Me.linkLabel11.TabIndex = 18
         Me.linkLabel11.TabStop = True
         Me.linkLabel11.Text = "Network streaming to YouTube"
-        '
-        'LinkLabel8
-        '
-        Me.LinkLabel8.AutoSize = True
-        Me.LinkLabel8.Location = New System.Drawing.Point(17, 127)
-        Me.LinkLabel8.Name = "LinkLabel8"
-        Me.LinkLabel8.Size = New System.Drawing.Size(207, 13)
-        Me.LinkLabel8.TabIndex = 17
-        Me.LinkLabel8.TabStop = True
-        Me.LinkLabel8.Text = "FFMPEG.exe redist required to be installed"
         '
         'rbNetworkRTMPFFMPEGCustom
         '
@@ -10341,13 +10329,14 @@ Partial Class Form1
         '
         'tpUDP
         '
-        Me.tpUDP.Controls.Add(Me.cbNetworkUDPFFMPEGUsePipes)
+        Me.tpUDP.Controls.Add(Me.label63)
+        Me.tpUDP.Controls.Add(Me.label62)
         Me.tpUDP.Controls.Add(Me.label314)
         Me.tpUDP.Controls.Add(Me.label313)
-        Me.tpUDP.Controls.Add(Me.LinkLabel9)
-        Me.tpUDP.Controls.Add(Me.label484)
         Me.tpUDP.Controls.Add(Me.edNetworkUDPURL)
         Me.tpUDP.Controls.Add(Me.label372)
+        Me.tpUDP.Controls.Add(Me.cbNetworkUDPFFMPEGUsePipes)
+        Me.tpUDP.Controls.Add(Me.label484)
         Me.tpUDP.Controls.Add(Me.rbNetworkUDPFFMPEGCustom)
         Me.tpUDP.Controls.Add(Me.rbNetworkUDPFFMPEG)
         Me.tpUDP.Location = New System.Drawing.Point(4, 22)
@@ -10370,34 +10359,6 @@ Partial Class Form1
         Me.cbNetworkUDPFFMPEGUsePipes.Text = "Use pipes"
         Me.cbNetworkUDPFFMPEGUsePipes.UseVisualStyleBackColor = True
         '
-        'label314
-        '
-        Me.label314.AutoSize = True
-        Me.label314.Location = New System.Drawing.Point(18, 270)
-        Me.label314.Name = "label314"
-        Me.label314.Size = New System.Drawing.Size(204, 13)
-        Me.label314.TabIndex = 19
-        Me.label314.Text = "For multicast UDP streaming use URL like"
-        '
-        'label313
-        '
-        Me.label313.AutoSize = True
-        Me.label313.Location = New System.Drawing.Point(18, 283)
-        Me.label313.Name = "label313"
-        Me.label313.Size = New System.Drawing.Size(229, 13)
-        Me.label313.TabIndex = 18
-        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
-        '
-        'LinkLabel9
-        '
-        Me.LinkLabel9.AutoSize = True
-        Me.LinkLabel9.Location = New System.Drawing.Point(18, 130)
-        Me.LinkLabel9.Name = "LinkLabel9"
-        Me.LinkLabel9.Size = New System.Drawing.Size(207, 13)
-        Me.LinkLabel9.TabIndex = 17
-        Me.LinkLabel9.TabStop = True
-        Me.LinkLabel9.Text = "FFMPEG.exe redist required to be installed"
-        '
         'label484
         '
         Me.label484.AutoSize = True
@@ -10406,23 +10367,6 @@ Partial Class Form1
         Me.label484.Size = New System.Drawing.Size(217, 13)
         Me.label484.TabIndex = 16
         Me.label484.Text = "Specify settings located on output format tab"
-        '
-        'edNetworkUDPURL
-        '
-        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 246)
-        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
-        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
-        Me.edNetworkUDPURL.TabIndex = 15
-        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000"
-        '
-        'label372
-        '
-        Me.label372.AutoSize = True
-        Me.label372.Location = New System.Drawing.Point(17, 230)
-        Me.label372.Name = "label372"
-        Me.label372.Size = New System.Drawing.Size(29, 13)
-        Me.label372.TabIndex = 14
-        Me.label372.Text = "URL"
         '
         'rbNetworkUDPFFMPEGCustom
         '
@@ -10449,7 +10393,6 @@ Partial Class Form1
         'tpSSF
         '
         Me.tpSSF.Controls.Add(Me.cbNetworkSSUsePipes)
-        Me.tpSSF.Controls.Add(Me.linkLabel10)
         Me.tpSSF.Controls.Add(Me.rbNetworkSSFFMPEGCustom)
         Me.tpSSF.Controls.Add(Me.rbNetworkSSFFMPEGDefault)
         Me.tpSSF.Controls.Add(Me.linkLabel5)
@@ -10476,16 +10419,6 @@ Partial Class Form1
         Me.cbNetworkSSUsePipes.TabIndex = 24
         Me.cbNetworkSSUsePipes.Text = "Use pipes for FFMPEG streaming"
         Me.cbNetworkSSUsePipes.UseVisualStyleBackColor = True
-        '
-        'linkLabel10
-        '
-        Me.linkLabel10.AutoSize = True
-        Me.linkLabel10.Location = New System.Drawing.Point(17, 225)
-        Me.linkLabel10.Name = "linkLabel10"
-        Me.linkLabel10.Size = New System.Drawing.Size(207, 13)
-        Me.linkLabel10.TabIndex = 23
-        Me.linkLabel10.TabStop = True
-        Me.linkLabel10.Text = "FFMPEG.exe redist required to be installed"
         '
         'rbNetworkSSFFMPEGCustom
         '
@@ -12762,6 +12695,59 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
+        'label63
+        '
+        Me.label63.AutoSize = True
+        Me.label63.Location = New System.Drawing.Point(17, 273)
+        Me.label63.Name = "label63"
+        Me.label63.Size = New System.Drawing.Size(109, 13)
+        Me.label63.TabIndex = 26
+        Me.label63.Text = "instead of IP address."
+        '
+        'label62
+        '
+        Me.label62.AutoSize = True
+        Me.label62.Location = New System.Drawing.Point(17, 260)
+        Me.label62.Name = "label62"
+        Me.label62.Size = New System.Drawing.Size(239, 13)
+        Me.label62.TabIndex = 25
+        Me.label62.Text = "To open the stream in VLC on a local PC, use @ "
+        '
+        'label314
+        '
+        Me.label314.AutoSize = True
+        Me.label314.Location = New System.Drawing.Point(17, 209)
+        Me.label314.Name = "label314"
+        Me.label314.Size = New System.Drawing.Size(222, 13)
+        Me.label314.TabIndex = 24
+        Me.label314.Text = "For multicast UDP streaming, use an URL like"
+        '
+        'label313
+        '
+        Me.label313.AutoSize = True
+        Me.label313.Location = New System.Drawing.Point(17, 222)
+        Me.label313.Name = "label313"
+        Me.label313.Size = New System.Drawing.Size(229, 13)
+        Me.label313.TabIndex = 23
+        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
+        '
+        'edNetworkUDPURL
+        '
+        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 186)
+        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
+        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
+        Me.edNetworkUDPURL.TabIndex = 22
+        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316"
+        '
+        'label372
+        '
+        Me.label372.AutoSize = True
+        Me.label372.Location = New System.Drawing.Point(17, 170)
+        Me.label372.Name = "label372"
+        Me.label372.Size = New System.Drawing.Size(29, 13)
+        Me.label372.TabIndex = 21
+        Me.label372.Text = "URL"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -13922,8 +13908,6 @@ End Sub
     Private WithEvents label369 As System.Windows.Forms.Label
     Friend WithEvents tpUDP As System.Windows.Forms.TabPage
     Private WithEvents label484 As System.Windows.Forms.Label
-    Private WithEvents edNetworkUDPURL As System.Windows.Forms.TextBox
-    Private WithEvents label372 As System.Windows.Forms.Label
     Private WithEvents rbNetworkUDPFFMPEGCustom As System.Windows.Forms.RadioButton
     Private WithEvents rbNetworkUDPFFMPEG As System.Windows.Forms.RadioButton
     Private WithEvents groupBox48 As System.Windows.Forms.GroupBox
@@ -13974,11 +13958,8 @@ End Sub
     Friend WithEvents TabPage26 As TabPage
     Private WithEvents pbAFMotionLevel As ProgressBar
     Private WithEvents label65 As Label
-    Private WithEvents LinkLabel8 As LinkLabel
-    Private WithEvents LinkLabel9 As LinkLabel
     Private WithEvents rbNetworkSSFFMPEGCustom As RadioButton
     Private WithEvents rbNetworkSSFFMPEGDefault As RadioButton
-    Private WithEvents linkLabel10 As LinkLabel
     Friend WithEvents TabPage61 As TabPage
     Private WithEvents cbDecklinkSourceTimecode As ComboBox
     Private WithEvents label341 As Label
@@ -14009,8 +13990,6 @@ End Sub
     Private WithEvents lbAudioChannelMapperRoutes As ListBox
     Private WithEvents cbAudioChannelMapperEnabled As CheckBox
     Private WithEvents linkLabel11 As LinkLabel
-    Private WithEvents label314 As Label
-    Private WithEvents label313 As Label
     Friend WithEvents TabPage63 As TabPage
     Private WithEvents cbGPUOldMovie As CheckBox
     Private WithEvents cbGPUDeinterlace As CheckBox
@@ -14208,4 +14187,10 @@ End Sub
     Private WithEvents edHLSURL As TextBox
     Private WithEvents btListONVIFSources As Button
     Private WithEvents btVirtualCameraRegister As Button
+    Private WithEvents label63 As Label
+    Private WithEvents label62 As Label
+    Private WithEvents label314 As Label
+    Private WithEvents label313 As Label
+    Private WithEvents edNetworkUDPURL As TextBox
+    Private WithEvents label372 As Label
 End Class

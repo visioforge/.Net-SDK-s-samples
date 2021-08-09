@@ -1138,6 +1138,8 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -5184,6 +5186,8 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tpUDP
             // 
+            this.tpUDP.Controls.Add(this.label63);
+            this.tpUDP.Controls.Add(this.label62);
             this.tpUDP.Controls.Add(this.cbNetworkUDPFFMPEGUsePipes);
             this.tpUDP.Controls.Add(this.label314);
             this.tpUDP.Controls.Add(this.label313);
@@ -5215,16 +5219,16 @@ namespace VideoCapture_CSharp_Demo
             // label314
             // 
             this.label314.AutoSize = true;
-            this.label314.Location = new System.Drawing.Point(17, 281);
+            this.label314.Location = new System.Drawing.Point(17, 182);
             this.label314.Name = "label314";
-            this.label314.Size = new System.Drawing.Size(204, 13);
+            this.label314.Size = new System.Drawing.Size(222, 13);
             this.label314.TabIndex = 14;
-            this.label314.Text = "For multicast UDP streaming use URL like";
+            this.label314.Text = "For multicast UDP streaming, use an URL like";
             // 
             // label313
             // 
             this.label313.AutoSize = true;
-            this.label313.Location = new System.Drawing.Point(17, 294);
+            this.label313.Location = new System.Drawing.Point(17, 195);
             this.label313.Name = "label313";
             this.label313.Size = new System.Drawing.Size(229, 13);
             this.label313.TabIndex = 13;
@@ -5241,16 +5245,16 @@ namespace VideoCapture_CSharp_Demo
             // 
             // edNetworkUDPURL
             // 
-            this.edNetworkUDPURL.Location = new System.Drawing.Point(20, 258);
+            this.edNetworkUDPURL.Location = new System.Drawing.Point(20, 159);
             this.edNetworkUDPURL.Name = "edNetworkUDPURL";
             this.edNetworkUDPURL.Size = new System.Drawing.Size(247, 20);
             this.edNetworkUDPURL.TabIndex = 10;
-            this.edNetworkUDPURL.Text = "udp://127.0.0.1:10000";
+            this.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316";
             // 
             // label372
             // 
             this.label372.AutoSize = true;
-            this.label372.Location = new System.Drawing.Point(17, 242);
+            this.label372.Location = new System.Drawing.Point(17, 143);
             this.label372.Name = "label372";
             this.label372.Size = new System.Drawing.Size(29, 13);
             this.label372.TabIndex = 9;
@@ -13173,6 +13177,24 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(17, 233);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(239, 13);
+            this.label62.TabIndex = 16;
+            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(17, 246);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(109, 13);
+            this.label63.TabIndex = 17;
+            this.label63.Text = "instead of IP address.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -14611,6 +14633,8 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.TextBox edHLSURL;
         private System.Windows.Forms.Button btListONVIFSources;
         private System.Windows.Forms.Button btVirtualCameraRegister;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label62;
     }
 }
 
