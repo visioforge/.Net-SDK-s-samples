@@ -752,7 +752,7 @@ Public Class Form1
                 SetWebMOutput(webmOutput)
                 VideoEdit1.Output_Format = webmOutput
             Case 13
-                outputFormat = VFVideoEditOutputFormat.FFMPEG_DLL
+                outputFormat = VFVideoEditOutputFormat.FFMPEG
 
                 Dim ffmpegDLLOutput = New VFFFMPEGOutput()
                 SetFFMPEGDLLOutput(ffmpegDLLOutput)
@@ -2868,6 +2868,16 @@ Public Class Form1
 
     Private Sub LinkLabel6_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel6.LinkClicked
         Dim startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub llXiphX64_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX64.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub llXiphX86_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX86.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86)
         Process.Start(startInfo)
     End Sub
 End Class

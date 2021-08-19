@@ -35,6 +35,10 @@ namespace VideoEdit_CS_Demo
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage30 = new System.Windows.Forms.TabPage();
+            this.llXiphX64 = new System.Windows.Forms.LinkLabel();
+            this.llXiphX86 = new System.Windows.Forms.LinkLabel();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
             this.lbInfo = new System.Windows.Forms.Label();
             this.btConfigure = new System.Windows.Forms.Button();
             this.btSelectOutput = new System.Windows.Forms.Button();
@@ -452,6 +456,13 @@ namespace VideoEdit_CS_Demo
             this.edNDIName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.tabPage77 = new System.Windows.Forms.TabPage();
+            this.label484 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label314 = new System.Windows.Forms.Label();
+            this.label313 = new System.Windows.Forms.Label();
+            this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
+            this.label372 = new System.Windows.Forms.Label();
             this.rbNetworkUDPFFMPEGCustom = new System.Windows.Forms.RadioButton();
             this.rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
             this.tabPage51 = new System.Windows.Forms.TabPage();
@@ -636,13 +647,6 @@ namespace VideoEdit_CS_Demo
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
             this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label314 = new System.Windows.Forms.Label();
-            this.label313 = new System.Windows.Forms.Label();
-            this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
-            this.label372 = new System.Windows.Forms.Label();
-            this.label484 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -821,6 +825,10 @@ namespace VideoEdit_CS_Demo
             // 
             // tabPage30
             // 
+            this.tabPage30.Controls.Add(this.llXiphX64);
+            this.tabPage30.Controls.Add(this.llXiphX86);
+            this.tabPage30.Controls.Add(this.label68);
+            this.tabPage30.Controls.Add(this.label67);
             this.tabPage30.Controls.Add(this.lbInfo);
             this.tabPage30.Controls.Add(this.btConfigure);
             this.tabPage30.Controls.Add(this.btSelectOutput);
@@ -836,10 +844,50 @@ namespace VideoEdit_CS_Demo
             this.tabPage30.Text = "Main";
             this.tabPage30.UseVisualStyleBackColor = true;
             // 
+            // llXiphX64
+            // 
+            this.llXiphX64.AutoSize = true;
+            this.llXiphX64.Location = new System.Drawing.Point(149, 224);
+            this.llXiphX64.Name = "llXiphX64";
+            this.llXiphX64.Size = new System.Drawing.Size(24, 13);
+            this.llXiphX64.TabIndex = 59;
+            this.llXiphX64.TabStop = true;
+            this.llXiphX64.Text = "x64";
+            this.llXiphX64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX64_LinkClicked);
+            // 
+            // llXiphX86
+            // 
+            this.llXiphX86.AutoSize = true;
+            this.llXiphX86.Location = new System.Drawing.Point(119, 224);
+            this.llXiphX86.Name = "llXiphX86";
+            this.llXiphX86.Size = new System.Drawing.Size(24, 13);
+            this.llXiphX86.TabIndex = 58;
+            this.llXiphX86.TabStop = true;
+            this.llXiphX86.Text = "x86";
+            this.llXiphX86.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX86_LinkClicked);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(0, 224);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(113, 13);
+            this.label68.TabIndex = 57;
+            this.label68.Text = "and Ogg Vorbis output";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(0, 202);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(273, 13);
+            this.label67.TabIndex = 56;
+            this.label67.Text = "Additional redist required to be installed for FLAC, Speex,";
+            // 
             // lbInfo
             // 
             this.lbInfo.AutoSize = true;
-            this.lbInfo.Location = new System.Drawing.Point(16, 64);
+            this.lbInfo.Location = new System.Drawing.Point(8, 64);
             this.lbInfo.Name = "lbInfo";
             this.lbInfo.Size = new System.Drawing.Size(267, 13);
             this.lbInfo.TabIndex = 52;
@@ -847,7 +895,7 @@ namespace VideoEdit_CS_Demo
             // 
             // btConfigure
             // 
-            this.btConfigure.Location = new System.Drawing.Point(19, 86);
+            this.btConfigure.Location = new System.Drawing.Point(11, 86);
             this.btConfigure.Name = "btConfigure";
             this.btConfigure.Size = new System.Drawing.Size(61, 23);
             this.btConfigure.TabIndex = 32;
@@ -857,7 +905,7 @@ namespace VideoEdit_CS_Demo
             // 
             // btSelectOutput
             // 
-            this.btSelectOutput.Location = new System.Drawing.Point(252, 151);
+            this.btSelectOutput.Location = new System.Drawing.Point(244, 151);
             this.btSelectOutput.Name = "btSelectOutput";
             this.btSelectOutput.Size = new System.Drawing.Size(26, 23);
             this.btSelectOutput.TabIndex = 31;
@@ -867,7 +915,7 @@ namespace VideoEdit_CS_Demo
             // 
             // edOutput
             // 
-            this.edOutput.Location = new System.Drawing.Point(19, 153);
+            this.edOutput.Location = new System.Drawing.Point(11, 153);
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(227, 20);
             this.edOutput.TabIndex = 30;
@@ -876,7 +924,7 @@ namespace VideoEdit_CS_Demo
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(16, 135);
+            this.label15.Location = new System.Drawing.Point(8, 135);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(52, 13);
             this.label15.TabIndex = 29;
@@ -900,13 +948,13 @@ namespace VideoEdit_CS_Demo
             "Speex",
             "Custom format",
             "WebM",
-            "FFMPEG (DLL)",
-            "FFMPEG (external exe) (BETA)",
+            "FFMPEG",
+            "FFMPEG (external exe)",
             "MP4",
             "MP4 v11 (CPU/GPU)",
             "Animated GIF",
             "Encrypted video"});
-            this.cbOutputVideoFormat.Location = new System.Drawing.Point(19, 34);
+            this.cbOutputVideoFormat.Location = new System.Drawing.Point(11, 34);
             this.cbOutputVideoFormat.Name = "cbOutputVideoFormat";
             this.cbOutputVideoFormat.Size = new System.Drawing.Size(259, 21);
             this.cbOutputVideoFormat.TabIndex = 28;
@@ -915,7 +963,7 @@ namespace VideoEdit_CS_Demo
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 16);
+            this.label9.Location = new System.Drawing.Point(8, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(39, 13);
             this.label9.TabIndex = 27;
@@ -5340,6 +5388,68 @@ namespace VideoEdit_CS_Demo
             this.tabPage77.Text = "UDP";
             this.tabPage77.UseVisualStyleBackColor = true;
             // 
+            // label484
+            // 
+            this.label484.AutoSize = true;
+            this.label484.Location = new System.Drawing.Point(27, 327);
+            this.label484.Name = "label484";
+            this.label484.Size = new System.Drawing.Size(217, 13);
+            this.label484.TabIndex = 24;
+            this.label484.Text = "Specify settings located on output format tab";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(15, 254);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(109, 13);
+            this.label63.TabIndex = 23;
+            this.label63.Text = "instead of IP address.";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(15, 241);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(239, 13);
+            this.label62.TabIndex = 22;
+            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
+            // 
+            // label314
+            // 
+            this.label314.AutoSize = true;
+            this.label314.Location = new System.Drawing.Point(15, 190);
+            this.label314.Name = "label314";
+            this.label314.Size = new System.Drawing.Size(222, 13);
+            this.label314.TabIndex = 21;
+            this.label314.Text = "For multicast UDP streaming, use an URL like";
+            // 
+            // label313
+            // 
+            this.label313.AutoSize = true;
+            this.label313.Location = new System.Drawing.Point(15, 203);
+            this.label313.Name = "label313";
+            this.label313.Size = new System.Drawing.Size(229, 13);
+            this.label313.TabIndex = 20;
+            this.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316";
+            // 
+            // edNetworkUDPURL
+            // 
+            this.edNetworkUDPURL.Location = new System.Drawing.Point(18, 167);
+            this.edNetworkUDPURL.Name = "edNetworkUDPURL";
+            this.edNetworkUDPURL.Size = new System.Drawing.Size(247, 20);
+            this.edNetworkUDPURL.TabIndex = 19;
+            this.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316";
+            // 
+            // label372
+            // 
+            this.label372.AutoSize = true;
+            this.label372.Location = new System.Drawing.Point(15, 151);
+            this.label372.Name = "label372";
+            this.label372.Size = new System.Drawing.Size(29, 13);
+            this.label372.TabIndex = 18;
+            this.label372.Text = "URL";
+            // 
             // rbNetworkUDPFFMPEGCustom
             // 
             this.rbNetworkUDPFFMPEGCustom.AutoSize = true;
@@ -7295,68 +7405,6 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoEdit1_OnBarcodeDetected);
             this.VideoEdit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoEdit1_MouseDown);
             // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(15, 254);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(109, 13);
-            this.label63.TabIndex = 23;
-            this.label63.Text = "instead of IP address.";
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(15, 241);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(239, 13);
-            this.label62.TabIndex = 22;
-            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
-            // 
-            // label314
-            // 
-            this.label314.AutoSize = true;
-            this.label314.Location = new System.Drawing.Point(15, 190);
-            this.label314.Name = "label314";
-            this.label314.Size = new System.Drawing.Size(222, 13);
-            this.label314.TabIndex = 21;
-            this.label314.Text = "For multicast UDP streaming, use an URL like";
-            // 
-            // label313
-            // 
-            this.label313.AutoSize = true;
-            this.label313.Location = new System.Drawing.Point(15, 203);
-            this.label313.Name = "label313";
-            this.label313.Size = new System.Drawing.Size(229, 13);
-            this.label313.TabIndex = 20;
-            this.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316";
-            // 
-            // edNetworkUDPURL
-            // 
-            this.edNetworkUDPURL.Location = new System.Drawing.Point(18, 167);
-            this.edNetworkUDPURL.Name = "edNetworkUDPURL";
-            this.edNetworkUDPURL.Size = new System.Drawing.Size(247, 20);
-            this.edNetworkUDPURL.TabIndex = 19;
-            this.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316";
-            // 
-            // label372
-            // 
-            this.label372.AutoSize = true;
-            this.label372.Location = new System.Drawing.Point(15, 151);
-            this.label372.Name = "label372";
-            this.label372.Size = new System.Drawing.Size(29, 13);
-            this.label372.TabIndex = 18;
-            this.label372.Text = "URL";
-            // 
-            // label484
-            // 
-            this.label484.AutoSize = true;
-            this.label484.Location = new System.Drawing.Point(27, 327);
-            this.label484.Name = "label484";
-            this.label484.Size = new System.Drawing.Size(217, 13);
-            this.label484.TabIndex = 24;
-            this.label484.Text = "Specify settings located on output format tab";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -8194,6 +8242,10 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.TextBox edNetworkUDPURL;
         private System.Windows.Forms.Label label372;
         private System.Windows.Forms.Label label484;
+        private System.Windows.Forms.LinkLabel llXiphX64;
+        private System.Windows.Forms.LinkLabel llXiphX86;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label67;
     }
 }
 

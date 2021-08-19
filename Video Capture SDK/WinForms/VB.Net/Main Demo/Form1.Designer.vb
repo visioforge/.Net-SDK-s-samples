@@ -574,6 +574,10 @@ Partial Class Form1
         Me.btStart = New System.Windows.Forms.Button()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
         Me.tabPage1 = New System.Windows.Forms.TabPage()
+        Me.llXiphX64 = New System.Windows.Forms.LinkLabel()
+        Me.llXiphX86 = New System.Windows.Forms.LinkLabel()
+        Me.label68 = New System.Windows.Forms.Label()
+        Me.label67 = New System.Windows.Forms.Label()
         Me.lbInfo = New System.Windows.Forms.Label()
         Me.btOutputConfigure = New System.Windows.Forms.Button()
         Me.cbOutputFormat = New System.Windows.Forms.ComboBox()
@@ -905,6 +909,12 @@ Partial Class Form1
         Me.edNDIName = New System.Windows.Forms.TextBox()
         Me.label30 = New System.Windows.Forms.Label()
         Me.tpUDP = New System.Windows.Forms.TabPage()
+        Me.label63 = New System.Windows.Forms.Label()
+        Me.label62 = New System.Windows.Forms.Label()
+        Me.label314 = New System.Windows.Forms.Label()
+        Me.label313 = New System.Windows.Forms.Label()
+        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
+        Me.label372 = New System.Windows.Forms.Label()
         Me.cbNetworkUDPFFMPEGUsePipes = New System.Windows.Forms.CheckBox()
         Me.label484 = New System.Windows.Forms.Label()
         Me.rbNetworkUDPFFMPEGCustom = New System.Windows.Forms.RadioButton()
@@ -1124,12 +1134,6 @@ Partial Class Form1
         Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
-        Me.label63 = New System.Windows.Forms.Label()
-        Me.label62 = New System.Windows.Forms.Label()
-        Me.label314 = New System.Windows.Forms.Label()
-        Me.label313 = New System.Windows.Forms.Label()
-        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
-        Me.label372 = New System.Windows.Forms.Label()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -6875,6 +6879,10 @@ Partial Class Form1
         '
         'tabPage1
         '
+        Me.tabPage1.Controls.Add(Me.llXiphX64)
+        Me.tabPage1.Controls.Add(Me.llXiphX86)
+        Me.tabPage1.Controls.Add(Me.label68)
+        Me.tabPage1.Controls.Add(Me.label67)
         Me.tabPage1.Controls.Add(Me.lbInfo)
         Me.tabPage1.Controls.Add(Me.btOutputConfigure)
         Me.tabPage1.Controls.Add(Me.cbOutputFormat)
@@ -6890,6 +6898,44 @@ Partial Class Form1
         Me.tabPage1.TabIndex = 0
         Me.tabPage1.Text = "Capture"
         Me.tabPage1.UseVisualStyleBackColor = True
+        '
+        'llXiphX64
+        '
+        Me.llXiphX64.AutoSize = True
+        Me.llXiphX64.Location = New System.Drawing.Point(165, 245)
+        Me.llXiphX64.Name = "llXiphX64"
+        Me.llXiphX64.Size = New System.Drawing.Size(24, 13)
+        Me.llXiphX64.TabIndex = 59
+        Me.llXiphX64.TabStop = True
+        Me.llXiphX64.Text = "x64"
+        '
+        'llXiphX86
+        '
+        Me.llXiphX86.AutoSize = True
+        Me.llXiphX86.Location = New System.Drawing.Point(135, 245)
+        Me.llXiphX86.Name = "llXiphX86"
+        Me.llXiphX86.Size = New System.Drawing.Size(24, 13)
+        Me.llXiphX86.TabIndex = 58
+        Me.llXiphX86.TabStop = True
+        Me.llXiphX86.Text = "x86"
+        '
+        'label68
+        '
+        Me.label68.AutoSize = True
+        Me.label68.Location = New System.Drawing.Point(16, 245)
+        Me.label68.Name = "label68"
+        Me.label68.Size = New System.Drawing.Size(113, 13)
+        Me.label68.TabIndex = 57
+        Me.label68.Text = "and Ogg Vorbis output"
+        '
+        'label67
+        '
+        Me.label67.AutoSize = True
+        Me.label67.Location = New System.Drawing.Point(16, 223)
+        Me.label67.Name = "label67"
+        Me.label67.Size = New System.Drawing.Size(273, 13)
+        Me.label67.TabIndex = 56
+        Me.label67.Text = "Additional redist required to be installed for FLAC, Speex,"
         '
         'lbInfo
         '
@@ -6913,7 +6959,7 @@ Partial Class Form1
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputFormat.FormattingEnabled = True
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture DV (DV devices only)", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (IP Cameras / H264 devices)", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe)", "MP4", "MP4 v11 (CPU/GPU)", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture DV (DV devices only)", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (IP Cameras / H264 devices)", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4", "MP4 v11 (CPU/GPU)", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(19, 33)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(275, 21)
@@ -10347,6 +10393,59 @@ Partial Class Form1
         Me.tpUDP.Text = "UDP"
         Me.tpUDP.UseVisualStyleBackColor = True
         '
+        'label63
+        '
+        Me.label63.AutoSize = True
+        Me.label63.Location = New System.Drawing.Point(17, 273)
+        Me.label63.Name = "label63"
+        Me.label63.Size = New System.Drawing.Size(109, 13)
+        Me.label63.TabIndex = 26
+        Me.label63.Text = "instead of IP address."
+        '
+        'label62
+        '
+        Me.label62.AutoSize = True
+        Me.label62.Location = New System.Drawing.Point(17, 260)
+        Me.label62.Name = "label62"
+        Me.label62.Size = New System.Drawing.Size(239, 13)
+        Me.label62.TabIndex = 25
+        Me.label62.Text = "To open the stream in VLC on a local PC, use @ "
+        '
+        'label314
+        '
+        Me.label314.AutoSize = True
+        Me.label314.Location = New System.Drawing.Point(17, 209)
+        Me.label314.Name = "label314"
+        Me.label314.Size = New System.Drawing.Size(222, 13)
+        Me.label314.TabIndex = 24
+        Me.label314.Text = "For multicast UDP streaming, use an URL like"
+        '
+        'label313
+        '
+        Me.label313.AutoSize = True
+        Me.label313.Location = New System.Drawing.Point(17, 222)
+        Me.label313.Name = "label313"
+        Me.label313.Size = New System.Drawing.Size(229, 13)
+        Me.label313.TabIndex = 23
+        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
+        '
+        'edNetworkUDPURL
+        '
+        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 186)
+        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
+        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
+        Me.edNetworkUDPURL.TabIndex = 22
+        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316"
+        '
+        'label372
+        '
+        Me.label372.AutoSize = True
+        Me.label372.Location = New System.Drawing.Point(17, 170)
+        Me.label372.Name = "label372"
+        Me.label372.Size = New System.Drawing.Size(29, 13)
+        Me.label372.TabIndex = 21
+        Me.label372.Text = "URL"
+        '
         'cbNetworkUDPFFMPEGUsePipes
         '
         Me.cbNetworkUDPFFMPEGUsePipes.AutoSize = True
@@ -12695,59 +12794,6 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
-        'label63
-        '
-        Me.label63.AutoSize = True
-        Me.label63.Location = New System.Drawing.Point(17, 273)
-        Me.label63.Name = "label63"
-        Me.label63.Size = New System.Drawing.Size(109, 13)
-        Me.label63.TabIndex = 26
-        Me.label63.Text = "instead of IP address."
-        '
-        'label62
-        '
-        Me.label62.AutoSize = True
-        Me.label62.Location = New System.Drawing.Point(17, 260)
-        Me.label62.Name = "label62"
-        Me.label62.Size = New System.Drawing.Size(239, 13)
-        Me.label62.TabIndex = 25
-        Me.label62.Text = "To open the stream in VLC on a local PC, use @ "
-        '
-        'label314
-        '
-        Me.label314.AutoSize = True
-        Me.label314.Location = New System.Drawing.Point(17, 209)
-        Me.label314.Name = "label314"
-        Me.label314.Size = New System.Drawing.Size(222, 13)
-        Me.label314.TabIndex = 24
-        Me.label314.Text = "For multicast UDP streaming, use an URL like"
-        '
-        'label313
-        '
-        Me.label313.AutoSize = True
-        Me.label313.Location = New System.Drawing.Point(17, 222)
-        Me.label313.Name = "label313"
-        Me.label313.Size = New System.Drawing.Size(229, 13)
-        Me.label313.TabIndex = 23
-        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
-        '
-        'edNetworkUDPURL
-        '
-        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 186)
-        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
-        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
-        Me.edNetworkUDPURL.TabIndex = 22
-        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316"
-        '
-        'label372
-        '
-        Me.label372.AutoSize = True
-        Me.label372.Location = New System.Drawing.Point(17, 170)
-        Me.label372.Name = "label372"
-        Me.label372.Size = New System.Drawing.Size(29, 13)
-        Me.label372.TabIndex = 21
-        Me.label372.Text = "URL"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -14193,4 +14239,8 @@ End Sub
     Private WithEvents label313 As Label
     Private WithEvents edNetworkUDPURL As TextBox
     Private WithEvents label372 As Label
+    Private WithEvents llXiphX64 As LinkLabel
+    Private WithEvents llXiphX86 As LinkLabel
+    Private WithEvents label68 As Label
+    Private WithEvents label67 As Label
 End Class

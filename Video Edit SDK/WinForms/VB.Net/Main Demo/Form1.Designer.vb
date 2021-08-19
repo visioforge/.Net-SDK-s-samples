@@ -39,6 +39,10 @@ Partial Class Form1
         Me.tabPage1 = New System.Windows.Forms.TabPage()
         Me.tabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.llXiphX64 = New System.Windows.Forms.LinkLabel()
+        Me.llXiphX86 = New System.Windows.Forms.LinkLabel()
+        Me.label68 = New System.Windows.Forms.Label()
+        Me.label67 = New System.Windows.Forms.Label()
         Me.lbInfo = New System.Windows.Forms.Label()
         Me.btConfigure = New System.Windows.Forms.Button()
         Me.btSelectOutput = New System.Windows.Forms.Button()
@@ -441,6 +445,12 @@ Partial Class Form1
         Me.edNDIName = New System.Windows.Forms.TextBox()
         Me.label13 = New System.Windows.Forms.Label()
         Me.TabPage67 = New System.Windows.Forms.TabPage()
+        Me.label63 = New System.Windows.Forms.Label()
+        Me.label62 = New System.Windows.Forms.Label()
+        Me.label314 = New System.Windows.Forms.Label()
+        Me.label313 = New System.Windows.Forms.Label()
+        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.label484 = New System.Windows.Forms.Label()
         Me.rbNetworkUDPFFMPEGCustom = New System.Windows.Forms.RadioButton()
         Me.rbNetworkUDPFFMPEG = New System.Windows.Forms.RadioButton()
@@ -616,139 +626,133 @@ Partial Class Form1
         Me.Label496 = New System.Windows.Forms.Label()
         Me.edTagTrackID = New System.Windows.Forms.TextBox()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
-        Me.label63 = New System.Windows.Forms.Label()
-        Me.label62 = New System.Windows.Forms.Label()
-        Me.label314 = New System.Windows.Forms.Label()
-        Me.label313 = New System.Windows.Forms.Label()
-        Me.edNetworkUDPURL = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.tabControl1.SuspendLayout()
-        Me.tabPage1.SuspendLayout()
-        Me.tabControl2.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        Me.tabPage30.SuspendLayout()
-        Me.tabPage31.SuspendLayout()
-        Me.tabControl17.SuspendLayout()
-        Me.tabPage68.SuspendLayout()
-        Me.tabControl7.SuspendLayout()
-        Me.tabPage29.SuspendLayout()
-        Me.tabPage42.SuspendLayout()
-        Me.TabPage7.SuspendLayout()
-        Me.groupBox37.SuspendLayout()
-        Me.TabPage16.SuspendLayout()
-        Me.groupBox40.SuspendLayout()
-        Me.groupBox39.SuspendLayout()
-        Me.groupBox38.SuspendLayout()
-        Me.TabPage33.SuspendLayout()
-        Me.groupBox45.SuspendLayout()
-        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage69.SuspendLayout()
-        Me.tabPage59.SuspendLayout()
-        Me.TabPage82.SuspendLayout()
-        CType(Me.tbGPUBlur, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbGPUContrast, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbGPUDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbGPULightness, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbGPUSaturation, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage20.SuspendLayout()
-        Me.tabControl15.SuspendLayout()
-        Me.TabPage26.SuspendLayout()
-        Me.TabPage27.SuspendLayout()
-        Me.TabPage21.SuspendLayout()
-        CType(Me.tbChromaKeySmoothing, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbChromaKeyThresholdSensitivity, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage70.SuspendLayout()
-        Me.TabPage81.SuspendLayout()
-        Me.tabPage9.SuspendLayout()
-        Me.groupBox5.SuspendLayout()
-        Me.tabPage3.SuspendLayout()
-        Me.tabControl18.SuspendLayout()
-        Me.tabPage71.SuspendLayout()
-        CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage72.SuspendLayout()
-        CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq8, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudEq0, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage73.SuspendLayout()
-        CType(Me.tbAudRelease, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudAttack, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudDynAmp, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage75.SuspendLayout()
-        CType(Me.tbAud3DSound, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage76.SuspendLayout()
-        CType(Me.tbAudTrueBass, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage57.SuspendLayout()
-        CType(Me.tbAudioTimeshift, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupBox1.SuspendLayout()
-        CType(Me.tbAudioOutputGainLFE, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioOutputGainSR, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioOutputGainSL, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioOutputGainR, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioOutputGainC, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioOutputGainL, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupBox2.SuspendLayout()
-        CType(Me.tbAudioInputGainLFE, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioInputGainSR, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioInputGainSL, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioInputGainR, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioInputGainC, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbAudioInputGainL, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage80.SuspendLayout()
-        Me.groupBox41.SuspendLayout()
-        CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage28.SuspendLayout()
-        Me.tabControl9.SuspendLayout()
-        Me.tabPage44.SuspendLayout()
-        Me.tabPage45.SuspendLayout()
-        Me.groupBox25.SuspendLayout()
-        CType(Me.tbMotDetHLThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupBox27.SuspendLayout()
-        Me.groupBox26.SuspendLayout()
-        CType(Me.tbMotDetDropFramesThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupBox24.SuspendLayout()
-        Me.tabPage2.SuspendLayout()
-        Me.groupBox13.SuspendLayout()
-        Me.TabPage23.SuspendLayout()
-        Me.TabPage24.SuspendLayout()
-        Me.tabControl5.SuspendLayout()
-        Me.TabPage25.SuspendLayout()
-        Me.TabPage47.SuspendLayout()
-        Me.TabPage48.SuspendLayout()
-        Me.TabPage5.SuspendLayout()
-        Me.TabPage67.SuspendLayout()
-        Me.TabPage49.SuspendLayout()
-        Me.TabPage56.SuspendLayout()
-        Me.TabPage32.SuspendLayout()
-        Me.TabPage34.SuspendLayout()
-        Me.TabPage43.SuspendLayout()
-        Me.groupBox48.SuspendLayout()
-        Me.groupBox47.SuspendLayout()
-        Me.groupBox43.SuspendLayout()
-        Me.TabPage78.SuspendLayout()
-        Me.TabPage22.SuspendLayout()
-        CType(Me.tbVUMeterBoost, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbVUMeterAmplification, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbSeeking, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabControl3.SuspendLayout()
-        Me.tabPage52.SuspendLayout()
-        Me.groupBox7.SuspendLayout()
-        Me.groupBox6.SuspendLayout()
-        CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPage53.SuspendLayout()
-        Me.tabPage54.SuspendLayout()
-        Me.TabPage74.SuspendLayout()
-        CType(Me.imgTagCover, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.tabControl1.SuspendLayout
+        Me.tabPage1.SuspendLayout
+        Me.tabControl2.SuspendLayout
+        Me.TabPage4.SuspendLayout
+        Me.tabPage30.SuspendLayout
+        Me.tabPage31.SuspendLayout
+        Me.tabControl17.SuspendLayout
+        Me.tabPage68.SuspendLayout
+        Me.tabControl7.SuspendLayout
+        Me.tabPage29.SuspendLayout
+        Me.tabPage42.SuspendLayout
+        Me.TabPage7.SuspendLayout
+        Me.groupBox37.SuspendLayout
+        Me.TabPage16.SuspendLayout
+        Me.groupBox40.SuspendLayout
+        Me.groupBox39.SuspendLayout
+        Me.groupBox38.SuspendLayout
+        Me.TabPage33.SuspendLayout
+        Me.groupBox45.SuspendLayout
+        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage69.SuspendLayout
+        Me.tabPage59.SuspendLayout
+        Me.TabPage82.SuspendLayout
+        CType(Me.tbGPUBlur, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbGPUContrast, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbGPUDarkness, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbGPULightness, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbGPUSaturation, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage20.SuspendLayout
+        Me.tabControl15.SuspendLayout
+        Me.TabPage26.SuspendLayout
+        Me.TabPage27.SuspendLayout
+        Me.TabPage21.SuspendLayout
+        CType(Me.tbChromaKeySmoothing, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbChromaKeyThresholdSensitivity, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage70.SuspendLayout
+        Me.TabPage81.SuspendLayout
+        Me.tabPage9.SuspendLayout
+        Me.groupBox5.SuspendLayout
+        Me.tabPage3.SuspendLayout
+        Me.tabControl18.SuspendLayout
+        Me.tabPage71.SuspendLayout
+        CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage72.SuspendLayout
+        CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq8, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq7, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq6, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq5, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq4, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq3, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq2, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq1, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudEq0, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage73.SuspendLayout
+        CType(Me.tbAudRelease, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudAttack, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudDynAmp, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage75.SuspendLayout
+        CType(Me.tbAud3DSound, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage76.SuspendLayout
+        CType(Me.tbAudTrueBass, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage57.SuspendLayout
+        CType(Me.tbAudioTimeshift, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.groupBox1.SuspendLayout
+        CType(Me.tbAudioOutputGainLFE, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioOutputGainSR, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioOutputGainSL, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioOutputGainR, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioOutputGainC, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioOutputGainL, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.groupBox2.SuspendLayout
+        CType(Me.tbAudioInputGainLFE, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioInputGainSR, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioInputGainSL, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioInputGainR, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioInputGainC, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbAudioInputGainL, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage80.SuspendLayout
+        Me.groupBox41.SuspendLayout
+        CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage28.SuspendLayout
+        Me.tabControl9.SuspendLayout
+        Me.tabPage44.SuspendLayout
+        Me.tabPage45.SuspendLayout
+        Me.groupBox25.SuspendLayout
+        CType(Me.tbMotDetHLThreshold, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.groupBox27.SuspendLayout
+        Me.groupBox26.SuspendLayout
+        CType(Me.tbMotDetDropFramesThreshold, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.groupBox24.SuspendLayout
+        Me.tabPage2.SuspendLayout
+        Me.groupBox13.SuspendLayout
+        Me.TabPage23.SuspendLayout
+        Me.TabPage24.SuspendLayout
+        Me.tabControl5.SuspendLayout
+        Me.TabPage25.SuspendLayout
+        Me.TabPage47.SuspendLayout
+        Me.TabPage48.SuspendLayout
+        Me.TabPage5.SuspendLayout
+        Me.TabPage67.SuspendLayout
+        Me.TabPage49.SuspendLayout
+        Me.TabPage56.SuspendLayout
+        Me.TabPage32.SuspendLayout
+        Me.TabPage34.SuspendLayout
+        Me.TabPage43.SuspendLayout
+        Me.groupBox48.SuspendLayout
+        Me.groupBox47.SuspendLayout
+        Me.groupBox43.SuspendLayout
+        Me.TabPage78.SuspendLayout
+        Me.TabPage22.SuspendLayout
+        CType(Me.tbVUMeterBoost, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbVUMeterAmplification, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.tbSeeking, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabControl3.SuspendLayout
+        Me.tabPage52.SuspendLayout
+        Me.groupBox7.SuspendLayout
+        Me.groupBox6.SuspendLayout
+        CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabPage53.SuspendLayout
+        Me.tabPage54.SuspendLayout
+        Me.TabPage74.SuspendLayout
+        CType(Me.imgTagCover, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'FontDialog1
         '
@@ -864,6 +868,10 @@ Partial Class Form1
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.llXiphX64)
+        Me.TabPage4.Controls.Add(Me.llXiphX86)
+        Me.TabPage4.Controls.Add(Me.label68)
+        Me.TabPage4.Controls.Add(Me.label67)
         Me.TabPage4.Controls.Add(Me.lbInfo)
         Me.TabPage4.Controls.Add(Me.btConfigure)
         Me.TabPage4.Controls.Add(Me.btSelectOutput)
@@ -879,6 +887,44 @@ Partial Class Form1
         Me.TabPage4.TabIndex = 7
         Me.TabPage4.Text = "Main"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'llXiphX64
+        '
+        Me.llXiphX64.AutoSize = True
+        Me.llXiphX64.Location = New System.Drawing.Point(155, 224)
+        Me.llXiphX64.Name = "llXiphX64"
+        Me.llXiphX64.Size = New System.Drawing.Size(24, 13)
+        Me.llXiphX64.TabIndex = 63
+        Me.llXiphX64.TabStop = True
+        Me.llXiphX64.Text = "x64"
+        '
+        'llXiphX86
+        '
+        Me.llXiphX86.AutoSize = True
+        Me.llXiphX86.Location = New System.Drawing.Point(125, 224)
+        Me.llXiphX86.Name = "llXiphX86"
+        Me.llXiphX86.Size = New System.Drawing.Size(24, 13)
+        Me.llXiphX86.TabIndex = 62
+        Me.llXiphX86.TabStop = True
+        Me.llXiphX86.Text = "x86"
+        '
+        'label68
+        '
+        Me.label68.AutoSize = True
+        Me.label68.Location = New System.Drawing.Point(6, 224)
+        Me.label68.Name = "label68"
+        Me.label68.Size = New System.Drawing.Size(113, 13)
+        Me.label68.TabIndex = 61
+        Me.label68.Text = "and Ogg Vorbis output"
+        '
+        'label67
+        '
+        Me.label67.AutoSize = True
+        Me.label67.Location = New System.Drawing.Point(6, 202)
+        Me.label67.Name = "label67"
+        Me.label67.Size = New System.Drawing.Size(273, 13)
+        Me.label67.TabIndex = 60
+        Me.label67.Text = "Additional redist required to be installed for FLAC, Speex,"
         '
         'lbInfo
         '
@@ -928,7 +974,7 @@ Partial Class Form1
         '
         Me.cbOutputVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputVideoFormat.FormattingEnabled = True
-        Me.cbOutputVideoFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG (DLL)", "FFMPEG (external exe) (BETA)", "MP4", "MP4 v11 (CPU/GPU)", "Animated GIF", "Encrypted video"})
+        Me.cbOutputVideoFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4", "MP4 v11 (CPU/GPU)", "Animated GIF", "Encrypted video"})
         Me.cbOutputVideoFormat.Location = New System.Drawing.Point(13, 32)
         Me.cbOutputVideoFormat.Name = "cbOutputVideoFormat"
         Me.cbOutputVideoFormat.Size = New System.Drawing.Size(259, 21)
@@ -5063,6 +5109,59 @@ Partial Class Form1
         Me.TabPage67.Text = "UDP"
         Me.TabPage67.UseVisualStyleBackColor = True
         '
+        'label63
+        '
+        Me.label63.AutoSize = True
+        Me.label63.Location = New System.Drawing.Point(17, 178)
+        Me.label63.Name = "label63"
+        Me.label63.Size = New System.Drawing.Size(109, 13)
+        Me.label63.TabIndex = 27
+        Me.label63.Text = "instead of IP address."
+        '
+        'label62
+        '
+        Me.label62.AutoSize = True
+        Me.label62.Location = New System.Drawing.Point(17, 165)
+        Me.label62.Name = "label62"
+        Me.label62.Size = New System.Drawing.Size(239, 13)
+        Me.label62.TabIndex = 26
+        Me.label62.Text = "To open the stream in VLC on a local PC, use @ "
+        '
+        'label314
+        '
+        Me.label314.AutoSize = True
+        Me.label314.Location = New System.Drawing.Point(17, 114)
+        Me.label314.Name = "label314"
+        Me.label314.Size = New System.Drawing.Size(222, 13)
+        Me.label314.TabIndex = 25
+        Me.label314.Text = "For multicast UDP streaming, use an URL like"
+        '
+        'label313
+        '
+        Me.label313.AutoSize = True
+        Me.label313.Location = New System.Drawing.Point(17, 127)
+        Me.label313.Name = "label313"
+        Me.label313.Size = New System.Drawing.Size(229, 13)
+        Me.label313.TabIndex = 24
+        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
+        '
+        'edNetworkUDPURL
+        '
+        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 91)
+        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
+        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
+        Me.edNetworkUDPURL.TabIndex = 23
+        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(17, 75)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(29, 13)
+        Me.Label4.TabIndex = 22
+        Me.Label4.Text = "URL"
+        '
         'label484
         '
         Me.label484.AutoSize = True
@@ -6834,59 +6933,6 @@ Partial Class Form1
         Me.cbTelemetry.Text = "Telemetry"
         Me.cbTelemetry.UseVisualStyleBackColor = True
         '
-        'label63
-        '
-        Me.label63.AutoSize = True
-        Me.label63.Location = New System.Drawing.Point(17, 178)
-        Me.label63.Name = "label63"
-        Me.label63.Size = New System.Drawing.Size(109, 13)
-        Me.label63.TabIndex = 27
-        Me.label63.Text = "instead of IP address."
-        '
-        'label62
-        '
-        Me.label62.AutoSize = True
-        Me.label62.Location = New System.Drawing.Point(17, 165)
-        Me.label62.Name = "label62"
-        Me.label62.Size = New System.Drawing.Size(239, 13)
-        Me.label62.TabIndex = 26
-        Me.label62.Text = "To open the stream in VLC on a local PC, use @ "
-        '
-        'label314
-        '
-        Me.label314.AutoSize = True
-        Me.label314.Location = New System.Drawing.Point(17, 114)
-        Me.label314.Name = "label314"
-        Me.label314.Size = New System.Drawing.Size(222, 13)
-        Me.label314.TabIndex = 25
-        Me.label314.Text = "For multicast UDP streaming, use an URL like"
-        '
-        'label313
-        '
-        Me.label313.AutoSize = True
-        Me.label313.Location = New System.Drawing.Point(17, 127)
-        Me.label313.Name = "label313"
-        Me.label313.Size = New System.Drawing.Size(229, 13)
-        Me.label313.TabIndex = 24
-        Me.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316"
-        '
-        'edNetworkUDPURL
-        '
-        Me.edNetworkUDPURL.Location = New System.Drawing.Point(20, 91)
-        Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
-        Me.edNetworkUDPURL.Size = New System.Drawing.Size(247, 20)
-        Me.edNetworkUDPURL.TabIndex = 23
-        Me.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(17, 75)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(29, 13)
-        Me.Label4.TabIndex = 22
-        Me.Label4.Text = "URL"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -6914,189 +6960,189 @@ Partial Class Form1
         Me.tabPage1.ResumeLayout(False)
         Me.tabControl2.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
-        Me.TabPage4.PerformLayout()
+        Me.TabPage4.PerformLayout
         Me.tabPage30.ResumeLayout(False)
-        Me.tabPage30.PerformLayout()
+        Me.tabPage30.PerformLayout
         Me.tabPage31.ResumeLayout(False)
         Me.tabControl17.ResumeLayout(False)
         Me.tabPage68.ResumeLayout(False)
-        Me.tabPage68.PerformLayout()
+        Me.tabPage68.PerformLayout
         Me.tabControl7.ResumeLayout(False)
         Me.tabPage29.ResumeLayout(False)
         Me.tabPage42.ResumeLayout(False)
         Me.TabPage7.ResumeLayout(False)
-        Me.TabPage7.PerformLayout()
+        Me.TabPage7.PerformLayout
         Me.groupBox37.ResumeLayout(False)
         Me.TabPage16.ResumeLayout(False)
-        Me.TabPage16.PerformLayout()
+        Me.TabPage16.PerformLayout
         Me.groupBox40.ResumeLayout(False)
-        Me.groupBox40.PerformLayout()
+        Me.groupBox40.PerformLayout
         Me.groupBox39.ResumeLayout(False)
-        Me.groupBox39.PerformLayout()
+        Me.groupBox39.PerformLayout
         Me.groupBox38.ResumeLayout(False)
-        Me.groupBox38.PerformLayout()
+        Me.groupBox38.PerformLayout
         Me.TabPage33.ResumeLayout(False)
-        Me.TabPage33.PerformLayout()
+        Me.TabPage33.PerformLayout
         Me.groupBox45.ResumeLayout(False)
-        Me.groupBox45.PerformLayout()
-        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox45.PerformLayout
+        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage69.ResumeLayout(False)
-        Me.tabPage69.PerformLayout()
+        Me.tabPage69.PerformLayout
         Me.tabPage59.ResumeLayout(False)
-        Me.tabPage59.PerformLayout()
+        Me.tabPage59.PerformLayout
         Me.TabPage82.ResumeLayout(False)
-        Me.TabPage82.PerformLayout()
-        CType(Me.tbGPUBlur, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbGPUContrast, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbGPUDarkness, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbGPULightness, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbGPUSaturation, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage82.PerformLayout
+        CType(Me.tbGPUBlur, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUContrast, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUDarkness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPULightness, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbGPUSaturation, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage20.ResumeLayout(False)
         Me.tabControl15.ResumeLayout(False)
         Me.TabPage26.ResumeLayout(False)
-        Me.TabPage26.PerformLayout()
+        Me.TabPage26.PerformLayout
         Me.TabPage27.ResumeLayout(False)
-        Me.TabPage27.PerformLayout()
+        Me.TabPage27.PerformLayout
         Me.TabPage21.ResumeLayout(False)
-        Me.TabPage21.PerformLayout()
-        CType(Me.tbChromaKeySmoothing, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbChromaKeyThresholdSensitivity, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage21.PerformLayout
+        CType(Me.tbChromaKeySmoothing, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbChromaKeyThresholdSensitivity, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage70.ResumeLayout(False)
-        Me.tabPage70.PerformLayout()
+        Me.tabPage70.PerformLayout
         Me.TabPage81.ResumeLayout(False)
-        Me.TabPage81.PerformLayout()
+        Me.TabPage81.PerformLayout
         Me.tabPage9.ResumeLayout(False)
-        Me.tabPage9.PerformLayout()
+        Me.tabPage9.PerformLayout
         Me.groupBox5.ResumeLayout(False)
-        Me.groupBox5.PerformLayout()
+        Me.groupBox5.PerformLayout
         Me.tabPage3.ResumeLayout(False)
-        Me.tabPage3.PerformLayout()
+        Me.tabPage3.PerformLayout
         Me.tabControl18.ResumeLayout(False)
         Me.tabPage71.ResumeLayout(False)
-        Me.tabPage71.PerformLayout()
-        CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPage71.PerformLayout
+        CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage72.ResumeLayout(False)
-        Me.tabPage72.PerformLayout()
-        CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq8, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudEq0, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPage72.PerformLayout
+        CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq8, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq7, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq6, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq5, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq4, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq3, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq2, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq1, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudEq0, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage73.ResumeLayout(False)
-        Me.tabPage73.PerformLayout()
-        CType(Me.tbAudRelease, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudAttack, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudDynAmp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPage73.PerformLayout
+        CType(Me.tbAudRelease, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudAttack, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudDynAmp, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage75.ResumeLayout(False)
-        Me.tabPage75.PerformLayout()
-        CType(Me.tbAud3DSound, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPage75.PerformLayout
+        CType(Me.tbAud3DSound, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage76.ResumeLayout(False)
-        Me.tabPage76.PerformLayout()
-        CType(Me.tbAudTrueBass, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPage76.PerformLayout
+        CType(Me.tbAudTrueBass, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage57.ResumeLayout(False)
-        Me.TabPage57.PerformLayout()
-        CType(Me.tbAudioTimeshift, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage57.PerformLayout
+        CType(Me.tbAudioTimeshift, System.ComponentModel.ISupportInitialize).EndInit
         Me.groupBox1.ResumeLayout(False)
-        Me.groupBox1.PerformLayout()
-        CType(Me.tbAudioOutputGainLFE, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioOutputGainSR, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioOutputGainSL, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioOutputGainR, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioOutputGainC, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioOutputGainL, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox1.PerformLayout
+        CType(Me.tbAudioOutputGainLFE, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainSR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainSL, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainC, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioOutputGainL, System.ComponentModel.ISupportInitialize).EndInit
         Me.groupBox2.ResumeLayout(False)
-        Me.groupBox2.PerformLayout()
-        CType(Me.tbAudioInputGainLFE, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioInputGainSR, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioInputGainSL, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioInputGainR, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioInputGainC, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbAudioInputGainL, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox2.PerformLayout
+        CType(Me.tbAudioInputGainLFE, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainSR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainSL, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainR, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainC, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbAudioInputGainL, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage80.ResumeLayout(False)
-        Me.TabPage80.PerformLayout()
+        Me.TabPage80.PerformLayout
         Me.groupBox41.ResumeLayout(False)
-        Me.groupBox41.PerformLayout()
-        CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox41.PerformLayout
+        CType(Me.tbAudioChannelMapperVolume, System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage28.ResumeLayout(False)
-        Me.TabPage28.PerformLayout()
+        Me.TabPage28.PerformLayout
         Me.tabControl9.ResumeLayout(False)
         Me.tabPage44.ResumeLayout(False)
-        Me.tabPage44.PerformLayout()
+        Me.tabPage44.PerformLayout
         Me.tabPage45.ResumeLayout(False)
         Me.groupBox25.ResumeLayout(False)
-        Me.groupBox25.PerformLayout()
-        CType(Me.tbMotDetHLThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox25.PerformLayout
+        CType(Me.tbMotDetHLThreshold, System.ComponentModel.ISupportInitialize).EndInit
         Me.groupBox27.ResumeLayout(False)
-        Me.groupBox27.PerformLayout()
+        Me.groupBox27.PerformLayout
         Me.groupBox26.ResumeLayout(False)
-        Me.groupBox26.PerformLayout()
-        CType(Me.tbMotDetDropFramesThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox26.PerformLayout
+        CType(Me.tbMotDetDropFramesThreshold, System.ComponentModel.ISupportInitialize).EndInit
         Me.groupBox24.ResumeLayout(False)
-        Me.groupBox24.PerformLayout()
+        Me.groupBox24.PerformLayout
         Me.tabPage2.ResumeLayout(False)
-        Me.tabPage2.PerformLayout()
+        Me.tabPage2.PerformLayout
         Me.groupBox13.ResumeLayout(False)
-        Me.groupBox13.PerformLayout()
+        Me.groupBox13.PerformLayout
         Me.TabPage23.ResumeLayout(False)
-        Me.TabPage23.PerformLayout()
+        Me.TabPage23.PerformLayout
         Me.TabPage24.ResumeLayout(False)
-        Me.TabPage24.PerformLayout()
+        Me.TabPage24.PerformLayout
         Me.tabControl5.ResumeLayout(False)
         Me.TabPage25.ResumeLayout(False)
-        Me.TabPage25.PerformLayout()
+        Me.TabPage25.PerformLayout
         Me.TabPage47.ResumeLayout(False)
-        Me.TabPage47.PerformLayout()
+        Me.TabPage47.PerformLayout
         Me.TabPage48.ResumeLayout(False)
-        Me.TabPage48.PerformLayout()
+        Me.TabPage48.PerformLayout
         Me.TabPage5.ResumeLayout(False)
-        Me.TabPage5.PerformLayout()
+        Me.TabPage5.PerformLayout
         Me.TabPage67.ResumeLayout(False)
-        Me.TabPage67.PerformLayout()
+        Me.TabPage67.PerformLayout
         Me.TabPage49.ResumeLayout(False)
-        Me.TabPage49.PerformLayout()
+        Me.TabPage49.PerformLayout
         Me.TabPage56.ResumeLayout(False)
-        Me.TabPage56.PerformLayout()
+        Me.TabPage56.PerformLayout
         Me.TabPage32.ResumeLayout(False)
-        Me.TabPage32.PerformLayout()
+        Me.TabPage32.PerformLayout
         Me.TabPage34.ResumeLayout(False)
-        Me.TabPage34.PerformLayout()
+        Me.TabPage34.PerformLayout
         Me.TabPage43.ResumeLayout(False)
         Me.groupBox48.ResumeLayout(False)
-        Me.groupBox48.PerformLayout()
+        Me.groupBox48.PerformLayout
         Me.groupBox47.ResumeLayout(False)
-        Me.groupBox47.PerformLayout()
+        Me.groupBox47.PerformLayout
         Me.groupBox43.ResumeLayout(False)
-        Me.groupBox43.PerformLayout()
+        Me.groupBox43.PerformLayout
         Me.TabPage78.ResumeLayout(False)
-        Me.TabPage78.PerformLayout()
+        Me.TabPage78.PerformLayout
         Me.TabPage22.ResumeLayout(False)
-        Me.TabPage22.PerformLayout()
-        CType(Me.tbVUMeterBoost, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbVUMeterAmplification, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbSeeking, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage22.PerformLayout
+        CType(Me.tbVUMeterBoost, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbVUMeterAmplification, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tbSeeking, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabControl3.ResumeLayout(False)
         Me.tabPage52.ResumeLayout(False)
-        Me.tabPage52.PerformLayout()
+        Me.tabPage52.PerformLayout
         Me.groupBox7.ResumeLayout(False)
-        Me.groupBox7.PerformLayout()
+        Me.groupBox7.PerformLayout
         Me.groupBox6.ResumeLayout(False)
-        Me.groupBox6.PerformLayout()
-        CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupBox6.PerformLayout
+        CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabPage53.ResumeLayout(False)
-        Me.tabPage53.PerformLayout()
+        Me.tabPage53.PerformLayout
         Me.tabPage54.ResumeLayout(False)
-        Me.tabPage54.PerformLayout()
+        Me.tabPage54.PerformLayout
         Me.TabPage74.ResumeLayout(False)
-        Me.TabPage74.PerformLayout()
-        CType(Me.imgTagCover, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage74.PerformLayout
+        CType(Me.imgTagCover, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
         Me.PerformLayout
 
@@ -7698,4 +7744,8 @@ End Sub
     Private WithEvents label313 As Label
     Private WithEvents edNetworkUDPURL As TextBox
     Private WithEvents Label4 As Label
+    Private WithEvents llXiphX64 As LinkLabel
+    Private WithEvents llXiphX86 As LinkLabel
+    Private WithEvents label68 As Label
+    Private WithEvents label67 As Label
 End Class

@@ -6223,6 +6223,18 @@ namespace VideoCapture_CSharp_Demo
         {
             btVirtualCameraRegister.Enabled = !VideoCapture1.CustomRedist_VirtualCameraRegister();
         }
+
+        private void llXiphX86_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86);
+            Process.Start(startInfo);
+        }
+
+        private void llXiphX64_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
+            Process.Start(startInfo);
+        }
     }
 }
 

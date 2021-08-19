@@ -1627,7 +1627,7 @@ namespace Main_Demo
                         }
                     case 20:
                         {
-                            outputFormat = VFVideoCaptureOutputFormat.FFMPEG_DLL;
+                            outputFormat = VFVideoCaptureOutputFormat.FFMPEG;
 
                             var ffmpegDLLOutput = new VFFFMPEGOutput();
                             SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
@@ -5914,6 +5914,18 @@ namespace Main_Demo
         private void btVirtualCameraRegister_Click(object sender, RoutedEventArgs e)
         {
             btVirtualCameraRegister.IsEnabled = !VideoCapture1.CustomRedist_VirtualCameraRegister();
+        }
+
+        private void llXiphX86_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86);
+            Process.Start(startInfo);
+        }
+
+        private void llXiphX64_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
+            Process.Start(startInfo);
         }
     }
 }

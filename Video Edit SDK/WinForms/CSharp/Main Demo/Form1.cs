@@ -853,7 +853,7 @@ namespace VideoEdit_CS_Demo
                     }
                 case 13:
                     {
-                        outputFormat = VFVideoEditOutputFormat.FFMPEG_DLL;
+                        outputFormat = VFVideoEditOutputFormat.FFMPEG;
 
                         var ffmpegDLLOutput = new VFFFMPEGOutput();
                         SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
@@ -3410,6 +3410,18 @@ namespace VideoEdit_CS_Demo
         private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
+            Process.Start(startInfo);
+        }
+
+        private void llXiphX86_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86);
+            Process.Start(startInfo);
+        }
+
+        private void llXiphX64_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
             Process.Start(startInfo);
         }
     }

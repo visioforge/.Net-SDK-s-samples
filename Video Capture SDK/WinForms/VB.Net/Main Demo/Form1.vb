@@ -853,7 +853,7 @@ Public Class Form1
                     SetWebMOutput(webmOutput)
                     VideoCapture1.Output_Format = webmOutput
                 Case 20
-                    outputFormat = VFVideoCaptureOutputFormat.FFMPEG_DLL
+                    outputFormat = VFVideoCaptureOutputFormat.FFMPEG
 
                     Dim ffmpegDLLOutput = New VFFFMPEGOutput()
                     SetFFMPEGDLLOutput(ffmpegDLLOutput)
@@ -5172,6 +5172,16 @@ Public Class Form1
 
     Private Sub btVirtualCameraRegister_Click(sender As Object, e As EventArgs) Handles btVirtualCameraRegister.Click
         btVirtualCameraRegister.Enabled = Not VideoCapture1.CustomRedist_VirtualCameraRegister()
+    End Sub
+
+    Private Sub llXiphX86_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX86.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86)
+        Process.Start(startInfo)
+    End Sub
+
+    Private Sub llXiphX64_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX64.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64)
+        Process.Start(startInfo)
     End Sub
 End Class
 

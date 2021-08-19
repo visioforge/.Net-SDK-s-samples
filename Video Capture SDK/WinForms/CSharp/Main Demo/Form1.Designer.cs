@@ -47,6 +47,10 @@ namespace VideoCapture_CSharp_Demo
             this.btStart = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.llXiphX64 = new System.Windows.Forms.LinkLabel();
+            this.llXiphX86 = new System.Windows.Forms.LinkLabel();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
             this.lbInfo = new System.Windows.Forms.Label();
             this.btOutputConfigure = new System.Windows.Forms.Button();
             this.cbAutoFilename = new System.Windows.Forms.CheckBox();
@@ -395,6 +399,8 @@ namespace VideoCapture_CSharp_Demo
             this.edNDIName = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.tpUDP = new System.Windows.Forms.TabPage();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
             this.cbNetworkUDPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
             this.label314 = new System.Windows.Forms.Label();
             this.label313 = new System.Windows.Forms.Label();
@@ -1138,8 +1144,6 @@ namespace VideoCapture_CSharp_Demo
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1407,6 +1411,10 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.llXiphX64);
+            this.tabPage1.Controls.Add(this.llXiphX86);
+            this.tabPage1.Controls.Add(this.label68);
+            this.tabPage1.Controls.Add(this.label67);
             this.tabPage1.Controls.Add(this.lbInfo);
             this.tabPage1.Controls.Add(this.btOutputConfigure);
             this.tabPage1.Controls.Add(this.cbAutoFilename);
@@ -1423,6 +1431,46 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Capture";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // llXiphX64
+            // 
+            this.llXiphX64.AutoSize = true;
+            this.llXiphX64.Location = new System.Drawing.Point(165, 234);
+            this.llXiphX64.Name = "llXiphX64";
+            this.llXiphX64.Size = new System.Drawing.Size(24, 13);
+            this.llXiphX64.TabIndex = 55;
+            this.llXiphX64.TabStop = true;
+            this.llXiphX64.Text = "x64";
+            this.llXiphX64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX64_LinkClicked);
+            // 
+            // llXiphX86
+            // 
+            this.llXiphX86.AutoSize = true;
+            this.llXiphX86.Location = new System.Drawing.Point(135, 234);
+            this.llXiphX86.Name = "llXiphX86";
+            this.llXiphX86.Size = new System.Drawing.Size(24, 13);
+            this.llXiphX86.TabIndex = 54;
+            this.llXiphX86.TabStop = true;
+            this.llXiphX86.Text = "x86";
+            this.llXiphX86.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX86_LinkClicked);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(16, 234);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(113, 13);
+            this.label68.TabIndex = 53;
+            this.label68.Text = "and Ogg Vorbis output";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(16, 212);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(273, 13);
+            this.label67.TabIndex = 52;
+            this.label67.Text = "Additional redist required to be installed for FLAC, Speex,";
             // 
             // lbInfo
             // 
@@ -1478,7 +1526,7 @@ namespace VideoCapture_CSharp_Demo
             "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)",
             "DirectCapture Custom (IP Cameras / H264 devices)",
             "WebM",
-            "FFMPEG (DLL)",
+            "FFMPEG",
             "FFMPEG (external exe)",
             "MP4",
             "MP4 (v11 engine, CPU/GPU)",
@@ -5203,6 +5251,24 @@ namespace VideoCapture_CSharp_Demo
             this.tpUDP.TabIndex = 5;
             this.tpUDP.Text = "UDP";
             this.tpUDP.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(17, 246);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(109, 13);
+            this.label63.TabIndex = 17;
+            this.label63.Text = "instead of IP address.";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(17, 233);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(239, 13);
+            this.label62.TabIndex = 16;
+            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
             // 
             // cbNetworkUDPFFMPEGUsePipes
             // 
@@ -13177,24 +13243,6 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.OnBDAChannelFound += new System.EventHandler<VisioForge.Types.BDAChannelEventArgs>(this.VideoCapture1_OnBDAChannelFound);
             this.VideoCapture1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoCapture1_MouseDown);
             // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(17, 233);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(239, 13);
-            this.label62.TabIndex = 16;
-            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(17, 246);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(109, 13);
-            this.label63.TabIndex = 17;
-            this.label63.Text = "instead of IP address.";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -14635,6 +14683,10 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Button btVirtualCameraRegister;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.LinkLabel llXiphX64;
+        private System.Windows.Forms.LinkLabel llXiphX86;
     }
 }
 
