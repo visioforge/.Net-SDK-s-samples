@@ -8,8 +8,8 @@
     <AssemblyTitle>Decklink Demo</AssemblyTitle>
     <Product>Decklink Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.8.0</AssemblyVersion>
-    <FileVersion>14.2.8.0</FileVersion>
+    <AssemblyVersion>14.2.9.0</AssemblyVersion>
+    <FileVersion>14.2.9.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,6 +63,6 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.9" />
   </ItemGroup>
 </Project>
