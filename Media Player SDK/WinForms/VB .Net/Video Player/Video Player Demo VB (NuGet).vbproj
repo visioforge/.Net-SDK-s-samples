@@ -108,16 +108,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.2.7" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.2.8" />
 
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.8" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -2123,7 +2123,7 @@ namespace VideoCapture_CSharp_Demo
 
                         var ffmpegOutput = new VFFFMPEGEXEOutput();
 
-                        if (rbNetworkUDPFFMPEG.Checked)
+                        if (rbNetworkRTMPFFMPEGCustom.Checked)
                         {
                             ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
                         }
