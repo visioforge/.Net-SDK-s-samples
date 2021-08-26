@@ -101,9 +101,6 @@ namespace Main_Demo
         private int zoomShiftX;
         private int zoomShiftY;
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
         // Dialogs
         private readonly FontDialog fontDialog = new FontDialog();
         private readonly Microsoft.Win32.SaveFileDialog outputFileSaveDialog = new Microsoft.Win32.SaveFileDialog();

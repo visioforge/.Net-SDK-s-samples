@@ -19,6 +19,55 @@ namespace VideoEdit_CS_Demo
             {
                 components.Dispose();
             }
+
+            mp4SettingsDialog?.Dispose();
+            mp4SettingsDialog = null;
+
+            mp4v11SettingsDialog?.Dispose();
+            mp4v11SettingsDialog = null;
+
+            mp3SettingsDialog?.Dispose();
+            mp3SettingsDialog = null;
+
+            m4aSettingsDialog?.Dispose();
+            m4aSettingsDialog = null;
+
+            gifSettingsDialog?.Dispose();
+            gifSettingsDialog = null;
+
+            flacSettingsDialog?.Dispose();
+            flacSettingsDialog = null;
+
+            ffmpegDLLSettingsDialog?.Dispose();
+            ffmpegDLLSettingsDialog = null;
+
+            ffmpegEXESettingsDialog?.Dispose();
+            ffmpegEXESettingsDialog = null;
+
+            dvSettingsDialog?.Dispose();
+            dvSettingsDialog = null;
+
+            aviSettingsDialog?.Dispose();
+            aviSettingsDialog = null;
+
+            customFormatSettingsDialog?.Dispose();
+            customFormatSettingsDialog = null;
+
+            wmvSettingsDialog?.Dispose();
+            wmvSettingsDialog = null;
+
+            webmSettingsDialog?.Dispose();
+            webmSettingsDialog = null;
+
+            speexSettingsDialog?.Dispose();
+            speexSettingsDialog = null;
+
+            pcmSettingsDialog?.Dispose();
+            pcmSettingsDialog = null;
+
+            oggVorbisSettingsDialog?.Dispose();
+            oggVorbisSettingsDialog = null;
+
             base.Dispose(disposing);
         }
 

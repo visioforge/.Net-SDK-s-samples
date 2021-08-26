@@ -97,7 +97,7 @@ namespace VideoCapture_CSharp_Demo
 
         private WindowCaptureForm windowCaptureForm;
 
-        private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
+        private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
