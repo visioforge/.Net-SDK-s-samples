@@ -9,8 +9,8 @@
     <AssemblyTitle>youtube-player</AssemblyTitle>
     <Product>youtube-player</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.16.0</AssemblyVersion>
-    <FileVersion>14.2.16.0</FileVersion>
+    <AssemblyVersion>14.2.17.0</AssemblyVersion>
+    <FileVersion>14.2.17.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -19,6 +19,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\VisioForge.MediaFramework\packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
@@ -36,11 +43,6 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\VisioForge.MediaFramework\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="YoutubeExplode, Version=5.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\VisioForge.MediaFramework\packages\YoutubeExplode.5.1.4\lib\net461\YoutubeExplode.dll</HintPath>
     </Reference>
@@ -76,7 +78,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.2.16" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="14.2.17" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

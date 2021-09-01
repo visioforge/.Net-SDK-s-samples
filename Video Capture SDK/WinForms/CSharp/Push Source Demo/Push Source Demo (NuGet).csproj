@@ -8,8 +8,8 @@
     <AssemblyTitle>Push Source Demo</AssemblyTitle>
     <Product>Push Source Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.16.0</AssemblyVersion>
-    <FileVersion>14.2.16.0</FileVersion>
+    <AssemblyVersion>14.2.17.0</AssemblyVersion>
+    <FileVersion>14.2.17.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,7 +21,7 @@
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Deployment" />
@@ -59,11 +59,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.2.16" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.2.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.2.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.2.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.2.17" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\1.jpg" />

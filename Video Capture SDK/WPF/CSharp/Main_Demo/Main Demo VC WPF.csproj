@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>Main Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.16.0</AssemblyVersion>
-    <FileVersion>14.2.16.0</FileVersion>
+    <AssemblyVersion>14.2.17.0</AssemblyVersion>
+    <FileVersion>14.2.17.0</FileVersion>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -29,7 +29,7 @@
   <PropertyGroup>
     <PostBuildEvent />
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,13 +40,13 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.16" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.17" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.17" />
   </ItemGroup>
 </Project>
