@@ -11609,7 +11609,7 @@ namespace VideoCapture_CSharp_Demo
             this.btSelectPIPFile.TabIndex = 2;
             this.btSelectPIPFile.Text = "...";
             this.btSelectPIPFile.UseVisualStyleBackColor = true;
-            this.btSelectPIPFile.Click += new System.EventHandler(this.button1_Click);
+            this.btSelectPIPFile.Click += new System.EventHandler(this.btSelectPIPFile_Click);
             // 
             // edPIPFileSoureFilename
             // 

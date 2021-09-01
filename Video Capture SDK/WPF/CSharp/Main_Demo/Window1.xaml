@@ -756,7 +756,7 @@
                     <GroupBox Header="Video / audio format" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Height="75" Width="356">
                         <Grid>
                             <RadioButton x:Name="rbEncryptedH264SW" Content="Use MP4 H264 / ACC output format" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <RadioButton x:Name="rbEncryptedH264CUDA" Content="Use MP4 H264 CUDA / AAC output format" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+                            <RadioButton x:Name="rbEncryptedH264CUDA" Content="[Deprecated] Use MP4 H264 CUDA / AAC output format" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Method" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="71" Width="356">

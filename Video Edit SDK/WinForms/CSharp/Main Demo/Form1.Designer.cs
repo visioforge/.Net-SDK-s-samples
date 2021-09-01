@@ -6111,11 +6111,12 @@ namespace VideoEdit_CS_Demo
             // rbEncryptedH264CUDA
             // 
             this.rbEncryptedH264CUDA.AutoSize = true;
+            this.rbEncryptedH264CUDA.Enabled = false;
             this.rbEncryptedH264CUDA.Location = new System.Drawing.Point(14, 51);
             this.rbEncryptedH264CUDA.Name = "rbEncryptedH264CUDA";
-            this.rbEncryptedH264CUDA.Size = new System.Drawing.Size(228, 17);
+            this.rbEncryptedH264CUDA.Size = new System.Drawing.Size(260, 17);
             this.rbEncryptedH264CUDA.TabIndex = 7;
-            this.rbEncryptedH264CUDA.Text = "Use MP4 H264 CUDA / AAC output format";
+            this.rbEncryptedH264CUDA.Text = "[Deprecated] Use MP4 H264 CUDA / AAC format";
             this.rbEncryptedH264CUDA.UseVisualStyleBackColor = true;
             // 
             // rbEncryptedH264SW
