@@ -733,7 +733,7 @@ namespace VideoEdit_CS_Demo
                     }
                 case 1:
                     {
-                        outputFormat = VFVideoEditOutputFormat.MKV;
+                        outputFormat = VFVideoEditOutputFormat.MKVv1;
 
                         var mkvOutput = new VFMKVv1Output();
                         SetMKVOutput(ref mkvOutput);

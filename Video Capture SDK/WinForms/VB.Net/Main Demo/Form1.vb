@@ -865,7 +865,7 @@ Public Class Form1
                     SetFFMPEGEXEOutput(ffmpegOutput)
                     VideoCapture1.Output_Format = ffmpegOutput
                 Case 22
-                    outputFormat = VFVideoCaptureOutputFormat.MP4v8v10
+                    outputFormat = VFVideoCaptureOutputFormat.MP4
                 Case 23
                     outputFormat = VFVideoCaptureOutputFormat.MP4v11
 
@@ -896,7 +896,7 @@ Public Class Form1
                     VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_Name = cbMPEGEncoder.Text
                 End If
 
-            ElseIf ((outputFormat = VFVideoCaptureOutputFormat.MP4v8v10) Or
+            ElseIf ((outputFormat = VFVideoCaptureOutputFormat.MP4) Or
                 ((outputFormat = VFVideoCaptureOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
                         (VideoCapture1.Network_Streaming_Enabled And (VideoCapture1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
 

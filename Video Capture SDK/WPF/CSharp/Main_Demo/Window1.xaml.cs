@@ -1644,7 +1644,7 @@ namespace Main_Demo
                         }
                     case 22:
                         {
-                            outputFormat = VFVideoCaptureOutputFormat.MP4v8v10;
+                            outputFormat = VFVideoCaptureOutputFormat.MP4;
                             break;
                         }
                     case 23:
@@ -1693,7 +1693,7 @@ namespace Main_Demo
                         VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_Name = cbMPEGEncoder.Text;
                     }
                 }
-                else if ((outputFormat == VFVideoCaptureOutputFormat.MP4v8v10)
+                else if ((outputFormat == VFVideoCaptureOutputFormat.MP4)
                          || ((outputFormat == VFVideoCaptureOutputFormat.Encrypted)
                              && (rbEncryptedH264SW.IsChecked == true))
                          || (VideoCapture1.Network_Streaming_Enabled
@@ -4840,7 +4840,7 @@ namespace Main_Demo
 
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
-            if (btONVIFConnect.Content == "Connect")
+            if (btONVIFConnect.Content.ToString() == "Connect")
             {
                 var connected = false;
 

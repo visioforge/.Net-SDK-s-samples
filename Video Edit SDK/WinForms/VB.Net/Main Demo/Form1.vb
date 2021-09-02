@@ -680,7 +680,7 @@ Public Class Form1
                 SetAVIOutput(aviOutput)
                 VideoEdit1.Output_Format = aviOutput
             Case 1
-                outputFormat = VFVideoEditOutputFormat.MKV
+                outputFormat = VFVideoEditOutputFormat.MKVv1
 
                 Dim mkvOutput = New VFMKVv1Output()
                 SetMKVOutput(mkvOutput)

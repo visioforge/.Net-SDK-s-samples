@@ -12,8 +12,8 @@
     <Product>VisioForge Video Edit SDK .Net</Product>
     <Description>VisioForge Video Edit SDK .Net CSharp Demo</Description>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.19.0</AssemblyVersion>
-    <FileVersion>14.2.19.0</FileVersion>
+    <AssemblyVersion>14.2.20.0</AssemblyVersion>
+    <FileVersion>14.2.20.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,7 +64,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.2.19" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.2.20" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
