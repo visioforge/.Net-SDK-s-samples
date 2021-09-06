@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>Simple Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.21.0</AssemblyVersion>
-    <FileVersion>14.2.21.0</FileVersion>
+    <AssemblyVersion>14.2.23.0</AssemblyVersion>
+    <FileVersion>14.2.23.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -38,7 +38,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.21" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.23" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
