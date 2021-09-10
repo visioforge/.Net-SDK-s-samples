@@ -52,7 +52,7 @@ namespace IPCaptureService
             VideoCapture1.Output_Filename = "d:\\ip_capture_output.mp4"; 
 
             var mp4Output = new VFMP4Output();
-            mp4Output.MP4Mode = VFMP4Mode.v10;
+            mp4Output.MP4Mode = VFMP4Mode.CPU_QSV;
             VideoCapture1.Output_Format = mp4Output;
 
             // VideoCapture1.WMV_Mode = VFWMVMode.InternalProfile;
