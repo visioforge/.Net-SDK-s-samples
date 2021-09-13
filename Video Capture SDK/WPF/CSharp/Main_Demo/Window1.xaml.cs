@@ -2472,20 +2472,20 @@ namespace Main_Demo
 
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
+            if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue?.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
             {
                 return;
             }
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
                 if (videoFormat == null)
                 {
                     return;
@@ -5923,6 +5923,40 @@ namespace Main_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
             Process.Start(startInfo);
+        }
+
+        private void cbPIPFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbPIPFormat.SelectedValue?.ToString()))
+            {
+                return;
+            }
+
+            if (cbPIPDevice.SelectedIndex != -1)
+            {
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbPIPDevice.SelectedValue.ToString());
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbPIPFormat.SelectedValue.ToString());
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbPIPFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbPIPFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbPIPFrameRate.Items.Count > 0)
+                {
+                    cbPIPFrameRate.SelectedIndex = 0;
+                }
+            }
         }
     }
 }

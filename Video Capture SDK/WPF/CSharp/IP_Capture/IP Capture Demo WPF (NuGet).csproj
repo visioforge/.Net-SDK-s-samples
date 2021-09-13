@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>IP Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.27.0</AssemblyVersion>
-    <FileVersion>14.2.27.0</FileVersion>
+    <AssemblyVersion>14.2.28.0</AssemblyVersion>
+    <FileVersion>14.2.28.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -38,21 +38,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.27" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.28" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="14.2.28" />
   </ItemGroup>
 </Project>

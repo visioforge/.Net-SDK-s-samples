@@ -1377,7 +1377,7 @@
                                             <CheckBox Content="Use best" Height="16" HorizontalAlignment="Left" Margin="320,79,0,0" x:Name="cbPIPFormatUseBest" VerticalAlignment="Top" Checked="cbPIPFormatUseBest_CheckedChanged" Unchecked="cbPIPFormatUseBest_CheckedChanged" />
                                             <Label Content="Don't add main video capture device!" Height="28" HorizontalAlignment="Left" Margin="10,9,0,0" x:Name="label226" VerticalAlignment="Top" Width="216" />
                                             <Label Content="Video format" Height="28" HorizontalAlignment="Left" Margin="10,67,0,0" x:Name="label227" VerticalAlignment="Top" Width="81" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,72,0,0" x:Name="cbPIPFormat" VerticalAlignment="Top" Width="200" />
+                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,72,0,0" x:Name="cbPIPFormat" VerticalAlignment="Top" Width="200" SelectionChanged="cbPIPFormat_SelectionChanged" />
                                             <Label Content="Frame rate" Height="28" HorizontalAlignment="Left" Margin="10,136,0,0" x:Name="label228" VerticalAlignment="Top" Width="81" />
                                             <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,141,0,0" x:Name="cbPIPFrameRate" VerticalAlignment="Top" Width="90" />
                                             <Label Content="fps" Height="28" HorizontalAlignment="Left" Margin="210,136,0,0" x:Name="label229" VerticalAlignment="Top" Width="81" />

@@ -11224,6 +11224,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbPIPFormat.Name = "cbPIPFormat";
             this.cbPIPFormat.Size = new System.Drawing.Size(205, 21);
             this.cbPIPFormat.TabIndex = 56;
+            this.cbPIPFormat.SelectedIndexChanged += new System.EventHandler(this.cbPIPFormat_SelectedIndexChanged);
             // 
             // label127
             // 

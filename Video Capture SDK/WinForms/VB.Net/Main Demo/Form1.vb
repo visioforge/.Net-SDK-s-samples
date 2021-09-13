@@ -5183,6 +5183,33 @@ Public Class Form1
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64)
         Process.Start(startInfo)
     End Sub
+
+    Private Sub cbPIPFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPIPFormat.SelectedIndexChanged
+        If (String.IsNullOrEmpty(cbPIPFormat.Text)) Then
+            Return
+        End If
+
+        If (cbPIPDevice.SelectedIndex <> -1) Then
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.First()
+            If (deviceItem Is Nothing) Then
+                Return
+            End If
+
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbPIPFormat.Text)?.First()
+            If (videoFormat Is Nothing) Then
+                Return
+            End If
+
+            cbPIPFrameRate.Items.Clear()
+            For Each frameRate As Double In videoFormat.FrameRates
+                cbPIPFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
+            Next
+
+            If (cbPIPFrameRate.Items.Count > 0) Then
+                cbPIPFrameRate.SelectedIndex = 0
+            End If
+        End If
+    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

@@ -6235,6 +6235,40 @@ namespace VideoCapture_CSharp_Demo
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
             Process.Start(startInfo);
         }
+
+        private void cbPIPFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cbPIPFormat.Text))
+            {
+                return;
+            }
+
+            if (cbPIPDevice.SelectedIndex != -1)
+            {
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbPIPDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbPIPFormat.Text);
+                if (videoFormat == null)
+                {
+                    return;
+                }
+
+                cbPIPFrameRate.Items.Clear();
+                foreach (var frameRate in videoFormat.FrameRates)
+                {
+                    cbPIPFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
+                }
+
+                if (cbPIPFrameRate.Items.Count > 0)
+                {
+                    cbPIPFrameRate.SelectedIndex = 0;
+                }
+            }
+        }
     }
 }
 
