@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Video_From_Images_CLI</RootNamespace>
+    <AssemblyName>Video From Images CLI</AssemblyName>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <AssemblyTitle>Video From Images CLI</AssemblyTitle>
+    <Product>Video From Images CLI</Product>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.2.28.0</AssemblyVersion>
+    <FileVersion>14.2.28.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.2.28" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VE_Main_Demo_CLI</RootNamespace>
+    <AssemblyName>VE Main Demo CLI</AssemblyName>
+    <TargetFrameworks>net472</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
+    <Product>VE Main Demo CLI</Product>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.2.28.0</AssemblyVersion>
+    <FileVersion>14.2.28.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x86" Version="14.2.28" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>
