@@ -8,8 +8,8 @@
     <AssemblyTitle>Multiple IP Cameras Demo WPF</AssemblyTitle>
     <Product>Multiple IP Cameras Demo WPF</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.2.28.0</AssemblyVersion>
-    <FileVersion>14.2.28.0</FileVersion>
+    <AssemblyVersion>14.3.1.0</AssemblyVersion>
+    <FileVersion>14.3.1.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -33,7 +33,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.2.28" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.3.1" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
