@@ -113,13 +113,13 @@ namespace multiple_video_streams
         {
             videoCaptureHelper.Video_CaptureDevice = cbCamera1.Text;
 
-            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
             }
 
-            var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat1.Text);
+            var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat1.Text);
             if (videoFormat == null)
             {
                 return;
@@ -154,13 +154,13 @@ namespace multiple_video_streams
         {
             videoCaptureHelper.Video_CaptureDevice = cbCamera2.Text;
 
-            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;
             }
 
-            var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat2.Text);
+            var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat2.Text);
             if (videoFormat == null)
             {
                 return;
@@ -245,13 +245,13 @@ namespace multiple_video_streams
 
             if (cbVideoFormat1.SelectedIndex != -1)
             {
-                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat1.Text);
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat1.Text);
                 if (videoFormat == null)
                 {
                     return;
@@ -279,13 +279,13 @@ namespace multiple_video_streams
 
             if (cbVideoFormat2.SelectedIndex != -2)
             {
-                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoFormat2.Text);
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat2.Text);
                 if (videoFormat == null)
                 {
                     return;

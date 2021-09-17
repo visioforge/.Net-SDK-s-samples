@@ -99,7 +99,7 @@ Public Class Form1
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
             cbAudioInputFormat.Items.Clear()
 
-            Dim deviceItem = (From info In VideoCapture1.Audio_CaptureDevices Where info.Name = cbAudioInputDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Audio_CaptureDevices Where info.Name = cbAudioInputDevice.Text)?.FirstOrDefault()
             If IsNothing(deviceItem) Then
                 Exit Sub
             End If

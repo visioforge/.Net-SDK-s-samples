@@ -148,7 +148,7 @@ namespace DVCapture
                 cbVideoInputFormat.Items.Clear();
 
                 var deviceItem =
-                    VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == e.AddedItems[0].ToString());
+                    VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -178,13 +178,13 @@ namespace DVCapture
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
                 if (videoFormat == null)
                 {
                     return;

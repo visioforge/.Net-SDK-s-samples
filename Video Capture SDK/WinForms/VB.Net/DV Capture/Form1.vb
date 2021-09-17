@@ -97,7 +97,7 @@ Public Class Form1
         If cbVideoInputDevice.SelectedIndex <> -1 Then
             VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text
 
-            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If IsNothing(deviceItem) Then
                 Exit Sub
             End If
@@ -123,12 +123,12 @@ Public Class Form1
 
         If (cbVideoInputDevice.SelectedIndex <> -1) Then
 
-            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If (deviceItem Is Nothing) Then
                 Return
             End If
 
-            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.First()
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.FirstOrDefault()
             If (videoFormat Is Nothing) Then
                 Return
             End If

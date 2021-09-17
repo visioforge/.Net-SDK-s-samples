@@ -238,7 +238,7 @@ Public Class Form1
 
         Dim devices As List(Of AudioCaptureDeviceInfo) = (From info In VideoCapture1.Audio_CaptureDevicesInfo Where info.Name = cbAudioInputDevice.Text).ToList()
         If devices.Any() Then
-            Dim deviceItem = devices.First()
+            Dim deviceItem = devices.FirstOrDefault()
             If Not IsNothing(deviceItem) Then
                 Dim lines = deviceItem.Lines
                 For Each item As String In lines
@@ -370,7 +370,7 @@ Public Class Form1
 
             cbVideoInputFormat.Items.Clear()
 
-            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If Not IsNothing(deviceItem) Then
                 Dim formats = deviceItem.VideoFormats
                 For Each item As VideoCaptureDeviceFormat In formats
@@ -522,12 +522,12 @@ Public Class Form1
 
         If (cbVideoInputDevice.SelectedIndex <> -1) Then
 
-            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If (deviceItem Is Nothing) Then
                 Return
             End If
 
-            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.First()
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbVideoInputFormat.Text)?.FirstOrDefault()
             If (videoFormat Is Nothing) Then
                 Return
             End If
@@ -551,7 +551,7 @@ Public Class Form1
 
         If (cbUseAudioInputFromVideoCaptureDevice.Checked) Then
 
-            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
 
             If (Not IsNothing(deviceItem)) Then
 
@@ -570,7 +570,7 @@ Public Class Form1
         ElseIf (cbAudioInputDevice.SelectedIndex <> -1) Then
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
 
-            Dim deviceItem = (From info In VideoCapture1.Audio_CaptureDevicesInfo Where info.Name = cbAudioInputDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Audio_CaptureDevicesInfo Where info.Name = cbAudioInputDevice.Text)?.FirstOrDefault()
             If (Not IsNothing(deviceItem)) Then
 
                 Dim defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels"
@@ -2677,7 +2677,7 @@ Public Class Form1
 
             cbPIPFormat.Items.Clear()
 
-            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.First()
+            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.FirstOrDefault()
             If Not IsNothing(deviceItem) Then
                 Dim formats = deviceItem.VideoFormats
                 For Each item As VideoCaptureDeviceFormat In formats
@@ -4126,7 +4126,7 @@ Public Class Form1
 
         cbDecklinkCaptureVideoFormat.Items.Clear()
 
-        Dim deviceItem = (From device In VideoCapture1.Decklink_CaptureDevices Where device.Name = cbDecklinkCaptureDevice.Text)?.First()
+        Dim deviceItem = (From device In VideoCapture1.Decklink_CaptureDevices Where device.Name = cbDecklinkCaptureDevice.Text)?.FirstOrDefault()
         If Not IsNothing(deviceItem) Then
             Dim formats = deviceItem.VideoFormats
 
@@ -5190,12 +5190,12 @@ Public Class Form1
         End If
 
         If (cbPIPDevice.SelectedIndex <> -1) Then
-            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.First()
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbPIPDevice.Text)?.FirstOrDefault()
             If (deviceItem Is Nothing) Then
                 Return
             End If
 
-            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbPIPFormat.Text)?.First()
+            Dim videoFormat As VideoCaptureDeviceFormat = (From Format In deviceItem.VideoFormats Where Format.Name = cbPIPFormat.Text)?.FirstOrDefault()
             If (videoFormat Is Nothing) Then
                 Return
             End If

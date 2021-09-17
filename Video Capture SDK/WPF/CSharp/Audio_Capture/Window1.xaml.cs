@@ -72,7 +72,7 @@ namespace Audio_Capture
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevices().First(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (var line in deviceItem.Lines)
@@ -132,7 +132,7 @@ namespace Audio_Capture
                 VideoCapture1.Audio_CaptureDevice = e.AddedItems[0].ToString();
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().First(device => device.Name == e.AddedItems[0].ToString());
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;

@@ -45,7 +45,7 @@ namespace MultipleWebCameras
             videoCapture1.Video_CaptureDevice = cbCamera1.Text;
             videoCapture1.Video_CaptureFormat_UseBest = true;
 
-            var deviceItem = videoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera1.Text);
+            var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
@@ -76,7 +76,7 @@ namespace MultipleWebCameras
             videoCapture2.Video_CaptureDevice = cbCamera2.Text;
             videoCapture2.Video_CaptureFormat_UseBest = true;
 
-            var deviceItem = videoCapture2.Video_CaptureDevicesInfo.First(device => device.Name == cbCamera2.Text);
+            var deviceItem = videoCapture2.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;

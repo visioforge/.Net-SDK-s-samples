@@ -66,7 +66,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.First(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
 
                 var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
                 var defaultValueExists = false;

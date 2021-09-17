@@ -307,7 +307,7 @@ namespace VideoCapture_CSharp_Demo
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
                 var audioInputDevice =
-                    VideoCapture1.Audio_CaptureDevicesInfo.First(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (audioInputDevice != null)
                 {
                     foreach (string line in audioInputDevice.Lines)
@@ -437,7 +437,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -593,7 +593,7 @@ namespace VideoCapture_CSharp_Demo
             if (cbUseAudioInputFromVideoCaptureDevice.Checked)
             {
                 var deviceItem =
-                    VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                    VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string format in deviceItem.AudioFormats)
@@ -613,7 +613,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.First(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
@@ -2660,13 +2660,13 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbVideoInputFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.Text);
                 if (videoFormat == null)
                 {
                     return;
@@ -3165,7 +3165,7 @@ namespace VideoCapture_CSharp_Demo
             if (cbPIPDevice.SelectedIndex != -1)
             {
                 cbPIPFormat.Items.Clear();
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbPIPDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbPIPDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (var format in deviceItem.VideoFormats)
@@ -4974,7 +4974,7 @@ namespace VideoCapture_CSharp_Demo
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = VideoCapture1.Decklink_CaptureDevices.First(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = VideoCapture1.Decklink_CaptureDevices.FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
                 foreach (var format in deviceItem.VideoFormats)
@@ -6245,13 +6245,13 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbPIPDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.First(device => device.Name == cbPIPDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbPIPDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.First(format => format.Name == cbPIPFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbPIPFormat.Text);
                 if (videoFormat == null)
                 {
                     return;

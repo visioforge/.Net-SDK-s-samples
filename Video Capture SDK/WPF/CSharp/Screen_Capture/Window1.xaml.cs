@@ -84,7 +84,7 @@ namespace Screen_Capture
                 cbAudioInputFormat.Items.Clear();
 
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevicesInfo.First(device => device.Name == e.AddedItems[0].ToString());
+                    VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;

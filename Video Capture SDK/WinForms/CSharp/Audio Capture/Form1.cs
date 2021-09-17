@@ -73,7 +73,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().First(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string line in deviceItem.Lines)
@@ -134,7 +134,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                 VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().First(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
