@@ -79,7 +79,7 @@ namespace webcam_preview
             VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
             VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
+            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
 
             // configure audio source
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
