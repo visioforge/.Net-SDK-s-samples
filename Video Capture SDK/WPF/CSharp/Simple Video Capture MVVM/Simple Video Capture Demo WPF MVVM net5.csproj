@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>Simple Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.3.5.0</AssemblyVersion>
-    <FileVersion>14.3.5.0</FileVersion>
+    <AssemblyVersion>14.3.6.0</AssemblyVersion>
+    <FileVersion>14.3.6.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -41,7 +41,7 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="14.3.5" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="14.3.6" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
