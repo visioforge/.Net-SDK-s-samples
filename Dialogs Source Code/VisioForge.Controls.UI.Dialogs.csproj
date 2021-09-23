@@ -1,0 +1,241 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net472;net5.0-windows;net6.0-windows;netcoreapp3.1</TargetFrameworks>
+    <LangVersion>default</LangVersion>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
+    <Product>VisioForge.Controls.UI.Dialogs</Product>
+    <Copyright>Copyright (c) 2006-2021</Copyright>
+    <AssemblyVersion>14.3.7.0</AssemblyVersion>
+    <FileVersion>14.3.7.0</FileVersion>
+    <Version>14.3.7.0</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile />
+    <CodeAnalysisRuleSet>..\VisioForge.DotNet.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\VisioForge.Controls.UI.Dialogs.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
+    <DefineConstants>$(DefineConstants);NETCOREAPP</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>VisioForge.Controls.UI.Dialogs.key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="MSBuild_Logs\**" />
+    <EmbeddedResource Remove="MSBuild_Logs\**" />
+    <None Remove="MSBuild_Logs\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="VisioForge.Controls.UI.Dialogs.csproj.DotSettings" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="OutputFormats\AVISettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\AVISettingsDialog.Designer.cs">
+      <DependentUpon>AVISettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\CustomFormatSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\CustomFormatSettingsDialog.Designer.cs">
+      <DependentUpon>CustomFormatSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\DVSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\DVSettingsDialog.Designer.cs">
+      <DependentUpon>DVSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\FFMPEGSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\FFMPEGSettingsDialog.Designer.cs">
+      <DependentUpon>FFMPEGSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\FFMPEGEXESettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\FFMPEGEXESettingsDialog.Designer.cs">
+      <DependentUpon>FFMPEGEXESettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\FLACSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\FLACSettingsDialog.Designer.cs">
+      <DependentUpon>FLACSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\GIFSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\GIFSettingsDialog.Designer.cs">
+      <DependentUpon>GIFSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\M4ASettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\M4ASettingsDialog.Designer.cs">
+      <DependentUpon>M4ASettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\HWEncodersOutputSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\HWEncodersOutputSettingsDialog.Designer.cs">
+      <DependentUpon>HWEncodersOutputSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\MP3SettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\MP3SettingsDialog.Designer.cs">
+      <DependentUpon>MP3SettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\MP4SettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\MP4SettingsDialog.Designer.cs">
+      <DependentUpon>MP4SettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\OggVorbisSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\OggVorbisSettingsDialog.Designer.cs">
+      <DependentUpon>OggVorbisSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\PCMSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\PCMSettingsDialog.Designer.cs">
+      <DependentUpon>PCMSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\SpeexSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\SpeexSettingsDialog.Designer.cs">
+      <DependentUpon>SpeexSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\WebMSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\WebMSettingsDialog.Designer.cs">
+      <DependentUpon>WebMSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="OutputFormats\WMVSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputFormats\WMVSettingsDialog.Designer.cs">
+      <DependentUpon>WMVSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="VideoEffects\ImageLogoSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VideoEffects\ImageLogoSettingsDialog.Designer.cs">
+      <DependentUpon>ImageLogoSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="VideoEffects\TextLogoSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="VideoEffects\TextLogoSettingsDialog.Designer.cs">
+      <DependentUpon>TextLogoSettingsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="WindowCaptureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowCaptureForm.Designer.cs">
+      <DependentUpon>WindowCaptureForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="OutputFormats\AVISettingsDialog.resx">
+      <DependentUpon>AVISettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\CustomFormatSettingsDialog.resx">
+      <DependentUpon>CustomFormatSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\DVSettingsDialog.resx">
+      <DependentUpon>DVSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\FFMPEGSettingsDialog.resx">
+      <DependentUpon>FFMPEGSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\FFMPEGEXESettingsDialog.resx">
+      <DependentUpon>FFMPEGEXESettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\FLACSettingsDialog.resx">
+      <DependentUpon>FLACSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\GIFSettingsDialog.resx">
+      <DependentUpon>GIFSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\M4ASettingsDialog.resx">
+      <DependentUpon>M4ASettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\HWEncodersOutputSettingsDialog.resx">
+      <DependentUpon>HWEncodersOutputSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\MP3SettingsDialog.resx">
+      <DependentUpon>MP3SettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\MP4SettingsDialog.resx">
+      <DependentUpon>MP4SettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\OggVorbisSettingsDialog.resx">
+      <DependentUpon>OggVorbisSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\PCMSettingsDialog.resx">
+      <DependentUpon>PCMSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\SpeexSettingsDialog.resx">
+      <DependentUpon>SpeexSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\WebMSettingsDialog.resx">
+      <DependentUpon>WebMSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="OutputFormats\WMVSettingsDialog.resx">
+      <DependentUpon>WMVSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VideoEffects\ImageLogoSettingsDialog.resx">
+      <DependentUpon>ImageLogoSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VideoEffects\TextLogoSettingsDialog.resx">
+      <DependentUpon>TextLogoSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="WindowCaptureForm.resx">
+      <DependentUpon>WindowCaptureForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisioForge.Controls.UI\VisioForge.Controls.UI.csproj" />
+    <ProjectReference Include="..\VisioForge.Controls\VisioForge.Controls.csproj" />
+    <ProjectReference Include="..\VisioForge.Shared\VisioForge.Shared.csproj" />
+    <ProjectReference Include="..\VisioForge.Types\VisioForge.Types.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.StyleCop" />
+    <None Include="VisioForge.Controls.UI.Dialogs.key.snk" />
+  </ItemGroup>
+</Project>

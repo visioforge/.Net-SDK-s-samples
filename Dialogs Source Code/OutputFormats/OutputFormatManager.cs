@@ -12,7 +12,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     public class OutputFormatManager : IDisposable
     {
-        private MFSettingsDialog mfSettingsDialog;
+        private HWEncodersOutputSettingsDialog mfSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -32,7 +32,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private WebMSettingsDialog webmSettingsDialog;
 
-        private FFMPEGDLLSettingsDialog ffmpegDLLSettingsDialog;
+        private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
@@ -156,14 +156,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
-                case VFVideoCaptureOutputFormat.FFMPEG_DLL:
+                case VFVideoCaptureOutputFormat.FFMPEG:
                     {
-                        if (ffmpegDLLSettingsDialog == null)
+                        if (ffmpegSettingsDialog == null)
                         {
-                            ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
                         }
 
-                        ffmpegDLLSettingsDialog.ShowDialog(parent);
+                        ffmpegSettingsDialog.ShowDialog(parent);
 
                         break;
                     }
@@ -196,7 +196,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
-                case VFVideoCaptureOutputFormat.MP4_CUDA:
+                case VFVideoCaptureOutputFormat.MP4:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -207,22 +207,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
-                case VFVideoCaptureOutputFormat.MP4v8v10:
-                    {
-                        if (this.mp4SettingsDialog == null)
-                        {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
-                        }
-
-                        this.mp4SettingsDialog.ShowDialog(parent);
-
-                        break;
-                    }
-                case VFVideoCaptureOutputFormat.MP4v11:
+                case VFVideoCaptureOutputFormat.MP4_HW:
                     {
                         if (mfSettingsDialog == null)
                         {
-                            mfSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
                         mfSettingsDialog.ShowDialog(parent);
@@ -389,14 +378,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        public void SetFFMPEGDLLOutput(ref VFFFMPEGDLLOutput ffmpegDLLOutput)
+        public void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
         {
-            if (ffmpegDLLSettingsDialog == null)
+            if (ffmpegSettingsDialog == null)
             {
-                ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                ffmpegSettingsDialog = new FFMPEGSettingsDialog();
             }
 
-            ffmpegDLLSettingsDialog.SaveSettings(ref ffmpegDLLOutput);
+            ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
         public void SetFLACOutput(ref VFFLACOutput flacOutput)
@@ -409,11 +398,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        public void SetMP4Output(ref VFMP4v11Output mp4Output)
+        public void SetMP4Output(ref VFMP4HWOutput mp4Output)
         {
             if (mfSettingsDialog == null)
             {
-                mfSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
             mfSettingsDialog.SaveSettings(ref mp4Output);
@@ -623,11 +612,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         core.Output_Format = new VFDirectCaptureMKVOutput();
                         break;
                     }
-                case VFVideoCaptureOutputFormat.FFMPEG_DLL:
+                case VFVideoCaptureOutputFormat.FFMPEG:
                     {
-                        var ffmpegDLLOutput = new VFFFMPEGDLLOutput();
-                        SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
-                        core.Output_Format = ffmpegDLLOutput;
+                        var ffmpegOutput = new VFFFMPEGOutput();
+                        SetFFMPEGOutput(ref ffmpegOutput);
+                        core.Output_Format = ffmpegOutput;
 
                         break;
                     }
@@ -665,7 +654,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
-                case VFVideoCaptureOutputFormat.MP4_CUDA:
+                case VFVideoCaptureOutputFormat.MP4:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -678,22 +667,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
-                case VFVideoCaptureOutputFormat.MP4v8v10:
+                case VFVideoCaptureOutputFormat.MP4_HW:
                     {
-                        if (this.mp4SettingsDialog == null)
-                        {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
-                        }
-
-                        var mp4Output = new VFMP4Output();
-                        SetMP4Output(ref mp4Output);
-                        core.Output_Format = mp4Output;
-
-                        break;
-                    }
-                case VFVideoCaptureOutputFormat.MP4v11:
-                    {
-                        var mp4Output = new VFMP4v11Output();
+                        var mp4Output = new VFMP4HWOutput();
                         SetMP4Output(ref mp4Output);
                         core.Output_Format = mp4Output;
 
@@ -777,7 +753,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             // TODO release unmanaged resources here
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             ReleaseUnmanagedResources();
 
@@ -789,10 +765,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     mfSettingsDialog = null;
                 }
 
-                if (ffmpegDLLSettingsDialog != null)
+                if (ffmpegSettingsDialog != null)
                 {
-                    ffmpegDLLSettingsDialog.Dispose();
-                    ffmpegDLLSettingsDialog = null;
+                    ffmpegSettingsDialog.Dispose();
+                    ffmpegSettingsDialog = null;
                 }
 
                 if (webmSettingsDialog != null)

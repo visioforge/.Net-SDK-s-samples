@@ -54,15 +54,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             {
                 case 0:
                     // v10(CPU or Intel QuickSync GPU)
-                    mp4Output.MP4Mode = VFMP4Mode.v10;
+                    mp4Output.MP4Mode = VFMP4Mode.CPU_QSV;
                     break;
                 case 1:
                     // v10 nVidia NVENC
-                    mp4Output.MP4Mode = VFMP4Mode.v10_NVENC;
+                    mp4Output.MP4Mode = VFMP4Mode.NVENC;
                     break;
             }
 
-            if (mp4Output.MP4Mode == VFMP4Mode.v10)
+            if (mp4Output.MP4Mode == VFMP4Mode.CPU_QSV)
             {
                 // Legacy / Modern settings
 
@@ -187,7 +187,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 int.TryParse(edH264Bitrate.Text, out tmp);
                 mp4Output.Video.Bitrate = tmp;
             }
-            else if (mp4Output.MP4Mode == VFMP4Mode.v10_NVENC)
+            else if (mp4Output.MP4Mode == VFMP4Mode.NVENC)
             {
                 // NVENC settings
                 switch (cbNVENCProfile.SelectedIndex)
@@ -329,17 +329,17 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             switch (mp4Output.MP4Mode)
             {
-                case VFMP4Mode.v10:
+                case VFMP4Mode.CPU_QSV:
                     cbMP4Mode.SelectedIndex = 0;
                     break;
-                case VFMP4Mode.v10_NVENC:
+                case VFMP4Mode.NVENC:
                     cbMP4Mode.SelectedIndex = 1;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (mp4Output.MP4Mode == VFMP4Mode.v10)
+            if (mp4Output.MP4Mode == VFMP4Mode.CPU_QSV)
             {
                 // Legacy / Modern settings
                 // Video H264 settings
@@ -468,7 +468,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 edH264P.Text = mp4Output.Video.P_Period.ToString();
                 edH264Bitrate.Text = mp4Output.Video.Bitrate.ToString();
             }
-            else if (mp4Output.MP4Mode == VFMP4Mode.v10_NVENC)
+            else if (mp4Output.MP4Mode == VFMP4Mode.NVENC)
             {
                 // NVENC settings
                 switch (mp4Output.Video_NVENC.Profile)

@@ -1,6 +1,6 @@
 ﻿namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
-    partial class MFSettingsDialog
+    partial class HWEncodersOutputSettingsDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             this.tabPage111 = new System.Windows.Forms.TabPage();
             this.cbCustomMuxer = new System.Windows.Forms.ComboBox();
             this.lbCustomMuxer = new System.Windows.Forms.Label();
-            this.lbMFHWAvailableEncoders = new System.Windows.Forms.Label();
+            this.lbx = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.cbMP4Mode = new System.Windows.Forms.ComboBox();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
@@ -40,27 +40,27 @@
             this.label490 = new System.Windows.Forms.Label();
             this.label377 = new System.Windows.Forms.Label();
             this.tabPage148 = new System.Windows.Forms.TabPage();
-            this.edMFKeyFrameSpacing = new System.Windows.Forms.TextBox();
+            this.edVideoKeyFrameSpacing = new System.Windows.Forms.TextBox();
             this.label528 = new System.Windows.Forms.Label();
             this.label525 = new System.Windows.Forms.Label();
-            this.edMFBFramesCount = new System.Windows.Forms.TextBox();
+            this.edVideoBFramesCount = new System.Windows.Forms.TextBox();
             this.label522 = new System.Windows.Forms.Label();
-            this.cbMFLowLatency = new System.Windows.Forms.CheckBox();
-            this.cbMFCABAC = new System.Windows.Forms.CheckBox();
+            this.cbVideoLowLatency = new System.Windows.Forms.CheckBox();
+            this.cbVideoCABAC = new System.Windows.Forms.CheckBox();
             this.groupBox52 = new System.Windows.Forms.GroupBox();
             this.label521 = new System.Windows.Forms.Label();
-            this.edMFQuality = new System.Windows.Forms.TextBox();
+            this.edVideoQuality = new System.Windows.Forms.TextBox();
             this.label520 = new System.Windows.Forms.Label();
-            this.edMFMaxBitrate = new System.Windows.Forms.TextBox();
+            this.edVideoMaxBitrate = new System.Windows.Forms.TextBox();
             this.label523 = new System.Windows.Forms.Label();
-            this.edMFBitrate = new System.Windows.Forms.TextBox();
+            this.edVideoBitrate = new System.Windows.Forms.TextBox();
             this.label524 = new System.Windows.Forms.Label();
-            this.cbMFRateControl = new System.Windows.Forms.ComboBox();
+            this.cbVideoRateControl = new System.Windows.Forms.ComboBox();
             this.groupBox53 = new System.Windows.Forms.GroupBox();
             this.label526 = new System.Windows.Forms.Label();
             this.label527 = new System.Windows.Forms.Label();
-            this.cbMFLevel = new System.Windows.Forms.ComboBox();
-            this.cbMFProfile = new System.Windows.Forms.ComboBox();
+            this.cbLevel = new System.Windows.Forms.ComboBox();
+            this.cbProfile = new System.Windows.Forms.ComboBox();
             this.tabPage90 = new System.Windows.Forms.TabPage();
             this.label354 = new System.Windows.Forms.Label();
             this.cbAACOutput = new System.Windows.Forms.ComboBox();
@@ -73,6 +73,7 @@
             this.label358 = new System.Windows.Forms.Label();
             this.btClose = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.edHWAvailableEncoders = new System.Windows.Forms.TextBox();
             this.tabControl24.SuspendLayout();
             this.tabPage111.SuspendLayout();
             this.tabPage148.SuspendLayout();
@@ -95,9 +96,10 @@
             // 
             // tabPage111
             // 
+            this.tabPage111.Controls.Add(this.edHWAvailableEncoders);
             this.tabPage111.Controls.Add(this.cbCustomMuxer);
             this.tabPage111.Controls.Add(this.lbCustomMuxer);
-            this.tabPage111.Controls.Add(this.lbMFHWAvailableEncoders);
+            this.tabPage111.Controls.Add(this.lbx);
             this.tabPage111.Controls.Add(this.textBox1);
             this.tabPage111.Controls.Add(this.cbMP4Mode);
             this.tabPage111.Controls.Add(this.linkLabel6);
@@ -116,7 +118,7 @@
             // 
             this.cbCustomMuxer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCustomMuxer.FormattingEnabled = true;
-            this.cbCustomMuxer.Location = new System.Drawing.Point(10, 179);
+            this.cbCustomMuxer.Location = new System.Drawing.Point(10, 199);
             this.cbCustomMuxer.Name = "cbCustomMuxer";
             this.cbCustomMuxer.Size = new System.Drawing.Size(255, 21);
             this.cbCustomMuxer.TabIndex = 20;
@@ -125,21 +127,21 @@
             // lbCustomMuxer
             // 
             this.lbCustomMuxer.AutoSize = true;
-            this.lbCustomMuxer.Location = new System.Drawing.Point(7, 163);
+            this.lbCustomMuxer.Location = new System.Drawing.Point(7, 183);
             this.lbCustomMuxer.Name = "lbCustomMuxer";
             this.lbCustomMuxer.Size = new System.Drawing.Size(73, 13);
             this.lbCustomMuxer.TabIndex = 19;
             this.lbCustomMuxer.Text = "Custom muxer";
             this.lbCustomMuxer.Visible = false;
             // 
-            // lbMFHWAvailableEncoders
+            // lbx
             // 
-            this.lbMFHWAvailableEncoders.AutoSize = true;
-            this.lbMFHWAvailableEncoders.Location = new System.Drawing.Point(7, 128);
-            this.lbMFHWAvailableEncoders.Name = "lbMFHWAvailableEncoders";
-            this.lbMFHWAvailableEncoders.Size = new System.Drawing.Size(77, 13);
-            this.lbMFHWAvailableEncoders.TabIndex = 18;
-            this.lbMFHWAvailableEncoders.Text = "HW available: ";
+            this.lbx.AutoSize = true;
+            this.lbx.Location = new System.Drawing.Point(7, 91);
+            this.lbx.Name = "lbx";
+            this.lbx.Size = new System.Drawing.Size(77, 13);
+            this.lbx.TabIndex = 18;
+            this.lbx.Text = "HW available: ";
             // 
             // textBox1
             // 
@@ -147,24 +149,24 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(255, 77);
+            this.textBox1.Size = new System.Drawing.Size(255, 44);
             this.textBox1.TabIndex = 17;
-            this.textBox1.Text = "SDK contains legacy encoder first to have compatibility with XP and Vista (v8) an" +
-    "d several modern encoders that can use CPU or Intel, AMD and nVidia GPUs for enc" +
-    "oding (v10/v11).\r\n";
+            this.textBox1.Text = "SDK can use Intel, AMD/ATI, and Nvidia hardware encoders for H264/H265.";
             // 
             // cbMP4Mode
             // 
             this.cbMP4Mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMP4Mode.FormattingEnabled = true;
             this.cbMP4Mode.Items.AddRange(new object[] {
-            "MS CPU (H264/AAC)",
-            "nVidia NVENC (H264/AAC)",
+            "Microsoft (H264/AAC)",
+            "Nvidia NVENC (H264/AAC)",
             "Intel QuickSync (H264/AAC)",
             "AMD Radeon (H264/AAC)",
-            "nVidia NVENC (H265/AAC)",
+            "Microsoft (H265/AAC)",
+            "Nvidia NVENC (H265/AAC)",
+            "Intel QuickSync (H265/AAC)",
             "AMD Radeon (H265/AAC)"});
-            this.cbMP4Mode.Location = new System.Drawing.Point(10, 94);
+            this.cbMP4Mode.Location = new System.Drawing.Point(10, 61);
             this.cbMP4Mode.Name = "cbMP4Mode";
             this.cbMP4Mode.Size = new System.Drawing.Size(255, 21);
             this.cbMP4Mode.TabIndex = 16;
@@ -208,13 +210,13 @@
             // 
             // tabPage148
             // 
-            this.tabPage148.Controls.Add(this.edMFKeyFrameSpacing);
+            this.tabPage148.Controls.Add(this.edVideoKeyFrameSpacing);
             this.tabPage148.Controls.Add(this.label528);
             this.tabPage148.Controls.Add(this.label525);
-            this.tabPage148.Controls.Add(this.edMFBFramesCount);
+            this.tabPage148.Controls.Add(this.edVideoBFramesCount);
             this.tabPage148.Controls.Add(this.label522);
-            this.tabPage148.Controls.Add(this.cbMFLowLatency);
-            this.tabPage148.Controls.Add(this.cbMFCABAC);
+            this.tabPage148.Controls.Add(this.cbVideoLowLatency);
+            this.tabPage148.Controls.Add(this.cbVideoCABAC);
             this.tabPage148.Controls.Add(this.groupBox52);
             this.tabPage148.Controls.Add(this.groupBox53);
             this.tabPage148.Location = new System.Drawing.Point(4, 22);
@@ -227,12 +229,12 @@
             // 
             // edMFKeyFrameSpacing
             // 
-            this.edMFKeyFrameSpacing.Location = new System.Drawing.Point(110, 280);
-            this.edMFKeyFrameSpacing.Name = "edMFKeyFrameSpacing";
-            this.edMFKeyFrameSpacing.Size = new System.Drawing.Size(111, 20);
-            this.edMFKeyFrameSpacing.TabIndex = 17;
-            this.edMFKeyFrameSpacing.Text = "50";
-            this.edMFKeyFrameSpacing.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edVideoKeyFrameSpacing.Location = new System.Drawing.Point(110, 280);
+            this.edVideoKeyFrameSpacing.Name = "edMFKeyFrameSpacing";
+            this.edVideoKeyFrameSpacing.Size = new System.Drawing.Size(111, 20);
+            this.edVideoKeyFrameSpacing.TabIndex = 17;
+            this.edVideoKeyFrameSpacing.Text = "50";
+            this.edVideoKeyFrameSpacing.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label528
             // 
@@ -254,12 +256,12 @@
             // 
             // edMFBFramesCount
             // 
-            this.edMFBFramesCount.Location = new System.Drawing.Point(110, 254);
-            this.edMFBFramesCount.Name = "edMFBFramesCount";
-            this.edMFBFramesCount.Size = new System.Drawing.Size(111, 20);
-            this.edMFBFramesCount.TabIndex = 14;
-            this.edMFBFramesCount.Text = "0";
-            this.edMFBFramesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edVideoBFramesCount.Location = new System.Drawing.Point(110, 254);
+            this.edVideoBFramesCount.Name = "edMFBFramesCount";
+            this.edVideoBFramesCount.Size = new System.Drawing.Size(111, 20);
+            this.edVideoBFramesCount.TabIndex = 14;
+            this.edVideoBFramesCount.Text = "0";
+            this.edVideoBFramesCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label522
             // 
@@ -272,34 +274,34 @@
             // 
             // cbMFLowLatency
             // 
-            this.cbMFLowLatency.AutoSize = true;
-            this.cbMFLowLatency.Location = new System.Drawing.Point(110, 235);
-            this.cbMFLowLatency.Name = "cbMFLowLatency";
-            this.cbMFLowLatency.Size = new System.Drawing.Size(83, 17);
-            this.cbMFLowLatency.TabIndex = 12;
-            this.cbMFLowLatency.Text = "Low latency";
-            this.cbMFLowLatency.UseVisualStyleBackColor = true;
+            this.cbVideoLowLatency.AutoSize = true;
+            this.cbVideoLowLatency.Location = new System.Drawing.Point(110, 235);
+            this.cbVideoLowLatency.Name = "cbMFLowLatency";
+            this.cbVideoLowLatency.Size = new System.Drawing.Size(83, 17);
+            this.cbVideoLowLatency.TabIndex = 12;
+            this.cbVideoLowLatency.Text = "Low latency";
+            this.cbVideoLowLatency.UseVisualStyleBackColor = true;
             // 
             // cbMFCABAC
             // 
-            this.cbMFCABAC.AutoSize = true;
-            this.cbMFCABAC.Location = new System.Drawing.Point(16, 235);
-            this.cbMFCABAC.Name = "cbMFCABAC";
-            this.cbMFCABAC.Size = new System.Drawing.Size(61, 17);
-            this.cbMFCABAC.TabIndex = 11;
-            this.cbMFCABAC.Text = "CABAC";
-            this.cbMFCABAC.UseVisualStyleBackColor = true;
+            this.cbVideoCABAC.AutoSize = true;
+            this.cbVideoCABAC.Location = new System.Drawing.Point(16, 235);
+            this.cbVideoCABAC.Name = "cbMFCABAC";
+            this.cbVideoCABAC.Size = new System.Drawing.Size(61, 17);
+            this.cbVideoCABAC.TabIndex = 11;
+            this.cbVideoCABAC.Text = "CABAC";
+            this.cbVideoCABAC.UseVisualStyleBackColor = true;
             // 
             // groupBox52
             // 
             this.groupBox52.Controls.Add(this.label521);
-            this.groupBox52.Controls.Add(this.edMFQuality);
+            this.groupBox52.Controls.Add(this.edVideoQuality);
             this.groupBox52.Controls.Add(this.label520);
-            this.groupBox52.Controls.Add(this.edMFMaxBitrate);
+            this.groupBox52.Controls.Add(this.edVideoMaxBitrate);
             this.groupBox52.Controls.Add(this.label523);
-            this.groupBox52.Controls.Add(this.edMFBitrate);
+            this.groupBox52.Controls.Add(this.edVideoBitrate);
             this.groupBox52.Controls.Add(this.label524);
-            this.groupBox52.Controls.Add(this.cbMFRateControl);
+            this.groupBox52.Controls.Add(this.cbVideoRateControl);
             this.groupBox52.Location = new System.Drawing.Point(6, 97);
             this.groupBox52.Name = "groupBox52";
             this.groupBox52.Size = new System.Drawing.Size(259, 132);
@@ -318,12 +320,12 @@
             // 
             // edMFQuality
             // 
-            this.edMFQuality.Location = new System.Drawing.Point(104, 98);
-            this.edMFQuality.Name = "edMFQuality";
-            this.edMFQuality.Size = new System.Drawing.Size(111, 20);
-            this.edMFQuality.TabIndex = 9;
-            this.edMFQuality.Text = "75";
-            this.edMFQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edVideoQuality.Location = new System.Drawing.Point(104, 98);
+            this.edVideoQuality.Name = "edMFQuality";
+            this.edVideoQuality.Size = new System.Drawing.Size(111, 20);
+            this.edVideoQuality.TabIndex = 9;
+            this.edVideoQuality.Text = "75";
+            this.edVideoQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label520
             // 
@@ -336,12 +338,12 @@
             // 
             // edMFMaxBitrate
             // 
-            this.edMFMaxBitrate.Location = new System.Drawing.Point(104, 72);
-            this.edMFMaxBitrate.Name = "edMFMaxBitrate";
-            this.edMFMaxBitrate.Size = new System.Drawing.Size(111, 20);
-            this.edMFMaxBitrate.TabIndex = 7;
-            this.edMFMaxBitrate.Text = "5000";
-            this.edMFMaxBitrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edVideoMaxBitrate.Location = new System.Drawing.Point(104, 72);
+            this.edVideoMaxBitrate.Name = "edMFMaxBitrate";
+            this.edVideoMaxBitrate.Size = new System.Drawing.Size(111, 20);
+            this.edVideoMaxBitrate.TabIndex = 7;
+            this.edVideoMaxBitrate.Text = "5000";
+            this.edVideoMaxBitrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label523
             // 
@@ -354,12 +356,12 @@
             // 
             // edMFBitrate
             // 
-            this.edMFBitrate.Location = new System.Drawing.Point(104, 46);
-            this.edMFBitrate.Name = "edMFBitrate";
-            this.edMFBitrate.Size = new System.Drawing.Size(111, 20);
-            this.edMFBitrate.TabIndex = 5;
-            this.edMFBitrate.Text = "2000";
-            this.edMFBitrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edVideoBitrate.Location = new System.Drawing.Point(104, 46);
+            this.edVideoBitrate.Name = "edMFBitrate";
+            this.edVideoBitrate.Size = new System.Drawing.Size(111, 20);
+            this.edVideoBitrate.TabIndex = 5;
+            this.edVideoBitrate.Text = "2000";
+            this.edVideoBitrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label524
             // 
@@ -372,25 +374,25 @@
             // 
             // cbMFRateControl
             // 
-            this.cbMFRateControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMFRateControl.FormattingEnabled = true;
-            this.cbMFRateControl.Items.AddRange(new object[] {
+            this.cbVideoRateControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVideoRateControl.FormattingEnabled = true;
+            this.cbVideoRateControl.Items.AddRange(new object[] {
             "CBR",
             "Peak Constrained VBR",
             "Unconstrained VBR",
             "Quality",
             "Low Delay VBR"});
-            this.cbMFRateControl.Location = new System.Drawing.Point(104, 19);
-            this.cbMFRateControl.Name = "cbMFRateControl";
-            this.cbMFRateControl.Size = new System.Drawing.Size(111, 21);
-            this.cbMFRateControl.TabIndex = 3;
+            this.cbVideoRateControl.Location = new System.Drawing.Point(104, 19);
+            this.cbVideoRateControl.Name = "cbMFRateControl";
+            this.cbVideoRateControl.Size = new System.Drawing.Size(111, 21);
+            this.cbVideoRateControl.TabIndex = 3;
             // 
             // groupBox53
             // 
             this.groupBox53.Controls.Add(this.label526);
             this.groupBox53.Controls.Add(this.label527);
-            this.groupBox53.Controls.Add(this.cbMFLevel);
-            this.groupBox53.Controls.Add(this.cbMFProfile);
+            this.groupBox53.Controls.Add(this.cbLevel);
+            this.groupBox53.Controls.Add(this.cbProfile);
             this.groupBox53.Location = new System.Drawing.Point(6, 9);
             this.groupBox53.Name = "groupBox53";
             this.groupBox53.Size = new System.Drawing.Size(259, 82);
@@ -418,9 +420,9 @@
             // 
             // cbMFLevel
             // 
-            this.cbMFLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMFLevel.FormattingEnabled = true;
-            this.cbMFLevel.Items.AddRange(new object[] {
+            this.cbLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLevel.FormattingEnabled = true;
+            this.cbLevel.Items.AddRange(new object[] {
             "1.0",
             "1.1",
             "1.2",
@@ -437,23 +439,23 @@
             "5.0",
             "5.1",
             "5.2"});
-            this.cbMFLevel.Location = new System.Drawing.Point(104, 46);
-            this.cbMFLevel.Name = "cbMFLevel";
-            this.cbMFLevel.Size = new System.Drawing.Size(111, 21);
-            this.cbMFLevel.TabIndex = 1;
+            this.cbLevel.Location = new System.Drawing.Point(104, 46);
+            this.cbLevel.Name = "cbMFLevel";
+            this.cbLevel.Size = new System.Drawing.Size(111, 21);
+            this.cbLevel.TabIndex = 1;
             // 
             // cbMFProfile
             // 
-            this.cbMFProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMFProfile.FormattingEnabled = true;
-            this.cbMFProfile.Items.AddRange(new object[] {
+            this.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProfile.FormattingEnabled = true;
+            this.cbProfile.Items.AddRange(new object[] {
             "Base",
             "Main",
             "High"});
-            this.cbMFProfile.Location = new System.Drawing.Point(104, 19);
-            this.cbMFProfile.Name = "cbMFProfile";
-            this.cbMFProfile.Size = new System.Drawing.Size(111, 21);
-            this.cbMFProfile.TabIndex = 0;
+            this.cbProfile.Location = new System.Drawing.Point(104, 19);
+            this.cbProfile.Name = "cbMFProfile";
+            this.cbProfile.Size = new System.Drawing.Size(111, 21);
+            this.cbProfile.TabIndex = 0;
             // 
             // tabPage90
             // 
@@ -621,7 +623,15 @@
             this.linkLabel1.Text = "Get dialog source code";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // MFSettingsDialog
+            // edHWAvailableEncoders
+            // 
+            this.edHWAvailableEncoders.Location = new System.Drawing.Point(90, 88);
+            this.edHWAvailableEncoders.Multiline = true;
+            this.edHWAvailableEncoders.Name = "edHWAvailableEncoders";
+            this.edHWAvailableEncoders.Size = new System.Drawing.Size(175, 80);
+            this.edHWAvailableEncoders.TabIndex = 21;
+            // 
+            // HWEncodersOutputSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -633,11 +643,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MFSettingsDialog";
+            this.Name = "HWEncodersOutputSettingsDialog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MP4 v11 settings";
-            this.Load += new System.EventHandler(this.MP4v11SettingsDialog_Load);
+            this.Text = "HW encoders settings";
+            this.Load += new System.EventHandler(this.mp4HWSettingsDialog_Load);
             this.tabControl24.ResumeLayout(false);
             this.tabPage111.ResumeLayout(false);
             this.tabPage111.PerformLayout();
@@ -658,7 +668,7 @@
 
         private System.Windows.Forms.TabControl tabControl24;
         private System.Windows.Forms.TabPage tabPage111;
-        private System.Windows.Forms.Label lbMFHWAvailableEncoders;
+        private System.Windows.Forms.Label lbx;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox cbMP4Mode;
         private System.Windows.Forms.LinkLabel linkLabel6;
@@ -666,27 +676,27 @@
         private System.Windows.Forms.Label label490;
         private System.Windows.Forms.Label label377;
         private System.Windows.Forms.TabPage tabPage148;
-        private System.Windows.Forms.TextBox edMFKeyFrameSpacing;
+        private System.Windows.Forms.TextBox edVideoKeyFrameSpacing;
         private System.Windows.Forms.Label label528;
         private System.Windows.Forms.Label label525;
-        private System.Windows.Forms.TextBox edMFBFramesCount;
+        private System.Windows.Forms.TextBox edVideoBFramesCount;
         private System.Windows.Forms.Label label522;
-        private System.Windows.Forms.CheckBox cbMFLowLatency;
-        private System.Windows.Forms.CheckBox cbMFCABAC;
+        private System.Windows.Forms.CheckBox cbVideoLowLatency;
+        private System.Windows.Forms.CheckBox cbVideoCABAC;
         private System.Windows.Forms.GroupBox groupBox52;
         private System.Windows.Forms.Label label521;
-        private System.Windows.Forms.TextBox edMFQuality;
+        private System.Windows.Forms.TextBox edVideoQuality;
         private System.Windows.Forms.Label label520;
-        private System.Windows.Forms.TextBox edMFMaxBitrate;
+        private System.Windows.Forms.TextBox edVideoMaxBitrate;
         private System.Windows.Forms.Label label523;
-        private System.Windows.Forms.TextBox edMFBitrate;
+        private System.Windows.Forms.TextBox edVideoBitrate;
         private System.Windows.Forms.Label label524;
-        private System.Windows.Forms.ComboBox cbMFRateControl;
+        private System.Windows.Forms.ComboBox cbVideoRateControl;
         private System.Windows.Forms.GroupBox groupBox53;
         private System.Windows.Forms.Label label526;
         private System.Windows.Forms.Label label527;
-        private System.Windows.Forms.ComboBox cbMFLevel;
-        private System.Windows.Forms.ComboBox cbMFProfile;
+        private System.Windows.Forms.ComboBox cbLevel;
+        private System.Windows.Forms.ComboBox cbProfile;
         private System.Windows.Forms.TabPage tabPage90;
         private System.Windows.Forms.Label label354;
         private System.Windows.Forms.ComboBox cbAACOutput;
@@ -701,5 +711,6 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ComboBox cbCustomMuxer;
         private System.Windows.Forms.Label lbCustomMuxer;
+        private System.Windows.Forms.TextBox edHWAvailableEncoders;
     }
 }

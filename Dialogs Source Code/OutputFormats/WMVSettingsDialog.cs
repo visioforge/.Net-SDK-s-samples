@@ -24,9 +24,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
     /// </summary>
     public partial class WMVSettingsDialog : Form
     {
+#pragma warning disable CA2213
         private readonly VideoCaptureCore _coreVideoCapture;
 
         private readonly VideoEditCore _coreVideoEdit;
+#pragma warning restore CA2213
 
         public bool WMA { get; set; }
 
