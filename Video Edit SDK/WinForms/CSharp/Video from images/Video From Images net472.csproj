@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Video From Images.2010.SDK</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.3.7.0</AssemblyVersion>
-    <FileVersion>14.3.7.0</FileVersion>
+    <AssemblyVersion>14.3.8.0</AssemblyVersion>
+    <FileVersion>14.3.8.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -60,7 +60,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.3.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="14.3.8" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
