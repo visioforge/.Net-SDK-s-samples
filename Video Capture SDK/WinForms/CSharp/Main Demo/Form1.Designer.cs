@@ -35,8 +35,8 @@ namespace VideoCapture_CSharp_Demo
             mp4SettingsDialog?.Dispose();
             mp4SettingsDialog = null;
 
-            mp4v11SettingsDialog?.Dispose();
-            mp4v11SettingsDialog = null;
+            mp4HWSettingsDialog?.Dispose();
+            mp4HWSettingsDialog = null;
 
             mp3SettingsDialog?.Dispose();
             mp3SettingsDialog = null;
@@ -53,8 +53,8 @@ namespace VideoCapture_CSharp_Demo
             flacSettingsDialog?.Dispose();
             flacSettingsDialog = null;
 
-            ffmpegDLLSettingsDialog?.Dispose();
-            ffmpegDLLSettingsDialog = null;
+            ffmpegSettingsDialog?.Dispose();
+            ffmpegSettingsDialog = null;
 
             ffmpegEXESettingsDialog?.Dispose();
             ffmpegEXESettingsDialog = null;
@@ -1588,8 +1588,8 @@ namespace VideoCapture_CSharp_Demo
             "WebM",
             "FFMPEG",
             "FFMPEG (external exe)",
-            "MP4",
-            "MP4 (v11 engine, CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "Encrypted video",
             "MPEG-TS",

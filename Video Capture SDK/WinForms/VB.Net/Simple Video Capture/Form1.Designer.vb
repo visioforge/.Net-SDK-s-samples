@@ -994,8 +994,8 @@ Partial Class Form1
         'cbOutputFormat
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutputFormat.FormattingEnabled = true
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.FormattingEnabled = True
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "WMV (Windows Media Video)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(16, 30)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(279, 21)
@@ -1003,7 +1003,7 @@ Partial Class Form1
         '
         'label4
         '
-        Me.label4.AutoSize = true
+        Me.label4.AutoSize = True
         Me.label4.Location = New System.Drawing.Point(13, 142)
         Me.label4.Name = "label4"
         Me.label4.Size = New System.Drawing.Size(52, 13)
@@ -1012,7 +1012,7 @@ Partial Class Form1
         '
         'label7
         '
-        Me.label7.AutoSize = true
+        Me.label7.AutoSize = True
         Me.label7.Location = New System.Drawing.Point(13, 13)
         Me.label7.Name = "label7"
         Me.label7.Size = New System.Drawing.Size(39, 13)
@@ -1021,7 +1021,7 @@ Partial Class Form1
         '
         'label11
         '
-        Me.label11.AutoSize = true
+        Me.label11.AutoSize = True
         Me.label11.Location = New System.Drawing.Point(6, 20)
         Me.label11.Name = "label11"
         Me.label11.Size = New System.Drawing.Size(95, 13)
@@ -1030,7 +1030,7 @@ Partial Class Form1
         '
         'label55
         '
-        Me.label55.AutoSize = true
+        Me.label55.AutoSize = True
         Me.label55.Location = New System.Drawing.Point(198, 358)
         Me.label55.Name = "label55"
         Me.label55.Size = New System.Drawing.Size(46, 13)
@@ -1039,7 +1039,7 @@ Partial Class Form1
         '
         'label54
         '
-        Me.label54.AutoSize = true
+        Me.label54.AutoSize = True
         Me.label54.Location = New System.Drawing.Point(7, 358)
         Me.label54.Name = "label54"
         Me.label54.Size = New System.Drawing.Size(42, 13)
@@ -1079,7 +1079,7 @@ Partial Class Form1
         Me.tabPage1.Size = New System.Drawing.Size(370, 404)
         Me.tabPage1.TabIndex = 0
         Me.tabPage1.Text = "Devices"
-        Me.tabPage1.UseVisualStyleBackColor = true
+        Me.tabPage1.UseVisualStyleBackColor = True
         '
         'tbAudioBalance
         '
@@ -1108,20 +1108,20 @@ Partial Class Form1
         '
         'cbRecordAudio
         '
-        Me.cbRecordAudio.AutoSize = true
-        Me.cbRecordAudio.Checked = true
+        Me.cbRecordAudio.AutoSize = True
+        Me.cbRecordAudio.Checked = True
         Me.cbRecordAudio.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbRecordAudio.Location = New System.Drawing.Point(253, 309)
         Me.cbRecordAudio.Name = "cbRecordAudio"
         Me.cbRecordAudio.Size = New System.Drawing.Size(115, 17)
         Me.cbRecordAudio.TabIndex = 86
         Me.cbRecordAudio.Text = "Play/Record audio"
-        Me.cbRecordAudio.UseVisualStyleBackColor = true
+        Me.cbRecordAudio.UseVisualStyleBackColor = True
         '
         'cbAudioOutputDevice
         '
         Me.cbAudioOutputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioOutputDevice.FormattingEnabled = true
+        Me.cbAudioOutputDevice.FormattingEnabled = True
         Me.cbAudioOutputDevice.Location = New System.Drawing.Point(9, 326)
         Me.cbAudioOutputDevice.Name = "cbAudioOutputDevice"
         Me.cbAudioOutputDevice.Size = New System.Drawing.Size(354, 21)
@@ -1129,7 +1129,7 @@ Partial Class Form1
         '
         'label15
         '
-        Me.label15.AutoSize = true
+        Me.label15.AutoSize = True
         Me.label15.Location = New System.Drawing.Point(6, 310)
         Me.label15.Name = "label15"
         Me.label15.Size = New System.Drawing.Size(102, 13)
@@ -1138,29 +1138,29 @@ Partial Class Form1
         '
         'cbUseBestAudioInputFormat
         '
-        Me.cbUseBestAudioInputFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.cbUseBestAudioInputFormat.AutoSize = true
+        Me.cbUseBestAudioInputFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbUseBestAudioInputFormat.AutoSize = True
         Me.cbUseBestAudioInputFormat.Location = New System.Drawing.Point(295, 227)
         Me.cbUseBestAudioInputFormat.Name = "cbUseBestAudioInputFormat"
         Me.cbUseBestAudioInputFormat.Size = New System.Drawing.Size(68, 17)
         Me.cbUseBestAudioInputFormat.TabIndex = 83
         Me.cbUseBestAudioInputFormat.Text = "Use best"
-        Me.cbUseBestAudioInputFormat.UseVisualStyleBackColor = true
+        Me.cbUseBestAudioInputFormat.UseVisualStyleBackColor = True
         '
         'btAudioInputDeviceSettings
         '
-        Me.btAudioInputDeviceSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btAudioInputDeviceSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btAudioInputDeviceSettings.Location = New System.Drawing.Point(287, 195)
         Me.btAudioInputDeviceSettings.Name = "btAudioInputDeviceSettings"
         Me.btAudioInputDeviceSettings.Size = New System.Drawing.Size(76, 23)
         Me.btAudioInputDeviceSettings.TabIndex = 82
         Me.btAudioInputDeviceSettings.Text = "Settings"
-        Me.btAudioInputDeviceSettings.UseVisualStyleBackColor = true
+        Me.btAudioInputDeviceSettings.UseVisualStyleBackColor = True
         '
         'cbAudioInputLine
         '
         Me.cbAudioInputLine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputLine.FormattingEnabled = true
+        Me.cbAudioInputLine.FormattingEnabled = True
         Me.cbAudioInputLine.Location = New System.Drawing.Point(9, 251)
         Me.cbAudioInputLine.Name = "cbAudioInputLine"
         Me.cbAudioInputLine.Size = New System.Drawing.Size(161, 21)
@@ -1168,10 +1168,10 @@ Partial Class Form1
         '
         'cbAudioInputFormat
         '
-        Me.cbAudioInputFormat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cbAudioInputFormat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbAudioInputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputFormat.FormattingEnabled = true
+        Me.cbAudioInputFormat.FormattingEnabled = True
         Me.cbAudioInputFormat.Location = New System.Drawing.Point(183, 250)
         Me.cbAudioInputFormat.Name = "cbAudioInputFormat"
         Me.cbAudioInputFormat.Size = New System.Drawing.Size(180, 21)
@@ -1179,10 +1179,10 @@ Partial Class Form1
         '
         'cbAudioInputDevice
         '
-        Me.cbAudioInputDevice.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cbAudioInputDevice.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbAudioInputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputDevice.FormattingEnabled = true
+        Me.cbAudioInputDevice.FormattingEnabled = True
         Me.cbAudioInputDevice.Location = New System.Drawing.Point(9, 197)
         Me.cbAudioInputDevice.Name = "cbAudioInputDevice"
         Me.cbAudioInputDevice.Size = New System.Drawing.Size(272, 21)
@@ -1190,7 +1190,7 @@ Partial Class Form1
         '
         'label22
         '
-        Me.label22.AutoSize = true
+        Me.label22.AutoSize = True
         Me.label22.Location = New System.Drawing.Point(6, 229)
         Me.label22.Name = "label22"
         Me.label22.Size = New System.Drawing.Size(79, 13)
@@ -1199,7 +1199,7 @@ Partial Class Form1
         '
         'label23
         '
-        Me.label23.AutoSize = true
+        Me.label23.AutoSize = True
         Me.label23.Location = New System.Drawing.Point(6, 173)
         Me.label23.Name = "label23"
         Me.label23.Size = New System.Drawing.Size(95, 13)
@@ -1208,7 +1208,7 @@ Partial Class Form1
         '
         'label25
         '
-        Me.label25.AutoSize = true
+        Me.label25.AutoSize = True
         Me.label25.Location = New System.Drawing.Point(180, 227)
         Me.label25.Name = "label25"
         Me.label25.Size = New System.Drawing.Size(63, 13)
@@ -1217,30 +1217,30 @@ Partial Class Form1
         '
         'btStart
         '
-        Me.btStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStart.Location = New System.Drawing.Point(389, 411)
         Me.btStart.Name = "btStart"
         Me.btStart.Size = New System.Drawing.Size(62, 23)
         Me.btStart.TabIndex = 61
         Me.btStart.Text = "Start"
-        Me.btStart.UseVisualStyleBackColor = true
+        Me.btStart.UseVisualStyleBackColor = True
         '
         'btStop
         '
-        Me.btStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStop.Location = New System.Drawing.Point(454, 411)
         Me.btStop.Name = "btStop"
         Me.btStop.Size = New System.Drawing.Size(62, 23)
         Me.btStop.TabIndex = 62
         Me.btStop.Text = "Stop"
-        Me.btStop.UseVisualStyleBackColor = true
+        Me.btStop.UseVisualStyleBackColor = True
         '
         'tcMain
         '
-        Me.tcMain.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.tcMain.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.tcMain.Controls.Add(Me.tabPage1)
         Me.tcMain.Controls.Add(Me.tabPage2)
         Me.tcMain.Controls.Add(Me.tabPage3)
@@ -1254,26 +1254,26 @@ Partial Class Form1
         '
         'llVideoTutorials
         '
-        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.llVideoTutorials.AutoSize = true
+        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.llVideoTutorials.AutoSize = True
         Me.llVideoTutorials.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.llVideoTutorials.Location = New System.Drawing.Point(778, 8)
         Me.llVideoTutorials.Name = "llVideoTutorials"
         Me.llVideoTutorials.Size = New System.Drawing.Size(68, 13)
         Me.llVideoTutorials.TabIndex = 92
-        Me.llVideoTutorials.TabStop = true
+        Me.llVideoTutorials.TabStop = True
         Me.llVideoTutorials.Text = "Video tutorial"
         '
         'VideoCapture1
         '
-        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = false
-        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = False
+        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VideoCapture1.Audio_CaptureDevice = ""
         Me.VideoCapture1.Audio_CaptureDevice_CustomLatency = 0
         Me.VideoCapture1.Audio_CaptureDevice_Format = ""
-        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = true
+        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = True
         Me.VideoCapture1.Audio_CaptureDevice_Line = ""
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice = Nothing
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice_Format = Nothing
@@ -1281,25 +1281,26 @@ Partial Class Form1
         Me.VideoCapture1.Audio_CaptureSourceFilter = Nothing
         Me.VideoCapture1.Audio_Channel_Mapper = Nothing
         Me.VideoCapture1.Audio_Decoder = Nothing
-        Me.VideoCapture1.Audio_Effects_Enabled = false
-        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = false
-        Me.VideoCapture1.Audio_Enhancer_Enabled = false
+        Me.VideoCapture1.Audio_Effects_Enabled = False
+        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = False
+        Me.VideoCapture1.Audio_Enhancer_Enabled = False
         Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
         Me.VideoCapture1.Audio_PCM_Converter = Nothing
-        Me.VideoCapture1.Audio_PlayAudio = true
-        Me.VideoCapture1.Audio_RecordAudio = true
-        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = false
+        Me.VideoCapture1.Audio_PlayAudio = True
+        Me.VideoCapture1.Audio_RecordAudio = True
+        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = False
         Me.VideoCapture1.Audio_VUMeter_Pro_Volume = 100
         Me.VideoCapture1.BackColor = System.Drawing.Color.Black
-        Me.VideoCapture1.Barcode_Reader_Enabled = false
+        Me.VideoCapture1.Barcode_Reader_Enabled = False
         Me.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
         Me.VideoCapture1.BDA_Source = Nothing
         Me.VideoCapture1.ChromaKey = Nothing
         Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Auto = true
-        Me.VideoCapture1.CustomRedist_Enabled = false
+        Me.VideoCapture1.CustomRedist_Auto = True
+        Me.VideoCapture1.CustomRedist_DisableDialog = False
+        Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
         Me.VideoCapture1.Debug_DisableMessageDialogs = false

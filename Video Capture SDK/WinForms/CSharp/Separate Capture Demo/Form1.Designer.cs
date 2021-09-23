@@ -157,6 +157,7 @@
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -848,8 +849,8 @@
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4 (Legacy)",
-            "MP4 ",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "MPEG-TS",
             "MOV"});
             this.cbOutputFormat.Location = new System.Drawing.Point(16, 33);

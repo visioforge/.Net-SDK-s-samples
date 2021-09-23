@@ -27,11 +27,11 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 
     public partial class Form1 : Form
     {
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
-        private MFSettingsDialog mpegTSSettingsDialog;
+        private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
-        private MFSettingsDialog movSettingsDialog;
+        private HWEncodersOutputSettingsDialog movSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -47,7 +47,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
         private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -103,8 +103,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                 }
             }
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" +
-                            "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,21 +255,21 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
-                mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
             }
 
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
@@ -280,7 +279,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         {
             if (movSettingsDialog == null)
             {
-                movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
             }
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
@@ -335,8 +334,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             VideoCapture1.Video_Renderer.Zoom_ShiftY = 0;
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             if (cbRecordAudio.Checked)
             {
@@ -415,8 +413,8 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                         }
                     case 5:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
                             break;
@@ -629,12 +627,12 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     }
                 case 5:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -653,7 +651,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     {
                         if (mpegTSSettingsDialog == null)
                         {
-                            mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                            mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
                         }
 
                         mpegTSSettingsDialog.ShowDialog(this);
@@ -664,7 +662,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     {
                         if (movSettingsDialog == null)
                         {
-                            movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                            movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
                         }
 
                         movSettingsDialog.ShowDialog(this);

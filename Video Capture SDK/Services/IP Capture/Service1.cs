@@ -11,6 +11,7 @@ namespace IPCaptureService
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.ServiceProcess;
 
     using VisioForge.Types;
@@ -48,8 +49,7 @@ namespace IPCaptureService
             VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
             VideoCapture1.IP_Camera_Source.URL = "http://212.162.177.75/mjpg/video.mjpg";
 
-            VideoCapture1.Output_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\service_output.wmv";
-            VideoCapture1.Output_Filename = "d:\\ip_capture_output.mp4"; 
+            VideoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "service_output.wmv");
 
             var mp4Output = new VFMP4Output();
             mp4Output.MP4Mode = VFMP4Mode.CPU_QSV;

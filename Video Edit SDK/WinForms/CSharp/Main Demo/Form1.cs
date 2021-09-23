@@ -52,7 +52,7 @@ namespace VideoEdit_CS_Demo
 
         private const int AUDIO_EFFECT_ID_FADE_OUT = 6;
 
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -68,7 +68,7 @@ namespace VideoEdit_CS_Demo
 
         private WebMSettingsDialog webmSettingsDialog;
 
-        private FFMPEGDLLSettingsDialog ffmpegDLLSettingsDialog;
+        private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
@@ -249,10 +249,10 @@ namespace VideoEdit_CS_Demo
         {
             Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
-            edOutputFileCut.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
-            edOutputFileJoin.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
-            VideoEdit1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             cbMode.SelectedIndex = 1;
             cbFrameRate.SelectedIndex = 0;
@@ -404,14 +404,14 @@ namespace VideoEdit_CS_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
+        private void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
         {
-            if (ffmpegDLLSettingsDialog == null)
+            if (ffmpegSettingsDialog == null)
             {
-                ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                ffmpegSettingsDialog = new FFMPEGSettingsDialog();
             }
 
-            ffmpegDLLSettingsDialog.SaveSettings(ref ffmpegDLLOutput);
+            ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
         private void SetFLACOutput(ref VFFLACOutput flacOutput)
@@ -424,14 +424,14 @@ namespace VideoEdit_CS_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
                
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
@@ -855,9 +855,9 @@ namespace VideoEdit_CS_Demo
                     {
                         outputFormat = VFVideoEditOutputFormat.FFMPEG;
 
-                        var ffmpegDLLOutput = new VFFFMPEGOutput();
-                        SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
-                        VideoEdit1.Output_Format = ffmpegDLLOutput;
+                        var ffmpegOutput = new VFFFMPEGOutput();
+                        SetFFMPEGOutput(ref ffmpegOutput);
+                        VideoEdit1.Output_Format = ffmpegOutput;
 
                         break;
                     }
@@ -876,10 +876,10 @@ namespace VideoEdit_CS_Demo
                     break;
                 case 16:
                     {
-                        outputFormat = VFVideoEditOutputFormat.MP4v11;
+                        outputFormat = VFVideoEditOutputFormat.MP4_HW;
 
-                        var mp4Output = new VFMP4v11Output();
-                        SetMP4v11Output(ref mp4Output);
+                        var mp4Output = new VFMP4HWOutput();
+                        SetMP4HWOutput(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
 
                         break;
@@ -3057,12 +3057,12 @@ namespace VideoEdit_CS_Demo
                     }
                 case 13:
                     {
-                        if (ffmpegDLLSettingsDialog == null)
+                        if (ffmpegSettingsDialog == null)
                         {
-                            ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
                         }
 
-                        ffmpegDLLSettingsDialog.ShowDialog(this);
+                        ffmpegSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -3090,12 +3090,12 @@ namespace VideoEdit_CS_Demo
                     }
                 case 16:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }

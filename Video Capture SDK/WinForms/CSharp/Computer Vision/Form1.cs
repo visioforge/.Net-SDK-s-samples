@@ -362,8 +362,7 @@ namespace Computer_Vision_Demo
             settings.Login = edIPLogin.Text;
             settings.Password = edIPPassword.Text;
             settings.Debug_Enabled = cbDebugMode.Checked;
-            settings.Debug_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                                      + "\\VisioForge\\ip_cam_log.txt";
+            settings.Debug_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "ip_cam_log.txt");
         }
 
         private void SelectVideoCaptureSource()
@@ -395,7 +394,7 @@ namespace Computer_Vision_Demo
         {
             // select source
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
 
             if (rbVideoCaptureDevice.Checked)
@@ -436,7 +435,7 @@ namespace Computer_Vision_Demo
         private void ConfigureMediaPlayer()
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-            MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
             MediaPlayer1.FilenamesOrURL.Clear();

@@ -3,6 +3,7 @@
 namespace multiple_ap_cams
 {
     using System;
+    using System.IO;
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI.WinForms;
@@ -34,7 +35,7 @@ namespace multiple_ap_cams
             videoCapture1.Mode = VFVideoCaptureMode.IPPreview;
             videoCapture1.Audio_PlayAudio = false;
             videoCapture1.Debug_Mode = cbDebugMode.Checked;
-            videoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            videoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             await videoCapture1.StartAsync();
 
@@ -66,7 +67,7 @@ namespace multiple_ap_cams
             videoCapture2.Mode = VFVideoCaptureMode.IPPreview;
             videoCapture2.Audio_PlayAudio = false;
             videoCapture2.Debug_Mode = cbDebugMode.Checked;
-            videoCapture2.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            videoCapture2.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             await videoCapture2.StartAsync();
 

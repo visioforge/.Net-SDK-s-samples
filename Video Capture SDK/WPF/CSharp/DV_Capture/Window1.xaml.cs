@@ -30,11 +30,11 @@ namespace DVCapture
     {
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
 
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
-        private MFSettingsDialog mpegTSSettingsDialog;
+        private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
-        private MFSettingsDialog movSettingsDialog;
+        private HWEncodersOutputSettingsDialog movSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -50,7 +50,7 @@ namespace DVCapture
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
         private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -108,8 +108,7 @@ namespace DVCapture
                 }
             }
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" +
-                            "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
         
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
@@ -288,21 +287,21 @@ namespace DVCapture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
-                mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
             }
 
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
@@ -312,7 +311,7 @@ namespace DVCapture
         {
             if (movSettingsDialog == null)
             {
-                movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
             }
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
@@ -363,8 +362,7 @@ namespace DVCapture
             mmLog.Clear();
 
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
-            VideoCapture1.Debug_Dir =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             if (cbRecordAudio.IsChecked == true)
             {
@@ -442,8 +440,8 @@ namespace DVCapture
                         }
                     case 5:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
                             break;
@@ -669,12 +667,12 @@ namespace DVCapture
                     }
                 case 5:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -693,7 +691,7 @@ namespace DVCapture
                     {
                         if (mpegTSSettingsDialog == null)
                         {
-                            mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                            mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
                         }
 
                         mpegTSSettingsDialog.ShowDialog(this);
@@ -704,7 +702,7 @@ namespace DVCapture
                     {
                         if (movSettingsDialog == null)
                         {
-                            movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                            movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
                         }
 
                         movSettingsDialog.ShowDialog(this);

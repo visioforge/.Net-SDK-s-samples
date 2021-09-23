@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace face_detection
 {
+    using System.IO;
     using VisioForge.Types;
 
     public partial class Form1 : Form
@@ -67,7 +68,7 @@ namespace face_detection
         {
             // set debug settings
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             VideoCapture1.Debug_Telemetry = cbTelemetry.Checked;
             mmLog.Clear();
 

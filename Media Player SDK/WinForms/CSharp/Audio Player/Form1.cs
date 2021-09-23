@@ -4,6 +4,7 @@ namespace Audio_Player_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Windows.Forms;
 
     using VisioForge.Controls.MediaPlayer;
@@ -94,7 +95,7 @@ namespace Audio_Player_Demo
         private void Form1_Load(object sender, EventArgs e)
         {
             Text += " (SDK v" + MediaPlayerCore.SDK_Version + ", " + MediaPlayerCore.SDK_State + ")";
-            MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
         private void timer1_Tick(object sender, EventArgs e)

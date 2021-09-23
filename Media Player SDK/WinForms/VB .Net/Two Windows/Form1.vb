@@ -3,6 +3,7 @@
 Imports VisioForge.Controls.UI
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
+Imports System.IO
 
 Public Class Form1
 
@@ -111,7 +112,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+        MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         form2 = New Form2
 

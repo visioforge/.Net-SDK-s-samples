@@ -9,10 +9,11 @@ using VisioForge.Types.OutputFormat;
 namespace Video_Join_Demo
 {
     using System.Collections.Generic;
+    using System.IO;
 
     public partial class Form1 : Form
     {
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -28,7 +29,7 @@ namespace Video_Join_Demo
 
         private WebMSettingsDialog webmSettingsDialog;
 
-        private FFMPEGDLLSettingsDialog ffmpegDLLSettingsDialog;
+        private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
@@ -269,12 +270,12 @@ namespace Video_Join_Demo
                     }
                 case 13:
                     {
-                        if (ffmpegDLLSettingsDialog == null)
+                        if (ffmpegSettingsDialog == null)
                         {
-                            ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
                         }
 
-                        ffmpegDLLSettingsDialog.ShowDialog(this);
+                        ffmpegSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -302,12 +303,12 @@ namespace Video_Join_Demo
                     }
                 case 16:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -556,9 +557,9 @@ namespace Video_Join_Demo
                     }
                 case 13:
                     {
-                        var ffmpegDLLOutput = new VFFFMPEGOutput();
-                        SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
-                        VideoEdit1.Output_Format = ffmpegDLLOutput;
+                        var ffmpegOutput = new VFFFMPEGOutput();
+                        SetFFMPEGOutput(ref ffmpegOutput);
+                        VideoEdit1.Output_Format = ffmpegOutput;
                         break;
                     }
                 case 14:
@@ -577,8 +578,8 @@ namespace Video_Join_Demo
                     }
                 case 16:
                     {
-                        var mp4Output = new VFMP4v11Output();
-                        SetMP4v11Output(ref mp4Output);
+                        var mp4Output = new VFMP4HWOutput();
+                        SetMP4HWOutput(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
                         break;
                     }
@@ -715,14 +716,14 @@ namespace Video_Join_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
+        private void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
         {
-            if (ffmpegDLLSettingsDialog == null)
+            if (ffmpegSettingsDialog == null)
             {
-                ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                ffmpegSettingsDialog = new FFMPEGSettingsDialog();
             }
 
-            ffmpegDLLSettingsDialog.SaveSettings(ref ffmpegDLLOutput);
+            ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
         private void SetFLACOutput(ref VFFLACOutput flacOutput)
@@ -735,14 +736,14 @@ namespace Video_Join_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
@@ -843,9 +844,9 @@ namespace Video_Join_Demo
         {
             Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
-            VideoEdit1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             cbFrameRate.SelectedIndex = 0;
             cbOutputVideoFormat.SelectedIndex = 15;

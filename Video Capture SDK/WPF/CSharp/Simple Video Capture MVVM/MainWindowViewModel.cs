@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Threading;
 using VisioForge.Controls.UI;
@@ -43,7 +44,7 @@ namespace Simple_Video_Capture
             ConfigureAudioInputDeviceCommand = new DelegateCommand(ConfigureAudioInputDevice);
             ConfigureVideoInputDeviceCommand = new DelegateCommand(ConfigureVideoInputDevice);
 
-            OutputFileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
+            OutputFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             SelectedOutputFormat =
                 OutputFormats.FirstOrDefault(_ => _.Description == "MP4") ??
                 OutputFormats.FirstOrDefault();
@@ -651,7 +652,7 @@ namespace Simple_Video_Capture
             VideoCaptureStartParams startParams = new VideoCaptureStartParams
             {
                 DebugMode = this.DebugMode,
-                DebugDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\",
+                DebugDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge"),
                 RecordAudio = this.RecordAudio,
                 VideoCaptureDevice = SelectedVideoInputDevice.Name,
                 VideoCaptureDeviceIsAudioSource = UseAudioInputFromVideoSource,
@@ -699,7 +700,7 @@ namespace Simple_Video_Capture
             {
                 FileName = "image.jpg",
                 Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
             };
 
             if (screenshotSaveDialog.ShowDialog() == true)

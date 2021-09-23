@@ -12,11 +12,11 @@ Imports VisioForge.Types.Sources
 Imports VisioForge.Types.VideoEffects
 
 Public Class Form1
-    Dim mp4v11SettingsDialog As MFSettingsDialog
+    Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim mpegTSSettingsDialog As MFSettingsDialog
+    Dim mpegTSSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim movSettingsDialog As MFSettingsDialog
+    Dim movSettingsDialog As HWEncodersOutputSettingsDialog
 
     Dim _mp4SettingsDialog As MP4SettingsDialog
 
@@ -48,12 +48,12 @@ Public Class Form1
         screenshotSaveDialog = New SaveFileDialog()
         screenshotSaveDialog.FileName = "image.jpg"
         screenshotSaveDialog.Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff"
-        screenshotSaveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\"
+        screenshotSaveDialog.InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         cbIPCameraType.SelectedIndex = 2
         cbOutputFormat.SelectedIndex = 2
 
-        edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\" + "output.mp4"
+        edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
     End Sub
 
     Private Sub btSelectOutput_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btSelectOutput.Click
@@ -62,18 +62,18 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub SetMP4v11Output(ByRef mp4Output As VFMP4v11Output)
-        If (mp4v11SettingsDialog Is Nothing) Then
-            mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
+    Private Sub SetMP4HWOutput(ByRef mp4Output As VFMP4HWOutput)
+        If (mp4HWSettingsDialog Is Nothing) Then
+            mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
         End If
 
-        mp4v11SettingsDialog.SaveSettings(mp4Output)
+        mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
     Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As VFMPEGTSOutput)
 
         If (mpegTSSettingsDialog Is Nothing) Then
-            mpegTSSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MPEGTS)
+            mpegTSSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS)
         End If
 
         mpegTSSettingsDialog.SaveSettings(mpegTSOutput)
@@ -82,7 +82,7 @@ Public Class Form1
     Private Sub SetMOVOutput(ByRef mkvOutput As VFMOVOutput)
 
         If (movSettingsDialog Is Nothing) Then
-            movSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MOV)
+            movSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV)
         End If
 
         movSettingsDialog.SaveSettings(mkvOutput)
@@ -148,7 +148,7 @@ Public Class Form1
         VideoCapture1.Video_Renderer.Zoom_ShiftY = 0
 
         VideoCapture1.Debug_Mode = cbDebugMode.Checked
-        VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\"
+        VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         VideoCapture1.Audio_RecordAudio = cbIPAudioCapture.Checked
         VideoCapture1.Audio_PlayAudio = cbIPAudioCapture.Checked
@@ -236,8 +236,8 @@ Public Class Form1
                     SetMP4Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 3
-                    Dim mp4Output = New VFMP4v11Output()
-                    SetMP4v11Output(mp4Output)
+                    Dim mp4Output = New VFMP4HWOutput()
+                    SetMP4HWOutput(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 4
                     Dim gifOutput = New VFAnimatedGIFOutput()
@@ -554,11 +554,11 @@ Public Class Form1
 
                 _mp4SettingsDialog.ShowDialog(Me)
             Case 3
-                If (mp4v11SettingsDialog Is Nothing) Then
-                    mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
+                If (mp4HWSettingsDialog Is Nothing) Then
+                    mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
                 End If
 
-                mp4v11SettingsDialog.ShowDialog(Me)
+                mp4HWSettingsDialog.ShowDialog(Me)
             Case 4
                 If (gifSettingsDialog Is Nothing) Then
                     gifSettingsDialog = New GIFSettingsDialog()
@@ -567,13 +567,13 @@ Public Class Form1
                 gifSettingsDialog.ShowDialog(Me)
             Case 5
                 If (mpegTSSettingsDialog Is Nothing) Then
-                    mpegTSSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MPEGTS)
+                    mpegTSSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS)
                 End If
 
                 mpegTSSettingsDialog.ShowDialog(Me)
             Case 6
                 If (movSettingsDialog Is Nothing) Then
-                    movSettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MOV)
+                    movSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV)
                 End If
 
                 movSettingsDialog.ShowDialog(Me)

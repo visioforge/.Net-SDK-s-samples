@@ -17,9 +17,11 @@ namespace Video_From_Images
     using VisioForge.Controls.UI.WinForms;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.VideoEffects;
+    using System.IO;
+
     public partial class Form1 : Form
     {
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -33,7 +35,7 @@ namespace Video_From_Images
 
         private WebMSettingsDialog webmSettingsDialog;
 
-        private FFMPEGDLLSettingsDialog ffmpegDLLSettingsDialog;
+        private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
@@ -126,8 +128,8 @@ namespace Video_From_Images
         {
             Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
-            VideoEdit1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             cbFrameRate.SelectedIndex = 7;
 
@@ -175,24 +177,24 @@ namespace Video_From_Images
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGDLLOutput(ref VFFFMPEGOutput ffmpegDLLOutput)
+        private void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
         {
-            if (ffmpegDLLSettingsDialog == null)
+            if (ffmpegSettingsDialog == null)
             {
-                ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                ffmpegSettingsDialog = new FFMPEGSettingsDialog();
             }
 
-            ffmpegDLLSettingsDialog.SaveSettings(ref ffmpegDLLOutput);
+            ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
@@ -347,9 +349,9 @@ namespace Video_From_Images
                         }
                     case 5:
                         {
-                            var ffmpegDLLOutput = new VFFFMPEGOutput();
-                            SetFFMPEGDLLOutput(ref ffmpegDLLOutput);
-                            VideoEdit1.Output_Format = ffmpegDLLOutput;
+                            var ffmpegOutput = new VFFFMPEGOutput();
+                            SetFFMPEGOutput(ref ffmpegOutput);
+                            VideoEdit1.Output_Format = ffmpegOutput;
 
                             break;
                         }
@@ -371,8 +373,8 @@ namespace Video_From_Images
                         }
                     case 8:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             VideoEdit1.Output_Format = mp4Output;
 
                             break;
@@ -580,12 +582,12 @@ namespace Video_From_Images
                     }
                 case 5:
                     {
-                        if (ffmpegDLLSettingsDialog == null)
+                        if (ffmpegSettingsDialog == null)
                         {
-                            ffmpegDLLSettingsDialog = new FFMPEGDLLSettingsDialog();
+                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
                         }
 
-                        ffmpegDLLSettingsDialog.ShowDialog(this);
+                        ffmpegSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -613,12 +615,12 @@ namespace Video_From_Images
                     }
                 case 8:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }

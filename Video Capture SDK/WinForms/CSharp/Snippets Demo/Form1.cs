@@ -36,7 +36,7 @@ namespace Video_Capture_Snippets_Demo
             mmLog.Clear();
                         
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             switch (cbSnippet.SelectedIndex)
             {
@@ -165,10 +165,10 @@ namespace Video_Capture_Snippets_Demo
             VideoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings() { FullScreen = true };
             VideoCapture1.Audio_PlayAudio = VideoCapture1.Audio_RecordAudio = false;
             VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
-
             VideoCapture1.Output_Format = new VFMP4Output();
             VideoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), edOutputFile.Text);
         }
+
         private void ScreenCaptureToWMVSnippet()
         {
             VideoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings() { FullScreen = true };

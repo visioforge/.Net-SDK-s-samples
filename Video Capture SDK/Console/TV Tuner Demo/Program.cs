@@ -11,6 +11,7 @@ namespace TV_Tuner_Demo
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading;
 
     using VisioForge.Controls.VideoCapture;
@@ -102,8 +103,7 @@ namespace TV_Tuner_Demo
                     {
                         videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
 
-                        string outputFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                                            + "\\VisioForge\\" + "output.avi";
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
@@ -115,12 +115,11 @@ namespace TV_Tuner_Demo
                     {
                         videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
 
-                        string outputFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                                            + "\\VisioForge\\" + "output.mp4";
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFMP4v11Output();
+                        videoCapture.Output_Format = new VFMP4HWOutput();
                     }
 
                     break;

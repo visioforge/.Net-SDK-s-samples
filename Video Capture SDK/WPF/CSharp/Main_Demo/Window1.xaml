@@ -33,8 +33,8 @@
                         <ComboBoxItem Content="WebM" />
                         <ComboBoxItem Content="FFMPEG" />
                         <ComboBoxItem Content="FFMPEG (EXE)" />
-                        <ComboBoxItem Content="MP4" />
-                        <ComboBoxItem Content="MP4 v11 (CPU/GPU)" />
+                        <ComboBoxItem Content="MP4 (CPU)" />
+                        <ComboBoxItem Content="MP4 (GPU: Intel, Nvidia, AMD/ATI)" />
                         <ComboBoxItem Content="Animated GIF" />
                         <ComboBoxItem Content="Encrypted video" />
                         <ComboBoxItem Content="MPEG-TS" />

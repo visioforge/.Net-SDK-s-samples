@@ -4,6 +4,7 @@ Imports VisioForge.Controls.MediaPlayer
 Imports VisioForge.Controls.UI
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
+Imports System.IO
 
 Public Class Form1
 
@@ -87,7 +88,7 @@ Public Class Form1
         MediaPlayer1 = New MediaPlayerCore()
 
         Text += " (SDK v" + MediaPlayerCore.SDK_Version.ToString() + ", " + MediaPlayerCore.SDK_State + ")"
-        MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+        MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
     End Sub
 

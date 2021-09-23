@@ -25,8 +25,8 @@ namespace Simple_Video_Capture
             {
                 new OutputFormatInfo(OutputFormatInfoTag.AVI, "AVI", ".avi"),
                 new OutputFormatInfo(OutputFormatInfoTag.WMV, "WMV (Windows Media Video)", ".wmv"),
-                new OutputFormatInfo(OutputFormatInfoTag.MP4, "MP4", ".mp4"),
-                new OutputFormatInfo(OutputFormatInfoTag.MP4_v11, "MP4 (v11 engine, CPU/GPU)", ".mp4"),
+                new OutputFormatInfo(OutputFormatInfoTag.MP4, "MP4 (CPU)", ".mp4"),
+                new OutputFormatInfo(OutputFormatInfoTag.MP4_HW, "MP4 (GPU: Intel, Nvidia, AMD/ATI)", ".mp4"),
                 new OutputFormatInfo(OutputFormatInfoTag.AGIF, "Animated GIF", ".gif"),
                 new OutputFormatInfo(OutputFormatInfoTag.MPEGTS, "MPEG-TS", ".ts"),
                 new OutputFormatInfo(OutputFormatInfoTag.MOV, "MOV", ".mov"),
@@ -131,14 +131,14 @@ namespace Simple_Video_Capture
 
                         break;
                     }
-                case OutputFormatInfoTag.MP4_v11:
+                case OutputFormatInfoTag.MP4_HW:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(ownerWindow);
+                        mp4HWSettingsDialog.ShowDialog(ownerWindow);
 
                         break;
                     }
@@ -157,7 +157,7 @@ namespace Simple_Video_Capture
                     {
                         if (mpegTSSettingsDialog == null)
                         {
-                            mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                            mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
                         }
 
                         mpegTSSettingsDialog.ShowDialog(ownerWindow);
@@ -168,7 +168,7 @@ namespace Simple_Video_Capture
                     {
                         if (movSettingsDialog == null)
                         {
-                            movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                            movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
                         }
 
                         movSettingsDialog.ShowDialog(ownerWindow);
@@ -411,10 +411,10 @@ namespace Simple_Video_Capture
                             break;
                         }
 
-                    case OutputFormatInfoTag.MP4_v11:
+                    case OutputFormatInfoTag.MP4_HW:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             videoCapture.Output_Format = mp4Output;
                             break;
                         }
@@ -549,14 +549,14 @@ namespace Simple_Video_Capture
             mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
@@ -573,7 +573,7 @@ namespace Simple_Video_Capture
         {
             if (mpegTSSettingsDialog == null)
             {
-                mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
             }
 
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
@@ -583,7 +583,7 @@ namespace Simple_Video_Capture
         {
             if (movSettingsDialog == null)
             {
-                movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
             }
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
@@ -596,9 +596,9 @@ namespace Simple_Video_Capture
 
         private WeakReference<System.Windows.Window> ownerWindowWeak;
 
-        private MFSettingsDialog mp4v11SettingsDialog;
-        private MFSettingsDialog mpegTSSettingsDialog;
-        private MFSettingsDialog movSettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
+        private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
+        private HWEncodersOutputSettingsDialog movSettingsDialog;
         private MP4SettingsDialog mp4SettingsDialog;
         private AVISettingsDialog aviSettingsDialog;
         private WMVSettingsDialog wmvSettingsDialog;

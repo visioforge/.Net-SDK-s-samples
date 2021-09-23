@@ -7,6 +7,7 @@ namespace Push_Source_Demo
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -19,11 +20,11 @@ namespace Push_Source_Demo
     // ReSharper disable once StyleCop.SA1601
     public partial class Form1 : Form
     {
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
-        private MFSettingsDialog mpegTSSettingsDialog;
+        private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
-        private MFSettingsDialog movSettingsDialog;
+        private HWEncodersOutputSettingsDialog movSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -49,8 +50,7 @@ namespace Push_Source_Demo
                 UpdateRecordingTime();
             };
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" +
-                            "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
             VideoCapture1.Video_Renderer_SetAuto();
 
@@ -144,21 +144,21 @@ namespace Push_Source_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
-                mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
             }
 
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
@@ -168,7 +168,7 @@ namespace Push_Source_Demo
         {
             if (movSettingsDialog == null)
             {
-                movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
             }
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
@@ -205,8 +205,7 @@ namespace Push_Source_Demo
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             VideoCapture1.Audio_RecordAudio = false;
             VideoCapture1.Audio_PlayAudio = false;
@@ -258,8 +257,8 @@ namespace Push_Source_Demo
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
                             break;
@@ -415,12 +414,12 @@ namespace Push_Source_Demo
                     }
                 case 3:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -439,7 +438,7 @@ namespace Push_Source_Demo
                     {
                         if (mpegTSSettingsDialog == null)
                         {
-                            mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                            mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
                         }
 
                         mpegTSSettingsDialog.ShowDialog(this);
@@ -450,7 +449,7 @@ namespace Push_Source_Demo
                     {
                         if (movSettingsDialog == null)
                         {
-                            movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                            movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
                         }
 
                         movSettingsDialog.ShowDialog(this);

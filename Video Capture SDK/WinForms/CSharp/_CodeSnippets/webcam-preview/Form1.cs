@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace webcam_preview
 {
+    using System.IO;
     using VisioForge.Types;
 
     public partial class Form1 : Form
@@ -71,7 +72,7 @@ namespace webcam_preview
         {
             // set debug settings
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             VideoCapture1.Debug_Telemetry = cbTelemetry.Checked;
             mmLog.Clear();
 

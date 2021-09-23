@@ -29,7 +29,7 @@
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
 
             Text += " (SDK v" + MediaPlayerCore.SDK_Version + ", " + MediaPlayerCore.SDK_State + ")";
-            MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)

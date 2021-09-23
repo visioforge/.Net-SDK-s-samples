@@ -540,8 +540,8 @@ namespace Decklink_Demo
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4",
-            "MP4 (v11 engine, CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "MPEG-TS",
             "MOV"});
@@ -950,6 +950,7 @@ namespace Decklink_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -983,7 +984,7 @@ namespace Decklink_Demo
             this.VideoCapture1.Network_Streaming_URL = "";
             this.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10;
             this.VideoCapture1.OSD_Enabled = false;
-            this.VideoCapture1.Output_Filename = "C:\\Users\\Roman\\Documents\\VisioForge\\output.avi";
+            this.VideoCapture1.Output_Filename = "output.mp4";
             this.VideoCapture1.Output_Format = null;
             this.VideoCapture1.PIP_AddSampleGrabbers = false;
             this.VideoCapture1.PIP_ChromaKeySettings = null;

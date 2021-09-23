@@ -436,7 +436,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             // btAudioInputDeviceSettings
             // 
             this.btAudioInputDeviceSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAudioInputDeviceSettings.Location = new System.Drawing.Point(287, 195);
+            this.btAudioInputDeviceSettings.Location = new System.Drawing.Point(287, 187);
             this.btAudioInputDeviceSettings.Name = "btAudioInputDeviceSettings";
             this.btAudioInputDeviceSettings.Size = new System.Drawing.Size(76, 23);
             this.btAudioInputDeviceSettings.TabIndex = 82;
@@ -448,7 +448,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             // 
             this.cbAudioInputLine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioInputLine.FormattingEnabled = true;
-            this.cbAudioInputLine.Location = new System.Drawing.Point(9, 251);
+            this.cbAudioInputLine.Location = new System.Drawing.Point(8, 245);
             this.cbAudioInputLine.Name = "cbAudioInputLine";
             this.cbAudioInputLine.Size = new System.Drawing.Size(161, 21);
             this.cbAudioInputLine.TabIndex = 81;
@@ -460,7 +460,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAudioInputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioInputFormat.FormattingEnabled = true;
-            this.cbAudioInputFormat.Location = new System.Drawing.Point(183, 250);
+            this.cbAudioInputFormat.Location = new System.Drawing.Point(183, 245);
             this.cbAudioInputFormat.Name = "cbAudioInputFormat";
             this.cbAudioInputFormat.Size = new System.Drawing.Size(180, 21);
             this.cbAudioInputFormat.TabIndex = 80;
@@ -472,7 +472,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAudioInputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioInputDevice.FormattingEnabled = true;
-            this.cbAudioInputDevice.Location = new System.Drawing.Point(9, 197);
+            this.cbAudioInputDevice.Location = new System.Drawing.Point(8, 189);
             this.cbAudioInputDevice.Name = "cbAudioInputDevice";
             this.cbAudioInputDevice.Size = new System.Drawing.Size(272, 21);
             this.cbAudioInputDevice.TabIndex = 79;
@@ -566,8 +566,8 @@ namespace VisioForge_SDK_Video_Capture_Demo
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4",
-            "MP4 (v11 engine, CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "MPEG-TS",
             "MOV"});
@@ -1452,6 +1452,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";

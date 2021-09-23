@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -89,7 +90,7 @@
         private void InitPlayer(MediaPlayer player)
         {
             player.Debug_Mode = cbDebugMode.Checked;
-            player.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             player.Source_Mode = VFMediaPlayerSource.LAV;
             player.Audio_OutputDevice = "Default DirectSound Device";
             MediaPlayer1.Info_UseLibMediaInfo = true;

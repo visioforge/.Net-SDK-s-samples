@@ -9,6 +9,7 @@ using System.Globalization;
 namespace multiple_video_streams
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -67,7 +68,7 @@ namespace multiple_video_streams
             videoCapture1.Audio_RecordAudio = false;
 
             videoCapture1.Debug_Mode = cbDebugMode.Checked;
-            videoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            videoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             
             await videoCapture1.StartAsync();
             tmRecording.Start();
@@ -98,8 +99,7 @@ namespace multiple_video_streams
                 cbCamera2.SelectedIndex = 0;
             }
 
-            edFilename.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
-                              + "multiple_video_streams.wmv";
+            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "multiple_video_streams.wmv");
 
             videoCapture1.Video_Renderer_SetAuto();
 

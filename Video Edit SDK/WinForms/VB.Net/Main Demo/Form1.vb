@@ -14,7 +14,7 @@ Imports VisioForge.Types.OutputFormat
 Imports VisioForge.Types.VideoEffects
 
 Public Class Form1
-    Dim mp4v11SettingsDialog As MFSettingsDialog
+    Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
     Dim _mp4SettingsDialog As MP4SettingsDialog
 
@@ -30,7 +30,7 @@ Public Class Form1
 
     Dim webmSettingsDialog As WebMSettingsDialog
 
-    Dim ffmpegDLLSettingsDialog As FFMPEGDLLSettingsDialog
+    Dim ffmpegSettingsDialog As FFMPEGSettingsDialog
 
     Dim ffmpegEXESettingsDialog As FFMPEGEXESettingsDialog
 
@@ -170,10 +170,10 @@ Public Class Form1
 
         Text += " (SDK v" + VideoEdit1.SDK_Version.ToString() + ", " + VideoEdit1.SDK_State + ")"
 
-        edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\" + "output.mp4"
-        edOutputFileCut.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4"
-        edOutputFileJoin.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4"
-        VideoEdit1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\"
+        edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+        edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+        edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+        VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         Tag = 1
 
@@ -344,12 +344,12 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub SetMP4v11Output(ByRef mp4Output As VFMP4v11Output)
-        If (mp4v11SettingsDialog Is Nothing) Then
-            mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
+    Private Sub SetMP4HWOutput(ByRef mp4Output As VFMP4HWOutput)
+        If (mp4HWSettingsDialog Is Nothing) Then
+            mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
         End If
 
-        mp4v11SettingsDialog.SaveSettings(mp4Output)
+        mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
     Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
@@ -360,12 +360,12 @@ Public Class Form1
         _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetFFMPEGDLLOutput(ByRef ffmpegDLLOutput As VFFFMPEGOutput)
-        If (ffmpegDLLSettingsDialog Is Nothing) Then
-            ffmpegDLLSettingsDialog = New FFMPEGDLLSettingsDialog()
+    Private Sub SetFFMPEGOutput(ByRef ffmpegOutput As VFFFMPEGOutput)
+        If (ffmpegSettingsDialog Is Nothing) Then
+            ffmpegSettingsDialog = New FFMPEGSettingsDialog()
         End If
 
-        ffmpegDLLSettingsDialog.SaveSettings(ffmpegDLLOutput)
+        ffmpegSettingsDialog.SaveSettings(ffmpegOutput)
     End Sub
 
     Private Sub SetFFMPEGEXEOutput(ByRef ffmpegOutput As VFFFMPEGEXEOutput)
@@ -754,9 +754,9 @@ Public Class Form1
             Case 13
                 outputFormat = VFVideoEditOutputFormat.FFMPEG
 
-                Dim ffmpegDLLOutput = New VFFFMPEGOutput()
-                SetFFMPEGDLLOutput(ffmpegDLLOutput)
-                VideoEdit1.Output_Format = ffmpegDLLOutput
+                Dim ffmpegOutput = New VFFFMPEGOutput()
+                SetFFMPEGOutput(ffmpegOutput)
+                VideoEdit1.Output_Format = ffmpegOutput
             Case 14
                 outputFormat = VFVideoEditOutputFormat.FFMPEG_EXE
 
@@ -766,10 +766,10 @@ Public Class Form1
             Case 15
                 outputFormat = VFVideoEditOutputFormat.MP4
             Case 16
-                outputFormat = VFVideoEditOutputFormat.MP4v11
+                outputFormat = VFVideoEditOutputFormat.MP4_HW
 
-                Dim mp4Output = New VFMP4v11Output()
-                SetMP4v11Output(mp4Output)
+                Dim mp4Output = New VFMP4HWOutput()
+                SetMP4HWOutput(mp4Output)
                 VideoEdit1.Output_Format = mp4Output
             Case 17
                 outputFormat = VFVideoEditOutputFormat.AnimatedGIF
@@ -2633,11 +2633,11 @@ Public Class Form1
 
                 webmSettingsDialog.ShowDialog(Me)
             Case 13
-                If (ffmpegDLLSettingsDialog Is Nothing) Then
-                    ffmpegDLLSettingsDialog = New FFMPEGDLLSettingsDialog()
+                If (ffmpegSettingsDialog Is Nothing) Then
+                    ffmpegSettingsDialog = New FFMPEGSettingsDialog()
                 End If
 
-                ffmpegDLLSettingsDialog.ShowDialog(Me)
+                ffmpegSettingsDialog.ShowDialog(Me)
             Case 14
                 If (ffmpegEXESettingsDialog Is Nothing) Then
                     ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
@@ -2651,11 +2651,11 @@ Public Class Form1
 
                 _mp4SettingsDialog.ShowDialog(Me)
             Case 16
-                If (mp4v11SettingsDialog Is Nothing) Then
-                    mp4v11SettingsDialog = New MFSettingsDialog(MFSettingsDialogMode.MP4v11)
+                If (mp4HWSettingsDialog Is Nothing) Then
+                    mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
                 End If
 
-                mp4v11SettingsDialog.ShowDialog(Me)
+                mp4HWSettingsDialog.ShowDialog(Me)
             Case 17
                 If (gifSettingsDialog Is Nothing) Then
                     gifSettingsDialog = New GIFSettingsDialog()

@@ -809,8 +809,8 @@ Partial Class Form1
         'cbOutputFormat
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutputFormat.FormattingEnabled = true
-        Me.cbOutputFormat.Items.AddRange(New Object() {"DV", "DV (Without reencoding)", "AVI", "WMV (Windows Media Video)", "MP4", "MP4 (v11 engine, CPU/GPU)", "Animated GIF", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.FormattingEnabled = True
+        Me.cbOutputFormat.Items.AddRange(New Object() {"DV", "DV (Without reencoding)", "AVI", "WMV (Windows Media Video)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(13, 29)
         Me.cbOutputFormat.Name = "cbOutputFormat"
         Me.cbOutputFormat.Size = New System.Drawing.Size(279, 21)
@@ -818,7 +818,7 @@ Partial Class Form1
         '
         'label7
         '
-        Me.label7.AutoSize = true
+        Me.label7.AutoSize = True
         Me.label7.Location = New System.Drawing.Point(10, 12)
         Me.label7.Name = "label7"
         Me.label7.Size = New System.Drawing.Size(39, 13)
@@ -828,32 +828,32 @@ Partial Class Form1
         'fontDialog1
         '
         Me.fontDialog1.Color = System.Drawing.Color.White
-        Me.fontDialog1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
-        Me.fontDialog1.FontMustExist = true
-        Me.fontDialog1.ShowColor = true
+        Me.fontDialog1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.fontDialog1.FontMustExist = True
+        Me.fontDialog1.ShowColor = True
         '
         'llVideoTutorials
         '
-        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.llVideoTutorials.AutoSize = true
+        Me.llVideoTutorials.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.llVideoTutorials.AutoSize = True
         Me.llVideoTutorials.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.llVideoTutorials.Location = New System.Drawing.Point(756, 9)
         Me.llVideoTutorials.Name = "llVideoTutorials"
         Me.llVideoTutorials.Size = New System.Drawing.Size(68, 13)
         Me.llVideoTutorials.TabIndex = 92
-        Me.llVideoTutorials.TabStop = true
+        Me.llVideoTutorials.TabStop = True
         Me.llVideoTutorials.Text = "Video tutorial"
         '
         'VideoCapture1
         '
-        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = false
-        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = False
+        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VideoCapture1.Audio_CaptureDevice = ""
         Me.VideoCapture1.Audio_CaptureDevice_CustomLatency = 0
         Me.VideoCapture1.Audio_CaptureDevice_Format = ""
-        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = true
+        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = True
         Me.VideoCapture1.Audio_CaptureDevice_Line = ""
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice = Nothing
         Me.VideoCapture1.Audio_CaptureDevice_MasterDevice_Format = Nothing
@@ -861,25 +861,26 @@ Partial Class Form1
         Me.VideoCapture1.Audio_CaptureSourceFilter = Nothing
         Me.VideoCapture1.Audio_Channel_Mapper = Nothing
         Me.VideoCapture1.Audio_Decoder = Nothing
-        Me.VideoCapture1.Audio_Effects_Enabled = false
-        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = false
-        Me.VideoCapture1.Audio_Enhancer_Enabled = false
+        Me.VideoCapture1.Audio_Effects_Enabled = False
+        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = False
+        Me.VideoCapture1.Audio_Enhancer_Enabled = False
         Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
         Me.VideoCapture1.Audio_PCM_Converter = Nothing
-        Me.VideoCapture1.Audio_PlayAudio = true
-        Me.VideoCapture1.Audio_RecordAudio = true
-        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Enabled = false
-        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = false
+        Me.VideoCapture1.Audio_PlayAudio = True
+        Me.VideoCapture1.Audio_RecordAudio = True
+        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Enabled = False
+        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = False
         Me.VideoCapture1.Audio_VUMeter_Pro_Volume = 100
         Me.VideoCapture1.BackColor = System.Drawing.Color.Black
-        Me.VideoCapture1.Barcode_Reader_Enabled = false
+        Me.VideoCapture1.Barcode_Reader_Enabled = False
         Me.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
         Me.VideoCapture1.BDA_Source = Nothing
         Me.VideoCapture1.ChromaKey = Nothing
         Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Auto = true
-        Me.VideoCapture1.CustomRedist_Enabled = false
+        Me.VideoCapture1.CustomRedist_Auto = True
+        Me.VideoCapture1.CustomRedist_DisableDialog = False
+        Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
         Me.VideoCapture1.Debug_DisableMessageDialogs = false

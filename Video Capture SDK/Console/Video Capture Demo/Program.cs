@@ -11,6 +11,7 @@ namespace Video_Capture_Demo
 {
     using System;
     using System.Globalization;
+    using System.IO;
     using System.Threading;
 
     using VisioForge.Controls.VideoCapture;
@@ -151,8 +152,7 @@ namespace Video_Capture_Demo
             {
                 case 0:
                     {
-                        string outputFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                                            + "\\VisioForge\\" + "output.avi";
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
@@ -162,12 +162,11 @@ namespace Video_Capture_Demo
                     break;
                 case 1:
                     {
-                        string outputFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                                            + "\\VisioForge\\" + "output.mp4";
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFMP4v11Output();
+                        videoCapture.Output_Format = new VFMP4HWOutput();
                     }
 
                     break;

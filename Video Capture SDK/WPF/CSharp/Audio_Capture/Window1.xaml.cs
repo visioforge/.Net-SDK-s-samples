@@ -10,6 +10,7 @@ namespace Audio_Capture
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -122,7 +123,7 @@ namespace Audio_Capture
             cbAudEqualizerPreset.SelectedIndex = 0;
             cbAudEqualizerPreset_SelectedIndexChanged(null, null);
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp3";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
@@ -426,7 +427,7 @@ namespace Audio_Capture
             mmLog.Clear();
 
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;

@@ -102,6 +102,7 @@ namespace Window_Capture
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
@@ -348,8 +349,8 @@ namespace Window_Capture
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4",
-            "MP4 (v11 engine, CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "MPEG-TS",
             "MOV"});

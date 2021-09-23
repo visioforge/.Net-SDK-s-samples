@@ -134,7 +134,7 @@ namespace VE_Main_Demo_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    core.Output_Format = new VFMP4v11Output();
+                    core.Output_Format = new VFMP4HWOutput();
                     break;
                 case "avi":
                     core.Output_Format = new VFAVIOutput();
@@ -147,7 +147,7 @@ namespace VE_Main_Demo_CLI
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    core.Output_Format = new VFMP4v11Output();
+                    core.Output_Format = new VFMP4HWOutput();
                     break;
             }
             

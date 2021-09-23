@@ -41,6 +41,7 @@
             this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
             this.btSelectImagesFolder = new System.Windows.Forms.Button();
             this.edImagesFolder = new System.Windows.Forms.TextBox();
             this.rbImagesFolder = new System.Windows.Forms.RadioButton();
@@ -89,7 +90,6 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -195,9 +195,11 @@
             this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
             this.VideoEdit1.ChromaKey = null;
             this.VideoEdit1.CustomRedist_Auto = true;
+            this.VideoEdit1.CustomRedist_DisableDialog = false;
             this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
+            this.VideoEdit1.Debug_DisableMessageDialogs = false;
             this.VideoEdit1.Debug_Mode = false;
             this.VideoEdit1.Debug_Telemetry = false;
             this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
@@ -236,6 +238,7 @@
             this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
             this.VideoEdit1.Video_Subtitles = null;
             this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
+            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
             this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
             this.VideoEdit1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoEdit1_OnLicenseRequired);
             this.VideoEdit1.OnVideoFrameBitmap += new System.EventHandler<VisioForge.Types.VideoFrameBitmapEventArgs>(this.VideoEdit1_OnVideoFrameBitmap);
@@ -281,6 +284,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Output";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 155);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(200, 13);
+            this.label6.TabIndex = 128;
+            this.label6.Text = "Resolution from resize option will be used";
             // 
             // btSelectImagesFolder
             // 
@@ -334,8 +346,8 @@
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe) (BETA)",
-            "MP4",
-            "MP4 v11 (CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "Encrypted video"});
             this.cbOutputFormat.Location = new System.Drawing.Point(16, 220);
@@ -753,15 +765,6 @@
             this.fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.fontDialog1.FontMustExist = true;
             this.fontDialog1.ShowColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 155);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(200, 13);
-            this.label6.TabIndex = 128;
-            this.label6.Text = "Resolution from resize option will be used";
             // 
             // Form1
             // 

@@ -116,8 +116,8 @@
             "WebM",
             "FFMPEG (DLL)",
             "FFMPEG (external exe) (BETA)",
-            "MP4",
-            "MP4 v11 (CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "Encrypted video"});
             this.cbOutputVideoFormat.Location = new System.Drawing.Point(14, 179);
@@ -265,9 +265,11 @@
             this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
             this.VideoEdit1.ChromaKey = null;
             this.VideoEdit1.CustomRedist_Auto = true;
+            this.VideoEdit1.CustomRedist_DisableDialog = false;
             this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
+            this.VideoEdit1.Debug_DisableMessageDialogs = false;
             this.VideoEdit1.Debug_Mode = false;
             this.VideoEdit1.Debug_Telemetry = false;
             this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
@@ -306,6 +308,7 @@
             this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
             this.VideoEdit1.Video_Subtitles = null;
             this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
+            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
             this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
             this.VideoEdit1.OnProgress += new System.EventHandler<VisioForge.Types.ProgressEventArgs>(this.VideoEdit1_OnProgress);
             this.VideoEdit1.OnStop += new System.EventHandler<VisioForge.Types.VideoEditStopEventArgs>(this.VideoEdit1_OnStop);

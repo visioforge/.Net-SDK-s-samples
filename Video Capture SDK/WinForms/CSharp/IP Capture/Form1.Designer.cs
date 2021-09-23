@@ -750,8 +750,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.cbOutputFormat.Items.AddRange(new object[] {
             "AVI",
             "WMV (Windows Media Video)",
-            "MP4",
-            "MP4 (v11 engine, CPU/GPU)",
+            "MP4 (CPU)",
+            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
             "Animated GIF",
             "MPEG-TS",
             "MOV"});

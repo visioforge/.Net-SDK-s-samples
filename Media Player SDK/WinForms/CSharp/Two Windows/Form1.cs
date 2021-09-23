@@ -4,6 +4,7 @@ namespace Two_Windows_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI;
@@ -30,7 +31,7 @@ namespace Two_Windows_Demo
             form2 = new Form2();
             form2.OnWindowSizeChanged += Form2_OnWindowSizeChanged;
             
-            MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             Text += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + ")";
 

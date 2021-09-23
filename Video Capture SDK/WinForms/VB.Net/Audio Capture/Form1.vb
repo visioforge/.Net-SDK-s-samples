@@ -7,6 +7,7 @@ Imports VisioForge.Types
 Imports VisioForge.Controls.VideoCapture
 Imports VisioForge.Tools
 Imports VisioForge.Types.OutputFormat
+Imports System.IO
 
 Public Class Form1
 
@@ -61,9 +62,9 @@ Public Class Form1
             End If
 
             cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
-            End If
+        End If
 
-            Dim defaultAudioRenderer = String.Empty
+        Dim defaultAudioRenderer = String.Empty
         For i = 0 To VideoCapture1.Audio_OutputDevices.Count - 1
             cbAudioOutputDevice.Items.Add(VideoCapture1.Audio_OutputDevices.Item(i))
 
@@ -91,7 +92,7 @@ Public Class Form1
         cbAudEqualizerPreset_SelectedIndexChanged(Nothing, Nothing)
         cbMode.SelectedIndex = 0
 
-        edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\" + "output.mp3"
+        edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3")
     End Sub
 
     Private Sub cbAudioInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioInputDevice.SelectedIndexChanged
@@ -328,7 +329,7 @@ Public Class Form1
         mmLog.Clear()
 
         VideoCapture1.Debug_Mode = cbDebugMode.Checked
-        VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\VisioForge\"
+        VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text

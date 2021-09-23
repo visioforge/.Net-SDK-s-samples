@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace screen_capture
 {
+    using System.IO;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.Sources;
@@ -27,7 +28,7 @@ namespace screen_capture
         {
             Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
             foreach (var screen in Screen.AllScreens)
             {
@@ -40,7 +41,7 @@ namespace screen_capture
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             VideoCapture1.Debug_Telemetry = cbTelemetry.Checked;
 
             // configure source

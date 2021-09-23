@@ -5,6 +5,7 @@ namespace VC_Timeshift_Demo
 {
     using System;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -24,7 +25,7 @@ namespace VC_Timeshift_Demo
             Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
             cbIPCameraType.SelectedIndex = 2;
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.avi";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
 
             foreach (var device in VideoCapture1.Video_CaptureDevicesInfo)
             {
@@ -190,7 +191,7 @@ namespace VC_Timeshift_Demo
             mmLog.Clear();
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             if (rbVideoCaptureDevice.Checked)
             {
@@ -272,7 +273,7 @@ namespace VC_Timeshift_Demo
             VideoCapture1.Timeshift_Settings = new TimeshiftSettings
             {
                 Player_Screen = MediaPlayer1,
-                TempFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\SBE\\",
+                TempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "SBE"),
                 Player_AudioOutput_Enabled = cbPlayerPlayAudio.Checked
             };
 
@@ -417,7 +418,7 @@ namespace VC_Timeshift_Demo
         private async void VideoCapture1_OnTimeshiftFileCreated(object sender, TimeshiftFileEventArgs e)
         {
             MediaPlayer1.Debug_Mode = true;
-            MediaPlayer1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             string filename = e.Filename;
 

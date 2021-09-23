@@ -53,8 +53,8 @@
                         <ComboBoxItem Content="DV (Without reencoding)" />
                         <ComboBoxItem Content="AVI" />
                         <ComboBoxItem Content="WMV (Windows Media Video)" />
-                        <ComboBoxItem Content="MP4" />
-                        <ComboBoxItem Content="MP4 (v11 engine, CPU/GPU)" />
+                        <ComboBoxItem Content="MP4 (CPU)" />
+                        <ComboBoxItem Content="MP4 (GPU: Intel, Nvidia, AMD/ATI)" />
                         <ComboBoxItem Content="Animated GIF" />
                         <ComboBoxItem Content="MPEG-TS" />
                         <ComboBoxItem Content="MOV" />

@@ -5,6 +5,7 @@ using System.Globalization;
 namespace multiple_ap_cams
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -26,7 +27,7 @@ namespace multiple_ap_cams
         private async void btStart1_Click(object sender, EventArgs e)
         {
             videoCapture1.Debug_Mode = cbDebugMode.Checked;
-            videoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            videoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             videoCapture1.Video_CaptureDevice = cbCamera1.Text;
 
@@ -86,7 +87,7 @@ namespace multiple_ap_cams
         private async void btStart2_Click(object sender, EventArgs e)
         {
             videoCapture2.Debug_Mode = cbDebugMode.Checked;
-            videoCapture2.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            videoCapture2.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             videoCapture2.Video_CaptureDevice = cbCamera2.Text;
 

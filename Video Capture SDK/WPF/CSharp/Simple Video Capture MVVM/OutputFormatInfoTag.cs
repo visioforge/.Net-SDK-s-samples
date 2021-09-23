@@ -5,7 +5,7 @@
         AVI,
         WMV,
         MP4,
-        MP4_v11,
+        MP4_HW,
         AGIF,
         MPEGTS,
         MOV,

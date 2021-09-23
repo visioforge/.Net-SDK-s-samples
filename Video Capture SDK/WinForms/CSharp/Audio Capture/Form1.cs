@@ -12,6 +12,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -124,7 +125,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             cbAudEqualizerPreset.SelectedIndex = 0;
             cbAudEqualizerPreset_SelectedIndexChanged(null, null);
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp3";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -411,7 +412,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             VideoCapture1.Video_Renderer.Zoom_ShiftY = 0;
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
        
             VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;

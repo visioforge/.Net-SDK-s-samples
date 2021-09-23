@@ -30,11 +30,11 @@ namespace Screen_Capture
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public partial class Window1
     {
-        private MFSettingsDialog mp4v11SettingsDialog;
+        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
-        private MFSettingsDialog mpegTSSettingsDialog;
+        private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
-        private MFSettingsDialog movSettingsDialog;
+        private HWEncodersOutputSettingsDialog movSettingsDialog;
 
         private MP4SettingsDialog mp4SettingsDialog;
 
@@ -50,7 +50,7 @@ namespace Screen_Capture
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\"
+            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
         private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -191,21 +191,21 @@ namespace Screen_Capture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4v11Output(ref VFMP4v11Output mp4Output)
+        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
-            if (mp4v11SettingsDialog == null)
+            if (mp4HWSettingsDialog == null)
             {
-                mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4v11SettingsDialog.SaveSettings(ref mp4Output);
+            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
-                mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
             }
 
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
@@ -215,7 +215,7 @@ namespace Screen_Capture
         {
             if (movSettingsDialog == null)
             {
-                movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
             }
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
@@ -305,8 +305,7 @@ namespace Screen_Capture
             VideoCapture1.Video_Sample_Grabber_Enabled = true;
 
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
-            VideoCapture1.Debug_Dir =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // from screen
             bool allScreens = cbScreenCaptureDisplayIndex.SelectedIndex == cbScreenCaptureDisplayIndex.Items.Count - 1;
@@ -395,8 +394,8 @@ namespace Screen_Capture
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4v11Output();
-                            SetMP4v11Output(ref mp4Output);
+                            var mp4Output = new VFMP4HWOutput();
+                            SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
                             break;
@@ -542,8 +541,7 @@ namespace Screen_Capture
             cbScreenCaptureDisplayIndex.Items.Add("All (fullscreen)");
 
             cbScreenCaptureDisplayIndex.SelectedIndex = 0;
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" +
-                            "output.mp4";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
@@ -634,12 +632,12 @@ namespace Screen_Capture
                     }
                 case 3:
                     {
-                        if (mp4v11SettingsDialog == null)
+                        if (mp4HWSettingsDialog == null)
                         {
-                            mp4v11SettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MP4v11);
+                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4v11SettingsDialog.ShowDialog(this);
+                        mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -658,7 +656,7 @@ namespace Screen_Capture
                     {
                         if (mpegTSSettingsDialog == null)
                         {
-                            mpegTSSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MPEGTS);
+                            mpegTSSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
                         }
 
                         mpegTSSettingsDialog.ShowDialog(this);
@@ -669,7 +667,7 @@ namespace Screen_Capture
                     {
                         if (movSettingsDialog == null)
                         {
-                            movSettingsDialog = new MFSettingsDialog(MFSettingsDialogMode.MOV);
+                            movSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
                         }
 
                         movSettingsDialog.ShowDialog(this);

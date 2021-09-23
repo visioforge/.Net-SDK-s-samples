@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace speaker_capture
 {
+    using System.IO;
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
@@ -49,7 +50,7 @@ namespace speaker_capture
         {
             Text += " (SDK v" + VideoCaptureCore.SDK_Version + ", " + VideoCaptureCore.SDK_State + ")";
 
-            edOutput.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\" + "output.mp3";
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
 
             VideoCapture1 = new VideoCaptureCore();
             VideoCapture1.OnError += VideoCapture1_OnError;
@@ -78,7 +79,7 @@ namespace speaker_capture
             VideoCapture1.Audio_Sample_Grabber_Enabled = true;
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
-            VideoCapture1.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\VisioForge\\";
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             VideoCapture1.Debug_Telemetry = cbTelemetry.Checked;
 
             _currentTimestamp = TimeSpan.Zero;
