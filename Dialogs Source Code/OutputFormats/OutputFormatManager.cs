@@ -218,6 +218,39 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
+                case VFVideoCaptureOutputFormat.MPEGTS:
+                    {
+                        if (mfSettingsDialog == null)
+                        {
+                            mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
+                        }
+
+                        mfSettingsDialog.ShowDialog(parent);
+
+                        break;
+                    }                    
+                case VFVideoCaptureOutputFormat.MKVv2:
+                    {
+                        if (mfSettingsDialog == null)
+                        {
+                            mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
+                        }
+
+                        mfSettingsDialog.ShowDialog(parent);
+
+                        break;
+                    }                    
+                case VFVideoCaptureOutputFormat.MOV:
+                    {
+                        if (mfSettingsDialog == null)
+                        {
+                            mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
+                        }
+
+                        mfSettingsDialog.ShowDialog(parent);
+
+                        break;
+                    }                    
                 case VFVideoCaptureOutputFormat.Encrypted:
                     {
                         if (this.mp4SettingsDialog == null)
@@ -398,7 +431,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        public void SetMP4Output(ref VFMP4HWOutput mp4Output)
+        public void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
         {
             if (mfSettingsDialog == null)
             {
@@ -406,6 +439,36 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
 
             mfSettingsDialog.SaveSettings(ref mp4Output);
+        }
+
+        public void SetMOVOutput(ref VFMOVOutput movOutput)
+        {
+            if (mfSettingsDialog == null)
+            {
+                mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV);
+            }
+
+            mfSettingsDialog.SaveSettings(ref movOutput);
+        }
+
+        public void SetMPEGTSOutput(ref VFMPEGTSOutput tsOutput)
+        {
+            if (mfSettingsDialog == null)
+            {
+                mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS);
+            }
+
+            mfSettingsDialog.SaveSettings(ref tsOutput);
+        }
+
+        public void SetMKVv2Output(ref VFMKVv2Output mkvOutput)
+        {
+            if (mfSettingsDialog == null)
+            {
+                mfSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
+            }
+
+            mfSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
         public void SetSpeexOutput(ref VFSpeexOutput speexOutput)
@@ -670,8 +733,32 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case VFVideoCaptureOutputFormat.MP4_HW:
                     {
                         var mp4Output = new VFMP4HWOutput();
-                        SetMP4Output(ref mp4Output);
+                        SetMP4HWOutput(ref mp4Output);
                         core.Output_Format = mp4Output;
+
+                        break;
+                    }
+                case VFVideoCaptureOutputFormat.MPEGTS:
+                    {
+                        var tsOutput = new VFMPEGTSOutput();
+                        SetMPEGTSOutput(ref tsOutput);
+                        core.Output_Format = tsOutput;
+
+                        break;
+                    }
+                case VFVideoCaptureOutputFormat.MKVv2:
+                    {
+                        var mkvOutput = new VFMKVv2Output();
+                        SetMKVv2Output(ref mkvOutput);
+                        core.Output_Format = mkvOutput;
+
+                        break;
+                    }
+                case VFVideoCaptureOutputFormat.MOV:
+                    {
+                        var movOutput = new VFMOVOutput();
+                        SetMOVOutput(ref movOutput);
+                        core.Output_Format = movOutput;
 
                         break;
                     }
