@@ -3120,9 +3120,7 @@ namespace Media_Player_Demo
                 }
             }
 
-            MediaInfo.ReadFilters();
-
-            foreach (var filter in MediaInfo.List_DirectShowFilters())
+            foreach (var filter in MediaPlayer1.DirectShow_Filters)
             {
                 cbCustomVideoDecoder.Items.Add(filter);
                 cbCustomAudioDecoder.Items.Add(filter);

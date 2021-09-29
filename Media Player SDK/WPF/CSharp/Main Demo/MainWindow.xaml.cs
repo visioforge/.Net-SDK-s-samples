@@ -172,9 +172,7 @@ namespace Main_Demo
                 cbFilters.SelectedIndex = 0;
             }
 
-            MediaInfo.ReadFilters();
-
-            foreach (string filter in MediaInfo.List_DirectShowFilters())
+            foreach (string filter in MediaPlayer1.DirectShow_Filters)
             {
                 cbCustomAudioDecoder.Items.Add(filter);
                 cbCustomVideoDecoder.Items.Add(filter);

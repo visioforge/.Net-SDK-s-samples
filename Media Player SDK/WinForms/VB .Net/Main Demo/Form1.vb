@@ -54,9 +54,7 @@ Public Class Form1
 
         End If
 
-        MediaInfo.ReadFilters()
-
-        For Each filter As String In MediaInfo.List_DirectShowFilters()
+        For Each filter As String In MediaPlayer1.DirectShow_Filters()
 
             cbCustomVideoDecoder.Items.Add(filter)
             cbCustomAudioDecoder.Items.Add(filter)
