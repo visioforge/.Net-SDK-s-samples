@@ -1,4 +1,5 @@
 14.4
+* Windows 11 support
 * Telemetry update
 * Resolved issues with Picture-in-Picture in 2x2 mode
 * Resolved issues with MJPEG Low Latency source in .Net 5/.Net 6/.Net Core 3.1
