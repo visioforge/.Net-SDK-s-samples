@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="FFMPEGSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
@@ -6,8 +10,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// FFMPEG settings dialog.
+    /// </summary>
     public partial class FFMPEGSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FFMPEGSettingsDialog"/> class.
+        /// </summary>
         public FFMPEGSettingsDialog()
         {
             InitializeComponent();
@@ -25,6 +35,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbOutputFormat.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFFFMPEGOutput ffmpegOutput)
         {
             cbOutputFormat.SelectedIndex = (int)ffmpegOutput.OutputFormat;
@@ -39,7 +58,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             {
                 cbAspectRatio.SelectedIndex = 1;
             }
-            else if(ffmpegOutput.Video_AspectRatio_W == 4 && ffmpegOutput.Video_AspectRatio_H == 3)
+            else if (ffmpegOutput.Video_AspectRatio_W == 4 && ffmpegOutput.Video_AspectRatio_H == 3)
             {
                 cbAspectRatio.SelectedIndex = 2;
             }
@@ -78,6 +97,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbVideoInterlace.Checked = ffmpegOutput.Video_Interlace;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFFFMPEGOutput ffmpegOutput)
         {
             ffmpegOutput.OutputFormat = (FFMPEGOutputFormat)cbOutputFormat.SelectedIndex;
@@ -163,56 +188,67 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     cbVideoCodec.SelectedIndex = 0;
                     cbAudioCodec.SelectedIndex = 0;
                     break;
+
                 // MP4
                 case 1:
                     cbVideoCodec.SelectedIndex = 1;
                     cbAudioCodec.SelectedIndex = 3;
                     break;
+
                 // MKV
                 case 2:
                     cbVideoCodec.SelectedIndex = 1;
                     cbAudioCodec.SelectedIndex = 3;
                     break;
+
                 // FLV
                 case 3:
                     cbVideoCodec.SelectedIndex = 1;
                     cbAudioCodec.SelectedIndex = 3;
                     break;
+
                 // OGG
                 case 4:
                     cbVideoCodec.SelectedIndex = 0;
                     cbAudioCodec.SelectedIndex = 5;
                     break;
+
                 // MPEG-TS
                 case 5:
                     cbVideoCodec.SelectedIndex = 11;
                     cbAudioCodec.SelectedIndex = 1;
                     break;
+
                 // VOB
                 case 6:
                     cbVideoCodec.SelectedIndex = 11;
                     cbAudioCodec.SelectedIndex = 1;
                     break;
+
                 // AVI
                 case 7:
                     cbVideoCodec.SelectedIndex = 1;
                     cbAudioCodec.SelectedIndex = 2;
                     break;
+
                 // WEBM
                 case 8:
                     cbVideoCodec.SelectedIndex = 12;
                     cbAudioCodec.SelectedIndex = 5;
                     break;
+
                 // M4A
                 case 9:
                     cbVideoCodec.SelectedIndex = 0;
                     cbAudioCodec.SelectedIndex = 3;
                     break;
+
                 // GIF
                 case 10:
                     cbVideoCodec.SelectedIndex = 0;
                     cbAudioCodec.SelectedIndex = 0;
                     break;
+
                 // MOV
                 case 11:
                     cbVideoCodec.SelectedIndex = 1;

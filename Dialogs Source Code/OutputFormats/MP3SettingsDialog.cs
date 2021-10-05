@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="MP3SettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
@@ -6,8 +10,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// MP3 settings dialog.
+    /// </summary>
     public partial class MP3SettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MP3SettingsDialog"/> class.
+        /// </summary>
         public MP3SettingsDialog()
         {
             InitializeComponent();
@@ -23,6 +33,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbLameSampleRate.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mp3Output">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFMP3Output mp3Output)
         {
             // main
@@ -67,6 +86,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbLameModeFixed.Checked = mp3Output.ModeFixed;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mp3Output">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMP3Output mp3Output)
         {
             // main

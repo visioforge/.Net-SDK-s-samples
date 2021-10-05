@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="SpeexSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
@@ -6,8 +10,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// Speex settings dialog.
+    /// </summary>
     public partial class SpeexSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpeexSettingsDialog"/> class.
+        /// </summary>
         public SpeexSettingsDialog()
         {
             InitializeComponent();
@@ -21,6 +31,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbSpeexMode.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Saves setings.
+        /// </summary>
+        /// <param name="speexOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFSpeexOutput speexOutput)
         {
             speexOutput.BitRate = tbSpeexBitrate.Value;
@@ -35,6 +51,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             speexOutput.UseVAD = cbSpeexVAD.Checked;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="speexOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFSpeexOutput speexOutput)
         {
             tbSpeexBitrate.Value = speexOutput.BitRate;

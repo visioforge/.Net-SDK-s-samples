@@ -942,7 +942,7 @@ Public Class Form1
                 If (rbGPUIntel.Checked) Then
                     MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.IntelQuickSync
                 ElseIf (rbGPUNVidia.Checked) Then
-                    MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.nVidiaCUVID
+                    MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.NvidiaCUVID
                 ElseIf (rbGPUDXVANative.Checked) Then
                     MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2Native
                 ElseIf (rbGPUDXVACopyBack.Checked) Then

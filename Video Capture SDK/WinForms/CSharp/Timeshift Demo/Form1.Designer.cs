@@ -557,7 +557,6 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.Audio_Channel_Mapper = null;
             this.VideoCapture1.Audio_Decoder = null;
             this.VideoCapture1.Audio_Effects_Enabled = false;
-            this.VideoCapture1.Audio_Effects_UseLegacyEffects = false;
             this.VideoCapture1.Audio_Enhancer_Enabled = false;
             this.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device";
             this.VideoCapture1.Audio_PCM_Converter = null;
@@ -574,7 +573,6 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
-            this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
             this.VideoCapture1.Debug_DisableMessageDialogs = false;
@@ -686,7 +684,6 @@ namespace VC_Timeshift_Demo
             // 
             this.MediaPlayer1.Audio_Channel_Mapper = null;
             this.MediaPlayer1.Audio_Effects_Enabled = false;
-            this.MediaPlayer1.Audio_Effects_UseLegacyEffects = false;
             this.MediaPlayer1.Audio_Enhancer_Enabled = false;
             this.MediaPlayer1.Audio_OutputDevice = "";
             this.MediaPlayer1.Audio_PlayAudio = false;
@@ -702,7 +699,6 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Custom_Splitter = null;
             this.MediaPlayer1.Custom_Video_Decoder = null;
             this.MediaPlayer1.CustomRedist_Auto = true;
-            this.MediaPlayer1.CustomRedist_Enabled = false;
             this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
             this.MediaPlayer1.Debug_Dir = null;
@@ -733,7 +729,7 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Selection_Stop = 0;
             this.MediaPlayer1.Size = new System.Drawing.Size(441, 303);
             this.MediaPlayer1.Source_Custom_CLSID = null;
-            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID;
+            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.NvidiaCUVID;
             this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
             this.MediaPlayer1.Source_Stream = null;
             this.MediaPlayer1.Source_Stream_AudioPresent = true;

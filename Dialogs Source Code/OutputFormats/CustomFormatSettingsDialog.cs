@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="CustomFormatSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
@@ -7,6 +11,9 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// Custom format settings dialog.
+    /// </summary>
     public partial class CustomFormatSettingsDialog : Form
     {
         private readonly string[] _videoCodecs;
@@ -15,6 +22,18 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private readonly string[] _dsFilters;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomFormatSettingsDialog"/> class.
+        /// </summary>
+        /// <param name="videoCodecs">
+        /// Video codecs.
+        /// </param>
+        /// <param name="audioCodecs">
+        /// Audio codecs.
+        /// </param>
+        /// <param name="dsFilters">
+        /// Filters.
+        /// </param>
         public CustomFormatSettingsDialog(string[] videoCodecs, string[] audioCodecs, string[] dsFilters)
         {
             InitializeComponent();
@@ -71,6 +90,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="directCaptureOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFDirectCaptureMP4Output directCaptureOutput)
         {
             // Custom audio codec can be used if device to not have audio pin with compressed stream
@@ -86,6 +111,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="directCaptureOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFDirectCaptureMP4Output directCaptureOutput)
         {
             // Custom audio codec can be used if device to not have audio pin with compressed stream
@@ -101,6 +132,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="directCaptureOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFDirectCaptureCustomOutput directCaptureOutput)
         {
             if (directCaptureOutput.Video_Codec_UseFiltersCategory)
@@ -131,6 +168,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbCustomFilewriter.Text = directCaptureOutput.SpecialFileWriter_FilterName;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="directCaptureOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFDirectCaptureCustomOutput directCaptureOutput)
         {
             if (rbCustomUseVideoCodecsCat.Checked)
@@ -161,6 +204,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             directCaptureOutput.SpecialFileWriter_FilterName = cbCustomFilewriter.Text;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="customOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFCustomOutput customOutput)
         {
             if (customOutput.Video_Codec_UseFiltersCategory)
@@ -191,6 +240,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbCustomFilewriter.Text = customOutput.SpecialFileWriter_FilterName;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="customOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFCustomOutput customOutput)
         {
             if (rbCustomUseVideoCodecsCat.Checked)

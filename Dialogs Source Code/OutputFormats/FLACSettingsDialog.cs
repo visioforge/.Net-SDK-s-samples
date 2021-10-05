@@ -1,12 +1,22 @@
-﻿using System;
+﻿// <copyright file="FLACSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// FLAC settings dialog.
+    /// </summary>
     public partial class FLACSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FLACSettingsDialog"/> class.
+        /// </summary>
         public FLACSettingsDialog()
         {
             InitializeComponent();
@@ -24,6 +34,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             Close();
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="flacOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFFLACOutput flacOutput)
         {
             tbFLACLevel.Value = flacOutput.Level;
@@ -36,6 +52,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             edFLACRiceMax.Text = flacOutput.RiceMax.ToString();
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="flacOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFFLACOutput flacOutput)
         {
             flacOutput.Level = tbFLACLevel.Value;

@@ -6786,9 +6786,8 @@ Partial Class Form1
         'MediaPlayer1
         '
         Me.MediaPlayer1.Audio_Channel_Mapper = Nothing
-        Me.MediaPlayer1.Audio_Effects_Enabled = false
-        Me.MediaPlayer1.Audio_Effects_UseLegacyEffects = false
-        Me.MediaPlayer1.Audio_Enhancer_Enabled = false
+        Me.MediaPlayer1.Audio_Effects_Enabled = False
+        Me.MediaPlayer1.Audio_Enhancer_Enabled = False
         Me.MediaPlayer1.Audio_OutputDevice = ""
         Me.MediaPlayer1.Audio_PlayAudio = true
         Me.MediaPlayer1.Audio_Sample_Grabber_Enabled = false
@@ -6802,8 +6801,7 @@ Partial Class Form1
         Me.MediaPlayer1.Custom_Audio_Decoder = Nothing
         Me.MediaPlayer1.Custom_Splitter = Nothing
         Me.MediaPlayer1.Custom_Video_Decoder = Nothing
-        Me.MediaPlayer1.CustomRedist_Auto = true
-        Me.MediaPlayer1.CustomRedist_Enabled = false
+        Me.MediaPlayer1.CustomRedist_Auto = True
         Me.MediaPlayer1.CustomRedist_Path = Nothing
         Me.MediaPlayer1.Debug_DeepCleanUp = false
         Me.MediaPlayer1.Debug_Dir = Nothing
@@ -6833,7 +6831,7 @@ Partial Class Form1
         Me.MediaPlayer1.Selection_Stop = 0
         Me.MediaPlayer1.Size = New System.Drawing.Size(415, 314)
         Me.MediaPlayer1.Source_Custom_CLSID = Nothing
-        Me.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID
+        Me.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.NvidiaCUVID
         Me.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS
         Me.MediaPlayer1.Source_Stream = Nothing
         Me.MediaPlayer1.Source_Stream_AudioPresent = true

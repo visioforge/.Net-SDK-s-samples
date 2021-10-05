@@ -22,18 +22,39 @@ namespace VisioForge.Controls.UI.Dialogs
     /// </summary>
     public partial class WindowCaptureForm : Form
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether window moved by mouse button down.
+        /// </summary>
         public bool MoveByMouseDown { get; set; } = true;
 
+        /// <summary>
+        /// Gets or sets default border color.
+        /// </summary>
         public Color DefaultBorderColor { get; set; } = Color.Red;
 
+        /// <summary>
+        /// Gets info label.
+        /// </summary>
         public Label InfoLabel => lbInfo;
 
+        /// <summary>
+        /// OnCaptureHotkey event.
+        /// </summary>
         public event EventHandler<WindowCaptureEventArgs> OnCaptureHotkey; 
 
+        /// <summary>
+        /// Gets capture window text.
+        /// </summary>
         public string CapturedWindowText { get; private set; }
 
+        /// <summary>
+        /// Gets captured window handle.
+        /// </summary>
         public IntPtr CapturedWindowHandle { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WindowCaptureForm"/> class.
+        /// </summary>
         public WindowCaptureForm()
         {
             InitializeComponent();
@@ -108,6 +129,7 @@ namespace VisioForge.Controls.UI.Dialogs
                 grf.Clear(Color.Fuchsia); 
 
                 var pen = new Pen(DefaultBorderColor, 3f);
+
                 //pen.Alignment = PenAlignment.Inset;
 
                 var rect = new Rectangle(0, 0, Width, Height);
@@ -143,6 +165,12 @@ namespace VisioForge.Controls.UI.Dialogs
 
         #endregion
 
+        /// <summary>
+        /// Updates location.
+        /// </summary>
+        /// <param name="rect">
+        /// Rectangle.
+        /// </param>
         public void UpdateLocation(Rectangle rect)
         {
             Bounds = rect;
@@ -172,11 +200,17 @@ namespace VisioForge.Controls.UI.Dialogs
             }
         }
 
+        /// <summary>
+        /// Starts capture.
+        /// </summary>
         public void StartCapture()
         {
             timer1.Start();
         }
 
+        /// <summary>
+        /// Stops capture.
+        /// </summary>
         public void StopCapture()
         {
             timer1.Stop();

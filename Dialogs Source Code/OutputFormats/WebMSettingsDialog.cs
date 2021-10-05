@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="WebMSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
@@ -7,8 +11,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// WebM settings dialog.
+    /// </summary>
     public partial class WebMSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebMSettingsDialog"/> class.
+        /// </summary>
         public WebMSettingsDialog()
         {
             InitializeComponent();
@@ -25,6 +35,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbWebMVideoQualityMode.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="webmOutput">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFWebMOutput webmOutput)
         {
             tbWebMAudioQuality.Value = webmOutput.Audio_Quality;
@@ -102,6 +121,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="webmOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFWebMOutput webmOutput)
         {
             webmOutput.Audio_Quality = tbWebMAudioQuality.Value;

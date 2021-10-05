@@ -1,19 +1,31 @@
-﻿using System;
+﻿// <copyright file="HWEncodersOutputSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
-// ReSharper disable InconsistentNaming
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// HW encoders output settings dialog.
+    /// </summary>
     public partial class HWEncodersOutputSettingsDialog : Form
     {
         private HWEncodersAvailableInfo _filtersAvailableInfo;
 
         private readonly HWSettingsDialogMode _mode;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HWEncodersOutputSettingsDialog"/> class.
+        /// </summary>
+        /// <param name="mode">
+        /// Mode.
+        /// </param>
         public HWEncodersOutputSettingsDialog(HWSettingsDialogMode mode)
         {
             InitializeComponent();
@@ -92,6 +104,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         break;
                     }
+
                 case HWSettingsDialogMode.MKV:
                     Text = "MKV settings";
                     break;
@@ -115,7 +128,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbAACObjectType.SelectedIndex = (int)audio.Object - 1;
         }
 
-        private void SaveAudio(ref VFM4AOutput audio)
+        private VFM4AOutput SaveAudio(VFM4AOutput audio)
         {
             int.TryParse(cbAACBitrate.Text, out var tmp);
             audio.Bitrate = tmp;
@@ -123,6 +136,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             audio.Version = (VFAACVersion)cbAACVersion.SelectedIndex;
             audio.Output = (VFAACOutput)cbAACOutput.SelectedIndex;
             audio.Object = (VFAACObject)(cbAACObjectType.SelectedIndex + 1);
+
+            return audio;
         }
 
         private void LoadVideo(VFMFVideoEncoderSettings video)
@@ -249,7 +264,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             edVideoQuality.Text = video.Quality.ToString();
         }
 
-        private void SaveVideo(ref VFMFVideoEncoderSettings video)
+        private VFMFVideoEncoderSettings SaveVideo(VFMFVideoEncoderSettings video)
         {
             // Main settings
             // 0 - Microsoft(H264 / AAC)
@@ -382,20 +397,40 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             int.TryParse(edVideoQuality.Text, out tmp);
             video.Quality = tmp;
+
+            return video;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mpegTSOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFMPEGTSOutput mpegTSOutput)
         {
             LoadVideo(mpegTSOutput.Video);
             LoadAudio(mpegTSOutput.Audio);
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mpegTSOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMPEGTSOutput mpegTSOutput)
         {
-            SaveVideo(ref mpegTSOutput.Video);
-            SaveAudio(ref mpegTSOutput.Audio);
+            mpegTSOutput.Video = SaveVideo(mpegTSOutput.Video);
+            mpegTSOutput.Audio = SaveAudio(mpegTSOutput.Audio);
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFMP4HWOutput mp4Output)
         {
             LoadVideo(mp4Output.Video);
@@ -414,10 +449,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMP4HWOutput mp4Output)
         {
-            SaveVideo(ref mp4Output.Video);
-            SaveAudio(ref mp4Output.Audio);
+            mp4Output.Video = SaveVideo(mp4Output.Video);
+            mp4Output.Audio = SaveAudio(mp4Output.Audio);
 
             if (_mode == HWSettingsDialogMode.MP4)
             {
@@ -425,29 +466,52 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
-
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFMKVv2Output mp4Output)
         {
             LoadVideo(mp4Output.Video);
             LoadAudio(mp4Output.Audio);
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMKVv2Output mp4Output)
         {
-            SaveVideo(ref mp4Output.Video);
-            SaveAudio(ref mp4Output.Audio);
+            mp4Output.Video = SaveVideo(mp4Output.Video);
+            mp4Output.Audio = SaveAudio(mp4Output.Audio);
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFMOVOutput mp4Output)
         {
             LoadVideo(mp4Output.Video);
             LoadAudio(mp4Output.Audio);
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMOVOutput mp4Output)
         {
-            SaveVideo(ref mp4Output.Video);
-            SaveAudio(ref mp4Output.Audio);
+            mp4Output.Video = SaveVideo(mp4Output.Video);
+            mp4Output.Audio = SaveAudio(mp4Output.Audio);
         }
 
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -463,7 +527,6 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void mp4HWSettingsDialog_Load(object sender, EventArgs e)
         {
-
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

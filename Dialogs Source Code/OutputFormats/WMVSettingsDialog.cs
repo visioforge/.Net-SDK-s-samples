@@ -30,8 +30,17 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private readonly VideoEditCore _coreVideoEdit;
 #pragma warning restore CA2213
 
+        /// <summary>
+        /// Gets or sets a value indicating whether WMA output will be used.
+        /// </summary>
         public bool WMA { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WMVSettingsDialog"/> class.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
         public WMVSettingsDialog(IVideoCaptureCore core)
         {
             InitializeComponent();
@@ -41,6 +50,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             LoadDefaults();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WMVSettingsDialog"/> class.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
         public WMVSettingsDialog(IVideoEditCore core)
         {
             InitializeComponent();
@@ -426,6 +441,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         cbWMVAudioEnabled.Checked = wmaOutput.Custom_Audio_StreamPresent;
                     }
+
                     break;
                 case VFWMVMode.V8SystemProfile:
 

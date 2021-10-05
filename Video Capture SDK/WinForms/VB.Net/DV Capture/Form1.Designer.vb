@@ -862,7 +862,6 @@ Partial Class Form1
         Me.VideoCapture1.Audio_Channel_Mapper = Nothing
         Me.VideoCapture1.Audio_Decoder = Nothing
         Me.VideoCapture1.Audio_Effects_Enabled = False
-        Me.VideoCapture1.Audio_Effects_UseLegacyEffects = False
         Me.VideoCapture1.Audio_Enhancer_Enabled = False
         Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
         Me.VideoCapture1.Audio_PCM_Converter = Nothing
@@ -880,7 +879,6 @@ Partial Class Form1
         Me.VideoCapture1.Custom_Source = Nothing
         Me.VideoCapture1.CustomRedist_Auto = True
         Me.VideoCapture1.CustomRedist_DisableDialog = False
-        Me.VideoCapture1.CustomRedist_Enabled = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
         Me.VideoCapture1.Debug_DisableMessageDialogs = false

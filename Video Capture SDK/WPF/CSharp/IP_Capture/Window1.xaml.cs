@@ -470,7 +470,7 @@ namespace IP_Capture
 
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
-            if (btONVIFConnect.Content == "Connect")
+            if (btONVIFConnect.Content.ToString() == "Connect")
             {
                 var connected = false;
 

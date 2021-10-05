@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="MP4SettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -6,12 +10,17 @@ using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
-// ReSharper disable InconsistentNaming
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// MP4 settings dialog.
+    /// </summary>
     public partial class MP4SettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MP4SettingsDialog"/> class.
+        /// </summary>
         public MP4SettingsDialog()
         {
             InitializeComponent();
@@ -46,6 +55,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbAACBitrate.SelectedIndex = 16;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMP4Output mp4Output)
         {
             int tmp;
@@ -269,7 +284,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 mp4Output.Video_NVENC.Bitrate = Convert.ToInt32(edNVENCBitrate.Text);
                 mp4Output.Video_NVENC.QP = Convert.ToInt32(edNVENCQP.Text);
-                mp4Output.Video_NVENC.RateControl = (VFNVENCRateControlMode) cbNVENCRateControl.SelectedIndex;
+                mp4Output.Video_NVENC.RateControl = (VFNVENCRateControlMode)cbNVENCRateControl.SelectedIndex;
                 mp4Output.Video_NVENC.GOP = Convert.ToInt32(edNVENCGOP.Text);
                 mp4Output.Video_NVENC.BFrames = Convert.ToInt32(edNVENCBFrames.Text);
             }
@@ -317,14 +332,23 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             if (rbEncryptionModeAES128.Checked)
             {
-                mp4Output.Encryption_Mode = VFEncryptionMode.v8_AES128;
+                mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128;
             }
             else
             {
-                mp4Output.Encryption_Mode = VFEncryptionMode.v9_AES256;
+                mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256;
             }
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mp4Output">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFMP4Output mp4Output)
         {
             switch (mp4Output.MP4Mode)
@@ -607,10 +631,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (mp4Output.Encryption_Mode)
             {
-                case VFEncryptionMode.v8_AES128:
+                case VFEncryptionMode.V8_AES128:
                     rbEncryptionModeAES128.Checked = true;
                     break;
-                case VFEncryptionMode.v9_AES256:
+                case VFEncryptionMode.V9_AES256:
                     rbEncryptionModeAES128.Checked = false;
                     break;
                 default:
@@ -634,16 +658,25 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The binary key cannot have an odd number of digits: {0}", hexString));
             }
 
-            byte[] HexAsBytes = new byte[hexString.Length / 2];
-            for (int index = 0; index < HexAsBytes.Length; index++)
+            byte[] hexAsBytes = new byte[hexString.Length / 2];
+            for (int index = 0; index < hexAsBytes.Length; index++)
             {
                 string byteValue = hexString.Substring(index * 2, 2);
-                HexAsBytes[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                hexAsBytes[index] = byte.Parse(byteValue, NumberStyles.HexNumber, CultureInfo.InvariantCulture);
             }
 
-            return HexAsBytes;
+            return hexAsBytes;
         }
 
+        /// <summary>
+        /// Converts byte array to hex string.
+        /// </summary>
+        /// <param name="ba">
+        /// Byte array.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
         public static string ConvertByteArrayToHexString(byte[] ba)
         {
             return BitConverter.ToString(ba).Replace("-", "");
@@ -678,7 +711,6 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void MP4v10SettingsDialog_Load(object sender, EventArgs e)
         {
-
         }
 
         private void btEncryptionOpenFile_Click(object sender, EventArgs e)

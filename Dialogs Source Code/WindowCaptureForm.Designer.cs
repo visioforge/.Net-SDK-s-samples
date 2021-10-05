@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+
+            _globalKeyboardHook?.Dispose();
+            _globalKeyboardHook = null;
+
             base.Dispose(disposing);
         }
 

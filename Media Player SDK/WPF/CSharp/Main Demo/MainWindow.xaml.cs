@@ -739,7 +739,7 @@ namespace Main_Demo
                     }
                     else if (rbGPUNVidia.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.nVidiaCUVID;
+                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.NvidiaCUVID;
                     }
                     else if (rbGPUDXVANative.IsChecked == true)
                     {

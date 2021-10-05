@@ -7,9 +7,21 @@
     <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
     <Product>VisioForge.Controls.UI.Dialogs</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.3.24.0</AssemblyVersion>
-    <FileVersion>14.3.24.0</FileVersion>
-    <Version>14.3.24.0</Version>
+    <AssemblyVersion>14.4.1.0</AssemblyVersion>
+    <FileVersion>14.4.1.0</FileVersion>
+    <Version>14.4.1.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!--
+    Make sure any documentation comments which are included in code get checked for syntax during the build, but do
+    not report warnings for missing comments.
+
+    CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do)
+    CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+  -->
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
     <LangVersion>8.0</LangVersion>
@@ -33,6 +45,30 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>VisioForge.Controls.UI.Dialogs.key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0-windows|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net5.0-windows|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-windows|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0-windows|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="MSBuild_Logs\**" />
@@ -237,5 +273,11 @@
   <ItemGroup>
     <None Include="Settings.StyleCop" />
     <None Include="VisioForge.Controls.UI.Dialogs.key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

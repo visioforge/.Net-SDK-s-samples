@@ -350,7 +350,6 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MediaPlayer1.Audio_Channel_Mapper = Nothing
         Me.MediaPlayer1.Audio_Effects_Enabled = False
-        Me.MediaPlayer1.Audio_Effects_UseLegacyEffects = False
         Me.MediaPlayer1.Audio_Enhancer_Enabled = False
         Me.MediaPlayer1.Audio_OutputDevice = ""
         Me.MediaPlayer1.Audio_PlayAudio = True
@@ -366,7 +365,6 @@ Partial Class Form1
         Me.MediaPlayer1.Custom_Splitter = Nothing
         Me.MediaPlayer1.Custom_Video_Decoder = Nothing
         Me.MediaPlayer1.CustomRedist_Auto = True
-        Me.MediaPlayer1.CustomRedist_Enabled = False
         Me.MediaPlayer1.CustomRedist_Path = Nothing
         Me.MediaPlayer1.Debug_DeepCleanUp = False
         Me.MediaPlayer1.Debug_Dir = Nothing
@@ -395,7 +393,7 @@ Partial Class Form1
         Me.MediaPlayer1.Selection_Stop = 0
         Me.MediaPlayer1.Size = New System.Drawing.Size(415, 302)
         Me.MediaPlayer1.Source_Custom_CLSID = Nothing
-        Me.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID
+        Me.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.NvidiaCUVID
         Me.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS
         Me.MediaPlayer1.Source_Stream = Nothing
         Me.MediaPlayer1.Source_Stream_AudioPresent = True

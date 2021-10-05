@@ -7387,7 +7387,6 @@ namespace VideoEdit_CS_Demo
             | System.Windows.Forms.AnchorStyles.Right)));
             this.VideoEdit1.Audio_Channel_Mapper = null;
             this.VideoEdit1.Audio_Effects_Enabled = false;
-            this.VideoEdit1.Audio_Effects_UseLegacyEffects = false;
             this.VideoEdit1.Audio_Enhancer_Enabled = false;
             this.VideoEdit1.Audio_Preview_Enabled = false;
             this.VideoEdit1.Audio_VUMeter_Enabled = false;
@@ -7399,7 +7398,6 @@ namespace VideoEdit_CS_Demo
             this.VideoEdit1.ChromaKey = null;
             this.VideoEdit1.CustomRedist_Auto = true;
             this.VideoEdit1.CustomRedist_DisableDialog = false;
-            this.VideoEdit1.CustomRedist_Enabled = false;
             this.VideoEdit1.CustomRedist_Path = null;
             this.VideoEdit1.Debug_Dir = "";
             this.VideoEdit1.Debug_DisableMessageDialogs = false;

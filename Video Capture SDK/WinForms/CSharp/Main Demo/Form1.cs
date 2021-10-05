@@ -139,9 +139,6 @@ namespace VideoCapture_CSharp_Demo
         /// </param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            //VideoCapture1.CustomRedist_Enabled = true;
-            //VideoCapture1.CustomRedist_Path = @"c:\Projects\_Projects\MediaFrameworkDotNet\_OUTPUT\FILTERS\";
-
             Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
 
             tmRecording.Elapsed += (senderx, args) =>

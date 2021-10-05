@@ -26,6 +26,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private readonly string[] _audioCodecs;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AVISettingsDialog"/> class.
+        /// </summary>
+        /// <param name="videoCodecs">
+        /// Video codecs.
+        /// </param>
+        /// <param name="audioCodecs">
+        /// Audio codecs.
+        /// </param>
         public AVISettingsDialog(string[] videoCodecs, string[] audioCodecs)
         {
             InitializeComponent();
@@ -94,6 +103,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="aviOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFAVIOutput aviOutput)
         {
             cbAudioCodecs.Text = aviOutput.ACM.Name;
@@ -108,6 +123,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbUseMP3InAVI.Checked = aviOutput.Audio_UseMP3Encoder;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="aviOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFAVIOutput aviOutput)
         {
             aviOutput.ACM.Name = cbAudioCodecs.Text;
@@ -125,6 +146,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="mkvOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFMKVv1Output mkvOutput)
         {
             cbAudioCodecs.Text = mkvOutput.ACM.Name;
@@ -139,6 +166,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbUseMP3InAVI.Checked = mkvOutput.Audio_UseMP3Encoder;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="mkvOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFMKVv1Output mkvOutput)
         {
             mkvOutput.ACM.Name = cbAudioCodecs.Text;

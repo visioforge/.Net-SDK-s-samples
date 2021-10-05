@@ -71,7 +71,6 @@ namespace Video_From_Images_Demo
             this.VideoCapture1.Audio_Channel_Mapper = null;
             this.VideoCapture1.Audio_Decoder = null;
             this.VideoCapture1.Audio_Effects_Enabled = false;
-            this.VideoCapture1.Audio_Effects_UseLegacyEffects = false;
             this.VideoCapture1.Audio_Enhancer_Enabled = false;
             this.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device";
             this.VideoCapture1.Audio_PCM_Converter = null;
@@ -87,7 +86,6 @@ namespace Video_From_Images_Demo
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
-            this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
             this.VideoCapture1.Debug_Mode = false;

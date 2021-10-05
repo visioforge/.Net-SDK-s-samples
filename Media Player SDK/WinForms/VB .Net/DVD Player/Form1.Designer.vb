@@ -454,9 +454,8 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.MediaPlayer1.Audio_Channel_Mapper = Nothing
-        Me.MediaPlayer1.Audio_Effects_Enabled = false
-        Me.MediaPlayer1.Audio_Effects_UseLegacyEffects = false
-        Me.MediaPlayer1.Audio_Enhancer_Enabled = false
+        Me.MediaPlayer1.Audio_Effects_Enabled = False
+        Me.MediaPlayer1.Audio_Enhancer_Enabled = False
         Me.MediaPlayer1.Audio_OutputDevice = ""
         Me.MediaPlayer1.Audio_PlayAudio = true
         Me.MediaPlayer1.Audio_Sample_Grabber_Enabled = false

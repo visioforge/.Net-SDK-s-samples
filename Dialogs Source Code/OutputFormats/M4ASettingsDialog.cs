@@ -1,14 +1,23 @@
-﻿using System;
+﻿// <copyright file="M4ASettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
-// ReSharper disable InconsistentNaming
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// M4A settings dialog.
+    /// </summary>
     public partial class M4ASettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="M4ASettingsDialog"/> class.
+        /// </summary>
         public M4ASettingsDialog()
         {
             InitializeComponent();
@@ -24,6 +33,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbM4ABitrate.SelectedIndex = 12;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="m4aOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFM4AOutput m4aOutput)
         {
             cbM4ABitrate.Text = m4aOutput.Bitrate.ToString();
@@ -32,6 +47,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbM4AObjectType.SelectedIndex = (int)m4aOutput.Object - 1;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="m4aOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFM4AOutput m4aOutput)
         {
             int.TryParse(cbM4ABitrate.Text, out var tmp);

@@ -31,6 +31,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
         private IVFVideoEffectTextLogo _intf;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextLogoSettingsDialog"/> class.
+        /// </summary>
         public TextLogoSettingsDialog()
         {
             InitializeComponent();
@@ -42,7 +45,16 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             cbTextLogoGradMode.SelectedIndex = 0;
             cbTextLogoShapeType.SelectedIndex = 0;
         }
-        
+
+        /// <summary>
+        /// Attaches video effect.
+        /// </summary>
+        /// <param name="effect">
+        /// Effect.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void Attach(IVFVideoEffect effect)
         {
             _intf = effect as IVFVideoEffectTextLogo;
@@ -113,7 +125,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             cbTextLogoGradientEnabled.Checked = _intf.GradientEnabled;
             cbTextLogoGradMode.SelectedIndex = (int)_intf.GradientMode;
             pnTextLogoGradColor1.BackColor = _intf.GradientColor1;
@@ -121,19 +133,19 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
             cbTextLogoEffectrMode.SelectedIndex = (int)_intf.BorderMode;
             pnTextLogoInnerColor.BackColor = _intf.BorderInnerColor;
-            pnTextLogoOuterColor.BackColor = _intf.BorderOuterColor ;
+            pnTextLogoOuterColor.BackColor = _intf.BorderOuterColor;
             edTextLogoInnerSize.Text = _intf.BorderInnerSize.ToString();
             edTextLogoOuterSize.Text = _intf.BorderOuterSize.ToString();
 
             cbTextLogoShapeEnabled.Checked = _intf.Shape;
             edTextLogoShapeLeft.Text = _intf.ShapeLeft.ToString();
             edTextLogoShapeTop.Text = _intf.ShapeTop.ToString();
-            cbTextLogoShapeType.SelectedIndex = (int)_intf.ShapeType ;
+            cbTextLogoShapeType.SelectedIndex = (int)_intf.ShapeType;
             edTextLogoShapeWidth.Text = _intf.ShapeWidth.ToString();
             edTextLogoShapeHeight.Text = _intf.ShapeHeight.ToString();
-            pnTextLogoShapeColor.BackColor = _intf.ShapeColor ;
+            pnTextLogoShapeColor.BackColor = _intf.ShapeColor;
 
-            tbTextLogoTransp.Value = _intf.TransparencyLevel ;
+            tbTextLogoTransp.Value = _intf.TransparencyLevel;
 
             switch (_intf.Mode)
             {
@@ -157,12 +169,30 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             cbTextLogoFadeOut.Checked = _intf.FadeOut;
         }
 
+        /// <summary>
+        /// Fills effect.
+        /// </summary>
+        /// <param name="effect">
+        /// Effect.
+        /// </param>
         public void Fill(IVFVideoEffect effect)
         {
             _intf = effect as IVFVideoEffectTextLogo;
             EffectUpdate(_intf);
         }
 
+        /// <summary>
+        /// Generates new effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IVideoCaptureCore core)
         {
             if (core == null)
@@ -186,6 +216,18 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
+        /// <summary>
+        /// Generates new effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IMediaPlayerCore core)
         {
             if (core == null)
@@ -209,6 +251,18 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
+        /// <summary>
+        /// Generates new effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IVideoEditCore core)
         {
             if (core == null)

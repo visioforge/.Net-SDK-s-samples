@@ -29,6 +29,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
         private IVFVideoEffectImageLogo _intf;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImageLogoSettingsDialog"/> class.
+        /// </summary>
         public ImageLogoSettingsDialog()
         {
             InitializeComponent();
@@ -52,6 +55,12 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             Close();
         }
 
+        /// <summary>
+        /// Attaches video effect.
+        /// </summary>
+        /// <param name="effect">
+        /// Effect.
+        /// </param>
         public void Attach(IVFVideoEffect effect)
         {
             _intf = effect as IVFVideoEffectImageLogo;
@@ -59,22 +68,40 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             {
                 return;
             }
-            
-            edImageLogoFilename.Text = _intf.Filename ;
+
+            edImageLogoFilename.Text = _intf.Filename;
             edImageLogoLeft.Text = _intf.Left.ToString();
             edImageLogoTop.Text = _intf.Top.ToString();
             tbImageLogoTransp.Value = _intf.TransparencyLevel;
-            pnImageLogoColorKey.ForeColor= _intf.ColorKey;
+            pnImageLogoColorKey.ForeColor = _intf.ColorKey;
             cbImageLogoUseColorKey.Checked = _intf.UseColorKey;
             cbImageLogoShowAlways.Checked = _intf.StartTime == TimeSpan.Zero && _intf.StopTime == TimeSpan.Zero;
         }
 
+        /// <summary>
+        /// Fills video effect.
+        /// </summary>
+        /// <param name="effect">
+        /// Effect.
+        /// </param>
         public void Fill(IVFVideoEffect effect)
         {
             _intf = effect as IVFVideoEffectImageLogo;
             EffectUpdate(_intf);
         }
 
+        /// <summary>
+        /// Generates effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IVideoCaptureCore core)
         {
             if (core == null)
@@ -98,6 +125,18 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
+        /// <summary>
+        /// Generates effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IVideoEditCore core)
         {
             if (core == null)
@@ -121,6 +160,18 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
+        /// <summary>
+        /// Generates effect name.
+        /// </summary>
+        /// <param name="core">
+        /// Core.
+        /// </param>
+        /// <returns>
+        /// Returns <see cref="string"/>.
+        /// </returns>
+        /// <exception cref="Exception">
+        /// Exception.
+        /// </exception>
         public string GenerateNewEffectName(IMediaPlayerCore core)
         {
             if (core == null)
@@ -171,7 +222,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             {
                 imageLogo.StartTime = TimeSpan.Zero;
                 imageLogo.StopTime = TimeSpan.Zero;
-            }  
+            }
             else
             {
                 imageLogo.StartTime = TimeSpan.FromMilliseconds(Convert.ToInt32(edImageLogoStartTime.Text));

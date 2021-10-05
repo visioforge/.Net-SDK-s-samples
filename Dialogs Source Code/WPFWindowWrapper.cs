@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="WPFWindowWrapper.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Windows.Forms;
 
 namespace VisioForge.Controls.UI.Dialogs
@@ -9,7 +13,7 @@ namespace VisioForge.Controls.UI.Dialogs
     public class WPFWindowWrapper : IWin32Window
     {
         /// <summary>
-        /// Creates new WPFWindowWrapper.
+        /// Initializes a new instance of the <see cref="WPFWindowWrapper"/> class.
         /// </summary>
         /// <param name="wpfWindow">
         /// WPF window.
@@ -23,28 +27,5 @@ namespace VisioForge.Controls.UI.Dialogs
         /// Gets handle.
         /// </summary>
         public IntPtr Handle { get; private set; }
-    }
-
-    /// <summary>
-    /// Helper to show WinForms dialog in WPF app.
-    /// </summary>
-    public static class WPFWindowWrapperHelper
-    {
-        /// <summary>
-        /// Show dialog.
-        /// </summary>
-        /// <param name="form">
-        /// WinForms form.
-        /// </param>
-        /// <param name="parent">
-        /// WPF window.
-        /// </param>
-        /// <returns>
-        /// Dialog result.
-        /// </returns>
-        public static DialogResult ShowDialog(this Form form, System.Windows.Window parent)
-        {
-            return form.ShowDialog(new WPFWindowWrapper(parent));
-        }
     }
 }

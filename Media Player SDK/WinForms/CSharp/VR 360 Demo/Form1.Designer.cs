@@ -306,7 +306,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MediaPlayer1.Audio_Channel_Mapper = null;
             this.MediaPlayer1.Audio_Effects_Enabled = false;
-            this.MediaPlayer1.Audio_Effects_UseLegacyEffects = false;
             this.MediaPlayer1.Audio_Enhancer_Enabled = false;
             this.MediaPlayer1.Audio_OutputDevice = "";
             this.MediaPlayer1.Audio_PlayAudio = true;
@@ -321,7 +320,6 @@
             this.MediaPlayer1.Custom_Audio_Decoder = null;
             this.MediaPlayer1.Custom_Splitter = null;
             this.MediaPlayer1.Custom_Video_Decoder = null;
-            this.MediaPlayer1.CustomRedist_Enabled = false;
             this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
             this.MediaPlayer1.Debug_Dir = null;
@@ -350,7 +348,7 @@
             this.MediaPlayer1.Selection_Stop = 0;
             this.MediaPlayer1.Size = new System.Drawing.Size(416, 306);
             this.MediaPlayer1.Source_Custom_CLSID = null;
-            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID;
+            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.NvidiaCUVID;
             this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
             this.MediaPlayer1.Source_Stream = null;
             this.MediaPlayer1.Source_Stream_AudioPresent = true;

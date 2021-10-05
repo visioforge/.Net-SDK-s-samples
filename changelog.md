@@ -11,6 +11,7 @@
 * Resolved issues with Separate capture for MP4 HW, MOV, MPEG-TS, and MKVv2 outputs
 * Added Video_CaptureDevice_CustomPinName property. You can use this property to set a custom output pin name for a video capture device with several output video pins
 * Custom redist configuration updated
+* Updated IP camera RTSP Low Latency engine
 
 14.3
 * An issue with Video Resize filter creation for NuGet redists has been resolved

@@ -295,7 +295,6 @@ namespace Two_Windows_Demo
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MediaPlayer1.Audio_Channel_Mapper = null;
             this.MediaPlayer1.Audio_Effects_Enabled = false;
-            this.MediaPlayer1.Audio_Effects_UseLegacyEffects = false;
             this.MediaPlayer1.Audio_Enhancer_Enabled = false;
             this.MediaPlayer1.Audio_OutputDevice = "";
             this.MediaPlayer1.Audio_PlayAudio = false;

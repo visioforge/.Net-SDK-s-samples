@@ -1,12 +1,22 @@
-﻿using System;
+﻿// <copyright file="GIFSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// GIF settings dialog.
+    /// </summary>
     public partial class GIFSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GIFSettingsDialog"/> class.
+        /// </summary>
         public GIFSettingsDialog()
         {
             InitializeComponent();
@@ -17,6 +27,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             Close();
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="gifOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFAnimatedGIFOutput gifOutput)
         {
             edGIFFrameRate.Text = gifOutput.FrameRate.ToString("F2");
@@ -24,6 +40,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             edGIFHeight.Text = gifOutput.ForcedVideoHeight.ToString();
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="gifOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFAnimatedGIFOutput gifOutput)
         {
             gifOutput.FrameRate = Convert.ToDouble(edGIFFrameRate.Text);

@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="OggVorbisSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
@@ -6,8 +10,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// Ogg Vorbis settings dialog.
+    /// </summary>
     public partial class OggVorbisSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OggVorbisSettingsDialog"/> class.
+        /// </summary>
         public OggVorbisSettingsDialog()
         {
             InitializeComponent();
@@ -22,6 +32,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbOGGMinimum.SelectedIndex = 5;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="oggVorbisOutput">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFOGGVorbisOutput oggVorbisOutput)
         {
             edOGGQuality.Text = oggVorbisOutput.Quality.ToString();
@@ -42,6 +61,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="oggVorbisOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFOGGVorbisOutput oggVorbisOutput)
         {
             oggVorbisOutput.Quality = Convert.ToInt32(edOGGQuality.Text);

@@ -1,18 +1,24 @@
-﻿using System;
+﻿// <copyright file="FFMPEGEXESettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
-// ReSharper disable CommentTypo
-
-// ReSharper disable InconsistentNaming
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     using VisioForge.Types.FFMPEGEXE;
 
+    /// <summary>
+    /// FFMPEG.exe settings dialog.
+    /// </summary>
     public partial class FFMPEGEXESettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FFMPEGEXESettingsDialog"/> class.
+        /// </summary>
         public FFMPEGEXESettingsDialog()
         {
             InitializeComponent();
@@ -309,11 +315,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 tbVideoQuality.Enabled = true;
 
                 var mf = (CommonMFSettings)ffmpegOutput.Video;
+
                 //edVideoGOPSize.Text = ffmpegOutput.Video.GOPSize.ToString();
                 //edVideoBFramesCount.Text = ffmpegOutput.Video.BFrames.ToString();
                 cbH264Mode.SelectedIndex = (int)mf.RateControl;
                 cbForceHWEncoding.Checked = mf.ForceHWEncoding;
-
 
                 //cbH264Usage.SelectedIndex = (int)ffmpegOutput.Video.H264_Preset;
                 //cbH264Profile.SelectedIndex = (int)ffmpegOutput.Video_H264_Profile;
@@ -387,13 +393,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case AudioEncoder.AC3:
                     cbAudioCodec.SelectedIndex = 2;
                     break;
-                case AudioEncoder.adpcm_g722:
+                case AudioEncoder.ADPCM_G722:
                     cbAudioCodec.SelectedIndex = 3;
                     break;
-                case AudioEncoder.adpcm_g726:
+                case AudioEncoder.ADPCM_G726:
                     cbAudioCodec.SelectedIndex = 4;
                     break;
-                case AudioEncoder.adpcm_ms:
+                case AudioEncoder.ADPCM_MS:
                     cbAudioCodec.SelectedIndex = 5;
                     break;
                 case AudioEncoder.ALAC:
@@ -562,6 +568,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">
+        /// Output settings.
+        /// </param>
         public void SaveSettings(ref VFFFMPEGEXEOutput ffmpegOutput)
         {
             ffmpegOutput.UsePipe = cbUsePipes.Checked;
@@ -1014,15 +1026,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     break;
                 case 3:
                     // G722
-                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_g722;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.ADPCM_G722;
                     break;
                 case 4:
                     // G726
-                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_g726;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.ADPCM_G726;
                     break;
                 case 5:
                     // ADPCM
-                    ffmpegOutput.Audio.Encoder = AudioEncoder.adpcm_ms;
+                    ffmpegOutput.Audio.Encoder = AudioEncoder.ADPCM_MS;
                     break;
                 case 6:
                     // ALAC

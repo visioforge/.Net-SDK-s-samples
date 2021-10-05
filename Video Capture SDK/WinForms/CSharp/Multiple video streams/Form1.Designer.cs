@@ -210,7 +210,6 @@ namespace multiple_video_streams
             this.videoCapture1.Audio_Channel_Mapper = null;
             this.videoCapture1.Audio_Decoder = null;
             this.videoCapture1.Audio_Effects_Enabled = false;
-            this.videoCapture1.Audio_Effects_UseLegacyEffects = false;
             this.videoCapture1.Audio_Enhancer_Enabled = false;
             this.videoCapture1.Audio_OutputDevice = "Default DirectSound Device";
             this.videoCapture1.Audio_PCM_Converter = null;
@@ -227,7 +226,6 @@ namespace multiple_video_streams
             this.videoCapture1.ChromaKey = null;
             this.videoCapture1.Custom_Source = null;
             this.videoCapture1.CustomRedist_Auto = true;
-            this.videoCapture1.CustomRedist_Enabled = false;
             this.videoCapture1.CustomRedist_Path = null;
             this.videoCapture1.Debug_Dir = "";
             this.videoCapture1.Debug_DisableMessageDialogs = false;

@@ -5987,7 +5987,6 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.VideoEdit1.Audio_Channel_Mapper = Nothing
         Me.VideoEdit1.Audio_Effects_Enabled = False
-        Me.VideoEdit1.Audio_Effects_UseLegacyEffects = False
         Me.VideoEdit1.Audio_Enhancer_Enabled = False
         Me.VideoEdit1.Audio_Preview_Enabled = False
         Me.VideoEdit1.Audio_VUMeter_Enabled = False
@@ -5999,7 +5998,6 @@ Partial Class Form1
         Me.VideoEdit1.ChromaKey = Nothing
         Me.VideoEdit1.CustomRedist_Auto = True
         Me.VideoEdit1.CustomRedist_DisableDialog = False
-        Me.VideoEdit1.CustomRedist_Enabled = False
         Me.VideoEdit1.CustomRedist_Path = Nothing
         Me.VideoEdit1.Debug_Dir = ""
         Me.VideoEdit1.Debug_DisableMessageDialogs = False

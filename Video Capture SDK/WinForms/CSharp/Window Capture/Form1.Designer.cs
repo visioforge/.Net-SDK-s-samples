@@ -85,7 +85,6 @@ namespace Window_Capture
             this.VideoCapture1.Audio_Channel_Mapper = null;
             this.VideoCapture1.Audio_Decoder = null;
             this.VideoCapture1.Audio_Effects_Enabled = false;
-            this.VideoCapture1.Audio_Effects_UseLegacyEffects = false;
             this.VideoCapture1.Audio_Enhancer_Enabled = false;
             this.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device";
             this.VideoCapture1.Audio_PCM_Converter = null;
@@ -103,7 +102,6 @@ namespace Window_Capture
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
             this.VideoCapture1.CustomRedist_DisableDialog = false;
-            this.VideoCapture1.CustomRedist_Enabled = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
             this.VideoCapture1.Debug_DisableMessageDialogs = false;

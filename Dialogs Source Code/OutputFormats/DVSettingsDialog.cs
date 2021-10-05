@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="DVSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
@@ -6,8 +10,14 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// DV settings dialog.
+    /// </summary>
     public partial class DVSettingsDialog : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DVSettingsDialog"/> class.
+        /// </summary>
         public DVSettingsDialog()
         {
             InitializeComponent();
@@ -21,6 +31,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbDVSampleRate.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="dvOutput">
+        /// Output.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException.
+        /// </exception>
         public void LoadSettings(VFDVOutput dvOutput)
         {
             cbDVChannels.Text = dvOutput.Audio_Channels.ToString();
@@ -41,6 +60,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             rbDVType2.Checked = dvOutput.Type2;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="dvOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFDVOutput dvOutput)
         {
             dvOutput.Audio_Channels = Convert.ToInt32(cbDVChannels.Text);

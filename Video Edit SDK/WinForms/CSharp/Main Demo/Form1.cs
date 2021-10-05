@@ -929,11 +929,11 @@ namespace VideoEdit_CS_Demo
 
                     if (rbEncryptionModeAES128.Checked)
                     {
-                        mp4Output.Encryption_Mode = VFEncryptionMode.v8_AES128;
+                        mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128;
                     }
                     else
                     {
-                        mp4Output.Encryption_Mode = VFEncryptionMode.v9_AES256;
+                        mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256;
                     }
                 }
 

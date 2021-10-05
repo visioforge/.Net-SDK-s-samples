@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="PCMSettingsDialog.cs" company="VisioForge">
+// Copyright (c) VisioForge. All rights reserved.
+// </copyright>
+
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
@@ -7,10 +11,19 @@ using VisioForge.Types.OutputFormat;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
+    /// <summary>
+    /// PCM settings dialog.
+    /// </summary>
     public partial class PCMSettingsDialog : Form
     {
         private readonly string[] _audioCodecs;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PCMSettingsDialog"/> class.
+        /// </summary>
+        /// <param name="audioCodecs">
+        /// Audio codecs.
+        /// </param>
         public PCMSettingsDialog(string[] audioCodecs)
         {
             InitializeComponent();
@@ -40,6 +53,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbAudioCodecs2.Text = @"PCM";
         }
 
+        /// <summary>
+        /// Loads settings.
+        /// </summary>
+        /// <param name="acmOutput">
+        /// Output.
+        /// </param>
         public void LoadSettings(VFACMOutput acmOutput)
         {
             cbChannels2.Text = acmOutput.Channels.ToString();
@@ -49,6 +68,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             acmOutput.Name = cbAudioCodecs2.Text;
         }
 
+        /// <summary>
+        /// Saves settings.
+        /// </summary>
+        /// <param name="acmOutput">
+        /// Output.
+        /// </param>
         public void SaveSettings(ref VFACMOutput acmOutput)
         {
             acmOutput.Channels = Convert.ToInt32(cbChannels2.Text);
