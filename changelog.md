@@ -1,3 +1,6 @@
+14.*
+* Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
+
 14.4
 * Windows 11 support
 * Telemetry update

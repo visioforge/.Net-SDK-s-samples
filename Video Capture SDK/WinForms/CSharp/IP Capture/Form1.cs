@@ -262,6 +262,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoCapture1.Video_Effects_Enabled = true;
             ConfigureVideoEffects();
 
+            VideoCapture1.StatusOverlay = new TextStatusOverlay();
+
             await VideoCapture1.StartAsync();
 
             tcMain.SelectedIndex = 3;

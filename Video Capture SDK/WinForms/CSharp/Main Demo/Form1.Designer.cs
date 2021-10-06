@@ -9651,7 +9651,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbIPURL.Name = "cbIPURL";
             this.cbIPURL.Size = new System.Drawing.Size(373, 21);
             this.cbIPURL.TabIndex = 89;
-            this.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1";
+            this.cbIPURL.Text = "http://192.168.1.64/onvif/device_service";
             // 
             // btListNDISources
             // 
@@ -13250,6 +13250,7 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(467, 321);
             this.VideoCapture1.Start_DelayEnabled = false;
+            this.VideoCapture1.StatusOverlay = null;
             this.VideoCapture1.TabIndex = 77;
             this.VideoCapture1.Tags = null;
             this.VideoCapture1.Timeshift_Settings = null;
@@ -13264,6 +13265,7 @@ namespace VideoCapture_CSharp_Demo
             this.VideoCapture1.TVTuner_Name = "";
             this.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D;
             this.VideoCapture1.Video_CaptureDevice = "";
+            this.VideoCapture1.Video_CaptureDevice_CustomPinName = null;
             this.VideoCapture1.Video_CaptureDevice_Format = "";
             this.VideoCapture1.Video_CaptureDevice_Format_UseBest = true;
             this.VideoCapture1.Video_CaptureDevice_FrameRate = 0D;

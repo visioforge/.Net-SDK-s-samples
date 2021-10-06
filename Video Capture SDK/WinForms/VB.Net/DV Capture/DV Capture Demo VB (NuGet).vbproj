@@ -125,12 +125,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.1" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.2" />
 
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.4.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.4.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.4.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.4.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.4.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.4.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.4.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.4.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

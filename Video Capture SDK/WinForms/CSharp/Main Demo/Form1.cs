@@ -785,6 +785,8 @@ namespace VideoCapture_CSharp_Demo
                 IPCameraSourceSettings settings;
                 SelectIPCameraSource(out settings);
                 VideoCapture1.IP_Camera_Source = settings;
+
+                VideoCapture1.StatusOverlay = new TextStatusOverlay();
             }
             else if ((VideoCapture1.Mode == VFVideoCaptureMode.VideoCapture) || (VideoCapture1.Mode == VFVideoCaptureMode.VideoPreview) ||
                 (VideoCapture1.Mode == VFVideoCaptureMode.AudioCapture) || (VideoCapture1.Mode == VFVideoCaptureMode.AudioPreview))

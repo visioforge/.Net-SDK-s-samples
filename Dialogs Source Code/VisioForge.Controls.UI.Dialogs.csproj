@@ -7,9 +7,9 @@
     <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
     <Product>VisioForge.Controls.UI.Dialogs</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.4.1.0</AssemblyVersion>
-    <FileVersion>14.4.1.0</FileVersion>
-    <Version>14.4.1.0</Version>
+    <AssemblyVersion>14.4.2.0</AssemblyVersion>
+    <FileVersion>14.4.2.0</FileVersion>
+    <Version>14.4.2.0</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -44,7 +44,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>VisioForge.Controls.UI.Dialogs.key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>VisioForge.Controls.UI.Dialogs.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -272,7 +272,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Settings.StyleCop" />
-    <None Include="VisioForge.Controls.UI.Dialogs.key.snk" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

@@ -386,6 +386,8 @@ namespace IP_Capture
             lbLogos.Items.Clear();
             ConfigureVideoEffects();
 
+            VideoCapture1.StatusOverlay = new TextStatusOverlay();
+
             await VideoCapture1.StartAsync();
 
             tcMain.SelectedIndex = 3;

@@ -260,6 +260,8 @@ Public Class Form1
         lbLogos.Items.Clear()
         ConfigureVideoEffects()
 
+        VideoCapture1.StatusOverlay = New TextStatusOverlay()
+
         Await VideoCapture1.StartAsync()
 
         tcMain.SelectedIndex = 3

@@ -1314,6 +1314,8 @@ namespace Main_Demo
                 IPCameraSourceSettings settings;
                 SelectIPCameraSource(out settings);
                 VideoCapture1.IP_Camera_Source = settings;
+
+                VideoCapture1.StatusOverlay = new TextStatusOverlay();
             }
             else if (VideoCapture1.Mode == VFVideoCaptureMode.BDAPreview
                      || VideoCapture1.Mode == VFVideoCaptureMode.BDACapture)
@@ -2373,7 +2375,7 @@ namespace Main_Demo
             cbPIPDevices.Items.Clear();
 
             lbFilters.Items.Clear();
-            
+
             tmRecording.Stop();
         }
 

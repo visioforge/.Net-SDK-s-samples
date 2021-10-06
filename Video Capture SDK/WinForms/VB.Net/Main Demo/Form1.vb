@@ -693,6 +693,8 @@ Public Class Form1
             Dim settings As IPCameraSourceSettings = SelectIPCameraSource()
             VideoCapture1.IP_Camera_Source = settings
 
+            VideoCapture1.StatusOverlay = New TextStatusOverlay()
+
         ElseIf ((VideoCapture1.Mode = VFVideoCaptureMode.BDACapture) Or (VideoCapture1.Mode = VFVideoCaptureMode.BDAPreview)) Then
 
             SelectBDASource()
