@@ -1898,21 +1898,19 @@ Public Class Form1
             Case 3
                 settings.Type = VFIPSource.Auto_LAV
             Case 4
-                settings.Type = VFIPSource.RTSP_Live555
-            Case 5
                 settings.Type = VFIPSource.MMS_WMV
-            Case 6
+            Case 5
                 settings.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
-            Case 7
+            Case 6
                 settings.Type = VFIPSource.RTSP_LowLatency
                 settings.RTSP_LowLatency_UseUDP = False
-            Case 8
+            Case 7
                 settings.Type = VFIPSource.RTSP_LowLatency
                 settings.RTSP_LowLatency_UseUDP = True
-            Case 9
+            Case 8
                 settings.Type = VFIPSource.NDI
-            Case 10
+            Case 9
                 settings.Type = VFIPSource.NDI_Legacy
         End Select
 

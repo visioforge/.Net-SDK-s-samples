@@ -383,7 +383,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
             "Auto (GPU decoding, LAV)",
-            "RTSP (Live555 engine)",
             "MMS - WMV",
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",
@@ -1175,6 +1174,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(429, 354);
             this.VideoCapture1.Start_DelayEnabled = false;
+            this.VideoCapture1.StatusOverlay = null;
             this.VideoCapture1.TabIndex = 93;
             this.VideoCapture1.Tags = null;
             this.VideoCapture1.Timeshift_Settings = null;
@@ -1189,6 +1189,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.VideoCapture1.TVTuner_Name = "";
             this.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D;
             this.VideoCapture1.Video_CaptureDevice = "";
+            this.VideoCapture1.Video_CaptureDevice_CustomPinName = null;
             this.VideoCapture1.Video_CaptureDevice_Format = "";
             this.VideoCapture1.Video_CaptureDevice_Format_UseBest = true;
             this.VideoCapture1.Video_CaptureDevice_FrameRate = 0D;

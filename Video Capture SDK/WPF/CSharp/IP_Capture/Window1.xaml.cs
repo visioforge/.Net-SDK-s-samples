@@ -253,29 +253,26 @@ namespace IP_Capture
                     lavGPU = true;
                     break;
                 case 4:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
-                    break;
-                case 5:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
                     break;
-                case 6:
+                case 5:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     cbIPAudioCapture.IsChecked = false;
                     VideoCapture1.Audio_RecordAudio = false;
                     VideoCapture1.Audio_PlayAudio = false;
                     break;
-                case 7:
+                case 6:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 8:
+                case 7:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 9:
+                case 8:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
                     break;
-                case 10:
+                case 9:
                     VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
                     break;
             }

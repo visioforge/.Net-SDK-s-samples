@@ -1,28 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Multiple_IP_Cameras_Demo_WPF
 {
-    using System.IO;
-
     using VisioForge.Controls.UI.WPF;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
     using VisioForge.Types.Sources;
-
-    using Path = System.Windows.Shapes.Path;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -59,19 +44,16 @@ namespace Multiple_IP_Cameras_Demo_WPF
                     videoCapture.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2Native;
                     break;
                 case 4:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
-                    break;
-                case 5:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
                     break;
-                case 6:
+                case 5:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     break;
-                case 7:
+                case 6:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 8:
+                case 7:
                     videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;
@@ -88,7 +70,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
             {
                 videoCapture.Mode = VFVideoCaptureMode.IPCapture;
 
-                videoCapture.Output_Filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $@"VisioForge\output_{DateTime.Now:yy-MM-dd hh_mm_ss}_{index}.mp4"); 
+                videoCapture.Output_Filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $@"VisioForge\output_{DateTime.Now:yy-MM-dd hh_mm_ss}_{index}.mp4");
                 videoCapture.Output_Format = mp4Output;
             }
 

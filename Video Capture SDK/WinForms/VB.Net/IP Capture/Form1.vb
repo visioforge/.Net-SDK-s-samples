@@ -170,23 +170,21 @@ Public Class Form1
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
                 lavGPU = True
             Case 4
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555
-            Case 5
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
-            Case 6
+            Case 5
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
                 VideoCapture1.Audio_RecordAudio = False
                 VideoCapture1.Audio_PlayAudio = False
-            Case 7
+            Case 6
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = False
-            Case 8
+            Case 7
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = True
-            Case 9
+            Case 8
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI
-            Case 10
+            Case 9
                 VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy
         End Select
 

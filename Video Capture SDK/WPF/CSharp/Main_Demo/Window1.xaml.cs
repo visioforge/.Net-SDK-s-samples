@@ -736,27 +736,24 @@ namespace Main_Demo
                     lavGPU = true;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.RTSP_Live555;
-                    break;
-                case 5:
                     settings.Type = VFIPSource.MMS_WMV;
                     break;
-                case 6:
+                case 5:
                     settings.Type = VFIPSource.HTTP_MJPEG_LowLatency;
                     cbIPAudioCapture.IsChecked = false;
                     break;
-                case 7:
+                case 6:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = false;
                     break;
-                case 8:
+                case 7:
                     settings.Type = VFIPSource.RTSP_LowLatency;
                     settings.RTSP_LowLatency_UseUDP = true;
                     break;
-                case 9:
+                case 8:
                     settings.Type = VFIPSource.NDI;
                     break;
-                case 10:
+                case 9:
                     settings.Type = VFIPSource.NDI_Legacy;
                     break;
             }

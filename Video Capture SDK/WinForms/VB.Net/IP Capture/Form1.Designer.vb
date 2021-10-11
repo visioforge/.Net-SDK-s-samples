@@ -359,8 +359,8 @@ Partial Class Form1
         'cbIPCameraType
         '
         Me.cbIPCameraType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbIPCameraType.FormattingEnabled = true
-        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "Auto (GPU decoding, LAV)", "RTSP (Live555 engine)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
+        Me.cbIPCameraType.FormattingEnabled = True
+        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "Auto (GPU decoding, LAV)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
         Me.cbIPCameraType.Location = New System.Drawing.Point(56, 45)
         Me.cbIPCameraType.Name = "cbIPCameraType"
         Me.cbIPCameraType.Size = New System.Drawing.Size(227, 21)
@@ -375,7 +375,7 @@ Partial Class Form1
         '
         'label167
         '
-        Me.label167.AutoSize = true
+        Me.label167.AutoSize = True
         Me.label167.Location = New System.Drawing.Point(164, 76)
         Me.label167.Name = "label167"
         Me.label167.Size = New System.Drawing.Size(53, 13)
@@ -391,7 +391,7 @@ Partial Class Form1
         '
         'label166
         '
-        Me.label166.AutoSize = true
+        Me.label166.AutoSize = True
         Me.label166.Location = New System.Drawing.Point(10, 76)
         Me.label166.Name = "label166"
         Me.label166.Size = New System.Drawing.Size(33, 13)
@@ -400,19 +400,19 @@ Partial Class Form1
         '
         'cbIPAudioCapture
         '
-        Me.cbIPAudioCapture.AutoSize = true
-        Me.cbIPAudioCapture.Checked = true
+        Me.cbIPAudioCapture.AutoSize = True
+        Me.cbIPAudioCapture.Checked = True
         Me.cbIPAudioCapture.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbIPAudioCapture.Location = New System.Drawing.Point(167, 162)
         Me.cbIPAudioCapture.Name = "cbIPAudioCapture"
         Me.cbIPAudioCapture.Size = New System.Drawing.Size(92, 17)
         Me.cbIPAudioCapture.TabIndex = 62
         Me.cbIPAudioCapture.Text = "Capture audio"
-        Me.cbIPAudioCapture.UseVisualStyleBackColor = true
+        Me.cbIPAudioCapture.UseVisualStyleBackColor = True
         '
         'label168
         '
-        Me.label168.AutoSize = true
+        Me.label168.AutoSize = True
         Me.label168.Location = New System.Drawing.Point(10, 49)
         Me.label168.Name = "label168"
         Me.label168.Size = New System.Drawing.Size(40, 13)
@@ -430,17 +430,17 @@ Partial Class Form1
         Me.tabPage146.Size = New System.Drawing.Size(439, 285)
         Me.tabPage146.TabIndex = 2
         Me.tabPage146.Text = "VLC"
-        Me.tabPage146.UseVisualStyleBackColor = true
+        Me.tabPage146.UseVisualStyleBackColor = True
         '
         'cbVLCZeroClockJitter
         '
-        Me.cbVLCZeroClockJitter.AutoSize = true
+        Me.cbVLCZeroClockJitter.AutoSize = True
         Me.cbVLCZeroClockJitter.Location = New System.Drawing.Point(173, 16)
         Me.cbVLCZeroClockJitter.Name = "cbVLCZeroClockJitter"
         Me.cbVLCZeroClockJitter.Size = New System.Drawing.Size(120, 17)
         Me.cbVLCZeroClockJitter.TabIndex = 78
         Me.cbVLCZeroClockJitter.Text = "VLC zero clock jitter"
-        Me.cbVLCZeroClockJitter.UseVisualStyleBackColor = true
+        Me.cbVLCZeroClockJitter.UseVisualStyleBackColor = True
         '
         'edVLCCacheSize
         '
@@ -452,7 +452,7 @@ Partial Class Form1
         '
         'label312
         '
-        Me.label312.AutoSize = true
+        Me.label312.AutoSize = True
         Me.label312.Location = New System.Drawing.Point(17, 17)
         Me.label312.Name = "label312"
         Me.label312.Size = New System.Drawing.Size(103, 13)
@@ -479,7 +479,7 @@ Partial Class Form1
         Me.tabPage145.Size = New System.Drawing.Size(439, 285)
         Me.tabPage145.TabIndex = 1
         Me.tabPage145.Text = "ONVIF"
-        Me.tabPage145.UseVisualStyleBackColor = true
+        Me.tabPage145.UseVisualStyleBackColor = True
         '
         'edONVIFPassword
         '
@@ -490,7 +490,7 @@ Partial Class Form1
         '
         'Label379
         '
-        Me.Label379.AutoSize = true
+        Me.Label379.AutoSize = True
         Me.Label379.Location = New System.Drawing.Point(183, 50)
         Me.Label379.Name = "Label379"
         Me.Label379.Size = New System.Drawing.Size(53, 13)
@@ -506,7 +506,7 @@ Partial Class Form1
         '
         'Label380
         '
-        Me.Label380.AutoSize = true
+        Me.Label380.AutoSize = True
         Me.Label380.Location = New System.Drawing.Point(12, 50)
         Me.Label380.Name = "Label380"
         Me.Label380.Size = New System.Drawing.Size(33, 13)
@@ -523,7 +523,7 @@ Partial Class Form1
         '
         'lbONVIFCameraInfo
         '
-        Me.lbONVIFCameraInfo.AutoSize = true
+        Me.lbONVIFCameraInfo.AutoSize = True
         Me.lbONVIFCameraInfo.Location = New System.Drawing.Point(11, 74)
         Me.lbONVIFCameraInfo.Name = "lbONVIFCameraInfo"
         Me.lbONVIFCameraInfo.Size = New System.Drawing.Size(69, 13)
@@ -534,13 +534,13 @@ Partial Class Form1
         '
         Me.edONVIFLiveVideoURL.Location = New System.Drawing.Point(75, 145)
         Me.edONVIFLiveVideoURL.Name = "edONVIFLiveVideoURL"
-        Me.edONVIFLiveVideoURL.ReadOnly = true
+        Me.edONVIFLiveVideoURL.ReadOnly = True
         Me.edONVIFLiveVideoURL.Size = New System.Drawing.Size(346, 20)
         Me.edONVIFLiveVideoURL.TabIndex = 28
         '
         'label513
         '
-        Me.label513.AutoSize = true
+        Me.label513.AutoSize = True
         Me.label513.Location = New System.Drawing.Point(11, 148)
         Me.label513.Name = "label513"
         Me.label513.Size = New System.Drawing.Size(59, 13)
@@ -560,7 +560,7 @@ Partial Class Form1
         Me.groupBox42.Name = "groupBox42"
         Me.groupBox42.Size = New System.Drawing.Size(271, 104)
         Me.groupBox42.TabIndex = 26
-        Me.groupBox42.TabStop = false
+        Me.groupBox42.TabStop = False
         Me.groupBox42.Text = "PTZ"
         '
         'btONVIFPTZSetDefault
@@ -570,7 +570,7 @@ Partial Class Form1
         Me.btONVIFPTZSetDefault.Size = New System.Drawing.Size(116, 23)
         Me.btONVIFPTZSetDefault.TabIndex = 6
         Me.btONVIFPTZSetDefault.Text = "Set default position"
-        Me.btONVIFPTZSetDefault.UseVisualStyleBackColor = true
+        Me.btONVIFPTZSetDefault.UseVisualStyleBackColor = True
         '
         'btONVIFRight
         '
@@ -579,7 +579,7 @@ Partial Class Form1
         Me.btONVIFRight.Size = New System.Drawing.Size(21, 48)
         Me.btONVIFRight.TabIndex = 5
         Me.btONVIFRight.Text = "R"
-        Me.btONVIFRight.UseVisualStyleBackColor = true
+        Me.btONVIFRight.UseVisualStyleBackColor = True
         '
         'btONVIFLeft
         '
@@ -588,7 +588,7 @@ Partial Class Form1
         Me.btONVIFLeft.Size = New System.Drawing.Size(21, 48)
         Me.btONVIFLeft.TabIndex = 4
         Me.btONVIFLeft.Text = "L"
-        Me.btONVIFLeft.UseVisualStyleBackColor = true
+        Me.btONVIFLeft.UseVisualStyleBackColor = True
         '
         'btONVIFZoomOut
         '
@@ -597,7 +597,7 @@ Partial Class Form1
         Me.btONVIFZoomOut.Size = New System.Drawing.Size(23, 23)
         Me.btONVIFZoomOut.TabIndex = 3
         Me.btONVIFZoomOut.Text = "-"
-        Me.btONVIFZoomOut.UseVisualStyleBackColor = true
+        Me.btONVIFZoomOut.UseVisualStyleBackColor = True
         '
         'btONVIFZoomIn
         '
@@ -606,7 +606,7 @@ Partial Class Form1
         Me.btONVIFZoomIn.Size = New System.Drawing.Size(22, 23)
         Me.btONVIFZoomIn.TabIndex = 2
         Me.btONVIFZoomIn.Text = "+"
-        Me.btONVIFZoomIn.UseVisualStyleBackColor = true
+        Me.btONVIFZoomIn.UseVisualStyleBackColor = True
         '
         'btONVIFDown
         '
@@ -615,7 +615,7 @@ Partial Class Form1
         Me.btONVIFDown.Size = New System.Drawing.Size(51, 23)
         Me.btONVIFDown.TabIndex = 1
         Me.btONVIFDown.Text = "Down"
-        Me.btONVIFDown.UseVisualStyleBackColor = true
+        Me.btONVIFDown.UseVisualStyleBackColor = True
         '
         'btONVIFUp
         '
@@ -624,12 +624,12 @@ Partial Class Form1
         Me.btONVIFUp.Size = New System.Drawing.Size(51, 23)
         Me.btONVIFUp.TabIndex = 0
         Me.btONVIFUp.Text = "Up"
-        Me.btONVIFUp.UseVisualStyleBackColor = true
+        Me.btONVIFUp.UseVisualStyleBackColor = True
         '
         'cbONVIFProfile
         '
         Me.cbONVIFProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbONVIFProfile.FormattingEnabled = true
+        Me.cbONVIFProfile.FormattingEnabled = True
         Me.cbONVIFProfile.Location = New System.Drawing.Point(75, 119)
         Me.cbONVIFProfile.Name = "cbONVIFProfile"
         Me.cbONVIFProfile.Size = New System.Drawing.Size(346, 21)
@@ -637,7 +637,7 @@ Partial Class Form1
         '
         'label510
         '
-        Me.label510.AutoSize = true
+        Me.label510.AutoSize = True
         Me.label510.Location = New System.Drawing.Point(12, 122)
         Me.label510.Name = "label510"
         Me.label510.Size = New System.Drawing.Size(36, 13)
@@ -651,7 +651,7 @@ Partial Class Form1
         Me.btONVIFConnect.Size = New System.Drawing.Size(75, 23)
         Me.btONVIFConnect.TabIndex = 0
         Me.btONVIFConnect.Text = "Connect"
-        Me.btONVIFConnect.UseVisualStyleBackColor = true
+        Me.btONVIFConnect.UseVisualStyleBackColor = True
         '
         'tabPage2
         '
@@ -668,7 +668,7 @@ Partial Class Form1
         Me.tabPage2.Size = New System.Drawing.Size(464, 339)
         Me.tabPage2.TabIndex = 1
         Me.tabPage2.Text = "Output"
-        Me.tabPage2.UseVisualStyleBackColor = true
+        Me.tabPage2.UseVisualStyleBackColor = True
         '
         'btSelectOutput
         '
@@ -677,7 +677,7 @@ Partial Class Form1
         Me.btSelectOutput.Size = New System.Drawing.Size(24, 23)
         Me.btSelectOutput.TabIndex = 127
         Me.btSelectOutput.Text = "..."
-        Me.btSelectOutput.UseVisualStyleBackColor = true
+        Me.btSelectOutput.UseVisualStyleBackColor = True
         '
         'edOutput
         '
@@ -689,7 +689,7 @@ Partial Class Form1
         '
         'lbInfo
         '
-        Me.lbInfo.AutoSize = true
+        Me.lbInfo.AutoSize = True
         Me.lbInfo.Location = New System.Drawing.Point(9, 58)
         Me.lbInfo.Name = "lbInfo"
         Me.lbInfo.Size = New System.Drawing.Size(267, 13)
@@ -703,7 +703,7 @@ Partial Class Form1
         Me.btOutputConfigure.Size = New System.Drawing.Size(75, 23)
         Me.btOutputConfigure.TabIndex = 124
         Me.btOutputConfigure.Text = "Configure"
-        Me.btOutputConfigure.UseVisualStyleBackColor = true
+        Me.btOutputConfigure.UseVisualStyleBackColor = True
         '
         'cbOutputFormat
         '
@@ -1077,13 +1077,13 @@ Partial Class Form1
         Me.VideoCapture1.CustomRedist_DisableDialog = False
         Me.VideoCapture1.CustomRedist_Path = Nothing
         Me.VideoCapture1.Debug_Dir = ""
-        Me.VideoCapture1.Debug_DisableMessageDialogs = false
-        Me.VideoCapture1.Debug_Mode = false
-        Me.VideoCapture1.Debug_Telemetry = false
+        Me.VideoCapture1.Debug_DisableMessageDialogs = False
+        Me.VideoCapture1.Debug_Mode = False
+        Me.VideoCapture1.Debug_Telemetry = False
         Me.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.[Auto]
         Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.[Auto]
-        Me.VideoCapture1.Decklink_Input_IREUSA = false
-        Me.VideoCapture1.Decklink_Input_SMPTE = false
+        Me.VideoCapture1.Decklink_Input_IREUSA = False
+        Me.VideoCapture1.Decklink_Input_SMPTE = False
         Me.VideoCapture1.Decklink_Output = Nothing
         Me.VideoCapture1.Decklink_Source = Nothing
         Me.VideoCapture1.DirectCapture_Muxer = Nothing
@@ -1097,33 +1097,34 @@ Partial Class Form1
         Me.VideoCapture1.MPEG_Audio_Decoder = ""
         Me.VideoCapture1.MPEG_Demuxer = Nothing
         Me.VideoCapture1.MPEG_Video_Decoder = ""
-        Me.VideoCapture1.MultiScreen_Enabled = false
+        Me.VideoCapture1.MultiScreen_Enabled = False
         Me.VideoCapture1.Name = "VideoCapture1"
-        Me.VideoCapture1.Network_Streaming_Audio_Enabled = false
-        Me.VideoCapture1.Network_Streaming_Enabled = false
+        Me.VideoCapture1.Network_Streaming_Audio_Enabled = False
+        Me.VideoCapture1.Network_Streaming_Enabled = False
         Me.VideoCapture1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV
         Me.VideoCapture1.Network_Streaming_Network_Port = 100
         Me.VideoCapture1.Network_Streaming_Output = Nothing
         Me.VideoCapture1.Network_Streaming_URL = ""
         Me.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10
-        Me.VideoCapture1.OSD_Enabled = false
+        Me.VideoCapture1.OSD_Enabled = False
         Me.VideoCapture1.Output_Filename = ""
         Me.VideoCapture1.Output_Format = Nothing
-        Me.VideoCapture1.PIP_AddSampleGrabbers = false
+        Me.VideoCapture1.PIP_AddSampleGrabbers = False
         Me.VideoCapture1.PIP_ChromaKeySettings = Nothing
         Me.VideoCapture1.PIP_Mode = VisioForge.Types.VFPIPMode.Custom
         Me.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.VFPIPResizeQuality.RQ_NN
         Me.VideoCapture1.Push_Source = Nothing
         Me.VideoCapture1.Screen_Capture_Source = Nothing
-        Me.VideoCapture1.SeparateCapture_AutostartCapture = false
-        Me.VideoCapture1.SeparateCapture_Enabled = false
+        Me.VideoCapture1.SeparateCapture_AutostartCapture = False
+        Me.VideoCapture1.SeparateCapture_Enabled = False
         Me.VideoCapture1.SeparateCapture_Filename_Mask = "output %yyyy-%MM-%dd %hh-%mm-%ss.%ext"
-        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0,Long)
-        Me.VideoCapture1.SeparateCapture_GMFMode = true
+        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0, Long)
+        Me.VideoCapture1.SeparateCapture_GMFMode = True
         Me.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal
         Me.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00")
         Me.VideoCapture1.Size = New System.Drawing.Size(427, 343)
-        Me.VideoCapture1.Start_DelayEnabled = false
+        Me.VideoCapture1.Start_DelayEnabled = False
+        Me.VideoCapture1.StatusOverlay = Nothing
         Me.VideoCapture1.TabIndex = 93
         Me.VideoCapture1.Tags = Nothing
         Me.VideoCapture1.Timeshift_Settings = Nothing
@@ -1138,6 +1139,7 @@ Partial Class Form1
         Me.VideoCapture1.TVTuner_Name = ""
         Me.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D
         Me.VideoCapture1.Video_CaptureDevice = ""
+        Me.VideoCapture1.Video_CaptureDevice_CustomPinName = Nothing
         Me.VideoCapture1.Video_CaptureDevice_Format = ""
         Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = true
         Me.VideoCapture1.Video_CaptureDevice_FrameRate = 0R

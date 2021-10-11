@@ -232,12 +232,9 @@ namespace VC_Timeshift_Demo
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
                         break;
                     case 3:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_Live555;
-                        break;
-                    case 4:
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
                         break;
-                    case 5:
+                    case 4:
                         {
                             // audio not supported
                             VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
@@ -246,18 +243,18 @@ namespace VC_Timeshift_Demo
                             cbIPAudioCapture.Checked = false;
                         }
                         break;
-                    case 6:
+                    case 5:
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                         VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                         break;
-                    case 7:
+                    case 6:
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
                         VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                         break;
-                    case 8:
+                    case 7:
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
                         break;
-                    case 9:
+                    case 8:
                         VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
                         break;
                 }

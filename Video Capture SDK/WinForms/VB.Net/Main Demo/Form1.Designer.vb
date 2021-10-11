@@ -3851,7 +3851,7 @@ Partial Class Form1
         '
         Me.cbIPCameraType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIPCameraType.FormattingEnabled = True
-        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "Auto (GPU decoding, LAV)", "RTSP (Live555 engine)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
+        Me.cbIPCameraType.Items.AddRange(New Object() {"Auto (VLC engine)", "Auto (FFMPEG engine)", "Auto (LAV engine)", "Auto (GPU decoding, LAV)", "MMS - WMV", "HTTP MJPEG Low Latency", "RTSP Low Latency TCP", "RTSP Low Latency UDP", "NDI", "NDI (Legacy)"})
         Me.cbIPCameraType.Location = New System.Drawing.Point(58, 40)
         Me.cbIPCameraType.Name = "cbIPCameraType"
         Me.cbIPCameraType.Size = New System.Drawing.Size(227, 21)
@@ -12733,6 +12733,7 @@ Partial Class Form1
         Me.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00")
         Me.VideoCapture1.Size = New System.Drawing.Size(465, 323)
         Me.VideoCapture1.Start_DelayEnabled = False
+        Me.VideoCapture1.StatusOverlay = Nothing
         Me.VideoCapture1.TabIndex = 94
         Me.VideoCapture1.Tags = Nothing
         Me.VideoCapture1.Timeshift_Settings = Nothing
@@ -12747,6 +12748,7 @@ Partial Class Form1
         Me.VideoCapture1.TVTuner_Name = ""
         Me.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D
         Me.VideoCapture1.Video_CaptureDevice = ""
+        Me.VideoCapture1.Video_CaptureDevice_CustomPinName = Nothing
         Me.VideoCapture1.Video_CaptureDevice_Format = ""
         Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = True
         Me.VideoCapture1.Video_CaptureDevice_FrameRate = 0R

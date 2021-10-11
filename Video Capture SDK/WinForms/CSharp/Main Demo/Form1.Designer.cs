@@ -9800,7 +9800,6 @@ namespace VideoCapture_CSharp_Demo
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
             "Auto (GPU decoding, LAV)",
-            "RTSP (Live555 engine)",
             "MMS - WMV",
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",

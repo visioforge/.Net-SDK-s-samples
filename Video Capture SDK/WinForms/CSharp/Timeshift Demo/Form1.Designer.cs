@@ -30,23 +30,12 @@ namespace VC_Timeshift_Demo
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.rbIPCamera = new System.Windows.Forms.RadioButton();
             this.rbVideoCaptureDevice = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbOutputFormat = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btSelectOutput = new System.Windows.Forms.Button();
-            this.edOutput = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cbDebugMode = new System.Windows.Forms.CheckBox();
-            this.mmLog = new System.Windows.Forms.TextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.cbUseBestAudioInputFormat = new System.Windows.Forms.CheckBox();
             this.cbUseAudioInputFromVideoCaptureDevice = new System.Windows.Forms.CheckBox();
@@ -74,6 +63,16 @@ namespace VC_Timeshift_Demo
             this.label167 = new System.Windows.Forms.Label();
             this.edIPLogin = new System.Windows.Forms.TextBox();
             this.label166 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbOutputFormat = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btSelectOutput = new System.Windows.Forms.Button();
+            this.edOutput = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbDebugMode = new System.Windows.Forms.CheckBox();
+            this.mmLog = new System.Windows.Forms.TextBox();
             this.VideoCapture1 = new VisioForge.Controls.UI.WinForms.VideoCapture();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MediaPlayer1 = new VisioForge.Controls.UI.WinForms.MediaPlayer();
@@ -87,13 +86,13 @@ namespace VC_Timeshift_Demo
             this.btStop = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
             this.SuspendLayout();
@@ -155,111 +154,6 @@ namespace VC_Timeshift_Demo
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(443, 257);
             this.tabControl1.TabIndex = 2;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.cbOutputFormat);
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Controls.Add(this.btSelectOutput);
-            this.tabPage4.Controls.Add(this.edOutput);
-            this.tabPage4.Controls.Add(this.label9);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(435, 231);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Output";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(226, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 13);
-            this.label3.TabIndex = 51;
-            this.label3.Text = "Default format settings used";
-            // 
-            // cbOutputFormat
-            // 
-            this.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOutputFormat.FormattingEnabled = true;
-            this.cbOutputFormat.Items.AddRange(new object[] {
-            "Do not record",
-            "AVI",
-            "MP4",
-            "WebM"});
-            this.cbOutputFormat.Location = new System.Drawing.Point(18, 28);
-            this.cbOutputFormat.Name = "cbOutputFormat";
-            this.cbOutputFormat.Size = new System.Drawing.Size(202, 21);
-            this.cbOutputFormat.TabIndex = 50;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 49;
-            this.label2.Text = "Output format";
-            // 
-            // btSelectOutput
-            // 
-            this.btSelectOutput.Location = new System.Drawing.Point(405, 75);
-            this.btSelectOutput.Name = "btSelectOutput";
-            this.btSelectOutput.Size = new System.Drawing.Size(24, 23);
-            this.btSelectOutput.TabIndex = 48;
-            this.btSelectOutput.Text = "...";
-            this.btSelectOutput.UseVisualStyleBackColor = true;
-            this.btSelectOutput.Click += new System.EventHandler(this.btSelectOutput_Click);
-            // 
-            // edOutput
-            // 
-            this.edOutput.Location = new System.Drawing.Point(18, 77);
-            this.edOutput.Name = "edOutput";
-            this.edOutput.Size = new System.Drawing.Size(381, 20);
-            this.edOutput.TabIndex = 47;
-            this.edOutput.Text = "c:\\capture.avi";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 61);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 13);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "File name";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.cbDebugMode);
-            this.tabPage3.Controls.Add(this.mmLog);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(435, 231);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Debug";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // cbDebugMode
-            // 
-            this.cbDebugMode.AutoSize = true;
-            this.cbDebugMode.Location = new System.Drawing.Point(6, 6);
-            this.cbDebugMode.Name = "cbDebugMode";
-            this.cbDebugMode.Size = new System.Drawing.Size(87, 17);
-            this.cbDebugMode.TabIndex = 74;
-            this.cbDebugMode.Text = "Debug mode";
-            this.cbDebugMode.UseVisualStyleBackColor = true;
-            // 
-            // mmLog
-            // 
-            this.mmLog.Location = new System.Drawing.Point(6, 24);
-            this.mmLog.Multiline = true;
-            this.mmLog.Name = "mmLog";
-            this.mmLog.Size = new System.Drawing.Size(423, 201);
-            this.mmLog.TabIndex = 73;
             // 
             // tabPage5
             // 
@@ -461,7 +355,6 @@ namespace VC_Timeshift_Demo
             "Auto (VLC engine)",
             "Auto (FFMPEG engine)",
             "Auto (LAV engine)",
-            "RTSP (Live555 engine)",
             "MMS - WMV",
             "HTTP MJPEG Low Latency",
             "RTSP Low Latency TCP",
@@ -542,6 +435,111 @@ namespace VC_Timeshift_Demo
             this.label166.TabIndex = 87;
             this.label166.Text = "Login";
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.label3);
+            this.tabPage4.Controls.Add(this.cbOutputFormat);
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.btSelectOutput);
+            this.tabPage4.Controls.Add(this.edOutput);
+            this.tabPage4.Controls.Add(this.label9);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(435, 231);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Output";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(226, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 13);
+            this.label3.TabIndex = 51;
+            this.label3.Text = "Default format settings used";
+            // 
+            // cbOutputFormat
+            // 
+            this.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOutputFormat.FormattingEnabled = true;
+            this.cbOutputFormat.Items.AddRange(new object[] {
+            "Do not record",
+            "AVI",
+            "MP4",
+            "WebM"});
+            this.cbOutputFormat.Location = new System.Drawing.Point(18, 28);
+            this.cbOutputFormat.Name = "cbOutputFormat";
+            this.cbOutputFormat.Size = new System.Drawing.Size(202, 21);
+            this.cbOutputFormat.TabIndex = 50;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "Output format";
+            // 
+            // btSelectOutput
+            // 
+            this.btSelectOutput.Location = new System.Drawing.Point(405, 75);
+            this.btSelectOutput.Name = "btSelectOutput";
+            this.btSelectOutput.Size = new System.Drawing.Size(24, 23);
+            this.btSelectOutput.TabIndex = 48;
+            this.btSelectOutput.Text = "...";
+            this.btSelectOutput.UseVisualStyleBackColor = true;
+            this.btSelectOutput.Click += new System.EventHandler(this.btSelectOutput_Click);
+            // 
+            // edOutput
+            // 
+            this.edOutput.Location = new System.Drawing.Point(18, 77);
+            this.edOutput.Name = "edOutput";
+            this.edOutput.Size = new System.Drawing.Size(381, 20);
+            this.edOutput.TabIndex = 47;
+            this.edOutput.Text = "c:\\capture.avi";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 61);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.TabIndex = 46;
+            this.label9.Text = "File name";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.cbDebugMode);
+            this.tabPage3.Controls.Add(this.mmLog);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(435, 231);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Debug";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbDebugMode
+            // 
+            this.cbDebugMode.AutoSize = true;
+            this.cbDebugMode.Location = new System.Drawing.Point(6, 6);
+            this.cbDebugMode.Name = "cbDebugMode";
+            this.cbDebugMode.Size = new System.Drawing.Size(87, 17);
+            this.cbDebugMode.TabIndex = 74;
+            this.cbDebugMode.Text = "Debug mode";
+            this.cbDebugMode.UseVisualStyleBackColor = true;
+            // 
+            // mmLog
+            // 
+            this.mmLog.Location = new System.Drawing.Point(6, 24);
+            this.mmLog.Multiline = true;
+            this.mmLog.Name = "mmLog";
+            this.mmLog.Size = new System.Drawing.Size(423, 201);
+            this.mmLog.TabIndex = 73;
+            // 
             // VideoCapture1
             // 
             this.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = false;
@@ -573,6 +571,7 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
             this.VideoCapture1.CustomRedist_Auto = true;
+            this.VideoCapture1.CustomRedist_DisableDialog = false;
             this.VideoCapture1.CustomRedist_Path = null;
             this.VideoCapture1.Debug_Dir = "";
             this.VideoCapture1.Debug_DisableMessageDialogs = false;
@@ -622,6 +621,7 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(439, 298);
             this.VideoCapture1.Start_DelayEnabled = false;
+            this.VideoCapture1.StatusOverlay = null;
             this.VideoCapture1.TabIndex = 1;
             this.VideoCapture1.Tags = null;
             this.VideoCapture1.Timeshift_Settings = null;
@@ -636,6 +636,7 @@ namespace VC_Timeshift_Demo
             this.VideoCapture1.TVTuner_Name = "";
             this.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D;
             this.VideoCapture1.Video_CaptureDevice = "";
+            this.VideoCapture1.Video_CaptureDevice_CustomPinName = null;
             this.VideoCapture1.Video_CaptureDevice_Format = "";
             this.VideoCapture1.Video_CaptureDevice_Format_UseBest = true;
             this.VideoCapture1.Video_CaptureDevice_FrameRate = 25D;
@@ -699,6 +700,7 @@ namespace VC_Timeshift_Demo
             this.MediaPlayer1.Custom_Splitter = null;
             this.MediaPlayer1.Custom_Video_Decoder = null;
             this.MediaPlayer1.CustomRedist_Auto = true;
+            this.MediaPlayer1.CustomRedist_DisableDialog = false;
             this.MediaPlayer1.CustomRedist_Path = null;
             this.MediaPlayer1.Debug_DeepCleanUp = false;
             this.MediaPlayer1.Debug_Dir = null;
@@ -856,14 +858,14 @@ namespace VC_Timeshift_Demo
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).EndInit();
