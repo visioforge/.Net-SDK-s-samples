@@ -3,6 +3,7 @@
 * RTSP Live555 IP camera engine has been removed. Please use RTSP Low Latency or FFMPEG engines.
 * Resolved SDK_Version possible issue.
 * Added Settings_Load API. You can load the settings file saved by Settings_JSON. Be sure that device names are correct.
+* Resolved issue with an exception if separate capture started before Start/StartAsync method call.
 
 14.4
 * Windows 11 support
