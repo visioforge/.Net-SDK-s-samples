@@ -4,6 +4,7 @@
 * Resolved SDK_Version possible issue.
 * Added Settings_Load API. You can load the settings file saved by Settings_JSON. Be sure that device names are correct.
 * Resolved issue with an exception if separate capture started before Start/StartAsync method call.
+* RTP support for VLC source engine
 
 14.4
 * Windows 11 support

@@ -8,8 +8,8 @@
     <AssemblyTitle>Computer Vision Demo</AssemblyTitle>
     <Product>Computer Vision Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.4.6.0</AssemblyVersion>
-    <FileVersion>14.4.6.0</FileVersion>
+    <AssemblyVersion>14.4.7.0</AssemblyVersion>
+    <FileVersion>14.4.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -58,8 +58,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.CV.x64" Version="14.4.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.CV.x64" Version="14.4.7" />
   </ItemGroup>
   <ItemGroup>
     <None Include="haarcascade_eye.xml">
