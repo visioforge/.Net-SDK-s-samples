@@ -15,7 +15,6 @@ namespace Simple_Video_Capture
         object UIElement { get; }
 
         Version SDK_Version { get; }
-        string SDK_State { get; }
         List<VideoCaptureDeviceInfo> Video_CaptureDevicesInfo { get; }
         List<AudioCaptureDeviceInfo> Audio_CaptureDevicesInfo { get; }
         List<string> Audio_OutputDevices { get; }

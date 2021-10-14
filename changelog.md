@@ -4,7 +4,9 @@
 * Resolved SDK_Version possible issue.
 * Added Settings_Load API. You can load the settings file saved by Settings_JSON. Be sure that device names are correct.
 * Resolved issue with an exception if separate capture started before Start/StartAsync method call.
-* RTP support for VLC source engine
+* RTP support for VLC source engine.
+* API breaking change: SDK_State property has been removed. We do not have TRIAL and FULL SDK versions anymore.
+* API breaking change: DirectShow_Filters_Show_Dialog, DirectShow_Filters_Has_Dialog, Audio_Codec_HasDialog, Audio_Codec_ShowDialog, Video_Codec_HasDialog, Video_Codec_ShowDialog, Filter_Supported_LAV, Filter_Exists_MatroskaMuxer, Filter_Exists_OGGMuxer, Filter_Exists_VorbisEncoder, Filter_Supported_EVR, Filter_Supported_VMR9 and Filter_Supported_NVENC has been moved to VisioForge.Tools.FilterHelpers class.
 
 14.4
 * Windows 11 support

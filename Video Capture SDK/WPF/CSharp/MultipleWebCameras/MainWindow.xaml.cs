@@ -25,7 +25,7 @@ namespace MultipleWebCameras
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + videoCapture1.SDK_Version + ", " + videoCapture1.SDK_State + ")";
+            Title += $" (SDK v{videoCapture1.SDK_Version})";
 
             foreach (var device in videoCapture1.Video_CaptureDevicesInfo)
             {

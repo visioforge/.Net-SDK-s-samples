@@ -144,7 +144,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Text += @" (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + "), C#";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
 
             edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -230,7 +230,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             timer1.Tag = 0;
         }

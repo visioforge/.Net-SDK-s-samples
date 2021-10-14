@@ -43,7 +43,7 @@ namespace Push_Source_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {

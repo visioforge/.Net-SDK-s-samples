@@ -139,7 +139,7 @@ namespace VideoCapture_CSharp_Demo
         /// </param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {
@@ -199,12 +199,12 @@ namespace VideoCapture_CSharp_Demo
             pnChromaKeyColor.BackColor = Color.FromArgb(128, 218, 128);
 
             var genres = new List<string>();
-            foreach (var genre in VideoCapture.Tags_GetDefaultVideoGenres())
+            foreach (var genre in VideoCapture1.Tags_GetDefaultVideoGenres())
             {
                 genres.Add(genre);
             }
 
-            foreach (var genre in VideoCapture.Tags_GetDefaultAudioGenres())
+            foreach (var genre in VideoCapture1.Tags_GetDefaultAudioGenres())
             {
                 genres.Add(genre);
             }
@@ -323,8 +323,8 @@ namespace VideoCapture_CSharp_Demo
             cbAudioInputFormat_SelectedIndexChanged(null, null);
             cbVideoInputFormat_SelectedIndexChanged(null, null);
 
-            rbEVR.Enabled = VideoCapture.Filter_Supported_EVR();
-            rbVMR9.Enabled = VideoCapture.Filter_Supported_VMR9();
+            rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR();
+            rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9();
 
             if (!(rbVMR9.Enabled && rbEVR.Enabled))
             {
@@ -383,12 +383,12 @@ namespace VideoCapture_CSharp_Demo
             cbPIPMode.SelectedIndex = 0;
 
             // BDA
-            foreach (string source in VideoCapture.BDA_Sources())
+            foreach (string source in VideoCapture1.BDA_Sources())
             {
                 cbBDASourceDevice.Items.Add(source);
             }
 
-            foreach (string receiver in VideoCapture.BDA_Receivers())
+            foreach (string receiver in VideoCapture1.BDA_Receivers())
             {
                 cbBDAReceiver.Items.Add(receiver);
             }
@@ -3094,8 +3094,8 @@ namespace VideoCapture_CSharp_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                    VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -3112,13 +3112,13 @@ namespace VideoCapture_CSharp_Demo
         {
             string name = cbFilters.Text;
 
-            if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -3127,8 +3127,8 @@ namespace VideoCapture_CSharp_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                                            VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -3138,13 +3138,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = lbFilters.Text;
 
-                if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -3198,8 +3198,8 @@ namespace VideoCapture_CSharp_Demo
             else
             {
                 string name = cbMPEGVideoDecoder.Text;
-                btMPEGVidDecSetting.Enabled = VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                  VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btMPEGVidDecSetting.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                  FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -3212,8 +3212,8 @@ namespace VideoCapture_CSharp_Demo
             else
             {
                 string name = cbMPEGVideoDecoder.Text;
-                btMPEGAudDecSettings.Enabled = VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                  VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btMPEGAudDecSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                  FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -3223,13 +3223,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGVideoDecoder.Text;
 
-                if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -3240,13 +3240,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGAudioDecoder.Text;
 
-                if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (VideoCapture.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }

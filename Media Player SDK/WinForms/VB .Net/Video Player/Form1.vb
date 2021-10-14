@@ -4,6 +4,7 @@ Imports VisioForge.Controls.UI
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
+Imports VisioForge.Tools
 
 Public Class Form1
 
@@ -51,9 +52,9 @@ Public Class Form1
 
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
-        If (MediaPlayer1.Filter_Supported_EVR()) Then
+        If (FilterHelpers.Filter_Supported_EVR()) Then
             MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
-        ElseIf (MediaPlayer1.Filter_Supported_VMR9()) Then
+        ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
             MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
         Else
             MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
@@ -120,7 +121,7 @@ Public Class Form1
             tbTimeline.Value = value
         End If
 
-        lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
+        lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
         timer1.Tag = 0
 
     End Sub
@@ -135,7 +136,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Text += " (SDK v" + MediaPlayer1.SDK_Version.ToString() + ", " + MediaPlayer1.SDK_State + ")"
+        Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         cbSourceMode.SelectedIndex = 0
 

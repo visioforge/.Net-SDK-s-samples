@@ -26,7 +26,7 @@ namespace screen_capture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 

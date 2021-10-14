@@ -7,6 +7,7 @@
 
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Tools;
     using VisioForge.Types;
     using VisioForge.Types.GPUVideoEffects;
 
@@ -52,11 +53,11 @@
             MediaPlayer1.Info_UseLibMediaInfo = true;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            if (MediaPlayer1.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (MediaPlayer1.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }
@@ -122,7 +123,7 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + ")";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
@@ -137,7 +138,7 @@
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             timer1.Tag = 0;
         }

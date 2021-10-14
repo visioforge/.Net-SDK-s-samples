@@ -90,7 +90,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + videoCapture1.SDK_Version + ", " + videoCapture1.SDK_State + ")";
+            Title += $" (SDK v{videoCapture1.SDK_Version})";
         }
 
         private async void btStop1_Click(object sender, RoutedEventArgs e)

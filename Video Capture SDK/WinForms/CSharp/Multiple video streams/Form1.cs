@@ -85,7 +85,7 @@ namespace multiple_video_streams
         private void Form1_Load(object sender, EventArgs e)
         {
             videoCaptureHelper = new VideoCapture();
-            Text += " (SDK v" + videoCaptureHelper.SDK_Version + ", " + videoCaptureHelper.SDK_State + ")";
+            Text += $" (SDK v{videoCaptureHelper.SDK_Version})";
 
             foreach (var device in videoCaptureHelper.Video_CaptureDevicesInfo)
             {

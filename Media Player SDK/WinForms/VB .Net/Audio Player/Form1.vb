@@ -87,7 +87,7 @@ Public Class Form1
 
         MediaPlayer1 = New MediaPlayerCore()
 
-        Text += " (SDK v" + MediaPlayerCore.SDK_Version.ToString() + ", " + MediaPlayerCore.SDK_State + ")"
+        Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
     End Sub
@@ -102,7 +102,7 @@ Public Class Form1
             tbTimeline.Value = value
         End If
 
-        lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
+        lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
 
         timer1.Tag = 0
 

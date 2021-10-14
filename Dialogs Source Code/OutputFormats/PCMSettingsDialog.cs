@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
+using VisioForge.Tools;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
 
@@ -86,21 +87,21 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbAudioCodecs2_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbAudioCodecs2.Text;
-            btAudioSettings2.Enabled = VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default) ||
-                                       VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btAudioSettings2.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default) ||
+                                       FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void btAudioSettings2_Click(object sender, EventArgs e)
         {
             string name = cbAudioCodecs2.Text;
 
-            if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 

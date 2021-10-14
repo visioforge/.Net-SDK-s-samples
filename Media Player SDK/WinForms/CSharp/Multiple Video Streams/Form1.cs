@@ -4,6 +4,7 @@
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Tools;
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
 
@@ -80,11 +81,11 @@
 
             MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
 
-            if (MediaPlayer1.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (MediaPlayer1.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }
@@ -149,7 +150,7 @@
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             timer1.Tag = 0;
         }

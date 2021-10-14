@@ -79,8 +79,8 @@ namespace IP_Capture
         }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
-        {
-            Title += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+        {            
+            Title += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {

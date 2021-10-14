@@ -9,6 +9,7 @@ namespace Two_Windows_Demo
 
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Tools;
     using VisioForge.Types;
 
     public partial class Form1 : Form
@@ -33,7 +34,7 @@ namespace Two_Windows_Demo
             
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            Text += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + ")";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
 
             form2.Show();
         }
@@ -60,11 +61,11 @@ namespace Two_Windows_Demo
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
             MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
 
-            if (MediaPlayer1.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (MediaPlayer1.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }
@@ -144,7 +145,7 @@ namespace Two_Windows_Demo
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             timer1.Tag = 0;
         }

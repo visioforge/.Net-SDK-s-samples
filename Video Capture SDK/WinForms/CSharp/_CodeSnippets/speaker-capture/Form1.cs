@@ -48,11 +48,13 @@ namespace speaker_capture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCaptureCore.SDK_Version + ", " + VideoCaptureCore.SDK_State + ")";
+            VideoCapture1 = new VideoCaptureCore();
+
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
 
-            VideoCapture1 = new VideoCaptureCore();
+            
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;

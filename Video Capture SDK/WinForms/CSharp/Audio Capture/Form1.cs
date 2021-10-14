@@ -51,7 +51,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCaptureCore.SDK_Version + ", " + VideoCaptureCore.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
             cbMode.SelectedIndex = 0;
 
             tmRecording.Elapsed += (senderx, args) =>

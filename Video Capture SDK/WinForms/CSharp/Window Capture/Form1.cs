@@ -37,17 +37,17 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             cbOutputFormat.SelectedIndex = 2;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
-            if (VideoCapture.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (VideoCapture.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }

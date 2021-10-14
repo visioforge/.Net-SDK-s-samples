@@ -28,7 +28,7 @@
             MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
 
-            Text += " (SDK v" + MediaPlayerCore.SDK_Version + ", " + MediaPlayerCore.SDK_State + ")";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
@@ -122,7 +122,7 @@
                 tbTimeline.Value = (int)MediaPlayer1.Position_Get_Time().TotalSeconds;
             }
 
-            lbTime.Text = MediaPlayerCore.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayerCore.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             if (cdg != null)
             {

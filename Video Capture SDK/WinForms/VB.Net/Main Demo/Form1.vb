@@ -95,7 +95,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Text += " (SDK v" + VideoCapture1.SDK_Version.ToString() + " date " + VideoCapture1.SDK_BuildDate.Date.ToString("d") + ", " + VideoCapture1.SDK_State + ")"
+        Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
         Tag = 1
 
@@ -152,11 +152,11 @@ Public Class Form1
         pnChromaKeyColor.BackColor = Color.FromArgb(128, 218, 128)
 
         Dim genres As List(Of String) = New List(Of String)
-        For Each s As String In VideoCapture.Tags_GetDefaultAudioGenres
+        For Each s As String In VideoCapture1.Tags_GetDefaultAudioGenres
             genres.Add(s)
         Next
 
-        For Each s As String In VideoCapture.Tags_GetDefaultVideoGenres
+        For Each s As String In VideoCapture1.Tags_GetDefaultVideoGenres
             genres.Add(s)
         Next
 
@@ -255,8 +255,8 @@ Public Class Form1
         cbAudioInputSelectedIndexChanged(sender, e)
         cbVideoInputSelectedIndexChanged(sender, e)
 
-        rbEVR.Enabled = VideoCapture.Filter_Supported_EVR()
-        rbVMR9.Enabled = VideoCapture.Filter_Supported_VMR9()
+        rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR()
+        rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9()
 
         If Not (rbVMR9.Enabled And rbEVR.Enabled) Then
             rbVR.Checked = True
@@ -312,13 +312,13 @@ Public Class Form1
         cbPIPMode.SelectedIndex = 0
 
         ' BDA
-        For Each source As String In VideoCapture.BDA_Sources()
+        For Each source As String In VideoCapture1.BDA_Sources()
 
             cbBDASourceDevice.Items.Add(source)
 
         Next
 
-        For Each receiver As String In VideoCapture.BDA_Receivers()
+        For Each receiver As String In VideoCapture1.BDA_Receivers()
 
             cbBDAReceiver.Items.Add(receiver)
 
@@ -923,7 +923,7 @@ Public Class Form1
                     Else
 
                         mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary
-                        mp4Output.Encryption_Key = VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
+                        mp4Output.Encryption_Key = VideoCapture1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
 
                     End If
 
@@ -2476,7 +2476,7 @@ Public Class Form1
         If cbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -2486,10 +2486,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-            VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-        ElseIf (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-            VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
 
         End If
 
@@ -2500,7 +2500,7 @@ Public Class Form1
         If lbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -2512,10 +2512,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
 
             End If
 
@@ -2615,7 +2615,7 @@ Public Class Form1
             btMPEGVidDecSetting.Enabled = False
         Else
             sName = cbMPEGVideoDecoder.Text
-            btMPEGVidDecSetting.Enabled = (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default) Or (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)))
+            btMPEGVidDecSetting.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)))
         End If
 
     End Sub
@@ -2628,7 +2628,7 @@ Public Class Form1
             btMPEGAudDecSettings.Enabled = False
         Else
             sName = cbMPEGVideoDecoder.Text
-            btMPEGAudDecSettings.Enabled = (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default) Or (VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)))
+            btMPEGAudDecSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)))
         End If
 
     End Sub
@@ -2640,10 +2640,10 @@ Public Class Form1
         If cbMPEGVideoDecoder.SelectedIndex > 0 Then
             sName = cbMPEGVideoDecoder.Text
 
-            If VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+            ElseIf FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
             End If
         End If
 
@@ -2656,10 +2656,10 @@ Public Class Form1
         If cbMPEGAudioDecoder.SelectedIndex > 0 Then
             sName = cbMPEGAudioDecoder.Text
 
-            If VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf VideoCapture.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig) Then
-                VideoCapture.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+            ElseIf FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
             End If
         End If
 

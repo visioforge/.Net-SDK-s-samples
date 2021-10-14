@@ -179,6 +179,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbVideoProfile.SelectedIndex = 0;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1871:Two branches in a conditional structure should not have exactly the same implementation", Justification = "<Pending>")]
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)

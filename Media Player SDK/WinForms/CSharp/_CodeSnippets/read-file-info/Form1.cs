@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 // ReSharper disable StyleCop.SA1600
 // ReSharper disable InconsistentNaming
 
 namespace read_file_info
 {
-    using VisioForge.Controls.VideoCapture;
     using VisioForge.Shared;
     using VisioForge.Tools.MediaInfo;
-    using VisioForge.Tools.TagLib;
     using VisioForge.Types;
+    using VisioForge.Tools.TagLib;
 
     public partial class Form1 : Form
     {
@@ -105,11 +97,6 @@ namespace read_file_info
                 var tags = VFTagLibHelper.ReadTags(filename, null);
                 mmInfo.Text += tags?.ToString();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Text += " (SDK v" + VideoCaptureCore.SDK_Version + ", " + VideoCaptureCore.SDK_State + ")";
         }
     }
 }

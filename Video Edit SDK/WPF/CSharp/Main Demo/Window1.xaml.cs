@@ -113,7 +113,7 @@ namespace Main_Demo
 
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
+            Title += $" (SDK v{VideoEdit1.SDK_Version})";
 
             // font for text logo
             fontDialog.Color = System.Drawing.Color.White;
@@ -142,12 +142,12 @@ namespace Main_Demo
             cbTransitionName.SelectedIndex = 0;
             
             var genres = new List<string>();
-            foreach (var genre in VideoCapture.Tags_GetDefaultVideoGenres())
+            foreach (var genre in VideoEdit1.Tags_GetDefaultVideoGenres())
             {
                 genres.Add(genre);
             }
 
-            foreach (var genre in VideoCapture.Tags_GetDefaultAudioGenres())
+            foreach (var genre in VideoEdit1.Tags_GetDefaultAudioGenres())
             {
                 genres.Add(genre);
             }
@@ -801,8 +801,7 @@ namespace Main_Demo
                     else
                     {
                         mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary;
-                        mp4Output.Encryption_Key =
-                            VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                        mp4Output.Encryption_Key = VideoEdit1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                     }
 
                     if (rbEncryptionModeAES128.IsChecked == true)
@@ -1192,8 +1191,8 @@ namespace Main_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.IsEnabled = VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                    VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -1210,13 +1209,13 @@ namespace Main_Demo
         {
             string name = cbFilters.Text;
 
-            if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -1226,13 +1225,13 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
 
-                if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -1547,8 +1546,8 @@ namespace Main_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.SelectedValue.ToString();
-                btFilterSettings2.IsEnabled = VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                                            VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
         
@@ -2306,7 +2305,7 @@ namespace Main_Demo
         private void btAddTransition_Click(object sender, RoutedEventArgs e)
         {
             // get id
-            int id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text);
+            int id = VideoEdit1.Video_Transition_GetIDFromName(cbTransitionName.Text);
 
             // add transition
             VideoEdit1.Video_Transition_Add(TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStopTime.Text)), id);

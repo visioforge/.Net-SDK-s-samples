@@ -23,7 +23,7 @@ namespace Simple_Video_Capture
             this.videoCaptureAccessor.OnError += VideoCaptureAccessorOnError;
 
             Title = "Simple Video Capture Demo - Video Capture SDK .Net" +
-                " (SDK v" + videoCaptureAccessor.SDK_Version + ", " + videoCaptureAccessor.SDK_State + ")";
+                " (SDK v" + videoCaptureAccessor.SDK_Version + ")";
 
             SelectedVideoInputDevice = VideoInputDevices.FirstOrDefault();
             SelectedAudioInputDevice = AudioInputDevices.FirstOrDefault();

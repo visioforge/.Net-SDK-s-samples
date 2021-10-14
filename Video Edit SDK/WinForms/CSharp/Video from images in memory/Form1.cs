@@ -71,7 +71,7 @@ namespace Video_From_Images
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
+            Text += $" (SDK v{VideoEdit1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -226,11 +226,11 @@ namespace Video_From_Images
             VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
 
             // apply capture parameters
-            if (VideoEdit.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (VideoEdit.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }

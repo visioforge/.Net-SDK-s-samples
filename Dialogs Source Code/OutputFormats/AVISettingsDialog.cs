@@ -14,6 +14,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
     using System.Windows.Forms;
 
     using VisioForge.Controls.VideoCapture;
+    using VisioForge.Tools;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
 
@@ -93,13 +94,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbAudioCodecs.Text;
 
-            if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -193,15 +194,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbVideoCodecs.Text;
 
-            if (VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.Video_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
             else
             {
-                if (VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoCaptureCore.Video_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -218,8 +219,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbAudioCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbAudioCodecs.Text;
-            btAudioSettings.Enabled = VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default) ||
-                                      VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btAudioSettings.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default) ||
+                                      FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         /// <summary>
@@ -234,8 +235,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbVideoCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbVideoCodecs.Text;
-            btVideoSettings.Enabled = VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.Default) ||
-                                      VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btVideoSettings.Enabled = FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default) ||
+                                      FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbUncVideo_CheckedChanged(object sender, EventArgs e)

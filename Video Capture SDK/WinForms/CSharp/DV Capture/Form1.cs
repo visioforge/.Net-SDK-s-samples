@@ -59,7 +59,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             cbOutputFormat.SelectedIndex = 4;
 

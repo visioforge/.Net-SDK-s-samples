@@ -84,6 +84,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="core">
         /// Core.
         /// </param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1871:Two branches in a conditional structure should not have exactly the same implementation", Justification = "<Pending>")]
         public void ShowDialog(VFVideoCaptureOutputFormat format, IWin32Window parent, VideoCaptureCore core)
         {
             switch (format)
@@ -302,12 +303,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 case VFVideoCaptureOutputFormat.Encrypted:
                     {
-                        if (this.mp4SettingsDialog == null)
+                        if (mp4SettingsDialog == null)
                         {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
+                            mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        this.mp4SettingsDialog.ShowDialog(parent);
+                        mp4SettingsDialog.ShowDialog(parent);
 
                         break;
                     }
@@ -1093,9 +1094,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
+        /// <summary>
+        /// Release unmanaged resources.
+        /// </summary>
+#pragma warning disable S1186 // Methods should not be empty
         private void ReleaseUnmanagedResources()
+#pragma warning restore S1186 // Methods should not be empty
         {
-            // TODO release unmanaged resources here
         }
 
         /// <summary>

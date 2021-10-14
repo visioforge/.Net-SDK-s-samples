@@ -10,6 +10,7 @@ namespace VC_Timeshift_Demo
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Tools;
     using VisioForge.Types;
     using VisioForge.Types.OutputFormat;
 
@@ -22,7 +23,8 @@ namespace VC_Timeshift_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+
             cbIPCameraType.SelectedIndex = 2;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
@@ -51,11 +53,11 @@ namespace VC_Timeshift_Demo
 
             cbOutputFormat.SelectedIndex = 0;
 
-            if (VideoCapture.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (VideoCapture.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }

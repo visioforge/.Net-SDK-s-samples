@@ -47,8 +47,6 @@ namespace Simple_Video_Capture
 
         public Version SDK_Version => this.videoCapture.SDK_Version;
 
-        public string SDK_State => this.videoCapture.SDK_State;
-
         public List<VideoCaptureDeviceInfo> Video_CaptureDevicesInfo => this.videoCapture.Video_CaptureDevicesInfo;
 
         public List<AudioCaptureDeviceInfo> Audio_CaptureDevicesInfo => this.videoCapture.Audio_CaptureDevicesInfo;

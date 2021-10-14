@@ -41,7 +41,7 @@ Public Class Form1
     Private ReadOnly tmRecording As Timers.Timer = New Timers.Timer(1000)
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
-        Text += " (SDK v" + VideoCapture1.SDK_Version.ToString() + ", " + VideoCapture1.SDK_State + ")"
+        Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
         AddHandler tmRecording.Elapsed, AddressOf UpdateRecordingTime
 

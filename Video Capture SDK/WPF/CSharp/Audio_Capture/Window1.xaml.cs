@@ -54,7 +54,7 @@ namespace Audio_Capture
 
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + VideoCaptureCore.SDK_Version + ", " + VideoCaptureCore.SDK_State + ")";
+            Title += $" (SDK v{VideoCapture1.SDK_Version})";
             cbMode.SelectedIndex = 0;
 
             foreach (var device in VideoCapture1.Audio_CaptureDevices())

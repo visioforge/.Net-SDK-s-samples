@@ -247,7 +247,7 @@ namespace VideoEdit_CS_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoEdit1.SDK_Version + ", " + VideoEdit1.SDK_State + ")";
+            Text += $" (SDK v{VideoEdit1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
@@ -275,12 +275,12 @@ namespace VideoEdit_CS_Demo
             pnChromaKeyColor.BackColor = Color.FromArgb(128, 218, 128);
 
             var genres = new List<string>();
-            foreach (var genre in VideoCapture.Tags_GetDefaultVideoGenres())
+            foreach (var genre in VideoEdit1.Tags_GetDefaultVideoGenres())
             {
                 genres.Add(genre);
             }
 
-            foreach (var genre in VideoCapture.Tags_GetDefaultAudioGenres())
+            foreach (var genre in VideoEdit1.Tags_GetDefaultAudioGenres())
             {
                 genres.Add(genre);
             }
@@ -923,8 +923,7 @@ namespace VideoEdit_CS_Demo
                     else
                     {
                         mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary;
-                        mp4Output.Encryption_Key =
-                            VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                        mp4Output.Encryption_Key = VideoEdit1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                     }
 
                     if (rbEncryptionModeAES128.Checked)
@@ -1431,8 +1430,8 @@ namespace VideoEdit_CS_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                    VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -1449,14 +1448,14 @@ namespace VideoEdit_CS_Demo
         {
             string name = cbFilters.Text;
 
-            if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
             else
-                if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -1465,8 +1464,8 @@ namespace VideoEdit_CS_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                                            VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -1476,13 +1475,13 @@ namespace VideoEdit_CS_Demo
             {
                 string name = lbFilters.Text;
 
-                if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (VideoEdit.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -2319,7 +2318,7 @@ namespace VideoEdit_CS_Demo
         private void btAddTransition_Click(object sender, EventArgs e)
         {
             // get id
-            int id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text);
+            int id = VideoEdit1.Video_Transition_GetIDFromName(cbTransitionName.Text);
 
             // add transition
             VideoEdit1.Video_Transition_Add(TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStopTime.Text)), id);

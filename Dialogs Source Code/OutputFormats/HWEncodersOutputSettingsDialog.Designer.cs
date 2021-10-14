@@ -647,7 +647,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "HW encoders settings";
-            this.Load += new System.EventHandler(this.mp4HWSettingsDialog_Load);
             this.tabControl24.ResumeLayout(false);
             this.tabPage111.ResumeLayout(false);
             this.tabPage111.PerformLayout();

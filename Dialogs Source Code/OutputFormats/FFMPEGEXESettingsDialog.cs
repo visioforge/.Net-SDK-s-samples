@@ -1397,9 +1397,9 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case 10:
                     cbOutputFormat.SelectedIndex = 22;
 
-                    cbVideoCodec.SelectedIndex = 7;
                     cbAudioCodec.SelectedIndex = 1;
-
+                    cbVideoCodec.SelectedIndex = 7;
+                    
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
@@ -1521,8 +1521,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 case 21:
                     cbOutputFormat.SelectedIndex = 4;
 
-                    cbVideoCodec.SelectedIndex = 16;
                     cbAudioCodec.SelectedIndex = 13;
+                    cbVideoCodec.SelectedIndex = 16;                    
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -1582,6 +1582,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void cbFFEXEAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
+#pragma warning disable S108 // Nested blocks of code should not be left empty
+
             FFEXEDisableAudioMode();
             lbFFEXEAudioNotes.Text = "Notes: None.";
 
@@ -1930,6 +1932,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                     break;
             }
+
+#pragma warning restore S108 // Nested blocks of code should not be left empty
         }
 
         private void tbFFEXEAudioQuality_Scroll(object sender, EventArgs e)
@@ -1939,6 +1943,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void cbFFEXEVideoCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
+#pragma warning disable S108 // Nested blocks of code should not be left empty
+
             edVBVBufferSize.Text = "0";
             edVideoGOPSize.Text = "0";
             edVideoBFramesCount.Text = "0";
@@ -2034,8 +2040,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         cbH264ZeroTolerance.Checked = false;
                         cbH264WebFastStart.Checked = false;
 
-                        edVideoTargetBitrate.Enabled = true;
                         tbVideoQuality.Enabled = true;
+                        edVideoTargetBitrate.Enabled = true;                        
                     }
 
                     break;
@@ -2048,8 +2054,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                         cbH264Usage.SelectedIndex = 0;
                         cbH264Profile.SelectedIndex = 0;
                         cbH264QuickTimeCompatibility.Checked = true;
-                        cbH264ZeroTolerance.Checked = false;
                         cbH264WebFastStart.Checked = false;
+                        cbH264ZeroTolerance.Checked = false;                        
                     }
 
                     break;
@@ -2178,7 +2184,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         tbVideoQuality.Minimum = 4;
                         tbVideoQuality.Maximum = 63;
-                        tbVideoQuality.Value = 10;
+                        tbVideoQuality.Value = 11;
                         tbFFEXEVideoQuality_Scroll(null, null);
 
                         edVideoTargetBitrate.Text = "2000";
@@ -2186,6 +2192,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                     break;
             }
+
+#pragma warning restore S108 // Nested blocks of code should not be left empty
         }
 
         private void tbFFEXEVideoQuality_Scroll(object sender, EventArgs e)

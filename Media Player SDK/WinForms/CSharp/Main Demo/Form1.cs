@@ -489,7 +489,7 @@ namespace Media_Player_Demo
                 else
                 {
                     keyType = VFEncryptionKeyType.Binary;
-                    key = MediaPlayer.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                    key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                 }
 
                 MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.Checked);
@@ -669,7 +669,7 @@ namespace Media_Player_Demo
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             if (MediaPlayer1.Source_Mode == VFMediaPlayerSource.DVD_DS)
             {
@@ -1336,7 +1336,7 @@ namespace Media_Player_Demo
             else
             {
                 MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.Binary;
-                MediaPlayer1.Encryption_Key = VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                MediaPlayer1.Encryption_Key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
 
             // Motion detection-ex
@@ -2596,8 +2596,8 @@ namespace Media_Player_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                    MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -2614,13 +2614,13 @@ namespace Media_Player_Demo
         {
             string name = cbFilters.Text;
 
-            if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -2629,8 +2629,8 @@ namespace Media_Player_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                                            MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -2640,13 +2640,13 @@ namespace Media_Player_Demo
             {
                 string name = lbFilters.Text;
 
-                if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -3084,7 +3084,7 @@ namespace Media_Player_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + "), C#";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
 
             // set combobox indexes
             cbSourceMode.SelectedIndex = 0;
@@ -3134,8 +3134,8 @@ namespace Media_Player_Demo
                 cbFilters_SelectedIndexChanged(null, null);
             }
 
-            rbEVR.Enabled = MediaPlayer1.Filter_Supported_EVR();
-            rbVMR9.Enabled = MediaPlayer1.Filter_Supported_VMR9();
+            rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR();
+            rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9();
 
             if (rbEVR.Enabled)
             {

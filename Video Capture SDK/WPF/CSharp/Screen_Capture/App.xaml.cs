@@ -7,9 +7,6 @@ using System.Windows;
 
 namespace Screen_Capture
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
     }

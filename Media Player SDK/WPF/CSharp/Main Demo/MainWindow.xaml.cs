@@ -73,7 +73,7 @@ namespace Main_Demo
                 tbTimeline.Value = value;
             }
 
-            lbTime.Content = MediaPlayer.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
+            lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
 
             if (MediaPlayer1.Source_Mode == VFMediaPlayerSource.DVD_DS)
             {
@@ -121,7 +121,7 @@ namespace Main_Demo
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + "), C# WPF";
+            Title += $" (SDK v{MediaPlayer1.SDK_Version})";
 
             // font for text logo
             fontDialog.Color = System.Drawing.Color.White;
@@ -531,7 +531,7 @@ namespace Main_Demo
                 else
                 {
                     keyType = VFEncryptionKeyType.Binary;
-                    key = MediaPlayer.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                    key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                 }
 
                 MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.IsChecked == true);
@@ -988,7 +988,7 @@ namespace Main_Demo
             else
             {
                 MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.Binary;
-                MediaPlayer1.Encryption_Key = MediaPlayer.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
+                MediaPlayer1.Encryption_Key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
 
             await MediaPlayer1.PlayAsync().ConfigureAwait(true);
@@ -2323,8 +2323,8 @@ namespace Main_Demo
             if (cbFilters.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
                 string name = e.AddedItems[0].ToString();
-                btFilterSettings.IsEnabled = MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                    MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -2341,13 +2341,13 @@ namespace Main_Demo
         {
             string name = cbFilters.Text;
 
-            if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -2357,13 +2357,13 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
 
-                if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
                 {
-                    MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
                 }
-                else if (MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
                 {
-                    MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
                 }
             }
         }
@@ -2388,8 +2388,8 @@ namespace Main_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.SelectedValue.ToString();
-                btFilterSettings2.IsEnabled = MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                                            MediaPlayer.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
             }
         }
 

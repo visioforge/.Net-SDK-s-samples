@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
+using VisioForge.Tools;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
 
@@ -279,56 +280,56 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbCustomVideoCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomVideoCodecs.Text;
-            btCustomVideoCodecSettings.Enabled = VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomVideoCodecSettings.Enabled = FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbCustomAudioCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomAudioCodecs.Text;
-            btCustomAudioCodecSettings.Enabled = VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomAudioCodecSettings.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbCustomDSFilterV_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomDSFilterV.Text;
-            btCustomDSFiltersVSettings.Enabled = VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomDSFiltersVSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbCustomDSFilterA_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomDSFilterA.Text;
-            btCustomDSFiltersASettings.Enabled = VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomDSFiltersASettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbCustomMuxer_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomMuxer.Text;
-            btCustomMuxerSettings.Enabled = VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomMuxerSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void cbCustomFilewriter_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbCustomFilewriter.Text;
-            btCustomFilewriterSettings.Enabled = VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default) ||
-                VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig);
+            btCustomFilewriterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
+                FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
         }
 
         private void btCustomAudioCodecSettings_Click(object sender, EventArgs e)
         {
             string name = cbCustomAudioCodecs.Text;
 
-            if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.Audio_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.Audio_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -336,13 +337,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbCustomDSFilterA.Text;
 
-            if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -350,13 +351,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbCustomDSFilterV.Text;
 
-            if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -364,13 +365,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbCustomFilewriter.Text;
 
-            if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -378,13 +379,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbCustomMuxer.Text;
 
-            if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.DirectShow_Filter_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.DirectShow_Filter_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 
@@ -392,13 +393,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbCustomVideoCodecs.Text;
 
-            if (VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default))
             {
-                VideoCaptureCore.Video_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
             }
-            else if (VideoCaptureCore.Video_Codec_Has_Dialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
             {
-                VideoCaptureCore.Video_Codec_Show_Dialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
             }
         }
 

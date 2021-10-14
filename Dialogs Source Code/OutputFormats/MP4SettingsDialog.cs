@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
+using VisioForge.Tools;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
 
@@ -694,7 +695,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             {
                 lbNVENCStatus.Tag = 1;
 
-                bool res = VideoCaptureCore.Filter_Supported_NVENC(out var errorCode);
+                bool res = FilterHelpers.Filter_Supported_NVENC(out var errorCode);
 
                 if (res)
                 {
@@ -707,10 +708,6 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     lbNVENCStatus.ForeColor = Color.Red;
                 }
             }
-        }
-
-        private void MP4v10SettingsDialog_Load(object sender, EventArgs e)
-        {
         }
 
         private void btEncryptionOpenFile_Click(object sender, EventArgs e)

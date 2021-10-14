@@ -35,7 +35,7 @@ Public Class Form1
         AddHandler VideoCapture1.OnLicenseRequired, AddressOf VideoCapture1_OnLicenseRequired
         AddHandler VideoCapture1.OnStop, AddressOf VideoCapture1_OnStop
 
-        Text += " (SDK v" + VideoCaptureCore.SDK_Version.ToString() + ", " + VideoCaptureCore.SDK_State + ")"
+        Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
         Dim i As Integer
         For i = 0 To VideoCapture1.Audio_CaptureDevices.Count - 1

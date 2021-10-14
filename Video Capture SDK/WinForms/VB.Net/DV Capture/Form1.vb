@@ -50,7 +50,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Text += " (SDK v" + VideoCapture1.SDK_Version.ToString() + ", " + VideoCapture1.SDK_State + ")"
+        Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
         cbOutputFormat.SelectedIndex = 4
 

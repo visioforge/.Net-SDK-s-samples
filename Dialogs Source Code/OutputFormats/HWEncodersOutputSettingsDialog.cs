@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
+using VisioForge.Shared;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;
 
@@ -41,7 +42,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbLevel.SelectedIndex = 12;
             cbVideoRateControl.SelectedIndex = 3;
 
-            _filtersAvailableInfo = VideoCaptureCore.HWEncodersAvailable();
+            _filtersAvailableInfo = MFTFilterEnum.GetFiltersAvailable(out _); 
             if (_filtersAvailableInfo.NVENC_H264)
             {
                 edHWAvailableEncoders.Text += "NVENC_H264  ";
@@ -525,46 +526,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             Close();
         }
 
-        private void mp4HWSettingsDialog_Load(object sender, EventArgs e)
-        {
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             const string url = "https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Dialogs%20Source%20Code/OutputFormats";
             var startInfo = new ProcessStartInfo("explorer.exe", url);
             Process.Start(startInfo);
         }
-    }
-
-    /// <summary>
-    /// HW settings dialog mode.
-    /// </summary>
-    public enum HWSettingsDialogMode
-    {
-        /// <summary>
-        /// Default.
-        /// </summary>
-        Default,
-
-        /// <summary>
-        /// MP4.
-        /// </summary>
-        MP4,
-
-        /// <summary>
-        /// MKV.
-        /// </summary>
-        MKV,
-
-        /// <summary>
-        /// MPEG-TS.
-        /// </summary>
-        MPEGTS,
-
-        /// <summary>
-        /// Apple MOV.
-        /// </summary>
-        MOV
     }
 }

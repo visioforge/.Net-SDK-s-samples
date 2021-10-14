@@ -9,6 +9,7 @@
 
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Tools;
     using VisioForge.Types;
 
     public partial class Form1 : Form
@@ -28,7 +29,7 @@
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Text += " (SDK v" + MediaPlayer1.SDK_Version + ", " + MediaPlayer1.SDK_State + "), C#";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
         }
 
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
@@ -72,7 +73,7 @@
                 tbTimeline.Value = value;
             }
 
-            lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
             
             timer1.Tag = 0;
         }
@@ -95,11 +96,11 @@
             player.Audio_OutputDevice = "Default DirectSound Device";
             MediaPlayer1.Info_UseLibMediaInfo = true;
 
-            if (player.Filter_Supported_EVR())
+            if (FilterHelpers.Filter_Supported_EVR())
             {
                 player.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
             }
-            else if (player.Filter_Supported_VMR9())
+            else if (FilterHelpers.Filter_Supported_VMR9())
             {
                 player.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
             }

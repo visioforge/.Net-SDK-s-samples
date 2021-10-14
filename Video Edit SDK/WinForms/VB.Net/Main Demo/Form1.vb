@@ -168,7 +168,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Text += " (SDK v" + VideoEdit1.SDK_Version.ToString() + ", " + VideoEdit1.SDK_State + ")"
+        Text += $" (SDK v{VideoEdit1.SDK_Version})"
 
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
         edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
@@ -209,11 +209,11 @@ Public Class Form1
         cbTransitionName.SelectedIndex = 0
 
         Dim genres As List(Of String) = New List(Of String)
-        For Each s As String In VideoCapture.Tags_GetDefaultAudioGenres
+        For Each s As String In VideoEdit1.Tags_GetDefaultAudioGenres()
             genres.Add(s)
         Next
 
-        For Each s As String In VideoCapture.Tags_GetDefaultVideoGenres
+        For Each s As String In VideoEdit1.Tags_GetDefaultVideoGenres()
             genres.Add(s)
         Next
 
@@ -807,7 +807,7 @@ Public Class Form1
                 Else
 
                     mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary
-                    mp4Output.Encryption_Key = VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
+                    mp4Output.Encryption_Key = VideoEdit1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
 
                 End If
 
@@ -1123,7 +1123,7 @@ Public Class Form1
         Dim id As Integer
 
         'get id
-        id = VideoEdit.Video_Transition_GetIDFromName(cbTransitionName.Text)
+        id = VideoEdit1.Video_Transition_GetIDFromName(cbTransitionName.Text)
 
         'add transition
         VideoEdit1.Video_Transition_Add(TimeSpan.FromMilliseconds(Convert.ToInt64(edTransStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt64(edTransStopTime.Text)), id)
@@ -1241,7 +1241,7 @@ Public Class Form1
         If (cbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -1262,10 +1262,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-            VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-        ElseIf (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-            VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
         End If
 
     End Sub
@@ -1275,7 +1275,7 @@ Public Class Form1
         If (lbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -1287,10 +1287,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf (VideoEdit.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-                VideoEdit.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
             End If
 
         End If

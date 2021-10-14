@@ -85,7 +85,7 @@ namespace Simple_Video_Capture
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            Title += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 

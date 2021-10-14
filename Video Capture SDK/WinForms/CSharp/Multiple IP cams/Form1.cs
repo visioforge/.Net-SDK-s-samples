@@ -90,7 +90,7 @@ namespace multiple_ap_cams
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + videoCapture2.SDK_Version + ", " + videoCapture2.SDK_State + ")";
+            Text += $" (SDK v{videoCapture2.SDK_Version})";
 
             tmRecording1.Elapsed += (senderx, args) =>
             {

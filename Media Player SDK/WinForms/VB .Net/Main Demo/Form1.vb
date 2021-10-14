@@ -28,7 +28,7 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Text += " (SDK v" + MediaPlayer1.SDK_Version.ToString() + ", " + MediaPlayer1.SDK_State + "), VB.Net"
+        Text += $" (SDK v{MediaPlayer1.SDK_Version}), VB.Net"
 
         ' set combobox indexes
         cbSourceMode.SelectedIndex = 0
@@ -70,8 +70,8 @@ Public Class Form1
 
         End If
 
-        rbEVR.Enabled = MediaPlayer1.Filter_Supported_EVR()
-        rbVMR9.Enabled = MediaPlayer1.Filter_Supported_VMR9()
+        rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR()
+        rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9()
 
         If (rbEVR.Enabled) Then
 
@@ -614,7 +614,7 @@ Public Class Form1
             Else
 
                 keyType = VFEncryptionKeyType.Binary
-                key = MediaPlayer.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
+                key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
 
             End If
 
@@ -800,7 +800,7 @@ Public Class Form1
 
         End If
 
-        lbTime.Text = MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
+        lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
 
         If (MediaPlayer1.Source_Mode = VFMediaPlayerSource.DVD_DS) Then
 
@@ -1306,7 +1306,7 @@ Public Class Form1
         Else
 
             MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.Binary
-            MediaPlayer1.Encryption_Key = VideoCapture.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
+            MediaPlayer1.Encryption_Key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
 
         End If
 
@@ -2419,7 +2419,7 @@ Public Class Form1
         If cbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -2440,10 +2440,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-            MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-        ElseIf (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-            MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
 
         End If
 
@@ -2454,7 +2454,7 @@ Public Class Form1
         If lbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Or (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
 
         End If
 
@@ -2466,10 +2466,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.Default)) Then
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf (MediaPlayer.DirectShow_Filter_Has_Dialog(sName, VFPropertyPage.VFWCompConfig)) Then
-                MediaPlayer.DirectShow_Filter_Show_Dialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
+            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
 
             End If
 
