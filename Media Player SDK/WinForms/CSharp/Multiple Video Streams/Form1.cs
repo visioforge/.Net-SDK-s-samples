@@ -40,9 +40,9 @@
             info.ReadFileInfo(true);
 
             MediaPlayer1.Multiple_Video_Streams_Mappings_Clear();
-            if (info.Video_Streams_Count() > 1)
+            if (info.VideoStreams.Count > 1)
             {
-                for (int i = 0; i < info.Video_Streams_Count() - 1; i++)
+                for (int i = 0; i < info.VideoStreams.Count - 1; i++)
                 {
                     if (i > 3)
                     {

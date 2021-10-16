@@ -12,6 +12,7 @@ Imports VisioForge.Types.FFMPEGEXE
 Imports VisioForge.Types.GPUVideoEffects
 Imports VisioForge.Types.OutputFormat
 Imports VisioForge.Types.VideoEffects
+Imports VisioForge.Types.Decklink
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
@@ -812,9 +813,9 @@ Public Class Form1
                 End If
 
                 If (rbEncryptionModeAES128.Checked) Then
-                    mp4Output.Encryption_Mode = VFEncryptionMode.v8_AES128
+                    mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128
                 Else
-                    mp4Output.Encryption_Mode = VFEncryptionMode.v9_AES256
+                    mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256
                 End If
             End If
 
@@ -1820,7 +1821,7 @@ Public Class Form1
             End If
 
             fadeOut.Enabled = cbVideoFadeInOut.Checked
-            fadeOut.StartTime =TimeSpan.FromMilliseconds(Convert.ToInt64(edVideoFadeInOutStartTime.Text))
+            fadeOut.StartTime = TimeSpan.FromMilliseconds(Convert.ToInt64(edVideoFadeInOutStartTime.Text))
             fadeOut.StopTime = TimeSpan.FromMilliseconds(Convert.ToInt64(edVideoFadeInOutStopTime.Text))
         End If
 
@@ -2827,14 +2828,14 @@ Public Class Form1
             VideoEdit1.ChromaKey.Dispose()
             VideoEdit1.ChromaKey = Nothing
         End If
-        
+
         If (cbChromaKeyEnabled.Checked) Then
             If (Not File.Exists(edChromaKeyImage.Text)) Then
                 MessageBox.Show("Chroma-key background file doesn't exists.")
                 Return
             End If
 
-            VideoEdit1.ChromaKey = New ChromaKeySettings(new Bitmap(edChromaKeyImage.Text))
+            VideoEdit1.ChromaKey = New ChromaKeySettings(New Bitmap(edChromaKeyImage.Text))
             VideoEdit1.ChromaKey.Smoothing = tbChromaKeySmoothing.Value / 1000.0F
             VideoEdit1.ChromaKey.ThresholdSensitivity = tbChromaKeyThresholdSensitivity.Value / 1000.0F
             VideoEdit1.ChromaKey.Color = pnChromaKeyColor.BackColor
@@ -2867,7 +2868,7 @@ Public Class Form1
     End Sub
 
     Private Sub LinkLabel6_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel6.LinkClicked
-        Dim startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
         Process.Start(startInfo)
     End Sub
 

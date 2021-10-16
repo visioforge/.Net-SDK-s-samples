@@ -12689,8 +12689,8 @@ Partial Class Form1
         Me.VideoCapture1.Debug_DisableMessageDialogs = False
         Me.VideoCapture1.Debug_Mode = False
         Me.VideoCapture1.Debug_Telemetry = False
-        Me.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.[Auto]
-        Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.[Auto]
+        Me.VideoCapture1.Decklink_Input = VisioForge.Types.Decklink.DecklinkInput.[Auto]
+        Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.[Auto]
         Me.VideoCapture1.Decklink_Input_IREUSA = False
         Me.VideoCapture1.Decklink_Input_SMPTE = False
         Me.VideoCapture1.Decklink_Output = Nothing

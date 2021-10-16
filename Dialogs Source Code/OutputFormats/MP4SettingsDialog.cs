@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using VisioForge.Controls.VideoCapture;
 using VisioForge.Tools;
 using VisioForge.Types;
 using VisioForge.Types.OutputFormat;

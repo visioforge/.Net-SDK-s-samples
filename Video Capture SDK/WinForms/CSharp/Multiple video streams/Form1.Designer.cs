@@ -231,8 +231,8 @@ namespace multiple_video_streams
             this.videoCapture1.Debug_DisableMessageDialogs = false;
             this.videoCapture1.Debug_Mode = false;
             this.videoCapture1.Debug_Telemetry = false;
-            this.videoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
-            this.videoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
+            this.videoCapture1.Decklink_Input = VisioForge.Types.Decklink.DecklinkInput.Auto;
+            this.videoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
             this.videoCapture1.Decklink_Input_IREUSA = false;
             this.videoCapture1.Decklink_Input_SMPTE = false;
             this.videoCapture1.Decklink_Output = null;

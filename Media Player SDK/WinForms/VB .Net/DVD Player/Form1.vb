@@ -5,6 +5,7 @@ Imports VisioForge.Tools.MediaInfo
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
+Imports VisioForge.Types.MediaInfo
 
 Public Class Form1
 
@@ -80,9 +81,9 @@ Public Class Form1
             cbDVDControlSubtitles.Items.Clear()
             cbDVDControlChapter.Items.Clear()
 
-            MediaInfo.DVD_Fill_Title_Info(cbDVDControlTitle.SelectedIndex)
+            Dim title As DVDTitleInfo = MediaInfo.Info.Titles(cbDVDControlTitle.SelectedIndex)
 
-            For i As Integer = 0 To MediaInfo.DVD_Title_NumberOfChapters - 1
+            For i As Integer = 0 To title.NumberOfChapters - 1
                 cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1))
             Next
 
@@ -90,13 +91,13 @@ Public Class Form1
                 cbDVDControlChapter.SelectedIndex = 0
             End If
 
-            For i As Integer = 0 To MediaInfo.DVD_Title_MainAttributes_NumberOfAudioStreams - 1
-                MediaInfo.DVD_Fill_Title_Audio_Info(cbDVDControlTitle.SelectedIndex, i)
-                Dim s As String = MediaInfo.DVD_Title_MainAttributes_AudioAttributes_AudioFormat()
+            For i As Integer = 0 To title.MainAttributes.NumberOfAudioStreams - 1
+                Dim audioStream As DVDAudioAttributes = title.MainAttributes.AudioAttributes(0)
+                Dim s As String = audioStream.AudioFormat
 
                 s = s + " - "
-                s = s + MediaInfo.DVD_Title_MainAttributes_AudioAttributes_NumberOfChannels() + "ch" + " - "
-                s = s + MediaInfo.DVD_Title_MainAttributes_AudioAttributes_LanguageS()
+                s = s + audioStream.NumberOfChannels + "ch" + " - "
+                s = s + audioStream.Language
 
                 cbDVDControlAudio.Items.Add(s)
             Next
@@ -107,9 +108,8 @@ Public Class Form1
 
             cbDVDControlSubtitles.Items.Add("Disabled")
 
-            For i As Integer = 0 To MediaInfo.DVD_Title_MainAttributes_NumberOfSubpictureStreams - 1
-                MediaInfo.DVD_Fill_Title_Subpicture_Info(cbDVDControlTitle.SelectedIndex, i)
-                cbDVDControlSubtitles.Items.Add(MediaInfo.DVD_Title_MainAttributes_SubpictureAttributes_LanguageS)
+            For i As Integer = 0 To title.MainAttributes.NumberOfSubpictureStreams - 1
+                cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes(i).Language)
             Next
 
             cbDVDControlSubtitles.SelectedIndex = 0
@@ -181,7 +181,7 @@ Public Class Form1
         MediaInfo.Filename = edFilename.Text
         MediaInfo.ReadDVDInfo()
 
-        For i As Integer = 0 To MediaInfo.DVD_Disc_NumOfTitles - 1
+        For i As Integer = 0 To MediaInfo.Info.Disc_NumOfTitles - 1
             cbDVDControlTitle.Items.Add("Title " + (i + 1))
         Next
 

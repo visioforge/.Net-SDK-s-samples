@@ -341,22 +341,22 @@ namespace Main_Demo
                 cbDVDAudio.Items.Clear();
                 cbDVDSubtitles.Items.Clear();
 
-                DVDInfo.DVD_Fill_Title_Info(lbDVDTitles.SelectedIndex);
+                var title = DVDInfo.Info.Titles[lbDVDTitles.SelectedIndex];
 
-                string s = DVDInfo.DVD_Title_MainAttributes_VideoAttributes_Compression + " ";
-                s = s + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_SourceResolutionX + "x" + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_SourceResolutionY + " ";
-                s = s + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_AspectX + ":" + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_AspectY + " ";
+                string s = title.MainAttributes.VideoAttributes.Compression + " ";
+                s = s + title.MainAttributes.VideoAttributes.SourceResolutionX + "x" + title.MainAttributes.VideoAttributes.SourceResolutionY + " ";
+                s = s + title.MainAttributes.VideoAttributes.AspectRatio.Item1 + ":" + title.MainAttributes.VideoAttributes.AspectRatio.Item2 + " ";
 
                 edDVDVideo.Text = s;
 
-                for (int i = 0; i < DVDInfo.DVD_Title_MainAttributes_NumberOfAudioStreams; i++)
+                for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
                 {
-                    DVDInfo.DVD_Fill_Title_Audio_Info(lbDVDTitles.SelectedIndex, i);
-                    s = DVDInfo.DVD_Title_MainAttributes_AudioAttributes_AudioFormat;
+                    var audioStream = title.MainAttributes.AudioAttributes[i];
+                    s = audioStream.AudioFormat.ToString();
 
                     s = s + " - ";
-                    s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_NumberOfChannels + "ch" + " - ";
-                    s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_LanguageS;
+                    s = s + audioStream.NumberOfChannels + "ch" + " - ";
+                    s = s + audioStream.Language;
 
                     cbDVDAudio.Items.Add(s);
                 }
@@ -366,10 +366,9 @@ namespace Main_Demo
                     cbDVDAudio.SelectedIndex = 0;
                 }
 
-                for (int i = 0; i < DVDInfo.DVD_Title_MainAttributes_NumberOfSubpictureStreams; i++)
+                for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
                 {
-                    DVDInfo.DVD_Fill_Title_Subpicture_Info(lbDVDTitles.SelectedIndex, i);
-                    cbDVDSubtitles.Items.Add(DVDInfo.DVD_Title_MainAttributes_SubpictureAttributes_LanguageS);
+                    cbDVDSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes[i].Language);
                 }
 
                 if (cbDVDSubtitles.Items.Count > 0)
@@ -536,55 +535,62 @@ namespace Main_Demo
 
                 MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.IsChecked == true);
 
-                for (int i = 0; i < MediaInfo.Video_Streams_Count(); i++)
+                for (int i = 0; i < MediaInfo.VideoStreams.Count; i++)
                 {
+                    var stream = MediaInfo.VideoStreams[i];
+
                     mmInfo.Text += string.Empty + Environment.NewLine;
                     mmInfo.Text += "Video #" + Convert.ToString(i + 1) + Environment.NewLine;
-                    mmInfo.Text += "Codec: " + MediaInfo.Video_Codec(i) + Environment.NewLine;
-                    mmInfo.Text += "Duration: " + MediaInfo.Video_Duration(i) + Environment.NewLine;
-                    mmInfo.Text += "Width: " + MediaInfo.Video_Width(i) + Environment.NewLine;
-                    mmInfo.Text += "Height: " + MediaInfo.Video_Height(i) + Environment.NewLine;
-                    mmInfo.Text += "FOURCC: " + MediaInfo.Video_FourCC(i) + Environment.NewLine;
-                    mmInfo.Text += "Aspect Ratio: " + MediaInfo.Video_AspectRatioStr(i) + Environment.NewLine;
-                    mmInfo.Text += "Frame rate: " + MediaInfo.Video_FrameRate(i) + Environment.NewLine;
-                    mmInfo.Text += "Bitrate: " + MediaInfo.Video_Bitrate(i) + Environment.NewLine;
-                    mmInfo.Text += "Frames count: " + MediaInfo.Video_FramesCount(i) + Environment.NewLine;
+                    mmInfo.Text += "Codec: " + stream.Codec + Environment.NewLine;
+                    mmInfo.Text += "Duration: " + stream.Duration.ToString() + Environment.NewLine;
+                    mmInfo.Text += "Width: " + stream.Width + Environment.NewLine;
+                    mmInfo.Text += "Height: " + stream.Height + Environment.NewLine;
+                    mmInfo.Text += "FOURCC: " + stream.FourCC + Environment.NewLine;
+                    mmInfo.Text += "Aspect Ratio: " + $"{stream.AspectRatio.Item1}:{stream.AspectRatio.Item2}" + Environment.NewLine;
+                    mmInfo.Text += "Frame rate: " + stream.FrameRate + Environment.NewLine;
+                    mmInfo.Text += "Bitrate: " + stream.Bitrate + Environment.NewLine;
+                    mmInfo.Text += "Frames count: " + stream.FramesCount + Environment.NewLine;
                 }
 
-                for (int i = 0; i < MediaInfo.Audio_Streams_Count(); i++)
+                for (int i = 0; i < MediaInfo.AudioStreams.Count; i++)
                 {
+                    var stream = MediaInfo.AudioStreams[i];
+
                     mmInfo.Text += string.Empty + Environment.NewLine;
                     mmInfo.Text += "Audio #" + Convert.ToString(i + 1) + Environment.NewLine;
-                    mmInfo.Text += "Codec: " + MediaInfo.Audio_Codec(i) + Environment.NewLine;
-                    mmInfo.Text += "Codec info: " + MediaInfo.Audio_CodecInfo(i) + Environment.NewLine;
-                    mmInfo.Text += "Duration: " + MediaInfo.Audio_Duration(i) + Environment.NewLine;
-                    mmInfo.Text += "Bitrate: " + MediaInfo.Audio_Bitrate(i) + Environment.NewLine;
-                    mmInfo.Text += "Channels: " + MediaInfo.Audio_Channels(i) + Environment.NewLine;
-                    mmInfo.Text += "Sample rate: " + MediaInfo.Audio_SampleRate(i) + Environment.NewLine;
-                    mmInfo.Text += "BPS: " + MediaInfo.Audio_BPS(i) + Environment.NewLine;
+                    mmInfo.Text += "Codec: " + stream.Codec + Environment.NewLine;
+                    mmInfo.Text += "Codec info: " + stream.CodecInfo + Environment.NewLine;
+                    mmInfo.Text += "Duration: " + stream.Duration.ToString() + Environment.NewLine;
+                    mmInfo.Text += "Bitrate: " + stream.Bitrate + Environment.NewLine;
+                    mmInfo.Text += "Channels: " + stream.Channels + Environment.NewLine;
+                    mmInfo.Text += "Sample rate: " + stream.SampleRate + Environment.NewLine;
+                    mmInfo.Text += "BPS: " + stream.BPS + Environment.NewLine;
+                    mmInfo.Text += "Language: " + stream.Language + Environment.NewLine;
                 }
 
-                for (int i = 0; i < MediaInfo.Text_Streams_Count(); i++)
+                for (int i = 0; i < MediaInfo.Subtitles.Count; i++)
                 {
+                    var stream = MediaInfo.Subtitles[i];
+
                     mmInfo.Text += string.Empty + Environment.NewLine;
                     mmInfo.Text += "Text #" + Convert.ToString(i + 1) + Environment.NewLine;
-                    mmInfo.Text += "Codec: " + MediaInfo.Text_Codec(i) + Environment.NewLine;
-                    mmInfo.Text += "Name: " + MediaInfo.Text_Name(i) + Environment.NewLine;
-                    mmInfo.Text += "Language: " + MediaInfo.Text_Language(i) + Environment.NewLine;
+                    mmInfo.Text += "Codec: " + stream.Codec + Environment.NewLine;
+                    mmInfo.Text += "Name: " + stream.Name + Environment.NewLine;
+                    mmInfo.Text += "Language: " + stream.Language + Environment.NewLine;
                 }
 
                 // timeline
-                if (MediaInfo.Video_Streams_Count() > 0)
+                if (MediaInfo.VideoStreams.Count > 0)
                 {
-                    tbTimeline.Maximum = (int)(MediaInfo.Video_DurationMSec(0) / 1000);
+                    tbTimeline.Maximum = (int)(MediaInfo.VideoStreams[0].Duration.TotalSeconds);
                 }
-                else if (MediaInfo.Audio_Streams_Count() > 0)
+                else if (MediaInfo.AudioStreams.Count > 0)
                 {
-                    tbTimeline.Maximum = (int)(MediaInfo.Audio_DurationMSec(0) / 1000);
+                    tbTimeline.Maximum = (int)(MediaInfo.AudioStreams[0].Duration.TotalSeconds);
                 }
 
                 // set audio streams tab
-                int count = MediaInfo.Audio_Streams_Count();
+                int count = MediaInfo.AudioStreams.Count;
                 bool one_output = MediaInfo.Audio_Streams_AllInOne;
 
                 cbAudioStream1.IsEnabled = true;
@@ -685,7 +691,7 @@ namespace Main_Demo
 
                 DVDInfo.ReadDVDInfo();
 
-                for (int i = 0; i < DVDInfo.DVD_Disc_NumOfTitles; i++)
+                for (int i = 0; i < DVDInfo.Info.Disc_NumOfTitles; i++)
                 {
                     lbDVDTitles.Items.Add("Title " + Convert.ToString(i + 1));
                     cbDVDControlTitle.Items.Add("Title " + Convert.ToString(i + 1));
@@ -1371,9 +1377,9 @@ namespace Main_Demo
                 cbDVDControlSubtitles.Items.Clear();
                 cbDVDControlChapter.Items.Clear();
 
-                DVDInfo.DVD_Fill_Title_Info(cbDVDControlTitle.SelectedIndex);
+                var title = DVDInfo.Info.Titles[cbDVDControlTitle.SelectedIndex];
 
-                for (int i = 0; i < DVDInfo.DVD_Title_NumberOfChapters; i++)
+                for (int i = 0; i < title.NumberOfChapters; i++)
                 {
                     cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1));
                 }
@@ -1383,14 +1389,14 @@ namespace Main_Demo
                     cbDVDControlChapter.SelectedIndex = 0;
                 }
 
-                for (int i = 0; i < DVDInfo.DVD_Title_MainAttributes_NumberOfAudioStreams; i++)
+                for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
                 {
-                    DVDInfo.DVD_Fill_Title_Audio_Info(cbDVDControlTitle.SelectedIndex, i);
-                    string s = DVDInfo.DVD_Title_MainAttributes_AudioAttributes_AudioFormat;
+                    var audioStream = title.MainAttributes.AudioAttributes[i];
+                    string s = audioStream.AudioFormat.ToString();
 
                     s = s + " - ";
-                    s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_NumberOfChannels + "ch" + " - ";
-                    s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_LanguageS;
+                    s = s + audioStream.NumberOfChannels + "ch" + " - ";
+                    s = s + audioStream.Language;
 
                     cbDVDControlAudio.Items.Add(s);
                 }
@@ -1401,10 +1407,9 @@ namespace Main_Demo
                 }
 
                 cbDVDControlSubtitles.Items.Add("Disabled");
-                for (int i = 0; i < DVDInfo.DVD_Title_MainAttributes_NumberOfSubpictureStreams; i++)
+                for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
                 {
-                    DVDInfo.DVD_Fill_Title_Subpicture_Info(cbDVDControlTitle.SelectedIndex, i);
-                    cbDVDControlSubtitles.Items.Add(DVDInfo.DVD_Title_MainAttributes_SubpictureAttributes_LanguageS);
+                    cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes[i].Language);
                 }
 
                 cbDVDControlSubtitles.SelectedIndex = 0;

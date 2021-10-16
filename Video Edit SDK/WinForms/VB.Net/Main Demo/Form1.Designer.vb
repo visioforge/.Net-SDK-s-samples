@@ -6003,7 +6003,7 @@ Partial Class Form1
         Me.VideoEdit1.Debug_DisableMessageDialogs = False
         Me.VideoEdit1.Debug_Mode = False
         Me.VideoEdit1.Debug_Telemetry = False
-        Me.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.[Auto]
+        Me.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.[Auto]
         Me.VideoEdit1.Decklink_Output = Nothing
         Me.VideoEdit1.Dynamic_Reconnection = False
         Me.VideoEdit1.Location = New System.Drawing.Point(331, 310)

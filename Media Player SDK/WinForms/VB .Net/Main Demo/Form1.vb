@@ -320,56 +320,43 @@ Public Class Form1
             cbDVDControlSubtitles.Items.Clear()
             cbDVDControlChapter.Items.Clear()
 
-            DVDInfo.DVD_Fill_Title_Info(cbDVDControlTitle.SelectedIndex)
-
-            For i As Integer = 0 To DVDInfo.DVD_Title_NumberOfChapters - 1
-
+            Dim title = DVDInfo.Info.Titles(cbDVDControlTitle.SelectedIndex)
+            For i As Integer = 0 To title.NumberOfChapters - 1
                 cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1))
-
             Next
 
             If (cbDVDControlChapter.Items.Count > 0) Then
-
                 cbDVDControlChapter.SelectedIndex = 0
-
             End If
 
-            For i As Integer = 0 To DVDInfo.DVD_Title_MainAttributes_NumberOfAudioStreams - 1
+            For i As Integer = 0 To title.MainAttributes.NumberOfAudioStreams - 1
+                Dim audioStream = title.MainAttributes.AudioAttributes(i)
 
-                DVDInfo.DVD_Fill_Title_Audio_Info(cbDVDControlTitle.SelectedIndex, i)
-                Dim s As String = DVDInfo.DVD_Title_MainAttributes_AudioAttributes_AudioFormat
+                Dim s As String = audioStream.AudioFormat
 
                 s = s + " - "
-                s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_NumberOfChannels.ToString + "ch" + " - "
-                s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_LanguageS
+                s = s + audioStream.NumberOfChannels.ToString + "ch" + " - "
+                s = s + audioStream.Language
 
                 cbDVDControlAudio.Items.Add(s)
-
             Next
 
             If (cbDVDControlAudio.Items.Count > 0) Then
-
                 cbDVDControlAudio.SelectedIndex = 0
-
             End If
 
             cbDVDControlSubtitles.Items.Add("Disabled")
-            For i As Integer = 0 To DVDInfo.DVD_Title_MainAttributes_NumberOfSubpictureStreams - 1
-
-                DVDInfo.DVD_Fill_Title_Subpicture_Info(cbDVDControlTitle.SelectedIndex, i)
-                cbDVDControlSubtitles.Items.Add(DVDInfo.DVD_Title_MainAttributes_SubpictureAttributes_LanguageS)
-
+            For i As Integer = 0 To title.MainAttributes.NumberOfSubpictureStreams - 1
+                cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes(i).Language)
             Next
 
             cbDVDControlSubtitles.SelectedIndex = 0
 
             'if null we just enumerate titles and chapters
             If (IsDBNull(sender)) Then
-
                 'play title
                 MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex)
                 tbTimeline.Maximum = MediaPlayer1.DVD_Title_GetDuration().TotalSeconds
-
             End If
         End If
 
@@ -378,60 +365,46 @@ Public Class Form1
     Private Sub lbDVDTitles_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles lbDVDTitles.Click
 
         If (lbDVDTitles.SelectedIndex <> -1) Then
-
             cbDVDAudio.Items.Clear()
             cbDVDSubtitles.Items.Clear()
 
-            DVDInfo.DVD_Fill_Title_Info(lbDVDTitles.SelectedIndex)
+            Dim title = DVDInfo.Info.Titles(cbDVDControlTitle.SelectedIndex)
 
-            Dim s As String = DVDInfo.DVD_Title_MainAttributes_VideoAttributes_Compression + " "
-            s = s + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_SourceResolutionX + "x" + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_SourceResolutionY + " "
-            s = s + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_AspectX + ":" + DVDInfo.DVD_Title_MainAttributes_VideoAttributes_AspectY + " "
+            Dim s As String = title.MainAttributes.VideoAttributes.Compression + " "
+            s = s + title.MainAttributes.VideoAttributes.SourceResolutionX + "x" + title.MainAttributes.VideoAttributes.SourceResolutionY + " "
+            s = s + title.MainAttributes.VideoAttributes.AspectRatio.Item1 + ":" + title.MainAttributes.VideoAttributes.AspectRatio.Item2 + " "
 
             edDVDVideo.Text = s
 
-            For i As Integer = 0 To DVDInfo.DVD_Title_MainAttributes_NumberOfAudioStreams - 1
-
-                DVDInfo.DVD_Fill_Title_Audio_Info(lbDVDTitles.SelectedIndex, i)
-                s = DVDInfo.DVD_Title_MainAttributes_AudioAttributes_AudioFormat
+            For i As Integer = 0 To title.MainAttributes.NumberOfAudioStreams - 1
+                Dim audioStream = title.MainAttributes.AudioAttributes(i)
+                s = audioStream.AudioFormat
 
                 s = s + " - "
-                s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_NumberOfChannels + "ch" + " - "
-                s = s + DVDInfo.DVD_Title_MainAttributes_AudioAttributes_LanguageS
+                s = s + audioStream.NumberOfChannels + "ch" + " - "
+                s = s + audioStream.Language
 
                 cbDVDAudio.Items.Add(s)
-
             Next
 
             If (cbDVDAudio.Items.Count > 0) Then
-
                 cbDVDAudio.SelectedIndex = 0
-
             End If
 
-            For i As Integer = 0 To DVDInfo.DVD_Title_MainAttributes_NumberOfSubpictureStreams - 1
-
-                DVDInfo.DVD_Fill_Title_Subpicture_Info(lbDVDTitles.SelectedIndex, i)
-                cbDVDSubtitles.Items.Add(DVDInfo.DVD_Title_MainAttributes_SubpictureAttributes_LanguageS)
-
+            For i As Integer = 0 To title.MainAttributes.NumberOfSubpictureStreams - 1
+                cbDVDSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes(i).Language)
             Next
 
             If (cbDVDSubtitles.Items.Count > 0) Then
-
                 cbDVDSubtitles.SelectedIndex = 0
-
             End If
-
         End If
-
     End Sub
 
     Private Sub tbBalance1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance1.Scroll
 
         If (cbAudioStream1.Checked Or MediaPlayer1.Audio_Streams_AllInOne()) Then
-
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value)
-
         End If
 
     End Sub
@@ -439,9 +412,7 @@ Public Class Form1
     Private Sub tbBalance2_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance2.Scroll
 
         If (cbAudioStream2.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Balance_Set(1, tbBalance2.Value)
-
         End If
 
     End Sub
@@ -449,9 +420,7 @@ Public Class Form1
     Private Sub tbBalance3_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance3.Scroll
 
         If (cbAudioStream3.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Balance_Set(2, tbBalance3.Value)
-
         End If
 
     End Sub
@@ -459,9 +428,7 @@ Public Class Form1
     Private Sub tbBalance4_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance4.Scroll
 
         If (cbAudioStream4.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Balance_Set(3, tbBalance4.Value)
-
         End If
 
     End Sub
@@ -469,13 +436,9 @@ Public Class Form1
     Private Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
 
         If (MediaPlayer1.Source_Mode <> VFMediaPlayerSource.DVD_DS) Then
-
             MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0)
-
         Else
-
             MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, False)
-
         End If
 
     End Sub
@@ -483,9 +446,7 @@ Public Class Form1
     Private Sub tbVolume1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume1.Scroll
 
         If (cbAudioStream1.Checked Or MediaPlayer1.Audio_Streams_AllInOne()) Then
-
             MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value)
-
         End If
 
     End Sub
@@ -493,9 +454,7 @@ Public Class Form1
     Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
 
         If (Convert.ToInt32(timer1.Tag) = 0) Then
-
             MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value))
-
         End If
 
     End Sub
@@ -503,9 +462,7 @@ Public Class Form1
     Private Sub tbVolume2_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume2.Scroll
 
         If (cbAudioStream2.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Volume_Set(1, tbVolume2.Value)
-
         End If
 
     End Sub
@@ -513,9 +470,7 @@ Public Class Form1
     Private Sub tbVolume3_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume3.Scroll
 
         If (cbAudioStream3.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Volume_Set(2, tbVolume3.Value)
-
         End If
 
     End Sub
@@ -523,9 +478,7 @@ Public Class Form1
     Private Sub tbVolume4_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume4.Scroll
 
         If (cbAudioStream4.Checked) Then
-
             MediaPlayer1.Audio_OutputDevice_Volume_Set(3, tbVolume4.Value)
-
         End If
 
     End Sub
@@ -535,10 +488,8 @@ Public Class Form1
     Private Sub LoadToMemory()
 
         If Not IsNothing(memoryFileStream) Then
-
             memoryFileStream.Dispose()
             memoryFileStream = Nothing
-
         End If
 
         memoryFileStream = New FileStream(edFilenameOrURL.Text, FileMode.Open)
@@ -620,49 +571,56 @@ Public Class Form1
 
             MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.Checked)
 
-            For i As Integer = 0 To MediaInfo.Video_Streams_Count() - 1
+            For i As Integer = 0 To MediaInfo.VideoStreams.Count - 1
+                Dim videoStream = MediaInfo.VideoStreams(i)
+
                 mmInfo.Text += String.Empty + Environment.NewLine
                 mmInfo.Text += "Video #" + Convert.ToString(i + 1) + Environment.NewLine
-                mmInfo.Text += "Codec: " + MediaInfo.Video_Codec(i) + Environment.NewLine
-                mmInfo.Text += "Duration: " + MediaInfo.Video_Duration(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Width: " + MediaInfo.Video_Width(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Height: " + MediaInfo.Video_Height(i).ToString() + Environment.NewLine
-                mmInfo.Text += "FOURCC: " + MediaInfo.Video_FourCC(i) + Environment.NewLine
-                mmInfo.Text += "Aspect Ratio: " + MediaInfo.Video_AspectRatioStr(i) + Environment.NewLine
-                mmInfo.Text += "Frame rate: " + MediaInfo.Video_FrameRate(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Bitrate: " + MediaInfo.Video_Bitrate(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Frames count: " + MediaInfo.Video_FramesCount(i).ToString() + Environment.NewLine
+                mmInfo.Text += "Codec: " + videoStream.Codec + Environment.NewLine
+                mmInfo.Text += "Duration: " + videoStream.Duration.ToString() + Environment.NewLine
+                mmInfo.Text += "Width: " + videoStream.Width + Environment.NewLine
+                mmInfo.Text += "Height: " + videoStream.Height + Environment.NewLine
+                mmInfo.Text += "FOURCC: " + videoStream.FourCC + Environment.NewLine
+                mmInfo.Text += "Aspect Ratio: " + $"{videoStream.AspectRatio.Item1}:{videoStream.AspectRatio.Item2}" + Environment.NewLine
+                mmInfo.Text += "Frame rate: " + videoStream.FrameRate + Environment.NewLine
+                mmInfo.Text += "Bitrate: " + videoStream.Bitrate + Environment.NewLine
+                mmInfo.Text += "Frames count: " + videoStream.FramesCount + Environment.NewLine
             Next
 
-            For i As Integer = 0 To MediaInfo.Audio_Streams_Count() - 1
+            For i As Integer = 0 To MediaInfo.AudioStreams.Count - 1
+                Dim audioStream = MediaInfo.AudioStreams(i)
+
                 mmInfo.Text += String.Empty + Environment.NewLine
                 mmInfo.Text += "Audio #" + Convert.ToString(i + 1) + Environment.NewLine
-                mmInfo.Text += "Codec: " + MediaInfo.Audio_Codec(i) + Environment.NewLine
-                mmInfo.Text += "Codec info: " + MediaInfo.Audio_CodecInfo(i) + Environment.NewLine
-                mmInfo.Text += "Duration: " + MediaInfo.Audio_Duration(i) + Environment.NewLine
-                mmInfo.Text += "Bitrate: " + MediaInfo.Audio_Bitrate(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Channels: " + MediaInfo.Audio_Channels(i).ToString() + Environment.NewLine
-                mmInfo.Text += "Sample rate: " + MediaInfo.Audio_SampleRate(i).ToString() + Environment.NewLine
-                mmInfo.Text += "BPS: " + MediaInfo.Audio_BPS(i).ToString() + Environment.NewLine
+                mmInfo.Text += "Codec: " + audioStream.Codec + Environment.NewLine
+                mmInfo.Text += "Codec info: " + audioStream.CodecInfo + Environment.NewLine
+                mmInfo.Text += "Duration: " + audioStream.Duration.ToString() + Environment.NewLine
+                mmInfo.Text += "Bitrate: " + audioStream.Bitrate + Environment.NewLine
+                mmInfo.Text += "Channels: " + audioStream.Channels + Environment.NewLine
+                mmInfo.Text += "Sample rate: " + audioStream.SampleRate + Environment.NewLine
+                mmInfo.Text += "BPS: " + audioStream.BPS + Environment.NewLine
+                mmInfo.Text += "Language: " + audioStream.Language + Environment.NewLine
             Next
 
-            For i As Integer = 0 To MediaInfo.Text_Streams_Count() - 1
+            For i As Integer = 0 To MediaInfo.Subtitles.Count - 1
+                Dim textStream = MediaInfo.Subtitles(i)
+
                 mmInfo.Text += String.Empty + Environment.NewLine
                 mmInfo.Text += "Text #" + Convert.ToString(i + 1) + Environment.NewLine
-                mmInfo.Text += "Codec: " + MediaInfo.Text_Codec(i) + Environment.NewLine
-                mmInfo.Text += "Name: " + MediaInfo.Text_Name(i) + Environment.NewLine
-                mmInfo.Text += "Language: " + MediaInfo.Text_Language(i) + Environment.NewLine
+                mmInfo.Text += "Codec: " + textStream.Codec + Environment.NewLine
+                mmInfo.Text += "Name: " + textStream.Name + Environment.NewLine
+                mmInfo.Text += "Language: " + textStream.Language + Environment.NewLine
             Next
 
             ' timeline
-            If (MediaInfo.Video_Streams_Count() > 0) Then
-                tbTimeline.Maximum = (MediaInfo.Video_DurationMSec(0) / 1000)
-            ElseIf (MediaInfo.Audio_Streams_Count() > 0) Then
-                tbTimeline.Maximum = (MediaInfo.Audio_DurationMSec(0) / 1000)
+            If (MediaInfo.VideoStreams.Count > 0) Then
+                tbTimeline.Maximum = MediaInfo.VideoStreams(0).Duration.TotalSeconds
+            ElseIf (MediaInfo.AudioStreams.Count > 0) Then
+                tbTimeline.Maximum = MediaInfo.AudioStreams(0).Duration.TotalSeconds
             End If
 
             ' set audio streams tab
-            Dim count As Integer = MediaInfo.Audio_Streams_Count()
+            Dim count As Integer = MediaInfo.AudioStreams.Count
             Dim oneOutput As Boolean = MediaInfo.Audio_Streams_AllInOne
 
             cbAudioStream1.Enabled = True
@@ -770,7 +728,7 @@ Public Class Form1
 
             DVDInfo.ReadDVDInfo()
 
-            For i As Integer = 0 To DVDInfo.DVD_Disc_NumOfTitles - 1
+            For i As Integer = 0 To DVDInfo.Info.Disc_NumOfTitles - 1
 
                 lbDVDTitles.Items.Add("Title " + Convert.ToString(i + 1))
                 cbDVDControlTitle.Items.Add("Title " + Convert.ToString(i + 1))

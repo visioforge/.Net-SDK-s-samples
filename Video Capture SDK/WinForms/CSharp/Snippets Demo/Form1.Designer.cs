@@ -711,8 +711,8 @@ namespace Video_Capture_Snippets_Demo
             this.VideoCapture1.Debug_DisableMessageDialogs = false;
             this.VideoCapture1.Debug_Mode = false;
             this.VideoCapture1.Debug_Telemetry = false;
-            this.VideoCapture1.Decklink_Input = VisioForge.Types.DecklinkInput.Auto;
-            this.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
+            this.VideoCapture1.Decklink_Input = VisioForge.Types.Decklink.DecklinkInput.Auto;
+            this.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
             this.VideoCapture1.Decklink_Input_IREUSA = false;
             this.VideoCapture1.Decklink_Input_SMPTE = false;
             this.VideoCapture1.Decklink_Output = null;

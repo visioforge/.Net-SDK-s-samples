@@ -200,7 +200,7 @@
             this.VideoEdit1.Debug_DisableMessageDialogs = false;
             this.VideoEdit1.Debug_Mode = false;
             this.VideoEdit1.Debug_Telemetry = false;
-            this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.DecklinkCaptureTimecodeSource.Auto;
+            this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
             this.VideoEdit1.Decklink_Output = null;
             this.VideoEdit1.Dynamic_Reconnection = false;
             this.VideoEdit1.Location = new System.Drawing.Point(348, 34);

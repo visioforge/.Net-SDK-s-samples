@@ -25,6 +25,7 @@ namespace Main_Demo
     using VisioForge.Controls.UI.WPF;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.Decklink;
     using VisioForge.Types.FFMPEGEXE;
     using VisioForge.Types.GPUVideoEffects;
     using VisioForge.Types.OutputFormat;

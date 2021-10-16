@@ -16,6 +16,7 @@ Imports VisioForge.Types.GPUVideoEffects
 Imports VisioForge.Shared
 Imports VisioForge.Tools
 Imports VisioForge.Types.FFMPEGEXE
+Imports VisioForge.Types.Decklink
 
 Public Class Form1
 
@@ -928,9 +929,9 @@ Public Class Form1
                     End If
 
                     If (rbEncryptionModeAES128.Checked) Then
-                        mp4Output.Encryption_Mode = VFEncryptionMode.v8_AES128
+                        mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128
                     Else
-                        mp4Output.Encryption_Mode = VFEncryptionMode.v9_AES256
+                        mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256
                     End If
                 End If
 
