@@ -9,7 +9,8 @@
 * API breaking change: DirectShow_Filters_Show_Dialog, DirectShow_Filters_Has_Dialog, Audio_Codec_HasDialog, Audio_Codec_ShowDialog, Video_Codec_HasDialog, Video_Codec_ShowDialog, Filter_Supported_LAV, Filter_Exists_MatroskaMuxer, Filter_Exists_OGGMuxer, Filter_Exists_VorbisEncoder, Filter_Supported_EVR, Filter_Supported_VMR9 and Filter_Supported_NVENC has been moved to VisioForge.Tools.FilterHelpers class.
 * VFAudioStreamInfo/VFVideoStreamInfo duration type changed to Timespan.
 * Decklink types from VisioForge.Types assembly moved to VisioForge.Types.Decklink namespace.
-* Telemetry update.
+* Telemetry updated.
+* Custom redist loader updated.
 
 14.4
 * Windows 11 support

@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>Simple Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.4.12.0</AssemblyVersion>
-    <FileVersion>14.4.12.0</FileVersion>
+    <AssemblyVersion>14.4.15.0</AssemblyVersion>
+    <FileVersion>14.4.15.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -41,13 +41,13 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.4.12" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="14.4.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="14.4.15" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
