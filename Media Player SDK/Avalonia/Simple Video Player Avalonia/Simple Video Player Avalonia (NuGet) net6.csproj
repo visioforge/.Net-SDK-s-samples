@@ -4,6 +4,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <!--<Nullable>enable</Nullable>-->
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
