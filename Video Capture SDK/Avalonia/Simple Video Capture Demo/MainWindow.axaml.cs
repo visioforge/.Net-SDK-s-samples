@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using VisioForge.Controls.UI;
 using VisioForge.Controls.UI.Avalonia;
 using VisioForge.Controls.UI.Dialogs;
@@ -44,13 +45,6 @@ namespace Simple_Video_Capture_Demo_Avalonia
         private WMVSettingsDialog wmvSettingsDialog;
 
         private GIFSettingsDialog gifSettingsDialog;
-
-        private readonly Microsoft.Win32.SaveFileDialog screenshotSaveDialog = new Microsoft.Win32.SaveFileDialog()
-        {
-            FileName = "image.jpg",
-            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
-        };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
@@ -432,23 +426,22 @@ namespace Simple_Video_Capture_Demo_Avalonia
             VideoCapture1 = null;
         }
 
-        private static bool SaveFileDialog(string defaultExt, string filter, out string filename)
+        private async Task<string> SaveVideoFileDialogAsync()
         {
-            filename = string.Empty;
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialFileName = "video.mp4";
+            sfd.DefaultExtension = ".mp4";
 
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+            var exts = new string[] { "mp4", "avi", "wmv", "wma", "mp3", "ogg" };
+            foreach (var extension in exts)
             {
-                DefaultExt = defaultExt,
-                Filter = filter
-            };
-
-            if (dlg.ShowDialog() == true)
-            {
-                filename = dlg.FileName;
-                return true;
+                var filter = new FileDialogFilter();
+                filter.Name = extension.ToUpperInvariant();
+                filter.Extensions.Add(extension);
+                sfd.Filters.Add(filter);
             }
 
-            return false;
+            return await sfd.ShowAsync(this);
         }
 
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
@@ -456,10 +449,10 @@ namespace Simple_Video_Capture_Demo_Avalonia
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.SelectedItem.ToString());
         }
 
-        private void btSelectOutput_Click(object sender, RoutedEventArgs e)
+        private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
-            string filename;
-            if (SaveFileDialog(".jpg; *.bmp; *.gif;", "Images|*.jpg; *.bmp; *.gif;", out filename))
+            string filename = await SaveVideoFileDialogAsync();
+            if (!string.IsNullOrEmpty(filename))
             {
                 edOutput.Text = filename;
             }
@@ -890,9 +883,24 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
         private async void btSaveSnapshot_Click(object sender, RoutedEventArgs e)
         {
-            if (screenshotSaveDialog.ShowDialog() == true)
+            var sfd = new SaveFileDialog();
+            sfd.InitialFileName = "image.jpg";
+            sfd.DefaultExtension = ".jpg";
+            sfd.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+            var exts = new string[] { "jpg", "bmp", "png", "gif", "tiff" };
+            foreach (var extension in exts)
             {
-                var filename = screenshotSaveDialog.FileName;
+                var filter = new FileDialogFilter();
+                filter.Name = extension.ToUpperInvariant();
+                filter.Extensions.Add(extension);
+                sfd.Filters.Add(filter);
+            }
+
+            var filename = await sfd.ShowAsync(this);
+
+            if (!string.IsNullOrEmpty(filename))
+            {
                 var ext = Path.GetExtension(filename).ToLowerInvariant();
                 switch (ext)
                 {
