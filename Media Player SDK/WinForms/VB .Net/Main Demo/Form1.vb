@@ -12,6 +12,8 @@ Imports System.Drawing.Imaging
 Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoProcessing
 Imports VisioForge.Types.AudioEffects
+Imports VisioForge.Types
+Imports VisioForge.Tools
 
 Public Class Form1
     Private ReadOnly audioChannelMapperItems As List(Of AudioChannelMapperItem) = New List(Of AudioChannelMapperItem)
