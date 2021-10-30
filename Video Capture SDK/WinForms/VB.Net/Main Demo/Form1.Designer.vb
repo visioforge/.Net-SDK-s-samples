@@ -11,6 +11,75 @@ Partial Class Form1
             onvifControl.Dispose()
         End If
 
+        mpegTSSettingsDialog?.Dispose()
+        mpegTSSettingsDialog = Nothing
+
+        mp4SettingsDialog?.Dispose()
+        mp4SettingsDialog = Nothing
+
+        mp4HWSettingsDialog?.Dispose()
+        mp4HWSettingsDialog = Nothing
+
+        mp3SettingsDialog?.Dispose()
+        mp3SettingsDialog = Nothing
+
+        movSettingsDialog?.Dispose()
+        movSettingsDialog = Nothing
+
+        m4aSettingsDialog?.Dispose()
+        m4aSettingsDialog = Nothing
+
+        gifSettingsDialog?.Dispose()
+        gifSettingsDialog = Nothing
+
+        flacSettingsDialog?.Dispose()
+        flacSettingsDialog = Nothing
+
+        ffmpegSettingsDialog?.Dispose()
+        ffmpegSettingsDialog = Nothing
+
+        ffmpegEXESettingsDialog?.Dispose()
+        ffmpegEXESettingsDialog = Nothing
+
+        dvSettingsDialog?.Dispose()
+        dvSettingsDialog = Nothing
+
+        aviSettingsDialog?.Dispose()
+        aviSettingsDialog = Nothing
+
+        customFormatSettingsDialog?.Dispose()
+        customFormatSettingsDialog = Nothing
+
+        wmvSettingsDialog?.Dispose()
+        wmvSettingsDialog = Nothing
+
+        webmSettingsDialog?.Dispose()
+        webmSettingsDialog = Nothing
+
+        speexSettingsDialog?.Dispose()
+        speexSettingsDialog = Nothing
+
+        pcmSettingsDialog?.Dispose()
+        pcmSettingsDialog = Nothing
+
+        oggVorbisSettingsDialog?.Dispose()
+        oggVorbisSettingsDialog = Nothing
+
+        windowCaptureForm?.Dispose()
+        windowCaptureForm = Nothing
+
+        screenshotSaveDialog?.Dispose()
+        screenshotSaveDialog = Nothing
+
+        screenshotSaveDialog?.Dispose()
+        screenshotSaveDialog = Nothing
+
+        tmRecording?.Dispose()
+        tmRecording = Nothing
+
+        VideoCapture1?.Dispose()
+        VideoCapture1 = Nothing
+
         Try
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -191,7 +260,6 @@ Partial Class Form1
         Me.tabControl19 = New System.Windows.Forms.TabControl()
         Me.tabPage96 = New System.Windows.Forms.TabPage()
         Me.cbUseBestAudioInputFormat = New System.Windows.Forms.CheckBox()
-        Me.cbUseAudioInputFromVideoCaptureDevice = New System.Windows.Forms.CheckBox()
         Me.btAudioInputDeviceSettings = New System.Windows.Forms.Button()
         Me.cbAudioInputLine = New System.Windows.Forms.ComboBox()
         Me.cbAudioInputFormat = New System.Windows.Forms.ComboBox()
@@ -376,12 +444,12 @@ Partial Class Form1
         Me.TabPage104 = New System.Windows.Forms.TabPage()
         Me.btBDAChannelScanningStart = New System.Windows.Forms.Button()
         Me.lvBDAChannels = New System.Windows.Forms.ListView()
-        Me.columnHeader1 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader2 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader3 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader4 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader5 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
-        Me.columnHeader6 = CType(New System.Windows.Forms.ColumnHeader(),System.Windows.Forms.ColumnHeader)
+        Me.columnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.columnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.label342 = New System.Windows.Forms.Label()
         Me.tabPage49 = New System.Windows.Forms.TabPage()
         Me.tabControl20 = New System.Windows.Forms.TabControl()
@@ -1131,9 +1199,9 @@ Partial Class Form1
         Me.Label492 = New System.Windows.Forms.Label()
         Me.cbTagEnabled = New System.Windows.Forms.CheckBox()
         Me.openFileDialog3 = New System.Windows.Forms.OpenFileDialog()
-        Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
+        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -2969,7 +3037,6 @@ Partial Class Form1
         'tabPage96
         '
         Me.tabPage96.Controls.Add(Me.cbUseBestAudioInputFormat)
-        Me.tabPage96.Controls.Add(Me.cbUseAudioInputFromVideoCaptureDevice)
         Me.tabPage96.Controls.Add(Me.btAudioInputDeviceSettings)
         Me.tabPage96.Controls.Add(Me.cbAudioInputLine)
         Me.tabPage96.Controls.Add(Me.cbAudioInputFormat)
@@ -2995,16 +3062,6 @@ Partial Class Form1
         Me.cbUseBestAudioInputFormat.TabIndex = 93
         Me.cbUseBestAudioInputFormat.Text = "Use best"
         Me.cbUseBestAudioInputFormat.UseVisualStyleBackColor = True
-        '
-        'cbUseAudioInputFromVideoCaptureDevice
-        '
-        Me.cbUseAudioInputFromVideoCaptureDevice.AutoSize = True
-        Me.cbUseAudioInputFromVideoCaptureDevice.Location = New System.Drawing.Point(246, 15)
-        Me.cbUseAudioInputFromVideoCaptureDevice.Name = "cbUseAudioInputFromVideoCaptureDevice"
-        Me.cbUseAudioInputFromVideoCaptureDevice.Size = New System.Drawing.Size(187, 17)
-        Me.cbUseAudioInputFromVideoCaptureDevice.TabIndex = 92
-        Me.cbUseAudioInputFromVideoCaptureDevice.Text = "Use audio input from video source"
-        Me.cbUseAudioInputFromVideoCaptureDevice.UseVisualStyleBackColor = True
         '
         'btAudioInputDeviceSettings
         '
@@ -12652,128 +12709,6 @@ Partial Class Form1
         Me.openFileDialog3.FileName = "openFileDialog3"
         Me.openFileDialog3.Filter = "VirtualDub filters|*.vdf"
         '
-        'VideoCapture1
-        '
-        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = False
-        Me.VideoCapture1.Audio_CaptureDevice = ""
-        Me.VideoCapture1.Audio_CaptureDevice_CustomLatency = 0
-        Me.VideoCapture1.Audio_CaptureDevice_Format = ""
-        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = True
-        Me.VideoCapture1.Audio_CaptureDevice_Line = ""
-        Me.VideoCapture1.Audio_CaptureDevice_MasterDevice = Nothing
-        Me.VideoCapture1.Audio_CaptureDevice_MasterDevice_Format = Nothing
-        Me.VideoCapture1.Audio_CaptureDevice_Path = Nothing
-        Me.VideoCapture1.Audio_CaptureSourceFilter = Nothing
-        Me.VideoCapture1.Audio_Channel_Mapper = Nothing
-        Me.VideoCapture1.Audio_Decoder = Nothing
-        Me.VideoCapture1.Audio_Effects_Enabled = False
-        Me.VideoCapture1.Audio_Enhancer_Enabled = False
-        Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
-        Me.VideoCapture1.Audio_PCM_Converter = Nothing
-        Me.VideoCapture1.Audio_PlayAudio = True
-        Me.VideoCapture1.Audio_RecordAudio = True
-        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Pro_Volume = 100
-        Me.VideoCapture1.BackColor = System.Drawing.Color.Black
-        Me.VideoCapture1.Barcode_Reader_Enabled = False
-        Me.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
-        Me.VideoCapture1.BDA_Source = Nothing
-        Me.VideoCapture1.ChromaKey = Nothing
-        Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Auto = True
-        Me.VideoCapture1.CustomRedist_DisableDialog = False
-        Me.VideoCapture1.CustomRedist_Path = Nothing
-        Me.VideoCapture1.Debug_Dir = ""
-        Me.VideoCapture1.Debug_DisableMessageDialogs = False
-        Me.VideoCapture1.Debug_Mode = False
-        Me.VideoCapture1.Debug_Telemetry = False
-        Me.VideoCapture1.Decklink_Input = VisioForge.Types.Decklink.DecklinkInput.[Auto]
-        Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.[Auto]
-        Me.VideoCapture1.Decklink_Input_IREUSA = False
-        Me.VideoCapture1.Decklink_Input_SMPTE = False
-        Me.VideoCapture1.Decklink_Output = Nothing
-        Me.VideoCapture1.Decklink_Source = Nothing
-        Me.VideoCapture1.DirectCapture_Muxer = Nothing
-        Me.VideoCapture1.DV_Decoder_Video_Resolution = VisioForge.Types.VFDVVideoResolution.Full
-        Me.VideoCapture1.Face_Tracking = Nothing
-        Me.VideoCapture1.IP_Camera_Source = Nothing
-        Me.VideoCapture1.Location = New System.Drawing.Point(334, 324)
-        Me.VideoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.VideoCapture
-        Me.VideoCapture1.Motion_Detection = Nothing
-        Me.VideoCapture1.Motion_DetectionEx = Nothing
-        Me.VideoCapture1.MPEG_Audio_Decoder = ""
-        Me.VideoCapture1.MPEG_Demuxer = Nothing
-        Me.VideoCapture1.MPEG_Video_Decoder = ""
-        Me.VideoCapture1.MultiScreen_Enabled = False
-        Me.VideoCapture1.Name = "VideoCapture1"
-        Me.VideoCapture1.Network_Streaming_Audio_Enabled = False
-        Me.VideoCapture1.Network_Streaming_Enabled = False
-        Me.VideoCapture1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV
-        Me.VideoCapture1.Network_Streaming_Network_Port = 100
-        Me.VideoCapture1.Network_Streaming_Output = Nothing
-        Me.VideoCapture1.Network_Streaming_URL = ""
-        Me.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10
-        Me.VideoCapture1.OSD_Enabled = False
-        Me.VideoCapture1.Output_Filename = ""
-        Me.VideoCapture1.Output_Format = Nothing
-        Me.VideoCapture1.PIP_AddSampleGrabbers = False
-        Me.VideoCapture1.PIP_ChromaKeySettings = Nothing
-        Me.VideoCapture1.PIP_Mode = VisioForge.Types.VFPIPMode.Custom
-        Me.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.VFPIPResizeQuality.RQ_NN
-        Me.VideoCapture1.Push_Source = Nothing
-        Me.VideoCapture1.Screen_Capture_Source = Nothing
-        Me.VideoCapture1.SeparateCapture_AutostartCapture = False
-        Me.VideoCapture1.SeparateCapture_Enabled = False
-        Me.VideoCapture1.SeparateCapture_Filename_Mask = "output %yyyy-%MM-%dd %hh-%mm-%ss.%ext"
-        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0, Long)
-        Me.VideoCapture1.SeparateCapture_GMFMode = True
-        Me.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal
-        Me.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00")
-        Me.VideoCapture1.Size = New System.Drawing.Size(465, 323)
-        Me.VideoCapture1.Start_DelayEnabled = False
-        Me.VideoCapture1.StatusOverlay = Nothing
-        Me.VideoCapture1.TabIndex = 94
-        Me.VideoCapture1.Tags = Nothing
-        Me.VideoCapture1.Timeshift_Settings = Nothing
-        Me.VideoCapture1.TVTuner_Channel = 0
-        Me.VideoCapture1.TVTuner_Country = ""
-        Me.VideoCapture1.TVTuner_FM_Tuning_StartFrequency = 80000000
-        Me.VideoCapture1.TVTuner_FM_Tuning_Step = 160000000
-        Me.VideoCapture1.TVTuner_FM_Tuning_StopFrequency = 0
-        Me.VideoCapture1.TVTuner_Frequency = 0
-        Me.VideoCapture1.TVTuner_InputType = ""
-        Me.VideoCapture1.TVTuner_Mode = VisioForge.Types.VFTVTunerMode.[Default]
-        Me.VideoCapture1.TVTuner_Name = ""
-        Me.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D
-        Me.VideoCapture1.Video_CaptureDevice = ""
-        Me.VideoCapture1.Video_CaptureDevice_CustomPinName = Nothing
-        Me.VideoCapture1.Video_CaptureDevice_Format = ""
-        Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = True
-        Me.VideoCapture1.Video_CaptureDevice_FrameRate = 0R
-        Me.VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_Name = ""
-        Me.VideoCapture1.Video_CaptureDevice_IsAudioSource = False
-        Me.VideoCapture1.Video_CaptureDevice_Path = Nothing
-        Me.VideoCapture1.Video_CaptureDevice_UseClosedCaptions = False
-        Me.VideoCapture1.Video_CaptureDevice_UseRAWSampleGrabber = False
-        Me.VideoCapture1.Video_Crop = Nothing
-        Me.VideoCapture1.Video_Decoder = Nothing
-        Me.VideoCapture1.Video_Effects_AllowMultipleStreams = False
-        Me.VideoCapture1.Video_Effects_Enabled = False
-        Me.VideoCapture1.Video_Effects_GPU_Enabled = False
-        Me.VideoCapture1.Video_Effects_MergeImageLogos = False
-        Me.VideoCapture1.Video_Effects_MergeTextLogos = False
-        Me.VideoCapture1.Video_Resize = Nothing
-        Me.VideoCapture1.Video_ResizeOrCrop_Enabled = False
-        Me.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone
-        Me.VideoCapture1.Video_Sample_Grabber_Enabled = False
-        Me.VideoCapture1.Video_Sample_Grabber_UseForVideoEffects = False
-        Me.VideoCapture1.Video_Still_Frames_Grabber_Enabled = False
-        Me.VideoCapture1.Virtual_Camera_Output_Enabled = False
-        Me.VideoCapture1.Virtual_Camera_Output_LicenseKey = Nothing
-        Me.VideoCapture1.VLC_Path = Nothing
-        '
         'btSaveScreenshot
         '
         Me.btSaveScreenshot.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -12794,12 +12729,21 @@ Partial Class Form1
         Me.lbTimestamp.TabIndex = 96
         Me.lbTimestamp.Text = "Recording time: 00:00:00"
         '
+        'VideoView1
+        '
+        Me.VideoView1.BackColor = System.Drawing.Color.Black
+        Me.VideoView1.Location = New System.Drawing.Point(334, 324)
+        Me.VideoView1.Name = "VideoView1"
+        Me.VideoView1.Size = New System.Drawing.Size(462, 323)
+        Me.VideoView1.StatusOverlay = Nothing
+        Me.VideoView1.TabIndex = 97
+        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(808, 713)
-        Me.Controls.Add(Me.VideoCapture1)
+        Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.linkLabel1)
         Me.Controls.Add(Me.tabControl12)
         Me.Controls.Add(Me.tabControl10)
@@ -13485,7 +13429,6 @@ End Sub
     Private WithEvents rbDenoiseCAST As System.Windows.Forms.RadioButton
     Private WithEvents rbDenoiseMosquito As System.Windows.Forms.RadioButton
     Private WithEvents cbDenoise As System.Windows.Forms.CheckBox
-    Friend WithEvents VideoCapture1 As VisioForge.Controls.UI.WinForms.VideoCapture
     Friend WithEvents TabPage23 As System.Windows.Forms.TabPage
     Private WithEvents cbScreenCaptureDisplayIndex As System.Windows.Forms.ComboBox
     Private WithEvents label93 As System.Windows.Forms.Label
@@ -13683,7 +13626,6 @@ End Sub
     Private WithEvents tabControl19 As System.Windows.Forms.TabControl
     Private WithEvents tabPage96 As System.Windows.Forms.TabPage
     Private WithEvents cbUseBestAudioInputFormat As System.Windows.Forms.CheckBox
-    Private WithEvents cbUseAudioInputFromVideoCaptureDevice As System.Windows.Forms.CheckBox
     Private WithEvents btAudioInputDeviceSettings As System.Windows.Forms.Button
     Private WithEvents cbAudioInputLine As System.Windows.Forms.ComboBox
     Private WithEvents cbAudioInputFormat As System.Windows.Forms.ComboBox
@@ -14243,4 +14185,5 @@ End Sub
     Private WithEvents llXiphX86 As LinkLabel
     Private WithEvents label68 As Label
     Private WithEvents label67 As Label
+    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
 End Class

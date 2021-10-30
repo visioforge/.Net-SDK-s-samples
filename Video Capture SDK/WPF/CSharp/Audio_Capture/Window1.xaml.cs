@@ -17,9 +17,12 @@ namespace Audio_Capture
     using System.Windows.Input;
 
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.AudioEffects;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
-    public partial class Window1
+    public partial class Window1 : IDisposable
     {
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
 
@@ -37,7 +40,9 @@ namespace Audio_Capture
 
         private WMVSettingsDialog wmvSettingsDialog;
 
-        private readonly VideoCaptureCore VideoCapture1;
+        private bool disposedValue;
+
+        private VideoCaptureCore VideoCapture1;
 
         public Window1()
         {
@@ -57,7 +62,7 @@ namespace Audio_Capture
             Title += $" (SDK v{VideoCapture1.SDK_Version})";
             cbMode.SelectedIndex = 0;
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices())
+            foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -73,7 +78,7 @@ namespace Audio_Capture
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (var line in deviceItem.Lines)
@@ -84,14 +89,12 @@ namespace Audio_Capture
                     if (cbAudioInputLine.Items.Count > 0)
                     {
                         cbAudioInputLine.SelectedIndex = 0;
-                        cbAudioInputLine_SelectedIndexChanged(null, null);
-                        cbAudioInputFormat_SelectedIndexChanged(null, null);
                     }
                 }
             }
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -130,10 +133,9 @@ namespace Audio_Capture
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
-                VideoCapture1.Audio_CaptureDevice = e.AddedItems[0].ToString();
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -161,8 +163,6 @@ namespace Audio_Capture
                     }
                 }
 
-                cbAudioInputFormat_SelectedIndexChanged(null, null);
-
                 cbAudioInputLine.Items.Clear();
 
                 foreach (var line in deviceItem.Lines)
@@ -175,8 +175,6 @@ namespace Audio_Capture
                     cbAudioInputLine.SelectedIndex = 0;
                 }
 
-                cbAudioInputLine_SelectedIndexChanged(null, null);
-
                 btAudioInputDeviceSettings.IsEnabled = deviceItem.DialogDefault;
             }
         }
@@ -184,26 +182,6 @@ namespace Audio_Capture
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
-        }
-
-        private void cbAudioInputFormat_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e == null || e.AddedItems.Count == 0)
-            {
-                return;
-            }
-
-            VideoCapture1.Audio_CaptureDevice_Format = e.AddedItems[0].ToString();
-        }
-
-        private void cbAudioInputLine_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e == null || e.AddedItems.Count == 0)
-            {
-                return;
-            }
-
-            VideoCapture1.Audio_CaptureDevice_Line = e.AddedItems[0].ToString();
         }
 
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, RoutedEventArgs e)
@@ -351,7 +329,7 @@ namespace Audio_Capture
         }
 
 
-        private void SetWMAOutput(ref VFWMAOutput wmaOutput)
+        private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -362,17 +340,17 @@ namespace Audio_Capture
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
-        private void SetACMOutput(ref VFACMOutput acmOutput)
+        private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs().ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
-        private void SetMP3Output(ref VFMP3Output mp3Output)
+        private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
             {
@@ -382,7 +360,7 @@ namespace Audio_Capture
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetFLACOutput(ref VFFLACOutput flacOutput)
+        private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
             {
@@ -392,7 +370,7 @@ namespace Audio_Capture
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
+        private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
             {
@@ -402,7 +380,7 @@ namespace Audio_Capture
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
-        public void SetM4AOutput(ref VFM4AOutput m4aOutput)
+        public void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
             {
@@ -412,7 +390,7 @@ namespace Audio_Capture
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
-        private void SetOGGOutput(ref VFOGGVorbisOutput oggVorbisOutput)
+        private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
             {
@@ -429,22 +407,24 @@ namespace Audio_Capture
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-            VideoCapture1.Audio_CaptureDevice_Format_UseBest = false;
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
+
+            VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
+            VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
+            VideoCapture1.Audio_CaptureDevice.Format_UseBest = false;
+            VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text;
+
             VideoCapture1.Audio_PlayAudio = cbPlayAudio.IsChecked == true;
-            VideoCapture1.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             if (cbMode.SelectedIndex == 0)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.AudioPreview;
+                VideoCapture1.Mode = VideoCaptureMode.AudioPreview;
                 VideoCapture1.Audio_RecordAudio = true;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.AudioCapture;
+                VideoCapture1.Mode = VideoCaptureMode.AudioCapture;
                 VideoCapture1.Audio_RecordAudio = true;
                 VideoCapture1.Output_Filename = edOutput.Text;
 
@@ -452,7 +432,7 @@ namespace Audio_Capture
                 {
                     case 0:
                         {
-                            var acmOutput = new VFACMOutput();
+                            var acmOutput = new ACMOutput();
                             SetACMOutput(ref acmOutput);
                             VideoCapture1.Output_Format = acmOutput;
 
@@ -460,7 +440,7 @@ namespace Audio_Capture
                         }
                     case 1:
                         {
-                            var mp3Output = new VFMP3Output();
+                            var mp3Output = new MP3Output();
                             SetMP3Output(ref mp3Output);
                             VideoCapture1.Output_Format = mp3Output;
 
@@ -468,7 +448,7 @@ namespace Audio_Capture
                         }
                     case 2:
                         {
-                            var wmaOutput = new VFWMAOutput();
+                            var wmaOutput = new WMAOutput();
                             SetWMAOutput(ref wmaOutput);
                             VideoCapture1.Output_Format = wmaOutput;
 
@@ -476,7 +456,7 @@ namespace Audio_Capture
                         }
                     case 3:
                         {
-                            var oggVorbisOutput = new VFOGGVorbisOutput();
+                            var oggVorbisOutput = new OGGVorbisOutput();
                             SetOGGOutput(ref oggVorbisOutput);
                             VideoCapture1.Output_Format = oggVorbisOutput;
 
@@ -484,7 +464,7 @@ namespace Audio_Capture
                         }
                     case 4:
                         {
-                            var flacOutput = new VFFLACOutput();
+                            var flacOutput = new FLACOutput();
                             SetFLACOutput(ref flacOutput);
                             VideoCapture1.Output_Format = flacOutput;
 
@@ -492,7 +472,7 @@ namespace Audio_Capture
                         }
                     case 5:
                         {
-                            var speexOutput = new VFSpeexOutput();
+                            var speexOutput = new SpeexOutput();
                             SetSpeexOutput(ref speexOutput);
                             VideoCapture1.Output_Format = speexOutput;
 
@@ -500,7 +480,7 @@ namespace Audio_Capture
                         }
                     case 6:
                         {
-                            var m4aOutput = new VFM4AOutput();
+                            var m4aOutput = new M4AOutput();
                             SetM4AOutput(ref m4aOutput);
                             VideoCapture1.Output_Format = m4aOutput;
 
@@ -513,10 +493,10 @@ namespace Audio_Capture
             VideoCapture1.Audio_Effects_Clear(-1);
             VideoCapture1.Audio_Effects_Enabled = true;
 
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
 
             await VideoCapture1.StartAsync();
         }
@@ -555,7 +535,7 @@ namespace Audio_Capture
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs().ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
@@ -698,6 +678,58 @@ namespace Audio_Capture
             {
                 lbTimestamp.Text = "Recording time: 00:00:00";
             }));
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    mp3SettingsDialog?.Dispose();
+                    mp3SettingsDialog = null;
+
+                    m4aSettingsDialog?.Dispose();
+                    m4aSettingsDialog = null;
+
+                    flacSettingsDialog?.Dispose();
+                    flacSettingsDialog = null;
+
+                    wmvSettingsDialog?.Dispose();
+                    wmvSettingsDialog = null;
+
+                    speexSettingsDialog?.Dispose();
+                    speexSettingsDialog = null;
+
+                    pcmSettingsDialog?.Dispose();
+                    pcmSettingsDialog = null;
+
+                    oggVorbisSettingsDialog?.Dispose();
+                    oggVorbisSettingsDialog = null;
+
+                    VideoCapture1?.Dispose();
+                    VideoCapture1 = null;
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~Window1()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

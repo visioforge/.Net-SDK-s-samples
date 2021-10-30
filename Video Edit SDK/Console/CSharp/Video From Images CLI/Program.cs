@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Events;
+using VisioForge.Types.Output;
+using VisioForge.Types.VideoEdit;
 
 namespace Video_From_Images_CLI
 {
@@ -69,22 +68,22 @@ namespace Video_From_Images_CLI
 
             foreach (string img in files)
             {
-                ve.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime), VFVideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
+                ve.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime), VideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
                 insertTime += 2000;
             }
 
             ve.Video_Effects_Clear();
-            ve.Mode = VisioForge.Types.VFVideoEditMode.Convert;
+            ve.Mode = VideoEditMode.Convert;
 
             ve.Video_Resize = true;
             ve.Video_Resize_Width = videoWidth;
             ve.Video_Resize_Height = videoHeight; 
 
             ve.Video_FrameRate = 25;
-            ve.Video_Renderer = new VideoRendererSettingsBase
+            ve.Video_Renderer = new VideoRendererSettings
             {
-                VideoRendererInternal = VFVideoRendererInternal.None,
-                StretchMode = VFVideoRendererStretchMode.Letterbox
+                VideoRenderer = VideoRendererMode.None,
+                StretchMode = VideoRendererStretchMode.Letterbox
             };
 
             if (string.IsNullOrEmpty(options.Format))
@@ -95,17 +94,17 @@ namespace Video_From_Images_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    ve.Output_Format = new VFMP4Output();
+                    ve.Output_Format = new MP4Output();
                     break;
                 case "avi":
-                    ve.Output_Format = new VFAVIOutput();
+                    ve.Output_Format = new AVIOutput();
                     break;
                 case "wmv":
-                    ve.Output_Format = new VFWMVOutput();
+                    ve.Output_Format = new WMVOutput();
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    ve.Output_Format = new VFMP4Output();
+                    ve.Output_Format = new MP4Output();
                     break;
             }
 

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove=".gitignore" />
+    <None Remove="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Avalonia" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.0.1" />
+  </ItemGroup>
+</Project>

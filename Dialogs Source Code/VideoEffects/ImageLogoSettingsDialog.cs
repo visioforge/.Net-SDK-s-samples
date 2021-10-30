@@ -23,11 +23,11 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
     /// <summary>
     /// Image logo settings dialog.
     /// </summary>
-    public partial class ImageLogoSettingsDialog : Form, IVFVideoEffectsSettingsDialog
+    public partial class ImageLogoSettingsDialog : Form, IVideoEffectsSettingsDialog
     {
         private const string NAME = "ImageLogo";
 
-        private IVFVideoEffectImageLogo _intf;
+        private IVideoEffectImageLogo _intf;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageLogoSettingsDialog"/> class.
@@ -61,9 +61,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <param name="effect">
         /// Effect.
         /// </param>
-        public void Attach(IVFVideoEffect effect)
+        public void Attach(IVideoEffect effect)
         {
-            _intf = effect as IVFVideoEffectImageLogo;
+            _intf = effect as IVideoEffectImageLogo;
             if (_intf == null)
             {
                 return;
@@ -84,9 +84,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <param name="effect">
         /// Effect.
         /// </param>
-        public void Fill(IVFVideoEffect effect)
+        public void Fill(IVideoEffect effect)
         {
-            _intf = effect as IVFVideoEffectImageLogo;
+            _intf = effect as IVideoEffectImageLogo;
             EffectUpdate(_intf);
         }
 
@@ -195,7 +195,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
-        private void EffectUpdate(IVFVideoEffectImageLogo imageLogo)
+        private void EffectUpdate(IVideoEffectImageLogo imageLogo)
         {
             if (imageLogo == null)
             {

@@ -6,16 +6,35 @@
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
         private readonly List<PIPInfo> _pipInfos;
 
         private int _lastZOrder = 8;
+
+        private MediaPlayerCore MediaPlayer1;
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
 
         public Form1()
         {
@@ -89,8 +108,8 @@
             MediaPlayer1.Video_Renderer.Zoom_ShiftX = 0;
             MediaPlayer1.Video_Renderer.Zoom_ShiftY = 0;
 
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
             await MediaPlayer1.PlayAsync();
 
@@ -199,6 +218,10 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+
             cbSourceMode.SelectedIndex = 0;
         }
 
@@ -207,7 +230,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
             lbStreamTransparency.Text = tbStreamTransparency.Value.ToString();
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate(StopDelegateMethod), null);
         }
@@ -250,10 +273,12 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
 
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.Status != VFMediaPlayerStatus.Free)
+            if (MediaPlayer1.State != PlaybackState.Free)
             {
                 await MediaPlayer1.StopAsync();
             }
+
+            DestroyEngine();
         }
     }
 }

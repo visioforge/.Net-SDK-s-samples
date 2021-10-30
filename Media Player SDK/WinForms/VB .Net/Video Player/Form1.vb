@@ -5,29 +5,36 @@ Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
 Imports VisioForge.Tools
-
+Imports VisioForge.Controls.MediaPlayer
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.MediaPlayer
 Public Class Form1
+    Private WithEvents MediaPlayer1 As MediaPlayerCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        MediaPlayer1 = New MediaPlayerCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        MediaPlayer1.Dispose()
+        MediaPlayer1 = Nothing
+    End Sub
 
     Private Sub btSelectFile_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSelectFile.Click
-
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
             edFilename.Text = openFileDialog1.FileName
         End If
-
     End Sub
 
     Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
-
         If (Convert.ToInt32(timer1.Tag) = 0) Then
             MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value))
         End If
-
     End Sub
 
     Private Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
-
         MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0)
-
     End Sub
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
@@ -41,23 +48,23 @@ Public Class Form1
 
         Select Case (cbSourceMode.SelectedIndex)
             Case 0
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV
             Case 1
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS
             Case 2
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.FFMPEG
             Case 3
-                MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_VLC
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_VLC
         End Select
 
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
         If (FilterHelpers.Filter_Supported_EVR()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
         ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         Else
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         End If
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
@@ -136,6 +143,8 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
+        CreateEngine()
+
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         cbSourceMode.SelectedIndex = 0
@@ -149,7 +158,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnError(sender As System.Object, e As VisioForge.Types.ErrorsEventArgs) Handles MediaPlayer1.OnError
+    Private Sub MediaPlayer1_OnError(sender As System.Object, e As ErrorsEventArgs) Handles MediaPlayer1.OnError
 
         Invoke(Sub()
                    mmError.Text = mmError.Text + e.Message + Environment.NewLine
@@ -173,6 +182,8 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
+
+        DestroyEngine()
     End Sub
 
     Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked

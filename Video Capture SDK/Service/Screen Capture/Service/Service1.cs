@@ -86,8 +86,9 @@ namespace ScreenCaptureService
                 eventLog1.Source = "VisioForgeScreenCaptureService";
                 eventLog1.WriteEntry(log);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
             }
         }
     }

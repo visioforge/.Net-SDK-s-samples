@@ -16,7 +16,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Output;
 
     /// <summary>
     /// AVI settings dialog.
@@ -94,13 +94,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbAudioCodecs.Text;
 
-            if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.VFWCompConfig))
             {
-                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -110,7 +110,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="aviOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFAVIOutput aviOutput)
+        public void LoadSettings(AVIOutput aviOutput)
         {
             cbAudioCodecs.Text = aviOutput.ACM.Name;
             cbChannels.Text = aviOutput.ACM.Channels.ToString();
@@ -130,7 +130,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="aviOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFAVIOutput aviOutput)
+        public void SaveSettings(ref AVIOutput aviOutput)
         {
             aviOutput.ACM.Name = cbAudioCodecs.Text;
             aviOutput.ACM.Channels = Convert.ToInt32(cbChannels.Text);
@@ -153,7 +153,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mkvOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFMKVv1Output mkvOutput)
+        public void LoadSettings(MKVv1Output mkvOutput)
         {
             cbAudioCodecs.Text = mkvOutput.ACM.Name;
             cbChannels.Text = mkvOutput.ACM.Channels.ToString();
@@ -173,7 +173,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mkvOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMKVv1Output mkvOutput)
+        public void SaveSettings(ref MKVv1Output mkvOutput)
         {
             mkvOutput.ACM.Name = cbAudioCodecs.Text;
             mkvOutput.ACM.Channels = Convert.ToInt32(cbChannels.Text);
@@ -194,15 +194,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         {
             string name = cbVideoCodecs.Text;
 
-            if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Video_Codec_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
             else
             {
-                if (FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
+                if (FilterHelpers.Video_Codec_HasDialog(name, PropertyPageType.VFWCompConfig))
                 {
-                    FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.Video_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
                 }
             }
         }
@@ -219,8 +219,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbAudioCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbAudioCodecs.Text;
-            btAudioSettings.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default) ||
-                                      FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
+            btAudioSettings.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.Default) ||
+                                      FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.VFWCompConfig);
         }
 
         /// <summary>
@@ -235,8 +235,8 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbVideoCodecs_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbVideoCodecs.Text;
-            btVideoSettings.Enabled = FilterHelpers.Video_Codec_HasDialog(name, VFPropertyPage.Default) ||
-                                      FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
+            btVideoSettings.Enabled = FilterHelpers.Video_Codec_HasDialog(name, PropertyPageType.Default) ||
+                                      FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.VFWCompConfig);
         }
 
         private void cbUncVideo_CheckedChanged(object sender, EventArgs e)

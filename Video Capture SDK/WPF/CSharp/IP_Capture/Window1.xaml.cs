@@ -7,6 +7,7 @@ namespace IP_Capture
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing.Imaging;
     using System.IO;
     using System.Timers;
     using System.Windows;
@@ -19,16 +20,19 @@ namespace IP_Capture
     using VisioForge.Controls.UI.Dialogs;
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Shared.IPCameraDB;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
     using VisioForge.Types.VideoEffects;
 
     using Application = System.Windows.Forms.Application;
 
-    public partial class Window1
+    public partial class Window1 : IDisposable
     {
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
@@ -44,14 +48,14 @@ namespace IP_Capture
 
         private GIFSettingsDialog gifSettingsDialog;
 
-        private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog
+        private SaveFileDialog screenshotSaveDialog = new SaveFileDialog
                                                                    {
                                                                        FileName = "image.jpg",
                                                                        Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
                                                                        InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
                                                                    };
 
-        private readonly Timer tmRecording = new Timer(1000);
+        private Timer tmRecording = new Timer(1000);
 
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -64,12 +68,34 @@ namespace IP_Capture
         private float onvifPtzY;
 
         private float onvifPtzZoom;
-        
+
+        private VideoCaptureCore VideoCapture1;
+        private bool disposedValue;
+
         public Window1()
         {
             InitializeComponent();
 
             Application.EnableVisualStyles();
+        }
+
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+            VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+            VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
         }
 
         private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -80,6 +106,8 @@ namespace IP_Capture
 
         private void Form1_Load(object sender, RoutedEventArgs e)
         {            
+            CreateEngine();
+
             Title += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
@@ -102,19 +130,19 @@ namespace IP_Capture
                 switch (ext)
                 {
                     case ".bmp":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.BMP, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
                         break;
                     case ".jpg":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.JPEG, 85);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
                         break;
                     case ".gif":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.GIF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
                         break;
                     case ".png":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.PNG, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
                         break;
                     case ".tiff":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.TIFF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
                         break;
                 }
             }
@@ -128,7 +156,7 @@ namespace IP_Capture
             }
         }
         
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -138,7 +166,7 @@ namespace IP_Capture
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -149,7 +177,7 @@ namespace IP_Capture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -159,7 +187,7 @@ namespace IP_Capture
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -169,7 +197,7 @@ namespace IP_Capture
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -179,7 +207,7 @@ namespace IP_Capture
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -189,7 +217,7 @@ namespace IP_Capture
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -202,7 +230,7 @@ namespace IP_Capture
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -228,7 +256,7 @@ namespace IP_Capture
             VideoCapture1.Audio_RecordAudio = cbIPAudioCapture.IsChecked == true;
             VideoCapture1.Audio_PlayAudio = cbIPAudioCapture.IsChecked == true;
 
-            VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRendererWPF.WPF;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
 
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
@@ -240,40 +268,40 @@ namespace IP_Capture
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_VLC;
                     break;
                 case 1:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG;
                     break;
                 case 2:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
                     break;
                 case 3:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
                     lavGPU = true;
                     break;
                 case 4:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.MMS_WMV;
                     break;
                 case 5:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.HTTP_MJPEG_LowLatency;
                     cbIPAudioCapture.IsChecked = false;
                     VideoCapture1.Audio_RecordAudio = false;
                     VideoCapture1.Audio_PlayAudio = false;
                     break;
                 case 6:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
                 case 7:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                     VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;
                 case 8:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI;
                     break;
                 case 9:
-                    VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
+                    VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI_Legacy;
                     break;
             }
 
@@ -285,10 +313,10 @@ namespace IP_Capture
             VideoCapture1.IP_Camera_Source.ForcedFramerate = Convert.ToDouble(edIPForcedFramerate.Text);
             VideoCapture1.IP_Camera_Source.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text[0];
 
-            if (VideoCapture1.IP_Camera_Source.Type == VFIPSource.Auto_LAV)
+            if (VideoCapture1.IP_Camera_Source.Type == IPSourceEngine.Auto_LAV)
             {
                 VideoCapture1.IP_Camera_Source.LAV_GPU_Use = lavGPU;
-                VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack;
+                VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = LAVGPUDecoder.DXVA2CopyBack;
             }
 
             if (cbIPCameraONVIF.IsChecked == true)
@@ -308,11 +336,11 @@ namespace IP_Capture
 
             if (rbPreview.IsChecked == true)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.IPPreview;
+                VideoCapture1.Mode = VideoCaptureMode.IPPreview;
             }
             else if (rbCapture.IsChecked == true)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.IPCapture;
+                VideoCapture1.Mode = VideoCaptureMode.IPCapture;
 
                 VideoCapture1.Output_Filename = edOutput.Text;
 
@@ -320,7 +348,7 @@ namespace IP_Capture
                 {
                     case 0:
                         {
-                            var aviOutput = new VFAVIOutput();
+                            var aviOutput = new AVIOutput();
                             SetAVIOutput(ref aviOutput);
                             VideoCapture1.Output_Format = aviOutput;
 
@@ -328,7 +356,7 @@ namespace IP_Capture
                         }
                     case 1:
                         {
-                            var wmvOutput = new VFWMVOutput();
+                            var wmvOutput = new WMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             VideoCapture1.Output_Format = wmvOutput;
 
@@ -336,7 +364,7 @@ namespace IP_Capture
                         }
                     case 2:
                         {
-                            var mp4Output = new VFMP4Output();
+                            var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -344,7 +372,7 @@ namespace IP_Capture
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4HWOutput();
+                            var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -352,7 +380,7 @@ namespace IP_Capture
                         }
                     case 4:
                         {
-                            var gifOutput = new VFAnimatedGIFOutput();
+                            var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
 
                             VideoCapture1.Output_Format = gifOutput;
@@ -361,7 +389,7 @@ namespace IP_Capture
                         }
                     case 5:
                         {
-                            var tsOutput = new VFMPEGTSOutput();
+                            var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
                             VideoCapture1.Output_Format = tsOutput;
 
@@ -369,7 +397,7 @@ namespace IP_Capture
                         }
                     case 6:
                         {
-                            var movOutput = new VFMOVOutput();
+                            var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
                             VideoCapture1.Output_Format = movOutput;
 
@@ -383,7 +411,7 @@ namespace IP_Capture
             lbLogos.Items.Clear();
             ConfigureVideoEffects();
 
-            VideoCapture1.StatusOverlay = new TextStatusOverlay();
+            VideoView1.StatusOverlay = new TextStatusOverlay();
 
             await VideoCapture1.StartAsync();
 
@@ -822,16 +850,16 @@ namespace IP_Capture
 
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectGrayscale grayscale;
+            IVideoEffectGrayscale grayscale;
             var effect = VideoCapture1.Video_Effects_Get("Grayscale");
             if (effect == null)
             {
-                grayscale = new VFVideoEffectGrayscale(cbGreyscale.IsChecked == true);
+                grayscale = new VideoEffectGrayscale(cbGreyscale.IsChecked == true);
                 VideoCapture1.Video_Effects_Add(grayscale);
             }
             else
             {
-                grayscale = effect as IVFVideoEffectGrayscale;
+                grayscale = effect as IVideoEffectGrayscale;
                 if (grayscale != null)
                 {
                     grayscale.Enabled = cbGreyscale.IsChecked == true;
@@ -841,16 +869,16 @@ namespace IP_Capture
 
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectContrast contrast;
+            IVideoEffectContrast contrast;
             var effect = VideoCapture1.Video_Effects_Get("Contrast");
             if (effect == null)
             {
-                contrast = new VFVideoEffectContrast(true, (int)tbContrast.Value);
+                contrast = new VideoEffectContrast(true, (int)tbContrast.Value);
                 VideoCapture1.Video_Effects_Add(contrast);
             }
             else
             {
-                contrast = effect as IVFVideoEffectContrast;
+                contrast = effect as IVideoEffectContrast;
                 if (contrast != null)
                 {
                     contrast.Value = (int)tbContrast.Value;
@@ -860,16 +888,16 @@ namespace IP_Capture
 
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectDarkness darkness;
+            IVideoEffectDarkness darkness;
             var effect = VideoCapture1.Video_Effects_Get("Darkness");
             if (effect == null)
             {
-                darkness = new VFVideoEffectDarkness(true, (int)tbDarkness.Value);
+                darkness = new VideoEffectDarkness(true, (int)tbDarkness.Value);
                 VideoCapture1.Video_Effects_Add(darkness);
             }
             else
             {
-                darkness = effect as IVFVideoEffectDarkness;
+                darkness = effect as IVideoEffectDarkness;
                 if (darkness != null)
                 {
                     darkness.Value = (int)tbDarkness.Value;
@@ -879,16 +907,16 @@ namespace IP_Capture
 
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectLightness lightness;
+            IVideoEffectLightness lightness;
             var effect = VideoCapture1.Video_Effects_Get("Lightness");
             if (effect == null)
             {
-                lightness = new VFVideoEffectLightness(true, (int)tbLightness.Value);
+                lightness = new VideoEffectLightness(true, (int)tbLightness.Value);
                 VideoCapture1.Video_Effects_Add(lightness);
             }
             else
             {
-                lightness = effect as IVFVideoEffectLightness;
+                lightness = effect as IVideoEffectLightness;
                 if (lightness != null)
                 {
                     lightness.Value = (int)tbLightness.Value;
@@ -900,16 +928,16 @@ namespace IP_Capture
         {
             if (VideoCapture1 != null)
             {
-                IVFVideoEffectSaturation saturation;
+                IVideoEffectSaturation saturation;
                 var effect = VideoCapture1.Video_Effects_Get("Saturation");
                 if (effect == null)
                 {
-                    saturation = new VFVideoEffectSaturation((int)tbSaturation.Value);
+                    saturation = new VideoEffectSaturation((int)tbSaturation.Value);
                     VideoCapture1.Video_Effects_Add(saturation);
                 }
                 else
                 {
-                    saturation = effect as IVFVideoEffectSaturation;
+                    saturation = effect as IVideoEffectSaturation;
                     if (saturation != null)
                     {
                         saturation.Value = (int)tbSaturation.Value;
@@ -920,16 +948,16 @@ namespace IP_Capture
 
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectInvert invert;
+            IVideoEffectInvert invert;
             var effect = VideoCapture1.Video_Effects_Get("Invert");
             if (effect == null)
             {
-                invert = new VFVideoEffectInvert(cbInvert.IsChecked == true);
+                invert = new VideoEffectInvert(cbInvert.IsChecked == true);
                 VideoCapture1.Video_Effects_Add(invert);
             }
             else
             {
-                invert = effect as IVFVideoEffectInvert;
+                invert = effect as IVideoEffectInvert;
                 if (invert != null)
                 {
                     invert.Enabled = cbInvert.IsChecked == true;
@@ -939,16 +967,16 @@ namespace IP_Capture
 
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectFlipDown flip;
+            IVideoEffectFlipDown flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipDown");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipHorizontal(cbFlipX.IsChecked == true);
+                flip = new VideoEffectFlipHorizontal(cbFlipX.IsChecked == true);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipDown;
+                flip = effect as IVideoEffectFlipDown;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipX.IsChecked == true;
@@ -958,16 +986,16 @@ namespace IP_Capture
 
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectFlipRight flip;
+            IVideoEffectFlipRight flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipRight");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipVertical(cbFlipY.IsChecked == true);
+                flip = new VideoEffectFlipVertical(cbFlipY.IsChecked == true);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipRight;
+                flip = effect as IVideoEffectFlipRight;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipY.IsChecked == true;
@@ -980,7 +1008,7 @@ namespace IP_Capture
             var dlg = new ImageLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectImageLogo(true, name);
+            var effect = new VideoEffectImageLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -995,7 +1023,7 @@ namespace IP_Capture
             var dlg = new TextLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectTextLogo(true, name);
+            var effect = new VideoEffectTextLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -1010,7 +1038,7 @@ namespace IP_Capture
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
-                if (effect.GetEffectType() == VFVideoEffectType.TextLogo)
+                if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();
 
@@ -1019,7 +1047,7 @@ namespace IP_Capture
                     dlg.ShowDialog(this);
                     dlg.Dispose();
                 }
-                else if (effect.GetEffectType() == VFVideoEffectType.ImageLogo)
+                else if (effect.GetEffectType() == VideoEffectType.ImageLogo)
                 {
                     var dlg = new ImageLogoSettingsDialog();
 
@@ -1093,6 +1121,72 @@ namespace IP_Capture
 
                                        MessageBox.Show("Network source stopped or disconnected!");
                                    }));
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DestroyEngine();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    if (onvifControl != null)
+                    {
+                        onvifControl.Dispose();
+                        onvifControl = null;
+                    }
+
+                    mpegTSSettingsDialog?.Dispose();
+                    mpegTSSettingsDialog = null;
+
+                    mp4SettingsDialog?.Dispose();
+                    mp4SettingsDialog = null;
+
+                    mp4HWSettingsDialog?.Dispose();
+                    mp4HWSettingsDialog = null;
+
+                    movSettingsDialog?.Dispose();
+                    movSettingsDialog = null;
+
+                    gifSettingsDialog?.Dispose();
+                    gifSettingsDialog = null;
+
+                    aviSettingsDialog?.Dispose();
+                    aviSettingsDialog = null;
+
+                    wmvSettingsDialog?.Dispose();
+                    wmvSettingsDialog = null;
+
+                    tmRecording?.Dispose();
+                    tmRecording = null;
+
+                    VideoCapture1?.Dispose();
+                    VideoCapture1 = null;
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~Window1()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

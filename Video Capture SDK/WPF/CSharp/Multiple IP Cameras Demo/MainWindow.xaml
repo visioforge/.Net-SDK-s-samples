@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:Multiple_IP_Cameras_Demo_WPF"
         xmlns:wpf="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"
         mc:Ignorable="d"
-        Title="Video Capture SDK .Net - Multiple IP Cameras Demo" Height="727" Width="1209" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico">
+        Title="Video Capture SDK .Net - Multiple IP Cameras Demo" Height="727" Width="1209" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="280" Margin="10,10,0,0" VerticalAlignment="Top" Width="380" Background="Black">
-            <wpf:VideoCapture x:Name="videoCapture1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+            <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
 
         <Grid HorizontalAlignment="Left" Height="280" Margin="410,10,0,0" VerticalAlignment="Top" Width="380" Background="Black">
-            <wpf:VideoCapture x:Name="videoCapture2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+            <wpf:VideoView x:Name="VideoView2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
         <TextBox x:Name="edURL1" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
         <Button x:Name="btStart1" Content="Start" HorizontalAlignment="Left" Margin="10,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStart1_Click" />
@@ -23,11 +23,11 @@
         <Button x:Name="btStop2" Content="Stop" HorizontalAlignment="Left" Margin="491,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStop2_Click" />
 
         <Grid HorizontalAlignment="Left" Height="280" Margin="10,350,0,0" VerticalAlignment="Top" Width="380" Background="Black">
-            <wpf:VideoCapture x:Name="videoCapture3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+            <wpf:VideoView x:Name="VideoView3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
 
         <Grid HorizontalAlignment="Left" Height="280" Margin="410,350,0,0" VerticalAlignment="Top" Width="380" Background="Black">
-            <wpf:VideoCapture x:Name="videoCapture4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" OnError="videoCapture_OnError"/>
+            <wpf:VideoView x:Name="VideoView4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
 
         <TextBox x:Name="edURL3" HorizontalAlignment="Left" Margin="10,635,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>

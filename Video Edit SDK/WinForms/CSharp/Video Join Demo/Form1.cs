@@ -4,12 +4,15 @@ using System.Windows.Forms;
 using VisioForge.Controls.UI.Dialogs.OutputFormats;
 using VisioForge.Tools;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace Video_Join_Demo
 {
     using System.Collections.Generic;
     using System.IO;
+    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.VideoEdit;
 
     public partial class Form1 : Form
     {
@@ -45,9 +48,30 @@ namespace Video_Join_Demo
 
         private GIFSettingsDialog gifSettingsDialog;
 
+        private VideoEditCore VideoEdit1;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void CreateEngine()
+        {
+            VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
+
+            VideoEdit1.OnError += VideoEdit1_OnError;
+            VideoEdit1.OnStop += VideoEdit1_OnStop;
+            VideoEdit1.OnProgress += VideoEdit1_OnProgress;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoEdit1.OnError -= VideoEdit1_OnError;
+            VideoEdit1.OnStop -= VideoEdit1_OnStop;
+            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+
+            VideoEdit1.Dispose();
+            VideoEdit1 = null;
         }
 
         private static string GetFileExt(string filename)
@@ -82,20 +106,20 @@ namespace Video_Join_Demo
                    (string.Compare(GetFileExt(s), ".GIF", StringComparison.OrdinalIgnoreCase) == 0) ||
                    (string.Compare(GetFileExt(s), ".PNG", StringComparison.OrdinalIgnoreCase) == 0))
                 {
-                    await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), null, VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                    await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), null, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                 }
                 else if ((string.Compare(GetFileExt(s), ".WAV", StringComparison.OrdinalIgnoreCase) == 0) ||
                    (string.Compare(GetFileExt(s), ".MP3", StringComparison.OrdinalIgnoreCase) == 0) ||
                    (string.Compare(GetFileExt(s), ".OGG", StringComparison.OrdinalIgnoreCase) == 0) ||
                    (string.Compare(GetFileExt(s), ".WMA", StringComparison.OrdinalIgnoreCase) == 0))
                 {
-                    var audioFile = new VFVEAudioSource(s, TimeSpan.Zero, TimeSpan.Zero, string.Empty);
+                    var audioFile = new AudioSource(s, TimeSpan.Zero, TimeSpan.Zero, string.Empty);
                     await VideoEdit1.Input_AddAudioFileAsync(audioFile, null, 0);
                 }
                 else
                 {
-                    var videoFile = new VFVEVideoSource(s, TimeSpan.Zero, TimeSpan.Zero, VFVideoEditStretchMode.Letterbox);
-                    var audioFile = new VFVEAudioSource(s, TimeSpan.Zero, TimeSpan.Zero, string.Empty);
+                    var videoFile = new VideoSource(s, TimeSpan.Zero, TimeSpan.Zero, VideoEditStretchMode.Letterbox);
+                    var audioFile = new AudioSource(s, TimeSpan.Zero, TimeSpan.Zero, string.Empty);
 
                     await VideoEdit1.Input_AddVideoFileAsync(videoFile, null, 0, customWidth, customHeight);
                     await VideoEdit1.Input_AddAudioFileAsync(audioFile, null, 0);
@@ -122,16 +146,6 @@ namespace Video_Join_Demo
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0:
-                    {
-                        if (aviSettingsDialog == null)
-                        {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
-                        }
-
-                        aviSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
                 case 1:
                     {
                         if (aviSettingsDialog == null)
@@ -291,6 +305,7 @@ namespace Video_Join_Demo
                         break;
                     }
                 case 15:
+                case 18:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -320,17 +335,6 @@ namespace Video_Join_Demo
                         }
 
                         gifSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 18:
-                    {
-                        if (this.mp4SettingsDialog == null)
-                        {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
-                        }
-
-                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -447,7 +451,7 @@ namespace Video_Join_Demo
 
             mmLog.Clear();
 
-            VideoEdit1.Mode = VFVideoEditMode.Convert;
+            VideoEdit1.Mode = VideoEditMode.Convert;
 
             VideoEdit1.Video_Effects_Clear();
             VideoEdit1.Video_Resize = cbResize.Checked;
@@ -466,126 +470,126 @@ namespace Video_Join_Demo
             {
                 case 0:
                     {
-                        var aviOutput = new VFAVIOutput();
+                        var aviOutput = new AVIOutput();
                         SetAVIOutput(ref aviOutput);
                         VideoEdit1.Output_Format = aviOutput;
                         break;
                     }
                 case 1:
                     {
-                        var mkvOutput = new VFMKVv1Output();
+                        var mkvOutput = new MKVv1Output();
                         SetMKVOutput(ref mkvOutput);
                         VideoEdit1.Output_Format = mkvOutput;
                         break;
                     }
                 case 2:
                     {
-                        var wmvOutput = new VFWMVOutput();
+                        var wmvOutput = new WMVOutput();
                         SetWMVOutput(ref wmvOutput);
                         VideoEdit1.Output_Format = wmvOutput;
                         break;
                     }
                 case 3:
                     {
-                        var dvOutput = new VFDVOutput();
+                        var dvOutput = new DVOutput();
                         SetDVOutput(ref dvOutput);
                         VideoEdit1.Output_Format = dvOutput;
                         break;
                     }
                 case 4:
                     {
-                        var acmOutput = new VFACMOutput();
+                        var acmOutput = new ACMOutput();
                         SetACMOutput(ref acmOutput);
                         VideoEdit1.Output_Format = acmOutput;
                         break;
                     }
                 case 5:
                     {
-                        var mp3Output = new VFMP3Output();
+                        var mp3Output = new MP3Output();
                         SetMP3Output(ref mp3Output);
                         VideoEdit1.Output_Format = mp3Output;
                         break;
                     }
                 case 6:
                     {
-                        var m4aOutput = new VFM4AOutput();
+                        var m4aOutput = new M4AOutput();
                         SetM4AOutput(ref m4aOutput);
                         VideoEdit1.Output_Format = m4aOutput;
                         break;
                     }
                 case 7:
                     {
-                        var wmaOutput = new VFWMAOutput();
+                        var wmaOutput = new WMAOutput();
                         SetWMAOutput(ref wmaOutput);
                         VideoEdit1.Output_Format = wmaOutput;
                         break;
                     }
                 case 8:
                     {
-                        var oggVorbisOutput = new VFOGGVorbisOutput();
+                        var oggVorbisOutput = new OGGVorbisOutput();
                         SetOGGOutput(ref oggVorbisOutput);
                         VideoEdit1.Output_Format = oggVorbisOutput;
                         break;
                     }
                 case 9:
                     {
-                        var flacOutput = new VFFLACOutput();
+                        var flacOutput = new FLACOutput();
                         SetFLACOutput(ref flacOutput);
                         VideoEdit1.Output_Format = flacOutput;
                         break;
                     }
                 case 10:
                     {
-                        var speexOutput = new VFSpeexOutput();
+                        var speexOutput = new SpeexOutput();
                         SetSpeexOutput(ref speexOutput);
                         VideoEdit1.Output_Format = speexOutput;
                         break;
                     }
                 case 11:
                     {
-                        var customOutput = new VFCustomOutput();
+                        var customOutput = new CustomOutput();
                         SetCustomOutput(ref customOutput);
                         VideoEdit1.Output_Format = customOutput;
                         break;
                     }
                 case 12:
                     {
-                        var webmOutput = new VFWebMOutput();
+                        var webmOutput = new WebMOutput();
                         SetWebMOutput(ref webmOutput);
                         VideoEdit1.Output_Format = webmOutput;
                         break;
                     }
                 case 13:
                     {
-                        var ffmpegOutput = new VFFFMPEGOutput();
+                        var ffmpegOutput = new FFMPEGOutput();
                         SetFFMPEGOutput(ref ffmpegOutput);
                         VideoEdit1.Output_Format = ffmpegOutput;
                         break;
                     }
                 case 14:
                     {
-                        var ffmpegOutput = new VFFFMPEGEXEOutput();
+                        var ffmpegOutput = new FFMPEGEXEOutput();
                         SetFFMPEGEXEOutput(ref ffmpegOutput);
                         VideoEdit1.Output_Format = ffmpegOutput;
                         break;
                     }
                 case 15:
                     {
-                        var mp4Output = new VFMP4Output();
+                        var mp4Output = new MP4Output();
                         SetMP4Output(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
                         break;
                     }
                 case 16:
                     {
-                        var mp4Output = new VFMP4HWOutput();
+                        var mp4Output = new MP4HWOutput();
                         SetMP4HWOutput(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
                         break;
                     }
                 case 17:
                     {
-                        var gifOutput = new VFAnimatedGIFOutput();
+                        var gifOutput = new AnimatedGIFOutput();
                         SetGIFOutput(ref gifOutput);
                         VideoEdit1.Output_Format = gifOutput;
                         break;
@@ -622,7 +626,7 @@ namespace Video_Join_Demo
             Invoke((Action)(() => { ProgressBar1.Value = e.Progress; }));
         }
 
-        private void VideoEdit1_OnStop(object sender, VideoEditStopEventArgs e)
+        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -644,7 +648,7 @@ namespace Video_Join_Demo
             VideoEdit1.Video_Transition_Clear();
         }
 
-        private void SetMP3Output(ref VFMP3Output mp3Output)
+        private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
             {
@@ -654,7 +658,7 @@ namespace Video_Join_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -664,7 +668,7 @@ namespace Video_Join_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
+        private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (ffmpegEXESettingsDialog == null)
             {
@@ -674,7 +678,7 @@ namespace Video_Join_Demo
             ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -685,7 +689,7 @@ namespace Video_Join_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
-        private void SetWMAOutput(ref VFWMAOutput wmaOutput)
+        private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -696,7 +700,7 @@ namespace Video_Join_Demo
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
-        private void SetACMOutput(ref VFACMOutput acmOutput)
+        private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
             {
@@ -706,7 +710,7 @@ namespace Video_Join_Demo
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
-        private void SetWebMOutput(ref VFWebMOutput webmOutput)
+        private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (webmSettingsDialog == null)
             {
@@ -716,7 +720,7 @@ namespace Video_Join_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
+        private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (ffmpegSettingsDialog == null)
             {
@@ -726,7 +730,7 @@ namespace Video_Join_Demo
             ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
-        private void SetFLACOutput(ref VFFLACOutput flacOutput)
+        private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
             {
@@ -736,7 +740,7 @@ namespace Video_Join_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -746,7 +750,7 @@ namespace Video_Join_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
+        private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
             {
@@ -756,7 +760,7 @@ namespace Video_Join_Demo
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
-        private void SetM4AOutput(ref VFM4AOutput m4aOutput)
+        private void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
             {
@@ -766,7 +770,7 @@ namespace Video_Join_Demo
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -776,7 +780,7 @@ namespace Video_Join_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetCustomOutput(ref VFCustomOutput customOutput)
+        private void SetCustomOutput(ref CustomOutput customOutput)
         {
             if (customFormatSettingsDialog == null)
             {
@@ -786,7 +790,7 @@ namespace Video_Join_Demo
             customFormatSettingsDialog.SaveSettings(ref customOutput);
         }
 
-        private void SetDVOutput(ref VFDVOutput dvOutput)
+        private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
             {
@@ -796,7 +800,7 @@ namespace Video_Join_Demo
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -807,13 +811,13 @@ namespace Video_Join_Demo
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 aviOutput.MP3 = mp3Output;
             }
         }
 
-        private void SetMKVOutput(ref VFMKVv1Output mkvOutput)
+        private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -824,13 +828,13 @@ namespace Video_Join_Demo
 
             if (mkvOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 mkvOutput.MP3 = mp3Output;
             }
         }
 
-        private void SetOGGOutput(ref VFOGGVorbisOutput oggVorbisOutput)
+        private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
             {
@@ -842,6 +846,8 @@ namespace Video_Join_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoEdit1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
@@ -850,6 +856,11 @@ namespace Video_Join_Demo
 
             cbFrameRate.SelectedIndex = 0;
             cbOutputVideoFormat.SelectedIndex = 15;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

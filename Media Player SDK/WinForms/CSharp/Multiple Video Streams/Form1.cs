@@ -2,14 +2,33 @@
 {
     using System;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Tools;
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
+        private MediaPlayerCore MediaPlayer1;
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -79,19 +98,19 @@
             MediaPlayer1.Audio_PlayAudio = true;
             MediaPlayer1.Info_UseLibMediaInfo = true;
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS;
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
 
             MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = false;
@@ -157,10 +176,12 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
 
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate(StopDelegateMethod), null);
         }
@@ -175,6 +196,8 @@
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btStop_Click(null, null);
+
+            DestroyEngine();
         }
     }
 }

@@ -8,27 +8,34 @@ Imports VisioForge.Controls.UI.Dialogs.OutputFormats
 Imports VisioForge.Controls.UI.Dialogs.VideoEffects
 Imports VisioForge.Types
 Imports VisioForge.Tools
-Imports VisioForge.Types.OutputFormat
+Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoEffects
+Imports VisioForge.Controls.VideoCapture
+Imports VisioForge.Types.Events
+Imports System.Drawing.Imaging
+Imports VisioForge.Types.VideoCapture
+Imports VisioForge.Types.AudioEffects
 
 Public Class Form1
-    Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
+    Private mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim mpegTSSettingsDialog As HWEncodersOutputSettingsDialog
+    Private mpegTSSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim movSettingsDialog As HWEncodersOutputSettingsDialog
+    Private movSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim _mp4SettingsDialog As MP4SettingsDialog
+    Private _mp4SettingsDialog As MP4SettingsDialog
 
-    Dim aviSettingsDialog As AVISettingsDialog
+    Private aviSettingsDialog As AVISettingsDialog
 
-    Dim wmvSettingsDialog As WMVSettingsDialog
+    Private wmvSettingsDialog As WMVSettingsDialog
 
-    Dim gifSettingsDialog As GIFSettingsDialog
+    Private gifSettingsDialog As GIFSettingsDialog
 
-    Dim screenshotSaveDialog As SaveFileDialog
+    Private screenshotSaveDialog As SaveFileDialog
 
-    Private ReadOnly tmRecording As Timers.Timer = New Timers.Timer(1000)
+    Private tmRecording As Timers.Timer = New Timers.Timer(1000)
+
+    Private WithEvents VideoCapture1 As VideoCaptureCore
 
     Public Sub New()
 
@@ -39,15 +46,23 @@ Public Class Form1
 
     End Sub
 
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        VideoCapture1 = New VideoCaptureCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        VideoCapture1.Dispose()
+        VideoCapture1 = Nothing
+    End Sub
+
     Private Sub cbAudioInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles cbAudioInputDevice.SelectedIndexChanged
         If cbAudioInputDevice.SelectedIndex <> -1 Then
-
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
             cbAudioInputFormat.Items.Clear()
 
             Dim deviceItem =
-                    (From info In VideoCapture1.Audio_CaptureDevicesInfo Where info.Name = cbAudioInputDevice.Text)?.FirstOrDefault()
+                    (From info In VideoCapture1.Audio_CaptureDevices Where info.Name = cbAudioInputDevice.Text)?.FirstOrDefault()
             If IsNothing(deviceItem) Then
                 Exit Sub
             End If
@@ -72,8 +87,6 @@ Public Class Form1
                 End If
             End If
 
-            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
-
             cbAudioInputLine.Items.Clear()
             Dim lines = deviceItem.Lines
             For Each item As String In lines
@@ -84,8 +97,6 @@ Public Class Form1
                 cbAudioInputLine.SelectedIndex = 0
             End If
 
-            cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
-
             btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault
         End If
     End Sub
@@ -93,16 +104,6 @@ Public Class Form1
     Private Sub btAudioInputDeviceSettings_Click(ByVal sender As Object, ByVal e As EventArgs) _
         Handles btAudioInputDeviceSettings.Click
         VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text)
-    End Sub
-
-    Private Sub cbAudioInputFormat_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles cbAudioInputFormat.SelectedIndexChanged
-        VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text
-    End Sub
-
-    Private Sub cbAudioInputLine_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles cbAudioInputLine.SelectedIndexChanged
-        VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text
     End Sub
 
     Private Sub cbAudioOutputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
@@ -115,26 +116,13 @@ Public Class Form1
         cbAudioInputFormat.Enabled = Not cbUseBestAudioInputFormat.Checked
     End Sub
 
-    Private Sub cbUseAudioInputFromVideoCaptureDevice_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles cbUseAudioInputFromVideoCaptureDevice.CheckedChanged
-        If Not ((cbVideoInputDevice.Text = "") OrElse (cbVideoInputDevice.Text Is Nothing)) Then
-            VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked
-            cbAudioInputDevice_SelectedIndexChanged(Nothing, Nothing)
-
-            cbAudioInputDevice.Enabled = Not cbUseAudioInputFromVideoCaptureDevice.Checked
-            btAudioInputDeviceSettings.Enabled = Not cbUseAudioInputFromVideoCaptureDevice.Checked
-        End If
-    End Sub
-
     Private Sub cbVideoInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles cbVideoInputDevice.SelectedIndexChanged
         If cbVideoInputDevice.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text
-
             cbVideoInputFormat.Items.Clear()
 
             Dim deviceItem =
-                    (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.
+                    (From info In VideoCapture1.Video_CaptureDevices Where info.Name = cbVideoInputDevice.Text)?.
                     FirstOrDefault()
             If IsNothing(deviceItem) Then
                 Exit Sub
@@ -149,8 +137,7 @@ Public Class Form1
                 cbVideoInputFormat.SelectedIndex = 0
                 cbVideoInputFormat_SelectedIndexChanged(Nothing, Nothing)
             End If
-            
-            cbUseAudioInputFromVideoCaptureDevice.Enabled = deviceItem.AudioOutput
+
             btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault
         End If
     End Sub
@@ -162,7 +149,7 @@ Public Class Form1
 
         If (cbVideoInputDevice.SelectedIndex <> -1) Then
 
-            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevicesInfo Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevices Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If (deviceItem Is Nothing) Then
                 Return
             End If
@@ -290,7 +277,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub SetMP4HWOutput(ByRef mp4Output As VFMP4HWOutput)
+    Private Sub SetMP4HWOutput(ByRef mp4Output As MP4HWOutput)
         If (mp4HWSettingsDialog Is Nothing) Then
             mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
         End If
@@ -298,7 +285,7 @@ Public Class Form1
         mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As VFMPEGTSOutput)
+    Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As MPEGTSOutput)
 
         If (mpegTSSettingsDialog Is Nothing) Then
             mpegTSSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS)
@@ -307,7 +294,7 @@ Public Class Form1
         mpegTSSettingsDialog.SaveSettings(mpegTSOutput)
     End Sub
 
-    Private Sub SetMOVOutput(ByRef mkvOutput As VFMOVOutput)
+    Private Sub SetMOVOutput(ByRef mkvOutput As MOVOutput)
 
         If (movSettingsDialog Is Nothing) Then
             movSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV)
@@ -316,7 +303,7 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
-    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
+    Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
         If (_mp4SettingsDialog Is Nothing) Then
             _mp4SettingsDialog = New MP4SettingsDialog()
         End If
@@ -324,7 +311,7 @@ Public Class Form1
         _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetGIFOutput(ByRef gifOutput As VFAnimatedGIFOutput)
+    Private Sub SetGIFOutput(ByRef gifOutput As AnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
         End If
@@ -332,7 +319,7 @@ Public Class Form1
         gifSettingsDialog.SaveSettings(gifOutput)
     End Sub
 
-    Private Sub SetWMVOutput(ByRef wmvOutput As VFWMVOutput)
+    Private Sub SetWMVOutput(ByRef wmvOutput As WMVOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
         End If
@@ -341,7 +328,7 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmvOutput)
     End Sub
 
-    Private Sub SetAVIOutput(ByRef aviOutput As VFAVIOutput)
+    Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
                 VideoCapture1.Video_Codecs.ToArray(),
@@ -352,7 +339,7 @@ Public Class Form1
 
         If (aviOutput.Audio_UseMP3Encoder) Then
 
-            Dim mp3Output = New VFMP3Output()
+            Dim mp3Output = New MP3Output()
             aviOutput.MP3 = mp3Output
         End If
     End Sub
@@ -375,55 +362,56 @@ Public Class Form1
         End If
 
         'apply capture parameters
-        VideoCapture1.Video_Renderer_SetAuto
-        
-        VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text
-        VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked
+        VideoCapture1.Video_Renderer_SetAuto()
+
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text
-        VideoCapture1.Audio_CaptureDevice_Format_UseBest = cbUseBestAudioInputFormat.Checked
-        VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text
-        VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked
-        VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
-        VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text
+
+        VideoCapture1.Video_CaptureDevice = New VideoCaptureSource(cbVideoInputDevice.Text)
+        VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text
+        VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked
+
+        VideoCapture1.Audio_CaptureDevice = New AudioCaptureSource(cbAudioInputDevice.Text)
+        VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text
+        VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked
 
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice_FrameRate = CSng(Convert.ToDouble(cbVideoInputFrameRate.Text))
+            VideoCapture1.Video_CaptureDevice.FrameRate = CSng(Convert.ToDouble(cbVideoInputFrameRate.Text))
         End If
 
         If (rbPreview.Checked) Then
-            VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview
+            VideoCapture1.Mode = VideoCaptureMode.VideoPreview
         Else
-            VideoCapture1.Mode = VFVideoCaptureMode.VideoCapture
+            VideoCapture1.Mode = VideoCaptureMode.VideoCapture
             VideoCapture1.Output_Filename = edOutput.Text
 
             Select Case (cbOutputFormat.SelectedIndex)
                 Case 0
-                    Dim aviOutput = New VFAVIOutput()
+                    Dim aviOutput = New AVIOutput()
                     SetAVIOutput(aviOutput)
                     VideoCapture1.Output_Format = aviOutput
                 Case 1
-                    Dim wmvOutput = New VFWMVOutput()
+                    Dim wmvOutput = New WMVOutput()
                     SetWMVOutput(wmvOutput)
                     VideoCapture1.Output_Format = wmvOutput
                 Case 2
-                    Dim mp4Output = New VFMP4Output()
+                    Dim mp4Output = New MP4Output()
                     SetMP4Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 3
-                    Dim mp4Output = New VFMP4HWOutput()
+                    Dim mp4Output = New MP4HWOutput()
                     SetMP4HWOutput(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 4
-                    Dim gifOutput = New VFAnimatedGIFOutput()
+                    Dim gifOutput = New AnimatedGIFOutput()
                     SetGIFOutput(gifOutput)
 
                     VideoCapture1.Output_Format = gifOutput
                 Case 5
-                    Dim tsOutput = New VFMPEGTSOutput()
+                    Dim tsOutput = New MPEGTSOutput()
                     SetMPEGTSOutput(tsOutput)
                     VideoCapture1.Output_Format = tsOutput
                 Case 6
-                    Dim movOutput = New VFMOVOutput()
+                    Dim movOutput = New MOVOutput()
                     SetMOVOutput(movOutput)
                     VideoCapture1.Output_Format = movOutput
             End Select
@@ -433,9 +421,9 @@ Public Class Form1
         VideoCapture1.Audio_Effects_Clear(-1)
         VideoCapture1.Audio_Effects_Enabled = True
 
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
 
         VideoCapture1.Video_Effects_Enabled = True
         VideoCapture1.Video_Effects_MergeImageLogos = cbMergeImageLogos.Checked
@@ -455,8 +443,8 @@ Public Class Form1
         Await VideoCapture1.StopAsync()
     End Sub
 
-
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+        CreateEngine()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
@@ -469,8 +457,8 @@ Public Class Form1
 
         cbOutputFormat.SelectedIndex = 2
 
-        For i As Int32 = 0 To VideoCapture1.Video_CaptureDevicesInfo.Count - 1
-            cbVideoInputDevice.Items.Add(VideoCapture1.Video_CaptureDevicesInfo.Item(i).Name)
+        For i As Int32 = 0 To VideoCapture1.Video_CaptureDevices.Count - 1
+            cbVideoInputDevice.Items.Add(VideoCapture1.Video_CaptureDevices.Item(i).Name)
         Next
 
         If cbVideoInputDevice.Items.Count > 0 Then
@@ -479,8 +467,8 @@ Public Class Form1
 
         cbVideoInputDevice_SelectedIndexChanged(Nothing, Nothing)
 
-        For i As Int32 = 0 To VideoCapture1.Audio_CaptureDevicesInfo.Count - 1
-            cbAudioInputDevice.Items.Add(VideoCapture1.Audio_CaptureDevicesInfo.Item(i).Name)
+        For i As Int32 = 0 To VideoCapture1.Audio_CaptureDevices.Count - 1
+            cbAudioInputDevice.Items.Add(VideoCapture1.Audio_CaptureDevices.Item(i).Name)
         Next
 
         If (cbAudioInputDevice.Items.Count > 0) Then
@@ -491,7 +479,7 @@ Public Class Form1
         cbAudioInputLine.Items.Clear()
 
         Dim deviceItem As List(Of AudioCaptureDeviceInfo) =
-                (From info In VideoCapture1.Audio_CaptureDevicesInfo Where info.Name = cbAudioInputDevice.Text).ToList()
+                (From info In VideoCapture1.Audio_CaptureDevices Where info.Name = cbAudioInputDevice.Text).ToList()
         If Not IsNothing(deviceItem) And deviceItem.Any() Then
             Dim lines = deviceItem.FirstOrDefault.Lines
             For Each item As String In lines
@@ -500,13 +488,10 @@ Public Class Form1
 
             If cbAudioInputLine.Items.Count > 0 Then
                 cbAudioInputLine.SelectedIndex = 0
-                cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
             End If
+        End If
 
-            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
-            End If
-
-            Dim defaultAudioRenderer = String.Empty
+        Dim defaultAudioRenderer = String.Empty
         For i As Integer = 0 To VideoCapture1.Audio_OutputDevices.Count - 1
             cbAudioOutputDevice.Items.Add(VideoCapture1.Audio_OutputDevices.Item(i))
 
@@ -542,8 +527,8 @@ Public Class Form1
     Private Sub Log(msg As String)
         If (IsHandleCreated) Then
             Invoke(Sub()
-                mmLog.Text = mmLog.Text + msg + Environment.NewLine
-            End Sub)
+                       mmLog.Text = mmLog.Text + msg + Environment.NewLine
+                   End Sub)
         End If
     End Sub
 
@@ -551,7 +536,7 @@ Public Class Form1
         Log(e.Message)
     End Sub
 
-    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs)  Handles VideoCapture1.OnLicenseRequired
+    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
         Log("(NOT ERROR) " + e.Message)
     End Sub
 
@@ -650,15 +635,15 @@ Public Class Form1
             Dim ext = Path.GetExtension(filename)?.ToLowerInvariant()
             Select Case (ext)
                 Case ".bmp"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.BMP, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0)
                 Case ".jpg"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.JPEG, 85)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85)
                 Case ".gif"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.GIF, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0)
                 Case ".png"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.PNG, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0)
                 Case ".tiff"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.TIFF, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0)
             End Select
         End If
     End Sub
@@ -701,10 +686,10 @@ Public Class Form1
 
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
-        Dim intf As IVFVideoEffectLightness
+        Dim intf As IVideoEffectLightness
         Dim effect = VideoCapture1.Video_Effects_Get("Lightness")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectLightness(True, tbLightness.Value)
+            intf = New VideoEffectLightness(True, tbLightness.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -717,10 +702,10 @@ Public Class Form1
 
     Private Sub tbSaturation_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSaturation.Scroll
 
-        Dim intf As IVFVideoEffectSaturation
+        Dim intf As IVideoEffectSaturation
         Dim effect = VideoCapture1.Video_Effects_Get("Saturation")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectSaturation(tbSaturation.Value)
+            intf = New VideoEffectSaturation(tbSaturation.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
 
@@ -734,10 +719,10 @@ Public Class Form1
 
     Private Sub tbContrast_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbContrast.Scroll
 
-        Dim intf As IVFVideoEffectContrast
+        Dim intf As IVideoEffectContrast
         Dim effect = VideoCapture1.Video_Effects_Get("Contrast")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectContrast(True, tbContrast.Value)
+            intf = New VideoEffectContrast(True, tbContrast.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -750,10 +735,10 @@ Public Class Form1
 
     Private Sub tbDarkness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbDarkness.Scroll
 
-        Dim intf As IVFVideoEffectDarkness
+        Dim intf As IVideoEffectDarkness
         Dim effect = VideoCapture1.Video_Effects_Get("Darkness")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectDarkness(True, tbDarkness.Value)
+            intf = New VideoEffectDarkness(True, tbDarkness.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -766,10 +751,10 @@ Public Class Form1
 
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
-        Dim intf As IVFVideoEffectGrayscale
+        Dim intf As IVideoEffectGrayscale
         Dim effect = VideoCapture1.Video_Effects_Get("Grayscale")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectGrayscale(cbGreyscale.Checked)
+            intf = New VideoEffectGrayscale(cbGreyscale.Checked)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -782,10 +767,10 @@ Public Class Form1
 
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
-        Dim intf As IVFVideoEffectInvert
+        Dim intf As IVideoEffectInvert
         Dim effect = VideoCapture1.Video_Effects_Get("Invert")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectInvert(cbInvert.Checked)
+            intf = New VideoEffectInvert(cbInvert.Checked)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -797,10 +782,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
-        Dim flip As IVFVideoEffectFlipDown
+        Dim flip As IVideoEffectFlipDown
         Dim effect = VideoCapture1.Video_Effects_Get("FlipDown")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipHorizontal(cbFlipX.Checked)
+            flip = New VideoEffectFlipHorizontal(cbFlipX.Checked)
             VideoCapture1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -811,10 +796,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipY_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipY.CheckedChanged
-        Dim flip As IVFVideoEffectFlipRight
+        Dim flip As IVideoEffectFlipRight
         Dim effect = VideoCapture1.Video_Effects_Get("FlipRight")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipVertical(cbFlipY.Checked)
+            flip = New VideoEffectFlipVertical(cbFlipY.Checked)
             VideoCapture1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -828,7 +813,7 @@ Public Class Form1
         Dim dlg = New ImageLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoCapture1)
-        Dim effect = New VFVideoEffectImageLogo(True, effectName)
+        Dim effect = New VideoEffectImageLogo(True, effectName)
 
         VideoCapture1.Video_Effects_Add(effect)
         lbLogos.Items.Add(effect.Name)
@@ -842,7 +827,7 @@ Public Class Form1
         Dim dlg = New TextLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoCapture1)
-        Dim effect = New VFVideoEffectTextLogo(True, effectName)
+        Dim effect = New VideoEffectTextLogo(True, effectName)
 
         VideoCapture1.Video_Effects_Add(effect)
         lbLogos.Items.Add(effect.Name)
@@ -855,14 +840,14 @@ Public Class Form1
     Private Sub btLogoEdit_Click(sender As Object, e As EventArgs) Handles btLogoEdit.Click
         If (lbLogos.SelectedItem IsNot Nothing) Then
             Dim effect = VideoCapture1.Video_Effects_Get(lbLogos.SelectedItem)
-            If (effect.GetEffectType() = VFVideoEffectType.TextLogo) Then
+            If (effect.GetEffectType() = VideoEffectType.TextLogo) Then
                 Dim dlg = New TextLogoSettingsDialog()
 
                 dlg.Attach(effect)
 
                 dlg.ShowDialog(Me)
                 dlg.Dispose()
-            ElseIf (effect.GetEffectType() = VFVideoEffectType.ImageLogo) Then
+            ElseIf (effect.GetEffectType() = VideoEffectType.ImageLogo) Then
                 Dim dlg = New ImageLogoSettingsDialog()
 
                 dlg.Attach(effect)
@@ -880,6 +865,9 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        DestroyEngine()
+    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

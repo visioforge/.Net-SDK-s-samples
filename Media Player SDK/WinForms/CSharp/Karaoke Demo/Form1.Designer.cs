@@ -17,6 +17,13 @@
             {
                 components.Dispose();
             }
+
+            MediaPlayer1?.Dispose();
+            MediaPlayer1 = null;
+
+            _cdg?.Dispose();
+            _cdg = null;
+
             base.Dispose(disposing);
         }
 

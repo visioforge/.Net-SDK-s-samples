@@ -39,7 +39,7 @@ namespace SimpleService
                 var AccountType = ServiceKeys.GetValue("ObjectName");
 
                 // Account Type must be Local System
-                if (string.Equals(AccountType, "LocalSystem") == false)
+                if (!string.Equals(AccountType, "LocalSystem"))
                     throw new Exception("Service account must be local system to enable interact with desktop");
 
                 // ORing the InteractiveProcess with the existing service type

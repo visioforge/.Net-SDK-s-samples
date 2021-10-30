@@ -958,22 +958,13 @@
 
         </TabControl>
         <CheckBox x:Name="cbLicensing" Content="Licensing info" HorizontalAlignment="Left" Margin="168,658,0,0" VerticalAlignment="Top"/>
-        <my:VideoEdit HorizontalAlignment="Stretch" 
+        <my:VideoView HorizontalAlignment="Stretch" 
                           Margin="411,360,25,70"
                           Background="Black"
                           Grid.RowSpan="2"
-                          x:Name="VideoEdit1" 
-                          VerticalAlignment="Stretch" 
-                          OnError="VideoEdit1_OnError" 
-                          OnProgress="VideoEdit1_OnProgress" 
-                          OnStart="VideoEdit1_OnStart" 
-                          OnStop="VideoEdit1_OnStop" 
-                          OnMotionDetectionEx="VideoEdit1_OnObjectDetection" 
-                          OnMotionDetection="VideoEdit1_OnMotion" 
-                          OnBarcodeDetected="VideoEdit1_OnBarcodeDetected" 
-                          MouseDown="VideoEdit1_MouseDown"
-                          OnLicenseRequired="VideoEdit1_OnLicenseRequired"
-                          OnFFMPEGInfo="VideoEdit1_OnFFMPEGInfo" />
+                          x:Name="VideoView1" 
+                          VerticalAlignment="Stretch"                          
+                          MouseDown="VideoView1_MouseDown" />
 
     </Grid>
 </Window>

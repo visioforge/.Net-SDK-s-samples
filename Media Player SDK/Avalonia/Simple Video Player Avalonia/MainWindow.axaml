@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonia="clr-namespace:VisioForge.Controls.UI.Avalonia;assembly=VisioForge.Controls.UI.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+        x:Class="Simple_Video_Player_Avalonia.MainWindow"
+        Title="Media Player SDK .Net Core - Main Demo"
+        Width="1280" Height="720"
+        Icon="visioforge_main_icon.ico">
+  <Grid ColumnDefinitions="0.5*,20,0.5*">
+    <TabControl Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="630" Width="620">
+      <TabItem Header="Info">
+        <Grid>
+          <ListBox Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="560" Height="400" x:Name="mmInfo" Items="{Binding Info}" />
+          <Button Height="32" Width="100" Margin="20,410,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Read info" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btReadInfo"/>
+          <Button Height="32" Width="100" Margin="130,410,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Read tags" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btReadTags"/>
+        </Grid>
+      </TabItem>
+      <TabItem Header="Audio output">
+        <Grid>
+          <TextBlock Text="Audio output" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+          <ComboBox Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="560" Height="32" x:Name="cbAudioOutputDevice" Items="{Binding AudioOutputDevices}"/>
+          <CheckBox Content="Play audio" Margin="20,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" IsChecked="true" x:Name="cbPlayAudio" />
+
+          <TextBlock Text="Volume" Margin="20,110,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+          <Slider Margin="20,110,0,0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="tbVolume" Minimum="0" Maximum="100" Value="85" />
+        </Grid>
+      </TabItem>
+      <TabItem Header="Debug">
+        <Grid>
+          <CheckBox Content="Debug mode" Margin="20,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" IsChecked="false" x:Name="cbDebugMode"/>
+          <ListBox Margin="20,40,10,10" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="560" x:Name="mmLog" Items="{Binding Log}"/>
+        </Grid>
+      </TabItem>     
+    </TabControl>
+
+    <TextBlock Grid.Column="2" Text="File name or URL" Margin="0,20,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <TextBox Grid.Column="2" Height="32" Width="560" Margin="0,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="c:\samples\!video.avi" x:Name="edFilenameOrURL"/>
+    <Button Grid.Column="2" Height="32" Width="32" Margin="568,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="..." x:Name="btSelectFile"/>
+
+    <Panel Grid.Column="2" Height="400" Width="600" Margin="0,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#000000" x:Name="pnScreen">
+      <avalonia:VideoView x:Name="VideoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    </Panel>
+
+    <Slider Grid.Column="2" Margin="0,480,0,0" Width="300"  HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="tbTimeline" />
+    <TextBlock Grid.Column="2" Text="00:00:00 / 00:00:00" Margin="320,500,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lbTimeline" />
+    <TextBlock Grid.Column="2" Text="Playback speed" Margin="485,500,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    <Slider Grid.Column="2" Margin="485,520,0,0" Width="100"  HorizontalAlignment="Left" VerticalAlignment="Top" Maximum="35" Minimum="-25" Value="10" x:Name="tbSpeed"/>
+
+    <Button Grid.Column="2" Height="32" Width="70" Margin="0,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Start" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btStart"/>
+    <Button Grid.Column="2" Height="32" Width="70" Margin="75,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Resume" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btResume"/>
+    <Button Grid.Column="2" Height="32" Width="70" Margin="150,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Pause" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btPause"/>
+    <Button Grid.Column="2" Height="32" Width="70" Margin="225,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Stop" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btStop"/>
+    <Button Grid.Column="2" Height="32" Width="120" Margin="320,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Next frame" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btNextFrame"/>
+    <Button Grid.Column="2" Height="32" Width="120" Margin="320,570,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Save snapshot" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btSaveSnapshot"/>
+  </Grid>
+</Window>

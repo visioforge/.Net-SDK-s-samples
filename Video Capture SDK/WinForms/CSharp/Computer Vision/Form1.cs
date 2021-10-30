@@ -19,7 +19,7 @@ namespace Computer_Vision_Demo
     using VisioForge.Controls.CV;
     using VisioForge.Shared.MFP;
     using VisioForge.Types;
-    using VisioForge.Types.Sources;
+    
 
     public partial class Form1 : Form
     {
@@ -342,19 +342,19 @@ namespace Computer_Vision_Demo
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
-                    settings.Type = VFIPSource.Auto_VLC;
+                    settings.Type = IPSource.Auto_VLC;
                     break;
                 case 1:
-                    settings.Type = VFIPSource.Auto_FFMPEG;
+                    settings.Type = IPSource.Auto_FFMPEG;
                     break;
                 case 2:
-                    settings.Type = VFIPSource.Auto_LAV;
+                    settings.Type = IPSource.Auto_LAV;
                     break;
                 case 3:
-                    settings.Type = VFIPSource.RTSP_Live555;
+                    settings.Type = IPSource.RTSP_Live555;
                     break;
                 case 4:
-                    settings.Type = VFIPSource.MMS_WMV;
+                    settings.Type = IPSource.MMS_WMV;
                     break;
             }
 
@@ -399,22 +399,22 @@ namespace Computer_Vision_Demo
 
             if (rbVideoCaptureDevice.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
+                VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.IPPreview;
+                VideoCapture1.Mode = VideoCaptureMode.IPPreview;
             }
 
-            if ((VideoCapture1.Mode == VFVideoCaptureMode.IPCapture) || (VideoCapture1.Mode == VFVideoCaptureMode.IPPreview))
+            if ((VideoCapture1.Mode == VideoCaptureMode.IPCapture) || (VideoCapture1.Mode == VideoCaptureMode.IPPreview))
             {
                 // from IP camera
                 IPCameraSourceSettings settings;
                 SelectIPCameraSource(out settings);
                 VideoCapture1.IP_Camera_Source = settings;
             }
-            else if ((VideoCapture1.Mode == VFVideoCaptureMode.VideoCapture) || (VideoCapture1.Mode == VFVideoCaptureMode.VideoPreview) ||
-                (VideoCapture1.Mode == VFVideoCaptureMode.AudioCapture) || (VideoCapture1.Mode == VFVideoCaptureMode.AudioPreview))
+            else if ((VideoCapture1.Mode == VideoCaptureMode.VideoCapture) || (VideoCapture1.Mode == VideoCaptureMode.VideoPreview) ||
+                (VideoCapture1.Mode == VideoCaptureMode.AudioCapture) || (VideoCapture1.Mode == VideoCaptureMode.AudioPreview))
             {
                 // from video capture device
                 SelectVideoCaptureSource();
@@ -437,7 +437,7 @@ namespace Computer_Vision_Demo
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
             MediaPlayer1.FilenamesOrURL.Clear();
             MediaPlayer1.FilenamesOrURL.Add(edFilename.Text);
 
@@ -485,7 +485,7 @@ namespace Computer_Vision_Demo
 
             //this.MediaPlayer1.Video_Effects_Enabled = true;
             //    this.MediaPlayer1.Video_Effects_Clear();
-            //    this.MediaPlayer1.Video_Effects_Add(new VFVideoEffectMosaic(true, 500));
+            //    this.MediaPlayer1.Video_Effects_Add(new VideoEffectMosaic(true, 500));
 
             if (rbVideoFile.Checked)
             {

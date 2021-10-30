@@ -12,14 +12,18 @@ namespace Push_Source_Demo
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     // ReSharper disable once StyleCop.SA1601
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
@@ -34,15 +38,34 @@ namespace Push_Source_Demo
 
         private GIFSettingsDialog gifSettingsDialog;
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
@@ -109,6 +132,7 @@ namespace Push_Source_Demo
                                 {
                                     VideoCapture1.Push_Source_AddVideoFrame(bmp);
                                     bmp.Dispose();
+                                    bmp = null;
                                 }
 
                                 Application.DoEvents();
@@ -123,7 +147,7 @@ namespace Push_Source_Demo
                     });
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -133,7 +157,7 @@ namespace Push_Source_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
         
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -144,7 +168,7 @@ namespace Push_Source_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -154,7 +178,7 @@ namespace Push_Source_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -164,7 +188,7 @@ namespace Push_Source_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -174,7 +198,7 @@ namespace Push_Source_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -184,7 +208,7 @@ namespace Push_Source_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -197,7 +221,7 @@ namespace Push_Source_Demo
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -221,11 +245,11 @@ namespace Push_Source_Demo
 
             if (rbPreview.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.PushSourcePreview;
+                VideoCapture1.Mode = VideoCaptureMode.PushSourcePreview;
             }
             else if (rbCapture.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.PushSourceCapture;
+                VideoCapture1.Mode = VideoCaptureMode.PushSourceCapture;
 
                 VideoCapture1.Output_Filename = edOutput.Text;
 
@@ -233,7 +257,7 @@ namespace Push_Source_Demo
                 {
                     case 0:
                         {
-                            var aviOutput = new VFAVIOutput();
+                            var aviOutput = new AVIOutput();
                             SetAVIOutput(ref aviOutput);
                             VideoCapture1.Output_Format = aviOutput;
 
@@ -241,7 +265,7 @@ namespace Push_Source_Demo
                         }
                     case 1:
                         {
-                            var wmvOutput = new VFWMVOutput();
+                            var wmvOutput = new WMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             VideoCapture1.Output_Format = wmvOutput;
 
@@ -249,7 +273,7 @@ namespace Push_Source_Demo
                         }
                     case 2:
                         {
-                            var mp4Output = new VFMP4Output();
+                            var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -257,7 +281,7 @@ namespace Push_Source_Demo
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4HWOutput();
+                            var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -265,7 +289,7 @@ namespace Push_Source_Demo
                         }
                     case 4:
                         {
-                            var gifOutput = new VFAnimatedGIFOutput();
+                            var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
 
                             VideoCapture1.Output_Format = gifOutput;
@@ -274,7 +298,7 @@ namespace Push_Source_Demo
                         }
                     case 5:
                         {
-                            var tsOutput = new VFMPEGTSOutput();
+                            var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
                             VideoCapture1.Output_Format = tsOutput;
 
@@ -282,7 +306,7 @@ namespace Push_Source_Demo
                         }
                     case 6:
                         {
-                            var movOutput = new VFMOVOutput();
+                            var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
                             VideoCapture1.Output_Format = movOutput;
 
@@ -457,6 +481,11 @@ namespace Push_Source_Demo
                         break;
                     }
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

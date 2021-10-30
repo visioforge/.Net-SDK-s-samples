@@ -7,19 +7,20 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     using VisioForge.Controls.UI.Dialogs;
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
     using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
@@ -40,18 +41,37 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private WindowCaptureForm windowCaptureForm;
 
-        private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
+        private VideoCaptureCore VideoCapture1;
+
+        private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
         
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
         
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
         }
 
         private async void btScreenCaptureUpdate_Click(object sender, EventArgs e)
@@ -63,10 +83,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
 
                 var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
                 var defaultValueExists = false;
@@ -90,8 +109,6 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     }
                 }
 
-                cbAudioInputFormat_SelectedIndexChanged(null, null);
-
                 cbAudioInputLine.Items.Clear();
 
                 foreach (string line in deviceItem.Lines)
@@ -104,8 +121,6 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     cbAudioInputLine.SelectedIndex = 0;
                 }
 
-                cbAudioInputLine_SelectedIndexChanged(null, null);
-
                 btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
         }
@@ -115,22 +130,12 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
-        private void cbAudioInputFormat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-        }
-
-        private void cbAudioInputLine_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
-        }
-
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -140,7 +145,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -151,7 +156,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -161,7 +166,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -171,7 +176,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -181,7 +186,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -191,7 +196,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -204,7 +209,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -215,7 +220,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             
             if (rbScreenCaptureWindow.Checked)
             {
-                source.Mode = VFScreenCaptureMode.Window;
+                source.Mode = ScreenCaptureMode.Window;
 
                 source.WindowHandle = IntPtr.Zero;
 
@@ -242,7 +247,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
             else
             {
-                source.Mode = VFScreenCaptureMode.Screen;
+                source.Mode = ScreenCaptureMode.Screen;
             }
 
             source.FrameRate = (float)Convert.ToDouble(edScreenFrameRate.Text);
@@ -288,7 +293,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         var source = CreateScreenCaptureSource(
                             Convert.ToInt32(cbScreenCaptureDisplayIndex.Items[i]),
                             true);
-                        VideoCapture1.PIP_Mode = VFPIPMode.Horizontal;
+                        VideoCapture1.PIP_Mode = PIPMode.Horizontal;
                         VideoCapture1.PIP_Sources_Add_ScreenSource(source, 0, 0, 0, 0);
                     }
                 }
@@ -306,9 +311,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 VideoCapture1.Audio_RecordAudio = true;
                 VideoCapture1.Audio_PlayAudio = false;
 
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
-                VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-                VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
+                VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
+                VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
+                VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text;
             }
             else
             {
@@ -324,18 +329,18 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
             if (rbPreview.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.ScreenPreview;
+                VideoCapture1.Mode = VideoCaptureMode.ScreenPreview;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
+                VideoCapture1.Mode = VideoCaptureMode.ScreenCapture;
                 VideoCapture1.Output_Filename = edOutput.Text;
 
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0:
                         {
-                            var aviOutput = new VFAVIOutput();
+                            var aviOutput = new AVIOutput();
                             SetAVIOutput(ref aviOutput);
                             VideoCapture1.Output_Format = aviOutput;
 
@@ -343,7 +348,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 1:
                         {
-                            var wmvOutput = new VFWMVOutput();
+                            var wmvOutput = new WMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             VideoCapture1.Output_Format = wmvOutput;
 
@@ -351,7 +356,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 2:
                         {
-                            var mp4Output = new VFMP4Output();
+                            var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -359,7 +364,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4HWOutput();
+                            var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -367,7 +372,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 4:
                         {
-                            var gifOutput = new VFAnimatedGIFOutput();
+                            var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
 
                             VideoCapture1.Output_Format = gifOutput;
@@ -376,7 +381,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 5:
                         {
-                            var tsOutput = new VFMPEGTSOutput();
+                            var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
                             VideoCapture1.Output_Format = tsOutput;
 
@@ -384,7 +389,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                         }
                     case 6:
                         {
-                            var movOutput = new VFMOVOutput();
+                            var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
                             VideoCapture1.Output_Format = movOutput;
 
@@ -408,6 +413,8 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+            
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
@@ -415,7 +422,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 UpdateRecordingTime();
             };
             
-            foreach (var device in VideoCapture1.Audio_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -620,19 +627,19 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 switch (ext)
                 {
                     case ".bmp":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.BMP, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp);
                         break;
                     case ".jpg":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.JPEG, 85);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
                         break;
                     case ".gif":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.GIF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif);
                         break;
                     case ".png":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.PNG, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png);
                         break;
                     case ".tiff":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.TIFF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff);
                         break;
                 }
             }
@@ -661,7 +668,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             var dlg = new TextLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectTextLogo(true, name);
+            var effect = new VideoEffectTextLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -676,7 +683,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             var dlg = new ImageLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectImageLogo(true, name);
+            var effect = new VideoEffectImageLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -700,7 +707,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
-                if (effect.GetEffectType() == VFVideoEffectType.TextLogo)
+                if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();
 
@@ -709,7 +716,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     dlg.ShowDialog(this);
                     dlg.Dispose();
                 }
-                else if (effect.GetEffectType() == VFVideoEffectType.ImageLogo)
+                else if (effect.GetEffectType() == VideoEffectType.ImageLogo)
                 {
                     var dlg = new ImageLogoSettingsDialog();
 
@@ -723,16 +730,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectLightness lightness;
+            IVideoEffectLightness lightness;
             var effect = VideoCapture1.Video_Effects_Get("Lightness");
             if (effect == null)
             {
-                lightness = new VFVideoEffectLightness(true, tbLightness.Value);
+                lightness = new VideoEffectLightness(true, tbLightness.Value);
                 VideoCapture1.Video_Effects_Add(lightness);
             }
             else
             {
-                lightness = effect as IVFVideoEffectLightness;
+                lightness = effect as IVideoEffectLightness;
                 if (lightness != null)
                 {
                     lightness.Value = tbLightness.Value;
@@ -742,16 +749,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectSaturation saturation;
+            IVideoEffectSaturation saturation;
             var effect = VideoCapture1.Video_Effects_Get("Saturation");
             if (effect == null)
             {
-                saturation = new VFVideoEffectSaturation(tbSaturation.Value);
+                saturation = new VideoEffectSaturation(tbSaturation.Value);
                 VideoCapture1.Video_Effects_Add(saturation);
             }
             else
             {
-                saturation = effect as IVFVideoEffectSaturation;
+                saturation = effect as IVideoEffectSaturation;
                 if (saturation != null)
                 {
                     saturation.Value = tbSaturation.Value;
@@ -761,16 +768,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectContrast contrast;
+            IVideoEffectContrast contrast;
             var effect = VideoCapture1.Video_Effects_Get("Contrast");
             if (effect == null)
             {
-                contrast = new VFVideoEffectContrast(true, tbContrast.Value);
+                contrast = new VideoEffectContrast(true, tbContrast.Value);
                 VideoCapture1.Video_Effects_Add(contrast);
             }
             else
             {
-                contrast = effect as IVFVideoEffectContrast;
+                contrast = effect as IVideoEffectContrast;
                 if (contrast != null)
                 {
                     contrast.Value = tbContrast.Value;
@@ -780,16 +787,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipDown flip;
+            IVideoEffectFlipDown flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipDown");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipHorizontal(cbFlipX.Checked);
+                flip = new VideoEffectFlipHorizontal(cbFlipX.Checked);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipDown;
+                flip = effect as IVideoEffectFlipDown;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipX.Checked;
@@ -799,16 +806,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipRight flip;
+            IVideoEffectFlipRight flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipRight");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipVertical(cbFlipY.Checked);
+                flip = new VideoEffectFlipVertical(cbFlipY.Checked);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipRight;
+                flip = effect as IVideoEffectFlipRight;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipY.Checked;
@@ -818,16 +825,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectGrayscale grayscale;
+            IVideoEffectGrayscale grayscale;
             var effect = VideoCapture1.Video_Effects_Get("Grayscale");
             if (effect == null)
             {
-                grayscale = new VFVideoEffectGrayscale(cbGreyscale.Checked);
+                grayscale = new VideoEffectGrayscale(cbGreyscale.Checked);
                 VideoCapture1.Video_Effects_Add(grayscale);
             }
             else
             {
-                grayscale = effect as IVFVideoEffectGrayscale;
+                grayscale = effect as IVideoEffectGrayscale;
                 if (grayscale != null)
                 {
                     grayscale.Enabled = cbGreyscale.Checked;
@@ -880,16 +887,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectInvert invert;
+            IVideoEffectInvert invert;
             var effect = VideoCapture1.Video_Effects_Get("Invert");
             if (effect == null)
             {
-                invert = new VFVideoEffectInvert(cbInvert.Checked);
+                invert = new VideoEffectInvert(cbInvert.Checked);
                 VideoCapture1.Video_Effects_Add(invert);
             }
             else
             {
-                invert = effect as IVFVideoEffectInvert;
+                invert = effect as IVideoEffectInvert;
                 if (invert != null)
                 {
                     invert.Enabled = cbInvert.Checked;
@@ -899,16 +906,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectDarkness darkness;
+            IVideoEffectDarkness darkness;
             var effect = VideoCapture1.Video_Effects_Get("Darkness");
             if (effect == null)
             {
-                darkness = new VFVideoEffectDarkness(true, tbDarkness.Value);
+                darkness = new VideoEffectDarkness(true, tbDarkness.Value);
                 VideoCapture1.Video_Effects_Add(darkness);
             }
             else
             {
-                darkness = effect as IVFVideoEffectDarkness;
+                darkness = effect as IVideoEffectDarkness;
                 if (darkness != null)
                 {
                     darkness.Value = tbDarkness.Value;
@@ -933,6 +940,11 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             windowCaptureForm.Hide();
 
             lbScreenSourceWindowText.Text = e.Caption;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

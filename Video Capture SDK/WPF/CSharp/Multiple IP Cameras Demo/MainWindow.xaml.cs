@@ -5,23 +5,70 @@ using System.Windows;
 namespace Multiple_IP_Cameras_Demo_WPF
 {
     using VisioForge.Controls.UI.WPF;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
-        private VFMP4Output mp4Output = new VFMP4Output();
+        private MP4Output mp4Output = new MP4Output();
+
+        private VideoCaptureCore VideoCapture1;
+
+        private VideoCaptureCore VideoCapture2;
+
+        private VideoCaptureCore VideoCapture3;
+
+        private VideoCaptureCore VideoCapture4;
+
+        private bool disposedValue;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private Task StartCamera(string url, bool preview, VideoCapture videoCapture, int index)
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1.OnError += VideoCapture_OnError;
+
+            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
+            VideoCapture2.OnError += VideoCapture_OnError;
+
+            VideoCapture3 = new VideoCaptureCore(VideoView3 as IVideoView);
+            VideoCapture3.OnError += VideoCapture_OnError;
+
+            VideoCapture4 = new VideoCaptureCore(VideoView4 as IVideoView);
+            VideoCapture4.OnError += VideoCapture_OnError;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture_OnError;
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+
+            VideoCapture2.OnError -= VideoCapture_OnError;
+            VideoCapture2.Dispose();
+            VideoCapture2 = null;
+
+            VideoCapture3.OnError -= VideoCapture_OnError;
+            VideoCapture3.Dispose();
+            VideoCapture3 = null;
+
+            VideoCapture4.OnError -= VideoCapture_OnError;
+            VideoCapture4.Dispose();
+            VideoCapture4 = null;
+        }
+
+        private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index)
         {
             // source
             videoCapture.IP_Camera_Source = new IPCameraSourceSettings { URL = url };
@@ -29,32 +76,32 @@ namespace Multiple_IP_Cameras_Demo_WPF
             switch (cbEngine.SelectedIndex)
             {
                 case 0:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.Auto_VLC;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.Auto_VLC;
                     break;
                 case 1:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG;
                     break;
                 case 2:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
                     videoCapture.IP_Camera_Source.LAV_GPU_Use = false;
                     break;
                 case 3:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
                     videoCapture.IP_Camera_Source.LAV_GPU_Use = true;
-                    videoCapture.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2Native;
+                    videoCapture.IP_Camera_Source.LAV_GPU_Mode = LAVGPUDecoder.DXVA2Native;
                     break;
                 case 4:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.MMS_WMV;
                     break;
                 case 5:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.HTTP_MJPEG_LowLatency;
                     break;
                 case 6:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                     break;
                 case 7:
-                    videoCapture.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                    videoCapture.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                     videoCapture.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                     break;
             }
@@ -64,11 +111,11 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
             if (preview)
             {
-                videoCapture.Mode = VFVideoCaptureMode.IPPreview;
+                videoCapture.Mode = VideoCaptureMode.IPPreview;
             }
             else
             {
-                videoCapture.Mode = VFVideoCaptureMode.IPCapture;
+                videoCapture.Mode = VideoCaptureMode.IPCapture;
 
                 videoCapture.Output_Filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $@"VisioForge\output_{DateTime.Now:yy-MM-dd hh_mm_ss}_{index}.mp4");
                 videoCapture.Output_Format = mp4Output;
@@ -85,20 +132,22 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, videoCapture1, 1);
+            await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, VideoCapture1, 1);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += $" (SDK v{videoCapture1.SDK_Version})";
+            CreateEngine();
+
+            Title += $" (SDK v{VideoCapture1.SDK_Version})";
         }
 
         private async void btStop1_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture1.StopAsync();
+            await VideoCapture1.StopAsync();
         }
 
-        private void videoCapture_OnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
                                                    {
@@ -108,32 +157,77 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL2.Text, rbPreview2.IsChecked == true, videoCapture2, 2);
+            await StartCamera(edURL2.Text, rbPreview2.IsChecked == true, VideoCapture2, 2);
         }
 
         private async void btStop2_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture2.StopAsync();
+            await VideoCapture2.StopAsync();
         }
 
         private async void btStart3_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL3.Text, rbPreview3.IsChecked == true, videoCapture3, 3);
+            await StartCamera(edURL3.Text, rbPreview3.IsChecked == true, VideoCapture3, 3);
         }
 
         private async void btStop3_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture3.StopAsync();
+            await VideoCapture3.StopAsync();
         }
 
         private async void btStart4_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL4.Text, rbPreview4.IsChecked == true, videoCapture4, 4);
+            await StartCamera(edURL4.Text, rbPreview4.IsChecked == true, VideoCapture4, 4);
         }
 
         private async void btStop4_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture4.StopAsync();
+            await VideoCapture4.StopAsync();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DestroyEngine();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    VideoCapture1?.Dispose();
+                    VideoCapture1 = null;
+
+                    VideoCapture2?.Dispose();
+                    VideoCapture2 = null;
+
+                    VideoCapture3?.Dispose();
+                    VideoCapture3 = null;
+
+                    VideoCapture4?.Dispose();
+                    VideoCapture4 = null;
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~MainWindow()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

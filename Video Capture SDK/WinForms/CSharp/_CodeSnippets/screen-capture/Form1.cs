@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 // ReSharper disable StyleCop.SA1600
 // ReSharper disable InconsistentNaming
@@ -13,19 +7,42 @@ using System.Windows.Forms;
 namespace screen_capture
 {
     using System.IO;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
@@ -47,7 +64,7 @@ namespace screen_capture
             // configure source
             var screenSource = new ScreenCaptureSourceSettings();
 
-            screenSource.Mode = VFScreenCaptureMode.Screen;
+            screenSource.Mode = ScreenCaptureMode.Screen;
 
             screenSource.FullScreen = rbScreenFullScreen.Checked;
             screenSource.Top = Convert.ToInt32(edScreenTop.Text);
@@ -68,9 +85,9 @@ namespace screen_capture
                 VideoCapture1.Audio_RecordAudio = true;
 
                 // select first audio device with default parameters
-                if (VideoCapture1.Audio_CaptureDevicesInfo.Any())
+                if (VideoCapture1.Audio_CaptureDevices.Any())
                 {
-                    VideoCapture1.Audio_CaptureDevice = VideoCapture1.Audio_CaptureDevicesInfo[0].Name;
+                    VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(VideoCapture1.Audio_CaptureDevices[0].Name);
                 }
             }
             else
@@ -82,13 +99,13 @@ namespace screen_capture
             // configure output
             if (cbCapture.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
-                VideoCapture1.Output_Format = new VFMP4Output();
+                VideoCapture1.Mode = VideoCaptureMode.ScreenCapture;
+                VideoCapture1.Output_Format = new MP4Output();
                 VideoCapture1.Output_Filename = edOutput.Text;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.ScreenPreview;
+                VideoCapture1.Mode = VideoCaptureMode.ScreenPreview;
             }
 
             await VideoCapture1.StartAsync();
@@ -133,6 +150,11 @@ namespace screen_capture
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             Log(e.Message);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

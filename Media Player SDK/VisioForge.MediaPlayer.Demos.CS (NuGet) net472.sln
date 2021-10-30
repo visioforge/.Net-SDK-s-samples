@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1622
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Player Demo (NuGet) net472", "WinForms\CSharp\Audio Player\Audio Player Demo (NuGet) net472.csproj", "{AEBEA0DD-44E1-4351-A9F2-FC6E46CFFB93}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Demo (N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP (NuGet) net472", "WinForms\CSharp\Main Demo\Main Demo MP (NuGet) net472.csproj", "{F3381D78-62A8-4730-A559-3B5ACDE8F667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo MP WPF", "WPF\CSharp\Main Demo\Main Demo MP WPF (NuGet) net472.csproj", "{E412F69E-2111-433E-856E-6ADE54655503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP WPF (NuGet) net472", "WPF\CSharp\Main Demo\Main Demo MP WPF (NuGet) net472.csproj", "{E412F69E-2111-433E-856E-6ADE54655503}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSnippets", "CodeSnippets", "{6E4DFE4D-F6E3-4D76-9143-0C408F773B65}"
 EndProject
@@ -34,6 +34,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karaoke Demo (NuGet) net472", "WinForms\CSharp\Karaoke Demo\Karaoke Demo (NuGet) net472.csproj", "{57DA73CE-CE2B-4660-81D4-3CF28CA0A647}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo (NuGet) net472", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo (NuGet) net472.csproj", "{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{5790C8A4-B862-462E-9781-22F33F9079F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) net472", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) net472.csproj", "{0F639645-9548-46EF-AF02-3AB559BA3E57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +151,14 @@ Global
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.ActiveCfg = Release|Any CPU
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.Build.0 = Release|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F639645-9548-46EF-AF02-3AB559BA3E57}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +177,7 @@ Global
 		{DDEF7252-9D8C-4324-8B18-A1944494F463} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{0F639645-9548-46EF-AF02-3AB559BA3E57} = {5790C8A4-B862-462E-9781-22F33F9079F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

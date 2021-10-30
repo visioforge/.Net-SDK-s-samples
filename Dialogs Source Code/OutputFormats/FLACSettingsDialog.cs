@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -40,7 +40,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="flacOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFFLACOutput flacOutput)
+        public void LoadSettings(FLACOutput flacOutput)
         {
             tbFLACLevel.Value = flacOutput.Level;
             cbFLACBlockSize.Text = flacOutput.BlockSize.ToString();
@@ -58,7 +58,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="flacOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFFLACOutput flacOutput)
+        public void SaveSettings(ref FLACOutput flacOutput)
         {
             flacOutput.Level = tbFLACLevel.Value;
             flacOutput.BlockSize = Convert.ToInt32(cbFLACBlockSize.Text);

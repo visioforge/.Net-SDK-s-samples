@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -42,7 +42,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFMP3Output mp3Output)
+        public void LoadSettings(MP3Output mp3Output)
         {
             // main
             cbLameCBRBitrate.Text = mp3Output.CBR_Bitrate.ToString();
@@ -54,16 +54,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (mp3Output.ChannelsMode)
             {
-                case VFLameChannelsMode.StandardStereo:
+                case MP3ChannelsMode.StandardStereo:
                     rbLameStandardStereo.Checked = true;
                     break;
-                case VFLameChannelsMode.JointStereo:
+                case MP3ChannelsMode.JointStereo:
                     rbLameJointStereo.Checked = true;
                     break;
-                case VFLameChannelsMode.DualStereo:
+                case MP3ChannelsMode.DualStereo:
                     rbLameDualChannels.Checked = true;
                     break;
-                case VFLameChannelsMode.Mono:
+                case MP3ChannelsMode.Mono:
                     rbLameMono.Checked = true;
                     break;
                 default:
@@ -92,7 +92,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp3Output">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMP3Output mp3Output)
+        public void SaveSettings(ref MP3Output mp3Output)
         {
             // main
             mp3Output.CBR_Bitrate = Convert.ToInt32(cbLameCBRBitrate.Text);
@@ -104,19 +104,19 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             if (rbLameStandardStereo.Checked)
             {
-                mp3Output.ChannelsMode = VFLameChannelsMode.StandardStereo;
+                mp3Output.ChannelsMode = MP3ChannelsMode.StandardStereo;
             }
             else if (rbLameJointStereo.Checked)
             {
-                mp3Output.ChannelsMode = VFLameChannelsMode.JointStereo;
+                mp3Output.ChannelsMode = MP3ChannelsMode.JointStereo;
             }
             else if (rbLameDualChannels.Checked)
             {
-                mp3Output.ChannelsMode = VFLameChannelsMode.DualStereo;
+                mp3Output.ChannelsMode = MP3ChannelsMode.DualStereo;
             }
             else
             {
-                mp3Output.ChannelsMode = VFLameChannelsMode.Mono;
+                mp3Output.ChannelsMode = MP3ChannelsMode.Mono;
             }
 
             mp3Output.VBR_Mode = rbLameVBR.Checked;

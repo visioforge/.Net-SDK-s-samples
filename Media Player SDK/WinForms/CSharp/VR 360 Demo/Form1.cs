@@ -4,16 +4,37 @@
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.GPUVideoEffects;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
-        private IVFGPUVideoEffectVR360Base vr = new VFGPUVideoEffectVR360Base(false);
+        private IGPUVideoEffectVR360Base vr = new GPUVideoEffectVR360Base(false);
+
+        private MediaPlayerCore MediaPlayer1;
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
 
         public Form1()
         {
@@ -46,7 +67,7 @@
         {
             mmError.Clear();
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
             MediaPlayer1.FilenamesOrURL.Add(edFilename.Text);
             MediaPlayer1.Audio_PlayAudio = true;
@@ -55,15 +76,15 @@
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -74,15 +95,15 @@
 
             if (rbVRCubemap.Checked)
             {
-                vr = new VFGPUVideoEffectEquiangularCubemap360(true, 0, 0, 0, 80, "VR");
+                vr = new GPUVideoEffectEquiangularCubemap360(true, 0, 0, 0, 80, "VR");
             }
             else
             {
-                vr = new VFGPUVideoEffectEquirectangular360(true, 0, 0, 0, 80, "VR");
+                vr = new GPUVideoEffectEquirectangular360(true, 0, 0, 0, 80, "VR");
             }
 
             MediaPlayer1.Video_Effects_GPU_Add(vr);
-            // MediaPlayer1.Video_Effects_GPU_Add(new VFGPUVideoEffectEquirectangular360(true));
+            // MediaPlayer1.Video_Effects_GPU_Add(new GPUVideoEffectEquirectangular360(true));
 
             await MediaPlayer1.PlayAsync();
 
@@ -123,7 +144,10 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
@@ -151,7 +175,7 @@
                                    }));
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -210,6 +234,11 @@
         {
             vr.Roll = tbRoll.Value;
             vr.UpdateRequired = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

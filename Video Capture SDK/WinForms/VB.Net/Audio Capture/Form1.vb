@@ -6,8 +6,11 @@ Imports VisioForge.Controls.UI.Dialogs.OutputFormats
 Imports VisioForge.Types
 Imports VisioForge.Controls.VideoCapture
 Imports VisioForge.Tools
-Imports VisioForge.Types.OutputFormat
+Imports VisioForge.Types.Output
 Imports System.IO
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.VideoCapture
+Imports VisioForge.Types.AudioEffects
 
 Public Class Form1
 
@@ -58,10 +61,7 @@ Public Class Form1
 
             If cbAudioInputLine.Items.Count > 0 Then
                 cbAudioInputLine.SelectedIndex = 0
-                cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
             End If
-
-            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
         End If
 
         Dim defaultAudioRenderer = String.Empty
@@ -97,7 +97,6 @@ Public Class Form1
 
     Private Sub cbAudioInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioInputDevice.SelectedIndexChanged
         If cbAudioInputDevice.SelectedIndex <> -1 Then
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
             cbAudioInputFormat.Items.Clear()
 
             Dim deviceItem = (From info In VideoCapture1.Audio_CaptureDevices Where info.Name = cbAudioInputDevice.Text)?.FirstOrDefault()
@@ -125,8 +124,6 @@ Public Class Form1
                 End If
             End If
 
-            cbAudioInputFormat_SelectedIndexChanged(Nothing, Nothing)
-
             cbAudioInputLine.Items.Clear()
 
             Dim lines = deviceItem.Lines
@@ -138,21 +135,11 @@ Public Class Form1
                 cbAudioInputLine.SelectedIndex = 0
             End If
 
-            cbAudioInputLine_SelectedIndexChanged(Nothing, Nothing)
-
             btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault
         End If
     End Sub
     Private Sub btAudioInputDeviceSettings_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btAudioInputDeviceSettings.Click
         VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text)
-    End Sub
-
-    Private Sub cbAudioInputFormat_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioInputFormat.SelectedIndexChanged
-        VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text
-    End Sub
-
-    Private Sub cbAudioInputLine_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioInputLine.SelectedIndexChanged
-        VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text
     End Sub
 
     Private Sub cbUseBestAudioInputFormat_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbUseBestAudioInputFormat.CheckedChanged
@@ -267,7 +254,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub SetM4AOutput(ByRef m4aOutput As VFM4AOutput)
+    Private Sub SetM4AOutput(ByRef m4aOutput As M4AOutput)
         If (m4aSettingsDialog Is Nothing) Then
             m4aSettingsDialog = New M4ASettingsDialog()
         End If
@@ -275,7 +262,7 @@ Public Class Form1
         m4aSettingsDialog.SaveSettings(m4aOutput)
     End Sub
 
-    Private Sub SetWMAOutput(ByRef wmaOutput As VFWMAOutput)
+    Private Sub SetWMAOutput(ByRef wmaOutput As WMAOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
         End If
@@ -284,7 +271,7 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmaOutput)
     End Sub
 
-    Private Sub SetOGGOutput(ByRef oggVorbisOutput As VFOGGVorbisOutput)
+    Private Sub SetOGGOutput(ByRef oggVorbisOutput As OGGVorbisOutput)
         If (oggVorbisSettingsDialog Is Nothing) Then
             oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
         End If
@@ -292,7 +279,7 @@ Public Class Form1
         oggVorbisSettingsDialog.SaveSettings(oggVorbisOutput)
     End Sub
 
-    Private Sub SetSpeexOutput(ByRef speexOutput As VFSpeexOutput)
+    Private Sub SetSpeexOutput(ByRef speexOutput As SpeexOutput)
         If (speexSettingsDialog Is Nothing) Then
             speexSettingsDialog = New SpeexSettingsDialog()
         End If
@@ -300,7 +287,7 @@ Public Class Form1
         speexSettingsDialog.SaveSettings(speexOutput)
     End Sub
 
-    Private Sub SetFLACOutput(ByRef flacOutput As VFFLACOutput)
+    Private Sub SetFLACOutput(ByRef flacOutput As FLACOutput)
         If (flacSettingsDialog Is Nothing) Then
             flacSettingsDialog = New FLACSettingsDialog()
         End If
@@ -308,7 +295,7 @@ Public Class Form1
         flacSettingsDialog.SaveSettings(flacOutput)
     End Sub
 
-    Private Sub SetMP3Output(ByRef mp3Output As VFMP3Output)
+    Private Sub SetMP3Output(ByRef mp3Output As MP3Output)
         If (mp3SettingsDialog Is Nothing) Then
             mp3SettingsDialog = New MP3SettingsDialog()
         End If
@@ -316,7 +303,7 @@ Public Class Form1
         mp3SettingsDialog.SaveSettings(mp3Output)
     End Sub
 
-    Private Sub SetACMOutput(ByRef acmOutput As VFACMOutput)
+    Private Sub SetACMOutput(ByRef acmOutput As ACMOutput)
         If (pcmSettingsDialog Is Nothing) Then
             pcmSettingsDialog = New PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray())
         End If
@@ -331,49 +318,51 @@ Public Class Form1
         VideoCapture1.Debug_Mode = cbDebugMode.Checked
         VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
-        VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text
-        VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text
-        VideoCapture1.Audio_CaptureDevice_Format_UseBest = False
-        VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text
+
+        VideoCapture1.Audio_CaptureDevice = New AudioCaptureSource(cbAudioInputDevice.Text)
+        VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text
+        VideoCapture1.Audio_CaptureDevice.Format_UseBest = False
+        VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text
         VideoCapture1.Audio_PlayAudio = cbPlayAudio.Checked
-        VideoCapture1.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None
+
+        VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None
 
         If cbMode.SelectedIndex = 0 Then
-            VideoCapture1.Mode = VFVideoCaptureMode.AudioPreview
+            VideoCapture1.Mode = VideoCaptureMode.AudioPreview
             VideoCapture1.Audio_RecordAudio = True
         Else
-            VideoCapture1.Mode = VFVideoCaptureMode.AudioCapture
+            VideoCapture1.Mode = VideoCaptureMode.AudioCapture
             VideoCapture1.Audio_RecordAudio = True
             VideoCapture1.Output_Filename = edOutput.Text
 
             Select Case (cbOutputFormat.SelectedIndex)
                 Case 0
-                    Dim acmOutput = New VFACMOutput()
+                    Dim acmOutput = New ACMOutput()
                     SetACMOutput(acmOutput)
                     VideoCapture1.Output_Format = acmOutput
                 Case 1
-                    Dim mp3Output = New VFMP3Output()
+                    Dim mp3Output = New MP3Output()
                     SetMP3Output(mp3Output)
                     VideoCapture1.Output_Format = mp3Output
                 Case 2
-                    Dim wmaOutput = New VFWMAOutput()
+                    Dim wmaOutput = New WMAOutput()
                     SetWMAOutput(wmaOutput)
                     VideoCapture1.Output_Format = wmaOutput
                 Case 3
-                    Dim oggVorbisOutput = New VFOGGVorbisOutput()
+                    Dim oggVorbisOutput = New OGGVorbisOutput()
                     SetOGGOutput(oggVorbisOutput)
                     VideoCapture1.Output_Format = oggVorbisOutput
                 Case 4
-                    Dim flacOutput = New VFFLACOutput()
+                    Dim flacOutput = New FLACOutput()
                     SetFLACOutput(flacOutput)
                     VideoCapture1.Output_Format = flacOutput
                 Case 5
-                    Dim speexOutput = New VFSpeexOutput()
+                    Dim speexOutput = New SpeexOutput()
                     SetSpeexOutput(speexOutput)
                     VideoCapture1.Output_Format = speexOutput
                 Case 6
-                    Dim m4aOutput = New VFM4AOutput()
+                    Dim m4aOutput = New M4AOutput()
                     SetM4AOutput(m4aOutput)
                     VideoCapture1.Output_Format = m4aOutput
             End Select
@@ -383,10 +372,10 @@ Public Class Form1
         VideoCapture1.Audio_Effects_Clear(-1)
         VideoCapture1.Audio_Effects_Enabled = True
 
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-        VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+        VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
 
         Await VideoCapture1.StartAsync()
 

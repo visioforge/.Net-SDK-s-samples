@@ -6,11 +6,13 @@ namespace Memory_Stream_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.WinForms;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -22,9 +24,27 @@ namespace Memory_Stream_Demo
 
         private byte[] _memorySource;
 
+        private MediaPlayerCore MediaPlayer1;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -53,14 +73,32 @@ namespace Memory_Stream_Demo
         {
             mmError.Text = string.Empty;
 
+            // video and audio present in file. tune this settings to play audio files or video files without audio
+            bool videoPresent;
+            bool audioPresent;
+            if (rbVideoWithAudio.Checked)
+            {
+                videoPresent = true;
+                audioPresent = true;
+            }
+            else if (rbVideoWithoutAudio.Checked)
+            {
+                videoPresent = true;
+                audioPresent = false;
+            }
+            else
+            {
+                videoPresent = false;
+                audioPresent = true;
+            }
+
             if (rbSTreamTypeFile.Checked)
             {
                 _fileStream = new FileStream(edFilename.Text, FileMode.Open);
                 _stream = new ManagedIStream(_fileStream);
 
                 // specifying settings
-                MediaPlayer1.Source_Stream = _stream;
-                MediaPlayer1.Source_Stream_Size = _fileStream.Length;
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length);
             }
             else
             {
@@ -69,42 +107,24 @@ namespace Memory_Stream_Demo
                 _stream = new ManagedIStream(_memoryStream);
 
                 // specifying settings
-                MediaPlayer1.Source_Stream = _stream;
-                MediaPlayer1.Source_Stream_Size = _memoryStream.Length;
-            }
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length);
+            }            
 
-            // video and audio present in file. tune this settings to play audio files or video files without audio
-            if (rbVideoWithAudio.Checked)
-            {
-                MediaPlayer1.Source_Stream_VideoPresent = true;
-                MediaPlayer1.Source_Stream_AudioPresent = true;
-            }
-            else if (rbVideoWithoutAudio.Checked)
-            {
-                MediaPlayer1.Source_Stream_VideoPresent = true;
-                MediaPlayer1.Source_Stream_AudioPresent = false;
-            }
-            else
-            {
-                MediaPlayer1.Source_Stream_VideoPresent = false;
-                MediaPlayer1.Source_Stream_AudioPresent = true;
-            }
-
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -116,6 +136,8 @@ namespace Memory_Stream_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{MediaPlayer1.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
@@ -193,6 +215,8 @@ namespace Memory_Stream_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btStop_Click(null, null);
+
+            DestroyEngine();
         }
 
         private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)

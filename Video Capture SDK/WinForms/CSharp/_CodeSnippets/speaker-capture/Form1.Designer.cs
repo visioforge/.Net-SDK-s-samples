@@ -16,7 +16,11 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
-            }
+            }         
+
+            VideoCapture1?.Dispose();
+            VideoCapture1 = null;
+
             base.Dispose(disposing);
         }
 

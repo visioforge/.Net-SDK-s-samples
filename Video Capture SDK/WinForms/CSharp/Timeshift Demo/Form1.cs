@@ -1,35 +1,75 @@
-﻿using VisioForge.Types.Sources;
-using VisioForge.Types.VideoEffects;
-
-namespace VC_Timeshift_Demo
+﻿namespace VC_Timeshift_Demo
 {
     using System;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.MediaPlayer;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
+    using VisioForge.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
+        private MediaPlayerCore MediaPlayer1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngineCapture()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoViewCapture as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnTimeshiftFileCreated += VideoCapture1_OnTimeshiftFileCreated;
+        }
+
+        private void DestroyEngineCapture()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnTimeshiftFileCreated -= VideoCapture1_OnTimeshiftFileCreated;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
+        private void CreateEnginePlayer()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoViewPlayer as IVideoView);
+
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+        }
+
+        private void DestroyEnginePlayer()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngineCapture();
+            CreateEnginePlayer();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             cbIPCameraType.SelectedIndex = 2;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
 
-            foreach (var device in VideoCapture1.Video_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Video_CaptureDevices)
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -40,7 +80,7 @@ namespace VC_Timeshift_Demo
                 cbVideoInputDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -55,15 +95,15 @@ namespace VC_Timeshift_Demo
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
         }
 
@@ -73,7 +113,7 @@ namespace VC_Timeshift_Demo
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -89,8 +129,6 @@ namespace VC_Timeshift_Demo
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-                
-                cbUseAudioInputFromVideoCaptureDevice.Enabled = deviceItem.AudioOutput;
             }
         }
 
@@ -103,7 +141,7 @@ namespace VC_Timeshift_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -133,28 +171,9 @@ namespace VC_Timeshift_Demo
             cbAudioInputFormat.Items.Clear();
             cbAudioInputLine.Items.Clear();
 
-            if (cbUseAudioInputFromVideoCaptureDevice.Checked)
+            if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                var deviceItem =
-                    VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
-                if (deviceItem != null)
-                {
-                    foreach (string format in deviceItem.AudioFormats)
-                    {
-                        cbAudioInputFormat.Items.Add(format);
-                    }
-
-                    if (cbAudioInputFormat.Items.Count > 0)
-                    {
-                        cbAudioInputFormat.SelectedIndex = 0;
-                    }
-                }
-            }
-            else if (cbAudioInputDevice.SelectedIndex != -1)
-            {
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
-
-                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string format in deviceItem.Formats)
@@ -197,26 +216,25 @@ namespace VC_Timeshift_Demo
 
             if (rbVideoCaptureDevice.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
+                VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
 
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
-                VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-                VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
-                VideoCapture1.Audio_CaptureDevice_Format_UseBest = cbUseBestAudioInputFormat.Checked;
+                VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
+                VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
+                VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text;
+                VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked;
 
-                VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-                VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked;
-                VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-                VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
+                VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
+                VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
+                VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
 
                 if (cbVideoInputFrameRate.SelectedIndex != -1)
                 {
-                    VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                    VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
                 }
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.IPPreview;
+                VideoCapture1.Mode = VideoCaptureMode.IPPreview;
                 VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
                 {
                     URL = cbIPURL.Text
@@ -225,39 +243,39 @@ namespace VC_Timeshift_Demo
                 switch (cbIPCameraType.SelectedIndex)
                 {
                     case 0:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_VLC;
                         break;
                     case 1:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG;
                         break;
                     case 2:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
                         break;
                     case 3:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.MMS_WMV;
                         break;
                     case 4:
                         {
                             // audio not supported
-                            VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency;
+                            VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.HTTP_MJPEG_LowLatency;
                             VideoCapture1.Audio_RecordAudio = false;
                             VideoCapture1.Audio_PlayAudio = false;
                             cbIPAudioCapture.Checked = false;
                         }
                         break;
                     case 5:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                         VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = false;
                         break;
                     case 6:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency;
                         VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = true;
                         break;
                     case 7:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI;
                         break;
                     case 8:
-                        VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy;
+                        VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI_Legacy;
                         break;
                 }
 
@@ -271,12 +289,12 @@ namespace VC_Timeshift_Demo
 
             VideoCapture1.Timeshift_Settings = new TimeshiftSettings
             {
-                Player_Screen = MediaPlayer1,
+                Player_Screen = VideoViewPlayer,
                 TempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "SBE"),
                 Player_AudioOutput_Enabled = cbPlayerPlayAudio.Checked
             };
 
-            var mp4Settings = new VFMP4Output
+            var mp4Settings = new MP4Output
                                   {
                                       Video =
                                           {
@@ -293,12 +311,12 @@ namespace VC_Timeshift_Demo
                 case 1:
                     {
                         VideoCapture1.Mode = rbVideoCaptureDevice.Checked
-                            ? VFVideoCaptureMode.VideoCapture
-                            : VFVideoCaptureMode.IPCapture;
+                            ? VideoCaptureMode.VideoCapture
+                            : VideoCaptureMode.IPCapture;
 
                         VideoCapture1.Output_Filename = edOutput.Text;
                         
-                        var output = new VFAVIOutput();
+                        var output = new AVIOutput();
                         VideoCapture1.Output_Format = output;
                     }
 
@@ -306,11 +324,11 @@ namespace VC_Timeshift_Demo
                 case 2:
                     {
                         VideoCapture1.Mode = rbVideoCaptureDevice.Checked
-                            ? VFVideoCaptureMode.VideoCapture
-                            : VFVideoCaptureMode.IPCapture;
+                            ? VideoCaptureMode.VideoCapture
+                            : VideoCaptureMode.IPCapture;
 
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        var output = new VFMP4Output();
+                        var output = new MP4Output();
                         VideoCapture1.Output_Format = output;
                     }
 
@@ -318,11 +336,11 @@ namespace VC_Timeshift_Demo
                 case 3:
                     {
                         VideoCapture1.Mode = rbVideoCaptureDevice.Checked
-                            ? VFVideoCaptureMode.VideoCapture
-                            : VFVideoCaptureMode.IPCapture;
+                            ? VideoCaptureMode.VideoCapture
+                            : VideoCaptureMode.IPCapture;
 
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        var output = new VFWebMOutput();
+                        var output = new WebMOutput();
                         VideoCapture1.Output_Format = output;
                     }
 
@@ -331,7 +349,7 @@ namespace VC_Timeshift_Demo
 
             VideoCapture1.Video_Effects_Clear();
             VideoCapture1.Video_Effects_Enabled = true;
-            VideoCapture1.Video_Effects_Add(new VFVideoEffectTextLogo(true) {Mode = TextLogoMode.Timestamp, Text = string.Empty, Left = 150, Top = 10});
+            VideoCapture1.Video_Effects_Add(new VideoEffectTextLogo(true) {Mode = TextLogoMode.Timestamp, Text = string.Empty, Left = 150, Top = 10});
 
             await VideoCapture1.StartAsync();
 
@@ -424,14 +442,15 @@ namespace VC_Timeshift_Demo
             MediaPlayer1.FilenamesOrURL.Clear();
             MediaPlayer1.FilenamesOrURL.Add(filename);
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.Timeshift;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Timeshift;
 
             await MediaPlayer1.PlayAsync();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            DestroyEngineCapture();
+            DestroyEnginePlayer();
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -37,7 +37,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="speexOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFSpeexOutput speexOutput)
+        public void SaveSettings(ref SpeexOutput speexOutput)
         {
             speexOutput.BitRate = tbSpeexBitrate.Value;
             speexOutput.BitrateControl = (SpeexBitrateControl)cbSpeexBitrateControl.SelectedIndex;
@@ -57,7 +57,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="speexOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFSpeexOutput speexOutput)
+        public void LoadSettings(SpeexOutput speexOutput)
         {
             tbSpeexBitrate.Value = speexOutput.BitRate;
             cbSpeexBitrateControl.SelectedIndex = (int)speexOutput.BitrateControl;

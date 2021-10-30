@@ -2,11 +2,24 @@
 
 Imports VisioForge.Controls.UI
 Imports VisioForge.Types
-Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
 Imports VisioForge.Tools
+Imports VisioForge.Controls.MediaPlayer
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.MediaPlayer
 
 Public Class Form1
+    Private WithEvents MediaPlayer1 As MediaPlayerCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        MediaPlayer1 = New MediaPlayerCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        MediaPlayer1.Dispose()
+        MediaPlayer1 = Nothing
+    End Sub
 
     Dim WithEvents form2 As Form2
 
@@ -39,16 +52,16 @@ Public Class Form1
         MediaPlayer1.FilenamesOrURL.Add(edFilename.Text)
         MediaPlayer1.Audio_PlayAudio = True
         MediaPlayer1.Info_UseLibMediaInfo = True
-        MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV
+        MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV
 
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
         If (FilterHelpers.Filter_Supported_EVR()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
         ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         Else
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         End If
 
         MediaPlayer1.MultiScreen_Enabled = True
@@ -113,6 +126,8 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
+        CreateEngine()
+
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         form2 = New Form2
@@ -157,6 +172,8 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
+
+        DestroyEngine()
     End Sub
 End Class
 

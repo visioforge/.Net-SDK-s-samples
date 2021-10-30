@@ -65,20 +65,20 @@ Partial Class Form1
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.MediaPlayer1 = New VisioForge.Controls.UI.WinForms.MediaPlayer()
-        Me.groupBox4.SuspendLayout
-        CType(Me.tbBalance1,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.tbVolume1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.groupBox1.SuspendLayout
-        Me.groupBox3.SuspendLayout
-        Me.groupBox2.SuspendLayout
-        CType(Me.tbSpeed,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.tbTimeline,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.groupBox4.SuspendLayout()
+        CType(Me.tbBalance1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbVolume1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.groupBox1.SuspendLayout()
+        Me.groupBox3.SuspendLayout()
+        Me.groupBox2.SuspendLayout()
+        CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbTimeline, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'groupBox4
         '
-        Me.groupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.groupBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.groupBox4.Controls.Add(Me.label7)
         Me.groupBox4.Controls.Add(Me.tbBalance1)
         Me.groupBox4.Controls.Add(Me.label6)
@@ -87,12 +87,12 @@ Partial Class Form1
         Me.groupBox4.Name = "groupBox4"
         Me.groupBox4.Size = New System.Drawing.Size(221, 107)
         Me.groupBox4.TabIndex = 34
-        Me.groupBox4.TabStop = false
+        Me.groupBox4.TabStop = False
         Me.groupBox4.Text = "Audio output"
         '
         'label7
         '
-        Me.label7.AutoSize = true
+        Me.label7.AutoSize = True
         Me.label7.Location = New System.Drawing.Point(109, 28)
         Me.label7.Name = "label7"
         Me.label7.Size = New System.Drawing.Size(46, 13)
@@ -111,7 +111,7 @@ Partial Class Form1
         '
         'label6
         '
-        Me.label6.AutoSize = true
+        Me.label6.AutoSize = True
         Me.label6.Location = New System.Drawing.Point(16, 28)
         Me.label6.Name = "label6"
         Me.label6.Size = New System.Drawing.Size(42, 13)
@@ -131,7 +131,7 @@ Partial Class Form1
         '
         'groupBox1
         '
-        Me.groupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.groupBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.groupBox1.Controls.Add(Me.cbLicensing)
         Me.groupBox1.Controls.Add(Me.mmError)
         Me.groupBox1.Controls.Add(Me.cbDebugMode)
@@ -139,23 +139,23 @@ Partial Class Form1
         Me.groupBox1.Name = "groupBox1"
         Me.groupBox1.Size = New System.Drawing.Size(221, 126)
         Me.groupBox1.TabIndex = 33
-        Me.groupBox1.TabStop = false
+        Me.groupBox1.TabStop = False
         Me.groupBox1.Text = "Errors and warnings"
         '
         'cbLicensing
         '
-        Me.cbLicensing.AutoSize = true
+        Me.cbLicensing.AutoSize = True
         Me.cbLicensing.Location = New System.Drawing.Point(106, 19)
         Me.cbLicensing.Name = "cbLicensing"
         Me.cbLicensing.Size = New System.Drawing.Size(91, 17)
         Me.cbLicensing.TabIndex = 4
         Me.cbLicensing.Text = "Licensing info"
-        Me.cbLicensing.UseVisualStyleBackColor = true
+        Me.cbLicensing.UseVisualStyleBackColor = True
         '
         'mmError
         '
         Me.mmError.Location = New System.Drawing.Point(6, 42)
-        Me.mmError.Multiline = true
+        Me.mmError.Multiline = True
         Me.mmError.Name = "mmError"
         Me.mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.mmError.Size = New System.Drawing.Size(209, 78)
@@ -163,19 +163,19 @@ Partial Class Form1
         '
         'cbDebugMode
         '
-        Me.cbDebugMode.AutoSize = true
+        Me.cbDebugMode.AutoSize = True
         Me.cbDebugMode.Location = New System.Drawing.Point(6, 19)
         Me.cbDebugMode.Name = "cbDebugMode"
         Me.cbDebugMode.Size = New System.Drawing.Size(87, 17)
         Me.cbDebugMode.TabIndex = 2
         Me.cbDebugMode.Text = "Debug mode"
-        Me.cbDebugMode.UseVisualStyleBackColor = true
+        Me.cbDebugMode.UseVisualStyleBackColor = True
         '
         'label1
         '
-        Me.label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.label1.AutoSize = true
-        Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.label1.AutoSize = True
+        Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.label1.Location = New System.Drawing.Point(95, 555)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(244, 13)
@@ -184,7 +184,7 @@ Partial Class Form1
         '
         'groupBox3
         '
-        Me.groupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.groupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.groupBox3.Controls.Add(Me.btDVDControlRootMenu)
         Me.groupBox3.Controls.Add(Me.btDVDControlTitleMenu)
         Me.groupBox3.Controls.Add(Me.cbDVDControlSubtitles)
@@ -199,7 +199,7 @@ Partial Class Form1
         Me.groupBox3.Name = "groupBox3"
         Me.groupBox3.Size = New System.Drawing.Size(416, 78)
         Me.groupBox3.TabIndex = 31
-        Me.groupBox3.TabStop = false
+        Me.groupBox3.TabStop = False
         Me.groupBox3.Text = "DVD"
         '
         'btDVDControlRootMenu
@@ -209,7 +209,7 @@ Partial Class Form1
         Me.btDVDControlRootMenu.Size = New System.Drawing.Size(75, 23)
         Me.btDVDControlRootMenu.TabIndex = 9
         Me.btDVDControlRootMenu.Text = "Root menu"
-        Me.btDVDControlRootMenu.UseVisualStyleBackColor = true
+        Me.btDVDControlRootMenu.UseVisualStyleBackColor = True
         '
         'btDVDControlTitleMenu
         '
@@ -218,12 +218,12 @@ Partial Class Form1
         Me.btDVDControlTitleMenu.Size = New System.Drawing.Size(75, 23)
         Me.btDVDControlTitleMenu.TabIndex = 8
         Me.btDVDControlTitleMenu.Text = "Title menu"
-        Me.btDVDControlTitleMenu.UseVisualStyleBackColor = true
+        Me.btDVDControlTitleMenu.UseVisualStyleBackColor = True
         '
         'cbDVDControlSubtitles
         '
         Me.cbDVDControlSubtitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVDControlSubtitles.FormattingEnabled = true
+        Me.cbDVDControlSubtitles.FormattingEnabled = True
         Me.cbDVDControlSubtitles.Location = New System.Drawing.Point(217, 50)
         Me.cbDVDControlSubtitles.Name = "cbDVDControlSubtitles"
         Me.cbDVDControlSubtitles.Size = New System.Drawing.Size(112, 21)
@@ -231,7 +231,7 @@ Partial Class Form1
         '
         'label19
         '
-        Me.label19.AutoSize = true
+        Me.label19.AutoSize = True
         Me.label19.Location = New System.Drawing.Point(168, 53)
         Me.label19.Name = "label19"
         Me.label19.Size = New System.Drawing.Size(47, 13)
@@ -241,7 +241,7 @@ Partial Class Form1
         'cbDVDControlAudio
         '
         Me.cbDVDControlAudio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVDControlAudio.FormattingEnabled = true
+        Me.cbDVDControlAudio.FormattingEnabled = True
         Me.cbDVDControlAudio.Location = New System.Drawing.Point(217, 23)
         Me.cbDVDControlAudio.Name = "cbDVDControlAudio"
         Me.cbDVDControlAudio.Size = New System.Drawing.Size(112, 21)
@@ -249,7 +249,7 @@ Partial Class Form1
         '
         'label21
         '
-        Me.label21.AutoSize = true
+        Me.label21.AutoSize = True
         Me.label21.Location = New System.Drawing.Point(168, 26)
         Me.label21.Name = "label21"
         Me.label21.Size = New System.Drawing.Size(34, 13)
@@ -259,7 +259,7 @@ Partial Class Form1
         'cbDVDControlChapter
         '
         Me.cbDVDControlChapter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVDControlChapter.FormattingEnabled = true
+        Me.cbDVDControlChapter.FormattingEnabled = True
         Me.cbDVDControlChapter.Location = New System.Drawing.Point(55, 50)
         Me.cbDVDControlChapter.Name = "cbDVDControlChapter"
         Me.cbDVDControlChapter.Size = New System.Drawing.Size(98, 21)
@@ -267,7 +267,7 @@ Partial Class Form1
         '
         'label18
         '
-        Me.label18.AutoSize = true
+        Me.label18.AutoSize = True
         Me.label18.Location = New System.Drawing.Point(6, 53)
         Me.label18.Name = "label18"
         Me.label18.Size = New System.Drawing.Size(44, 13)
@@ -277,7 +277,7 @@ Partial Class Form1
         'cbDVDControlTitle
         '
         Me.cbDVDControlTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVDControlTitle.FormattingEnabled = true
+        Me.cbDVDControlTitle.FormattingEnabled = True
         Me.cbDVDControlTitle.Location = New System.Drawing.Point(55, 23)
         Me.cbDVDControlTitle.Name = "cbDVDControlTitle"
         Me.cbDVDControlTitle.Size = New System.Drawing.Size(98, 21)
@@ -285,7 +285,7 @@ Partial Class Form1
         '
         'label17
         '
-        Me.label17.AutoSize = true
+        Me.label17.AutoSize = True
         Me.label17.Location = New System.Drawing.Point(6, 26)
         Me.label17.Name = "label17"
         Me.label17.Size = New System.Drawing.Size(27, 13)
@@ -294,7 +294,7 @@ Partial Class Form1
         '
         'groupBox2
         '
-        Me.groupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.groupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.groupBox2.Controls.Add(Me.cbLoop)
         Me.groupBox2.Controls.Add(Me.btNextFrame)
         Me.groupBox2.Controls.Add(Me.btStop)
@@ -309,18 +309,18 @@ Partial Class Form1
         Me.groupBox2.Name = "groupBox2"
         Me.groupBox2.Size = New System.Drawing.Size(416, 90)
         Me.groupBox2.TabIndex = 30
-        Me.groupBox2.TabStop = false
+        Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Controls"
         '
         'cbLoop
         '
-        Me.cbLoop.AutoSize = true
+        Me.cbLoop.AutoSize = True
         Me.cbLoop.Location = New System.Drawing.Point(330, 62)
         Me.cbLoop.Name = "cbLoop"
         Me.cbLoop.Size = New System.Drawing.Size(50, 17)
         Me.cbLoop.TabIndex = 9
         Me.cbLoop.Text = "Loop"
-        Me.cbLoop.UseVisualStyleBackColor = true
+        Me.cbLoop.UseVisualStyleBackColor = True
         '
         'btNextFrame
         '
@@ -329,17 +329,17 @@ Partial Class Form1
         Me.btNextFrame.Size = New System.Drawing.Size(75, 23)
         Me.btNextFrame.TabIndex = 8
         Me.btNextFrame.Text = "Next frame"
-        Me.btNextFrame.UseVisualStyleBackColor = true
+        Me.btNextFrame.UseVisualStyleBackColor = True
         '
         'btStop
         '
-        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStop.Location = New System.Drawing.Point(180, 58)
         Me.btStop.Name = "btStop"
         Me.btStop.Size = New System.Drawing.Size(46, 23)
         Me.btStop.TabIndex = 7
         Me.btStop.Text = "Stop"
-        Me.btStop.UseVisualStyleBackColor = true
+        Me.btStop.UseVisualStyleBackColor = True
         '
         'btPause
         '
@@ -348,7 +348,7 @@ Partial Class Form1
         Me.btPause.Size = New System.Drawing.Size(52, 23)
         Me.btPause.TabIndex = 6
         Me.btPause.Text = "Pause"
-        Me.btPause.UseVisualStyleBackColor = true
+        Me.btPause.UseVisualStyleBackColor = True
         '
         'btResume
         '
@@ -357,17 +357,17 @@ Partial Class Form1
         Me.btResume.Size = New System.Drawing.Size(61, 23)
         Me.btResume.TabIndex = 5
         Me.btResume.Text = "Resume"
-        Me.btResume.UseVisualStyleBackColor = true
+        Me.btResume.UseVisualStyleBackColor = True
         '
         'btStart
         '
-        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStart.Location = New System.Drawing.Point(6, 58)
         Me.btStart.Name = "btStart"
         Me.btStart.Size = New System.Drawing.Size(43, 23)
         Me.btStart.TabIndex = 4
         Me.btStart.Text = "Start"
-        Me.btStart.UseVisualStyleBackColor = true
+        Me.btStart.UseVisualStyleBackColor = True
         '
         'tbSpeed
         '
@@ -381,7 +381,7 @@ Partial Class Form1
         '
         'label16
         '
-        Me.label16.AutoSize = true
+        Me.label16.AutoSize = True
         Me.label16.Location = New System.Drawing.Point(322, 11)
         Me.label16.Name = "label16"
         Me.label16.Size = New System.Drawing.Size(38, 13)
@@ -390,7 +390,7 @@ Partial Class Form1
         '
         'lbTime
         '
-        Me.lbTime.AutoSize = true
+        Me.lbTime.AutoSize = True
         Me.lbTime.Location = New System.Drawing.Point(219, 27)
         Me.lbTime.Name = "lbTime"
         Me.lbTime.Size = New System.Drawing.Size(96, 13)
@@ -407,29 +407,29 @@ Partial Class Form1
         '
         'linkLabel1
         '
-        Me.linkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.linkLabel1.AutoSize = true
+        Me.linkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.linkLabel1.AutoSize = True
         Me.linkLabel1.Location = New System.Drawing.Point(321, 6)
         Me.linkLabel1.Name = "linkLabel1"
         Me.linkLabel1.Size = New System.Drawing.Size(110, 13)
         Me.linkLabel1.TabIndex = 29
-        Me.linkLabel1.TabStop = true
+        Me.linkLabel1.TabStop = True
         Me.linkLabel1.Text = "Watch video tutorials!"
         '
         'btSelectFile
         '
-        Me.btSelectFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btSelectFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btSelectFile.Location = New System.Drawing.Point(408, 23)
         Me.btSelectFile.Name = "btSelectFile"
         Me.btSelectFile.Size = New System.Drawing.Size(23, 23)
         Me.btSelectFile.TabIndex = 28
         Me.btSelectFile.Text = "..."
-        Me.btSelectFile.UseVisualStyleBackColor = true
+        Me.btSelectFile.UseVisualStyleBackColor = True
         '
         'edFilename
         '
-        Me.edFilename.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.edFilename.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.edFilename.Location = New System.Drawing.Point(15, 25)
         Me.edFilename.Name = "edFilename"
         Me.edFilename.Size = New System.Drawing.Size(387, 20)
@@ -438,7 +438,7 @@ Partial Class Form1
         '
         'label14
         '
-        Me.label14.AutoSize = true
+        Me.label14.AutoSize = True
         Me.label14.Location = New System.Drawing.Point(12, 9)
         Me.label14.Name = "label14"
         Me.label14.Size = New System.Drawing.Size(95, 13)
@@ -448,66 +448,21 @@ Partial Class Form1
         'timer1
         '
         '
-        'MediaPlayer1
+        'VideoView1
         '
-        Me.MediaPlayer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.MediaPlayer1.Audio_Channel_Mapper = Nothing
-        Me.MediaPlayer1.Audio_Effects_Enabled = False
-        Me.MediaPlayer1.Audio_Enhancer_Enabled = False
-        Me.MediaPlayer1.Audio_OutputDevice = ""
-        Me.MediaPlayer1.Audio_PlayAudio = true
-        Me.MediaPlayer1.Audio_Sample_Grabber_Enabled = false
-        Me.MediaPlayer1.Audio_VUMeter_Enabled = false
-        Me.MediaPlayer1.Audio_VUMeter_Pro_Enabled = false
-        Me.MediaPlayer1.Audio_VUMeter_Pro_Volume = 0
-        Me.MediaPlayer1.BackColor = System.Drawing.Color.Black
-        Me.MediaPlayer1.Barcode_Reader_Enabled = false
-        Me.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
-        Me.MediaPlayer1.ChromaKey = Nothing
-        Me.MediaPlayer1.Custom_Audio_Decoder = Nothing
-        Me.MediaPlayer1.Custom_Splitter = Nothing
-        Me.MediaPlayer1.Custom_Video_Decoder = Nothing
-        Me.MediaPlayer1.Debug_DeepCleanUp = false
-        Me.MediaPlayer1.Debug_Dir = Nothing
-        Me.MediaPlayer1.Debug_Mode = false
-        Me.MediaPlayer1.Encryption_Key = ""
-        Me.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.[String]
-        Me.MediaPlayer1.Face_Tracking = Nothing
-        Me.MediaPlayer1.Info_UseLibMediaInfo = false
-        Me.MediaPlayer1.Location = New System.Drawing.Point(15, 54)
-        Me.MediaPlayer1.Loop = false
-        Me.MediaPlayer1.Loop_DoNotSeekToBeginning = false
-        Me.MediaPlayer1.MaximalSpeedPlayback = false
-        Me.MediaPlayer1.Motion_Detection = Nothing
-        Me.MediaPlayer1.Motion_DetectionEx = Nothing
-        Me.MediaPlayer1.MultiScreen_Enabled = false
-        Me.MediaPlayer1.Name = "MediaPlayer1"
-        Me.MediaPlayer1.ReversePlayback_CacheSize = 0
-        Me.MediaPlayer1.ReversePlayback_Enabled = false
-        Me.MediaPlayer1.Selection_Active = false
-        Me.MediaPlayer1.Selection_Start = 0
-        Me.MediaPlayer1.Selection_Stop = 0
-        Me.MediaPlayer1.Size = New System.Drawing.Size(415, 303)
-        Me.MediaPlayer1.Source_Custom_CLSID = Nothing
-        Me.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS
-        Me.MediaPlayer1.Source_Stream = Nothing
-        Me.MediaPlayer1.Source_Stream_AudioPresent = true
-        Me.MediaPlayer1.Source_Stream_Size = CType(0,Long)
-        Me.MediaPlayer1.Source_Stream_VideoPresent = true
-        Me.MediaPlayer1.Play_DelayEnabled = false
-        Me.MediaPlayer1.TabIndex = 35
-        Me.MediaPlayer1.Video_Effects_Enabled = false
-        Me.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = False
-        Me.MediaPlayer1.Video_Stream_Index = 0
+        Me.VideoView1.BackColor = System.Drawing.Color.Black
+        Me.VideoView1.Location = New System.Drawing.Point(15, 54)
+        Me.VideoView1.Name = "VideoView1"
+        Me.VideoView1.Size = New System.Drawing.Size(416, 306)
+        Me.VideoView1.StatusOverlay = Nothing
+        Me.VideoView1.TabIndex = 35
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(670, 578)
-        Me.Controls.Add(Me.MediaPlayer1)
+        Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.groupBox4)
         Me.Controls.Add(Me.groupBox1)
         Me.Controls.Add(Me.label1)
@@ -574,6 +529,6 @@ End Sub
     Private WithEvents saveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Private WithEvents openFileDialog1 As System.Windows.Forms.OpenFileDialog
     Private WithEvents timer1 As System.Windows.Forms.Timer
-    Friend WithEvents MediaPlayer1 As VisioForge.Controls.UI.WinForms.MediaPlayer
     Private WithEvents cbLicensing As CheckBox
+    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
 End Class

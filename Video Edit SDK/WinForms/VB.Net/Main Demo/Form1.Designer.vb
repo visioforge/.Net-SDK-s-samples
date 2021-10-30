@@ -11,6 +11,57 @@ Partial Class Form1
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
             End If
+
+            mp4HWSettingsDialog?.Dispose()
+            mp4HWSettingsDialog = Nothing
+
+            mp4SettingsDialog?.Dispose()
+            mp4SettingsDialog = Nothing
+
+            mp3SettingsDialog?.Dispose()
+            mp3SettingsDialog = Nothing
+
+            m4aSettingsDialog?.Dispose()
+            m4aSettingsDialog = Nothing
+
+            gifSettingsDialog?.Dispose()
+            gifSettingsDialog = Nothing
+
+            flacSettingsDialog?.Dispose()
+            flacSettingsDialog = Nothing
+
+            ffmpegSettingsDialog?.Dispose()
+            ffmpegSettingsDialog = Nothing
+
+            ffmpegEXESettingsDialog?.Dispose()
+            ffmpegEXESettingsDialog = Nothing
+
+            dvSettingsDialog?.Dispose()
+            dvSettingsDialog = Nothing
+
+            aviSettingsDialog?.Dispose()
+            aviSettingsDialog = Nothing
+
+            customFormatSettingsDialog?.Dispose()
+            customFormatSettingsDialog = Nothing
+
+            wmvSettingsDialog?.Dispose()
+            wmvSettingsDialog = Nothing
+
+            webmSettingsDialog?.Dispose()
+            webmSettingsDialog = Nothing
+
+            speexSettingsDialog?.Dispose()
+            speexSettingsDialog = Nothing
+
+            pcmSettingsDialog?.Dispose()
+            pcmSettingsDialog = Nothing
+
+            oggVorbisSettingsDialog?.Dispose()
+            oggVorbisSettingsDialog = Nothing
+
+            VideoEdit1?.Dispose()
+            VideoEdit1 = Nothing
         Finally
             MyBase.Dispose(disposing)
         End Try
@@ -529,7 +580,6 @@ Partial Class Form1
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.tbSeeking = New System.Windows.Forms.TrackBar()
         Me.openFileDialog3 = New System.Windows.Forms.OpenFileDialog()
-        Me.VideoEdit1 = New VisioForge.Controls.UI.WinForms.VideoEdit()
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.tabControl3 = New System.Windows.Forms.TabControl()
         Me.tabPage52 = New System.Windows.Forms.TabPage()
@@ -626,25 +676,26 @@ Partial Class Form1
         Me.Label496 = New System.Windows.Forms.Label()
         Me.edTagTrackID = New System.Windows.Forms.TextBox()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
-        Me.tabControl1.SuspendLayout
-        Me.tabPage1.SuspendLayout
-        Me.tabControl2.SuspendLayout
-        Me.TabPage4.SuspendLayout
-        Me.tabPage30.SuspendLayout
-        Me.tabPage31.SuspendLayout
-        Me.tabControl17.SuspendLayout
-        Me.tabPage68.SuspendLayout
-        Me.tabControl7.SuspendLayout
-        Me.tabPage29.SuspendLayout
-        Me.tabPage42.SuspendLayout
-        Me.TabPage7.SuspendLayout
-        Me.groupBox37.SuspendLayout
-        Me.TabPage16.SuspendLayout
-        Me.groupBox40.SuspendLayout
-        Me.groupBox39.SuspendLayout
-        Me.groupBox38.SuspendLayout
-        Me.TabPage33.SuspendLayout
-        Me.groupBox45.SuspendLayout
+        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.tabControl1.SuspendLayout()
+        Me.tabPage1.SuspendLayout()
+        Me.tabControl2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.tabPage30.SuspendLayout()
+        Me.tabPage31.SuspendLayout()
+        Me.tabControl17.SuspendLayout()
+        Me.tabPage68.SuspendLayout()
+        Me.tabControl7.SuspendLayout()
+        Me.tabPage29.SuspendLayout()
+        Me.tabPage42.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
+        Me.groupBox37.SuspendLayout()
+        Me.TabPage16.SuspendLayout()
+        Me.groupBox40.SuspendLayout()
+        Me.groupBox39.SuspendLayout()
+        Me.groupBox38.SuspendLayout()
+        Me.TabPage33.SuspendLayout()
+        Me.groupBox45.SuspendLayout()
         CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -5980,67 +6031,6 @@ Partial Class Form1
         Me.openFileDialog3.FileName = "openFileDialog3"
         Me.openFileDialog3.Filter = "Windows Media profile|*.prx"
         '
-        'VideoEdit1
-        '
-        Me.VideoEdit1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.VideoEdit1.Audio_Channel_Mapper = Nothing
-        Me.VideoEdit1.Audio_Effects_Enabled = False
-        Me.VideoEdit1.Audio_Enhancer_Enabled = False
-        Me.VideoEdit1.Audio_Preview_Enabled = False
-        Me.VideoEdit1.Audio_VUMeter_Enabled = False
-        Me.VideoEdit1.Audio_VUMeter_Pro_Enabled = False
-        Me.VideoEdit1.Audio_VUMeter_Pro_Volume = 0
-        Me.VideoEdit1.BackColor = System.Drawing.Color.Black
-        Me.VideoEdit1.Barcode_Reader_Enabled = False
-        Me.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
-        Me.VideoEdit1.ChromaKey = Nothing
-        Me.VideoEdit1.CustomRedist_Auto = True
-        Me.VideoEdit1.CustomRedist_DisableDialog = False
-        Me.VideoEdit1.CustomRedist_Path = Nothing
-        Me.VideoEdit1.Debug_Dir = ""
-        Me.VideoEdit1.Debug_DisableMessageDialogs = False
-        Me.VideoEdit1.Debug_Mode = False
-        Me.VideoEdit1.Debug_Telemetry = False
-        Me.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.[Auto]
-        Me.VideoEdit1.Decklink_Output = Nothing
-        Me.VideoEdit1.Dynamic_Reconnection = False
-        Me.VideoEdit1.Location = New System.Drawing.Point(331, 310)
-        Me.VideoEdit1.Loop = False
-        Me.VideoEdit1.Mode = VisioForge.Types.VFVideoEditMode.Convert
-        Me.VideoEdit1.Motion_Detection = Nothing
-        Me.VideoEdit1.Motion_DetectionEx = Nothing
-        Me.VideoEdit1.Name = "VideoEdit1"
-        Me.VideoEdit1.Network_Streaming_Audio_Enabled = False
-        Me.VideoEdit1.Network_Streaming_Enabled = False
-        Me.VideoEdit1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV
-        Me.VideoEdit1.Network_Streaming_Network_Port = 0
-        Me.VideoEdit1.Network_Streaming_Output = Nothing
-        Me.VideoEdit1.Network_Streaming_URL = Nothing
-        Me.VideoEdit1.Network_Streaming_WMV_Maximum_Clients = 0
-        Me.VideoEdit1.Output_Filename = "c:\output.avi"
-        Me.VideoEdit1.Output_Format = Nothing
-        Me.VideoEdit1.Size = New System.Drawing.Size(425, 276)
-        Me.VideoEdit1.Start_DelayEnabled = False
-        Me.VideoEdit1.TabIndex = 90
-        Me.VideoEdit1.Tags = Nothing
-        Me.VideoEdit1.UseLibMediaInfo = False
-        Me.VideoEdit1.Video_Crop = Nothing
-        Me.VideoEdit1.Video_Custom_Resizer_CLSID = New System.Guid("00000000-0000-0000-0000-000000000000")
-        Me.VideoEdit1.Video_Effects_AllowMultipleStreams = False
-        Me.VideoEdit1.Video_Effects_Enabled = False
-        Me.VideoEdit1.Video_Effects_GPU_Enabled = False
-        Me.VideoEdit1.Video_FrameRate = 25.0R
-        Me.VideoEdit1.Video_Preview_Enabled = True
-        Me.VideoEdit1.Video_Resize = False
-        Me.VideoEdit1.Video_Resize_Height = 480
-        Me.VideoEdit1.Video_Resize_Width = 640
-        Me.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone
-        Me.VideoEdit1.Video_Subtitles = Nothing
-        Me.VideoEdit1.Virtual_Camera_Output_Enabled = False
-        Me.VideoEdit1.Virtual_Camera_Output_LicenseKey = Nothing
-        '
         'tabControl3
         '
         Me.tabControl3.Controls.Add(Me.tabPage52)
@@ -6932,12 +6922,21 @@ Partial Class Form1
         Me.cbTelemetry.Text = "Telemetry"
         Me.cbTelemetry.UseVisualStyleBackColor = True
         '
+        'VideoView1
+        '
+        Me.VideoView1.BackColor = System.Drawing.Color.Black
+        Me.VideoView1.Location = New System.Drawing.Point(335, 310)
+        Me.VideoView1.Name = "VideoView1"
+        Me.VideoView1.Size = New System.Drawing.Size(417, 284)
+        Me.VideoView1.StatusOverlay = Nothing
+        Me.VideoView1.TabIndex = 95
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(768, 634)
-        Me.Controls.Add(Me.VideoEdit1)
+        Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.btStop)
         Me.Controls.Add(Me.btStart)
         Me.Controls.Add(Me.ProgressBar1)
@@ -7292,7 +7291,6 @@ End Sub
     Private WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Private WithEvents tbSeeking As System.Windows.Forms.TrackBar
     Private WithEvents openFileDialog3 As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents VideoEdit1 As VisioForge.Controls.UI.WinForms.VideoEdit
     Friend WithEvents TabPage20 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage21 As System.Windows.Forms.TabPage
     Private WithEvents tabControl15 As System.Windows.Forms.TabControl
@@ -7747,4 +7745,5 @@ End Sub
     Private WithEvents llXiphX86 As LinkLabel
     Private WithEvents label68 As Label
     Private WithEvents label67 As Label
+    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
 End Class

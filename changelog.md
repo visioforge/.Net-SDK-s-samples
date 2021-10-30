@@ -1,16 +1,33 @@
-14.*
+15.0
 * Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
 * RTSP Live555 IP camera engine has been removed. Please use RTSP Low Latency or FFMPEG engines.
 * Resolved SDK_Version possible issue.
 * Added Settings_Load API. You can load the settings file saved by Settings_JSON. Be sure that device names are correct.
 * Resolved issue with an exception if separate capture started before Start/StartAsync method call.
-* RTP support for VLC source engine.
+* RTP support for the VLC source engine.
 * API breaking change: SDK_State property has been removed. We do not have TRIAL and FULL SDK versions anymore.
 * API breaking change: DirectShow_Filters_Show_Dialog, DirectShow_Filters_Has_Dialog, Audio_Codec_HasDialog, Audio_Codec_ShowDialog, Video_Codec_HasDialog, Video_Codec_ShowDialog, Filter_Supported_LAV, Filter_Exists_MatroskaMuxer, Filter_Exists_OGGMuxer, Filter_Exists_VorbisEncoder, Filter_Supported_EVR, Filter_Supported_VMR9 and Filter_Supported_NVENC has been moved to VisioForge.Tools.FilterHelpers class.
 * VFAudioStreamInfo/VFVideoStreamInfo duration type changed to Timespan.
 * Decklink types from VisioForge.Types assembly moved to VisioForge.Types.Decklink namespace.
 * Telemetry updated.
 * Custom redist loader updated.
+* NDI update.
+* Status property changes to State, type is PlaybackState in all SDKs.
+* UI controls splitted into Core (VideoCaptureCore, MediaPlayerCore, VideoEditCore) and VideoView.
+* Video_CaptureDevice... properties merged into Video_CaptureDevice property of VideoCaptureSource type.
+* Audio_CaptureDevice... properties merged into Audio_CaptureDevice property of AudioCaptureSource type.
+* In Media Player SDK Source_Stream... properties were merged into Source_MemoryStream property of MemoryStreamSource type
+* Updated DVD playback
+* Updated FFMPEG source
+* API breaking change: Media Player SDK types moved from VisioForge.Types namespace to VisioForge.Types.MediaPlayer
+* API breaking change: Video Capture SDK types moved from VisioForge.Types namespace to VisioForge.Types.VideoCapture
+* API breaking change: Video Edit SDK types moved from VisioForge.Types namespace to "VisioForge.Types.VideoEdit"
+* API breaking change: Output types moved from VisioForge.Types namespace to VisioForge.Types.Output
+* API breaking change: Output types moved from VisioForge.Types namespace to VisioForge.Types.Output
+* API breaking change: Video Effects types moved from VisioForge.Types namespace to VisioForge.Types.VideoEffects
+* API breaking change: Audio Effects types moved from VisioForge.Types namespace to VisioForge.Types.AudioEffects
+* API breaking change: Event types moved from VisioForge.Types namespace to VisioForge.Types.Events
+* Added Video_Renderer_SetCustomWindowHandle method to set custom video renderer by Win32 window/control HWND handle
 
 14.4
 * Windows 11 support
@@ -44,7 +61,7 @@
 14.2
 * An issue with audio stream capture with enabled Virtual Camera SDK output was resolved
 * VFMP4v8v10Output was replaced with VFMP4Output
-* The "CanStart" method was added for Video_CaptureDevicesInfo items. The method returns true if the device can start and is not used exclusively in another app
+* The "CanStart" method was added for Video_CaptureDevices items. The method returns true if the device can start and is not used exclusively in another app
 * Added async/await API to the ONVIFControl
 * An issue with wrong ColorKey processing in the Text Overlay video effect was resolved
 * Added forced frame rate support for the RTSP Low Latency IP camera source

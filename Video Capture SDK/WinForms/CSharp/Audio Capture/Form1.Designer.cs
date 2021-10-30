@@ -19,6 +19,34 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             {
                 components.Dispose();
             }
+
+            mp3SettingsDialog?.Dispose();
+            mp3SettingsDialog = null;
+
+            m4aSettingsDialog?.Dispose();
+            m4aSettingsDialog = null;
+
+            flacSettingsDialog?.Dispose();
+            flacSettingsDialog = null;
+
+            wmvSettingsDialog?.Dispose();
+            wmvSettingsDialog = null;
+
+            speexSettingsDialog?.Dispose();
+            speexSettingsDialog = null;
+
+            pcmSettingsDialog?.Dispose();
+            pcmSettingsDialog = null;
+
+            oggVorbisSettingsDialog?.Dispose();
+            oggVorbisSettingsDialog = null;
+
+            tmRecording?.Dispose();
+            tmRecording = null;
+
+            VideoCapture1?.Dispose();
+            VideoCapture1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -973,7 +1001,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             this.cbAudioInputLine.Name = "cbAudioInputLine";
             this.cbAudioInputLine.Size = new System.Drawing.Size(291, 23);
             this.cbAudioInputLine.TabIndex = 81;
-            this.cbAudioInputLine.SelectedIndexChanged += new System.EventHandler(this.cbAudioInputLine_SelectedIndexChanged);
             // 
             // cbAudioInputFormat
             // 
@@ -986,7 +1013,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             this.cbAudioInputFormat.Name = "cbAudioInputFormat";
             this.cbAudioInputFormat.Size = new System.Drawing.Size(291, 23);
             this.cbAudioInputFormat.TabIndex = 80;
-            this.cbAudioInputFormat.SelectedIndexChanged += new System.EventHandler(this.cbAudioInputFormat_SelectedIndexChanged);
             // 
             // cbAudioInputDevice
             // 
@@ -1093,7 +1119,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btStart);
             this.Controls.Add(this.tcMain);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

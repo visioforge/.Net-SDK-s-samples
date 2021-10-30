@@ -6,16 +6,19 @@ namespace DVD_Player_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
     using VisioForge.Tools;
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
         private readonly DVDInfoReader MediaInfo = new DVDInfoReader();
+
+        private MediaPlayerCore MediaPlayer1;
 
         public Form1()
         {
@@ -59,19 +62,19 @@ namespace DVD_Player_Demo
             MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, false);
         }
 
-        private async void btResume_Click(object sender, EventArgs e)
+        private void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            MediaPlayer1.Resume();
         }
 
-        private async void btPause_Click(object sender, EventArgs e)
+        private void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            MediaPlayer1.Pause();
         }
 
-        private async void btStop_Click(object sender, EventArgs e)
+        private void btStop_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.StopAsync();
+            MediaPlayer1.Stop();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
         }
@@ -103,7 +106,7 @@ namespace DVD_Player_Demo
 
                 for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
                 {
-                    var audioStream = title.MainAttributes.AudioAttributes[i];                    
+                    var audioStream = title.MainAttributes.AudioAttributes[i];
                     string s = audioStream.AudioFormat.ToString();
 
                     s = s + " - ";
@@ -126,12 +129,12 @@ namespace DVD_Player_Demo
 
                 cbDVDControlSubtitles.SelectedIndex = 0;
 
-                // if (nil we just enumerate titles and chapters
+                // if (null we just enumerate titles and chapters
                 if (sender != null)
                 {
                     // play title
                     MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex);
-                    tbTimeline.Maximum = (int)MediaPlayer1.DVD_Title_GetDuration().TotalSeconds;
+                    tbTimeline.Maximum = (int)((MediaPlayer1.DVD_Title_GetDuration()).TotalSeconds);
                 }
             }
         }
@@ -165,15 +168,15 @@ namespace DVD_Player_Demo
 
         private void btDVDControlTitleMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title);
+            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
         }
 
         private void btDVDControlRootMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Root);
+            MediaPlayer1.DVD_Menu_Show(DVDMenu.Root);
         }
 
-        private async void btStart_Click(object sender, EventArgs e)
+        private void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
 
@@ -181,7 +184,7 @@ namespace DVD_Player_Demo
             MediaPlayer1.Loop = cbLoop.Checked;
             MediaPlayer1.Audio_PlayAudio = true;
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.DVD_DS;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS;
 
             // read DVD info
             cbDVDControlTitle.Items.Clear();
@@ -199,22 +202,11 @@ namespace DVD_Player_Demo
 
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
-            }
-            else
-            {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
-            }
+            MediaPlayer1.Video_Renderer_SetAuto();
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
-            await MediaPlayer1.PlayAsync();
+            MediaPlayer1.Play();
 
             // DVD
             // select and play first title
@@ -225,7 +217,7 @@ namespace DVD_Player_Demo
             }
 
             // show title menu
-            MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title);
+            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
 
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
             MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
@@ -236,9 +228,9 @@ namespace DVD_Player_Demo
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)MediaPlayer1.Duration_Time().TotalSeconds;
+            tbTimeline.Maximum = (int)((MediaPlayer1.Duration_Time()).TotalSeconds);
 
-            int value = (int)MediaPlayer1.Position_Get_Time().TotalSeconds;
+            int value = (int)((MediaPlayer1.Position_Get_Time()).TotalSeconds);
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -250,15 +242,37 @@ namespace DVD_Player_Demo
             {
                 if (MediaPlayer1.DVD_Chapter_GetCurrent() != cbDVDControlChapter.SelectedIndex)
                 {
-                    cbDVDControlChapter.SelectedIndex = MediaPlayer1.DVD_Chapter_GetCurrent();
+                    //cbDVDControlChapter.SelectedIndex =  MediaPlayer1.DVD_Chapter_GetCurrent();
                 }
             }
 
             timer1.Tag = 0;
         }
 
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnDVDPlaybackError += MediaPlayer1_OnDVDPlaybackError;
+            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnDVDPlaybackError -= MediaPlayer1_OnDVDPlaybackError;
+            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{MediaPlayer1.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
@@ -281,7 +295,7 @@ namespace DVD_Player_Demo
 
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -305,6 +319,8 @@ namespace DVD_Player_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btStop_Click(null, null);
+
+            DestroyEngine();
         }
     }
 }

@@ -9,12 +9,14 @@
     using VisioForge.Controls.UI;
     using VisioForge.MediaFramework.CDG;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
         private MediaPlayerCore MediaPlayer1;
 
-        private CDGFile cdg;
+        private CDGFile _cdg;
 
         public Form1()
         {
@@ -38,16 +40,16 @@
             {
                 edFilename.Text = openFileDialog1.FileName;
 
-                if (cdg != null)
+                if (_cdg != null)
                 {
-                    cdg.Dispose();
-                    cdg = null;
+                    _cdg.Dispose();
+                    _cdg = null;
                 }
 
                 var cdgFile = Path.Combine(Path.GetDirectoryName(edFilename.Text), Path.GetFileNameWithoutExtension(edFilename.Text)) + ".cdg";
                 if (File.Exists(cdgFile))
                 {
-                    cdg = new CDGFile(cdgFile);
+                    _cdg = new CDGFile(cdgFile);
                 }
             }
         }
@@ -67,10 +69,10 @@
             MediaPlayer1.FilenamesOrURL.Add(edFilename.Text);
             MediaPlayer1.Audio_PlayAudio = true;
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            MediaPlayer1.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             MediaPlayer1.Info_UseLibMediaInfo = true;
@@ -124,11 +126,11 @@
 
             lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
-            if (cdg != null)
+            if (_cdg != null)
             {
-                if (cdg.renderAtPosition((long)MediaPlayer1.Position_Get_Time().TotalMilliseconds))
+                if (_cdg.renderAtPosition((long)MediaPlayer1.Position_Get_Time().TotalMilliseconds))
                 {
-                    imgScreen.Image = cdg.RGBImage();
+                    imgScreen.Image = _cdg.RGBImage();
                 }
             }
 
@@ -149,7 +151,7 @@
                                    }));
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Tools;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -59,7 +59,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="acmOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFACMOutput acmOutput)
+        public void LoadSettings(ACMOutput acmOutput)
         {
             cbChannels2.Text = acmOutput.Channels.ToString();
             cbBPS2.Text = acmOutput.BPS.ToString();
@@ -74,7 +74,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="acmOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFACMOutput acmOutput)
+        public void SaveSettings(ref ACMOutput acmOutput)
         {
             acmOutput.Channels = Convert.ToInt32(cbChannels2.Text);
             acmOutput.BPS = Convert.ToInt32(cbBPS2.Text);
@@ -86,21 +86,21 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         private void cbAudioCodecs2_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = cbAudioCodecs2.Text;
-            btAudioSettings2.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default) ||
-                                       FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig);
+            btAudioSettings2.Enabled = FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.Default) ||
+                                       FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.VFWCompConfig);
         }
 
         private void btAudioSettings2_Click(object sender, EventArgs e)
         {
             string name = cbAudioCodecs2.Text;
 
-            if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.Audio_Codec_HasDialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.Audio_Codec_HasDialog(name, PropertyPageType.VFWCompConfig))
             {
-                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.Audio_Codec_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
             }
         }
 

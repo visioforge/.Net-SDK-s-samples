@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -40,17 +40,17 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFDVOutput dvOutput)
+        public void LoadSettings(DVOutput dvOutput)
         {
             cbDVChannels.Text = dvOutput.Audio_Channels.ToString();
             cbDVSampleRate.Text = dvOutput.Audio_SampleRate.ToString();
 
             switch (dvOutput.Video_Format)
             {
-                case VFDVVideoFormat.PAL:
+                case DVVideoFormat.PAL:
                     rbDVPAL.Checked = true;
                     break;
-                case VFDVVideoFormat.NTSC:
+                case DVVideoFormat.NTSC:
                     rbDVPAL.Checked = false;
                     break;
                 default:
@@ -66,18 +66,18 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="dvOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFDVOutput dvOutput)
+        public void SaveSettings(ref DVOutput dvOutput)
         {
             dvOutput.Audio_Channels = Convert.ToInt32(cbDVChannels.Text);
             dvOutput.Audio_SampleRate = Convert.ToInt32(cbDVSampleRate.Text);
 
             if (rbDVPAL.Checked)
             {
-                dvOutput.Video_Format = VFDVVideoFormat.PAL;
+                dvOutput.Video_Format = DVVideoFormat.PAL;
             }
             else
             {
-                dvOutput.Video_Format = VFDVVideoFormat.NTSC;
+                dvOutput.Video_Format = DVVideoFormat.NTSC;
             }
 
             dvOutput.Type2 = rbDVType2.Checked;

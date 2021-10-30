@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -44,7 +44,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFFFMPEGOutput ffmpegOutput)
+        public void LoadSettings(FFMPEGOutput ffmpegOutput)
         {
             cbOutputFormat.SelectedIndex = (int)ffmpegOutput.OutputFormat;
             cbVideoCodec.SelectedIndex = (int)ffmpegOutput.Video_Codec;
@@ -103,7 +103,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="ffmpegOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFFFMPEGOutput ffmpegOutput)
+        public void SaveSettings(ref FFMPEGOutput ffmpegOutput)
         {
             ffmpegOutput.OutputFormat = (FFMPEGOutputFormat)cbOutputFormat.SelectedIndex;
             ffmpegOutput.Video_Codec = (FFMPEGVideoCodec)cbVideoCodec.SelectedIndex;

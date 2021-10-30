@@ -1,21 +1,28 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using System.Globalization;
-
 namespace MultipleWebCameras
 {
     using System;
     using System.Diagnostics;
     using System.Linq;
     using System.Windows;
-
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.VideoCapture;
+
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class MainWindow : IDisposable
     {
+        private VideoCaptureCore VideoCapture1;
+
+        private VideoCaptureCore VideoCapture2;
+
+        private bool disposedValue;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,11 +30,33 @@ namespace MultipleWebCameras
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1.OnError += VideoCapture1_OnError;
+
+            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
+            VideoCapture2.OnError += VideoCapture2_OnError;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+
+            VideoCapture2.OnError -= VideoCapture2_OnError;
+            VideoCapture2.Dispose();
+            VideoCapture2 = null;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title += $" (SDK v{videoCapture1.SDK_Version})";
+            CreateEngine();
 
-            foreach (var device in videoCapture1.Video_CaptureDevicesInfo)
+            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+
+            foreach (var device in VideoCapture1.Video_CaptureDevices)
             {
                 cbCamera1.Items.Add(device.Name);
                 cbCamera2.Items.Add(device.Name);
@@ -42,10 +71,10 @@ namespace MultipleWebCameras
 
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
-            videoCapture1.Video_CaptureDevice = cbCamera1.Text;
-            videoCapture1.Video_CaptureFormat_UseBest = true;
+            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
+            VideoCapture1.Video_CaptureDevice.Format_UseBest = true;
 
-            var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
+            var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
@@ -57,26 +86,26 @@ namespace MultipleWebCameras
                 return;
             }
 
-            videoCapture1.Video_FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
+            VideoCapture1.Video_CaptureDevice.FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
 
-            // videoCapture1.OnError += VideoCapture1OnOnError;
-            videoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
-            videoCapture1.Audio_PlayAudio = false;
+            // VideoCapture1.OnError += VideoCapture1OnOnError;
+            VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
+            VideoCapture1.Audio_PlayAudio = false;
 
-            await videoCapture1.StartAsync();
+            await VideoCapture1.StartAsync();
         }
 
         private async void btStop1_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture1.StopAsync();
+            await VideoCapture1.StopAsync();
         }
 
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
-            videoCapture2.Video_CaptureDevice = cbCamera2.Text;
-            videoCapture2.Video_CaptureFormat_UseBest = true;
+            VideoCapture2.Video_CaptureDevice = new VideoCaptureSource(cbCamera2.Text);
+            VideoCapture2.Video_CaptureDevice.Format_UseBest = true;
 
-            var deviceItem = videoCapture2.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
+            var deviceItem = VideoCapture2.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;
@@ -88,27 +117,66 @@ namespace MultipleWebCameras
                 return;
             }
 
-            videoCapture2.Video_FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
+            VideoCapture2.Video_CaptureDevice.FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
 
-            // videoCapture2.OnError += VideoCapture2OnOnError;
-            videoCapture2.Mode = VFVideoCaptureMode.VideoPreview;
-            videoCapture2.Audio_PlayAudio = false;
-            await videoCapture2.StartAsync();
+            // VideoCapture2.OnError += VideoCapture2OnOnError;
+            VideoCapture2.Mode = VideoCaptureMode.VideoPreview;
+            VideoCapture2.Audio_PlayAudio = false;
+            await VideoCapture2.StartAsync();
         }
 
         private async void btStop2_Click(object sender, RoutedEventArgs e)
         {
-            await videoCapture2.StopAsync();
+            await VideoCapture2.StopAsync();
         }
 
-        private void videoCapture1_OnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine("CAM1: " + e.Message);
         }
 
-        private void videoCapture2_OnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture2_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine("CAM2: " + e.Message);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DestroyEngine();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    VideoCapture1?.Dispose();
+                    VideoCapture1 = null;
+
+                    VideoCapture2?.Dispose();
+                    VideoCapture2 = null;
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~MainWindow()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

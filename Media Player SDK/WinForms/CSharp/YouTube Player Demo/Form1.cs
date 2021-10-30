@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Types;
-
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
     using YoutubeExplode;
     using YoutubeExplode.Videos.Streams;
 
@@ -18,6 +18,22 @@
         private readonly List<IAudioStreamInfo> _audioInfoList = new List<IAudioStreamInfo>();
 
         private volatile int _timeTag;
+
+        private MediaPlayerCore MediaPlayer1;
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
 
         public Form1()
         {
@@ -36,7 +52,7 @@
                 return;
             }
 
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
             MediaPlayer1.Audio_PlayAudio = false;
 
             MediaPlayer1.Audio_AdditionalStreams_Clear();
@@ -114,7 +130,10 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
@@ -140,6 +159,11 @@
             {
                 MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Tools;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -61,7 +61,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMP4Output mp4Output)
+        public void SaveSettings(ref MP4Output mp4Output)
         {
             int tmp;
 
@@ -69,15 +69,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             {
                 case 0:
                     // v10(CPU or Intel QuickSync GPU)
-                    mp4Output.MP4Mode = VFMP4Mode.CPU_QSV;
+                    mp4Output.MP4Mode = MP4Mode.CPU_QSV;
                     break;
                 case 1:
                     // v10 nVidia NVENC
-                    mp4Output.MP4Mode = VFMP4Mode.NVENC;
+                    mp4Output.MP4Mode = MP4Mode.NVENC;
                     break;
             }
 
-            if (mp4Output.MP4Mode == VFMP4Mode.CPU_QSV)
+            if (mp4Output.MP4Mode == MP4Mode.CPU_QSV)
             {
                 // Legacy / Modern settings
 
@@ -85,111 +85,111 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 switch (cbH264Profile.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileAuto;
+                        mp4Output.Video.Profile = H264Profile.ProfileAuto;
                         break;
                     case 1:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileBaseline;
+                        mp4Output.Video.Profile = H264Profile.ProfileBaseline;
                         break;
                     case 2:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileMain;
+                        mp4Output.Video.Profile = H264Profile.ProfileMain;
                         break;
                     case 3:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileHigh;
+                        mp4Output.Video.Profile = H264Profile.ProfileHigh;
                         break;
                     case 4:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileHigh10;
+                        mp4Output.Video.Profile = H264Profile.ProfileHigh10;
                         break;
                     case 5:
-                        mp4Output.Video.Profile = VFH264Profile.ProfileHigh422;
+                        mp4Output.Video.Profile = H264Profile.ProfileHigh422;
                         break;
                 }
 
                 switch (cbH264Level.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video.Level = VFH264Level.LevelAuto;
+                        mp4Output.Video.Level = H264Level.LevelAuto;
                         break;
                     case 1:
-                        mp4Output.Video.Level = VFH264Level.Level1;
+                        mp4Output.Video.Level = H264Level.Level1;
                         break;
                     case 2:
-                        mp4Output.Video.Level = VFH264Level.Level11;
+                        mp4Output.Video.Level = H264Level.Level11;
                         break;
                     case 3:
-                        mp4Output.Video.Level = VFH264Level.Level12;
+                        mp4Output.Video.Level = H264Level.Level12;
                         break;
                     case 4:
-                        mp4Output.Video.Level = VFH264Level.Level13;
+                        mp4Output.Video.Level = H264Level.Level13;
                         break;
                     case 5:
-                        mp4Output.Video.Level = VFH264Level.Level2;
+                        mp4Output.Video.Level = H264Level.Level2;
                         break;
                     case 6:
-                        mp4Output.Video.Level = VFH264Level.Level21;
+                        mp4Output.Video.Level = H264Level.Level21;
                         break;
                     case 7:
-                        mp4Output.Video.Level = VFH264Level.Level22;
+                        mp4Output.Video.Level = H264Level.Level22;
                         break;
                     case 8:
-                        mp4Output.Video.Level = VFH264Level.Level3;
+                        mp4Output.Video.Level = H264Level.Level3;
                         break;
                     case 9:
-                        mp4Output.Video.Level = VFH264Level.Level31;
+                        mp4Output.Video.Level = H264Level.Level31;
                         break;
                     case 10:
-                        mp4Output.Video.Level = VFH264Level.Level32;
+                        mp4Output.Video.Level = H264Level.Level32;
                         break;
                     case 11:
-                        mp4Output.Video.Level = VFH264Level.Level4;
+                        mp4Output.Video.Level = H264Level.Level4;
                         break;
                     case 12:
-                        mp4Output.Video.Level = VFH264Level.Level41;
+                        mp4Output.Video.Level = H264Level.Level41;
                         break;
                     case 13:
-                        mp4Output.Video.Level = VFH264Level.Level42;
+                        mp4Output.Video.Level = H264Level.Level42;
                         break;
                     case 14:
-                        mp4Output.Video.Level = VFH264Level.Level5;
+                        mp4Output.Video.Level = H264Level.Level5;
                         break;
                     case 15:
-                        mp4Output.Video.Level = VFH264Level.Level51;
+                        mp4Output.Video.Level = H264Level.Level51;
                         break;
                 }
 
                 switch (cbH264TargetUsage.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video.TargetUsage = VFH264TargetUsage.Auto;
+                        mp4Output.Video.TargetUsage = H264TargetUsage.Auto;
                         break;
                     case 1:
-                        mp4Output.Video.TargetUsage = VFH264TargetUsage.BestQuality;
+                        mp4Output.Video.TargetUsage = H264TargetUsage.BestQuality;
                         break;
                     case 2:
-                        mp4Output.Video.TargetUsage = VFH264TargetUsage.Balanced;
+                        mp4Output.Video.TargetUsage = H264TargetUsage.Balanced;
                         break;
                     case 3:
-                        mp4Output.Video.TargetUsage = VFH264TargetUsage.BestSpeed;
+                        mp4Output.Video.TargetUsage = H264TargetUsage.BestSpeed;
                         break;
                 }
 
                 switch (cbH264PictureType.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video.PictureType = VFH264PictureType.Auto;
+                        mp4Output.Video.PictureType = H264PictureType.Auto;
                         break;
                     case 1:
-                        mp4Output.Video.PictureType = VFH264PictureType.Frame;
+                        mp4Output.Video.PictureType = H264PictureType.Frame;
                         break;
                     case 2:
-                        mp4Output.Video.PictureType = VFH264PictureType.TFF;
+                        mp4Output.Video.PictureType = H264PictureType.TFF;
                         break;
                     case 3:
-                        mp4Output.Video.PictureType = VFH264PictureType.BFF;
+                        mp4Output.Video.PictureType = H264PictureType.BFF;
                         break;
                 }
 
-                mp4Output.Video.RateControl = (VFH264RateControl)cbH264RateControl.SelectedIndex;
-                mp4Output.Video.MBEncoding = (VFH264MBEncoding)cbH264MBEncoding.SelectedIndex;
+                mp4Output.Video.RateControl = (H264RateControl)cbH264RateControl.SelectedIndex;
+                mp4Output.Video.MBEncoding = (H264MBEncoding)cbH264MBEncoding.SelectedIndex;
                 mp4Output.Video.GOP = cbH264GOP.Checked;
                 mp4Output.Video.BitrateAuto = cbH264AutoBitrate.Checked;
 
@@ -202,89 +202,89 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 int.TryParse(edH264Bitrate.Text, out tmp);
                 mp4Output.Video.Bitrate = tmp;
             }
-            else if (mp4Output.MP4Mode == VFMP4Mode.NVENC)
+            else if (mp4Output.MP4Mode == MP4Mode.NVENC)
             {
                 // NVENC settings
                 switch (cbNVENCProfile.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.Auto;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.Auto;
                         break;
                     case 1:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_Baseline;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_Baseline;
                         break;
                     case 2:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_Main;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_Main;
                         break;
                     case 3:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_High;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_High;
                         break;
                     case 4:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_High444;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_High444;
                         break;
                     case 5:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_ProgressiveHigh;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_ProgressiveHigh;
                         break;
                     case 6:
-                        mp4Output.Video_NVENC.Profile = VFNVENCVideoEncoderProfile.H264_ConstrainedHigh;
+                        mp4Output.Video_NVENC.Profile = NVENCVideoEncoderProfile.H264_ConstrainedHigh;
                         break;
                 }
 
                 switch (cbNVENCLevel.SelectedIndex)
                 {
                     case 0:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.Auto;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.Auto;
                         break;
                     case 1:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_1;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_1;
                         break;
                     case 2:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_11;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_11;
                         break;
                     case 3:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_12;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_12;
                         break;
                     case 4:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_13;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_13;
                         break;
                     case 5:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_2;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_2;
                         break;
                     case 6:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_21;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_21;
                         break;
                     case 7:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_22;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_22;
                         break;
                     case 8:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_3;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_3;
                         break;
                     case 9:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_31;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_31;
                         break;
                     case 10:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_32;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_32;
                         break;
                     case 11:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_4;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_4;
                         break;
                     case 12:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_41;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_41;
                         break;
                     case 13:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_42;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_42;
                         break;
                     case 14:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_5;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_5;
                         break;
                     case 15:
-                        mp4Output.Video_NVENC.Level = VFNVENCEncoderLevel.H264_51;
+                        mp4Output.Video_NVENC.Level = NVENCEncoderLevel.H264_51;
                         break;
                 }
 
                 mp4Output.Video_NVENC.Bitrate = Convert.ToInt32(edNVENCBitrate.Text);
                 mp4Output.Video_NVENC.QP = Convert.ToInt32(edNVENCQP.Text);
-                mp4Output.Video_NVENC.RateControl = (VFNVENCRateControlMode)cbNVENCRateControl.SelectedIndex;
+                mp4Output.Video_NVENC.RateControl = (NVENCRateControlMode)cbNVENCRateControl.SelectedIndex;
                 mp4Output.Video_NVENC.GOP = Convert.ToInt32(edNVENCGOP.Text);
                 mp4Output.Video_NVENC.BFrames = Convert.ToInt32(edNVENCBFrames.Text);
             }
@@ -292,51 +292,51 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             // Audio AAC settings
             int.TryParse(cbAACBitrate.Text, out tmp);
             mp4Output.Audio_AAC.Bitrate = tmp;
-            mp4Output.Audio_AAC.Version = (VFAACVersion)cbAACVersion.SelectedIndex;
-            mp4Output.Audio_AAC.Output = (VFAACOutput)cbAACOutput.SelectedIndex;
-            mp4Output.Audio_AAC.Object = (VFAACObject)(cbAACObjectType.SelectedIndex + 1);
+            mp4Output.Audio_AAC.Version = (AACVersion)cbAACVersion.SelectedIndex;
+            mp4Output.Audio_AAC.Output = (AACOutput)cbAACOutput.SelectedIndex;
+            mp4Output.Audio_AAC.Object = (AACObject)(cbAACObjectType.SelectedIndex + 1);
 
             mp4Output.UseSpecialSyncMode = cbMP4UseSpecialSyncMode.Checked;
 
             if (cbMP4CustomAVSettings.Checked)
             {
-                mp4Output.MP4V10Flags = 0;
+                mp4Output.MP4MuxFlags = 0;
                 if (cbMP4TimeAdjust.Checked)
                 {
-                    mp4Output.MP4V10Flags |= MP4V10Flags.TimeAdjust;
+                    mp4Output.MP4MuxFlags |= MP4MuxFlags.TimeAdjust;
                 }
 
                 if (cbMP4TimeOverride.Checked)
                 {
-                    mp4Output.MP4V10Flags |= MP4V10Flags.TimeOverride;
+                    mp4Output.MP4MuxFlags |= MP4MuxFlags.TimeOverride;
                 }
             }
 
-            mp4Output.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC;
+            mp4Output.Encryption_Format = EncryptionFormat.MP4_H264_SW_AAC;
 
             if (rbEncryptionKeyString.Checked)
             {
-                mp4Output.Encryption_KeyType = VFEncryptionKeyType.String;
+                mp4Output.Encryption_KeyType = EncryptionKeyType.String;
                 mp4Output.Encryption_Key = edEncryptionKeyString.Text;
             }
             else if (rbEncryptionKeyFile.Checked)
             {
-                mp4Output.Encryption_KeyType = VFEncryptionKeyType.File;
+                mp4Output.Encryption_KeyType = EncryptionKeyType.File;
                 mp4Output.Encryption_Key = edEncryptionKeyFile.Text;
             }
             else
             {
-                mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary;
+                mp4Output.Encryption_KeyType = EncryptionKeyType.Binary;
                 mp4Output.Encryption_Key = ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
 
             if (rbEncryptionModeAES128.Checked)
             {
-                mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128;
+                mp4Output.Encryption_Mode = EncryptionMode.V8_AES128;
             }
             else
             {
-                mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256;
+                mp4Output.Encryption_Mode = EncryptionMode.V9_AES256;
             }
         }
 
@@ -349,42 +349,42 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFMP4Output mp4Output)
+        public void LoadSettings(MP4Output mp4Output)
         {
             switch (mp4Output.MP4Mode)
             {
-                case VFMP4Mode.CPU_QSV:
+                case MP4Mode.CPU_QSV:
                     cbMP4Mode.SelectedIndex = 0;
                     break;
-                case VFMP4Mode.NVENC:
+                case MP4Mode.NVENC:
                     cbMP4Mode.SelectedIndex = 1;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (mp4Output.MP4Mode == VFMP4Mode.CPU_QSV)
+            if (mp4Output.MP4Mode == MP4Mode.CPU_QSV)
             {
                 // Legacy / Modern settings
                 // Video H264 settings
                 switch (mp4Output.Video.Profile)
                 {
-                    case VFH264Profile.ProfileAuto:
+                    case H264Profile.ProfileAuto:
                         cbH264Profile.SelectedIndex = 0;
                         break;
-                    case VFH264Profile.ProfileBaseline:
+                    case H264Profile.ProfileBaseline:
                         cbH264Profile.SelectedIndex = 1;
                         break;
-                    case VFH264Profile.ProfileMain:
+                    case H264Profile.ProfileMain:
                         cbH264Profile.SelectedIndex = 2;
                         break;
-                    case VFH264Profile.ProfileHigh:
+                    case H264Profile.ProfileHigh:
                         cbH264Profile.SelectedIndex = 3;
                         break;
-                    case VFH264Profile.ProfileHigh10:
+                    case H264Profile.ProfileHigh10:
                         cbH264Profile.SelectedIndex = 4;
                         break;
-                    case VFH264Profile.ProfileHigh422:
+                    case H264Profile.ProfileHigh422:
                         cbH264Profile.SelectedIndex = 5;
                         break;
                     default:
@@ -393,55 +393,55 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 switch (mp4Output.Video.Level)
                 {
-                    case VFH264Level.LevelAuto:
+                    case H264Level.LevelAuto:
                         cbH264Level.SelectedIndex = 0;
                         break;
-                    case VFH264Level.Level1:
+                    case H264Level.Level1:
                         cbH264Level.SelectedIndex = 1;
                         break;
-                    case VFH264Level.Level11:
+                    case H264Level.Level11:
                         cbH264Level.SelectedIndex = 2;
                         break;
-                    case VFH264Level.Level12:
+                    case H264Level.Level12:
                         cbH264Level.SelectedIndex = 3;
                         break;
-                    case VFH264Level.Level13:
+                    case H264Level.Level13:
                         cbH264Level.SelectedIndex = 4;
                         break;
-                    case VFH264Level.Level2:
+                    case H264Level.Level2:
                         cbH264Level.SelectedIndex = 5;
                         break;
-                    case VFH264Level.Level21:
+                    case H264Level.Level21:
                         cbH264Level.SelectedIndex = 6;
                         break;
-                    case VFH264Level.Level22:
+                    case H264Level.Level22:
                         cbH264Level.SelectedIndex = 7;
                         break;
-                    case VFH264Level.Level3:
+                    case H264Level.Level3:
                         cbH264Level.SelectedIndex = 8;
                         break;
-                    case VFH264Level.Level31:
+                    case H264Level.Level31:
                         cbH264Level.SelectedIndex = 9;
                         break;
-                    case VFH264Level.Level32:
+                    case H264Level.Level32:
                         cbH264Level.SelectedIndex = 10;
                         break;
-                    case VFH264Level.Level4:
+                    case H264Level.Level4:
                         cbH264Level.SelectedIndex = 11;
                         break;
-                    case VFH264Level.Level41:
+                    case H264Level.Level41:
                         cbH264Level.SelectedIndex = 12;
                         break;
-                    case VFH264Level.Level42:
+                    case H264Level.Level42:
                         cbH264Level.SelectedIndex = 13;
                         break;
-                    case VFH264Level.Level5:
+                    case H264Level.Level5:
                         cbH264Level.SelectedIndex = 14;
                         break;
-                    case VFH264Level.Level51:
+                    case H264Level.Level51:
                         cbH264Level.SelectedIndex = 15;
                         break;
-                    case VFH264Level.Level51_NVENC:
+                    case H264Level.Level51_NVENC:
                         cbH264Level.SelectedIndex = 15;
                         break;
                     default:
@@ -450,16 +450,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 switch (mp4Output.Video.TargetUsage)
                 {
-                    case VFH264TargetUsage.Auto:
+                    case H264TargetUsage.Auto:
                         cbH264TargetUsage.SelectedIndex = 0;
                         break;
-                    case VFH264TargetUsage.BestQuality:
+                    case H264TargetUsage.BestQuality:
                         cbH264TargetUsage.SelectedIndex = 1;
                         break;
-                    case VFH264TargetUsage.Balanced:
+                    case H264TargetUsage.Balanced:
                         cbH264TargetUsage.SelectedIndex = 2;
                         break;
-                    case VFH264TargetUsage.BestSpeed:
+                    case H264TargetUsage.BestSpeed:
                         cbH264TargetUsage.SelectedIndex = 3;
                         break;
                     default:
@@ -468,16 +468,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 switch (mp4Output.Video.PictureType)
                 {
-                    case VFH264PictureType.Auto:
+                    case H264PictureType.Auto:
                         cbH264PictureType.SelectedIndex = 0;
                         break;
-                    case VFH264PictureType.Frame:
+                    case H264PictureType.Frame:
                         cbH264PictureType.SelectedIndex = 1;
                         break;
-                    case VFH264PictureType.TFF:
+                    case H264PictureType.TFF:
                         cbH264PictureType.SelectedIndex = 2;
                         break;
-                    case VFH264PictureType.BFF:
+                    case H264PictureType.BFF:
                         cbH264PictureType.SelectedIndex = 3;
                         break;
                     default:
@@ -492,30 +492,30 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 edH264P.Text = mp4Output.Video.P_Period.ToString();
                 edH264Bitrate.Text = mp4Output.Video.Bitrate.ToString();
             }
-            else if (mp4Output.MP4Mode == VFMP4Mode.NVENC)
+            else if (mp4Output.MP4Mode == MP4Mode.NVENC)
             {
                 // NVENC settings
                 switch (mp4Output.Video_NVENC.Profile)
                 {
-                    case VFNVENCVideoEncoderProfile.Auto:
+                    case NVENCVideoEncoderProfile.Auto:
                         cbNVENCProfile.SelectedIndex = 0;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_Baseline:
+                    case NVENCVideoEncoderProfile.H264_Baseline:
                         cbNVENCProfile.SelectedIndex = 1;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_Main:
+                    case NVENCVideoEncoderProfile.H264_Main:
                         cbNVENCProfile.SelectedIndex = 2;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_High:
+                    case NVENCVideoEncoderProfile.H264_High:
                         cbNVENCProfile.SelectedIndex = 3;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_High444:
+                    case NVENCVideoEncoderProfile.H264_High444:
                         cbNVENCProfile.SelectedIndex = 4;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_ProgressiveHigh:
+                    case NVENCVideoEncoderProfile.H264_ProgressiveHigh:
                         cbNVENCProfile.SelectedIndex = 5;
                         break;
-                    case VFNVENCVideoEncoderProfile.H264_ConstrainedHigh:
+                    case NVENCVideoEncoderProfile.H264_ConstrainedHigh:
                         cbNVENCProfile.SelectedIndex = 6;
                         break;
                     default:
@@ -524,55 +524,55 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 switch (mp4Output.Video_NVENC.Level)
                 {
-                    case VFNVENCEncoderLevel.Auto:
+                    case NVENCEncoderLevel.Auto:
                         cbNVENCLevel.SelectedIndex = 0;
                         break;
-                    case VFNVENCEncoderLevel.H264_1:
+                    case NVENCEncoderLevel.H264_1:
                         cbNVENCLevel.SelectedIndex = 1;
                         break;
-                    case VFNVENCEncoderLevel.H264_11:
+                    case NVENCEncoderLevel.H264_11:
                         cbNVENCLevel.SelectedIndex = 2;
                         break;
-                    case VFNVENCEncoderLevel.H264_12:
+                    case NVENCEncoderLevel.H264_12:
                         cbNVENCLevel.SelectedIndex = 3;
                         break;
-                    case VFNVENCEncoderLevel.H264_13:
+                    case NVENCEncoderLevel.H264_13:
                         cbNVENCLevel.SelectedIndex = 4;
                         break;
-                    case VFNVENCEncoderLevel.H264_2:
+                    case NVENCEncoderLevel.H264_2:
                         cbNVENCLevel.SelectedIndex = 5;
                         break;
-                    case VFNVENCEncoderLevel.H264_21:
+                    case NVENCEncoderLevel.H264_21:
                         cbNVENCLevel.SelectedIndex = 6;
                         break;
-                    case VFNVENCEncoderLevel.H264_22:
+                    case NVENCEncoderLevel.H264_22:
                         cbNVENCLevel.SelectedIndex = 7;
                         break;
-                    case VFNVENCEncoderLevel.H264_3:
+                    case NVENCEncoderLevel.H264_3:
                         cbNVENCLevel.SelectedIndex = 8;
                         break;
-                    case VFNVENCEncoderLevel.H264_31:
+                    case NVENCEncoderLevel.H264_31:
                         cbNVENCLevel.SelectedIndex = 9;
                         break;
-                    case VFNVENCEncoderLevel.H264_32:
+                    case NVENCEncoderLevel.H264_32:
                         cbNVENCLevel.SelectedIndex = 10;
                         break;
-                    case VFNVENCEncoderLevel.H264_4:
+                    case NVENCEncoderLevel.H264_4:
                         cbNVENCLevel.SelectedIndex = 11;
                         break;
-                    case VFNVENCEncoderLevel.H264_41:
+                    case NVENCEncoderLevel.H264_41:
                         cbNVENCLevel.SelectedIndex = 12;
                         break;
-                    case VFNVENCEncoderLevel.H264_42:
+                    case NVENCEncoderLevel.H264_42:
                         cbNVENCLevel.SelectedIndex = 13;
                         break;
-                    case VFNVENCEncoderLevel.H264_5:
+                    case NVENCEncoderLevel.H264_5:
                         cbNVENCLevel.SelectedIndex = 14;
                         break;
-                    case VFNVENCEncoderLevel.H264_51:
+                    case NVENCEncoderLevel.H264_51:
                         cbNVENCLevel.SelectedIndex = 15;
                         break;
-                    case VFNVENCEncoderLevel.H264_52:
+                    case NVENCEncoderLevel.H264_52:
                         cbNVENCLevel.SelectedIndex = 16;
                         break;
                     default:
@@ -593,7 +593,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbAACObjectType.SelectedIndex = (int)mp4Output.Audio_AAC.Object - 1;
             cbMP4UseSpecialSyncMode.Checked = mp4Output.UseSpecialSyncMode;
 
-            if ((mp4Output.MP4V10Flags & MP4V10Flags.TimeAdjust) != 0)
+            if ((mp4Output.MP4MuxFlags & MP4MuxFlags.TimeAdjust) != 0)
             {
                 cbMP4TimeAdjust.Checked = true;
             }
@@ -602,7 +602,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 cbMP4TimeAdjust.Checked = false;
             }
 
-            if ((mp4Output.MP4V10Flags & MP4V10Flags.TimeOverride) != 0)
+            if ((mp4Output.MP4MuxFlags & MP4MuxFlags.TimeOverride) != 0)
             {
                 cbMP4TimeOverride.Checked = true;
             }
@@ -613,15 +613,15 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (mp4Output.Encryption_KeyType)
             {
-                case VFEncryptionKeyType.String:
+                case EncryptionKeyType.String:
                     rbEncryptionKeyString.Checked = true;
                     edEncryptionKeyString.Text = mp4Output.Encryption_Key.ToString();
                     break;
-                case VFEncryptionKeyType.File:
+                case EncryptionKeyType.File:
                     rbEncryptionKeyFile.Checked = true;
                     edEncryptionKeyString.Text = mp4Output.Encryption_Key.ToString();
                     break;
-                case VFEncryptionKeyType.Binary:
+                case EncryptionKeyType.Binary:
                     rbEncryptionKeyFile.Checked = true;
                     edEncryptionKeyHEX.Text = ConvertByteArrayToHexString((byte[])mp4Output.Encryption_Key);
                     break;
@@ -631,10 +631,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (mp4Output.Encryption_Mode)
             {
-                case VFEncryptionMode.V8_AES128:
+                case EncryptionMode.V8_AES128:
                     rbEncryptionModeAES128.Checked = true;
                     break;
-                case VFEncryptionMode.V9_AES256:
+                case EncryptionMode.V9_AES256:
                     rbEncryptionModeAES128.Checked = false;
                     break;
                 default:

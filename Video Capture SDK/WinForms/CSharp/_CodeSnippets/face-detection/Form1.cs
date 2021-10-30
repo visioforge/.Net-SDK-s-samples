@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 // ReSharper disable InconsistentNaming
 // ReSharper disable StyleCop.SA1600
@@ -14,21 +8,48 @@ using System.Windows.Forms;
 namespace face_detection
 {
     using System.IO;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.VideoCapture;
+    using VisioForge.Types.VideoProcessing;
 
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+            VideoCapture1.OnFaceDetected += VideoCapture1_OnFaceDetected;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+            VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             // enumerate devices
-            foreach (var device in VideoCapture1.Video_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Video_CaptureDevices)
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -46,7 +67,7 @@ namespace face_detection
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             // fill video formats and frame rates
-            var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+            var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
             if (deviceItem == null)
             {
                 return;
@@ -73,17 +94,17 @@ namespace face_detection
             mmLog.Clear();
 
             // configure video source
-            VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-            VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
-            VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
+            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
+            VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
+            VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
+            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
 
             // disabe audio
             VideoCapture1.Audio_PlayAudio = false;
             VideoCapture1.Audio_RecordAudio = false;
 
             // set video preview mode
-            VideoCapture1.Mode = VFVideoCaptureMode.VideoPreview;
+            VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
 
             // set face tracking settings
             VideoCapture1.Face_Tracking = new FaceTrackingSettings
@@ -164,7 +185,7 @@ namespace face_detection
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -187,6 +208,11 @@ namespace face_detection
                     cbVideoInputFrameRate.SelectedIndex = 0;
                 }
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

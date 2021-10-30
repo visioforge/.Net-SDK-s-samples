@@ -6,19 +6,54 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
         private readonly List<string> sourceFiles;
 
-        private MediaPlayer CurrentPlayer;
+        private MediaPlayerCore CurrentPlayer;
 
-        //private MediaPlayer backgroundPlayer;
+        private MediaPlayerCore MediaPlayer1;
+
+        private MediaPlayerCore MediaPlayer2;
+
+        private void CreateEngine1()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void CreateEngine2()
+        {
+            MediaPlayer2 = new MediaPlayerCore(VideoView2 as IVideoView);
+            MediaPlayer2.OnError += MediaPlayer2_OnError;
+            MediaPlayer2.OnStop += MediaPlayer2_OnStop;
+        }
+
+        private void DestroyEngine1()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
+
+        private void DestroyEngine2()
+        {
+            MediaPlayer2.OnError -= MediaPlayer2_OnError;
+            MediaPlayer2.OnStop -= MediaPlayer2_OnStop;
+
+            MediaPlayer2.Dispose();
+            MediaPlayer2 = null;
+        }
 
         public Form1()
         {
@@ -88,29 +123,29 @@
             CurrentPlayer.SetSpeed(tbSpeed.Value / 10.0);
         }
 
-        private void InitPlayer(MediaPlayer player)
+        private void InitPlayer(MediaPlayerCore player)
         {
             player.Debug_Mode = cbDebugMode.Checked;
             player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            player.Source_Mode = VFMediaPlayerSource.LAV;
+            player.Source_Mode = MediaPlayerSourceMode.LAV;
             player.Audio_OutputDevice = "Default DirectSound Device";
             MediaPlayer1.Info_UseLibMediaInfo = true;
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                player.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                player.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                player.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                player.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                player.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                player.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
         }
 
-        private async Task PlayFileAsync(string filename, MediaPlayer player)
+        private async Task PlayFileAsync(string filename, MediaPlayerCore player)
         {
             player.FilenamesOrURL.Clear();
             player.FilenamesOrURL.Add(filename);
@@ -138,22 +173,24 @@
 
             CurrentPlayer = MediaPlayer1;
 
-            MediaPlayer1.Show();
-            MediaPlayer2.Hide();
-            await this.PlayFileAsync(sourceFiles[0], MediaPlayer1);
+            VideoView1.Show();
+            VideoView2.Hide();
+
+            await PlayFileAsync(sourceFiles[0], MediaPlayer1);
             sourceFiles.RemoveAt(0);
 
-            await this.PlayFileAsync(sourceFiles[0], MediaPlayer2);
+            await PlayFileAsync(sourceFiles[0], MediaPlayer2);
             sourceFiles.RemoveAt(0);
+
             await MediaPlayer2.PauseAsync();
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate1(StopDelegateMethod1), null);
         }
 
-        private void MediaPlayer2_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer2_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate2(StopDelegateMethod2), null);
         }
@@ -167,8 +204,8 @@
             //timer1.Enabled = false;
             tbTimeline.Value = 0;
 
-            MediaPlayer1.Hide();
-            MediaPlayer2.Show();
+            VideoView1.Hide();
+            VideoView2.Show();
 
             CurrentPlayer = MediaPlayer2;
             await MediaPlayer2.ResumeAsync();
@@ -185,8 +222,8 @@
             //timer1.Enabled = false;
             tbTimeline.Value = 0;
 
-            MediaPlayer1.Show();
-            MediaPlayer2.Hide();
+            VideoView1.Show();
+            VideoView2.Hide();
 
             CurrentPlayer = MediaPlayer1;
             await MediaPlayer1.ResumeAsync();
@@ -200,15 +237,18 @@
 
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.Status != VFMediaPlayerStatus.Free)
+            if (MediaPlayer1.State != PlaybackState.Free)
             {
                 await MediaPlayer1.StopAsync();
             }
 
-            if (MediaPlayer2.Status != VFMediaPlayerStatus.Free)
+            if (MediaPlayer2.State != PlaybackState.Free)
             {
                 await MediaPlayer2.StopAsync();
             }
+
+            DestroyEngine1();
+            DestroyEngine2();
         }
 
         private void tbTimeline_Scroll(object sender, EventArgs e)
@@ -239,6 +279,14 @@
                                    {
                                        mmLog.Text += e.Message + Environment.NewLine;
                                    }));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CreateEngine1();
+            CreateEngine2();
+
+            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
         }
     }
 }

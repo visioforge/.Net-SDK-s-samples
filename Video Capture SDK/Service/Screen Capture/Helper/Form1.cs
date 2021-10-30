@@ -14,15 +14,22 @@ namespace ScreenCaptureServiceHelper
     using System.Security.Permissions;
 
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Shared.WIN32;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
         public Form1()
         {
             InitializeComponent();
+
+            VideoCapture1 = new VideoCaptureCore();
         }
 
         /// <summary>
@@ -33,7 +40,7 @@ namespace ScreenCaptureServiceHelper
             // System.Diagnostics.Debugger.Launch();
 
             // configure cam1
-            VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
+            VideoCapture1.Mode = VideoCaptureMode.ScreenCapture;
 
             VideoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings();
             VideoCapture1.Screen_Capture_Source.FullScreen = true;
@@ -43,9 +50,9 @@ namespace ScreenCaptureServiceHelper
 
             AddLog("Output file: " + VideoCapture1.Output_Filename);
 
-            var wmvOutput = new VFWMVOutput();
-            wmvOutput.Mode = VFWMVMode.InternalProfile;
-            wmvOutput.Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles()[5];
+            var wmvOutput = new WMVOutput();
+            wmvOutput.Mode = WMVMode.InternalProfile;
+            wmvOutput.Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles[5];
             VideoCapture1.Output_Format = wmvOutput;
 
             VideoCapture1.OnError -= VideoCapture1_OnError;
@@ -98,8 +105,9 @@ namespace ScreenCaptureServiceHelper
                 eventLog1.Source = "VisioForgeScreenCaptureService";
                 eventLog1.WriteEntry(log);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
             }
         }
 
@@ -109,7 +117,7 @@ namespace ScreenCaptureServiceHelper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            VF_SCS_EXIT_COMMAND = RegisterWindowMessage("VF_SCS_EXIT_COMMAND");
+            VF_SCS_EXIT_COMMAND = Win32API.RegisterWindowMessage("VF_SCS_EXIT_COMMAND");
 
             string[] args = Environment.GetCommandLineArgs();
 
@@ -117,7 +125,7 @@ namespace ScreenCaptureServiceHelper
             {
                 //System.Diagnostics.Debugger.Launch();
                 
-                IntPtr result = SendMessage(HWND_BROADCAST, VF_SCS_EXIT_COMMAND, (IntPtr)0, (IntPtr)0);
+                Win32API.SendMessage(HWND_BROADCAST, VF_SCS_EXIT_COMMAND, (IntPtr)0, (IntPtr)0);
             }
             else
             {
@@ -127,17 +135,6 @@ namespace ScreenCaptureServiceHelper
                 CaptureStart();
             }
         }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern uint RegisterWindowMessage(string lpString);
 
         [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         protected override void WndProc(ref Message m)

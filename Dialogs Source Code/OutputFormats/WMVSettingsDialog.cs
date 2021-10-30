@@ -17,7 +17,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Controls.VideoEdit;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Output;
 
     /// <summary>
     /// WMV settings dialog.
@@ -89,14 +89,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             if (_coreVideoCapture != null)
             {
-                foreach (string profile in _coreVideoCapture.WMV_Internal_Profiles())
+                foreach (string profile in _coreVideoCapture.WMV_Internal_Profiles)
                 {
                     cbWMVInternalProfile9.Items.Add(profile);
                 }
             }
             else
             {
-                foreach (string profile in _coreVideoEdit.WMV_Internal_Profiles())
+                foreach (string profile in _coreVideoEdit.WMV_Internal_Profiles)
                 {
                     cbWMVInternalProfile9.Items.Add(profile);
                 }
@@ -132,30 +132,30 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void cbWMVAudioCodec_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var mode = VFWMVStreamMode.CBR;
+            var mode = WMVStreamMode.CBR;
             switch (cbWMVAudioMode.SelectedIndex)
             {
                 case 0:
                     {
-                        mode = VFWMVStreamMode.CBR;
+                        mode = WMVStreamMode.CBR;
                         break;
                     }
 
                 case 1:
                     {
-                        mode = VFWMVStreamMode.VBRBitrate;
+                        mode = WMVStreamMode.VBRBitrate;
                         break;
                     }
 
                 case 2:
                     {
-                        mode = VFWMVStreamMode.VBRPeakBitrate;
+                        mode = WMVStreamMode.VBRPeakBitrate;
                         break;
                     }
 
                 case 3:
                     {
-                        mode = VFWMVStreamMode.VBRQuality;
+                        mode = WMVStreamMode.VBRQuality;
                         break;
                     }
             }
@@ -187,30 +187,30 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void cbWMVAudioMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var mode = VFWMVStreamMode.CBR;
+            var mode = WMVStreamMode.CBR;
             switch (cbWMVAudioMode.SelectedIndex)
             {
                 case 0:
                     {
-                        mode = VFWMVStreamMode.CBR;
+                        mode = WMVStreamMode.CBR;
                         break;
                     }
 
                 case 1:
                     {
-                        mode = VFWMVStreamMode.VBRBitrate;
+                        mode = WMVStreamMode.VBRBitrate;
                         break;
                     }
 
                 case 2:
                     {
-                        mode = VFWMVStreamMode.VBRPeakBitrate;
+                        mode = WMVStreamMode.VBRPeakBitrate;
                         break;
                     }
 
                 case 3:
                     {
-                        mode = VFWMVStreamMode.VBRQuality;
+                        mode = WMVStreamMode.VBRQuality;
                         break;
                     }
             }
@@ -239,12 +239,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
         private void cbWMVVideoMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var mode = VFWMVStreamMode.CBR;
+            var mode = WMVStreamMode.CBR;
             switch (cbWMVVideoMode.SelectedIndex)
             {
                 case 0:
                     {
-                        mode = VFWMVStreamMode.CBR;
+                        mode = WMVStreamMode.CBR;
                         edWMVVideoBitrate.Enabled = true;
                         edWMVVideoPeakBitrate.Enabled = false;
                         edWMVVideoQuality.Enabled = false;
@@ -253,7 +253,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 case 1:
                     {
-                        mode = VFWMVStreamMode.VBRBitrate;
+                        mode = WMVStreamMode.VBRBitrate;
                         edWMVVideoBitrate.Enabled = true;
                         edWMVVideoPeakBitrate.Enabled = false;
                         edWMVVideoQuality.Enabled = false;
@@ -262,7 +262,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 case 2:
                     {
-                        mode = VFWMVStreamMode.VBRPeakBitrate;
+                        mode = WMVStreamMode.VBRPeakBitrate;
                         edWMVVideoBitrate.Enabled = true;
                         edWMVVideoPeakBitrate.Enabled = true;
                         edWMVVideoQuality.Enabled = false;
@@ -271,7 +271,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                 case 3:
                     {
-                        mode = VFWMVStreamMode.VBRQuality;
+                        mode = WMVStreamMode.VBRQuality;
                         edWMVVideoBitrate.Enabled = false;
                         edWMVVideoPeakBitrate.Enabled = false;
                         edWMVVideoQuality.Enabled = true;
@@ -324,7 +324,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="wmaOutput">
         /// WMA settings.
         /// </param>
-        public void SaveSettings(ref VFWMAOutput wmaOutput)
+        public void SaveSettings(ref WMAOutput wmaOutput)
         {
             //if (WMA && !_loaded)
             //{
@@ -333,7 +333,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             if (rbWMVInternal9.Checked)
             {
-                wmaOutput.Mode = VFWMVMode.InternalProfile;
+                wmaOutput.Mode = WMVMode.InternalProfile;
 
                 if (cbWMVInternalProfile9.SelectedIndex != -1)
                 {
@@ -342,7 +342,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
             else if (rbWMVInternal8.Checked)
             {
-                wmaOutput.Mode = VFWMVMode.V8SystemProfile;
+                wmaOutput.Mode = WMVMode.V8SystemProfile;
 
                 if (cbWMVInternalProfile8.SelectedIndex != -1)
                 {
@@ -351,12 +351,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
             else if (rbWMVExternal.Checked)
             {
-                wmaOutput.Mode = VFWMVMode.ExternalProfile;
+                wmaOutput.Mode = WMVMode.ExternalProfile;
                 wmaOutput.External_Profile_FileName = edWMVProfile.Text;
             }
             else
             {
-                wmaOutput.Mode = VFWMVMode.CustomSettings;
+                wmaOutput.Mode = WMVMode.CustomSettings;
 
                 wmaOutput.Custom_Audio_Codec = cbWMVAudioCodec.Text;
                 wmaOutput.Custom_Audio_Format = cbWMVAudioFormat.Text;
@@ -365,19 +365,19 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 string s = cbWMVAudioMode.Text;
                 if (s == "CBR")
                 {
-                    wmaOutput.Custom_Audio_Mode = VFWMVStreamMode.CBR;
+                    wmaOutput.Custom_Audio_Mode = WMVStreamMode.CBR;
                 }
                 else if (s == "VBR")
                 {
-                    wmaOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRBitrate;
+                    wmaOutput.Custom_Audio_Mode = WMVStreamMode.VBRBitrate;
                 }
                 else if (s == "VBR (Peak)")
                 {
-                    wmaOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRPeakBitrate;
+                    wmaOutput.Custom_Audio_Mode = WMVStreamMode.VBRPeakBitrate;
                 }
                 else
                 {
-                    wmaOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRQuality;
+                    wmaOutput.Custom_Audio_Mode = WMVStreamMode.VBRQuality;
                 }
 
                 wmaOutput.Custom_Audio_StreamPresent = cbWMVAudioEnabled.Checked;
@@ -392,7 +392,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="wmaOutput">
         /// WMA settings.
         /// </param>
-        public void LoadSettings(VFWMAOutput wmaOutput)
+        public void LoadSettings(WMAOutput wmaOutput)
         {
             //if (WMA && !_loaded)
             //{
@@ -401,11 +401,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (wmaOutput.Mode)
             {
-                case VFWMVMode.ExternalProfile:
+                case WMVMode.ExternalProfile:
                     rbWMVExternal.Checked = true;
                     edWMVProfile.Text = wmaOutput.External_Profile_FileName;
                     break;
-                case VFWMVMode.InternalProfile:
+                case WMVMode.InternalProfile:
                     rbWMVInternal9.Checked = true;
                     if (!string.IsNullOrEmpty(wmaOutput.Internal_Profile_Name))
                     {
@@ -413,7 +413,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
 
                     break;
-                case VFWMVMode.CustomSettings:
+                case WMVMode.CustomSettings:
                     {
                         rbWMVCustom.Checked = true;
 
@@ -423,16 +423,16 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
                         switch (wmaOutput.Custom_Audio_Mode)
                         {
-                            case VFWMVStreamMode.CBR:
+                            case WMVStreamMode.CBR:
                                 cbWMVAudioMode.Text = "CBR";
                                 break;
-                            case VFWMVStreamMode.VBRQuality:
+                            case WMVStreamMode.VBRQuality:
                                 cbWMVAudioMode.Text = "Quality";
                                 break;
-                            case VFWMVStreamMode.VBRBitrate:
+                            case WMVStreamMode.VBRBitrate:
                                 cbWMVAudioMode.Text = "VBR";
                                 break;
-                            case VFWMVStreamMode.VBRPeakBitrate:
+                            case WMVStreamMode.VBRPeakBitrate:
                                 cbWMVAudioMode.Text = "VBR (Peak)";
                                 break;
                             default:
@@ -443,7 +443,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                     }
 
                     break;
-                case VFWMVMode.V8SystemProfile:
+                case WMVMode.V8SystemProfile:
 
                     rbWMVInternal8.Checked = true;
 
@@ -464,11 +464,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="wmvOutput">
         /// WMV settings.
         /// </param>
-        public void SaveSettings(ref VFWMVOutput wmvOutput)
+        public void SaveSettings(ref WMVOutput wmvOutput)
         {
             if (rbWMVInternal9.Checked)
             {
-                wmvOutput.Mode = VFWMVMode.InternalProfile;
+                wmvOutput.Mode = WMVMode.InternalProfile;
 
                 if (cbWMVInternalProfile9.SelectedIndex != -1)
                 {
@@ -477,7 +477,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
             else if (rbWMVInternal8.Checked)
             {
-                wmvOutput.Mode = VFWMVMode.V8SystemProfile;
+                wmvOutput.Mode = WMVMode.V8SystemProfile;
 
                 if (cbWMVInternalProfile8.SelectedIndex != -1)
                 {
@@ -486,12 +486,12 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
             else if (rbWMVExternal.Checked)
             {
-                wmvOutput.Mode = VFWMVMode.ExternalProfile;
+                wmvOutput.Mode = WMVMode.ExternalProfile;
                 wmvOutput.External_Profile_FileName = edWMVProfile.Text;
             }
             else
             {
-                wmvOutput.Mode = VFWMVMode.CustomSettings;
+                wmvOutput.Mode = WMVMode.CustomSettings;
 
                 wmvOutput.Custom_Audio_Codec = cbWMVAudioCodec.Text;
                 wmvOutput.Custom_Audio_Format = cbWMVAudioFormat.Text;
@@ -500,19 +500,19 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 string s = cbWMVAudioMode.Text;
                 if (s == "CBR")
                 {
-                    wmvOutput.Custom_Audio_Mode = VFWMVStreamMode.CBR;
+                    wmvOutput.Custom_Audio_Mode = WMVStreamMode.CBR;
                 }
                 else if (s == "VBR")
                 {
-                    wmvOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRBitrate;
+                    wmvOutput.Custom_Audio_Mode = WMVStreamMode.VBRBitrate;
                 }
                 else if (s == "VBR (Peak)")
                 {
-                    wmvOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRPeakBitrate;
+                    wmvOutput.Custom_Audio_Mode = WMVStreamMode.VBRPeakBitrate;
                 }
                 else
                 {
-                    wmvOutput.Custom_Audio_Mode = VFWMVStreamMode.VBRQuality;
+                    wmvOutput.Custom_Audio_Mode = WMVStreamMode.VBRQuality;
                 }
 
                 wmvOutput.Custom_Audio_StreamPresent = cbWMVAudioEnabled.Checked;
@@ -529,32 +529,32 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
                 s = cbWMVVideoMode.Text;
                 if (s == "CBR")
                 {
-                    wmvOutput.Custom_Video_Mode = VFWMVStreamMode.CBR;
+                    wmvOutput.Custom_Video_Mode = WMVStreamMode.CBR;
                 }
                 else if (s == "VBR")
                 {
-                    wmvOutput.Custom_Video_Mode = VFWMVStreamMode.VBRBitrate;
+                    wmvOutput.Custom_Video_Mode = WMVStreamMode.VBRBitrate;
                 }
                 else if (s == "VBR (Peak)")
                 {
-                    wmvOutput.Custom_Video_Mode = VFWMVStreamMode.VBRPeakBitrate;
+                    wmvOutput.Custom_Video_Mode = WMVStreamMode.VBRPeakBitrate;
                 }
                 else
                 {
-                    wmvOutput.Custom_Video_Mode = VFWMVStreamMode.VBRQuality;
+                    wmvOutput.Custom_Video_Mode = WMVStreamMode.VBRQuality;
                 }
 
                 if (cbWMVTVFormat.Text == "PAL")
                 {
-                    wmvOutput.Custom_Video_TVSystem = VFWMVTVSystem.PAL;
+                    wmvOutput.Custom_Video_TVSystem = WMVTVSystem.PAL;
                 }
                 else if (cbWMVTVFormat.Text == "NTSC")
                 {
-                    wmvOutput.Custom_Video_TVSystem = VFWMVTVSystem.NTSC;
+                    wmvOutput.Custom_Video_TVSystem = WMVTVSystem.NTSC;
                 }
                 else
                 {
-                    wmvOutput.Custom_Video_TVSystem = VFWMVTVSystem.Other;
+                    wmvOutput.Custom_Video_TVSystem = WMVTVSystem.Other;
                 }
 
                 wmvOutput.Custom_Video_StreamPresent = cbWMVVideoEnabled.Checked;

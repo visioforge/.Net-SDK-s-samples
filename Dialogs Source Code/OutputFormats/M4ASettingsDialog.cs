@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -39,7 +39,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="m4aOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFM4AOutput m4aOutput)
+        public void LoadSettings(M4AOutput m4aOutput)
         {
             cbM4ABitrate.Text = m4aOutput.Bitrate.ToString();
             cbM4AVersion.SelectedIndex = (int)m4aOutput.Version;
@@ -53,14 +53,14 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="m4aOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFM4AOutput m4aOutput)
+        public void SaveSettings(ref M4AOutput m4aOutput)
         {
             int.TryParse(cbM4ABitrate.Text, out var tmp);
             m4aOutput.Bitrate = tmp;
 
-            m4aOutput.Version = (VFAACVersion)cbM4AVersion.SelectedIndex;
-            m4aOutput.Output = (VFAACOutput)cbM4AOutput.SelectedIndex;
-            m4aOutput.Object = (VFAACObject)(cbM4AObjectType.SelectedIndex + 1);
+            m4aOutput.Version = (AACVersion)cbM4AVersion.SelectedIndex;
+            m4aOutput.Output = (AACOutput)cbM4AOutput.SelectedIndex;
+            m4aOutput.Object = (AACObject)(cbM4AObjectType.SelectedIndex + 1);
         }
 
         private void btClose_Click(object sender, EventArgs e)

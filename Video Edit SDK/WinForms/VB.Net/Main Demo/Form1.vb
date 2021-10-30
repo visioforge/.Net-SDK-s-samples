@@ -6,18 +6,21 @@ Imports VisioForge.Controls.UI
 Imports VisioForge.Controls.UI.Dialogs.OutputFormats
 Imports VisioForge.Controls.UI.Dialogs.VideoEffects
 Imports VisioForge.Types
-Imports VisioForge.Controls.UI.WinForms
 Imports VisioForge.Tools
 Imports VisioForge.Types.FFMPEGEXE
-Imports VisioForge.Types.GPUVideoEffects
-Imports VisioForge.Types.OutputFormat
+Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoEffects
 Imports VisioForge.Types.Decklink
+Imports VisioForge.Controls.VideoEdit
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.VideoEdit
+Imports VisioForge.Types.AudioEffects
+Imports VisioForge.Types.VideoProcessing
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim _mp4SettingsDialog As MP4SettingsDialog
+    Dim mp4SettingsDialog As MP4SettingsDialog
 
     Dim aviSettingsDialog As AVISettingsDialog
 
@@ -55,6 +58,18 @@ Public Class Form1
     Dim zoomShiftX As Integer = 0
 
     Dim zoomShiftY As Integer = 0
+
+    Private WithEvents VideoEdit1 As VideoEditCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        VideoEdit1 = New VideoEditCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        VideoEdit1.Dispose()
+        VideoEdit1 = Nothing
+    End Sub
 
     Private Function GetFileExt(ByVal fileName As String) As String
 
@@ -97,30 +112,30 @@ Public Class Form1
                 If (cbAddFullFile.Checked) Then
 
                     If (cbInsertAfterPreviousFile.Checked) Then
-                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), Nothing, VFVideoEditStretchMode.Letterbox)
+                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), Nothing, VideoEditStretchMode.Letterbox)
                     Else
-                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), VFVideoEditStretchMode.Letterbox)
+                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), VideoEditStretchMode.Letterbox)
                     End If
 
                 Else
                     If (cbInsertAfterPreviousFile.Checked) Then
-                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), Nothing, VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight)
+                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), Nothing, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight)
                     Else
-                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight)
+                        Await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), VideoEditStretchMode.Letterbox, 0, customWidth, customHeight)
                     End If
                 End If
 
             ElseIf ((String.Compare(GetFileExt(s), ".WAV", True) = 0) Or (String.Compare(GetFileExt(s), ".MP3", True) = 0) Or (String.Compare(GetFileExt(s), ".OGG", True) = 0) Or (String.Compare(GetFileExt(s), ".WMA", True) = 0)) Then
 
                 If (cbAddFullFile.Checked) Then
-                    Dim audioFile = New VFVEAudioSource(s, Nothing, Nothing, String.Empty, 0, tbSpeed.Value / 100.0)
+                    Dim audioFile = New AudioSource(s, Nothing, Nothing, String.Empty, 0, tbSpeed.Value / 100.0)
                     If (cbInsertAfterPreviousFile.Checked) Then
                         Await VideoEdit1.Input_AddAudioFileAsync(audioFile, Nothing, 0)
                     Else
                         Await VideoEdit1.Input_AddAudioFileAsync(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), 0)
                     End If
                 Else
-                    Dim audioFile = New VFVEAudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), String.Empty, 0, tbSpeed.Value / 100.0)
+                    Dim audioFile = New AudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), String.Empty, 0, tbSpeed.Value / 100.0)
                     If (cbInsertAfterPreviousFile.Checked) Then
                         Await VideoEdit1.Input_AddAudioFileAsync(audioFile, Nothing, 0)
                     Else
@@ -129,9 +144,9 @@ Public Class Form1
                 End If
             Else
                 If (cbAddFullFile.Checked) Then
-                    Dim videoFile = New VFVEVideoSource(
-                                s, Nothing, Nothing, VFVideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0)
-                    Dim audioFile = New VFVEAudioSource(s, Nothing, Nothing, String.Empty, 0, tbSpeed.Value / 100.0)
+                    Dim videoFile = New VideoSource(
+                                s, Nothing, Nothing, VideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0)
+                    Dim audioFile = New AudioSource(s, Nothing, Nothing, String.Empty, 0, tbSpeed.Value / 100.0)
 
                     If (cbInsertAfterPreviousFile.Checked) Then
                         Await VideoEdit1.Input_AddVideoFileAsync(videoFile, Nothing, 0, customWidth, customHeight)
@@ -141,9 +156,9 @@ Public Class Form1
                         Await VideoEdit1.Input_AddAudioFileAsync(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), 0)
                     End If
                 Else
-                    Dim videoFile = New VFVEVideoSource(
-                                s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), VFVideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0)
-                    Dim audioFile = New VFVEAudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), String.Empty, 0, tbSpeed.Value / 100.0)
+                    Dim videoFile = New VideoSource(
+                                s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), VideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0)
+                    Dim audioFile = New AudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), String.Empty, 0, tbSpeed.Value / 100.0)
 
                     If (cbInsertAfterPreviousFile.Checked) Then
                         Await VideoEdit1.Input_AddVideoFileAsync(videoFile, Nothing, 0, customWidth, customHeight)
@@ -168,6 +183,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+        CreateEngine()
 
         Text += $" (SDK v{VideoEdit1.SDK_Version})"
 
@@ -232,7 +248,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub VideoEdit1_OnStop(ByVal sender As System.Object, ByVal e As VideoEditStopEventArgs) Handles VideoEdit1.OnStop
+    Private Sub VideoEdit1_OnStop(ByVal sender As System.Object, ByVal e As StopEventArgs) Handles VideoEdit1.OnStop
         Invoke(Sub()
                    ProgressBar1.Value = 0
 
@@ -302,21 +318,21 @@ Public Class Form1
     Private Sub ConfigureVideoRenderer()
 
         If rbVMR9.Checked Then
-            VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         ElseIf rbEVR.Checked Then
-            VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
         ElseIf rbVR.Checked Then
-            VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         ElseIf (rbDirect2D.Checked) Then
-            VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.Direct2D
+            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
         Else
-            VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.None
+            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.None
         End If
 
         If (cbStretch.Checked) Then
-            VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch
+            VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch
         Else
-            VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox
+            VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox
         End If
 
         VideoEdit1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text)
@@ -345,7 +361,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub SetMP4HWOutput(ByRef mp4Output As VFMP4HWOutput)
+    Private Sub SetMP4HWOutput(ByRef mp4Output As MP4HWOutput)
         If (mp4HWSettingsDialog Is Nothing) Then
             mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
         End If
@@ -353,15 +369,15 @@ Public Class Form1
         mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
-        If (_mp4SettingsDialog Is Nothing) Then
-            _mp4SettingsDialog = New MP4SettingsDialog()
+    Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
+        If (mp4SettingsDialog Is Nothing) Then
+            mp4SettingsDialog = New MP4SettingsDialog()
         End If
 
-        _mp4SettingsDialog.SaveSettings(mp4Output)
+        mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetFFMPEGOutput(ByRef ffmpegOutput As VFFFMPEGOutput)
+    Private Sub SetFFMPEGOutput(ByRef ffmpegOutput As FFMPEGOutput)
         If (ffmpegSettingsDialog Is Nothing) Then
             ffmpegSettingsDialog = New FFMPEGSettingsDialog()
         End If
@@ -369,7 +385,7 @@ Public Class Form1
         ffmpegSettingsDialog.SaveSettings(ffmpegOutput)
     End Sub
 
-    Private Sub SetFFMPEGEXEOutput(ByRef ffmpegOutput As VFFFMPEGEXEOutput)
+    Private Sub SetFFMPEGEXEOutput(ByRef ffmpegOutput As FFMPEGEXEOutput)
         If (ffmpegEXESettingsDialog Is Nothing) Then
             ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
         End If
@@ -377,7 +393,7 @@ Public Class Form1
         ffmpegEXESettingsDialog.SaveSettings(ffmpegOutput)
     End Sub
 
-    Private Sub SetGIFOutput(ByRef gifOutput As VFAnimatedGIFOutput)
+    Private Sub SetGIFOutput(ByRef gifOutput As AnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
         End If
@@ -385,7 +401,7 @@ Public Class Form1
         gifSettingsDialog.SaveSettings(gifOutput)
     End Sub
 
-    Private Sub SetWebMOutput(ByRef webmOutput As VFWebMOutput)
+    Private Sub SetWebMOutput(ByRef webmOutput As WebMOutput)
         If (webmSettingsDialog Is Nothing) Then
             webmSettingsDialog = New WebMSettingsDialog()
         End If
@@ -393,14 +409,14 @@ Public Class Form1
         webmSettingsDialog.SaveSettings(webmOutput)
     End Sub
 
-    Private Sub SetM4AOutput(ByRef m4aOutput As VFM4AOutput)
+    Private Sub SetM4AOutput(ByRef m4aOutput As M4AOutput)
         If (m4aSettingsDialog Is Nothing) Then
             m4aSettingsDialog = New M4ASettingsDialog()
         End If
 
         m4aSettingsDialog.SaveSettings(m4aOutput)
     End Sub
-    Private Sub SetWMAOutput(ByRef wmaOutput As VFWMAOutput)
+    Private Sub SetWMAOutput(ByRef wmaOutput As WMAOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoEdit1)
         End If
@@ -409,7 +425,7 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmaOutput)
     End Sub
 
-    Private Sub SetWMVOutput(ByRef wmvOutput As VFWMVOutput)
+    Private Sub SetWMVOutput(ByRef wmvOutput As WMVOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoEdit1)
         End If
@@ -418,7 +434,7 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmvOutput)
     End Sub
 
-    Private Sub SetOGGOutput(ByRef oggVorbisOutput As VFOGGVorbisOutput)
+    Private Sub SetOGGOutput(ByRef oggVorbisOutput As OGGVorbisOutput)
         If (oggVorbisSettingsDialog Is Nothing) Then
             oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
         End If
@@ -426,7 +442,7 @@ Public Class Form1
         oggVorbisSettingsDialog.SaveSettings(oggVorbisOutput)
     End Sub
 
-    Private Sub SetSpeexOutput(ByRef speexOutput As VFSpeexOutput)
+    Private Sub SetSpeexOutput(ByRef speexOutput As SpeexOutput)
         If (speexSettingsDialog Is Nothing) Then
             speexSettingsDialog = New SpeexSettingsDialog()
         End If
@@ -434,7 +450,7 @@ Public Class Form1
         speexSettingsDialog.SaveSettings(speexOutput)
     End Sub
 
-    Private Sub SetFLACOutput(ByRef flacOutput As VFFLACOutput)
+    Private Sub SetFLACOutput(ByRef flacOutput As FLACOutput)
         If (flacSettingsDialog Is Nothing) Then
             flacSettingsDialog = New FLACSettingsDialog()
         End If
@@ -442,7 +458,7 @@ Public Class Form1
         flacSettingsDialog.SaveSettings(flacOutput)
     End Sub
 
-    Private Sub SetMP3Output(ByRef mp3Output As VFMP3Output)
+    Private Sub SetMP3Output(ByRef mp3Output As MP3Output)
         If (mp3SettingsDialog Is Nothing) Then
             mp3SettingsDialog = New MP3SettingsDialog()
         End If
@@ -450,7 +466,7 @@ Public Class Form1
         mp3SettingsDialog.SaveSettings(mp3Output)
     End Sub
 
-    Private Sub SetACMOutput(ByRef acmOutput As VFACMOutput)
+    Private Sub SetACMOutput(ByRef acmOutput As ACMOutput)
         If (pcmSettingsDialog Is Nothing) Then
             pcmSettingsDialog = New PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray())
         End If
@@ -458,7 +474,7 @@ Public Class Form1
         pcmSettingsDialog.SaveSettings(acmOutput)
     End Sub
 
-    Private Sub SetCustomOutput(ByRef customOutput As VFCustomOutput)
+    Private Sub SetCustomOutput(ByRef customOutput As CustomOutput)
         If (customFormatSettingsDialog Is Nothing) Then
             customFormatSettingsDialog = New CustomFormatSettingsDialog(
                 VideoEdit1.Video_Codecs.ToArray(),
@@ -469,7 +485,7 @@ Public Class Form1
         customFormatSettingsDialog.SaveSettings(customOutput)
     End Sub
 
-    Private Sub SetDVOutput(ByRef dvOutput As VFDVOutput)
+    Private Sub SetDVOutput(ByRef dvOutput As DVOutput)
         If (dvSettingsDialog Is Nothing) Then
             dvSettingsDialog = New DVSettingsDialog()
         End If
@@ -477,7 +493,7 @@ Public Class Form1
         dvSettingsDialog.SaveSettings(dvOutput)
     End Sub
 
-    Private Sub SetAVIOutput(ByRef aviOutput As VFAVIOutput)
+    Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
                 VideoEdit1.Video_Codecs.ToArray(),
@@ -488,13 +504,13 @@ Public Class Form1
 
         If (aviOutput.Audio_UseMP3Encoder) Then
 
-            Dim mp3Output = New VFMP3Output()
+            Dim mp3Output = New MP3Output()
             SetMP3Output(mp3Output)
             aviOutput.MP3 = mp3Output
         End If
     End Sub
 
-    Private Sub SetMKVOutput(ByRef mkvOutput As VFMKVv1Output)
+    Private Sub SetMKVOutput(ByRef mkvOutput As MKVv1Output)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
                 VideoEdit1.Video_Codecs.ToArray(),
@@ -504,7 +520,7 @@ Public Class Form1
         aviSettingsDialog.SaveSettings(mkvOutput)
 
         If (mkvOutput.Audio_UseMP3Encoder) Then
-            Dim mp3Output = New VFMP3Output()
+            Dim mp3Output = New MP3Output()
             SetMP3Output(mp3Output)
             mkvOutput.MP3 = mp3Output
         End If
@@ -523,9 +539,9 @@ Public Class Form1
         mmLog.Clear()
 
         If (rbConvert.Checked) Then
-            VideoEdit1.Mode = VFVideoEditMode.Convert
+            VideoEdit1.Mode = VideoEditMode.Convert
         Else
-            VideoEdit1.Mode = VFVideoEditMode.Preview
+            VideoEdit1.Mode = VideoEditMode.Preview
         End If
 
         VideoEdit1.Video_Resize = cbResize.Checked
@@ -565,18 +581,18 @@ Public Class Form1
             Select Case (cbNetworkStreamingMode.SelectedIndex)
 
                 Case 0
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.WMV
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.WMV
 
                     If (rbNetworkStreamingUseMainWMVSettings.Checked) Then
 
-                        Dim wmvOutput As VFWMVOutput = New VFWMVOutput()
+                        Dim wmvOutput As WMVOutput = New WMVOutput()
                         SetWMVOutput(wmvOutput)
                         VideoEdit1.Network_Streaming_Output = wmvOutput
 
                     Else
 
-                        Dim wmvOutput As VFWMVOutput = New VFWMVOutput()
-                        wmvOutput.Mode = VFWMVMode.ExternalProfile
+                        Dim wmvOutput As WMVOutput = New WMVOutput()
+                        wmvOutput.Mode = WMVMode.ExternalProfile
                         wmvOutput.External_Profile_FileName = edNetworkStreamingWMVProfile.Text
                         VideoEdit1.Network_Streaming_Output = wmvOutput
 
@@ -587,14 +603,14 @@ Public Class Form1
 
                 Case 1
 
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW
                     VideoEdit1.Network_Streaming_URL = edNetworkRTSPURL.Text
 
                 Case 2
 
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTMP_FFMPEG_EXE
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.RTMP_FFMPEG_EXE
 
-                    Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
+                    Dim ffmpegOutput As FFMPEGEXEOutput = New FFMPEGEXEOutput()
 
                     If (rbNetworkUDPFFMPEG.Checked) Then
 
@@ -611,15 +627,15 @@ Public Class Form1
                     VideoEdit1.Network_Streaming_Output = ffmpegOutput
                     VideoEdit1.Network_Streaming_URL = edNetworkRTMPURL.Text
                 Case 3
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.NDI
 
-                    Dim ndiOutput = New VFNDIOutput(edNDIName.Text)
+                    Dim ndiOutput = New NDIOutput(edNDIName.Text)
                     VideoEdit1.Network_Streaming_Output = ndiOutput
                     edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}"
                 Case 4
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.UDP_FFMPEG_EXE
 
-                    Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
+                    Dim ffmpegOutput As FFMPEGEXEOutput = New FFMPEGEXEOutput()
 
                     If (rbNetworkUDPFFMPEG.Checked) Then
 
@@ -638,13 +654,13 @@ Public Class Form1
                 Case 5
                     If (rbNetworkSSSoftware.Checked) Then
 
-                        VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW
+                        VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.SSF_H264_AAC_SW
 
                     Else
 
-                        VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_FFMPEG_EXE
+                        VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.SSF_FFMPEG_EXE
 
-                        Dim ffmpegOutput As VFFFMPEGEXEOutput = New VFFFMPEGEXEOutput()
+                        Dim ffmpegOutput As FFMPEGEXEOutput = New FFMPEGEXEOutput()
 
                         If (rbNetworkSSFFMPEGDefault.Checked) Then
 
@@ -663,7 +679,7 @@ Public Class Form1
 
                     VideoEdit1.Network_Streaming_URL = edNetworkSSURL.Text
                 Case 6
-                    VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.External
+                    VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.External
             End Select
 
             VideoEdit1.Network_Streaming_Audio_Enabled = cbNetworkStreamingAudioEnabled.Checked
@@ -672,150 +688,150 @@ Public Class Form1
 
         VideoEdit1.Output_Filename = edOutput.Text
 
-        Dim outputFormat = VFVideoEditOutputFormat.AVI
+        Dim outputFormat = VideoEditOutputFormat.AVI
         Select Case cbOutputVideoFormat.SelectedIndex
             Case 0
-                outputFormat = VFVideoEditOutputFormat.AVI
+                outputFormat = VideoEditOutputFormat.AVI
 
-                Dim aviOutput = New VFAVIOutput()
+                Dim aviOutput = New AVIOutput()
                 SetAVIOutput(aviOutput)
                 VideoEdit1.Output_Format = aviOutput
             Case 1
-                outputFormat = VFVideoEditOutputFormat.MKVv1
+                outputFormat = VideoEditOutputFormat.MKVv1
 
-                Dim mkvOutput = New VFMKVv1Output()
+                Dim mkvOutput = New MKVv1Output()
                 SetMKVOutput(mkvOutput)
                 VideoEdit1.Output_Format = mkvOutput
             Case 2
-                outputFormat = VFVideoEditOutputFormat.WMV
+                outputFormat = VideoEditOutputFormat.WMV
 
-                Dim wmvOutput As VFWMVOutput = New VFWMVOutput
+                Dim wmvOutput As WMVOutput = New WMVOutput
                 SetWMVOutput(wmvOutput)
                 VideoEdit1.Output_Format = wmvOutput
             Case 3
-                outputFormat = VFVideoEditOutputFormat.DV
+                outputFormat = VideoEditOutputFormat.DV
 
-                Dim dvOutput = New VFDVOutput()
+                Dim dvOutput = New DVOutput()
                 SetDVOutput(dvOutput)
                 VideoEdit1.Output_Format = dvOutput
             Case 4
-                outputFormat = VFVideoEditOutputFormat.PCM_ACM
+                outputFormat = VideoEditOutputFormat.PCM_ACM
 
-                Dim acmOutput = New VFACMOutput()
+                Dim acmOutput = New ACMOutput()
                 SetACMOutput(acmOutput)
                 VideoEdit1.Output_Format = acmOutput
             Case 5
-                outputFormat = VFVideoEditOutputFormat.MP3
+                outputFormat = VideoEditOutputFormat.MP3
 
-                Dim mp3Output = New VFMP3Output()
+                Dim mp3Output = New MP3Output()
                 SetMP3Output(mp3Output)
                 VideoEdit1.Output_Format = mp3Output
             Case 6
-                outputFormat = VFVideoEditOutputFormat.M4A
+                outputFormat = VideoEditOutputFormat.M4A
 
-                Dim m4aOutput = New VFM4AOutput()
+                Dim m4aOutput = New M4AOutput()
                 SetM4AOutput(m4aOutput)
                 VideoEdit1.Output_Format = m4aOutput
             Case 7
-                outputFormat = VFVideoEditOutputFormat.WMA
+                outputFormat = VideoEditOutputFormat.WMA
 
-                Dim wmaOutput As VFWMAOutput = New VFWMAOutput()
+                Dim wmaOutput As WMAOutput = New WMAOutput()
                 SetWMAOutput(wmaOutput)
                 VideoEdit1.Output_Format = wmaOutput
             Case 8
-                outputFormat = VFVideoEditOutputFormat.OggVorbis
+                outputFormat = VideoEditOutputFormat.OggVorbis
 
-                Dim oggVorbisOutput = New VFOGGVorbisOutput()
+                Dim oggVorbisOutput = New OGGVorbisOutput()
                 SetOGGOutput(oggVorbisOutput)
                 VideoEdit1.Output_Format = oggVorbisOutput
             Case 9
-                outputFormat = VFVideoEditOutputFormat.FLAC
+                outputFormat = VideoEditOutputFormat.FLAC
 
-                Dim flacOutput = New VFFLACOutput()
+                Dim flacOutput = New FLACOutput()
                 SetFLACOutput(flacOutput)
                 VideoEdit1.Output_Format = flacOutput
             Case 10
-                outputFormat = VFVideoEditOutputFormat.Speex
+                outputFormat = VideoEditOutputFormat.Speex
 
-                Dim speexOutput = New VFSpeexOutput()
+                Dim speexOutput = New SpeexOutput()
                 SetSpeexOutput(speexOutput)
                 VideoEdit1.Output_Format = speexOutput
             Case 11
-                outputFormat = VFVideoEditOutputFormat.Custom
+                outputFormat = VideoEditOutputFormat.Custom
 
-                Dim customOutput = New VFCustomOutput()
+                Dim customOutput = New CustomOutput()
                 SetCustomOutput(customOutput)
                 VideoEdit1.Output_Format = customOutput
             Case 12
-                outputFormat = VFVideoEditOutputFormat.WebM
+                outputFormat = VideoEditOutputFormat.WebM
 
-                Dim webmOutput = New VFWebMOutput()
+                Dim webmOutput = New WebMOutput()
                 SetWebMOutput(webmOutput)
                 VideoEdit1.Output_Format = webmOutput
             Case 13
-                outputFormat = VFVideoEditOutputFormat.FFMPEG
+                outputFormat = VideoEditOutputFormat.FFMPEG
 
-                Dim ffmpegOutput = New VFFFMPEGOutput()
+                Dim ffmpegOutput = New FFMPEGOutput()
                 SetFFMPEGOutput(ffmpegOutput)
                 VideoEdit1.Output_Format = ffmpegOutput
             Case 14
-                outputFormat = VFVideoEditOutputFormat.FFMPEG_EXE
+                outputFormat = VideoEditOutputFormat.FFMPEG_EXE
 
-                Dim ffmpegOutput = New VFFFMPEGEXEOutput()
+                Dim ffmpegOutput = New FFMPEGEXEOutput()
                 SetFFMPEGEXEOutput(ffmpegOutput)
                 VideoEdit1.Output_Format = ffmpegOutput
             Case 15
-                outputFormat = VFVideoEditOutputFormat.MP4
+                outputFormat = VideoEditOutputFormat.MP4
             Case 16
-                outputFormat = VFVideoEditOutputFormat.MP4_HW
+                outputFormat = VideoEditOutputFormat.MP4_HW
 
-                Dim mp4Output = New VFMP4HWOutput()
+                Dim mp4Output = New MP4HWOutput()
                 SetMP4HWOutput(mp4Output)
                 VideoEdit1.Output_Format = mp4Output
             Case 17
-                outputFormat = VFVideoEditOutputFormat.AnimatedGIF
+                outputFormat = VideoEditOutputFormat.AnimatedGIF
 
-                Dim gifOutput = New VFAnimatedGIFOutput()
+                Dim gifOutput = New AnimatedGIFOutput()
                 SetGIFOutput(gifOutput)
                 VideoEdit1.Output_Format = gifOutput
             Case 18
-                outputFormat = VFVideoEditOutputFormat.Encrypted
+                outputFormat = VideoEditOutputFormat.Encrypted
         End Select
 
-        If ((outputFormat = VFVideoEditOutputFormat.MP4) Or
-            ((outputFormat = VFVideoEditOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
-                    (VideoEdit1.Network_Streaming_Enabled And (VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
+        If ((outputFormat = VideoEditOutputFormat.MP4) Or
+            ((outputFormat = VideoEditOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
+                    (VideoEdit1.Network_Streaming_Enabled And (VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
 
-            Dim mp4Output As VFMP4Output = New VFMP4Output()
+            Dim mp4Output As MP4Output = New MP4Output()
             SetMP4Output(mp4Output)
 
             ' encryption
-            If (outputFormat = VFVideoEditOutputFormat.Encrypted) Then
+            If (outputFormat = VideoEditOutputFormat.Encrypted) Then
 
                 mp4Output.Encryption = True
-                mp4Output.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC
+                mp4Output.Encryption_Format = EncryptionFormat.MP4_H264_SW_AAC
 
                 If (rbEncryptionKeyString.Checked) Then
 
-                    mp4Output.Encryption_KeyType = VFEncryptionKeyType.String
+                    mp4Output.Encryption_KeyType = EncryptionKeyType.String
                     mp4Output.Encryption_Key = edEncryptionKeyString.Text
 
                 ElseIf (rbEncryptionKeyFile.Checked) Then
 
-                    mp4Output.Encryption_KeyType = VFEncryptionKeyType.File
+                    mp4Output.Encryption_KeyType = EncryptionKeyType.File
                     mp4Output.Encryption_Key = edEncryptionKeyFile.Text
 
                 Else
 
-                    mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary
+                    mp4Output.Encryption_KeyType = EncryptionKeyType.Binary
                     mp4Output.Encryption_Key = VideoEdit1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
 
                 End If
 
                 If (rbEncryptionModeAES128.Checked) Then
-                    mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128
+                    mp4Output.Encryption_Mode = EncryptionMode.V8_AES128
                 Else
-                    mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256
+                    mp4Output.Encryption_Mode = EncryptionMode.V9_AES256
                 End If
             End If
 
@@ -855,11 +871,11 @@ Public Class Form1
         VideoEdit1.Audio_Effects_Enabled = cbAudioEffectsEnabled.Checked
         If (VideoEdit1.Audio_Effects_Enabled) Then
 
-            VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
 
             tbAudAmplifyAmp_Scroll(sender, e)
             tbAudDynAmp_Scroll(sender, e)
@@ -909,19 +925,19 @@ Public Class Form1
         ' video rotation
         Select Case cbRotate.SelectedIndex
             Case 0
-                VideoEdit1.Video_Rotation = VFRotateMode.RotateNone
+                VideoEdit1.Video_Rotation = RotateMode.RotateNone
             Case 1
-                VideoEdit1.Video_Rotation = VFRotateMode.Rotate90
+                VideoEdit1.Video_Rotation = RotateMode.Rotate90
             Case 2
-                VideoEdit1.Video_Rotation = VFRotateMode.Rotate180
+                VideoEdit1.Video_Rotation = RotateMode.Rotate180
             Case 3
-                VideoEdit1.Video_Rotation = VFRotateMode.Rotate270
+                VideoEdit1.Video_Rotation = RotateMode.Rotate270
         End Select
 
         ' tags
         If cbTagEnabled.Checked Then
 
-            Dim tags As VFFileTags = New VFFileTags
+            Dim tags As MediaFileTags = New MediaFileTags
 
             tags.Title = edTagTitle.Text
             tags.Performers = New String() {edTagArtists.Text}
@@ -957,10 +973,10 @@ Public Class Form1
         If cbDeinterlace.Checked Then
 
             If rbDeintBlendEnabled.Checked Then
-                Dim blend As IVFVideoEffectDeinterlaceBlend
+                Dim blend As IVideoEffectDeinterlaceBlend
                 Dim effect = VideoEdit1.Video_Effects_Get("DeinterlaceBlend")
                 If (IsNothing(effect)) Then
-                    blend = New VFVideoEffectDeinterlaceBlend(True)
+                    blend = New VideoEffectDeinterlaceBlend(True)
                     VideoEdit1.Video_Effects_Add(blend)
                 Else
                     blend = effect
@@ -977,10 +993,10 @@ Public Class Form1
                 blend.Constants1 = Convert.ToInt32(edDeintBlendConstants1.Text) / 10.0
                 blend.Constants2 = Convert.ToInt32(edDeintBlendConstants2.Text) / 10.0
             ElseIf (rbDeintCAVTEnabled.Checked) Then
-                Dim cavt As IVFVideoEffectDeinterlaceCAVT
+                Dim cavt As IVideoEffectDeinterlaceCAVT
                 Dim effect = VideoEdit1.Video_Effects_Get("DeinterlaceCAVT")
                 If (IsNothing(effect)) Then
-                    cavt = New VFVideoEffectDeinterlaceCAVT(rbDeintCAVTEnabled.Checked, Convert.ToInt32(edDeintCAVTThreshold.Text))
+                    cavt = New VideoEffectDeinterlaceCAVT(rbDeintCAVTEnabled.Checked, Convert.ToInt32(edDeintCAVTThreshold.Text))
                     VideoEdit1.Video_Effects_Add(cavt)
                 Else
                     cavt = effect
@@ -993,10 +1009,10 @@ Public Class Form1
 
                 cavt.Threshold = Convert.ToInt32(edDeintCAVTThreshold.Text)
             Else
-                Dim triangle As IVFVideoEffectDeinterlaceTriangle
+                Dim triangle As IVideoEffectDeinterlaceTriangle
                 Dim effect = VideoEdit1.Video_Effects_Get("DeinterlaceTriangle")
                 If (IsNothing(effect)) Then
-                    triangle = New VFVideoEffectDeinterlaceTriangle(True, Convert.ToByte(edDeintTriangleWeight.Text))
+                    triangle = New VideoEffectDeinterlaceTriangle(True, Convert.ToByte(edDeintTriangleWeight.Text))
                     VideoEdit1.Video_Effects_Add(triangle)
                 Else
                     triangle = effect
@@ -1016,10 +1032,10 @@ Public Class Form1
         If cbDenoise.Checked And VideoEdit1.Mode Then
 
             If (rbDenoiseCAST.Checked) Then
-                Dim cast As IVFVideoEffectDenoiseCAST
+                Dim cast As IVideoEffectDenoiseCAST
                 Dim effect = VideoEdit1.Video_Effects_Get("DenoiseCAST")
                 If (IsNothing(effect)) Then
-                    cast = New VFVideoEffectDenoiseCAST(True)
+                    cast = New VideoEffectDenoiseCAST(True)
                     VideoEdit1.Video_Effects_Add(cast)
                 Else
                     cast = effect
@@ -1030,10 +1046,10 @@ Public Class Form1
                     Return
                 End If
             Else
-                Dim mosquito As IVFVideoEffectDenoiseMosquito
+                Dim mosquito As IVideoEffectDenoiseMosquito
                 Dim effect = VideoEdit1.Video_Effects_Get("DenoiseMosquito")
                 If (IsNothing(effect)) Then
-                    mosquito = New VFVideoEffectDenoiseMosquito(True)
+                    mosquito = New VideoEffectDenoiseMosquito(True)
                     VideoEdit1.Video_Effects_Add(mosquito)
                 Else
                     mosquito = effect
@@ -1136,10 +1152,10 @@ Public Class Form1
 
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
-        Dim intf As IVFVideoEffectGrayscale
+        Dim intf As IVideoEffectGrayscale
         Dim effect = VideoEdit1.Video_Effects_Get("Grayscale")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectGrayscale(cbGreyscale.Checked)
+            intf = New VideoEffectGrayscale(cbGreyscale.Checked)
             VideoEdit1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -1152,10 +1168,10 @@ Public Class Form1
 
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
-        Dim invert As IVFVideoEffectInvert
+        Dim invert As IVideoEffectInvert
         Dim effect = VideoEdit1.Video_Effects_Get("Invert")
         If (IsNothing(effect)) Then
-            invert = New VFVideoEffectInvert(cbInvert.Checked)
+            invert = New VideoEffectInvert(cbInvert.Checked)
             VideoEdit1.Video_Effects_Add(invert)
         Else
             invert = effect
@@ -1167,17 +1183,16 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
-
         VideoEdit1.Stop()
-
+        DestroyEngine()
     End Sub
 
     Private Sub tbDarkness_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbDarkness.Scroll
 
-        Dim darkness As IVFVideoEffectDarkness
+        Dim darkness As IVideoEffectDarkness
         Dim effect = VideoEdit1.Video_Effects_Get("Darkness")
         If (IsNothing(effect)) Then
-            darkness = New VFVideoEffectDarkness(True, tbDarkness.Value)
+            darkness = New VideoEffectDarkness(True, tbDarkness.Value)
             VideoEdit1.Video_Effects_Add(darkness)
         Else
             darkness = effect
@@ -1190,10 +1205,10 @@ Public Class Form1
 
     Private Sub tbLightness_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
-        Dim lightness As IVFVideoEffectLightness
+        Dim lightness As IVideoEffectLightness
         Dim effect = VideoEdit1.Video_Effects_Get("Lightness")
         If (IsNothing(effect)) Then
-            lightness = New VFVideoEffectLightness(True, tbLightness.Value)
+            lightness = New VideoEffectLightness(True, tbLightness.Value)
             VideoEdit1.Video_Effects_Add(lightness)
         Else
             lightness = effect
@@ -1206,10 +1221,10 @@ Public Class Form1
 
     Private Sub tbSaturation_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbSaturation.Scroll
 
-        Dim saturation As IVFVideoEffectSaturation
+        Dim saturation As IVideoEffectSaturation
         Dim effect = VideoEdit1.Video_Effects_Get("Saturation")
         If (IsNothing(effect)) Then
-            saturation = New VFVideoEffectSaturation(tbSaturation.Value)
+            saturation = New VideoEffectSaturation(tbSaturation.Value)
             VideoEdit1.Video_Effects_Add(saturation)
         Else
 
@@ -1223,10 +1238,10 @@ Public Class Form1
 
     Private Sub tbContrast_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbContrast.Scroll
 
-        Dim contrast As IVFVideoEffectContrast
+        Dim contrast As IVideoEffectContrast
         Dim effect = VideoEdit1.Video_Effects_Get("Contrast")
         If (IsNothing(effect)) Then
-            contrast = New VFVideoEffectContrast(True, tbContrast.Value)
+            contrast = New VideoEffectContrast(True, tbContrast.Value)
             VideoEdit1.Video_Effects_Add(contrast)
         Else
             contrast = effect
@@ -1242,7 +1257,7 @@ Public Class Form1
         If (cbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig))
 
         End If
 
@@ -1252,7 +1267,7 @@ Public Class Form1
 
         If (cbFilters.SelectedIndex <> -1) Then
 
-            VideoEdit1.Video_Filters_Add(New VFCustomProcessingFilter(cbFilters.Text))
+            VideoEdit1.Video_Filters_Add(New CustomProcessingFilter(cbFilters.Text))
             lbFilters.Items.Add(cbFilters.Text)
 
         End If
@@ -1263,10 +1278,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.VFWCompConfig)
         End If
 
     End Sub
@@ -1276,7 +1291,7 @@ Public Class Form1
         If (lbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig))
+            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig))
 
         End If
 
@@ -1288,10 +1303,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.Default)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.Default)
-            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, VFPropertyPage.VFWCompConfig)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, VFPropertyPage.VFWCompConfig)
+            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.VFWCompConfig)
             End If
 
         End If
@@ -1462,15 +1477,15 @@ Public Class Form1
         If Tag = 1 Then
 
             If (rbVMR9.Checked) Then
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
             ElseIf (rbEVR.Checked) Then
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
             ElseIf (rbVR.Checked) Then
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
             ElseIf (rbDirect2D.Checked) Then
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.Direct2D
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
             Else
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.None
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.None
             End If
 
         End If
@@ -1480,9 +1495,9 @@ Public Class Form1
     Private Async Sub cbStretch_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbStretch.CheckedChanged
 
         If (cbStretch.Checked) Then
-            VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch
+            VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch
         Else
-            VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox
+            VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox
         End If
 
         Await VideoEdit1.Video_Renderer_UpdateAsync()
@@ -1625,10 +1640,10 @@ Public Class Form1
 
     Private Sub cbZoom_CheckedChanged(sender As Object, e As EventArgs) Handles cbZoom.CheckedChanged
 
-        Dim zoomEffect As IVFVideoEffectZoom
+        Dim zoomEffect As IVideoEffectZoom
         Dim effect = VideoEdit1.Video_Effects_Get("Zoom")
         If (IsNothing(effect)) Then
-            zoomEffect = New VFVideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoom.Checked)
+            zoomEffect = New VideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoom.Checked)
             VideoEdit1.Video_Effects_Add(zoomEffect)
         Else
             zoomEffect = effect
@@ -1699,10 +1714,10 @@ Public Class Form1
 
     Private Sub cbPan_CheckedChanged(sender As Object, e As EventArgs) Handles cbPan.CheckedChanged
 
-        Dim pan As IVFVideoEffectPan
+        Dim pan As IVideoEffectPan
         Dim effect = VideoEdit1.Video_Effects_Get("Pan")
         If (IsNothing(effect)) Then
-            pan = New VFVideoEffectPan(True)
+            pan = New VideoEffectPan(True)
             VideoEdit1.Video_Effects_Add(pan)
         Else
             pan = effect
@@ -1750,7 +1765,7 @@ Public Class Form1
         edBarcode.Text = value.Value
         edBarcodeMetadata.Text = String.Empty
 
-        For Each o As KeyValuePair(Of VFBarcodeResultMetadataType, Object) In value.Metadata
+        For Each o As KeyValuePair(Of BarcodeResultMetadataType, Object) In value.Metadata
 
             edBarcodeMetadata.Text += o.Key.ToString() + ": " + o.Value.ToString() + Environment.NewLine
 
@@ -1788,10 +1803,10 @@ Public Class Form1
     Private Sub cbFadeInOut_CheckedChanged(sender As Object, e As EventArgs) Handles cbVideoFadeInOut.CheckedChanged
 
         If (rbVideoFadeIn.Checked) Then
-            Dim fadeIn As IVFVideoEffectFadeIn
+            Dim fadeIn As IVideoEffectFadeIn
             Dim effect = VideoEdit1.Video_Effects_Get("FadeIn")
             If (IsNothing(effect)) Then
-                fadeIn = New VFVideoEffectFadeIn(cbVideoFadeInOut.Checked)
+                fadeIn = New VideoEffectFadeIn(cbVideoFadeInOut.Checked)
                 VideoEdit1.Video_Effects_Add(fadeIn)
             Else
                 fadeIn = effect
@@ -1806,10 +1821,10 @@ Public Class Form1
             fadeIn.StartTime = TimeSpan.FromMilliseconds(Convert.ToInt64(edVideoFadeInOutStartTime.Text))
             fadeIn.StopTime = TimeSpan.FromMilliseconds(Convert.ToInt64(edVideoFadeInOutStopTime.Text))
         Else
-            Dim fadeOut As IVFVideoEffectFadeOut
+            Dim fadeOut As IVideoEffectFadeOut
             Dim effect = VideoEdit1.Video_Effects_Get("FadeOut")
             If (IsNothing(effect)) Then
-                fadeOut = New VFVideoEffectFadeOut(cbVideoFadeInOut.Checked)
+                fadeOut = New VideoEffectFadeOut(cbVideoFadeInOut.Checked)
                 VideoEdit1.Video_Effects_Add(fadeOut)
             Else
                 fadeOut = effect
@@ -1867,10 +1882,10 @@ Public Class Form1
             windowWidth = Width
             windowHeight = Height
 
-            controlLeft = VideoEdit1.Left
-            controlTop = VideoEdit1.Top
-            controlWidth = VideoEdit1.Width
-            controlHeight = VideoEdit1.Height
+            controlLeft = VideoView1.Left
+            controlTop = VideoView1.Top
+            controlWidth = VideoView1.Width
+            controlHeight = VideoView1.Height
 
             ' resizing window
             Left = 0
@@ -1883,10 +1898,10 @@ Public Class Form1
             WindowState = FormWindowState.Maximized
 
             ' resizing control
-            VideoEdit1.Left = 0
-            VideoEdit1.Top = 0
-            VideoEdit1.Width = Width
-            VideoEdit1.Height = Height
+            VideoView1.Left = 0
+            VideoView1.Top = 0
+            VideoView1.Width = Width
+            VideoView1.Height = Height
 
             Await VideoEdit1.Video_Renderer_UpdateAsync()
 
@@ -1905,10 +1920,10 @@ Public Class Form1
             WindowState = FormWindowState.Normal
 
             ' restoring control
-            VideoEdit1.Left = controlLeft
-            VideoEdit1.Top = controlTop
-            VideoEdit1.Width = controlWidth
-            VideoEdit1.Height = controlHeight
+            VideoView1.Left = controlLeft
+            VideoView1.Top = controlTop
+            VideoView1.Width = controlWidth
+            VideoView1.Height = controlHeight
 
             Await VideoEdit1.Video_Renderer_UpdateAsync()
 
@@ -1916,12 +1931,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub VideoEdit1_MouseDown(sender As Object, e As MouseEventArgs) Handles VideoEdit1.MouseDown
+    Private Sub VideoView1_MouseDown(sender As Object, e As MouseEventArgs) Handles VideoView1.MouseDown
 
         If (fullScreen) Then
-
             btFullScreen_Click(sender, e)
-
         End If
 
     End Sub
@@ -1968,7 +1981,7 @@ Public Class Form1
 
     Private Sub ApplyAudioInputGains()
 
-        Dim gains As VFAudioEnhancerGains = New VFAudioEnhancerGains()
+        Dim gains As AudioEnhancerGains = New AudioEnhancerGains()
 
         gains.L = tbAudioInputGainL.Value / 10.0F
         gains.C = tbAudioInputGainC.Value / 10.0F
@@ -1983,7 +1996,7 @@ Public Class Form1
 
     Private Sub ApplyAudioOutputGains()
 
-        Dim gains As VFAudioEnhancerGains = New VFAudioEnhancerGains
+        Dim gains As AudioEnhancerGains = New AudioEnhancerGains
 
         gains.L = tbAudioOutputGainL.Value / 10.0F
         gains.C = tbAudioOutputGainC.Value / 10.0F
@@ -2255,14 +2268,14 @@ Public Class Form1
 
     Private Sub btStartMux_Click(sender As Object, e As EventArgs) Handles btStartMux.Click
 
-        Dim streams As List(Of VFVEFFMPEGStream) = New List(Of VFVEFFMPEGStream)
+        Dim streams As List(Of FFMPEGStream) = New List(Of FFMPEGStream)
 
         For Each item As String In lbMuxStreamsList.Items
 
             Dim prefix = item.Substring(0, 1)
             Dim filename = item.Substring(3)
 
-            Dim stream = New VFVEFFMPEGStream()
+            Dim stream = New FFMPEGStream()
             stream.Filename = filename
             stream.ID = prefix
 
@@ -2340,10 +2353,10 @@ Public Class Form1
 
     Private Sub tbGPULightness_Scroll(sender As Object, e As EventArgs) Handles tbGPULightness.Scroll
 
-        Dim intf As IVFGPUVideoEffectBrightness
+        Dim intf As IGPUVideoEffectBrightness
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Brightness")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectBrightness(True, tbGPULightness.Value)
+            intf = New GPUVideoEffectBrightness(True, tbGPULightness.Value)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2357,10 +2370,10 @@ Public Class Form1
 
     Private Sub tbGPUSaturation_Scroll(sender As Object, e As EventArgs) Handles tbGPUSaturation.Scroll
 
-        Dim intf As IVFGPUVideoEffectSaturation
+        Dim intf As IGPUVideoEffectSaturation
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Saturation")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectSaturation(True, tbGPUSaturation.Value)
+            intf = New GPUVideoEffectSaturation(True, tbGPUSaturation.Value)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2374,10 +2387,10 @@ Public Class Form1
 
     Private Sub tbGPUContrast_Scroll(sender As Object, e As EventArgs) Handles tbGPUContrast.Scroll
 
-        Dim intf As IVFGPUVideoEffectContrast
+        Dim intf As IGPUVideoEffectContrast
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Contrast")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectContrast(True, tbGPUContrast.Value)
+            intf = New GPUVideoEffectContrast(True, tbGPUContrast.Value)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2391,10 +2404,10 @@ Public Class Form1
 
     Private Sub tbGPUDarkness_Scroll(sender As Object, e As EventArgs) Handles tbGPUDarkness.Scroll
 
-        Dim intf As IVFGPUVideoEffectDarkness
+        Dim intf As IGPUVideoEffectDarkness
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Darkness")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectDarkness(True, tbGPUDarkness.Value)
+            intf = New GPUVideoEffectDarkness(True, tbGPUDarkness.Value)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2408,10 +2421,10 @@ Public Class Form1
 
     Private Sub cbGPUGreyscale_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUGreyscale.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectGrayscale
+        Dim intf As IGPUVideoEffectGrayscale
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Grayscale")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectGrayscale(cbGPUGreyscale.Checked)
+            intf = New GPUVideoEffectGrayscale(cbGPUGreyscale.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2425,10 +2438,10 @@ Public Class Form1
 
     Private Sub cbGPUInvert_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUInvert.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectInvert
+        Dim intf As IGPUVideoEffectInvert
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Invert")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectInvert(cbGPUInvert.Checked)
+            intf = New GPUVideoEffectInvert(cbGPUInvert.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2442,10 +2455,10 @@ Public Class Form1
 
     Private Sub cbGPUNightVision_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUNightVision.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectNightVision
+        Dim intf As IGPUVideoEffectNightVision
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("NightVision")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectNightVision(cbGPUNightVision.Checked)
+            intf = New GPUVideoEffectNightVision(cbGPUNightVision.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2459,10 +2472,10 @@ Public Class Form1
 
     Private Sub cbGPUPixelate_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUPixelate.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectPixelate
+        Dim intf As IGPUVideoEffectPixelate
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Pixelate")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectPixelate(cbGPUPixelate.Checked)
+            intf = New GPUVideoEffectPixelate(cbGPUPixelate.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2476,10 +2489,10 @@ Public Class Form1
 
     Private Sub cbGPUDenoise_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUDenoise.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectDenoise
+        Dim intf As IGPUVideoEffectDenoise
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Denoise")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectDenoise(cbGPUDenoise.Checked)
+            intf = New GPUVideoEffectDenoise(cbGPUDenoise.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2493,10 +2506,10 @@ Public Class Form1
 
     Private Sub cbGPUDeinterlace_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUDeinterlace.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectDeinterlaceBlend
+        Dim intf As IGPUVideoEffectDeinterlaceBlend
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("DeinterlaceBlend")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.Checked)
+            intf = New GPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2510,10 +2523,10 @@ Public Class Form1
 
     Private Sub cbGPUOldMovie_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUOldMovie.CheckedChanged
 
-        Dim intf As IVFGPUVideoEffectOldMovie
+        Dim intf As IGPUVideoEffectOldMovie
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("OldMovie")
         If (IsNothing(effect)) Then
-            intf = New VFGPUVideoEffectOldMovie(cbGPUOldMovie.Checked)
+            intf = New GPUVideoEffectOldMovie(cbGPUOldMovie.Checked)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect
@@ -2528,7 +2541,7 @@ Public Class Form1
     Private Delegate Sub VUDelegate(ByVal e As VUMeterEventArgs)
 
     Private Sub VUDelegateMethod(ByVal e As VUMeterEventArgs)
-        If (VideoEdit1.Status = VFVideoEditStatus.Free) Then
+        If (VideoEdit1.State = PlaybackState.Free) Then
             Return
         End If
 
@@ -2646,11 +2659,11 @@ Public Class Form1
 
                 ffmpegEXESettingsDialog.ShowDialog(Me)
             Case 15
-                If (_mp4SettingsDialog Is Nothing) Then
-                    _mp4SettingsDialog = New MP4SettingsDialog()
+                If (mp4SettingsDialog Is Nothing) Then
+                    mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                _mp4SettingsDialog.ShowDialog(Me)
+                mp4SettingsDialog.ShowDialog(Me)
             Case 16
                 If (mp4HWSettingsDialog Is Nothing) Then
                     mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
@@ -2664,11 +2677,11 @@ Public Class Form1
 
                 gifSettingsDialog.ShowDialog(Me)
             Case 18
-                If (_mp4SettingsDialog Is Nothing) Then
-                    _mp4SettingsDialog = New MP4SettingsDialog()
+                If (mp4SettingsDialog Is Nothing) Then
+                    mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
-                _mp4SettingsDialog.ShowDialog(Me)
+                mp4SettingsDialog.ShowDialog(Me)
         End Select
     End Sub
 
@@ -2716,10 +2729,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
-        Dim flip As IVFVideoEffectFlipDown
+        Dim flip As IVideoEffectFlipDown
         Dim effect = VideoEdit1.Video_Effects_Get("FlipDown")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipHorizontal(cbFlipX.Checked)
+            flip = New VideoEffectFlipHorizontal(cbFlipX.Checked)
             VideoEdit1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -2730,10 +2743,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipY_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipY.CheckedChanged
-        Dim flip As IVFVideoEffectFlipRight
+        Dim flip As IVideoEffectFlipRight
         Dim effect = VideoEdit1.Video_Effects_Get("FlipRight")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipVertical(cbFlipY.Checked)
+            flip = New VideoEffectFlipVertical(cbFlipY.Checked)
             VideoEdit1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -2765,7 +2778,7 @@ Public Class Form1
         Dim dlg = New ImageLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoEdit1)
-        Dim effect = New VFVideoEffectImageLogo(True, effectName)
+        Dim effect = New VideoEffectImageLogo(True, effectName)
 
         VideoEdit1.Video_Effects_Add(effect)
         lbImageLogos.Items.Add(effect.Name)
@@ -2797,7 +2810,7 @@ Public Class Form1
         Dim dlg = New TextLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoEdit1)
-        Dim effect = New VFVideoEffectTextLogo(True, effectName)
+        Dim effect = New VideoEffectTextLogo(True, effectName)
 
         VideoEdit1.Video_Effects_Add(effect)
         lbTextLogos.Items.Add(effect.Name)
@@ -2808,10 +2821,10 @@ Public Class Form1
     End Sub
 
     Private Sub tbGPUBlur_Scroll(sender As Object, e As EventArgs) Handles tbGPUBlur.Scroll
-        Dim intf As IVFGPUVideoEffectBlur
+        Dim intf As IGPUVideoEffectBlur
         Dim effect = VideoEdit1.Video_Effects_GPU_Get("Blur")
         If (effect Is Nothing) Then
-            intf = New VFGPUVideoEffectBlur(tbGPUBlur.Value > 0, tbGPUBlur.Value)
+            intf = New GPUVideoEffectBlur(tbGPUBlur.Value > 0, tbGPUBlur.Value)
             VideoEdit1.Video_Effects_GPU_Add(intf)
         Else
             intf = effect

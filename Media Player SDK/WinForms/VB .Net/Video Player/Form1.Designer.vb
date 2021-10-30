@@ -55,13 +55,13 @@ Partial Class Form1
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.MediaPlayer1 = New VisioForge.Controls.UI.WinForms.MediaPlayer()
         Me.cbSourceMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.linkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.label25 = New System.Windows.Forms.Label()
         Me.label20 = New System.Windows.Forms.Label()
+        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
         Me.groupBox4.SuspendLayout()
         CType(Me.tbBalance1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbVolume1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -343,70 +343,6 @@ Partial Class Form1
         'timer1
         '
         '
-        'MediaPlayer1
-        '
-        Me.MediaPlayer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MediaPlayer1.Audio_Channel_Mapper = Nothing
-        Me.MediaPlayer1.Audio_Effects_Enabled = False
-        Me.MediaPlayer1.Audio_Enhancer_Enabled = False
-        Me.MediaPlayer1.Audio_OutputDevice = ""
-        Me.MediaPlayer1.Audio_PlayAudio = True
-        Me.MediaPlayer1.Audio_Sample_Grabber_Enabled = False
-        Me.MediaPlayer1.Audio_VUMeter_Enabled = False
-        Me.MediaPlayer1.Audio_VUMeter_Pro_Enabled = False
-        Me.MediaPlayer1.Audio_VUMeter_Pro_Volume = 0
-        Me.MediaPlayer1.BackColor = System.Drawing.Color.Black
-        Me.MediaPlayer1.Barcode_Reader_Enabled = False
-        Me.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
-        Me.MediaPlayer1.ChromaKey = Nothing
-        Me.MediaPlayer1.Custom_Audio_Decoder = Nothing
-        Me.MediaPlayer1.Custom_Splitter = Nothing
-        Me.MediaPlayer1.Custom_Video_Decoder = Nothing
-        Me.MediaPlayer1.CustomRedist_Auto = True
-        Me.MediaPlayer1.CustomRedist_Path = Nothing
-        Me.MediaPlayer1.Debug_DeepCleanUp = False
-        Me.MediaPlayer1.Debug_Dir = Nothing
-        Me.MediaPlayer1.Debug_Mode = False
-        Me.MediaPlayer1.Debug_Telemetry = False
-        Me.MediaPlayer1.Encryption_Key = ""
-        Me.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.[String]
-        Me.MediaPlayer1.Face_Tracking = Nothing
-        Me.MediaPlayer1.Info_UseLibMediaInfo = False
-        Me.MediaPlayer1.Location = New System.Drawing.Point(12, 58)
-        Me.MediaPlayer1.Loop = False
-        Me.MediaPlayer1.Loop_DoNotSeekToBeginning = False
-        Me.MediaPlayer1.MaximalSpeedPlayback = False
-        Me.MediaPlayer1.MIDI_Renderer = Nothing
-        Me.MediaPlayer1.Motion_Detection = Nothing
-        Me.MediaPlayer1.Motion_DetectionEx = Nothing
-        Me.MediaPlayer1.MultiScreen_Enabled = False
-        Me.MediaPlayer1.Name = "MediaPlayer1"
-        Me.MediaPlayer1.OSD_Enabled = False
-        Me.MediaPlayer1.Play_DelayEnabled = False
-        Me.MediaPlayer1.Play_PauseAtFirstFrame = False
-        Me.MediaPlayer1.ReversePlayback_CacheSize = 0
-        Me.MediaPlayer1.ReversePlayback_Enabled = False
-        Me.MediaPlayer1.Selection_Active = False
-        Me.MediaPlayer1.Selection_Start = 0
-        Me.MediaPlayer1.Selection_Stop = 0
-        Me.MediaPlayer1.Size = New System.Drawing.Size(415, 302)
-        Me.MediaPlayer1.Source_Custom_CLSID = Nothing
-        Me.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.NvidiaCUVID
-        Me.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS
-        Me.MediaPlayer1.Source_Stream = Nothing
-        Me.MediaPlayer1.Source_Stream_AudioPresent = True
-        Me.MediaPlayer1.Source_Stream_Size = CType(0, Long)
-        Me.MediaPlayer1.Source_Stream_VideoPresent = True
-        Me.MediaPlayer1.TabIndex = 43
-        Me.MediaPlayer1.Video_Effects_Enabled = False
-        Me.MediaPlayer1.Video_Effects_GPU_Enabled = False
-        Me.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = False
-        Me.MediaPlayer1.Video_Stream_Index = 0
-        Me.MediaPlayer1.Virtual_Camera_Output_Enabled = False
-        Me.MediaPlayer1.Virtual_Camera_Output_LicenseKey = Nothing
-        '
         'cbSourceMode
         '
         Me.cbSourceMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -468,18 +404,27 @@ Partial Class Form1
         Me.label20.TabIndex = 90
         Me.label20.Text = "Please install VLC redist EXE or NuGet"
         '
+        'VideoView1
+        '
+        Me.VideoView1.BackColor = System.Drawing.Color.Black
+        Me.VideoView1.Location = New System.Drawing.Point(12, 58)
+        Me.VideoView1.Name = "VideoView1"
+        Me.VideoView1.Size = New System.Drawing.Size(416, 304)
+        Me.VideoView1.StatusOverlay = Nothing
+        Me.VideoView1.TabIndex = 94
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(664, 500)
+        Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.linkLabel2)
         Me.Controls.Add(Me.linkLabel7)
         Me.Controls.Add(Me.label25)
         Me.Controls.Add(Me.label20)
         Me.Controls.Add(Me.cbSourceMode)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.MediaPlayer1)
         Me.Controls.Add(Me.groupBox4)
         Me.Controls.Add(Me.groupBox1)
         Me.Controls.Add(Me.label1)
@@ -532,7 +477,6 @@ End Sub
     Private WithEvents saveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Private WithEvents openFileDialog1 As System.Windows.Forms.OpenFileDialog
     Private WithEvents timer1 As System.Windows.Forms.Timer
-    Friend WithEvents MediaPlayer1 As VisioForge.Controls.UI.WinForms.MediaPlayer
     Private WithEvents cbSourceMode As ComboBox
     Friend WithEvents Label2 As Label
     Private WithEvents cbLicensing As CheckBox
@@ -541,4 +485,5 @@ End Sub
     Private WithEvents linkLabel7 As LinkLabel
     Private WithEvents label25 As Label
     Private WithEvents label20 As Label
+    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
 End Class

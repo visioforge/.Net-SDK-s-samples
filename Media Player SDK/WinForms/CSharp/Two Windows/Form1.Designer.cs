@@ -17,6 +17,13 @@ namespace Two_Windows_Demo
             {
                 components.Dispose();
             }
+
+            MediaPlayer1?.Dispose();
+            MediaPlayer1 = null;
+
+            form2?.Dispose();
+            form2 = null;
+
             base.Dispose(disposing);
         }
 
@@ -53,7 +60,7 @@ namespace Two_Windows_Demo
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MediaPlayer1 = new VisioForge.Controls.UI.WinForms.MediaPlayer();
+            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
@@ -288,68 +295,21 @@ namespace Two_Windows_Demo
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // MediaPlayer1
+            // VideoView1
             // 
-            this.MediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MediaPlayer1.Audio_Channel_Mapper = null;
-            this.MediaPlayer1.Audio_Effects_Enabled = false;
-            this.MediaPlayer1.Audio_Enhancer_Enabled = false;
-            this.MediaPlayer1.Audio_OutputDevice = "";
-            this.MediaPlayer1.Audio_PlayAudio = false;
-            this.MediaPlayer1.Audio_Sample_Grabber_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Pro_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Pro_Volume = 0;
-            this.MediaPlayer1.BackColor = System.Drawing.Color.Black;
-            this.MediaPlayer1.Barcode_Reader_Enabled = false;
-            this.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
-            this.MediaPlayer1.ChromaKey = null;
-            this.MediaPlayer1.Custom_Audio_Decoder = null;
-            this.MediaPlayer1.Custom_Splitter = null;
-            this.MediaPlayer1.Custom_Video_Decoder = null;
-            this.MediaPlayer1.Debug_DeepCleanUp = false;
-            this.MediaPlayer1.Debug_Dir = null;
-            this.MediaPlayer1.Debug_Mode = false;
-            this.MediaPlayer1.Encryption_Key = "";
-            this.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.String;
-            this.MediaPlayer1.Face_Tracking = null;
-            this.MediaPlayer1.Info_UseLibMediaInfo = false;
-            this.MediaPlayer1.Location = new System.Drawing.Point(437, 14);
-            this.MediaPlayer1.Loop = false;
-            this.MediaPlayer1.Loop_DoNotSeekToBeginning = false;
-            this.MediaPlayer1.MaximalSpeedPlayback = false;
-            this.MediaPlayer1.Motion_Detection = null;
-            this.MediaPlayer1.Motion_DetectionEx = null;
-            this.MediaPlayer1.MultiScreen_Enabled = false;
-            this.MediaPlayer1.Name = "MediaPlayer1";
-            this.MediaPlayer1.ReversePlayback_CacheSize = 0;
-            this.MediaPlayer1.ReversePlayback_Enabled = false;
-            this.MediaPlayer1.Selection_Active = false;
-            this.MediaPlayer1.Selection_Start = 0;
-            this.MediaPlayer1.Selection_Stop = 0;
-            this.MediaPlayer1.Size = new System.Drawing.Size(464, 350);
-            this.MediaPlayer1.Source_Custom_CLSID = null;
-            this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
-            this.MediaPlayer1.Source_Stream = null;
-            this.MediaPlayer1.Source_Stream_AudioPresent = true;
-            this.MediaPlayer1.Source_Stream_Size = ((long)(0));
-            this.MediaPlayer1.Source_Stream_VideoPresent = true;
-            this.MediaPlayer1.Play_DelayEnabled = false;
-            this.MediaPlayer1.TabIndex = 36;
-            this.MediaPlayer1.Video_Effects_Enabled = false;
-            this.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = false;
-            this.MediaPlayer1.Video_Stream_Index = 0;
-            this.MediaPlayer1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.MediaPlayer1_OnError);
-            this.MediaPlayer1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.MediaPlayer1_OnLicenseRequired);
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(437, 11);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(463, 350);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 36;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 396);
-            this.Controls.Add(this.MediaPlayer1);
+            this.Controls.Add(this.VideoView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -400,7 +360,7 @@ namespace Two_Windows_Demo
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Timer timer1;
-        private VisioForge.Controls.UI.WinForms.MediaPlayer MediaPlayer1;
+        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
     }
 }
 

@@ -6,10 +6,25 @@ Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
 Imports VisioForge.Types.MediaInfo
+Imports VisioForge.Controls.MediaPlayer
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.MediaPlayer
 
 Public Class Form1
 
     Private ReadOnly MediaInfo As DVDInfoReader = New DVDInfoReader
+
+    Private WithEvents MediaPlayer1 As MediaPlayerCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        MediaPlayer1 = New MediaPlayerCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        MediaPlayer1.Dispose()
+        MediaPlayer1 = Nothing
+    End Sub
 
     Private Sub btSelectFile_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSelectFile.Click
 
@@ -152,13 +167,13 @@ Public Class Form1
 
     Private Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
 
-        MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title)
+        MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
 
     End Sub
 
     Private Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
 
-        MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Root)
+        MediaPlayer1.DVD_Menu_Show(DVDMenu.Root)
 
     End Sub
 
@@ -170,7 +185,7 @@ Public Class Form1
         MediaPlayer1.Loop = cbLoop.Checked
         MediaPlayer1.Audio_PlayAudio = True
 
-        MediaPlayer1.Source_Mode = VFMediaPlayerSource.DVD_DS
+        MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS
 
         ' read DVD info
         cbDVDControlTitle.Items.Clear()
@@ -188,11 +203,11 @@ Public Class Form1
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
         If (FilterHelpers.Filter_Supported_EVR()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
         ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         Else
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         End If
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
@@ -208,7 +223,7 @@ Public Class Form1
         End If
 
         'show title menu
-        MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title)
+        MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
 
         MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value)
         MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value)
@@ -247,6 +262,8 @@ Public Class Form1
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
+        CreateEngine()
+
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
@@ -259,7 +276,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnError(sender As System.Object, e As VisioForge.Types.ErrorsEventArgs) Handles MediaPlayer1.OnError
+    Private Sub MediaPlayer1_OnError(sender As System.Object, e As ErrorsEventArgs) Handles MediaPlayer1.OnError
 
         Invoke(Sub()
                    mmError.Text = mmError.Text + e.Message + Environment.NewLine
@@ -267,7 +284,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnDVDPlaybackError(sender As System.Object, e As VisioForge.Types.DVDEventArgs) Handles MediaPlayer1.OnDVDPlaybackError
+    Private Sub MediaPlayer1_OnDVDPlaybackError(sender As System.Object, e As DVDEventArgs) Handles MediaPlayer1.OnDVDPlaybackError
 
         Invoke(Sub()
                    mmError.Text = mmError.Text + e.Message + Environment.NewLine
@@ -287,6 +304,8 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
+
+        DestroyEngine()
     End Sub
 End Class
 

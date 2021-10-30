@@ -3,37 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Player Demo", "WinForms\CSharp\Audio Player\Audio Player Demo (NuGet) net6.csproj", "{AEBEA0DD-44E1-4351-A9F2-FC6E46CFFB93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Player Demo (NuGet) net6", "WinForms\CSharp\Audio Player\Audio Player Demo (NuGet) net6.csproj", "{AEBEA0DD-44E1-4351-A9F2-FC6E46CFFB93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVD Player Demo", "WinForms\CSharp\DVD Player\DVD Player Demo (NuGet) net6.csproj", "{5D95E60B-D07E-4ACE-89E6-C28C09F4151B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DVD Player Demo (NuGet) net6", "WinForms\CSharp\DVD Player\DVD Player Demo (NuGet) net6.csproj", "{5D95E60B-D07E-4ACE-89E6-C28C09F4151B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memory Playback Demo", "WinForms\CSharp\Memory Stream\Memory Playback Demo (NuGet) net6.csproj", "{25DA5DDB-F811-4D93-A359-28C76185E9C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory Playback Demo (NuGet) net6", "WinForms\CSharp\Memory Stream\Memory Playback Demo (NuGet) net6.csproj", "{25DA5DDB-F811-4D93-A359-28C76185E9C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Two Windows Demo", "WinForms\CSharp\Two Windows\Two Windows Demo (NuGet) net6.csproj", "{04E1EC37-8636-4E41-85D7-A3934C6C023D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Two Windows Demo (NuGet) net6", "WinForms\CSharp\Two Windows\Two Windows Demo (NuGet) net6.csproj", "{04E1EC37-8636-4E41-85D7-A3934C6C023D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{743796DD-6F87-4CD9-8419-0B8CE16B4CB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{C65A40AE-D7BC-4311-85F5-30D463D55564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seamless Playback Demo", "WinForms\CSharp\Seamless Playback\Seamless Playback Demo (NuGet) net6.csproj", "{3A2FBF0F-A809-4C9E-8C87-798EC6ABB3BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seamless Playback Demo (NuGet) net6", "WinForms\CSharp\Seamless Playback\Seamless Playback Demo (NuGet) net6.csproj", "{3A2FBF0F-A809-4C9E-8C87-798EC6ABB3BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multiple Video Streams Demo", "WinForms\CSharp\Multiple Video Streams\Multiple Video Streams Demo (NuGet) net6.csproj", "{BFDCC3A2-6364-43A1-88EE-8950763735FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Video Streams Demo (NuGet) net6", "WinForms\CSharp\Multiple Video Streams\Multiple Video Streams Demo (NuGet) net6.csproj", "{BFDCC3A2-6364-43A1-88EE-8950763735FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Mixing Demo", "WinForms\CSharp\Video Mixing Demo\Video Mixing Demo (NuGet) net6.csproj", "{F6BB9AA5-9C91-4C28-9414-9BC9781B968A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixing Demo (NuGet) net6", "WinForms\CSharp\Video Mixing Demo\Video Mixing Demo (NuGet) net6.csproj", "{F6BB9AA5-9C91-4C28-9414-9BC9781B968A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Video Player Demo", "WinForms\CSharp\Simple Video Player\Simple Video Player Demo (NuGet) net6.csproj", "{32BB8666-08DB-448E-B758-893EF8D26D92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Demo (NuGet) net6", "WinForms\CSharp\Simple Video Player\Simple Video Player Demo (NuGet) net6.csproj", "{32BB8666-08DB-448E-B758-893EF8D26D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo MP", "WinForms\CSharp\Main Demo\Main Demo MP (NuGet) net6.csproj", "{F3381D78-62A8-4730-A559-3B5ACDE8F667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP (NuGet) net6", "WinForms\CSharp\Main Demo\Main Demo MP (NuGet) net6.csproj", "{F3381D78-62A8-4730-A559-3B5ACDE8F667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main Demo MP WPF", "WPF\CSharp\Main Demo\Main Demo MP WPF (NuGet) net6.csproj", "{E412F69E-2111-433E-856E-6ADE54655503}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP WPF (NuGet) net6", "WPF\CSharp\Main Demo\Main Demo MP WPF (NuGet) net6.csproj", "{E412F69E-2111-433E-856E-6ADE54655503}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSnippets", "CodeSnippets", "{6E4DFE4D-F6E3-4D76-9143-0C408F773B65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "read-file-info", "WinForms\CSharp\_CodeSnippets\read-file-info\read-file-info (NuGet) net6.csproj", "{DDEF7252-9D8C-4324-8B18-A1944494F463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info (NuGet) net6", "WinForms\CSharp\_CodeSnippets\read-file-info\read-file-info (NuGet) net6.csproj", "{DDEF7252-9D8C-4324-8B18-A1944494F463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Karaoke Demo", "WinForms\CSharp\Karaoke Demo\Karaoke Demo (NuGet) net6.csproj", "{57DA73CE-CE2B-4660-81D4-3CF28CA0A647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karaoke Demo (NuGet) net6", "WinForms\CSharp\Karaoke Demo\Karaoke Demo (NuGet) net6.csproj", "{57DA73CE-CE2B-4660-81D4-3CF28CA0A647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTube Player Demo", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo (NuGet) net6.csproj", "{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo (NuGet) net6", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo (NuGet) net6.csproj", "{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{53C08278-37B5-445C-AD9A-D3D70EE03E6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) net6", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) net6.csproj", "{96750269-2BCA-4575-B2FE-3EE00033D8D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +151,14 @@ Global
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.ActiveCfg = Release|x86
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.Build.0 = Release|x86
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|x86.Build.0 = Debug|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|x86.ActiveCfg = Release|Any CPU
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +177,7 @@ Global
 		{DDEF7252-9D8C-4324-8B18-A1944494F463} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{96750269-2BCA-4575-B2FE-3EE00033D8D0} = {53C08278-37B5-445C-AD9A-D3D70EE03E6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

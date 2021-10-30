@@ -10,6 +10,37 @@ Partial Class Form1
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
         End If
+
+        _mp4SettingsDialog?.Dispose()
+        _mp4SettingsDialog = Nothing
+
+        mp4HWSettingsDialog?.Dispose()
+        mp4HWSettingsDialog = Nothing
+
+        mpegTSSettingsDialog?.Dispose()
+        mpegTSSettingsDialog = Nothing
+
+        movSettingsDialog?.Dispose()
+        movSettingsDialog = Nothing
+
+        aviSettingsDialog?.Dispose()
+        aviSettingsDialog = Nothing
+
+        wmvSettingsDialog?.Dispose()
+        wmvSettingsDialog = Nothing
+
+        gifSettingsDialog?.Dispose()
+        gifSettingsDialog = Nothing
+
+        screenshotSaveDialog?.Dispose()
+        screenshotSaveDialog = Nothing
+
+        tmRecording?.Dispose()
+        tmRecording = Nothing
+
+        VideoCapture1?.Dispose()
+        VideoCapture1 = Nothing
+
         MyBase.Dispose(disposing)
     End Sub
 
@@ -93,7 +124,6 @@ Partial Class Form1
         Me.label7 = New System.Windows.Forms.Label()
         Me.openFileDialog2 = New System.Windows.Forms.OpenFileDialog()
         Me.llVideoTutorials = New System.Windows.Forms.LinkLabel()
-        Me.VideoCapture1 = New VisioForge.Controls.UI.WinForms.VideoCapture()
         Me.label34 = New System.Windows.Forms.Label()
         Me.lbTimestamp = New System.Windows.Forms.Label()
         Me.rbCapture = New System.Windows.Forms.RadioButton()
@@ -101,38 +131,39 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
-        Me.tabPage3.SuspendLayout
-        CType(Me.tbDarkness,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.tbContrast,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.tbLightness,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.tbSaturation,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabPage4.SuspendLayout
-        Me.tcMain.SuspendLayout
-        Me.tabPage1.SuspendLayout
-        Me.tabPage2.SuspendLayout
-        Me.SuspendLayout
+        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.tabPage3.SuspendLayout()
+        CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbLightness, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbSaturation, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPage4.SuspendLayout()
+        Me.tcMain.SuspendLayout()
+        Me.tabPage1.SuspendLayout()
+        Me.tabPage2.SuspendLayout()
+        Me.SuspendLayout()
         '
         'btStop
         '
-        Me.btStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStop.Location = New System.Drawing.Point(454, 387)
         Me.btStop.Name = "btStop"
         Me.btStop.Size = New System.Drawing.Size(62, 23)
         Me.btStop.TabIndex = 54
         Me.btStop.Text = "Stop"
-        Me.btStop.UseVisualStyleBackColor = true
+        Me.btStop.UseVisualStyleBackColor = True
         '
         'btStart
         '
-        Me.btStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.btStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStart.Location = New System.Drawing.Point(389, 387)
         Me.btStart.Name = "btStart"
         Me.btStart.Size = New System.Drawing.Size(62, 23)
         Me.btStart.TabIndex = 53
         Me.btStart.Text = "Start"
-        Me.btStart.UseVisualStyleBackColor = true
+        Me.btStart.UseVisualStyleBackColor = True
         '
         'tabPage3
         '
@@ -161,11 +192,11 @@ Partial Class Form1
         Me.tabPage3.Size = New System.Drawing.Size(370, 380)
         Me.tabPage3.TabIndex = 2
         Me.tabPage3.Text = "Video effects"
-        Me.tabPage3.UseVisualStyleBackColor = true
+        Me.tabPage3.UseVisualStyleBackColor = True
         '
         'Label5
         '
-        Me.Label5.AutoSize = true
+        Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(50, 336)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(239, 13)
@@ -174,48 +205,48 @@ Partial Class Form1
         '
         'cbFlipY
         '
-        Me.cbFlipY.AutoSize = true
+        Me.cbFlipY.AutoSize = True
         Me.cbFlipY.Location = New System.Drawing.Point(218, 287)
         Me.cbFlipY.Name = "cbFlipY"
         Me.cbFlipY.Size = New System.Drawing.Size(52, 17)
         Me.cbFlipY.TabIndex = 141
         Me.cbFlipY.Text = "Flip Y"
-        Me.cbFlipY.UseVisualStyleBackColor = true
+        Me.cbFlipY.UseVisualStyleBackColor = True
         '
         'cbFlipX
         '
-        Me.cbFlipX.AutoSize = true
+        Me.cbFlipX.AutoSize = True
         Me.cbFlipX.Location = New System.Drawing.Point(158, 287)
         Me.cbFlipX.Name = "cbFlipX"
         Me.cbFlipX.Size = New System.Drawing.Size(52, 17)
         Me.cbFlipX.TabIndex = 140
         Me.cbFlipX.Text = "Flip X"
-        Me.cbFlipX.UseVisualStyleBackColor = true
+        Me.cbFlipX.UseVisualStyleBackColor = True
         '
         'cbInvert
         '
-        Me.cbInvert.AutoSize = true
+        Me.cbInvert.AutoSize = True
         Me.cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cbInvert.Location = New System.Drawing.Point(98, 287)
         Me.cbInvert.Name = "cbInvert"
         Me.cbInvert.Size = New System.Drawing.Size(53, 17)
         Me.cbInvert.TabIndex = 139
         Me.cbInvert.Text = "Invert"
-        Me.cbInvert.UseVisualStyleBackColor = true
+        Me.cbInvert.UseVisualStyleBackColor = True
         '
         'cbGreyscale
         '
-        Me.cbGreyscale.AutoSize = true
+        Me.cbGreyscale.AutoSize = True
         Me.cbGreyscale.Location = New System.Drawing.Point(18, 287)
         Me.cbGreyscale.Name = "cbGreyscale"
         Me.cbGreyscale.Size = New System.Drawing.Size(73, 17)
         Me.cbGreyscale.TabIndex = 138
         Me.cbGreyscale.Text = "Greyscale"
-        Me.cbGreyscale.UseVisualStyleBackColor = true
+        Me.cbGreyscale.UseVisualStyleBackColor = True
         '
         'label201
         '
-        Me.label201.AutoSize = true
+        Me.label201.AutoSize = True
         Me.label201.Location = New System.Drawing.Point(151, 217)
         Me.label201.Name = "label201"
         Me.label201.Size = New System.Drawing.Size(52, 13)
@@ -233,7 +264,7 @@ Partial Class Form1
         '
         'label200
         '
-        Me.label200.AutoSize = true
+        Me.label200.AutoSize = True
         Me.label200.Location = New System.Drawing.Point(15, 217)
         Me.label200.Name = "label200"
         Me.label200.Size = New System.Drawing.Size(46, 13)
@@ -242,7 +273,7 @@ Partial Class Form1
         '
         'label199
         '
-        Me.label199.AutoSize = true
+        Me.label199.AutoSize = True
         Me.label199.Location = New System.Drawing.Point(151, 165)
         Me.label199.Name = "label199"
         Me.label199.Size = New System.Drawing.Size(55, 13)
@@ -251,7 +282,7 @@ Partial Class Form1
         '
         'label198
         '
-        Me.label198.AutoSize = true
+        Me.label198.AutoSize = True
         Me.label198.Location = New System.Drawing.Point(15, 165)
         Me.label198.Name = "label198"
         Me.label198.Size = New System.Drawing.Size(52, 13)
@@ -288,7 +319,7 @@ Partial Class Form1
         '
         'label3
         '
-        Me.label3.AutoSize = true
+        Me.label3.AutoSize = True
         Me.label3.Location = New System.Drawing.Point(9, 11)
         Me.label3.Name = "label3"
         Me.label3.Size = New System.Drawing.Size(95, 13)
@@ -302,7 +333,7 @@ Partial Class Form1
         Me.btTextLogoAdd.Size = New System.Drawing.Size(99, 23)
         Me.btTextLogoAdd.TabIndex = 128
         Me.btTextLogoAdd.Text = "Add text logo"
-        Me.btTextLogoAdd.UseVisualStyleBackColor = true
+        Me.btTextLogoAdd.UseVisualStyleBackColor = True
         '
         'btLogoRemove
         '
@@ -311,7 +342,7 @@ Partial Class Form1
         Me.btLogoRemove.Size = New System.Drawing.Size(59, 23)
         Me.btLogoRemove.TabIndex = 127
         Me.btLogoRemove.Text = "Remove"
-        Me.btLogoRemove.UseVisualStyleBackColor = true
+        Me.btLogoRemove.UseVisualStyleBackColor = True
         '
         'btLogoEdit
         '
@@ -320,11 +351,11 @@ Partial Class Form1
         Me.btLogoEdit.Size = New System.Drawing.Size(59, 23)
         Me.btLogoEdit.TabIndex = 126
         Me.btLogoEdit.Text = "Edit"
-        Me.btLogoEdit.UseVisualStyleBackColor = true
+        Me.btLogoEdit.UseVisualStyleBackColor = True
         '
         'lbLogos
         '
-        Me.lbLogos.FormattingEnabled = true
+        Me.lbLogos.FormattingEnabled = True
         Me.lbLogos.Location = New System.Drawing.Point(12, 27)
         Me.lbLogos.Name = "lbLogos"
         Me.lbLogos.Size = New System.Drawing.Size(347, 95)
@@ -337,7 +368,7 @@ Partial Class Form1
         Me.btImageLogoAdd.Size = New System.Drawing.Size(99, 23)
         Me.btImageLogoAdd.TabIndex = 124
         Me.btImageLogoAdd.Text = "Add image logo"
-        Me.btImageLogoAdd.UseVisualStyleBackColor = true
+        Me.btImageLogoAdd.UseVisualStyleBackColor = True
         '
         'tabPage4
         '
@@ -349,54 +380,54 @@ Partial Class Form1
         Me.tabPage4.Size = New System.Drawing.Size(370, 380)
         Me.tabPage4.TabIndex = 3
         Me.tabPage4.Text = "Log"
-        Me.tabPage4.UseVisualStyleBackColor = true
+        Me.tabPage4.UseVisualStyleBackColor = True
         '
         'cbDebugMode
         '
-        Me.cbDebugMode.AutoSize = true
+        Me.cbDebugMode.AutoSize = True
         Me.cbDebugMode.Location = New System.Drawing.Point(6, 6)
         Me.cbDebugMode.Name = "cbDebugMode"
         Me.cbDebugMode.Size = New System.Drawing.Size(87, 17)
         Me.cbDebugMode.TabIndex = 81
         Me.cbDebugMode.Text = "Debug mode"
-        Me.cbDebugMode.UseVisualStyleBackColor = true
+        Me.cbDebugMode.UseVisualStyleBackColor = True
         '
         'mmLog
         '
-        Me.mmLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.mmLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.mmLog.Location = New System.Drawing.Point(6, 29)
-        Me.mmLog.Multiline = true
+        Me.mmLog.Multiline = True
         Me.mmLog.Name = "mmLog"
         Me.mmLog.Size = New System.Drawing.Size(358, 345)
         Me.mmLog.TabIndex = 80
         '
         'cbUseBestAudioInputFormat
         '
-        Me.cbUseBestAudioInputFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.cbUseBestAudioInputFormat.AutoSize = true
+        Me.cbUseBestAudioInputFormat.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbUseBestAudioInputFormat.AutoSize = True
         Me.cbUseBestAudioInputFormat.Location = New System.Drawing.Point(296, 309)
         Me.cbUseBestAudioInputFormat.Name = "cbUseBestAudioInputFormat"
         Me.cbUseBestAudioInputFormat.Size = New System.Drawing.Size(68, 17)
         Me.cbUseBestAudioInputFormat.TabIndex = 83
         Me.cbUseBestAudioInputFormat.Text = "Use best"
-        Me.cbUseBestAudioInputFormat.UseVisualStyleBackColor = true
+        Me.cbUseBestAudioInputFormat.UseVisualStyleBackColor = True
         '
         'btAudioInputDeviceSettings
         '
-        Me.btAudioInputDeviceSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btAudioInputDeviceSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btAudioInputDeviceSettings.Location = New System.Drawing.Point(288, 277)
         Me.btAudioInputDeviceSettings.Name = "btAudioInputDeviceSettings"
         Me.btAudioInputDeviceSettings.Size = New System.Drawing.Size(76, 23)
         Me.btAudioInputDeviceSettings.TabIndex = 82
         Me.btAudioInputDeviceSettings.Text = "Settings"
-        Me.btAudioInputDeviceSettings.UseVisualStyleBackColor = true
+        Me.btAudioInputDeviceSettings.UseVisualStyleBackColor = True
         '
         'cbAudioInputLine
         '
         Me.cbAudioInputLine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputLine.FormattingEnabled = true
+        Me.cbAudioInputLine.FormattingEnabled = True
         Me.cbAudioInputLine.Location = New System.Drawing.Point(10, 327)
         Me.cbAudioInputLine.Name = "cbAudioInputLine"
         Me.cbAudioInputLine.Size = New System.Drawing.Size(161, 21)
@@ -404,10 +435,10 @@ Partial Class Form1
         '
         'cbAudioInputFormat
         '
-        Me.cbAudioInputFormat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cbAudioInputFormat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbAudioInputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputFormat.FormattingEnabled = true
+        Me.cbAudioInputFormat.FormattingEnabled = True
         Me.cbAudioInputFormat.Location = New System.Drawing.Point(184, 326)
         Me.cbAudioInputFormat.Name = "cbAudioInputFormat"
         Me.cbAudioInputFormat.Size = New System.Drawing.Size(180, 21)
@@ -415,10 +446,10 @@ Partial Class Form1
         '
         'cbAudioInputDevice
         '
-        Me.cbAudioInputDevice.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cbAudioInputDevice.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbAudioInputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAudioInputDevice.FormattingEnabled = true
+        Me.cbAudioInputDevice.FormattingEnabled = True
         Me.cbAudioInputDevice.Location = New System.Drawing.Point(10, 279)
         Me.cbAudioInputDevice.Name = "cbAudioInputDevice"
         Me.cbAudioInputDevice.Size = New System.Drawing.Size(272, 21)
@@ -426,7 +457,7 @@ Partial Class Form1
         '
         'label22
         '
-        Me.label22.AutoSize = true
+        Me.label22.AutoSize = True
         Me.label22.Location = New System.Drawing.Point(7, 311)
         Me.label22.Name = "label22"
         Me.label22.Size = New System.Drawing.Size(50, 13)
@@ -435,7 +466,7 @@ Partial Class Form1
         '
         'label23
         '
-        Me.label23.AutoSize = true
+        Me.label23.AutoSize = True
         Me.label23.Location = New System.Drawing.Point(7, 261)
         Me.label23.Name = "label23"
         Me.label23.Size = New System.Drawing.Size(66, 13)
@@ -444,7 +475,7 @@ Partial Class Form1
         '
         'label25
         '
-        Me.label25.AutoSize = true
+        Me.label25.AutoSize = True
         Me.label25.Location = New System.Drawing.Point(181, 309)
         Me.label25.Name = "label25"
         Me.label25.Size = New System.Drawing.Size(63, 13)
@@ -453,37 +484,37 @@ Partial Class Form1
         '
         'cbRecordAudio
         '
-        Me.cbRecordAudio.AutoSize = true
+        Me.cbRecordAudio.AutoSize = True
         Me.cbRecordAudio.Location = New System.Drawing.Point(10, 234)
         Me.cbRecordAudio.Name = "cbRecordAudio"
         Me.cbRecordAudio.Size = New System.Drawing.Size(90, 17)
         Me.cbRecordAudio.TabIndex = 66
         Me.cbRecordAudio.Text = "Record audio"
-        Me.cbRecordAudio.UseVisualStyleBackColor = true
+        Me.cbRecordAudio.UseVisualStyleBackColor = True
         '
         'btScreenCaptureUpdate
         '
-        Me.btScreenCaptureUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btScreenCaptureUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btScreenCaptureUpdate.Location = New System.Drawing.Point(244, 76)
         Me.btScreenCaptureUpdate.Name = "btScreenCaptureUpdate"
         Me.btScreenCaptureUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btScreenCaptureUpdate.TabIndex = 65
         Me.btScreenCaptureUpdate.Text = "Update"
-        Me.btScreenCaptureUpdate.UseVisualStyleBackColor = true
+        Me.btScreenCaptureUpdate.UseVisualStyleBackColor = True
         '
         'cbScreenCapture_GrabMouseCursor
         '
-        Me.cbScreenCapture_GrabMouseCursor.AutoSize = true
+        Me.cbScreenCapture_GrabMouseCursor.AutoSize = True
         Me.cbScreenCapture_GrabMouseCursor.Location = New System.Drawing.Point(10, 180)
         Me.cbScreenCapture_GrabMouseCursor.Name = "cbScreenCapture_GrabMouseCursor"
         Me.cbScreenCapture_GrabMouseCursor.Size = New System.Drawing.Size(129, 17)
         Me.cbScreenCapture_GrabMouseCursor.TabIndex = 61
         Me.cbScreenCapture_GrabMouseCursor.Text = "Capture mouse cursor"
-        Me.cbScreenCapture_GrabMouseCursor.UseVisualStyleBackColor = true
+        Me.cbScreenCapture_GrabMouseCursor.UseVisualStyleBackColor = True
         '
         'label79
         '
-        Me.label79.AutoSize = true
+        Me.label79.AutoSize = True
         Me.label79.Location = New System.Drawing.Point(131, 131)
         Me.label79.Name = "label79"
         Me.label79.Size = New System.Drawing.Size(21, 13)
@@ -500,8 +531,8 @@ Partial Class Form1
         '
         'label43
         '
-        Me.label43.AutoSize = true
-        Me.label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.label43.AutoSize = True
+        Me.label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.label43.Location = New System.Drawing.Point(7, 131)
         Me.label43.Name = "label43"
         Me.label43.Size = New System.Drawing.Size(67, 13)
@@ -518,7 +549,7 @@ Partial Class Form1
         '
         'label42
         '
-        Me.label42.AutoSize = true
+        Me.label42.AutoSize = True
         Me.label42.Location = New System.Drawing.Point(131, 92)
         Me.label42.Name = "label42"
         Me.label42.Size = New System.Drawing.Size(40, 13)
@@ -535,8 +566,8 @@ Partial Class Form1
         '
         'label26
         '
-        Me.label26.AutoSize = true
-        Me.label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.label26.AutoSize = True
+        Me.label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.label26.Location = New System.Drawing.Point(131, 66)
         Me.label26.Name = "label26"
         Me.label26.Size = New System.Drawing.Size(29, 13)
@@ -553,7 +584,7 @@ Partial Class Form1
         '
         'label40
         '
-        Me.label40.AutoSize = true
+        Me.label40.AutoSize = True
         Me.label40.Location = New System.Drawing.Point(29, 92)
         Me.label40.Name = "label40"
         Me.label40.Size = New System.Drawing.Size(32, 13)
@@ -563,9 +594,9 @@ Partial Class Form1
         'fontDialog1
         '
         Me.fontDialog1.Color = System.Drawing.Color.White
-        Me.fontDialog1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
-        Me.fontDialog1.FontMustExist = true
-        Me.fontDialog1.ShowColor = true
+        Me.fontDialog1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.fontDialog1.FontMustExist = True
+        Me.fontDialog1.ShowColor = True
         '
         'edScreenLeft
         '
@@ -577,8 +608,8 @@ Partial Class Form1
         '
         'tcMain
         '
-        Me.tcMain.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.tcMain.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.tcMain.Controls.Add(Me.tabPage1)
         Me.tcMain.Controls.Add(Me.tabPage2)
         Me.tcMain.Controls.Add(Me.tabPage3)
@@ -629,23 +660,23 @@ Partial Class Form1
         Me.tabPage1.Size = New System.Drawing.Size(370, 380)
         Me.tabPage1.TabIndex = 0
         Me.tabPage1.Text = "Input"
-        Me.tabPage1.UseVisualStyleBackColor = true
+        Me.tabPage1.UseVisualStyleBackColor = True
         '
         'textBox1
         '
         Me.textBox1.BackColor = System.Drawing.Color.White
         Me.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.textBox1.Location = New System.Drawing.Point(196, 14)
-        Me.textBox1.Multiline = true
+        Me.textBox1.Multiline = True
         Me.textBox1.Name = "textBox1"
-        Me.textBox1.ReadOnly = true
+        Me.textBox1.ReadOnly = True
         Me.textBox1.Size = New System.Drawing.Size(167, 47)
         Me.textBox1.TabIndex = 94
         Me.textBox1.Text = "You can update left/top position and mouse cursor capturing on-the-fly"
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(172, 181)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(191, 13)
@@ -654,7 +685,7 @@ Partial Class Form1
         '
         'lbScreenSourceWindowText
         '
-        Me.lbScreenSourceWindowText.AutoSize = true
+        Me.lbScreenSourceWindowText.AutoSize = True
         Me.lbScreenSourceWindowText.Location = New System.Drawing.Point(193, 164)
         Me.lbScreenSourceWindowText.Name = "lbScreenSourceWindowText"
         Me.lbScreenSourceWindowText.Size = New System.Drawing.Size(107, 13)
@@ -668,33 +699,33 @@ Partial Class Form1
         Me.btScreenSourceWindowSelect.Size = New System.Drawing.Size(49, 23)
         Me.btScreenSourceWindowSelect.TabIndex = 91
         Me.btScreenSourceWindowSelect.Text = "Select"
-        Me.btScreenSourceWindowSelect.UseVisualStyleBackColor = true
+        Me.btScreenSourceWindowSelect.UseVisualStyleBackColor = True
         '
         'rbScreenCaptureWindow
         '
-        Me.rbScreenCaptureWindow.AutoSize = true
+        Me.rbScreenCaptureWindow.AutoSize = True
         Me.rbScreenCaptureWindow.Location = New System.Drawing.Point(178, 134)
         Me.rbScreenCaptureWindow.Name = "rbScreenCaptureWindow"
         Me.rbScreenCaptureWindow.Size = New System.Drawing.Size(101, 17)
         Me.rbScreenCaptureWindow.TabIndex = 90
-        Me.rbScreenCaptureWindow.TabStop = true
+        Me.rbScreenCaptureWindow.TabStop = True
         Me.rbScreenCaptureWindow.Text = "Capture window"
-        Me.rbScreenCaptureWindow.UseVisualStyleBackColor = true
+        Me.rbScreenCaptureWindow.UseVisualStyleBackColor = True
         '
         'cbScreenCapture_DesktopDuplication
         '
-        Me.cbScreenCapture_DesktopDuplication.AutoSize = true
+        Me.cbScreenCapture_DesktopDuplication.AutoSize = True
         Me.cbScreenCapture_DesktopDuplication.Location = New System.Drawing.Point(10, 203)
         Me.cbScreenCapture_DesktopDuplication.Name = "cbScreenCapture_DesktopDuplication"
         Me.cbScreenCapture_DesktopDuplication.Size = New System.Drawing.Size(182, 17)
         Me.cbScreenCapture_DesktopDuplication.TabIndex = 89
         Me.cbScreenCapture_DesktopDuplication.Text = "Allow Desktop Duplication usage"
-        Me.cbScreenCapture_DesktopDuplication.UseVisualStyleBackColor = true
+        Me.cbScreenCapture_DesktopDuplication.UseVisualStyleBackColor = True
         '
         'cbScreenCaptureDisplayIndex
         '
         Me.cbScreenCaptureDisplayIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbScreenCaptureDisplayIndex.FormattingEnabled = true
+        Me.cbScreenCaptureDisplayIndex.FormattingEnabled = True
         Me.cbScreenCaptureDisplayIndex.Location = New System.Drawing.Point(80, 153)
         Me.cbScreenCaptureDisplayIndex.Name = "cbScreenCaptureDisplayIndex"
         Me.cbScreenCaptureDisplayIndex.Size = New System.Drawing.Size(80, 21)
@@ -702,8 +733,8 @@ Partial Class Form1
         '
         'label93
         '
-        Me.label93.AutoSize = true
-        Me.label93.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.label93.AutoSize = True
+        Me.label93.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.label93.Location = New System.Drawing.Point(7, 156)
         Me.label93.Name = "label93"
         Me.label93.Size = New System.Drawing.Size(65, 13)
@@ -712,8 +743,8 @@ Partial Class Form1
         '
         'label24
         '
-        Me.label24.AutoSize = true
-        Me.label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204,Byte))
+        Me.label24.AutoSize = True
+        Me.label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.label24.Location = New System.Drawing.Point(29, 66)
         Me.label24.Name = "label24"
         Me.label24.Size = New System.Drawing.Size(29, 13)
@@ -722,25 +753,25 @@ Partial Class Form1
         '
         'rbScreenCustomArea
         '
-        Me.rbScreenCustomArea.AutoSize = true
+        Me.rbScreenCustomArea.AutoSize = True
         Me.rbScreenCustomArea.Location = New System.Drawing.Point(10, 36)
         Me.rbScreenCustomArea.Name = "rbScreenCustomArea"
         Me.rbScreenCustomArea.Size = New System.Drawing.Size(84, 17)
         Me.rbScreenCustomArea.TabIndex = 49
         Me.rbScreenCustomArea.Text = "Custom area"
-        Me.rbScreenCustomArea.UseVisualStyleBackColor = true
+        Me.rbScreenCustomArea.UseVisualStyleBackColor = True
         '
         'rbScreenFullScreen
         '
-        Me.rbScreenFullScreen.AutoSize = true
-        Me.rbScreenFullScreen.Checked = true
+        Me.rbScreenFullScreen.AutoSize = True
+        Me.rbScreenFullScreen.Checked = True
         Me.rbScreenFullScreen.Location = New System.Drawing.Point(10, 12)
         Me.rbScreenFullScreen.Name = "rbScreenFullScreen"
         Me.rbScreenFullScreen.Size = New System.Drawing.Size(76, 17)
         Me.rbScreenFullScreen.TabIndex = 48
-        Me.rbScreenFullScreen.TabStop = true
+        Me.rbScreenFullScreen.TabStop = True
         Me.rbScreenFullScreen.Text = "Full screen"
-        Me.rbScreenFullScreen.UseVisualStyleBackColor = true
+        Me.rbScreenFullScreen.UseVisualStyleBackColor = True
         '
         'tabPage2
         '
@@ -757,7 +788,7 @@ Partial Class Form1
         Me.tabPage2.Size = New System.Drawing.Size(370, 380)
         Me.tabPage2.TabIndex = 1
         Me.tabPage2.Text = "Output"
-        Me.tabPage2.UseVisualStyleBackColor = true
+        Me.tabPage2.UseVisualStyleBackColor = True
         '
         'btSelectOutput
         '
@@ -766,7 +797,7 @@ Partial Class Form1
         Me.btSelectOutput.Size = New System.Drawing.Size(24, 23)
         Me.btSelectOutput.TabIndex = 133
         Me.btSelectOutput.Text = "..."
-        Me.btSelectOutput.UseVisualStyleBackColor = true
+        Me.btSelectOutput.UseVisualStyleBackColor = True
         '
         'edOutput
         '
@@ -778,7 +809,7 @@ Partial Class Form1
         '
         'lbInfo
         '
-        Me.lbInfo.AutoSize = true
+        Me.lbInfo.AutoSize = True
         Me.lbInfo.Location = New System.Drawing.Point(13, 58)
         Me.lbInfo.Name = "lbInfo"
         Me.lbInfo.Size = New System.Drawing.Size(267, 13)
@@ -792,7 +823,7 @@ Partial Class Form1
         Me.btOutputConfigure.Size = New System.Drawing.Size(75, 23)
         Me.btOutputConfigure.TabIndex = 130
         Me.btOutputConfigure.Text = "Configure"
-        Me.btOutputConfigure.UseVisualStyleBackColor = true
+        Me.btOutputConfigure.UseVisualStyleBackColor = True
         '
         'cbOutputFormat
         '
@@ -837,129 +868,6 @@ Partial Class Form1
         Me.llVideoTutorials.TabIndex = 92
         Me.llVideoTutorials.TabStop = True
         Me.llVideoTutorials.Text = "Video tutorial"
-        '
-        'VideoCapture1
-        '
-        Me.VideoCapture1.Additional_Audio_CaptureDevice_MixChannels = False
-        Me.VideoCapture1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.VideoCapture1.Audio_CaptureDevice = ""
-        Me.VideoCapture1.Audio_CaptureDevice_CustomLatency = 0
-        Me.VideoCapture1.Audio_CaptureDevice_Format = ""
-        Me.VideoCapture1.Audio_CaptureDevice_Format_UseBest = True
-        Me.VideoCapture1.Audio_CaptureDevice_Line = ""
-        Me.VideoCapture1.Audio_CaptureDevice_MasterDevice = Nothing
-        Me.VideoCapture1.Audio_CaptureDevice_MasterDevice_Format = Nothing
-        Me.VideoCapture1.Audio_CaptureDevice_Path = Nothing
-        Me.VideoCapture1.Audio_CaptureSourceFilter = Nothing
-        Me.VideoCapture1.Audio_Channel_Mapper = Nothing
-        Me.VideoCapture1.Audio_Decoder = Nothing
-        Me.VideoCapture1.Audio_Effects_Enabled = False
-        Me.VideoCapture1.Audio_Enhancer_Enabled = False
-        Me.VideoCapture1.Audio_OutputDevice = "Default DirectSound Device"
-        Me.VideoCapture1.Audio_PCM_Converter = Nothing
-        Me.VideoCapture1.Audio_PlayAudio = True
-        Me.VideoCapture1.Audio_RecordAudio = True
-        Me.VideoCapture1.Audio_Sample_Grabber_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Pro_Enabled = False
-        Me.VideoCapture1.Audio_VUMeter_Pro_Volume = 100
-        Me.VideoCapture1.BackColor = System.Drawing.Color.Black
-        Me.VideoCapture1.Barcode_Reader_Enabled = False
-        Me.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.[Auto]
-        Me.VideoCapture1.BDA_Source = Nothing
-        Me.VideoCapture1.ChromaKey = Nothing
-        Me.VideoCapture1.Custom_Source = Nothing
-        Me.VideoCapture1.CustomRedist_Auto = True
-        Me.VideoCapture1.CustomRedist_DisableDialog = False
-        Me.VideoCapture1.CustomRedist_Path = Nothing
-        Me.VideoCapture1.Debug_Dir = ""
-        Me.VideoCapture1.Debug_DisableMessageDialogs = False
-        Me.VideoCapture1.Debug_Mode = False
-        Me.VideoCapture1.Debug_Telemetry = False
-        Me.VideoCapture1.Decklink_Input = VisioForge.Types.Decklink.DecklinkInput.[Auto]
-        Me.VideoCapture1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.[Auto]
-        Me.VideoCapture1.Decklink_Input_IREUSA = False
-        Me.VideoCapture1.Decklink_Input_SMPTE = False
-        Me.VideoCapture1.Decklink_Output = Nothing
-        Me.VideoCapture1.Decklink_Source = Nothing
-        Me.VideoCapture1.DirectCapture_Muxer = Nothing
-        Me.VideoCapture1.DV_Decoder_Video_Resolution = VisioForge.Types.VFDVVideoResolution.Full
-        Me.VideoCapture1.Face_Tracking = Nothing
-        Me.VideoCapture1.IP_Camera_Source = Nothing
-        Me.VideoCapture1.Location = New System.Drawing.Point(389, 26)
-        Me.VideoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.VideoCapture
-        Me.VideoCapture1.Motion_Detection = Nothing
-        Me.VideoCapture1.Motion_DetectionEx = Nothing
-        Me.VideoCapture1.MPEG_Audio_Decoder = ""
-        Me.VideoCapture1.MPEG_Demuxer = Nothing
-        Me.VideoCapture1.MPEG_Video_Decoder = ""
-        Me.VideoCapture1.MultiScreen_Enabled = False
-        Me.VideoCapture1.Name = "VideoCapture1"
-        Me.VideoCapture1.Network_Streaming_Audio_Enabled = False
-        Me.VideoCapture1.Network_Streaming_Enabled = False
-        Me.VideoCapture1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV
-        Me.VideoCapture1.Network_Streaming_Network_Port = 100
-        Me.VideoCapture1.Network_Streaming_Output = Nothing
-        Me.VideoCapture1.Network_Streaming_URL = ""
-        Me.VideoCapture1.Network_Streaming_WMV_Maximum_Clients = 10
-        Me.VideoCapture1.OSD_Enabled = False
-        Me.VideoCapture1.Output_Filename = ""
-        Me.VideoCapture1.Output_Format = Nothing
-        Me.VideoCapture1.PIP_AddSampleGrabbers = False
-        Me.VideoCapture1.PIP_ChromaKeySettings = Nothing
-        Me.VideoCapture1.PIP_Mode = VisioForge.Types.VFPIPMode.Custom
-        Me.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.VFPIPResizeQuality.RQ_NN
-        Me.VideoCapture1.Push_Source = Nothing
-        Me.VideoCapture1.Screen_Capture_Source = Nothing
-        Me.VideoCapture1.SeparateCapture_AutostartCapture = False
-        Me.VideoCapture1.SeparateCapture_Enabled = False
-        Me.VideoCapture1.SeparateCapture_Filename_Mask = "output %yyyy-%MM-%dd %hh-%mm-%ss.%ext"
-        Me.VideoCapture1.SeparateCapture_FileSizeThreshold = CType(0, Long)
-        Me.VideoCapture1.SeparateCapture_GMFMode = True
-        Me.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal
-        Me.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00")
-        Me.VideoCapture1.Size = New System.Drawing.Size(427, 322)
-        Me.VideoCapture1.Start_DelayEnabled = False
-        Me.VideoCapture1.TabIndex = 93
-        Me.VideoCapture1.Tags = Nothing
-        Me.VideoCapture1.Timeshift_Settings = Nothing
-        Me.VideoCapture1.TVTuner_Channel = 0
-        Me.VideoCapture1.TVTuner_Country = ""
-        Me.VideoCapture1.TVTuner_FM_Tuning_StartFrequency = 80000000
-        Me.VideoCapture1.TVTuner_FM_Tuning_Step = 160000000
-        Me.VideoCapture1.TVTuner_FM_Tuning_StopFrequency = 0
-        Me.VideoCapture1.TVTuner_Frequency = 0
-        Me.VideoCapture1.TVTuner_InputType = ""
-        Me.VideoCapture1.TVTuner_Mode = VisioForge.Types.VFTVTunerMode.[Default]
-        Me.VideoCapture1.TVTuner_Name = ""
-        Me.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D
-        Me.VideoCapture1.Video_CaptureDevice = ""
-        Me.VideoCapture1.Video_CaptureDevice_Format = ""
-        Me.VideoCapture1.Video_CaptureDevice_Format_UseBest = True
-        Me.VideoCapture1.Video_CaptureDevice_FrameRate = 0R
-        Me.VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_Name = ""
-        Me.VideoCapture1.Video_CaptureDevice_IsAudioSource = False
-        Me.VideoCapture1.Video_CaptureDevice_Path = Nothing
-        Me.VideoCapture1.Video_CaptureDevice_UseClosedCaptions = False
-        Me.VideoCapture1.Video_CaptureDevice_UseRAWSampleGrabber = False
-        Me.VideoCapture1.Video_Crop = Nothing
-        Me.VideoCapture1.Video_Decoder = Nothing
-        Me.VideoCapture1.Video_Effects_AllowMultipleStreams = False
-        Me.VideoCapture1.Video_Effects_Enabled = False
-        Me.VideoCapture1.Video_Effects_GPU_Enabled = False
-        Me.VideoCapture1.Video_Effects_MergeImageLogos = False
-        Me.VideoCapture1.Video_Effects_MergeTextLogos = False
-        Me.VideoCapture1.Video_Resize = Nothing
-        Me.VideoCapture1.Video_ResizeOrCrop_Enabled = False
-        Me.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone
-        Me.VideoCapture1.Video_Sample_Grabber_Enabled = False
-        Me.VideoCapture1.Video_Sample_Grabber_UseForVideoEffects = False
-        Me.VideoCapture1.Video_Still_Frames_Grabber_Enabled = False
-        Me.VideoCapture1.Virtual_Camera_Output_Enabled = False
-        Me.VideoCapture1.Virtual_Camera_Output_LicenseKey = Nothing
-        Me.VideoCapture1.VLC_Path = Nothing
         '
         'label34
         '
@@ -1013,33 +921,43 @@ Partial Class Form1
         Me.btSaveScreenshot.Size = New System.Drawing.Size(127, 23)
         Me.btSaveScreenshot.TabIndex = 109
         Me.btSaveScreenshot.Text = "Save snapshot"
-        Me.btSaveScreenshot.UseVisualStyleBackColor = true
+        Me.btSaveScreenshot.UseVisualStyleBackColor = True
         '
         'btResume
         '
-        Me.btResume.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btResume.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btResume.Location = New System.Drawing.Point(598, 387)
         Me.btResume.Name = "btResume"
         Me.btResume.Size = New System.Drawing.Size(55, 23)
         Me.btResume.TabIndex = 108
         Me.btResume.Text = "Resume"
-        Me.btResume.UseVisualStyleBackColor = true
+        Me.btResume.UseVisualStyleBackColor = True
         '
         'btPause
         '
-        Me.btPause.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btPause.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btPause.Location = New System.Drawing.Point(537, 387)
         Me.btPause.Name = "btPause"
         Me.btPause.Size = New System.Drawing.Size(55, 23)
         Me.btPause.TabIndex = 107
         Me.btPause.Text = "Pause"
-        Me.btPause.UseVisualStyleBackColor = true
+        Me.btPause.UseVisualStyleBackColor = True
+        '
+        'VideoView1
+        '
+        Me.VideoView1.BackColor = System.Drawing.Color.Black
+        Me.VideoView1.Location = New System.Drawing.Point(389, 26)
+        Me.VideoView1.Name = "VideoView1"
+        Me.VideoView1.Size = New System.Drawing.Size(428, 312)
+        Me.VideoView1.StatusOverlay = Nothing
+        Me.VideoView1.TabIndex = 110
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(830, 416)
+        Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.btSaveScreenshot)
         Me.Controls.Add(Me.btResume)
         Me.Controls.Add(Me.btPause)
@@ -1047,7 +965,6 @@ Partial Class Form1
         Me.Controls.Add(Me.rbCapture)
         Me.Controls.Add(Me.rbPreview)
         Me.Controls.Add(Me.label34)
-        Me.Controls.Add(Me.VideoCapture1)
         Me.Controls.Add(Me.llVideoTutorials)
         Me.Controls.Add(Me.btStop)
         Me.Controls.Add(Me.btStart)
@@ -1107,7 +1024,6 @@ End Sub
     Private WithEvents tabPage2 As System.Windows.Forms.TabPage
     Private WithEvents openFileDialog2 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents llVideoTutorials As System.Windows.Forms.LinkLabel
-    Friend WithEvents VideoCapture1 As VisioForge.Controls.UI.WinForms.VideoCapture
     Private WithEvents cbScreenCaptureDisplayIndex As System.Windows.Forms.ComboBox
     Private WithEvents label93 As System.Windows.Forms.Label
     Private WithEvents label34 As System.Windows.Forms.Label
@@ -1151,4 +1067,5 @@ End Sub
     Private WithEvents btScreenSourceWindowSelect As Button
     Private WithEvents rbScreenCaptureWindow As RadioButton
     Private WithEvents textBox1 As TextBox
+    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
 End Class

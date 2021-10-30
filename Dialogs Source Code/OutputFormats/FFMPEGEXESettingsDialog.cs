@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -46,7 +46,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="ffmpegOutput">
         /// FFMPEG settings.
         /// </param>
-        public void LoadSettings(VFFFMPEGEXEOutput ffmpegOutput)
+        public void LoadSettings(FFMPEGEXEOutput ffmpegOutput)
         {
             cbUsePipes.Checked = ffmpegOutput.UsePipe;
             edCustomParametersAudio.Text = ffmpegOutput.Custom_AdditionalAudioArgs;
@@ -574,7 +574,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="ffmpegOutput">
         /// Output settings.
         /// </param>
-        public void SaveSettings(ref VFFFMPEGEXEOutput ffmpegOutput)
+        public void SaveSettings(ref FFMPEGEXEOutput ffmpegOutput)
         {
             ffmpegOutput.UsePipe = cbUsePipes.Checked;
             ffmpegOutput.Custom_AdditionalAudioArgs = edCustomParametersAudio.Text;

@@ -6,11 +6,12 @@
 
     using VisioForge.Controls.UI.Dialogs;
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -30,34 +31,44 @@
 
         private WindowCaptureForm windowCaptureForm;
 
+        private VideoCaptureCore VideoCapture1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             cbOutputFormat.SelectedIndex = 2;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
-            }
-            else
-            {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
-            }
+            VideoCapture1.Video_Renderer_SetAuto();
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -67,7 +78,7 @@
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
         
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -78,7 +89,7 @@
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -88,7 +99,7 @@
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -98,7 +109,7 @@
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -108,7 +119,7 @@
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -118,7 +129,7 @@
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
         
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -131,7 +142,7 @@
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -140,7 +151,7 @@
         {
             var source = new ScreenCaptureSourceSettings
                              {
-                                 Mode = VFScreenCaptureMode.Window, 
+                                 Mode = ScreenCaptureMode.Window, 
                                  WindowHandle = IntPtr.Zero
                              };
 
@@ -193,14 +204,14 @@
             VideoCapture1.Video_Effects_Enabled = false;
             VideoCapture1.Video_Effects_Clear();
 
-            VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
+            VideoCapture1.Mode = VideoCaptureMode.ScreenCapture;
             VideoCapture1.Output_Filename = edOutput.Text;
 
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
                     {
-                        var aviOutput = new VFAVIOutput();
+                        var aviOutput = new AVIOutput();
                         SetAVIOutput(ref aviOutput);
                         VideoCapture1.Output_Format = aviOutput;
 
@@ -208,7 +219,7 @@
                     }
                 case 1:
                     {
-                        var wmvOutput = new VFWMVOutput();
+                        var wmvOutput = new WMVOutput();
                         SetWMVOutput(ref wmvOutput);
                         VideoCapture1.Output_Format = wmvOutput;
 
@@ -216,7 +227,7 @@
                     }
                 case 2:
                     {
-                        var mp4Output = new VFMP4Output();
+                        var mp4Output = new MP4Output();
                         SetMP4Output(ref mp4Output);
                         VideoCapture1.Output_Format = mp4Output;
 
@@ -224,7 +235,7 @@
                     }
                 case 3:
                     {
-                        var mp4Output = new VFMP4HWOutput();
+                        var mp4Output = new MP4HWOutput();
                         SetMP4HWOutput(ref mp4Output);
                         VideoCapture1.Output_Format = mp4Output;
 
@@ -232,7 +243,7 @@
                     }
                 case 4:
                     {
-                        var gifOutput = new VFAnimatedGIFOutput();
+                        var gifOutput = new AnimatedGIFOutput();
                         SetGIFOutput(ref gifOutput);
 
                         VideoCapture1.Output_Format = gifOutput;
@@ -241,7 +252,7 @@
                     }
                 case 5:
                     {
-                        var tsOutput = new VFMPEGTSOutput();
+                        var tsOutput = new MPEGTSOutput();
                         SetMPEGTSOutput(ref tsOutput);
                         VideoCapture1.Output_Format = tsOutput;
 
@@ -249,7 +260,7 @@
                     }
                 case 6:
                     {
-                        var movOutput = new VFMOVOutput();
+                        var movOutput = new MOVOutput();
                         SetMOVOutput(ref movOutput);
                         VideoCapture1.Output_Format = movOutput;
 
@@ -437,6 +448,11 @@
             windowCaptureForm.Hide();
 
             lbScreenSourceWindowText.Text = e.Caption;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

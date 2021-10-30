@@ -7,25 +7,26 @@ namespace VE_Main_Demo_CLI
 
     using VisioForge.Controls.VideoEdit;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoEdit;
     using VisioForge.Types.VideoEffects;
 
     class Program
     {
         private static void AddVideoSourceFromOption(string[] option, VideoEditCore core)
         {
-            VFVEVideoSource src;
+            VideoSource src;
             if (option.Length == 2)
             {
-                src = new VFVEVideoSource(
+                src = new VideoSource(
                     option[0],
-                    new[] { new VFVEFileSegment(null, null) });
+                    new[] { new FileSegment(null, null) });
             }
             else
             {
-                src = new VFVEVideoSource(
+                src = new VideoSource(
                     option[0],
-                    new[] { new VFVEFileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
+                    new[] { new FileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
             }
 
             if (option.Length == 2)
@@ -40,18 +41,18 @@ namespace VE_Main_Demo_CLI
 
         private static void AddAudioSourceFromOption(string[] option, VideoEditCore core)
         {
-            VFVEAudioSource src;
+            AudioSource src;
             if (option.Length == 2)
             {
-                src = new VFVEAudioSource(
+                src = new AudioSource(
                     option[0],
-                    new[] { new VFVEFileSegment(null, null) });
+                    new[] { new FileSegment(null, null) });
             }
             else
             {
-                src = new VFVEAudioSource(
+                src = new AudioSource(
                     option[0],
-                    new[] { new VFVEFileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
+                    new[] { new FileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
             }
 
             if (option.Length == 2)
@@ -134,31 +135,31 @@ namespace VE_Main_Demo_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    core.Output_Format = new VFMP4HWOutput();
+                    core.Output_Format = new MP4HWOutput();
                     break;
                 case "avi":
-                    core.Output_Format = new VFAVIOutput();
+                    core.Output_Format = new AVIOutput();
                     break;
                 case "wmv":
-                    core.Output_Format = new VFWMVOutput();
+                    core.Output_Format = new WMVOutput();
                     break;
                 case "webm":
-                    core.Output_Format = new VFWebMOutput();
+                    core.Output_Format = new WebMOutput();
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    core.Output_Format = new VFMP4HWOutput();
+                    core.Output_Format = new MP4HWOutput();
                     break;
             }
             
-            core.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            core.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             //Text overlay
             if (!string.IsNullOrEmpty(options.TextOverlay))
             {
                 core.Video_Effects_Enabled = true;
 
-                var textOverlay = new VFVideoEffectTextLogo(true);
+                var textOverlay = new VideoEffectTextLogo(true);
                 textOverlay.Text = options.TextOverlay;
                 core.Video_Effects_Add(textOverlay);
             }
@@ -168,7 +169,7 @@ namespace VE_Main_Demo_CLI
             {
                 core.Video_Effects_Enabled = true;
 
-                var imageLogo = new VFVideoEffectImageLogo(true)
+                var imageLogo = new VideoEffectImageLogo(true)
                                     {
                                         Filename = options.ImageOverlay,
                                         Left = 30,
@@ -198,7 +199,7 @@ namespace VE_Main_Demo_CLI
             //File Tags
             if (options.Tags)
             {
-                core.Tags = new VFFileTags()
+                core.Tags = new MediaFileTags()
                                 {
                                     Title = "Test Title",
                                     Performers = new string[] { },

@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using VisioForge.Controls.UI;
 using VisioForge.Controls.UI.Dialogs.OutputFormats;
 using VisioForge.Controls.UI.Dialogs.VideoEffects;
-using VisioForge.Controls.UI.WinForms;
+using VisioForge.Controls.VideoCapture;
 using VisioForge.Tools;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
-using VisioForge.Types.Sources;
+using VisioForge.Types.AudioEffects;
+using VisioForge.Types.Events;
+using VisioForge.Types.Output;
+using VisioForge.Types.VideoCapture;
 using VisioForge.Types.VideoEffects;
 
 namespace Decklink_Demo
 {
     public partial class Form1 : Form
     {
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private VideoCaptureCore VideoCapture1;
 
-        private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
@@ -45,8 +50,27 @@ namespace Decklink_Demo
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             cbDecklinkSourceInput.SelectedIndex = 0;
@@ -259,7 +283,7 @@ namespace Decklink_Demo
             var dlg = new ImageLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectImageLogo(true, name);
+            var effect = new VideoEffectImageLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -274,7 +298,7 @@ namespace Decklink_Demo
             var dlg = new TextLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoCapture1);
-            var effect = new VFVideoEffectTextLogo(true, name);
+            var effect = new VideoEffectTextLogo(true, name);
 
             VideoCapture1.Video_Effects_Add(effect);
             lbLogos.Items.Add(effect.Name);
@@ -289,7 +313,7 @@ namespace Decklink_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
-                if (effect.GetEffectType() == VFVideoEffectType.TextLogo)
+                if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();
 
@@ -298,7 +322,7 @@ namespace Decklink_Demo
                     dlg.ShowDialog(this);
                     dlg.Dispose();
                 }
-                else if (effect.GetEffectType() == VFVideoEffectType.ImageLogo)
+                else if (effect.GetEffectType() == VideoEffectType.ImageLogo)
                 {
                     var dlg = new ImageLogoSettingsDialog();
 
@@ -321,16 +345,16 @@ namespace Decklink_Demo
 
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectLightness lightness;
+            IVideoEffectLightness lightness;
             var effect = VideoCapture1.Video_Effects_Get("Lightness");
             if (effect == null)
             {
-                lightness = new VFVideoEffectLightness(true, tbLightness.Value);
+                lightness = new VideoEffectLightness(true, tbLightness.Value);
                 VideoCapture1.Video_Effects_Add(lightness);
             }
             else
             {
-                lightness = effect as IVFVideoEffectLightness;
+                lightness = effect as IVideoEffectLightness;
                 if (lightness != null)
                 {
                     lightness.Value = tbLightness.Value;
@@ -340,16 +364,16 @@ namespace Decklink_Demo
 
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectSaturation saturation;
+            IVideoEffectSaturation saturation;
             var effect = VideoCapture1.Video_Effects_Get("Saturation");
             if (effect == null)
             {
-                saturation = new VFVideoEffectSaturation(tbSaturation.Value);
+                saturation = new VideoEffectSaturation(tbSaturation.Value);
                 VideoCapture1.Video_Effects_Add(saturation);
             }
             else
             {
-                saturation = effect as IVFVideoEffectSaturation;
+                saturation = effect as IVideoEffectSaturation;
                 if (saturation != null)
                 {
                     saturation.Value = tbSaturation.Value;
@@ -359,16 +383,16 @@ namespace Decklink_Demo
 
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectContrast contrast;
+            IVideoEffectContrast contrast;
             var effect = VideoCapture1.Video_Effects_Get("Contrast");
             if (effect == null)
             {
-                contrast = new VFVideoEffectContrast(true, tbContrast.Value);
+                contrast = new VideoEffectContrast(true, tbContrast.Value);
                 VideoCapture1.Video_Effects_Add(contrast);
             }
             else
             {
-                contrast = effect as IVFVideoEffectContrast;
+                contrast = effect as IVideoEffectContrast;
                 if (contrast != null)
                 {
                     contrast.Value = tbContrast.Value;
@@ -378,16 +402,16 @@ namespace Decklink_Demo
 
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectDarkness darkness;
+            IVideoEffectDarkness darkness;
             var effect = VideoCapture1.Video_Effects_Get("Darkness");
             if (effect == null)
             {
-                darkness = new VFVideoEffectDarkness(true, tbDarkness.Value);
+                darkness = new VideoEffectDarkness(true, tbDarkness.Value);
                 VideoCapture1.Video_Effects_Add(darkness);
             }
             else
             {
-                darkness = effect as IVFVideoEffectDarkness;
+                darkness = effect as IVideoEffectDarkness;
                 if (darkness != null)
                 {
                     darkness.Value = tbDarkness.Value;
@@ -397,16 +421,16 @@ namespace Decklink_Demo
 
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectGrayscale grayscale;
+            IVideoEffectGrayscale grayscale;
             var effect = VideoCapture1.Video_Effects_Get("Grayscale");
             if (effect == null)
             {
-                grayscale = new VFVideoEffectGrayscale(cbGreyscale.Checked);
+                grayscale = new VideoEffectGrayscale(cbGreyscale.Checked);
                 VideoCapture1.Video_Effects_Add(grayscale);
             }
             else
             {
-                grayscale = effect as IVFVideoEffectGrayscale;
+                grayscale = effect as IVideoEffectGrayscale;
                 if (grayscale != null)
                 {
                     grayscale.Enabled = cbGreyscale.Checked;
@@ -416,16 +440,16 @@ namespace Decklink_Demo
 
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectInvert invert;
+            IVideoEffectInvert invert;
             var effect = VideoCapture1.Video_Effects_Get("Invert");
             if (effect == null)
             {
-                invert = new VFVideoEffectInvert(cbInvert.Checked);
+                invert = new VideoEffectInvert(cbInvert.Checked);
                 VideoCapture1.Video_Effects_Add(invert);
             }
             else
             {
-                invert = effect as IVFVideoEffectInvert;
+                invert = effect as IVideoEffectInvert;
                 if (invert != null)
                 {
                     invert.Enabled = cbInvert.Checked;
@@ -435,16 +459,16 @@ namespace Decklink_Demo
 
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipDown flip;
+            IVideoEffectFlipDown flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipDown");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipHorizontal(cbFlipX.Checked);
+                flip = new VideoEffectFlipHorizontal(cbFlipX.Checked);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipDown;
+                flip = effect as IVideoEffectFlipDown;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipX.Checked;
@@ -454,16 +478,16 @@ namespace Decklink_Demo
 
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipRight flip;
+            IVideoEffectFlipRight flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipRight");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipVertical(cbFlipY.Checked);
+                flip = new VideoEffectFlipVertical(cbFlipY.Checked);
                 VideoCapture1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipRight;
+                flip = effect as IVideoEffectFlipRight;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipY.Checked;
@@ -512,18 +536,18 @@ namespace Decklink_Demo
 
             if (rbPreview.Checked)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.DecklinkSourcePreview;
+                VideoCapture1.Mode = VideoCaptureMode.DecklinkSourcePreview;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.DecklinkSourceCapture;
+                VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture;
                 VideoCapture1.Output_Filename = edOutput.Text;
 
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0:
                         {
-                            var aviOutput = new VFAVIOutput();
+                            var aviOutput = new AVIOutput();
                             SetAVIOutput(ref aviOutput);
                             VideoCapture1.Output_Format = aviOutput;
 
@@ -531,7 +555,7 @@ namespace Decklink_Demo
                         }
                     case 1:
                         {
-                            var wmvOutput = new VFWMVOutput();
+                            var wmvOutput = new WMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             VideoCapture1.Output_Format = wmvOutput;
 
@@ -539,7 +563,7 @@ namespace Decklink_Demo
                         }
                     case 2:
                         {
-                            var mp4Output = new VFMP4Output();
+                            var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -547,7 +571,7 @@ namespace Decklink_Demo
                         }
                     case 3:
                         {
-                            var mp4Output = new VFMP4HWOutput();
+                            var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
                             VideoCapture1.Output_Format = mp4Output;
 
@@ -555,7 +579,7 @@ namespace Decklink_Demo
                         }
                     case 4:
                         {
-                            var gifOutput = new VFAnimatedGIFOutput();
+                            var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
 
                             VideoCapture1.Output_Format = gifOutput;
@@ -564,7 +588,7 @@ namespace Decklink_Demo
                         }
                     case 5:
                         {
-                            var tsOutput = new VFMPEGTSOutput();
+                            var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
                             VideoCapture1.Output_Format = tsOutput;
 
@@ -572,7 +596,7 @@ namespace Decklink_Demo
                         }
                     case 6:
                         {
-                            var movOutput = new VFMOVOutput();
+                            var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
                             VideoCapture1.Output_Format = movOutput;
 
@@ -590,7 +614,7 @@ namespace Decklink_Demo
             VideoCapture1.Audio_Effects_Clear(-1);
             VideoCapture1.Audio_Effects_Enabled = true;
 
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
 
             await VideoCapture1.StartAsync();
 
@@ -598,7 +622,7 @@ namespace Decklink_Demo
             tmRecording.Start();
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -608,7 +632,7 @@ namespace Decklink_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -619,7 +643,7 @@ namespace Decklink_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -629,7 +653,7 @@ namespace Decklink_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -639,7 +663,7 @@ namespace Decklink_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -649,7 +673,7 @@ namespace Decklink_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -659,7 +683,7 @@ namespace Decklink_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -671,7 +695,7 @@ namespace Decklink_Demo
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -746,19 +770,19 @@ namespace Decklink_Demo
                 switch (ext)
                 {
                     case ".bmp":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.BMP, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
                         break;
                     case ".jpg":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.JPEG, 85);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
                         break;
                     case ".gif":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.GIF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
                         break;
                     case ".png":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.PNG, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
                         break;
                     case ".tiff":
-                        await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.TIFF, 0);
+                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
                         break;
                 }
             }
@@ -807,6 +831,11 @@ namespace Decklink_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

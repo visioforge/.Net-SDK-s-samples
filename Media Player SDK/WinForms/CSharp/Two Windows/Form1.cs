@@ -6,15 +6,35 @@ namespace Two_Windows_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.WinForms;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
+        private MediaPlayerCore MediaPlayer1;
+
         public Form2 form2 = new Form2();
+
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
 
         public Form1()
         {
@@ -29,9 +49,11 @@ namespace Two_Windows_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             form2 = new Form2();
             form2.OnWindowSizeChanged += Form2_OnWindowSizeChanged;
-            
+
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version})";
@@ -59,19 +81,19 @@ namespace Two_Windows_Demo
             MediaPlayer1.Audio_PlayAudio = true;
             MediaPlayer1.Info_UseLibMediaInfo = true;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
-            MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
 
             MediaPlayer1.MultiScreen_Enabled = true;
@@ -150,25 +172,27 @@ namespace Two_Windows_Demo
             timer1.Tag = 0;
         }
 
-        private void MediaPlayer1_OnError(object sender, VisioForge.Types.ErrorsEventArgs e)
+        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
-form2.Log(e.Message);
+                                       form2.Log(e.Message);
                                    }));
         }
 
-        private void MediaPlayer1_OnLicenseRequired(object sender, VisioForge.Types.LicenseEventArgs e)
+        private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
- form2.LogLicense(e.Message);
+                                       form2.LogLicense(e.Message);
                                    }));
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             btStop_Click(null, null);
+
+            DestroyEngine();
         }
     }
 }

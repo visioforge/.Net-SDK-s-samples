@@ -24,21 +24,26 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoEdit;
     using VisioForge.Tools;
     using VisioForge.Types;
+    using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Decklink;
+    using VisioForge.Types.Events;
     using VisioForge.Types.FFMPEGEXE;
-    using VisioForge.Types.GPUVideoEffects;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoEdit;
     using VisioForge.Types.VideoEffects;
-
-    using VFM4AOutput = VisioForge.Types.OutputFormat.VFM4AOutput;
+    using VisioForge.Types.VideoProcessing;
+    using M4AOutput = VisioForge.Types.Output.M4AOutput;
 
     /// <summary>
     /// Main demo form.
     /// </summary>
     public partial class Form1 : Form
     {
+        private VideoEditCore VideoEdit1;
+
         private const int AUDIO_EFFECT_ID_AMPLIFY = 0;
         
         private const int AUDIO_EFFECT_ID_EQ = 1;
@@ -141,18 +146,18 @@ namespace VideoEdit_CS_Demo
                     {
                         if (cbInsertAfterPreviousFile.Checked)
                         {
-                            await VideoEdit1.Input_AddImageFileAsync(s,  TimeSpan.FromMilliseconds(2000), null, VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddImageFileAsync(s,  TimeSpan.FromMilliseconds(2000), null, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                         }
                         else
                         {
-                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds( 2000), TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)), VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds( 2000), TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)), VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                         }
                     }
                     else
                     {
                         if (cbInsertAfterPreviousFile.Checked)
                         {
-                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), null, VFVideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)), null, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                         }
                         else
                         {
@@ -160,7 +165,7 @@ namespace VideoEdit_CS_Demo
                                 s,
                                 TimeSpan.FromMilliseconds( Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)),
                                 TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)),
-                                VFVideoEditStretchMode.Letterbox,
+                                VideoEditStretchMode.Letterbox,
                                 0,
                                 customWidth,
                                 customHeight);
@@ -175,7 +180,7 @@ namespace VideoEdit_CS_Demo
                 {
                     if (cbAddFullFile.Checked)
                     {
-                        var audioFile = new VFVEAudioSource(s, null, null, string.Empty, 0, tbSpeed.Value / 100.0);
+                        var audioFile = new AudioSource(s, null, null, string.Empty, 0, tbSpeed.Value / 100.0);
                         if (cbInsertAfterPreviousFile.Checked)
                         {
                             await VideoEdit1.Input_AddAudioFileAsync(audioFile, null, 0);
@@ -187,7 +192,7 @@ namespace VideoEdit_CS_Demo
                     }
                     else
                     {
-                        var audioFile = new VFVEAudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), string.Empty, 0, tbSpeed.Value / 100.0);
+                        var audioFile = new AudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), string.Empty, 0, tbSpeed.Value / 100.0);
                         if (cbInsertAfterPreviousFile.Checked)
                         {
                             await VideoEdit1.Input_AddAudioFileAsync(audioFile, null, 0);
@@ -202,9 +207,9 @@ namespace VideoEdit_CS_Demo
                 {
                     if (cbAddFullFile.Checked)
                     {
-                        var videoFile = new VFVEVideoSource(
-                                s, null, null, VFVideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0);
-                        var audioFile = new VFVEAudioSource(s, null, null, string.Empty, 0, tbSpeed.Value / 100.0);
+                        var videoFile = new VideoSource(
+                                s, null, null, VideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0);
+                        var audioFile = new AudioSource(s, null, null, string.Empty, 0, tbSpeed.Value / 100.0);
 
                         if (cbInsertAfterPreviousFile.Checked)
                         {
@@ -219,9 +224,9 @@ namespace VideoEdit_CS_Demo
                     }
                     else
                     {
-                        var videoFile = new VFVEVideoSource(
-                                s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), VFVideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0);
-                        var audioFile = new VFVEAudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), string.Empty, 0, tbSpeed.Value / 100.0);
+                        var videoFile = new VideoSource(
+                                s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), VideoEditStretchMode.Letterbox, 0, tbSpeed.Value / 100.0);
+                        var audioFile = new AudioSource(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)), TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)), string.Empty, 0, tbSpeed.Value / 100.0);
 
                         if (cbInsertAfterPreviousFile.Checked)
                         {
@@ -246,8 +251,47 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        private void CreateEngine()
+        {
+            VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
+
+            VideoEdit1.OnError += VideoEdit1_OnError;
+            VideoView1.MouseClick += VideoView1_MouseClick;
+            VideoEdit1.OnBarcodeDetected += VideoEdit1_OnBarcodeDetected;
+            VideoEdit1.OnAudioVUMeterProVolume += VideoEdit1_OnAudioVUMeterProVolume;
+            VideoEdit1.OnLicenseRequired += VideoEdit1_OnLicenseRequired;
+            VideoEdit1.OnMotionDetection += VideoEdit1_OnMotion;
+            VideoEdit1.OnAudioVUMeter += VideoEdit1_OnAudioVUMeter;
+            VideoEdit1.OnFFMPEGInfo += VideoEdit1_OnFFMPEGInfo;
+            VideoEdit1.OnAudioVUMeter += VideoEdit1_OnAudioVUMeter;
+            VideoEdit1.OnStart += VideoEdit1_OnStart;
+            VideoEdit1.OnStop += VideoEdit1_OnStop;
+            VideoEdit1.OnProgress += VideoEdit1_OnProgress;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoEdit1.OnError -= VideoEdit1_OnError;
+            VideoView1.MouseClick -= VideoView1_MouseClick;
+            VideoEdit1.OnBarcodeDetected -= VideoEdit1_OnBarcodeDetected;
+            VideoEdit1.OnAudioVUMeterProVolume -= VideoEdit1_OnAudioVUMeterProVolume;
+            VideoEdit1.OnLicenseRequired -= VideoEdit1_OnLicenseRequired;
+            VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
+            VideoEdit1.OnAudioVUMeter -= VideoEdit1_OnAudioVUMeter;
+            VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
+            VideoEdit1.OnAudioVUMeter -= VideoEdit1_OnAudioVUMeter;
+            VideoEdit1.OnStart -= VideoEdit1_OnStart;
+            VideoEdit1.OnStop -= VideoEdit1_OnStop;
+            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+
+            VideoEdit1.Dispose();
+            VideoEdit1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoEdit1.SDK_Version})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
@@ -333,7 +377,7 @@ namespace VideoEdit_CS_Demo
             }
         }
         
-        private void SetMP3Output(ref VFMP3Output mp3Output)
+        private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
             {
@@ -343,7 +387,7 @@ namespace VideoEdit_CS_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -353,7 +397,7 @@ namespace VideoEdit_CS_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetFFMPEGEXEOutput(ref VFFFMPEGEXEOutput ffmpegOutput)
+        private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (ffmpegEXESettingsDialog == null)
             {
@@ -363,7 +407,7 @@ namespace VideoEdit_CS_Demo
             ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -374,7 +418,7 @@ namespace VideoEdit_CS_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
-        private void SetWMAOutput(ref VFWMAOutput wmaOutput)
+        private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -385,7 +429,7 @@ namespace VideoEdit_CS_Demo
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
-        private void SetACMOutput(ref VFACMOutput acmOutput)
+        private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
             {
@@ -395,7 +439,7 @@ namespace VideoEdit_CS_Demo
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
-        private void SetWebMOutput(ref VFWebMOutput webmOutput)
+        private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (webmSettingsDialog == null)
             {
@@ -405,7 +449,7 @@ namespace VideoEdit_CS_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
-        private void SetFFMPEGOutput(ref VFFFMPEGOutput ffmpegOutput)
+        private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (ffmpegSettingsDialog == null)
             {
@@ -415,7 +459,7 @@ namespace VideoEdit_CS_Demo
             ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
-        private void SetFLACOutput(ref VFFLACOutput flacOutput)
+        private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
             {
@@ -425,7 +469,7 @@ namespace VideoEdit_CS_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
                
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -435,7 +479,7 @@ namespace VideoEdit_CS_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
+        private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
             {
@@ -445,7 +489,7 @@ namespace VideoEdit_CS_Demo
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
-        private void SetM4AOutput(ref VFM4AOutput m4aOutput)
+        private void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
             {
@@ -455,7 +499,7 @@ namespace VideoEdit_CS_Demo
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -465,17 +509,20 @@ namespace VideoEdit_CS_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetCustomOutput(ref VFCustomOutput customOutput)
+        private void SetCustomOutput(ref CustomOutput customOutput)
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(
+                    VideoEdit1.Video_Codecs.ToArray(), 
+                    VideoEdit1.Audio_Codecs.ToArray(), 
+                    VideoEdit1.DirectShow_Filters.ToArray());
             }
 
             customFormatSettingsDialog.SaveSettings(ref customOutput);
         }
 
-        private void SetDVOutput(ref VFDVOutput dvOutput)
+        private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
             {
@@ -485,24 +532,26 @@ namespace VideoEdit_CS_Demo
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(
+                    VideoEdit1.Video_Codecs.ToArray(), 
+                    VideoEdit1.Audio_Codecs.ToArray());
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 aviOutput.MP3 = mp3Output;
             }
         }
 
-        private void SetMKVOutput(ref VFMKVv1Output mkvOutput)
+        private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -513,13 +562,13 @@ namespace VideoEdit_CS_Demo
 
             if (mkvOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 mkvOutput.MP3 = mp3Output;
             }
         }
 
-        private void SetOGGOutput(ref VFOGGVorbisOutput oggVorbisOutput)
+        private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
             {
@@ -539,19 +588,19 @@ namespace VideoEdit_CS_Demo
                 {
                     case 0:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.WMV;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.WMV;
 
                             if (rbNetworkStreamingUseMainWMVSettings.Checked)
                             {
-                                var wmvOutput = new VFWMVOutput();
+                                var wmvOutput = new WMVOutput();
                                 SetWMVOutput(ref wmvOutput);
                                 VideoEdit1.Network_Streaming_Output = wmvOutput;
                             }
                             else
                             {
-                                var wmvOutput = new VFWMVOutput
+                                var wmvOutput = new WMVOutput
                                 {
-                                    Mode = VFWMVMode.ExternalProfile,
+                                    Mode = WMVMode.ExternalProfile,
                                     External_Profile_FileName = edNetworkStreamingWMVProfile.Text
                                 };
                                 VideoEdit1.Network_Streaming_Output = wmvOutput;
@@ -565,7 +614,7 @@ namespace VideoEdit_CS_Demo
 
                     case 1:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTSP_H264_AAC_SW;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW;
                             VideoEdit1.Network_Streaming_URL = edNetworkRTSPURL.Text;
 
                             break;
@@ -573,9 +622,9 @@ namespace VideoEdit_CS_Demo
 
                     case 2:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.RTMP_FFMPEG_EXE;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.RTMP_FFMPEG_EXE;
 
-                            var ffmpegOutput = new VFFFMPEGEXEOutput();
+                            var ffmpegOutput = new FFMPEGEXEOutput();
 
                             if (rbNetworkUDPFFMPEG.Checked)
                             {
@@ -595,9 +644,9 @@ namespace VideoEdit_CS_Demo
                         }
                     case 3:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.NDI;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.NDI;
 
-                            var ndiOutput = new VFNDIOutput(edNDIName.Text);
+                            var ndiOutput = new NDIOutput(edNDIName.Text);
                             VideoEdit1.Network_Streaming_Output = ndiOutput;
                             edNDIURL.Text = $"ndi://{System.Net.Dns.GetHostName()}/{edNDIName.Text}";
 
@@ -605,9 +654,9 @@ namespace VideoEdit_CS_Demo
                         }
                     case 4:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.UDP_FFMPEG_EXE;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.UDP_FFMPEG_EXE;
 
-                            var ffmpegOutput = new VFFFMPEGEXEOutput();
+                            var ffmpegOutput = new FFMPEGEXEOutput();
 
                             if (rbNetworkUDPFFMPEG.Checked)
                             {
@@ -630,13 +679,13 @@ namespace VideoEdit_CS_Demo
                         {
                             if (rbNetworkSSSoftware.Checked)
                             {
-                                VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_H264_AAC_SW;
+                                VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.SSF_H264_AAC_SW;
                             }
                             else
                             {
-                                VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.SSF_FFMPEG_EXE;
+                                VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.SSF_FFMPEG_EXE;
 
-                                var ffmpegOutput = new VFFFMPEGEXEOutput();
+                                var ffmpegOutput = new FFMPEGEXEOutput();
 
                                 if (rbNetworkSSFFMPEGDefault.Checked)
                                 {
@@ -658,7 +707,7 @@ namespace VideoEdit_CS_Demo
 
                     case 6:
                         {
-                            VideoEdit1.Network_Streaming_Format = VFNetworkStreamingFormat.External;
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.External;
 
                             break;
                         }
@@ -679,7 +728,7 @@ namespace VideoEdit_CS_Demo
 
             mmLog.Clear();
 
-            VideoEdit1.Mode = (VFVideoEditMode)cbMode.SelectedIndex;
+            VideoEdit1.Mode = (VideoEditMode)cbMode.SelectedIndex;
             
             VideoEdit1.Video_Resize = cbResize.Checked;
             
@@ -719,14 +768,14 @@ namespace VideoEdit_CS_Demo
             
             VideoEdit1.Output_Filename = edOutput.Text;
 
-            VFVideoEditOutputFormat outputFormat = VFVideoEditOutputFormat.AVI;
+            VideoEditOutputFormat outputFormat = VideoEditOutputFormat.AVI;
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0:
                     {
-                        outputFormat = VFVideoEditOutputFormat.AVI;
+                        outputFormat = VideoEditOutputFormat.AVI;
 
-                        var aviOutput = new VFAVIOutput();
+                        var aviOutput = new AVIOutput();
                         SetAVIOutput(ref aviOutput);
                         VideoEdit1.Output_Format = aviOutput;
 
@@ -734,9 +783,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 1:
                     {
-                        outputFormat = VFVideoEditOutputFormat.MKVv1;
+                        outputFormat = VideoEditOutputFormat.MKVv1;
 
-                        var mkvOutput = new VFMKVv1Output();
+                        var mkvOutput = new MKVv1Output();
                         SetMKVOutput(ref mkvOutput);
                         VideoEdit1.Output_Format = mkvOutput;
 
@@ -744,9 +793,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 2:
                     {
-                        outputFormat = VFVideoEditOutputFormat.WMV;
+                        outputFormat = VideoEditOutputFormat.WMV;
 
-                        var wmvOutput = new VFWMVOutput();
+                        var wmvOutput = new WMVOutput();
                         SetWMVOutput(ref wmvOutput);
                         VideoEdit1.Output_Format = wmvOutput;
 
@@ -754,9 +803,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 3:
                     {
-                        outputFormat = VFVideoEditOutputFormat.DV;
+                        outputFormat = VideoEditOutputFormat.DV;
 
-                        var dvOutput = new VFDVOutput();
+                        var dvOutput = new DVOutput();
                         SetDVOutput(ref dvOutput);
                         VideoEdit1.Output_Format = dvOutput;
 
@@ -764,9 +813,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 4:
                     {
-                        outputFormat = VFVideoEditOutputFormat.PCM_ACM;
+                        outputFormat = VideoEditOutputFormat.PCM_ACM;
 
-                        var acmOutput = new VFACMOutput();
+                        var acmOutput = new ACMOutput();
                         SetACMOutput(ref acmOutput);
                         VideoEdit1.Output_Format = acmOutput;
 
@@ -774,9 +823,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 5:
                     {
-                        outputFormat = VFVideoEditOutputFormat.MP3;
+                        outputFormat = VideoEditOutputFormat.MP3;
 
-                        var mp3Output = new VFMP3Output();
+                        var mp3Output = new MP3Output();
                         SetMP3Output(ref mp3Output);
                         VideoEdit1.Output_Format = mp3Output;
 
@@ -784,9 +833,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 6:
                     {
-                        outputFormat = VFVideoEditOutputFormat.M4A;
+                        outputFormat = VideoEditOutputFormat.M4A;
 
-                        var m4aOutput = new VFM4AOutput();
+                        var m4aOutput = new M4AOutput();
                         SetM4AOutput(ref m4aOutput);
                         VideoEdit1.Output_Format = m4aOutput;
 
@@ -794,9 +843,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 7:
                     {
-                        outputFormat = VFVideoEditOutputFormat.WMA;
+                        outputFormat = VideoEditOutputFormat.WMA;
 
-                        var wmaOutput = new VFWMAOutput();
+                        var wmaOutput = new WMAOutput();
                         SetWMAOutput(ref wmaOutput);
                         VideoEdit1.Output_Format = wmaOutput;
 
@@ -804,9 +853,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 8:
                     {
-                        outputFormat = VFVideoEditOutputFormat.OggVorbis;
+                        outputFormat = VideoEditOutputFormat.OggVorbis;
 
-                        var oggVorbisOutput = new VFOGGVorbisOutput();
+                        var oggVorbisOutput = new OGGVorbisOutput();
                         SetOGGOutput(ref oggVorbisOutput);
                         VideoEdit1.Output_Format = oggVorbisOutput;
 
@@ -814,9 +863,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 9:
                     {
-                        outputFormat = VFVideoEditOutputFormat.FLAC;
+                        outputFormat = VideoEditOutputFormat.FLAC;
 
-                        var flacOutput = new VFFLACOutput();
+                        var flacOutput = new FLACOutput();
                         SetFLACOutput(ref flacOutput);
                         VideoEdit1.Output_Format = flacOutput;
 
@@ -824,9 +873,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 10:
                     {
-                        outputFormat = VFVideoEditOutputFormat.Speex;
+                        outputFormat = VideoEditOutputFormat.Speex;
 
-                        var speexOutput = new VFSpeexOutput();
+                        var speexOutput = new SpeexOutput();
                         SetSpeexOutput(ref speexOutput);
                         VideoEdit1.Output_Format = speexOutput;
 
@@ -834,9 +883,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 11:
                     {
-                        outputFormat = VFVideoEditOutputFormat.Custom;
+                        outputFormat = VideoEditOutputFormat.Custom;
 
-                        var customOutput = new VFCustomOutput();
+                        var customOutput = new CustomOutput();
                         SetCustomOutput(ref customOutput);
                         VideoEdit1.Output_Format = customOutput;
 
@@ -844,9 +893,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 12:
                     {
-                        outputFormat = VFVideoEditOutputFormat.WebM;
+                        outputFormat = VideoEditOutputFormat.WebM;
 
-                        var webmOutput = new VFWebMOutput();
+                        var webmOutput = new WebMOutput();
                         SetWebMOutput(ref webmOutput);
                         VideoEdit1.Output_Format = webmOutput;
 
@@ -854,9 +903,9 @@ namespace VideoEdit_CS_Demo
                     }
                 case 13:
                     {
-                        outputFormat = VFVideoEditOutputFormat.FFMPEG;
+                        outputFormat = VideoEditOutputFormat.FFMPEG;
 
-                        var ffmpegOutput = new VFFFMPEGOutput();
+                        var ffmpegOutput = new FFMPEGOutput();
                         SetFFMPEGOutput(ref ffmpegOutput);
                         VideoEdit1.Output_Format = ffmpegOutput;
 
@@ -864,22 +913,22 @@ namespace VideoEdit_CS_Demo
                     }
                 case 14:
                     {
-                        outputFormat = VFVideoEditOutputFormat.FFMPEG_EXE;
+                        outputFormat = VideoEditOutputFormat.FFMPEG_EXE;
 
-                        var ffmpegOutput = new VFFFMPEGEXEOutput();
+                        var ffmpegOutput = new FFMPEGEXEOutput();
                         SetFFMPEGEXEOutput(ref ffmpegOutput);
                         VideoEdit1.Output_Format = ffmpegOutput;
 
                         break;
                     }
                 case 15:
-                    outputFormat = VFVideoEditOutputFormat.MP4;
+                    outputFormat = VideoEditOutputFormat.MP4;
                     break;
                 case 16:
                     {
-                        outputFormat = VFVideoEditOutputFormat.MP4_HW;
+                        outputFormat = VideoEditOutputFormat.MP4_HW;
 
-                        var mp4Output = new VFMP4HWOutput();
+                        var mp4Output = new MP4HWOutput();
                         SetMP4HWOutput(ref mp4Output);
                         VideoEdit1.Output_Format = mp4Output;
 
@@ -887,53 +936,53 @@ namespace VideoEdit_CS_Demo
                     }
                 case 17:
                     {
-                        outputFormat = VFVideoEditOutputFormat.AnimatedGIF;
-                        var gifOutput = new VFAnimatedGIFOutput();
+                        outputFormat = VideoEditOutputFormat.AnimatedGIF;
+                        var gifOutput = new AnimatedGIFOutput();
                         SetGIFOutput(ref gifOutput);
                         VideoEdit1.Output_Format = gifOutput;
                         break;
                     }
                 case 18:
-                    outputFormat = VFVideoEditOutputFormat.Encrypted;
+                    outputFormat = VideoEditOutputFormat.Encrypted;
                     break;
             }
 
-            if ((outputFormat == VFVideoEditOutputFormat.MP4) ||
-            ((outputFormat == VFVideoEditOutputFormat.Encrypted) && rbEncryptedH264SW.Checked) ||
-                    (VideoEdit1.Network_Streaming_Enabled && (VideoEdit1.Network_Streaming_Format == VFNetworkStreamingFormat.RTSP_H264_AAC_SW)))
+            if ((outputFormat == VideoEditOutputFormat.MP4) ||
+            ((outputFormat == VideoEditOutputFormat.Encrypted) && rbEncryptedH264SW.Checked) ||
+                    (VideoEdit1.Network_Streaming_Enabled && (VideoEdit1.Network_Streaming_Format == NetworkStreamingFormat.RTSP_H264_AAC_SW)))
             {
-                var mp4Output = new VFMP4Output();
+                var mp4Output = new MP4Output();
                 SetMP4Output(ref mp4Output);
 
                 // encryption
-                if (outputFormat == VFVideoEditOutputFormat.Encrypted)
+                if (outputFormat == VideoEditOutputFormat.Encrypted)
                 {
                     mp4Output.Encryption = true;
-                    mp4Output.Encryption_Format = VFEncryptionFormat.MP4_H264_SW_AAC;
+                    mp4Output.Encryption_Format = EncryptionFormat.MP4_H264_SW_AAC;
 
                     if (rbEncryptionKeyString.Checked)
                     {
-                        mp4Output.Encryption_KeyType = VFEncryptionKeyType.String;
+                        mp4Output.Encryption_KeyType = EncryptionKeyType.String;
                         mp4Output.Encryption_Key = edEncryptionKeyString.Text;
                     }
                     else if (rbEncryptionKeyFile.Checked)
                     {
-                        mp4Output.Encryption_KeyType = VFEncryptionKeyType.File;
+                        mp4Output.Encryption_KeyType = EncryptionKeyType.File;
                         mp4Output.Encryption_Key = edEncryptionKeyFile.Text;
                     }
                     else
                     {
-                        mp4Output.Encryption_KeyType = VFEncryptionKeyType.Binary;
+                        mp4Output.Encryption_KeyType = EncryptionKeyType.Binary;
                         mp4Output.Encryption_Key = VideoEdit1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                     }
 
                     if (rbEncryptionModeAES128.Checked)
                     {
-                        mp4Output.Encryption_Mode = VFEncryptionMode.V8_AES128;
+                        mp4Output.Encryption_Mode = EncryptionMode.V8_AES128;
                     }
                     else
                     {
-                        mp4Output.Encryption_Mode = VFEncryptionMode.V9_AES256;
+                        mp4Output.Encryption_Mode = EncryptionMode.V9_AES256;
                     }
                 }
 
@@ -975,20 +1024,20 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Audio_Effects_Enabled = cbAudioEffectsEnabled.Checked;
             if (VideoEdit1.Audio_Effects_Enabled)
             {
-                VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
                 VideoEdit1.Audio_Effects_Add(
                     -1,
-                    VFAudioEffectType.Fade, 
+                    AudioEffectType.Fade, 
                     cbFadeInEnabled.Checked,
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStartTime.Text)),
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStopTime.Text)));
                 VideoEdit1.Audio_Effects_Add(
                     -1,
-                    VFAudioEffectType.Fade, 
+                    AudioEffectType.Fade, 
                     cbFadeOutEnabled.Checked,
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStartTime.Text)),
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStopTime.Text)));
@@ -1038,7 +1087,7 @@ namespace VideoEdit_CS_Demo
 
             // Barcode detection
             VideoEdit1.Barcode_Reader_Enabled = cbBarcodeDetectionEnabled.Checked;
-            VideoEdit1.Barcode_Reader_Type = (VFBarcodeType)cbBarcodeType.SelectedIndex;
+            VideoEdit1.Barcode_Reader_Type = (BarcodeType)cbBarcodeType.SelectedIndex;
 
             // motion detection
             ConfigureMotionDetection();
@@ -1047,23 +1096,23 @@ namespace VideoEdit_CS_Demo
             switch (cbRotate.SelectedIndex)
             {
                 case 0:
-                    VideoEdit1.Video_Rotation = VFRotateMode.RotateNone;
+                    VideoEdit1.Video_Rotation = RotateMode.RotateNone;
                     break;
                 case 1:
-                    VideoEdit1.Video_Rotation = VFRotateMode.Rotate90;
+                    VideoEdit1.Video_Rotation = RotateMode.Rotate90;
                     break;
                 case 2:
-                    VideoEdit1.Video_Rotation = VFRotateMode.Rotate180;
+                    VideoEdit1.Video_Rotation = RotateMode.Rotate180;
                     break;
                 case 3:
-                    VideoEdit1.Video_Rotation = VFRotateMode.Rotate270;
+                    VideoEdit1.Video_Rotation = RotateMode.Rotate270;
                     break;
             }
 
             // Output tags
             if (cbTagEnabled.Checked)
             {
-                var tags = new VFFileTags
+                var tags = new MediaFileTags
                 {
                     Title = edTagTitle.Text,
                     Performers = new[] { edTagArtists.Text },
@@ -1101,17 +1150,17 @@ namespace VideoEdit_CS_Demo
             {
                 if (rbDeintBlendEnabled.Checked)
                 {
-                    IVFVideoEffectDeinterlaceBlend blend;
+                    IVideoEffectDeinterlaceBlend blend;
                     var effect = VideoEdit1.Video_Effects_Get("DeinterlaceBlend");
                     if (effect == null)
                     {
-                        blend = new VFVideoEffectDeinterlaceBlend(true);
+                        blend = new VideoEffectDeinterlaceBlend(true);
                         VideoEdit1.Video_Effects_Add(blend);
                     }
                     else
                     {
                         // ReSharper disable once TryCastAlwaysSucceeds
-                        blend = effect as IVFVideoEffectDeinterlaceBlend;
+                        blend = effect as IVideoEffectDeinterlaceBlend;
                     }
 
                     if (blend == null)
@@ -1127,18 +1176,18 @@ namespace VideoEdit_CS_Demo
                 }
                 else if (rbDeintCAVTEnabled.Checked)
                 {
-                    IVFVideoEffectDeinterlaceCAVT cavt;
+                    IVideoEffectDeinterlaceCAVT cavt;
                     var effect = VideoEdit1.Video_Effects_Get("DeinterlaceCAVT");
                     if (effect == null)
                     {
-                        cavt = new VFVideoEffectDeinterlaceCAVT(
+                        cavt = new VideoEffectDeinterlaceCAVT(
                             rbDeintCAVTEnabled.Checked,
                             Convert.ToInt32(edDeintCAVTThreshold.Text));
                         VideoEdit1.Video_Effects_Add(cavt);
                     }
                     else
                     {
-                        cavt = effect as IVFVideoEffectDeinterlaceCAVT;
+                        cavt = effect as IVideoEffectDeinterlaceCAVT;
                     }
 
                     if (cavt == null)
@@ -1151,18 +1200,18 @@ namespace VideoEdit_CS_Demo
                 }
                 else
                 {
-                    IVFVideoEffectDeinterlaceTriangle triangle;
+                    IVideoEffectDeinterlaceTriangle triangle;
                     var effect = VideoEdit1.Video_Effects_Get("DeinterlaceTriangle");
                     if (effect == null)
                     {
-                        triangle = new VFVideoEffectDeinterlaceTriangle(
+                        triangle = new VideoEffectDeinterlaceTriangle(
                             true,
                             Convert.ToByte(edDeintTriangleWeight.Text));
                         VideoEdit1.Video_Effects_Add(triangle);
                     }
                     else
                     {
-                        triangle = effect as IVFVideoEffectDeinterlaceTriangle;
+                        triangle = effect as IVideoEffectDeinterlaceTriangle;
                     }
 
                     if (triangle == null)
@@ -1181,16 +1230,16 @@ namespace VideoEdit_CS_Demo
                 VideoEdit1.Video_Effects_Enabled = true;
                 if (rbDenoiseCAST.Checked)
                 {
-                    IVFVideoEffectDenoiseCAST cast;
+                    IVideoEffectDenoiseCAST cast;
                     var effect = VideoEdit1.Video_Effects_Get("DenoiseCAST");
                     if (effect == null)
                     {
-                        cast = new VFVideoEffectDenoiseCAST(true);
+                        cast = new VideoEffectDenoiseCAST(true);
                         VideoEdit1.Video_Effects_Add(cast);
                     }
                     else
                     {
-                        cast = effect as IVFVideoEffectDenoiseCAST;
+                        cast = effect as IVideoEffectDenoiseCAST;
                     }
 
                     if (cast == null)
@@ -1201,16 +1250,16 @@ namespace VideoEdit_CS_Demo
                 }
                 else
                 {
-                    IVFVideoEffectDenoiseMosquito mosquito;
+                    IVideoEffectDenoiseMosquito mosquito;
                     var effect = VideoEdit1.Video_Effects_Get("DenoiseMosquito");
                     if (effect == null)
                     {
-                        mosquito = new VFVideoEffectDenoiseMosquito(true);
+                        mosquito = new VideoEffectDenoiseMosquito(true);
                         VideoEdit1.Video_Effects_Add(mosquito);
                     }
                     else
                     {
-                        mosquito = effect as IVFVideoEffectDenoiseMosquito;
+                        mosquito = effect as IVideoEffectDenoiseMosquito;
                     }
 
                     if (mosquito == null)
@@ -1303,16 +1352,16 @@ namespace VideoEdit_CS_Demo
         
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectGrayscale grayscale;
+            IVideoEffectGrayscale grayscale;
             var effect = VideoEdit1.Video_Effects_Get("Grayscale");
             if (effect == null)
             {
-                grayscale = new VFVideoEffectGrayscale(cbGreyscale.Checked);
+                grayscale = new VideoEffectGrayscale(cbGreyscale.Checked);
                 VideoEdit1.Video_Effects_Add(grayscale);
             }
             else
             {
-                grayscale = effect as IVFVideoEffectGrayscale;
+                grayscale = effect as IVideoEffectGrayscale;
                 if (grayscale != null)
                 {
                     grayscale.Enabled = cbGreyscale.Checked;
@@ -1322,16 +1371,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectInvert invert;
+            IVideoEffectInvert invert;
             var effect = VideoEdit1.Video_Effects_Get("Invert");
             if (effect == null)
             {
-                invert = new VFVideoEffectInvert(cbInvert.Checked);
+                invert = new VideoEffectInvert(cbInvert.Checked);
                 VideoEdit1.Video_Effects_Add(invert);
             }
             else
             {
-                invert = effect as IVFVideoEffectInvert;
+                invert = effect as IVideoEffectInvert;
                 if (invert != null)
                 {
                     invert.Enabled = cbInvert.Checked;
@@ -1346,16 +1395,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectDarkness darkness;
+            IVideoEffectDarkness darkness;
             var effect = VideoEdit1.Video_Effects_Get("Darkness");
             if (effect == null)
             {
-                darkness = new VFVideoEffectDarkness(true, tbDarkness.Value);
+                darkness = new VideoEffectDarkness(true, tbDarkness.Value);
                 VideoEdit1.Video_Effects_Add(darkness);
             }
             else
             {
-                darkness = effect as IVFVideoEffectDarkness;
+                darkness = effect as IVideoEffectDarkness;
                 if (darkness != null)
                 {
                     darkness.Value = tbDarkness.Value;
@@ -1365,16 +1414,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectLightness lightness;
+            IVideoEffectLightness lightness;
             var effect = VideoEdit1.Video_Effects_Get("Lightness");
             if (effect == null)
             {
-                lightness = new VFVideoEffectLightness(true, tbLightness.Value);
+                lightness = new VideoEffectLightness(true, tbLightness.Value);
                 VideoEdit1.Video_Effects_Add(lightness);
             }
             else
             {
-                lightness = effect as IVFVideoEffectLightness;
+                lightness = effect as IVideoEffectLightness;
                 if (lightness != null)
                 {
                     lightness.Value = tbLightness.Value;
@@ -1384,16 +1433,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectSaturation saturation;
+            IVideoEffectSaturation saturation;
             var effect = VideoEdit1.Video_Effects_Get("Saturation");
             if (effect == null)
             {
-                saturation = new VFVideoEffectSaturation(tbSaturation.Value);
+                saturation = new VideoEffectSaturation(tbSaturation.Value);
                 VideoEdit1.Video_Effects_Add(saturation);
             }
             else
             {
-                saturation = effect as IVFVideoEffectSaturation;
+                saturation = effect as IVideoEffectSaturation;
                 if (saturation != null)
                 {
                     saturation.Value = tbSaturation.Value;
@@ -1409,16 +1458,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
-            IVFVideoEffectContrast contrast;
+            IVideoEffectContrast contrast;
             var effect = VideoEdit1.Video_Effects_Get("Contrast");
             if (effect == null)
             {
-                contrast = new VFVideoEffectContrast(true, tbContrast.Value);
+                contrast = new VideoEffectContrast(true, tbContrast.Value);
                 VideoEdit1.Video_Effects_Add(contrast);
             }
             else
             {
-                contrast = effect as IVFVideoEffectContrast;
+                contrast = effect as IVideoEffectContrast;
                 if (contrast != null)
                 {
                     contrast.Value = tbContrast.Value;
@@ -1431,8 +1480,8 @@ namespace VideoEdit_CS_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -1440,7 +1489,7 @@ namespace VideoEdit_CS_Demo
         {
             if (cbFilters.SelectedIndex != -1)
             {
-                VideoEdit1.Video_Filters_Add(new VFCustomProcessingFilter(cbFilters.Text));
+                VideoEdit1.Video_Filters_Add(new CustomProcessingFilter(cbFilters.Text));
                 lbFilters.Items.Add(cbFilters.Text);
             }
         }
@@ -1449,14 +1498,14 @@ namespace VideoEdit_CS_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
             else
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -1465,8 +1514,8 @@ namespace VideoEdit_CS_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -1476,13 +1525,13 @@ namespace VideoEdit_CS_Demo
             {
                 string name = lbFilters.Text;
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
                 }
             }
         }
@@ -1630,11 +1679,11 @@ namespace VideoEdit_CS_Demo
         {
             if (cbStretch.Checked)
             {
-                VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch;
+                VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch;
             }
             else
             {
-                VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox;
+                VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox;
             }
 
             await VideoEdit1.Video_Renderer_UpdateAsync();
@@ -1686,7 +1735,7 @@ namespace VideoEdit_CS_Demo
                                    }));
         }
 
-        private void VideoEdit1_OnStop(object sender, VideoEditStopEventArgs e)
+        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -1770,7 +1819,7 @@ namespace VideoEdit_CS_Demo
                                                       Compare_Green = cbCompareGreen.Checked,
                                                       Compare_Blue = cbCompareBlue.Checked,
                                                       Compare_Greyscale = cbCompareGreyscale.Checked,
-                                                      Highlight_Color = (VFMotionCHLColor)cbMotDetHLColor.SelectedIndex,
+                                                      Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
                                                       Highlight_Enabled = cbMotDetHLEnabled.Checked,
                                                       Highlight_Threshold = tbMotDetHLThreshold.Value,
                                                       FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
@@ -1822,30 +1871,18 @@ namespace VideoEdit_CS_Demo
             BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
         }
 
-        private delegate void AFMotionDelegate(float level);
-
-        private void AFMotionDelegateMethod(float level)
-        {
-            pbAFMotionLevel.Value = (int)(level * 100);
-        }
-
-        private void VideoEdit1_OnObjectDetection(object sender, MotionDetectionExEventArgs e)
-        {
-            BeginInvoke(new AFMotionDelegate(AFMotionDelegateMethod), e.Level);
-        }
-
         private void cbZoom_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectZoom zoomEffect;
+            IVideoEffectZoom zoomEffect;
             var effect = VideoEdit1.Video_Effects_Get("Zoom");
             if (effect == null)
             {
-                zoomEffect = new VFVideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoom.Checked);
+                zoomEffect = new VideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoom.Checked);
                 VideoEdit1.Video_Effects_Add(zoomEffect);
             }
             else
             {
-                zoomEffect = effect as IVFVideoEffectZoom;
+                zoomEffect = effect as IVideoEffectZoom;
             }
 
             if (zoomEffect == null)
@@ -1907,16 +1944,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbPan_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectPan pan;
+            IVideoEffectPan pan;
             var effect = VideoEdit1.Video_Effects_Get("Pan");
             if (effect == null)
             {
-                pan = new VFVideoEffectPan(true);
+                pan = new VideoEffectPan(true);
                 VideoEdit1.Video_Effects_Add(pan);
             }
             else
             {
-                pan = effect as IVFVideoEffectPan;
+                pan = effect as IVideoEffectPan;
             }
 
             if (pan == null)
@@ -2032,32 +2069,32 @@ namespace VideoEdit_CS_Demo
         {
             if (rbVMR9.Checked)
             {
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else if (rbEVR.Checked)
             {
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (rbVR.Checked)
             {
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
             else if (rbDirect2D.Checked)
             {
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.Direct2D;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D;
             }
             else
             {
-                VideoEdit1.Video_Renderer.Video_Renderer = VFVideoRenderer.None;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
             }
 
             if (cbStretch.Checked)
             {
-                VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch;
+                VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch;
             }
             else
             {
-                VideoEdit1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox;
+                VideoEdit1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox;
             }
 
             VideoEdit1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
@@ -2100,16 +2137,16 @@ namespace VideoEdit_CS_Demo
         {
             if (rbVideoFadeIn.Checked)
             {
-                IVFVideoEffectFadeIn fadeIn;
+                IVideoEffectFadeIn fadeIn;
                 var effect = VideoEdit1.Video_Effects_Get("FadeIn");
                 if (effect == null)
                 {
-                    fadeIn = new VFVideoEffectFadeIn(cbVideoFadeInOut.Checked);
+                    fadeIn = new VideoEffectFadeIn(cbVideoFadeInOut.Checked);
                     VideoEdit1.Video_Effects_Add(fadeIn);
                 }
                 else
                 {
-                    fadeIn = effect as IVFVideoEffectFadeIn;
+                    fadeIn = effect as IVideoEffectFadeIn;
                 }
 
                 if (fadeIn == null)
@@ -2124,16 +2161,16 @@ namespace VideoEdit_CS_Demo
             }
             else
             {
-                IVFVideoEffectFadeOut fadeOut;
+                IVideoEffectFadeOut fadeOut;
                 var effect = VideoEdit1.Video_Effects_Get("FadeOut");
                 if (effect == null)
                 {
-                    fadeOut = new VFVideoEffectFadeOut(cbVideoFadeInOut.Checked);
+                    fadeOut = new VideoEffectFadeOut(cbVideoFadeInOut.Checked);
                     VideoEdit1.Video_Effects_Add(fadeOut);
                 }
                 else
                 {
-                    fadeOut = effect as IVFVideoEffectFadeOut;
+                    fadeOut = effect as IVideoEffectFadeOut;
                 }
 
                 if (fadeOut == null)
@@ -2181,10 +2218,10 @@ namespace VideoEdit_CS_Demo
                 windowWidth = Width;
                 windowHeight = Height;
 
-                controlLeft = VideoEdit1.Left;
-                controlTop = VideoEdit1.Top;
-                controlWidth = VideoEdit1.Width;
-                controlHeight = VideoEdit1.Height;
+                controlLeft = VideoView1.Left;
+                controlTop = VideoView1.Top;
+                controlWidth = VideoView1.Width;
+                controlHeight = VideoView1.Height;
 
                 // resizing window
                 Left = 0;
@@ -2197,10 +2234,10 @@ namespace VideoEdit_CS_Demo
                 WindowState = FormWindowState.Maximized;
 
                 // resizing control
-                VideoEdit1.Left = 0;
-                VideoEdit1.Top = 0;
-                VideoEdit1.Width = Width;
-                VideoEdit1.Height = Height;
+                VideoView1.Left = 0;
+                VideoView1.Top = 0;
+                VideoView1.Width = Width;
+                VideoView1.Height = Height;
 
                 await VideoEdit1.Video_Renderer_UpdateAsync();
             }
@@ -2220,16 +2257,16 @@ namespace VideoEdit_CS_Demo
                 WindowState = FormWindowState.Normal;
 
                 // restoring control
-                VideoEdit1.Left = controlLeft;
-                VideoEdit1.Top = controlTop;
-                VideoEdit1.Width = controlWidth;
-                VideoEdit1.Height = controlHeight;
+                VideoView1.Left = controlLeft;
+                VideoView1.Top = controlTop;
+                VideoView1.Width = controlWidth;
+                VideoView1.Height = controlHeight;
 
                 await VideoEdit1.Video_Renderer_UpdateAsync();
             }
         }
 
-        private void VideoEdit1_MouseDown(object sender, MouseEventArgs e)
+        private void VideoView1_MouseClick(object sender, MouseEventArgs e)
         {
             if (fullScreen)
             {
@@ -2341,7 +2378,7 @@ namespace VideoEdit_CS_Demo
 
         private void ApplyAudioInputGains()
         {
-            VFAudioEnhancerGains gains = new VFAudioEnhancerGains
+            AudioEnhancerGains gains = new AudioEnhancerGains
             {
                 L = tbAudioInputGainL.Value / 10.0f,
                 C = tbAudioInputGainC.Value / 10.0f,
@@ -2398,7 +2435,7 @@ namespace VideoEdit_CS_Demo
 
         private void ApplyAudioOutputGains()
         {
-            VFAudioEnhancerGains gains = new VFAudioEnhancerGains
+            AudioEnhancerGains gains = new AudioEnhancerGains
             {
                 L = tbAudioOutputGainL.Value / 10.0f,
                 C = tbAudioOutputGainC.Value / 10.0f,
@@ -2549,14 +2586,14 @@ namespace VideoEdit_CS_Demo
 
         private void btStartMux_Click(object sender, EventArgs e)
         {
-            var streams = new List<VFVEFFMPEGStream>();
+            var streams = new List<FFMPEGStream>();
 
             foreach (string item in lbMuxStreamsList.Items)
             {
                 string prefix = item.Substring(0, 1);
                 string filename = item.Substring(3);
 
-                streams.Add(new VFVEFFMPEGStream
+                streams.Add(new FFMPEGStream
                 {
                     Filename = filename,
                     ID = prefix
@@ -2654,16 +2691,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbGPULightness_Scroll(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectBrightness intf;
+            IGPUVideoEffectBrightness intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Brightness");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectBrightness(true, tbGPULightness.Value);
+                intf = new GPUVideoEffectBrightness(true, tbGPULightness.Value);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectBrightness;
+                intf = effect as IGPUVideoEffectBrightness;
                 if (intf != null)
                 {
                     intf.Value = tbGPULightness.Value;
@@ -2674,16 +2711,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbGPUSaturation_Scroll(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectSaturation intf;
+            IGPUVideoEffectSaturation intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Saturation");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectSaturation(true, tbGPUSaturation.Value);
+                intf = new GPUVideoEffectSaturation(true, tbGPUSaturation.Value);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectSaturation;
+                intf = effect as IGPUVideoEffectSaturation;
                 if (intf != null)
                 {
                     intf.Value = tbGPUSaturation.Value;
@@ -2694,16 +2731,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbGPUContrast_Scroll(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectContrast intf;
+            IGPUVideoEffectContrast intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Contrast");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectContrast(true, tbGPUContrast.Value);
+                intf = new GPUVideoEffectContrast(true, tbGPUContrast.Value);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as VFGPUVideoEffectContrast;
+                intf = effect as GPUVideoEffectContrast;
                 if (intf != null)
                 {
                     intf.Value = tbGPUContrast.Value;
@@ -2714,16 +2751,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbGPUDarkness_Scroll(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectDarkness intf;
+            IGPUVideoEffectDarkness intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Darkness");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDarkness(true, tbGPUDarkness.Value);
+                intf = new GPUVideoEffectDarkness(true, tbGPUDarkness.Value);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDarkness;
+                intf = effect as IGPUVideoEffectDarkness;
                 if (intf != null)
                 {
                     intf.Value = tbGPUDarkness.Value;
@@ -2734,16 +2771,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUGreyscale_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectGrayscale intf;
+            IGPUVideoEffectGrayscale intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Grayscale");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectGrayscale(cbGPUGreyscale.Checked);
+                intf = new GPUVideoEffectGrayscale(cbGPUGreyscale.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectGrayscale;
+                intf = effect as IGPUVideoEffectGrayscale;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUGreyscale.Checked;
@@ -2754,16 +2791,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUInvert_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectInvert intf;
+            IGPUVideoEffectInvert intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Invert");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectInvert(cbGPUInvert.Checked);
+                intf = new GPUVideoEffectInvert(cbGPUInvert.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectInvert;
+                intf = effect as IGPUVideoEffectInvert;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUInvert.Checked;
@@ -2774,16 +2811,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUNightVision_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectNightVision intf;
+            IGPUVideoEffectNightVision intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("NightVision");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectNightVision(cbGPUNightVision.Checked);
+                intf = new GPUVideoEffectNightVision(cbGPUNightVision.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectNightVision;
+                intf = effect as IGPUVideoEffectNightVision;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUNightVision.Checked;
@@ -2794,16 +2831,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUPixelate_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectPixelate intf;
+            IGPUVideoEffectPixelate intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Pixelate");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectPixelate(cbGPUPixelate.Checked);
+                intf = new GPUVideoEffectPixelate(cbGPUPixelate.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectPixelate;
+                intf = effect as IGPUVideoEffectPixelate;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUPixelate.Checked;
@@ -2814,16 +2851,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUDenoise_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectDenoise intf;
+            IGPUVideoEffectDenoise intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Denoise");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDenoise(cbGPUDenoise.Checked);
+                intf = new GPUVideoEffectDenoise(cbGPUDenoise.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDenoise;
+                intf = effect as IGPUVideoEffectDenoise;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUDenoise.Checked;
@@ -2834,16 +2871,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUDeinterlace_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectDeinterlaceBlend intf;
+            IGPUVideoEffectDeinterlaceBlend intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("DeinterlaceBlend");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.Checked);
+                intf = new GPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDeinterlaceBlend;
+                intf = effect as IGPUVideoEffectDeinterlaceBlend;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUDeinterlace.Checked;
@@ -2854,16 +2891,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbGPUOldMovie_CheckedChanged(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectOldMovie intf;
+            IGPUVideoEffectOldMovie intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("OldMovie");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectOldMovie(cbGPUOldMovie.Checked);
+                intf = new GPUVideoEffectOldMovie(cbGPUOldMovie.Checked);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectOldMovie;
+                intf = effect as IGPUVideoEffectOldMovie;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUOldMovie.Checked;
@@ -2881,7 +2918,7 @@ namespace VideoEdit_CS_Demo
 
         private void VideoEdit1_OnAudioVUMeter(object sender, VUMeterEventArgs e)
         {
-            if (VideoEdit1.Status == VFVideoEditStatus.Free)
+            if (VideoEdit1.State == PlaybackState.Free)
             {
                 return;
             }
@@ -2909,16 +2946,6 @@ namespace VideoEdit_CS_Demo
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0:
-                    {
-                        if (aviSettingsDialog == null)
-                        {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
-                        }
-
-                        aviSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
                 case 1:
                     {
                         if (aviSettingsDialog == null)
@@ -3078,6 +3105,7 @@ namespace VideoEdit_CS_Demo
                         break;
                     }
                 case 15:
+                case 18:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -3107,17 +3135,6 @@ namespace VideoEdit_CS_Demo
                         }
 
                         gifSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 18:
-                    {
-                        if (this.mp4SettingsDialog == null)
-                        {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
-                        }
-
-                        this.mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
@@ -3232,7 +3249,7 @@ namespace VideoEdit_CS_Demo
             var dlg = new TextLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoEdit1);
-            var effect = new VFVideoEffectTextLogo(true, name);
+            var effect = new VideoEffectTextLogo(true, name);
 
             VideoEdit1.Video_Effects_Add(effect);
             lbTextLogos.Items.Add(effect.Name);
@@ -3269,7 +3286,7 @@ namespace VideoEdit_CS_Demo
             var dlg = new ImageLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(VideoEdit1);
-            var effect = new VFVideoEffectImageLogo(true, name);
+            var effect = new VideoEffectImageLogo(true, name);
 
             VideoEdit1.Video_Effects_Add(effect);
             lbImageLogos.Items.Add(effect.Name);
@@ -3303,16 +3320,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipDown flip;
+            IVideoEffectFlipDown flip;
             var effect = VideoEdit1.Video_Effects_Get("FlipDown");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipHorizontal(cbFlipX.Checked);
+                flip = new VideoEffectFlipHorizontal(cbFlipX.Checked);
                 VideoEdit1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipDown;
+                flip = effect as IVideoEffectFlipDown;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipX.Checked;
@@ -3322,16 +3339,16 @@ namespace VideoEdit_CS_Demo
 
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
-            IVFVideoEffectFlipRight flip;
+            IVideoEffectFlipRight flip;
             var effect = VideoEdit1.Video_Effects_Get("FlipRight");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipVertical(cbFlipY.Checked);
+                flip = new VideoEffectFlipVertical(cbFlipY.Checked);
                 VideoEdit1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipRight;
+                flip = effect as IVideoEffectFlipRight;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipY.Checked;
@@ -3369,16 +3386,16 @@ namespace VideoEdit_CS_Demo
 
         private void tbGPUBlur_Scroll(object sender, EventArgs e)
         {
-            IVFGPUVideoEffectBlur intf;
+            IGPUVideoEffectBlur intf;
             var effect = VideoEdit1.Video_Effects_GPU_Get("Blur");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectBlur(tbGPUBlur.Value > 0, tbGPUBlur.Value);
+                intf = new GPUVideoEffectBlur(tbGPUBlur.Value > 0, tbGPUBlur.Value);
                 VideoEdit1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectBlur;
+                intf = effect as IGPUVideoEffectBlur;
                 if (intf != null)
                 {
                     intf.Enabled = tbGPUBlur.Value > 0;

@@ -5,6 +5,8 @@ Imports VisioForge.Controls.UI
 Imports VisioForge.Types
 Imports VisioForge.Controls.UI.WinForms
 Imports System.IO
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.MediaPlayer
 
 Public Class Form1
 
@@ -34,10 +36,10 @@ Public Class Form1
         MediaPlayer1.Audio_PlayAudio = True
         MediaPlayer1.Info_UseLibMediaInfo = True
 
-        MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS
+        MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
-        MediaPlayer1.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None
+        MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
 
@@ -141,7 +143,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnStop(sender As Object, e As MediaPlayerStopEventArgs) Handles MediaPlayer1.OnStop
+    Private Sub MediaPlayer1_OnStop(sender As Object, e As StopEventArgs) Handles MediaPlayer1.OnStop
 
     End Sub
 

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -44,7 +44,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFWebMOutput webmOutput)
+        public void LoadSettings(WebMOutput webmOutput)
         {
             tbWebMAudioQuality.Value = webmOutput.Audio_Quality;
 
@@ -127,7 +127,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="webmOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFWebMOutput webmOutput)
+        public void SaveSettings(ref WebMOutput webmOutput)
         {
             webmOutput.Audio_Quality = tbWebMAudioQuality.Value;
 

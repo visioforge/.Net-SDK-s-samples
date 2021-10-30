@@ -7,9 +7,13 @@ Imports VisioForge.Controls.UI.Dialogs.VideoEffects
 Imports VisioForge.Shared.IPCameraDB
 Imports VisioForge.Types
 Imports VisioForge.Tools
-Imports VisioForge.Types.OutputFormat
-Imports VisioForge.Types.Sources
+Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoEffects
+Imports VisioForge.Controls.VideoCapture
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.VideoCapture
+Imports VisioForge.Types.MediaPlayer
+Imports System.Drawing.Imaging
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
@@ -38,9 +42,23 @@ Public Class Form1
 
     Dim onvifPtzZoom As Double
 
-    Private ReadOnly tmRecording As Timers.Timer = New Timers.Timer(1000)
+    Private tmRecording As Timers.Timer = New Timers.Timer(1000)
+
+    Dim WithEvents VideoCapture1 As VideoCaptureCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        VideoCapture1 = New VideoCaptureCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        VideoCapture1.Dispose()
+        VideoCapture1 = Nothing
+    End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+        CreateEngine()
+
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
 
         AddHandler tmRecording.Elapsed, AddressOf UpdateRecordingTime
@@ -62,7 +80,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub SetMP4HWOutput(ByRef mp4Output As VFMP4HWOutput)
+    Private Sub SetMP4HWOutput(ByRef mp4Output As MP4HWOutput)
         If (mp4HWSettingsDialog Is Nothing) Then
             mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
         End If
@@ -70,7 +88,7 @@ Public Class Form1
         mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As VFMPEGTSOutput)
+    Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As MPEGTSOutput)
 
         If (mpegTSSettingsDialog Is Nothing) Then
             mpegTSSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS)
@@ -79,7 +97,7 @@ Public Class Form1
         mpegTSSettingsDialog.SaveSettings(mpegTSOutput)
     End Sub
 
-    Private Sub SetMOVOutput(ByRef mkvOutput As VFMOVOutput)
+    Private Sub SetMOVOutput(ByRef mkvOutput As MOVOutput)
 
         If (movSettingsDialog Is Nothing) Then
             movSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV)
@@ -88,7 +106,7 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
-    Private Sub SetMP4Output(ByRef mp4Output As VFMP4Output)
+    Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
         If (_mp4SettingsDialog Is Nothing) Then
             _mp4SettingsDialog = New MP4SettingsDialog()
         End If
@@ -96,7 +114,7 @@ Public Class Form1
         _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
-    Private Sub SetGIFOutput(ByRef gifOutput As VFAnimatedGIFOutput)
+    Private Sub SetGIFOutput(ByRef gifOutput As AnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
         End If
@@ -104,7 +122,7 @@ Public Class Form1
         gifSettingsDialog.SaveSettings(gifOutput)
     End Sub
 
-    Private Sub SetWMVOutput(ByRef wmvOutput As VFWMVOutput)
+    Private Sub SetWMVOutput(ByRef wmvOutput As WMVOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
         End If
@@ -113,7 +131,7 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmvOutput)
     End Sub
 
-    Private Sub SetAVIOutput(ByRef aviOutput As VFAVIOutput)
+    Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
                 VideoCapture1.Video_Codecs.ToArray(),
@@ -124,7 +142,7 @@ Public Class Form1
 
         If (aviOutput.Audio_UseMP3Encoder) Then
 
-            Dim mp3Output = New VFMP3Output()
+            Dim mp3Output = New MP3Output()
             aviOutput.MP3 = mp3Output
         End If
     End Sub
@@ -161,31 +179,31 @@ Public Class Form1
         Dim lavGPU As Boolean = False
         Select Case (cbIPCameraType.SelectedIndex)
             Case 0
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_VLC
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_VLC
             Case 1
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG
             Case 2
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV
             Case 3
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV
                 lavGPU = True
             Case 4
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.MMS_WMV
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.MMS_WMV
             Case 5
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.HTTP_MJPEG_LowLatency
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.HTTP_MJPEG_LowLatency
                 cbIPAudioCapture.Checked = False
                 VideoCapture1.Audio_RecordAudio = False
                 VideoCapture1.Audio_PlayAudio = False
             Case 6
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = False
             Case 7
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.RTSP_LowLatency
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.RTSP_LowLatency
                 VideoCapture1.IP_Camera_Source.RTSP_LowLatency_UseUDP = True
             Case 8
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI
             Case 9
-                VideoCapture1.IP_Camera_Source.Type = VFIPSource.NDI_Legacy
+                VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI_Legacy
         End Select
 
         VideoCapture1.IP_Camera_Source.URL = cbIPURL.Text
@@ -197,9 +215,9 @@ Public Class Form1
         VideoCapture1.IP_Camera_Source.ForcedFramerate = Convert.ToInt32(edIPForcedFramerate.Text)
         VideoCapture1.IP_Camera_Source.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text(0)
 
-        If VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_LAV Then
+        If VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV Then
             VideoCapture1.IP_Camera_Source.LAV_GPU_Use = lavGPU
-            VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack
+            VideoCapture1.IP_Camera_Source.LAV_GPU_Mode = LAVGPUDecoder.DXVA2CopyBack
         End If
 
         If cbIPCameraONVIF.Checked Then
@@ -215,39 +233,39 @@ Public Class Form1
         End If
 
         If rbPreview.Checked Then
-            VideoCapture1.Mode = VFVideoCaptureMode.IPPreview
+            VideoCapture1.Mode = VideoCaptureMode.IPPreview
         Else
-            VideoCapture1.Mode = VFVideoCaptureMode.IPCapture
+            VideoCapture1.Mode = VideoCaptureMode.IPCapture
             VideoCapture1.Output_Filename = edOutput.Text
 
             Select Case cbOutputFormat.SelectedIndex
                 Case 0
-                    Dim aviOutput = New VFAVIOutput()
+                    Dim aviOutput = New AVIOutput()
                     SetAVIOutput(aviOutput)
                     VideoCapture1.Output_Format = aviOutput
                 Case 1
-                    Dim wmvOutput = New VFWMVOutput()
+                    Dim wmvOutput = New WMVOutput()
                     SetWMVOutput(wmvOutput)
                     VideoCapture1.Output_Format = wmvOutput
                 Case 2
-                    Dim mp4Output = New VFMP4Output()
+                    Dim mp4Output = New MP4Output()
                     SetMP4Output(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 3
-                    Dim mp4Output = New VFMP4HWOutput()
+                    Dim mp4Output = New MP4HWOutput()
                     SetMP4HWOutput(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
                 Case 4
-                    Dim gifOutput = New VFAnimatedGIFOutput()
+                    Dim gifOutput = New AnimatedGIFOutput()
                     SetGIFOutput(gifOutput)
 
                     VideoCapture1.Output_Format = gifOutput
                 Case 5
-                    Dim tsOutput = New VFMPEGTSOutput()
+                    Dim tsOutput = New MPEGTSOutput()
                     SetMPEGTSOutput(tsOutput)
                     VideoCapture1.Output_Format = tsOutput
                 Case 6
-                    Dim movOutput = New VFMOVOutput()
+                    Dim movOutput = New MOVOutput()
                     SetMOVOutput(movOutput)
                     VideoCapture1.Output_Format = movOutput
             End Select
@@ -258,7 +276,7 @@ Public Class Form1
         lbLogos.Items.Clear()
         ConfigureVideoEffects()
 
-        VideoCapture1.StatusOverlay = New TextStatusOverlay()
+        VideoView1.StatusOverlay = New TextStatusOverlay()
 
         Await VideoCapture1.StartAsync()
 
@@ -586,15 +604,15 @@ Public Class Form1
             Dim ext = Path.GetExtension(filename)?.ToLowerInvariant()
             Select Case (ext)
                 Case ".bmp"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.BMP, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0)
                 Case ".jpg"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.JPEG, 85)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85)
                 Case ".gif"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.GIF, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0)
                 Case ".png"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.PNG, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0)
                 Case ".tiff"
-                    Await VideoCapture1.Frame_SaveAsync(filename, VFImageFormat.TIFF, 0)
+                    Await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0)
             End Select
         End If
     End Sub
@@ -637,10 +655,10 @@ Public Class Form1
 
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
-        Dim intf As IVFVideoEffectLightness
+        Dim intf As IVideoEffectLightness
         Dim effect = VideoCapture1.Video_Effects_Get("Lightness")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectLightness(True, tbLightness.Value)
+            intf = New VideoEffectLightness(True, tbLightness.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -653,10 +671,10 @@ Public Class Form1
 
     Private Sub tbSaturation_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSaturation.Scroll
 
-        Dim intf As IVFVideoEffectSaturation
+        Dim intf As IVideoEffectSaturation
         Dim effect = VideoCapture1.Video_Effects_Get("Saturation")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectSaturation(tbSaturation.Value)
+            intf = New VideoEffectSaturation(tbSaturation.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
 
@@ -670,10 +688,10 @@ Public Class Form1
 
     Private Sub tbContrast_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbContrast.Scroll
 
-        Dim intf As IVFVideoEffectContrast
+        Dim intf As IVideoEffectContrast
         Dim effect = VideoCapture1.Video_Effects_Get("Contrast")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectContrast(True, tbContrast.Value)
+            intf = New VideoEffectContrast(True, tbContrast.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -686,10 +704,10 @@ Public Class Form1
 
     Private Sub tbDarkness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbDarkness.Scroll
 
-        Dim intf As IVFVideoEffectDarkness
+        Dim intf As IVideoEffectDarkness
         Dim effect = VideoCapture1.Video_Effects_Get("Darkness")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectDarkness(True, tbDarkness.Value)
+            intf = New VideoEffectDarkness(True, tbDarkness.Value)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -702,10 +720,10 @@ Public Class Form1
 
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
-        Dim intf As IVFVideoEffectGrayscale
+        Dim intf As IVideoEffectGrayscale
         Dim effect = VideoCapture1.Video_Effects_Get("Grayscale")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectGrayscale(cbGreyscale.Checked)
+            intf = New VideoEffectGrayscale(cbGreyscale.Checked)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -718,10 +736,10 @@ Public Class Form1
 
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
-        Dim intf As IVFVideoEffectInvert
+        Dim intf As IVideoEffectInvert
         Dim effect = VideoCapture1.Video_Effects_Get("Invert")
         If (IsNothing(effect)) Then
-            intf = New VFVideoEffectInvert(cbInvert.Checked)
+            intf = New VideoEffectInvert(cbInvert.Checked)
             VideoCapture1.Video_Effects_Add(intf)
         Else
             intf = effect
@@ -733,10 +751,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
-        Dim flip As IVFVideoEffectFlipDown
+        Dim flip As IVideoEffectFlipDown
         Dim effect = VideoCapture1.Video_Effects_Get("FlipDown")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipHorizontal(cbFlipX.Checked)
+            flip = New VideoEffectFlipHorizontal(cbFlipX.Checked)
             VideoCapture1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -747,10 +765,10 @@ Public Class Form1
     End Sub
 
     Private Sub cbFlipY_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipY.CheckedChanged
-        Dim flip As IVFVideoEffectFlipRight
+        Dim flip As IVideoEffectFlipRight
         Dim effect = VideoCapture1.Video_Effects_Get("FlipRight")
         If (effect Is Nothing) Then
-            flip = New VFVideoEffectFlipVertical(cbFlipY.Checked)
+            flip = New VideoEffectFlipVertical(cbFlipY.Checked)
             VideoCapture1.Video_Effects_Add(flip)
         Else
             flip = effect
@@ -764,7 +782,7 @@ Public Class Form1
         Dim dlg = New ImageLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoCapture1)
-        Dim effect = New VFVideoEffectImageLogo(True, effectName)
+        Dim effect = New VideoEffectImageLogo(True, effectName)
 
         VideoCapture1.Video_Effects_Add(effect)
         lbLogos.Items.Add(effect.Name)
@@ -778,7 +796,7 @@ Public Class Form1
         Dim dlg = New TextLogoSettingsDialog()
 
         Dim effectName = dlg.GenerateNewEffectName(VideoCapture1)
-        Dim effect = New VFVideoEffectTextLogo(True, effectName)
+        Dim effect = New VideoEffectTextLogo(True, effectName)
 
         VideoCapture1.Video_Effects_Add(effect)
         lbLogos.Items.Add(effect.Name)
@@ -791,14 +809,14 @@ Public Class Form1
     Private Sub btLogoEdit_Click(sender As Object, e As EventArgs) Handles btLogoEdit.Click
         If (lbLogos.SelectedItem IsNot Nothing) Then
             Dim effect = VideoCapture1.Video_Effects_Get(lbLogos.SelectedItem)
-            If (effect.GetEffectType() = VFVideoEffectType.TextLogo) Then
+            If (effect.GetEffectType() = VideoEffectType.TextLogo) Then
                 Dim dlg = New TextLogoSettingsDialog()
 
                 dlg.Attach(effect)
 
                 dlg.ShowDialog(Me)
                 dlg.Dispose()
-            ElseIf (effect.GetEffectType() = VFVideoEffectType.ImageLogo) Then
+            ElseIf (effect.GetEffectType() = VideoEffectType.ImageLogo) Then
                 Dim dlg = New ImageLogoSettingsDialog()
 
                 dlg.Attach(effect)
@@ -857,6 +875,10 @@ Public Class Form1
                    Await VideoCapture1.StopAsync()
                    MessageBox.Show("Network source stopped or disconnected!")
                End Sub)
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        DestroyEngine()
     End Sub
 End Class
 

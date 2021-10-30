@@ -9,6 +9,7 @@ namespace read_file_info
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Tools.TagLib;
+    using VisioForge.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -34,7 +35,7 @@ namespace read_file_info
             // check file playable
             if (cbIsPlayable.Checked)
             {
-                VFFilePlaybackError ErrorCode;
+                FilePlaybackError ErrorCode;
                 string ErrorText;
 
                 if (MediaInfoReader.IsFilePlayable(filename, out ErrorCode, out ErrorText))

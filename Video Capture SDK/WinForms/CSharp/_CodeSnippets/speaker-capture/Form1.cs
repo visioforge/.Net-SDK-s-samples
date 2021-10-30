@@ -15,7 +15,9 @@ namespace speaker_capture
     using System.IO;
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -67,15 +69,15 @@ namespace speaker_capture
 
         private async void btStart_Click(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_CaptureDevice = "VisioForge What You Hear Source";
-            VideoCapture1.Audio_CaptureDevice_Format_UseBest = true;
+            VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource("VisioForge What You Hear Source");
+            VideoCapture1.Audio_CaptureDevice.Format_UseBest = true;
 
             VideoCapture1.Audio_RecordAudio = true;
             VideoCapture1.Audio_PlayAudio = true;
 
-            VideoCapture1.Mode = VFVideoCaptureMode.AudioCapture;
+            VideoCapture1.Mode = VideoCaptureMode.AudioCapture;
 
-            VideoCapture1.Output_Format = new VFMP3Output();
+            VideoCapture1.Output_Format = new MP3Output();
             VideoCapture1.Output_Filename = edOutput.Text;
 
             VideoCapture1.Audio_Sample_Grabber_Enabled = true;

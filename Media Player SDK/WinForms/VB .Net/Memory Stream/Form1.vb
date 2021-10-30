@@ -4,10 +4,11 @@ Imports System.IO
 Imports VisioForge.Controls.UI
 Imports VisioForge.Tools
 Imports VisioForge.Types
-Imports VisioForge.Controls.UI.WinForms
+Imports VisioForge.Controls.MediaPlayer
+Imports VisioForge.Types.Events
+Imports VisioForge.Types.MediaPlayer
 
 Public Class Form1
-
     Private _stream As ManagedIStream
 
     Private _fileStream As FileStream
@@ -15,6 +16,18 @@ Public Class Form1
     Private _memoryStream As MemoryStream
 
     Private _memorySource() As Byte
+
+    Private WithEvents MediaPlayer1 As MediaPlayerCore
+
+    Private Sub CreateEngine()
+        Dim vv As IVideoView = VideoView1
+        MediaPlayer1 = New MediaPlayerCore(vv)
+    End Sub
+
+    Private Sub DestroyEngine()
+        MediaPlayer1.Dispose()
+        MediaPlayer1 = Nothing
+    End Sub
 
     Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
 
@@ -28,45 +41,45 @@ Public Class Form1
 
         mmError.Text = String.Empty
 
+        Dim audioPresent As Boolean
+        Dim videoPresent As Boolean
+
+        If (rbVideoWithAudio.Checked) Then
+            videoPresent = True
+            videoPresent = True
+        ElseIf (rbVideoWithoutAudio.Checked) Then
+            videoPresent = True
+            videoPresent = False
+        Else
+            videoPresent = False
+            videoPresent = True
+        End If
+
         If (rbSTreamTypeFile.Checked) Then
             _fileStream = New FileStream(edFilename.Text, FileMode.Open)
             _stream = New ManagedIStream(_fileStream)
 
-            ' specifying settings
-            ' MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS;
-            MediaPlayer1.Source_Stream = _stream
-            MediaPlayer1.Source_Stream_Size = _fileStream.Length
+            MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length)
         Else
             _memorySource = File.ReadAllBytes(edFilename.Text)
             _memoryStream = New MemoryStream(_memorySource)
             _stream = New ManagedIStream(_memoryStream)
 
-            MediaPlayer1.Source_Stream = _stream
-            MediaPlayer1.Source_Stream_Size = _memoryStream.Length
+            MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length)
         End If
 
-        ' video and audio present in file. tune this settings to play audio files or video files without audio
-        If (rbVideoWithAudio.Checked) Then
-            MediaPlayer1.Source_Stream_VideoPresent = True
-            MediaPlayer1.Source_Stream_AudioPresent = True
-        ElseIf (rbVideoWithoutAudio.Checked) Then
-            MediaPlayer1.Source_Stream_VideoPresent = True
-            MediaPlayer1.Source_Stream_AudioPresent = False
-        Else
-            MediaPlayer1.Source_Stream_VideoPresent = False
-            MediaPlayer1.Source_Stream_AudioPresent = True
-        End If
 
-        MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS
+
+        MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS
 
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
         If (FilterHelpers.Filter_Supported_EVR()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
         ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         Else
-            MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         End If
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
@@ -78,6 +91,8 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+
+        CreateEngine()
 
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
@@ -181,6 +196,8 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
+
+        DestroyEngine()
     End Sub
 
     Private Sub btSelectFile_Click(sender As Object, e As EventArgs) Handles btSelectFile.Click

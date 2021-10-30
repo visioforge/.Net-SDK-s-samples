@@ -8,8 +8,8 @@
     <AssemblyTitle>TV Tuner Demo</AssemblyTitle>
     <Product>TV Tuner Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>14.4.16.0</AssemblyVersion>
-    <FileVersion>14.4.16.0</FileVersion>
+    <AssemblyVersion>15.0.1.0</AssemblyVersion>
+    <FileVersion>15.0.1.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -28,11 +28,11 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="14.4.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="14.4.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="14.4.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="14.4.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="14.4.16" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.0.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

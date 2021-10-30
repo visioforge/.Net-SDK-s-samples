@@ -768,23 +768,6 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-
-        <wpf:MediaPlayer Margin="406,161,25,310" 
-                             Background="Black"
-                             HorizontalAlignment="Stretch" 
-                             x:Name="MediaPlayer1"
-                             VerticalAlignment="Stretch"
-                             OnError="MediaPlayer1_OnError" 
-                             OnMotionDetectionEx="MediaPlayer1_OnObjectDetection"
-                             OnMotion="MediaPlayer1_OnMotion" 
-                             OnStop="MediaPlayer1_OnStop"
-                             OnBarcodeDetected="MediaPlayer1_OnBarcodeDetected" 
-                             OnVideoEncrypted="MediaPlayer1_OnVideoEncrypted"
-                             MouseDown="MediaPlayer1_MouseDown" 
-                             OnAudioVUMeterProFFTCalculated="MediaPlayer1_OnAudioVUMeterProFFTCalculated"
-                             OnAudioVUMeterProMaximumCalculated="MediaPlayer1_OnAudioVUMeterProMaximumCalculated"
-                             OnAudioVUMeterProVolume="MediaPlayer1_OnAudioVUMeterProVolume" 
-                             OnLicenseRequired="MediaPlayer1_OnLicenseRequired" OnMIDIFileInfo="MediaPlayer1_OnMIDIFileInfo" 
-                             />
+        <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="304" Margin="407,171,0,0" VerticalAlignment="Top" Width="411"/>
     </Grid>
 </Window>

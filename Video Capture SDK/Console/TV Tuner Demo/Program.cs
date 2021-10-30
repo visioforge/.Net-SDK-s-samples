@@ -16,7 +16,9 @@ namespace TV_Tuner_Demo
 
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     class Program
     {
@@ -25,12 +27,10 @@ namespace TV_Tuner_Demo
             var videoCapture = new VideoCaptureCore();
             videoCapture.OnTVTunerTuneChannels += videoCapture_OnTVTunerTuneChannels;
             videoCapture.OnError += VideoCapture_OnError;
-            videoCapture.OnVideoFrameBuffer += VideoCapture_OnVideoFrameBuffer;
-
-            videoCapture.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             // get video capture devices
-            var videoCaptureDevices = videoCapture.Video_CaptureDevices();
+            var videoCaptureDevices = videoCapture.Video_CaptureDevices;
 
             Console.WriteLine(@"Video capture devices: ");
             for (int i = 0; i < videoCaptureDevices.Count; i++)
@@ -42,7 +42,7 @@ namespace TV_Tuner_Demo
             int videoCaptureDeviceIndex = Convert.ToInt32(Console.ReadLine());
 
             // get audio capture devices
-            var audioCaptureDevices = videoCapture.Audio_CaptureDevices();
+            var audioCaptureDevices = videoCapture.Audio_CaptureDevices;
 
             Console.WriteLine(@"Audio capture devices: ");
             Console.WriteLine(@"0: Use video capture device if possible.");
@@ -61,17 +61,17 @@ namespace TV_Tuner_Demo
             var tunerFormats = new List<string>();
             var tunerCountries = new List<string>();
 
-            foreach (string tunerDevice in videoCapture.TVTuner_Devices())
+            foreach (string tunerDevice in videoCapture.TVTuner_Devices)
             {
                 tuners.Add(tunerDevice);
             }
 
-            foreach (string tunerTVFormat in videoCapture.TVTuner_TVFormats())
+            foreach (string tunerTVFormat in videoCapture.TVTuner_TVFormats)
             {
                 tunerFormats.Add(tunerTVFormat);
             }
 
-            foreach (string tunerCountry in videoCapture.TVTuner_Countries())
+            foreach (string tunerCountry in videoCapture.TVTuner_Countries)
             {
                 tunerCountries.Add(tunerCountry);
             }
@@ -96,30 +96,30 @@ namespace TV_Tuner_Demo
             {
                 case 0:
                     {
-                        videoCapture.Mode = VFVideoCaptureMode.VideoPreview;
+                        videoCapture.Mode = VideoCaptureMode.VideoPreview;
                     }
                     break;
                 case 1:
                     {
-                        videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
+                        videoCapture.Mode = VideoCaptureMode.VideoCapture;
 
                         string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFAVIOutput();
+                        videoCapture.Output_Format = new AVIOutput();
                     }
 
                     break;
                 case 2:
                     {
-                        videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
+                        videoCapture.Mode = VideoCaptureMode.VideoCapture;
 
                         string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFMP4HWOutput();
+                        videoCapture.Output_Format = new MP4HWOutput();
                     }
 
                     break;
@@ -130,25 +130,24 @@ namespace TV_Tuner_Demo
             }
 
             // set properties
-            videoCapture.Video_CaptureDevice = videoCaptureDevices[videoCaptureDeviceIndex].Name;
-            videoCapture.Video_CaptureDevice_Format_UseBest = true;
-            videoCapture.Video_CaptureDevice_FrameRate = 0; // auto
+            videoCapture.Video_CaptureDevice = new VideoCaptureSource(videoCaptureDevices[videoCaptureDeviceIndex].Name);
+            videoCapture.Video_CaptureDevice.Format_UseBest = true;
+            videoCapture.Video_CaptureDevice.FrameRate = 0; // auto
 
             if (audioCaptureDeviceIndex == 0)
             {
-                videoCapture.Video_CaptureDevice_IsAudioSource = true;
+                videoCapture.Video_CaptureDevice.IsAudioSource = true;
             }
             else
             {
-                videoCapture.Video_CaptureDevice_IsAudioSource = false;
-                videoCapture.Audio_CaptureDevice = audioCaptureDevices[audioCaptureDeviceIndex - 1].Name;
+                videoCapture.Video_CaptureDevice.IsAudioSource = false;
+                videoCapture.Audio_CaptureDevice = new AudioCaptureSource(audioCaptureDevices[audioCaptureDeviceIndex - 1].Name);
+                videoCapture.Audio_CaptureDevice.Format_UseBest = true;
             }
             
-            videoCapture.Audio_CaptureDevice_Format_UseBest = true;
-
             videoCapture.TVTuner_Country = country;
             videoCapture.TVTuner_Name = tuners[tunerIndex];
-            videoCapture.TVTuner_Mode = VFTVTunerMode.FMRadio;
+            videoCapture.TVTuner_Mode = TVTunerMode.FMRadio;
 
             // videoCapture.TVTuner_Apply();
 
@@ -181,11 +180,6 @@ namespace TV_Tuner_Demo
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
             videoCapture.Stop();
-        }
-
-        private static void VideoCapture_OnVideoFrameBuffer(object sender, VideoFrameBufferEventArgs e)
-        {
-            
         }
 
         private static void VideoCapture_OnError(object sender, ErrorsEventArgs e)

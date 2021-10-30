@@ -6,43 +6,81 @@ namespace multiple_ap_cams
     using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
+        private System.Timers.Timer tmRecording1 = new System.Timers.Timer(1000);
+
+        private System.Timers.Timer tmRecording2 = new System.Timers.Timer(1000);
+
+        private VideoCaptureCore VideoCapture1;
+
+        private VideoCaptureCore VideoCapture2;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private readonly System.Timers.Timer tmRecording1 = new System.Timers.Timer(1000);
+        private void CreateEngine1()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
-        private readonly System.Timers.Timer tmRecording2 = new System.Timers.Timer(1000);
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
 
+        private void CreateEngine2()
+        {
+            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
 
-        // private const string url = "http://212.162.177.75/mjpg/video.mjpg";
-        // private const string url = "rtsp://media1.law.harvard.edu/Media/policy_a/2012/02/02_unger.mov";
+            VideoCapture2.OnError += VideoCapture2_OnError;
+            VideoCapture2.OnLicenseRequired += VideoCapture2_OnLicenseRequired;
+        }
+
+        private void DestroyEngine1()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
+        private void DestroyEngine2()
+        {
+            VideoCapture2.OnError -= VideoCapture2_OnError;
+            VideoCapture2.OnLicenseRequired -= VideoCapture2_OnLicenseRequired;
+
+            VideoCapture2.Dispose();
+            VideoCapture2 = null;
+        }
 
         private async void btStart1_Click(object sender, EventArgs e)
         {
-            videoCapture1.IP_Camera_Source = new IPCameraSourceSettings
+            VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
                 URL = edURL1.Text,
-                Type = VFIPSource.Auto_LAV
+                Type = IPSourceEngine.Auto_LAV,
+                Login = edLogin1.Text,
+                Password = edPassword1.Text
             };
-            videoCapture1.Mode = VFVideoCaptureMode.IPPreview;
-            videoCapture1.Audio_PlayAudio = false;
-            videoCapture1.Debug_Mode = cbDebugMode.Checked;
-            videoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            await videoCapture1.StartAsync();
+            VideoCapture1.Mode = VideoCaptureMode.IPPreview;
+            VideoCapture1.Audio_PlayAudio = false;
+            VideoCapture1.Debug_Mode = cbDebugMode.Checked;
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+            await VideoCapture1.StartAsync();
 
             tmRecording1.Start();
         }
 
-        private void VideoCapture1OnOnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             if (IsHandleCreated)
             {
@@ -54,27 +92,29 @@ namespace multiple_ap_cams
         {
             tmRecording1.Stop();
 
-            await videoCapture1.StopAsync();
+            await VideoCapture1.StopAsync();
         }
 
         private async void btStart2_Click(object sender, EventArgs e)
         {
-            videoCapture2.IP_Camera_Source = new IPCameraSourceSettings
+            VideoCapture2.IP_Camera_Source = new IPCameraSourceSettings
             {
                 URL = edURL2.Text,
-                Type = VFIPSource.Auto_LAV
+                Type = IPSourceEngine.Auto_LAV,
+                Login = edLogin2.Text,
+                Password = edPassword2.Text
             };
-            videoCapture2.Mode = VFVideoCaptureMode.IPPreview;
-            videoCapture2.Audio_PlayAudio = false;
-            videoCapture2.Debug_Mode = cbDebugMode.Checked;
-            videoCapture2.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            VideoCapture2.Mode = VideoCaptureMode.IPPreview;
+            VideoCapture2.Audio_PlayAudio = false;
+            VideoCapture2.Debug_Mode = cbDebugMode.Checked;
+            VideoCapture2.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            await videoCapture2.StartAsync();
+            await VideoCapture2.StartAsync();
 
             tmRecording2.Start();
         }
 
-        private void VideoCapture2OnOnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture2_OnError(object sender, ErrorsEventArgs e)
         {
             if (IsHandleCreated)
             {
@@ -85,12 +125,15 @@ namespace multiple_ap_cams
         private async void btStop2_Click(object sender, EventArgs e)
         {
             tmRecording2.Stop();
-            await videoCapture2.StopAsync();
+            await VideoCapture2.StopAsync();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += $" (SDK v{videoCapture2.SDK_Version})";
+            CreateEngine1();
+            CreateEngine2();
+
+            Text += $" (SDK v{VideoCapture2.SDK_Version})";
 
             tmRecording1.Elapsed += (senderx, args) =>
             {
@@ -102,11 +145,11 @@ namespace multiple_ap_cams
                 UpdateRecordingTime2();
             };
 
-            videoCapture1.Video_Renderer_SetAuto();
-            videoCapture2.Video_Renderer_SetAuto();
+            VideoCapture1.Video_Renderer_SetAuto();
+            VideoCapture2.Video_Renderer_SetAuto();
         }
 
-        private void videoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
+        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             if (IsHandleCreated)
             {
@@ -117,7 +160,7 @@ namespace multiple_ap_cams
             }
         }
 
-        private void videoCapture2_OnLicenseRequired(object sender, LicenseEventArgs e)
+        private void VideoCapture2_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             if (IsHandleCreated)
             {
@@ -132,7 +175,7 @@ namespace multiple_ap_cams
         {
             if (IsHandleCreated)
             {
-                var ts = videoCapture1.Duration_Time();
+                var ts = VideoCapture1.Duration_Time();
 
                 if (Math.Abs(ts.TotalMilliseconds) < 0.01)
                 {
@@ -151,7 +194,7 @@ namespace multiple_ap_cams
         {
             if (IsHandleCreated)
             {
-                var ts = videoCapture2.Duration_Time();
+                var ts = VideoCapture2.Duration_Time();
 
                 if (Math.Abs(ts.TotalMilliseconds) < 0.01)
                 {
@@ -164,6 +207,12 @@ namespace multiple_ap_cams
                                         lbTimestamp2.Text = "Recording time: " + ts.ToString(@"hh\:mm\:ss");
                                     }));
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine1();
+            DestroyEngine2();
         }
     }
 }

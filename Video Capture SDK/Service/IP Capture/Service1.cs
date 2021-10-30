@@ -13,22 +13,28 @@ namespace IPCaptureService
     using System.Diagnostics;
     using System.IO;
     using System.ServiceProcess;
-
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
+
 
     /// <summary>
     /// Service class.
     /// </summary>
     public partial class Service1 : ServiceBase
     {
+        private VideoCaptureCore VideoCapture1;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Service1"/> class.
         /// </summary>
         public Service1()
         {
             InitializeComponent();
+
+            VideoCapture1 = new VideoCaptureCore();
         }
 
         /// <summary>
@@ -36,29 +42,29 @@ namespace IPCaptureService
         /// </summary>
         protected void CaptureStart()
         {
-            System.Diagnostics.Debugger.Launch();
+            System.Diagnostics.Debugger.Launch();            
 
             // configure cam1
-            VideoCapture1.Mode = VFVideoCaptureMode.IPCapture;
+            VideoCapture1.Mode = VideoCaptureMode.IPCapture;
 
             VideoCapture1.Audio_RecordAudio = false;
             VideoCapture1.Audio_PlayAudio = false;
 
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings();
             VideoCapture1.IP_Camera_Source.AudioCapture = false;
-            VideoCapture1.IP_Camera_Source.Type = VFIPSource.Auto_FFMPEG;
+            VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG;
             VideoCapture1.IP_Camera_Source.URL = "http://212.162.177.75/mjpg/video.mjpg";
 
             VideoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "service_output.wmv");
 
-            var mp4Output = new VFMP4Output();
-            mp4Output.MP4Mode = VFMP4Mode.CPU_QSV;
+            var mp4Output = new MP4Output();
+            mp4Output.MP4Mode = MP4Mode.CPU_QSV;
             VideoCapture1.Output_Format = mp4Output;
 
-            // VideoCapture1.WMV_Mode = VFWMVMode.InternalProfile;
+            // VideoCapture1.WMV_Mode = WMVMode.InternalProfile;
             // VideoCapture1.WMV_Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles()[5];
 
-            VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.None;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             VideoCapture1.OnError -= VideoCapture1_OnError;
             VideoCapture1.OnError += VideoCapture1_OnError;
@@ -133,8 +139,9 @@ namespace IPCaptureService
                 eventLog1.Source = "VisioForgeIPCaptureService";
                 eventLog1.WriteEntry(log);
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex.ToString());
             }
         }
     }

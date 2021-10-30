@@ -19,6 +19,43 @@
             {
                 components.Dispose();
             }
+
+            mp4SettingsDialog?.Dispose();
+            mp4SettingsDialog = null;
+
+            mp4HWSettingsDialog?.Dispose();
+            mp4HWSettingsDialog = null;
+
+            webmSettingsDialog?.Dispose();
+            webmSettingsDialog = null;
+
+            mp3SettingsDialog?.Dispose();
+            mp3SettingsDialog = null;
+
+            aviSettingsDialog?.Dispose();
+            aviSettingsDialog = null;
+
+            wmvSettingsDialog?.Dispose();
+            wmvSettingsDialog = null;
+
+            gifSettingsDialog?.Dispose();
+            gifSettingsDialog = null;
+
+            ffmpegEXESettingsDialog?.Dispose();
+            ffmpegEXESettingsDialog = null;
+
+            ffmpegSettingsDialog?.Dispose();
+            ffmpegSettingsDialog = null;
+
+            dvSettingsDialog?.Dispose();
+            dvSettingsDialog = null;
+
+            loadedImage?.Dispose();
+            loadedImage = null;
+
+            VideoEdit1?.Dispose();
+            VideoEdit1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -38,7 +75,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.ProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.rbConvert = new System.Windows.Forms.RadioButton();
-            this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -90,6 +126,7 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -176,72 +213,6 @@
             this.rbConvert.TabIndex = 78;
             this.rbConvert.Text = "Convert video";
             this.rbConvert.UseVisualStyleBackColor = true;
-            // 
-            // VideoEdit1
-            // 
-            this.VideoEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.VideoEdit1.Audio_Channel_Mapper = null;
-            this.VideoEdit1.Audio_Effects_Enabled = false;
-            this.VideoEdit1.Audio_Enhancer_Enabled = false;
-            this.VideoEdit1.Audio_Preview_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Volume = 0;
-            this.VideoEdit1.BackColor = System.Drawing.Color.Black;
-            this.VideoEdit1.Barcode_Reader_Enabled = false;
-            this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
-            this.VideoEdit1.ChromaKey = null;
-            this.VideoEdit1.CustomRedist_Auto = true;
-            this.VideoEdit1.CustomRedist_DisableDialog = false;
-            this.VideoEdit1.CustomRedist_Path = null;
-            this.VideoEdit1.Debug_Dir = "";
-            this.VideoEdit1.Debug_DisableMessageDialogs = false;
-            this.VideoEdit1.Debug_Mode = false;
-            this.VideoEdit1.Debug_Telemetry = false;
-            this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
-            this.VideoEdit1.Decklink_Output = null;
-            this.VideoEdit1.Dynamic_Reconnection = false;
-            this.VideoEdit1.Location = new System.Drawing.Point(348, 34);
-            this.VideoEdit1.Loop = false;
-            this.VideoEdit1.Mode = VisioForge.Types.VFVideoEditMode.Convert;
-            this.VideoEdit1.Motion_Detection = null;
-            this.VideoEdit1.Motion_DetectionEx = null;
-            this.VideoEdit1.Name = "VideoEdit1";
-            this.VideoEdit1.Network_Streaming_Audio_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV;
-            this.VideoEdit1.Network_Streaming_Network_Port = 0;
-            this.VideoEdit1.Network_Streaming_Output = null;
-            this.VideoEdit1.Network_Streaming_URL = null;
-            this.VideoEdit1.Network_Streaming_WMV_Maximum_Clients = 0;
-            this.VideoEdit1.Output_Filename = "c:\\output.avi";
-            this.VideoEdit1.Output_Format = null;
-            this.VideoEdit1.Size = new System.Drawing.Size(415, 308);
-            this.VideoEdit1.Start_DelayEnabled = false;
-            this.VideoEdit1.TabIndex = 91;
-            this.VideoEdit1.Tags = null;
-            this.VideoEdit1.UseLibMediaInfo = false;
-            this.VideoEdit1.Video_Crop = null;
-            this.VideoEdit1.Video_Custom_Resizer_CLSID = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.VideoEdit1.Video_Effects_AllowMultipleStreams = false;
-            this.VideoEdit1.Video_Effects_Enabled = false;
-            this.VideoEdit1.Video_Effects_GPU_Enabled = false;
-            this.VideoEdit1.Video_FrameRate = 25D;
-            this.VideoEdit1.Video_Preview_Enabled = true;
-            this.VideoEdit1.Video_Resize = false;
-            this.VideoEdit1.Video_Resize_Height = 480;
-            this.VideoEdit1.Video_Resize_Width = 640;
-            this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
-            this.VideoEdit1.Video_Subtitles = null;
-            this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
-            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
-            this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
-            this.VideoEdit1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoEdit1_OnLicenseRequired);
-            this.VideoEdit1.OnVideoFrameBitmap += new System.EventHandler<VisioForge.Types.VideoFrameBitmapEventArgs>(this.VideoEdit1_OnVideoFrameBitmap);
-            this.VideoEdit1.OnProgress += new System.EventHandler<VisioForge.Types.ProgressEventArgs>(this.VideoEdit1_OnProgress);
-            this.VideoEdit1.OnStop += new System.EventHandler<VisioForge.Types.VideoEditStopEventArgs>(this.VideoEdit1_OnStop);
             // 
             // tabControl1
             // 
@@ -764,13 +735,22 @@
             this.fontDialog1.FontMustExist = true;
             this.fontDialog1.ShowColor = true;
             // 
+            // VideoView1
+            // 
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(348, 34);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(414, 309);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 93;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 420);
+            this.Controls.Add(this.VideoView1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.VideoEdit1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.rbPreview);
             this.Controls.Add(this.btStop);
@@ -781,6 +761,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "VisioForge Video Edit SDK .Net - Video From Images In Memory";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -807,7 +788,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ProgressBar ProgressBar1;
         private System.Windows.Forms.RadioButton rbConvert;
-        private VisioForge.Controls.UI.WinForms.VideoEdit VideoEdit1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ComboBox cbFrameRate;
@@ -859,6 +839,7 @@
         private System.Windows.Forms.TextBox edImagesFolder;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label6;
+        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
     }
 }
 

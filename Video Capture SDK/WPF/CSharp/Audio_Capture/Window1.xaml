@@ -12,8 +12,8 @@
                     <Button Height="23" Margin="294,38,0,0" Name="btAudioInputDeviceSettings" VerticalAlignment="Top" Click="btAudioInputDeviceSettings_Click" HorizontalAlignment="Left" Width="65">Settings</Button>
                     <Label Height="24" Margin="19,66,0,0" x:Name="label22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" Content="Input line"/>
                     <Label Height="24" Margin="19,122,0,0" Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97">Input format</Label>
-                    <ComboBox Height="23" Margin="19,94,0,0" Name="cbAudioInputLine" VerticalAlignment="Top" HorizontalAlignment="Left" Width="265" SelectionChanged="cbAudioInputLine_SelectedIndexChanged" />
-                    <ComboBox Height="23" Margin="19,146,0,0" Name="cbAudioInputFormat" VerticalAlignment="Top" StaysOpenOnEdit="True" SelectionChanged="cbAudioInputFormat_SelectedIndexChanged" HorizontalAlignment="Left" Width="265" />
+                    <ComboBox Height="23" Margin="19,94,0,0" Name="cbAudioInputLine" VerticalAlignment="Top" HorizontalAlignment="Left" Width="265" />
+                    <ComboBox Height="23" Margin="19,146,0,0" Name="cbAudioInputFormat" VerticalAlignment="Top" StaysOpenOnEdit="True" HorizontalAlignment="Left" Width="265" />
                     <CheckBox Height="16" HorizontalAlignment="Left" Margin="207,128,0,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="75" Click="cbUseBestAudioInputFormat_CheckedChanged">Use best</CheckBox>
                     <Label Margin="19,234,0,0" Name="label15" HorizontalAlignment="Left" Width="120" Height="25" VerticalAlignment="Top">Audio output device</Label>
                     <ComboBox Margin="19,264,0,0" Name="cbAudioOutputDevice" Height="24" VerticalAlignment="Top" SelectionChanged="cbAudioOutputDevice_SelectedIndexChanged" HorizontalAlignment="Left" Width="340" />

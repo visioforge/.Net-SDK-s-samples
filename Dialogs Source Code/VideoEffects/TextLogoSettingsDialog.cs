@@ -25,11 +25,11 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
     /// <summary>
     /// Text logo settings dialog.
     /// </summary>
-    public partial class TextLogoSettingsDialog : Form, IVFVideoEffectsSettingsDialog
+    public partial class TextLogoSettingsDialog : Form, IVideoEffectsSettingsDialog
     {
         private const string NAME = "TextLogo";
 
-        private IVFVideoEffectTextLogo _intf;
+        private IVideoEffectTextLogo _intf;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextLogoSettingsDialog"/> class.
@@ -55,9 +55,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void Attach(IVFVideoEffect effect)
+        public void Attach(IVideoEffect effect)
         {
-            _intf = effect as IVFVideoEffectTextLogo;
+            _intf = effect as IVideoEffectTextLogo;
             if (_intf == null)
             {
                 return;
@@ -92,16 +92,16 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
             switch (_intf.RotationMode)
             {
-                case VFTextRotationMode.RmNone:
+                case TextRotationMode.RmNone:
                     rbTextLogoDegree0.Checked = true;
                     break;
-                case VFTextRotationMode.Rm90:
+                case TextRotationMode.Rm90:
                     rbTextLogoDegree90.Checked = true;
                     break;
-                case VFTextRotationMode.Rm180:
+                case TextRotationMode.Rm180:
                     rbTextLogoDegree180.Checked = true;
                     break;
-                case VFTextRotationMode.Rm270:
+                case TextRotationMode.Rm270:
                     rbTextLogoDegree270.Checked = true;
                     break;
                 default:
@@ -110,16 +110,16 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
             switch (_intf.FlipMode)
             {
-                case VFTextFlipMode.None:
+                case TextFlipMode.None:
                     rbTextLogoFlipNone.Checked = true;
                     break;
-                case VFTextFlipMode.X:
+                case TextFlipMode.X:
                     rbTextLogoFlipX.Checked = true;
                     break;
-                case VFTextFlipMode.Y:
+                case TextFlipMode.Y:
                     rbTextLogoFlipY.Checked = true;
                     break;
-                case VFTextFlipMode.XAndY:
+                case TextFlipMode.XAndY:
                     rbTextLogoFlipXY.Checked = true;
                     break;
                 default:
@@ -175,9 +175,9 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <param name="effect">
         /// Effect.
         /// </param>
-        public void Fill(IVFVideoEffect effect)
+        public void Fill(IVideoEffect effect)
         {
-            _intf = effect as IVFVideoEffectTextLogo;
+            _intf = effect as IVideoEffectTextLogo;
             EffectUpdate(_intf);
         }
 
@@ -286,7 +286,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             return name;
         }
 
-        private void EffectUpdate(IVFVideoEffectTextLogo textLogo)
+        private void EffectUpdate(IVideoEffectTextLogo textLogo)
         {
             if (textLogo == null)
             {
@@ -294,8 +294,8 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
                 return;
             }
 
-            VFTextRotationMode rotate;
-            VFTextFlipMode flip;
+            TextRotationMode rotate;
+            TextFlipMode flip;
 
             StringFormat formatFlags = new StringFormat();
 
@@ -337,47 +337,47 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 
             if (rbTextLogoDegree0.Checked)
             {
-                rotate = VFTextRotationMode.RmNone;
+                rotate = TextRotationMode.RmNone;
             }
             else if (rbTextLogoDegree90.Checked)
             {
-                rotate = VFTextRotationMode.Rm90;
+                rotate = TextRotationMode.Rm90;
             }
             else if (rbTextLogoDegree180.Checked)
             {
-                rotate = VFTextRotationMode.Rm180;
+                rotate = TextRotationMode.Rm180;
             }
             else
             {
-                rotate = VFTextRotationMode.Rm270;
+                rotate = TextRotationMode.Rm270;
             }
 
             if (rbTextLogoFlipNone.Checked)
             {
-                flip = VFTextFlipMode.None;
+                flip = TextFlipMode.None;
             }
             else if (rbTextLogoFlipX.Checked)
             {
-                flip = VFTextFlipMode.X;
+                flip = TextFlipMode.X;
             }
             else if (rbTextLogoFlipY.Checked)
             {
-                flip = VFTextFlipMode.Y;
+                flip = TextFlipMode.Y;
             }
             else
             {
-                flip = VFTextFlipMode.XAndY;
+                flip = TextFlipMode.XAndY;
             }
 
             textLogo.RotationMode = rotate;
             textLogo.FlipMode = flip;
 
             textLogo.GradientEnabled = cbTextLogoGradientEnabled.Checked;
-            textLogo.GradientMode = (VFTextGradientMode)cbTextLogoGradMode.SelectedIndex;
+            textLogo.GradientMode = (TextGradientMode)cbTextLogoGradMode.SelectedIndex;
             textLogo.GradientColor1 = pnTextLogoGradColor1.BackColor;
             textLogo.GradientColor2 = pnTextLogoGradColor2.BackColor;
 
-            textLogo.BorderMode = (VFTextEffectMode)cbTextLogoEffectrMode.SelectedIndex;
+            textLogo.BorderMode = (TextEffectMode)cbTextLogoEffectrMode.SelectedIndex;
             textLogo.BorderInnerColor = pnTextLogoInnerColor.BackColor;
             textLogo.BorderOuterColor = pnTextLogoOuterColor.BackColor;
             textLogo.BorderInnerSize = Convert.ToInt32(edTextLogoInnerSize.Text);
@@ -386,7 +386,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
             textLogo.Shape = cbTextLogoShapeEnabled.Checked;
             textLogo.ShapeLeft = Convert.ToInt32(edTextLogoShapeLeft.Text);
             textLogo.ShapeTop = Convert.ToInt32(edTextLogoShapeTop.Text);
-            textLogo.ShapeType = (VFTextShapeType)cbTextLogoShapeType.SelectedIndex;
+            textLogo.ShapeType = (TextShapeType)cbTextLogoShapeType.SelectedIndex;
             textLogo.ShapeWidth = Convert.ToInt32(edTextLogoShapeWidth.Text);
             textLogo.ShapeHeight = Convert.ToInt32(edTextLogoShapeHeight.Text);
             textLogo.ShapeColor = pnTextLogoShapeColor.BackColor;

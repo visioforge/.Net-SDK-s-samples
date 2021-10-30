@@ -68,6 +68,9 @@ namespace VideoEdit_CS_Demo
             oggVorbisSettingsDialog?.Dispose();
             oggVorbisSettingsDialog = null;
 
+            VideoEdit1?.Dispose();
+            VideoEdit1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -695,7 +698,7 @@ namespace VideoEdit_CS_Demo
             this.cbLicensing = new System.Windows.Forms.CheckBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
-            this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
+            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -7380,85 +7383,21 @@ namespace VideoEdit_CS_Demo
             this.mmLog.Size = new System.Drawing.Size(306, 45);
             this.mmLog.TabIndex = 83;
             // 
-            // VideoEdit1
+            // VideoView1
             // 
-            this.VideoEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.VideoEdit1.Audio_Channel_Mapper = null;
-            this.VideoEdit1.Audio_Effects_Enabled = false;
-            this.VideoEdit1.Audio_Enhancer_Enabled = false;
-            this.VideoEdit1.Audio_Preview_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Volume = 0;
-            this.VideoEdit1.BackColor = System.Drawing.Color.Black;
-            this.VideoEdit1.Barcode_Reader_Enabled = false;
-            this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
-            this.VideoEdit1.ChromaKey = null;
-            this.VideoEdit1.CustomRedist_Auto = true;
-            this.VideoEdit1.CustomRedist_DisableDialog = false;
-            this.VideoEdit1.CustomRedist_Path = null;
-            this.VideoEdit1.Debug_Dir = "";
-            this.VideoEdit1.Debug_DisableMessageDialogs = false;
-            this.VideoEdit1.Debug_Mode = false;
-            this.VideoEdit1.Debug_Telemetry = false;
-            this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
-            this.VideoEdit1.Decklink_Output = null;
-            this.VideoEdit1.Dynamic_Reconnection = false;
-            this.VideoEdit1.Location = new System.Drawing.Point(331, 322);
-            this.VideoEdit1.Loop = false;
-            this.VideoEdit1.Mode = VisioForge.Types.VFVideoEditMode.Convert;
-            this.VideoEdit1.Motion_Detection = null;
-            this.VideoEdit1.Motion_DetectionEx = null;
-            this.VideoEdit1.Name = "VideoEdit1";
-            this.VideoEdit1.Network_Streaming_Audio_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV;
-            this.VideoEdit1.Network_Streaming_Network_Port = 0;
-            this.VideoEdit1.Network_Streaming_Output = null;
-            this.VideoEdit1.Network_Streaming_URL = null;
-            this.VideoEdit1.Network_Streaming_WMV_Maximum_Clients = 0;
-            this.VideoEdit1.Output_Filename = "c:\\output.avi";
-            this.VideoEdit1.Output_Format = null;
-            this.VideoEdit1.Size = new System.Drawing.Size(433, 294);
-            this.VideoEdit1.Start_DelayEnabled = false;
-            this.VideoEdit1.TabIndex = 78;
-            this.VideoEdit1.Tags = null;
-            this.VideoEdit1.UseLibMediaInfo = false;
-            this.VideoEdit1.Video_Crop = null;
-            this.VideoEdit1.Video_Custom_Resizer_CLSID = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.VideoEdit1.Video_Effects_AllowMultipleStreams = false;
-            this.VideoEdit1.Video_Effects_Enabled = false;
-            this.VideoEdit1.Video_Effects_GPU_Enabled = false;
-            this.VideoEdit1.Video_FrameRate = 25D;
-            this.VideoEdit1.Video_Preview_Enabled = true;
-            this.VideoEdit1.Video_Resize = false;
-            this.VideoEdit1.Video_Resize_Height = 480;
-            this.VideoEdit1.Video_Resize_Width = 640;
-            this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
-            this.VideoEdit1.Video_Subtitles = null;
-            this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
-            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
-            this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
-            this.VideoEdit1.OnFFMPEGInfo += new System.EventHandler<VisioForge.Types.FFMPEGInfoEventArgs>(this.VideoEdit1_OnFFMPEGInfo);
-            this.VideoEdit1.OnLicenseRequired += new System.EventHandler<VisioForge.Types.LicenseEventArgs>(this.VideoEdit1_OnLicenseRequired);
-            this.VideoEdit1.OnAudioVUMeter += new System.EventHandler<VisioForge.Types.VUMeterEventArgs>(this.VideoEdit1_OnAudioVUMeter);
-            this.VideoEdit1.OnAudioVUMeterProVolume += new System.EventHandler<VisioForge.Types.AudioLevelEventArgs>(this.VideoEdit1_OnAudioVUMeterProVolume);
-            this.VideoEdit1.OnMotionDetection += new System.EventHandler<VisioForge.Types.MotionDetectionEventArgs>(this.VideoEdit1_OnMotion);
-            this.VideoEdit1.OnProgress += new System.EventHandler<VisioForge.Types.ProgressEventArgs>(this.VideoEdit1_OnProgress);
-            this.VideoEdit1.OnStart += new System.EventHandler<System.EventArgs>(this.VideoEdit1_OnStart);
-            this.VideoEdit1.OnStop += new System.EventHandler<VisioForge.Types.VideoEditStopEventArgs>(this.VideoEdit1_OnStop);
-            this.VideoEdit1.OnMotionDetectionEx += new System.EventHandler<VisioForge.Types.MotionDetectionExEventArgs>(this.VideoEdit1_OnObjectDetection);
-            this.VideoEdit1.OnBarcodeDetected += new System.EventHandler<VisioForge.Types.BarcodeEventArgs>(this.VideoEdit1_OnBarcodeDetected);
-            this.VideoEdit1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VideoEdit1_MouseDown);
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(331, 322);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(432, 289);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 87;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 653);
-            this.Controls.Add(this.VideoEdit1);
+            this.Controls.Add(this.VideoView1);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btStart);
             this.Controls.Add(this.ProgressBar1);
@@ -7813,7 +7752,6 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.TrackBar tbSeeking;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.OpenFileDialog openFileDialog3;
-        private VisioForge.Controls.UI.WinForms.VideoEdit VideoEdit1;
         private System.Windows.Forms.TabPage tabPage15;
         private System.Windows.Forms.TabPage tabPage20;
         private System.Windows.Forms.TabControl tabControl15;
@@ -8294,6 +8232,7 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.LinkLabel llXiphX86;
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.Label label67;
+        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
     }
 }
 

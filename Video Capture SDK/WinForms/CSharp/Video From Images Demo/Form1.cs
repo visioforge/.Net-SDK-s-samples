@@ -5,11 +5,12 @@
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
-
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Shared.MFP;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
-    using VisioForge.Types.Sources;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -25,9 +26,28 @@
 
         private string[] IMAGE_SEARCH_PATTERN = { "*.jpeg", "*.jpg", "*.bmp", "*.png" };
 
+        private VideoCaptureCore VideoCapture1;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
         }
 
         private bool LoadImages()
@@ -104,15 +124,15 @@
                                  Top = 0,
                                  Bottom = _imageHeight,
                                  FrameRate = Convert.ToInt32(edVideoFrameRate.Text),
-                                 Mode = VFScreenCaptureMode.Color
+                                 Mode = ScreenCaptureMode.Color
                              };
             VideoCapture1.Screen_Capture_Source = source;
 
             VideoCapture1.Audio_PlayAudio = false;
             VideoCapture1.Audio_RecordAudio = false;
 
-            VideoCapture1.Mode = VFVideoCaptureMode.ScreenCapture;
-            VideoCapture1.Output_Format = new VFMP4Output();
+            VideoCapture1.Mode = VideoCaptureMode.ScreenCapture;
+            VideoCapture1.Output_Format = new MP4Output();
             VideoCapture1.Output_Filename = edOutputFile.Text;
 
             VideoCapture1.Debug_Mode = cbDebug.Checked;
@@ -122,6 +142,8 @@
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
             edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -150,6 +172,11 @@
                                    {
                                        edLog.Text += e.Message;
                                    }));
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

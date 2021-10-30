@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+
+            MediaPlayer1?.Dispose();
+            MediaPlayer1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -28,6 +32,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btSelectFile = new System.Windows.Forms.Button();
             this.edFilenameOrURL = new System.Windows.Forms.TextBox();
@@ -40,7 +45,6 @@
             this.btStart = new System.Windows.Forms.Button();
             this.lbTime = new System.Windows.Forms.Label();
             this.tbTimeline = new System.Windows.Forms.TrackBar();
-            this.MediaPlayer1 = new VisioForge.Controls.UI.WinForms.MediaPlayer();
             this.pnScreen1 = new System.Windows.Forms.Panel();
             this.pnScreen3 = new System.Windows.Forms.Panel();
             this.pnScreen2 = new System.Windows.Forms.Panel();
@@ -48,7 +52,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.mmLog = new System.Windows.Forms.TextBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
             this.SuspendLayout();
@@ -166,59 +171,6 @@
             this.tbTimeline.TabIndex = 0;
             this.tbTimeline.Scroll += new System.EventHandler(this.tbTimeline_Scroll);
             // 
-            // MediaPlayer1
-            // 
-            this.MediaPlayer1.Audio_Channel_Mapper = null;
-            this.MediaPlayer1.Audio_Effects_Enabled = false;
-            this.MediaPlayer1.Audio_Enhancer_Enabled = false;
-            this.MediaPlayer1.Audio_OutputDevice = "";
-            this.MediaPlayer1.Audio_PlayAudio = false;
-            this.MediaPlayer1.Audio_Sample_Grabber_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Pro_Enabled = false;
-            this.MediaPlayer1.Audio_VUMeter_Pro_Volume = 0;
-            this.MediaPlayer1.BackColor = System.Drawing.Color.Black;
-            this.MediaPlayer1.Barcode_Reader_Enabled = false;
-            this.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
-            this.MediaPlayer1.ChromaKey = null;
-            this.MediaPlayer1.Custom_Audio_Decoder = null;
-            this.MediaPlayer1.Custom_Splitter = null;
-            this.MediaPlayer1.Custom_Video_Decoder = null;
-            this.MediaPlayer1.Debug_DeepCleanUp = false;
-            this.MediaPlayer1.Debug_Dir = null;
-            this.MediaPlayer1.Debug_Mode = false;
-            this.MediaPlayer1.Encryption_Key = "";
-            this.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.String;
-            this.MediaPlayer1.Face_Tracking = null;
-            this.MediaPlayer1.Info_UseLibMediaInfo = false;
-            this.MediaPlayer1.Location = new System.Drawing.Point(15, 52);
-            this.MediaPlayer1.Loop = false;
-            this.MediaPlayer1.Loop_DoNotSeekToBeginning = false;
-            this.MediaPlayer1.MaximalSpeedPlayback = false;
-            this.MediaPlayer1.Motion_Detection = null;
-            this.MediaPlayer1.Motion_DetectionEx = null;
-            this.MediaPlayer1.MultiScreen_Enabled = false;
-            this.MediaPlayer1.Name = "MediaPlayer1";
-            this.MediaPlayer1.ReversePlayback_CacheSize = 0;
-            this.MediaPlayer1.ReversePlayback_Enabled = false;
-            this.MediaPlayer1.Selection_Active = false;
-            this.MediaPlayer1.Selection_Start = 0;
-            this.MediaPlayer1.Selection_Stop = 0;
-            this.MediaPlayer1.Size = new System.Drawing.Size(414, 280);
-            this.MediaPlayer1.Source_Custom_CLSID = null;
-            this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
-            this.MediaPlayer1.Source_Stream = null;
-            this.MediaPlayer1.Source_Stream_AudioPresent = true;
-            this.MediaPlayer1.Source_Stream_Size = ((long)(0));
-            this.MediaPlayer1.Source_Stream_VideoPresent = true;
-            this.MediaPlayer1.Play_DelayEnabled = false;
-            this.MediaPlayer1.TabIndex = 9;
-            this.MediaPlayer1.Video_Effects_Enabled = false;
-            this.MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = false;
-            this.MediaPlayer1.Video_Stream_Index = 0;
-            this.MediaPlayer1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.MediaPlayer1_OnError);
-            this.MediaPlayer1.OnStop += new System.EventHandler<VisioForge.Types.MediaPlayerStopEventArgs>(this.MediaPlayer1_OnStop);
-            // 
             // pnScreen1
             // 
             this.pnScreen1.BackColor = System.Drawing.Color.Black;
@@ -274,18 +226,27 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // VideoView1
+            // 
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(15, 51);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(414, 281);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 527);
+            this.Controls.Add(this.VideoView1);
             this.Controls.Add(this.mmLog);
             this.Controls.Add(this.cbDebugMode);
             this.Controls.Add(this.pnScreen4);
             this.Controls.Add(this.pnScreen2);
             this.Controls.Add(this.pnScreen3);
             this.Controls.Add(this.pnScreen1);
-            this.Controls.Add(this.MediaPlayer1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btSelectFile);
             this.Controls.Add(this.edFilenameOrURL);
@@ -319,7 +280,6 @@
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Label lbTime;
         private System.Windows.Forms.TrackBar tbTimeline;
-        private VisioForge.Controls.UI.WinForms.MediaPlayer MediaPlayer1;
         private System.Windows.Forms.Panel pnScreen1;
         private System.Windows.Forms.Panel pnScreen3;
         private System.Windows.Forms.Panel pnScreen2;
@@ -328,6 +288,7 @@
         private System.Windows.Forms.TextBox mmLog;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Timer timer1;
+        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
     }
 }
 

@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -33,7 +33,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="gifOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFAnimatedGIFOutput gifOutput)
+        public void LoadSettings(AnimatedGIFOutput gifOutput)
         {
             edGIFFrameRate.Text = gifOutput.FrameRate.ToString("F2");
             edGIFWidth.Text = gifOutput.ForcedVideoWidth.ToString();
@@ -46,7 +46,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="gifOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFAnimatedGIFOutput gifOutput)
+        public void SaveSettings(ref AnimatedGIFOutput gifOutput)
         {
             gifOutput.FrameRate = Convert.ToDouble(edGIFFrameRate.Text);
             gifOutput.ForcedVideoWidth = Convert.ToInt32(edGIFWidth.Text);

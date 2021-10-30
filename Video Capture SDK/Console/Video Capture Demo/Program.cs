@@ -16,7 +16,9 @@ namespace Video_Capture_Demo
 
     using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     class Program
     {
@@ -25,10 +27,10 @@ namespace Video_Capture_Demo
             var videoCapture = new VideoCaptureCore();
             videoCapture.OnError += VideoCapture_OnError;
 
-            videoCapture.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             // get video capture devices
-            var videoCaptureDevices = videoCapture.Video_CaptureDevices();
+            var videoCaptureDevices = videoCapture.Video_CaptureDevices;
 
             Console.WriteLine(@"Video capture devices: ");
             for (int i = 0; i < videoCaptureDevices.Count; i++)
@@ -70,7 +72,7 @@ namespace Video_Capture_Demo
             }
 
             // get audio capture devices
-            var audioCaptureDevices = videoCapture.Audio_CaptureDevices();
+            var audioCaptureDevices = videoCapture.Audio_CaptureDevices;
 
             Console.WriteLine(@"Audio capture devices: ");
             Console.WriteLine(@"0: Use video capture device if possible.");
@@ -121,32 +123,33 @@ namespace Video_Capture_Demo
             int mode = Convert.ToInt32(Console.ReadLine());
 
             // set properties
-            videoCapture.Video_CaptureDevice = videoCaptureDevices[videoCaptureDeviceIndex].Name;
+            videoCapture.Video_CaptureDevice = new VideoCaptureSource(videoCaptureDevices[videoCaptureDeviceIndex].Name);
 
             if (string.IsNullOrEmpty(videoFormat.Name))
             {
-                videoCapture.Video_CaptureDevice_Format_UseBest = true;
+                videoCapture.Video_CaptureDevice.Format_UseBest = true;
             }
             else
             {
-                videoCapture.Video_CaptureDevice_Format_UseBest = false;
-                videoCapture.Video_CaptureDevice_Format = videoFormat.Name;
+                videoCapture.Video_CaptureDevice.Format_UseBest = false;
+                videoCapture.Video_CaptureDevice.Format = videoFormat.Name;
             }
 
-            videoCapture.Video_CaptureDevice_FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture); 
+            videoCapture.Video_CaptureDevice.FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture); 
 
             if (audioCaptureDeviceIndex == 0)
             {
-                videoCapture.Video_CaptureDevice_IsAudioSource = true;
+                videoCapture.Video_CaptureDevice.IsAudioSource = true;
             }
             else
             {
-                videoCapture.Video_CaptureDevice_IsAudioSource = false;
-                videoCapture.Audio_CaptureDevice = audioCaptureDevices[audioCaptureDeviceIndex - 1].Name;
+                videoCapture.Video_CaptureDevice.IsAudioSource = false;
+                videoCapture.Audio_CaptureDevice = new AudioCaptureSource(audioCaptureDevices[audioCaptureDeviceIndex - 1].Name); 
+                videoCapture.Audio_CaptureDevice.Format_UseBest = false;
+                videoCapture.Audio_CaptureDevice.Format = audioFormat;
             }
 
-            videoCapture.Audio_CaptureDevice_Format_UseBest = false;
-            videoCapture.Audio_CaptureDevice_Format = audioFormat;
+           
 
             switch (mode)
             {
@@ -156,7 +159,7 @@ namespace Video_Capture_Demo
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFAVIOutput();
+                        videoCapture.Output_Format = new AVIOutput();
                     }
 
                     break;
@@ -166,7 +169,7 @@ namespace Video_Capture_Demo
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
-                        videoCapture.Output_Format = new VFMP4HWOutput();
+                        videoCapture.Output_Format = new MP4HWOutput();
                     }
 
                     break;
@@ -176,7 +179,7 @@ namespace Video_Capture_Demo
                     return;
             }
 
-            videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
+            videoCapture.Mode = VideoCaptureMode.VideoCapture;
             videoCapture.Start();
 
             Console.WriteLine(@"Press ESC to stop");

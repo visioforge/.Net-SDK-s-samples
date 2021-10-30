@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Threading;
 using VisioForge.Controls.UI;
 using VisioForge.Tools;
-using VisioForge.Types;
+using VisioForge.Types.VideoCapture;
 using VisioForge.Types.VideoEffects;
 
 namespace Simple_Video_Capture
@@ -93,7 +93,7 @@ namespace Simple_Video_Capture
 
         #region Devices Tab
 
-        public List<VideoCaptureDeviceInfo> VideoInputDevices => videoCaptureAccessor.Video_CaptureDevicesInfo;
+        public List<VideoCaptureDeviceInfo> VideoInputDevices => videoCaptureAccessor.Video_CaptureDevices;
 
         public VideoCaptureDeviceInfo SelectedVideoInputDevice
         {
@@ -102,9 +102,8 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedVideoInputDevice, value))
                 {
-                    this.videoCaptureAccessor.Video_CaptureDevice = SelectedVideoInputDevice.Name;
+                    this.videoCaptureAccessor.Video_CaptureDevice = new VideoCaptureSource(SelectedVideoInputDevice.Name);
                     SelectedVideoFormat = SelectedVideoInputDevice?.VideoFormats.FirstOrDefault();
-                    UseAudioInputFromVideoSource = false;
                 }
             }
         }
@@ -127,7 +126,7 @@ namespace Simple_Video_Capture
             set => SetProperty(ref this.selectedFrameRate, value);
         }
 
-        public List<AudioCaptureDeviceInfo> AudioInputDevices => videoCaptureAccessor.Audio_CaptureDevicesInfo;
+        public List<AudioCaptureDeviceInfo> AudioInputDevices => videoCaptureAccessor.Audio_CaptureDevices;
 
         public AudioCaptureDeviceInfo SelectedAudioInputDevice
         {
@@ -136,7 +135,7 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedAudioInputDevice, value))
                 {
-                    this.videoCaptureAccessor.Audio_CaptureDevice = SelectedAudioInputDevice.Name;
+                    this.videoCaptureAccessor.Audio_CaptureDevice = new AudioCaptureSource(SelectedAudioInputDevice.Name);
 
                     SelectedAudioInputFormat =
                         SelectedAudioInputDevice.Formats.FirstOrDefault(_ => _ == "PCM, 44100 Hz, 16 Bits, 2 Channels") ??
@@ -156,7 +155,7 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedAudioInputFormat, value))
                 {
-                    this.videoCaptureAccessor.Audio_CaptureDevice_Format = this.selectedAudioInputFormat;
+                    this.videoCaptureAccessor.Audio_CaptureDevice.Format = this.selectedAudioInputFormat;
                 }
             }
         }
@@ -168,7 +167,7 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedAudioInputLine, value))
                 {
-                    this.videoCaptureAccessor.Audio_CaptureDevice_Line = this.selectedAudioInputLine;
+                    this.videoCaptureAccessor.Audio_CaptureDevice.Line = this.selectedAudioInputLine;
                 }
             }
         }
@@ -181,22 +180,9 @@ namespace Simple_Video_Capture
             set => SetProperty(ref this.selectedAudioOutputDevice, value);
         }
 
-        public bool UseAudioInputFromVideoSource
-        {
-            get => this.useAudioInputFromVideoSource;
-            set
-            {
-                if (SetProperty(ref this.useAudioInputFromVideoSource, value))
-                {
-                    this.videoCaptureAccessor.Video_CaptureDevice_IsAudioSource = this.useAudioInputFromVideoSource;
-                    RaisePropertyChanged(nameof(CanConfigureAudioInputDevice));
-                }
-            }
-        }
-
         public bool CanConfigureAudioInputDevice
         {
-            get => !UseAudioInputFromVideoSource && SelectedAudioInputDevice?.DialogDefault == true;
+            get => SelectedAudioInputDevice?.DialogDefault == true;
         }
 
         public bool UseBestVideoInputFormat
@@ -301,9 +287,9 @@ namespace Simple_Video_Capture
 
         #region Video Effects Tab
 
-        public ObservableCollection<IVFVideoEffect> Logos { get; } = new ObservableCollection<IVFVideoEffect>();
+        public ObservableCollection<IVideoEffect> Logos { get; } = new ObservableCollection<IVideoEffect>();
 
-        public IVFVideoEffect SelectedLogo
+        public IVideoEffect SelectedLogo
         {
             get => this.selectedLogo;
             set
@@ -649,20 +635,23 @@ namespace Simple_Video_Capture
                 SetFlipYEffectEnabledState();
             }
 
+            var videoSource = new VideoCaptureSource(SelectedVideoInputDevice.Name);
+            videoSource.Format = SelectedVideoFormat.Name;
+            videoSource.Format_UseBest = UseBestVideoInputFormat;
+            videoSource.FrameRate = SelectedFrameRate.GetValueOrDefault(0);
+
+            var audioSource = new AudioCaptureSource(SelectedAudioInputDevice.Name);
+            videoSource.Format = SelectedAudioInputFormat;
+            videoSource.Format_UseBest = UseBestAudioInputFormat;
+
             VideoCaptureStartParams startParams = new VideoCaptureStartParams
             {
                 DebugMode = this.DebugMode,
                 DebugDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge"),
                 RecordAudio = this.RecordAudio,
-                VideoCaptureDevice = SelectedVideoInputDevice.Name,
-                VideoCaptureDeviceIsAudioSource = UseAudioInputFromVideoSource,
-                VideoCaptureFormat = SelectedVideoFormat.Name,
-                VideoCaptureFormatUseBest = UseBestVideoInputFormat,
-                AudioCaptureDevice = SelectedAudioInputDevice.Name,
-                AudioCaptureDeviceFormat = SelectedAudioInputFormat,
-                AudioCaptureDeviceFormatUseBest = UseBestAudioInputFormat,
-                AudioOutputDevice = SelectedAudioOutputDevice,
-                VideoFrameRate = SelectedFrameRate.GetValueOrDefault(0),
+                VideoCaptureDevice = videoSource,
+                AudioCaptureDevice = audioSource,
+                AudioOutputDevice = SelectedAudioOutputDevice,                 
                 Preview = this.PreviewMode,
                 OutputFileName = this.OutputFileName,
                 OutputFormat = SelectedOutputFormat.Tag,
@@ -705,7 +694,7 @@ namespace Simple_Video_Capture
 
             if (screenshotSaveDialog.ShowDialog() == true)
             {
-                await  this.videoCaptureAccessor.SaveScreenshotAsync(screenshotSaveDialog.FileName);
+                await videoCaptureAccessor.SaveScreenshotAsync(screenshotSaveDialog.FileName);
             }
         }
 
@@ -774,7 +763,6 @@ namespace Simple_Video_Capture
         private string selectedAudioInputFormat;
         private string selectedAudioInputLine;
         private string selectedAudioOutputDevice;
-        private bool useAudioInputFromVideoSource;
         private bool useBestVideoInputFormat;
         private bool useBestAudioInputFormat;
         private bool recordAudio;
@@ -788,7 +776,7 @@ namespace Simple_Video_Capture
         private OutputFormatInfo selectedOutputFormat;
         private string outputFileName;
 
-        private IVFVideoEffect selectedLogo;
+        private IVideoEffect selectedLogo;
         private bool mergeImageLogos;
         private bool mergeTextLogos;
         private bool grayscaleEffectEnabled;

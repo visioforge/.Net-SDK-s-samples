@@ -10,10 +10,12 @@ namespace Separate_Capture_Demo
 
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Tools;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -29,15 +31,36 @@ namespace Separate_Capture_Demo
 
         private WMVSettingsDialog wmvSettingsDialog;
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        private VideoCaptureCore VideoCapture1;
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CreateEngine();
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
@@ -47,7 +70,7 @@ namespace Separate_Capture_Demo
 
             cbOutputFormat.SelectedIndex = 2;
 
-            foreach (var device in VideoCapture1.Video_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Video_CaptureDevices)
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -59,7 +82,7 @@ namespace Separate_Capture_Demo
 
             cbVideoInputDevice_SelectedIndexChanged(null, null);
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevicesInfo)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -75,7 +98,7 @@ namespace Separate_Capture_Demo
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string line in deviceItem.Lines)
@@ -86,8 +109,6 @@ namespace Separate_Capture_Demo
                     if (cbAudioInputLine.Items.Count > 0)
                     {
                         cbAudioInputLine.SelectedIndex = 0;
-                        cbAudioInputLine_SelectedIndexChanged(null, null);
-                        cbAudioInputFormat_SelectedIndexChanged(null, null);
                     }
                 }
             }
@@ -120,15 +141,15 @@ namespace Separate_Capture_Demo
 
             if (FilterHelpers.Filter_Supported_EVR())
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.EVR;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else if (FilterHelpers.Filter_Supported_VMR9())
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VMR9;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
             else
             {
-                VideoCapture1.Video_Renderer.Video_Renderer = VFVideoRenderer.VideoRenderer;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
         }
 
@@ -166,28 +187,29 @@ namespace Separate_Capture_Demo
             }
 
             // apply capture parameters
-            VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-            VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked;
-            VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
-            VideoCapture1.Audio_CaptureDevice_Format_UseBest = cbUseBestAudioInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
+            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
+            VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
+            VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
+            
+            VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
+            VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
+            VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked;
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice_FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
+                VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
             }
 
-            VideoCapture1.Mode = VFVideoCaptureMode.VideoCapture;
+            VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
+
+            VideoCapture1.Mode = VideoCaptureMode.VideoCapture;
             VideoCapture1.Output_Filename = edOutput.Text;
 
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
                     {
-                        var aviOutput = new VFAVIOutput();
+                        var aviOutput = new AVIOutput();
                         SetAVIOutput(ref aviOutput);
                         VideoCapture1.Output_Format = aviOutput;
 
@@ -195,7 +217,7 @@ namespace Separate_Capture_Demo
                     }
                 case 1:
                     {
-                        var wmvOutput = new VFWMVOutput();
+                        var wmvOutput = new WMVOutput();
                         SetWMVOutput(ref wmvOutput);
                         VideoCapture1.Output_Format = wmvOutput;
 
@@ -203,7 +225,7 @@ namespace Separate_Capture_Demo
                     }
                 case 2:
                     {
-                        var mp4Output = new VFMP4Output();
+                        var mp4Output = new MP4Output();
                         SetMP4Output(ref mp4Output);
                         VideoCapture1.Output_Format = mp4Output;
 
@@ -211,7 +233,7 @@ namespace Separate_Capture_Demo
                     }
                 case 3:
                     {
-                        var mp4Output = new VFMP4HWOutput();
+                        var mp4Output = new MP4HWOutput();
                         SetMP4HWOutput(ref mp4Output);
                         VideoCapture1.Output_Format = mp4Output;
 
@@ -219,7 +241,7 @@ namespace Separate_Capture_Demo
                     }
                 case 4:
                     {
-                        var tsOutput = new VFMPEGTSOutput();
+                        var tsOutput = new MPEGTSOutput();
                         SetMPEGTSOutput(ref tsOutput);
                         VideoCapture1.Output_Format = tsOutput;
 
@@ -227,7 +249,7 @@ namespace Separate_Capture_Demo
                     }
                 case 5:
                     {
-                        var movOutput = new VFMOVOutput();
+                        var movOutput = new MOVOutput();
                         SetMOVOutput(ref movOutput);
                         VideoCapture1.Output_Format = movOutput;
 
@@ -239,25 +261,25 @@ namespace Separate_Capture_Demo
             VideoCapture1.SeparateCapture_Enabled = true;
             if (rbSeparateCaptureStartManually.Checked)
             {
-                VideoCapture1.SeparateCapture_Mode = VFSeparateCaptureMode.Normal;
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.Normal;
                 VideoCapture1.SeparateCapture_AutostartCapture = false;
             }
             else if (rbSeparateCaptureSplitByDuration.Checked)
             {
-                VideoCapture1.SeparateCapture_Mode = VFSeparateCaptureMode.SplitByDuration;
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.SplitByDuration;
                 VideoCapture1.SeparateCapture_AutostartCapture = true;
                 VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.FromMilliseconds(Convert.ToInt32(edSeparateCaptureDuration.Text));
             }
             else if (rbSeparateCaptureSplitBySize.Checked)
             {
-                VideoCapture1.SeparateCapture_Mode = VFSeparateCaptureMode.SplitByFileSize;
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.SplitByFileSize;
                 VideoCapture1.SeparateCapture_AutostartCapture = true;
                 VideoCapture1.SeparateCapture_FileSizeThreshold = Convert.ToInt32(edSeparateCaptureFileSize.Text) * 1024 * 1024;
             }
 
             //VideoCapture1.Video_Effects_Enabled = true;
             //VideoCapture1.Video_Effects_Clear();
-            //var tsEffect = new VFVideoEffectTextLogo(true) { Mode = TextLogoMode.Timestamp };
+            //var tsEffect = new VideoEffectTextLogo(true) { Mode = TextLogoMode.Timestamp };
             //VideoCapture1.Video_Effects_Add(tsEffect);
 
             await VideoCapture1.StartAsync();
@@ -304,7 +326,7 @@ namespace Separate_Capture_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -333,10 +355,8 @@ namespace Separate_Capture_Demo
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-
                 cbVideoInputFormat.Items.Clear();
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -353,36 +373,13 @@ namespace Separate_Capture_Demo
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
 
-                cbUseAudioInputFromVideoCaptureDevice.Enabled = deviceItem.AudioOutput;
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
-        }
-
-        private void cbUseAudioInputFromVideoCaptureDevice_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbVideoInputDevice.Text))
-            {
-                VideoCapture1.Video_CaptureDevice_IsAudioSource = cbUseAudioInputFromVideoCaptureDevice.Checked;
-                cbAudioInputDevice_SelectedIndexChanged(null, null);
-
-                cbAudioInputDevice.Enabled = !cbUseAudioInputFromVideoCaptureDevice.Checked;
-                btAudioInputDeviceSettings.Enabled = !cbUseAudioInputFromVideoCaptureDevice.Checked;
-            }
-        }
+        }        
 
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
-        }
-
-        private void cbAudioInputLine_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
-        }
-
-        private void cbAudioInputFormat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
         }
 
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
@@ -394,10 +391,9 @@ namespace Separate_Capture_Demo
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -425,8 +421,6 @@ namespace Separate_Capture_Demo
                     }
                 }
 
-                cbAudioInputFormat_SelectedIndexChanged(null, null);
-
                 cbAudioInputLine.Items.Clear();
 
                 foreach (string line in deviceItem.Lines)
@@ -438,8 +432,6 @@ namespace Separate_Capture_Demo
                 {
                     cbAudioInputLine.SelectedIndex = 0;
                 }
-
-                cbAudioInputLine_SelectedIndexChanged(null, null);
 
                 btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
@@ -469,7 +461,7 @@ namespace Separate_Capture_Demo
             Log("(NOT ERROR) " + e.Message);
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
             {
@@ -479,7 +471,7 @@ namespace Separate_Capture_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -490,7 +482,7 @@ namespace Separate_Capture_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
         
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -500,7 +492,7 @@ namespace Separate_Capture_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -510,7 +502,7 @@ namespace Separate_Capture_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -520,7 +512,7 @@ namespace Separate_Capture_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
         
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -533,7 +525,7 @@ namespace Separate_Capture_Demo
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                var mp3Output = new VFMP3Output();
+                var mp3Output = new MP3Output();
                 aviOutput.MP3 = mp3Output;
             }
         }
@@ -691,6 +683,11 @@ namespace Separate_Capture_Demo
         private async void btSeparateCaptureChangeFilename_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_ChangeFilenameOnTheFlyAsync(edNewFilename.Text);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

@@ -47,8 +47,7 @@ namespace CSCreateProcessAsUserFromService
 
                     if (WTS_CONNECTSTATE_CLASS.WTSActive == tSessionInfo.State)
                     {
-                        IntPtr hToken = IntPtr.Zero;
-                        if (WTSQueryUserToken(tSessionInfo.SessionID, out hToken))
+                        if (WTSQueryUserToken(tSessionInfo.SessionID, out IntPtr hToken))
                         {
                             const int STARTF_USESHOWWINDOW = 0x00000001;
                             const short SW_HIDE = 0;

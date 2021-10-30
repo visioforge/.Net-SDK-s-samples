@@ -17,6 +17,58 @@
             {
                 components.Dispose();
             }
+
+            mp4SettingsDialog?.Dispose();
+            mp4SettingsDialog = null;
+
+            mp4HWSettingsDialog?.Dispose();
+            mp4HWSettingsDialog = null;
+
+            mp3SettingsDialog?.Dispose();
+            mp3SettingsDialog = null;
+
+            m4aSettingsDialog?.Dispose();
+            m4aSettingsDialog = null;
+
+            gifSettingsDialog?.Dispose();
+            gifSettingsDialog = null;
+
+            flacSettingsDialog?.Dispose();
+            flacSettingsDialog = null;
+
+            ffmpegSettingsDialog?.Dispose();
+            ffmpegSettingsDialog = null;
+
+            ffmpegEXESettingsDialog?.Dispose();
+            ffmpegEXESettingsDialog = null;
+
+            dvSettingsDialog?.Dispose();
+            dvSettingsDialog = null;
+
+            aviSettingsDialog?.Dispose();
+            aviSettingsDialog = null;
+
+            customFormatSettingsDialog?.Dispose();
+            customFormatSettingsDialog = null;
+
+            wmvSettingsDialog?.Dispose();
+            wmvSettingsDialog = null;
+
+            webmSettingsDialog?.Dispose();
+            webmSettingsDialog = null;
+
+            speexSettingsDialog?.Dispose();
+            speexSettingsDialog = null;
+
+            pcmSettingsDialog?.Dispose();
+            pcmSettingsDialog = null;
+
+            oggVorbisSettingsDialog?.Dispose();
+            oggVorbisSettingsDialog = null;
+
+            VideoEdit1?.Dispose();
+            VideoEdit1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -47,7 +99,6 @@
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.VideoEdit1 = new VisioForge.Controls.UI.WinForms.VideoEdit();
             this.OpenDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SaveDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.cbFrameRate = new System.Windows.Forms.ComboBox();
@@ -56,6 +107,7 @@
             this.edWidth = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbResize = new System.Windows.Forms.CheckBox();
+            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.SuspendLayout();
             // 
             // lbInfo
@@ -250,67 +302,6 @@
             this.label10.TabIndex = 96;
             this.label10.Text = "Input files";
             // 
-            // VideoEdit1
-            // 
-            this.VideoEdit1.Audio_Channel_Mapper = null;
-            this.VideoEdit1.Audio_Effects_Enabled = false;
-            this.VideoEdit1.Audio_Enhancer_Enabled = false;
-            this.VideoEdit1.Audio_Preview_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Enabled = false;
-            this.VideoEdit1.Audio_VUMeter_Pro_Volume = 0;
-            this.VideoEdit1.BackColor = System.Drawing.Color.Black;
-            this.VideoEdit1.Barcode_Reader_Enabled = false;
-            this.VideoEdit1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
-            this.VideoEdit1.ChromaKey = null;
-            this.VideoEdit1.CustomRedist_Auto = true;
-            this.VideoEdit1.CustomRedist_DisableDialog = false;
-            this.VideoEdit1.CustomRedist_Path = null;
-            this.VideoEdit1.Debug_Dir = "";
-            this.VideoEdit1.Debug_DisableMessageDialogs = false;
-            this.VideoEdit1.Debug_Mode = false;
-            this.VideoEdit1.Debug_Telemetry = false;
-            this.VideoEdit1.Decklink_Input_Capture_Timecode_Source = VisioForge.Types.Decklink.DecklinkCaptureTimecodeSource.Auto;
-            this.VideoEdit1.Decklink_Output = null;
-            this.VideoEdit1.Dynamic_Reconnection = false;
-            this.VideoEdit1.Location = new System.Drawing.Point(422, 12);
-            this.VideoEdit1.Loop = false;
-            this.VideoEdit1.Mode = VisioForge.Types.VFVideoEditMode.Convert;
-            this.VideoEdit1.Motion_Detection = null;
-            this.VideoEdit1.Motion_DetectionEx = null;
-            this.VideoEdit1.Name = "VideoEdit1";
-            this.VideoEdit1.Network_Streaming_Audio_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Enabled = false;
-            this.VideoEdit1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV;
-            this.VideoEdit1.Network_Streaming_Network_Port = 0;
-            this.VideoEdit1.Network_Streaming_Output = null;
-            this.VideoEdit1.Network_Streaming_URL = null;
-            this.VideoEdit1.Network_Streaming_WMV_Maximum_Clients = 0;
-            this.VideoEdit1.Output_Filename = "c:\\output.avi";
-            this.VideoEdit1.Output_Format = null;
-            this.VideoEdit1.Size = new System.Drawing.Size(433, 319);
-            this.VideoEdit1.Start_DelayEnabled = false;
-            this.VideoEdit1.TabIndex = 105;
-            this.VideoEdit1.Tags = null;
-            this.VideoEdit1.UseLibMediaInfo = false;
-            this.VideoEdit1.Video_Crop = null;
-            this.VideoEdit1.Video_Custom_Resizer_CLSID = new System.Guid("00000000-0000-0000-0000-000000000000");
-            this.VideoEdit1.Video_Effects_AllowMultipleStreams = false;
-            this.VideoEdit1.Video_Effects_Enabled = false;
-            this.VideoEdit1.Video_Effects_GPU_Enabled = false;
-            this.VideoEdit1.Video_FrameRate = 25D;
-            this.VideoEdit1.Video_Preview_Enabled = true;
-            this.VideoEdit1.Video_Resize = false;
-            this.VideoEdit1.Video_Resize_Height = 480;
-            this.VideoEdit1.Video_Resize_Width = 640;
-            this.VideoEdit1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
-            this.VideoEdit1.Video_Subtitles = null;
-            this.VideoEdit1.Virtual_Camera_Output_Enabled = false;
-            this.VideoEdit1.Virtual_Camera_Output_LicenseKey = null;
-            this.VideoEdit1.OnError += new System.EventHandler<VisioForge.Types.ErrorsEventArgs>(this.VideoEdit1_OnError);
-            this.VideoEdit1.OnProgress += new System.EventHandler<VisioForge.Types.ProgressEventArgs>(this.VideoEdit1_OnProgress);
-            this.VideoEdit1.OnStop += new System.EventHandler<VisioForge.Types.VideoEditStopEventArgs>(this.VideoEdit1_OnStop);
-            // 
             // OpenDialog1
             // 
             this.OpenDialog1.Filter = resources.GetString("OpenDialog1.Filter");
@@ -384,18 +375,27 @@
             this.cbResize.Text = "Resize";
             this.cbResize.UseVisualStyleBackColor = true;
             // 
+            // VideoView1
+            // 
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(422, 12);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(432, 306);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 170;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 379);
+            this.Controls.Add(this.VideoView1);
             this.Controls.Add(this.cbFrameRate);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.edHeight);
             this.Controls.Add(this.edWidth);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbResize);
-            this.Controls.Add(this.VideoEdit1);
             this.Controls.Add(this.lbInfo);
             this.Controls.Add(this.btConfigure);
             this.Controls.Add(this.btSelectOutput);
@@ -417,6 +417,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "VisioForge Video Edit SDK .Net - Video Join Demo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -443,7 +444,6 @@
         private System.Windows.Forms.ListBox lbFiles;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Label label10;
-        private VisioForge.Controls.UI.WinForms.VideoEdit VideoEdit1;
         private System.Windows.Forms.OpenFileDialog OpenDialog1;
         private System.Windows.Forms.SaveFileDialog SaveDialog1;
         private System.Windows.Forms.ComboBox cbFrameRate;
@@ -452,6 +452,7 @@
         private System.Windows.Forms.TextBox edWidth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbResize;
+        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
     }
 }
 

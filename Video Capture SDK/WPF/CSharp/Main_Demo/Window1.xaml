@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI"        
         xmlns:VolumeMeterPro="clr-namespace:VisioForge.Controls.UI.WPF.VolumeMeterPro;assembly=VisioForge.Controls.UI" x:Class="Main_Demo.Window1"
-    Title="Video Capture SDK .Net - Main Demo" Height="845" Width="975" Loaded="Form1_Load" Icon="visioforge_main_icon.ico">
+    Title="Video Capture SDK .Net - Main Demo" Height="845" Width="975" Loaded="Form1_Load" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
 
         <TabControl Height="638" HorizontalAlignment="Left" Margin="12,12,0,0" x:Name="tabControl1" VerticalAlignment="Top" Width="382">
@@ -950,7 +950,7 @@
                                     <TabItem Header="MPEG Encoder" x:Name="tabItem55">
                                         <Grid>
                                             <Label Content="MPEG Encoder" Height="28" HorizontalAlignment="Left" Margin="32,26,0,0" x:Name="label204" VerticalAlignment="Top" Width="111" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,51,0,0" x:Name="cbMPEGEncoder" VerticalAlignment="Top" Width="303" SelectionChanged="cbMPEGEncoder_SelectionChanged" />
+                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,51,0,0" x:Name="cbMPEGEncoder" VerticalAlignment="Top" Width="303" />
                                             <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="341,51,0,0" x:Name="btMPEGEncoderShowDialog" VerticalAlignment="Top" Width="65" Click="btMPEGEncoderShowDialog_Click" />
                                         </Grid>
                                     </TabItem>
@@ -1071,11 +1071,10 @@
                                 <Label Content="Input device" Height="28" HorizontalAlignment="Left" Margin="27,15,0,0" x:Name="label185" VerticalAlignment="Top" Width="120" />
                                 <ComboBox Height="23" Margin="27,42,0,0" x:Name="cbAudioInputDevice" VerticalAlignment="Top" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" Width="375" />
                                 <Button Content="Settings" Height="23" HorizontalAlignment="Left" Margin="408,42,0,0" x:Name="btAudioInputDeviceSettings" VerticalAlignment="Top" Width="75" Click="btAudioInputDeviceSettings_Click" />
-                                <CheckBox Content="Use audio input from video source" Height="16" HorizontalAlignment="Left" Margin="202,20,0,0" x:Name="cbUseAudioInputFromVideoCaptureDevice" VerticalAlignment="Top" Click="cbUseAudioInputFromVideoCaptureDevice_CheckedChanged" />
                                 <Label Content="Audio input line" Height="24" HorizontalAlignment="Left" Margin="27,75,0,0" x:Name="label186" VerticalAlignment="Top" Width="97" />
                                 <Label Content="Input format" Height="24" Margin="277,75,0,0" x:Name="label187" VerticalAlignment="Top" HorizontalAlignment="Left" Width="97" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="27,98,0,0" x:Name="cbAudioInputLine" VerticalAlignment="Top" Width="244" SelectionChanged="cbAudioInputLine_SelectedIndexChanged" />
-                                <ComboBox Height="23" Margin="277,98,0,0" x:Name="cbAudioInputFormat" StaysOpenOnEdit="True" VerticalAlignment="Top" SelectionChanged="cbAudioInputFormat_SelectedIndexChanged" HorizontalAlignment="Left" Width="206" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="27,98,0,0" x:Name="cbAudioInputLine" VerticalAlignment="Top" Width="244" />
+                                <ComboBox Height="23" Margin="277,98,0,0" x:Name="cbAudioInputFormat" StaysOpenOnEdit="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="206" />
                                 <CheckBox Content="Use best" Height="16" HorizontalAlignment="Left" Margin="418,80,0,0" x:Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="65" Click="cbUseBestAudioInputFormat_CheckedChanged" />
                             </Grid>
                         </TabItem>
@@ -1647,23 +1646,11 @@
 			Foreground="#FF0016CF" MouseDown="linkLabel1_LinkClicked" />
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Right" Margin="0,0,426,48" TextWrapping="Wrap" Text="Recording time: 00:00:00" Height="16" VerticalAlignment="Bottom"/>
         <Button Content="Save snapshot" Height="23" HorizontalAlignment="Right" IsDefault="False" IsEnabled="True" Margin="0,0,183,45" x:Name="btSaveScreenshot" VerticalAlignment="Bottom" Width="126" Click="btSaveScreenshot_Click" />
-        <my:VideoCapture
+        <my:VideoView
                              Margin="411,410,20,73" 
                              Background="Black" 
-                             x:Name="VideoCapture1" 
-				             OnTVTunerTuneChannels="VideoCapture1_OnTVTunerTuneChannels" 
-                             OnError="VideoCapture1_OnError" 
-                             OnMotion="VideoCapture1_OnMotion" 
-                             OnMotionDetectionEx="VideoCapture1_OnObjectDetection" 
-                             OnBarcodeDetected="VideoCapture1_OnBarcodeDetected"
-                             OnFaceDetected="VideoCapture1_OnFaceDetected" 
-                             MouseDown="VideoCapture1_MouseDown" 
-                             OnAudioVUMeterProMaximumCalculated="VideoCapture1_OnAudioVUMeterProMaximumCalculated" 
-                             OnAudioVUMeterProFFTCalculated="VideoCapture1_OnAudioVUMeterProFFTCalculated" 
-                             OnAudioVUMeterProVolume="VideoCapture1_OnAudioVUMeterProVolume"
-                             OnLicenseRequired="VideoCapture1_OnLicenseRequired"
-                             OnFFMPEGInfo="VideoCapture1_OnFFMPEGInfo"
-                             OnNetworkSourceDisconnect="VideoCapture1_OnNetworkSourceDisconnect"  />
+                             x:Name="VideoView1" 				            
+                             MouseDown="VideoView1_MouseDown" />
 
     </Grid>
 </Window>

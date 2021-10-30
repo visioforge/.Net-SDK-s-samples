@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using VisioForge.Controls.UI.Dialogs;
 using VisioForge.Controls.UI.Dialogs.OutputFormats;
 using VisioForge.Controls.UI.Dialogs.VideoEffects;
 using VisioForge.Controls.UI.WPF;
+using VisioForge.Controls.VideoCapture;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
+using VisioForge.Types.VideoCapture;
 using VisioForge.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {
-    public class WpfVideoCaptureAccessor
-        : IVideoCaptureAccessor
+    public class WpfVideoCaptureAccessor : IVideoCaptureAccessor
     {
         public WpfVideoCaptureAccessor()
         {
-            this.videoCapture = new VideoCapture();
+            videoView = new VideoView();
+            this.videoCapture = new VideoCaptureCore(videoView);
+            
             this.videoCapture.OnError += (_s, _e) => this.OnError?.Invoke(this, _e.Message);
             this.videoCapture.OnLicenseRequired += (_s, _e) => this.OnError?.Invoke(this, "(NOT ERROR) " + _e.Message);
 
@@ -43,43 +47,25 @@ namespace Simple_Video_Capture
             }
         }
 
-        public object UIElement => this.videoCapture;
+        public object UIElement => this.videoView;
 
         public Version SDK_Version => this.videoCapture.SDK_Version;
 
-        public List<VideoCaptureDeviceInfo> Video_CaptureDevicesInfo => this.videoCapture.Video_CaptureDevicesInfo;
+        public List<VideoCaptureDeviceInfo> Video_CaptureDevices => this.videoCapture.Video_CaptureDevices;
 
-        public List<AudioCaptureDeviceInfo> Audio_CaptureDevicesInfo => this.videoCapture.Audio_CaptureDevicesInfo;
+        public List<AudioCaptureDeviceInfo> Audio_CaptureDevices => this.videoCapture.Audio_CaptureDevices;
 
         public List<string> Audio_OutputDevices => this.videoCapture.Audio_OutputDevices;
 
         public List<OutputFormatInfo> OutputFormats => new List<OutputFormatInfo>(this.outputFormats);
 
-        public string Audio_CaptureDevice_Format
-        {
-            get => this.videoCapture.Audio_CaptureDevice_Format;
-            set => this.videoCapture.Audio_CaptureDevice_Format = value;
-        }
-
-        public string Audio_CaptureDevice_Line
-        {
-            get => this.videoCapture.Audio_CaptureDevice_Line;
-            set => this.videoCapture.Audio_CaptureDevice_Line = value;
-        }
-
-        public bool Video_CaptureDevice_IsAudioSource
-        {
-            get => this.videoCapture.Video_CaptureDevice_IsAudioSource;
-            set => this.videoCapture.Video_CaptureDevice_IsAudioSource = value;
-        }
-
-        public string Video_CaptureDevice
+        public VideoCaptureSource Video_CaptureDevice
         {
             get => this.videoCapture.Video_CaptureDevice;
             set => this.videoCapture.Video_CaptureDevice = value;
         }
 
-        public string Audio_CaptureDevice
+        public AudioCaptureSource Audio_CaptureDevice
         {
             get => this.videoCapture.Audio_CaptureDevice;
             set => this.videoCapture.Audio_CaptureDevice = value;
@@ -186,12 +172,12 @@ namespace Simple_Video_Capture
             this.videoCapture.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, deviceName);
         }
 
-        public IVFVideoEffect AddImageLogoEffect()
+        public IVideoEffect AddImageLogoEffect()
         {
             using (var dlg = new ImageLogoSettingsDialog())
             {
                 var name = dlg.GenerateNewEffectName(this.videoCapture);
-                var effect = new VFVideoEffectImageLogo(true, name);
+                var effect = new VideoEffectImageLogo(true, name);
 
                 this.videoCapture.Video_Effects_Add(effect);
 
@@ -201,13 +187,13 @@ namespace Simple_Video_Capture
             }
 
         }
-        public IVFVideoEffect AddTextLogoEffect()
+        public IVideoEffect AddTextLogoEffect()
         {
             using (var dlg = new TextLogoSettingsDialog())
             {
 
                 var name = dlg.GenerateNewEffectName(this.videoCapture);
-                var effect = new VFVideoEffectTextLogo(true, name);
+                var effect = new VideoEffectTextLogo(true, name);
 
                 this.videoCapture.Video_Effects_Add(effect);
                 dlg.Fill(effect);
@@ -216,9 +202,9 @@ namespace Simple_Video_Capture
             }
         }
 
-        public void EditEffect(IVFVideoEffect effect)
+        public void EditEffect(IVideoEffect effect)
         {
-            if (effect.GetEffectType() == VFVideoEffectType.TextLogo)
+            if (effect.GetEffectType() == VideoEffectType.TextLogo)
             {
                 using (var dlg = new TextLogoSettingsDialog())
                 {
@@ -226,7 +212,7 @@ namespace Simple_Video_Capture
                     dlg.ShowDialog(TryGetOwnerWindow());
                 }
             }
-            else if (effect.GetEffectType() == VFVideoEffectType.ImageLogo)
+            else if (effect.GetEffectType() == VideoEffectType.ImageLogo)
             {
                 using (var dlg = new ImageLogoSettingsDialog())
                 {
@@ -236,7 +222,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        public void RemoveEffect(IVFVideoEffect effect)
+        public void RemoveEffect(IVideoEffect effect)
         {
             this.videoCapture.Video_Effects_Remove(effect.Name);
         }
@@ -253,19 +239,19 @@ namespace Simple_Video_Capture
                 switch (name)
                 {
                     case "Grayscale":
-                        this.videoCapture.Video_Effects_Add(new VFVideoEffectGrayscale(state));
+                        this.videoCapture.Video_Effects_Add(new VideoEffectGrayscale(state));
                         break;
 
                     case "Invert":
-                        this.videoCapture.Video_Effects_Add(new VFVideoEffectInvert(state));
+                        this.videoCapture.Video_Effects_Add(new VideoEffectInvert(state));
                         break;
 
                     case "FlipDown":
-                        this.videoCapture.Video_Effects_Add(new VFVideoEffectFlipHorizontal(state));
+                        this.videoCapture.Video_Effects_Add(new VideoEffectFlipHorizontal(state));
                         break;
 
                     case "FlipRight":
-                        this.videoCapture.Video_Effects_Add(new VFVideoEffectFlipVertical(state));
+                        this.videoCapture.Video_Effects_Add(new VideoEffectFlipVertical(state));
                         break;
 
                     default:
@@ -280,10 +266,10 @@ namespace Simple_Video_Capture
             {
                 case "Contrast":
                     {
-                        var effect = this.videoCapture.Video_Effects_Get(name) as IVFVideoEffectContrast;
+                        var effect = this.videoCapture.Video_Effects_Get(name) as IVideoEffectContrast;
                         if (effect == null)
                         {
-                            this.videoCapture.Video_Effects_Add(new VFVideoEffectContrast(true, value));
+                            this.videoCapture.Video_Effects_Add(new VideoEffectContrast(true, value));
                         }
                         else
                         {
@@ -294,10 +280,10 @@ namespace Simple_Video_Capture
 
                 case "Darkness":
                     {
-                        var effect = this.videoCapture.Video_Effects_Get(name) as IVFVideoEffectDarkness;
+                        var effect = this.videoCapture.Video_Effects_Get(name) as IVideoEffectDarkness;
                         if (effect == null)
                         {
-                            this.videoCapture.Video_Effects_Add(new VFVideoEffectDarkness(true, value));
+                            this.videoCapture.Video_Effects_Add(new VideoEffectDarkness(true, value));
                         }
                         else
                         {
@@ -308,10 +294,10 @@ namespace Simple_Video_Capture
 
                 case "Lightness":
                     {
-                        var effect = this.videoCapture.Video_Effects_Get(name) as IVFVideoEffectLightness;
+                        var effect = this.videoCapture.Video_Effects_Get(name) as IVideoEffectLightness;
                         if (effect == null)
                         {
-                            this.videoCapture.Video_Effects_Add(new VFVideoEffectLightness(true, value));
+                            this.videoCapture.Video_Effects_Add(new VideoEffectLightness(true, value));
                         }
                         else
                         {
@@ -322,10 +308,10 @@ namespace Simple_Video_Capture
 
                 case "Saturation":
                     {
-                        var effect = this.videoCapture.Video_Effects_Get(name) as IVFVideoEffectSaturation;
+                        var effect = this.videoCapture.Video_Effects_Get(name) as IVideoEffectSaturation;
                         if (effect == null)
                         {
-                            this.videoCapture.Video_Effects_Add(new VFVideoEffectSaturation(value));
+                            this.videoCapture.Video_Effects_Add(new VideoEffectSaturation(value));
                         }
                         else
                         {
@@ -358,36 +344,27 @@ namespace Simple_Video_Capture
                 videoCapture.Audio_PlayAudio = false;
             }
 
-            videoCapture.Video_Renderer.Video_Renderer = VFVideoRendererWPF.WPF;
+            videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
 
             videoCapture.Video_CaptureDevice = startParams.VideoCaptureDevice;
-            videoCapture.Video_CaptureDevice_IsAudioSource = startParams.VideoCaptureDeviceIsAudioSource;
-            videoCapture.Video_CaptureFormat = startParams.VideoCaptureFormat;
-            videoCapture.Video_CaptureFormat_UseBest = startParams.VideoCaptureFormatUseBest;
             videoCapture.Audio_CaptureDevice = startParams.AudioCaptureDevice;
-            videoCapture.Audio_CaptureDevice_Format = startParams.AudioCaptureDeviceFormat;
-            videoCapture.Audio_CaptureDevice_Format_UseBest = startParams.AudioCaptureDeviceFormatUseBest;
+           
             videoCapture.Audio_OutputDevice = startParams.AudioOutputDevice;
 
-            if (startParams.VideoFrameRate > 0)
+            if (startParams.Preview)
             {
-                videoCapture.Video_FrameRate = startParams.VideoFrameRate;
-            }
-
-            if (startParams.Preview == true)
-            {
-                videoCapture.Mode = VFVideoCaptureMode.VideoPreview;
+                videoCapture.Mode = VideoCaptureMode.VideoPreview;
             }
             else
             {
-                videoCapture.Mode = VFVideoCaptureMode.VideoCapture;
+                videoCapture.Mode = VideoCaptureMode.VideoCapture;
                 videoCapture.Output_Filename = startParams.OutputFileName;
 
                 switch (startParams.OutputFormat)
                 {
                     case OutputFormatInfoTag.AVI:
                         {
-                            var aviOutput = new VFAVIOutput();
+                            var aviOutput = new AVIOutput();
                             SetAVIOutput(ref aviOutput);
                             videoCapture.Output_Format = aviOutput;
                             break;
@@ -395,7 +372,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.WMV:
                         {
-                            var wmvOutput = new VFWMVOutput();
+                            var wmvOutput = new WMVOutput();
                             SetWMVOutput(ref wmvOutput);
                             videoCapture.Output_Format = wmvOutput;
                             break;
@@ -403,7 +380,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.MP4:
                         {
-                            var mp4Output = new VFMP4Output();
+                            var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
                             videoCapture.Output_Format = mp4Output;
                             break;
@@ -411,7 +388,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.MP4_HW:
                         {
-                            var mp4Output = new VFMP4HWOutput();
+                            var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
                             videoCapture.Output_Format = mp4Output;
                             break;
@@ -419,7 +396,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.AGIF:
                         {
-                            var gifOutput = new VFAnimatedGIFOutput();
+                            var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
                             videoCapture.Output_Format = gifOutput;
                             break;
@@ -427,7 +404,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.MPEGTS:
                         {
-                            var tsOutput = new VFMPEGTSOutput();
+                            var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
                             videoCapture.Output_Format = tsOutput;
                             break;
@@ -435,7 +412,7 @@ namespace Simple_Video_Capture
 
                     case OutputFormatInfoTag.MOV:
                         {
-                            var movOutput = new VFMOVOutput();
+                            var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
                             videoCapture.Output_Format = movOutput;
                             break;
@@ -477,19 +454,19 @@ namespace Simple_Video_Capture
             switch (ext)
             {
                 case ".bmp":
-                    task = videoCapture.Frame_SaveAsync(fileName, VFImageFormat.BMP, 0);
+                    task = videoCapture.Frame_SaveAsync(fileName, ImageFormat.Bmp, 0);
                     break;
                 case ".jpg":
-                    task = videoCapture.Frame_SaveAsync(fileName, VFImageFormat.JPEG, 85);
+                    task = videoCapture.Frame_SaveAsync(fileName, ImageFormat.Jpeg, 85);
                     break;
                 case ".gif":
-                    task = videoCapture.Frame_SaveAsync(fileName, VFImageFormat.GIF, 0);
+                    task = videoCapture.Frame_SaveAsync(fileName, ImageFormat.Gif, 0);
                     break;
                 case ".png":
-                    task = videoCapture.Frame_SaveAsync(fileName, VFImageFormat.PNG, 0);
+                    task = videoCapture.Frame_SaveAsync(fileName, ImageFormat.Png, 0);
                     break;
                 case ".tiff":
-                    task = videoCapture.Frame_SaveAsync(fileName, VFImageFormat.TIFF, 0);
+                    task = videoCapture.Frame_SaveAsync(fileName, ImageFormat.Tiff, 0);
                     break;
             }
 
@@ -511,7 +488,7 @@ namespace Simple_Video_Capture
             return null;
         }
 
-        private void SetAVIOutput(ref VFAVIOutput aviOutput)
+        private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
             {
@@ -522,11 +499,11 @@ namespace Simple_Video_Capture
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
-                aviOutput.MP3 = new VFMP3Output();
+                aviOutput.MP3 = new MP3Output();
             }
         }
 
-        private void SetWMVOutput(ref VFWMVOutput wmvOutput)
+        private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -537,7 +514,7 @@ namespace Simple_Video_Capture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
-        private void SetMP4Output(ref VFMP4Output mp4Output)
+        private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (mp4SettingsDialog == null)
             {
@@ -547,7 +524,7 @@ namespace Simple_Video_Capture
             mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetMP4HWOutput(ref VFMP4HWOutput mp4Output)
+        private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
             {
@@ -557,7 +534,7 @@ namespace Simple_Video_Capture
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
-        private void SetGIFOutput(ref VFAnimatedGIFOutput gifOutput)
+        private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
             {
@@ -567,7 +544,7 @@ namespace Simple_Video_Capture
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
-        private void SetMPEGTSOutput(ref VFMPEGTSOutput mpegTSOutput)
+        private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
             {
@@ -577,7 +554,7 @@ namespace Simple_Video_Capture
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
-        private void SetMOVOutput(ref VFMOVOutput mkvOutput)
+        private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
             {
@@ -589,7 +566,10 @@ namespace Simple_Video_Capture
 
         #endregion
 
-        private readonly VideoCapture videoCapture;
+        private readonly VideoCaptureCore videoCapture;
+
+        private readonly VideoView videoView;
+
         private readonly List<OutputFormatInfo> outputFormats;
 
         private WeakReference<System.Windows.Window> ownerWindowWeak;

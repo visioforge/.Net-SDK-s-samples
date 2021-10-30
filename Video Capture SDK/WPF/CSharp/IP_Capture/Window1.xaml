@@ -1,7 +1,7 @@
 ﻿<Window x:Class="IP_Capture.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="IP Capture Demo - Video Capture SDK .Net" Height="458.476" Width="1041.571" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI" Icon="visioforge_main_icon.ico">
+    Title="IP Capture Demo - Video Capture SDK .Net" Height="458.476" Width="1041.571" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
         <TabControl Margin="7,7,0,0" Name="tcMain" Height="379" VerticalAlignment="Top" HorizontalAlignment="Left" Width="540" Grid.ColumnSpan="2">
             <TabItem Header="Input" IsSelected="True">
@@ -41,7 +41,7 @@
                                 <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="416,200,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="rtsp://192.168.1.101:554/stream1" IsEditable="True"/>
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.64/onvif/device_service" IsEditable="True"/>
                                 <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="20,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="137,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
                             </Grid>
@@ -140,9 +140,7 @@
         <Label Content="Video tutorial" Height="26" Margin="0,0,9,0" Name="label11" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Foreground="#FF0035BC"
                FontWeight="Bold" MouseUp="llVideoTutorials_LinkClicked" Grid.Column="1" />
 
-        <my:VideoCapture Margin="560,31,10,41" Background="Black" x:Name="VideoCapture1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                             OnError="VideoCapture1_OnError"
-                             OnLicenseRequired="VideoCapture1_OnLicenseRequired" OnNetworkSourceDisconnect="VideoCapture1_OnNetworkSourceDisconnect" />
+        <my:VideoView Margin="560,31,10,41" Background="Black" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
         <Label Content="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,0,122,0" VerticalAlignment="Top" Grid.Column="1"/>
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="279,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>

@@ -10,6 +10,7 @@ namespace Main_Demo
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
     using System.Threading.Tasks;
@@ -19,18 +20,21 @@ namespace Main_Demo
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-
+    using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.UI;
     using VisioForge.Controls.UI.Dialogs;
     using VisioForge.Controls.UI.Dialogs.VideoEffects;
+    using VisioForge.Controls.UI.WPF;
     using VisioForge.Tools;
     using VisioForge.Tools.MediaInfo;
     using VisioForge.Types;
-    using VisioForge.Types.GPUVideoEffects;
+    using VisioForge.Types.AudioEffects;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.Output;
     using VisioForge.Types.VideoEffects;
-
+    using VisioForge.Types.VideoProcessing;
     using Color = System.Windows.Media.Color;
-    using MediaPlayer = VisioForge.Controls.UI.WPF.MediaPlayer;
     using MessageBox = System.Windows.MessageBox;
 
     /// <summary>
@@ -39,6 +43,8 @@ namespace Main_Demo
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public partial class MainWindow
     {
+        private MediaPlayerCore MediaPlayer1;
+
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
 
         // Zoom
@@ -75,7 +81,7 @@ namespace Main_Demo
 
             lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
 
-            if (MediaPlayer1.Source_Mode == VFMediaPlayerSource.DVD_DS)
+            if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
             {
                 if (MediaPlayer1.DVD_Chapter_GetCurrent() != cbDVDControlChapter.SelectedIndex && cbDVDControlChapter.SelectedIndex != -1)
                 {
@@ -119,8 +125,43 @@ namespace Main_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
+        private void CreateEngine()
+        {
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            VideoView1.MouseDown += MediaPlayer1_MouseDown;
+            MediaPlayer1.OnBarcodeDetected += MediaPlayer1_OnBarcodeDetected;
+            MediaPlayer1.OnAudioVUMeterProVolume += MediaPlayer1_OnAudioVUMeterProVolume;
+            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+            MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
+            MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
+            MediaPlayer1.OnAudioVUMeterProFFTCalculated += MediaPlayer1_OnAudioVUMeterProFFTCalculated;
+            MediaPlayer1.OnAudioVUMeterProMaximumCalculated += MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
+
+        }
+
+        private void DestroyEngine()
+        {
+            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            VideoView1.MouseDown -= MediaPlayer1_MouseDown;
+            MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
+            MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
+            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
+            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+            MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
+            MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
+            MediaPlayer1.OnAudioVUMeterProFFTCalculated -= MediaPlayer1_OnAudioVUMeterProFFTCalculated;
+            MediaPlayer1.OnAudioVUMeterProMaximumCalculated -= MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
+
+            MediaPlayer1.Dispose();
+            MediaPlayer1 = null;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CreateEngine();
+
             Title += $" (SDK v{MediaPlayer1.SDK_Version})";
 
             // font for text logo
@@ -195,16 +236,16 @@ namespace Main_Demo
 
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectLightness lightness;
+            IVideoEffectLightness lightness;
             var effect = MediaPlayer1.Video_Effects_Get("Lightness");
             if (effect == null)
             {
-                lightness = new VFVideoEffectLightness(true, (int)tbLightness.Value);
+                lightness = new VideoEffectLightness(true, (int)tbLightness.Value);
                 MediaPlayer1.Video_Effects_Add(lightness);
             }
             else
             {
-                lightness = effect as IVFVideoEffectLightness;
+                lightness = effect as IVideoEffectLightness;
                 if (lightness != null)
                 {
                     lightness.Value = (int)tbLightness.Value;
@@ -216,16 +257,16 @@ namespace Main_Demo
         {
             if (MediaPlayer1 != null)
             {
-                IVFVideoEffectSaturation saturation;
+                IVideoEffectSaturation saturation;
                 var effect = MediaPlayer1.Video_Effects_Get("Saturation");
                 if (effect == null)
                 {
-                    saturation = new VFVideoEffectSaturation((int)tbSaturation.Value);
+                    saturation = new VideoEffectSaturation((int)tbSaturation.Value);
                     MediaPlayer1.Video_Effects_Add(saturation);
                 }
                 else
                 {
-                    saturation = effect as IVFVideoEffectSaturation;
+                    saturation = effect as IVideoEffectSaturation;
                     if (saturation != null)
                     {
                         saturation.Value = (int)tbSaturation.Value;
@@ -236,16 +277,16 @@ namespace Main_Demo
 
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectDarkness darkness;
+            IVideoEffectDarkness darkness;
             var effect = MediaPlayer1.Video_Effects_Get("Darkness");
             if (effect == null)
             {
-                darkness = new VFVideoEffectDarkness(true, (int)tbDarkness.Value);
+                darkness = new VideoEffectDarkness(true, (int)tbDarkness.Value);
                 MediaPlayer1.Video_Effects_Add(darkness);
             }
             else
             {
-                darkness = effect as IVFVideoEffectDarkness;
+                darkness = effect as IVideoEffectDarkness;
                 if (darkness != null)
                 {
                     darkness.Value = (int)tbDarkness.Value;
@@ -255,16 +296,16 @@ namespace Main_Demo
 
         private void cbGreyscale_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectGrayscale grayscale;
+            IVideoEffectGrayscale grayscale;
             var effect = MediaPlayer1.Video_Effects_Get("Grayscale");
             if (effect == null)
             {
-                grayscale = new VFVideoEffectGrayscale(cbGreyscale.IsChecked == true);
+                grayscale = new VideoEffectGrayscale(cbGreyscale.IsChecked == true);
                 MediaPlayer1.Video_Effects_Add(grayscale);
             }
             else
             {
-                grayscale = effect as IVFVideoEffectGrayscale;
+                grayscale = effect as IVideoEffectGrayscale;
                 if (grayscale != null)
                 {
                     grayscale.Enabled = cbGreyscale.IsChecked == true;
@@ -274,16 +315,16 @@ namespace Main_Demo
 
         private void cbInvert_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectInvert invert;
+            IVideoEffectInvert invert;
             var effect = MediaPlayer1.Video_Effects_Get("Invert");
             if (effect == null)
             {
-                invert = new VFVideoEffectInvert(cbInvert.IsChecked == true);
+                invert = new VideoEffectInvert(cbInvert.IsChecked == true);
                 MediaPlayer1.Video_Effects_Add(invert);
             }
             else
             {
-                invert = effect as IVFVideoEffectInvert;
+                invert = effect as IVideoEffectInvert;
                 if (invert != null)
                 {
                     invert.Enabled = cbInvert.IsChecked == true;
@@ -317,19 +358,19 @@ namespace Main_Demo
             switch (cbImageType.SelectedIndex)
             {
                 case 0:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".bmp", VFImageFormat.BMP, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".bmp", ImageFormat.Bmp, 0, customWidth, customHeight);
                     break;
                 case 1:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".jpg", VFImageFormat.JPEG, (int)tbJPEGQuality.Value, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".jpg", ImageFormat.Jpeg, (int)tbJPEGQuality.Value, customWidth, customHeight);
                     break;
                 case 2:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".gif", VFImageFormat.GIF, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".gif", ImageFormat.Gif, 0, customWidth, customHeight);
                     break;
                 case 3:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".png", VFImageFormat.PNG, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".png", ImageFormat.Png, 0, customWidth, customHeight);
                     break;
                 case 4:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".tiff", VFImageFormat.TIFF, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".tiff", ImageFormat.Tiff, 0, customWidth, customHeight);
                     break;
             }
         }
@@ -417,7 +458,7 @@ namespace Main_Demo
                 return;
             }
 
-            if (MediaPlayer1.Source_Mode != VFMediaPlayerSource.DVD_DS)
+            if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.DVD_DS)
             {
                 MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0);
             }
@@ -494,15 +535,15 @@ namespace Main_Demo
 
             SetSourceMode();
 
-            if ((MediaPlayer1.Source_Mode == VFMediaPlayerSource.File_DS) ||
-                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.FFMPEG) ||
-                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.LAV) ||
-                (MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS))
+            if ((MediaPlayer1.Source_Mode == MediaPlayerSourceMode.File_DS) ||
+                (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.FFMPEG) ||
+                (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.LAV) ||
+                (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.Encrypted_File_DS))
             {
                 // "Read info" button
                 if (sender != null)
                 {
-                    VFFilePlaybackError ErrorCode;
+                    FilePlaybackError ErrorCode;
                     string ErrorText;
                     // ReSharper disable once AccessToStaticMemberViaDerivedType
                     if (MediaInfoReader.IsFilePlayable(edFilenameOrURL.Text, out ErrorCode, out ErrorText))
@@ -515,25 +556,25 @@ namespace Main_Demo
                     }
                 }
 
-                VFEncryptionKeyType keyType;
+                EncryptionKeyType keyType;
                 object key;
                 if (rbEncryptionKeyString.IsChecked == true)
                 {
-                    keyType = VFEncryptionKeyType.String;
+                    keyType = EncryptionKeyType.String;
                     key = edEncryptionKeyString.Text;
                 }
                 else if (rbEncryptionKeyFile.IsChecked == true)
                 {
-                    keyType = VFEncryptionKeyType.File;
+                    keyType = EncryptionKeyType.File;
                     key = edEncryptionKeyFile.Text;
                 }
                 else
                 {
-                    keyType = VFEncryptionKeyType.Binary;
+                    keyType = EncryptionKeyType.Binary;
                     key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
                 }
 
-                MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode == VFMediaPlayerSource.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.IsChecked == true);
+                MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode == MediaPlayerSourceMode.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.IsChecked == true);
 
                 for (int i = 0; i < MediaInfo.VideoStreams.Count; i++)
                 {
@@ -672,7 +713,7 @@ namespace Main_Demo
                     tbBalance1.IsEnabled = true;
                 }
             }
-            else if (MediaPlayer1.Source_Mode == VFMediaPlayerSource.DVD_DS)
+            else if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
             {
                 cbAudioStream1.IsEnabled = true;
                 cbAudioStream1.IsChecked = true;
@@ -719,14 +760,9 @@ namespace Main_Demo
             memoryFileStream = new FileStream(edFilenameOrURL.Text, FileMode.Open);
             ManagedIStream stream = new ManagedIStream(memoryFileStream);
 
-            // specifying settings
-            //MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS;
-            MediaPlayer1.Source_Stream = stream;
-            MediaPlayer1.Source_Stream_Size = memoryFileStream.Length;
-
+            // specifing settings
             // video and audio present in file. tune this settings to play audio files or video files without audio
-            MediaPlayer1.Source_Stream_VideoPresent = true;
-            MediaPlayer1.Source_Stream_AudioPresent = true;
+            MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(stream, true, true, memoryFileStream.Length);
         }
 
         private void SetSourceMode()
@@ -734,63 +770,63 @@ namespace Main_Demo
             switch (cbSourceMode.SelectedIndex)
             {
                 case 0:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.LAV;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
                     break;
                 case 1:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.GPU;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.GPU;
 
                     if (rbGPUIntel.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.IntelQuickSync;
+                        MediaPlayer1.Source_GPU_Mode = LAVGPUDecoder.IntelQuickSync;
                     }
                     else if (rbGPUNVidia.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.NvidiaCUVID;
+                        MediaPlayer1.Source_GPU_Mode = LAVGPUDecoder.NvidiaCUVID;
                     }
                     else if (rbGPUDXVANative.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2Native;
+                        MediaPlayer1.Source_GPU_Mode = LAVGPUDecoder.DXVA2Native;
                     }
                     else if (rbGPUDXVACopyBack.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.DXVA2CopyBack;
+                        MediaPlayer1.Source_GPU_Mode = LAVGPUDecoder.DXVA2CopyBack;
                     }
                     else if (rbGPUDirect3D.IsChecked == true)
                     {
-                        MediaPlayer1.Source_GPU_Mode = VFMediaPlayerSourceGPUDecoder.Direct3D11;
+                        MediaPlayer1.Source_GPU_Mode = LAVGPUDecoder.Direct3D11;
                     }
 
                     break;
                 case 2:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.FFMPEG;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.FFMPEG;
                     break;
                 case 3:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_DS;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS;
                     break;
                 case 4:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.File_VLC;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_VLC;
                     break;
                 case 5:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.DVD_DS;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS;
                     break;
                 case 6:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.BluRay;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.BluRay;
                     break;
                 case 7:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.Memory_DS;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
                     LoadToMemory();
                     break;
                 case 8:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.MMS_WMV_DS;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MMS_WMV_DS;
                     break;
                 case 9:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.HTTP_RTSP_VLC;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.HTTP_RTSP_VLC;
                     break;
                 case 10:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.Encrypted_File_DS;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS;
                     break;
                 case 11:
-                    MediaPlayer1.Source_Mode = VFMediaPlayerSource.MIDI;
+                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MIDI;
                     break;
             }
         }
@@ -858,7 +894,7 @@ namespace Main_Demo
             }
 
             MediaPlayer1.Loop = cbLoop.IsChecked == true;
-            MediaPlayer1.Audio_Play = cbPlayAudio.IsChecked == true;
+            MediaPlayer1.Audio_PlayAudio = cbPlayAudio.IsChecked == true;
 
             SetSourceMode();
 
@@ -868,38 +904,38 @@ namespace Main_Demo
 
             if (rbWPF.IsChecked == true)
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRendererWPF.WPF;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
             }
             else if (rbDirect2D.IsChecked == true)
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRendererWPF.Direct2D;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D;
             }
             else if (rbEVR.IsChecked == true)
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRendererWPF.EVR;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.Video_Renderer = VFVideoRendererWPF.None;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
             }
 
             MediaPlayer1.Virtual_Camera_Output_Enabled = rbVirtualCameraOutput.IsChecked == true;
 
             if (cbStretch.IsChecked == true)
             {
-                MediaPlayer1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch;
+                MediaPlayer1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox;
+                MediaPlayer1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox;
             }
 
             MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
 
-            MediaPlayer1.Video_Renderer.BackgroundColor = MediaPlayer.ColorConv(((SolidColorBrush)pnVideoRendererBGColor.Fill).Color);
+            MediaPlayer1.Video_Renderer.BackgroundColor = VideoView.ColorConv(((SolidColorBrush)pnVideoRendererBGColor.Fill).Color);
             MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.IsChecked == true;
             MediaPlayer1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.IsChecked == true;
-            MediaPlayer1.Background = pnVideoRendererBGColor.Fill;
+            VideoView1.Background = pnVideoRendererBGColor.Fill;
 
             MediaPlayer1.Video_Sample_Grabber_UseForVideoEffects = true;
 
@@ -937,11 +973,11 @@ namespace Main_Demo
             MediaPlayer1.Audio_Effects_Enabled = cbAudioEffectsEnabled.IsChecked == true;
             if (MediaPlayer1.Audio_Effects_Enabled)
             {
-                MediaPlayer1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, VFAudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.IsChecked == true, TimeSpan.Zero, TimeSpan.Zero);
             }
 
             // VU meter Pro
@@ -978,29 +1014,29 @@ namespace Main_Demo
 
             // Barcode detection
             MediaPlayer1.Barcode_Reader_Enabled = cbBarcodeDetectionEnabled.IsChecked == true;
-            MediaPlayer1.Barcode_Reader_Type = (VFBarcodeType)cbBarcodeType.SelectedIndex;
+            MediaPlayer1.Barcode_Reader_Type = (BarcodeType)cbBarcodeType.SelectedIndex;
 
             // Encryption
             if (rbEncryptionKeyString.IsChecked == true)
             {
-                MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.String;
+                MediaPlayer1.Encryption_KeyType = EncryptionKeyType.String;
                 MediaPlayer1.Encryption_Key = edEncryptionKeyString.Text;
             }
             else if (rbEncryptionKeyFile.IsChecked == true)
             {
-                MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.File;
+                MediaPlayer1.Encryption_KeyType = EncryptionKeyType.File;
                 MediaPlayer1.Encryption_Key = edEncryptionKeyFile.Text;
             }
             else
             {
-                MediaPlayer1.Encryption_KeyType = VFEncryptionKeyType.Binary;
+                MediaPlayer1.Encryption_KeyType = EncryptionKeyType.Binary;
                 MediaPlayer1.Encryption_Key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
 
             await MediaPlayer1.PlayAsync().ConfigureAwait(true);
 
             // DVD
-            if (MediaPlayer1.Source_Mode == VFMediaPlayerSource.DVD_DS)
+            if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
             {
                 // select and play first title
                 if (cbDVDControlTitle.Items.Count > 0)
@@ -1010,11 +1046,11 @@ namespace Main_Demo
                 }
 
                 // show title menu
-                MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title);
+                MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
             }
 
             // set audio volume for each stream
-            if (MediaPlayer1.Source_Mode != VFMediaPlayerSource.DVD_DS && MediaPlayer1.Source_Mode != VFMediaPlayerSource.MMS_WMV_DS)
+            if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.DVD_DS && MediaPlayer1.Source_Mode != MediaPlayerSourceMode.MMS_WMV_DS)
             {
                 int count = MediaPlayer1.Audio_Streams_Count();
 
@@ -1082,16 +1118,16 @@ namespace Main_Demo
                 MediaPlayer1.Video_Effects_Enabled = true;
                 if (rbDeintBlendEnabled.IsChecked == true)
                 {
-                    IVFVideoEffectDeinterlaceBlend blend;
+                    IVideoEffectDeinterlaceBlend blend;
                     var effect = MediaPlayer1.Video_Effects_Get("DeinterlaceBlend");
                     if (effect == null)
                     {
-                        blend = new VFVideoEffectDeinterlaceBlend(true);
+                        blend = new VideoEffectDeinterlaceBlend(true);
                         MediaPlayer1.Video_Effects_Add(blend);
                     }
                     else
                     {
-                        blend = effect as IVFVideoEffectDeinterlaceBlend;
+                        blend = effect as IVideoEffectDeinterlaceBlend;
                     }
 
                     if (blend == null)
@@ -1107,16 +1143,16 @@ namespace Main_Demo
                 }
                 else if (rbDeintCAVTEnabled.IsChecked == true)
                 {
-                    IVFVideoEffectDeinterlaceCAVT cavt;
+                    IVideoEffectDeinterlaceCAVT cavt;
                     var effect = MediaPlayer1.Video_Effects_Get("DeinterlaceCAVT");
                     if (effect == null)
                     {
-                        cavt = new VFVideoEffectDeinterlaceCAVT(rbDeintCAVTEnabled.IsChecked == true, Convert.ToInt32(edDeintCAVTThreshold.Text));
+                        cavt = new VideoEffectDeinterlaceCAVT(rbDeintCAVTEnabled.IsChecked == true, Convert.ToInt32(edDeintCAVTThreshold.Text));
                         MediaPlayer1.Video_Effects_Add(cavt);
                     }
                     else
                     {
-                        cavt = effect as IVFVideoEffectDeinterlaceCAVT;
+                        cavt = effect as IVideoEffectDeinterlaceCAVT;
                     }
 
                     if (cavt == null)
@@ -1129,16 +1165,16 @@ namespace Main_Demo
                 }
                 else
                 {
-                    IVFVideoEffectDeinterlaceTriangle triangle;
+                    IVideoEffectDeinterlaceTriangle triangle;
                     var effect = MediaPlayer1.Video_Effects_Get("DeinterlaceTriangle");
                     if (effect == null)
                     {
-                        triangle = new VFVideoEffectDeinterlaceTriangle(true, Convert.ToByte(edDeintTriangleWeight.Text));
+                        triangle = new VideoEffectDeinterlaceTriangle(true, Convert.ToByte(edDeintTriangleWeight.Text));
                         MediaPlayer1.Video_Effects_Add(triangle);
                     }
                     else
                     {
-                        triangle = effect as IVFVideoEffectDeinterlaceTriangle;
+                        triangle = effect as IVideoEffectDeinterlaceTriangle;
                     }
 
                     if (triangle == null)
@@ -1157,16 +1193,16 @@ namespace Main_Demo
                 MediaPlayer1.Video_Effects_Enabled = true;
                 if (rbDenoiseCAST.IsChecked == true)
                 {
-                    IVFVideoEffectDenoiseCAST cast;
+                    IVideoEffectDenoiseCAST cast;
                     var effect = MediaPlayer1.Video_Effects_Get("DenoiseCAST");
                     if (effect == null)
                     {
-                        cast = new VFVideoEffectDenoiseCAST(true);
+                        cast = new VideoEffectDenoiseCAST(true);
                         MediaPlayer1.Video_Effects_Add(cast);
                     }
                     else
                     {
-                        cast = effect as IVFVideoEffectDenoiseCAST;
+                        cast = effect as IVideoEffectDenoiseCAST;
                     }
 
                     if (cast == null)
@@ -1177,16 +1213,16 @@ namespace Main_Demo
                 }
                 else
                 {
-                    IVFVideoEffectDenoiseMosquito mosquito;
+                    IVideoEffectDenoiseMosquito mosquito;
                     var effect = MediaPlayer1.Video_Effects_Get("DenoiseMosquito");
                     if (effect == null)
                     {
-                        mosquito = new VFVideoEffectDenoiseMosquito(true);
+                        mosquito = new VideoEffectDenoiseMosquito(true);
                         MediaPlayer1.Video_Effects_Add(mosquito);
                     }
                     else
                     {
-                        mosquito = effect as IVFVideoEffectDenoiseMosquito;
+                        mosquito = effect as IVideoEffectDenoiseMosquito;
                     }
 
                     if (mosquito == null)
@@ -1269,12 +1305,12 @@ namespace Main_Demo
 
         private void btDVDControlRootMenu_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Root);
+            MediaPlayer1.DVD_Menu_Show(DVDMenu.Root);
         }
 
         private void btDVDControlTitleMenu_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(VFDVDMenu.Title);
+            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
         }
 
         private async void cbAudioStream1_Checked(object sender, RoutedEventArgs e)
@@ -1474,7 +1510,7 @@ namespace Main_Demo
 
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
-            if (MediaPlayer1.Video_Renderer.Video_Renderer != VFVideoRendererWPF.EVR)
+            if (MediaPlayer1.Video_Renderer.VideoRenderer != VideoRendererMode.EVR)
             {
                 MessageBox.Show(this, "Please set video renderer to EVR to support frame step.");
                 return;
@@ -1485,16 +1521,16 @@ namespace Main_Demo
 
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFVideoEffectContrast contrast;
+            IVideoEffectContrast contrast;
             var effect = MediaPlayer1.Video_Effects_Get("Contrast");
             if (effect == null)
             {
-                contrast = new VFVideoEffectContrast(true, (int)tbContrast.Value);
+                contrast = new VideoEffectContrast(true, (int)tbContrast.Value);
                 MediaPlayer1.Video_Effects_Add(contrast);
             }
             else
             {
-                contrast = effect as IVFVideoEffectContrast;
+                contrast = effect as IVideoEffectContrast;
                 if (contrast != null)
                 {
                     contrast.Value = (int)tbContrast.Value;
@@ -1655,7 +1691,7 @@ namespace Main_Demo
                                                         Compare_Blue = cbCompareBlue.IsChecked == true,
                                                         Compare_Greyscale = cbCompareGreyscale.IsChecked == true,
                                                         Highlight_Color =
-                                                            (VFMotionCHLColor)cbMotDetHLColor.SelectedIndex,
+                                                            (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
                                                         Highlight_Enabled = cbMotDetHLEnabled.IsChecked == true,
                                                         Highlight_Threshold = (int)tbMotDetHLThreshold.Value,
                                                         FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
@@ -1706,18 +1742,6 @@ namespace Main_Demo
         private void cbAFMotionDetection_Checked(object sender, RoutedEventArgs e)
         {
             ConfigureMotionDetectionEx();
-        }
-
-        private delegate void AFMotionDelegate(float level);
-
-        private void AFMotionDelegateMethod(float level)
-        {
-            pbAFMotionLevel.Value = (int)(level * 100);
-        }
-
-        private void MediaPlayer1_OnObjectDetection(object sender, MotionDetectionExEventArgs e)
-        {
-            Dispatcher?.BeginInvoke(new AFMotionDelegate(AFMotionDelegateMethod), e.Level);
         }
 
         private void ConfigureChromaKey()
@@ -1784,7 +1808,7 @@ namespace Main_Demo
             Dispatcher?.BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
         }
 
-        private void MediaPlayer1_OnStop(object sender, MediaPlayerStopEventArgs e)
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher?.BeginInvoke(new StopDelegate(StopDelegateMethod), null);
         }
@@ -1816,16 +1840,16 @@ namespace Main_Demo
 
         private void cbZoomEnabled_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectZoom zoomEffect;
+            IVideoEffectZoom zoomEffect;
             var effect = MediaPlayer1.Video_Effects_Get("Zoom");
             if (effect == null)
             {
-                zoomEffect = new VFVideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoomEnabled.IsChecked == true);
+                zoomEffect = new VideoEffectZoom(zoom, zoom, zoomShiftX, zoomShiftY, cbZoomEnabled.IsChecked == true);
                 MediaPlayer1.Video_Effects_Add(zoomEffect);
             }
             else
             {
-                zoomEffect = effect as IVFVideoEffectZoom;
+                zoomEffect = effect as IVideoEffectZoom;
             }
 
             if (zoomEffect == null)
@@ -1887,16 +1911,16 @@ namespace Main_Demo
 
         private void cbPan_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectPan pan;
+            IVideoEffectPan pan;
             var effect = MediaPlayer1.Video_Effects_Get("Pan");
             if (effect == null)
             {
-                pan = new VFVideoEffectPan(true);
+                pan = new VideoEffectPan(true);
                 MediaPlayer1.Video_Effects_Add(pan);
             }
             else
             {
-                pan = effect as IVFVideoEffectPan;
+                pan = effect as IVideoEffectPan;
             }
 
             if (pan == null)
@@ -1957,16 +1981,16 @@ namespace Main_Demo
         {
             if (rbFadeIn.IsChecked == true)
             {
-                IVFVideoEffectFadeIn fadeIn;
+                IVideoEffectFadeIn fadeIn;
                 var effect = MediaPlayer1.Video_Effects_Get("FadeIn");
                 if (effect == null)
                 {
-                    fadeIn = new VFVideoEffectFadeIn(cbFadeInOut.IsChecked == true);
+                    fadeIn = new VideoEffectFadeIn(cbFadeInOut.IsChecked == true);
                     MediaPlayer1.Video_Effects_Add(fadeIn);
                 }
                 else
                 {
-                    fadeIn = effect as IVFVideoEffectFadeIn;
+                    fadeIn = effect as IVideoEffectFadeIn;
                 }
 
                 if (fadeIn == null)
@@ -1981,16 +2005,16 @@ namespace Main_Demo
             }
             else
             {
-                IVFVideoEffectFadeOut fadeOut;
+                IVideoEffectFadeOut fadeOut;
                 var effect = MediaPlayer1.Video_Effects_Get("FadeOut");
                 if (effect == null)
                 {
-                    fadeOut = new VFVideoEffectFadeOut(cbFadeInOut.IsChecked == true);
+                    fadeOut = new VideoEffectFadeOut(cbFadeInOut.IsChecked == true);
                     MediaPlayer1.Video_Effects_Add(fadeOut);
                 }
                 else
                 {
-                    fadeOut = effect as IVFVideoEffectFadeOut;
+                    fadeOut = effect as IVideoEffectFadeOut;
                 }
 
                 if (fadeOut == null)
@@ -2009,14 +2033,6 @@ namespace Main_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
-        }
-
-        private void MediaPlayer1_OnVideoEncrypted(object sender, EventArgs e)
-        {
-            Dispatcher?.BeginInvoke((Action)(() =>
-            {
-                MessageBox.Show(this, "Video is encrypted. Please be sure that you're entered correct pin code.");
-            }));
         }
 
         #region Full screen
@@ -2050,9 +2066,9 @@ namespace Main_Demo
                 windowWidth = Width;
                 windowHeight = Height;
 
-                controlMargin = MediaPlayer1.Margin;
-                controlWidth = MediaPlayer1.Width;
-                controlHeight = MediaPlayer1.Height;
+                controlMargin = VideoView1.Margin;
+                controlWidth = VideoView1.Width;
+                controlHeight = VideoView1.Height;
 
                 // resizing window
                 ResizeMode = ResizeMode.NoResize;
@@ -2067,9 +2083,9 @@ namespace Main_Demo
                 Margin = new Thickness(0);
 
                 // resizing control
-                MediaPlayer1.Margin = new Thickness(0, 0, 0, 0);
-                MediaPlayer1.Width = Screen.AllScreens[0].Bounds.Width;
-                MediaPlayer1.Height = Screen.AllScreens[0].Bounds.Height;
+                VideoView1.Margin = new Thickness(0, 0, 0, 0);
+                VideoView1.Width = Screen.AllScreens[0].Bounds.Width;
+                VideoView1.Height = Screen.AllScreens[0].Bounds.Height;
 
                 await MediaPlayer1.Video_Renderer_UpdateAsync();
             }
@@ -2079,12 +2095,12 @@ namespace Main_Demo
                 fullScreen = false;
 
                 // restoring control
-                MediaPlayer1.Margin = controlMargin;
-                MediaPlayer1.Width = controlWidth;
-                MediaPlayer1.Height = controlHeight;
+                VideoView1.Margin = controlMargin;
+                VideoView1.Width = controlWidth;
+                VideoView1.Height = controlHeight;
 
-                MediaPlayer1.Width = controlWidth;
-                MediaPlayer1.Height = controlHeight;
+                VideoView1.Width = controlWidth;
+                VideoView1.Height = controlHeight;
 
                 // restoring window
                 Left = windowLeft;
@@ -2188,11 +2204,11 @@ namespace Main_Demo
         {
             if (MediaPlayer1 != null)
             {
-                IVFVideoEffectRotate rotate;
+                IVideoEffectRotate rotate;
                 var effect = MediaPlayer1.Video_Effects_Get("Rotate");
                 if (effect == null)
                 {
-                    rotate = new VFVideoEffectRotate(
+                    rotate = new VideoEffectRotate(
                         cbLiveRotation.IsChecked == true,
                         tbLiveRotationAngle.Value,
                         cbLiveRotationStretch.IsChecked == true);
@@ -2200,7 +2216,7 @@ namespace Main_Demo
                 }
                 else
                 {
-                    rotate = effect as IVFVideoEffectRotate;
+                    rotate = effect as IVideoEffectRotate;
                 }
 
                 if (rotate == null)
@@ -2290,7 +2306,7 @@ namespace Main_Demo
             if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 pnVideoRendererBGColor.Fill = new SolidColorBrush(ColorConv(colorDialog1.Color));
-                MediaPlayer1.Background = pnVideoRendererBGColor.Fill;
+                VideoView1.Background = pnVideoRendererBGColor.Fill;
 
                 MediaPlayer1.Video_Renderer.BackgroundColor = colorDialog1.Color;
                 await MediaPlayer1.Video_Renderer_UpdateAsync();
@@ -2301,11 +2317,11 @@ namespace Main_Demo
         {
             if (cbStretch.IsChecked == true)
             {
-                MediaPlayer1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Stretch;
+                MediaPlayer1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch;
             }
             else
             {
-                MediaPlayer1.Video_Renderer.StretchMode = VFVideoRendererStretchMode.Letterbox;
+                MediaPlayer1.Video_Renderer.StretchMode = VideoRendererStretchMode.Letterbox;
             }
 
             await MediaPlayer1.Video_Renderer_UpdateAsync();
@@ -2328,8 +2344,8 @@ namespace Main_Demo
             if (cbFilters.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
                 string name = e.AddedItems[0].ToString();
-                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -2346,13 +2362,13 @@ namespace Main_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
+            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -2362,13 +2378,13 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.Default);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, VFPropertyPage.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
                 }
             }
         }
@@ -2393,8 +2409,8 @@ namespace Main_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.SelectedValue.ToString();
-                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, VFPropertyPage.VFWCompConfig);
+                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
             }
         }
 
@@ -2410,7 +2426,7 @@ namespace Main_Demo
 
         private void ApplyAudioInputGains()
         {
-            VFAudioEnhancerGains gains = new VFAudioEnhancerGains
+            AudioEnhancerGains gains = new AudioEnhancerGains
             {
                 L = (float)tbAudioInputGainL.Value / 10.0f,
                 C = (float)tbAudioInputGainC.Value / 10.0f,
@@ -2467,7 +2483,7 @@ namespace Main_Demo
 
         private void ApplyAudioOutputGains()
         {
-            VFAudioEnhancerGains gains = new VFAudioEnhancerGains
+            AudioEnhancerGains gains = new AudioEnhancerGains
             {
                 L = (float)tbAudioOutputGainL.Value / 10.0f,
                 C = (float)tbAudioOutputGainC.Value / 10.0f,
@@ -2556,7 +2572,7 @@ namespace Main_Demo
             {
                 if (tags.Pictures?.Length > 0)
                 {
-                    imgTags.Source = MediaPlayer.BitmapConv(tags.Pictures[0]);
+                    imgTags.Source = VideoView.BitmapConv(tags.Pictures[0]);
                 }
 
                 edTags.Text = tags.ToString();
@@ -2593,16 +2609,16 @@ namespace Main_Demo
                 return;
             }
 
-            IVFGPUVideoEffectBrightness intf;
+            IGPUVideoEffectBrightness intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Brightness");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectBrightness(true, (int)tbGPULightness.Value);
+                intf = new GPUVideoEffectBrightness(true, (int)tbGPULightness.Value);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectBrightness;
+                intf = effect as IGPUVideoEffectBrightness;
                 if (intf != null)
                 {
                     intf.Value = (int)tbGPULightness.Value;
@@ -2618,16 +2634,16 @@ namespace Main_Demo
                 return;
             }
 
-            IVFGPUVideoEffectSaturation intf;
+            IGPUVideoEffectSaturation intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Saturation");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectSaturation(true, (int)tbGPUSaturation.Value);
+                intf = new GPUVideoEffectSaturation(true, (int)tbGPUSaturation.Value);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectSaturation;
+                intf = effect as IGPUVideoEffectSaturation;
                 if (intf != null)
                 {
                     intf.Value = (int)tbGPUSaturation.Value;
@@ -2643,16 +2659,16 @@ namespace Main_Demo
                 return;
             }
 
-            IVFGPUVideoEffectContrast intf;
+            IGPUVideoEffectContrast intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Contrast");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectContrast(true, (int)tbGPUContrast.Value);
+                intf = new GPUVideoEffectContrast(true, (int)tbGPUContrast.Value);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as VFGPUVideoEffectContrast;
+                intf = effect as GPUVideoEffectContrast;
                 if (intf != null)
                 {
                     intf.Value = (int)tbGPUContrast.Value;
@@ -2668,16 +2684,16 @@ namespace Main_Demo
                 return;
             }
 
-            IVFGPUVideoEffectDarkness intf;
+            IGPUVideoEffectDarkness intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Darkness");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDarkness(true, (int)tbGPUDarkness.Value);
+                intf = new GPUVideoEffectDarkness(true, (int)tbGPUDarkness.Value);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDarkness;
+                intf = effect as IGPUVideoEffectDarkness;
                 if (intf != null)
                 {
                     intf.Value = (int)tbGPUDarkness.Value;
@@ -2688,16 +2704,16 @@ namespace Main_Demo
 
         private void cbGPUGreyscale_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectGrayscale intf;
+            IGPUVideoEffectGrayscale intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Grayscale");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectGrayscale(cbGPUGreyscale.IsChecked == true);
+                intf = new GPUVideoEffectGrayscale(cbGPUGreyscale.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectGrayscale;
+                intf = effect as IGPUVideoEffectGrayscale;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUGreyscale.IsChecked == true;
@@ -2708,16 +2724,16 @@ namespace Main_Demo
 
         private void cbGPUInvert_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectInvert intf;
+            IGPUVideoEffectInvert intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Invert");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectInvert(cbGPUInvert.IsChecked == true);
+                intf = new GPUVideoEffectInvert(cbGPUInvert.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectInvert;
+                intf = effect as IGPUVideoEffectInvert;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUInvert.IsChecked == true;
@@ -2728,16 +2744,16 @@ namespace Main_Demo
 
         private void cbGPUNightVision_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectNightVision intf;
+            IGPUVideoEffectNightVision intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("NightVision");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectNightVision(cbGPUNightVision.IsChecked == true);
+                intf = new GPUVideoEffectNightVision(cbGPUNightVision.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectNightVision;
+                intf = effect as IGPUVideoEffectNightVision;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUNightVision.IsChecked == true;
@@ -2748,16 +2764,16 @@ namespace Main_Demo
 
         private void cbGPUPixelate_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectPixelate intf;
+            IGPUVideoEffectPixelate intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Pixelate");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectPixelate(cbGPUPixelate.IsChecked == true);
+                intf = new GPUVideoEffectPixelate(cbGPUPixelate.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectPixelate;
+                intf = effect as IGPUVideoEffectPixelate;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUPixelate.IsChecked == true;
@@ -2768,16 +2784,16 @@ namespace Main_Demo
 
         private void cbGPUDenoise_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectDenoise intf;
+            IGPUVideoEffectDenoise intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Denoise");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDenoise(cbGPUDenoise.IsChecked == true);
+                intf = new GPUVideoEffectDenoise(cbGPUDenoise.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDenoise;
+                intf = effect as IGPUVideoEffectDenoise;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUDenoise.IsChecked == true;
@@ -2788,16 +2804,16 @@ namespace Main_Demo
 
         private void cbGPUDeinterlace_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectDeinterlaceBlend intf;
+            IGPUVideoEffectDeinterlaceBlend intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("DeinterlaceBlend");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.IsChecked == true);
+                intf = new GPUVideoEffectDeinterlaceBlend(cbGPUDeinterlace.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectDeinterlaceBlend;
+                intf = effect as IGPUVideoEffectDeinterlaceBlend;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUDeinterlace.IsChecked == true;
@@ -2808,16 +2824,16 @@ namespace Main_Demo
 
         private void cbGPUOldMovie_Click(object sender, RoutedEventArgs e)
         {
-            IVFGPUVideoEffectOldMovie intf;
+            IGPUVideoEffectOldMovie intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("OldMovie");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectOldMovie(cbGPUOldMovie.IsChecked == true);
+                intf = new GPUVideoEffectOldMovie(cbGPUOldMovie.IsChecked == true);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectOldMovie;
+                intf = effect as IGPUVideoEffectOldMovie;
                 if (intf != null)
                 {
                     intf.Enabled = cbGPUOldMovie.IsChecked == true;
@@ -2838,7 +2854,7 @@ namespace Main_Demo
 
         private void btPrevFrame_Click(object sender, RoutedEventArgs e)
         {
-            if (MediaPlayer1.Video_Renderer.Video_Renderer != VFVideoRendererWPF.EVR)
+            if (MediaPlayer1.Video_Renderer.VideoRenderer != VideoRendererMode.EVR)
             {
                 MessageBox.Show(this, "Please set video renderer to EVR to support frame step.");
                 return;
@@ -2850,6 +2866,8 @@ namespace Main_Demo
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await StopAll();
+
+            DestroyEngine();
         }
 
         private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
@@ -2857,7 +2875,7 @@ namespace Main_Demo
             var dlg = new TextLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(MediaPlayer1);
-            var effect = new VFVideoEffectTextLogo(true, name);
+            var effect = new VideoEffectTextLogo(true, name);
 
             MediaPlayer1.Video_Effects_Add(effect);
             lbTextLogos.Items.Add(effect.Name);
@@ -2894,7 +2912,7 @@ namespace Main_Demo
             var dlg = new ImageLogoSettingsDialog();
 
             var name = dlg.GenerateNewEffectName(MediaPlayer1);
-            var effect = new VFVideoEffectImageLogo(true, name);
+            var effect = new VideoEffectImageLogo(true, name);
 
             MediaPlayer1.Video_Effects_Add(effect);
             lbImageLogos.Items.Add(effect.Name);
@@ -2928,16 +2946,16 @@ namespace Main_Demo
 
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectFlipDown flip;
+            IVideoEffectFlipDown flip;
             var effect = MediaPlayer1.Video_Effects_Get("FlipDown");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipHorizontal(cbFlipX.IsChecked == true);
+                flip = new VideoEffectFlipHorizontal(cbFlipX.IsChecked == true);
                 MediaPlayer1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipDown;
+                flip = effect as IVideoEffectFlipDown;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipX.IsChecked == true;
@@ -2947,16 +2965,16 @@ namespace Main_Demo
 
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
-            IVFVideoEffectFlipRight flip;
+            IVideoEffectFlipRight flip;
             var effect = MediaPlayer1.Video_Effects_Get("FlipRight");
             if (effect == null)
             {
-                flip = new VFVideoEffectFlipVertical(cbFlipY.IsChecked == true);
+                flip = new VideoEffectFlipVertical(cbFlipY.IsChecked == true);
                 MediaPlayer1.Video_Effects_Add(flip);
             }
             else
             {
-                flip = effect as IVFVideoEffectFlipRight;
+                flip = effect as IVideoEffectFlipRight;
                 if (flip != null)
                 {
                     flip.Enabled = cbFlipY.IsChecked == true;
@@ -2992,16 +3010,16 @@ namespace Main_Demo
 
         private void tbGPUBlur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            IVFGPUVideoEffectBlur intf;
+            IGPUVideoEffectBlur intf;
             var effect = MediaPlayer1.Video_Effects_GPU_Get("Blur");
             if (effect == null)
             {
-                intf = new VFGPUVideoEffectBlur(tbGPUBlur.Value > 0, (int)tbGPUBlur.Value);
+                intf = new GPUVideoEffectBlur(tbGPUBlur.Value > 0, (int)tbGPUBlur.Value);
                 MediaPlayer1.Video_Effects_GPU_Add(intf);
             }
             else
             {
-                intf = effect as IVFGPUVideoEffectBlur;
+                intf = effect as IGPUVideoEffectBlur;
                 if (intf != null)
                 {
                     intf.Enabled = tbGPUBlur.Value > 0;

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using VisioForge.Controls.VideoCapture;
 using VisioForge.Shared;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -120,7 +120,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             }
         }
 
-        private void LoadAudio(VFM4AOutput audio)
+        private void LoadAudio(M4AOutput audio)
         {
             cbAACBitrate.Text = audio.Bitrate.ToString();
 
@@ -129,19 +129,19 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             cbAACObjectType.SelectedIndex = (int)audio.Object - 1;
         }
 
-        private VFM4AOutput SaveAudio(VFM4AOutput audio)
+        private M4AOutput SaveAudio(M4AOutput audio)
         {
             int.TryParse(cbAACBitrate.Text, out var tmp);
             audio.Bitrate = tmp;
 
-            audio.Version = (VFAACVersion)cbAACVersion.SelectedIndex;
-            audio.Output = (VFAACOutput)cbAACOutput.SelectedIndex;
-            audio.Object = (VFAACObject)(cbAACObjectType.SelectedIndex + 1);
+            audio.Version = (AACVersion)cbAACVersion.SelectedIndex;
+            audio.Output = (AACOutput)cbAACOutput.SelectedIndex;
+            audio.Object = (AACObject)(cbAACObjectType.SelectedIndex + 1);
 
             return audio;
         }
 
-        private void LoadVideo(VFMFVideoEncoderSettings video)
+        private void LoadVideo(MFVideoEncoderSettings video)
         {
             // 0 - Microsoft(H264 / AAC)
             // 1 - Nvidia NVENC(H264/ AAC)
@@ -155,31 +155,31 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             // Main settings
             switch (video.Codec)
             {
-                case VFMFVideoEncoder.MS_H264:
+                case MFVideoEncoder.MS_H264:
                     cbMP4Mode.SelectedIndex = 0;
                     break;
-                case VFMFVideoEncoder.QSV_H264:
+                case MFVideoEncoder.QSV_H264:
                     cbMP4Mode.SelectedIndex = 2;
                     break;
-                case VFMFVideoEncoder.NVENC_H264:
+                case MFVideoEncoder.NVENC_H264:
                     cbMP4Mode.SelectedIndex = 1;
                     break;
-                case VFMFVideoEncoder.AMD_H264:
+                case MFVideoEncoder.AMD_H264:
                     cbMP4Mode.SelectedIndex = 3;
                     break;
-                case VFMFVideoEncoder.NVENC_H265:
+                case MFVideoEncoder.NVENC_H265:
                     cbMP4Mode.SelectedIndex = 5;
                     break;
-                case VFMFVideoEncoder.AMD_H265:
+                case MFVideoEncoder.AMD_H265:
                     cbMP4Mode.SelectedIndex = 7;
                     break;
-                case VFMFVideoEncoder.MS_H265:
+                case MFVideoEncoder.MS_H265:
                     cbMP4Mode.SelectedIndex = 4;
                     break;
-                case VFMFVideoEncoder.QSV_H265:
+                case MFVideoEncoder.QSV_H265:
                     cbMP4Mode.SelectedIndex = 6;
                     break;
-                case VFMFVideoEncoder.None:
+                case MFVideoEncoder.None:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -188,13 +188,13 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             // Video H264 settings
             switch (video.Profile)
             {
-                case VFMFH264Profile.Simple:
+                case MFH264Profile.Simple:
                     cbProfile.SelectedIndex = 0;
                     break;
-                case VFMFH264Profile.Main:
+                case MFH264Profile.Main:
                     cbProfile.SelectedIndex = 1;
                     break;
-                case VFMFH264Profile.High:
+                case MFH264Profile.High:
                     cbProfile.SelectedIndex = 2;
                     break;
                 default:
@@ -203,52 +203,52 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (video.Level)
             {
-                case VFMFH264Level.Level1:
+                case MFH264Level.Level1:
                     cbLevel.SelectedIndex = 0;
                     break;
-                case VFMFH264Level.Level1b:
+                case MFH264Level.Level1b:
                     cbLevel.SelectedIndex = 1;
                     break;
-                case VFMFH264Level.Level12:
+                case MFH264Level.Level12:
                     cbLevel.SelectedIndex = 2;
                     break;
-                case VFMFH264Level.Level13:
+                case MFH264Level.Level13:
                     cbLevel.SelectedIndex = 3;
                     break;
-                case VFMFH264Level.Level2:
+                case MFH264Level.Level2:
                     cbLevel.SelectedIndex = 4;
                     break;
-                case VFMFH264Level.Level21:
+                case MFH264Level.Level21:
                     cbLevel.SelectedIndex = 5;
                     break;
-                case VFMFH264Level.Level22:
+                case MFH264Level.Level22:
                     cbLevel.SelectedIndex = 6;
                     break;
-                case VFMFH264Level.Level3:
+                case MFH264Level.Level3:
                     cbLevel.SelectedIndex = 7;
                     break;
-                case VFMFH264Level.Level31:
+                case MFH264Level.Level31:
                     cbLevel.SelectedIndex = 8;
                     break;
-                case VFMFH264Level.Level32:
+                case MFH264Level.Level32:
                     cbLevel.SelectedIndex = 9;
                     break;
-                case VFMFH264Level.Level4:
+                case MFH264Level.Level4:
                     cbLevel.SelectedIndex = 10;
                     break;
-                case VFMFH264Level.Level41:
+                case MFH264Level.Level41:
                     cbLevel.SelectedIndex = 11;
                     break;
-                case VFMFH264Level.Level42:
+                case MFH264Level.Level42:
                     cbLevel.SelectedIndex = 12;
                     break;
-                case VFMFH264Level.Level5:
+                case MFH264Level.Level5:
                     cbLevel.SelectedIndex = 13;
                     break;
-                case VFMFH264Level.Level51:
+                case MFH264Level.Level51:
                     cbLevel.SelectedIndex = 14;
                     break;
-                case VFMFH264Level.Level52:
+                case MFH264Level.Level52:
                     cbLevel.SelectedIndex = 15;
                     break;
                 default:
@@ -265,7 +265,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             edVideoQuality.Text = video.Quality.ToString();
         }
 
-        private VFMFVideoEncoderSettings SaveVideo(VFMFVideoEncoderSettings video)
+        private MFVideoEncoderSettings SaveVideo(MFVideoEncoderSettings video)
         {
             // Main settings
             // 0 - Microsoft(H264 / AAC)
@@ -281,35 +281,35 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             {
                 case 0:
                     //  MS H264
-                    video.Codec = VFMFVideoEncoder.MS_H264;
+                    video.Codec = MFVideoEncoder.MS_H264;
                     break;
                 case 1:
                     //  nVidia NVENC H264
-                    video.Codec = VFMFVideoEncoder.NVENC_H264;
+                    video.Codec = MFVideoEncoder.NVENC_H264;
                     break;
                 case 2:
                     //  Intel QuickSync H264
-                    video.Codec = VFMFVideoEncoder.QSV_H264;
+                    video.Codec = MFVideoEncoder.QSV_H264;
                     break;
                 case 3:
                     //  AMD Radeon H264
-                    video.Codec = VFMFVideoEncoder.AMD_H264;
+                    video.Codec = MFVideoEncoder.AMD_H264;
                     break;
                 case 4:
                     //  MS H265
-                    video.Codec = VFMFVideoEncoder.MS_H265;
+                    video.Codec = MFVideoEncoder.MS_H265;
                     break;
                 case 5:
                     //  NVENC H265
-                    video.Codec = VFMFVideoEncoder.NVENC_H265;
+                    video.Codec = MFVideoEncoder.NVENC_H265;
                     break;
                 case 6:
                     //  QSV H265
-                    video.Codec = VFMFVideoEncoder.QSV_H265;
+                    video.Codec = MFVideoEncoder.QSV_H265;
                     break;
                 case 7:
                     //  AMD Radeon H265
-                    video.Codec = VFMFVideoEncoder.AMD_H265;
+                    video.Codec = MFVideoEncoder.AMD_H265;
                     break;
             }
 
@@ -317,69 +317,69 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
             switch (cbProfile.SelectedIndex)
             {
                 case 0:
-                    video.Profile = VFMFH264Profile.Base;
+                    video.Profile = MFH264Profile.Base;
                     break;
                 case 1:
-                    video.Profile = VFMFH264Profile.Main;
+                    video.Profile = MFH264Profile.Main;
                     break;
                 case 2:
-                    video.Profile = VFMFH264Profile.High;
+                    video.Profile = MFH264Profile.High;
                     break;
             }
 
             switch (cbLevel.SelectedIndex)
             {
                 case 0:
-                    video.Level = VFMFH264Level.Level1;
+                    video.Level = MFH264Level.Level1;
                     break;
                 case 1:
-                    video.Level = VFMFH264Level.Level11;
+                    video.Level = MFH264Level.Level11;
                     break;
                 case 2:
-                    video.Level = VFMFH264Level.Level12;
+                    video.Level = MFH264Level.Level12;
                     break;
                 case 3:
-                    video.Level = VFMFH264Level.Level13;
+                    video.Level = MFH264Level.Level13;
                     break;
                 case 4:
-                    video.Level = VFMFH264Level.Level2;
+                    video.Level = MFH264Level.Level2;
                     break;
                 case 5:
-                    video.Level = VFMFH264Level.Level21;
+                    video.Level = MFH264Level.Level21;
                     break;
                 case 6:
-                    video.Level = VFMFH264Level.Level22;
+                    video.Level = MFH264Level.Level22;
                     break;
                 case 7:
-                    video.Level = VFMFH264Level.Level3;
+                    video.Level = MFH264Level.Level3;
                     break;
                 case 8:
-                    video.Level = VFMFH264Level.Level31;
+                    video.Level = MFH264Level.Level31;
                     break;
                 case 9:
-                    video.Level = VFMFH264Level.Level32;
+                    video.Level = MFH264Level.Level32;
                     break;
                 case 10:
-                    video.Level = VFMFH264Level.Level4;
+                    video.Level = MFH264Level.Level4;
                     break;
                 case 11:
-                    video.Level = VFMFH264Level.Level41;
+                    video.Level = MFH264Level.Level41;
                     break;
                 case 12:
-                    video.Level = VFMFH264Level.Level42;
+                    video.Level = MFH264Level.Level42;
                     break;
                 case 13:
-                    video.Level = VFMFH264Level.Level5;
+                    video.Level = MFH264Level.Level5;
                     break;
                 case 14:
-                    video.Level = VFMFH264Level.Level51;
+                    video.Level = MFH264Level.Level51;
                     break;
                 case 15:
-                    video.Level = VFMFH264Level.Level52;
+                    video.Level = MFH264Level.Level52;
                     break;
             }
 
-            video.RateControl = (VFMFCommonRateControlMode)cbVideoRateControl.SelectedIndex;
+            video.RateControl = (MFCommonRateControlMode)cbVideoRateControl.SelectedIndex;
 
             video.CABAC = cbVideoCABAC.Checked;
             video.LowLatencyMode = cbVideoLowLatency.Checked;
@@ -408,7 +408,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mpegTSOutput">
         /// Output.
         /// </param>
-        public void LoadSettings(VFMPEGTSOutput mpegTSOutput)
+        public void LoadSettings(MPEGTSOutput mpegTSOutput)
         {
             LoadVideo(mpegTSOutput.Video);
             LoadAudio(mpegTSOutput.Audio);
@@ -420,7 +420,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mpegTSOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMPEGTSOutput mpegTSOutput)
+        public void SaveSettings(ref MPEGTSOutput mpegTSOutput)
         {
             mpegTSOutput.Video = SaveVideo(mpegTSOutput.Video);
             mpegTSOutput.Audio = SaveAudio(mpegTSOutput.Audio);
@@ -432,7 +432,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void LoadSettings(VFMP4HWOutput mp4Output)
+        public void LoadSettings(MP4HWOutput mp4Output)
         {
             LoadVideo(mp4Output.Video);
             LoadAudio(mp4Output.Audio);
@@ -456,7 +456,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMP4HWOutput mp4Output)
+        public void SaveSettings(ref MP4HWOutput mp4Output)
         {
             mp4Output.Video = SaveVideo(mp4Output.Video);
             mp4Output.Audio = SaveAudio(mp4Output.Audio);
@@ -473,7 +473,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void LoadSettings(VFMKVv2Output mp4Output)
+        public void LoadSettings(MKVv2Output mp4Output)
         {
             LoadVideo(mp4Output.Video);
             LoadAudio(mp4Output.Audio);
@@ -485,7 +485,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMKVv2Output mp4Output)
+        public void SaveSettings(ref MKVv2Output mp4Output)
         {
             mp4Output.Video = SaveVideo(mp4Output.Video);
             mp4Output.Audio = SaveAudio(mp4Output.Audio);
@@ -497,7 +497,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void LoadSettings(VFMOVOutput mp4Output)
+        public void LoadSettings(MOVOutput mp4Output)
         {
             LoadVideo(mp4Output.Video);
             LoadAudio(mp4Output.Audio);
@@ -509,7 +509,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="mp4Output">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFMOVOutput mp4Output)
+        public void SaveSettings(ref MOVOutput mp4Output)
         {
             mp4Output.Video = SaveVideo(mp4Output.Video);
             mp4Output.Audio = SaveAudio(mp4Output.Audio);

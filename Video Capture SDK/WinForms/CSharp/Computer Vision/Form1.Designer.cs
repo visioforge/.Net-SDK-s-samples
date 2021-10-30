@@ -1035,7 +1035,7 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.Audio_VUMeter_Pro_Volume = 100;
             this.VideoCapture1.BackColor = System.Drawing.Color.Black;
             this.VideoCapture1.Barcode_Reader_Enabled = false;
-            this.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.QR;
+            this.VideoCapture1.Barcode_Reader_Type = VisioForge.Types.BarcodeType.QR;
             this.VideoCapture1.BDA_Source = null;
             this.VideoCapture1.ChromaKey = null;
             this.VideoCapture1.Custom_Source = null;
@@ -1053,11 +1053,11 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.Decklink_Output = null;
             this.VideoCapture1.Decklink_Source = null;
             this.VideoCapture1.DirectCapture_Muxer = null;
-            this.VideoCapture1.DV_Decoder_Video_Resolution = VisioForge.Types.VFDVVideoResolution.Full;
+            this.VideoCapture1.DV_Decoder_Video_Resolution = VisioForge.Types.DVVideoResolution.Full;
             this.VideoCapture1.Face_Tracking = null;
             this.VideoCapture1.IP_Camera_Source = null;
             this.VideoCapture1.Location = new System.Drawing.Point(481, 12);
-            this.VideoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.VideoCapture;
+            this.VideoCapture1.Mode = VisioForge.Types.VideoCaptureMode.VideoCapture;
             this.VideoCapture1.Motion_Detection = null;
             this.VideoCapture1.Motion_DetectionEx = null;
             this.VideoCapture1.MPEG_Audio_Decoder = "";
@@ -1067,7 +1067,7 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.Name = "VideoCapture1";
             this.VideoCapture1.Network_Streaming_Audio_Enabled = false;
             this.VideoCapture1.Network_Streaming_Enabled = false;
-            this.VideoCapture1.Network_Streaming_Format = VisioForge.Types.VFNetworkStreamingFormat.WMV;
+            this.VideoCapture1.Network_Streaming_Format = VisioForge.Types.NetworkStreamingFormat.WMV;
             this.VideoCapture1.Network_Streaming_Network_Port = 10;
             this.VideoCapture1.Network_Streaming_Output = null;
             this.VideoCapture1.Network_Streaming_URL = "";
@@ -1077,8 +1077,8 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.Output_Format = null;
             this.VideoCapture1.PIP_AddSampleGrabbers = false;
             this.VideoCapture1.PIP_ChromaKeySettings = null;
-            this.VideoCapture1.PIP_Mode = VisioForge.Types.VFPIPMode.Custom;
-            this.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.VFPIPResizeQuality.RQ_NN;
+            this.VideoCapture1.PIP_Mode = VisioForge.Types.PIPMode.Custom;
+            this.VideoCapture1.PIP_ResizeQuality = VisioForge.Types.PIPResizeQuality.RQ_NN;
             this.VideoCapture1.Push_Source = null;
             this.VideoCapture1.Screen_Capture_Source = null;
             this.VideoCapture1.SeparateCapture_AutostartCapture = false;
@@ -1086,7 +1086,7 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.SeparateCapture_Filename_Mask = "output %yyyy-%MM-%dd %hh-%mm-%ss.%ext";
             this.VideoCapture1.SeparateCapture_FileSizeThreshold = ((long)(0));
             this.VideoCapture1.SeparateCapture_GMFMode = true;
-            this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.VFSeparateCaptureMode.Normal;
+            this.VideoCapture1.SeparateCapture_Mode = VisioForge.Types.SeparateCaptureMode.Normal;
             this.VideoCapture1.SeparateCapture_TimeThreshold = System.TimeSpan.Parse("00:00:00");
             this.VideoCapture1.Size = new System.Drawing.Size(467, 348);
             this.VideoCapture1.Start_DelayEnabled = false;
@@ -1100,9 +1100,9 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.TVTuner_FM_Tuning_StopFrequency = 0;
             this.VideoCapture1.TVTuner_Frequency = 0;
             this.VideoCapture1.TVTuner_InputType = "";
-            this.VideoCapture1.TVTuner_Mode = VisioForge.Types.VFTVTunerMode.Default;
+            this.VideoCapture1.TVTuner_Mode = VisioForge.Types.TVTunerMode.Default;
             this.VideoCapture1.TVTuner_Name = "";
-            this.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.VFTVTunerVideoFormat.PAL_D;
+            this.VideoCapture1.TVTuner_TVFormat = VisioForge.Types.TVTunerVideoFormat.PAL_D;
             this.VideoCapture1.Video_CaptureDevice = "";
             this.VideoCapture1.Video_CaptureDevice_Format = "";
             this.VideoCapture1.Video_CaptureDevice_Format_UseBest = true;
@@ -1121,7 +1121,7 @@ namespace Computer_Vision_Demo
             this.VideoCapture1.Video_Effects_MergeTextLogos = false;
             this.VideoCapture1.Video_Resize = null;
             this.VideoCapture1.Video_ResizeOrCrop_Enabled = false;
-            this.VideoCapture1.Video_Rotation = VisioForge.Types.VFRotateMode.RotateNone;
+            this.VideoCapture1.Video_Rotation = VisioForge.Types.RotateMode.RotateNone;
             this.VideoCapture1.Video_Sample_Grabber_Enabled = false;
             this.VideoCapture1.Video_Sample_Grabber_UseForVideoEffects = false;
             this.VideoCapture1.Video_Still_Frames_Grabber_Enabled = false;
@@ -1148,7 +1148,7 @@ namespace Computer_Vision_Demo
             this.MediaPlayer1.Audio_VUMeter_Pro_Volume = 0;
             this.MediaPlayer1.BackColor = System.Drawing.Color.Black;
             this.MediaPlayer1.Barcode_Reader_Enabled = false;
-            this.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.VFBarcodeType.Auto;
+            this.MediaPlayer1.Barcode_Reader_Type = VisioForge.Types.BarcodeType.Auto;
             this.MediaPlayer1.ChromaKey = null;
             this.MediaPlayer1.Custom_Audio_Decoder = null;
             this.MediaPlayer1.Custom_Splitter = null;
@@ -1162,7 +1162,7 @@ namespace Computer_Vision_Demo
             this.MediaPlayer1.Debug_Mode = false;
             this.MediaPlayer1.Debug_Telemetry = false;
             this.MediaPlayer1.Encryption_Key = "";
-            this.MediaPlayer1.Encryption_KeyType = VisioForge.Types.VFEncryptionKeyType.String;
+            this.MediaPlayer1.Encryption_KeyType = VisioForge.Types.EncryptionKeyType.String;
             this.MediaPlayer1.Face_Tracking = null;
             this.MediaPlayer1.Info_UseLibMediaInfo = false;
             this.MediaPlayer1.Location = new System.Drawing.Point(481, 12);
@@ -1185,8 +1185,8 @@ namespace Computer_Vision_Demo
             this.MediaPlayer1.Selection_Stop = 0;
             this.MediaPlayer1.Size = new System.Drawing.Size(467, 348);
             this.MediaPlayer1.Source_Custom_CLSID = null;
-            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.VFMediaPlayerSourceGPUDecoder.nVidiaCUVID;
-            this.MediaPlayer1.Source_Mode = VisioForge.Types.VFMediaPlayerSource.File_DS;
+            this.MediaPlayer1.Source_GPU_Mode = VisioForge.Types.LAVGPUDecoder.nVidiaCUVID;
+            this.MediaPlayer1.Source_Mode = VisioForge.Types.MediaPlayerSourceMode.File_DS;
             this.MediaPlayer1.Source_Stream = null;
             this.MediaPlayer1.Source_Stream_AudioPresent = true;
             this.MediaPlayer1.Source_Stream_Size = ((long)(0));

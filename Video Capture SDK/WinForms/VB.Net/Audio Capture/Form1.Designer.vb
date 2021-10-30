@@ -10,6 +10,31 @@ Partial Class Form1
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
         End If
+
+        mp3SettingsDialog?.Dispose()
+        mp3SettingsDialog = Nothing
+
+        m4aSettingsDialog?.Dispose()
+        m4aSettingsDialog = Nothing
+
+        flacSettingsDialog?.Dispose()
+        flacSettingsDialog = Nothing
+
+        wmvSettingsDialog?.Dispose()
+        wmvSettingsDialog = Nothing
+
+        speexSettingsDialog?.Dispose()
+        speexSettingsDialog = Nothing
+
+        pcmSettingsDialog?.Dispose()
+        pcmSettingsDialog = Nothing
+
+        oggVorbisSettingsDialog?.Dispose()
+        oggVorbisSettingsDialog = Nothing
+
+        VideoCapture1?.Dispose()
+        VideoCapture1 = Nothing
+
         MyBase.Dispose(disposing)
     End Sub
 

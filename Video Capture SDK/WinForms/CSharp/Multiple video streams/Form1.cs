@@ -16,30 +16,54 @@ namespace multiple_video_streams
     using Properties;
 
     using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Controls.VideoCapture;
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
-        private VideoCapture videoCaptureHelper;
-        
+        private VideoCaptureCore videoCaptureHelper;
+
+        private VideoCaptureCore VideoCapture1;
+
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private void CreateEngine()
+        {
+            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
+            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
+        }
+
+        private void DestroyEngine()
+        {
+            VideoCapture1.OnError -= VideoCapture1_OnError;
+            VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
+            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
+
+            VideoCapture1.Dispose();
+            VideoCapture1 = null;
+        }
 
         private async void btStart_Click(object sender, EventArgs e)
         {
             // 1st device
-            videoCapture1.Video_CaptureDevice = cbCamera1.Text;
-            videoCapture1.Video_CaptureDevice_Format_UseBest = false;
-            videoCapture1.Video_CaptureDevice_Format = cbVideoFormat1.Text;
-            videoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoFrameRate1.Text);
+            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
+            VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
+            VideoCapture1.Video_CaptureDevice.Format = cbVideoFormat1.Text;
+            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoFrameRate1.Text);
 
             // 2nd device
-            videoCapture1.PIP_Sources_Add_VideoCaptureDevice(
+            VideoCapture1.PIP_Sources_Add_VideoCaptureDevice(
                 cbCamera2.Text,
                 cbVideoFormat2.Text,
                 false,
@@ -50,44 +74,46 @@ namespace multiple_video_streams
                 320,
                 240);
 
-            var wmvOutput = new VFWMVOutput
+            var wmvOutput = new WMVOutput
                                 {
-                                    Mode = VFWMVMode.ExternalProfileFromText,
+                                    Mode = WMVMode.ExternalProfileFromText,
                                     External_Profile_Text = Resources.WMVProfile
                                 };
-            videoCapture1.Output_Format = wmvOutput;
+            VideoCapture1.Output_Format = wmvOutput;
 
             // main options
-            videoCapture1.OnError += videoCapture1_OnError;
+            VideoCapture1.OnError += VideoCapture1_OnError;
 
-            videoCapture1.Output_Filename = edFilename.Text;
-            videoCapture1.Mode = VFVideoCaptureMode.VideoCapture;
-            videoCapture1.PIP_Mode = VFPIPMode.MultipleVideoStreams;
-            videoCapture1.PIP_AddSampleGrabbers = true;
-            videoCapture1.Audio_PlayAudio = false;
-            videoCapture1.Audio_RecordAudio = false;
+            VideoCapture1.Output_Filename = edFilename.Text;
+            VideoCapture1.Mode = VideoCaptureMode.VideoCapture;
+            VideoCapture1.PIP_Mode = PIPMode.MultipleVideoStreams;
+            VideoCapture1.PIP_AddSampleGrabbers = true;
+            VideoCapture1.Audio_PlayAudio = false;
+            VideoCapture1.Audio_RecordAudio = false;
 
-            videoCapture1.Debug_Mode = cbDebugMode.Checked;
-            videoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            VideoCapture1.Debug_Mode = cbDebugMode.Checked;
+            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             
-            await videoCapture1.StartAsync();
+            await VideoCapture1.StartAsync();
             tmRecording.Start();
         }
 
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
-            await videoCapture1.StopAsync();
+            await VideoCapture1.StopAsync();
 
             videoScreen2.Image = null;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            videoCaptureHelper = new VideoCapture();
+            CreateEngine();
+
+            videoCaptureHelper = new VideoCaptureCore();
             Text += $" (SDK v{videoCaptureHelper.SDK_Version})";
 
-            foreach (var device in videoCaptureHelper.Video_CaptureDevicesInfo)
+            foreach (var device in videoCaptureHelper.Video_CaptureDevices)
             {
                 cbCamera1.Items.Add(device.Name);
                 cbCamera2.Items.Add(device.Name);
@@ -101,7 +127,7 @@ namespace multiple_video_streams
 
             edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "multiple_video_streams.wmv");
 
-            videoCapture1.Video_Renderer_SetAuto();
+            VideoCapture1.Video_Renderer_SetAuto();
 
             tmRecording.Elapsed += (senderx, args) =>
             {
@@ -111,29 +137,10 @@ namespace multiple_video_streams
 
         private void cbCamera1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            videoCaptureHelper.Video_CaptureDevice = cbCamera1.Text;
-
-            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
-            }
-
-            var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat1.Text);
-            if (videoFormat == null)
-            {
-                return;
-            }
-
-            cbVideoFrameRate1.Items.Clear();
-            foreach (var frameRate in videoFormat.FrameRates)
-            {
-                cbVideoFrameRate1.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
-            }
-
-            if (cbVideoFrameRate1.Items.Count > 4)
-            {
-                cbVideoFrameRate1.SelectedIndex = 4;
             }
 
             var formats = deviceItem.VideoFormats;
@@ -144,37 +151,18 @@ namespace multiple_video_streams
                 cbVideoFormat1.Items.Add(format);
             }
 
-            if (cbVideoFormat1.Items.Count > 4)
+            if (cbVideoFormat1.Items.Count > 0)
             {
-                cbVideoFormat1.SelectedIndex = 4;
-            }
+                cbVideoFormat1.SelectedIndex = 0;
+            }           
         }
 
         private void cbCamera2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            videoCaptureHelper.Video_CaptureDevice = cbCamera2.Text;
-
-            var deviceItem = videoCaptureHelper.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;
-            }
-
-            var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat2.Text);
-            if (videoFormat == null)
-            {
-                return;
-            }
-
-            cbVideoFrameRate2.Items.Clear();
-            foreach (var frameRate in videoFormat.FrameRates)
-            {
-                cbVideoFrameRate2.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture));
-            }
-
-            if (cbVideoFrameRate2.Items.Count > 4)
-            {
-                cbVideoFrameRate2.SelectedIndex = 4;
             }
 
             var formats = deviceItem.VideoFormats;
@@ -191,9 +179,9 @@ namespace multiple_video_streams
             }
         }
 
-        private void videoCapture1_OnVideoFrameBitmap(object sender, VideoFrameBitmapEventArgs e)
+        private void VideoCapture1_OnVideoFrameBitmap(object sender, VideoFrameBitmapEventArgs e)
         {
-            if (e.SourceStream == VFVideoStreamType.PIP1)
+            if (e.SourceStream == VideoStreamType.PIP1)
             {
                 videoScreen2.Image = e.Frame;
             }
@@ -207,12 +195,12 @@ namespace multiple_video_streams
             }
         }
 
-        private void videoCapture1_OnError(object sender, ErrorsEventArgs e)
+        private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
-        private void videoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
+        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             Log("(NOT ERROR) " + e.Message);
         }
@@ -221,7 +209,7 @@ namespace multiple_video_streams
         {
             if (IsHandleCreated)
             {
-                var ts = videoCapture1.Duration_Time();
+                var ts = VideoCapture1.Duration_Time();
 
                 if (Math.Abs(ts.TotalMilliseconds) < 0.01)
                 {
@@ -245,7 +233,7 @@ namespace multiple_video_streams
 
             if (cbVideoFormat1.SelectedIndex != -1)
             {
-                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera1.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -279,7 +267,7 @@ namespace multiple_video_streams
 
             if (cbVideoFormat2.SelectedIndex != -2)
             {
-                var deviceItem = videoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbCamera2.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -302,6 +290,11 @@ namespace multiple_video_streams
                     cbVideoFrameRate2.SelectedIndex = 0;
                 }
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DestroyEngine();
         }
     }
 }

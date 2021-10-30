@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types;
-using VisioForge.Types.OutputFormat;
+using VisioForge.Types.Output;
 
 namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
@@ -41,7 +41,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <exception cref="ArgumentOutOfRangeException">
         /// ArgumentOutOfRangeException.
         /// </exception>
-        public void LoadSettings(VFOGGVorbisOutput oggVorbisOutput)
+        public void LoadSettings(OGGVorbisOutput oggVorbisOutput)
         {
             edOGGQuality.Text = oggVorbisOutput.Quality.ToString();
             cbOGGMinimum.Text = oggVorbisOutput.MinBitRate.ToString();
@@ -50,10 +50,10 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             switch (oggVorbisOutput.Mode)
             {
-                case VFVorbisMode.Quality:
+                case VorbisMode.Quality:
                     rbOGGQuality.Checked = true;
                     break;
-                case VFVorbisMode.Bitrate:
+                case VorbisMode.Bitrate:
                     rbOGGBitrate.Checked = true;
                     break;
                 default:
@@ -67,7 +67,7 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
         /// <param name="oggVorbisOutput">
         /// Output.
         /// </param>
-        public void SaveSettings(ref VFOGGVorbisOutput oggVorbisOutput)
+        public void SaveSettings(ref OGGVorbisOutput oggVorbisOutput)
         {
             oggVorbisOutput.Quality = Convert.ToInt32(edOGGQuality.Text);
             oggVorbisOutput.MinBitRate = Convert.ToInt32(cbOGGMinimum.Text);
@@ -76,11 +76,11 @@ namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 
             if (rbOGGQuality.Checked)
             {
-                oggVorbisOutput.Mode = VFVorbisMode.Quality;
+                oggVorbisOutput.Mode = VorbisMode.Quality;
             }
             else
             {
-                oggVorbisOutput.Mode = VFVorbisMode.Bitrate;
+                oggVorbisOutput.Mode = VorbisMode.Bitrate;
             }
         }
 

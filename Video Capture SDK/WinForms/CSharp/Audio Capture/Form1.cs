@@ -17,7 +17,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
     using System.Windows.Forms;
 
     using VisioForge.Types;
-    using VisioForge.Types.OutputFormat;
+    using VisioForge.Types.AudioEffects;
+    using VisioForge.Types.Events;
+    using VisioForge.Types.Output;
+    using VisioForge.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -35,9 +38,9 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
         private WMVSettingsDialog wmvSettingsDialog;
 
-        private readonly VideoCaptureCore VideoCapture1;
+        private VideoCaptureCore VideoCapture1;
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public Form1()
         {
@@ -59,7 +62,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                 UpdateRecordingTime();
             };
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices())
+            foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -74,7 +77,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string line in deviceItem.Lines)
@@ -87,12 +90,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             if (cbAudioInputLine.Items.Count > 0)
             {
                 cbAudioInputLine.SelectedIndex = 0;
-                cbAudioInputLine_SelectedIndexChanged(null, null);
-                cbAudioInputFormat_SelectedIndexChanged(null, null);
             }
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -132,10 +133,9 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -163,8 +163,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                 }
 
-                cbAudioInputFormat_SelectedIndexChanged(null, null);
-
                 cbAudioInputLine.Items.Clear();
 
                 foreach (string line in deviceItem.Lines)
@@ -177,8 +175,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     cbAudioInputLine.SelectedIndex = 0;
                 }
 
-                cbAudioInputLine_SelectedIndexChanged(null, null);
-
                 btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
         }
@@ -186,17 +182,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
-        }
-
-        private void cbAudioInputFormat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-        }
-
-        private void cbAudioInputLine_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
-        }
+        }      
 
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
@@ -332,7 +318,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
-        private void SetWMAOutput(ref VFWMAOutput wmaOutput)
+        private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
             {
@@ -343,17 +329,17 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
-        private void SetACMOutput(ref VFACMOutput acmOutput)
+        private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs().ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
         
-        private void SetMP3Output(ref VFMP3Output mp3Output)
+        private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
             {
@@ -363,7 +349,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
         
-        private void SetFLACOutput(ref VFFLACOutput flacOutput)
+        private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
             {
@@ -373,7 +359,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
-        private void SetSpeexOutput(ref VFSpeexOutput speexOutput)
+        private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
             {
@@ -383,7 +369,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
-        public void SetM4AOutput(ref VFM4AOutput m4aOutput)
+        public void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
             {
@@ -393,7 +379,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
-        private void SetOGGOutput(ref VFOGGVorbisOutput oggVorbisOutput)
+        private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
             {
@@ -413,23 +399,25 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-       
-            VideoCapture1.Audio_CaptureDevice = cbAudioInputDevice.Text;
+
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
-            VideoCapture1.Audio_CaptureDevice_Format = cbAudioInputFormat.Text;
-            VideoCapture1.Audio_CaptureDevice_Format_UseBest = false;
-            VideoCapture1.Audio_CaptureDevice_Line = cbAudioInputLine.Text;
+
+            VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
+            VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
+            VideoCapture1.Audio_CaptureDevice.Format_UseBest = false;
+            VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text;
+
             VideoCapture1.Audio_PlayAudio = cbPlayAudio.Checked;
-            VideoCapture1.Video_Renderer.VideoRendererInternal = VFVideoRendererInternal.None;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
            
             if (cbMode.SelectedIndex == 0)
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.AudioPreview;
+                VideoCapture1.Mode = VideoCaptureMode.AudioPreview;
                 VideoCapture1.Audio_RecordAudio = true;
             }
             else
             {
-                VideoCapture1.Mode = VFVideoCaptureMode.AudioCapture;
+                VideoCapture1.Mode = VideoCaptureMode.AudioCapture;
                 VideoCapture1.Audio_RecordAudio = true;
                 VideoCapture1.Output_Filename = edOutput.Text;
 
@@ -437,7 +425,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                 {
                     case 0:
                     {
-                        var acmOutput = new VFACMOutput();
+                        var acmOutput = new ACMOutput();
                         SetACMOutput(ref acmOutput);
                         VideoCapture1.Output_Format = acmOutput;
 
@@ -445,7 +433,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 1:
                     {
-                        var mp3Output = new VFMP3Output();
+                        var mp3Output = new MP3Output();
                         SetMP3Output(ref mp3Output);
                         VideoCapture1.Output_Format = mp3Output;
 
@@ -453,7 +441,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 2:
                     {
-                        var wmaOutput = new VFWMAOutput();
+                        var wmaOutput = new WMAOutput();
                         SetWMAOutput(ref wmaOutput);
                         VideoCapture1.Output_Format = wmaOutput;
 
@@ -461,7 +449,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 3:
                     {
-                        var oggVorbisOutput = new VFOGGVorbisOutput();
+                        var oggVorbisOutput = new OGGVorbisOutput();
                         SetOGGOutput(ref oggVorbisOutput);
                         VideoCapture1.Output_Format = oggVorbisOutput;
 
@@ -469,7 +457,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 4:
                     {
-                        var flacOutput = new VFFLACOutput();
+                        var flacOutput = new FLACOutput();
                         SetFLACOutput(ref flacOutput);
                         VideoCapture1.Output_Format = flacOutput;
 
@@ -477,7 +465,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 5:
                     {
-                        var speexOutput = new VFSpeexOutput();
+                        var speexOutput = new SpeexOutput();
                         SetSpeexOutput(ref speexOutput);
                         VideoCapture1.Output_Format = speexOutput;
 
@@ -485,7 +473,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                     case 6:
                     {
-                        var m4aOutput = new VFM4AOutput();
+                        var m4aOutput = new M4AOutput();
                         SetM4AOutput(ref m4aOutput);
                         VideoCapture1.Output_Format = m4aOutput;
 
@@ -498,10 +486,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             VideoCapture1.Audio_Effects_Clear(-1);
             VideoCapture1.Audio_Effects_Enabled = true;
 
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, VFAudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
   
             await VideoCapture1.StartAsync();
 
@@ -590,7 +578,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs().ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
