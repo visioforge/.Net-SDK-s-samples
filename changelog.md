@@ -12,17 +12,16 @@
 * Telemetry updated.
 * Custom redist loader updated.
 * NDI update.
-* Status property changes to State, type is PlaybackState in all SDKs.
-* UI controls splitted into Core (VideoCaptureCore, MediaPlayerCore, VideoEditCore) and VideoView.
-* Video_CaptureDevice... properties merged into Video_CaptureDevice property of VideoCaptureSource type.
-* Audio_CaptureDevice... properties merged into Audio_CaptureDevice property of AudioCaptureSource type.
-* In Media Player SDK Source_Stream... properties were merged into Source_MemoryStream property of MemoryStreamSource type
+* API breaking change: Status property changes to State, type is PlaybackState in all SDKs.
+* API breaking change: UI controls splitted into Core (VideoCaptureCore, MediaPlayerCore, VideoEditCore) and VideoView.
+* API breaking change: Video_CaptureDevice... properties merged into Video_CaptureDevice property of VideoCaptureSource type.
+* API breaking change: Audio_CaptureDevice... properties merged into Audio_CaptureDevice property of AudioCaptureSource type.
+* API breaking change: In Media Player SDK Source_Stream... properties were merged into Source_MemoryStream property of MemoryStreamSource type
 * Updated DVD playback
 * Updated FFMPEG source
 * API breaking change: Media Player SDK types moved from VisioForge.Types namespace to VisioForge.Types.MediaPlayer
 * API breaking change: Video Capture SDK types moved from VisioForge.Types namespace to VisioForge.Types.VideoCapture
 * API breaking change: Video Edit SDK types moved from VisioForge.Types namespace to "VisioForge.Types.VideoEdit"
-* API breaking change: Output types moved from VisioForge.Types namespace to VisioForge.Types.Output
 * API breaking change: Output types moved from VisioForge.Types namespace to VisioForge.Types.Output
 * API breaking change: Video Effects types moved from VisioForge.Types namespace to VisioForge.Types.VideoEffects
 * API breaking change: Audio Effects types moved from VisioForge.Types namespace to VisioForge.Types.AudioEffects

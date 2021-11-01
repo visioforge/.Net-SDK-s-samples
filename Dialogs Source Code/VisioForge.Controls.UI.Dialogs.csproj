@@ -7,9 +7,9 @@
     <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
     <Product>VisioForge.Controls.UI.Dialogs</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.0.1.0</AssemblyVersion>
-    <FileVersion>15.0.1.0</FileVersion>
-    <Version>15.0.1.0</Version>
+    <AssemblyVersion>15.0.2.0</AssemblyVersion>
+    <FileVersion>15.0.2.0</FileVersion>
+    <Version>15.0.2.0</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
