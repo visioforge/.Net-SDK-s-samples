@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
             this.btStartWithAudio = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
@@ -81,6 +82,7 @@
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btStartWithAudio);
             this.Controls.Add(this.VideoView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Video Capture SDK .Net - Screen capture to MP4 code snippet";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -1,4 +1,4 @@
-﻿namespace screen_capture_wmv
+﻿namespace video_capture_webcam_mp4
 {
     partial class Form1
     {
@@ -73,7 +73,7 @@
             this.Controls.Add(this.VideoView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Video Capture SDK .Net - Screen capture to WMV code snippet";
+            this.Text = "Video Capture SDK .Net - Video capture webcam to MP4 code snippet";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
