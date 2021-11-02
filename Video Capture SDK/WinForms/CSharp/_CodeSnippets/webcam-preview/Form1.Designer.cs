@@ -34,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btResume = new System.Windows.Forms.Button();
             this.btPause = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
@@ -362,6 +363,7 @@
             this.Controls.Add(this.btPause);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btStart);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "WebCam Preview Code Snippet";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
