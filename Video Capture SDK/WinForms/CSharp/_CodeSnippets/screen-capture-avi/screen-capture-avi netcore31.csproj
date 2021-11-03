@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <RootNamespace>video_preview_webcam_frame_capture</RootNamespace>
+    <RootNamespace>screen_capture_avi</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -15,5 +15,5 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.0.2" />
   </ItemGroup>
-
+  
 </Project>
