@@ -129,7 +129,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.0.2" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

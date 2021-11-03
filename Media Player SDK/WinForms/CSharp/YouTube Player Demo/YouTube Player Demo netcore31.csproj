@@ -9,8 +9,8 @@
     <AssemblyTitle>youtube-player</AssemblyTitle>
     <Product>youtube-player</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.0.2.0</AssemblyVersion>
-    <FileVersion>15.0.2.0</FileVersion>
+    <AssemblyVersion>15.0.3.0</AssemblyVersion>
+    <FileVersion>15.0.3.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -78,7 +78,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="15.0.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="15.0.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

@@ -17,7 +17,7 @@ namespace screen_capture_mp4
             InitializeComponent();
         }
 
-        private void btStartWithAudio_Click(object sender, EventArgs e)
+        private async void btStartWithAudio_Click(object sender, EventArgs e)
         {
             // set screen capture with full screen enabled
             videoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings() { FullScreen = true };
@@ -36,10 +36,10 @@ namespace screen_capture_mp4
             videoCapture1.Output_Format = new MP4Output();
             videoCapture1.Mode = VideoCaptureMode.ScreenCapture;
 
-            videoCapture1.Start();
+            await videoCapture1.StartAsync();
         }
 
-        private void btStartWithoutAudio_Click(object sender, EventArgs e)
+        private async void btStartWithoutAudio_Click(object sender, EventArgs e)
         {
             // set screen capture with full screen enabled
             videoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings() { FullScreen = true };
@@ -51,7 +51,8 @@ namespace screen_capture_mp4
             videoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             videoCapture1.Output_Format = new MP4Output();
             videoCapture1.Mode = VideoCaptureMode.ScreenCapture;
-            videoCapture1.Start();
+            
+            await videoCapture1.StartAsync();
         }
 
         private async void btStop_Click(object sender, EventArgs e)
