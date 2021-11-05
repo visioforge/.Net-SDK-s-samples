@@ -27,7 +27,7 @@ namespace Video_From_Images_CLI
 
 
             var options = new CommandLineOptions();
-            if (!VisioForge.Shared.CommandLine.Parser.Default.ParseArguments(args, options))
+            if (!VisioForge.Libs.CommandLine.Parser.Default.ParseArguments(args, options))
             {
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();

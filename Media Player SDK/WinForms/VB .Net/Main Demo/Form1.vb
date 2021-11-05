@@ -549,38 +549,27 @@ Public Class Form1
 
             ' "Read info" button
             If IsDBNull(sender) Then
-
                 Dim errorCode As FilePlaybackError
                 Dim errorText As String = ""
 
                 If (MediaInfoReader.IsFilePlayable(edFilenameOrURL.Text, errorCode, errorText)) Then
-
                     mmInfo.Text += "This file is playable" + Environment.NewLine
-
                 Else
-
                     mmInfo.Text += "This file is not playable" + Environment.NewLine
-
                 End If
             End If
 
             Dim keyType As EncryptionKeyType
             Dim key As Object
             If (rbEncryptionKeyString.Checked) Then
-
                 keyType = EncryptionKeyType.String
                 key = edEncryptionKeyString.Text
-
             ElseIf (rbEncryptionKeyFile.Checked) Then
-
                 keyType = EncryptionKeyType.File
                 key = edEncryptionKeyFile.Text
-
             Else
-
                 keyType = EncryptionKeyType.Binary
                 key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text)
-
             End If
 
             MediaInfo.ReadFileInfo(MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS, key, keyType, cbUseLibMediaInfo.Checked)

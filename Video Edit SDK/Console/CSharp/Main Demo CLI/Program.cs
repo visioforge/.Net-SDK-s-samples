@@ -92,7 +92,7 @@ namespace VE_Main_Demo_CLI
         static void Main(string[] args)
         {
             var options = new CommandLineOptions();
-            if (!VisioForge.Shared.CommandLine.Parser.Default.ParseArguments(args, options))
+            if (!VisioForge.Libs.CommandLine.Parser.Default.ParseArguments(args, options))
             {
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();

@@ -7,9 +7,9 @@
     <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
     <Product>VisioForge.Controls.UI.Dialogs</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.0.3.0</AssemblyVersion>
-    <FileVersion>15.0.3.0</FileVersion>
-    <Version>15.0.3.0</Version>
+    <AssemblyVersion>15.0.4.0</AssemblyVersion>
+    <FileVersion>15.0.4.0</FileVersion>
+    <Version>15.0.4.0</Version>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -267,6 +267,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VisioForge.Controls.UI\VisioForge.Controls.UI.csproj" />
     <ProjectReference Include="..\VisioForge.Controls\VisioForge.Controls.csproj" />
+    <ProjectReference Include="..\VisioForge.Libs\VisioForge.Libs.csproj" />
     <ProjectReference Include="..\VisioForge.Shared\VisioForge.Shared.csproj" />
     <ProjectReference Include="..\VisioForge.Types\VisioForge.Types.csproj" />
   </ItemGroup>
