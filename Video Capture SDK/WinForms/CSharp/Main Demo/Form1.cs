@@ -848,7 +848,6 @@ namespace VideoCapture_CSharp_Demo
                                || VideoCapture1.Mode == VideoCaptureMode.BDACapture
                                || VideoCapture1.Mode == VideoCaptureMode.CustomCapture
                                || VideoCapture1.Mode == VideoCaptureMode.IPCapture
-                               || VideoCapture1.Mode == VideoCaptureMode.KinectCapture
                                || VideoCapture1.Mode == VideoCaptureMode.ScreenCapture
                                || VideoCapture1.Mode == VideoCaptureMode.DecklinkSourceCapture
                                || VideoCapture1.Mode == VideoCaptureMode.VideoCapture;
@@ -2268,6 +2267,29 @@ namespace VideoCapture_CSharp_Demo
                 case 7:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.External;
+
+                        break;
+                    }
+
+                case 8:
+                    {
+                        VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.Icecast_FFMPEG_EXE;
+
+                        var ffmpegOutput = new FFMPEGEXEOutput();
+
+                        if (rbNetworkUDPFFMPEG.Checked)
+                        {
+                            ffmpegOutput.FillDefaults(DefaultsProfile.Icecast, true);
+                        }
+                        else
+                        {
+                            SetFFMPEGEXEOutput(ref ffmpegOutput);
+                        }
+
+                        ffmpegOutput.UsePipe = cbNetworkIcecastFFMPEGUsePipes.Checked;
+                        VideoCapture1.Network_Streaming_Output = ffmpegOutput;
+
+                        VideoCapture1.Network_Streaming_URL = edIcecastURL.Text;
 
                         break;
                     }

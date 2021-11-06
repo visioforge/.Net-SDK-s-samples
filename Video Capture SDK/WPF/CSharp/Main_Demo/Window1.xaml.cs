@@ -1428,7 +1428,6 @@ namespace Main_Demo
                                || this.VideoCapture1.Mode == VideoCaptureMode.BDACapture
                                || this.VideoCapture1.Mode == VideoCaptureMode.CustomCapture
                                || this.VideoCapture1.Mode == VideoCaptureMode.IPCapture
-                               || this.VideoCapture1.Mode == VideoCaptureMode.KinectCapture
                                || this.VideoCapture1.Mode == VideoCaptureMode.ScreenCapture
                                || this.VideoCapture1.Mode == VideoCaptureMode.DecklinkSourceCapture
                                || this.VideoCapture1.Mode == VideoCaptureMode.VideoCapture;

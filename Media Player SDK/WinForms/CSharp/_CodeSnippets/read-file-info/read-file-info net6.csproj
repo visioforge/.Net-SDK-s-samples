@@ -9,8 +9,8 @@
     <AssemblyTitle>read-file-info</AssemblyTitle>
     <Product>read-file-info</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.0.5.0</AssemblyVersion>
-    <FileVersion>15.0.5.0</FileVersion>
+    <AssemblyVersion>15.0.6.0</AssemblyVersion>
+    <FileVersion>15.0.6.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,6 +57,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="15.0.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer.TRIAL" Version="15.0.6" />
   </ItemGroup>
 </Project>
