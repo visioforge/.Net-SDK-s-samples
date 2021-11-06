@@ -1,3 +1,6 @@
+15.*
+* Disabled Sentry debug messages in console
+
 15.0
 * Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
 * RTSP Live555 IP camera engine has been removed. Please use RTSP Low Latency or FFMPEG engines.
