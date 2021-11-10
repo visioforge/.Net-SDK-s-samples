@@ -4,8 +4,9 @@
     <LangVersion>default</LangVersion>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyTitle>VisioForge.Controls.UI.Dialogs</AssemblyTitle>
-    <Product>VisioForge.Controls.UI.Dialogs</Product>
+    <UseWPF>true</UseWPF>
+    <AssemblyTitle>VisioForge.Controls.UI.Dialogs.Shared</AssemblyTitle>
+    <Product>VisioForge.Controls.UI.Dialogs.Shared</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
     <AssemblyVersion>15.0.6.0</AssemblyVersion>
     <FileVersion>15.0.6.0</FileVersion>
@@ -265,27 +266,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioForge.Controls.UI\VisioForge.Controls.UI.csproj" />
-    <ProjectReference Include="..\VisioForge.Controls\VisioForge.Controls.csproj" />
-    <ProjectReference Include="..\VisioForge.Libs\VisioForge.Libs.csproj" />
-    <ProjectReference Include="..\VisioForge.Shared\VisioForge.Shared.csproj" />
-    <ProjectReference Include="..\VisioForge.Types\VisioForge.Types.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Settings.StyleCop" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="VisioForge.DotNet.Core" Version="15.0.6" />
   </ItemGroup>
 </Project>

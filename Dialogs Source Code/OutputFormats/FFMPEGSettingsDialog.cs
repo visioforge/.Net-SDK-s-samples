@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 
-namespace VisioForge.Controls.UI.Dialogs.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 {
     /// <summary>
     /// FFMPEG settings dialog.

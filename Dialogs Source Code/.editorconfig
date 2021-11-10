@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = none

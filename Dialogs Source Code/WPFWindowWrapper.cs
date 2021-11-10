@@ -5,7 +5,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace VisioForge.Controls.UI.Dialogs
+namespace VisioForge.Controls.UI.Dialogs.Shared
 {
     /// <summary>
     /// Handle wrapper to show WinForms dialog in WPF app.

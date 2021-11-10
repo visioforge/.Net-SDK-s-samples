@@ -1,1 +1,4 @@
 .gitignorexxx
+bin/
+obj/
+.vs/

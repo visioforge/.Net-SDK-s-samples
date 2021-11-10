@@ -13,7 +13,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 // ReSharper disable InconsistentNaming
 
-namespace VisioForge.Controls.UI.Dialogs.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 {
     /// <summary>
     /// Output format manager.

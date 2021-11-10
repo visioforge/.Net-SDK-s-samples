@@ -1,4 +1,4 @@
-﻿namespace VisioForge.Controls.UI.Dialogs.VideoEffects
+﻿namespace VisioForge.Controls.UI.Dialogs.Shared.VideoEffects
 {
     partial class ImageLogoSettingsDialog
     {

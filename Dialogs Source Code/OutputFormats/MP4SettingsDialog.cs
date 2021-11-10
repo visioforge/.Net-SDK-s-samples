@@ -11,7 +11,7 @@ using VisioForge.Tools;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 
-namespace VisioForge.Controls.UI.Dialogs.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 {
     /// <summary>
     /// MP4 settings dialog.

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace VisioForge.Controls.UI.Dialogs.VideoEffects
+namespace VisioForge.Controls.UI.Dialogs.Shared.VideoEffects
 {
     using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.VideoCapture;
@@ -25,7 +25,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <param name="effect">
         /// Effect.
         /// </param>
-        void Attach(IVFVideoEffect effect);
+        void Attach(IVideoEffect effect);
 
         /// <summary>
         /// Fills effect.
@@ -33,7 +33,7 @@ namespace VisioForge.Controls.UI.Dialogs.VideoEffects
         /// <param name="effect">
         /// Effect.
         /// </param>
-        void Fill(IVFVideoEffect effect);
+        void Fill(IVideoEffect effect);
 
         /// <summary>
         /// Generates new effect name.

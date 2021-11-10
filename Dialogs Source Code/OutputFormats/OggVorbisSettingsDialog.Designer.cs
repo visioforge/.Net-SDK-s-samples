@@ -1,4 +1,4 @@
-﻿namespace VisioForge.Controls.UI.Dialogs.OutputFormats
+﻿namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 {
     partial class OggVorbisSettingsDialog
     {

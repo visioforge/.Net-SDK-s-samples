@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace VisioForge.Controls.UI.Dialogs.VideoEffects
+namespace VisioForge.Controls.UI.Dialogs.Shared.VideoEffects
 {
     using VisioForge.Controls.MediaPlayer;
     using VisioForge.Controls.VideoCapture;

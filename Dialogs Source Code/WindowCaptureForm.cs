@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace VisioForge.Controls.UI.Dialogs
+namespace VisioForge.Controls.UI.Dialogs.Shared
 {
     using System;
     using System.Drawing;

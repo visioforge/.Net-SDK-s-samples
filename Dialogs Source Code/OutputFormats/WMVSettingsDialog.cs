@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace VisioForge.Controls.UI.Dialogs.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 {
     using System;
     using System.Collections.Generic;
