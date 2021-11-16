@@ -712,8 +712,8 @@ Public Class Form1
 
         Dim captureMode = (VideoCapture1.Mode = VideoCaptureMode.AudioCapture Or VideoCapture1.Mode = VideoCaptureMode.BDACapture Or
                            VideoCapture1.Mode = VideoCaptureMode.CustomCapture Or VideoCapture1.Mode = VideoCaptureMode.IPCapture Or
-                           VideoCapture1.Mode = VideoCaptureMode.KinectCapture Or VideoCapture1.Mode = VideoCaptureMode.ScreenCapture Or
-                           VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture Or VideoCapture1.Mode = VideoCaptureMode.VideoCapture)
+                           VideoCapture1.Mode = VideoCaptureMode.ScreenCapture Or VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture Or
+                           VideoCapture1.Mode = VideoCaptureMode.VideoCapture)
 
         If (captureMode) Then
             VideoCapture1.Output_Filename = edOutput.Text

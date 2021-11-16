@@ -411,12 +411,12 @@ Public Class Form1
 
     Private Sub VideoCapture1_OnAudioFrameBuffer(sender As Object, e As AudioFrameBufferEventArgs)
 
-        If (e.Timestamp.TotalMilliseconds < 0) Then
+        If (e.Frame.Timestamp.TotalMilliseconds < 0) Then
             Return
         End If
 
         BeginInvoke(Sub()
-                        lbTimestamp.Text = $"Recording time: " + String.Format("{0:00}:{1:00}:{2:00}", e.Timestamp.Hours, e.Timestamp.Minutes, e.Timestamp.Seconds)
+                        lbTimestamp.Text = $"Recording time: " + String.Format("{0:00}:{1:00}:{2:00}", e.Frame.Timestamp.Hours, e.Frame.Timestamp.Minutes, e.Frame.Timestamp.Seconds)
                     End Sub)
     End Sub
 

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types.Output;
 
-namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     /// <summary>
     /// GIF settings dialog.

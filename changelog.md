@@ -1,6 +1,8 @@
 15.*
-* Disabled Sentry debug messages in console
+* Disabled Sentry debug messages in the console
 * Added Icecast streaming
+* VideoStreamInfo.FrameRate property type changed to VideoFrameRate (with numerator and denominator) from double
+* Updated WPF VideoView, resolved the issue for IP cameras stream playback
 
 15.0
 * Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.

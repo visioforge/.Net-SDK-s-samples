@@ -1,4 +1,4 @@
-﻿namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
+﻿namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     partial class WebMSettingsDialog
     {

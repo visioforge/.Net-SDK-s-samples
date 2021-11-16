@@ -661,14 +661,14 @@ namespace Audio_Capture
 
         private void VideoCapture1_OnAudioFrameBuffer(object sender, AudioFrameBufferEventArgs e)
         {
-            if (e.Timestamp.TotalMilliseconds < 0)
+            if (e.Frame.Timestamp.TotalMilliseconds < 0)
             {
                 return;
             }
 
             Dispatcher.BeginInvoke((Action)(() =>
             {
-                lbTimestamp.Text = "Recording time: " + e.Timestamp.ToString(@"hh\:mm\:ss");
+                lbTimestamp.Text = "Recording time: " + e.Frame.Timestamp.ToString(@"hh\:mm\:ss");
             }));
         }
 

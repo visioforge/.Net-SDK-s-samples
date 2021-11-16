@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using VisioForge.Types.Output;
 
-namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     using VisioForge.Types.FFMPEGEXE;
 
@@ -948,7 +948,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
                     (videoEncoderSettings as MPEG2Settings).GOPSize = Convert.ToInt32(edVideoGOPSize.Text);
                     (videoEncoderSettings as MPEG2Settings).BFrames = Convert.ToInt32(edVideoBFramesCount.Text);
                 }
-
+                
                 //ffmpegOutput.Video_X264_Quantizer = tbFFEXEH264Quantizer.Value;
                 //ffmpegOutput.Video_H264_Mode = (VFFFMPEGEXEH264Mode)cbFFEXEH264Mode.SelectedIndex;
                 //ffmpegOutput.Video_H264_Preset = (X264Preset)cbFFEXEH264Usage.SelectedIndex;
@@ -1365,7 +1365,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 
                     cbVideoCodec.SelectedIndex = 5;
                     cbAudioCodec.SelectedIndex = 1;
-
+                    
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
 
@@ -1399,7 +1399,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
 
                     cbAudioCodec.SelectedIndex = 1;
                     cbVideoCodec.SelectedIndex = 7;
-
+                    
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
                     break;
@@ -1522,7 +1522,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
                     cbOutputFormat.SelectedIndex = 4;
 
                     cbAudioCodec.SelectedIndex = 13;
-                    cbVideoCodec.SelectedIndex = 16;
+                    cbVideoCodec.SelectedIndex = 16;                    
 
                     cbFFEXEVideoCodec_SelectedIndexChanged(null, null);
                     cbFFEXEAudioCodec_SelectedIndexChanged(null, null);
@@ -2041,7 +2041,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
                         cbH264WebFastStart.Checked = false;
 
                         tbVideoQuality.Enabled = true;
-                        edVideoTargetBitrate.Enabled = true;
+                        edVideoTargetBitrate.Enabled = true;                        
                     }
 
                     break;
@@ -2055,7 +2055,7 @@ namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
                         cbH264Profile.SelectedIndex = 0;
                         cbH264QuickTimeCompatibility.Checked = true;
                         cbH264WebFastStart.Checked = false;
-                        cbH264ZeroTolerance.Checked = false;
+                        cbH264ZeroTolerance.Checked = false;                        
                     }
 
                     break;

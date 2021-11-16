@@ -450,19 +450,19 @@ namespace Video_From_Images
 
             if (predefinedImagesUsed)
             {
-                if (e.StartTime.TotalMilliseconds < 2000)
+                if (e.Timestamp.TotalMilliseconds < 2000)
                 {
                     frame = Resources._1;
                 }
-                else if (e.StartTime.TotalMilliseconds < 4000)
+                else if (e.Timestamp.TotalMilliseconds < 4000)
                 {
                     frame = Resources._2;
                 }
-                else if (e.StartTime.TotalMilliseconds < 6000)
+                else if (e.Timestamp.TotalMilliseconds < 6000)
                 {
                     frame = Resources._3;
                 }
-                else if (e.StartTime.TotalMilliseconds < 8000)
+                else if (e.Timestamp.TotalMilliseconds < 8000)
                 {
                     frame = Resources._4;
                 }
@@ -473,7 +473,7 @@ namespace Video_From_Images
             }
             else
             {
-                int index = (int)Math.Truncate(e.StartTime.TotalMilliseconds / 2000);
+                int index = (int)Math.Truncate(e.Timestamp.TotalMilliseconds / 2000);
                 if (loadedImageFilename == loadedFiles[index])
                 {
                     frame = loadedImage;

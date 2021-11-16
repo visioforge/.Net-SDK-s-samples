@@ -343,10 +343,10 @@ namespace Main_Demo
                 cbAudioOutputDevice_SelectedIndexChanged(null, null);
             }
 
-            if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
+            if (!string.IsNullOrEmpty(cbAudioInputDevice.SelectedValue.ToString()))
             {
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedValue.ToString());
                 if (deviceItem != null)
                 {
                     foreach (string line in deviceItem.Lines)
@@ -518,7 +518,7 @@ namespace Main_Demo
                         {
                             string input =
                                 VideoCapture1.Video_CaptureDevice_CrossBar_GetConnectedInputForOutput(
-                                    cbCrossbarOutput.Text);
+                                    cbCrossbarOutput.SelectedValue.ToString());
 
                             if (input != string.Empty)
                             {
@@ -631,7 +631,7 @@ namespace Main_Demo
 
                 if (cbAudioInputDevice.SelectedIndex != -1)
                 {
-                    var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                    var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedValue.ToString());
                     if (deviceItem != null)
                     {
                         var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
@@ -723,7 +723,7 @@ namespace Main_Demo
             settings.Right = Convert.ToInt32(edScreenRight.Text);
             settings.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.IsChecked
                                                                   == true;
-            settings.DisplayIndex = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
+            settings.DisplayIndex = Convert.ToInt32(cbScreenCaptureDisplayIndex.SelectedValue);
             settings.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.IsChecked == true;
         }
 
@@ -731,7 +731,7 @@ namespace Main_Demo
         {
             settings = new IPCameraSourceSettings
             {
-                URL = cbIPURL.Text
+                URL = cbIPURL.SelectedValue.ToString()
             };
 
             bool lavGPU = false;
@@ -795,7 +795,7 @@ namespace Main_Demo
 
                 if (cbONVIFProfile.SelectedIndex != -1)
                 {
-                    settings.ONVIF_SourceProfile = cbONVIFProfile.Text;
+                    settings.ONVIF_SourceProfile = cbONVIFProfile.SelectedValue.ToString();
                 }
             }
 
@@ -2402,7 +2402,7 @@ namespace Main_Demo
             {
                 string relatedInput;
                 string relatedOutput;
-                VideoCapture1.Video_CaptureDevice_CrossBar_GetRelated(e.AddedItems[0].ToString(), cbCrossbarOutput.Text, out relatedInput, out relatedOutput);
+                VideoCapture1.Video_CaptureDevice_CrossBar_GetRelated(e.AddedItems[0].ToString(), cbCrossbarOutput.SelectedValue.ToString(), out relatedInput, out relatedOutput);
             }
         }
 
@@ -2605,12 +2605,12 @@ namespace Main_Demo
 
         private void btVideoCaptureDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
-            VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
+            VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.SelectedValue.ToString());
         }
 
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
-            VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
+            VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.SelectedValue.ToString());
         }
 
         private void btConnect_Click(object sender, RoutedEventArgs e)
@@ -2732,7 +2732,7 @@ namespace Main_Demo
         {
             if (cbTVCountry.SelectedIndex != -1)
             {
-                VideoCapture1.TVTuner_Country = cbTVCountry.Text;
+                VideoCapture1.TVTuner_Country = cbTVCountry.SelectedValue.ToString();
                 edTVDefaultFormat.Text = VideoCapture1.TVTuner_Countries_GetPreferredFormatForCountry(VideoCapture1.TVTuner_Country);
 
                 if (string.IsNullOrEmpty(VideoCapture1.TVTuner_Name))

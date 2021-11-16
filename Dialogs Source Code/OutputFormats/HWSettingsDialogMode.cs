@@ -2,7 +2,7 @@
 // Copyright (c) VisioForge. All rights reserved.
 // </copyright>
 
-namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     /// <summary>
     /// HW settings dialog mode.

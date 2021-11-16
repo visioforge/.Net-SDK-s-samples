@@ -585,7 +585,7 @@ Public Class Form1
                 mmInfo.Text += "Height: " & videoStream.Height & Environment.NewLine
                 mmInfo.Text += "FOURCC: " & videoStream.FourCC & Environment.NewLine
                 mmInfo.Text += "Aspect Ratio: " & $"{videoStream.AspectRatio.Item1}:{videoStream.AspectRatio.Item2}" & Environment.NewLine
-                mmInfo.Text += "Frame rate: " & videoStream.FrameRate & Environment.NewLine
+                mmInfo.Text += "Frame rate: " & videoStream.FrameRate.Value & Environment.NewLine
                 mmInfo.Text += "Bitrate: " & videoStream.Bitrate & Environment.NewLine
                 mmInfo.Text += "Frames count: " & videoStream.FramesCount & Environment.NewLine
             Next

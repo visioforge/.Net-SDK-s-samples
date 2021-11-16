@@ -1,4 +1,4 @@
-﻿namespace VisioForge.Controls.UI.Dialogs.Shared
+﻿namespace VisioForge.Controls.UI.Dialogs
 {
     partial class WindowCaptureForm
     {

@@ -6,7 +6,7 @@
     using System.IO;
     using System.Windows.Forms;
     using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.MFP;
+    using VisioForge.Shared.Helpers;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;
@@ -153,7 +153,7 @@
         {
             using (var grf = Graphics.FromImage(e.Frame))
             {
-                var dur = e.StartTime.TotalMilliseconds / _frameDuration;
+                var dur = e.Timestamp.TotalMilliseconds / _frameDuration;
                 var idx = dur % _images.Count;
 
                 grf.DrawImage(_images[(int)idx], _imageRect, _imageRect, GraphicsUnit.Pixel);

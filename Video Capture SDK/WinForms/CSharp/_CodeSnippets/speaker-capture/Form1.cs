@@ -64,7 +64,7 @@ namespace speaker_capture
 
         private void VideoCapture1_OnAudioFrameBuffer(object sender, AudioFrameBufferEventArgs e)
         {
-            _currentTimestamp = e.Timestamp;
+            _currentTimestamp = e.Frame.Timestamp;
         }
 
         private async void btStart_Click(object sender, EventArgs e)

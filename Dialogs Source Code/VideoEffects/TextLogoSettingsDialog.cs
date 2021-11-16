@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace VisioForge.Controls.UI.Dialogs.Shared.VideoEffects
+namespace VisioForge.Controls.UI.Dialogs.VideoEffects
 {
     using System;
     using System.Diagnostics;

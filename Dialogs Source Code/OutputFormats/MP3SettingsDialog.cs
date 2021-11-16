@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 
-namespace VisioForge.Controls.UI.Dialogs.Shared.OutputFormats
+namespace VisioForge.Controls.UI.Dialogs.OutputFormats
 {
     /// <summary>
     /// MP3 settings dialog.
