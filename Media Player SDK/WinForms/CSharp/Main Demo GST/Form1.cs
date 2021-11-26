@@ -94,17 +94,6 @@ namespace Main_Demo
 
         private void AddVideoEffects()
         {
-            //_player.Video_Effects_AddOrUpdate(new GSTVideoBalance()
-            //{
-            //    Brightness = 0.5
-            //});
-            //_player.Video_Effects_AddOrUpdate(new GSTFlipRotate(GSTVideoFlipRotateMethod.Method90L));
-
-            //_player.Video_Effects_AddOrUpdate(new GSTGamma(5.0));
-            //_player.Video_Effects_AddOrUpdate(new GSTDeinterlace());
-
-            //_player.Video_Effects_AddOrUpdate(new GSTColorEffects(GSTColorEffectsPreset.Sepia));
-
             if (cbResizeEnabled.Checked)
             {
                 var resize = new GSTResize(
@@ -391,8 +380,6 @@ namespace Main_Demo
             {
                 _player = new MediaPlayerGST(videoView1);
                 _player.OnStop += _player_OnStop;
-                _player.OnVideoFrameBuffer += _player_OnVideoFrame;
-                _player.OnAudioFrameBuffer += _player_OnAudioFrame;
                 _player.OnAudioVUMeter += _player_OnAudioVUMeter;
                 _player.OnError += _player_OnError;
                 _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
@@ -472,18 +459,6 @@ namespace Main_Demo
             {
                 mmLog.Text += e.Message + Environment.NewLine;
             }));            
-        }
-
-        private void _player_OnAudioFrame(object sender, AudioFrameBufferEventArgs e)
-        {
-            
-        }
-
-        private void _player_OnVideoFrame(object sender, VideoFrameBufferEventArgs e)
-        {
-           // Bitmap bitmap = null;
-           // ImageHelper.RAWImageToBitmap(e.Frame, ref bitmap);
-           // bitmap.Save(@"c:\vf\lalala.jpg");
         }
 
         private async void _player_OnStop(object sender, StopEventArgs e)
@@ -718,28 +693,6 @@ namespace Main_Demo
                     }
                 }
             }
-        }
-
-        //private VideoCompositionTest _videoTest;
-
-        private void btTest_Click(object sender, EventArgs e)
-        {
-            //var vidcap = new VideoCaptureCore(null);
-            //vidcap.VideoCaptureDevicesEnumerate();
-
-            //vidcap.VideoCaptureDevicesGetFormats(5, out var info);
-
-            //_videoTest = new VideoCompositionTest();
-            //_videoTest.Test();
-
-            //GC.Collect();
-            //GC.Collect();
-        }
-
-        private void btGC_Click(object sender, EventArgs e)
-        {
-            GC.Collect();
-            GC.Collect();
         }
 
         private void btSaveSnapshot_Click(object sender, EventArgs e)

@@ -242,11 +242,9 @@
             this.cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.btTest = new System.Windows.Forms.Button();
             this.mmLog = new System.Windows.Forms.TextBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.btGC = new System.Windows.Forms.Button();
             this.btSaveSnapshot = new System.Windows.Forms.Button();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox2.SuspendLayout();
@@ -2680,7 +2678,6 @@
             // 
             // tabPage10
             // 
-            this.tabPage10.Controls.Add(this.btTest);
             this.tabPage10.Controls.Add(this.mmLog);
             this.tabPage10.Controls.Add(this.cbDebugMode);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
@@ -2690,16 +2687,6 @@
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "Debug";
             this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // btTest
-            // 
-            this.btTest.Location = new System.Drawing.Point(205, 9);
-            this.btTest.Name = "btTest";
-            this.btTest.Size = new System.Drawing.Size(75, 23);
-            this.btTest.TabIndex = 2;
-            this.btTest.Text = "Test";
-            this.btTest.UseVisualStyleBackColor = true;
-            this.btTest.Click += new System.EventHandler(this.btTest_Click);
             // 
             // mmLog
             // 
@@ -2719,16 +2706,6 @@
             this.cbDebugMode.TabIndex = 0;
             this.cbDebugMode.Text = "Debug mode";
             this.cbDebugMode.UseVisualStyleBackColor = true;
-            // 
-            // btGC
-            // 
-            this.btGC.Location = new System.Drawing.Point(334, 567);
-            this.btGC.Name = "btGC";
-            this.btGC.Size = new System.Drawing.Size(75, 23);
-            this.btGC.TabIndex = 27;
-            this.btGC.Text = "GC";
-            this.btGC.UseVisualStyleBackColor = true;
-            this.btGC.Click += new System.EventHandler(this.btGC_Click);
             // 
             // btSaveSnapshot
             // 
@@ -2756,7 +2733,6 @@
             this.ClientSize = new System.Drawing.Size(763, 694);
             this.Controls.Add(this.videoView1);
             this.Controls.Add(this.btSaveSnapshot);
-            this.Controls.Add(this.btGC);
             this.Controls.Add(this.tabControl3);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btSelectFile);
@@ -2879,7 +2855,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.Button btTest;
         private System.Windows.Forms.TextBox mmLog;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Label label6;
@@ -3054,7 +3029,6 @@
         private System.Windows.Forms.Label label7;
         private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
         private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
-        private System.Windows.Forms.Button btGC;
         private System.Windows.Forms.Button btSaveSnapshot;
         private System.Windows.Forms.ComboBox cbAudioStream;
         private System.Windows.Forms.Label label8;
