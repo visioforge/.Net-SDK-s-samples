@@ -740,7 +740,7 @@ namespace Main_Demo
         {
             settings = new IPCameraSourceSettings
             {
-                URL = cbIPURL.SelectedValue.ToString()
+                URL = cbIPURL.Text
             };
 
             bool lavGPU = false;

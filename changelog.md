@@ -3,7 +3,7 @@
 * Added Icecast streaming
 * VideoStreamInfo.FrameRate property type changed to VideoFrameRate (with numerator and denominator) from double
 * Updated WPF VideoView, resolved the issue for IP cameras stream playback
-* VisioForge.Controls, VisioForge.Controls.UI, VisioForge.Controls.UI.Dialogs, and VisioForge.Tools merged inside VisioForge.Core
+* API breaking change: VisioForge.Controls, VisioForge.Controls.UI, VisioForge.Controls.UI.Dialogs, and VisioForge.Tools merged inside VisioForge.Core
 * Audio effect API now uses string name instead of index
 * Added Android support in Media Player SDK .Net
 * Added new GStreamer-based crossplatform engine to support Windows and other platforms within v15 development cycle
