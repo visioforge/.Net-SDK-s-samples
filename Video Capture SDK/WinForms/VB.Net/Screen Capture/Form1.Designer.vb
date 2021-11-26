@@ -131,7 +131,7 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tabPage3.SuspendLayout()
         CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1067,5 +1067,5 @@ End Sub
     Private WithEvents btScreenSourceWindowSelect As Button
     Private WithEvents rbScreenCaptureWindow As RadioButton
     Private WithEvents textBox1 As TextBox
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

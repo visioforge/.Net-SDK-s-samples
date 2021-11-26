@@ -75,7 +75,7 @@ namespace Memory_Stream_Demo
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rbStreamTypeMemory = new System.Windows.Forms.RadioButton();
             this.rbSTreamTypeFile = new System.Windows.Forms.RadioButton();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
@@ -514,7 +514,7 @@ namespace Memory_Stream_Demo
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton rbStreamTypeMemory;
         private System.Windows.Forms.RadioButton rbSTreamTypeFile;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

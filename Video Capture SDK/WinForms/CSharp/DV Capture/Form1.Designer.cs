@@ -143,7 +143,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox21.SuspendLayout();
@@ -1119,6 +1119,6 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         private System.Windows.Forms.Button btImageLogoAdd;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbDeinterlaceCAVT;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }

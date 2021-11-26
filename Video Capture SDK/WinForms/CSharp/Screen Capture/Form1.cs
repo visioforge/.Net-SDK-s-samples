@@ -1,7 +1,7 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable StyleCop.SA1600
 
-using VisioForge.Controls.UI;
+using VisioForge.Core.UI;
 
 namespace VisioForge_SDK_Screen_Capture_Demo
 {
@@ -11,12 +11,12 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.Dialogs;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

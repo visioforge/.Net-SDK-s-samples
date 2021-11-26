@@ -16,7 +16,7 @@ namespace ScreenCaptureService
 
     using CSCreateProcessAsUserFromService;
 
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Core.UI.WinForms;
     using VisioForge.Types;
 
     /// <summary>

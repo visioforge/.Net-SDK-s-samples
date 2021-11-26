@@ -132,7 +132,7 @@ Partial Class Form1
         Me.btPause = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
         Me.label2 = New System.Windows.Forms.Label()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tabPage3.SuspendLayout()
         CType(Me.tbDarkness, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbContrast, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1055,5 +1055,5 @@ End Sub
     Private WithEvents btImageLogoAdd As Button
     Private WithEvents Label5 As Label
     Private WithEvents cbDeinterlaceCAVT As CheckBox
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

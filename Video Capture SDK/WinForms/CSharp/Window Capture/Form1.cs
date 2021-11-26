@@ -3,11 +3,11 @@
     using System;
     using System.IO;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.Dialogs;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

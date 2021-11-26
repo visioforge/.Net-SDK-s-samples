@@ -10,12 +10,12 @@ namespace Video_From_Images
     using System.Windows.Forms;
 
     using Properties;
-
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.VideoEdit;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoEdit;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

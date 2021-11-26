@@ -10,10 +10,10 @@ namespace Push_Source_Demo
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

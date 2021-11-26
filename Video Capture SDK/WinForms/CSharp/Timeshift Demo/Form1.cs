@@ -5,9 +5,10 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

@@ -120,7 +120,7 @@
             this.SaveDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -812,7 +812,7 @@
         private System.Windows.Forms.ListBox lbLogos;
         private System.Windows.Forms.Button btImageLogoAdd;
         private System.Windows.Forms.Label label5;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

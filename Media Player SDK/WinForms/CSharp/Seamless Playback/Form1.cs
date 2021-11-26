@@ -6,9 +6,10 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Controls.UI;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.UI;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

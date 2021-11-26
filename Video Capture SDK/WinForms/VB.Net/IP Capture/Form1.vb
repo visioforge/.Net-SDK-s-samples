@@ -1,19 +1,19 @@
 ' ReSharper disable InconsistentNaming
 
 Imports System.IO
-Imports VisioForge.Controls.UI
-Imports VisioForge.Controls.UI.Dialogs.OutputFormats
-Imports VisioForge.Controls.UI.Dialogs.VideoEffects
-Imports VisioForge.Shared.IPCameraDB
+Imports VisioForge.Core.UI
+Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
+Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 Imports VisioForge.Types
-Imports VisioForge.Tools
+Imports VisioForge.MediaFramework
 Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoEffects
-Imports VisioForge.Controls.VideoCapture
+Imports VisioForge.Core.VideoCapture
 Imports VisioForge.Types.Events
 Imports VisioForge.Types.VideoCapture
 Imports VisioForge.Types.MediaPlayer
 Imports System.Drawing.Imaging
+Imports VisioForge.Core
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
@@ -318,10 +318,6 @@ Public Class Form1
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
         Process.Start(startInfo)
 
-    End Sub
-
-    Private Sub btShowIPCamDatabase_Click(sender As Object, e As EventArgs) Handles btShowIPCamDatabase.Click
-        IPCameraDB.ShowWindow()
     End Sub
 
     Private Async Sub btONVIFConnect_Click(sender As Object, e As EventArgs) Handles btONVIFConnect.Click

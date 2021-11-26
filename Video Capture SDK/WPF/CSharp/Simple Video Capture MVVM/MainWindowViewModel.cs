@@ -7,8 +7,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
-using VisioForge.Controls.UI;
-using VisioForge.Tools;
+using VisioForge.Core;
+using VisioForge.Core.UI;
+using VisioForge.MediaFramework;
 using VisioForge.Types.VideoCapture;
 using VisioForge.Types.VideoEffects;
 

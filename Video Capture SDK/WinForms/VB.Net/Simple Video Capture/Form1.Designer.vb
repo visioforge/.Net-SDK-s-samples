@@ -163,7 +163,7 @@ Partial Class Form1
         Me.lbTimestamp = New System.Windows.Forms.Label()
         Me.rbCapture = New System.Windows.Forms.RadioButton()
         Me.rbPreview = New System.Windows.Forms.RadioButton()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         CType(Me.tbAudAmplifyAmp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPage72.SuspendLayout()
         CType(Me.tbAudEq9, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1535,5 +1535,5 @@ End Sub
     Private WithEvents btImageLogoAdd As Button
     Private WithEvents cbMergeTextLogos As CheckBox
     Private WithEvents cbMergeImageLogos As CheckBox
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

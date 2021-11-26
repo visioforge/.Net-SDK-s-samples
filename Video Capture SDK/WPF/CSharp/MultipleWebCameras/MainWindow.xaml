@@ -1,7 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:WPF="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI" x:Class="MultipleWebCameras.MainWindow"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="MultipleWebCameras.MainWindow"
         Title="Video Capture SDK .Net - Multiple Web Cams Demo" Height="389" Width="815" ResizeMode="CanMinimize" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="280" Margin="10,10,0,0" VerticalAlignment="Top" Width="380" Background="Black">

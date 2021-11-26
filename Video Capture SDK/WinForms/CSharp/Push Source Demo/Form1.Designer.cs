@@ -81,7 +81,7 @@ namespace Push_Source_Demo
             this.mmLog = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -386,7 +386,7 @@ namespace Push_Source_Demo
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbTimestamp;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

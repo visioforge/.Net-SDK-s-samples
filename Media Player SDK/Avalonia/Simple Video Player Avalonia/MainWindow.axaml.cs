@@ -10,9 +10,10 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
-using VisioForge.Controls.MediaPlayer;
-using VisioForge.Controls.UI.Avalonia;
-using VisioForge.Tools.MediaInfo;
+using VisioForge.Core.MediaInfoGST;
+using VisioForge.Core.MediaPlayerGST;
+using VisioForge.Core.Avalonia;
+using VisioForge.MediaFramework.MediaInfo;
 using VisioForge.Types.Events;
 
 namespace Simple_Video_Player_Avalonia
@@ -23,7 +24,7 @@ namespace Simple_Video_Player_Avalonia
 
         private bool _initialized;
 
-        private MediaPlayerCore _player;
+        private MediaPlayerGST _player;
 
         private VideoView VideoView1;
 
@@ -76,8 +77,14 @@ namespace Simple_Video_Player_Avalonia
 
             InitControls();
             Activated += MainWindow_Activated;
+            Closing += MainWindow_Closing;
 
             DataContext = this;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _player.Close();
         }
 
         private void InitializeComponent()
@@ -120,10 +127,9 @@ namespace Simple_Video_Player_Avalonia
 
         private void InitPlayer()
         {
-            _player = new MediaPlayerCore(VideoView1);
+            _player = new MediaPlayerGST(VideoView1);
             _player.OnStop += Player_OnStop;
             _player.OnError += Player_OnError;
-            _player.Video_Sample_Grabber_UseForVideoEffects = true;
         }
 
         private bool _tbTimelineApplyingValue;
@@ -198,7 +204,7 @@ namespace Simple_Video_Player_Avalonia
             var file = await sfd.ShowAsync(this);
             if (!string.IsNullOrEmpty(file))
             {
-                _player.Frame_Save(file, ImageFormat.Jpeg);
+                await _player.Snapshot_SaveAsync(file, ImageFormat.Jpeg);
             }
         }
 
@@ -212,47 +218,47 @@ namespace Simple_Video_Player_Avalonia
             }
         }
 
-        private void btStart_Click(object sender, RoutedEventArgs e)
+        private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             tbSpeed.Value = 10;
             _player.Debug_Mode = cbDebugMode.IsChecked == true;
 
             string source = edFilenameOrURL.Text;
-            _player.FilenamesOrURL.Clear();
-            _player.FilenamesOrURL.Add(source);
-
-            _player.Audio_PlayAudio = cbPlayAudio.IsChecked == true;
+            
+            _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
             _player.Audio_OutputDevice = cbAudioOutputDevice.SelectedItem.ToString();
 
-            _player.Play();
+            await _player.OpenAsync(new Uri(source));
+            await _player.PlayAsync();
 
             _tmPosition.Start();
         }
 
-        private void btStop_Click(object sender, RoutedEventArgs e)
+        private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _tmPosition.Stop();
 
-            _player.Stop();
+            await _player.StopAsync();
+            await _player.CloseAsync();
 
             tbTimeline.Value = 0;
             lbTimeline.Text = "00:00:00 / 00:00:00";
         }
 
-        private void btResume_Click(object sender, RoutedEventArgs e)
+        private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            _player.Resume();
+            await _player.ResumeAsync();
         }
 
-        private void btPause_Click(object sender, RoutedEventArgs e)
+        private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            _player.Pause();
+            await _player.PauseAsync();
         }
 
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
-            _player.NextFrame();
+            _player.NextFrame(1);
         }
 
         private void Player_OnError(object sender, ErrorsEventArgs e)
@@ -262,15 +268,20 @@ namespace Simple_Video_Player_Avalonia
 
         private void Player_OnStop(object sender, StopEventArgs e)
         {
-            _tmPosition.Stop();
-            ShowMessage("Playback complete.");
+           _tmPosition.Stop();
+
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                VideoView1.Refresh();
+                //ShowMessage("Playback complete.");
+            });
         }
 
-        private void tbTimeline_Scroll()
+        private async void tbTimeline_Scroll()
         {
             if (_tbTimelineApplyingValue)
             {
-                _player?.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
@@ -278,8 +289,8 @@ namespace Simple_Video_Player_Avalonia
         {
             Dispatcher.UIThread.InvokeAsync((Action)(() =>
             {
-                var position = _player.Position_Get_Time();
-                var duration = _player.Duration_Time();
+                var position = _player.Position_Get();
+                var duration = _player.Duration();
 
                 tbTimeline.Maximum = (int)duration.TotalSeconds;
 
@@ -294,9 +305,14 @@ namespace Simple_Video_Player_Avalonia
             }));
         }
 
-        private void tbSpeed_Scroll()
+        private async void tbSpeed_Scroll()
         {
-            _player?.SetSpeed(tbSpeed.Value / 10.0);
+            if (_player == null)
+            {
+                return;
+            }
+
+            await _player.Rate_SetAsync(tbSpeed.Value / 10.0);
         }
 
         private void tbVolume_Scroll()
@@ -306,7 +322,7 @@ namespace Simple_Video_Player_Avalonia
                 return;
             }
 
-            _player.Audio_OutputDevice_Volume_Set(-1, (int)(tbVolume.Value / 100.0));
+            _player.Audio_OutputDevice_Volume = tbVolume.Value / 100.0;
         }
 
         private void btReadTags_Click(object sender, RoutedEventArgs e)
@@ -316,27 +332,26 @@ namespace Simple_Video_Player_Avalonia
             Info.Add(tags?.ToString());
         }
 
-        private void btReadInfo_Click(object sender, RoutedEventArgs e)
+        private async void btReadInfo_Click(object sender, RoutedEventArgs e)
         {
             Info.Clear();
 
-            var infoReader = new MediaInfoReader();
-            infoReader.Filename = edFilenameOrURL.Text;
-            infoReader.ReadFileInfo(true);
+            var infoReader = new MediaInfoReader(_player);
+            await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
 
-            if (infoReader.VideoStreams.Count > 0)
+            if (infoReader.Info.VideoStreams.Count > 0)
             {
                 Info.Add("Video streams:");
-                foreach (var video in infoReader.VideoStreams)
+                foreach (var video in infoReader.Info.VideoStreams)
                 {
                     Info.Add($"{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}");
                 }
             }
 
-            if (infoReader.AudioStreams.Count > 0)
+            if (infoReader.Info.AudioStreams.Count > 0)
             {
                 Info.Add("Audio streams:");
-                foreach (var audio in infoReader.AudioStreams)
+                foreach (var audio in infoReader.Info.AudioStreams)
                 {
                     Info.Add($"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
                 }

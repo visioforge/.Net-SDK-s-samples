@@ -6,10 +6,11 @@ namespace Two_Windows_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
-    using VisioForge.Tools;
+    using VisioForge.Core;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

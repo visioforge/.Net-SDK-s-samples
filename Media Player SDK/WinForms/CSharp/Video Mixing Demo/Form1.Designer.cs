@@ -97,7 +97,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl3.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.tabPage9.SuspendLayout();
@@ -876,7 +876,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

@@ -53,7 +53,7 @@
             this.mmLog = new System.Windows.Forms.TextBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
             this.SuspendLayout();
@@ -288,7 +288,7 @@
         private System.Windows.Forms.TextBox mmLog;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Timer timer1;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

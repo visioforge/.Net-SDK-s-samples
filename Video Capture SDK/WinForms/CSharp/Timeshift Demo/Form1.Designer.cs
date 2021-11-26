@@ -92,8 +92,8 @@ namespace VC_Timeshift_Demo
             this.btStart = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.VideoViewCapture = new VisioForge.Controls.UI.WinForms.VideoView();
-            this.VideoViewPlayer = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoViewCapture = new VisioForge.Core.UI.WinForms.VideoView();
+            this.VideoViewPlayer = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -753,8 +753,8 @@ namespace VC_Timeshift_Demo
         private System.Windows.Forms.CheckBox cbIPAudioCapture;
         private System.Windows.Forms.ComboBox cbIPCameraType;
         private System.Windows.Forms.Label label168;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoViewCapture;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoViewPlayer;
+        private VisioForge.Core.UI.WinForms.VideoView VideoViewCapture;
+        private VisioForge.Core.UI.WinForms.VideoView VideoViewPlayer;
     }
 }
 

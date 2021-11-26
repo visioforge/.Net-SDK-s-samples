@@ -8,8 +8,8 @@
     <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
     <Product>VE Main Demo CLI</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.0.7.0</AssemblyVersion>
-    <FileVersion>15.0.7.0</FileVersion>
+    <AssemblyVersion>15.1.4.0</AssemblyVersion>
+    <FileVersion>15.1.4.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -27,7 +27,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit.TRIAL" Version="15.0.7" />
+    <PackageReference Include="CommandLineParser19" Version="1.9.74" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.1.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -6,7 +6,7 @@ namespace MultipleWebCameras
     using System.Diagnostics;
     using System.Linq;
     using System.Windows;
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.VideoCapture;

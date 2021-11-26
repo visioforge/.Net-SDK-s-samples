@@ -65,7 +65,7 @@ Partial Class Form1
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.groupBox4.SuspendLayout()
         CType(Me.tbBalance1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbVolume1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -530,5 +530,5 @@ End Sub
     Private WithEvents openFileDialog1 As System.Windows.Forms.OpenFileDialog
     Private WithEvents timer1 As System.Windows.Forms.Timer
     Private WithEvents cbLicensing As CheckBox
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

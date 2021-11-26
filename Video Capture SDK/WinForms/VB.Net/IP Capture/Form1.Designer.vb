@@ -71,7 +71,6 @@ Partial Class Form1
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
-        Me.btShowIPCamDatabase = New System.Windows.Forms.Button()
         Me.cbIPDisconnect = New System.Windows.Forms.CheckBox()
         Me.edIPForcedFramerateID = New System.Windows.Forms.TextBox()
         Me.label344 = New System.Windows.Forms.Label()
@@ -150,7 +149,7 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tcMain.SuspendLayout()
         Me.tabPage1.SuspendLayout()
         Me.tabControl15.SuspendLayout()
@@ -213,7 +212,6 @@ Partial Class Form1
         Me.tabPage144.Controls.Add(Me.linkLabel7)
         Me.tabPage144.Controls.Add(Me.label165)
         Me.tabPage144.Controls.Add(Me.cbIPCameraONVIF)
-        Me.tabPage144.Controls.Add(Me.btShowIPCamDatabase)
         Me.tabPage144.Controls.Add(Me.cbIPDisconnect)
         Me.tabPage144.Controls.Add(Me.edIPForcedFramerateID)
         Me.tabPage144.Controls.Add(Me.label344)
@@ -327,15 +325,6 @@ Partial Class Form1
         Me.cbIPCameraONVIF.TabIndex = 78
         Me.cbIPCameraONVIF.Text = "ONVIF camera"
         Me.cbIPCameraONVIF.UseVisualStyleBackColor = True
-        '
-        'btShowIPCamDatabase
-        '
-        Me.btShowIPCamDatabase.Location = New System.Drawing.Point(293, 256)
-        Me.btShowIPCamDatabase.Name = "btShowIPCamDatabase"
-        Me.btShowIPCamDatabase.Size = New System.Drawing.Size(135, 23)
-        Me.btShowIPCamDatabase.TabIndex = 77
-        Me.btShowIPCamDatabase.Text = "Show IP cam database"
-        Me.btShowIPCamDatabase.UseVisualStyleBackColor = True
         '
         'cbIPDisconnect
         '
@@ -1177,7 +1166,6 @@ End Sub
     Private WithEvents tabControl15 As TabControl
     Private WithEvents tabPage144 As TabPage
     Private WithEvents cbIPCameraONVIF As CheckBox
-    Private WithEvents btShowIPCamDatabase As Button
     Private WithEvents cbIPDisconnect As CheckBox
     Private WithEvents edIPForcedFramerateID As TextBox
     Private WithEvents label344 As Label
@@ -1256,5 +1244,5 @@ End Sub
     Private WithEvents btListNDISources As Button
     Private WithEvents cbIPURL As ComboBox
     Private WithEvents btListONVIFSources As Button
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

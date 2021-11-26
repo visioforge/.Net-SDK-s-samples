@@ -61,7 +61,7 @@ Partial Class Form1
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.label25 = New System.Windows.Forms.Label()
         Me.label20 = New System.Windows.Forms.Label()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.groupBox4.SuspendLayout()
         CType(Me.tbBalance1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbVolume1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -485,5 +485,5 @@ End Sub
     Private WithEvents linkLabel7 As LinkLabel
     Private WithEvents label25 As Label
     Private WithEvents label20 As Label
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

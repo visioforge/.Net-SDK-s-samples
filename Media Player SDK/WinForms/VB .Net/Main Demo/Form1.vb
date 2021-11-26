@@ -1,11 +1,11 @@
 ﻿Imports System.Globalization
-Imports VisioForge.Controls.UI
-Imports VisioForge.Controls.UI.Dialogs.VideoEffects
+Imports VisioForge.Core.UI
+Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 Imports VisioForge.Types.VideoEffects ' ReSharper disable InconsistentNaming
 
 Imports System.IO
-Imports VisioForge.Tools.MediaInfo
-Imports VisioForge.Controls.MediaPlayer
+Imports VisioForge.MediaFramework.MediaInfo
+Imports VisioForge.Core.MediaPlayer
 Imports VisioForge.Types.Events
 Imports VisioForge.Types.MediaPlayer
 Imports System.Drawing.Imaging
@@ -13,9 +13,23 @@ Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoProcessing
 Imports VisioForge.Types.AudioEffects
 Imports VisioForge.Types
-Imports VisioForge.Tools
+Imports VisioForge.MediaFramework
+Imports VisioForge.Core.MediaInfo
+Imports VisioForge.Core
 
 Public Class Form1
+    Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
+
+    Private Const AUDIO_EFFECT_ID_EQ As String = "eq"
+
+    Private Const AUDIO_EFFECT_ID_DYN_AMPLIFY As String = "dyn_amplify"
+
+    Private Const AUDIO_EFFECT_ID_SOUND_3D As String = "sound3d"
+
+    Private Const AUDIO_EFFECT_ID_TRUE_BASS As String = "true_bass"
+
+    Private Const AUDIO_EFFECT_ID_PITCH_SHIFT As String = "pitch_shift"
+
     Private ReadOnly audioChannelMapperItems As List(Of AudioChannelMapperItem) = New List(Of AudioChannelMapperItem)
 
     ' Zoom
@@ -321,15 +335,15 @@ Public Class Form1
 
         Select Case (cbImageType.SelectedIndex)
             Case 0
-                Await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".bmp", ImageFormat.Bmp, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight)
             Case 1
-                Await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".jpg", ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".jpg"), ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight)
             Case 2
-                Await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".gif", ImageFormat.Gif, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".gif"), ImageFormat.Gif, 0, customWidth, customHeight)
             Case 3
-                Await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".png", ImageFormat.Png, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".png"), ImageFormat.Png, 0, customWidth, customHeight)
             Case 4
-                Await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".tiff", ImageFormat.Tiff, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight)
         End Select
     End Sub
 
@@ -1187,11 +1201,11 @@ Public Class Form1
 
         If (MediaPlayer1.Audio_Effects_Enabled) Then
 
-            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
 
         End If
 
@@ -1608,149 +1622,149 @@ Public Class Form1
 
     Private Sub btAudEqRefresh_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btAudEqRefresh.Click
 
-        tbAudEq0.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 0)
-        tbAudEq1.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 1)
-        tbAudEq2.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 2)
-        tbAudEq3.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 3)
-        tbAudEq4.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 4)
-        tbAudEq5.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 5)
-        tbAudEq6.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 6)
-        tbAudEq7.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 7)
-        tbAudEq8.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 8)
-        tbAudEq9.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 9)
+        tbAudEq0.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0)
+        tbAudEq1.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 1)
+        tbAudEq2.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 2)
+        tbAudEq3.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 3)
+        tbAudEq4.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 4)
+        tbAudEq5.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 5)
+        tbAudEq6.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 6)
+        tbAudEq7.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 7)
+        tbAudEq8.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 8)
+        tbAudEq9.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9)
 
     End Sub
 
     Private Sub cbAudAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudAmplifyEnabled.CheckedChanged
 
-        MediaPlayer1.Audio_Effects_Enable(-1, 0, cbAudAmplifyEnabled.Checked)
+        MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked)
 
     End Sub
 
     Private Sub cbAudDynamicAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudDynamicAmplifyEnabled.CheckedChanged
 
-        MediaPlayer1.Audio_Effects_Enable(-1, 2, cbAudDynamicAmplifyEnabled.Checked)
+        MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked)
 
     End Sub
 
     Private Sub cbAudEqualizerEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudEqualizerEnabled.CheckedChanged
 
-        MediaPlayer1.Audio_Effects_Enable(-1, 1, cbAudEqualizerEnabled.Checked)
+        MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked)
 
     End Sub
 
     Private Sub cbAudEqualizerPreset_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudEqualizerPreset.SelectedIndexChanged
 
-        MediaPlayer1.Audio_Effects_Equalizer_Preset_Set(-1, 1, cbAudEqualizerPreset.SelectedIndex)
+        MediaPlayer1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerPreset.SelectedIndex)
         btAudEqRefresh_Click(sender, e)
 
     End Sub
 
     Private Sub cbAudSound3DEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudSound3DEnabled.CheckedChanged
 
-        MediaPlayer1.Audio_Effects_Enable(-1, 3, cbAudSound3DEnabled.Checked)
+        MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked)
 
     End Sub
 
     Private Sub cbAudTrueBassEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudTrueBassEnabled.CheckedChanged
 
-        MediaPlayer1.Audio_Effects_Enable(-1, 4, cbAudTrueBassEnabled.Checked)
+        MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked)
 
     End Sub
 
     Private Sub tbAud3DSound_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAud3DSound.Scroll
 
-        MediaPlayer1.Audio_Effects_Sound3D(-1, 3, tbAud3DSound.Value)
+        MediaPlayer1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value)
 
     End Sub
 
     Private Sub tbAudAmplifyAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAmplifyAmp.Scroll
 
-        MediaPlayer1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, False)
+        MediaPlayer1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, False)
 
     End Sub
 
     Private Sub tbAudAttack_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAttack.Scroll
 
-        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub tbAudDynAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudDynAmp.Scroll
 
-        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub tbAudRelease_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudRelease.Scroll
 
-        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub tbAudEq0_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq0.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 0, tbAudEq0.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value)
 
     End Sub
 
     Private Sub tbAudEq1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq1.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 1, tbAudEq1.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value)
 
     End Sub
 
     Private Sub tbAudEq2_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq2.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 2, tbAudEq2.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value)
 
     End Sub
 
     Private Sub tbAudEq3_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq3.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 3, tbAudEq3.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value)
 
     End Sub
 
     Private Sub tbAudEq4_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq4.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 4, tbAudEq4.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value)
 
     End Sub
 
     Private Sub tbAudEq5_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq5.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 5, tbAudEq5.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value)
 
     End Sub
 
     Private Sub tbAudEq6_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq6.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 6, tbAudEq6.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value)
 
     End Sub
 
     Private Sub tbAudEq7_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq7.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 7, tbAudEq7.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value)
 
     End Sub
 
     Private Sub tbAudEq8_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq8.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 8, tbAudEq8.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value)
 
     End Sub
 
     Private Sub tbAudEq9_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq9.Scroll
 
-        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 9, tbAudEq9.Value)
+        MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value)
 
     End Sub
 
     Private Sub tbAudTrueBass_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudTrueBass.Scroll
 
-        MediaPlayer1.Audio_Effects_TrueBass(-1, 4, 200, False, tbAudTrueBass.Value)
+        MediaPlayer1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, False, tbAudTrueBass.Value)
 
     End Sub
 

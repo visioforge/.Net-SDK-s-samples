@@ -424,10 +424,10 @@ namespace Media_Player_Demo
             this.label381 = new System.Windows.Forms.Label();
             this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
             this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
-            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.btOSDRenderLayers = new System.Windows.Forms.Button();
             this.lbOSDLayers = new System.Windows.Forms.CheckedListBox();
@@ -625,7 +625,7 @@ namespace Media_Player_Demo
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label37 = new System.Windows.Forms.Label();
             this.edCustomSourceFilter = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage20.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -7745,10 +7745,10 @@ namespace Media_Player_Demo
         private System.Windows.Forms.TextBox edCustomSourceFilter;
         private System.Windows.Forms.TabPage tabPage28;
         private System.Windows.Forms.CheckBox cbVUMeterPro;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter2;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter1;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter2;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter1;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
         private System.Windows.Forms.TrackBar tbVUMeterBoost;
         private System.Windows.Forms.Label label382;
         private System.Windows.Forms.Label label381;
@@ -7954,6 +7954,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel7;
         private System.Windows.Forms.RadioButton rbNDIStreaming;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }

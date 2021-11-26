@@ -16,13 +16,13 @@ namespace IP_Capture
 
     using Microsoft.Win32;
 
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.IPCameraDB;
-    using VisioForge.Tools;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.UI.WPF;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;
@@ -31,6 +31,7 @@ namespace IP_Capture
     using VisioForge.Types.VideoEffects;
 
     using Application = System.Windows.Forms.Application;
+    using VisioForge.Core;
 
     public partial class Window1 : IDisposable
     {
@@ -488,11 +489,6 @@ namespace IP_Capture
         private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             Log("(NOT ERROR) " + e.Message);
-        }
-
-        private void btShowIPCamDatabase_Click(object sender, RoutedEventArgs e)
-        {
-            IPCameraDB.ShowWindow();
         }
 
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)

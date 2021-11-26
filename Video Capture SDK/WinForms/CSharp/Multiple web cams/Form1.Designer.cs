@@ -62,8 +62,8 @@ namespace multiple_ap_cams
             this.label1 = new System.Windows.Forms.Label();
             this.cbFrameRate2 = new System.Windows.Forms.ComboBox();
             this.cbVideoInputFormat2 = new System.Windows.Forms.ComboBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
-            this.VideoView2 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.VideoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.SuspendLayout();
             // 
             // btStart1
@@ -304,8 +304,8 @@ namespace multiple_ap_cams
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbFrameRate2;
         private System.Windows.Forms.ComboBox cbVideoInputFormat2;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView2;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView2;
     }
 }
 

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
+    using VisioForge.Core.MediaPlayer;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

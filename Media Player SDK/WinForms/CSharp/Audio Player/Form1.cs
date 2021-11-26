@@ -7,9 +7,9 @@ namespace Audio_Player_Demo
     using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.WinForms;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

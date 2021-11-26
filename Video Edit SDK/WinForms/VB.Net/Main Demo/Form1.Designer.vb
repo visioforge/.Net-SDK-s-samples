@@ -568,11 +568,11 @@ Partial Class Form1
         Me.label381 = New System.Windows.Forms.Label()
         Me.tbVUMeterAmplification = New System.Windows.Forms.TrackBar()
         Me.cbVUMeterPro = New System.Windows.Forms.CheckBox()
-        Me.waveformPainter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.waveformPainter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.volumeMeter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
-        Me.volumeMeter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
-        Me.peakMeterCtrl1 = New VisioForge.Controls.UI.WinForms.PeakMeterCtrl()
+        Me.waveformPainter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.waveformPainter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.volumeMeter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.volumeMeter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.peakMeterCtrl1 = New VisioForge.Core.UI.WinForms.PeakMeterCtrl()
         Me.cbVUMeter = New System.Windows.Forms.CheckBox()
         Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.btStop = New System.Windows.Forms.Button()
@@ -676,7 +676,7 @@ Partial Class Form1
         Me.Label496 = New System.Windows.Forms.Label()
         Me.edTagTrackID = New System.Windows.Forms.TextBox()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tabControl1.SuspendLayout()
         Me.tabPage1.SuspendLayout()
         Me.tabControl2.SuspendLayout()
@@ -7684,17 +7684,17 @@ End Sub
     Friend WithEvents edTagYear As TextBox
     Friend WithEvents Label496 As Label
     Friend WithEvents edTagTrackID As TextBox
-    Private WithEvents peakMeterCtrl1 As VisioForge.Controls.UI.WinForms.PeakMeterCtrl
+    Private WithEvents peakMeterCtrl1 As VisioForge.Core.UI.WinForms.PeakMeterCtrl
     Private WithEvents cbVUMeter As CheckBox
     Private WithEvents tbVUMeterBoost As TrackBar
     Private WithEvents label382 As Label
     Private WithEvents label381 As Label
     Private WithEvents tbVUMeterAmplification As TrackBar
     Private WithEvents cbVUMeterPro As CheckBox
-    Private WithEvents waveformPainter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents waveformPainter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents volumeMeter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
-    Private WithEvents volumeMeter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents waveformPainter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents waveformPainter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents volumeMeter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents volumeMeter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
     Friend WithEvents TabPage4 As TabPage
     Private WithEvents lbInfo As Label
     Private WithEvents btConfigure As Button
@@ -7745,5 +7745,5 @@ End Sub
     Private WithEvents llXiphX86 As LinkLabel
     Private WithEvents label68 As Label
     Private WithEvents label67 As Label
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

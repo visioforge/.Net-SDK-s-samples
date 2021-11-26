@@ -60,7 +60,7 @@ namespace multiple_video_streams
             this.videoScreen2 = new System.Windows.Forms.PictureBox();
             this.lbTimestamp = new System.Windows.Forms.Label();
             this.btSelectOutput = new System.Windows.Forms.Button();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             ((System.ComponentModel.ISupportInitialize)(this.videoScreen2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -301,7 +301,7 @@ namespace multiple_video_streams
         private System.Windows.Forms.PictureBox videoScreen2;
         private System.Windows.Forms.Label lbTimestamp;
         private System.Windows.Forms.Button btSelectOutput;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

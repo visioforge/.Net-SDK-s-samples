@@ -11,18 +11,18 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.IPCameraDB;
-    using VisioForge.Tools;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;
     using VisioForge.Types.Output;
     using VisioForge.Types.VideoCapture;
     using VisioForge.Types.VideoEffects;
+    using VisioForge.Core;
 
     public partial class Form1 : Form
     {
@@ -329,11 +329,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
             Process.Start(startInfo);
-        }
-
-        private void btShowIPCamDatabase_Click(object sender, EventArgs e)
-        {
-            IPCameraDB.ShowWindow();
         }
 
         private async void btONVIFConnect_Click(object sender, EventArgs e)

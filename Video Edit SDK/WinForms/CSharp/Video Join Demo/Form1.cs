@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using VisioForge.Controls.UI.Dialogs.OutputFormats;
-using VisioForge.Tools;
+using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+using VisioForge.MediaFramework;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 
@@ -10,7 +10,8 @@ namespace Video_Join_Demo
 {
     using System.Collections.Generic;
     using System.IO;
-    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Core;
+    using VisioForge.Core.VideoEdit;
     using VisioForge.Types.Events;
     using VisioForge.Types.VideoEdit;
 

@@ -459,10 +459,10 @@ Partial Class Form1
         Me.label381 = New System.Windows.Forms.Label()
         Me.tbVUMeterAmplification = New System.Windows.Forms.TrackBar()
         Me.cbVUMeterPro = New System.Windows.Forms.CheckBox()
-        Me.waveformPainter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.waveformPainter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.volumeMeter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
-        Me.volumeMeter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.waveformPainter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.waveformPainter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.volumeMeter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.volumeMeter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
         Me.tabPage5 = New System.Windows.Forms.TabPage()
         Me.btOSDRenderLayers = New System.Windows.Forms.Button()
         Me.lbOSDLayers = New System.Windows.Forms.CheckedListBox()
@@ -613,7 +613,7 @@ Partial Class Form1
         Me.edFilenameOrURL = New System.Windows.Forms.TextBox()
         Me.label14 = New System.Windows.Forms.Label()
         Me.linkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tabControl3.SuspendLayout()
         Me.tabPage10.SuspendLayout()
         Me.tabPage9.SuspendLayout()
@@ -7395,10 +7395,10 @@ End Sub
     Private WithEvents label381 As System.Windows.Forms.Label
     Private WithEvents tbVUMeterAmplification As System.Windows.Forms.TrackBar
     Private WithEvents cbVUMeterPro As System.Windows.Forms.CheckBox
-    Private WithEvents waveformPainter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents waveformPainter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents volumeMeter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
-    Private WithEvents volumeMeter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents waveformPainter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents waveformPainter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents volumeMeter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents volumeMeter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
     Private WithEvents tabControl5 As System.Windows.Forms.TabControl
     Private WithEvents tabPage33 As System.Windows.Forms.TabPage
     Private WithEvents tabPage34 As System.Windows.Forms.TabPage
@@ -7611,5 +7611,5 @@ End Sub
     Private WithEvents linkLabel7 As LinkLabel
     Private WithEvents label25 As Label
     Private WithEvents label20 As Label
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

@@ -70,7 +70,7 @@ namespace Video_Player_Demo
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.label25 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
@@ -516,7 +516,7 @@ namespace Video_Player_Demo
         private System.Windows.Forms.LinkLabel linkLabel7;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label20;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

@@ -182,7 +182,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.rbCapture = new System.Windows.Forms.RadioButton();
             this.rbPreview = new System.Windows.Forms.RadioButton();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1547,7 +1547,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         private System.Windows.Forms.Label lbScreenSourceWindowText;
         private System.Windows.Forms.Button btScreenSourceWindowSelect;
         private System.Windows.Forms.RadioButton rbScreenCaptureWindow;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

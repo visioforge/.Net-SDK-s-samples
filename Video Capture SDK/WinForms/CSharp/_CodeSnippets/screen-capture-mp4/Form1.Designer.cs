@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.btStartWithAudio = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
             this.btStartWithoutAudio = new System.Windows.Forms.Button();
@@ -92,7 +92,7 @@
 
         #endregion
 
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.Button btStartWithAudio;
         private System.Windows.Forms.Button btStop;
         private System.Windows.Forms.Button btStartWithoutAudio;

@@ -13,9 +13,9 @@ namespace ScreenCaptureServiceHelper
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
 
-    using VisioForge.Controls.UI.WinForms;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.WIN32;
+    using VisioForge.Core.UI.WinForms;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework.WIN32;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

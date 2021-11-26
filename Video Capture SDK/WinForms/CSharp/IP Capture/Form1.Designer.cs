@@ -83,7 +83,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.label1 = new System.Windows.Forms.Label();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
-            this.btShowIPCamDatabase = new System.Windows.Forms.Button();
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.cbIPDisconnect = new System.Windows.Forms.CheckBox();
             this.edIPForcedFramerateID = new System.Windows.Forms.TextBox();
@@ -163,7 +162,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.btPause = new System.Windows.Forms.Button();
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.lbTimestamp = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl15.SuspendLayout();
@@ -225,7 +224,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.tabPage144.Controls.Add(this.label1);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
-            this.tabPage144.Controls.Add(this.btShowIPCamDatabase);
             this.tabPage144.Controls.Add(this.linkLabel7);
             this.tabPage144.Controls.Add(this.cbIPDisconnect);
             this.tabPage144.Controls.Add(this.edIPForcedFramerateID);
@@ -334,16 +332,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.cbIPCameraONVIF.TabIndex = 78;
             this.cbIPCameraONVIF.Text = "ONVIF camera";
             this.cbIPCameraONVIF.UseVisualStyleBackColor = true;
-            // 
-            // btShowIPCamDatabase
-            // 
-            this.btShowIPCamDatabase.Location = new System.Drawing.Point(294, 259);
-            this.btShowIPCamDatabase.Name = "btShowIPCamDatabase";
-            this.btShowIPCamDatabase.Size = new System.Drawing.Size(135, 23);
-            this.btShowIPCamDatabase.TabIndex = 77;
-            this.btShowIPCamDatabase.Text = "Show IP cam database";
-            this.btShowIPCamDatabase.UseVisualStyleBackColor = true;
-            this.btShowIPCamDatabase.Click += new System.EventHandler(this.btShowIPCamDatabase_Click);
             // 
             // linkLabel7
             // 
@@ -1248,7 +1236,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.TabControl tabControl15;
         private System.Windows.Forms.TabPage tabPage144;
         private System.Windows.Forms.CheckBox cbIPCameraONVIF;
-        private System.Windows.Forms.Button btShowIPCamDatabase;
         private System.Windows.Forms.LinkLabel linkLabel7;
         private System.Windows.Forms.CheckBox cbIPDisconnect;
         private System.Windows.Forms.TextBox edIPForcedFramerateID;
@@ -1325,7 +1312,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private System.Windows.Forms.Button btListNDISources;
         private System.Windows.Forms.ComboBox cbIPURL;
         private System.Windows.Forms.Button btListONVIFSources;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

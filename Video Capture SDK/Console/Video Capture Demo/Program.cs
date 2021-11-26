@@ -14,7 +14,7 @@ namespace Video_Capture_Demo
     using System.IO;
     using System.Threading;
 
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

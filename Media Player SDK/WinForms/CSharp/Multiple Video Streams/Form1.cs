@@ -2,9 +2,11 @@
 {
     using System;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Tools;
-    using VisioForge.Tools.MediaInfo;
+    using VisioForge.Core;
+    using VisioForge.Core.MediaInfo;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.MediaFramework;
+    using VisioForge.MediaFramework.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;
@@ -56,6 +58,7 @@
             {
                 Filename = edFilenameOrURL.Text
             };
+
             info.ReadFileInfo(true);
 
             MediaPlayer1.Multiple_Video_Streams_Mappings_Clear();

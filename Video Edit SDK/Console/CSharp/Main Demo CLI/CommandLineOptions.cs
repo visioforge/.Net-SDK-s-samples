@@ -5,8 +5,8 @@ using System.Text;
 
 namespace VE_Main_Demo_CLI
 {
-    using VisioForge.Libs.CommandLine;
-    using VisioForge.Libs.CommandLine.Text;
+    using CommandLine;
+    using CommandLine.Text;
 
     public class CommandLineOptions
     {

@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{7D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) net5", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) net5.csproj", "{B9BC6A6D-3A0A-44B4-8D0B-0560ADDD4C4D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP GST (NuGet) net5", "WinForms\CSharp\Main Demo GST\Main Demo MP GST (NuGet) net5.csproj", "{DABA9589-73B1-4B46-89AC-32228B54DB12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,14 @@ Global
 		{B9BC6A6D-3A0A-44B4-8D0B-0560ADDD4C4D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9BC6A6D-3A0A-44B4-8D0B-0560ADDD4C4D}.Release|x86.ActiveCfg = Release|Any CPU
 		{B9BC6A6D-3A0A-44B4-8D0B-0560ADDD4C4D}.Release|x86.Build.0 = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.Build.0 = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.ActiveCfg = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +188,7 @@ Global
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{B9BC6A6D-3A0A-44B4-8D0B-0560ADDD4C4D} = {7DF44382-AF88-4DD5-8410-64F6D78A6284}
+		{DABA9589-73B1-4B46-89AC-32228B54DB12} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -13,11 +13,10 @@ namespace Media_Player_Demo
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Controls.MediaPlayer;
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Tools;
-    using VisioForge.Tools.MediaInfo;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Events;
@@ -26,9 +25,22 @@ namespace Media_Player_Demo
     
     using VisioForge.Types.VideoEffects;
     using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core;
 
     public partial class Form1 : Form
     {
+        private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
+
+        private const string AUDIO_EFFECT_ID_EQ = "eq";
+
+        private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
+
+        private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
+
+        private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
+
+        private const string AUDIO_EFFECT_ID_PITCH_SHIFT = "pitch_shift";
+
         private MediaPlayerCore MediaPlayer1;
 
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
@@ -290,19 +302,19 @@ namespace Media_Player_Demo
             switch (cbImageType.SelectedIndex)
             {
                 case 0:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".bmp", ImageFormat.Bmp, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight);
                     break;
                 case 1:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".jpg", ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".jpg"), ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight);
                     break;
                 case 2:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".gif", ImageFormat.Gif, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".gif"), ImageFormat.Gif, 0, customWidth, customHeight);
                     break;
                 case 3:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".png", ImageFormat.Png, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".png"), ImageFormat.Png, 0, customWidth, customHeight);
                     break;
                 case 4:
-                    await MediaPlayer1.Frame_SaveAsync(edScreenshotsFolder.Text + "\\" + s + ".tiff", ImageFormat.Tiff, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight);
                     break;
             }
         }
@@ -1285,12 +1297,12 @@ namespace Media_Player_Demo
             MediaPlayer1.Audio_Effects_Enabled = cbAudioEffectsEnabled.Checked;
             if (MediaPlayer1.Audio_Effects_Enabled)
             {
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.PitchShift, cbAudPitchShiftEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                MediaPlayer1.Audio_Effects_Add(-1, AudioEffectType.PitchShift, AUDIO_EFFECT_ID_PITCH_SHIFT, cbAudPitchShiftEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
             }
 
             if (cbAudPitchShiftEnabled.Checked)
@@ -1757,128 +1769,128 @@ namespace Media_Player_Demo
 
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
-            tbAudEq0.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 0);
-            tbAudEq1.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 1);
-            tbAudEq2.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 2);
-            tbAudEq3.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 3);
-            tbAudEq4.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 4);
-            tbAudEq5.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 5);
-            tbAudEq6.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 6);
-            tbAudEq7.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 7);
-            tbAudEq8.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 8);
-            tbAudEq9.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, 1, 9);
+            tbAudEq0.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
+            tbAudEq1.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 1);
+            tbAudEq2.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 2);
+            tbAudEq3.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 3);
+            tbAudEq4.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 4);
+            tbAudEq5.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 5);
+            tbAudEq6.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 6);
+            tbAudEq7.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 7);
+            tbAudEq8.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 8);
+            tbAudEq9.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 0, cbAudAmplifyEnabled.Checked);
-            MediaPlayer1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, false);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
         private void cbAudDynamicAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 2, cbAudDynamicAmplifyEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked);
         }
 
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 1, cbAudEqualizerEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Preset_Set(-1, 1, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
+            MediaPlayer1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(null, null);
         }
 
         private void cbAudSound3DEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 3, cbAudSound3DEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked);
         }
 
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 4, cbAudTrueBassEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
         
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Sound3D(-1, 3, tbAud3DSound.Value);
+            MediaPlayer1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value);
         }
 
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, false);
+            MediaPlayer1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
         private void tbAudAttack_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
+            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void tbAudDynAmp_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
+            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 0, tbAudEq0.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value);
         }
 
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 1, tbAudEq1.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value);
         }
 
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 2, tbAudEq2.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value);
         }
 
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 3, tbAudEq3.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value);
         }
 
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 4, tbAudEq4.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value);
         }
 
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 5, tbAudEq5.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value);
         }
 
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 6, tbAudEq6.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value);
         }
 
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 7, tbAudEq7.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value);
         }
 
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 8, tbAudEq8.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value);
         }
 
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, 1, 9, tbAudEq9.Value);
+            MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value);
         }
 
         private void tbAudRelease_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
+            MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_TrueBass(-1, 4, 200, false, tbAudTrueBass.Value);
+            MediaPlayer1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, tbAudTrueBass.Value);
         }
 
         private void tbJPEGQuality_Scroll(object sender, EventArgs e)
@@ -2480,12 +2492,12 @@ namespace Media_Player_Demo
 
         private void tbAudPitchShift_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_PitchShift(-1, 5, tbAudPitchShift.Value / 1000f);
+            MediaPlayer1.Audio_Effects_PitchShift(-1, AUDIO_EFFECT_ID_PITCH_SHIFT, tbAudPitchShift.Value / 1000f);
         }
 
         private void cbAudPitchShiftEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Effects_Enable(-1, 5, cbAudPitchShiftEnabled.Checked);
+            MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_PITCH_SHIFT, cbAudPitchShiftEnabled.Checked);
         }
 
         private void MediaPlayer1_OnAudioVUMeterProVolume(object sender, AudioLevelEventArgs e)

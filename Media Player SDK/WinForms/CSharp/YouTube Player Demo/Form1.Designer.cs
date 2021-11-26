@@ -46,7 +46,7 @@
             this.cbVideoStream = new System.Windows.Forms.ComboBox();
             this.cbAudioStream = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,7 +217,7 @@
         private System.Windows.Forms.ComboBox cbVideoStream;
         private System.Windows.Forms.ComboBox cbAudioStream;
         private System.Windows.Forms.Timer timer1;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

@@ -1,9 +1,9 @@
 ' ReSharper disable InconsistentNaming
 
-Imports VisioForge.Controls.MediaPlayer
-Imports VisioForge.Controls.UI
+Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.UI
 Imports VisioForge.Types
-Imports VisioForge.Controls.UI.WinForms
+Imports VisioForge.Core.UI.WinForms
 Imports System.IO
 Imports VisioForge.Types.Events
 Imports VisioForge.Types.MediaPlayer

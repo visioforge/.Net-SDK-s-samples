@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Video_From_Images_CLI
 {
-    using VisioForge.Libs.CommandLine;
-    using VisioForge.Libs.CommandLine.Text;
+    using CommandLine;
+    using CommandLine.Text;
 
     public class CommandLineOptions
     {

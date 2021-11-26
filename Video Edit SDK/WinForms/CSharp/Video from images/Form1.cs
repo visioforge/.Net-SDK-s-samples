@@ -3,10 +3,10 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using VisioForge.Controls.UI;
-using VisioForge.Controls.UI.Dialogs.OutputFormats;
-using VisioForge.Controls.UI.Dialogs.VideoEffects;
-using VisioForge.Tools;
+using VisioForge.Core.UI;
+using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+using VisioForge.MediaFramework;
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace Video_From_Images
@@ -17,9 +17,10 @@ namespace Video_From_Images
     using VisioForge.Types.Output;
     using VisioForge.Types.VideoEffects;
     using System.IO;
-    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Core.VideoEdit;
     using VisioForge.Types.Events;
     using VisioForge.Types.VideoEdit;
+    using VisioForge.Core;
 
     public partial class Form1 : Form
     {

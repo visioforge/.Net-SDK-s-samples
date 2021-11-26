@@ -20,12 +20,11 @@ namespace VideoEdit_CS_Demo
     using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.UI.WinForms;
-    using VisioForge.Controls.VideoEdit;
-    using VisioForge.Tools;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.UI.WinForms;
+    using VisioForge.Core.VideoEdit;
     using VisioForge.Types;
     using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Decklink;
@@ -36,6 +35,7 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Types.VideoEffects;
     using VisioForge.Types.VideoProcessing;
     using M4AOutput = VisioForge.Types.Output.M4AOutput;
+    using VisioForge.Core;
 
     /// <summary>
     /// Main demo form.
@@ -44,19 +44,19 @@ namespace VideoEdit_CS_Demo
     {
         private VideoEditCore VideoEdit1;
 
-        private const int AUDIO_EFFECT_ID_AMPLIFY = 0;
+        private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
         
-        private const int AUDIO_EFFECT_ID_EQ = 1;
+        private const string AUDIO_EFFECT_ID_EQ = "eq";
 
-        private const int AUDIO_EFFECT_ID_DYN_AMPLIFY = 2;
+        private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
 
-        private const int AUDIO_EFFECT_ID_SOUND_3D = 3;
+        private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
 
-        private const int AUDIO_EFFECT_ID_TRUE_BASS = 4;
+        private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
 
-        private const int AUDIO_EFFECT_ID_FADE_IN = 5;
+        private const string AUDIO_EFFECT_ID_FADE_IN = "fade_in";
 
-        private const int AUDIO_EFFECT_ID_FADE_OUT = 6;
+        private const string AUDIO_EFFECT_ID_FADE_OUT = "fade_out";
 
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
@@ -1024,20 +1024,22 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Audio_Effects_Enabled = cbAudioEffectsEnabled.Checked;
             if (VideoEdit1.Audio_Effects_Enabled)
             {
-                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+                VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
                 VideoEdit1.Audio_Effects_Add(
                     -1,
-                    AudioEffectType.Fade, 
+                    AudioEffectType.Fade,
+                    AUDIO_EFFECT_ID_FADE_IN,
                     cbFadeInEnabled.Checked,
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStartTime.Text)),
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStopTime.Text)));
                 VideoEdit1.Audio_Effects_Add(
                     -1,
-                    AudioEffectType.Fade, 
+                    AudioEffectType.Fade,
+                    AUDIO_EFFECT_ID_FADE_OUT,
                     cbFadeOutEnabled.Checked,
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStartTime.Text)),
                     TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStopTime.Text)));

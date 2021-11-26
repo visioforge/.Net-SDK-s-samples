@@ -106,7 +106,7 @@ namespace Video_Capture_Snippets_Demo
             this.label25 = new System.Windows.Forms.Label();
             this.edOutputFile = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -858,7 +858,7 @@ namespace Video_Capture_Snippets_Demo
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox cbAudioInputDevice;
         private System.Windows.Forms.Label label28;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

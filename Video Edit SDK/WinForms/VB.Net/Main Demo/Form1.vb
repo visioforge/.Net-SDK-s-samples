@@ -2,22 +2,36 @@
 
 Imports System.Globalization
 Imports System.IO
-Imports VisioForge.Controls.UI
-Imports VisioForge.Controls.UI.Dialogs.OutputFormats
-Imports VisioForge.Controls.UI.Dialogs.VideoEffects
+Imports VisioForge.Core.UI
+Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
+Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 Imports VisioForge.Types
-Imports VisioForge.Tools
+Imports VisioForge.MediaFramework
 Imports VisioForge.Types.FFMPEGEXE
 Imports VisioForge.Types.Output
 Imports VisioForge.Types.VideoEffects
 Imports VisioForge.Types.Decklink
-Imports VisioForge.Controls.VideoEdit
+Imports VisioForge.Core.VideoEdit
 Imports VisioForge.Types.Events
 Imports VisioForge.Types.VideoEdit
 Imports VisioForge.Types.AudioEffects
 Imports VisioForge.Types.VideoProcessing
+Imports VisioForge.Core
+Imports VisioForge.MediaFramework.Helpers
 
 Public Class Form1
+    Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
+
+    Private Const AUDIO_EFFECT_ID_EQ As String = "eq"
+
+    Private Const AUDIO_EFFECT_ID_DYN_AMPLIFY As String = "dyn_amplify"
+
+    Private Const AUDIO_EFFECT_ID_SOUND_3D As String = "sound3d"
+
+    Private Const AUDIO_EFFECT_ID_TRUE_BASS As String = "true_bass"
+
+    Private Const AUDIO_EFFECT_ID_PITCH_SHIFT As String = "pitch_shift"
+
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
     Dim mp4SettingsDialog As MP4SettingsDialog
@@ -871,11 +885,11 @@ Public Class Form1
         VideoEdit1.Audio_Effects_Enabled = cbAudioEffectsEnabled.Checked
         If (VideoEdit1.Audio_Effects_Enabled) Then
 
-            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
-            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
+            VideoEdit1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
 
             tbAudAmplifyAmp_Scroll(sender, e)
             tbAudDynAmp_Scroll(sender, e)
@@ -1323,149 +1337,149 @@ Public Class Form1
 
     Private Sub cbAudAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudAmplifyEnabled.CheckedChanged
 
-        VideoEdit1.Audio_Effects_Enable(-1, 0, cbAudAmplifyEnabled.Checked)
+        VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked)
 
     End Sub
 
     Private Sub tbAudAmplifyAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAmplifyAmp.Scroll
 
-        VideoEdit1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, False)
+        VideoEdit1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, False)
 
     End Sub
 
     Private Sub cbAudEqualizerEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudEqualizerEnabled.CheckedChanged
 
-        VideoEdit1.Audio_Effects_Enable(-1, 1, cbAudEqualizerEnabled.Checked)
+        VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked)
 
     End Sub
 
     Private Sub tbAudEq0_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq0.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 0, tbAudEq0.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value)
 
     End Sub
 
     Private Sub tbAudEq1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq1.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 1, tbAudEq1.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value)
 
     End Sub
 
     Private Sub tbAudEq2_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq2.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 2, tbAudEq2.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value)
 
     End Sub
 
     Private Sub tbAudEq3_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq3.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 3, tbAudEq3.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value)
 
     End Sub
 
     Private Sub tbAudEq4_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq4.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 4, tbAudEq4.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value)
 
     End Sub
 
     Private Sub tbAudEq5_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq5.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 5, tbAudEq5.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value)
 
     End Sub
 
     Private Sub tbAudEq6_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq6.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 6, tbAudEq6.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value)
 
     End Sub
 
     Private Sub tbAudEq7_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq7.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 7, tbAudEq7.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value)
 
     End Sub
 
     Private Sub tbAudEq8_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq8.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 8, tbAudEq8.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value)
 
     End Sub
 
     Private Sub tbAudEq9_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq9.Scroll
 
-        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, 1, 9, tbAudEq9.Value)
+        VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value)
 
     End Sub
 
     Private Sub cbAudEqualizerPreset_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudEqualizerPreset.SelectedIndexChanged
 
-        VideoEdit1.Audio_Effects_Equalizer_Preset_Set(-1, 1, cbAudEqualizerPreset.SelectedIndex)
+        VideoEdit1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerPreset.SelectedIndex)
         btAudEqRefresh_Click(sender, e)
 
     End Sub
 
     Private Sub btAudEqRefresh_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btAudEqRefresh.Click
 
-        tbAudEq0.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 0)
-        tbAudEq1.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 1)
-        tbAudEq2.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 2)
-        tbAudEq3.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 3)
-        tbAudEq4.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 4)
-        tbAudEq5.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 5)
-        tbAudEq6.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 6)
-        tbAudEq7.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 7)
-        tbAudEq8.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 8)
-        tbAudEq9.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, 1, 9)
+        tbAudEq0.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0)
+        tbAudEq1.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 1)
+        tbAudEq2.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 2)
+        tbAudEq3.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 3)
+        tbAudEq4.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 4)
+        tbAudEq5.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 5)
+        tbAudEq6.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 6)
+        tbAudEq7.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 7)
+        tbAudEq8.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 8)
+        tbAudEq9.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9)
 
     End Sub
 
     Private Sub cbAudDynamicAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudDynamicAmplifyEnabled.CheckedChanged
 
-        VideoEdit1.Audio_Effects_Enable(-1, 2, cbAudDynamicAmplifyEnabled.Checked)
+        VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked)
 
     End Sub
 
     Private Sub tbAudDynAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudDynAmp.Scroll
 
-        VideoEdit1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub tbAudAttack_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAttack.Scroll
 
-        VideoEdit1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub tbAudRelease_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudRelease.Scroll
 
-        VideoEdit1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
+        VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
     Private Sub cbAudSound3DEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudSound3DEnabled.CheckedChanged
 
-        VideoEdit1.Audio_Effects_Enable(-1, 3, cbAudSound3DEnabled.Checked)
+        VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked)
 
     End Sub
 
     Private Sub tbAud3DSound_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAud3DSound.Scroll
 
-        VideoEdit1.Audio_Effects_Sound3D(-1, 3, tbAud3DSound.Value)
+        VideoEdit1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value)
 
     End Sub
 
     Private Sub cbAudTrueBassEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudTrueBassEnabled.CheckedChanged
 
-        VideoEdit1.Audio_Effects_Enable(-1, 4, cbAudTrueBassEnabled.Checked)
+        VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked)
 
     End Sub
 
     Private Sub tbAudTrueBass_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudTrueBass.Scroll
 
-        VideoEdit1.Audio_Effects_TrueBass(-1, 4, 200, False, tbAudTrueBass.Value)
+        VideoEdit1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, False, tbAudTrueBass.Value)
 
     End Sub
 

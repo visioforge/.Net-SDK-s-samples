@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace screen_capture
 {
     using System.IO;
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

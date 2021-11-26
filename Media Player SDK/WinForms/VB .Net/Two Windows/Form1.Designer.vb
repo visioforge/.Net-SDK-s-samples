@@ -46,7 +46,7 @@ Partial Class Form1
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.groupBox2.SuspendLayout()
         CType(Me.tbSpeed, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbTimeline, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -317,5 +317,5 @@ Partial Class Form1
     Private WithEvents openFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

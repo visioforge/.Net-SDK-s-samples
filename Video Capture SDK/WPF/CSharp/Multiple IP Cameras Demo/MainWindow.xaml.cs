@@ -4,8 +4,8 @@ using System.Windows;
 
 namespace Multiple_IP_Cameras_Demo_WPF
 {
-    using VisioForge.Controls.UI.WPF;
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.UI.WPF;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

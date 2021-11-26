@@ -24,10 +24,8 @@ namespace Video_From_Images_CLI
             //var optionsz = new CommandLineOptions { InputFolder = "c:\\samples\\pics\\", OutputFile = "c:\\vf\\output.avi", Resolution = new[] { "1920", "1080" }, Duration = 2000, Format = "mp4" };
             //var arguments = CommandLine.Parser.Default.FormatCommandLine(optionsz);
 
-
-
             var options = new CommandLineOptions();
-            if (!VisioForge.Libs.CommandLine.Parser.Default.ParseArguments(args, options))
+            if (!CommandLine.Parser.Default.ParseArguments(args, options))
             {
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();
@@ -59,7 +57,7 @@ namespace Video_From_Images_CLI
                 File.Delete(options.OutputFile);
             }
 
-            VisioForge.Controls.VideoEdit.VideoEditCore ve = new VisioForge.Controls.VideoEdit.VideoEditCore();
+            VisioForge.Core.VideoEdit.VideoEditCore ve = new VisioForge.Core.VideoEdit.VideoEditCore();
 
             int insertTime = 0;
             

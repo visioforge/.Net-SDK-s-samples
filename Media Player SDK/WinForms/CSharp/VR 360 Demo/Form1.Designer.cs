@@ -67,7 +67,7 @@
             this.btZoomOut = new System.Windows.Forms.Button();
             this.btZoomIn = new System.Windows.Forms.Button();
             this.tbRoll = new System.Windows.Forms.TrackBar();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
@@ -497,7 +497,7 @@
         private System.Windows.Forms.Button btZoomOut;
         private System.Windows.Forms.Button btZoomIn;
         private System.Windows.Forms.TrackBar tbRoll;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

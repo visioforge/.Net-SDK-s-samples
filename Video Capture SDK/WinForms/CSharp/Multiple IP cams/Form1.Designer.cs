@@ -58,8 +58,8 @@ namespace multiple_ap_cams
             this.label3 = new System.Windows.Forms.Label();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
-            this.VideoView2 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.VideoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.edPassword1 = new System.Windows.Forms.TextBox();
             this.label167 = new System.Windows.Forms.Label();
             this.edLogin1 = new System.Windows.Forms.TextBox();
@@ -330,8 +330,8 @@ namespace multiple_ap_cams
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.TextBox mmLog;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView2;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView2;
         private System.Windows.Forms.TextBox edPassword1;
         private System.Windows.Forms.Label label167;
         private System.Windows.Forms.TextBox edLogin1;

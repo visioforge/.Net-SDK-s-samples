@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28922.388
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Player Demo (NuGet) net6", "WinForms\CSharp\Audio Player\Audio Player Demo (NuGet) net6.csproj", "{AEBEA0DD-44E1-4351-A9F2-FC6E46CFFB93}"
 EndProject
@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karaoke Demo (NuGet) net6",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo (NuGet) net6", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo (NuGet) net6.csproj", "{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{53C08278-37B5-445C-AD9A-D3D70EE03E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP GST (NuGet) net6", "WinForms\CSharp\Main Demo GST\Main Demo MP GST (NuGet) net6.csproj", "{DABA9589-73B1-4B46-89AC-32228B54DB12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) net6", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) net6.csproj", "{96750269-2BCA-4575-B2FE-3EE00033D8D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) net6", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) net6.csproj", "{7154B2EB-049B-4605-BAA4-12B41D629C39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avalonia", "Avalonia", "{ABF9824B-D3DC-4ABF-AC1B-2676A31108CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,14 +153,22 @@ Global
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.ActiveCfg = Release|x86
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA}.Release|x86.Build.0 = Release|x86
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Debug|x86.Build.0 = Debug|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|x86.ActiveCfg = Release|Any CPU
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0}.Release|x86.Build.0 = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.Build.0 = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.ActiveCfg = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.Build.0 = Release|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Debug|x86.Build.0 = Debug|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Release|x86.ActiveCfg = Release|Any CPU
+		{7154B2EB-049B-4605-BAA4-12B41D629C39}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,7 +187,8 @@ Global
 		{DDEF7252-9D8C-4324-8B18-A1944494F463} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
-		{96750269-2BCA-4575-B2FE-3EE00033D8D0} = {53C08278-37B5-445C-AD9A-D3D70EE03E6D}
+		{DABA9589-73B1-4B46-89AC-32228B54DB12} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{7154B2EB-049B-4605-BAA4-12B41D629C39} = {ABF9824B-D3DC-4ABF-AC1B-2676A31108CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

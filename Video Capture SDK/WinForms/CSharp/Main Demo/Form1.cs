@@ -18,14 +18,11 @@ namespace VideoCapture_CSharp_Demo
     using System.Linq;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.UI;
-    using VisioForge.Controls.UI.Dialogs;
-    using VisioForge.Controls.UI.Dialogs.OutputFormats;
-    using VisioForge.Controls.UI.Dialogs.VideoEffects;
-    using VisioForge.Controls.UI.WinForms;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.IPCameraDB;
-    using VisioForge.Tools;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Decklink;
@@ -37,12 +34,23 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Types.VideoEffects;
     using VisioForge.Types.VideoProcessing;
     using M4AOutput = VisioForge.Types.Output.M4AOutput;
+    using VisioForge.Core;
 
     /// <summary>
     /// Main form.
     /// </summary>
     public partial class Form1 : Form
     {
+        private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
+
+        private const string AUDIO_EFFECT_ID_EQ = "eq";
+
+        private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
+
+        private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
+
+        private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
+
         private VideoCaptureCore VideoCapture1;
 
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
@@ -128,11 +136,11 @@ namespace VideoCapture_CSharp_Demo
         {
             VideoCapture1.Audio_Effects_Clear(-1);
 
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.DynamicAmplify, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
         }
 
         private void CreateEngine()
@@ -1536,7 +1544,7 @@ namespace VideoCapture_CSharp_Demo
 
                 string path = Path.GetDirectoryName(edOutput.Text);
                 string ext = Path.GetExtension(edOutput.Text);
-                VideoCapture1.Output_Filename = path + "\\" + s + ext;
+                VideoCapture1.Output_Filename = Path.Combine(path, s, ext);
             }
         }
 
@@ -3519,16 +3527,16 @@ namespace VideoCapture_CSharp_Demo
 
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
-            tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 0);
-            tbAudEq1.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 1);
-            tbAudEq2.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 2);
-            tbAudEq3.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 3);
-            tbAudEq4.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 4);
-            tbAudEq5.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 5);
-            tbAudEq6.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 6);
-            tbAudEq7.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 7);
-            tbAudEq8.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 8);
-            tbAudEq9.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, 1, 9);
+            tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
+            tbAudEq1.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 1);
+            tbAudEq2.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 2);
+            tbAudEq3.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 3);
+            tbAudEq4.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 4);
+            tbAudEq5.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 5);
+            tbAudEq6.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 6);
+            tbAudEq7.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 7);
+            tbAudEq8.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 8);
+            tbAudEq9.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
         private async void btSignal_Click(object sender, EventArgs e)
@@ -3589,33 +3597,33 @@ namespace VideoCapture_CSharp_Demo
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 0, cbAudAmplifyEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
         }
 
         private void cbAudDynamicAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 2, cbAudDynamicAmplifyEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked);
         }
 
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 1, cbAudEqualizerEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, 1, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
+            VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(sender, e);
         }
 
         private void cbAudSound3DEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 3, cbAudSound3DEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked);
         }
 
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 4, cbAudTrueBassEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
 
         private async void cbStretch1_CheckedChanged(object sender, EventArgs e)
@@ -3673,72 +3681,72 @@ namespace VideoCapture_CSharp_Demo
 
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Sound3D(-1, 3, (ushort)tbAud3DSound.Value);
+            VideoCapture1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (ushort)tbAud3DSound.Value);
         }
 
         private void tbAudDynAmp_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
+            VideoCapture1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void tbAudAttack_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_DynamicAmplify(-1, 2, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
+            VideoCapture1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 0, (sbyte)tbAudEq0.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, (sbyte)tbAudEq0.Value);
         }
 
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 1, (sbyte)tbAudEq1.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, (sbyte)tbAudEq1.Value);
         }
 
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 2, (sbyte)tbAudEq2.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, (sbyte)tbAudEq2.Value);
         }
 
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 3, (sbyte)tbAudEq3.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, (sbyte)tbAudEq3.Value);
         }
 
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 4, (sbyte)tbAudEq4.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, (sbyte)tbAudEq4.Value);
         }
 
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 5, (sbyte)tbAudEq5.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, (sbyte)tbAudEq5.Value);
         }
 
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 6, (sbyte)tbAudEq6.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, (sbyte)tbAudEq6.Value);
         }
 
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 7, (sbyte)tbAudEq7.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, (sbyte)tbAudEq7.Value);
         }
 
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 8, (sbyte)tbAudEq8.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, (sbyte)tbAudEq8.Value);
         }
 
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, 1, 9, (sbyte)tbAudEq9.Value);
+            VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, (sbyte)tbAudEq9.Value);
         }
 
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_TrueBass(-1, 4, 200, false, (ushort)tbAudTrueBass.Value);
+            VideoCapture1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, (ushort)tbAudTrueBass.Value);
         }
 
         private void tbContrast_Scroll(object sender, EventArgs e)
@@ -3819,12 +3827,12 @@ namespace VideoCapture_CSharp_Demo
 
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, false);
+            VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
         private void tbAudRelease_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_DynamicAmplify(-1, 2, (ushort)tbAudAttack.Value, (ushort)tbAudDynAmp.Value, tbAudRelease.Value);
+            VideoCapture1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (ushort)tbAudAttack.Value, (ushort)tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
         private void pnOSDColorKey_Click(object sender, EventArgs e)
@@ -5235,11 +5243,6 @@ namespace VideoCapture_CSharp_Demo
                     intf.Update();
                 }
             }
-        }
-
-        private void btShowIPCamDatabase_Click(object sender, EventArgs e)
-        {
-            IPCameraDB.ShowWindow();
         }
 
         private async void btONVIFConnect_Click(object sender, EventArgs e)

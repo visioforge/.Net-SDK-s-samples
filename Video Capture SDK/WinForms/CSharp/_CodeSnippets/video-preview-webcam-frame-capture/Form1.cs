@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using VisioForge.Controls.VideoCapture;
+using VisioForge.Core.VideoCapture;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 using VisioForge.Types.VideoCapture;

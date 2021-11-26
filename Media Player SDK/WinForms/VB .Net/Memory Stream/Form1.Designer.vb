@@ -69,7 +69,7 @@ Partial Class Form1
         Me.groupBox3 = New System.Windows.Forms.GroupBox()
         Me.rbStreamTypeMemory = New System.Windows.Forms.RadioButton()
         Me.rbSTreamTypeFile = New System.Windows.Forms.RadioButton()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.groupBox4.SuspendLayout()
         CType(Me.tbBalance1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbVolume1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -492,5 +492,5 @@ End Sub
     Private WithEvents groupBox3 As GroupBox
     Private WithEvents rbStreamTypeMemory As RadioButton
     Private WithEvents rbSTreamTypeFile As RadioButton
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

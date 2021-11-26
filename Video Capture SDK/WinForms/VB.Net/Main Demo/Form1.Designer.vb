@@ -276,7 +276,7 @@ Partial Class Form1
         Me.cbAudioOutputDevice = New System.Windows.Forms.ComboBox()
         Me.label15 = New System.Windows.Forms.Label()
         Me.tabPage98 = New System.Windows.Forms.TabPage()
-        Me.peakMeterCtrl1 = New VisioForge.Controls.UI.WinForms.PeakMeterCtrl()
+        Me.peakMeterCtrl1 = New VisioForge.Core.UI.WinForms.PeakMeterCtrl()
         Me.cbVUMeter = New System.Windows.Forms.CheckBox()
         Me.TabPage111 = New System.Windows.Forms.TabPage()
         Me.tbVUMeterBoost = New System.Windows.Forms.TrackBar()
@@ -284,10 +284,10 @@ Partial Class Form1
         Me.label381 = New System.Windows.Forms.Label()
         Me.tbVUMeterAmplification = New System.Windows.Forms.TrackBar()
         Me.cbVUMeterPro = New System.Windows.Forms.CheckBox()
-        Me.waveformPainter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.waveformPainter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter()
-        Me.volumeMeter2 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
-        Me.volumeMeter1 = New VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.waveformPainter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.waveformPainter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter()
+        Me.volumeMeter2 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
+        Me.volumeMeter1 = New VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter()
         Me.tabPage99 = New System.Windows.Forms.TabPage()
         Me.rbAddAudioStreamsIndependent = New System.Windows.Forms.RadioButton()
         Me.rbAddAudioStreamsMix = New System.Windows.Forms.RadioButton()
@@ -333,7 +333,6 @@ Partial Class Form1
         Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
-        Me.btShowIPCamDatabase = New System.Windows.Forms.Button()
         Me.cbIPDisconnect = New System.Windows.Forms.CheckBox()
         Me.edIPForcedFramerateID = New System.Windows.Forms.TextBox()
         Me.label344 = New System.Windows.Forms.Label()
@@ -1201,7 +1200,7 @@ Partial Class Form1
         Me.openFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
-        Me.VideoView1 = New VisioForge.Controls.UI.WinForms.VideoView()
+        Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -3732,7 +3731,6 @@ Partial Class Form1
         Me.tabPage144.Controls.Add(Me.linkLabel7)
         Me.tabPage144.Controls.Add(Me.label165)
         Me.tabPage144.Controls.Add(Me.cbIPCameraONVIF)
-        Me.tabPage144.Controls.Add(Me.btShowIPCamDatabase)
         Me.tabPage144.Controls.Add(Me.cbIPDisconnect)
         Me.tabPage144.Controls.Add(Me.edIPForcedFramerateID)
         Me.tabPage144.Controls.Add(Me.label344)
@@ -3846,15 +3844,6 @@ Partial Class Form1
         Me.cbIPCameraONVIF.TabIndex = 78
         Me.cbIPCameraONVIF.Text = "ONVIF camera"
         Me.cbIPCameraONVIF.UseVisualStyleBackColor = True
-        '
-        'btShowIPCamDatabase
-        '
-        Me.btShowIPCamDatabase.Location = New System.Drawing.Point(283, 209)
-        Me.btShowIPCamDatabase.Name = "btShowIPCamDatabase"
-        Me.btShowIPCamDatabase.Size = New System.Drawing.Size(135, 23)
-        Me.btShowIPCamDatabase.TabIndex = 77
-        Me.btShowIPCamDatabase.Text = "Show IP cam database"
-        Me.btShowIPCamDatabase.UseVisualStyleBackColor = True
         '
         'cbIPDisconnect
         '
@@ -13642,7 +13631,7 @@ End Sub
     Private WithEvents cbAudioOutputDevice As System.Windows.Forms.ComboBox
     Private WithEvents label15 As System.Windows.Forms.Label
     Private WithEvents tabPage98 As System.Windows.Forms.TabPage
-    Private WithEvents peakMeterCtrl1 As VisioForge.Controls.UI.WinForms.PeakMeterCtrl
+    Private WithEvents peakMeterCtrl1 As VisioForge.Core.UI.WinForms.PeakMeterCtrl
     Private WithEvents cbVUMeter As System.Windows.Forms.CheckBox
     Private WithEvents tabPage99 As System.Windows.Forms.TabPage
     Private WithEvents label319 As System.Windows.Forms.Label
@@ -13785,13 +13774,13 @@ End Sub
     Friend WithEvents TabPage111 As System.Windows.Forms.TabPage
     Private WithEvents tbVUMeterBoost As System.Windows.Forms.TrackBar
     Private WithEvents label382 As System.Windows.Forms.Label
-    Private WithEvents waveformPainter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents waveformPainter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter
-    Private WithEvents volumeMeter2 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents waveformPainter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents waveformPainter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter
+    Private WithEvents volumeMeter2 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
     Private WithEvents label381 As System.Windows.Forms.Label
     Private WithEvents tbVUMeterAmplification As System.Windows.Forms.TrackBar
     Private WithEvents cbVUMeterPro As System.Windows.Forms.CheckBox
-    Private WithEvents volumeMeter1 As VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter
+    Private WithEvents volumeMeter1 As VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter
     Friend WithEvents TabPage112 As System.Windows.Forms.TabPage
     Private WithEvents cbLiveRotationStretch As System.Windows.Forms.CheckBox
     Private WithEvents label392 As System.Windows.Forms.Label
@@ -14003,7 +13992,6 @@ End Sub
     Private WithEvents tabControl15 As TabControl
     Private WithEvents tabPage144 As TabPage
     Private WithEvents cbIPCameraONVIF As CheckBox
-    Private WithEvents btShowIPCamDatabase As Button
     Private WithEvents cbIPDisconnect As CheckBox
     Private WithEvents edIPForcedFramerateID As TextBox
     Private WithEvents label344 As Label
@@ -14185,5 +14173,5 @@ End Sub
     Private WithEvents llXiphX86 As LinkLabel
     Private WithEvents label68 As Label
     Private WithEvents label67 As Label
-    Friend WithEvents VideoView1 As VisioForge.Controls.UI.WinForms.VideoView
+    Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
 End Class

@@ -5,7 +5,7 @@ namespace VE_Main_Demo_CLI
 {
     using System;
 
-    using VisioForge.Controls.VideoEdit;
+    using VisioForge.Core.VideoEdit;
     using VisioForge.Types;
     using VisioForge.Types.Output;
     using VisioForge.Types.VideoEdit;
@@ -92,7 +92,7 @@ namespace VE_Main_Demo_CLI
         static void Main(string[] args)
         {
             var options = new CommandLineOptions();
-            if (!VisioForge.Libs.CommandLine.Parser.Default.ParseArguments(args, options))
+            if (!CommandLine.Parser.Default.ParseArguments(args, options))
             {
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey();

@@ -107,7 +107,7 @@
             this.edWidth = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbResize = new System.Windows.Forms.CheckBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.SuspendLayout();
             // 
             // lbInfo
@@ -452,7 +452,7 @@
         private System.Windows.Forms.TextBox edWidth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox cbResize;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

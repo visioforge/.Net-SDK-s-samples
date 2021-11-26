@@ -1,8 +1,12 @@
-15.*
+15.1
 * Disabled Sentry debug messages in the console
 * Added Icecast streaming
 * VideoStreamInfo.FrameRate property type changed to VideoFrameRate (with numerator and denominator) from double
 * Updated WPF VideoView, resolved the issue for IP cameras stream playback
+* VisioForge.Controls, VisioForge.Controls.UI, VisioForge.Controls.UI.Dialogs, and VisioForge.Tools merged inside VisioForge.Core
+* Audio effect API now uses string name instead of index
+* Added Android support in Media Player SDK .Net
+* Added new GStreamer-based crossplatform engine to support Windows and other platforms within v15 development cycle
 
 15.0
 * Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.

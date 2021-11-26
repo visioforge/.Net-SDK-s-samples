@@ -116,7 +116,7 @@
             this.mmLog = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAudioBalance)).BeginInit();
@@ -903,7 +903,7 @@
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Button btSeparateCaptureStop;
         private System.Windows.Forms.Button btSeparateCaptureStart;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

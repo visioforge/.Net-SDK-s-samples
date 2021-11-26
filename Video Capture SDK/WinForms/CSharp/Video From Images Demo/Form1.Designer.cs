@@ -57,7 +57,7 @@ namespace Video_From_Images_Demo
             this.label7 = new System.Windows.Forms.Label();
             this.edImageDuration = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.SuspendLayout();
             // 
             // btStart
@@ -311,7 +311,7 @@ namespace Video_From_Images_Demo
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox edImageDuration;
         private System.Windows.Forms.Label label8;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

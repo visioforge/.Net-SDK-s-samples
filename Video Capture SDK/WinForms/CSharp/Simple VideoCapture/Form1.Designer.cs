@@ -174,7 +174,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
             this.btSaveScreenshot = new System.Windows.Forms.Button();
             this.btResume = new System.Windows.Forms.Button();
             this.btPause = new System.Windows.Forms.Button();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tcMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAudioBalance)).BeginInit();
@@ -1619,7 +1619,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbMergeTextLogos;
         private System.Windows.Forms.CheckBox cbMergeImageLogos;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

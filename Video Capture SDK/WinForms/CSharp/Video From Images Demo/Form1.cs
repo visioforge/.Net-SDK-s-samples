@@ -5,8 +5,8 @@
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Controls.VideoCapture;
-    using VisioForge.Shared.Helpers;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework.Helpers;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

@@ -68,7 +68,7 @@ namespace face_detection
             this.btPause = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -505,7 +505,7 @@ namespace face_detection
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TextBox edFaceTrackingFaces;
         private System.Windows.Forms.Label label364;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

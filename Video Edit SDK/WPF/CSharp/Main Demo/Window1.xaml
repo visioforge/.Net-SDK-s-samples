@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="VisioForge Video Edit SDK .Net Main Demo" Height="835" Width="975" Loaded="Form1_Load" 
-        Closed="Window_Closed" xmlns:my="clr-namespace:VisioForge.Controls.UI.WPF;assembly=VisioForge.Controls.UI" Icon="visioforge_main_icon.ico">
+        Closed="Window_Closed" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" Icon="visioforge_main_icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="720*" />

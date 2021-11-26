@@ -4,11 +4,13 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using VisioForge.Controls.UI;
-using VisioForge.Controls.UI.Dialogs.OutputFormats;
-using VisioForge.Controls.UI.Dialogs.VideoEffects;
-using VisioForge.Controls.VideoCapture;
-using VisioForge.Tools;
+using VisioForge.Core;
+using VisioForge.Core.UI;
+using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+using VisioForge.Core.VideoCapture;
+using VisioForge.MediaFramework;
+using VisioForge.MediaFramework.Helpers;
 using VisioForge.Types;
 using VisioForge.Types.AudioEffects;
 using VisioForge.Types.Events;
@@ -20,6 +22,8 @@ namespace Decklink_Demo
 {
     public partial class Form1 : Form
     {
+        private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
+
         private VideoCaptureCore VideoCapture1;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -497,12 +501,12 @@ namespace Decklink_Demo
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Enable(-1, 0, cbAudAmplifyEnabled.Checked);
+            VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
         }
 
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Effects_Amplify(-1, 0, tbAudAmplifyAmp.Value * 10, false);
+            VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
         private async void btStart_Click(object sender, EventArgs e)
@@ -614,7 +618,7 @@ namespace Decklink_Demo
             VideoCapture1.Audio_Effects_Clear(-1);
             VideoCapture1.Audio_Effects_Enabled = true;
 
-            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
+            VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Amplify, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
 
             await VideoCapture1.StartAsync();
 

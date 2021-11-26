@@ -15,8 +15,8 @@ namespace multiple_video_streams
 
     using Properties;
 
-    using VisioForge.Controls.UI.WinForms;
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.UI.WinForms;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

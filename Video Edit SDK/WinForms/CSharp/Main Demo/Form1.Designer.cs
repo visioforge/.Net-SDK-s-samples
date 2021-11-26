@@ -607,11 +607,11 @@ namespace VideoEdit_CS_Demo
             this.label381 = new System.Windows.Forms.Label();
             this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
             this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
-            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
-            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.peakMeterCtrl1 = new VisioForge.Core.UI.WinForms.PeakMeterCtrl();
+            this.waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.btStart = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
             this.OpenDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -698,7 +698,7 @@ namespace VideoEdit_CS_Demo
             this.cbLicensing = new System.Windows.Forms.CheckBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -8148,12 +8148,12 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.Label label381;
         private System.Windows.Forms.TrackBar tbVUMeterAmplification;
         private System.Windows.Forms.CheckBox cbVUMeterPro;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter2;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter1;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
-        private VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter2;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter1;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
+        private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
         private System.Windows.Forms.CheckBox cbVUMeter;
-        private VisioForge.Controls.UI.WinForms.PeakMeterCtrl peakMeterCtrl1;
+        private VisioForge.Core.UI.WinForms.PeakMeterCtrl peakMeterCtrl1;
         private System.Windows.Forms.TextBox edCropRight;
         private System.Windows.Forms.Label label176;
         private System.Windows.Forms.TextBox edCropBottom;
@@ -8232,7 +8232,7 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.LinkLabel llXiphX86;
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.Label label67;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
     }
 }
 

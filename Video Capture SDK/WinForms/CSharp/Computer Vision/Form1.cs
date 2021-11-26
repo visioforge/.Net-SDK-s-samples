@@ -16,13 +16,22 @@ namespace Computer_Vision_Demo
     using System.Linq;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.CV;
-    using VisioForge.Shared.MFP;
+    using VisioForge.Core.CV;
+    using VisioForge.Core.MediaPlayer;
+    using VisioForge.Core.VideoCapture;
+    using VisioForge.MediaFramework.MFP;
     using VisioForge.Types;
-    
+    using VisioForge.Types.Events;
+    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Types.VideoCapture;
+    using VisioForge.Types.VideoProcessing;
 
     public partial class Form1 : Form
     {
+        private VideoCaptureCore VideoCapture1;
+
+        private MediaPlayerCore MediaPlayer1;
+
         private FaceDetector faceDetector;
 
         private CarCounter carCounter;
@@ -36,9 +45,17 @@ namespace Computer_Vision_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ", " + VideoCapture1.SDK_State + ")";
+            VideoCapture1 = new VideoCaptureCore(VideoCaptureView as IVideoView);
+            VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
+            VideoCapture1.OnError += VideoCapture1_OnError;
 
-            foreach (var device in VideoCapture1.Video_CaptureDevicesInfo)
+            MediaPlayer1 = new MediaPlayerCore(MediaPlayerView as IVideoView);
+            MediaPlayer1.OnVideoFrameBuffer += MediaPlayer1_OnVideoFrameBuffer;
+            MediaPlayer1.OnError += MediaPlayer1_OnError;
+
+            Text += " (SDK v" + VideoCapture1.SDK_Version + ")";
+
+            foreach (var device in VideoCapture1.Video_CaptureDevices)
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -50,6 +67,11 @@ namespace Computer_Vision_Demo
             }
 
             cbIPCameraType.SelectedIndex = 0;
+        }
+
+        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        {
+            Log(e.Message);
         }
 
         #region Face detection
@@ -82,11 +104,11 @@ namespace Computer_Vision_Demo
 
             faceDetector.MinFaceSize = new Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
 
-            var path = Path.GetDirectoryName(Application.ExecutablePath) + "\\";
-            string facePath = cbFDFace.Checked ? path + "haarcascade_frontalface_default.xml" : null;
-            string eyesPath = cbFDEyes.Checked ? path + "haarcascade_eye.xml" : null;
-            string nosePath = cbFDNose.Checked ? path + "haarcascade_mcs_nose.xml" : null;
-            string mouthPath = cbFDMouth.Checked ? path + "haarcascade_mcs_mouth.xml" : null;
+            var path = Path.GetDirectoryName(Application.ExecutablePath);
+            string facePath = cbFDFace.Checked ? Path.Combine(path, "haarcascade_frontalface_default.xml") : null;
+            string eyesPath = cbFDEyes.Checked ? Path.Combine(path, "haarcascade_eye.xml") : null;
+            string nosePath = cbFDNose.Checked ? Path.Combine(path, "haarcascade_mcs_nose.xml") : null;
+            string mouthPath = cbFDMouth.Checked ? Path.Combine(path, "haarcascade_mcs_mouth.xml") : null;
 
             faceDetector.Init(
                 facePath,
@@ -113,7 +135,7 @@ namespace Computer_Vision_Demo
             }
         }
 
-        private void OnFaceDetected(object sender, OnCVFaceDetectedArgs e)
+        private void OnFaceDetected(object sender, OnCVFaceDetectedEventArgs e)
         {
             if (e.Faces.Length == 0)
             {
@@ -179,7 +201,7 @@ namespace Computer_Vision_Demo
             }
         }
 
-        private void OnPedestrianDetected(object sender, OnCVPedestrianDetectedArgs e)
+        private void OnPedestrianDetected(object sender, OnCVPedestrianDetectedEventArgs e)
         {
             if (e.Items.Length == 0)
             {
@@ -223,7 +245,7 @@ namespace Computer_Vision_Demo
             carCounter.OnCarsDetected += this.OnCarsDetected;
         }
 
-        private void OnCarsDetected(object sender, OnCVCarDetectedArgs e)
+        private void OnCarsDetected(object sender, OnCVCarDetectedEventArgs e)
         {
             BeginInvoke(
                 (Action)(() =>
@@ -246,8 +268,7 @@ namespace Computer_Vision_Demo
 
         //IntPtr pd = IntPtr.Zero;
 
-
-        private void ProcessFrame(RAWImage frame)
+        private void ProcessFrame(VideoFrame frame)
         {
             //if (pd == IntPtr.Zero)
             //{
@@ -260,9 +281,10 @@ namespace Computer_Vision_Demo
             //int count = CV.PedestrianDetectorProcess(pd, frame, ref items, out time);
             //Trace.WriteLine($"Count: {count}, time: {time}");
 
-            var faces = faceDetector?.Process(frame);
-            carCounter?.Process(frame);
-            pedestrianDetector?.Process(frame);
+            var image = frame.ToRAWImage();
+            var faces = faceDetector?.Process(image);
+            carCounter?.Process(image);
+            pedestrianDetector?.Process(image);
 
             if (cbFDMosaic.Checked)
             {
@@ -284,18 +306,18 @@ namespace Computer_Vision_Demo
                         }
 
                         rect.Bottom += 10;
-                        if (rect.Bottom > frame.Height)
+                        if (rect.Bottom > image.Height)
                         {
-                            rect.Bottom = frame.Height;
+                            rect.Bottom = image.Height;
                         }
 
                         rect.Right += 10;
-                        if (rect.Right > frame.Width)
+                        if (rect.Right > image.Width)
                         {
-                            rect.Right = frame.Width;
+                            rect.Right = image.Width;
                         }
 
-                        MFP.EffectMosaicROI(frame.Data, frame.Width, frame.Height, 45, rect);
+                        MFP.EffectMosaicROI(frame.Data, image.Width, image.Height, 45, rect);
                     }
                 }
             }
@@ -314,7 +336,7 @@ namespace Computer_Vision_Demo
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -342,19 +364,16 @@ namespace Computer_Vision_Demo
             switch (cbIPCameraType.SelectedIndex)
             {
                 case 0:
-                    settings.Type = IPSource.Auto_VLC;
+                    settings.Type = IPSourceEngine.Auto_VLC;
                     break;
                 case 1:
-                    settings.Type = IPSource.Auto_FFMPEG;
+                    settings.Type = IPSourceEngine.Auto_FFMPEG;
                     break;
                 case 2:
-                    settings.Type = IPSource.Auto_LAV;
+                    settings.Type = IPSourceEngine.Auto_LAV;
                     break;
                 case 3:
-                    settings.Type = IPSource.RTSP_Live555;
-                    break;
-                case 4:
-                    settings.Type = IPSource.MMS_WMV;
+                    settings.Type = IPSourceEngine.MMS_WMV;
                     break;
             }
 
@@ -367,13 +386,13 @@ namespace Computer_Vision_Demo
 
         private void SelectVideoCaptureSource()
         {
-            VideoCapture1.Video_CaptureDevice = cbVideoInputDevice.Text;
-            VideoCapture1.Video_CaptureDevice_Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice_Format = cbVideoInputFormat.Text;
+            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
+            VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
+            VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice_FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
             }
         }
 
@@ -489,14 +508,14 @@ namespace Computer_Vision_Demo
 
             if (rbVideoFile.Checked)
             {
-                MediaPlayer1.Show();
-                VideoCapture1.Hide();
+                MediaPlayerView.Show();
+                VideoCaptureView.Hide();
                 await MediaPlayer1.PlayAsync();
             }
             else
             {
-                MediaPlayer1.Hide();
-                VideoCapture1.Show();
+                MediaPlayerView.Hide();
+                VideoCaptureView.Show();
                 await VideoCapture1.StartAsync();
             }
         }
@@ -528,7 +547,7 @@ namespace Computer_Vision_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevicesInfo.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;

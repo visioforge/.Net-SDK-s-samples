@@ -2,7 +2,7 @@ using System;
 
 namespace VideoCapture_CSharp_Demo
 {
-    using VisioForge.Controls.UI.WinForms.VolumeMeterPro;
+    using VisioForge.Core.UI.WinForms.VolumeMeterPro;
     using VisioForge.Types;
 
     partial class Form1
@@ -505,6 +505,10 @@ namespace VideoCapture_CSharp_Demo
             this.tpNSExternal = new System.Windows.Forms.TabPage();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbNetworkIcecastFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
+            this.edIcecastURL = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
             this.cbNetworkStreamingAudioEnabled = new System.Windows.Forms.CheckBox();
             this.cbNetworkStreaming = new System.Windows.Forms.CheckBox();
             this.tabPage28 = new System.Windows.Forms.TabPage();
@@ -873,7 +877,6 @@ namespace VideoCapture_CSharp_Demo
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.label165 = new System.Windows.Forms.Label();
             this.cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
-            this.btShowIPCamDatabase = new System.Windows.Forms.Button();
             this.cbIPDisconnect = new System.Windows.Forms.CheckBox();
             this.edIPForcedFramerateID = new System.Windows.Forms.TextBox();
             this.label344 = new System.Windows.Forms.Label();
@@ -1203,16 +1206,12 @@ namespace VideoCapture_CSharp_Demo
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.edIcecastURL = new System.Windows.Forms.TextBox();
-            this.label69 = new System.Windows.Forms.Label();
-            this.cbNetworkIcecastFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
-            this.VideoView1 = new VisioForge.Controls.UI.WinForms.VideoView();
-            this.peakMeterCtrl1 = new VisioForge.Controls.UI.WinForms.PeakMeterCtrl();
-            this.waveformPainter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Controls.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.peakMeterCtrl1 = new VisioForge.Core.UI.WinForms.PeakMeterCtrl();
+            this.waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            this.volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            this.volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1302,6 +1301,7 @@ namespace VideoCapture_CSharp_Demo
             this.tpSSF.SuspendLayout();
             this.tpHLS.SuspendLayout();
             this.tpNSExternal.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage28.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.tabControl6.SuspendLayout();
@@ -1420,7 +1420,6 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage126.SuspendLayout();
             this.tabControl12.SuspendLayout();
             this.tabPage53.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label8
@@ -5736,6 +5735,48 @@ namespace VideoCapture_CSharp_Demo
             this.linkLabel2.Text = "Streaming to Adobe Flash Media Server";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.cbNetworkIcecastFFMPEGUsePipes);
+            this.tabPage3.Controls.Add(this.edIcecastURL);
+            this.tabPage3.Controls.Add(this.label69);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(284, 356);
+            this.tabPage3.TabIndex = 8;
+            this.tabPage3.Text = "Icecast";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbNetworkIcecastFFMPEGUsePipes
+            // 
+            this.cbNetworkIcecastFFMPEGUsePipes.AutoSize = true;
+            this.cbNetworkIcecastFFMPEGUsePipes.Checked = true;
+            this.cbNetworkIcecastFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbNetworkIcecastFFMPEGUsePipes.Location = new System.Drawing.Point(16, 57);
+            this.cbNetworkIcecastFFMPEGUsePipes.Name = "cbNetworkIcecastFFMPEGUsePipes";
+            this.cbNetworkIcecastFFMPEGUsePipes.Size = new System.Drawing.Size(73, 17);
+            this.cbNetworkIcecastFFMPEGUsePipes.TabIndex = 15;
+            this.cbNetworkIcecastFFMPEGUsePipes.Text = "Use pipes";
+            this.cbNetworkIcecastFFMPEGUsePipes.UseVisualStyleBackColor = true;
+            // 
+            // edIcecastURL
+            // 
+            this.edIcecastURL.Location = new System.Drawing.Point(16, 31);
+            this.edIcecastURL.Name = "edIcecastURL";
+            this.edIcecastURL.Size = new System.Drawing.Size(252, 20);
+            this.edIcecastURL.TabIndex = 12;
+            this.edIcecastURL.Text = "icecast://source:SRC@127.0.0.1:8000/live";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(13, 15);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(29, 13);
+            this.label69.TabIndex = 11;
+            this.label69.Text = "URL";
+            // 
             // cbNetworkStreamingAudioEnabled
             // 
             this.cbNetworkStreamingAudioEnabled.AutoSize = true;
@@ -9553,7 +9594,6 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage144.Controls.Add(this.linkLabel7);
             this.tabPage144.Controls.Add(this.label165);
             this.tabPage144.Controls.Add(this.cbIPCameraONVIF);
-            this.tabPage144.Controls.Add(this.btShowIPCamDatabase);
             this.tabPage144.Controls.Add(this.cbIPDisconnect);
             this.tabPage144.Controls.Add(this.edIPForcedFramerateID);
             this.tabPage144.Controls.Add(this.label344);
@@ -9672,16 +9712,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbIPCameraONVIF.TabIndex = 78;
             this.cbIPCameraONVIF.Text = "ONVIF camera";
             this.cbIPCameraONVIF.UseVisualStyleBackColor = true;
-            // 
-            // btShowIPCamDatabase
-            // 
-            this.btShowIPCamDatabase.Location = new System.Drawing.Point(293, 218);
-            this.btShowIPCamDatabase.Name = "btShowIPCamDatabase";
-            this.btShowIPCamDatabase.Size = new System.Drawing.Size(135, 23);
-            this.btShowIPCamDatabase.TabIndex = 77;
-            this.btShowIPCamDatabase.Text = "Show IP cam database";
-            this.btShowIPCamDatabase.UseVisualStyleBackColor = true;
-            this.btShowIPCamDatabase.Click += new System.EventHandler(this.btShowIPCamDatabase_Click);
             // 
             // cbIPDisconnect
             // 
@@ -13108,48 +13138,6 @@ namespace VideoCapture_CSharp_Demo
             // 
             this.openFileDialog2.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.cbNetworkIcecastFFMPEGUsePipes);
-            this.tabPage3.Controls.Add(this.edIcecastURL);
-            this.tabPage3.Controls.Add(this.label69);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(284, 356);
-            this.tabPage3.TabIndex = 8;
-            this.tabPage3.Text = "Icecast";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // edIcecastURL
-            // 
-            this.edIcecastURL.Location = new System.Drawing.Point(16, 31);
-            this.edIcecastURL.Name = "edIcecastURL";
-            this.edIcecastURL.Size = new System.Drawing.Size(252, 20);
-            this.edIcecastURL.TabIndex = 12;
-            this.edIcecastURL.Text = "icecast://source:SRC@127.0.0.1:8000/live";
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(13, 15);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(29, 13);
-            this.label69.TabIndex = 11;
-            this.label69.Text = "URL";
-            // 
-            // cbNetworkIcecastFFMPEGUsePipes
-            // 
-            this.cbNetworkIcecastFFMPEGUsePipes.AutoSize = true;
-            this.cbNetworkIcecastFFMPEGUsePipes.Checked = true;
-            this.cbNetworkIcecastFFMPEGUsePipes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbNetworkIcecastFFMPEGUsePipes.Location = new System.Drawing.Point(16, 57);
-            this.cbNetworkIcecastFFMPEGUsePipes.Name = "cbNetworkIcecastFFMPEGUsePipes";
-            this.cbNetworkIcecastFFMPEGUsePipes.Size = new System.Drawing.Size(73, 17);
-            this.cbNetworkIcecastFFMPEGUsePipes.TabIndex = 15;
-            this.cbNetworkIcecastFFMPEGUsePipes.Text = "Use pipes";
-            this.cbNetworkIcecastFFMPEGUsePipes.UseVisualStyleBackColor = true;
-            // 
             // VideoView1
             // 
             this.VideoView1.BackColor = System.Drawing.Color.Black;
@@ -13369,6 +13357,8 @@ namespace VideoCapture_CSharp_Demo
             this.tpHLS.PerformLayout();
             this.tpNSExternal.ResumeLayout(false);
             this.tpNSExternal.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage28.ResumeLayout(false);
             this.tabPage28.PerformLayout();
             this.groupBox19.ResumeLayout(false);
@@ -13552,8 +13542,6 @@ namespace VideoCapture_CSharp_Demo
             this.tabControl12.ResumeLayout(false);
             this.tabPage53.ResumeLayout(false);
             this.tabPage53.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -14151,7 +14139,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TabPage tabPage98;
         private System.Windows.Forms.TabPage tabPage99;
-        private VisioForge.Controls.UI.WinForms.PeakMeterCtrl peakMeterCtrl1;
+        private VisioForge.Core.UI.WinForms.PeakMeterCtrl peakMeterCtrl1;
         private System.Windows.Forms.CheckBox cbVUMeter;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.Label label92;
@@ -14498,7 +14486,6 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.ComboBox rbMotionDetectionExDetector;
         private System.Windows.Forms.TabControl tabControl15;
         private System.Windows.Forms.TabPage tabPage144;
-        private System.Windows.Forms.Button btShowIPCamDatabase;
         private System.Windows.Forms.CheckBox cbIPDisconnect;
         private System.Windows.Forms.TextBox edIPForcedFramerateID;
         private System.Windows.Forms.Label label344;
@@ -14661,7 +14648,7 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.LinkLabel llXiphX64;
         private System.Windows.Forms.LinkLabel llXiphX86;
-        private VisioForge.Controls.UI.WinForms.VideoView VideoView1;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox edIcecastURL;
         private System.Windows.Forms.Label label69;

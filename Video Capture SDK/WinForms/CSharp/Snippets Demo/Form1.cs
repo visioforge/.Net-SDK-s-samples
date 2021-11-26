@@ -7,7 +7,7 @@ namespace Video_Capture_Snippets_Demo
     using System.IO;
     using System.Windows.Forms;
 
-    using VisioForge.Controls.VideoCapture;
+    using VisioForge.Core.VideoCapture;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;
