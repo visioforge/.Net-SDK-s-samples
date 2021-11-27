@@ -1,0 +1,34 @@
+name: .NET
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: | 
+          3.1.x
+          5.0.x
+          6.0.x
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build app for release
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln" -t:rebuild -verbosity:diag -property:Configuration=Release
+        
+#    - name: Restore dependencies
+#      run: dotnet restore _SOURCE\VisioForge.MediaFramework.Solution.sln
+#    - name: Build
+#      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
+#    - name: Test
+#      run: dotnet test --no-build --verbosity normal
