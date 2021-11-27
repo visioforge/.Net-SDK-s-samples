@@ -10,7 +10,7 @@ jobs:
     env:
       Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net6.sln"
     
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +24,6 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
       with:
-        vs-version: '[17.0,18.0)'
         vs-prerelease: true
         
     - name: Restore dependencies
