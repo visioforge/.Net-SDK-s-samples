@@ -13,8 +13,9 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>    
-  </PropertyGroup>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <RuntimeIdentifiers>win;win7-x64;win7-x86</RuntimeIdentifiers>  
+</PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
   </PropertyGroup>
