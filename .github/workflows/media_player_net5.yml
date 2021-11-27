@@ -1,4 +1,4 @@
-name: .NET
+name: Media Player SDK .Net 5
 on:
   push:
     branches: [ master ]
@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    env:
+      Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln"
+    
     runs-on: windows-2019
 
     steps:
@@ -24,10 +27,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
         
     - name: Restore dependencies
-      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln"
+      run: dotnet restore $env:Solution_Name
 
     - name: Build app for release
-      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln" -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: msbuild $env:Solution_Name -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
