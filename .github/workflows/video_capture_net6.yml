@@ -1,4 +1,4 @@
-name: Media Player SDK .Net Core 3.1
+name: Video Capture SDK .Net 6
 on:
   push:
     branches: [ master ]
@@ -8,9 +8,9 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) netcore31.sln"
+      Solution_Name: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net6.sln"
     
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v2
@@ -19,10 +19,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: | 
-          3.1.x
+          6.0.x
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-prerelease: true
         
     - name: Restore dependencies
       run: dotnet restore $env:Solution_Name

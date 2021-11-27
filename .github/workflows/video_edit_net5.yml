@@ -1,4 +1,4 @@
-name: Media Player SDK .Net 5
+name: Video Edit SDK .Net 5
 on:
   push:
     branches: [ master ]
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln"
+      Solution_Name: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net5.sln"
     
     runs-on: windows-2019
 
