@@ -22,12 +22,13 @@ jobs:
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
+        
+    - name: Restore dependencies
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln"
 
     - name: Build app for release
       run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln" -t:rebuild -verbosity:diag -property:Configuration=Release
-        
-#    - name: Restore dependencies
-#      run: dotnet restore _SOURCE\VisioForge.MediaFramework.Solution.sln
+
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
 #    - name: Test
