@@ -23,6 +23,8 @@ jobs:
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-prerelease: true
         
     - name: Restore dependencies
       run: dotnet restore $env:Solution_Name
