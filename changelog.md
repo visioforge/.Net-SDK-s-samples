@@ -1,3 +1,6 @@
+15.x
+* Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
+
 15.1
 * Disabled Sentry debug messages in the console
 * Added Icecast streaming
