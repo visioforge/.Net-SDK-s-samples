@@ -1,5 +1,6 @@
 15.x
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
+* Updated ONVIF support, resolved an issue with username and password specified in URL but not specified in source settings
 
 15.1
 * Disabled Sentry debug messages in the console

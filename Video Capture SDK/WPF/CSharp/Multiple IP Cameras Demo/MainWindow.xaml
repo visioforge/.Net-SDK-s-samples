@@ -16,11 +16,11 @@
             <wpf:VideoView x:Name="VideoView2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
         <TextBox x:Name="edURL1" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
-        <Button x:Name="btStart1" Content="Start" HorizontalAlignment="Left" Margin="10,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStart1_Click" />
-        <Button x:Name="btStop1" Content="Stop" HorizontalAlignment="Left" Margin="90,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStop1_Click"/>
-        <TextBox x:Name="edURL2" HorizontalAlignment="Left" Margin="410,295,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
-        <Button x:Name="btStart2" Content="Start" HorizontalAlignment="Left" Margin="411,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStart2_Click" />
-        <Button x:Name="btStop2" Content="Stop" HorizontalAlignment="Left" Margin="491,321.96,0,0" VerticalAlignment="Top" Width="75" Click="btStop2_Click" />
+        <Button x:Name="btStart1" Content="Start" HorizontalAlignment="Left" Margin="10,322,0,0" VerticalAlignment="Top" Width="50" Click="btStart1_Click" />
+        <Button x:Name="btStop1" Content="Stop" HorizontalAlignment="Left" Margin="65,322,0,0" VerticalAlignment="Top" Width="50" Click="btStop1_Click"/>
+        <TextBox x:Name="edURL2" HorizontalAlignment="Left" Margin="410,295,0,0" VerticalAlignment="Top" Width="310" Text="http://..."/>
+        <Button x:Name="btStart2" Content="Start" HorizontalAlignment="Left" Margin="411,322,0,0" VerticalAlignment="Top" Width="50" Click="btStart2_Click" />
+        <Button x:Name="btStop2" Content="Stop" HorizontalAlignment="Left" Margin="466,322,0,0" VerticalAlignment="Top" Width="50" Click="btStop2_Click" />
 
         <Grid HorizontalAlignment="Left" Height="280" Margin="10,350,0,0" VerticalAlignment="Top" Width="380" Background="Black">
             <wpf:VideoView x:Name="VideoView3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
@@ -30,12 +30,12 @@
             <wpf:VideoView x:Name="VideoView4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
         </Grid>
 
-        <TextBox x:Name="edURL3" HorizontalAlignment="Left" Margin="10,635,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
-        <Button x:Name="btStart3" Content="Start" HorizontalAlignment="Left" Margin="10,658,0,0" VerticalAlignment="Top" Width="75" Click="btStart3_Click" />
-        <Button x:Name="btStop3" Content="Stop" HorizontalAlignment="Left" Margin="90,658,0,0" VerticalAlignment="Top" Width="75" Click="btStop3_Click"/>
-        <TextBox x:Name="edURL4" HorizontalAlignment="Left" Margin="410,635,0,0" VerticalAlignment="Top" Width="380" Text="http://..."/>
-        <Button x:Name="btStart4" Content="Start" HorizontalAlignment="Left" Margin="411,658,0,0" VerticalAlignment="Top" Width="75" Click="btStart4_Click" />
-        <Button x:Name="btStop4" Content="Stop" HorizontalAlignment="Left" Margin="491,658,0,0" VerticalAlignment="Top" Width="75" Click="btStop4_Click" />
+        <TextBox x:Name="edURL3" HorizontalAlignment="Left" Margin="10,635,0,0" VerticalAlignment="Top" Width="310" Text="http://..."/>
+        <Button x:Name="btStart3" Content="Start" HorizontalAlignment="Left" Margin="10,658,0,0" VerticalAlignment="Top" Width="50" Click="btStart3_Click" />
+        <Button x:Name="btStop3" Content="Stop" HorizontalAlignment="Left" Margin="65,658,0,0" VerticalAlignment="Top" Width="50" Click="btStop3_Click"/>
+        <TextBox x:Name="edURL4" HorizontalAlignment="Left" Margin="410,635,0,0" VerticalAlignment="Top" Width="310" Text="http://..."/>
+        <Button x:Name="btStart4" Content="Start" HorizontalAlignment="Left" Margin="411,658,0,0" VerticalAlignment="Top" Width="50" Click="btStart4_Click" />
+        <Button x:Name="btStop4" Content="Stop" HorizontalAlignment="Left" Margin="466,658,0,0" VerticalAlignment="Top" Width="50" Click="btStop4_Click" />
         <Grid HorizontalAlignment="Left" Height="23" Margin="235,325,0,0" VerticalAlignment="Top" Width="155">
             <RadioButton x:Name="rbPreview1" Content="Preview" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
             <RadioButton x:Name="rbCapture1" Content="Capture" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top"/>
@@ -67,6 +67,11 @@
         <TextBox x:Name="edLog" HorizontalAlignment="Left" Height="300" Margin="805,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="371"/>
         <Label x:Name="label2" Content="Log" HorizontalAlignment="Left" Margin="805,114,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbDebug" Content="Debug" HorizontalAlignment="Left" Margin="1120,120,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="You can include login and password into the URL." HorizontalAlignment="Left" Margin="805,452,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbONVIF1" Content="ONVIF" HorizontalAlignment="Left" Margin="335,296,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbONVIF3" Content="ONVIF" HorizontalAlignment="Left" Margin="335,636,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbONVIF2" Content="ONVIF" HorizontalAlignment="Left" Margin="735,296,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbONVIF4" Content="ONVIF" HorizontalAlignment="Left" Margin="735,636,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

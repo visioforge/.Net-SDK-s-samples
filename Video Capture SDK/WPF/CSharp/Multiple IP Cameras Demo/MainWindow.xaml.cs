@@ -68,10 +68,10 @@ namespace Multiple_IP_Cameras_Demo_WPF
             VideoCapture4 = null;
         }
 
-        private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index)
+        private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index, bool onvif)
         {
             // source
-            videoCapture.IP_Camera_Source = new IPCameraSourceSettings { URL = url };
+            videoCapture.IP_Camera_Source = new IPCameraSourceSettings { URL = url, ONVIF_Source = onvif };
 
             switch (cbEngine.SelectedIndex)
             {
@@ -132,7 +132,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, VideoCapture1, 1);
+            await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, VideoCapture1, 1, cbONVIF1.IsChecked == true);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -157,7 +157,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL2.Text, rbPreview2.IsChecked == true, VideoCapture2, 2);
+            await StartCamera(edURL2.Text, rbPreview2.IsChecked == true, VideoCapture2, 2, cbONVIF2.IsChecked == true);
         }
 
         private async void btStop2_Click(object sender, RoutedEventArgs e)
@@ -167,7 +167,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart3_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL3.Text, rbPreview3.IsChecked == true, VideoCapture3, 3);
+            await StartCamera(edURL3.Text, rbPreview3.IsChecked == true, VideoCapture3, 3, cbONVIF3.IsChecked == true);
         }
 
         private async void btStop3_Click(object sender, RoutedEventArgs e)
@@ -177,7 +177,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private async void btStart4_Click(object sender, RoutedEventArgs e)
         {
-            await StartCamera(edURL4.Text, rbPreview4.IsChecked == true, VideoCapture4, 4);
+            await StartCamera(edURL4.Text, rbPreview4.IsChecked == true, VideoCapture4, 4, cbONVIF4.IsChecked == true);
         }
 
         private async void btStop4_Click(object sender, RoutedEventArgs e)
