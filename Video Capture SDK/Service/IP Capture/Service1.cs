@@ -42,9 +42,10 @@ namespace IPCaptureService
         /// </summary>
         protected void CaptureStart()
         {
-            System.Diagnostics.Debugger.Launch();            
+            // Uncomment to start debugger
+            // System.Diagnostics.Debugger.Launch();            
 
-            // configure cam1
+            // configure cam
             VideoCapture1.Mode = VideoCaptureMode.IPCapture;
 
             VideoCapture1.Audio_RecordAudio = false;
@@ -52,17 +53,14 @@ namespace IPCaptureService
 
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings();
             VideoCapture1.IP_Camera_Source.AudioCapture = false;
-            VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_FFMPEG;
+            VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
             VideoCapture1.IP_Camera_Source.URL = "http://212.162.177.75/mjpg/video.mjpg";
-
-            VideoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "service_output.wmv");
+            
+            VideoCapture1.Output_Filename = @"c:\vf\service_output.mp4";
 
             var mp4Output = new MP4Output();
             mp4Output.MP4Mode = MP4Mode.CPU_QSV;
             VideoCapture1.Output_Format = mp4Output;
-
-            // VideoCapture1.WMV_Mode = WMVMode.InternalProfile;
-            // VideoCapture1.WMV_Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles()[5];
 
             VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
