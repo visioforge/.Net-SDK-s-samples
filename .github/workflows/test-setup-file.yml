@@ -24,13 +24,12 @@ jobs:
     steps:
       # Download setup exe
       - name: Download setup exe
-        run: |
-          curl.exe -o visioforge_sdks_installer_dotnet_setup.exe http://files.visioforge.com/trials/visioforge_sdks_installer_dotnet_setup.exe
+        run: curl.exe -o visioforge_sdks_installer_dotnet_setup.exe http://files.visioforge.com/trials/visioforge_sdks_installer_dotnet_setup.exe
 
       # Run setup 
       - name: Run setup
-        run: |
-          .\visioforge_sdks_installer_dotnet_setup.exe /exenoui /qn
+        run: .\visioforge_sdks_installer_dotnet_setup.exe /exenoui /qn
+        shell: cmd  
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #- uses: actions/checkout@v2
