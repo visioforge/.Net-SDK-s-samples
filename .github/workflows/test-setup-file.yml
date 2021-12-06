@@ -23,13 +23,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Download setup exe
-      - uses: suisei-cn/actions-download-file@v1
-        id: downloadfile  # Remember to give an ID if you need the output filename
-        name: Download the file
-        with:
-          url: "http://files.visioforge.com/trials/visioforge_sdks_installer_dotnet_setup.exe"
-          target: public/
-    
+      - name: Download setup exe
+        run: |
+          curl.exe -o visioforge_sdks_installer_dotnet_setup.exe http://files.visioforge.com/trials/visioforge_sdks_installer_dotnet_setup.exe
+
+      # Run setup 
+      - name: Run setup
+        run: |
+          .\visioforge_sdks_installer_dotnet_setup.exe /exenoui /qn
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #- uses: actions/checkout@v2
 
