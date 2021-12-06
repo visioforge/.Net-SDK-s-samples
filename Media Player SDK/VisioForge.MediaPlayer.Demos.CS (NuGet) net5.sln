@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP WPF (NuGet) ne
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeSnippets", "CodeSnippets", "{6E4DFE4D-F6E3-4D76-9143-0C408F773B65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info (NuGet) net5", "WinForms\CSharp\_CodeSnippets\read-file-info\read-file-info (NuGet) net5.csproj", "{DDEF7252-9D8C-4324-8B18-A1944494F463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info (NuGet) net5", "_CodeSnippets\read-file-info\read-file-info (NuGet) net5.csproj", "{DDEF7252-9D8C-4324-8B18-A1944494F463}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karaoke Demo (NuGet) net5", "WinForms\CSharp\Karaoke Demo\Karaoke Demo (NuGet) net5.csproj", "{57DA73CE-CE2B-4660-81D4-3CF28CA0A647}"
 EndProject

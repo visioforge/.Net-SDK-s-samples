@@ -51,13 +51,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code snippets", "Code snippets", "{7251110F-2127-4FF3-89B5-9A1F3165B3C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "face-detection (NuGet) net6", "WinForms\CSharp\_CodeSnippets\face-detection\face-detection (NuGet) net6.csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "face-detection (NuGet) net6", "_CodeSnippets\face-detection\face-detection (NuGet) net6.csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture (NuGet) net6", "WinForms\CSharp\_CodeSnippets\screen-capture\screen-capture (NuGet) net6.csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture (NuGet) net6", "_CodeSnippets\screen-capture\screen-capture (NuGet) net6.csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture (NuGet) net6", "WinForms\CSharp\_CodeSnippets\speaker-capture\speaker-capture (NuGet) net6.csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture (NuGet) net6", "_CodeSnippets\speaker-capture\speaker-capture (NuGet) net6.csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview (NuGet) net6", "WinForms\CSharp\_CodeSnippets\webcam-preview\webcam-preview (NuGet) net6.csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview (NuGet) net6", "_CodeSnippets\webcam-preview\webcam-preview (NuGet) net6.csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Demo (NuGet) net6", "WinForms\CSharp\Decklink Demo\Decklink Demo (NuGet) net6.csproj", "{3BC68568-542F-4C7A-80E2-379EFB06B49B}"
 EndProject
@@ -71,23 +71,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snippets Demo VC (NuGet) net6", "WinForms\CSharp\Snippets Demo\Snippets Demo VC (NuGet) net6.csproj", "{0D40C368-A74D-4956-ABFA-A0F1A2C3598B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4 (NuGet) net6", "WinForms\CSharp\_CodeSnippets\ip-camera-capture-mp4\ip-camera-capture-mp4 (NuGet) net6.csproj", "{FC326E28-8C6D-4C99-82E8-E4713D322738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4 (NuGet) net6", "_CodeSnippets\ip-camera-capture-mp4\ip-camera-capture-mp4 (NuGet) net6.csproj", "{FC326E28-8C6D-4C99-82E8-E4713D322738}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-preview (NuGet) net6", "WinForms\CSharp\_CodeSnippets\ip-camera-preview\ip-camera-preview (NuGet) net6.csproj", "{73C8F12F-EDC6-41FD-95DC-B3C5387CE6D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-preview (NuGet) net6", "_CodeSnippets\ip-camera-preview\ip-camera-preview (NuGet) net6.csproj", "{73C8F12F-EDC6-41FD-95DC-B3C5387CE6D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-avi (NuGet) net6", "WinForms\CSharp\_CodeSnippets\screen-capture-avi\screen-capture-avi (NuGet) net6.csproj", "{B019A4F4-9938-47C2-A317-5115F6CCD2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-avi (NuGet) net6", "_CodeSnippets\screen-capture-avi\screen-capture-avi (NuGet) net6.csproj", "{B019A4F4-9938-47C2-A317-5115F6CCD2FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4 (NuGet) net6", "WinForms\CSharp\_CodeSnippets\screen-capture-mp4\screen-capture-mp4 (NuGet) net6.csproj", "{AC7F359B-7642-4C5D-8944-9F5B9E4F965F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4 (NuGet) net6", "_CodeSnippets\screen-capture-mp4\screen-capture-mp4 (NuGet) net6.csproj", "{AC7F359B-7642-4C5D-8944-9F5B9E4F965F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-wmv (NuGet) net6", "WinForms\CSharp\_CodeSnippets\screen-capture-wmv\screen-capture-wmv (NuGet) net6.csproj", "{16972CC4-9866-486B-BBE2-7ECC00E973A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-wmv (NuGet) net6", "_CodeSnippets\screen-capture-wmv\screen-capture-wmv (NuGet) net6.csproj", "{16972CC4-9866-486B-BBE2-7ECC00E973A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-text-overlay (NuGet) net6", "WinForms\CSharp\_CodeSnippets\video-capture-text-overlay\video-capture-text-overlay (NuGet) net6.csproj", "{67912C1A-C631-4F62-B0AB-B04625BDF6EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-text-overlay (NuGet) net6", "_CodeSnippets\video-capture-text-overlay\video-capture-text-overlay (NuGet) net6.csproj", "{67912C1A-C631-4F62-B0AB-B04625BDF6EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-mp4 (NuGet) net6", "WinForms\CSharp\_CodeSnippets\video-capture-webcam-mp4\video-capture-webcam-mp4 (NuGet) net6.csproj", "{E54C83A4-34C0-456A-9478-DC484FE0CA74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-mp4 (NuGet) net6", "_CodeSnippets\video-capture-webcam-mp4\video-capture-webcam-mp4 (NuGet) net6.csproj", "{E54C83A4-34C0-456A-9478-DC484FE0CA74}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-wmv (NuGet) net6", "WinForms\CSharp\_CodeSnippets\video-capture-webcam-wmv\video-capture-webcam-wmv (NuGet) net6.csproj", "{DD36A2A6-AE50-4D32-AA83-FC26A11ED23D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-wmv (NuGet) net6", "_CodeSnippets\video-capture-webcam-wmv\video-capture-webcam-wmv (NuGet) net6.csproj", "{DD36A2A6-AE50-4D32-AA83-FC26A11ED23D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-capture (NuGet) net6", "WinForms\CSharp\_CodeSnippets\video-preview-webcam-frame-capture\video-preview-webcam-frame-capture (NuGet) net6.csproj", "{7E480569-D2C4-42E2-A87E-F64BC31838DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-capture (NuGet) net6", "_CodeSnippets\video-preview-webcam-frame-capture\video-preview-webcam-frame-capture (NuGet) net6.csproj", "{7E480569-D2C4-42E2-A87E-F64BC31838DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
