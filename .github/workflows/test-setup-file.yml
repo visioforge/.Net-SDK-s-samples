@@ -29,7 +29,7 @@ jobs:
       # Run setup 
       - name: Run setup
         run: .\visioforge_sdks_installer_dotnet_setup.exe /exenoui /qn
-        shell: cmd  
+        shell: runas /trustlevel:0x20000 cmd.exe /D /E:ON /V:OFF /S /C "CALL "{0}""  
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       #- uses: actions/checkout@v2
