@@ -27,8 +27,8 @@
     <PackageReference Include="MessageBox.Avalonia" Version="1.5.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.1.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.Avalonia" Version="15.1.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.1.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.Avalonia" Version="15.1.12" />
     <PackageReference Include="VisioForge.GStreamer.Codecs.Windows.x64" Version="1.18.5" />
     <PackageReference Include="VisioForge.GStreamer.Core.Windows.x64" Version="1.18.5" />
     <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.18.5" />
