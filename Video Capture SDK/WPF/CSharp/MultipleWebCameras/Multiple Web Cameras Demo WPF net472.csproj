@@ -9,8 +9,8 @@
     <AssemblyTitle>MultipleWebCameras</AssemblyTitle>
     <Product>MultipleWebCameras</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.1.10.0</AssemblyVersion>
-    <FileVersion>15.1.10.0</FileVersion>
+    <AssemblyVersion>15.1.11.0</AssemblyVersion>
+    <FileVersion>15.1.11.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -33,7 +33,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.10" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.11" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
