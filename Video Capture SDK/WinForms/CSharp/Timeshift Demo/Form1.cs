@@ -8,7 +8,6 @@
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-using VisioForge.MediaFramework;
 using VisioForge.Types;
 using VisioForge.Types.Output;
 

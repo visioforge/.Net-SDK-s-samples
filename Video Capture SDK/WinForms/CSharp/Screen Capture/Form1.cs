@@ -16,7 +16,6 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

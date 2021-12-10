@@ -1,10 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using VisioForge.Core.UI;
-using VisioForge.Core.UI.WinForms.Dialogs;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.VideoCapture;
-using VisioForge.MediaFramework;
 
 namespace Audio_Capture
 {
@@ -17,7 +15,6 @@ namespace Audio_Capture
     using System.Windows.Input;
     using VisioForge.Core;
     using VisioForge.Core.UI.WPF;
-    using VisioForge.MediaFramework.Helpers;
     using VisioForge.Types;
     using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Events;

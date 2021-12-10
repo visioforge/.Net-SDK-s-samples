@@ -22,7 +22,6 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.Output;

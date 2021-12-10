@@ -9,8 +9,6 @@ namespace Memory_Stream_Demo
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms;
-    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;

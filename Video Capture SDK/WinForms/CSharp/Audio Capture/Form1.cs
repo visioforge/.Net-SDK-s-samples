@@ -6,7 +6,6 @@
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.VideoCapture;
-using VisioForge.MediaFramework;
 
 namespace VisioForge_SDK_4_Audio_Capture_CSharp
 {

@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-using VisioForge.MediaFramework;
 // ReSharper disable RedundantArgumentDefaultValue
 
 namespace Video_From_Images

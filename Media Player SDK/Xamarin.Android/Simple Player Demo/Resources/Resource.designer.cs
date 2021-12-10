@@ -153,7 +153,6 @@ namespace Simple_Player_Demo
 			global::Xamarin.Essentials.Resource.Id.text2 = global::Simple_Player_Demo.Resource.Id.text2;
 			global::Xamarin.Essentials.Resource.Id.time = global::Simple_Player_Demo.Resource.Id.time;
 			global::Xamarin.Essentials.Resource.Id.title = global::Simple_Player_Demo.Resource.Id.title;
-			global::Xamarin.Essentials.Resource.Id.view_tree_lifecycle_owner = global::Simple_Player_Demo.Resource.Id.view_tree_lifecycle_owner;
 			global::Xamarin.Essentials.Resource.Integer.status_bar_notification_info_maxnum = global::Simple_Player_Demo.Resource.Integer.status_bar_notification_info_maxnum;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_page = global::Simple_Player_Demo.Resource.Layout.browser_actions_context_menu_page;
 			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_row = global::Simple_Player_Demo.Resource.Layout.browser_actions_context_menu_row;

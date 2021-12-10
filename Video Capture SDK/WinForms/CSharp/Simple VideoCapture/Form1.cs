@@ -20,7 +20,6 @@ namespace VisioForge_SDK_Video_Capture_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WinForms;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework;
     using VisioForge.Types;
     using VisioForge.Types.AudioEffects;
     using VisioForge.Types.Events;
