@@ -6,7 +6,6 @@ using System.Windows.Forms;
 namespace read_file_info
 {
     using VisioForge.MediaFramework;
-    using VisioForge.MediaFramework.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Types.MediaPlayer;
     using VisioForge.Core.MediaInfo;
@@ -103,7 +102,7 @@ namespace read_file_info
             // read tags
             if (cbReadTags.Checked)
             {
-                var tags = TagLibHelper.ReadTags(filename, null);
+                var tags = TagLibHelper.ReadTags(filename);
                 mmInfo.Text += tags?.ToString();
             }
         }

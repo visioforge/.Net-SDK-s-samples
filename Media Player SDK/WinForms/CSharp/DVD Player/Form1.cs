@@ -9,8 +9,6 @@ namespace DVD_Player_Demo
     using VisioForge.Core.MediaInfo;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.MediaFramework;
-    using VisioForge.MediaFramework.MediaInfo;
     using VisioForge.Types;
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;
