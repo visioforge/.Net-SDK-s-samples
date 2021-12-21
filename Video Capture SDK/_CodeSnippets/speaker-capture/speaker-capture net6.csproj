@@ -9,8 +9,8 @@
     <AssemblyTitle>speaker-capture</AssemblyTitle>
     <Product>speaker-capture</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.1.17.0</AssemblyVersion>
-    <FileVersion>15.1.17.0</FileVersion>
+    <AssemblyVersion>15.1.18.0</AssemblyVersion>
+    <FileVersion>15.1.18.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -61,6 +61,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.17" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.18" />
   </ItemGroup>
 </Project>

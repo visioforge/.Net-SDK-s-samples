@@ -4,6 +4,7 @@
 * Resolved an issue with the FFMPEG.exe output dialog
 * Resolved an issue with the separate capture in a service applications
 * SDK migrated to System.Text.Json from NewtonsoftJson
+* Updated DirectCapture output for IP cameras
 
 15.1
 * Disabled Sentry debug messages in the console
