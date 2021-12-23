@@ -418,6 +418,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.edIPPassword.Name = "edIPPassword";
             this.edIPPassword.Size = new System.Drawing.Size(100, 20);
             this.edIPPassword.TabIndex = 66;
+            this.edIPPassword.Text = "";
             // 
             // label167
             // 
@@ -434,6 +435,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.edIPLogin.Name = "edIPLogin";
             this.edIPLogin.Size = new System.Drawing.Size(100, 20);
             this.edIPLogin.TabIndex = 64;
+            this.edIPLogin.Text = "";
             // 
             // label166
             // 

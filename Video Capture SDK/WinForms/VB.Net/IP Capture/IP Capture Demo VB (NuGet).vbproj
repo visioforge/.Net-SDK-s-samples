@@ -130,17 +130,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="15.1.19" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="15.1.20" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

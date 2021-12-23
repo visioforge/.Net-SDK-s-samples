@@ -25,7 +25,7 @@
                         <ComboBoxItem Content="Custom" />
                         <ComboBoxItem Content="DirectCapture DV (DV devices only)" />
                         <ComboBoxItem Content="DirectCapture AVI (some devices only)" />
-                        <ComboBoxItem Content="DirectCapture MPEG (MPEG 1/2 devices only)" />
+                        <ComboBoxItem Content="DirectCapture MPEG (IP cameras / MPEG2 devices)" />
                         <ComboBoxItem Content="DirectCapture MKV (IP cameras / H264 devices)" />
                         <ComboBoxItem Content="DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)" />
                         <ComboBoxItem Content="DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)" />
