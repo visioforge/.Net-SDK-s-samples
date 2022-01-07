@@ -41,14 +41,12 @@ namespace multiple_video_streams
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
         }
 
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
@@ -198,11 +196,6 @@ namespace multiple_video_streams
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void UpdateRecordingTime()

@@ -56,7 +56,6 @@ namespace Audio_Capture
             VideoCapture1 = new VideoCaptureCore();
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnStop += VideoCapture1_OnStop;
 
             InitializeComponent();
@@ -527,11 +526,6 @@ namespace Audio_Capture
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)

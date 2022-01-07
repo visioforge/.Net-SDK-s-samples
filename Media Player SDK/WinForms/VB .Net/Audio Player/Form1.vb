@@ -133,16 +133,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles MediaPlayer1.OnLicenseRequired
-
-        Invoke(Sub()
-                   If cbLicensing.Checked Then
-                       mmError.Text = mmError.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
-                   End If
-               End Sub)
-
-    End Sub
-
     Private Sub MediaPlayer1_OnStop(sender As Object, e As StopEventArgs) Handles MediaPlayer1.OnStop
 
     End Sub

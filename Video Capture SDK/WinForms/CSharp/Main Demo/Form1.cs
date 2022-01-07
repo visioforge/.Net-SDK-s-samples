@@ -151,7 +151,6 @@ namespace VideoCapture_CSharp_Demo
             VideoView1.MouseClick += VideoView1_MouseClick;
             VideoCapture1.OnBarcodeDetected += VideoCapture1_OnBarcodeDetected;
             VideoCapture1.OnAudioVUMeterProVolume += VideoCapture1_OnAudioVUMeterProVolume;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnMotion += VideoCapture1_OnMotion;
             VideoCapture1.OnAudioVUMeter += VideoCapture1_OnAudioVUMeter;
             VideoCapture1.OnTVTunerTuneChannels += VideoCapture1_OnTVTunerTuneChannels;
@@ -168,7 +167,6 @@ namespace VideoCapture_CSharp_Demo
             VideoView1.MouseClick -= VideoView1_MouseClick;
             VideoCapture1.OnBarcodeDetected -= VideoCapture1_OnBarcodeDetected;
             VideoCapture1.OnAudioVUMeterProVolume -= VideoCapture1_OnAudioVUMeterProVolume;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnMotion -= VideoCapture1_OnMotion;
 
             VideoCapture1.OnAudioVUMeter -= VideoCapture1_OnAudioVUMeter;
@@ -3105,7 +3103,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbFilters.Text;
                 btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3126,9 +3124,9 @@ namespace VideoCapture_CSharp_Demo
             {
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3138,7 +3136,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = lbFilters.Text;
                 btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3152,9 +3150,9 @@ namespace VideoCapture_CSharp_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3209,7 +3207,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGVideoDecoder.Text;
                 btMPEGVidDecSetting.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3223,7 +3221,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGVideoDecoder.Text;
                 btMPEGAudDecSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3237,9 +3235,9 @@ namespace VideoCapture_CSharp_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3254,9 +3252,9 @@ namespace VideoCapture_CSharp_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3959,11 +3957,6 @@ namespace VideoCapture_CSharp_Demo
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void VideoCapture1_OnTVTunerTuneChannels(object sender, TVTunerTuneChannelsEventArgs e)

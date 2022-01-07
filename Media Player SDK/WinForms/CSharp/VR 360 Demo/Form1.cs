@@ -23,14 +23,12 @@
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
-            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
         private void DestroyEngine()
         {
             MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
             MediaPlayer1.Dispose();
@@ -181,17 +179,6 @@
             Invoke((Action)(() =>
                                    {
                                        tbTimeline.Value = 0;
-                                   }));
-        }
-
-        private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       if (cbLicensing.Checked)
-                                       {
-                                           mmError.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                                       }
                                    }));
         }
 

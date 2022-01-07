@@ -28,14 +28,12 @@ namespace face_detection
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnFaceDetected += VideoCapture1_OnFaceDetected;
         }
 
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
 
             VideoCapture1.Dispose();
@@ -134,11 +132,6 @@ namespace face_detection
         }
 
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
-        {
-            Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
         {
             Log(e.Message);
         }

@@ -27,10 +27,6 @@ Public Class Form1
         MediaPlayer1.MultiScreen_UpdateSize(0, form2.Screen.Width, form2.Screen.Height)
     End Sub
 
-    Private Sub MediaPlayer1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles MediaPlayer1.OnLicenseRequired
-        form2.LogLicensing(e.Message)
-    End Sub
-
     Private Sub btSelectFile_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btSelectFile.Click
 
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then

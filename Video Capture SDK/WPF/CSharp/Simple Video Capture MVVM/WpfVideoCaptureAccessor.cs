@@ -23,7 +23,6 @@ namespace Simple_Video_Capture
             this.videoCapture = new VideoCaptureCore(videoView);
             
             this.videoCapture.OnError += (_s, _e) => this.OnError?.Invoke(this, _e.Message);
-            this.videoCapture.OnLicenseRequired += (_s, _e) => this.OnError?.Invoke(this, "(NOT ERROR) " + _e.Message);
 
             this.outputFormats = new List<OutputFormatInfo>
             {

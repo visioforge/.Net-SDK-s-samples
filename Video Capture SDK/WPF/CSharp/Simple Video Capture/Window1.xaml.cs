@@ -71,13 +71,11 @@ namespace Simple_Video_Capture
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
         }
 
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
@@ -218,11 +216,6 @@ namespace Simple_Video_Capture
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void tbAudioVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

@@ -43,11 +43,6 @@ namespace speaker_capture
             Log(e.Message);
         }
 
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log(e.Message);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             VideoCapture1 = new VideoCaptureCore();
@@ -58,7 +53,6 @@ namespace speaker_capture
 
             
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
         }
 

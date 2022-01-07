@@ -53,7 +53,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         {
             VideoCapture1 = new VideoCaptureCore();
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnStop += VideoCapture1_OnStop;
 
             InitializeComponent();
@@ -528,11 +527,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)

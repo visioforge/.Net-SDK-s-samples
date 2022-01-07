@@ -167,16 +167,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MediaPlayer1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles MediaPlayer1.OnLicenseRequired
-
-        Invoke(Sub()
-                   If cbLicensing.Checked Then
-                       mmError.Text = mmError.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
-                   End If
-               End Sub)
-
-    End Sub
-
     Private Sub btPreviousFrame_Click(sender As Object, e As EventArgs) Handles btPreviousFrame.Click
         MediaPlayer1.PreviousFrame()
     End Sub

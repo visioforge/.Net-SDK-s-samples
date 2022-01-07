@@ -142,7 +142,6 @@ namespace Main_Demo
             VideoView1.MouseDown += MediaPlayer1_MouseDown;
             MediaPlayer1.OnBarcodeDetected += MediaPlayer1_OnBarcodeDetected;
             MediaPlayer1.OnAudioVUMeterProVolume += MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
@@ -157,7 +156,6 @@ namespace Main_Demo
             VideoView1.MouseDown -= MediaPlayer1_MouseDown;
             MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
             MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
@@ -2355,7 +2353,7 @@ namespace Main_Demo
             {
                 string name = e.AddedItems[0].ToString();
                 btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2376,9 +2374,9 @@ namespace Main_Demo
             {
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2392,9 +2390,9 @@ namespace Main_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -2420,7 +2418,7 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
                 btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2553,17 +2551,6 @@ namespace Main_Demo
             lbAudioTimeshift.Content = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
             MediaPlayer1.Audio_Enhancer_Timeshift(-1, (int)tbAudioTimeshift.Value);
-        }
-
-        private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Dispatcher?.BeginInvoke((Action)(() =>
-            {
-                if (cbLicensing.IsChecked == true)
-                {
-                    mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                }
-            }));
         }
 
         private void btEncryptionOpenFile_Click(object sender, RoutedEventArgs e)

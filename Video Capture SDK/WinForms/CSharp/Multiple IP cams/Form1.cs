@@ -31,7 +31,6 @@ namespace multiple_ap_cams
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
         }
 
         private void CreateEngine2()
@@ -39,13 +38,11 @@ namespace multiple_ap_cams
             VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
 
             VideoCapture2.OnError += VideoCapture2_OnError;
-            VideoCapture2.OnLicenseRequired += VideoCapture2_OnLicenseRequired;
         }
 
         private void DestroyEngine1()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
@@ -54,7 +51,6 @@ namespace multiple_ap_cams
         private void DestroyEngine2()
         {
             VideoCapture2.OnError -= VideoCapture2_OnError;
-            VideoCapture2.OnLicenseRequired -= VideoCapture2_OnLicenseRequired;
 
             VideoCapture2.Dispose();
             VideoCapture2 = null;
@@ -147,28 +143,6 @@ namespace multiple_ap_cams
 
             VideoCapture1.Video_Renderer_SetAuto();
             VideoCapture2.Video_Renderer_SetAuto();
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            if (IsHandleCreated)
-            {
-                Invoke((Action)(() =>
-                                       {
-                                           mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                                       }));
-            }
-        }
-
-        private void VideoCapture2_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            if (IsHandleCreated)
-            {
-                Invoke((Action)(() =>
-                                       {
-                                           mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                                       }));
-            }
         }
 
         private void UpdateRecordingTime1()

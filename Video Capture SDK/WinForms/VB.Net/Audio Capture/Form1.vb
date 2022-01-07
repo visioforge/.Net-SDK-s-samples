@@ -47,7 +47,6 @@ Public Class Form1
 
         AddHandler VideoCapture1.OnError, AddressOf VideoCapture1_OnError
         AddHandler VideoCapture1.OnAudioFrameBuffer, AddressOf VideoCapture1_OnAudioFrameBuffer
-        AddHandler VideoCapture1.OnLicenseRequired, AddressOf VideoCapture1_OnLicenseRequired
         AddHandler VideoCapture1.OnStop, AddressOf VideoCapture1_OnStop
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
@@ -415,10 +414,6 @@ Public Class Form1
 
     Private Sub VideoCapture1_OnError(ByVal sender As System.Object, ByVal e As ErrorsEventArgs) Handles VideoCapture1.OnError
         Log(e.Message)
-    End Sub
-
-    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
-        Log("(NOT ERROR) " + e.Message)
     End Sub
 
     Private Sub VideoCapture1_OnAudioFrameBuffer(sender As Object, e As AudioFrameBufferEventArgs)

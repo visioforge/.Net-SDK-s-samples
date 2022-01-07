@@ -259,7 +259,6 @@ namespace VideoEdit_CS_Demo
             VideoView1.MouseClick += VideoView1_MouseClick;
             VideoEdit1.OnBarcodeDetected += VideoEdit1_OnBarcodeDetected;
             VideoEdit1.OnAudioVUMeterProVolume += VideoEdit1_OnAudioVUMeterProVolume;
-            VideoEdit1.OnLicenseRequired += VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnMotionDetection += VideoEdit1_OnMotion;
             VideoEdit1.OnAudioVUMeter += VideoEdit1_OnAudioVUMeter;
             VideoEdit1.OnFFMPEGInfo += VideoEdit1_OnFFMPEGInfo;
@@ -275,7 +274,6 @@ namespace VideoEdit_CS_Demo
             VideoView1.MouseClick -= VideoView1_MouseClick;
             VideoEdit1.OnBarcodeDetected -= VideoEdit1_OnBarcodeDetected;
             VideoEdit1.OnAudioVUMeterProVolume -= VideoEdit1_OnAudioVUMeterProVolume;
-            VideoEdit1.OnLicenseRequired -= VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
             VideoEdit1.OnAudioVUMeter -= VideoEdit1_OnAudioVUMeter;
             VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
@@ -1483,7 +1481,7 @@ namespace VideoEdit_CS_Demo
             {
                 string name = cbFilters.Text;
                 btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1505,9 +1503,9 @@ namespace VideoEdit_CS_Demo
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
             else
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1517,7 +1515,7 @@ namespace VideoEdit_CS_Demo
             {
                 string name = lbFilters.Text;
                 btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1531,9 +1529,9 @@ namespace VideoEdit_CS_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -2490,18 +2488,6 @@ namespace VideoEdit_CS_Demo
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
             VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
-        }
-
-        private void VideoEdit1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       if (cbLicensing.Checked)
-                                       {
-                                           mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message
-                                                         + Environment.NewLine;
-                                       }
-                                   }));
         }
 
         private delegate void FFMPEGInfoDelegate(string message);

@@ -394,10 +394,6 @@ Public Class Form1
         Log(e.Message)
     End Sub
 
-    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
-        Log("(NOT ERROR) " + e.Message)
-    End Sub
-
     Private Sub btOutputConfigure_Click(sender As Object, e As EventArgs) Handles btOutputConfigure.Click
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0

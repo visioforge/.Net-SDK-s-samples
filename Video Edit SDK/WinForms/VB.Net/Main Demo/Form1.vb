@@ -1271,7 +1271,7 @@ Public Class Form1
         If (cbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig))
+            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -1294,8 +1294,8 @@ Public Class Form1
 
         If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
             FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.VFWCompConfig)
+        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
         End If
 
     End Sub
@@ -1305,7 +1305,7 @@ Public Class Form1
         If (lbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig))
+            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -1319,8 +1319,8 @@ Public Class Form1
 
             If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.VFWCompConfig)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.VFWCompConfig)
+            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
             End If
 
         End If
@@ -2125,14 +2125,6 @@ Public Class Form1
 
         VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value)
 
-    End Sub
-
-    Private Sub VideoEdit1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoEdit1.OnLicenseRequired
-        Invoke(Sub()
-                   If cbLicensing.Checked Then
-                       mmLog.Text = mmLog.Text + "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine
-                   End If
-               End Sub)
     End Sub
 
     Private Delegate Sub FFMPEGInfoDelegate(ByVal message As String)

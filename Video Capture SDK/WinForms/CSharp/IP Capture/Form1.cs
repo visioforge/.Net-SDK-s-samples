@@ -71,14 +71,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
         }
 
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
             VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
 
             VideoCapture1.Dispose();
@@ -318,11 +316,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
-        }
-
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Log("(NOT ERROR) " + e.Message);
         }
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

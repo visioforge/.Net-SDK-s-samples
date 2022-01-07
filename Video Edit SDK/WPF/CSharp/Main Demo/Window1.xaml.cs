@@ -136,7 +136,6 @@ namespace Main_Demo
 
             VideoEdit1.OnError += VideoEdit1_OnError;
             VideoEdit1.OnBarcodeDetected += VideoEdit1_OnBarcodeDetected;
-            VideoEdit1.OnLicenseRequired += VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnMotionDetection += VideoEdit1_OnMotion;
             VideoEdit1.OnFFMPEGInfo += VideoEdit1_OnFFMPEGInfo;
             VideoEdit1.OnStart += VideoEdit1_OnStart;
@@ -148,7 +147,6 @@ namespace Main_Demo
         {
             VideoEdit1.OnError -= VideoEdit1_OnError;
             VideoEdit1.OnBarcodeDetected -= VideoEdit1_OnBarcodeDetected;
-            VideoEdit1.OnLicenseRequired -= VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
             VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
             VideoEdit1.OnStart -= VideoEdit1_OnStart;
@@ -1241,7 +1239,7 @@ namespace Main_Demo
             {
                 string name = cbFilters.Text;
                 btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1262,9 +1260,9 @@ namespace Main_Demo
             {
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1278,9 +1276,9 @@ namespace Main_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -1598,7 +1596,7 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
                 btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
         
@@ -2499,19 +2497,7 @@ namespace Main_Demo
 
             VideoEdit1.Audio_Enhancer_Timeshift(-1, (int)tbAudioTimeshift.Value);
         }
-
-        private void VideoEdit1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Dispatcher?.Invoke(
-                () =>
-                    {
-                        if (cbLicensing.IsChecked == true)
-                        {
-                            mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                        }
-                    });
-        }
-        
+       
         public delegate void FFMPEGInfoDelegate(string message);
 
         public void FFMPEGInfoDelegateMethod(string message)

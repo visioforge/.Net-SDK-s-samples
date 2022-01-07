@@ -71,13 +71,11 @@ namespace VisioForge_SDK_Video_Capture_Demo
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired += VideoCapture1_OnLicenseRequired;
         }
 
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnLicenseRequired -= VideoCapture1_OnLicenseRequired;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
@@ -588,36 +586,33 @@ namespace VisioForge_SDK_Video_Capture_Demo
             Log(e.Message);
         }
 
-        private void VideoCapture1_OnLicenseRequired(object sender, LicenseEventArgs e)
+        private void btSaveScreenshot_Click(object sender, EventArgs e)
         {
-            Log("(NOT ERROR) " + e.Message);
-        }
+            VisioForge.Core.VirtualCameraNameAPI.SetName("Custom XXX");
 
-        private async void btSaveScreenshot_Click(object sender, EventArgs e)
-        {
-            if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                var filename = screenshotSaveDialog.FileName;
-                var ext = Path.GetExtension(filename)?.ToLowerInvariant();
-                switch (ext)
-                {
-                    case ".bmp":
-                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
-                        break;
-                    case ".jpg":
-                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
-                        break;
-                    case ".gif":
-                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
-                        break;
-                    case ".png":
-                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
-                        break;
-                    case ".tiff":
-                        await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
-                        break;
-                }
-            }
+            //if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
+            //{
+            //    var filename = screenshotSaveDialog.FileName;
+            //    var ext = Path.GetExtension(filename)?.ToLowerInvariant();
+            //    switch (ext)
+            //    {
+            //        case ".bmp":
+            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
+            //            break;
+            //        case ".jpg":
+            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
+            //            break;
+            //        case ".gif":
+            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
+            //            break;
+            //        case ".png":
+            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
+            //            break;
+            //        case ".tiff":
+            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
+            //            break;
+            //    }
+            //}
         }
 
         private void SetMP4Output(ref MP4Output mp4Output)

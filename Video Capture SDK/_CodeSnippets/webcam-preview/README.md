@@ -1,3 +1,14 @@
-1. Create new WPF or WinForms project
-2. Right-click on your project in Solution Explorer, select Manage NuGet packages. Select Browse tab. Search for "VisioForge.DotNet.VideoCapture.TRIAL", install package. After installation (should take 1-2 minutes) restart Visual Studio and open solution again.
-3. Place VideoCapture control from Toolbox to form.
+﻿# VisioForge Video Capture SDK .Net
+
+## Video preview from a webcam code snippet (C#/WinForms)
+
+The code snippet shows how to preview a video from a webcam.
+
+[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+
+## Supported frameworks
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6

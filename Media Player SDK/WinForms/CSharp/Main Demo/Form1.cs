@@ -2179,6 +2179,8 @@ namespace Media_Player_Demo
             {
                 await MediaPlayer1.StopAsync();
             }
+
+            DestroyEngine();
         }
 
         private void cbZoom_CheckedChanged(object sender, EventArgs e)
@@ -2599,7 +2601,7 @@ namespace Media_Player_Demo
             {
                 string name = cbFilters.Text;
                 btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2620,9 +2622,9 @@ namespace Media_Player_Demo
             {
                 FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2632,7 +2634,7 @@ namespace Media_Player_Demo
             {
                 string name = lbFilters.Text;
                 btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig);
+                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2646,9 +2648,9 @@ namespace Media_Player_Demo
                 {
                     FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.VFWCompConfig))
+                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.VFWCompConfig);
+                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -2797,14 +2799,6 @@ namespace Media_Player_Demo
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
             MediaPlayer1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
-        }
-
-        private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            BeginInvoke((Action)(() =>
-                                        {
-                                            mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                                        }));
         }
 
         private void btReadTags_Click(object sender, EventArgs e)
@@ -3087,7 +3081,6 @@ namespace Media_Player_Demo
             VideoView1.MouseClick += VideoView1_MouseClick;
             MediaPlayer1.OnBarcodeDetected += MediaPlayer1_OnBarcodeDetected;
             MediaPlayer1.OnAudioVUMeterProVolume += MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
@@ -3099,7 +3092,6 @@ namespace Media_Player_Demo
             VideoView1.MouseClick -= VideoView1_MouseClick;
             MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
             MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnLicenseRequired -= MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;

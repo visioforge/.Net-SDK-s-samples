@@ -387,10 +387,6 @@ Public Class Form1
         Log(e.Message)
     End Sub
 
-    Private Sub VideoCapture1_OnLicenseRequired(sender As Object, e As LicenseEventArgs) Handles VideoCapture1.OnLicenseRequired
-        Log("(NOT ERROR) " + e.Message)
-    End Sub
-
     Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0

@@ -22,7 +22,6 @@ namespace Audio_Player_Demo
         {
             MediaPlayer1 = new MediaPlayerCore();
             MediaPlayer1.OnError += MediaPlayer1_OnError;
-            MediaPlayer1.OnLicenseRequired += MediaPlayer1_OnLicenseRequired;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
 
             InitializeComponent();
@@ -130,17 +129,6 @@ namespace Audio_Player_Demo
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() => tbTimeline.Value = 0));
-        }
-
-        private void MediaPlayer1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       if (cbLicensing.Checked)
-                                       {
-                                           mmError.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message + Environment.NewLine;
-                                       }
-                                   }));
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

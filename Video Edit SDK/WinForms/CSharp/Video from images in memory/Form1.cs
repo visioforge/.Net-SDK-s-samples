@@ -63,7 +63,6 @@ namespace Video_From_Images
             VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
 
             VideoEdit1.OnError += VideoEdit1_OnError;
-            VideoEdit1.OnLicenseRequired += VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnStop += VideoEdit1_OnStop;
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
@@ -71,7 +70,6 @@ namespace Video_From_Images
         private void DestroyEngine()
         {
             VideoEdit1.OnError -= VideoEdit1_OnError;
-            VideoEdit1.OnLicenseRequired -= VideoEdit1_OnLicenseRequired;
             VideoEdit1.OnStop -= VideoEdit1_OnStop;
             VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
 
@@ -511,18 +509,6 @@ namespace Video_From_Images
             {
                 MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
             }
-        }
-
-        private void VideoEdit1_OnLicenseRequired(object sender, LicenseEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       if (cbLicensing.Checked)
-                                       {
-                                           mmLog.Text += "(NOT ERROR) LICENSING:" + Environment.NewLine + e.Message
-                                                         + Environment.NewLine;
-                                       }
-                                   }));
         }
 
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
