@@ -75,7 +75,7 @@
 
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
-        
+
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -86,7 +86,7 @@
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -126,7 +126,7 @@
 
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
-        
+
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -144,14 +144,14 @@
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private ScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureSourceSettings
-                             {
-                                 Mode = ScreenCaptureMode.Window, 
-                                 WindowHandle = IntPtr.Zero
-                             };
+            {
+                Mode = ScreenCaptureMode.Window,
+                WindowHandle = IntPtr.Zero
+            };
 
             try
             {
@@ -197,7 +197,7 @@
             // audio source
             VideoCapture1.Audio_RecordAudio = false;
             VideoCapture1.Audio_PlayAudio = false;
-            
+
             // apply capture params
             VideoCapture1.Video_Effects_Enabled = false;
             VideoCapture1.Video_Effects_Clear();
@@ -390,7 +390,7 @@
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:

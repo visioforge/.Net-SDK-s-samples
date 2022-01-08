@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+
+            _player?.Dispose();
+            _player = null;
+
             base.Dispose(disposing);
         }
 

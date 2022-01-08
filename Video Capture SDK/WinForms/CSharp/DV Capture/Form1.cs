@@ -151,7 +151,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-                
+
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
         }
@@ -208,7 +208,6 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void btSelectOutput_Click(object sender, EventArgs e)
@@ -274,7 +273,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -342,7 +341,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -559,7 +558,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 5:
@@ -750,6 +749,11 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

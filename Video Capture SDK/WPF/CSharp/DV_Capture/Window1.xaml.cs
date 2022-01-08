@@ -57,7 +57,7 @@ namespace DVCapture
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         private VideoCaptureCore VideoCapture1;
 
@@ -81,6 +81,9 @@ namespace DVCapture
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+
+            tmRecording?.Dispose();
+            tmRecording = null;
         }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
@@ -133,7 +136,7 @@ namespace DVCapture
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
-        
+
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -160,7 +163,7 @@ namespace DVCapture
                 }
             }
         }
-        
+
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -184,7 +187,7 @@ namespace DVCapture
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-                
+
                 btVideoCaptureDeviceSettings.IsEnabled = deviceItem.DialogDefault;
             }
         }
@@ -241,7 +244,6 @@ namespace DVCapture
         private void tbAudioBalance_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
@@ -286,7 +288,7 @@ namespace DVCapture
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.Stop);
         }
-        
+
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -307,7 +309,7 @@ namespace DVCapture
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -375,7 +377,7 @@ namespace DVCapture
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Video_Sample_Grabber_Enabled = true;
@@ -505,7 +507,7 @@ namespace DVCapture
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -600,7 +602,7 @@ namespace DVCapture
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 5:
@@ -747,7 +749,7 @@ namespace DVCapture
         {
             await VideoCapture1.ResumeAsync();
         }
-       
+
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -766,7 +768,7 @@ namespace DVCapture
                 }
             }
         }
-        
+
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectContrast contrast;
@@ -845,7 +847,7 @@ namespace DVCapture
                 }
             }
         }
-        
+
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectInvert invert;
@@ -938,6 +940,11 @@ namespace DVCapture
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

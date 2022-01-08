@@ -16,7 +16,7 @@ namespace Audio_Player_Demo
 
     public partial class Form1 : Form
     {
-        private readonly MediaPlayerCore MediaPlayer1;
+        private MediaPlayerCore MediaPlayer1;
 
         public Form1()
         {

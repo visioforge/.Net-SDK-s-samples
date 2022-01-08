@@ -18,7 +18,7 @@ using VisioForge.Types.Events;
 
 namespace Simple_Video_Player_Avalonia
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
         private System.Timers.Timer _tmPosition;
 
@@ -132,7 +132,8 @@ namespace Simple_Video_Player_Avalonia
             _player.OnError += Player_OnError;
         }
 
-        private bool _tbTimelineApplyingValue;
+        private volatile bool _tbTimelineApplyingValue;
+        private bool disposedValue;
 
         private void InitControls()
         {
@@ -224,7 +225,7 @@ namespace Simple_Video_Player_Avalonia
             _player.Debug_Mode = cbDebugMode.IsChecked == true;
 
             string source = edFilenameOrURL.Text;
-            
+
             _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
             _player.Audio_OutputDevice = cbAudioOutputDevice.SelectedItem.ToString();
@@ -268,7 +269,7 @@ namespace Simple_Video_Player_Avalonia
 
         private void Player_OnStop(object sender, StopEventArgs e)
         {
-           _tmPosition.Stop();
+            _tmPosition.Stop();
 
             Dispatcher.UIThread.InvokeAsync(() =>
             {
@@ -356,6 +357,42 @@ namespace Simple_Video_Player_Avalonia
                     Info.Add($"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
                 }
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                }
+
+                _tmPosition?.Dispose();
+                _tmPosition = null;
+
+                VideoView1?.Dispose();
+                VideoView1 = null;
+
+                _player?.Dispose();
+                _player = null;
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        ~MainWindow()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

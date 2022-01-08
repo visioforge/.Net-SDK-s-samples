@@ -15,13 +15,13 @@ using VisioForge.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {
-    public class WpfVideoCaptureAccessor : IVideoCaptureAccessor
+    public class WpfVideoCaptureAccessor : IVideoCaptureAccessor, IDisposable
     {
         public WpfVideoCaptureAccessor()
         {
             videoView = new VideoView();
             this.videoCapture = new VideoCaptureCore(videoView);
-            
+
             this.videoCapture.OnError += (_s, _e) => this.OnError?.Invoke(this, _e.Message);
 
             this.outputFormats = new List<OutputFormatInfo>
@@ -347,7 +347,7 @@ namespace Simple_Video_Capture
 
             videoCapture.Video_CaptureDevice = startParams.VideoCaptureDevice;
             videoCapture.Audio_CaptureDevice = startParams.AudioCaptureDevice;
-           
+
             videoCapture.Audio_OutputDevice = startParams.AudioOutputDevice;
 
             if (startParams.Preview)
@@ -565,9 +565,9 @@ namespace Simple_Video_Capture
 
         #endregion
 
-        private readonly VideoCaptureCore videoCapture;
+        private VideoCaptureCore videoCapture;
 
-        private readonly VideoView videoView;
+        private VideoView videoView;
 
         private readonly List<OutputFormatInfo> outputFormats;
 
@@ -580,5 +580,73 @@ namespace Simple_Video_Capture
         private AVISettingsDialog aviSettingsDialog;
         private WMVSettingsDialog wmvSettingsDialog;
         private GIFSettingsDialog gifSettingsDialog;
+        private bool disposedValue;
+
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                }
+
+                videoCapture.Dispose();
+                videoCapture = null;
+
+                videoView.Dispose();
+                videoView = null;
+
+                aviSettingsDialog.Dispose();
+                aviSettingsDialog = null;
+
+                mp4HWSettingsDialog.Dispose();
+                mp4HWSettingsDialog = null;
+
+                mp4SettingsDialog.Dispose();
+                mp4SettingsDialog = null;
+
+                movSettingsDialog.Dispose();
+                movSettingsDialog = null;
+
+                mpegTSSettingsDialog.Dispose();
+                mpegTSSettingsDialog = null;
+
+                gifSettingsDialog.Dispose();
+                gifSettingsDialog = null;
+
+                wmvSettingsDialog.Dispose();
+                wmvSettingsDialog = null;
+
+
+
+
+
+                disposedValue = true;
+            }
+        }
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="WpfVideoCaptureAccessor"/> class.
+        /// </summary>
+        ~WpfVideoCaptureAccessor()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

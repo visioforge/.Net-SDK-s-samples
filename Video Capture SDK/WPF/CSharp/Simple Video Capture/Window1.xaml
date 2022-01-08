@@ -55,10 +55,10 @@
             <TabItem Header="Video effects" Name="tabItem3">
                 <Grid>
                     <ListBox x:Name="lbLogos" HorizontalAlignment="Left" Height="119" VerticalAlignment="Top" Width="382" Margin="10,36,0,0"/>
-                    <Button x:Name="btImageLogoAdd" Content="Add image logo" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="110" Click="BtImageLogoAdd_Click" />
-                    <Button x:Name="btTextLogoAdd" Content="Add text logo" HorizontalAlignment="Left" Margin="125,160,0,0" VerticalAlignment="Top" Width="110" Click="BtTextLogoAdd_Click" />
-                    <Button x:Name="btLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="287,160,0,0" VerticalAlignment="Top" Width="50" Click="BtLogoEdit_Click"/>
-                    <Button x:Name="btLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="342,160,0,0" VerticalAlignment="Top" Width="50" Click="BtLogoRemove_Click" />
+                    <Button x:Name="btImageLogoAdd" Content="Add image logo" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Width="110" Click="btImageLogoAdd_Click" />
+                    <Button x:Name="btTextLogoAdd" Content="Add text logo" HorizontalAlignment="Left" Margin="125,160,0,0" VerticalAlignment="Top" Width="110" Click="btTextLogoAdd_Click" />
+                    <Button x:Name="btLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="287,160,0,0" VerticalAlignment="Top" Width="50" Click="btLogoEdit_Click"/>
+                    <Button x:Name="btLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="342,160,0,0" VerticalAlignment="Top" Width="50" Click="btLogoRemove_Click" />
                     <Label x:Name="label" Content="Image / text logos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <Slider Height="23" HorizontalAlignment="Left" Margin="46,239,0,0" Maximum="255" x:Name="tbLightness" VerticalAlignment="Top" Width="100" ValueChanged="tbLightness_Scroll" />
                     <Label Content="Lightness" HorizontalAlignment="Left" Margin="71,212,0,0" x:Name="label92" Width="86" Height="28" VerticalAlignment="Top" />
@@ -70,8 +70,8 @@
                     <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="237,259,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
                     <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="21,330,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged"  />
                     <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="96,330,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
-                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,330,0,0" VerticalAlignment="Top" Checked="CbFlipX_Checked" Unchecked="CbFlipX_Checked"/>
-                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,330,0,0" VerticalAlignment="Top" Checked="CbFlipY_Checked" Unchecked="CbFlipY_Checked"/>
+                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,330,0,0" VerticalAlignment="Top" Checked="cbFlipX_Checked" Unchecked="cbFlipX_Checked"/>
+                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,330,0,0" VerticalAlignment="Top" Checked="cbFlipY_Checked" Unchecked="cbFlipY_Checked"/>
                     <Label x:Name="label114" Content="More effects and settings available in Main Demo" HorizontalAlignment="Left" Margin="33,363,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="cbMergeTextLogos" Content="Merge text logos into one" HorizontalAlignment="Left" Margin="202,185,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="cbMergeImageLogos" Content="Merge image logos into one" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"/>
@@ -93,8 +93,8 @@
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="17,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True" Content="Preview"/>
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="115,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"/>
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="225,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
-        <Button Content="Resume" Margin="0,0,148,10" x:Name="btResume" Click="BtResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
-        <Button Content="Pause" Margin="0,0,211,10" x:Name="btPause" Click="BtPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
+        <Button Content="Resume" Margin="0,0,148,10" x:Name="btResume" Click="btResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
+        <Button Content="Pause" Margin="0,0,211,10" x:Name="btPause" Click="btPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
         <Button Content="Save snapshot" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" x:Name="btSaveScreenshot_Copy" Click="btSaveScreenshot_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118" />
     </Grid>
 </Window>

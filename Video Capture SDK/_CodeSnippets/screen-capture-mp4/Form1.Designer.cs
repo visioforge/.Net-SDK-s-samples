@@ -1,5 +1,6 @@
 ﻿namespace screen_capture_mp4
-{    partial class Form1
+{
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
@@ -16,6 +17,10 @@
             {
                 components.Dispose();
             }
+
+            videoCapture1?.Dispose();
+            videoCapture1 = null;
+
             base.Dispose(disposing);
         }
 

@@ -254,7 +254,7 @@ namespace Decklink_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -315,6 +315,11 @@ namespace Decklink_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

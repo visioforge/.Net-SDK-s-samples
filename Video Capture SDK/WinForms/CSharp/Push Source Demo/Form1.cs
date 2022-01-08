@@ -98,50 +98,50 @@ namespace Push_Source_Demo
 
         private Task PushImagesAsync()
         {
-           return Task.Run(
-               async () =>
-                    {
-                        Bitmap bmp = null;
-                        for (int k = 0; k < 5; k++)
-                        {
-                            for (int i = 0; i < 25; i++)
-                            {
-                                switch (k)
-                                {
-                                    case 0:
-                                        bmp = new Bitmap(Properties.Resources._1);
-                                        break;
-                                    case 1:
-                                        bmp = new Bitmap(Properties.Resources._2);
-                                        break;
-                                    case 2:
-                                        bmp = new Bitmap(Properties.Resources._3);
-                                        break;
-                                    case 3:
-                                        bmp = new Bitmap(Properties.Resources._4);
-                                        break;
-                                    case 4:
-                                        bmp = new Bitmap(Properties.Resources._5);
-                                        break;
-                                }
+            return Task.Run(
+                async () =>
+                     {
+                         Bitmap bmp = null;
+                         for (int k = 0; k < 5; k++)
+                         {
+                             for (int i = 0; i < 25; i++)
+                             {
+                                 switch (k)
+                                 {
+                                     case 0:
+                                         bmp = new Bitmap(Properties.Resources._1);
+                                         break;
+                                     case 1:
+                                         bmp = new Bitmap(Properties.Resources._2);
+                                         break;
+                                     case 2:
+                                         bmp = new Bitmap(Properties.Resources._3);
+                                         break;
+                                     case 3:
+                                         bmp = new Bitmap(Properties.Resources._4);
+                                         break;
+                                     case 4:
+                                         bmp = new Bitmap(Properties.Resources._5);
+                                         break;
+                                 }
 
-                                if (bmp != null)
-                                {
-                                    VideoCapture1.Push_Source_AddVideoFrame(bmp);
-                                    bmp.Dispose();
-                                    bmp = null;
-                                }
+                                 if (bmp != null)
+                                 {
+                                     VideoCapture1.Push_Source_AddVideoFrame(bmp);
+                                     bmp.Dispose();
+                                     bmp = null;
+                                 }
 
-                                Application.DoEvents();
-                            }
-                        }
+                                 Application.DoEvents();
+                             }
+                         }
 
-                        await VideoCapture1.StopAsync();
+                         await VideoCapture1.StopAsync();
 
-                        tmRecording.Stop();
+                         tmRecording.Stop();
 
-                        MessageBox.Show("Done!");
-                    });
+                         MessageBox.Show("Done!");
+                     });
         }
 
         private void SetMP4Output(ref MP4Output mp4Output)
@@ -153,7 +153,7 @@ namespace Push_Source_Demo
 
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
-        
+
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -164,7 +164,7 @@ namespace Push_Source_Demo
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -222,7 +222,7 @@ namespace Push_Source_Demo
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
@@ -364,7 +364,7 @@ namespace Push_Source_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:

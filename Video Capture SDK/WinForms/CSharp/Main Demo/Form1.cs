@@ -415,20 +415,14 @@ namespace VideoCapture_CSharp_Demo
                 cbMPEGVideoDecoder.Items.Add(specialFilter);
             }
 
-            if (cbMPEGVideoDecoder.Items.Count > 0)
-            {
-                cbMPEGVideoDecoder.SelectedIndex = 0;
-            }
+            cbMPEGVideoDecoder.SelectedIndex = 0;
 
             foreach (string specialFilter in VideoCapture1.Special_Filters(SpecialFilterType.MPEG1AudioDecoder))
             {
                 cbMPEGAudioDecoder.Items.Add(specialFilter);
             }
 
-            if (cbMPEGAudioDecoder.Items.Count > 0)
-            {
-                cbMPEGAudioDecoder.SelectedIndex = 0;
-            }
+            cbMPEGAudioDecoder.SelectedIndex = 0;
 
             cbMPEGVideoDecoder_SelectedIndexChanged(null, null);
             cbMPEGAudioDecoder_SelectedIndexChanged(null, null);
@@ -1225,8 +1219,10 @@ namespace VideoCapture_CSharp_Demo
 
                 VideoCapture1.Video_Sample_Grabber_Enabled = false;
             }
-
-            VideoCapture1.Video_Sample_Grabber_Enabled = true;
+            else
+            {
+                VideoCapture1.Video_Sample_Grabber_Enabled = true;
+            }
 
             // start
             await VideoCapture1.StartAsync();
@@ -3068,7 +3064,6 @@ namespace VideoCapture_CSharp_Demo
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void btSelectWMVProfileNetwork_Click(object sender, EventArgs e)
@@ -5242,8 +5237,6 @@ namespace VideoCapture_CSharp_Demo
         {
             if (btONVIFConnect.Text == "Connect")
             {
-                var connected = false;
-
                 try
                 {
                     btONVIFConnect.Enabled = false;
@@ -5306,11 +5299,7 @@ namespace VideoCapture_CSharp_Demo
                 finally
                 {
                     btONVIFConnect.Enabled = true;
-
-                    if (!connected)
-                    {
-                        btONVIFConnect.Text = "Connect";
-                    }
+                    btONVIFConnect.Text = "Connect";
                 }
             }
             else
@@ -5341,7 +5330,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzX = onvifPtzRanges.MinX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, EventArgs e)
@@ -5364,7 +5353,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzX = onvifPtzRanges.MaxX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFUp_Click(object sender, EventArgs e)
@@ -5382,7 +5371,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzY = onvifPtzRanges.MinY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFDown_Click(object sender, EventArgs e)
@@ -5400,7 +5389,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzY = onvifPtzRanges.MaxY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomIn_Click(object sender, EventArgs e)
@@ -5418,7 +5407,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzZoom = onvifPtzRanges.MaxZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomOut_Click(object sender, EventArgs e)
@@ -5436,7 +5425,7 @@ namespace VideoCapture_CSharp_Demo
                 onvifPtzZoom = onvifPtzRanges.MinZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void tbPIPChromaKeyTolerance1_Scroll(object sender, EventArgs e)

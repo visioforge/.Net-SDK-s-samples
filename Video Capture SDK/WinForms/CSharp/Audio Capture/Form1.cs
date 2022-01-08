@@ -36,7 +36,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         private MP3SettingsDialog mp3SettingsDialog;
 
         private FLACSettingsDialog flacSettingsDialog;
-        
+
         private OggVorbisSettingsDialog oggVorbisSettingsDialog;
 
         private SpeexSettingsDialog speexSettingsDialog;
@@ -188,7 +188,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
-        }      
+        }
 
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
@@ -208,7 +208,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
@@ -344,7 +343,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
-        
+
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -354,7 +353,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
-        
+
         private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
@@ -415,7 +414,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             VideoCapture1.Audio_PlayAudio = cbPlayAudio.Checked;
             VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
-           
+
             if (cbMode.SelectedIndex == 0)
             {
                 VideoCapture1.Mode = VideoCaptureMode.AudioPreview;
@@ -430,61 +429,61 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0:
-                    {
-                        var acmOutput = new ACMOutput();
-                        SetACMOutput(ref acmOutput);
-                        VideoCapture1.Output_Format = acmOutput;
+                        {
+                            var acmOutput = new ACMOutput();
+                            SetACMOutput(ref acmOutput);
+                            VideoCapture1.Output_Format = acmOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 1:
-                    {
-                        var mp3Output = new MP3Output();
-                        SetMP3Output(ref mp3Output);
-                        VideoCapture1.Output_Format = mp3Output;
+                        {
+                            var mp3Output = new MP3Output();
+                            SetMP3Output(ref mp3Output);
+                            VideoCapture1.Output_Format = mp3Output;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 2:
-                    {
-                        var wmaOutput = new WMAOutput();
-                        SetWMAOutput(ref wmaOutput);
-                        VideoCapture1.Output_Format = wmaOutput;
+                        {
+                            var wmaOutput = new WMAOutput();
+                            SetWMAOutput(ref wmaOutput);
+                            VideoCapture1.Output_Format = wmaOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 3:
-                    {
-                        var oggVorbisOutput = new OGGVorbisOutput();
-                        SetOGGOutput(ref oggVorbisOutput);
-                        VideoCapture1.Output_Format = oggVorbisOutput;
+                        {
+                            var oggVorbisOutput = new OGGVorbisOutput();
+                            SetOGGOutput(ref oggVorbisOutput);
+                            VideoCapture1.Output_Format = oggVorbisOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 4:
-                    {
-                        var flacOutput = new FLACOutput();
-                        SetFLACOutput(ref flacOutput);
-                        VideoCapture1.Output_Format = flacOutput;
+                        {
+                            var flacOutput = new FLACOutput();
+                            SetFLACOutput(ref flacOutput);
+                            VideoCapture1.Output_Format = flacOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 5:
-                    {
-                        var speexOutput = new SpeexOutput();
-                        SetSpeexOutput(ref speexOutput);
-                        VideoCapture1.Output_Format = speexOutput;
+                        {
+                            var speexOutput = new SpeexOutput();
+                            SetSpeexOutput(ref speexOutput);
+                            VideoCapture1.Output_Format = speexOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                     case 6:
-                    {
-                        var m4aOutput = new M4AOutput();
-                        SetM4AOutput(ref m4aOutput);
-                        VideoCapture1.Output_Format = m4aOutput;
+                        {
+                            var m4aOutput = new M4AOutput();
+                            SetM4AOutput(ref m4aOutput);
+                            VideoCapture1.Output_Format = m4aOutput;
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
 
@@ -496,13 +495,13 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Sound3D, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
-  
+
             await VideoCapture1.StartAsync();
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -550,7 +549,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     }
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg"); //-V3139
                         break;
                     }
                 case 4:

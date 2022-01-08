@@ -88,7 +88,7 @@ namespace Main_Demo
         private GIFSettingsDialog gifSettingsDialog;
 
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
-        
+
         // Zoom
         private double zoom = 1.0;
         private int zoomShiftX;
@@ -116,7 +116,7 @@ namespace Main_Demo
             int k = filename.LastIndexOf('.');
             return filename.Substring(k, filename.Length - k);
         }
-        
+
         public Window1()
         {
             InitializeComponent();
@@ -180,14 +180,14 @@ namespace Main_Demo
             edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            
+
             for (int i = 0; i < VideoEdit1.Video_Transition_Names().Count; i++)
             {
                 cbTransitionName.Items.Add(VideoEdit1.Video_Transition_Names()[i]);
             }
 
             cbTransitionName.SelectedIndex = 0;
-            
+
             var genres = new List<string>();
             foreach (var genre in VideoEdit1.Tags_GetDefaultVideoGenres())
             {
@@ -215,7 +215,7 @@ namespace Main_Demo
 
             cbAudEqualizerPreset.SelectedIndex = 0;
         }
-        
+
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -431,7 +431,7 @@ namespace Main_Demo
             zoomShiftY = 0;
 
             mmLog.Clear();
-            
+
             VideoEdit1.Video_Renderer.Zoom_Ratio = 0;
             VideoEdit1.Video_Renderer.Zoom_ShiftX = 0;
             VideoEdit1.Video_Renderer.Zoom_ShiftY = 0;
@@ -526,10 +526,10 @@ namespace Main_Demo
                             else
                             {
                                 var wmvOutput = new WMVOutput
-                                                    {
-                                                        Mode = WMVMode.ExternalProfile,
-                                                        External_Profile_FileName = edNetworkStreamingWMVProfile.Text
-                                                    };
+                                {
+                                    Mode = WMVMode.ExternalProfile,
+                                    External_Profile_FileName = edNetworkStreamingWMVProfile.Text
+                                };
                                 VideoEdit1.Network_Streaming_Output = wmvOutput;
                             }
 
@@ -883,11 +883,11 @@ namespace Main_Demo
             if (cbAudioChannelMapperEnabled.IsChecked == true)
             {
                 VideoEdit1.Audio_Channel_Mapper = new AudioChannelMapperSettings
-                                                      {
-                                                          Routes = audioChannelMapperItems.ToArray(),
-                                                          OutputChannelsCount =
+                {
+                    Routes = audioChannelMapperItems.ToArray(),
+                    OutputChannelsCount =
                                                               Convert.ToInt32(edAudioChannelMapperOutputChannels.Text)
-                                                      };
+                };
             }
             else
             {
@@ -972,18 +972,18 @@ namespace Main_Demo
             if (cbTagEnabled.IsChecked == true)
             {
                 var tags = new MediaFileTags
-                               {
-                                   Title = edTagTitle.Text,
-                                   Performers = new[] { edTagArtists.Text },
-                                   Album = edTagAlbum.Text,
-                                   Comment = edTagComment.Text,
-                                   Track = Convert.ToUInt32(edTagTrackID.Text),
-                                   Copyright = edTagCopyright.Text,
-                                   Year = Convert.ToUInt32(edTagYear.Text),
-                                   Composers = new[] { edTagComposers.Text },
-                                   Genres = new[] { cbTagGenre.Text },
-                                   Lyrics = edTagLyrics.Text
-                               };
+                {
+                    Title = edTagTitle.Text,
+                    Performers = new[] { edTagArtists.Text },
+                    Album = edTagAlbum.Text,
+                    Comment = edTagComment.Text,
+                    Track = Convert.ToUInt32(edTagTrackID.Text),
+                    Copyright = edTagCopyright.Text,
+                    Year = Convert.ToUInt32(edTagYear.Text),
+                    Composers = new[] { edTagComposers.Text },
+                    Genres = new[] { cbTagGenre.Text },
+                    Lyrics = edTagLyrics.Text
+                };
 
                 if (imgTagCover.Tag != null)
                 {
@@ -1288,7 +1288,7 @@ namespace Main_Demo
             lbFilters.Items.Clear();
             VideoEdit1.Video_Filters_Clear();
         }
-        
+
         private void btAudEqRefresh_Click(object sender, RoutedEventArgs e)
         {
             tbAudEq0.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -1302,7 +1302,7 @@ namespace Main_Demo
             tbAudEq8.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 8);
             tbAudEq9.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
-        
+
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.IsChecked == true);
@@ -1333,13 +1333,13 @@ namespace Main_Demo
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.IsChecked == true);
         }
-        
+
         private void tbAud3DSound_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (ushort)tbAud3DSound.Value);
         }
 
-        private void tbAudDynAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void tbAudDynAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e) //-V3013
         {
             VideoEdit1?.Audio_Effects_DynamicAmplify(
                 -1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (int)tbAudAttack.Value, (int)tbAudDynAmp.Value, (int)tbAudRelease.Value);
@@ -1502,10 +1502,10 @@ namespace Main_Demo
                 }
 
                 VideoEdit1.ChromaKey = new ChromaKeySettings(new Bitmap(edChromaKeyImage.Text))
-                                           {
-                                               Smoothing = (float)(tbChromaKeySmoothing.Value / 1000f),
-                                               ThresholdSensitivity = (float)(tbChromaKeyThresholdSensitivity.Value / 1000f),
-                                               Color = ColorConv(((SolidColorBrush)pnChromaKeyColor.Fill).Color)
+                {
+                    Smoothing = (float)(tbChromaKeySmoothing.Value / 1000f),
+                    ThresholdSensitivity = (float)(tbChromaKeyThresholdSensitivity.Value / 1000f),
+                    Color = ColorConv(((SolidColorBrush)pnChromaKeyColor.Fill).Color)
                 };
             }
             else
@@ -1519,18 +1519,18 @@ namespace Main_Demo
             if (cbDecklinkOutput.IsChecked == true)
             {
                 VideoEdit1.Decklink_Output = new DecklinkOutputSettings
-                                                 {
-                                                     DVEncoding = cbDecklinkDV.IsChecked == true,
-                                                     AnalogOutputIREUSA = cbDecklinkOutputNTSC.SelectedIndex == 0,
-                                                     AnalogOutputSMPTE = cbDecklinkOutputComponentLevels.SelectedIndex == 0,
-                                                     BlackToDeckInCapture = (DecklinkBlackToDeckInCapture)cbDecklinkOutputBlackToDeck.SelectedIndex,
-                                                     DualLinkOutputMode = (DecklinkDualLinkMode)cbDecklinkOutputDualLink.SelectedIndex,
-                                                     HDTVPulldownOnOutput = (DecklinkHDTVPulldownOnOutput)cbDecklinkOutputHDTVPulldown.SelectedIndex,
-                                                     SingleFieldOutputForSynchronousFrames = (DecklinkSingleFieldOutputForSynchronousFrames)cbDecklinkOutputSingleField.SelectedIndex,
-                                                     VideoOutputDownConversionMode = (DecklinkVideoOutputDownConversionMode)cbDecklinkOutputDownConversion.SelectedIndex,
-                                                     VideoOutputDownConversionModeAnalogUsed = cbDecklinkOutputDownConversionAnalogOutput.IsChecked == true,
-                                                     AnalogOutput = (DecklinkAnalogOutput)cbDecklinkOutputAnalog.SelectedIndex
-                                                 };
+                {
+                    DVEncoding = cbDecklinkDV.IsChecked == true,
+                    AnalogOutputIREUSA = cbDecklinkOutputNTSC.SelectedIndex == 0,
+                    AnalogOutputSMPTE = cbDecklinkOutputComponentLevels.SelectedIndex == 0,
+                    BlackToDeckInCapture = (DecklinkBlackToDeckInCapture)cbDecklinkOutputBlackToDeck.SelectedIndex,
+                    DualLinkOutputMode = (DecklinkDualLinkMode)cbDecklinkOutputDualLink.SelectedIndex,
+                    HDTVPulldownOnOutput = (DecklinkHDTVPulldownOnOutput)cbDecklinkOutputHDTVPulldown.SelectedIndex,
+                    SingleFieldOutputForSynchronousFrames = (DecklinkSingleFieldOutputForSynchronousFrames)cbDecklinkOutputSingleField.SelectedIndex,
+                    VideoOutputDownConversionMode = (DecklinkVideoOutputDownConversionMode)cbDecklinkOutputDownConversion.SelectedIndex,
+                    VideoOutputDownConversionModeAnalogUsed = cbDecklinkOutputDownConversionAnalogOutput.IsChecked == true,
+                    AnalogOutput = (DecklinkAnalogOutput)cbDecklinkOutputAnalog.SelectedIndex
+                };
             }
             else
             {
@@ -1589,7 +1589,7 @@ namespace Main_Demo
         {
             Dispatcher?.Invoke(() => { mmLog.Text = mmLog.Text + e.Message + Environment.NewLine; });
         }
-        
+
         private void lbFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -1599,7 +1599,7 @@ namespace Main_Demo
                                             FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
-        
+
         private async void cbStretch_Checked(object sender, RoutedEventArgs e)
         {
             if (cbStretch.IsChecked == true)
@@ -1707,7 +1707,7 @@ namespace Main_Demo
                                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)),
                                 TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)),
                                 VideoEditStretchMode.Letterbox,
-                                0, 
+                                0,
                                 customWidth,
                                 customHeight);
                         }
@@ -1802,7 +1802,7 @@ namespace Main_Demo
             VideoEdit1?.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value));
         }
 
-        private void tbChromaKeyContrastLow_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void tbChromaKeyContrastLow_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //-V3013
         {
             if (VideoEdit1 != null)
             {
@@ -1853,21 +1853,21 @@ namespace Main_Demo
             if (cbMotDetEnabled.IsChecked == true)
             {
                 VideoEdit1.Motion_Detection = new MotionDetectionSettings
-                                                  {
-                                                      Enabled = cbMotDetEnabled.IsChecked == true,
-                                                      Compare_Red = cbCompareRed.IsChecked == true,
-                                                      Compare_Green = cbCompareGreen.IsChecked == true,
-                                                      Compare_Blue = cbCompareBlue.IsChecked == true,
-                                                      Compare_Greyscale = cbCompareGreyscale.IsChecked == true,
-                                                      Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
-                                                      Highlight_Enabled = cbMotDetHLEnabled.IsChecked == true,
-                                                      Highlight_Threshold = (int)tbMotDetHLThreshold.Value,
-                                                      FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
-                                                      Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
-                                                      Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
-                                                      DropFrames_Enabled = cbMotDetDropFramesEnabled.IsChecked == true,
-                                                      DropFrames_Threshold = (int)tbMotDetDropFramesThreshold.Value
-                                                  };
+                {
+                    Enabled = true,
+                    Compare_Red = cbCompareRed.IsChecked == true,
+                    Compare_Green = cbCompareGreen.IsChecked == true,
+                    Compare_Blue = cbCompareBlue.IsChecked == true,
+                    Compare_Greyscale = cbCompareGreyscale.IsChecked == true,
+                    Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
+                    Highlight_Enabled = cbMotDetHLEnabled.IsChecked == true,
+                    Highlight_Threshold = (int)tbMotDetHLThreshold.Value,
+                    FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
+                    Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
+                    Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
+                    DropFrames_Enabled = cbMotDetDropFramesEnabled.IsChecked == true,
+                    DropFrames_Threshold = (int)tbMotDetDropFramesThreshold.Value
+                };
                 VideoEdit1.MotionDetection_Update();
             }
             else
@@ -2133,7 +2133,7 @@ namespace Main_Demo
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingMSExpressionEncoder);
             Process.Start(startInfo);
         }
-        
+
         #region Full screen
 
         private bool fullScreen;
@@ -2497,7 +2497,7 @@ namespace Main_Demo
 
             VideoEdit1.Audio_Enhancer_Timeshift(-1, (int)tbAudioTimeshift.Value);
         }
-       
+
         public delegate void FFMPEGInfoDelegate(string message);
 
         public void FFMPEGInfoDelegateMethod(string message)
@@ -2522,7 +2522,7 @@ namespace Main_Demo
                 edEncryptionKeyFile.Text = openFileDialog1.FileName;
             }
         }
-        
+
         private void btSelectOutputCut_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -2664,11 +2664,11 @@ namespace Main_Demo
         private void btAudioChannelMapperAddNewRoute_Click(object sender, RoutedEventArgs e)
         {
             var item = new AudioChannelMapperItem
-                           {
-                               SourceChannel = Convert.ToInt32(edAudioChannelMapperSourceChannel.Text),
-                               TargetChannel = Convert.ToInt32(edAudioChannelMapperTargetChannel.Text),
-                               TargetChannelVolume = (float)tbAudioChannelMapperVolume.Value / 1000.0f
-                           };
+            {
+                SourceChannel = Convert.ToInt32(edAudioChannelMapperSourceChannel.Text),
+                TargetChannel = Convert.ToInt32(edAudioChannelMapperTargetChannel.Text),
+                TargetChannelVolume = (float)tbAudioChannelMapperVolume.Value / 1000.0f
+            };
 
             audioChannelMapperItems.Add(item);
 

@@ -262,11 +262,11 @@ namespace Video_From_Images
             {
                 VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
-            
+
             if (!rbConvert.Checked)
             {
                 VideoEdit1.Mode = VideoEditMode.Preview;
-               
+
             }
             else
             {
@@ -423,7 +423,7 @@ namespace Video_From_Images
 
         private static string[] EnumerateImageFiles(string path)
         {
-            var res = new List<string>(); 
+            var res = new List<string>();
 
             var exts = new string[] { "*.jpg", "*.jpeg", "*.png", "*.gif", "*.bmp" };
             foreach (var ext in exts)
@@ -516,60 +516,60 @@ namespace Video_From_Images
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
                 case 1:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
+                        break;
+                    }
                 case 2:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv");
+                        break;
+                    }
                 case 3:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
                 case 4:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        break;
+                    }
                 case 5:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
                 case 6:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
                 case 7:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
+                        break;
+                    }
                 case 8:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        break;
+                    }
                 case 9:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
+                        break;
+                    }
                 case 10:
-                {
-                    edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
-                    break;
-                }
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
+                        break;
+                    }
             }
         }
 
@@ -579,108 +579,108 @@ namespace Video_From_Images
             {
                 case 0:
                 case 1:
-                {
-                    if (aviSettingsDialog == null)
                     {
-                        aviSettingsDialog = new AVISettingsDialog(
-                            VideoEdit1.Video_Codecs.ToArray(),
-                            VideoEdit1.Audio_Codecs.ToArray());
+                        if (aviSettingsDialog == null)
+                        {
+                            aviSettingsDialog = new AVISettingsDialog(
+                                VideoEdit1.Video_Codecs.ToArray(),
+                                VideoEdit1.Audio_Codecs.ToArray());
+                        }
+
+                        aviSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    aviSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 2:
-                {
-                    if (wmvSettingsDialog == null)
                     {
-                        wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
+                        if (wmvSettingsDialog == null)
+                        {
+                            wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
+                        }
+
+                        wmvSettingsDialog.WMA = false;
+                        wmvSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    wmvSettingsDialog.WMA = false;
-                    wmvSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 3:
-                {
-                    if (dvSettingsDialog == null)
                     {
-                        dvSettingsDialog = new DVSettingsDialog();
+                        if (dvSettingsDialog == null)
+                        {
+                            dvSettingsDialog = new DVSettingsDialog();
+                        }
+
+                        dvSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    dvSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 4:
-                {
-                    if (webmSettingsDialog == null)
                     {
-                        webmSettingsDialog = new WebMSettingsDialog();
+                        if (webmSettingsDialog == null)
+                        {
+                            webmSettingsDialog = new WebMSettingsDialog();
+                        }
+
+                        webmSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    webmSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 5:
-                {
-                    if (ffmpegSettingsDialog == null)
                     {
-                        ffmpegSettingsDialog = new FFMPEGSettingsDialog();
+                        if (ffmpegSettingsDialog == null)
+                        {
+                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
+                        }
+
+                        ffmpegSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    ffmpegSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 6:
-                {
-                    if (ffmpegEXESettingsDialog == null)
                     {
-                        ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
+                        if (ffmpegEXESettingsDialog == null)
+                        {
+                            ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
+                        }
+
+                        ffmpegEXESettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    ffmpegEXESettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 7:
                 case 10:
-                {
-                    if (this.mp4SettingsDialog == null)
                     {
-                        this.mp4SettingsDialog = new MP4SettingsDialog();
+                        if (this.mp4SettingsDialog == null)
+                        {
+                            this.mp4SettingsDialog = new MP4SettingsDialog();
+                        }
+
+                        this.mp4SettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    this.mp4SettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 8:
-                {
-                    if (mp4HWSettingsDialog == null)
                     {
+                        if (mp4HWSettingsDialog == null)
+                        {
                             mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
+                        }
+
+                        mp4HWSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    mp4HWSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
                 case 9:
-                {
-                    if (gifSettingsDialog == null)
                     {
-                        gifSettingsDialog = new GIFSettingsDialog();
+                        if (gifSettingsDialog == null)
+                        {
+                            gifSettingsDialog = new GIFSettingsDialog();
+                        }
+
+                        gifSettingsDialog.ShowDialog(this);
+
+                        break;
                     }
-
-                    gifSettingsDialog.ShowDialog(this);
-
-                    break;
-                }
             }
         }
 
@@ -728,6 +728,11 @@ namespace Video_From_Images
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoEdit1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

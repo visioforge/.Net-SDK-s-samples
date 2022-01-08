@@ -99,7 +99,7 @@ namespace Simple_Video_Capture
 
             return false;
         }
-        
+
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
@@ -226,7 +226,6 @@ namespace Simple_Video_Capture
         private void tbAudioBalance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void lbViewVideoTutorials_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -258,7 +257,7 @@ namespace Simple_Video_Capture
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectionChanged(null, null);
                 }
-                
+
                 btVideoCaptureDeviceSettings.IsEnabled = deviceItem.DialogDefault;
             }
         }
@@ -433,7 +432,7 @@ namespace Simple_Video_Capture
                 VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
             }
 
-            if (rbPreview.IsChecked  == true)
+            if (rbPreview.IsChecked == true)
             {
                 VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
             }
@@ -517,7 +516,7 @@ namespace Simple_Video_Capture
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -552,21 +551,21 @@ namespace Simple_Video_Capture
 
             if (cbFlipX.IsChecked == true)
             {
-                CbFlipX_Checked(null, null);
+                cbFlipX_Checked(null, null);
             }
 
             if (cbFlipY.IsChecked == true)
             {
-                CbFlipY_Checked(null, null);
+                cbFlipY_Checked(null, null);
             }
         }
 
-        private async void BtResume_Click(object sender, RoutedEventArgs e)
+        private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
-        private async void BtPause_Click(object sender, RoutedEventArgs e)
+        private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
@@ -577,23 +576,23 @@ namespace Simple_Video_Capture
 
             await VideoCapture1.StopAsync();
         }
-        
+
         private void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
+            if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue?.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
             {
                 return;
             }
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
                 if (videoFormat == null)
                 {
                     return;
@@ -611,7 +610,7 @@ namespace Simple_Video_Capture
                 }
             }
         }
-        
+
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -740,7 +739,7 @@ namespace Simple_Video_Capture
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -898,7 +897,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void CbFlipX_Checked(object sender, RoutedEventArgs e)
+        private void cbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipDown");
@@ -917,7 +916,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void CbFlipY_Checked(object sender, RoutedEventArgs e)
+        private void cbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipRight");
@@ -936,7 +935,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void BtImageLogoAdd_Click(object sender, RoutedEventArgs e)
+        private void btImageLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
 
@@ -951,7 +950,7 @@ namespace Simple_Video_Capture
             dlg.Dispose();
         }
 
-        private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
+        private void btTextLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
 
@@ -966,11 +965,16 @@ namespace Simple_Video_Capture
             dlg.Dispose();
         }
 
-        private void BtLogoEdit_Click(object sender, RoutedEventArgs e)
+        private void btLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();
@@ -992,7 +996,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void BtLogoRemove_Click(object sender, RoutedEventArgs e)
+        private void btLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
             {

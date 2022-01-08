@@ -22,7 +22,7 @@ namespace Media_Player_Demo
     using VisioForge.Types.Events;
     using VisioForge.Types.MediaPlayer;
     using VisioForge.Types.Output;
-    
+
     using VisioForge.Types.VideoEffects;
     using VisioForge.Types.VideoProcessing;
     using VisioForge.Core;
@@ -579,7 +579,7 @@ namespace Media_Player_Demo
                 {
                     return;
                 }
-                
+
                 if (count > 1)
                 {
                     cbAudioStream2.Enabled = true;
@@ -614,7 +614,7 @@ namespace Media_Player_Demo
 
                 int count3 = count2;
 
-                if ((count2 + count >= 4) && (count3 > 0))
+                if (count2 + count >= 4)
                 {
                     cbAudioStream4.Enabled = true;
                     cbAudioStream4.Checked = true;
@@ -1129,7 +1129,7 @@ namespace Media_Player_Demo
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             MediaPlayer1.Debug_Telemetry = cbTelemetry.Checked;
-            
+
             zoom = 1.0;
             zoomShiftX = 0;
             zoomShiftY = 0;
@@ -1333,7 +1333,7 @@ namespace Media_Player_Demo
                     }
                 }
             }
-        
+
             // Video effects CPU
             AddVideoEffects();
 
@@ -1476,7 +1476,7 @@ namespace Media_Player_Demo
         private async void btZoomShiftDown_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_ShiftY = MediaPlayer1.Video_Renderer.Zoom_ShiftY - 2;
-            await MediaPlayer1.Video_Renderer_UpdateAsync(); 
+            await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
         private async void btZoomShiftLeft_Click(object sender, EventArgs e)
@@ -1624,7 +1624,7 @@ namespace Media_Player_Demo
                     s = s + " - ";
                     s = s + audioStream.NumberOfChannels + "ch" + " - ";
                     s = s + audioStream.Language;
-                    
+
                     cbDVDControlAudio.Items.Add(s);
                 }
 
@@ -1812,7 +1812,7 @@ namespace Media_Player_Demo
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
-        
+
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value);
@@ -1956,21 +1956,21 @@ namespace Media_Player_Demo
             if (cbMotDetEnabled.Checked)
             {
                 MediaPlayer1.Motion_Detection = new MotionDetectionSettings
-                                                    {
-                                                        Enabled = cbMotDetEnabled.Checked,
-                                                        Compare_Red = cbCompareRed.Checked,
-                                                        Compare_Green = cbCompareGreen.Checked,
-                                                        Compare_Blue = cbCompareBlue.Checked,
-                                                        Compare_Greyscale = cbCompareGreyscale.Checked,
-                                                        Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
-                                                        Highlight_Enabled = cbMotDetHLEnabled.Checked,
-                                                        Highlight_Threshold = tbMotDetHLThreshold.Value,
-                                                        FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
-                                                        Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
-                                                        Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
-                                                        DropFrames_Enabled = cbMotDetDropFramesEnabled.Checked,
-                                                        DropFrames_Threshold = tbMotDetDropFramesThreshold.Value
-                                                    };
+                {
+                    Enabled = cbMotDetEnabled.Checked,
+                    Compare_Red = cbCompareRed.Checked,
+                    Compare_Green = cbCompareGreen.Checked,
+                    Compare_Blue = cbCompareBlue.Checked,
+                    Compare_Greyscale = cbCompareGreyscale.Checked,
+                    Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
+                    Highlight_Enabled = cbMotDetHLEnabled.Checked,
+                    Highlight_Threshold = tbMotDetHLThreshold.Value,
+                    FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
+                    Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
+                    Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
+                    DropFrames_Enabled = cbMotDetDropFramesEnabled.Checked,
+                    DropFrames_Threshold = tbMotDetDropFramesThreshold.Value
+                };
                 MediaPlayer1.MotionDetection_Update();
             }
             else
@@ -1998,10 +1998,10 @@ namespace Media_Player_Demo
             if (cbMotionDetectionEx.Checked)
             {
                 MediaPlayer1.Motion_DetectionEx = new MotionDetectionExSettings
-                                                      {
-                                                          ProcessorType = (MotionProcessorType)rbMotionDetectionExProcessor.SelectedIndex,
-                                                          DetectorType = (MotionDetectorType)rbMotionDetectionExDetector.SelectedIndex
-                                                      };
+                {
+                    ProcessorType = (MotionProcessorType)rbMotionDetectionExProcessor.SelectedIndex,
+                    DetectorType = (MotionDetectorType)rbMotionDetectionExDetector.SelectedIndex
+                };
             }
             else
             {
@@ -2813,7 +2813,7 @@ namespace Media_Player_Demo
                 }
             }
 
-            edTags.Text = tags?.ToString();            
+            edTags.Text = tags?.ToString();
         }
 
         private void btReversePlaybackPrevFrame_Click(object sender, EventArgs e)

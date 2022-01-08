@@ -144,7 +144,7 @@ namespace TV_Tuner_Demo
                 videoCapture.Audio_CaptureDevice = new AudioCaptureSource(audioCaptureDevices[audioCaptureDeviceIndex - 1].Name);
                 videoCapture.Audio_CaptureDevice.Format_UseBest = true;
             }
-            
+
             videoCapture.TVTuner_Country = country;
             videoCapture.TVTuner_Name = tuners[tunerIndex];
             videoCapture.TVTuner_Mode = TVTunerMode.FMRadio;
@@ -180,6 +180,8 @@ namespace TV_Tuner_Demo
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
             videoCapture.Stop();
+
+            videoCapture.Dispose();
         }
 
         private static void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -200,6 +202,6 @@ namespace TV_Tuner_Demo
             }
         }
     }
-} 
-    
+}
+
 

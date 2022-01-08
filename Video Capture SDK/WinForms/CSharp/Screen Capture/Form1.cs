@@ -48,9 +48,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
-        
+
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -75,7 +75,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(Convert.ToInt32(edScreenLeft.Text), Convert.ToInt32(edScreenTop.Text), cbScreenCapture_GrabMouseCursor.Checked);
         }
-        
+
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -83,6 +83,10 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 cbAudioInputFormat.Items.Clear();
 
                 var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
 
                 var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
                 var defaultValueExists = false;
@@ -152,7 +156,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -214,7 +218,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         private ScreenCaptureSourceSettings CreateScreenCaptureSource(int screenID, bool forcedFullScreen)
         {
             var source = new ScreenCaptureSourceSettings();
-            
+
             if (rbScreenCaptureWindow.Checked)
             {
                 source.Mode = ScreenCaptureMode.Window;
@@ -301,7 +305,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     Convert.ToInt32(cbScreenCaptureDisplayIndex.Text),
                     false);
             }
-            
+
             // audio source
             if (cbRecordAudio.Checked)
             {
@@ -400,7 +404,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -411,14 +415,14 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
-            
+
             Text += $" (SDK v{VideoCapture1.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {
                 UpdateRecordingTime();
             };
-            
+
             foreach (var device in VideoCapture1.Audio_CaptureDevices)
             {
                 cbAudioInputDevice.Items.Add(device.Name);
@@ -429,7 +433,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 cbAudioInputDevice.SelectedIndex = 0;
                 cbAudioInputDevice_SelectedIndexChanged(null, null);
             }
-            
+
             foreach (var screen in Screen.AllScreens)
             {
                 cbScreenCaptureDisplayIndex.Items.Add(screen.DeviceName.Replace(@"\\.\DISPLAY", string.Empty));
@@ -565,7 +569,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -654,7 +658,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             await VideoCapture1.ResumeAsync();
         }
-        
+
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -699,6 +703,11 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

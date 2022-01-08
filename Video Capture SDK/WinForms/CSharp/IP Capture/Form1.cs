@@ -328,8 +328,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             if (btONVIFConnect.Text == "Connect")
             {
-                var connected = false;
-
                 try
                 {
                     btONVIFConnect.Enabled = false;
@@ -392,11 +390,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 finally
                 {
                     btONVIFConnect.Enabled = true;
-
-                    if (!connected)
-                    {
-                        btONVIFConnect.Text = "Connect";
-                    }
+                    btONVIFConnect.Text = "Connect";
                 }
             }
             else
@@ -432,7 +426,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzX = onvifPtzRanges.MinX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, EventArgs e)
@@ -455,7 +449,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzX = onvifPtzRanges.MaxX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFUp_Click(object sender, EventArgs e)
@@ -473,7 +467,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzY = onvifPtzRanges.MinY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFDown_Click(object sender, EventArgs e)
@@ -491,7 +485,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzY = onvifPtzRanges.MaxY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomIn_Click(object sender, EventArgs e)
@@ -509,7 +503,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzZoom = onvifPtzRanges.MaxZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomOut_Click(object sender, EventArgs e)
@@ -527,7 +521,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 onvifPtzZoom = onvifPtzRanges.MinZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
@@ -566,7 +560,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
-        
+
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -577,7 +571,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -617,7 +611,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
-        
+
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -653,7 +647,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -837,6 +831,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

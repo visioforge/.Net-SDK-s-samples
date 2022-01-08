@@ -102,8 +102,11 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedVideoInputDevice, value))
                 {
-                    this.videoCaptureAccessor.Video_CaptureDevice = new VideoCaptureSource(SelectedVideoInputDevice.Name);
-                    SelectedVideoFormat = SelectedVideoInputDevice?.VideoFormats.FirstOrDefault();
+                    if (SelectedVideoInputDevice != null)
+                    {
+                        this.videoCaptureAccessor.Video_CaptureDevice = new VideoCaptureSource(SelectedVideoInputDevice.Name);
+                        SelectedVideoFormat = SelectedVideoInputDevice.VideoFormats.FirstOrDefault();
+                    }
                 }
             }
         }
@@ -260,7 +263,7 @@ namespace Simple_Video_Capture
         #region Output tab
 
         public DelegateCommand BrowseForOutputFileCommand { get; }
-        
+
         public DelegateCommand ConfigureOutputFormatCommand { get; }
 
         public List<OutputFormatInfo> OutputFormats => this.videoCaptureAccessor.OutputFormats;
@@ -570,7 +573,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private bool CanEditLogo()
+        private bool CanEditLogo() //-V3013
         {
             return SelectedLogo != null;
         }
@@ -651,7 +654,7 @@ namespace Simple_Video_Capture
                 RecordAudio = this.RecordAudio,
                 VideoCaptureDevice = videoSource,
                 AudioCaptureDevice = audioSource,
-                AudioOutputDevice = SelectedAudioOutputDevice,                 
+                AudioOutputDevice = SelectedAudioOutputDevice,
                 Preview = this.PreviewMode,
                 OutputFileName = this.OutputFileName,
                 OutputFormat = SelectedOutputFormat.Tag,

@@ -495,7 +495,6 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (e.Property.ToString() == "Value")
             {
                 VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
-                VideoCapture1.Audio_OutputDevice_Balance_Get();
             }
         }
 
@@ -1018,7 +1017,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -1102,7 +1101,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (e.Property.ToString() == "Value")
             {
                 UpdateContrast();
-            }            
+            }
         }
 
         private void UpdateDarkness()
@@ -1129,7 +1128,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (e.Property.ToString() == "Value")
             {
                 UpdateDarkness();
-            }            
+            }
         }
 
         private void UpdateLightness()
@@ -1156,7 +1155,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (e.Property.ToString() == "Value")
             {
                 UpdateLightness();
-            }            
+            }
         }
 
         private void UpdateSaturation()
@@ -1186,7 +1185,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (e.Property.ToString() == "Value")
             {
                 UpdateSaturation();
-            }            
+            }
         }
 
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
@@ -1281,6 +1280,11 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();
@@ -1312,7 +1316,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {            
+        {
             DestroyEngine();
         }
 
@@ -1349,6 +1353,9 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
                     VideoCapture1?.Dispose();
                     VideoCapture1 = null;
+
+                    VideoView1?.Dispose();
+                    VideoView1 = null;
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer

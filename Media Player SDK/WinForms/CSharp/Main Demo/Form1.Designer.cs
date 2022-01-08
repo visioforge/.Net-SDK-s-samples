@@ -22,6 +22,9 @@ namespace Media_Player_Demo
             MediaPlayer1?.Dispose();
             MediaPlayer1 = null;
 
+            memoryFileStream?.Dispose();
+            memoryFileStream = null;
+
             base.Dispose(disposing);
         }
 
@@ -6478,7 +6481,7 @@ namespace Media_Player_Demo
             // 
             // edFilenameOrURL
             // 
-            this.edFilenameOrURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.edFilenameOrURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edFilenameOrURL.Location = new System.Drawing.Point(330, 28);
             this.edFilenameOrURL.Name = "edFilenameOrURL";
@@ -7003,7 +7006,7 @@ namespace Media_Player_Demo
             // 
             // cbSourceMode
             // 
-            this.cbSourceMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbSourceMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSourceMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSourceMode.FormattingEnabled = true;
@@ -7029,7 +7032,7 @@ namespace Media_Player_Demo
             // 
             // lbSourceFiles
             // 
-            this.lbSourceFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lbSourceFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbSourceFiles.ContextMenuStrip = this.mnPlaylist;
             this.lbSourceFiles.FormattingEnabled = true;
@@ -7105,7 +7108,7 @@ namespace Media_Player_Demo
             // 
             // edCustomSourceFilter
             // 
-            this.edCustomSourceFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.edCustomSourceFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edCustomSourceFilter.Location = new System.Drawing.Point(432, 155);
             this.edCustomSourceFilter.Name = "edCustomSourceFilter";

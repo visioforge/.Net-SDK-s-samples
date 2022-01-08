@@ -129,7 +129,7 @@ namespace Main_Demo
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog2 = new Microsoft.Win32.OpenFileDialog();
@@ -197,6 +197,9 @@ namespace Main_Demo
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+
+            tmRecording.Dispose();
+            tmRecording = null;
         }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
@@ -393,20 +396,14 @@ namespace Main_Demo
                 cbMPEGVideoDecoder.Items.Add(specialFilter);
             }
 
-            if (cbMPEGVideoDecoder.Items.Count > 0)
-            {
-                cbMPEGVideoDecoder.SelectedIndex = 0;
-            }
+            cbMPEGVideoDecoder.SelectedIndex = 0;
 
             foreach (string specialFilter in VideoCapture1.Special_Filters(SpecialFilterType.MPEG1AudioDecoder))
             {
                 cbMPEGAudioDecoder.Items.Add(specialFilter);
             }
 
-            if (cbMPEGAudioDecoder.Items.Count > 0)
-            {
-                cbMPEGAudioDecoder.SelectedIndex = 0;
-            }
+            cbMPEGAudioDecoder.SelectedIndex = 0;
 
             cbMPEGVideoDecoder_SelectedIndexChanged(null, null);
             cbMPEGAudioDecoder_SelectedIndexChanged(null, null);
@@ -457,18 +454,6 @@ namespace Main_Demo
                         cbVideoInputFormat.SelectedIndex = 0;
                         cbVideoInputFormat_SelectedIndexChanged(null, null);
                     }
-
-                    //cbFramerate.Items.Clear();
-
-                    //foreach (string frameRate in deviceItem.VideoFrameRates)
-                    //{
-                    //    cbFramerate.Items.Add(frameRate);
-                    //}
-
-                    //if (cbFramerate.Items.Count > 0)
-                    //{
-                    //    cbFramerate.SelectedIndex = 0;
-                    //}
 
                     // currently device active, we can read TV Tuner name
                     var tvTuner = deviceItem.TVTuner;
@@ -636,45 +621,42 @@ namespace Main_Demo
                 cbAudioInputFormat.Items.Clear();
                 cbAudioInputLine.Items.Clear();
 
-                if (cbAudioInputDevice.SelectedIndex != -1)
+                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedValue.ToString());
+                if (deviceItem != null)
                 {
-                    var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedValue.ToString());
-                    if (deviceItem != null)
+                    var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
+                    var defaultValueExists = false;
+                    foreach (string format in deviceItem.Formats)
                     {
-                        var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
-                        var defaultValueExists = false;
-                        foreach (string format in deviceItem.Formats)
+                        cbAudioInputFormat.Items.Add(format);
+
+                        if (defaultValue == format)
                         {
-                            cbAudioInputFormat.Items.Add(format);
-
-                            if (defaultValue == format)
-                            {
-                                defaultValueExists = true;
-                            }
+                            defaultValueExists = true;
                         }
-
-                        if (cbAudioInputFormat.Items.Count > 0)
-                        {
-                            cbAudioInputFormat.SelectedIndex = 0;
-
-                            if (defaultValueExists)
-                            {
-                                cbAudioInputFormat.Text = defaultValue;
-                            }
-                        }
-
-                        foreach (string line in deviceItem.Lines)
-                        {
-                            cbAudioInputLine.Items.Add(line);
-                        }
-
-                        if (cbAudioInputLine.Items.Count > 0)
-                        {
-                            cbAudioInputLine.SelectedIndex = 0;
-                        }
-
-                        btAudioInputDeviceSettings.IsEnabled = deviceItem.DialogDefault;
                     }
+
+                    if (cbAudioInputFormat.Items.Count > 0)
+                    {
+                        cbAudioInputFormat.SelectedIndex = 0;
+
+                        if (defaultValueExists)
+                        {
+                            cbAudioInputFormat.Text = defaultValue;
+                        }
+                    }
+
+                    foreach (string line in deviceItem.Lines)
+                    {
+                        cbAudioInputLine.Items.Add(line);
+                    }
+
+                    if (cbAudioInputLine.Items.Count > 0)
+                    {
+                        cbAudioInputLine.SelectedIndex = 0;
+                    }
+
+                    btAudioInputDeviceSettings.IsEnabled = deviceItem.DialogDefault;
                 }
             }
         }
@@ -1428,7 +1410,7 @@ namespace Main_Demo
                     VideoCapture1.Video_CaptureDevice.FrameRate = 25;
                 }
 
-                VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.IsChecked == true;               
+                VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.IsChecked == true;
             }
 
             bool captureMode = this.VideoCapture1.Mode == VideoCaptureMode.AudioCapture
@@ -2860,7 +2842,6 @@ namespace Main_Demo
         private void tbAudioBalance_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void btSelectWMVProfileNetwork_Click(object sender, RoutedEventArgs e)
@@ -2990,7 +2971,7 @@ namespace Main_Demo
 
         private void cbMPEGVideoDecoder_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbMPEGVideoDecoder.SelectedIndex < 1 || e == null || e.AddedItems.Count > 0)
+            if (cbMPEGVideoDecoder.SelectedIndex < 1 || e == null || e.AddedItems.Count == 0)
             {
                 btMPEGVidDecSetting.IsEnabled = false;
             }
@@ -3004,7 +2985,7 @@ namespace Main_Demo
 
         private void cbMPEGAudioDecoder_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbMPEGAudioDecoder.SelectedIndex < 1 || e == null || e.AddedItems.Count > 0)
+            if (cbMPEGAudioDecoder.SelectedIndex < 1 || e == null || e.AddedItems.Count == 0)
             {
                 btMPEGAudDecSettings.IsEnabled = false;
             }
@@ -3136,7 +3117,7 @@ namespace Main_Demo
             {
                 VideoCapture1.Motion_Detection = new MotionDetectionSettings
                 {
-                    Enabled = cbMotDetEnabled.IsChecked == true,
+                    Enabled = true,
                     Compare_Red = cbCompareRed.IsChecked == true,
                     Compare_Green = cbCompareGreen.IsChecked == true,
                     Compare_Blue = cbCompareBlue.IsChecked == true,
@@ -3279,7 +3260,7 @@ namespace Main_Demo
             VideoCapture1?.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (ushort)tbAud3DSound.Value);
         }
 
-        private void tbAudDynAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void tbAudDynAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e) //-V3013
         {
             VideoCapture1?.Audio_Effects_DynamicAmplify(
                 -1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (int)tbAudAttack.Value, (int)tbAudDynAmp.Value, (int)tbAudRelease.Value);
@@ -4801,8 +4782,6 @@ namespace Main_Demo
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
             {
-                var connected = false;
-
                 try
                 {
                     btONVIFConnect.IsEnabled = false;
@@ -4865,11 +4844,7 @@ namespace Main_Demo
                 finally
                 {
                     btONVIFConnect.IsEnabled = true;
-
-                    if (!connected)
-                    {
-                        btONVIFConnect.Content = "Connect";
-                    }
+                    btONVIFConnect.Content = "Connect";
                 }
             }
             else
@@ -4900,7 +4875,7 @@ namespace Main_Demo
                 onvifPtzX = onvifPtzRanges.MinX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
@@ -4923,7 +4898,7 @@ namespace Main_Demo
                 onvifPtzX = onvifPtzRanges.MaxX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFUp_Click(object sender, RoutedEventArgs e)
@@ -4941,7 +4916,7 @@ namespace Main_Demo
                 onvifPtzY = onvifPtzRanges.MinY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFDown_Click(object sender, RoutedEventArgs e)
@@ -4959,7 +4934,7 @@ namespace Main_Demo
                 onvifPtzY = onvifPtzRanges.MaxY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
@@ -4977,7 +4952,7 @@ namespace Main_Demo
                 onvifPtzZoom = onvifPtzRanges.MaxZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
@@ -4995,7 +4970,7 @@ namespace Main_Demo
                 onvifPtzZoom = onvifPtzRanges.MinZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void pnPIPChromaKeyColor_MouseDown(object sender, MouseButtonEventArgs e)
@@ -5302,7 +5277,7 @@ namespace Main_Demo
                     }
                 case 11:
                     {
-                        if (customFormatSettingsDialog == null)
+                        if (customFormatSettingsDialog == null) //-V3139
                         {
                             customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray());
                         }

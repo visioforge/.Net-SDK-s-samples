@@ -140,7 +140,7 @@ namespace Video_From_Images
                 edOutput.Text = SaveDialog1.FileName;
             }
         }
-        
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
@@ -295,7 +295,7 @@ namespace Video_From_Images
             mmLog.Clear();
 
             VideoEdit1.Debug_Mode = cbDebugMode.Checked;
-            
+
             VideoEdit1.Video_Resize = cbResize.Checked;
 
             if (VideoEdit1.Video_Resize)
@@ -426,7 +426,7 @@ namespace Video_From_Images
                         }
                 }
             }
-            
+
             VideoEdit1.Video_Effects_Enabled = true;
             VideoEdit1.Video_Effects_Clear();
             lbLogos.Items.Clear();
@@ -508,7 +508,7 @@ namespace Video_From_Images
                     }
                 case 7:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 8:
@@ -636,7 +636,7 @@ namespace Video_From_Images
                         gifSettingsDialog.ShowDialog(this);
 
                         break;
-                    }                
+                    }
             }
         }
 
@@ -684,6 +684,11 @@ namespace Video_From_Images
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoEdit1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

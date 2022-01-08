@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+
+            videoCapture1?.Dispose();
+            videoCapture1 = null;
+
             base.Dispose(disposing);
         }
 

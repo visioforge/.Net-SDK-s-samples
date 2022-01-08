@@ -135,7 +135,7 @@ namespace Video_Capture_Demo
                 videoCapture.Video_CaptureDevice.Format = videoFormat.Name;
             }
 
-            videoCapture.Video_CaptureDevice.FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture); 
+            videoCapture.Video_CaptureDevice.FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture);
 
             if (audioCaptureDeviceIndex == 0)
             {
@@ -144,12 +144,12 @@ namespace Video_Capture_Demo
             else
             {
                 videoCapture.Video_CaptureDevice.IsAudioSource = false;
-                videoCapture.Audio_CaptureDevice = new AudioCaptureSource(audioCaptureDevices[audioCaptureDeviceIndex - 1].Name); 
+                videoCapture.Audio_CaptureDevice = new AudioCaptureSource(audioCaptureDevices[audioCaptureDeviceIndex - 1].Name);
                 videoCapture.Audio_CaptureDevice.Format_UseBest = false;
                 videoCapture.Audio_CaptureDevice.Format = audioFormat;
             }
 
-           
+
 
             switch (mode)
             {
@@ -193,6 +193,8 @@ namespace Video_Capture_Demo
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
             videoCapture.Stop();
+
+            videoCapture.Dispose();
         }
 
         private static void VideoCapture_OnError(object sender, ErrorsEventArgs e)

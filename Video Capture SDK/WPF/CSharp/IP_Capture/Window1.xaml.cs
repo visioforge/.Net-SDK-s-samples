@@ -50,11 +50,11 @@ namespace IP_Capture
         private GIFSettingsDialog gifSettingsDialog;
 
         private SaveFileDialog screenshotSaveDialog = new SaveFileDialog
-                                                                   {
-                                                                       FileName = "image.jpg",
-                                                                       Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-                                                                       InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
-                                                                   };
+        {
+            FileName = "image.jpg",
+            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
+            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+        };
 
         private Timer tmRecording = new Timer(1000);
 
@@ -104,7 +104,7 @@ namespace IP_Capture
         }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
-        {            
+        {
             CreateEngine();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version})";
@@ -119,7 +119,7 @@ namespace IP_Capture
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
-        
+
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -154,7 +154,7 @@ namespace IP_Capture
                 edOutput.Text = saveFileDialog1.FileName;
             }
         }
-        
+
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -175,7 +175,7 @@ namespace IP_Capture
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -233,7 +233,7 @@ namespace IP_Capture
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (onvifControl != null)
@@ -404,7 +404,7 @@ namespace IP_Capture
                         }
                 }
             }
-            
+
             VideoCapture1.Video_Effects_Enabled = true;
             VideoCapture1.Video_Effects_Clear();
             lbLogos.Items.Clear();
@@ -488,8 +488,6 @@ namespace IP_Capture
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
             {
-                var connected = false;
-
                 try
                 {
                     btONVIFConnect.IsEnabled = false;
@@ -552,11 +550,7 @@ namespace IP_Capture
                 finally
                 {
                     btONVIFConnect.IsEnabled = true;
-
-                    if (!connected)
-                    {
-                        btONVIFConnect.Content = "Connect";
-                    }
+                    btONVIFConnect.Content = "Connect";
                 }
             }
             else
@@ -587,7 +581,7 @@ namespace IP_Capture
                 onvifPtzX = onvifPtzRanges.MinX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
@@ -610,7 +604,7 @@ namespace IP_Capture
                 onvifPtzX = onvifPtzRanges.MaxX;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFUp_Click(object sender, RoutedEventArgs e)
@@ -628,7 +622,7 @@ namespace IP_Capture
                 onvifPtzY = onvifPtzRanges.MinY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFDown_Click(object sender, RoutedEventArgs e)
@@ -646,7 +640,7 @@ namespace IP_Capture
                 onvifPtzY = onvifPtzRanges.MaxY;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
@@ -664,7 +658,7 @@ namespace IP_Capture
                 onvifPtzZoom = onvifPtzRanges.MaxZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
@@ -682,7 +676,7 @@ namespace IP_Capture
                 onvifPtzZoom = onvifPtzRanges.MinZoom;
             }
 
-            onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
         }
 
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -701,7 +695,7 @@ namespace IP_Capture
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -1027,6 +1021,11 @@ namespace IP_Capture
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

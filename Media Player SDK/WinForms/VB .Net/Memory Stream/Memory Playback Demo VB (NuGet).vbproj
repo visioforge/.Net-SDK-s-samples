@@ -3,8 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5026A90B-4C06-4167-A8E1-A8BA0070404F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -14,8 +13,7 @@
     <MyType>WindowsForms</MyType>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
     <RuntimeIdentifiers>win;win7-x64;win7-x86</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -112,11 +110,11 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.1.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.1.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="15.1.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.1.21" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.1.21" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x86" Version="15.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.1.23" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

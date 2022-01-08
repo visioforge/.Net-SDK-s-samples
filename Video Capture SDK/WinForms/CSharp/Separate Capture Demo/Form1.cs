@@ -188,7 +188,7 @@ namespace Separate_Capture_Demo
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
             VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
             VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
-            
+
             VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
             VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
             VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked;
@@ -297,7 +297,6 @@ namespace Separate_Capture_Demo
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
@@ -373,7 +372,7 @@ namespace Separate_Capture_Demo
 
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
-        }        
+        }
 
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
@@ -474,7 +473,7 @@ namespace Separate_Capture_Demo
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -504,7 +503,7 @@ namespace Separate_Capture_Demo
 
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
-        
+
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -539,7 +538,7 @@ namespace Separate_Capture_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:

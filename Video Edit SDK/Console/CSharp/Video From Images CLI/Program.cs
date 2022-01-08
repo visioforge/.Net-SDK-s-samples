@@ -37,7 +37,7 @@ namespace Video_From_Images_CLI
                 Console.WriteLine(@"Folder with images does not exists: " + options.InputFolder);
                 return;
             }
-            
+
             var files = new List<string>();
             AddFiles(options.InputFolder, "*.jpg", ref files);
             AddFiles(options.InputFolder, "*.jpeg", ref files);
@@ -45,7 +45,7 @@ namespace Video_From_Images_CLI
             AddFiles(options.InputFolder, "*.bmp", ref files);
             AddFiles(options.InputFolder, "*.gif", ref files);
             AddFiles(options.InputFolder, "*.tif", ref files);
-            
+
             if (files.Count == 0)
             {
                 Console.WriteLine(@"Folder with images is empty or do not contains supported formats: " + options.InputFolder);
@@ -57,28 +57,28 @@ namespace Video_From_Images_CLI
                 File.Delete(options.OutputFile);
             }
 
-            VisioForge.Core.VideoEdit.VideoEditCore ve = new VisioForge.Core.VideoEdit.VideoEditCore();
+            var videoEdit = new VisioForge.Core.VideoEdit.VideoEditCore();
 
             int insertTime = 0;
-            
+
             int videoWidth = Convert.ToInt32(options.Resolution[0]);
             int videoHeight = Convert.ToInt32(options.Resolution[1]);
 
             foreach (string img in files)
             {
-                ve.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime), VideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
+                videoEdit.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime), VideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
                 insertTime += 2000;
             }
 
-            ve.Video_Effects_Clear();
-            ve.Mode = VideoEditMode.Convert;
+            videoEdit.Video_Effects_Clear();
+            videoEdit.Mode = VideoEditMode.Convert;
 
-            ve.Video_Resize = true;
-            ve.Video_Resize_Width = videoWidth;
-            ve.Video_Resize_Height = videoHeight; 
+            videoEdit.Video_Resize = true;
+            videoEdit.Video_Resize_Width = videoWidth;
+            videoEdit.Video_Resize_Height = videoHeight;
 
-            ve.Video_FrameRate = 25;
-            ve.Video_Renderer = new VideoRendererSettings
+            videoEdit.Video_FrameRate = 25;
+            videoEdit.Video_Renderer = new VideoRendererSettings
             {
                 VideoRenderer = VideoRendererMode.None,
                 StretchMode = VideoRendererStretchMode.Letterbox
@@ -92,35 +92,38 @@ namespace Video_From_Images_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    ve.Output_Format = new MP4Output();
+                    videoEdit.Output_Format = new MP4Output();
                     break;
                 case "avi":
-                    ve.Output_Format = new AVIOutput();
+                    videoEdit.Output_Format = new AVIOutput();
                     break;
                 case "wmv":
-                    ve.Output_Format = new WMVOutput();
+                    videoEdit.Output_Format = new WMVOutput();
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    ve.Output_Format = new MP4Output();
+                    videoEdit.Output_Format = new MP4Output();
                     break;
             }
 
-            ve.Output_Filename = options.OutputFile;
+            videoEdit.Output_Filename = options.OutputFile;
 
-            ve.Video_Effects_Enabled = true;
-            ve.Video_Effects_Clear();
+            videoEdit.Video_Effects_Enabled = true;
+            videoEdit.Video_Effects_Clear();
 
-            ve.OnError += VideoEdit1_OnError;
-            ve.OnProgress += VeOnOnProgress;
+            videoEdit.OnError += VideoEdit1_OnError;
+            videoEdit.OnProgress += VeOnOnProgress;
 
-            ve.ConsoleUsage = true;
+            videoEdit.ConsoleUsage = true;
 
-            ve.Start();
+            videoEdit.Start();
 
-            Console.WriteLine(@"Video saved to: " + ve.Output_Filename);
+            Console.WriteLine(@"Video saved to: " + videoEdit.Output_Filename);
             Console.Write("Press any key to exit.");
             Console.ReadKey();
+
+            videoEdit.Stop();
+            videoEdit.Dispose();
         }
 
         private static void VeOnOnProgress(object sender, ProgressEventArgs progressEventArgs)

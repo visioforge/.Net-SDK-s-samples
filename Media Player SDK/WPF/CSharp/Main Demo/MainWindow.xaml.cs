@@ -109,7 +109,7 @@ namespace Main_Demo
 
             timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick +=
-                delegate(object s, EventArgs a)
+                delegate (object s, EventArgs a)
                 {
                     timer1_Tick();
                 };
@@ -339,7 +339,7 @@ namespace Main_Demo
                 }
             }
         }
-        
+
         private void btSelectScreenshotsFolder_Click(object sender, RoutedEventArgs e)
         {
             if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -651,7 +651,7 @@ namespace Main_Demo
                 {
                     return;
                 }
-                
+
                 if (count > 1)
                 {
                     cbAudioStream2.IsEnabled = true;
@@ -686,7 +686,7 @@ namespace Main_Demo
 
                 int count3 = count2;
 
-                if ((count2 + count >= 4) && (count3 > 0))
+                if (count2 + count >= 4)
                 {
                     cbAudioStream4.IsEnabled = true;
                     cbAudioStream4.IsChecked = true;
@@ -1007,7 +1007,7 @@ namespace Main_Demo
             {
                 MediaPlayer1.Audio_VUMeter_Pro_Enabled = false;
             }
-            
+
             // Video effects CPU
             AddVideoEffects();
 
@@ -1590,7 +1590,7 @@ namespace Main_Demo
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.IsChecked == true);
         }
-        
+
         private void tbAud3DSound_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaPlayer1?.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (int)tbAud3DSound.Value);
@@ -1692,23 +1692,23 @@ namespace Main_Demo
             if (cbMotDetEnabled.IsChecked == true)
             {
                 MediaPlayer1.Motion_Detection = new MotionDetectionSettings
-                                                    {
-                                                        Enabled = cbMotDetEnabled.IsChecked == true,
-                                                        Compare_Red = cbCompareRed.IsChecked == true,
-                                                        Compare_Green = cbCompareGreen.IsChecked == true,
-                                                        Compare_Blue = cbCompareBlue.IsChecked == true,
-                                                        Compare_Greyscale = cbCompareGreyscale.IsChecked == true,
-                                                        Highlight_Color =
+                {
+                    Enabled = true,
+                    Compare_Red = cbCompareRed.IsChecked == true,
+                    Compare_Green = cbCompareGreen.IsChecked == true,
+                    Compare_Blue = cbCompareBlue.IsChecked == true,
+                    Compare_Greyscale = cbCompareGreyscale.IsChecked == true,
+                    Highlight_Color =
                                                             (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
-                                                        Highlight_Enabled = cbMotDetHLEnabled.IsChecked == true,
-                                                        Highlight_Threshold = (int)tbMotDetHLThreshold.Value,
-                                                        FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
-                                                        Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
-                                                        Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
-                                                        DropFrames_Enabled =
+                    Highlight_Enabled = cbMotDetHLEnabled.IsChecked == true,
+                    Highlight_Threshold = (int)tbMotDetHLThreshold.Value,
+                    FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
+                    Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
+                    Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
+                    DropFrames_Enabled =
                                                             cbMotDetDropFramesEnabled.IsChecked == true,
-                                                        DropFrames_Threshold = (int)tbMotDetDropFramesThreshold.Value
-                                                    };
+                    DropFrames_Threshold = (int)tbMotDetDropFramesThreshold.Value
+                };
                 MediaPlayer1.MotionDetection_Update();
             }
             else

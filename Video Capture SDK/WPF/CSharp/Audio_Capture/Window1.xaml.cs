@@ -213,7 +213,6 @@ namespace Audio_Capture
         private void tbAudioBalance_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, RoutedEventArgs e)
@@ -639,7 +638,7 @@ namespace Audio_Capture
                     }
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg"); //-V3139
                         break;
                     }
                 case 4:

@@ -162,7 +162,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
                     cbVideoInputFormat.SelectedIndex = 0;
                     cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
-                
+
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
             }
         }
@@ -219,7 +219,6 @@ namespace VisioForge_SDK_Video_Capture_Demo
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
-            VideoCapture1.Audio_OutputDevice_Balance_Get();
         }
 
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
@@ -710,7 +709,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -894,6 +893,11 @@ namespace VisioForge_SDK_Video_Capture_Demo
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

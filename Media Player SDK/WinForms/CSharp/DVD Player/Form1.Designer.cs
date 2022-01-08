@@ -19,6 +19,10 @@ namespace DVD_Player_Demo
             {
                 components.Dispose();
             }
+
+            MediaPlayer1?.Dispose();
+            MediaPlayer1 = null;
+
             base.Dispose(disposing);
         }
 
@@ -106,7 +110,7 @@ namespace DVD_Player_Demo
             // 
             // edFilename
             // 
-            this.edFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.edFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edFilename.Location = new System.Drawing.Point(12, 25);
             this.edFilename.Name = "edFilename";

@@ -56,7 +56,7 @@ namespace Screen_Capture
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
-        private readonly System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         // Dialogs
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -83,6 +83,9 @@ namespace Screen_Capture
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+
+            tmRecording?.Dispose();
+            tmRecording = null;
         }
 
         private async void btScreenCaptureUpdate_Click(object sender, RoutedEventArgs e)
@@ -92,7 +95,7 @@ namespace Screen_Capture
                 Convert.ToInt32(edScreenTop.Text),
                 cbScreenCapture_GrabMouseCursor.IsChecked == true);
         }
-        
+
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -171,7 +174,7 @@ namespace Screen_Capture
 
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
-        
+
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -182,7 +185,7 @@ namespace Screen_Capture
             wmvSettingsDialog.WMA = false;
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
-        
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -222,7 +225,7 @@ namespace Screen_Capture
 
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
-        
+
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -240,7 +243,7 @@ namespace Screen_Capture
                 aviOutput.MP3 = mp3Output;
             }
         }
-        
+
         private ScreenCaptureSourceSettings CreateScreenCaptureSource(int screenID, bool forcedFullScreen)
         {
             var source = new ScreenCaptureSourceSettings();
@@ -431,7 +434,7 @@ namespace Screen_Capture
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -683,7 +686,7 @@ namespace Screen_Capture
                     }
                 case 2:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4"); //-V3139
                         break;
                     }
                 case 3:
@@ -899,6 +902,11 @@ namespace Screen_Capture
             if (lbLogos.SelectedItem != null)
             {
                 var effect = VideoCapture1.Video_Effects_Get((string)lbLogos.SelectedItem);
+                if (effect == null)
+                {
+                    return;
+                }
+
                 if (effect.GetEffectType() == VideoEffectType.TextLogo)
                 {
                     var dlg = new TextLogoSettingsDialog();

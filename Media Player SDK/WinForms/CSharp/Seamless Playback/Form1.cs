@@ -26,20 +26,20 @@
         private void CreateEngine1()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
-            MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnError += MediaPlayer_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
         private void CreateEngine2()
         {
             MediaPlayer2 = new MediaPlayerCore(VideoView2 as IVideoView);
-            MediaPlayer2.OnError += MediaPlayer2_OnError;
+            MediaPlayer2.OnError += MediaPlayer_OnError;
             MediaPlayer2.OnStop += MediaPlayer2_OnStop;
         }
 
         private void DestroyEngine1()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            MediaPlayer1.OnError -= MediaPlayer_OnError;
             MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
             MediaPlayer1.Dispose();
@@ -48,7 +48,7 @@
 
         private void DestroyEngine2()
         {
-            MediaPlayer2.OnError -= MediaPlayer2_OnError;
+            MediaPlayer2.OnError -= MediaPlayer_OnError;
             MediaPlayer2.OnStop -= MediaPlayer2_OnStop;
 
             MediaPlayer2.Dispose();
@@ -109,7 +109,7 @@
             }
 
             lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-            
+
             timer1.Tag = 0;
         }
 
@@ -265,15 +265,7 @@
             Process.Start(startInfo);
         }
 
-        private void MediaPlayer2_OnError(object sender, ErrorsEventArgs e)
-        {
-            Invoke((Action)(() =>
-                                   {
-                                       mmLog.Text += e.Message + Environment.NewLine;
-                                   }));
-        }
-
-        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        private void MediaPlayer_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
