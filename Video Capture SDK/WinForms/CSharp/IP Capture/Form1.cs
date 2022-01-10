@@ -87,7 +87,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {
@@ -616,9 +616,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -691,7 +689,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);

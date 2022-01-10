@@ -145,7 +145,7 @@
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }

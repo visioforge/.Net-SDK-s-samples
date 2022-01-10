@@ -195,14 +195,14 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
             CreateEngine();
 
-            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+            Title += $" (SDK v{VideoCapture1.SDK_Version()})";
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
             cbOutputFormat.SelectedIndex = 2;
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 VideoInputDevices.Add(device.Name);
             }
@@ -214,7 +214,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
             cbVideoInputDevice_SelectionChanged(null, null);
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 AudioInputDevices.Add(device.Name);
             }
@@ -230,7 +230,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             if (!string.IsNullOrEmpty(cbAudioInputDevice.SelectedItem.ToString()))
             {
                 var deviceItem =
-                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedItem.ToString());
+                    VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedItem.ToString());
                 if (deviceItem != null)
                 {
                     foreach (var line in deviceItem.Lines)
@@ -246,7 +246,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             }
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
             {
                 AudioOutputDevices.Add(audioOutputDevice);
 
@@ -505,7 +505,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
                 VideoInputFormats.Clear();
 
                 var deviceItem =
-                    VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                    VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -532,7 +532,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
             {
                 AudioInputFormats.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -641,9 +641,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -849,7 +847,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedItem.ToString());
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedItem.ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -924,7 +922,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog();

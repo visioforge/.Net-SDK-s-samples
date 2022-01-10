@@ -45,7 +45,7 @@ namespace VideoEdit_CS_Demo
         private VideoEditCore VideoEdit1;
 
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
-        
+
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
         private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
@@ -146,11 +146,11 @@ namespace VideoEdit_CS_Demo
                     {
                         if (cbInsertAfterPreviousFile.Checked)
                         {
-                            await VideoEdit1.Input_AddImageFileAsync(s,  TimeSpan.FromMilliseconds(2000), null, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), null, VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                         }
                         else
                         {
-                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds( 2000), TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)), VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddImageFileAsync(s, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), VideoEditStretchMode.Letterbox, 0, customWidth, customHeight);
                         }
                     }
                     else
@@ -163,8 +163,8 @@ namespace VideoEdit_CS_Demo
                         {
                             await VideoEdit1.Input_AddImageFileAsync(
                                 s,
-                                TimeSpan.FromMilliseconds( Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)),
-                                TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)),
                                 VideoEditStretchMode.Letterbox,
                                 0,
                                 customWidth,
@@ -218,8 +218,8 @@ namespace VideoEdit_CS_Demo
                         }
                         else
                         {
-                            await VideoEdit1.Input_AddVideoFileAsync(videoFile, TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)), 0, customWidth, customHeight);
-                            await VideoEdit1.Input_AddAudioFileAsync(audioFile, TimeSpan.FromMilliseconds( Convert.ToInt32(edInsertTime.Text)), 0);
+                            await VideoEdit1.Input_AddVideoFileAsync(videoFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), 0, customWidth, customHeight);
+                            await VideoEdit1.Input_AddAudioFileAsync(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)), 0);
                         }
                     }
                     else
@@ -290,7 +290,7 @@ namespace VideoEdit_CS_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoEdit1.SDK_Version})";
+            Text += $" (SDK v{VideoEdit1.SDK_Version()})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
@@ -374,7 +374,7 @@ namespace VideoEdit_CS_Demo
                 waveformPainter2.Boost = tbVUMeterBoost.Value / 10.0F;
             }
         }
-        
+
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -431,7 +431,7 @@ namespace VideoEdit_CS_Demo
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
@@ -466,7 +466,7 @@ namespace VideoEdit_CS_Demo
 
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
-               
+
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -511,10 +511,7 @@ namespace VideoEdit_CS_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(
-                    VideoEdit1.Video_Codecs.ToArray(), 
-                    VideoEdit1.Audio_Codecs.ToArray(), 
-                    VideoEdit1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref customOutput);
@@ -534,9 +531,7 @@ namespace VideoEdit_CS_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoEdit1.Video_Codecs.ToArray(), 
-                    VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -553,7 +548,7 @@ namespace VideoEdit_CS_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref mkvOutput);
@@ -727,9 +722,9 @@ namespace VideoEdit_CS_Demo
             mmLog.Clear();
 
             VideoEdit1.Mode = (VideoEditMode)cbMode.SelectedIndex;
-            
+
             VideoEdit1.Video_Resize = cbResize.Checked;
-            
+
             if (VideoEdit1.Video_Resize)
             {
                 VideoEdit1.Video_Resize_Width = Convert.ToInt32(edWidth.Text);
@@ -763,7 +758,7 @@ namespace VideoEdit_CS_Demo
             ConfigureVideoRenderer();
 
             ConfigureNetworkStreaming();
-            
+
             VideoEdit1.Output_Filename = edOutput.Text;
 
             VideoEditOutputFormat outputFormat = VideoEditOutputFormat.AVI;
@@ -1063,7 +1058,7 @@ namespace VideoEdit_CS_Demo
                 cbFadeInEnabled_CheckedChanged(sender, e);
                 cbFadeOutEnabled_CheckedChanged(sender, e);
             }
-            
+
             // Object detection
             ConfigureObjectDetection();
 
@@ -1343,13 +1338,13 @@ namespace VideoEdit_CS_Demo
 
             volumeMeter1.Clear();
             volumeMeter2.Clear();
-            
+
             VideoEdit1.Video_Effects_Clear();
 
             lbImageLogos.Items.Clear();
             lbTextLogos.Items.Clear();
         }
-        
+
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -1387,7 +1382,7 @@ namespace VideoEdit_CS_Demo
                 }
             }
         }
-        
+
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             await VideoEdit1.StopAsync();
@@ -1813,21 +1808,21 @@ namespace VideoEdit_CS_Demo
             if (cbMotDetEnabled.Checked)
             {
                 VideoEdit1.Motion_Detection = new MotionDetectionSettings
-                                                  {
-                                                      Enabled = cbMotDetEnabled.Checked,
-                                                      Compare_Red = cbCompareRed.Checked,
-                                                      Compare_Green = cbCompareGreen.Checked,
-                                                      Compare_Blue = cbCompareBlue.Checked,
-                                                      Compare_Greyscale = cbCompareGreyscale.Checked,
-                                                      Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
-                                                      Highlight_Enabled = cbMotDetHLEnabled.Checked,
-                                                      Highlight_Threshold = tbMotDetHLThreshold.Value,
-                                                      FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
-                                                      Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
-                                                      Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
-                                                      DropFrames_Enabled = cbMotDetDropFramesEnabled.Checked,
-                                                      DropFrames_Threshold = tbMotDetDropFramesThreshold.Value
-                                                  };
+                {
+                    Enabled = cbMotDetEnabled.Checked,
+                    Compare_Red = cbCompareRed.Checked,
+                    Compare_Green = cbCompareGreen.Checked,
+                    Compare_Blue = cbCompareBlue.Checked,
+                    Compare_Greyscale = cbCompareGreyscale.Checked,
+                    Highlight_Color = (MotionCHLColor)cbMotDetHLColor.SelectedIndex,
+                    Highlight_Enabled = cbMotDetHLEnabled.Checked,
+                    Highlight_Threshold = tbMotDetHLThreshold.Value,
+                    FrameInterval = Convert.ToInt32(edMotDetFrameInterval.Text),
+                    Matrix_Height = Convert.ToInt32(edMotDetMatrixHeight.Text),
+                    Matrix_Width = Convert.ToInt32(edMotDetMatrixWidth.Text),
+                    DropFrames_Enabled = cbMotDetDropFramesEnabled.Checked,
+                    DropFrames_Threshold = tbMotDetDropFramesThreshold.Value
+                };
                 VideoEdit1.MotionDetection_Update();
             }
             else
@@ -2111,7 +2106,7 @@ namespace VideoEdit_CS_Demo
                 VideoEdit1.ChromaKey.Dispose();
                 VideoEdit1.ChromaKey = null;
             }
-            
+
             if (cbChromaKeyEnabled.Checked)
             {
                 if (!File.Exists(edChromaKeyImage.Text))
@@ -2121,11 +2116,11 @@ namespace VideoEdit_CS_Demo
                 }
 
                 VideoEdit1.ChromaKey = new ChromaKeySettings(new Bitmap(edChromaKeyImage.Text))
-                                           {
-                                               Smoothing = tbChromaKeySmoothing.Value / 1000f,
-                                               ThresholdSensitivity = tbChromaKeyThresholdSensitivity.Value / 1000f,
-                                               Color = pnChromaKeyColor.BackColor
-                                           };
+                {
+                    Smoothing = tbChromaKeySmoothing.Value / 1000f,
+                    ThresholdSensitivity = tbChromaKeyThresholdSensitivity.Value / 1000f,
+                    Color = pnChromaKeyColor.BackColor
+                };
             }
             else
             {
@@ -2245,7 +2240,7 @@ namespace VideoEdit_CS_Demo
             {
                 // going normal screen
                 fullScreen = false;
-                
+
                 // restoring window
                 Left = windowLeft;
                 Top = windowTop;
@@ -2906,7 +2901,7 @@ namespace VideoEdit_CS_Demo
 
         private void VideoEdit1_OnAudioVUMeter(object sender, VUMeterEventArgs e)
         {
-            if (VideoEdit1.State == PlaybackState.Free)
+            if (VideoEdit1.State() == PlaybackState.Free)
             {
                 return;
             }
@@ -2938,7 +2933,7 @@ namespace VideoEdit_CS_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);
@@ -2973,7 +2968,7 @@ namespace VideoEdit_CS_Demo
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
@@ -3051,7 +3046,7 @@ namespace VideoEdit_CS_Demo
                     {
                         if (customFormatSettingsDialog == null)
                         {
-                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
                         }
 
                         customFormatSettingsDialog.ShowDialog(this);
@@ -3231,7 +3226,7 @@ namespace VideoEdit_CS_Demo
                     }
             }
         }
-        
+
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -3349,12 +3344,12 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_FADE_IN, cbFadeInEnabled.Checked);
 
             VideoEdit1.Audio_Effects_Fades(
-                -1, 
-                AUDIO_EFFECT_ID_FADE_IN, 
+                -1,
+                AUDIO_EFFECT_ID_FADE_IN,
                 0,
                 100,
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStartTime.Text)),
-                TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStopTime.Text)), 
+                TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStopTime.Text)),
                 false);
         }
 

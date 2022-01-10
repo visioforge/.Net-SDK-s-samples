@@ -82,7 +82,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -201,9 +201,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -416,14 +414,14 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {
                 UpdateRecordingTime();
             };
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -476,7 +474,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);

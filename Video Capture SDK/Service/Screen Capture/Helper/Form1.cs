@@ -52,7 +52,7 @@ namespace ScreenCaptureServiceHelper
 
             var wmvOutput = new WMVOutput();
             wmvOutput.Mode = WMVMode.InternalProfile;
-            wmvOutput.Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles[5];
+            wmvOutput.Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles()[5];
             VideoCapture1.Output_Format = wmvOutput;
 
             VideoCapture1.OnError -= VideoCapture1_OnError;
@@ -124,7 +124,7 @@ namespace ScreenCaptureServiceHelper
             if (args.Length > 0 && args[0] == "-q")
             {
                 //System.Diagnostics.Debugger.Launch();
-                
+
                 Win32API.SendMessage(HWND_BROADCAST, VF_SCS_EXIT_COMMAND, (IntPtr)0, (IntPtr)0);
             }
             else

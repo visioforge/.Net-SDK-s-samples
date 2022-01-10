@@ -160,7 +160,7 @@ namespace Main_Demo
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
             CreateEngine();
-            Title += $" (SDK v{VideoEdit1.SDK_Version})";
+            Title += $" (SDK v{VideoEdit1.SDK_Version()})";
 
             // font for text logo
             fontDialog.Color = System.Drawing.Color.White;
@@ -280,7 +280,7 @@ namespace Main_Demo
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
@@ -360,7 +360,7 @@ namespace Main_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref customOutput);
@@ -380,7 +380,7 @@ namespace Main_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -397,7 +397,7 @@ namespace Main_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref mkvOutput);
@@ -1577,7 +1577,7 @@ namespace Main_Demo
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            if (VideoEdit1.State == PlaybackState.Play)
+            if (VideoEdit1.State() == PlaybackState.Play)
             {
                 VideoEdit1.Stop();
             }
@@ -3038,7 +3038,7 @@ namespace Main_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);
@@ -3073,7 +3073,7 @@ namespace Main_Demo
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
@@ -3151,7 +3151,7 @@ namespace Main_Demo
                     {
                         if (customFormatSettingsDialog == null)
                         {
-                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
                         }
 
                         customFormatSettingsDialog.ShowDialog(this);

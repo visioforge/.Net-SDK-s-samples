@@ -30,7 +30,7 @@ namespace Video_Capture_Demo
             videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             // get video capture devices
-            var videoCaptureDevices = videoCapture.Video_CaptureDevices;
+            var videoCaptureDevices = videoCapture.Video_CaptureDevices();
 
             Console.WriteLine(@"Video capture devices: ");
             for (int i = 0; i < videoCaptureDevices.Count; i++)
@@ -72,7 +72,7 @@ namespace Video_Capture_Demo
             }
 
             // get audio capture devices
-            var audioCaptureDevices = videoCapture.Audio_CaptureDevices;
+            var audioCaptureDevices = videoCapture.Audio_CaptureDevices();
 
             Console.WriteLine(@"Audio capture devices: ");
             Console.WriteLine(@"0: Use video capture device if possible.");

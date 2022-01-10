@@ -105,7 +105,7 @@ namespace Memory_Stream_Demo
 
                 // specifying settings
                 MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length);
-            }            
+            }
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
@@ -135,7 +135,7 @@ namespace Memory_Stream_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 

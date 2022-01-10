@@ -66,7 +66,7 @@ namespace multiple_ap_cams
 
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
 
-            var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+            var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
@@ -125,7 +125,7 @@ namespace multiple_ap_cams
 
             VideoCapture2.Video_CaptureDevice = new VideoCaptureSource(cbCamera2.Text);
 
-            var deviceItem = VideoCapture2.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+            var deviceItem = VideoCapture2.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;
@@ -180,7 +180,7 @@ namespace multiple_ap_cams
             CreateEngine1();
             CreateEngine2();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             tmRecording1.Elapsed += (senderx, args) =>
             {
@@ -192,7 +192,7 @@ namespace multiple_ap_cams
                 UpdateRecordingTime2();
             };
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbCamera1.Items.Add(device.Name);
                 cbCamera2.Items.Add(device.Name);
@@ -252,7 +252,7 @@ namespace multiple_ap_cams
             {
                 cbVideoInputFormat1.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -276,7 +276,7 @@ namespace multiple_ap_cams
             {
                 cbVideoInputFormat2.Items.Clear();
 
-                var deviceItem = VideoCapture2.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+                var deviceItem = VideoCapture2.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -303,7 +303,7 @@ namespace multiple_ap_cams
 
             if (cbCamera1.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -337,7 +337,7 @@ namespace multiple_ap_cams
 
             if (cbCamera2.SelectedIndex != -2)
             {
-                var deviceItem = VideoCapture2.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+                var deviceItem = VideoCapture2.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
                 if (deviceItem == null)
                 {
                     return;

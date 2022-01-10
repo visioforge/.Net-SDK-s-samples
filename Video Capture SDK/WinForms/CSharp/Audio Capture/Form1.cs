@@ -60,7 +60,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
             cbMode.SelectedIndex = 0;
 
             tmRecording.Elapsed += (senderx, args) =>
@@ -68,7 +68,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                 UpdateRecordingTime();
             };
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -83,7 +83,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string line in deviceItem.Lines)
@@ -99,7 +99,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -141,7 +141,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -338,7 +338,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1);
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
@@ -578,7 +578,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1);
                         }
 
                         pcmSettingsDialog.ShowDialog(this);

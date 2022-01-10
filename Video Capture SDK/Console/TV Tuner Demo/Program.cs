@@ -30,7 +30,7 @@ namespace TV_Tuner_Demo
             videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
             // get video capture devices
-            var videoCaptureDevices = videoCapture.Video_CaptureDevices;
+            var videoCaptureDevices = videoCapture.Video_CaptureDevices();
 
             Console.WriteLine(@"Video capture devices: ");
             for (int i = 0; i < videoCaptureDevices.Count; i++)
@@ -42,7 +42,7 @@ namespace TV_Tuner_Demo
             int videoCaptureDeviceIndex = Convert.ToInt32(Console.ReadLine());
 
             // get audio capture devices
-            var audioCaptureDevices = videoCapture.Audio_CaptureDevices;
+            var audioCaptureDevices = videoCapture.Audio_CaptureDevices();
 
             Console.WriteLine(@"Audio capture devices: ");
             Console.WriteLine(@"0: Use video capture device if possible.");
@@ -61,17 +61,17 @@ namespace TV_Tuner_Demo
             var tunerFormats = new List<string>();
             var tunerCountries = new List<string>();
 
-            foreach (string tunerDevice in videoCapture.TVTuner_Devices)
+            foreach (string tunerDevice in videoCapture.TVTuner_Devices())
             {
                 tuners.Add(tunerDevice);
             }
 
-            foreach (string tunerTVFormat in videoCapture.TVTuner_TVFormats)
+            foreach (string tunerTVFormat in videoCapture.TVTuner_TVFormats())
             {
                 tunerFormats.Add(tunerTVFormat);
             }
 
-            foreach (string tunerCountry in videoCapture.TVTuner_Countries)
+            foreach (string tunerCountry in videoCapture.TVTuner_Countries())
             {
                 tunerCountries.Add(tunerCountry);
             }

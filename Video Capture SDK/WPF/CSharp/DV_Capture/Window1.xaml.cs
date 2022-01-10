@@ -90,7 +90,7 @@ namespace DVCapture
         {
             CreateEngine();
 
-            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+            Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             cbOutputFormat.SelectedIndex = 4;
 
@@ -99,7 +99,7 @@ namespace DVCapture
                 UpdateRecordingTime();
             };
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -112,7 +112,7 @@ namespace DVCapture
             cbVideoInputDevice_SelectedIndexChanged(null, null);
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -171,7 +171,7 @@ namespace DVCapture
                 cbVideoInputFormat.Items.Clear();
 
                 var deviceItem =
-                    VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                    VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -201,7 +201,7 @@ namespace DVCapture
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -364,9 +364,7 @@ namespace DVCapture
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -653,7 +651,7 @@ namespace DVCapture
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);

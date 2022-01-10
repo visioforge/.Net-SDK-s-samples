@@ -54,9 +54,9 @@ namespace MultipleWebCameras
         {
             CreateEngine();
 
-            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+            Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbCamera1.Items.Add(device.Name);
                 cbCamera2.Items.Add(device.Name);
@@ -74,7 +74,7 @@ namespace MultipleWebCameras
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
             VideoCapture1.Video_CaptureDevice.Format_UseBest = true;
 
-            var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+            var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
@@ -105,7 +105,7 @@ namespace MultipleWebCameras
             VideoCapture2.Video_CaptureDevice = new VideoCaptureSource(cbCamera2.Text);
             VideoCapture2.Video_CaptureDevice.Format_UseBest = true;
 
-            var deviceItem = VideoCapture2.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+            var deviceItem = VideoCapture2.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;

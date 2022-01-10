@@ -194,7 +194,7 @@ namespace VideoCapture_CSharp_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             tmRecording.Elapsed += (senderx, args) =>
             {
@@ -277,7 +277,7 @@ namespace VideoCapture_CSharp_Demo
 
             VideoCapture1.TVTuner_Read();
 
-            foreach (string tunerDevice in VideoCapture1.TVTuner_Devices)
+            foreach (string tunerDevice in VideoCapture1.TVTuner_Devices())
             {
                 cbTVTuner.Items.Add(tunerDevice);
             }
@@ -287,14 +287,14 @@ namespace VideoCapture_CSharp_Demo
                 cbTVTuner.SelectedIndex = 0;
             }
 
-            foreach (string tunerTVFormat in VideoCapture1.TVTuner_TVFormats)
+            foreach (string tunerTVFormat in VideoCapture1.TVTuner_TVFormats())
             {
                 cbTVSystem.Items.Add(tunerTVFormat);
             }
 
             cbTVSystem.SelectedIndex = 0;
 
-            foreach (string tunerCountry in VideoCapture1.TVTuner_Countries)
+            foreach (string tunerCountry in VideoCapture1.TVTuner_Countries())
             {
                 cbTVCountry.Items.Add(tunerCountry);
             }
@@ -303,7 +303,7 @@ namespace VideoCapture_CSharp_Demo
 
             cbTVTuner_SelectedIndexChanged(null, null);
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbVideoInputDevice.Items.Add(device.Name);
                 cbPIPDevice.Items.Add(device.Name);
@@ -317,7 +317,7 @@ namespace VideoCapture_CSharp_Demo
                 cbPIPDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
                 cbAdditionalAudioSource.Items.Add(device.Name);
@@ -332,7 +332,7 @@ namespace VideoCapture_CSharp_Demo
             }
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -359,7 +359,7 @@ namespace VideoCapture_CSharp_Demo
             if (!string.IsNullOrEmpty(cbAudioInputDevice.Text))
             {
                 var audioInputDevice =
-                    VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                    VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (audioInputDevice != null)
                 {
                     foreach (string line in audioInputDevice.Lines)
@@ -400,7 +400,7 @@ namespace VideoCapture_CSharp_Demo
                 cbMPEGEncoder.SelectedIndex = 0;
             }
 
-            foreach (string directShowFilter in VideoCapture1.DirectShow_Filters)
+            foreach (string directShowFilter in VideoCapture1.DirectShow_Filters())
             {
                 cbFilters.Items.Add(directShowFilter);
                 cbMPEGDemuxer.Items.Add(directShowFilter);
@@ -430,12 +430,12 @@ namespace VideoCapture_CSharp_Demo
             cbPIPMode.SelectedIndex = 0;
 
             // BDA
-            foreach (string source in VideoCapture1.BDA_Sources)
+            foreach (string source in VideoCapture1.BDA_Sources())
             {
                 cbBDASourceDevice.Items.Add(source);
             }
 
-            foreach (string receiver in VideoCapture1.BDA_Receivers)
+            foreach (string receiver in VideoCapture1.BDA_Receivers())
             {
                 cbBDAReceiver.Items.Add(receiver);
             }
@@ -459,7 +459,7 @@ namespace VideoCapture_CSharp_Demo
             cbAudEqualizerPreset.SelectedIndex = 0;
 
             // Decklink
-            foreach (var device in VideoCapture1.Decklink_CaptureDevices)
+            foreach (var device in VideoCapture1.Decklink_CaptureDevices())
             {
                 cbDecklinkCaptureDevice.Items.Add(device.Name);
             }
@@ -470,7 +470,7 @@ namespace VideoCapture_CSharp_Demo
                 cbDecklinkCaptureDevice_SelectedIndexChanged(null, null);
             }
 
-            btVirtualCameraRegister.Enabled = !VideoCapture1.DirectShow_Filters.Contains("VisioForge Virtual Camera");
+            btVirtualCameraRegister.Enabled = !VideoCapture1.DirectShow_Filters().Contains("VisioForge Virtual Camera");
 
             Form1_SizeChanged(this, EventArgs.Empty);
         }
@@ -481,7 +481,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -635,7 +635,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     var defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels";
@@ -1899,7 +1899,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs().ToArray());
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
@@ -1999,7 +1999,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref directCaptureOutput);
@@ -2009,7 +2009,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref directCaptureOutput);
@@ -2019,7 +2019,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref customOutput);
@@ -2039,7 +2039,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -2056,7 +2056,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref mkvOutput);
@@ -2649,13 +2649,13 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_Read();
 
                 cbTVMode.Items.Clear();
-                foreach (string tunerMode in VideoCapture1.TVTuner_Modes)
+                foreach (string tunerMode in VideoCapture1.TVTuner_Modes())
                 {
                     cbTVMode.Items.Add(tunerMode);
                 }
 
-                edVideoFreq.Text = Convert.ToString(VideoCapture1.TVTuner_VideoFrequency);
-                edAudioFreq.Text = Convert.ToString(VideoCapture1.TVTuner_AudioFrequency);
+                edVideoFreq.Text = Convert.ToString(VideoCapture1.TVTuner_VideoFrequency());
+                edAudioFreq.Text = Convert.ToString(VideoCapture1.TVTuner_AudioFrequency());
                 cbTVInput.SelectedIndex = cbTVInput.Items.IndexOf(VideoCapture1.TVTuner_InputType);
                 cbTVMode.SelectedIndex = cbTVMode.Items.IndexOf(VideoCapture1.TVTuner_Mode);
                 cbTVSystem.SelectedIndex = cbTVSystem.Items.IndexOf(VideoCapture1.TVTuner_TVFormat);
@@ -2672,7 +2672,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -2943,8 +2943,8 @@ namespace VideoCapture_CSharp_Demo
 
             VideoCapture1.TVTuner_Apply();
             VideoCapture1.TVTuner_Read();
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString(CultureInfo.InvariantCulture);
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString(CultureInfo.InvariantCulture);
+            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
+            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
         }
 
         private void cbTVCountry_SelectedIndexChanged(object sender, EventArgs e)
@@ -2954,7 +2954,7 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_Country = cbTVCountry.Text;
                 edTVDefaultFormat.Text = VideoCapture1.TVTuner_Countries_GetPreferredFormatForCountry(VideoCapture1.TVTuner_Country);
 
-                if (VideoCapture1.State == PlaybackState.Play)
+                if (VideoCapture1.State() == PlaybackState.Play)
                 {
                     VideoCapture1.TVTuner_Apply();
                     VideoCapture1.TVTuner_Read();
@@ -2987,8 +2987,8 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_Apply();
                 VideoCapture1.TVTuner_Read();
                 cbTVChannel.Items.Clear();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString(CultureInfo.InvariantCulture);
+                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
+                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -3012,8 +3012,8 @@ namespace VideoCapture_CSharp_Demo
 
                 VideoCapture1.TVTuner_Apply();
                 VideoCapture1.TVTuner_Read();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString(CultureInfo.InvariantCulture);
+                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
+                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -3024,8 +3024,8 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_InputType = cbTVInput.Text;
                 VideoCapture1.TVTuner_Apply();
                 VideoCapture1.TVTuner_Read();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString(CultureInfo.InvariantCulture);
+                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
+                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -3041,8 +3041,8 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_TVFormat = VideoCapture1.TVTuner_TVFormat_FromString(cbTVSystem.Text);
                 VideoCapture1.TVTuner_Apply();
                 VideoCapture1.TVTuner_Read();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString(CultureInfo.InvariantCulture);
+                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
+                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
@@ -3163,7 +3163,7 @@ namespace VideoCapture_CSharp_Demo
             if (cbPIPDevice.SelectedIndex != -1)
             {
                 cbPIPFormat.Items.Clear();
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbPIPDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbPIPDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (var format in deviceItem.VideoFormats)
@@ -3983,7 +3983,7 @@ namespace VideoCapture_CSharp_Demo
 
         private void VUDelegateMethod(VUMeterEventArgs e)
         {
-            if (VideoCapture1.State == PlaybackState.Free)
+            if (VideoCapture1.State() == PlaybackState.Free)
             {
                 return;
             }
@@ -4687,7 +4687,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbCustomVideoSourceCategory.SelectedIndex == 0)
             {
-                var filters = VideoCapture1.Video_CaptureDevices;
+                var filters = VideoCapture1.Video_CaptureDevices();
                 foreach (var item in filters)
                 {
                     cbCustomVideoSourceFilter.Items.Add(item.Name);
@@ -4700,7 +4700,7 @@ namespace VideoCapture_CSharp_Demo
             }
             else if (cbCustomVideoSourceCategory.SelectedIndex == 1)
             {
-                var filters = VideoCapture1.DirectShow_Filters;
+                var filters = VideoCapture1.DirectShow_Filters();
                 foreach (var item in filters)
                 {
                     cbCustomVideoSourceFilter.Items.Add(item);
@@ -4720,7 +4720,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbCustomAudioSourceCategory.SelectedIndex == 0)
             {
-                var filters = VideoCapture1.Audio_CaptureDevices;
+                var filters = VideoCapture1.Audio_CaptureDevices();
                 foreach (var item in filters)
                 {
                     cbCustomAudioSourceFilter.Items.Add(item.Name);
@@ -4733,7 +4733,7 @@ namespace VideoCapture_CSharp_Demo
             }
             else if (cbCustomAudioSourceCategory.SelectedIndex == 1)
             {
-                var filters = VideoCapture1.DirectShow_Filters;
+                var filters = VideoCapture1.DirectShow_Filters();
                 foreach (var item in filters)
                 {
                     cbCustomAudioSourceFilter.Items.Add(item);
@@ -4967,7 +4967,7 @@ namespace VideoCapture_CSharp_Demo
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = VideoCapture1.Decklink_CaptureDevices.FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = VideoCapture1.Decklink_CaptureDevices().FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
                 foreach (var format in deviceItem.VideoFormats)
@@ -5471,7 +5471,7 @@ namespace VideoCapture_CSharp_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);
@@ -5506,7 +5506,7 @@ namespace VideoCapture_CSharp_Demo
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1);
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
@@ -5588,7 +5588,7 @@ namespace VideoCapture_CSharp_Demo
                     {
                         if (customFormatSettingsDialog == null)
                         {
-                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray());
+                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoCapture1);
                         }
 
                         customFormatSettingsDialog.ShowDialog(this);
@@ -6197,7 +6197,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbPIPDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbPIPDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbPIPDevice.Text);
                 if (deviceItem == null)
                 {
                     return;

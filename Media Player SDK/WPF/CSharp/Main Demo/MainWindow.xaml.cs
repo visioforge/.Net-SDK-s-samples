@@ -170,7 +170,7 @@ namespace Main_Demo
         {
             CreateEngine();
 
-            Title += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Title += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             // font for text logo
             fontDialog.Color = System.Drawing.Color.White;
@@ -189,7 +189,7 @@ namespace Main_Demo
             pnChromaKeyColor.Fill = new SolidColorBrush(Color.FromArgb(255, 128, 218, 128));
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in MediaPlayer1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in MediaPlayer1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -211,7 +211,7 @@ namespace Main_Demo
                 }
             }
 
-            foreach (string directShowFilter in MediaPlayer1.DirectShow_Filters)
+            foreach (string directShowFilter in MediaPlayer1.DirectShow_Filters())
             {
                 cbFilters.Items.Add(directShowFilter);
             }
@@ -221,7 +221,7 @@ namespace Main_Demo
                 cbFilters.SelectedIndex = 0;
             }
 
-            foreach (string filter in MediaPlayer1.DirectShow_Filters)
+            foreach (string filter in MediaPlayer1.DirectShow_Filters())
             {
                 cbCustomAudioDecoder.Items.Add(filter);
                 cbCustomVideoDecoder.Items.Add(filter);

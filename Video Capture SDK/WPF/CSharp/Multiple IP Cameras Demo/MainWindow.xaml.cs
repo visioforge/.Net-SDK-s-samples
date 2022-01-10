@@ -139,7 +139,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
         {
             CreateEngine();
 
-            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+            Title += $" (SDK v{VideoCapture1.SDK_Version()})";
         }
 
         private async void btStop1_Click(object sender, RoutedEventArgs e)

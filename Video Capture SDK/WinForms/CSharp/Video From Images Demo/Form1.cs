@@ -67,7 +67,7 @@
                     files.AddRange(lst);
                 }
             }
-            
+
             if (files.Count == 0)
             {
                 MessageBox.Show(this, "Images not found!");
@@ -118,14 +118,14 @@
             }
 
             var source = new ScreenCaptureSourceSettings
-                             {
-                                 Left = 0,
-                                 Right = _imageWidth,
-                                 Top = 0,
-                                 Bottom = _imageHeight,
-                                 FrameRate = Convert.ToInt32(edVideoFrameRate.Text),
-                                 Mode = ScreenCaptureMode.Color
-                             };
+            {
+                Left = 0,
+                Right = _imageWidth,
+                Top = 0,
+                Bottom = _imageHeight,
+                FrameRate = Convert.ToInt32(edVideoFrameRate.Text),
+                Mode = ScreenCaptureMode.Color
+            };
             VideoCapture1.Screen_Capture_Source = source;
 
             VideoCapture1.Audio_PlayAudio = false;
@@ -144,7 +144,7 @@
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
             edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }

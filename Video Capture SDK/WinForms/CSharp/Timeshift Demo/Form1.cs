@@ -63,13 +63,13 @@
             CreateEngineCapture();
             CreateEnginePlayer();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             cbIPCameraType.SelectedIndex = 2;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -80,7 +80,7 @@
                 cbVideoInputDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -113,7 +113,7 @@
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -141,7 +141,7 @@
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -173,7 +173,7 @@
 
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string format in deviceItem.Formats)
@@ -295,12 +295,12 @@
             };
 
             var mp4Settings = new MP4Output
-                                  {
-                                      Video =
+            {
+                Video =
                                           {
                                               IDR_Period = 5
                                           }
-                                  };
+            };
 
             VideoCapture1.Timeshift_Settings.EncodingSettings = mp4Settings;
 
@@ -315,7 +315,7 @@
                             : VideoCaptureMode.IPCapture;
 
                         VideoCapture1.Output_Filename = edOutput.Text;
-                        
+
                         var output = new AVIOutput();
                         VideoCapture1.Output_Format = output;
                     }
@@ -349,7 +349,7 @@
 
             VideoCapture1.Video_Effects_Clear();
             VideoCapture1.Video_Effects_Enabled = true;
-            VideoCapture1.Video_Effects_Add(new VideoEffectTextLogo(true) {Mode = TextLogoMode.Timestamp, Text = string.Empty, Left = 150, Top = 10});
+            VideoCapture1.Video_Effects_Add(new VideoEffectTextLogo(true) { Mode = TextLogoMode.Timestamp, Text = string.Empty, Left = 150, Top = 10 });
 
             await VideoCapture1.StartAsync();
 

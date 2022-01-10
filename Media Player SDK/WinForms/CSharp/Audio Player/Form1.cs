@@ -95,7 +95,7 @@ namespace Audio_Player_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 

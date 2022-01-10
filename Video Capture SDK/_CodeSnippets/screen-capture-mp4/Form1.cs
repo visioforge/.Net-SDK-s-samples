@@ -23,7 +23,7 @@ namespace screen_capture_mp4
             videoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings() { FullScreen = true };
 
             // select first audio device with default parameters
-            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices[0].Name);
+            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices()[0].Name);
 
             // disable audio playback
             videoCapture1.Audio_PlayAudio = false;
@@ -51,7 +51,7 @@ namespace screen_capture_mp4
             videoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             videoCapture1.Output_Format = new MP4Output();
             videoCapture1.Mode = VideoCaptureMode.ScreenCapture;
-            
+
             await videoCapture1.StartAsync();
         }
 

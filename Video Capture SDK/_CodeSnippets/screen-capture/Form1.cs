@@ -41,7 +41,7 @@ namespace screen_capture
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
@@ -83,9 +83,9 @@ namespace screen_capture
                 VideoCapture1.Audio_RecordAudio = true;
 
                 // select first audio device with default parameters
-                if (VideoCapture1.Audio_CaptureDevices.Any())
+                if (VideoCapture1.Audio_CaptureDevices().Any())
                 {
-                    VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(VideoCapture1.Audio_CaptureDevices[0].Name);
+                    VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(VideoCapture1.Audio_CaptureDevices()[0].Name);
                 }
             }
             else

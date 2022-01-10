@@ -125,7 +125,7 @@ namespace Video_Player_Demo
             timer1.Stop();
 
             await MediaPlayer1.StopAsync();
-            
+
             tbTimeline.Value = 0;
         }
 
@@ -153,7 +153,7 @@ namespace Video_Player_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             cbSourceMode.SelectedIndex = 0;
         }

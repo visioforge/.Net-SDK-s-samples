@@ -21,8 +21,8 @@ namespace video_capture_text_overlay
 
         private async void btStart_Click(object sender, EventArgs e)
         {
-            videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices[0].Name);
-            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices[0].Name);
+            videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices()[0].Name);
+            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices()[0].Name);
             videoCapture1.Mode = VideoCaptureMode.VideoCapture;
             videoCapture1.Output_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             videoCapture1.Output_Format = new MP4Output();

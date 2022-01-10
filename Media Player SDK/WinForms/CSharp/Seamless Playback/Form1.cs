@@ -64,7 +64,7 @@
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }
 
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
@@ -237,12 +237,12 @@
 
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.State != PlaybackState.Free)
+            if (MediaPlayer1.State() != PlaybackState.Free)
             {
                 await MediaPlayer1.StopAsync();
             }
 
-            if (MediaPlayer2.State != PlaybackState.Free)
+            if (MediaPlayer2.State() != PlaybackState.Free)
             {
                 await MediaPlayer2.StopAsync();
             }
@@ -278,7 +278,7 @@
             CreateEngine1();
             CreateEngine2();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }
     }
 }

@@ -179,7 +179,7 @@
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }
 
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)

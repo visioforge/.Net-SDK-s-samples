@@ -48,13 +48,13 @@ namespace Simple_Video_Capture
 
         public object UIElement => this.videoView;
 
-        public Version SDK_Version => this.videoCapture.SDK_Version;
+        public Version SDK_Version => this.videoCapture.SDK_Version();
 
-        public List<VideoCaptureDeviceInfo> Video_CaptureDevices => this.videoCapture.Video_CaptureDevices;
+        public List<VideoCaptureDeviceInfo> Video_CaptureDevices => this.videoCapture.Video_CaptureDevices();
 
-        public List<AudioCaptureDeviceInfo> Audio_CaptureDevices => this.videoCapture.Audio_CaptureDevices;
+        public List<AudioCaptureDeviceInfo> Audio_CaptureDevices => this.videoCapture.Audio_CaptureDevices();
 
-        public List<string> Audio_OutputDevices => this.videoCapture.Audio_OutputDevices;
+        public List<string> Audio_OutputDevices => this.videoCapture.Audio_OutputDevices();
 
         public List<OutputFormatInfo> OutputFormats => new List<OutputFormatInfo>(this.outputFormats);
 
@@ -84,7 +84,7 @@ namespace Simple_Video_Capture
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(videoCapture.Video_Codecs.ToArray(), videoCapture.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(videoCapture);
                         }
 
                         aviSettingsDialog.ShowDialog(ownerWindow);
@@ -491,7 +491,7 @@ namespace Simple_Video_Capture
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(videoCapture.Video_Codecs.ToArray(), videoCapture.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(videoCapture);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);

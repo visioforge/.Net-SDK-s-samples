@@ -46,7 +46,7 @@
         private void AddFile(string filename)
         {
             var info = new PIPInfo();
-            
+
             // first file should be added as usual, other files using PIP API
             if (MediaPlayer1.FilenamesOrURL.Count == 0)
             {
@@ -124,7 +124,7 @@
         {
             Invoke((Action)(() =>
                                    {
-mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
+                                       mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
                                    }));
         }
 
@@ -143,7 +143,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
         private async void btStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            
+
             await MediaPlayer1.StopAsync();
 
             _pipInfos.Clear();
@@ -163,7 +163,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -220,7 +220,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             cbSourceMode.SelectedIndex = 0;
         }
@@ -273,7 +273,7 @@ mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
 
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.State != PlaybackState.Free)
+            if (MediaPlayer1.State() != PlaybackState.Free)
             {
                 await MediaPlayer1.StopAsync();
             }

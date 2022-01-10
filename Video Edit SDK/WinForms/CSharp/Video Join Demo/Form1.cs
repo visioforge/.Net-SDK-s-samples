@@ -150,7 +150,7 @@ namespace Video_Join_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);
@@ -185,7 +185,7 @@ namespace Video_Join_Demo
                     {
                         if (pcmSettingsDialog == null)
                         {
-                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                            pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
                         }
 
                         pcmSettingsDialog.ShowDialog(this);
@@ -263,7 +263,7 @@ namespace Video_Join_Demo
                     {
                         if (customFormatSettingsDialog == null)
                         {
-                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                            customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
                         }
 
                         customFormatSettingsDialog.ShowDialog(this);
@@ -704,7 +704,7 @@ namespace Video_Join_Demo
         {
             if (pcmSettingsDialog == null)
             {
-                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray());
+                pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
             }
 
             pcmSettingsDialog.SaveSettings(ref acmOutput);
@@ -784,7 +784,7 @@ namespace Video_Join_Demo
         {
             if (customFormatSettingsDialog == null)
             {
-                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray());
+                customFormatSettingsDialog = new CustomFormatSettingsDialog(VideoEdit1);
             }
 
             customFormatSettingsDialog.SaveSettings(ref customOutput);
@@ -804,7 +804,7 @@ namespace Video_Join_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -821,7 +821,7 @@ namespace Video_Join_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref mkvOutput);
@@ -848,7 +848,7 @@ namespace Video_Join_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoEdit1.SDK_Version})";
+            Text += $" (SDK v{VideoEdit1.SDK_Version()})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 

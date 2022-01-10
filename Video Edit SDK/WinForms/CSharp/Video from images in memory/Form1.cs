@@ -95,7 +95,7 @@ namespace Video_From_Images
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoEdit1.SDK_Version})";
+            Text += $" (SDK v{VideoEdit1.SDK_Version()})";
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -189,9 +189,7 @@ namespace Video_From_Images
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoEdit1.Video_Codecs.ToArray(),
-                    VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -218,9 +216,7 @@ namespace Video_From_Images
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(
-                    VideoEdit1.Video_Codecs.ToArray(),
-                    VideoEdit1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
             aviSettingsDialog.SaveSettings(ref mkvOutput);
@@ -582,9 +578,7 @@ namespace Video_From_Images
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(
-                                VideoEdit1.Video_Codecs.ToArray(),
-                                VideoEdit1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);

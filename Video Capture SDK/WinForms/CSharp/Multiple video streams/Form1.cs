@@ -73,10 +73,10 @@ namespace multiple_video_streams
                 240);
 
             var wmvOutput = new WMVOutput
-                                {
-                                    Mode = WMVMode.ExternalProfileFromText,
-                                    External_Profile_Text = Resources.WMVProfile
-                                };
+            {
+                Mode = WMVMode.ExternalProfileFromText,
+                External_Profile_Text = Resources.WMVProfile
+            };
             VideoCapture1.Output_Format = wmvOutput;
 
             // main options
@@ -91,7 +91,7 @@ namespace multiple_video_streams
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            
+
             await VideoCapture1.StartAsync();
             tmRecording.Start();
         }
@@ -109,9 +109,9 @@ namespace multiple_video_streams
             CreateEngine();
 
             videoCaptureHelper = new VideoCaptureCore();
-            Text += $" (SDK v{videoCaptureHelper.SDK_Version})";
+            Text += $" (SDK v{videoCaptureHelper.SDK_Version()})";
 
-            foreach (var device in videoCaptureHelper.Video_CaptureDevices)
+            foreach (var device in videoCaptureHelper.Video_CaptureDevices())
             {
                 cbCamera1.Items.Add(device.Name);
                 cbCamera2.Items.Add(device.Name);
@@ -135,7 +135,7 @@ namespace multiple_video_streams
 
         private void cbCamera1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var deviceItem = videoCaptureHelper.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
             if (deviceItem == null)
             {
                 return;
@@ -152,12 +152,12 @@ namespace multiple_video_streams
             if (cbVideoFormat1.Items.Count > 0)
             {
                 cbVideoFormat1.SelectedIndex = 0;
-            }           
+            }
         }
 
         private void cbCamera2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var deviceItem = videoCaptureHelper.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+            var deviceItem = videoCaptureHelper.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
             if (deviceItem == null)
             {
                 return;
@@ -226,7 +226,7 @@ namespace multiple_video_streams
 
             if (cbVideoFormat1.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera1.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -260,7 +260,7 @@ namespace multiple_video_streams
 
             if (cbVideoFormat2.SelectedIndex != -2)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbCamera2.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
                 if (deviceItem == null)
                 {
                     return;

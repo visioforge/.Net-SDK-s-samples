@@ -129,7 +129,7 @@ namespace multiple_ap_cams
             CreateEngine1();
             CreateEngine2();
 
-            Text += $" (SDK v{VideoCapture2.SDK_Version})";
+            Text += $" (SDK v{VideoCapture2.SDK_Version()})";
 
             tmRecording1.Elapsed += (senderx, args) =>
             {

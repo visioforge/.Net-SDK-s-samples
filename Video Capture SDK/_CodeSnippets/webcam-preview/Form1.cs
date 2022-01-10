@@ -30,7 +30,7 @@ namespace webcam_preview
         private void DestroyEngine()
         {
             VideoCapture1.OnError -= VideoCapture1_OnError;
- 
+
             VideoCapture1.Dispose();
             VideoCapture1 = null;
         }
@@ -39,10 +39,10 @@ namespace webcam_preview
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             // enumerate devices
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -52,11 +52,11 @@ namespace webcam_preview
                 cbVideoInputDevice.SelectedIndex = 0;
             }
 
-            foreach (var device in VideoCapture1.Audio_CaptureDevices)
+            foreach (var device in VideoCapture1.Audio_CaptureDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
-            
+
             if (cbAudioInputDevice.Items.Count > 0)
             {
                 cbAudioInputDevice.SelectedIndex = 0;
@@ -66,7 +66,7 @@ namespace webcam_preview
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             // fill video formats and frame rates
-            var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+            var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
             if (deviceItem == null)
             {
                 return;
@@ -77,7 +77,7 @@ namespace webcam_preview
             {
                 cbVideoInputFormat.Items.Add(format.Name);
             }
-            
+
             if (cbVideoInputFormat.Items.Count > 0)
             {
                 cbVideoInputFormat.SelectedIndex = 0;
@@ -103,7 +103,7 @@ namespace webcam_preview
             VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.Text;
             VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked;
             VideoCapture1.Audio_CaptureDevice.Line = cbAudioInputLine.Text;
-            
+
             // set video preview mode
             VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
 
@@ -118,7 +118,7 @@ namespace webcam_preview
 
             if (cbAudioInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Audio_CaptureDevices.FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
+                var deviceItem = VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.Text);
                 if (deviceItem != null)
                 {
                     foreach (string format in deviceItem.Formats)
@@ -181,7 +181,7 @@ namespace webcam_preview
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;

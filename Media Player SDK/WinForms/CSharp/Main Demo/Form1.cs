@@ -2175,7 +2175,7 @@ namespace Media_Player_Demo
 
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.State != PlaybackState.Free)
+            if (MediaPlayer1.State() != PlaybackState.Free)
             {
                 await MediaPlayer1.StopAsync();
             }
@@ -3104,7 +3104,7 @@ namespace Media_Player_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             // set combobox indexes
             cbSourceMode.SelectedIndex = 0;
@@ -3118,7 +3118,7 @@ namespace Media_Player_Demo
             pnChromaKeyColor.BackColor = Color.FromArgb(128, 218, 128);
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in MediaPlayer1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in MediaPlayer1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -3140,7 +3140,7 @@ namespace Media_Player_Demo
                 }
             }
 
-            foreach (var filter in MediaPlayer1.DirectShow_Filters)
+            foreach (var filter in MediaPlayer1.DirectShow_Filters())
             {
                 cbCustomVideoDecoder.Items.Add(filter);
                 cbCustomAudioDecoder.Items.Add(filter);

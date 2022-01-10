@@ -73,7 +73,7 @@ namespace Decklink_Demo
         {
             CreateEngine();
 
-            Text += $" (SDK v{VideoCapture1.SDK_Version})";
+            Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
             cbDecklinkSourceInput.SelectedIndex = 0;
             cbDecklinkSourceNTSC.SelectedIndex = 0;
@@ -90,7 +90,7 @@ namespace Decklink_Demo
             };
 
             string defaultAudioRenderer = string.Empty;
-            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices)
+            foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice);
 
@@ -112,7 +112,7 @@ namespace Decklink_Demo
                 }
             }
 
-            foreach (var device in VideoCapture1.Decklink_CaptureDevices)
+            foreach (var device in VideoCapture1.Decklink_CaptureDevices())
             {
                 cbDecklinkCaptureDevice.Items.Add(device.Name);
             }
@@ -161,7 +161,7 @@ namespace Decklink_Demo
                     {
                         if (aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray());
+                            aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
                         }
 
                         aviSettingsDialog.ShowDialog(this);
@@ -694,8 +694,7 @@ namespace Decklink_Demo
         {
             if (aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(),
-                    VideoCapture1.Audio_Codecs.ToArray());
+                aviSettingsDialog = new AVISettingsDialog(VideoCapture1);
             }
 
             aviSettingsDialog.SaveSettings(ref aviOutput);
@@ -799,7 +798,7 @@ namespace Decklink_Demo
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = VideoCapture1.Decklink_CaptureDevices.FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = VideoCapture1.Decklink_CaptureDevices().FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
                 foreach (var format in deviceItem.VideoFormats)

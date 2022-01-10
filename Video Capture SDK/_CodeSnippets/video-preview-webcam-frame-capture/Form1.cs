@@ -33,8 +33,8 @@ namespace video_preview_webcam_frame_capture
 
         private async void btStart_Click(object sender, EventArgs e)
         {
-            videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices[0].Name);
-            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices[0].Name);
+            videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices()[0].Name);
+            videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(videoCapture1.Audio_CaptureDevices()[0].Name);
             videoCapture1.Mode = VideoCaptureMode.VideoPreview;
 
             await videoCapture1.StartAsync();
