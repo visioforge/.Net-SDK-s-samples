@@ -35,7 +35,7 @@ namespace ip_camera_capture_mp4
             // Several engines are available. We'll use LAV as the most compatible. For low latency RTSP playback, use the RTSP Low Latency engine.
             videoCapture1.IP_Camera_Source = new IPCameraSourceSettings()
             {
-                URL = "http://192.168.233.129:8000/camera/mjpeg"
+                URL = new Uri("http://192.168.233.129:8000/camera/mjpeg")
             };
 
             videoCapture1.Audio_PlayAudio = videoCapture1.Audio_RecordAudio = false;

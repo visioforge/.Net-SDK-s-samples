@@ -206,7 +206,7 @@ Public Class Form1
                 VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.NDI_Legacy
         End Select
 
-        VideoCapture1.IP_Camera_Source.URL = cbIPURL.Text
+        VideoCapture1.IP_Camera_Source.URL = New Uri(cbIPURL.Text)
         VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.Checked
         VideoCapture1.IP_Camera_Source.Login = edIPLogin.Text
         VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text

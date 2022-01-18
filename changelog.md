@@ -1,10 +1,12 @@
-15.x
+15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
 * Updated ONVIF support, resolved an issue with username and password specified in URL but not specified in source settings
 * Resolved an issue with the FFMPEG.exe output dialog
 * Resolved an issue with the separate capture in a service applications
 * SDK migrated to System.Text.Json from NewtonsoftJson
 * Updated DirectCapture output for IP cameras
+* Video processing performance optimizations
+* IPCameraSourceSettings.URL property type changed from string to System.Uri
 
 15.1
 * Disabled Sentry debug messages in the console

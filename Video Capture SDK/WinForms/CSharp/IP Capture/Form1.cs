@@ -134,7 +134,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = cbIPURL.Text
+                URL = new Uri(cbIPURL.Text, UriKind.Absolute)
             };
 
             bool lavGPU = false;

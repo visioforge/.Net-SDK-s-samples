@@ -60,7 +60,7 @@ namespace multiple_ap_cams
         {
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = edURL1.Text,
+                URL = new Uri(edURL1.Text),
                 Type = IPSourceEngine.Auto_LAV,
                 Login = edLogin1.Text,
                 Password = edPassword1.Text
@@ -95,7 +95,7 @@ namespace multiple_ap_cams
         {
             VideoCapture2.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = edURL2.Text,
+                URL = new Uri(edURL2.Text),
                 Type = IPSourceEngine.Auto_LAV,
                 Login = edLogin2.Text,
                 Password = edPassword2.Text

@@ -54,8 +54,8 @@ namespace IPCaptureService
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings();
             VideoCapture1.IP_Camera_Source.AudioCapture = false;
             VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
-            VideoCapture1.IP_Camera_Source.URL = "http://212.162.177.75/mjpg/video.mjpg";
-            
+            VideoCapture1.IP_Camera_Source.URL = new Uri("http://212.162.177.75/mjpg/video.mjpg");
+
             VideoCapture1.Output_Filename = @"c:\vf\service_output.mp4";
 
             var mp4Output = new MP4Output();
@@ -81,7 +81,7 @@ namespace IPCaptureService
             AddLog("start - 1");
 
             CaptureStart();
-            
+
             AddLog("start - 2");
         }
 

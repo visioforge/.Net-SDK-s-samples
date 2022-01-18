@@ -8,8 +8,8 @@
     <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
     <Product>VE Main Demo CLI</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.1.24.0</AssemblyVersion>
-    <FileVersion>15.1.24.0</FileVersion>
+    <AssemblyVersion>15.2.0.0</AssemblyVersion>
+    <FileVersion>15.2.0.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -28,18 +28,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser19" Version="1.9.74" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x86" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x86" Version="15.1.24" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x86" Version="15.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

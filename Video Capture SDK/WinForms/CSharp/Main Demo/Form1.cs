@@ -2381,7 +2381,7 @@ namespace VideoCapture_CSharp_Demo
         {
             settings = new IPCameraSourceSettings
             {
-                URL = cbIPURL.Text
+                URL = new Uri(cbIPURL.Text)
             };
 
             bool lavGPU = false;

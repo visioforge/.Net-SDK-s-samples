@@ -26,6 +26,8 @@ namespace Media_Player_Demo
     using VisioForge.Types.VideoEffects;
     using VisioForge.Types.VideoProcessing;
     using VisioForge.Core;
+    using System.Runtime.InteropServices;
+    using VisioForge.MediaFramework.Helpers;
 
     public partial class Form1 : Form
     {

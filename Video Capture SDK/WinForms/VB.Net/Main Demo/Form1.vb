@@ -1890,7 +1890,7 @@ Public Class Form1
     Private Function SelectIPCameraSource() As IPCameraSourceSettings
 
         Dim settings As IPCameraSourceSettings = New IPCameraSourceSettings()
-        settings.URL = cbIPURL.Text
+        settings.URL = New Uri(cbIPURL.Text)
 
         Dim lavGPU As Boolean = False
         Select Case (cbIPCameraType.SelectedIndex)

@@ -71,7 +71,7 @@ namespace Multiple_IP_Cameras_Demo_WPF
         private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index, bool onvif)
         {
             // source
-            videoCapture.IP_Camera_Source = new IPCameraSourceSettings { URL = url, ONVIF_Source = onvif };
+            videoCapture.IP_Camera_Source = new IPCameraSourceSettings { URL = new Uri(url), ONVIF_Source = onvif };
 
             switch (cbEngine.SelectedIndex)
             {
