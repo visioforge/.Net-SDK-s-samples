@@ -7,6 +7,7 @@
 * Updated DirectCapture output for IP cameras
 * Video processing performance optimizations
 * IPCameraSourceSettings.URL property type changed from string to System.Uri
+* Added DirectCapture ASF output for IP cameras
 
 15.1
 * Disabled Sentry debug messages in the console

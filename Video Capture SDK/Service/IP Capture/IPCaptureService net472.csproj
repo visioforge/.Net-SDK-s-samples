@@ -8,8 +8,8 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>SimpleService</AssemblyTitle>
     <Product>SimpleService</Product>
-    <AssemblyVersion>15.2.0.0</AssemblyVersion>
-    <FileVersion>15.2.0.0</FileVersion>
+    <AssemblyVersion>15.2.1.0</AssemblyVersion>
+    <FileVersion>15.2.1.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -50,7 +50,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

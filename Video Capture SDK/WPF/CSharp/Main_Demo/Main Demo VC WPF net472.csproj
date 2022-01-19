@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>Main Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.2.0.0</AssemblyVersion>
-    <FileVersion>15.2.0.0</FileVersion>
+    <AssemblyVersion>15.2.1.0</AssemblyVersion>
+    <FileVersion>15.2.1.0</FileVersion>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -40,13 +40,13 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.2.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.2.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x86" Version="15.2.1" />
   </ItemGroup>
 </Project>

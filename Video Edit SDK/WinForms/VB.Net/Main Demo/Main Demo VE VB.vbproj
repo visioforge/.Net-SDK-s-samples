@@ -124,7 +124,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.2.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.2.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
