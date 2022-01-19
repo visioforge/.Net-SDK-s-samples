@@ -420,19 +420,28 @@ namespace Main_Demo
 
             cbAudEqualizerPreset.SelectedIndex = 0;
 
-            // Decklink
-            foreach (var device in VideoCapture1.Decklink_CaptureDevices())
-            {
-                cbDecklinkCaptureDevice.Items.Add(device.Name);
-            }
-
-            if (cbDecklinkCaptureDevice.Items.Count > 0)
-            {
-                cbDecklinkCaptureDevice.SelectedIndex = 0;
-                cbDecklinkCaptureDevice_SelectionChanged(null, null);
-            }
+            // Decklink enumerating can be slow. We'll run it in an independent thread.
+            System.Threading.Tasks.Task.Run(AddDecklinkSources);
 
             btVirtualCameraRegister.IsEnabled = !VideoCapture1.DirectShow_Filters().Contains("VisioForge Virtual Camera");
+        }
+
+        private void AddDecklinkSources()
+        {
+            var devices = VideoCapture1.Decklink_CaptureDevices();
+            Dispatcher.Invoke((Action)(() =>
+            {
+                foreach (var device in devices)
+                {
+                    cbDecklinkCaptureDevice.Items.Add(device.Name);
+                }
+
+                if (cbDecklinkCaptureDevice.Items.Count > 0)
+                {
+                    cbDecklinkCaptureDevice.SelectedIndex = 0;
+                    cbDecklinkCaptureDevice_SelectionChanged(null, null);
+                }
+            }));
         }
 
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)

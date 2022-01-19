@@ -11,9 +11,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.2.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.2.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.2.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.2.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.2.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.2.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.2.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.2.3" />
   </ItemGroup>
 </Project>

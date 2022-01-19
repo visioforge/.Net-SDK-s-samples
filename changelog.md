@@ -1,3 +1,7 @@
+15.x
+* App start-up time improved for PCs with Decklink cards 
+* NDI SDK v5 support
+
 15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
 * Updated ONVIF support, resolved an issue with username and password specified in URL but not specified in source settings
