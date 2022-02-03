@@ -185,7 +185,7 @@ namespace Video_Player_Demo
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(244, 13);
             this.label1.TabIndex = 31;
-            this.label1.Text = "Much more features shown in Main Demo!";
+            this.label1.Text = "Much more features are shown in Main Demo!";
             // 
             // groupBox2
             // 

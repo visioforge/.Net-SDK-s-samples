@@ -52,10 +52,10 @@ namespace Main_Demo
             if (cbAudEchoEnabled.Checked)
             {
                 var echo = new GSTEcho(TimeSpan.FromMilliseconds(tbAudEchoDelay.Value))
-                               {
-                                   Intensity = this.tbAudEchoIntensity.Value / 100.0f,
-                                   Feedback = this.tbAudEchoFeedback.Value / 100.0f
-                               };
+                {
+                    Intensity = this.tbAudEchoIntensity.Value / 100.0f,
+                    Feedback = this.tbAudEchoFeedback.Value / 100.0f
+                };
 
                 _player.Audio_Effects_AddOrUpdate(echo);
             }
@@ -183,11 +183,11 @@ namespace Main_Demo
             {
                 var colorBalance = new GSTVideoBalance
                 {
-                                           Brightness = tbVideoBrightness.Value / 100.0,
-                                           Contrast = tbVideoContrast.Value / 100.0,
-                                           Saturation = tbVideoSaturation.Value / 100.0,
-                                           Hue = tbVideoHue.Value / 100.0
-                                       };
+                    Brightness = tbVideoBrightness.Value / 100.0,
+                    Contrast = tbVideoContrast.Value / 100.0,
+                    Saturation = tbVideoSaturation.Value / 100.0,
+                    Hue = tbVideoHue.Value / 100.0
+                };
 
                 _player.Video_Effects_AddOrUpdate(colorBalance);
             }
@@ -314,13 +314,13 @@ namespace Main_Demo
             Invoke((Action)(() =>
             {
                 pbAFMotionLevel.Value = (int)(e.Level * 100);
-            }));   
+            }));
         }
 
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Text = "";
-                    
+
             tbSpeed.Value = 10;
             _player.Debug_Mode = cbDebugMode.Checked;
             _player.Audio_Play = cbPlayAudio.Checked;
@@ -335,14 +335,14 @@ namespace Main_Demo
             string source = edFilenameOrURL.Text;
             if (source.Contains("rtsp://"))
             {
-                var rtspSource = new RTSPSourceSettings(new Uri(source))
-                                     {
-                                         Login = edRTSPUserName.Text,
-                                         Password = edRTSPPassword.Text,
-                                         Latency = tbRTSPLatency.Value,
-                                         RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024,
-                                         UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024
-                                     };
+                var rtspSource = new RTSPSourceSettings(new Uri(source), true)
+                {
+                    Login = edRTSPUserName.Text,
+                    Password = edRTSPPassword.Text,
+                    Latency = tbRTSPLatency.Value,
+                    RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024,
+                    UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024
+                };
 
                 switch (cbRTSPProtocol.SelectedIndex)
                 {
@@ -364,7 +364,7 @@ namespace Main_Demo
             {
                 var uniSource = new UniversalSourceSettings(new Uri(source));
                 await _player.OpenAsync(uniSource);
-            }            
+            }
 
             await _player.PlayAsync();
 
@@ -383,7 +383,7 @@ namespace Main_Demo
                 _player.OnAudioVUMeter += _player_OnAudioVUMeter;
                 _player.OnError += _player_OnError;
                 _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
-                
+
                 foreach (var font in _player.Fonts_Names)
                 {
                     cbTextOverlayFontName.Items.Add(font);
@@ -410,7 +410,8 @@ namespace Main_Demo
         {
             e.DetectorEnabled = false;
 
-            Invoke((Action)(() => {
+            Invoke((Action)(() =>
+            {
                 edBarcode.Text = e.Value;
                 edBarcodeMetadata.Text = string.Empty;
                 foreach (var o in e.Metadata)
@@ -455,10 +456,10 @@ namespace Main_Demo
 
         private void _player_OnError(object sender, ErrorsEventArgs e)
         {
-            BeginInvoke((Action) (() =>
-            {
-                mmLog.Text += e.Message + Environment.NewLine;
-            }));            
+            BeginInvoke((Action)(() =>
+           {
+               mmLog.Text += e.Message + Environment.NewLine;
+           }));
         }
 
         private async void _player_OnStop(object sender, StopEventArgs e)
@@ -667,7 +668,7 @@ namespace Main_Demo
         {
             var tags = _player.Tags_Read(edFilenameOrURL.Text);
 
-            mmInfo.Text = tags?.ToString();   
+            mmInfo.Text = tags?.ToString();
         }
 
         private async void btReadInfo_Click(object sender, EventArgs e)
@@ -704,7 +705,7 @@ namespace Main_Demo
                 {
                     _player.Snapshot_Save(dlg.FileName, ImageFormat.Jpeg);
                 }
-            }            
+            }
         }
 
         private void cbAudioStream_SelectedIndexChanged(object sender, EventArgs e)

@@ -175,7 +175,7 @@ Partial Class Form1
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(244, 13)
         Me.label1.TabIndex = 40
-        Me.label1.Text = "Much more features shown in Main Demo!"
+        Me.label1.Text = "Much more features are shown in Main Demo!"
         '
         'groupBox2
         '

@@ -3,6 +3,7 @@
 * NDI SDK v5 support
 * Resolved an issue with MKV Legacy output (wrong cast exception). 
 * Zoom and pan effects perfomance optimizations
+* Added basic Media Blocks API (WIP)
 
 15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos

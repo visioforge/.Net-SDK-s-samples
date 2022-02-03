@@ -246,7 +246,7 @@ Partial Class Form1
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(244, 13)
         Me.Label1.TabIndex = 30
-        Me.Label1.Text = "Much more features shown in Main Demo!"
+        Me.Label1.Text = "Much more features are shown in Main Demo!"
         '
         'LinkLabel1
         '
