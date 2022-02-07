@@ -616,6 +616,7 @@
                         <ComboBoxItem Content="UDP"/>
                         <ComboBoxItem Content="Smooth Streaming to Microsoft IIS"/>
                         <ComboBoxItem Content="Output to external virtual devices"/>
+                        <ComboBoxItem Content="HLS"/>
                     </ComboBox>
 
                     <CheckBox Content="Stream audio" Height="16" HorizontalAlignment="Left" Margin="22,526.12,0,0" x:Name="cbNetworkStreamingAudioEnabled" VerticalAlignment="Top" />
@@ -666,6 +667,30 @@
                                 <Label x:Name="label5" Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDI" Content="vendor's website" HorizontalAlignment="Left" Margin="14,154,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="Blue" MouseLeftButtonUp="lbNDI_MouseLeftButtonUp"/>
 
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="HLS">
+                            <Grid>
+                                <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Output folder for video files and playlist" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="c:\inetpub\wwwroot\hls\" VerticalAlignment="Top" Width="309"/>
+                                <Button x:Name="btSelectHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="324,31,0,0" Content="..." VerticalAlignment="Top" Width="23" Click="btSelectHLSOutputFolder_Click"/>
+                                <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Segment duration (sec)" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSSegmentDuration" HorizontalAlignment="Left" Height="23" Margin="10,80,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="67"/>
+                                <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="Segment count that will be saved during streaming" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSSegmentCount" HorizontalAlignment="Left" Height="23" Margin="10,129,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="67"/>
+                                <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="84,130,0,0" TextWrapping="Wrap" Text="Use 0 to save all segments" VerticalAlignment="Top"/>
+                                <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="You can set video (H264) and audio (AAC) settings in code" VerticalAlignment="Top"/>
+                                <Label x:Name="lbHLSConfigure" Content="How to configure HTTP server for HLS" Height="29" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF" MouseDown="lbHLSConfigure_MouseDown" />
+                                <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,200,0,0" TextWrapping="Wrap" Text="Mode (playlist type)" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbHLSMode" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                                    <ComboBoxItem>Live</ComboBoxItem>
+                                    <ComboBoxItem>VOD</ComboBoxItem>
+                                    <ComboBoxItem>Event</ComboBoxItem>
+                                </ComboBox>
+                                <CheckBox x:Name="cbHLSEmbeddedHTTPServerEnabled" Content="Use embedded HTTP server with port" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSEmbeddedHTTPServerPort" HorizontalAlignment="Left" Height="23" Margin="252,257,0,0" TextWrapping="Wrap" Text="81" VerticalAlignment="Top" Width="40"/>
+                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,284,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="UDP">

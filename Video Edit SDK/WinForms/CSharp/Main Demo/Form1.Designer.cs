@@ -699,6 +699,25 @@ namespace VideoEdit_CS_Demo
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
             this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.edHLSURL = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.edHLSEmbeddedHTTPServerPort = new System.Windows.Forms.TextBox();
+            this.cbHLSEmbeddedHTTPServerEnabled = new System.Windows.Forms.CheckBox();
+            this.cbHLSMode = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbHLSConfigure = new System.Windows.Forms.LinkLabel();
+            this.label532 = new System.Windows.Forms.Label();
+            this.label531 = new System.Windows.Forms.Label();
+            this.label530 = new System.Windows.Forms.Label();
+            this.label529 = new System.Windows.Forms.Label();
+            this.edHLSSegmentCount = new System.Windows.Forms.TextBox();
+            this.label519 = new System.Windows.Forms.Label();
+            this.edHLSSegmentDuration = new System.Windows.Forms.TextBox();
+            this.btSelectHLSOutputFolder = new System.Windows.Forms.Button();
+            this.edHLSOutputFolder = new System.Windows.Forms.TextBox();
+            this.label380 = new System.Windows.Forms.Label();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -829,6 +848,7 @@ namespace VideoEdit_CS_Demo
             this.tabPage53.SuspendLayout();
             this.tabPage54.SuspendLayout();
             this.tabPage74.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -5055,7 +5075,8 @@ namespace VideoEdit_CS_Demo
             "NDI",
             "UDP",
             "Smooth Streaming to Microsoft IIS",
-            "Output to external virtual devices"});
+            "Output to external virtual devices",
+            "HTTP Live Streaming (HLS)"});
             this.cbNetworkStreamingMode.Location = new System.Drawing.Point(16, 39);
             this.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode";
             this.cbNetworkStreamingMode.Size = new System.Drawing.Size(276, 21);
@@ -5070,6 +5091,7 @@ namespace VideoEdit_CS_Demo
             this.tabControl5.Controls.Add(this.tabPage77);
             this.tabControl5.Controls.Add(this.tabPage51);
             this.tabControl5.Controls.Add(this.tabPage33);
+            this.tabControl5.Controls.Add(this.tabPage5);
             this.tabControl5.Location = new System.Drawing.Point(4, 73);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
@@ -7392,6 +7414,189 @@ namespace VideoEdit_CS_Demo
             this.VideoView1.StatusOverlay = null;
             this.VideoView1.TabIndex = 87;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.edHLSURL);
+            this.tabPage5.Controls.Add(this.label14);
+            this.tabPage5.Controls.Add(this.edHLSEmbeddedHTTPServerPort);
+            this.tabPage5.Controls.Add(this.cbHLSEmbeddedHTTPServerEnabled);
+            this.tabPage5.Controls.Add(this.cbHLSMode);
+            this.tabPage5.Controls.Add(this.label25);
+            this.tabPage5.Controls.Add(this.lbHLSConfigure);
+            this.tabPage5.Controls.Add(this.label532);
+            this.tabPage5.Controls.Add(this.label531);
+            this.tabPage5.Controls.Add(this.label530);
+            this.tabPage5.Controls.Add(this.label529);
+            this.tabPage5.Controls.Add(this.edHLSSegmentCount);
+            this.tabPage5.Controls.Add(this.label519);
+            this.tabPage5.Controls.Add(this.edHLSSegmentDuration);
+            this.tabPage5.Controls.Add(this.btSelectHLSOutputFolder);
+            this.tabPage5.Controls.Add(this.edHLSOutputFolder);
+            this.tabPage5.Controls.Add(this.label380);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(284, 352);
+            this.tabPage5.TabIndex = 7;
+            this.tabPage5.Text = "HLS";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // edHLSURL
+            // 
+            this.edHLSURL.Location = new System.Drawing.Point(14, 288);
+            this.edHLSURL.Name = "edHLSURL";
+            this.edHLSURL.Size = new System.Drawing.Size(252, 20);
+            this.edHLSURL.TabIndex = 33;
+            this.edHLSURL.Text = "http://localhost:81/playlist.m3u8";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(11, 313);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(16, 13);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "or";
+            // 
+            // edHLSEmbeddedHTTPServerPort
+            // 
+            this.edHLSEmbeddedHTTPServerPort.Location = new System.Drawing.Point(225, 263);
+            this.edHLSEmbeddedHTTPServerPort.Name = "edHLSEmbeddedHTTPServerPort";
+            this.edHLSEmbeddedHTTPServerPort.Size = new System.Drawing.Size(41, 20);
+            this.edHLSEmbeddedHTTPServerPort.TabIndex = 31;
+            this.edHLSEmbeddedHTTPServerPort.Text = "81";
+            // 
+            // cbHLSEmbeddedHTTPServerEnabled
+            // 
+            this.cbHLSEmbeddedHTTPServerEnabled.AutoSize = true;
+            this.cbHLSEmbeddedHTTPServerEnabled.Location = new System.Drawing.Point(14, 265);
+            this.cbHLSEmbeddedHTTPServerEnabled.Name = "cbHLSEmbeddedHTTPServerEnabled";
+            this.cbHLSEmbeddedHTTPServerEnabled.Size = new System.Drawing.Size(205, 17);
+            this.cbHLSEmbeddedHTTPServerEnabled.TabIndex = 30;
+            this.cbHLSEmbeddedHTTPServerEnabled.Text = "Use embedded HTTP server with port";
+            this.cbHLSEmbeddedHTTPServerEnabled.UseVisualStyleBackColor = true;
+            // 
+            // cbHLSMode
+            // 
+            this.cbHLSMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHLSMode.FormattingEnabled = true;
+            this.cbHLSMode.Items.AddRange(new object[] {
+            "Live",
+            "VOD",
+            "Event"});
+            this.cbHLSMode.Location = new System.Drawing.Point(14, 227);
+            this.cbHLSMode.Name = "cbHLSMode";
+            this.cbHLSMode.Size = new System.Drawing.Size(121, 21);
+            this.cbHLSMode.TabIndex = 29;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(11, 211);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(97, 13);
+            this.label25.TabIndex = 28;
+            this.label25.Text = "Mode (playlist type)";
+            // 
+            // lbHLSConfigure
+            // 
+            this.lbHLSConfigure.AutoSize = true;
+            this.lbHLSConfigure.Location = new System.Drawing.Point(11, 326);
+            this.lbHLSConfigure.Name = "lbHLSConfigure";
+            this.lbHLSConfigure.Size = new System.Drawing.Size(191, 13);
+            this.lbHLSConfigure.TabIndex = 27;
+            this.lbHLSConfigure.TabStop = true;
+            this.lbHLSConfigure.Text = "How to configure HTTP server for HLS";
+            this.lbHLSConfigure.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbHLSConfigure_LinkClicked);
+            // 
+            // label532
+            // 
+            this.label532.AutoSize = true;
+            this.label532.Location = new System.Drawing.Point(11, 181);
+            this.label532.Name = "label532";
+            this.label532.Size = new System.Drawing.Size(42, 13);
+            this.label532.TabIndex = 26;
+            this.label532.Text = "in code";
+            // 
+            // label531
+            // 
+            this.label531.AutoSize = true;
+            this.label531.Location = new System.Drawing.Point(11, 168);
+            this.label531.Name = "label531";
+            this.label531.Size = new System.Drawing.Size(247, 13);
+            this.label531.TabIndex = 25;
+            this.label531.Text = "You can set video (H264) and audio (AAC) settings";
+            // 
+            // label530
+            // 
+            this.label530.AutoSize = true;
+            this.label530.Location = new System.Drawing.Point(62, 133);
+            this.label530.Name = "label530";
+            this.label530.Size = new System.Drawing.Size(134, 13);
+            this.label530.TabIndex = 24;
+            this.label530.Text = "Use 0 to save all segments";
+            // 
+            // label529
+            // 
+            this.label529.AutoSize = true;
+            this.label529.Location = new System.Drawing.Point(11, 114);
+            this.label529.Name = "label529";
+            this.label529.Size = new System.Drawing.Size(244, 13);
+            this.label529.TabIndex = 23;
+            this.label529.Text = "Segment count that will be saved during streaming";
+            // 
+            // edHLSSegmentCount
+            // 
+            this.edHLSSegmentCount.Location = new System.Drawing.Point(14, 130);
+            this.edHLSSegmentCount.Name = "edHLSSegmentCount";
+            this.edHLSSegmentCount.Size = new System.Drawing.Size(42, 20);
+            this.edHLSSegmentCount.TabIndex = 22;
+            this.edHLSSegmentCount.Text = "20";
+            // 
+            // label519
+            // 
+            this.label519.AutoSize = true;
+            this.label519.Location = new System.Drawing.Point(11, 65);
+            this.label519.Name = "label519";
+            this.label519.Size = new System.Drawing.Size(116, 13);
+            this.label519.TabIndex = 21;
+            this.label519.Text = "Segment duration (sec)";
+            // 
+            // edHLSSegmentDuration
+            // 
+            this.edHLSSegmentDuration.Location = new System.Drawing.Point(14, 81);
+            this.edHLSSegmentDuration.Name = "edHLSSegmentDuration";
+            this.edHLSSegmentDuration.Size = new System.Drawing.Size(42, 20);
+            this.edHLSSegmentDuration.TabIndex = 20;
+            this.edHLSSegmentDuration.Text = "10";
+            // 
+            // btSelectHLSOutputFolder
+            // 
+            this.btSelectHLSOutputFolder.Location = new System.Drawing.Point(250, 31);
+            this.btSelectHLSOutputFolder.Name = "btSelectHLSOutputFolder";
+            this.btSelectHLSOutputFolder.Size = new System.Drawing.Size(23, 23);
+            this.btSelectHLSOutputFolder.TabIndex = 19;
+            this.btSelectHLSOutputFolder.Text = "...";
+            this.btSelectHLSOutputFolder.UseVisualStyleBackColor = true;
+            this.btSelectHLSOutputFolder.Click += new System.EventHandler(this.btSelectHLSOutputFolder_Click);
+            // 
+            // edHLSOutputFolder
+            // 
+            this.edHLSOutputFolder.Location = new System.Drawing.Point(14, 33);
+            this.edHLSOutputFolder.Name = "edHLSOutputFolder";
+            this.edHLSOutputFolder.Size = new System.Drawing.Size(230, 20);
+            this.edHLSOutputFolder.TabIndex = 18;
+            this.edHLSOutputFolder.Text = "c:\\inetpub\\wwwroot\\hls\\";
+            // 
+            // label380
+            // 
+            this.label380.AutoSize = true;
+            this.label380.Location = new System.Drawing.Point(11, 14);
+            this.label380.Name = "label380";
+            this.label380.Size = new System.Drawing.Size(188, 13);
+            this.label380.TabIndex = 17;
+            this.label380.Text = "Output folder for video files and playlist";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7610,6 +7815,8 @@ namespace VideoEdit_CS_Demo
             this.tabPage54.PerformLayout();
             this.tabPage74.ResumeLayout(false);
             this.tabPage74.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8233,6 +8440,25 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.Label label67;
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TextBox edHLSURL;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox edHLSEmbeddedHTTPServerPort;
+        private System.Windows.Forms.CheckBox cbHLSEmbeddedHTTPServerEnabled;
+        private System.Windows.Forms.ComboBox cbHLSMode;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.LinkLabel lbHLSConfigure;
+        private System.Windows.Forms.Label label532;
+        private System.Windows.Forms.Label label531;
+        private System.Windows.Forms.Label label530;
+        private System.Windows.Forms.Label label529;
+        private System.Windows.Forms.TextBox edHLSSegmentCount;
+        private System.Windows.Forms.Label label519;
+        private System.Windows.Forms.TextBox edHLSSegmentDuration;
+        private System.Windows.Forms.Button btSelectHLSOutputFolder;
+        private System.Windows.Forms.TextBox edHLSOutputFolder;
+        private System.Windows.Forms.Label label380;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

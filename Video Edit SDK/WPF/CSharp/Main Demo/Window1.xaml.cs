@@ -636,6 +636,35 @@ namespace Main_Demo
 
                             break;
                         }
+                    case 7:
+                        {
+                            VideoEdit1.Network_Streaming_Format = NetworkStreamingFormat.HLS;
+
+                            var hls = new HLSOutput
+                            {
+                                HLS =
+                                {
+                                    SegmentDuration = Convert.ToInt32(edHLSSegmentDuration.Text),
+                                    NumSegments = Convert.ToInt32(edHLSSegmentCount.Text),
+                                    OutputFolder = edHLSOutputFolder.Text,
+                                    PlaylistType = (HLSPlaylistType)cbHLSMode.SelectedIndex,
+                                    Custom_HTTP_Server_Enabled = cbHLSEmbeddedHTTPServerEnabled.IsChecked == true,
+                                    Custom_HTTP_Server_Port = Convert.ToInt32(edHLSEmbeddedHTTPServerPort.Text)
+                                }
+                            };
+                            VideoEdit1.Network_Streaming_Output = hls;
+
+                            if (cbHLSEmbeddedHTTPServerEnabled.IsChecked == true)
+                            {
+                                edHLSURL.Text = $"http://localhost:{edHLSEmbeddedHTTPServerPort.Text}/playlist.m3u8";
+                            }
+                            else
+                            {
+                                edHLSURL.Text = string.Empty;
+                            }
+
+                            break;
+                        }
                 }
 
                 VideoEdit1.Network_Streaming_Audio_Enabled = cbNetworkStreamingAudioEnabled.IsChecked == true;
@@ -3387,6 +3416,21 @@ namespace Main_Demo
         private void llXiphX64_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
+            Process.Start(startInfo);
+        }
+
+        private void btSelectHLSOutputFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDialog = new FolderBrowserDialog();
+            if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                edHLSOutputFolder.Text = folderDialog.SelectedPath;
+            }
+        }
+
+        private void lbHLSConfigure_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming);
             Process.Start(startInfo);
         }
     }
