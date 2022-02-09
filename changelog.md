@@ -2,9 +2,10 @@
 * App start-up time improved for PCs with Decklink cards 
 * NDI SDK v5 support
 * Resolved an issue with MKV Legacy output (wrong cast exception). 
-* Zoom and pan effects perfomance optimizations
+* Zoom and pan effects performance optimizations
 * Added basic Media Blocks API (WIP)
 * Added HLS network streaming to Video Edit SDK .Net
+* Added Rotate property to WPF VideoView. You can rotate video by 90, 180, or 270 degrees. Also, you can use GetImageLayer() method to get the Image layer and apply custom transforms
 
 15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos

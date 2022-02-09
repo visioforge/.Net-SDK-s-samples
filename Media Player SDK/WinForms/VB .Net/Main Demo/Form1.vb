@@ -16,6 +16,7 @@ Imports VisioForge.Types
 Imports VisioForge.MediaFramework
 Imports VisioForge.Core.MediaInfo
 Imports VisioForge.Core
+Imports System.Threading.Tasks
 
 Public Class Form1
     Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
@@ -347,7 +348,7 @@ Public Class Form1
         End Select
     End Sub
 
-    Private Sub cbDVDControlTitle_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlTitle.SelectedIndexChanged
+    Private Async Sub cbDVDControlTitle_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlTitle.SelectedIndexChanged
 
         If (cbDVDControlTitle.SelectedIndex <> -1) Then
 
@@ -391,8 +392,8 @@ Public Class Form1
             'if null we just enumerate titles and chapters
             If (IsDBNull(sender)) Then
                 'play title
-                MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex)
-                tbTimeline.Maximum = MediaPlayer1.DVD_Title_GetDuration().TotalSeconds
+                Await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex)
+                tbTimeline.Maximum = (Await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds
             End If
         End If
 
@@ -469,12 +470,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
+    Private Async Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
 
         If (MediaPlayer1.Source_Mode <> MediaPlayerSourceMode.DVD_DS) Then
-            MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0)
+            Await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0)
         Else
-            MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, False)
+            Await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, False)
         End If
 
     End Sub
@@ -487,10 +488,10 @@ Public Class Form1
 
     End Sub
 
-    Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
+    Private Async Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
 
         If (Convert.ToInt32(timer1.Tag) = 0) Then
-            MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value))
+            Await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value))
         End If
 
     End Sub
@@ -763,12 +764,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
+    Private Async Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
 
         timer1.Tag = 1
-        tbTimeline.Maximum = MediaPlayer1.Duration_Time().TotalSeconds
+        tbTimeline.Maximum = (Await MediaPlayer1.Duration_TimeAsync()).TotalSeconds
 
-        Dim value As Integer = MediaPlayer1.Position_Get_Time().TotalSeconds
+        Dim value As Integer = (Await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds
         If ((value > 0) And (value < tbTimeline.Maximum)) Then
 
             tbTimeline.Value = value
@@ -1177,13 +1178,13 @@ Public Class Form1
         MediaPlayer1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked
         If (MediaPlayer1.Audio_Enhancer_Enabled) Then
 
-            MediaPlayer1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked)
-            MediaPlayer1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked)
+            Await MediaPlayer1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked)
+            Await MediaPlayer1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked)
 
-            ApplyAudioInputGains()
-            ApplyAudioOutputGains()
+            Await ApplyAudioInputGainsAsync()
+            Await ApplyAudioOutputGainsAsync()
 
-            MediaPlayer1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value)
+            Await MediaPlayer1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value)
         End If
 
         ' Audio channels mapping
@@ -1301,7 +1302,7 @@ Public Class Form1
             End If
 
             ' show title menu
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
+            Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
 
         End If
 
@@ -1324,7 +1325,7 @@ Public Class Form1
 
                     MediaPlayer1.Audio_OutputDevice_Balance_Set(1, tbBalance2.Value)
                     MediaPlayer1.Audio_OutputDevice_Volume_Set(1, tbVolume2.Value)
-                    MediaPlayer1.Audio_Streams_Set(1, False) 'disable stream
+                    Await MediaPlayer1.Audio_Streams_SetAsync(1, False) 'disable stream
 
                 End If
 
@@ -1332,7 +1333,7 @@ Public Class Form1
 
                     MediaPlayer1.Audio_OutputDevice_Balance_Set(2, tbBalance3.Value)
                     MediaPlayer1.Audio_OutputDevice_Volume_Set(2, tbVolume3.Value)
-                    MediaPlayer1.Audio_Streams_Set(2, False) 'disable stream
+                    Await MediaPlayer1.Audio_Streams_SetAsync(2, False) 'disable stream
 
                 End If
 
@@ -1340,7 +1341,7 @@ Public Class Form1
 
                     MediaPlayer1.Audio_OutputDevice_Balance_Set(3, tbBalance4.Value)
                     MediaPlayer1.Audio_OutputDevice_Volume_Set(3, tbVolume4.Value)
-                    MediaPlayer1.Audio_Streams_Set(3, False) 'disable stream
+                    Await MediaPlayer1.Audio_Streams_SetAsync(3, False) 'disable stream
 
                 End If
             Else
@@ -1375,16 +1376,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
-
-        MediaPlayer1.DVD_Menu_Show(DVDMenu.Root)
-
+    Private Async Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
+        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root)
     End Sub
 
-    Private Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
-
-        MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
-
+    Private Async Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
+        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
     End Sub
 
     Private Async Sub btZoomIn_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btZoomIn.Click
@@ -1495,32 +1492,26 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbDVDControlAudio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlAudio.SelectedIndexChanged
+    Private Async Sub cbDVDControlAudio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlAudio.SelectedIndexChanged
 
         If (cbDVDControlAudio.SelectedIndex > 0) Then
-
-            MediaPlayer1.DVD_Select_AudioStream(cbDVDControlAudio.SelectedIndex)
-
+            Await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex)
         End If
 
     End Sub
 
-    Private Sub cbDVDControlChapter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlChapter.SelectedIndexChanged
+    Private Async Sub cbDVDControlChapter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlChapter.SelectedIndexChanged
 
         If (cbDVDControlChapter.SelectedIndex > 0) Then
-
-            MediaPlayer1.DVD_Chapter_Select(cbDVDControlChapter.SelectedIndex)
-
+            Await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex)
         End If
 
     End Sub
 
-    Private Sub cbDVDControlSubtitles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlSubtitles.SelectedIndexChanged
+    Private Async Sub cbDVDControlSubtitles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlSubtitles.SelectedIndexChanged
 
         If (cbDVDControlSubtitles.SelectedIndex > 0) Then
-
-            MediaPlayer1.DVD_Select_SubpictureStream(cbDVDControlSubtitles.SelectedIndex - 1)
-
+            Await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1)
         End If
 
         ' 0 - x - subtitles
@@ -2461,19 +2452,19 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
+    Private Async Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
 
-        MediaPlayer1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked)
-
-    End Sub
-
-    Private Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
-
-        MediaPlayer1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked)
+        Await MediaPlayer1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked)
 
     End Sub
 
-    Private Sub ApplyAudioInputGains()
+    Private Async Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
+
+        Await MediaPlayer1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked)
+
+    End Sub
+
+    Private Async Function ApplyAudioInputGainsAsync() As Task
 
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains()
 
@@ -2484,59 +2475,59 @@ Public Class Form1
         gains.SR = tbAudioInputGainSR.Value / 10.0F
         gains.LFE = tbAudioInputGainLFE.Value / 10.0F
 
-        MediaPlayer1.Audio_Enhancer_InputGains(-1, gains)
+        Await MediaPlayer1.Audio_Enhancer_InputGainsAsync(-1, gains)
 
-    End Sub
+    End Function
 
-    Private Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
+    Private Async Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
 
         lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
+    Private Async Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
 
         lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
+    Private Async Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
 
         lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
+    Private Async Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
 
         lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
+    Private Async Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
 
         lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
+    Private Async Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
 
         lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub ApplyAudioOutputGains()
+    Private Async Function ApplyAudioOutputGainsAsync() As Task
 
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains
 
@@ -2547,63 +2538,63 @@ Public Class Form1
         gains.SR = tbAudioOutputGainSR.Value / 10.0F
         gains.LFE = tbAudioOutputGainLFE.Value / 10.0F
 
-        MediaPlayer1.Audio_Enhancer_OutputGains(-1, gains)
+        Await MediaPlayer1.Audio_Enhancer_OutputGainsAsync(-1, gains)
 
-    End Sub
+    End Function
 
-    Private Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
+    Private Async Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
 
         lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
+    Private Async Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
 
         lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
+    Private Async Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
 
         lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
+    Private Async Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
 
         lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
+    Private Async Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
 
         lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
+    Private Async Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
 
         lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
+    Private Async Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
 
         lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms"
 
-        MediaPlayer1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value)
+        Await MediaPlayer1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value)
 
     End Sub
 

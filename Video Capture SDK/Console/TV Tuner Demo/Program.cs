@@ -55,7 +55,7 @@ namespace TV_Tuner_Demo
             int audioCaptureDeviceIndex = Convert.ToInt32(Console.ReadLine());
 
             // get tv tuner info
-            videoCapture.TVTuner_Read();
+            videoCapture.TVTuner_ReadAsync();
 
             var tuners = new List<string>();
             var tunerFormats = new List<string>();

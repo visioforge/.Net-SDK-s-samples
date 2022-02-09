@@ -22,6 +22,7 @@ Imports VisioForge.Types.AudioEffects
 Imports VisioForge.Types.VideoProcessing
 Imports System.Drawing.Imaging
 Imports VisioForge.Types.MediaPlayer
+Imports System.Threading.Tasks
 
 Public Class Form1
 
@@ -123,7 +124,7 @@ Public Class Form1
         VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero)
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         CreateEngine()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
@@ -201,7 +202,7 @@ Public Class Form1
 
         cbDirect2DRotate.SelectedIndex = 0
 
-        VideoCapture1.TVTuner_Read()
+        Await VideoCapture1.TVTuner_ReadAsync()
 
         For i As Integer = 0 To VideoCapture1.TVTuner_Devices.Count - 1
             cbTVTuner.Items.Add(VideoCapture1.TVTuner_Devices.Item(i))
@@ -384,15 +385,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub cbVideoInputDevice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbVideoInputDevice.SelectedIndexChanged
-
-        Dim min As Integer = 0
-        Dim max As Integer = 0
-        Dim k As Integer
-        Dim default_value As Integer = 0
-        Dim step1 As Integer = 0
-
-        Dim auto1 As Boolean = False
+    Private Async Sub cbVideoInputDevice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbVideoInputDevice.SelectedIndexChanged
 
         If cbVideoInputDevice.SelectedIndex <> -1 Then
             cbVideoInputFormat.Items.Clear()
@@ -414,7 +407,7 @@ Public Class Form1
                 Dim tvTuner = deviceItem.TVTuner
                 If tvTuner <> "" Then
 
-                    k = cbTVTuner.Items.IndexOf(tvTuner)
+                    Dim k As Integer = cbTVTuner.Items.IndexOf(tvTuner)
                     If k >= 0 Then
                         cbTVTuner.SelectedIndex = k
                     End If
@@ -485,52 +478,52 @@ Public Class Form1
                 End If
 
                 'updating adjust settings
-                If VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Brightness, min, max, step1, default_value, auto1) Then
-
-                    tbAdjBrightness.Minimum = min
-                    tbAdjBrightness.Maximum = max
-                    tbAdjBrightness.SmallChange = step1
-                    tbAdjBrightness.Value = default_value
-                    cbAdjBrightnessAuto.Checked = auto1
-                    lbAdjBrightnessMin.Text = "Min: " + Convert.ToString(min)
-                    lbAdjBrightnessMax.Text = "Max: " + Convert.ToString(max)
-                    lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(default_value)
+                Dim brightnessRanges As VideoCaptureDeviceAdjustRanges = Await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Brightness)
+                If brightnessRanges IsNot Nothing Then
+                    tbAdjBrightness.Minimum = brightnessRanges.Min
+                    tbAdjBrightness.Maximum = brightnessRanges.Max
+                    tbAdjBrightness.SmallChange = brightnessRanges.Step
+                    tbAdjBrightness.Value = brightnessRanges.Default
+                    cbAdjBrightnessAuto.Checked = brightnessRanges.Auto
+                    lbAdjBrightnessMin.Text = "Min: " + Convert.ToString(brightnessRanges.Min)
+                    lbAdjBrightnessMax.Text = "Max: " + Convert.ToString(brightnessRanges.Max)
+                    lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(brightnessRanges.Default)
                 End If
 
-                If VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Hue, min, max, step1, default_value, auto1) Then
-
-                    tbAdjHue.Minimum = min
-                    tbAdjHue.Maximum = max
-                    tbAdjHue.SmallChange = step1
-                    tbAdjHue.Value = default_value
-                    cbAdjHueAuto.Checked = auto1
-                    lbAdjHueMin.Text = "Min: " + Convert.ToString(min)
-                    lbAdjHueMax.Text = "Max: " + Convert.ToString(max)
-                    lbAdjHueCurrent.Text = "Current: " + Convert.ToString(default_value)
+                Dim hueRanges As VideoCaptureDeviceAdjustRanges = Await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Hue)
+                If hueRanges IsNot Nothing Then
+                    tbAdjHue.Minimum = hueRanges.Min
+                    tbAdjHue.Maximum = hueRanges.Max
+                    tbAdjHue.SmallChange = hueRanges.Step
+                    tbAdjHue.Value = hueRanges.Default
+                    cbAdjHueAuto.Checked = hueRanges.Auto
+                    lbAdjHueMin.Text = "Min: " + Convert.ToString(hueRanges.Min)
+                    lbAdjHueMax.Text = "Max: " + Convert.ToString(hueRanges.Max)
+                    lbAdjHueCurrent.Text = "Current: " + Convert.ToString(hueRanges.Default)
                 End If
 
-                If VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Saturation, min, max, step1, default_value, auto1) Then
-
-                    tbAdjSaturation.Minimum = min
-                    tbAdjSaturation.Maximum = max
-                    tbAdjSaturation.SmallChange = step1
-                    tbAdjSaturation.Value = default_value
-                    cbAdjSaturationAuto.Checked = auto1
-                    lbAdjSaturationMin.Text = "Min: " + Convert.ToString(min)
-                    lbAdjSaturationMax.Text = "Max: " + Convert.ToString(max)
-                    lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(default_value)
+                Dim saturationRanges As VideoCaptureDeviceAdjustRanges = Await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Saturation)
+                If saturationRanges IsNot Nothing Then
+                    tbAdjSaturation.Minimum = saturationRanges.Min
+                    tbAdjSaturation.Maximum = saturationRanges.Max
+                    tbAdjSaturation.SmallChange = saturationRanges.Step
+                    tbAdjSaturation.Value = saturationRanges.Default
+                    cbAdjSaturationAuto.Checked = saturationRanges.Auto
+                    lbAdjSaturationMin.Text = "Min: " + Convert.ToString(saturationRanges.Min)
+                    lbAdjSaturationMax.Text = "Max: " + Convert.ToString(saturationRanges.Max)
+                    lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(saturationRanges.Default)
                 End If
 
-                If VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Contrast, min, max, step1, default_value, auto1) Then
-
-                    tbAdjContrast.Minimum = min
-                    tbAdjContrast.Maximum = max
-                    tbAdjContrast.SmallChange = step1
-                    tbAdjContrast.Value = default_value
-                    cbAdjContrastAuto.Checked = auto1
-                    lbAdjContrastMin.Text = "Min: " + Convert.ToString(min)
-                    lbAdjContrastMax.Text = "Max: " + Convert.ToString(max)
-                    lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(default_value)
+                Dim contrastRanges As VideoCaptureDeviceAdjustRanges = Await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Contrast)
+                If contrastRanges IsNot Nothing Then
+                    tbAdjContrast.Minimum = contrastRanges.Min
+                    tbAdjContrast.Maximum = contrastRanges.Max
+                    tbAdjContrast.SmallChange = contrastRanges.Step
+                    tbAdjContrast.Value = contrastRanges.Default
+                    cbAdjContrastAuto.Checked = contrastRanges.Auto
+                    lbAdjContrastMin.Text = "Min: " + Convert.ToString(contrastRanges.Min)
+                    lbAdjContrastMax.Text = "Max: " + Convert.ToString(contrastRanges.Max)
+                    lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(contrastRanges.Default)
                 End If
 
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault
@@ -991,15 +984,13 @@ Public Class Form1
         ' Audio enhancement
         VideoCapture1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked
         If (VideoCapture1.Audio_Enhancer_Enabled) Then
+            Await VideoCapture1.Audio_Enhancer_NormalizeAsync(cbAudioNormalize.Checked)
+            Await VideoCapture1.Audio_Enhancer_AutoGainAsync(cbAudioAutoGain.Checked)
 
-            VideoCapture1.Audio_Enhancer_Normalize(cbAudioNormalize.Checked)
-            VideoCapture1.Audio_Enhancer_AutoGain(cbAudioAutoGain.Checked)
+            Await ApplyAudioInputGainsAsync()
+            Await ApplyAudioOutputGainsAsync()
 
-            ApplyAudioInputGains()
-            ApplyAudioOutputGains()
-
-            VideoCapture1.Audio_Enhancer_Timeshift(tbAudioTimeshift.Value)
-
+            Await VideoCapture1.Audio_Enhancer_TimeshiftAsync(tbAudioTimeshift.Value)
         End If
 
         ' Audio channels mapping
@@ -2064,7 +2055,7 @@ Public Class Form1
         cbCrossbarInput_SelectedIndexChanged(sender, e)
     End Sub
 
-    Private Sub cbTVChannel_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbTVChannel.SelectedIndexChanged
+    Private Async Sub cbTVChannel_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbTVChannel.SelectedIndexChanged
         If cbTVChannel.SelectedIndex <> -1 Then
 
             Dim k As Integer = Convert.ToInt32(cbTVChannel.Text)
@@ -2084,18 +2075,18 @@ Public Class Form1
                 Return
             End If
 
-            VideoCapture1.TVTuner_Apply()
-            VideoCapture1.TVTuner_Read()
+            Await VideoCapture1.TVTuner_ApplyAsync()
+            Await VideoCapture1.TVTuner_ReadAsync()
             edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
             edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
         End If
     End Sub
 
-    Private Sub cbTVTuner_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVTuner.SelectedIndexChanged
+    Private Async Sub cbTVTuner_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVTuner.SelectedIndexChanged
 
         If cbTVTuner.Items.Count > 0 And cbTVTuner.SelectedIndex <> -1 Then
             VideoCapture1.TVTuner_Name = cbTVTuner.Text
-            VideoCapture1.TVTuner_Read()
+            Await VideoCapture1.TVTuner_ReadAsync()
 
             cbTVMode.Items.Clear()
             For i As Integer = 0 To VideoCapture1.TVTuner_Modes.Count - 1
@@ -2278,12 +2269,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btStartTune_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStartTune.Click
+    Private Async Sub btStartTune_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStartTune.Click
 
         Const KHz As Integer = 1000
         Const MHz As Integer = 1000000
 
-        VideoCapture1.TVTuner_Read()
+        Await VideoCapture1.TVTuner_ReadAsync()
         cbTVChannel.Items.Clear()
 
         If (cbTVMode.SelectedIndex <> -1) And (cbTVMode.Text = "FM Radio") Then
@@ -2302,7 +2293,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btUseThisChannel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btUseThisChannel.Click
+    Private Async Sub btUseThisChannel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btUseThisChannel.Click
         If Convert.ToInt32(edChannel.Text) <= 10000 Then
             'channel
             VideoCapture1.TVTuner_Channel = Convert.ToInt32(edChannel.Text)
@@ -2319,14 +2310,14 @@ Public Class Form1
             Return
         End If
 
-        VideoCapture1.TVTuner_Apply()
-        VideoCapture1.TVTuner_Read()
+        Await VideoCapture1.TVTuner_ApplyAsync()
+        Await VideoCapture1.TVTuner_ReadAsync()
         edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
         edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
 
     End Sub
 
-    Private Sub cbTVCountry_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVCountry.SelectedIndexChanged
+    Private Async Sub cbTVCountry_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVCountry.SelectedIndexChanged
         If cbTVCountry.SelectedIndex <> -1 Then
 
             VideoCapture1.TVTuner_Country = cbTVCountry.Text
@@ -2337,8 +2328,8 @@ Public Class Form1
             End If
 
             If VideoCapture1.State = PlaybackState.Play Then
-                VideoCapture1.TVTuner_Apply()
-                VideoCapture1.TVTuner_Read()
+                Await VideoCapture1.TVTuner_ApplyAsync()
+                Await VideoCapture1.TVTuner_ReadAsync()
             End If
 
         End If
@@ -2351,7 +2342,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbTVSelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVMode.SelectedIndexChanged
+    Private Async Sub cbTVSelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVMode.SelectedIndexChanged
 
         If cbTVMode.SelectedIndex <> -1 Then
             VideoCapture1.TVTuner_Mode = cbTVMode.Text
@@ -2360,8 +2351,8 @@ Public Class Form1
                 Return
             End If
 
-            VideoCapture1.TVTuner_Apply()
-            VideoCapture1.TVTuner_Read()
+            Await VideoCapture1.TVTuner_ApplyAsync()
+            Await VideoCapture1.TVTuner_ReadAsync()
             cbTVChannel.Items.Clear()
             edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
             edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
@@ -2369,7 +2360,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbTVInput_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVInput.SelectedIndexChanged
+    Private Async Sub cbTVInput_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVInput.SelectedIndexChanged
         If cbTVInput.SelectedIndex <> -1 Then
             VideoCapture1.TVTuner_InputType = cbTVInput.Text
 
@@ -2377,15 +2368,15 @@ Public Class Form1
                 Return
             End If
 
-            VideoCapture1.TVTuner_Apply()
-            VideoCapture1.TVTuner_Read()
+            Await VideoCapture1.TVTuner_ApplyAsync()
+            Await VideoCapture1.TVTuner_ReadAsync()
             edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
             edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
         End If
 
     End Sub
 
-    Private Sub cbTVSystem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVSystem.SelectedIndexChanged
+    Private Async Sub cbTVSystem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVSystem.SelectedIndexChanged
 
         If cbTVSystem.SelectedIndex <> -1 Then
             VideoCapture1.TVTuner_TVFormat = VideoCapture1.TVTuner_TVFormat_FromString(cbTVSystem.Text)
@@ -2394,8 +2385,8 @@ Public Class Form1
                 Return
             End If
 
-            VideoCapture1.TVTuner_Apply()
-            VideoCapture1.TVTuner_Read()
+            Await VideoCapture1.TVTuner_ApplyAsync()
+            Await VideoCapture1.TVTuner_ReadAsync()
             edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
             edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
         End If
@@ -3879,20 +3870,19 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
+    Private Async Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
 
-        VideoCapture1.Audio_Enhancer_Normalize(cbAudioNormalize.Checked)
-
-    End Sub
-
-    Private Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
-
-        VideoCapture1.Audio_Enhancer_AutoGain(cbAudioAutoGain.Checked)
+        Await VideoCapture1.Audio_Enhancer_NormalizeAsync(cbAudioNormalize.Checked)
 
     End Sub
 
-    Private Sub ApplyAudioInputGains()
+    Private Async Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
 
+        Await VideoCapture1.Audio_Enhancer_AutoGainAsync(cbAudioAutoGain.Checked)
+
+    End Sub
+
+    Private Async Function ApplyAudioInputGainsAsync() As Task
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains()
 
         gains.L = tbAudioInputGainL.Value / 10.0F
@@ -3902,12 +3892,10 @@ Public Class Form1
         gains.SR = tbAudioInputGainSR.Value / 10.0F
         gains.LFE = tbAudioInputGainLFE.Value / 10.0F
 
-        VideoCapture1.Audio_Enhancer_InputGains(gains)
+        Await VideoCapture1.Audio_Enhancer_InputGainsAsync(gains)
+    End Function
 
-    End Sub
-
-    Private Sub ApplyAudioOutputGains()
-
+    Private Async Function ApplyAudioOutputGainsAsync() As Task
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains
 
         gains.L = tbAudioOutputGainL.Value / 10.0F
@@ -3917,112 +3905,109 @@ Public Class Form1
         gains.SR = tbAudioOutputGainSR.Value / 10.0F
         gains.LFE = tbAudioOutputGainLFE.Value / 10.0F
 
-        VideoCapture1.Audio_Enhancer_OutputGains(gains)
+        Await VideoCapture1.Audio_Enhancer_OutputGainsAsync(gains)
+    End Function
 
-    End Sub
-
-    Private Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
+    Private Async Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
 
         lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
+    Private Async Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
 
         lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
+    Private Async Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
 
         lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
+    Private Async Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
 
         lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
+    Private Async Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
 
         lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
+    Private Async Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
 
         lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
+    Private Async Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
 
         lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
+    Private Async Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
 
         lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
+    Private Async Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
 
         lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
+    Private Async Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
 
         lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
+    Private Async Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
 
         lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
+    Private Async Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
 
         lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
-
+    Private Async Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
         lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms"
 
-        VideoCapture1.Audio_Enhancer_Timeshift(tbAudioTimeshift.Value)
-
+        Await VideoCapture1.Audio_Enhancer_TimeshiftAsync(tbAudioTimeshift.Value)
     End Sub
 
     Private Sub Log(msg As String)

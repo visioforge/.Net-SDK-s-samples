@@ -23,8 +23,8 @@
     <AssemblyTitle>Video Capture Demo</AssemblyTitle>
     <Product>Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.2.9.0</AssemblyVersion>
-    <FileVersion>15.2.9.0</FileVersion>
+    <AssemblyVersion>15.2.10.0</AssemblyVersion>
+    <FileVersion>15.2.10.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -44,11 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser19" Version="1.9.74" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.2.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.2.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.2.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.2.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.2.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.2.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.2.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.2.10" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -97,12 +97,12 @@
             tbTimeline.Value = 0;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)CurrentPlayer.Duration_Time().TotalSeconds;
+            tbTimeline.Maximum = (int)(await CurrentPlayer.Duration_TimeAsync()).TotalSeconds;
 
-            int value = (int)CurrentPlayer.Position_Get_Time().TotalSeconds;
+            int value = (int)(await CurrentPlayer.Position_Get_TimeAsync()).TotalSeconds;
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -118,9 +118,9 @@
             CurrentPlayer.NextFrame();
         }
 
-        private void tbSpeed_Scroll(object sender, EventArgs e)
+        private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            CurrentPlayer.SetSpeed(tbSpeed.Value / 10.0);
+            await CurrentPlayer.SetSpeedAsync(tbSpeed.Value / 10.0);
         }
 
         private void InitPlayer(MediaPlayerCore player)
@@ -251,11 +251,11 @@
             DestroyEngine2();
         }
 
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                CurrentPlayer.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await CurrentPlayer.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 

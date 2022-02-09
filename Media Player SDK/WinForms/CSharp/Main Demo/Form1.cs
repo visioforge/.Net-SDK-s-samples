@@ -398,15 +398,15 @@ namespace Media_Player_Demo
             }
         }
 
-        private void tbSpeed_Scroll(object sender, EventArgs e)
+        private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
             if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.DVD_DS)
             {
-                MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0);
+                await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
             }
             else
             {
-                MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, false);
+                await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, false);
             }
         }
 
@@ -418,11 +418,11 @@ namespace Media_Player_Demo
             }
         }
 
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
@@ -685,12 +685,12 @@ namespace Media_Player_Demo
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)MediaPlayer1.Duration_Time().TotalSeconds;
+            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
-            int value = (int)MediaPlayer1.Position_Get_Time().TotalSeconds;
+            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -1271,13 +1271,13 @@ namespace Media_Player_Demo
             MediaPlayer1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked;
             if (MediaPlayer1.Audio_Enhancer_Enabled)
             {
-                MediaPlayer1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked);
-                MediaPlayer1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked);
+                await MediaPlayer1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
+                await MediaPlayer1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
 
-                ApplyAudioInputGains();
-                ApplyAudioOutputGains();
+                await ApplyAudioInputGainsAsync();
+                await ApplyAudioOutputGainsAsync();
 
-                MediaPlayer1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
+                await MediaPlayer1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value);
             }
 
             // Audio channels mapping
@@ -1386,7 +1386,7 @@ namespace Media_Player_Demo
                 }
 
                 // show title menu
-                MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
+                await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
             }
 
             // set audio volume for each stream
@@ -1453,14 +1453,14 @@ namespace Media_Player_Demo
             }
         }
 
-        private void btDVDControlRootMenu_Click(object sender, EventArgs e)
+        private async void btDVDControlRootMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Root);
+            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root);
         }
 
-        private void btDVDControlTitleMenu_Click(object sender, EventArgs e)
+        private async void btDVDControlTitleMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
+            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
         }
 
         private async void btZoomIn_Click(object sender, EventArgs e)
@@ -1571,34 +1571,34 @@ namespace Media_Player_Demo
             }
         }
 
-        private void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlAudio.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Select_AudioStream(cbDVDControlAudio.SelectedIndex);
+                await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex);
             }
         }
 
-        private void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlChapter.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Chapter_Select(cbDVDControlChapter.SelectedIndex);
+                await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex);
             }
         }
 
-        private void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlSubtitles.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Select_SubpictureStream(cbDVDControlSubtitles.SelectedIndex - 1);
+                await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1);
             }
 
             // 0 - x - subtitles
             // -1 - disable subtitles
         }
 
-        private void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlTitle.SelectedIndex != -1)
             {
@@ -1648,8 +1648,8 @@ namespace Media_Player_Demo
                 if (sender != null)
                 {
                     // play title
-                    MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex);
-                    tbTimeline.Maximum = (int)MediaPlayer1.DVD_Title_GetDuration().TotalSeconds;
+                    await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex);
+                    tbTimeline.Maximum = (int)((await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds);
                 }
             }
         }
@@ -1935,21 +1935,21 @@ namespace Media_Player_Demo
             lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(tbAdjBrightness.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
-        private void tbAdjContrast_Scroll(object sender, EventArgs e)
+        private async void tbAdjContrast_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Video_Renderer_VideoAdjust_SetValue(VideoRendererAdjustment.Contrast, (float)(tbAdjContrast.Value / 10.0));
+            await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Contrast, (float)(tbAdjContrast.Value / 10.0));
             lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(tbAdjContrast.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
-        private void tbAdjHue_Scroll(object sender, EventArgs e)
+        private async void tbAdjHue_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Video_Renderer_VideoAdjust_SetValue(VideoRendererAdjustment.Hue, (float)(tbAdjHue.Value / 10.0));
+            await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Hue, (float)(tbAdjHue.Value / 10.0));
             lbAdjHueCurrent.Text = "Current: " + Convert.ToString(tbAdjHue.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
-        private void tbAdjSaturation_Scroll(object sender, EventArgs e)
+        private async void tbAdjSaturation_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Video_Renderer_VideoAdjust_SetValue(VideoRendererAdjustment.Saturation, (float)(tbAdjSaturation.Value / 10.0));
+            await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Saturation, (float)(tbAdjSaturation.Value / 10.0));
             lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(tbAdjSaturation.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
@@ -2672,17 +2672,17 @@ namespace Media_Player_Demo
             MediaPlayer1.Video_Filters_Clear();
         }
 
-        private void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked);
+            await MediaPlayer1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
         }
 
-        private void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked);
+            await MediaPlayer1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
         }
 
-        private void ApplyAudioInputGains()
+        private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2694,52 +2694,52 @@ namespace Media_Player_Demo
                 LFE = tbAudioInputGainLFE.Value / 10.0f
             };
 
-            MediaPlayer1.Audio_Enhancer_InputGains(-1, gains);
+            await MediaPlayer1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
-        private void tbAudioInputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void ApplyAudioOutputGains()
+        private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2751,56 +2751,56 @@ namespace Media_Player_Demo
                 LFE = tbAudioOutputGainLFE.Value / 10.0f
             };
 
-            MediaPlayer1.Audio_Enhancer_OutputGains(-1, gains);
+            await MediaPlayer1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
-        private void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainR_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioTimeshift_Scroll(object sender, EventArgs e)
+        private async void tbAudioTimeshift_Scroll(object sender, EventArgs e)
         {
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
-            MediaPlayer1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
+            await MediaPlayer1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value);
         }
 
         private void btReadTags_Click(object sender, EventArgs e)

@@ -53,11 +53,11 @@
             }
         }
 
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
@@ -113,21 +113,21 @@
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)MediaPlayer1.Duration_Time().TotalSeconds;
+            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
-            if ((MediaPlayer1.Position_Get_Time().TotalSeconds > 0) && (MediaPlayer1.Position_Get_Time().TotalSeconds < tbTimeline.Maximum))
+            if (((await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds > 0) && ((await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds < tbTimeline.Maximum))
             {
-                tbTimeline.Value = (int)MediaPlayer1.Position_Get_Time().TotalSeconds;
+                tbTimeline.Value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
             }
 
             lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             if (_cdg != null)
             {
-                if (_cdg.renderAtPosition((long)MediaPlayer1.Position_Get_Time().TotalMilliseconds))
+                if (_cdg.renderAtPosition((long)(await MediaPlayer1.Position_Get_TimeAsync()).TotalMilliseconds))
                 {
                     imgScreen.Image = _cdg.RGBImage();
                 }

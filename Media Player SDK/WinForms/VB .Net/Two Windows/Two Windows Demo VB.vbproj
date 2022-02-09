@@ -121,7 +121,7 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.2.9" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.2.10" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

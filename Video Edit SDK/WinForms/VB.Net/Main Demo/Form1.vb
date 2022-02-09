@@ -18,6 +18,7 @@ Imports VisioForge.Types.AudioEffects
 Imports VisioForge.Types.VideoProcessing
 Imports VisioForge.Core
 Imports VisioForge.MediaFramework.Helpers
+Imports System.Threading.Tasks
 
 Public Class Form1
     Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
@@ -858,13 +859,13 @@ Public Class Form1
         VideoEdit1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked
         If (VideoEdit1.Audio_Enhancer_Enabled) Then
 
-            VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked)
-            VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked)
+            Await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked)
+            Await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked)
 
-            ApplyAudioInputGains()
-            ApplyAudioOutputGains()
+            Await ApplyAudioInputGainsAsync()
+            Await ApplyAudioOutputGainsAsync()
 
-            VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value)
+            Await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value)
 
         End If
 
@@ -1196,8 +1197,8 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
-        VideoEdit1.Stop()
+    Private Async Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Await VideoEdit1.StopAsync()
         DestroyEngine()
     End Sub
 
@@ -1981,22 +1982,20 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
+    Private Async Sub cbAudioNormalize_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioNormalize.CheckedChanged
 
-        VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked)
-
-    End Sub
-
-    Private Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
-
-        VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked)
+        Await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked)
 
     End Sub
 
-    Private Sub ApplyAudioInputGains()
+    Private Async Sub cbAudioAutoGain_CheckedChanged(sender As Object, e As EventArgs) Handles cbAudioAutoGain.CheckedChanged
 
+        Await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked)
+
+    End Sub
+
+    Private Async Function ApplyAudioInputGainsAsync() As Task
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains()
-
         gains.L = tbAudioInputGainL.Value / 10.0F
         gains.C = tbAudioInputGainC.Value / 10.0F
         gains.R = tbAudioInputGainR.Value / 10.0F
@@ -2004,14 +2003,11 @@ Public Class Form1
         gains.SR = tbAudioInputGainSR.Value / 10.0F
         gains.LFE = tbAudioInputGainLFE.Value / 10.0F
 
-        VideoEdit1.Audio_Enhancer_InputGains(-1, gains)
+        Await VideoEdit1.Audio_Enhancer_InputGainsAsync(-1, gains)
+    End Function
 
-    End Sub
-
-    Private Sub ApplyAudioOutputGains()
-
+    Private Async Function ApplyAudioOutputGainsAsync() As Task
         Dim gains As AudioEnhancerGains = New AudioEnhancerGains
-
         gains.L = tbAudioOutputGainL.Value / 10.0F
         gains.C = tbAudioOutputGainC.Value / 10.0F
         gains.R = tbAudioOutputGainR.Value / 10.0F
@@ -2019,111 +2015,110 @@ Public Class Form1
         gains.SR = tbAudioOutputGainSR.Value / 10.0F
         gains.LFE = tbAudioOutputGainLFE.Value / 10.0F
 
-        VideoEdit1.Audio_Enhancer_OutputGains(-1, gains)
+        Await VideoEdit1.Audio_Enhancer_OutputGainsAsync(-1, gains)
+    End Function
 
-    End Sub
-
-    Private Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
+    Private Async Sub tbAudioInputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainL.Scroll
 
         lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
+    Private Async Sub tbAudioInputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainC.Scroll
 
         lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
+    Private Async Sub tbAudioInputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainR.Scroll
 
         lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
+    Private Async Sub tbAudioInputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSL.Scroll
 
         lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
+    Private Async Sub tbAudioInputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainSR.Scroll
 
         lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
+    Private Async Sub tbAudioInputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioInputGainLFE.Scroll
 
         lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioInputGains()
+        Await ApplyAudioInputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
+    Private Async Sub tbAudioOutputGainL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainL.Scroll
 
         lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
+    Private Async Sub tbAudioOutputGainC_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainC.Scroll
 
         lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
+    Private Async Sub tbAudioOutputGainR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainR.Scroll
 
         lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
+    Private Async Sub tbAudioOutputGainSL_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSL.Scroll
 
         lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
+    Private Async Sub tbAudioOutputGainSR_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainSR.Scroll
 
         lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
+    Private Async Sub tbAudioOutputGainLFE_Scroll(sender As Object, e As EventArgs) Handles tbAudioOutputGainLFE.Scroll
 
         lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0F).ToString("F1")
 
-        ApplyAudioOutputGains()
+        Await ApplyAudioOutputGainsAsync()
 
     End Sub
 
-    Private Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
+    Private Async Sub tbAudioTimeshift_Scroll(sender As Object, e As EventArgs) Handles tbAudioTimeshift.Scroll
 
         lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms"
 
-        VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value)
+        Await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value)
 
     End Sub
 

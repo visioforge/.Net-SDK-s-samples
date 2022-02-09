@@ -28,14 +28,14 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
+    Private Async Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
         If (Convert.ToInt32(timer1.Tag) = 0) Then
-            MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value))
+            Await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value))
         End If
     End Sub
 
-    Private Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
-        MediaPlayer1.SetSpeed(tbSpeed.Value / 10.0)
+    Private Async Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
+        Await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0)
     End Sub
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
@@ -119,12 +119,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
+    Private Async Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
 
         timer1.Tag = 1
-        tbTimeline.Maximum = MediaPlayer1.Duration_Time().TotalSeconds
+        tbTimeline.Maximum = (Await MediaPlayer1.Duration_TimeAsync()).TotalSeconds
 
-        Dim value As Integer = MediaPlayer1.Position_Get_Time().TotalSeconds
+        Dim value As Integer = (Await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds
         If ((value > 0) And (value < tbTimeline.Maximum)) Then
             tbTimeline.Value = value
         End If

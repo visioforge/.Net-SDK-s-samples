@@ -151,20 +151,20 @@
             MediaPlayer1.NextFrame();
         }
 
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)MediaPlayer1.Duration_Time().TotalSeconds;
+            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
-            int value = (int)MediaPlayer1.Position_Get_Time().TotalSeconds;
+            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;

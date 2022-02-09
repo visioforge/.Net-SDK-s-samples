@@ -47,17 +47,17 @@ Public Class Form1
 
     End Sub
 
-    Private Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
+    Private Async Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
 
         If (Convert.ToInt32(timer1.Tag) = 0) Then
-            MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value))
+            Await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value))
         End If
 
     End Sub
 
-    Private Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
+    Private Async Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
 
-        MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, False)
+        Await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, False)
 
     End Sub
 
@@ -88,7 +88,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbDVDControlTitle_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs)
+    Private Async Sub cbDVDControlTitle_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs)
 
         If (cbDVDControlTitle.SelectedIndex <> -1) Then
 
@@ -132,33 +132,33 @@ Public Class Form1
 
             If (Not IsDBNull(sender)) Then 'if null we just enumerate titles and chapters
                 'play title
-                MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex)
-                tbTimeline.Maximum = MediaPlayer1.DVD_Title_GetDuration().TotalSeconds
+                Await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex)
+                tbTimeline.Maximum = (Await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds
             End If
         End If
 
     End Sub
 
-    Private Sub cbDVDControlAudio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlAudio.SelectedIndexChanged
+    Private Async Sub cbDVDControlAudio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlAudio.SelectedIndexChanged
 
         If (cbDVDControlAudio.SelectedIndex > 0) Then
-            MediaPlayer1.DVD_Select_AudioStream(cbDVDControlAudio.SelectedIndex)
+            Await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex)
         End If
 
     End Sub
 
-    Private Sub cbDVDControlChapter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlChapter.SelectedIndexChanged
+    Private Async Sub cbDVDControlChapter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlChapter.SelectedIndexChanged
 
         If (cbDVDControlChapter.SelectedIndex > 0) Then
-            MediaPlayer1.DVD_Chapter_Select(cbDVDControlChapter.SelectedIndex)
+            Await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex)
         End If
 
     End Sub
 
-    Private Sub cbDVDControlSubtitles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlSubtitles.SelectedIndexChanged
+    Private Async Sub cbDVDControlSubtitles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlSubtitles.SelectedIndexChanged
 
         If (cbDVDControlSubtitles.SelectedIndex > 0) Then
-            MediaPlayer1.DVD_Select_SubpictureStream(cbDVDControlSubtitles.SelectedIndex - 1)
+            Await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1)
 
             ' 0 - x - subtitles
             ' -1 - disable subtitles
@@ -166,15 +166,15 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
+    Private Async Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
 
-        MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
+        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
 
     End Sub
 
-    Private Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
+    Private Async Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
 
-        MediaPlayer1.DVD_Menu_Show(DVDMenu.Root)
+        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root)
 
     End Sub
 
@@ -224,7 +224,7 @@ Public Class Form1
         End If
 
         'show title menu
-        MediaPlayer1.DVD_Menu_Show(DVDMenu.Title)
+        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
 
         MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value)
         MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value)
@@ -241,12 +241,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
+    Private Async Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
 
         timer1.Tag = 1
-        tbTimeline.Maximum = MediaPlayer1.Duration_Time().TotalSeconds
+        tbTimeline.Maximum = (Await MediaPlayer1.Duration_TimeAsync()).TotalSeconds
 
-        Dim value As Integer = MediaPlayer1.Position_Get_Time().TotalSeconds
+        Dim value As Integer = (Await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds
         If ((value > 0) And (value < tbTimeline.Maximum)) Then
             tbTimeline.Value = value
         End If

@@ -11,6 +11,7 @@ namespace Main_Demo
     using System.Drawing;
     using System.Globalization;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Forms;
@@ -899,13 +900,13 @@ namespace Main_Demo
             VideoEdit1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.IsChecked == true;
             if (VideoEdit1.Audio_Enhancer_Enabled)
             {
-                VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.IsChecked == true);
-                VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.IsChecked == true);
+                await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.IsChecked == true);
+                await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.IsChecked == true);
 
-                ApplyAudioInputGains();
-                ApplyAudioOutputGains();
+                await ApplyAudioInputGainsAsync();
+                await ApplyAudioOutputGainsAsync();
 
-                VideoEdit1.Audio_Enhancer_Timeshift(-1, (int)tbAudioTimeshift.Value);
+                await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, (int)tbAudioTimeshift.Value);
             }
 
             // Audio channels mapping
@@ -1604,11 +1605,11 @@ namespace Main_Demo
             Process.Start(startInfo);
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private async void Window_Closed(object sender, EventArgs e)
         {
             if (VideoEdit1.State() == PlaybackState.Play)
             {
-                VideoEdit1.Stop();
+                await VideoEdit1.StopAsync();
             }
 
             DestroyEngine();
@@ -2396,17 +2397,17 @@ namespace Main_Demo
             "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
         }
 
-        private void cbAudioNormalize_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioNormalize_Checked(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.IsChecked == true);
+            await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.IsChecked == true);
         }
 
-        private void cbAudioAutoGain_Checked(object sender, RoutedEventArgs e)
+        private async void cbAudioAutoGain_Checked(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.IsChecked == true);
+            await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.IsChecked == true);
         }
 
-        private void ApplyAudioInputGains()
+        private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2418,52 +2419,52 @@ namespace Main_Demo
                 LFE = (float)tbAudioInputGainLFE.Value / 10.0f
             };
 
-            VideoEdit1.Audio_Enhancer_InputGains(-1, gains);
+            await VideoEdit1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
-        private void tbAudioInputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainL.Content = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainC.Content = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainR.Content = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainSL.Content = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainSR.Content = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioInputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainLFE.Content = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void ApplyAudioOutputGains()
+        private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2475,56 +2476,56 @@ namespace Main_Demo
                 LFE = (float)tbAudioOutputGainLFE.Value / 10.0f
             };
 
-            VideoEdit1.Audio_Enhancer_OutputGains(-1, gains);
+            await VideoEdit1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
-        private void tbAudioOutputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainL.Content = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainC.Content = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainR.Content = (tbAudioOutputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainSL.Content = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainSR.Content = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioOutputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainLFE.Content = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioTimeshift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbAudioTimeshift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioTimeshift.Content = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
-            VideoEdit1.Audio_Enhancer_Timeshift(-1, (int)tbAudioTimeshift.Value);
+            await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, (int)tbAudioTimeshift.Value);
         }
 
         public delegate void FFMPEGInfoDelegate(string message);

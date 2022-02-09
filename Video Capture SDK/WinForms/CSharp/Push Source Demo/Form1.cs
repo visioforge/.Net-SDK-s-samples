@@ -127,7 +127,7 @@ namespace Push_Source_Demo
 
                                  if (bmp != null)
                                  {
-                                     VideoCapture1.Push_Source_AddVideoFrame(bmp);
+                                     await VideoCapture1.Push_Source_AddVideoFrameAsync(bmp);
                                      bmp.Dispose();
                                      bmp = null;
                                  }

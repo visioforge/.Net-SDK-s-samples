@@ -35,6 +35,7 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Types.VideoProcessing;
     using M4AOutput = VisioForge.Types.Output.M4AOutput;
     using VisioForge.Core;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Main form.
@@ -190,7 +191,7 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">
         /// Event args.
         /// </param>
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
 
@@ -275,7 +276,7 @@ namespace VideoCapture_CSharp_Demo
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output_new.mp4");
 
-            VideoCapture1.TVTuner_Read();
+            await VideoCapture1.TVTuner_ReadAsync();
 
             foreach (string tunerDevice in VideoCapture1.TVTuner_Devices())
             {
@@ -459,7 +460,9 @@ namespace VideoCapture_CSharp_Demo
             cbAudEqualizerPreset.SelectedIndex = 0;
 
             // Decklink enumerating can be slow. We'll run it in an independent thread.
+#pragma warning disable CS4014 
             System.Threading.Tasks.Task.Run(AddDecklinkSources);
+#pragma warning restore CS4014 
 
             btVirtualCameraRegister.Enabled = !VideoCapture1.DirectShow_Filters().Contains("VisioForge Virtual Camera");
 
@@ -484,7 +487,7 @@ namespace VideoCapture_CSharp_Demo
             }));
         }
 
-        private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
@@ -580,57 +583,56 @@ namespace VideoCapture_CSharp_Demo
                 }
 
                 // updating adjust settings
-                int max;
-                int defaultValue;
-                int min;
-                bool auto;
-                int step;
-                if (VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Brightness, out min, out max, out step, out defaultValue, out auto))
+                var brightnessRange = await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Brightness);
+                if (brightnessRange != null)
                 {
-                    tbAdjBrightness.Minimum = min;
-                    tbAdjBrightness.Maximum = max;
-                    tbAdjBrightness.SmallChange = step;
-                    tbAdjBrightness.Value = defaultValue;
-                    cbAdjBrightnessAuto.Checked = auto;
-                    lbAdjBrightnessMin.Text = "Min: " + Convert.ToString(min);
-                    lbAdjBrightnessMax.Text = "Max: " + Convert.ToString(max);
-                    lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(defaultValue);
+                    tbAdjBrightness.Minimum = brightnessRange.Min;
+                    tbAdjBrightness.Maximum = brightnessRange.Max;
+                    tbAdjBrightness.SmallChange = brightnessRange.Step;
+                    tbAdjBrightness.Value = brightnessRange.Default;
+                    cbAdjBrightnessAuto.Checked = brightnessRange.Auto;
+                    lbAdjBrightnessMin.Text = "Min: " + Convert.ToString(brightnessRange.Min);
+                    lbAdjBrightnessMax.Text = "Max: " + Convert.ToString(brightnessRange.Max);
+                    lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(brightnessRange.Default);
                 }
 
-                if (VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Hue, out min, out max, out step, out defaultValue, out auto))
+                var hueRange = await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Hue);
+                if (hueRange != null)
                 {
-                    tbAdjHue.Minimum = min;
-                    tbAdjHue.Maximum = max;
-                    tbAdjHue.SmallChange = step;
-                    tbAdjHue.Value = defaultValue;
-                    cbAdjHueAuto.Checked = auto;
-                    lbAdjHueMin.Text = "Min: " + Convert.ToString(min);
-                    lbAdjHueMax.Text = "Max: " + Convert.ToString(max);
-                    lbAdjHueCurrent.Text = "Current: " + Convert.ToString(defaultValue);
+                    tbAdjHue.Minimum = hueRange.Min;
+                    tbAdjHue.Maximum = hueRange.Max;
+                    tbAdjHue.SmallChange = hueRange.Step;
+                    tbAdjHue.Value = hueRange.Default;
+                    cbAdjHueAuto.Checked = hueRange.Auto;
+                    lbAdjHueMin.Text = "Min: " + Convert.ToString(hueRange.Min);
+                    lbAdjHueMax.Text = "Max: " + Convert.ToString(hueRange.Max);
+                    lbAdjHueCurrent.Text = "Current: " + Convert.ToString(hueRange.Default);
                 }
 
-                if (VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Saturation, out min, out max, out step, out defaultValue, out auto))
+                var saturationRange = await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Saturation);
+                if (saturationRange != null)
                 {
-                    tbAdjSaturation.Minimum = min;
-                    tbAdjSaturation.Maximum = max;
-                    tbAdjSaturation.SmallChange = step;
-                    tbAdjSaturation.Value = defaultValue;
-                    cbAdjSaturationAuto.Checked = auto;
-                    lbAdjSaturationMin.Text = "Min: " + Convert.ToString(min);
-                    lbAdjSaturationMax.Text = "Max: " + Convert.ToString(max);
-                    lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(defaultValue);
+                    tbAdjSaturation.Minimum = saturationRange.Min;
+                    tbAdjSaturation.Maximum = saturationRange.Max;
+                    tbAdjSaturation.SmallChange = saturationRange.Step;
+                    tbAdjSaturation.Value = saturationRange.Default;
+                    cbAdjSaturationAuto.Checked = saturationRange.Auto;
+                    lbAdjSaturationMin.Text = "Min: " + Convert.ToString(saturationRange.Min);
+                    lbAdjSaturationMax.Text = "Max: " + Convert.ToString(saturationRange.Max);
+                    lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(saturationRange.Default);
                 }
 
-                if (VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRanges(VideoHardwareAdjustment.Contrast, out min, out max, out step, out defaultValue, out auto))
+                var contrastRange = await VideoCapture1.Video_CaptureDevice_VideoAdjust_GetRangesAsync(VideoHardwareAdjustment.Contrast);
+                if (contrastRange != null)
                 {
-                    tbAdjContrast.Minimum = min;
-                    tbAdjContrast.Maximum = max;
-                    tbAdjContrast.SmallChange = step;
-                    tbAdjContrast.Value = defaultValue;
-                    cbAdjContrastAuto.Checked = auto;
-                    lbAdjContrastMin.Text = "Min: " + Convert.ToString(min);
-                    lbAdjContrastMax.Text = "Max: " + Convert.ToString(max);
-                    lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(defaultValue);
+                    tbAdjContrast.Minimum = contrastRange.Min;
+                    tbAdjContrast.Maximum = contrastRange.Max;
+                    tbAdjContrast.SmallChange = contrastRange.Step;
+                    tbAdjContrast.Value = contrastRange.Default;
+                    cbAdjContrastAuto.Checked = contrastRange.Auto;
+                    lbAdjContrastMin.Text = "Min: " + Convert.ToString(contrastRange.Min);
+                    lbAdjContrastMax.Text = "Max: " + Convert.ToString(contrastRange.Max);
+                    lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(contrastRange.Default);
                 }
 
                 btVideoCaptureDeviceSettings.Enabled = deviceItem.DialogDefault;
@@ -1168,13 +1170,13 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked;
             if (VideoCapture1.Audio_Enhancer_Enabled)
             {
-                VideoCapture1.Audio_Enhancer_Normalize(cbAudioNormalize.Checked);
-                VideoCapture1.Audio_Enhancer_AutoGain(cbAudioAutoGain.Checked);
+                await VideoCapture1.Audio_Enhancer_NormalizeAsync(cbAudioNormalize.Checked);
+                await VideoCapture1.Audio_Enhancer_AutoGainAsync(cbAudioAutoGain.Checked);
 
-                ApplyAudioInputGains();
-                ApplyAudioOutputGains();
+                await ApplyAudioInputGainsAsync();
+                await ApplyAudioOutputGainsAsync();
 
-                VideoCapture1.Audio_Enhancer_Timeshift(tbAudioTimeshift.Value);
+                await VideoCapture1.Audio_Enhancer_TimeshiftAsync(tbAudioTimeshift.Value);
             }
 
             // Audio channels mapping
@@ -2650,12 +2652,12 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">
         /// Event args.
         /// </param>
-        private void cbTVTuner_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVTuner_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((cbTVTuner.Items.Count > 0) && (cbTVTuner.SelectedIndex != -1))
             {
                 VideoCapture1.TVTuner_Name = cbTVTuner.Text;
-                VideoCapture1.TVTuner_Read();
+                await VideoCapture1.TVTuner_ReadAsync();
 
                 cbTVMode.Items.Clear();
                 foreach (string tunerMode in VideoCapture1.TVTuner_Modes())
@@ -2913,12 +2915,12 @@ namespace VideoCapture_CSharp_Demo
             }
         }
 
-        private void btStartTune_Click(object sender, EventArgs e)
+        private async void btStartTune_Click(object sender, EventArgs e)
         {
             const int KHz = 1000;
             const int MHz = 1000000;
 
-            VideoCapture1.TVTuner_Read();
+            await VideoCapture1.TVTuner_ReadAsync();
             cbTVChannel.Items.Clear();
 
             if ((cbTVMode.SelectedIndex != -1) && (cbTVMode.Text == "FM Radio"))
@@ -2936,7 +2938,7 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.TVTuner_TuneChannels_Stop();
         }
 
-        private void btUseThisChannel_Click(object sender, EventArgs e)
+        private async void btUseThisChannel_Click(object sender, EventArgs e)
         {
             if (Convert.ToInt32(edChannel.Text) <= 10000)
             {
@@ -2950,13 +2952,13 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_Frequency = Convert.ToInt32(edChannel.Text);
             }
 
-            VideoCapture1.TVTuner_Apply();
-            VideoCapture1.TVTuner_Read();
+            await VideoCapture1.TVTuner_ApplyAsync();
+            await VideoCapture1.TVTuner_ReadAsync();
             edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
             edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
         }
 
-        private void cbTVCountry_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTVCountry.SelectedIndex != -1)
             {
@@ -2965,8 +2967,8 @@ namespace VideoCapture_CSharp_Demo
 
                 if (VideoCapture1.State() == PlaybackState.Play)
                 {
-                    VideoCapture1.TVTuner_Apply();
-                    VideoCapture1.TVTuner_Read();
+                    await VideoCapture1.TVTuner_ApplyAsync();
+                    await VideoCapture1.TVTuner_ReadAsync();
                 }
             }
         }
@@ -2985,7 +2987,7 @@ namespace VideoCapture_CSharp_Demo
             await VideoCapture1.Video_Renderer_UpdateAsync();
         }
 
-        private void cbTVMode_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTVMode.SelectedIndex != -1)
             {
@@ -2993,15 +2995,15 @@ namespace VideoCapture_CSharp_Demo
                 Enum.TryParse(cbTVMode.Text, true, out mode);
                 VideoCapture1.TVTuner_Mode = mode;
 
-                VideoCapture1.TVTuner_Apply();
-                VideoCapture1.TVTuner_Read();
+                await VideoCapture1.TVTuner_ApplyAsync();
+                await VideoCapture1.TVTuner_ReadAsync();
                 cbTVChannel.Items.Clear();
                 edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
                 edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
-        private void cbTVChannel_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTVChannel.SelectedIndex != -1)
             {
@@ -3019,26 +3021,26 @@ namespace VideoCapture_CSharp_Demo
                     VideoCapture1.TVTuner_Frequency = k;
                 }
 
-                VideoCapture1.TVTuner_Apply();
-                VideoCapture1.TVTuner_Read();
+                await VideoCapture1.TVTuner_ApplyAsync();
+                await VideoCapture1.TVTuner_ReadAsync();
                 edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
                 edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
-        private void cbTVInput_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTVInput.SelectedIndex != -1)
             {
                 VideoCapture1.TVTuner_InputType = cbTVInput.Text;
-                VideoCapture1.TVTuner_Apply();
-                VideoCapture1.TVTuner_Read();
+                await VideoCapture1.TVTuner_ApplyAsync();
+                await VideoCapture1.TVTuner_ReadAsync();
                 edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
                 edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
         }
 
-        private void cbTVSystem_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbTVSystem_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbTVSystem.SelectedIndex != -1)
             {
@@ -3048,8 +3050,8 @@ namespace VideoCapture_CSharp_Demo
                 }
 
                 VideoCapture1.TVTuner_TVFormat = VideoCapture1.TVTuner_TVFormat_FromString(cbTVSystem.Text);
-                VideoCapture1.TVTuner_Apply();
-                VideoCapture1.TVTuner_Read();
+                await VideoCapture1.TVTuner_ApplyAsync();
+                await VideoCapture1.TVTuner_ReadAsync();
                 edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
                 edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
             }
@@ -4820,17 +4822,17 @@ namespace VideoCapture_CSharp_Demo
             }
         }
 
-        private void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Enhancer_Normalize(cbAudioNormalize.Checked);
+            await VideoCapture1.Audio_Enhancer_NormalizeAsync(cbAudioNormalize.Checked);
         }
 
-        private void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
         {
-            VideoCapture1.Audio_Enhancer_AutoGain(cbAudioAutoGain.Checked);
+            await VideoCapture1.Audio_Enhancer_AutoGainAsync(cbAudioAutoGain.Checked);
         }
 
-        private void ApplyAudioInputGains()
+        private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -4842,52 +4844,52 @@ namespace VideoCapture_CSharp_Demo
                 LFE = tbAudioInputGainLFE.Value / 10.0f
             };
 
-            VideoCapture1.Audio_Enhancer_InputGains(gains);
+            await VideoCapture1.Audio_Enhancer_InputGainsAsync(gains);
         }
 
-        private void tbAudioInputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void ApplyAudioOutputGains()
+        private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -4899,56 +4901,56 @@ namespace VideoCapture_CSharp_Demo
                 LFE = tbAudioOutputGainLFE.Value / 10.0f
             };
 
-            VideoCapture1.Audio_Enhancer_OutputGains(gains);
+            await VideoCapture1.Audio_Enhancer_OutputGainsAsync(gains);
         }
 
-        private void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainR_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioTimeshift_Scroll(object sender, EventArgs e)
+        private async void tbAudioTimeshift_Scroll(object sender, EventArgs e)
         {
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
-            VideoCapture1.Audio_Enhancer_Timeshift(tbAudioTimeshift.Value);
+            await VideoCapture1.Audio_Enhancer_TimeshiftAsync(tbAudioTimeshift.Value);
         }
 
         private delegate void FFMPEGInfoDelegate(string message);

@@ -36,6 +36,7 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Types.VideoProcessing;
     using M4AOutput = VisioForge.Types.Output.M4AOutput;
     using VisioForge.Core;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Main demo form.
@@ -1019,13 +1020,13 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Audio_Enhancer_Enabled = cbAudioEnhancementEnabled.Checked;
             if (VideoEdit1.Audio_Enhancer_Enabled)
             {
-                VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked);
-                VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked);
+                await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
+                await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
 
-                ApplyAudioInputGains();
-                ApplyAudioOutputGains();
+                await ApplyAudioInputGainsAsync();
+                await ApplyAudioOutputGainsAsync();
 
-                VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
+                await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value);
             }
 
             // Audio channels mapping
@@ -2392,17 +2393,17 @@ namespace VideoEdit_CS_Demo
             "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
         }
 
-        private void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
         {
-            VideoEdit1.Audio_Enhancer_Normalize(-1, cbAudioNormalize.Checked);
+            await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
         }
 
-        private void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
+        private async void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
         {
-            VideoEdit1.Audio_Enhancer_AutoGain(-1, cbAudioAutoGain.Checked);
+            await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
         }
 
-        private void ApplyAudioInputGains()
+        private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2414,52 +2415,52 @@ namespace VideoEdit_CS_Demo
                 LFE = tbAudioInputGainLFE.Value / 10.0f
             };
 
-            VideoEdit1.Audio_Enhancer_InputGains(-1, gains);
+            await VideoEdit1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
-        private void tbAudioInputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioInputGains();
+            await ApplyAudioInputGainsAsync();
         }
 
-        private void ApplyAudioOutputGains()
+        private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
             {
@@ -2471,49 +2472,49 @@ namespace VideoEdit_CS_Demo
                 LFE = tbAudioOutputGainLFE.Value / 10.0f
             };
 
-            VideoEdit1.Audio_Enhancer_OutputGains(-1, gains);
+            await VideoEdit1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
-        private void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
+        private async void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
 
-            ApplyAudioOutputGains();
+            await ApplyAudioOutputGainsAsync();
         }
 
-        private void tbAudioTimeshift_Scroll(object sender, EventArgs e)
+        private async void tbAudioTimeshift_Scroll(object sender, EventArgs e)
         {
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
 
-            VideoEdit1.Audio_Enhancer_Timeshift(-1, tbAudioTimeshift.Value);
+            await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value);
         }
 
         private delegate void FFMPEGInfoDelegate(string message);

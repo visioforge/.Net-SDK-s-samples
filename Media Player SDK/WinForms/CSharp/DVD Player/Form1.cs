@@ -48,32 +48,32 @@ namespace DVD_Player_Demo
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
         }
 
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
-        private void tbSpeed_Scroll(object sender, EventArgs e)
+        private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_SetSpeed(tbSpeed.Value / 10.0, false);
+            await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, false);
         }
 
-        private void btResume_Click(object sender, EventArgs e)
+        private async void btResume_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Resume();
+            await MediaPlayer1.ResumeAsync();
         }
 
-        private void btPause_Click(object sender, EventArgs e)
+        private async void btPause_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Pause();
+            await MediaPlayer1.PauseAsync();
         }
 
-        private void btStop_Click(object sender, EventArgs e)
+        private async void btStop_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Stop();
+            await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
         }
@@ -83,7 +83,7 @@ namespace DVD_Player_Demo
             MediaPlayer1.NextFrame();
         }
 
-        private void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlTitle.SelectedIndex != -1)
             {
@@ -132,50 +132,50 @@ namespace DVD_Player_Demo
                 if (sender != null)
                 {
                     // play title
-                    MediaPlayer1.DVD_Title_Play(cbDVDControlTitle.SelectedIndex);
-                    tbTimeline.Maximum = (int)((MediaPlayer1.DVD_Title_GetDuration()).TotalSeconds);
+                    await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex);
+                    tbTimeline.Maximum = (int)((await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds);
                 }
             }
         }
 
-        private void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlAudio.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Select_AudioStream(cbDVDControlAudio.SelectedIndex);
+                await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex);
             }
         }
 
-        private void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlChapter.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Chapter_Select(cbDVDControlChapter.SelectedIndex);
+                await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex);
             }
         }
 
-        private void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDVDControlSubtitles.SelectedIndex > 0)
             {
-                MediaPlayer1.DVD_Select_SubpictureStream(cbDVDControlSubtitles.SelectedIndex - 1);
+                await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1);
             }
 
             // 0 - x - subtitles
             // -1 - disable subtitles
         }
 
-        private void btDVDControlTitleMenu_Click(object sender, EventArgs e)
+        private async void btDVDControlTitleMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
+            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
         }
 
-        private void btDVDControlRootMenu_Click(object sender, EventArgs e)
+        private async void btDVDControlRootMenu_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Root);
+            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root);
         }
 
-        private void btStart_Click(object sender, EventArgs e)
+        private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
 
@@ -205,7 +205,7 @@ namespace DVD_Player_Demo
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
-            MediaPlayer1.Play();
+            await MediaPlayer1.PlayAsync();
 
             // DVD
             // select and play first title
@@ -216,7 +216,7 @@ namespace DVD_Player_Demo
             }
 
             // show title menu
-            MediaPlayer1.DVD_Menu_Show(DVDMenu.Title);
+            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
 
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
             MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
@@ -224,12 +224,12 @@ namespace DVD_Player_Demo
             timer1.Enabled = true;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)((MediaPlayer1.Duration_Time()).TotalSeconds);
+            tbTimeline.Maximum = (int)((await MediaPlayer1.Duration_TimeAsync()).TotalSeconds);
 
-            int value = (int)((MediaPlayer1.Position_Get_Time()).TotalSeconds);
+            int value = (int)((await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds);
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
