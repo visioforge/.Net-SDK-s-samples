@@ -7,9 +7,9 @@ namespace MultipleWebCameras
     using System.Linq;
     using System.Windows;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.VideoCapture;
 
 
     /// <summary>
@@ -41,13 +41,19 @@ namespace MultipleWebCameras
 
         private void DestroyEngine()
         {
+            if (VideoCapture1 != null)
+            {
             VideoCapture1.OnError -= VideoCapture1_OnError;
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+            }
 
+            if (VideoCapture2 != null)
+            {
             VideoCapture2.OnError -= VideoCapture2_OnError;
             VideoCapture2.Dispose();
             VideoCapture2 = null;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

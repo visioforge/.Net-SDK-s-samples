@@ -6,11 +6,12 @@
     using System.IO;
     using System.Windows.Forms;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework.Helpers;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.DirectShow.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Helpers;
 
     public partial class Form1 : Form
     {
@@ -43,11 +44,14 @@
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private bool LoadImages()

@@ -3,10 +3,10 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using VisioForge.Core.VideoCapture;
-using VisioForge.Types;
-using VisioForge.Types.Output;
-using VisioForge.Types.VideoCapture;
-using VisioForge.Types.VideoEffects;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace video_capture_text_overlay
 {

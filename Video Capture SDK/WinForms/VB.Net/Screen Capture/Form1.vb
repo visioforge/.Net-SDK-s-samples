@@ -6,14 +6,15 @@ Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Types
-Imports VisioForge.Types.Output
-Imports VisioForge.Types.VideoEffects
+Imports VisioForge.Core.Types
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoEffects
 Imports VisioForge.Core.VideoCapture
-Imports VisioForge.Types.Events
+Imports VisioForge.Core.Types.Events
 Imports System.Drawing.Imaging
-Imports VisioForge.Types.VideoCapture
+Imports VisioForge.Core.Types.VideoCapture
 Imports VisioForge.Core
+Imports VisioForge.Core.Helpers
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog

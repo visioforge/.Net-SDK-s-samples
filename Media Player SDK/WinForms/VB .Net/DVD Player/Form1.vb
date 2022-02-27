@@ -2,13 +2,13 @@
 
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.MediaInfo
-Imports VisioForge.Types
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.UI.WinForms
 Imports System.IO
-Imports VisioForge.Types.MediaInfo
+Imports VisioForge.Core.Types.MediaInfo
 Imports VisioForge.Core.MediaPlayer
-Imports VisioForge.Types.Events
-Imports VisioForge.Types.MediaPlayer
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.MediaPlayer
 Imports VisioForge.Core
 
 Public Class Form1
@@ -203,13 +203,7 @@ Public Class Form1
 
         MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
 
-        If (FilterHelpers.Filter_Supported_EVR()) Then
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-        ElseIf (FilterHelpers.Filter_Supported_VMR9()) Then
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
-        Else
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
-        End If
+        MediaPlayer1.Video_Renderer_SetAuto()
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
 

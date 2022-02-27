@@ -3,7 +3,7 @@ using System;
 namespace VideoCapture_CSharp_Demo
 {
     using VisioForge.Core.UI.WinForms.VolumeMeterPro;
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form1
     {

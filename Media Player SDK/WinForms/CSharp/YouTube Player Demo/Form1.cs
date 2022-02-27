@@ -5,9 +5,9 @@
     using System.IO;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
     using YoutubeExplode;
     using YoutubeExplode.Videos.Streams;
 
@@ -29,10 +29,13 @@
 
         private void DestroyEngine()
         {
+            if (MediaPlayer1 != null)
+            {
             MediaPlayer1.OnError -= MediaPlayer1_OnError;
 
             MediaPlayer1.Dispose();
             MediaPlayer1 = null;
+            }
         }
 
         public Form1()

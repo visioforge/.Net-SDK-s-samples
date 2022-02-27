@@ -1,4 +1,4 @@
-15.x
+15.3
 * App start-up time improved for PCs with Decklink cards 
 * NDI SDK v5 support
 * Resolved an issue with MKV Legacy output (wrong cast exception). 
@@ -6,6 +6,11 @@
 * Added basic Media Blocks API (WIP)
 * Added HLS network streaming to Video Edit SDK .Net
 * Added Rotate property to WPF VideoView. You can rotate video by 90, 180, or 270 degrees. Also, you can use GetImageLayer() method to get the Image layer and apply custom transforms
+* API change - FilterHelpers renamed to FilterDialogHelper
+* VisioForge.Types and VisioForge.MediaFramework assemblies merged into VisioForge.Core
+* UI classes moved to VisioForge.Core.UI.* assemblies and independent NuGet packages
+* VisioForge.Types renamed to VisioForge.Core.Types
+* VisioForge.Core no longer depends on  Windows Forms framework
 
 15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos

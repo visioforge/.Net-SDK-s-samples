@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisioForge.Core.VideoCapture;
-using VisioForge.Types;
-using VisioForge.Types.Output;
-using VisioForge.Types.VideoCapture;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoCapture;
 
 namespace screen_capture_wmv
 {

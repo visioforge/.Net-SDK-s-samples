@@ -14,10 +14,10 @@ namespace IPCaptureService
     using System.IO;
     using System.ServiceProcess;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
 
     /// <summary>

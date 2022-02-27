@@ -8,12 +8,12 @@
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -36,11 +36,14 @@
 
         private void DestroyEngineCapture()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnTimeshiftFileCreated -= VideoCapture1_OnTimeshiftFileCreated;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnTimeshiftFileCreated -= VideoCapture1_OnTimeshiftFileCreated;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private void CreateEnginePlayer()
@@ -93,18 +96,7 @@
 
             cbOutputFormat.SelectedIndex = 0;
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            MediaPlayer1.Video_Renderer_SetAuto();
         }
 
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)

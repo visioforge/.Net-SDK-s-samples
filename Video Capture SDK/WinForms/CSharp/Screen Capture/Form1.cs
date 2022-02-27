@@ -12,15 +12,16 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using System.Linq;
     using System.Windows.Forms;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -65,10 +66,13 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private async void btScreenCaptureUpdate_Click(object sender, EventArgs e)

@@ -2,17 +2,18 @@
 using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-using VisioForge.Types;
-using VisioForge.Types.Output;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Output;
 
 namespace Video_Join_Demo
 {
     using System.Collections.Generic;
     using System.IO;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.VideoEdit;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.VideoEdit;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.VideoEdit;
 
     public partial class Form1 : Form
     {
@@ -66,12 +67,15 @@ namespace Video_Join_Demo
 
         private void DestroyEngine()
         {
-            VideoEdit1.OnError -= VideoEdit1_OnError;
-            VideoEdit1.OnStop -= VideoEdit1_OnStop;
-            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+            if (VideoEdit1 != null)
+            {
+                VideoEdit1.OnError -= VideoEdit1_OnError;
+                VideoEdit1.OnStop -= VideoEdit1_OnStop;
+                VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
 
-            VideoEdit1.Dispose();
-            VideoEdit1 = null;
+                VideoEdit1.Dispose();
+                VideoEdit1 = null;
+            }
         }
 
         private static string GetFileExt(string filename)

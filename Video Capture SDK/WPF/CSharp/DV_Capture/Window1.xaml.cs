@@ -15,17 +15,18 @@ namespace DVCapture
     using System.Windows.Forms;
     using System.Windows.Input;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
 
     using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -77,10 +78,13 @@ namespace DVCapture
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
 
             tmRecording?.Dispose();
             tmRecording = null;

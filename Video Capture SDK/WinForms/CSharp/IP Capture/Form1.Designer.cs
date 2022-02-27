@@ -2,7 +2,7 @@ using System;
 
 namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form1
     {

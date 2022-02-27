@@ -1,73 +1,74 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Video_From_Images</RootNamespace>
-    <AssemblyName>WinForms Video From Images In Memory</AssemblyName>
-    <TargetFrameworks>net5.0-windows</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-    <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyTitle>Video From Images.2010.SDK</AssemblyTitle>
-    <Company>VisioForge</Company>
-    <Product>Video From Images.2010.SDK</Product>
-    <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.2.10.0</AssemblyVersion>
-    <FileVersion>15.2.10.0</FileVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Update="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.2.10" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\1.jpg" />
-    <None Include="Images\2.jpg" />
-    <None Include="Images\3.jpg" />
-    <None Include="Images\4.jpg" />
-    <None Include="Images\5.jpg" />
-    <Content Include="visioforge_main_icon.ico" />
-  </ItemGroup>
+	<PropertyGroup>
+		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>Video_From_Images</RootNamespace>
+		<AssemblyName>WinForms Video From Images In Memory</AssemblyName>
+		<TargetFrameworks>net5.0-windows</TargetFrameworks>
+		<RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AssemblyTitle>Video From Images.2010.SDK</AssemblyTitle>
+		<Company>VisioForge</Company>
+		<Product>Video From Images.2010.SDK</Product>
+		<Copyright>Copyright (c) 2006-2022</Copyright>
+		<AssemblyVersion>15.3.4.0</AssemblyVersion>
+		<FileVersion>15.3.4.0</FileVersion>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+		<Reference Include="System.Deployment" />
+		<Reference Include="System.Windows.Forms" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Form1.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="Form1.Designer.cs">
+			<DependentUpon>Form1.cs</DependentUpon>
+		</Compile>
+		<EmbeddedResource Update="Form1.resx">
+			<DependentUpon>Form1.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+		</Compile>
+		<None Include="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.3.4" />
+		<PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.4" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Images\1.jpg" />
+		<None Include="Images\2.jpg" />
+		<None Include="Images\3.jpg" />
+		<None Include="Images\4.jpg" />
+		<None Include="Images\5.jpg" />
+		<Content Include="visioforge_main_icon.ico" />
+	</ItemGroup>
 </Project>

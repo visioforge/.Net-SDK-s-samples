@@ -5,20 +5,21 @@ Imports System.IO
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Types
-Imports VisioForge.MediaFramework
-Imports VisioForge.Types.FFMPEGEXE
-Imports VisioForge.Types.Output
-Imports VisioForge.Types.VideoEffects
-Imports VisioForge.Types.Decklink
-Imports VisioForge.Core.VideoEdit
-Imports VisioForge.Types.Events
-Imports VisioForge.Types.VideoEdit
-Imports VisioForge.Types.AudioEffects
-Imports VisioForge.Types.VideoProcessing
+Imports VisioForge.Core.Types
 Imports VisioForge.Core
-Imports VisioForge.MediaFramework.Helpers
+Imports VisioForge.Core.Types.FFMPEGEXE
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoEffects
+Imports VisioForge.Core.Types.Decklink
+Imports VisioForge.Core.VideoEdit
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.VideoEdit
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Types.VideoProcessing
+Imports VisioForge.Core.Helpers
 Imports System.Threading.Tasks
+Imports VisioForge.Core.DirectShow.Helpers
+Imports VisioForge.Libs.Types
 
 Public Class Form1
     Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
@@ -1272,7 +1273,7 @@ Public Class Form1
         If (cbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
+            btFilterSettings.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -1293,10 +1294,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+        If (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+            FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+        ElseIf (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+            FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
         End If
 
     End Sub
@@ -1306,7 +1307,7 @@ Public Class Form1
         If (lbFilters.SelectedIndex <> -1) Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
+            btFilterSettings2.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -1318,10 +1319,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+            If (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+            ElseIf (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
             End If
 
         End If
@@ -1781,9 +1782,7 @@ Public Class Form1
         edBarcodeMetadata.Text = String.Empty
 
         For Each o As KeyValuePair(Of BarcodeResultMetadataType, Object) In value.Metadata
-
             edBarcodeMetadata.Text += o.Key.ToString() + ": " + o.Value.ToString() + Environment.NewLine
-
         Next
 
     End Sub

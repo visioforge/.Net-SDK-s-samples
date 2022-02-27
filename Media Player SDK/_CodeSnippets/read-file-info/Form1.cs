@@ -5,11 +5,9 @@ using System.Windows.Forms;
 
 namespace read_file_info
 {
-    using VisioForge.MediaFramework;
-    using VisioForge.Types;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Core.MediaInfo;
     using VisioForge.Core;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.MediaInfo;
 
     public partial class Form1 : Form
     {

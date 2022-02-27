@@ -17,17 +17,17 @@ namespace Media_Player_Demo
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.MediaInfo;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.Output;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
 
-    using VisioForge.Types.VideoEffects;
-    using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
     using VisioForge.Core;
     using System.Runtime.InteropServices;
-    using VisioForge.MediaFramework.Helpers;
+    using VisioForge.Core.Helpers;
 
     public partial class Form1 : Form
     {
@@ -2602,8 +2602,8 @@ namespace Media_Player_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2620,13 +2620,13 @@ namespace Media_Player_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+            if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+            else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2635,8 +2635,8 @@ namespace Media_Player_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings2.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2646,13 +2646,13 @@ namespace Media_Player_Demo
             {
                 string name = lbFilters.Text;
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3090,16 +3090,19 @@ namespace Media_Player_Demo
 
         private void DestroyEngine()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            VideoView1.MouseClick -= VideoView1_MouseClick;
-            MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
-            MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
-            MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
-            MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                VideoView1.MouseClick -= VideoView1_MouseClick;
+                MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
+                MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+                MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
+                MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -3156,8 +3159,8 @@ namespace Media_Player_Demo
                 cbFilters_SelectedIndexChanged(null, null);
             }
 
-            rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR();
-            rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9();
+            rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR();
+            rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9();
 
             if (rbEVR.Enabled)
             {

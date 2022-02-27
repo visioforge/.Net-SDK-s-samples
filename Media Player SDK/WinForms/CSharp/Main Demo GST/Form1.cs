@@ -9,15 +9,15 @@ namespace Main_Demo
     using System.Drawing;
     using System.Windows.Forms;
 
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
     using System.Drawing.Imaging;
-    using VisioForge.Types.Events;
+    using VisioForge.Core.Types.Events;
     using VisioForge.Core.MediaPlayerGST;
-    using VisioForge.Types.GST.VideoEffects;
-    using VisioForge.Types.VideoProcessing;
-    using VisioForge.Types.MediaPlayer.GST;
-    using VisioForge.Types.GST;
-    using VisioForge.Types.GST.AudioEffects;
+    using VisioForge.Core.Types.GST.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.Types.MediaPlayer.GST;
+    using VisioForge.Core.Types.GST;
+    using VisioForge.Core.Types.GST.AudioEffects;
     using VisioForge.Core.MediaInfoGST;
 
     public partial class Form1 : Form

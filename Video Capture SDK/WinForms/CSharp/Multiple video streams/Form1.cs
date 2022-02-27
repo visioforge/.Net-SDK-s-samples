@@ -17,10 +17,10 @@ namespace multiple_video_streams
 
     using VisioForge.Core.UI.WinForms;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -45,11 +45,14 @@ namespace multiple_video_streams
 
         private void DestroyEngine()
         {
+            if (VideoCapture1 != null)
+            {
             VideoCapture1.OnError -= VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+            }
         }
 
         private async void btStart_Click(object sender, EventArgs e)

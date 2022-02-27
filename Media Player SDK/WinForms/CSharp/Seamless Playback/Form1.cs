@@ -9,9 +9,9 @@
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -39,11 +39,14 @@
 
         private void DestroyEngine1()
         {
-            MediaPlayer1.OnError -= MediaPlayer_OnError;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer_OnError;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         private void DestroyEngine2()
@@ -131,18 +134,7 @@
             player.Audio_OutputDevice = "Default DirectSound Device";
             MediaPlayer1.Info_UseLibMediaInfo = true;
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                player.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                player.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                player.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            MediaPlayer1.Video_Renderer_SetAuto();
         }
 
         private async Task PlayFileAsync(string filename, MediaPlayerCore player)

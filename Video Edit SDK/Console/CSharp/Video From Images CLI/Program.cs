@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using VisioForge.Types;
-using VisioForge.Types.Events;
-using VisioForge.Types.Output;
-using VisioForge.Types.VideoEdit;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoEdit;
 
 namespace Video_From_Images_CLI
 {

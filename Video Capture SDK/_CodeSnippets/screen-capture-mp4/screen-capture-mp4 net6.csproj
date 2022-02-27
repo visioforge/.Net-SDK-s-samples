@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
-    <RootNamespace>screen_capture_mp4</RootNamespace>
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.2.10" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFrameworks>net6.0-windows</TargetFrameworks>
+		<RootNamespace>screen_capture_mp4</RootNamespace>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.4" />
+		<PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.4" />
+	</ItemGroup>
 </Project>

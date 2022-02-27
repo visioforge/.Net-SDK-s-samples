@@ -20,13 +20,14 @@ namespace VisioForge_SDK_Video_Capture_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WinForms;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
 
     public partial class Form1 : Form
     {
@@ -75,10 +76,13 @@ namespace VisioForge_SDK_Video_Capture_Demo
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -552,18 +556,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            VideoCapture1.Video_Renderer_SetAuto();
         }
 
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

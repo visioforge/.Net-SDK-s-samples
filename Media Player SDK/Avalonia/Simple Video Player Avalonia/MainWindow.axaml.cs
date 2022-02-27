@@ -12,9 +12,8 @@ using System.IO;
 using System.Threading.Tasks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.MediaPlayerGST;
-using VisioForge.Core.Avalonia;
-using VisioForge.MediaFramework.MediaInfo;
-using VisioForge.Types.Events;
+using VisioForge.Core.UI.Avalonia;
+using VisioForge.Core.Types.Events;
 
 namespace Simple_Video_Player_Avalonia
 {

@@ -3,14 +3,15 @@
 Imports System.Linq
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
-Imports VisioForge.Types
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.VideoCapture
 Imports VisioForge.Core
-Imports VisioForge.Types.Output
+Imports VisioForge.Core.Types.Output
 Imports System.IO
-Imports VisioForge.Types.Events
-Imports VisioForge.Types.VideoCapture
-Imports VisioForge.Types.AudioEffects
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.VideoCapture
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Helpers
 
 Public Class Form1
 

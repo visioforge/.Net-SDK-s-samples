@@ -8,9 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Windows.Threading;
 using VisioForge.Core;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.UI;
-using VisioForge.Types.VideoCapture;
-using VisioForge.Types.VideoEffects;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {

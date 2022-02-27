@@ -19,12 +19,12 @@ namespace Computer_Vision_Demo
     using VisioForge.Core.CV;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework.MFP;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core.MFP;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoProcessing;
 
     public partial class Form1 : Form
     {

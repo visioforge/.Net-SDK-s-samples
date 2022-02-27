@@ -8,10 +8,10 @@ using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 using VisioForge.Core.UI.WPF;
 using VisioForge.Core.VideoCapture;
-using VisioForge.Types;
-using VisioForge.Types.Output;
-using VisioForge.Types.VideoCapture;
-using VisioForge.Types.VideoEffects;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {

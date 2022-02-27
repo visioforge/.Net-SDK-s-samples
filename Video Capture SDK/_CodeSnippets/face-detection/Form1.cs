@@ -9,10 +9,10 @@ namespace face_detection
 {
     using System.IO;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoProcessing;
 
     public partial class Form1 : Form
     {
@@ -33,11 +33,14 @@ namespace face_detection
 
         private void DestroyEngine()
         {
+            if (VideoCapture1 != null)
+            {
             VideoCapture1.OnError -= VideoCapture1_OnError;
             VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

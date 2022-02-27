@@ -15,11 +15,12 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
     using System.Linq;
     using System.Windows.Forms;
     using VisioForge.Core;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Form1 : Form
     {

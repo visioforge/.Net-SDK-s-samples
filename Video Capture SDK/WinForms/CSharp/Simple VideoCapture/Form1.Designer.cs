@@ -1,4 +1,4 @@
-using VisioForge.Types;
+using VisioForge.Core.Types;
 using System;
 
 namespace VisioForge_SDK_Video_Capture_Demo

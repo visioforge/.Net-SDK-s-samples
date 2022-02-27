@@ -23,19 +23,20 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Decklink;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.FFMPEGEXE;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
-    using VisioForge.Types.VideoEffects;
-    using VisioForge.Types.VideoProcessing;
-    using M4AOutput = VisioForge.Types.Output.M4AOutput;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Decklink;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.FFMPEGEXE;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
+    using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
     using VisioForge.Core;
     using System.Threading.Tasks;
+    using VisioForge.Core.Helpers;
 
     /// <summary>
     /// Main form.
@@ -164,22 +165,25 @@ namespace VideoCapture_CSharp_Demo
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoView1.MouseClick -= VideoView1_MouseClick;
-            VideoCapture1.OnBarcodeDetected -= VideoCapture1_OnBarcodeDetected;
-            VideoCapture1.OnAudioVUMeterProVolume -= VideoCapture1_OnAudioVUMeterProVolume;
-            VideoCapture1.OnMotion -= VideoCapture1_OnMotion;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoView1.MouseClick -= VideoView1_MouseClick;
+                VideoCapture1.OnBarcodeDetected -= VideoCapture1_OnBarcodeDetected;
+                VideoCapture1.OnAudioVUMeterProVolume -= VideoCapture1_OnAudioVUMeterProVolume;
+                VideoCapture1.OnMotion -= VideoCapture1_OnMotion;
 
-            VideoCapture1.OnAudioVUMeter -= VideoCapture1_OnAudioVUMeter;
-            VideoCapture1.OnTVTunerTuneChannels -= VideoCapture1_OnTVTunerTuneChannels;
-            VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
-            VideoCapture1.OnFFMPEGInfo -= VideoCapture1_OnFFMPEGInfo;
-            VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
-            VideoCapture1.OnBDAChannelFound -= VideoCapture1_OnBDAChannelFound;
-            VideoCapture1.OnMotionDetectionEx -= VideoCapture1_OnMotionDetectionEx;
+                VideoCapture1.OnAudioVUMeter -= VideoCapture1_OnAudioVUMeter;
+                VideoCapture1.OnTVTunerTuneChannels -= VideoCapture1_OnTVTunerTuneChannels;
+                VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
+                VideoCapture1.OnFFMPEGInfo -= VideoCapture1_OnFFMPEGInfo;
+                VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
+                VideoCapture1.OnBDAChannelFound -= VideoCapture1_OnBDAChannelFound;
+                VideoCapture1.OnMotionDetectionEx -= VideoCapture1_OnMotionDetectionEx;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         /// <summary>
@@ -377,8 +381,8 @@ namespace VideoCapture_CSharp_Demo
 
             cbVideoInputFormat_SelectedIndexChanged(null, null);
 
-            rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR();
-            rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9();
+            rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR();
+            rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9();
 
             if (!(rbVMR9.Enabled && rbEVR.Enabled))
             {
@@ -3108,8 +3112,8 @@ namespace VideoCapture_CSharp_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3126,13 +3130,13 @@ namespace VideoCapture_CSharp_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+            if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+            else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3141,8 +3145,8 @@ namespace VideoCapture_CSharp_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.Text;
-                btFilterSettings2.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings2.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3152,13 +3156,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = lbFilters.Text;
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3212,8 +3216,8 @@ namespace VideoCapture_CSharp_Demo
             else
             {
                 string name = cbMPEGVideoDecoder.Text;
-                btMPEGVidDecSetting.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btMPEGVidDecSetting.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                  FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3226,8 +3230,8 @@ namespace VideoCapture_CSharp_Demo
             else
             {
                 string name = cbMPEGVideoDecoder.Text;
-                btMPEGAudDecSettings.Enabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                  FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btMPEGAudDecSettings.Enabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                  FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3237,13 +3241,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGVideoDecoder.Text;
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -3254,13 +3258,13 @@ namespace VideoCapture_CSharp_Demo
             {
                 string name = cbMPEGAudioDecoder.Text;
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -5878,7 +5882,7 @@ namespace VideoCapture_CSharp_Demo
         {
             uint dpiX;
             uint dpiY;
-            Screen.PrimaryScreen.GetDpi(DpiType.Effective, out dpiX, out dpiY);
+            Screen.PrimaryScreen.GetDpi(VisioForge.Core.Types.DpiType.Effective, out dpiX, out dpiY);
 
             VideoView1.Width = Width - VideoView1.Left - (int)(30 * dpiX / 96);
             VideoView1.Height = Height - VideoView1.Top - (int)(110 * dpiY / 96);

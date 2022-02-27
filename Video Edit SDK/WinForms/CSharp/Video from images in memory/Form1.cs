@@ -11,15 +11,16 @@ namespace Video_From_Images
 
     using Properties;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoEdit;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoEdit;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEdit;
+    using VisioForge.Core.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -69,12 +70,15 @@ namespace Video_From_Images
 
         private void DestroyEngine()
         {
-            VideoEdit1.OnError -= VideoEdit1_OnError;
-            VideoEdit1.OnStop -= VideoEdit1_OnStop;
-            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+            if (VideoEdit1 != null)
+            {
+                VideoEdit1.OnError -= VideoEdit1_OnError;
+                VideoEdit1.OnStop -= VideoEdit1_OnStop;
+                VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
 
-            VideoEdit1.Dispose();
-            VideoEdit1 = null;
+                VideoEdit1.Dispose();
+                VideoEdit1 = null;
+            }
         }
 
         private void btSelectOutput_Click(object sender, EventArgs e)
@@ -245,24 +249,12 @@ namespace Video_From_Images
 
             VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
 
-            // apply capture parameters
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            // apply capture parameters            
+            VideoEdit1.Video_Renderer_SetAuto();
 
             if (!rbConvert.Checked)
             {
                 VideoEdit1.Mode = VideoEditMode.Preview;
-
             }
             else
             {

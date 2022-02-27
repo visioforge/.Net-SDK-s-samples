@@ -1,6 +1,6 @@
 ﻿namespace ScreenCaptureService
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Service1
     {

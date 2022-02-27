@@ -1,6 +1,6 @@
 namespace Video_Player_Demo
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form1
     {

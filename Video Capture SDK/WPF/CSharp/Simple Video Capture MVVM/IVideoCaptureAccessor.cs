@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VisioForge.Types;
-using VisioForge.Types.VideoCapture;
-using VisioForge.Types.VideoEffects;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {

@@ -9,9 +9,9 @@ namespace Memory_Stream_Demo
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -38,10 +38,13 @@ namespace Memory_Stream_Demo
 
         private void DestroyEngine()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -111,18 +114,7 @@ namespace Memory_Stream_Demo
 
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            MediaPlayer1.Video_Renderer_SetAuto();
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             await MediaPlayer1.PlayAsync();

@@ -1,6 +1,6 @@
 ﻿namespace Video_From_Images
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form1
     {

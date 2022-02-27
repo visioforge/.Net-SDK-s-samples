@@ -1,15 +1,15 @@
 ﻿using System.Diagnostics;
-using VisioForge.MediaFramework;
+using VisioForge.Core;
 
 namespace VE_Main_Demo_CLI
 {
     using System;
 
     using VisioForge.Core.VideoEdit;
-    using VisioForge.Types;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoEdit;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEdit;
+    using VisioForge.Core.Types.VideoEffects;
 
     class Program
     {

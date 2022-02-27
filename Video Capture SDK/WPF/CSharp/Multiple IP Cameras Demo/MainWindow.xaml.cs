@@ -6,11 +6,11 @@ namespace Multiple_IP_Cameras_Demo_WPF
 {
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -51,21 +51,33 @@ namespace Multiple_IP_Cameras_Demo_WPF
 
         private void DestroyEngine()
         {
+            if (VideoCapture1 != null)
+            {
             VideoCapture1.OnError -= VideoCapture_OnError;
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+            }
 
+            if (VideoCapture2 != null)
+            {
             VideoCapture2.OnError -= VideoCapture_OnError;
             VideoCapture2.Dispose();
             VideoCapture2 = null;
+            }
 
+            if (VideoCapture3 != null)
+            {
             VideoCapture3.OnError -= VideoCapture_OnError;
             VideoCapture3.Dispose();
             VideoCapture3 = null;
+            }
 
+            if (VideoCapture4 != null)
+            {
             VideoCapture4.OnError -= VideoCapture_OnError;
             VideoCapture4.Dispose();
             VideoCapture4 = null;
+            }
         }
 
         private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index, bool onvif)

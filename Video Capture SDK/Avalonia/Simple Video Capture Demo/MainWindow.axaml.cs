@@ -12,18 +12,18 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using VisioForge.Core;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.UI;
-using VisioForge.Core.Avalonia;
+using VisioForge.Core.UI.Avalonia;
 using VisioForge.Core.UI.WinForms.Dialogs;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 using VisioForge.Core.VideoCapture;
-using VisioForge.MediaFramework;
-using VisioForge.Types;
-using VisioForge.Types.Events;
-using VisioForge.Types.Output;
-using VisioForge.Types.VideoCapture;
-using VisioForge.Types.VideoEffects;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace Simple_Video_Capture_Demo_Avalonia
 {
@@ -419,10 +419,13 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private async Task<string> SaveVideoFileDialogAsync()

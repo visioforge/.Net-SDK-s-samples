@@ -8,14 +8,14 @@ namespace Separate_Capture_Demo
     using System.Linq;
     using System.Windows.Forms;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -49,10 +49,13 @@ namespace Separate_Capture_Demo
 
         private void DestroyEngine()
         {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+            if (VideoCapture1 != null)
+            {
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -137,18 +140,7 @@ namespace Separate_Capture_Demo
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
             edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output_new.mp4");
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            VideoCapture1.Video_Renderer_SetAuto();
         }
 
         private async void btStop_Click(object sender, EventArgs e)

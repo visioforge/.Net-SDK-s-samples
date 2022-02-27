@@ -21,19 +21,19 @@ namespace Main_Demo
     using System.Windows.Media;
     using System.Windows.Threading;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaInfo;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoEffects;
-    using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
     using Color = System.Windows.Media.Color;
     using MessageBox = System.Windows.MessageBox;
 
@@ -154,18 +154,21 @@ namespace Main_Demo
 
         private void DestroyEngine()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            VideoView1.MouseDown -= MediaPlayer1_MouseDown;
-            MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
-            MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
-            MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
-            MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
-            MediaPlayer1.OnAudioVUMeterProFFTCalculated -= MediaPlayer1_OnAudioVUMeterProFFTCalculated;
-            MediaPlayer1.OnAudioVUMeterProMaximumCalculated -= MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                VideoView1.MouseDown -= MediaPlayer1_MouseDown;
+                MediaPlayer1.OnBarcodeDetected -= MediaPlayer1_OnBarcodeDetected;
+                MediaPlayer1.OnAudioVUMeterProVolume -= MediaPlayer1_OnAudioVUMeterProVolume;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+                MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
+                MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
+                MediaPlayer1.OnAudioVUMeterProFFTCalculated -= MediaPlayer1_OnAudioVUMeterProFFTCalculated;
+                MediaPlayer1.OnAudioVUMeterProMaximumCalculated -= MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -2354,8 +2357,8 @@ namespace Main_Demo
             if (cbFilters.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
                 string name = e.AddedItems[0].ToString();
-                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings.IsEnabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2372,13 +2375,13 @@ namespace Main_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+            if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+            else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -2388,13 +2391,13 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -2419,8 +2422,8 @@ namespace Main_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.SelectedValue.ToString();
-                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings2.IsEnabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -3059,6 +3062,11 @@ namespace Main_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            VideoView1.Width = 500;
         }
     }
 }

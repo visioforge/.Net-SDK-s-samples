@@ -1,4 +1,4 @@
-﻿Imports VisioForge.Types
+﻿Imports VisioForge.Core.Types
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1

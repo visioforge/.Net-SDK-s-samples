@@ -16,9 +16,9 @@ namespace Simple_Player_Demo
     using Android.Util;
     using Android.Widget;
     using VisioForge.Core.MediaPlayerGST;
-    using VisioForge.Core.MediaPlayerGST.Android;
-    using VisioForge.Types.GST.AudioEffects;
-    using VisioForge.Types.MediaPlayer.GST;
+    using VisioForge.Core.UI.Android;
+    using VisioForge.Core.Types.GST.AudioEffects;
+    using VisioForge.Core.Types.MediaPlayer.GST;
     using Xamarin.Essentials;
     using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
@@ -29,7 +29,7 @@ namespace Simple_Player_Demo
 
         private MediaPlayerGST _player;
 
-        private VisioForge.Core.MediaPlayerGST.Android.VideoView videoView;
+        private VisioForge.Core.UI.Android.VideoView videoView;
 
         private Button btOpenFile;
 
@@ -59,7 +59,7 @@ namespace Simple_Player_Demo
 
             tmPosition.Elapsed += tmPosition_Elapsed;
 
-            videoView = FindViewById<VisioForge.Core.MediaPlayerGST.Android.VideoView>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
             _player = new MediaPlayerGST(videoView, JNIEnv.Handle, this);
             _player.OnStart += _player_OnStart;

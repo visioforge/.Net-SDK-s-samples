@@ -10,9 +10,9 @@ namespace Audio_Player_Demo
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {

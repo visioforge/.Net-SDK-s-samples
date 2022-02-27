@@ -15,14 +15,35 @@ namespace ScreenCaptureServiceHelper
 
     using VisioForge.Core.UI.WinForms;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.MediaFramework.WIN32;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.WinAPI;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// RegisterWindowMessage.
+        /// </summary>
+        /// <param name="lpString">
+        /// String.
+        /// </param>
+        /// <returns>uint.</returns>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern uint RegisterWindowMessage(string lpString);
+
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <param name="hWnd">The HWND.</param>
+        /// <param name="Msg">The MSG.</param>
+        /// <param name="wParam">The w parameter.</param>
+        /// <param name="lParam">The l parameter.</param>
+        /// <returns>IntPtr.</returns>
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
         private VideoCaptureCore VideoCapture1;
 
         public Form1()
@@ -117,7 +138,7 @@ namespace ScreenCaptureServiceHelper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            VF_SCS_EXIT_COMMAND = Win32API.RegisterWindowMessage("VF_SCS_EXIT_COMMAND");
+            VF_SCS_EXIT_COMMAND = RegisterWindowMessage("VF_SCS_EXIT_COMMAND");
 
             string[] args = Environment.GetCommandLineArgs();
 
@@ -125,7 +146,7 @@ namespace ScreenCaptureServiceHelper
             {
                 //System.Diagnostics.Debugger.Launch();
 
-                Win32API.SendMessage(HWND_BROADCAST, VF_SCS_EXIT_COMMAND, (IntPtr)0, (IntPtr)0);
+                SendMessage(HWND_BROADCAST, VF_SCS_EXIT_COMMAND, (IntPtr)0, (IntPtr)0);
             }
             else
             {

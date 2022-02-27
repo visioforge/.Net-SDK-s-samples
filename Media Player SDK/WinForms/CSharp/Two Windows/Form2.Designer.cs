@@ -1,6 +1,6 @@
 namespace Two_Windows_Demo
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form2
     {

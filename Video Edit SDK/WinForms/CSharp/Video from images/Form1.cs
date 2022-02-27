@@ -12,14 +12,15 @@ namespace Video_From_Images
 {
     using System.Diagnostics;
 
-    using VisioForge.Types;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEffects;
     using System.IO;
     using VisioForge.Core.VideoEdit;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.VideoEdit;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.VideoEdit;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
 
     public partial class Form1 : Form
     {
@@ -61,12 +62,15 @@ namespace Video_From_Images
 
         private void DestroyEngine()
         {
-            VideoEdit1.OnError -= VideoEdit1_OnError;
-            VideoEdit1.OnStop -= VideoEdit1_OnStop;
-            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+            if (VideoEdit1 != null)
+            {
+                VideoEdit1.OnError -= VideoEdit1_OnError;
+                VideoEdit1.OnStop -= VideoEdit1_OnStop;
+                VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
 
-            VideoEdit1.Dispose();
-            VideoEdit1 = null;
+                VideoEdit1.Dispose();
+                VideoEdit1 = null;
+            }
         }
 
         private static string GetFileExt(string filename)
@@ -303,18 +307,8 @@ namespace Video_From_Images
             VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
 
             // apply capture parameters
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+
+            VideoEdit1.Video_Renderer_SetAuto();
 
             if (rbPreview.Checked)
             {

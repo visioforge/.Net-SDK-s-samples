@@ -7,11 +7,10 @@
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.MediaFramework;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
-    using VisioForge.Types.VideoEffects;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.VideoEffects;
 
     public partial class Form1 : Form
     {
@@ -28,11 +27,14 @@
 
         private void DestroyEngine()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         public Form1()
@@ -73,18 +75,7 @@
             MediaPlayer1.Info_UseLibMediaInfo = true;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            if (FilterHelpers.Filter_Supported_EVR())
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (FilterHelpers.Filter_Supported_VMR9())
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            }
-            else
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
+            MediaPlayer1.Video_Renderer_SetAuto();
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 

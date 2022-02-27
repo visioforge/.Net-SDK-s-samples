@@ -1,36 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>VE_Main_Demo_CLI</RootNamespace>
-    <AssemblyName>VE Main Demo CLI</AssemblyName>
-    <TargetFrameworks>net5.0-windows</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-    <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
-    <Product>VE Main Demo CLI</Product>
-    <Copyright>Copyright (c) 2006-2021</Copyright>
-    <AssemblyVersion>15.2.10.0</AssemblyVersion>
-    <FileVersion>15.2.10.0</FileVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser19" Version="1.9.74" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.2.10" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="visioforge_main_icon.ico" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>VE_Main_Demo_CLI</RootNamespace>
+		<AssemblyName>VE Main Demo CLI</AssemblyName>
+		<TargetFrameworks>net5.0-windows</TargetFrameworks>
+		<RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+		<AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
+		<Product>VE Main Demo CLI</Product>
+		<Copyright>Copyright (c) 2006-2022</Copyright>
+		<AssemblyVersion>15.3.4.0</AssemblyVersion>
+		<FileVersion>15.3.4.0</FileVersion>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser19" Version="1.9.74" />
+		<PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.3.4" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="visioforge_main_icon.ico" />
+	</ItemGroup>
 </Project>

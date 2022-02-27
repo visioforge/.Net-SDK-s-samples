@@ -1,6 +1,6 @@
 namespace VisioForge_SDK_4_Audio_Capture_CSharp
 {
-    using VisioForge.Types;
+    using VisioForge.Core.Types;
 
     partial class Form1
     {

@@ -4,5 +4,6 @@
     <SelectedDevice>pixel_2_pie_9_0_-_api_28_x86</SelectedDevice>
     <ActiveDebugProfile>pixel_2_pie_9_0_-_api_28_x86</ActiveDebugProfile>
     <DefaultDevice>pixel_2_pie_9_0_-_api_28_x86</DefaultDevice>
+    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
   </PropertyGroup>
 </Project>

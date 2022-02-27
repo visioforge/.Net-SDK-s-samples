@@ -3,26 +3,27 @@
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq
-Imports VisioForge.Types
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.UI.WinForms
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Types.Output
-Imports VisioForge.Types.VideoEffects
-Imports VisioForge.MediaFramework
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoEffects
 Imports VisioForge.Core
-Imports VisioForge.Types.FFMPEGEXE
-Imports VisioForge.Types.Decklink
+Imports VisioForge.Core.Types.FFMPEGEXE
+Imports VisioForge.Core.Types.Decklink
 Imports VisioForge.Core.VideoCapture
-Imports VisioForge.Types.Events
-Imports VisioForge.Types.VideoCapture
-Imports VisioForge.Types.AudioEffects
-Imports VisioForge.Types.VideoProcessing
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.VideoCapture
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Types.VideoProcessing
 Imports System.Drawing.Imaging
-Imports VisioForge.Types.MediaPlayer
+Imports VisioForge.Core.Types.MediaPlayer
 Imports System.Threading.Tasks
+Imports VisioForge.Core.Helpers
+Imports VisioForge.Libs.Types
 
 Public Class Form1
 
@@ -286,8 +287,8 @@ Public Class Form1
 
         cbVideoInputSelectedIndexChanged(sender, e)
 
-        rbEVR.Enabled = FilterHelpers.Filter_Supported_EVR()
-        rbVMR9.Enabled = FilterHelpers.Filter_Supported_VMR9()
+        rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR()
+        rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9()
 
         If Not (rbVMR9.Enabled And rbEVR.Enabled) Then
             rbVR.Checked = True
@@ -2451,7 +2452,7 @@ Public Class Form1
         If cbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = cbFilters.Text
-            btFilterSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
+            btFilterSettings.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -2461,10 +2462,10 @@ Public Class Form1
 
         Dim sName As String = cbFilters.Text
 
-        If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-        ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
-            FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+        If (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+            FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+        ElseIf (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+            FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
 
         End If
 
@@ -2475,7 +2476,7 @@ Public Class Form1
         If lbFilters.SelectedIndex <> -1 Then
 
             Dim sName As String = lbFilters.Text
-            btFilterSettings2.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
+            btFilterSettings2.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig))
 
         End If
 
@@ -2487,10 +2488,10 @@ Public Class Form1
 
             Dim sName As String = lbFilters.Text
 
-            If (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-            ElseIf (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+            If (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default)) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+            ElseIf (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
 
             End If
 
@@ -2590,7 +2591,7 @@ Public Class Form1
             btMPEGVidDecSetting.Enabled = False
         Else
             sName = cbMPEGVideoDecoder.Text
-            btMPEGVidDecSetting.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)))
+            btMPEGVidDecSetting.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)))
         End If
 
     End Sub
@@ -2603,7 +2604,7 @@ Public Class Form1
             btMPEGAudDecSettings.Enabled = False
         Else
             sName = cbMPEGVideoDecoder.Text
-            btMPEGAudDecSettings.Enabled = (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Or (FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)))
+            btMPEGAudDecSettings.Enabled = (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Or (FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig)))
         End If
 
     End Sub
@@ -2615,10 +2616,10 @@ Public Class Form1
         If cbMPEGVideoDecoder.SelectedIndex > 0 Then
             sName = cbMPEGVideoDecoder.Text
 
-            If FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-            ElseIf FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+            If FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+            ElseIf FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
             End If
         End If
 
@@ -2631,10 +2632,10 @@ Public Class Form1
         If cbMPEGAudioDecoder.SelectedIndex > 0 Then
             sName = cbMPEGAudioDecoder.Text
 
-            If FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
-            ElseIf FilterHelpers.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig) Then
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
+            If FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.Default) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.Default)
+            ElseIf FilterDialogHelper.DirectShow_Filter_HasDialog(sName, PropertyPageType.CompressorConfig) Then
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, sName, PropertyPageType.CompressorConfig)
             End If
         End If
 
@@ -4350,8 +4351,8 @@ Public Class Form1
 
                 cbONVIFProfile.Items.Clear()
 
-                Dim profiles As VisioForge.MediaFramework.ONVIF.Profile() = Await onvifControl.GetProfilesAsync()
-                For Each profile As VisioForge.MediaFramework.ONVIF.Profile In profiles
+                Dim profiles As VisioForge.Core.ONVIF.Profile() = Await onvifControl.GetProfilesAsync()
+                For Each profile As VisioForge.Core.ONVIF.Profile In profiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 

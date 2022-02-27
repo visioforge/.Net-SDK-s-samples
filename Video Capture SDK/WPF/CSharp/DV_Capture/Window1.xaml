@@ -1,7 +1,8 @@
 ﻿<Window x:Class="DVCapture.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="DV Capture Demo - Video Capture SDK .Net" Height="441.136" Width="813.797" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
+    Title="DV Capture Demo - Video Capture SDK .Net" Height="441.136" Width="813.797" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
+        Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
         <RadioButton Height="16" HorizontalAlignment="Right" Margin="0,0,352,38" Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True">Preview</RadioButton>
         <RadioButton Height="16" HorizontalAlignment="Right" Margin="0,0,259,38" Name="rbCapture" VerticalAlignment="Bottom" Width="77">Capture</RadioButton>

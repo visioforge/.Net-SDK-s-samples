@@ -1,4 +1,4 @@
-﻿using VisioForge.Types;
+﻿using VisioForge.Core.Types;
 using System;
 
 namespace multiple_video_streams

@@ -10,9 +10,9 @@ namespace multiple_ap_cams
     using System.Windows.Forms;
 
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -45,18 +45,24 @@ namespace multiple_ap_cams
 
         private void DestroyEngine1()
         {
+            if (VideoCapture1 != null)
+            {
             VideoCapture1.OnError -= VideoCapture1_OnError;
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
+            }
         }
 
         private void DestroyEngine2()
         {
+            if (VideoCapture2 != null)
+            {
             VideoCapture2.OnError -= VideoCapture2_OnError;
 
             VideoCapture2.Dispose();
             VideoCapture2 = null;
+            }
         }
 
         private async void btStart1_Click(object sender, EventArgs e)

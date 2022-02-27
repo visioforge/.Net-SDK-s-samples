@@ -14,12 +14,13 @@ namespace Audio_Capture
     using System.Windows.Controls;
     using System.Windows.Input;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI.WPF;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoCapture;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
 
     public partial class Window1 : IDisposable
     {

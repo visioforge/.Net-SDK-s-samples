@@ -19,21 +19,23 @@ namespace Main_Demo
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using VisioForge.Core;
+    using VisioForge.Core.DirectShow.Helpers;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoEdit;
-    using VisioForge.Types;
-    using VisioForge.Types.AudioEffects;
-    using VisioForge.Types.Decklink;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.FFMPEGEXE;
-    using VisioForge.Types.Output;
-    using VisioForge.Types.VideoEdit;
-    using VisioForge.Types.VideoEffects;
-    using VisioForge.Types.VideoProcessing;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Decklink;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.FFMPEGEXE;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEdit;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
     using Color = System.Windows.Media.Color;
     using MessageBox = System.Windows.MessageBox;
 
@@ -146,16 +148,19 @@ namespace Main_Demo
 
         private void DestroyEngine()
         {
-            VideoEdit1.OnError -= VideoEdit1_OnError;
-            VideoEdit1.OnBarcodeDetected -= VideoEdit1_OnBarcodeDetected;
-            VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
-            VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
-            VideoEdit1.OnStart -= VideoEdit1_OnStart;
-            VideoEdit1.OnStop -= VideoEdit1_OnStop;
-            VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+            if (VideoEdit1 != null)
+            {
+                VideoEdit1.OnError -= VideoEdit1_OnError;
+                VideoEdit1.OnBarcodeDetected -= VideoEdit1_OnBarcodeDetected;
+                VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
+                VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
+                VideoEdit1.OnStart -= VideoEdit1_OnStart;
+                VideoEdit1.OnStop -= VideoEdit1_OnStop;
+                VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
 
-            VideoEdit1.Dispose();
-            VideoEdit1 = null;
+                VideoEdit1.Dispose();
+                VideoEdit1 = null;
+            }
         }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
@@ -1268,8 +1273,8 @@ namespace Main_Demo
             if (cbFilters.SelectedIndex != -1)
             {
                 string name = cbFilters.Text;
-                btFilterSettings.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                    FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings.IsEnabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                    FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1286,13 +1291,13 @@ namespace Main_Demo
         {
             string name = cbFilters.Text;
 
-            if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+            if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
             }
-            else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+            else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
             {
-                FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
             }
         }
 
@@ -1302,13 +1307,13 @@ namespace Main_Demo
             {
                 string name = lbFilters.SelectedValue.ToString();
 
-                if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
+                if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.Default);
                 }
-                else if (FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
+                else if (FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig))
                 {
-                    FilterHelpers.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
+                    FilterDialogHelper.DirectShow_Filter_ShowDialog(IntPtr.Zero, name, PropertyPageType.CompressorConfig);
                 }
             }
         }
@@ -1625,8 +1630,8 @@ namespace Main_Demo
             if (lbFilters.SelectedIndex != -1)
             {
                 string name = lbFilters.SelectedValue.ToString();
-                btFilterSettings2.IsEnabled = FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
-                                            FilterHelpers.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
+                btFilterSettings2.IsEnabled = FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.Default) ||
+                                            FilterDialogHelper.DirectShow_Filter_HasDialog(name, PropertyPageType.CompressorConfig);
             }
         }
 

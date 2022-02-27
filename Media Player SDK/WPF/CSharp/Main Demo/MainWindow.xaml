@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:my="clr-namespace:VisioForge.Core.UI;assembly=VisioForge.Core"
-        xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core"
-        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core.UI.WPF"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         x:Class="Main_Demo.MainWindow"
         Title="VisioForge Media Player SDK .Net Demo" Height="802" Width="843" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
@@ -769,5 +769,6 @@
             </ListBox.ContextMenu>
         </ListBox>
         <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="304" Margin="407,171,0,0" VerticalAlignment="Top" Width="411"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="593,717,0,0" VerticalAlignment="Top" Click="button_Click"/>
     </Grid>
 </Window>

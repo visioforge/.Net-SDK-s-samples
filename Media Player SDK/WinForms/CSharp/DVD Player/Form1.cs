@@ -9,9 +9,9 @@ namespace DVD_Player_Demo
     using VisioForge.Core.MediaInfo;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.UI;
-    using VisioForge.Types;
-    using VisioForge.Types.Events;
-    using VisioForge.Types.MediaPlayer;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -258,12 +258,15 @@ namespace DVD_Player_Demo
 
         private void DestroyEngine()
         {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            MediaPlayer1.OnDVDPlaybackError -= MediaPlayer1_OnDVDPlaybackError;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.OnDVDPlaybackError -= MediaPlayer1_OnDVDPlaybackError;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)

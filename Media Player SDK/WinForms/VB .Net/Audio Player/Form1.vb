@@ -2,11 +2,11 @@
 
 Imports VisioForge.Core.MediaPlayer
 Imports VisioForge.Core.UI
-Imports VisioForge.Types
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.UI.WinForms
 Imports System.IO
-Imports VisioForge.Types.Events
-Imports VisioForge.Types.MediaPlayer
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.MediaPlayer
 
 Public Class Form1
 
