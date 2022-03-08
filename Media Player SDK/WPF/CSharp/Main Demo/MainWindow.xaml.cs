@@ -371,19 +371,19 @@ namespace Main_Demo
             switch (cbImageType.SelectedIndex)
             {
                 case 0:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight);
                     break;
                 case 1:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".jpg"), ImageFormat.Jpeg, (int)tbJPEGQuality.Value, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".jpg"), ImageFormat.Jpeg, (int)tbJPEGQuality.Value, customWidth, customHeight);
                     break;
                 case 2:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".gif"), ImageFormat.Gif, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".gif"), ImageFormat.Gif, 0, customWidth, customHeight);
                     break;
                 case 3:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".png"), ImageFormat.Png, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".png"), ImageFormat.Png, 0, customWidth, customHeight);
                     break;
                 case 4:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight);
+                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight);
                     break;
             }
         }
@@ -3062,11 +3062,6 @@ namespace Main_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            VideoView1.Width = 500;
         }
     }
 }

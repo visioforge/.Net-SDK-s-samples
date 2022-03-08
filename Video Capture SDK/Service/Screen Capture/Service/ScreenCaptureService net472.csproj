@@ -1,61 +1,61 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-		<ProductVersion>8.0.30703</ProductVersion>
-		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net472</TargetFrameworks>
-		<RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-		<UseWindowsForms>true</UseWindowsForms>
-		<AssemblyTitle>SimpleService</AssemblyTitle>
-		<Company>VisioForge</Company>
-		<Product>SimpleService</Product>
-		<Copyright>Copyright (c) 2006-2022</Copyright>
-		<AssemblyVersion>15.3.4.0</AssemblyVersion>
-		<FileVersion>15.3.4.0</FileVersion>
-		<OutputPath>bin\$(Configuration)\</OutputPath>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-		<DebugType>full</DebugType>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-		<DebugType>pdbonly</DebugType>
-	</PropertyGroup>
-	<PropertyGroup>
-		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-	</PropertyGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
-		<Reference Include="System.Configuration.Install" />
-		<Reference Include="System.Management" />
-		<Reference Include="System.ServiceProcess" />
-		<Reference Include="System.Windows.Forms" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Update="ProjectInstaller.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="ProjectInstaller.Designer.cs">
-			<DependentUpon>ProjectInstaller.cs</DependentUpon>
-		</Compile>
-		<Compile Update="Service1.cs">
-			<SubType>Component</SubType>
-		</Compile>
-		<Compile Update="Service1.Designer.cs">
-			<DependentUpon>Service1.cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Update="ProjectInstaller.resx">
-			<DependentUpon>ProjectInstaller.cs</DependentUpon>
-		</EmbeddedResource>
-		<EmbeddedResource Update="Service1.resx">
-			<DependentUpon>Service1.cs</DependentUpon>
-		</EmbeddedResource>
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.4" />
-		<PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.4" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="visioforge_main_icon.ico" />
-	</ItemGroup>
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net472</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>SimpleService</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>SimpleService</Product>
+    <Copyright>Copyright (c) 2006-2022</Copyright>
+    <AssemblyVersion>15.3.5.0</AssemblyVersion>
+    <FileVersion>15.3.5.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Service1.resx">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
 </Project>

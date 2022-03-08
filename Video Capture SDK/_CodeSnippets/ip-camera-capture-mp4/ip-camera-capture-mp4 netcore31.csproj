@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-		<RootNamespace>ip_camera_capture_mp4</RootNamespace>
-		<UseWindowsForms>true</UseWindowsForms>
-		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-	</PropertyGroup>
-	<ItemGroup>
-		<Content Include="visioforge_main_icon.ico" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.4" />
-		<PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.4" />
-	</ItemGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <RootNamespace>ip_camera_capture_mp4</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.3.5" />
+  </ItemGroup>
 </Project>

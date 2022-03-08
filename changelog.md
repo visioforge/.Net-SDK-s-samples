@@ -1,4 +1,4 @@
-15.3.4
+15.3
 * App start-up time improved for PCs with Decklink cards 
 * NDI SDK v5 support
 * Resolved an issue with MKV Legacy output (wrong cast exception). 
