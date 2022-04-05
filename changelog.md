@@ -11,6 +11,8 @@
 * UI classes moved to VisioForge.Core.UI.* assemblies and independent NuGet packages
 * VisioForge.Types renamed to VisioForge.Core.Types
 * VisioForge.Core no longer depends on  Windows Forms framework
+* Resolved an issue with ignored Play_PauseAtFirstFrame property 
+* Updated HighDPI support in WinForms samples
 
 15.2
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
