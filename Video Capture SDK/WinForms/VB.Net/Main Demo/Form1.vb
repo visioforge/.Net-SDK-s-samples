@@ -4763,8 +4763,12 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
-        VideoView1.Width = Width - VideoView1.Left - 30
-        VideoView1.Height = Height - VideoView1.Top - 120
+        Dim dpiX As UInt32
+        Dim dpiY As UInt32
+        Screen.PrimaryScreen.GetDpi(VisioForge.Core.Types.DpiType.Effective, dpiX, dpiY)
+
+        VideoView1.Width = Width - VideoView1.Left - (20 * dpiX / 96)
+        VideoView1.Height = Height - VideoView1.Top - (110 * dpiY / 96)
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged

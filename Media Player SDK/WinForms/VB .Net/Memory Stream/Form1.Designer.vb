@@ -33,7 +33,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.rbAudioFile = New System.Windows.Forms.RadioButton()
         Me.rbVideoWithoutAudio = New System.Windows.Forms.RadioButton()
@@ -65,7 +64,7 @@ Partial Class Form1
         Me.label14 = New System.Windows.Forms.Label()
         Me.saveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.openFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.timer1 = New System.Windows.Forms.Timer()
         Me.groupBox3 = New System.Windows.Forms.GroupBox()
         Me.rbStreamTypeMemory = New System.Windows.Forms.RadioButton()
         Me.rbSTreamTypeFile = New System.Windows.Forms.RadioButton()
@@ -83,9 +82,10 @@ Partial Class Form1
         'rbAudioFile
         '
         Me.rbAudioFile.AutoSize = True
-        Me.rbAudioFile.Location = New System.Drawing.Point(286, 58)
+        Me.rbAudioFile.Location = New System.Drawing.Point(572, 112)
+        Me.rbAudioFile.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.rbAudioFile.Name = "rbAudioFile"
-        Me.rbAudioFile.Size = New System.Drawing.Size(68, 17)
+        Me.rbAudioFile.Size = New System.Drawing.Size(132, 29)
         Me.rbAudioFile.TabIndex = 57
         Me.rbAudioFile.Text = "Audio file"
         Me.rbAudioFile.UseVisualStyleBackColor = True
@@ -93,9 +93,10 @@ Partial Class Form1
         'rbVideoWithoutAudio
         '
         Me.rbVideoWithoutAudio.AutoSize = True
-        Me.rbVideoWithoutAudio.Location = New System.Drawing.Point(140, 58)
+        Me.rbVideoWithoutAudio.Location = New System.Drawing.Point(280, 112)
+        Me.rbVideoWithoutAudio.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.rbVideoWithoutAudio.Name = "rbVideoWithoutAudio"
-        Me.rbVideoWithoutAudio.Size = New System.Drawing.Size(140, 17)
+        Me.rbVideoWithoutAudio.Size = New System.Drawing.Size(279, 29)
         Me.rbVideoWithoutAudio.TabIndex = 56
         Me.rbVideoWithoutAudio.Text = "Video file (without audio)"
         Me.rbVideoWithoutAudio.UseVisualStyleBackColor = True
@@ -104,9 +105,10 @@ Partial Class Form1
         '
         Me.rbVideoWithAudio.AutoSize = True
         Me.rbVideoWithAudio.Checked = True
-        Me.rbVideoWithAudio.Location = New System.Drawing.Point(12, 58)
+        Me.rbVideoWithAudio.Location = New System.Drawing.Point(24, 112)
+        Me.rbVideoWithAudio.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.rbVideoWithAudio.Name = "rbVideoWithAudio"
-        Me.rbVideoWithAudio.Size = New System.Drawing.Size(125, 17)
+        Me.rbVideoWithAudio.Size = New System.Drawing.Size(249, 29)
         Me.rbVideoWithAudio.TabIndex = 55
         Me.rbVideoWithAudio.TabStop = True
         Me.rbVideoWithAudio.Text = "Video file (with audio)"
@@ -119,9 +121,11 @@ Partial Class Form1
         Me.groupBox4.Controls.Add(Me.tbBalance1)
         Me.groupBox4.Controls.Add(Me.label6)
         Me.groupBox4.Controls.Add(Me.tbVolume1)
-        Me.groupBox4.Location = New System.Drawing.Point(434, 148)
+        Me.groupBox4.Location = New System.Drawing.Point(868, 285)
+        Me.groupBox4.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.groupBox4.Name = "groupBox4"
-        Me.groupBox4.Size = New System.Drawing.Size(221, 107)
+        Me.groupBox4.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.groupBox4.Size = New System.Drawing.Size(442, 206)
         Me.groupBox4.TabIndex = 53
         Me.groupBox4.TabStop = False
         Me.groupBox4.Text = "Audio output"
@@ -129,39 +133,43 @@ Partial Class Form1
         'label7
         '
         Me.label7.AutoSize = True
-        Me.label7.Location = New System.Drawing.Point(109, 28)
+        Me.label7.Location = New System.Drawing.Point(218, 54)
+        Me.label7.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.label7.Name = "label7"
-        Me.label7.Size = New System.Drawing.Size(46, 13)
+        Me.label7.Size = New System.Drawing.Size(90, 25)
         Me.label7.TabIndex = 11
         Me.label7.Text = "Balance"
         '
         'tbBalance1
         '
         Me.tbBalance1.BackColor = System.Drawing.SystemColors.Window
-        Me.tbBalance1.Location = New System.Drawing.Point(112, 44)
+        Me.tbBalance1.Location = New System.Drawing.Point(224, 85)
+        Me.tbBalance1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.tbBalance1.Maximum = 100
         Me.tbBalance1.Minimum = -100
         Me.tbBalance1.Name = "tbBalance1"
-        Me.tbBalance1.Size = New System.Drawing.Size(85, 45)
+        Me.tbBalance1.Size = New System.Drawing.Size(170, 90)
         Me.tbBalance1.TabIndex = 10
         '
         'label6
         '
         Me.label6.AutoSize = True
-        Me.label6.Location = New System.Drawing.Point(16, 28)
+        Me.label6.Location = New System.Drawing.Point(32, 54)
+        Me.label6.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.label6.Name = "label6"
-        Me.label6.Size = New System.Drawing.Size(42, 13)
+        Me.label6.Size = New System.Drawing.Size(84, 25)
         Me.label6.TabIndex = 9
         Me.label6.Text = "Volume"
         '
         'tbVolume1
         '
         Me.tbVolume1.BackColor = System.Drawing.SystemColors.Window
-        Me.tbVolume1.Location = New System.Drawing.Point(19, 44)
+        Me.tbVolume1.Location = New System.Drawing.Point(38, 85)
+        Me.tbVolume1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.tbVolume1.Maximum = 100
         Me.tbVolume1.Minimum = 20
         Me.tbVolume1.Name = "tbVolume1"
-        Me.tbVolume1.Size = New System.Drawing.Size(85, 45)
+        Me.tbVolume1.Size = New System.Drawing.Size(170, 90)
         Me.tbVolume1.TabIndex = 8
         Me.tbVolume1.Value = 80
         '
@@ -171,9 +179,11 @@ Partial Class Form1
         Me.groupBox1.Controls.Add(Me.cbLicensing)
         Me.groupBox1.Controls.Add(Me.mmError)
         Me.groupBox1.Controls.Add(Me.cbDebugMode)
-        Me.groupBox1.Location = New System.Drawing.Point(434, 16)
+        Me.groupBox1.Location = New System.Drawing.Point(868, 31)
+        Me.groupBox1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.groupBox1.Name = "groupBox1"
-        Me.groupBox1.Size = New System.Drawing.Size(221, 126)
+        Me.groupBox1.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.groupBox1.Size = New System.Drawing.Size(442, 242)
         Me.groupBox1.TabIndex = 52
         Me.groupBox1.TabStop = False
         Me.groupBox1.Text = "Errors and warnings"
@@ -181,28 +191,31 @@ Partial Class Form1
         'cbLicensing
         '
         Me.cbLicensing.AutoSize = True
-        Me.cbLicensing.Location = New System.Drawing.Point(106, 19)
+        Me.cbLicensing.Location = New System.Drawing.Point(212, 37)
+        Me.cbLicensing.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.cbLicensing.Name = "cbLicensing"
-        Me.cbLicensing.Size = New System.Drawing.Size(91, 17)
+        Me.cbLicensing.Size = New System.Drawing.Size(177, 29)
         Me.cbLicensing.TabIndex = 4
         Me.cbLicensing.Text = "Licensing info"
         Me.cbLicensing.UseVisualStyleBackColor = True
         '
         'mmError
         '
-        Me.mmError.Location = New System.Drawing.Point(6, 42)
+        Me.mmError.Location = New System.Drawing.Point(12, 81)
+        Me.mmError.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.mmError.Multiline = True
         Me.mmError.Name = "mmError"
         Me.mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.mmError.Size = New System.Drawing.Size(209, 78)
+        Me.mmError.Size = New System.Drawing.Size(414, 146)
         Me.mmError.TabIndex = 3
         '
         'cbDebugMode
         '
         Me.cbDebugMode.AutoSize = True
-        Me.cbDebugMode.Location = New System.Drawing.Point(6, 19)
+        Me.cbDebugMode.Location = New System.Drawing.Point(12, 37)
+        Me.cbDebugMode.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.cbDebugMode.Name = "cbDebugMode"
-        Me.cbDebugMode.Size = New System.Drawing.Size(87, 17)
+        Me.cbDebugMode.Size = New System.Drawing.Size(166, 29)
         Me.cbDebugMode.TabIndex = 2
         Me.cbDebugMode.Text = "Debug mode"
         Me.cbDebugMode.UseVisualStyleBackColor = True
@@ -212,9 +225,10 @@ Partial Class Form1
         Me.label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.label1.AutoSize = True
         Me.label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.label1.Location = New System.Drawing.Point(83, 515)
+        Me.label1.Location = New System.Drawing.Point(166, 990)
+        Me.label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(244, 13)
+        Me.label1.Size = New System.Drawing.Size(500, 26)
         Me.label1.TabIndex = 51
         Me.label1.Text = "Much more features are shown in Main Demo!"
         '
@@ -231,9 +245,11 @@ Partial Class Form1
         Me.groupBox2.Controls.Add(Me.label16)
         Me.groupBox2.Controls.Add(Me.lbTime)
         Me.groupBox2.Controls.Add(Me.tbTimeline)
-        Me.groupBox2.Location = New System.Drawing.Point(12, 408)
+        Me.groupBox2.Location = New System.Drawing.Point(24, 785)
+        Me.groupBox2.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.groupBox2.Name = "groupBox2"
-        Me.groupBox2.Size = New System.Drawing.Size(416, 90)
+        Me.groupBox2.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.groupBox2.Size = New System.Drawing.Size(832, 173)
         Me.groupBox2.TabIndex = 50
         Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Controls"
@@ -241,18 +257,20 @@ Partial Class Form1
         'cbLoop
         '
         Me.cbLoop.AutoSize = True
-        Me.cbLoop.Location = New System.Drawing.Point(337, 62)
+        Me.cbLoop.Location = New System.Drawing.Point(674, 119)
+        Me.cbLoop.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.cbLoop.Name = "cbLoop"
-        Me.cbLoop.Size = New System.Drawing.Size(50, 17)
+        Me.cbLoop.Size = New System.Drawing.Size(92, 29)
         Me.cbLoop.TabIndex = 10
         Me.cbLoop.Text = "Loop"
         Me.cbLoop.UseVisualStyleBackColor = True
         '
         'btNextFrame
         '
-        Me.btNextFrame.Location = New System.Drawing.Point(249, 58)
+        Me.btNextFrame.Location = New System.Drawing.Point(498, 112)
+        Me.btNextFrame.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btNextFrame.Name = "btNextFrame"
-        Me.btNextFrame.Size = New System.Drawing.Size(75, 23)
+        Me.btNextFrame.Size = New System.Drawing.Size(150, 44)
         Me.btNextFrame.TabIndex = 8
         Me.btNextFrame.Text = "Next frame"
         Me.btNextFrame.UseVisualStyleBackColor = True
@@ -260,27 +278,30 @@ Partial Class Form1
         'btStop
         '
         Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btStop.Location = New System.Drawing.Point(180, 58)
+        Me.btStop.Location = New System.Drawing.Point(360, 112)
+        Me.btStop.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btStop.Name = "btStop"
-        Me.btStop.Size = New System.Drawing.Size(46, 23)
+        Me.btStop.Size = New System.Drawing.Size(92, 44)
         Me.btStop.TabIndex = 7
         Me.btStop.Text = "Stop"
         Me.btStop.UseVisualStyleBackColor = True
         '
         'btPause
         '
-        Me.btPause.Location = New System.Drawing.Point(122, 58)
+        Me.btPause.Location = New System.Drawing.Point(244, 112)
+        Me.btPause.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btPause.Name = "btPause"
-        Me.btPause.Size = New System.Drawing.Size(52, 23)
+        Me.btPause.Size = New System.Drawing.Size(104, 44)
         Me.btPause.TabIndex = 6
         Me.btPause.Text = "Pause"
         Me.btPause.UseVisualStyleBackColor = True
         '
         'btResume
         '
-        Me.btResume.Location = New System.Drawing.Point(55, 58)
+        Me.btResume.Location = New System.Drawing.Point(110, 112)
+        Me.btResume.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btResume.Name = "btResume"
-        Me.btResume.Size = New System.Drawing.Size(61, 23)
+        Me.btResume.Size = New System.Drawing.Size(122, 44)
         Me.btResume.TabIndex = 5
         Me.btResume.Text = "Resume"
         Me.btResume.UseVisualStyleBackColor = True
@@ -288,56 +309,62 @@ Partial Class Form1
         'btStart
         '
         Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btStart.Location = New System.Drawing.Point(6, 58)
+        Me.btStart.Location = New System.Drawing.Point(12, 112)
+        Me.btStart.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btStart.Name = "btStart"
-        Me.btStart.Size = New System.Drawing.Size(43, 23)
+        Me.btStart.Size = New System.Drawing.Size(86, 44)
         Me.btStart.TabIndex = 4
         Me.btStart.Text = "Start"
         Me.btStart.UseVisualStyleBackColor = True
         '
         'tbSpeed
         '
-        Me.tbSpeed.Location = New System.Drawing.Point(321, 27)
+        Me.tbSpeed.Location = New System.Drawing.Point(642, 52)
+        Me.tbSpeed.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.tbSpeed.Maximum = 25
         Me.tbSpeed.Minimum = 5
         Me.tbSpeed.Name = "tbSpeed"
-        Me.tbSpeed.Size = New System.Drawing.Size(89, 45)
+        Me.tbSpeed.Size = New System.Drawing.Size(178, 90)
         Me.tbSpeed.TabIndex = 3
         Me.tbSpeed.Value = 10
         '
         'label16
         '
         Me.label16.AutoSize = True
-        Me.label16.Location = New System.Drawing.Point(322, 11)
+        Me.label16.Location = New System.Drawing.Point(644, 21)
+        Me.label16.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.label16.Name = "label16"
-        Me.label16.Size = New System.Drawing.Size(38, 13)
+        Me.label16.Size = New System.Drawing.Size(74, 25)
         Me.label16.TabIndex = 2
         Me.label16.Text = "Speed"
         '
         'lbTime
         '
         Me.lbTime.AutoSize = True
-        Me.lbTime.Location = New System.Drawing.Point(219, 27)
+        Me.lbTime.Location = New System.Drawing.Point(438, 52)
+        Me.lbTime.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lbTime.Name = "lbTime"
-        Me.lbTime.Size = New System.Drawing.Size(96, 13)
+        Me.lbTime.Size = New System.Drawing.Size(186, 25)
         Me.lbTime.TabIndex = 1
         Me.lbTime.Text = "00:00:00/00:00:00"
         '
         'tbTimeline
         '
-        Me.tbTimeline.Location = New System.Drawing.Point(6, 19)
+        Me.tbTimeline.Location = New System.Drawing.Point(12, 37)
+        Me.tbTimeline.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.tbTimeline.Maximum = 100
         Me.tbTimeline.Name = "tbTimeline"
-        Me.tbTimeline.Size = New System.Drawing.Size(207, 45)
+        Me.tbTimeline.Size = New System.Drawing.Size(414, 90)
         Me.tbTimeline.TabIndex = 0
         '
         'linkLabel1
         '
         Me.linkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.linkLabel1.AutoSize = True
-        Me.linkLabel1.Location = New System.Drawing.Point(318, 10)
+        Me.linkLabel1.Location = New System.Drawing.Point(636, 19)
+        Me.linkLabel1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.linkLabel1.Name = "linkLabel1"
-        Me.linkLabel1.Size = New System.Drawing.Size(110, 13)
+        Me.linkLabel1.Size = New System.Drawing.Size(219, 25)
         Me.linkLabel1.TabIndex = 49
         Me.linkLabel1.TabStop = True
         Me.linkLabel1.Text = "Watch video tutorials!"
@@ -345,9 +372,10 @@ Partial Class Form1
         'btSelectFile
         '
         Me.btSelectFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btSelectFile.Location = New System.Drawing.Point(405, 27)
+        Me.btSelectFile.Location = New System.Drawing.Point(810, 52)
+        Me.btSelectFile.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.btSelectFile.Name = "btSelectFile"
-        Me.btSelectFile.Size = New System.Drawing.Size(23, 23)
+        Me.btSelectFile.Size = New System.Drawing.Size(46, 44)
         Me.btSelectFile.TabIndex = 48
         Me.btSelectFile.Text = "..."
         Me.btSelectFile.UseVisualStyleBackColor = True
@@ -356,18 +384,20 @@ Partial Class Form1
         '
         Me.edFilename.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.edFilename.Location = New System.Drawing.Point(12, 29)
+        Me.edFilename.Location = New System.Drawing.Point(24, 56)
+        Me.edFilename.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.edFilename.Name = "edFilename"
-        Me.edFilename.Size = New System.Drawing.Size(387, 20)
+        Me.edFilename.Size = New System.Drawing.Size(770, 31)
         Me.edFilename.TabIndex = 47
         Me.edFilename.Text = "C:\video.avi"
         '
         'label14
         '
         Me.label14.AutoSize = True
-        Me.label14.Location = New System.Drawing.Point(9, 13)
+        Me.label14.Location = New System.Drawing.Point(18, 25)
+        Me.label14.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.label14.Name = "label14"
-        Me.label14.Size = New System.Drawing.Size(52, 13)
+        Me.label14.Size = New System.Drawing.Size(106, 25)
         Me.label14.TabIndex = 46
         Me.label14.Text = "File name"
         '
@@ -379,11 +409,11 @@ Partial Class Form1
         Me.groupBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.groupBox3.Controls.Add(Me.rbStreamTypeMemory)
         Me.groupBox3.Controls.Add(Me.rbSTreamTypeFile)
-        Me.groupBox3.Location = New System.Drawing.Point(440, 260)
-        Me.groupBox3.Margin = New System.Windows.Forms.Padding(2)
+        Me.groupBox3.Location = New System.Drawing.Point(880, 500)
+        Me.groupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.groupBox3.Name = "groupBox3"
-        Me.groupBox3.Padding = New System.Windows.Forms.Padding(2)
-        Me.groupBox3.Size = New System.Drawing.Size(207, 81)
+        Me.groupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox3.Size = New System.Drawing.Size(414, 156)
         Me.groupBox3.TabIndex = 59
         Me.groupBox3.TabStop = False
         Me.groupBox3.Text = "Stream type"
@@ -391,10 +421,10 @@ Partial Class Form1
         'rbStreamTypeMemory
         '
         Me.rbStreamTypeMemory.AutoSize = True
-        Me.rbStreamTypeMemory.Location = New System.Drawing.Point(12, 49)
-        Me.rbStreamTypeMemory.Margin = New System.Windows.Forms.Padding(2)
+        Me.rbStreamTypeMemory.Location = New System.Drawing.Point(24, 94)
+        Me.rbStreamTypeMemory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rbStreamTypeMemory.Name = "rbStreamTypeMemory"
-        Me.rbStreamTypeMemory.Size = New System.Drawing.Size(153, 17)
+        Me.rbStreamTypeMemory.Size = New System.Drawing.Size(308, 29)
         Me.rbStreamTypeMemory.TabIndex = 1
         Me.rbStreamTypeMemory.Text = "Load entire file into memory"
         Me.rbStreamTypeMemory.UseVisualStyleBackColor = True
@@ -403,10 +433,10 @@ Partial Class Form1
         '
         Me.rbSTreamTypeFile.AutoSize = True
         Me.rbSTreamTypeFile.Checked = True
-        Me.rbSTreamTypeFile.Location = New System.Drawing.Point(12, 21)
-        Me.rbSTreamTypeFile.Margin = New System.Windows.Forms.Padding(2)
+        Me.rbSTreamTypeFile.Location = New System.Drawing.Point(24, 40)
+        Me.rbSTreamTypeFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rbSTreamTypeFile.Name = "rbSTreamTypeFile"
-        Me.rbSTreamTypeFile.Size = New System.Drawing.Size(94, 17)
+        Me.rbSTreamTypeFile.Size = New System.Drawing.Size(186, 29)
         Me.rbSTreamTypeFile.TabIndex = 0
         Me.rbSTreamTypeFile.TabStop = True
         Me.rbSTreamTypeFile.Text = "Use file stream"
@@ -415,17 +445,18 @@ Partial Class Form1
         'VideoView1
         '
         Me.VideoView1.BackColor = System.Drawing.Color.Black
-        Me.VideoView1.Location = New System.Drawing.Point(12, 81)
+        Me.VideoView1.Location = New System.Drawing.Point(24, 156)
+        Me.VideoView1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.VideoView1.Name = "VideoView1"
-        Me.VideoView1.Size = New System.Drawing.Size(416, 321)
+        Me.VideoView1.Size = New System.Drawing.Size(832, 617)
         Me.VideoView1.StatusOverlay = Nothing
         Me.VideoView1.TabIndex = 60
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(666, 535)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(192.0!, 192.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(1332, 1029)
         Me.Controls.Add(Me.VideoView1)
         Me.Controls.Add(Me.groupBox3)
         Me.Controls.Add(Me.rbAudioFile)
@@ -439,7 +470,8 @@ Partial Class Form1
         Me.Controls.Add(Me.btSelectFile)
         Me.Controls.Add(Me.edFilename)
         Me.Controls.Add(Me.label14)
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.Name = "Form1"
         Me.Text = "Media Player SDK .Net - Memory Playback Demo"
         Me.groupBox4.ResumeLayout(false)

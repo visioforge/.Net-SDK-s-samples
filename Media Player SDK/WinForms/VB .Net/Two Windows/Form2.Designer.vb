@@ -38,51 +38,57 @@ Partial Class Form2
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.cbLicensing)
         Me.GroupBox1.Controls.Add(Me.mmError)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 367)
+        Me.GroupBox1.Location = New System.Drawing.Point(24, 706)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(475, 117)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.GroupBox1.Size = New System.Drawing.Size(950, 225)
         Me.GroupBox1.TabIndex = 1
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Errors and warnings"
         '
         'cbLicensing
         '
-        Me.cbLicensing.AutoSize = true
-        Me.cbLicensing.Location = New System.Drawing.Point(378, 19)
+        Me.cbLicensing.AutoSize = True
+        Me.cbLicensing.Location = New System.Drawing.Point(756, 37)
+        Me.cbLicensing.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.cbLicensing.Name = "cbLicensing"
-        Me.cbLicensing.Size = New System.Drawing.Size(91, 17)
+        Me.cbLicensing.Size = New System.Drawing.Size(177, 29)
         Me.cbLicensing.TabIndex = 4
         Me.cbLicensing.Text = "Licensing info"
-        Me.cbLicensing.UseVisualStyleBackColor = true
+        Me.cbLicensing.UseVisualStyleBackColor = True
         '
         'mmError
         '
-        Me.mmError.Location = New System.Drawing.Point(6, 42)
-        Me.mmError.Multiline = true
+        Me.mmError.Location = New System.Drawing.Point(12, 81)
+        Me.mmError.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.mmError.Multiline = True
         Me.mmError.Name = "mmError"
         Me.mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.mmError.Size = New System.Drawing.Size(463, 69)
+        Me.mmError.Size = New System.Drawing.Size(922, 129)
         Me.mmError.TabIndex = 3
         '
         'pnScreen
         '
-        Me.pnScreen.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.pnScreen.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnScreen.BackColor = System.Drawing.Color.Black
-        Me.pnScreen.Location = New System.Drawing.Point(12, 12)
+        Me.pnScreen.Location = New System.Drawing.Point(24, 23)
+        Me.pnScreen.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.pnScreen.Name = "pnScreen"
-        Me.pnScreen.Size = New System.Drawing.Size(475, 349)
+        Me.pnScreen.Size = New System.Drawing.Size(950, 671)
         Me.pnScreen.TabIndex = 2
         '
         'Form2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(499, 496)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(192.0!, 192.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.ClientSize = New System.Drawing.Size(998, 954)
         Me.Controls.Add(Me.pnScreen)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.Name = "Form2"
         Me.Text = "Media Player SDK .Net - Two Windows Demo"
         Me.GroupBox1.ResumeLayout(false)

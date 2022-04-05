@@ -12,6 +12,10 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
         [STAThread]
         static void Main()
         {
+#if NETCOREAPP
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+#endif
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
