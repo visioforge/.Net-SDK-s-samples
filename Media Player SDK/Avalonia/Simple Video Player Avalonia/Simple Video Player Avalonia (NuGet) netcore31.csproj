@@ -21,17 +21,17 @@
     <AvaloniaResource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.12" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
+    <PackageReference Include="Avalonia" Version="0.10.13" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.13" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
-    <PackageReference Include="MessageBox.Avalonia" Version="1.7.1" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.13" />
+    <PackageReference Include="MessageBox.Avalonia" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.3.10" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.3.10" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.3.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.3.11" />
     <PackageReference Include="VisioForge.GStreamer.Codecs.Windows.x64" Version="1.18.5" />
-    <PackageReference Include="VisioForge.GStreamer.Core.Windows.x64" Version="1.18.5" />
+    <PackageReference Include="VisioForge.GStreamer.Core.Windows.x64" Version="1.18.6" />
     <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.18.5" />
   </ItemGroup>
 </Project>

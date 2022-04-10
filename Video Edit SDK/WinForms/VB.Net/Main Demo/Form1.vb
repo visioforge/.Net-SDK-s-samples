@@ -337,8 +337,6 @@ Public Class Form1
             VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         ElseIf rbEVR.Checked Then
             VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-        ElseIf rbVR.Checked Then
-            VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         ElseIf (rbDirect2D.Checked) Then
             VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
         Else
@@ -1485,7 +1483,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVR.CheckedChanged, rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
+    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
 
         cbScreenFlipVertical.Enabled = rbVMR9.Checked Or rbDirect2D.Checked
         cbScreenFlipHorizontal.Enabled = rbVMR9.Checked Or rbDirect2D.Checked
@@ -1496,8 +1494,6 @@ Public Class Form1
                 VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
             ElseIf (rbEVR.Checked) Then
                 VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-            ElseIf (rbVR.Checked) Then
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
             ElseIf (rbDirect2D.Checked) Then
                 VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
             Else

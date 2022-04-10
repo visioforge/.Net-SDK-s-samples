@@ -290,12 +290,6 @@ Public Class Form1
         rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR()
         rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9()
 
-        If Not (rbVMR9.Enabled And rbEVR.Enabled) Then
-            rbVR.Checked = True
-        ElseIf (rbEVR.Enabled) Then
-            rbEVR.Checked = True
-        End If
-
         rbVR_CheckedChanged(sender, e)
 
         Dim filters As List(Of String)
@@ -1188,8 +1182,6 @@ Public Class Form1
             VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         ElseIf rbEVR.Checked Then
             VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-        ElseIf rbVR.Checked Then
-            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         ElseIf (rbDirect2D.Checked) Then
             VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
         Else
@@ -2175,7 +2167,7 @@ Public Class Form1
         lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(tbAdjSaturation.Value)
     End Sub
 
-    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVR.CheckedChanged, rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
+    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
 
         cbScreenFlipVertical.Enabled = rbVMR9.Checked Or rbDirect2D.Checked
         cbScreenFlipHorizontal.Enabled = rbVMR9.Checked Or rbDirect2D.Checked
@@ -2185,8 +2177,6 @@ Public Class Form1
                 VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
             ElseIf rbEVR.Checked Then
                 VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-            ElseIf rbVR.Checked Then
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
             ElseIf (rbDirect2D.Checked) Then
                 VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
             Else
@@ -4760,15 +4750,6 @@ Public Class Form1
                             lbTimestamp.Text = $"Recording time: " + String.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds)
                         End Sub)
         End If
-    End Sub
-
-    Private Sub Form1_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
-        Dim dpiX As UInt32
-        Dim dpiY As UInt32
-        Screen.PrimaryScreen.GetDpi(VisioForge.Core.Types.DpiType.Effective, dpiX, dpiY)
-
-        VideoView1.Width = Width - VideoView1.Left - (20 * dpiX / 96)
-        VideoView1.Height = Height - VideoView1.Top - (110 * dpiY / 96)
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged

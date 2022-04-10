@@ -384,15 +384,6 @@ namespace VideoCapture_CSharp_Demo
             rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR();
             rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9();
 
-            if (!(rbVMR9.Enabled && rbEVR.Enabled))
-            {
-                rbVR.Checked = true;
-            }
-            else if (rbEVR.Enabled)
-            {
-                rbEVR.Checked = true;
-            }
-
             rbVR_CheckedChanged(null, null);
 
             foreach (string specialFilter in VideoCapture1.Special_Filters(SpecialFilterType.HardwareVideoEncoder))
@@ -469,8 +460,6 @@ namespace VideoCapture_CSharp_Demo
 #pragma warning restore CS4014 
 
             btVirtualCameraRegister.Enabled = !VideoCapture1.DirectShow_Filters().Contains("VisioForge Virtual Camera");
-
-            Form1_SizeChanged(this, EventArgs.Empty);
         }
 
         private void AddDecklinkSources()
@@ -1431,10 +1420,6 @@ namespace VideoCapture_CSharp_Demo
             else if (rbEVR.Checked)
             {
                 VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (rbVR.Checked)
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
             else if (rbDirect2D.Checked)
             {
@@ -2810,10 +2795,6 @@ namespace VideoCapture_CSharp_Demo
             else if (rbEVR.Checked)
             {
                 VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (rbVR.Checked)
-            {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
             else if (rbDirect2D.Checked)
             {
@@ -5876,16 +5857,6 @@ namespace VideoCapture_CSharp_Demo
                                         lbTimestamp.Text = "Recording time: " + ts.ToString(@"hh\:mm\:ss");
                                     }));
             }
-        }
-
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-            uint dpiX;
-            uint dpiY;
-            Screen.PrimaryScreen.GetDpi(VisioForge.Core.Types.DpiType.Effective, out dpiX, out dpiY);
-
-            VideoView1.Width = Width - VideoView1.Left - (int)(30 * dpiX / 96);
-            VideoView1.Height = Height - VideoView1.Top - (int)(110 * dpiY / 96);
         }
 
         private void btTextLogoAdd_Click(object sender, EventArgs e)

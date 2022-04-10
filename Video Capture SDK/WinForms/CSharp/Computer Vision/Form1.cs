@@ -53,9 +53,9 @@ namespace Computer_Vision_Demo
             MediaPlayer1.OnVideoFrameBuffer += MediaPlayer1_OnVideoFrameBuffer;
             MediaPlayer1.OnError += MediaPlayer1_OnError;
 
-            Text += " (SDK v" + VideoCapture1.SDK_Version + ")";
+            Text += " (SDK v" + VideoCapture1.SDK_Version() + ")";
 
-            foreach (var device in VideoCapture1.Video_CaptureDevices)
+            foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
                 cbVideoInputDevice.Items.Add(device.Name);
             }
@@ -92,7 +92,7 @@ namespace Computer_Vision_Demo
             faceDetector.MinNeighbors = tbFDMinNeighbors.Value;
             faceDetector.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
             faceDetector.VideoScale = tbFDDownscale.Value / 10.0f;
-            
+
             if (rbFDCircle.Checked)
             {
                 faceDetector.DrawShapeType = CVShapeType.Circle;
@@ -317,7 +317,7 @@ namespace Computer_Vision_Demo
                             rect.Right = image.Width;
                         }
 
-                        MFP.EffectMosaicROI(frame.Data, image.Width, image.Height, 45, rect);
+                        VisioForge.Core.FastImageProcessing.MosaicROI(frame.Data, image.Width, image.Height, 45, rect);
                     }
                 }
             }
@@ -336,7 +336,7 @@ namespace Computer_Vision_Demo
             {
                 cbVideoInputFormat.Items.Clear();
 
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;
@@ -358,7 +358,7 @@ namespace Computer_Vision_Demo
         {
             settings = new IPCameraSourceSettings
             {
-                URL = edIPUrl.Text
+                URL = new Uri(edIPUrl.Text)
             };
 
             switch (cbIPCameraType.SelectedIndex)
@@ -408,7 +408,7 @@ namespace Computer_Vision_Demo
         {
             Log(e.Message);
         }
-        
+
         private void ConfigureVideoCapture()
         {
             // select source
@@ -547,7 +547,7 @@ namespace Computer_Vision_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = VideoCapture1.Video_CaptureDevices.FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
+                var deviceItem = VideoCapture1.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbVideoInputDevice.Text);
                 if (deviceItem == null)
                 {
                     return;

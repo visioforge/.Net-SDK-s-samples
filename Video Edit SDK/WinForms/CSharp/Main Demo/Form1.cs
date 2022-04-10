@@ -353,15 +353,6 @@ namespace VideoEdit_CS_Demo
             // ReSharper disable once CoVariantArrayConversion
             cbAudEqualizerPreset.Items.AddRange(VideoEdit1.Audio_Effects_Equalizer_Presets().ToArray());
             cbAudEqualizerPreset.SelectedIndex = 0;
-
-            if (rbEVR.Enabled)
-            {
-                rbEVR.Checked = true;
-            }
-            else if (!(rbVMR9.Enabled && rbEVR.Enabled))
-            {
-                rbVR.Checked = true;
-            }
         }
 
         private void ConfigureVUMeters()
@@ -2106,10 +2097,6 @@ namespace VideoEdit_CS_Demo
             else if (rbEVR.Checked)
             {
                 VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (rbVR.Checked)
-            {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
             else if (rbDirect2D.Checked)
             {

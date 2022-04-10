@@ -44,8 +44,6 @@ Public Class Form1
 
     Private ReadOnly MediaInfo As MediaInfoReader = New MediaInfoReader
 
-    Private ReadOnly DVDInfo As DVDInfoReader = New DVDInfoReader
-
     Private WithEvents MediaPlayer1 As MediaPlayerCore
 
     Private Sub CreateEngine()
@@ -106,16 +104,6 @@ Public Class Form1
         rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR()
         rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9()
 
-        If (rbEVR.Enabled) Then
-
-            rbEVR.Checked = True
-
-        ElseIf (Not rbVMR9.Enabled) Then
-
-            rbVR.Checked = True
-
-        End If
-
         rbVR_CheckedChanged(sender, e)
 
         ' ReSharper disable once CoVariantArrayConversion
@@ -124,8 +112,6 @@ Public Class Form1
 
         edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
-
-        Form1_SizeChanged(Me, EventArgs.Empty)
     End Sub
 
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
@@ -290,7 +276,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVR.CheckedChanged, rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
+    Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
 
         If MediaPlayer1 Is Nothing Then
             Return
@@ -303,8 +289,6 @@ Public Class Form1
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         ElseIf (rbEVR.Checked) Then
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
-        ElseIf (rbVR.Checked) Then
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
         ElseIf (rbDirect2D.Checked) Then
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.Direct2D
         Else
@@ -348,96 +332,6 @@ Public Class Form1
         End Select
     End Sub
 
-    Private Async Sub cbDVDControlTitle_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlTitle.SelectedIndexChanged
-
-        If (cbDVDControlTitle.SelectedIndex <> -1) Then
-
-            'fill info
-            cbDVDControlAudio.Items.Clear()
-            cbDVDControlSubtitles.Items.Clear()
-            cbDVDControlChapter.Items.Clear()
-
-            Dim title = DVDInfo.Info.Titles(cbDVDControlTitle.SelectedIndex)
-            For i As Integer = 0 To title.NumberOfChapters - 1
-                cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1))
-            Next
-
-            If (cbDVDControlChapter.Items.Count > 0) Then
-                cbDVDControlChapter.SelectedIndex = 0
-            End If
-
-            For i As Integer = 0 To title.MainAttributes.NumberOfAudioStreams - 1
-                Dim audioStream = title.MainAttributes.AudioAttributes(i)
-
-                Dim s As String = audioStream.AudioFormat
-
-                s = s + " - "
-                s = s + audioStream.NumberOfChannels.ToString + "ch" + " - "
-                s = s + audioStream.Language
-
-                cbDVDControlAudio.Items.Add(s)
-            Next
-
-            If (cbDVDControlAudio.Items.Count > 0) Then
-                cbDVDControlAudio.SelectedIndex = 0
-            End If
-
-            cbDVDControlSubtitles.Items.Add("Disabled")
-            For i As Integer = 0 To title.MainAttributes.NumberOfSubpictureStreams - 1
-                cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes(i).Language)
-            Next
-
-            cbDVDControlSubtitles.SelectedIndex = 0
-
-            'if null we just enumerate titles and chapters
-            If (IsDBNull(sender)) Then
-                'play title
-                Await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex)
-                tbTimeline.Maximum = (Await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds
-            End If
-        End If
-
-    End Sub
-
-    Private Sub lbDVDTitles_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles lbDVDTitles.Click
-
-        If (lbDVDTitles.SelectedIndex <> -1) Then
-            cbDVDAudio.Items.Clear()
-            cbDVDSubtitles.Items.Clear()
-
-            Dim title = DVDInfo.Info.Titles(cbDVDControlTitle.SelectedIndex)
-
-            Dim s As String = title.MainAttributes.VideoAttributes.Compression + " "
-            s = s + title.MainAttributes.VideoAttributes.SourceResolutionX + "x" + title.MainAttributes.VideoAttributes.SourceResolutionY + " "
-            s = s + title.MainAttributes.VideoAttributes.AspectRatio.Item1 + ":" + title.MainAttributes.VideoAttributes.AspectRatio.Item2 + " "
-
-            edDVDVideo.Text = s
-
-            For i As Integer = 0 To title.MainAttributes.NumberOfAudioStreams - 1
-                Dim audioStream = title.MainAttributes.AudioAttributes(i)
-                s = audioStream.AudioFormat
-
-                s = s + " - "
-                s = s + audioStream.NumberOfChannels + "ch" + " - "
-                s = s + audioStream.Language
-
-                cbDVDAudio.Items.Add(s)
-            Next
-
-            If (cbDVDAudio.Items.Count > 0) Then
-                cbDVDAudio.SelectedIndex = 0
-            End If
-
-            For i As Integer = 0 To title.MainAttributes.NumberOfSubpictureStreams - 1
-                cbDVDSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes(i).Language)
-            Next
-
-            If (cbDVDSubtitles.Items.Count > 0) Then
-                cbDVDSubtitles.SelectedIndex = 0
-            End If
-        End If
-    End Sub
-
     Private Sub tbBalance1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance1.Scroll
 
         If (cbAudioStream1.Checked Or MediaPlayer1.Audio_Streams_AllInOne()) Then
@@ -472,11 +366,7 @@ Public Class Form1
 
     Private Async Sub tbSpeed_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSpeed.Scroll
 
-        If (MediaPlayer1.Source_Mode <> MediaPlayerSourceMode.DVD_DS) Then
-            Await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0)
-        Else
-            Await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, False)
-        End If
+        Await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0)
 
     End Sub
 
@@ -727,32 +617,6 @@ Public Class Form1
 
             End If
 
-        ElseIf (MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS) Then
-
-            cbAudioStream1.Enabled = True
-            cbAudioStream1.Checked = True
-            tbVolume1.Enabled = True
-            tbBalance1.Enabled = True
-
-            edDVDVideo.Text = String.Empty
-            lbDVDTitles.Items.Clear()
-            cbDVDAudio.Items.Clear()
-            cbDVDSubtitles.Items.Clear()
-
-            cbDVDControlTitle.Items.Clear()
-            cbDVDControlChapter.Items.Clear()
-            cbDVDControlAudio.Items.Clear()
-            cbDVDControlSubtitles.Items.Clear()
-
-            DVDInfo.ReadDVDInfo()
-
-            For i As Integer = 0 To DVDInfo.Info.Disc_NumOfTitles - 1
-
-                lbDVDTitles.Items.Add("Title " + Convert.ToString(i + 1))
-                cbDVDControlTitle.Items.Add("Title " + Convert.ToString(i + 1))
-
-            Next
-
         Else
 
             cbAudioStream1.Enabled = True
@@ -777,16 +641,6 @@ Public Class Form1
         End If
 
         lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
-
-        If (MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS) Then
-
-            If (MediaPlayer1.DVD_Chapter_GetCurrent() <> cbDVDControlChapter.SelectedIndex And cbDVDControlChapter.SelectedIndex <> -1) Then
-
-                cbDVDControlChapter.SelectedIndex = MediaPlayer1.DVD_Chapter_GetCurrent()
-
-            End If
-
-        End If
 
         timer1.Tag = 0
 
@@ -933,19 +787,17 @@ Public Class Form1
             Case 4
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_VLC
             Case 5
-                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS
-            Case 6
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.BluRay
-            Case 7
+            Case 6
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS
                 LoadToMemory()
-            Case 8
+            Case 7
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MMS_WMV_DS
-            Case 9
+            Case 8
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.HTTP_RTSP_VLC
-            Case 10
+            Case 9
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS
-            Case 11
+            Case 10
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MIDI
         End Select
     End Sub
@@ -1156,9 +1008,7 @@ Public Class Form1
 
         MediaPlayer1.Audio_OutputDevice = cbAudioOutputDevice.Text
 
-        If (rbVR.Checked) Then
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer
-        ElseIf (rbVMR9.Checked) Then
+        If (rbVMR9.Checked) Then
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9
         ElseIf (rbEVR.Checked) Then
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR
@@ -1290,24 +1140,8 @@ Public Class Form1
 
         FillAdjustRanges()
 
-        ' DVD
-        If (MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS) Then
-
-            ' select and play first title
-            If (cbDVDControlTitle.Items.Count > 0) Then
-
-                cbDVDControlTitle.SelectedIndex = 0
-                cbDVDControlTitle_SelectedIndexChanged(sender, e)
-
-            End If
-
-            ' show title menu
-            Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
-
-        End If
-
         ' set audio volume for each stream
-        If (MediaPlayer1.Source_Mode <> MediaPlayerSourceMode.DVD_DS And MediaPlayer1.Source_Mode <> MediaPlayerSourceMode.MMS_WMV_DS) Then
+        If (MediaPlayer1.Source_Mode <> MediaPlayerSourceMode.MMS_WMV_DS) Then
 
             Dim count As Integer = MediaPlayer1.Audio_Streams_Count()
 
@@ -1374,14 +1208,6 @@ Public Class Form1
             edFilenameOrURL.Text = openFileDialog1.FileName
         End If
 
-    End Sub
-
-    Private Async Sub btDVDControlRootMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlRootMenu.Click
-        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root)
-    End Sub
-
-    Private Async Sub btDVDControlTitleMenu_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVDControlTitleMenu.Click
-        Await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title)
     End Sub
 
     Private Async Sub btZoomIn_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btZoomIn.Click
@@ -1489,33 +1315,6 @@ Public Class Form1
             End If
 
         End If
-
-    End Sub
-
-    Private Async Sub cbDVDControlAudio_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlAudio.SelectedIndexChanged
-
-        If (cbDVDControlAudio.SelectedIndex > 0) Then
-            Await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex)
-        End If
-
-    End Sub
-
-    Private Async Sub cbDVDControlChapter_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlChapter.SelectedIndexChanged
-
-        If (cbDVDControlChapter.SelectedIndex > 0) Then
-            Await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex)
-        End If
-
-    End Sub
-
-    Private Async Sub cbDVDControlSubtitles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbDVDControlSubtitles.SelectedIndexChanged
-
-        If (cbDVDControlSubtitles.SelectedIndex > 0) Then
-            Await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1)
-        End If
-
-        ' 0 - x - subtitles
-        ' -1 - disable subtitles
 
     End Sub
 
@@ -2842,18 +2641,6 @@ Public Class Form1
 
     Private Sub btPreviousFrame_Click(sender As Object, e As EventArgs) Handles btPreviousFrame.Click
         MediaPlayer1.PreviousFrame()
-    End Sub
-
-    Private Sub Form1_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
-        Dim dpiX As UInt32
-        Dim dpiY As UInt32
-        Screen.PrimaryScreen.GetDpi(VisioForge.Core.Types.DpiType.Effective, dpiX, dpiY)
-
-        VideoView1.Width = Width - VideoView1.Left - (30 * dpiX / 96)
-        VideoView1.Height = Height - VideoView1.Top - (260 * dpiY / 96)
-
-        'VideoView1.Width = Width - VideoView1.Left - 30
-        'VideoView1.Height = Height - VideoView1.Top - 260
     End Sub
 
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged

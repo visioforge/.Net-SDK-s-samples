@@ -1223,11 +1223,7 @@ namespace Media_Player_Demo
                 waveformPainter2.Boost = tbVUMeterBoost.Value / 10.0F;
             }
 
-            if (rbVR.Checked)
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            }
-            else if (rbVMR9.Checked)
+            if (rbVMR9.Checked)
             {
                 MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
             }
@@ -2070,10 +2066,6 @@ namespace Media_Player_Demo
             else if (rbEVR.Checked)
             {
                 MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            }
-            else if (rbVR.Checked)
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
             }
             else if (rbDirect2D.Checked)
             {
@@ -3161,15 +3153,6 @@ namespace Media_Player_Demo
 
             rbEVR.Enabled = FilterDialogHelper.Filter_Supported_EVR();
             rbVMR9.Enabled = FilterDialogHelper.Filter_Supported_VMR9();
-
-            if (rbEVR.Enabled)
-            {
-                rbEVR.Checked = true;
-            }
-            else if (!rbVMR9.Enabled)
-            {
-                rbVR.Checked = true;
-            }
 
             rbVR_CheckedChanged(sender, e);
 
