@@ -2,6 +2,7 @@
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
 * Updated HighDPI support in WinForms samples
 * Resolved an issue with HighDPI support for Direct2D video renderer
+* Added additional API to ONVIFControl class: GetDeviceCapabilities, GetMediaEndpoints
 
 15.3
 * App start-up time improved for PCs with Decklink cards 
