@@ -3,7 +3,7 @@
 * Updated HighDPI support in WinForms samples
 * Resolved an issue with HighDPI support for Direct2D video renderer
 * Added additional API to ONVIFControl class: GetDeviceCapabilities, GetMediaEndpoints
-* Resolved forced reencoding issue with FFMPEG files join without reencoding
+* Resolved forced reencoding issue with FFMPEG files join without reencoding.
 
 15.3
 * App start-up time improved for PCs with Decklink cards 
