@@ -8,8 +8,8 @@
     <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
     <Product>VE Main Demo CLI</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.3.18.0</AssemblyVersion>
-    <FileVersion>15.3.18.0</FileVersion>
+    <AssemblyVersion>15.3.19.0</AssemblyVersion>
+    <FileVersion>15.3.19.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser19" Version="1.9.74" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.3.18" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.3.19" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
