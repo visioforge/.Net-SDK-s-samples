@@ -27,12 +27,6 @@ jobs:
     - name: Build app for release CS
       run: msbuild $env:Solution_Name_CS -t:rebuild -verbosity:diag -property:Configuration=Release
 
-    - name: Restore dependencies VB
-      run: dotnet restore $env:Solution_Name_VB
-
-    - name: Build app for release VB
-      run: msbuild $env:Solution_Name_VB -t:rebuild -verbosity:diag -property:Configuration=Release
-
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
 #    - name: Test
