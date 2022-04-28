@@ -4,6 +4,7 @@
 * Resolved an issue with HighDPI support for Direct2D video renderer
 * Added additional API to ONVIFControl class: GetDeviceCapabilities, GetMediaEndpoints
 * Resolved forced reencoding issue with FFMPEG files join without reencoding
+* Sentry update
 
 15.3
 * App start-up time improved for PCs with Decklink cards 
