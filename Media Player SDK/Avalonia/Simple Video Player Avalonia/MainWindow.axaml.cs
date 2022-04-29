@@ -12,8 +12,8 @@ using System.IO;
 using System.Threading.Tasks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.MediaPlayerGST;
-using VisioForge.Core.UI.Avalonia;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.UI.Avalonia;
 
 namespace Simple_Video_Player_Avalonia
 {
@@ -336,7 +336,7 @@ namespace Simple_Video_Player_Avalonia
         {
             Info.Clear();
 
-            var infoReader = new MediaInfoReader(_player);
+            var infoReader = new GSTMediaInfoReader(_player);
             await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
 
             if (infoReader.Info.VideoStreams.Count > 0)

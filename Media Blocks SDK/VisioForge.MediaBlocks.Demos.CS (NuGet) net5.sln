@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo (
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo (NuGet) net5", "WinForms\CSharp\Video Mixer Demo\Video Mixer Demo (NuGet) net5.csproj", "{F36BD8CE-C0DE-43A7-8C72-DC8E1620C31F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo (NuGet) net5", "WinForms\CSharp\Simple Player Demo\Simple Player Demo (NuGet) net5.csproj", "{CE24C181-F908-40CC-948A-9DCEB5D0F5A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{F36BD8CE-C0DE-43A7-8C72-DC8E1620C31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36BD8CE-C0DE-43A7-8C72-DC8E1620C31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36BD8CE-C0DE-43A7-8C72-DC8E1620C31F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE24C181-F908-40CC-948A-9DCEB5D0F5A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE24C181-F908-40CC-948A-9DCEB5D0F5A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE24C181-F908-40CC-948A-9DCEB5D0F5A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE24C181-F908-40CC-948A-9DCEB5D0F5A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{DB660834-EC8E-4BA0-A073-A72F16361CFD} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{B7F32B88-9FAA-48D1-A5ED-3E11B8547ACC} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{F36BD8CE-C0DE-43A7-8C72-DC8E1620C31F} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{CE24C181-F908-40CC-948A-9DCEB5D0F5A0} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
