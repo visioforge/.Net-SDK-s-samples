@@ -6,6 +6,7 @@
 * Resolved forced reencoding issue with FFMPEG files join without reencoding
 * Sentry update
 * Added video interpolation settings for Zoom and Pan video effects
+* Added GtkSharp UI framework support for video rendering
 
 15.3
 * App start-up time improved for PCs with Decklink cards 

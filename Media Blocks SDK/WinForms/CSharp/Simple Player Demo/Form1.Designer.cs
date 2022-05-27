@@ -56,11 +56,11 @@ namespace MediaBlocks_Player_Demo
             this.edFilename = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this._tmPosition = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.label6 = new System.Windows.Forms.Label();
             this.tbVolume1 = new System.Windows.Forms.TrackBar();
+            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
@@ -295,7 +295,7 @@ namespace MediaBlocks_Player_Demo
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this._tmPosition.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label2
             // 
@@ -308,16 +308,6 @@ namespace MediaBlocks_Player_Demo
             this.label2.Size = new System.Drawing.Size(397, 20);
             this.label2.TabIndex = 31;
             this.label2.Text = "Much more features are shown in Main Demo!";
-            // 
-            // VideoView1
-            // 
-            this.VideoView1.BackColor = System.Drawing.Color.Black;
-            this.VideoView1.Location = new System.Drawing.Point(18, 86);
-            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.VideoView1.Name = "VideoView1";
-            this.VideoView1.Size = new System.Drawing.Size(622, 460);
-            this.VideoView1.StatusOverlay = null;
-            this.VideoView1.TabIndex = 90;
             // 
             // label6
             // 
@@ -340,6 +330,16 @@ namespace MediaBlocks_Player_Demo
             this.tbVolume1.TabIndex = 91;
             this.tbVolume1.Value = 80;
             this.tbVolume1.Scroll += new System.EventHandler(this.tbVolume1_Scroll);
+            // 
+            // VideoView1
+            // 
+            this.VideoView1.BackColor = System.Drawing.Color.Black;
+            this.VideoView1.Location = new System.Drawing.Point(18, 86);
+            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.VideoView1.Name = "VideoView1";
+            this.VideoView1.Size = new System.Drawing.Size(622, 460);
+            this.VideoView1.StatusOverlay = null;
+            this.VideoView1.TabIndex = 90;
             // 
             // Form1
             // 
@@ -394,7 +394,7 @@ namespace MediaBlocks_Player_Demo
         private System.Windows.Forms.TextBox edFilename;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer _tmPosition;
         private System.Windows.Forms.CheckBox cbLicensing;
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.Label label2;

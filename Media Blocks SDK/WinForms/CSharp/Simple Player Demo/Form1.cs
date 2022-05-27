@@ -77,7 +77,7 @@ namespace MediaBlocks_Player_Demo
 
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            if (Convert.ToInt32(_tmPosition.Tag) == 0)
             {
                 await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
@@ -132,7 +132,7 @@ namespace MediaBlocks_Player_Demo
             // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
             // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
-            timer1.Start();
+            _tmPosition.Start();
         }
 
         private void btNextFrame_Click(object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace MediaBlocks_Player_Demo
 
         private async void btStop_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+            _tmPosition.Stop();
 
             await _pipeline?.StopAsync();
 
@@ -175,7 +175,7 @@ namespace MediaBlocks_Player_Demo
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
+            _tmPosition.Tag = 1;
 
             var position = await _pipeline.Position_GetAsync();
             var duration = await _pipeline.DurationAsync();
@@ -189,7 +189,7 @@ namespace MediaBlocks_Player_Demo
                 tbTimeline.Value = (int)position.TotalSeconds;
             }
 
-            timer1.Tag = 0;
+            _tmPosition.Tag = 0;
         }
 
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
@@ -213,18 +213,6 @@ namespace MediaBlocks_Player_Demo
             btStop_Click(null, null);
 
             DestroyEngine();
-        }
-
-        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
     }
 }
