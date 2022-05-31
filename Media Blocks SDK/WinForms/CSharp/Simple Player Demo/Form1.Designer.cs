@@ -295,7 +295,7 @@ namespace MediaBlocks_Player_Demo
             // 
             // timer1
             // 
-            this._tmPosition.Tick += new System.EventHandler(this.timer1_Tick);
+            this._tmPosition.Tick += new System.EventHandler(this.tmPosition_Tick);
             // 
             // label2
             // 

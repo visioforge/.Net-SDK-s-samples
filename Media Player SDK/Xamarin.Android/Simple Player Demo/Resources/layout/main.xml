@@ -12,7 +12,7 @@
         android:id="@+id/pnScreen"
         android:layout_above="@id/layoutURL">
 
-        <VisioForge.Core.MediaPlayerGST.Android.VideoView
+        <VisioForge.Core.UI.Android.VideoView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:minWidth="25px"

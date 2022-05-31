@@ -1,0 +1,32 @@
+﻿<Window
+    x:Class="Simple_Media_Player_WinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Simple_Media_Player_WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:winui="using:VisioForge.Core.UI.WinUI"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1024" Height="720" Spacing="16" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,16,16,0" Spacing="15">
+                <TextBlock VerticalAlignment="Center">File name or URL</TextBlock>
+                <TextBox x:Name="edFilename" Width="600" VerticalAlignment="Center" />
+                <Button x:Name="btOpenFile" Click="btOpenFile_Click" Width="32">...</Button>
+            </StackPanel>
+
+            <winui:VideoView x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1024" Height="560" Background="Gray" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,0,16,0" Spacing="15">
+                <Button x:Name="btPlay" Click="btPlay_Click" Width="80" VerticalAlignment="Center" >Play</Button>
+                <Button x:Name="btPause" Click="btPause_Click" Width="80" VerticalAlignment="Center" >Pause</Button>
+                <Button x:Name="btResume" Click="btResume_Click" Width="80" VerticalAlignment="Center" >Resume</Button>
+                <Button x:Name="btStop" Click="btStop_Click" Width="80" VerticalAlignment="Center" >Stop</Button>
+                <Slider x:Name="slPosition" Width="480" VerticalAlignment="Center" ValueChanged="slPosition_ValueChanged"></Slider>
+                <TextBlock x:Name="lbPosition" VerticalAlignment="Center">00:00:00 / 00:00:00</TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+
+</Window>

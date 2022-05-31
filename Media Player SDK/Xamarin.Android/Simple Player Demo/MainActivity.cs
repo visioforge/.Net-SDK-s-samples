@@ -1,24 +1,22 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-
 using AndroidX.AppCompat.App;
+using System;
 
 namespace Simple_Player_Demo
 {
-    using System.Globalization;
-    using System.Threading;
-    using System.Threading.Tasks;
-
     using Android.Graphics;
     using Android.Util;
     using Android.Widget;
+    using System.Globalization;
+    using System.Threading;
+    using System.Threading.Tasks;
     using VisioForge.Core.MediaPlayerGST;
-    using VisioForge.Core.UI.Android;
     using VisioForge.Core.Types.GST.AudioEffects;
     using VisioForge.Core.Types.MediaPlayer.GST;
+    using VisioForge.Core.UI.Android;
     using Xamarin.Essentials;
     using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
@@ -182,8 +180,6 @@ namespace Simple_Player_Demo
         private async void btStart_Click(object sender, EventArgs e)
         {
             isSeeking = false;
-
-            _player.Audio_Effects_AddOrUpdate(new GSTTrueBass(2048, 7000));
 
             await _player.OpenAsync(new Uri(edURL.Text));
             await _player.PlayAsync();

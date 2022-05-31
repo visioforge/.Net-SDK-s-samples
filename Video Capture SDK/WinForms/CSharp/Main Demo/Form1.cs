@@ -16,13 +16,10 @@ namespace VideoCapture_CSharp_Demo
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
-
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.VideoCapture;
+    using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Decklink;
@@ -33,10 +30,12 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoCapture;
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
-    using VisioForge.Core;
-    using System.Threading.Tasks;
-    using VisioForge.Core.Helpers;
 
     /// <summary>
     /// Main form.
@@ -256,7 +255,7 @@ namespace VideoCapture_CSharp_Demo
 
             cbHLSMode.SelectedIndex = 0;
 
-            pnChromaKeyColor.BackColor = Color.FromArgb(128, 218, 128);
+            pnChromaKeyColor.BackColor = System.Drawing.Color.FromArgb(128, 218, 128);
 
             var genres = new List<string>();
             foreach (var genre in VideoCapture1.Tags_GetDefaultVideoGenres())
@@ -3359,7 +3358,7 @@ namespace VideoCapture_CSharp_Demo
                         Convert.ToInt32(edOSDImageLeft.Text),
                         Convert.ToInt32(edOSDImageTop.Text),
                         false,
-                        Color.Black);
+                        System.Drawing.Color.Black);
                 }
             }
             else
@@ -3382,7 +3381,7 @@ namespace VideoCapture_CSharp_Demo
             if (lbOSDLayers.SelectedIndex != -1)
             {
                 Font fnt = edOSDText.Font;
-                Color color = edOSDText.ForeColor;
+                var color = edOSDText.ForeColor;
 
                 VideoCapture1.OSD_Layers_Draw_Text(
                     lbOSDLayers.SelectedIndex,

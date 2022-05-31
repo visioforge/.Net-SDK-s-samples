@@ -236,7 +236,6 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 VideoView1.Refresh();
-                //ShowMessage("Playback complete.");
             });
         }
 
@@ -292,11 +291,6 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                    // TODO: dispose managed state (managed objects)
-                }
-
                 _tmPosition?.Dispose();
                 _tmPosition = null;
 

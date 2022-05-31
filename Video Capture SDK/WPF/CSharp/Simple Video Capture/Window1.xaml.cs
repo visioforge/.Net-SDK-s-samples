@@ -17,17 +17,17 @@ namespace Simple_Video_Capture
     using System.Windows.Input;
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Core.Types;
-    using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.Output;
-    using VisioForge.Core.Types.VideoCapture;
-    using VisioForge.Core.Types.VideoEffects;
 
     /// <summary>
     /// Interaction logic for Window1.xaml
@@ -58,6 +58,7 @@ namespace Simple_Video_Capture
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         private VideoCaptureCore VideoCapture1;
+
         private bool disposedValue;
 
         public Window1()
@@ -416,7 +417,7 @@ namespace Simple_Video_Capture
                 VideoCapture1.Audio_PlayAudio = false;
             }
 
-            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
 
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
 

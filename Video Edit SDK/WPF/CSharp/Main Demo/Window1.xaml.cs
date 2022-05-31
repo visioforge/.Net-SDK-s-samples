@@ -21,12 +21,6 @@ namespace Main_Demo
     using VisioForge.Core;
     using VisioForge.Core.DirectShow.Helpers;
     using VisioForge.Core.Helpers;
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.UI.WPF;
-    using VisioForge.Core.VideoEdit;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Decklink;
@@ -36,6 +30,12 @@ namespace Main_Demo
     using VisioForge.Core.Types.VideoEdit;
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.UI.WPF;
+    using VisioForge.Core.VideoEdit;
     using Color = System.Windows.Media.Color;
     using MessageBox = System.Windows.MessageBox;
 
@@ -485,7 +485,7 @@ namespace Main_Demo
 
             if (rbWPF.IsChecked == true)
             {
-                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
+                VideoEdit1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
             }
             else if (rbDirect2D.IsChecked == true)
             {

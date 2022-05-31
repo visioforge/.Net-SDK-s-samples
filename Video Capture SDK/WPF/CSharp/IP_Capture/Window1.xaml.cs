@@ -5,6 +5,7 @@
 
 namespace IP_Capture
 {
+    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Drawing.Imaging;
@@ -13,25 +14,21 @@ namespace IP_Capture
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-
-    using Microsoft.Win32;
-
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.UI.WPF;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
-
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.UI.WPF;
+    using VisioForge.Core.VideoCapture;
     using Application = System.Windows.Forms.Application;
-    using VisioForge.Core.Helpers;
 
     public partial class Window1 : IDisposable
     {
@@ -256,7 +253,7 @@ namespace IP_Capture
             VideoCapture1.Audio_RecordAudio = cbIPAudioCapture.IsChecked == true;
             VideoCapture1.Audio_PlayAudio = cbIPAudioCapture.IsChecked == true;
 
-            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
+            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
 
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings

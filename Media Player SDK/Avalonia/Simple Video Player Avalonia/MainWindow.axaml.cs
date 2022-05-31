@@ -14,6 +14,7 @@ using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.MediaPlayerGST;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.UI.Avalonia;
+// ReSharper disable MemberCanBeMadeStatic.Local
 
 namespace Simple_Video_Player_Avalonia
 {
@@ -190,8 +191,13 @@ namespace Simple_Video_Player_Avalonia
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
+#pragma warning disable S1186
+#pragma warning disable CS1998
         private async void btSaveSnapshot_Click(object sender, RoutedEventArgs e)
+#pragma warning restore CS1998
+#pragma warning restore S1186
         {
+#if NET_WINDOWS
             var sfd = new SaveFileDialog();
             sfd.InitialFileName = "frame.jpg";
             sfd.DefaultExtension = ".jpg";
@@ -206,6 +212,7 @@ namespace Simple_Video_Player_Avalonia
             {
                 await _player.Snapshot_SaveAsync(file, ImageFormat.Jpeg);
             }
+#endif
         }
 
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)

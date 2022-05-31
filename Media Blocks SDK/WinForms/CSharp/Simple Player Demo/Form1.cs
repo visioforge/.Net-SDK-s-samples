@@ -40,16 +40,16 @@ namespace MediaBlocks_Player_Demo
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _pipeline.OnError += MediaPlayer1_OnError;
-            _pipeline.OnStop += MediaPlayer1_OnStop;
+            _pipeline.OnError += Pipeline_OnError;
+            _pipeline.OnStop += Pipeline_OnStop;
         }
 
         private void DestroyEngine()
         {
             if (_pipeline != null)
             {
-                _pipeline.OnError -= MediaPlayer1_OnError;
-                _pipeline.OnStop -= MediaPlayer1_OnStop;
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
 
                 _pipeline.Dispose();
                 _pipeline = null;
@@ -144,7 +144,10 @@ namespace MediaBlocks_Player_Demo
         {
             _tmPosition.Stop();
 
-            await _pipeline?.StopAsync();
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+            }
 
             tbTimeline.Value = 0;
 
@@ -173,7 +176,7 @@ namespace MediaBlocks_Player_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
-        private async void timer1_Tick(object sender, EventArgs e)
+        private async void tmPosition_Tick(object sender, EventArgs e)
         {
             _tmPosition.Tag = 1;
 
@@ -192,7 +195,7 @@ namespace MediaBlocks_Player_Demo
             _tmPosition.Tag = 0;
         }
 
-        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -200,7 +203,7 @@ namespace MediaBlocks_Player_Demo
                                    }));
         }
 
-        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
+        private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {

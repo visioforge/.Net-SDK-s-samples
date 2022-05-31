@@ -11,23 +11,22 @@ namespace Media_Player_Demo
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaInfo;
+    using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.Types.Output;
-
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
-    using VisioForge.Core;
-    using System.Runtime.InteropServices;
-    using VisioForge.Core.Helpers;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 
     public partial class Form1 : Form
     {

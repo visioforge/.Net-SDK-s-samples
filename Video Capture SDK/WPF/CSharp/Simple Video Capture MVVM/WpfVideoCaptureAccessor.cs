@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.VideoCapture;
+using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.UI.WinForms.Dialogs;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 using VisioForge.Core.UI.WPF;
 using VisioForge.Core.VideoCapture;
-using VisioForge.Core.Types;
-using VisioForge.Core.Types.Output;
-using VisioForge.Core.Types.VideoCapture;
-using VisioForge.Core.Types.VideoEffects;
 
 namespace Simple_Video_Capture
 {
@@ -343,7 +343,7 @@ namespace Simple_Video_Capture
                 videoCapture.Audio_PlayAudio = false;
             }
 
-            videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
+            videoCapture.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
 
             videoCapture.Video_CaptureDevice = startParams.VideoCaptureDevice;
             videoCapture.Audio_CaptureDevice = startParams.AudioCaptureDevice;

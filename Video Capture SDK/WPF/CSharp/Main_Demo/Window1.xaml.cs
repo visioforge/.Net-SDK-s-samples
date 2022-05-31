@@ -10,10 +10,12 @@ namespace Main_Demo
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Forms;
@@ -21,33 +23,29 @@ namespace Main_Demo
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
-
+    using VisioForge.Core;
+    using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
+    using VisioForge.Core.Types.Decklink;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.FFMPEGEXE;
+    using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.Types.VideoProcessing;
     using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoCapture;
-    using VisioForge.Core.Types;
-    using VisioForge.Core.Types.Decklink;
-    using VisioForge.Core.Types.FFMPEGEXE;
-    using VisioForge.Core.Types.Output;
-    using VisioForge.Core.Types.VideoEffects;
-
     using Application = System.Windows.Application;
     using Color = System.Windows.Media.Color;
     using HorizontalAlignment = System.Windows.HorizontalAlignment;
-    using MessageBox = System.Windows.MessageBox;
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
-    using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.VideoCapture;
-    using VisioForge.Core.Types.VideoProcessing;
-    using VisioForge.Core.Types.MediaPlayer;
-    using VisioForge.Core.Types.AudioEffects;
-    using System.Drawing.Imaging;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.UI.WinForms.Dialogs;
-    using VisioForge.Core;
-    using System.Threading.Tasks;
-    using VisioForge.Core.Helpers;
+    using MessageBox = System.Windows.MessageBox;
 
     // ReSharper disable InconsistentNaming
 
@@ -1853,7 +1851,7 @@ namespace Main_Demo
 
             if (rbWPF.IsChecked == true)
             {
-                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF;
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
             }
             else if (rbDirect2D.IsChecked == true)
             {
