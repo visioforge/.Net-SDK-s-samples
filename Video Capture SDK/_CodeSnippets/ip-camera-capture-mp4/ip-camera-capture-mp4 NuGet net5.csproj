@@ -11,11 +11,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.29" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.29" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.29" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.29" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.3.29" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.3.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.3.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.3.30" />
   </ItemGroup>
 </Project>
