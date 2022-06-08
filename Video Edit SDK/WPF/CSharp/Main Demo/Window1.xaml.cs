@@ -2566,23 +2566,23 @@ namespace Main_Demo
             }
         }
 
-        private void btStartCut_Click(object sender, RoutedEventArgs e)
+        private async void btStartCut_Click(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.FastEdit_CutFile(
+            await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
                 edOutputFileCut.Text);
         }
 
-        private void btStopCut_Click(object sender, RoutedEventArgs e)
+        private async void btStopCut_Click(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
-        private void btStopJoin_Click(object sender, RoutedEventArgs e)
+        private async void btStopJoin_Click(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
         private void btStartJoin_Click(object sender, RoutedEventArgs e)
@@ -2593,7 +2593,7 @@ namespace Main_Demo
                 files.Add(item.ToString());
             }
 
-            VideoEdit1.FastEdit_JoinFiles(
+            VideoEdit1.FastEdit_JoinFilesAsync(
                 files.ToArray(),
                 edOutputFileCut.Text);
         }
@@ -2655,12 +2655,12 @@ namespace Main_Demo
             }
         }
 
-        private void btStopMux_Click(object sender, RoutedEventArgs e)
+        private async void btStopMux_Click(object sender, RoutedEventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
-        private void btStartMux_Click(object sender, RoutedEventArgs e)
+        private async void btStartMux_Click(object sender, RoutedEventArgs e)
         {
             var streams = new List<FFMPEGStream>();
 
@@ -2676,7 +2676,7 @@ namespace Main_Demo
                 });
             }
 
-            VideoEdit1.FastEdit_MuxStreams(streams, cbMuxStreamsShortest.IsChecked == true, edMuxStreamsOutputFile.Text);
+            await VideoEdit1.FastEdit_MuxStreamsAsync(streams, cbMuxStreamsShortest.IsChecked == true, edMuxStreamsOutputFile.Text);
         }
 
         private void cbDebugMode_Click(object sender, RoutedEventArgs e)

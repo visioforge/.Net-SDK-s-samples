@@ -2,23 +2,23 @@
 
 Imports System.Globalization
 Imports System.IO
+Imports System.Threading.Tasks
+Imports VisioForge.Core
+Imports VisioForge.Core.DirectShow.Helpers
+Imports VisioForge.Core.Helpers
+Imports VisioForge.Core.Types
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Types.Decklink
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.FFMPEGEXE
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoEdit
+Imports VisioForge.Core.Types.VideoEffects
+Imports VisioForge.Core.Types.VideoProcessing
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Core.Types
-Imports VisioForge.Core
-Imports VisioForge.Core.Types.FFMPEGEXE
-Imports VisioForge.Core.Types.Output
-Imports VisioForge.Core.Types.VideoEffects
-Imports VisioForge.Core.Types.Decklink
 Imports VisioForge.Core.VideoEdit
-Imports VisioForge.Core.Types.Events
-Imports VisioForge.Core.Types.VideoEdit
-Imports VisioForge.Core.Types.AudioEffects
-Imports VisioForge.Core.Types.VideoProcessing
-Imports VisioForge.Core.Helpers
-Imports System.Threading.Tasks
-Imports VisioForge.Core.DirectShow.Helpers
 Imports VisioForge.Libs.Types
 
 Public Class Form1
@@ -34,46 +34,46 @@ Public Class Form1
 
     Private Const AUDIO_EFFECT_ID_PITCH_SHIFT As String = "pitch_shift"
 
-    Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
+    Private mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
-    Dim mp4SettingsDialog As MP4SettingsDialog
+    Private mp4SettingsDialog As MP4SettingsDialog
 
-    Dim aviSettingsDialog As AVISettingsDialog
+    Private aviSettingsDialog As AVISettingsDialog
 
-    Dim wmvSettingsDialog As WMVSettingsDialog
+    Private wmvSettingsDialog As WMVSettingsDialog
 
-    Dim dvSettingsDialog As DVSettingsDialog
+    Private dvSettingsDialog As DVSettingsDialog
 
-    Dim pcmSettingsDialog As PCMSettingsDialog
+    Private pcmSettingsDialog As PCMSettingsDialog
 
-    Dim mp3SettingsDialog As MP3SettingsDialog
+    Private mp3SettingsDialog As MP3SettingsDialog
 
-    Dim webmSettingsDialog As WebMSettingsDialog
+    Private webmSettingsDialog As WebMSettingsDialog
 
-    Dim ffmpegSettingsDialog As FFMPEGSettingsDialog
+    Private ffmpegSettingsDialog As FFMPEGSettingsDialog
 
-    Dim ffmpegEXESettingsDialog As FFMPEGEXESettingsDialog
+    Private ffmpegEXESettingsDialog As FFMPEGEXESettingsDialog
 
-    Dim flacSettingsDialog As FLACSettingsDialog
+    Private flacSettingsDialog As FLACSettingsDialog
 
-    Dim customFormatSettingsDialog As CustomFormatSettingsDialog
+    Private customFormatSettingsDialog As CustomFormatSettingsDialog
 
-    Dim oggVorbisSettingsDialog As OggVorbisSettingsDialog
+    Private oggVorbisSettingsDialog As OggVorbisSettingsDialog
 
-    Dim speexSettingsDialog As SpeexSettingsDialog
+    Private speexSettingsDialog As SpeexSettingsDialog
 
-    Dim m4aSettingsDialog As M4ASettingsDialog
+    Private m4aSettingsDialog As M4ASettingsDialog
 
-    Dim gifSettingsDialog As GIFSettingsDialog
+    Private gifSettingsDialog As GIFSettingsDialog
 
-    ReadOnly audioChannelMapperItems As List(Of AudioChannelMapperItem) = New List(Of AudioChannelMapperItem)
+    Private ReadOnly audioChannelMapperItems As List(Of AudioChannelMapperItem) = New List(Of AudioChannelMapperItem)
 
     ' Zoom
-    Dim zoom As Double = 1.0
+    Private zoom As Double = 1.0
 
-    Dim zoomShiftX As Integer = 0
+    Private zoomShiftX As Integer = 0
 
-    Dim zoomShiftY As Integer = 0
+    Private zoomShiftY As Integer = 0
 
     Private WithEvents VideoEdit1 As VideoEditCore
 
@@ -1861,23 +1861,23 @@ Public Class Form1
 
 #Region "Full screen"
 
-    Dim fullScreen As Boolean
+    Private fullScreen As Boolean
 
-    Dim windowLeft As Integer
+    Private windowLeft As Integer
 
-    Dim windowTop As Integer
+    Private windowTop As Integer
 
-    Dim windowWidth As Integer
+    Private windowWidth As Integer
 
-    Dim windowHeight As Integer
+    Private windowHeight As Integer
 
-    Dim controlLeft As Integer
+    Private controlLeft As Integer
 
-    Dim controlTop As Integer
+    Private controlTop As Integer
 
-    Dim controlWidth As Integer
+    Private controlWidth As Integer
 
-    Dim controlHeight As Integer
+    Private controlHeight As Integer
 
     Private Async Sub btFullScreen_Click(sender As Object, e As EventArgs) Handles btFullScreen.Click
 
@@ -2178,9 +2178,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btStartCut_Click(sender As Object, e As EventArgs) Handles btStartCut.Click
+    Private Async Sub btStartCut_Click(sender As Object, e As EventArgs) Handles btStartCut.Click
 
-        VideoEdit1.FastEdit_CutFile(
+        Await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                  TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
@@ -2188,7 +2188,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btStartJoin_Click(sender As Object, e As EventArgs) Handles btStartJoin.Click
+    Private Async Sub btStartJoin_Click(sender As Object, e As EventArgs) Handles btStartJoin.Click
 
         Dim files = New List(Of String)
 
@@ -2196,21 +2196,21 @@ Public Class Form1
             files.Add(item.ToString())
         Next
 
-        VideoEdit1.FastEdit_JoinFiles(
+        Await VideoEdit1.FastEdit_JoinFilesAsync(
                 files.ToArray(),
                 edOutputFileCut.Text)
 
     End Sub
 
-    Private Sub btStopJoin_Click(sender As Object, e As EventArgs) Handles btStopJoin.Click
+    Private Async Sub btStopJoin_Click(sender As Object, e As EventArgs) Handles btStopJoin.Click
 
-        VideoEdit1.FastEdit_Stop()
+        Await VideoEdit1.FastEdit_StopAsync()
 
     End Sub
 
-    Private Sub btStopCut_Click(sender As Object, e As EventArgs) Handles btStopCut.Click
+    Private Async Sub btStopCut_Click(sender As Object, e As EventArgs) Handles btStopCut.Click
 
-        VideoEdit1.FastEdit_Stop()
+        Await VideoEdit1.FastEdit_StopAsync()
 
     End Sub
 
@@ -2262,7 +2262,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btStartMux_Click(sender As Object, e As EventArgs) Handles btStartMux.Click
+    Private Async Sub btStartMux_Click(sender As Object, e As EventArgs) Handles btStartMux.Click
 
         Dim streams As List(Of FFMPEGStream) = New List(Of FFMPEGStream)
 
@@ -2279,7 +2279,7 @@ Public Class Form1
 
         Next
 
-        VideoEdit1.FastEdit_MuxStreams(streams, cbMuxStreamsShortest.Checked, edMuxStreamsOutputFile.Text)
+        Await VideoEdit1.FastEdit_MuxStreamsAsync(streams, cbMuxStreamsShortest.Checked, edMuxStreamsOutputFile.Text)
 
     End Sub
 
@@ -2299,9 +2299,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btStopMux_Click(sender As Object, e As EventArgs) Handles btStopMux.Click
+    Private Async Sub btStopMux_Click(sender As Object, e As EventArgs) Handles btStopMux.Click
 
-        VideoEdit1.FastEdit_Stop()
+        Await VideoEdit1.FastEdit_StopAsync()
 
     End Sub
 

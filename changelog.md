@@ -7,6 +7,7 @@
 * Sentry update
 * Added video interpolation settings for Zoom and Pan video effects
 * Added GtkSharp UI framework support for video rendering
+* FastEdit API has been changed to async
 
 15.3
 * App start-up time improved for PCs with Decklink cards 

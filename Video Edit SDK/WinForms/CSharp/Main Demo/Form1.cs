@@ -18,13 +18,11 @@ namespace VideoEdit_CS_Demo
     using System.Drawing;
     using System.Globalization;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
-
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.UI.WinForms;
-    using VisioForge.Core.VideoEdit;
+    using VisioForge.Core;
+    using VisioForge.Core.DirectShow.Helpers;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Decklink;
@@ -34,11 +32,12 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Core.Types.VideoEdit;
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoEdit;
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
-    using VisioForge.Core;
-    using System.Threading.Tasks;
-    using VisioForge.Core.Helpers;
-    using VisioForge.Core.DirectShow.Helpers;
 
     /// <summary>
     /// Main demo form.
@@ -2534,21 +2533,21 @@ namespace VideoEdit_CS_Demo
             }
         }
 
-        private void btStartCut_Click(object sender, EventArgs e)
+        private async void btStartCut_Click(object sender, EventArgs e)
         {
-            VideoEdit1.FastEdit_CutFile(
+            await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                  TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
                 edOutputFileCut.Text);
         }
 
-        private void btStopCut_Click(object sender, EventArgs e)
+        private async void btStopCut_Click(object sender, EventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
-        private void btStartJoin_Click(object sender, EventArgs e)
+        private async void btStartJoin_Click(object sender, EventArgs e)
         {
             List<string> files = new List<string>();
             foreach (var item in lbFiles2.Items)
@@ -2556,14 +2555,14 @@ namespace VideoEdit_CS_Demo
                 files.Add(item.ToString());
             }
 
-            VideoEdit1.FastEdit_JoinFiles(
+            await VideoEdit1.FastEdit_JoinFilesAsync(
                 files.ToArray(),
                 edOutputFileCut.Text);
         }
 
-        private void btStopJoin_Click(object sender, EventArgs e)
+        private async void btStopJoin_Click(object sender, EventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
         private void btSelectOutputCut_Click(object sender, EventArgs e)
@@ -2591,7 +2590,7 @@ namespace VideoEdit_CS_Demo
             }
         }
 
-        private void btStartMux_Click(object sender, EventArgs e)
+        private async void btStartMux_Click(object sender, EventArgs e)
         {
             var streams = new List<FFMPEGStream>();
 
@@ -2607,7 +2606,7 @@ namespace VideoEdit_CS_Demo
                 });
             }
 
-            VideoEdit1.FastEdit_MuxStreams(streams, cbMuxStreamsShortest.Checked, edMuxStreamsOutputFile.Text);
+            await VideoEdit1.FastEdit_MuxStreamsAsync(streams, cbMuxStreamsShortest.Checked, edMuxStreamsOutputFile.Text);
         }
 
         private void btMuxStreamsSelectFile_Click(object sender, EventArgs e)
@@ -2654,9 +2653,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
-        private void btStopMux_Click(object sender, EventArgs e)
+        private async void btStopMux_Click(object sender, EventArgs e)
         {
-            VideoEdit1.FastEdit_Stop();
+            await VideoEdit1.FastEdit_StopAsync();
         }
 
         private void btAudioChannelMapperClear_Click(object sender, EventArgs e)
