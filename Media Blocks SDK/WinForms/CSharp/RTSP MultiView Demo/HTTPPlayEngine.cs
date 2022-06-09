@@ -8,7 +8,7 @@ using VisioForge.Core.Types.MediaPlayer.GST;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
-    internal class RTSPPlayEngine : IDisposable, IPlayEngine
+    internal class HTTPPlayEngine : IDisposable, IPlayEngine
     {
         private MediaBlocksPipeline _pipeline;
 
@@ -16,7 +16,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private AudioRendererBlock _audioRenderer;
 
-        private RTSPSourceBlock _source;
+        private FileSourceBlock _source;
 
         private bool disposedValue;
 
@@ -28,7 +28,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public bool AudioEnabled { get; set; }
 
-        public RTSPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled)
+        public HTTPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled)
         {
             URL = url;
             Login = login;
@@ -37,10 +37,19 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _pipeline = new MediaBlocksPipeline();
 
-            var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
-            rtspSettings.Login = login;
-            rtspSettings.Password = password;
-            _source = new RTSPSourceBlock(rtspSettings);
+            //var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
+            //rtspSettings.Login = login;
+            //rtspSettings.Password = password;
+            //_source = new FileSourceBlock(rtspSettings);
+
+            var urix = url;
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
+            {
+                var uri1 = new Uri(url);
+                urix = new UriBuilder(uri1) { UserName = login, Password = password }.Uri.ToString();
+            }
+
+            _source = new FileSourceBlock(urix);
 
             _videoRenderer = new VideoRendererBlock(videoView, true);
 
@@ -94,7 +103,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         }
 
         // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        ~RTSPPlayEngine()
+        ~HTTPPlayEngine()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);

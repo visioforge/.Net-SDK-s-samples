@@ -7,7 +7,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 {
     public partial class Form1 : Form
     {
-        private RTSPPlayEngine[] _engines = new RTSPPlayEngine[9];
+        private IPlayEngine[] _engines = new IPlayEngine[9];
 
         public Form1()
         {
@@ -19,6 +19,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
+            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
         }
 
         private IVideoView GetVideoViewByIndex(int index)
@@ -58,7 +59,15 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _engines[id] = null;
             }
 
-            _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+            if (cbUseMJPEG.Checked)
+            {
+                _engines[id] = new HTTPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+            }
+            else
+            {
+                _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+            }
+
             _engines[id].Start();
         }
 
@@ -71,6 +80,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _engines[id].Dispose();
                 _engines[id] = null;
             }
+
+            GetVideoViewByIndex(id).CallRefresh();
         }
 
         private void cbCameraIndex_SelectedIndexChanged(object sender, EventArgs e)

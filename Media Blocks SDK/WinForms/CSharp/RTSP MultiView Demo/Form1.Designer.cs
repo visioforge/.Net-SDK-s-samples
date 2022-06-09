@@ -49,6 +49,7 @@
             this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.cbAudioEnabled = new System.Windows.Forms.CheckBox();
+            this.cbUseMJPEG = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -243,11 +244,22 @@
             this.cbAudioEnabled.Text = "Enable audio";
             this.cbAudioEnabled.UseVisualStyleBackColor = true;
             // 
+            // cbUseMJPEG
+            // 
+            this.cbUseMJPEG.AutoSize = true;
+            this.cbUseMJPEG.Location = new System.Drawing.Point(1667, 53);
+            this.cbUseMJPEG.Name = "cbUseMJPEG";
+            this.cbUseMJPEG.Size = new System.Drawing.Size(219, 24);
+            this.cbUseMJPEG.TabIndex = 21;
+            this.cbUseMJPEG.Text = "Use HTTP MJPEG source";
+            this.cbUseMJPEG.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1898, 994);
+            this.Controls.Add(this.cbUseMJPEG);
             this.Controls.Add(this.cbAudioEnabled);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btStart);
@@ -300,6 +312,7 @@
         private System.Windows.Forms.Button btStop;
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.CheckBox cbAudioEnabled;
+        private System.Windows.Forms.CheckBox cbUseMJPEG;
     }
 }
 
