@@ -157,7 +157,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
 
-            var mediaInfo = new GSTMediaInfoReader();
+            var mediaInfo = new MediaInfoGST();
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edFilenameOrURL.Text)))

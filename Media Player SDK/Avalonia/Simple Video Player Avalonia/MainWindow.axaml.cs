@@ -343,7 +343,7 @@ namespace Simple_Video_Player_Avalonia
         {
             Info.Clear();
 
-            var infoReader = new GSTMediaInfoReader(_player);
+            var infoReader = new MediaInfoGST(_player);
             await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
 
             if (infoReader.Info.VideoStreams.Count > 0)

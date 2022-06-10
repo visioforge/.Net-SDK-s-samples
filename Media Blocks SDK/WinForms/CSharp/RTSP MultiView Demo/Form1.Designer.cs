@@ -50,6 +50,7 @@
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.cbAudioEnabled = new System.Windows.Forms.CheckBox();
             this.cbUseMJPEG = new System.Windows.Forms.CheckBox();
+            this.cbUseGPU = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -237,7 +238,7 @@
             // cbAudioEnabled
             // 
             this.cbAudioEnabled.AutoSize = true;
-            this.cbAudioEnabled.Location = new System.Drawing.Point(1758, 143);
+            this.cbAudioEnabled.Location = new System.Drawing.Point(1474, 187);
             this.cbAudioEnabled.Name = "cbAudioEnabled";
             this.cbAudioEnabled.Size = new System.Drawing.Size(128, 24);
             this.cbAudioEnabled.TabIndex = 20;
@@ -247,18 +248,29 @@
             // cbUseMJPEG
             // 
             this.cbUseMJPEG.AutoSize = true;
-            this.cbUseMJPEG.Location = new System.Drawing.Point(1667, 53);
+            this.cbUseMJPEG.Location = new System.Drawing.Point(1474, 217);
             this.cbUseMJPEG.Name = "cbUseMJPEG";
             this.cbUseMJPEG.Size = new System.Drawing.Size(219, 24);
             this.cbUseMJPEG.TabIndex = 21;
             this.cbUseMJPEG.Text = "Use HTTP MJPEG source";
             this.cbUseMJPEG.UseVisualStyleBackColor = true;
             // 
+            // cbUseGPU
+            // 
+            this.cbUseGPU.AutoSize = true;
+            this.cbUseGPU.Location = new System.Drawing.Point(1474, 247);
+            this.cbUseGPU.Name = "cbUseGPU";
+            this.cbUseGPU.Size = new System.Drawing.Size(236, 24);
+            this.cbUseGPU.TabIndex = 22;
+            this.cbUseGPU.Text = "Use GPU for video decoding";
+            this.cbUseGPU.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1898, 994);
+            this.Controls.Add(this.cbUseGPU);
             this.Controls.Add(this.cbUseMJPEG);
             this.Controls.Add(this.cbAudioEnabled);
             this.Controls.Add(this.btStop);
@@ -313,6 +325,7 @@
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.CheckBox cbAudioEnabled;
         private System.Windows.Forms.CheckBox cbUseMJPEG;
+        private System.Windows.Forms.CheckBox cbUseGPU;
     }
 }
 

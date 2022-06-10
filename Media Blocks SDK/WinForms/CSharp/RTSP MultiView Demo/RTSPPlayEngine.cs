@@ -28,18 +28,22 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public bool AudioEnabled { get; set; }
 
-        public RTSPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled)
+        public bool GPUDecoding { get; set; }
+
+        public RTSPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled, bool useGPU)
         {
             URL = url;
             Login = login;
             Password = password;
             AudioEnabled = audioEnabled;
+            GPUDecoding = useGPU;
 
             _pipeline = new MediaBlocksPipeline();
 
             var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
             rtspSettings.Login = login;
             rtspSettings.Password = password;
+            rtspSettings.UseGPUDecoder = useGPU;
             _source = new RTSPSourceBlock(rtspSettings);
 
             _videoRenderer = new VideoRendererBlock(videoView, true);

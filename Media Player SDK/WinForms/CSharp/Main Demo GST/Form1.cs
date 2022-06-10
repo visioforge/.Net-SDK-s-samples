@@ -673,7 +673,7 @@ namespace Main_Demo
 
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
-            var infoReader = new GSTMediaInfoReader(_player);
+            var infoReader = new MediaInfoGST(_player);
             if (await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text)))
             {
                 if (infoReader.Info.VideoStreams.Count > 0)

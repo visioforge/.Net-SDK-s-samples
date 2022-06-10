@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.Types;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
@@ -49,7 +50,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
-        private void btStart_Click(object sender, EventArgs e)
+        private async void btStart_Click(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
             if (_engines[id] != null)
@@ -59,13 +60,16 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _engines[id] = null;
             }
 
+            //var mediaInfo = new MediaInfoGST();
+            //var res = await mediaInfo.OpenAsync(new Uri(edURL.Text));
+
             if (cbUseMJPEG.Checked)
             {
                 _engines[id] = new HTTPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
             }
             else
             {
-                _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+                _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked, cbUseGPU.Checked);
             }
 
             _engines[id].Start();

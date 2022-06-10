@@ -96,7 +96,7 @@ namespace MediaBlocks_Player_Demo
 
             _pipeline.Debug_Mode = cbDebugMode.Checked;
 
-            var mediaInfo = new GSTMediaInfoReader();
+            var mediaInfo = new MediaInfoGST();
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
