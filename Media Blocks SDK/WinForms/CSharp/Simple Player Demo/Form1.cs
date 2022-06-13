@@ -38,7 +38,7 @@ namespace MediaBlocks_Player_Demo
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(false);
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;
@@ -116,13 +116,13 @@ namespace MediaBlocks_Player_Demo
 
             if (videoStream)
             {
-                _videoRenderer = new VideoRendererBlock(VideoView1, false);
+                _videoRenderer = new VideoRendererBlock(VideoView1);
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock(false);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 

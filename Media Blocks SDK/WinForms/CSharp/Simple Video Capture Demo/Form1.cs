@@ -48,7 +48,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
 
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
@@ -155,10 +155,10 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(VideoView1, true);
+            _videoRenderer = new VideoRendererBlock(VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text, true);
+            _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
 
             // capture
             if (capture)

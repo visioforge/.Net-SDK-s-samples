@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.Types;
@@ -13,6 +14,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         public Form1()
         {
             InitializeComponent();
+
+            MediaBlocksPipeline.Init();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -20,7 +23,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+            edURL.Text = "rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
         }
 
         private IVideoView GetVideoViewByIndex(int index)
@@ -55,13 +58,10 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             int id = cbCameraIndex.SelectedIndex;
             if (_engines[id] != null)
             {
-                _engines[id].Stop();
+                await _engines[id].StopAsync();
                 _engines[id].Dispose();
                 _engines[id] = null;
             }
-
-            //var mediaInfo = new MediaInfoGST();
-            //var res = await mediaInfo.OpenAsync(new Uri(edURL.Text));
 
             if (cbUseMJPEG.Checked)
             {
@@ -72,15 +72,15 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked, cbUseGPU.Checked);
             }
 
-            _engines[id].Start();
+            await _engines[id].StartAsync();
         }
 
-        private void btStop_Click(object sender, EventArgs e)
+        private async void btStop_Click(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
             if (_engines[id] != null)
             {
-                _engines[id].Stop();
+                await _engines[id].StopAsync();
                 _engines[id].Dispose();
                 _engines[id] = null;
             }

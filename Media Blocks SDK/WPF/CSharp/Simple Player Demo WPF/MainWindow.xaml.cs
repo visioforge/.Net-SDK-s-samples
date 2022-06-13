@@ -70,17 +70,17 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(false);
             _pipeline.OnError += MediaPlayer1_OnError;
             _pipeline.OnStop += MediaPlayer1_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             _fileSource = new FileSourceBlock(edFilename.Text);
 
-            _videoRenderer = new VideoRendererBlock(VideoView1, false);
+            _videoRenderer = new VideoRendererBlock(VideoView1);
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
-            _audioRenderer = new AudioRendererBlock(false);
+            _audioRenderer = new AudioRendererBlock();
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 

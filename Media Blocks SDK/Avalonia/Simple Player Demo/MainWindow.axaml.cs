@@ -49,7 +49,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(false);
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += MediaPlayer1_OnError;
             _pipeline.OnStop += MediaPlayer1_OnStop;
@@ -177,13 +177,13 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             if (videoStream)
             {
-                _videoRenderer = new VideoRendererBlock(VideoView1, false);
+                _videoRenderer = new VideoRendererBlock(VideoView1);
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock(false);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 

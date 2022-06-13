@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -38,7 +39,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             AudioEnabled = audioEnabled;
             GPUDecoding = useGPU;
 
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(true);
 
             var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
             rtspSettings.Login = login;
@@ -46,25 +47,25 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             rtspSettings.UseGPUDecoder = useGPU;
             _source = new RTSPSourceBlock(rtspSettings);
 
-            _videoRenderer = new VideoRendererBlock(videoView, true);
+            _videoRenderer = new VideoRendererBlock(videoView);
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 
             if (audioEnabled)
             {
-                _audioRenderer = new AudioRendererBlock(true);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
         }
 
-        public bool Start()
+        public Task<bool> StartAsync()
         {
-            return _pipeline.Start();
+            return _pipeline.StartAsync();
         }
 
-        public bool Stop()
+        public Task<bool> StopAsync()
         {
-            return _pipeline.Stop();
+            return _pipeline.StopAsync();
         }
 
         public bool IsStarted()

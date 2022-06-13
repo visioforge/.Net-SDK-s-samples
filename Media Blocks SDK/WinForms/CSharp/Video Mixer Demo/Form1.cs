@@ -37,13 +37,13 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         private async void btStart_Click(object sender, System.EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(false);
             _pipeline.OnError += _pipeline_OnError;
 
             _source1 = new FileSourceBlock(edFile1.Text);
             _source2 = new FileSourceBlock(edFile2.Text) { Name = "Source2" };
 
-            _videoRenderer = new VideoRendererBlock(videoView1, false);
+            _videoRenderer = new VideoRendererBlock(videoView1);
 
             var mixerSettings = new GSTVideoMixerSettings();
             mixerSettings.AddStream(Convert.ToInt32(edX1.Text), Convert.ToInt32(edY1.Text), Convert.ToInt32(edWidth1.Text), Convert.ToInt32(edHeight1.Text));

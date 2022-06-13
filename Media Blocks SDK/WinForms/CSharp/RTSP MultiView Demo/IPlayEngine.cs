@@ -16,9 +16,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         bool AudioEnabled { get; set; }
 
-        bool Start();
+        Task<bool> StartAsync();
 
-        bool Stop();
+        Task<bool> StopAsync();
 
         bool IsStarted();
     }
