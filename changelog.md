@@ -8,6 +8,7 @@
 * Added video interpolation settings for Zoom and Pan video effects
 * Added GtkSharp UI framework support for video rendering
 * FastEdit API has been changed to async
+* Resolved screen flip issue with Video_Effects_AllowMultipleStreams property of Video Capture SDK .Net core 
 
 15.3
 * App start-up time improved for PCs with Decklink cards 
