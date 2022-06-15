@@ -4,6 +4,7 @@ using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.MediaPlayer.GST;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
@@ -11,10 +12,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
     {
         private IPlayEngine[] _engines = new IPlayEngine[9];
 
+        private Tuple<string, string>[] _hwDecoders;
+
         public Form1()
         {
             InitializeComponent();
 
+            // We have to initialize the engine on start
             MediaBlocksPipeline.Init();
         }
 
@@ -24,6 +28,19 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             cbCameraIndex.SelectedIndex = 0;
             edURL.Text = "rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+
+            _hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC" });
+            foreach (var item in _hwDecoders)
+            {
+                cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));
+            }
+
+            if (cbGPUDecoder.Items.Count > 0)
+            {
+                cbGPUDecoder.SelectedIndex = 0;
+                cbGPUDecoder.Enabled = true;
+                cbUseGPU.Enabled = true;
+            }
         }
 
         private IVideoView GetVideoViewByIndex(int index)
@@ -55,6 +72,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private async void btStart_Click(object sender, EventArgs e)
         {
+            edLog.Text = string.Empty;
+
             int id = cbCameraIndex.SelectedIndex;
             if (_engines[id] != null)
             {
@@ -69,10 +88,28 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
             else
             {
-                _engines[id] = new RTSPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked, cbUseGPU.Checked);
+                var rtspSettings = new RTSPSourceSettings(new Uri(edURL.Text), cbAudioEnabled.Checked)
+                {
+                    Login = edLogin.Text,
+                    Password = edPassword.Text,
+                    UseGPUDecoder = cbUseGPU.Checked,
+                    CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex].Item1
+                };
+
+                _engines[id] = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
             }
 
+            _engines[id].OnError += Engine_OnError;
+
             await _engines[id].StartAsync();
+        }
+
+        private void Engine_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        {
+            Invoke((Action)(() =>
+            {
+                edLog.Text += e.Message + Environment.NewLine;
+            }));
         }
 
         private async void btStop_Click(object sender, EventArgs e)
@@ -81,6 +118,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             if (_engines[id] != null)
             {
                 await _engines[id].StopAsync();
+
+                _engines[id].OnError -= Engine_OnError;
                 _engines[id].Dispose();
                 _engines[id] = null;
             }

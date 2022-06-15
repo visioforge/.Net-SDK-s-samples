@@ -39,6 +39,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btStop = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
+            this.cbAudioEnabled = new System.Windows.Forms.CheckBox();
+            this.cbUseMJPEG = new System.Windows.Forms.CheckBox();
+            this.cbUseGPU = new System.Windows.Forms.CheckBox();
+            this.cbGPUDecoder = new System.Windows.Forms.ComboBox();
+            this.edLog = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.videoView9 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView8 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView7 = new VisioForge.Core.UI.WinForms.VideoView();
@@ -48,15 +54,12 @@
             this.videoView3 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.cbAudioEnabled = new System.Windows.Forms.CheckBox();
-            this.cbUseMJPEG = new System.Windows.Forms.CheckBox();
-            this.cbUseGPU = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1470, 17);
+            this.label1.Location = new System.Drawing.Point(1483, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 20);
             this.label1.TabIndex = 8;
@@ -64,7 +67,7 @@
             // 
             // edURL
             // 
-            this.edURL.Location = new System.Drawing.Point(1474, 77);
+            this.edURL.Location = new System.Drawing.Point(1487, 76);
             this.edURL.Name = "edURL";
             this.edURL.Size = new System.Drawing.Size(412, 26);
             this.edURL.TabIndex = 9;
@@ -73,14 +76,14 @@
             // 
             // edLogin
             // 
-            this.edLogin.Location = new System.Drawing.Point(1474, 141);
+            this.edLogin.Location = new System.Drawing.Point(1487, 140);
             this.edLogin.Name = "edLogin";
             this.edLogin.Size = new System.Drawing.Size(122, 26);
             this.edLogin.TabIndex = 11;
             // 
             // edPassword
             // 
-            this.edPassword.Location = new System.Drawing.Point(1602, 143);
+            this.edPassword.Location = new System.Drawing.Point(1615, 142);
             this.edPassword.Name = "edPassword";
             this.edPassword.Size = new System.Drawing.Size(122, 26);
             this.edPassword.TabIndex = 12;
@@ -99,7 +102,7 @@
             "7",
             "8",
             "9"});
-            this.cbCameraIndex.Location = new System.Drawing.Point(1602, 14);
+            this.cbCameraIndex.Location = new System.Drawing.Point(1615, 13);
             this.cbCameraIndex.Name = "cbCameraIndex";
             this.cbCameraIndex.Size = new System.Drawing.Size(80, 28);
             this.cbCameraIndex.TabIndex = 13;
@@ -108,7 +111,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1470, 54);
+            this.label2.Location = new System.Drawing.Point(1483, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 20);
             this.label2.TabIndex = 14;
@@ -117,7 +120,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1470, 118);
+            this.label3.Location = new System.Drawing.Point(1483, 117);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 15;
@@ -126,7 +129,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1598, 118);
+            this.label4.Location = new System.Drawing.Point(1611, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 20);
             this.label4.TabIndex = 16;
@@ -134,7 +137,7 @@
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(1594, 949);
+            this.btStop.Location = new System.Drawing.Point(1607, 948);
             this.btStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStop.Name = "btStop";
             this.btStop.Size = new System.Drawing.Size(112, 35);
@@ -145,7 +148,7 @@
             // 
             // btStart
             // 
-            this.btStart.Location = new System.Drawing.Point(1474, 949);
+            this.btStart.Location = new System.Drawing.Point(1487, 948);
             this.btStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(112, 35);
@@ -153,6 +156,65 @@
             this.btStart.Text = "Start";
             this.btStart.UseVisualStyleBackColor = true;
             this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            // 
+            // cbAudioEnabled
+            // 
+            this.cbAudioEnabled.AutoSize = true;
+            this.cbAudioEnabled.Location = new System.Drawing.Point(1487, 186);
+            this.cbAudioEnabled.Name = "cbAudioEnabled";
+            this.cbAudioEnabled.Size = new System.Drawing.Size(128, 24);
+            this.cbAudioEnabled.TabIndex = 20;
+            this.cbAudioEnabled.Text = "Enable audio";
+            this.cbAudioEnabled.UseVisualStyleBackColor = true;
+            // 
+            // cbUseMJPEG
+            // 
+            this.cbUseMJPEG.AutoSize = true;
+            this.cbUseMJPEG.Location = new System.Drawing.Point(1487, 216);
+            this.cbUseMJPEG.Name = "cbUseMJPEG";
+            this.cbUseMJPEG.Size = new System.Drawing.Size(219, 24);
+            this.cbUseMJPEG.TabIndex = 21;
+            this.cbUseMJPEG.Text = "Use HTTP MJPEG source";
+            this.cbUseMJPEG.UseVisualStyleBackColor = true;
+            // 
+            // cbUseGPU
+            // 
+            this.cbUseGPU.AutoSize = true;
+            this.cbUseGPU.Enabled = false;
+            this.cbUseGPU.Location = new System.Drawing.Point(1487, 246);
+            this.cbUseGPU.Name = "cbUseGPU";
+            this.cbUseGPU.Size = new System.Drawing.Size(236, 24);
+            this.cbUseGPU.TabIndex = 22;
+            this.cbUseGPU.Text = "Use GPU for video decoding";
+            this.cbUseGPU.UseVisualStyleBackColor = true;
+            // 
+            // cbGPUDecoder
+            // 
+            this.cbGPUDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGPUDecoder.Enabled = false;
+            this.cbGPUDecoder.FormattingEnabled = true;
+            this.cbGPUDecoder.Location = new System.Drawing.Point(1515, 276);
+            this.cbGPUDecoder.Name = "cbGPUDecoder";
+            this.cbGPUDecoder.Size = new System.Drawing.Size(384, 28);
+            this.cbGPUDecoder.TabIndex = 24;
+            // 
+            // edLog
+            // 
+            this.edLog.Location = new System.Drawing.Point(1487, 360);
+            this.edLog.Multiline = true;
+            this.edLog.Name = "edLog";
+            this.edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.edLog.Size = new System.Drawing.Size(412, 348);
+            this.edLog.TabIndex = 25;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1483, 338);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Error log";
             // 
             // videoView9
             // 
@@ -235,41 +297,14 @@
             this.videoView1.StatusOverlay = null;
             this.videoView1.TabIndex = 0;
             // 
-            // cbAudioEnabled
-            // 
-            this.cbAudioEnabled.AutoSize = true;
-            this.cbAudioEnabled.Location = new System.Drawing.Point(1474, 187);
-            this.cbAudioEnabled.Name = "cbAudioEnabled";
-            this.cbAudioEnabled.Size = new System.Drawing.Size(128, 24);
-            this.cbAudioEnabled.TabIndex = 20;
-            this.cbAudioEnabled.Text = "Enable audio";
-            this.cbAudioEnabled.UseVisualStyleBackColor = true;
-            // 
-            // cbUseMJPEG
-            // 
-            this.cbUseMJPEG.AutoSize = true;
-            this.cbUseMJPEG.Location = new System.Drawing.Point(1474, 217);
-            this.cbUseMJPEG.Name = "cbUseMJPEG";
-            this.cbUseMJPEG.Size = new System.Drawing.Size(219, 24);
-            this.cbUseMJPEG.TabIndex = 21;
-            this.cbUseMJPEG.Text = "Use HTTP MJPEG source";
-            this.cbUseMJPEG.UseVisualStyleBackColor = true;
-            // 
-            // cbUseGPU
-            // 
-            this.cbUseGPU.AutoSize = true;
-            this.cbUseGPU.Location = new System.Drawing.Point(1474, 247);
-            this.cbUseGPU.Name = "cbUseGPU";
-            this.cbUseGPU.Size = new System.Drawing.Size(236, 24);
-            this.cbUseGPU.TabIndex = 22;
-            this.cbUseGPU.Text = "Use GPU for video decoding";
-            this.cbUseGPU.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1898, 994);
+            this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.edLog);
+            this.Controls.Add(this.cbGPUDecoder);
             this.Controls.Add(this.cbUseGPU);
             this.Controls.Add(this.cbUseMJPEG);
             this.Controls.Add(this.cbAudioEnabled);
@@ -326,6 +361,9 @@
         private System.Windows.Forms.CheckBox cbAudioEnabled;
         private System.Windows.Forms.CheckBox cbUseMJPEG;
         private System.Windows.Forms.CheckBox cbUseGPU;
+        private System.Windows.Forms.ComboBox cbGPUDecoder;
+        private System.Windows.Forms.TextBox edLog;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -5,6 +5,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.MediaPlayer.GST;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
@@ -29,33 +30,33 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public bool AudioEnabled { get; set; }
 
-        public bool GPUDecoding { get; set; }
+        public event EventHandler<ErrorsEventArgs> OnError;
 
-        public RTSPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled, bool useGPU)
+        public RTSPPlayEngine(RTSPSourceSettings rtspSettings, IVideoView videoView)
         {
-            URL = url;
-            Login = login;
-            Password = password;
-            AudioEnabled = audioEnabled;
-            GPUDecoding = useGPU;
+            URL = rtspSettings.Uri.ToString();
+            Login = rtspSettings.Login;
+            Password = rtspSettings.Password;
+            AudioEnabled = rtspSettings.AudioEnabled;
 
             _pipeline = new MediaBlocksPipeline(true);
-
-            var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
-            rtspSettings.Login = login;
-            rtspSettings.Password = password;
-            rtspSettings.UseGPUDecoder = useGPU;
+            _pipeline.OnError += _pipeline_OnError;
             _source = new RTSPSourceBlock(rtspSettings);
 
             _videoRenderer = new VideoRendererBlock(videoView);
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 
-            if (audioEnabled)
+            if (rtspSettings.AudioEnabled)
             {
                 _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
+        }
+
+        private void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        {
+            OnError?.Invoke(this, e);
         }
 
         public Task<bool> StartAsync()
@@ -79,11 +80,14 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
                 }
 
-                _pipeline?.Dispose();
-                _pipeline = null;
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= _pipeline_OnError;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
 
                 _videoRenderer?.Dispose();
                 _videoRenderer = null;
@@ -98,16 +102,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
-        // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
         ~RTSPPlayEngine()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);
         }
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

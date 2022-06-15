@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VisioForge.Core.Types.Events;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
@@ -21,5 +22,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         Task<bool> StopAsync();
 
         bool IsStarted();
+
+        event EventHandler<ErrorsEventArgs> OnError;
     }
 }
