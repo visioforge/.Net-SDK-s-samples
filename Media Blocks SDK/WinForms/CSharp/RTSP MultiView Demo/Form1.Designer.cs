@@ -54,6 +54,7 @@
             this.videoView3 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.cbCompatibilityMode = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -200,17 +201,17 @@
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(1487, 360);
+            this.edLog.Location = new System.Drawing.Point(1487, 420);
             this.edLog.Multiline = true;
             this.edLog.Name = "edLog";
             this.edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edLog.Size = new System.Drawing.Size(412, 348);
+            this.edLog.Size = new System.Drawing.Size(412, 288);
             this.edLog.TabIndex = 25;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1483, 338);
+            this.label5.Location = new System.Drawing.Point(1483, 397);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 20);
             this.label5.TabIndex = 26;
@@ -297,11 +298,22 @@
             this.videoView1.StatusOverlay = null;
             this.videoView1.TabIndex = 0;
             // 
+            // cbCompatibilityMode
+            // 
+            this.cbCompatibilityMode.AutoSize = true;
+            this.cbCompatibilityMode.Location = new System.Drawing.Point(1487, 319);
+            this.cbCompatibilityMode.Name = "cbCompatibilityMode";
+            this.cbCompatibilityMode.Size = new System.Drawing.Size(168, 24);
+            this.cbCompatibilityMode.TabIndex = 27;
+            this.cbCompatibilityMode.Text = "Compatibility mode";
+            this.cbCompatibilityMode.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.cbCompatibilityMode);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.edLog);
             this.Controls.Add(this.cbGPUDecoder);
@@ -364,6 +376,7 @@
         private System.Windows.Forms.ComboBox cbGPUDecoder;
         private System.Windows.Forms.TextBox edLog;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox cbCompatibilityMode;
     }
 }
 

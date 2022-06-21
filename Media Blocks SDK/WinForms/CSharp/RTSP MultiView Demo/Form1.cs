@@ -29,15 +29,19 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             cbCameraIndex.SelectedIndex = 0;
             edURL.Text = "rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
 
+            // HW decoders
+            cbGPUDecoder.Items.Add("None");
+
             _hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
             foreach (var item in _hwDecoders)
             {
                 cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));
             }
 
-            if (cbGPUDecoder.Items.Count > 0)
+            cbGPUDecoder.SelectedIndex = 0;
+
+            if (cbGPUDecoder.Items.Count > 1)
             {
-                cbGPUDecoder.SelectedIndex = 0;
                 cbGPUDecoder.Enabled = true;
                 cbUseGPU.Enabled = true;
             }
@@ -93,8 +97,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     Login = edLogin.Text,
                     Password = edPassword.Text,
                     UseGPUDecoder = cbUseGPU.Checked,
-                    CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex].Item1
+                    CompatibilityMode = cbCompatibilityMode.Checked
                 };
+
+                if (cbGPUDecoder.SelectedIndex > 0)
+                {
+                    rtspSettings.CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                }
 
                 _engines[id] = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
             }
