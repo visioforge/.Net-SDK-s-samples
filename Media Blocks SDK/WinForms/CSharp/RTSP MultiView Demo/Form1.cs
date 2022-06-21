@@ -29,7 +29,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             cbCameraIndex.SelectedIndex = 0;
             edURL.Text = "rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
 
-            _hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC" });
+            _hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
             foreach (var item in _hwDecoders)
             {
                 cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));

@@ -56,11 +56,13 @@
             this.edX2 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.edLog = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.rbCPU = new System.Windows.Forms.RadioButton();
+            this.rbDX11 = new System.Windows.Forms.RadioButton();
+            this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.SuspendLayout();
             // 
             // label1
@@ -258,7 +260,7 @@
             this.edY2.Name = "edY2";
             this.edY2.Size = new System.Drawing.Size(46, 26);
             this.edY2.TabIndex = 22;
-            this.edY2.Text = "0";
+            this.edY2.Text = "100";
             // 
             // label10
             // 
@@ -275,7 +277,7 @@
             this.edX2.Name = "edX2";
             this.edX2.Size = new System.Drawing.Size(46, 26);
             this.edX2.TabIndex = 20;
-            this.edX2.Text = "0";
+            this.edX2.Text = "100";
             // 
             // label11
             // 
@@ -294,15 +296,6 @@
             this.label12.Size = new System.Drawing.Size(239, 20);
             this.label12.TabIndex = 18;
             this.label12.Text = "Second stream position and size";
-            // 
-            // videoView1
-            // 
-            this.videoView1.BackColor = System.Drawing.Color.Black;
-            this.videoView1.Location = new System.Drawing.Point(516, 16);
-            this.videoView1.Name = "videoView1";
-            this.videoView1.Size = new System.Drawing.Size(720, 480);
-            this.videoView1.StatusOverlay = null;
-            this.videoView1.TabIndex = 6;
             // 
             // edLog
             // 
@@ -341,11 +334,44 @@
             this.label15.TabIndex = 30;
             this.label15.Text = "Log";
             // 
+            // rbCPU
+            // 
+            this.rbCPU.AutoSize = true;
+            this.rbCPU.Location = new System.Drawing.Point(516, 519);
+            this.rbCPU.Name = "rbCPU";
+            this.rbCPU.Size = new System.Drawing.Size(100, 24);
+            this.rbCPU.TabIndex = 31;
+            this.rbCPU.Text = "Use CPU";
+            this.rbCPU.UseVisualStyleBackColor = true;
+            // 
+            // rbDX11
+            // 
+            this.rbDX11.AutoSize = true;
+            this.rbDX11.Checked = true;
+            this.rbDX11.Location = new System.Drawing.Point(622, 519);
+            this.rbDX11.Name = "rbDX11";
+            this.rbDX11.Size = new System.Drawing.Size(168, 24);
+            this.rbDX11.TabIndex = 32;
+            this.rbDX11.TabStop = true;
+            this.rbDX11.Text = "GPU (Direct3D 11)";
+            this.rbDX11.UseVisualStyleBackColor = true;
+            // 
+            // videoView1
+            // 
+            this.videoView1.BackColor = System.Drawing.Color.Black;
+            this.videoView1.Location = new System.Drawing.Point(516, 16);
+            this.videoView1.Name = "videoView1";
+            this.videoView1.Size = new System.Drawing.Size(720, 480);
+            this.videoView1.StatusOverlay = null;
+            this.videoView1.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1258, 562);
+            this.Controls.Add(this.rbDX11);
+            this.Controls.Add(this.rbCPU);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -421,5 +447,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.RadioButton rbCPU;
+        private System.Windows.Forms.RadioButton rbDX11;
     }
 }
