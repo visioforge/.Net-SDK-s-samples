@@ -55,6 +55,7 @@
             this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             this.cbCompatibilityMode = new System.Windows.Forms.CheckBox();
+            this.btReadInfo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -213,9 +214,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(1483, 397);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 26;
-            this.label5.Text = "Error log";
+            this.label5.Text = "Error / info log";
             // 
             // videoView9
             // 
@@ -308,11 +309,22 @@
             this.cbCompatibilityMode.Text = "Compatibility mode";
             this.cbCompatibilityMode.UseVisualStyleBackColor = true;
             // 
+            // btReadInfo
+            // 
+            this.btReadInfo.Location = new System.Drawing.Point(1763, 137);
+            this.btReadInfo.Name = "btReadInfo";
+            this.btReadInfo.Size = new System.Drawing.Size(136, 36);
+            this.btReadInfo.TabIndex = 28;
+            this.btReadInfo.Text = "Read info";
+            this.btReadInfo.UseVisualStyleBackColor = true;
+            this.btReadInfo.Click += new System.EventHandler(this.btReadInfo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.btReadInfo);
             this.Controls.Add(this.cbCompatibilityMode);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.edLog);
@@ -377,6 +389,7 @@
         private System.Windows.Forms.TextBox edLog;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbCompatibilityMode;
+        private System.Windows.Forms.Button btReadInfo;
     }
 }
 

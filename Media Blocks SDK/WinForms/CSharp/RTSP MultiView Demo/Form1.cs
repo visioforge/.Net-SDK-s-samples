@@ -163,5 +163,41 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _engines[i] = null;
             }
         }
+
+        private async void btReadInfo_Click(object sender, EventArgs e)
+        {
+            var infoReader = new MediaInfoGST();
+
+            var uriBuilder = new UriBuilder(edURL.Text);
+            if (!string.IsNullOrEmpty(edLogin.Text) && !string.IsNullOrEmpty(edPassword.Text))
+            {
+                uriBuilder.UserName = edLogin.Text;
+                uriBuilder.Password = edPassword.Text;
+            }
+
+            var res = await infoReader.OpenAsync(uriBuilder.Uri);
+            if (res)
+            {
+                if (infoReader.Info.VideoStreams.Count > 0)
+                {
+                    edLog.Text += "Video streams: " + Environment.NewLine;
+                    foreach (var item in infoReader.Info.VideoStreams)
+                    {
+                        edLog.Text += $"  {item.Codec} {item.Width}x{item.Height}" + Environment.NewLine;
+                    }
+                }
+
+                edLog.Text += Environment.NewLine;
+
+                if (infoReader.Info.AudioStreams.Count > 0)
+                {
+                    edLog.Text += "Audio streams: " + Environment.NewLine;
+                    foreach (var item in infoReader.Info.AudioStreams)
+                    {
+                        edLog.Text += $"  {item.Codec} {item.Channels} ch {item.SampleRate} Hz" + Environment.NewLine;
+                    }
+                }
+            }
+        }
     }
 }
