@@ -7,18 +7,18 @@ namespace Main_Demo
 {
     using System;
     using System.Drawing;
-    using System.Windows.Forms;
-
-    using VisioForge.Core.Types;
     using System.Drawing.Imaging;
-    using VisioForge.Core.Types.Events;
+    using System.Windows.Forms;
+    using VisioForge.Core.MediaInfoGST;
     using VisioForge.Core.MediaPlayerGST;
-    using VisioForge.Core.Types.GST.VideoEffects;
-    using VisioForge.Core.Types.VideoProcessing;
-    using VisioForge.Core.Types.MediaPlayer.GST;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.GST;
     using VisioForge.Core.Types.GST.AudioEffects;
-    using VisioForge.Core.MediaInfoGST;
+    using VisioForge.Core.Types.GST.VideoEffects;
+    using VisioForge.Core.Types.MediaPlayer.GST;
+    using VisioForge.Core.Types.VideoProcessing;
+    using FontStyle = VisioForge.Core.Types.GST.VideoEffects.FontStyle;
 
     public partial class Form1 : Form
     {
@@ -33,7 +33,7 @@ namespace Main_Demo
         {
             if (cbAudAmplifyEnabled.Checked)
             {
-                var amplify = new GSTAmplify(tbAudAmplifyAmp.Value / 100.0);
+                var amplify = new Amplify(tbAudAmplifyAmp.Value / 100.0);
                 _player.Audio_Effects_AddOrUpdate(amplify);
             }
         }
@@ -42,7 +42,7 @@ namespace Main_Demo
         {
             if (cbAudBalanceEnabled.Checked)
             {
-                var balance = new GSTAudioBalance(tbAudBalanceLevel.Value / 10.0);
+                var balance = new AudioBalance(tbAudBalanceLevel.Value / 10.0);
                 _player.Audio_Effects_AddOrUpdate(balance);
             }
         }
@@ -51,7 +51,7 @@ namespace Main_Demo
         {
             if (cbAudEchoEnabled.Checked)
             {
-                var echo = new GSTEcho(TimeSpan.FromMilliseconds(tbAudEchoDelay.Value))
+                var echo = new Echo(TimeSpan.FromMilliseconds(tbAudEchoDelay.Value))
                 {
                     Intensity = this.tbAudEchoIntensity.Value / 100.0f,
                     Feedback = this.tbAudEchoFeedback.Value / 100.0f
@@ -77,7 +77,7 @@ namespace Main_Demo
                 levels[8] = tbAudEq8.Value;
                 levels[9] = tbAudEq9.Value;
 
-                var eq = new GSTEqualizer10(levels);
+                var eq = new Equalizer10(levels);
                 _player.Audio_Effects_AddOrUpdate(eq);
             }
         }
@@ -96,12 +96,12 @@ namespace Main_Demo
         {
             if (cbResizeEnabled.Checked)
             {
-                var resize = new GSTResize(
+                var resize = new Resize(
                     Convert.ToInt32(edResizeWidth.Text),
                     Convert.ToInt32(edResizeHeight.Text))
                 {
                     Letterbox = cbResizeLetterbox.Checked,
-                    Method = (GSTVideoScaleMethod)cbResizeMethod.SelectedIndex
+                    Method = (VideoScaleMethod)cbResizeMethod.SelectedIndex
                 };
                 _player.Video_Effects_AddOrUpdate(resize);
             }
@@ -152,7 +152,7 @@ namespace Main_Demo
         {
             if (cbImageOverlayEnabled.Checked)
             {
-                var imageOverlay = new GSTImageOverlay(edImageOverlayFilename.Text)
+                var imageOverlay = new ImageOverlay(edImageOverlayFilename.Text)
                 {
                     Alpha = tbImageOverlayAlpha.Value / 100.0,
                     X = Convert.ToInt32(edImageOverlayX.Text),
@@ -172,7 +172,7 @@ namespace Main_Demo
         {
             if (cbGaussianBlurEnabled.Checked)
             {
-                var blur = new GSTGaussianBlur(tbGaussianBlur.Value / 10.0);
+                var blur = new GaussianBlur(tbGaussianBlur.Value / 10.0);
                 _player.Video_Effects_AddOrUpdate(blur);
             }
         }
@@ -181,7 +181,7 @@ namespace Main_Demo
         {
             if (cbVideoBalanceEnabled.Checked)
             {
-                var colorBalance = new GSTVideoBalance
+                var colorBalance = new VideoBalance
                 {
                     Brightness = tbVideoBrightness.Value / 100.0,
                     Contrast = tbVideoContrast.Value / 100.0,
@@ -197,7 +197,7 @@ namespace Main_Demo
         {
             if (cbColorEffectEnabled.Checked)
             {
-                var colorEffect = new GSTColorEffects((GSTColorEffectsPreset)cbColorEffect.SelectedIndex);
+                var colorEffect = new ColorEffects((ColorEffectsPreset)cbColorEffect.SelectedIndex);
                 _player.Video_Effects_AddOrUpdate(colorEffect);
             }
         }
@@ -206,7 +206,7 @@ namespace Main_Demo
         {
             if (cbFlipRotateEnabled.Checked)
             {
-                var flipRotate = new GSTFlipRotate((GSTVideoFlipRotateMethod)cbFlipRotate.SelectedIndex);
+                var flipRotate = new FlipRotate((VideoFlipRotateMethod)cbFlipRotate.SelectedIndex);
                 _player.Video_Effects_AddOrUpdate(flipRotate);
             }
         }
@@ -215,15 +215,15 @@ namespace Main_Demo
         {
             if (cbDeinterlaceEnabled.Checked)
             {
-                var deinterlace = new GSTDeinterlace
+                var deinterlace = new Deinterlace
                 {
                     DropOrphans = cbDeinterlaceDropOrphans.Checked,
                     IgnoreObscure = cbDeinterlaceIgnoreObscure.Checked,
-                    FieldLayout = (GSTDeinterlaceFieldLayout)cbDeinterlaceFieldLayout.SelectedIndex,
-                    Fields = (GSTDeinterlaceFields)cbDeinterlaceFields.SelectedIndex,
-                    Locking = (GSTDeinterlaceLocking)cbDeinterlaceLocking.SelectedIndex,
-                    Method = (GSTDeinterlaceMethods)cbDeinterlaceMethod.SelectedIndex,
-                    Mode = (GSTDeinterlaceMode)cbDeinterlaceMode.SelectedIndex
+                    FieldLayout = (DeinterlaceFieldLayout)cbDeinterlaceFieldLayout.SelectedIndex,
+                    Fields = (DeinterlaceFields)cbDeinterlaceFields.SelectedIndex,
+                    Locking = (DeinterlaceLocking)cbDeinterlaceLocking.SelectedIndex,
+                    Method = (DeinterlaceMethods)cbDeinterlaceMethod.SelectedIndex,
+                    Mode = (DeinterlaceMode)cbDeinterlaceMode.SelectedIndex
                 };
 
                 _player.Video_Effects_AddOrUpdate(deinterlace);
@@ -234,16 +234,16 @@ namespace Main_Demo
         {
             if (cbTextOverlayEnabled.Checked)
             {
-                var textOverlay = new GSTTextOverlay
+                var textOverlay = new TextOverlay
                 {
-                    Mode = (GSTTextOverlayMode)cbTextOverlayMode.SelectedIndex,
+                    Mode = (TextOverlayMode)cbTextOverlayMode.SelectedIndex,
                     Text = edTextOverlayText.Text,
-                    VerticalAlignment = (GSTTextOverlayVAlign)cbTextOverlayVAlign.SelectedIndex,
-                    LineAignment = (GSTTextOverlayLineAlign)cbTextOverlayLineAlign.SelectedIndex,
-                    WrapMode = (GSTTextOverlayWrapMode)(cbTextOverlayFontWrapMode.SelectedIndex - 1),
+                    VerticalAlignment = (TextOverlayVAlign)cbTextOverlayVAlign.SelectedIndex,
+                    LineAignment = (TextOverlayLineAlign)cbTextOverlayLineAlign.SelectedIndex,
+                    WrapMode = (TextOverlayWrapMode)(cbTextOverlayFontWrapMode.SelectedIndex - 1),
                     FontSize = Convert.ToInt32(cbTextOverlayFontSize.Text),
-                    FontStyle = (GSTFontStyle)cbTextOverlayFontStyle.SelectedIndex,
-                    FontWeight = (GSTFontWeight)Enum.Parse(typeof(GSTFontWeight), cbTextOverlayFontWeight.Text, true),
+                    FontStyle = (FontStyle)cbTextOverlayFontStyle.SelectedIndex,
+                    FontWeight = (FontWeight)Enum.Parse(typeof(FontWeight), cbTextOverlayFontWeight.Text, true),
                     AutoAjustSize = cbTextOverlayAutosize.Checked,
                     Color = pnTextOverlayColor.BackColor,
                     FontName = cbTextOverlayFontName.Text,
@@ -256,10 +256,10 @@ namespace Main_Demo
                     case 0:
                     case 1:
                     case 2:
-                        textOverlay.HorizontalAlignment = (GSTTextOverlayHAlign)cbTextOverlayHAlign.SelectedIndex;
+                        textOverlay.HorizontalAlignment = (TextOverlayHAlign)cbTextOverlayHAlign.SelectedIndex;
                         break;
                     default:
-                        textOverlay.HorizontalAlignment = GSTTextOverlayHAlign.Custom;
+                        textOverlay.HorizontalAlignment = TextOverlayHAlign.Custom;
                         break;
                 }
 
@@ -719,10 +719,10 @@ namespace Main_Demo
         private void cbSubtitlesCustomSettings_CheckedChanged(object sender, EventArgs e)
         {
             var fontSize = Convert.ToInt32(cbTextOverlayFontSize.Text);
-            var fontStyle = (GSTFontStyle)cbTextOverlayFontStyle.SelectedIndex;
-            var fontWeight = (GSTFontWeight)Enum.Parse(typeof(GSTFontWeight), cbTextOverlayFontWeight.Text, true);
+            var fontStyle = (FontStyle)cbTextOverlayFontStyle.SelectedIndex;
+            var fontWeight = (FontWeight)Enum.Parse(typeof(FontWeight), cbTextOverlayFontWeight.Text, true);
             var fontName = cbTextOverlayFontName.Text;
-            _player.Subtitles_Settings.Font = new GSTFontSettings(fontName, fontSize, fontStyle, GSTFontStretch.Normal, fontWeight);
+            _player.Subtitles_Settings.Font = new FontSettings(fontName, fontSize, fontStyle, FontStretch.Normal, fontWeight);
 
             _player.Subtitles_Settings_Update();
         }

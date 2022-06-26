@@ -126,6 +126,8 @@ namespace MediaBlocks_Player_Demo
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 
+            _pipeline.Loop = cbLoop.Checked;
+
             await _pipeline.StartAsync();
 
             // set audio volume for each stream

@@ -61,6 +61,7 @@ namespace MediaBlocks_Player_Demo
             this.label6 = new System.Windows.Forms.Label();
             this.tbVolume1 = new System.Windows.Forms.TrackBar();
             this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.cbLoop = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
@@ -130,6 +131,7 @@ namespace MediaBlocks_Player_Demo
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.cbLoop);
             this.groupBox2.Controls.Add(this.btNextFrame);
             this.groupBox2.Controls.Add(this.btStop);
             this.groupBox2.Controls.Add(this.btPause);
@@ -230,7 +232,7 @@ namespace MediaBlocks_Player_Demo
             // lbTime
             // 
             this.lbTime.AutoSize = true;
-            this.lbTime.Location = new System.Drawing.Point(324, 51);
+            this.lbTime.Location = new System.Drawing.Point(324, 42);
             this.lbTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTime.Name = "lbTime";
             this.lbTime.Size = new System.Drawing.Size(137, 20);
@@ -293,7 +295,7 @@ namespace MediaBlocks_Player_Demo
             this.label14.TabIndex = 26;
             this.label14.Text = "File name";
             // 
-            // timer1
+            // _tmPosition
             // 
             this._tmPosition.Tick += new System.EventHandler(this.tmPosition_Tick);
             // 
@@ -340,6 +342,16 @@ namespace MediaBlocks_Player_Demo
             this.VideoView1.Size = new System.Drawing.Size(622, 460);
             this.VideoView1.StatusOverlay = null;
             this.VideoView1.TabIndex = 90;
+            // 
+            // cbLoop
+            // 
+            this.cbLoop.AutoSize = true;
+            this.cbLoop.Location = new System.Drawing.Point(390, 95);
+            this.cbLoop.Name = "cbLoop";
+            this.cbLoop.Size = new System.Drawing.Size(71, 24);
+            this.cbLoop.TabIndex = 9;
+            this.cbLoop.Text = "Loop";
+            this.cbLoop.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -401,6 +413,7 @@ namespace MediaBlocks_Player_Demo
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TrackBar tbVolume1;
         private System.Windows.Forms.TextBox mmError;
+        private System.Windows.Forms.CheckBox cbLoop;
     }
 }
 

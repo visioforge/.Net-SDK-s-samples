@@ -31,13 +31,13 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         private NullRendererBlock _nullRenderer2;
 
-        private GSTVideoMixerSettings _settings = new GSTVideoMixerSettings();
+        private VideoMixerSettings _settings = new VideoMixerSettings();
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
         public void AddStream(Rectangle rect, int zorder)
         {
-            _settings.AddStream(new GSTVideoMixerSettingsStream(rect, (uint)zorder));
+            _settings.AddStream(new VideoMixerSettingsStream(rect, (uint)zorder));
         }
 
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)

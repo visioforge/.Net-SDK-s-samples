@@ -25,13 +25,13 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.10" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.36" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.3.37" />
     <PackageReference Include="VisioForge.DotNet.Core.Avalonia" Version="15.3.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.3.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.3.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.3.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x86" Version="15.3.37" />
   </ItemGroup>
 </Project>
