@@ -9,6 +9,9 @@
 * Added GtkSharp UI framework support for video rendering
 * FastEdit API has been changed to async
 * Resolved screen flip issue with Video_Effects_AllowMultipleStreams property of Video Capture SDK .Net core 
+* Updated RTSP MultiView demo
+* Added OnLoop event into Media Player SDK .Net
+* Added Loop feature into Media Blocks SDK .Net
 
 15.3
 * App start-up time improved for PCs with Decklink cards 

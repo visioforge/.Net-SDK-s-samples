@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using VisioForge.Core.GStreamer.Helpers;
+
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.Types;
@@ -10,7 +10,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 {
     public partial class Form1 : Form
     {
-        private IPlayEngine[] _engines = new IPlayEngine[9];
+        private IPlayEngine[] _playEngines = new IPlayEngine[9];
+
+        private RTSPRecordEngine[] _recordEngines = new RTSPRecordEngine[9];
 
         private Tuple<string, string>[] _hwDecoders;
 
@@ -79,16 +81,16 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             edLog.Text = string.Empty;
 
             int id = cbCameraIndex.SelectedIndex;
-            if (_engines[id] != null)
+            if (_playEngines[id] != null)
             {
-                await _engines[id].StopAsync();
-                _engines[id].Dispose();
-                _engines[id] = null;
+                await _playEngines[id].StopAsync();
+                _playEngines[id].Dispose();
+                _playEngines[id] = null;
             }
 
             if (cbUseMJPEG.Checked)
             {
-                _engines[id] = new HTTPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+                _playEngines[id] = new HTTPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
             }
             else
             {
@@ -97,7 +99,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     Login = edLogin.Text,
                     Password = edPassword.Text,
                     UseGPUDecoder = cbUseGPU.Checked,
-                    CompatibilityMode = cbCompatibilityMode.Checked
+                    CompatibilityMode = cbCompatibilityMode.Checked,
                 };
 
                 if (cbGPUDecoder.SelectedIndex > 0)
@@ -105,12 +107,12 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     rtspSettings.CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
                 }
 
-                _engines[id] = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
+                _playEngines[id] = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
             }
 
-            _engines[id].OnError += Engine_OnError;
+            _playEngines[id].OnError += Engine_OnError;
 
-            await _engines[id].StartAsync();
+            await _playEngines[id].StartAsync();
         }
 
         private void Engine_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
@@ -124,13 +126,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         private async void btStop_Click(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
-            if (_engines[id] != null)
+            if (_playEngines[id] != null)
             {
-                await _engines[id].StopAsync();
+                await _playEngines[id].StopAsync();
 
-                _engines[id].OnError -= Engine_OnError;
-                _engines[id].Dispose();
-                _engines[id] = null;
+                _playEngines[id].OnError -= Engine_OnError;
+                _playEngines[id].Dispose();
+                _playEngines[id] = null;
             }
 
             GetVideoViewByIndex(id).CallRefresh();
@@ -139,12 +141,14 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         private void cbCameraIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
-            if (_engines[id] != null)
+            if (_playEngines[id] != null)
             {
-                edURL.Text = _engines[id].URL;
-                edLogin.Text = _engines[id].Login;
-                edPassword.Text = _engines[id].Password;
-                cbAudioEnabled.Checked = _engines[id].AudioEnabled;
+                edURL.Text = _playEngines[id].URL;
+                edLogin.Text = _playEngines[id].Login;
+                edPassword.Text = _playEngines[id].Password;
+                cbAudioEnabled.Checked = _playEngines[id].AudioEnabled;
+                edFilename.Text = _recordEngines[id].Filename;
+                cbReencodeAudio.Checked = _recordEngines[id].ReencodeAudio;
             }
             else
             {
@@ -152,15 +156,17 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 edLogin.Text = "";
                 edPassword.Text = "";
                 cbAudioEnabled.Checked = false;
+                edFilename.Text = "";
+                cbReencodeAudio.Checked = true;
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            for (int i = 0; i < _engines.Length; i++)
+            for (int i = 0; i < _playEngines.Length; i++)
             {
-                _engines[i]?.Dispose();
-                _engines[i] = null;
+                _playEngines[i]?.Dispose();
+                _playEngines[i] = null;
             }
         }
 
@@ -197,6 +203,47 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                         edLog.Text += $"  {item.Codec} {item.Channels} ch {item.SampleRate} Hz" + Environment.NewLine;
                     }
                 }
+            }
+        }
+
+        private async void btStartRecord_Click(object sender, EventArgs e)
+        {
+            edLog.Text = string.Empty;
+
+            int id = cbCameraIndex.SelectedIndex;
+
+            if (_recordEngines[id] != null)
+            {
+                await _recordEngines[id].StopAsync();
+                _recordEngines[id].Dispose();
+                _recordEngines[id] = null;
+            }
+
+            var rtspSettings = new RTSPRAWSourceSettings(new Uri(edURL.Text), cbAudioEnabled.Checked)
+            {
+                Login = edLogin.Text,
+                Password = edPassword.Text,
+            };
+
+            _recordEngines[id] = new RTSPRecordEngine();
+            _recordEngines[id].OnError += Engine_OnError;
+            _recordEngines[id].Filename = edFilename.Text;
+            _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
+
+            await _recordEngines[id].StartAsync(rtspSettings);
+        }
+
+        private async void btStopRecord_Click(object sender, EventArgs e)
+        {
+            int id = cbCameraIndex.SelectedIndex;
+
+            if (_recordEngines[id] != null)
+            {
+                await _recordEngines[id].StopAsync();
+
+                _recordEngines[id].OnError -= Engine_OnError;
+                _recordEngines[id].Dispose();
+                _recordEngines[id] = null;
             }
         }
     }

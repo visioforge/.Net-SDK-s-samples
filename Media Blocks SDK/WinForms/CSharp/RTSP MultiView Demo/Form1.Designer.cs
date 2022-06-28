@@ -45,6 +45,10 @@
             this.cbGPUDecoder = new System.Windows.Forms.ComboBox();
             this.edLog = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.cbCompatibilityMode = new System.Windows.Forms.CheckBox();
+            this.btReadInfo = new System.Windows.Forms.Button();
+            this.btStartRecord = new System.Windows.Forms.Button();
+            this.btStopRecord = new System.Windows.Forms.Button();
             this.videoView9 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView8 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView7 = new VisioForge.Core.UI.WinForms.VideoView();
@@ -54,8 +58,11 @@
             this.videoView3 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.cbCompatibilityMode = new System.Windows.Forms.CheckBox();
-            this.btReadInfo = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.edFilename = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.cbReencodeAudio = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -139,7 +146,7 @@
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(1607, 948);
+            this.btStop.Location = new System.Drawing.Point(1607, 351);
             this.btStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStop.Name = "btStop";
             this.btStop.Size = new System.Drawing.Size(112, 35);
@@ -150,7 +157,7 @@
             // 
             // btStart
             // 
-            this.btStart.Location = new System.Drawing.Point(1487, 948);
+            this.btStart.Location = new System.Drawing.Point(1487, 351);
             this.btStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(112, 35);
@@ -162,6 +169,8 @@
             // cbAudioEnabled
             // 
             this.cbAudioEnabled.AutoSize = true;
+            this.cbAudioEnabled.Checked = true;
+            this.cbAudioEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAudioEnabled.Location = new System.Drawing.Point(1487, 186);
             this.cbAudioEnabled.Name = "cbAudioEnabled";
             this.cbAudioEnabled.Size = new System.Drawing.Size(128, 24);
@@ -202,21 +211,63 @@
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(1487, 420);
+            this.edLog.Location = new System.Drawing.Point(1487, 587);
             this.edLog.Multiline = true;
             this.edLog.Name = "edLog";
             this.edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edLog.Size = new System.Drawing.Size(412, 288);
+            this.edLog.Size = new System.Drawing.Size(412, 240);
             this.edLog.TabIndex = 25;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1483, 397);
+            this.label5.Location = new System.Drawing.Point(1483, 564);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 26;
             this.label5.Text = "Error / info log";
+            // 
+            // cbCompatibilityMode
+            // 
+            this.cbCompatibilityMode.AutoSize = true;
+            this.cbCompatibilityMode.Location = new System.Drawing.Point(1487, 319);
+            this.cbCompatibilityMode.Name = "cbCompatibilityMode";
+            this.cbCompatibilityMode.Size = new System.Drawing.Size(168, 24);
+            this.cbCompatibilityMode.TabIndex = 27;
+            this.cbCompatibilityMode.Text = "Compatibility mode";
+            this.cbCompatibilityMode.UseVisualStyleBackColor = true;
+            // 
+            // btReadInfo
+            // 
+            this.btReadInfo.Location = new System.Drawing.Point(1763, 137);
+            this.btReadInfo.Name = "btReadInfo";
+            this.btReadInfo.Size = new System.Drawing.Size(136, 36);
+            this.btReadInfo.TabIndex = 28;
+            this.btReadInfo.Text = "Read info";
+            this.btReadInfo.UseVisualStyleBackColor = true;
+            this.btReadInfo.Click += new System.EventHandler(this.btReadInfo_Click);
+            // 
+            // btStartRecord
+            // 
+            this.btStartRecord.Location = new System.Drawing.Point(1487, 481);
+            this.btStartRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btStartRecord.Name = "btStartRecord";
+            this.btStartRecord.Size = new System.Drawing.Size(112, 35);
+            this.btStartRecord.TabIndex = 29;
+            this.btStartRecord.Text = "Start record";
+            this.btStartRecord.UseVisualStyleBackColor = true;
+            this.btStartRecord.Click += new System.EventHandler(this.btStartRecord_Click);
+            // 
+            // btStopRecord
+            // 
+            this.btStopRecord.Location = new System.Drawing.Point(1607, 481);
+            this.btStopRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btStopRecord.Name = "btStopRecord";
+            this.btStopRecord.Size = new System.Drawing.Size(112, 35);
+            this.btStopRecord.TabIndex = 30;
+            this.btStopRecord.Text = "Stop record";
+            this.btStopRecord.UseVisualStyleBackColor = true;
+            this.btStopRecord.Click += new System.EventHandler(this.btStopRecord_Click);
             // 
             // videoView9
             // 
@@ -299,31 +350,60 @@
             this.videoView1.StatusOverlay = null;
             this.videoView1.TabIndex = 0;
             // 
-            // cbCompatibilityMode
+            // label6
             // 
-            this.cbCompatibilityMode.AutoSize = true;
-            this.cbCompatibilityMode.Location = new System.Drawing.Point(1487, 319);
-            this.cbCompatibilityMode.Name = "cbCompatibilityMode";
-            this.cbCompatibilityMode.Size = new System.Drawing.Size(168, 24);
-            this.cbCompatibilityMode.TabIndex = 27;
-            this.cbCompatibilityMode.Text = "Compatibility mode";
-            this.cbCompatibilityMode.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1483, 417);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(274, 20);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Record original video to MPEG-TS file";
             // 
-            // btReadInfo
+            // edFilename
             // 
-            this.btReadInfo.Location = new System.Drawing.Point(1763, 137);
-            this.btReadInfo.Name = "btReadInfo";
-            this.btReadInfo.Size = new System.Drawing.Size(136, 36);
-            this.btReadInfo.TabIndex = 28;
-            this.btReadInfo.Text = "Read info";
-            this.btReadInfo.UseVisualStyleBackColor = true;
-            this.btReadInfo.Click += new System.EventHandler(this.btReadInfo_Click);
+            this.edFilename.Location = new System.Drawing.Point(1487, 440);
+            this.edFilename.Name = "edFilename";
+            this.edFilename.Size = new System.Drawing.Size(371, 26);
+            this.edFilename.TabIndex = 32;
+            this.edFilename.Text = "c:\\vf\\_ipcamoutput.ts";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1864, 436);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(35, 35);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "ts";
+            this.saveFileDialog1.Filter = "MPEG-TS files|*.ts";
+            // 
+            // cbReencodeAudio
+            // 
+            this.cbReencodeAudio.AutoSize = true;
+            this.cbReencodeAudio.Checked = true;
+            this.cbReencodeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbReencodeAudio.Location = new System.Drawing.Point(1745, 487);
+            this.cbReencodeAudio.Name = "cbReencodeAudio";
+            this.cbReencodeAudio.Size = new System.Drawing.Size(152, 24);
+            this.cbReencodeAudio.TabIndex = 34;
+            this.cbReencodeAudio.Text = "Reencode audio";
+            this.cbReencodeAudio.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.cbReencodeAudio);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.edFilename);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.btStopRecord);
+            this.Controls.Add(this.btStartRecord);
             this.Controls.Add(this.btReadInfo);
             this.Controls.Add(this.cbCompatibilityMode);
             this.Controls.Add(this.label5);
@@ -390,6 +470,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbCompatibilityMode;
         private System.Windows.Forms.Button btReadInfo;
+        private System.Windows.Forms.Button btStartRecord;
+        private System.Windows.Forms.Button btStopRecord;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox edFilename;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox cbReencodeAudio;
     }
 }
 
