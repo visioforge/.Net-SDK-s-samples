@@ -7,18 +7,11 @@ using System;
 
 namespace Simple_Player_Demo
 {
-    using Android.Graphics;
-    using Android.Util;
     using Android.Widget;
     using System.Globalization;
     using System.Threading;
-    using System.Threading.Tasks;
     using VisioForge.Core.MediaPlayerGST;
-    using VisioForge.Core.Types.GST.AudioEffects;
-    using VisioForge.Core.Types.MediaPlayer.GST;
-    using VisioForge.Core.UI.Android;
     using Xamarin.Essentials;
-    using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
@@ -151,7 +144,6 @@ namespace Simple_Player_Demo
             tmPosition.Stop();
 
             await _player.StopAsync();
-            await _player.CloseAsync();
 
             // clear screen workaround
             pnScreen.RemoveView(videoView);

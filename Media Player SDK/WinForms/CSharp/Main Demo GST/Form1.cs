@@ -462,10 +462,8 @@ namespace Main_Demo
            }));
         }
 
-        private async void _player_OnStop(object sender, StopEventArgs e)
+        private void _player_OnStop(object sender, StopEventArgs e)
         {
-            await _player.CloseAsync();
-
             tmPosition.Stop();
 
             videoView1.Invalidate();
@@ -487,7 +485,6 @@ namespace Main_Demo
             tmPosition.Stop();
 
             await _player.StopAsync();
-            await _player.CloseAsync();
 
             _player.Video_Effects_Clear();
 
