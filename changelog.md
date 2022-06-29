@@ -12,6 +12,8 @@
 * Updated RTSP MultiView demo
 * Added OnLoop event into Media Player SDK .Net
 * Added Loop feature into Media Blocks SDK .Net
+* Avalonia VideoView downgrade to 0.10.12 because of Avalonia UI problems with NativeControl 
+* Added File Encryptor demo for Video Edit SDK .Net
 
 15.3
 * App start-up time improved for PCs with Decklink cards 

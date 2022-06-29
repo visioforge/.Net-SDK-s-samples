@@ -4,12 +4,9 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Threading.Tasks;
 using VisioForge.Core.MediaInfoGST;
 using VisioForge.Core.MediaPlayerGST;
 using VisioForge.Core.Types.Events;
@@ -84,7 +81,7 @@ namespace Simple_Video_Player_Avalonia
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _player.Close();
+            _player.Stop();
         }
 
         private void InitializeComponent()
@@ -247,7 +244,6 @@ namespace Simple_Video_Player_Avalonia
             _tmPosition.Stop();
 
             await _player.StopAsync();
-            await _player.CloseAsync();
 
             tbTimeline.Value = 0;
             lbTimeline.Text = "00:00:00 / 00:00:00";
