@@ -9,7 +9,7 @@
 * Added GtkSharp UI framework support for video rendering
 * FastEdit API has been changed to async
 * Resolved screen flip issue with Video_Effects_AllowMultipleStreams property of Video Capture SDK .Net core 
-* Updated RTSP MultiView demo
+* Updated RTSP MultiView demo (added GPU decoding, added RAW streams access)
 * Added OnLoop event into Media Player SDK .Net
 * Added Loop feature into Media Blocks SDK .Net
 * Avalonia VideoView downgrade to 0.10.12 because of Avalonia UI problems with NativeControl 

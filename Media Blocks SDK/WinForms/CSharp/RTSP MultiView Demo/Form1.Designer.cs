@@ -63,6 +63,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.cbReencodeAudio = new System.Windows.Forms.CheckBox();
+            this.cbRAWEvents = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -393,11 +394,24 @@
             this.cbReencodeAudio.Text = "Reencode audio";
             this.cbReencodeAudio.UseVisualStyleBackColor = true;
             // 
+            // cbRAWEvents
+            // 
+            this.cbRAWEvents.AutoSize = true;
+            this.cbRAWEvents.Checked = true;
+            this.cbRAWEvents.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbRAWEvents.Location = new System.Drawing.Point(1633, 186);
+            this.cbRAWEvents.Name = "cbRAWEvents";
+            this.cbRAWEvents.Size = new System.Drawing.Size(208, 24);
+            this.cbRAWEvents.TabIndex = 35;
+            this.cbRAWEvents.Text = "RAW video/audio events";
+            this.cbRAWEvents.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.cbRAWEvents);
             this.Controls.Add(this.cbReencodeAudio);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.edFilename);
@@ -477,6 +491,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox cbReencodeAudio;
+        private System.Windows.Forms.CheckBox cbRAWEvents;
     }
 }
 

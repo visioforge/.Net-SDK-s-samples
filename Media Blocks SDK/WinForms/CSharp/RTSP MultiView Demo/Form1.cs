@@ -100,6 +100,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     Password = edPassword.Text,
                     UseGPUDecoder = cbUseGPU.Checked,
                     CompatibilityMode = cbCompatibilityMode.Checked,
+                    EnableRAWVideoAudioEvents = cbRAWEvents.Checked
                 };
 
                 if (cbGPUDecoder.SelectedIndex > 0)
@@ -107,12 +108,54 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     rtspSettings.CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
                 }
 
-                _playEngines[id] = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
+                var engine = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
+                _playEngines[id] = engine;
+
+                if (rtspSettings.EnableRAWVideoAudioEvents)
+                {
+                    engine.OnAudioRAWFrame += Engine_OnAudioRAWFrame;
+                    engine.OnVideoRAWFrame += Engine_OnVideoRAWFrame;
+                }
             }
 
             _playEngines[id].OnError += Engine_OnError;
 
+            _rawVideoFrameReceived = false;
+            _rawAudioFrameReceived = false;
+
             await _playEngines[id].StartAsync();
+        }
+
+        bool _rawVideoFrameReceived;
+
+        bool _rawAudioFrameReceived;
+
+        private void Engine_OnVideoRAWFrame(object sender, VisioForge.Core.Types.Events.DataFrameEventArgs e)
+        {
+            if (_rawVideoFrameReceived)
+            {
+                return;
+            }
+
+            Invoke((Action)(() =>
+            {
+                edLog.Text += $"RAW video frame received" + Environment.NewLine;
+                _rawVideoFrameReceived = true;
+            }));
+        }
+
+        private void Engine_OnAudioRAWFrame(object sender, VisioForge.Core.Types.Events.DataFrameEventArgs e)
+        {
+            if (_rawAudioFrameReceived)
+            {
+                return;
+            }
+
+            Invoke((Action)(() =>
+            {
+                edLog.Text += $"RAW audio frame received" + Environment.NewLine;
+                _rawAudioFrameReceived = true;
+            }));
         }
 
         private void Engine_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)

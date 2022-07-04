@@ -48,6 +48,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tmProgress = new System.Windows.Forms.Timer(this.components);
+            this.cbForceRecompress = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -191,11 +192,22 @@
             this.tmProgress.Interval = 500;
             this.tmProgress.Tick += new System.EventHandler(this.tmProgress_Tick);
             // 
+            // cbForceRecompress
+            // 
+            this.cbForceRecompress.AutoSize = true;
+            this.cbForceRecompress.Location = new System.Drawing.Point(395, 325);
+            this.cbForceRecompress.Name = "cbForceRecompress";
+            this.cbForceRecompress.Size = new System.Drawing.Size(163, 24);
+            this.cbForceRecompress.TabIndex = 15;
+            this.cbForceRecompress.Text = "Force recompress";
+            this.cbForceRecompress.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 608);
+            this.Controls.Add(this.cbForceRecompress);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.edKey);
             this.Controls.Add(this.label5);
@@ -240,5 +252,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Timer tmProgress;
+        private System.Windows.Forms.CheckBox cbForceRecompress;
     }
 }

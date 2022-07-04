@@ -75,6 +75,11 @@ namespace File_Encryptor
                 }
             }
 
+            if (cbForceRecompress.Checked)
+            {
+                _fastEncrypt = false;
+            }
+
             // fast encrypt or reencoding
             if (_fastEncrypt)
             {

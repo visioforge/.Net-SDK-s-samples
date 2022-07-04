@@ -32,6 +32,10 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
+        public event EventHandler<DataFrameEventArgs> OnAudioRAWFrame;
+
+        public event EventHandler<DataFrameEventArgs> OnVideoRAWFrame;
+
         public RTSPPlayEngine(RTSPSourceSettings rtspSettings, IVideoView videoView)
         {
             URL = rtspSettings.Uri.ToString();
@@ -41,6 +45,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += _pipeline_OnError;
+
             _source = new RTSPSourceBlock(rtspSettings);
 
             _videoRenderer = new VideoRendererBlock(videoView);
@@ -61,11 +66,17 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public Task<bool> StartAsync()
         {
+            _source.OnAudioRAWFrame += OnAudioRAWFrame;
+            _source.OnVideoRAWFrame += OnVideoRAWFrame;
+
             return _pipeline.StartAsync();
         }
 
         public Task<bool> StopAsync()
         {
+            _source.OnAudioRAWFrame -= OnAudioRAWFrame;
+            _source.OnVideoRAWFrame -= OnVideoRAWFrame;
+
             return _pipeline.StopAsync();
         }
 
