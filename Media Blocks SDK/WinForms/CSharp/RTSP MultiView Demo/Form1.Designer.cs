@@ -195,9 +195,9 @@
             this.cbUseGPU.Enabled = false;
             this.cbUseGPU.Location = new System.Drawing.Point(1487, 246);
             this.cbUseGPU.Name = "cbUseGPU";
-            this.cbUseGPU.Size = new System.Drawing.Size(236, 24);
+            this.cbUseGPU.Size = new System.Drawing.Size(223, 24);
             this.cbUseGPU.TabIndex = 22;
-            this.cbUseGPU.Text = "Use GPU for video decoding";
+            this.cbUseGPU.Text = "Use custom video decoder";
             this.cbUseGPU.UseVisualStyleBackColor = true;
             // 
             // cbGPUDecoder

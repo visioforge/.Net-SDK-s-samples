@@ -33,7 +33,7 @@ namespace Main_Demo
         {
             if (cbAudAmplifyEnabled.Checked)
             {
-                var amplify = new Amplify(tbAudAmplifyAmp.Value / 100.0);
+                var amplify = new AmplifyAudioEffect(tbAudAmplifyAmp.Value / 100.0);
                 _player.Audio_Effects_AddOrUpdate(amplify);
             }
         }
@@ -42,7 +42,7 @@ namespace Main_Demo
         {
             if (cbAudBalanceEnabled.Checked)
             {
-                var balance = new AudioBalance(tbAudBalanceLevel.Value / 10.0);
+                var balance = new BalanceAudioEffect(tbAudBalanceLevel.Value / 10.0);
                 _player.Audio_Effects_AddOrUpdate(balance);
             }
         }
@@ -51,7 +51,7 @@ namespace Main_Demo
         {
             if (cbAudEchoEnabled.Checked)
             {
-                var echo = new Echo(TimeSpan.FromMilliseconds(tbAudEchoDelay.Value))
+                var echo = new EchoAudioEffect(TimeSpan.FromMilliseconds(tbAudEchoDelay.Value))
                 {
                     Intensity = this.tbAudEchoIntensity.Value / 100.0f,
                     Feedback = this.tbAudEchoFeedback.Value / 100.0f
@@ -77,7 +77,7 @@ namespace Main_Demo
                 levels[8] = tbAudEq8.Value;
                 levels[9] = tbAudEq9.Value;
 
-                var eq = new Equalizer10(levels);
+                var eq = new Equalizer10AudioEffect(levels);
                 _player.Audio_Effects_AddOrUpdate(eq);
             }
         }
@@ -96,7 +96,7 @@ namespace Main_Demo
         {
             if (cbResizeEnabled.Checked)
             {
-                var resize = new Resize(
+                var resize = new ResizeVideoEffect(
                     Convert.ToInt32(edResizeWidth.Text),
                     Convert.ToInt32(edResizeHeight.Text))
                 {
@@ -133,7 +133,7 @@ namespace Main_Demo
 
             if (cbFishEyeEnabled.Checked)
             {
-                var fishEye = new GSTFishEye();
+                var fishEye = new FishEyeVideoEffect();
                 _player.Video_Effects_AddOrUpdate(fishEye);
             }
 
@@ -152,7 +152,7 @@ namespace Main_Demo
         {
             if (cbImageOverlayEnabled.Checked)
             {
-                var imageOverlay = new ImageOverlay(edImageOverlayFilename.Text)
+                var imageOverlay = new ImageOverlayVideoEffect(edImageOverlayFilename.Text)
                 {
                     Alpha = tbImageOverlayAlpha.Value / 100.0,
                     X = Convert.ToInt32(edImageOverlayX.Text),
@@ -172,7 +172,7 @@ namespace Main_Demo
         {
             if (cbGaussianBlurEnabled.Checked)
             {
-                var blur = new GaussianBlur(tbGaussianBlur.Value / 10.0);
+                var blur = new GaussianBlurVideoEffect(tbGaussianBlur.Value / 10.0);
                 _player.Video_Effects_AddOrUpdate(blur);
             }
         }
@@ -181,7 +181,7 @@ namespace Main_Demo
         {
             if (cbVideoBalanceEnabled.Checked)
             {
-                var colorBalance = new VideoBalance
+                var colorBalance = new VideoBalanceVideoEffect
                 {
                     Brightness = tbVideoBrightness.Value / 100.0,
                     Contrast = tbVideoContrast.Value / 100.0,
@@ -197,7 +197,7 @@ namespace Main_Demo
         {
             if (cbColorEffectEnabled.Checked)
             {
-                var colorEffect = new ColorEffects((ColorEffectsPreset)cbColorEffect.SelectedIndex);
+                var colorEffect = new ColorEffectsVideoEffect((ColorEffectsPreset)cbColorEffect.SelectedIndex);
                 _player.Video_Effects_AddOrUpdate(colorEffect);
             }
         }
@@ -206,7 +206,7 @@ namespace Main_Demo
         {
             if (cbFlipRotateEnabled.Checked)
             {
-                var flipRotate = new FlipRotate((VideoFlipRotateMethod)cbFlipRotate.SelectedIndex);
+                var flipRotate = new FlipRotateVideoEffect((VideoFlipRotateMethod)cbFlipRotate.SelectedIndex);
                 _player.Video_Effects_AddOrUpdate(flipRotate);
             }
         }
@@ -215,7 +215,7 @@ namespace Main_Demo
         {
             if (cbDeinterlaceEnabled.Checked)
             {
-                var deinterlace = new Deinterlace
+                var deinterlace = new DeinterlaceVideoEffect
                 {
                     DropOrphans = cbDeinterlaceDropOrphans.Checked,
                     IgnoreObscure = cbDeinterlaceIgnoreObscure.Checked,
@@ -234,7 +234,7 @@ namespace Main_Demo
         {
             if (cbTextOverlayEnabled.Checked)
             {
-                var textOverlay = new TextOverlay
+                var textOverlay = new TextOverlayVideoEffect
                 {
                     Mode = (TextOverlayMode)cbTextOverlayMode.SelectedIndex,
                     Text = edTextOverlayText.Text,

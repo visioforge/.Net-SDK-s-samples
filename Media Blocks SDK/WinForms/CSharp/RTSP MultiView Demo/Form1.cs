@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using VisioForge.Core.MediaBlocks;
@@ -14,7 +15,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private RTSPRecordEngine[] _recordEngines = new RTSPRecordEngine[9];
 
-        private Tuple<string, string>[] _hwDecoders;
+        private List<Tuple<string, string>> _customDecoders;
 
         public Form1()
         {
@@ -34,8 +35,16 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             // HW decoders
             cbGPUDecoder.Items.Add("None");
 
-            _hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
-            foreach (var item in _hwDecoders)
+            var hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
+            var swH264Decoders = MediaBlocksPipeline.GetSoftwareH264Decoders();
+            var swH265Decoders = MediaBlocksPipeline.GetSoftwareH265Decoders();
+
+            _customDecoders = new List<Tuple<string, string>>();
+            _customDecoders.AddRange(hwDecoders);
+            _customDecoders.AddRange(swH264Decoders);
+            _customDecoders.AddRange(swH265Decoders);
+
+            foreach (var item in _customDecoders)
             {
                 cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));
             }
@@ -105,7 +114,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
                 if (cbGPUDecoder.SelectedIndex > 0)
                 {
-                    rtspSettings.CustomVideoDecoder = _hwDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                    rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
                 }
 
                 var engine = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
