@@ -113,8 +113,8 @@
     <PackageReference Include="VisioForge.GStreamer.Core.Android">
       <Version>1.20.1</Version>
     </PackageReference>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.3.42" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.3.42" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.3.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.3.43" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.5.0.2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />

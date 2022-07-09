@@ -7,9 +7,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.42" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.42" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.42" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.3.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.3.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.3.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.3.43" />
   </ItemGroup>
 </Project>
