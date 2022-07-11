@@ -116,6 +116,7 @@ namespace Encrypted_Memory_Playback_Demo
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
+            MediaPlayer1.Audio_PlayAudio = audioPresent;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
             MediaPlayer1.Video_Renderer_SetAuto();
