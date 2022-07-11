@@ -38,6 +38,18 @@ namespace Encrypted_Memory_Playback_Demo
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+        }
+
+        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
+        {
+            timer1.Enabled = false;
+
+            _fileStream?.Dispose();
+            _fileStream = null;
+
+            _decryptor?.Dispose();
+            _decryptor = null;
         }
 
         private void DestroyEngine()
