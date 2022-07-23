@@ -53,6 +53,5 @@
 		<Button Grid.Column="2" Height="32" Width="70" Margin="150,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Pause" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btPause"/>
 		<Button Grid.Column="2" Height="32" Width="70" Margin="225,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Stop" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btStop"/>
 		<Button Grid.Column="2" Height="32" Width="120" Margin="320,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Next frame" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btNextFrame"/>
-		<Button Grid.Column="2" Height="32" Width="120" Margin="320,570,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Save snapshot" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btSaveSnapshot"/>
 	</Grid>
 </Window>

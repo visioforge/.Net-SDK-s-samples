@@ -57,8 +57,6 @@ namespace Simple_Video_Player_Avalonia
 
         private ComboBox cbAudioOutputDevice;
 
-        private Button btSaveSnapshot;
-
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
         public ObservableCollection<string> Info { get; set; } = new ObservableCollection<string>();
@@ -176,9 +174,6 @@ namespace Simple_Video_Player_Avalonia
             btReadInfo = this.FindControl<Button>("btReadInfo");
             btReadInfo.Click += btReadInfo_Click;
 
-            btSaveSnapshot = this.FindControl<Button>("btSaveSnapshot");
-            btSaveSnapshot.Click += btSaveSnapshot_Click;
-
             cbDebugMode = this.FindControl<CheckBox>("cbDebugMode");
             cbPlayAudio = this.FindControl<CheckBox>("cbPlayAudio");
 
@@ -186,30 +181,6 @@ namespace Simple_Video_Player_Avalonia
 
             _tmPosition = new System.Timers.Timer(1000);
             _tmPosition.Elapsed += tmPosition_Elapsed;
-        }
-
-#pragma warning disable S1186
-#pragma warning disable CS1998
-        private async void btSaveSnapshot_Click(object sender, RoutedEventArgs e)
-#pragma warning restore CS1998
-#pragma warning restore S1186
-        {
-#if NET_WINDOWS
-            var sfd = new SaveFileDialog();
-            sfd.InitialFileName = "frame.jpg";
-            sfd.DefaultExtension = ".jpg";
-
-            var filter = new FileDialogFilter();
-            filter.Name = "JPEG image";
-            filter.Extensions.Add("jpg");
-            sfd.Filters.Add(filter);
-
-            var file = await sfd.ShowAsync(this);
-            if (!string.IsNullOrEmpty(file))
-            {
-                await _player.Snapshot_SaveAsync(file, ImageFormat.Jpeg);
-            }
-#endif
         }
 
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)

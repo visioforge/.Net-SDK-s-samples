@@ -6,12 +6,12 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Simple_Player_Demo")]
+[assembly: AssemblyTitle("Simple_Player_Demo_MP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Simple_Player_Demo")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyProduct("Simple_Player_Demo_MP")]
+[assembly: AssemblyCopyright("Copyright © 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
@@ -22,5 +22,5 @@ using Android.App;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("15.3.46.0")]
-[assembly: AssemblyFileVersion("15.3.46.0")]
+[assembly: AssemblyVersion("15.4.0.0")]
+[assembly: AssemblyFileVersion("15.4.0.0")]

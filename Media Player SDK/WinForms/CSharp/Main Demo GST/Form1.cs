@@ -8,6 +8,7 @@ namespace Main_Demo
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.IO;
     using System.Windows.Forms;
     using VisioForge.Core.MediaInfoGST;
     using VisioForge.Core.MediaPlayerGST;
@@ -152,14 +153,21 @@ namespace Main_Demo
         {
             if (cbImageOverlayEnabled.Checked)
             {
-                var imageOverlay = new ImageOverlayVideoEffect(edImageOverlayFilename.Text)
+                var filename = edImageOverlayFilename.Text;
+                if (!File.Exists(filename))
+                {
+                    MessageBox.Show("Image logo file not found.");
+                    return;
+                }
+
+                var imageOverlay = new ImageOverlayVideoEffect(filename)
                 {
                     Alpha = tbImageOverlayAlpha.Value / 100.0,
                     X = Convert.ToInt32(edImageOverlayX.Text),
                     Y = Convert.ToInt32(edImageOverlayY.Text)
                 };
 
-                var bmp = new Bitmap(edImageOverlayFilename.Text);
+                var bmp = new Bitmap(filename);
                 imageOverlay.Width = bmp.Width;
                 imageOverlay.Height = bmp.Height;
                 bmp.Dispose();
@@ -729,6 +737,14 @@ namespace Main_Demo
             _player.Subtitles_Settings.Visible = cbSubtitlesEnabled.Checked;
 
             _player.Subtitles_Settings_Update();
+        }
+
+        private void btImageOverlayOpen_Click(object sender, EventArgs e)
+        {
+            if (dlgOpenImage.ShowDialog(this) == DialogResult.OK)
+            {
+                edImageOverlayFilename.Text = dlgOpenImage.FileName;
+            }
         }
     }
 }

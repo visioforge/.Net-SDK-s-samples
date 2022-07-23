@@ -5,7 +5,7 @@ using Android.Views;
 using AndroidX.AppCompat.App;
 using System;
 
-namespace Simple_Player_Demo
+namespace Simple_Player_Demo_MP
 {
     using Android.Widget;
     using System.Globalization;
@@ -193,14 +193,6 @@ namespace Simple_Player_Demo
 
             var pos = _player.Position_Get();
             var progress = (int)pos.TotalMilliseconds;
-            if (progress > sbTimeline.Max)
-            {
-                sbTimeline.Progress = sbTimeline.Max;
-            }
-            else
-            {
-                sbTimeline.Progress = progress;
-            }
 
             try
             {
@@ -209,6 +201,15 @@ namespace Simple_Player_Demo
                     if (_player == null)
                     {
                         return;
+                    }
+
+                    if (progress > sbTimeline.Max)
+                    {
+                        sbTimeline.Progress = sbTimeline.Max;
+                    }
+                    else
+                    {
+                        sbTimeline.Progress = progress;
                     }
 
                     // This is where the received data is passed
