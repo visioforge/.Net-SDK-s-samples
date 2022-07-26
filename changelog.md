@@ -1,4 +1,7 @@
 15.x
+* Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine
+
+15.4
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
 * Updated HighDPI support in WinForms samples
 * Resolved an issue with HighDPI support for Direct2D video renderer
