@@ -1,5 +1,5 @@
 15.x
-* Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine
+* Added NetworkDisconnect event support to the MJPEG Low Latency IP camera engine
 
 15.4
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
