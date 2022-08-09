@@ -155,7 +155,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
             _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);

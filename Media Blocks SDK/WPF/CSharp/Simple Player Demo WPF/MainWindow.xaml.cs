@@ -77,7 +77,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
             _fileSource = new FileSourceBlock(edFilename.Text);
 
-            _videoRenderer = new VideoRendererBlock(VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
             _audioRenderer = new AudioRendererBlock();

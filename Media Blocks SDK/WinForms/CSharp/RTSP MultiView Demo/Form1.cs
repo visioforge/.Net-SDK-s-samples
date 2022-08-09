@@ -22,7 +22,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.Init();
+            MediaBlocksPipeline.InitSDK();
         }
 
         private void Form1_Load(object sender, EventArgs e)

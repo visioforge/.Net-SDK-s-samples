@@ -56,7 +56,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _source = new FileSourceBlock(urix);
 
-            _videoRenderer = new VideoRendererBlock(videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 

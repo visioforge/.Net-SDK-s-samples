@@ -177,7 +177,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             if (videoStream)
             {
-                _videoRenderer = new VideoRendererBlock(VideoView1);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
