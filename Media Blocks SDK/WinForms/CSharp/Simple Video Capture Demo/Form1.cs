@@ -10,12 +10,12 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.GST.AudioEncoders;
 using VisioForge.Core.Types.GST.Sinks;
 using VisioForge.Core.Types.GST.Sources;
 using VisioForge.Core.Types.GST.VideoEncoders;
-using VisioForge.Core.Types.MediaInfo;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo
 {
@@ -166,7 +166,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 _videoTee = new TeeBlock(2);
                 _audioTee = new TeeBlock(2);
                 _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
-                _aacEncoder = new AACEncoderBlock(new AACEncoderSettings());
+                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
                 _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(@"c:\vf\output.mp4"));
             }
 

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player Avalonia (NuGet) netcore31", "Avalonia\Simple Video Player Avalonia\Simple Video Player Avalonia (NuGet) netcore31.csproj", "{AF373F62-81A0-44C4-AFED-BCA48EAD4392}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Debug|x86.Build.0 = Debug|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Release|x86.ActiveCfg = Release|Any CPU
+		{AF373F62-81A0-44C4-AFED-BCA48EAD4392}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
+	EndGlobalSection
+EndGlobal

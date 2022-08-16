@@ -14,15 +14,19 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 {
     public class RTSPRecordEngine : IDisposable
     {
-        private MediaBlocksPipeline _pipeline;
+        public MediaBlocksPipeline Pipeline { get; private set; }
 
-        private MPEGTSSinkBlock _tsSink;
+        private MPEGTSSinkBlock _tsMuxer;
+
+        private MP4SinkBlock _mp4Muxer;
 
         private RTSPRAWSourceBlock _rtspRawSource;
 
         private DecodeBinBlock _decodeBin;
 
-        private AACEncoderBlock _aacEncoder;
+        private AACEncoderBlock _audioEncoder;
+
+        //private MP3EncoderBlock _audioEncoder;
 
         private bool disposedValue;
 
@@ -32,45 +36,71 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public bool ReencodeAudio { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether MP4 output used instead MPEG-TS.
+        /// </summary>
+        public bool MP4 { get; set; }
+
         public Task<bool> StartAsync(RTSPRAWSourceSettings rtspSettings)
         {
-            _pipeline = new MediaBlocksPipeline(true);
-            _pipeline.OnError += OnError;
+            Pipeline = new MediaBlocksPipeline(true);
+            Pipeline.OnError += OnError;
+            // Pipeline.Debug_Mode = true;
 
             _rtspRawSource = new RTSPRAWSourceBlock(rtspSettings);
 
-            _tsSink = new MPEGTSSinkBlock(new MPEGTSSinkSettings(Filename));
+            MediaBlockPad inputVideoPad;
+            MediaBlockPad inputAudioPad;
 
-            _pipeline.Connect(_rtspRawSource.VideoOutput, _tsSink.CreateNewInput(MediaBlockPadMediaType.Video));
+            if (MP4)
+            {
+                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(Filename));
+                inputVideoPad = _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video);
+                inputAudioPad = _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio);
+            }
+            else
+            {
+                _tsMuxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(Filename));
+                inputVideoPad = _tsMuxer.CreateNewInput(MediaBlockPadMediaType.Video);
+                inputAudioPad = _tsMuxer.CreateNewInput(MediaBlockPadMediaType.Audio);
+            }
+
+            Pipeline.Connect(_rtspRawSource.VideoOutput, inputVideoPad);
 
             if (rtspSettings.AudioEnabled)
             {
                 if (ReencodeAudio)
                 {
-                    _decodeBin = new DecodeBinBlock();
-                    _aacEncoder = new AACEncoderBlock(new AACEncoderSettings());
+                    _decodeBin = new DecodeBinBlock(false, true, false)
+                    {
+                        DisableAudioConverter = true
+                    };
 
-                    _pipeline.Connect(_rtspRawSource.AudioOutput, _decodeBin.Input);
-                    _pipeline.Connect(_decodeBin.Output, _aacEncoder.Input);
-                    _pipeline.Connect(_aacEncoder.Output, _tsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    _audioEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
+
+                    //_audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+
+                    Pipeline.Connect(_rtspRawSource.AudioOutput, _decodeBin.Input);
+                    Pipeline.Connect(_decodeBin.AudioOutput, _audioEncoder.Input);
+                    Pipeline.Connect(_audioEncoder.Output, inputAudioPad);
                 }
                 else
                 {
-                    _pipeline.Connect(_rtspRawSource.AudioOutput, _tsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    Pipeline.Connect(_rtspRawSource.AudioOutput, inputAudioPad);
                 }
             }
 
-            return _pipeline.StartAsync();
+            return Pipeline.StartAsync();
         }
 
         public Task<bool> StopAsync()
         {
-            if (_pipeline == null)
+            if (Pipeline == null)
                 return Task.FromResult(false);
 
-            _pipeline.OnError -= OnError;
+            Pipeline.OnError -= OnError;
 
-            return _pipeline.StopAsync();
+            return Pipeline.StopAsync();
 
         }
 
@@ -82,15 +112,18 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 {
                 }
 
-                if (_pipeline != null)
+                if (Pipeline != null)
                 {
-                    _pipeline.OnError -= OnError;
-                    _pipeline.Dispose();
-                    _pipeline = null;
+                    Pipeline.OnError -= OnError;
+                    Pipeline.Dispose();
+                    Pipeline = null;
                 }
 
-                _tsSink?.Dispose();
-                _tsSink = null;
+                _mp4Muxer?.Dispose();
+                _mp4Muxer = null;
+
+                _tsMuxer?.Dispose();
+                _tsMuxer = null;
 
                 _rtspRawSource?.Dispose();
                 _rtspRawSource = null;
@@ -98,8 +131,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _decodeBin?.Dispose();
                 _decodeBin = null;
 
-                _aacEncoder?.Dispose();
-                _aacEncoder = null;
+                _audioEncoder?.Dispose();
+                _audioEncoder = null;
 
                 disposedValue = true;
             }

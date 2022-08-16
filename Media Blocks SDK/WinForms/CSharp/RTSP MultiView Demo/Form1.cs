@@ -30,7 +30,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+            edFilename.Text = @"c:\vf\outputxx.ts";
 
             // HW decoders
             cbGPUDecoder.Items.Add("None");
@@ -281,6 +282,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             _recordEngines[id].OnError += Engine_OnError;
             _recordEngines[id].Filename = edFilename.Text;
             _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
+            _recordEngines[id].MP4 = rbMP4Output.Checked;
 
             await _recordEngines[id].StartAsync(rtspSettings);
         }

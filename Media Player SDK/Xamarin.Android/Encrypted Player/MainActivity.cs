@@ -59,7 +59,7 @@ namespace Encrypted_File_Player_Demo_XA
 
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
-            _player = new MediaPlayerGST(videoView, JNIEnv.Handle, this);
+            _player = new MediaPlayerGST(videoView, this);
             _player.OnStart += _player_OnStart;
 
             btOpenFile = FindViewById<Button>(Resource.Id.btOpenFile);

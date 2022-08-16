@@ -64,6 +64,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.cbReencodeAudio = new System.Windows.Forms.CheckBox();
             this.cbRAWEvents = new System.Windows.Forms.CheckBox();
+            this.rbMPEGTSOutput = new System.Windows.Forms.RadioButton();
+            this.rbMP4Output = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -212,17 +214,17 @@
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(1487, 587);
+            this.edLog.Location = new System.Drawing.Point(1487, 614);
             this.edLog.Multiline = true;
             this.edLog.Name = "edLog";
             this.edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edLog.Size = new System.Drawing.Size(412, 240);
+            this.edLog.Size = new System.Drawing.Size(412, 368);
             this.edLog.TabIndex = 25;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1483, 564);
+            this.label5.Location = new System.Drawing.Point(1483, 591);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 26;
@@ -250,7 +252,7 @@
             // 
             // btStartRecord
             // 
-            this.btStartRecord.Location = new System.Drawing.Point(1487, 481);
+            this.btStartRecord.Location = new System.Drawing.Point(1487, 522);
             this.btStartRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStartRecord.Name = "btStartRecord";
             this.btStartRecord.Size = new System.Drawing.Size(112, 35);
@@ -261,7 +263,7 @@
             // 
             // btStopRecord
             // 
-            this.btStopRecord.Location = new System.Drawing.Point(1607, 481);
+            this.btStopRecord.Location = new System.Drawing.Point(1607, 522);
             this.btStopRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btStopRecord.Name = "btStopRecord";
             this.btStopRecord.Size = new System.Drawing.Size(112, 35);
@@ -356,9 +358,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1483, 417);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(274, 20);
+            this.label6.Size = new System.Drawing.Size(328, 20);
             this.label6.TabIndex = 31;
-            this.label6.Text = "Record original video to MPEG-TS file";
+            this.label6.Text = "Record original video to MPEG-TS or MP4 file";
             // 
             // edFilename
             // 
@@ -387,7 +389,7 @@
             this.cbReencodeAudio.AutoSize = true;
             this.cbReencodeAudio.Checked = true;
             this.cbReencodeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReencodeAudio.Location = new System.Drawing.Point(1745, 487);
+            this.cbReencodeAudio.Location = new System.Drawing.Point(1747, 482);
             this.cbReencodeAudio.Name = "cbReencodeAudio";
             this.cbReencodeAudio.Size = new System.Drawing.Size(152, 24);
             this.cbReencodeAudio.TabIndex = 34;
@@ -406,11 +408,35 @@
             this.cbRAWEvents.Text = "RAW video/audio events";
             this.cbRAWEvents.UseVisualStyleBackColor = true;
             // 
+            // rbMPEGTSOutput
+            // 
+            this.rbMPEGTSOutput.AutoSize = true;
+            this.rbMPEGTSOutput.Checked = true;
+            this.rbMPEGTSOutput.Location = new System.Drawing.Point(1487, 481);
+            this.rbMPEGTSOutput.Name = "rbMPEGTSOutput";
+            this.rbMPEGTSOutput.Size = new System.Drawing.Size(106, 24);
+            this.rbMPEGTSOutput.TabIndex = 36;
+            this.rbMPEGTSOutput.TabStop = true;
+            this.rbMPEGTSOutput.Text = "MPEG-TS";
+            this.rbMPEGTSOutput.UseVisualStyleBackColor = true;
+            // 
+            // rbMP4Output
+            // 
+            this.rbMP4Output.AutoSize = true;
+            this.rbMP4Output.Location = new System.Drawing.Point(1609, 481);
+            this.rbMP4Output.Name = "rbMP4Output";
+            this.rbMP4Output.Size = new System.Drawing.Size(66, 24);
+            this.rbMP4Output.TabIndex = 37;
+            this.rbMP4Output.Text = "MP4";
+            this.rbMP4Output.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.rbMP4Output);
+            this.Controls.Add(this.rbMPEGTSOutput);
             this.Controls.Add(this.cbRAWEvents);
             this.Controls.Add(this.cbReencodeAudio);
             this.Controls.Add(this.button1);
@@ -492,6 +518,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox cbReencodeAudio;
         private System.Windows.Forms.CheckBox cbRAWEvents;
+        private System.Windows.Forms.RadioButton rbMPEGTSOutput;
+        private System.Windows.Forms.RadioButton rbMP4Output;
     }
 }
 
