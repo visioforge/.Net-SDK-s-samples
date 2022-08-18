@@ -49,7 +49,7 @@
     <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.20.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.3" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.5" />
   </ItemGroup>
 </Project>
