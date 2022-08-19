@@ -1,0 +1,28 @@
+name: Video Edit SDK X .Net 4.7.2
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name_CS: "Video Edit SDK/VisioForge.VideoEdit.X.Demos.CS (NuGet) net472.sln"
+    
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v1
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+        
+    - name: Restore dependencies CS
+      run: dotnet restore $env:Solution_Name_CS
+
+    - name: Build app for release CS
+      run: msbuild $env:Solution_Name_CS -t:rebuild -verbosity:diag -property:Configuration=Release
