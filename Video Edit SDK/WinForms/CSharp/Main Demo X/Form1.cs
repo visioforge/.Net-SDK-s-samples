@@ -1,0 +1,687 @@
+// ReSharper disable InconsistentNaming
+
+// ReSharper disable StyleCop.SA1600
+// ReSharper disable RedundantArgumentDefaultValue
+// ReSharper disable UnusedParameter.Local
+
+
+
+// ReSharper disable NotAccessedVariable
+// ReSharper disable InlineOutVariableDeclaration
+
+// ReSharper disable StringLiteralTypo
+namespace VideoEdit_CS_Demo
+{
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Windows.Forms;
+    using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.GST.AudioEffects;
+    using VisioForge.Core.Types.GST.Output;
+    using VisioForge.Core.Types.GST.VideoEdit;
+    using VisioForge.Core.Types.GST.VideoEffects;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.VideoEditX;
+
+    /// <summary>
+    /// Main demo form.
+    /// </summary>
+    public partial class Form1 : Form
+    {
+        private VideoEditCoreX VideoEdit1;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private static string GetFileExt(string filename)
+        {
+            int k = filename.LastIndexOf('.');
+            return filename.Substring(k, filename.Length - k);
+        }
+
+        private void btClearList_Click(object sender, EventArgs e)
+        {
+            lbFiles.Items.Clear();
+            VideoEdit1.Input_Clear_List();
+        }
+
+        private void btAddInputFile_Click(object sender, EventArgs e)
+        {
+            if (OpenDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string s = OpenDialog1.FileName;
+
+                lbFiles.Items.Add(s);
+
+                //await VideoEdit1.Input_AddVideoFileAsync(s, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10), insertTime: TimeSpan.FromSeconds(0));
+
+                if ((string.Compare(GetFileExt(s), ".BMP", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".JPG", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".JPEG", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".GIF", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".PNG", StringComparison.OrdinalIgnoreCase) == 0))
+                {
+                    if (cbAddFullFile.Checked)
+                    {
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddImageFile(
+                                s,
+                                TimeSpan.FromMilliseconds(2000),
+                                null);
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddImageFile(
+                                s,
+                                TimeSpan.FromMilliseconds(2000),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                    else
+                    {
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddImageFile(
+                                s,
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)));
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddImageFile(
+                                s,
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text) - Convert.ToInt32(edStartTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                }
+                else
+                    if ((string.Compare(GetFileExt(s), ".WAV", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".MP3", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".OGG", StringComparison.OrdinalIgnoreCase) == 0) ||
+                   (string.Compare(GetFileExt(s), ".WMA", StringComparison.OrdinalIgnoreCase) == 0))
+                {
+                    if (cbAddFullFile.Checked)
+                    {
+                        var audioFile = new AudioFileSource(s);
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddAudioFile(audioFile, null);
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddAudioFile(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                    else
+                    {
+                        var audioFile = new AudioFileSource(
+                            s,
+                            TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)),
+                            TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)));
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddAudioFile(audioFile, null);
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddAudioFile(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                }
+                else
+                {
+                    if (cbAddFullFile.Checked)
+                    {
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddAudioVideoFile(s, null);
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddAudioVideoFile(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                    else
+                    {
+                        if (cbInsertAfterPreviousFile.Checked)
+                        {
+                            VideoEdit1.Input_AddAudioVideoFile(
+                                s,
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)),
+                                null);
+                        }
+                        else
+                        {
+                            VideoEdit1.Input_AddAudioVideoFile(
+                                s,
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTime.Text)),
+                                TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btSelectOutput_Click(object sender, EventArgs e)
+        {
+            if (SaveDialog1.ShowDialog() == DialogResult.OK)
+            {
+                edOutput.Text = SaveDialog1.FileName;
+            }
+        }
+
+        private void CreateEngine()
+        {
+            VideoEdit1 = new VideoEditCoreX(VideoView1 as IVideoView);
+
+            VideoEdit1.OnError += VideoEdit1_OnError;
+            VideoEdit1.OnStart += VideoEdit1_OnStart;
+            VideoEdit1.OnStop += VideoEdit1_OnStop;
+            VideoEdit1.OnProgress += VideoEdit1_OnProgress;
+
+            VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+        }
+
+        private void DestroyEngine()
+        {
+            if (VideoEdit1 != null)
+            {
+                VideoEdit1.OnError -= VideoEdit1_OnError;
+                VideoEdit1.OnStart -= VideoEdit1_OnStart;
+                VideoEdit1.OnStop -= VideoEdit1_OnStop;
+                VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+
+                VideoEdit1.Dispose();
+                VideoEdit1 = null;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CreateEngine();
+
+            Text += $" (SDK v{VideoEditCoreX.SDK_Version})";
+
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+
+            cbMode.SelectedIndex = 1;
+            cbFrameRate.SelectedIndex = 0;
+            cbOutputVideoFormat.SelectedIndex = 0;
+            cbRotate.SelectedIndex = 0;
+
+            var transitions = VideoEdit1.Video_Transitions_Names();
+            foreach (var item in transitions)
+            {
+                cbTransitionName.Items.Add(item);
+            }
+
+            cbTransitionName.SelectedIndex = 0;
+        }
+
+        private void btStart_Click(object sender, EventArgs e)
+        {
+            VideoEdit1.Debug_Mode = cbDebugMode.Checked;
+            VideoEdit1.Debug_Telemetry = cbTelemetry.Checked;
+
+            mmLog.Clear();
+
+            if (!string.IsNullOrEmpty(edWidth.Text) && !string.IsNullOrEmpty(edHeight.Text))
+            {
+                VideoEdit1.Output_VideoSize = new System.Drawing.Size(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text));
+            }
+
+            if (cbCrop.Checked)
+            {
+                VideoEdit1.Output_VideoCrop = new CropVideoEffect(
+                    Convert.ToInt32(edCropLeft.Text),
+                    Convert.ToInt32(edCropTop.Text),
+                    Convert.ToInt32(edCropRight.Text),
+                    Convert.ToInt32(edCropBottom.Text));
+            }
+            else
+            {
+                VideoEdit1.Output_VideoCrop = null;
+            }
+
+            //if (cbSubtitlesEnabled.Checked)
+            //{
+            //    VideoEdit1.Video_Subtitles = new SubtitlesSettings(edSubtitlesFilename.Text);
+            //}
+            //else
+            //{
+            //    VideoEdit1.Video_Subtitles = null;
+            //}
+
+            VideoEdit1.Output_VideoFrameRate = new VideoFrameRate(Convert.ToInt32(cbFrameRate.Text, CultureInfo.InvariantCulture));
+
+            if (cbMode.SelectedIndex == 0)
+            {
+                VideoEdit1.Output_Filename = edOutput.Text;
+
+                switch (cbOutputVideoFormat.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            var mp4Output = new MP4Output();
+                            VideoEdit1.Output_Format = mp4Output;
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            var webmOutput = new WebMOutput();
+                            VideoEdit1.Output_Format = webmOutput;
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            var mkvOutput = new MKVOutput();
+                            VideoEdit1.Output_Format = mkvOutput;
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            var wmvOutput = new WMV1Output();
+                            VideoEdit1.Output_Format = wmvOutput;
+
+                            break;
+                        }
+                    case 4:
+                        {
+                            var acmOutput = new WAVOutput();
+                            VideoEdit1.Output_Format = acmOutput;
+
+                            break;
+                        }
+                    case 5:
+                        {
+                            var mp3Output = new MP3Output();
+                            VideoEdit1.Output_Format = mp3Output;
+
+                            break;
+                        }
+                    case 6:
+                        {
+                            var m4aOutput = new M4AOutput();
+                            VideoEdit1.Output_Format = m4aOutput;
+
+                            break;
+                        }
+                    case 7:
+                        {
+                            var wmaOutput = new WMA1Output();
+                            VideoEdit1.Output_Format = wmaOutput;
+
+                            break;
+                        }
+                    case 8:
+                        {
+                            var oggVorbisOutput = new OGGVorbisOutput();
+                            VideoEdit1.Output_Format = oggVorbisOutput;
+
+                            break;
+                        }
+                    case 9:
+                        {
+                            var flacOutput = new FLACOutput();
+                            VideoEdit1.Output_Format = flacOutput;
+
+                            break;
+                        }
+                    case 10:
+                        {
+                            var speexOutput = new SpeexOutput();
+                            VideoEdit1.Output_Format = speexOutput;
+
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                VideoEdit1.Output_Filename = null;
+                VideoEdit1.Output_Format = null;
+            }
+
+            // Audio effects
+            VideoEdit1.Audio_Effects.Clear();
+
+            if (cbAudAmplifyEnabled.Checked)
+            {
+                var amplify = new AmplifyAudioEffect(tbAudAmplifyAmp.Value / 100.0);
+                VideoEdit1.Audio_Effects.Add(amplify);
+            }
+
+            if (cbAudEqualizerEnabled.Checked)
+            {
+                var levels = new double[] { tbAudEq0.Value, tbAudEq1.Value, tbAudEq2.Value, tbAudEq3.Value, tbAudEq4.Value,
+                                            tbAudEq5.Value,tbAudEq6.Value,tbAudEq7.Value,tbAudEq8.Value,tbAudEq9.Value};
+                var eq10 = new Equalizer10AudioEffect(levels);
+                VideoEdit1.Audio_Effects.Add(eq10);
+            }
+
+            // Video effects CPU
+            AddVideoEffects();
+
+            // video rotation
+            switch (cbRotate.SelectedIndex)
+            {
+                case 0:
+                    VideoEdit1.Output_VideoRotateFlip = null;
+                    break;
+                case 1:
+                    VideoEdit1.Output_VideoRotateFlip = new FlipRotateVideoEffect(VideoFlipRotateMethod.Method90R);
+                    break;
+                case 2:
+                    VideoEdit1.Output_VideoRotateFlip = new FlipRotateVideoEffect(VideoFlipRotateMethod.Method180);
+                    break;
+                case 3:
+                    VideoEdit1.Output_VideoRotateFlip = new FlipRotateVideoEffect(VideoFlipRotateMethod.Method90L);
+                    break;
+            }
+
+            VideoEdit1.Start();
+
+            //lbTransitions.Items.Clear();
+        }
+
+        private void AddVideoEffects()
+        {
+            // Deinterlace
+            if (cbDeinterlace.Checked)
+            {
+                var deint = new DeinterlaceVideoEffect();
+
+                VideoEdit1.Video_Effects.Add(deint);
+            }
+
+            // Balance
+            if (tbBrightness.Value != 0 || tbHue.Value != 0 || tbContrast.Value != 100 || tbSaturation.Value != 100)
+            {
+                var balance = new VideoBalanceVideoEffect();
+                balance.Brightness = tbBrightness.Value / 100.0;
+                balance.Hue = tbHue.Value / 100.0;
+                balance.Saturation = tbSaturation.Value / 100.0;
+                balance.Contrast = tbContrast.Value / 100.0;
+
+                VideoEdit1.Video_Effects.Add(balance);
+            }
+
+            // Grayscale
+            if (cbGreyscale.Checked)
+            {
+                var grayscale = new VideoBalanceVideoEffect();
+                grayscale.Saturation = 0;
+
+                VideoEdit1.Video_Effects.Add(grayscale);
+            }
+
+            // Sepia
+            if (cbSepia.Checked)
+            {
+                var sepia = new ColorEffectsVideoEffect(ColorEffectsPreset.Sepia);
+
+                VideoEdit1.Video_Effects.Add(sepia);
+            }
+
+            // Flip
+            if (cbFlipX.Checked)
+            {
+                var flipx = new FlipRotateVideoEffect(VideoFlipRotateMethod.MethodHorizontal);
+
+                VideoEdit1.Video_Effects.Add(flipx);
+            }
+
+            if (cbFlipY.Checked)
+            {
+                var flipy = new FlipRotateVideoEffect(VideoFlipRotateMethod.MethodVertical);
+
+                VideoEdit1.Video_Effects.Add(flipy);
+            }
+
+            // Text overlay
+            if (cbTextOverlay.Checked)
+            {
+                var textOverlay = new TextOverlay();
+
+                VideoEdit1.TextOverlays.Add(textOverlay);
+            }
+
+            // Image overlay
+            if (cbImageOverlay.Checked)
+            {
+                var imageOverlay = new ImageOverlayVideoEffect("logo.png");
+
+                VideoEdit1.Video_Effects.Add(imageOverlay);
+            }
+        }
+
+        private void btStop_Click(object sender, EventArgs e)
+        {
+            VideoEdit1.Stop();
+
+            lbFiles.Items.Clear();
+            VideoEdit1.Input_Clear_List();
+            ProgressBar1.Value = 0;
+
+            VideoEdit1.Video_Effects.Clear();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VideoEdit1.Stop();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
+            Process.Start(startInfo);
+        }
+
+        private void tbSeeking_Scroll(object sender, EventArgs e)
+        {
+            VideoEdit1.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value));
+        }
+
+        private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
+        {
+            Invoke((Action)(() =>
+                                   {
+                                       mmLog.Text = mmLog.Text + e.Message + "(" + e.CallSite + ")" + Environment.NewLine;
+                                   }));
+        }
+
+        private void VideoEdit1_OnStart(object sender, EventArgs e)
+        {
+            Invoke((Action)(() =>
+                                   {
+                                       tbSeeking.Maximum = (int)VideoEdit1.Duration().TotalMilliseconds;
+                                   }));
+        }
+
+        private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
+        {
+            Invoke((Action)(() =>
+                                   {
+                                       ProgressBar1.Value = e.Progress;
+                                   }));
+        }
+
+        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
+        {
+            Invoke((Action)(() =>
+                                   {
+                                       System.Threading.Thread.Sleep(1000);
+
+                                       ProgressBar1.Value = 0;
+                                       lbFiles.Items.Clear();
+                                       //lbTransitions.Items.Clear();
+
+                                       if (e.Successful)
+                                       {
+                                           MessageBox.Show("Completed successfully", string.Empty, MessageBoxButtons.OK);
+                                       }
+                                       else
+                                       {
+                                           MessageBox.Show("Stopped with error", string.Empty, MessageBoxButtons.OK);
+                                       }
+
+                                       // DestroyEngine();
+                                       //CreateEngine();
+                                   }));
+
+            //VideoEdit1.Input_Clear_List();
+            //VideoEdit1.Video_Transitions.Clear();
+            //VideoEdit1.Video_Effects.Clear();         
+        }
+
+        private void btAddTransition_Click(object sender, EventArgs e)
+        {
+            var trans = new VideoTransition(
+                cbTransitionName.Text,
+                TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStartTime.Text)),
+                TimeSpan.FromMilliseconds(Convert.ToInt32(edTransStopTime.Text)));
+            VideoEdit1.Video_Transitions.Add(trans);
+
+            // add to list
+            lbTransitions.Items.Add(cbTransitionName.Text +
+            "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
+        }
+
+        private void btSubtitlesSelectFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogSubtitles.ShowDialog() == DialogResult.OK)
+            {
+                edSubtitlesFilename.Text = openFileDialogSubtitles.FileName;
+            }
+        }
+
+        private void cbOutputVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbOutputVideoFormat.SelectedIndex)
+            {
+                case 0:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
+                case 1:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
+                        break;
+                    }
+                case 2:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv");
+                        break;
+                    }
+
+                case 3:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
+                case 4:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
+                        break;
+                    }
+                case 5:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
+                        break;
+                    }
+                case 6:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
+                        break;
+                    }
+                case 7:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
+                        break;
+                    }
+                case 8:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        break;
+                    }
+                case 9:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
+                        break;
+                    }
+                case 10:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        break;
+                    }
+                case 11:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
+                case 12:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        break;
+                    }
+                case 13:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
+                case 14:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        break;
+                    }
+                case 15:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        break;
+                    }
+                case 16:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        break;
+                    }
+                case 17:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
+                        break;
+                    }
+                case 18:
+                    {
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
+                        break;
+                    }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string SRC_VIDEO_FILE = @"c:\samples\!video.mp4";
+            string SRC_VIDEO_FILE_2 = @"c:\samples\!video.avi";
+
+            VideoEdit1.Input_AddAudioVideoFile(SRC_VIDEO_FILE, TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(40), insertTime: TimeSpan.FromSeconds(0));
+            VideoEdit1.Input_AddAudioVideoFile(SRC_VIDEO_FILE_2, TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(20), insertTime: TimeSpan.FromSeconds(5));
+
+            var trans = new VideoTransition(VideoTransitionType.Crossfade, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10));
+            VideoEdit1.Video_Transitions.Add(trans);
+        }
+    }
+}
+
+// ReSharper restore InconsistentNaming
