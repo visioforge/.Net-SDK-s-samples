@@ -1,5 +1,6 @@
 15.x
 * Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine 
+* Added Linux support for VideoEditCoreX based demos
 
 15.4
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
