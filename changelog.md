@@ -1,6 +1,7 @@
 15.x
 * Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine 
 * Added Linux support for VideoEditCoreX based demos
+* Added OnRTSPLowLatencyRAWFrame event to get RAW frames from RTSP stream, using RTSP Low Latency engine
 
 15.4
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
