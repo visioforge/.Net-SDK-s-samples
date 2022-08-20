@@ -455,7 +455,7 @@ namespace VideoEdit_CS_Demo
             {
                 var textOverlay = new TextOverlay();
 
-                VideoEdit1.TextOverlays.Add(textOverlay);
+                VideoEdit1.Video_TextOverlays.Add(textOverlay);
             }
 
             // Image overlay

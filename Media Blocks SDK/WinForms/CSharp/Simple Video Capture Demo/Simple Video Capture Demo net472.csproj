@@ -23,8 +23,8 @@
     <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.20.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.9" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
