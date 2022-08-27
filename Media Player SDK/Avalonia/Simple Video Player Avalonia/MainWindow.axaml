@@ -7,7 +7,7 @@
         x:Class="Simple_Video_Player_Avalonia.MainWindow"
         Title="Media Player SDK .Net Main Demo (Avalonia)"
         Width="1280" Height="720"
-        Icon="visioforge_main_icon.ico">
+        Icon="/visioforge_main_icon.ico">
 	<Grid ColumnDefinitions="0.5*,20,0.5*">
 		<TabControl Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="630" Width="620">
 			<TabItem Header="Info">

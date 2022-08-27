@@ -17,7 +17,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.GST.VideoCapture;
+using VisioForge.Core.Types.X.VideoCapture;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {

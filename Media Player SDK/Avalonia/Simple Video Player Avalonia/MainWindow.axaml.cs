@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using VisioForge.Core.MediaInfoGST;
-using VisioForge.Core.MediaPlayerGST;
+using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.UI.Avalonia;
 // ReSharper disable MemberCanBeMadeStatic.Local
@@ -21,7 +21,7 @@ namespace Simple_Video_Player_Avalonia
 
         private bool _initialized;
 
-        private MediaPlayerGST _player;
+        private MediaPlayerCoreX _player;
 
         private VideoView VideoView1;
 
@@ -122,7 +122,7 @@ namespace Simple_Video_Player_Avalonia
 
         private void InitPlayer()
         {
-            _player = new MediaPlayerGST(VideoView1);
+            _player = new MediaPlayerCoreX(VideoView1);
             _player.OnStop += Player_OnStop;
             _player.OnError += Player_OnError;
         }
@@ -310,7 +310,7 @@ namespace Simple_Video_Player_Avalonia
         {
             Info.Clear();
 
-            var infoReader = new MediaInfoGST(_player);
+            var infoReader = new MediaInfoReaderX(_player);
             await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
 
             if (infoReader.Info.VideoStreams.Count > 0)

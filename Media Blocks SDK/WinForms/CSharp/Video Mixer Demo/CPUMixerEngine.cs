@@ -11,7 +11,7 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.GST.VideoEffects;
+using VisioForge.Core.Types.X.VideoEffects;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {

@@ -11,19 +11,19 @@ namespace Main_Demo
     using System.IO;
     using System.Windows.Forms;
     using VisioForge.Core.MediaInfoGST;
-    using VisioForge.Core.MediaPlayerGST;
+    using VisioForge.Core.MediaPlayerX;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.GST;
-    using VisioForge.Core.Types.GST.AudioEffects;
-    using VisioForge.Core.Types.GST.VideoEffects;
+    using VisioForge.Core.Types.X;
+    using VisioForge.Core.Types.X.AudioEffects;
+    using VisioForge.Core.Types.X.VideoEffects;
     using VisioForge.Core.Types.MediaPlayer.GST;
     using VisioForge.Core.Types.VideoProcessing;
-    using FontStyle = VisioForge.Core.Types.GST.VideoEffects.FontStyle;
+    using FontStyle = VisioForge.Core.Types.X.VideoEffects.FontStyle;
 
     public partial class Form1 : Form
     {
-        private MediaPlayerGST _player;
+        private MediaPlayerCoreX _player;
 
         public Form1()
         {
@@ -386,7 +386,7 @@ namespace Main_Demo
         {
             if (_player == null)
             {
-                _player = new MediaPlayerGST(videoView1);
+                _player = new MediaPlayerCoreX(videoView1);
                 _player.OnStop += _player_OnStop;
                 _player.OnAudioVUMeter += _player_OnAudioVUMeter;
                 _player.OnError += _player_OnError;
@@ -449,7 +449,7 @@ namespace Main_Demo
                 ));
         }
 
-        private void _player_OnAudioVUMeter(object sender, GSTVUMeterEventArgs e)
+        private void _player_OnAudioVUMeter(object sender, VUMeterXEventArgs e)
         {
             Invoke((Action)(() =>
             {
@@ -678,7 +678,7 @@ namespace Main_Demo
 
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
-            var infoReader = new MediaInfoGST(_player);
+            var infoReader = new MediaInfoReaderX(_player);
             if (await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text)))
             {
                 if (infoReader.Info.VideoStreams.Count > 0)

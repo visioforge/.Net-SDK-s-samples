@@ -6,8 +6,8 @@ using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.GST.AudioEncoders;
-using VisioForge.Core.Types.GST.Sinks;
+using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.MediaPlayer.GST;
 
 namespace MediaBlocks_RTSP_MultiView_Demo

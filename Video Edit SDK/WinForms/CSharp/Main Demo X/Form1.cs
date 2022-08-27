@@ -20,10 +20,10 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.GST.AudioEffects;
-    using VisioForge.Core.Types.GST.Output;
-    using VisioForge.Core.Types.GST.VideoEdit;
-    using VisioForge.Core.Types.GST.VideoEffects;
+    using VisioForge.Core.Types.X.AudioEffects;
+    using VisioForge.Core.Types.X.Output;
+    using VisioForge.Core.Types.X.VideoEdit;
+    using VisioForge.Core.Types.X.VideoEffects;
     using VisioForge.Core.UI;
     using VisioForge.Core.VideoEditX;
 

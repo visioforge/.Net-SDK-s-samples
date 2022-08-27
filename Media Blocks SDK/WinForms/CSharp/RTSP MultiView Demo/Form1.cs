@@ -225,7 +225,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
-            var infoReader = new MediaInfoGST();
+            var infoReader = new MediaInfoReaderX();
 
             var uriBuilder = new UriBuilder(edURL.Text);
             if (!string.IsNullOrEmpty(edLogin.Text) && !string.IsNullOrEmpty(edPassword.Text))

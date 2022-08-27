@@ -33,7 +33,7 @@
     <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.20.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.10" />
   </ItemGroup>
 </Project>

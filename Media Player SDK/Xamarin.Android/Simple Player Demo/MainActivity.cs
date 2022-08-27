@@ -10,7 +10,7 @@ namespace Simple_Player_Demo_MP
     using Android.Widget;
     using System.Globalization;
     using System.Threading;
-    using VisioForge.Core.MediaPlayerGST;
+    using VisioForge.Core.MediaPlayerX;
     using Xamarin.Essentials;
 
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -18,7 +18,7 @@ namespace Simple_Player_Demo_MP
     {
         private string TEST_URL = "http://test.visioforge.com/video.avi";
 
-        private MediaPlayerGST _player;
+        private MediaPlayerCoreX _player;
 
         private VisioForge.Core.UI.Android.VideoView videoView;
 
@@ -52,7 +52,7 @@ namespace Simple_Player_Demo_MP
 
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
-            _player = new MediaPlayerGST(videoView, this);
+            _player = new MediaPlayerCoreX(videoView, this);
             _player.OnStart += _player_OnStart;
 
             btOpenFile = FindViewById<Button>(Resource.Id.btOpenFile);

@@ -12,10 +12,10 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.GST.AudioEncoders;
-using VisioForge.Core.Types.GST.Sinks;
-using VisioForge.Core.Types.GST.Sources;
-using VisioForge.Core.Types.GST.VideoEncoders;
+using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.Sinks;
+using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoEncoders;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo
 {

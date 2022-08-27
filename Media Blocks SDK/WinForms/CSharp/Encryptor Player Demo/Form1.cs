@@ -13,7 +13,7 @@ namespace MediaBlocks_Encryptor_Player_Demo
     using VisioForge.Core.MediaBlocks.Special;
     using VisioForge.Core.MediaBlocks.VideoRendering;
     using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.GST.Sources;
+    using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI;
 
     public partial class Form1 : Form

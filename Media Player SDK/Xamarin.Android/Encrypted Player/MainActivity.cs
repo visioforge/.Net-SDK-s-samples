@@ -7,12 +7,12 @@ using AndroidX.AppCompat.Widget;
 using AndroidX.AppCompat.App;
 using Google.Android.Material.FloatingActionButton;
 using Google.Android.Material.Snackbar;
-using VisioForge.Core.MediaPlayerGST;
+using VisioForge.Core.MediaPlayerX;
 using Android.Widget;
 using System.Globalization;
 using System.Threading;
 using Xamarin.Essentials;
-using VisioForge.Core.Types.GST.Sources;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoEncryption;
 using System.IO;
 
@@ -23,7 +23,7 @@ namespace Encrypted_File_Player_Demo_XA
     {
         private string TEST_URL = "http://test.visioforge.com/video.avi";
 
-        private MediaPlayerGST _player;
+        private MediaPlayerCoreX _player;
 
         private VisioForge.Core.UI.Android.VideoView videoView;
 
@@ -59,7 +59,7 @@ namespace Encrypted_File_Player_Demo_XA
 
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
-            _player = new MediaPlayerGST(videoView, this);
+            _player = new MediaPlayerCoreX(videoView, this);
             _player.OnStart += _player_OnStart;
 
             btOpenFile = FindViewById<Button>(Resource.Id.btOpenFile);

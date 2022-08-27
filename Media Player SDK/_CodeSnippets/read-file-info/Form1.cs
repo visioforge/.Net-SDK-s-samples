@@ -6,8 +6,8 @@ using System.Windows.Forms;
 namespace read_file_info
 {
     using VisioForge.Core;
-    using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.MediaInfo;
+    using VisioForge.Core.Types.MediaPlayer;
 
     public partial class Form1 : Form
     {
@@ -15,7 +15,7 @@ namespace read_file_info
         {
             InitializeComponent();
 
-            CustomRedist.ConfigureLocalRedist(out var _);
+            MediaInfoReader.ConfigureLocalRedist();
         }
 
         private void btOpenFile_Click(object sender, EventArgs e)

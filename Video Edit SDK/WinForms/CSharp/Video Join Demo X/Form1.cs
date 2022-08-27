@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Core.Types;
-using VisioForge.Core.Types.GST.Output;
+using VisioForge.Core.Types.X.Output;
 
 namespace Video_Join_Demo
 {
@@ -56,14 +56,14 @@ namespace Video_Join_Demo
                 string filename = OpenDialog1.FileName;
 
                 // if resolution and output format not set we should set it the same as in added file
-                MediaInfoGST mediaInfo = null;
+                MediaInfoReaderX mediaInfo = null;
                 if (cbResize.Checked)
                 {
                     VideoEdit1.Output_VideoSize = new System.Drawing.Size(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text));
                 }
                 else
                 {
-                    mediaInfo = new MediaInfoGST();
+                    mediaInfo = new MediaInfoReaderX();
                     if (mediaInfo.Open(filename) && mediaInfo.Info.VideoStreams.Count > 0)
                     {
                         VideoEdit1.Output_VideoSize = new System.Drawing.Size(mediaInfo.Info.VideoStreams[0].Width, mediaInfo.Info.VideoStreams[0].Height);
@@ -75,7 +75,7 @@ namespace Video_Join_Demo
                 {
                     if (mediaInfo == null)
                     {
-                        mediaInfo = new MediaInfoGST();
+                        mediaInfo = new MediaInfoReaderX();
                         mediaInfo.Open(filename);
                     }
 

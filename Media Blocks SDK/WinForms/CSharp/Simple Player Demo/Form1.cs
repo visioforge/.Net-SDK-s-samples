@@ -17,12 +17,12 @@ namespace MediaBlocks_Player_Demo
     using VisioForge.Core.MediaBlocks.VideoRendering;
     using VisioForge.Core.MediaInfoGST;
     using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.GST.AudioEffects;
-    using VisioForge.Core.Types.GST.AudioEncoders;
-    using VisioForge.Core.Types.GST.Sinks;
-    using VisioForge.Core.Types.GST.Sources;
-    using VisioForge.Core.Types.GST.VideoEffects;
-    using VisioForge.Core.Types.GST.VideoEncoders;
+    using VisioForge.Core.Types.X.AudioEffects;
+    using VisioForge.Core.Types.X.AudioEncoders;
+    using VisioForge.Core.Types.X.Sinks;
+    using VisioForge.Core.Types.X.Sources;
+    using VisioForge.Core.Types.X.VideoEffects;
+    using VisioForge.Core.Types.X.VideoEncoders;
     using VisioForge.Core.Types.MediaPlayer.GST;
     using VisioForge.Core.UI;
 
@@ -96,7 +96,7 @@ namespace MediaBlocks_Player_Demo
 
             _pipeline.Debug_Mode = cbDebugMode.Checked;
 
-            var mediaInfo = new MediaInfoGST();
+            var mediaInfo = new MediaInfoReaderX();
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
