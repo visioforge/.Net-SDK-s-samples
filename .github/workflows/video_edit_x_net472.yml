@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name_CS: "Video Edit SDK/VisioForge.VideoEdit.X.Demos.CS (NuGet) net472.sln"
+      Solution_Name_CS: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.WinForms net472.sln"
     
     runs-on: windows-2019
 
