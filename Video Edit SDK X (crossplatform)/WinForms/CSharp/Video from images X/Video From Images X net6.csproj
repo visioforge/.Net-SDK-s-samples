@@ -30,6 +30,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="app.manifest" />
     <None Remove="Video From Images.csproj.DotSettings" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">

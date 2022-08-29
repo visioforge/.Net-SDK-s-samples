@@ -34,6 +34,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
