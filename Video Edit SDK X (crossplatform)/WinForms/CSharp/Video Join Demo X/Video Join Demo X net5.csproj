@@ -2,14 +2,14 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Video_Join_Demo</RootNamespace>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Video Join Demo</AssemblyTitle>
     <Product>Video Join Demo</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.10.0</AssemblyVersion>
-    <FileVersion>15.4.10.0</FileVersion>
+    <AssemblyVersion>15.4.11.0</AssemblyVersion>
+    <FileVersion>15.4.11.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

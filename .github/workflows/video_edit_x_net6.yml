@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Video Edit SDK/VisioForge.VideoEdit.X.Demos.CS (NuGet) net6.sln"
+      Solution_Name: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.WinForms net6.sln"
     
     runs-on: windows-2022
 
