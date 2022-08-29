@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.Types;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {
@@ -29,8 +30,8 @@ namespace MediaBlocks_Video_Mixer_Demo
                 _engine = new D3D11MixerEngine();
             }
 
-            _engine.AddStream(new System.Drawing.Rectangle(Convert.ToInt32(edX1.Text), Convert.ToInt32(edY1.Text), Convert.ToInt32(edWidth1.Text), Convert.ToInt32(edHeight1.Text)), 0);
-            _engine.AddStream(new System.Drawing.Rectangle(Convert.ToInt32(edX2.Text), Convert.ToInt32(edY2.Text), Convert.ToInt32(edWidth2.Text), Convert.ToInt32(edHeight2.Text)), 1);
+            _engine.AddStream(new Rect(Convert.ToInt32(edX1.Text), Convert.ToInt32(edY1.Text), Convert.ToInt32(edWidth1.Text), Convert.ToInt32(edHeight1.Text)), 0);
+            _engine.AddStream(new Rect(Convert.ToInt32(edX2.Text), Convert.ToInt32(edY2.Text), Convert.ToInt32(edWidth2.Text), Convert.ToInt32(edHeight2.Text)), 1);
 
             await _engine.StartAsync(edFile1.Text, edFile2.Text, videoView1);
         }

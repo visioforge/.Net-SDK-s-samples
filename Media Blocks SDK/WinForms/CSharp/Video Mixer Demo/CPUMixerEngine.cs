@@ -35,7 +35,7 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
-        public void AddStream(Rectangle rect, int zorder)
+        public void AddStream(Rect rect, int zorder)
         {
             _settings.AddStream(new VideoMixerStream(rect, (uint)zorder));
         }

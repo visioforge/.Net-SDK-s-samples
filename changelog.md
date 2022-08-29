@@ -3,6 +3,7 @@
 * Added Linux support for VideoEditCoreX based demos
 * Added OnRTSPLowLatencyRAWFrame event to get RAW frames from RTSP stream, using RTSP Low Latency engine
 * Added AutoTransitions property to the VideoEditCoreX engine
+* System.Drawing.Rectangle and System.Drawing.Size types are replaced by VisioForge.Types.Rectangle and VisioForge.Types.Size in all crossplatform APIs
 
 15.4
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 

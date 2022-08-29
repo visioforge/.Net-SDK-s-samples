@@ -20,6 +20,7 @@ namespace Main_Demo
     using VisioForge.Core.Types.MediaPlayer.GST;
     using VisioForge.Core.Types.VideoProcessing;
     using FontStyle = VisioForge.Core.Types.X.VideoEffects.FontStyle;
+    using VisioForge.Core.Helpers;
 
     public partial class Form1 : Form
     {
@@ -253,7 +254,7 @@ namespace Main_Demo
                     FontStyle = (FontStyle)cbTextOverlayFontStyle.SelectedIndex,
                     FontWeight = (FontWeight)Enum.Parse(typeof(FontWeight), cbTextOverlayFontWeight.Text, true),
                     AutoAjustSize = cbTextOverlayAutosize.Checked,
-                    Color = pnTextOverlayColor.BackColor,
+                    Color = pnTextOverlayColor.BackColor.ToColor(),
                     FontName = cbTextOverlayFontName.Text,
                     XPos = tbTextOverlayX.Value / 100.0,
                     YPos = tbTextOverlayY.Value / 100.0

@@ -20,6 +20,6 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         Task StopAsync();
 
-        void AddStream(Rectangle rect, int zorder);
+        void AddStream(Rect rect, int zorder);
     }
 }

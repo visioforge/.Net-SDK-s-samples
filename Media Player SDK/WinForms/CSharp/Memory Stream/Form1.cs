@@ -107,7 +107,7 @@ namespace Memory_Stream_Demo
                 _stream = new ManagedIStream(_memoryStream);
 
                 // specifying settings
-                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length);
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _memoryStream.Length);
             }
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
