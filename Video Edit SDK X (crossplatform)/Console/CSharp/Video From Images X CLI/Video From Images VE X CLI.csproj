@@ -5,8 +5,8 @@
     <AssemblyTitle>Video From Images CLI</AssemblyTitle>
     <Product>Video From Images CLI</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.11.0</AssemblyVersion>
-    <FileVersion>15.4.11.0</FileVersion>
+    <AssemblyVersion>15.4.12.0</AssemblyVersion>
+    <FileVersion>15.4.12.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -34,17 +34,17 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.GStreamer.Codecs.Windows.x86" Version="1.20.3" />
-    <PackageReference Include="VisioForge.GStreamer.Core.Windows.x86" Version="1.20.3" />
-    <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x86.UPX" Version="1.20.3" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x86" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x86" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x86.UPX" Version="1.20.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.GStreamer.Codecs.Windows.x64" Version="1.20.3" />
-    <PackageReference Include="VisioForge.GStreamer.Core.Windows.x64" Version="1.20.3" />
-    <PackageReference Include="VisioForge.GStreamer.Libav.Windows.x64.UPX" Version="1.20.3" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.11" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.12" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

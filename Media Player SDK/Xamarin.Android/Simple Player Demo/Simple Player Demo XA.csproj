@@ -110,23 +110,23 @@
     <PackageReference Include="System.Text.Json">
       <Version>6.0.5</Version>
     </PackageReference>
-    <PackageReference Include="VisioForge.GStreamer.Core.Android">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android">
       <Version>1.18.5</Version>
     </PackageReference>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.4.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.4.12" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.2.1" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.1.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+  <!-- <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\visioforge.gstreamer.core.android\1.18.5\build\VisioForge.GStreamer.Core.Android.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\visioforge.gstreamer.core.android\1.18.5\build\VisioForge.GStreamer.Core.Android.targets'))" />
+    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\VisioForge.CrossPlatform.core.android\1.18.5\build\VisioForge.CrossPlatform.Core.Android.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\VisioForge.CrossPlatform.core.android\1.18.5\build\VisioForge.CrossPlatform.Core.Android.targets'))" />
   </Target>
-  <Import Project="$(UserProfile)\.nuget\packages\visioforge.gstreamer.core.android\1.18.5\build\VisioForge.GStreamer.Core.Android.targets" Condition="Exists('$(UserProfile)\.nuget\packages\visioforge.gstreamer.core.android\1.18.5\build\VisioForge.GStreamer.Core.Android.targets')" />
+  <Import Project="$(UserProfile)\.nuget\packages\VisioForge.CrossPlatform.core.android\1.18.5\build\VisioForge.CrossPlatform.Core.Android.targets" Condition="Exists('$(UserProfile)\.nuget\packages\VisioForge.CrossPlatform.core.android\1.18.5\build\VisioForge.CrossPlatform.Core.Android.targets')" /> -->
   <!--<Target Name="CopyGSTLibs" AfterTargets="Build" Inputs="%userprofile%\.nuget\packages .Mac/1.0.1/build/osx-x64/libvlc.dylib" Outputs="$(AppBundleDir)/Contents/MonoBundle/libvlc.dylib">
     <Message Text="Copying libvlc.dylib to appbundle..." />
     <Copy SourceFiles="../../../../packages/VisioForge.CrossPlatform.Redist.Mac/1.0.1/build/osx-x64/libvlc.dylib" DestinationFiles="$(AppBundleDir)/Contents/MonoBundle/libvlc.dylib" />
