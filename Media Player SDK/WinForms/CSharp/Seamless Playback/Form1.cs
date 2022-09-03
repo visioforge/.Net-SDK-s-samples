@@ -95,8 +95,10 @@
 
         private async void btStop_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
+
             await CurrentPlayer.StopAsync();
-            timer1.Enabled = false;
+
             tbTimeline.Value = 0;
         }
 
@@ -144,7 +146,7 @@
 
             await player.PlayAsync();
 
-            timer1.Enabled = true;
+            timer1.Start();
         }
 
         private async void btStart_Click(object sender, EventArgs e)
@@ -194,10 +196,10 @@
         private async void StopDelegateMethod1()
         {
             //timer1.Enabled = false;
-            tbTimeline.Value = 0;
-
-            VideoView1.Hide();
             VideoView2.Show();
+            VideoView1.Hide();
+
+            tbTimeline.Value = 0;
 
             CurrentPlayer = MediaPlayer2;
             await MediaPlayer2.ResumeAsync();
@@ -212,10 +214,10 @@
         private async void StopDelegateMethod2()
         {
             //timer1.Enabled = false;
-            tbTimeline.Value = 0;
-
-            VideoView1.Show();
             VideoView2.Hide();
+            VideoView1.Show();
+
+            tbTimeline.Value = 0;
 
             CurrentPlayer = MediaPlayer1;
             await MediaPlayer1.ResumeAsync();
