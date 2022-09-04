@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player Demo XA MB", "Xamarin.Android\Simple Player Demo\Simple Player Demo XA MB.csproj", "{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33BB27E-3FB2-4776-BA3B-248BEA9FFB07}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
+	EndGlobalSection
+EndGlobal

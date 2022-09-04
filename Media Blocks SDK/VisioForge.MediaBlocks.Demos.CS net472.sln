@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{743796DD-6F87-4CD9-8419-0B8CE16B4CB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP MultiView Demo net472", "WinForms\CSharp\RTSP MultiView Demo\RTSP MultiView Demo net472.csproj", "{6FF79CCB-CBB9-4081-93E8-03A59474ACF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo net472", "WinForms\CSharp\Simple Video Capture Demo\Simple Video Capture Demo net472.csproj", "{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo net472", "WinForms\CSharp\Video Mixer Demo\Video Mixer Demo net472.csproj", "{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo net472", "WinForms\CSharp\Simple Player Demo\Simple Player Demo net472.csproj", "{756E665B-AAA8-4118-BF35-53DABA3E80DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encryptor Player Demo net472", "WinForms\CSharp\Encryptor Player Demo\Encryptor Player Demo net472.csproj", "{2BEB793D-2B35-4FA3-9846-F6372D185229}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FF79CCB-CBB9-4081-93E8-03A59474ACF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF79CCB-CBB9-4081-93E8-03A59474ACF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF79CCB-CBB9-4081-93E8-03A59474ACF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF79CCB-CBB9-4081-93E8-03A59474ACF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756E665B-AAA8-4118-BF35-53DABA3E80DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756E665B-AAA8-4118-BF35-53DABA3E80DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756E665B-AAA8-4118-BF35-53DABA3E80DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756E665B-AAA8-4118-BF35-53DABA3E80DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BEB793D-2B35-4FA3-9846-F6372D185229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEB793D-2B35-4FA3-9846-F6372D185229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEB793D-2B35-4FA3-9846-F6372D185229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEB793D-2B35-4FA3-9846-F6372D185229}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6FF79CCB-CBB9-4081-93E8-03A59474ACF8} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{B19A8C6F-6724-4699-B7AD-0E1C0C09E3E6} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{EAB64232-0CC9-41A9-8FD6-A3EE5FBE2DF3} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{756E665B-AAA8-4118-BF35-53DABA3E80DA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{2BEB793D-2B35-4FA3-9846-F6372D185229} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
+	EndGlobalSection
+EndGlobal
