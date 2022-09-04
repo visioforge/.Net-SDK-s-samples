@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo MP X netcore31", "WinForms\Main Demo\Main Demo MP X netcore31.csproj", "{DABA9589-73B1-4B46-89AC-32228B54DB12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.ActiveCfg = Debug|x86
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Debug|x86.Build.0 = Debug|x86
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.ActiveCfg = Release|x86
+		{DABA9589-73B1-4B46-89AC-32228B54DB12}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
+	EndGlobalSection
+EndGlobal
