@@ -1,4 +1,4 @@
-name: Media Blocks SDK .Net MAUI
+name: Media Player SDK X .Net MAUI
 on:
   push:
     branches: [ master ]
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.sln"
+      Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
     
     runs-on: windows-2022
 
@@ -25,9 +25,6 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-        
-    - name: Install MAUI workload
-      run: dotnet workload install maui
         
     - name: Restore dependencies
       run: dotnet restore $env:Solution_Name
