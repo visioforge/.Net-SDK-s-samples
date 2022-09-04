@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name_CS: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS (NuGet) net472.sln"
+      Solution_Name_CS: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net472.sln"
     
     runs-on: windows-2019
 
