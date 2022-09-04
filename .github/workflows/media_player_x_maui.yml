@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
+      Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
     
     runs-on: windows-2022
 
