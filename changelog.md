@@ -1,11 +1,16 @@
-15.x
+# Changelog
+
+## 15.x
+
 * Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine 
 * Added Linux support for VideoEditCoreX based demos
 * Added OnRTSPLowLatencyRAWFrame event to get RAW frames from RTSP stream, using RTSP Low Latency engine
 * Added AutoTransitions property to the VideoEditCoreX engine
 * System.Drawing.Rectangle and System.Drawing.Size types are replaced by VisioForge.Types.Rectangle and VisioForge.Types.Size in all crossplatform APIs
+* MAUI samples (BETA) are added
 
-15.4
+## 15.4
+
 * Resolved an issue with ignored Play_PauseAtFirstFrame property 
 * Updated HighDPI support in WinForms samples
 * Resolved an issue with HighDPI support for Direct2D video renderer
@@ -22,7 +27,8 @@
 * Avalonia VideoView downgrade to 0.10.12 because of Avalonia UI problems with NativeControl 
 * Added File Encryptor demo for Video Edit SDK .Net
 
-15.3
+## 15.3
+
 * App start-up time improved for PCs with Decklink cards 
 * NDI SDK v5 support
 * Resolved an issue with MKV Legacy output (wrong cast exception). 
@@ -36,7 +42,8 @@
 * VisioForge.Types renamed to VisioForge.Core.Types
 * VisioForge.Core no longer depends on  Windows Forms framework
 
-15.2
+## 15.2
+
 * Added HorizontalAlignment and VerticalAlignment properties to the text and image logos
 * Updated ONVIF support, resolved an issue with username and password specified in URL but not specified in source settings
 * Resolved an issue with the FFMPEG.exe output dialog
@@ -47,7 +54,8 @@
 * IPCameraSourceSettings.URL property type changed from string to System.Uri
 * Added DirectCapture ASF output for IP cameras
 
-15.1
+## 15.1
+
 * Disabled Sentry debug messages in the console
 * Added Icecast streaming
 * VideoStreamInfo.FrameRate property type changed to VideoFrameRate (with numerator and denominator) from double
@@ -57,7 +65,8 @@
 * Added Android support in Media Player SDK .Net
 * Added new GStreamer-based crossplatform engine to support Windows and other platforms within v15 development cycle
 
-15.0
+## 15.0
+
 * Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
 * RTSP Live555 IP camera engine has been removed. Please use RTSP Low Latency or FFMPEG engines.
 * Resolved SDK_Version possible issue.
@@ -87,7 +96,8 @@
 * API breaking change: Event types moved from VisioForge.Types namespace to VisioForge.Types.Events
 * Added Video_Renderer_SetCustomWindowHandle method to set custom video renderer by Win32 window/control HWND handle
 
-14.4
+## 14.4
+
 * Windows 11 support
 * Telemetry update
 * Resolved issues with Picture-in-Picture in 2x2 mode
@@ -103,7 +113,8 @@
 * Custom redist configuration updated
 * Updated IP camera RTSP Low Latency engine
 
-14.3
+## 14.3
+
 * An issue with Video Resize filter creation for NuGet redists has been resolved
 * Telemetry update
 * Updated VFDirectCaptureMP4Output output
@@ -116,7 +127,8 @@
 * Resolved issues with Picture-in-Picture for 2x2 mode
 * Splitted project and solutions by independent files for .Net Framework 4.7.2, .Net Core 3.1, .Net 5 and .Net 6
 
-14.2
+## 14.2
+
 * An issue with audio stream capture with enabled Virtual Camera SDK output was resolved
 * VFMP4v8v10Output was replaced with VFMP4Output
 * The "CanStart" method was added for Video_CaptureDevices items. The method returns true if the device can start and is not used exclusively in another app
@@ -130,7 +142,8 @@
 * VC++ redist is no longer required to be installed. VC++ linking changed to static (except optional XIPH output)
 * Many base DirectShow filters moved to the VisioForge_BaseFilters module
 
-14.1
+## 14.1
+
 * Added WPF VideoView control. You can push video frames from the OnVideoFrameBuffer event to control to render them
 * Correct default transparency value for a text logo
 * ONVIF support added to .Net 5 / .Net Core 3.1 builds
@@ -148,7 +161,8 @@
 * Removed Kinect assemblies and demos. Please contact us if you still need Kinect packages 
 * MP4v10 default profile has been changed to Baseline / 5.0 for better browsers compatibility
 
-14.0
+## 14.0
+
 * .Net 5.0 support
 * Resolved issue with not visible Decklink sources in NuGet SDK version
 * Resolved issue with device added/removed notifier
@@ -166,7 +180,8 @@
 * Added IP_Camera_CheckAvailable method in Video Capture SDK .Net
 * Updated FFMPEG Source filter, more supported codecs, and added GPU decoding
 
-12.1
+## 12.1
+
 * Migrated to .Net 4.6
 * Added Debug_DisableMessageDialogs property to disable error dialog if OnError event is not implemented.
 * Fixed issue with resize on pause for WPF controls.
@@ -182,7 +197,8 @@
 * .Net Core NuGet packaged merged with .Net Framework package
 * Added NuGet redists. Deployment never was so simple!
 
-12.0
+## 12.0
+
 * Async / await API for all SDK's
 * Breaking API change: All time related API now uses TimeSpan instead long (milliseconds)
 * Tag reader/writer - correct logo loading for some video formats
@@ -205,7 +221,8 @@
 * .Net Core assemblies updated to .Net Core 3.1 LTS
 * Updated demos repository on GitHub
 
-11.4
+## 11.4
+
 * Added ASP.Net MVC video conversion demo app to Video Edit SDK .Net
 * Alternative OSD implementation to handle Windows 10 changes
 * Updated GPU video effects
@@ -222,7 +239,8 @@
 * Resolved issue with file lock using LAV engine in Media Player SDK .Net
 * Added DirectX 11 based GPU video processing
 
-11.3
+## 11.3
+
 * Resolved issue with audio renderer connection if Virtual Camera SDK output enabled in Video Capture SDK
 * Improved subtitles support with autoloading in Media Player SDK .Net
 * Updated audio fade-in/fade-out effects
@@ -233,7 +251,8 @@
 * Added optional GPU decoding in Media Player SDK .Net. Available decoding engines: DXVA2, Direct3D 11, nVidia CUVID, Intel QuickSync
 * Added .Net Core 3.0 support, including WinForms and WPF demo apps (Windows only)
 
-11.2
+## 11.2
+
 * Added Loop property to Video Edit SDK .Net
 * Updated audio enhancer
 * Updated RTSP Low Latency source
@@ -244,7 +263,8 @@
 * Added YouTube playback code snippet
 * Added method to move OSD
 
-11.1
+## 11.1
+
 * Fixed seeking issue with some MP4 files in Video Edit SDK
 * Fixed stretch / letterbox issue in WPF version of all SDK's
 * Fixed issue with equalizer on sample rate 16000 or less
@@ -264,7 +284,8 @@
 * Added Frame_GetCurrentFromRenderer method to all SDK's. Using this method you can get currently rendered video frame directly from video renderer.
 * Added low latency RTSP source playback in Video Capture SDK .Net
 
-11.0
+## 11.0
+
 * Fixed bug with MP4 v11 output, custom GOP settings
 * Updated MJPEG Decoder
 * Fixed bug with MP4 v11 output, Windows 7 now fully supported
