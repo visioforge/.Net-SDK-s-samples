@@ -26,6 +26,9 @@ jobs:
       with:
         vs-prerelease: true
         
+    - name: Install MAUI workload
+      run: dotnet workload install maui
+        
     - name: Restore dependencies
       run: dotnet restore $env:Solution_Name
 
