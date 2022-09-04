@@ -17,7 +17,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.X.VideoCapture;
+using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {
@@ -38,7 +38,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         {
             InitializeComponent();
 
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
         }
 
@@ -77,7 +77,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             var videoSourceSettings = new VideoCaptureDeviceSourceSettings(cbVideoInput.Text);
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-            var videoRendererBlock = new VideoRendererBlock(videoView, true);
+            var videoRendererBlock = new VideoRendererBlock(_pipeline, videoView);
             _pipeline.Connect(_videoSource.Output, videoRendererBlock.Input);
 
             await _pipeline.StartAsync();

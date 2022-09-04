@@ -15,7 +15,7 @@ namespace MediaBlocks_Player_Demo
     using VisioForge.Core.MediaBlocks.VideoEncoders;
     using VisioForge.Core.MediaBlocks.VideoProcessing;
     using VisioForge.Core.MediaBlocks.VideoRendering;
-    using VisioForge.Core.MediaInfoGST;
+    using VisioForge.Core.MediaInfoReaderX;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.AudioEffects;
     using VisioForge.Core.Types.X.AudioEncoders;

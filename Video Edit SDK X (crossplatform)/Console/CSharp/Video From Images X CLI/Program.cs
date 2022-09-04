@@ -22,13 +22,16 @@ namespace Video_From_Images_CLI
 
         static void Main(string[] args)
         {
-            var options = new CommandLineOptions();
-            if (!CommandLine.Parser.Default.ParseArguments(args, options))
+            var res = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
+            if (res == null || res.Value == null || string.IsNullOrEmpty(res.Value.InputFolder))
             {
+                Console.WriteLine(CommandLineOptions.GetUsage(res));
                 Console.WriteLine("Press any key to exit...");
-                Console.ReadKey();
+                Console.Read();
                 return;
             }
+
+            var options = res.Value;
 
             options.InputFolder = options.InputFolder.Trim();
 
@@ -61,8 +64,8 @@ namespace Video_From_Images_CLI
 
             int insertTime = 0;
 
-            int videoWidth = Convert.ToInt32(options.Resolution[0]);
-            int videoHeight = Convert.ToInt32(options.Resolution[1]);
+            int videoWidth = options.Width;
+            int videoHeight = options.Height;
 
             foreach (string img in files)
             {

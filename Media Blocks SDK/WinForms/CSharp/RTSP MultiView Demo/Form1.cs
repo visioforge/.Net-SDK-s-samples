@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaInfoGST;
+using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer.GST;
 

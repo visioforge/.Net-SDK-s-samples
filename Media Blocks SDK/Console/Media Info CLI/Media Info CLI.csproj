@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net6.0-macos10.14</TargetFramework>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net472</TargetFrameworks>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net6.0</TargetFramework>
+    <RootNamespace>Media_Info_CLI</RootNamespace>
+    <Nullable>disable</Nullable>
+    <LangVersion>9.0</LangVersion>
+    <ApplicationId>com.visioforge.mediainfocli</ApplicationId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <UseSGen>false</UseSGen>
+    <WarningLevel>4</WarningLevel>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.14" />
+  </ItemGroup>
+</Project>

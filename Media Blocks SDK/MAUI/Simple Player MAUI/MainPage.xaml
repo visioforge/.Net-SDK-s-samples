@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Simple_Player_MAUI.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             Loaded="ContentPage_Loaded">
+
+    <ScrollView>
+
+        <Grid RowSpacing="10" RowDefinitions="*,Auto,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+
+            <my:VideoView Grid.Row="0"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="imgVideo"
+                Background="Gray"/>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                        Padding="0,0,0,0" Margin="0,0,0,0" Spacing="5">
+
+                <Entry Placeholder=""
+                       x:Name="edFilename" 
+                       HorizontalOptions="FillAndExpand"
+                       Margin="5" />
+                
+                <Button 
+                    Text="..."
+                    FontAttributes="Bold"
+                    Grid.Row="0"
+                    Clicked="OnSelectFile"
+                    HorizontalOptions="Center" 
+                    Margin="5"/>
+            </StackLayout>
+
+            <my:PlaybackPanel x:Name="pbPanel" Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="48"
+                        Padding="0,0,0,0" Margin="0,0,0,0" />
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

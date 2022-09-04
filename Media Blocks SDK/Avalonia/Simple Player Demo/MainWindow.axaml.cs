@@ -11,7 +11,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.MediaInfoGST;
+using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.UI.Avalonia;
 

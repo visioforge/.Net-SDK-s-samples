@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using VisioForge.Core.Helpers;
-using VisioForge.Core.MediaInfoGST;
+using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
