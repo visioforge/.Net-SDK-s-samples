@@ -2,7 +2,7 @@
 
 ## 15.x
 
-* Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine 
+* Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine
 * Added Linux support for VideoEditCoreX based demos
 * Added OnRTSPLowLatencyRAWFrame event to get RAW frames from RTSP stream, using RTSP Low Latency engine
 * Added AutoTransitions property to the VideoEditCoreX engine
@@ -11,7 +11,7 @@
 
 ## 15.4
 
-* Resolved an issue with ignored Play_PauseAtFirstFrame property 
+* Resolved an issue with ignored Play_PauseAtFirstFrame property
 * Updated HighDPI support in WinForms samples
 * Resolved an issue with HighDPI support for Direct2D video renderer
 * Added additional API to ONVIFControl class: GetDeviceCapabilities, GetMediaEndpoints
@@ -20,18 +20,18 @@
 * Added video interpolation settings for Zoom and Pan video effects
 * Added GtkSharp UI framework support for video rendering
 * FastEdit API has been changed to async
-* Resolved screen flip issue with Video_Effects_AllowMultipleStreams property of Video Capture SDK .Net core 
+* Resolved screen flip issue with Video_Effects_AllowMultipleStreams property of Video Capture SDK .Net core
 * Updated RTSP MultiView demo (added GPU decoding, added RAW streams access)
 * Added OnLoop event into Media Player SDK .Net
 * Added Loop feature into Media Blocks SDK .Net
-* Avalonia VideoView downgrade to 0.10.12 because of Avalonia UI problems with NativeControl 
+* Avalonia VideoView downgrade to 0.10.12 because of Avalonia UI problems with NativeControl
 * Added File Encryptor demo for Video Edit SDK .Net
 
 ## 15.3
 
-* App start-up time improved for PCs with Decklink cards 
+* App start-up time improved for PCs with Decklink cards
 * NDI SDK v5 support
-* Resolved an issue with MKV Legacy output (wrong cast exception). 
+* Resolved an issue with MKV Legacy output (wrong cast exception).
 * Zoom and pan effects performance optimizations
 * Added basic Media Blocks API (WIP)
 * Added HLS network streaming to Video Edit SDK .Net
@@ -123,7 +123,7 @@
 * IP camera MJPEG Low Latency engine has been updated
 * NDI source listing has been updated
 * Improved ONVIF support
-* Added .Net Core 3.1 support for RTSP Low Latency source engine 
+* Added .Net Core 3.1 support for RTSP Low Latency source engine
 * Resolved issues with Picture-in-Picture for 2x2 mode
 * Splitted project and solutions by independent files for .Net Framework 4.7.2, .Net Core 3.1, .Net 5 and .Net 6
 
@@ -156,9 +156,9 @@
 * IP camera source added to the TimeShift demo
 * Added separate output support for MOV
 * Added faststart FFMPEG flag for MP4v11 output that used FFMPEG MP4 muxer
-* Added GPU decoding for the IP Camera source in demo applications 
+* Added GPU decoding for the IP Camera source in demo applications
 * Added CustomRedist_DisableDialog property to disable redist message dialog
-* Removed Kinect assemblies and demos. Please contact us if you still need Kinect packages 
+* Removed Kinect assemblies and demos. Please contact us if you still need Kinect packages
 * MP4v10 default profile has been changed to Baseline / 5.0 for better browsers compatibility
 
 ## 14.0
@@ -187,7 +187,7 @@
 * Fixed issue with resize on pause for WPF controls.
 * Updated ONVIF engine in Video Capture SDK .Net
 * Updated What You Hear source in Video Capture SDK .Net
-* Added OnPause/OnResume events 
+* Added OnPause/OnResume events
 * Updated YouTube demo in Media Player SDK .Net
 * Improved support of webcams with integrated H264 encoder in Video Capture SDK .Net
 * Updated VLC source
@@ -203,10 +203,10 @@
 * Breaking API change: All time related API now uses TimeSpan instead long (milliseconds)
 * Tag reader/writer - correct logo loading for some video formats
 * Removed legacy DirectX 9 video effects
-* Fixed audio conversion progress issue in Video Edit SDK .Net 
+* Fixed audio conversion progress issue in Video Edit SDK .Net
 * Improved .Net Core compatibility
 * Virtual Camera SDK output added to Media Player SDK .Net (as one of video renderers)
-* NewTek NDI devices support added to Video Capture SDK .Net as a new engine for IP cameras 
+* NewTek NDI devices support added to Video Capture SDK .Net as a new engine for IP cameras
 * Added Video_Effects_MergeImageLogos and Video_Effects_MergeTextLogos properties. If you have 3 or more logos you can set this properties to true to optimize video effects performance
 * Added playlist type option for HLS network streaming
 * Added integrated lightweight HTTP server for HLS network streaming
