@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo net5", "Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo net5", "WinForms\CSharp\Simple Player Demo\Simple Player Demo net5.csproj", "{F8CDDEA5-0F1F-4C31-B840-33587993DC7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encryptor Player Demo net5", "WinForms\CSharp\Encryptor Player Demo\Encryptor Player Demo net5.csproj", "{1B80776C-504A-425E-897A-E3592A8C53A6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{F8CDDEA5-0F1F-4C31-B840-33587993DC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8CDDEA5-0F1F-4C31-B840-33587993DC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8CDDEA5-0F1F-4C31-B840-33587993DC7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B80776C-504A-425E-897A-E3592A8C53A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B80776C-504A-425E-897A-E3592A8C53A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B80776C-504A-425E-897A-E3592A8C53A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B80776C-504A-425E-897A-E3592A8C53A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,7 +44,6 @@ Global
 		{60F5F63F-AFB3-4C97-80DA-17813772A948} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{5C03AEA0-E2E4-47A1-8477-211B25C17EA9} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{F8CDDEA5-0F1F-4C31-B840-33587993DC7F} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
-		{1B80776C-504A-425E-897A-E3592A8C53A6} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
