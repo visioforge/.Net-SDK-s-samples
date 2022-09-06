@@ -247,7 +247,6 @@ namespace Simple_Video_Player_Avalonia
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 VideoView1.Refresh();
-                //ShowMessage("Playback complete.");
             });
         }
 
@@ -336,10 +335,6 @@ namespace Simple_Video_Player_Avalonia
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                }
-
                 _tmPosition?.Dispose();
                 _tmPosition = null;
 
