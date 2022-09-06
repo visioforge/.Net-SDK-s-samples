@@ -8,6 +8,7 @@
 * Added AutoTransitions property to the VideoEditCoreX engine
 * System.Drawing.Rectangle and System.Drawing.Size types are replaced by VisioForge.Types.Rectangle and VisioForge.Types.Size in all crossplatform APIs
 * MAUI samples (BETA) are added
+* Improved compatibility with Snap Camera for MP4 HW encoding
 
 ## 15.4
 
