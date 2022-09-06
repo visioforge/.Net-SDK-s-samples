@@ -1,0 +1,31 @@
+name: Media Player SDK X .Net Core 3.1
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.WinForms netcore31.sln"
+    
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: | 
+          3.1.x
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+        
+    - name: Restore dependencies
+      run: dotnet restore $env:Solution_Name
+
+    - name: Build app for release
+      run: msbuild $env:Solution_Name -t:rebuild -verbosity:diag -property:Configuration=Release
