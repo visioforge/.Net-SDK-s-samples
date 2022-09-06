@@ -102,7 +102,7 @@ namespace Computer_Vision_Demo
                 faceDetector.DrawShapeType = CVShapeType.Rectangle;
             }
 
-            faceDetector.MinFaceSize = new Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
+            faceDetector.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
 
             var path = Path.GetDirectoryName(Application.ExecutablePath);
             string facePath = cbFDFace.Checked ? Path.Combine(path, "haarcascade_frontalface_default.xml") : null;
@@ -148,7 +148,7 @@ namespace Computer_Vision_Demo
                     edFDFaces.Text = string.Empty;
                     foreach (var face in e.Faces)
                     {
-                        edFDFaces.Text += $"Face at {face.Position.ToNiceString()}" + Environment.NewLine;
+                        edFDFaces.Text += $"Face at {face.Position.ToString()}" + Environment.NewLine;
                     }
                 }));
         }
@@ -214,7 +214,7 @@ namespace Computer_Vision_Demo
                     edPDDetected.Text = string.Empty;
                     foreach (var item in e.Items)
                     {
-                        edPDDetected.Text += $"Object at {item.ToNiceString()}" + Environment.NewLine;
+                        edPDDetected.Text += $"Object at {item.ToString()}" + Environment.NewLine;
                     }
                 }));
         }
@@ -292,7 +292,7 @@ namespace Computer_Vision_Demo
                 {
                     foreach (var face in faces)
                     {
-                        var rect = face.Position;
+                        var rect = new VFRectIntl(face.Position.Left, face.Position.Top, face.Position.Right, face.Position.Bottom);
                         rect.Top -= 10;
                         if (rect.Top < 0)
                         {

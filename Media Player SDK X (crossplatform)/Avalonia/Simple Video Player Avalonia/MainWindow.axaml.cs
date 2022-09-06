@@ -338,7 +338,6 @@ namespace Simple_Video_Player_Avalonia
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
                 }
 
                 _tmPosition?.Dispose();
@@ -354,7 +353,6 @@ namespace Simple_Video_Player_Avalonia
             }
         }
 
-        // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
         ~MainWindow()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
