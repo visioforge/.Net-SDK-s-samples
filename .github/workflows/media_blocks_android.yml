@@ -5,32 +5,27 @@ on:
   pull_request:
     branches: [ master ]
 
+
 jobs:
   build:
     env:
       Solution_Name: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Android.sln"
-    
-    runs-on: windows-2022
+      CSProj_Name: "Media Blocks SDK/Xamarin.Android/Simple Player Demo/Simple Player Demo XA MB.csproj"
+    runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Setup .NET 
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: | 
-          6.0.x
-          
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
-        
-    - name: Install Android workload
-      run: dotnet workload install android
-        
-    - name: Restore dependencies
-      run: dotnet restore $env:Solution_Name
+    - uses: actions/checkout@v3
+    - name: Set default Xamarin SDK versions
+      run: |
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.10 --android=10.2
 
-    - name: Build app for release
-      run: msbuild $env:Solution_Name -t:rebuild -verbosity:diag -property:Configuration=Release
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Install dependencies
+      run: nuget restore Solution_Name
+
+    - name: Build
+      run: msbuild CSProj_Name /t:PackageForAndroid /p:Configuration=Debug
