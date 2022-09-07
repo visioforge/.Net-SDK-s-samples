@@ -9,7 +9,7 @@
 * System.Drawing.Rectangle and System.Drawing.Size types are replaced by VisioForge.Types.Rectangle and VisioForge.Types.Size in all crossplatform APIs
 * MAUI samples (BETA) are added
 * Improved compatibility with Snap Camera for MP4 HW encoding
-* Online licensing updated
+* Online licensing updated.
 
 ## 15.4
 
