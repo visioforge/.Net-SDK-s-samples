@@ -1,7 +1,18 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Blocks SDK .Net - Simple Player Demo (Xamarin.Android)
 
-## Simple Video Player Avalonia Demo
+Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in Xamarin.Android applications. It is a good starting point for building your own media player application.
 
-Demo app for Avalonia.
+## Features
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+- Play media files
+- Play network streams
+- Seeking
+
+## Supported frameworks
+
+- MonoAndroid
+- .Net 6
+
+---
+
+[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)

@@ -95,6 +95,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer netcore31 (NuG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP Streamer netcore31 (NuGet)", "WinForms\CSharp\UDP Streamer\UDP Streamer netcore31 (NuGet).csproj", "{0A893F70-FD1F-434F-81CC-683BFF78D7D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camera Light Demo (NuGet) netcore31", "WinForms\CSharp\Camera Light Demo\Camera Light Demo (NuGet) netcore31.csproj", "{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -439,6 +441,14 @@ Global
 		{0A893F70-FD1F-434F-81CC-683BFF78D7D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A893F70-FD1F-434F-81CC-683BFF78D7D8}.Release|x86.ActiveCfg = Release|Any CPU
 		{0A893F70-FD1F-434F-81CC-683BFF78D7D8}.Release|x86.Build.0 = Release|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Debug|x86.Build.0 = Debug|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -486,6 +496,7 @@ Global
 		{549AE8DA-21D8-411A-BAE9-C89669BD9DAD} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{28F210F6-DC4D-45B0-BAB4-004742D3FBF9} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{0A893F70-FD1F-434F-81CC-683BFF78D7D8} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{DA6CB358-C0FE-4C93-8FDA-37A2C7037DAE} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

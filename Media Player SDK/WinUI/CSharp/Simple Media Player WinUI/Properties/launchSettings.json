@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Simple Media Player WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Simple Media Player WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

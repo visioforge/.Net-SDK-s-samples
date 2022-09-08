@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <RuntimeIdentifiers>win10-x64;win10-x86</RuntimeIdentifiers>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Camera_Light_Demo</RootNamespace>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.21" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.21" />
+    <ProjectReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="15.4.20" />
+  </ItemGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Condition="'$(TargetFramework)' == 'netcoreapp3.1' or '$(TargetFramework)' == 'net472'" Include="Microsoft.Windows.SDK.Contracts" Version="10.0.19041.2" />
+  </ItemGroup>
+</Project>
