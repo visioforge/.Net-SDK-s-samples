@@ -442,7 +442,7 @@ namespace VideoEdit_CS_Demo
             // Text overlay
             if (cbTextOverlay.Checked)
             {
-                var textOverlay = new TextOverlay();
+                var textOverlay = new TextOverlay("Hello world!");
 
                 VideoEdit1.Video_TextOverlays.Add(textOverlay);
             }
