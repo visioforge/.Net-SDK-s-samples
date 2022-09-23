@@ -330,6 +330,10 @@ namespace IP_Capture
             {
                 VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
+            else
+            {
+                VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.Zero;
+            }
 
             if (rbPreview.IsChecked == true)
             {

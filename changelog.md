@@ -11,6 +11,7 @@
 * Improved compatibility with Snap Camera for MP4 HW encoding
 * Online licensing updated
 * Added Camera Light demo
+* Added segments support in Media Player SDK .Net (Cross-platform engine)
 
 ## 15.4
 

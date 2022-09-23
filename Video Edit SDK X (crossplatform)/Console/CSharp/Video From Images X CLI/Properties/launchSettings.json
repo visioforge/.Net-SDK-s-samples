@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Video From Images VE X CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "-i \" c:\\samples\\pics_test\\ \" -o \"output.mp4\" -w 1920 -h 1080 -d 2000 -f mp4"
+    }
+  }
+}

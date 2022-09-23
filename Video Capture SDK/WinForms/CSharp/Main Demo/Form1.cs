@@ -2465,6 +2465,10 @@ namespace VideoCapture_CSharp_Demo
             {
                 settings.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
+            else
+            {
+                settings.DisconnectEventInterval = TimeSpan.Zero;
+            }
         }
 
         private void SelectScreenSource(out ScreenCaptureSourceSettings settings)
@@ -3338,6 +3342,12 @@ namespace VideoCapture_CSharp_Demo
 
         private void btOSDImageDraw_Click(object sender, EventArgs e)
         {
+            if (!File.Exists(edOSDImageFilename.Text))
+            {
+                MessageBox.Show("OSD image file does not exist.");
+                return;
+            }
+
             if (lbOSDLayers.SelectedIndex != -1)
             {
                 if (cbOSDImageTranspColor.Checked)

@@ -25,7 +25,6 @@ using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.UI;
 using VisioForge.Core.VideoCapture;
-using VisioForge.Core.VideoCapture;
 using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;

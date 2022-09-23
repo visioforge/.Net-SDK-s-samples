@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Main Demo VC": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

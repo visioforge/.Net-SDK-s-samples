@@ -2525,6 +2525,11 @@ Public Class Form1
 
     Private Sub btOSDImageDraw_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDImageDraw.Click
 
+        If (Not System.IO.File.Exists(edOSDImageFilename.Text)) Then
+            MessageBox.Show("OSD image file does not exist.")
+            Return
+        End If
+
         If (lbOSDLayers.SelectedIndex <> -1) Then
             If (cbOSDImageTranspColor.Checked) Then
                 VideoCapture1.OSD_Layers_Draw_Image(lbOSDLayers.SelectedIndex, edOSDImageFilename.Text, Convert.ToInt32(edOSDImageLeft.Text), Convert.ToInt32(edOSDImageTop.Text), True, pnOSDColorKey.BackColor)

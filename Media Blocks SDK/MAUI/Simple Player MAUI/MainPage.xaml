@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Simple_Player_MAUI.MainPage"
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             xmlns:skins="clr-namespace:VisioForge.Core.UI.MAUI.Skins;assembly=VisioForge.Core.UI.MAUI"
              Loaded="ContentPage_Loaded">
 
     <ScrollView>
@@ -32,7 +33,7 @@
                     Margin="5"/>
             </StackLayout>
 
-            <my:PlaybackPanel x:Name="pbPanel" Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="48"
+            <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="48"
                         Padding="0,0,0,0" Margin="0,0,0,0" />
         </Grid>
     </ScrollView>

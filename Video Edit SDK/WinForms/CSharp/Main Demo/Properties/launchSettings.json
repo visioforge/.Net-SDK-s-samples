@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Main Demo VE": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

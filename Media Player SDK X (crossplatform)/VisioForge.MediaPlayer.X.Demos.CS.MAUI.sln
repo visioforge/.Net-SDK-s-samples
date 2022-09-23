@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple_Media_Player_MAUI", "MAUI\Simple_Media_Player_MAUI\Simple_Media_Player_MAUI.csproj", "{01200F83-12D3-4D5E-8572-A5BEC2551A9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayer", "MAUI\SimplePlayer\SimplePlayer.csproj", "{01200F83-12D3-4D5E-8572-A5BEC2551A9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

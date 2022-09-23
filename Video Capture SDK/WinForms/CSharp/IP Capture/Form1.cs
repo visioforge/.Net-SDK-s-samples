@@ -212,6 +212,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             {
                 VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
             }
+            else
+            {
+                VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.Zero;
+            }
 
             if (rbPreview.Checked)
             {

@@ -336,6 +336,9 @@ namespace Main_Demo
             _player.Audio_OutputDevice = cbAudioOutputDevice.Text;
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
 
+            //_player.Segment_Start = TimeSpan.FromMilliseconds(12000);
+            //_player.Segment_Stop = TimeSpan.FromMilliseconds(20000);
+
             AddAudioEffects();
             AddVideoEffects();
             AddMotionDetection();
@@ -378,9 +381,6 @@ namespace Main_Demo
             await _player.PlayAsync();
 
             tmPosition.Start();
-
-            GC.Collect();
-            GC.Collect();
         }
 
         private void Form1_Shown(object sender, EventArgs e)

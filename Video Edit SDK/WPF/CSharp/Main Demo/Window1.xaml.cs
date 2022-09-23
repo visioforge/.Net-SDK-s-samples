@@ -2210,16 +2210,18 @@ namespace Main_Demo
                 WindowStyle = WindowStyle.None;
                 Topmost = true;
 
+                var dpi = VisualTreeHelper.GetDpi(this);
+
                 Left = 0;
                 Top = 0;
-                Width = Screen.AllScreens[0].Bounds.Width;
-                Height = Screen.AllScreens[0].Bounds.Height;
+                Width = Screen.AllScreens[0].Bounds.Width / dpi.DpiScaleX;
+                Height = Screen.AllScreens[0].Bounds.Height / dpi.DpiScaleY;
                 Margin = new Thickness(0);
 
                 // resizing control
                 VideoView1.Margin = new Thickness(0);
-                VideoView1.Width = Screen.AllScreens[0].Bounds.Width;
-                VideoView1.Height = Screen.AllScreens[0].Bounds.Height;
+                VideoView1.Width = Screen.AllScreens[0].Bounds.Width / dpi.DpiScaleX;
+                VideoView1.Height = Screen.AllScreens[0].Bounds.Height / dpi.DpiScaleY;
 
                 await VideoEdit1.Video_Renderer_UpdateAsync();
             }

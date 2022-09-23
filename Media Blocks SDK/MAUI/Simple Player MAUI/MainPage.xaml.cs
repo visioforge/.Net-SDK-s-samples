@@ -69,7 +69,7 @@ namespace Simple_Player_MAUI
                     edFilename.Text = result.FullPath;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 // The user canceled or something went wrong
             }
