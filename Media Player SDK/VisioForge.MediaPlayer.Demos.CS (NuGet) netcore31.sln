@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo (NuGet)
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encrypted Memory Playback Demo (NuGet) netcore31", "WinForms\CSharp\Encrypted Memory Playback Demo\Encrypted Memory Playback Demo (NuGet) netcore31.csproj", "{5B690403-3503-4F3F-8C58-B9E263464350}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skinned Player (NuGet) netcore31", "WPF\CSharp\Skinned Player\Skinned Player (NuGet) netcore31.csproj", "{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,14 @@ Global
 		{5B690403-3503-4F3F-8C58-B9E263464350}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B690403-3503-4F3F-8C58-B9E263464350}.Release|x86.ActiveCfg = Release|Any CPU
 		{5B690403-3503-4F3F-8C58-B9E263464350}.Release|x86.Build.0 = Release|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Debug|x86.Build.0 = Debug|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +186,7 @@ Global
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{5B690403-3503-4F3F-8C58-B9E263464350} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{4C2C736B-E9D9-4267-9E71-CAD3158CF6A5} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

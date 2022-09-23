@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo (NuGet)
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encrypted Memory Playback Demo (NuGet) net6", "WinForms\CSharp\Encrypted Memory Playback Demo\Encrypted Memory Playback Demo (NuGet) net6.csproj", "{F315B30D-50DF-4660-87B2-9F88B2AFF7B5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skinned Player (NuGet) net6", "WPF\CSharp\Skinned Player\Skinned Player (NuGet) net6.csproj", "{638FCE66-3B4D-47EE-8467-E04D18023C97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,14 @@ Global
 		{F315B30D-50DF-4660-87B2-9F88B2AFF7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F315B30D-50DF-4660-87B2-9F88B2AFF7B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{F315B30D-50DF-4660-87B2-9F88B2AFF7B5}.Release|x86.Build.0 = Release|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Debug|x86.Build.0 = Debug|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Release|x86.ActiveCfg = Release|Any CPU
+		{638FCE66-3B4D-47EE-8467-E04D18023C97}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +186,7 @@ Global
 		{57DA73CE-CE2B-4660-81D4-3CF28CA0A647} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{2E73EBCD-58F8-4ADC-9212-BC71F65F8DBA} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{F315B30D-50DF-4660-87B2-9F88B2AFF7B5} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{638FCE66-3B4D-47EE-8467-E04D18023C97} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
