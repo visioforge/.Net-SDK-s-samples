@@ -34,6 +34,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btTurnOn = new System.Windows.Forms.Button();
             this.btTurnOff = new System.Windows.Forms.Button();
+            this.lbDeviceCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // fontDialog1
@@ -67,18 +68,30 @@
             this.btTurnOff.UseVisualStyleBackColor = true;
             this.btTurnOff.Click += new System.EventHandler(this.btTurnOff_Click);
             // 
+            // lbDeviceCount
+            // 
+            this.lbDeviceCount.AutoSize = true;
+            this.lbDeviceCount.Location = new System.Drawing.Point(141, 145);
+            this.lbDeviceCount.Name = "lbDeviceCount";
+            this.lbDeviceCount.Size = new System.Drawing.Size(127, 20);
+            this.lbDeviceCount.TabIndex = 2;
+            this.lbDeviceCount.Text = "Devices found: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 201);
+            this.Controls.Add(this.lbDeviceCount);
             this.Controls.Add(this.btTurnOff);
             this.Controls.Add(this.btTurnOn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Camera Light Demo - Video Capture SDK .Net";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -88,5 +101,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btTurnOn;
         private System.Windows.Forms.Button btTurnOff;
+        private System.Windows.Forms.Label lbDeviceCount;
     }
 }
