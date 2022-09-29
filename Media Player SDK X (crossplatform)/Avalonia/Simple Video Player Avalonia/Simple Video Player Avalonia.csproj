@@ -25,7 +25,7 @@
     <AvaloniaResource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.5" />
+    <PackageReference Include="System.Text.Json" Version="6.0.6" />
     <PackageReference Include="Avalonia" Version="0.10.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
     <PackageReference Include="MessageBox.Avalonia" Version="2.0.0" />
@@ -37,7 +37,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.26" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.26" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.4.27" />
   </ItemGroup>
 </Project>

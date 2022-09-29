@@ -44,10 +44,10 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.26" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.4.26" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.4.27" />
   </ItemGroup>
 </Project>
