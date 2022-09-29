@@ -142,7 +142,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
         {
             var ofd = new OpenFileDialog();
             string[] files = await ofd.ShowAsync(this);
-            if (files?.Length > 0)
+            if (files != null && files.Length > 0)
             {
                 edFilenameOrURL.Text = files[0];
             }
