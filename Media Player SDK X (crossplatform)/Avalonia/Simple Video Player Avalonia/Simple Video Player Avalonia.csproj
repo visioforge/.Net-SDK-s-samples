@@ -31,7 +31,13 @@
     <PackageReference Include="MessageBox.Avalonia" Version="2.0.0" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
   </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.2" />
+  </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x86" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x86" Version="1.20.3.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x86.UPX" Version="1.20.3.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.20.3.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.20.3.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
