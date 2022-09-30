@@ -31,10 +31,10 @@
         {
             if (MediaPlayer1 != null)
             {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
             }
         }
 
@@ -60,8 +60,8 @@
 
             MediaPlayer1.Audio_AdditionalStreams_Clear();
 
-            MediaPlayer1.FilenamesOrURL.Clear();
-            MediaPlayer1.FilenamesOrURL.Add(_videoInfoList[cbVideoStream.SelectedIndex].Url);
+            MediaPlayer1.Playlist_Clear();
+            MediaPlayer1.Playlist_Add(_videoInfoList[cbVideoStream.SelectedIndex].Url);
 
             if (_videoInfoList[cbVideoStream.SelectedIndex].ToString().Contains("Muxed"))
             {

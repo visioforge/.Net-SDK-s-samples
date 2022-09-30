@@ -5,15 +5,14 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -431,8 +430,8 @@
 
             string filename = e.Filename;
 
-            MediaPlayer1.FilenamesOrURL.Clear();
-            MediaPlayer1.FilenamesOrURL.Add(filename);
+            MediaPlayer1.Playlist_Clear();
+            MediaPlayer1.Playlist_Add(filename);
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Timeshift;
 

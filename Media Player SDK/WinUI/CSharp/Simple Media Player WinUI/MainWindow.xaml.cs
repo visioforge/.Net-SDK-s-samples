@@ -1,31 +1,15 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using VisioForge.Core.MediaPlayer;
-using VisioForge.Core.Types;
-using VisioForge.Core.Types.MediaPlayer;
 using Windows.ApplicationModel;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Media.Playback;
-using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
-using WinRT;
-using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -140,8 +124,9 @@ namespace Simple_Media_Player_WinUI
         {
             videoView.Background = new SolidColorBrush(new Color { A = 0, R = 0, G = 0, B = 0 });
 
-            MediaPlayer1.FilenamesOrURL.Clear();
-            MediaPlayer1.FilenamesOrURL.Add(edFilename.Text);
+            MediaPlayer1.Playlist_Clear();
+            MediaPlayer1.Playlist_Add(edFilename.Text);
+
             await MediaPlayer1.PlayAsync();
 
             _timer.Start();

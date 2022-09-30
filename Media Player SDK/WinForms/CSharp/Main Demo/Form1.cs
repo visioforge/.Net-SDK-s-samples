@@ -11,7 +11,6 @@ namespace Media_Player_Demo
     using System.Drawing.Imaging;
     using System.Globalization;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core;
@@ -1131,6 +1130,8 @@ namespace Media_Player_Demo
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             MediaPlayer1.Debug_Telemetry = cbTelemetry.Checked;
 
+            MediaPlayer1.Playlist_Reset();
+
             zoom = 1.0;
             zoomShiftX = 0;
             zoomShiftY = 0;
@@ -1190,7 +1191,7 @@ namespace Media_Player_Demo
 
             foreach (var item in lbSourceFiles.Items)
             {
-                MediaPlayer1.FilenamesOrURL.Add(item.ToString());
+                MediaPlayer1.Playlist_Add(item.ToString());
             }
 
             MediaPlayer1.Loop = cbLoop.Checked;
@@ -3077,6 +3078,12 @@ namespace Media_Player_Demo
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
+            MediaPlayer1.OnPlaylistFinished += MediaPlayer1_OnPlaylistFinished;
+        }
+
+        private void MediaPlayer1_OnPlaylistFinished(object sender, EventArgs e)
+        {
+            MediaPlayer1.Playlist_Clear();
         }
 
         private void DestroyEngine()
@@ -3090,6 +3097,7 @@ namespace Media_Player_Demo
                 MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
                 MediaPlayer1.OnMIDIFileInfo -= MediaPlayer1_OnMIDIFileInfo;
                 MediaPlayer1.OnMotion -= MediaPlayer1_OnMotion;
+                MediaPlayer1.OnPlaylistFinished -= MediaPlayer1_OnPlaylistFinished;
 
                 MediaPlayer1.Dispose();
                 MediaPlayer1 = null;
@@ -3317,14 +3325,14 @@ namespace Media_Player_Demo
                 if (lbSourceFiles.SelectedItem != null)
                 {
                     var filename = lbSourceFiles.SelectedItem.ToString();
-                    MediaPlayer1.FilenamesOrURL.Remove(filename);
+                    MediaPlayer1.Playlist_Remove(filename);
 
                     lbSourceFiles.Items.Remove(lbSourceFiles.SelectedItem);
                 }
             }
             else if (e.ClickedItem.Name == "mnPlaylistRemoveAll")
             {
-                MediaPlayer1.FilenamesOrURL.Clear();
+                MediaPlayer1.Playlist_Clear();
                 lbSourceFiles.Items.Clear();
             }
         }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
@@ -71,6 +71,12 @@ namespace Skinned_Player
 
         public MainWindow()
         {
+            var skinFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Skins", "Default.vfskin");
+            SkinManager.LoadFromFile(skinFile);
+
+            //var skinPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Skins", "Default");
+            //SkinManager.LoadFromFolder(skinPath);
+
             InitializeComponent();
 
             StateChanged += MainWindowStateChangeRaised;
@@ -96,6 +102,7 @@ namespace Skinned_Player
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
             MediaPlayer1.Audio_PlayAudio = true;
+            MediaPlayer1.Video_Effects_Enabled = true;
 
             VideoView1.MouseDown += MediaPlayer1_MouseDown;
 

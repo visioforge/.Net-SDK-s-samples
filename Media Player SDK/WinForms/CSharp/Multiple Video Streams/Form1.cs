@@ -2,7 +2,6 @@
 {
     using System;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.MediaInfo;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -96,8 +95,8 @@
                 }
             }
 
-            MediaPlayer1.FilenamesOrURL.Clear();
-            MediaPlayer1.FilenamesOrURL.Add(edFilenameOrURL.Text);
+            MediaPlayer1.Playlist_Clear();
+            MediaPlayer1.Playlist_Add(edFilenameOrURL.Text);
 
             MediaPlayer1.Audio_PlayAudio = true;
             MediaPlayer1.Info_UseLibMediaInfo = true;

@@ -1,13 +1,11 @@
 ' ReSharper disable InconsistentNaming
 
-Imports VisioForge.Core.UI
-Imports VisioForge.Core.Types
 Imports System.IO
 Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.Events
 Imports VisioForge.Core.Types.MediaPlayer
-Imports VisioForge.Core
-Imports VisioForge.Core.DirectShow.Helpers
+Imports VisioForge.Core.UI
 
 Public Class Form1
     Private WithEvents MediaPlayer1 As MediaPlayerCore
@@ -46,7 +44,9 @@ Public Class Form1
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
 
-        MediaPlayer1.FilenamesOrURL.Add(edFilename.Text)
+        MediaPlayer1.Playlist_Clear()
+        MediaPlayer1.Playlist_Add(edFilename.Text)
+
         MediaPlayer1.Audio_PlayAudio = True
         MediaPlayer1.Info_UseLibMediaInfo = True
         MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV

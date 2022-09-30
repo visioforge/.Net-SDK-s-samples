@@ -82,8 +82,8 @@
             <Grid Grid.Row="0" Height="30" Background="#F999" x:Name="pnCaption">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <!--App icon-->
-                    <Image Source="/Resources/watermelon.ico" Width="18" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    <TextBlock Text="Media Player SDK .Net - Skinned Player" FontFamily="Arial" Margin="4 3 0 0" x:Name="CaptionBlock" />
+                    <!--<Image Source="/Resources/watermelon.ico" Width="18" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+                    <TextBlock Text="Media Player SDK .Net - Skinned Player" FontFamily="Arial" Margin="20 3 0 0" x:Name="CaptionBlock" />
                 </StackPanel>
 
                 <!--Caption buttons-->

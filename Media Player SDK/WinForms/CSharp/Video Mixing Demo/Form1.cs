@@ -7,10 +7,10 @@
     using System.IO;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.UI;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.UI;
 
     public partial class Form1 : Form
     {
@@ -31,11 +31,11 @@
         {
             if (MediaPlayer1 != null)
             {
-            MediaPlayer1.OnError -= MediaPlayer1_OnError;
-            MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
 
-            MediaPlayer1.Dispose();
-            MediaPlayer1 = null;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
             }
         }
 
@@ -51,9 +51,9 @@
             var info = new PIPInfo();
 
             // first file should be added as usual, other files using PIP API
-            if (MediaPlayer1.FilenamesOrURL.Count == 0)
+            if (MediaPlayer1.Playlist_GetCount() == 0)
             {
-                MediaPlayer1.FilenamesOrURL.Add(filename);
+                MediaPlayer1.Playlist_Add(filename);
                 lbSourceFiles.Items.Add($@"{filename} (entire screen)");
                 info.Rect = new Rectangle(0, 0, 0, 0);
                 info.Alpha = 1.0f;

@@ -12,6 +12,7 @@
 * Online licensing updated
 * Added Camera Light demo
 * Added segments support in Media Player SDK .Net (Cross-platform engine)
+* Added Playlist API in Media Player SDK .Net (Windows-only, engine)
 
 ## 15.4
 

@@ -851,6 +851,8 @@ namespace Main_Demo
             MediaPlayer1.Debug_Telemetry = cbTelemetry.IsChecked == true;
             MediaPlayer1.Debug_Mode = cbDebugMode.IsChecked == true;
 
+            MediaPlayer1.Playlist_Reset();
+
             zoom = 1.0;
             zoomShiftX = 0;
             zoomShiftY = 0;
@@ -905,7 +907,7 @@ namespace Main_Demo
 
             foreach (var item in lbSourceFiles.Items)
             {
-                MediaPlayer1.FilenamesOrURL.Add(item.ToString());
+                MediaPlayer1.Playlist_Add(item.ToString());
             }
 
             MediaPlayer1.Loop = cbLoop.IsChecked == true;
@@ -2091,18 +2093,16 @@ namespace Main_Demo
                 WindowStyle = WindowStyle.None;
                 Topmost = true;
 
-                var dpi = VisualTreeHelper.GetDpi(this);
-
                 Left = 0;
                 Top = 0;
-                Width = Screen.AllScreens[0].Bounds.Width / dpi.DpiScaleX;
-                Height = Screen.AllScreens[0].Bounds.Height / dpi.DpiScaleY;
+                Width = SystemParameters.PrimaryScreenWidth;
+                Height = SystemParameters.PrimaryScreenHeight;
                 Margin = new Thickness(0);
 
                 // resizing control
                 VideoView1.Margin = new Thickness(0, 0, 0, 0);
-                VideoView1.Width = Screen.AllScreens[0].Bounds.Width / dpi.DpiScaleX;
-                VideoView1.Height = Screen.AllScreens[0].Bounds.Height / dpi.DpiScaleY;
+                VideoView1.Width = SystemParameters.PrimaryScreenWidth;
+                VideoView1.Height = SystemParameters.PrimaryScreenHeight;
 
                 await MediaPlayer1.Video_Renderer_UpdateAsync();
             }
@@ -2999,7 +2999,8 @@ namespace Main_Demo
 
         private void mnPlaylistRemoveAll_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.FilenamesOrURL.Clear();
+            MediaPlayer1.Playlist_Clear();
+
             lbSourceFiles.Items.Clear();
         }
 
@@ -3008,7 +3009,7 @@ namespace Main_Demo
             if (lbSourceFiles.SelectedItem != null)
             {
                 var filename = lbSourceFiles.SelectedItem.ToString();
-                MediaPlayer1.FilenamesOrURL.Remove(filename);
+                MediaPlayer1.Playlist_Remove(filename);
 
                 lbSourceFiles.Items.Remove(lbSourceFiles.SelectedItem);
             }

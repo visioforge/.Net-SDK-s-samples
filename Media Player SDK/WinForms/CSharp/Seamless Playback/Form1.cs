@@ -6,12 +6,11 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.UI;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.UI;
 
     public partial class Form1 : Form
     {
@@ -141,8 +140,8 @@
 
         private async Task PlayFileAsync(string filename, MediaPlayerCore player)
         {
-            player.FilenamesOrURL.Clear();
-            player.FilenamesOrURL.Add(filename);
+            player.Playlist_Clear();
+            player.Playlist_Add(filename);
 
             await player.PlayAsync();
 

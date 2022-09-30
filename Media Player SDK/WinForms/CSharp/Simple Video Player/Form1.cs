@@ -6,12 +6,11 @@ namespace Video_Player_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.UI;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.UI;
 
     public partial class Form1 : Form
     {
@@ -88,7 +87,9 @@ namespace Video_Player_Demo
                     break;
             }
 
-            MediaPlayer1.FilenamesOrURL.Add(edFilename.Text);
+            MediaPlayer1.Playlist_Clear();
+            MediaPlayer1.Playlist_Add(edFilename.Text);
+
             MediaPlayer1.Loop = cbLoop.Checked;
             MediaPlayer1.Audio_PlayAudio = true;
             MediaPlayer1.Info_UseLibMediaInfo = true;

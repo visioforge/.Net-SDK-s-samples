@@ -1,21 +1,19 @@
-﻿Imports System.Globalization
-Imports VisioForge.Core.UI
-Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Core.Types.VideoEffects ' ReSharper disable InconsistentNaming
-
+﻿Imports System.Drawing.Imaging
+Imports System.Globalization
 Imports System.IO
+Imports System.Threading.Tasks
+Imports VisioForge.Core
+Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.MediaInfo
 Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.Types.AudioEffects
 Imports VisioForge.Core.Types.Events
 Imports VisioForge.Core.Types.MediaPlayer
-Imports System.Drawing.Imaging
 Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoEffects ' ReSharper disable InconsistentNaming
 Imports VisioForge.Core.Types.VideoProcessing
-Imports VisioForge.Core.Types.AudioEffects
-Imports VisioForge.Core.Types
-Imports VisioForge.Core
-Imports System.Threading.Tasks
-Imports VisioForge.Core.Helpers
+Imports VisioForge.Core.UI
+Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 Imports VisioForge.Libs.Types
 
 Public Class Form1
@@ -994,8 +992,9 @@ Public Class Form1
             MessageBox.Show("Playlist is empty!")
         End If
 
+        MediaPlayer1.Playlist_Clear()
         For Each item As Object In lbSourceFiles.Items
-            MediaPlayer1.FilenamesOrURL.Add(item.ToString())
+            MediaPlayer1.Playlist_Add(item.ToString())
         Next
 
         MediaPlayer1.Loop = cbLoop.Checked
@@ -1574,26 +1573,6 @@ Public Class Form1
         BeginInvoke(Sub()
                         mmLog.Text = mmLog.Text + e.Message + Environment.NewLine
                     End Sub)
-
-    End Sub
-
-    Private Delegate Sub AFStopDelegate()
-
-    Private Async Sub AFStopDelegateMethod()
-
-        tbTimeline.Value = 0
-
-        'playlist used, we still need to call from GUI thread, using delegate
-        If (MediaPlayer1.FilenamesOrURL.Count > 0) Then
-            Await MediaPlayer1.PlayAsync()
-        End If
-
-    End Sub
-
-    Private Sub MediaPlayer1_OnStop(ByVal sender As System.Object, ByVal e As EventArgs) Handles MediaPlayer1.OnStop
-
-        Dim motdel As AFStopDelegate = New AFStopDelegate(AddressOf AFStopDelegateMethod)
-        BeginInvoke(motdel, Nothing)
 
     End Sub
 
@@ -2773,11 +2752,11 @@ Public Class Form1
         If (e.ClickedItem.Name = "mnPlaylistRemove") Then
             If (lbSourceFiles.SelectedItem IsNot Nothing) Then
                 Dim filename = lbSourceFiles.SelectedItem.ToString()
-                MediaPlayer1.FilenamesOrURL.Remove(filename)
+                MediaPlayer1.Playlist_Remove(filename)
                 lbSourceFiles.Items.Remove(lbSourceFiles.SelectedItem)
             End If
         ElseIf (e.ClickedItem.Name = "mnPlaylistRemoveAll") Then
-            MediaPlayer1.FilenamesOrURL.Clear()
+            MediaPlayer1.Playlist_Clear()
             lbSourceFiles.Items.Clear()
         End If
     End Sub
