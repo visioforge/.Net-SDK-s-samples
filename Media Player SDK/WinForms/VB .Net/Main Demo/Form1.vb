@@ -6,6 +6,7 @@ Imports VisioForge.Core
 Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.MediaInfo
 Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.AudioEffects
 Imports VisioForge.Core.Types.Events
 Imports VisioForge.Core.Types.MediaPlayer
