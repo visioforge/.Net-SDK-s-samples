@@ -13,6 +13,7 @@
 * Added Camera Light demo
 * Added segments support in Media Player SDK .Net (Cross-platform engine)
 * Added Playlist API in Media Player SDK .Net (Windows-only, engine)
+* Resolved issues with "rtsp_source_create_audio_resampler" call in the RTSP Low Latency engine in Video Capture SDK .Net (Windows-only, engine)
 
 ## 15.4
 
