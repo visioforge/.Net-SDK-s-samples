@@ -1209,6 +1209,10 @@ namespace VideoCapture_CSharp_Demo
             this.cbTelemetry = new System.Windows.Forms.CheckBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
+            this.cbDecklinkOutputVideoRenderer = new System.Windows.Forms.ComboBox();
+            this.cbDecklinkOutputAudioRenderer = new System.Windows.Forms.ComboBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1959,7 +1963,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage91.Controls.Add(this.cbZoom);
             this.tabPage91.Location = new System.Drawing.Point(4, 29);
             this.tabPage91.Name = "tabPage91";
-            this.tabPage91.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage91.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage91.Size = new System.Drawing.Size(416, 389);
             this.tabPage91.TabIndex = 2;
             this.tabPage91.Text = "Zoom";
@@ -2068,7 +2072,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage92.Controls.Add(this.cbPan);
             this.tabPage92.Location = new System.Drawing.Point(4, 29);
             this.tabPage92.Name = "tabPage92";
-            this.tabPage92.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage92.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage92.Size = new System.Drawing.Size(416, 389);
             this.tabPage92.TabIndex = 3;
             this.tabPage92.Text = "Pan";
@@ -3159,7 +3163,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage9.Controls.Add(this.cbResize);
             this.tabPage9.Location = new System.Drawing.Point(4, 29);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage9.Size = new System.Drawing.Size(439, 713);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "Resize / crop / rotate";
@@ -7162,7 +7166,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage25.Controls.Add(this.cbBarcodeDetectionEnabled);
             this.tabPage25.Location = new System.Drawing.Point(4, 29);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage25.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage25.Size = new System.Drawing.Size(464, 752);
             this.tabPage25.TabIndex = 13;
             this.tabPage25.Text = "Barcode reader";
@@ -7337,6 +7341,10 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tabPage103
             // 
+            this.tabPage103.Controls.Add(this.label71);
+            this.tabPage103.Controls.Add(this.label70);
+            this.tabPage103.Controls.Add(this.cbDecklinkOutputAudioRenderer);
+            this.tabPage103.Controls.Add(this.cbDecklinkOutputVideoRenderer);
             this.tabPage103.Controls.Add(this.cbDecklinkOutputDownConversionAnalogOutput);
             this.tabPage103.Controls.Add(this.cbDecklinkOutputDownConversion);
             this.tabPage103.Controls.Add(this.label337);
@@ -7368,7 +7376,7 @@ namespace VideoCapture_CSharp_Demo
             // cbDecklinkOutputDownConversionAnalogOutput
             // 
             this.cbDecklinkOutputDownConversionAnalogOutput.AutoSize = true;
-            this.cbDecklinkOutputDownConversionAnalogOutput.Location = new System.Drawing.Point(27, 382);
+            this.cbDecklinkOutputDownConversionAnalogOutput.Location = new System.Drawing.Point(15, 541);
             this.cbDecklinkOutputDownConversionAnalogOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputDownConversionAnalogOutput.Name = "cbDecklinkOutputDownConversionAnalogOutput";
             this.cbDecklinkOutputDownConversionAnalogOutput.Size = new System.Drawing.Size(174, 24);
@@ -7386,7 +7394,7 @@ namespace VideoCapture_CSharp_Demo
             "Letterbox 16:9",
             "Anamorphic",
             "Anamorphic center"});
-            this.cbDecklinkOutputDownConversion.Location = new System.Drawing.Point(27, 345);
+            this.cbDecklinkOutputDownConversion.Location = new System.Drawing.Point(15, 504);
             this.cbDecklinkOutputDownConversion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputDownConversion.Name = "cbDecklinkOutputDownConversion";
             this.cbDecklinkOutputDownConversion.Size = new System.Drawing.Size(180, 28);
@@ -7395,7 +7403,7 @@ namespace VideoCapture_CSharp_Demo
             // label337
             // 
             this.label337.AutoSize = true;
-            this.label337.Location = new System.Drawing.Point(22, 320);
+            this.label337.Location = new System.Drawing.Point(10, 479);
             this.label337.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label337.Name = "label337";
             this.label337.Size = new System.Drawing.Size(174, 20);
@@ -7410,7 +7418,7 @@ namespace VideoCapture_CSharp_Demo
             "Default",
             "Enabled",
             "Disabled"});
-            this.cbDecklinkOutputHDTVPulldown.Location = new System.Drawing.Point(27, 454);
+            this.cbDecklinkOutputHDTVPulldown.Location = new System.Drawing.Point(15, 613);
             this.cbDecklinkOutputHDTVPulldown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputHDTVPulldown.Name = "cbDecklinkOutputHDTVPulldown";
             this.cbDecklinkOutputHDTVPulldown.Size = new System.Drawing.Size(180, 28);
@@ -7419,7 +7427,7 @@ namespace VideoCapture_CSharp_Demo
             // label336
             // 
             this.label336.AutoSize = true;
-            this.label336.Location = new System.Drawing.Point(22, 431);
+            this.label336.Location = new System.Drawing.Point(10, 590);
             this.label336.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label336.Name = "label336";
             this.label336.Size = new System.Drawing.Size(119, 20);
@@ -7435,7 +7443,7 @@ namespace VideoCapture_CSharp_Demo
             "None",
             "Digital",
             "Analogue"});
-            this.cbDecklinkOutputBlackToDeck.Location = new System.Drawing.Point(27, 272);
+            this.cbDecklinkOutputBlackToDeck.Location = new System.Drawing.Point(15, 431);
             this.cbDecklinkOutputBlackToDeck.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputBlackToDeck.Name = "cbDecklinkOutputBlackToDeck";
             this.cbDecklinkOutputBlackToDeck.Size = new System.Drawing.Size(180, 28);
@@ -7444,7 +7452,7 @@ namespace VideoCapture_CSharp_Demo
             // label335
             // 
             this.label335.AutoSize = true;
-            this.label335.Location = new System.Drawing.Point(22, 248);
+            this.label335.Location = new System.Drawing.Point(10, 407);
             this.label335.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label335.Name = "label335";
             this.label335.Size = new System.Drawing.Size(104, 20);
@@ -7459,7 +7467,7 @@ namespace VideoCapture_CSharp_Demo
             "Default",
             "Enabled",
             "Disabled"});
-            this.cbDecklinkOutputSingleField.Location = new System.Drawing.Point(27, 203);
+            this.cbDecklinkOutputSingleField.Location = new System.Drawing.Point(15, 362);
             this.cbDecklinkOutputSingleField.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputSingleField.Name = "cbDecklinkOutputSingleField";
             this.cbDecklinkOutputSingleField.Size = new System.Drawing.Size(180, 28);
@@ -7468,7 +7476,7 @@ namespace VideoCapture_CSharp_Demo
             // label334
             // 
             this.label334.AutoSize = true;
-            this.label334.Location = new System.Drawing.Point(22, 178);
+            this.label334.Location = new System.Drawing.Point(10, 337);
             this.label334.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label334.Name = "label334";
             this.label334.Size = new System.Drawing.Size(136, 20);
@@ -7482,7 +7490,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbDecklinkOutputComponentLevels.Items.AddRange(new object[] {
             "SMPTE",
             "Betacam"});
-            this.cbDecklinkOutputComponentLevels.Location = new System.Drawing.Point(231, 272);
+            this.cbDecklinkOutputComponentLevels.Location = new System.Drawing.Point(219, 431);
             this.cbDecklinkOutputComponentLevels.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputComponentLevels.Name = "cbDecklinkOutputComponentLevels";
             this.cbDecklinkOutputComponentLevels.Size = new System.Drawing.Size(180, 28);
@@ -7491,7 +7499,7 @@ namespace VideoCapture_CSharp_Demo
             // label333
             // 
             this.label333.AutoSize = true;
-            this.label333.Location = new System.Drawing.Point(226, 248);
+            this.label333.Location = new System.Drawing.Point(214, 407);
             this.label333.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label333.Name = "label333";
             this.label333.Size = new System.Drawing.Size(135, 20);
@@ -7505,7 +7513,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbDecklinkOutputNTSC.Items.AddRange(new object[] {
             "USA",
             "Japan"});
-            this.cbDecklinkOutputNTSC.Location = new System.Drawing.Point(231, 203);
+            this.cbDecklinkOutputNTSC.Location = new System.Drawing.Point(219, 362);
             this.cbDecklinkOutputNTSC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputNTSC.Name = "cbDecklinkOutputNTSC";
             this.cbDecklinkOutputNTSC.Size = new System.Drawing.Size(180, 28);
@@ -7514,7 +7522,7 @@ namespace VideoCapture_CSharp_Demo
             // label332
             // 
             this.label332.AutoSize = true;
-            this.label332.Location = new System.Drawing.Point(226, 178);
+            this.label332.Location = new System.Drawing.Point(214, 337);
             this.label332.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label332.Name = "label332";
             this.label332.Size = new System.Drawing.Size(118, 20);
@@ -7529,7 +7537,7 @@ namespace VideoCapture_CSharp_Demo
             "Default",
             "Enabled",
             "Disabled"});
-            this.cbDecklinkOutputDualLink.Location = new System.Drawing.Point(27, 134);
+            this.cbDecklinkOutputDualLink.Location = new System.Drawing.Point(15, 293);
             this.cbDecklinkOutputDualLink.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputDualLink.Name = "cbDecklinkOutputDualLink";
             this.cbDecklinkOutputDualLink.Size = new System.Drawing.Size(180, 28);
@@ -7538,7 +7546,7 @@ namespace VideoCapture_CSharp_Demo
             // label331
             // 
             this.label331.AutoSize = true;
-            this.label331.Location = new System.Drawing.Point(22, 111);
+            this.label331.Location = new System.Drawing.Point(10, 270);
             this.label331.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label331.Name = "label331";
             this.label331.Size = new System.Drawing.Size(113, 20);
@@ -7554,7 +7562,7 @@ namespace VideoCapture_CSharp_Demo
             "Component",
             "Composite",
             "S-Video"});
-            this.cbDecklinkOutputAnalog.Location = new System.Drawing.Point(231, 134);
+            this.cbDecklinkOutputAnalog.Location = new System.Drawing.Point(219, 293);
             this.cbDecklinkOutputAnalog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkOutputAnalog.Name = "cbDecklinkOutputAnalog";
             this.cbDecklinkOutputAnalog.Size = new System.Drawing.Size(180, 28);
@@ -7563,7 +7571,7 @@ namespace VideoCapture_CSharp_Demo
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(226, 111);
+            this.label87.Location = new System.Drawing.Point(214, 270);
             this.label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(109, 20);
@@ -7573,7 +7581,7 @@ namespace VideoCapture_CSharp_Demo
             // cbDecklinkDV
             // 
             this.cbDecklinkDV.AutoSize = true;
-            this.cbDecklinkDV.Location = new System.Drawing.Point(40, 60);
+            this.cbDecklinkDV.Location = new System.Drawing.Point(14, 227);
             this.cbDecklinkDV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbDecklinkDV.Name = "cbDecklinkDV";
             this.cbDecklinkDV.Size = new System.Drawing.Size(108, 24);
@@ -9590,7 +9598,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage63.Controls.Add(this.tabControl19);
             this.tabPage63.Location = new System.Drawing.Point(4, 29);
             this.tabPage63.Name = "tabPage63";
-            this.tabPage63.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage63.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage63.Size = new System.Drawing.Size(692, 435);
             this.tabPage63.TabIndex = 9;
             this.tabPage63.Text = "Audio input / output";
@@ -9621,7 +9629,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage96.Controls.Add(this.label10);
             this.tabPage96.Location = new System.Drawing.Point(4, 29);
             this.tabPage96.Name = "tabPage96";
-            this.tabPage96.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage96.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage96.Size = new System.Drawing.Size(674, 393);
             this.tabPage96.TabIndex = 0;
             this.tabPage96.Text = "Main audio input";
@@ -9722,7 +9730,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage97.Controls.Add(this.label15);
             this.tabPage97.Location = new System.Drawing.Point(4, 29);
             this.tabPage97.Name = "tabPage97";
-            this.tabPage97.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage97.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage97.Size = new System.Drawing.Size(674, 393);
             this.tabPage97.TabIndex = 1;
             this.tabPage97.Text = "Audio output";
@@ -9813,7 +9821,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage98.Controls.Add(this.peakMeterCtrl1);
             this.tabPage98.Location = new System.Drawing.Point(4, 29);
             this.tabPage98.Name = "tabPage98";
-            this.tabPage98.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage98.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage98.Size = new System.Drawing.Size(674, 393);
             this.tabPage98.TabIndex = 2;
             this.tabPage98.Text = "VU meter";
@@ -9978,7 +9986,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage99.Controls.Add(this.label180);
             this.tabPage99.Location = new System.Drawing.Point(4, 29);
             this.tabPage99.Name = "tabPage99";
-            this.tabPage99.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage99.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage99.Size = new System.Drawing.Size(674, 393);
             this.tabPage99.TabIndex = 3;
             this.tabPage99.Text = "Additional audio inputs";
@@ -12423,7 +12431,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage100.Controls.Add(this.label320);
             this.tabPage100.Location = new System.Drawing.Point(4, 29);
             this.tabPage100.Name = "tabPage100";
-            this.tabPage100.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage100.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage100.Size = new System.Drawing.Size(642, 336);
             this.tabPage100.TabIndex = 3;
             this.tabPage100.Text = "Video file";
@@ -14224,6 +14232,42 @@ namespace VideoCapture_CSharp_Demo
             this.mmLog.Size = new System.Drawing.Size(462, 110);
             this.mmLog.TabIndex = 97;
             // 
+            // cbDecklinkOutputVideoRenderer
+            // 
+            this.cbDecklinkOutputVideoRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDecklinkOutputVideoRenderer.FormattingEnabled = true;
+            this.cbDecklinkOutputVideoRenderer.Location = new System.Drawing.Point(14, 106);
+            this.cbDecklinkOutputVideoRenderer.Name = "cbDecklinkOutputVideoRenderer";
+            this.cbDecklinkOutputVideoRenderer.Size = new System.Drawing.Size(386, 28);
+            this.cbDecklinkOutputVideoRenderer.TabIndex = 19;
+            // 
+            // cbDecklinkOutputAudioRenderer
+            // 
+            this.cbDecklinkOutputAudioRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDecklinkOutputAudioRenderer.FormattingEnabled = true;
+            this.cbDecklinkOutputAudioRenderer.Location = new System.Drawing.Point(14, 178);
+            this.cbDecklinkOutputAudioRenderer.Name = "cbDecklinkOutputAudioRenderer";
+            this.cbDecklinkOutputAudioRenderer.Size = new System.Drawing.Size(386, 28);
+            this.cbDecklinkOutputAudioRenderer.TabIndex = 20;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(10, 83);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(114, 20);
+            this.label70.TabIndex = 21;
+            this.label70.Text = "Video renderer";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(10, 155);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(114, 20);
+            this.label71.TabIndex = 22;
+            this.label71.Text = "Audio renderer";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -15668,6 +15712,10 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.CheckBox cbTelemetry;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.TextBox mmLog;
+        private System.Windows.Forms.ComboBox cbDecklinkOutputVideoRenderer;
+        private System.Windows.Forms.ComboBox cbDecklinkOutputAudioRenderer;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label70;
     }
 }
 

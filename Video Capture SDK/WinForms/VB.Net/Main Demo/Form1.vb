@@ -1,28 +1,26 @@
 ' ReSharper disable InconsistentNaming
 
+Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq
+Imports System.Threading.Tasks
+Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.Types
-Imports VisioForge.Core.UI.WinForms
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Types.Decklink
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.FFMPEGEXE
+Imports VisioForge.Core.Types.MediaPlayer
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoCapture
+Imports VisioForge.Core.Types.VideoEffects
+Imports VisioForge.Core.Types.VideoProcessing
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Core.Types.Output
-Imports VisioForge.Core.Types.VideoEffects
-Imports VisioForge.Core
-Imports VisioForge.Core.Types.FFMPEGEXE
-Imports VisioForge.Core.Types.Decklink
 Imports VisioForge.Core.VideoCapture
-Imports VisioForge.Core.Types.Events
-Imports VisioForge.Core.Types.VideoCapture
-Imports VisioForge.Core.Types.AudioEffects
-Imports VisioForge.Core.Types.VideoProcessing
-Imports System.Drawing.Imaging
-Imports VisioForge.Core.Types.MediaPlayer
-Imports System.Threading.Tasks
-Imports VisioForge.Core.Helpers
 Imports VisioForge.Libs.Types
 
 Public Class Form1
@@ -126,6 +124,7 @@ Public Class Form1
     End Sub
 
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+
         CreateEngine()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
@@ -172,6 +171,22 @@ Public Class Form1
         cbDecklinkSourceNTSC.SelectedIndex = 0
         cbDecklinkSourceComponentLevels.SelectedIndex = 0
         cbDecklinkSourceTimecode.SelectedIndex = 0
+
+        For Each item As String In VideoCapture1.Decklink_Output_VideoRenderers()
+            cbDecklinkOutputVideoRenderer.Items.Add(item)
+        Next
+
+        If (cbDecklinkOutputVideoRenderer.Items.Count > 0) Then
+            cbDecklinkOutputVideoRenderer.SelectedIndex = 0
+        End If
+
+        For Each item As String In VideoCapture1.Decklink_Output_AudioRenderers()
+            cbDecklinkOutputAudioRenderer.Items.Add(item)
+        Next
+
+        If (cbDecklinkOutputAudioRenderer.Items.Count > 0) Then
+            cbDecklinkOutputAudioRenderer.SelectedIndex = 0
+        End If
 
         cbFaceTrackingColorMode.SelectedIndex = 0
         cbFaceTrackingScalingMode.SelectedIndex = 0
@@ -1205,6 +1220,8 @@ Public Class Form1
 
         If cbDecklinkOutput.Checked Then
             VideoCapture1.Decklink_Output = New DecklinkOutputSettings()
+            VideoCapture1.Decklink_Output.VideoRendererName = cbDecklinkOutputVideoRenderer.Text
+            VideoCapture1.Decklink_Output.AudioRendererName = cbDecklinkOutputAudioRenderer.Text
             VideoCapture1.Decklink_Output.DVEncoding = cbDecklinkDV.Checked
             VideoCapture1.Decklink_Output.AnalogOutputIREUSA = cbDecklinkOutputNTSC.SelectedIndex = 0
             VideoCapture1.Decklink_Output.AnalogOutputSMPTE = cbDecklinkOutputComponentLevels.SelectedIndex = 0

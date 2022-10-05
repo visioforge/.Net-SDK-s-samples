@@ -697,58 +697,62 @@
             <TabItem Header="Decklink" Height="19.96" VerticalAlignment="Top" >
                 <Grid>
                     <CheckBox x:Name="cbDecklinkOutput" Content="Enable output to Decklink card" HorizontalAlignment="Left" Margin="22,18.08,0,0" VerticalAlignment="Top"/>
-                    <CheckBox x:Name="cbDecklinkDV" Content="DV output" HorizontalAlignment="Left" Margin="43,48.08,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Dual link mode" HorizontalAlignment="Left" Margin="32,81.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputDualLink" HorizontalAlignment="Left" Margin="32,107.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <CheckBox x:Name="cbDecklinkDV" Content="DV output" HorizontalAlignment="Left" Margin="22,172,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Dual link mode" HorizontalAlignment="Left" Margin="22,204,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputDualLink" HorizontalAlignment="Left" Margin="22,230,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Default"/>
                         <ComboBoxItem Content="Enabled"/>
                         <ComboBoxItem Content="Disabled"/>
                     </ComboBox>
-                    <Label Content="Analog output" HorizontalAlignment="Left" Margin="206,81.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputAnalog" HorizontalAlignment="Left" Margin="206,107.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="Analog output" HorizontalAlignment="Left" Margin="196,204,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputAnalog" HorizontalAlignment="Left" Margin="196,230,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Auto"/>
                         <ComboBoxItem Content="Component"/>
                         <ComboBoxItem Content="Composite"/>
                         <ComboBoxItem Content="S-Video"/>
                     </ComboBox>
-                    <Label Content="Single field output" HorizontalAlignment="Left" Margin="32,127.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputSingleField" HorizontalAlignment="Left" Margin="32,153.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="Single field output" HorizontalAlignment="Left" Margin="22,250,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputSingleField" HorizontalAlignment="Left" Margin="22,276,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Default"/>
                         <ComboBoxItem Content="Enabled"/>
                         <ComboBoxItem Content="Disabled"/>
                     </ComboBox>
-                    <Label Content="NTSC standard" HorizontalAlignment="Left" Margin="206,127.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputNTSC" HorizontalAlignment="Left" Margin="206,153.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="NTSC standard" HorizontalAlignment="Left" Margin="196,250,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputNTSC" HorizontalAlignment="Left" Margin="196,276,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="USA"/>
                         <ComboBoxItem Content="Japan"/>
                     </ComboBox>
-                    <Label Content="Black to deck" HorizontalAlignment="Left" Margin="32,181.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputBlackToDeck" HorizontalAlignment="Left" Margin="32,207.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="Black to deck" HorizontalAlignment="Left" Margin="22,304,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputBlackToDeck" HorizontalAlignment="Left" Margin="22,330,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Default"/>
                         <ComboBoxItem Content="None"/>
                         <ComboBoxItem Content="Digital"/>
                         <ComboBoxItem Content="Analogue"/>
                     </ComboBox>
-                    <Label Content="Component levels" HorizontalAlignment="Left" Margin="206,181.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputComponentLevels" HorizontalAlignment="Left" Margin="206,207.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="Component levels" HorizontalAlignment="Left" Margin="196,304,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputComponentLevels" HorizontalAlignment="Left" Margin="196,330,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="SMPTE"/>
                         <ComboBoxItem Content="Betacam"/>
                     </ComboBox>
-                    <Label Content="Down conversion mode" HorizontalAlignment="Left" Margin="32,227.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputDownConversion" HorizontalAlignment="Left" Margin="32,253.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="Down conversion mode" HorizontalAlignment="Left" Margin="22,350,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputDownConversion" HorizontalAlignment="Left" Margin="22,376,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Default"/>
                         <ComboBoxItem Content="Disabled"/>
                         <ComboBoxItem Content="Letterbox 16:9"/>
                         <ComboBoxItem Content="Anamorphic"/>
                         <ComboBoxItem Content="Anamorphic center"/>
                     </ComboBox>
-                    <Label Content="HDTV pulldown" HorizontalAlignment="Left" Margin="32,309.08,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cbDecklinkOutputHDTVPulldown" HorizontalAlignment="Left" Margin="32,335.04,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
+                    <Label Content="HDTV pulldown" HorizontalAlignment="Left" Margin="22,432,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputHDTVPulldown" HorizontalAlignment="Left" Margin="22,458,0,0" VerticalAlignment="Top" Width="143" SelectedIndex="0">
                         <ComboBoxItem Content="Default"/>
                         <ComboBoxItem Content="Enabled"/>
                         <ComboBoxItem Content="Disabled"/>
                     </ComboBox>
-                    <CheckBox x:Name="cbDecklinkOutputDownConversionAnalogOutput" Content="Analog output used" HorizontalAlignment="Left" Margin="32,280,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbDecklinkOutputDownConversionAnalogOutput" Content="Analog output used" HorizontalAlignment="Left" Margin="22,403,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputVideoRenderer" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top" Width="317"/>
+                    <Label x:Name="label6" Content="Video renderer" HorizontalAlignment="Left" Margin="22,55,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label7" Content="Audio renderer" HorizontalAlignment="Left" Margin="22,108,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbDecklinkOutputAudioRenderer" HorizontalAlignment="Left" Margin="22,134,0,0" VerticalAlignment="Top" Width="317"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Encryption" Height="19.96" VerticalAlignment="Top" >

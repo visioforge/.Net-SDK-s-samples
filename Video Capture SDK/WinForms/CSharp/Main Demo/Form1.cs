@@ -18,7 +18,6 @@ namespace VideoCapture_CSharp_Demo
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
@@ -241,6 +240,26 @@ namespace VideoCapture_CSharp_Demo
             cbDecklinkSourceNTSC.SelectedIndex = 0;
             cbDecklinkSourceComponentLevels.SelectedIndex = 0;
             cbDecklinkSourceTimecode.SelectedIndex = 0;
+
+            foreach (var item in VideoCapture1.Decklink_Output_VideoRenderers())
+            {
+                cbDecklinkOutputVideoRenderer.Items.Add(item);
+            }
+
+            if (cbDecklinkOutputVideoRenderer.Items.Count > 0)
+            {
+                cbDecklinkOutputVideoRenderer.SelectedIndex = 0;
+            }
+
+            foreach (var item in VideoCapture1.Decklink_Output_AudioRenderers())
+            {
+                cbDecklinkOutputAudioRenderer.Items.Add(item);
+            }
+
+            if (cbDecklinkOutputAudioRenderer.Items.Count > 0)
+            {
+                cbDecklinkOutputAudioRenderer.SelectedIndex = 0;
+            }
 
             cbFaceTrackingColorMode.SelectedIndex = 0;
             cbFaceTrackingScalingMode.SelectedIndex = 0;
@@ -1132,7 +1151,7 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.Virtual_Camera_Output_Enabled = cbVirtualCamera.Checked;
 
             // Decklink output
-            ConfigureDecklink();
+            ConfigureDecklinkOutput();
 
             // Object detection 
             ConfigureMotionDetectionEx();
@@ -1774,12 +1793,14 @@ namespace VideoCapture_CSharp_Demo
             }
         }
 
-        private void ConfigureDecklink()
+        private void ConfigureDecklinkOutput()
         {
             if (cbDecklinkOutput.Checked)
             {
                 VideoCapture1.Decklink_Output = new DecklinkOutputSettings
                 {
+                    VideoRendererName = cbDecklinkOutputVideoRenderer.Text,
+                    AudioRendererName = cbDecklinkOutputAudioRenderer.Text,
                     DVEncoding = cbDecklinkDV.Checked,
                     AnalogOutputIREUSA = cbDecklinkOutputNTSC.SelectedIndex == 0,
                     AnalogOutputSMPTE =
