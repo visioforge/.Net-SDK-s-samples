@@ -4156,7 +4156,7 @@ namespace Main_Demo
 
         private void cbCustomVideoSourceCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbCustomVideoSourceFilter == null)
+            if (VideoCapture1 == null || cbCustomVideoSourceFilter == null)
             {
                 return;
             }
@@ -4193,7 +4193,7 @@ namespace Main_Demo
 
         private void cbCustomAudioSourceCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbCustomAudioSourceFilter == null)
+            if (VideoCapture1 == null || cbCustomAudioSourceFilter == null)
             {
                 return;
             }
