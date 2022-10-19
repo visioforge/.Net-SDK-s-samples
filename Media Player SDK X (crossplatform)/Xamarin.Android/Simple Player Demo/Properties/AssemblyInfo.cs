@@ -22,5 +22,5 @@ using Android.App;
 //      Minor Version 
 //      Build Number
 //      Revision
-[assembly: AssemblyVersion("15.4.33.0")]
-[assembly: AssemblyFileVersion("15.4.33.0")]
+[assembly: AssemblyVersion("15.4.34.0")]
+[assembly: AssemblyFileVersion("15.4.34.0")]

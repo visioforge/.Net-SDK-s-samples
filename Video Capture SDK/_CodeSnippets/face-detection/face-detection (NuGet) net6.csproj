@@ -9,8 +9,8 @@
     <AssemblyTitle>face-detection</AssemblyTitle>
     <Product>face-detection</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.33.0</AssemblyVersion>
-    <FileVersion>15.4.33.0</FileVersion>
+    <AssemblyVersion>15.4.34.0</AssemblyVersion>
+    <FileVersion>15.4.34.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -61,9 +61,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.33" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.33" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.33" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.33" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.34" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.34" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.34" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.34" />
   </ItemGroup>
 </Project>
