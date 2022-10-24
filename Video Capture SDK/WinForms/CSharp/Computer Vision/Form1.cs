@@ -15,16 +15,14 @@ namespace Computer_Vision_Demo
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
     using VisioForge.Core.CV;
     using VisioForge.Core.MediaPlayer;
-    using VisioForge.Core.VideoCapture;
-    using VisioForge.Core.MFP;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -392,7 +390,7 @@ namespace Computer_Vision_Demo
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture));
             }
         }
 
