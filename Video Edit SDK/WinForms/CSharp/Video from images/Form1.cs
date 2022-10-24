@@ -1,7 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
@@ -11,16 +10,14 @@ using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 namespace Video_From_Images
 {
     using System.Diagnostics;
-
-    using VisioForge.Core.Types;
-    using VisioForge.Core.Types.Output;
-    using VisioForge.Core.Types.VideoEffects;
     using System.IO;
-    using VisioForge.Core.VideoEdit;
-    using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.VideoEdit;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.Output;
+    using VisioForge.Core.Types.VideoEdit;
+    using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.VideoEdit;
 
     public partial class Form1 : Form
     {
@@ -83,7 +80,7 @@ namespace Video_From_Images
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
             {
-                VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
+                VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
 
                 // resize if required
                 int customWidth = 0;
@@ -304,7 +301,7 @@ namespace Video_From_Images
                 VideoEdit1.Video_Resize_Height = Convert.ToInt32(edHeight.Text);
             }
 
-            VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
 
             // apply capture parameters
 

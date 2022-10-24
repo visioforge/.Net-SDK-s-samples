@@ -18,7 +18,6 @@ namespace Main_Demo
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using VisioForge.Core;
     using VisioForge.Core.DirectShow.Helpers;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
@@ -31,7 +30,6 @@ namespace Main_Demo
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
     using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
@@ -481,7 +479,7 @@ namespace Main_Demo
                 VideoEdit1.Video_Subtitles = null;
             }
 
-            VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
 
             if (rbWPF.IsChecked == true)
             {
@@ -1696,7 +1694,7 @@ namespace Main_Demo
         {
             if (openFileDialog1.ShowDialog() == true)
             {
-                VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture);
+                VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
                 // resize if required
                 int customWidth = 0;

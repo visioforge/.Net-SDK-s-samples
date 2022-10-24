@@ -13,12 +13,11 @@ namespace TV_Tuner_Demo
     using System.Collections.Generic;
     using System.IO;
     using System.Threading;
-
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     class Program
     {
@@ -132,7 +131,7 @@ namespace TV_Tuner_Demo
             // set properties
             videoCapture.Video_CaptureDevice = new VideoCaptureSource(videoCaptureDevices[videoCaptureDeviceIndex].Name);
             videoCapture.Video_CaptureDevice.Format_UseBest = true;
-            videoCapture.Video_CaptureDevice.FrameRate = 0; // auto
+            videoCapture.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty; // auto
 
             if (audioCaptureDeviceIndex == 0)
             {

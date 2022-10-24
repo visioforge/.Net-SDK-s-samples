@@ -8,11 +8,11 @@ using System.Windows.Forms;
 namespace face_detection
 {
     using System.IO;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoProcessing;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -35,11 +35,11 @@ namespace face_detection
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
         }
 
@@ -98,7 +98,7 @@ namespace face_detection
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
             VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
+            VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
 
             // disabe audio
             VideoCapture1.Audio_PlayAudio = false;

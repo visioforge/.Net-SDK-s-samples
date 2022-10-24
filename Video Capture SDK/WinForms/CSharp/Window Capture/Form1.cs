@@ -3,15 +3,14 @@
     using System;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Core;
-    using VisioForge.Core.UI.WinForms.Dialogs;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.VideoCapture;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
-    using VisioForge.Core.Helpers;
+    using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -175,7 +174,7 @@
                 return null;
             }
 
-            source.FrameRate = (float)Convert.ToDouble(edScreenFrameRate.Text);
+            source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
             return source;
         }

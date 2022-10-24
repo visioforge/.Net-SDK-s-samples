@@ -2,17 +2,15 @@
 
 namespace multiple_ap_cams
 {
-    using System.Globalization;
-
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -47,10 +45,10 @@ namespace multiple_ap_cams
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
         }
 
@@ -58,10 +56,10 @@ namespace multiple_ap_cams
         {
             if (VideoCapture2 != null)
             {
-            VideoCapture2.OnError -= VideoCapture2_OnError;
+                VideoCapture2.OnError -= VideoCapture2_OnError;
 
-            VideoCapture2.Dispose();
-            VideoCapture2 = null;
+                VideoCapture2.Dispose();
+                VideoCapture2 = null;
             }
         }
 
@@ -90,11 +88,11 @@ namespace multiple_ap_cams
 
             if (cbFrameRate1.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToInt32(cbFrameRate1.Text);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToInt32(cbFrameRate1.Text));
             }
             else
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = 25;
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
             }
 
             VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
@@ -149,11 +147,11 @@ namespace multiple_ap_cams
 
             if (cbFrameRate2.SelectedIndex != -1)
             {
-                VideoCapture2.Video_CaptureDevice.FrameRate = Convert.ToInt32(cbFrameRate2.Text);
+                VideoCapture2.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate2.Text));
             }
             else
             {
-                VideoCapture2.Video_CaptureDevice.FrameRate = 25;
+                VideoCapture2.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
             }
 
             VideoCapture2.Mode = VideoCaptureMode.VideoPreview;

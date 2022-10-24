@@ -2,25 +2,23 @@
 
 namespace Video_From_Images
 {
+    using Properties;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
-
-    using Properties;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.VideoEdit;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoEdit;
     using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoEdit;
 
     public partial class Form1 : Form
     {
@@ -247,7 +245,7 @@ namespace Video_From_Images
                 VideoEdit1.Video_Resize_Height = Convert.ToInt32(edHeight.Text);
             }
 
-            VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text);
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
 
             // apply capture parameters            
             VideoEdit1.Video_Renderer_SetAuto();

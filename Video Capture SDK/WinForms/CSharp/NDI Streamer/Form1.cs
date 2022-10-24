@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisioForge.Core.Types;
-using VisioForge.Core.Types.AudioEffects;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.FFMPEGEXE;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.UI;
@@ -272,7 +264,7 @@ namespace NDI_Streamer
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
 
             VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);

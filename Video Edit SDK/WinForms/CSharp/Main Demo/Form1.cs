@@ -20,8 +20,6 @@ namespace VideoEdit_CS_Demo
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Core;
-    using VisioForge.Core.DirectShow.Helpers;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
@@ -33,7 +31,6 @@ namespace VideoEdit_CS_Demo
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Types.VideoProcessing;
     using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoEdit;
@@ -122,7 +119,7 @@ namespace VideoEdit_CS_Demo
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
             {
-                VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture);
+                VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
                 string s = OpenDialog1.FileName;
 
@@ -780,7 +777,7 @@ namespace VideoEdit_CS_Demo
                 VideoEdit1.Video_Subtitles = null;
             }
 
-            VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture);
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
             ConfigureVideoRenderer();
 

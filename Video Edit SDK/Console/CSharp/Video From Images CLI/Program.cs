@@ -77,7 +77,7 @@ namespace Video_From_Images_CLI
             videoEdit.Video_Resize_Width = videoWidth;
             videoEdit.Video_Resize_Height = videoHeight;
 
-            videoEdit.Video_FrameRate = 25;
+            videoEdit.Video_FrameRate = new VideoFrameRate(25);
             videoEdit.Video_Renderer = new VideoRendererSettings
             {
                 VideoRenderer = VideoRendererMode.None,

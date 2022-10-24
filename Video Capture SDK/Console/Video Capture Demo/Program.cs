@@ -13,12 +13,11 @@ namespace Video_Capture_Demo
     using System.Globalization;
     using System.IO;
     using System.Threading;
-
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     class Program
     {
@@ -57,7 +56,7 @@ namespace Video_Capture_Demo
             }
 
             // video frame rates
-            double videoFrameRate = 0;
+            VideoFrameRate videoFrameRate = VideoFrameRate.Empty;
             if (videoFormat.FrameRates.Count > 0)
             {
                 Console.WriteLine(@"Video capture device frame rates: ");
@@ -135,7 +134,7 @@ namespace Video_Capture_Demo
                 videoCapture.Video_CaptureDevice.Format = videoFormat.Name;
             }
 
-            videoCapture.Video_CaptureDevice.FrameRate = Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture);
+            videoCapture.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(videoFrameRate, CultureInfo.InvariantCulture));
 
             if (audioCaptureDeviceIndex == 0)
             {

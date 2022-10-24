@@ -10,14 +10,13 @@ namespace Push_Source_Demo
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.VideoCapture;
 
     // ReSharper disable once StyleCop.SA1601
     public partial class Form1 : Form
@@ -238,7 +237,7 @@ namespace Push_Source_Demo
             {
                 VideoWidth = bmp.Width,
                 VideoHeight = bmp.Height,
-                VideoFrameRate = 25.0f
+                VideoFrameRate = new VideoFrameRate(25)
             };
             bmp.Dispose();
 

@@ -15,7 +15,6 @@ namespace Simple_Video_Capture
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
@@ -23,7 +22,6 @@ namespace Simple_Video_Capture
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
@@ -432,7 +430,7 @@ namespace Simple_Video_Capture
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
 
             if (rbPreview.IsChecked == true)

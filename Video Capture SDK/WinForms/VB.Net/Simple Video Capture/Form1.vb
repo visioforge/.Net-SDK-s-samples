@@ -1,21 +1,20 @@
 ' ReSharper disable InconsistentNaming
 
+Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq
+Imports VisioForge.Core.Helpers
+Imports VisioForge.Core.Types
+Imports VisioForge.Core.Types.AudioEffects
+Imports VisioForge.Core.Types.Events
+Imports VisioForge.Core.Types.Output
+Imports VisioForge.Core.Types.VideoCapture
+Imports VisioForge.Core.Types.VideoEffects
 Imports VisioForge.Core.UI
 Imports VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
 Imports VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-Imports VisioForge.Core.Types
-Imports VisioForge.Core.Types.Output
-Imports VisioForge.Core.Types.VideoEffects
 Imports VisioForge.Core.VideoCapture
-Imports VisioForge.Core.Types.Events
-Imports System.Drawing.Imaging
-Imports VisioForge.Core.Types.VideoCapture
-Imports VisioForge.Core.Types.AudioEffects
-Imports VisioForge.Core
-Imports VisioForge.Core.Helpers
 
 Public Class Form1
     Private Const AUDIO_EFFECT_ID_AMPLIFY As String = "amplify"
@@ -173,7 +172,7 @@ Public Class Form1
             End If
 
             cbVideoInputFrameRate.Items.Clear()
-            For Each frameRate As Double In videoFormat.FrameRates
+            For Each frameRate As VideoFrameRate In videoFormat.FrameRates
                 cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
             Next
 
@@ -388,7 +387,7 @@ Public Class Form1
         VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked
 
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice.FrameRate = CSng(Convert.ToDouble(cbVideoInputFrameRate.Text))
+            VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text))
         End If
 
         If (rbPreview.Checked) Then

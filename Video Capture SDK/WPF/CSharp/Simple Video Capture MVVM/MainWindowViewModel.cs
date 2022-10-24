@@ -7,11 +7,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
-using VisioForge.Core;
 using VisioForge.Core.Helpers;
-using VisioForge.Core.UI;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.Types.VideoEffects;
+using VisioForge.Core.UI;
 
 namespace Simple_Video_Capture
 {
@@ -119,7 +119,7 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedVideoFormat, value))
                 {
-                    SelectedFrameRate = SelectedVideoFormat?.FrameRates.FirstOrDefault();
+                    SelectedFrameRate = SelectedVideoFormat?.FrameRates.FirstOrDefault().Value;
                 }
             }
         }
@@ -642,7 +642,7 @@ namespace Simple_Video_Capture
             var videoSource = new VideoCaptureSource(SelectedVideoInputDevice.Name);
             videoSource.Format = SelectedVideoFormat.Name;
             videoSource.Format_UseBest = UseBestVideoInputFormat;
-            videoSource.FrameRate = SelectedFrameRate.GetValueOrDefault(0);
+            videoSource.FrameRate = new VideoFrameRate(SelectedFrameRate.GetValueOrDefault(0));
 
             var audioSource = new AudioCaptureSource(SelectedAudioInputDevice.Name);
             videoSource.Format = SelectedAudioInputFormat;

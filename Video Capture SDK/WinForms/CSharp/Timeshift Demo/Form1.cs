@@ -220,7 +220,7 @@
 
                 if (cbVideoInputFrameRate.SelectedIndex != -1)
                 {
-                    VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                    VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture));
                 }
             }
             else

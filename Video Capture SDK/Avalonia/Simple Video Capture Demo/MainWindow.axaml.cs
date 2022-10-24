@@ -11,19 +11,17 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using VisioForge.Core;
 using VisioForge.Core.Helpers;
-using VisioForge.Core.UI;
-using VisioForge.Core.UI.Avalonia;
-using VisioForge.Core.UI.WinForms.Dialogs;
-using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-using VisioForge.Core.VideoCapture;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.Types.VideoEffects;
+using VisioForge.Core.UI;
+using VisioForge.Core.UI.Avalonia;
+using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+using VisioForge.Core.VideoCapture;
 
 namespace Simple_Video_Capture_Demo_Avalonia
 {
@@ -693,7 +691,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.SelectedItem.ToString());
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.SelectedItem.ToString()));
             }
 
             if (rbPreview.IsChecked == true)

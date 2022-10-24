@@ -5,13 +5,12 @@
     using System.Drawing;
     using System.IO;
     using System.Windows.Forms;
-    using VisioForge.Core.VideoCapture;
-    using VisioForge.Core.DirectShow.Helpers;
+    using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
-    using VisioForge.Core.Helpers;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -127,7 +126,7 @@
                 Right = _imageWidth,
                 Top = 0,
                 Bottom = _imageHeight,
-                FrameRate = Convert.ToInt32(edVideoFrameRate.Text),
+                FrameRate = new VideoFrameRate(Convert.ToDouble(edVideoFrameRate.Text)),
                 Mode = ScreenCaptureMode.Color
             };
             VideoCapture1.Screen_Capture_Source = source;

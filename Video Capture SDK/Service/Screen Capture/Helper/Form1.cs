@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenCaptureServiceHelper
@@ -12,14 +6,11 @@ namespace ScreenCaptureServiceHelper
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
-
-    using VisioForge.Core.UI.WinForms;
-    using VisioForge.Core.VideoCapture;
-    using VisioForge.Core.WinAPI;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -65,7 +56,7 @@ namespace ScreenCaptureServiceHelper
 
             VideoCapture1.Screen_Capture_Source = new ScreenCaptureSourceSettings();
             VideoCapture1.Screen_Capture_Source.FullScreen = true;
-            VideoCapture1.Screen_Capture_Source.FrameRate = 5;
+            VideoCapture1.Screen_Capture_Source.FrameRate = new VideoFrameRate(5);
 
             VideoCapture1.Output_Filename = "d:\\screen.wmv";
 

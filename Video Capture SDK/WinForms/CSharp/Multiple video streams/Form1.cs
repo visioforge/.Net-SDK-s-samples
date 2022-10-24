@@ -8,19 +8,16 @@ using System.Globalization;
 
 namespace multiple_video_streams
 {
+    using Properties;
     using System;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-
-    using Properties;
-
-    using VisioForge.Core.UI.WinForms;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -47,11 +44,11 @@ namespace multiple_video_streams
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnVideoFrameBitmap -= VideoCapture1_OnVideoFrameBitmap;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
         }
 
@@ -61,14 +58,14 @@ namespace multiple_video_streams
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
             VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
             VideoCapture1.Video_CaptureDevice.Format = cbVideoFormat1.Text;
-            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoFrameRate1.Text);
+            VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate1.Text));
 
             // 2nd device
             VideoCapture1.PIP_Sources_Add_VideoCaptureDevice(
                 cbCamera2.Text,
                 cbVideoFormat2.Text,
                 false,
-                Convert.ToDouble(cbVideoFrameRate1.Text),
+                new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate1.Text)),
                 cbCamera2.Text,
                 0,
                 0,

@@ -854,7 +854,7 @@ namespace VideoCapture_CSharp_Demo
                 {
                     VideoWidth = 640,
                     VideoHeight = 480,
-                    VideoFrameRate = 25.0f
+                    VideoFrameRate = new VideoFrameRate(25.0f)
                 };
             }
             else if ((VideoCapture1.Mode == VideoCaptureMode.DecklinkSourceCapture) || (VideoCapture1.Mode == VideoCaptureMode.DecklinkSourcePreview))
@@ -2339,11 +2339,11 @@ namespace VideoCapture_CSharp_Demo
 
             if (string.IsNullOrEmpty(cbCustomVideoSourceFrameRate.Text))
             {
-                VideoCapture1.Custom_Source.VideoFilterFrameRate = 0f;
+                VideoCapture1.Custom_Source.VideoFilterFrameRate = VideoFrameRate.Empty;
             }
             else
             {
-                VideoCapture1.Custom_Source.VideoFilterFrameRate = Convert.ToDouble(cbCustomVideoSourceFrameRate.Text);
+                VideoCapture1.Custom_Source.VideoFilterFrameRate = new VideoFrameRate(Convert.ToDouble(cbCustomVideoSourceFrameRate.Text));
             }
 
             if (cbCustomAudioSourceCategory.SelectedIndex == 0)
@@ -2391,7 +2391,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture));
             }
 
             VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.Checked;
@@ -2546,7 +2546,7 @@ namespace VideoCapture_CSharp_Demo
                 settings.DisplayIndex = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
             }
 
-            settings.FrameRate = Convert.ToInt32(edScreenFrameRate.Text);
+            settings.FrameRate = new VideoFrameRate(Convert.ToInt32(edScreenFrameRate.Text));
 
             settings.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.Checked;
             settings.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.Checked;
@@ -3325,7 +3325,7 @@ namespace VideoCapture_CSharp_Demo
                     cbPIPDevice.Text,
                     format,
                     cbPIPFormatUseBest.Checked,
-                    Convert.ToDouble(frameRate),
+                    new VideoFrameRate(Convert.ToDouble(frameRate)),
                     input,
                     Convert.ToInt32(edPIPVidCapLeft.Text),
                     Convert.ToInt32(edPIPVidCapTop.Text),

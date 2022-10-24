@@ -8,27 +8,19 @@ using System;
 namespace Simple_Player_Demo
 {
     using Android;
-    using Android.Graphics;
     using Android.Util;
     using Android.Widget;
     using AndroidX.Core.App;
     using System.Globalization;
     using System.Threading;
-    using System.Threading.Tasks;
     using VisioForge.Core.MediaBlocks;
     using VisioForge.Core.MediaBlocks.AudioRendering;
     using VisioForge.Core.MediaBlocks.Sources;
     using VisioForge.Core.MediaBlocks.Special;
     using VisioForge.Core.MediaBlocks.VideoRendering;
     using VisioForge.Core.MediaInfoReaderX;
-    using VisioForge.Core.MediaPlayerX;
     using VisioForge.Core.Types.Events;
-    using VisioForge.Core.Types.X.AudioEffects;
-    using VisioForge.Core.Types.X.Sources;
-    using VisioForge.Core.Types.MediaPlayer.GST;
-    using VisioForge.Core.UI.Android;
     using Xamarin.Essentials;
-    using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
@@ -281,7 +273,6 @@ namespace Simple_Player_Demo
             //_pipeline.Connect(_memorySource.Output, _decodeBin.Input);
 
             _fileSource = new FileSourceBlock(edURL.Text, renderVideo: videoStream, renderAudio: audioStream);
-
 
             if (videoStream)
             {

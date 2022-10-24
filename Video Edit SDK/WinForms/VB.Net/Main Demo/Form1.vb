@@ -3,8 +3,6 @@
 Imports System.Globalization
 Imports System.IO
 Imports System.Threading.Tasks
-Imports VisioForge.Core
-Imports VisioForge.Core.DirectShow.Helpers
 Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.AudioEffects
@@ -108,7 +106,7 @@ Public Class Form1
 
         If (OpenDialog1.ShowDialog() = DialogResult.OK) Then
 
-            VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture)
+            VideoEdit1.Video_FrameRate = New VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture))
 
             ' resize if required
             Dim customWidth = 0
@@ -583,7 +581,7 @@ Public Class Form1
             VideoEdit1.Video_Subtitles = Nothing
         End If
 
-        VideoEdit1.Video_FrameRate = Convert.ToDouble(cbFrameRate.Text)
+        VideoEdit1.Video_FrameRate = New VideoFrameRate(Convert.ToDouble(cbFrameRate.Text))
 
         ConfigureVideoRenderer()
 

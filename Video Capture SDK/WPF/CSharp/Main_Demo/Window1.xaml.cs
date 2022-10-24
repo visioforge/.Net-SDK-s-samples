@@ -710,7 +710,7 @@ namespace Main_Demo
                 settings.Mode = ScreenCaptureMode.Screen;
             }
 
-            settings.FrameRate = (float)Convert.ToDouble(edScreenFrameRate.Text);
+            settings.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
             settings.FullScreen = rbScreenFullScreen.IsChecked == true;
             settings.Top = Convert.ToInt32(edScreenTop.Text);
             settings.Bottom = Convert.ToInt32(edScreenBottom.Text);
@@ -1374,11 +1374,11 @@ namespace Main_Demo
 
                 if (string.IsNullOrEmpty(cbCustomVideoSourceFrameRate.Text))
                 {
-                    VideoCapture1.Custom_Source.VideoFilterFrameRate = 0f;
+                    VideoCapture1.Custom_Source.VideoFilterFrameRate = VideoFrameRate.Empty;
                 }
                 else
                 {
-                    VideoCapture1.Custom_Source.VideoFilterFrameRate = Convert.ToDouble(cbCustomVideoSourceFrameRate.Text);
+                    VideoCapture1.Custom_Source.VideoFilterFrameRate = new VideoFrameRate(Convert.ToDouble(cbCustomVideoSourceFrameRate.Text));
                 }
 
                 if (cbCustomAudioSourceCategory.SelectedIndex == 0)
@@ -1412,12 +1412,12 @@ namespace Main_Demo
                 {
                     if (!string.IsNullOrEmpty(cbVideoInputFrameRate.Text))
                     {
-                        VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text);
+                        VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
                     }
                 }
                 catch
                 {
-                    VideoCapture1.Video_CaptureDevice.FrameRate = 25;
+                    VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
                 }
 
                 VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.IsChecked == true;
@@ -3110,7 +3110,7 @@ namespace Main_Demo
                     cbPIPDevice.Text,
                     format,
                     cbPIPFormatUseBest.IsChecked == true,
-                    Convert.ToDouble(frameRate),
+                    new VideoFrameRate(Convert.ToDouble(frameRate)),
                     input,
                     Convert.ToInt32(edPIPVidCapLeft.Text),
                     Convert.ToInt32(edPIPVidCapTop.Text),

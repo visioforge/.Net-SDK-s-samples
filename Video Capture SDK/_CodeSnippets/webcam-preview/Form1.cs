@@ -6,10 +6,10 @@ using System.Windows.Forms;
 namespace webcam_preview
 {
     using System.IO;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -31,10 +31,10 @@ namespace webcam_preview
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
         }
 
@@ -99,7 +99,7 @@ namespace webcam_preview
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
             VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture);
+            VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture));
 
             // configure audio source
             VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);

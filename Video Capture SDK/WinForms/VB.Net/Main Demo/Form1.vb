@@ -561,7 +561,7 @@ Public Class Form1
             End If
 
             cbVideoInputFrameRate.Items.Clear()
-            For Each frameRate As Double In videoFormat.FrameRates
+            For Each frameRate As VideoFrameRate In videoFormat.FrameRates
                 cbVideoInputFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
             Next
 
@@ -1828,7 +1828,7 @@ Public Class Form1
         VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.Checked
 
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice.FrameRate = Convert.ToDouble(cbVideoInputFrameRate.Text)
+            VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text))
         End If
 
         VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked
@@ -1850,9 +1850,9 @@ Public Class Form1
         VideoCapture1.Custom_Source.VideoFilenameOrURL = edCustomVideoSourceURL.Text
 
         If (String.IsNullOrEmpty(cbCustomVideoSourceFrameRate.Text)) Then
-            VideoCapture1.Custom_Source.VideoFilterFrameRate = 0.0F
+            VideoCapture1.Custom_Source.VideoFilterFrameRate = VideoFrameRate.Empty
         Else
-            VideoCapture1.Custom_Source.VideoFilterFrameRate = Convert.ToDouble(cbCustomVideoSourceFrameRate.Text)
+            VideoCapture1.Custom_Source.VideoFilterFrameRate = New VideoFrameRate(Convert.ToDouble(cbCustomVideoSourceFrameRate.Text))
         End If
 
         If (cbCustomAudioSourceCategory.SelectedIndex = 0) Then
@@ -1978,7 +1978,7 @@ Public Class Form1
             settings.Mode = ScreenCaptureMode.Screen
         End If
 
-        settings.FrameRate = Convert.ToDouble(edScreenFrameRate.Text)
+        settings.FrameRate = New VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text))
         settings.FullScreen = rbScreenFullScreen.Checked
         settings.Top = Convert.ToInt32(edScreenTop.Text)
         settings.Bottom = Convert.ToInt32(edScreenBottom.Text)
@@ -2723,7 +2723,7 @@ Public Class Form1
                 cbPIPDevice.Text,
                 format,
                 cbPIPFormatUseBest.Checked,
-                Convert.ToDouble(frame_rate),
+                New VideoFrameRate(Convert.ToDouble(frame_rate)),
                 input,
                 Convert.ToInt32(edPIPVidCapLeft.Text),
                 Convert.ToInt32(edPIPVidCapTop.Text),
@@ -5141,7 +5141,7 @@ Public Class Form1
             End If
 
             cbPIPFrameRate.Items.Clear()
-            For Each frameRate As Double In videoFormat.FrameRates
+            For Each frameRate As VideoFrameRate In videoFormat.FrameRates
                 cbPIPFrameRate.Items.Add(frameRate.ToString(CultureInfo.CurrentCulture))
             Next
 

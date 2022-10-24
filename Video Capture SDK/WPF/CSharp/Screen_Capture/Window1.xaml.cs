@@ -11,11 +11,9 @@ namespace Screen_Capture
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
@@ -282,7 +280,7 @@ namespace Screen_Capture
                 source.Mode = ScreenCaptureMode.Screen;
             }
 
-            source.FrameRate = (float)Convert.ToDouble(edScreenFrameRate.Text);
+            source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
             source.FullScreen = rbScreenFullScreen.IsChecked == true || forcedFullScreen;
             source.Top = Convert.ToInt32(edScreenTop.Text);
             source.Bottom = Convert.ToInt32(edScreenBottom.Text);

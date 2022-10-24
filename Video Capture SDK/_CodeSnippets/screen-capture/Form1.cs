@@ -7,11 +7,11 @@ using System.Windows.Forms;
 namespace screen_capture
 {
     using System.IO;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -33,10 +33,10 @@ namespace screen_capture
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
 
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
         }
 
@@ -74,7 +74,7 @@ namespace screen_capture
             screenSource.Right = Convert.ToInt32(edScreenRight.Text);
 
             screenSource.DisplayIndex = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
-            screenSource.FrameRate = Convert.ToInt32(edScreenFrameRate.Text);
+            screenSource.FrameRate = new VideoFrameRate(Convert.ToInt32(edScreenFrameRate.Text));
             screenSource.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.Checked;
             screenSource.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.Checked;
             VideoCapture1.Screen_Capture_Source = screenSource;

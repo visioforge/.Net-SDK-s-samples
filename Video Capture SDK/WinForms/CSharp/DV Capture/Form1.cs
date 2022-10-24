@@ -17,17 +17,16 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using VisioForge.Core;
     using VisioForge.Core.Helpers;
-    using VisioForge.Core.UI;
-    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
-    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-    using VisioForge.Core.VideoCapture;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
+    using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
+    using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
+    using VisioForge.Core.VideoCapture;
 
     public partial class Form1 : Form
     {
@@ -380,7 +379,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 
             if (cbVideoInputFrameRate.SelectedIndex != -1)
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = (float)Convert.ToDouble(cbVideoInputFrameRate.Text);
+                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
 
             if (rbPreview.Checked)
