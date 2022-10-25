@@ -10,10 +10,10 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.4.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.4.36" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.4.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.4.37" />
   </ItemGroup>
 </Project>
