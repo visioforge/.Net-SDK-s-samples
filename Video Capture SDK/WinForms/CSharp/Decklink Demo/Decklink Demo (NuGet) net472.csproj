@@ -8,8 +8,8 @@
     <AssemblyTitle>Decklink Demo</AssemblyTitle>
     <Product>Decklink Demo</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.38.0</AssemblyVersion>
-    <FileVersion>15.4.38.0</FileVersion>
+    <AssemblyVersion>15.4.39.0</AssemblyVersion>
+    <FileVersion>15.4.39.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,11 +64,11 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.38" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.38" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.38" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.38" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.4.38" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.4.38" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.4.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.4.39" />
   </ItemGroup>
 </Project>

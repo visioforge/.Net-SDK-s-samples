@@ -2578,7 +2578,7 @@ namespace Main_Demo
             {
                 if (tags.Pictures?.Length > 0)
                 {
-                    imgTags.Source = VideoView.BitmapConv(tags.Pictures[0]);
+                    imgTags.Source = tags.Pictures[0].ToBitmapSource();
                 }
 
                 edTags.Text = tags.ToString();

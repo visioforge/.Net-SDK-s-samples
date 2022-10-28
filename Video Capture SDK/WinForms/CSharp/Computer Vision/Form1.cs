@@ -84,6 +84,11 @@ namespace Computer_Vision_Demo
 
         private void FaceDetectionUpdate()
         {
+            if (faceDetector == null)
+            {
+                return;
+            }
+
             faceDetector.DrawEnabled = cbFDDraw.Checked;
             faceDetector.DrawColor = Color.Green;
             faceDetector.FramesToSkip = tbFDSkipFrames.Value;
