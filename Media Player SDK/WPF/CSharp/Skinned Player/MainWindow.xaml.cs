@@ -80,6 +80,9 @@ namespace Skinned_Player
             InitializeComponent();
 
             StateChanged += MainWindowStateChangeRaised;
+
+            playlist.SkinName = "Default";
+            playerControls.SkinName = "Default";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
