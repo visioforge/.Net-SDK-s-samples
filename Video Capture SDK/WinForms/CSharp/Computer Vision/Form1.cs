@@ -140,7 +140,7 @@ namespace Computer_Vision_Demo
             }
         }
 
-        private void OnFaceDetected(object sender, OnCVFaceDetectedEventArgs e)
+        private void OnFaceDetected(object sender, CVFaceDetectedEventArgs e)
         {
             if (e.Faces.Length == 0)
             {
@@ -206,7 +206,7 @@ namespace Computer_Vision_Demo
             }
         }
 
-        private void OnPedestrianDetected(object sender, OnCVPedestrianDetectedEventArgs e)
+        private void OnPedestrianDetected(object sender, CVPedestrianDetectedEventArgs e)
         {
             if (e.Items.Length == 0)
             {
@@ -250,7 +250,7 @@ namespace Computer_Vision_Demo
             carCounter.OnCarsDetected += this.OnCarsDetected;
         }
 
-        private void OnCarsDetected(object sender, OnCVCarDetectedEventArgs e)
+        private void OnCarsDetected(object sender, CVCarDetectedEventArgs e)
         {
             BeginInvoke(
                 (Action)(() =>
