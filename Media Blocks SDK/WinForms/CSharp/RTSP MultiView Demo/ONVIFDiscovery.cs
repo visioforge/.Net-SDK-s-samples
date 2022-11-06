@@ -21,72 +21,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Lists ONVIF sources.
-        /// </summary>
-        /// <param name="timeout">
-        /// Timeout.
-        /// </param>
-        /// <param name="cts">
-        /// Cancellation token (optional).
-        /// </param>
-        /// <returns>
-        /// The <see cref="Uri"/>.
-        /// </returns>
-        private async Task<Uri[]> ListSourcesAsync(TimeSpan? timeout, CancellationTokenSource? cts)
-        {
-            if (timeout == null)
-            {
-                timeout = TimeSpan.FromSeconds(2);
-            }
-
-            var list = new List<Uri>();
-
-            bool ctsExternal = cts != null;
-            if (cts == null)
-            {
-                cts = new CancellationTokenSource();
-            }
-
-            var discovery = new VisioForge.Core.ONVIFDiscovery.Discovery();
-            //await discovery.Discover((int)timeout.Value.TotalSeconds, (device) =>
-            //{
-            //    if (!device.XAdresses.Any())
-            //    {
-            //        return;
-            //    }
-
-            //    list.Add(new Uri(device.XAdresses.FirstOrDefault()));
-            //}, cts.Token);
-
-            var res = await discovery.Discover((int)timeout.Value.TotalSeconds, cts.Token);
-            foreach (var device in res)
-            {
-                if (!device.XAdresses.Any())
-                {
-                    continue;
-                }
-
-                list.Add(new Uri(device.XAdresses.FirstOrDefault()));
-            }
-
-            if (!ctsExternal)
-            {
-                cts.Dispose();
-            }
-
-            return list.ToArray();
-        }
-
         private async void btSearch_Click(object sender, EventArgs e)
         {
             cbSources.Items.Clear();
-
-            //var list = await ListSourcesAsync(TimeSpan.FromSeconds(5), null);
-            //foreach (var item in list)
-            //{
-            //    cbSources.Items.Add(item.ToString());
-            //}
 
             // Create a Discovery instance
             var onvifDiscovery = new Discovery();
