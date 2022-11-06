@@ -15,9 +15,9 @@
 * Added Playlist API in Media Player SDK .Net (Windows-only engine)
 * Resolved issues with "rtsp_source_create_audio_resampler" call in the RTSP Low Latency engine in Video Capture SDK .Net (Windows-only engine)
 * Added support for multiple Decklink outputs in Video Capture SDK .Net and Video Edit SDK .Net  (Windows-only engine)
-* API breaking change: the frame rate changed from double to VideoFrameRate in all APIs
 * Resolved issues with reverse playback engine in Media Player SDK .Net (Windows-only engine)
 * ONVIFControl and other ONVIF-related APIs are available for all platforms
+* API breaking change: the frame rate changed from double to VideoFrameRate in all APIs
 
 ## 15.4
 
