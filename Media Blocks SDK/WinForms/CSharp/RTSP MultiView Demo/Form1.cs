@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer.GST;
+using System.Linq;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
@@ -299,6 +302,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _recordEngines[id].Dispose();
                 _recordEngines[id] = null;
             }
+        }
+
+        private void btONVIF_Click(object sender, EventArgs e)
+        {
+            var disc = new ONVIFDiscovery();
+            disc.ShowDialog();
+            disc.Dispose();
         }
     }
 }

@@ -66,6 +66,7 @@
             this.cbRAWEvents = new System.Windows.Forms.CheckBox();
             this.rbMPEGTSOutput = new System.Windows.Forms.RadioButton();
             this.rbMP4Output = new System.Windows.Forms.RadioButton();
+            this.btONVIF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -430,11 +431,22 @@
             this.rbMP4Output.Text = "MP4";
             this.rbMP4Output.UseVisualStyleBackColor = true;
             // 
+            // btONVIF
+            // 
+            this.btONVIF.Location = new System.Drawing.Point(1763, 6);
+            this.btONVIF.Name = "btONVIF";
+            this.btONVIF.Size = new System.Drawing.Size(136, 46);
+            this.btONVIF.TabIndex = 38;
+            this.btONVIF.Text = "ONVIF discovery";
+            this.btONVIF.UseVisualStyleBackColor = true;
+            this.btONVIF.Click += new System.EventHandler(this.btONVIF_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 994);
+            this.Controls.Add(this.btONVIF);
             this.Controls.Add(this.rbMP4Output);
             this.Controls.Add(this.rbMPEGTSOutput);
             this.Controls.Add(this.cbRAWEvents);
@@ -520,6 +532,7 @@
         private System.Windows.Forms.CheckBox cbRAWEvents;
         private System.Windows.Forms.RadioButton rbMPEGTSOutput;
         private System.Windows.Forms.RadioButton rbMP4Output;
+        private System.Windows.Forms.Button btONVIF;
     }
 }
 
