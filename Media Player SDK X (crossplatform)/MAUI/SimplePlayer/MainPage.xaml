@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Simple_Media_Player_MAUI.MainPage"
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
-             xmlns:skins="clr-namespace:VisioForge.Core.UI.MAUI.Skins;assembly=VisioForge.Core.UI.MAUI">
+             xmlns:skins="clr-namespace:VisioForge.Core.UI.MAUI.Skins;assembly=VisioForge.Core.UI.MAUI" >
 
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->

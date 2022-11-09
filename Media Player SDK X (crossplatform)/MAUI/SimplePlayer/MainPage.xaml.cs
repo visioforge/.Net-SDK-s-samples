@@ -10,6 +10,9 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.UI.Skins;
+using Stream = System.IO.Stream;
+using System.Reflection;
 
 #if ANDROID
 using Android.Runtime;
@@ -20,6 +23,8 @@ namespace Simple_Media_Player_MAUI
 {
     public partial class MainPage : ContentPage
     {
+        private string SKIN_NAME = "Default.vfskin";
+
         private MediaPlayerCoreX _player;
 
 #if ANDROID
@@ -28,17 +33,44 @@ namespace Simple_Media_Player_MAUI
         private const string DEFAULT_FILENAME = @"c:\samples\!video.mp4";
 #endif
 
+        /// <summary>
+        /// Loads this instance.
+        /// </summary>
+        private void LoadSkin()
+        {
+            var assembly = GetType().Assembly;
+            var resources = assembly.GetManifestResourceNames();
+
+            foreach (string resourceKey in resources)
+            {
+                if (resourceKey.Contains(SKIN_NAME))
+                {
+                    using (var stream = assembly.GetManifestResourceStream(resourceKey))
+                    {
+                        var data = new byte[stream.Length];
+                        stream.Read(data, 0, data.Length);
+
+                        SkinManager.LoadFromData("Default", data);
+                    }
+                }
+            }
+        }
+        
         public MainPage()
         {
+            LoadSkin();
+            
             InitializeComponent();
 
             Loaded += MainPage_Loaded;
-            Unloaded += MainPage_Unloaded;
 
-            //pbPanel.OnPreparePlayClick += PlaybackPanel_OnPreparePlayClick;
+            //playlist.SkinName = "Default";
+            //playerControls.SkinName = "Default";
+            
+            pbPanel.OnPreparePlayClick += PlaybackPanel_OnPreparePlayClick;
         }
 
-        private void MainPage_Unloaded(object sender, EventArgs e)
+        private void Window_Destroying(object sender, EventArgs e)
         {
             if (_player != null)
             {
@@ -53,18 +85,21 @@ namespace Simple_Media_Player_MAUI
         private void MainPage_Loaded(object sender, EventArgs e)
         {
 #if ANDROID
-            //var view = (Android.Views.ViewGroup)this.Handler.PlatformView;
-            //var context = view.Context;
+            var view = (Android.Views.ViewGroup)this.Handler.PlatformView;
+           // var context = view.Context;
             var activity = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; //(Android.App.Activity)context;
-            //_player = new MediaPlayerCoreX(imgVideo, activity, VisioForge.Core.Types.PlatformType.Android);
+            _player = new MediaPlayerCoreX(imgVideo, activity, VisioForge.Core.Types.PlatformType.Android);
 #else
-            //_player = new MediaPlayerCoreX(imgVideo);
+            _player = new MediaPlayerCoreX(imgVideo);
 #endif
-            //_player.OnError += _player_OnError;
+            _player.OnError += _player_OnError;
 
-            //pbPanel.Player = _player;
+            pbPanel.Player = _player;
 
             //edFilename.Text = DEFAULT_FILENAME;
+
+            Window.Destroying += Window_Destroying;
+
         }
 
         private void PlaybackPanel_OnPreparePlayClick(object sender, EventArgs e)
