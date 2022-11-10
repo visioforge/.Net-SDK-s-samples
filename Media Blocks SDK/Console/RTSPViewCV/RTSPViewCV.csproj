@@ -10,26 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.4.48" />
-    <PackageReference Include="VisioForge.DotNet.Core.CV" Version="15.4.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.CVD" Version="15.4.48" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.20.3.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.20.3.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="haarcascade_eye.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="haarcascade_frontalface_default.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="haarcascade_mcs_mouth.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="haarcascade_mcs_nose.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <EnableCodeSigning>false</EnableCodeSigning>
