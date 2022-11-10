@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using VisioForge.Core.CV;
 using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks;
@@ -27,10 +28,18 @@ namespace RTSPViewCV
 
         static RTSPSourceBlock _source;
 
+        static bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
         //static FileSourceBlock _source;
 
         static void InitFaceDetector(bool eyes = false, bool nose = false, bool mouth = false)
         {
+            if (!IsWindows)
+            {
+                Console.WriteLine("Currently CV available only for Windows.");
+                return;
+            }
+
             _faceDetector = new FaceDetector();
             _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
             var path = Path.GetDirectoryName(AppContext.BaseDirectory);
