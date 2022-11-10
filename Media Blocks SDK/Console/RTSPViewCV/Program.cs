@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DlibDotNet;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using VisioForge.Core.CV;
+using System.Security.Cryptography;
+using VisioForge.Core;
+using VisioForge.Core.CVD;
 using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -11,6 +14,7 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer.GST;
+using static System.Net.WebRequestMethods;
 
 namespace RTSPViewCV
 {
@@ -28,33 +32,16 @@ namespace RTSPViewCV
 
         static RTSPSourceBlock _source;
 
-        static bool IsWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
         //static FileSourceBlock _source;
 
         static void InitFaceDetector(bool eyes = false, bool nose = false, bool mouth = false)
         {
-            if (!IsWindows)
-            {
-                Console.WriteLine("Currently CV available only for Windows.");
-                return;
-            }
-
             _faceDetector = new FaceDetector();
             _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
-            var path = Path.GetDirectoryName(AppContext.BaseDirectory);
-            string facePath = Path.Combine(path, "haarcascade_frontalface_default.xml");
-            string eyesPath = eyes ? Path.Combine(path, "haarcascade_eye.xml") : null;
-            string nosePath = nose ? Path.Combine(path, "haarcascade_mcs_nose.xml") : null;
-            string mouthPath = mouth ? Path.Combine(path, "haarcascade_mcs_mouth.xml") : null;
 
-            _faceDetector.Init(
-                facePath,
-                eyesPath,
-                nosePath,
-                mouthPath,
-                true);
+            _faceDetector.Init();
 
+            _faceDetector.DrawEnabled = true;
             _faceDetector.UpdateSettings();
         }
 
@@ -119,9 +106,9 @@ namespace RTSPViewCV
 
         private static void _sampleGrabber_OnVideoFrameBuffer(object sender, VisioForge.Core.Types.Events.VideoFrameBufferEventArgs e)
         {
-            Console.WriteLine($"Video frame received. [{e.Frame.Timestamp}]");
+            //Console.WriteLine($"Video frame received. [{e.Frame.Timestamp}]");
 
-            _faceDetector?.Process(e.Frame);
+            _faceDetector?.Process(e.Frame);            
         }
 
         private static void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
