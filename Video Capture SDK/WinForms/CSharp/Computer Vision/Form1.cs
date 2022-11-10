@@ -346,7 +346,7 @@ namespace Computer_Vision_Demo
             //Trace.WriteLine($"Count: {count}, time: {time}");
 
             var image = frame.ToRAWImage();
-            var faces = faceDetector?.Process(image);
+            var faces = faceDetector?.Process(image, frame.Timestamp);
             carCounter?.Process(image);
             pedestrianDetector?.Process(image);
             objectDetector?.Process(image);
