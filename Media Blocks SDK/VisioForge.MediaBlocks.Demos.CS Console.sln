@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Media Info CLI", "Console\Media Info CLI\Media Info CLI.csproj", "{60892F01-E9A8-463F-86BA-A9381FE4CE2E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPView", "Console\RTSPView\RTSPView.csproj", "{031CC542-17A1-43CF-BB70-FCCB52F06632}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPViewCV", "Console\RTSPViewCV\RTSPViewCV.csproj", "{F97934EA-E814-4A0C-AD39-948FC490DCFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{60892F01-E9A8-463F-86BA-A9381FE4CE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60892F01-E9A8-463F-86BA-A9381FE4CE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60892F01-E9A8-463F-86BA-A9381FE4CE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031CC542-17A1-43CF-BB70-FCCB52F06632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031CC542-17A1-43CF-BB70-FCCB52F06632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031CC542-17A1-43CF-BB70-FCCB52F06632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031CC542-17A1-43CF-BB70-FCCB52F06632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F97934EA-E814-4A0C-AD39-948FC490DCFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F97934EA-E814-4A0C-AD39-948FC490DCFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F97934EA-E814-4A0C-AD39-948FC490DCFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F97934EA-E814-4A0C-AD39-948FC490DCFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

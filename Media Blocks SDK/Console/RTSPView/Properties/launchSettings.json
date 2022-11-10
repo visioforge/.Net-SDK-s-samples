@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RTSPView": {
+      "commandName": "Project",
+      "commandLineArgs": "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1 admin dancer23"
+    }
+  }
+}
