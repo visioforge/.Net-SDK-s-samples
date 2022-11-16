@@ -13,6 +13,7 @@ using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.UI.Skins;
 using Stream = System.IO.Stream;
 using System.Reflection;
+using System.Drawing.Printing;
 
 #if ANDROID
 using Android.Runtime;
@@ -66,8 +67,6 @@ namespace Simple_Media_Player_MAUI
 
             //playlist.SkinName = "Default";
             //playerControls.SkinName = "Default";
-            
-            pbPanel.OnPreparePlayClick += PlaybackPanel_OnPreparePlayClick;
         }
 
         private void Window_Destroying(object sender, EventArgs e)
@@ -99,12 +98,6 @@ namespace Simple_Media_Player_MAUI
             //edFilename.Text = DEFAULT_FILENAME;
 
             Window.Destroying += Window_Destroying;
-
-        }
-
-        private void PlaybackPanel_OnPreparePlayClick(object sender, EventArgs e)
-        {
-            //pbPanel.Filename = edFilename.Text;
         }
 
         private void OnStop(object sender, EventArgs e)

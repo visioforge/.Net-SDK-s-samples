@@ -44,10 +44,16 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.48" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.4.48" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.49" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.4.49" />
   </ItemGroup>
 </Project>
