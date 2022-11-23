@@ -18,6 +18,7 @@
 * Resolved issues with reverse playback engine in Media Player SDK .Net (Windows-only engine)
 * ONVIFControl and other ONVIF-related APIs are available for all platforms
 * API breaking change: the frame rate changed from double to VideoFrameRate in all APIs
+* Added GPU HW decoding for VLC engine
 
 ## 15.4
 
