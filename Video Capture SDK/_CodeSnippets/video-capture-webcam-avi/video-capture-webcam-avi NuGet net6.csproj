@@ -17,7 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture.TRIAL" Version="15.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.53" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.53" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.4.54" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.4.54" />
   </ItemGroup>
 </Project>
