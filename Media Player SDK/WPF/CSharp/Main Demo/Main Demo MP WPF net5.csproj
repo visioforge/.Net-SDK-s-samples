@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Main Demo</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.54.0</AssemblyVersion>
-    <FileVersion>15.4.54.0</FileVersion>
+    <AssemblyVersion>15.4.55.0</AssemblyVersion>
+    <FileVersion>15.4.55.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -38,9 +38,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.54" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.4.54" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.54" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.4.55" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.4.55" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.55" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo net6", "Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo net6", "WinForms\CSharp\Simple Player Demo\Simple Player Demo net6.csproj", "{13BC142B-C1C3-4339-AA27-7BCCA9B03346}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory Player Demo net6", "WinForms\CSharp\Memory Player Demo\Memory Player Demo net6.csproj", "{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{13BC142B-C1C3-4339-AA27-7BCCA9B03346}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13BC142B-C1C3-4339-AA27-7BCCA9B03346}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13BC142B-C1C3-4339-AA27-7BCCA9B03346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{A24ED407-998B-4A6F-83BE-E908DC61758B} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{6072919F-08E7-4842-B541-03ED5B3E56AC} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{13BC142B-C1C3-4339-AA27-7BCCA9B03346} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{CF4098C2-B1AC-4A1F-A4A2-D2184A6B635F} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

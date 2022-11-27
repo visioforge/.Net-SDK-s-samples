@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using VisioForge.Core.MediaPlayer;
@@ -113,11 +114,11 @@ namespace Skinned_Player
             playerControls.OnAction += PlayerControls_OnAction;
         }
 
-        private void PlayerControls_OnAction(object sender, SkinActionEventArgs e)
+        private async void PlayerControls_OnAction(object sender, SkinActionEventArgs e)
         {
             if (e.Type == SkinElementType.FullScreen)
             {
-                ToggleFullScreen();
+                await ToggleFullScreenAsync();
             }
         }
 
@@ -161,7 +162,7 @@ namespace Skinned_Player
 
         private double controlHeight;
 
-        private async void ToggleFullScreen()
+        private async Task ToggleFullScreenAsync()
         {
             if (!fullScreen)
             {
@@ -210,9 +211,6 @@ namespace Skinned_Player
                 VideoView1.Width = controlWidth;
                 VideoView1.Height = controlHeight;
 
-                VideoView1.Width = controlWidth;
-                VideoView1.Height = controlHeight;
-
                 // restoring window
                 Left = windowLeft;
                 Top = windowTop;
@@ -231,11 +229,11 @@ namespace Skinned_Player
             }
         }
 
-        private void MediaPlayer1_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void MediaPlayer1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (fullScreen)
             {
-                ToggleFullScreen();
+                await ToggleFullScreenAsync();
             }
         }
 

@@ -2346,7 +2346,9 @@ namespace Main_Demo
 
         private void rbVR_Checked(object sender, RoutedEventArgs e)
         {
-            if (rbDirect2D != null)
+            if (rbDirect2D != null && cbScreenFlipVertical != null && 
+                cbScreenFlipHorizontal != null && cbDirect2DRotate != null &&
+                pnZoom != null)
             {
                 bool direct2d = rbDirect2D.IsChecked == true;
                 cbScreenFlipVertical.IsEnabled = direct2d;
