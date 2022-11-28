@@ -10,8 +10,8 @@
     <Company>VisioForge</Company>
     <Product>SimpleService</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.55.0</AssemblyVersion>
-    <FileVersion>15.4.55.0</FileVersion>
+    <AssemblyVersion>15.4.56.0</AssemblyVersion>
+    <FileVersion>15.4.56.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -52,8 +52,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.55" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.55" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.4.56" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.4.56" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
