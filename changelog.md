@@ -20,6 +20,7 @@
 * API breaking change: the frame rate changed from double to VideoFrameRate in all APIs
 * Added GPU HW decoding for VLC engine
 * Resolved issue with WPF HighDPI apps that use EVR
+* Resolved issue with MediaPlayerCore.Video_Renderer_SetCustomWindowHandle method
 
 ## 15.4
 
