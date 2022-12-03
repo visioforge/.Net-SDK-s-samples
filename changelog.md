@@ -21,6 +21,7 @@
 * Added GPU HW decoding for VLC engine
 * Resolved issue with WPF HighDPI apps that use EVR
 * Resolved issue with MediaPlayerCore.Video_Renderer_SetCustomWindowHandle method
+* Added previous frame playback in Media Player SDK .Net (Cross-platform engine)
 
 ## 15.4
 

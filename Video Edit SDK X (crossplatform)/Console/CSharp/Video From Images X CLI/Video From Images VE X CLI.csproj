@@ -5,8 +5,8 @@
     <AssemblyTitle>Video From Images CLI</AssemblyTitle>
     <Product>Video From Images CLI</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.4.58.0</AssemblyVersion>
-    <FileVersion>15.4.58.0</FileVersion>
+    <AssemblyVersion>15.4.59.0</AssemblyVersion>
+    <FileVersion>15.4.59.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
@@ -48,7 +48,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.58" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.4.59" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -533,12 +533,20 @@ namespace Main_Demo
 
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            _player.Rate_Set(tbSpeed.Value / 10.0);
+            var speed = tbSpeed.Value / 10.0;
+            if (_player.Rate_Set(speed))
+            {
+                lbSpeed.Text = $"Speed: {speed:F1}";
+            }
         }
 
         private void btNextFrame_Click(object sender, EventArgs e)
         {
             _player.NextFrame(1);
+
+            tbSpeed.Value = (int)(_player.Rate_Get() * 10);
+            var speed = tbSpeed.Value / 10.0;
+            lbSpeed.Text = $"Speed: {speed:F1}";
         }
 
         private void tbVolume1_Scroll(object sender, EventArgs e)
@@ -746,6 +754,15 @@ namespace Main_Demo
             {
                 edImageOverlayFilename.Text = dlgOpenImage.FileName;
             }
+        }
+
+        private void btPrevFrame_Click(object sender, EventArgs e)
+        {
+            _player.PrevFrame(1);
+
+            tbSpeed.Value = (int)(_player.Rate_Get() * 10);
+            var speed = tbSpeed.Value / 10.0;
+            lbSpeed.Text = $"Speed: {speed:F1}";
         }
     }
 }
