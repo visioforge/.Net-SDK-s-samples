@@ -6,7 +6,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.MediaPlayer.GST;
+using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {

@@ -8,7 +8,7 @@ using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
-using VisioForge.Core.Types.MediaPlayer.GST;
+using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {

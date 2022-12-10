@@ -22,6 +22,7 @@
 * Resolved issue with WPF HighDPI apps that use EVR
 * Resolved issue with MediaPlayerCore.Video_Renderer_SetCustomWindowHandle method
 * Added previous frame playback in Media Player SDK .Net (Cross-platform engine)
+* Added WPF Screen Capture Demo to Media Blocks SDK .Net 
 
 ## 15.4
 

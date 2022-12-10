@@ -17,10 +17,11 @@ namespace Main_Demo
     using VisioForge.Core.Types.X;
     using VisioForge.Core.Types.X.AudioEffects;
     using VisioForge.Core.Types.X.VideoEffects;
-    using VisioForge.Core.Types.MediaPlayer.GST;
     using VisioForge.Core.Types.VideoProcessing;
     using FontStyle = VisioForge.Core.Types.X.VideoEffects.FontStyle;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.Types.X.MediaPlayer;
+    using VisioForge.Core.Types.X.Sources;
 
     public partial class Form1 : Form
     {

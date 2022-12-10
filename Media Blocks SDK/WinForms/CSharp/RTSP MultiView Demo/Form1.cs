@@ -7,8 +7,9 @@ using System.Windows.Forms;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types;
-using VisioForge.Core.Types.MediaPlayer.GST;
+using VisioForge.Core.Types.X.MediaPlayer;
 using System.Linq;
+using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {

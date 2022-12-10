@@ -23,7 +23,7 @@ namespace MediaBlocks_Player_Demo
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.VideoEffects;
     using VisioForge.Core.Types.X.VideoEncoders;
-    using VisioForge.Core.Types.MediaPlayer.GST;
+    using VisioForge.Core.Types.X.MediaPlayer;
     using VisioForge.Core.UI;
 
     public partial class Form1 : Form

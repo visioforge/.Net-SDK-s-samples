@@ -1,0 +1,62 @@
+﻿<Window x:Class="Screen_Capture_MB_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Screen_Capture_MB_WPF"
+        mc:Ignorable="d"
+       Title="Screen Capture Demo - Media Blocks SDK .Net" Height="526" Width="859" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" Icon="visioforge_main_icon.ico" Closing="Window_Closing" >
+    <Grid>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,406,10" Name="btStart" VerticalAlignment="Bottom" Width="75" Click="btStart_Click" FontWeight="Bold">Start</Button>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,326,10" Name="btStop" VerticalAlignment="Bottom" Width="75" Click="btStop_Click" FontWeight="Bold">Stop</Button>
+        <TabControl Margin="10,10,0,0" x:Name="tcMain" HorizontalAlignment="Left" Width="347" Height="437" VerticalAlignment="Top">
+            <TabItem Header="Input" IsSelected="True" Name="tabPage1">
+                <Grid>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="10,281,0,0" Name="label23" VerticalAlignment="Top" Width="120">Audio input device</Label>
+                    <ComboBox Height="23" Margin="0,309,0,0" Name="cbAudioInputDevice" VerticalAlignment="Top" HorizontalAlignment="Center" Width="321" />
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,15,0,0" Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True">Full Screen</RadioButton>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,41,0,0" Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89">Custom Area</RadioButton>
+                    <TextBox Margin="103,64,0,0" Name="edScreenLeft" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39" Text="0" />
+                    <Label Height="28" Margin="32,62,0,0" Name="label15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Left</Label>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="103,89,0,0" Name="edScreenRight" VerticalAlignment="Top" Width="39" Text="640" />
+                    <Label Height="28" HorizontalAlignment="Left" Margin="32,89,0,0" Name="label22" VerticalAlignment="Top" Width="41">Right</Label>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="200,64,0,0" Name="edScreenTop" VerticalAlignment="Top" Width="39" Text="0" />
+                    <Label Height="28" Margin="149,62,0,0" Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Top</Label>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="200,89,0,0" Name="edScreenBottom" VerticalAlignment="Top" Width="39" Text="480" />
+                    <Label Height="28" Margin="149,89,0,0" Name="label26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54">Bottom</Label>
+                    <TextBox HorizontalAlignment="Left" Margin="103,144,0,0" Name="edScreenFrameRate" Width="39" Height="22" VerticalAlignment="Top" Text="10" />
+                    <Label HorizontalAlignment="Left" Margin="12,141,0,0" Name="label27" Width="67" Height="28" VerticalAlignment="Top">Frame rate</Label>
+                    <Label Margin="0,141,0,0" Name="label28" Height="28" VerticalAlignment="Top" HorizontalAlignment="Center" Width="47">fps</Label>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,231,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,261,0,0" Name="cbRecordAudio" VerticalAlignment="Top" Width="131">Record Audio</CheckBox>
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
+                    <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,187,0,0" Name="label55" VerticalAlignment="Top" />
+                    <Label Height="28" HorizontalAlignment="Left" Margin="10,337,0,0" x:Name="label23_Copy" VerticalAlignment="Top" Width="120" Content="Audio output device"/>
+                    <ComboBox Height="23" Margin="0,365,0,0" x:Name="cbAudioOutputDevice" VerticalAlignment="Top" HorizontalAlignment="Center" Width="320" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Output" IsSelected="True">
+                <Grid>
+                    <Label Content="MP4 output format with default settings will be used" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="62" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,64,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="292" Text="capture.mp4" />
+                    <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,64,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log" IsSelected="True">
+                <Grid>
+                    <TextBox Margin="10,31,0,0" x:Name="mmLog" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="370" Width="323" />
+                    <CheckBox Height="16" HorizontalAlignment="Right" Margin="0,10,232,0" x:Name="cbDebugMode" VerticalAlignment="Top" Width="101" Content="Debug Mode"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Content="Video tutorial" FontWeight="Bold" Foreground="#FF0035BC" HorizontalAlignment="Right" Margin="0,3,10,0" Name="label33" Width="89" MouseUp="llVideoTutorials_LinkClicked" Height="26" VerticalAlignment="Top" />
+        <my:VideoView Margin="368,32,10,123" Name="VideoView1" Background="Black" />
+        <Label Content="Much more features available in Main Demo" HorizontalAlignment="Left" Margin="370,3,0,0" VerticalAlignment="Top"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="10,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True" Content="Preview"/>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="108,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"/>
+        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="218,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
+        <Button Content="Resume" Margin="0,0,165,10" x:Name="btResume" Click="btResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
+        <Button Content="Pause" Margin="0,0,228,10" x:Name="btPause" Click="btPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
+    </Grid>
+</Window>
