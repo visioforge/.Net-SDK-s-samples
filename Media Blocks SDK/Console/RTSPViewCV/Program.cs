@@ -1,20 +1,10 @@
-﻿using DlibDotNet;
-using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using VisioForge.Core;
+﻿using System;
 using VisioForge.Core.CVD;
-using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.Types;
-using VisioForge.Core.Types.MediaPlayer.GST;
-using static System.Net.WebRequestMethods;
+using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPViewCV
 {

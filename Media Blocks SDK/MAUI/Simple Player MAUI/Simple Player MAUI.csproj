@@ -68,7 +68,7 @@
 	  </AndroidNativeLibrary>
 	</ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.2" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.0" />
