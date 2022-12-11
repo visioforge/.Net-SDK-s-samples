@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Main_Demo</RootNamespace>
     <AssemblyName>Main Demo</AssemblyName>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
     <AssemblyTitle>Main Demo</AssemblyTitle>
     <Product>Main Demo</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
