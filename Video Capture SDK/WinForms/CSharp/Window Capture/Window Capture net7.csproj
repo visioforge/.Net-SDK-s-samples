@@ -1,16 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProductVersion>8.0.50727</ProductVersion>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>VideoEdit_CS_Demo</RootNamespace>
-    <AssemblyName>WinForms Main Demo</AssemblyName>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <RootNamespace>Window_Capture</RootNamespace>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyTitle>Video Edit SDK .Net CSharp Demo</AssemblyTitle>
-    <Company>VisioForge</Company>
-    <Product>VisioForge Video Edit SDK .Net</Product>
-    <Description>VisioForge Video Edit SDK .Net CSharp Demo</Description>
+    <AssemblyTitle>Window Capture</AssemblyTitle>
+    <Product>Window Capture</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
     <AssemblyVersion>15.5.0.0</AssemblyVersion>
     <FileVersion>15.5.0.0</FileVersion>
@@ -26,18 +22,12 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent />
-  </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Remove="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Form1.cs">
@@ -47,7 +37,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Update="Form1.resx">
-      <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
@@ -71,14 +60,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.0" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x86" Version="1.20.3.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x86" Version="1.20.3.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x86.UPX" Version="1.20.3.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.20.3.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.20.3.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.20.3.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

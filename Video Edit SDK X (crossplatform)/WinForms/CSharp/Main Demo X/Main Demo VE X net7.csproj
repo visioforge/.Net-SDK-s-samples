@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>VideoEdit_CS_Demo</RootNamespace>
     <AssemblyName>WinForms Main Demo</AssemblyName>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
     <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Video Edit SDK .Net CSharp Demo</AssemblyTitle>
