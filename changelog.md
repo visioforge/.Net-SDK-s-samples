@@ -2,6 +2,7 @@
 
 ## 15.5
 
+* .Net 7 support
 * Added NetworkDisconnect event support to MJPEG Low Latency IP camera engine
 * Added Linux support for VideoEditCoreX based demos
 * Added OnRTSPLowLatencyRAWFrame event to get RAW frames from RTSP stream, using RTSP Low Latency engine
