@@ -1,10 +1,10 @@
-﻿namespace Simple_Media_Player_MAUI;
-
-public partial class AppShell : Shell
+﻿namespace Simple_Player_MAUI
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    public partial class AppShell : Shell
+    {
+        public AppShell()
+        {
+            InitializeComponent();
+        }
+    }
 }
-

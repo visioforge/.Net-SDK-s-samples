@@ -19,7 +19,7 @@ namespace Video_Capture_Demo
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {

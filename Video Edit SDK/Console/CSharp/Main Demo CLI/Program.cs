@@ -10,8 +10,10 @@ namespace VE_Main_Demo_CLI
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoEdit;
     using VisioForge.Core.Types.VideoEffects;
+    using CommandLine;
+    using System.Collections.Generic;
 
-    class Program
+    static class Program
     {
         private static void AddVideoSourceFromOption(string[] option, VideoEditCore core)
         {
@@ -91,22 +93,31 @@ namespace VE_Main_Demo_CLI
 
         static void Main(string[] args)
         {
-            var options = new CommandLineOptions();
-            if (!CommandLine.Parser.Default.ParseArguments(args, options))
-            {
-                Console.WriteLine("Press any key to exit...");
-                Console.ReadKey();
-                return;
-            }
+            //var str = "-i c:\\samples\\pics\\ -o output_file.mp4 -r 1920:1080 -d 2000 -f mp4";
+            //var strx = str.Split(' ');
+            CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(Run)
+                .WithNotParsed(HandleParseError);
+        }
 
+        static void HandleParseError(IEnumerable<Error> errs)
+        {
+            Console.WriteLine("Wrong arguments. Press any key to exit...");
+            Console.ReadKey();
+        }
+
+        static void Run(CommandLineOptions options)
+        {
             var core = new VideoEditCore();
 
             // resize
-            if (options.Resize != null && options.Resize.Count == 2)
+            if (!string.IsNullOrEmpty(options.Resize))
             {
                 core.Video_Resize = true;
-                core.Video_Resize_Width = Convert.ToInt32(options.Resize[0]);
-                core.Video_Resize_Height = Convert.ToInt32(options.Resize[1]);
+
+                var resize = options.Resize.Split(':');
+                core.Video_Resize_Width = Convert.ToInt32(resize[0]);
+                core.Video_Resize_Height = Convert.ToInt32(resize[1]);
             }
 
             // add source files

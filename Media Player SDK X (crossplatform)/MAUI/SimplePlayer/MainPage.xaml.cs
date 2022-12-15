@@ -1,32 +1,31 @@
-﻿//using VisioForge.Core.UI.MAUI;
+﻿using VisioForge.Core.UI.MAUI;
 using System.Diagnostics;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using System.Globalization;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.Special;
-using VisioForge.Core.MediaBlocks;
-
-using VisioForge.Core.MediaBlocks.VideoRendering;
-
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.UI.Skins;
-using Stream = System.IO.Stream;
-using System.Reflection;
-using System.Drawing.Printing;
+using VisioForge.Core.Types;
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using System;
 
 #if ANDROID
 using Android.Runtime;
-using Android.Media;
 #endif
 
-namespace Simple_Media_Player_MAUI
+namespace Simple_Player_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        private string SKIN_NAME = "Default.vfskin";
-
         private MediaPlayerCoreX _player;
+
+        private string _filename;
+
+        /// <summary>
+        /// The seeking flag.
+        /// </summary>
+        private volatile bool _isTimerUpdate;
 
 #if ANDROID
         private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
@@ -35,38 +34,53 @@ namespace Simple_Media_Player_MAUI
 #endif
 
         /// <summary>
-        /// Loads this instance.
+        /// The position timer.
         /// </summary>
-        private void LoadSkin()
-        {
-            var assembly = GetType().Assembly;
-            var resources = assembly.GetManifestResourceNames();
+        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);        
 
-            foreach (string resourceKey in resources)
-            {
-                if (resourceKey.Contains(SKIN_NAME))
-                {
-                    using (var stream = assembly.GetManifestResourceStream(resourceKey))
-                    {
-                        var data = new byte[stream.Length];
-                        stream.Read(data, 0, data.Length);
-
-                        SkinManager.LoadFromData("Default", data);
-                    }
-                }
-            }
-        }
-        
         public MainPage()
         {
-            LoadSkin();
-            
             InitializeComponent();
 
             Loaded += MainPage_Loaded;
+            
+            _tmPosition.Elapsed += tmPosition_Elapsed;
+        }
 
-            //playlist.SkinName = "Default";
-            //playerControls.SkinName = "Default";
+        private void MainPage_Loaded(object sender, EventArgs e)
+        {
+#if ANDROID
+            //var view = (Android.Views.ViewGroup)this.Handler.PlatformView;
+            //var context = view.Context;
+            var activity = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; //(Android.App.Activity)context;
+            _player = new MediaPlayerCoreX(imgVideo, activity, VisioForge.Core.Types.PlatformType.Android);
+#else
+            _player = new MediaPlayerCoreX(imgVideo);
+#endif
+            _player.OnError += _player_OnError;
+            _player.OnStart += _player_OnStart;
+
+            Window.Destroying += Window_Destroying;
+        }
+
+        private void _player_OnStart(object sender, EventArgs e)
+        {
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    if (_player == null)
+                    {
+                        return;
+                    }
+
+                    slSeeking.Maximum = (await _player.DurationAsync()).TotalMilliseconds;
+                });
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }                      
         }
 
         private void Window_Destroying(object sender, EventArgs e)
@@ -81,25 +95,6 @@ namespace Simple_Media_Player_MAUI
             }
         }
 
-        private void MainPage_Loaded(object sender, EventArgs e)
-        {
-#if ANDROID
-            var view = (Android.Views.ViewGroup)this.Handler.PlatformView;
-           // var context = view.Context;
-            var activity = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; //(Android.App.Activity)context;
-            _player = new MediaPlayerCoreX(imgVideo, activity, VisioForge.Core.Types.PlatformType.Android);
-#else
-            _player = new MediaPlayerCoreX(imgVideo);
-#endif
-            _player.OnError += _player_OnError;
-
-            pbPanel.Player = _player;
-
-            //edFilename.Text = DEFAULT_FILENAME;
-
-            Window.Destroying += Window_Destroying;
-        }
-
         private void OnStop(object sender, EventArgs e)
         {
             if (_player != null)
@@ -112,6 +107,183 @@ namespace Simple_Media_Player_MAUI
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
+        }
+
+        private async Task StopAllAsync()
+        {
+            if (_player == null)
+            {
+                return;
+            }
+
+            _tmPosition.Stop();
+
+            if (_player != null)
+            {
+                await _player.StopAsync();
+            }
+        }
+
+        /// <summary>
+        /// Handles the Elapsed event of the tmPosition control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_player == null)
+            {
+                return;
+            }
+
+            var pos = await _player.Position_GetAsync();
+            var progress = (int)pos.TotalMilliseconds;
+
+            try
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    if (_player == null)
+                    {
+                        return;
+                    }
+
+                    _isTimerUpdate = true;
+
+                    if (progress > slSeeking.Maximum)
+                    {
+                        slSeeking.Value = slSeeking.Maximum;
+                    }
+                    else
+                    {
+                        slSeeking.Value = progress;
+                    }
+
+                    // This is where the received data is passed
+                    lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                    lbDuration.Text = $"{_player.Duration().ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+
+                    _isTimerUpdate = false;
+                });
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            if (!_isTimerUpdate && _player != null)
+            {
+                await _player.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+            }
+        }
+
+        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            if (_player != null)
+            {
+                _player.Audio_OutputDevice_Volume = e.NewValue / 100.0;
+            }
+        }
+
+        private async void btOpen_Clicked(object sender, EventArgs e)
+        {
+            await StopAllAsync();
+
+            btPlayPause.Text = "PLAY";
+
+            try
+            {
+                var result = await FilePicker.Default.PickAsync();
+                if (result != null)
+                {
+                    _filename = result.FullPath;
+                    lbFilename.Text = _filename;
+                    lbFilename.IsVisible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                // The user canceled or something went wrong
+            }
+        }
+
+        private async void btPlayPause_Clicked(object sender, EventArgs e)
+        {
+            if (_player == null || string.IsNullOrEmpty(_filename))
+            {
+                return;
+            }
+
+            switch (_player.State)
+            {
+                case PlaybackState.Play:
+                    {
+                        await _player.PauseAsync();
+
+                        btPlayPause.Text = "PLAY";
+                    }
+
+                    break;
+                case PlaybackState.Pause:
+                    {
+                        await _player.ResumeAsync();
+
+                        btPlayPause.Text = "PAUSE";
+                    }
+
+                    break;
+                case PlaybackState.Free:
+                    {
+                        if (_player.State == PlaybackState.Play || _player.State == PlaybackState.Pause)
+                        {
+                            return;
+                        }
+
+                        await _player.OpenAsync(new Uri(_filename));
+                        await _player.PlayAsync();
+
+                        _tmPosition.Start();
+
+                        btPlayPause.Text = "PAUSE";
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async void btSpeed_Clicked(object sender, EventArgs e)
+        {         
+            if (btSpeed.Text == "SPEED: 1X")
+            {
+                // set 2x
+                btSpeed.Text = "SPEED: 2X";
+                await _player.Rate_SetAsync(2.0);
+            }
+            else if (btSpeed.Text == "SPEED: 2X")
+            {
+                // set 0.5x
+                btSpeed.Text = "SPEED: 0.5X";
+                await _player.Rate_SetAsync(0.5);
+            }
+            else if (btSpeed.Text == "SPEED: 0.5X")
+            {
+                // set 1x
+                btSpeed.Text = "SPEED: 1X";
+                await _player.Rate_SetAsync(1.0);
+            }
+        }
+
+        private async void btStop_Clicked(object sender, EventArgs e)
+        {
+            await StopAllAsync();
+
+            btSpeed.Text = "SPEED: 1X";
+            btPlayPause.Text = "PLAY";
         }
     }
 }

@@ -1,14 +1,16 @@
-﻿using System;
+﻿using CommandLine;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoEdit;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace Video_From_Images_CLI
 {
-    class Program
+    static class Program
     {
         static void AddFiles(string inputFolder, string ext, ref List<string> files)
         {
@@ -18,20 +20,27 @@ namespace Video_From_Images_CLI
                 files.Add(s);
             }
         }
-
+        
         static void Main(string[] args)
         {
-            //var optionsz = new CommandLineOptions { InputFolder = "c:\\samples\\pics\\", OutputFile = "c:\\vf\\output.avi", Resolution = new[] { "1920", "1080" }, Duration = 2000, Format = "mp4" };
-            //var arguments = CommandLine.Parser.Default.FormatCommandLine(optionsz);
-
-            var options = new CommandLineOptions();
-            if (!CommandLine.Parser.Default.ParseArguments(args, options))
+            if (args.Length < 2)
             {
-                Console.WriteLine("Press any key to exit...");
+                var help = CommandLineOptions.GetUsage();
+                Console.WriteLine(help);
+
+                Console.Write("Press any key to exit.");
                 Console.ReadKey();
-                return;
             }
 
+            //var str = "-i c:\\samples\\pics\\ -o output_file.mp4 -r 1920:1080 -d 2000 -f mp4";
+            //var strx = str.Split(' ');
+            CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(Run)
+                .WithNotParsed(HandleParseError);
+        }
+        
+        static void Run(CommandLineOptions options)
+        {
             if (!Directory.Exists(options.InputFolder))
             {
                 Console.WriteLine(@"Folder with images does not exists: " + options.InputFolder);
@@ -61,8 +70,9 @@ namespace Video_From_Images_CLI
 
             int insertTime = 0;
 
-            int videoWidth = Convert.ToInt32(options.Resolution[0]);
-            int videoHeight = Convert.ToInt32(options.Resolution[1]);
+            var res = options.Resolution.Split(':');
+            int videoWidth = Convert.ToInt32(res[0]);
+            int videoHeight = Convert.ToInt32(res[1]);
 
             foreach (string img in files)
             {
@@ -124,6 +134,12 @@ namespace Video_From_Images_CLI
 
             videoEdit.Stop();
             videoEdit.Dispose();
+        }
+        
+        static void HandleParseError(IEnumerable<Error> errs)
+        {
+            Console.WriteLine("Wrong arguments. Press any key to exit...");
+            Console.ReadKey();
         }
 
         private static void VeOnOnProgress(object sender, ProgressEventArgs progressEventArgs)
