@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: | 
-          6.0.x
+          7.0.x
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
@@ -27,7 +27,7 @@ jobs:
         vs-prerelease: true
         
     - name: Install MAUI workload
-      run: dotnet workload install maui
+      run: dotnet workload install maui maui-ios maui-android maui-windows
         
     - name: Restore dependencies
       run: dotnet restore $env:Solution_Name
