@@ -27,7 +27,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CommandLineParser19" Version="1.9.74" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.1" />
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.5.1" />
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x86" Version="15.5.1" />
