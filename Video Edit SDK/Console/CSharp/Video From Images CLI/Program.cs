@@ -6,7 +6,6 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoEdit;
-using static System.Windows.Forms.Design.AxImporter;
 
 namespace Video_From_Images_CLI
 {
