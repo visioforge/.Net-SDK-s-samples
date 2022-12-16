@@ -10,6 +10,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -574,33 +575,31 @@ namespace VisioForge_SDK_Video_Capture_Demo
             Log(e.Message);
         }
 
-        private void btSaveScreenshot_Click(object sender, EventArgs e)
+        private async void btSaveScreenshot_Click(object sender, EventArgs e)
         {
-            VisioForge.Core.VirtualCameraNameAPI.SetName("Custom XXX");
-
-            //if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
-            //{
-            //    var filename = screenshotSaveDialog.FileName;
-            //    var ext = Path.GetExtension(filename)?.ToLowerInvariant();
-            //    switch (ext)
-            //    {
-            //        case ".bmp":
-            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
-            //            break;
-            //        case ".jpg":
-            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
-            //            break;
-            //        case ".gif":
-            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
-            //            break;
-            //        case ".png":
-            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
-            //            break;
-            //        case ".tiff":
-            //            await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
-            //            break;
-            //    }
-            //}
+            if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
+            {
+               var filename = screenshotSaveDialog.FileName;
+               var ext = Path.GetExtension(filename)?.ToLowerInvariant();
+               switch (ext)
+               {
+                   case ".bmp":
+                       await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Bmp, 0);
+                       break;
+                   case ".jpg":
+                       await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 85);
+                       break;
+                   case ".gif":
+                       await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Gif, 0);
+                       break;
+                   case ".png":
+                       await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Png, 0);
+                       break;
+                   case ".tiff":
+                       await VideoCapture1.Frame_SaveAsync(filename, ImageFormat.Tiff, 0);
+                       break;
+               }
+            }
         }
 
         private void SetMP4Output(ref MP4Output mp4Output)

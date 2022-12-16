@@ -2,14 +2,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net6.0-macos10.14</TargetFramework>
-    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net472;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net6.0-windows</TargetFrameworks>
     <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <LangVersion>9.0</LangVersion>
     <ApplicationId>com.visioforge.rtspviewcli</ApplicationId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.2" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.20.3.1" />
