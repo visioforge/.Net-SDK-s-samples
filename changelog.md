@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.x
+* VisioForge HW encoders update
+
 ## 15.5
 
 * .Net 7 support

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net7.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks>net7.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
     <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
@@ -53,8 +54,8 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.3" />
   </ItemGroup>
   <!--<ItemGroup>
 		<PackageReference Include="VisioForge.DotNet.Core" Version="15.4.23"/>
