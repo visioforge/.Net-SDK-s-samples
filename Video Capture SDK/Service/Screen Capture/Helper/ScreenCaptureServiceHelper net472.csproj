@@ -7,8 +7,8 @@
     <AssemblyTitle>ScreenCaptureServiceHelper</AssemblyTitle>
     <Product>ScreenCaptureServiceHelper</Product>
     <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.5.3.0</AssemblyVersion>
-    <FileVersion>15.5.3.0</FileVersion>
+    <AssemblyVersion>15.5.4.0</AssemblyVersion>
+    <FileVersion>15.5.4.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -61,8 +61,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.4" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
