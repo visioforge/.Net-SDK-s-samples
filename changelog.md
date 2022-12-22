@@ -1,8 +1,10 @@
 # Changelog
 
-## 15.x
-* VisioForge HW encoders update
+## 15.5.4
 * Added Decklink_Input_GetVideoFramesCount/Decklink_Input_GetVideoFramesCountAsync API to get total and dropped frames for the Decklink source
+
+## 15.5.2
+* VisioForge HW encoders update
 
 ## 15.5
 
