@@ -107,6 +107,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camera Light Demo (NuGet) n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtual Camera Streamer (NuGet) net472", "WinForms\CSharp\Virtual Camera Streamer\Virtual Camera Streamer (NuGet) net472.csproj", "{7A760F77-1D00-4D65-8E3D-E463907F86CA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nvidia Maxine VC Demo (NuGet) net472", "WPF\CSharp\Nvidia Maxine Demo\Nvidia Maxine VC Demo (NuGet) net472.csproj", "{D03AE404-65B3-4C14-97A5-A3DB71EE9997}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -491,6 +493,14 @@ Global
 		{7A760F77-1D00-4D65-8E3D-E463907F86CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A760F77-1D00-4D65-8E3D-E463907F86CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A760F77-1D00-4D65-8E3D-E463907F86CA}.Release|x86.Build.0 = Release|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Debug|x86.Build.0 = Debug|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Release|x86.ActiveCfg = Release|Any CPU
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -543,6 +553,7 @@ Global
 		{8CCA9F40-8397-451C-9D77-7CE391CBAB42} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{58190B57-D95B-4892-8E60-85B561DE7CAE} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{7A760F77-1D00-4D65-8E3D-E463907F86CA} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{D03AE404-65B3-4C14-97A5-A3DB71EE9997} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

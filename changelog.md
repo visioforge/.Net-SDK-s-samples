@@ -1,7 +1,7 @@
 # Changelog
 
 ## 15.5.7
-* Added Nvidia Maxine Video Effects SDK (BETA) and sample app for Media Player SDK .Net
+* Added Nvidia Maxine Video Effects SDK (BETA) and sample app for Media Player SDK .Net and Video Capture SDK .Net
 
 ## 15.5.4
 * Added Decklink_Input_GetVideoFramesCount/Decklink_Input_GetVideoFramesCountAsync API to get total and dropped frames for the Decklink source
