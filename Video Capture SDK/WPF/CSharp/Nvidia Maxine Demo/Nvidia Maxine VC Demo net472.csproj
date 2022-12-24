@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.NvidiaMaxine" Version="15.5.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.NvidiaMaxine" Version="15.5.7" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.7" />
   </ItemGroup>
   <ItemGroup>
