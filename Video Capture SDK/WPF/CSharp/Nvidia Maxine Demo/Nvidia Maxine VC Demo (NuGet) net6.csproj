@@ -59,16 +59,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.50.0.58025">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.7" />
     <PackageReference Include="VisioForge.DotNet.Core.NvidiaMaxine" Version="15.5.7" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.7" />
