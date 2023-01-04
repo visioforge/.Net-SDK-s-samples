@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -87,6 +88,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
                 cbAudioOutput.SelectedIndex = 0;
             }
+
+            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -167,7 +170,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 _audioTee = new TeeBlock(2);
                 _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
                 _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
-                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(@"c:\vf\output.mp4"));
+                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
             }
 
             // connect all
@@ -320,7 +323,17 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         {
             if (_audioRenderer != null)
             {
-                _audioRenderer.Volume = tbVolume1.Value / 100.0;
+                _audioRenderer.Volume = tbVolume.Value / 100.0;
+            }
+        }
+
+        private void btSelectOutput_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "MP4 files (*.mp4)|*.mp4|WebM files (*.webm)|*.mp4|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                edFilename.Text = dialog.FileName;
             }
         }
     }

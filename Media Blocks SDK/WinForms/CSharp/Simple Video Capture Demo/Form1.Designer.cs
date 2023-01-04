@@ -49,10 +49,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbVolume1 = new System.Windows.Forms.TrackBar();
+            this.tbVolume = new System.Windows.Forms.TrackBar();
             this.cbAudioOutput = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btSelectOutput = new System.Windows.Forms.Button();
+            this.edFilename = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbOutputFormat = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -64,7 +67,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbVolume)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
@@ -73,8 +76,8 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(445, -238);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(494, -298);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(397, 20);
@@ -85,21 +88,21 @@
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(688, 14);
+            this.linkLabel1.Location = new System.Drawing.Point(764, 18);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(160, 20);
+            this.linkLabel1.Size = new System.Drawing.Size(184, 25);
             this.linkLabel1.TabIndex = 93;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Watch video tutorials!";
             // 
             // btStop
             // 
-            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStop.Location = new System.Drawing.Point(710, 468);
-            this.btStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btStop.Location = new System.Drawing.Point(823, 585);
+            this.btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(69, 35);
+            this.btStop.Size = new System.Drawing.Size(100, 44);
             this.btStop.TabIndex = 104;
             this.btStop.Text = "Stop";
             this.btStop.UseVisualStyleBackColor = true;
@@ -107,10 +110,10 @@
             // 
             // btPause
             // 
-            this.btPause.Location = new System.Drawing.Point(623, 468);
-            this.btPause.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btPause.Location = new System.Drawing.Point(715, 585);
+            this.btPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btPause.Name = "btPause";
-            this.btPause.Size = new System.Drawing.Size(78, 35);
+            this.btPause.Size = new System.Drawing.Size(100, 44);
             this.btPause.TabIndex = 103;
             this.btPause.Text = "Pause";
             this.btPause.UseVisualStyleBackColor = true;
@@ -118,10 +121,10 @@
             // 
             // btResume
             // 
-            this.btResume.Location = new System.Drawing.Point(522, 468);
-            this.btResume.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btResume.Location = new System.Drawing.Point(607, 585);
+            this.btResume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btResume.Name = "btResume";
-            this.btResume.Size = new System.Drawing.Size(92, 35);
+            this.btResume.Size = new System.Drawing.Size(100, 44);
             this.btResume.TabIndex = 102;
             this.btResume.Text = "Resume";
             this.btResume.UseVisualStyleBackColor = true;
@@ -129,11 +132,11 @@
             // 
             // btStart
             // 
-            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStart.Location = new System.Drawing.Point(449, 468);
-            this.btStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btStart.Location = new System.Drawing.Point(499, 585);
+            this.btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(64, 35);
+            this.btStart.Size = new System.Drawing.Size(100, 44);
             this.btStart.TabIndex = 101;
             this.btStart.Text = "Start";
             this.btStart.UseVisualStyleBackColor = true;
@@ -142,10 +145,10 @@
             // lbTime
             // 
             this.lbTime.AutoSize = true;
-            this.lbTime.Location = new System.Drawing.Point(928, 475);
+            this.lbTime.Location = new System.Drawing.Point(1031, 594);
             this.lbTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(137, 20);
+            this.lbTime.Size = new System.Drawing.Size(155, 25);
             this.lbTime.TabIndex = 100;
             this.lbTime.Text = "00:00:00/00:00:00";
             // 
@@ -155,10 +158,11 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 14);
+            this.tabControl1.Location = new System.Drawing.Point(13, 18);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(417, 632);
+            this.tabControl1.Size = new System.Drawing.Size(463, 790);
             this.tabControl1.TabIndex = 105;
             // 
             // tabPage1
@@ -171,10 +175,11 @@
             this.tabPage1.Controls.Add(this.cbVideoFormat);
             this.tabPage1.Controls.Add(this.cbVideoInput);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(409, 599);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage1.Size = new System.Drawing.Size(455, 752);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Source";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -183,27 +188,29 @@
             // 
             this.cbAudioFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioFormat.FormattingEnabled = true;
-            this.cbAudioFormat.Location = new System.Drawing.Point(24, 183);
+            this.cbAudioFormat.Location = new System.Drawing.Point(27, 229);
+            this.cbAudioFormat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbAudioFormat.Name = "cbAudioFormat";
-            this.cbAudioFormat.Size = new System.Drawing.Size(354, 28);
+            this.cbAudioFormat.Size = new System.Drawing.Size(393, 33);
             this.cbAudioFormat.TabIndex = 114;
             // 
             // cbAudioInput
             // 
             this.cbAudioInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioInput.FormattingEnabled = true;
-            this.cbAudioInput.Location = new System.Drawing.Point(24, 149);
+            this.cbAudioInput.Location = new System.Drawing.Point(27, 186);
+            this.cbAudioInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbAudioInput.Name = "cbAudioInput";
-            this.cbAudioInput.Size = new System.Drawing.Size(354, 28);
+            this.cbAudioInput.Size = new System.Drawing.Size(393, 33);
             this.cbAudioInput.TabIndex = 113;
             this.cbAudioInput.SelectedIndexChanged += new System.EventHandler(this.cbAudioInput_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 126);
+            this.label4.Location = new System.Drawing.Point(22, 158);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(138, 20);
+            this.label4.Size = new System.Drawing.Size(161, 25);
             this.label4.TabIndex = 112;
             this.label4.Text = "Audio input device";
             // 
@@ -211,17 +218,18 @@
             // 
             this.cbVideoFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVideoFrameRate.FormattingEnabled = true;
-            this.cbVideoFrameRate.Location = new System.Drawing.Point(269, 81);
+            this.cbVideoFrameRate.Location = new System.Drawing.Point(299, 101);
+            this.cbVideoFrameRate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbVideoFrameRate.Name = "cbVideoFrameRate";
-            this.cbVideoFrameRate.Size = new System.Drawing.Size(72, 28);
+            this.cbVideoFrameRate.Size = new System.Drawing.Size(80, 33);
             this.cbVideoFrameRate.TabIndex = 111;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(347, 84);
+            this.label3.Location = new System.Drawing.Point(386, 105);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 20);
+            this.label3.Size = new System.Drawing.Size(37, 25);
             this.label3.TabIndex = 110;
             this.label3.Text = "fps";
             // 
@@ -229,9 +237,10 @@
             // 
             this.cbVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVideoFormat.FormattingEnabled = true;
-            this.cbVideoFormat.Location = new System.Drawing.Point(24, 81);
+            this.cbVideoFormat.Location = new System.Drawing.Point(27, 101);
+            this.cbVideoFormat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbVideoFormat.Name = "cbVideoFormat";
-            this.cbVideoFormat.Size = new System.Drawing.Size(239, 28);
+            this.cbVideoFormat.Size = new System.Drawing.Size(265, 33);
             this.cbVideoFormat.TabIndex = 109;
             this.cbVideoFormat.SelectedIndexChanged += new System.EventHandler(this.cbVideoFormat_SelectedIndexChanged);
             // 
@@ -239,31 +248,33 @@
             // 
             this.cbVideoInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbVideoInput.FormattingEnabled = true;
-            this.cbVideoInput.Location = new System.Drawing.Point(24, 47);
+            this.cbVideoInput.Location = new System.Drawing.Point(27, 59);
+            this.cbVideoInput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbVideoInput.Name = "cbVideoInput";
-            this.cbVideoInput.Size = new System.Drawing.Size(354, 28);
+            this.cbVideoInput.Size = new System.Drawing.Size(393, 33);
             this.cbVideoInput.TabIndex = 108;
             this.cbVideoInput.SelectedIndexChanged += new System.EventHandler(this.cbVideoInput_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 24);
+            this.label1.Location = new System.Drawing.Point(22, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 20);
+            this.label1.Size = new System.Drawing.Size(159, 25);
             this.label1.TabIndex = 107;
             this.label1.Text = "Video input device";
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.tbVolume1);
+            this.tabPage4.Controls.Add(this.tbVolume);
             this.tabPage4.Controls.Add(this.cbAudioOutput);
             this.tabPage4.Controls.Add(this.label5);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 34);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(409, 599);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage4.Size = new System.Drawing.Size(455, 752);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Audio renderer";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -271,54 +282,86 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(60, 90);
+            this.label6.Location = new System.Drawing.Point(67, 112);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 20);
+            this.label6.Size = new System.Drawing.Size(72, 25);
             this.label6.TabIndex = 122;
             this.label6.Text = "Volume";
             // 
-            // tbVolume1
+            // tbVolume
             // 
-            this.tbVolume1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume1.Location = new System.Drawing.Point(64, 115);
-            this.tbVolume1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbVolume1.Maximum = 100;
-            this.tbVolume1.Name = "tbVolume1";
-            this.tbVolume1.Size = new System.Drawing.Size(314, 69);
-            this.tbVolume1.TabIndex = 121;
-            this.tbVolume1.Value = 80;
-            this.tbVolume1.Scroll += new System.EventHandler(this.tbVolume1_Scroll);
+            this.tbVolume.BackColor = System.Drawing.SystemColors.Window;
+            this.tbVolume.Location = new System.Drawing.Point(71, 144);
+            this.tbVolume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.tbVolume.Maximum = 100;
+            this.tbVolume.Name = "tbVolume";
+            this.tbVolume.Size = new System.Drawing.Size(349, 69);
+            this.tbVolume.TabIndex = 121;
+            this.tbVolume.Value = 80;
+            this.tbVolume.Scroll += new System.EventHandler(this.tbVolume1_Scroll);
             // 
             // cbAudioOutput
             // 
             this.cbAudioOutput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAudioOutput.FormattingEnabled = true;
-            this.cbAudioOutput.Location = new System.Drawing.Point(24, 47);
+            this.cbAudioOutput.Location = new System.Drawing.Point(27, 59);
+            this.cbAudioOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbAudioOutput.Name = "cbAudioOutput";
-            this.cbAudioOutput.Size = new System.Drawing.Size(354, 28);
+            this.cbAudioOutput.Size = new System.Drawing.Size(393, 33);
             this.cbAudioOutput.TabIndex = 120;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 24);
+            this.label5.Location = new System.Drawing.Point(22, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 20);
+            this.label5.Size = new System.Drawing.Size(174, 25);
             this.label5.TabIndex = 119;
             this.label5.Text = "Audio output device";
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btSelectOutput);
+            this.tabPage2.Controls.Add(this.edFilename);
+            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.cbOutputFormat);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(409, 599);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Size = new System.Drawing.Size(455, 752);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Output";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btSelectOutput
+            // 
+            this.btSelectOutput.Location = new System.Drawing.Point(388, 140);
+            this.btSelectOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btSelectOutput.Name = "btSelectOutput";
+            this.btSelectOutput.Size = new System.Drawing.Size(32, 32);
+            this.btSelectOutput.TabIndex = 42;
+            this.btSelectOutput.Text = "...";
+            this.btSelectOutput.UseVisualStyleBackColor = true;
+            this.btSelectOutput.Click += new System.EventHandler(this.btSelectOutput_Click);
+            // 
+            // edFilename
+            // 
+            this.edFilename.Location = new System.Drawing.Point(27, 140);
+            this.edFilename.Name = "edFilename";
+            this.edFilename.Size = new System.Drawing.Size(354, 31);
+            this.edFilename.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(22, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 25);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Output file";
             // 
             // cbOutputFormat
             // 
@@ -328,17 +371,18 @@
             "None",
             "MP4",
             "WebM"});
-            this.cbOutputFormat.Location = new System.Drawing.Point(24, 47);
+            this.cbOutputFormat.Location = new System.Drawing.Point(27, 59);
+            this.cbOutputFormat.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbOutputFormat.Name = "cbOutputFormat";
-            this.cbOutputFormat.Size = new System.Drawing.Size(354, 28);
+            this.cbOutputFormat.Size = new System.Drawing.Size(393, 33);
             this.cbOutputFormat.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 24);
+            this.label7.Location = new System.Drawing.Point(22, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(108, 20);
+            this.label7.Size = new System.Drawing.Size(128, 25);
             this.label7.TabIndex = 0;
             this.label7.Text = "Output format";
             // 
@@ -347,30 +391,31 @@
             this.tabPage3.Controls.Add(this.mmLog);
             this.tabPage3.Controls.Add(this.cbTelemetry);
             this.tabPage3.Controls.Add(this.cbDebugMode);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 34);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(409, 599);
+            this.tabPage3.Size = new System.Drawing.Size(455, 752);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Log";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // mmLog
             // 
-            this.mmLog.Location = new System.Drawing.Point(17, 57);
-            this.mmLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mmLog.Location = new System.Drawing.Point(19, 71);
+            this.mmLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.mmLog.Multiline = true;
             this.mmLog.Name = "mmLog";
             this.mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mmLog.Size = new System.Drawing.Size(372, 525);
+            this.mmLog.Size = new System.Drawing.Size(413, 655);
             this.mmLog.TabIndex = 8;
             // 
             // cbTelemetry
             // 
             this.cbTelemetry.AutoSize = true;
-            this.cbTelemetry.Location = new System.Drawing.Point(156, 22);
-            this.cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbTelemetry.Location = new System.Drawing.Point(173, 28);
+            this.cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cbTelemetry.Name = "cbTelemetry";
-            this.cbTelemetry.Size = new System.Drawing.Size(104, 24);
+            this.cbTelemetry.Size = new System.Drawing.Size(113, 29);
             this.cbTelemetry.TabIndex = 7;
             this.cbTelemetry.Text = "Telemetry";
             this.cbTelemetry.UseVisualStyleBackColor = true;
@@ -378,10 +423,10 @@
             // cbDebugMode
             // 
             this.cbDebugMode.AutoSize = true;
-            this.cbDebugMode.Location = new System.Drawing.Point(17, 22);
-            this.cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbDebugMode.Location = new System.Drawing.Point(19, 28);
+            this.cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cbDebugMode.Name = "cbDebugMode";
-            this.cbDebugMode.Size = new System.Drawing.Size(127, 24);
+            this.cbDebugMode.Size = new System.Drawing.Size(144, 29);
             this.cbDebugMode.TabIndex = 6;
             this.cbDebugMode.Text = "Debug mode";
             this.cbDebugMode.UseVisualStyleBackColor = true;
@@ -393,18 +438,18 @@
             // VideoView1
             // 
             this.VideoView1.BackColor = System.Drawing.Color.Black;
-            this.VideoView1.Location = new System.Drawing.Point(449, 43);
-            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.VideoView1.Location = new System.Drawing.Point(499, 54);
+            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.VideoView1.Name = "VideoView1";
-            this.VideoView1.Size = new System.Drawing.Size(622, 415);
+            this.VideoView1.Size = new System.Drawing.Size(691, 519);
             this.VideoView1.StatusOverlay = null;
             this.VideoView1.TabIndex = 97;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 661);
+            this.ClientSize = new System.Drawing.Size(1211, 826);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btPause);
@@ -415,6 +460,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.linkLabel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Media Blocks SDK .Net - Simple Video Capture Demo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -424,7 +470,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbVolume)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -461,10 +507,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TrackBar tbVolume1;
+        private System.Windows.Forms.TrackBar tbVolume;
         private System.Windows.Forms.ComboBox cbAudioOutput;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbOutputFormat;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox edFilename;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btSelectOutput;
     }
 }

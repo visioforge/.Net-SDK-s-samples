@@ -7,19 +7,77 @@
         xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
         x:Class="MediaBlocks_Simple_Video_Capture_Demo_WPF.MainWindow"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - Simple Video Capture Demo" Height="453" Width="800" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico">
+        Title="Media Blocks SDK .Net - Simple Video Capture Demo" Height="453" Width="810" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <WPF:VideoView x:Name="videoView" HorizontalAlignment="Left" Height="219" Margin="488,10,0,0" VerticalAlignment="Top" Width="302"/>
-        <Label x:Name="label" Content="Video source" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" Margin="102,14,0,0" VerticalAlignment="Top" Width="204"/>
-        <Label x:Name="label1" Content="Format" HorizontalAlignment="Left" Margin="26,39,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Margin="102,41,0,0" VerticalAlignment="Top" Width="133"/>
-        <Label x:Name="label2" Content="fps" HorizontalAlignment="Left" Margin="280,39,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbVideoFrameRate" HorizontalAlignment="Left" Margin="240,41,0,0" VerticalAlignment="Top" Width="40"/>
-        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="728,404,0,0" VerticalAlignment="Top" Width="50"/>
-        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="673,404,0,0" VerticalAlignment="Top" Width="50" Click="btStart_Click"/>
-        <TextBox x:Name="mmLog" HorizontalAlignment="Left" Height="75" Margin="10,349,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="296"/>
+        <WPF:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300" Margin="10,10,10,0" Width="400"/>
 
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Video input device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbVideoFormat" Margin="0,10,0,0" Width="280" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                        <ComboBox x:Name="cbVideoFrameRate" Margin="10,10,0,0" Width="50"/>
+                        <Label Content="fps" Margin="0,10,0,0" />
+                    </StackPanel>
+
+                    <Label Content="Audio input device" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbAudioInput_SelectionChanged"/>
+                    <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Width="360"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Audio renderer">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Audio output device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360"/>
+                    <Label Content="Volume" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <Slider x:Name="tbVolume" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Minimum="0" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged" />
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Output">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Format" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbOutputFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectedIndex="0">
+                        <ComboBoxItem>None</ComboBoxItem>
+                        <ComboBoxItem>MP4</ComboBoxItem>
+                        <ComboBoxItem>WebM</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Filename" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edFilename" Width="330" Text="c:\capture.avi"/>
+                        <Button x:Name="btSelectFile" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectFile_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="cbDebugMode" Width="110">Debug mode</CheckBox>
+                        <CheckBox x:Name="cbTelemetry">Telemetry</CheckBox>
+                    </StackPanel>
+
+                    <TextBox x:Name="mmLog" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,40,0,10" TextWrapping="Wrap" Width="360"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,320,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btPause" Content="Pause" Width="60" Margin="10,0,0,0" Click="btPause_Click"/>
+            <Button x:Name="btResume" Content="Resume" Width="60" Margin="10,0,0,0" Click="btResume_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,320,10,0" Text="00:00:00" x:Name="lbTime"/>
     </Grid>
 </Window>

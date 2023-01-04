@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
+using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.MediaBlocks.Special;
+using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.ONVIF;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoEncoders;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {
@@ -33,6 +45,20 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         private AudioRendererBlock _audioRenderer;
 
         private SystemVideoSourceBlock _videoSource;
+
+        private SystemAudioSourceBlock _audioSource;
+
+        private MP4SinkBlock _mp4Muxer;
+
+        private H264EncoderBlock _h264Encoder;
+
+        private TeeBlock _videoTee;
+
+        private TeeBlock _audioTee;
+
+        private AACEncoderBlock _aacEncoder;
+
+        private System.Timers.Timer _timer;
 
         public MainWindow()
         {
@@ -52,6 +78,16 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            _timer = new System.Timers.Timer(500);
+            _timer.Elapsed += _timer_Elapsed;
+
+            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline.OnError += Pipeline_OnError;
+
+            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+            cbOutputFormat.SelectedIndex = 1;
+
             var videoCaptureDevices = SystemVideoSourceBlock.GetDevices(_pipeline);
             if (videoCaptureDevices.Length > 0)
             {
@@ -62,10 +98,36 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
                 cbVideoInput.SelectedIndex = 0;
             }
+
+            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(_pipeline, AudioCaptureDeviceAPI.DirectSound);
+            if (audioCaptureDevices.Length > 0)
+            {
+                foreach (var item in audioCaptureDevices)
+                {
+                    cbAudioInput.Items.Add(item.Name);
+                }
+
+                cbAudioInput.SelectedIndex = 0;
+            }
+
+            var audioOutputDevices = AudioRendererBlock.GetDevices(_pipeline);
+            if (audioOutputDevices.Length > 0)
+            {
+                foreach (var item in audioOutputDevices)
+                {
+                    cbAudioOutput.Items.Add(item);
+                }
+
+                cbAudioOutput.SelectedIndex = 0;
+            }
+
+            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            bool capture = cbOutputFormat.SelectedIndex > 0;
+
             mmLog.Clear();
 
             if (cbVideoInput.SelectedIndex < 0)
@@ -74,13 +136,238 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 return;
             }
 
-            var videoSourceSettings = new VideoCaptureDeviceSourceSettings(cbVideoInput.Text);
+            // video source
+            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+            var deviceName = cbVideoInput.Text;
+            var format = cbVideoFormat.Text;
+            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            {
+                var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                if (device != null)
+                {
+                    var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                    if (formatItem != null)
+                    {
+                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device.Name)
+                        {
+                            Format = formatItem.ToFormat()
+                        };
+
+                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                    }
+                }
+            }
+
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-            var videoRendererBlock = new VideoRendererBlock(_pipeline, videoView);
-            _pipeline.Connect(_videoSource.Output, videoRendererBlock.Input);
+            // audio source
+            AudioCaptureDeviceSourceSettings audioSourceSettings = null;
 
+            deviceName = cbAudioInput.Text;
+            format = cbAudioFormat.Text;
+            if (!string.IsNullOrEmpty(deviceName))
+            {
+                var device = SystemAudioSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                if (device != null)
+                {
+                    var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
+                    if (formatItem != null)
+                    {
+                        audioSourceSettings = new AudioCaptureDeviceSourceSettings(device.OriginalName, formatItem.ToFormat());
+                    }
+                }
+            }
+
+            _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
+
+            // video renderer
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+            // audio renderer
+            _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
+
+            // capture
+            if (capture)
+            {
+                _videoTee = new TeeBlock(2);
+                _audioTee = new TeeBlock(2);
+                _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
+                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+            }
+
+            // connect all
+            if (capture)
+            {
+                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
+                _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                _pipeline.Connect(_audioSource.Output, _audioTee.Input);
+                _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+                _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
+                _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
+            }
+            else
+            {
+                _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
+                _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
+            }
+
+            // start
             await _pipeline.StartAsync();
+
+            _timer.Start();
+        }
+
+        private void btSelectFile_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "MP4 files (*.mp4)|*.mp4|WebM files (*.webm)|*.mp4|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == true)
+            {
+                edFilename.Text = dialog.FileName;
+            }
+        }
+
+        private async void btStop_Click(object sender, RoutedEventArgs e)
+        {
+            _timer.Stop();
+
+            await _pipeline?.StopAsync();
+
+            _pipeline?.ClearBlocks();
+
+            VideoView1.CallRefresh();
+        }
+
+        private async void btPause_Click(object sender, RoutedEventArgs e)
+        {
+            await _pipeline.PauseAsync();
+        }
+
+        private async void btResume_Click(object sender, RoutedEventArgs e)
+        {
+            await _pipeline.ResumeAsync();
+        }
+
+        private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            var position = await _pipeline.Position_GetAsync();
+
+            Dispatcher.Invoke(() =>
+            {
+                lbTime.Text = position.ToString("hh\\:mm\\:ss");
+            });           
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            btStop_Click(null, null);
+
+            if (_pipeline != null)
+            {
+                _pipeline.OnError -= Pipeline_OnError;
+
+                _pipeline.Dispose();
+                _pipeline = null;
+            }
+        }
+
+        private void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            {
+                var deviceName = (string)e.AddedItems[0];
+
+                if (!string.IsNullOrEmpty(deviceName))
+                {
+                    cbVideoFormat.Items.Clear();
+
+                    var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    if (device != null)
+                    {
+                        foreach (var item in device.VideoFormats)
+                        {
+                            cbVideoFormat.Items.Add(item.Name);
+                        }
+
+                        if (cbVideoFormat.Items.Count > 0)
+                        {
+                            cbVideoFormat.SelectedIndex = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbVideoFrameRate.Items.Clear();
+
+            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            {
+                var deviceName = cbVideoInput.SelectedValue.ToString();
+                var format = (string)e.AddedItems[0];
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                {
+                    var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    if (device != null)
+                    {
+                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                        if (formatItem != null)
+                        {
+                            // build int range from tuple (min, max)    
+                            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
+                            foreach (var item in frameRateList)
+                            {
+                                cbVideoFrameRate.Items.Add(item);
+                            }
+
+                            if (cbVideoFrameRate.Items.Count > 0)
+                            {
+                                cbVideoFrameRate.SelectedIndex = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbAudioInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            {
+                var deviceName = (string)e.AddedItems[0];
+                if (!string.IsNullOrEmpty(deviceName))
+                {
+                    cbAudioFormat.Items.Clear();
+
+                    var device = SystemAudioSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    if (device != null)
+                    {
+                        foreach (var format in device.Formats)
+                        {
+                            cbAudioFormat.Items.Add(format.Name);
+                        }
+
+                        if (cbAudioFormat.Items.Count > 0)
+                        {
+                            cbAudioFormat.SelectedIndex = 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (_audioRenderer != null)
+            {
+                _audioRenderer.Volume = tbVolume.Value / 100.0;
+            }
         }
     }
 }
