@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.8
+* Resolved the DeinterlaceBlend video effect crash
+* Used 3rd-party libraries moved to VisioForge.Libs.External assembly/NuGet
+
 ## 15.5.7
 * Added Nvidia Maxine Video Effects SDK (BETA) and sample app for Media Player SDK .Net and Video Capture SDK .Net
 

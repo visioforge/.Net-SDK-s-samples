@@ -42,6 +42,10 @@ namespace Nvidia_Maxine_Demo
 
         private WriteableBitmap _previewBitmap;
 
+        private AIGSEffectMode _aigsMode;
+
+        private string _aigsBackgroundImage;
+
         private bool disposedValue;
 
         public Window1()
@@ -80,6 +84,10 @@ namespace Nvidia_Maxine_Demo
                         break;
                     case 4:
                         _videoEffect = new SuperResolutionEffect(_modelsPath, videoFrame);
+                        break;
+                    case 5:
+                        _videoEffect = new AIGSEffect(_modelsPath, videoFrame, _aigsMode);
+                        (_videoEffect as AIGSEffect).BackgroundImage = _aigsBackgroundImage;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -381,6 +389,8 @@ namespace Nvidia_Maxine_Demo
 
             _modelsPath = edModels.Text;
             _effectID = cbVideoEffect.SelectedIndex;
+            _aigsMode = (AIGSEffectMode)cbAIGSMode.SelectedIndex;
+            _aigsBackgroundImage = edAIGSBackground.Text;
 
             await VideoCapture1.StartAsync();
 
@@ -412,6 +422,75 @@ namespace Nvidia_Maxine_Demo
             pnScreen.EndInit();
 
             _previewBitmap = null;
+        }
+
+        private void cbVideoEffect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (gdDenoise == null)
+            {
+                return;
+            }
+
+            switch (cbVideoEffect.SelectedIndex)
+            {
+                case 0:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 1:
+                    {
+                        gdDenoise.Visibility = Visibility.Visible;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 2:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Visible;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 3:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Visible;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 4:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Visible;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 5:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Visible;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)

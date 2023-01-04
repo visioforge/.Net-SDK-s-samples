@@ -31,23 +31,71 @@
                 <TextBox x:Name="edLog" HorizontalAlignment="Center" Margin="0,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Height="84" VerticalScrollBarVisibility="Auto"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Video effects" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,156,15,0" Height="139" Width="276">
+        <GroupBox Header="Video effects" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,156,15,0" Height="293" Width="276">
             <Grid>
                 <Label Content="Models folder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="edModels" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="c:\Projects\_Projects\NvidiaMaxineNet\SDK\bin\models\" VerticalAlignment="Top" Width="219" Height="20" MaxLines="1"/>
                 <Button x:Name="btSelectModelsFolder" Content="..." HorizontalAlignment="Left" Margin="234,35,0,0" VerticalAlignment="Top" Width="20" Height="20"/>
 
-                <Label Content="Effect" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cbVideoEffect" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" Width="244" SelectedIndex="0" >
+                <Label Content="Effect" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cbVideoEffect" Margin="0,85,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" SelectedIndex="0" Height="24" Width="244" SelectionChanged="cbVideoEffect_SelectionChanged">
                     <ComboBoxItem>None</ComboBoxItem>
                     <ComboBoxItem>Denoise</ComboBoxItem>
-                    <ComboBoxItem>Artifact reduction</ComboBoxItem>
+                    <ComboBoxItem>Artifact Reduction</ComboBoxItem>
                     <ComboBoxItem>Upscale</ComboBoxItem>
-                    <ComboBoxItem>Super resolution</ComboBoxItem>
+                    <ComboBoxItem>Super Resolution</ComboBoxItem>
+                    <ComboBoxItem>AI Green Screen</ComboBoxItem>
                 </ComboBox>
+
+                <Grid x:Name="gdDenoise" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <Label Margin="10,0,0,0">Strength</Label>
+                    <Slider x:Name="slDenoiseStrength" Margin="10,25,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Minimum="0" Maximum="10" Value="7"></Slider>
+                </Grid>
+
+                <Grid x:Name="gdArtifactReduction" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <Label Margin="10,0,0,0">Mode</Label>
+                    <ComboBox x:Name="cbArtifactReductionMode" Margin="15,25,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>High bitrate</ComboBoxItem>
+                        <ComboBoxItem>Low bitrate</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+
+                <Grid x:Name="gdUpscale" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <Label Margin="10,0,0,0">Strength</Label>
+                    <Slider x:Name="slUpscaleStrength" Margin="10,25,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Minimum="0" Maximum="10" Value="7"></Slider>
+
+                    <Label Margin="10,45,0,0">New height</Label>
+                    <TextBox x:Name="edUpscaleHeight" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="24">1080</TextBox>
+                </Grid>
+
+                <Grid x:Name="gdSuperResolution" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Label Margin="10,0,0,0">Mode</Label>
+                    <ComboBox x:Name="cbSuperResolutionMode" Margin="15,25,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>HQ source</ComboBoxItem>
+                        <ComboBoxItem>LQ source</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Margin="10,45,0,0">New height</Label>
+                    <TextBox x:Name="edSuperResolutionHeight" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="24">1080</TextBox>
+                </Grid>
+
+                <Grid x:Name="gdAIGS" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <Label Margin="10,0,0,0">Mode</Label>
+                    <ComboBox x:Name="cbAIGSMode" Margin="15,25,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectedIndex="0">
+                        <ComboBoxItem>Matte</ComboBoxItem>
+                        <ComboBoxItem>Green</ComboBoxItem>
+                        <ComboBoxItem>White</ComboBoxItem>
+                        <ComboBoxItem>None</ComboBoxItem>
+                        <ComboBoxItem>Background</ComboBoxItem>
+                        <ComboBoxItem>Blur</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Margin="10,45,0,0">Background image</Label>
+                    <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24">c:\Samples\pics\5.jpg</TextBox>
+                </Grid>
             </Grid>
         </GroupBox>
-        <Label Content="Nvidia Maxine Video Effects SDK or redist required" HorizontalAlignment="Right" Margin="0,307,15,0" VerticalAlignment="Top"/>
+        <Label Content="Nvidia Maxine Video Effects SDK or redist required" HorizontalAlignment="Right" Margin="0,472,13,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

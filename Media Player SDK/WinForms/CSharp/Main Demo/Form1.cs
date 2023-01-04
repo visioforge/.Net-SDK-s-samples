@@ -2077,7 +2077,7 @@ namespace Media_Player_Demo
             }
         }
 
-        private void cbStretch1_CheckedChanged(object sender, EventArgs e)
+        private void cbFlipStretch1_CheckedChanged(object sender, EventArgs e)
         {
             VideoRendererStretchMode stretch;
             if (cbStretch1.Checked)
@@ -2092,7 +2092,7 @@ namespace Media_Player_Demo
             MediaPlayer1.MultiScreen_SetParameters(0, stretch, cbFlipHorizontal1.Checked, cbFlipVertical1.Checked);
         }
 
-        private void cbStretch2_CheckedChanged(object sender, EventArgs e)
+        private void cbFlipStretch2_CheckedChanged(object sender, EventArgs e)
         {
             VideoRendererStretchMode stretch;
             if (cbStretch2.Checked)
@@ -2106,67 +2106,7 @@ namespace Media_Player_Demo
 
             MediaPlayer1.MultiScreen_SetParameters(1, stretch, cbFlipHorizontal2.Checked, cbFlipVertical2.Checked);
         }
-
-        private void cbFlipVertical1_CheckedChanged(object sender, EventArgs e)
-        {
-            VideoRendererStretchMode stretch;
-            if (cbStretch1.Checked)
-            {
-                stretch = VideoRendererStretchMode.Stretch;
-            }
-            else
-            {
-                stretch = VideoRendererStretchMode.Letterbox;
-            }
-
-            MediaPlayer1.MultiScreen_SetParameters(0, stretch, cbFlipHorizontal1.Checked, cbFlipVertical1.Checked);
-        }
-
-        private void cbFlipHorizontal2_CheckedChanged(object sender, EventArgs e)
-        {
-            VideoRendererStretchMode stretch;
-            if (cbStretch2.Checked)
-            {
-                stretch = VideoRendererStretchMode.Stretch;
-            }
-            else
-            {
-                stretch = VideoRendererStretchMode.Letterbox;
-            }
-
-            MediaPlayer1.MultiScreen_SetParameters(1, stretch, cbFlipHorizontal2.Checked, cbFlipVertical2.Checked);
-        }
-
-        private void cbFlipHorizontal1_CheckedChanged(object sender, EventArgs e)
-        {
-            VideoRendererStretchMode stretch;
-            if (cbStretch1.Checked)
-            {
-                stretch = VideoRendererStretchMode.Stretch;
-            }
-            else
-            {
-                stretch = VideoRendererStretchMode.Letterbox;
-            }
-
-            MediaPlayer1.MultiScreen_SetParameters(0, stretch, cbFlipHorizontal1.Checked, cbFlipVertical1.Checked);
-        }
-
-        private void cbFlipVertical2_CheckedChanged(object sender, EventArgs e)
-        {
-            VideoRendererStretchMode stretch;
-            if (cbStretch2.Checked)
-            {
-                stretch = VideoRendererStretchMode.Stretch;
-            }
-            else
-            {
-                stretch = VideoRendererStretchMode.Letterbox;
-            }
-
-            MediaPlayer1.MultiScreen_SetParameters(1, stretch, cbFlipHorizontal2.Checked, cbFlipVertical2.Checked);
-        }
-
+        
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (MediaPlayer1.State() != PlaybackState.Free)

@@ -1873,7 +1873,7 @@ namespace Media_Player_Demo
             this.cbFlipHorizontal2.TabIndex = 21;
             this.cbFlipHorizontal2.Text = "Flip horizontal";
             this.cbFlipHorizontal2.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal2.CheckedChanged += new System.EventHandler(this.cbFlipHorizontal2_CheckedChanged);
+            this.cbFlipHorizontal2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
             // 
             // cbFlipVertical2
             // 
@@ -1885,7 +1885,7 @@ namespace Media_Player_Demo
             this.cbFlipVertical2.TabIndex = 20;
             this.cbFlipVertical2.Text = "Flip vertical";
             this.cbFlipVertical2.UseVisualStyleBackColor = true;
-            this.cbFlipVertical2.CheckedChanged += new System.EventHandler(this.cbFlipVertical2_CheckedChanged);
+            this.cbFlipVertical2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
             // 
             // cbStretch2
             // 
@@ -1897,7 +1897,7 @@ namespace Media_Player_Demo
             this.cbStretch2.TabIndex = 19;
             this.cbStretch2.Text = "Stretch";
             this.cbStretch2.UseVisualStyleBackColor = true;
-            this.cbStretch2.CheckedChanged += new System.EventHandler(this.cbStretch2_CheckedChanged);
+            this.cbStretch2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
             // 
             // cbFlipHorizontal1
             // 
@@ -1909,7 +1909,7 @@ namespace Media_Player_Demo
             this.cbFlipHorizontal1.TabIndex = 18;
             this.cbFlipHorizontal1.Text = "Flip horizontal";
             this.cbFlipHorizontal1.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal1.CheckedChanged += new System.EventHandler(this.cbFlipHorizontal1_CheckedChanged);
+            this.cbFlipHorizontal1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
             // 
             // cbFlipVertical1
             // 
@@ -1921,7 +1921,7 @@ namespace Media_Player_Demo
             this.cbFlipVertical1.TabIndex = 17;
             this.cbFlipVertical1.Text = "Flip vertical";
             this.cbFlipVertical1.UseVisualStyleBackColor = true;
-            this.cbFlipVertical1.CheckedChanged += new System.EventHandler(this.cbFlipVertical1_CheckedChanged);
+            this.cbFlipVertical1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
             // 
             // cbStretch1
             // 
@@ -1933,7 +1933,7 @@ namespace Media_Player_Demo
             this.cbStretch1.TabIndex = 16;
             this.cbStretch1.Text = "Stretch";
             this.cbStretch1.UseVisualStyleBackColor = true;
-            this.cbStretch1.CheckedChanged += new System.EventHandler(this.cbStretch1_CheckedChanged);
+            this.cbStretch1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
             // 
             // pnScreen2
             // 

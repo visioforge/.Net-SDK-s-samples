@@ -1,28 +1,14 @@
 ﻿using NvidiaMaxine.VideoEffects.Effects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types;
-using VisioForge.Core;
 using VisioForge.Core.Types.MediaPlayer;
-using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.Windows.Forms;
-using VisioForge.Core.RTSPSource;
 
 namespace Nvidia_Maxine_Player
 {
@@ -43,6 +29,10 @@ namespace Nvidia_Maxine_Player
         private int _effectID = 0;
 
         private string _modelsPath;
+
+        private AIGSEffectMode _aigsMode;
+
+        private string _aigsBackgroundImage;
 
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
@@ -77,6 +67,10 @@ namespace Nvidia_Maxine_Player
                         break;
                     case 4:
                         _videoEffect = new SuperResolutionEffect(_modelsPath, videoFrame);
+                        break;
+                    case 5:
+                        _videoEffect = new AIGSEffect(_modelsPath, videoFrame, _aigsMode);
+                        (_videoEffect as AIGSEffect).BackgroundImage = _aigsBackgroundImage;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -129,7 +123,8 @@ namespace Nvidia_Maxine_Player
             {
                 MediaPlayer1.OnError -= MediaPlayer1_OnError;
                 MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
-
+                MediaPlayer1.OnVideoFrameBuffer -= MediaPlayer1_OnVideoFrameBuffer;
+                
                 MediaPlayer1.Dispose();
                 MediaPlayer1 = null;
             }
@@ -163,7 +158,9 @@ namespace Nvidia_Maxine_Player
 
             _effectID = cbVideoEffect.SelectedIndex;
             _modelsPath = edModels.Text;
-
+            _aigsMode = (AIGSEffectMode)cbAIGSMode.SelectedIndex;
+            _aigsBackgroundImage = edAIGSBackground.Text;
+            
             await MediaPlayer1.PlayAsync();
 
             _timer.Start();
@@ -214,6 +211,7 @@ namespace Nvidia_Maxine_Player
             MediaPlayer1.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             cbVideoEffect.SelectedIndex = 0;
+            cbVideoEffect_SelectionChanged(null, null);
 
             _timer.Interval = TimeSpan.FromMilliseconds(500);
             _timer.Tick +=
@@ -260,6 +258,75 @@ namespace Nvidia_Maxine_Player
             btStop_Click(null, null);
 
             DestroyEngine();
+        }
+
+        private void cbVideoEffect_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (gdDenoise == null)
+            {
+                return;
+            }
+
+            switch (cbVideoEffect.SelectedIndex)
+            {
+                case 0:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 1:
+                    {
+                        gdDenoise.Visibility = Visibility.Visible;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 2:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Visible;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 3:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Visible;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 4:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Visible;
+                        gdAIGS.Visibility = Visibility.Collapsed;
+                    }
+                    break;
+                case 5:
+                    {
+                        gdDenoise.Visibility = Visibility.Collapsed;
+                        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                        gdSuperResolution.Visibility = Visibility.Collapsed;
+                        gdUpscale.Visibility = Visibility.Collapsed;
+                        gdAIGS.Visibility = Visibility.Visible;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

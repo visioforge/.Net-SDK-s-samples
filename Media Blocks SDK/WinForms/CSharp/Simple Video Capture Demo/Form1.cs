@@ -66,7 +66,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(_pipeline);
+            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(_pipeline, AudioCaptureDeviceAPI.DirectSound);
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)

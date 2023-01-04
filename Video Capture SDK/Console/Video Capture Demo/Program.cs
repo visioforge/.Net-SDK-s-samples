@@ -40,6 +40,12 @@ namespace Video_Capture_Demo
             Console.Write(@"Select video capture device index: ");
             int videoCaptureDeviceIndex = Convert.ToInt32(Console.ReadLine());
 
+            if (videoCaptureDeviceIndex >= videoCaptureDevices.Count)
+            {
+                Console.Write(@"Wrong video capture device index has been specified.");
+                return;
+            }
+
             // video formats
             VideoCaptureDeviceFormat videoFormat = new VideoCaptureDeviceFormat(string.Empty);
             if (videoCaptureDevices[videoCaptureDeviceIndex].VideoFormats.Count > 0)
