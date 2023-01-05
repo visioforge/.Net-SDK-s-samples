@@ -29,8 +29,9 @@
 
             <TabItem Header="Video effects">
                 <StackPanel Orientation="Vertical" Margin="10,10,0,0">
-                    <CheckBox x:Name="cbAddTextOverlay" Margin="0,10,0,0">Add sample text overlay</CheckBox>
-                    <CheckBox x:Name="cbAddImageOverlay" Margin="0,10,0,0">Add sample image overlay</CheckBox>
+                    <CheckBox x:Name="cbAddTextOverlay" Margin="0,10,0,0" Checked="cbAddTextOverlay_Checked" Unchecked="cbAddTextOverlay_Unchecked">Add sample text overlay</CheckBox>
+                    <CheckBox x:Name="cbAddScrollingTextOverlay" Margin="0,10,0,0" Checked="cbAddScrollingTextOverlay_Checked" Unchecked="cbAddScrollingTextOverlay_Unchecked">Add sample scrolling text overlay</CheckBox>
+                    <CheckBox x:Name="cbAddImageOverlay" Margin="0,10,0,0" Checked="cbAddImageOverlay_Checked" Unchecked="cbAddImageOverlay_Unchecked">Add sample image overlay</CheckBox>
                 </StackPanel>
             </TabItem>
 

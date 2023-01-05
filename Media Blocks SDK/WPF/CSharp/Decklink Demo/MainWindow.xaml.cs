@@ -14,6 +14,7 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
@@ -37,9 +38,7 @@ namespace Decklink_MB_Demo
 
         private DecklinkAudioSourceBlock _audioSource;
 
-        private TextOverlayBlock _textOverlay;
-
-        private ImageOverlayBlock _imageOverlay;
+        private VideoEffectsBlock _videoEffects;
 
         private MP4SinkBlock _mp4Muxer;
 
@@ -53,7 +52,7 @@ namespace Decklink_MB_Demo
 
         private DecklinkAudioSinkBlock _decklinkAudioSink;
 
-        private DecklinkVideoSinkBlock _decklinkVideoSink; 
+        private DecklinkVideoSinkBlock _decklinkVideoSink;
 
         private System.Timers.Timer _timer;
 
@@ -179,6 +178,46 @@ namespace Decklink_MB_Demo
             VideoView1.CallRefresh();
         }
 
+        private void AddTextLogo()
+        {
+            var textOverlay = new VideoEffectTextLogo(true);
+            textOverlay.Left = 50;
+            textOverlay.Top = 50;
+            _videoEffects.Video_Effects_Add(textOverlay);
+        }
+
+        private void RemoveTextLogo()
+        {
+            _videoEffects.Video_Effects_Remove("TextLogo");
+        }
+
+        private void AddScrollingTextLogo()
+        {
+            var textOverlay = new VideoEffectScrollingTextLogo(true);
+            textOverlay.Left = 50;
+            textOverlay.Top = 50;
+            _videoEffects.Video_Effects_Add(textOverlay);
+        }
+
+        private void RemoveScrollingTextLogo()
+        {
+            _videoEffects.Video_Effects_Remove("ScrollingTextLogo");
+        }
+
+        private void AddImageLogo()
+        {
+            var imageOverlay = new VideoEffectImageLogo(true);
+            imageOverlay.Filename = System.IO.Path.Combine(Environment.CurrentDirectory, "logo.png");
+            imageOverlay.Left = 50;
+            imageOverlay.Top = 150;
+            _videoEffects.Video_Effects_Add(imageOverlay);
+        }
+
+        private void RemoveImageLogo()
+        {
+            _videoEffects.Video_Effects_Remove("ImageLogo");
+        }
+
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             bool capture = cbOutputFormat.SelectedIndex > 0;
@@ -230,39 +269,25 @@ namespace Decklink_MB_Demo
             // audio renderer
             _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
 
-            // source pads
-            MediaBlockPad videoOutputPad = _videoSource.Output;
-            MediaBlockPad audioOutputPad = _audioSource.Output;
+            // effects
+            _videoEffects = new VideoEffectsBlock();
 
-            // text overlay
             if (cbAddTextOverlay.IsChecked == true)
             {
-                var settings = new TextOverlaySettings("Hello world!!!");
-                settings.HorizontalAlignment = TextOverlayHAlign.Center;
-                settings.VerticalAlignment = TextOverlayVAlign.Top;
-
-                _textOverlay = new TextOverlayBlock(settings);
-                
-                _pipeline.AddBlock(_textOverlay);
-
-                _pipeline.Connect(videoOutputPad, _textOverlay.Input);
-                videoOutputPad = _textOverlay.Output;
+                AddTextLogo();
             }
-
-            // image overlay
+            
+            if (cbAddScrollingTextOverlay.IsChecked == true)
+            {
+                AddScrollingTextLogo();
+            }
+            
             if (cbAddImageOverlay.IsChecked == true)
             {
-                var settings = new ImageOverlaySettings("logo.png");
-               // settings.HorizontalAlignment = ImageOverlayHAlign.Right;
-               // settings.VerticalAlignment = ImageOverlayVAlign.Bottom;
-
-                _imageOverlay = new ImageOverlayBlock(settings);
-
-                _pipeline.AddBlock(_imageOverlay);
-
-                _pipeline.Connect(videoOutputPad, _imageOverlay.Input);
-                videoOutputPad = _imageOverlay.Output;
+                AddImageLogo();
             }
+
+            _pipeline.Connect(_videoSource.Output, _videoEffects.Input);
 
             // tees
             int captureID = -1;
@@ -285,8 +310,8 @@ namespace Decklink_MB_Demo
                 _videoTee = new TeeBlock(k);
                 _audioTee = new TeeBlock(k);
 
-                _pipeline.Connect(videoOutputPad, _videoTee.Input);
-                _pipeline.Connect(audioOutputPad, _audioTee.Input);
+                _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
+                _pipeline.Connect(_audioSource.Output, _audioTee.Input);
 
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
                 _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
@@ -304,10 +329,10 @@ namespace Decklink_MB_Demo
             if (tee)
             {
                 if (capture)
-                {                    
+                {
                     _pipeline.Connect(_videoTee.Outputs[captureID], _h264Encoder.Input);
                     _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
-                    
+
                     _pipeline.Connect(_audioTee.Outputs[captureID], _aacEncoder.Input);
                     _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
                 }
@@ -345,12 +370,12 @@ namespace Decklink_MB_Demo
 
                     _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkVideoSink.Input);
                     _pipeline.Connect(_audioTee.Outputs[decklinkOutputID], _decklinkAudioSink.Input);
-                }                        
+                }
             }
             else
             {
-                _pipeline.Connect(audioOutputPad, _audioRenderer.Input);
-                _pipeline.Connect(videoOutputPad, _videoRenderer.Input);
+                _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
+                _pipeline.Connect(_videoEffects.Output, _videoRenderer.Input);
             }
 
             // start
@@ -380,6 +405,36 @@ namespace Decklink_MB_Demo
                 _pipeline.Dispose();
                 _pipeline = null;
             }
+        }
+
+        private void cbAddTextOverlay_Checked(object sender, RoutedEventArgs e)
+        {
+            AddTextLogo();
+        }
+
+        private void cbAddTextOverlay_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveTextLogo();
+        }
+
+        private void cbAddImageOverlay_Checked(object sender, RoutedEventArgs e)
+        {
+            AddImageLogo();
+        }
+
+        private void cbAddImageOverlay_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveImageLogo();
+        }
+
+        private void cbAddScrollingTextOverlay_Checked(object sender, RoutedEventArgs e)
+        {
+            AddScrollingTextLogo();
+        }
+
+        private void cbAddScrollingTextOverlay_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RemoveScrollingTextLogo();
         }
     }
 }
