@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.9
+* Updated Decklink source for Media Blocks SDK .Net
+* Added Decklink Demo for Media Blocks SDK .Net
+
 ## 15.5.8
 * Resolved the DeinterlaceBlend video effect crash
 * Used 3rd-party libraries moved to VisioForge.Libs.External assembly/NuGet
