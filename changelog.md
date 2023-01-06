@@ -1,21 +1,28 @@
 # Changelog
 
+## 15.5.11
+* [Media Blocks SDK .Net] Updated MP4SinkBlock. Sink can split output files by duration, file size or timecode. Use MP4SplitSinkSettings instead MP4SinkSettings to configure.
+* [Video Capture SDK .Net] Added the OnMJPEGLowLatencyRAWFrame event that fired when the MJPEG low latency engine received a RAW frame from camera.
+
+## 15.5.10
+* [Media Blocks SDK .Net] Added VideoEffectsBlock to use video effects, available in Windows SDKs
+
 ## 15.5.9
-* Updated Decklink source for Media Blocks SDK .Net
-* Added Decklink Demo for Media Blocks SDK .Net
+* [Media Blocks SDK .Net] Updated Decklink source
+* [Media Blocks SDK .Net] Added Decklink Demo (WPF)
 
 ## 15.5.8
-* Resolved the DeinterlaceBlend video effect crash
-* Used 3rd-party libraries moved to VisioForge.Libs.External assembly/NuGet
+* [ALL] Resolved the DeinterlaceBlend video effect crash
+* [ALL] Used 3rd-party libraries moved to VisioForge.Libs.External assembly/NuGet
 
 ## 15.5.7
-* Added Nvidia Maxine Video Effects SDK (BETA) and sample app for Media Player SDK .Net and Video Capture SDK .Net
+* [ALL] Added Nvidia Maxine Video Effects SDK (BETA) and sample app for Media Player SDK .Net and Video Capture SDK .Net
 
 ## 15.5.4
-* Added Decklink_Input_GetVideoFramesCount/Decklink_Input_GetVideoFramesCountAsync API to get total and dropped frames for the Decklink source
+* [Video Capture SDK .Net] Added Decklink_Input_GetVideoFramesCount/Decklink_Input_GetVideoFramesCountAsync API to get total and dropped frames for the Decklink source
 
 ## 15.5.2
-* VisioForge HW encoders update
+* [ALL] VisioForge HW encoders update
 
 ## 15.5
 
