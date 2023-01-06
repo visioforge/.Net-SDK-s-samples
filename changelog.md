@@ -2,7 +2,7 @@
 
 ## 15.5.11
 * [Media Blocks SDK .Net] Updated MP4SinkBlock. Sink can split output files by duration, file size or timecode. Use MP4SplitSinkSettings instead MP4SinkSettings to configure.
-* [Video Capture SDK .Net] Added the OnMJPEGLowLatencyRAWFrame event that fired when the MJPEG low latency engine received a RAW frame from camera.
+* [Video Capture SDK .Net] Added the OnMJPEGLowLatencyRAWFrame event that fired when the MJPEG low latency engine received a RAW frame from a camera.
 
 ## 15.5.10
 * [Media Blocks SDK .Net] Added VideoEffectsBlock to use video effects, available in Windows SDKs
