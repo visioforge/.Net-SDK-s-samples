@@ -242,7 +242,7 @@ namespace Decklink_MB_Demo
                 if (device != null)
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device);
-                    videoSourceSettings.Mode = Enum.Parse<DecklinkMode>(cbVideoMode.Text);
+                    videoSourceSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
                 }
             }
 
@@ -348,7 +348,7 @@ namespace Decklink_MB_Demo
                         if (device != null)
                         {
                             videoSinkSettings = new DecklinkVideoSinkSettings(device);
-                            videoSinkSettings.Mode = Enum.Parse<DecklinkMode>(cbVideoMode.Text);
+                            videoSinkSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
                         }
                     }
 
