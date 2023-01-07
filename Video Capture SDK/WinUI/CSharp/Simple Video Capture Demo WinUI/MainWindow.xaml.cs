@@ -712,10 +712,16 @@ namespace Simple_Video_Capture_Demo_WinUI
 
         private void SetIcon()
         {
-            IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
-            var appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
+            try
+            {
+                IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+                WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
+                var appWindow = AppWindow.GetFromWindowId(windowId);
+                appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
+            }
+            catch 
+            {                
+            }            
         }
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)

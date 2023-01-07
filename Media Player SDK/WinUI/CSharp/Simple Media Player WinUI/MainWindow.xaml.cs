@@ -50,16 +50,10 @@ namespace Simple_Media_Player_WinUI
 
         private void SetIcon()
         {
-            try
-            {
-                IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
-                WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
-                var appWindow = AppWindow.GetFromWindowId(windowId);
-                appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
-            }
-            catch 
-            {                
-            }            
+            IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
+            var appWindow = AppWindow.GetFromWindowId(windowId);
+            appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
         }
 
 #pragma warning disable S3168 // "async" methods should not return "void"
