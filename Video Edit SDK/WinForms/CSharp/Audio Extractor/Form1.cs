@@ -68,7 +68,7 @@ namespace Audio_Extractor
             }));
         }
 
-        private void _core_OnProgress(object? sender, ProgressEventArgs e)
+        private void _core_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke(new Action(() =>
             {
