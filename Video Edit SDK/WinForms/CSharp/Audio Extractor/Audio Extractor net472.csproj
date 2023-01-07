@@ -3,7 +3,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>Audio_Extractor</RootNamespace>
-    <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
