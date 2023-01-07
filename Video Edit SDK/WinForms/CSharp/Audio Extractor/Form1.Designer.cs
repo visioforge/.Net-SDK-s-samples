@@ -1,4 +1,6 @@
-﻿namespace Audio_Extractor
+﻿using System.Windows.Forms;
+
+namespace Audio_Extractor
 {
     partial class Form1
     {
