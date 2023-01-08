@@ -11,9 +11,9 @@
     <Company>VisioForge</Company>
     <Product>Video Edit SDK .Net</Product>
     <Description>Video Edit SDK .Net Main Demo (WPF)</Description>
-    <Copyright>Copyright (c) 2006-2022</Copyright>
-    <AssemblyVersion>15.5.12.0</AssemblyVersion>
-    <FileVersion>15.5.12.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.5.14.0</AssemblyVersion>
+    <FileVersion>15.5.14.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -41,9 +41,9 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.12" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.14" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.14" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.14" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
