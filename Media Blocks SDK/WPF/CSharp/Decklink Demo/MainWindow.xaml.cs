@@ -34,6 +34,8 @@ namespace Decklink_MB_Demo
 
         private AudioRendererBlock _audioRenderer;
 
+        private VideoResizeBlock _videoResize;
+
         private DecklinkVideoSourceBlock _videoSource;
 
         private DecklinkAudioSourceBlock _audioSource;
@@ -60,6 +62,8 @@ namespace Decklink_MB_Demo
         {
             InitializeComponent();
             _pipeline = new MediaBlocksPipeline(true);
+            _pipeline.Debug_Mode = true;
+            _pipeline.Debug_Dir = @"c:\vf\";
             _pipeline.OnError += Pipeline_OnError;
         }
 
@@ -311,6 +315,7 @@ namespace Decklink_MB_Demo
                 _audioTee = new TeeBlock(k);
 
                 _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
+                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
                 _pipeline.Connect(_audioSource.Output, _audioTee.Input);
 
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
@@ -320,9 +325,29 @@ namespace Decklink_MB_Demo
             // capture
             if (capture)
             {
-                _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
+                var h264settings = new MFH264EncoderSettings();
+
+                // GOP size
+                h264settings.GOPSize = 25;
+
+                // quality
+                h264settings.RCMode = MFH264EncoderRCMode.QVBR;
+                h264settings.QP = 15;
+                h264settings.QPB = 15;
+                h264settings.QPP = 15;
+                h264settings.QPI = 15;
+
+                _h264Encoder = new H264EncoderBlock(h264settings);
+
                 _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
-                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+
+                var mp4Settings = new MP4SinkSettings(edFilename.Text);
+                _mp4Muxer = new MP4SinkBlock(mp4Settings);
+
+                if (cbResizeVideo.IsChecked == true)
+                {
+                    _videoResize = new VideoResizeBlock(new ResizeVideoEffect(Convert.ToInt32(edResizeWidth.Text), Convert.ToInt32(edResizeHeight.Text)));
+                }
             }
 
             // connect all
@@ -330,7 +355,16 @@ namespace Decklink_MB_Demo
             {
                 if (capture)
                 {
-                    _pipeline.Connect(_videoTee.Outputs[captureID], _h264Encoder.Input);
+                    if (cbResizeVideo.IsChecked == true)
+                    {
+                        _pipeline.Connect(_videoTee.Outputs[captureID], _videoResize.Input);
+                        _pipeline.Connect(_videoResize.Output, _h264Encoder.Input);
+                    }
+                    else
+                    {
+                        _pipeline.Connect(_videoTee.Outputs[captureID], _h264Encoder.Input);
+                    }      
+                        
                     _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
 
                     _pipeline.Connect(_audioTee.Outputs[captureID], _aacEncoder.Input);

@@ -52,8 +52,15 @@
                         <ComboBoxItem>MP4</ComboBoxItem>
                         <ComboBoxItem>WebM</ComboBoxItem>
                     </ComboBox>
-                    <Label Content="Filename" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
 
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                        <CheckBox x:Name="cbResizeVideo" Content="Resize video" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBox x:Name="edResizeWidth" Width="30" Text="480" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                        <Label Content="x" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center" />
+                        <TextBox x:Name="edResizeHeight" Width="30" Text="360" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Label Content="Filename" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="edFilename" Width="330" Text="c:\capture.avi"/>
                         <Button x:Name="btSelectFile" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectFile_Click"/>
