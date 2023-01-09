@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.17
+* [ALL] Updated scrolling text logo (performance)
+* [Media Blocks SDK .Net] Updated Decklink sink blocks
+
 ## 15.5.16
 * [ALL] Resolved crash with a text logo with a custom resolution 
 

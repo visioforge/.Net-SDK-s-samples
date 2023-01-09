@@ -8,8 +8,8 @@
     <AssemblyTitle>Video From Images CLI</AssemblyTitle>
     <Product>Video From Images CLI</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.16.0</AssemblyVersion>
-    <FileVersion>15.5.16.0</FileVersion>
+    <AssemblyVersion>15.5.17.0</AssemblyVersion>
+    <FileVersion>15.5.17.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,7 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.16" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.17" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
