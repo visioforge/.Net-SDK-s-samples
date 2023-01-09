@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.16
+* [ALL] Resolved crash with a text logo with a custom resolution 
+
 ## 15.5.12
 * [Media Blocks SDK .Net] Added Intel QuickSync H264, HEVC, VP9 and MJPEG encoders support.
 * [Video Edit SDK .Net] Added FastEdit_ExtractAudioStreamAsync method to extract the audio stream from the video file.
