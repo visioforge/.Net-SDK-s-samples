@@ -10,6 +10,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
@@ -1060,6 +1061,11 @@ namespace VisioForge_SDK_Video_Capture_Demo
             {
                 cbFlipY_CheckedChanged(null, null);
             }
+
+            if (cbScrollingText.Checked)
+            {
+                cbScrollingText_CheckedChanged(null, null);
+            }
         }
 
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
@@ -1103,6 +1109,26 @@ namespace VisioForge_SDK_Video_Capture_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
+        }
+
+        private void cbScrollingText_CheckedChanged(object sender, EventArgs e)
+        {
+            IVideoEffectScrollingTextLogo textLogo;
+            var effect = VideoCapture1.Video_Effects_Get("ScrollingTextLogo");
+            if (effect == null)
+            {
+                textLogo = new VideoEffectScrollingTextLogo(cbScrollingText.Checked);
+                VideoCapture1.Video_Effects_Add(textLogo);
+            }
+            else
+            {
+                textLogo = effect as IVideoEffectScrollingTextLogo;
+                if (textLogo != null)
+                {
+                    textLogo.Enabled = cbScrollingText.Checked;
+                    textLogo.Reset();
+                }
+            }
         }
     }
 }

@@ -68,13 +68,14 @@
                     <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="67,259,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
                     <Slider Height="23" HorizontalAlignment="Left" Margin="214,286,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbDarkness_Scroll" />
                     <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="237,259,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
-                    <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="21,330,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged"  />
-                    <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="96,330,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
-                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,330,0,0" VerticalAlignment="Top" Checked="cbFlipX_Checked" Unchecked="cbFlipX_Checked"/>
-                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,330,0,0" VerticalAlignment="Top" Checked="cbFlipY_Checked" Unchecked="cbFlipY_Checked"/>
+                    <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="21,323,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged"  />
+                    <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="96,323,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
+                    <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="202,323,0,0" VerticalAlignment="Top" Checked="cbFlipX_Checked" Unchecked="cbFlipX_Checked"/>
+                    <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="265,323,0,0" VerticalAlignment="Top" Checked="cbFlipY_Checked" Unchecked="cbFlipY_Checked"/>
                     <Label x:Name="label114" Content="More effects and settings available in Main Demo" HorizontalAlignment="Left" Margin="33,363,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="cbMergeTextLogos" Content="Merge text logos into one" HorizontalAlignment="Left" Margin="202,185,0,0" VerticalAlignment="Top"/>
                     <CheckBox x:Name="cbMergeImageLogos" Content="Merge image logos into one" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbScrollingText" Content="Sample scrolling text" HorizontalAlignment="Left" Margin="21,344,0,0" VerticalAlignment="Top" Checked="cbScrollingText_Checked" Unchecked="cbScrollingText_Checked" />
                 </Grid>
             </TabItem>
             <TabItem Header="Log" Name="tabItem5">

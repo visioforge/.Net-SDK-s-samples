@@ -74,7 +74,7 @@
                                             <ListBox x:Name="lbImageLogos" HorizontalAlignment="Left" Height="197" VerticalAlignment="Top" Width="338" Margin="10,30,0,0"/>
                                             <Button x:Name="btImageLogoAdd" Content="Add" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="74" Click="BtImageLogoAdd_Click"/>
                                             <Button x:Name="btImageLogoEdit" Content="Edit" HorizontalAlignment="Left" Margin="89,232,0,0" VerticalAlignment="Top" Width="76" Click="BtImageLogoEdit_Click"/>
-                                            <Button x:Name="btImageLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="274,232,0,0" VerticalAlignment="Top" Width="74" Click="BtImageLogoRemove_Click"/>
+                                            <Button x:Name="btImageLogoRemove" Content="Remove" HorizontalAlignment="Left" Margin="274,232,0,0" VerticalAlignment="Top" Width="74" Click="btImageLogoRemove_Click"/>
                                             <CheckBox x:Name="cbMergeImageLogos" Content="Merge image logos into one" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                         </Grid>
                                     </TabItem>
@@ -163,14 +163,15 @@
                                 <Label Content="Lightness" HorizontalAlignment="Left" Margin="69,34,0,0" x:Name="label92" Width="86" Height="28" VerticalAlignment="Top" />
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="212,61,0,0" Maximum="255" x:Name="tbSaturation" VerticalAlignment="Top" Width="100" Value="255" ValueChanged="tbSaturation_Scroll" />
                                 <Label Content="Saturation" HorizontalAlignment="Left" Margin="235,34,0,0" x:Name="label93" Width="86" Height="28" VerticalAlignment="Top" />
-                                <Slider Height="23" HorizontalAlignment="Left" Margin="44,127,0,0" Maximum="255" x:Name="tbContrast" VerticalAlignment="Top" Width="100" ValueChanged="tbContrast_Scroll" />
-                                <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="65,100,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
-                                <Slider Height="23" HorizontalAlignment="Left" Margin="212,127,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbDarkness_Scroll" />
-                                <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="235,100,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
-                                <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="10,172,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged" />
-                                <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="105,172,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
-                                <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="195,172,0,0" VerticalAlignment="Top" Checked="CbFlipX_Checked" Unchecked="CbFlipX_Checked"/>
-                                <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="272,172,0,0" VerticalAlignment="Top" Checked="CbFlipY_Checked" Unchecked="CbFlipY_Checked"/>
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="44,116,0,0" Maximum="255" x:Name="tbContrast" VerticalAlignment="Top" Width="100" ValueChanged="tbContrast_Scroll" />
+                                <Label Content="Contrast" Height="28" HorizontalAlignment="Left" Margin="65,89,0,0" x:Name="label94" VerticalAlignment="Top" Width="60" />
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="212,116,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="100" ValueChanged="tbDarkness_Scroll" />
+                                <Label Content="Darkness" Height="28" HorizontalAlignment="Left" Margin="235,89,0,0" x:Name="label95" VerticalAlignment="Top" Width="86" />
+                                <CheckBox Content="Grayscale" Height="16" HorizontalAlignment="Left" Margin="16,154,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_CheckedChanged" />
+                                <CheckBox Content="Invert" Height="16" HorizontalAlignment="Left" Margin="111,154,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_CheckedChanged" />
+                                <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="201,154,0,0" VerticalAlignment="Top" Checked="cbFlipX_Checked" Unchecked="cbFlipX_Checked"/>
+                                <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="278,154,0,0" VerticalAlignment="Top" Checked="cbFlipY_Checked" Unchecked="cbFlipY_Checked"/>
+                                <CheckBox x:Name="cbScrollingText" Content="Sample scrolling text" HorizontalAlignment="Left" Margin="16,175,0,0" VerticalAlignment="Top" Checked="cbScrollingText_Checked" Unchecked="cbScrollingText_Checked"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Deinterlace" x:Name="tabItem24">
@@ -1053,7 +1054,7 @@
                                 <CheckBox x:Name="cbCCPanRelative" Height="17" Width="65" Margin="126,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Relative" />
                                 <CheckBox x:Name="cbCCPanManual" Height="17" Width="61" Margin="63,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Manual" />
                                 <CheckBox x:Name="cbCCPanAuto" Height="17" Width="48" Margin="15,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Auto" />
-                                <Button x:Name="btCCReadValues" Height="23" Width="91" Margin="409,271,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="BtCCReadValues_Click" Content="Read values" />
+                                <Button x:Name="btCCReadValues" Height="23" Width="91" Margin="409,271,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btCCReadValues_Click" Content="Read values" />
                                 <Label x:Name="lbCCPanCurrent" Margin="133,51,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Current = 40" />
                                 <Label x:Name="lbCCPanMax" Margin="70,51,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Max = 100" />
                                 <Label x:Name="lbCCPanMin" Margin="22,51,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Min = 1" />

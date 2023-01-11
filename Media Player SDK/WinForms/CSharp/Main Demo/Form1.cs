@@ -1123,6 +1123,11 @@ namespace Media_Player_Demo
             {
                 cbFadeInOut_CheckedChanged(null, null);
             }
+
+            if (cbScrollingText.Checked)
+            {
+                cbScrollingText_CheckedChanged(null, null);
+            }
         }
 
         private async void btStart_Click(object sender, EventArgs e)
@@ -3317,6 +3322,26 @@ namespace Media_Player_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
+        }
+
+        private void cbScrollingText_CheckedChanged(object sender, EventArgs e)
+        {
+            IVideoEffectScrollingTextLogo textLogo;
+            var effect = MediaPlayer1.Video_Effects_Get("ScrollingTextLogo");
+            if (effect == null)
+            {
+                textLogo = new VideoEffectScrollingTextLogo(cbScrollingText.Checked);
+                MediaPlayer1.Video_Effects_Add(textLogo);
+            }
+            else
+            {
+                textLogo = effect as IVideoEffectScrollingTextLogo;
+                if (textLogo != null)
+                {
+                    textLogo.Enabled = cbScrollingText.Checked;
+                    textLogo.Reset();
+                }
+            }
         }
     }
 }

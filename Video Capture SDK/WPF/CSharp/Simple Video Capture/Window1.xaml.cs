@@ -559,6 +559,11 @@ namespace Simple_Video_Capture
             {
                 cbFlipY_Checked(null, null);
             }
+
+            if (cbScrollingText.IsChecked == true)
+            {
+                cbScrollingText_Checked(null, null);
+            }
         }
 
         private async void btResume_Click(object sender, RoutedEventArgs e)
@@ -1064,6 +1069,26 @@ namespace Simple_Video_Capture
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+
+        private void cbScrollingText_Checked(object sender, RoutedEventArgs e)
+        {
+            IVideoEffectScrollingTextLogo textLogo;
+            var effect = VideoCapture1.Video_Effects_Get("ScrollingTextLogo");
+            if (effect == null)
+            {
+                textLogo = new VideoEffectScrollingTextLogo(cbScrollingText.IsChecked == true);
+                VideoCapture1.Video_Effects_Add(textLogo);
+            }
+            else
+            {
+                textLogo = effect as IVideoEffectScrollingTextLogo;
+                if (textLogo != null)
+                {
+                    textLogo.Enabled = cbScrollingText.IsChecked == true;
+                    textLogo.Reset();
+                }
+            }
         }
     }
 }

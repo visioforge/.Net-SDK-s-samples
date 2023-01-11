@@ -111,27 +111,15 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>8.45.0.54064</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android">
       <Version>1.18.5.2</Version>
+    </PackageReference>
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android">
+      <Version>15.5.18</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.5.1" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.1.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.Android\VisioForge.Core.UI.Android.csproj">
-      <Project>{fefd02f6-5fdc-4ce1-bb28-2e8d7415b715}</Project>
-      <Name>VisioForge.Core.UI.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj">
-      <Project>{86fedb56-f1bc-48d4-b59a-8bf292621817}</Project>
-      <Name>VisioForge.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!--<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

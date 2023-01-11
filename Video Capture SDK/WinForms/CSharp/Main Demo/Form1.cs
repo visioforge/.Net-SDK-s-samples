@@ -1743,6 +1743,11 @@ namespace VideoCapture_CSharp_Demo
             {
                 cbFadeInOut_CheckedChanged(null, null);
             }
+
+            if (cbScrollingText.Checked)
+            {
+                cbScrollingText_CheckedChanged(null, null);
+            }
         }
 
         private void ConfigureBarcodeDetection()
@@ -6234,6 +6239,26 @@ namespace VideoCapture_CSharp_Demo
                 if (cbPIPFrameRate.Items.Count > 0)
                 {
                     cbPIPFrameRate.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void cbScrollingText_CheckedChanged(object sender, EventArgs e)
+        {
+            IVideoEffectScrollingTextLogo textLogo;
+            var effect = VideoCapture1.Video_Effects_Get("ScrollingTextLogo");
+            if (effect == null)
+            {
+                textLogo = new VideoEffectScrollingTextLogo(cbScrollingText.Checked);
+                VideoCapture1.Video_Effects_Add(textLogo);
+            }
+            else
+            {
+                textLogo = effect as IVideoEffectScrollingTextLogo;
+                if (textLogo != null)
+                {
+                    textLogo.Enabled = cbScrollingText.Checked;
+                    textLogo.Reset();
                 }
             }
         }

@@ -2340,17 +2340,22 @@ namespace Main_Demo
 
             if (cbFlipX.IsChecked == true)
             {
-                CbFlipX_Checked(null, null);
+                cbFlipX_Checked(null, null);
             }
 
             if (cbFlipY.IsChecked == true)
             {
-                CbFlipY_Checked(null, null);
+                cbFlipY_Checked(null, null);
             }
 
             if (cbLiveRotation.IsChecked == true)
             {
                 cbLiveRotation_Checked(null, null);
+            }
+
+            if (cbScrollingText.IsChecked == true)
+            {
+                cbScrollingText_Checked(null, null);
             }
         }
 
@@ -5498,7 +5503,7 @@ namespace Main_Demo
             }
         }
 
-        private void BtImageLogoRemove_Click(object sender, RoutedEventArgs e)
+        private void btImageLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
             {
@@ -5507,7 +5512,7 @@ namespace Main_Demo
             }
         }
 
-        private void CbFlipX_Checked(object sender, RoutedEventArgs e)
+        private void cbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipDown");
@@ -5526,7 +5531,7 @@ namespace Main_Demo
             }
         }
 
-        private void CbFlipY_Checked(object sender, RoutedEventArgs e)
+        private void cbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
             var effect = VideoCapture1.Video_Effects_Get("FlipRight");
@@ -5545,7 +5550,7 @@ namespace Main_Demo
             }
         }
 
-        private async void BtCCReadValues_Click(object sender, RoutedEventArgs e)
+        private async void btCCReadValues_Click(object sender, RoutedEventArgs e)
         {
             var pan = await VideoCapture1.Video_CaptureDevice_CameraControl_GetRangeAsync(CameraControlProperty.Pan);
             if (pan != null)
@@ -5894,6 +5899,26 @@ namespace Main_Demo
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
+        }
+
+        private void cbScrollingText_Checked(object sender, RoutedEventArgs e)
+        {
+            IVideoEffectScrollingTextLogo textLogo;
+            var effect = VideoCapture1.Video_Effects_Get("ScrollingTextLogo");
+            if (effect == null)
+            {
+                textLogo = new VideoEffectScrollingTextLogo(cbScrollingText.IsChecked == true);
+                VideoCapture1.Video_Effects_Add(textLogo);
+            }
+            else
+            {
+                textLogo = effect as IVideoEffectScrollingTextLogo;
+                if (textLogo != null)
+                {
+                    textLogo.Enabled = cbScrollingText.IsChecked == true;
+                    textLogo.Reset();
+                }
+            }
         }
     }
 }

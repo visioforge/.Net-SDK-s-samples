@@ -62,8 +62,6 @@ namespace Decklink_MB_Demo
         {
             InitializeComponent();
             _pipeline = new MediaBlocksPipeline(true);
-            _pipeline.Debug_Mode = true;
-            _pipeline.Debug_Dir = @"c:\vf\";
             _pipeline.OnError += Pipeline_OnError;
         }
 
