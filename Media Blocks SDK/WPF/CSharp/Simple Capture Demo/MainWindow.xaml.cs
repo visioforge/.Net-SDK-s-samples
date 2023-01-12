@@ -21,15 +21,12 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.ONVIF;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {

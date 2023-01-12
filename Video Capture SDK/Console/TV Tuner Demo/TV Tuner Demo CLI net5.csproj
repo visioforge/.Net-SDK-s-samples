@@ -8,8 +8,8 @@
     <AssemblyTitle>TV Tuner Demo</AssemblyTitle>
     <Product>TV Tuner Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.18.0</AssemblyVersion>
-    <FileVersion>15.5.18.0</FileVersion>
+    <AssemblyVersion>15.5.19.0</AssemblyVersion>
+    <FileVersion>15.5.19.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -27,7 +27,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.18" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.19" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

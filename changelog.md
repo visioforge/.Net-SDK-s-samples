@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.19
+* [ALL] Updated scrolling text logo. Added the Preload method to render a text overlay before playback.
+
 ## 15.5.17
 * [ALL] Updated scrolling text logo (performance)
 * [Media Blocks SDK .Net] Updated Decklink sink blocks
