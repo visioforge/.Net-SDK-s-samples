@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.5.21
+* [Media Blocks SDK .Net] Added YouTubeSink and FacebookLiveSink blocks with custom YouTube/Facebook configurations. RTMPSink can stream to YouTube/Facebook the same as before.
+
+## 15.5.20
+* [Media Blocks SDK .Net] Added SqueezeBack video mixer block.
+
 ## 15.5.19
 * [ALL] Updated scrolling text logo. Added the Preload method to render a text overlay before playback.
 

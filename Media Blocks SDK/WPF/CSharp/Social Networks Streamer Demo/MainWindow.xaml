@@ -1,0 +1,64 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Social_Networks_Streamer_Demo"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
+        x:Class="Social_Networks_Streamer_Demo.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Social Networks Streamer Demo" Height="613" Width="1031" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+
+        <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="360" Margin="366,10,0,0" VerticalAlignment="Top" Width="640"/>
+
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="366,383,0,0">
+            <Button x:Name="btStart" Content="Start" Width="50" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="50" Margin="10,0,0,0" Click="btStop_Click"/>            
+            <TextBlock x:Name="lbTime" Text="00:00:00" Margin="15,0,0,0" />
+        </StackPanel>
+
+        <TextBox x:Name="mmLog" HorizontalAlignment="Left" Height="104" Margin="10,466,0,0" TextWrapping="Wrap" Text="Log" VerticalAlignment="Top" Width="340"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Video source" HorizontalAlignment="Left" Width="90"/>
+                <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" Width="250" SelectionChanged="cbVideoInput_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Format" HorizontalAlignment="Left" Margin="10,0,0,0" Width="80"/>
+                <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Width="160" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+
+                <ComboBox x:Name="cbVideoFrameRate" HorizontalAlignment="Left" Margin="10,0,0,0" Width="50"/>
+                <Label Content="fps" HorizontalAlignment="Left" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Audio source" HorizontalAlignment="Left" Width="90"/>
+                <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" Width="250" SelectionChanged="cbAudioInput_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Format" HorizontalAlignment="Left" Margin="10,0,0,0" Width="80"/>
+                <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Width="250"/>
+            </StackPanel>
+
+            <Separator Margin="0,10,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Platform" HorizontalAlignment="Left" Width="90"/>
+                <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0">
+                    <ComboBoxItem>YouTube</ComboBoxItem>
+                    <ComboBoxItem>Facebook</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Streaming key" HorizontalAlignment="Left" Width="90"/>
+                <TextBox x:Name="edStreamingKey" HorizontalAlignment="Left" Width="250" Text="FB-3836698476399726-0-AbxoyjM_skzzl8lA"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

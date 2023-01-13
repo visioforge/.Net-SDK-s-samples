@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo MB WPF n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MB Demo net472", "WPF\CSharp\Decklink Demo\Decklink MB Demo net472.csproj", "{0A60B45C-D64F-4C82-B908-D2BD64BA73F3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer Demo MB net472", "WPF\CSharp\Social Networks Streamer Demo\Social Networks Streamer Demo MB net472.csproj", "{26C31395-5835-42F1-8CBA-187DA0A53ACB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{0A60B45C-D64F-4C82-B908-D2BD64BA73F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A60B45C-D64F-4C82-B908-D2BD64BA73F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A60B45C-D64F-4C82-B908-D2BD64BA73F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26C31395-5835-42F1-8CBA-187DA0A53ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26C31395-5835-42F1-8CBA-187DA0A53ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26C31395-5835-42F1-8CBA-187DA0A53ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26C31395-5835-42F1-8CBA-187DA0A53ACB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{C849C67F-1096-4E15-B9F0-372DD91D43D7} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{32EFC2D9-21A4-44DD-9C9A-147F8E0F2A8B} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{0A60B45C-D64F-4C82-B908-D2BD64BA73F3} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{26C31395-5835-42F1-8CBA-187DA0A53ACB} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
