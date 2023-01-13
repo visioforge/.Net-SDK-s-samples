@@ -1,9 +1,10 @@
-# Media Blocks SDK .Net - Facebook Streamer Demo (WPF)
+# Media Blocks SDK .Net - Social Networks Streamer Demo (WPF)
 
-Facebook Streamer Demo is an application that uses the Media Blocks SDK .Net to stream from webcams to Facebook Live in WPF applications.
+Social Networks Streamer Demo is an application that uses the Media Blocks SDK .Net to stream from webcams to YouTube or Facebook Live in WPF applications.
 
 ## Features
 
+- Video streaming to YouTube
 - Video streaming to Facebook Live
 - Video preview
 
