@@ -83,8 +83,6 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            cbOutputFormat.SelectedIndex = 1;
-
             var videoCaptureDevices = SystemVideoSourceBlock.GetDevices(_pipeline);
             if (videoCaptureDevices.Length > 0)
             {
