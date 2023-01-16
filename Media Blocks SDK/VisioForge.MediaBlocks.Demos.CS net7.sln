@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MB Demo net7", "WP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer Demo MB net7", "WPF\CSharp\Social Networks Streamer Demo\Social Networks Streamer Demo MB net7.csproj", "{B099787C-07B7-4469-B430-B70B0C87BEA8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo net7", "WPF\CSharp\Video Compositor Demo\Video Compositor Demo net7.csproj", "{ABE9639C-A500-41EF-9320-2B0CA557FB3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{B099787C-07B7-4469-B430-B70B0C87BEA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B099787C-07B7-4469-B430-B70B0C87BEA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B099787C-07B7-4469-B430-B70B0C87BEA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABE9639C-A500-41EF-9320-2B0CA557FB3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABE9639C-A500-41EF-9320-2B0CA557FB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABE9639C-A500-41EF-9320-2B0CA557FB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABE9639C-A500-41EF-9320-2B0CA557FB3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{BAFC5FCA-4568-4E23-898E-E7E839E4941E} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{4AC3B01D-511C-48FD-8A70-5313747DE81A} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{B099787C-07B7-4469-B430-B70B0C87BEA8} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{ABE9639C-A500-41EF-9320-2B0CA557FB3C} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

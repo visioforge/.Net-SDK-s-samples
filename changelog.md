@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.23
+* [Media Blocks SDK .Net] Added Video Compositor sample.
+
 ## 15.5.21
 * [Media Blocks SDK .Net] Added YouTubeSink and FacebookLiveSink blocks with custom YouTube/Facebook configurations. RTMPSink can stream to YouTube/Facebook the same as before.
 

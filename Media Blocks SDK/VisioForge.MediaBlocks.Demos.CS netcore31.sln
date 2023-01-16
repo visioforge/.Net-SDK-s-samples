@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MB Demo netcore31"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer Demo MB netcore31", "WPF\CSharp\Social Networks Streamer Demo\Social Networks Streamer Demo MB netcore31.csproj", "{B82B653D-4E2B-40CD-9C63-58DEF617CBD0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo netcore31", "WPF\CSharp\Video Compositor Demo\Video Compositor Demo netcore31.csproj", "{C3F461D0-9F4D-4B1F-9956-884665B1B652}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{B82B653D-4E2B-40CD-9C63-58DEF617CBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B82B653D-4E2B-40CD-9C63-58DEF617CBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B82B653D-4E2B-40CD-9C63-58DEF617CBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F461D0-9F4D-4B1F-9956-884665B1B652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F461D0-9F4D-4B1F-9956-884665B1B652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F461D0-9F4D-4B1F-9956-884665B1B652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F461D0-9F4D-4B1F-9956-884665B1B652}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{DD36B157-C425-4F67-A363-373ED414DF88} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{853CA3F0-1A5D-45A9-AA90-6C27170D881E} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{B82B653D-4E2B-40CD-9C63-58DEF617CBD0} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{C3F461D0-9F4D-4B1F-9956-884665B1B652} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

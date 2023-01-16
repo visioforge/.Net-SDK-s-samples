@@ -1,0 +1,77 @@
+﻿<Window x:Class="Video_Compositor_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Video_Compositor_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Video Compositor Demo" Height="692" Width="1143" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView x:Name="VideoView1" Grid.Column="1" Width="800" Height="600" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="10,620,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
+            <Button x:Name="btStart" Content="Start" Width="50" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="50" Margin="10,0,0,0" Click="btStop_Click"/>
+            <Label x:Name="lbTimestamp" Content="00:00:00" Margin="10,0,0,0"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,10,0,0">
+            <Label Content="Resolution and frame rate"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="edWidth" Text="1920" Width="40" VerticalContentAlignment="Center"/>
+                <Label Content="x" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="edHeight" Text="1080" Width="40" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="edFrameRate" Text="25" Width="25" Margin="15,0,0,0" VerticalContentAlignment="Center"/>
+                <Label Content="fps" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <Separator Margin="0,10,0,0"/>
+
+            <Label Content="Sources"/>
+            <ComboBox x:Name="cbSources"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <StackPanel Orientation="Vertical" Width="75">
+                    <Button x:Name="btAddCamera" Content="Add camera" Height="25" Margin="0,10,0,0" Click="btAddCamera_Click"/>
+                    <Button x:Name="btAddScreen" Content="Add screen" Height="25" Margin="0,10,0,0" Click="btAddScreen_Click"/>
+                    <Button x:Name="btAddFile" Content="Add file" Height="25" Margin="0,10,0,0" Click="btAddFile_Click"/>
+                    <Button x:Name="btRemove" Content="Remove" Height="25" Margin="0,10,0,0" Click="btRemove_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                    <Label Margin="0,10,0,0">Rectangle will be used while adding</Label>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                        <Label Width="40" Margin="10,0,0,0">Left</Label>
+                        <TextBox x:Name="edRectLeft" Text="0" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <Label Width="50" Margin="10,0,0,0">Top</Label>
+                        <TextBox x:Name="edRectTop" Text="0" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                        <Label Width="40" Margin="10,0,0,0">Right</Label>
+                        <TextBox x:Name="edRectRight" Text="640" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                        <Label Width="50" Margin="10,0,0,0">Bottom</Label>
+                        <TextBox x:Name="edRectBottom" Text="480" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <Button x:Name="btUpdateRect" Content="Update rect" Height="25" Margin="0,7,0,0" Width="100" Click="btUpdateRect_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Separator Margin="0,10,0,0"/>
+
+            <Label Content="Output"/>
+            <RadioButton x:Name="rbOutputNone" Content="No output (preview only)" Margin="0,10,0,0" VerticalContentAlignment="Center" IsChecked="True"/>
+            <RadioButton x:Name="rbOutputFile" Content="Output to the file" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <TextBox x:Name="edOutputFilename" Text="C:\vf\output.mp4" Margin="15,0,0,0" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" Width="230"/>
+                <Button x:Name="btSelectFile" Content="..." Margin="10,0,10,0" Width="25" VerticalContentAlignment="Top" Click="btSelectFile_Click"/>
+            </StackPanel>
+            <RadioButton x:Name="rbOutputYouTube" Content="YouTube streaming" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="edOutputYouTubeKey" Text="STREAMING KEY" Margin="15,10,10,0" VerticalContentAlignment="Center"/>
+            <RadioButton x:Name="rbOutputFacebook" Content="Facebook streaming" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="edOutputFacebookKey" Text="STREAMING KEY" Margin="15,10,10,0" VerticalContentAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>
