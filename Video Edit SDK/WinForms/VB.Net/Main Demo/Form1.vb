@@ -2,6 +2,7 @@
 
 Imports System.Globalization
 Imports System.IO
+Imports System.Linq
 Imports System.Threading.Tasks
 Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.Types

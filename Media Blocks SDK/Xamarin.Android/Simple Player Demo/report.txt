@@ -1,0 +1,1097 @@
+﻿// ***********************************************************************
+// Assembly         : VisioForge.Core
+// Author           : roman
+// Created          : 11-11-2021
+//
+// Last Modified By : roman
+// Last Modified On : 02-21-2022
+// ***********************************************************************
+// <copyright file="VideoView.cs" company="VisioForge">
+//     Copyright (c) 2006-2021
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+
+#if __ANDROID__
+
+namespace VisioForge.Core.UI.Android
+{
+    using global::Android.Content;
+    using global::Android.Graphics;
+    using global::Android.Util;
+    using global::Android.Views;
+    using System;
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.Android;
+    using Math = System.Math;
+    using Size = Types.Size;
+
+    /// <summary>
+    /// Class VideoView.
+    /// Implements the <see cref="SurfaceView" />
+    /// Implements the <see cref="ISurfaceHolderCallback" />
+    /// Implements the <see cref="VisioForge.Core.Types.IVideoView" />.
+    /// </summary>
+    /// <seealso cref="SurfaceView" />
+    /// <seealso cref="ISurfaceHolderCallback" />
+    /// <seealso cref="VisioForge.Core.Types.IVideoView" />
+    public class VideoView : SurfaceView, ISurfaceHolderCallback, IVideoView
+    {
+        /// <summary>
+        /// The handle.
+        /// </summary>
+        private IntPtr _handle;
+
+        /// <summary>
+        /// The media width.
+        /// </summary>
+        private readonly int mediaWidth = 320;
+
+        /// <summary>
+        /// The media height.
+        /// </summary>
+        private readonly int mediaHeight = 240;
+
+#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
+        /// <summary>
+        /// The holder.
+        /// </summary>
+        private ISurfaceHolder _holder;
+#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoView"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="attrs">The attrs.</param>
+        /// <param name="defStyle">The definition style.</param>
+        public VideoView(Context context, IAttributeSet attrs,
+                             int defStyle) : base(context, attrs, defStyle)
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoView"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="attrs">The attrs.</param>
+        public VideoView(Context context, IAttributeSet attrs) : base(context, attrs)
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VideoView"/> class.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        public VideoView(Context context) : base(context)
+        {
+            Init();
+        }
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        private void Init()
+        {
+            // Handle.
+            _handle = IntPtr.Zero;
+
+            // Install a SurfaceHolder.Callback so we get notified when the
+            // underlying surface is created and destroyed.
+            _holder = Holder;
+            _holder.AddCallback(this);
+        }
+
+        /// <summary>
+        /// Called by the layout manager to find out our size and give us some rules.
+        /// We will try to maximize our size, and preserve the media's aspect ratio if
+        /// we are given the freedom to do so.
+        /// </summary>
+        /// <param name="widthMeasureSpec">The width measure spec.</param>
+        /// <param name="heightMeasureSpec">The height measure spec.</param>
+        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        {
+            int width = 0, height = 0;
+            var wmode = View.MeasureSpec.GetMode(widthMeasureSpec);
+            var hmode = View.MeasureSpec.GetMode(heightMeasureSpec);
+            int wsize = View.MeasureSpec.GetSize(widthMeasureSpec);
+            int hsize = View.MeasureSpec.GetSize(heightMeasureSpec);
+
+            Log.Info("GStreamer", "onMeasure called with " + mediaWidth + "x" + mediaHeight);
+
+            // Obey width rules
+            switch (wmode)
+            {
+                case MeasureSpecMode.AtMost:
+                    if (hmode == MeasureSpecMode.Exactly)
+                    {
+                        width = Math.Min(hsize * mediaWidth / mediaHeight, wsize);
+                        break;
+                    }
+
+                    width = wsize;
+                    break;
+                case MeasureSpecMode.Exactly:
+                    width = wsize;
+                    break;
+                case MeasureSpecMode.Unspecified:
+                    width = mediaWidth;
+                    break;
+            }
+
+            // Obey height rules
+            switch (hmode)
+            {
+                case MeasureSpecMode.AtMost:
+                    if (wmode == MeasureSpecMode.Exactly)
+                    {
+                        height = Math.Min(wsize * mediaHeight / mediaWidth, hsize);
+                        break;
+                    }
+
+                    height = hsize;
+                    break;
+                case MeasureSpecMode.Exactly:
+                    height = hsize;
+                    break;
+                case MeasureSpecMode.Unspecified:
+                    height = mediaHeight;
+                    break;
+            }
+
+            // Finally, calculate best size when both axis are free
+            if (hmode == MeasureSpecMode.AtMost && wmode == MeasureSpecMode.AtMost)
+            {
+                int correct_height = width * mediaHeight / mediaWidth;
+                int correct_width = height * mediaWidth / mediaHeight;
+
+                if (correct_height < height)
+                    height = correct_height;
+                else
+                    width = correct_width;
+            }
+
+            // Obey minimum size
+            width = Math.Max(SuggestedMinimumWidth, width);
+            height = Math.Max(SuggestedMinimumHeight, height);
+            SetMeasuredDimension(width, height);
+        }
+
+        /// <summary>
+        /// Occurs when the surface was changed.
+        /// </summary>
+        public event EventHandler<SurfaceHolderEventArgs> OnSurfaceChanged;
+
+        /// <summary>
+        /// Occurs when the surface was created.
+        /// </summary>
+        public event EventHandler<SurfaceHolderEventArgs> OnSurfaceCreated;
+
+        /// <summary>
+        /// Occurs when the surface was destroyed.
+        /// </summary>
+        public event EventHandler<SurfaceHolderEventArgs> OnSurfaceDestroyed;
+
+        /// <summary>
+        /// Surface changed handler.
+        /// </summary>
+        /// <param name="holder">The holder.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height)
+        {
+            Log.Debug("GStreamer", "Surface changed to format " + format + " width " + width + " height " + height);
+
+            OnSurfaceChanged?.Invoke(this, new SurfaceHolderEventArgs(holder, format, width, height));
+
+            //nativeSurfaceInit(holder.Surface);
+        }
+
+        /// <summary>
+        /// Surfaces created handler.
+        /// </summary>
+        /// <param name="holder">The holder.</param>
+        public void SurfaceCreated(ISurfaceHolder holder)
+        {
+            Log.Debug("GStreamer", "Surface created: " + holder.Surface);
+
+            //SurfaceIsCreated = true;
+
+            OnSurfaceCreated?.Invoke(this, new SurfaceHolderEventArgs(holder));
+        }
+
+        /// <summary>
+        /// Surfaces destroyed handler.
+        /// </summary>
+        /// <param name="holder">The holder.</param>
+        public void SurfaceDestroyed(ISurfaceHolder holder)
+        {
+            Log.Debug("GStreamer", "Surface destroyed");
+
+            //SurfaceIsCreated = false;
+
+            OnSurfaceDestroyed?.Invoke(this, new SurfaceHolderEventArgs(holder));
+
+            //nativeSurfaceFinalize();
+        }
+
+#if NET_WINDOWS
+        /// <summary>
+        /// Attaches parent.
+        /// </summary>
+        /// <param name="parent">Parent.</param>
+        public void Attach(IMPVCVECore parent)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Detaches parent.
+        /// </summary>
+        /// <param name="parent">Parent.</param>
+        public void Detach(IMPVCVECore parent)
+        {
+            //throw new NotImplementedException();
+        }
+#endif
+
+        /// <summary>
+        /// Gets type - WPF or WinForms.
+        /// </summary>
+        /// <returns>Returns <see cref="T:VisioForge.Core.Types.VideoViewUIEngine" />.</returns>
+        public VideoViewUIEngine GetUIEngine()
+        {
+            return VideoViewUIEngine.Android;
+        }
+
+        /// <summary>
+        /// Invokes InvokeVideoRendererUpdate().
+        /// </summary>
+        public void InvokeVideoRendererUpdate()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Invokes Start().
+        /// </summary>
+        public void InvokeStart()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Invokes Start(), complete.
+        /// </summary>
+        public void InvokeStartComplete()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Invokes Stop().
+        /// </summary>
+        public void InvokeStop()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets handle.
+        /// </summary>
+        /// <returns>Returns <see cref="T:System.IntPtr" />.</returns>
+        public IntPtr GetHandle()
+        {
+            return _handle;
+        }
+
+        /// <summary>
+        /// Sets the handle.
+        /// </summary>
+        /// <param name="handle">The handle.</param>
+        public void SetHandle(IntPtr handle)
+        {
+            _handle = handle;
+        }
+
+        /// <summary>
+        /// Gets view size.
+        /// </summary>
+        /// <returns>Returns <see cref="T:System.Drawing.Size" />.</returns>
+        public Size GetSize()
+        {
+            return Size.Empty;
+        }
+
+        /// <summary>
+        /// Clears the UI.
+        /// </summary>
+        public void ClearUI()
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Logs the error in a custom dialog.
+        /// </summary>
+        /// <param name="msg">The message.</param>
+        public void LogDialogError(string msg)
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Closes logs dialog.
+        /// </summary>
+        public void LogDialogClose()
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Clears error dialog.
+        /// </summary>
+        public void LogDialogClear()
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Shows the message dialog.
+        /// </summary>
+        /// <param name="message">
+        /// Message.
+        /// </param>   
+        /// <returns>Returns MessageBoxResult.</returns>
+        public MessageBoxResult ShowMessage(string message)
+        {
+            return MessageBoxResult.None;
+        }
+
+        /// <summary>
+        /// Shows the message dialog.
+        /// </summary>
+        /// <param name="message">
+        /// Message.
+        /// </param>   
+        /// <param name="caption">
+        /// Caption.
+        /// </param>   
+        /// <param name="buttons">
+        /// Buttons.
+        /// </param>   
+        /// <returns>Returns MessageBoxResult.</returns>
+        public MessageBoxResult ShowMessageEx(string message, string caption, MessageBoxDialogButtons buttons)
+        {
+            return MessageBoxResult.None;
+        }
+
+        /// <summary>
+        /// Resizes video view by value.
+        /// </summary>
+        /// <param name="round">
+        /// Round to. Usually 2 or 4.
+        /// </param>
+        public void ResizeRoundTo(int round)
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Calls Refresh.
+        /// </summary>
+        public void CallRefresh()
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Calls Invoke.
+        /// </summary>
+        /// <param name="method">Method.</param>
+        /// <param name="args">Arguments.</param>
+        public void CallInvoke(Delegate method, params object[] args)
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Gets the is handle created.
+        /// </summary>
+        /// <returns><c>true</c> if the handle is created, <c>false</c> otherwise.</returns>
+        public bool GetIsHandleCreated()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Gets the invoke required.
+        /// </summary>
+        /// <returns><c>true</c> if the invoke is required, <c>false</c> otherwise.</returns>
+        public bool GetInvokeRequired()
+        {
+            return false;
+        }
+
+#if NET_WINDOWS
+        /// <summary>
+        /// Create the PictureBox.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public void PictureBoxCreate(int width, int height)
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Destroys the PictureBox.
+        /// </summary>
+        public void PictureBoxDestroy()
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Set the image on PictureBox.
+        /// </summary>
+        /// <param name="image">The image.</param>
+        public void PictureBoxSetImage(System.Drawing.Bitmap image)
+        {
+            // Method intentionally left empty.
+        }
+
+        /// <summary>
+        /// Gets the PictureBox image.
+        /// </summary>
+        /// <returns>System.Drawing.Bitmap.</returns>
+        public System.Drawing.Bitmap PictureBoxGetImage()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Is the PictureBox exists.
+        /// </summary>
+        /// <returns><c>true</c> if exists, <c>false</c> otherwise.</returns>
+        public bool PictureBoxExists()
+        {
+            return false;
+        }
+#endif
+
+        //public void SurfaceChanged(ISurfaceHolder holder, [global::Android.Runtime.GeneratedEnum] Format format, int width, int height)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void SurfaceCreated(ISurfaceHolder holder)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public void SurfaceDestroyed(ISurfaceHolder holder)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        // public int media_width = 320;
+        // public int media_height = 240;
+
+        // SurfaceView mSurfaceView;
+
+        // public ISurfaceHolder Holder { get; set; }
+
+        // global::Android.Hardware.Camera.Size mPreviewSize;
+        // IList<global::Android.Hardware.Camera.Size> mSupportedPreviewSizes;
+
+        //// public bool SurfaceIsCreated { get; set; }
+
+        // // Mandatory constructors, they do not do much
+        // public VFSurfaceView(Context context, IAttributeSet attrs,
+        //         int defStyle) :
+        //     base(context, attrs, defStyle)
+        // {
+        //     Init(context);
+        // }
+
+        // public VFSurfaceView(Context context, IAttributeSet attrs) : base(context, attrs)
+        // {
+        //     Init(context);
+        // }
+
+        // public VFSurfaceView(Context context) : base(context)
+        // {
+        //     Init(context);
+        // }
+
+        // public void Init(Context context)
+        // {
+        //     mSurfaceView = new SurfaceView(context);
+        //     AddView(mSurfaceView);
+
+        //     // Install a SurfaceHolder.Callback so we get notified when the
+        //     // underlying surface is created and destroyed.
+        //     Holder = mSurfaceView.Holder;
+        //     Holder.AddCallback(this);
+        //     Holder.SetType(SurfaceType.PushBuffers);
+        // }
+
+        // // Called by the layout manager to find out our size and give us some rules.
+        // // We will try to maximize our size, and preserve the media's aspect ratio if
+        // // we are given the freedom to do so.
+
+        // //protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        // //{
+        // //    int width = 0, height = 0;
+        // //    var wmode = View.MeasureSpec.GetMode(widthMeasureSpec);
+        // //    var hmode = View.MeasureSpec.GetMode(heightMeasureSpec);
+        // //    int wsize = (int)View.MeasureSpec.GetMode(widthMeasureSpec);
+        // //    int hsize = (int)View.MeasureSpec.GetMode(heightMeasureSpec);
+
+        // //    Log.Info("GStreamer", "onMeasure called with " + media_width + "x" + media_height);
+        // //    // Obey width rules
+        // //    switch (wmode)
+        // //    {
+        // //        case MeasureSpecMode.AtMost:
+        // //            if (hmode == MeasureSpecMode.Exactly)
+        // //            {
+        // //                width = Math.Min(hsize * media_width / media_height, wsize);
+        // //            }
+        // //            break;
+        // //        case MeasureSpecMode.Exactly:
+        // //            width = wsize;
+        // //            break;
+        // //        case MeasureSpecMode.Unspecified:
+        // //            width = media_width;
+        // //            break;
+        // //    }
+
+        // //    // Obey height rules
+        // //    switch (hmode)
+        // //    {
+        // //        case MeasureSpecMode.AtMost:
+        // //            if (wmode == MeasureSpecMode.Exactly)
+        // //            {
+        // //                height = Math.Min(wsize * media_height / media_width, hsize);
+        // //            }
+        // //            break;
+        // //        case MeasureSpecMode.Exactly:
+        // //            height = hsize;
+        // //            break;
+        // //        case MeasureSpecMode.Unspecified:
+        // //            height = media_height;
+        // //            break;
+        // //    }
+
+        // //    // Finally, calculate best size when both axis are free
+        // //    if (hmode == MeasureSpecMode.AtMost && wmode == MeasureSpecMode.AtMost)
+        // //    {
+        // //        int correct_height = width * media_height / media_width;
+        // //        int correct_width = height * media_width / media_height;
+
+        // //        if (correct_height < height)
+        // //            height = correct_height;
+        // //        else
+        // //            width = correct_width;
+        // //    }
+
+        // //    // Obey minimum size
+        // //    width = Math.Max(SuggestedMinimumWidth, width);
+        // //    height = Math.Max(SuggestedMinimumHeight, height);
+        // //    SetMeasuredDimension(width, height);
+        // //}
+
+        // private global::Android.Hardware.Camera.Size GetOptimalPreviewSize(IList<global::Android.Hardware.Camera.Size> sizes, int w, int h)
+        // {
+        //     const double ASPECT_TOLERANCE = 0.1;
+        //     double targetRatio = (double)w / h;
+
+        //     if (sizes == null)
+        //         return null;
+
+        //     global::Android.Hardware.Camera.Size optimalSize = null;
+        //     double minDiff = double.MaxValue;
+
+        //     int targetHeight = h;
+
+        //     // Try to find an size match aspect ratio and size
+        //     foreach (global::Android.Hardware.Camera.Size size in sizes)
+        //     {
+        //         double ratio = (double)size.Width / size.Height;
+
+        //         if (Math.Abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+        //             continue;
+
+        //         if (Math.Abs(size.Height - targetHeight) < minDiff)
+        //         {
+        //             optimalSize = size;
+        //             minDiff = Math.Abs(size.Height - targetHeight);
+        //         }
+        //     }
+
+        //     // Cannot find the one match the aspect ratio, ignore the requirement
+        //     if (optimalSize == null)
+        //     {
+        //         minDiff = double.MaxValue;
+        //         foreach (global::Android.Hardware.Camera.Size size in sizes)
+        //         {
+        //             if (Math.Abs(size.Height - targetHeight) < minDiff)
+        //             {
+        //                 optimalSize = size;
+        //                 minDiff = Math.Abs(size.Height - targetHeight);
+        //             }
+        //         }
+        //     }
+
+        //     return optimalSize;
+        // }
+
+        // protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        // {
+        //     // We purposely disregard child measurements because act as a
+        //     // wrapper to a SurfaceView that centers the camera preview instead
+        //     // of stretching it.
+        //     int width = ResolveSize(SuggestedMinimumWidth, widthMeasureSpec);
+        //     int height = ResolveSize(SuggestedMinimumHeight, heightMeasureSpec);
+        //     SetMeasuredDimension(width, height);
+
+        //     if (mSupportedPreviewSizes != null)
+        //     {
+        //         mPreviewSize = GetOptimalPreviewSize(mSupportedPreviewSizes, width, height);
+        //     }
+        // }
+
+        // protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        // {
+        //     if (changed && ChildCount > 0)
+        //     {
+        //         View child = GetChildAt(0);
+
+        //         int width = r - l;
+        //         int height = b - t;
+
+        //         int previewWidth = width;
+        //         int previewHeight = height;
+        //         if (mPreviewSize != null)
+        //         {
+        //             previewWidth = mPreviewSize.Width;
+        //             previewHeight = mPreviewSize.Height;
+        //         }
+
+        //         // Center the child SurfaceView within the parent.
+        //         if (width * previewHeight > height * previewWidth)
+        //         {
+        //             int scaledChildWidth = previewWidth * height / previewHeight;
+        //             child.Layout((width - scaledChildWidth) / 2, 0,
+        //                 (width + scaledChildWidth) / 2, height);
+        //         }
+        //         else
+        //         {
+        //             int scaledChildHeight = previewHeight * width / previewWidth;
+        //             child.Layout(0, (height - scaledChildHeight) / 2,
+        //                 width, (height + scaledChildHeight) / 2);
+        //         }
+        //     }
+        // }
+    }
+}
+
+#endif
+
+
+using Android.App;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using AndroidX.AppCompat.App;
+using System;
+
+namespace Simple_Player_Demo
+{
+    using Android;
+    using Android.Util;
+    using Android.Widget;
+    using AndroidX.Core.App;
+    using System.Globalization;
+    using System.Threading;
+    using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core.MediaBlocks.AudioRendering;
+    using VisioForge.Core.MediaBlocks.Sources;
+    using VisioForge.Core.MediaBlocks.Special;
+    using VisioForge.Core.MediaBlocks.VideoRendering;
+    using VisioForge.Core.MediaInfoReaderX;
+    using VisioForge.Core.Types.Events;
+    using Xamarin.Essentials;
+
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    public class MainActivity : AppCompatActivity
+    {
+        private string TEST_URL = "http://test.visioforge.com/video.avi";
+
+        private VisioForge.Core.UI.Android.VideoView videoView;
+
+        private Button btOpenFile;
+
+        private Button btStart;
+
+        private Button btPause;
+
+        private Button btStop;
+
+        private EditText edURL;
+
+        private SeekBar sbTimeline;
+
+        private TextView lbPosition;
+
+        private GridLayout pnScreen;
+
+        private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
+
+        private bool isSeeking = false;
+
+        private MediaBlocksPipeline _pipeline;
+
+        private VideoRendererBlock _videoRenderer;
+
+        private AudioRendererBlock _audioRenderer;
+
+        private FileSourceBlock _fileSource;
+
+        private StreamSourceBlock _memorySource;
+
+        private DecodeBinBlock _decodeBin;
+
+        private void DestroyEngine()
+        {
+            if (_pipeline != null)
+            {
+                _pipeline.OnError -= _pipeline_OnError;
+                _pipeline.OnStop -= _pipeline_OnStop;
+                _pipeline.OnStart -= _pipeline_OnStart;
+
+                _pipeline.Dispose();
+                _pipeline = null;
+            }
+        }
+
+        private async void _pipeline_OnStart(object sender, EventArgs e)
+        {
+            var duration = await _pipeline.DurationAsync();
+            sbTimeline.Max = (int)duration.TotalMilliseconds;
+        }
+
+        private void _pipeline_OnError(object sender, ErrorsEventArgs e)
+        {
+            Log.Error("MainActivity", e.Message);
+        }
+
+        private void _pipeline_OnStop(object sender, StopEventArgs e)
+        {
+            RunOnUiThread(() =>
+            {
+                sbTimeline.Progress = 0;
+            });
+        }
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            SetContentView(Simple_Player_Demo_MP.Resource.Layout.main);
+
+            ActivityCompat.RequestPermissions(this,
+                new String[]{
+                        Manifest.Permission.Camera,
+                        Manifest.Permission.Internet,
+                        Manifest.Permission.RecordAudio,
+                        Manifest.Permission.AccessNetworkState,
+                        Manifest.Permission.AccessWifiState,
+                        Manifest.Permission.ModifyAudioSettings}, 1004);
+
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Simple_Player_Demo_MP.Resource.Id.videoView);
+
+            _pipeline = new MediaBlocksPipeline(this, true);
+            //_pipeline.Debug_Dir = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "VisioForge");
+            _pipeline.OnError += _pipeline_OnError;
+            _pipeline.OnStop += _pipeline_OnStop;
+            _pipeline.OnStart += _pipeline_OnStart;
+
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+
+            tmPosition.Elapsed += tmPosition_Elapsed;
+
+            btOpenFile = FindViewById<Button>(Simple_Player_Demo_MP.Resource.Id.btOpenFile);
+            btOpenFile.Click += btOpenFile_Click;
+
+            btStart = FindViewById<Button>(Simple_Player_Demo_MP.Resource.Id.btStart);
+            btStart.Click += btStart_Click;
+
+            btPause = FindViewById<Button>(Simple_Player_Demo_MP.Resource.Id.btPause);
+            btPause.Click += btPause_Click;
+
+            btStop = FindViewById<Button>(Simple_Player_Demo_MP.Resource.Id.btStop);
+            btStop.Click += btStop_Click;
+
+            sbTimeline = FindViewById<SeekBar>(Simple_Player_Demo_MP.Resource.Id.sbTimeline);
+            sbTimeline.ProgressChanged += sbTimeline_ProgressChanged;
+
+            sbTimeline.StartTrackingTouch += delegate (object sender, SeekBar.StartTrackingTouchEventArgs args)
+            {
+                isSeeking = true;
+            };
+
+            sbTimeline.StopTrackingTouch += delegate (object sender, SeekBar.StopTrackingTouchEventArgs args)
+            {
+                isSeeking = false;
+            };
+
+            lbPosition = FindViewById<TextView>(Simple_Player_Demo_MP.Resource.Id.lbPosition);
+
+            pnScreen = FindViewById<GridLayout>(Simple_Player_Demo_MP.Resource.Id.pnScreen);
+
+            edURL = FindViewById<EditText>(Simple_Player_Demo_MP.Resource.Id.edURL);
+            edURL.Text = TEST_URL;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Simple_Player_Demo_MP.Resource.Menu.menu_main, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Simple_Player_Demo_MP.Resource.Id.action_settings)
+            {
+                return true;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
+        private async void sbTimeline_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
+        {
+            if (isSeeking)
+            {
+                await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.Progress));
+            }
+        }
+
+        private async void btOpenFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Thread.Sleep(200);
+
+                var file = await FilePicker.PickAsync();
+                if (file == null)
+                    return; // user canceled file picking
+
+                RunOnUiThread(() =>
+                {
+                    edURL.Text = file.FullPath;
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception choosing file: " + ex.ToString());
+            }
+        }
+
+        private async void btStop_Click(object sender, EventArgs e)
+        {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
+            tmPosition.Stop();
+
+            await _pipeline.StopAsync();
+
+            RunOnUiThread(() =>
+            {
+                sbTimeline.Progress = 0;
+            });
+
+            videoView.Invalidate();
+
+            //DestroyEngine();
+
+            // clear screen workaround
+            pnScreen.RemoveView(videoView);
+            pnScreen.AddView(videoView);
+        }
+
+        private async void btPause_Click(object sender, EventArgs e)
+        {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
+            if (btPause.Text == "Pause")
+            {
+                await _pipeline.PauseAsync();
+                btPause.Text = "Resume";
+            }
+            else
+            {
+                await _pipeline.ResumeAsync();
+                btPause.Text = "Pause";
+            }
+        }
+
+        private async void btStart_Click(object sender, EventArgs e)
+        {
+            //var src = new VirtualVideoSourceBlock(new VirtualVideoSourceSettings());
+            //var src = new AndroidVideoSourceBlock(new AndroidVideoSourceSettings());
+
+            isSeeking = false;
+
+            var mediaInfo = new MediaInfoReaderX(context: null, this);
+            bool videoStream = true;
+            bool audioStream = true;
+            if (await mediaInfo.OpenAsync(new Uri(edURL.Text)))
+            {
+                if (mediaInfo.Info.VideoStreams.Count == 0)
+                {
+                    videoStream = false;
+                }
+
+                if (mediaInfo.Info.AudioStreams.Count == 0)
+                {
+                    audioStream = false;
+                }
+            }
+
+            //var data = System.IO.File.ReadAllBytes(edURL.Text);
+            //_memorySource = new StreamSourceBlock(new MemorySourceSettings(data));
+
+            //_decodeBin = new DecodeBinBlock(true, true, false);
+            //_pipeline.Connect(_memorySource.Output, _decodeBin.Input);
+
+            _fileSource = new FileSourceBlock(edURL.Text, renderVideo: videoStream, renderAudio: audioStream);
+
+            if (videoStream)
+            {
+                _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
+            }
+
+            if (audioStream)
+            {
+                _audioRenderer = new AudioRendererBlock();
+                _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
+            }
+
+            await _pipeline.StartAsync();
+
+            tmPosition.Start();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+
+        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (isSeeking)
+            {
+                return;
+            }
+
+            var duration = await _pipeline.DurationAsync();
+            var pos = await _pipeline.Position_GetAsync();
+            var progress = (int)pos.TotalMilliseconds;
+
+            try
+            {
+                RunOnUiThread(() =>
+                {
+                    if (_pipeline == null)
+                    {
+                        return;
+                    }
+
+                    if (progress > sbTimeline.Max)
+                    {
+                        sbTimeline.Progress = sbTimeline.Max;
+                    }
+                    else
+                    {
+                        sbTimeline.Progress = progress;
+                    }
+
+                    // This is where the received data is passed
+                    lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}/{duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                });
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+
+            _pipeline.StopAsync();
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+}
+
+
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Android.App;
+
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("Simple_Player_Demo")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Simple_Player_Demo")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+[assembly: AssemblyVersion("15.5.25.0")]
+[assembly: AssemblyFileVersion("15.5.25.0")]
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.simple_player_demo" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="27" android:targetSdkVersion="31" />
+	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/AppTheme"></application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+</manifest>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.VideoCapture;
@@ -17,13 +18,13 @@ namespace Simple_Video_Capture
 
         Version SDK_Version { get; }
 
-        List<VideoCaptureDeviceInfo> Video_CaptureDevices { get; }
+        ObservableCollection<VideoCaptureDeviceInfo> Video_CaptureDevices { get; }
 
-        List<AudioCaptureDeviceInfo> Audio_CaptureDevices { get; }
+        ObservableCollection<AudioCaptureDeviceInfo> Audio_CaptureDevices { get; }
 
-        List<string> Audio_OutputDevices { get; }
+        ObservableCollection<string> Audio_OutputDevices { get; }
 
-        List<OutputFormatInfo> OutputFormats { get; }
+        ObservableCollection<OutputFormatInfo> OutputFormats { get; }
 
         void Audio_OutputDevice_Volume_Set(int volume);
 

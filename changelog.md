@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.5.25
+* [ALL] Telemetry update
+
+## 15.5.24
+* [ALL] SDKs updated to use the ObservableCollection instead of List in public API.
+* [ALL] Updated MP4 HW output. Improved NVENC performance.
+
 ## 15.5.23
 * [Media Blocks SDK .Net] Added Video Compositor sample.
 

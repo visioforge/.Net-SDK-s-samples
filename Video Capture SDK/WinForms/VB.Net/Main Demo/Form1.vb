@@ -1,5 +1,6 @@
 ' ReSharper disable InconsistentNaming
 
+Imports System.Collections.ObjectModel
 Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
@@ -308,7 +309,7 @@ Public Class Form1
         rbVR_CheckedChanged(sender, e)
 
         Dim filters As List(Of String)
-        filters = VideoCapture1.Special_Filters(SpecialFilterType.HardwareVideoEncoder)
+        filters = VideoCapture1.Special_Filters(SpecialFilterType.HardwareVideoEncoder).ToList()
         For i As Integer = 0 To filters.Count - 1
             cbMPEGEncoder.Items.Add(filters.Item(i))
         Next i
@@ -324,12 +325,12 @@ Public Class Form1
         cbMPEGVideoDecoder.Items.Add("(default)")
         cbMPEGAudioDecoder.Items.Add("(default)")
 
-        filters = VideoCapture1.Special_Filters(SpecialFilterType.MPEG12VideoDecoder)
+        filters = VideoCapture1.Special_Filters(SpecialFilterType.MPEG12VideoDecoder).ToList()
         For i As Integer = 0 To filters.Count - 1
             cbMPEGVideoDecoder.Items.Add(filters.Item(i))
         Next i
 
-        filters = VideoCapture1.Special_Filters(SpecialFilterType.MPEG1AudioDecoder)
+        filters = VideoCapture1.Special_Filters(SpecialFilterType.MPEG1AudioDecoder).ToList()
         For i As Integer = 0 To filters.Count - 1
             cbMPEGAudioDecoder.Items.Add(filters.Item(i))
         Next i
@@ -444,7 +445,7 @@ Public Class Form1
 
                     Dim inputs As List(Of String)
 
-                    inputs = VideoCapture1.Video_CaptureDevice_CrossBar_GetInputsForOutput("Video Decoder")
+                    inputs = VideoCapture1.Video_CaptureDevice_CrossBar_GetInputsForOutput("Video Decoder").ToList()
                     For i As Integer = 0 To inputs.Count - 1
                         cbCrossbarVideoInput.Items.Add(inputs.Item(i))
                     Next i
@@ -2047,7 +2048,7 @@ Public Class Form1
 
             Dim inputs As List(Of String)
 
-            inputs = VideoCapture1.Video_CaptureDevice_CrossBar_GetInputsForOutput(cbCrossbarOutput.Text)
+            inputs = VideoCapture1.Video_CaptureDevice_CrossBar_GetInputsForOutput(cbCrossbarOutput.Text).ToList()
             For i As Integer = 0 To inputs.Count - 1
                 cbCrossbarInput.Items.Add(inputs.Item(i))
             Next i

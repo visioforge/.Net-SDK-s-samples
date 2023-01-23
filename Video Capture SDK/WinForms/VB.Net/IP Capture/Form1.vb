@@ -14,6 +14,7 @@ Imports VisioForge.Core.Types.VideoCapture
 Imports VisioForge.Core.Types.MediaPlayer
 Imports System.Drawing.Imaging
 Imports VisioForge.Core.Helpers
+Imports System.Linq
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog

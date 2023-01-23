@@ -254,83 +254,81 @@ namespace VideoEdit_CS_Demo
 
             if (cbMode.SelectedIndex == 0)
             {
-                VideoEdit1.Output_Filename = edOutput.Text;
-
                 switch (cbOutputVideoFormat.SelectedIndex)
                 {
                     case 0:
                         {
-                            var mp4Output = new MP4Output();
+                            var mp4Output = new MP4Output(edOutput.Text);
                             VideoEdit1.Output_Format = mp4Output;
 
                             break;
                         }
                     case 1:
                         {
-                            var webmOutput = new WebMOutput();
+                            var webmOutput = new WebMOutput(edOutput.Text);
                             VideoEdit1.Output_Format = webmOutput;
 
                             break;
                         }
                     case 2:
                         {
-                            var mkvOutput = new MKVOutput();
+                            var mkvOutput = new MKVOutput(edOutput.Text);
                             VideoEdit1.Output_Format = mkvOutput;
 
                             break;
                         }
                     case 3:
                         {
-                            var wmvOutput = new WMV1Output();
+                            var wmvOutput = new WMV1Output(edOutput.Text);
                             VideoEdit1.Output_Format = wmvOutput;
 
                             break;
                         }
                     case 4:
                         {
-                            var acmOutput = new WAVOutput();
+                            var acmOutput = new WAVOutput(edOutput.Text);
                             VideoEdit1.Output_Format = acmOutput;
 
                             break;
                         }
                     case 5:
                         {
-                            var mp3Output = new MP3Output();
+                            var mp3Output = new MP3Output(edOutput.Text);
                             VideoEdit1.Output_Format = mp3Output;
 
                             break;
                         }
                     case 6:
                         {
-                            var m4aOutput = new M4AOutput();
+                            var m4aOutput = new M4AOutput(edOutput.Text);
                             VideoEdit1.Output_Format = m4aOutput;
 
                             break;
                         }
                     case 7:
                         {
-                            var wmaOutput = new WMA1Output();
+                            var wmaOutput = new WMA1Output(edOutput.Text);
                             VideoEdit1.Output_Format = wmaOutput;
 
                             break;
                         }
                     case 8:
                         {
-                            var oggVorbisOutput = new OGGVorbisOutput();
+                            var oggVorbisOutput = new OGGVorbisOutput(edOutput.Text);
                             VideoEdit1.Output_Format = oggVorbisOutput;
 
                             break;
                         }
                     case 9:
                         {
-                            var flacOutput = new FLACOutput();
+                            var flacOutput = new FLACOutput(edOutput.Text);
                             VideoEdit1.Output_Format = flacOutput;
 
                             break;
                         }
                     case 10:
                         {
-                            var speexOutput = new SpeexOutput();
+                            var speexOutput = new SpeexOutput(edOutput.Text);
                             VideoEdit1.Output_Format = speexOutput;
 
                             break;
@@ -339,7 +337,6 @@ namespace VideoEdit_CS_Demo
             }
             else
             {
-                VideoEdit1.Output_Filename = null;
                 VideoEdit1.Output_Format = null;
             }
 

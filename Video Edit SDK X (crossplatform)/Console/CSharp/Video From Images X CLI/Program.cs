@@ -84,22 +84,20 @@ namespace Video_From_Images_CLI
             switch (options.Format)
             {
                 case "mp4":
-                    videoEdit.Output_Format = new MP4Output();
+                    videoEdit.Output_Format = new MP4Output(options.OutputFile);
                     break;
                 case "avi":
-                    videoEdit.Output_Format = new AVIOutput();
+                    videoEdit.Output_Format = new AVIOutput(options.OutputFile);
                     break;
                 case "wmv":
-                    videoEdit.Output_Format = new WMV1Output();
+                    videoEdit.Output_Format = new WMV1Output(options.OutputFile);
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");
-                    videoEdit.Output_Format = new MP4Output();
+                    videoEdit.Output_Format = new MP4Output(options.OutputFile);
                     break;
             }
-
-            videoEdit.Output_Filename = options.OutputFile;
-
+            
             videoEdit.OnError += VideoEdit1_OnError;
             videoEdit.OnProgress += VideoEdit1_OnProgress;
             videoEdit.OnStop += VideoEdit_OnStop;
@@ -108,7 +106,7 @@ namespace Video_From_Images_CLI
 
             videoEdit.Start();
 
-            Console.WriteLine(@"Video saved to: " + videoEdit.Output_Filename);
+            Console.WriteLine(@"Video saved to: " + options.OutputFile);
             Console.Write("Press any key to exit.");
             Console.ReadKey();
 

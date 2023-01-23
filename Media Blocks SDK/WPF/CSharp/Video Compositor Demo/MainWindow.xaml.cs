@@ -31,6 +31,7 @@ using Rect = VisioForge.Core.Types.Rect;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.UI.WPF.Dialogs.Sources;
 
 namespace Video_Compositor_Demo
 {

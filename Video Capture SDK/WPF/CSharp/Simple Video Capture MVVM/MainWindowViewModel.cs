@@ -94,7 +94,7 @@ namespace Simple_Video_Capture
 
         #region Devices Tab
 
-        public List<VideoCaptureDeviceInfo> VideoInputDevices => videoCaptureAccessor.Video_CaptureDevices;
+        public ObservableCollection<VideoCaptureDeviceInfo> VideoInputDevices => videoCaptureAccessor.Video_CaptureDevices;
 
         public VideoCaptureDeviceInfo SelectedVideoInputDevice
         {
@@ -130,7 +130,7 @@ namespace Simple_Video_Capture
             set => SetProperty(ref this.selectedFrameRate, value);
         }
 
-        public List<AudioCaptureDeviceInfo> AudioInputDevices => videoCaptureAccessor.Audio_CaptureDevices;
+        public ObservableCollection<AudioCaptureDeviceInfo> AudioInputDevices => videoCaptureAccessor.Audio_CaptureDevices;
 
         public AudioCaptureDeviceInfo SelectedAudioInputDevice
         {
@@ -176,7 +176,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        public List<string> AudioOutputDevices => this.videoCaptureAccessor.Audio_OutputDevices;
+        public ObservableCollection<string> AudioOutputDevices => this.videoCaptureAccessor.Audio_OutputDevices;
 
         public string SelectedAudioOutputDevice
         {
@@ -267,7 +267,7 @@ namespace Simple_Video_Capture
 
         public DelegateCommand ConfigureOutputFormatCommand { get; }
 
-        public List<OutputFormatInfo> OutputFormats => this.videoCaptureAccessor.OutputFormats;
+        public ObservableCollection<OutputFormatInfo> OutputFormats => this.videoCaptureAccessor.OutputFormats;
 
         public OutputFormatInfo SelectedOutputFormat
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.Types.VideoEffects;
-using VisioForge.Core.UI.WinForms.Dialogs;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 using VisioForge.Core.UI.WPF;
@@ -24,7 +24,7 @@ namespace Simple_Video_Capture
 
             this.videoCapture.OnError += (_s, _e) => this.OnError?.Invoke(this, _e.Message);
 
-            this.outputFormats = new List<OutputFormatInfo>
+            this.outputFormats = new ObservableCollection<OutputFormatInfo>
             {
                 new OutputFormatInfo(OutputFormatInfoTag.AVI, "AVI", ".avi"),
                 new OutputFormatInfo(OutputFormatInfoTag.WMV, "WMV (Windows Media Video)", ".wmv"),
@@ -50,13 +50,13 @@ namespace Simple_Video_Capture
 
         public Version SDK_Version => this.videoCapture.SDK_Version();
 
-        public List<VideoCaptureDeviceInfo> Video_CaptureDevices => this.videoCapture.Video_CaptureDevices();
+        public ObservableCollection<VideoCaptureDeviceInfo> Video_CaptureDevices => this.videoCapture.Video_CaptureDevices();
 
-        public List<AudioCaptureDeviceInfo> Audio_CaptureDevices => this.videoCapture.Audio_CaptureDevices();
+        public ObservableCollection<AudioCaptureDeviceInfo> Audio_CaptureDevices => this.videoCapture.Audio_CaptureDevices();
 
-        public List<string> Audio_OutputDevices => this.videoCapture.Audio_OutputDevices();
+        public ObservableCollection<string> Audio_OutputDevices => this.videoCapture.Audio_OutputDevices();
 
-        public List<OutputFormatInfo> OutputFormats => new List<OutputFormatInfo>(this.outputFormats);
+        public ObservableCollection<OutputFormatInfo> OutputFormats => new ObservableCollection<OutputFormatInfo>(this.outputFormats);
 
         public VideoCaptureSource Video_CaptureDevice
         {
@@ -569,7 +569,7 @@ namespace Simple_Video_Capture
 
         private VideoView videoView;
 
-        private readonly List<OutputFormatInfo> outputFormats;
+        private readonly ObservableCollection<OutputFormatInfo> outputFormats;
 
         private WeakReference<System.Windows.Window> ownerWindowWeak;
 

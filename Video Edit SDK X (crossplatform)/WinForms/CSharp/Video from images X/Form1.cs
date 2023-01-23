@@ -124,46 +124,43 @@ namespace Video_From_Images
             // apply capture parameters
             if (rbPreview.Checked)
             {
-                VideoEdit1.Output_Filename = null;
                 VideoEdit1.Output_Format = null;
             }
             else
             {
-                VideoEdit1.Output_Filename = edOutput.Text;
-
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0:
                         {
-                            var mp4Output = new MP4Output();
+                            var mp4Output = new MP4Output(edOutput.Text);
                             VideoEdit1.Output_Format = mp4Output;
 
                             break;
                         }
                     case 1:
                         {
-                            var aviOutput = new AVIOutput();
+                            var aviOutput = new AVIOutput(edOutput.Text);
                             VideoEdit1.Output_Format = aviOutput;
 
                             break;
                         }
                     case 2:
                         {
-                            var mkvOutput = new MKVOutput();
+                            var mkvOutput = new MKVOutput(edOutput.Text);
                             VideoEdit1.Output_Format = mkvOutput;
 
                             break;
                         }
                     case 3:
                         {
-                            var wmvOutput = new WMV1Output();
+                            var wmvOutput = new WMV1Output(edOutput.Text);
                             VideoEdit1.Output_Format = wmvOutput;
 
                             break;
                         }
                     case 4:
                         {
-                            var webmOutput = new WebMOutput();
+                            var webmOutput = new WebMOutput(edOutput.Text);
                             VideoEdit1.Output_Format = webmOutput;
 
                             break;

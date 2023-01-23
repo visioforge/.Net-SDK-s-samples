@@ -40,7 +40,7 @@ namespace Decklink_MB_Demo
 
         private DecklinkAudioSourceBlock _audioSource;
 
-        private VideoEffectsBlock _videoEffects;
+        private VideoEffectsWinBlock _videoEffects;
 
         private MP4SinkBlock _mp4Muxer;
 
@@ -62,6 +62,8 @@ namespace Decklink_MB_Demo
         {
             InitializeComponent();
             _pipeline = new MediaBlocksPipeline(true);
+            _pipeline.Debug_Mode = true;
+            _pipeline.Debug_Dir = @"c:\vf\";
             _pipeline.OnError += Pipeline_OnError;
         }
 
@@ -272,7 +274,7 @@ namespace Decklink_MB_Demo
             _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
 
             // effects
-            _videoEffects = new VideoEffectsBlock();
+            _videoEffects = new VideoEffectsWinBlock();
 
             if (cbAddTextOverlay.IsChecked == true)
             {

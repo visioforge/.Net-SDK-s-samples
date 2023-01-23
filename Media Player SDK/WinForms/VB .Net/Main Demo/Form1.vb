@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
+Imports System.Linq
 Imports System.Threading.Tasks
 Imports VisioForge.Core
 Imports VisioForge.Core.Helpers
