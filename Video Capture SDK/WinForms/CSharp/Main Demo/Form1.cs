@@ -2185,8 +2185,32 @@ namespace VideoCapture_CSharp_Demo
                         ffmpegOutput.UsePipe = cbNetworkRTMPFFMPEGUsePipes.Checked;
 
                         VideoCapture1.Network_Streaming_Output = ffmpegOutput;
-                        VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text;
 
+                        if (rbNetworkRTMPYouTube.Checked)
+                        {
+                            VideoCapture1.Network_Streaming_URL = "rtmp://a.rtmp.youtube.com/live2/" + edNetworkRTMPYouTube.Text;
+
+                            if (!cbNetworkStreamingAudioEnabled.Checked || !cbPlayAudio.Checked)
+                            {
+                                MessageBox.Show("Audio streaming should be enabled to stream to YouTube.");
+                                cbNetworkStreamingAudioEnabled.Checked = true;
+                            }
+                        }
+                        else if (rbNetworkRTMPFacebook.Checked)
+                        {
+                            VideoCapture1.Network_Streaming_URL = "rtmps://live-api-s.facebook.com:443/rtmp/" + edNetworkRTMPFacebook.Text;
+
+                            if (!cbNetworkStreamingAudioEnabled.Checked || !cbPlayAudio.Checked)
+                            {
+                                MessageBox.Show("Audio streaming should be enabled to stream to Facebook Live.");
+                                cbNetworkStreamingAudioEnabled.Checked = true;
+                            }
+                        }
+                        else
+                        {
+                            VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text;
+                        }
+                        
                         break;
                     }
 

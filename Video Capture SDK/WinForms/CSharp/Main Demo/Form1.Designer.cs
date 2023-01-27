@@ -129,6 +129,7 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl17 = new System.Windows.Forms.TabControl();
             this.tabPage68 = new System.Windows.Forms.TabPage();
+            this.cbScrollingText = new System.Windows.Forms.CheckBox();
             this.cbFlipY = new System.Windows.Forms.CheckBox();
             this.cbFlipX = new System.Windows.Forms.CheckBox();
             this.cbDisableAllVideoProcessing = new System.Windows.Forms.CheckBox();
@@ -450,12 +451,17 @@ namespace VideoCapture_CSharp_Demo
             this.label367 = new System.Windows.Forms.Label();
             this.label366 = new System.Windows.Forms.Label();
             this.tpRTMP = new System.Windows.Forms.TabPage();
-            this.cbNetworkRTMPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
-            this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-            this.rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
-            this.rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rbNetworkRTMPGeneric = new System.Windows.Forms.RadioButton();
+            this.edNetworkRTMPFacebook = new System.Windows.Forms.TextBox();
+            this.rbNetworkRTMPFacebook = new System.Windows.Forms.RadioButton();
+            this.edNetworkRTMPYouTube = new System.Windows.Forms.TextBox();
+            this.rbNetworkRTMPYouTube = new System.Windows.Forms.RadioButton();
             this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
             this.label368 = new System.Windows.Forms.Label();
+            this.cbNetworkRTMPFFMPEGUsePipes = new System.Windows.Forms.CheckBox();
+            this.rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
+            this.rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
             this.label369 = new System.Windows.Forms.Label();
             this.tpNDI = new System.Windows.Forms.TabPage();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
@@ -1213,7 +1219,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbTelemetry = new System.Windows.Forms.CheckBox();
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.mmLog = new System.Windows.Forms.TextBox();
-            this.cbScrollingText = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -1298,6 +1303,7 @@ namespace VideoCapture_CSharp_Demo
             this.tpWMV.SuspendLayout();
             this.tpRTSP.SuspendLayout();
             this.tpRTMP.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tpNDI.SuspendLayout();
             this.tpUDP.SuspendLayout();
             this.tpSSF.SuspendLayout();
@@ -1728,6 +1734,17 @@ namespace VideoCapture_CSharp_Demo
             this.tabPage68.TabIndex = 0;
             this.tabPage68.Text = "Effects";
             this.tabPage68.UseVisualStyleBackColor = true;
+            // 
+            // cbScrollingText
+            // 
+            this.cbScrollingText.AutoSize = true;
+            this.cbScrollingText.Location = new System.Drawing.Point(15, 318);
+            this.cbScrollingText.Name = "cbScrollingText";
+            this.cbScrollingText.Size = new System.Drawing.Size(202, 29);
+            this.cbScrollingText.TabIndex = 89;
+            this.cbScrollingText.Text = "Sample scrolling text";
+            this.cbScrollingText.UseVisualStyleBackColor = true;
+            this.cbScrollingText.CheckedChanged += new System.EventHandler(this.cbScrollingText_CheckedChanged);
             // 
             // cbFlipY
             // 
@@ -5495,12 +5512,10 @@ namespace VideoCapture_CSharp_Demo
             // 
             // tpRTMP
             // 
+            this.tpRTMP.Controls.Add(this.groupBox4);
             this.tpRTMP.Controls.Add(this.cbNetworkRTMPFFMPEGUsePipes);
-            this.tpRTMP.Controls.Add(this.linkLabel11);
             this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
             this.tpRTMP.Controls.Add(this.rbNetworkRTMPFFMPEG);
-            this.tpRTMP.Controls.Add(this.edNetworkRTMPURL);
-            this.tpRTMP.Controls.Add(this.label368);
             this.tpRTMP.Controls.Add(this.label369);
             this.tpRTMP.Location = new System.Drawing.Point(4, 34);
             this.tpRTMP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
@@ -5510,6 +5525,89 @@ namespace VideoCapture_CSharp_Demo
             this.tpRTMP.TabIndex = 3;
             this.tpRTMP.Text = "RTMP";
             this.tpRTMP.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rbNetworkRTMPGeneric);
+            this.groupBox4.Controls.Add(this.edNetworkRTMPFacebook);
+            this.groupBox4.Controls.Add(this.rbNetworkRTMPFacebook);
+            this.groupBox4.Controls.Add(this.edNetworkRTMPYouTube);
+            this.groupBox4.Controls.Add(this.rbNetworkRTMPYouTube);
+            this.groupBox4.Controls.Add(this.edNetworkRTMPURL);
+            this.groupBox4.Controls.Add(this.label368);
+            this.groupBox4.Location = new System.Drawing.Point(33, 206);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(408, 343);
+            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Target";
+            // 
+            // rbNetworkRTMPGeneric
+            // 
+            this.rbNetworkRTMPGeneric.AutoSize = true;
+            this.rbNetworkRTMPGeneric.Checked = true;
+            this.rbNetworkRTMPGeneric.Location = new System.Drawing.Point(20, 212);
+            this.rbNetworkRTMPGeneric.Name = "rbNetworkRTMPGeneric";
+            this.rbNetworkRTMPGeneric.Size = new System.Drawing.Size(145, 29);
+            this.rbNetworkRTMPGeneric.TabIndex = 16;
+            this.rbNetworkRTMPGeneric.TabStop = true;
+            this.rbNetworkRTMPGeneric.Text = "Generic RTMP";
+            this.rbNetworkRTMPGeneric.UseVisualStyleBackColor = true;
+            // 
+            // edNetworkRTMPFacebook
+            // 
+            this.edNetworkRTMPFacebook.Location = new System.Drawing.Point(41, 164);
+            this.edNetworkRTMPFacebook.Name = "edNetworkRTMPFacebook";
+            this.edNetworkRTMPFacebook.Size = new System.Drawing.Size(350, 31);
+            this.edNetworkRTMPFacebook.TabIndex = 15;
+            this.edNetworkRTMPFacebook.Text = "KEY";
+            // 
+            // rbNetworkRTMPFacebook
+            // 
+            this.rbNetworkRTMPFacebook.AutoSize = true;
+            this.rbNetworkRTMPFacebook.Location = new System.Drawing.Point(20, 129);
+            this.rbNetworkRTMPFacebook.Name = "rbNetworkRTMPFacebook";
+            this.rbNetworkRTMPFacebook.Size = new System.Drawing.Size(113, 29);
+            this.rbNetworkRTMPFacebook.TabIndex = 14;
+            this.rbNetworkRTMPFacebook.Text = "Facebook";
+            this.rbNetworkRTMPFacebook.UseVisualStyleBackColor = true;
+            // 
+            // edNetworkRTMPYouTube
+            // 
+            this.edNetworkRTMPYouTube.Location = new System.Drawing.Point(41, 81);
+            this.edNetworkRTMPYouTube.Name = "edNetworkRTMPYouTube";
+            this.edNetworkRTMPYouTube.Size = new System.Drawing.Size(350, 31);
+            this.edNetworkRTMPYouTube.TabIndex = 13;
+            this.edNetworkRTMPYouTube.Text = "KEY";
+            // 
+            // rbNetworkRTMPYouTube
+            // 
+            this.rbNetworkRTMPYouTube.AutoSize = true;
+            this.rbNetworkRTMPYouTube.Location = new System.Drawing.Point(20, 46);
+            this.rbNetworkRTMPYouTube.Name = "rbNetworkRTMPYouTube";
+            this.rbNetworkRTMPYouTube.Size = new System.Drawing.Size(105, 29);
+            this.rbNetworkRTMPYouTube.TabIndex = 12;
+            this.rbNetworkRTMPYouTube.Text = "YouTube";
+            this.rbNetworkRTMPYouTube.UseVisualStyleBackColor = true;
+            // 
+            // edNetworkRTMPURL
+            // 
+            this.edNetworkRTMPURL.Location = new System.Drawing.Point(41, 286);
+            this.edNetworkRTMPURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.edNetworkRTMPURL.Name = "edNetworkRTMPURL";
+            this.edNetworkRTMPURL.Size = new System.Drawing.Size(350, 31);
+            this.edNetworkRTMPURL.TabIndex = 11;
+            this.edNetworkRTMPURL.Text = "rtmp://localhost:5554/live/Stream";
+            // 
+            // label368
+            // 
+            this.label368.AutoSize = true;
+            this.label368.Location = new System.Drawing.Point(41, 255);
+            this.label368.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label368.Name = "label368";
+            this.label368.Size = new System.Drawing.Size(43, 25);
+            this.label368.TabIndex = 10;
+            this.label368.Text = "URL";
             // 
             // cbNetworkRTMPFFMPEGUsePipes
             // 
@@ -5523,18 +5621,6 @@ namespace VideoCapture_CSharp_Demo
             this.cbNetworkRTMPFFMPEGUsePipes.TabIndex = 14;
             this.cbNetworkRTMPFFMPEGUsePipes.Text = "Use pipes";
             this.cbNetworkRTMPFFMPEGUsePipes.UseVisualStyleBackColor = true;
-            // 
-            // linkLabel11
-            // 
-            this.linkLabel11.AutoSize = true;
-            this.linkLabel11.Location = new System.Drawing.Point(29, 279);
-            this.linkLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel11.Name = "linkLabel11";
-            this.linkLabel11.Size = new System.Drawing.Size(258, 25);
-            this.linkLabel11.TabIndex = 13;
-            this.linkLabel11.TabStop = true;
-            this.linkLabel11.Text = "Network streaming to YouTube";
-            this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel11_LinkClicked);
             // 
             // rbNetworkRTMPFFMPEGCustom
             // 
@@ -5559,25 +5645,6 @@ namespace VideoCapture_CSharp_Demo
             this.rbNetworkRTMPFFMPEG.TabStop = true;
             this.rbNetworkRTMPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
             this.rbNetworkRTMPFFMPEG.UseVisualStyleBackColor = true;
-            // 
-            // edNetworkRTMPURL
-            // 
-            this.edNetworkRTMPURL.Location = new System.Drawing.Point(33, 561);
-            this.edNetworkRTMPURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edNetworkRTMPURL.Name = "edNetworkRTMPURL";
-            this.edNetworkRTMPURL.Size = new System.Drawing.Size(408, 31);
-            this.edNetworkRTMPURL.TabIndex = 9;
-            this.edNetworkRTMPURL.Text = "rtmp://localhost:5554/live/Stream";
-            // 
-            // label368
-            // 
-            this.label368.AutoSize = true;
-            this.label368.Location = new System.Drawing.Point(29, 531);
-            this.label368.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label368.Name = "label368";
-            this.label368.Size = new System.Drawing.Size(43, 25);
-            this.label368.TabIndex = 8;
-            this.label368.Text = "URL";
             // 
             // label369
             // 
@@ -14296,17 +14363,6 @@ namespace VideoCapture_CSharp_Demo
             this.mmLog.Size = new System.Drawing.Size(513, 136);
             this.mmLog.TabIndex = 97;
             // 
-            // cbScrollingText
-            // 
-            this.cbScrollingText.AutoSize = true;
-            this.cbScrollingText.Location = new System.Drawing.Point(15, 318);
-            this.cbScrollingText.Name = "cbScrollingText";
-            this.cbScrollingText.Size = new System.Drawing.Size(202, 29);
-            this.cbScrollingText.TabIndex = 89;
-            this.cbScrollingText.Text = "Sample scrolling text";
-            this.cbScrollingText.UseVisualStyleBackColor = true;
-            this.cbScrollingText.CheckedChanged += new System.EventHandler(this.cbScrollingText_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -14450,6 +14506,8 @@ namespace VideoCapture_CSharp_Demo
             this.tpRTSP.PerformLayout();
             this.tpRTMP.ResumeLayout(false);
             this.tpRTMP.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tpNDI.ResumeLayout(false);
             this.tpNDI.PerformLayout();
             this.tpUDP.ResumeLayout(false);
@@ -15334,8 +15392,6 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label367;
         private System.Windows.Forms.ComboBox cbNetworkStreamingMode;
         private System.Windows.Forms.TabPage tpRTMP;
-        private System.Windows.Forms.TextBox edNetworkRTMPURL;
-        private System.Windows.Forms.Label label368;
         private System.Windows.Forms.Label label369;
         private System.Windows.Forms.TabPage tpSSF;
         private System.Windows.Forms.TextBox edNetworkSSURL;
@@ -15550,7 +15606,6 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Button btAudioChannelMapperClear;
         private System.Windows.Forms.CheckBox cbDisableAllVideoProcessing;
         private System.Windows.Forms.CheckBox cbSeparateCaptureBridgeEngine;
-        private System.Windows.Forms.LinkLabel linkLabel11;
         private System.Windows.Forms.Label label314;
         private System.Windows.Forms.Label label313;
         private System.Windows.Forms.TabPage tpHLS;
@@ -15755,6 +15810,14 @@ namespace VideoCapture_CSharp_Demo
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Label label70;
         private System.Windows.Forms.CheckBox cbScrollingText;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rbNetworkRTMPGeneric;
+        private System.Windows.Forms.TextBox edNetworkRTMPFacebook;
+        private System.Windows.Forms.RadioButton rbNetworkRTMPFacebook;
+        private System.Windows.Forms.TextBox edNetworkRTMPYouTube;
+        private System.Windows.Forms.RadioButton rbNetworkRTMPYouTube;
+        private System.Windows.Forms.TextBox edNetworkRTMPURL;
+        private System.Windows.Forms.Label label368;
     }
 }
 

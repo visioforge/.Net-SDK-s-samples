@@ -331,7 +331,7 @@ namespace Decklink_MB_Demo
                 h264settings.GOPSize = 25;
 
                 // quality
-                h264settings.RCMode = MFH264EncoderRCMode.QVBR;
+                h264settings.RateControl = MFH264EncoderRCMode.QVBR;
                 h264settings.QP = 15;
                 h264settings.QPB = 15;
                 h264settings.QPP = 15;

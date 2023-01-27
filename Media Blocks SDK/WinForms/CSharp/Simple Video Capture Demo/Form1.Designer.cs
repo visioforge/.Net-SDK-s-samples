@@ -64,6 +64,9 @@
             this.cbDebugMode = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            this.btStartRecord = new System.Windows.Forms.Button();
+            this.btStopRecord = new System.Windows.Forms.Button();
+            this.VideoView2 = new VisioForge.Core.UI.WinForms.VideoView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -445,11 +448,44 @@
             this.VideoView1.StatusOverlay = null;
             this.VideoView1.TabIndex = 97;
             // 
+            // btStartRecord
+            // 
+            this.btStartRecord.Location = new System.Drawing.Point(499, 656);
+            this.btStartRecord.Name = "btStartRecord";
+            this.btStartRecord.Size = new System.Drawing.Size(157, 44);
+            this.btStartRecord.TabIndex = 106;
+            this.btStartRecord.Text = "Start record";
+            this.btStartRecord.UseVisualStyleBackColor = true;
+            this.btStartRecord.Click += new System.EventHandler(this.btStartRecord_Click);
+            // 
+            // btStopRecord
+            // 
+            this.btStopRecord.Location = new System.Drawing.Point(662, 656);
+            this.btStopRecord.Name = "btStopRecord";
+            this.btStopRecord.Size = new System.Drawing.Size(157, 44);
+            this.btStopRecord.TabIndex = 107;
+            this.btStopRecord.Text = "Stop record";
+            this.btStopRecord.UseVisualStyleBackColor = true;
+            this.btStopRecord.Click += new System.EventHandler(this.btStopRecord_Click);
+            // 
+            // VideoView2
+            // 
+            this.VideoView2.BackColor = System.Drawing.Color.Black;
+            this.VideoView2.Location = new System.Drawing.Point(962, 639);
+            this.VideoView2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.VideoView2.Name = "VideoView2";
+            this.VideoView2.Size = new System.Drawing.Size(236, 182);
+            this.VideoView2.StatusOverlay = null;
+            this.VideoView2.TabIndex = 108;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 826);
+            this.Controls.Add(this.VideoView2);
+            this.Controls.Add(this.btStopRecord);
+            this.Controls.Add(this.btStartRecord);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btStop);
             this.Controls.Add(this.btPause);
@@ -515,5 +551,8 @@
         private System.Windows.Forms.TextBox edFilename;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btSelectOutput;
+        private System.Windows.Forms.Button btStartRecord;
+        private System.Windows.Forms.Button btStopRecord;
+        private VisioForge.Core.UI.WinForms.VideoView VideoView2;
     }
 }

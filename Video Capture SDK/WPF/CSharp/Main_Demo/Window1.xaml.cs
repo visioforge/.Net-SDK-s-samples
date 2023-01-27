@@ -1201,7 +1201,31 @@ namespace Main_Demo
                             ffmpegOutput.UsePipe = cbNetworkRTMPFFMPEGUsePipes.IsChecked == true;
 
                             VideoCapture1.Network_Streaming_Output = ffmpegOutput;
-                            VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text;
+
+                            if (rbNetworkRTMPYouTube.IsChecked == true)
+                            {
+                                VideoCapture1.Network_Streaming_URL = "rtmp://a.rtmp.youtube.com/live2/" + edNetworkRTMPYouTube.Text;
+
+                                if (cbNetworkStreamingAudioEnabled.IsChecked == false || cbPlayAudio.IsChecked == false)
+                                {
+                                    MessageBox.Show("Audio streaming should be enabled to stream to YouTube.");
+                                    cbNetworkStreamingAudioEnabled.IsChecked = true;
+                                }
+                            }
+                            else if (rbNetworkRTMPFacebook.IsChecked == true)
+                            {
+                                VideoCapture1.Network_Streaming_URL = "rtmps://live-api-s.facebook.com:443/rtmp/" + edNetworkRTMPFacebook.Text;
+
+                                if (cbNetworkStreamingAudioEnabled.IsChecked == false || cbPlayAudio.IsChecked == false)
+                                {
+                                    MessageBox.Show("Audio streaming should be enabled to stream to Facebook Live.");
+                                    cbNetworkStreamingAudioEnabled.IsChecked = true;
+                                }
+                            }
+                            else
+                            {
+                                VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text;
+                            }
 
                             break;
                         }
@@ -4534,13 +4558,7 @@ namespace Main_Demo
                 + edAudioChannelMapperTargetChannel.Text + ", volume: "
                 + (tbAudioChannelMapperVolume.Value / 1000.0f).ToString("F2"));
         }
-
-        private void lbDownloadFFMPEG_Copy3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NetworkStreamingToYouTube);
-            Process.Start(startInfo);
-        }
-
+        
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(async () =>

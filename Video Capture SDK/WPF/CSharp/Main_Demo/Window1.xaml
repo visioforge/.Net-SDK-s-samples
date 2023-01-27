@@ -485,13 +485,22 @@
                         </TabItem>
                         <TabItem Header="RTMP">
                             <Grid>
-                                <RadioButton x:Name="rbNetworkRTMPFFMPEG" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,23,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                                <RadioButton x:Name="rbNetworkRTMPFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" Margin="22,42.96,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Format settings located on output format tab" HorizontalAlignment="Left" Margin="54,321,0,0" VerticalAlignment="Top"/>
-                                <Label Content="URL" HorizontalAlignment="Left" Margin="22,267,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edNetworkRTMPURL" HorizontalAlignment="Left" Height="23" Margin="22,293,0,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" VerticalAlignment="Top" Width="308"/>
-                                <Label x:Name="lbDownloadFFMPEG_Copy3" Content="Network streaming to YouTube" HorizontalAlignment="Left" Margin="22,113,0,0" VerticalAlignment="Top" Background="White" Foreground="#FF0016CF" FontWeight="Bold" MouseLeftButtonDown="lbDownloadFFMPEG_Copy3_MouseLeftButtonDown" />
-                                <CheckBox x:Name="cbNetworkRTMPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" Margin="22,78,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                                <StackPanel Orientation="Vertical" Margin="10,10,10,0">
+                                    <RadioButton x:Name="rbNetworkRTMPFFMPEG" Content="H264 / AAC using FFMPEG EXE" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" GroupName="RTMP_FORMAT"/>
+                                    <RadioButton Margin="0,5,0,0" x:Name="rbNetworkRTMPFFMPEGCustom" Content="Custom settings using FFMPEG EXE" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="RTMP_FORMAT"/>
+                                    <CheckBox Margin="0,15,0,0" x:Name="cbNetworkRTMPFFMPEGUsePipes" Content="Use pipes" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True"/>
+
+                                    <Label Margin="-5,15,0,0">Target</Label>
+                                    <RadioButton x:Name="rbNetworkRTMPYouTube" GroupName="RTMP_TARGET" IsChecked="True">YouTube</RadioButton>
+                                    <TextBox Margin="20,5,10,0" x:Name="edNetworkRTMPYouTube">KEY</TextBox>
+                                    <RadioButton Margin="0,10,0,0" x:Name="rbNetworkRTMPFacebook" GroupName="RTMP_TARGET">Facebook Live</RadioButton>
+                                    <TextBox Margin="20,5,10,0" x:Name="edNetworkRTMPFacebook">KEY</TextBox>
+                                    <RadioButton Margin="0,10,0,0" x:Name="rbNetworkRTMPGeneric" GroupName="RTMP_TARGET">Generic</RadioButton>                                    
+                                    <Label Content="URL" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top"/>
+                                    <TextBox x:Name="edNetworkRTMPURL" Margin="20,0,10,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" />
+
+                                    <Label Content="Format settings located on output format tab" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"/>
+                                </StackPanel>                               
                             </Grid>
                         </TabItem>
                         <TabItem Header="NDI">
