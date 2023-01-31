@@ -1,7 +1,12 @@
 # Changelog
 
+## 15.5.29
+* [ALL] Added Save/Load methods for output format to serialize into JSON.
+* [Media Blocks SDK .Net] Added MJPEG HTTP Live streaming sink block.
+* [ALL] Resolved MP4 HW QSV H264 regression.
+
 ## 15.5.27
-* [ALL] WinForms and WPF VideoView stability update
+* [ALL] WinForms and WPF VideoView stability update.
 * [Media Player SDK .Net] Removed FilenamesOrURL legacy property. Please use Playlist_... API instead.
 * [Media Blocks SDK .Net] Added fade-in/out feature for image overlay block.
 

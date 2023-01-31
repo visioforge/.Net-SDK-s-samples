@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -20,10 +12,8 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.ONVIF;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
@@ -49,6 +39,8 @@ namespace Social_Networks_Streamer_Demo
         private YouTubeSinkBlock _youtubeSink;
         
         private FacebookLiveSinkBlock _facebookSink;
+
+        private HTTPMJPEGLiveSinkBlock _mjpegSink;
 
         private H264EncoderBlock _h264Encoder;
 
@@ -184,31 +176,45 @@ namespace Social_Networks_Streamer_Demo
             _videoTee = new TeeBlock(2);
             _audioTee = new TeeBlock(2);
 
-            var h264Settings = new OpenH264EncoderSettings();
-            _h264Encoder = new H264EncoderBlock(h264Settings);
-            _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());            
-
-            // connect all
+            // connect inputs
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-            _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
-           
+            
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-            _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
 
-            if (cbPlatform.SelectedIndex == 0)
+            if (cbPlatform.SelectedIndex == 0 || cbPlatform.SelectedIndex == 1)
             {
-                _youtubeSink = new YouTubeSinkBlock(new YouTubeSinkSettings(edStreamingKey.Text));
-                _pipeline.Connect(_h264Encoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Video));
-                _pipeline.Connect(_aacEncoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Audio));
-            }            
+                // H264/AAC encoders
+                var h264Settings = new OpenH264EncoderSettings();
+                _h264Encoder = new H264EncoderBlock(h264Settings);
+                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+
+                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
+                _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
+                
+                // YouTube
+                if (cbPlatform.SelectedIndex == 0)
+                {
+                    _youtubeSink = new YouTubeSinkBlock(new YouTubeSinkSettings(edStreamingKey.Text));
+                    _pipeline.Connect(_h264Encoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_aacEncoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+                // Facebook Live
+                else if (cbPlatform.SelectedIndex == 1)
+                {
+                    _facebookSink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edStreamingKey.Text));
+                    _pipeline.Connect(_h264Encoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+            }
+            // MJPEG
             else
             {
-                _facebookSink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edStreamingKey.Text));
-                _pipeline.Connect(_h264Encoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Video));
-                _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
-            }    
+                _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
+                _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
+                edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
+            }
 
             // start
             await _pipeline.StartAsync();
