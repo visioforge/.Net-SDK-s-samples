@@ -1,7 +1,7 @@
 # Changelog
 
 ## 15.5.29
-* [ALL] Added Save/Load methods for output format to serialize into JSON
+* [ALL] Added Save/Load methods for output format to serialize into JSON.
 * [Media Blocks SDK .Net] Added MJPEG HTTP Live streaming sink block.
 * [ALL] Resolved MP4 HW QSV H264 regression.
 
