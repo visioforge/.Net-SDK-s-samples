@@ -1,7 +1,7 @@
 # Changelog
 
 ## 15.5.30
-* [Media Blocks SDK .Net] Updated Video Mixer block
+* [Media Blocks SDK .Net] Updated Video Mixer block.
 
 ## 15.5.29
 * [ALL] Added Save/Load methods for output format to serialize into JSON.
