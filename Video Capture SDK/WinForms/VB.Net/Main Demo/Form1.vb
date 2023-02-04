@@ -5085,10 +5085,10 @@ Public Class Form1
         Process.Start(startInfo)
     End Sub
 
-    Private Sub btListNDISources_Click(sender As Object, e As EventArgs) Handles btListNDISources.Click
+    Private Async Sub btListNDISources_Click(sender As Object, e As EventArgs) Handles btListNDISources.Click
         cbIPURL.Items.Clear()
 
-        Dim lst As Uri() = VideoCapture1.IP_Camera_NDI_ListSources()
+        Dim lst As Uri() = Await VideoCapture1.IP_Camera_NDI_ListSourcesAsync()
         For Each uri As Uri In lst
             cbIPURL.Items.Add(uri)
         Next

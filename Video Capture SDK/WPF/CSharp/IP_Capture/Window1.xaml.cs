@@ -1070,11 +1070,11 @@ namespace IP_Capture
             Process.Start(startInfo);
         }
 
-        private void btListNDISources_Click(object sender, RoutedEventArgs e)
+        private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
 
-            var lst = VideoCapture1.IP_Camera_NDI_ListSources();
+            var lst = await VideoCapture1.IP_Camera_NDI_ListSourcesAsync();
             foreach (var uri in lst)
             {
                 cbIPURL.Items.Add(uri);

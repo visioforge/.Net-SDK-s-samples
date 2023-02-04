@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.5.32
+* [ALL] Resolved NDI SDK detection issues.
+
+## 15.5.31
+* [Media Blocks SDK .Net] Updated Speex encoder.
+
 ## 15.5.30
 * [Media Blocks SDK .Net] Updated Video Mixer block.
 

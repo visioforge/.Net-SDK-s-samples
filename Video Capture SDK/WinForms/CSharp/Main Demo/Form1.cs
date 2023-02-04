@@ -6184,11 +6184,11 @@ namespace VideoCapture_CSharp_Demo
             Process.Start(startInfo);
         }
 
-        private void btListNDISources_Click(object sender, EventArgs e)
+        private async void btListNDISources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
 
-            var lst = VideoCapture1.IP_Camera_NDI_ListSources();
+            var lst = await VideoCapture1.IP_Camera_NDI_ListSourcesAsync();
             foreach (var uri in lst)
             {
                 cbIPURL.Items.Add(uri);
