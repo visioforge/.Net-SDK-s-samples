@@ -9,8 +9,8 @@
     <AssemblyTitle>Video From Images Demo</AssemblyTitle>
     <Product>Video From Images Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.32.0</AssemblyVersion>
-    <FileVersion>15.5.32.0</FileVersion>
+    <AssemblyVersion>15.5.33.0</AssemblyVersion>
+    <FileVersion>15.5.33.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,8 +61,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.32" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.33" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.33" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
