@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>NDI_Source</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.34" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.34" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.34" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.5.34" />
+  </ItemGroup>
+</Project>

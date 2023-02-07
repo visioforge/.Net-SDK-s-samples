@@ -54,6 +54,8 @@ namespace Video_Compositor_Demo
 
         private FacebookLiveOutputBlock _facebookOutput;
 
+        private NDISinkBlock _ndiSink;
+
         private VideoMixerBlock _videoMixer;
 
         private VirtualAudioSourceBlock _fakeAudioSource;
@@ -274,9 +276,21 @@ namespace Video_Compositor_Demo
                     _pipeline.Connect(_videoTee.Outputs[1], _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Video));
                     _pipeline.Connect(_fakeAudioSource.Output, _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
                 }
+                else if (rbOutputNDI.IsChecked == true)
+                {
+                    // fake audio source 
+                    _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
+
+                    // create and connect Facebook Live output
+                    _ndiSink = new NDISinkBlock(new NDISinkSettings(edOutputNDIName.Text));
+                    _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_fakeAudioSource.Output, _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
             }
 
             await _pipeline.StartAsync();
+
+            //_pipeline.SavePipeline("compositor");
 
             tmRecording.Start();
         }
@@ -285,8 +299,15 @@ namespace Video_Compositor_Demo
         {
             tmRecording.Stop();
 
-            await _pipeline.StopAsync();
-
+            if (rbOutputFile.IsChecked == true)
+            {
+                await _pipeline.StopAsync();
+            }
+            else
+            {
+                await _pipeline.StopAsync(true);
+            }
+            
             DestroyEngine();
         }
 

@@ -276,11 +276,6 @@ namespace Screen_Capture_MB_WPF
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
-
-        private void Log(string txt)
-        {
-            Dispatcher.Invoke((Action)(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; }));
-        }
        
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

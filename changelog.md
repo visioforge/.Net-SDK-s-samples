@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.34
+* [Media Blocks SDK .Net] Added NDI Sink and NDI source blocks.
+  
 ## 15.5.32
 * [ALL] Resolved NDI SDK detection issues.
 
