@@ -4,7 +4,7 @@
 * [CV] Resolved issue with wrong face coordinates.
 * [CV, Media Blocks SDK .Net] Added Face Detector block.
 * [Media Blocks SDK .Net] Added rav1e AV1 video encoder.
-* [Media Blocks SDK .Net] Added GIF video encoder.
+* [Media Blocks SDK .Net] Added GIF video encoder
 
 ## 15.5.34
 * [Media Blocks SDK .Net] Added NDI Sink and NDI source blocks.
