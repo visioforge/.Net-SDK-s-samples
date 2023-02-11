@@ -29,9 +29,15 @@
             </TabItem>
 
             <TabItem Header="Face detection">
-                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
-                    <Label Content="Settings available using API" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                </StackPanel>
+                <Grid>
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <RadioButton Content="Detect faces" x:Name="rbDetectFaces" IsChecked="True" />
+                        <RadioButton Content="Blur faces" x:Name="rbBlurFaces" Margin="0,5,0,0" />
+                        <Label Content="Settings available using API" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" />
+                    </StackPanel>
+
+                    <TextBox x:Name="mmFaces" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,50,0,10" TextWrapping="Wrap" Width="360"/>
+                </Grid>
             </TabItem>
 
             <TabItem Header="Log">

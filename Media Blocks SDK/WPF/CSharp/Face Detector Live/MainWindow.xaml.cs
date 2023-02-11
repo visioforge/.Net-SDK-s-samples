@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.ONVIF;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.OpenCV;
 using VisioForge.Core.Types.X.Sources;
 
 namespace Face_Detector_Live
@@ -35,10 +24,11 @@ namespace Face_Detector_Live
 
         private SystemVideoSourceBlock _videoSource;
 
-        private FaceDetectorBlock _detector;
+        private CVFaceDetectBlock _detector;
+
+        private CVFaceBlurBlock _blurer;
 
         private System.Timers.Timer _timer;
-
 
         public MainWindow()
         {
@@ -199,12 +189,23 @@ namespace Face_Detector_Live
             // video renderer
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-            // detector
-            _detector = new FaceDetectorBlock();
-
+            // detector/blurrer
+            MediaBlock detectOrBlur;
+            if (rbDetectFaces.IsChecked == true)
+            {
+                _detector = new CVFaceDetectBlock(new CVFaceDetectSettings());
+                _detector.FaceDetected += _detector_FaceDetected;
+                detectOrBlur = _detector;
+            }
+            else
+            {
+                _blurer = new CVFaceBlurBlock(new CVFaceBlurSettings());
+                detectOrBlur = _blurer;
+            }
+            
             // connect all
-            _pipeline.Connect(_videoSource.Output, _detector.Input);
-            _pipeline.Connect(_detector.Output, _videoRenderer.Input);
+            _pipeline.Connect(_videoSource.Output, detectOrBlur.Input);
+            _pipeline.Connect(detectOrBlur.Output, _videoRenderer.Input);
 
             // start
             await _pipeline.StartAsync();
@@ -212,9 +213,30 @@ namespace Face_Detector_Live
             _timer.Start();
         }
 
+        private void _detector_HandDetected(object sender, CVHandDetectedEventArgs e)
+        {
+            Dispatcher.Invoke((Action)(() =>
+            {
+                mmFaces.Text = e.ToString();
+            }));
+        }
+
+        private void _detector_FaceDetected(object sender, CVFaceDetectedEventArgs e)
+        {
+            Dispatcher.Invoke((Action)(() =>
+            {
+                mmFaces.Text = e.ToString();
+            }));
+        }
+
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
+
+            if (_detector != null)
+            {
+                _detector.FaceDetected -= _detector_FaceDetected;
+            }
 
             await _pipeline?.StopAsync();
 
