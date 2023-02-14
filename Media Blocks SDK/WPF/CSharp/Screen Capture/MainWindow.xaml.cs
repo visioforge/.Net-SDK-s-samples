@@ -236,7 +236,7 @@ namespace Screen_Capture_MB_WPF
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            foreach (var device in SystemAudioSourceBlock.GetDevices(_pipeline))
+            foreach (var device in SystemAudioSourceBlock.GetDevices())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -247,7 +247,7 @@ namespace Screen_Capture_MB_WPF
                 //cbAudioInputDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in AudioRendererBlock.GetDevices(_pipeline))
+            foreach (var device in AudioRendererBlock.GetDevices())
             {
                 cbAudioOutputDevice.Items.Add(device);
             }

@@ -64,7 +64,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
             cbOutputFormat.SelectedIndex = 0;
 
-            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices(_pipeline);
+            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -75,7 +75,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(_pipeline, AudioCaptureDeviceAPI.DirectSound);
+            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(AudioCaptureDeviceAPI.DirectSound);
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -86,7 +86,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = AudioRendererBlock.GetDevices(_pipeline);
+            var audioOutputDevices = AudioRendererBlock.GetDevices();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -127,7 +127,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -152,7 +152,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = SystemAudioSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -269,7 +269,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             {
                 cbVideoFormat.Items.Clear();
 
-                var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     foreach (var item in device.VideoFormats)
@@ -293,7 +293,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -322,7 +322,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             {
                 cbAudioFormat.Items.Clear();
 
-                var device = SystemAudioSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     foreach (var format in device.Formats)

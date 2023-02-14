@@ -2,7 +2,8 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <PlatformTarget>x64</PlatformTarget>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>NDI_Streamer</RootNamespace>
     <LangVersion>9.0</LangVersion>
@@ -15,12 +16,11 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.35" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.36" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.5.35" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.36" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>

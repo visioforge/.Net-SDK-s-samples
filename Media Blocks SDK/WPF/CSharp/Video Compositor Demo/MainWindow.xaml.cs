@@ -109,7 +109,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.VideoCaptureFormat;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);

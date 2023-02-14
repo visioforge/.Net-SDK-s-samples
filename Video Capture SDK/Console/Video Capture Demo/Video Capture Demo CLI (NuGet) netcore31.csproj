@@ -4,27 +4,13 @@
     <RootNamespace>Video_Capture_Demo</RootNamespace>
     <AssemblyName>Video Capture Demo</AssemblyName>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <PlatformTarget>x64</PlatformTarget>
     <AssemblyTitle>Video Capture Demo</AssemblyTitle>
     <Product>Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.35.0</AssemblyVersion>
-    <FileVersion>15.5.35.0</FileVersion>
+    <AssemblyVersion>15.5.36.0</AssemblyVersion>
+    <FileVersion>15.5.36.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -42,11 +28,9 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x86" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x86" Version="15.5.35" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.36" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

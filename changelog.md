@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.36
+* [Media Blocks SDK .Net] Added OpenCV blocks: CVDewarp, CVDilate, CVEdgeDetect, CVEqualizeHistogram, CVErode, CVFaceBlur, CVFaceDetect, CVHandDetect, CVLaplace, CVMotionCells, CVSmooth, CVSobel, CVTemplateMatch, CVTextOverlay, CVTracker
+
 ## 15.5.35
 * [CV] Resolved issue with wrong face coordinates.
 * [CV, Media Blocks SDK .Net] Added Face Detector block.

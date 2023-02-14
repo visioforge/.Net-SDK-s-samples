@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;win7-x86</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
     <RootNamespace>MediaBlocks_Player_Demo</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <PlatformTarget>x64</PlatformTarget>
@@ -24,8 +24,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.0.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.35" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.36" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

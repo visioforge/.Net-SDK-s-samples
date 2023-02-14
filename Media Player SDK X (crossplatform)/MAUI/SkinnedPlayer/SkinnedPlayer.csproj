@@ -54,8 +54,8 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.35" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.35" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.36" />
   </ItemGroup>
   <!--<ItemGroup>
 		<PackageReference Include="VisioForge.DotNet.Core" Version="15.4.23"/>

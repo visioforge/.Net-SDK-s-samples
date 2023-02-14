@@ -56,7 +56,7 @@ namespace Face_Detector_Live
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices(_pipeline);
+            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -101,7 +101,7 @@ namespace Face_Detector_Live
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -128,7 +128,7 @@ namespace Face_Detector_Live
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -168,7 +168,7 @@ namespace Face_Detector_Live
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = SystemVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);

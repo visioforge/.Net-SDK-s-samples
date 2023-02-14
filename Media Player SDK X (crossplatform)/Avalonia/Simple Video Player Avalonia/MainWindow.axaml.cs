@@ -111,7 +111,7 @@ namespace Simple_Video_Player_Avalonia
 
             foreach (var item in _player.Audio_OutputDevices)
             {
-                AudioOutputDevices.Add(item);
+                AudioOutputDevices.Add(item.Name);
             }
 
             if (AudioOutputDevices.Count > 0)

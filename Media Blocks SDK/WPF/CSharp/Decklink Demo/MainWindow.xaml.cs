@@ -97,7 +97,7 @@ namespace Decklink_MB_Demo
 
             cbOutputFormat.SelectedIndex = 0;
 
-            var videoCaptureDevices = DecklinkVideoSourceBlock.GetDevices(_pipeline);
+            var videoCaptureDevices = DecklinkVideoSourceBlock.GetDevices();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -108,7 +108,7 @@ namespace Decklink_MB_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = DecklinkAudioSourceBlock.GetDevices(_pipeline);
+            var audioCaptureDevices = DecklinkAudioSourceBlock.GetDevices();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -119,7 +119,7 @@ namespace Decklink_MB_Demo
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var videoSinkDevices = DecklinkVideoSinkBlock.GetDevices(_pipeline);
+            var videoSinkDevices = DecklinkVideoSinkBlock.GetDevices();
             if (videoSinkDevices.Length > 0)
             {
                 foreach (var item in videoSinkDevices)
@@ -130,7 +130,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkVideoOutput.SelectedIndex = 0;
             }
 
-            var audioSinkDevices = DecklinkAudioSinkBlock.GetDevices(_pipeline);
+            var audioSinkDevices = DecklinkAudioSinkBlock.GetDevices();
             if (audioSinkDevices.Length > 0)
             {
                 foreach (var item in audioSinkDevices)
@@ -141,7 +141,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkAudioOutput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = AudioRendererBlock.GetDevices(_pipeline);
+            var audioOutputDevices = AudioRendererBlock.GetDevices();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -242,7 +242,7 @@ namespace Decklink_MB_Demo
             var deviceName = cbVideoInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = DecklinkVideoSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = DecklinkVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device);
@@ -258,7 +258,7 @@ namespace Decklink_MB_Demo
             deviceName = cbAudioInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = DecklinkAudioSourceBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                var device = DecklinkAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     audioSourceSettings = new DecklinkAudioSourceSettings(device);
@@ -378,7 +378,7 @@ namespace Decklink_MB_Demo
                     deviceName = cbDecklinkVideoOutput.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var device = DecklinkVideoSinkBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                        var device = DecklinkVideoSinkBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                         if (device != null)
                         {
                             videoSinkSettings = new DecklinkVideoSinkSettings(device);
@@ -393,7 +393,7 @@ namespace Decklink_MB_Demo
                     deviceName = cbDecklinkAudioOutput.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var device = DecklinkAudioSinkBlock.GetDevices(_pipeline).FirstOrDefault(x => x.Name == deviceName);
+                        var device = DecklinkAudioSinkBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
                         if (device != null)
                         {
                             audioSinkSettings = new DecklinkAudioSinkSettings(device);
