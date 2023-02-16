@@ -24,6 +24,7 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -44,6 +45,11 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />
   </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <!-- Required - WinUI does not yet have buildTransitive for everything -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230118.102" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.4" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Default.vfskin" />
   </ItemGroup>
@@ -54,8 +60,9 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.36" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.MAUI\VisioForge.Core.UI.MAUI.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Libs\VisioForge.Libs.csproj" />
   </ItemGroup>
   <!--<ItemGroup>
 		<PackageReference Include="VisioForge.DotNet.Core" Version="15.4.23"/>

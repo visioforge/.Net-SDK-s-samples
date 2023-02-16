@@ -2968,12 +2968,12 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.TVTuner_FM_Tuning_Step = 100 * KHz;
             }
 
-            VideoCapture1.TVTuner_TuneChannels_Start();
+            await VideoCapture1.TVTuner_TuneChannels_StartAsync();
         }
 
-        private void btStopTune_Click(object sender, EventArgs e)
+        private async void btStopTune_Click(object sender, EventArgs e)
         {
-            VideoCapture1.TVTuner_TuneChannels_Stop();
+            await VideoCapture1.TVTuner_TuneChannels_StopAsync();
         }
 
         private async void btUseThisChannel_Click(object sender, EventArgs e)

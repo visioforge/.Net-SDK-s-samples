@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.37
+* [Video Capture SDK .Net] Resolved issue with TV Tuning on Avermedia devices
+
 ## 15.5.36
 * [Media Blocks SDK .Net] Added OpenCV blocks: CVDewarp, CVDilate, CVEdgeDetect, CVEqualizeHistogram, CVErode, CVFaceBlur, CVFaceDetect, CVHandDetect, CVLaplace, CVMotionCells, CVSmooth, CVSobel, CVTemplateMatch, CVTextOverlay, CVTracker
 

@@ -40,7 +40,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.0.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.36" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.36" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.37" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.37" />
   </ItemGroup>
 </Project>
