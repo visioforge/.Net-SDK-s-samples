@@ -98,7 +98,7 @@ namespace Video_Compositor_Demo
 
         private void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog(_pipeline);
+            var dlg = new VideoCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
