@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.39
+* [Video Capture SDK .Net] Updated NVENC encoder. Resolved issue with high definition video capture.
+
 ## 15.5.37
 * [Video Capture SDK .Net] Resolved issue with TV Tuning on Avermedia devices
 
