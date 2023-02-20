@@ -105,8 +105,8 @@ namespace Video_Compositor_Demo
 
                 VideoCaptureDeviceSourceSettings settings = null;
 
-                var deviceName = dlg.VideoCaptureDevice;
-                var format = dlg.VideoCaptureFormat;
+                var deviceName = dlg.Device;
+                var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
                     var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
@@ -120,7 +120,7 @@ namespace Video_Compositor_Demo
                                 Format = formatItem.ToFormat()
                             };
 
-                            settings.Format.FrameRate = dlg.VideoFrameRate;
+                            settings.Format.FrameRate = dlg.FrameRate;
                         }
                     }
                 }
@@ -136,7 +136,7 @@ namespace Video_Compositor_Demo
 
                 _sources.Add(src);
 
-                cbSources.Items.Add($"Camera [{dlg.VideoCaptureDevice}]");
+                cbSources.Items.Add($"Camera [{dlg.Device}]");
                 cbSources.SelectedIndex = cbSources.Items.Count - 1;
             }
         }
