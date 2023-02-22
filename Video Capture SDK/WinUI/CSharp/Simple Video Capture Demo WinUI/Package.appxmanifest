@@ -7,13 +7,13 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="58e0f8d1-9e9e-489b-ba20-8591b8db16a0"
-    Publisher="CN=roman"
+    Name="3d648891-648d-4445-a3f0-7e106989ef69"
+    Publisher="CN=Roman"
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>Simple Video Capture Demo WinUI</DisplayName>
-    <PublisherDisplayName>roman</PublisherDisplayName>
+    <DisplayName>Simple Video Capture</DisplayName>
+    <PublisherDisplayName>Roman</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,8 +31,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Simple Video Capture Demo WinUI"
-        Description="Simple Video Capture Demo WinUI"
+        DisplayName="Simple Video Capture"
+        Description="Simple Video Capture"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

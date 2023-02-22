@@ -1,12 +1,11 @@
-﻿<Window
-    x:Class="Simple_Video_Capture_Demo_WinUI.MainWindow"
+<Window
+    x:Class="Simple_Video_Capture.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Simple_Video_Capture_Demo_WinUI"
+    xmlns:local="using:Simple_Video_Capture"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:winui="using:VisioForge.Core.UI.WinUI"
-    mc:Ignorable="d"
-    Activated="Window_Activated">
+    mc:Ignorable="d" Activated="Window_Activated">
 
     <Grid>
         <Pivot HorizontalAlignment="Left" Margin="12,12,0,0" Name="tcMain" Width="840" Height="419" VerticalAlignment="Top">
@@ -17,7 +16,6 @@
                     <Button HorizontalAlignment="Left" Margin="340,29,36,0" Name="btVideoCaptureDeviceSettings" VerticalAlignment="Top" Width="75" Click="btVideoCaptureDeviceSettings_Click">Settings</Button>
                     <TextBlock HorizontalAlignment="Left" Margin="6,64,0,0" VerticalAlignment="Top" Width="120">Video input format</TextBlock>
                     <ComboBox Width="260" Margin="6,86,117,0" Name="cbVideoInputFormat" VerticalAlignment="Top" SelectionChanged="cbVideoInputFormat_SelectionChanged" />
-                    <CheckBox Margin="200,70,117,0" Name="cbUseBestVideoInputFormat" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71" Checked="cbUseBestVideoInputFormat_Checked" Unchecked="cbUseBestVideoInputFormat_Checked">Use best</CheckBox>
                     <TextBlock HorizontalAlignment="Left" Margin="280,64,0,0" VerticalAlignment="Top" Width="75">Frame rate</TextBlock>
                     <ComboBox HorizontalAlignment="Left" Margin="280,86,0,0" x:Name="cbVideoInputFrameRate" VerticalAlignment="Top" Width="95" />
                     <TextBlock HorizontalAlignment="Left" Margin="385,90,0,0" VerticalAlignment="Top" Width="32">fps</TextBlock>
@@ -28,7 +26,6 @@
                     <ComboBox Margin="6,224,0,0" Name="cbAudioInputLine" VerticalAlignment="Top" HorizontalAlignment="Left" Width="166" />
                     <TextBlock Margin="180,201,128,0" VerticalAlignment="Top">Input format</TextBlock>
                     <ComboBox Margin="180,224,36,0" Name="cbAudioInputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="230" />
-                    <CheckBox HorizontalAlignment="Left" Margin="320,196,0,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Checked="cbUseBestAudioInputFormat_Checked" Unchecked="cbUseBestAudioInputFormat_Checked">Use best</CheckBox>
                     <TextBlock HorizontalAlignment="Left" Margin="6,276,0,0" VerticalAlignment="Top">Audio output device</TextBlock>
                     <ComboBox Width="405" Margin="6,305,36,0" Name="cbAudioOutputDevice" VerticalAlignment="Top" />
                     <CheckBox HorizontalAlignment="Left" Margin="270,276,0,0" Name="cbRecordAudio" VerticalAlignment="Top" IsChecked="True">Play/record audio</CheckBox>
@@ -72,13 +69,13 @@
 
                     <Slider HorizontalAlignment="Left" Margin="214,96,0,0" Maximum="255" x:Name="tbDarkness" VerticalAlignment="Top" Width="150" ValueChanged="tbDarkness_ValueChanged" />
                     <TextBlock Text="Darkness" HorizontalAlignment="Left" Margin="214,76,0,0" VerticalAlignment="Top" />
-                    
+
                     <CheckBox Content="Grayscale" HorizontalAlignment="Left" Margin="6,140,0,0" x:Name="cbGreyscale" VerticalAlignment="Top" Click="cbGreyscale_Click"  />
                     <CheckBox Content="Invert" HorizontalAlignment="Left" Margin="106,140,0,0" x:Name="cbInvert" VerticalAlignment="Top" Click="cbInvert_Click" />
 
                     <CheckBox x:Name="cbFlipX" Content="Flip X" HorizontalAlignment="Left" Margin="214,140,0,0" VerticalAlignment="Top" Checked="cbFlipX_Checked" Unchecked="cbFlipX_Checked"/>
                     <CheckBox x:Name="cbFlipY" Content="Flip Y" HorizontalAlignment="Left" Margin="290,140,0,0" VerticalAlignment="Top" Checked="cbFlipY_Checked" Unchecked="cbFlipY_Checked"/>
-                    
+
                     <TextBlock Text="More effects and settings available in Main Demo" HorizontalAlignment="Left" Margin="6,250,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </PivotItem>
@@ -89,7 +86,7 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-       
+
         <winui:VideoView Name="VideoView1" Margin="450,33,16,145" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         <TextBlock Text="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,8,16,0" VerticalAlignment="Top"/>

@@ -1,8 +1,11 @@
-﻿<Application
-    x:Class="Simple_Video_Capture_Demo_WinUI.App"
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Application
+    x:Class="Simple_Video_Capture.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Simple_Video_Capture_Demo_WinUI">
+    xmlns:local="using:Simple_Video_Capture">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
