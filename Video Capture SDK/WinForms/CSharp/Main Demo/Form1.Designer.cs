@@ -13173,7 +13173,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipHorizontal3.TabIndex = 14;
             this.cbFlipHorizontal3.Text = "Flip horizontal";
             this.cbFlipHorizontal3.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal3.CheckedChanged += new System.EventHandler(this.cbFlipHorizontal3_CheckedChanged);
+            this.cbFlipHorizontal3.CheckedChanged += new System.EventHandler(this.cbStretch3_CheckedChanged);
             // 
             // cbFlipVertical3
             // 
@@ -13185,7 +13185,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipVertical3.TabIndex = 13;
             this.cbFlipVertical3.Text = "Flip vertical";
             this.cbFlipVertical3.UseVisualStyleBackColor = true;
-            this.cbFlipVertical3.CheckedChanged += new System.EventHandler(this.cbFlipVertical3_CheckedChanged);
+            this.cbFlipVertical3.CheckedChanged += new System.EventHandler(this.cbStretch3_CheckedChanged);
             // 
             // cbStretch3
             // 
@@ -13209,7 +13209,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipHorizontal2.TabIndex = 11;
             this.cbFlipHorizontal2.Text = "Flip horizontal";
             this.cbFlipHorizontal2.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal2.CheckedChanged += new System.EventHandler(this.cbFlipHorizontal2_CheckedChanged);
+            this.cbFlipHorizontal2.CheckedChanged += new System.EventHandler(this.cbStretch2_CheckedChanged);
             // 
             // cbFlipVertical2
             // 
@@ -13221,7 +13221,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipVertical2.TabIndex = 10;
             this.cbFlipVertical2.Text = "Flip vertical";
             this.cbFlipVertical2.UseVisualStyleBackColor = true;
-            this.cbFlipVertical2.CheckedChanged += new System.EventHandler(this.cbFlipVertical2_CheckedChanged);
+            this.cbFlipVertical2.CheckedChanged += new System.EventHandler(this.cbStretch2_CheckedChanged);
             // 
             // cbStretch2
             // 
@@ -13245,7 +13245,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipHorizontal1.TabIndex = 8;
             this.cbFlipHorizontal1.Text = "Flip horizontal";
             this.cbFlipHorizontal1.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal1.CheckedChanged += new System.EventHandler(this.cbFlipHorizontal1_CheckedChanged);
+            this.cbFlipHorizontal1.CheckedChanged += new System.EventHandler(this.cbStretch1_CheckedChanged);
             // 
             // cbFlipVertical1
             // 
@@ -13257,7 +13257,7 @@ namespace VideoCapture_CSharp_Demo
             this.cbFlipVertical1.TabIndex = 7;
             this.cbFlipVertical1.Text = "Flip vertical";
             this.cbFlipVertical1.UseVisualStyleBackColor = true;
-            this.cbFlipVertical1.CheckedChanged += new System.EventHandler(this.cbFlipVertical1_CheckedChanged);
+            this.cbFlipVertical1.CheckedChanged += new System.EventHandler(this.cbStretch1_CheckedChanged);
             // 
             // cbStretch1
             // 

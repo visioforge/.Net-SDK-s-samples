@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.40
+* [Video Capture SDK .Net] Added CustomVideoFrameRate property to MFOutput. You can set custom frame rate if your source provide incorrect frame rate (IP camera, for example).
+
 ## 15.5.39
 * [Video Capture SDK .Net] Updated NVENC encoder. Resolved issue with high definition video capture.
 

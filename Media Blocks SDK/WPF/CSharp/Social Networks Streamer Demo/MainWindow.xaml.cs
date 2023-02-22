@@ -89,7 +89,7 @@ namespace Social_Networks_Streamer_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices(AudioCaptureDeviceAPI.DirectSound);
+            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -147,7 +147,7 @@ namespace Social_Networks_Streamer_Demo
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // audio source
-            AudioCaptureDeviceSourceSettings audioSourceSettings = null;
+            DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
 
             deviceName = cbAudioInput.Text;
             format = cbAudioFormat.Text;
@@ -159,7 +159,7 @@ namespace Social_Networks_Streamer_Demo
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        audioSourceSettings = new AudioCaptureDeviceSourceSettings(device.OriginalName, formatItem.ToFormat());
+                        audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
                     }
                 }
             }

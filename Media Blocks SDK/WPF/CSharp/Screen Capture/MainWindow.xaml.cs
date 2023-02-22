@@ -142,7 +142,7 @@ namespace Screen_Capture_MB_WPF
 
             if (cbRecordAudio.IsChecked == true)
             {
-                _audioInput = new SystemAudioSourceBlock(new AudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
+                _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
                 _audioRenderer = new AudioRendererBlock(cbAudioOutputDevice.Text);
             }
 
