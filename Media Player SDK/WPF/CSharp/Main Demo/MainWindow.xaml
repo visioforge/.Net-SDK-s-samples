@@ -33,18 +33,6 @@
                                 <TextBox Height="302" HorizontalAlignment="Left" Margin="17,21,0,0" x:Name="mmInfo" VerticalAlignment="Top" Width="294" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="DVD" x:Name="tabItem6">
-                            <Grid>
-                                <Label Content="Titles" Height="28" HorizontalAlignment="Left" Margin="16,15,0,0" x:Name="label1" VerticalAlignment="Top" />
-                                <ListBox Height="100" HorizontalAlignment="Left" Margin="16,41,0,0" x:Name="lbDVDTitles" VerticalAlignment="Top" Width="291" MouseDown="lbDVDTitles_MouseDown" />
-                                <Label Content="Video" Height="28" HorizontalAlignment="Left" Margin="16,147,0,0" x:Name="label2" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="16,171,0,0" x:Name="edDVDVideo" VerticalAlignment="Top" Width="291" />
-                                <Label Content="Audio streams" Height="28" HorizontalAlignment="Left" Margin="19,200,0,0" x:Name="label3" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="19,226,0,0" x:Name="cbDVDAudio" VerticalAlignment="Top" Width="288" />
-                                <Label Content="Subtitles" Height="28" HorizontalAlignment="Left" Margin="16,255,0,0" x:Name="label4" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="19,280,0,0" x:Name="cbDVDSubtitles" VerticalAlignment="Top" Width="288" />
-                            </Grid>
-                        </TabItem>
                         <TabItem Header="Tags">
                             <Grid>
                                 <Button x:Name="btReadTags" Content="Read tags" HorizontalAlignment="Left" Margin="10,312,0,0" VerticalAlignment="Top" Width="75" Click="btReadTags_Click"/>
@@ -729,20 +717,6 @@
                 <Button x:Name="btPrevFrame" Content="Prev frame" HorizontalAlignment="Left" Margin="238,35,0,0" VerticalAlignment="Top" Width="65" Height="23" Click="btPrevFrame_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="DVD" Height="91" HorizontalAlignment="Left" Margin="407,0,0,125" x:Name="groupBox2" VerticalAlignment="Bottom" Width="403">
-            <Grid>
-                <Label Content="Title" Height="28" HorizontalAlignment="Left" Margin="8,4,0,0" x:Name="label20" VerticalAlignment="Top" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="61,6,0,0" x:Name="cbDVDControlTitle" VerticalAlignment="Top" Width="93" SelectionChanged="cbDVDControlTitle_SelectionChanged" />
-                <Label Content="Chapter" Height="28" HorizontalAlignment="Left" Margin="8,32,0,0" x:Name="label21" VerticalAlignment="Top" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="61,35,0,0" x:Name="cbDVDControlChapter" VerticalAlignment="Top" Width="93" SelectionChanged="cbDVDControlChapter_SelectionChanged" />
-                <Label Content="Audio" Height="28" HorizontalAlignment="Left" Margin="166,4,0,0" x:Name="label22" VerticalAlignment="Top" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="219,6,0,0" x:Name="cbDVDControlAudio" VerticalAlignment="Top" Width="93" SelectionChanged="cbDVDControlAudio_SelectionChanged" />
-                <Label Content="Subtitles" Height="28" HorizontalAlignment="Left" Margin="166,32,0,0" x:Name="label23" VerticalAlignment="Top" />
-                <ComboBox Height="23" HorizontalAlignment="Left" Margin="219,35,0,0" x:Name="cbDVDControlSubtitles" VerticalAlignment="Top" Width="93" SelectionChanged="cbDVDControlSubtitles_SelectionChanged" />
-                <Button Content="Title menu" HorizontalAlignment="Left" Margin="319,6,0,0" x:Name="btDVDControlTitleMenu" Width="66" Height="23" VerticalAlignment="Top" Click="btDVDControlTitleMenu_Click" />
-                <Button Content="Root menu" Height="23" HorizontalAlignment="Left" Margin="319,35,0,0" x:Name="btDVDControlRootMenu" VerticalAlignment="Top" Width="66" Click="btDVDControlRootMenu_Click" />
-            </Grid>
-        </GroupBox>
         <Label Content="Source mode" HorizontalAlignment="Left" Margin="406,130.04,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbSourceMode" Margin="491,134,25,0" VerticalAlignment="Top">
             <ComboBoxItem Content="File / Network stream (decode using LAV)"/>
@@ -750,7 +724,6 @@
             <ComboBoxItem Content="File / Network stream (decode using FFMPEG)"/>
             <ComboBoxItem Content="File (decode using DirectShow)"/>
             <ComboBoxItem Content="File (decode using VLC)"/>
-            <ComboBoxItem Content="DVD"/>
             <ComboBoxItem Content="Blu-Ray"/>
             <ComboBoxItem Content="File from memory (decode using DirectShow)"/>
             <ComboBoxItem Content="MMS / WMV (network stream)"/>

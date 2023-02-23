@@ -17,4 +17,9 @@
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Skins\Default.vfskin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

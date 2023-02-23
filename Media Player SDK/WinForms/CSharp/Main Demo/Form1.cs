@@ -55,8 +55,6 @@ namespace Media_Player_Demo
 
         private readonly MediaInfoReader MediaInfo = new MediaInfoReader();
 
-        private readonly DVDInfoReader DVDInfo = new DVDInfoReader();
-
         private readonly List<Form> multiscreenWindows = new List<Form>();
 
         public Form1()
@@ -320,51 +318,6 @@ namespace Media_Player_Demo
             }
         }
 
-        private void lbDVDTitles_Click(object sender, EventArgs e)
-        {
-            if (lbDVDTitles.SelectedIndex != -1)
-            {
-                cbDVDAudio.Items.Clear();
-                cbDVDSubtitles.Items.Clear();
-
-                var title = DVDInfo.Info.Titles[lbDVDTitles.SelectedIndex];
-
-                string s = title.MainAttributes.VideoAttributes.Compression + " ";
-                s = s + title.MainAttributes.VideoAttributes.SourceResolutionX + "x" + title.MainAttributes.VideoAttributes.SourceResolutionY + " ";
-                s = s + title.MainAttributes.VideoAttributes.AspectRatio.Item1 + ":" + title.MainAttributes.VideoAttributes.AspectRatio.Item2 + " ";
-
-                edDVDVideo.Text = s;
-
-                for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
-                {
-                    var audioStream = title.MainAttributes.AudioAttributes[i];
-                    s = audioStream.AudioFormat.ToString();
-
-                    s = s + " - ";
-                    s = s + audioStream.NumberOfChannels + "ch" + " - ";
-                    s = s + audioStream.Language;
-
-                    cbDVDAudio.Items.Add(s);
-                }
-
-                if (cbDVDAudio.Items.Count > 0)
-                {
-                    cbDVDAudio.SelectedIndex = 0;
-                }
-
-                for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
-                {
-                    var subpictureStream = title.MainAttributes.SubpictureAttributes[i];
-                    cbDVDSubtitles.Items.Add(subpictureStream.Language);
-                }
-
-                if (cbDVDSubtitles.Items.Count > 0)
-                {
-                    cbDVDSubtitles.SelectedIndex = 0;
-                }
-            }
-        }
-
         private void tbBalance1_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream1.Checked || MediaPlayer1.Audio_Streams_AllInOne())
@@ -399,14 +352,7 @@ namespace Media_Player_Demo
 
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.DVD_DS)
-            {
                 await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
-            }
-            else
-            {
-                await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, false);
-            }
         }
 
         private void tbVolume1_Scroll(object sender, EventArgs e)
@@ -650,31 +596,6 @@ namespace Media_Player_Demo
                     tbBalance1.Enabled = true;
                 }
             }
-            else if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
-            {
-                cbAudioStream1.Enabled = true;
-                cbAudioStream1.Checked = true;
-                tbVolume1.Enabled = true;
-                tbBalance1.Enabled = true;
-
-                edDVDVideo.Text = string.Empty;
-                lbDVDTitles.Items.Clear();
-                cbDVDAudio.Items.Clear();
-                cbDVDSubtitles.Items.Clear();
-
-                cbDVDControlTitle.Items.Clear();
-                cbDVDControlChapter.Items.Clear();
-                cbDVDControlAudio.Items.Clear();
-                cbDVDControlSubtitles.Items.Clear();
-
-                DVDInfo.ReadDVDInfo();
-
-                for (int i = 0; i < DVDInfo.Info.Disc_NumOfTitles; i++)
-                {
-                    lbDVDTitles.Items.Add("Title " + Convert.ToString(i + 1));
-                    cbDVDControlTitle.Items.Add("Title " + Convert.ToString(i + 1));
-                }
-            }
             else
             {
                 cbAudioStream1.Enabled = true;
@@ -696,14 +617,6 @@ namespace Media_Player_Demo
             }
 
             lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
-            {
-                if (MediaPlayer1.DVD_Chapter_GetCurrent() != cbDVDControlChapter.SelectedIndex && cbDVDControlChapter.SelectedIndex != -1)
-                {
-                    cbDVDControlChapter.SelectedIndex = MediaPlayer1.DVD_Chapter_GetCurrent();
-                }
-            }
 
             timer1.Tag = 0;
         }
@@ -901,25 +814,22 @@ namespace Media_Player_Demo
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_VLC;
                     break;
                 case 5:
-                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS;
-                    break;
-                case 6:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.BluRay;
                     break;
-                case 7:
+                case 6:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
                     LoadToMemory();
                     break;
-                case 8:
+                case 7:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MMS_WMV_DS;
                     break;
-                case 9:
+                case 8:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.HTTP_RTSP_VLC;
                     break;
-                case 10:
+                case 9:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS;
                     break;
-                case 11:
+                case 10:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.CustomSource;
 
                     if (!string.IsNullOrEmpty(edCustomSourceFilter.Text))
@@ -929,7 +839,7 @@ namespace Media_Player_Demo
 
                     break;
 
-                case 12:
+                case 11:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MIDI;
                     break;
             }
@@ -1377,22 +1287,8 @@ namespace Media_Player_Demo
 
             await FillVideoRendererAdjustRangesAsync();
 
-            // DVD
-            if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.DVD_DS)
-            {
-                // select and play first title
-                if (cbDVDControlTitle.Items.Count > 0)
-                {
-                    cbDVDControlTitle.SelectedIndex = 0;
-                    cbDVDControlTitle_SelectedIndexChanged(null, null);
-                }
-
-                // show title menu
-                await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
-            }
-
             // set audio volume for each stream
-            if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.DVD_DS && MediaPlayer1.Source_Mode != MediaPlayerSourceMode.MMS_WMV_DS)
+            if (MediaPlayer1.Source_Mode != MediaPlayerSourceMode.MMS_WMV_DS)
             {
                 int count = MediaPlayer1.Audio_Streams_Count();
 
@@ -1453,16 +1349,6 @@ namespace Media_Player_Demo
             {
                 edFilenameOrURL.Text = openFileDialog1.FileName;
             }
-        }
-
-        private async void btDVDControlRootMenu_Click(object sender, EventArgs e)
-        {
-            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root);
-        }
-
-        private async void btDVDControlTitleMenu_Click(object sender, EventArgs e)
-        {
-            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
         }
 
         private async void btZoomIn_Click(object sender, EventArgs e)
@@ -1569,89 +1455,6 @@ namespace Media_Player_Demo
                     cbAudioStream1.Checked = false;
                     cbAudioStream2.Checked = false;
                     cbAudioStream3.Checked = false;
-                }
-            }
-        }
-
-        private async void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbDVDControlAudio.SelectedIndex > 0)
-            {
-                await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex);
-            }
-        }
-
-        private async void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbDVDControlChapter.SelectedIndex > 0)
-            {
-                await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex);
-            }
-        }
-
-        private async void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbDVDControlSubtitles.SelectedIndex > 0)
-            {
-                await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1);
-            }
-
-            // 0 - x - subtitles
-            // -1 - disable subtitles
-        }
-
-        private async void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbDVDControlTitle.SelectedIndex != -1)
-            {
-                // fill info
-                cbDVDControlAudio.Items.Clear();
-                cbDVDControlSubtitles.Items.Clear();
-                cbDVDControlChapter.Items.Clear();
-
-                var title = DVDInfo.Info.Titles[cbDVDControlTitle.SelectedIndex];
-                for (int i = 0; i < title.NumberOfChapters; i++)
-                {
-                    cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1));
-                }
-
-                if (cbDVDControlChapter.Items.Count > 0)
-                {
-                    cbDVDControlChapter.SelectedIndex = 0;
-                }
-
-                for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
-                {
-                    var audioStream = title.MainAttributes.AudioAttributes[i];
-                    string s = audioStream.AudioFormat.ToString();
-
-                    s = s + " - ";
-                    s = s + audioStream.NumberOfChannels + "ch" + " - ";
-                    s = s + audioStream.Language;
-
-                    cbDVDControlAudio.Items.Add(s);
-                }
-
-                if (cbDVDControlAudio.Items.Count > 0)
-                {
-                    cbDVDControlAudio.SelectedIndex = 0;
-                }
-
-                cbDVDControlSubtitles.Items.Add("Disabled");
-                for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
-                {
-                    var subpictureStream = title.MainAttributes.SubpictureAttributes[i];
-                    cbDVDControlSubtitles.Items.Add(subpictureStream.Language);
-                }
-
-                cbDVDControlSubtitles.SelectedIndex = 0;
-
-                // if null we just enumerate titles and chapters
-                if (sender != null)
-                {
-                    // play title
-                    await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex);
-                    tbTimeline.Maximum = (int)((await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds);
                 }
             }
         }
@@ -2112,7 +1915,7 @@ namespace Media_Player_Demo
 
             MediaPlayer1.MultiScreen_SetParameters(1, stretch, cbFlipHorizontal2.Checked, cbFlipVertical2.Checked);
         }
-        
+
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (MediaPlayer1.State() != PlaybackState.Free)

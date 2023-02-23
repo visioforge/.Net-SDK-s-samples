@@ -36,7914 +36,7611 @@ namespace Media_Player_Demo
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage20 = new System.Windows.Forms.TabPage();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.rbGPUDirect3D = new System.Windows.Forms.RadioButton();
-            this.rbGPUDXVANative = new System.Windows.Forms.RadioButton();
-            this.rbGPUDXVACopyBack = new System.Windows.Forms.RadioButton();
-            this.rbGPUIntel = new System.Windows.Forms.RadioButton();
-            this.rbGPUNVidia = new System.Windows.Forms.RadioButton();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.cbUseLibMediaInfo = new System.Windows.Forms.CheckBox();
-            this.btReadInfo = new System.Windows.Forms.Button();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.mmInfo = new System.Windows.Forms.TextBox();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.lbDVDTitles = new System.Windows.Forms.ListBox();
-            this.cbDVDSubtitles = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbDVDAudio = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.edDVDVideo = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabPage49 = new System.Windows.Forms.TabPage();
-            this.imgTags = new System.Windows.Forms.PictureBox();
-            this.edTags = new System.Windows.Forms.TextBox();
-            this.btReadTags = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbBalance4 = new System.Windows.Forms.TrackBar();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbVolume4 = new System.Windows.Forms.TrackBar();
-            this.cbAudioStream4 = new System.Windows.Forms.CheckBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbBalance3 = new System.Windows.Forms.TrackBar();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tbVolume3 = new System.Windows.Forms.TrackBar();
-            this.cbAudioStream3 = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbBalance2 = new System.Windows.Forms.TrackBar();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbVolume2 = new System.Windows.Forms.TrackBar();
-            this.cbAudioStream2 = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbBalance1 = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbVolume1 = new System.Windows.Forms.TrackBar();
-            this.cbAudioStream1 = new System.Windows.Forms.CheckBox();
-            this.cbPlayAudio = new System.Windows.Forms.CheckBox();
-            this.cbAudioOutputDevice = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabControl4 = new System.Windows.Forms.TabControl();
-            this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.label393 = new System.Windows.Forms.Label();
-            this.cbDirect2DRotate = new System.Windows.Forms.ComboBox();
-            this.pnVideoRendererBGColor = new System.Windows.Forms.Panel();
-            this.label394 = new System.Windows.Forms.Label();
-            this.btFullScreen = new System.Windows.Forms.Button();
-            this.groupBox28 = new System.Windows.Forms.GroupBox();
-            this.btZoomReset = new System.Windows.Forms.Button();
-            this.btZoomShiftRight = new System.Windows.Forms.Button();
-            this.btZoomShiftLeft = new System.Windows.Forms.Button();
-            this.btZoomOut = new System.Windows.Forms.Button();
-            this.btZoomIn = new System.Windows.Forms.Button();
-            this.btZoomShiftDown = new System.Windows.Forms.Button();
-            this.btZoomShiftUp = new System.Windows.Forms.Button();
-            this.cbScreenFlipVertical = new System.Windows.Forms.CheckBox();
-            this.cbScreenFlipHorizontal = new System.Windows.Forms.CheckBox();
-            this.cbStretch = new System.Windows.Forms.CheckBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.rbNDIStreaming = new System.Windows.Forms.RadioButton();
-            this.rbVirtualCameraOutput = new System.Windows.Forms.RadioButton();
-            this.rbMadVR = new System.Windows.Forms.RadioButton();
-            this.rbDirect2D = new System.Windows.Forms.RadioButton();
-            this.rbNone = new System.Windows.Forms.RadioButton();
-            this.rbEVR = new System.Windows.Forms.RadioButton();
-            this.rbVMR9 = new System.Windows.Forms.RadioButton();
-            this.label15 = new System.Windows.Forms.Label();
-            this.edAspectRatioY = new System.Windows.Forms.TextBox();
-            this.edAspectRatioX = new System.Windows.Forms.TextBox();
-            this.cbAspectRatioUseCustom = new System.Windows.Forms.CheckBox();
-            this.tabPage17 = new System.Windows.Forms.TabPage();
-            this.cbMultiscreenDrawOnExternalDisplays = new System.Windows.Forms.CheckBox();
-            this.cbMultiscreenDrawOnPanels = new System.Windows.Forms.CheckBox();
-            this.cbFlipHorizontal2 = new System.Windows.Forms.CheckBox();
-            this.cbFlipVertical2 = new System.Windows.Forms.CheckBox();
-            this.cbStretch2 = new System.Windows.Forms.CheckBox();
-            this.cbFlipHorizontal1 = new System.Windows.Forms.CheckBox();
-            this.cbFlipVertical1 = new System.Windows.Forms.CheckBox();
-            this.cbStretch1 = new System.Windows.Forms.CheckBox();
-            this.pnScreen2 = new System.Windows.Forms.Panel();
-            this.pnScreen1 = new System.Windows.Forms.Panel();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabControl17 = new System.Windows.Forms.TabControl();
-            this.tabPage68 = new System.Windows.Forms.TabPage();
-            this.cbFlipY = new System.Windows.Forms.CheckBox();
-            this.cbFlipX = new System.Windows.Forms.CheckBox();
-            this.label201 = new System.Windows.Forms.Label();
-            this.label200 = new System.Windows.Forms.Label();
-            this.label199 = new System.Windows.Forms.Label();
-            this.label198 = new System.Windows.Forms.Label();
-            this.tabControl7 = new System.Windows.Forms.TabControl();
-            this.tabPage29 = new System.Windows.Forms.TabPage();
-            this.btTextLogoRemove = new System.Windows.Forms.Button();
-            this.btTextLogoEdit = new System.Windows.Forms.Button();
-            this.lbTextLogos = new System.Windows.Forms.ListBox();
-            this.btTextLogoAdd = new System.Windows.Forms.Button();
-            this.tabPage42 = new System.Windows.Forms.TabPage();
-            this.btImageLogoRemove = new System.Windows.Forms.Button();
-            this.btImageLogoEdit = new System.Windows.Forms.Button();
-            this.lbImageLogos = new System.Windows.Forms.ListBox();
-            this.btImageLogoAdd = new System.Windows.Forms.Button();
-            this.tabPage18 = new System.Windows.Forms.TabPage();
-            this.groupBox37 = new System.Windows.Forms.GroupBox();
-            this.btEffZoomRight = new System.Windows.Forms.Button();
-            this.btEffZoomLeft = new System.Windows.Forms.Button();
-            this.btEffZoomOut = new System.Windows.Forms.Button();
-            this.btEffZoomIn = new System.Windows.Forms.Button();
-            this.btEffZoomDown = new System.Windows.Forms.Button();
-            this.btEffZoomUp = new System.Windows.Forms.Button();
-            this.cbZoom = new System.Windows.Forms.CheckBox();
-            this.tabPage19 = new System.Windows.Forms.TabPage();
-            this.groupBox40 = new System.Windows.Forms.GroupBox();
-            this.edPanDestHeight = new System.Windows.Forms.TextBox();
-            this.label302 = new System.Windows.Forms.Label();
-            this.edPanDestWidth = new System.Windows.Forms.TextBox();
-            this.label303 = new System.Windows.Forms.Label();
-            this.edPanDestTop = new System.Windows.Forms.TextBox();
-            this.label304 = new System.Windows.Forms.Label();
-            this.edPanDestLeft = new System.Windows.Forms.TextBox();
-            this.label305 = new System.Windows.Forms.Label();
-            this.groupBox39 = new System.Windows.Forms.GroupBox();
-            this.edPanSourceHeight = new System.Windows.Forms.TextBox();
-            this.label298 = new System.Windows.Forms.Label();
-            this.edPanSourceWidth = new System.Windows.Forms.TextBox();
-            this.label299 = new System.Windows.Forms.Label();
-            this.edPanSourceTop = new System.Windows.Forms.TextBox();
-            this.label300 = new System.Windows.Forms.Label();
-            this.edPanSourceLeft = new System.Windows.Forms.TextBox();
-            this.label301 = new System.Windows.Forms.Label();
-            this.groupBox38 = new System.Windows.Forms.GroupBox();
-            this.edPanStopTime = new System.Windows.Forms.TextBox();
-            this.label296 = new System.Windows.Forms.Label();
-            this.edPanStartTime = new System.Windows.Forms.TextBox();
-            this.label297 = new System.Windows.Forms.Label();
-            this.cbPan = new System.Windows.Forms.CheckBox();
-            this.tabPage22 = new System.Windows.Forms.TabPage();
-            this.rbFadeOut = new System.Windows.Forms.RadioButton();
-            this.rbFadeIn = new System.Windows.Forms.RadioButton();
-            this.groupBox45 = new System.Windows.Forms.GroupBox();
-            this.edFadeInOutStopTime = new System.Windows.Forms.TextBox();
-            this.label329 = new System.Windows.Forms.Label();
-            this.edFadeInOutStartTime = new System.Windows.Forms.TextBox();
-            this.label330 = new System.Windows.Forms.Label();
-            this.cbFadeInOut = new System.Windows.Forms.CheckBox();
-            this.tabPage43 = new System.Windows.Forms.TabPage();
-            this.cbLiveRotationStretch = new System.Windows.Forms.CheckBox();
-            this.label392 = new System.Windows.Forms.Label();
-            this.label391 = new System.Windows.Forms.Label();
-            this.tbLiveRotationAngle = new System.Windows.Forms.TrackBar();
-            this.label390 = new System.Windows.Forms.Label();
-            this.cbLiveRotation = new System.Windows.Forms.CheckBox();
-            this.tbContrast = new System.Windows.Forms.TrackBar();
-            this.tbDarkness = new System.Windows.Forms.TrackBar();
-            this.tbLightness = new System.Windows.Forms.TrackBar();
-            this.tbSaturation = new System.Windows.Forms.TrackBar();
-            this.cbInvert = new System.Windows.Forms.CheckBox();
-            this.cbGreyscale = new System.Windows.Forms.CheckBox();
-            this.cbVideoEffects = new System.Windows.Forms.CheckBox();
-            this.tabPage69 = new System.Windows.Forms.TabPage();
-            this.label211 = new System.Windows.Forms.Label();
-            this.edDeintTriangleWeight = new System.Windows.Forms.TextBox();
-            this.label212 = new System.Windows.Forms.Label();
-            this.label210 = new System.Windows.Forms.Label();
-            this.label209 = new System.Windows.Forms.Label();
-            this.label206 = new System.Windows.Forms.Label();
-            this.edDeintBlendConstants2 = new System.Windows.Forms.TextBox();
-            this.label207 = new System.Windows.Forms.Label();
-            this.edDeintBlendConstants1 = new System.Windows.Forms.TextBox();
-            this.label208 = new System.Windows.Forms.Label();
-            this.label204 = new System.Windows.Forms.Label();
-            this.edDeintBlendThreshold2 = new System.Windows.Forms.TextBox();
-            this.label205 = new System.Windows.Forms.Label();
-            this.edDeintBlendThreshold1 = new System.Windows.Forms.TextBox();
-            this.label203 = new System.Windows.Forms.Label();
-            this.label202 = new System.Windows.Forms.Label();
-            this.edDeintCAVTThreshold = new System.Windows.Forms.TextBox();
-            this.label104 = new System.Windows.Forms.Label();
-            this.rbDeintTriangleEnabled = new System.Windows.Forms.RadioButton();
-            this.rbDeintBlendEnabled = new System.Windows.Forms.RadioButton();
-            this.rbDeintCAVTEnabled = new System.Windows.Forms.RadioButton();
-            this.cbDeinterlace = new System.Windows.Forms.CheckBox();
-            this.tabPage59 = new System.Windows.Forms.TabPage();
-            this.rbDenoiseCAST = new System.Windows.Forms.RadioButton();
-            this.rbDenoiseMosquito = new System.Windows.Forms.RadioButton();
-            this.cbDenoise = new System.Windows.Forms.CheckBox();
-            this.tabPage51 = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
-            this.tbGPUBlur = new System.Windows.Forms.TrackBar();
-            this.cbVideoEffectsGPUEnabled = new System.Windows.Forms.CheckBox();
-            this.cbGPUOldMovie = new System.Windows.Forms.CheckBox();
-            this.cbGPUDeinterlace = new System.Windows.Forms.CheckBox();
-            this.cbGPUDenoise = new System.Windows.Forms.CheckBox();
-            this.cbGPUPixelate = new System.Windows.Forms.CheckBox();
-            this.cbGPUNightVision = new System.Windows.Forms.CheckBox();
-            this.label383 = new System.Windows.Forms.Label();
-            this.label384 = new System.Windows.Forms.Label();
-            this.label385 = new System.Windows.Forms.Label();
-            this.label386 = new System.Windows.Forms.Label();
-            this.tbGPUContrast = new System.Windows.Forms.TrackBar();
-            this.tbGPUDarkness = new System.Windows.Forms.TrackBar();
-            this.tbGPULightness = new System.Windows.Forms.TrackBar();
-            this.tbGPUSaturation = new System.Windows.Forms.TrackBar();
-            this.cbGPUInvert = new System.Windows.Forms.CheckBox();
-            this.cbGPUGreyscale = new System.Windows.Forms.CheckBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.lbAdjSaturationCurrent = new System.Windows.Forms.Label();
-            this.lbAdjSaturationMax = new System.Windows.Forms.Label();
-            this.lbAdjSaturationMin = new System.Windows.Forms.Label();
-            this.tbAdjSaturation = new System.Windows.Forms.TrackBar();
-            this.label45 = new System.Windows.Forms.Label();
-            this.lbAdjHueCurrent = new System.Windows.Forms.Label();
-            this.lbAdjHueMax = new System.Windows.Forms.Label();
-            this.lbAdjHueMin = new System.Windows.Forms.Label();
-            this.tbAdjHue = new System.Windows.Forms.TrackBar();
-            this.label41 = new System.Windows.Forms.Label();
-            this.lbAdjContrastCurrent = new System.Windows.Forms.Label();
-            this.lbAdjContrastMax = new System.Windows.Forms.Label();
-            this.lbAdjContrastMin = new System.Windows.Forms.Label();
-            this.tbAdjContrast = new System.Windows.Forms.TrackBar();
-            this.label23 = new System.Windows.Forms.Label();
-            this.lbAdjBrightnessCurrent = new System.Windows.Forms.Label();
-            this.lbAdjBrightnessMax = new System.Windows.Forms.Label();
-            this.lbAdjBrightnessMin = new System.Windows.Forms.Label();
-            this.tbAdjBrightness = new System.Windows.Forms.TrackBar();
-            this.label24 = new System.Windows.Forms.Label();
-            this.tabPage15 = new System.Windows.Forms.TabPage();
-            this.pnChromaKeyColor = new System.Windows.Forms.Panel();
-            this.btChromaKeySelectBGImage = new System.Windows.Forms.Button();
-            this.edChromaKeyImage = new System.Windows.Forms.TextBox();
-            this.label216 = new System.Windows.Forms.Label();
-            this.label215 = new System.Windows.Forms.Label();
-            this.tbChromaKeySmoothing = new System.Windows.Forms.TrackBar();
-            this.label214 = new System.Windows.Forms.Label();
-            this.tbChromaKeyThresholdSensitivity = new System.Windows.Forms.TrackBar();
-            this.label213 = new System.Windows.Forms.Label();
-            this.cbChromaKeyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage46 = new System.Windows.Forms.TabPage();
-            this.btFilterDelete = new System.Windows.Forms.Button();
-            this.btFilterDeleteAll = new System.Windows.Forms.Button();
-            this.btFilterSettings2 = new System.Windows.Forms.Button();
-            this.lbFilters = new System.Windows.Forms.ListBox();
-            this.label106 = new System.Windows.Forms.Label();
-            this.btFilterSettings = new System.Windows.Forms.Button();
-            this.btFilterAdd = new System.Windows.Forms.Button();
-            this.cbFilters = new System.Windows.Forms.ComboBox();
-            this.label105 = new System.Windows.Forms.Label();
-            this.tabPage48 = new System.Windows.Forms.TabPage();
-            this.lbAudioTimeshift = new System.Windows.Forms.Label();
-            this.tbAudioTimeshift = new System.Windows.Forms.TrackBar();
-            this.label70 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lbAudioOutputGainLFE = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainLFE = new System.Windows.Forms.TrackBar();
-            this.label55 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainSR = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainSR = new System.Windows.Forms.TrackBar();
-            this.label57 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainSL = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainSL = new System.Windows.Forms.TrackBar();
-            this.label59 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainR = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainR = new System.Windows.Forms.TrackBar();
-            this.label61 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainC = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainC = new System.Windows.Forms.TrackBar();
-            this.label67 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainL = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainL = new System.Windows.Forms.TrackBar();
-            this.label69 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbAudioInputGainLFE = new System.Windows.Forms.Label();
-            this.tbAudioInputGainLFE = new System.Windows.Forms.TrackBar();
-            this.label53 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainSR = new System.Windows.Forms.Label();
-            this.tbAudioInputGainSR = new System.Windows.Forms.TrackBar();
-            this.label51 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainSL = new System.Windows.Forms.Label();
-            this.tbAudioInputGainSL = new System.Windows.Forms.TrackBar();
-            this.label49 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainR = new System.Windows.Forms.Label();
-            this.tbAudioInputGainR = new System.Windows.Forms.TrackBar();
-            this.label47 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainC = new System.Windows.Forms.Label();
-            this.tbAudioInputGainC = new System.Windows.Forms.TrackBar();
-            this.label44 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainL = new System.Windows.Forms.Label();
-            this.tbAudioInputGainL = new System.Windows.Forms.TrackBar();
-            this.label40 = new System.Windows.Forms.Label();
-            this.cbAudioAutoGain = new System.Windows.Forms.CheckBox();
-            this.cbAudioNormalize = new System.Windows.Forms.CheckBox();
-            this.cbAudioEnhancementEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.label31 = new System.Windows.Forms.Label();
-            this.tabControl18 = new System.Windows.Forms.TabControl();
-            this.tabPage71 = new System.Windows.Forms.TabPage();
-            this.label231 = new System.Windows.Forms.Label();
-            this.label230 = new System.Windows.Forms.Label();
-            this.tbAudAmplifyAmp = new System.Windows.Forms.TrackBar();
-            this.label95 = new System.Windows.Forms.Label();
-            this.cbAudAmplifyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage72 = new System.Windows.Forms.TabPage();
-            this.btAudEqRefresh = new System.Windows.Forms.Button();
-            this.cbAudEqualizerPreset = new System.Windows.Forms.ComboBox();
-            this.label243 = new System.Windows.Forms.Label();
-            this.label242 = new System.Windows.Forms.Label();
-            this.label241 = new System.Windows.Forms.Label();
-            this.label240 = new System.Windows.Forms.Label();
-            this.label239 = new System.Windows.Forms.Label();
-            this.label238 = new System.Windows.Forms.Label();
-            this.label237 = new System.Windows.Forms.Label();
-            this.label236 = new System.Windows.Forms.Label();
-            this.label235 = new System.Windows.Forms.Label();
-            this.label234 = new System.Windows.Forms.Label();
-            this.label233 = new System.Windows.Forms.Label();
-            this.label232 = new System.Windows.Forms.Label();
-            this.tbAudEq9 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq8 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq7 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq6 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq5 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq4 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq3 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq2 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq1 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq0 = new System.Windows.Forms.TrackBar();
-            this.cbAudEqualizerEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage73 = new System.Windows.Forms.TabPage();
-            this.tbAudRelease = new System.Windows.Forms.TrackBar();
-            this.label248 = new System.Windows.Forms.Label();
-            this.label249 = new System.Windows.Forms.Label();
-            this.label246 = new System.Windows.Forms.Label();
-            this.tbAudAttack = new System.Windows.Forms.TrackBar();
-            this.label247 = new System.Windows.Forms.Label();
-            this.label244 = new System.Windows.Forms.Label();
-            this.tbAudDynAmp = new System.Windows.Forms.TrackBar();
-            this.label245 = new System.Windows.Forms.Label();
-            this.cbAudDynamicAmplifyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage75 = new System.Windows.Forms.TabPage();
-            this.tbAud3DSound = new System.Windows.Forms.TrackBar();
-            this.label253 = new System.Windows.Forms.Label();
-            this.cbAudSound3DEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage76 = new System.Windows.Forms.TabPage();
-            this.tbAudTrueBass = new System.Windows.Forms.TrackBar();
-            this.label254 = new System.Windows.Forms.Label();
-            this.cbAudTrueBassEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage27 = new System.Windows.Forms.TabPage();
-            this.tbAudPitchShift = new System.Windows.Forms.TrackBar();
-            this.label36 = new System.Windows.Forms.Label();
-            this.cbAudPitchShiftEnabled = new System.Windows.Forms.CheckBox();
-            this.cbAudioEffectsEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage50 = new System.Windows.Forms.TabPage();
-            this.btAudioChannelMapperClear = new System.Windows.Forms.Button();
-            this.groupBox41 = new System.Windows.Forms.GroupBox();
-            this.btAudioChannelMapperAddNewRoute = new System.Windows.Forms.Button();
-            this.label311 = new System.Windows.Forms.Label();
-            this.tbAudioChannelMapperVolume = new System.Windows.Forms.TrackBar();
-            this.label310 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperTargetChannel = new System.Windows.Forms.TextBox();
-            this.label309 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperSourceChannel = new System.Windows.Forms.TextBox();
-            this.label308 = new System.Windows.Forms.Label();
-            this.label307 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperOutputChannels = new System.Windows.Forms.TextBox();
-            this.label306 = new System.Windows.Forms.Label();
-            this.lbAudioChannelMapperRoutes = new System.Windows.Forms.ListBox();
-            this.cbAudioChannelMapperEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage28 = new System.Windows.Forms.TabPage();
-            this.tbVUMeterBoost = new System.Windows.Forms.TrackBar();
-            this.label382 = new System.Windows.Forms.Label();
-            this.label381 = new System.Windows.Forms.Label();
-            this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
-            this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
-            this.waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.btOSDRenderLayers = new System.Windows.Forms.Button();
-            this.lbOSDLayers = new System.Windows.Forms.CheckedListBox();
-            this.cbOSDEnabled = new System.Windows.Forms.CheckBox();
-            this.groupBox19 = new System.Windows.Forms.GroupBox();
-            this.btOSDClearLayer = new System.Windows.Forms.Button();
-            this.tabControl6 = new System.Windows.Forms.TabControl();
-            this.tabPage30 = new System.Windows.Forms.TabPage();
-            this.btOSDImageDraw = new System.Windows.Forms.Button();
-            this.pnOSDColorKey = new System.Windows.Forms.Panel();
-            this.cbOSDImageTranspColor = new System.Windows.Forms.CheckBox();
-            this.edOSDImageTop = new System.Windows.Forms.TextBox();
-            this.label115 = new System.Windows.Forms.Label();
-            this.edOSDImageLeft = new System.Windows.Forms.TextBox();
-            this.label114 = new System.Windows.Forms.Label();
-            this.btOSDSelectImage = new System.Windows.Forms.Button();
-            this.edOSDImageFilename = new System.Windows.Forms.TextBox();
-            this.label113 = new System.Windows.Forms.Label();
-            this.tabPage31 = new System.Windows.Forms.TabPage();
-            this.edOSDTextTop = new System.Windows.Forms.TextBox();
-            this.label117 = new System.Windows.Forms.Label();
-            this.edOSDTextLeft = new System.Windows.Forms.TextBox();
-            this.label118 = new System.Windows.Forms.Label();
-            this.label116 = new System.Windows.Forms.Label();
-            this.btOSDSelectFont = new System.Windows.Forms.Button();
-            this.edOSDText = new System.Windows.Forms.TextBox();
-            this.btOSDTextDraw = new System.Windows.Forms.Button();
-            this.tabPage32 = new System.Windows.Forms.TabPage();
-            this.tbOSDTranspLevel = new System.Windows.Forms.TrackBar();
-            this.btOSDSetTransp = new System.Windows.Forms.Button();
-            this.label119 = new System.Windows.Forms.Label();
-            this.btOSDClearLayers = new System.Windows.Forms.Button();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.btOSDLayerAdd = new System.Windows.Forms.Button();
-            this.edOSDLayerHeight = new System.Windows.Forms.TextBox();
-            this.label111 = new System.Windows.Forms.Label();
-            this.edOSDLayerWidth = new System.Windows.Forms.TextBox();
-            this.label112 = new System.Windows.Forms.Label();
-            this.edOSDLayerTop = new System.Windows.Forms.TextBox();
-            this.label110 = new System.Windows.Forms.Label();
-            this.edOSDLayerLeft = new System.Windows.Forms.TextBox();
-            this.label109 = new System.Windows.Forms.Label();
-            this.label108 = new System.Windows.Forms.Label();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.tabControl5 = new System.Windows.Forms.TabControl();
-            this.tabPage33 = new System.Windows.Forms.TabPage();
-            this.cbCustomSplitter = new System.Windows.Forms.ComboBox();
-            this.rbSplitterCustom = new System.Windows.Forms.RadioButton();
-            this.rbSplitterDefault = new System.Windows.Forms.RadioButton();
-            this.tabPage34 = new System.Windows.Forms.TabPage();
-            this.rbVideoDecoderVFH264 = new System.Windows.Forms.RadioButton();
-            this.cbCustomVideoDecoder = new System.Windows.Forms.ComboBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.rbVideoDecoderCustom = new System.Windows.Forms.RadioButton();
-            this.rbVideoDecoderFFDShow = new System.Windows.Forms.RadioButton();
-            this.rbVideoDecoderMS = new System.Windows.Forms.RadioButton();
-            this.rbVideoDecoderDefault = new System.Windows.Forms.RadioButton();
-            this.tabPage47 = new System.Windows.Forms.TabPage();
-            this.cbCustomAudioDecoder = new System.Windows.Forms.ComboBox();
-            this.rbAudioDecoderCustom = new System.Windows.Forms.RadioButton();
-            this.rbAudioDecoderDefault = new System.Windows.Forms.RadioButton();
-            this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.tabControl9 = new System.Windows.Forms.TabControl();
-            this.tabPage44 = new System.Windows.Forms.TabPage();
-            this.pbMotionLevel = new System.Windows.Forms.ProgressBar();
-            this.label158 = new System.Windows.Forms.Label();
-            this.mmMotDetMatrix = new System.Windows.Forms.TextBox();
-            this.tabPage45 = new System.Windows.Forms.TabPage();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.cbMotDetHLColor = new System.Windows.Forms.ComboBox();
-            this.label161 = new System.Windows.Forms.Label();
-            this.label160 = new System.Windows.Forms.Label();
-            this.cbMotDetHLEnabled = new System.Windows.Forms.CheckBox();
-            this.tbMotDetHLThreshold = new System.Windows.Forms.TrackBar();
-            this.btMotDetUpdateSettings = new System.Windows.Forms.Button();
-            this.groupBox27 = new System.Windows.Forms.GroupBox();
-            this.edMotDetMatrixHeight = new System.Windows.Forms.TextBox();
-            this.label163 = new System.Windows.Forms.Label();
-            this.edMotDetMatrixWidth = new System.Windows.Forms.TextBox();
-            this.label164 = new System.Windows.Forms.Label();
-            this.groupBox26 = new System.Windows.Forms.GroupBox();
-            this.label162 = new System.Windows.Forms.Label();
-            this.tbMotDetDropFramesThreshold = new System.Windows.Forms.TrackBar();
-            this.cbMotDetDropFramesEnabled = new System.Windows.Forms.CheckBox();
-            this.groupBox24 = new System.Windows.Forms.GroupBox();
-            this.edMotDetFrameInterval = new System.Windows.Forms.TextBox();
-            this.label159 = new System.Windows.Forms.Label();
-            this.cbCompareGreyscale = new System.Windows.Forms.CheckBox();
-            this.cbCompareBlue = new System.Windows.Forms.CheckBox();
-            this.cbCompareGreen = new System.Windows.Forms.CheckBox();
-            this.cbCompareRed = new System.Windows.Forms.CheckBox();
-            this.cbMotDetEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.label505 = new System.Windows.Forms.Label();
-            this.rbMotionDetectionExProcessor = new System.Windows.Forms.ComboBox();
-            this.label389 = new System.Windows.Forms.Label();
-            this.rbMotionDetectionExDetector = new System.Windows.Forms.ComboBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.pbAFMotionLevel = new System.Windows.Forms.ProgressBar();
-            this.cbMotionDetectionEx = new System.Windows.Forms.CheckBox();
-            this.tabPage21 = new System.Windows.Forms.TabPage();
-            this.edBarcodeMetadata = new System.Windows.Forms.TextBox();
-            this.label91 = new System.Windows.Forms.Label();
-            this.cbBarcodeType = new System.Windows.Forms.ComboBox();
-            this.label90 = new System.Windows.Forms.Label();
-            this.btBarcodeReset = new System.Windows.Forms.Button();
-            this.edBarcode = new System.Windows.Forms.TextBox();
-            this.label89 = new System.Windows.Forms.Label();
-            this.cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage23 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox48 = new System.Windows.Forms.GroupBox();
-            this.label343 = new System.Windows.Forms.Label();
-            this.edEncryptionKeyHEX = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyBinary = new System.Windows.Forms.RadioButton();
-            this.btEncryptionOpenFile = new System.Windows.Forms.Button();
-            this.edEncryptionKeyFile = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyFile = new System.Windows.Forms.RadioButton();
-            this.edEncryptionKeyString = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyString = new System.Windows.Forms.RadioButton();
-            this.tabPage24 = new System.Windows.Forms.TabPage();
-            this.btReversePlaybackNextFrame = new System.Windows.Forms.Button();
-            this.btReversePlaybackPrevFrame = new System.Windows.Forms.Button();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.btReversePlayback = new System.Windows.Forms.Button();
-            this.edReversePlaybackCacheSize = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.tbReversePlaybackTrackbar = new System.Windows.Forms.TrackBar();
-            this.label14 = new System.Windows.Forms.Label();
-            this.edFilenameOrURL = new System.Windows.Forms.TextBox();
-            this.btSelectFile = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btPreviousFrame = new System.Windows.Forms.Button();
-            this.cbLoop = new System.Windows.Forms.CheckBox();
-            this.btNextFrame = new System.Windows.Forms.Button();
-            this.btStop = new System.Windows.Forms.Button();
-            this.btPause = new System.Windows.Forms.Button();
-            this.btResume = new System.Windows.Forms.Button();
-            this.btStart = new System.Windows.Forms.Button();
-            this.tbSpeed = new System.Windows.Forms.TrackBar();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lbTime = new System.Windows.Forms.Label();
-            this.tbTimeline = new System.Windows.Forms.TrackBar();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btDVDControlRootMenu = new System.Windows.Forms.Button();
-            this.btDVDControlTitleMenu = new System.Windows.Forms.Button();
-            this.cbDVDControlSubtitles = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.cbDVDControlAudio = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.cbDVDControlChapter = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cbDVDControlTitle = new System.Windows.Forms.ComboBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.cbTelemetry = new System.Windows.Forms.CheckBox();
-            this.mmLog = new System.Windows.Forms.TextBox();
-            this.cbDebugMode = new System.Windows.Forms.CheckBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.tabControl13 = new System.Windows.Forms.TabControl();
-            this.tabPage54 = new System.Windows.Forms.TabPage();
-            this.cbImageType = new System.Windows.Forms.ComboBox();
-            this.lbJPEGQuality = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.btSaveScreenshot = new System.Windows.Forms.Button();
-            this.btSelectScreenshotsFolder = new System.Windows.Forms.Button();
-            this.label63 = new System.Windows.Forms.Label();
-            this.edScreenshotsFolder = new System.Windows.Forms.TextBox();
-            this.tbJPEGQuality = new System.Windows.Forms.TrackBar();
-            this.tabPage55 = new System.Windows.Forms.TabPage();
-            this.edScreenshotHeight = new System.Windows.Forms.TextBox();
-            this.label176 = new System.Windows.Forms.Label();
-            this.edScreenshotWidth = new System.Windows.Forms.TextBox();
-            this.label177 = new System.Windows.Forms.Label();
-            this.cbScreenshotResize = new System.Windows.Forms.CheckBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label29 = new System.Windows.Forms.Label();
-            this.cbSourceMode = new System.Windows.Forms.ComboBox();
-            this.lbSourceFiles = new System.Windows.Forms.ListBox();
-            this.mnPlaylist = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnPlaylistRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnPlaylistRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.label30 = new System.Windows.Forms.Label();
-            this.btAddFileToPlaylist = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label37 = new System.Windows.Forms.Label();
-            this.edCustomSourceFilter = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.cbScrollingText = new System.Windows.Forms.CheckBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPage20.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.tabPage49.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgTags)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.tabControl4.SuspendLayout();
-            this.tabPage16.SuspendLayout();
-            this.groupBox28.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.tabPage17.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabControl17.SuspendLayout();
-            this.tabPage68.SuspendLayout();
-            this.tabControl7.SuspendLayout();
-            this.tabPage29.SuspendLayout();
-            this.tabPage42.SuspendLayout();
-            this.tabPage18.SuspendLayout();
-            this.groupBox37.SuspendLayout();
-            this.tabPage19.SuspendLayout();
-            this.groupBox40.SuspendLayout();
-            this.groupBox39.SuspendLayout();
-            this.groupBox38.SuspendLayout();
-            this.tabPage22.SuspendLayout();
-            this.groupBox45.SuspendLayout();
-            this.tabPage43.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLiveRotationAngle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaturation)).BeginInit();
-            this.tabPage69.SuspendLayout();
-            this.tabPage59.SuspendLayout();
-            this.tabPage51.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUBlur)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUDarkness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPULightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUSaturation)).BeginInit();
-            this.tabPage8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjSaturation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjHue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjBrightness)).BeginInit();
-            this.tabPage15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeySmoothing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeyThresholdSensitivity)).BeginInit();
-            this.tabPage46.SuspendLayout();
-            this.tabPage48.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioTimeshift)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainLFE)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainL)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainLFE)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainL)).BeginInit();
-            this.tabPage11.SuspendLayout();
-            this.tabControl18.SuspendLayout();
-            this.tabPage71.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).BeginInit();
-            this.tabPage72.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).BeginInit();
-            this.tabPage73.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudRelease)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudDynAmp)).BeginInit();
-            this.tabPage75.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAud3DSound)).BeginInit();
-            this.tabPage76.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudTrueBass)).BeginInit();
-            this.tabPage27.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudPitchShift)).BeginInit();
-            this.tabPage50.SuspendLayout();
-            this.groupBox41.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioChannelMapperVolume)).BeginInit();
-            this.tabPage28.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterBoost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterAmplification)).BeginInit();
-            this.tabPage5.SuspendLayout();
-            this.groupBox19.SuspendLayout();
-            this.tabControl6.SuspendLayout();
-            this.tabPage30.SuspendLayout();
-            this.tabPage31.SuspendLayout();
-            this.tabPage32.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbOSDTranspLevel)).BeginInit();
-            this.groupBox15.SuspendLayout();
-            this.tabPage12.SuspendLayout();
-            this.tabControl5.SuspendLayout();
-            this.tabPage33.SuspendLayout();
-            this.tabPage34.SuspendLayout();
-            this.tabPage47.SuspendLayout();
-            this.tabPage13.SuspendLayout();
-            this.tabControl9.SuspendLayout();
-            this.tabPage44.SuspendLayout();
-            this.tabPage45.SuspendLayout();
-            this.groupBox25.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetHLThreshold)).BeginInit();
-            this.groupBox27.SuspendLayout();
-            this.groupBox26.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetDropFramesThreshold)).BeginInit();
-            this.groupBox24.SuspendLayout();
-            this.tabPage14.SuspendLayout();
-            this.tabPage21.SuspendLayout();
-            this.tabPage23.SuspendLayout();
-            this.groupBox48.SuspendLayout();
-            this.tabPage24.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbReversePlaybackTrackbar)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tabControl13.SuspendLayout();
-            this.tabPage54.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbJPEGQuality)).BeginInit();
-            this.tabPage55.SuspendLayout();
-            this.mnPlaylist.SuspendLayout();
-            this.SuspendLayout();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage20 = new System.Windows.Forms.TabPage();
+            linkLabel2 = new System.Windows.Forms.LinkLabel();
+            linkLabel7 = new System.Windows.Forms.LinkLabel();
+            label25 = new System.Windows.Forms.Label();
+            label20 = new System.Windows.Forms.Label();
+            groupBox6 = new System.Windows.Forms.GroupBox();
+            rbGPUDirect3D = new System.Windows.Forms.RadioButton();
+            rbGPUDXVANative = new System.Windows.Forms.RadioButton();
+            rbGPUDXVACopyBack = new System.Windows.Forms.RadioButton();
+            rbGPUIntel = new System.Windows.Forms.RadioButton();
+            rbGPUNVidia = new System.Windows.Forms.RadioButton();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            cbUseLibMediaInfo = new System.Windows.Forms.CheckBox();
+            btReadInfo = new System.Windows.Forms.Button();
+            tabControl2 = new System.Windows.Forms.TabControl();
+            tabPage6 = new System.Windows.Forms.TabPage();
+            mmInfo = new System.Windows.Forms.TextBox();
+            tabPage49 = new System.Windows.Forms.TabPage();
+            imgTags = new System.Windows.Forms.PictureBox();
+            edTags = new System.Windows.Forms.TextBox();
+            btReadTags = new System.Windows.Forms.Button();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            label10 = new System.Windows.Forms.Label();
+            tbBalance4 = new System.Windows.Forms.TrackBar();
+            label11 = new System.Windows.Forms.Label();
+            tbVolume4 = new System.Windows.Forms.TrackBar();
+            cbAudioStream4 = new System.Windows.Forms.CheckBox();
+            label12 = new System.Windows.Forms.Label();
+            tbBalance3 = new System.Windows.Forms.TrackBar();
+            label13 = new System.Windows.Forms.Label();
+            tbVolume3 = new System.Windows.Forms.TrackBar();
+            cbAudioStream3 = new System.Windows.Forms.CheckBox();
+            label8 = new System.Windows.Forms.Label();
+            tbBalance2 = new System.Windows.Forms.TrackBar();
+            label9 = new System.Windows.Forms.Label();
+            tbVolume2 = new System.Windows.Forms.TrackBar();
+            cbAudioStream2 = new System.Windows.Forms.CheckBox();
+            label7 = new System.Windows.Forms.Label();
+            tbBalance1 = new System.Windows.Forms.TrackBar();
+            label6 = new System.Windows.Forms.Label();
+            tbVolume1 = new System.Windows.Forms.TrackBar();
+            cbAudioStream1 = new System.Windows.Forms.CheckBox();
+            cbPlayAudio = new System.Windows.Forms.CheckBox();
+            cbAudioOutputDevice = new System.Windows.Forms.ComboBox();
+            label5 = new System.Windows.Forms.Label();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            tabControl4 = new System.Windows.Forms.TabControl();
+            tabPage16 = new System.Windows.Forms.TabPage();
+            label393 = new System.Windows.Forms.Label();
+            cbDirect2DRotate = new System.Windows.Forms.ComboBox();
+            pnVideoRendererBGColor = new System.Windows.Forms.Panel();
+            label394 = new System.Windows.Forms.Label();
+            btFullScreen = new System.Windows.Forms.Button();
+            groupBox28 = new System.Windows.Forms.GroupBox();
+            btZoomReset = new System.Windows.Forms.Button();
+            btZoomShiftRight = new System.Windows.Forms.Button();
+            btZoomShiftLeft = new System.Windows.Forms.Button();
+            btZoomOut = new System.Windows.Forms.Button();
+            btZoomIn = new System.Windows.Forms.Button();
+            btZoomShiftDown = new System.Windows.Forms.Button();
+            btZoomShiftUp = new System.Windows.Forms.Button();
+            cbScreenFlipVertical = new System.Windows.Forms.CheckBox();
+            cbScreenFlipHorizontal = new System.Windows.Forms.CheckBox();
+            cbStretch = new System.Windows.Forms.CheckBox();
+            groupBox13 = new System.Windows.Forms.GroupBox();
+            rbNDIStreaming = new System.Windows.Forms.RadioButton();
+            rbVirtualCameraOutput = new System.Windows.Forms.RadioButton();
+            rbMadVR = new System.Windows.Forms.RadioButton();
+            rbDirect2D = new System.Windows.Forms.RadioButton();
+            rbNone = new System.Windows.Forms.RadioButton();
+            rbEVR = new System.Windows.Forms.RadioButton();
+            rbVMR9 = new System.Windows.Forms.RadioButton();
+            label15 = new System.Windows.Forms.Label();
+            edAspectRatioY = new System.Windows.Forms.TextBox();
+            edAspectRatioX = new System.Windows.Forms.TextBox();
+            cbAspectRatioUseCustom = new System.Windows.Forms.CheckBox();
+            tabPage17 = new System.Windows.Forms.TabPage();
+            cbMultiscreenDrawOnExternalDisplays = new System.Windows.Forms.CheckBox();
+            cbMultiscreenDrawOnPanels = new System.Windows.Forms.CheckBox();
+            cbFlipHorizontal2 = new System.Windows.Forms.CheckBox();
+            cbFlipVertical2 = new System.Windows.Forms.CheckBox();
+            cbStretch2 = new System.Windows.Forms.CheckBox();
+            cbFlipHorizontal1 = new System.Windows.Forms.CheckBox();
+            cbFlipVertical1 = new System.Windows.Forms.CheckBox();
+            cbStretch1 = new System.Windows.Forms.CheckBox();
+            pnScreen2 = new System.Windows.Forms.Panel();
+            pnScreen1 = new System.Windows.Forms.Panel();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            tabControl17 = new System.Windows.Forms.TabControl();
+            tabPage68 = new System.Windows.Forms.TabPage();
+            cbScrollingText = new System.Windows.Forms.CheckBox();
+            cbFlipY = new System.Windows.Forms.CheckBox();
+            cbFlipX = new System.Windows.Forms.CheckBox();
+            label201 = new System.Windows.Forms.Label();
+            label200 = new System.Windows.Forms.Label();
+            label199 = new System.Windows.Forms.Label();
+            label198 = new System.Windows.Forms.Label();
+            tabControl7 = new System.Windows.Forms.TabControl();
+            tabPage29 = new System.Windows.Forms.TabPage();
+            btTextLogoRemove = new System.Windows.Forms.Button();
+            btTextLogoEdit = new System.Windows.Forms.Button();
+            lbTextLogos = new System.Windows.Forms.ListBox();
+            btTextLogoAdd = new System.Windows.Forms.Button();
+            tabPage42 = new System.Windows.Forms.TabPage();
+            btImageLogoRemove = new System.Windows.Forms.Button();
+            btImageLogoEdit = new System.Windows.Forms.Button();
+            lbImageLogos = new System.Windows.Forms.ListBox();
+            btImageLogoAdd = new System.Windows.Forms.Button();
+            tabPage18 = new System.Windows.Forms.TabPage();
+            groupBox37 = new System.Windows.Forms.GroupBox();
+            btEffZoomRight = new System.Windows.Forms.Button();
+            btEffZoomLeft = new System.Windows.Forms.Button();
+            btEffZoomOut = new System.Windows.Forms.Button();
+            btEffZoomIn = new System.Windows.Forms.Button();
+            btEffZoomDown = new System.Windows.Forms.Button();
+            btEffZoomUp = new System.Windows.Forms.Button();
+            cbZoom = new System.Windows.Forms.CheckBox();
+            tabPage19 = new System.Windows.Forms.TabPage();
+            groupBox40 = new System.Windows.Forms.GroupBox();
+            edPanDestHeight = new System.Windows.Forms.TextBox();
+            label302 = new System.Windows.Forms.Label();
+            edPanDestWidth = new System.Windows.Forms.TextBox();
+            label303 = new System.Windows.Forms.Label();
+            edPanDestTop = new System.Windows.Forms.TextBox();
+            label304 = new System.Windows.Forms.Label();
+            edPanDestLeft = new System.Windows.Forms.TextBox();
+            label305 = new System.Windows.Forms.Label();
+            groupBox39 = new System.Windows.Forms.GroupBox();
+            edPanSourceHeight = new System.Windows.Forms.TextBox();
+            label298 = new System.Windows.Forms.Label();
+            edPanSourceWidth = new System.Windows.Forms.TextBox();
+            label299 = new System.Windows.Forms.Label();
+            edPanSourceTop = new System.Windows.Forms.TextBox();
+            label300 = new System.Windows.Forms.Label();
+            edPanSourceLeft = new System.Windows.Forms.TextBox();
+            label301 = new System.Windows.Forms.Label();
+            groupBox38 = new System.Windows.Forms.GroupBox();
+            edPanStopTime = new System.Windows.Forms.TextBox();
+            label296 = new System.Windows.Forms.Label();
+            edPanStartTime = new System.Windows.Forms.TextBox();
+            label297 = new System.Windows.Forms.Label();
+            cbPan = new System.Windows.Forms.CheckBox();
+            tabPage22 = new System.Windows.Forms.TabPage();
+            rbFadeOut = new System.Windows.Forms.RadioButton();
+            rbFadeIn = new System.Windows.Forms.RadioButton();
+            groupBox45 = new System.Windows.Forms.GroupBox();
+            edFadeInOutStopTime = new System.Windows.Forms.TextBox();
+            label329 = new System.Windows.Forms.Label();
+            edFadeInOutStartTime = new System.Windows.Forms.TextBox();
+            label330 = new System.Windows.Forms.Label();
+            cbFadeInOut = new System.Windows.Forms.CheckBox();
+            tabPage43 = new System.Windows.Forms.TabPage();
+            cbLiveRotationStretch = new System.Windows.Forms.CheckBox();
+            label392 = new System.Windows.Forms.Label();
+            label391 = new System.Windows.Forms.Label();
+            tbLiveRotationAngle = new System.Windows.Forms.TrackBar();
+            label390 = new System.Windows.Forms.Label();
+            cbLiveRotation = new System.Windows.Forms.CheckBox();
+            tbContrast = new System.Windows.Forms.TrackBar();
+            tbDarkness = new System.Windows.Forms.TrackBar();
+            tbLightness = new System.Windows.Forms.TrackBar();
+            tbSaturation = new System.Windows.Forms.TrackBar();
+            cbInvert = new System.Windows.Forms.CheckBox();
+            cbGreyscale = new System.Windows.Forms.CheckBox();
+            cbVideoEffects = new System.Windows.Forms.CheckBox();
+            tabPage69 = new System.Windows.Forms.TabPage();
+            label211 = new System.Windows.Forms.Label();
+            edDeintTriangleWeight = new System.Windows.Forms.TextBox();
+            label212 = new System.Windows.Forms.Label();
+            label210 = new System.Windows.Forms.Label();
+            label209 = new System.Windows.Forms.Label();
+            label206 = new System.Windows.Forms.Label();
+            edDeintBlendConstants2 = new System.Windows.Forms.TextBox();
+            label207 = new System.Windows.Forms.Label();
+            edDeintBlendConstants1 = new System.Windows.Forms.TextBox();
+            label208 = new System.Windows.Forms.Label();
+            label204 = new System.Windows.Forms.Label();
+            edDeintBlendThreshold2 = new System.Windows.Forms.TextBox();
+            label205 = new System.Windows.Forms.Label();
+            edDeintBlendThreshold1 = new System.Windows.Forms.TextBox();
+            label203 = new System.Windows.Forms.Label();
+            label202 = new System.Windows.Forms.Label();
+            edDeintCAVTThreshold = new System.Windows.Forms.TextBox();
+            label104 = new System.Windows.Forms.Label();
+            rbDeintTriangleEnabled = new System.Windows.Forms.RadioButton();
+            rbDeintBlendEnabled = new System.Windows.Forms.RadioButton();
+            rbDeintCAVTEnabled = new System.Windows.Forms.RadioButton();
+            cbDeinterlace = new System.Windows.Forms.CheckBox();
+            tabPage59 = new System.Windows.Forms.TabPage();
+            rbDenoiseCAST = new System.Windows.Forms.RadioButton();
+            rbDenoiseMosquito = new System.Windows.Forms.RadioButton();
+            cbDenoise = new System.Windows.Forms.CheckBox();
+            tabPage51 = new System.Windows.Forms.TabPage();
+            label22 = new System.Windows.Forms.Label();
+            tbGPUBlur = new System.Windows.Forms.TrackBar();
+            cbVideoEffectsGPUEnabled = new System.Windows.Forms.CheckBox();
+            cbGPUOldMovie = new System.Windows.Forms.CheckBox();
+            cbGPUDeinterlace = new System.Windows.Forms.CheckBox();
+            cbGPUDenoise = new System.Windows.Forms.CheckBox();
+            cbGPUPixelate = new System.Windows.Forms.CheckBox();
+            cbGPUNightVision = new System.Windows.Forms.CheckBox();
+            label383 = new System.Windows.Forms.Label();
+            label384 = new System.Windows.Forms.Label();
+            label385 = new System.Windows.Forms.Label();
+            label386 = new System.Windows.Forms.Label();
+            tbGPUContrast = new System.Windows.Forms.TrackBar();
+            tbGPUDarkness = new System.Windows.Forms.TrackBar();
+            tbGPULightness = new System.Windows.Forms.TrackBar();
+            tbGPUSaturation = new System.Windows.Forms.TrackBar();
+            cbGPUInvert = new System.Windows.Forms.CheckBox();
+            cbGPUGreyscale = new System.Windows.Forms.CheckBox();
+            tabPage8 = new System.Windows.Forms.TabPage();
+            lbAdjSaturationCurrent = new System.Windows.Forms.Label();
+            lbAdjSaturationMax = new System.Windows.Forms.Label();
+            lbAdjSaturationMin = new System.Windows.Forms.Label();
+            tbAdjSaturation = new System.Windows.Forms.TrackBar();
+            label45 = new System.Windows.Forms.Label();
+            lbAdjHueCurrent = new System.Windows.Forms.Label();
+            lbAdjHueMax = new System.Windows.Forms.Label();
+            lbAdjHueMin = new System.Windows.Forms.Label();
+            tbAdjHue = new System.Windows.Forms.TrackBar();
+            label41 = new System.Windows.Forms.Label();
+            lbAdjContrastCurrent = new System.Windows.Forms.Label();
+            lbAdjContrastMax = new System.Windows.Forms.Label();
+            lbAdjContrastMin = new System.Windows.Forms.Label();
+            tbAdjContrast = new System.Windows.Forms.TrackBar();
+            label23 = new System.Windows.Forms.Label();
+            lbAdjBrightnessCurrent = new System.Windows.Forms.Label();
+            lbAdjBrightnessMax = new System.Windows.Forms.Label();
+            lbAdjBrightnessMin = new System.Windows.Forms.Label();
+            tbAdjBrightness = new System.Windows.Forms.TrackBar();
+            label24 = new System.Windows.Forms.Label();
+            tabPage15 = new System.Windows.Forms.TabPage();
+            pnChromaKeyColor = new System.Windows.Forms.Panel();
+            btChromaKeySelectBGImage = new System.Windows.Forms.Button();
+            edChromaKeyImage = new System.Windows.Forms.TextBox();
+            label216 = new System.Windows.Forms.Label();
+            label215 = new System.Windows.Forms.Label();
+            tbChromaKeySmoothing = new System.Windows.Forms.TrackBar();
+            label214 = new System.Windows.Forms.Label();
+            tbChromaKeyThresholdSensitivity = new System.Windows.Forms.TrackBar();
+            label213 = new System.Windows.Forms.Label();
+            cbChromaKeyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage46 = new System.Windows.Forms.TabPage();
+            btFilterDelete = new System.Windows.Forms.Button();
+            btFilterDeleteAll = new System.Windows.Forms.Button();
+            btFilterSettings2 = new System.Windows.Forms.Button();
+            lbFilters = new System.Windows.Forms.ListBox();
+            label106 = new System.Windows.Forms.Label();
+            btFilterSettings = new System.Windows.Forms.Button();
+            btFilterAdd = new System.Windows.Forms.Button();
+            cbFilters = new System.Windows.Forms.ComboBox();
+            label105 = new System.Windows.Forms.Label();
+            tabPage48 = new System.Windows.Forms.TabPage();
+            lbAudioTimeshift = new System.Windows.Forms.Label();
+            tbAudioTimeshift = new System.Windows.Forms.TrackBar();
+            label70 = new System.Windows.Forms.Label();
+            groupBox4 = new System.Windows.Forms.GroupBox();
+            lbAudioOutputGainLFE = new System.Windows.Forms.Label();
+            tbAudioOutputGainLFE = new System.Windows.Forms.TrackBar();
+            label55 = new System.Windows.Forms.Label();
+            lbAudioOutputGainSR = new System.Windows.Forms.Label();
+            tbAudioOutputGainSR = new System.Windows.Forms.TrackBar();
+            label57 = new System.Windows.Forms.Label();
+            lbAudioOutputGainSL = new System.Windows.Forms.Label();
+            tbAudioOutputGainSL = new System.Windows.Forms.TrackBar();
+            label59 = new System.Windows.Forms.Label();
+            lbAudioOutputGainR = new System.Windows.Forms.Label();
+            tbAudioOutputGainR = new System.Windows.Forms.TrackBar();
+            label61 = new System.Windows.Forms.Label();
+            lbAudioOutputGainC = new System.Windows.Forms.Label();
+            tbAudioOutputGainC = new System.Windows.Forms.TrackBar();
+            label67 = new System.Windows.Forms.Label();
+            lbAudioOutputGainL = new System.Windows.Forms.Label();
+            tbAudioOutputGainL = new System.Windows.Forms.TrackBar();
+            label69 = new System.Windows.Forms.Label();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            lbAudioInputGainLFE = new System.Windows.Forms.Label();
+            tbAudioInputGainLFE = new System.Windows.Forms.TrackBar();
+            label53 = new System.Windows.Forms.Label();
+            lbAudioInputGainSR = new System.Windows.Forms.Label();
+            tbAudioInputGainSR = new System.Windows.Forms.TrackBar();
+            label51 = new System.Windows.Forms.Label();
+            lbAudioInputGainSL = new System.Windows.Forms.Label();
+            tbAudioInputGainSL = new System.Windows.Forms.TrackBar();
+            label49 = new System.Windows.Forms.Label();
+            lbAudioInputGainR = new System.Windows.Forms.Label();
+            tbAudioInputGainR = new System.Windows.Forms.TrackBar();
+            label47 = new System.Windows.Forms.Label();
+            lbAudioInputGainC = new System.Windows.Forms.Label();
+            tbAudioInputGainC = new System.Windows.Forms.TrackBar();
+            label44 = new System.Windows.Forms.Label();
+            lbAudioInputGainL = new System.Windows.Forms.Label();
+            tbAudioInputGainL = new System.Windows.Forms.TrackBar();
+            label40 = new System.Windows.Forms.Label();
+            cbAudioAutoGain = new System.Windows.Forms.CheckBox();
+            cbAudioNormalize = new System.Windows.Forms.CheckBox();
+            cbAudioEnhancementEnabled = new System.Windows.Forms.CheckBox();
+            tabPage11 = new System.Windows.Forms.TabPage();
+            label31 = new System.Windows.Forms.Label();
+            tabControl18 = new System.Windows.Forms.TabControl();
+            tabPage71 = new System.Windows.Forms.TabPage();
+            label231 = new System.Windows.Forms.Label();
+            label230 = new System.Windows.Forms.Label();
+            tbAudAmplifyAmp = new System.Windows.Forms.TrackBar();
+            label95 = new System.Windows.Forms.Label();
+            cbAudAmplifyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage72 = new System.Windows.Forms.TabPage();
+            btAudEqRefresh = new System.Windows.Forms.Button();
+            cbAudEqualizerPreset = new System.Windows.Forms.ComboBox();
+            label243 = new System.Windows.Forms.Label();
+            label242 = new System.Windows.Forms.Label();
+            label241 = new System.Windows.Forms.Label();
+            label240 = new System.Windows.Forms.Label();
+            label239 = new System.Windows.Forms.Label();
+            label238 = new System.Windows.Forms.Label();
+            label237 = new System.Windows.Forms.Label();
+            label236 = new System.Windows.Forms.Label();
+            label235 = new System.Windows.Forms.Label();
+            label234 = new System.Windows.Forms.Label();
+            label233 = new System.Windows.Forms.Label();
+            label232 = new System.Windows.Forms.Label();
+            tbAudEq9 = new System.Windows.Forms.TrackBar();
+            tbAudEq8 = new System.Windows.Forms.TrackBar();
+            tbAudEq7 = new System.Windows.Forms.TrackBar();
+            tbAudEq6 = new System.Windows.Forms.TrackBar();
+            tbAudEq5 = new System.Windows.Forms.TrackBar();
+            tbAudEq4 = new System.Windows.Forms.TrackBar();
+            tbAudEq3 = new System.Windows.Forms.TrackBar();
+            tbAudEq2 = new System.Windows.Forms.TrackBar();
+            tbAudEq1 = new System.Windows.Forms.TrackBar();
+            tbAudEq0 = new System.Windows.Forms.TrackBar();
+            cbAudEqualizerEnabled = new System.Windows.Forms.CheckBox();
+            tabPage73 = new System.Windows.Forms.TabPage();
+            tbAudRelease = new System.Windows.Forms.TrackBar();
+            label248 = new System.Windows.Forms.Label();
+            label249 = new System.Windows.Forms.Label();
+            label246 = new System.Windows.Forms.Label();
+            tbAudAttack = new System.Windows.Forms.TrackBar();
+            label247 = new System.Windows.Forms.Label();
+            label244 = new System.Windows.Forms.Label();
+            tbAudDynAmp = new System.Windows.Forms.TrackBar();
+            label245 = new System.Windows.Forms.Label();
+            cbAudDynamicAmplifyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage75 = new System.Windows.Forms.TabPage();
+            tbAud3DSound = new System.Windows.Forms.TrackBar();
+            label253 = new System.Windows.Forms.Label();
+            cbAudSound3DEnabled = new System.Windows.Forms.CheckBox();
+            tabPage76 = new System.Windows.Forms.TabPage();
+            tbAudTrueBass = new System.Windows.Forms.TrackBar();
+            label254 = new System.Windows.Forms.Label();
+            cbAudTrueBassEnabled = new System.Windows.Forms.CheckBox();
+            tabPage27 = new System.Windows.Forms.TabPage();
+            tbAudPitchShift = new System.Windows.Forms.TrackBar();
+            label36 = new System.Windows.Forms.Label();
+            cbAudPitchShiftEnabled = new System.Windows.Forms.CheckBox();
+            cbAudioEffectsEnabled = new System.Windows.Forms.CheckBox();
+            tabPage50 = new System.Windows.Forms.TabPage();
+            btAudioChannelMapperClear = new System.Windows.Forms.Button();
+            groupBox41 = new System.Windows.Forms.GroupBox();
+            btAudioChannelMapperAddNewRoute = new System.Windows.Forms.Button();
+            label311 = new System.Windows.Forms.Label();
+            tbAudioChannelMapperVolume = new System.Windows.Forms.TrackBar();
+            label310 = new System.Windows.Forms.Label();
+            edAudioChannelMapperTargetChannel = new System.Windows.Forms.TextBox();
+            label309 = new System.Windows.Forms.Label();
+            edAudioChannelMapperSourceChannel = new System.Windows.Forms.TextBox();
+            label308 = new System.Windows.Forms.Label();
+            label307 = new System.Windows.Forms.Label();
+            edAudioChannelMapperOutputChannels = new System.Windows.Forms.TextBox();
+            label306 = new System.Windows.Forms.Label();
+            lbAudioChannelMapperRoutes = new System.Windows.Forms.ListBox();
+            cbAudioChannelMapperEnabled = new System.Windows.Forms.CheckBox();
+            tabPage28 = new System.Windows.Forms.TabPage();
+            tbVUMeterBoost = new System.Windows.Forms.TrackBar();
+            label382 = new System.Windows.Forms.Label();
+            label381 = new System.Windows.Forms.Label();
+            tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
+            cbVUMeterPro = new System.Windows.Forms.CheckBox();
+            waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            btOSDRenderLayers = new System.Windows.Forms.Button();
+            lbOSDLayers = new System.Windows.Forms.CheckedListBox();
+            cbOSDEnabled = new System.Windows.Forms.CheckBox();
+            groupBox19 = new System.Windows.Forms.GroupBox();
+            btOSDClearLayer = new System.Windows.Forms.Button();
+            tabControl6 = new System.Windows.Forms.TabControl();
+            tabPage30 = new System.Windows.Forms.TabPage();
+            btOSDImageDraw = new System.Windows.Forms.Button();
+            pnOSDColorKey = new System.Windows.Forms.Panel();
+            cbOSDImageTranspColor = new System.Windows.Forms.CheckBox();
+            edOSDImageTop = new System.Windows.Forms.TextBox();
+            label115 = new System.Windows.Forms.Label();
+            edOSDImageLeft = new System.Windows.Forms.TextBox();
+            label114 = new System.Windows.Forms.Label();
+            btOSDSelectImage = new System.Windows.Forms.Button();
+            edOSDImageFilename = new System.Windows.Forms.TextBox();
+            label113 = new System.Windows.Forms.Label();
+            tabPage31 = new System.Windows.Forms.TabPage();
+            edOSDTextTop = new System.Windows.Forms.TextBox();
+            label117 = new System.Windows.Forms.Label();
+            edOSDTextLeft = new System.Windows.Forms.TextBox();
+            label118 = new System.Windows.Forms.Label();
+            label116 = new System.Windows.Forms.Label();
+            btOSDSelectFont = new System.Windows.Forms.Button();
+            edOSDText = new System.Windows.Forms.TextBox();
+            btOSDTextDraw = new System.Windows.Forms.Button();
+            tabPage32 = new System.Windows.Forms.TabPage();
+            tbOSDTranspLevel = new System.Windows.Forms.TrackBar();
+            btOSDSetTransp = new System.Windows.Forms.Button();
+            label119 = new System.Windows.Forms.Label();
+            btOSDClearLayers = new System.Windows.Forms.Button();
+            groupBox15 = new System.Windows.Forms.GroupBox();
+            btOSDLayerAdd = new System.Windows.Forms.Button();
+            edOSDLayerHeight = new System.Windows.Forms.TextBox();
+            label111 = new System.Windows.Forms.Label();
+            edOSDLayerWidth = new System.Windows.Forms.TextBox();
+            label112 = new System.Windows.Forms.Label();
+            edOSDLayerTop = new System.Windows.Forms.TextBox();
+            label110 = new System.Windows.Forms.Label();
+            edOSDLayerLeft = new System.Windows.Forms.TextBox();
+            label109 = new System.Windows.Forms.Label();
+            label108 = new System.Windows.Forms.Label();
+            tabPage12 = new System.Windows.Forms.TabPage();
+            tabControl5 = new System.Windows.Forms.TabControl();
+            tabPage33 = new System.Windows.Forms.TabPage();
+            cbCustomSplitter = new System.Windows.Forms.ComboBox();
+            rbSplitterCustom = new System.Windows.Forms.RadioButton();
+            rbSplitterDefault = new System.Windows.Forms.RadioButton();
+            tabPage34 = new System.Windows.Forms.TabPage();
+            rbVideoDecoderVFH264 = new System.Windows.Forms.RadioButton();
+            cbCustomVideoDecoder = new System.Windows.Forms.ComboBox();
+            label28 = new System.Windows.Forms.Label();
+            label27 = new System.Windows.Forms.Label();
+            label26 = new System.Windows.Forms.Label();
+            rbVideoDecoderCustom = new System.Windows.Forms.RadioButton();
+            rbVideoDecoderFFDShow = new System.Windows.Forms.RadioButton();
+            rbVideoDecoderMS = new System.Windows.Forms.RadioButton();
+            rbVideoDecoderDefault = new System.Windows.Forms.RadioButton();
+            tabPage47 = new System.Windows.Forms.TabPage();
+            cbCustomAudioDecoder = new System.Windows.Forms.ComboBox();
+            rbAudioDecoderCustom = new System.Windows.Forms.RadioButton();
+            rbAudioDecoderDefault = new System.Windows.Forms.RadioButton();
+            tabPage13 = new System.Windows.Forms.TabPage();
+            tabControl9 = new System.Windows.Forms.TabControl();
+            tabPage44 = new System.Windows.Forms.TabPage();
+            pbMotionLevel = new System.Windows.Forms.ProgressBar();
+            label158 = new System.Windows.Forms.Label();
+            mmMotDetMatrix = new System.Windows.Forms.TextBox();
+            tabPage45 = new System.Windows.Forms.TabPage();
+            groupBox25 = new System.Windows.Forms.GroupBox();
+            cbMotDetHLColor = new System.Windows.Forms.ComboBox();
+            label161 = new System.Windows.Forms.Label();
+            label160 = new System.Windows.Forms.Label();
+            cbMotDetHLEnabled = new System.Windows.Forms.CheckBox();
+            tbMotDetHLThreshold = new System.Windows.Forms.TrackBar();
+            btMotDetUpdateSettings = new System.Windows.Forms.Button();
+            groupBox27 = new System.Windows.Forms.GroupBox();
+            edMotDetMatrixHeight = new System.Windows.Forms.TextBox();
+            label163 = new System.Windows.Forms.Label();
+            edMotDetMatrixWidth = new System.Windows.Forms.TextBox();
+            label164 = new System.Windows.Forms.Label();
+            groupBox26 = new System.Windows.Forms.GroupBox();
+            label162 = new System.Windows.Forms.Label();
+            tbMotDetDropFramesThreshold = new System.Windows.Forms.TrackBar();
+            cbMotDetDropFramesEnabled = new System.Windows.Forms.CheckBox();
+            groupBox24 = new System.Windows.Forms.GroupBox();
+            edMotDetFrameInterval = new System.Windows.Forms.TextBox();
+            label159 = new System.Windows.Forms.Label();
+            cbCompareGreyscale = new System.Windows.Forms.CheckBox();
+            cbCompareBlue = new System.Windows.Forms.CheckBox();
+            cbCompareGreen = new System.Windows.Forms.CheckBox();
+            cbCompareRed = new System.Windows.Forms.CheckBox();
+            cbMotDetEnabled = new System.Windows.Forms.CheckBox();
+            tabPage14 = new System.Windows.Forms.TabPage();
+            label505 = new System.Windows.Forms.Label();
+            rbMotionDetectionExProcessor = new System.Windows.Forms.ComboBox();
+            label389 = new System.Windows.Forms.Label();
+            rbMotionDetectionExDetector = new System.Windows.Forms.ComboBox();
+            label64 = new System.Windows.Forms.Label();
+            label65 = new System.Windows.Forms.Label();
+            pbAFMotionLevel = new System.Windows.Forms.ProgressBar();
+            cbMotionDetectionEx = new System.Windows.Forms.CheckBox();
+            tabPage21 = new System.Windows.Forms.TabPage();
+            edBarcodeMetadata = new System.Windows.Forms.TextBox();
+            label91 = new System.Windows.Forms.Label();
+            cbBarcodeType = new System.Windows.Forms.ComboBox();
+            label90 = new System.Windows.Forms.Label();
+            btBarcodeReset = new System.Windows.Forms.Button();
+            edBarcode = new System.Windows.Forms.TextBox();
+            label89 = new System.Windows.Forms.Label();
+            cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
+            tabPage23 = new System.Windows.Forms.TabPage();
+            textBox1 = new System.Windows.Forms.TextBox();
+            groupBox48 = new System.Windows.Forms.GroupBox();
+            label343 = new System.Windows.Forms.Label();
+            edEncryptionKeyHEX = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyBinary = new System.Windows.Forms.RadioButton();
+            btEncryptionOpenFile = new System.Windows.Forms.Button();
+            edEncryptionKeyFile = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyFile = new System.Windows.Forms.RadioButton();
+            edEncryptionKeyString = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyString = new System.Windows.Forms.RadioButton();
+            tabPage24 = new System.Windows.Forms.TabPage();
+            btReversePlaybackNextFrame = new System.Windows.Forms.Button();
+            btReversePlaybackPrevFrame = new System.Windows.Forms.Button();
+            label34 = new System.Windows.Forms.Label();
+            label33 = new System.Windows.Forms.Label();
+            btReversePlayback = new System.Windows.Forms.Button();
+            edReversePlaybackCacheSize = new System.Windows.Forms.TextBox();
+            label32 = new System.Windows.Forms.Label();
+            tbReversePlaybackTrackbar = new System.Windows.Forms.TrackBar();
+            label14 = new System.Windows.Forms.Label();
+            edFilenameOrURL = new System.Windows.Forms.TextBox();
+            btSelectFile = new System.Windows.Forms.Button();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            btPreviousFrame = new System.Windows.Forms.Button();
+            cbLoop = new System.Windows.Forms.CheckBox();
+            btNextFrame = new System.Windows.Forms.Button();
+            btStop = new System.Windows.Forms.Button();
+            btPause = new System.Windows.Forms.Button();
+            btResume = new System.Windows.Forms.Button();
+            btStart = new System.Windows.Forms.Button();
+            tbSpeed = new System.Windows.Forms.TrackBar();
+            label16 = new System.Windows.Forms.Label();
+            lbTime = new System.Windows.Forms.Label();
+            tbTimeline = new System.Windows.Forms.TrackBar();
+            tabControl3 = new System.Windows.Forms.TabControl();
+            tabPage10 = new System.Windows.Forms.TabPage();
+            cbTelemetry = new System.Windows.Forms.CheckBox();
+            mmLog = new System.Windows.Forms.TextBox();
+            cbDebugMode = new System.Windows.Forms.CheckBox();
+            tabPage9 = new System.Windows.Forms.TabPage();
+            tabControl13 = new System.Windows.Forms.TabControl();
+            tabPage54 = new System.Windows.Forms.TabPage();
+            cbImageType = new System.Windows.Forms.ComboBox();
+            lbJPEGQuality = new System.Windows.Forms.Label();
+            label38 = new System.Windows.Forms.Label();
+            btSaveScreenshot = new System.Windows.Forms.Button();
+            btSelectScreenshotsFolder = new System.Windows.Forms.Button();
+            label63 = new System.Windows.Forms.Label();
+            edScreenshotsFolder = new System.Windows.Forms.TextBox();
+            tbJPEGQuality = new System.Windows.Forms.TrackBar();
+            tabPage55 = new System.Windows.Forms.TabPage();
+            edScreenshotHeight = new System.Windows.Forms.TextBox();
+            label176 = new System.Windows.Forms.Label();
+            edScreenshotWidth = new System.Windows.Forms.TextBox();
+            label177 = new System.Windows.Forms.Label();
+            cbScreenshotResize = new System.Windows.Forms.CheckBox();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            fontDialog1 = new System.Windows.Forms.FontDialog();
+            openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            colorDialog1 = new System.Windows.Forms.ColorDialog();
+            timer1 = new System.Windows.Forms.Timer(components);
+            label29 = new System.Windows.Forms.Label();
+            cbSourceMode = new System.Windows.Forms.ComboBox();
+            lbSourceFiles = new System.Windows.Forms.ListBox();
+            mnPlaylist = new System.Windows.Forms.ContextMenuStrip(components);
+            mnPlaylistRemove = new System.Windows.Forms.ToolStripMenuItem();
+            mnPlaylistRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
+            label30 = new System.Windows.Forms.Label();
+            btAddFileToPlaylist = new System.Windows.Forms.Button();
+            linkLabel1 = new System.Windows.Forms.LinkLabel();
+            label37 = new System.Windows.Forms.Label();
+            edCustomSourceFilter = new System.Windows.Forms.TextBox();
+            VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            tabControl1.SuspendLayout();
+            tabPage20.SuspendLayout();
+            groupBox6.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabPage6.SuspendLayout();
+            tabPage49.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)imgTags).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbBalance4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).BeginInit();
+            tabPage3.SuspendLayout();
+            tabControl4.SuspendLayout();
+            tabPage16.SuspendLayout();
+            groupBox28.SuspendLayout();
+            groupBox13.SuspendLayout();
+            tabPage17.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabControl17.SuspendLayout();
+            tabPage68.SuspendLayout();
+            tabControl7.SuspendLayout();
+            tabPage29.SuspendLayout();
+            tabPage42.SuspendLayout();
+            tabPage18.SuspendLayout();
+            groupBox37.SuspendLayout();
+            tabPage19.SuspendLayout();
+            groupBox40.SuspendLayout();
+            groupBox39.SuspendLayout();
+            groupBox38.SuspendLayout();
+            tabPage22.SuspendLayout();
+            groupBox45.SuspendLayout();
+            tabPage43.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbLiveRotationAngle).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbDarkness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbLightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSaturation).BeginInit();
+            tabPage69.SuspendLayout();
+            tabPage59.SuspendLayout();
+            tabPage51.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGPUBlur).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUDarkness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPULightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUSaturation).BeginInit();
+            tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAdjSaturation).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjHue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjBrightness).BeginInit();
+            tabPage15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeySmoothing).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeyThresholdSensitivity).BeginInit();
+            tabPage46.SuspendLayout();
+            tabPage48.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioTimeshift).BeginInit();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainLFE).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainC).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainL).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainLFE).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainC).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainL).BeginInit();
+            tabPage11.SuspendLayout();
+            tabControl18.SuspendLayout();
+            tabPage71.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).BeginInit();
+            tabPage72.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).BeginInit();
+            tabPage73.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudRelease).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudAttack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudDynAmp).BeginInit();
+            tabPage75.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAud3DSound).BeginInit();
+            tabPage76.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudTrueBass).BeginInit();
+            tabPage27.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudPitchShift).BeginInit();
+            tabPage50.SuspendLayout();
+            groupBox41.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioChannelMapperVolume).BeginInit();
+            tabPage28.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterBoost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterAmplification).BeginInit();
+            tabPage5.SuspendLayout();
+            groupBox19.SuspendLayout();
+            tabControl6.SuspendLayout();
+            tabPage30.SuspendLayout();
+            tabPage31.SuspendLayout();
+            tabPage32.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbOSDTranspLevel).BeginInit();
+            groupBox15.SuspendLayout();
+            tabPage12.SuspendLayout();
+            tabControl5.SuspendLayout();
+            tabPage33.SuspendLayout();
+            tabPage34.SuspendLayout();
+            tabPage47.SuspendLayout();
+            tabPage13.SuspendLayout();
+            tabControl9.SuspendLayout();
+            tabPage44.SuspendLayout();
+            tabPage45.SuspendLayout();
+            groupBox25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetHLThreshold).BeginInit();
+            groupBox27.SuspendLayout();
+            groupBox26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetDropFramesThreshold).BeginInit();
+            groupBox24.SuspendLayout();
+            tabPage14.SuspendLayout();
+            tabPage21.SuspendLayout();
+            tabPage23.SuspendLayout();
+            groupBox48.SuspendLayout();
+            tabPage24.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbReversePlaybackTrackbar).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
+            tabControl3.SuspendLayout();
+            tabPage10.SuspendLayout();
+            tabPage9.SuspendLayout();
+            tabControl13.SuspendLayout();
+            tabPage54.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbJPEGQuality).BeginInit();
+            tabPage55.SuspendLayout();
+            mnPlaylist.SuspendLayout();
+            SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage20);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage48);
-            this.tabControl1.Controls.Add(this.tabPage11);
-            this.tabControl1.Controls.Add(this.tabPage50);
-            this.tabControl1.Controls.Add(this.tabPage28);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage12);
-            this.tabControl1.Controls.Add(this.tabPage13);
-            this.tabControl1.Controls.Add(this.tabPage14);
-            this.tabControl1.Controls.Add(this.tabPage21);
-            this.tabControl1.Controls.Add(this.tabPage23);
-            this.tabControl1.Controls.Add(this.tabPage24);
-            this.tabControl1.Location = new System.Drawing.Point(20, 22);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(516, 996);
-            this.tabControl1.TabIndex = 1;
+            tabControl1.Controls.Add(tabPage20);
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage48);
+            tabControl1.Controls.Add(tabPage11);
+            tabControl1.Controls.Add(tabPage50);
+            tabControl1.Controls.Add(tabPage28);
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage12);
+            tabControl1.Controls.Add(tabPage13);
+            tabControl1.Controls.Add(tabPage14);
+            tabControl1.Controls.Add(tabPage21);
+            tabControl1.Controls.Add(tabPage23);
+            tabControl1.Controls.Add(tabPage24);
+            tabControl1.Location = new System.Drawing.Point(20, 22);
+            tabControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(516, 995);
+            tabControl1.TabIndex = 1;
             // 
             // tabPage20
             // 
-            this.tabPage20.Controls.Add(this.linkLabel2);
-            this.tabPage20.Controls.Add(this.linkLabel7);
-            this.tabPage20.Controls.Add(this.label25);
-            this.tabPage20.Controls.Add(this.label20);
-            this.tabPage20.Controls.Add(this.groupBox6);
-            this.tabPage20.Location = new System.Drawing.Point(4, 34);
-            this.tabPage20.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage20.Name = "tabPage20";
-            this.tabPage20.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage20.Size = new System.Drawing.Size(508, 958);
-            this.tabPage20.TabIndex = 15;
-            this.tabPage20.Text = "Source mode";
-            this.tabPage20.UseVisualStyleBackColor = true;
+            tabPage20.Controls.Add(linkLabel2);
+            tabPage20.Controls.Add(linkLabel7);
+            tabPage20.Controls.Add(label25);
+            tabPage20.Controls.Add(label20);
+            tabPage20.Controls.Add(groupBox6);
+            tabPage20.Location = new System.Drawing.Point(4, 34);
+            tabPage20.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage20.Name = "tabPage20";
+            tabPage20.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage20.Size = new System.Drawing.Size(508, 957);
+            tabPage20.TabIndex = 15;
+            tabPage20.Text = "Source mode";
+            tabPage20.UseVisualStyleBackColor = true;
             // 
             // linkLabel2
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(190, 286);
-            this.linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(40, 25);
-            this.linkLabel2.TabIndex = 85;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "x64";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            linkLabel2.AutoSize = true;
+            linkLabel2.Location = new System.Drawing.Point(190, 286);
+            linkLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new System.Drawing.Size(40, 25);
+            linkLabel2.TabIndex = 85;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "x64";
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // linkLabel7
             // 
-            this.linkLabel7.AutoSize = true;
-            this.linkLabel7.Location = new System.Drawing.Point(140, 286);
-            this.linkLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel7.Name = "linkLabel7";
-            this.linkLabel7.Size = new System.Drawing.Size(40, 25);
-            this.linkLabel7.TabIndex = 84;
-            this.linkLabel7.TabStop = true;
-            this.linkLabel7.Text = "x86";
-            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            linkLabel7.AutoSize = true;
+            linkLabel7.Location = new System.Drawing.Point(140, 286);
+            linkLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel7.Name = "linkLabel7";
+            linkLabel7.Size = new System.Drawing.Size(40, 25);
+            linkLabel7.TabIndex = 84;
+            linkLabel7.TabStop = true;
+            linkLabel7.Text = "x86";
+            linkLabel7.LinkClicked += linkLabel7_LinkClicked;
             // 
             // label25
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(22, 286);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(104, 25);
-            this.label25.TabIndex = 83;
-            this.label25.Text = "VLC engine ";
+            label25.AutoSize = true;
+            label25.Location = new System.Drawing.Point(22, 286);
+            label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label25.Name = "label25";
+            label25.Size = new System.Drawing.Size(104, 25);
+            label25.TabIndex = 83;
+            label25.Text = "VLC engine ";
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(22, 246);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(430, 25);
-            this.label20.TabIndex = 82;
-            this.label20.Text = "Please install VLC redist EXE or NuGet package to use";
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(22, 245);
+            label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(430, 25);
+            label20.TabIndex = 82;
+            label20.Text = "Please install VLC redist EXE or NuGet package to use";
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.rbGPUDirect3D);
-            this.groupBox6.Controls.Add(this.rbGPUDXVANative);
-            this.groupBox6.Controls.Add(this.rbGPUDXVACopyBack);
-            this.groupBox6.Controls.Add(this.rbGPUIntel);
-            this.groupBox6.Controls.Add(this.rbGPUNVidia);
-            this.groupBox6.Location = new System.Drawing.Point(10, 11);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox6.Size = new System.Drawing.Size(467, 208);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "GPU decoder";
+            groupBox6.Controls.Add(rbGPUDirect3D);
+            groupBox6.Controls.Add(rbGPUDXVANative);
+            groupBox6.Controls.Add(rbGPUDXVACopyBack);
+            groupBox6.Controls.Add(rbGPUIntel);
+            groupBox6.Controls.Add(rbGPUNVidia);
+            groupBox6.Location = new System.Drawing.Point(10, 11);
+            groupBox6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox6.Size = new System.Drawing.Size(468, 208);
+            groupBox6.TabIndex = 1;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "GPU decoder";
             // 
             // rbGPUDirect3D
             // 
-            this.rbGPUDirect3D.AutoSize = true;
-            this.rbGPUDirect3D.Location = new System.Drawing.Point(22, 140);
-            this.rbGPUDirect3D.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbGPUDirect3D.Name = "rbGPUDirect3D";
-            this.rbGPUDirect3D.Size = new System.Drawing.Size(131, 29);
-            this.rbGPUDirect3D.TabIndex = 4;
-            this.rbGPUDirect3D.Text = "Direct3D 11";
-            this.rbGPUDirect3D.UseVisualStyleBackColor = true;
+            rbGPUDirect3D.AutoSize = true;
+            rbGPUDirect3D.Location = new System.Drawing.Point(22, 141);
+            rbGPUDirect3D.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbGPUDirect3D.Name = "rbGPUDirect3D";
+            rbGPUDirect3D.Size = new System.Drawing.Size(131, 29);
+            rbGPUDirect3D.TabIndex = 4;
+            rbGPUDirect3D.Text = "Direct3D 11";
+            rbGPUDirect3D.UseVisualStyleBackColor = true;
             // 
             // rbGPUDXVANative
             // 
-            this.rbGPUDXVANative.AutoSize = true;
-            this.rbGPUDXVANative.Location = new System.Drawing.Point(218, 96);
-            this.rbGPUDXVANative.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbGPUDXVANative.Name = "rbGPUDXVANative";
-            this.rbGPUDXVANative.Size = new System.Drawing.Size(154, 29);
-            this.rbGPUDXVANative.TabIndex = 3;
-            this.rbGPUDXVANative.Text = "DXVA2 (native)";
-            this.rbGPUDXVANative.UseVisualStyleBackColor = true;
+            rbGPUDXVANative.AutoSize = true;
+            rbGPUDXVANative.Location = new System.Drawing.Point(218, 95);
+            rbGPUDXVANative.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbGPUDXVANative.Name = "rbGPUDXVANative";
+            rbGPUDXVANative.Size = new System.Drawing.Size(154, 29);
+            rbGPUDXVANative.TabIndex = 3;
+            rbGPUDXVANative.Text = "DXVA2 (native)";
+            rbGPUDXVANative.UseVisualStyleBackColor = true;
             // 
             // rbGPUDXVACopyBack
             // 
-            this.rbGPUDXVACopyBack.AutoSize = true;
-            this.rbGPUDXVACopyBack.Checked = true;
-            this.rbGPUDXVACopyBack.Location = new System.Drawing.Point(22, 96);
-            this.rbGPUDXVACopyBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbGPUDXVACopyBack.Name = "rbGPUDXVACopyBack";
-            this.rbGPUDXVACopyBack.Size = new System.Drawing.Size(190, 29);
-            this.rbGPUDXVACopyBack.TabIndex = 2;
-            this.rbGPUDXVACopyBack.TabStop = true;
-            this.rbGPUDXVACopyBack.Text = "DXVA2 (copy-back)";
-            this.rbGPUDXVACopyBack.UseVisualStyleBackColor = true;
+            rbGPUDXVACopyBack.AutoSize = true;
+            rbGPUDXVACopyBack.Checked = true;
+            rbGPUDXVACopyBack.Location = new System.Drawing.Point(22, 95);
+            rbGPUDXVACopyBack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbGPUDXVACopyBack.Name = "rbGPUDXVACopyBack";
+            rbGPUDXVACopyBack.Size = new System.Drawing.Size(190, 29);
+            rbGPUDXVACopyBack.TabIndex = 2;
+            rbGPUDXVACopyBack.TabStop = true;
+            rbGPUDXVACopyBack.Text = "DXVA2 (copy-back)";
+            rbGPUDXVACopyBack.UseVisualStyleBackColor = true;
             // 
             // rbGPUIntel
             // 
-            this.rbGPUIntel.AutoSize = true;
-            this.rbGPUIntel.Location = new System.Drawing.Point(218, 52);
-            this.rbGPUIntel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbGPUIntel.Name = "rbGPUIntel";
-            this.rbGPUIntel.Size = new System.Drawing.Size(157, 29);
-            this.rbGPUIntel.TabIndex = 1;
-            this.rbGPUIntel.Text = "Intel QuickSync";
-            this.rbGPUIntel.UseVisualStyleBackColor = true;
+            rbGPUIntel.AutoSize = true;
+            rbGPUIntel.Location = new System.Drawing.Point(218, 52);
+            rbGPUIntel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbGPUIntel.Name = "rbGPUIntel";
+            rbGPUIntel.Size = new System.Drawing.Size(157, 29);
+            rbGPUIntel.TabIndex = 1;
+            rbGPUIntel.Text = "Intel QuickSync";
+            rbGPUIntel.UseVisualStyleBackColor = true;
             // 
             // rbGPUNVidia
             // 
-            this.rbGPUNVidia.AutoSize = true;
-            this.rbGPUNVidia.Location = new System.Drawing.Point(22, 52);
-            this.rbGPUNVidia.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbGPUNVidia.Name = "rbGPUNVidia";
-            this.rbGPUNVidia.Size = new System.Drawing.Size(143, 29);
-            this.rbGPUNVidia.TabIndex = 0;
-            this.rbGPUNVidia.Text = "nVidia CUVID";
-            this.rbGPUNVidia.UseVisualStyleBackColor = true;
+            rbGPUNVidia.AutoSize = true;
+            rbGPUNVidia.Location = new System.Drawing.Point(22, 52);
+            rbGPUNVidia.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbGPUNVidia.Name = "rbGPUNVidia";
+            rbGPUNVidia.Size = new System.Drawing.Size(143, 29);
+            rbGPUNVidia.TabIndex = 0;
+            rbGPUNVidia.Text = "nVidia CUVID";
+            rbGPUNVidia.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.cbUseLibMediaInfo);
-            this.tabPage1.Controls.Add(this.btReadInfo);
-            this.tabPage1.Controls.Add(this.tabControl2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 34);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage1.Size = new System.Drawing.Size(508, 958);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Info";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(cbUseLibMediaInfo);
+            tabPage1.Controls.Add(btReadInfo);
+            tabPage1.Controls.Add(tabControl2);
+            tabPage1.Location = new System.Drawing.Point(4, 34);
+            tabPage1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage1.Size = new System.Drawing.Size(508, 957);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Info";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // cbUseLibMediaInfo
             // 
-            this.cbUseLibMediaInfo.AutoSize = true;
-            this.cbUseLibMediaInfo.Checked = true;
-            this.cbUseLibMediaInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUseLibMediaInfo.Location = new System.Drawing.Point(24, 718);
-            this.cbUseLibMediaInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbUseLibMediaInfo.Name = "cbUseLibMediaInfo";
-            this.cbUseLibMediaInfo.Size = new System.Drawing.Size(172, 29);
-            this.cbUseLibMediaInfo.TabIndex = 2;
-            this.cbUseLibMediaInfo.Text = "Use libMediaInfo";
-            this.cbUseLibMediaInfo.UseVisualStyleBackColor = true;
+            cbUseLibMediaInfo.AutoSize = true;
+            cbUseLibMediaInfo.Checked = true;
+            cbUseLibMediaInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbUseLibMediaInfo.Location = new System.Drawing.Point(24, 719);
+            cbUseLibMediaInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbUseLibMediaInfo.Name = "cbUseLibMediaInfo";
+            cbUseLibMediaInfo.Size = new System.Drawing.Size(172, 29);
+            cbUseLibMediaInfo.TabIndex = 2;
+            cbUseLibMediaInfo.Text = "Use libMediaInfo";
+            cbUseLibMediaInfo.UseVisualStyleBackColor = true;
             // 
             // btReadInfo
             // 
-            this.btReadInfo.Location = new System.Drawing.Point(24, 842);
-            this.btReadInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btReadInfo.Name = "btReadInfo";
-            this.btReadInfo.Size = new System.Drawing.Size(124, 44);
-            this.btReadInfo.TabIndex = 1;
-            this.btReadInfo.Text = "Read info";
-            this.btReadInfo.UseVisualStyleBackColor = true;
-            this.btReadInfo.Click += new System.EventHandler(this.btReadInfo_Click);
+            btReadInfo.Location = new System.Drawing.Point(24, 842);
+            btReadInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btReadInfo.Name = "btReadInfo";
+            btReadInfo.Size = new System.Drawing.Size(124, 44);
+            btReadInfo.TabIndex = 1;
+            btReadInfo.Text = "Read info";
+            btReadInfo.UseVisualStyleBackColor = true;
+            btReadInfo.Click += btReadInfo_Click;
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Controls.Add(this.tabPage7);
-            this.tabControl2.Controls.Add(this.tabPage49);
-            this.tabControl2.Location = new System.Drawing.Point(27, 31);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(453, 658);
-            this.tabControl2.TabIndex = 0;
+            tabControl2.Controls.Add(tabPage6);
+            tabControl2.Controls.Add(tabPage49);
+            tabControl2.Location = new System.Drawing.Point(28, 31);
+            tabControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new System.Drawing.Size(452, 658);
+            tabControl2.TabIndex = 0;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.mmInfo);
-            this.tabPage6.Location = new System.Drawing.Point(4, 34);
-            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage6.Size = new System.Drawing.Size(445, 620);
-            this.tabPage6.TabIndex = 0;
-            this.tabPage6.Text = "File";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            tabPage6.Controls.Add(mmInfo);
+            tabPage6.Location = new System.Drawing.Point(4, 34);
+            tabPage6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage6.Size = new System.Drawing.Size(444, 620);
+            tabPage6.TabIndex = 0;
+            tabPage6.Text = "File";
+            tabPage6.UseVisualStyleBackColor = true;
             // 
             // mmInfo
             // 
-            this.mmInfo.Location = new System.Drawing.Point(27, 39);
-            this.mmInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mmInfo.Multiline = true;
-            this.mmInfo.Name = "mmInfo";
-            this.mmInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmInfo.Size = new System.Drawing.Size(384, 446);
-            this.mmInfo.TabIndex = 0;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.lbDVDTitles);
-            this.tabPage7.Controls.Add(this.cbDVDSubtitles);
-            this.tabPage7.Controls.Add(this.label4);
-            this.tabPage7.Controls.Add(this.cbDVDAudio);
-            this.tabPage7.Controls.Add(this.label3);
-            this.tabPage7.Controls.Add(this.edDVDVideo);
-            this.tabPage7.Controls.Add(this.label2);
-            this.tabPage7.Controls.Add(this.label1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 34);
-            this.tabPage7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage7.Size = new System.Drawing.Size(445, 620);
-            this.tabPage7.TabIndex = 1;
-            this.tabPage7.Text = "DVD";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // lbDVDTitles
-            // 
-            this.lbDVDTitles.FormattingEnabled = true;
-            this.lbDVDTitles.ItemHeight = 25;
-            this.lbDVDTitles.Location = new System.Drawing.Point(30, 68);
-            this.lbDVDTitles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbDVDTitles.Name = "lbDVDTitles";
-            this.lbDVDTitles.Size = new System.Drawing.Size(380, 229);
-            this.lbDVDTitles.TabIndex = 8;
-            this.lbDVDTitles.Click += new System.EventHandler(this.lbDVDTitles_Click);
-            // 
-            // cbDVDSubtitles
-            // 
-            this.cbDVDSubtitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDSubtitles.FormattingEnabled = true;
-            this.cbDVDSubtitles.Location = new System.Drawing.Point(30, 529);
-            this.cbDVDSubtitles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDSubtitles.Name = "cbDVDSubtitles";
-            this.cbDVDSubtitles.Size = new System.Drawing.Size(380, 33);
-            this.cbDVDSubtitles.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 498);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 25);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Subtitles";
-            // 
-            // cbDVDAudio
-            // 
-            this.cbDVDAudio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDAudio.FormattingEnabled = true;
-            this.cbDVDAudio.Location = new System.Drawing.Point(30, 431);
-            this.cbDVDAudio.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDAudio.Name = "cbDVDAudio";
-            this.cbDVDAudio.Size = new System.Drawing.Size(380, 33);
-            this.cbDVDAudio.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 400);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Audio streams";
-            // 
-            // edDVDVideo
-            // 
-            this.edDVDVideo.Location = new System.Drawing.Point(30, 339);
-            this.edDVDVideo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDVDVideo.Name = "edDVDVideo";
-            this.edDVDVideo.Size = new System.Drawing.Size(380, 31);
-            this.edDVDVideo.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 308);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 25);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Video";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 36);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Titles";
+            mmInfo.Location = new System.Drawing.Point(28, 39);
+            mmInfo.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            mmInfo.Multiline = true;
+            mmInfo.Name = "mmInfo";
+            mmInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmInfo.Size = new System.Drawing.Size(384, 446);
+            mmInfo.TabIndex = 0;
             // 
             // tabPage49
             // 
-            this.tabPage49.Controls.Add(this.imgTags);
-            this.tabPage49.Controls.Add(this.edTags);
-            this.tabPage49.Controls.Add(this.btReadTags);
-            this.tabPage49.Location = new System.Drawing.Point(4, 34);
-            this.tabPage49.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage49.Name = "tabPage49";
-            this.tabPage49.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage49.Size = new System.Drawing.Size(445, 620);
-            this.tabPage49.TabIndex = 2;
-            this.tabPage49.Text = "Tags";
-            this.tabPage49.UseVisualStyleBackColor = true;
+            tabPage49.Controls.Add(imgTags);
+            tabPage49.Controls.Add(edTags);
+            tabPage49.Controls.Add(btReadTags);
+            tabPage49.Location = new System.Drawing.Point(4, 34);
+            tabPage49.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage49.Name = "tabPage49";
+            tabPage49.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage49.Size = new System.Drawing.Size(444, 620);
+            tabPage49.TabIndex = 2;
+            tabPage49.Text = "Tags";
+            tabPage49.UseVisualStyleBackColor = true;
             // 
             // imgTags
             // 
-            this.imgTags.Location = new System.Drawing.Point(263, 406);
-            this.imgTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.imgTags.Name = "imgTags";
-            this.imgTags.Size = new System.Drawing.Size(150, 172);
-            this.imgTags.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgTags.TabIndex = 2;
-            this.imgTags.TabStop = false;
+            imgTags.Location = new System.Drawing.Point(262, 406);
+            imgTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            imgTags.Name = "imgTags";
+            imgTags.Size = new System.Drawing.Size(150, 172);
+            imgTags.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            imgTags.TabIndex = 2;
+            imgTags.TabStop = false;
             // 
             // edTags
             // 
-            this.edTags.Location = new System.Drawing.Point(27, 32);
-            this.edTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edTags.Multiline = true;
-            this.edTags.Name = "edTags";
-            this.edTags.Size = new System.Drawing.Size(384, 358);
-            this.edTags.TabIndex = 1;
+            edTags.Location = new System.Drawing.Point(28, 31);
+            edTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTags.Multiline = true;
+            edTags.Name = "edTags";
+            edTags.Size = new System.Drawing.Size(384, 359);
+            edTags.TabIndex = 1;
             // 
             // btReadTags
             // 
-            this.btReadTags.Location = new System.Drawing.Point(27, 535);
-            this.btReadTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btReadTags.Name = "btReadTags";
-            this.btReadTags.Size = new System.Drawing.Size(124, 44);
-            this.btReadTags.TabIndex = 0;
-            this.btReadTags.Text = "Read tags";
-            this.btReadTags.UseVisualStyleBackColor = true;
-            this.btReadTags.Click += new System.EventHandler(this.btReadTags_Click);
+            btReadTags.Location = new System.Drawing.Point(28, 534);
+            btReadTags.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btReadTags.Name = "btReadTags";
+            btReadTags.Size = new System.Drawing.Size(124, 44);
+            btReadTags.TabIndex = 0;
+            btReadTags.Text = "Read tags";
+            btReadTags.UseVisualStyleBackColor = true;
+            btReadTags.Click += btReadTags_Click;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.tbBalance4);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.tbVolume4);
-            this.tabPage2.Controls.Add(this.cbAudioStream4);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.tbBalance3);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.tbVolume3);
-            this.tabPage2.Controls.Add(this.cbAudioStream3);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.tbBalance2);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.tbVolume2);
-            this.tabPage2.Controls.Add(this.cbAudioStream2);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.tbBalance1);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.tbVolume1);
-            this.tabPage2.Controls.Add(this.cbAudioStream1);
-            this.tabPage2.Controls.Add(this.cbPlayAudio);
-            this.tabPage2.Controls.Add(this.cbAudioOutputDevice);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 34);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage2.Size = new System.Drawing.Size(508, 958);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Audio output";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(label10);
+            tabPage2.Controls.Add(tbBalance4);
+            tabPage2.Controls.Add(label11);
+            tabPage2.Controls.Add(tbVolume4);
+            tabPage2.Controls.Add(cbAudioStream4);
+            tabPage2.Controls.Add(label12);
+            tabPage2.Controls.Add(tbBalance3);
+            tabPage2.Controls.Add(label13);
+            tabPage2.Controls.Add(tbVolume3);
+            tabPage2.Controls.Add(cbAudioStream3);
+            tabPage2.Controls.Add(label8);
+            tabPage2.Controls.Add(tbBalance2);
+            tabPage2.Controls.Add(label9);
+            tabPage2.Controls.Add(tbVolume2);
+            tabPage2.Controls.Add(cbAudioStream2);
+            tabPage2.Controls.Add(label7);
+            tabPage2.Controls.Add(tbBalance1);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(tbVolume1);
+            tabPage2.Controls.Add(cbAudioStream1);
+            tabPage2.Controls.Add(cbPlayAudio);
+            tabPage2.Controls.Add(cbAudioOutputDevice);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Location = new System.Drawing.Point(4, 34);
+            tabPage2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage2.Size = new System.Drawing.Size(508, 957);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Audio output";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(322, 600);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 25);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Balance";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(322, 600);
+            label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(71, 25);
+            label10.TabIndex = 22;
+            label10.Text = "Balance";
             // 
             // tbBalance4
             // 
-            this.tbBalance4.BackColor = System.Drawing.SystemColors.Window;
-            this.tbBalance4.Location = new System.Drawing.Point(327, 631);
-            this.tbBalance4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbBalance4.Maximum = 100;
-            this.tbBalance4.Minimum = -100;
-            this.tbBalance4.Name = "tbBalance4";
-            this.tbBalance4.Size = new System.Drawing.Size(142, 69);
-            this.tbBalance4.TabIndex = 21;
-            this.tbBalance4.Scroll += new System.EventHandler(this.tbBalance4_Scroll);
+            tbBalance4.BackColor = System.Drawing.SystemColors.Window;
+            tbBalance4.Location = new System.Drawing.Point(328, 631);
+            tbBalance4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbBalance4.Maximum = 100;
+            tbBalance4.Minimum = -100;
+            tbBalance4.Name = "tbBalance4";
+            tbBalance4.Size = new System.Drawing.Size(142, 69);
+            tbBalance4.TabIndex = 21;
+            tbBalance4.Scroll += tbBalance4_Scroll;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(167, 600);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 25);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Volume";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(168, 600);
+            label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(72, 25);
+            label11.TabIndex = 20;
+            label11.Text = "Volume";
             // 
             // tbVolume4
             // 
-            this.tbVolume4.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume4.Location = new System.Drawing.Point(171, 631);
-            this.tbVolume4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVolume4.Maximum = 100;
-            this.tbVolume4.Name = "tbVolume4";
-            this.tbVolume4.Size = new System.Drawing.Size(142, 69);
-            this.tbVolume4.TabIndex = 19;
-            this.tbVolume4.Value = 85;
-            this.tbVolume4.Scroll += new System.EventHandler(this.tbVolume4_Scroll);
+            tbVolume4.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume4.Location = new System.Drawing.Point(171, 631);
+            tbVolume4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVolume4.Maximum = 100;
+            tbVolume4.Name = "tbVolume4";
+            tbVolume4.Size = new System.Drawing.Size(142, 69);
+            tbVolume4.TabIndex = 19;
+            tbVolume4.Value = 85;
+            tbVolume4.Scroll += tbVolume4_Scroll;
             // 
             // cbAudioStream4
             // 
-            this.cbAudioStream4.AutoSize = true;
-            this.cbAudioStream4.Location = new System.Drawing.Point(31, 571);
-            this.cbAudioStream4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioStream4.Name = "cbAudioStream4";
-            this.cbAudioStream4.Size = new System.Drawing.Size(108, 29);
-            this.cbAudioStream4.TabIndex = 18;
-            this.cbAudioStream4.Text = "Stream 4";
-            this.cbAudioStream4.UseVisualStyleBackColor = true;
-            this.cbAudioStream4.CheckedChanged += new System.EventHandler(this.cbAudioStream4_CheckedChanged);
+            cbAudioStream4.AutoSize = true;
+            cbAudioStream4.Location = new System.Drawing.Point(31, 570);
+            cbAudioStream4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioStream4.Name = "cbAudioStream4";
+            cbAudioStream4.Size = new System.Drawing.Size(108, 29);
+            cbAudioStream4.TabIndex = 18;
+            cbAudioStream4.Text = "Stream 4";
+            cbAudioStream4.UseVisualStyleBackColor = true;
+            cbAudioStream4.CheckedChanged += cbAudioStream4_CheckedChanged;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(322, 472);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(71, 25);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Balance";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(322, 472);
+            label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(71, 25);
+            label12.TabIndex = 17;
+            label12.Text = "Balance";
             // 
             // tbBalance3
             // 
-            this.tbBalance3.BackColor = System.Drawing.SystemColors.Window;
-            this.tbBalance3.Location = new System.Drawing.Point(327, 504);
-            this.tbBalance3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbBalance3.Maximum = 100;
-            this.tbBalance3.Minimum = -100;
-            this.tbBalance3.Name = "tbBalance3";
-            this.tbBalance3.Size = new System.Drawing.Size(142, 69);
-            this.tbBalance3.TabIndex = 16;
-            this.tbBalance3.Scroll += new System.EventHandler(this.tbBalance3_Scroll);
+            tbBalance3.BackColor = System.Drawing.SystemColors.Window;
+            tbBalance3.Location = new System.Drawing.Point(328, 505);
+            tbBalance3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbBalance3.Maximum = 100;
+            tbBalance3.Minimum = -100;
+            tbBalance3.Name = "tbBalance3";
+            tbBalance3.Size = new System.Drawing.Size(142, 69);
+            tbBalance3.TabIndex = 16;
+            tbBalance3.Scroll += tbBalance3_Scroll;
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(167, 472);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(72, 25);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "Volume";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(168, 472);
+            label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(72, 25);
+            label13.TabIndex = 15;
+            label13.Text = "Volume";
             // 
             // tbVolume3
             // 
-            this.tbVolume3.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume3.Location = new System.Drawing.Point(171, 504);
-            this.tbVolume3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVolume3.Maximum = 100;
-            this.tbVolume3.Name = "tbVolume3";
-            this.tbVolume3.Size = new System.Drawing.Size(142, 69);
-            this.tbVolume3.TabIndex = 14;
-            this.tbVolume3.Value = 85;
-            this.tbVolume3.Scroll += new System.EventHandler(this.tbVolume3_Scroll);
+            tbVolume3.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume3.Location = new System.Drawing.Point(171, 505);
+            tbVolume3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVolume3.Maximum = 100;
+            tbVolume3.Name = "tbVolume3";
+            tbVolume3.Size = new System.Drawing.Size(142, 69);
+            tbVolume3.TabIndex = 14;
+            tbVolume3.Value = 85;
+            tbVolume3.Scroll += tbVolume3_Scroll;
             // 
             // cbAudioStream3
             // 
-            this.cbAudioStream3.AutoSize = true;
-            this.cbAudioStream3.Location = new System.Drawing.Point(31, 444);
-            this.cbAudioStream3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioStream3.Name = "cbAudioStream3";
-            this.cbAudioStream3.Size = new System.Drawing.Size(108, 29);
-            this.cbAudioStream3.TabIndex = 13;
-            this.cbAudioStream3.Text = "Stream 3";
-            this.cbAudioStream3.UseVisualStyleBackColor = true;
-            this.cbAudioStream3.CheckedChanged += new System.EventHandler(this.cbAudioStream3_CheckedChanged);
+            cbAudioStream3.AutoSize = true;
+            cbAudioStream3.Location = new System.Drawing.Point(31, 444);
+            cbAudioStream3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioStream3.Name = "cbAudioStream3";
+            cbAudioStream3.Size = new System.Drawing.Size(108, 29);
+            cbAudioStream3.TabIndex = 13;
+            cbAudioStream3.Text = "Stream 3";
+            cbAudioStream3.UseVisualStyleBackColor = true;
+            cbAudioStream3.CheckedChanged += cbAudioStream3_CheckedChanged;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(322, 354);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 25);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Balance";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(322, 355);
+            label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(71, 25);
+            label8.TabIndex = 12;
+            label8.Text = "Balance";
             // 
             // tbBalance2
             // 
-            this.tbBalance2.BackColor = System.Drawing.SystemColors.Window;
-            this.tbBalance2.Location = new System.Drawing.Point(327, 385);
-            this.tbBalance2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbBalance2.Maximum = 100;
-            this.tbBalance2.Minimum = -100;
-            this.tbBalance2.Name = "tbBalance2";
-            this.tbBalance2.Size = new System.Drawing.Size(142, 69);
-            this.tbBalance2.TabIndex = 11;
-            this.tbBalance2.Scroll += new System.EventHandler(this.tbBalance2_Scroll);
+            tbBalance2.BackColor = System.Drawing.SystemColors.Window;
+            tbBalance2.Location = new System.Drawing.Point(328, 384);
+            tbBalance2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbBalance2.Maximum = 100;
+            tbBalance2.Minimum = -100;
+            tbBalance2.Name = "tbBalance2";
+            tbBalance2.Size = new System.Drawing.Size(142, 69);
+            tbBalance2.TabIndex = 11;
+            tbBalance2.Scroll += tbBalance2_Scroll;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(167, 354);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 25);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Volume";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(168, 355);
+            label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(72, 25);
+            label9.TabIndex = 10;
+            label9.Text = "Volume";
             // 
             // tbVolume2
             // 
-            this.tbVolume2.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume2.Location = new System.Drawing.Point(171, 385);
-            this.tbVolume2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVolume2.Maximum = 100;
-            this.tbVolume2.Name = "tbVolume2";
-            this.tbVolume2.Size = new System.Drawing.Size(142, 69);
-            this.tbVolume2.TabIndex = 9;
-            this.tbVolume2.Value = 85;
-            this.tbVolume2.Scroll += new System.EventHandler(this.tbVolume2_Scroll);
+            tbVolume2.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume2.Location = new System.Drawing.Point(171, 384);
+            tbVolume2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVolume2.Maximum = 100;
+            tbVolume2.Name = "tbVolume2";
+            tbVolume2.Size = new System.Drawing.Size(142, 69);
+            tbVolume2.TabIndex = 9;
+            tbVolume2.Value = 85;
+            tbVolume2.Scroll += tbVolume2_Scroll;
             // 
             // cbAudioStream2
             // 
-            this.cbAudioStream2.AutoSize = true;
-            this.cbAudioStream2.Location = new System.Drawing.Point(31, 325);
-            this.cbAudioStream2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioStream2.Name = "cbAudioStream2";
-            this.cbAudioStream2.Size = new System.Drawing.Size(108, 29);
-            this.cbAudioStream2.TabIndex = 8;
-            this.cbAudioStream2.Text = "Stream 2";
-            this.cbAudioStream2.UseVisualStyleBackColor = true;
-            this.cbAudioStream2.CheckedChanged += new System.EventHandler(this.cbAudioStream2_CheckedChanged);
+            cbAudioStream2.AutoSize = true;
+            cbAudioStream2.Location = new System.Drawing.Point(31, 325);
+            cbAudioStream2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioStream2.Name = "cbAudioStream2";
+            cbAudioStream2.Size = new System.Drawing.Size(108, 29);
+            cbAudioStream2.TabIndex = 8;
+            cbAudioStream2.Text = "Stream 2";
+            cbAudioStream2.UseVisualStyleBackColor = true;
+            cbAudioStream2.CheckedChanged += cbAudioStream2_CheckedChanged;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(322, 235);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 25);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Balance";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(322, 234);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(71, 25);
+            label7.TabIndex = 7;
+            label7.Text = "Balance";
             // 
             // tbBalance1
             // 
-            this.tbBalance1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbBalance1.Location = new System.Drawing.Point(327, 265);
-            this.tbBalance1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbBalance1.Maximum = 100;
-            this.tbBalance1.Minimum = -100;
-            this.tbBalance1.Name = "tbBalance1";
-            this.tbBalance1.Size = new System.Drawing.Size(142, 69);
-            this.tbBalance1.TabIndex = 6;
-            this.tbBalance1.Scroll += new System.EventHandler(this.tbBalance1_Scroll);
+            tbBalance1.BackColor = System.Drawing.SystemColors.Window;
+            tbBalance1.Location = new System.Drawing.Point(328, 266);
+            tbBalance1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbBalance1.Maximum = 100;
+            tbBalance1.Minimum = -100;
+            tbBalance1.Name = "tbBalance1";
+            tbBalance1.Size = new System.Drawing.Size(142, 69);
+            tbBalance1.TabIndex = 6;
+            tbBalance1.Scroll += tbBalance1_Scroll;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(167, 235);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 25);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Volume";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(168, 234);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(72, 25);
+            label6.TabIndex = 5;
+            label6.Text = "Volume";
             // 
             // tbVolume1
             // 
-            this.tbVolume1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume1.Location = new System.Drawing.Point(171, 265);
-            this.tbVolume1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVolume1.Maximum = 100;
-            this.tbVolume1.Name = "tbVolume1";
-            this.tbVolume1.Size = new System.Drawing.Size(142, 69);
-            this.tbVolume1.TabIndex = 4;
-            this.tbVolume1.Value = 85;
-            this.tbVolume1.Scroll += new System.EventHandler(this.tbVolume1_Scroll);
+            tbVolume1.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume1.Location = new System.Drawing.Point(171, 266);
+            tbVolume1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVolume1.Maximum = 100;
+            tbVolume1.Name = "tbVolume1";
+            tbVolume1.Size = new System.Drawing.Size(142, 69);
+            tbVolume1.TabIndex = 4;
+            tbVolume1.Value = 85;
+            tbVolume1.Scroll += tbVolume1_Scroll;
             // 
             // cbAudioStream1
             // 
-            this.cbAudioStream1.AutoSize = true;
-            this.cbAudioStream1.Location = new System.Drawing.Point(31, 206);
-            this.cbAudioStream1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioStream1.Name = "cbAudioStream1";
-            this.cbAudioStream1.Size = new System.Drawing.Size(108, 29);
-            this.cbAudioStream1.TabIndex = 3;
-            this.cbAudioStream1.Text = "Stream 1";
-            this.cbAudioStream1.UseVisualStyleBackColor = true;
-            this.cbAudioStream1.CheckedChanged += new System.EventHandler(this.cbAudioStream1_CheckedChanged);
+            cbAudioStream1.AutoSize = true;
+            cbAudioStream1.Location = new System.Drawing.Point(31, 206);
+            cbAudioStream1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioStream1.Name = "cbAudioStream1";
+            cbAudioStream1.Size = new System.Drawing.Size(108, 29);
+            cbAudioStream1.TabIndex = 3;
+            cbAudioStream1.Text = "Stream 1";
+            cbAudioStream1.UseVisualStyleBackColor = true;
+            cbAudioStream1.CheckedChanged += cbAudioStream1_CheckedChanged;
             // 
             // cbPlayAudio
             // 
-            this.cbPlayAudio.AutoSize = true;
-            this.cbPlayAudio.Checked = true;
-            this.cbPlayAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbPlayAudio.Location = new System.Drawing.Point(31, 119);
-            this.cbPlayAudio.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbPlayAudio.Name = "cbPlayAudio";
-            this.cbPlayAudio.Size = new System.Drawing.Size(120, 29);
-            this.cbPlayAudio.TabIndex = 2;
-            this.cbPlayAudio.Text = "Play audio";
-            this.cbPlayAudio.UseVisualStyleBackColor = true;
+            cbPlayAudio.AutoSize = true;
+            cbPlayAudio.Checked = true;
+            cbPlayAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbPlayAudio.Location = new System.Drawing.Point(31, 119);
+            cbPlayAudio.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbPlayAudio.Name = "cbPlayAudio";
+            cbPlayAudio.Size = new System.Drawing.Size(120, 29);
+            cbPlayAudio.TabIndex = 2;
+            cbPlayAudio.Text = "Play audio";
+            cbPlayAudio.UseVisualStyleBackColor = true;
             // 
             // cbAudioOutputDevice
             // 
-            this.cbAudioOutputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAudioOutputDevice.FormattingEnabled = true;
-            this.cbAudioOutputDevice.Location = new System.Drawing.Point(31, 68);
-            this.cbAudioOutputDevice.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioOutputDevice.Name = "cbAudioOutputDevice";
-            this.cbAudioOutputDevice.Size = new System.Drawing.Size(434, 33);
-            this.cbAudioOutputDevice.TabIndex = 1;
+            cbAudioOutputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAudioOutputDevice.FormattingEnabled = true;
+            cbAudioOutputDevice.Location = new System.Drawing.Point(31, 69);
+            cbAudioOutputDevice.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioOutputDevice.Name = "cbAudioOutputDevice";
+            cbAudioOutputDevice.Size = new System.Drawing.Size(434, 33);
+            cbAudioOutputDevice.TabIndex = 1;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 31);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(119, 25);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Audio output";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(28, 31);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(119, 25);
+            label5.TabIndex = 0;
+            label5.Text = "Audio output";
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.tabControl4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 34);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage3.Size = new System.Drawing.Size(508, 958);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Display";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(tabControl4);
+            tabPage3.Location = new System.Drawing.Point(4, 34);
+            tabPage3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage3.Size = new System.Drawing.Size(508, 957);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Display";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabControl4
             // 
-            this.tabControl4.Controls.Add(this.tabPage16);
-            this.tabControl4.Controls.Add(this.tabPage17);
-            this.tabControl4.Location = new System.Drawing.Point(4, 11);
-            this.tabControl4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl4.Name = "tabControl4";
-            this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(487, 922);
-            this.tabControl4.TabIndex = 17;
+            tabControl4.Controls.Add(tabPage16);
+            tabControl4.Controls.Add(tabPage17);
+            tabControl4.Location = new System.Drawing.Point(4, 11);
+            tabControl4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl4.Name = "tabControl4";
+            tabControl4.SelectedIndex = 0;
+            tabControl4.Size = new System.Drawing.Size(488, 922);
+            tabControl4.TabIndex = 17;
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.label393);
-            this.tabPage16.Controls.Add(this.cbDirect2DRotate);
-            this.tabPage16.Controls.Add(this.pnVideoRendererBGColor);
-            this.tabPage16.Controls.Add(this.label394);
-            this.tabPage16.Controls.Add(this.btFullScreen);
-            this.tabPage16.Controls.Add(this.groupBox28);
-            this.tabPage16.Controls.Add(this.cbScreenFlipVertical);
-            this.tabPage16.Controls.Add(this.cbScreenFlipHorizontal);
-            this.tabPage16.Controls.Add(this.cbStretch);
-            this.tabPage16.Controls.Add(this.groupBox13);
-            this.tabPage16.Controls.Add(this.label15);
-            this.tabPage16.Controls.Add(this.edAspectRatioY);
-            this.tabPage16.Controls.Add(this.edAspectRatioX);
-            this.tabPage16.Controls.Add(this.cbAspectRatioUseCustom);
-            this.tabPage16.Location = new System.Drawing.Point(4, 34);
-            this.tabPage16.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage16.Size = new System.Drawing.Size(479, 884);
-            this.tabPage16.TabIndex = 0;
-            this.tabPage16.Text = "Main";
-            this.tabPage16.UseVisualStyleBackColor = true;
+            tabPage16.Controls.Add(label393);
+            tabPage16.Controls.Add(cbDirect2DRotate);
+            tabPage16.Controls.Add(pnVideoRendererBGColor);
+            tabPage16.Controls.Add(label394);
+            tabPage16.Controls.Add(btFullScreen);
+            tabPage16.Controls.Add(groupBox28);
+            tabPage16.Controls.Add(cbScreenFlipVertical);
+            tabPage16.Controls.Add(cbScreenFlipHorizontal);
+            tabPage16.Controls.Add(cbStretch);
+            tabPage16.Controls.Add(groupBox13);
+            tabPage16.Controls.Add(label15);
+            tabPage16.Controls.Add(edAspectRatioY);
+            tabPage16.Controls.Add(edAspectRatioX);
+            tabPage16.Controls.Add(cbAspectRatioUseCustom);
+            tabPage16.Location = new System.Drawing.Point(4, 34);
+            tabPage16.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage16.Name = "tabPage16";
+            tabPage16.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage16.Size = new System.Drawing.Size(480, 884);
+            tabPage16.TabIndex = 0;
+            tabPage16.Text = "Main";
+            tabPage16.UseVisualStyleBackColor = true;
             // 
             // label393
             // 
-            this.label393.AutoSize = true;
-            this.label393.Location = new System.Drawing.Point(236, 611);
-            this.label393.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label393.Name = "label393";
-            this.label393.Size = new System.Drawing.Size(133, 25);
-            this.label393.TabIndex = 35;
-            this.label393.Text = "Direct2D rotate";
+            label393.AutoSize = true;
+            label393.Location = new System.Drawing.Point(236, 611);
+            label393.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label393.Name = "label393";
+            label393.Size = new System.Drawing.Size(133, 25);
+            label393.TabIndex = 35;
+            label393.Text = "Direct2D rotate";
             // 
             // cbDirect2DRotate
             // 
-            this.cbDirect2DRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDirect2DRotate.FormattingEnabled = true;
-            this.cbDirect2DRotate.Items.AddRange(new object[] {
-            "0",
-            "90",
-            "180",
-            "270"});
-            this.cbDirect2DRotate.Location = new System.Drawing.Point(240, 642);
-            this.cbDirect2DRotate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDirect2DRotate.Name = "cbDirect2DRotate";
-            this.cbDirect2DRotate.Size = new System.Drawing.Size(201, 33);
-            this.cbDirect2DRotate.TabIndex = 34;
-            this.cbDirect2DRotate.SelectedIndexChanged += new System.EventHandler(this.cbDirect2DRotate_SelectedIndexChanged);
+            cbDirect2DRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDirect2DRotate.FormattingEnabled = true;
+            cbDirect2DRotate.Items.AddRange(new object[] { "0", "90", "180", "270" });
+            cbDirect2DRotate.Location = new System.Drawing.Point(240, 642);
+            cbDirect2DRotate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDirect2DRotate.Name = "cbDirect2DRotate";
+            cbDirect2DRotate.Size = new System.Drawing.Size(202, 33);
+            cbDirect2DRotate.TabIndex = 34;
+            cbDirect2DRotate.SelectedIndexChanged += cbDirect2DRotate_SelectedIndexChanged;
             // 
             // pnVideoRendererBGColor
             // 
-            this.pnVideoRendererBGColor.BackColor = System.Drawing.Color.Black;
-            this.pnVideoRendererBGColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnVideoRendererBGColor.Location = new System.Drawing.Point(200, 421);
-            this.pnVideoRendererBGColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pnVideoRendererBGColor.Name = "pnVideoRendererBGColor";
-            this.pnVideoRendererBGColor.Size = new System.Drawing.Size(39, 44);
-            this.pnVideoRendererBGColor.TabIndex = 33;
-            this.pnVideoRendererBGColor.Click += new System.EventHandler(this.pnVideoRendererBGColor_Click);
+            pnVideoRendererBGColor.BackColor = System.Drawing.Color.Black;
+            pnVideoRendererBGColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnVideoRendererBGColor.Location = new System.Drawing.Point(200, 420);
+            pnVideoRendererBGColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnVideoRendererBGColor.Name = "pnVideoRendererBGColor";
+            pnVideoRendererBGColor.Size = new System.Drawing.Size(40, 44);
+            pnVideoRendererBGColor.TabIndex = 33;
+            pnVideoRendererBGColor.Click += pnVideoRendererBGColor_Click;
             // 
             // label394
             // 
-            this.label394.AutoSize = true;
-            this.label394.Location = new System.Drawing.Point(22, 431);
-            this.label394.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label394.Name = "label394";
-            this.label394.Size = new System.Drawing.Size(152, 25);
-            this.label394.TabIndex = 32;
-            this.label394.Text = "Background color";
+            label394.AutoSize = true;
+            label394.Location = new System.Drawing.Point(22, 431);
+            label394.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label394.Name = "label394";
+            label394.Size = new System.Drawing.Size(152, 25);
+            label394.TabIndex = 32;
+            label394.Text = "Background color";
             // 
             // btFullScreen
             // 
-            this.btFullScreen.Location = new System.Drawing.Point(240, 694);
-            this.btFullScreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFullScreen.Name = "btFullScreen";
-            this.btFullScreen.Size = new System.Drawing.Size(203, 44);
-            this.btFullScreen.TabIndex = 31;
-            this.btFullScreen.Text = "Full screen";
-            this.btFullScreen.UseVisualStyleBackColor = true;
-            this.btFullScreen.Click += new System.EventHandler(this.btFullScreen_Click);
+            btFullScreen.Location = new System.Drawing.Point(240, 694);
+            btFullScreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFullScreen.Name = "btFullScreen";
+            btFullScreen.Size = new System.Drawing.Size(202, 44);
+            btFullScreen.TabIndex = 31;
+            btFullScreen.Text = "Full screen";
+            btFullScreen.UseVisualStyleBackColor = true;
+            btFullScreen.Click += btFullScreen_Click;
             // 
             // groupBox28
             // 
-            this.groupBox28.Controls.Add(this.btZoomReset);
-            this.groupBox28.Controls.Add(this.btZoomShiftRight);
-            this.groupBox28.Controls.Add(this.btZoomShiftLeft);
-            this.groupBox28.Controls.Add(this.btZoomOut);
-            this.groupBox28.Controls.Add(this.btZoomIn);
-            this.groupBox28.Controls.Add(this.btZoomShiftDown);
-            this.groupBox28.Controls.Add(this.btZoomShiftUp);
-            this.groupBox28.Location = new System.Drawing.Point(27, 611);
-            this.groupBox28.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox28.Name = "groupBox28";
-            this.groupBox28.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox28.Size = new System.Drawing.Size(198, 250);
-            this.groupBox28.TabIndex = 30;
-            this.groupBox28.TabStop = false;
-            this.groupBox28.Text = "Zoom";
+            groupBox28.Controls.Add(btZoomReset);
+            groupBox28.Controls.Add(btZoomShiftRight);
+            groupBox28.Controls.Add(btZoomShiftLeft);
+            groupBox28.Controls.Add(btZoomOut);
+            groupBox28.Controls.Add(btZoomIn);
+            groupBox28.Controls.Add(btZoomShiftDown);
+            groupBox28.Controls.Add(btZoomShiftUp);
+            groupBox28.Location = new System.Drawing.Point(28, 611);
+            groupBox28.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox28.Name = "groupBox28";
+            groupBox28.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox28.Size = new System.Drawing.Size(198, 250);
+            groupBox28.TabIndex = 30;
+            groupBox28.TabStop = false;
+            groupBox28.Text = "Zoom";
             // 
             // btZoomReset
             // 
-            this.btZoomReset.Location = new System.Drawing.Point(58, 194);
-            this.btZoomReset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomReset.Name = "btZoomReset";
-            this.btZoomReset.Size = new System.Drawing.Size(83, 44);
-            this.btZoomReset.TabIndex = 6;
-            this.btZoomReset.Text = "Reset";
-            this.btZoomReset.UseVisualStyleBackColor = true;
-            this.btZoomReset.Click += new System.EventHandler(this.btZoomReset_Click);
+            btZoomReset.Location = new System.Drawing.Point(58, 194);
+            btZoomReset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomReset.Name = "btZoomReset";
+            btZoomReset.Size = new System.Drawing.Size(82, 44);
+            btZoomReset.TabIndex = 6;
+            btZoomReset.Text = "Reset";
+            btZoomReset.UseVisualStyleBackColor = true;
+            btZoomReset.Click += btZoomReset_Click;
             // 
             // btZoomShiftRight
             // 
-            this.btZoomShiftRight.Location = new System.Drawing.Point(142, 64);
-            this.btZoomShiftRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomShiftRight.Name = "btZoomShiftRight";
-            this.btZoomShiftRight.Size = new System.Drawing.Size(36, 92);
-            this.btZoomShiftRight.TabIndex = 5;
-            this.btZoomShiftRight.Text = "R";
-            this.btZoomShiftRight.UseVisualStyleBackColor = true;
-            this.btZoomShiftRight.Click += new System.EventHandler(this.btZoomShiftRight_Click);
+            btZoomShiftRight.Location = new System.Drawing.Point(142, 64);
+            btZoomShiftRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomShiftRight.Name = "btZoomShiftRight";
+            btZoomShiftRight.Size = new System.Drawing.Size(36, 92);
+            btZoomShiftRight.TabIndex = 5;
+            btZoomShiftRight.Text = "R";
+            btZoomShiftRight.UseVisualStyleBackColor = true;
+            btZoomShiftRight.Click += btZoomShiftRight_Click;
             // 
             // btZoomShiftLeft
             // 
-            this.btZoomShiftLeft.Location = new System.Drawing.Point(22, 61);
-            this.btZoomShiftLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomShiftLeft.Name = "btZoomShiftLeft";
-            this.btZoomShiftLeft.Size = new System.Drawing.Size(36, 92);
-            this.btZoomShiftLeft.TabIndex = 4;
-            this.btZoomShiftLeft.Text = "L";
-            this.btZoomShiftLeft.UseVisualStyleBackColor = true;
-            this.btZoomShiftLeft.Click += new System.EventHandler(this.btZoomShiftLeft_Click);
+            btZoomShiftLeft.Location = new System.Drawing.Point(22, 61);
+            btZoomShiftLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomShiftLeft.Name = "btZoomShiftLeft";
+            btZoomShiftLeft.Size = new System.Drawing.Size(36, 92);
+            btZoomShiftLeft.TabIndex = 4;
+            btZoomShiftLeft.Text = "L";
+            btZoomShiftLeft.UseVisualStyleBackColor = true;
+            btZoomShiftLeft.Click += btZoomShiftLeft_Click;
             // 
             // btZoomOut
             // 
-            this.btZoomOut.Location = new System.Drawing.Point(102, 86);
-            this.btZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomOut.Name = "btZoomOut";
-            this.btZoomOut.Size = new System.Drawing.Size(38, 44);
-            this.btZoomOut.TabIndex = 3;
-            this.btZoomOut.Text = "-";
-            this.btZoomOut.UseVisualStyleBackColor = true;
-            this.btZoomOut.Click += new System.EventHandler(this.btZoomOut_Click);
+            btZoomOut.Location = new System.Drawing.Point(102, 86);
+            btZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomOut.Name = "btZoomOut";
+            btZoomOut.Size = new System.Drawing.Size(38, 44);
+            btZoomOut.TabIndex = 3;
+            btZoomOut.Text = "-";
+            btZoomOut.UseVisualStyleBackColor = true;
+            btZoomOut.Click += btZoomOut_Click;
             // 
             // btZoomIn
             // 
-            this.btZoomIn.Location = new System.Drawing.Point(58, 86);
-            this.btZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomIn.Name = "btZoomIn";
-            this.btZoomIn.Size = new System.Drawing.Size(37, 44);
-            this.btZoomIn.TabIndex = 2;
-            this.btZoomIn.Text = "+";
-            this.btZoomIn.UseVisualStyleBackColor = true;
-            this.btZoomIn.Click += new System.EventHandler(this.btZoomIn_Click);
+            btZoomIn.Location = new System.Drawing.Point(58, 86);
+            btZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomIn.Name = "btZoomIn";
+            btZoomIn.Size = new System.Drawing.Size(38, 44);
+            btZoomIn.TabIndex = 2;
+            btZoomIn.Text = "+";
+            btZoomIn.UseVisualStyleBackColor = true;
+            btZoomIn.Click += btZoomIn_Click;
             // 
             // btZoomShiftDown
             // 
-            this.btZoomShiftDown.Location = new System.Drawing.Point(57, 135);
-            this.btZoomShiftDown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomShiftDown.Name = "btZoomShiftDown";
-            this.btZoomShiftDown.Size = new System.Drawing.Size(84, 44);
-            this.btZoomShiftDown.TabIndex = 1;
-            this.btZoomShiftDown.Text = "Down";
-            this.btZoomShiftDown.UseVisualStyleBackColor = true;
-            this.btZoomShiftDown.Click += new System.EventHandler(this.btZoomShiftDown_Click);
+            btZoomShiftDown.Location = new System.Drawing.Point(58, 134);
+            btZoomShiftDown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomShiftDown.Name = "btZoomShiftDown";
+            btZoomShiftDown.Size = new System.Drawing.Size(84, 44);
+            btZoomShiftDown.TabIndex = 1;
+            btZoomShiftDown.Text = "Down";
+            btZoomShiftDown.UseVisualStyleBackColor = true;
+            btZoomShiftDown.Click += btZoomShiftDown_Click;
             // 
             // btZoomShiftUp
             // 
-            this.btZoomShiftUp.Location = new System.Drawing.Point(57, 39);
-            this.btZoomShiftUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btZoomShiftUp.Name = "btZoomShiftUp";
-            this.btZoomShiftUp.Size = new System.Drawing.Size(84, 44);
-            this.btZoomShiftUp.TabIndex = 0;
-            this.btZoomShiftUp.Text = "Up";
-            this.btZoomShiftUp.UseVisualStyleBackColor = true;
-            this.btZoomShiftUp.Click += new System.EventHandler(this.btZoomShiftUp_Click);
+            btZoomShiftUp.Location = new System.Drawing.Point(58, 39);
+            btZoomShiftUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btZoomShiftUp.Name = "btZoomShiftUp";
+            btZoomShiftUp.Size = new System.Drawing.Size(84, 44);
+            btZoomShiftUp.TabIndex = 0;
+            btZoomShiftUp.Text = "Up";
+            btZoomShiftUp.UseVisualStyleBackColor = true;
+            btZoomShiftUp.Click += btZoomShiftUp_Click;
             // 
             // cbScreenFlipVertical
             // 
-            this.cbScreenFlipVertical.AutoSize = true;
-            this.cbScreenFlipVertical.Location = new System.Drawing.Point(293, 468);
-            this.cbScreenFlipVertical.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbScreenFlipVertical.Name = "cbScreenFlipVertical";
-            this.cbScreenFlipVertical.Size = new System.Drawing.Size(126, 29);
-            this.cbScreenFlipVertical.TabIndex = 29;
-            this.cbScreenFlipVertical.Text = "Flip vertical";
-            this.cbScreenFlipVertical.UseVisualStyleBackColor = true;
-            this.cbScreenFlipVertical.CheckedChanged += new System.EventHandler(this.cbScreenFlipVertical_CheckedChanged);
+            cbScreenFlipVertical.AutoSize = true;
+            cbScreenFlipVertical.Location = new System.Drawing.Point(292, 469);
+            cbScreenFlipVertical.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbScreenFlipVertical.Name = "cbScreenFlipVertical";
+            cbScreenFlipVertical.Size = new System.Drawing.Size(126, 29);
+            cbScreenFlipVertical.TabIndex = 29;
+            cbScreenFlipVertical.Text = "Flip vertical";
+            cbScreenFlipVertical.UseVisualStyleBackColor = true;
+            cbScreenFlipVertical.CheckedChanged += cbScreenFlipVertical_CheckedChanged;
             // 
             // cbScreenFlipHorizontal
             // 
-            this.cbScreenFlipHorizontal.AutoSize = true;
-            this.cbScreenFlipHorizontal.Location = new System.Drawing.Point(293, 422);
-            this.cbScreenFlipHorizontal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbScreenFlipHorizontal.Name = "cbScreenFlipHorizontal";
-            this.cbScreenFlipHorizontal.Size = new System.Drawing.Size(150, 29);
-            this.cbScreenFlipHorizontal.TabIndex = 28;
-            this.cbScreenFlipHorizontal.Text = "Flip horizontal";
-            this.cbScreenFlipHorizontal.UseVisualStyleBackColor = true;
-            this.cbScreenFlipHorizontal.CheckedChanged += new System.EventHandler(this.cbScreenFlipHorizontal_CheckedChanged);
+            cbScreenFlipHorizontal.AutoSize = true;
+            cbScreenFlipHorizontal.Location = new System.Drawing.Point(292, 422);
+            cbScreenFlipHorizontal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbScreenFlipHorizontal.Name = "cbScreenFlipHorizontal";
+            cbScreenFlipHorizontal.Size = new System.Drawing.Size(150, 29);
+            cbScreenFlipHorizontal.TabIndex = 28;
+            cbScreenFlipHorizontal.Text = "Flip horizontal";
+            cbScreenFlipHorizontal.UseVisualStyleBackColor = true;
+            cbScreenFlipHorizontal.CheckedChanged += cbScreenFlipHorizontal_CheckedChanged;
             // 
             // cbStretch
             // 
-            this.cbStretch.AutoSize = true;
-            this.cbStretch.Location = new System.Drawing.Point(293, 515);
-            this.cbStretch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbStretch.Name = "cbStretch";
-            this.cbStretch.Size = new System.Drawing.Size(141, 29);
-            this.cbStretch.TabIndex = 27;
-            this.cbStretch.Text = "Stretch video";
-            this.cbStretch.UseVisualStyleBackColor = true;
-            this.cbStretch.CheckedChanged += new System.EventHandler(this.cbStretch_CheckedChanged);
+            cbStretch.AutoSize = true;
+            cbStretch.Location = new System.Drawing.Point(292, 516);
+            cbStretch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbStretch.Name = "cbStretch";
+            cbStretch.Size = new System.Drawing.Size(141, 29);
+            cbStretch.TabIndex = 27;
+            cbStretch.Text = "Stretch video";
+            cbStretch.UseVisualStyleBackColor = true;
+            cbStretch.CheckedChanged += cbStretch_CheckedChanged;
             // 
             // groupBox13
             // 
-            this.groupBox13.Controls.Add(this.rbNDIStreaming);
-            this.groupBox13.Controls.Add(this.rbVirtualCameraOutput);
-            this.groupBox13.Controls.Add(this.rbMadVR);
-            this.groupBox13.Controls.Add(this.rbDirect2D);
-            this.groupBox13.Controls.Add(this.rbNone);
-            this.groupBox13.Controls.Add(this.rbEVR);
-            this.groupBox13.Controls.Add(this.rbVMR9);
-            this.groupBox13.Location = new System.Drawing.Point(27, 11);
-            this.groupBox13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox13.Size = new System.Drawing.Size(417, 368);
-            this.groupBox13.TabIndex = 26;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Video Renderer";
+            groupBox13.Controls.Add(rbNDIStreaming);
+            groupBox13.Controls.Add(rbVirtualCameraOutput);
+            groupBox13.Controls.Add(rbMadVR);
+            groupBox13.Controls.Add(rbDirect2D);
+            groupBox13.Controls.Add(rbNone);
+            groupBox13.Controls.Add(rbEVR);
+            groupBox13.Controls.Add(rbVMR9);
+            groupBox13.Location = new System.Drawing.Point(28, 11);
+            groupBox13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox13.Name = "groupBox13";
+            groupBox13.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox13.Size = new System.Drawing.Size(418, 369);
+            groupBox13.TabIndex = 26;
+            groupBox13.TabStop = false;
+            groupBox13.Text = "Video Renderer";
             // 
             // rbNDIStreaming
             // 
-            this.rbNDIStreaming.AutoSize = true;
-            this.rbNDIStreaming.Location = new System.Drawing.Point(22, 314);
-            this.rbNDIStreaming.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbNDIStreaming.Name = "rbNDIStreaming";
-            this.rbNDIStreaming.Size = new System.Drawing.Size(152, 29);
-            this.rbNDIStreaming.TabIndex = 7;
-            this.rbNDIStreaming.Text = "NDI streaming";
-            this.rbNDIStreaming.UseVisualStyleBackColor = true;
+            rbNDIStreaming.AutoSize = true;
+            rbNDIStreaming.Location = new System.Drawing.Point(22, 314);
+            rbNDIStreaming.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNDIStreaming.Name = "rbNDIStreaming";
+            rbNDIStreaming.Size = new System.Drawing.Size(152, 29);
+            rbNDIStreaming.TabIndex = 7;
+            rbNDIStreaming.Text = "NDI streaming";
+            rbNDIStreaming.UseVisualStyleBackColor = true;
             // 
             // rbVirtualCameraOutput
             // 
-            this.rbVirtualCameraOutput.AutoSize = true;
-            this.rbVirtualCameraOutput.Location = new System.Drawing.Point(22, 270);
-            this.rbVirtualCameraOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVirtualCameraOutput.Name = "rbVirtualCameraOutput";
-            this.rbVirtualCameraOutput.Size = new System.Drawing.Size(274, 29);
-            this.rbVirtualCameraOutput.TabIndex = 6;
-            this.rbVirtualCameraOutput.Text = "Output to Virtual Camera SDK";
-            this.rbVirtualCameraOutput.UseVisualStyleBackColor = true;
+            rbVirtualCameraOutput.AutoSize = true;
+            rbVirtualCameraOutput.Location = new System.Drawing.Point(22, 270);
+            rbVirtualCameraOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVirtualCameraOutput.Name = "rbVirtualCameraOutput";
+            rbVirtualCameraOutput.Size = new System.Drawing.Size(274, 29);
+            rbVirtualCameraOutput.TabIndex = 6;
+            rbVirtualCameraOutput.Text = "Output to Virtual Camera SDK";
+            rbVirtualCameraOutput.UseVisualStyleBackColor = true;
             // 
             // rbMadVR
             // 
-            this.rbMadVR.AutoSize = true;
-            this.rbMadVR.Location = new System.Drawing.Point(22, 181);
-            this.rbMadVR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbMadVR.Name = "rbMadVR";
-            this.rbMadVR.Size = new System.Drawing.Size(176, 29);
-            this.rbMadVR.TabIndex = 5;
-            this.rbMadVR.Text = "madVR (optional)";
-            this.rbMadVR.UseVisualStyleBackColor = true;
+            rbMadVR.AutoSize = true;
+            rbMadVR.Location = new System.Drawing.Point(22, 181);
+            rbMadVR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbMadVR.Name = "rbMadVR";
+            rbMadVR.Size = new System.Drawing.Size(176, 29);
+            rbMadVR.TabIndex = 5;
+            rbMadVR.Text = "madVR (optional)";
+            rbMadVR.UseVisualStyleBackColor = true;
             // 
             // rbDirect2D
             // 
-            this.rbDirect2D.AutoSize = true;
-            this.rbDirect2D.Location = new System.Drawing.Point(22, 136);
-            this.rbDirect2D.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDirect2D.Name = "rbDirect2D";
-            this.rbDirect2D.Size = new System.Drawing.Size(106, 29);
-            this.rbDirect2D.TabIndex = 4;
-            this.rbDirect2D.Text = "Direct2D";
-            this.rbDirect2D.UseVisualStyleBackColor = true;
-            this.rbDirect2D.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbDirect2D.AutoSize = true;
+            rbDirect2D.Location = new System.Drawing.Point(22, 136);
+            rbDirect2D.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDirect2D.Name = "rbDirect2D";
+            rbDirect2D.Size = new System.Drawing.Size(106, 29);
+            rbDirect2D.TabIndex = 4;
+            rbDirect2D.Text = "Direct2D";
+            rbDirect2D.UseVisualStyleBackColor = true;
+            rbDirect2D.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbNone
             // 
-            this.rbNone.AutoSize = true;
-            this.rbNone.Location = new System.Drawing.Point(22, 225);
-            this.rbNone.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbNone.Name = "rbNone";
-            this.rbNone.Size = new System.Drawing.Size(80, 29);
-            this.rbNone.TabIndex = 3;
-            this.rbNone.Text = "None";
-            this.rbNone.UseVisualStyleBackColor = true;
-            this.rbNone.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbNone.AutoSize = true;
+            rbNone.Location = new System.Drawing.Point(22, 225);
+            rbNone.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNone.Name = "rbNone";
+            rbNone.Size = new System.Drawing.Size(80, 29);
+            rbNone.TabIndex = 3;
+            rbNone.Text = "None";
+            rbNone.UseVisualStyleBackColor = true;
+            rbNone.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbEVR
             // 
-            this.rbEVR.AutoSize = true;
-            this.rbEVR.Checked = true;
-            this.rbEVR.Location = new System.Drawing.Point(22, 92);
-            this.rbEVR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbEVR.Name = "rbEVR";
-            this.rbEVR.Size = new System.Drawing.Size(309, 29);
-            this.rbEVR.TabIndex = 2;
-            this.rbEVR.TabStop = true;
-            this.rbEVR.Text = "Enhanced Video Renderer (default)";
-            this.rbEVR.UseVisualStyleBackColor = true;
-            this.rbEVR.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbEVR.AutoSize = true;
+            rbEVR.Checked = true;
+            rbEVR.Location = new System.Drawing.Point(22, 92);
+            rbEVR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEVR.Name = "rbEVR";
+            rbEVR.Size = new System.Drawing.Size(309, 29);
+            rbEVR.TabIndex = 2;
+            rbEVR.TabStop = true;
+            rbEVR.Text = "Enhanced Video Renderer (default)";
+            rbEVR.UseVisualStyleBackColor = true;
+            rbEVR.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbVMR9
             // 
-            this.rbVMR9.AutoSize = true;
-            this.rbVMR9.Location = new System.Drawing.Point(22, 49);
-            this.rbVMR9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVMR9.Name = "rbVMR9";
-            this.rbVMR9.Size = new System.Drawing.Size(231, 29);
-            this.rbVMR9.TabIndex = 1;
-            this.rbVMR9.Text = "Video Mixing Renderer 9";
-            this.rbVMR9.UseVisualStyleBackColor = true;
-            this.rbVMR9.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbVMR9.AutoSize = true;
+            rbVMR9.Location = new System.Drawing.Point(22, 48);
+            rbVMR9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVMR9.Name = "rbVMR9";
+            rbVMR9.Size = new System.Drawing.Size(231, 29);
+            rbVMR9.TabIndex = 1;
+            rbVMR9.Text = "Video Mixing Renderer 9";
+            rbVMR9.UseVisualStyleBackColor = true;
+            rbVMR9.CheckedChanged += rbVR_CheckedChanged;
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(113, 565);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(20, 25);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "x";
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(112, 566);
+            label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(20, 25);
+            label15.TabIndex = 25;
+            label15.Text = "x";
             // 
             // edAspectRatioY
             // 
-            this.edAspectRatioY.Location = new System.Drawing.Point(137, 560);
-            this.edAspectRatioY.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edAspectRatioY.Name = "edAspectRatioY";
-            this.edAspectRatioY.Size = new System.Drawing.Size(47, 31);
-            this.edAspectRatioY.TabIndex = 24;
-            this.edAspectRatioY.Text = "9";
+            edAspectRatioY.Location = new System.Drawing.Point(138, 559);
+            edAspectRatioY.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAspectRatioY.Name = "edAspectRatioY";
+            edAspectRatioY.Size = new System.Drawing.Size(46, 31);
+            edAspectRatioY.TabIndex = 24;
+            edAspectRatioY.Text = "9";
             // 
             // edAspectRatioX
             // 
-            this.edAspectRatioX.Location = new System.Drawing.Point(56, 560);
-            this.edAspectRatioX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edAspectRatioX.Name = "edAspectRatioX";
-            this.edAspectRatioX.Size = new System.Drawing.Size(47, 31);
-            this.edAspectRatioX.TabIndex = 23;
-            this.edAspectRatioX.Text = "16";
+            edAspectRatioX.Location = new System.Drawing.Point(56, 559);
+            edAspectRatioX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAspectRatioX.Name = "edAspectRatioX";
+            edAspectRatioX.Size = new System.Drawing.Size(46, 31);
+            edAspectRatioX.TabIndex = 23;
+            edAspectRatioX.Text = "16";
             // 
             // cbAspectRatioUseCustom
             // 
-            this.cbAspectRatioUseCustom.AutoSize = true;
-            this.cbAspectRatioUseCustom.Location = new System.Drawing.Point(27, 515);
-            this.cbAspectRatioUseCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAspectRatioUseCustom.Name = "cbAspectRatioUseCustom";
-            this.cbAspectRatioUseCustom.Size = new System.Drawing.Size(228, 29);
-            this.cbAspectRatioUseCustom.TabIndex = 22;
-            this.cbAspectRatioUseCustom.Text = "Use custom aspect ratio";
-            this.cbAspectRatioUseCustom.UseVisualStyleBackColor = true;
-            this.cbAspectRatioUseCustom.CheckedChanged += new System.EventHandler(this.cbAspectRatioUseCustom_CheckedChanged);
+            cbAspectRatioUseCustom.AutoSize = true;
+            cbAspectRatioUseCustom.Location = new System.Drawing.Point(28, 516);
+            cbAspectRatioUseCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAspectRatioUseCustom.Name = "cbAspectRatioUseCustom";
+            cbAspectRatioUseCustom.Size = new System.Drawing.Size(228, 29);
+            cbAspectRatioUseCustom.TabIndex = 22;
+            cbAspectRatioUseCustom.Text = "Use custom aspect ratio";
+            cbAspectRatioUseCustom.UseVisualStyleBackColor = true;
+            cbAspectRatioUseCustom.CheckedChanged += cbAspectRatioUseCustom_CheckedChanged;
             // 
             // tabPage17
             // 
-            this.tabPage17.Controls.Add(this.cbMultiscreenDrawOnExternalDisplays);
-            this.tabPage17.Controls.Add(this.cbMultiscreenDrawOnPanels);
-            this.tabPage17.Controls.Add(this.cbFlipHorizontal2);
-            this.tabPage17.Controls.Add(this.cbFlipVertical2);
-            this.tabPage17.Controls.Add(this.cbStretch2);
-            this.tabPage17.Controls.Add(this.cbFlipHorizontal1);
-            this.tabPage17.Controls.Add(this.cbFlipVertical1);
-            this.tabPage17.Controls.Add(this.cbStretch1);
-            this.tabPage17.Controls.Add(this.pnScreen2);
-            this.tabPage17.Controls.Add(this.pnScreen1);
-            this.tabPage17.Location = new System.Drawing.Point(4, 34);
-            this.tabPage17.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage17.Size = new System.Drawing.Size(479, 884);
-            this.tabPage17.TabIndex = 1;
-            this.tabPage17.Text = "Multiscreen";
-            this.tabPage17.UseVisualStyleBackColor = true;
+            tabPage17.Controls.Add(cbMultiscreenDrawOnExternalDisplays);
+            tabPage17.Controls.Add(cbMultiscreenDrawOnPanels);
+            tabPage17.Controls.Add(cbFlipHorizontal2);
+            tabPage17.Controls.Add(cbFlipVertical2);
+            tabPage17.Controls.Add(cbStretch2);
+            tabPage17.Controls.Add(cbFlipHorizontal1);
+            tabPage17.Controls.Add(cbFlipVertical1);
+            tabPage17.Controls.Add(cbStretch1);
+            tabPage17.Controls.Add(pnScreen2);
+            tabPage17.Controls.Add(pnScreen1);
+            tabPage17.Location = new System.Drawing.Point(4, 34);
+            tabPage17.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage17.Name = "tabPage17";
+            tabPage17.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage17.Size = new System.Drawing.Size(480, 884);
+            tabPage17.TabIndex = 1;
+            tabPage17.Text = "Multiscreen";
+            tabPage17.UseVisualStyleBackColor = true;
             // 
             // cbMultiscreenDrawOnExternalDisplays
             // 
-            this.cbMultiscreenDrawOnExternalDisplays.AutoSize = true;
-            this.cbMultiscreenDrawOnExternalDisplays.Location = new System.Drawing.Point(17, 65);
-            this.cbMultiscreenDrawOnExternalDisplays.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMultiscreenDrawOnExternalDisplays.Name = "cbMultiscreenDrawOnExternalDisplays";
-            this.cbMultiscreenDrawOnExternalDisplays.Size = new System.Drawing.Size(289, 29);
-            this.cbMultiscreenDrawOnExternalDisplays.TabIndex = 23;
-            this.cbMultiscreenDrawOnExternalDisplays.Text = "Draw video on external displays";
-            this.cbMultiscreenDrawOnExternalDisplays.UseVisualStyleBackColor = true;
+            cbMultiscreenDrawOnExternalDisplays.AutoSize = true;
+            cbMultiscreenDrawOnExternalDisplays.Location = new System.Drawing.Point(18, 66);
+            cbMultiscreenDrawOnExternalDisplays.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMultiscreenDrawOnExternalDisplays.Name = "cbMultiscreenDrawOnExternalDisplays";
+            cbMultiscreenDrawOnExternalDisplays.Size = new System.Drawing.Size(289, 29);
+            cbMultiscreenDrawOnExternalDisplays.TabIndex = 23;
+            cbMultiscreenDrawOnExternalDisplays.Text = "Draw video on external displays";
+            cbMultiscreenDrawOnExternalDisplays.UseVisualStyleBackColor = true;
             // 
             // cbMultiscreenDrawOnPanels
             // 
-            this.cbMultiscreenDrawOnPanels.AutoSize = true;
-            this.cbMultiscreenDrawOnPanels.Location = new System.Drawing.Point(17, 21);
-            this.cbMultiscreenDrawOnPanels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMultiscreenDrawOnPanels.Name = "cbMultiscreenDrawOnPanels";
-            this.cbMultiscreenDrawOnPanels.Size = new System.Drawing.Size(210, 29);
-            this.cbMultiscreenDrawOnPanels.TabIndex = 22;
-            this.cbMultiscreenDrawOnPanels.Text = "Draw video on panels";
-            this.cbMultiscreenDrawOnPanels.UseVisualStyleBackColor = true;
+            cbMultiscreenDrawOnPanels.AutoSize = true;
+            cbMultiscreenDrawOnPanels.Location = new System.Drawing.Point(18, 20);
+            cbMultiscreenDrawOnPanels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMultiscreenDrawOnPanels.Name = "cbMultiscreenDrawOnPanels";
+            cbMultiscreenDrawOnPanels.Size = new System.Drawing.Size(210, 29);
+            cbMultiscreenDrawOnPanels.TabIndex = 22;
+            cbMultiscreenDrawOnPanels.Text = "Draw video on panels";
+            cbMultiscreenDrawOnPanels.UseVisualStyleBackColor = true;
             // 
             // cbFlipHorizontal2
             // 
-            this.cbFlipHorizontal2.AutoSize = true;
-            this.cbFlipHorizontal2.Location = new System.Drawing.Point(270, 829);
-            this.cbFlipHorizontal2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipHorizontal2.Name = "cbFlipHorizontal2";
-            this.cbFlipHorizontal2.Size = new System.Drawing.Size(150, 29);
-            this.cbFlipHorizontal2.TabIndex = 21;
-            this.cbFlipHorizontal2.Text = "Flip horizontal";
-            this.cbFlipHorizontal2.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
+            cbFlipHorizontal2.AutoSize = true;
+            cbFlipHorizontal2.Location = new System.Drawing.Point(270, 830);
+            cbFlipHorizontal2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipHorizontal2.Name = "cbFlipHorizontal2";
+            cbFlipHorizontal2.Size = new System.Drawing.Size(150, 29);
+            cbFlipHorizontal2.TabIndex = 21;
+            cbFlipHorizontal2.Text = "Flip horizontal";
+            cbFlipHorizontal2.UseVisualStyleBackColor = true;
+            cbFlipHorizontal2.CheckedChanged += cbFlipStretch2_CheckedChanged;
             // 
             // cbFlipVertical2
             // 
-            this.cbFlipVertical2.AutoSize = true;
-            this.cbFlipVertical2.Location = new System.Drawing.Point(127, 829);
-            this.cbFlipVertical2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipVertical2.Name = "cbFlipVertical2";
-            this.cbFlipVertical2.Size = new System.Drawing.Size(126, 29);
-            this.cbFlipVertical2.TabIndex = 20;
-            this.cbFlipVertical2.Text = "Flip vertical";
-            this.cbFlipVertical2.UseVisualStyleBackColor = true;
-            this.cbFlipVertical2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
+            cbFlipVertical2.AutoSize = true;
+            cbFlipVertical2.Location = new System.Drawing.Point(128, 830);
+            cbFlipVertical2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipVertical2.Name = "cbFlipVertical2";
+            cbFlipVertical2.Size = new System.Drawing.Size(126, 29);
+            cbFlipVertical2.TabIndex = 20;
+            cbFlipVertical2.Text = "Flip vertical";
+            cbFlipVertical2.UseVisualStyleBackColor = true;
+            cbFlipVertical2.CheckedChanged += cbFlipStretch2_CheckedChanged;
             // 
             // cbStretch2
             // 
-            this.cbStretch2.AutoSize = true;
-            this.cbStretch2.Location = new System.Drawing.Point(17, 829);
-            this.cbStretch2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbStretch2.Name = "cbStretch2";
-            this.cbStretch2.Size = new System.Drawing.Size(92, 29);
-            this.cbStretch2.TabIndex = 19;
-            this.cbStretch2.Text = "Stretch";
-            this.cbStretch2.UseVisualStyleBackColor = true;
-            this.cbStretch2.CheckedChanged += new System.EventHandler(this.cbFlipStretch2_CheckedChanged);
+            cbStretch2.AutoSize = true;
+            cbStretch2.Location = new System.Drawing.Point(18, 830);
+            cbStretch2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbStretch2.Name = "cbStretch2";
+            cbStretch2.Size = new System.Drawing.Size(92, 29);
+            cbStretch2.TabIndex = 19;
+            cbStretch2.Text = "Stretch";
+            cbStretch2.UseVisualStyleBackColor = true;
+            cbStretch2.CheckedChanged += cbFlipStretch2_CheckedChanged;
             // 
             // cbFlipHorizontal1
             // 
-            this.cbFlipHorizontal1.AutoSize = true;
-            this.cbFlipHorizontal1.Location = new System.Drawing.Point(270, 375);
-            this.cbFlipHorizontal1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipHorizontal1.Name = "cbFlipHorizontal1";
-            this.cbFlipHorizontal1.Size = new System.Drawing.Size(150, 29);
-            this.cbFlipHorizontal1.TabIndex = 18;
-            this.cbFlipHorizontal1.Text = "Flip horizontal";
-            this.cbFlipHorizontal1.UseVisualStyleBackColor = true;
-            this.cbFlipHorizontal1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
+            cbFlipHorizontal1.AutoSize = true;
+            cbFlipHorizontal1.Location = new System.Drawing.Point(270, 375);
+            cbFlipHorizontal1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipHorizontal1.Name = "cbFlipHorizontal1";
+            cbFlipHorizontal1.Size = new System.Drawing.Size(150, 29);
+            cbFlipHorizontal1.TabIndex = 18;
+            cbFlipHorizontal1.Text = "Flip horizontal";
+            cbFlipHorizontal1.UseVisualStyleBackColor = true;
+            cbFlipHorizontal1.CheckedChanged += cbFlipStretch1_CheckedChanged;
             // 
             // cbFlipVertical1
             // 
-            this.cbFlipVertical1.AutoSize = true;
-            this.cbFlipVertical1.Location = new System.Drawing.Point(127, 375);
-            this.cbFlipVertical1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipVertical1.Name = "cbFlipVertical1";
-            this.cbFlipVertical1.Size = new System.Drawing.Size(126, 29);
-            this.cbFlipVertical1.TabIndex = 17;
-            this.cbFlipVertical1.Text = "Flip vertical";
-            this.cbFlipVertical1.UseVisualStyleBackColor = true;
-            this.cbFlipVertical1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
+            cbFlipVertical1.AutoSize = true;
+            cbFlipVertical1.Location = new System.Drawing.Point(128, 375);
+            cbFlipVertical1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipVertical1.Name = "cbFlipVertical1";
+            cbFlipVertical1.Size = new System.Drawing.Size(126, 29);
+            cbFlipVertical1.TabIndex = 17;
+            cbFlipVertical1.Text = "Flip vertical";
+            cbFlipVertical1.UseVisualStyleBackColor = true;
+            cbFlipVertical1.CheckedChanged += cbFlipStretch1_CheckedChanged;
             // 
             // cbStretch1
             // 
-            this.cbStretch1.AutoSize = true;
-            this.cbStretch1.Location = new System.Drawing.Point(17, 375);
-            this.cbStretch1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbStretch1.Name = "cbStretch1";
-            this.cbStretch1.Size = new System.Drawing.Size(92, 29);
-            this.cbStretch1.TabIndex = 16;
-            this.cbStretch1.Text = "Stretch";
-            this.cbStretch1.UseVisualStyleBackColor = true;
-            this.cbStretch1.CheckedChanged += new System.EventHandler(this.cbFlipStretch1_CheckedChanged);
+            cbStretch1.AutoSize = true;
+            cbStretch1.Location = new System.Drawing.Point(18, 375);
+            cbStretch1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbStretch1.Name = "cbStretch1";
+            cbStretch1.Size = new System.Drawing.Size(92, 29);
+            cbStretch1.TabIndex = 16;
+            cbStretch1.Text = "Stretch";
+            cbStretch1.UseVisualStyleBackColor = true;
+            cbStretch1.CheckedChanged += cbFlipStretch1_CheckedChanged;
             // 
             // pnScreen2
             // 
-            this.pnScreen2.BackColor = System.Drawing.Color.Black;
-            this.pnScreen2.Location = new System.Drawing.Point(17, 419);
-            this.pnScreen2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pnScreen2.Name = "pnScreen2";
-            this.pnScreen2.Size = new System.Drawing.Size(409, 392);
-            this.pnScreen2.TabIndex = 15;
+            pnScreen2.BackColor = System.Drawing.Color.Black;
+            pnScreen2.Location = new System.Drawing.Point(18, 419);
+            pnScreen2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnScreen2.Name = "pnScreen2";
+            pnScreen2.Size = new System.Drawing.Size(409, 392);
+            pnScreen2.TabIndex = 15;
             // 
             // pnScreen1
             // 
-            this.pnScreen1.BackColor = System.Drawing.Color.Black;
-            this.pnScreen1.Location = new System.Drawing.Point(77, 121);
-            this.pnScreen1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pnScreen1.Name = "pnScreen1";
-            this.pnScreen1.Size = new System.Drawing.Size(290, 242);
-            this.pnScreen1.TabIndex = 13;
+            pnScreen1.BackColor = System.Drawing.Color.Black;
+            pnScreen1.Location = new System.Drawing.Point(78, 120);
+            pnScreen1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnScreen1.Name = "pnScreen1";
+            pnScreen1.Size = new System.Drawing.Size(290, 242);
+            pnScreen1.TabIndex = 13;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.tabControl17);
-            this.tabPage4.Location = new System.Drawing.Point(4, 34);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage4.Size = new System.Drawing.Size(508, 958);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Video processing";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            tabPage4.Controls.Add(tabControl17);
+            tabPage4.Location = new System.Drawing.Point(4, 34);
+            tabPage4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage4.Size = new System.Drawing.Size(508, 957);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Video processing";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // tabControl17
             // 
-            this.tabControl17.Controls.Add(this.tabPage68);
-            this.tabControl17.Controls.Add(this.tabPage69);
-            this.tabControl17.Controls.Add(this.tabPage59);
-            this.tabControl17.Controls.Add(this.tabPage51);
-            this.tabControl17.Controls.Add(this.tabPage8);
-            this.tabControl17.Controls.Add(this.tabPage15);
-            this.tabControl17.Controls.Add(this.tabPage46);
-            this.tabControl17.Location = new System.Drawing.Point(0, 11);
-            this.tabControl17.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl17.Name = "tabControl17";
-            this.tabControl17.SelectedIndex = 0;
-            this.tabControl17.Size = new System.Drawing.Size(497, 932);
-            this.tabControl17.TabIndex = 37;
+            tabControl17.Controls.Add(tabPage68);
+            tabControl17.Controls.Add(tabPage69);
+            tabControl17.Controls.Add(tabPage59);
+            tabControl17.Controls.Add(tabPage51);
+            tabControl17.Controls.Add(tabPage8);
+            tabControl17.Controls.Add(tabPage15);
+            tabControl17.Controls.Add(tabPage46);
+            tabControl17.Location = new System.Drawing.Point(0, 11);
+            tabControl17.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl17.Name = "tabControl17";
+            tabControl17.SelectedIndex = 0;
+            tabControl17.Size = new System.Drawing.Size(498, 931);
+            tabControl17.TabIndex = 37;
             // 
             // tabPage68
             // 
-            this.tabPage68.Controls.Add(this.cbScrollingText);
-            this.tabPage68.Controls.Add(this.cbFlipY);
-            this.tabPage68.Controls.Add(this.cbFlipX);
-            this.tabPage68.Controls.Add(this.label201);
-            this.tabPage68.Controls.Add(this.label200);
-            this.tabPage68.Controls.Add(this.label199);
-            this.tabPage68.Controls.Add(this.label198);
-            this.tabPage68.Controls.Add(this.tabControl7);
-            this.tabPage68.Controls.Add(this.tbContrast);
-            this.tabPage68.Controls.Add(this.tbDarkness);
-            this.tabPage68.Controls.Add(this.tbLightness);
-            this.tabPage68.Controls.Add(this.tbSaturation);
-            this.tabPage68.Controls.Add(this.cbInvert);
-            this.tabPage68.Controls.Add(this.cbGreyscale);
-            this.tabPage68.Controls.Add(this.cbVideoEffects);
-            this.tabPage68.Location = new System.Drawing.Point(4, 34);
-            this.tabPage68.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage68.Name = "tabPage68";
-            this.tabPage68.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage68.Size = new System.Drawing.Size(489, 894);
-            this.tabPage68.TabIndex = 0;
-            this.tabPage68.Text = "Effects";
-            this.tabPage68.UseVisualStyleBackColor = true;
-            // 
-            // cbFlipY
-            // 
-            this.cbFlipY.AutoSize = true;
-            this.cbFlipY.Location = new System.Drawing.Point(355, 287);
-            this.cbFlipY.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipY.Name = "cbFlipY";
-            this.cbFlipY.Size = new System.Drawing.Size(81, 29);
-            this.cbFlipY.TabIndex = 69;
-            this.cbFlipY.Text = "Flip Y";
-            this.cbFlipY.UseVisualStyleBackColor = true;
-            this.cbFlipY.CheckedChanged += new System.EventHandler(this.cbFlipY_CheckedChanged);
-            // 
-            // cbFlipX
-            // 
-            this.cbFlipX.AutoSize = true;
-            this.cbFlipX.Location = new System.Drawing.Point(255, 287);
-            this.cbFlipX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFlipX.Name = "cbFlipX";
-            this.cbFlipX.Size = new System.Drawing.Size(82, 29);
-            this.cbFlipX.TabIndex = 68;
-            this.cbFlipX.Text = "Flip X";
-            this.cbFlipX.UseVisualStyleBackColor = true;
-            this.cbFlipX.CheckedChanged += new System.EventHandler(this.cbFlipX_CheckedChanged);
-            // 
-            // label201
-            // 
-            this.label201.AutoSize = true;
-            this.label201.Location = new System.Drawing.Point(237, 169);
-            this.label201.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label201.Name = "label201";
-            this.label201.Size = new System.Drawing.Size(84, 25);
-            this.label201.TabIndex = 63;
-            this.label201.Text = "Darkness";
-            // 
-            // label200
-            // 
-            this.label200.AutoSize = true;
-            this.label200.Location = new System.Drawing.Point(10, 169);
-            this.label200.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label200.Name = "label200";
-            this.label200.Size = new System.Drawing.Size(79, 25);
-            this.label200.TabIndex = 62;
-            this.label200.Text = "Contrast";
-            // 
-            // label199
-            // 
-            this.label199.AutoSize = true;
-            this.label199.Location = new System.Drawing.Point(237, 69);
-            this.label199.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label199.Name = "label199";
-            this.label199.Size = new System.Drawing.Size(93, 25);
-            this.label199.TabIndex = 61;
-            this.label199.Text = "Saturation";
-            // 
-            // label198
-            // 
-            this.label198.AutoSize = true;
-            this.label198.Location = new System.Drawing.Point(10, 69);
-            this.label198.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label198.Name = "label198";
-            this.label198.Size = new System.Drawing.Size(86, 25);
-            this.label198.TabIndex = 60;
-            this.label198.Text = "Lightness";
-            // 
-            // tabControl7
-            // 
-            this.tabControl7.Controls.Add(this.tabPage29);
-            this.tabControl7.Controls.Add(this.tabPage42);
-            this.tabControl7.Controls.Add(this.tabPage18);
-            this.tabControl7.Controls.Add(this.tabPage19);
-            this.tabControl7.Controls.Add(this.tabPage22);
-            this.tabControl7.Controls.Add(this.tabPage43);
-            this.tabControl7.Location = new System.Drawing.Point(4, 356);
-            this.tabControl7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl7.Name = "tabControl7";
-            this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(471, 528);
-            this.tabControl7.TabIndex = 59;
-            // 
-            // tabPage29
-            // 
-            this.tabPage29.Controls.Add(this.btTextLogoRemove);
-            this.tabPage29.Controls.Add(this.btTextLogoEdit);
-            this.tabPage29.Controls.Add(this.lbTextLogos);
-            this.tabPage29.Controls.Add(this.btTextLogoAdd);
-            this.tabPage29.Location = new System.Drawing.Point(4, 34);
-            this.tabPage29.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage29.Size = new System.Drawing.Size(463, 490);
-            this.tabPage29.TabIndex = 0;
-            this.tabPage29.Text = "Text logo";
-            this.tabPage29.UseVisualStyleBackColor = true;
-            // 
-            // btTextLogoRemove
-            // 
-            this.btTextLogoRemove.Location = new System.Drawing.Point(343, 414);
-            this.btTextLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btTextLogoRemove.Name = "btTextLogoRemove";
-            this.btTextLogoRemove.Size = new System.Drawing.Size(98, 44);
-            this.btTextLogoRemove.TabIndex = 7;
-            this.btTextLogoRemove.Text = "Remove";
-            this.btTextLogoRemove.UseVisualStyleBackColor = true;
-            this.btTextLogoRemove.Click += new System.EventHandler(this.btTextLogoRemove_Click);
-            // 
-            // btTextLogoEdit
-            // 
-            this.btTextLogoEdit.Location = new System.Drawing.Point(123, 414);
-            this.btTextLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btTextLogoEdit.Name = "btTextLogoEdit";
-            this.btTextLogoEdit.Size = new System.Drawing.Size(98, 44);
-            this.btTextLogoEdit.TabIndex = 6;
-            this.btTextLogoEdit.Text = "Edit";
-            this.btTextLogoEdit.UseVisualStyleBackColor = true;
-            this.btTextLogoEdit.Click += new System.EventHandler(this.btTextLogoEdit_Click);
-            // 
-            // lbTextLogos
-            // 
-            this.lbTextLogos.FormattingEnabled = true;
-            this.lbTextLogos.ItemHeight = 25;
-            this.lbTextLogos.Location = new System.Drawing.Point(17, 22);
-            this.lbTextLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbTextLogos.Name = "lbTextLogos";
-            this.lbTextLogos.Size = new System.Drawing.Size(426, 379);
-            this.lbTextLogos.TabIndex = 5;
-            // 
-            // btTextLogoAdd
-            // 
-            this.btTextLogoAdd.Location = new System.Drawing.Point(13, 414);
-            this.btTextLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btTextLogoAdd.Name = "btTextLogoAdd";
-            this.btTextLogoAdd.Size = new System.Drawing.Size(98, 44);
-            this.btTextLogoAdd.TabIndex = 4;
-            this.btTextLogoAdd.Text = "Add";
-            this.btTextLogoAdd.UseVisualStyleBackColor = true;
-            this.btTextLogoAdd.Click += new System.EventHandler(this.btTextLogoAdd_Click);
-            // 
-            // tabPage42
-            // 
-            this.tabPage42.Controls.Add(this.btImageLogoRemove);
-            this.tabPage42.Controls.Add(this.btImageLogoEdit);
-            this.tabPage42.Controls.Add(this.lbImageLogos);
-            this.tabPage42.Controls.Add(this.btImageLogoAdd);
-            this.tabPage42.Location = new System.Drawing.Point(4, 34);
-            this.tabPage42.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage42.Name = "tabPage42";
-            this.tabPage42.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage42.Size = new System.Drawing.Size(463, 490);
-            this.tabPage42.TabIndex = 1;
-            this.tabPage42.Text = "Image logo";
-            this.tabPage42.UseVisualStyleBackColor = true;
-            // 
-            // btImageLogoRemove
-            // 
-            this.btImageLogoRemove.Location = new System.Drawing.Point(343, 414);
-            this.btImageLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btImageLogoRemove.Name = "btImageLogoRemove";
-            this.btImageLogoRemove.Size = new System.Drawing.Size(98, 44);
-            this.btImageLogoRemove.TabIndex = 11;
-            this.btImageLogoRemove.Text = "Remove";
-            this.btImageLogoRemove.UseVisualStyleBackColor = true;
-            this.btImageLogoRemove.Click += new System.EventHandler(this.btImageLogoRemove_Click);
-            // 
-            // btImageLogoEdit
-            // 
-            this.btImageLogoEdit.Location = new System.Drawing.Point(123, 414);
-            this.btImageLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btImageLogoEdit.Name = "btImageLogoEdit";
-            this.btImageLogoEdit.Size = new System.Drawing.Size(98, 44);
-            this.btImageLogoEdit.TabIndex = 10;
-            this.btImageLogoEdit.Text = "Edit";
-            this.btImageLogoEdit.UseVisualStyleBackColor = true;
-            this.btImageLogoEdit.Click += new System.EventHandler(this.btImageLogoEdit_Click);
-            // 
-            // lbImageLogos
-            // 
-            this.lbImageLogos.FormattingEnabled = true;
-            this.lbImageLogos.ItemHeight = 25;
-            this.lbImageLogos.Location = new System.Drawing.Point(17, 22);
-            this.lbImageLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbImageLogos.Name = "lbImageLogos";
-            this.lbImageLogos.Size = new System.Drawing.Size(426, 379);
-            this.lbImageLogos.TabIndex = 9;
-            // 
-            // btImageLogoAdd
-            // 
-            this.btImageLogoAdd.Location = new System.Drawing.Point(13, 414);
-            this.btImageLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btImageLogoAdd.Name = "btImageLogoAdd";
-            this.btImageLogoAdd.Size = new System.Drawing.Size(98, 44);
-            this.btImageLogoAdd.TabIndex = 8;
-            this.btImageLogoAdd.Text = "Add";
-            this.btImageLogoAdd.UseVisualStyleBackColor = true;
-            this.btImageLogoAdd.Click += new System.EventHandler(this.btImageLogoAdd_Click);
-            // 
-            // tabPage18
-            // 
-            this.tabPage18.Controls.Add(this.groupBox37);
-            this.tabPage18.Controls.Add(this.cbZoom);
-            this.tabPage18.Location = new System.Drawing.Point(4, 34);
-            this.tabPage18.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage18.Size = new System.Drawing.Size(463, 490);
-            this.tabPage18.TabIndex = 2;
-            this.tabPage18.Text = "Zoom";
-            this.tabPage18.UseVisualStyleBackColor = true;
-            // 
-            // groupBox37
-            // 
-            this.groupBox37.Controls.Add(this.btEffZoomRight);
-            this.groupBox37.Controls.Add(this.btEffZoomLeft);
-            this.groupBox37.Controls.Add(this.btEffZoomOut);
-            this.groupBox37.Controls.Add(this.btEffZoomIn);
-            this.groupBox37.Controls.Add(this.btEffZoomDown);
-            this.groupBox37.Controls.Add(this.btEffZoomUp);
-            this.groupBox37.Location = new System.Drawing.Point(143, 98);
-            this.groupBox37.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox37.Name = "groupBox37";
-            this.groupBox37.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox37.Size = new System.Drawing.Size(198, 200);
-            this.groupBox37.TabIndex = 18;
-            this.groupBox37.TabStop = false;
-            this.groupBox37.Text = "Zoom";
-            // 
-            // btEffZoomRight
-            // 
-            this.btEffZoomRight.Location = new System.Drawing.Point(142, 64);
-            this.btEffZoomRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomRight.Name = "btEffZoomRight";
-            this.btEffZoomRight.Size = new System.Drawing.Size(36, 92);
-            this.btEffZoomRight.TabIndex = 5;
-            this.btEffZoomRight.Text = "R";
-            this.btEffZoomRight.UseVisualStyleBackColor = true;
-            this.btEffZoomRight.Click += new System.EventHandler(this.btEffZoomRight_Click);
-            // 
-            // btEffZoomLeft
-            // 
-            this.btEffZoomLeft.Location = new System.Drawing.Point(22, 61);
-            this.btEffZoomLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomLeft.Name = "btEffZoomLeft";
-            this.btEffZoomLeft.Size = new System.Drawing.Size(36, 92);
-            this.btEffZoomLeft.TabIndex = 4;
-            this.btEffZoomLeft.Text = "L";
-            this.btEffZoomLeft.UseVisualStyleBackColor = true;
-            this.btEffZoomLeft.Click += new System.EventHandler(this.btEffZoomLeft_Click);
-            // 
-            // btEffZoomOut
-            // 
-            this.btEffZoomOut.Location = new System.Drawing.Point(102, 86);
-            this.btEffZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomOut.Name = "btEffZoomOut";
-            this.btEffZoomOut.Size = new System.Drawing.Size(38, 44);
-            this.btEffZoomOut.TabIndex = 3;
-            this.btEffZoomOut.Text = "-";
-            this.btEffZoomOut.UseVisualStyleBackColor = true;
-            this.btEffZoomOut.Click += new System.EventHandler(this.btEffZoomOut_Click);
-            // 
-            // btEffZoomIn
-            // 
-            this.btEffZoomIn.Location = new System.Drawing.Point(58, 86);
-            this.btEffZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomIn.Name = "btEffZoomIn";
-            this.btEffZoomIn.Size = new System.Drawing.Size(37, 44);
-            this.btEffZoomIn.TabIndex = 2;
-            this.btEffZoomIn.Text = "+";
-            this.btEffZoomIn.UseVisualStyleBackColor = true;
-            this.btEffZoomIn.Click += new System.EventHandler(this.btEffZoomIn_Click);
-            // 
-            // btEffZoomDown
-            // 
-            this.btEffZoomDown.Location = new System.Drawing.Point(57, 132);
-            this.btEffZoomDown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomDown.Name = "btEffZoomDown";
-            this.btEffZoomDown.Size = new System.Drawing.Size(84, 44);
-            this.btEffZoomDown.TabIndex = 1;
-            this.btEffZoomDown.Text = "Down";
-            this.btEffZoomDown.UseVisualStyleBackColor = true;
-            this.btEffZoomDown.Click += new System.EventHandler(this.btEffZoomDown_Click);
-            // 
-            // btEffZoomUp
-            // 
-            this.btEffZoomUp.Location = new System.Drawing.Point(57, 39);
-            this.btEffZoomUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEffZoomUp.Name = "btEffZoomUp";
-            this.btEffZoomUp.Size = new System.Drawing.Size(84, 44);
-            this.btEffZoomUp.TabIndex = 0;
-            this.btEffZoomUp.Text = "Up";
-            this.btEffZoomUp.UseVisualStyleBackColor = true;
-            this.btEffZoomUp.Click += new System.EventHandler(this.btEffZoomUp_Click);
-            // 
-            // cbZoom
-            // 
-            this.cbZoom.AutoSize = true;
-            this.cbZoom.Location = new System.Drawing.Point(20, 29);
-            this.cbZoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(101, 29);
-            this.cbZoom.TabIndex = 17;
-            this.cbZoom.Text = "Enabled";
-            this.cbZoom.UseVisualStyleBackColor = true;
-            this.cbZoom.CheckedChanged += new System.EventHandler(this.cbZoom_CheckedChanged);
-            // 
-            // tabPage19
-            // 
-            this.tabPage19.Controls.Add(this.groupBox40);
-            this.tabPage19.Controls.Add(this.groupBox39);
-            this.tabPage19.Controls.Add(this.groupBox38);
-            this.tabPage19.Controls.Add(this.cbPan);
-            this.tabPage19.Location = new System.Drawing.Point(4, 34);
-            this.tabPage19.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage19.Name = "tabPage19";
-            this.tabPage19.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage19.Size = new System.Drawing.Size(463, 490);
-            this.tabPage19.TabIndex = 3;
-            this.tabPage19.Text = "Pan";
-            this.tabPage19.UseVisualStyleBackColor = true;
-            // 
-            // groupBox40
-            // 
-            this.groupBox40.Controls.Add(this.edPanDestHeight);
-            this.groupBox40.Controls.Add(this.label302);
-            this.groupBox40.Controls.Add(this.edPanDestWidth);
-            this.groupBox40.Controls.Add(this.label303);
-            this.groupBox40.Controls.Add(this.edPanDestTop);
-            this.groupBox40.Controls.Add(this.label304);
-            this.groupBox40.Controls.Add(this.edPanDestLeft);
-            this.groupBox40.Controls.Add(this.label305);
-            this.groupBox40.Location = new System.Drawing.Point(20, 311);
-            this.groupBox40.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox40.Name = "groupBox40";
-            this.groupBox40.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox40.Size = new System.Drawing.Size(280, 148);
-            this.groupBox40.TabIndex = 58;
-            this.groupBox40.TabStop = false;
-            this.groupBox40.Text = "Destination rect";
-            // 
-            // edPanDestHeight
-            // 
-            this.edPanDestHeight.Location = new System.Drawing.Point(204, 98);
-            this.edPanDestHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanDestHeight.Name = "edPanDestHeight";
-            this.edPanDestHeight.Size = new System.Drawing.Size(53, 31);
-            this.edPanDestHeight.TabIndex = 17;
-            this.edPanDestHeight.Text = "240";
-            // 
-            // label302
-            // 
-            this.label302.AutoSize = true;
-            this.label302.Location = new System.Drawing.Point(136, 104);
-            this.label302.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label302.Name = "label302";
-            this.label302.Size = new System.Drawing.Size(65, 25);
-            this.label302.TabIndex = 16;
-            this.label302.Text = "Height";
-            // 
-            // edPanDestWidth
-            // 
-            this.edPanDestWidth.Location = new System.Drawing.Point(204, 48);
-            this.edPanDestWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanDestWidth.Name = "edPanDestWidth";
-            this.edPanDestWidth.Size = new System.Drawing.Size(53, 31);
-            this.edPanDestWidth.TabIndex = 15;
-            this.edPanDestWidth.Text = "320";
-            // 
-            // label303
-            // 
-            this.label303.AutoSize = true;
-            this.label303.Location = new System.Drawing.Point(136, 54);
-            this.label303.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label303.Name = "label303";
-            this.label303.Size = new System.Drawing.Size(60, 25);
-            this.label303.TabIndex = 14;
-            this.label303.Text = "Width";
-            // 
-            // edPanDestTop
-            // 
-            this.edPanDestTop.Location = new System.Drawing.Point(71, 100);
-            this.edPanDestTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanDestTop.Name = "edPanDestTop";
-            this.edPanDestTop.Size = new System.Drawing.Size(53, 31);
-            this.edPanDestTop.TabIndex = 12;
-            this.edPanDestTop.Text = "0";
-            // 
-            // label304
-            // 
-            this.label304.AutoSize = true;
-            this.label304.Location = new System.Drawing.Point(22, 104);
-            this.label304.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label304.Name = "label304";
-            this.label304.Size = new System.Drawing.Size(41, 25);
-            this.label304.TabIndex = 11;
-            this.label304.Text = "Top";
-            // 
-            // edPanDestLeft
-            // 
-            this.edPanDestLeft.Location = new System.Drawing.Point(71, 50);
-            this.edPanDestLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanDestLeft.Name = "edPanDestLeft";
-            this.edPanDestLeft.Size = new System.Drawing.Size(53, 31);
-            this.edPanDestLeft.TabIndex = 10;
-            this.edPanDestLeft.Text = "0";
-            // 
-            // label305
-            // 
-            this.label305.AutoSize = true;
-            this.label305.Location = new System.Drawing.Point(22, 54);
-            this.label305.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label305.Name = "label305";
-            this.label305.Size = new System.Drawing.Size(41, 25);
-            this.label305.TabIndex = 9;
-            this.label305.Text = "Left";
-            // 
-            // groupBox39
-            // 
-            this.groupBox39.Controls.Add(this.edPanSourceHeight);
-            this.groupBox39.Controls.Add(this.label298);
-            this.groupBox39.Controls.Add(this.edPanSourceWidth);
-            this.groupBox39.Controls.Add(this.label299);
-            this.groupBox39.Controls.Add(this.edPanSourceTop);
-            this.groupBox39.Controls.Add(this.label300);
-            this.groupBox39.Controls.Add(this.edPanSourceLeft);
-            this.groupBox39.Controls.Add(this.label301);
-            this.groupBox39.Location = new System.Drawing.Point(20, 154);
-            this.groupBox39.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox39.Size = new System.Drawing.Size(280, 148);
-            this.groupBox39.TabIndex = 57;
-            this.groupBox39.TabStop = false;
-            this.groupBox39.Text = "Source rect";
-            // 
-            // edPanSourceHeight
-            // 
-            this.edPanSourceHeight.Location = new System.Drawing.Point(204, 98);
-            this.edPanSourceHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanSourceHeight.Name = "edPanSourceHeight";
-            this.edPanSourceHeight.Size = new System.Drawing.Size(53, 31);
-            this.edPanSourceHeight.TabIndex = 17;
-            this.edPanSourceHeight.Text = "480";
-            // 
-            // label298
-            // 
-            this.label298.AutoSize = true;
-            this.label298.Location = new System.Drawing.Point(136, 104);
-            this.label298.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label298.Name = "label298";
-            this.label298.Size = new System.Drawing.Size(65, 25);
-            this.label298.TabIndex = 16;
-            this.label298.Text = "Height";
-            // 
-            // edPanSourceWidth
-            // 
-            this.edPanSourceWidth.Location = new System.Drawing.Point(204, 48);
-            this.edPanSourceWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanSourceWidth.Name = "edPanSourceWidth";
-            this.edPanSourceWidth.Size = new System.Drawing.Size(53, 31);
-            this.edPanSourceWidth.TabIndex = 15;
-            this.edPanSourceWidth.Text = "640";
-            // 
-            // label299
-            // 
-            this.label299.AutoSize = true;
-            this.label299.Location = new System.Drawing.Point(136, 54);
-            this.label299.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label299.Name = "label299";
-            this.label299.Size = new System.Drawing.Size(60, 25);
-            this.label299.TabIndex = 14;
-            this.label299.Text = "Width";
-            // 
-            // edPanSourceTop
-            // 
-            this.edPanSourceTop.Location = new System.Drawing.Point(71, 100);
-            this.edPanSourceTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanSourceTop.Name = "edPanSourceTop";
-            this.edPanSourceTop.Size = new System.Drawing.Size(53, 31);
-            this.edPanSourceTop.TabIndex = 12;
-            this.edPanSourceTop.Text = "0";
-            // 
-            // label300
-            // 
-            this.label300.AutoSize = true;
-            this.label300.Location = new System.Drawing.Point(22, 104);
-            this.label300.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label300.Name = "label300";
-            this.label300.Size = new System.Drawing.Size(41, 25);
-            this.label300.TabIndex = 11;
-            this.label300.Text = "Top";
-            // 
-            // edPanSourceLeft
-            // 
-            this.edPanSourceLeft.Location = new System.Drawing.Point(71, 50);
-            this.edPanSourceLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanSourceLeft.Name = "edPanSourceLeft";
-            this.edPanSourceLeft.Size = new System.Drawing.Size(53, 31);
-            this.edPanSourceLeft.TabIndex = 10;
-            this.edPanSourceLeft.Text = "0";
-            // 
-            // label301
-            // 
-            this.label301.AutoSize = true;
-            this.label301.Location = new System.Drawing.Point(22, 54);
-            this.label301.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label301.Name = "label301";
-            this.label301.Size = new System.Drawing.Size(41, 25);
-            this.label301.TabIndex = 9;
-            this.label301.Text = "Left";
-            // 
-            // groupBox38
-            // 
-            this.groupBox38.Controls.Add(this.edPanStopTime);
-            this.groupBox38.Controls.Add(this.label296);
-            this.groupBox38.Controls.Add(this.edPanStartTime);
-            this.groupBox38.Controls.Add(this.label297);
-            this.groupBox38.Location = new System.Drawing.Point(20, 56);
-            this.groupBox38.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox38.Name = "groupBox38";
-            this.groupBox38.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox38.Size = new System.Drawing.Size(280, 89);
-            this.groupBox38.TabIndex = 56;
-            this.groupBox38.TabStop = false;
-            this.groupBox38.Text = "Duration";
-            // 
-            // edPanStopTime
-            // 
-            this.edPanStopTime.Location = new System.Drawing.Point(196, 36);
-            this.edPanStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanStopTime.Name = "edPanStopTime";
-            this.edPanStopTime.Size = new System.Drawing.Size(62, 31);
-            this.edPanStopTime.TabIndex = 34;
-            this.edPanStopTime.Text = "15000";
-            this.edPanStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label296
-            // 
-            this.label296.AutoSize = true;
-            this.label296.Location = new System.Drawing.Point(147, 42);
-            this.label296.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label296.Name = "label296";
-            this.label296.Size = new System.Drawing.Size(49, 25);
-            this.label296.TabIndex = 33;
-            this.label296.Text = "Stop";
-            // 
-            // edPanStartTime
-            // 
-            this.edPanStartTime.Location = new System.Drawing.Point(71, 36);
-            this.edPanStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edPanStartTime.Name = "edPanStartTime";
-            this.edPanStartTime.Size = new System.Drawing.Size(62, 31);
-            this.edPanStartTime.TabIndex = 32;
-            this.edPanStartTime.Text = "5000";
-            this.edPanStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label297
-            // 
-            this.label297.AutoSize = true;
-            this.label297.Location = new System.Drawing.Point(17, 42);
-            this.label297.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label297.Name = "label297";
-            this.label297.Size = new System.Drawing.Size(48, 25);
-            this.label297.TabIndex = 31;
-            this.label297.Text = "Start";
-            // 
-            // cbPan
-            // 
-            this.cbPan.AutoSize = true;
-            this.cbPan.Location = new System.Drawing.Point(20, 11);
-            this.cbPan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbPan.Name = "cbPan";
-            this.cbPan.Size = new System.Drawing.Size(101, 29);
-            this.cbPan.TabIndex = 55;
-            this.cbPan.Text = "Enabled";
-            this.cbPan.UseVisualStyleBackColor = true;
-            this.cbPan.CheckedChanged += new System.EventHandler(this.cbPan_CheckedChanged);
-            // 
-            // tabPage22
-            // 
-            this.tabPage22.Controls.Add(this.rbFadeOut);
-            this.tabPage22.Controls.Add(this.rbFadeIn);
-            this.tabPage22.Controls.Add(this.groupBox45);
-            this.tabPage22.Controls.Add(this.cbFadeInOut);
-            this.tabPage22.Location = new System.Drawing.Point(4, 34);
-            this.tabPage22.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage22.Name = "tabPage22";
-            this.tabPage22.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage22.Size = new System.Drawing.Size(463, 490);
-            this.tabPage22.TabIndex = 4;
-            this.tabPage22.Text = "Fade-in/out";
-            this.tabPage22.UseVisualStyleBackColor = true;
-            // 
-            // rbFadeOut
-            // 
-            this.rbFadeOut.AutoSize = true;
-            this.rbFadeOut.Location = new System.Drawing.Point(169, 198);
-            this.rbFadeOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbFadeOut.Name = "rbFadeOut";
-            this.rbFadeOut.Size = new System.Drawing.Size(108, 29);
-            this.rbFadeOut.TabIndex = 60;
-            this.rbFadeOut.TabStop = true;
-            this.rbFadeOut.Text = "Fade-out";
-            this.rbFadeOut.UseVisualStyleBackColor = true;
-            // 
-            // rbFadeIn
-            // 
-            this.rbFadeIn.AutoSize = true;
-            this.rbFadeIn.Checked = true;
-            this.rbFadeIn.Location = new System.Drawing.Point(17, 198);
-            this.rbFadeIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbFadeIn.Name = "rbFadeIn";
-            this.rbFadeIn.Size = new System.Drawing.Size(95, 29);
-            this.rbFadeIn.TabIndex = 59;
-            this.rbFadeIn.TabStop = true;
-            this.rbFadeIn.Text = "Fade-in";
-            this.rbFadeIn.UseVisualStyleBackColor = true;
-            // 
-            // groupBox45
-            // 
-            this.groupBox45.Controls.Add(this.edFadeInOutStopTime);
-            this.groupBox45.Controls.Add(this.label329);
-            this.groupBox45.Controls.Add(this.edFadeInOutStartTime);
-            this.groupBox45.Controls.Add(this.label330);
-            this.groupBox45.Location = new System.Drawing.Point(17, 98);
-            this.groupBox45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox45.Size = new System.Drawing.Size(280, 89);
-            this.groupBox45.TabIndex = 58;
-            this.groupBox45.TabStop = false;
-            this.groupBox45.Text = "Duration";
-            // 
-            // edFadeInOutStopTime
-            // 
-            this.edFadeInOutStopTime.Location = new System.Drawing.Point(196, 36);
-            this.edFadeInOutStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edFadeInOutStopTime.Name = "edFadeInOutStopTime";
-            this.edFadeInOutStopTime.Size = new System.Drawing.Size(62, 31);
-            this.edFadeInOutStopTime.TabIndex = 34;
-            this.edFadeInOutStopTime.Text = "15000";
-            this.edFadeInOutStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label329
-            // 
-            this.label329.AutoSize = true;
-            this.label329.Location = new System.Drawing.Point(147, 42);
-            this.label329.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label329.Name = "label329";
-            this.label329.Size = new System.Drawing.Size(49, 25);
-            this.label329.TabIndex = 33;
-            this.label329.Text = "Stop";
-            // 
-            // edFadeInOutStartTime
-            // 
-            this.edFadeInOutStartTime.Location = new System.Drawing.Point(71, 36);
-            this.edFadeInOutStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edFadeInOutStartTime.Name = "edFadeInOutStartTime";
-            this.edFadeInOutStartTime.Size = new System.Drawing.Size(62, 31);
-            this.edFadeInOutStartTime.TabIndex = 32;
-            this.edFadeInOutStartTime.Text = "5000";
-            this.edFadeInOutStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label330
-            // 
-            this.label330.AutoSize = true;
-            this.label330.Location = new System.Drawing.Point(17, 42);
-            this.label330.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label330.Name = "label330";
-            this.label330.Size = new System.Drawing.Size(48, 25);
-            this.label330.TabIndex = 31;
-            this.label330.Text = "Start";
-            // 
-            // cbFadeInOut
-            // 
-            this.cbFadeInOut.AutoSize = true;
-            this.cbFadeInOut.Location = new System.Drawing.Point(17, 32);
-            this.cbFadeInOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFadeInOut.Name = "cbFadeInOut";
-            this.cbFadeInOut.Size = new System.Drawing.Size(101, 29);
-            this.cbFadeInOut.TabIndex = 57;
-            this.cbFadeInOut.Text = "Enabled";
-            this.cbFadeInOut.UseVisualStyleBackColor = true;
-            this.cbFadeInOut.CheckedChanged += new System.EventHandler(this.cbFadeInOut_CheckedChanged);
-            // 
-            // tabPage43
-            // 
-            this.tabPage43.Controls.Add(this.cbLiveRotationStretch);
-            this.tabPage43.Controls.Add(this.label392);
-            this.tabPage43.Controls.Add(this.label391);
-            this.tabPage43.Controls.Add(this.tbLiveRotationAngle);
-            this.tabPage43.Controls.Add(this.label390);
-            this.tabPage43.Controls.Add(this.cbLiveRotation);
-            this.tabPage43.Location = new System.Drawing.Point(4, 34);
-            this.tabPage43.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage43.Name = "tabPage43";
-            this.tabPage43.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage43.Size = new System.Drawing.Size(463, 490);
-            this.tabPage43.TabIndex = 5;
-            this.tabPage43.Text = "Live rotation";
-            this.tabPage43.UseVisualStyleBackColor = true;
-            // 
-            // cbLiveRotationStretch
-            // 
-            this.cbLiveRotationStretch.AutoSize = true;
-            this.cbLiveRotationStretch.Location = new System.Drawing.Point(20, 264);
-            this.cbLiveRotationStretch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbLiveRotationStretch.Name = "cbLiveRotationStretch";
-            this.cbLiveRotationStretch.Size = new System.Drawing.Size(259, 29);
-            this.cbLiveRotationStretch.TabIndex = 65;
-            this.cbLiveRotationStretch.Text = "Stretch  if angle is 90 or 270";
-            this.cbLiveRotationStretch.UseVisualStyleBackColor = true;
-            this.cbLiveRotationStretch.CheckedChanged += new System.EventHandler(this.cbLiveRotationStretch_CheckedChanged);
-            // 
-            // label392
-            // 
-            this.label392.AutoSize = true;
-            this.label392.Location = new System.Drawing.Point(217, 214);
-            this.label392.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label392.Name = "label392";
-            this.label392.Size = new System.Drawing.Size(42, 25);
-            this.label392.TabIndex = 64;
-            this.label392.Text = "360";
-            // 
-            // label391
-            // 
-            this.label391.AutoSize = true;
-            this.label391.Location = new System.Drawing.Point(16, 214);
-            this.label391.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label391.Name = "label391";
-            this.label391.Size = new System.Drawing.Size(22, 25);
-            this.label391.TabIndex = 63;
-            this.label391.Text = "0";
-            // 
-            // tbLiveRotationAngle
-            // 
-            this.tbLiveRotationAngle.Location = new System.Drawing.Point(20, 121);
-            this.tbLiveRotationAngle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbLiveRotationAngle.Maximum = 360;
-            this.tbLiveRotationAngle.Name = "tbLiveRotationAngle";
-            this.tbLiveRotationAngle.Size = new System.Drawing.Size(238, 69);
-            this.tbLiveRotationAngle.TabIndex = 62;
-            this.tbLiveRotationAngle.TickFrequency = 5;
-            this.tbLiveRotationAngle.Value = 90;
-            this.tbLiveRotationAngle.Scroll += new System.EventHandler(this.tbLiveRotationAngle_Scroll);
-            // 
-            // label390
-            // 
-            this.label390.AutoSize = true;
-            this.label390.Location = new System.Drawing.Point(16, 85);
-            this.label390.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label390.Name = "label390";
-            this.label390.Size = new System.Drawing.Size(58, 25);
-            this.label390.TabIndex = 61;
-            this.label390.Text = "Angle";
-            // 
-            // cbLiveRotation
-            // 
-            this.cbLiveRotation.AutoSize = true;
-            this.cbLiveRotation.Location = new System.Drawing.Point(20, 22);
-            this.cbLiveRotation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbLiveRotation.Name = "cbLiveRotation";
-            this.cbLiveRotation.Size = new System.Drawing.Size(101, 29);
-            this.cbLiveRotation.TabIndex = 60;
-            this.cbLiveRotation.Text = "Enabled";
-            this.cbLiveRotation.UseVisualStyleBackColor = true;
-            this.cbLiveRotation.CheckedChanged += new System.EventHandler(this.cbLiveRotation_CheckedChanged);
-            // 
-            // tbContrast
-            // 
-            this.tbContrast.BackColor = System.Drawing.SystemColors.Window;
-            this.tbContrast.Location = new System.Drawing.Point(4, 206);
-            this.tbContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbContrast.Maximum = 255;
-            this.tbContrast.Name = "tbContrast";
-            this.tbContrast.Size = new System.Drawing.Size(217, 69);
-            this.tbContrast.TabIndex = 49;
-            this.tbContrast.Scroll += new System.EventHandler(this.tbContrast_Scroll);
-            // 
-            // tbDarkness
-            // 
-            this.tbDarkness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbDarkness.Location = new System.Drawing.Point(237, 206);
-            this.tbDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbDarkness.Maximum = 255;
-            this.tbDarkness.Name = "tbDarkness";
-            this.tbDarkness.Size = new System.Drawing.Size(217, 69);
-            this.tbDarkness.TabIndex = 46;
-            this.tbDarkness.Scroll += new System.EventHandler(this.tbDarkness_Scroll);
-            // 
-            // tbLightness
-            // 
-            this.tbLightness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbLightness.Location = new System.Drawing.Point(4, 98);
-            this.tbLightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbLightness.Maximum = 255;
-            this.tbLightness.Name = "tbLightness";
-            this.tbLightness.Size = new System.Drawing.Size(217, 69);
-            this.tbLightness.TabIndex = 45;
-            this.tbLightness.Scroll += new System.EventHandler(this.tbLightness_Scroll);
-            // 
-            // tbSaturation
-            // 
-            this.tbSaturation.BackColor = System.Drawing.SystemColors.Window;
-            this.tbSaturation.Location = new System.Drawing.Point(237, 98);
-            this.tbSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbSaturation.Maximum = 255;
-            this.tbSaturation.Name = "tbSaturation";
-            this.tbSaturation.Size = new System.Drawing.Size(217, 69);
-            this.tbSaturation.TabIndex = 43;
-            this.tbSaturation.Value = 255;
-            this.tbSaturation.Scroll += new System.EventHandler(this.tbSaturation_Scroll);
-            // 
-            // cbInvert
-            // 
-            this.cbInvert.AutoSize = true;
-            this.cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbInvert.Location = new System.Drawing.Point(155, 287);
-            this.cbInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbInvert.Name = "cbInvert";
-            this.cbInvert.Size = new System.Drawing.Size(83, 29);
-            this.cbInvert.TabIndex = 41;
-            this.cbInvert.Text = "Invert";
-            this.cbInvert.UseVisualStyleBackColor = true;
-            this.cbInvert.CheckedChanged += new System.EventHandler(this.cbInvert_CheckedChanged);
-            // 
-            // cbGreyscale
-            // 
-            this.cbGreyscale.AutoSize = true;
-            this.cbGreyscale.Location = new System.Drawing.Point(21, 287);
-            this.cbGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGreyscale.Name = "cbGreyscale";
-            this.cbGreyscale.Size = new System.Drawing.Size(112, 29);
-            this.cbGreyscale.TabIndex = 39;
-            this.cbGreyscale.Text = "Greyscale";
-            this.cbGreyscale.UseVisualStyleBackColor = true;
-            this.cbGreyscale.CheckedChanged += new System.EventHandler(this.cbGreyscale_CheckedChanged);
-            // 
-            // cbVideoEffects
-            // 
-            this.cbVideoEffects.AutoSize = true;
-            this.cbVideoEffects.Location = new System.Drawing.Point(13, 15);
-            this.cbVideoEffects.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbVideoEffects.Name = "cbVideoEffects";
-            this.cbVideoEffects.Size = new System.Drawing.Size(101, 29);
-            this.cbVideoEffects.TabIndex = 37;
-            this.cbVideoEffects.Text = "Enabled";
-            this.cbVideoEffects.UseVisualStyleBackColor = true;
-            // 
-            // tabPage69
-            // 
-            this.tabPage69.Controls.Add(this.label211);
-            this.tabPage69.Controls.Add(this.edDeintTriangleWeight);
-            this.tabPage69.Controls.Add(this.label212);
-            this.tabPage69.Controls.Add(this.label210);
-            this.tabPage69.Controls.Add(this.label209);
-            this.tabPage69.Controls.Add(this.label206);
-            this.tabPage69.Controls.Add(this.edDeintBlendConstants2);
-            this.tabPage69.Controls.Add(this.label207);
-            this.tabPage69.Controls.Add(this.edDeintBlendConstants1);
-            this.tabPage69.Controls.Add(this.label208);
-            this.tabPage69.Controls.Add(this.label204);
-            this.tabPage69.Controls.Add(this.edDeintBlendThreshold2);
-            this.tabPage69.Controls.Add(this.label205);
-            this.tabPage69.Controls.Add(this.edDeintBlendThreshold1);
-            this.tabPage69.Controls.Add(this.label203);
-            this.tabPage69.Controls.Add(this.label202);
-            this.tabPage69.Controls.Add(this.edDeintCAVTThreshold);
-            this.tabPage69.Controls.Add(this.label104);
-            this.tabPage69.Controls.Add(this.rbDeintTriangleEnabled);
-            this.tabPage69.Controls.Add(this.rbDeintBlendEnabled);
-            this.tabPage69.Controls.Add(this.rbDeintCAVTEnabled);
-            this.tabPage69.Controls.Add(this.cbDeinterlace);
-            this.tabPage69.Location = new System.Drawing.Point(4, 34);
-            this.tabPage69.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage69.Name = "tabPage69";
-            this.tabPage69.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage69.Size = new System.Drawing.Size(489, 894);
-            this.tabPage69.TabIndex = 1;
-            this.tabPage69.Text = "Deinterlace";
-            this.tabPage69.UseVisualStyleBackColor = true;
-            // 
-            // label211
-            // 
-            this.label211.AutoSize = true;
-            this.label211.Location = new System.Drawing.Point(167, 565);
-            this.label211.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(69, 25);
-            this.label211.TabIndex = 28;
-            this.label211.Text = "[0-255]";
-            // 
-            // edDeintTriangleWeight
-            // 
-            this.edDeintTriangleWeight.Location = new System.Drawing.Point(171, 519);
-            this.edDeintTriangleWeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintTriangleWeight.Name = "edDeintTriangleWeight";
-            this.edDeintTriangleWeight.Size = new System.Drawing.Size(51, 31);
-            this.edDeintTriangleWeight.TabIndex = 27;
-            this.edDeintTriangleWeight.Text = "180";
-            // 
-            // label212
-            // 
-            this.label212.AutoSize = true;
-            this.label212.Location = new System.Drawing.Point(57, 525);
-            this.label212.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label212.Name = "label212";
-            this.label212.Size = new System.Drawing.Size(68, 25);
-            this.label212.TabIndex = 26;
-            this.label212.Text = "Weight";
-            // 
-            // label210
-            // 
-            this.label210.AutoSize = true;
-            this.label210.Location = new System.Drawing.Point(429, 369);
-            this.label210.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label210.Name = "label210";
-            this.label210.Size = new System.Drawing.Size(44, 25);
-            this.label210.TabIndex = 25;
-            this.label210.Text = "/ 10";
-            // 
-            // label209
-            // 
-            this.label209.AutoSize = true;
-            this.label209.Location = new System.Drawing.Point(429, 306);
-            this.label209.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label209.Name = "label209";
-            this.label209.Size = new System.Drawing.Size(44, 25);
-            this.label209.TabIndex = 24;
-            this.label209.Text = "/ 10";
-            // 
-            // label206
-            // 
-            this.label206.AutoSize = true;
-            this.label206.Location = new System.Drawing.Point(363, 410);
-            this.label206.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label206.Name = "label206";
-            this.label206.Size = new System.Drawing.Size(77, 25);
-            this.label206.TabIndex = 23;
-            this.label206.Text = "[0.0-1.0]";
-            // 
-            // edDeintBlendConstants2
-            // 
-            this.edDeintBlendConstants2.Location = new System.Drawing.Point(369, 364);
-            this.edDeintBlendConstants2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintBlendConstants2.Name = "edDeintBlendConstants2";
-            this.edDeintBlendConstants2.Size = new System.Drawing.Size(51, 31);
-            this.edDeintBlendConstants2.TabIndex = 22;
-            this.edDeintBlendConstants2.Text = "9";
-            // 
-            // label207
-            // 
-            this.label207.AutoSize = true;
-            this.label207.Location = new System.Drawing.Point(253, 369);
-            this.label207.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label207.Name = "label207";
-            this.label207.Size = new System.Drawing.Size(106, 25);
-            this.label207.TabIndex = 21;
-            this.label207.Text = "Constants 2";
-            // 
-            // edDeintBlendConstants1
-            // 
-            this.edDeintBlendConstants1.Location = new System.Drawing.Point(369, 300);
-            this.edDeintBlendConstants1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintBlendConstants1.Name = "edDeintBlendConstants1";
-            this.edDeintBlendConstants1.Size = new System.Drawing.Size(51, 31);
-            this.edDeintBlendConstants1.TabIndex = 20;
-            this.edDeintBlendConstants1.Text = "3";
-            // 
-            // label208
-            // 
-            this.label208.AutoSize = true;
-            this.label208.Location = new System.Drawing.Point(253, 306);
-            this.label208.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label208.Name = "label208";
-            this.label208.Size = new System.Drawing.Size(106, 25);
-            this.label208.TabIndex = 19;
-            this.label208.Text = "Constants 1";
-            // 
-            // label204
-            // 
-            this.label204.AutoSize = true;
-            this.label204.Location = new System.Drawing.Point(167, 410);
-            this.label204.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label204.Name = "label204";
-            this.label204.Size = new System.Drawing.Size(69, 25);
-            this.label204.TabIndex = 18;
-            this.label204.Text = "[0-255]";
-            // 
-            // edDeintBlendThreshold2
-            // 
-            this.edDeintBlendThreshold2.Location = new System.Drawing.Point(171, 364);
-            this.edDeintBlendThreshold2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintBlendThreshold2.Name = "edDeintBlendThreshold2";
-            this.edDeintBlendThreshold2.Size = new System.Drawing.Size(51, 31);
-            this.edDeintBlendThreshold2.TabIndex = 17;
-            this.edDeintBlendThreshold2.Text = "9";
-            // 
-            // label205
-            // 
-            this.label205.AutoSize = true;
-            this.label205.Location = new System.Drawing.Point(57, 369);
-            this.label205.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label205.Name = "label205";
-            this.label205.Size = new System.Drawing.Size(105, 25);
-            this.label205.TabIndex = 16;
-            this.label205.Text = "Threshold 2";
-            // 
-            // edDeintBlendThreshold1
-            // 
-            this.edDeintBlendThreshold1.Location = new System.Drawing.Point(171, 300);
-            this.edDeintBlendThreshold1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintBlendThreshold1.Name = "edDeintBlendThreshold1";
-            this.edDeintBlendThreshold1.Size = new System.Drawing.Size(51, 31);
-            this.edDeintBlendThreshold1.TabIndex = 15;
-            this.edDeintBlendThreshold1.Text = "5";
-            // 
-            // label203
-            // 
-            this.label203.AutoSize = true;
-            this.label203.Location = new System.Drawing.Point(57, 306);
-            this.label203.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label203.Name = "label203";
-            this.label203.Size = new System.Drawing.Size(105, 25);
-            this.label203.TabIndex = 14;
-            this.label203.Text = "Threshold 1";
-            // 
-            // label202
-            // 
-            this.label202.AutoSize = true;
-            this.label202.Location = new System.Drawing.Point(167, 198);
-            this.label202.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label202.Name = "label202";
-            this.label202.Size = new System.Drawing.Size(69, 25);
-            this.label202.TabIndex = 13;
-            this.label202.Text = "[0-255]";
-            // 
-            // edDeintCAVTThreshold
-            // 
-            this.edDeintCAVTThreshold.Location = new System.Drawing.Point(171, 152);
-            this.edDeintCAVTThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edDeintCAVTThreshold.Name = "edDeintCAVTThreshold";
-            this.edDeintCAVTThreshold.Size = new System.Drawing.Size(51, 31);
-            this.edDeintCAVTThreshold.TabIndex = 12;
-            this.edDeintCAVTThreshold.Text = "20";
-            // 
-            // label104
-            // 
-            this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(57, 158);
-            this.label104.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(90, 25);
-            this.label104.TabIndex = 11;
-            this.label104.Text = "Threshold";
-            // 
-            // rbDeintTriangleEnabled
-            // 
-            this.rbDeintTriangleEnabled.AutoSize = true;
-            this.rbDeintTriangleEnabled.Location = new System.Drawing.Point(30, 468);
-            this.rbDeintTriangleEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDeintTriangleEnabled.Name = "rbDeintTriangleEnabled";
-            this.rbDeintTriangleEnabled.Size = new System.Drawing.Size(97, 29);
-            this.rbDeintTriangleEnabled.TabIndex = 10;
-            this.rbDeintTriangleEnabled.Text = "Triangle";
-            this.rbDeintTriangleEnabled.UseVisualStyleBackColor = true;
-            // 
-            // rbDeintBlendEnabled
-            // 
-            this.rbDeintBlendEnabled.AutoSize = true;
-            this.rbDeintBlendEnabled.Location = new System.Drawing.Point(30, 244);
-            this.rbDeintBlendEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDeintBlendEnabled.Name = "rbDeintBlendEnabled";
-            this.rbDeintBlendEnabled.Size = new System.Drawing.Size(81, 29);
-            this.rbDeintBlendEnabled.TabIndex = 9;
-            this.rbDeintBlendEnabled.Text = "Blend";
-            this.rbDeintBlendEnabled.UseVisualStyleBackColor = true;
-            // 
-            // rbDeintCAVTEnabled
-            // 
-            this.rbDeintCAVTEnabled.AutoSize = true;
-            this.rbDeintCAVTEnabled.Checked = true;
-            this.rbDeintCAVTEnabled.Location = new System.Drawing.Point(30, 100);
-            this.rbDeintCAVTEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDeintCAVTEnabled.Name = "rbDeintCAVTEnabled";
-            this.rbDeintCAVTEnabled.Size = new System.Drawing.Size(372, 29);
-            this.rbDeintCAVTEnabled.TabIndex = 8;
-            this.rbDeintCAVTEnabled.TabStop = true;
-            this.rbDeintCAVTEnabled.Text = "Content Adaptive Vertical Temporal (CAVT)";
-            this.rbDeintCAVTEnabled.UseVisualStyleBackColor = true;
-            // 
-            // cbDeinterlace
-            // 
-            this.cbDeinterlace.AutoSize = true;
-            this.cbDeinterlace.Location = new System.Drawing.Point(30, 31);
-            this.cbDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDeinterlace.Name = "cbDeinterlace";
-            this.cbDeinterlace.Size = new System.Drawing.Size(101, 29);
-            this.cbDeinterlace.TabIndex = 7;
-            this.cbDeinterlace.Text = "Enabled";
-            this.cbDeinterlace.UseVisualStyleBackColor = true;
-            // 
-            // tabPage59
-            // 
-            this.tabPage59.Controls.Add(this.rbDenoiseCAST);
-            this.tabPage59.Controls.Add(this.rbDenoiseMosquito);
-            this.tabPage59.Controls.Add(this.cbDenoise);
-            this.tabPage59.Location = new System.Drawing.Point(4, 34);
-            this.tabPage59.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage59.Name = "tabPage59";
-            this.tabPage59.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage59.Size = new System.Drawing.Size(489, 894);
-            this.tabPage59.TabIndex = 4;
-            this.tabPage59.Text = "Denoise";
-            this.tabPage59.UseVisualStyleBackColor = true;
-            // 
-            // rbDenoiseCAST
-            // 
-            this.rbDenoiseCAST.AutoSize = true;
-            this.rbDenoiseCAST.Location = new System.Drawing.Point(30, 152);
-            this.rbDenoiseCAST.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDenoiseCAST.Name = "rbDenoiseCAST";
-            this.rbDenoiseCAST.Size = new System.Drawing.Size(369, 29);
-            this.rbDenoiseCAST.TabIndex = 10;
-            this.rbDenoiseCAST.Text = "Content Adaptive Spatio-Temporal (CAST)";
-            this.rbDenoiseCAST.UseVisualStyleBackColor = true;
-            // 
-            // rbDenoiseMosquito
-            // 
-            this.rbDenoiseMosquito.AutoSize = true;
-            this.rbDenoiseMosquito.Checked = true;
-            this.rbDenoiseMosquito.Location = new System.Drawing.Point(30, 100);
-            this.rbDenoiseMosquito.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbDenoiseMosquito.Name = "rbDenoiseMosquito";
-            this.rbDenoiseMosquito.Size = new System.Drawing.Size(114, 29);
-            this.rbDenoiseMosquito.TabIndex = 9;
-            this.rbDenoiseMosquito.TabStop = true;
-            this.rbDenoiseMosquito.Text = "Mosquito";
-            this.rbDenoiseMosquito.UseVisualStyleBackColor = true;
-            // 
-            // cbDenoise
-            // 
-            this.cbDenoise.AutoSize = true;
-            this.cbDenoise.Location = new System.Drawing.Point(30, 31);
-            this.cbDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDenoise.Name = "cbDenoise";
-            this.cbDenoise.Size = new System.Drawing.Size(101, 29);
-            this.cbDenoise.TabIndex = 8;
-            this.cbDenoise.Text = "Enabled";
-            this.cbDenoise.UseVisualStyleBackColor = true;
-            // 
-            // tabPage51
-            // 
-            this.tabPage51.Controls.Add(this.label22);
-            this.tabPage51.Controls.Add(this.tbGPUBlur);
-            this.tabPage51.Controls.Add(this.cbVideoEffectsGPUEnabled);
-            this.tabPage51.Controls.Add(this.cbGPUOldMovie);
-            this.tabPage51.Controls.Add(this.cbGPUDeinterlace);
-            this.tabPage51.Controls.Add(this.cbGPUDenoise);
-            this.tabPage51.Controls.Add(this.cbGPUPixelate);
-            this.tabPage51.Controls.Add(this.cbGPUNightVision);
-            this.tabPage51.Controls.Add(this.label383);
-            this.tabPage51.Controls.Add(this.label384);
-            this.tabPage51.Controls.Add(this.label385);
-            this.tabPage51.Controls.Add(this.label386);
-            this.tabPage51.Controls.Add(this.tbGPUContrast);
-            this.tabPage51.Controls.Add(this.tbGPUDarkness);
-            this.tabPage51.Controls.Add(this.tbGPULightness);
-            this.tabPage51.Controls.Add(this.tbGPUSaturation);
-            this.tabPage51.Controls.Add(this.cbGPUInvert);
-            this.tabPage51.Controls.Add(this.cbGPUGreyscale);
-            this.tabPage51.Location = new System.Drawing.Point(4, 34);
-            this.tabPage51.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage51.Name = "tabPage51";
-            this.tabPage51.Size = new System.Drawing.Size(489, 894);
-            this.tabPage51.TabIndex = 9;
-            this.tabPage51.Text = "Effects (GPU)";
-            this.tabPage51.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(17, 518);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(42, 25);
-            this.label22.TabIndex = 100;
-            this.label22.Text = "Blur";
-            // 
-            // tbGPUBlur
-            // 
-            this.tbGPUBlur.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUBlur.Location = new System.Drawing.Point(11, 548);
-            this.tbGPUBlur.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbGPUBlur.Maximum = 30;
-            this.tbGPUBlur.Name = "tbGPUBlur";
-            this.tbGPUBlur.Size = new System.Drawing.Size(217, 69);
-            this.tbGPUBlur.TabIndex = 99;
-            this.tbGPUBlur.Scroll += new System.EventHandler(this.tbGPUBlur_Scroll);
-            // 
-            // cbVideoEffectsGPUEnabled
-            // 
-            this.cbVideoEffectsGPUEnabled.AutoSize = true;
-            this.cbVideoEffectsGPUEnabled.Location = new System.Drawing.Point(30, 31);
-            this.cbVideoEffectsGPUEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbVideoEffectsGPUEnabled.Name = "cbVideoEffectsGPUEnabled";
-            this.cbVideoEffectsGPUEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbVideoEffectsGPUEnabled.TabIndex = 97;
-            this.cbVideoEffectsGPUEnabled.Text = "Enabled";
-            this.cbVideoEffectsGPUEnabled.UseVisualStyleBackColor = true;
-            // 
-            // cbGPUOldMovie
-            // 
-            this.cbGPUOldMovie.AutoSize = true;
-            this.cbGPUOldMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUOldMovie.Location = new System.Drawing.Point(236, 461);
-            this.cbGPUOldMovie.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUOldMovie.Name = "cbGPUOldMovie";
-            this.cbGPUOldMovie.Size = new System.Drawing.Size(121, 29);
-            this.cbGPUOldMovie.TabIndex = 96;
-            this.cbGPUOldMovie.Text = "Old movie";
-            this.cbGPUOldMovie.UseVisualStyleBackColor = true;
-            this.cbGPUOldMovie.CheckedChanged += new System.EventHandler(this.cbGPUOldMovie_CheckedChanged);
-            // 
-            // cbGPUDeinterlace
-            // 
-            this.cbGPUDeinterlace.AutoSize = true;
-            this.cbGPUDeinterlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUDeinterlace.Location = new System.Drawing.Point(236, 415);
-            this.cbGPUDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUDeinterlace.Name = "cbGPUDeinterlace";
-            this.cbGPUDeinterlace.Size = new System.Drawing.Size(125, 29);
-            this.cbGPUDeinterlace.TabIndex = 94;
-            this.cbGPUDeinterlace.Text = "Deinterlace";
-            this.cbGPUDeinterlace.UseVisualStyleBackColor = true;
-            this.cbGPUDeinterlace.CheckedChanged += new System.EventHandler(this.cbGPUDeinterlace_CheckedChanged);
-            // 
-            // cbGPUDenoise
-            // 
-            this.cbGPUDenoise.AutoSize = true;
-            this.cbGPUDenoise.Location = new System.Drawing.Point(22, 415);
-            this.cbGPUDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUDenoise.Name = "cbGPUDenoise";
-            this.cbGPUDenoise.Size = new System.Drawing.Size(102, 29);
-            this.cbGPUDenoise.TabIndex = 93;
-            this.cbGPUDenoise.Text = "Denoise";
-            this.cbGPUDenoise.UseVisualStyleBackColor = true;
-            this.cbGPUDenoise.CheckedChanged += new System.EventHandler(this.cbGPUDenoise_CheckedChanged);
-            // 
-            // cbGPUPixelate
-            // 
-            this.cbGPUPixelate.AutoSize = true;
-            this.cbGPUPixelate.Location = new System.Drawing.Point(236, 371);
-            this.cbGPUPixelate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUPixelate.Name = "cbGPUPixelate";
-            this.cbGPUPixelate.Size = new System.Drawing.Size(97, 29);
-            this.cbGPUPixelate.TabIndex = 92;
-            this.cbGPUPixelate.Text = "Pixelate";
-            this.cbGPUPixelate.UseVisualStyleBackColor = true;
-            this.cbGPUPixelate.CheckedChanged += new System.EventHandler(this.cbGPUPixelate_CheckedChanged);
-            // 
-            // cbGPUNightVision
-            // 
-            this.cbGPUNightVision.AutoSize = true;
-            this.cbGPUNightVision.Location = new System.Drawing.Point(22, 371);
-            this.cbGPUNightVision.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUNightVision.Name = "cbGPUNightVision";
-            this.cbGPUNightVision.Size = new System.Drawing.Size(133, 29);
-            this.cbGPUNightVision.TabIndex = 91;
-            this.cbGPUNightVision.Text = "Night vision";
-            this.cbGPUNightVision.UseVisualStyleBackColor = true;
-            this.cbGPUNightVision.CheckedChanged += new System.EventHandler(this.cbGPUNightVision_CheckedChanged);
-            // 
-            // label383
-            // 
-            this.label383.AutoSize = true;
-            this.label383.Location = new System.Drawing.Point(243, 192);
-            this.label383.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label383.Name = "label383";
-            this.label383.Size = new System.Drawing.Size(84, 25);
-            this.label383.TabIndex = 90;
-            this.label383.Text = "Darkness";
-            // 
-            // label384
-            // 
-            this.label384.AutoSize = true;
-            this.label384.Location = new System.Drawing.Point(17, 192);
-            this.label384.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label384.Name = "label384";
-            this.label384.Size = new System.Drawing.Size(79, 25);
-            this.label384.TabIndex = 89;
-            this.label384.Text = "Contrast";
-            // 
-            // label385
-            // 
-            this.label385.AutoSize = true;
-            this.label385.Location = new System.Drawing.Point(243, 92);
-            this.label385.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label385.Name = "label385";
-            this.label385.Size = new System.Drawing.Size(93, 25);
-            this.label385.TabIndex = 88;
-            this.label385.Text = "Saturation";
-            // 
-            // label386
-            // 
-            this.label386.AutoSize = true;
-            this.label386.Location = new System.Drawing.Point(17, 92);
-            this.label386.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label386.Name = "label386";
-            this.label386.Size = new System.Drawing.Size(86, 25);
-            this.label386.TabIndex = 87;
-            this.label386.Text = "Lightness";
-            // 
-            // tbGPUContrast
-            // 
-            this.tbGPUContrast.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUContrast.Location = new System.Drawing.Point(11, 229);
-            this.tbGPUContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbGPUContrast.Maximum = 255;
-            this.tbGPUContrast.Name = "tbGPUContrast";
-            this.tbGPUContrast.Size = new System.Drawing.Size(217, 69);
-            this.tbGPUContrast.TabIndex = 86;
-            this.tbGPUContrast.Value = 255;
-            this.tbGPUContrast.Scroll += new System.EventHandler(this.tbGPUContrast_Scroll);
-            // 
-            // tbGPUDarkness
-            // 
-            this.tbGPUDarkness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUDarkness.Location = new System.Drawing.Point(243, 229);
-            this.tbGPUDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbGPUDarkness.Maximum = 255;
-            this.tbGPUDarkness.Name = "tbGPUDarkness";
-            this.tbGPUDarkness.Size = new System.Drawing.Size(217, 69);
-            this.tbGPUDarkness.TabIndex = 85;
-            this.tbGPUDarkness.Scroll += new System.EventHandler(this.tbGPUDarkness_Scroll);
-            // 
-            // tbGPULightness
-            // 
-            this.tbGPULightness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPULightness.Location = new System.Drawing.Point(11, 121);
-            this.tbGPULightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbGPULightness.Maximum = 255;
-            this.tbGPULightness.Name = "tbGPULightness";
-            this.tbGPULightness.Size = new System.Drawing.Size(217, 69);
-            this.tbGPULightness.TabIndex = 84;
-            this.tbGPULightness.Scroll += new System.EventHandler(this.tbGPULightness_Scroll);
-            // 
-            // tbGPUSaturation
-            // 
-            this.tbGPUSaturation.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUSaturation.Location = new System.Drawing.Point(243, 121);
-            this.tbGPUSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbGPUSaturation.Maximum = 255;
-            this.tbGPUSaturation.Name = "tbGPUSaturation";
-            this.tbGPUSaturation.Size = new System.Drawing.Size(217, 69);
-            this.tbGPUSaturation.TabIndex = 83;
-            this.tbGPUSaturation.Value = 255;
-            this.tbGPUSaturation.Scroll += new System.EventHandler(this.tbGPUSaturation_Scroll);
-            // 
-            // cbGPUInvert
-            // 
-            this.cbGPUInvert.AutoSize = true;
-            this.cbGPUInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUInvert.Location = new System.Drawing.Point(236, 328);
-            this.cbGPUInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUInvert.Name = "cbGPUInvert";
-            this.cbGPUInvert.Size = new System.Drawing.Size(83, 29);
-            this.cbGPUInvert.TabIndex = 82;
-            this.cbGPUInvert.Text = "Invert";
-            this.cbGPUInvert.UseVisualStyleBackColor = true;
-            this.cbGPUInvert.CheckedChanged += new System.EventHandler(this.cbGPUInvert_CheckedChanged);
-            // 
-            // cbGPUGreyscale
-            // 
-            this.cbGPUGreyscale.AutoSize = true;
-            this.cbGPUGreyscale.Location = new System.Drawing.Point(22, 328);
-            this.cbGPUGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbGPUGreyscale.Name = "cbGPUGreyscale";
-            this.cbGPUGreyscale.Size = new System.Drawing.Size(112, 29);
-            this.cbGPUGreyscale.TabIndex = 81;
-            this.cbGPUGreyscale.Text = "Greyscale";
-            this.cbGPUGreyscale.UseVisualStyleBackColor = true;
-            this.cbGPUGreyscale.CheckedChanged += new System.EventHandler(this.cbGPUGreyscale_CheckedChanged);
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Controls.Add(this.lbAdjSaturationCurrent);
-            this.tabPage8.Controls.Add(this.lbAdjSaturationMax);
-            this.tabPage8.Controls.Add(this.lbAdjSaturationMin);
-            this.tabPage8.Controls.Add(this.tbAdjSaturation);
-            this.tabPage8.Controls.Add(this.label45);
-            this.tabPage8.Controls.Add(this.lbAdjHueCurrent);
-            this.tabPage8.Controls.Add(this.lbAdjHueMax);
-            this.tabPage8.Controls.Add(this.lbAdjHueMin);
-            this.tabPage8.Controls.Add(this.tbAdjHue);
-            this.tabPage8.Controls.Add(this.label41);
-            this.tabPage8.Controls.Add(this.lbAdjContrastCurrent);
-            this.tabPage8.Controls.Add(this.lbAdjContrastMax);
-            this.tabPage8.Controls.Add(this.lbAdjContrastMin);
-            this.tabPage8.Controls.Add(this.tbAdjContrast);
-            this.tabPage8.Controls.Add(this.label23);
-            this.tabPage8.Controls.Add(this.lbAdjBrightnessCurrent);
-            this.tabPage8.Controls.Add(this.lbAdjBrightnessMax);
-            this.tabPage8.Controls.Add(this.lbAdjBrightnessMin);
-            this.tabPage8.Controls.Add(this.tbAdjBrightness);
-            this.tabPage8.Controls.Add(this.label24);
-            this.tabPage8.Location = new System.Drawing.Point(4, 34);
-            this.tabPage8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage8.Size = new System.Drawing.Size(489, 894);
-            this.tabPage8.TabIndex = 5;
-            this.tabPage8.Text = "Effects (Video renderer)";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // lbAdjSaturationCurrent
-            // 
-            this.lbAdjSaturationCurrent.AutoSize = true;
-            this.lbAdjSaturationCurrent.Location = new System.Drawing.Point(217, 511);
-            this.lbAdjSaturationCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjSaturationCurrent.Name = "lbAdjSaturationCurrent";
-            this.lbAdjSaturationCurrent.Size = new System.Drawing.Size(112, 25);
-            this.lbAdjSaturationCurrent.TabIndex = 48;
-            this.lbAdjSaturationCurrent.Text = "Current = 40";
-            // 
-            // lbAdjSaturationMax
-            // 
-            this.lbAdjSaturationMax.AutoSize = true;
-            this.lbAdjSaturationMax.Location = new System.Drawing.Point(111, 511);
-            this.lbAdjSaturationMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjSaturationMax.Name = "lbAdjSaturationMax";
-            this.lbAdjSaturationMax.Size = new System.Drawing.Size(97, 25);
-            this.lbAdjSaturationMax.TabIndex = 47;
-            this.lbAdjSaturationMax.Text = "Max = 100";
-            // 
-            // lbAdjSaturationMin
-            // 
-            this.lbAdjSaturationMin.AutoSize = true;
-            this.lbAdjSaturationMin.Location = new System.Drawing.Point(31, 511);
-            this.lbAdjSaturationMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjSaturationMin.Name = "lbAdjSaturationMin";
-            this.lbAdjSaturationMin.Size = new System.Drawing.Size(74, 25);
-            this.lbAdjSaturationMin.TabIndex = 45;
-            this.lbAdjSaturationMin.Text = "Min = 1";
-            // 
-            // tbAdjSaturation
-            // 
-            this.tbAdjSaturation.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAdjSaturation.Location = new System.Drawing.Point(22, 456);
-            this.tbAdjSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAdjSaturation.Maximum = 100;
-            this.tbAdjSaturation.Name = "tbAdjSaturation";
-            this.tbAdjSaturation.Size = new System.Drawing.Size(318, 69);
-            this.tbAdjSaturation.TabIndex = 44;
-            this.tbAdjSaturation.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAdjSaturation.Value = 50;
-            this.tbAdjSaturation.Scroll += new System.EventHandler(this.tbAdjSaturation_Scroll);
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(17, 425);
-            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(93, 25);
-            this.label45.TabIndex = 43;
-            this.label45.Text = "Saturation";
-            // 
-            // lbAdjHueCurrent
-            // 
-            this.lbAdjHueCurrent.AutoSize = true;
-            this.lbAdjHueCurrent.Location = new System.Drawing.Point(217, 381);
-            this.lbAdjHueCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjHueCurrent.Name = "lbAdjHueCurrent";
-            this.lbAdjHueCurrent.Size = new System.Drawing.Size(112, 25);
-            this.lbAdjHueCurrent.TabIndex = 42;
-            this.lbAdjHueCurrent.Text = "Current = 40";
-            // 
-            // lbAdjHueMax
-            // 
-            this.lbAdjHueMax.AutoSize = true;
-            this.lbAdjHueMax.Location = new System.Drawing.Point(111, 381);
-            this.lbAdjHueMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjHueMax.Name = "lbAdjHueMax";
-            this.lbAdjHueMax.Size = new System.Drawing.Size(97, 25);
-            this.lbAdjHueMax.TabIndex = 41;
-            this.lbAdjHueMax.Text = "Max = 100";
-            // 
-            // lbAdjHueMin
-            // 
-            this.lbAdjHueMin.AutoSize = true;
-            this.lbAdjHueMin.Location = new System.Drawing.Point(31, 381);
-            this.lbAdjHueMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjHueMin.Name = "lbAdjHueMin";
-            this.lbAdjHueMin.Size = new System.Drawing.Size(74, 25);
-            this.lbAdjHueMin.TabIndex = 39;
-            this.lbAdjHueMin.Text = "Min = 1";
-            // 
-            // tbAdjHue
-            // 
-            this.tbAdjHue.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAdjHue.Location = new System.Drawing.Point(22, 325);
-            this.tbAdjHue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAdjHue.Maximum = 100;
-            this.tbAdjHue.Name = "tbAdjHue";
-            this.tbAdjHue.Size = new System.Drawing.Size(318, 69);
-            this.tbAdjHue.TabIndex = 38;
-            this.tbAdjHue.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAdjHue.Value = 50;
-            this.tbAdjHue.Scroll += new System.EventHandler(this.tbAdjHue_Scroll);
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(17, 294);
-            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(44, 25);
-            this.label41.TabIndex = 37;
-            this.label41.Text = "Hue";
-            // 
-            // lbAdjContrastCurrent
-            // 
-            this.lbAdjContrastCurrent.AutoSize = true;
-            this.lbAdjContrastCurrent.Location = new System.Drawing.Point(217, 246);
-            this.lbAdjContrastCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjContrastCurrent.Name = "lbAdjContrastCurrent";
-            this.lbAdjContrastCurrent.Size = new System.Drawing.Size(112, 25);
-            this.lbAdjContrastCurrent.TabIndex = 36;
-            this.lbAdjContrastCurrent.Text = "Current = 40";
-            // 
-            // lbAdjContrastMax
-            // 
-            this.lbAdjContrastMax.AutoSize = true;
-            this.lbAdjContrastMax.Location = new System.Drawing.Point(111, 246);
-            this.lbAdjContrastMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjContrastMax.Name = "lbAdjContrastMax";
-            this.lbAdjContrastMax.Size = new System.Drawing.Size(97, 25);
-            this.lbAdjContrastMax.TabIndex = 35;
-            this.lbAdjContrastMax.Text = "Max = 100";
-            // 
-            // lbAdjContrastMin
-            // 
-            this.lbAdjContrastMin.AutoSize = true;
-            this.lbAdjContrastMin.Location = new System.Drawing.Point(31, 246);
-            this.lbAdjContrastMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjContrastMin.Name = "lbAdjContrastMin";
-            this.lbAdjContrastMin.Size = new System.Drawing.Size(74, 25);
-            this.lbAdjContrastMin.TabIndex = 33;
-            this.lbAdjContrastMin.Text = "Min = 1";
-            // 
-            // tbAdjContrast
-            // 
-            this.tbAdjContrast.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAdjContrast.Location = new System.Drawing.Point(22, 190);
-            this.tbAdjContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAdjContrast.Maximum = 100;
-            this.tbAdjContrast.Name = "tbAdjContrast";
-            this.tbAdjContrast.Size = new System.Drawing.Size(318, 69);
-            this.tbAdjContrast.TabIndex = 32;
-            this.tbAdjContrast.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAdjContrast.Value = 50;
-            this.tbAdjContrast.Scroll += new System.EventHandler(this.tbAdjContrast_Scroll);
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(17, 160);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(79, 25);
-            this.label23.TabIndex = 31;
-            this.label23.Text = "Contrast";
-            // 
-            // lbAdjBrightnessCurrent
-            // 
-            this.lbAdjBrightnessCurrent.AutoSize = true;
-            this.lbAdjBrightnessCurrent.Location = new System.Drawing.Point(217, 115);
-            this.lbAdjBrightnessCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjBrightnessCurrent.Name = "lbAdjBrightnessCurrent";
-            this.lbAdjBrightnessCurrent.Size = new System.Drawing.Size(112, 25);
-            this.lbAdjBrightnessCurrent.TabIndex = 30;
-            this.lbAdjBrightnessCurrent.Text = "Current = 40";
-            // 
-            // lbAdjBrightnessMax
-            // 
-            this.lbAdjBrightnessMax.AutoSize = true;
-            this.lbAdjBrightnessMax.Location = new System.Drawing.Point(111, 115);
-            this.lbAdjBrightnessMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjBrightnessMax.Name = "lbAdjBrightnessMax";
-            this.lbAdjBrightnessMax.Size = new System.Drawing.Size(97, 25);
-            this.lbAdjBrightnessMax.TabIndex = 29;
-            this.lbAdjBrightnessMax.Text = "Max = 100";
-            // 
-            // lbAdjBrightnessMin
-            // 
-            this.lbAdjBrightnessMin.AutoSize = true;
-            this.lbAdjBrightnessMin.Location = new System.Drawing.Point(31, 115);
-            this.lbAdjBrightnessMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAdjBrightnessMin.Name = "lbAdjBrightnessMin";
-            this.lbAdjBrightnessMin.Size = new System.Drawing.Size(74, 25);
-            this.lbAdjBrightnessMin.TabIndex = 27;
-            this.lbAdjBrightnessMin.Text = "Min = 1";
-            // 
-            // tbAdjBrightness
-            // 
-            this.tbAdjBrightness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAdjBrightness.Location = new System.Drawing.Point(22, 60);
-            this.tbAdjBrightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAdjBrightness.Maximum = 100;
-            this.tbAdjBrightness.Name = "tbAdjBrightness";
-            this.tbAdjBrightness.Size = new System.Drawing.Size(318, 69);
-            this.tbAdjBrightness.TabIndex = 26;
-            this.tbAdjBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAdjBrightness.Value = 50;
-            this.tbAdjBrightness.Scroll += new System.EventHandler(this.tbAdjBrightness_Scroll);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(17, 29);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(94, 25);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "Brightness";
-            // 
-            // tabPage15
-            // 
-            this.tabPage15.Controls.Add(this.pnChromaKeyColor);
-            this.tabPage15.Controls.Add(this.btChromaKeySelectBGImage);
-            this.tabPage15.Controls.Add(this.edChromaKeyImage);
-            this.tabPage15.Controls.Add(this.label216);
-            this.tabPage15.Controls.Add(this.label215);
-            this.tabPage15.Controls.Add(this.tbChromaKeySmoothing);
-            this.tabPage15.Controls.Add(this.label214);
-            this.tabPage15.Controls.Add(this.tbChromaKeyThresholdSensitivity);
-            this.tabPage15.Controls.Add(this.label213);
-            this.tabPage15.Controls.Add(this.cbChromaKeyEnabled);
-            this.tabPage15.Location = new System.Drawing.Point(4, 34);
-            this.tabPage15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage15.Size = new System.Drawing.Size(489, 894);
-            this.tabPage15.TabIndex = 7;
-            this.tabPage15.Text = "Chroma key";
-            this.tabPage15.UseVisualStyleBackColor = true;
-            // 
-            // pnChromaKeyColor
-            // 
-            this.pnChromaKeyColor.BackColor = System.Drawing.Color.Lime;
-            this.pnChromaKeyColor.ForeColor = System.Drawing.SystemColors.Control;
-            this.pnChromaKeyColor.Location = new System.Drawing.Point(91, 385);
-            this.pnChromaKeyColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pnChromaKeyColor.Name = "pnChromaKeyColor";
-            this.pnChromaKeyColor.Size = new System.Drawing.Size(43, 46);
-            this.pnChromaKeyColor.TabIndex = 33;
-            this.pnChromaKeyColor.Click += new System.EventHandler(this.pnChromaKeyColor_Click);
-            // 
-            // btChromaKeySelectBGImage
-            // 
-            this.btChromaKeySelectBGImage.Location = new System.Drawing.Point(424, 504);
-            this.btChromaKeySelectBGImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btChromaKeySelectBGImage.Name = "btChromaKeySelectBGImage";
-            this.btChromaKeySelectBGImage.Size = new System.Drawing.Size(40, 44);
-            this.btChromaKeySelectBGImage.TabIndex = 32;
-            this.btChromaKeySelectBGImage.Text = "...";
-            this.btChromaKeySelectBGImage.UseVisualStyleBackColor = true;
-            this.btChromaKeySelectBGImage.Click += new System.EventHandler(this.btChromaKeySelectBGImage_Click);
-            // 
-            // edChromaKeyImage
-            // 
-            this.edChromaKeyImage.Location = new System.Drawing.Point(22, 508);
-            this.edChromaKeyImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edChromaKeyImage.Name = "edChromaKeyImage";
-            this.edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
-            this.edChromaKeyImage.TabIndex = 31;
-            this.edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
-            // 
-            // label216
-            // 
-            this.label216.AutoSize = true;
-            this.label216.Location = new System.Drawing.Point(17, 478);
-            this.label216.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label216.Name = "label216";
-            this.label216.Size = new System.Drawing.Size(191, 25);
-            this.label216.TabIndex = 30;
-            this.label216.Text = "Image background file";
-            // 
-            // label215
-            // 
-            this.label215.AutoSize = true;
-            this.label215.Location = new System.Drawing.Point(17, 392);
-            this.label215.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label215.Name = "label215";
-            this.label215.Size = new System.Drawing.Size(55, 25);
-            this.label215.TabIndex = 26;
-            this.label215.Text = "Color";
-            // 
-            // tbChromaKeySmoothing
-            // 
-            this.tbChromaKeySmoothing.BackColor = System.Drawing.SystemColors.Window;
-            this.tbChromaKeySmoothing.Location = new System.Drawing.Point(22, 279);
-            this.tbChromaKeySmoothing.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbChromaKeySmoothing.Maximum = 1000;
-            this.tbChromaKeySmoothing.Name = "tbChromaKeySmoothing";
-            this.tbChromaKeySmoothing.Size = new System.Drawing.Size(257, 69);
-            this.tbChromaKeySmoothing.TabIndex = 25;
-            this.tbChromaKeySmoothing.Value = 80;
-            this.tbChromaKeySmoothing.Scroll += new System.EventHandler(this.tbChromaKeyContrastHigh_Scroll);
-            // 
-            // label214
-            // 
-            this.label214.AutoSize = true;
-            this.label214.Location = new System.Drawing.Point(17, 244);
-            this.label214.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label214.Name = "label214";
-            this.label214.Size = new System.Drawing.Size(101, 25);
-            this.label214.TabIndex = 24;
-            this.label214.Text = "Smoothing";
-            // 
-            // tbChromaKeyThresholdSensitivity
-            // 
-            this.tbChromaKeyThresholdSensitivity.BackColor = System.Drawing.SystemColors.Window;
-            this.tbChromaKeyThresholdSensitivity.Location = new System.Drawing.Point(22, 139);
-            this.tbChromaKeyThresholdSensitivity.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbChromaKeyThresholdSensitivity.Maximum = 200;
-            this.tbChromaKeyThresholdSensitivity.Name = "tbChromaKeyThresholdSensitivity";
-            this.tbChromaKeyThresholdSensitivity.Size = new System.Drawing.Size(257, 69);
-            this.tbChromaKeyThresholdSensitivity.TabIndex = 23;
-            this.tbChromaKeyThresholdSensitivity.Value = 180;
-            this.tbChromaKeyThresholdSensitivity.Scroll += new System.EventHandler(this.tbChromaKeyContrastLow_Scroll);
-            // 
-            // label213
-            // 
-            this.label213.AutoSize = true;
-            this.label213.Location = new System.Drawing.Point(17, 104);
-            this.label213.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label213.Name = "label213";
-            this.label213.Size = new System.Drawing.Size(172, 25);
-            this.label213.TabIndex = 22;
-            this.label213.Text = "Threshold sensitivity";
-            // 
-            // cbChromaKeyEnabled
-            // 
-            this.cbChromaKeyEnabled.AutoSize = true;
-            this.cbChromaKeyEnabled.Location = new System.Drawing.Point(22, 29);
-            this.cbChromaKeyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbChromaKeyEnabled.Name = "cbChromaKeyEnabled";
-            this.cbChromaKeyEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbChromaKeyEnabled.TabIndex = 21;
-            this.cbChromaKeyEnabled.Text = "Enabled";
-            this.cbChromaKeyEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage46
-            // 
-            this.tabPage46.Controls.Add(this.btFilterDelete);
-            this.tabPage46.Controls.Add(this.btFilterDeleteAll);
-            this.tabPage46.Controls.Add(this.btFilterSettings2);
-            this.tabPage46.Controls.Add(this.lbFilters);
-            this.tabPage46.Controls.Add(this.label106);
-            this.tabPage46.Controls.Add(this.btFilterSettings);
-            this.tabPage46.Controls.Add(this.btFilterAdd);
-            this.tabPage46.Controls.Add(this.cbFilters);
-            this.tabPage46.Controls.Add(this.label105);
-            this.tabPage46.Location = new System.Drawing.Point(4, 34);
-            this.tabPage46.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage46.Name = "tabPage46";
-            this.tabPage46.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage46.Size = new System.Drawing.Size(489, 894);
-            this.tabPage46.TabIndex = 8;
-            this.tabPage46.Text = "3rd-party filters";
-            this.tabPage46.UseVisualStyleBackColor = true;
-            // 
-            // btFilterDelete
-            // 
-            this.btFilterDelete.Location = new System.Drawing.Point(250, 546);
-            this.btFilterDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFilterDelete.Name = "btFilterDelete";
-            this.btFilterDelete.Size = new System.Drawing.Size(80, 44);
-            this.btFilterDelete.TabIndex = 26;
-            this.btFilterDelete.Text = "Delete";
-            this.btFilterDelete.UseVisualStyleBackColor = true;
-            this.btFilterDelete.Click += new System.EventHandler(this.btFilterDelete_Click);
-            // 
-            // btFilterDeleteAll
-            // 
-            this.btFilterDeleteAll.Location = new System.Drawing.Point(340, 546);
-            this.btFilterDeleteAll.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFilterDeleteAll.Name = "btFilterDeleteAll";
-            this.btFilterDeleteAll.Size = new System.Drawing.Size(113, 44);
-            this.btFilterDeleteAll.TabIndex = 25;
-            this.btFilterDeleteAll.Text = "Delete all";
-            this.btFilterDeleteAll.UseVisualStyleBackColor = true;
-            this.btFilterDeleteAll.Click += new System.EventHandler(this.btFilterDeleteAll_Click);
-            // 
-            // btFilterSettings2
-            // 
-            this.btFilterSettings2.Location = new System.Drawing.Point(20, 546);
-            this.btFilterSettings2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFilterSettings2.Name = "btFilterSettings2";
-            this.btFilterSettings2.Size = new System.Drawing.Size(109, 44);
-            this.btFilterSettings2.TabIndex = 24;
-            this.btFilterSettings2.Text = "Settings";
-            this.btFilterSettings2.UseVisualStyleBackColor = true;
-            this.btFilterSettings2.Click += new System.EventHandler(this.btFilterSettings2_Click);
-            // 
-            // lbFilters
-            // 
-            this.lbFilters.FormattingEnabled = true;
-            this.lbFilters.ItemHeight = 25;
-            this.lbFilters.Location = new System.Drawing.Point(20, 228);
-            this.lbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbFilters.Name = "lbFilters";
-            this.lbFilters.Size = new System.Drawing.Size(431, 304);
-            this.lbFilters.TabIndex = 23;
-            this.lbFilters.SelectedIndexChanged += new System.EventHandler(this.lbFilters_SelectedIndexChanged);
-            // 
-            // label106
-            // 
-            this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(16, 196);
-            this.label106.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(118, 25);
-            this.label106.TabIndex = 22;
-            this.label106.Text = "Current filters";
-            // 
-            // btFilterSettings
-            // 
-            this.btFilterSettings.Location = new System.Drawing.Point(340, 104);
-            this.btFilterSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFilterSettings.Name = "btFilterSettings";
-            this.btFilterSettings.Size = new System.Drawing.Size(113, 44);
-            this.btFilterSettings.TabIndex = 21;
-            this.btFilterSettings.Text = "Settings";
-            this.btFilterSettings.UseVisualStyleBackColor = true;
-            this.btFilterSettings.Click += new System.EventHandler(this.btFilterSettings_Click);
-            // 
-            // btFilterAdd
-            // 
-            this.btFilterAdd.Location = new System.Drawing.Point(20, 104);
-            this.btFilterAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btFilterAdd.Name = "btFilterAdd";
-            this.btFilterAdd.Size = new System.Drawing.Size(64, 44);
-            this.btFilterAdd.TabIndex = 20;
-            this.btFilterAdd.Text = "Add";
-            this.btFilterAdd.UseVisualStyleBackColor = true;
-            this.btFilterAdd.Click += new System.EventHandler(this.btFilterAdd_Click);
-            // 
-            // cbFilters
-            // 
-            this.cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilters.FormattingEnabled = true;
-            this.cbFilters.Location = new System.Drawing.Point(20, 52);
-            this.cbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbFilters.Name = "cbFilters";
-            this.cbFilters.Size = new System.Drawing.Size(431, 33);
-            this.cbFilters.TabIndex = 19;
-            this.cbFilters.SelectedIndexChanged += new System.EventHandler(this.cbFilters_SelectedIndexChanged);
-            // 
-            // label105
-            // 
-            this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(16, 21);
-            this.label105.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(58, 25);
-            this.label105.TabIndex = 18;
-            this.label105.Text = "Filters";
-            // 
-            // tabPage48
-            // 
-            this.tabPage48.Controls.Add(this.lbAudioTimeshift);
-            this.tabPage48.Controls.Add(this.tbAudioTimeshift);
-            this.tabPage48.Controls.Add(this.label70);
-            this.tabPage48.Controls.Add(this.groupBox4);
-            this.tabPage48.Controls.Add(this.groupBox1);
-            this.tabPage48.Controls.Add(this.cbAudioAutoGain);
-            this.tabPage48.Controls.Add(this.cbAudioNormalize);
-            this.tabPage48.Controls.Add(this.cbAudioEnhancementEnabled);
-            this.tabPage48.Location = new System.Drawing.Point(4, 34);
-            this.tabPage48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage48.Name = "tabPage48";
-            this.tabPage48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage48.Size = new System.Drawing.Size(508, 958);
-            this.tabPage48.TabIndex = 12;
-            this.tabPage48.Text = "Audio enhancement";
-            this.tabPage48.UseVisualStyleBackColor = true;
-            // 
-            // lbAudioTimeshift
-            // 
-            this.lbAudioTimeshift.AutoSize = true;
-            this.lbAudioTimeshift.Location = new System.Drawing.Point(290, 861);
-            this.lbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioTimeshift.Name = "lbAudioTimeshift";
-            this.lbAudioTimeshift.Size = new System.Drawing.Size(51, 25);
-            this.lbAudioTimeshift.TabIndex = 7;
-            this.lbAudioTimeshift.Text = "0 ms";
-            // 
-            // tbAudioTimeshift
-            // 
-            this.tbAudioTimeshift.Location = new System.Drawing.Point(107, 840);
-            this.tbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioTimeshift.Maximum = 3000;
-            this.tbAudioTimeshift.Name = "tbAudioTimeshift";
-            this.tbAudioTimeshift.Size = new System.Drawing.Size(173, 69);
-            this.tbAudioTimeshift.SmallChange = 10;
-            this.tbAudioTimeshift.TabIndex = 6;
-            this.tbAudioTimeshift.TickFrequency = 100;
-            this.tbAudioTimeshift.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioTimeshift.Scroll += new System.EventHandler(this.tbAudioTimeshift_Scroll);
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(4, 861);
-            this.label70.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(89, 25);
-            this.label70.TabIndex = 5;
-            this.label70.Text = "Time shift";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainLFE);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainLFE);
-            this.groupBox4.Controls.Add(this.label55);
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainSR);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainSR);
-            this.groupBox4.Controls.Add(this.label57);
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainSL);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainSL);
-            this.groupBox4.Controls.Add(this.label59);
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainR);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainR);
-            this.groupBox4.Controls.Add(this.label61);
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainC);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainC);
-            this.groupBox4.Controls.Add(this.label67);
-            this.groupBox4.Controls.Add(this.lbAudioOutputGainL);
-            this.groupBox4.Controls.Add(this.tbAudioOutputGainL);
-            this.groupBox4.Controls.Add(this.label69);
-            this.groupBox4.Location = new System.Drawing.Point(10, 494);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox4.Size = new System.Drawing.Size(482, 331);
-            this.groupBox4.TabIndex = 4;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Output gains (dB)";
-            // 
-            // lbAudioOutputGainLFE
-            // 
-            this.lbAudioOutputGainLFE.AutoSize = true;
-            this.lbAudioOutputGainLFE.Location = new System.Drawing.Point(416, 285);
-            this.lbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainLFE.Name = "lbAudioOutputGainLFE";
-            this.lbAudioOutputGainLFE.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainLFE.TabIndex = 17;
-            this.lbAudioOutputGainLFE.Text = "0.0";
-            // 
-            // tbAudioOutputGainLFE
-            // 
-            this.tbAudioOutputGainLFE.Location = new System.Drawing.Point(403, 79);
-            this.tbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainLFE.Maximum = 200;
-            this.tbAudioOutputGainLFE.Minimum = -200;
-            this.tbAudioOutputGainLFE.Name = "tbAudioOutputGainLFE";
-            this.tbAudioOutputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainLFE.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainLFE.TabIndex = 16;
-            this.tbAudioOutputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainLFE.Scroll += new System.EventHandler(this.tbAudioOutputGainLFE_Scroll);
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(417, 48);
-            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(38, 25);
-            this.label55.TabIndex = 15;
-            this.label55.Text = "LFE";
-            // 
-            // lbAudioOutputGainSR
-            // 
-            this.lbAudioOutputGainSR.AutoSize = true;
-            this.lbAudioOutputGainSR.Location = new System.Drawing.Point(336, 285);
-            this.lbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainSR.Name = "lbAudioOutputGainSR";
-            this.lbAudioOutputGainSR.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainSR.TabIndex = 14;
-            this.lbAudioOutputGainSR.Text = "0.0";
-            // 
-            // tbAudioOutputGainSR
-            // 
-            this.tbAudioOutputGainSR.Location = new System.Drawing.Point(323, 79);
-            this.tbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainSR.Maximum = 200;
-            this.tbAudioOutputGainSR.Minimum = -200;
-            this.tbAudioOutputGainSR.Name = "tbAudioOutputGainSR";
-            this.tbAudioOutputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainSR.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainSR.TabIndex = 13;
-            this.tbAudioOutputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainSR.Scroll += new System.EventHandler(this.tbAudioOutputGainSR_Scroll);
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(342, 48);
-            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(33, 25);
-            this.label57.TabIndex = 12;
-            this.label57.Text = "SR";
-            // 
-            // lbAudioOutputGainSL
-            // 
-            this.lbAudioOutputGainSL.AutoSize = true;
-            this.lbAudioOutputGainSL.Location = new System.Drawing.Point(256, 285);
-            this.lbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainSL.Name = "lbAudioOutputGainSL";
-            this.lbAudioOutputGainSL.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainSL.TabIndex = 11;
-            this.lbAudioOutputGainSL.Text = "0.0";
-            // 
-            // tbAudioOutputGainSL
-            // 
-            this.tbAudioOutputGainSL.Location = new System.Drawing.Point(243, 79);
-            this.tbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainSL.Maximum = 200;
-            this.tbAudioOutputGainSL.Minimum = -200;
-            this.tbAudioOutputGainSL.Name = "tbAudioOutputGainSL";
-            this.tbAudioOutputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainSL.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainSL.TabIndex = 10;
-            this.tbAudioOutputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainSL.Scroll += new System.EventHandler(this.tbAudioOutputGainSL_Scroll);
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(263, 48);
-            this.label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(30, 25);
-            this.label59.TabIndex = 9;
-            this.label59.Text = "SL";
-            // 
-            // lbAudioOutputGainR
-            // 
-            this.lbAudioOutputGainR.AutoSize = true;
-            this.lbAudioOutputGainR.Location = new System.Drawing.Point(176, 285);
-            this.lbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainR.Name = "lbAudioOutputGainR";
-            this.lbAudioOutputGainR.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainR.TabIndex = 8;
-            this.lbAudioOutputGainR.Text = "0.0";
-            // 
-            // tbAudioOutputGainR
-            // 
-            this.tbAudioOutputGainR.Location = new System.Drawing.Point(163, 79);
-            this.tbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainR.Maximum = 200;
-            this.tbAudioOutputGainR.Minimum = -200;
-            this.tbAudioOutputGainR.Name = "tbAudioOutputGainR";
-            this.tbAudioOutputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainR.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainR.TabIndex = 7;
-            this.tbAudioOutputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainR.Scroll += new System.EventHandler(this.tbAudioOutputGainR_Scroll);
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(190, 48);
-            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(23, 25);
-            this.label61.TabIndex = 6;
-            this.label61.Text = "R";
-            // 
-            // lbAudioOutputGainC
-            // 
-            this.lbAudioOutputGainC.AutoSize = true;
-            this.lbAudioOutputGainC.Location = new System.Drawing.Point(96, 285);
-            this.lbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainC.Name = "lbAudioOutputGainC";
-            this.lbAudioOutputGainC.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainC.TabIndex = 5;
-            this.lbAudioOutputGainC.Text = "0.0";
-            // 
-            // tbAudioOutputGainC
-            // 
-            this.tbAudioOutputGainC.Location = new System.Drawing.Point(83, 79);
-            this.tbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainC.Maximum = 200;
-            this.tbAudioOutputGainC.Minimum = -200;
-            this.tbAudioOutputGainC.Name = "tbAudioOutputGainC";
-            this.tbAudioOutputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainC.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainC.TabIndex = 4;
-            this.tbAudioOutputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainC.Scroll += new System.EventHandler(this.tbAudioOutputGainC_Scroll);
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(110, 48);
-            this.label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(23, 25);
-            this.label67.TabIndex = 3;
-            this.label67.Text = "C";
-            // 
-            // lbAudioOutputGainL
-            // 
-            this.lbAudioOutputGainL.AutoSize = true;
-            this.lbAudioOutputGainL.Location = new System.Drawing.Point(16, 285);
-            this.lbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainL.Name = "lbAudioOutputGainL";
-            this.lbAudioOutputGainL.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioOutputGainL.TabIndex = 2;
-            this.lbAudioOutputGainL.Text = "0.0";
-            // 
-            // tbAudioOutputGainL
-            // 
-            this.tbAudioOutputGainL.Location = new System.Drawing.Point(3, 79);
-            this.tbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioOutputGainL.Maximum = 200;
-            this.tbAudioOutputGainL.Minimum = -200;
-            this.tbAudioOutputGainL.Name = "tbAudioOutputGainL";
-            this.tbAudioOutputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainL.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioOutputGainL.TabIndex = 1;
-            this.tbAudioOutputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainL.Scroll += new System.EventHandler(this.tbAudioOutputGainL_Scroll);
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(30, 48);
-            this.label69.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(20, 25);
-            this.label69.TabIndex = 0;
-            this.label69.Text = "L";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lbAudioInputGainLFE);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainLFE);
-            this.groupBox1.Controls.Add(this.label53);
-            this.groupBox1.Controls.Add(this.lbAudioInputGainSR);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainSR);
-            this.groupBox1.Controls.Add(this.label51);
-            this.groupBox1.Controls.Add(this.lbAudioInputGainSL);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainSL);
-            this.groupBox1.Controls.Add(this.label49);
-            this.groupBox1.Controls.Add(this.lbAudioInputGainR);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainR);
-            this.groupBox1.Controls.Add(this.label47);
-            this.groupBox1.Controls.Add(this.lbAudioInputGainC);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainC);
-            this.groupBox1.Controls.Add(this.label44);
-            this.groupBox1.Controls.Add(this.lbAudioInputGainL);
-            this.groupBox1.Controls.Add(this.tbAudioInputGainL);
-            this.groupBox1.Controls.Add(this.label40);
-            this.groupBox1.Location = new System.Drawing.Point(10, 152);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox1.Size = new System.Drawing.Size(482, 331);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Input gains (dB)";
-            // 
-            // lbAudioInputGainLFE
-            // 
-            this.lbAudioInputGainLFE.AutoSize = true;
-            this.lbAudioInputGainLFE.Location = new System.Drawing.Point(416, 285);
-            this.lbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainLFE.Name = "lbAudioInputGainLFE";
-            this.lbAudioInputGainLFE.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainLFE.TabIndex = 17;
-            this.lbAudioInputGainLFE.Text = "0.0";
-            // 
-            // tbAudioInputGainLFE
-            // 
-            this.tbAudioInputGainLFE.Location = new System.Drawing.Point(403, 79);
-            this.tbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainLFE.Maximum = 200;
-            this.tbAudioInputGainLFE.Minimum = -200;
-            this.tbAudioInputGainLFE.Name = "tbAudioInputGainLFE";
-            this.tbAudioInputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainLFE.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainLFE.TabIndex = 16;
-            this.tbAudioInputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainLFE.Scroll += new System.EventHandler(this.tbAudioInputGainLFE_Scroll);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(417, 48);
-            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(38, 25);
-            this.label53.TabIndex = 15;
-            this.label53.Text = "LFE";
-            // 
-            // lbAudioInputGainSR
-            // 
-            this.lbAudioInputGainSR.AutoSize = true;
-            this.lbAudioInputGainSR.Location = new System.Drawing.Point(336, 285);
-            this.lbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainSR.Name = "lbAudioInputGainSR";
-            this.lbAudioInputGainSR.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainSR.TabIndex = 14;
-            this.lbAudioInputGainSR.Text = "0.0";
-            // 
-            // tbAudioInputGainSR
-            // 
-            this.tbAudioInputGainSR.Location = new System.Drawing.Point(323, 79);
-            this.tbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainSR.Maximum = 200;
-            this.tbAudioInputGainSR.Minimum = -200;
-            this.tbAudioInputGainSR.Name = "tbAudioInputGainSR";
-            this.tbAudioInputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainSR.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainSR.TabIndex = 13;
-            this.tbAudioInputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainSR.Scroll += new System.EventHandler(this.tbAudioInputGainSR_Scroll);
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(342, 48);
-            this.label51.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(33, 25);
-            this.label51.TabIndex = 12;
-            this.label51.Text = "SR";
-            // 
-            // lbAudioInputGainSL
-            // 
-            this.lbAudioInputGainSL.AutoSize = true;
-            this.lbAudioInputGainSL.Location = new System.Drawing.Point(256, 285);
-            this.lbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainSL.Name = "lbAudioInputGainSL";
-            this.lbAudioInputGainSL.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainSL.TabIndex = 11;
-            this.lbAudioInputGainSL.Text = "0.0";
-            // 
-            // tbAudioInputGainSL
-            // 
-            this.tbAudioInputGainSL.Location = new System.Drawing.Point(243, 79);
-            this.tbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainSL.Maximum = 200;
-            this.tbAudioInputGainSL.Minimum = -200;
-            this.tbAudioInputGainSL.Name = "tbAudioInputGainSL";
-            this.tbAudioInputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainSL.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainSL.TabIndex = 10;
-            this.tbAudioInputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainSL.Scroll += new System.EventHandler(this.tbAudioInputGainSL_Scroll);
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(263, 48);
-            this.label49.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(30, 25);
-            this.label49.TabIndex = 9;
-            this.label49.Text = "SL";
-            // 
-            // lbAudioInputGainR
-            // 
-            this.lbAudioInputGainR.AutoSize = true;
-            this.lbAudioInputGainR.Location = new System.Drawing.Point(176, 285);
-            this.lbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainR.Name = "lbAudioInputGainR";
-            this.lbAudioInputGainR.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainR.TabIndex = 8;
-            this.lbAudioInputGainR.Text = "0.0";
-            // 
-            // tbAudioInputGainR
-            // 
-            this.tbAudioInputGainR.Location = new System.Drawing.Point(163, 79);
-            this.tbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainR.Maximum = 200;
-            this.tbAudioInputGainR.Minimum = -200;
-            this.tbAudioInputGainR.Name = "tbAudioInputGainR";
-            this.tbAudioInputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainR.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainR.TabIndex = 7;
-            this.tbAudioInputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainR.Scroll += new System.EventHandler(this.tbAudioInputGainR_Scroll);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(190, 48);
-            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(23, 25);
-            this.label47.TabIndex = 6;
-            this.label47.Text = "R";
-            // 
-            // lbAudioInputGainC
-            // 
-            this.lbAudioInputGainC.AutoSize = true;
-            this.lbAudioInputGainC.Location = new System.Drawing.Point(96, 285);
-            this.lbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainC.Name = "lbAudioInputGainC";
-            this.lbAudioInputGainC.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainC.TabIndex = 5;
-            this.lbAudioInputGainC.Text = "0.0";
-            // 
-            // tbAudioInputGainC
-            // 
-            this.tbAudioInputGainC.Location = new System.Drawing.Point(83, 79);
-            this.tbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainC.Maximum = 200;
-            this.tbAudioInputGainC.Minimum = -200;
-            this.tbAudioInputGainC.Name = "tbAudioInputGainC";
-            this.tbAudioInputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainC.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainC.TabIndex = 4;
-            this.tbAudioInputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainC.Scroll += new System.EventHandler(this.tbAudioInputGainC_Scroll);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(110, 48);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(23, 25);
-            this.label44.TabIndex = 3;
-            this.label44.Text = "C";
-            // 
-            // lbAudioInputGainL
-            // 
-            this.lbAudioInputGainL.AutoSize = true;
-            this.lbAudioInputGainL.Location = new System.Drawing.Point(16, 285);
-            this.lbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainL.Name = "lbAudioInputGainL";
-            this.lbAudioInputGainL.Size = new System.Drawing.Size(36, 25);
-            this.lbAudioInputGainL.TabIndex = 2;
-            this.lbAudioInputGainL.Text = "0.0";
-            // 
-            // tbAudioInputGainL
-            // 
-            this.tbAudioInputGainL.Location = new System.Drawing.Point(3, 79);
-            this.tbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioInputGainL.Maximum = 200;
-            this.tbAudioInputGainL.Minimum = -200;
-            this.tbAudioInputGainL.Name = "tbAudioInputGainL";
-            this.tbAudioInputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainL.Size = new System.Drawing.Size(69, 200);
-            this.tbAudioInputGainL.TabIndex = 1;
-            this.tbAudioInputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainL.Scroll += new System.EventHandler(this.tbAudioInputGainL_Scroll);
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(30, 48);
-            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(20, 25);
-            this.label40.TabIndex = 0;
-            this.label40.Text = "L";
-            // 
-            // cbAudioAutoGain
-            // 
-            this.cbAudioAutoGain.AutoSize = true;
-            this.cbAudioAutoGain.Location = new System.Drawing.Point(222, 90);
-            this.cbAudioAutoGain.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioAutoGain.Name = "cbAudioAutoGain";
-            this.cbAudioAutoGain.Size = new System.Drawing.Size(116, 29);
-            this.cbAudioAutoGain.TabIndex = 2;
-            this.cbAudioAutoGain.Text = "Auto gain";
-            this.cbAudioAutoGain.UseVisualStyleBackColor = true;
-            this.cbAudioAutoGain.CheckedChanged += new System.EventHandler(this.cbAudioAutoGain_CheckedChanged);
-            // 
-            // cbAudioNormalize
-            // 
-            this.cbAudioNormalize.AutoSize = true;
-            this.cbAudioNormalize.Location = new System.Drawing.Point(64, 90);
-            this.cbAudioNormalize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioNormalize.Name = "cbAudioNormalize";
-            this.cbAudioNormalize.Size = new System.Drawing.Size(118, 29);
-            this.cbAudioNormalize.TabIndex = 1;
-            this.cbAudioNormalize.Text = "Normalize";
-            this.cbAudioNormalize.UseVisualStyleBackColor = true;
-            this.cbAudioNormalize.CheckedChanged += new System.EventHandler(this.cbAudioNormalize_CheckedChanged);
-            // 
-            // cbAudioEnhancementEnabled
-            // 
-            this.cbAudioEnhancementEnabled.AutoSize = true;
-            this.cbAudioEnhancementEnabled.Location = new System.Drawing.Point(27, 29);
-            this.cbAudioEnhancementEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioEnhancementEnabled.Name = "cbAudioEnhancementEnabled";
-            this.cbAudioEnhancementEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudioEnhancementEnabled.TabIndex = 0;
-            this.cbAudioEnhancementEnabled.Text = "Enabled";
-            this.cbAudioEnhancementEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage11
-            // 
-            this.tabPage11.Controls.Add(this.label31);
-            this.tabPage11.Controls.Add(this.tabControl18);
-            this.tabPage11.Controls.Add(this.cbAudioEffectsEnabled);
-            this.tabPage11.Location = new System.Drawing.Point(4, 34);
-            this.tabPage11.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage11.Size = new System.Drawing.Size(508, 958);
-            this.tabPage11.TabIndex = 5;
-            this.tabPage11.Text = "Audio effects";
-            this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(156, 18);
-            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(313, 25);
-            this.label31.TabIndex = 4;
-            this.label31.Text = "Much more effects available using API";
-            // 
-            // tabControl18
-            // 
-            this.tabControl18.Controls.Add(this.tabPage71);
-            this.tabControl18.Controls.Add(this.tabPage72);
-            this.tabControl18.Controls.Add(this.tabPage73);
-            this.tabControl18.Controls.Add(this.tabPage75);
-            this.tabControl18.Controls.Add(this.tabPage76);
-            this.tabControl18.Controls.Add(this.tabPage27);
-            this.tabControl18.Location = new System.Drawing.Point(13, 60);
-            this.tabControl18.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl18.Name = "tabControl18";
-            this.tabControl18.SelectedIndex = 0;
-            this.tabControl18.Size = new System.Drawing.Size(471, 850);
-            this.tabControl18.TabIndex = 3;
-            // 
-            // tabPage71
-            // 
-            this.tabPage71.Controls.Add(this.label231);
-            this.tabPage71.Controls.Add(this.label230);
-            this.tabPage71.Controls.Add(this.tbAudAmplifyAmp);
-            this.tabPage71.Controls.Add(this.label95);
-            this.tabPage71.Controls.Add(this.cbAudAmplifyEnabled);
-            this.tabPage71.Location = new System.Drawing.Point(4, 34);
-            this.tabPage71.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage71.Name = "tabPage71";
-            this.tabPage71.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage71.Size = new System.Drawing.Size(463, 812);
-            this.tabPage71.TabIndex = 0;
-            this.tabPage71.Text = "Amplify";
-            this.tabPage71.UseVisualStyleBackColor = true;
-            // 
-            // label231
-            // 
-            this.label231.AutoSize = true;
-            this.label231.Location = new System.Drawing.Point(356, 102);
-            this.label231.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label231.Name = "label231";
-            this.label231.Size = new System.Drawing.Size(57, 25);
-            this.label231.TabIndex = 5;
-            this.label231.Text = "400%";
-            // 
-            // label230
-            // 
-            this.label230.AutoSize = true;
-            this.label230.Location = new System.Drawing.Point(113, 102);
-            this.label230.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label230.Name = "label230";
-            this.label230.Size = new System.Drawing.Size(57, 25);
-            this.label230.TabIndex = 4;
-            this.label230.Text = "100%";
-            // 
-            // tbAudAmplifyAmp
-            // 
-            this.tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudAmplifyAmp.Location = new System.Drawing.Point(27, 132);
-            this.tbAudAmplifyAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudAmplifyAmp.Maximum = 4000;
-            this.tbAudAmplifyAmp.Name = "tbAudAmplifyAmp";
-            this.tbAudAmplifyAmp.Size = new System.Drawing.Size(383, 69);
-            this.tbAudAmplifyAmp.TabIndex = 3;
-            this.tbAudAmplifyAmp.TickFrequency = 50;
-            this.tbAudAmplifyAmp.Value = 1000;
-            this.tbAudAmplifyAmp.Scroll += new System.EventHandler(this.tbAudAmplifyAmp_Scroll);
-            // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(22, 102);
-            this.label95.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(72, 25);
-            this.label95.TabIndex = 2;
-            this.label95.Text = "Volume";
-            // 
-            // cbAudAmplifyEnabled
-            // 
-            this.cbAudAmplifyEnabled.AutoSize = true;
-            this.cbAudAmplifyEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled";
-            this.cbAudAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudAmplifyEnabled.TabIndex = 1;
-            this.cbAudAmplifyEnabled.Text = "Enabled";
-            this.cbAudAmplifyEnabled.UseVisualStyleBackColor = true;
-            this.cbAudAmplifyEnabled.CheckedChanged += new System.EventHandler(this.cbAudAmplifyEnabled_CheckedChanged);
-            // 
-            // tabPage72
-            // 
-            this.tabPage72.Controls.Add(this.btAudEqRefresh);
-            this.tabPage72.Controls.Add(this.cbAudEqualizerPreset);
-            this.tabPage72.Controls.Add(this.label243);
-            this.tabPage72.Controls.Add(this.label242);
-            this.tabPage72.Controls.Add(this.label241);
-            this.tabPage72.Controls.Add(this.label240);
-            this.tabPage72.Controls.Add(this.label239);
-            this.tabPage72.Controls.Add(this.label238);
-            this.tabPage72.Controls.Add(this.label237);
-            this.tabPage72.Controls.Add(this.label236);
-            this.tabPage72.Controls.Add(this.label235);
-            this.tabPage72.Controls.Add(this.label234);
-            this.tabPage72.Controls.Add(this.label233);
-            this.tabPage72.Controls.Add(this.label232);
-            this.tabPage72.Controls.Add(this.tbAudEq9);
-            this.tabPage72.Controls.Add(this.tbAudEq8);
-            this.tabPage72.Controls.Add(this.tbAudEq7);
-            this.tabPage72.Controls.Add(this.tbAudEq6);
-            this.tabPage72.Controls.Add(this.tbAudEq5);
-            this.tabPage72.Controls.Add(this.tbAudEq4);
-            this.tabPage72.Controls.Add(this.tbAudEq3);
-            this.tabPage72.Controls.Add(this.tbAudEq2);
-            this.tabPage72.Controls.Add(this.tbAudEq1);
-            this.tabPage72.Controls.Add(this.tbAudEq0);
-            this.tabPage72.Controls.Add(this.cbAudEqualizerEnabled);
-            this.tabPage72.Location = new System.Drawing.Point(4, 34);
-            this.tabPage72.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage72.Name = "tabPage72";
-            this.tabPage72.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage72.Size = new System.Drawing.Size(463, 812);
-            this.tabPage72.TabIndex = 1;
-            this.tabPage72.Text = "Equalizer";
-            this.tabPage72.UseVisualStyleBackColor = true;
-            // 
-            // btAudEqRefresh
-            // 
-            this.btAudEqRefresh.Location = new System.Drawing.Point(291, 421);
-            this.btAudEqRefresh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btAudEqRefresh.Name = "btAudEqRefresh";
-            this.btAudEqRefresh.Size = new System.Drawing.Size(124, 44);
-            this.btAudEqRefresh.TabIndex = 26;
-            this.btAudEqRefresh.Text = "Refresh";
-            this.btAudEqRefresh.UseVisualStyleBackColor = true;
-            this.btAudEqRefresh.Click += new System.EventHandler(this.btAudEqRefresh_Click);
-            // 
-            // cbAudEqualizerPreset
-            // 
-            this.cbAudEqualizerPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAudEqualizerPreset.FormattingEnabled = true;
-            this.cbAudEqualizerPreset.Location = new System.Drawing.Point(102, 346);
-            this.cbAudEqualizerPreset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudEqualizerPreset.Name = "cbAudEqualizerPreset";
-            this.cbAudEqualizerPreset.Size = new System.Drawing.Size(313, 33);
-            this.cbAudEqualizerPreset.TabIndex = 25;
-            this.cbAudEqualizerPreset.SelectedIndexChanged += new System.EventHandler(this.cbAudEqualizerPreset_SelectedIndexChanged);
-            // 
-            // label243
-            // 
-            this.label243.AutoSize = true;
-            this.label243.Location = new System.Drawing.Point(23, 352);
-            this.label243.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label243.Name = "label243";
-            this.label243.Size = new System.Drawing.Size(60, 25);
-            this.label243.TabIndex = 24;
-            this.label243.Text = "Preset";
-            // 
-            // label242
-            // 
-            this.label242.AutoSize = true;
-            this.label242.Location = new System.Drawing.Point(343, 300);
-            this.label242.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label242.Name = "label242";
-            this.label242.Size = new System.Drawing.Size(42, 25);
-            this.label242.TabIndex = 23;
-            this.label242.Text = "16K";
-            // 
-            // label241
-            // 
-            this.label241.AutoSize = true;
-            this.label241.Location = new System.Drawing.Point(307, 300);
-            this.label241.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label241.Name = "label241";
-            this.label241.Size = new System.Drawing.Size(42, 25);
-            this.label241.TabIndex = 22;
-            this.label241.Text = "14K";
-            // 
-            // label240
-            // 
-            this.label240.AutoSize = true;
-            this.label240.Location = new System.Drawing.Point(270, 300);
-            this.label240.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label240.Name = "label240";
-            this.label240.Size = new System.Drawing.Size(42, 25);
-            this.label240.TabIndex = 21;
-            this.label240.Text = "12K";
-            // 
-            // label239
-            // 
-            this.label239.AutoSize = true;
-            this.label239.Location = new System.Drawing.Point(238, 300);
-            this.label239.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label239.Name = "label239";
-            this.label239.Size = new System.Drawing.Size(32, 25);
-            this.label239.TabIndex = 20;
-            this.label239.Text = "6K";
-            // 
-            // label238
-            // 
-            this.label238.AutoSize = true;
-            this.label238.Location = new System.Drawing.Point(202, 300);
-            this.label238.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label238.Name = "label238";
-            this.label238.Size = new System.Drawing.Size(32, 25);
-            this.label238.TabIndex = 19;
-            this.label238.Text = "3K";
-            // 
-            // label237
-            // 
-            this.label237.AutoSize = true;
-            this.label237.Location = new System.Drawing.Point(170, 300);
-            this.label237.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label237.Name = "label237";
-            this.label237.Size = new System.Drawing.Size(32, 25);
-            this.label237.TabIndex = 18;
-            this.label237.Text = "1K";
-            // 
-            // label236
-            // 
-            this.label236.AutoSize = true;
-            this.label236.Location = new System.Drawing.Point(133, 300);
-            this.label236.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label236.Name = "label236";
-            this.label236.Size = new System.Drawing.Size(42, 25);
-            this.label236.TabIndex = 17;
-            this.label236.Text = "600";
-            // 
-            // label235
-            // 
-            this.label235.AutoSize = true;
-            this.label235.Location = new System.Drawing.Point(97, 300);
-            this.label235.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label235.Name = "label235";
-            this.label235.Size = new System.Drawing.Size(42, 25);
-            this.label235.TabIndex = 16;
-            this.label235.Text = "310";
-            // 
-            // label234
-            // 
-            this.label234.AutoSize = true;
-            this.label234.Location = new System.Drawing.Point(60, 300);
-            this.label234.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label234.Name = "label234";
-            this.label234.Size = new System.Drawing.Size(42, 25);
-            this.label234.TabIndex = 15;
-            this.label234.Text = "170";
-            // 
-            // label233
-            // 
-            this.label233.AutoSize = true;
-            this.label233.Location = new System.Drawing.Point(30, 300);
-            this.label233.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label233.Name = "label233";
-            this.label233.Size = new System.Drawing.Size(32, 25);
-            this.label233.TabIndex = 14;
-            this.label233.Text = "60";
-            // 
-            // label232
-            // 
-            this.label232.AutoSize = true;
-            this.label232.Location = new System.Drawing.Point(197, 64);
-            this.label232.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label232.Name = "label232";
-            this.label232.Size = new System.Drawing.Size(22, 25);
-            this.label232.TabIndex = 13;
-            this.label232.Text = "0";
-            // 
-            // tbAudEq9
-            // 
-            this.tbAudEq9.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq9.Location = new System.Drawing.Point(342, 94);
-            this.tbAudEq9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq9.Maximum = 100;
-            this.tbAudEq9.Minimum = -100;
-            this.tbAudEq9.Name = "tbAudEq9";
-            this.tbAudEq9.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq9.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq9.TabIndex = 12;
-            this.tbAudEq9.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq9.Scroll += new System.EventHandler(this.tbAudEq9_Scroll);
-            // 
-            // tbAudEq8
-            // 
-            this.tbAudEq8.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq8.Location = new System.Drawing.Point(307, 94);
-            this.tbAudEq8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq8.Maximum = 100;
-            this.tbAudEq8.Minimum = -100;
-            this.tbAudEq8.Name = "tbAudEq8";
-            this.tbAudEq8.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq8.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq8.TabIndex = 11;
-            this.tbAudEq8.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq8.Scroll += new System.EventHandler(this.tbAudEq8_Scroll);
-            // 
-            // tbAudEq7
-            // 
-            this.tbAudEq7.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq7.Location = new System.Drawing.Point(270, 94);
-            this.tbAudEq7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq7.Maximum = 100;
-            this.tbAudEq7.Minimum = -100;
-            this.tbAudEq7.Name = "tbAudEq7";
-            this.tbAudEq7.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq7.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq7.TabIndex = 10;
-            this.tbAudEq7.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq7.Scroll += new System.EventHandler(this.tbAudEq7_Scroll);
-            // 
-            // tbAudEq6
-            // 
-            this.tbAudEq6.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq6.Location = new System.Drawing.Point(236, 94);
-            this.tbAudEq6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq6.Maximum = 100;
-            this.tbAudEq6.Minimum = -100;
-            this.tbAudEq6.Name = "tbAudEq6";
-            this.tbAudEq6.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq6.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq6.TabIndex = 9;
-            this.tbAudEq6.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq6.Scroll += new System.EventHandler(this.tbAudEq6_Scroll);
-            // 
-            // tbAudEq5
-            // 
-            this.tbAudEq5.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq5.Location = new System.Drawing.Point(200, 94);
-            this.tbAudEq5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq5.Maximum = 100;
-            this.tbAudEq5.Minimum = -100;
-            this.tbAudEq5.Name = "tbAudEq5";
-            this.tbAudEq5.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq5.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq5.TabIndex = 8;
-            this.tbAudEq5.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq5.Scroll += new System.EventHandler(this.tbAudEq5_Scroll);
-            // 
-            // tbAudEq4
-            // 
-            this.tbAudEq4.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq4.Location = new System.Drawing.Point(167, 94);
-            this.tbAudEq4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq4.Maximum = 100;
-            this.tbAudEq4.Minimum = -100;
-            this.tbAudEq4.Name = "tbAudEq4";
-            this.tbAudEq4.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq4.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq4.TabIndex = 7;
-            this.tbAudEq4.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq4.Scroll += new System.EventHandler(this.tbAudEq4_Scroll);
-            // 
-            // tbAudEq3
-            // 
-            this.tbAudEq3.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq3.Location = new System.Drawing.Point(131, 94);
-            this.tbAudEq3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq3.Maximum = 100;
-            this.tbAudEq3.Minimum = -100;
-            this.tbAudEq3.Name = "tbAudEq3";
-            this.tbAudEq3.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq3.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq3.TabIndex = 6;
-            this.tbAudEq3.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq3.Scroll += new System.EventHandler(this.tbAudEq3_Scroll);
-            // 
-            // tbAudEq2
-            // 
-            this.tbAudEq2.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq2.Location = new System.Drawing.Point(97, 94);
-            this.tbAudEq2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq2.Maximum = 100;
-            this.tbAudEq2.Minimum = -100;
-            this.tbAudEq2.Name = "tbAudEq2";
-            this.tbAudEq2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq2.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq2.TabIndex = 5;
-            this.tbAudEq2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq2.Scroll += new System.EventHandler(this.tbAudEq2_Scroll);
-            // 
-            // tbAudEq1
-            // 
-            this.tbAudEq1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq1.Location = new System.Drawing.Point(62, 94);
-            this.tbAudEq1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq1.Maximum = 100;
-            this.tbAudEq1.Minimum = -100;
-            this.tbAudEq1.Name = "tbAudEq1";
-            this.tbAudEq1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq1.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq1.TabIndex = 4;
-            this.tbAudEq1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq1.Scroll += new System.EventHandler(this.tbAudEq1_Scroll);
-            // 
-            // tbAudEq0
-            // 
-            this.tbAudEq0.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq0.Location = new System.Drawing.Point(29, 94);
-            this.tbAudEq0.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudEq0.Maximum = 100;
-            this.tbAudEq0.Minimum = -100;
-            this.tbAudEq0.Name = "tbAudEq0";
-            this.tbAudEq0.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq0.Size = new System.Drawing.Size(69, 200);
-            this.tbAudEq0.TabIndex = 3;
-            this.tbAudEq0.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq0.Scroll += new System.EventHandler(this.tbAudEq0_Scroll);
-            // 
-            // cbAudEqualizerEnabled
-            // 
-            this.cbAudEqualizerEnabled.AutoSize = true;
-            this.cbAudEqualizerEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudEqualizerEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled";
-            this.cbAudEqualizerEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudEqualizerEnabled.TabIndex = 2;
-            this.cbAudEqualizerEnabled.Text = "Enabled";
-            this.cbAudEqualizerEnabled.UseVisualStyleBackColor = true;
-            this.cbAudEqualizerEnabled.CheckedChanged += new System.EventHandler(this.cbAudEqualizerEnabled_CheckedChanged);
-            // 
-            // tabPage73
-            // 
-            this.tabPage73.Controls.Add(this.tbAudRelease);
-            this.tabPage73.Controls.Add(this.label248);
-            this.tabPage73.Controls.Add(this.label249);
-            this.tabPage73.Controls.Add(this.label246);
-            this.tabPage73.Controls.Add(this.tbAudAttack);
-            this.tabPage73.Controls.Add(this.label247);
-            this.tabPage73.Controls.Add(this.label244);
-            this.tabPage73.Controls.Add(this.tbAudDynAmp);
-            this.tabPage73.Controls.Add(this.label245);
-            this.tabPage73.Controls.Add(this.cbAudDynamicAmplifyEnabled);
-            this.tabPage73.Location = new System.Drawing.Point(4, 34);
-            this.tabPage73.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage73.Name = "tabPage73";
-            this.tabPage73.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage73.Size = new System.Drawing.Size(463, 812);
-            this.tabPage73.TabIndex = 2;
-            this.tabPage73.Text = "Dynamic amplify";
-            this.tabPage73.UseVisualStyleBackColor = true;
-            // 
-            // tbAudRelease
-            // 
-            this.tbAudRelease.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudRelease.Location = new System.Drawing.Point(27, 402);
-            this.tbAudRelease.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudRelease.Maximum = 10000;
-            this.tbAudRelease.Minimum = 10;
-            this.tbAudRelease.Name = "tbAudRelease";
-            this.tbAudRelease.Size = new System.Drawing.Size(383, 69);
-            this.tbAudRelease.TabIndex = 15;
-            this.tbAudRelease.TickFrequency = 250;
-            this.tbAudRelease.Value = 10;
-            this.tbAudRelease.Scroll += new System.EventHandler(this.tbAudRelease_Scroll);
-            // 
-            // label248
-            // 
-            this.label248.AutoSize = true;
-            this.label248.Location = new System.Drawing.Point(389, 371);
-            this.label248.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label248.Name = "label248";
-            this.label248.Size = new System.Drawing.Size(32, 25);
-            this.label248.TabIndex = 14;
-            this.label248.Text = "10";
-            // 
-            // label249
-            // 
-            this.label249.AutoSize = true;
-            this.label249.Location = new System.Drawing.Point(22, 371);
-            this.label249.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label249.Name = "label249";
-            this.label249.Size = new System.Drawing.Size(110, 25);
-            this.label249.TabIndex = 12;
-            this.label249.Text = "Release time";
-            // 
-            // label246
-            // 
-            this.label246.AutoSize = true;
-            this.label246.Location = new System.Drawing.Point(389, 232);
-            this.label246.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label246.Name = "label246";
-            this.label246.Size = new System.Drawing.Size(32, 25);
-            this.label246.TabIndex = 11;
-            this.label246.Text = "10";
-            // 
-            // tbAudAttack
-            // 
-            this.tbAudAttack.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudAttack.Location = new System.Drawing.Point(27, 264);
-            this.tbAudAttack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudAttack.Maximum = 10000;
-            this.tbAudAttack.Minimum = 10;
-            this.tbAudAttack.Name = "tbAudAttack";
-            this.tbAudAttack.Size = new System.Drawing.Size(383, 69);
-            this.tbAudAttack.TabIndex = 10;
-            this.tbAudAttack.TickFrequency = 250;
-            this.tbAudAttack.Value = 10;
-            this.tbAudAttack.Scroll += new System.EventHandler(this.tbAudAttack_Scroll);
-            // 
-            // label247
-            // 
-            this.label247.AutoSize = true;
-            this.label247.Location = new System.Drawing.Point(22, 232);
-            this.label247.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label247.Name = "label247";
-            this.label247.Size = new System.Drawing.Size(62, 25);
-            this.label247.TabIndex = 9;
-            this.label247.Text = "Attack";
-            // 
-            // label244
-            // 
-            this.label244.AutoSize = true;
-            this.label244.Location = new System.Drawing.Point(389, 102);
-            this.label244.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label244.Name = "label244";
-            this.label244.Size = new System.Drawing.Size(52, 25);
-            this.label244.TabIndex = 8;
-            this.label244.Text = "1000";
-            // 
-            // tbAudDynAmp
-            // 
-            this.tbAudDynAmp.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudDynAmp.Location = new System.Drawing.Point(27, 132);
-            this.tbAudDynAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudDynAmp.Maximum = 2000;
-            this.tbAudDynAmp.Minimum = 100;
-            this.tbAudDynAmp.Name = "tbAudDynAmp";
-            this.tbAudDynAmp.Size = new System.Drawing.Size(383, 69);
-            this.tbAudDynAmp.TabIndex = 7;
-            this.tbAudDynAmp.TickFrequency = 50;
-            this.tbAudDynAmp.Value = 1000;
-            this.tbAudDynAmp.Scroll += new System.EventHandler(this.tbAudDynAmp_Scroll);
-            // 
-            // label245
-            // 
-            this.label245.AutoSize = true;
-            this.label245.Location = new System.Drawing.Point(22, 102);
-            this.label245.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label245.Name = "label245";
-            this.label245.Size = new System.Drawing.Size(198, 25);
-            this.label245.TabIndex = 6;
-            this.label245.Text = "Maximum amplification";
-            // 
-            // cbAudDynamicAmplifyEnabled
-            // 
-            this.cbAudDynamicAmplifyEnabled.AutoSize = true;
-            this.cbAudDynamicAmplifyEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudDynamicAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudDynamicAmplifyEnabled.Name = "cbAudDynamicAmplifyEnabled";
-            this.cbAudDynamicAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudDynamicAmplifyEnabled.TabIndex = 2;
-            this.cbAudDynamicAmplifyEnabled.Text = "Enabled";
-            this.cbAudDynamicAmplifyEnabled.UseVisualStyleBackColor = true;
-            this.cbAudDynamicAmplifyEnabled.CheckedChanged += new System.EventHandler(this.cbAudDynamicAmplifyEnabled_CheckedChanged);
-            // 
-            // tabPage75
-            // 
-            this.tabPage75.Controls.Add(this.tbAud3DSound);
-            this.tabPage75.Controls.Add(this.label253);
-            this.tabPage75.Controls.Add(this.cbAudSound3DEnabled);
-            this.tabPage75.Location = new System.Drawing.Point(4, 34);
-            this.tabPage75.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage75.Name = "tabPage75";
-            this.tabPage75.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage75.Size = new System.Drawing.Size(463, 812);
-            this.tabPage75.TabIndex = 4;
-            this.tabPage75.Text = "Sound 3D";
-            this.tabPage75.UseVisualStyleBackColor = true;
-            // 
-            // tbAud3DSound
-            // 
-            this.tbAud3DSound.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAud3DSound.Location = new System.Drawing.Point(27, 132);
-            this.tbAud3DSound.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAud3DSound.Maximum = 10000;
-            this.tbAud3DSound.Name = "tbAud3DSound";
-            this.tbAud3DSound.Size = new System.Drawing.Size(383, 69);
-            this.tbAud3DSound.TabIndex = 19;
-            this.tbAud3DSound.TickFrequency = 250;
-            this.tbAud3DSound.Value = 500;
-            this.tbAud3DSound.Scroll += new System.EventHandler(this.tbAud3DSound_Scroll);
-            // 
-            // label253
-            // 
-            this.label253.AutoSize = true;
-            this.label253.Location = new System.Drawing.Point(22, 102);
-            this.label253.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label253.Name = "label253";
-            this.label253.Size = new System.Drawing.Size(142, 25);
-            this.label253.TabIndex = 18;
-            this.label253.Text = "3D amplification";
-            // 
-            // cbAudSound3DEnabled
-            // 
-            this.cbAudSound3DEnabled.AutoSize = true;
-            this.cbAudSound3DEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudSound3DEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudSound3DEnabled.Name = "cbAudSound3DEnabled";
-            this.cbAudSound3DEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudSound3DEnabled.TabIndex = 2;
-            this.cbAudSound3DEnabled.Text = "Enabled";
-            this.cbAudSound3DEnabled.UseVisualStyleBackColor = true;
-            this.cbAudSound3DEnabled.CheckedChanged += new System.EventHandler(this.cbAudSound3DEnabled_CheckedChanged);
-            // 
-            // tabPage76
-            // 
-            this.tabPage76.Controls.Add(this.tbAudTrueBass);
-            this.tabPage76.Controls.Add(this.label254);
-            this.tabPage76.Controls.Add(this.cbAudTrueBassEnabled);
-            this.tabPage76.Location = new System.Drawing.Point(4, 34);
-            this.tabPage76.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage76.Name = "tabPage76";
-            this.tabPage76.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage76.Size = new System.Drawing.Size(463, 812);
-            this.tabPage76.TabIndex = 5;
-            this.tabPage76.Text = "True Bass";
-            this.tabPage76.UseVisualStyleBackColor = true;
-            // 
-            // tbAudTrueBass
-            // 
-            this.tbAudTrueBass.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudTrueBass.Location = new System.Drawing.Point(27, 132);
-            this.tbAudTrueBass.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudTrueBass.Maximum = 10000;
-            this.tbAudTrueBass.Name = "tbAudTrueBass";
-            this.tbAudTrueBass.Size = new System.Drawing.Size(383, 69);
-            this.tbAudTrueBass.TabIndex = 21;
-            this.tbAudTrueBass.TickFrequency = 250;
-            this.tbAudTrueBass.Scroll += new System.EventHandler(this.tbAudTrueBass_Scroll);
-            // 
-            // label254
-            // 
-            this.label254.AutoSize = true;
-            this.label254.Location = new System.Drawing.Point(22, 102);
-            this.label254.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label254.Name = "label254";
-            this.label254.Size = new System.Drawing.Size(72, 25);
-            this.label254.TabIndex = 20;
-            this.label254.Text = "Volume";
-            // 
-            // cbAudTrueBassEnabled
-            // 
-            this.cbAudTrueBassEnabled.AutoSize = true;
-            this.cbAudTrueBassEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudTrueBassEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudTrueBassEnabled.Name = "cbAudTrueBassEnabled";
-            this.cbAudTrueBassEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudTrueBassEnabled.TabIndex = 2;
-            this.cbAudTrueBassEnabled.Text = "Enabled";
-            this.cbAudTrueBassEnabled.UseVisualStyleBackColor = true;
-            this.cbAudTrueBassEnabled.CheckedChanged += new System.EventHandler(this.cbAudTrueBassEnabled_CheckedChanged);
-            // 
-            // tabPage27
-            // 
-            this.tabPage27.Controls.Add(this.tbAudPitchShift);
-            this.tabPage27.Controls.Add(this.label36);
-            this.tabPage27.Controls.Add(this.cbAudPitchShiftEnabled);
-            this.tabPage27.Location = new System.Drawing.Point(4, 34);
-            this.tabPage27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage27.Size = new System.Drawing.Size(463, 812);
-            this.tabPage27.TabIndex = 7;
-            this.tabPage27.Text = "Pitch shift";
-            this.tabPage27.UseVisualStyleBackColor = true;
-            // 
-            // tbAudPitchShift
-            // 
-            this.tbAudPitchShift.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudPitchShift.Location = new System.Drawing.Point(27, 132);
-            this.tbAudPitchShift.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudPitchShift.Maximum = 3000;
-            this.tbAudPitchShift.Minimum = 100;
-            this.tbAudPitchShift.Name = "tbAudPitchShift";
-            this.tbAudPitchShift.Size = new System.Drawing.Size(383, 69);
-            this.tbAudPitchShift.TabIndex = 26;
-            this.tbAudPitchShift.TickFrequency = 20;
-            this.tbAudPitchShift.Value = 1000;
-            this.tbAudPitchShift.Scroll += new System.EventHandler(this.tbAudPitchShift_Scroll);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(22, 102);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(50, 25);
-            this.label36.TabIndex = 25;
-            this.label36.Text = "Pitch";
-            // 
-            // cbAudPitchShiftEnabled
-            // 
-            this.cbAudPitchShiftEnabled.AutoSize = true;
-            this.cbAudPitchShiftEnabled.Location = new System.Drawing.Point(27, 31);
-            this.cbAudPitchShiftEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudPitchShiftEnabled.Name = "cbAudPitchShiftEnabled";
-            this.cbAudPitchShiftEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudPitchShiftEnabled.TabIndex = 24;
-            this.cbAudPitchShiftEnabled.Text = "Enabled";
-            this.cbAudPitchShiftEnabled.UseVisualStyleBackColor = true;
-            this.cbAudPitchShiftEnabled.CheckedChanged += new System.EventHandler(this.cbAudPitchShiftEnabled_CheckedChanged);
-            // 
-            // cbAudioEffectsEnabled
-            // 
-            this.cbAudioEffectsEnabled.AutoSize = true;
-            this.cbAudioEffectsEnabled.Location = new System.Drawing.Point(13, 15);
-            this.cbAudioEffectsEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioEffectsEnabled.Name = "cbAudioEffectsEnabled";
-            this.cbAudioEffectsEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudioEffectsEnabled.TabIndex = 2;
-            this.cbAudioEffectsEnabled.Text = "Enabled";
-            this.cbAudioEffectsEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage50
-            // 
-            this.tabPage50.Controls.Add(this.btAudioChannelMapperClear);
-            this.tabPage50.Controls.Add(this.groupBox41);
-            this.tabPage50.Controls.Add(this.label307);
-            this.tabPage50.Controls.Add(this.edAudioChannelMapperOutputChannels);
-            this.tabPage50.Controls.Add(this.label306);
-            this.tabPage50.Controls.Add(this.lbAudioChannelMapperRoutes);
-            this.tabPage50.Controls.Add(this.cbAudioChannelMapperEnabled);
-            this.tabPage50.Location = new System.Drawing.Point(4, 34);
-            this.tabPage50.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage50.Name = "tabPage50";
-            this.tabPage50.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage50.Size = new System.Drawing.Size(508, 958);
-            this.tabPage50.TabIndex = 13;
-            this.tabPage50.Text = "Audio channel mapper";
-            this.tabPage50.UseVisualStyleBackColor = true;
-            // 
-            // btAudioChannelMapperClear
-            // 
-            this.btAudioChannelMapperClear.Location = new System.Drawing.Point(340, 422);
-            this.btAudioChannelMapperClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btAudioChannelMapperClear.Name = "btAudioChannelMapperClear";
-            this.btAudioChannelMapperClear.Size = new System.Drawing.Size(124, 44);
-            this.btAudioChannelMapperClear.TabIndex = 21;
-            this.btAudioChannelMapperClear.Text = "Clear";
-            this.btAudioChannelMapperClear.UseVisualStyleBackColor = true;
-            this.btAudioChannelMapperClear.Click += new System.EventHandler(this.btAudioChannelMapperClear_Click);
-            // 
-            // groupBox41
-            // 
-            this.groupBox41.Controls.Add(this.btAudioChannelMapperAddNewRoute);
-            this.groupBox41.Controls.Add(this.label311);
-            this.groupBox41.Controls.Add(this.tbAudioChannelMapperVolume);
-            this.groupBox41.Controls.Add(this.label310);
-            this.groupBox41.Controls.Add(this.edAudioChannelMapperTargetChannel);
-            this.groupBox41.Controls.Add(this.label309);
-            this.groupBox41.Controls.Add(this.edAudioChannelMapperSourceChannel);
-            this.groupBox41.Controls.Add(this.label308);
-            this.groupBox41.Location = new System.Drawing.Point(10, 479);
-            this.groupBox41.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox41.Name = "groupBox41";
-            this.groupBox41.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox41.Size = new System.Drawing.Size(478, 329);
-            this.groupBox41.TabIndex = 20;
-            this.groupBox41.TabStop = false;
-            this.groupBox41.Text = "Add new route";
-            // 
-            // btAudioChannelMapperAddNewRoute
-            // 
-            this.btAudioChannelMapperAddNewRoute.Location = new System.Drawing.Point(180, 252);
-            this.btAudioChannelMapperAddNewRoute.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btAudioChannelMapperAddNewRoute.Name = "btAudioChannelMapperAddNewRoute";
-            this.btAudioChannelMapperAddNewRoute.Size = new System.Drawing.Size(124, 44);
-            this.btAudioChannelMapperAddNewRoute.TabIndex = 20;
-            this.btAudioChannelMapperAddNewRoute.Text = "Add";
-            this.btAudioChannelMapperAddNewRoute.UseVisualStyleBackColor = true;
-            this.btAudioChannelMapperAddNewRoute.Click += new System.EventHandler(this.btAudioChannelMapperAddNewRoute_Click);
-            // 
-            // label311
-            // 
-            this.label311.AutoSize = true;
-            this.label311.Location = new System.Drawing.Point(342, 171);
-            this.label311.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label311.Name = "label311";
-            this.label311.Size = new System.Drawing.Size(109, 25);
-            this.label311.TabIndex = 19;
-            this.label311.Text = "10% - 200%";
-            // 
-            // tbAudioChannelMapperVolume
-            // 
-            this.tbAudioChannelMapperVolume.Location = new System.Drawing.Point(347, 79);
-            this.tbAudioChannelMapperVolume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbAudioChannelMapperVolume.Maximum = 2000;
-            this.tbAudioChannelMapperVolume.Minimum = 100;
-            this.tbAudioChannelMapperVolume.Name = "tbAudioChannelMapperVolume";
-            this.tbAudioChannelMapperVolume.Size = new System.Drawing.Size(123, 69);
-            this.tbAudioChannelMapperVolume.TabIndex = 18;
-            this.tbAudioChannelMapperVolume.Value = 1000;
-            // 
-            // label310
-            // 
-            this.label310.AutoSize = true;
-            this.label310.Location = new System.Drawing.Point(342, 48);
-            this.label310.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label310.Name = "label310";
-            this.label310.Size = new System.Drawing.Size(72, 25);
-            this.label310.TabIndex = 17;
-            this.label310.Text = "Volume";
-            // 
-            // edAudioChannelMapperTargetChannel
-            // 
-            this.edAudioChannelMapperTargetChannel.Location = new System.Drawing.Point(180, 79);
-            this.edAudioChannelMapperTargetChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edAudioChannelMapperTargetChannel.Name = "edAudioChannelMapperTargetChannel";
-            this.edAudioChannelMapperTargetChannel.Size = new System.Drawing.Size(82, 31);
-            this.edAudioChannelMapperTargetChannel.TabIndex = 16;
-            this.edAudioChannelMapperTargetChannel.Text = "0";
-            // 
-            // label309
-            // 
-            this.label309.AutoSize = true;
-            this.label309.Location = new System.Drawing.Point(176, 48);
-            this.label309.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label309.Name = "label309";
-            this.label309.Size = new System.Drawing.Size(125, 25);
-            this.label309.TabIndex = 15;
-            this.label309.Text = "Target channel";
-            // 
-            // edAudioChannelMapperSourceChannel
-            // 
-            this.edAudioChannelMapperSourceChannel.Location = new System.Drawing.Point(24, 79);
-            this.edAudioChannelMapperSourceChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edAudioChannelMapperSourceChannel.Name = "edAudioChannelMapperSourceChannel";
-            this.edAudioChannelMapperSourceChannel.Size = new System.Drawing.Size(82, 31);
-            this.edAudioChannelMapperSourceChannel.TabIndex = 14;
-            this.edAudioChannelMapperSourceChannel.Text = "0";
-            // 
-            // label308
-            // 
-            this.label308.AutoSize = true;
-            this.label308.Location = new System.Drawing.Point(20, 48);
-            this.label308.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label308.Name = "label308";
-            this.label308.Size = new System.Drawing.Size(131, 25);
-            this.label308.TabIndex = 13;
-            this.label308.Text = "Source channel";
-            // 
-            // label307
-            // 
-            this.label307.AutoSize = true;
-            this.label307.Location = new System.Drawing.Point(16, 194);
-            this.label307.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label307.Name = "label307";
-            this.label307.Size = new System.Drawing.Size(66, 25);
-            this.label307.TabIndex = 19;
-            this.label307.Text = "Routes";
-            // 
-            // edAudioChannelMapperOutputChannels
-            // 
-            this.edAudioChannelMapperOutputChannels.Location = new System.Drawing.Point(20, 119);
-            this.edAudioChannelMapperOutputChannels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edAudioChannelMapperOutputChannels.Name = "edAudioChannelMapperOutputChannels";
-            this.edAudioChannelMapperOutputChannels.Size = new System.Drawing.Size(67, 31);
-            this.edAudioChannelMapperOutputChannels.TabIndex = 18;
-            this.edAudioChannelMapperOutputChannels.Text = "0";
-            // 
-            // label306
-            // 
-            this.label306.AutoSize = true;
-            this.label306.Location = new System.Drawing.Point(16, 89);
-            this.label306.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label306.Name = "label306";
-            this.label306.Size = new System.Drawing.Size(458, 25);
-            this.label306.TabIndex = 17;
-            this.label306.Text = "Output channels count (0 to use original channels count)";
-            // 
-            // lbAudioChannelMapperRoutes
-            // 
-            this.lbAudioChannelMapperRoutes.FormattingEnabled = true;
-            this.lbAudioChannelMapperRoutes.ItemHeight = 25;
-            this.lbAudioChannelMapperRoutes.Location = new System.Drawing.Point(20, 229);
-            this.lbAudioChannelMapperRoutes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbAudioChannelMapperRoutes.Name = "lbAudioChannelMapperRoutes";
-            this.lbAudioChannelMapperRoutes.Size = new System.Drawing.Size(442, 179);
-            this.lbAudioChannelMapperRoutes.TabIndex = 16;
-            // 
-            // cbAudioChannelMapperEnabled
-            // 
-            this.cbAudioChannelMapperEnabled.AutoSize = true;
-            this.cbAudioChannelMapperEnabled.Location = new System.Drawing.Point(20, 22);
-            this.cbAudioChannelMapperEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbAudioChannelMapperEnabled.Name = "cbAudioChannelMapperEnabled";
-            this.cbAudioChannelMapperEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbAudioChannelMapperEnabled.TabIndex = 15;
-            this.cbAudioChannelMapperEnabled.Text = "Enabled";
-            this.cbAudioChannelMapperEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage28
-            // 
-            this.tabPage28.Controls.Add(this.tbVUMeterBoost);
-            this.tabPage28.Controls.Add(this.label382);
-            this.tabPage28.Controls.Add(this.label381);
-            this.tabPage28.Controls.Add(this.tbVUMeterAmplification);
-            this.tabPage28.Controls.Add(this.cbVUMeterPro);
-            this.tabPage28.Controls.Add(this.waveformPainter2);
-            this.tabPage28.Controls.Add(this.waveformPainter1);
-            this.tabPage28.Controls.Add(this.volumeMeter2);
-            this.tabPage28.Controls.Add(this.volumeMeter1);
-            this.tabPage28.Location = new System.Drawing.Point(4, 34);
-            this.tabPage28.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage28.Size = new System.Drawing.Size(508, 958);
-            this.tabPage28.TabIndex = 11;
-            this.tabPage28.Text = "VU meter";
-            this.tabPage28.UseVisualStyleBackColor = true;
-            // 
-            // tbVUMeterBoost
-            // 
-            this.tbVUMeterBoost.Location = new System.Drawing.Point(207, 268);
-            this.tbVUMeterBoost.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVUMeterBoost.Maximum = 30;
-            this.tbVUMeterBoost.Minimum = 1;
-            this.tbVUMeterBoost.Name = "tbVUMeterBoost";
-            this.tbVUMeterBoost.Size = new System.Drawing.Size(173, 69);
-            this.tbVUMeterBoost.TabIndex = 122;
-            this.tbVUMeterBoost.Value = 10;
-            this.tbVUMeterBoost.Scroll += new System.EventHandler(this.tbVUMeterBoost_Scroll);
-            // 
-            // label382
-            // 
-            this.label382.AutoSize = true;
-            this.label382.Location = new System.Drawing.Point(202, 236);
-            this.label382.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label382.Name = "label382";
-            this.label382.Size = new System.Drawing.Size(118, 25);
-            this.label382.TabIndex = 121;
-            this.label382.Text = "Meters boost";
-            // 
-            // label381
-            // 
-            this.label381.AutoSize = true;
-            this.label381.Location = new System.Drawing.Point(202, 111);
-            this.label381.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label381.Name = "label381";
-            this.label381.Size = new System.Drawing.Size(209, 25);
-            this.label381.TabIndex = 120;
-            this.label381.Text = "Volume amplification (%)";
-            // 
-            // tbVUMeterAmplification
-            // 
-            this.tbVUMeterAmplification.Location = new System.Drawing.Point(207, 142);
-            this.tbVUMeterAmplification.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbVUMeterAmplification.Maximum = 100;
-            this.tbVUMeterAmplification.Name = "tbVUMeterAmplification";
-            this.tbVUMeterAmplification.Size = new System.Drawing.Size(176, 69);
-            this.tbVUMeterAmplification.TabIndex = 119;
-            this.tbVUMeterAmplification.Value = 100;
-            this.tbVUMeterAmplification.Scroll += new System.EventHandler(this.tbVUMeterAmplification_Scroll);
-            // 
-            // cbVUMeterPro
-            // 
-            this.cbVUMeterPro.AutoSize = true;
-            this.cbVUMeterPro.Location = new System.Drawing.Point(37, 46);
-            this.cbVUMeterPro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbVUMeterPro.Name = "cbVUMeterPro";
-            this.cbVUMeterPro.Size = new System.Drawing.Size(201, 29);
-            this.cbVUMeterPro.TabIndex = 115;
-            this.cbVUMeterPro.Text = "Enable VU meter Pro";
-            this.cbVUMeterPro.UseVisualStyleBackColor = true;
-            // 
-            // waveformPainter2
-            // 
-            this.waveformPainter2.Boost = 1F;
-            this.waveformPainter2.Location = new System.Drawing.Point(24, 492);
-            this.waveformPainter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.waveformPainter2.Name = "waveformPainter2";
-            this.waveformPainter2.Size = new System.Drawing.Size(450, 115);
-            this.waveformPainter2.TabIndex = 118;
-            this.waveformPainter2.Text = "waveformPainter2";
-            // 
-            // waveformPainter1
-            // 
-            this.waveformPainter1.Boost = 1F;
-            this.waveformPainter1.Location = new System.Drawing.Point(24, 365);
-            this.waveformPainter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.waveformPainter1.Name = "waveformPainter1";
-            this.waveformPainter1.Size = new System.Drawing.Size(450, 115);
-            this.waveformPainter1.TabIndex = 117;
-            this.waveformPainter1.Text = "waveformPainter1";
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter2.Boost = 1F;
-            this.volumeMeter2.Location = new System.Drawing.Point(100, 111);
-            this.volumeMeter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.volumeMeter2.MaxDb = 18F;
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Size = new System.Drawing.Size(37, 242);
-            this.volumeMeter2.TabIndex = 116;
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter1.Boost = 1F;
-            this.volumeMeter1.Location = new System.Drawing.Point(53, 111);
-            this.volumeMeter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.volumeMeter1.MaxDb = 18F;
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Size = new System.Drawing.Size(37, 242);
-            this.volumeMeter1.TabIndex = 114;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.btOSDRenderLayers);
-            this.tabPage5.Controls.Add(this.lbOSDLayers);
-            this.tabPage5.Controls.Add(this.cbOSDEnabled);
-            this.tabPage5.Controls.Add(this.groupBox19);
-            this.tabPage5.Controls.Add(this.btOSDClearLayers);
-            this.tabPage5.Controls.Add(this.groupBox15);
-            this.tabPage5.Controls.Add(this.label108);
-            this.tabPage5.Location = new System.Drawing.Point(4, 34);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage5.Size = new System.Drawing.Size(508, 958);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "OSD";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // btOSDRenderLayers
-            // 
-            this.btOSDRenderLayers.Location = new System.Drawing.Point(269, 398);
-            this.btOSDRenderLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDRenderLayers.Name = "btOSDRenderLayers";
-            this.btOSDRenderLayers.Size = new System.Drawing.Size(209, 44);
-            this.btOSDRenderLayers.TabIndex = 16;
-            this.btOSDRenderLayers.Text = "Render layers";
-            this.btOSDRenderLayers.UseVisualStyleBackColor = true;
-            this.btOSDRenderLayers.Click += new System.EventHandler(this.btOSDRenderLayers_Click);
-            // 
-            // lbOSDLayers
-            // 
-            this.lbOSDLayers.CheckOnClick = true;
-            this.lbOSDLayers.FormattingEnabled = true;
-            this.lbOSDLayers.Location = new System.Drawing.Point(27, 131);
-            this.lbOSDLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lbOSDLayers.Name = "lbOSDLayers";
-            this.lbOSDLayers.Size = new System.Drawing.Size(228, 200);
-            this.lbOSDLayers.TabIndex = 15;
-            this.lbOSDLayers.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lbOSDLayers_ItemCheck);
-            // 
-            // cbOSDEnabled
-            // 
-            this.cbOSDEnabled.AutoSize = true;
-            this.cbOSDEnabled.Location = new System.Drawing.Point(27, 29);
-            this.cbOSDEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbOSDEnabled.Name = "cbOSDEnabled";
-            this.cbOSDEnabled.Size = new System.Drawing.Size(415, 29);
-            this.cbOSDEnabled.TabIndex = 14;
-            this.cbOSDEnabled.Text = "Enabled (should be set before playback started)";
-            this.cbOSDEnabled.UseVisualStyleBackColor = true;
-            // 
-            // groupBox19
-            // 
-            this.groupBox19.Controls.Add(this.btOSDClearLayer);
-            this.groupBox19.Controls.Add(this.tabControl6);
-            this.groupBox19.Location = new System.Drawing.Point(24, 454);
-            this.groupBox19.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox19.Size = new System.Drawing.Size(450, 481);
-            this.groupBox19.TabIndex = 13;
-            this.groupBox19.TabStop = false;
-            this.groupBox19.Text = "Selected layer";
-            // 
-            // btOSDClearLayer
-            // 
-            this.btOSDClearLayer.Location = new System.Drawing.Point(18, 425);
-            this.btOSDClearLayer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDClearLayer.Name = "btOSDClearLayer";
-            this.btOSDClearLayer.Size = new System.Drawing.Size(151, 44);
-            this.btOSDClearLayer.TabIndex = 2;
-            this.btOSDClearLayer.Text = "Clear layer";
-            this.btOSDClearLayer.UseVisualStyleBackColor = true;
-            this.btOSDClearLayer.Click += new System.EventHandler(this.btOSDClearLayer_Click);
-            // 
-            // tabControl6
-            // 
-            this.tabControl6.Controls.Add(this.tabPage30);
-            this.tabControl6.Controls.Add(this.tabPage31);
-            this.tabControl6.Controls.Add(this.tabPage32);
-            this.tabControl6.Location = new System.Drawing.Point(18, 36);
-            this.tabControl6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl6.Name = "tabControl6";
-            this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(417, 378);
-            this.tabControl6.TabIndex = 0;
-            // 
-            // tabPage30
-            // 
-            this.tabPage30.Controls.Add(this.btOSDImageDraw);
-            this.tabPage30.Controls.Add(this.pnOSDColorKey);
-            this.tabPage30.Controls.Add(this.cbOSDImageTranspColor);
-            this.tabPage30.Controls.Add(this.edOSDImageTop);
-            this.tabPage30.Controls.Add(this.label115);
-            this.tabPage30.Controls.Add(this.edOSDImageLeft);
-            this.tabPage30.Controls.Add(this.label114);
-            this.tabPage30.Controls.Add(this.btOSDSelectImage);
-            this.tabPage30.Controls.Add(this.edOSDImageFilename);
-            this.tabPage30.Controls.Add(this.label113);
-            this.tabPage30.Location = new System.Drawing.Point(4, 34);
-            this.tabPage30.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage30.Name = "tabPage30";
-            this.tabPage30.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage30.Size = new System.Drawing.Size(409, 340);
-            this.tabPage30.TabIndex = 1;
-            this.tabPage30.Text = "Image";
-            this.tabPage30.UseVisualStyleBackColor = true;
-            // 
-            // btOSDImageDraw
-            // 
-            this.btOSDImageDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btOSDImageDraw.Location = new System.Drawing.Point(297, 271);
-            this.btOSDImageDraw.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDImageDraw.Name = "btOSDImageDraw";
-            this.btOSDImageDraw.Size = new System.Drawing.Size(96, 44);
-            this.btOSDImageDraw.TabIndex = 47;
-            this.btOSDImageDraw.Text = "Draw";
-            this.btOSDImageDraw.UseVisualStyleBackColor = true;
-            this.btOSDImageDraw.Click += new System.EventHandler(this.btOSDImageDraw_Click);
-            // 
-            // pnOSDColorKey
-            // 
-            this.pnOSDColorKey.BackColor = System.Drawing.Color.Fuchsia;
-            this.pnOSDColorKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnOSDColorKey.Location = new System.Drawing.Point(269, 196);
-            this.pnOSDColorKey.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pnOSDColorKey.Name = "pnOSDColorKey";
-            this.pnOSDColorKey.Size = new System.Drawing.Size(39, 44);
-            this.pnOSDColorKey.TabIndex = 45;
-            this.pnOSDColorKey.Click += new System.EventHandler(this.pnOSDColorKey_Click);
-            // 
-            // cbOSDImageTranspColor
-            // 
-            this.cbOSDImageTranspColor.AutoSize = true;
-            this.cbOSDImageTranspColor.Location = new System.Drawing.Point(24, 196);
-            this.cbOSDImageTranspColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbOSDImageTranspColor.Name = "cbOSDImageTranspColor";
-            this.cbOSDImageTranspColor.Size = new System.Drawing.Size(218, 29);
-            this.cbOSDImageTranspColor.TabIndex = 7;
-            this.cbOSDImageTranspColor.Text = "Use transparency color";
-            this.cbOSDImageTranspColor.UseVisualStyleBackColor = true;
-            // 
-            // edOSDImageTop
-            // 
-            this.edOSDImageTop.Location = new System.Drawing.Point(220, 129);
-            this.edOSDImageTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDImageTop.Name = "edOSDImageTop";
-            this.edOSDImageTop.Size = new System.Drawing.Size(61, 31);
-            this.edOSDImageTop.TabIndex = 6;
-            this.edOSDImageTop.Text = "0";
-            // 
-            // label115
-            // 
-            this.label115.AutoSize = true;
-            this.label115.Location = new System.Drawing.Point(169, 135);
-            this.label115.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label115.Name = "label115";
-            this.label115.Size = new System.Drawing.Size(41, 25);
-            this.label115.TabIndex = 5;
-            this.label115.Text = "Top";
-            // 
-            // edOSDImageLeft
-            // 
-            this.edOSDImageLeft.Location = new System.Drawing.Point(82, 129);
-            this.edOSDImageLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDImageLeft.Name = "edOSDImageLeft";
-            this.edOSDImageLeft.Size = new System.Drawing.Size(61, 31);
-            this.edOSDImageLeft.TabIndex = 4;
-            this.edOSDImageLeft.Text = "0";
-            // 
-            // label114
-            // 
-            this.label114.AutoSize = true;
-            this.label114.Location = new System.Drawing.Point(20, 135);
-            this.label114.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label114.Name = "label114";
-            this.label114.Size = new System.Drawing.Size(41, 25);
-            this.label114.TabIndex = 3;
-            this.label114.Text = "Left";
-            // 
-            // btOSDSelectImage
-            // 
-            this.btOSDSelectImage.Location = new System.Drawing.Point(356, 58);
-            this.btOSDSelectImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDSelectImage.Name = "btOSDSelectImage";
-            this.btOSDSelectImage.Size = new System.Drawing.Size(37, 44);
-            this.btOSDSelectImage.TabIndex = 2;
-            this.btOSDSelectImage.Text = "...";
-            this.btOSDSelectImage.UseVisualStyleBackColor = true;
-            this.btOSDSelectImage.Click += new System.EventHandler(this.btOSDSelectImage_Click);
-            // 
-            // edOSDImageFilename
-            // 
-            this.edOSDImageFilename.Location = new System.Drawing.Point(24, 61);
-            this.edOSDImageFilename.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDImageFilename.Name = "edOSDImageFilename";
-            this.edOSDImageFilename.Size = new System.Drawing.Size(317, 31);
-            this.edOSDImageFilename.TabIndex = 1;
-            this.edOSDImageFilename.Text = "c:\\logo.png";
-            // 
-            // label113
-            // 
-            this.label113.AutoSize = true;
-            this.label113.Location = new System.Drawing.Point(20, 31);
-            this.label113.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(87, 25);
-            this.label113.TabIndex = 0;
-            this.label113.Text = "File name";
-            // 
-            // tabPage31
-            // 
-            this.tabPage31.Controls.Add(this.edOSDTextTop);
-            this.tabPage31.Controls.Add(this.label117);
-            this.tabPage31.Controls.Add(this.edOSDTextLeft);
-            this.tabPage31.Controls.Add(this.label118);
-            this.tabPage31.Controls.Add(this.label116);
-            this.tabPage31.Controls.Add(this.btOSDSelectFont);
-            this.tabPage31.Controls.Add(this.edOSDText);
-            this.tabPage31.Controls.Add(this.btOSDTextDraw);
-            this.tabPage31.Location = new System.Drawing.Point(4, 34);
-            this.tabPage31.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage31.Name = "tabPage31";
-            this.tabPage31.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage31.Size = new System.Drawing.Size(409, 340);
-            this.tabPage31.TabIndex = 2;
-            this.tabPage31.Text = "Text";
-            this.tabPage31.UseVisualStyleBackColor = true;
-            // 
-            // edOSDTextTop
-            // 
-            this.edOSDTextTop.Location = new System.Drawing.Point(220, 129);
-            this.edOSDTextTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDTextTop.Name = "edOSDTextTop";
-            this.edOSDTextTop.Size = new System.Drawing.Size(61, 31);
-            this.edOSDTextTop.TabIndex = 55;
-            this.edOSDTextTop.Text = "0";
-            // 
-            // label117
-            // 
-            this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(169, 135);
-            this.label117.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label117.Name = "label117";
-            this.label117.Size = new System.Drawing.Size(41, 25);
-            this.label117.TabIndex = 54;
-            this.label117.Text = "Top";
-            // 
-            // edOSDTextLeft
-            // 
-            this.edOSDTextLeft.Location = new System.Drawing.Point(82, 129);
-            this.edOSDTextLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDTextLeft.Name = "edOSDTextLeft";
-            this.edOSDTextLeft.Size = new System.Drawing.Size(61, 31);
-            this.edOSDTextLeft.TabIndex = 53;
-            this.edOSDTextLeft.Text = "0";
-            // 
-            // label118
-            // 
-            this.label118.AutoSize = true;
-            this.label118.Location = new System.Drawing.Point(20, 135);
-            this.label118.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label118.Name = "label118";
-            this.label118.Size = new System.Drawing.Size(41, 25);
-            this.label118.TabIndex = 52;
-            this.label118.Text = "Left";
-            // 
-            // label116
-            // 
-            this.label116.AutoSize = true;
-            this.label116.Location = new System.Drawing.Point(20, 31);
-            this.label116.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label116.Name = "label116";
-            this.label116.Size = new System.Drawing.Size(42, 25);
-            this.label116.TabIndex = 51;
-            this.label116.Text = "Text";
-            // 
-            // btOSDSelectFont
-            // 
-            this.btOSDSelectFont.Location = new System.Drawing.Point(330, 58);
-            this.btOSDSelectFont.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDSelectFont.Name = "btOSDSelectFont";
-            this.btOSDSelectFont.Size = new System.Drawing.Size(62, 44);
-            this.btOSDSelectFont.TabIndex = 50;
-            this.btOSDSelectFont.Text = "Font";
-            this.btOSDSelectFont.UseVisualStyleBackColor = true;
-            this.btOSDSelectFont.Click += new System.EventHandler(this.btOSDSelectFont_Click);
-            // 
-            // edOSDText
-            // 
-            this.edOSDText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.edOSDText.Location = new System.Drawing.Point(24, 61);
-            this.edOSDText.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDText.Name = "edOSDText";
-            this.edOSDText.Size = new System.Drawing.Size(297, 31);
-            this.edOSDText.TabIndex = 49;
-            this.edOSDText.Text = "Hello!!!";
-            // 
-            // btOSDTextDraw
-            // 
-            this.btOSDTextDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btOSDTextDraw.Location = new System.Drawing.Point(297, 271);
-            this.btOSDTextDraw.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDTextDraw.Name = "btOSDTextDraw";
-            this.btOSDTextDraw.Size = new System.Drawing.Size(96, 44);
-            this.btOSDTextDraw.TabIndex = 48;
-            this.btOSDTextDraw.Text = "Draw";
-            this.btOSDTextDraw.UseVisualStyleBackColor = true;
-            this.btOSDTextDraw.Click += new System.EventHandler(this.btOSDTextDraw_Click);
-            // 
-            // tabPage32
-            // 
-            this.tabPage32.Controls.Add(this.tbOSDTranspLevel);
-            this.tabPage32.Controls.Add(this.btOSDSetTransp);
-            this.tabPage32.Controls.Add(this.label119);
-            this.tabPage32.Location = new System.Drawing.Point(4, 34);
-            this.tabPage32.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage32.Name = "tabPage32";
-            this.tabPage32.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage32.Size = new System.Drawing.Size(409, 340);
-            this.tabPage32.TabIndex = 3;
-            this.tabPage32.Text = "Other";
-            this.tabPage32.UseVisualStyleBackColor = true;
-            // 
-            // tbOSDTranspLevel
-            // 
-            this.tbOSDTranspLevel.BackColor = System.Drawing.SystemColors.Window;
-            this.tbOSDTranspLevel.Location = new System.Drawing.Point(24, 61);
-            this.tbOSDTranspLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbOSDTranspLevel.Maximum = 255;
-            this.tbOSDTranspLevel.Name = "tbOSDTranspLevel";
-            this.tbOSDTranspLevel.Size = new System.Drawing.Size(238, 69);
-            this.tbOSDTranspLevel.TabIndex = 3;
-            this.tbOSDTranspLevel.TickFrequency = 10;
-            // 
-            // btOSDSetTransp
-            // 
-            this.btOSDSetTransp.Location = new System.Drawing.Point(297, 79);
-            this.btOSDSetTransp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDSetTransp.Name = "btOSDSetTransp";
-            this.btOSDSetTransp.Size = new System.Drawing.Size(80, 44);
-            this.btOSDSetTransp.TabIndex = 2;
-            this.btOSDSetTransp.Text = "Set";
-            this.btOSDSetTransp.UseVisualStyleBackColor = true;
-            this.btOSDSetTransp.Click += new System.EventHandler(this.btOSDSetTransp_Click);
-            // 
-            // label119
-            // 
-            this.label119.AutoSize = true;
-            this.label119.Location = new System.Drawing.Point(20, 31);
-            this.label119.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label119.Name = "label119";
-            this.label119.Size = new System.Drawing.Size(154, 25);
-            this.label119.TabIndex = 0;
-            this.label119.Text = "Transparency level";
-            // 
-            // btOSDClearLayers
-            // 
-            this.btOSDClearLayers.Location = new System.Drawing.Point(27, 398);
-            this.btOSDClearLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDClearLayers.Name = "btOSDClearLayers";
-            this.btOSDClearLayers.Size = new System.Drawing.Size(233, 44);
-            this.btOSDClearLayers.TabIndex = 12;
-            this.btOSDClearLayers.Text = "Remove all layers";
-            this.btOSDClearLayers.UseVisualStyleBackColor = true;
-            this.btOSDClearLayers.Click += new System.EventHandler(this.btOSDClearLayers_Click);
-            // 
-            // groupBox15
-            // 
-            this.groupBox15.Controls.Add(this.btOSDLayerAdd);
-            this.groupBox15.Controls.Add(this.edOSDLayerHeight);
-            this.groupBox15.Controls.Add(this.label111);
-            this.groupBox15.Controls.Add(this.edOSDLayerWidth);
-            this.groupBox15.Controls.Add(this.label112);
-            this.groupBox15.Controls.Add(this.edOSDLayerTop);
-            this.groupBox15.Controls.Add(this.label110);
-            this.groupBox15.Controls.Add(this.edOSDLayerLeft);
-            this.groupBox15.Controls.Add(this.label109);
-            this.groupBox15.Location = new System.Drawing.Point(269, 118);
-            this.groupBox15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox15.Size = new System.Drawing.Size(209, 258);
-            this.groupBox15.TabIndex = 11;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "New layer";
-            // 
-            // btOSDLayerAdd
-            // 
-            this.btOSDLayerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btOSDLayerAdd.Location = new System.Drawing.Point(51, 206);
-            this.btOSDLayerAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btOSDLayerAdd.Name = "btOSDLayerAdd";
-            this.btOSDLayerAdd.Size = new System.Drawing.Size(93, 44);
-            this.btOSDLayerAdd.TabIndex = 8;
-            this.btOSDLayerAdd.Text = "Create";
-            this.btOSDLayerAdd.UseVisualStyleBackColor = true;
-            this.btOSDLayerAdd.Click += new System.EventHandler(this.btOSDLayerAdd_Click);
-            // 
-            // edOSDLayerHeight
-            // 
-            this.edOSDLayerHeight.Location = new System.Drawing.Point(122, 156);
-            this.edOSDLayerHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDLayerHeight.Name = "edOSDLayerHeight";
-            this.edOSDLayerHeight.Size = new System.Drawing.Size(61, 31);
-            this.edOSDLayerHeight.TabIndex = 7;
-            this.edOSDLayerHeight.Text = "200";
-            // 
-            // label111
-            // 
-            this.label111.AutoSize = true;
-            this.label111.Location = new System.Drawing.Point(117, 125);
-            this.label111.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(65, 25);
-            this.label111.TabIndex = 6;
-            this.label111.Text = "Height";
-            // 
-            // edOSDLayerWidth
-            // 
-            this.edOSDLayerWidth.Location = new System.Drawing.Point(22, 156);
-            this.edOSDLayerWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDLayerWidth.Name = "edOSDLayerWidth";
-            this.edOSDLayerWidth.Size = new System.Drawing.Size(61, 31);
-            this.edOSDLayerWidth.TabIndex = 5;
-            this.edOSDLayerWidth.Text = "200";
-            // 
-            // label112
-            // 
-            this.label112.AutoSize = true;
-            this.label112.Location = new System.Drawing.Point(17, 125);
-            this.label112.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(60, 25);
-            this.label112.TabIndex = 4;
-            this.label112.Text = "Width";
-            // 
-            // edOSDLayerTop
-            // 
-            this.edOSDLayerTop.Location = new System.Drawing.Point(122, 81);
-            this.edOSDLayerTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDLayerTop.Name = "edOSDLayerTop";
-            this.edOSDLayerTop.Size = new System.Drawing.Size(61, 31);
-            this.edOSDLayerTop.TabIndex = 3;
-            this.edOSDLayerTop.Text = "0";
-            // 
-            // label110
-            // 
-            this.label110.AutoSize = true;
-            this.label110.Location = new System.Drawing.Point(117, 50);
-            this.label110.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label110.Name = "label110";
-            this.label110.Size = new System.Drawing.Size(41, 25);
-            this.label110.TabIndex = 2;
-            this.label110.Text = "Top";
-            // 
-            // edOSDLayerLeft
-            // 
-            this.edOSDLayerLeft.Location = new System.Drawing.Point(22, 81);
-            this.edOSDLayerLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edOSDLayerLeft.Name = "edOSDLayerLeft";
-            this.edOSDLayerLeft.Size = new System.Drawing.Size(61, 31);
-            this.edOSDLayerLeft.TabIndex = 1;
-            this.edOSDLayerLeft.Text = "0";
-            // 
-            // label109
-            // 
-            this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(17, 50);
-            this.label109.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(41, 25);
-            this.label109.TabIndex = 0;
-            this.label109.Text = "Left";
-            // 
-            // label108
-            // 
-            this.label108.AutoSize = true;
-            this.label108.Location = new System.Drawing.Point(20, 98);
-            this.label108.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(61, 25);
-            this.label108.TabIndex = 9;
-            this.label108.Text = "Layers";
-            // 
-            // tabPage12
-            // 
-            this.tabPage12.Controls.Add(this.tabControl5);
-            this.tabPage12.Location = new System.Drawing.Point(4, 34);
-            this.tabPage12.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage12.Size = new System.Drawing.Size(508, 958);
-            this.tabPage12.TabIndex = 6;
-            this.tabPage12.Text = "Decoders / Splitter";
-            this.tabPage12.UseVisualStyleBackColor = true;
-            // 
-            // tabControl5
-            // 
-            this.tabControl5.Controls.Add(this.tabPage33);
-            this.tabControl5.Controls.Add(this.tabPage34);
-            this.tabControl5.Controls.Add(this.tabPage47);
-            this.tabControl5.Location = new System.Drawing.Point(10, 11);
-            this.tabControl5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl5.Name = "tabControl5";
-            this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(487, 922);
-            this.tabControl5.TabIndex = 0;
-            // 
-            // tabPage33
-            // 
-            this.tabPage33.Controls.Add(this.cbCustomSplitter);
-            this.tabPage33.Controls.Add(this.rbSplitterCustom);
-            this.tabPage33.Controls.Add(this.rbSplitterDefault);
-            this.tabPage33.Location = new System.Drawing.Point(4, 34);
-            this.tabPage33.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage33.Name = "tabPage33";
-            this.tabPage33.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage33.Size = new System.Drawing.Size(479, 884);
-            this.tabPage33.TabIndex = 0;
-            this.tabPage33.Text = "Splitter";
-            this.tabPage33.UseVisualStyleBackColor = true;
-            // 
-            // cbCustomSplitter
-            // 
-            this.cbCustomSplitter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomSplitter.FormattingEnabled = true;
-            this.cbCustomSplitter.Location = new System.Drawing.Point(60, 128);
-            this.cbCustomSplitter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCustomSplitter.Name = "cbCustomSplitter";
-            this.cbCustomSplitter.Size = new System.Drawing.Size(387, 33);
-            this.cbCustomSplitter.Sorted = true;
-            this.cbCustomSplitter.TabIndex = 27;
-            // 
-            // rbSplitterCustom
-            // 
-            this.rbSplitterCustom.AutoSize = true;
-            this.rbSplitterCustom.Location = new System.Drawing.Point(27, 81);
-            this.rbSplitterCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbSplitterCustom.Name = "rbSplitterCustom";
-            this.rbSplitterCustom.Size = new System.Drawing.Size(99, 29);
-            this.rbSplitterCustom.TabIndex = 1;
-            this.rbSplitterCustom.Text = "Custom";
-            this.rbSplitterCustom.UseVisualStyleBackColor = true;
-            // 
-            // rbSplitterDefault
-            // 
-            this.rbSplitterDefault.AutoSize = true;
-            this.rbSplitterDefault.Checked = true;
-            this.rbSplitterDefault.Location = new System.Drawing.Point(27, 29);
-            this.rbSplitterDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbSplitterDefault.Name = "rbSplitterDefault";
-            this.rbSplitterDefault.Size = new System.Drawing.Size(94, 29);
-            this.rbSplitterDefault.TabIndex = 0;
-            this.rbSplitterDefault.TabStop = true;
-            this.rbSplitterDefault.Text = "Default";
-            this.rbSplitterDefault.UseVisualStyleBackColor = true;
-            // 
-            // tabPage34
-            // 
-            this.tabPage34.Controls.Add(this.rbVideoDecoderVFH264);
-            this.tabPage34.Controls.Add(this.cbCustomVideoDecoder);
-            this.tabPage34.Controls.Add(this.label28);
-            this.tabPage34.Controls.Add(this.label27);
-            this.tabPage34.Controls.Add(this.label26);
-            this.tabPage34.Controls.Add(this.rbVideoDecoderCustom);
-            this.tabPage34.Controls.Add(this.rbVideoDecoderFFDShow);
-            this.tabPage34.Controls.Add(this.rbVideoDecoderMS);
-            this.tabPage34.Controls.Add(this.rbVideoDecoderDefault);
-            this.tabPage34.Location = new System.Drawing.Point(4, 34);
-            this.tabPage34.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage34.Name = "tabPage34";
-            this.tabPage34.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage34.Size = new System.Drawing.Size(479, 884);
-            this.tabPage34.TabIndex = 1;
-            this.tabPage34.Text = "Video decoder";
-            this.tabPage34.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoDecoderVFH264
-            // 
-            this.rbVideoDecoderVFH264.AutoSize = true;
-            this.rbVideoDecoderVFH264.Location = new System.Drawing.Point(27, 385);
-            this.rbVideoDecoderVFH264.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVideoDecoderVFH264.Name = "rbVideoDecoderVFH264";
-            this.rbVideoDecoderVFH264.Size = new System.Drawing.Size(241, 29);
-            this.rbVideoDecoderVFH264.TabIndex = 26;
-            this.rbVideoDecoderVFH264.TabStop = true;
-            this.rbVideoDecoderVFH264.Text = "VisioForge H264 Decoder";
-            this.rbVideoDecoderVFH264.UseVisualStyleBackColor = true;
-            // 
-            // cbCustomVideoDecoder
-            // 
-            this.cbCustomVideoDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomVideoDecoder.FormattingEnabled = true;
-            this.cbCustomVideoDecoder.Location = new System.Drawing.Point(62, 496);
-            this.cbCustomVideoDecoder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCustomVideoDecoder.Name = "cbCustomVideoDecoder";
-            this.cbCustomVideoDecoder.Size = new System.Drawing.Size(386, 33);
-            this.cbCustomVideoDecoder.Sorted = true;
-            this.cbCustomVideoDecoder.TabIndex = 25;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(57, 325);
-            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(159, 25);
-            this.label28.TabIndex = 24;
-            this.label28.Text = "and DVD playback";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(57, 281);
-            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(404, 25);
-            this.label27.TabIndex = 23;
-            this.label27.Text = "To play DVD you must activate MPEG-2 decoding";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(57, 154);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(329, 25);
-            this.label26.TabIndex = 22;
-            this.label26.Text = "Available on Vista / 7 Premium and later";
-            // 
-            // rbVideoDecoderCustom
-            // 
-            this.rbVideoDecoderCustom.AutoSize = true;
-            this.rbVideoDecoderCustom.Location = new System.Drawing.Point(27, 452);
-            this.rbVideoDecoderCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVideoDecoderCustom.Name = "rbVideoDecoderCustom";
-            this.rbVideoDecoderCustom.Size = new System.Drawing.Size(99, 29);
-            this.rbVideoDecoderCustom.TabIndex = 21;
-            this.rbVideoDecoderCustom.Text = "Custom";
-            this.rbVideoDecoderCustom.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoDecoderFFDShow
-            // 
-            this.rbVideoDecoderFFDShow.AutoSize = true;
-            this.rbVideoDecoderFFDShow.Location = new System.Drawing.Point(27, 222);
-            this.rbVideoDecoderFFDShow.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVideoDecoderFFDShow.Name = "rbVideoDecoderFFDShow";
-            this.rbVideoDecoderFFDShow.Size = new System.Drawing.Size(112, 29);
-            this.rbVideoDecoderFFDShow.TabIndex = 20;
-            this.rbVideoDecoderFFDShow.Text = "FFDShow";
-            this.rbVideoDecoderFFDShow.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoDecoderMS
-            // 
-            this.rbVideoDecoderMS.AutoSize = true;
-            this.rbVideoDecoderMS.Location = new System.Drawing.Point(27, 98);
-            this.rbVideoDecoderMS.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVideoDecoderMS.Name = "rbVideoDecoderMS";
-            this.rbVideoDecoderMS.Size = new System.Drawing.Size(317, 29);
-            this.rbVideoDecoderMS.TabIndex = 19;
-            this.rbVideoDecoderMS.Text = "Microsoft DTV/DVD Video Decoder";
-            this.rbVideoDecoderMS.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoDecoderDefault
-            // 
-            this.rbVideoDecoderDefault.AutoSize = true;
-            this.rbVideoDecoderDefault.Checked = true;
-            this.rbVideoDecoderDefault.Location = new System.Drawing.Point(27, 29);
-            this.rbVideoDecoderDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbVideoDecoderDefault.Name = "rbVideoDecoderDefault";
-            this.rbVideoDecoderDefault.Size = new System.Drawing.Size(94, 29);
-            this.rbVideoDecoderDefault.TabIndex = 18;
-            this.rbVideoDecoderDefault.TabStop = true;
-            this.rbVideoDecoderDefault.Text = "Default";
-            this.rbVideoDecoderDefault.UseVisualStyleBackColor = true;
-            // 
-            // tabPage47
-            // 
-            this.tabPage47.Controls.Add(this.cbCustomAudioDecoder);
-            this.tabPage47.Controls.Add(this.rbAudioDecoderCustom);
-            this.tabPage47.Controls.Add(this.rbAudioDecoderDefault);
-            this.tabPage47.Location = new System.Drawing.Point(4, 34);
-            this.tabPage47.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage47.Name = "tabPage47";
-            this.tabPage47.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage47.Size = new System.Drawing.Size(479, 884);
-            this.tabPage47.TabIndex = 2;
-            this.tabPage47.Text = "Audio decoder";
-            this.tabPage47.UseVisualStyleBackColor = true;
-            // 
-            // cbCustomAudioDecoder
-            // 
-            this.cbCustomAudioDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomAudioDecoder.FormattingEnabled = true;
-            this.cbCustomAudioDecoder.Location = new System.Drawing.Point(62, 128);
-            this.cbCustomAudioDecoder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCustomAudioDecoder.Name = "cbCustomAudioDecoder";
-            this.cbCustomAudioDecoder.Size = new System.Drawing.Size(386, 33);
-            this.cbCustomAudioDecoder.Sorted = true;
-            this.cbCustomAudioDecoder.TabIndex = 30;
-            // 
-            // rbAudioDecoderCustom
-            // 
-            this.rbAudioDecoderCustom.AutoSize = true;
-            this.rbAudioDecoderCustom.Location = new System.Drawing.Point(27, 81);
-            this.rbAudioDecoderCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbAudioDecoderCustom.Name = "rbAudioDecoderCustom";
-            this.rbAudioDecoderCustom.Size = new System.Drawing.Size(99, 29);
-            this.rbAudioDecoderCustom.TabIndex = 29;
-            this.rbAudioDecoderCustom.Text = "Custom";
-            this.rbAudioDecoderCustom.UseVisualStyleBackColor = true;
-            // 
-            // rbAudioDecoderDefault
-            // 
-            this.rbAudioDecoderDefault.AutoSize = true;
-            this.rbAudioDecoderDefault.Checked = true;
-            this.rbAudioDecoderDefault.Location = new System.Drawing.Point(27, 29);
-            this.rbAudioDecoderDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbAudioDecoderDefault.Name = "rbAudioDecoderDefault";
-            this.rbAudioDecoderDefault.Size = new System.Drawing.Size(94, 29);
-            this.rbAudioDecoderDefault.TabIndex = 28;
-            this.rbAudioDecoderDefault.TabStop = true;
-            this.rbAudioDecoderDefault.Text = "Default";
-            this.rbAudioDecoderDefault.UseVisualStyleBackColor = true;
-            // 
-            // tabPage13
-            // 
-            this.tabPage13.Controls.Add(this.tabControl9);
-            this.tabPage13.Controls.Add(this.cbMotDetEnabled);
-            this.tabPage13.Location = new System.Drawing.Point(4, 34);
-            this.tabPage13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage13.Size = new System.Drawing.Size(508, 958);
-            this.tabPage13.TabIndex = 7;
-            this.tabPage13.Text = "Motion detection";
-            this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // tabControl9
-            // 
-            this.tabControl9.Controls.Add(this.tabPage44);
-            this.tabControl9.Controls.Add(this.tabPage45);
-            this.tabControl9.Location = new System.Drawing.Point(24, 82);
-            this.tabControl9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl9.Name = "tabControl9";
-            this.tabControl9.SelectedIndex = 0;
-            this.tabControl9.Size = new System.Drawing.Size(447, 794);
-            this.tabControl9.TabIndex = 3;
-            // 
-            // tabPage44
-            // 
-            this.tabPage44.Controls.Add(this.pbMotionLevel);
-            this.tabPage44.Controls.Add(this.label158);
-            this.tabPage44.Controls.Add(this.mmMotDetMatrix);
-            this.tabPage44.Location = new System.Drawing.Point(4, 34);
-            this.tabPage44.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage44.Name = "tabPage44";
-            this.tabPage44.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage44.Size = new System.Drawing.Size(439, 756);
-            this.tabPage44.TabIndex = 0;
-            this.tabPage44.Text = "Output matrix";
-            this.tabPage44.UseVisualStyleBackColor = true;
-            // 
-            // pbMotionLevel
-            // 
-            this.pbMotionLevel.Location = new System.Drawing.Point(10, 629);
-            this.pbMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pbMotionLevel.Name = "pbMotionLevel";
-            this.pbMotionLevel.Size = new System.Drawing.Size(378, 36);
-            this.pbMotionLevel.TabIndex = 2;
-            // 
-            // label158
-            // 
-            this.label158.AutoSize = true;
-            this.label158.Location = new System.Drawing.Point(9, 590);
-            this.label158.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label158.Name = "label158";
-            this.label158.Size = new System.Drawing.Size(110, 25);
-            this.label158.TabIndex = 1;
-            this.label158.Text = "Motion level";
-            // 
-            // mmMotDetMatrix
-            // 
-            this.mmMotDetMatrix.Location = new System.Drawing.Point(10, 11);
-            this.mmMotDetMatrix.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mmMotDetMatrix.Multiline = true;
-            this.mmMotDetMatrix.Name = "mmMotDetMatrix";
-            this.mmMotDetMatrix.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmMotDetMatrix.Size = new System.Drawing.Size(411, 498);
-            this.mmMotDetMatrix.TabIndex = 0;
-            // 
-            // tabPage45
-            // 
-            this.tabPage45.Controls.Add(this.groupBox25);
-            this.tabPage45.Controls.Add(this.btMotDetUpdateSettings);
-            this.tabPage45.Controls.Add(this.groupBox27);
-            this.tabPage45.Controls.Add(this.groupBox26);
-            this.tabPage45.Controls.Add(this.groupBox24);
-            this.tabPage45.Location = new System.Drawing.Point(4, 34);
-            this.tabPage45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage45.Name = "tabPage45";
-            this.tabPage45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage45.Size = new System.Drawing.Size(439, 756);
-            this.tabPage45.TabIndex = 1;
-            this.tabPage45.Text = "Settings";
-            this.tabPage45.UseVisualStyleBackColor = true;
-            // 
-            // groupBox25
-            // 
-            this.groupBox25.Controls.Add(this.cbMotDetHLColor);
-            this.groupBox25.Controls.Add(this.label161);
-            this.groupBox25.Controls.Add(this.label160);
-            this.groupBox25.Controls.Add(this.cbMotDetHLEnabled);
-            this.groupBox25.Controls.Add(this.tbMotDetHLThreshold);
-            this.groupBox25.Location = new System.Drawing.Point(20, 198);
-            this.groupBox25.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox25.Size = new System.Drawing.Size(389, 165);
-            this.groupBox25.TabIndex = 1;
-            this.groupBox25.TabStop = false;
-            this.groupBox25.Text = "Color highlight";
-            // 
-            // cbMotDetHLColor
-            // 
-            this.cbMotDetHLColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMotDetHLColor.FormattingEnabled = true;
-            this.cbMotDetHLColor.Items.AddRange(new object[] {
-            "Red",
-            "Green",
-            "Blue"});
-            this.cbMotDetHLColor.Location = new System.Drawing.Point(256, 114);
-            this.cbMotDetHLColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMotDetHLColor.Name = "cbMotDetHLColor";
-            this.cbMotDetHLColor.Size = new System.Drawing.Size(114, 33);
-            this.cbMotDetHLColor.TabIndex = 5;
-            // 
-            // label161
-            // 
-            this.label161.AutoSize = true;
-            this.label161.Location = new System.Drawing.Point(247, 81);
-            this.label161.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label161.Name = "label161";
-            this.label161.Size = new System.Drawing.Size(55, 25);
-            this.label161.TabIndex = 4;
-            this.label161.Text = "Color";
-            // 
-            // label160
-            // 
-            this.label160.AutoSize = true;
-            this.label160.Location = new System.Drawing.Point(50, 81);
-            this.label160.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(90, 25);
-            this.label160.TabIndex = 2;
-            this.label160.Text = "Threshold";
-            // 
-            // cbMotDetHLEnabled
-            // 
-            this.cbMotDetHLEnabled.AutoSize = true;
-            this.cbMotDetHLEnabled.Checked = true;
-            this.cbMotDetHLEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbMotDetHLEnabled.Location = new System.Drawing.Point(23, 42);
-            this.cbMotDetHLEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMotDetHLEnabled.Name = "cbMotDetHLEnabled";
-            this.cbMotDetHLEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbMotDetHLEnabled.TabIndex = 1;
-            this.cbMotDetHLEnabled.Text = "Enabled";
-            this.cbMotDetHLEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tbMotDetHLThreshold
-            // 
-            this.tbMotDetHLThreshold.BackColor = System.Drawing.SystemColors.Window;
-            this.tbMotDetHLThreshold.Location = new System.Drawing.Point(51, 111);
-            this.tbMotDetHLThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbMotDetHLThreshold.Maximum = 255;
-            this.tbMotDetHLThreshold.Name = "tbMotDetHLThreshold";
-            this.tbMotDetHLThreshold.Size = new System.Drawing.Size(173, 69);
-            this.tbMotDetHLThreshold.TabIndex = 3;
-            this.tbMotDetHLThreshold.TickFrequency = 5;
-            this.tbMotDetHLThreshold.Value = 25;
-            // 
-            // btMotDetUpdateSettings
-            // 
-            this.btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btMotDetUpdateSettings.Location = new System.Drawing.Point(230, 689);
-            this.btMotDetUpdateSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btMotDetUpdateSettings.Name = "btMotDetUpdateSettings";
-            this.btMotDetUpdateSettings.Size = new System.Drawing.Size(178, 44);
-            this.btMotDetUpdateSettings.TabIndex = 4;
-            this.btMotDetUpdateSettings.Text = "Update settings";
-            this.btMotDetUpdateSettings.UseVisualStyleBackColor = true;
-            this.btMotDetUpdateSettings.Click += new System.EventHandler(this.btMotDetUpdateSettings_Click);
-            // 
-            // groupBox27
-            // 
-            this.groupBox27.Controls.Add(this.edMotDetMatrixHeight);
-            this.groupBox27.Controls.Add(this.label163);
-            this.groupBox27.Controls.Add(this.edMotDetMatrixWidth);
-            this.groupBox27.Controls.Add(this.label164);
-            this.groupBox27.Location = new System.Drawing.Point(20, 511);
-            this.groupBox27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox27.Size = new System.Drawing.Size(389, 114);
-            this.groupBox27.TabIndex = 3;
-            this.groupBox27.TabStop = false;
-            this.groupBox27.Text = "Matrix";
-            // 
-            // edMotDetMatrixHeight
-            // 
-            this.edMotDetMatrixHeight.Location = new System.Drawing.Point(242, 44);
-            this.edMotDetMatrixHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edMotDetMatrixHeight.Name = "edMotDetMatrixHeight";
-            this.edMotDetMatrixHeight.Size = new System.Drawing.Size(57, 31);
-            this.edMotDetMatrixHeight.TabIndex = 75;
-            this.edMotDetMatrixHeight.Text = "10";
-            // 
-            // label163
-            // 
-            this.label163.AutoSize = true;
-            this.label163.Location = new System.Drawing.Point(163, 50);
-            this.label163.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label163.Name = "label163";
-            this.label163.Size = new System.Drawing.Size(65, 25);
-            this.label163.TabIndex = 74;
-            this.label163.Text = "Height";
-            // 
-            // edMotDetMatrixWidth
-            // 
-            this.edMotDetMatrixWidth.Location = new System.Drawing.Point(93, 44);
-            this.edMotDetMatrixWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edMotDetMatrixWidth.Name = "edMotDetMatrixWidth";
-            this.edMotDetMatrixWidth.Size = new System.Drawing.Size(57, 31);
-            this.edMotDetMatrixWidth.TabIndex = 73;
-            this.edMotDetMatrixWidth.Text = "10";
-            // 
-            // label164
-            // 
-            this.label164.AutoSize = true;
-            this.label164.Location = new System.Drawing.Point(23, 50);
-            this.label164.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label164.Name = "label164";
-            this.label164.Size = new System.Drawing.Size(60, 25);
-            this.label164.TabIndex = 72;
-            this.label164.Text = "Width";
-            // 
-            // groupBox26
-            // 
-            this.groupBox26.Controls.Add(this.label162);
-            this.groupBox26.Controls.Add(this.tbMotDetDropFramesThreshold);
-            this.groupBox26.Controls.Add(this.cbMotDetDropFramesEnabled);
-            this.groupBox26.Location = new System.Drawing.Point(20, 368);
-            this.groupBox26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox26.Size = new System.Drawing.Size(389, 132);
-            this.groupBox26.TabIndex = 2;
-            this.groupBox26.TabStop = false;
-            this.groupBox26.Text = "Drop frames";
-            // 
-            // label162
-            // 
-            this.label162.AutoSize = true;
-            this.label162.Location = new System.Drawing.Point(157, 40);
-            this.label162.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(90, 25);
-            this.label162.TabIndex = 4;
-            this.label162.Text = "Threshold";
-            // 
-            // tbMotDetDropFramesThreshold
-            // 
-            this.tbMotDetDropFramesThreshold.BackColor = System.Drawing.SystemColors.Window;
-            this.tbMotDetDropFramesThreshold.Location = new System.Drawing.Point(158, 71);
-            this.tbMotDetDropFramesThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbMotDetDropFramesThreshold.Maximum = 255;
-            this.tbMotDetDropFramesThreshold.Name = "tbMotDetDropFramesThreshold";
-            this.tbMotDetDropFramesThreshold.Size = new System.Drawing.Size(173, 69);
-            this.tbMotDetDropFramesThreshold.TabIndex = 5;
-            this.tbMotDetDropFramesThreshold.TickFrequency = 5;
-            this.tbMotDetDropFramesThreshold.Value = 5;
-            // 
-            // cbMotDetDropFramesEnabled
-            // 
-            this.cbMotDetDropFramesEnabled.AutoSize = true;
-            this.cbMotDetDropFramesEnabled.Location = new System.Drawing.Point(23, 36);
-            this.cbMotDetDropFramesEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMotDetDropFramesEnabled.Name = "cbMotDetDropFramesEnabled";
-            this.cbMotDetDropFramesEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbMotDetDropFramesEnabled.TabIndex = 1;
-            this.cbMotDetDropFramesEnabled.Text = "Enabled";
-            this.cbMotDetDropFramesEnabled.UseVisualStyleBackColor = true;
-            // 
-            // groupBox24
-            // 
-            this.groupBox24.Controls.Add(this.edMotDetFrameInterval);
-            this.groupBox24.Controls.Add(this.label159);
-            this.groupBox24.Controls.Add(this.cbCompareGreyscale);
-            this.groupBox24.Controls.Add(this.cbCompareBlue);
-            this.groupBox24.Controls.Add(this.cbCompareGreen);
-            this.groupBox24.Controls.Add(this.cbCompareRed);
-            this.groupBox24.Location = new System.Drawing.Point(20, 22);
-            this.groupBox24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox24.Size = new System.Drawing.Size(389, 158);
-            this.groupBox24.TabIndex = 0;
-            this.groupBox24.TabStop = false;
-            this.groupBox24.Text = "Compare settings";
-            // 
-            // edMotDetFrameInterval
-            // 
-            this.edMotDetFrameInterval.Location = new System.Drawing.Point(158, 98);
-            this.edMotDetFrameInterval.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edMotDetFrameInterval.Name = "edMotDetFrameInterval";
-            this.edMotDetFrameInterval.Size = new System.Drawing.Size(51, 31);
-            this.edMotDetFrameInterval.TabIndex = 5;
-            this.edMotDetFrameInterval.Text = "2";
-            // 
-            // label159
-            // 
-            this.label159.AutoSize = true;
-            this.label159.Location = new System.Drawing.Point(18, 104);
-            this.label159.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label159.Name = "label159";
-            this.label159.Size = new System.Drawing.Size(123, 25);
-            this.label159.TabIndex = 4;
-            this.label159.Text = "Frame interval";
-            // 
-            // cbCompareGreyscale
-            // 
-            this.cbCompareGreyscale.AutoSize = true;
-            this.cbCompareGreyscale.Checked = true;
-            this.cbCompareGreyscale.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCompareGreyscale.Location = new System.Drawing.Point(271, 40);
-            this.cbCompareGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCompareGreyscale.Name = "cbCompareGreyscale";
-            this.cbCompareGreyscale.Size = new System.Drawing.Size(112, 29);
-            this.cbCompareGreyscale.TabIndex = 3;
-            this.cbCompareGreyscale.Text = "Greyscale";
-            this.cbCompareGreyscale.UseVisualStyleBackColor = true;
-            // 
-            // cbCompareBlue
-            // 
-            this.cbCompareBlue.AutoSize = true;
-            this.cbCompareBlue.Location = new System.Drawing.Point(197, 40);
-            this.cbCompareBlue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCompareBlue.Name = "cbCompareBlue";
-            this.cbCompareBlue.Size = new System.Drawing.Size(71, 29);
-            this.cbCompareBlue.TabIndex = 2;
-            this.cbCompareBlue.Text = "Blue";
-            this.cbCompareBlue.UseVisualStyleBackColor = true;
-            // 
-            // cbCompareGreen
-            // 
-            this.cbCompareGreen.AutoSize = true;
-            this.cbCompareGreen.Location = new System.Drawing.Point(100, 40);
-            this.cbCompareGreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCompareGreen.Name = "cbCompareGreen";
-            this.cbCompareGreen.Size = new System.Drawing.Size(84, 29);
-            this.cbCompareGreen.TabIndex = 1;
-            this.cbCompareGreen.Text = "Green";
-            this.cbCompareGreen.UseVisualStyleBackColor = true;
-            // 
-            // cbCompareRed
-            // 
-            this.cbCompareRed.AutoSize = true;
-            this.cbCompareRed.Location = new System.Drawing.Point(23, 40);
-            this.cbCompareRed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbCompareRed.Name = "cbCompareRed";
-            this.cbCompareRed.Size = new System.Drawing.Size(68, 29);
-            this.cbCompareRed.TabIndex = 0;
-            this.cbCompareRed.Text = "Red";
-            this.cbCompareRed.UseVisualStyleBackColor = true;
-            // 
-            // cbMotDetEnabled
-            // 
-            this.cbMotDetEnabled.AutoSize = true;
-            this.cbMotDetEnabled.Location = new System.Drawing.Point(24, 31);
-            this.cbMotDetEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMotDetEnabled.Name = "cbMotDetEnabled";
-            this.cbMotDetEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbMotDetEnabled.TabIndex = 2;
-            this.cbMotDetEnabled.Text = "Enabled";
-            this.cbMotDetEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage14
-            // 
-            this.tabPage14.Controls.Add(this.label505);
-            this.tabPage14.Controls.Add(this.rbMotionDetectionExProcessor);
-            this.tabPage14.Controls.Add(this.label389);
-            this.tabPage14.Controls.Add(this.rbMotionDetectionExDetector);
-            this.tabPage14.Controls.Add(this.label64);
-            this.tabPage14.Controls.Add(this.label65);
-            this.tabPage14.Controls.Add(this.pbAFMotionLevel);
-            this.tabPage14.Controls.Add(this.cbMotionDetectionEx);
-            this.tabPage14.Location = new System.Drawing.Point(4, 34);
-            this.tabPage14.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage14.Size = new System.Drawing.Size(508, 958);
-            this.tabPage14.TabIndex = 14;
-            this.tabPage14.Text = "Motion detection (Extended)";
-            this.tabPage14.UseVisualStyleBackColor = true;
-            // 
-            // label505
-            // 
-            this.label505.AutoSize = true;
-            this.label505.Location = new System.Drawing.Point(27, 192);
-            this.label505.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label505.Name = "label505";
-            this.label505.Size = new System.Drawing.Size(89, 25);
-            this.label505.TabIndex = 31;
-            this.label505.Text = "Processor";
-            // 
-            // rbMotionDetectionExProcessor
-            // 
-            this.rbMotionDetectionExProcessor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.rbMotionDetectionExProcessor.FormattingEnabled = true;
-            this.rbMotionDetectionExProcessor.Items.AddRange(new object[] {
-            "None",
-            "Blob counting objects",
-            "GridMotionAreaProcessing",
-            "Motion area highlighting",
-            "Motion border highlighting"});
-            this.rbMotionDetectionExProcessor.Location = new System.Drawing.Point(27, 222);
-            this.rbMotionDetectionExProcessor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbMotionDetectionExProcessor.Name = "rbMotionDetectionExProcessor";
-            this.rbMotionDetectionExProcessor.Size = new System.Drawing.Size(427, 33);
-            this.rbMotionDetectionExProcessor.TabIndex = 30;
-            // 
-            // label389
-            // 
-            this.label389.AutoSize = true;
-            this.label389.Location = new System.Drawing.Point(27, 96);
-            this.label389.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label389.Name = "label389";
-            this.label389.Size = new System.Drawing.Size(80, 25);
-            this.label389.TabIndex = 29;
-            this.label389.Text = "Detector";
-            // 
-            // rbMotionDetectionExDetector
-            // 
-            this.rbMotionDetectionExDetector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.rbMotionDetectionExDetector.FormattingEnabled = true;
-            this.rbMotionDetectionExDetector.Items.AddRange(new object[] {
-            "Custom frame difference",
-            "Simple background modeling",
-            "Two frames difference"});
-            this.rbMotionDetectionExDetector.Location = new System.Drawing.Point(27, 128);
-            this.rbMotionDetectionExDetector.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbMotionDetectionExDetector.Name = "rbMotionDetectionExDetector";
-            this.rbMotionDetectionExDetector.Size = new System.Drawing.Size(427, 33);
-            this.rbMotionDetectionExDetector.TabIndex = 28;
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(89, 842);
-            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(293, 25);
-            this.label64.TabIndex = 27;
-            this.label64.Text = "Much more options available in API";
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(27, 304);
-            this.label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(110, 25);
-            this.label65.TabIndex = 26;
-            this.label65.Text = "Motion level";
-            // 
-            // pbAFMotionLevel
-            // 
-            this.pbAFMotionLevel.Location = new System.Drawing.Point(27, 335);
-            this.pbAFMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.pbAFMotionLevel.Name = "pbAFMotionLevel";
-            this.pbAFMotionLevel.Size = new System.Drawing.Size(430, 44);
-            this.pbAFMotionLevel.TabIndex = 25;
-            // 
-            // cbMotionDetectionEx
-            // 
-            this.cbMotionDetectionEx.AutoSize = true;
-            this.cbMotionDetectionEx.Location = new System.Drawing.Point(27, 22);
-            this.cbMotionDetectionEx.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbMotionDetectionEx.Name = "cbMotionDetectionEx";
-            this.cbMotionDetectionEx.Size = new System.Drawing.Size(101, 29);
-            this.cbMotionDetectionEx.TabIndex = 24;
-            this.cbMotionDetectionEx.Text = "Enabled";
-            this.cbMotionDetectionEx.UseVisualStyleBackColor = true;
-            // 
-            // tabPage21
-            // 
-            this.tabPage21.Controls.Add(this.edBarcodeMetadata);
-            this.tabPage21.Controls.Add(this.label91);
-            this.tabPage21.Controls.Add(this.cbBarcodeType);
-            this.tabPage21.Controls.Add(this.label90);
-            this.tabPage21.Controls.Add(this.btBarcodeReset);
-            this.tabPage21.Controls.Add(this.edBarcode);
-            this.tabPage21.Controls.Add(this.label89);
-            this.tabPage21.Controls.Add(this.cbBarcodeDetectionEnabled);
-            this.tabPage21.Location = new System.Drawing.Point(4, 34);
-            this.tabPage21.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage21.Name = "tabPage21";
-            this.tabPage21.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage21.Size = new System.Drawing.Size(508, 958);
-            this.tabPage21.TabIndex = 8;
-            this.tabPage21.Text = "Barcode reader";
-            this.tabPage21.UseVisualStyleBackColor = true;
-            // 
-            // edBarcodeMetadata
-            // 
-            this.edBarcodeMetadata.Location = new System.Drawing.Point(27, 308);
-            this.edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.edBarcodeMetadata.Multiline = true;
-            this.edBarcodeMetadata.Name = "edBarcodeMetadata";
-            this.edBarcodeMetadata.Size = new System.Drawing.Size(451, 182);
-            this.edBarcodeMetadata.TabIndex = 16;
-            // 
-            // label91
-            // 
-            this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(23, 271);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(87, 25);
-            this.label91.TabIndex = 15;
-            this.label91.Text = "Metadata";
-            // 
-            // cbBarcodeType
-            // 
-            this.cbBarcodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBarcodeType.FormattingEnabled = true;
-            this.cbBarcodeType.Items.AddRange(new object[] {
-            "Autodetect",
-            "UPC-A",
-            "UPC-E",
-            "EAN-8",
-            "EAN-13",
-            "Code 39",
-            "Code 93",
-            "Code 128",
-            "ITF",
-            "CodaBar",
-            "RSS-14",
-            "Data matrix",
-            "Aztec",
-            "QR",
-            "PDF-417"});
-            this.cbBarcodeType.Location = new System.Drawing.Point(27, 122);
-            this.cbBarcodeType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbBarcodeType.Name = "cbBarcodeType";
-            this.cbBarcodeType.Size = new System.Drawing.Size(264, 33);
-            this.cbBarcodeType.TabIndex = 14;
-            // 
-            // label90
-            // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(23, 92);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(116, 25);
-            this.label90.TabIndex = 13;
-            this.label90.Text = "Barcode type";
-            // 
-            // btBarcodeReset
-            // 
-            this.btBarcodeReset.Location = new System.Drawing.Point(27, 515);
-            this.btBarcodeReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btBarcodeReset.Name = "btBarcodeReset";
-            this.btBarcodeReset.Size = new System.Drawing.Size(103, 44);
-            this.btBarcodeReset.TabIndex = 12;
-            this.btBarcodeReset.Text = "Restart";
-            this.btBarcodeReset.UseVisualStyleBackColor = true;
-            this.btBarcodeReset.Click += new System.EventHandler(this.btBarcodeReset_Click);
-            // 
-            // edBarcode
-            // 
-            this.edBarcode.Location = new System.Drawing.Point(27, 215);
-            this.edBarcode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.edBarcode.Name = "edBarcode";
-            this.edBarcode.Size = new System.Drawing.Size(451, 31);
-            this.edBarcode.TabIndex = 11;
-            // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(23, 185);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(153, 25);
-            this.label89.TabIndex = 10;
-            this.label89.Text = "Detected barcode";
-            // 
-            // cbBarcodeDetectionEnabled
-            // 
-            this.cbBarcodeDetectionEnabled.AutoSize = true;
-            this.cbBarcodeDetectionEnabled.Location = new System.Drawing.Point(27, 35);
-            this.cbBarcodeDetectionEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled";
-            this.cbBarcodeDetectionEnabled.Size = new System.Drawing.Size(101, 29);
-            this.cbBarcodeDetectionEnabled.TabIndex = 9;
-            this.cbBarcodeDetectionEnabled.Text = "Enabled";
-            this.cbBarcodeDetectionEnabled.UseVisualStyleBackColor = true;
-            // 
-            // tabPage23
-            // 
-            this.tabPage23.Controls.Add(this.textBox1);
-            this.tabPage23.Controls.Add(this.groupBox48);
-            this.tabPage23.Location = new System.Drawing.Point(4, 34);
-            this.tabPage23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage23.Size = new System.Drawing.Size(508, 958);
-            this.tabPage23.TabIndex = 9;
-            this.tabPage23.Text = "Encryption";
-            this.tabPage23.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(27, 471);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(446, 150);
-            this.textBox1.TabIndex = 11;
-            this.textBox1.Text = "Media Player SDK .Net can play encrypted files created by Video Encryption SDK (D" +
-    "irectShow or included in Video Capture SDK .Net / Video Edit SDK .Net).";
-            // 
-            // groupBox48
-            // 
-            this.groupBox48.Controls.Add(this.label343);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyHEX);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyBinary);
-            this.groupBox48.Controls.Add(this.btEncryptionOpenFile);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyFile);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyFile);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyString);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyString);
-            this.groupBox48.Location = new System.Drawing.Point(27, 29);
-            this.groupBox48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox48.Size = new System.Drawing.Size(449, 431);
-            this.groupBox48.TabIndex = 9;
-            this.groupBox48.TabStop = false;
-            this.groupBox48.Text = "Encryption key type";
-            // 
-            // label343
-            // 
-            this.label343.AutoSize = true;
-            this.label343.Location = new System.Drawing.Point(56, 382);
-            this.label343.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label343.Name = "label343";
-            this.label343.Size = new System.Drawing.Size(258, 25);
-            this.label343.TabIndex = 10;
-            this.label343.Text = "You can assign byte[] using API";
-            // 
-            // edEncryptionKeyHEX
-            // 
-            this.edEncryptionKeyHEX.Location = new System.Drawing.Point(60, 339);
-            this.edEncryptionKeyHEX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
-            this.edEncryptionKeyHEX.Size = new System.Drawing.Size(354, 31);
-            this.edEncryptionKeyHEX.TabIndex = 9;
-            this.edEncryptionKeyHEX.Text = "enter hex data";
-            // 
-            // rbEncryptionKeyBinary
-            // 
-            this.rbEncryptionKeyBinary.AutoSize = true;
-            this.rbEncryptionKeyBinary.Location = new System.Drawing.Point(23, 294);
-            this.rbEncryptionKeyBinary.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbEncryptionKeyBinary.Name = "rbEncryptionKeyBinary";
-            this.rbEncryptionKeyBinary.Size = new System.Drawing.Size(197, 29);
-            this.rbEncryptionKeyBinary.TabIndex = 8;
-            this.rbEncryptionKeyBinary.Text = "Binary data (v9 SDK)";
-            this.rbEncryptionKeyBinary.UseVisualStyleBackColor = true;
-            // 
-            // btEncryptionOpenFile
-            // 
-            this.btEncryptionOpenFile.Location = new System.Drawing.Point(378, 219);
-            this.btEncryptionOpenFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btEncryptionOpenFile.Name = "btEncryptionOpenFile";
-            this.btEncryptionOpenFile.Size = new System.Drawing.Size(38, 44);
-            this.btEncryptionOpenFile.TabIndex = 7;
-            this.btEncryptionOpenFile.Text = "...";
-            this.btEncryptionOpenFile.UseVisualStyleBackColor = true;
-            this.btEncryptionOpenFile.Click += new System.EventHandler(this.btEncryptionOpenFile_Click);
-            // 
-            // edEncryptionKeyFile
-            // 
-            this.edEncryptionKeyFile.Location = new System.Drawing.Point(60, 222);
-            this.edEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edEncryptionKeyFile.Name = "edEncryptionKeyFile";
-            this.edEncryptionKeyFile.Size = new System.Drawing.Size(306, 31);
-            this.edEncryptionKeyFile.TabIndex = 6;
-            this.edEncryptionKeyFile.Text = "c:\\keyfile.txt";
-            // 
-            // rbEncryptionKeyFile
-            // 
-            this.rbEncryptionKeyFile.AutoSize = true;
-            this.rbEncryptionKeyFile.Location = new System.Drawing.Point(23, 179);
-            this.rbEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbEncryptionKeyFile.Name = "rbEncryptionKeyFile";
-            this.rbEncryptionKeyFile.Size = new System.Drawing.Size(135, 29);
-            this.rbEncryptionKeyFile.TabIndex = 5;
-            this.rbEncryptionKeyFile.Text = "File (v9 SDK)";
-            this.rbEncryptionKeyFile.UseVisualStyleBackColor = true;
-            // 
-            // edEncryptionKeyString
-            // 
-            this.edEncryptionKeyString.Location = new System.Drawing.Point(60, 108);
-            this.edEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edEncryptionKeyString.Name = "edEncryptionKeyString";
-            this.edEncryptionKeyString.Size = new System.Drawing.Size(354, 31);
-            this.edEncryptionKeyString.TabIndex = 4;
-            this.edEncryptionKeyString.Text = "100";
-            // 
-            // rbEncryptionKeyString
-            // 
-            this.rbEncryptionKeyString.AutoSize = true;
-            this.rbEncryptionKeyString.Checked = true;
-            this.rbEncryptionKeyString.Location = new System.Drawing.Point(23, 54);
-            this.rbEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.rbEncryptionKeyString.Name = "rbEncryptionKeyString";
-            this.rbEncryptionKeyString.Size = new System.Drawing.Size(83, 29);
-            this.rbEncryptionKeyString.TabIndex = 0;
-            this.rbEncryptionKeyString.TabStop = true;
-            this.rbEncryptionKeyString.Text = "String";
-            this.rbEncryptionKeyString.UseVisualStyleBackColor = true;
-            // 
-            // tabPage24
-            // 
-            this.tabPage24.Controls.Add(this.btReversePlaybackNextFrame);
-            this.tabPage24.Controls.Add(this.btReversePlaybackPrevFrame);
-            this.tabPage24.Controls.Add(this.label34);
-            this.tabPage24.Controls.Add(this.label33);
-            this.tabPage24.Controls.Add(this.btReversePlayback);
-            this.tabPage24.Controls.Add(this.edReversePlaybackCacheSize);
-            this.tabPage24.Controls.Add(this.label32);
-            this.tabPage24.Controls.Add(this.tbReversePlaybackTrackbar);
-            this.tabPage24.Location = new System.Drawing.Point(4, 34);
-            this.tabPage24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage24.Size = new System.Drawing.Size(508, 958);
-            this.tabPage24.TabIndex = 10;
-            this.tabPage24.Text = "Reverse playback";
-            this.tabPage24.UseVisualStyleBackColor = true;
-            // 
-            // btReversePlaybackNextFrame
-            // 
-            this.btReversePlaybackNextFrame.Location = new System.Drawing.Point(217, 389);
-            this.btReversePlaybackNextFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btReversePlaybackNextFrame.Name = "btReversePlaybackNextFrame";
-            this.btReversePlaybackNextFrame.Size = new System.Drawing.Size(176, 44);
-            this.btReversePlaybackNextFrame.TabIndex = 12;
-            this.btReversePlaybackNextFrame.Text = "Next frame";
-            this.btReversePlaybackNextFrame.UseVisualStyleBackColor = true;
-            this.btReversePlaybackNextFrame.Click += new System.EventHandler(this.btReversePlaybackNextFrame_Click);
-            // 
-            // btReversePlaybackPrevFrame
-            // 
-            this.btReversePlaybackPrevFrame.Location = new System.Drawing.Point(31, 389);
-            this.btReversePlaybackPrevFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btReversePlaybackPrevFrame.Name = "btReversePlaybackPrevFrame";
-            this.btReversePlaybackPrevFrame.Size = new System.Drawing.Size(176, 44);
-            this.btReversePlaybackPrevFrame.TabIndex = 11;
-            this.btReversePlaybackPrevFrame.Text = "Previous frame";
-            this.btReversePlaybackPrevFrame.UseVisualStyleBackColor = true;
-            this.btReversePlaybackPrevFrame.Click += new System.EventHandler(this.btReversePlaybackPrevFrame_Click);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(27, 222);
-            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(182, 25);
-            this.label34.TabIndex = 10;
-            this.label34.Text = "count before tracking";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(27, 190);
-            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(377, 25);
-            this.label33.TabIndex = 9;
-            this.label33.Text = "Wait several seconds to cache required frames";
-            // 
-            // btReversePlayback
-            // 
-            this.btReversePlayback.Location = new System.Drawing.Point(31, 122);
-            this.btReversePlayback.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btReversePlayback.Name = "btReversePlayback";
-            this.btReversePlayback.Size = new System.Drawing.Size(317, 44);
-            this.btReversePlayback.TabIndex = 8;
-            this.btReversePlayback.Text = "Go to reverse playback mode";
-            this.btReversePlayback.UseVisualStyleBackColor = true;
-            this.btReversePlayback.Click += new System.EventHandler(this.btReversePlayback_Click);
-            // 
-            // edReversePlaybackCacheSize
-            // 
-            this.edReversePlaybackCacheSize.Location = new System.Drawing.Point(237, 29);
-            this.edReversePlaybackCacheSize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edReversePlaybackCacheSize.Name = "edReversePlaybackCacheSize";
-            this.edReversePlaybackCacheSize.Size = new System.Drawing.Size(108, 31);
-            this.edReversePlaybackCacheSize.TabIndex = 7;
-            this.edReversePlaybackCacheSize.Text = "100";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(27, 35);
-            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(144, 25);
-            this.label32.TabIndex = 6;
-            this.label32.Text = "Frame cache size";
-            // 
-            // tbReversePlaybackTrackbar
-            // 
-            this.tbReversePlaybackTrackbar.Location = new System.Drawing.Point(31, 272);
-            this.tbReversePlaybackTrackbar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbReversePlaybackTrackbar.Maximum = 100;
-            this.tbReversePlaybackTrackbar.Name = "tbReversePlaybackTrackbar";
-            this.tbReversePlaybackTrackbar.Size = new System.Drawing.Size(317, 69);
-            this.tbReversePlaybackTrackbar.TabIndex = 4;
-            this.tbReversePlaybackTrackbar.Value = 100;
-            this.tbReversePlaybackTrackbar.Scroll += new System.EventHandler(this.tbReversePlaybackTrackbar_Scroll);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(544, 22);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(145, 25);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "File name or URL";
-            // 
-            // edFilenameOrURL
-            // 
-            this.edFilenameOrURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edFilenameOrURL.Location = new System.Drawing.Point(550, 54);
-            this.edFilenameOrURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edFilenameOrURL.Name = "edFilenameOrURL";
-            this.edFilenameOrURL.Size = new System.Drawing.Size(577, 31);
-            this.edFilenameOrURL.TabIndex = 3;
-            this.edFilenameOrURL.Text = "c:\\samples\\!video.mp4";
-            // 
-            // btSelectFile
-            // 
-            this.btSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSelectFile.Location = new System.Drawing.Point(1204, 50);
-            this.btSelectFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btSelectFile.Name = "btSelectFile";
-            this.btSelectFile.Size = new System.Drawing.Size(38, 44);
-            this.btSelectFile.TabIndex = 4;
-            this.btSelectFile.Text = "...";
-            this.btSelectFile.UseVisualStyleBackColor = true;
-            this.btSelectFile.Click += new System.EventHandler(this.btSelectFile_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btPreviousFrame);
-            this.groupBox2.Controls.Add(this.cbLoop);
-            this.groupBox2.Controls.Add(this.btNextFrame);
-            this.groupBox2.Controls.Add(this.btStop);
-            this.groupBox2.Controls.Add(this.btPause);
-            this.groupBox2.Controls.Add(this.btResume);
-            this.groupBox2.Controls.Add(this.btStart);
-            this.groupBox2.Controls.Add(this.tbSpeed);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.lbTime);
-            this.groupBox2.Controls.Add(this.tbTimeline);
-            this.groupBox2.Location = new System.Drawing.Point(550, 968);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox2.Size = new System.Drawing.Size(690, 172);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Controls";
-            // 
-            // btPreviousFrame
-            // 
-            this.btPreviousFrame.Location = new System.Drawing.Point(420, 111);
-            this.btPreviousFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btPreviousFrame.Name = "btPreviousFrame";
-            this.btPreviousFrame.Size = new System.Drawing.Size(124, 44);
-            this.btPreviousFrame.TabIndex = 10;
-            this.btPreviousFrame.Text = "Prev frame";
-            this.btPreviousFrame.UseVisualStyleBackColor = true;
-            this.btPreviousFrame.Click += new System.EventHandler(this.btPreviousFrame_Click);
-            // 
-            // cbLoop
-            // 
-            this.cbLoop.AutoSize = true;
-            this.cbLoop.Location = new System.Drawing.Point(367, 22);
-            this.cbLoop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbLoop.Name = "cbLoop";
-            this.cbLoop.Size = new System.Drawing.Size(79, 29);
-            this.cbLoop.TabIndex = 9;
-            this.cbLoop.Text = "Loop";
-            this.cbLoop.UseVisualStyleBackColor = true;
-            // 
-            // btNextFrame
-            // 
-            this.btNextFrame.Location = new System.Drawing.Point(556, 111);
-            this.btNextFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btNextFrame.Name = "btNextFrame";
-            this.btNextFrame.Size = new System.Drawing.Size(124, 44);
-            this.btNextFrame.TabIndex = 8;
-            this.btNextFrame.Text = "Next frame";
-            this.btNextFrame.UseVisualStyleBackColor = true;
-            this.btNextFrame.Click += new System.EventHandler(this.btNextFrame_Click);
-            // 
-            // btStop
-            // 
-            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btStop.Location = new System.Drawing.Point(300, 111);
-            this.btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(77, 44);
-            this.btStop.TabIndex = 7;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.btStop_Click);
-            // 
-            // btPause
-            // 
-            this.btPause.Location = new System.Drawing.Point(203, 111);
-            this.btPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btPause.Name = "btPause";
-            this.btPause.Size = new System.Drawing.Size(87, 44);
-            this.btPause.TabIndex = 6;
-            this.btPause.Text = "Pause";
-            this.btPause.UseVisualStyleBackColor = true;
-            this.btPause.Click += new System.EventHandler(this.btPause_Click);
-            // 
-            // btResume
-            // 
-            this.btResume.Location = new System.Drawing.Point(91, 111);
-            this.btResume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btResume.Name = "btResume";
-            this.btResume.Size = new System.Drawing.Size(102, 44);
-            this.btResume.TabIndex = 5;
-            this.btResume.Text = "Resume";
-            this.btResume.UseVisualStyleBackColor = true;
-            this.btResume.Click += new System.EventHandler(this.btResume_Click);
-            // 
-            // btStart
-            // 
-            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btStart.Location = new System.Drawing.Point(10, 111);
-            this.btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(71, 44);
-            this.btStart.TabIndex = 4;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
-            // 
-            // tbSpeed
-            // 
-            this.tbSpeed.Location = new System.Drawing.Point(536, 52);
-            this.tbSpeed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbSpeed.Maximum = 25;
-            this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Size = new System.Drawing.Size(149, 69);
-            this.tbSpeed.TabIndex = 3;
-            this.tbSpeed.Value = 10;
-            this.tbSpeed.Scroll += new System.EventHandler(this.tbSpeed_Scroll);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(537, 21);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(62, 25);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "Speed";
-            // 
-            // lbTime
-            // 
-            this.lbTime.AutoSize = true;
-            this.lbTime.Location = new System.Drawing.Point(362, 61);
-            this.lbTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(155, 25);
-            this.lbTime.TabIndex = 1;
-            this.lbTime.Text = "00:00:00/00:00:00";
-            // 
-            // tbTimeline
-            // 
-            this.tbTimeline.Location = new System.Drawing.Point(10, 36);
-            this.tbTimeline.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbTimeline.Maximum = 100;
-            this.tbTimeline.Name = "tbTimeline";
-            this.tbTimeline.Size = new System.Drawing.Size(344, 69);
-            this.tbTimeline.TabIndex = 0;
-            this.tbTimeline.Scroll += new System.EventHandler(this.tbTimeline_Scroll);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btDVDControlRootMenu);
-            this.groupBox3.Controls.Add(this.btDVDControlTitleMenu);
-            this.groupBox3.Controls.Add(this.cbDVDControlSubtitles);
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.cbDVDControlAudio);
-            this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.cbDVDControlChapter);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.cbDVDControlTitle);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Location = new System.Drawing.Point(550, 1154);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.groupBox3.Size = new System.Drawing.Size(690, 150);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "DVD";
-            // 
-            // btDVDControlRootMenu
-            // 
-            this.btDVDControlRootMenu.Location = new System.Drawing.Point(558, 92);
-            this.btDVDControlRootMenu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btDVDControlRootMenu.Name = "btDVDControlRootMenu";
-            this.btDVDControlRootMenu.Size = new System.Drawing.Size(124, 44);
-            this.btDVDControlRootMenu.TabIndex = 9;
-            this.btDVDControlRootMenu.Text = "Root menu";
-            this.btDVDControlRootMenu.UseVisualStyleBackColor = true;
-            this.btDVDControlRootMenu.Click += new System.EventHandler(this.btDVDControlRootMenu_Click);
-            // 
-            // btDVDControlTitleMenu
-            // 
-            this.btDVDControlTitleMenu.Location = new System.Drawing.Point(558, 40);
-            this.btDVDControlTitleMenu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btDVDControlTitleMenu.Name = "btDVDControlTitleMenu";
-            this.btDVDControlTitleMenu.Size = new System.Drawing.Size(124, 44);
-            this.btDVDControlTitleMenu.TabIndex = 8;
-            this.btDVDControlTitleMenu.Text = "Title menu";
-            this.btDVDControlTitleMenu.UseVisualStyleBackColor = true;
-            this.btDVDControlTitleMenu.Click += new System.EventHandler(this.btDVDControlTitleMenu_Click);
-            // 
-            // cbDVDControlSubtitles
-            // 
-            this.cbDVDControlSubtitles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDControlSubtitles.FormattingEnabled = true;
-            this.cbDVDControlSubtitles.Location = new System.Drawing.Point(362, 96);
-            this.cbDVDControlSubtitles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDControlSubtitles.Name = "cbDVDControlSubtitles";
-            this.cbDVDControlSubtitles.Size = new System.Drawing.Size(184, 33);
-            this.cbDVDControlSubtitles.TabIndex = 7;
-            this.cbDVDControlSubtitles.SelectedIndexChanged += new System.EventHandler(this.cbDVDControlSubtitles_SelectedIndexChanged);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(280, 102);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(80, 25);
-            this.label19.TabIndex = 6;
-            this.label19.Text = "Subtitles";
-            // 
-            // cbDVDControlAudio
-            // 
-            this.cbDVDControlAudio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDControlAudio.FormattingEnabled = true;
-            this.cbDVDControlAudio.Location = new System.Drawing.Point(362, 44);
-            this.cbDVDControlAudio.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDControlAudio.Name = "cbDVDControlAudio";
-            this.cbDVDControlAudio.Size = new System.Drawing.Size(184, 33);
-            this.cbDVDControlAudio.TabIndex = 5;
-            this.cbDVDControlAudio.SelectedIndexChanged += new System.EventHandler(this.cbDVDControlAudio_SelectedIndexChanged);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(280, 50);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(60, 25);
-            this.label21.TabIndex = 4;
-            this.label21.Text = "Audio";
-            // 
-            // cbDVDControlChapter
-            // 
-            this.cbDVDControlChapter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDControlChapter.FormattingEnabled = true;
-            this.cbDVDControlChapter.Location = new System.Drawing.Point(91, 96);
-            this.cbDVDControlChapter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDControlChapter.Name = "cbDVDControlChapter";
-            this.cbDVDControlChapter.Size = new System.Drawing.Size(161, 33);
-            this.cbDVDControlChapter.TabIndex = 3;
-            this.cbDVDControlChapter.SelectedIndexChanged += new System.EventHandler(this.cbDVDControlChapter_SelectedIndexChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(10, 102);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(74, 25);
-            this.label18.TabIndex = 2;
-            this.label18.Text = "Chapter";
-            // 
-            // cbDVDControlTitle
-            // 
-            this.cbDVDControlTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDVDControlTitle.FormattingEnabled = true;
-            this.cbDVDControlTitle.Location = new System.Drawing.Point(91, 44);
-            this.cbDVDControlTitle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDVDControlTitle.Name = "cbDVDControlTitle";
-            this.cbDVDControlTitle.Size = new System.Drawing.Size(161, 33);
-            this.cbDVDControlTitle.TabIndex = 1;
-            this.cbDVDControlTitle.SelectedIndexChanged += new System.EventHandler(this.cbDVDControlTitle_SelectedIndexChanged);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(10, 50);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(44, 25);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Title";
-            // 
-            // tabControl3
-            // 
-            this.tabControl3.Controls.Add(this.tabPage10);
-            this.tabControl3.Controls.Add(this.tabPage9);
-            this.tabControl3.Location = new System.Drawing.Point(20, 1022);
-            this.tabControl3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(516, 281);
-            this.tabControl3.TabIndex = 9;
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.cbTelemetry);
-            this.tabPage10.Controls.Add(this.mmLog);
-            this.tabPage10.Controls.Add(this.cbDebugMode);
-            this.tabPage10.Location = new System.Drawing.Point(4, 34);
-            this.tabPage10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage10.Size = new System.Drawing.Size(508, 243);
-            this.tabPage10.TabIndex = 2;
-            this.tabPage10.Text = "Debug";
-            this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // cbTelemetry
-            // 
-            this.cbTelemetry.AutoSize = true;
-            this.cbTelemetry.Checked = true;
-            this.cbTelemetry.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbTelemetry.Location = new System.Drawing.Point(133, 25);
-            this.cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbTelemetry.Name = "cbTelemetry";
-            this.cbTelemetry.Size = new System.Drawing.Size(113, 29);
-            this.cbTelemetry.TabIndex = 4;
-            this.cbTelemetry.Text = "Telemetry";
-            this.cbTelemetry.UseVisualStyleBackColor = true;
-            // 
-            // mmLog
-            // 
-            this.mmLog.Location = new System.Drawing.Point(27, 69);
-            this.mmLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.mmLog.Multiline = true;
-            this.mmLog.Name = "mmLog";
-            this.mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmLog.Size = new System.Drawing.Size(437, 146);
-            this.mmLog.TabIndex = 1;
-            // 
-            // cbDebugMode
-            // 
-            this.cbDebugMode.AutoSize = true;
-            this.cbDebugMode.Location = new System.Drawing.Point(27, 25);
-            this.cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbDebugMode.Name = "cbDebugMode";
-            this.cbDebugMode.Size = new System.Drawing.Size(92, 29);
-            this.cbDebugMode.TabIndex = 0;
-            this.cbDebugMode.Text = "Debug";
-            this.cbDebugMode.UseVisualStyleBackColor = true;
-            // 
-            // tabPage9
-            // 
-            this.tabPage9.Controls.Add(this.tabControl13);
-            this.tabPage9.Location = new System.Drawing.Point(4, 34);
-            this.tabPage9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage9.Size = new System.Drawing.Size(508, 243);
-            this.tabPage9.TabIndex = 1;
-            this.tabPage9.Text = "Snapshot";
-            this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // tabControl13
-            // 
-            this.tabControl13.Controls.Add(this.tabPage54);
-            this.tabControl13.Controls.Add(this.tabPage55);
-            this.tabControl13.Location = new System.Drawing.Point(3, 4);
-            this.tabControl13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabControl13.Name = "tabControl13";
-            this.tabControl13.SelectedIndex = 0;
-            this.tabControl13.Size = new System.Drawing.Size(489, 214);
-            this.tabControl13.TabIndex = 27;
-            // 
-            // tabPage54
-            // 
-            this.tabPage54.Controls.Add(this.cbImageType);
-            this.tabPage54.Controls.Add(this.lbJPEGQuality);
-            this.tabPage54.Controls.Add(this.label38);
-            this.tabPage54.Controls.Add(this.btSaveScreenshot);
-            this.tabPage54.Controls.Add(this.btSelectScreenshotsFolder);
-            this.tabPage54.Controls.Add(this.label63);
-            this.tabPage54.Controls.Add(this.edScreenshotsFolder);
-            this.tabPage54.Controls.Add(this.tbJPEGQuality);
-            this.tabPage54.Location = new System.Drawing.Point(4, 34);
-            this.tabPage54.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage54.Name = "tabPage54";
-            this.tabPage54.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage54.Size = new System.Drawing.Size(481, 176);
-            this.tabPage54.TabIndex = 0;
-            this.tabPage54.Text = "Main";
-            this.tabPage54.UseVisualStyleBackColor = true;
-            // 
-            // cbImageType
-            // 
-            this.cbImageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbImageType.FormattingEnabled = true;
-            this.cbImageType.Items.AddRange(new object[] {
-            "BMP",
-            "JPEG",
-            "GIF",
-            "PNG",
-            "TIFF"});
-            this.cbImageType.Location = new System.Drawing.Point(18, 114);
-            this.cbImageType.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbImageType.Name = "cbImageType";
-            this.cbImageType.Size = new System.Drawing.Size(120, 33);
-            this.cbImageType.TabIndex = 33;
-            // 
-            // lbJPEGQuality
-            // 
-            this.lbJPEGQuality.AutoSize = true;
-            this.lbJPEGQuality.Location = new System.Drawing.Point(436, 119);
-            this.lbJPEGQuality.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbJPEGQuality.Name = "lbJPEGQuality";
-            this.lbJPEGQuality.Size = new System.Drawing.Size(32, 25);
-            this.lbJPEGQuality.TabIndex = 32;
-            this.lbJPEGQuality.Text = "85";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(198, 119);
-            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(107, 25);
-            this.label38.TabIndex = 31;
-            this.label38.Text = "JPEG quality";
-            // 
-            // btSaveScreenshot
-            // 
-            this.btSaveScreenshot.Location = new System.Drawing.Point(378, 28);
-            this.btSaveScreenshot.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btSaveScreenshot.Name = "btSaveScreenshot";
-            this.btSaveScreenshot.Size = new System.Drawing.Size(93, 44);
-            this.btSaveScreenshot.TabIndex = 29;
-            this.btSaveScreenshot.Text = "Save";
-            this.btSaveScreenshot.UseVisualStyleBackColor = true;
-            this.btSaveScreenshot.Click += new System.EventHandler(this.btSaveScreenshot_Click);
-            // 
-            // btSelectScreenshotsFolder
-            // 
-            this.btSelectScreenshotsFolder.Location = new System.Drawing.Point(330, 28);
-            this.btSelectScreenshotsFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btSelectScreenshotsFolder.Name = "btSelectScreenshotsFolder";
-            this.btSelectScreenshotsFolder.Size = new System.Drawing.Size(38, 44);
-            this.btSelectScreenshotsFolder.TabIndex = 28;
-            this.btSelectScreenshotsFolder.Text = "...";
-            this.btSelectScreenshotsFolder.UseVisualStyleBackColor = true;
-            this.btSelectScreenshotsFolder.Click += new System.EventHandler(this.btSelectScreenshotsFolder_Click);
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(13, 36);
-            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(62, 25);
-            this.label63.TabIndex = 27;
-            this.label63.Text = "Folder";
-            // 
-            // edScreenshotsFolder
-            // 
-            this.edScreenshotsFolder.Location = new System.Drawing.Point(89, 31);
-            this.edScreenshotsFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edScreenshotsFolder.Name = "edScreenshotsFolder";
-            this.edScreenshotsFolder.Size = new System.Drawing.Size(228, 31);
-            this.edScreenshotsFolder.TabIndex = 26;
-            this.edScreenshotsFolder.Text = "c:\\";
-            // 
-            // tbJPEGQuality
-            // 
-            this.tbJPEGQuality.BackColor = System.Drawing.SystemColors.Window;
-            this.tbJPEGQuality.Location = new System.Drawing.Point(320, 92);
-            this.tbJPEGQuality.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tbJPEGQuality.Maximum = 100;
-            this.tbJPEGQuality.Name = "tbJPEGQuality";
-            this.tbJPEGQuality.Size = new System.Drawing.Size(107, 69);
-            this.tbJPEGQuality.TabIndex = 30;
-            this.tbJPEGQuality.TickFrequency = 5;
-            this.tbJPEGQuality.Value = 85;
-            this.tbJPEGQuality.Scroll += new System.EventHandler(this.tbJPEGQuality_Scroll);
-            // 
-            // tabPage55
-            // 
-            this.tabPage55.Controls.Add(this.edScreenshotHeight);
-            this.tabPage55.Controls.Add(this.label176);
-            this.tabPage55.Controls.Add(this.edScreenshotWidth);
-            this.tabPage55.Controls.Add(this.label177);
-            this.tabPage55.Controls.Add(this.cbScreenshotResize);
-            this.tabPage55.Location = new System.Drawing.Point(4, 34);
-            this.tabPage55.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage55.Name = "tabPage55";
-            this.tabPage55.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.tabPage55.Size = new System.Drawing.Size(481, 176);
-            this.tabPage55.TabIndex = 1;
-            this.tabPage55.Text = "Resize";
-            this.tabPage55.UseVisualStyleBackColor = true;
-            // 
-            // edScreenshotHeight
-            // 
-            this.edScreenshotHeight.Location = new System.Drawing.Point(271, 85);
-            this.edScreenshotHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edScreenshotHeight.Name = "edScreenshotHeight";
-            this.edScreenshotHeight.Size = new System.Drawing.Size(57, 31);
-            this.edScreenshotHeight.TabIndex = 128;
-            this.edScreenshotHeight.Text = "576";
-            // 
-            // label176
-            // 
-            this.label176.AutoSize = true;
-            this.label176.Location = new System.Drawing.Point(193, 90);
-            this.label176.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label176.Name = "label176";
-            this.label176.Size = new System.Drawing.Size(65, 25);
-            this.label176.TabIndex = 127;
-            this.label176.Text = "Height";
-            // 
-            // edScreenshotWidth
-            // 
-            this.edScreenshotWidth.Location = new System.Drawing.Point(123, 85);
-            this.edScreenshotWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edScreenshotWidth.Name = "edScreenshotWidth";
-            this.edScreenshotWidth.Size = new System.Drawing.Size(57, 31);
-            this.edScreenshotWidth.TabIndex = 126;
-            this.edScreenshotWidth.Text = "768";
-            // 
-            // label177
-            // 
-            this.label177.AutoSize = true;
-            this.label177.Location = new System.Drawing.Point(53, 90);
-            this.label177.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(60, 25);
-            this.label177.TabIndex = 125;
-            this.label177.Text = "Width";
-            // 
-            // cbScreenshotResize
-            // 
-            this.cbScreenshotResize.AutoSize = true;
-            this.cbScreenshotResize.Location = new System.Drawing.Point(27, 35);
-            this.cbScreenshotResize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.cbScreenshotResize.Name = "cbScreenshotResize";
-            this.cbScreenshotResize.Size = new System.Drawing.Size(101, 29);
-            this.cbScreenshotResize.TabIndex = 0;
-            this.cbScreenshotResize.Text = "Enabled";
-            this.cbScreenshotResize.UseVisualStyleBackColor = true;
-            // 
-            // fontDialog1
-            // 
-            this.fontDialog1.Color = System.Drawing.Color.White;
-            this.fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.fontDialog1.FontMustExist = true;
-            this.fontDialog1.ShowColor = true;
-            // 
-            // openFileDialog2
-            // 
-            this.openFileDialog2.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(544, 246);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(118, 25);
-            this.label29.TabIndex = 14;
-            this.label29.Text = "Source mode";
-            // 
-            // cbSourceMode
-            // 
-            this.cbSourceMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbSourceMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSourceMode.FormattingEnabled = true;
-            this.cbSourceMode.Items.AddRange(new object[] {
-            "File / Network stream (decode using LAV) ",
-            "File / Network stream (decode using GPU) ",
-            "File / Network stream (decode using FFMPEG)",
-            "File (decode using DirectShow)",
-            "File (decode using VLC)",
-            "DVD",
-            "Blu-Ray",
-            "File from memory (decode using DirectShow)",
-            "MMS / WMV (network stream)",
-            "HTTP / RTSP / RTMP (decoding using VLC)",
-            "Encrypted file (decode using DirectShow)",
-            "Custom source filter (specified by CLSID)",
-            "MIDI / KAR"});
-            this.cbSourceMode.Location = new System.Drawing.Point(720, 240);
-            this.cbSourceMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbSourceMode.Name = "cbSourceMode";
-            this.cbSourceMode.Size = new System.Drawing.Size(517, 33);
-            this.cbSourceMode.TabIndex = 15;
-            // 
-            // lbSourceFiles
-            // 
-            this.lbSourceFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbSourceFiles.ContextMenuStrip = this.mnPlaylist;
-            this.lbSourceFiles.FormattingEnabled = true;
-            this.lbSourceFiles.ItemHeight = 25;
-            this.lbSourceFiles.Location = new System.Drawing.Point(550, 125);
-            this.lbSourceFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lbSourceFiles.Name = "lbSourceFiles";
-            this.lbSourceFiles.Size = new System.Drawing.Size(687, 104);
-            this.lbSourceFiles.TabIndex = 16;
-            // 
-            // mnPlaylist
-            // 
-            this.mnPlaylist.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.mnPlaylist.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnPlaylistRemove,
-            this.mnPlaylistRemoveAll});
-            this.mnPlaylist.Name = "mnPlaylist";
-            this.mnPlaylist.Size = new System.Drawing.Size(171, 68);
-            this.mnPlaylist.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnPlaylist_ItemClicked);
-            // 
-            // mnPlaylistRemove
-            // 
-            this.mnPlaylistRemove.Name = "mnPlaylistRemove";
-            this.mnPlaylistRemove.Size = new System.Drawing.Size(170, 32);
-            this.mnPlaylistRemove.Text = "Remove";
-            // 
-            // mnPlaylistRemoveAll
-            // 
-            this.mnPlaylistRemoveAll.Name = "mnPlaylistRemoveAll";
-            this.mnPlaylistRemoveAll.Size = new System.Drawing.Size(170, 32);
-            this.mnPlaylistRemoveAll.Text = "Remove all";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(547, 94);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(66, 25);
-            this.label30.TabIndex = 17;
-            this.label30.Text = "Playlist";
-            // 
-            // btAddFileToPlaylist
-            // 
-            this.btAddFileToPlaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddFileToPlaylist.Location = new System.Drawing.Point(1137, 52);
-            this.btAddFileToPlaylist.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btAddFileToPlaylist.Name = "btAddFileToPlaylist";
-            this.btAddFileToPlaylist.Size = new System.Drawing.Size(63, 42);
-            this.btAddFileToPlaylist.TabIndex = 18;
-            this.btAddFileToPlaylist.Text = "Add";
-            this.btAddFileToPlaylist.UseVisualStyleBackColor = true;
-            this.btAddFileToPlaylist.Click += new System.EventHandler(this.btAddFileToPlaylist_Click);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(1060, 18);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(184, 25);
-            this.linkLabel1.TabIndex = 20;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Watch video tutorials!";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(547, 304);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(166, 25);
-            this.label37.TabIndex = 21;
-            this.label37.Text = "Custom filter CLSID";
-            // 
-            // edCustomSourceFilter
-            // 
-            this.edCustomSourceFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edCustomSourceFilter.Location = new System.Drawing.Point(720, 298);
-            this.edCustomSourceFilter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.edCustomSourceFilter.Name = "edCustomSourceFilter";
-            this.edCustomSourceFilter.Size = new System.Drawing.Size(517, 31);
-            this.edCustomSourceFilter.TabIndex = 22;
-            // 
-            // VideoView1
-            // 
-            this.VideoView1.BackColor = System.Drawing.Color.Black;
-            this.VideoView1.Location = new System.Drawing.Point(550, 352);
-            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.VideoView1.Name = "VideoView1";
-            this.VideoView1.Size = new System.Drawing.Size(691, 590);
-            this.VideoView1.StatusOverlay = null;
-            this.VideoView1.TabIndex = 23;
+            tabPage68.Controls.Add(cbScrollingText);
+            tabPage68.Controls.Add(cbFlipY);
+            tabPage68.Controls.Add(cbFlipX);
+            tabPage68.Controls.Add(label201);
+            tabPage68.Controls.Add(label200);
+            tabPage68.Controls.Add(label199);
+            tabPage68.Controls.Add(label198);
+            tabPage68.Controls.Add(tabControl7);
+            tabPage68.Controls.Add(tbContrast);
+            tabPage68.Controls.Add(tbDarkness);
+            tabPage68.Controls.Add(tbLightness);
+            tabPage68.Controls.Add(tbSaturation);
+            tabPage68.Controls.Add(cbInvert);
+            tabPage68.Controls.Add(cbGreyscale);
+            tabPage68.Controls.Add(cbVideoEffects);
+            tabPage68.Location = new System.Drawing.Point(4, 34);
+            tabPage68.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage68.Name = "tabPage68";
+            tabPage68.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage68.Size = new System.Drawing.Size(490, 893);
+            tabPage68.TabIndex = 0;
+            tabPage68.Text = "Effects";
+            tabPage68.UseVisualStyleBackColor = true;
             // 
             // cbScrollingText
             // 
-            this.cbScrollingText.AutoSize = true;
-            this.cbScrollingText.Location = new System.Drawing.Point(21, 318);
-            this.cbScrollingText.Name = "cbScrollingText";
-            this.cbScrollingText.Size = new System.Drawing.Size(202, 29);
-            this.cbScrollingText.TabIndex = 89;
-            this.cbScrollingText.Text = "Sample scrolling text";
-            this.cbScrollingText.UseVisualStyleBackColor = true;
-            this.cbScrollingText.CheckedChanged += new System.EventHandler(this.cbScrollingText_CheckedChanged);
+            cbScrollingText.AutoSize = true;
+            cbScrollingText.Location = new System.Drawing.Point(21, 319);
+            cbScrollingText.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbScrollingText.Name = "cbScrollingText";
+            cbScrollingText.Size = new System.Drawing.Size(202, 29);
+            cbScrollingText.TabIndex = 89;
+            cbScrollingText.Text = "Sample scrolling text";
+            cbScrollingText.UseVisualStyleBackColor = true;
+            cbScrollingText.CheckedChanged += cbScrollingText_CheckedChanged;
+            // 
+            // cbFlipY
+            // 
+            cbFlipY.AutoSize = true;
+            cbFlipY.Location = new System.Drawing.Point(355, 288);
+            cbFlipY.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipY.Name = "cbFlipY";
+            cbFlipY.Size = new System.Drawing.Size(81, 29);
+            cbFlipY.TabIndex = 69;
+            cbFlipY.Text = "Flip Y";
+            cbFlipY.UseVisualStyleBackColor = true;
+            cbFlipY.CheckedChanged += cbFlipY_CheckedChanged;
+            // 
+            // cbFlipX
+            // 
+            cbFlipX.AutoSize = true;
+            cbFlipX.Location = new System.Drawing.Point(255, 288);
+            cbFlipX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipX.Name = "cbFlipX";
+            cbFlipX.Size = new System.Drawing.Size(82, 29);
+            cbFlipX.TabIndex = 68;
+            cbFlipX.Text = "Flip X";
+            cbFlipX.UseVisualStyleBackColor = true;
+            cbFlipX.CheckedChanged += cbFlipX_CheckedChanged;
+            // 
+            // label201
+            // 
+            label201.AutoSize = true;
+            label201.Location = new System.Drawing.Point(238, 169);
+            label201.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label201.Name = "label201";
+            label201.Size = new System.Drawing.Size(84, 25);
+            label201.TabIndex = 63;
+            label201.Text = "Darkness";
+            // 
+            // label200
+            // 
+            label200.AutoSize = true;
+            label200.Location = new System.Drawing.Point(10, 169);
+            label200.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label200.Name = "label200";
+            label200.Size = new System.Drawing.Size(79, 25);
+            label200.TabIndex = 62;
+            label200.Text = "Contrast";
+            // 
+            // label199
+            // 
+            label199.AutoSize = true;
+            label199.Location = new System.Drawing.Point(238, 69);
+            label199.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label199.Name = "label199";
+            label199.Size = new System.Drawing.Size(93, 25);
+            label199.TabIndex = 61;
+            label199.Text = "Saturation";
+            // 
+            // label198
+            // 
+            label198.AutoSize = true;
+            label198.Location = new System.Drawing.Point(10, 69);
+            label198.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label198.Name = "label198";
+            label198.Size = new System.Drawing.Size(86, 25);
+            label198.TabIndex = 60;
+            label198.Text = "Lightness";
+            // 
+            // tabControl7
+            // 
+            tabControl7.Controls.Add(tabPage29);
+            tabControl7.Controls.Add(tabPage42);
+            tabControl7.Controls.Add(tabPage18);
+            tabControl7.Controls.Add(tabPage19);
+            tabControl7.Controls.Add(tabPage22);
+            tabControl7.Controls.Add(tabPage43);
+            tabControl7.Location = new System.Drawing.Point(4, 356);
+            tabControl7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl7.Name = "tabControl7";
+            tabControl7.SelectedIndex = 0;
+            tabControl7.Size = new System.Drawing.Size(471, 528);
+            tabControl7.TabIndex = 59;
+            // 
+            // tabPage29
+            // 
+            tabPage29.Controls.Add(btTextLogoRemove);
+            tabPage29.Controls.Add(btTextLogoEdit);
+            tabPage29.Controls.Add(lbTextLogos);
+            tabPage29.Controls.Add(btTextLogoAdd);
+            tabPage29.Location = new System.Drawing.Point(4, 34);
+            tabPage29.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage29.Name = "tabPage29";
+            tabPage29.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage29.Size = new System.Drawing.Size(463, 490);
+            tabPage29.TabIndex = 0;
+            tabPage29.Text = "Text logo";
+            tabPage29.UseVisualStyleBackColor = true;
+            // 
+            // btTextLogoRemove
+            // 
+            btTextLogoRemove.Location = new System.Drawing.Point(342, 414);
+            btTextLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoRemove.Name = "btTextLogoRemove";
+            btTextLogoRemove.Size = new System.Drawing.Size(98, 44);
+            btTextLogoRemove.TabIndex = 7;
+            btTextLogoRemove.Text = "Remove";
+            btTextLogoRemove.UseVisualStyleBackColor = true;
+            btTextLogoRemove.Click += btTextLogoRemove_Click;
+            // 
+            // btTextLogoEdit
+            // 
+            btTextLogoEdit.Location = new System.Drawing.Point(122, 414);
+            btTextLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoEdit.Name = "btTextLogoEdit";
+            btTextLogoEdit.Size = new System.Drawing.Size(98, 44);
+            btTextLogoEdit.TabIndex = 6;
+            btTextLogoEdit.Text = "Edit";
+            btTextLogoEdit.UseVisualStyleBackColor = true;
+            btTextLogoEdit.Click += btTextLogoEdit_Click;
+            // 
+            // lbTextLogos
+            // 
+            lbTextLogos.FormattingEnabled = true;
+            lbTextLogos.ItemHeight = 25;
+            lbTextLogos.Location = new System.Drawing.Point(18, 22);
+            lbTextLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbTextLogos.Name = "lbTextLogos";
+            lbTextLogos.Size = new System.Drawing.Size(426, 379);
+            lbTextLogos.TabIndex = 5;
+            // 
+            // btTextLogoAdd
+            // 
+            btTextLogoAdd.Location = new System.Drawing.Point(12, 414);
+            btTextLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoAdd.Name = "btTextLogoAdd";
+            btTextLogoAdd.Size = new System.Drawing.Size(98, 44);
+            btTextLogoAdd.TabIndex = 4;
+            btTextLogoAdd.Text = "Add";
+            btTextLogoAdd.UseVisualStyleBackColor = true;
+            btTextLogoAdd.Click += btTextLogoAdd_Click;
+            // 
+            // tabPage42
+            // 
+            tabPage42.Controls.Add(btImageLogoRemove);
+            tabPage42.Controls.Add(btImageLogoEdit);
+            tabPage42.Controls.Add(lbImageLogos);
+            tabPage42.Controls.Add(btImageLogoAdd);
+            tabPage42.Location = new System.Drawing.Point(4, 34);
+            tabPage42.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage42.Name = "tabPage42";
+            tabPage42.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage42.Size = new System.Drawing.Size(463, 490);
+            tabPage42.TabIndex = 1;
+            tabPage42.Text = "Image logo";
+            tabPage42.UseVisualStyleBackColor = true;
+            // 
+            // btImageLogoRemove
+            // 
+            btImageLogoRemove.Location = new System.Drawing.Point(342, 414);
+            btImageLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoRemove.Name = "btImageLogoRemove";
+            btImageLogoRemove.Size = new System.Drawing.Size(98, 44);
+            btImageLogoRemove.TabIndex = 11;
+            btImageLogoRemove.Text = "Remove";
+            btImageLogoRemove.UseVisualStyleBackColor = true;
+            btImageLogoRemove.Click += btImageLogoRemove_Click;
+            // 
+            // btImageLogoEdit
+            // 
+            btImageLogoEdit.Location = new System.Drawing.Point(122, 414);
+            btImageLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoEdit.Name = "btImageLogoEdit";
+            btImageLogoEdit.Size = new System.Drawing.Size(98, 44);
+            btImageLogoEdit.TabIndex = 10;
+            btImageLogoEdit.Text = "Edit";
+            btImageLogoEdit.UseVisualStyleBackColor = true;
+            btImageLogoEdit.Click += btImageLogoEdit_Click;
+            // 
+            // lbImageLogos
+            // 
+            lbImageLogos.FormattingEnabled = true;
+            lbImageLogos.ItemHeight = 25;
+            lbImageLogos.Location = new System.Drawing.Point(18, 22);
+            lbImageLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbImageLogos.Name = "lbImageLogos";
+            lbImageLogos.Size = new System.Drawing.Size(426, 379);
+            lbImageLogos.TabIndex = 9;
+            // 
+            // btImageLogoAdd
+            // 
+            btImageLogoAdd.Location = new System.Drawing.Point(12, 414);
+            btImageLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoAdd.Name = "btImageLogoAdd";
+            btImageLogoAdd.Size = new System.Drawing.Size(98, 44);
+            btImageLogoAdd.TabIndex = 8;
+            btImageLogoAdd.Text = "Add";
+            btImageLogoAdd.UseVisualStyleBackColor = true;
+            btImageLogoAdd.Click += btImageLogoAdd_Click;
+            // 
+            // tabPage18
+            // 
+            tabPage18.Controls.Add(groupBox37);
+            tabPage18.Controls.Add(cbZoom);
+            tabPage18.Location = new System.Drawing.Point(4, 34);
+            tabPage18.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage18.Name = "tabPage18";
+            tabPage18.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage18.Size = new System.Drawing.Size(463, 490);
+            tabPage18.TabIndex = 2;
+            tabPage18.Text = "Zoom";
+            tabPage18.UseVisualStyleBackColor = true;
+            // 
+            // groupBox37
+            // 
+            groupBox37.Controls.Add(btEffZoomRight);
+            groupBox37.Controls.Add(btEffZoomLeft);
+            groupBox37.Controls.Add(btEffZoomOut);
+            groupBox37.Controls.Add(btEffZoomIn);
+            groupBox37.Controls.Add(btEffZoomDown);
+            groupBox37.Controls.Add(btEffZoomUp);
+            groupBox37.Location = new System.Drawing.Point(142, 98);
+            groupBox37.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox37.Name = "groupBox37";
+            groupBox37.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox37.Size = new System.Drawing.Size(198, 200);
+            groupBox37.TabIndex = 18;
+            groupBox37.TabStop = false;
+            groupBox37.Text = "Zoom";
+            // 
+            // btEffZoomRight
+            // 
+            btEffZoomRight.Location = new System.Drawing.Point(142, 64);
+            btEffZoomRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomRight.Name = "btEffZoomRight";
+            btEffZoomRight.Size = new System.Drawing.Size(36, 92);
+            btEffZoomRight.TabIndex = 5;
+            btEffZoomRight.Text = "R";
+            btEffZoomRight.UseVisualStyleBackColor = true;
+            btEffZoomRight.Click += btEffZoomRight_Click;
+            // 
+            // btEffZoomLeft
+            // 
+            btEffZoomLeft.Location = new System.Drawing.Point(22, 61);
+            btEffZoomLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomLeft.Name = "btEffZoomLeft";
+            btEffZoomLeft.Size = new System.Drawing.Size(36, 92);
+            btEffZoomLeft.TabIndex = 4;
+            btEffZoomLeft.Text = "L";
+            btEffZoomLeft.UseVisualStyleBackColor = true;
+            btEffZoomLeft.Click += btEffZoomLeft_Click;
+            // 
+            // btEffZoomOut
+            // 
+            btEffZoomOut.Location = new System.Drawing.Point(102, 86);
+            btEffZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomOut.Name = "btEffZoomOut";
+            btEffZoomOut.Size = new System.Drawing.Size(38, 44);
+            btEffZoomOut.TabIndex = 3;
+            btEffZoomOut.Text = "-";
+            btEffZoomOut.UseVisualStyleBackColor = true;
+            btEffZoomOut.Click += btEffZoomOut_Click;
+            // 
+            // btEffZoomIn
+            // 
+            btEffZoomIn.Location = new System.Drawing.Point(58, 86);
+            btEffZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomIn.Name = "btEffZoomIn";
+            btEffZoomIn.Size = new System.Drawing.Size(38, 44);
+            btEffZoomIn.TabIndex = 2;
+            btEffZoomIn.Text = "+";
+            btEffZoomIn.UseVisualStyleBackColor = true;
+            btEffZoomIn.Click += btEffZoomIn_Click;
+            // 
+            // btEffZoomDown
+            // 
+            btEffZoomDown.Location = new System.Drawing.Point(58, 131);
+            btEffZoomDown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomDown.Name = "btEffZoomDown";
+            btEffZoomDown.Size = new System.Drawing.Size(84, 44);
+            btEffZoomDown.TabIndex = 1;
+            btEffZoomDown.Text = "Down";
+            btEffZoomDown.UseVisualStyleBackColor = true;
+            btEffZoomDown.Click += btEffZoomDown_Click;
+            // 
+            // btEffZoomUp
+            // 
+            btEffZoomUp.Location = new System.Drawing.Point(58, 39);
+            btEffZoomUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomUp.Name = "btEffZoomUp";
+            btEffZoomUp.Size = new System.Drawing.Size(84, 44);
+            btEffZoomUp.TabIndex = 0;
+            btEffZoomUp.Text = "Up";
+            btEffZoomUp.UseVisualStyleBackColor = true;
+            btEffZoomUp.Click += btEffZoomUp_Click;
+            // 
+            // cbZoom
+            // 
+            cbZoom.AutoSize = true;
+            cbZoom.Location = new System.Drawing.Point(20, 30);
+            cbZoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbZoom.Name = "cbZoom";
+            cbZoom.Size = new System.Drawing.Size(101, 29);
+            cbZoom.TabIndex = 17;
+            cbZoom.Text = "Enabled";
+            cbZoom.UseVisualStyleBackColor = true;
+            cbZoom.CheckedChanged += cbZoom_CheckedChanged;
+            // 
+            // tabPage19
+            // 
+            tabPage19.Controls.Add(groupBox40);
+            tabPage19.Controls.Add(groupBox39);
+            tabPage19.Controls.Add(groupBox38);
+            tabPage19.Controls.Add(cbPan);
+            tabPage19.Location = new System.Drawing.Point(4, 34);
+            tabPage19.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage19.Name = "tabPage19";
+            tabPage19.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage19.Size = new System.Drawing.Size(463, 490);
+            tabPage19.TabIndex = 3;
+            tabPage19.Text = "Pan";
+            tabPage19.UseVisualStyleBackColor = true;
+            // 
+            // groupBox40
+            // 
+            groupBox40.Controls.Add(edPanDestHeight);
+            groupBox40.Controls.Add(label302);
+            groupBox40.Controls.Add(edPanDestWidth);
+            groupBox40.Controls.Add(label303);
+            groupBox40.Controls.Add(edPanDestTop);
+            groupBox40.Controls.Add(label304);
+            groupBox40.Controls.Add(edPanDestLeft);
+            groupBox40.Controls.Add(label305);
+            groupBox40.Location = new System.Drawing.Point(20, 311);
+            groupBox40.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            groupBox40.Name = "groupBox40";
+            groupBox40.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            groupBox40.Size = new System.Drawing.Size(280, 148);
+            groupBox40.TabIndex = 58;
+            groupBox40.TabStop = false;
+            groupBox40.Text = "Destination rect";
+            // 
+            // edPanDestHeight
+            // 
+            edPanDestHeight.Location = new System.Drawing.Point(204, 98);
+            edPanDestHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestHeight.Name = "edPanDestHeight";
+            edPanDestHeight.Size = new System.Drawing.Size(53, 31);
+            edPanDestHeight.TabIndex = 17;
+            edPanDestHeight.Text = "240";
+            // 
+            // label302
+            // 
+            label302.AutoSize = true;
+            label302.Location = new System.Drawing.Point(136, 105);
+            label302.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label302.Name = "label302";
+            label302.Size = new System.Drawing.Size(65, 25);
+            label302.TabIndex = 16;
+            label302.Text = "Height";
+            // 
+            // edPanDestWidth
+            // 
+            edPanDestWidth.Location = new System.Drawing.Point(204, 48);
+            edPanDestWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestWidth.Name = "edPanDestWidth";
+            edPanDestWidth.Size = new System.Drawing.Size(53, 31);
+            edPanDestWidth.TabIndex = 15;
+            edPanDestWidth.Text = "320";
+            // 
+            // label303
+            // 
+            label303.AutoSize = true;
+            label303.Location = new System.Drawing.Point(136, 55);
+            label303.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label303.Name = "label303";
+            label303.Size = new System.Drawing.Size(60, 25);
+            label303.TabIndex = 14;
+            label303.Text = "Width";
+            // 
+            // edPanDestTop
+            // 
+            edPanDestTop.Location = new System.Drawing.Point(71, 100);
+            edPanDestTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestTop.Name = "edPanDestTop";
+            edPanDestTop.Size = new System.Drawing.Size(53, 31);
+            edPanDestTop.TabIndex = 12;
+            edPanDestTop.Text = "0";
+            // 
+            // label304
+            // 
+            label304.AutoSize = true;
+            label304.Location = new System.Drawing.Point(22, 105);
+            label304.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label304.Name = "label304";
+            label304.Size = new System.Drawing.Size(41, 25);
+            label304.TabIndex = 11;
+            label304.Text = "Top";
+            // 
+            // edPanDestLeft
+            // 
+            edPanDestLeft.Location = new System.Drawing.Point(71, 50);
+            edPanDestLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestLeft.Name = "edPanDestLeft";
+            edPanDestLeft.Size = new System.Drawing.Size(53, 31);
+            edPanDestLeft.TabIndex = 10;
+            edPanDestLeft.Text = "0";
+            // 
+            // label305
+            // 
+            label305.AutoSize = true;
+            label305.Location = new System.Drawing.Point(22, 55);
+            label305.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label305.Name = "label305";
+            label305.Size = new System.Drawing.Size(41, 25);
+            label305.TabIndex = 9;
+            label305.Text = "Left";
+            // 
+            // groupBox39
+            // 
+            groupBox39.Controls.Add(edPanSourceHeight);
+            groupBox39.Controls.Add(label298);
+            groupBox39.Controls.Add(edPanSourceWidth);
+            groupBox39.Controls.Add(label299);
+            groupBox39.Controls.Add(edPanSourceTop);
+            groupBox39.Controls.Add(label300);
+            groupBox39.Controls.Add(edPanSourceLeft);
+            groupBox39.Controls.Add(label301);
+            groupBox39.Location = new System.Drawing.Point(20, 155);
+            groupBox39.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            groupBox39.Name = "groupBox39";
+            groupBox39.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            groupBox39.Size = new System.Drawing.Size(280, 148);
+            groupBox39.TabIndex = 57;
+            groupBox39.TabStop = false;
+            groupBox39.Text = "Source rect";
+            // 
+            // edPanSourceHeight
+            // 
+            edPanSourceHeight.Location = new System.Drawing.Point(204, 98);
+            edPanSourceHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceHeight.Name = "edPanSourceHeight";
+            edPanSourceHeight.Size = new System.Drawing.Size(53, 31);
+            edPanSourceHeight.TabIndex = 17;
+            edPanSourceHeight.Text = "480";
+            // 
+            // label298
+            // 
+            label298.AutoSize = true;
+            label298.Location = new System.Drawing.Point(136, 105);
+            label298.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label298.Name = "label298";
+            label298.Size = new System.Drawing.Size(65, 25);
+            label298.TabIndex = 16;
+            label298.Text = "Height";
+            // 
+            // edPanSourceWidth
+            // 
+            edPanSourceWidth.Location = new System.Drawing.Point(204, 48);
+            edPanSourceWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceWidth.Name = "edPanSourceWidth";
+            edPanSourceWidth.Size = new System.Drawing.Size(53, 31);
+            edPanSourceWidth.TabIndex = 15;
+            edPanSourceWidth.Text = "640";
+            // 
+            // label299
+            // 
+            label299.AutoSize = true;
+            label299.Location = new System.Drawing.Point(136, 55);
+            label299.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label299.Name = "label299";
+            label299.Size = new System.Drawing.Size(60, 25);
+            label299.TabIndex = 14;
+            label299.Text = "Width";
+            // 
+            // edPanSourceTop
+            // 
+            edPanSourceTop.Location = new System.Drawing.Point(71, 100);
+            edPanSourceTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceTop.Name = "edPanSourceTop";
+            edPanSourceTop.Size = new System.Drawing.Size(53, 31);
+            edPanSourceTop.TabIndex = 12;
+            edPanSourceTop.Text = "0";
+            // 
+            // label300
+            // 
+            label300.AutoSize = true;
+            label300.Location = new System.Drawing.Point(22, 105);
+            label300.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label300.Name = "label300";
+            label300.Size = new System.Drawing.Size(41, 25);
+            label300.TabIndex = 11;
+            label300.Text = "Top";
+            // 
+            // edPanSourceLeft
+            // 
+            edPanSourceLeft.Location = new System.Drawing.Point(71, 50);
+            edPanSourceLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceLeft.Name = "edPanSourceLeft";
+            edPanSourceLeft.Size = new System.Drawing.Size(53, 31);
+            edPanSourceLeft.TabIndex = 10;
+            edPanSourceLeft.Text = "0";
+            // 
+            // label301
+            // 
+            label301.AutoSize = true;
+            label301.Location = new System.Drawing.Point(22, 55);
+            label301.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label301.Name = "label301";
+            label301.Size = new System.Drawing.Size(41, 25);
+            label301.TabIndex = 9;
+            label301.Text = "Left";
+            // 
+            // groupBox38
+            // 
+            groupBox38.Controls.Add(edPanStopTime);
+            groupBox38.Controls.Add(label296);
+            groupBox38.Controls.Add(edPanStartTime);
+            groupBox38.Controls.Add(label297);
+            groupBox38.Location = new System.Drawing.Point(20, 56);
+            groupBox38.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox38.Name = "groupBox38";
+            groupBox38.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox38.Size = new System.Drawing.Size(280, 89);
+            groupBox38.TabIndex = 56;
+            groupBox38.TabStop = false;
+            groupBox38.Text = "Duration";
+            // 
+            // edPanStopTime
+            // 
+            edPanStopTime.Location = new System.Drawing.Point(196, 36);
+            edPanStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanStopTime.Name = "edPanStopTime";
+            edPanStopTime.Size = new System.Drawing.Size(62, 31);
+            edPanStopTime.TabIndex = 34;
+            edPanStopTime.Text = "15000";
+            edPanStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label296
+            // 
+            label296.AutoSize = true;
+            label296.Location = new System.Drawing.Point(148, 42);
+            label296.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label296.Name = "label296";
+            label296.Size = new System.Drawing.Size(49, 25);
+            label296.TabIndex = 33;
+            label296.Text = "Stop";
+            // 
+            // edPanStartTime
+            // 
+            edPanStartTime.Location = new System.Drawing.Point(71, 36);
+            edPanStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanStartTime.Name = "edPanStartTime";
+            edPanStartTime.Size = new System.Drawing.Size(62, 31);
+            edPanStartTime.TabIndex = 32;
+            edPanStartTime.Text = "5000";
+            edPanStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label297
+            // 
+            label297.AutoSize = true;
+            label297.Location = new System.Drawing.Point(18, 42);
+            label297.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label297.Name = "label297";
+            label297.Size = new System.Drawing.Size(48, 25);
+            label297.TabIndex = 31;
+            label297.Text = "Start";
+            // 
+            // cbPan
+            // 
+            cbPan.AutoSize = true;
+            cbPan.Location = new System.Drawing.Point(20, 11);
+            cbPan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbPan.Name = "cbPan";
+            cbPan.Size = new System.Drawing.Size(101, 29);
+            cbPan.TabIndex = 55;
+            cbPan.Text = "Enabled";
+            cbPan.UseVisualStyleBackColor = true;
+            cbPan.CheckedChanged += cbPan_CheckedChanged;
+            // 
+            // tabPage22
+            // 
+            tabPage22.Controls.Add(rbFadeOut);
+            tabPage22.Controls.Add(rbFadeIn);
+            tabPage22.Controls.Add(groupBox45);
+            tabPage22.Controls.Add(cbFadeInOut);
+            tabPage22.Location = new System.Drawing.Point(4, 34);
+            tabPage22.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage22.Name = "tabPage22";
+            tabPage22.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage22.Size = new System.Drawing.Size(463, 490);
+            tabPage22.TabIndex = 4;
+            tabPage22.Text = "Fade-in/out";
+            tabPage22.UseVisualStyleBackColor = true;
+            // 
+            // rbFadeOut
+            // 
+            rbFadeOut.AutoSize = true;
+            rbFadeOut.Location = new System.Drawing.Point(169, 198);
+            rbFadeOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbFadeOut.Name = "rbFadeOut";
+            rbFadeOut.Size = new System.Drawing.Size(108, 29);
+            rbFadeOut.TabIndex = 60;
+            rbFadeOut.TabStop = true;
+            rbFadeOut.Text = "Fade-out";
+            rbFadeOut.UseVisualStyleBackColor = true;
+            // 
+            // rbFadeIn
+            // 
+            rbFadeIn.AutoSize = true;
+            rbFadeIn.Checked = true;
+            rbFadeIn.Location = new System.Drawing.Point(18, 198);
+            rbFadeIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbFadeIn.Name = "rbFadeIn";
+            rbFadeIn.Size = new System.Drawing.Size(95, 29);
+            rbFadeIn.TabIndex = 59;
+            rbFadeIn.TabStop = true;
+            rbFadeIn.Text = "Fade-in";
+            rbFadeIn.UseVisualStyleBackColor = true;
+            // 
+            // groupBox45
+            // 
+            groupBox45.Controls.Add(edFadeInOutStopTime);
+            groupBox45.Controls.Add(label329);
+            groupBox45.Controls.Add(edFadeInOutStartTime);
+            groupBox45.Controls.Add(label330);
+            groupBox45.Location = new System.Drawing.Point(18, 98);
+            groupBox45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox45.Name = "groupBox45";
+            groupBox45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox45.Size = new System.Drawing.Size(280, 89);
+            groupBox45.TabIndex = 58;
+            groupBox45.TabStop = false;
+            groupBox45.Text = "Duration";
+            // 
+            // edFadeInOutStopTime
+            // 
+            edFadeInOutStopTime.Location = new System.Drawing.Point(196, 36);
+            edFadeInOutStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeInOutStopTime.Name = "edFadeInOutStopTime";
+            edFadeInOutStopTime.Size = new System.Drawing.Size(62, 31);
+            edFadeInOutStopTime.TabIndex = 34;
+            edFadeInOutStopTime.Text = "15000";
+            edFadeInOutStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label329
+            // 
+            label329.AutoSize = true;
+            label329.Location = new System.Drawing.Point(148, 42);
+            label329.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label329.Name = "label329";
+            label329.Size = new System.Drawing.Size(49, 25);
+            label329.TabIndex = 33;
+            label329.Text = "Stop";
+            // 
+            // edFadeInOutStartTime
+            // 
+            edFadeInOutStartTime.Location = new System.Drawing.Point(71, 36);
+            edFadeInOutStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeInOutStartTime.Name = "edFadeInOutStartTime";
+            edFadeInOutStartTime.Size = new System.Drawing.Size(62, 31);
+            edFadeInOutStartTime.TabIndex = 32;
+            edFadeInOutStartTime.Text = "5000";
+            edFadeInOutStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label330
+            // 
+            label330.AutoSize = true;
+            label330.Location = new System.Drawing.Point(18, 42);
+            label330.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label330.Name = "label330";
+            label330.Size = new System.Drawing.Size(48, 25);
+            label330.TabIndex = 31;
+            label330.Text = "Start";
+            // 
+            // cbFadeInOut
+            // 
+            cbFadeInOut.AutoSize = true;
+            cbFadeInOut.Location = new System.Drawing.Point(18, 31);
+            cbFadeInOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFadeInOut.Name = "cbFadeInOut";
+            cbFadeInOut.Size = new System.Drawing.Size(101, 29);
+            cbFadeInOut.TabIndex = 57;
+            cbFadeInOut.Text = "Enabled";
+            cbFadeInOut.UseVisualStyleBackColor = true;
+            cbFadeInOut.CheckedChanged += cbFadeInOut_CheckedChanged;
+            // 
+            // tabPage43
+            // 
+            tabPage43.Controls.Add(cbLiveRotationStretch);
+            tabPage43.Controls.Add(label392);
+            tabPage43.Controls.Add(label391);
+            tabPage43.Controls.Add(tbLiveRotationAngle);
+            tabPage43.Controls.Add(label390);
+            tabPage43.Controls.Add(cbLiveRotation);
+            tabPage43.Location = new System.Drawing.Point(4, 34);
+            tabPage43.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage43.Name = "tabPage43";
+            tabPage43.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage43.Size = new System.Drawing.Size(463, 490);
+            tabPage43.TabIndex = 5;
+            tabPage43.Text = "Live rotation";
+            tabPage43.UseVisualStyleBackColor = true;
+            // 
+            // cbLiveRotationStretch
+            // 
+            cbLiveRotationStretch.AutoSize = true;
+            cbLiveRotationStretch.Location = new System.Drawing.Point(20, 264);
+            cbLiveRotationStretch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbLiveRotationStretch.Name = "cbLiveRotationStretch";
+            cbLiveRotationStretch.Size = new System.Drawing.Size(259, 29);
+            cbLiveRotationStretch.TabIndex = 65;
+            cbLiveRotationStretch.Text = "Stretch  if angle is 90 or 270";
+            cbLiveRotationStretch.UseVisualStyleBackColor = true;
+            cbLiveRotationStretch.CheckedChanged += cbLiveRotationStretch_CheckedChanged;
+            // 
+            // label392
+            // 
+            label392.AutoSize = true;
+            label392.Location = new System.Drawing.Point(218, 214);
+            label392.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label392.Name = "label392";
+            label392.Size = new System.Drawing.Size(42, 25);
+            label392.TabIndex = 64;
+            label392.Text = "360";
+            // 
+            // label391
+            // 
+            label391.AutoSize = true;
+            label391.Location = new System.Drawing.Point(16, 214);
+            label391.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label391.Name = "label391";
+            label391.Size = new System.Drawing.Size(22, 25);
+            label391.TabIndex = 63;
+            label391.Text = "0";
+            // 
+            // tbLiveRotationAngle
+            // 
+            tbLiveRotationAngle.Location = new System.Drawing.Point(20, 120);
+            tbLiveRotationAngle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbLiveRotationAngle.Maximum = 360;
+            tbLiveRotationAngle.Name = "tbLiveRotationAngle";
+            tbLiveRotationAngle.Size = new System.Drawing.Size(238, 69);
+            tbLiveRotationAngle.TabIndex = 62;
+            tbLiveRotationAngle.TickFrequency = 5;
+            tbLiveRotationAngle.Value = 90;
+            tbLiveRotationAngle.Scroll += tbLiveRotationAngle_Scroll;
+            // 
+            // label390
+            // 
+            label390.AutoSize = true;
+            label390.Location = new System.Drawing.Point(16, 84);
+            label390.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label390.Name = "label390";
+            label390.Size = new System.Drawing.Size(58, 25);
+            label390.TabIndex = 61;
+            label390.Text = "Angle";
+            // 
+            // cbLiveRotation
+            // 
+            cbLiveRotation.AutoSize = true;
+            cbLiveRotation.Location = new System.Drawing.Point(20, 22);
+            cbLiveRotation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbLiveRotation.Name = "cbLiveRotation";
+            cbLiveRotation.Size = new System.Drawing.Size(101, 29);
+            cbLiveRotation.TabIndex = 60;
+            cbLiveRotation.Text = "Enabled";
+            cbLiveRotation.UseVisualStyleBackColor = true;
+            cbLiveRotation.CheckedChanged += cbLiveRotation_CheckedChanged;
+            // 
+            // tbContrast
+            // 
+            tbContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbContrast.Location = new System.Drawing.Point(4, 206);
+            tbContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbContrast.Maximum = 255;
+            tbContrast.Name = "tbContrast";
+            tbContrast.Size = new System.Drawing.Size(218, 69);
+            tbContrast.TabIndex = 49;
+            tbContrast.Scroll += tbContrast_Scroll;
+            // 
+            // tbDarkness
+            // 
+            tbDarkness.BackColor = System.Drawing.SystemColors.Window;
+            tbDarkness.Location = new System.Drawing.Point(238, 206);
+            tbDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbDarkness.Maximum = 255;
+            tbDarkness.Name = "tbDarkness";
+            tbDarkness.Size = new System.Drawing.Size(218, 69);
+            tbDarkness.TabIndex = 46;
+            tbDarkness.Scroll += tbDarkness_Scroll;
+            // 
+            // tbLightness
+            // 
+            tbLightness.BackColor = System.Drawing.SystemColors.Window;
+            tbLightness.Location = new System.Drawing.Point(4, 98);
+            tbLightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbLightness.Maximum = 255;
+            tbLightness.Name = "tbLightness";
+            tbLightness.Size = new System.Drawing.Size(218, 69);
+            tbLightness.TabIndex = 45;
+            tbLightness.Scroll += tbLightness_Scroll;
+            // 
+            // tbSaturation
+            // 
+            tbSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbSaturation.Location = new System.Drawing.Point(238, 98);
+            tbSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbSaturation.Maximum = 255;
+            tbSaturation.Name = "tbSaturation";
+            tbSaturation.Size = new System.Drawing.Size(218, 69);
+            tbSaturation.TabIndex = 43;
+            tbSaturation.Value = 255;
+            tbSaturation.Scroll += tbSaturation_Scroll;
+            // 
+            // cbInvert
+            // 
+            cbInvert.AutoSize = true;
+            cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbInvert.Location = new System.Drawing.Point(155, 288);
+            cbInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbInvert.Name = "cbInvert";
+            cbInvert.Size = new System.Drawing.Size(83, 29);
+            cbInvert.TabIndex = 41;
+            cbInvert.Text = "Invert";
+            cbInvert.UseVisualStyleBackColor = true;
+            cbInvert.CheckedChanged += cbInvert_CheckedChanged;
+            // 
+            // cbGreyscale
+            // 
+            cbGreyscale.AutoSize = true;
+            cbGreyscale.Location = new System.Drawing.Point(21, 288);
+            cbGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGreyscale.Name = "cbGreyscale";
+            cbGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbGreyscale.TabIndex = 39;
+            cbGreyscale.Text = "Greyscale";
+            cbGreyscale.UseVisualStyleBackColor = true;
+            cbGreyscale.CheckedChanged += cbGreyscale_CheckedChanged;
+            // 
+            // cbVideoEffects
+            // 
+            cbVideoEffects.AutoSize = true;
+            cbVideoEffects.Location = new System.Drawing.Point(12, 16);
+            cbVideoEffects.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVideoEffects.Name = "cbVideoEffects";
+            cbVideoEffects.Size = new System.Drawing.Size(101, 29);
+            cbVideoEffects.TabIndex = 37;
+            cbVideoEffects.Text = "Enabled";
+            cbVideoEffects.UseVisualStyleBackColor = true;
+            // 
+            // tabPage69
+            // 
+            tabPage69.Controls.Add(label211);
+            tabPage69.Controls.Add(edDeintTriangleWeight);
+            tabPage69.Controls.Add(label212);
+            tabPage69.Controls.Add(label210);
+            tabPage69.Controls.Add(label209);
+            tabPage69.Controls.Add(label206);
+            tabPage69.Controls.Add(edDeintBlendConstants2);
+            tabPage69.Controls.Add(label207);
+            tabPage69.Controls.Add(edDeintBlendConstants1);
+            tabPage69.Controls.Add(label208);
+            tabPage69.Controls.Add(label204);
+            tabPage69.Controls.Add(edDeintBlendThreshold2);
+            tabPage69.Controls.Add(label205);
+            tabPage69.Controls.Add(edDeintBlendThreshold1);
+            tabPage69.Controls.Add(label203);
+            tabPage69.Controls.Add(label202);
+            tabPage69.Controls.Add(edDeintCAVTThreshold);
+            tabPage69.Controls.Add(label104);
+            tabPage69.Controls.Add(rbDeintTriangleEnabled);
+            tabPage69.Controls.Add(rbDeintBlendEnabled);
+            tabPage69.Controls.Add(rbDeintCAVTEnabled);
+            tabPage69.Controls.Add(cbDeinterlace);
+            tabPage69.Location = new System.Drawing.Point(4, 34);
+            tabPage69.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage69.Name = "tabPage69";
+            tabPage69.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage69.Size = new System.Drawing.Size(490, 893);
+            tabPage69.TabIndex = 1;
+            tabPage69.Text = "Deinterlace";
+            tabPage69.UseVisualStyleBackColor = true;
+            // 
+            // label211
+            // 
+            label211.AutoSize = true;
+            label211.Location = new System.Drawing.Point(168, 566);
+            label211.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label211.Name = "label211";
+            label211.Size = new System.Drawing.Size(69, 25);
+            label211.TabIndex = 28;
+            label211.Text = "[0-255]";
+            // 
+            // edDeintTriangleWeight
+            // 
+            edDeintTriangleWeight.Location = new System.Drawing.Point(171, 519);
+            edDeintTriangleWeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintTriangleWeight.Name = "edDeintTriangleWeight";
+            edDeintTriangleWeight.Size = new System.Drawing.Size(52, 31);
+            edDeintTriangleWeight.TabIndex = 27;
+            edDeintTriangleWeight.Text = "180";
+            // 
+            // label212
+            // 
+            label212.AutoSize = true;
+            label212.Location = new System.Drawing.Point(58, 525);
+            label212.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label212.Name = "label212";
+            label212.Size = new System.Drawing.Size(68, 25);
+            label212.TabIndex = 26;
+            label212.Text = "Weight";
+            // 
+            // label210
+            // 
+            label210.AutoSize = true;
+            label210.Location = new System.Drawing.Point(429, 369);
+            label210.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label210.Name = "label210";
+            label210.Size = new System.Drawing.Size(44, 25);
+            label210.TabIndex = 25;
+            label210.Text = "/ 10";
+            // 
+            // label209
+            // 
+            label209.AutoSize = true;
+            label209.Location = new System.Drawing.Point(429, 306);
+            label209.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label209.Name = "label209";
+            label209.Size = new System.Drawing.Size(44, 25);
+            label209.TabIndex = 24;
+            label209.Text = "/ 10";
+            // 
+            // label206
+            // 
+            label206.AutoSize = true;
+            label206.Location = new System.Drawing.Point(362, 409);
+            label206.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label206.Name = "label206";
+            label206.Size = new System.Drawing.Size(77, 25);
+            label206.TabIndex = 23;
+            label206.Text = "[0.0-1.0]";
+            // 
+            // edDeintBlendConstants2
+            // 
+            edDeintBlendConstants2.Location = new System.Drawing.Point(369, 364);
+            edDeintBlendConstants2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendConstants2.Name = "edDeintBlendConstants2";
+            edDeintBlendConstants2.Size = new System.Drawing.Size(52, 31);
+            edDeintBlendConstants2.TabIndex = 22;
+            edDeintBlendConstants2.Text = "9";
+            // 
+            // label207
+            // 
+            label207.AutoSize = true;
+            label207.Location = new System.Drawing.Point(252, 369);
+            label207.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label207.Name = "label207";
+            label207.Size = new System.Drawing.Size(106, 25);
+            label207.TabIndex = 21;
+            label207.Text = "Constants 2";
+            // 
+            // edDeintBlendConstants1
+            // 
+            edDeintBlendConstants1.Location = new System.Drawing.Point(369, 300);
+            edDeintBlendConstants1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendConstants1.Name = "edDeintBlendConstants1";
+            edDeintBlendConstants1.Size = new System.Drawing.Size(52, 31);
+            edDeintBlendConstants1.TabIndex = 20;
+            edDeintBlendConstants1.Text = "3";
+            // 
+            // label208
+            // 
+            label208.AutoSize = true;
+            label208.Location = new System.Drawing.Point(252, 306);
+            label208.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label208.Name = "label208";
+            label208.Size = new System.Drawing.Size(106, 25);
+            label208.TabIndex = 19;
+            label208.Text = "Constants 1";
+            // 
+            // label204
+            // 
+            label204.AutoSize = true;
+            label204.Location = new System.Drawing.Point(168, 409);
+            label204.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label204.Name = "label204";
+            label204.Size = new System.Drawing.Size(69, 25);
+            label204.TabIndex = 18;
+            label204.Text = "[0-255]";
+            // 
+            // edDeintBlendThreshold2
+            // 
+            edDeintBlendThreshold2.Location = new System.Drawing.Point(171, 364);
+            edDeintBlendThreshold2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendThreshold2.Name = "edDeintBlendThreshold2";
+            edDeintBlendThreshold2.Size = new System.Drawing.Size(52, 31);
+            edDeintBlendThreshold2.TabIndex = 17;
+            edDeintBlendThreshold2.Text = "9";
+            // 
+            // label205
+            // 
+            label205.AutoSize = true;
+            label205.Location = new System.Drawing.Point(58, 369);
+            label205.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label205.Name = "label205";
+            label205.Size = new System.Drawing.Size(105, 25);
+            label205.TabIndex = 16;
+            label205.Text = "Threshold 2";
+            // 
+            // edDeintBlendThreshold1
+            // 
+            edDeintBlendThreshold1.Location = new System.Drawing.Point(171, 300);
+            edDeintBlendThreshold1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendThreshold1.Name = "edDeintBlendThreshold1";
+            edDeintBlendThreshold1.Size = new System.Drawing.Size(52, 31);
+            edDeintBlendThreshold1.TabIndex = 15;
+            edDeintBlendThreshold1.Text = "5";
+            // 
+            // label203
+            // 
+            label203.AutoSize = true;
+            label203.Location = new System.Drawing.Point(58, 306);
+            label203.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label203.Name = "label203";
+            label203.Size = new System.Drawing.Size(105, 25);
+            label203.TabIndex = 14;
+            label203.Text = "Threshold 1";
+            // 
+            // label202
+            // 
+            label202.AutoSize = true;
+            label202.Location = new System.Drawing.Point(168, 198);
+            label202.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label202.Name = "label202";
+            label202.Size = new System.Drawing.Size(69, 25);
+            label202.TabIndex = 13;
+            label202.Text = "[0-255]";
+            // 
+            // edDeintCAVTThreshold
+            // 
+            edDeintCAVTThreshold.Location = new System.Drawing.Point(171, 152);
+            edDeintCAVTThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintCAVTThreshold.Name = "edDeintCAVTThreshold";
+            edDeintCAVTThreshold.Size = new System.Drawing.Size(52, 31);
+            edDeintCAVTThreshold.TabIndex = 12;
+            edDeintCAVTThreshold.Text = "20";
+            // 
+            // label104
+            // 
+            label104.AutoSize = true;
+            label104.Location = new System.Drawing.Point(58, 158);
+            label104.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label104.Name = "label104";
+            label104.Size = new System.Drawing.Size(90, 25);
+            label104.TabIndex = 11;
+            label104.Text = "Threshold";
+            // 
+            // rbDeintTriangleEnabled
+            // 
+            rbDeintTriangleEnabled.AutoSize = true;
+            rbDeintTriangleEnabled.Location = new System.Drawing.Point(30, 469);
+            rbDeintTriangleEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintTriangleEnabled.Name = "rbDeintTriangleEnabled";
+            rbDeintTriangleEnabled.Size = new System.Drawing.Size(97, 29);
+            rbDeintTriangleEnabled.TabIndex = 10;
+            rbDeintTriangleEnabled.Text = "Triangle";
+            rbDeintTriangleEnabled.UseVisualStyleBackColor = true;
+            // 
+            // rbDeintBlendEnabled
+            // 
+            rbDeintBlendEnabled.AutoSize = true;
+            rbDeintBlendEnabled.Location = new System.Drawing.Point(30, 244);
+            rbDeintBlendEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintBlendEnabled.Name = "rbDeintBlendEnabled";
+            rbDeintBlendEnabled.Size = new System.Drawing.Size(81, 29);
+            rbDeintBlendEnabled.TabIndex = 9;
+            rbDeintBlendEnabled.Text = "Blend";
+            rbDeintBlendEnabled.UseVisualStyleBackColor = true;
+            // 
+            // rbDeintCAVTEnabled
+            // 
+            rbDeintCAVTEnabled.AutoSize = true;
+            rbDeintCAVTEnabled.Checked = true;
+            rbDeintCAVTEnabled.Location = new System.Drawing.Point(30, 100);
+            rbDeintCAVTEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintCAVTEnabled.Name = "rbDeintCAVTEnabled";
+            rbDeintCAVTEnabled.Size = new System.Drawing.Size(372, 29);
+            rbDeintCAVTEnabled.TabIndex = 8;
+            rbDeintCAVTEnabled.TabStop = true;
+            rbDeintCAVTEnabled.Text = "Content Adaptive Vertical Temporal (CAVT)";
+            rbDeintCAVTEnabled.UseVisualStyleBackColor = true;
+            // 
+            // cbDeinterlace
+            // 
+            cbDeinterlace.AutoSize = true;
+            cbDeinterlace.Location = new System.Drawing.Point(30, 31);
+            cbDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDeinterlace.Name = "cbDeinterlace";
+            cbDeinterlace.Size = new System.Drawing.Size(101, 29);
+            cbDeinterlace.TabIndex = 7;
+            cbDeinterlace.Text = "Enabled";
+            cbDeinterlace.UseVisualStyleBackColor = true;
+            // 
+            // tabPage59
+            // 
+            tabPage59.Controls.Add(rbDenoiseCAST);
+            tabPage59.Controls.Add(rbDenoiseMosquito);
+            tabPage59.Controls.Add(cbDenoise);
+            tabPage59.Location = new System.Drawing.Point(4, 34);
+            tabPage59.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage59.Name = "tabPage59";
+            tabPage59.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage59.Size = new System.Drawing.Size(490, 893);
+            tabPage59.TabIndex = 4;
+            tabPage59.Text = "Denoise";
+            tabPage59.UseVisualStyleBackColor = true;
+            // 
+            // rbDenoiseCAST
+            // 
+            rbDenoiseCAST.AutoSize = true;
+            rbDenoiseCAST.Location = new System.Drawing.Point(30, 152);
+            rbDenoiseCAST.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDenoiseCAST.Name = "rbDenoiseCAST";
+            rbDenoiseCAST.Size = new System.Drawing.Size(369, 29);
+            rbDenoiseCAST.TabIndex = 10;
+            rbDenoiseCAST.Text = "Content Adaptive Spatio-Temporal (CAST)";
+            rbDenoiseCAST.UseVisualStyleBackColor = true;
+            // 
+            // rbDenoiseMosquito
+            // 
+            rbDenoiseMosquito.AutoSize = true;
+            rbDenoiseMosquito.Checked = true;
+            rbDenoiseMosquito.Location = new System.Drawing.Point(30, 100);
+            rbDenoiseMosquito.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDenoiseMosquito.Name = "rbDenoiseMosquito";
+            rbDenoiseMosquito.Size = new System.Drawing.Size(114, 29);
+            rbDenoiseMosquito.TabIndex = 9;
+            rbDenoiseMosquito.TabStop = true;
+            rbDenoiseMosquito.Text = "Mosquito";
+            rbDenoiseMosquito.UseVisualStyleBackColor = true;
+            // 
+            // cbDenoise
+            // 
+            cbDenoise.AutoSize = true;
+            cbDenoise.Location = new System.Drawing.Point(30, 31);
+            cbDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDenoise.Name = "cbDenoise";
+            cbDenoise.Size = new System.Drawing.Size(101, 29);
+            cbDenoise.TabIndex = 8;
+            cbDenoise.Text = "Enabled";
+            cbDenoise.UseVisualStyleBackColor = true;
+            // 
+            // tabPage51
+            // 
+            tabPage51.Controls.Add(label22);
+            tabPage51.Controls.Add(tbGPUBlur);
+            tabPage51.Controls.Add(cbVideoEffectsGPUEnabled);
+            tabPage51.Controls.Add(cbGPUOldMovie);
+            tabPage51.Controls.Add(cbGPUDeinterlace);
+            tabPage51.Controls.Add(cbGPUDenoise);
+            tabPage51.Controls.Add(cbGPUPixelate);
+            tabPage51.Controls.Add(cbGPUNightVision);
+            tabPage51.Controls.Add(label383);
+            tabPage51.Controls.Add(label384);
+            tabPage51.Controls.Add(label385);
+            tabPage51.Controls.Add(label386);
+            tabPage51.Controls.Add(tbGPUContrast);
+            tabPage51.Controls.Add(tbGPUDarkness);
+            tabPage51.Controls.Add(tbGPULightness);
+            tabPage51.Controls.Add(tbGPUSaturation);
+            tabPage51.Controls.Add(cbGPUInvert);
+            tabPage51.Controls.Add(cbGPUGreyscale);
+            tabPage51.Location = new System.Drawing.Point(4, 34);
+            tabPage51.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage51.Name = "tabPage51";
+            tabPage51.Size = new System.Drawing.Size(490, 893);
+            tabPage51.TabIndex = 9;
+            tabPage51.Text = "Effects (GPU)";
+            tabPage51.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(18, 519);
+            label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(42, 25);
+            label22.TabIndex = 100;
+            label22.Text = "Blur";
+            // 
+            // tbGPUBlur
+            // 
+            tbGPUBlur.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUBlur.Location = new System.Drawing.Point(11, 548);
+            tbGPUBlur.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUBlur.Maximum = 30;
+            tbGPUBlur.Name = "tbGPUBlur";
+            tbGPUBlur.Size = new System.Drawing.Size(218, 69);
+            tbGPUBlur.TabIndex = 99;
+            tbGPUBlur.Scroll += tbGPUBlur_Scroll;
+            // 
+            // cbVideoEffectsGPUEnabled
+            // 
+            cbVideoEffectsGPUEnabled.AutoSize = true;
+            cbVideoEffectsGPUEnabled.Location = new System.Drawing.Point(30, 31);
+            cbVideoEffectsGPUEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVideoEffectsGPUEnabled.Name = "cbVideoEffectsGPUEnabled";
+            cbVideoEffectsGPUEnabled.Size = new System.Drawing.Size(101, 29);
+            cbVideoEffectsGPUEnabled.TabIndex = 97;
+            cbVideoEffectsGPUEnabled.Text = "Enabled";
+            cbVideoEffectsGPUEnabled.UseVisualStyleBackColor = true;
+            // 
+            // cbGPUOldMovie
+            // 
+            cbGPUOldMovie.AutoSize = true;
+            cbGPUOldMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUOldMovie.Location = new System.Drawing.Point(236, 461);
+            cbGPUOldMovie.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUOldMovie.Name = "cbGPUOldMovie";
+            cbGPUOldMovie.Size = new System.Drawing.Size(121, 29);
+            cbGPUOldMovie.TabIndex = 96;
+            cbGPUOldMovie.Text = "Old movie";
+            cbGPUOldMovie.UseVisualStyleBackColor = true;
+            cbGPUOldMovie.CheckedChanged += cbGPUOldMovie_CheckedChanged;
+            // 
+            // cbGPUDeinterlace
+            // 
+            cbGPUDeinterlace.AutoSize = true;
+            cbGPUDeinterlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUDeinterlace.Location = new System.Drawing.Point(236, 416);
+            cbGPUDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUDeinterlace.Name = "cbGPUDeinterlace";
+            cbGPUDeinterlace.Size = new System.Drawing.Size(125, 29);
+            cbGPUDeinterlace.TabIndex = 94;
+            cbGPUDeinterlace.Text = "Deinterlace";
+            cbGPUDeinterlace.UseVisualStyleBackColor = true;
+            cbGPUDeinterlace.CheckedChanged += cbGPUDeinterlace_CheckedChanged;
+            // 
+            // cbGPUDenoise
+            // 
+            cbGPUDenoise.AutoSize = true;
+            cbGPUDenoise.Location = new System.Drawing.Point(22, 416);
+            cbGPUDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUDenoise.Name = "cbGPUDenoise";
+            cbGPUDenoise.Size = new System.Drawing.Size(102, 29);
+            cbGPUDenoise.TabIndex = 93;
+            cbGPUDenoise.Text = "Denoise";
+            cbGPUDenoise.UseVisualStyleBackColor = true;
+            cbGPUDenoise.CheckedChanged += cbGPUDenoise_CheckedChanged;
+            // 
+            // cbGPUPixelate
+            // 
+            cbGPUPixelate.AutoSize = true;
+            cbGPUPixelate.Location = new System.Drawing.Point(236, 370);
+            cbGPUPixelate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUPixelate.Name = "cbGPUPixelate";
+            cbGPUPixelate.Size = new System.Drawing.Size(97, 29);
+            cbGPUPixelate.TabIndex = 92;
+            cbGPUPixelate.Text = "Pixelate";
+            cbGPUPixelate.UseVisualStyleBackColor = true;
+            cbGPUPixelate.CheckedChanged += cbGPUPixelate_CheckedChanged;
+            // 
+            // cbGPUNightVision
+            // 
+            cbGPUNightVision.AutoSize = true;
+            cbGPUNightVision.Location = new System.Drawing.Point(22, 370);
+            cbGPUNightVision.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUNightVision.Name = "cbGPUNightVision";
+            cbGPUNightVision.Size = new System.Drawing.Size(133, 29);
+            cbGPUNightVision.TabIndex = 91;
+            cbGPUNightVision.Text = "Night vision";
+            cbGPUNightVision.UseVisualStyleBackColor = true;
+            cbGPUNightVision.CheckedChanged += cbGPUNightVision_CheckedChanged;
+            // 
+            // label383
+            // 
+            label383.AutoSize = true;
+            label383.Location = new System.Drawing.Point(242, 192);
+            label383.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label383.Name = "label383";
+            label383.Size = new System.Drawing.Size(84, 25);
+            label383.TabIndex = 90;
+            label383.Text = "Darkness";
+            // 
+            // label384
+            // 
+            label384.AutoSize = true;
+            label384.Location = new System.Drawing.Point(18, 192);
+            label384.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label384.Name = "label384";
+            label384.Size = new System.Drawing.Size(79, 25);
+            label384.TabIndex = 89;
+            label384.Text = "Contrast";
+            // 
+            // label385
+            // 
+            label385.AutoSize = true;
+            label385.Location = new System.Drawing.Point(242, 92);
+            label385.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label385.Name = "label385";
+            label385.Size = new System.Drawing.Size(93, 25);
+            label385.TabIndex = 88;
+            label385.Text = "Saturation";
+            // 
+            // label386
+            // 
+            label386.AutoSize = true;
+            label386.Location = new System.Drawing.Point(18, 92);
+            label386.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label386.Name = "label386";
+            label386.Size = new System.Drawing.Size(86, 25);
+            label386.TabIndex = 87;
+            label386.Text = "Lightness";
+            // 
+            // tbGPUContrast
+            // 
+            tbGPUContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUContrast.Location = new System.Drawing.Point(11, 230);
+            tbGPUContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUContrast.Maximum = 255;
+            tbGPUContrast.Name = "tbGPUContrast";
+            tbGPUContrast.Size = new System.Drawing.Size(218, 69);
+            tbGPUContrast.TabIndex = 86;
+            tbGPUContrast.Value = 255;
+            tbGPUContrast.Scroll += tbGPUContrast_Scroll;
+            // 
+            // tbGPUDarkness
+            // 
+            tbGPUDarkness.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUDarkness.Location = new System.Drawing.Point(242, 230);
+            tbGPUDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUDarkness.Maximum = 255;
+            tbGPUDarkness.Name = "tbGPUDarkness";
+            tbGPUDarkness.Size = new System.Drawing.Size(218, 69);
+            tbGPUDarkness.TabIndex = 85;
+            tbGPUDarkness.Scroll += tbGPUDarkness_Scroll;
+            // 
+            // tbGPULightness
+            // 
+            tbGPULightness.BackColor = System.Drawing.SystemColors.Window;
+            tbGPULightness.Location = new System.Drawing.Point(11, 120);
+            tbGPULightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPULightness.Maximum = 255;
+            tbGPULightness.Name = "tbGPULightness";
+            tbGPULightness.Size = new System.Drawing.Size(218, 69);
+            tbGPULightness.TabIndex = 84;
+            tbGPULightness.Scroll += tbGPULightness_Scroll;
+            // 
+            // tbGPUSaturation
+            // 
+            tbGPUSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUSaturation.Location = new System.Drawing.Point(242, 120);
+            tbGPUSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUSaturation.Maximum = 255;
+            tbGPUSaturation.Name = "tbGPUSaturation";
+            tbGPUSaturation.Size = new System.Drawing.Size(218, 69);
+            tbGPUSaturation.TabIndex = 83;
+            tbGPUSaturation.Value = 255;
+            tbGPUSaturation.Scroll += tbGPUSaturation_Scroll;
+            // 
+            // cbGPUInvert
+            // 
+            cbGPUInvert.AutoSize = true;
+            cbGPUInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUInvert.Location = new System.Drawing.Point(236, 328);
+            cbGPUInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUInvert.Name = "cbGPUInvert";
+            cbGPUInvert.Size = new System.Drawing.Size(83, 29);
+            cbGPUInvert.TabIndex = 82;
+            cbGPUInvert.Text = "Invert";
+            cbGPUInvert.UseVisualStyleBackColor = true;
+            cbGPUInvert.CheckedChanged += cbGPUInvert_CheckedChanged;
+            // 
+            // cbGPUGreyscale
+            // 
+            cbGPUGreyscale.AutoSize = true;
+            cbGPUGreyscale.Location = new System.Drawing.Point(22, 328);
+            cbGPUGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUGreyscale.Name = "cbGPUGreyscale";
+            cbGPUGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbGPUGreyscale.TabIndex = 81;
+            cbGPUGreyscale.Text = "Greyscale";
+            cbGPUGreyscale.UseVisualStyleBackColor = true;
+            cbGPUGreyscale.CheckedChanged += cbGPUGreyscale_CheckedChanged;
+            // 
+            // tabPage8
+            // 
+            tabPage8.Controls.Add(lbAdjSaturationCurrent);
+            tabPage8.Controls.Add(lbAdjSaturationMax);
+            tabPage8.Controls.Add(lbAdjSaturationMin);
+            tabPage8.Controls.Add(tbAdjSaturation);
+            tabPage8.Controls.Add(label45);
+            tabPage8.Controls.Add(lbAdjHueCurrent);
+            tabPage8.Controls.Add(lbAdjHueMax);
+            tabPage8.Controls.Add(lbAdjHueMin);
+            tabPage8.Controls.Add(tbAdjHue);
+            tabPage8.Controls.Add(label41);
+            tabPage8.Controls.Add(lbAdjContrastCurrent);
+            tabPage8.Controls.Add(lbAdjContrastMax);
+            tabPage8.Controls.Add(lbAdjContrastMin);
+            tabPage8.Controls.Add(tbAdjContrast);
+            tabPage8.Controls.Add(label23);
+            tabPage8.Controls.Add(lbAdjBrightnessCurrent);
+            tabPage8.Controls.Add(lbAdjBrightnessMax);
+            tabPage8.Controls.Add(lbAdjBrightnessMin);
+            tabPage8.Controls.Add(tbAdjBrightness);
+            tabPage8.Controls.Add(label24);
+            tabPage8.Location = new System.Drawing.Point(4, 34);
+            tabPage8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage8.Name = "tabPage8";
+            tabPage8.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage8.Size = new System.Drawing.Size(490, 893);
+            tabPage8.TabIndex = 5;
+            tabPage8.Text = "Effects (Video renderer)";
+            tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // lbAdjSaturationCurrent
+            // 
+            lbAdjSaturationCurrent.AutoSize = true;
+            lbAdjSaturationCurrent.Location = new System.Drawing.Point(218, 511);
+            lbAdjSaturationCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjSaturationCurrent.Name = "lbAdjSaturationCurrent";
+            lbAdjSaturationCurrent.Size = new System.Drawing.Size(112, 25);
+            lbAdjSaturationCurrent.TabIndex = 48;
+            lbAdjSaturationCurrent.Text = "Current = 40";
+            // 
+            // lbAdjSaturationMax
+            // 
+            lbAdjSaturationMax.AutoSize = true;
+            lbAdjSaturationMax.Location = new System.Drawing.Point(111, 511);
+            lbAdjSaturationMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjSaturationMax.Name = "lbAdjSaturationMax";
+            lbAdjSaturationMax.Size = new System.Drawing.Size(97, 25);
+            lbAdjSaturationMax.TabIndex = 47;
+            lbAdjSaturationMax.Text = "Max = 100";
+            // 
+            // lbAdjSaturationMin
+            // 
+            lbAdjSaturationMin.AutoSize = true;
+            lbAdjSaturationMin.Location = new System.Drawing.Point(31, 511);
+            lbAdjSaturationMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjSaturationMin.Name = "lbAdjSaturationMin";
+            lbAdjSaturationMin.Size = new System.Drawing.Size(74, 25);
+            lbAdjSaturationMin.TabIndex = 45;
+            lbAdjSaturationMin.Text = "Min = 1";
+            // 
+            // tbAdjSaturation
+            // 
+            tbAdjSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbAdjSaturation.Location = new System.Drawing.Point(22, 456);
+            tbAdjSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAdjSaturation.Maximum = 100;
+            tbAdjSaturation.Name = "tbAdjSaturation";
+            tbAdjSaturation.Size = new System.Drawing.Size(318, 69);
+            tbAdjSaturation.TabIndex = 44;
+            tbAdjSaturation.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAdjSaturation.Value = 50;
+            tbAdjSaturation.Scroll += tbAdjSaturation_Scroll;
+            // 
+            // label45
+            // 
+            label45.AutoSize = true;
+            label45.Location = new System.Drawing.Point(18, 425);
+            label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label45.Name = "label45";
+            label45.Size = new System.Drawing.Size(93, 25);
+            label45.TabIndex = 43;
+            label45.Text = "Saturation";
+            // 
+            // lbAdjHueCurrent
+            // 
+            lbAdjHueCurrent.AutoSize = true;
+            lbAdjHueCurrent.Location = new System.Drawing.Point(218, 381);
+            lbAdjHueCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjHueCurrent.Name = "lbAdjHueCurrent";
+            lbAdjHueCurrent.Size = new System.Drawing.Size(112, 25);
+            lbAdjHueCurrent.TabIndex = 42;
+            lbAdjHueCurrent.Text = "Current = 40";
+            // 
+            // lbAdjHueMax
+            // 
+            lbAdjHueMax.AutoSize = true;
+            lbAdjHueMax.Location = new System.Drawing.Point(111, 381);
+            lbAdjHueMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjHueMax.Name = "lbAdjHueMax";
+            lbAdjHueMax.Size = new System.Drawing.Size(97, 25);
+            lbAdjHueMax.TabIndex = 41;
+            lbAdjHueMax.Text = "Max = 100";
+            // 
+            // lbAdjHueMin
+            // 
+            lbAdjHueMin.AutoSize = true;
+            lbAdjHueMin.Location = new System.Drawing.Point(31, 381);
+            lbAdjHueMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjHueMin.Name = "lbAdjHueMin";
+            lbAdjHueMin.Size = new System.Drawing.Size(74, 25);
+            lbAdjHueMin.TabIndex = 39;
+            lbAdjHueMin.Text = "Min = 1";
+            // 
+            // tbAdjHue
+            // 
+            tbAdjHue.BackColor = System.Drawing.SystemColors.Window;
+            tbAdjHue.Location = new System.Drawing.Point(22, 325);
+            tbAdjHue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAdjHue.Maximum = 100;
+            tbAdjHue.Name = "tbAdjHue";
+            tbAdjHue.Size = new System.Drawing.Size(318, 69);
+            tbAdjHue.TabIndex = 38;
+            tbAdjHue.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAdjHue.Value = 50;
+            tbAdjHue.Scroll += tbAdjHue_Scroll;
+            // 
+            // label41
+            // 
+            label41.AutoSize = true;
+            label41.Location = new System.Drawing.Point(18, 294);
+            label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label41.Name = "label41";
+            label41.Size = new System.Drawing.Size(44, 25);
+            label41.TabIndex = 37;
+            label41.Text = "Hue";
+            // 
+            // lbAdjContrastCurrent
+            // 
+            lbAdjContrastCurrent.AutoSize = true;
+            lbAdjContrastCurrent.Location = new System.Drawing.Point(218, 245);
+            lbAdjContrastCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjContrastCurrent.Name = "lbAdjContrastCurrent";
+            lbAdjContrastCurrent.Size = new System.Drawing.Size(112, 25);
+            lbAdjContrastCurrent.TabIndex = 36;
+            lbAdjContrastCurrent.Text = "Current = 40";
+            // 
+            // lbAdjContrastMax
+            // 
+            lbAdjContrastMax.AutoSize = true;
+            lbAdjContrastMax.Location = new System.Drawing.Point(111, 245);
+            lbAdjContrastMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjContrastMax.Name = "lbAdjContrastMax";
+            lbAdjContrastMax.Size = new System.Drawing.Size(97, 25);
+            lbAdjContrastMax.TabIndex = 35;
+            lbAdjContrastMax.Text = "Max = 100";
+            // 
+            // lbAdjContrastMin
+            // 
+            lbAdjContrastMin.AutoSize = true;
+            lbAdjContrastMin.Location = new System.Drawing.Point(31, 245);
+            lbAdjContrastMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjContrastMin.Name = "lbAdjContrastMin";
+            lbAdjContrastMin.Size = new System.Drawing.Size(74, 25);
+            lbAdjContrastMin.TabIndex = 33;
+            lbAdjContrastMin.Text = "Min = 1";
+            // 
+            // tbAdjContrast
+            // 
+            tbAdjContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbAdjContrast.Location = new System.Drawing.Point(22, 191);
+            tbAdjContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAdjContrast.Maximum = 100;
+            tbAdjContrast.Name = "tbAdjContrast";
+            tbAdjContrast.Size = new System.Drawing.Size(318, 69);
+            tbAdjContrast.TabIndex = 32;
+            tbAdjContrast.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAdjContrast.Value = 50;
+            tbAdjContrast.Scroll += tbAdjContrast_Scroll;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(18, 159);
+            label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(79, 25);
+            label23.TabIndex = 31;
+            label23.Text = "Contrast";
+            // 
+            // lbAdjBrightnessCurrent
+            // 
+            lbAdjBrightnessCurrent.AutoSize = true;
+            lbAdjBrightnessCurrent.Location = new System.Drawing.Point(218, 116);
+            lbAdjBrightnessCurrent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjBrightnessCurrent.Name = "lbAdjBrightnessCurrent";
+            lbAdjBrightnessCurrent.Size = new System.Drawing.Size(112, 25);
+            lbAdjBrightnessCurrent.TabIndex = 30;
+            lbAdjBrightnessCurrent.Text = "Current = 40";
+            // 
+            // lbAdjBrightnessMax
+            // 
+            lbAdjBrightnessMax.AutoSize = true;
+            lbAdjBrightnessMax.Location = new System.Drawing.Point(111, 116);
+            lbAdjBrightnessMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjBrightnessMax.Name = "lbAdjBrightnessMax";
+            lbAdjBrightnessMax.Size = new System.Drawing.Size(97, 25);
+            lbAdjBrightnessMax.TabIndex = 29;
+            lbAdjBrightnessMax.Text = "Max = 100";
+            // 
+            // lbAdjBrightnessMin
+            // 
+            lbAdjBrightnessMin.AutoSize = true;
+            lbAdjBrightnessMin.Location = new System.Drawing.Point(31, 116);
+            lbAdjBrightnessMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAdjBrightnessMin.Name = "lbAdjBrightnessMin";
+            lbAdjBrightnessMin.Size = new System.Drawing.Size(74, 25);
+            lbAdjBrightnessMin.TabIndex = 27;
+            lbAdjBrightnessMin.Text = "Min = 1";
+            // 
+            // tbAdjBrightness
+            // 
+            tbAdjBrightness.BackColor = System.Drawing.SystemColors.Window;
+            tbAdjBrightness.Location = new System.Drawing.Point(22, 59);
+            tbAdjBrightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAdjBrightness.Maximum = 100;
+            tbAdjBrightness.Name = "tbAdjBrightness";
+            tbAdjBrightness.Size = new System.Drawing.Size(318, 69);
+            tbAdjBrightness.TabIndex = 26;
+            tbAdjBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAdjBrightness.Value = 50;
+            tbAdjBrightness.Scroll += tbAdjBrightness_Scroll;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(18, 30);
+            label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(94, 25);
+            label24.TabIndex = 25;
+            label24.Text = "Brightness";
+            // 
+            // tabPage15
+            // 
+            tabPage15.Controls.Add(pnChromaKeyColor);
+            tabPage15.Controls.Add(btChromaKeySelectBGImage);
+            tabPage15.Controls.Add(edChromaKeyImage);
+            tabPage15.Controls.Add(label216);
+            tabPage15.Controls.Add(label215);
+            tabPage15.Controls.Add(tbChromaKeySmoothing);
+            tabPage15.Controls.Add(label214);
+            tabPage15.Controls.Add(tbChromaKeyThresholdSensitivity);
+            tabPage15.Controls.Add(label213);
+            tabPage15.Controls.Add(cbChromaKeyEnabled);
+            tabPage15.Location = new System.Drawing.Point(4, 34);
+            tabPage15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage15.Name = "tabPage15";
+            tabPage15.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage15.Size = new System.Drawing.Size(490, 893);
+            tabPage15.TabIndex = 7;
+            tabPage15.Text = "Chroma key";
+            tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // pnChromaKeyColor
+            // 
+            pnChromaKeyColor.BackColor = System.Drawing.Color.Lime;
+            pnChromaKeyColor.ForeColor = System.Drawing.SystemColors.Control;
+            pnChromaKeyColor.Location = new System.Drawing.Point(91, 384);
+            pnChromaKeyColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnChromaKeyColor.Name = "pnChromaKeyColor";
+            pnChromaKeyColor.Size = new System.Drawing.Size(42, 45);
+            pnChromaKeyColor.TabIndex = 33;
+            pnChromaKeyColor.Click += pnChromaKeyColor_Click;
+            // 
+            // btChromaKeySelectBGImage
+            // 
+            btChromaKeySelectBGImage.Location = new System.Drawing.Point(424, 505);
+            btChromaKeySelectBGImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btChromaKeySelectBGImage.Name = "btChromaKeySelectBGImage";
+            btChromaKeySelectBGImage.Size = new System.Drawing.Size(40, 44);
+            btChromaKeySelectBGImage.TabIndex = 32;
+            btChromaKeySelectBGImage.Text = "...";
+            btChromaKeySelectBGImage.UseVisualStyleBackColor = true;
+            btChromaKeySelectBGImage.Click += btChromaKeySelectBGImage_Click;
+            // 
+            // edChromaKeyImage
+            // 
+            edChromaKeyImage.Location = new System.Drawing.Point(22, 508);
+            edChromaKeyImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edChromaKeyImage.Name = "edChromaKeyImage";
+            edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
+            edChromaKeyImage.TabIndex = 31;
+            edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
+            // 
+            // label216
+            // 
+            label216.AutoSize = true;
+            label216.Location = new System.Drawing.Point(18, 478);
+            label216.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label216.Name = "label216";
+            label216.Size = new System.Drawing.Size(191, 25);
+            label216.TabIndex = 30;
+            label216.Text = "Image background file";
+            // 
+            // label215
+            // 
+            label215.AutoSize = true;
+            label215.Location = new System.Drawing.Point(18, 392);
+            label215.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label215.Name = "label215";
+            label215.Size = new System.Drawing.Size(55, 25);
+            label215.TabIndex = 26;
+            label215.Text = "Color";
+            // 
+            // tbChromaKeySmoothing
+            // 
+            tbChromaKeySmoothing.BackColor = System.Drawing.SystemColors.Window;
+            tbChromaKeySmoothing.Location = new System.Drawing.Point(22, 280);
+            tbChromaKeySmoothing.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbChromaKeySmoothing.Maximum = 1000;
+            tbChromaKeySmoothing.Name = "tbChromaKeySmoothing";
+            tbChromaKeySmoothing.Size = new System.Drawing.Size(258, 69);
+            tbChromaKeySmoothing.TabIndex = 25;
+            tbChromaKeySmoothing.Value = 80;
+            tbChromaKeySmoothing.Scroll += tbChromaKeyContrastHigh_Scroll;
+            // 
+            // label214
+            // 
+            label214.AutoSize = true;
+            label214.Location = new System.Drawing.Point(18, 244);
+            label214.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label214.Name = "label214";
+            label214.Size = new System.Drawing.Size(101, 25);
+            label214.TabIndex = 24;
+            label214.Text = "Smoothing";
+            // 
+            // tbChromaKeyThresholdSensitivity
+            // 
+            tbChromaKeyThresholdSensitivity.BackColor = System.Drawing.SystemColors.Window;
+            tbChromaKeyThresholdSensitivity.Location = new System.Drawing.Point(22, 139);
+            tbChromaKeyThresholdSensitivity.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbChromaKeyThresholdSensitivity.Maximum = 200;
+            tbChromaKeyThresholdSensitivity.Name = "tbChromaKeyThresholdSensitivity";
+            tbChromaKeyThresholdSensitivity.Size = new System.Drawing.Size(258, 69);
+            tbChromaKeyThresholdSensitivity.TabIndex = 23;
+            tbChromaKeyThresholdSensitivity.Value = 180;
+            tbChromaKeyThresholdSensitivity.Scroll += tbChromaKeyContrastLow_Scroll;
+            // 
+            // label213
+            // 
+            label213.AutoSize = true;
+            label213.Location = new System.Drawing.Point(18, 105);
+            label213.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label213.Name = "label213";
+            label213.Size = new System.Drawing.Size(172, 25);
+            label213.TabIndex = 22;
+            label213.Text = "Threshold sensitivity";
+            // 
+            // cbChromaKeyEnabled
+            // 
+            cbChromaKeyEnabled.AutoSize = true;
+            cbChromaKeyEnabled.Location = new System.Drawing.Point(22, 30);
+            cbChromaKeyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbChromaKeyEnabled.Name = "cbChromaKeyEnabled";
+            cbChromaKeyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbChromaKeyEnabled.TabIndex = 21;
+            cbChromaKeyEnabled.Text = "Enabled";
+            cbChromaKeyEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage46
+            // 
+            tabPage46.Controls.Add(btFilterDelete);
+            tabPage46.Controls.Add(btFilterDeleteAll);
+            tabPage46.Controls.Add(btFilterSettings2);
+            tabPage46.Controls.Add(lbFilters);
+            tabPage46.Controls.Add(label106);
+            tabPage46.Controls.Add(btFilterSettings);
+            tabPage46.Controls.Add(btFilterAdd);
+            tabPage46.Controls.Add(cbFilters);
+            tabPage46.Controls.Add(label105);
+            tabPage46.Location = new System.Drawing.Point(4, 34);
+            tabPage46.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage46.Name = "tabPage46";
+            tabPage46.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage46.Size = new System.Drawing.Size(490, 893);
+            tabPage46.TabIndex = 8;
+            tabPage46.Text = "3rd-party filters";
+            tabPage46.UseVisualStyleBackColor = true;
+            // 
+            // btFilterDelete
+            // 
+            btFilterDelete.Location = new System.Drawing.Point(250, 545);
+            btFilterDelete.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterDelete.Name = "btFilterDelete";
+            btFilterDelete.Size = new System.Drawing.Size(80, 44);
+            btFilterDelete.TabIndex = 26;
+            btFilterDelete.Text = "Delete";
+            btFilterDelete.UseVisualStyleBackColor = true;
+            btFilterDelete.Click += btFilterDelete_Click;
+            // 
+            // btFilterDeleteAll
+            // 
+            btFilterDeleteAll.Location = new System.Drawing.Point(340, 545);
+            btFilterDeleteAll.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterDeleteAll.Name = "btFilterDeleteAll";
+            btFilterDeleteAll.Size = new System.Drawing.Size(112, 44);
+            btFilterDeleteAll.TabIndex = 25;
+            btFilterDeleteAll.Text = "Delete all";
+            btFilterDeleteAll.UseVisualStyleBackColor = true;
+            btFilterDeleteAll.Click += btFilterDeleteAll_Click;
+            // 
+            // btFilterSettings2
+            // 
+            btFilterSettings2.Location = new System.Drawing.Point(20, 545);
+            btFilterSettings2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterSettings2.Name = "btFilterSettings2";
+            btFilterSettings2.Size = new System.Drawing.Size(109, 44);
+            btFilterSettings2.TabIndex = 24;
+            btFilterSettings2.Text = "Settings";
+            btFilterSettings2.UseVisualStyleBackColor = true;
+            btFilterSettings2.Click += btFilterSettings2_Click;
+            // 
+            // lbFilters
+            // 
+            lbFilters.FormattingEnabled = true;
+            lbFilters.ItemHeight = 25;
+            lbFilters.Location = new System.Drawing.Point(20, 228);
+            lbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbFilters.Name = "lbFilters";
+            lbFilters.Size = new System.Drawing.Size(432, 304);
+            lbFilters.TabIndex = 23;
+            lbFilters.SelectedIndexChanged += lbFilters_SelectedIndexChanged;
+            // 
+            // label106
+            // 
+            label106.AutoSize = true;
+            label106.Location = new System.Drawing.Point(16, 195);
+            label106.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label106.Name = "label106";
+            label106.Size = new System.Drawing.Size(118, 25);
+            label106.TabIndex = 22;
+            label106.Text = "Current filters";
+            // 
+            // btFilterSettings
+            // 
+            btFilterSettings.Location = new System.Drawing.Point(340, 105);
+            btFilterSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterSettings.Name = "btFilterSettings";
+            btFilterSettings.Size = new System.Drawing.Size(112, 44);
+            btFilterSettings.TabIndex = 21;
+            btFilterSettings.Text = "Settings";
+            btFilterSettings.UseVisualStyleBackColor = true;
+            btFilterSettings.Click += btFilterSettings_Click;
+            // 
+            // btFilterAdd
+            // 
+            btFilterAdd.Location = new System.Drawing.Point(20, 105);
+            btFilterAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterAdd.Name = "btFilterAdd";
+            btFilterAdd.Size = new System.Drawing.Size(64, 44);
+            btFilterAdd.TabIndex = 20;
+            btFilterAdd.Text = "Add";
+            btFilterAdd.UseVisualStyleBackColor = true;
+            btFilterAdd.Click += btFilterAdd_Click;
+            // 
+            // cbFilters
+            // 
+            cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbFilters.FormattingEnabled = true;
+            cbFilters.Location = new System.Drawing.Point(20, 52);
+            cbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFilters.Name = "cbFilters";
+            cbFilters.Size = new System.Drawing.Size(432, 33);
+            cbFilters.TabIndex = 19;
+            cbFilters.SelectedIndexChanged += cbFilters_SelectedIndexChanged;
+            // 
+            // label105
+            // 
+            label105.AutoSize = true;
+            label105.Location = new System.Drawing.Point(16, 20);
+            label105.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label105.Name = "label105";
+            label105.Size = new System.Drawing.Size(58, 25);
+            label105.TabIndex = 18;
+            label105.Text = "Filters";
+            // 
+            // tabPage48
+            // 
+            tabPage48.Controls.Add(lbAudioTimeshift);
+            tabPage48.Controls.Add(tbAudioTimeshift);
+            tabPage48.Controls.Add(label70);
+            tabPage48.Controls.Add(groupBox4);
+            tabPage48.Controls.Add(groupBox1);
+            tabPage48.Controls.Add(cbAudioAutoGain);
+            tabPage48.Controls.Add(cbAudioNormalize);
+            tabPage48.Controls.Add(cbAudioEnhancementEnabled);
+            tabPage48.Location = new System.Drawing.Point(4, 34);
+            tabPage48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage48.Name = "tabPage48";
+            tabPage48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage48.Size = new System.Drawing.Size(508, 957);
+            tabPage48.TabIndex = 12;
+            tabPage48.Text = "Audio enhancement";
+            tabPage48.UseVisualStyleBackColor = true;
+            // 
+            // lbAudioTimeshift
+            // 
+            lbAudioTimeshift.AutoSize = true;
+            lbAudioTimeshift.Location = new System.Drawing.Point(290, 861);
+            lbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioTimeshift.Name = "lbAudioTimeshift";
+            lbAudioTimeshift.Size = new System.Drawing.Size(51, 25);
+            lbAudioTimeshift.TabIndex = 7;
+            lbAudioTimeshift.Text = "0 ms";
+            // 
+            // tbAudioTimeshift
+            // 
+            tbAudioTimeshift.Location = new System.Drawing.Point(108, 841);
+            tbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioTimeshift.Maximum = 3000;
+            tbAudioTimeshift.Name = "tbAudioTimeshift";
+            tbAudioTimeshift.Size = new System.Drawing.Size(172, 69);
+            tbAudioTimeshift.SmallChange = 10;
+            tbAudioTimeshift.TabIndex = 6;
+            tbAudioTimeshift.TickFrequency = 100;
+            tbAudioTimeshift.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioTimeshift.Scroll += tbAudioTimeshift_Scroll;
+            // 
+            // label70
+            // 
+            label70.AutoSize = true;
+            label70.Location = new System.Drawing.Point(4, 861);
+            label70.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label70.Name = "label70";
+            label70.Size = new System.Drawing.Size(89, 25);
+            label70.TabIndex = 5;
+            label70.Text = "Time shift";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(lbAudioOutputGainLFE);
+            groupBox4.Controls.Add(tbAudioOutputGainLFE);
+            groupBox4.Controls.Add(label55);
+            groupBox4.Controls.Add(lbAudioOutputGainSR);
+            groupBox4.Controls.Add(tbAudioOutputGainSR);
+            groupBox4.Controls.Add(label57);
+            groupBox4.Controls.Add(lbAudioOutputGainSL);
+            groupBox4.Controls.Add(tbAudioOutputGainSL);
+            groupBox4.Controls.Add(label59);
+            groupBox4.Controls.Add(lbAudioOutputGainR);
+            groupBox4.Controls.Add(tbAudioOutputGainR);
+            groupBox4.Controls.Add(label61);
+            groupBox4.Controls.Add(lbAudioOutputGainC);
+            groupBox4.Controls.Add(tbAudioOutputGainC);
+            groupBox4.Controls.Add(label67);
+            groupBox4.Controls.Add(lbAudioOutputGainL);
+            groupBox4.Controls.Add(tbAudioOutputGainL);
+            groupBox4.Controls.Add(label69);
+            groupBox4.Location = new System.Drawing.Point(10, 494);
+            groupBox4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox4.Size = new System.Drawing.Size(482, 331);
+            groupBox4.TabIndex = 4;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Output gains (dB)";
+            // 
+            // lbAudioOutputGainLFE
+            // 
+            lbAudioOutputGainLFE.AutoSize = true;
+            lbAudioOutputGainLFE.Location = new System.Drawing.Point(416, 284);
+            lbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainLFE.Name = "lbAudioOutputGainLFE";
+            lbAudioOutputGainLFE.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainLFE.TabIndex = 17;
+            lbAudioOutputGainLFE.Text = "0.0";
+            // 
+            // tbAudioOutputGainLFE
+            // 
+            tbAudioOutputGainLFE.Location = new System.Drawing.Point(402, 80);
+            tbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainLFE.Maximum = 200;
+            tbAudioOutputGainLFE.Minimum = -200;
+            tbAudioOutputGainLFE.Name = "tbAudioOutputGainLFE";
+            tbAudioOutputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainLFE.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainLFE.TabIndex = 16;
+            tbAudioOutputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainLFE.Scroll += tbAudioOutputGainLFE_Scroll;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Location = new System.Drawing.Point(418, 48);
+            label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label55.Name = "label55";
+            label55.Size = new System.Drawing.Size(38, 25);
+            label55.TabIndex = 15;
+            label55.Text = "LFE";
+            // 
+            // lbAudioOutputGainSR
+            // 
+            lbAudioOutputGainSR.AutoSize = true;
+            lbAudioOutputGainSR.Location = new System.Drawing.Point(336, 284);
+            lbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainSR.Name = "lbAudioOutputGainSR";
+            lbAudioOutputGainSR.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainSR.TabIndex = 14;
+            lbAudioOutputGainSR.Text = "0.0";
+            // 
+            // tbAudioOutputGainSR
+            // 
+            tbAudioOutputGainSR.Location = new System.Drawing.Point(322, 80);
+            tbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainSR.Maximum = 200;
+            tbAudioOutputGainSR.Minimum = -200;
+            tbAudioOutputGainSR.Name = "tbAudioOutputGainSR";
+            tbAudioOutputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainSR.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainSR.TabIndex = 13;
+            tbAudioOutputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainSR.Scroll += tbAudioOutputGainSR_Scroll;
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.Location = new System.Drawing.Point(342, 48);
+            label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label57.Name = "label57";
+            label57.Size = new System.Drawing.Size(33, 25);
+            label57.TabIndex = 12;
+            label57.Text = "SR";
+            // 
+            // lbAudioOutputGainSL
+            // 
+            lbAudioOutputGainSL.AutoSize = true;
+            lbAudioOutputGainSL.Location = new System.Drawing.Point(256, 284);
+            lbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainSL.Name = "lbAudioOutputGainSL";
+            lbAudioOutputGainSL.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainSL.TabIndex = 11;
+            lbAudioOutputGainSL.Text = "0.0";
+            // 
+            // tbAudioOutputGainSL
+            // 
+            tbAudioOutputGainSL.Location = new System.Drawing.Point(242, 80);
+            tbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainSL.Maximum = 200;
+            tbAudioOutputGainSL.Minimum = -200;
+            tbAudioOutputGainSL.Name = "tbAudioOutputGainSL";
+            tbAudioOutputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainSL.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainSL.TabIndex = 10;
+            tbAudioOutputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainSL.Scroll += tbAudioOutputGainSL_Scroll;
+            // 
+            // label59
+            // 
+            label59.AutoSize = true;
+            label59.Location = new System.Drawing.Point(262, 48);
+            label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label59.Name = "label59";
+            label59.Size = new System.Drawing.Size(30, 25);
+            label59.TabIndex = 9;
+            label59.Text = "SL";
+            // 
+            // lbAudioOutputGainR
+            // 
+            lbAudioOutputGainR.AutoSize = true;
+            lbAudioOutputGainR.Location = new System.Drawing.Point(176, 284);
+            lbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainR.Name = "lbAudioOutputGainR";
+            lbAudioOutputGainR.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainR.TabIndex = 8;
+            lbAudioOutputGainR.Text = "0.0";
+            // 
+            // tbAudioOutputGainR
+            // 
+            tbAudioOutputGainR.Location = new System.Drawing.Point(162, 80);
+            tbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainR.Maximum = 200;
+            tbAudioOutputGainR.Minimum = -200;
+            tbAudioOutputGainR.Name = "tbAudioOutputGainR";
+            tbAudioOutputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainR.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainR.TabIndex = 7;
+            tbAudioOutputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainR.Scroll += tbAudioOutputGainR_Scroll;
+            // 
+            // label61
+            // 
+            label61.AutoSize = true;
+            label61.Location = new System.Drawing.Point(190, 48);
+            label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label61.Name = "label61";
+            label61.Size = new System.Drawing.Size(23, 25);
+            label61.TabIndex = 6;
+            label61.Text = "R";
+            // 
+            // lbAudioOutputGainC
+            // 
+            lbAudioOutputGainC.AutoSize = true;
+            lbAudioOutputGainC.Location = new System.Drawing.Point(96, 284);
+            lbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainC.Name = "lbAudioOutputGainC";
+            lbAudioOutputGainC.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainC.TabIndex = 5;
+            lbAudioOutputGainC.Text = "0.0";
+            // 
+            // tbAudioOutputGainC
+            // 
+            tbAudioOutputGainC.Location = new System.Drawing.Point(82, 80);
+            tbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainC.Maximum = 200;
+            tbAudioOutputGainC.Minimum = -200;
+            tbAudioOutputGainC.Name = "tbAudioOutputGainC";
+            tbAudioOutputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainC.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainC.TabIndex = 4;
+            tbAudioOutputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainC.Scroll += tbAudioOutputGainC_Scroll;
+            // 
+            // label67
+            // 
+            label67.AutoSize = true;
+            label67.Location = new System.Drawing.Point(110, 48);
+            label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label67.Name = "label67";
+            label67.Size = new System.Drawing.Size(23, 25);
+            label67.TabIndex = 3;
+            label67.Text = "C";
+            // 
+            // lbAudioOutputGainL
+            // 
+            lbAudioOutputGainL.AutoSize = true;
+            lbAudioOutputGainL.Location = new System.Drawing.Point(16, 284);
+            lbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainL.Name = "lbAudioOutputGainL";
+            lbAudioOutputGainL.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainL.TabIndex = 2;
+            lbAudioOutputGainL.Text = "0.0";
+            // 
+            // tbAudioOutputGainL
+            // 
+            tbAudioOutputGainL.Location = new System.Drawing.Point(2, 80);
+            tbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainL.Maximum = 200;
+            tbAudioOutputGainL.Minimum = -200;
+            tbAudioOutputGainL.Name = "tbAudioOutputGainL";
+            tbAudioOutputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainL.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainL.TabIndex = 1;
+            tbAudioOutputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainL.Scroll += tbAudioOutputGainL_Scroll;
+            // 
+            // label69
+            // 
+            label69.AutoSize = true;
+            label69.Location = new System.Drawing.Point(30, 48);
+            label69.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label69.Name = "label69";
+            label69.Size = new System.Drawing.Size(20, 25);
+            label69.TabIndex = 0;
+            label69.Text = "L";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(lbAudioInputGainLFE);
+            groupBox1.Controls.Add(tbAudioInputGainLFE);
+            groupBox1.Controls.Add(label53);
+            groupBox1.Controls.Add(lbAudioInputGainSR);
+            groupBox1.Controls.Add(tbAudioInputGainSR);
+            groupBox1.Controls.Add(label51);
+            groupBox1.Controls.Add(lbAudioInputGainSL);
+            groupBox1.Controls.Add(tbAudioInputGainSL);
+            groupBox1.Controls.Add(label49);
+            groupBox1.Controls.Add(lbAudioInputGainR);
+            groupBox1.Controls.Add(tbAudioInputGainR);
+            groupBox1.Controls.Add(label47);
+            groupBox1.Controls.Add(lbAudioInputGainC);
+            groupBox1.Controls.Add(tbAudioInputGainC);
+            groupBox1.Controls.Add(label44);
+            groupBox1.Controls.Add(lbAudioInputGainL);
+            groupBox1.Controls.Add(tbAudioInputGainL);
+            groupBox1.Controls.Add(label40);
+            groupBox1.Location = new System.Drawing.Point(10, 152);
+            groupBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox1.Size = new System.Drawing.Size(482, 331);
+            groupBox1.TabIndex = 3;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Input gains (dB)";
+            // 
+            // lbAudioInputGainLFE
+            // 
+            lbAudioInputGainLFE.AutoSize = true;
+            lbAudioInputGainLFE.Location = new System.Drawing.Point(416, 284);
+            lbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainLFE.Name = "lbAudioInputGainLFE";
+            lbAudioInputGainLFE.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainLFE.TabIndex = 17;
+            lbAudioInputGainLFE.Text = "0.0";
+            // 
+            // tbAudioInputGainLFE
+            // 
+            tbAudioInputGainLFE.Location = new System.Drawing.Point(402, 80);
+            tbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainLFE.Maximum = 200;
+            tbAudioInputGainLFE.Minimum = -200;
+            tbAudioInputGainLFE.Name = "tbAudioInputGainLFE";
+            tbAudioInputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainLFE.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainLFE.TabIndex = 16;
+            tbAudioInputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainLFE.Scroll += tbAudioInputGainLFE_Scroll;
+            // 
+            // label53
+            // 
+            label53.AutoSize = true;
+            label53.Location = new System.Drawing.Point(418, 48);
+            label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label53.Name = "label53";
+            label53.Size = new System.Drawing.Size(38, 25);
+            label53.TabIndex = 15;
+            label53.Text = "LFE";
+            // 
+            // lbAudioInputGainSR
+            // 
+            lbAudioInputGainSR.AutoSize = true;
+            lbAudioInputGainSR.Location = new System.Drawing.Point(336, 284);
+            lbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainSR.Name = "lbAudioInputGainSR";
+            lbAudioInputGainSR.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainSR.TabIndex = 14;
+            lbAudioInputGainSR.Text = "0.0";
+            // 
+            // tbAudioInputGainSR
+            // 
+            tbAudioInputGainSR.Location = new System.Drawing.Point(322, 80);
+            tbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainSR.Maximum = 200;
+            tbAudioInputGainSR.Minimum = -200;
+            tbAudioInputGainSR.Name = "tbAudioInputGainSR";
+            tbAudioInputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainSR.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainSR.TabIndex = 13;
+            tbAudioInputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainSR.Scroll += tbAudioInputGainSR_Scroll;
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Location = new System.Drawing.Point(342, 48);
+            label51.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label51.Name = "label51";
+            label51.Size = new System.Drawing.Size(33, 25);
+            label51.TabIndex = 12;
+            label51.Text = "SR";
+            // 
+            // lbAudioInputGainSL
+            // 
+            lbAudioInputGainSL.AutoSize = true;
+            lbAudioInputGainSL.Location = new System.Drawing.Point(256, 284);
+            lbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainSL.Name = "lbAudioInputGainSL";
+            lbAudioInputGainSL.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainSL.TabIndex = 11;
+            lbAudioInputGainSL.Text = "0.0";
+            // 
+            // tbAudioInputGainSL
+            // 
+            tbAudioInputGainSL.Location = new System.Drawing.Point(242, 80);
+            tbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainSL.Maximum = 200;
+            tbAudioInputGainSL.Minimum = -200;
+            tbAudioInputGainSL.Name = "tbAudioInputGainSL";
+            tbAudioInputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainSL.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainSL.TabIndex = 10;
+            tbAudioInputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainSL.Scroll += tbAudioInputGainSL_Scroll;
+            // 
+            // label49
+            // 
+            label49.AutoSize = true;
+            label49.Location = new System.Drawing.Point(262, 48);
+            label49.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label49.Name = "label49";
+            label49.Size = new System.Drawing.Size(30, 25);
+            label49.TabIndex = 9;
+            label49.Text = "SL";
+            // 
+            // lbAudioInputGainR
+            // 
+            lbAudioInputGainR.AutoSize = true;
+            lbAudioInputGainR.Location = new System.Drawing.Point(176, 284);
+            lbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainR.Name = "lbAudioInputGainR";
+            lbAudioInputGainR.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainR.TabIndex = 8;
+            lbAudioInputGainR.Text = "0.0";
+            // 
+            // tbAudioInputGainR
+            // 
+            tbAudioInputGainR.Location = new System.Drawing.Point(162, 80);
+            tbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainR.Maximum = 200;
+            tbAudioInputGainR.Minimum = -200;
+            tbAudioInputGainR.Name = "tbAudioInputGainR";
+            tbAudioInputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainR.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainR.TabIndex = 7;
+            tbAudioInputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainR.Scroll += tbAudioInputGainR_Scroll;
+            // 
+            // label47
+            // 
+            label47.AutoSize = true;
+            label47.Location = new System.Drawing.Point(190, 48);
+            label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label47.Name = "label47";
+            label47.Size = new System.Drawing.Size(23, 25);
+            label47.TabIndex = 6;
+            label47.Text = "R";
+            // 
+            // lbAudioInputGainC
+            // 
+            lbAudioInputGainC.AutoSize = true;
+            lbAudioInputGainC.Location = new System.Drawing.Point(96, 284);
+            lbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainC.Name = "lbAudioInputGainC";
+            lbAudioInputGainC.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainC.TabIndex = 5;
+            lbAudioInputGainC.Text = "0.0";
+            // 
+            // tbAudioInputGainC
+            // 
+            tbAudioInputGainC.Location = new System.Drawing.Point(82, 80);
+            tbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainC.Maximum = 200;
+            tbAudioInputGainC.Minimum = -200;
+            tbAudioInputGainC.Name = "tbAudioInputGainC";
+            tbAudioInputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainC.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainC.TabIndex = 4;
+            tbAudioInputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainC.Scroll += tbAudioInputGainC_Scroll;
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.Location = new System.Drawing.Point(110, 48);
+            label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label44.Name = "label44";
+            label44.Size = new System.Drawing.Size(23, 25);
+            label44.TabIndex = 3;
+            label44.Text = "C";
+            // 
+            // lbAudioInputGainL
+            // 
+            lbAudioInputGainL.AutoSize = true;
+            lbAudioInputGainL.Location = new System.Drawing.Point(16, 284);
+            lbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainL.Name = "lbAudioInputGainL";
+            lbAudioInputGainL.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainL.TabIndex = 2;
+            lbAudioInputGainL.Text = "0.0";
+            // 
+            // tbAudioInputGainL
+            // 
+            tbAudioInputGainL.Location = new System.Drawing.Point(2, 80);
+            tbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainL.Maximum = 200;
+            tbAudioInputGainL.Minimum = -200;
+            tbAudioInputGainL.Name = "tbAudioInputGainL";
+            tbAudioInputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainL.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainL.TabIndex = 1;
+            tbAudioInputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainL.Scroll += tbAudioInputGainL_Scroll;
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new System.Drawing.Point(30, 48);
+            label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label40.Name = "label40";
+            label40.Size = new System.Drawing.Size(20, 25);
+            label40.TabIndex = 0;
+            label40.Text = "L";
+            // 
+            // cbAudioAutoGain
+            // 
+            cbAudioAutoGain.AutoSize = true;
+            cbAudioAutoGain.Location = new System.Drawing.Point(222, 91);
+            cbAudioAutoGain.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioAutoGain.Name = "cbAudioAutoGain";
+            cbAudioAutoGain.Size = new System.Drawing.Size(116, 29);
+            cbAudioAutoGain.TabIndex = 2;
+            cbAudioAutoGain.Text = "Auto gain";
+            cbAudioAutoGain.UseVisualStyleBackColor = true;
+            cbAudioAutoGain.CheckedChanged += cbAudioAutoGain_CheckedChanged;
+            // 
+            // cbAudioNormalize
+            // 
+            cbAudioNormalize.AutoSize = true;
+            cbAudioNormalize.Location = new System.Drawing.Point(64, 91);
+            cbAudioNormalize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioNormalize.Name = "cbAudioNormalize";
+            cbAudioNormalize.Size = new System.Drawing.Size(118, 29);
+            cbAudioNormalize.TabIndex = 1;
+            cbAudioNormalize.Text = "Normalize";
+            cbAudioNormalize.UseVisualStyleBackColor = true;
+            cbAudioNormalize.CheckedChanged += cbAudioNormalize_CheckedChanged;
+            // 
+            // cbAudioEnhancementEnabled
+            // 
+            cbAudioEnhancementEnabled.AutoSize = true;
+            cbAudioEnhancementEnabled.Location = new System.Drawing.Point(28, 30);
+            cbAudioEnhancementEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioEnhancementEnabled.Name = "cbAudioEnhancementEnabled";
+            cbAudioEnhancementEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioEnhancementEnabled.TabIndex = 0;
+            cbAudioEnhancementEnabled.Text = "Enabled";
+            cbAudioEnhancementEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage11
+            // 
+            tabPage11.Controls.Add(label31);
+            tabPage11.Controls.Add(tabControl18);
+            tabPage11.Controls.Add(cbAudioEffectsEnabled);
+            tabPage11.Location = new System.Drawing.Point(4, 34);
+            tabPage11.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage11.Name = "tabPage11";
+            tabPage11.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage11.Size = new System.Drawing.Size(508, 957);
+            tabPage11.TabIndex = 5;
+            tabPage11.Text = "Audio effects";
+            tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Location = new System.Drawing.Point(156, 19);
+            label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label31.Name = "label31";
+            label31.Size = new System.Drawing.Size(313, 25);
+            label31.TabIndex = 4;
+            label31.Text = "Much more effects available using API";
+            // 
+            // tabControl18
+            // 
+            tabControl18.Controls.Add(tabPage71);
+            tabControl18.Controls.Add(tabPage72);
+            tabControl18.Controls.Add(tabPage73);
+            tabControl18.Controls.Add(tabPage75);
+            tabControl18.Controls.Add(tabPage76);
+            tabControl18.Controls.Add(tabPage27);
+            tabControl18.Location = new System.Drawing.Point(12, 59);
+            tabControl18.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl18.Name = "tabControl18";
+            tabControl18.SelectedIndex = 0;
+            tabControl18.Size = new System.Drawing.Size(471, 850);
+            tabControl18.TabIndex = 3;
+            // 
+            // tabPage71
+            // 
+            tabPage71.Controls.Add(label231);
+            tabPage71.Controls.Add(label230);
+            tabPage71.Controls.Add(tbAudAmplifyAmp);
+            tabPage71.Controls.Add(label95);
+            tabPage71.Controls.Add(cbAudAmplifyEnabled);
+            tabPage71.Location = new System.Drawing.Point(4, 34);
+            tabPage71.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage71.Name = "tabPage71";
+            tabPage71.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage71.Size = new System.Drawing.Size(463, 812);
+            tabPage71.TabIndex = 0;
+            tabPage71.Text = "Amplify";
+            tabPage71.UseVisualStyleBackColor = true;
+            // 
+            // label231
+            // 
+            label231.AutoSize = true;
+            label231.Location = new System.Drawing.Point(356, 102);
+            label231.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label231.Name = "label231";
+            label231.Size = new System.Drawing.Size(57, 25);
+            label231.TabIndex = 5;
+            label231.Text = "400%";
+            // 
+            // label230
+            // 
+            label230.AutoSize = true;
+            label230.Location = new System.Drawing.Point(112, 102);
+            label230.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label230.Name = "label230";
+            label230.Size = new System.Drawing.Size(57, 25);
+            label230.TabIndex = 4;
+            label230.Text = "100%";
+            // 
+            // tbAudAmplifyAmp
+            // 
+            tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window;
+            tbAudAmplifyAmp.Location = new System.Drawing.Point(28, 131);
+            tbAudAmplifyAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudAmplifyAmp.Maximum = 4000;
+            tbAudAmplifyAmp.Name = "tbAudAmplifyAmp";
+            tbAudAmplifyAmp.Size = new System.Drawing.Size(382, 69);
+            tbAudAmplifyAmp.TabIndex = 3;
+            tbAudAmplifyAmp.TickFrequency = 50;
+            tbAudAmplifyAmp.Value = 1000;
+            tbAudAmplifyAmp.Scroll += tbAudAmplifyAmp_Scroll;
+            // 
+            // label95
+            // 
+            label95.AutoSize = true;
+            label95.Location = new System.Drawing.Point(22, 102);
+            label95.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label95.Name = "label95";
+            label95.Size = new System.Drawing.Size(72, 25);
+            label95.TabIndex = 2;
+            label95.Text = "Volume";
+            // 
+            // cbAudAmplifyEnabled
+            // 
+            cbAudAmplifyEnabled.AutoSize = true;
+            cbAudAmplifyEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled";
+            cbAudAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudAmplifyEnabled.TabIndex = 1;
+            cbAudAmplifyEnabled.Text = "Enabled";
+            cbAudAmplifyEnabled.UseVisualStyleBackColor = true;
+            cbAudAmplifyEnabled.CheckedChanged += cbAudAmplifyEnabled_CheckedChanged;
+            // 
+            // tabPage72
+            // 
+            tabPage72.Controls.Add(btAudEqRefresh);
+            tabPage72.Controls.Add(cbAudEqualizerPreset);
+            tabPage72.Controls.Add(label243);
+            tabPage72.Controls.Add(label242);
+            tabPage72.Controls.Add(label241);
+            tabPage72.Controls.Add(label240);
+            tabPage72.Controls.Add(label239);
+            tabPage72.Controls.Add(label238);
+            tabPage72.Controls.Add(label237);
+            tabPage72.Controls.Add(label236);
+            tabPage72.Controls.Add(label235);
+            tabPage72.Controls.Add(label234);
+            tabPage72.Controls.Add(label233);
+            tabPage72.Controls.Add(label232);
+            tabPage72.Controls.Add(tbAudEq9);
+            tabPage72.Controls.Add(tbAudEq8);
+            tabPage72.Controls.Add(tbAudEq7);
+            tabPage72.Controls.Add(tbAudEq6);
+            tabPage72.Controls.Add(tbAudEq5);
+            tabPage72.Controls.Add(tbAudEq4);
+            tabPage72.Controls.Add(tbAudEq3);
+            tabPage72.Controls.Add(tbAudEq2);
+            tabPage72.Controls.Add(tbAudEq1);
+            tabPage72.Controls.Add(tbAudEq0);
+            tabPage72.Controls.Add(cbAudEqualizerEnabled);
+            tabPage72.Location = new System.Drawing.Point(4, 34);
+            tabPage72.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage72.Name = "tabPage72";
+            tabPage72.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage72.Size = new System.Drawing.Size(463, 812);
+            tabPage72.TabIndex = 1;
+            tabPage72.Text = "Equalizer";
+            tabPage72.UseVisualStyleBackColor = true;
+            // 
+            // btAudEqRefresh
+            // 
+            btAudEqRefresh.Location = new System.Drawing.Point(291, 420);
+            btAudEqRefresh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudEqRefresh.Name = "btAudEqRefresh";
+            btAudEqRefresh.Size = new System.Drawing.Size(124, 44);
+            btAudEqRefresh.TabIndex = 26;
+            btAudEqRefresh.Text = "Refresh";
+            btAudEqRefresh.UseVisualStyleBackColor = true;
+            btAudEqRefresh.Click += btAudEqRefresh_Click;
+            // 
+            // cbAudEqualizerPreset
+            // 
+            cbAudEqualizerPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAudEqualizerPreset.FormattingEnabled = true;
+            cbAudEqualizerPreset.Location = new System.Drawing.Point(102, 345);
+            cbAudEqualizerPreset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudEqualizerPreset.Name = "cbAudEqualizerPreset";
+            cbAudEqualizerPreset.Size = new System.Drawing.Size(313, 33);
+            cbAudEqualizerPreset.TabIndex = 25;
+            cbAudEqualizerPreset.SelectedIndexChanged += cbAudEqualizerPreset_SelectedIndexChanged;
+            // 
+            // label243
+            // 
+            label243.AutoSize = true;
+            label243.Location = new System.Drawing.Point(22, 352);
+            label243.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label243.Name = "label243";
+            label243.Size = new System.Drawing.Size(60, 25);
+            label243.TabIndex = 24;
+            label243.Text = "Preset";
+            // 
+            // label242
+            // 
+            label242.AutoSize = true;
+            label242.Location = new System.Drawing.Point(342, 300);
+            label242.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label242.Name = "label242";
+            label242.Size = new System.Drawing.Size(42, 25);
+            label242.TabIndex = 23;
+            label242.Text = "16K";
+            // 
+            // label241
+            // 
+            label241.AutoSize = true;
+            label241.Location = new System.Drawing.Point(308, 300);
+            label241.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label241.Name = "label241";
+            label241.Size = new System.Drawing.Size(42, 25);
+            label241.TabIndex = 22;
+            label241.Text = "14K";
+            // 
+            // label240
+            // 
+            label240.AutoSize = true;
+            label240.Location = new System.Drawing.Point(270, 300);
+            label240.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label240.Name = "label240";
+            label240.Size = new System.Drawing.Size(42, 25);
+            label240.TabIndex = 21;
+            label240.Text = "12K";
+            // 
+            // label239
+            // 
+            label239.AutoSize = true;
+            label239.Location = new System.Drawing.Point(238, 300);
+            label239.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label239.Name = "label239";
+            label239.Size = new System.Drawing.Size(32, 25);
+            label239.TabIndex = 20;
+            label239.Text = "6K";
+            // 
+            // label238
+            // 
+            label238.AutoSize = true;
+            label238.Location = new System.Drawing.Point(202, 300);
+            label238.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label238.Name = "label238";
+            label238.Size = new System.Drawing.Size(32, 25);
+            label238.TabIndex = 19;
+            label238.Text = "3K";
+            // 
+            // label237
+            // 
+            label237.AutoSize = true;
+            label237.Location = new System.Drawing.Point(170, 300);
+            label237.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label237.Name = "label237";
+            label237.Size = new System.Drawing.Size(32, 25);
+            label237.TabIndex = 18;
+            label237.Text = "1K";
+            // 
+            // label236
+            // 
+            label236.AutoSize = true;
+            label236.Location = new System.Drawing.Point(132, 300);
+            label236.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label236.Name = "label236";
+            label236.Size = new System.Drawing.Size(42, 25);
+            label236.TabIndex = 17;
+            label236.Text = "600";
+            // 
+            // label235
+            // 
+            label235.AutoSize = true;
+            label235.Location = new System.Drawing.Point(98, 300);
+            label235.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label235.Name = "label235";
+            label235.Size = new System.Drawing.Size(42, 25);
+            label235.TabIndex = 16;
+            label235.Text = "310";
+            // 
+            // label234
+            // 
+            label234.AutoSize = true;
+            label234.Location = new System.Drawing.Point(60, 300);
+            label234.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label234.Name = "label234";
+            label234.Size = new System.Drawing.Size(42, 25);
+            label234.TabIndex = 15;
+            label234.Text = "170";
+            // 
+            // label233
+            // 
+            label233.AutoSize = true;
+            label233.Location = new System.Drawing.Point(30, 300);
+            label233.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label233.Name = "label233";
+            label233.Size = new System.Drawing.Size(32, 25);
+            label233.TabIndex = 14;
+            label233.Text = "60";
+            // 
+            // label232
+            // 
+            label232.AutoSize = true;
+            label232.Location = new System.Drawing.Point(198, 64);
+            label232.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label232.Name = "label232";
+            label232.Size = new System.Drawing.Size(22, 25);
+            label232.TabIndex = 13;
+            label232.Text = "0";
+            // 
+            // tbAudEq9
+            // 
+            tbAudEq9.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq9.Location = new System.Drawing.Point(342, 94);
+            tbAudEq9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq9.Maximum = 100;
+            tbAudEq9.Minimum = -100;
+            tbAudEq9.Name = "tbAudEq9";
+            tbAudEq9.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq9.Size = new System.Drawing.Size(69, 200);
+            tbAudEq9.TabIndex = 12;
+            tbAudEq9.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq9.Scroll += tbAudEq9_Scroll;
+            // 
+            // tbAudEq8
+            // 
+            tbAudEq8.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq8.Location = new System.Drawing.Point(308, 94);
+            tbAudEq8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq8.Maximum = 100;
+            tbAudEq8.Minimum = -100;
+            tbAudEq8.Name = "tbAudEq8";
+            tbAudEq8.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq8.Size = new System.Drawing.Size(69, 200);
+            tbAudEq8.TabIndex = 11;
+            tbAudEq8.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq8.Scroll += tbAudEq8_Scroll;
+            // 
+            // tbAudEq7
+            // 
+            tbAudEq7.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq7.Location = new System.Drawing.Point(270, 94);
+            tbAudEq7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq7.Maximum = 100;
+            tbAudEq7.Minimum = -100;
+            tbAudEq7.Name = "tbAudEq7";
+            tbAudEq7.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq7.Size = new System.Drawing.Size(69, 200);
+            tbAudEq7.TabIndex = 10;
+            tbAudEq7.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq7.Scroll += tbAudEq7_Scroll;
+            // 
+            // tbAudEq6
+            // 
+            tbAudEq6.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq6.Location = new System.Drawing.Point(236, 94);
+            tbAudEq6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq6.Maximum = 100;
+            tbAudEq6.Minimum = -100;
+            tbAudEq6.Name = "tbAudEq6";
+            tbAudEq6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq6.Size = new System.Drawing.Size(69, 200);
+            tbAudEq6.TabIndex = 9;
+            tbAudEq6.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq6.Scroll += tbAudEq6_Scroll;
+            // 
+            // tbAudEq5
+            // 
+            tbAudEq5.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq5.Location = new System.Drawing.Point(200, 94);
+            tbAudEq5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq5.Maximum = 100;
+            tbAudEq5.Minimum = -100;
+            tbAudEq5.Name = "tbAudEq5";
+            tbAudEq5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq5.Size = new System.Drawing.Size(69, 200);
+            tbAudEq5.TabIndex = 8;
+            tbAudEq5.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq5.Scroll += tbAudEq5_Scroll;
+            // 
+            // tbAudEq4
+            // 
+            tbAudEq4.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq4.Location = new System.Drawing.Point(168, 94);
+            tbAudEq4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq4.Maximum = 100;
+            tbAudEq4.Minimum = -100;
+            tbAudEq4.Name = "tbAudEq4";
+            tbAudEq4.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq4.Size = new System.Drawing.Size(69, 200);
+            tbAudEq4.TabIndex = 7;
+            tbAudEq4.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq4.Scroll += tbAudEq4_Scroll;
+            // 
+            // tbAudEq3
+            // 
+            tbAudEq3.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq3.Location = new System.Drawing.Point(131, 94);
+            tbAudEq3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq3.Maximum = 100;
+            tbAudEq3.Minimum = -100;
+            tbAudEq3.Name = "tbAudEq3";
+            tbAudEq3.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq3.Size = new System.Drawing.Size(69, 200);
+            tbAudEq3.TabIndex = 6;
+            tbAudEq3.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq3.Scroll += tbAudEq3_Scroll;
+            // 
+            // tbAudEq2
+            // 
+            tbAudEq2.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq2.Location = new System.Drawing.Point(98, 94);
+            tbAudEq2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq2.Maximum = 100;
+            tbAudEq2.Minimum = -100;
+            tbAudEq2.Name = "tbAudEq2";
+            tbAudEq2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq2.Size = new System.Drawing.Size(69, 200);
+            tbAudEq2.TabIndex = 5;
+            tbAudEq2.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq2.Scroll += tbAudEq2_Scroll;
+            // 
+            // tbAudEq1
+            // 
+            tbAudEq1.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq1.Location = new System.Drawing.Point(62, 94);
+            tbAudEq1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq1.Maximum = 100;
+            tbAudEq1.Minimum = -100;
+            tbAudEq1.Name = "tbAudEq1";
+            tbAudEq1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq1.Size = new System.Drawing.Size(69, 200);
+            tbAudEq1.TabIndex = 4;
+            tbAudEq1.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq1.Scroll += tbAudEq1_Scroll;
+            // 
+            // tbAudEq0
+            // 
+            tbAudEq0.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq0.Location = new System.Drawing.Point(29, 94);
+            tbAudEq0.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq0.Maximum = 100;
+            tbAudEq0.Minimum = -100;
+            tbAudEq0.Name = "tbAudEq0";
+            tbAudEq0.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq0.Size = new System.Drawing.Size(69, 200);
+            tbAudEq0.TabIndex = 3;
+            tbAudEq0.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq0.Scroll += tbAudEq0_Scroll;
+            // 
+            // cbAudEqualizerEnabled
+            // 
+            cbAudEqualizerEnabled.AutoSize = true;
+            cbAudEqualizerEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudEqualizerEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled";
+            cbAudEqualizerEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudEqualizerEnabled.TabIndex = 2;
+            cbAudEqualizerEnabled.Text = "Enabled";
+            cbAudEqualizerEnabled.UseVisualStyleBackColor = true;
+            cbAudEqualizerEnabled.CheckedChanged += cbAudEqualizerEnabled_CheckedChanged;
+            // 
+            // tabPage73
+            // 
+            tabPage73.Controls.Add(tbAudRelease);
+            tabPage73.Controls.Add(label248);
+            tabPage73.Controls.Add(label249);
+            tabPage73.Controls.Add(label246);
+            tabPage73.Controls.Add(tbAudAttack);
+            tabPage73.Controls.Add(label247);
+            tabPage73.Controls.Add(label244);
+            tabPage73.Controls.Add(tbAudDynAmp);
+            tabPage73.Controls.Add(label245);
+            tabPage73.Controls.Add(cbAudDynamicAmplifyEnabled);
+            tabPage73.Location = new System.Drawing.Point(4, 34);
+            tabPage73.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage73.Name = "tabPage73";
+            tabPage73.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage73.Size = new System.Drawing.Size(463, 812);
+            tabPage73.TabIndex = 2;
+            tabPage73.Text = "Dynamic amplify";
+            tabPage73.UseVisualStyleBackColor = true;
+            // 
+            // tbAudRelease
+            // 
+            tbAudRelease.BackColor = System.Drawing.SystemColors.Window;
+            tbAudRelease.Location = new System.Drawing.Point(28, 402);
+            tbAudRelease.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudRelease.Maximum = 10000;
+            tbAudRelease.Minimum = 10;
+            tbAudRelease.Name = "tbAudRelease";
+            tbAudRelease.Size = new System.Drawing.Size(382, 69);
+            tbAudRelease.TabIndex = 15;
+            tbAudRelease.TickFrequency = 250;
+            tbAudRelease.Value = 10;
+            tbAudRelease.Scroll += tbAudRelease_Scroll;
+            // 
+            // label248
+            // 
+            label248.AutoSize = true;
+            label248.Location = new System.Drawing.Point(389, 370);
+            label248.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label248.Name = "label248";
+            label248.Size = new System.Drawing.Size(32, 25);
+            label248.TabIndex = 14;
+            label248.Text = "10";
+            // 
+            // label249
+            // 
+            label249.AutoSize = true;
+            label249.Location = new System.Drawing.Point(22, 370);
+            label249.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label249.Name = "label249";
+            label249.Size = new System.Drawing.Size(110, 25);
+            label249.TabIndex = 12;
+            label249.Text = "Release time";
+            // 
+            // label246
+            // 
+            label246.AutoSize = true;
+            label246.Location = new System.Drawing.Point(389, 231);
+            label246.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label246.Name = "label246";
+            label246.Size = new System.Drawing.Size(32, 25);
+            label246.TabIndex = 11;
+            label246.Text = "10";
+            // 
+            // tbAudAttack
+            // 
+            tbAudAttack.BackColor = System.Drawing.SystemColors.Window;
+            tbAudAttack.Location = new System.Drawing.Point(28, 264);
+            tbAudAttack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudAttack.Maximum = 10000;
+            tbAudAttack.Minimum = 10;
+            tbAudAttack.Name = "tbAudAttack";
+            tbAudAttack.Size = new System.Drawing.Size(382, 69);
+            tbAudAttack.TabIndex = 10;
+            tbAudAttack.TickFrequency = 250;
+            tbAudAttack.Value = 10;
+            tbAudAttack.Scroll += tbAudAttack_Scroll;
+            // 
+            // label247
+            // 
+            label247.AutoSize = true;
+            label247.Location = new System.Drawing.Point(22, 231);
+            label247.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label247.Name = "label247";
+            label247.Size = new System.Drawing.Size(62, 25);
+            label247.TabIndex = 9;
+            label247.Text = "Attack";
+            // 
+            // label244
+            // 
+            label244.AutoSize = true;
+            label244.Location = new System.Drawing.Point(389, 102);
+            label244.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label244.Name = "label244";
+            label244.Size = new System.Drawing.Size(52, 25);
+            label244.TabIndex = 8;
+            label244.Text = "1000";
+            // 
+            // tbAudDynAmp
+            // 
+            tbAudDynAmp.BackColor = System.Drawing.SystemColors.Window;
+            tbAudDynAmp.Location = new System.Drawing.Point(28, 131);
+            tbAudDynAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudDynAmp.Maximum = 2000;
+            tbAudDynAmp.Minimum = 100;
+            tbAudDynAmp.Name = "tbAudDynAmp";
+            tbAudDynAmp.Size = new System.Drawing.Size(382, 69);
+            tbAudDynAmp.TabIndex = 7;
+            tbAudDynAmp.TickFrequency = 50;
+            tbAudDynAmp.Value = 1000;
+            tbAudDynAmp.Scroll += tbAudDynAmp_Scroll;
+            // 
+            // label245
+            // 
+            label245.AutoSize = true;
+            label245.Location = new System.Drawing.Point(22, 102);
+            label245.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label245.Name = "label245";
+            label245.Size = new System.Drawing.Size(198, 25);
+            label245.TabIndex = 6;
+            label245.Text = "Maximum amplification";
+            // 
+            // cbAudDynamicAmplifyEnabled
+            // 
+            cbAudDynamicAmplifyEnabled.AutoSize = true;
+            cbAudDynamicAmplifyEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudDynamicAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudDynamicAmplifyEnabled.Name = "cbAudDynamicAmplifyEnabled";
+            cbAudDynamicAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudDynamicAmplifyEnabled.TabIndex = 2;
+            cbAudDynamicAmplifyEnabled.Text = "Enabled";
+            cbAudDynamicAmplifyEnabled.UseVisualStyleBackColor = true;
+            cbAudDynamicAmplifyEnabled.CheckedChanged += cbAudDynamicAmplifyEnabled_CheckedChanged;
+            // 
+            // tabPage75
+            // 
+            tabPage75.Controls.Add(tbAud3DSound);
+            tabPage75.Controls.Add(label253);
+            tabPage75.Controls.Add(cbAudSound3DEnabled);
+            tabPage75.Location = new System.Drawing.Point(4, 34);
+            tabPage75.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage75.Name = "tabPage75";
+            tabPage75.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage75.Size = new System.Drawing.Size(463, 812);
+            tabPage75.TabIndex = 4;
+            tabPage75.Text = "Sound 3D";
+            tabPage75.UseVisualStyleBackColor = true;
+            // 
+            // tbAud3DSound
+            // 
+            tbAud3DSound.BackColor = System.Drawing.SystemColors.Window;
+            tbAud3DSound.Location = new System.Drawing.Point(28, 131);
+            tbAud3DSound.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAud3DSound.Maximum = 10000;
+            tbAud3DSound.Name = "tbAud3DSound";
+            tbAud3DSound.Size = new System.Drawing.Size(382, 69);
+            tbAud3DSound.TabIndex = 19;
+            tbAud3DSound.TickFrequency = 250;
+            tbAud3DSound.Value = 500;
+            tbAud3DSound.Scroll += tbAud3DSound_Scroll;
+            // 
+            // label253
+            // 
+            label253.AutoSize = true;
+            label253.Location = new System.Drawing.Point(22, 102);
+            label253.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label253.Name = "label253";
+            label253.Size = new System.Drawing.Size(142, 25);
+            label253.TabIndex = 18;
+            label253.Text = "3D amplification";
+            // 
+            // cbAudSound3DEnabled
+            // 
+            cbAudSound3DEnabled.AutoSize = true;
+            cbAudSound3DEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudSound3DEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudSound3DEnabled.Name = "cbAudSound3DEnabled";
+            cbAudSound3DEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudSound3DEnabled.TabIndex = 2;
+            cbAudSound3DEnabled.Text = "Enabled";
+            cbAudSound3DEnabled.UseVisualStyleBackColor = true;
+            cbAudSound3DEnabled.CheckedChanged += cbAudSound3DEnabled_CheckedChanged;
+            // 
+            // tabPage76
+            // 
+            tabPage76.Controls.Add(tbAudTrueBass);
+            tabPage76.Controls.Add(label254);
+            tabPage76.Controls.Add(cbAudTrueBassEnabled);
+            tabPage76.Location = new System.Drawing.Point(4, 34);
+            tabPage76.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage76.Name = "tabPage76";
+            tabPage76.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage76.Size = new System.Drawing.Size(463, 812);
+            tabPage76.TabIndex = 5;
+            tabPage76.Text = "True Bass";
+            tabPage76.UseVisualStyleBackColor = true;
+            // 
+            // tbAudTrueBass
+            // 
+            tbAudTrueBass.BackColor = System.Drawing.SystemColors.Window;
+            tbAudTrueBass.Location = new System.Drawing.Point(28, 131);
+            tbAudTrueBass.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudTrueBass.Maximum = 10000;
+            tbAudTrueBass.Name = "tbAudTrueBass";
+            tbAudTrueBass.Size = new System.Drawing.Size(382, 69);
+            tbAudTrueBass.TabIndex = 21;
+            tbAudTrueBass.TickFrequency = 250;
+            tbAudTrueBass.Scroll += tbAudTrueBass_Scroll;
+            // 
+            // label254
+            // 
+            label254.AutoSize = true;
+            label254.Location = new System.Drawing.Point(22, 102);
+            label254.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label254.Name = "label254";
+            label254.Size = new System.Drawing.Size(72, 25);
+            label254.TabIndex = 20;
+            label254.Text = "Volume";
+            // 
+            // cbAudTrueBassEnabled
+            // 
+            cbAudTrueBassEnabled.AutoSize = true;
+            cbAudTrueBassEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudTrueBassEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudTrueBassEnabled.Name = "cbAudTrueBassEnabled";
+            cbAudTrueBassEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudTrueBassEnabled.TabIndex = 2;
+            cbAudTrueBassEnabled.Text = "Enabled";
+            cbAudTrueBassEnabled.UseVisualStyleBackColor = true;
+            cbAudTrueBassEnabled.CheckedChanged += cbAudTrueBassEnabled_CheckedChanged;
+            // 
+            // tabPage27
+            // 
+            tabPage27.Controls.Add(tbAudPitchShift);
+            tabPage27.Controls.Add(label36);
+            tabPage27.Controls.Add(cbAudPitchShiftEnabled);
+            tabPage27.Location = new System.Drawing.Point(4, 34);
+            tabPage27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage27.Name = "tabPage27";
+            tabPage27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage27.Size = new System.Drawing.Size(463, 812);
+            tabPage27.TabIndex = 7;
+            tabPage27.Text = "Pitch shift";
+            tabPage27.UseVisualStyleBackColor = true;
+            // 
+            // tbAudPitchShift
+            // 
+            tbAudPitchShift.BackColor = System.Drawing.SystemColors.Window;
+            tbAudPitchShift.Location = new System.Drawing.Point(28, 131);
+            tbAudPitchShift.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudPitchShift.Maximum = 3000;
+            tbAudPitchShift.Minimum = 100;
+            tbAudPitchShift.Name = "tbAudPitchShift";
+            tbAudPitchShift.Size = new System.Drawing.Size(382, 69);
+            tbAudPitchShift.TabIndex = 26;
+            tbAudPitchShift.TickFrequency = 20;
+            tbAudPitchShift.Value = 1000;
+            tbAudPitchShift.Scroll += tbAudPitchShift_Scroll;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new System.Drawing.Point(22, 102);
+            label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label36.Name = "label36";
+            label36.Size = new System.Drawing.Size(50, 25);
+            label36.TabIndex = 25;
+            label36.Text = "Pitch";
+            // 
+            // cbAudPitchShiftEnabled
+            // 
+            cbAudPitchShiftEnabled.AutoSize = true;
+            cbAudPitchShiftEnabled.Location = new System.Drawing.Point(28, 31);
+            cbAudPitchShiftEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudPitchShiftEnabled.Name = "cbAudPitchShiftEnabled";
+            cbAudPitchShiftEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudPitchShiftEnabled.TabIndex = 24;
+            cbAudPitchShiftEnabled.Text = "Enabled";
+            cbAudPitchShiftEnabled.UseVisualStyleBackColor = true;
+            cbAudPitchShiftEnabled.CheckedChanged += cbAudPitchShiftEnabled_CheckedChanged;
+            // 
+            // cbAudioEffectsEnabled
+            // 
+            cbAudioEffectsEnabled.AutoSize = true;
+            cbAudioEffectsEnabled.Location = new System.Drawing.Point(12, 16);
+            cbAudioEffectsEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioEffectsEnabled.Name = "cbAudioEffectsEnabled";
+            cbAudioEffectsEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioEffectsEnabled.TabIndex = 2;
+            cbAudioEffectsEnabled.Text = "Enabled";
+            cbAudioEffectsEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage50
+            // 
+            tabPage50.Controls.Add(btAudioChannelMapperClear);
+            tabPage50.Controls.Add(groupBox41);
+            tabPage50.Controls.Add(label307);
+            tabPage50.Controls.Add(edAudioChannelMapperOutputChannels);
+            tabPage50.Controls.Add(label306);
+            tabPage50.Controls.Add(lbAudioChannelMapperRoutes);
+            tabPage50.Controls.Add(cbAudioChannelMapperEnabled);
+            tabPage50.Location = new System.Drawing.Point(4, 34);
+            tabPage50.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage50.Name = "tabPage50";
+            tabPage50.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage50.Size = new System.Drawing.Size(508, 957);
+            tabPage50.TabIndex = 13;
+            tabPage50.Text = "Audio channel mapper";
+            tabPage50.UseVisualStyleBackColor = true;
+            // 
+            // btAudioChannelMapperClear
+            // 
+            btAudioChannelMapperClear.Location = new System.Drawing.Point(340, 422);
+            btAudioChannelMapperClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudioChannelMapperClear.Name = "btAudioChannelMapperClear";
+            btAudioChannelMapperClear.Size = new System.Drawing.Size(124, 44);
+            btAudioChannelMapperClear.TabIndex = 21;
+            btAudioChannelMapperClear.Text = "Clear";
+            btAudioChannelMapperClear.UseVisualStyleBackColor = true;
+            btAudioChannelMapperClear.Click += btAudioChannelMapperClear_Click;
+            // 
+            // groupBox41
+            // 
+            groupBox41.Controls.Add(btAudioChannelMapperAddNewRoute);
+            groupBox41.Controls.Add(label311);
+            groupBox41.Controls.Add(tbAudioChannelMapperVolume);
+            groupBox41.Controls.Add(label310);
+            groupBox41.Controls.Add(edAudioChannelMapperTargetChannel);
+            groupBox41.Controls.Add(label309);
+            groupBox41.Controls.Add(edAudioChannelMapperSourceChannel);
+            groupBox41.Controls.Add(label308);
+            groupBox41.Location = new System.Drawing.Point(10, 480);
+            groupBox41.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox41.Name = "groupBox41";
+            groupBox41.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox41.Size = new System.Drawing.Size(478, 330);
+            groupBox41.TabIndex = 20;
+            groupBox41.TabStop = false;
+            groupBox41.Text = "Add new route";
+            // 
+            // btAudioChannelMapperAddNewRoute
+            // 
+            btAudioChannelMapperAddNewRoute.Location = new System.Drawing.Point(180, 252);
+            btAudioChannelMapperAddNewRoute.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudioChannelMapperAddNewRoute.Name = "btAudioChannelMapperAddNewRoute";
+            btAudioChannelMapperAddNewRoute.Size = new System.Drawing.Size(124, 44);
+            btAudioChannelMapperAddNewRoute.TabIndex = 20;
+            btAudioChannelMapperAddNewRoute.Text = "Add";
+            btAudioChannelMapperAddNewRoute.UseVisualStyleBackColor = true;
+            btAudioChannelMapperAddNewRoute.Click += btAudioChannelMapperAddNewRoute_Click;
+            // 
+            // label311
+            // 
+            label311.AutoSize = true;
+            label311.Location = new System.Drawing.Point(342, 170);
+            label311.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label311.Name = "label311";
+            label311.Size = new System.Drawing.Size(109, 25);
+            label311.TabIndex = 19;
+            label311.Text = "10% - 200%";
+            // 
+            // tbAudioChannelMapperVolume
+            // 
+            tbAudioChannelMapperVolume.Location = new System.Drawing.Point(348, 80);
+            tbAudioChannelMapperVolume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioChannelMapperVolume.Maximum = 2000;
+            tbAudioChannelMapperVolume.Minimum = 100;
+            tbAudioChannelMapperVolume.Name = "tbAudioChannelMapperVolume";
+            tbAudioChannelMapperVolume.Size = new System.Drawing.Size(122, 69);
+            tbAudioChannelMapperVolume.TabIndex = 18;
+            tbAudioChannelMapperVolume.Value = 1000;
+            // 
+            // label310
+            // 
+            label310.AutoSize = true;
+            label310.Location = new System.Drawing.Point(342, 48);
+            label310.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label310.Name = "label310";
+            label310.Size = new System.Drawing.Size(72, 25);
+            label310.TabIndex = 17;
+            label310.Text = "Volume";
+            // 
+            // edAudioChannelMapperTargetChannel
+            // 
+            edAudioChannelMapperTargetChannel.Location = new System.Drawing.Point(180, 80);
+            edAudioChannelMapperTargetChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperTargetChannel.Name = "edAudioChannelMapperTargetChannel";
+            edAudioChannelMapperTargetChannel.Size = new System.Drawing.Size(82, 31);
+            edAudioChannelMapperTargetChannel.TabIndex = 16;
+            edAudioChannelMapperTargetChannel.Text = "0";
+            // 
+            // label309
+            // 
+            label309.AutoSize = true;
+            label309.Location = new System.Drawing.Point(176, 48);
+            label309.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label309.Name = "label309";
+            label309.Size = new System.Drawing.Size(125, 25);
+            label309.TabIndex = 15;
+            label309.Text = "Target channel";
+            // 
+            // edAudioChannelMapperSourceChannel
+            // 
+            edAudioChannelMapperSourceChannel.Location = new System.Drawing.Point(24, 80);
+            edAudioChannelMapperSourceChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperSourceChannel.Name = "edAudioChannelMapperSourceChannel";
+            edAudioChannelMapperSourceChannel.Size = new System.Drawing.Size(82, 31);
+            edAudioChannelMapperSourceChannel.TabIndex = 14;
+            edAudioChannelMapperSourceChannel.Text = "0";
+            // 
+            // label308
+            // 
+            label308.AutoSize = true;
+            label308.Location = new System.Drawing.Point(20, 48);
+            label308.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label308.Name = "label308";
+            label308.Size = new System.Drawing.Size(131, 25);
+            label308.TabIndex = 13;
+            label308.Text = "Source channel";
+            // 
+            // label307
+            // 
+            label307.AutoSize = true;
+            label307.Location = new System.Drawing.Point(16, 194);
+            label307.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label307.Name = "label307";
+            label307.Size = new System.Drawing.Size(66, 25);
+            label307.TabIndex = 19;
+            label307.Text = "Routes";
+            // 
+            // edAudioChannelMapperOutputChannels
+            // 
+            edAudioChannelMapperOutputChannels.Location = new System.Drawing.Point(20, 119);
+            edAudioChannelMapperOutputChannels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperOutputChannels.Name = "edAudioChannelMapperOutputChannels";
+            edAudioChannelMapperOutputChannels.Size = new System.Drawing.Size(66, 31);
+            edAudioChannelMapperOutputChannels.TabIndex = 18;
+            edAudioChannelMapperOutputChannels.Text = "0";
+            // 
+            // label306
+            // 
+            label306.AutoSize = true;
+            label306.Location = new System.Drawing.Point(16, 89);
+            label306.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label306.Name = "label306";
+            label306.Size = new System.Drawing.Size(458, 25);
+            label306.TabIndex = 17;
+            label306.Text = "Output channels count (0 to use original channels count)";
+            // 
+            // lbAudioChannelMapperRoutes
+            // 
+            lbAudioChannelMapperRoutes.FormattingEnabled = true;
+            lbAudioChannelMapperRoutes.ItemHeight = 25;
+            lbAudioChannelMapperRoutes.Location = new System.Drawing.Point(20, 230);
+            lbAudioChannelMapperRoutes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbAudioChannelMapperRoutes.Name = "lbAudioChannelMapperRoutes";
+            lbAudioChannelMapperRoutes.Size = new System.Drawing.Size(442, 179);
+            lbAudioChannelMapperRoutes.TabIndex = 16;
+            // 
+            // cbAudioChannelMapperEnabled
+            // 
+            cbAudioChannelMapperEnabled.AutoSize = true;
+            cbAudioChannelMapperEnabled.Location = new System.Drawing.Point(20, 22);
+            cbAudioChannelMapperEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioChannelMapperEnabled.Name = "cbAudioChannelMapperEnabled";
+            cbAudioChannelMapperEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioChannelMapperEnabled.TabIndex = 15;
+            cbAudioChannelMapperEnabled.Text = "Enabled";
+            cbAudioChannelMapperEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage28
+            // 
+            tabPage28.Controls.Add(tbVUMeterBoost);
+            tabPage28.Controls.Add(label382);
+            tabPage28.Controls.Add(label381);
+            tabPage28.Controls.Add(tbVUMeterAmplification);
+            tabPage28.Controls.Add(cbVUMeterPro);
+            tabPage28.Controls.Add(waveformPainter2);
+            tabPage28.Controls.Add(waveformPainter1);
+            tabPage28.Controls.Add(volumeMeter2);
+            tabPage28.Controls.Add(volumeMeter1);
+            tabPage28.Location = new System.Drawing.Point(4, 34);
+            tabPage28.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage28.Name = "tabPage28";
+            tabPage28.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage28.Size = new System.Drawing.Size(508, 957);
+            tabPage28.TabIndex = 11;
+            tabPage28.Text = "VU meter";
+            tabPage28.UseVisualStyleBackColor = true;
+            // 
+            // tbVUMeterBoost
+            // 
+            tbVUMeterBoost.Location = new System.Drawing.Point(208, 269);
+            tbVUMeterBoost.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVUMeterBoost.Maximum = 30;
+            tbVUMeterBoost.Minimum = 1;
+            tbVUMeterBoost.Name = "tbVUMeterBoost";
+            tbVUMeterBoost.Size = new System.Drawing.Size(172, 69);
+            tbVUMeterBoost.TabIndex = 122;
+            tbVUMeterBoost.Value = 10;
+            tbVUMeterBoost.Scroll += tbVUMeterBoost_Scroll;
+            // 
+            // label382
+            // 
+            label382.AutoSize = true;
+            label382.Location = new System.Drawing.Point(202, 236);
+            label382.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label382.Name = "label382";
+            label382.Size = new System.Drawing.Size(118, 25);
+            label382.TabIndex = 121;
+            label382.Text = "Meters boost";
+            // 
+            // label381
+            // 
+            label381.AutoSize = true;
+            label381.Location = new System.Drawing.Point(202, 111);
+            label381.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label381.Name = "label381";
+            label381.Size = new System.Drawing.Size(209, 25);
+            label381.TabIndex = 120;
+            label381.Text = "Volume amplification (%)";
+            // 
+            // tbVUMeterAmplification
+            // 
+            tbVUMeterAmplification.Location = new System.Drawing.Point(208, 142);
+            tbVUMeterAmplification.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVUMeterAmplification.Maximum = 100;
+            tbVUMeterAmplification.Name = "tbVUMeterAmplification";
+            tbVUMeterAmplification.Size = new System.Drawing.Size(176, 69);
+            tbVUMeterAmplification.TabIndex = 119;
+            tbVUMeterAmplification.Value = 100;
+            tbVUMeterAmplification.Scroll += tbVUMeterAmplification_Scroll;
+            // 
+            // cbVUMeterPro
+            // 
+            cbVUMeterPro.AutoSize = true;
+            cbVUMeterPro.Location = new System.Drawing.Point(38, 45);
+            cbVUMeterPro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVUMeterPro.Name = "cbVUMeterPro";
+            cbVUMeterPro.Size = new System.Drawing.Size(201, 29);
+            cbVUMeterPro.TabIndex = 115;
+            cbVUMeterPro.Text = "Enable VU meter Pro";
+            cbVUMeterPro.UseVisualStyleBackColor = true;
+            // 
+            // waveformPainter2
+            // 
+            waveformPainter2.Boost = 1F;
+            waveformPainter2.Location = new System.Drawing.Point(24, 492);
+            waveformPainter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            waveformPainter2.Name = "waveformPainter2";
+            waveformPainter2.Size = new System.Drawing.Size(450, 116);
+            waveformPainter2.TabIndex = 118;
+            waveformPainter2.Text = "waveformPainter2";
+            // 
+            // waveformPainter1
+            // 
+            waveformPainter1.Boost = 1F;
+            waveformPainter1.Location = new System.Drawing.Point(24, 366);
+            waveformPainter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            waveformPainter1.Name = "waveformPainter1";
+            waveformPainter1.Size = new System.Drawing.Size(450, 116);
+            waveformPainter1.TabIndex = 117;
+            waveformPainter1.Text = "waveformPainter1";
+            // 
+            // volumeMeter2
+            // 
+            volumeMeter2.Amplitude = 0F;
+            volumeMeter2.BackColor = System.Drawing.Color.LightGray;
+            volumeMeter2.Boost = 1F;
+            volumeMeter2.Location = new System.Drawing.Point(100, 111);
+            volumeMeter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            volumeMeter2.MaxDb = 18F;
+            volumeMeter2.MinDb = -60F;
+            volumeMeter2.Name = "volumeMeter2";
+            volumeMeter2.Size = new System.Drawing.Size(38, 242);
+            volumeMeter2.TabIndex = 116;
+            // 
+            // volumeMeter1
+            // 
+            volumeMeter1.Amplitude = 0F;
+            volumeMeter1.BackColor = System.Drawing.Color.LightGray;
+            volumeMeter1.Boost = 1F;
+            volumeMeter1.Location = new System.Drawing.Point(52, 111);
+            volumeMeter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            volumeMeter1.MaxDb = 18F;
+            volumeMeter1.MinDb = -60F;
+            volumeMeter1.Name = "volumeMeter1";
+            volumeMeter1.Size = new System.Drawing.Size(38, 242);
+            volumeMeter1.TabIndex = 114;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(btOSDRenderLayers);
+            tabPage5.Controls.Add(lbOSDLayers);
+            tabPage5.Controls.Add(cbOSDEnabled);
+            tabPage5.Controls.Add(groupBox19);
+            tabPage5.Controls.Add(btOSDClearLayers);
+            tabPage5.Controls.Add(groupBox15);
+            tabPage5.Controls.Add(label108);
+            tabPage5.Location = new System.Drawing.Point(4, 34);
+            tabPage5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage5.Size = new System.Drawing.Size(508, 957);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "OSD";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // btOSDRenderLayers
+            // 
+            btOSDRenderLayers.Location = new System.Drawing.Point(269, 398);
+            btOSDRenderLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDRenderLayers.Name = "btOSDRenderLayers";
+            btOSDRenderLayers.Size = new System.Drawing.Size(209, 44);
+            btOSDRenderLayers.TabIndex = 16;
+            btOSDRenderLayers.Text = "Render layers";
+            btOSDRenderLayers.UseVisualStyleBackColor = true;
+            btOSDRenderLayers.Click += btOSDRenderLayers_Click;
+            // 
+            // lbOSDLayers
+            // 
+            lbOSDLayers.CheckOnClick = true;
+            lbOSDLayers.FormattingEnabled = true;
+            lbOSDLayers.Location = new System.Drawing.Point(28, 131);
+            lbOSDLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbOSDLayers.Name = "lbOSDLayers";
+            lbOSDLayers.Size = new System.Drawing.Size(228, 172);
+            lbOSDLayers.TabIndex = 15;
+            lbOSDLayers.ItemCheck += lbOSDLayers_ItemCheck;
+            // 
+            // cbOSDEnabled
+            // 
+            cbOSDEnabled.AutoSize = true;
+            cbOSDEnabled.Location = new System.Drawing.Point(28, 30);
+            cbOSDEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbOSDEnabled.Name = "cbOSDEnabled";
+            cbOSDEnabled.Size = new System.Drawing.Size(415, 29);
+            cbOSDEnabled.TabIndex = 14;
+            cbOSDEnabled.Text = "Enabled (should be set before playback started)";
+            cbOSDEnabled.UseVisualStyleBackColor = true;
+            // 
+            // groupBox19
+            // 
+            groupBox19.Controls.Add(btOSDClearLayer);
+            groupBox19.Controls.Add(tabControl6);
+            groupBox19.Location = new System.Drawing.Point(24, 455);
+            groupBox19.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox19.Name = "groupBox19";
+            groupBox19.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox19.Size = new System.Drawing.Size(450, 481);
+            groupBox19.TabIndex = 13;
+            groupBox19.TabStop = false;
+            groupBox19.Text = "Selected layer";
+            // 
+            // btOSDClearLayer
+            // 
+            btOSDClearLayer.Location = new System.Drawing.Point(18, 425);
+            btOSDClearLayer.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDClearLayer.Name = "btOSDClearLayer";
+            btOSDClearLayer.Size = new System.Drawing.Size(151, 44);
+            btOSDClearLayer.TabIndex = 2;
+            btOSDClearLayer.Text = "Clear layer";
+            btOSDClearLayer.UseVisualStyleBackColor = true;
+            btOSDClearLayer.Click += btOSDClearLayer_Click;
+            // 
+            // tabControl6
+            // 
+            tabControl6.Controls.Add(tabPage30);
+            tabControl6.Controls.Add(tabPage31);
+            tabControl6.Controls.Add(tabPage32);
+            tabControl6.Location = new System.Drawing.Point(18, 36);
+            tabControl6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl6.Name = "tabControl6";
+            tabControl6.SelectedIndex = 0;
+            tabControl6.Size = new System.Drawing.Size(418, 378);
+            tabControl6.TabIndex = 0;
+            // 
+            // tabPage30
+            // 
+            tabPage30.Controls.Add(btOSDImageDraw);
+            tabPage30.Controls.Add(pnOSDColorKey);
+            tabPage30.Controls.Add(cbOSDImageTranspColor);
+            tabPage30.Controls.Add(edOSDImageTop);
+            tabPage30.Controls.Add(label115);
+            tabPage30.Controls.Add(edOSDImageLeft);
+            tabPage30.Controls.Add(label114);
+            tabPage30.Controls.Add(btOSDSelectImage);
+            tabPage30.Controls.Add(edOSDImageFilename);
+            tabPage30.Controls.Add(label113);
+            tabPage30.Location = new System.Drawing.Point(4, 34);
+            tabPage30.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage30.Name = "tabPage30";
+            tabPage30.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage30.Size = new System.Drawing.Size(410, 340);
+            tabPage30.TabIndex = 1;
+            tabPage30.Text = "Image";
+            tabPage30.UseVisualStyleBackColor = true;
+            // 
+            // btOSDImageDraw
+            // 
+            btOSDImageDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btOSDImageDraw.Location = new System.Drawing.Point(298, 270);
+            btOSDImageDraw.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDImageDraw.Name = "btOSDImageDraw";
+            btOSDImageDraw.Size = new System.Drawing.Size(96, 44);
+            btOSDImageDraw.TabIndex = 47;
+            btOSDImageDraw.Text = "Draw";
+            btOSDImageDraw.UseVisualStyleBackColor = true;
+            btOSDImageDraw.Click += btOSDImageDraw_Click;
+            // 
+            // pnOSDColorKey
+            // 
+            pnOSDColorKey.BackColor = System.Drawing.Color.Fuchsia;
+            pnOSDColorKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnOSDColorKey.Location = new System.Drawing.Point(269, 195);
+            pnOSDColorKey.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnOSDColorKey.Name = "pnOSDColorKey";
+            pnOSDColorKey.Size = new System.Drawing.Size(40, 44);
+            pnOSDColorKey.TabIndex = 45;
+            pnOSDColorKey.Click += pnOSDColorKey_Click;
+            // 
+            // cbOSDImageTranspColor
+            // 
+            cbOSDImageTranspColor.AutoSize = true;
+            cbOSDImageTranspColor.Location = new System.Drawing.Point(24, 195);
+            cbOSDImageTranspColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbOSDImageTranspColor.Name = "cbOSDImageTranspColor";
+            cbOSDImageTranspColor.Size = new System.Drawing.Size(218, 29);
+            cbOSDImageTranspColor.TabIndex = 7;
+            cbOSDImageTranspColor.Text = "Use transparency color";
+            cbOSDImageTranspColor.UseVisualStyleBackColor = true;
+            // 
+            // edOSDImageTop
+            // 
+            edOSDImageTop.Location = new System.Drawing.Point(220, 130);
+            edOSDImageTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDImageTop.Name = "edOSDImageTop";
+            edOSDImageTop.Size = new System.Drawing.Size(62, 31);
+            edOSDImageTop.TabIndex = 6;
+            edOSDImageTop.Text = "0";
+            // 
+            // label115
+            // 
+            label115.AutoSize = true;
+            label115.Location = new System.Drawing.Point(169, 134);
+            label115.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label115.Name = "label115";
+            label115.Size = new System.Drawing.Size(41, 25);
+            label115.TabIndex = 5;
+            label115.Text = "Top";
+            // 
+            // edOSDImageLeft
+            // 
+            edOSDImageLeft.Location = new System.Drawing.Point(82, 130);
+            edOSDImageLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDImageLeft.Name = "edOSDImageLeft";
+            edOSDImageLeft.Size = new System.Drawing.Size(62, 31);
+            edOSDImageLeft.TabIndex = 4;
+            edOSDImageLeft.Text = "0";
+            // 
+            // label114
+            // 
+            label114.AutoSize = true;
+            label114.Location = new System.Drawing.Point(20, 134);
+            label114.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label114.Name = "label114";
+            label114.Size = new System.Drawing.Size(41, 25);
+            label114.TabIndex = 3;
+            label114.Text = "Left";
+            // 
+            // btOSDSelectImage
+            // 
+            btOSDSelectImage.Location = new System.Drawing.Point(356, 58);
+            btOSDSelectImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDSelectImage.Name = "btOSDSelectImage";
+            btOSDSelectImage.Size = new System.Drawing.Size(38, 44);
+            btOSDSelectImage.TabIndex = 2;
+            btOSDSelectImage.Text = "...";
+            btOSDSelectImage.UseVisualStyleBackColor = true;
+            btOSDSelectImage.Click += btOSDSelectImage_Click;
+            // 
+            // edOSDImageFilename
+            // 
+            edOSDImageFilename.Location = new System.Drawing.Point(24, 61);
+            edOSDImageFilename.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDImageFilename.Name = "edOSDImageFilename";
+            edOSDImageFilename.Size = new System.Drawing.Size(316, 31);
+            edOSDImageFilename.TabIndex = 1;
+            edOSDImageFilename.Text = "c:\\logo.png";
+            // 
+            // label113
+            // 
+            label113.AutoSize = true;
+            label113.Location = new System.Drawing.Point(20, 31);
+            label113.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label113.Name = "label113";
+            label113.Size = new System.Drawing.Size(87, 25);
+            label113.TabIndex = 0;
+            label113.Text = "File name";
+            // 
+            // tabPage31
+            // 
+            tabPage31.Controls.Add(edOSDTextTop);
+            tabPage31.Controls.Add(label117);
+            tabPage31.Controls.Add(edOSDTextLeft);
+            tabPage31.Controls.Add(label118);
+            tabPage31.Controls.Add(label116);
+            tabPage31.Controls.Add(btOSDSelectFont);
+            tabPage31.Controls.Add(edOSDText);
+            tabPage31.Controls.Add(btOSDTextDraw);
+            tabPage31.Location = new System.Drawing.Point(4, 34);
+            tabPage31.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage31.Name = "tabPage31";
+            tabPage31.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage31.Size = new System.Drawing.Size(410, 340);
+            tabPage31.TabIndex = 2;
+            tabPage31.Text = "Text";
+            tabPage31.UseVisualStyleBackColor = true;
+            // 
+            // edOSDTextTop
+            // 
+            edOSDTextTop.Location = new System.Drawing.Point(220, 130);
+            edOSDTextTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDTextTop.Name = "edOSDTextTop";
+            edOSDTextTop.Size = new System.Drawing.Size(62, 31);
+            edOSDTextTop.TabIndex = 55;
+            edOSDTextTop.Text = "0";
+            // 
+            // label117
+            // 
+            label117.AutoSize = true;
+            label117.Location = new System.Drawing.Point(169, 134);
+            label117.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label117.Name = "label117";
+            label117.Size = new System.Drawing.Size(41, 25);
+            label117.TabIndex = 54;
+            label117.Text = "Top";
+            // 
+            // edOSDTextLeft
+            // 
+            edOSDTextLeft.Location = new System.Drawing.Point(82, 130);
+            edOSDTextLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDTextLeft.Name = "edOSDTextLeft";
+            edOSDTextLeft.Size = new System.Drawing.Size(62, 31);
+            edOSDTextLeft.TabIndex = 53;
+            edOSDTextLeft.Text = "0";
+            // 
+            // label118
+            // 
+            label118.AutoSize = true;
+            label118.Location = new System.Drawing.Point(20, 134);
+            label118.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label118.Name = "label118";
+            label118.Size = new System.Drawing.Size(41, 25);
+            label118.TabIndex = 52;
+            label118.Text = "Left";
+            // 
+            // label116
+            // 
+            label116.AutoSize = true;
+            label116.Location = new System.Drawing.Point(20, 31);
+            label116.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label116.Name = "label116";
+            label116.Size = new System.Drawing.Size(42, 25);
+            label116.TabIndex = 51;
+            label116.Text = "Text";
+            // 
+            // btOSDSelectFont
+            // 
+            btOSDSelectFont.Location = new System.Drawing.Point(330, 58);
+            btOSDSelectFont.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDSelectFont.Name = "btOSDSelectFont";
+            btOSDSelectFont.Size = new System.Drawing.Size(62, 44);
+            btOSDSelectFont.TabIndex = 50;
+            btOSDSelectFont.Text = "Font";
+            btOSDSelectFont.UseVisualStyleBackColor = true;
+            btOSDSelectFont.Click += btOSDSelectFont_Click;
+            // 
+            // edOSDText
+            // 
+            edOSDText.ForeColor = System.Drawing.SystemColors.WindowText;
+            edOSDText.Location = new System.Drawing.Point(24, 61);
+            edOSDText.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDText.Name = "edOSDText";
+            edOSDText.Size = new System.Drawing.Size(296, 31);
+            edOSDText.TabIndex = 49;
+            edOSDText.Text = "Hello!!!";
+            // 
+            // btOSDTextDraw
+            // 
+            btOSDTextDraw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btOSDTextDraw.Location = new System.Drawing.Point(298, 270);
+            btOSDTextDraw.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDTextDraw.Name = "btOSDTextDraw";
+            btOSDTextDraw.Size = new System.Drawing.Size(96, 44);
+            btOSDTextDraw.TabIndex = 48;
+            btOSDTextDraw.Text = "Draw";
+            btOSDTextDraw.UseVisualStyleBackColor = true;
+            btOSDTextDraw.Click += btOSDTextDraw_Click;
+            // 
+            // tabPage32
+            // 
+            tabPage32.Controls.Add(tbOSDTranspLevel);
+            tabPage32.Controls.Add(btOSDSetTransp);
+            tabPage32.Controls.Add(label119);
+            tabPage32.Location = new System.Drawing.Point(4, 34);
+            tabPage32.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage32.Name = "tabPage32";
+            tabPage32.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage32.Size = new System.Drawing.Size(410, 340);
+            tabPage32.TabIndex = 3;
+            tabPage32.Text = "Other";
+            tabPage32.UseVisualStyleBackColor = true;
+            // 
+            // tbOSDTranspLevel
+            // 
+            tbOSDTranspLevel.BackColor = System.Drawing.SystemColors.Window;
+            tbOSDTranspLevel.Location = new System.Drawing.Point(24, 61);
+            tbOSDTranspLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbOSDTranspLevel.Maximum = 255;
+            tbOSDTranspLevel.Name = "tbOSDTranspLevel";
+            tbOSDTranspLevel.Size = new System.Drawing.Size(238, 69);
+            tbOSDTranspLevel.TabIndex = 3;
+            tbOSDTranspLevel.TickFrequency = 10;
+            // 
+            // btOSDSetTransp
+            // 
+            btOSDSetTransp.Location = new System.Drawing.Point(298, 80);
+            btOSDSetTransp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDSetTransp.Name = "btOSDSetTransp";
+            btOSDSetTransp.Size = new System.Drawing.Size(80, 44);
+            btOSDSetTransp.TabIndex = 2;
+            btOSDSetTransp.Text = "Set";
+            btOSDSetTransp.UseVisualStyleBackColor = true;
+            btOSDSetTransp.Click += btOSDSetTransp_Click;
+            // 
+            // label119
+            // 
+            label119.AutoSize = true;
+            label119.Location = new System.Drawing.Point(20, 31);
+            label119.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label119.Name = "label119";
+            label119.Size = new System.Drawing.Size(154, 25);
+            label119.TabIndex = 0;
+            label119.Text = "Transparency level";
+            // 
+            // btOSDClearLayers
+            // 
+            btOSDClearLayers.Location = new System.Drawing.Point(28, 398);
+            btOSDClearLayers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDClearLayers.Name = "btOSDClearLayers";
+            btOSDClearLayers.Size = new System.Drawing.Size(232, 44);
+            btOSDClearLayers.TabIndex = 12;
+            btOSDClearLayers.Text = "Remove all layers";
+            btOSDClearLayers.UseVisualStyleBackColor = true;
+            btOSDClearLayers.Click += btOSDClearLayers_Click;
+            // 
+            // groupBox15
+            // 
+            groupBox15.Controls.Add(btOSDLayerAdd);
+            groupBox15.Controls.Add(edOSDLayerHeight);
+            groupBox15.Controls.Add(label111);
+            groupBox15.Controls.Add(edOSDLayerWidth);
+            groupBox15.Controls.Add(label112);
+            groupBox15.Controls.Add(edOSDLayerTop);
+            groupBox15.Controls.Add(label110);
+            groupBox15.Controls.Add(edOSDLayerLeft);
+            groupBox15.Controls.Add(label109);
+            groupBox15.Location = new System.Drawing.Point(269, 119);
+            groupBox15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox15.Name = "groupBox15";
+            groupBox15.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox15.Size = new System.Drawing.Size(209, 258);
+            groupBox15.TabIndex = 11;
+            groupBox15.TabStop = false;
+            groupBox15.Text = "New layer";
+            // 
+            // btOSDLayerAdd
+            // 
+            btOSDLayerAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btOSDLayerAdd.Location = new System.Drawing.Point(51, 206);
+            btOSDLayerAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btOSDLayerAdd.Name = "btOSDLayerAdd";
+            btOSDLayerAdd.Size = new System.Drawing.Size(92, 44);
+            btOSDLayerAdd.TabIndex = 8;
+            btOSDLayerAdd.Text = "Create";
+            btOSDLayerAdd.UseVisualStyleBackColor = true;
+            btOSDLayerAdd.Click += btOSDLayerAdd_Click;
+            // 
+            // edOSDLayerHeight
+            // 
+            edOSDLayerHeight.Location = new System.Drawing.Point(122, 156);
+            edOSDLayerHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDLayerHeight.Name = "edOSDLayerHeight";
+            edOSDLayerHeight.Size = new System.Drawing.Size(62, 31);
+            edOSDLayerHeight.TabIndex = 7;
+            edOSDLayerHeight.Text = "200";
+            // 
+            // label111
+            // 
+            label111.AutoSize = true;
+            label111.Location = new System.Drawing.Point(118, 125);
+            label111.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label111.Name = "label111";
+            label111.Size = new System.Drawing.Size(65, 25);
+            label111.TabIndex = 6;
+            label111.Text = "Height";
+            // 
+            // edOSDLayerWidth
+            // 
+            edOSDLayerWidth.Location = new System.Drawing.Point(22, 156);
+            edOSDLayerWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDLayerWidth.Name = "edOSDLayerWidth";
+            edOSDLayerWidth.Size = new System.Drawing.Size(62, 31);
+            edOSDLayerWidth.TabIndex = 5;
+            edOSDLayerWidth.Text = "200";
+            // 
+            // label112
+            // 
+            label112.AutoSize = true;
+            label112.Location = new System.Drawing.Point(18, 125);
+            label112.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label112.Name = "label112";
+            label112.Size = new System.Drawing.Size(60, 25);
+            label112.TabIndex = 4;
+            label112.Text = "Width";
+            // 
+            // edOSDLayerTop
+            // 
+            edOSDLayerTop.Location = new System.Drawing.Point(122, 81);
+            edOSDLayerTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDLayerTop.Name = "edOSDLayerTop";
+            edOSDLayerTop.Size = new System.Drawing.Size(62, 31);
+            edOSDLayerTop.TabIndex = 3;
+            edOSDLayerTop.Text = "0";
+            // 
+            // label110
+            // 
+            label110.AutoSize = true;
+            label110.Location = new System.Drawing.Point(118, 50);
+            label110.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label110.Name = "label110";
+            label110.Size = new System.Drawing.Size(41, 25);
+            label110.TabIndex = 2;
+            label110.Text = "Top";
+            // 
+            // edOSDLayerLeft
+            // 
+            edOSDLayerLeft.Location = new System.Drawing.Point(22, 81);
+            edOSDLayerLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOSDLayerLeft.Name = "edOSDLayerLeft";
+            edOSDLayerLeft.Size = new System.Drawing.Size(62, 31);
+            edOSDLayerLeft.TabIndex = 1;
+            edOSDLayerLeft.Text = "0";
+            // 
+            // label109
+            // 
+            label109.AutoSize = true;
+            label109.Location = new System.Drawing.Point(18, 50);
+            label109.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label109.Name = "label109";
+            label109.Size = new System.Drawing.Size(41, 25);
+            label109.TabIndex = 0;
+            label109.Text = "Left";
+            // 
+            // label108
+            // 
+            label108.AutoSize = true;
+            label108.Location = new System.Drawing.Point(20, 98);
+            label108.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label108.Name = "label108";
+            label108.Size = new System.Drawing.Size(61, 25);
+            label108.TabIndex = 9;
+            label108.Text = "Layers";
+            // 
+            // tabPage12
+            // 
+            tabPage12.Controls.Add(tabControl5);
+            tabPage12.Location = new System.Drawing.Point(4, 34);
+            tabPage12.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage12.Name = "tabPage12";
+            tabPage12.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage12.Size = new System.Drawing.Size(508, 957);
+            tabPage12.TabIndex = 6;
+            tabPage12.Text = "Decoders / Splitter";
+            tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // tabControl5
+            // 
+            tabControl5.Controls.Add(tabPage33);
+            tabControl5.Controls.Add(tabPage34);
+            tabControl5.Controls.Add(tabPage47);
+            tabControl5.Location = new System.Drawing.Point(10, 11);
+            tabControl5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl5.Name = "tabControl5";
+            tabControl5.SelectedIndex = 0;
+            tabControl5.Size = new System.Drawing.Size(488, 922);
+            tabControl5.TabIndex = 0;
+            // 
+            // tabPage33
+            // 
+            tabPage33.Controls.Add(cbCustomSplitter);
+            tabPage33.Controls.Add(rbSplitterCustom);
+            tabPage33.Controls.Add(rbSplitterDefault);
+            tabPage33.Location = new System.Drawing.Point(4, 34);
+            tabPage33.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage33.Name = "tabPage33";
+            tabPage33.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage33.Size = new System.Drawing.Size(480, 884);
+            tabPage33.TabIndex = 0;
+            tabPage33.Text = "Splitter";
+            tabPage33.UseVisualStyleBackColor = true;
+            // 
+            // cbCustomSplitter
+            // 
+            cbCustomSplitter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCustomSplitter.FormattingEnabled = true;
+            cbCustomSplitter.Location = new System.Drawing.Point(60, 128);
+            cbCustomSplitter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCustomSplitter.Name = "cbCustomSplitter";
+            cbCustomSplitter.Size = new System.Drawing.Size(386, 33);
+            cbCustomSplitter.Sorted = true;
+            cbCustomSplitter.TabIndex = 27;
+            // 
+            // rbSplitterCustom
+            // 
+            rbSplitterCustom.AutoSize = true;
+            rbSplitterCustom.Location = new System.Drawing.Point(28, 81);
+            rbSplitterCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbSplitterCustom.Name = "rbSplitterCustom";
+            rbSplitterCustom.Size = new System.Drawing.Size(99, 29);
+            rbSplitterCustom.TabIndex = 1;
+            rbSplitterCustom.Text = "Custom";
+            rbSplitterCustom.UseVisualStyleBackColor = true;
+            // 
+            // rbSplitterDefault
+            // 
+            rbSplitterDefault.AutoSize = true;
+            rbSplitterDefault.Checked = true;
+            rbSplitterDefault.Location = new System.Drawing.Point(28, 30);
+            rbSplitterDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbSplitterDefault.Name = "rbSplitterDefault";
+            rbSplitterDefault.Size = new System.Drawing.Size(94, 29);
+            rbSplitterDefault.TabIndex = 0;
+            rbSplitterDefault.TabStop = true;
+            rbSplitterDefault.Text = "Default";
+            rbSplitterDefault.UseVisualStyleBackColor = true;
+            // 
+            // tabPage34
+            // 
+            tabPage34.Controls.Add(rbVideoDecoderVFH264);
+            tabPage34.Controls.Add(cbCustomVideoDecoder);
+            tabPage34.Controls.Add(label28);
+            tabPage34.Controls.Add(label27);
+            tabPage34.Controls.Add(label26);
+            tabPage34.Controls.Add(rbVideoDecoderCustom);
+            tabPage34.Controls.Add(rbVideoDecoderFFDShow);
+            tabPage34.Controls.Add(rbVideoDecoderMS);
+            tabPage34.Controls.Add(rbVideoDecoderDefault);
+            tabPage34.Location = new System.Drawing.Point(4, 34);
+            tabPage34.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage34.Name = "tabPage34";
+            tabPage34.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage34.Size = new System.Drawing.Size(480, 884);
+            tabPage34.TabIndex = 1;
+            tabPage34.Text = "Video decoder";
+            tabPage34.UseVisualStyleBackColor = true;
+            // 
+            // rbVideoDecoderVFH264
+            // 
+            rbVideoDecoderVFH264.AutoSize = true;
+            rbVideoDecoderVFH264.Location = new System.Drawing.Point(28, 384);
+            rbVideoDecoderVFH264.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoDecoderVFH264.Name = "rbVideoDecoderVFH264";
+            rbVideoDecoderVFH264.Size = new System.Drawing.Size(241, 29);
+            rbVideoDecoderVFH264.TabIndex = 26;
+            rbVideoDecoderVFH264.TabStop = true;
+            rbVideoDecoderVFH264.Text = "VisioForge H264 Decoder";
+            rbVideoDecoderVFH264.UseVisualStyleBackColor = true;
+            // 
+            // cbCustomVideoDecoder
+            // 
+            cbCustomVideoDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCustomVideoDecoder.FormattingEnabled = true;
+            cbCustomVideoDecoder.Location = new System.Drawing.Point(62, 495);
+            cbCustomVideoDecoder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCustomVideoDecoder.Name = "cbCustomVideoDecoder";
+            cbCustomVideoDecoder.Size = new System.Drawing.Size(386, 33);
+            cbCustomVideoDecoder.Sorted = true;
+            cbCustomVideoDecoder.TabIndex = 25;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new System.Drawing.Point(58, 325);
+            label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label28.Name = "label28";
+            label28.Size = new System.Drawing.Size(159, 25);
+            label28.TabIndex = 24;
+            label28.Text = "and DVD playback";
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new System.Drawing.Point(58, 281);
+            label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label27.Name = "label27";
+            label27.Size = new System.Drawing.Size(404, 25);
+            label27.TabIndex = 23;
+            label27.Text = "To play DVD you must activate MPEG-2 decoding";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new System.Drawing.Point(58, 155);
+            label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label26.Name = "label26";
+            label26.Size = new System.Drawing.Size(329, 25);
+            label26.TabIndex = 22;
+            label26.Text = "Available on Vista / 7 Premium and later";
+            // 
+            // rbVideoDecoderCustom
+            // 
+            rbVideoDecoderCustom.AutoSize = true;
+            rbVideoDecoderCustom.Location = new System.Drawing.Point(28, 452);
+            rbVideoDecoderCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoDecoderCustom.Name = "rbVideoDecoderCustom";
+            rbVideoDecoderCustom.Size = new System.Drawing.Size(99, 29);
+            rbVideoDecoderCustom.TabIndex = 21;
+            rbVideoDecoderCustom.Text = "Custom";
+            rbVideoDecoderCustom.UseVisualStyleBackColor = true;
+            // 
+            // rbVideoDecoderFFDShow
+            // 
+            rbVideoDecoderFFDShow.AutoSize = true;
+            rbVideoDecoderFFDShow.Location = new System.Drawing.Point(28, 222);
+            rbVideoDecoderFFDShow.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoDecoderFFDShow.Name = "rbVideoDecoderFFDShow";
+            rbVideoDecoderFFDShow.Size = new System.Drawing.Size(112, 29);
+            rbVideoDecoderFFDShow.TabIndex = 20;
+            rbVideoDecoderFFDShow.Text = "FFDShow";
+            rbVideoDecoderFFDShow.UseVisualStyleBackColor = true;
+            // 
+            // rbVideoDecoderMS
+            // 
+            rbVideoDecoderMS.AutoSize = true;
+            rbVideoDecoderMS.Location = new System.Drawing.Point(28, 98);
+            rbVideoDecoderMS.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoDecoderMS.Name = "rbVideoDecoderMS";
+            rbVideoDecoderMS.Size = new System.Drawing.Size(317, 29);
+            rbVideoDecoderMS.TabIndex = 19;
+            rbVideoDecoderMS.Text = "Microsoft DTV/DVD Video Decoder";
+            rbVideoDecoderMS.UseVisualStyleBackColor = true;
+            // 
+            // rbVideoDecoderDefault
+            // 
+            rbVideoDecoderDefault.AutoSize = true;
+            rbVideoDecoderDefault.Checked = true;
+            rbVideoDecoderDefault.Location = new System.Drawing.Point(28, 30);
+            rbVideoDecoderDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoDecoderDefault.Name = "rbVideoDecoderDefault";
+            rbVideoDecoderDefault.Size = new System.Drawing.Size(94, 29);
+            rbVideoDecoderDefault.TabIndex = 18;
+            rbVideoDecoderDefault.TabStop = true;
+            rbVideoDecoderDefault.Text = "Default";
+            rbVideoDecoderDefault.UseVisualStyleBackColor = true;
+            // 
+            // tabPage47
+            // 
+            tabPage47.Controls.Add(cbCustomAudioDecoder);
+            tabPage47.Controls.Add(rbAudioDecoderCustom);
+            tabPage47.Controls.Add(rbAudioDecoderDefault);
+            tabPage47.Location = new System.Drawing.Point(4, 34);
+            tabPage47.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage47.Name = "tabPage47";
+            tabPage47.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage47.Size = new System.Drawing.Size(480, 884);
+            tabPage47.TabIndex = 2;
+            tabPage47.Text = "Audio decoder";
+            tabPage47.UseVisualStyleBackColor = true;
+            // 
+            // cbCustomAudioDecoder
+            // 
+            cbCustomAudioDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCustomAudioDecoder.FormattingEnabled = true;
+            cbCustomAudioDecoder.Location = new System.Drawing.Point(62, 128);
+            cbCustomAudioDecoder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCustomAudioDecoder.Name = "cbCustomAudioDecoder";
+            cbCustomAudioDecoder.Size = new System.Drawing.Size(386, 33);
+            cbCustomAudioDecoder.Sorted = true;
+            cbCustomAudioDecoder.TabIndex = 30;
+            // 
+            // rbAudioDecoderCustom
+            // 
+            rbAudioDecoderCustom.AutoSize = true;
+            rbAudioDecoderCustom.Location = new System.Drawing.Point(28, 81);
+            rbAudioDecoderCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbAudioDecoderCustom.Name = "rbAudioDecoderCustom";
+            rbAudioDecoderCustom.Size = new System.Drawing.Size(99, 29);
+            rbAudioDecoderCustom.TabIndex = 29;
+            rbAudioDecoderCustom.Text = "Custom";
+            rbAudioDecoderCustom.UseVisualStyleBackColor = true;
+            // 
+            // rbAudioDecoderDefault
+            // 
+            rbAudioDecoderDefault.AutoSize = true;
+            rbAudioDecoderDefault.Checked = true;
+            rbAudioDecoderDefault.Location = new System.Drawing.Point(28, 30);
+            rbAudioDecoderDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbAudioDecoderDefault.Name = "rbAudioDecoderDefault";
+            rbAudioDecoderDefault.Size = new System.Drawing.Size(94, 29);
+            rbAudioDecoderDefault.TabIndex = 28;
+            rbAudioDecoderDefault.TabStop = true;
+            rbAudioDecoderDefault.Text = "Default";
+            rbAudioDecoderDefault.UseVisualStyleBackColor = true;
+            // 
+            // tabPage13
+            // 
+            tabPage13.Controls.Add(tabControl9);
+            tabPage13.Controls.Add(cbMotDetEnabled);
+            tabPage13.Location = new System.Drawing.Point(4, 34);
+            tabPage13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage13.Name = "tabPage13";
+            tabPage13.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage13.Size = new System.Drawing.Size(508, 957);
+            tabPage13.TabIndex = 7;
+            tabPage13.Text = "Motion detection";
+            tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // tabControl9
+            // 
+            tabControl9.Controls.Add(tabPage44);
+            tabControl9.Controls.Add(tabPage45);
+            tabControl9.Location = new System.Drawing.Point(24, 81);
+            tabControl9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl9.Name = "tabControl9";
+            tabControl9.SelectedIndex = 0;
+            tabControl9.Size = new System.Drawing.Size(448, 794);
+            tabControl9.TabIndex = 3;
+            // 
+            // tabPage44
+            // 
+            tabPage44.Controls.Add(pbMotionLevel);
+            tabPage44.Controls.Add(label158);
+            tabPage44.Controls.Add(mmMotDetMatrix);
+            tabPage44.Location = new System.Drawing.Point(4, 34);
+            tabPage44.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage44.Name = "tabPage44";
+            tabPage44.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage44.Size = new System.Drawing.Size(440, 756);
+            tabPage44.TabIndex = 0;
+            tabPage44.Text = "Output matrix";
+            tabPage44.UseVisualStyleBackColor = true;
+            // 
+            // pbMotionLevel
+            // 
+            pbMotionLevel.Location = new System.Drawing.Point(10, 630);
+            pbMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pbMotionLevel.Name = "pbMotionLevel";
+            pbMotionLevel.Size = new System.Drawing.Size(378, 36);
+            pbMotionLevel.TabIndex = 2;
+            // 
+            // label158
+            // 
+            label158.AutoSize = true;
+            label158.Location = new System.Drawing.Point(9, 591);
+            label158.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label158.Name = "label158";
+            label158.Size = new System.Drawing.Size(110, 25);
+            label158.TabIndex = 1;
+            label158.Text = "Motion level";
+            // 
+            // mmMotDetMatrix
+            // 
+            mmMotDetMatrix.Location = new System.Drawing.Point(10, 11);
+            mmMotDetMatrix.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            mmMotDetMatrix.Multiline = true;
+            mmMotDetMatrix.Name = "mmMotDetMatrix";
+            mmMotDetMatrix.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmMotDetMatrix.Size = new System.Drawing.Size(412, 498);
+            mmMotDetMatrix.TabIndex = 0;
+            // 
+            // tabPage45
+            // 
+            tabPage45.Controls.Add(groupBox25);
+            tabPage45.Controls.Add(btMotDetUpdateSettings);
+            tabPage45.Controls.Add(groupBox27);
+            tabPage45.Controls.Add(groupBox26);
+            tabPage45.Controls.Add(groupBox24);
+            tabPage45.Location = new System.Drawing.Point(4, 34);
+            tabPage45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage45.Name = "tabPage45";
+            tabPage45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage45.Size = new System.Drawing.Size(440, 756);
+            tabPage45.TabIndex = 1;
+            tabPage45.Text = "Settings";
+            tabPage45.UseVisualStyleBackColor = true;
+            // 
+            // groupBox25
+            // 
+            groupBox25.Controls.Add(cbMotDetHLColor);
+            groupBox25.Controls.Add(label161);
+            groupBox25.Controls.Add(label160);
+            groupBox25.Controls.Add(cbMotDetHLEnabled);
+            groupBox25.Controls.Add(tbMotDetHLThreshold);
+            groupBox25.Location = new System.Drawing.Point(20, 198);
+            groupBox25.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox25.Name = "groupBox25";
+            groupBox25.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox25.Size = new System.Drawing.Size(389, 166);
+            groupBox25.TabIndex = 1;
+            groupBox25.TabStop = false;
+            groupBox25.Text = "Color highlight";
+            // 
+            // cbMotDetHLColor
+            // 
+            cbMotDetHLColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbMotDetHLColor.FormattingEnabled = true;
+            cbMotDetHLColor.Items.AddRange(new object[] { "Red", "Green", "Blue" });
+            cbMotDetHLColor.Location = new System.Drawing.Point(256, 114);
+            cbMotDetHLColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetHLColor.Name = "cbMotDetHLColor";
+            cbMotDetHLColor.Size = new System.Drawing.Size(114, 33);
+            cbMotDetHLColor.TabIndex = 5;
+            // 
+            // label161
+            // 
+            label161.AutoSize = true;
+            label161.Location = new System.Drawing.Point(248, 81);
+            label161.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label161.Name = "label161";
+            label161.Size = new System.Drawing.Size(55, 25);
+            label161.TabIndex = 4;
+            label161.Text = "Color";
+            // 
+            // label160
+            // 
+            label160.AutoSize = true;
+            label160.Location = new System.Drawing.Point(50, 81);
+            label160.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label160.Name = "label160";
+            label160.Size = new System.Drawing.Size(90, 25);
+            label160.TabIndex = 2;
+            label160.Text = "Threshold";
+            // 
+            // cbMotDetHLEnabled
+            // 
+            cbMotDetHLEnabled.AutoSize = true;
+            cbMotDetHLEnabled.Checked = true;
+            cbMotDetHLEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbMotDetHLEnabled.Location = new System.Drawing.Point(22, 42);
+            cbMotDetHLEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetHLEnabled.Name = "cbMotDetHLEnabled";
+            cbMotDetHLEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetHLEnabled.TabIndex = 1;
+            cbMotDetHLEnabled.Text = "Enabled";
+            cbMotDetHLEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tbMotDetHLThreshold
+            // 
+            tbMotDetHLThreshold.BackColor = System.Drawing.SystemColors.Window;
+            tbMotDetHLThreshold.Location = new System.Drawing.Point(51, 111);
+            tbMotDetHLThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbMotDetHLThreshold.Maximum = 255;
+            tbMotDetHLThreshold.Name = "tbMotDetHLThreshold";
+            tbMotDetHLThreshold.Size = new System.Drawing.Size(172, 69);
+            tbMotDetHLThreshold.TabIndex = 3;
+            tbMotDetHLThreshold.TickFrequency = 5;
+            tbMotDetHLThreshold.Value = 25;
+            // 
+            // btMotDetUpdateSettings
+            // 
+            btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btMotDetUpdateSettings.Location = new System.Drawing.Point(230, 689);
+            btMotDetUpdateSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMotDetUpdateSettings.Name = "btMotDetUpdateSettings";
+            btMotDetUpdateSettings.Size = new System.Drawing.Size(178, 44);
+            btMotDetUpdateSettings.TabIndex = 4;
+            btMotDetUpdateSettings.Text = "Update settings";
+            btMotDetUpdateSettings.UseVisualStyleBackColor = true;
+            btMotDetUpdateSettings.Click += btMotDetUpdateSettings_Click;
+            // 
+            // groupBox27
+            // 
+            groupBox27.Controls.Add(edMotDetMatrixHeight);
+            groupBox27.Controls.Add(label163);
+            groupBox27.Controls.Add(edMotDetMatrixWidth);
+            groupBox27.Controls.Add(label164);
+            groupBox27.Location = new System.Drawing.Point(20, 511);
+            groupBox27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox27.Name = "groupBox27";
+            groupBox27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox27.Size = new System.Drawing.Size(389, 114);
+            groupBox27.TabIndex = 3;
+            groupBox27.TabStop = false;
+            groupBox27.Text = "Matrix";
+            // 
+            // edMotDetMatrixHeight
+            // 
+            edMotDetMatrixHeight.Location = new System.Drawing.Point(242, 44);
+            edMotDetMatrixHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetMatrixHeight.Name = "edMotDetMatrixHeight";
+            edMotDetMatrixHeight.Size = new System.Drawing.Size(56, 31);
+            edMotDetMatrixHeight.TabIndex = 75;
+            edMotDetMatrixHeight.Text = "10";
+            // 
+            // label163
+            // 
+            label163.AutoSize = true;
+            label163.Location = new System.Drawing.Point(162, 50);
+            label163.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label163.Name = "label163";
+            label163.Size = new System.Drawing.Size(65, 25);
+            label163.TabIndex = 74;
+            label163.Text = "Height";
+            // 
+            // edMotDetMatrixWidth
+            // 
+            edMotDetMatrixWidth.Location = new System.Drawing.Point(92, 44);
+            edMotDetMatrixWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetMatrixWidth.Name = "edMotDetMatrixWidth";
+            edMotDetMatrixWidth.Size = new System.Drawing.Size(56, 31);
+            edMotDetMatrixWidth.TabIndex = 73;
+            edMotDetMatrixWidth.Text = "10";
+            // 
+            // label164
+            // 
+            label164.AutoSize = true;
+            label164.Location = new System.Drawing.Point(22, 50);
+            label164.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label164.Name = "label164";
+            label164.Size = new System.Drawing.Size(60, 25);
+            label164.TabIndex = 72;
+            label164.Text = "Width";
+            // 
+            // groupBox26
+            // 
+            groupBox26.Controls.Add(label162);
+            groupBox26.Controls.Add(tbMotDetDropFramesThreshold);
+            groupBox26.Controls.Add(cbMotDetDropFramesEnabled);
+            groupBox26.Location = new System.Drawing.Point(20, 369);
+            groupBox26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox26.Name = "groupBox26";
+            groupBox26.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox26.Size = new System.Drawing.Size(389, 131);
+            groupBox26.TabIndex = 2;
+            groupBox26.TabStop = false;
+            groupBox26.Text = "Drop frames";
+            // 
+            // label162
+            // 
+            label162.AutoSize = true;
+            label162.Location = new System.Drawing.Point(158, 41);
+            label162.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label162.Name = "label162";
+            label162.Size = new System.Drawing.Size(90, 25);
+            label162.TabIndex = 4;
+            label162.Text = "Threshold";
+            // 
+            // tbMotDetDropFramesThreshold
+            // 
+            tbMotDetDropFramesThreshold.BackColor = System.Drawing.SystemColors.Window;
+            tbMotDetDropFramesThreshold.Location = new System.Drawing.Point(158, 70);
+            tbMotDetDropFramesThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbMotDetDropFramesThreshold.Maximum = 255;
+            tbMotDetDropFramesThreshold.Name = "tbMotDetDropFramesThreshold";
+            tbMotDetDropFramesThreshold.Size = new System.Drawing.Size(172, 69);
+            tbMotDetDropFramesThreshold.TabIndex = 5;
+            tbMotDetDropFramesThreshold.TickFrequency = 5;
+            tbMotDetDropFramesThreshold.Value = 5;
+            // 
+            // cbMotDetDropFramesEnabled
+            // 
+            cbMotDetDropFramesEnabled.AutoSize = true;
+            cbMotDetDropFramesEnabled.Location = new System.Drawing.Point(22, 36);
+            cbMotDetDropFramesEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetDropFramesEnabled.Name = "cbMotDetDropFramesEnabled";
+            cbMotDetDropFramesEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetDropFramesEnabled.TabIndex = 1;
+            cbMotDetDropFramesEnabled.Text = "Enabled";
+            cbMotDetDropFramesEnabled.UseVisualStyleBackColor = true;
+            // 
+            // groupBox24
+            // 
+            groupBox24.Controls.Add(edMotDetFrameInterval);
+            groupBox24.Controls.Add(label159);
+            groupBox24.Controls.Add(cbCompareGreyscale);
+            groupBox24.Controls.Add(cbCompareBlue);
+            groupBox24.Controls.Add(cbCompareGreen);
+            groupBox24.Controls.Add(cbCompareRed);
+            groupBox24.Location = new System.Drawing.Point(20, 22);
+            groupBox24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox24.Name = "groupBox24";
+            groupBox24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox24.Size = new System.Drawing.Size(389, 158);
+            groupBox24.TabIndex = 0;
+            groupBox24.TabStop = false;
+            groupBox24.Text = "Compare settings";
+            // 
+            // edMotDetFrameInterval
+            // 
+            edMotDetFrameInterval.Location = new System.Drawing.Point(158, 98);
+            edMotDetFrameInterval.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetFrameInterval.Name = "edMotDetFrameInterval";
+            edMotDetFrameInterval.Size = new System.Drawing.Size(52, 31);
+            edMotDetFrameInterval.TabIndex = 5;
+            edMotDetFrameInterval.Text = "2";
+            // 
+            // label159
+            // 
+            label159.AutoSize = true;
+            label159.Location = new System.Drawing.Point(18, 105);
+            label159.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label159.Name = "label159";
+            label159.Size = new System.Drawing.Size(123, 25);
+            label159.TabIndex = 4;
+            label159.Text = "Frame interval";
+            // 
+            // cbCompareGreyscale
+            // 
+            cbCompareGreyscale.AutoSize = true;
+            cbCompareGreyscale.Checked = true;
+            cbCompareGreyscale.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbCompareGreyscale.Location = new System.Drawing.Point(271, 41);
+            cbCompareGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareGreyscale.Name = "cbCompareGreyscale";
+            cbCompareGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbCompareGreyscale.TabIndex = 3;
+            cbCompareGreyscale.Text = "Greyscale";
+            cbCompareGreyscale.UseVisualStyleBackColor = true;
+            // 
+            // cbCompareBlue
+            // 
+            cbCompareBlue.AutoSize = true;
+            cbCompareBlue.Location = new System.Drawing.Point(198, 41);
+            cbCompareBlue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareBlue.Name = "cbCompareBlue";
+            cbCompareBlue.Size = new System.Drawing.Size(71, 29);
+            cbCompareBlue.TabIndex = 2;
+            cbCompareBlue.Text = "Blue";
+            cbCompareBlue.UseVisualStyleBackColor = true;
+            // 
+            // cbCompareGreen
+            // 
+            cbCompareGreen.AutoSize = true;
+            cbCompareGreen.Location = new System.Drawing.Point(100, 41);
+            cbCompareGreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareGreen.Name = "cbCompareGreen";
+            cbCompareGreen.Size = new System.Drawing.Size(84, 29);
+            cbCompareGreen.TabIndex = 1;
+            cbCompareGreen.Text = "Green";
+            cbCompareGreen.UseVisualStyleBackColor = true;
+            // 
+            // cbCompareRed
+            // 
+            cbCompareRed.AutoSize = true;
+            cbCompareRed.Location = new System.Drawing.Point(22, 41);
+            cbCompareRed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareRed.Name = "cbCompareRed";
+            cbCompareRed.Size = new System.Drawing.Size(68, 29);
+            cbCompareRed.TabIndex = 0;
+            cbCompareRed.Text = "Red";
+            cbCompareRed.UseVisualStyleBackColor = true;
+            // 
+            // cbMotDetEnabled
+            // 
+            cbMotDetEnabled.AutoSize = true;
+            cbMotDetEnabled.Location = new System.Drawing.Point(24, 31);
+            cbMotDetEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetEnabled.Name = "cbMotDetEnabled";
+            cbMotDetEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetEnabled.TabIndex = 2;
+            cbMotDetEnabled.Text = "Enabled";
+            cbMotDetEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage14
+            // 
+            tabPage14.Controls.Add(label505);
+            tabPage14.Controls.Add(rbMotionDetectionExProcessor);
+            tabPage14.Controls.Add(label389);
+            tabPage14.Controls.Add(rbMotionDetectionExDetector);
+            tabPage14.Controls.Add(label64);
+            tabPage14.Controls.Add(label65);
+            tabPage14.Controls.Add(pbAFMotionLevel);
+            tabPage14.Controls.Add(cbMotionDetectionEx);
+            tabPage14.Location = new System.Drawing.Point(4, 34);
+            tabPage14.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage14.Name = "tabPage14";
+            tabPage14.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage14.Size = new System.Drawing.Size(508, 957);
+            tabPage14.TabIndex = 14;
+            tabPage14.Text = "Motion detection (Extended)";
+            tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // label505
+            // 
+            label505.AutoSize = true;
+            label505.Location = new System.Drawing.Point(28, 192);
+            label505.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label505.Name = "label505";
+            label505.Size = new System.Drawing.Size(89, 25);
+            label505.TabIndex = 31;
+            label505.Text = "Processor";
+            // 
+            // rbMotionDetectionExProcessor
+            // 
+            rbMotionDetectionExProcessor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            rbMotionDetectionExProcessor.FormattingEnabled = true;
+            rbMotionDetectionExProcessor.Items.AddRange(new object[] { "None", "Blob counting objects", "GridMotionAreaProcessing", "Motion area highlighting", "Motion border highlighting" });
+            rbMotionDetectionExProcessor.Location = new System.Drawing.Point(28, 222);
+            rbMotionDetectionExProcessor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbMotionDetectionExProcessor.Name = "rbMotionDetectionExProcessor";
+            rbMotionDetectionExProcessor.Size = new System.Drawing.Size(426, 33);
+            rbMotionDetectionExProcessor.TabIndex = 30;
+            // 
+            // label389
+            // 
+            label389.AutoSize = true;
+            label389.Location = new System.Drawing.Point(28, 95);
+            label389.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label389.Name = "label389";
+            label389.Size = new System.Drawing.Size(80, 25);
+            label389.TabIndex = 29;
+            label389.Text = "Detector";
+            // 
+            // rbMotionDetectionExDetector
+            // 
+            rbMotionDetectionExDetector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            rbMotionDetectionExDetector.FormattingEnabled = true;
+            rbMotionDetectionExDetector.Items.AddRange(new object[] { "Custom frame difference", "Simple background modeling", "Two frames difference" });
+            rbMotionDetectionExDetector.Location = new System.Drawing.Point(28, 128);
+            rbMotionDetectionExDetector.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbMotionDetectionExDetector.Name = "rbMotionDetectionExDetector";
+            rbMotionDetectionExDetector.Size = new System.Drawing.Size(426, 33);
+            rbMotionDetectionExDetector.TabIndex = 28;
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Location = new System.Drawing.Point(89, 842);
+            label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label64.Name = "label64";
+            label64.Size = new System.Drawing.Size(293, 25);
+            label64.TabIndex = 27;
+            label64.Text = "Much more options available in API";
+            // 
+            // label65
+            // 
+            label65.AutoSize = true;
+            label65.Location = new System.Drawing.Point(28, 305);
+            label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label65.Name = "label65";
+            label65.Size = new System.Drawing.Size(110, 25);
+            label65.TabIndex = 26;
+            label65.Text = "Motion level";
+            // 
+            // pbAFMotionLevel
+            // 
+            pbAFMotionLevel.Location = new System.Drawing.Point(28, 334);
+            pbAFMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pbAFMotionLevel.Name = "pbAFMotionLevel";
+            pbAFMotionLevel.Size = new System.Drawing.Size(430, 44);
+            pbAFMotionLevel.TabIndex = 25;
+            // 
+            // cbMotionDetectionEx
+            // 
+            cbMotionDetectionEx.AutoSize = true;
+            cbMotionDetectionEx.Location = new System.Drawing.Point(28, 22);
+            cbMotionDetectionEx.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotionDetectionEx.Name = "cbMotionDetectionEx";
+            cbMotionDetectionEx.Size = new System.Drawing.Size(101, 29);
+            cbMotionDetectionEx.TabIndex = 24;
+            cbMotionDetectionEx.Text = "Enabled";
+            cbMotionDetectionEx.UseVisualStyleBackColor = true;
+            // 
+            // tabPage21
+            // 
+            tabPage21.Controls.Add(edBarcodeMetadata);
+            tabPage21.Controls.Add(label91);
+            tabPage21.Controls.Add(cbBarcodeType);
+            tabPage21.Controls.Add(label90);
+            tabPage21.Controls.Add(btBarcodeReset);
+            tabPage21.Controls.Add(edBarcode);
+            tabPage21.Controls.Add(label89);
+            tabPage21.Controls.Add(cbBarcodeDetectionEnabled);
+            tabPage21.Location = new System.Drawing.Point(4, 34);
+            tabPage21.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage21.Name = "tabPage21";
+            tabPage21.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            tabPage21.Size = new System.Drawing.Size(508, 957);
+            tabPage21.TabIndex = 8;
+            tabPage21.Text = "Barcode reader";
+            tabPage21.UseVisualStyleBackColor = true;
+            // 
+            // edBarcodeMetadata
+            // 
+            edBarcodeMetadata.Location = new System.Drawing.Point(28, 308);
+            edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            edBarcodeMetadata.Multiline = true;
+            edBarcodeMetadata.Name = "edBarcodeMetadata";
+            edBarcodeMetadata.Size = new System.Drawing.Size(452, 182);
+            edBarcodeMetadata.TabIndex = 16;
+            // 
+            // label91
+            // 
+            label91.AutoSize = true;
+            label91.Location = new System.Drawing.Point(22, 270);
+            label91.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label91.Name = "label91";
+            label91.Size = new System.Drawing.Size(87, 25);
+            label91.TabIndex = 15;
+            label91.Text = "Metadata";
+            // 
+            // cbBarcodeType
+            // 
+            cbBarcodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbBarcodeType.FormattingEnabled = true;
+            cbBarcodeType.Items.AddRange(new object[] { "Autodetect", "UPC-A", "UPC-E", "EAN-8", "EAN-13", "Code 39", "Code 93", "Code 128", "ITF", "CodaBar", "RSS-14", "Data matrix", "Aztec", "QR", "PDF-417" });
+            cbBarcodeType.Location = new System.Drawing.Point(28, 122);
+            cbBarcodeType.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            cbBarcodeType.Name = "cbBarcodeType";
+            cbBarcodeType.Size = new System.Drawing.Size(264, 33);
+            cbBarcodeType.TabIndex = 14;
+            // 
+            // label90
+            // 
+            label90.AutoSize = true;
+            label90.Location = new System.Drawing.Point(22, 92);
+            label90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label90.Name = "label90";
+            label90.Size = new System.Drawing.Size(116, 25);
+            label90.TabIndex = 13;
+            label90.Text = "Barcode type";
+            // 
+            // btBarcodeReset
+            // 
+            btBarcodeReset.Location = new System.Drawing.Point(28, 516);
+            btBarcodeReset.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            btBarcodeReset.Name = "btBarcodeReset";
+            btBarcodeReset.Size = new System.Drawing.Size(102, 44);
+            btBarcodeReset.TabIndex = 12;
+            btBarcodeReset.Text = "Restart";
+            btBarcodeReset.UseVisualStyleBackColor = true;
+            btBarcodeReset.Click += btBarcodeReset_Click;
+            // 
+            // edBarcode
+            // 
+            edBarcode.Location = new System.Drawing.Point(28, 216);
+            edBarcode.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            edBarcode.Name = "edBarcode";
+            edBarcode.Size = new System.Drawing.Size(452, 31);
+            edBarcode.TabIndex = 11;
+            // 
+            // label89
+            // 
+            label89.AutoSize = true;
+            label89.Location = new System.Drawing.Point(22, 184);
+            label89.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label89.Name = "label89";
+            label89.Size = new System.Drawing.Size(153, 25);
+            label89.TabIndex = 10;
+            label89.Text = "Detected barcode";
+            // 
+            // cbBarcodeDetectionEnabled
+            // 
+            cbBarcodeDetectionEnabled.AutoSize = true;
+            cbBarcodeDetectionEnabled.Location = new System.Drawing.Point(28, 34);
+            cbBarcodeDetectionEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled";
+            cbBarcodeDetectionEnabled.Size = new System.Drawing.Size(101, 29);
+            cbBarcodeDetectionEnabled.TabIndex = 9;
+            cbBarcodeDetectionEnabled.Text = "Enabled";
+            cbBarcodeDetectionEnabled.UseVisualStyleBackColor = true;
+            // 
+            // tabPage23
+            // 
+            tabPage23.Controls.Add(textBox1);
+            tabPage23.Controls.Add(groupBox48);
+            tabPage23.Location = new System.Drawing.Point(4, 34);
+            tabPage23.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage23.Name = "tabPage23";
+            tabPage23.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage23.Size = new System.Drawing.Size(508, 957);
+            tabPage23.TabIndex = 9;
+            tabPage23.Text = "Encryption";
+            tabPage23.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new System.Drawing.Point(28, 470);
+            textBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new System.Drawing.Size(446, 149);
+            textBox1.TabIndex = 11;
+            textBox1.Text = "Media Player SDK .Net can play encrypted files created by Video Encryption SDK (DirectShow or included in Video Capture SDK .Net / Video Edit SDK .Net).";
+            // 
+            // groupBox48
+            // 
+            groupBox48.Controls.Add(label343);
+            groupBox48.Controls.Add(edEncryptionKeyHEX);
+            groupBox48.Controls.Add(rbEncryptionKeyBinary);
+            groupBox48.Controls.Add(btEncryptionOpenFile);
+            groupBox48.Controls.Add(edEncryptionKeyFile);
+            groupBox48.Controls.Add(rbEncryptionKeyFile);
+            groupBox48.Controls.Add(edEncryptionKeyString);
+            groupBox48.Controls.Add(rbEncryptionKeyString);
+            groupBox48.Location = new System.Drawing.Point(28, 30);
+            groupBox48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox48.Name = "groupBox48";
+            groupBox48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox48.Size = new System.Drawing.Size(449, 431);
+            groupBox48.TabIndex = 9;
+            groupBox48.TabStop = false;
+            groupBox48.Text = "Encryption key type";
+            // 
+            // label343
+            // 
+            label343.AutoSize = true;
+            label343.Location = new System.Drawing.Point(56, 381);
+            label343.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label343.Name = "label343";
+            label343.Size = new System.Drawing.Size(258, 25);
+            label343.TabIndex = 10;
+            label343.Text = "You can assign byte[] using API";
+            // 
+            // edEncryptionKeyHEX
+            // 
+            edEncryptionKeyHEX.Location = new System.Drawing.Point(60, 339);
+            edEncryptionKeyHEX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
+            edEncryptionKeyHEX.Size = new System.Drawing.Size(354, 31);
+            edEncryptionKeyHEX.TabIndex = 9;
+            edEncryptionKeyHEX.Text = "enter hex data";
+            // 
+            // rbEncryptionKeyBinary
+            // 
+            rbEncryptionKeyBinary.AutoSize = true;
+            rbEncryptionKeyBinary.Location = new System.Drawing.Point(22, 294);
+            rbEncryptionKeyBinary.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyBinary.Name = "rbEncryptionKeyBinary";
+            rbEncryptionKeyBinary.Size = new System.Drawing.Size(197, 29);
+            rbEncryptionKeyBinary.TabIndex = 8;
+            rbEncryptionKeyBinary.Text = "Binary data (v9 SDK)";
+            rbEncryptionKeyBinary.UseVisualStyleBackColor = true;
+            // 
+            // btEncryptionOpenFile
+            // 
+            btEncryptionOpenFile.Location = new System.Drawing.Point(378, 219);
+            btEncryptionOpenFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEncryptionOpenFile.Name = "btEncryptionOpenFile";
+            btEncryptionOpenFile.Size = new System.Drawing.Size(38, 44);
+            btEncryptionOpenFile.TabIndex = 7;
+            btEncryptionOpenFile.Text = "...";
+            btEncryptionOpenFile.UseVisualStyleBackColor = true;
+            btEncryptionOpenFile.Click += btEncryptionOpenFile_Click;
+            // 
+            // edEncryptionKeyFile
+            // 
+            edEncryptionKeyFile.Location = new System.Drawing.Point(60, 222);
+            edEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyFile.Name = "edEncryptionKeyFile";
+            edEncryptionKeyFile.Size = new System.Drawing.Size(306, 31);
+            edEncryptionKeyFile.TabIndex = 6;
+            edEncryptionKeyFile.Text = "c:\\keyfile.txt";
+            // 
+            // rbEncryptionKeyFile
+            // 
+            rbEncryptionKeyFile.AutoSize = true;
+            rbEncryptionKeyFile.Location = new System.Drawing.Point(22, 180);
+            rbEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyFile.Name = "rbEncryptionKeyFile";
+            rbEncryptionKeyFile.Size = new System.Drawing.Size(135, 29);
+            rbEncryptionKeyFile.TabIndex = 5;
+            rbEncryptionKeyFile.Text = "File (v9 SDK)";
+            rbEncryptionKeyFile.UseVisualStyleBackColor = true;
+            // 
+            // edEncryptionKeyString
+            // 
+            edEncryptionKeyString.Location = new System.Drawing.Point(60, 108);
+            edEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyString.Name = "edEncryptionKeyString";
+            edEncryptionKeyString.Size = new System.Drawing.Size(354, 31);
+            edEncryptionKeyString.TabIndex = 4;
+            edEncryptionKeyString.Text = "100";
+            // 
+            // rbEncryptionKeyString
+            // 
+            rbEncryptionKeyString.AutoSize = true;
+            rbEncryptionKeyString.Checked = true;
+            rbEncryptionKeyString.Location = new System.Drawing.Point(22, 55);
+            rbEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyString.Name = "rbEncryptionKeyString";
+            rbEncryptionKeyString.Size = new System.Drawing.Size(83, 29);
+            rbEncryptionKeyString.TabIndex = 0;
+            rbEncryptionKeyString.TabStop = true;
+            rbEncryptionKeyString.Text = "String";
+            rbEncryptionKeyString.UseVisualStyleBackColor = true;
+            // 
+            // tabPage24
+            // 
+            tabPage24.Controls.Add(btReversePlaybackNextFrame);
+            tabPage24.Controls.Add(btReversePlaybackPrevFrame);
+            tabPage24.Controls.Add(label34);
+            tabPage24.Controls.Add(label33);
+            tabPage24.Controls.Add(btReversePlayback);
+            tabPage24.Controls.Add(edReversePlaybackCacheSize);
+            tabPage24.Controls.Add(label32);
+            tabPage24.Controls.Add(tbReversePlaybackTrackbar);
+            tabPage24.Location = new System.Drawing.Point(4, 34);
+            tabPage24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage24.Name = "tabPage24";
+            tabPage24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage24.Size = new System.Drawing.Size(508, 957);
+            tabPage24.TabIndex = 10;
+            tabPage24.Text = "Reverse playback";
+            tabPage24.UseVisualStyleBackColor = true;
+            // 
+            // btReversePlaybackNextFrame
+            // 
+            btReversePlaybackNextFrame.Location = new System.Drawing.Point(218, 389);
+            btReversePlaybackNextFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btReversePlaybackNextFrame.Name = "btReversePlaybackNextFrame";
+            btReversePlaybackNextFrame.Size = new System.Drawing.Size(176, 44);
+            btReversePlaybackNextFrame.TabIndex = 12;
+            btReversePlaybackNextFrame.Text = "Next frame";
+            btReversePlaybackNextFrame.UseVisualStyleBackColor = true;
+            btReversePlaybackNextFrame.Click += btReversePlaybackNextFrame_Click;
+            // 
+            // btReversePlaybackPrevFrame
+            // 
+            btReversePlaybackPrevFrame.Location = new System.Drawing.Point(31, 389);
+            btReversePlaybackPrevFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btReversePlaybackPrevFrame.Name = "btReversePlaybackPrevFrame";
+            btReversePlaybackPrevFrame.Size = new System.Drawing.Size(176, 44);
+            btReversePlaybackPrevFrame.TabIndex = 11;
+            btReversePlaybackPrevFrame.Text = "Previous frame";
+            btReversePlaybackPrevFrame.UseVisualStyleBackColor = true;
+            btReversePlaybackPrevFrame.Click += btReversePlaybackPrevFrame_Click;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new System.Drawing.Point(28, 222);
+            label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label34.Name = "label34";
+            label34.Size = new System.Drawing.Size(182, 25);
+            label34.TabIndex = 10;
+            label34.Text = "count before tracking";
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Location = new System.Drawing.Point(28, 191);
+            label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label33.Name = "label33";
+            label33.Size = new System.Drawing.Size(377, 25);
+            label33.TabIndex = 9;
+            label33.Text = "Wait several seconds to cache required frames";
+            // 
+            // btReversePlayback
+            // 
+            btReversePlayback.Location = new System.Drawing.Point(31, 122);
+            btReversePlayback.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btReversePlayback.Name = "btReversePlayback";
+            btReversePlayback.Size = new System.Drawing.Size(318, 44);
+            btReversePlayback.TabIndex = 8;
+            btReversePlayback.Text = "Go to reverse playback mode";
+            btReversePlayback.UseVisualStyleBackColor = true;
+            btReversePlayback.Click += btReversePlayback_Click;
+            // 
+            // edReversePlaybackCacheSize
+            // 
+            edReversePlaybackCacheSize.Location = new System.Drawing.Point(238, 30);
+            edReversePlaybackCacheSize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edReversePlaybackCacheSize.Name = "edReversePlaybackCacheSize";
+            edReversePlaybackCacheSize.Size = new System.Drawing.Size(108, 31);
+            edReversePlaybackCacheSize.TabIndex = 7;
+            edReversePlaybackCacheSize.Text = "100";
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Location = new System.Drawing.Point(28, 34);
+            label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label32.Name = "label32";
+            label32.Size = new System.Drawing.Size(144, 25);
+            label32.TabIndex = 6;
+            label32.Text = "Frame cache size";
+            // 
+            // tbReversePlaybackTrackbar
+            // 
+            tbReversePlaybackTrackbar.Location = new System.Drawing.Point(31, 272);
+            tbReversePlaybackTrackbar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbReversePlaybackTrackbar.Maximum = 100;
+            tbReversePlaybackTrackbar.Name = "tbReversePlaybackTrackbar";
+            tbReversePlaybackTrackbar.Size = new System.Drawing.Size(318, 69);
+            tbReversePlaybackTrackbar.TabIndex = 4;
+            tbReversePlaybackTrackbar.Value = 100;
+            tbReversePlaybackTrackbar.Scroll += tbReversePlaybackTrackbar_Scroll;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(544, 22);
+            label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(145, 25);
+            label14.TabIndex = 2;
+            label14.Text = "File name or URL";
+            // 
+            // edFilenameOrURL
+            // 
+            edFilenameOrURL.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            edFilenameOrURL.Location = new System.Drawing.Point(550, 55);
+            edFilenameOrURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFilenameOrURL.Name = "edFilenameOrURL";
+            edFilenameOrURL.Size = new System.Drawing.Size(576, 31);
+            edFilenameOrURL.TabIndex = 3;
+            edFilenameOrURL.Text = "c:\\samples\\!video.mp4";
+            // 
+            // btSelectFile
+            // 
+            btSelectFile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btSelectFile.Location = new System.Drawing.Point(1204, 50);
+            btSelectFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectFile.Name = "btSelectFile";
+            btSelectFile.Size = new System.Drawing.Size(38, 44);
+            btSelectFile.TabIndex = 4;
+            btSelectFile.Text = "...";
+            btSelectFile.UseVisualStyleBackColor = true;
+            btSelectFile.Click += btSelectFile_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btPreviousFrame);
+            groupBox2.Controls.Add(cbLoop);
+            groupBox2.Controls.Add(btNextFrame);
+            groupBox2.Controls.Add(btStop);
+            groupBox2.Controls.Add(btPause);
+            groupBox2.Controls.Add(btResume);
+            groupBox2.Controls.Add(btStart);
+            groupBox2.Controls.Add(tbSpeed);
+            groupBox2.Controls.Add(label16);
+            groupBox2.Controls.Add(lbTime);
+            groupBox2.Controls.Add(tbTimeline);
+            groupBox2.Location = new System.Drawing.Point(550, 969);
+            groupBox2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox2.Size = new System.Drawing.Size(690, 172);
+            groupBox2.TabIndex = 7;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Controls";
+            // 
+            // btPreviousFrame
+            // 
+            btPreviousFrame.Location = new System.Drawing.Point(420, 111);
+            btPreviousFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btPreviousFrame.Name = "btPreviousFrame";
+            btPreviousFrame.Size = new System.Drawing.Size(124, 44);
+            btPreviousFrame.TabIndex = 10;
+            btPreviousFrame.Text = "Prev frame";
+            btPreviousFrame.UseVisualStyleBackColor = true;
+            btPreviousFrame.Click += btPreviousFrame_Click;
+            // 
+            // cbLoop
+            // 
+            cbLoop.AutoSize = true;
+            cbLoop.Location = new System.Drawing.Point(368, 22);
+            cbLoop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbLoop.Name = "cbLoop";
+            cbLoop.Size = new System.Drawing.Size(79, 29);
+            cbLoop.TabIndex = 9;
+            cbLoop.Text = "Loop";
+            cbLoop.UseVisualStyleBackColor = true;
+            // 
+            // btNextFrame
+            // 
+            btNextFrame.Location = new System.Drawing.Point(556, 111);
+            btNextFrame.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btNextFrame.Name = "btNextFrame";
+            btNextFrame.Size = new System.Drawing.Size(124, 44);
+            btNextFrame.TabIndex = 8;
+            btNextFrame.Text = "Next frame";
+            btNextFrame.UseVisualStyleBackColor = true;
+            btNextFrame.Click += btNextFrame_Click;
+            // 
+            // btStop
+            // 
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStop.Location = new System.Drawing.Point(300, 111);
+            btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(78, 44);
+            btStop.TabIndex = 7;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
+            // 
+            // btPause
+            // 
+            btPause.Location = new System.Drawing.Point(202, 111);
+            btPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btPause.Name = "btPause";
+            btPause.Size = new System.Drawing.Size(88, 44);
+            btPause.TabIndex = 6;
+            btPause.Text = "Pause";
+            btPause.UseVisualStyleBackColor = true;
+            btPause.Click += btPause_Click;
+            // 
+            // btResume
+            // 
+            btResume.Location = new System.Drawing.Point(91, 111);
+            btResume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btResume.Name = "btResume";
+            btResume.Size = new System.Drawing.Size(102, 44);
+            btResume.TabIndex = 5;
+            btResume.Text = "Resume";
+            btResume.UseVisualStyleBackColor = true;
+            btResume.Click += btResume_Click;
+            // 
+            // btStart
+            // 
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStart.Location = new System.Drawing.Point(10, 111);
+            btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(71, 44);
+            btStart.TabIndex = 4;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
+            // 
+            // tbSpeed
+            // 
+            tbSpeed.Location = new System.Drawing.Point(536, 52);
+            tbSpeed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbSpeed.Maximum = 25;
+            tbSpeed.Name = "tbSpeed";
+            tbSpeed.Size = new System.Drawing.Size(149, 69);
+            tbSpeed.TabIndex = 3;
+            tbSpeed.Value = 10;
+            tbSpeed.Scroll += tbSpeed_Scroll;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(538, 20);
+            label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(62, 25);
+            label16.TabIndex = 2;
+            label16.Text = "Speed";
+            // 
+            // lbTime
+            // 
+            lbTime.AutoSize = true;
+            lbTime.Location = new System.Drawing.Point(362, 61);
+            lbTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbTime.Name = "lbTime";
+            lbTime.Size = new System.Drawing.Size(155, 25);
+            lbTime.TabIndex = 1;
+            lbTime.Text = "00:00:00/00:00:00";
+            // 
+            // tbTimeline
+            // 
+            tbTimeline.Location = new System.Drawing.Point(10, 36);
+            tbTimeline.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbTimeline.Maximum = 100;
+            tbTimeline.Name = "tbTimeline";
+            tbTimeline.Size = new System.Drawing.Size(344, 69);
+            tbTimeline.TabIndex = 0;
+            tbTimeline.Scroll += tbTimeline_Scroll;
+            // 
+            // tabControl3
+            // 
+            tabControl3.Controls.Add(tabPage10);
+            tabControl3.Controls.Add(tabPage9);
+            tabControl3.Location = new System.Drawing.Point(20, 1022);
+            tabControl3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl3.Name = "tabControl3";
+            tabControl3.SelectedIndex = 0;
+            tabControl3.Size = new System.Drawing.Size(516, 281);
+            tabControl3.TabIndex = 9;
+            // 
+            // tabPage10
+            // 
+            tabPage10.Controls.Add(cbTelemetry);
+            tabPage10.Controls.Add(mmLog);
+            tabPage10.Controls.Add(cbDebugMode);
+            tabPage10.Location = new System.Drawing.Point(4, 34);
+            tabPage10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage10.Name = "tabPage10";
+            tabPage10.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage10.Size = new System.Drawing.Size(508, 243);
+            tabPage10.TabIndex = 2;
+            tabPage10.Text = "Debug";
+            tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // cbTelemetry
+            // 
+            cbTelemetry.AutoSize = true;
+            cbTelemetry.Checked = true;
+            cbTelemetry.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbTelemetry.Location = new System.Drawing.Point(132, 25);
+            cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbTelemetry.Name = "cbTelemetry";
+            cbTelemetry.Size = new System.Drawing.Size(113, 29);
+            cbTelemetry.TabIndex = 4;
+            cbTelemetry.Text = "Telemetry";
+            cbTelemetry.UseVisualStyleBackColor = true;
+            // 
+            // mmLog
+            // 
+            mmLog.Location = new System.Drawing.Point(28, 69);
+            mmLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            mmLog.Multiline = true;
+            mmLog.Name = "mmLog";
+            mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmLog.Size = new System.Drawing.Size(436, 146);
+            mmLog.TabIndex = 1;
+            // 
+            // cbDebugMode
+            // 
+            cbDebugMode.AutoSize = true;
+            cbDebugMode.Location = new System.Drawing.Point(28, 25);
+            cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDebugMode.Name = "cbDebugMode";
+            cbDebugMode.Size = new System.Drawing.Size(92, 29);
+            cbDebugMode.TabIndex = 0;
+            cbDebugMode.Text = "Debug";
+            cbDebugMode.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            tabPage9.Controls.Add(tabControl13);
+            tabPage9.Location = new System.Drawing.Point(4, 34);
+            tabPage9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage9.Name = "tabPage9";
+            tabPage9.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage9.Size = new System.Drawing.Size(508, 243);
+            tabPage9.TabIndex = 1;
+            tabPage9.Text = "Snapshot";
+            tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabControl13
+            // 
+            tabControl13.Controls.Add(tabPage54);
+            tabControl13.Controls.Add(tabPage55);
+            tabControl13.Location = new System.Drawing.Point(2, 5);
+            tabControl13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl13.Name = "tabControl13";
+            tabControl13.SelectedIndex = 0;
+            tabControl13.Size = new System.Drawing.Size(489, 214);
+            tabControl13.TabIndex = 27;
+            // 
+            // tabPage54
+            // 
+            tabPage54.Controls.Add(cbImageType);
+            tabPage54.Controls.Add(lbJPEGQuality);
+            tabPage54.Controls.Add(label38);
+            tabPage54.Controls.Add(btSaveScreenshot);
+            tabPage54.Controls.Add(btSelectScreenshotsFolder);
+            tabPage54.Controls.Add(label63);
+            tabPage54.Controls.Add(edScreenshotsFolder);
+            tabPage54.Controls.Add(tbJPEGQuality);
+            tabPage54.Location = new System.Drawing.Point(4, 34);
+            tabPage54.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage54.Name = "tabPage54";
+            tabPage54.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage54.Size = new System.Drawing.Size(481, 176);
+            tabPage54.TabIndex = 0;
+            tabPage54.Text = "Main";
+            tabPage54.UseVisualStyleBackColor = true;
+            // 
+            // cbImageType
+            // 
+            cbImageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbImageType.FormattingEnabled = true;
+            cbImageType.Items.AddRange(new object[] { "BMP", "JPEG", "GIF", "PNG", "TIFF" });
+            cbImageType.Location = new System.Drawing.Point(18, 114);
+            cbImageType.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbImageType.Name = "cbImageType";
+            cbImageType.Size = new System.Drawing.Size(120, 33);
+            cbImageType.TabIndex = 33;
+            // 
+            // lbJPEGQuality
+            // 
+            lbJPEGQuality.AutoSize = true;
+            lbJPEGQuality.Location = new System.Drawing.Point(436, 119);
+            lbJPEGQuality.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbJPEGQuality.Name = "lbJPEGQuality";
+            lbJPEGQuality.Size = new System.Drawing.Size(32, 25);
+            lbJPEGQuality.TabIndex = 32;
+            lbJPEGQuality.Text = "85";
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new System.Drawing.Point(198, 119);
+            label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label38.Name = "label38";
+            label38.Size = new System.Drawing.Size(107, 25);
+            label38.TabIndex = 31;
+            label38.Text = "JPEG quality";
+            // 
+            // btSaveScreenshot
+            // 
+            btSaveScreenshot.Location = new System.Drawing.Point(378, 28);
+            btSaveScreenshot.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSaveScreenshot.Name = "btSaveScreenshot";
+            btSaveScreenshot.Size = new System.Drawing.Size(92, 44);
+            btSaveScreenshot.TabIndex = 29;
+            btSaveScreenshot.Text = "Save";
+            btSaveScreenshot.UseVisualStyleBackColor = true;
+            btSaveScreenshot.Click += btSaveScreenshot_Click;
+            // 
+            // btSelectScreenshotsFolder
+            // 
+            btSelectScreenshotsFolder.Location = new System.Drawing.Point(330, 28);
+            btSelectScreenshotsFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectScreenshotsFolder.Name = "btSelectScreenshotsFolder";
+            btSelectScreenshotsFolder.Size = new System.Drawing.Size(38, 44);
+            btSelectScreenshotsFolder.TabIndex = 28;
+            btSelectScreenshotsFolder.Text = "...";
+            btSelectScreenshotsFolder.UseVisualStyleBackColor = true;
+            btSelectScreenshotsFolder.Click += btSelectScreenshotsFolder_Click;
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Location = new System.Drawing.Point(12, 36);
+            label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label63.Name = "label63";
+            label63.Size = new System.Drawing.Size(62, 25);
+            label63.TabIndex = 27;
+            label63.Text = "Folder";
+            // 
+            // edScreenshotsFolder
+            // 
+            edScreenshotsFolder.Location = new System.Drawing.Point(89, 31);
+            edScreenshotsFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edScreenshotsFolder.Name = "edScreenshotsFolder";
+            edScreenshotsFolder.Size = new System.Drawing.Size(228, 31);
+            edScreenshotsFolder.TabIndex = 26;
+            edScreenshotsFolder.Text = "c:\\";
+            // 
+            // tbJPEGQuality
+            // 
+            tbJPEGQuality.BackColor = System.Drawing.SystemColors.Window;
+            tbJPEGQuality.Location = new System.Drawing.Point(320, 92);
+            tbJPEGQuality.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbJPEGQuality.Maximum = 100;
+            tbJPEGQuality.Name = "tbJPEGQuality";
+            tbJPEGQuality.Size = new System.Drawing.Size(108, 69);
+            tbJPEGQuality.TabIndex = 30;
+            tbJPEGQuality.TickFrequency = 5;
+            tbJPEGQuality.Value = 85;
+            tbJPEGQuality.Scroll += tbJPEGQuality_Scroll;
+            // 
+            // tabPage55
+            // 
+            tabPage55.Controls.Add(edScreenshotHeight);
+            tabPage55.Controls.Add(label176);
+            tabPage55.Controls.Add(edScreenshotWidth);
+            tabPage55.Controls.Add(label177);
+            tabPage55.Controls.Add(cbScreenshotResize);
+            tabPage55.Location = new System.Drawing.Point(4, 34);
+            tabPage55.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage55.Name = "tabPage55";
+            tabPage55.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage55.Size = new System.Drawing.Size(481, 176);
+            tabPage55.TabIndex = 1;
+            tabPage55.Text = "Resize";
+            tabPage55.UseVisualStyleBackColor = true;
+            // 
+            // edScreenshotHeight
+            // 
+            edScreenshotHeight.Location = new System.Drawing.Point(271, 84);
+            edScreenshotHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edScreenshotHeight.Name = "edScreenshotHeight";
+            edScreenshotHeight.Size = new System.Drawing.Size(56, 31);
+            edScreenshotHeight.TabIndex = 128;
+            edScreenshotHeight.Text = "576";
+            // 
+            // label176
+            // 
+            label176.AutoSize = true;
+            label176.Location = new System.Drawing.Point(192, 91);
+            label176.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label176.Name = "label176";
+            label176.Size = new System.Drawing.Size(65, 25);
+            label176.TabIndex = 127;
+            label176.Text = "Height";
+            // 
+            // edScreenshotWidth
+            // 
+            edScreenshotWidth.Location = new System.Drawing.Point(122, 84);
+            edScreenshotWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edScreenshotWidth.Name = "edScreenshotWidth";
+            edScreenshotWidth.Size = new System.Drawing.Size(56, 31);
+            edScreenshotWidth.TabIndex = 126;
+            edScreenshotWidth.Text = "768";
+            // 
+            // label177
+            // 
+            label177.AutoSize = true;
+            label177.Location = new System.Drawing.Point(52, 91);
+            label177.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label177.Name = "label177";
+            label177.Size = new System.Drawing.Size(60, 25);
+            label177.TabIndex = 125;
+            label177.Text = "Width";
+            // 
+            // cbScreenshotResize
+            // 
+            cbScreenshotResize.AutoSize = true;
+            cbScreenshotResize.Location = new System.Drawing.Point(28, 34);
+            cbScreenshotResize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbScreenshotResize.Name = "cbScreenshotResize";
+            cbScreenshotResize.Size = new System.Drawing.Size(101, 29);
+            cbScreenshotResize.TabIndex = 0;
+            cbScreenshotResize.Text = "Enabled";
+            cbScreenshotResize.UseVisualStyleBackColor = true;
+            // 
+            // fontDialog1
+            // 
+            fontDialog1.Color = System.Drawing.Color.White;
+            fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            fontDialog1.FontMustExist = true;
+            fontDialog1.ShowColor = true;
+            // 
+            // openFileDialog2
+            // 
+            openFileDialog2.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
+            // 
+            // timer1
+            // 
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new System.Drawing.Point(544, 245);
+            label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label29.Name = "label29";
+            label29.Size = new System.Drawing.Size(118, 25);
+            label29.TabIndex = 14;
+            label29.Text = "Source mode";
+            // 
+            // cbSourceMode
+            // 
+            cbSourceMode.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            cbSourceMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbSourceMode.FormattingEnabled = true;
+            cbSourceMode.Items.AddRange(new object[] { "File / Network stream (decode using LAV) ", "File / Network stream (decode using GPU) ", "File / Network stream (decode using FFMPEG)", "File (decode using DirectShow)", "File (decode using VLC)", "Blu-Ray", "File from memory (decode using DirectShow)", "MMS / WMV (network stream)", "HTTP / RTSP / RTMP (decoding using VLC)", "Encrypted file (decode using DirectShow)", "Custom source filter (specified by CLSID)", "MIDI / KAR" });
+            cbSourceMode.Location = new System.Drawing.Point(720, 241);
+            cbSourceMode.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            cbSourceMode.Name = "cbSourceMode";
+            cbSourceMode.Size = new System.Drawing.Size(516, 33);
+            cbSourceMode.TabIndex = 15;
+            // 
+            // lbSourceFiles
+            // 
+            lbSourceFiles.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            lbSourceFiles.ContextMenuStrip = mnPlaylist;
+            lbSourceFiles.FormattingEnabled = true;
+            lbSourceFiles.ItemHeight = 25;
+            lbSourceFiles.Location = new System.Drawing.Point(550, 125);
+            lbSourceFiles.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            lbSourceFiles.Name = "lbSourceFiles";
+            lbSourceFiles.Size = new System.Drawing.Size(686, 104);
+            lbSourceFiles.TabIndex = 16;
+            // 
+            // mnPlaylist
+            // 
+            mnPlaylist.ImageScalingSize = new System.Drawing.Size(24, 24);
+            mnPlaylist.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mnPlaylistRemove, mnPlaylistRemoveAll });
+            mnPlaylist.Name = "mnPlaylist";
+            mnPlaylist.Size = new System.Drawing.Size(171, 68);
+            mnPlaylist.ItemClicked += mnPlaylist_ItemClicked;
+            // 
+            // mnPlaylistRemove
+            // 
+            mnPlaylistRemove.Name = "mnPlaylistRemove";
+            mnPlaylistRemove.Size = new System.Drawing.Size(170, 32);
+            mnPlaylistRemove.Text = "Remove";
+            // 
+            // mnPlaylistRemoveAll
+            // 
+            mnPlaylistRemoveAll.Name = "mnPlaylistRemoveAll";
+            mnPlaylistRemoveAll.Size = new System.Drawing.Size(170, 32);
+            mnPlaylistRemoveAll.Text = "Remove all";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Location = new System.Drawing.Point(548, 94);
+            label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label30.Name = "label30";
+            label30.Size = new System.Drawing.Size(66, 25);
+            label30.TabIndex = 17;
+            label30.Text = "Playlist";
+            // 
+            // btAddFileToPlaylist
+            // 
+            btAddFileToPlaylist.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btAddFileToPlaylist.Location = new System.Drawing.Point(1138, 52);
+            btAddFileToPlaylist.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            btAddFileToPlaylist.Name = "btAddFileToPlaylist";
+            btAddFileToPlaylist.Size = new System.Drawing.Size(62, 42);
+            btAddFileToPlaylist.TabIndex = 18;
+            btAddFileToPlaylist.Text = "Add";
+            btAddFileToPlaylist.UseVisualStyleBackColor = true;
+            btAddFileToPlaylist.Click += btAddFileToPlaylist_Click;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new System.Drawing.Point(1060, 19);
+            linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new System.Drawing.Size(184, 25);
+            linkLabel1.TabIndex = 20;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Watch video tutorials!";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new System.Drawing.Point(548, 305);
+            label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label37.Name = "label37";
+            label37.Size = new System.Drawing.Size(166, 25);
+            label37.TabIndex = 21;
+            label37.Text = "Custom filter CLSID";
+            // 
+            // edCustomSourceFilter
+            // 
+            edCustomSourceFilter.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            edCustomSourceFilter.Location = new System.Drawing.Point(720, 298);
+            edCustomSourceFilter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCustomSourceFilter.Name = "edCustomSourceFilter";
+            edCustomSourceFilter.Size = new System.Drawing.Size(516, 31);
+            edCustomSourceFilter.TabIndex = 22;
+            // 
+            // VideoView1
+            // 
+            VideoView1.BackColor = System.Drawing.Color.Black;
+            VideoView1.Location = new System.Drawing.Point(550, 352);
+            VideoView1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            VideoView1.Name = "VideoView1";
+            VideoView1.Size = new System.Drawing.Size(691, 591);
+            VideoView1.StatusOverlay = null;
+            VideoView1.TabIndex = 23;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1262, 1321);
-            this.Controls.Add(this.VideoView1);
-            this.Controls.Add(this.edCustomSourceFilter);
-            this.Controls.Add(this.label37);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.btAddFileToPlaylist);
-            this.Controls.Add(this.label30);
-            this.Controls.Add(this.lbSourceFiles);
-            this.Controls.Add(this.cbSourceMode);
-            this.Controls.Add(this.label29);
-            this.Controls.Add(this.tabControl3);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btSelectFile);
-            this.Controls.Add(this.edFilenameOrURL);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.tabControl1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.Name = "Form1";
-            this.Text = "Media Player SDK .Net - Main Demo";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage20.ResumeLayout(false);
-            this.tabPage20.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.tabPage49.ResumeLayout(false);
-            this.tabPage49.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgTags)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabControl4.ResumeLayout(false);
-            this.tabPage16.ResumeLayout(false);
-            this.tabPage16.PerformLayout();
-            this.groupBox28.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
-            this.tabPage17.ResumeLayout(false);
-            this.tabPage17.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabControl17.ResumeLayout(false);
-            this.tabPage68.ResumeLayout(false);
-            this.tabPage68.PerformLayout();
-            this.tabControl7.ResumeLayout(false);
-            this.tabPage29.ResumeLayout(false);
-            this.tabPage42.ResumeLayout(false);
-            this.tabPage18.ResumeLayout(false);
-            this.tabPage18.PerformLayout();
-            this.groupBox37.ResumeLayout(false);
-            this.tabPage19.ResumeLayout(false);
-            this.tabPage19.PerformLayout();
-            this.groupBox40.ResumeLayout(false);
-            this.groupBox40.PerformLayout();
-            this.groupBox39.ResumeLayout(false);
-            this.groupBox39.PerformLayout();
-            this.groupBox38.ResumeLayout(false);
-            this.groupBox38.PerformLayout();
-            this.tabPage22.ResumeLayout(false);
-            this.tabPage22.PerformLayout();
-            this.groupBox45.ResumeLayout(false);
-            this.groupBox45.PerformLayout();
-            this.tabPage43.ResumeLayout(false);
-            this.tabPage43.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLiveRotationAngle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaturation)).EndInit();
-            this.tabPage69.ResumeLayout(false);
-            this.tabPage69.PerformLayout();
-            this.tabPage59.ResumeLayout(false);
-            this.tabPage59.PerformLayout();
-            this.tabPage51.ResumeLayout(false);
-            this.tabPage51.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUBlur)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUDarkness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPULightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUSaturation)).EndInit();
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjSaturation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjHue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAdjBrightness)).EndInit();
-            this.tabPage15.ResumeLayout(false);
-            this.tabPage15.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeySmoothing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeyThresholdSensitivity)).EndInit();
-            this.tabPage46.ResumeLayout(false);
-            this.tabPage46.PerformLayout();
-            this.tabPage48.ResumeLayout(false);
-            this.tabPage48.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioTimeshift)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainLFE)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainL)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainLFE)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainL)).EndInit();
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
-            this.tabControl18.ResumeLayout(false);
-            this.tabPage71.ResumeLayout(false);
-            this.tabPage71.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).EndInit();
-            this.tabPage72.ResumeLayout(false);
-            this.tabPage72.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).EndInit();
-            this.tabPage73.ResumeLayout(false);
-            this.tabPage73.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudRelease)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudDynAmp)).EndInit();
-            this.tabPage75.ResumeLayout(false);
-            this.tabPage75.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAud3DSound)).EndInit();
-            this.tabPage76.ResumeLayout(false);
-            this.tabPage76.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudTrueBass)).EndInit();
-            this.tabPage27.ResumeLayout(false);
-            this.tabPage27.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudPitchShift)).EndInit();
-            this.tabPage50.ResumeLayout(false);
-            this.tabPage50.PerformLayout();
-            this.groupBox41.ResumeLayout(false);
-            this.groupBox41.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioChannelMapperVolume)).EndInit();
-            this.tabPage28.ResumeLayout(false);
-            this.tabPage28.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterBoost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterAmplification)).EndInit();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.groupBox19.ResumeLayout(false);
-            this.tabControl6.ResumeLayout(false);
-            this.tabPage30.ResumeLayout(false);
-            this.tabPage30.PerformLayout();
-            this.tabPage31.ResumeLayout(false);
-            this.tabPage31.PerformLayout();
-            this.tabPage32.ResumeLayout(false);
-            this.tabPage32.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbOSDTranspLevel)).EndInit();
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
-            this.tabPage12.ResumeLayout(false);
-            this.tabControl5.ResumeLayout(false);
-            this.tabPage33.ResumeLayout(false);
-            this.tabPage33.PerformLayout();
-            this.tabPage34.ResumeLayout(false);
-            this.tabPage34.PerformLayout();
-            this.tabPage47.ResumeLayout(false);
-            this.tabPage47.PerformLayout();
-            this.tabPage13.ResumeLayout(false);
-            this.tabPage13.PerformLayout();
-            this.tabControl9.ResumeLayout(false);
-            this.tabPage44.ResumeLayout(false);
-            this.tabPage44.PerformLayout();
-            this.tabPage45.ResumeLayout(false);
-            this.groupBox25.ResumeLayout(false);
-            this.groupBox25.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetHLThreshold)).EndInit();
-            this.groupBox27.ResumeLayout(false);
-            this.groupBox27.PerformLayout();
-            this.groupBox26.ResumeLayout(false);
-            this.groupBox26.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetDropFramesThreshold)).EndInit();
-            this.groupBox24.ResumeLayout(false);
-            this.groupBox24.PerformLayout();
-            this.tabPage14.ResumeLayout(false);
-            this.tabPage14.PerformLayout();
-            this.tabPage21.ResumeLayout(false);
-            this.tabPage21.PerformLayout();
-            this.tabPage23.ResumeLayout(false);
-            this.tabPage23.PerformLayout();
-            this.groupBox48.ResumeLayout(false);
-            this.groupBox48.PerformLayout();
-            this.tabPage24.ResumeLayout(false);
-            this.tabPage24.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbReversePlaybackTrackbar)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage10.ResumeLayout(false);
-            this.tabPage10.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            this.tabControl13.ResumeLayout(false);
-            this.tabPage54.ResumeLayout(false);
-            this.tabPage54.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbJPEGQuality)).EndInit();
-            this.tabPage55.ResumeLayout(false);
-            this.tabPage55.PerformLayout();
-            this.mnPlaylist.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1262, 1330);
+            Controls.Add(VideoView1);
+            Controls.Add(edCustomSourceFilter);
+            Controls.Add(label37);
+            Controls.Add(linkLabel1);
+            Controls.Add(btAddFileToPlaylist);
+            Controls.Add(label30);
+            Controls.Add(lbSourceFiles);
+            Controls.Add(cbSourceMode);
+            Controls.Add(label29);
+            Controls.Add(tabControl3);
+            Controls.Add(groupBox2);
+            Controls.Add(btSelectFile);
+            Controls.Add(edFilenameOrURL);
+            Controls.Add(label14);
+            Controls.Add(tabControl1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            Name = "Form1";
+            Text = "Media Player SDK .Net - Main Demo";
+            FormClosed += Form1_FormClosed;
+            Load += Form1_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage20.ResumeLayout(false);
+            tabPage20.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabControl2.ResumeLayout(false);
+            tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
+            tabPage49.ResumeLayout(false);
+            tabPage49.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)imgTags).EndInit();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbBalance4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbBalance1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabControl4.ResumeLayout(false);
+            tabPage16.ResumeLayout(false);
+            tabPage16.PerformLayout();
+            groupBox28.ResumeLayout(false);
+            groupBox13.ResumeLayout(false);
+            groupBox13.PerformLayout();
+            tabPage17.ResumeLayout(false);
+            tabPage17.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabControl17.ResumeLayout(false);
+            tabPage68.ResumeLayout(false);
+            tabPage68.PerformLayout();
+            tabControl7.ResumeLayout(false);
+            tabPage29.ResumeLayout(false);
+            tabPage42.ResumeLayout(false);
+            tabPage18.ResumeLayout(false);
+            tabPage18.PerformLayout();
+            groupBox37.ResumeLayout(false);
+            tabPage19.ResumeLayout(false);
+            tabPage19.PerformLayout();
+            groupBox40.ResumeLayout(false);
+            groupBox40.PerformLayout();
+            groupBox39.ResumeLayout(false);
+            groupBox39.PerformLayout();
+            groupBox38.ResumeLayout(false);
+            groupBox38.PerformLayout();
+            tabPage22.ResumeLayout(false);
+            tabPage22.PerformLayout();
+            groupBox45.ResumeLayout(false);
+            groupBox45.PerformLayout();
+            tabPage43.ResumeLayout(false);
+            tabPage43.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbLiveRotationAngle).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbDarkness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbLightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSaturation).EndInit();
+            tabPage69.ResumeLayout(false);
+            tabPage69.PerformLayout();
+            tabPage59.ResumeLayout(false);
+            tabPage59.PerformLayout();
+            tabPage51.ResumeLayout(false);
+            tabPage51.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGPUBlur).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUDarkness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPULightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUSaturation).EndInit();
+            tabPage8.ResumeLayout(false);
+            tabPage8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAdjSaturation).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjHue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAdjBrightness).EndInit();
+            tabPage15.ResumeLayout(false);
+            tabPage15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeySmoothing).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeyThresholdSensitivity).EndInit();
+            tabPage46.ResumeLayout(false);
+            tabPage46.PerformLayout();
+            tabPage48.ResumeLayout(false);
+            tabPage48.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioTimeshift).EndInit();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainLFE).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainC).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainL).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainLFE).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainC).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainL).EndInit();
+            tabPage11.ResumeLayout(false);
+            tabPage11.PerformLayout();
+            tabControl18.ResumeLayout(false);
+            tabPage71.ResumeLayout(false);
+            tabPage71.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).EndInit();
+            tabPage72.ResumeLayout(false);
+            tabPage72.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).EndInit();
+            tabPage73.ResumeLayout(false);
+            tabPage73.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudRelease).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudAttack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudDynAmp).EndInit();
+            tabPage75.ResumeLayout(false);
+            tabPage75.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAud3DSound).EndInit();
+            tabPage76.ResumeLayout(false);
+            tabPage76.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudTrueBass).EndInit();
+            tabPage27.ResumeLayout(false);
+            tabPage27.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudPitchShift).EndInit();
+            tabPage50.ResumeLayout(false);
+            tabPage50.PerformLayout();
+            groupBox41.ResumeLayout(false);
+            groupBox41.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioChannelMapperVolume).EndInit();
+            tabPage28.ResumeLayout(false);
+            tabPage28.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterBoost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterAmplification).EndInit();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            groupBox19.ResumeLayout(false);
+            tabControl6.ResumeLayout(false);
+            tabPage30.ResumeLayout(false);
+            tabPage30.PerformLayout();
+            tabPage31.ResumeLayout(false);
+            tabPage31.PerformLayout();
+            tabPage32.ResumeLayout(false);
+            tabPage32.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbOSDTranspLevel).EndInit();
+            groupBox15.ResumeLayout(false);
+            groupBox15.PerformLayout();
+            tabPage12.ResumeLayout(false);
+            tabControl5.ResumeLayout(false);
+            tabPage33.ResumeLayout(false);
+            tabPage33.PerformLayout();
+            tabPage34.ResumeLayout(false);
+            tabPage34.PerformLayout();
+            tabPage47.ResumeLayout(false);
+            tabPage47.PerformLayout();
+            tabPage13.ResumeLayout(false);
+            tabPage13.PerformLayout();
+            tabControl9.ResumeLayout(false);
+            tabPage44.ResumeLayout(false);
+            tabPage44.PerformLayout();
+            tabPage45.ResumeLayout(false);
+            groupBox25.ResumeLayout(false);
+            groupBox25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetHLThreshold).EndInit();
+            groupBox27.ResumeLayout(false);
+            groupBox27.PerformLayout();
+            groupBox26.ResumeLayout(false);
+            groupBox26.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetDropFramesThreshold).EndInit();
+            groupBox24.ResumeLayout(false);
+            groupBox24.PerformLayout();
+            tabPage14.ResumeLayout(false);
+            tabPage14.PerformLayout();
+            tabPage21.ResumeLayout(false);
+            tabPage21.PerformLayout();
+            tabPage23.ResumeLayout(false);
+            tabPage23.PerformLayout();
+            groupBox48.ResumeLayout(false);
+            groupBox48.PerformLayout();
+            tabPage24.ResumeLayout(false);
+            tabPage24.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbReversePlaybackTrackbar).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
+            tabControl3.ResumeLayout(false);
+            tabPage10.ResumeLayout(false);
+            tabPage10.PerformLayout();
+            tabPage9.ResumeLayout(false);
+            tabControl13.ResumeLayout(false);
+            tabPage54.ResumeLayout(false);
+            tabPage54.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbJPEGQuality).EndInit();
+            tabPage55.ResumeLayout(false);
+            tabPage55.PerformLayout();
+            mnPlaylist.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -7956,15 +7653,7 @@ namespace Media_Player_Demo
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TextBox mmInfo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbDVDSubtitles;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbDVDAudio;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox edDVDVideo;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btReadInfo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox cbPlayAudio;
@@ -8040,17 +7729,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.Button btResume;
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Button btNextFrame;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btDVDControlRootMenu;
-        private System.Windows.Forms.Button btDVDControlTitleMenu;
-        private System.Windows.Forms.ComboBox cbDVDControlSubtitles;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cbDVDControlAudio;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox cbDVDControlChapter;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cbDVDControlTitle;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.TabPage tabPage10;
@@ -8062,7 +7740,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.TextBox mmLog;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ListBox lbDVDTitles;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabControl tabControl18;
         private System.Windows.Forms.TabPage tabPage71;
