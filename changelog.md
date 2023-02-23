@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.41
+[ALL] Updated Avalonia VideoView control. Resolved issues with video playback on Windows on HighDPI displays.
+
 ## 15.5.40
 * [Video Capture SDK .Net] Added CustomVideoFrameRate property to MFOutput. You can set custom frame rate if your source provide incorrect frame rate (IP camera, for example).
 

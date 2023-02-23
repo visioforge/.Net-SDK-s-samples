@@ -13,8 +13,8 @@
     <Product>VisioForge Video Edit SDK .Net</Product>
     <Description>VisioForge Video Edit SDK .Net CSharp Demo</Description>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.40.0</AssemblyVersion>
-    <FileVersion>15.5.40.0</FileVersion>
+    <AssemblyVersion>15.5.41.0</AssemblyVersion>
+    <FileVersion>15.5.41.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -72,8 +72,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.40" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.40" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.41" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.41" />
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.0.5" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.0.5" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.0.5" />
