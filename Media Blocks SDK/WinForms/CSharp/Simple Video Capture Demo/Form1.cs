@@ -29,7 +29,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
         private VideoRendererBlock _videoRenderer;
 
-        private VideoRendererBlock _videoRenderer2;
+        //private VideoRendererBlock _videoRenderer2;
 
         //   private AudioRendererBlock _audioRenderer;
 
@@ -167,7 +167,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
             // video renderer
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-            _videoRenderer2 = new VideoRendererBlock(_pipeline, VideoView2);
+            //_videoRenderer2 = new VideoRendererBlock(_pipeline, VideoView2);
 
             // audio renderer
             // _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
@@ -569,7 +569,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         {
             //_videoTee.Outputs[1].DisconnectLive(_videoRenderer2.Input);
             _videoTee.Outputs[1].DisconnectLive(_h264Encoder.Input);
-            
+
             if (!_h264Encoder.GetElement().SendEvent(Event.NewEos()))
             {
                 System.Diagnostics.Debug.WriteLine("EOS event failed");

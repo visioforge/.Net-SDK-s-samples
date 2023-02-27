@@ -147,8 +147,6 @@ namespace Simple_Video_Capture_Demo_Avalonia
 
         private RadioButton rbPreview;
 
-        private RadioButton rbCapture;
-
         private TextBlock lbTimestamp;
 
         private Button btSaveSnapshot;
@@ -373,8 +371,6 @@ namespace Simple_Video_Capture_Demo_Avalonia
             cbDebugMode = this.FindControl<CheckBox>("cbDebugMode");
 
             rbPreview = this.FindControl<RadioButton>("rbPreview");
-
-            rbCapture = this.FindControl<RadioButton>("rbCapture");
 
             lbTimestamp = this.FindControl<TextBlock>("lbTimestamp");
 
