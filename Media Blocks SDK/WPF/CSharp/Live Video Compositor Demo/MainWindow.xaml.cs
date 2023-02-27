@@ -371,31 +371,31 @@ namespace Live_Video_Compositor_Demo
             var ctx = new ContextMenu();
 
             var miScreen = new MenuItem() { Header = "Screen source" };
-            miScreen.Click += async (sender, e) =>
+            miScreen.Click += async (senderm, args) =>
             {
                 await AddScreenSourceAsync();
             };
 
             var miCamera = new MenuItem() { Header = "Camera source" };
-            miCamera.Click += async (sender, e) =>
+            miCamera.Click += async (senderm, args) =>
             {
                 await AddCameraSourceAsync();
             };
 
             var miAudioSource = new MenuItem() { Header = "Audio source" };
-            miAudioSource.Click += async (sender, e) =>
+            miAudioSource.Click += async (senderm, args) =>
             {
                 await AddAudioSourceAsync();
             };
 
             var miAudioVirtual = new MenuItem() { Header = "Virtual audio" };
-            miAudioVirtual.Click += async (sender, e) =>
+            miAudioVirtual.Click += async (senderm, args) =>
             {
                 await AddAudioVirtualAsync();
             };
 
             var miVideoVirtual = new MenuItem() { Header = "Virtual video" };
-            miVideoVirtual.Click += async (sender, e) =>
+            miVideoVirtual.Click += async (senderm, args) =>
             {
                 await AddVideoVirtualAsync();
             };
@@ -424,19 +424,19 @@ namespace Live_Video_Compositor_Demo
             var ctx = new ContextMenu();
 
             var miMP4 = new MenuItem() { Header = "MP4 file" };
-            miMP4.Click += async (sender, e) =>
+            miMP4.Click += async (senderm, args) =>
             {
                 await AddMP4OutputAsync();
             };
 
             var miWebM = new MenuItem() { Header = "WebM file" };
-            miWebM.Click += async (sender, e) =>
+            miWebM.Click += async (senderm, args) =>
             {
                 await AddWebMOutputAsync();
             };
 
             var miMP3 = new MenuItem() { Header = "MP3 file" };
-            miMP3.Click += async (sender, e) =>
+            miMP3.Click += async (senderm, args) =>
             {
                 await AddMP3OutputAsync();
             };
