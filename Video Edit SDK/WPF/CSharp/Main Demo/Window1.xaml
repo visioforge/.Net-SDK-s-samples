@@ -911,6 +911,8 @@
                             <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="120,36,0,0" x:Name="label154" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
+                    <Label Content="[NuGet only] Install decoders to edit MP4 files, or if you can see errors while adding files" Height="29" HorizontalAlignment="Left" Margin="88,4,0,0" x:Name="llDecoders" VerticalAlignment="Top" FontWeight="Bold"
+                        Foreground="#FF0016CF" MouseDown="llDecoders_MouseDown" FontSize="10" />
                 </Grid>
             </TabItem>
             <TabItem Header="Cut file (w/o reencoding)">

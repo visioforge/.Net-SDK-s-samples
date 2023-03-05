@@ -133,7 +133,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device.Name)
+                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
                         {
                             Format = formatItem.ToFormat()
                         };

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -24,6 +25,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
@@ -105,12 +107,12 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = AudioRendererBlock.GetDevices();
+            var audioOutputDevices = AudioRendererBlock.GetDevices().Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
                 {
-                    cbAudioOutput.Items.Add(item);
+                    cbAudioOutput.Items.Add(item.Name);
                 }
 
                 cbAudioOutput.SelectedIndex = 0;
@@ -144,7 +146,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device.Name)
+                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
                         {
                             Format = formatItem.ToFormat()
                         };
@@ -180,7 +182,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
+            _audioRenderer = new AudioRendererBlock(DeviceEnumerator.AudioOutputs.Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
 
             // capture
             if (capture)

@@ -115,7 +115,7 @@ namespace Video_Compositor_Demo
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
                         if (formatItem != null)
                         {
-                            settings = new VideoCaptureDeviceSourceSettings(device.Name)
+                            settings = new VideoCaptureDeviceSourceSettings(device)
                             {
                                 Format = formatItem.ToFormat()
                             };

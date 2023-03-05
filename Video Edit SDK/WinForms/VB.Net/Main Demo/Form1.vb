@@ -2889,6 +2889,11 @@ Public Class Form1
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86)
         Process.Start(startInfo)
     End Sub
+
+    Private Sub llDecoders_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llDecoders.LinkClicked
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub)
+        Process.Start(startInfo)
+    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

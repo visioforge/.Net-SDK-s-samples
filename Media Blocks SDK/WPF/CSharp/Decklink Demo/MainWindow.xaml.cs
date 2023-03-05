@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 using System.Windows;
-
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -18,6 +18,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Decklink;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
@@ -143,7 +144,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkAudioOutput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = AudioRendererBlock.GetDevices();
+            var audioOutputDevices = AudioRendererBlock.GetDevices().Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -273,7 +274,7 @@ namespace Decklink_MB_Demo
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock(cbAudioOutput.Text);
+            _audioRenderer = new AudioRendererBlock(DeviceEnumerator.AudioOutputs.Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
 
             // effects
             _videoEffects = new VideoEffectsWinBlock();

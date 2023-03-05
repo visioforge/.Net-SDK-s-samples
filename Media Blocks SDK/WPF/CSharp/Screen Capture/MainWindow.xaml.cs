@@ -19,6 +19,9 @@ using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core;
+using System.Linq;
+using VisioForge.Core.Types.X.Output;
 
 namespace Screen_Capture_MB_WPF
 {
@@ -143,7 +146,7 @@ namespace Screen_Capture_MB_WPF
             if (cbRecordAudio.IsChecked == true)
             {
                 _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
-                _audioRenderer = new AudioRendererBlock(cbAudioOutputDevice.Text);
+                _audioRenderer = new AudioRendererBlock(DeviceEnumerator.AudioOutputs.Where(device => device.Name == cbAudioOutputDevice.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
             }
 
             if (rbPreview.IsChecked == true)

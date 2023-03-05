@@ -676,6 +676,7 @@ Partial Class Form1
         Me.edTagTrackID = New System.Windows.Forms.TextBox()
         Me.cbTelemetry = New System.Windows.Forms.CheckBox()
         Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
+        Me.llDecoders = New System.Windows.Forms.LinkLabel()
         Me.tabControl1.SuspendLayout
         Me.tabPage1.SuspendLayout
         Me.tabControl2.SuspendLayout
@@ -826,7 +827,7 @@ Partial Class Form1
         'mmLog
         '
         Me.mmLog.Location = New System.Drawing.Point(16, 852)
-        Me.mmLog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.mmLog.Margin = New System.Windows.Forms.Padding(4)
         Me.mmLog.Multiline = True
         Me.mmLog.Name = "mmLog"
         Me.mmLog.Size = New System.Drawing.Size(463, 84)
@@ -846,7 +847,7 @@ Partial Class Form1
         '
         Me.cbDebugMode.AutoSize = True
         Me.cbDebugMode.Location = New System.Drawing.Point(224, 786)
-        Me.cbDebugMode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDebugMode.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDebugMode.Name = "cbDebugMode"
         Me.cbDebugMode.Size = New System.Drawing.Size(127, 24)
         Me.cbDebugMode.TabIndex = 74
@@ -858,7 +859,7 @@ Partial Class Form1
         Me.rbPreview.AutoSize = True
         Me.rbPreview.Checked = True
         Me.rbPreview.Location = New System.Drawing.Point(120, 784)
-        Me.rbPreview.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbPreview.Margin = New System.Windows.Forms.Padding(4)
         Me.rbPreview.Name = "rbPreview"
         Me.rbPreview.Size = New System.Drawing.Size(88, 24)
         Me.rbPreview.TabIndex = 73
@@ -870,7 +871,7 @@ Partial Class Form1
         '
         Me.rbConvert.AutoSize = True
         Me.rbConvert.Location = New System.Drawing.Point(16, 784)
-        Me.rbConvert.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbConvert.Margin = New System.Windows.Forms.Padding(4)
         Me.rbConvert.Name = "rbConvert"
         Me.rbConvert.Size = New System.Drawing.Size(89, 24)
         Me.rbConvert.TabIndex = 72
@@ -895,7 +896,7 @@ Partial Class Form1
         Me.tabControl1.Controls.Add(Me.TabPage78)
         Me.tabControl1.Controls.Add(Me.TabPage22)
         Me.tabControl1.Location = New System.Drawing.Point(16, 18)
-        Me.tabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl1.Name = "tabControl1"
         Me.tabControl1.SelectedIndex = 0
         Me.tabControl1.Size = New System.Drawing.Size(465, 750)
@@ -905,9 +906,9 @@ Partial Class Form1
         '
         Me.tabPage1.Controls.Add(Me.tabControl2)
         Me.tabPage1.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage1.Name = "tabPage1"
-        Me.tabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage1.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage1.Size = New System.Drawing.Size(457, 717)
         Me.tabPage1.TabIndex = 0
         Me.tabPage1.Text = "Output"
@@ -918,7 +919,7 @@ Partial Class Form1
         Me.tabControl2.Controls.Add(Me.TabPage4)
         Me.tabControl2.Controls.Add(Me.tabPage30)
         Me.tabControl2.Location = New System.Drawing.Point(6, 9)
-        Me.tabControl2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl2.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl2.Name = "tabControl2"
         Me.tabControl2.SelectedIndex = 0
         Me.tabControl2.Size = New System.Drawing.Size(438, 696)
@@ -939,7 +940,7 @@ Partial Class Form1
         Me.TabPage4.Controls.Add(Me.label9)
         Me.TabPage4.Location = New System.Drawing.Point(4, 29)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage4.Size = New System.Drawing.Size(430, 663)
         Me.TabPage4.TabIndex = 7
         Me.TabPage4.Text = "Main"
@@ -1000,7 +1001,7 @@ Partial Class Form1
         'btConfigure
         '
         Me.btConfigure.Location = New System.Drawing.Point(20, 123)
-        Me.btConfigure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btConfigure.Margin = New System.Windows.Forms.Padding(4)
         Me.btConfigure.Name = "btConfigure"
         Me.btConfigure.Size = New System.Drawing.Size(92, 33)
         Me.btConfigure.TabIndex = 58
@@ -1010,7 +1011,7 @@ Partial Class Form1
         'btSelectOutput
         '
         Me.btSelectOutput.Location = New System.Drawing.Point(369, 216)
-        Me.btSelectOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btSelectOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.btSelectOutput.Name = "btSelectOutput"
         Me.btSelectOutput.Size = New System.Drawing.Size(39, 33)
         Me.btSelectOutput.TabIndex = 57
@@ -1020,7 +1021,7 @@ Partial Class Form1
         'edOutput
         '
         Me.edOutput.Location = New System.Drawing.Point(20, 219)
-        Me.edOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.edOutput.Name = "edOutput"
         Me.edOutput.Size = New System.Drawing.Size(338, 26)
         Me.edOutput.TabIndex = 56
@@ -1042,7 +1043,7 @@ Partial Class Form1
         Me.cbOutputVideoFormat.FormattingEnabled = True
         Me.cbOutputVideoFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video"})
         Me.cbOutputVideoFormat.Location = New System.Drawing.Point(20, 48)
-        Me.cbOutputVideoFormat.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbOutputVideoFormat.Margin = New System.Windows.Forms.Padding(4)
         Me.cbOutputVideoFormat.Name = "cbOutputVideoFormat"
         Me.cbOutputVideoFormat.Size = New System.Drawing.Size(386, 28)
         Me.cbOutputVideoFormat.TabIndex = 54
@@ -1077,9 +1078,9 @@ Partial Class Form1
         Me.tabPage30.Controls.Add(Me.label2)
         Me.tabPage30.Controls.Add(Me.cbResize)
         Me.tabPage30.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage30.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage30.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage30.Name = "tabPage30"
-        Me.tabPage30.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage30.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage30.Size = New System.Drawing.Size(430, 663)
         Me.tabPage30.TabIndex = 6
         Me.tabPage30.Text = "Resolution / frame rate"
@@ -1098,7 +1099,7 @@ Partial Class Form1
         'edCropRight
         '
         Me.edCropRight.Location = New System.Drawing.Point(268, 328)
-        Me.edCropRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edCropRight.Margin = New System.Windows.Forms.Padding(4)
         Me.edCropRight.Name = "edCropRight"
         Me.edCropRight.Size = New System.Drawing.Size(52, 26)
         Me.edCropRight.TabIndex = 166
@@ -1117,7 +1118,7 @@ Partial Class Form1
         'edCropBottom
         '
         Me.edCropBottom.Location = New System.Drawing.Point(126, 328)
-        Me.edCropBottom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edCropBottom.Margin = New System.Windows.Forms.Padding(4)
         Me.edCropBottom.Name = "edCropBottom"
         Me.edCropBottom.Size = New System.Drawing.Size(52, 26)
         Me.edCropBottom.TabIndex = 164
@@ -1136,7 +1137,7 @@ Partial Class Form1
         'edCropLeft
         '
         Me.edCropLeft.Location = New System.Drawing.Point(268, 291)
-        Me.edCropLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edCropLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.edCropLeft.Name = "edCropLeft"
         Me.edCropLeft.Size = New System.Drawing.Size(52, 26)
         Me.edCropLeft.TabIndex = 162
@@ -1155,7 +1156,7 @@ Partial Class Form1
         'edCropTop
         '
         Me.edCropTop.Location = New System.Drawing.Point(126, 291)
-        Me.edCropTop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edCropTop.Margin = New System.Windows.Forms.Padding(4)
         Me.edCropTop.Name = "edCropTop"
         Me.edCropTop.Size = New System.Drawing.Size(52, 26)
         Me.edCropTop.TabIndex = 160
@@ -1175,7 +1176,7 @@ Partial Class Form1
         '
         Me.cbCrop.AutoSize = True
         Me.cbCrop.Location = New System.Drawing.Point(16, 260)
-        Me.cbCrop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbCrop.Margin = New System.Windows.Forms.Padding(4)
         Me.cbCrop.Name = "cbCrop"
         Me.cbCrop.Size = New System.Drawing.Size(69, 24)
         Me.cbCrop.TabIndex = 158
@@ -1198,7 +1199,7 @@ Partial Class Form1
         Me.cbRotate.FormattingEnabled = True
         Me.cbRotate.Items.AddRange(New Object() {"0", "90", "180", "270"})
         Me.cbRotate.Location = New System.Drawing.Point(126, 219)
-        Me.cbRotate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbRotate.Margin = New System.Windows.Forms.Padding(4)
         Me.cbRotate.Name = "cbRotate"
         Me.cbRotate.Size = New System.Drawing.Size(178, 28)
         Me.cbRotate.TabIndex = 142
@@ -1209,7 +1210,7 @@ Partial Class Form1
         Me.cbFrameRate.FormattingEnabled = True
         Me.cbFrameRate.Items.AddRange(New Object() {"0", "1", "2", "5", "10", "12", "15", "20", "25", "30"})
         Me.cbFrameRate.Location = New System.Drawing.Point(16, 99)
-        Me.cbFrameRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbFrameRate.Margin = New System.Windows.Forms.Padding(4)
         Me.cbFrameRate.Name = "cbFrameRate"
         Me.cbFrameRate.Size = New System.Drawing.Size(70, 28)
         Me.cbFrameRate.TabIndex = 45
@@ -1217,7 +1218,7 @@ Partial Class Form1
         'edHeight
         '
         Me.edHeight.Location = New System.Drawing.Point(234, 27)
-        Me.edHeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edHeight.Margin = New System.Windows.Forms.Padding(4)
         Me.edHeight.Name = "edHeight"
         Me.edHeight.Size = New System.Drawing.Size(70, 26)
         Me.edHeight.TabIndex = 43
@@ -1226,7 +1227,7 @@ Partial Class Form1
         'edWidth
         '
         Me.edWidth.Location = New System.Drawing.Point(126, 27)
-        Me.edWidth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edWidth.Margin = New System.Windows.Forms.Padding(4)
         Me.edWidth.Name = "edWidth"
         Me.edWidth.Size = New System.Drawing.Size(70, 26)
         Me.edWidth.TabIndex = 42
@@ -1246,7 +1247,7 @@ Partial Class Form1
         '
         Me.cbResize.AutoSize = True
         Me.cbResize.Location = New System.Drawing.Point(16, 30)
-        Me.cbResize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbResize.Margin = New System.Windows.Forms.Padding(4)
         Me.cbResize.Name = "cbResize"
         Me.cbResize.Size = New System.Drawing.Size(84, 24)
         Me.cbResize.TabIndex = 40
@@ -1257,9 +1258,9 @@ Partial Class Form1
         '
         Me.tabPage31.Controls.Add(Me.tabControl17)
         Me.tabPage31.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage31.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage31.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage31.Name = "tabPage31"
-        Me.tabPage31.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage31.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage31.Size = New System.Drawing.Size(457, 717)
         Me.tabPage31.TabIndex = 4
         Me.tabPage31.Text = "Video processing"
@@ -1276,7 +1277,7 @@ Partial Class Form1
         Me.tabControl17.Controls.Add(Me.tabPage70)
         Me.tabControl17.Controls.Add(Me.TabPage81)
         Me.tabControl17.Location = New System.Drawing.Point(2, 9)
-        Me.tabControl17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl17.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl17.Name = "tabControl17"
         Me.tabControl17.SelectedIndex = 0
         Me.tabControl17.Size = New System.Drawing.Size(447, 699)
@@ -1299,9 +1300,9 @@ Partial Class Form1
         Me.tabPage68.Controls.Add(Me.cbGreyscale)
         Me.tabPage68.Controls.Add(Me.cbEffects)
         Me.tabPage68.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage68.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage68.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage68.Name = "tabPage68"
-        Me.tabPage68.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage68.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage68.Size = New System.Drawing.Size(439, 666)
         Me.tabPage68.TabIndex = 0
         Me.tabPage68.Text = "Effects"
@@ -1311,7 +1312,7 @@ Partial Class Form1
         '
         Me.cbFlipY.AutoSize = True
         Me.cbFlipY.Location = New System.Drawing.Point(315, 225)
-        Me.cbFlipY.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbFlipY.Margin = New System.Windows.Forms.Padding(4)
         Me.cbFlipY.Name = "cbFlipY"
         Me.cbFlipY.Size = New System.Drawing.Size(75, 24)
         Me.cbFlipY.TabIndex = 71
@@ -1322,7 +1323,7 @@ Partial Class Form1
         '
         Me.cbFlipX.AutoSize = True
         Me.cbFlipX.Location = New System.Drawing.Point(225, 225)
-        Me.cbFlipX.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbFlipX.Margin = New System.Windows.Forms.Padding(4)
         Me.cbFlipX.Name = "cbFlipX"
         Me.cbFlipX.Size = New System.Drawing.Size(75, 24)
         Me.cbFlipX.TabIndex = 70
@@ -1377,7 +1378,7 @@ Partial Class Form1
         Me.tabControl7.Controls.Add(Me.TabPage16)
         Me.tabControl7.Controls.Add(Me.TabPage33)
         Me.tabControl7.Location = New System.Drawing.Point(4, 267)
-        Me.tabControl7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl7.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl7.Name = "tabControl7"
         Me.tabControl7.SelectedIndex = 0
         Me.tabControl7.Size = New System.Drawing.Size(424, 396)
@@ -1390,9 +1391,9 @@ Partial Class Form1
         Me.tabPage29.Controls.Add(Me.lbTextLogos)
         Me.tabPage29.Controls.Add(Me.btTextLogoAdd)
         Me.tabPage29.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage29.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage29.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage29.Name = "tabPage29"
-        Me.tabPage29.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage29.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage29.Size = New System.Drawing.Size(416, 363)
         Me.tabPage29.TabIndex = 0
         Me.tabPage29.Text = "Text logo"
@@ -1401,7 +1402,7 @@ Partial Class Form1
         'btTextLogoRemove
         '
         Me.btTextLogoRemove.Location = New System.Drawing.Point(312, 310)
-        Me.btTextLogoRemove.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btTextLogoRemove.Margin = New System.Windows.Forms.Padding(4)
         Me.btTextLogoRemove.Name = "btTextLogoRemove"
         Me.btTextLogoRemove.Size = New System.Drawing.Size(88, 33)
         Me.btTextLogoRemove.TabIndex = 11
@@ -1411,7 +1412,7 @@ Partial Class Form1
         'btTextLogoEdit
         '
         Me.btTextLogoEdit.Location = New System.Drawing.Point(111, 310)
-        Me.btTextLogoEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btTextLogoEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btTextLogoEdit.Name = "btTextLogoEdit"
         Me.btTextLogoEdit.Size = New System.Drawing.Size(88, 33)
         Me.btTextLogoEdit.TabIndex = 10
@@ -1423,7 +1424,7 @@ Partial Class Form1
         Me.lbTextLogos.FormattingEnabled = True
         Me.lbTextLogos.ItemHeight = 20
         Me.lbTextLogos.Location = New System.Drawing.Point(15, 18)
-        Me.lbTextLogos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbTextLogos.Margin = New System.Windows.Forms.Padding(4)
         Me.lbTextLogos.Name = "lbTextLogos"
         Me.lbTextLogos.Size = New System.Drawing.Size(384, 264)
         Me.lbTextLogos.TabIndex = 9
@@ -1431,7 +1432,7 @@ Partial Class Form1
         'btTextLogoAdd
         '
         Me.btTextLogoAdd.Location = New System.Drawing.Point(12, 310)
-        Me.btTextLogoAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btTextLogoAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btTextLogoAdd.Name = "btTextLogoAdd"
         Me.btTextLogoAdd.Size = New System.Drawing.Size(88, 33)
         Me.btTextLogoAdd.TabIndex = 8
@@ -1445,9 +1446,9 @@ Partial Class Form1
         Me.tabPage42.Controls.Add(Me.lbImageLogos)
         Me.tabPage42.Controls.Add(Me.btImageLogoAdd)
         Me.tabPage42.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage42.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage42.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage42.Name = "tabPage42"
-        Me.tabPage42.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage42.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage42.Size = New System.Drawing.Size(416, 363)
         Me.tabPage42.TabIndex = 1
         Me.tabPage42.Text = "Image logo"
@@ -1456,7 +1457,7 @@ Partial Class Form1
         'btImageLogoRemove
         '
         Me.btImageLogoRemove.Location = New System.Drawing.Point(312, 310)
-        Me.btImageLogoRemove.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btImageLogoRemove.Margin = New System.Windows.Forms.Padding(4)
         Me.btImageLogoRemove.Name = "btImageLogoRemove"
         Me.btImageLogoRemove.Size = New System.Drawing.Size(88, 33)
         Me.btImageLogoRemove.TabIndex = 15
@@ -1466,7 +1467,7 @@ Partial Class Form1
         'btImageLogoEdit
         '
         Me.btImageLogoEdit.Location = New System.Drawing.Point(111, 310)
-        Me.btImageLogoEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btImageLogoEdit.Margin = New System.Windows.Forms.Padding(4)
         Me.btImageLogoEdit.Name = "btImageLogoEdit"
         Me.btImageLogoEdit.Size = New System.Drawing.Size(88, 33)
         Me.btImageLogoEdit.TabIndex = 14
@@ -1478,7 +1479,7 @@ Partial Class Form1
         Me.lbImageLogos.FormattingEnabled = True
         Me.lbImageLogos.ItemHeight = 20
         Me.lbImageLogos.Location = New System.Drawing.Point(15, 18)
-        Me.lbImageLogos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbImageLogos.Margin = New System.Windows.Forms.Padding(4)
         Me.lbImageLogos.Name = "lbImageLogos"
         Me.lbImageLogos.Size = New System.Drawing.Size(384, 264)
         Me.lbImageLogos.TabIndex = 13
@@ -1486,7 +1487,7 @@ Partial Class Form1
         'btImageLogoAdd
         '
         Me.btImageLogoAdd.Location = New System.Drawing.Point(12, 310)
-        Me.btImageLogoAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btImageLogoAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btImageLogoAdd.Name = "btImageLogoAdd"
         Me.btImageLogoAdd.Size = New System.Drawing.Size(88, 33)
         Me.btImageLogoAdd.TabIndex = 12
@@ -1499,7 +1500,7 @@ Partial Class Form1
         Me.TabPage7.Controls.Add(Me.cbZoom)
         Me.TabPage7.Location = New System.Drawing.Point(4, 29)
         Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage7.Size = New System.Drawing.Size(416, 363)
         Me.TabPage7.TabIndex = 2
         Me.TabPage7.Text = "Zoom"
@@ -1514,9 +1515,9 @@ Partial Class Form1
         Me.groupBox37.Controls.Add(Me.btEffZoomDown)
         Me.groupBox37.Controls.Add(Me.btEffZoomUp)
         Me.groupBox37.Location = New System.Drawing.Point(129, 72)
-        Me.groupBox37.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox37.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox37.Name = "groupBox37"
-        Me.groupBox37.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox37.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox37.Size = New System.Drawing.Size(178, 150)
         Me.groupBox37.TabIndex = 20
         Me.groupBox37.TabStop = False
@@ -1525,7 +1526,7 @@ Partial Class Form1
         'btEffZoomRight
         '
         Me.btEffZoomRight.Location = New System.Drawing.Point(128, 48)
-        Me.btEffZoomRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomRight.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomRight.Name = "btEffZoomRight"
         Me.btEffZoomRight.Size = New System.Drawing.Size(32, 69)
         Me.btEffZoomRight.TabIndex = 5
@@ -1535,7 +1536,7 @@ Partial Class Form1
         'btEffZoomLeft
         '
         Me.btEffZoomLeft.Location = New System.Drawing.Point(20, 46)
-        Me.btEffZoomLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomLeft.Name = "btEffZoomLeft"
         Me.btEffZoomLeft.Size = New System.Drawing.Size(32, 69)
         Me.btEffZoomLeft.TabIndex = 4
@@ -1545,7 +1546,7 @@ Partial Class Form1
         'btEffZoomOut
         '
         Me.btEffZoomOut.Location = New System.Drawing.Point(92, 66)
-        Me.btEffZoomOut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomOut.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomOut.Name = "btEffZoomOut"
         Me.btEffZoomOut.Size = New System.Drawing.Size(34, 33)
         Me.btEffZoomOut.TabIndex = 3
@@ -1555,7 +1556,7 @@ Partial Class Form1
         'btEffZoomIn
         '
         Me.btEffZoomIn.Location = New System.Drawing.Point(52, 66)
-        Me.btEffZoomIn.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomIn.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomIn.Name = "btEffZoomIn"
         Me.btEffZoomIn.Size = New System.Drawing.Size(33, 33)
         Me.btEffZoomIn.TabIndex = 2
@@ -1565,7 +1566,7 @@ Partial Class Form1
         'btEffZoomDown
         '
         Me.btEffZoomDown.Location = New System.Drawing.Point(51, 99)
-        Me.btEffZoomDown.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomDown.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomDown.Name = "btEffZoomDown"
         Me.btEffZoomDown.Size = New System.Drawing.Size(76, 33)
         Me.btEffZoomDown.TabIndex = 1
@@ -1575,7 +1576,7 @@ Partial Class Form1
         'btEffZoomUp
         '
         Me.btEffZoomUp.Location = New System.Drawing.Point(51, 28)
-        Me.btEffZoomUp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEffZoomUp.Margin = New System.Windows.Forms.Padding(4)
         Me.btEffZoomUp.Name = "btEffZoomUp"
         Me.btEffZoomUp.Size = New System.Drawing.Size(76, 33)
         Me.btEffZoomUp.TabIndex = 0
@@ -1586,7 +1587,7 @@ Partial Class Form1
         '
         Me.cbZoom.AutoSize = True
         Me.cbZoom.Location = New System.Drawing.Point(18, 21)
-        Me.cbZoom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbZoom.Margin = New System.Windows.Forms.Padding(4)
         Me.cbZoom.Name = "cbZoom"
         Me.cbZoom.Size = New System.Drawing.Size(94, 24)
         Me.cbZoom.TabIndex = 19
@@ -1601,7 +1602,7 @@ Partial Class Form1
         Me.TabPage16.Controls.Add(Me.cbPan)
         Me.TabPage16.Location = New System.Drawing.Point(4, 29)
         Me.TabPage16.Name = "TabPage16"
-        Me.TabPage16.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage16.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage16.Size = New System.Drawing.Size(416, 363)
         Me.TabPage16.TabIndex = 3
         Me.TabPage16.Text = "Pan"
@@ -1627,7 +1628,7 @@ Partial Class Form1
         'edPanDestHeight
         '
         Me.edPanDestHeight.Location = New System.Drawing.Point(184, 74)
-        Me.edPanDestHeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanDestHeight.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanDestHeight.Name = "edPanDestHeight"
         Me.edPanDestHeight.Size = New System.Drawing.Size(48, 26)
         Me.edPanDestHeight.TabIndex = 17
@@ -1646,7 +1647,7 @@ Partial Class Form1
         'edPanDestWidth
         '
         Me.edPanDestWidth.Location = New System.Drawing.Point(184, 36)
-        Me.edPanDestWidth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanDestWidth.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanDestWidth.Name = "edPanDestWidth"
         Me.edPanDestWidth.Size = New System.Drawing.Size(48, 26)
         Me.edPanDestWidth.TabIndex = 15
@@ -1665,7 +1666,7 @@ Partial Class Form1
         'edPanDestTop
         '
         Me.edPanDestTop.Location = New System.Drawing.Point(64, 75)
-        Me.edPanDestTop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanDestTop.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanDestTop.Name = "edPanDestTop"
         Me.edPanDestTop.Size = New System.Drawing.Size(48, 26)
         Me.edPanDestTop.TabIndex = 12
@@ -1684,7 +1685,7 @@ Partial Class Form1
         'edPanDestLeft
         '
         Me.edPanDestLeft.Location = New System.Drawing.Point(64, 38)
-        Me.edPanDestLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanDestLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanDestLeft.Name = "edPanDestLeft"
         Me.edPanDestLeft.Size = New System.Drawing.Size(48, 26)
         Me.edPanDestLeft.TabIndex = 10
@@ -1720,7 +1721,7 @@ Partial Class Form1
         'edPanSourceHeight
         '
         Me.edPanSourceHeight.Location = New System.Drawing.Point(184, 74)
-        Me.edPanSourceHeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanSourceHeight.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanSourceHeight.Name = "edPanSourceHeight"
         Me.edPanSourceHeight.Size = New System.Drawing.Size(48, 26)
         Me.edPanSourceHeight.TabIndex = 17
@@ -1739,7 +1740,7 @@ Partial Class Form1
         'edPanSourceWidth
         '
         Me.edPanSourceWidth.Location = New System.Drawing.Point(184, 36)
-        Me.edPanSourceWidth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanSourceWidth.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanSourceWidth.Name = "edPanSourceWidth"
         Me.edPanSourceWidth.Size = New System.Drawing.Size(48, 26)
         Me.edPanSourceWidth.TabIndex = 15
@@ -1758,7 +1759,7 @@ Partial Class Form1
         'edPanSourceTop
         '
         Me.edPanSourceTop.Location = New System.Drawing.Point(64, 75)
-        Me.edPanSourceTop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanSourceTop.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanSourceTop.Name = "edPanSourceTop"
         Me.edPanSourceTop.Size = New System.Drawing.Size(48, 26)
         Me.edPanSourceTop.TabIndex = 12
@@ -1777,7 +1778,7 @@ Partial Class Form1
         'edPanSourceLeft
         '
         Me.edPanSourceLeft.Location = New System.Drawing.Point(64, 38)
-        Me.edPanSourceLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanSourceLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanSourceLeft.Name = "edPanSourceLeft"
         Me.edPanSourceLeft.Size = New System.Drawing.Size(48, 26)
         Me.edPanSourceLeft.TabIndex = 10
@@ -1800,9 +1801,9 @@ Partial Class Form1
         Me.groupBox38.Controls.Add(Me.edPanStartTime)
         Me.groupBox38.Controls.Add(Me.label297)
         Me.groupBox38.Location = New System.Drawing.Point(18, 42)
-        Me.groupBox38.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox38.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox38.Name = "groupBox38"
-        Me.groupBox38.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox38.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox38.Size = New System.Drawing.Size(252, 66)
         Me.groupBox38.TabIndex = 56
         Me.groupBox38.TabStop = False
@@ -1811,7 +1812,7 @@ Partial Class Form1
         'edPanStopTime
         '
         Me.edPanStopTime.Location = New System.Drawing.Point(176, 27)
-        Me.edPanStopTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanStopTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanStopTime.Name = "edPanStopTime"
         Me.edPanStopTime.Size = New System.Drawing.Size(56, 26)
         Me.edPanStopTime.TabIndex = 34
@@ -1831,7 +1832,7 @@ Partial Class Form1
         'edPanStartTime
         '
         Me.edPanStartTime.Location = New System.Drawing.Point(64, 27)
-        Me.edPanStartTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edPanStartTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edPanStartTime.Name = "edPanStartTime"
         Me.edPanStartTime.Size = New System.Drawing.Size(56, 26)
         Me.edPanStartTime.TabIndex = 32
@@ -1852,7 +1853,7 @@ Partial Class Form1
         '
         Me.cbPan.AutoSize = True
         Me.cbPan.Location = New System.Drawing.Point(18, 9)
-        Me.cbPan.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbPan.Margin = New System.Windows.Forms.Padding(4)
         Me.cbPan.Name = "cbPan"
         Me.cbPan.Size = New System.Drawing.Size(94, 24)
         Me.cbPan.TabIndex = 55
@@ -1866,9 +1867,9 @@ Partial Class Form1
         Me.TabPage33.Controls.Add(Me.groupBox45)
         Me.TabPage33.Controls.Add(Me.cbVideoFadeInOut)
         Me.TabPage33.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage33.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage33.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage33.Name = "TabPage33"
-        Me.TabPage33.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage33.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage33.Size = New System.Drawing.Size(416, 363)
         Me.TabPage33.TabIndex = 4
         Me.TabPage33.Text = "Fade-in/out"
@@ -1878,7 +1879,7 @@ Partial Class Form1
         '
         Me.rbVideoFadeOut.AutoSize = True
         Me.rbVideoFadeOut.Location = New System.Drawing.Point(160, 129)
-        Me.rbVideoFadeOut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbVideoFadeOut.Margin = New System.Windows.Forms.Padding(4)
         Me.rbVideoFadeOut.Name = "rbVideoFadeOut"
         Me.rbVideoFadeOut.Size = New System.Drawing.Size(99, 24)
         Me.rbVideoFadeOut.TabIndex = 64
@@ -1891,7 +1892,7 @@ Partial Class Form1
         Me.rbVideoFadeIn.AutoSize = True
         Me.rbVideoFadeIn.Checked = True
         Me.rbVideoFadeIn.Location = New System.Drawing.Point(24, 129)
-        Me.rbVideoFadeIn.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbVideoFadeIn.Margin = New System.Windows.Forms.Padding(4)
         Me.rbVideoFadeIn.Name = "rbVideoFadeIn"
         Me.rbVideoFadeIn.Size = New System.Drawing.Size(88, 24)
         Me.rbVideoFadeIn.TabIndex = 63
@@ -1906,9 +1907,9 @@ Partial Class Form1
         Me.groupBox45.Controls.Add(Me.edVideoFadeInOutStartTime)
         Me.groupBox45.Controls.Add(Me.label330)
         Me.groupBox45.Location = New System.Drawing.Point(24, 54)
-        Me.groupBox45.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox45.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox45.Name = "groupBox45"
-        Me.groupBox45.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox45.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox45.Size = New System.Drawing.Size(252, 66)
         Me.groupBox45.TabIndex = 62
         Me.groupBox45.TabStop = False
@@ -1917,7 +1918,7 @@ Partial Class Form1
         'edVideoFadeInOutStopTime
         '
         Me.edVideoFadeInOutStopTime.Location = New System.Drawing.Point(176, 27)
-        Me.edVideoFadeInOutStopTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edVideoFadeInOutStopTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edVideoFadeInOutStopTime.Name = "edVideoFadeInOutStopTime"
         Me.edVideoFadeInOutStopTime.Size = New System.Drawing.Size(56, 26)
         Me.edVideoFadeInOutStopTime.TabIndex = 34
@@ -1937,7 +1938,7 @@ Partial Class Form1
         'edVideoFadeInOutStartTime
         '
         Me.edVideoFadeInOutStartTime.Location = New System.Drawing.Point(64, 27)
-        Me.edVideoFadeInOutStartTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edVideoFadeInOutStartTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edVideoFadeInOutStartTime.Name = "edVideoFadeInOutStartTime"
         Me.edVideoFadeInOutStartTime.Size = New System.Drawing.Size(56, 26)
         Me.edVideoFadeInOutStartTime.TabIndex = 32
@@ -1958,7 +1959,7 @@ Partial Class Form1
         '
         Me.cbVideoFadeInOut.AutoSize = True
         Me.cbVideoFadeInOut.Location = New System.Drawing.Point(24, 21)
-        Me.cbVideoFadeInOut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbVideoFadeInOut.Margin = New System.Windows.Forms.Padding(4)
         Me.cbVideoFadeInOut.Name = "cbVideoFadeInOut"
         Me.cbVideoFadeInOut.Size = New System.Drawing.Size(94, 24)
         Me.cbVideoFadeInOut.TabIndex = 61
@@ -1969,7 +1970,7 @@ Partial Class Form1
         '
         Me.tbContrast.BackColor = System.Drawing.SystemColors.Window
         Me.tbContrast.Location = New System.Drawing.Point(4, 154)
-        Me.tbContrast.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbContrast.Margin = New System.Windows.Forms.Padding(4)
         Me.tbContrast.Maximum = 255
         Me.tbContrast.Name = "tbContrast"
         Me.tbContrast.Size = New System.Drawing.Size(195, 69)
@@ -1979,7 +1980,7 @@ Partial Class Form1
         '
         Me.tbDarkness.BackColor = System.Drawing.SystemColors.Window
         Me.tbDarkness.Location = New System.Drawing.Point(213, 154)
-        Me.tbDarkness.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbDarkness.Margin = New System.Windows.Forms.Padding(4)
         Me.tbDarkness.Maximum = 255
         Me.tbDarkness.Name = "tbDarkness"
         Me.tbDarkness.Size = New System.Drawing.Size(195, 69)
@@ -1989,7 +1990,7 @@ Partial Class Form1
         '
         Me.tbLightness.BackColor = System.Drawing.SystemColors.Window
         Me.tbLightness.Location = New System.Drawing.Point(4, 74)
-        Me.tbLightness.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbLightness.Margin = New System.Windows.Forms.Padding(4)
         Me.tbLightness.Maximum = 255
         Me.tbLightness.Name = "tbLightness"
         Me.tbLightness.Size = New System.Drawing.Size(195, 69)
@@ -1999,7 +2000,7 @@ Partial Class Form1
         '
         Me.tbSaturation.BackColor = System.Drawing.SystemColors.Window
         Me.tbSaturation.Location = New System.Drawing.Point(213, 74)
-        Me.tbSaturation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbSaturation.Margin = New System.Windows.Forms.Padding(4)
         Me.tbSaturation.Maximum = 255
         Me.tbSaturation.Name = "tbSaturation"
         Me.tbSaturation.Size = New System.Drawing.Size(195, 69)
@@ -2011,7 +2012,7 @@ Partial Class Form1
         Me.cbInvert.AutoSize = True
         Me.cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cbInvert.Location = New System.Drawing.Point(129, 228)
-        Me.cbInvert.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbInvert.Margin = New System.Windows.Forms.Padding(4)
         Me.cbInvert.Name = "cbInvert"
         Me.cbInvert.Size = New System.Drawing.Size(75, 24)
         Me.cbInvert.TabIndex = 41
@@ -2022,7 +2023,7 @@ Partial Class Form1
         '
         Me.cbGreyscale.AutoSize = True
         Me.cbGreyscale.Location = New System.Drawing.Point(14, 228)
-        Me.cbGreyscale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGreyscale.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGreyscale.Name = "cbGreyscale"
         Me.cbGreyscale.Size = New System.Drawing.Size(106, 24)
         Me.cbGreyscale.TabIndex = 39
@@ -2035,7 +2036,7 @@ Partial Class Form1
         Me.cbEffects.Checked = True
         Me.cbEffects.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbEffects.Location = New System.Drawing.Point(12, 12)
-        Me.cbEffects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbEffects.Margin = New System.Windows.Forms.Padding(4)
         Me.cbEffects.Name = "cbEffects"
         Me.cbEffects.Size = New System.Drawing.Size(94, 24)
         Me.cbEffects.TabIndex = 37
@@ -2067,9 +2068,9 @@ Partial Class Form1
         Me.tabPage69.Controls.Add(Me.rbDeintCAVTEnabled)
         Me.tabPage69.Controls.Add(Me.cbDeinterlace)
         Me.tabPage69.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage69.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage69.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage69.Name = "tabPage69"
-        Me.tabPage69.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage69.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage69.Size = New System.Drawing.Size(439, 666)
         Me.tabPage69.TabIndex = 1
         Me.tabPage69.Text = "Deinterlace"
@@ -2088,7 +2089,7 @@ Partial Class Form1
         'edDeintTriangleWeight
         '
         Me.edDeintTriangleWeight.Location = New System.Drawing.Point(154, 390)
-        Me.edDeintTriangleWeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintTriangleWeight.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintTriangleWeight.Name = "edDeintTriangleWeight"
         Me.edDeintTriangleWeight.Size = New System.Drawing.Size(46, 26)
         Me.edDeintTriangleWeight.TabIndex = 27
@@ -2137,7 +2138,7 @@ Partial Class Form1
         'edDeintBlendConstants2
         '
         Me.edDeintBlendConstants2.Location = New System.Drawing.Point(332, 273)
-        Me.edDeintBlendConstants2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintBlendConstants2.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintBlendConstants2.Name = "edDeintBlendConstants2"
         Me.edDeintBlendConstants2.Size = New System.Drawing.Size(46, 26)
         Me.edDeintBlendConstants2.TabIndex = 22
@@ -2156,7 +2157,7 @@ Partial Class Form1
         'edDeintBlendConstants1
         '
         Me.edDeintBlendConstants1.Location = New System.Drawing.Point(332, 225)
-        Me.edDeintBlendConstants1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintBlendConstants1.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintBlendConstants1.Name = "edDeintBlendConstants1"
         Me.edDeintBlendConstants1.Size = New System.Drawing.Size(46, 26)
         Me.edDeintBlendConstants1.TabIndex = 20
@@ -2185,7 +2186,7 @@ Partial Class Form1
         'edDeintBlendThreshold2
         '
         Me.edDeintBlendThreshold2.Location = New System.Drawing.Point(154, 273)
-        Me.edDeintBlendThreshold2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintBlendThreshold2.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintBlendThreshold2.Name = "edDeintBlendThreshold2"
         Me.edDeintBlendThreshold2.Size = New System.Drawing.Size(46, 26)
         Me.edDeintBlendThreshold2.TabIndex = 17
@@ -2204,7 +2205,7 @@ Partial Class Form1
         'edDeintBlendThreshold1
         '
         Me.edDeintBlendThreshold1.Location = New System.Drawing.Point(154, 225)
-        Me.edDeintBlendThreshold1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintBlendThreshold1.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintBlendThreshold1.Name = "edDeintBlendThreshold1"
         Me.edDeintBlendThreshold1.Size = New System.Drawing.Size(46, 26)
         Me.edDeintBlendThreshold1.TabIndex = 15
@@ -2233,7 +2234,7 @@ Partial Class Form1
         'edDeintCAVTThreshold
         '
         Me.edDeintCAVTThreshold.Location = New System.Drawing.Point(154, 114)
-        Me.edDeintCAVTThreshold.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edDeintCAVTThreshold.Margin = New System.Windows.Forms.Padding(4)
         Me.edDeintCAVTThreshold.Name = "edDeintCAVTThreshold"
         Me.edDeintCAVTThreshold.Size = New System.Drawing.Size(46, 26)
         Me.edDeintCAVTThreshold.TabIndex = 12
@@ -2253,7 +2254,7 @@ Partial Class Form1
         '
         Me.rbDeintTriangleEnabled.AutoSize = True
         Me.rbDeintTriangleEnabled.Location = New System.Drawing.Point(27, 351)
-        Me.rbDeintTriangleEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDeintTriangleEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDeintTriangleEnabled.Name = "rbDeintTriangleEnabled"
         Me.rbDeintTriangleEnabled.Size = New System.Drawing.Size(90, 24)
         Me.rbDeintTriangleEnabled.TabIndex = 10
@@ -2264,7 +2265,7 @@ Partial Class Form1
         '
         Me.rbDeintBlendEnabled.AutoSize = True
         Me.rbDeintBlendEnabled.Location = New System.Drawing.Point(27, 183)
-        Me.rbDeintBlendEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDeintBlendEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDeintBlendEnabled.Name = "rbDeintBlendEnabled"
         Me.rbDeintBlendEnabled.Size = New System.Drawing.Size(75, 24)
         Me.rbDeintBlendEnabled.TabIndex = 9
@@ -2276,7 +2277,7 @@ Partial Class Form1
         Me.rbDeintCAVTEnabled.AutoSize = True
         Me.rbDeintCAVTEnabled.Checked = True
         Me.rbDeintCAVTEnabled.Location = New System.Drawing.Point(27, 75)
-        Me.rbDeintCAVTEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDeintCAVTEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDeintCAVTEnabled.Name = "rbDeintCAVTEnabled"
         Me.rbDeintCAVTEnabled.Size = New System.Drawing.Size(340, 24)
         Me.rbDeintCAVTEnabled.TabIndex = 8
@@ -2288,7 +2289,7 @@ Partial Class Form1
         '
         Me.cbDeinterlace.AutoSize = True
         Me.cbDeinterlace.Location = New System.Drawing.Point(27, 24)
-        Me.cbDeinterlace.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDeinterlace.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDeinterlace.Name = "cbDeinterlace"
         Me.cbDeinterlace.Size = New System.Drawing.Size(94, 24)
         Me.cbDeinterlace.TabIndex = 7
@@ -2301,9 +2302,9 @@ Partial Class Form1
         Me.tabPage59.Controls.Add(Me.rbDenoiseMosquito)
         Me.tabPage59.Controls.Add(Me.cbDenoise)
         Me.tabPage59.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage59.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage59.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage59.Name = "tabPage59"
-        Me.tabPage59.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage59.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage59.Size = New System.Drawing.Size(439, 666)
         Me.tabPage59.TabIndex = 4
         Me.tabPage59.Text = "Denoise"
@@ -2313,7 +2314,7 @@ Partial Class Form1
         '
         Me.rbDenoiseCAST.AutoSize = True
         Me.rbDenoiseCAST.Location = New System.Drawing.Point(27, 114)
-        Me.rbDenoiseCAST.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDenoiseCAST.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDenoiseCAST.Name = "rbDenoiseCAST"
         Me.rbDenoiseCAST.Size = New System.Drawing.Size(334, 24)
         Me.rbDenoiseCAST.TabIndex = 10
@@ -2325,7 +2326,7 @@ Partial Class Form1
         Me.rbDenoiseMosquito.AutoSize = True
         Me.rbDenoiseMosquito.Checked = True
         Me.rbDenoiseMosquito.Location = New System.Drawing.Point(27, 75)
-        Me.rbDenoiseMosquito.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDenoiseMosquito.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDenoiseMosquito.Name = "rbDenoiseMosquito"
         Me.rbDenoiseMosquito.Size = New System.Drawing.Size(99, 24)
         Me.rbDenoiseMosquito.TabIndex = 9
@@ -2337,7 +2338,7 @@ Partial Class Form1
         '
         Me.cbDenoise.AutoSize = True
         Me.cbDenoise.Location = New System.Drawing.Point(27, 24)
-        Me.cbDenoise.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDenoise.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDenoise.Name = "cbDenoise"
         Me.cbDenoise.Size = New System.Drawing.Size(94, 24)
         Me.cbDenoise.TabIndex = 8
@@ -2365,9 +2366,9 @@ Partial Class Form1
         Me.TabPage82.Controls.Add(Me.cbGPUInvert)
         Me.TabPage82.Controls.Add(Me.cbGPUGreyscale)
         Me.TabPage82.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage82.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage82.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage82.Name = "TabPage82"
-        Me.TabPage82.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage82.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage82.Size = New System.Drawing.Size(439, 666)
         Me.TabPage82.TabIndex = 8
         Me.TabPage82.Text = "GPU effects"
@@ -2387,7 +2388,7 @@ Partial Class Form1
         '
         Me.tbGPUBlur.BackColor = System.Drawing.SystemColors.Window
         Me.tbGPUBlur.Location = New System.Drawing.Point(16, 428)
-        Me.tbGPUBlur.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbGPUBlur.Margin = New System.Windows.Forms.Padding(4)
         Me.tbGPUBlur.Maximum = 30
         Me.tbGPUBlur.Name = "tbGPUBlur"
         Me.tbGPUBlur.Size = New System.Drawing.Size(195, 69)
@@ -2397,7 +2398,7 @@ Partial Class Form1
         '
         Me.cbVideoEffectsGPUEnabled.AutoSize = True
         Me.cbVideoEffectsGPUEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbVideoEffectsGPUEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbVideoEffectsGPUEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbVideoEffectsGPUEnabled.Name = "cbVideoEffectsGPUEnabled"
         Me.cbVideoEffectsGPUEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbVideoEffectsGPUEnabled.TabIndex = 97
@@ -2409,7 +2410,7 @@ Partial Class Form1
         Me.cbGPUOldMovie.AutoSize = True
         Me.cbGPUOldMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cbGPUOldMovie.Location = New System.Drawing.Point(218, 342)
-        Me.cbGPUOldMovie.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUOldMovie.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUOldMovie.Name = "cbGPUOldMovie"
         Me.cbGPUOldMovie.Size = New System.Drawing.Size(104, 24)
         Me.cbGPUOldMovie.TabIndex = 96
@@ -2421,7 +2422,7 @@ Partial Class Form1
         Me.cbGPUDeinterlace.AutoSize = True
         Me.cbGPUDeinterlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cbGPUDeinterlace.Location = New System.Drawing.Point(218, 308)
-        Me.cbGPUDeinterlace.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUDeinterlace.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUDeinterlace.Name = "cbGPUDeinterlace"
         Me.cbGPUDeinterlace.Size = New System.Drawing.Size(116, 24)
         Me.cbGPUDeinterlace.TabIndex = 94
@@ -2432,7 +2433,7 @@ Partial Class Form1
         '
         Me.cbGPUDenoise.AutoSize = True
         Me.cbGPUDenoise.Location = New System.Drawing.Point(26, 308)
-        Me.cbGPUDenoise.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUDenoise.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUDenoise.Name = "cbGPUDenoise"
         Me.cbGPUDenoise.Size = New System.Drawing.Size(94, 24)
         Me.cbGPUDenoise.TabIndex = 93
@@ -2443,7 +2444,7 @@ Partial Class Form1
         '
         Me.cbGPUPixelate.AutoSize = True
         Me.cbGPUPixelate.Location = New System.Drawing.Point(218, 274)
-        Me.cbGPUPixelate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUPixelate.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUPixelate.Name = "cbGPUPixelate"
         Me.cbGPUPixelate.Size = New System.Drawing.Size(90, 24)
         Me.cbGPUPixelate.TabIndex = 92
@@ -2454,7 +2455,7 @@ Partial Class Form1
         '
         Me.cbGPUNightVision.AutoSize = True
         Me.cbGPUNightVision.Location = New System.Drawing.Point(26, 274)
-        Me.cbGPUNightVision.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUNightVision.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUNightVision.Name = "cbGPUNightVision"
         Me.cbGPUNightVision.Size = New System.Drawing.Size(115, 24)
         Me.cbGPUNightVision.TabIndex = 91
@@ -2505,7 +2506,7 @@ Partial Class Form1
         '
         Me.tbGPUContrast.BackColor = System.Drawing.SystemColors.Window
         Me.tbGPUContrast.Location = New System.Drawing.Point(16, 168)
-        Me.tbGPUContrast.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbGPUContrast.Margin = New System.Windows.Forms.Padding(4)
         Me.tbGPUContrast.Maximum = 255
         Me.tbGPUContrast.Name = "tbGPUContrast"
         Me.tbGPUContrast.Size = New System.Drawing.Size(195, 69)
@@ -2516,7 +2517,7 @@ Partial Class Form1
         '
         Me.tbGPUDarkness.BackColor = System.Drawing.SystemColors.Window
         Me.tbGPUDarkness.Location = New System.Drawing.Point(225, 168)
-        Me.tbGPUDarkness.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbGPUDarkness.Margin = New System.Windows.Forms.Padding(4)
         Me.tbGPUDarkness.Maximum = 255
         Me.tbGPUDarkness.Name = "tbGPUDarkness"
         Me.tbGPUDarkness.Size = New System.Drawing.Size(195, 69)
@@ -2526,7 +2527,7 @@ Partial Class Form1
         '
         Me.tbGPULightness.BackColor = System.Drawing.SystemColors.Window
         Me.tbGPULightness.Location = New System.Drawing.Point(16, 87)
-        Me.tbGPULightness.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbGPULightness.Margin = New System.Windows.Forms.Padding(4)
         Me.tbGPULightness.Maximum = 255
         Me.tbGPULightness.Name = "tbGPULightness"
         Me.tbGPULightness.Size = New System.Drawing.Size(195, 69)
@@ -2536,7 +2537,7 @@ Partial Class Form1
         '
         Me.tbGPUSaturation.BackColor = System.Drawing.SystemColors.Window
         Me.tbGPUSaturation.Location = New System.Drawing.Point(225, 87)
-        Me.tbGPUSaturation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbGPUSaturation.Margin = New System.Windows.Forms.Padding(4)
         Me.tbGPUSaturation.Maximum = 255
         Me.tbGPUSaturation.Name = "tbGPUSaturation"
         Me.tbGPUSaturation.Size = New System.Drawing.Size(195, 69)
@@ -2548,7 +2549,7 @@ Partial Class Form1
         Me.cbGPUInvert.AutoSize = True
         Me.cbGPUInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cbGPUInvert.Location = New System.Drawing.Point(218, 242)
-        Me.cbGPUInvert.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUInvert.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUInvert.Name = "cbGPUInvert"
         Me.cbGPUInvert.Size = New System.Drawing.Size(75, 24)
         Me.cbGPUInvert.TabIndex = 82
@@ -2559,7 +2560,7 @@ Partial Class Form1
         '
         Me.cbGPUGreyscale.AutoSize = True
         Me.cbGPUGreyscale.Location = New System.Drawing.Point(26, 242)
-        Me.cbGPUGreyscale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbGPUGreyscale.Margin = New System.Windows.Forms.Padding(4)
         Me.cbGPUGreyscale.Name = "cbGPUGreyscale"
         Me.cbGPUGreyscale.Size = New System.Drawing.Size(106, 24)
         Me.cbGPUGreyscale.TabIndex = 81
@@ -2571,9 +2572,9 @@ Partial Class Form1
         Me.TabPage20.Controls.Add(Me.tabControl15)
         Me.TabPage20.Controls.Add(Me.label16)
         Me.TabPage20.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage20.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage20.Name = "TabPage20"
-        Me.TabPage20.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage20.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage20.Size = New System.Drawing.Size(439, 666)
         Me.TabPage20.TabIndex = 5
         Me.TabPage20.Text = "Object detection"
@@ -2584,7 +2585,7 @@ Partial Class Form1
         Me.tabControl15.Controls.Add(Me.TabPage26)
         Me.tabControl15.Controls.Add(Me.TabPage27)
         Me.tabControl15.Location = New System.Drawing.Point(9, 9)
-        Me.tabControl15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl15.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl15.Name = "tabControl15"
         Me.tabControl15.SelectedIndex = 0
         Me.tabControl15.Size = New System.Drawing.Size(417, 556)
@@ -2598,9 +2599,9 @@ Partial Class Form1
         Me.TabPage26.Controls.Add(Me.cbAFMotionHighlight)
         Me.TabPage26.Controls.Add(Me.cbAFMotionDetection)
         Me.TabPage26.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage26.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage26.Name = "TabPage26"
-        Me.TabPage26.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage26.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage26.Size = New System.Drawing.Size(409, 523)
         Me.TabPage26.TabIndex = 0
         Me.TabPage26.Text = "Motion detection"
@@ -2629,7 +2630,7 @@ Partial Class Form1
         'pbAFMotionLevel
         '
         Me.pbAFMotionLevel.Location = New System.Drawing.Point(9, 477)
-        Me.pbAFMotionLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pbAFMotionLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.pbAFMotionLevel.Name = "pbAFMotionLevel"
         Me.pbAFMotionLevel.Size = New System.Drawing.Size(387, 33)
         Me.pbAFMotionLevel.TabIndex = 2
@@ -2638,7 +2639,7 @@ Partial Class Form1
         '
         Me.cbAFMotionHighlight.AutoSize = True
         Me.cbAFMotionHighlight.Location = New System.Drawing.Point(22, 66)
-        Me.cbAFMotionHighlight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAFMotionHighlight.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAFMotionHighlight.Name = "cbAFMotionHighlight"
         Me.cbAFMotionHighlight.Size = New System.Drawing.Size(97, 24)
         Me.cbAFMotionHighlight.TabIndex = 1
@@ -2649,7 +2650,7 @@ Partial Class Form1
         '
         Me.cbAFMotionDetection.AutoSize = True
         Me.cbAFMotionDetection.Location = New System.Drawing.Point(22, 27)
-        Me.cbAFMotionDetection.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAFMotionDetection.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAFMotionDetection.Name = "cbAFMotionDetection"
         Me.cbAFMotionDetection.Size = New System.Drawing.Size(202, 24)
         Me.cbAFMotionDetection.TabIndex = 0
@@ -2661,9 +2662,9 @@ Partial Class Form1
         Me.TabPage27.Controls.Add(Me.label171)
         Me.TabPage27.Controls.Add(Me.label66)
         Me.TabPage27.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage27.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage27.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage27.Name = "TabPage27"
-        Me.TabPage27.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage27.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage27.Size = New System.Drawing.Size(409, 523)
         Me.TabPage27.TabIndex = 1
         Me.TabPage27.Text = "Effects"
@@ -2710,9 +2711,9 @@ Partial Class Form1
         Me.TabPage21.Controls.Add(Me.label213)
         Me.TabPage21.Controls.Add(Me.cbChromaKeyEnabled)
         Me.TabPage21.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage21.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage21.Name = "TabPage21"
-        Me.TabPage21.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage21.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage21.Size = New System.Drawing.Size(439, 666)
         Me.TabPage21.TabIndex = 6
         Me.TabPage21.Text = "Chroma key"
@@ -2723,7 +2724,7 @@ Partial Class Form1
         Me.pnChromaKeyColor.BackColor = System.Drawing.Color.Lime
         Me.pnChromaKeyColor.ForeColor = System.Drawing.SystemColors.Control
         Me.pnChromaKeyColor.Location = New System.Drawing.Point(81, 298)
-        Me.pnChromaKeyColor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnChromaKeyColor.Margin = New System.Windows.Forms.Padding(4)
         Me.pnChromaKeyColor.Name = "pnChromaKeyColor"
         Me.pnChromaKeyColor.Size = New System.Drawing.Size(39, 36)
         Me.pnChromaKeyColor.TabIndex = 43
@@ -2731,7 +2732,7 @@ Partial Class Form1
         'btChromaKeySelectBGImage
         '
         Me.btChromaKeySelectBGImage.Location = New System.Drawing.Point(381, 392)
-        Me.btChromaKeySelectBGImage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btChromaKeySelectBGImage.Margin = New System.Windows.Forms.Padding(4)
         Me.btChromaKeySelectBGImage.Name = "btChromaKeySelectBGImage"
         Me.btChromaKeySelectBGImage.Size = New System.Drawing.Size(36, 34)
         Me.btChromaKeySelectBGImage.TabIndex = 42
@@ -2741,7 +2742,7 @@ Partial Class Form1
         'edChromaKeyImage
         '
         Me.edChromaKeyImage.Location = New System.Drawing.Point(18, 394)
-        Me.edChromaKeyImage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edChromaKeyImage.Margin = New System.Windows.Forms.Padding(4)
         Me.edChromaKeyImage.Name = "edChromaKeyImage"
         Me.edChromaKeyImage.Size = New System.Drawing.Size(350, 26)
         Me.edChromaKeyImage.TabIndex = 41
@@ -2771,7 +2772,7 @@ Partial Class Form1
         '
         Me.tbChromaKeySmoothing.BackColor = System.Drawing.SystemColors.Window
         Me.tbChromaKeySmoothing.Location = New System.Drawing.Point(18, 216)
-        Me.tbChromaKeySmoothing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbChromaKeySmoothing.Margin = New System.Windows.Forms.Padding(4)
         Me.tbChromaKeySmoothing.Maximum = 1000
         Me.tbChromaKeySmoothing.Name = "tbChromaKeySmoothing"
         Me.tbChromaKeySmoothing.Size = New System.Drawing.Size(231, 69)
@@ -2792,7 +2793,7 @@ Partial Class Form1
         '
         Me.tbChromaKeyThresholdSensitivity.BackColor = System.Drawing.SystemColors.Window
         Me.tbChromaKeyThresholdSensitivity.Location = New System.Drawing.Point(18, 106)
-        Me.tbChromaKeyThresholdSensitivity.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbChromaKeyThresholdSensitivity.Margin = New System.Windows.Forms.Padding(4)
         Me.tbChromaKeyThresholdSensitivity.Maximum = 200
         Me.tbChromaKeyThresholdSensitivity.Name = "tbChromaKeyThresholdSensitivity"
         Me.tbChromaKeyThresholdSensitivity.Size = New System.Drawing.Size(231, 69)
@@ -2813,7 +2814,7 @@ Partial Class Form1
         '
         Me.cbChromaKeyEnabled.AutoSize = True
         Me.cbChromaKeyEnabled.Location = New System.Drawing.Point(18, 21)
-        Me.cbChromaKeyEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbChromaKeyEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbChromaKeyEnabled.Name = "cbChromaKeyEnabled"
         Me.cbChromaKeyEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbChromaKeyEnabled.TabIndex = 34
@@ -2831,9 +2832,9 @@ Partial Class Form1
         Me.tabPage70.Controls.Add(Me.cbFilters)
         Me.tabPage70.Controls.Add(Me.label105)
         Me.tabPage70.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage70.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage70.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage70.Name = "tabPage70"
-        Me.tabPage70.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage70.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage70.Size = New System.Drawing.Size(439, 666)
         Me.tabPage70.TabIndex = 3
         Me.tabPage70.Text = "3rd-party filters"
@@ -2842,7 +2843,7 @@ Partial Class Form1
         'btFilterDeleteAll
         '
         Me.btFilterDeleteAll.Location = New System.Drawing.Point(315, 414)
-        Me.btFilterDeleteAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btFilterDeleteAll.Margin = New System.Windows.Forms.Padding(4)
         Me.btFilterDeleteAll.Name = "btFilterDeleteAll"
         Me.btFilterDeleteAll.Size = New System.Drawing.Size(102, 33)
         Me.btFilterDeleteAll.TabIndex = 16
@@ -2852,7 +2853,7 @@ Partial Class Form1
         'btFilterSettings2
         '
         Me.btFilterSettings2.Location = New System.Drawing.Point(27, 414)
-        Me.btFilterSettings2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btFilterSettings2.Margin = New System.Windows.Forms.Padding(4)
         Me.btFilterSettings2.Name = "btFilterSettings2"
         Me.btFilterSettings2.Size = New System.Drawing.Size(98, 33)
         Me.btFilterSettings2.TabIndex = 15
@@ -2864,7 +2865,7 @@ Partial Class Form1
         Me.lbFilters.FormattingEnabled = True
         Me.lbFilters.ItemHeight = 20
         Me.lbFilters.Location = New System.Drawing.Point(27, 174)
-        Me.lbFilters.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.lbFilters.Name = "lbFilters"
         Me.lbFilters.Size = New System.Drawing.Size(388, 184)
         Me.lbFilters.TabIndex = 14
@@ -2882,7 +2883,7 @@ Partial Class Form1
         'btFilterSettings
         '
         Me.btFilterSettings.Location = New System.Drawing.Point(315, 82)
-        Me.btFilterSettings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btFilterSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btFilterSettings.Name = "btFilterSettings"
         Me.btFilterSettings.Size = New System.Drawing.Size(102, 33)
         Me.btFilterSettings.TabIndex = 12
@@ -2892,7 +2893,7 @@ Partial Class Form1
         'btFilterAdd
         '
         Me.btFilterAdd.Location = New System.Drawing.Point(27, 82)
-        Me.btFilterAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btFilterAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btFilterAdd.Name = "btFilterAdd"
         Me.btFilterAdd.Size = New System.Drawing.Size(58, 33)
         Me.btFilterAdd.TabIndex = 11
@@ -2904,7 +2905,7 @@ Partial Class Form1
         Me.cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFilters.FormattingEnabled = True
         Me.cbFilters.Location = New System.Drawing.Point(27, 44)
-        Me.cbFilters.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbFilters.Margin = New System.Windows.Forms.Padding(4)
         Me.cbFilters.Name = "cbFilters"
         Me.cbFilters.Size = New System.Drawing.Size(388, 28)
         Me.cbFilters.TabIndex = 10
@@ -2928,9 +2929,9 @@ Partial Class Form1
         Me.TabPage81.Controls.Add(Me.Label130)
         Me.TabPage81.Controls.Add(Me.cbSubtitlesEnabled)
         Me.TabPage81.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage81.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage81.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage81.Name = "TabPage81"
-        Me.TabPage81.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage81.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage81.Size = New System.Drawing.Size(439, 666)
         Me.TabPage81.TabIndex = 7
         Me.TabPage81.Text = "Subtitles"
@@ -2959,7 +2960,7 @@ Partial Class Form1
         'btSubtitlesSelectFile
         '
         Me.btSubtitlesSelectFile.Location = New System.Drawing.Point(375, 80)
-        Me.btSubtitlesSelectFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btSubtitlesSelectFile.Margin = New System.Windows.Forms.Padding(4)
         Me.btSubtitlesSelectFile.Name = "btSubtitlesSelectFile"
         Me.btSubtitlesSelectFile.Size = New System.Drawing.Size(34, 33)
         Me.btSubtitlesSelectFile.TabIndex = 9
@@ -2969,7 +2970,7 @@ Partial Class Form1
         'edSubtitlesFilename
         '
         Me.edSubtitlesFilename.Location = New System.Drawing.Point(20, 82)
-        Me.edSubtitlesFilename.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edSubtitlesFilename.Margin = New System.Windows.Forms.Padding(4)
         Me.edSubtitlesFilename.Name = "edSubtitlesFilename"
         Me.edSubtitlesFilename.Size = New System.Drawing.Size(346, 26)
         Me.edSubtitlesFilename.TabIndex = 8
@@ -2988,7 +2989,7 @@ Partial Class Form1
         '
         Me.cbSubtitlesEnabled.AutoSize = True
         Me.cbSubtitlesEnabled.Location = New System.Drawing.Point(20, 24)
-        Me.cbSubtitlesEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbSubtitlesEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbSubtitlesEnabled.Name = "cbSubtitlesEnabled"
         Me.cbSubtitlesEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbSubtitlesEnabled.TabIndex = 6
@@ -3001,9 +3002,9 @@ Partial Class Form1
         Me.tabPage9.Controls.Add(Me.lbTransitions)
         Me.tabPage9.Controls.Add(Me.label43)
         Me.tabPage9.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage9.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage9.Name = "tabPage9"
-        Me.tabPage9.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage9.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage9.Size = New System.Drawing.Size(457, 717)
         Me.tabPage9.TabIndex = 3
         Me.tabPage9.Text = "Transitions"
@@ -3021,9 +3022,9 @@ Partial Class Form1
         Me.groupBox5.Controls.Add(Me.cbTransitionName)
         Me.groupBox5.Controls.Add(Me.label44)
         Me.groupBox5.Location = New System.Drawing.Point(30, 177)
-        Me.groupBox5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox5.Name = "groupBox5"
-        Me.groupBox5.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox5.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox5.Size = New System.Drawing.Size(376, 207)
         Me.groupBox5.TabIndex = 2
         Me.groupBox5.TabStop = False
@@ -3042,7 +3043,7 @@ Partial Class Form1
         'edTransStopTime
         '
         Me.edTransStopTime.Location = New System.Drawing.Point(126, 154)
-        Me.edTransStopTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edTransStopTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edTransStopTime.Name = "edTransStopTime"
         Me.edTransStopTime.Size = New System.Drawing.Size(62, 26)
         Me.edTransStopTime.TabIndex = 7
@@ -3071,7 +3072,7 @@ Partial Class Form1
         'edTransStartTime
         '
         Me.edTransStartTime.Location = New System.Drawing.Point(126, 117)
-        Me.edTransStartTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edTransStartTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edTransStartTime.Name = "edTransStartTime"
         Me.edTransStartTime.Size = New System.Drawing.Size(62, 26)
         Me.edTransStartTime.TabIndex = 4
@@ -3090,7 +3091,7 @@ Partial Class Form1
         'btAddTransition
         '
         Me.btAddTransition.Location = New System.Drawing.Point(304, 60)
-        Me.btAddTransition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAddTransition.Margin = New System.Windows.Forms.Padding(4)
         Me.btAddTransition.Name = "btAddTransition"
         Me.btAddTransition.Size = New System.Drawing.Size(63, 33)
         Me.btAddTransition.TabIndex = 2
@@ -3102,7 +3103,7 @@ Partial Class Form1
         Me.cbTransitionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTransitionName.FormattingEnabled = True
         Me.cbTransitionName.Location = New System.Drawing.Point(22, 63)
-        Me.cbTransitionName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbTransitionName.Margin = New System.Windows.Forms.Padding(4)
         Me.cbTransitionName.Name = "cbTransitionName"
         Me.cbTransitionName.Size = New System.Drawing.Size(271, 28)
         Me.cbTransitionName.TabIndex = 1
@@ -3122,7 +3123,7 @@ Partial Class Form1
         Me.lbTransitions.FormattingEnabled = True
         Me.lbTransitions.ItemHeight = 20
         Me.lbTransitions.Location = New System.Drawing.Point(30, 51)
-        Me.lbTransitions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbTransitions.Margin = New System.Windows.Forms.Padding(4)
         Me.lbTransitions.Name = "lbTransitions"
         Me.lbTransitions.Size = New System.Drawing.Size(374, 64)
         Me.lbTransitions.TabIndex = 1
@@ -3143,9 +3144,9 @@ Partial Class Form1
         Me.tabPage3.Controls.Add(Me.tabControl18)
         Me.tabPage3.Controls.Add(Me.cbAudioEffectsEnabled)
         Me.tabPage3.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage3.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage3.Name = "tabPage3"
-        Me.tabPage3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage3.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage3.Size = New System.Drawing.Size(457, 717)
         Me.tabPage3.TabIndex = 5
         Me.tabPage3.Text = "Audio effects"
@@ -3169,7 +3170,7 @@ Partial Class Form1
         Me.tabControl18.Controls.Add(Me.tabPage75)
         Me.tabControl18.Controls.Add(Me.tabPage76)
         Me.tabControl18.Location = New System.Drawing.Point(15, 54)
-        Me.tabControl18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl18.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl18.Name = "tabControl18"
         Me.tabControl18.SelectedIndex = 0
         Me.tabControl18.Size = New System.Drawing.Size(424, 638)
@@ -3183,9 +3184,9 @@ Partial Class Form1
         Me.tabPage71.Controls.Add(Me.label95)
         Me.tabPage71.Controls.Add(Me.cbAudAmplifyEnabled)
         Me.tabPage71.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage71.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage71.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage71.Name = "tabPage71"
-        Me.tabPage71.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage71.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage71.Size = New System.Drawing.Size(416, 605)
         Me.tabPage71.TabIndex = 0
         Me.tabPage71.Text = "Amplify"
@@ -3215,7 +3216,7 @@ Partial Class Form1
         '
         Me.tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudAmplifyAmp.Location = New System.Drawing.Point(24, 99)
-        Me.tbAudAmplifyAmp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudAmplifyAmp.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudAmplifyAmp.Maximum = 4000
         Me.tbAudAmplifyAmp.Name = "tbAudAmplifyAmp"
         Me.tbAudAmplifyAmp.Size = New System.Drawing.Size(345, 69)
@@ -3237,7 +3238,7 @@ Partial Class Form1
         '
         Me.cbAudAmplifyEnabled.AutoSize = True
         Me.cbAudAmplifyEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbAudAmplifyEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudAmplifyEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled"
         Me.cbAudAmplifyEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudAmplifyEnabled.TabIndex = 1
@@ -3272,9 +3273,9 @@ Partial Class Form1
         Me.tabPage72.Controls.Add(Me.tbAudEq0)
         Me.tabPage72.Controls.Add(Me.cbAudEqualizerEnabled)
         Me.tabPage72.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage72.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage72.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage72.Name = "tabPage72"
-        Me.tabPage72.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage72.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage72.Size = New System.Drawing.Size(416, 605)
         Me.tabPage72.TabIndex = 1
         Me.tabPage72.Text = "Equlizer"
@@ -3283,7 +3284,7 @@ Partial Class Form1
         'btAudEqRefresh
         '
         Me.btAudEqRefresh.Location = New System.Drawing.Point(262, 315)
-        Me.btAudEqRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAudEqRefresh.Margin = New System.Windows.Forms.Padding(4)
         Me.btAudEqRefresh.Name = "btAudEqRefresh"
         Me.btAudEqRefresh.Size = New System.Drawing.Size(112, 33)
         Me.btAudEqRefresh.TabIndex = 26
@@ -3295,7 +3296,7 @@ Partial Class Form1
         Me.cbAudEqualizerPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbAudEqualizerPreset.FormattingEnabled = True
         Me.cbAudEqualizerPreset.Location = New System.Drawing.Point(92, 260)
-        Me.cbAudEqualizerPreset.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudEqualizerPreset.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudEqualizerPreset.Name = "cbAudEqualizerPreset"
         Me.cbAudEqualizerPreset.Size = New System.Drawing.Size(282, 28)
         Me.cbAudEqualizerPreset.TabIndex = 25
@@ -3424,7 +3425,7 @@ Partial Class Form1
         '
         Me.tbAudEq9.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq9.Location = New System.Drawing.Point(308, 70)
-        Me.tbAudEq9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq9.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq9.Maximum = 100
         Me.tbAudEq9.Minimum = -100
         Me.tbAudEq9.Name = "tbAudEq9"
@@ -3437,7 +3438,7 @@ Partial Class Form1
         '
         Me.tbAudEq8.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq8.Location = New System.Drawing.Point(276, 70)
-        Me.tbAudEq8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq8.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq8.Maximum = 100
         Me.tbAudEq8.Minimum = -100
         Me.tbAudEq8.Name = "tbAudEq8"
@@ -3450,7 +3451,7 @@ Partial Class Form1
         '
         Me.tbAudEq7.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq7.Location = New System.Drawing.Point(243, 70)
-        Me.tbAudEq7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq7.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq7.Maximum = 100
         Me.tbAudEq7.Minimum = -100
         Me.tbAudEq7.Name = "tbAudEq7"
@@ -3463,7 +3464,7 @@ Partial Class Form1
         '
         Me.tbAudEq6.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq6.Location = New System.Drawing.Point(212, 70)
-        Me.tbAudEq6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq6.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq6.Maximum = 100
         Me.tbAudEq6.Minimum = -100
         Me.tbAudEq6.Name = "tbAudEq6"
@@ -3476,7 +3477,7 @@ Partial Class Form1
         '
         Me.tbAudEq5.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq5.Location = New System.Drawing.Point(180, 70)
-        Me.tbAudEq5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq5.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq5.Maximum = 100
         Me.tbAudEq5.Minimum = -100
         Me.tbAudEq5.Name = "tbAudEq5"
@@ -3489,7 +3490,7 @@ Partial Class Form1
         '
         Me.tbAudEq4.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq4.Location = New System.Drawing.Point(150, 70)
-        Me.tbAudEq4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq4.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq4.Maximum = 100
         Me.tbAudEq4.Minimum = -100
         Me.tbAudEq4.Name = "tbAudEq4"
@@ -3502,7 +3503,7 @@ Partial Class Form1
         '
         Me.tbAudEq3.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq3.Location = New System.Drawing.Point(118, 70)
-        Me.tbAudEq3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq3.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq3.Maximum = 100
         Me.tbAudEq3.Minimum = -100
         Me.tbAudEq3.Name = "tbAudEq3"
@@ -3515,7 +3516,7 @@ Partial Class Form1
         '
         Me.tbAudEq2.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq2.Location = New System.Drawing.Point(87, 70)
-        Me.tbAudEq2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq2.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq2.Maximum = 100
         Me.tbAudEq2.Minimum = -100
         Me.tbAudEq2.Name = "tbAudEq2"
@@ -3528,7 +3529,7 @@ Partial Class Form1
         '
         Me.tbAudEq1.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq1.Location = New System.Drawing.Point(56, 70)
-        Me.tbAudEq1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq1.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq1.Maximum = 100
         Me.tbAudEq1.Minimum = -100
         Me.tbAudEq1.Name = "tbAudEq1"
@@ -3541,7 +3542,7 @@ Partial Class Form1
         '
         Me.tbAudEq0.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudEq0.Location = New System.Drawing.Point(26, 70)
-        Me.tbAudEq0.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudEq0.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudEq0.Maximum = 100
         Me.tbAudEq0.Minimum = -100
         Me.tbAudEq0.Name = "tbAudEq0"
@@ -3554,7 +3555,7 @@ Partial Class Form1
         '
         Me.cbAudEqualizerEnabled.AutoSize = True
         Me.cbAudEqualizerEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbAudEqualizerEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudEqualizerEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled"
         Me.cbAudEqualizerEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudEqualizerEnabled.TabIndex = 2
@@ -3574,9 +3575,9 @@ Partial Class Form1
         Me.tabPage73.Controls.Add(Me.label245)
         Me.tabPage73.Controls.Add(Me.cbAudDynamicAmplifyEnabled)
         Me.tabPage73.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage73.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage73.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage73.Name = "tabPage73"
-        Me.tabPage73.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage73.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage73.Size = New System.Drawing.Size(416, 605)
         Me.tabPage73.TabIndex = 2
         Me.tabPage73.Text = "Dynamic amplify"
@@ -3586,7 +3587,7 @@ Partial Class Form1
         '
         Me.tbAudRelease.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudRelease.Location = New System.Drawing.Point(24, 302)
-        Me.tbAudRelease.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudRelease.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudRelease.Maximum = 10000
         Me.tbAudRelease.Minimum = 10
         Me.tbAudRelease.Name = "tbAudRelease"
@@ -3629,7 +3630,7 @@ Partial Class Form1
         '
         Me.tbAudAttack.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudAttack.Location = New System.Drawing.Point(24, 198)
-        Me.tbAudAttack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudAttack.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudAttack.Maximum = 10000
         Me.tbAudAttack.Minimum = 10
         Me.tbAudAttack.Name = "tbAudAttack"
@@ -3662,7 +3663,7 @@ Partial Class Form1
         '
         Me.tbAudDynAmp.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudDynAmp.Location = New System.Drawing.Point(24, 99)
-        Me.tbAudDynAmp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudDynAmp.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudDynAmp.Maximum = 2000
         Me.tbAudDynAmp.Minimum = 100
         Me.tbAudDynAmp.Name = "tbAudDynAmp"
@@ -3685,7 +3686,7 @@ Partial Class Form1
         '
         Me.cbAudDynamicAmplifyEnabled.AutoSize = True
         Me.cbAudDynamicAmplifyEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbAudDynamicAmplifyEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudDynamicAmplifyEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudDynamicAmplifyEnabled.Name = "cbAudDynamicAmplifyEnabled"
         Me.cbAudDynamicAmplifyEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudDynamicAmplifyEnabled.TabIndex = 2
@@ -3698,9 +3699,9 @@ Partial Class Form1
         Me.tabPage75.Controls.Add(Me.label253)
         Me.tabPage75.Controls.Add(Me.cbAudSound3DEnabled)
         Me.tabPage75.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage75.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage75.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage75.Name = "tabPage75"
-        Me.tabPage75.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage75.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage75.Size = New System.Drawing.Size(416, 605)
         Me.tabPage75.TabIndex = 4
         Me.tabPage75.Text = "Sound 3D"
@@ -3710,7 +3711,7 @@ Partial Class Form1
         '
         Me.tbAud3DSound.BackColor = System.Drawing.SystemColors.Window
         Me.tbAud3DSound.Location = New System.Drawing.Point(24, 99)
-        Me.tbAud3DSound.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAud3DSound.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAud3DSound.Maximum = 10000
         Me.tbAud3DSound.Name = "tbAud3DSound"
         Me.tbAud3DSound.Size = New System.Drawing.Size(345, 69)
@@ -3732,7 +3733,7 @@ Partial Class Form1
         '
         Me.cbAudSound3DEnabled.AutoSize = True
         Me.cbAudSound3DEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbAudSound3DEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudSound3DEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudSound3DEnabled.Name = "cbAudSound3DEnabled"
         Me.cbAudSound3DEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudSound3DEnabled.TabIndex = 2
@@ -3745,9 +3746,9 @@ Partial Class Form1
         Me.tabPage76.Controls.Add(Me.label254)
         Me.tabPage76.Controls.Add(Me.cbAudTrueBassEnabled)
         Me.tabPage76.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage76.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage76.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage76.Name = "tabPage76"
-        Me.tabPage76.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage76.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage76.Size = New System.Drawing.Size(416, 605)
         Me.tabPage76.TabIndex = 5
         Me.tabPage76.Text = "True Bass"
@@ -3757,7 +3758,7 @@ Partial Class Form1
         '
         Me.tbAudTrueBass.BackColor = System.Drawing.SystemColors.Window
         Me.tbAudTrueBass.Location = New System.Drawing.Point(24, 99)
-        Me.tbAudTrueBass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudTrueBass.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudTrueBass.Maximum = 10000
         Me.tbAudTrueBass.Name = "tbAudTrueBass"
         Me.tbAudTrueBass.Size = New System.Drawing.Size(345, 69)
@@ -3778,7 +3779,7 @@ Partial Class Form1
         '
         Me.cbAudTrueBassEnabled.AutoSize = True
         Me.cbAudTrueBassEnabled.Location = New System.Drawing.Point(24, 24)
-        Me.cbAudTrueBassEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudTrueBassEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudTrueBassEnabled.Name = "cbAudTrueBassEnabled"
         Me.cbAudTrueBassEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudTrueBassEnabled.TabIndex = 2
@@ -3789,7 +3790,7 @@ Partial Class Form1
         '
         Me.cbAudioEffectsEnabled.AutoSize = True
         Me.cbAudioEffectsEnabled.Location = New System.Drawing.Point(15, 21)
-        Me.cbAudioEffectsEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudioEffectsEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudioEffectsEnabled.Name = "cbAudioEffectsEnabled"
         Me.cbAudioEffectsEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudioEffectsEnabled.TabIndex = 2
@@ -3807,9 +3808,9 @@ Partial Class Form1
         Me.TabPage57.Controls.Add(Me.cbAudioNormalize)
         Me.TabPage57.Controls.Add(Me.cbAudioEnhancementEnabled)
         Me.TabPage57.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage57.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage57.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage57.Name = "TabPage57"
-        Me.TabPage57.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage57.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage57.Size = New System.Drawing.Size(457, 717)
         Me.TabPage57.TabIndex = 13
         Me.TabPage57.Text = "Audio enhancement"
@@ -3828,7 +3829,7 @@ Partial Class Form1
         'tbAudioTimeshift
         '
         Me.tbAudioTimeshift.Location = New System.Drawing.Point(99, 630)
-        Me.tbAudioTimeshift.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioTimeshift.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioTimeshift.Maximum = 3000
         Me.tbAudioTimeshift.Name = "tbAudioTimeshift"
         Me.tbAudioTimeshift.Size = New System.Drawing.Size(156, 69)
@@ -3868,9 +3869,9 @@ Partial Class Form1
         Me.groupBox1.Controls.Add(Me.tbAudioOutputGainL)
         Me.groupBox1.Controls.Add(Me.label122)
         Me.groupBox1.Location = New System.Drawing.Point(12, 370)
-        Me.groupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox1.Name = "groupBox1"
-        Me.groupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox1.Size = New System.Drawing.Size(434, 249)
         Me.groupBox1.TabIndex = 17
         Me.groupBox1.TabStop = False
@@ -3889,7 +3890,7 @@ Partial Class Form1
         'tbAudioOutputGainLFE
         '
         Me.tbAudioOutputGainLFE.Location = New System.Drawing.Point(363, 60)
-        Me.tbAudioOutputGainLFE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainLFE.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainLFE.Maximum = 200
         Me.tbAudioOutputGainLFE.Minimum = -200
         Me.tbAudioOutputGainLFE.Name = "tbAudioOutputGainLFE"
@@ -3921,7 +3922,7 @@ Partial Class Form1
         'tbAudioOutputGainSR
         '
         Me.tbAudioOutputGainSR.Location = New System.Drawing.Point(291, 60)
-        Me.tbAudioOutputGainSR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainSR.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainSR.Maximum = 200
         Me.tbAudioOutputGainSR.Minimum = -200
         Me.tbAudioOutputGainSR.Name = "tbAudioOutputGainSR"
@@ -3953,7 +3954,7 @@ Partial Class Form1
         'tbAudioOutputGainSL
         '
         Me.tbAudioOutputGainSL.Location = New System.Drawing.Point(219, 60)
-        Me.tbAudioOutputGainSL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainSL.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainSL.Maximum = 200
         Me.tbAudioOutputGainSL.Minimum = -200
         Me.tbAudioOutputGainSL.Name = "tbAudioOutputGainSL"
@@ -3985,7 +3986,7 @@ Partial Class Form1
         'tbAudioOutputGainR
         '
         Me.tbAudioOutputGainR.Location = New System.Drawing.Point(147, 60)
-        Me.tbAudioOutputGainR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainR.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainR.Maximum = 200
         Me.tbAudioOutputGainR.Minimum = -200
         Me.tbAudioOutputGainR.Name = "tbAudioOutputGainR"
@@ -4017,7 +4018,7 @@ Partial Class Form1
         'tbAudioOutputGainC
         '
         Me.tbAudioOutputGainC.Location = New System.Drawing.Point(75, 60)
-        Me.tbAudioOutputGainC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainC.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainC.Maximum = 200
         Me.tbAudioOutputGainC.Minimum = -200
         Me.tbAudioOutputGainC.Name = "tbAudioOutputGainC"
@@ -4049,7 +4050,7 @@ Partial Class Form1
         'tbAudioOutputGainL
         '
         Me.tbAudioOutputGainL.Location = New System.Drawing.Point(3, 60)
-        Me.tbAudioOutputGainL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioOutputGainL.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioOutputGainL.Maximum = 200
         Me.tbAudioOutputGainL.Minimum = -200
         Me.tbAudioOutputGainL.Name = "tbAudioOutputGainL"
@@ -4089,9 +4090,9 @@ Partial Class Form1
         Me.groupBox2.Controls.Add(Me.tbAudioInputGainL)
         Me.groupBox2.Controls.Add(Me.label128)
         Me.groupBox2.Location = New System.Drawing.Point(12, 114)
-        Me.groupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox2.Name = "groupBox2"
-        Me.groupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox2.Size = New System.Drawing.Size(434, 249)
         Me.groupBox2.TabIndex = 16
         Me.groupBox2.TabStop = False
@@ -4110,7 +4111,7 @@ Partial Class Form1
         'tbAudioInputGainLFE
         '
         Me.tbAudioInputGainLFE.Location = New System.Drawing.Point(363, 60)
-        Me.tbAudioInputGainLFE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainLFE.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainLFE.Maximum = 200
         Me.tbAudioInputGainLFE.Minimum = -200
         Me.tbAudioInputGainLFE.Name = "tbAudioInputGainLFE"
@@ -4142,7 +4143,7 @@ Partial Class Form1
         'tbAudioInputGainSR
         '
         Me.tbAudioInputGainSR.Location = New System.Drawing.Point(291, 60)
-        Me.tbAudioInputGainSR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainSR.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainSR.Maximum = 200
         Me.tbAudioInputGainSR.Minimum = -200
         Me.tbAudioInputGainSR.Name = "tbAudioInputGainSR"
@@ -4174,7 +4175,7 @@ Partial Class Form1
         'tbAudioInputGainSL
         '
         Me.tbAudioInputGainSL.Location = New System.Drawing.Point(219, 60)
-        Me.tbAudioInputGainSL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainSL.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainSL.Maximum = 200
         Me.tbAudioInputGainSL.Minimum = -200
         Me.tbAudioInputGainSL.Name = "tbAudioInputGainSL"
@@ -4206,7 +4207,7 @@ Partial Class Form1
         'tbAudioInputGainR
         '
         Me.tbAudioInputGainR.Location = New System.Drawing.Point(147, 60)
-        Me.tbAudioInputGainR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainR.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainR.Maximum = 200
         Me.tbAudioInputGainR.Minimum = -200
         Me.tbAudioInputGainR.Name = "tbAudioInputGainR"
@@ -4238,7 +4239,7 @@ Partial Class Form1
         'tbAudioInputGainC
         '
         Me.tbAudioInputGainC.Location = New System.Drawing.Point(75, 60)
-        Me.tbAudioInputGainC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainC.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainC.Maximum = 200
         Me.tbAudioInputGainC.Minimum = -200
         Me.tbAudioInputGainC.Name = "tbAudioInputGainC"
@@ -4270,7 +4271,7 @@ Partial Class Form1
         'tbAudioInputGainL
         '
         Me.tbAudioInputGainL.Location = New System.Drawing.Point(3, 60)
-        Me.tbAudioInputGainL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioInputGainL.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioInputGainL.Maximum = 200
         Me.tbAudioInputGainL.Minimum = -200
         Me.tbAudioInputGainL.Name = "tbAudioInputGainL"
@@ -4293,7 +4294,7 @@ Partial Class Form1
         '
         Me.cbAudioAutoGain.AutoSize = True
         Me.cbAudioAutoGain.Location = New System.Drawing.Point(202, 66)
-        Me.cbAudioAutoGain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudioAutoGain.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudioAutoGain.Name = "cbAudioAutoGain"
         Me.cbAudioAutoGain.Size = New System.Drawing.Size(103, 24)
         Me.cbAudioAutoGain.TabIndex = 15
@@ -4304,7 +4305,7 @@ Partial Class Form1
         '
         Me.cbAudioNormalize.AutoSize = True
         Me.cbAudioNormalize.Location = New System.Drawing.Point(62, 66)
-        Me.cbAudioNormalize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudioNormalize.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudioNormalize.Name = "cbAudioNormalize"
         Me.cbAudioNormalize.Size = New System.Drawing.Size(105, 24)
         Me.cbAudioNormalize.TabIndex = 14
@@ -4315,7 +4316,7 @@ Partial Class Form1
         '
         Me.cbAudioEnhancementEnabled.AutoSize = True
         Me.cbAudioEnhancementEnabled.Location = New System.Drawing.Point(27, 18)
-        Me.cbAudioEnhancementEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudioEnhancementEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudioEnhancementEnabled.Name = "cbAudioEnhancementEnabled"
         Me.cbAudioEnhancementEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudioEnhancementEnabled.TabIndex = 13
@@ -4332,9 +4333,9 @@ Partial Class Form1
         Me.TabPage80.Controls.Add(Me.lbAudioChannelMapperRoutes)
         Me.TabPage80.Controls.Add(Me.cbAudioChannelMapperEnabled)
         Me.TabPage80.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage80.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage80.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage80.Name = "TabPage80"
-        Me.TabPage80.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage80.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage80.Size = New System.Drawing.Size(457, 717)
         Me.TabPage80.TabIndex = 15
         Me.TabPage80.Text = "Audio channel mapper"
@@ -4343,7 +4344,7 @@ Partial Class Form1
         'btAudioChannelMapperClear
         '
         Me.btAudioChannelMapperClear.Location = New System.Drawing.Point(303, 315)
-        Me.btAudioChannelMapperClear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAudioChannelMapperClear.Margin = New System.Windows.Forms.Padding(4)
         Me.btAudioChannelMapperClear.Name = "btAudioChannelMapperClear"
         Me.btAudioChannelMapperClear.Size = New System.Drawing.Size(112, 33)
         Me.btAudioChannelMapperClear.TabIndex = 28
@@ -4361,9 +4362,9 @@ Partial Class Form1
         Me.groupBox41.Controls.Add(Me.edAudioChannelMapperSourceChannel)
         Me.groupBox41.Controls.Add(Me.label308)
         Me.groupBox41.Location = New System.Drawing.Point(6, 357)
-        Me.groupBox41.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox41.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox41.Name = "groupBox41"
-        Me.groupBox41.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox41.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox41.Size = New System.Drawing.Size(438, 246)
         Me.groupBox41.TabIndex = 27
         Me.groupBox41.TabStop = False
@@ -4372,7 +4373,7 @@ Partial Class Form1
         'btAudioChannelMapperAddNewRoute
         '
         Me.btAudioChannelMapperAddNewRoute.Location = New System.Drawing.Point(162, 189)
-        Me.btAudioChannelMapperAddNewRoute.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAudioChannelMapperAddNewRoute.Margin = New System.Windows.Forms.Padding(4)
         Me.btAudioChannelMapperAddNewRoute.Name = "btAudioChannelMapperAddNewRoute"
         Me.btAudioChannelMapperAddNewRoute.Size = New System.Drawing.Size(112, 33)
         Me.btAudioChannelMapperAddNewRoute.TabIndex = 20
@@ -4392,7 +4393,7 @@ Partial Class Form1
         'tbAudioChannelMapperVolume
         '
         Me.tbAudioChannelMapperVolume.Location = New System.Drawing.Point(312, 60)
-        Me.tbAudioChannelMapperVolume.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbAudioChannelMapperVolume.Margin = New System.Windows.Forms.Padding(4)
         Me.tbAudioChannelMapperVolume.Maximum = 2000
         Me.tbAudioChannelMapperVolume.Minimum = 100
         Me.tbAudioChannelMapperVolume.Name = "tbAudioChannelMapperVolume"
@@ -4413,7 +4414,7 @@ Partial Class Form1
         'edAudioChannelMapperTargetChannel
         '
         Me.edAudioChannelMapperTargetChannel.Location = New System.Drawing.Point(162, 60)
-        Me.edAudioChannelMapperTargetChannel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edAudioChannelMapperTargetChannel.Margin = New System.Windows.Forms.Padding(4)
         Me.edAudioChannelMapperTargetChannel.Name = "edAudioChannelMapperTargetChannel"
         Me.edAudioChannelMapperTargetChannel.Size = New System.Drawing.Size(74, 26)
         Me.edAudioChannelMapperTargetChannel.TabIndex = 16
@@ -4432,7 +4433,7 @@ Partial Class Form1
         'edAudioChannelMapperSourceChannel
         '
         Me.edAudioChannelMapperSourceChannel.Location = New System.Drawing.Point(22, 60)
-        Me.edAudioChannelMapperSourceChannel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edAudioChannelMapperSourceChannel.Margin = New System.Windows.Forms.Padding(4)
         Me.edAudioChannelMapperSourceChannel.Name = "edAudioChannelMapperSourceChannel"
         Me.edAudioChannelMapperSourceChannel.Size = New System.Drawing.Size(74, 26)
         Me.edAudioChannelMapperSourceChannel.TabIndex = 14
@@ -4461,7 +4462,7 @@ Partial Class Form1
         'edAudioChannelMapperOutputChannels
         '
         Me.edAudioChannelMapperOutputChannels.Location = New System.Drawing.Point(15, 87)
-        Me.edAudioChannelMapperOutputChannels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edAudioChannelMapperOutputChannels.Margin = New System.Windows.Forms.Padding(4)
         Me.edAudioChannelMapperOutputChannels.Name = "edAudioChannelMapperOutputChannels"
         Me.edAudioChannelMapperOutputChannels.Size = New System.Drawing.Size(61, 26)
         Me.edAudioChannelMapperOutputChannels.TabIndex = 25
@@ -4482,7 +4483,7 @@ Partial Class Form1
         Me.lbAudioChannelMapperRoutes.FormattingEnabled = True
         Me.lbAudioChannelMapperRoutes.ItemHeight = 20
         Me.lbAudioChannelMapperRoutes.Location = New System.Drawing.Point(15, 171)
-        Me.lbAudioChannelMapperRoutes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbAudioChannelMapperRoutes.Margin = New System.Windows.Forms.Padding(4)
         Me.lbAudioChannelMapperRoutes.Name = "lbAudioChannelMapperRoutes"
         Me.lbAudioChannelMapperRoutes.Size = New System.Drawing.Size(398, 84)
         Me.lbAudioChannelMapperRoutes.TabIndex = 23
@@ -4491,7 +4492,7 @@ Partial Class Form1
         '
         Me.cbAudioChannelMapperEnabled.AutoSize = True
         Me.cbAudioChannelMapperEnabled.Location = New System.Drawing.Point(15, 15)
-        Me.cbAudioChannelMapperEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAudioChannelMapperEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAudioChannelMapperEnabled.Name = "cbAudioChannelMapperEnabled"
         Me.cbAudioChannelMapperEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbAudioChannelMapperEnabled.TabIndex = 22
@@ -4503,9 +4504,9 @@ Partial Class Form1
         Me.TabPage28.Controls.Add(Me.tabControl9)
         Me.TabPage28.Controls.Add(Me.cbMotDetEnabled)
         Me.TabPage28.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage28.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage28.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage28.Name = "TabPage28"
-        Me.TabPage28.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage28.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage28.Size = New System.Drawing.Size(457, 717)
         Me.TabPage28.TabIndex = 7
         Me.TabPage28.Text = "Motion detection"
@@ -4516,7 +4517,7 @@ Partial Class Form1
         Me.tabControl9.Controls.Add(Me.tabPage44)
         Me.tabControl9.Controls.Add(Me.tabPage45)
         Me.tabControl9.Location = New System.Drawing.Point(22, 66)
-        Me.tabControl9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl9.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl9.Name = "tabControl9"
         Me.tabControl9.SelectedIndex = 0
         Me.tabControl9.Size = New System.Drawing.Size(402, 596)
@@ -4528,9 +4529,9 @@ Partial Class Form1
         Me.tabPage44.Controls.Add(Me.label158)
         Me.tabPage44.Controls.Add(Me.mmMotDetMatrix)
         Me.tabPage44.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage44.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage44.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage44.Name = "tabPage44"
-        Me.tabPage44.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage44.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage44.Size = New System.Drawing.Size(394, 563)
         Me.tabPage44.TabIndex = 0
         Me.tabPage44.Text = "Output matrix"
@@ -4539,7 +4540,7 @@ Partial Class Form1
         'pbMotionLevel
         '
         Me.pbMotionLevel.Location = New System.Drawing.Point(26, 486)
-        Me.pbMotionLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pbMotionLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.pbMotionLevel.Name = "pbMotionLevel"
         Me.pbMotionLevel.Size = New System.Drawing.Size(338, 27)
         Me.pbMotionLevel.TabIndex = 2
@@ -4557,7 +4558,7 @@ Partial Class Form1
         'mmMotDetMatrix
         '
         Me.mmMotDetMatrix.Location = New System.Drawing.Point(9, 9)
-        Me.mmMotDetMatrix.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.mmMotDetMatrix.Margin = New System.Windows.Forms.Padding(4)
         Me.mmMotDetMatrix.Multiline = True
         Me.mmMotDetMatrix.Name = "mmMotDetMatrix"
         Me.mmMotDetMatrix.ScrollBars = System.Windows.Forms.ScrollBars.Both
@@ -4572,9 +4573,9 @@ Partial Class Form1
         Me.tabPage45.Controls.Add(Me.groupBox26)
         Me.tabPage45.Controls.Add(Me.groupBox24)
         Me.tabPage45.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage45.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage45.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage45.Name = "tabPage45"
-        Me.tabPage45.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage45.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage45.Size = New System.Drawing.Size(394, 563)
         Me.tabPage45.TabIndex = 1
         Me.tabPage45.Text = "Settings"
@@ -4588,9 +4589,9 @@ Partial Class Form1
         Me.groupBox25.Controls.Add(Me.cbMotDetHLEnabled)
         Me.groupBox25.Controls.Add(Me.tbMotDetHLThreshold)
         Me.groupBox25.Location = New System.Drawing.Point(18, 148)
-        Me.groupBox25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox25.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox25.Name = "groupBox25"
-        Me.groupBox25.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox25.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox25.Size = New System.Drawing.Size(350, 123)
         Me.groupBox25.TabIndex = 1
         Me.groupBox25.TabStop = False
@@ -4602,7 +4603,7 @@ Partial Class Form1
         Me.cbMotDetHLColor.FormattingEnabled = True
         Me.cbMotDetHLColor.Items.AddRange(New Object() {"Red", "Green", "Blue"})
         Me.cbMotDetHLColor.Location = New System.Drawing.Point(230, 84)
-        Me.cbMotDetHLColor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMotDetHLColor.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMotDetHLColor.Name = "cbMotDetHLColor"
         Me.cbMotDetHLColor.Size = New System.Drawing.Size(103, 28)
         Me.cbMotDetHLColor.TabIndex = 5
@@ -4633,7 +4634,7 @@ Partial Class Form1
         Me.cbMotDetHLEnabled.Checked = True
         Me.cbMotDetHLEnabled.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbMotDetHLEnabled.Location = New System.Drawing.Point(21, 32)
-        Me.cbMotDetHLEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMotDetHLEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMotDetHLEnabled.Name = "cbMotDetHLEnabled"
         Me.cbMotDetHLEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbMotDetHLEnabled.TabIndex = 1
@@ -4644,7 +4645,7 @@ Partial Class Form1
         '
         Me.tbMotDetHLThreshold.BackColor = System.Drawing.SystemColors.Window
         Me.tbMotDetHLThreshold.Location = New System.Drawing.Point(46, 84)
-        Me.tbMotDetHLThreshold.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbMotDetHLThreshold.Margin = New System.Windows.Forms.Padding(4)
         Me.tbMotDetHLThreshold.Maximum = 255
         Me.tbMotDetHLThreshold.Name = "tbMotDetHLThreshold"
         Me.tbMotDetHLThreshold.Size = New System.Drawing.Size(156, 69)
@@ -4656,7 +4657,7 @@ Partial Class Form1
         '
         Me.btMotDetUpdateSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btMotDetUpdateSettings.Location = New System.Drawing.Point(207, 516)
-        Me.btMotDetUpdateSettings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btMotDetUpdateSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.btMotDetUpdateSettings.Name = "btMotDetUpdateSettings"
         Me.btMotDetUpdateSettings.Size = New System.Drawing.Size(160, 33)
         Me.btMotDetUpdateSettings.TabIndex = 4
@@ -4670,9 +4671,9 @@ Partial Class Form1
         Me.groupBox27.Controls.Add(Me.edMotDetMatrixWidth)
         Me.groupBox27.Controls.Add(Me.label164)
         Me.groupBox27.Location = New System.Drawing.Point(18, 384)
-        Me.groupBox27.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox27.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox27.Name = "groupBox27"
-        Me.groupBox27.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox27.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox27.Size = New System.Drawing.Size(350, 84)
         Me.groupBox27.TabIndex = 3
         Me.groupBox27.TabStop = False
@@ -4681,7 +4682,7 @@ Partial Class Form1
         'edMotDetMatrixHeight
         '
         Me.edMotDetMatrixHeight.Location = New System.Drawing.Point(218, 33)
-        Me.edMotDetMatrixHeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMotDetMatrixHeight.Margin = New System.Windows.Forms.Padding(4)
         Me.edMotDetMatrixHeight.Name = "edMotDetMatrixHeight"
         Me.edMotDetMatrixHeight.Size = New System.Drawing.Size(52, 26)
         Me.edMotDetMatrixHeight.TabIndex = 75
@@ -4700,7 +4701,7 @@ Partial Class Form1
         'edMotDetMatrixWidth
         '
         Me.edMotDetMatrixWidth.Location = New System.Drawing.Point(84, 33)
-        Me.edMotDetMatrixWidth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMotDetMatrixWidth.Margin = New System.Windows.Forms.Padding(4)
         Me.edMotDetMatrixWidth.Name = "edMotDetMatrixWidth"
         Me.edMotDetMatrixWidth.Size = New System.Drawing.Size(52, 26)
         Me.edMotDetMatrixWidth.TabIndex = 73
@@ -4722,9 +4723,9 @@ Partial Class Form1
         Me.groupBox26.Controls.Add(Me.tbMotDetDropFramesThreshold)
         Me.groupBox26.Controls.Add(Me.cbMotDetDropFramesEnabled)
         Me.groupBox26.Location = New System.Drawing.Point(18, 276)
-        Me.groupBox26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox26.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox26.Name = "groupBox26"
-        Me.groupBox26.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox26.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox26.Size = New System.Drawing.Size(350, 99)
         Me.groupBox26.TabIndex = 2
         Me.groupBox26.TabStop = False
@@ -4744,7 +4745,7 @@ Partial Class Form1
         '
         Me.tbMotDetDropFramesThreshold.BackColor = System.Drawing.SystemColors.Window
         Me.tbMotDetDropFramesThreshold.Location = New System.Drawing.Point(142, 54)
-        Me.tbMotDetDropFramesThreshold.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbMotDetDropFramesThreshold.Margin = New System.Windows.Forms.Padding(4)
         Me.tbMotDetDropFramesThreshold.Maximum = 255
         Me.tbMotDetDropFramesThreshold.Name = "tbMotDetDropFramesThreshold"
         Me.tbMotDetDropFramesThreshold.Size = New System.Drawing.Size(156, 69)
@@ -4756,7 +4757,7 @@ Partial Class Form1
         '
         Me.cbMotDetDropFramesEnabled.AutoSize = True
         Me.cbMotDetDropFramesEnabled.Location = New System.Drawing.Point(21, 27)
-        Me.cbMotDetDropFramesEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMotDetDropFramesEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMotDetDropFramesEnabled.Name = "cbMotDetDropFramesEnabled"
         Me.cbMotDetDropFramesEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbMotDetDropFramesEnabled.TabIndex = 1
@@ -4772,9 +4773,9 @@ Partial Class Form1
         Me.groupBox24.Controls.Add(Me.cbCompareGreen)
         Me.groupBox24.Controls.Add(Me.cbCompareRed)
         Me.groupBox24.Location = New System.Drawing.Point(18, 18)
-        Me.groupBox24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox24.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox24.Name = "groupBox24"
-        Me.groupBox24.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox24.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox24.Size = New System.Drawing.Size(350, 118)
         Me.groupBox24.TabIndex = 0
         Me.groupBox24.TabStop = False
@@ -4783,7 +4784,7 @@ Partial Class Form1
         'edMotDetFrameInterval
         '
         Me.edMotDetFrameInterval.Location = New System.Drawing.Point(142, 74)
-        Me.edMotDetFrameInterval.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMotDetFrameInterval.Margin = New System.Windows.Forms.Padding(4)
         Me.edMotDetFrameInterval.Name = "edMotDetFrameInterval"
         Me.edMotDetFrameInterval.Size = New System.Drawing.Size(46, 26)
         Me.edMotDetFrameInterval.TabIndex = 5
@@ -4805,7 +4806,7 @@ Partial Class Form1
         Me.cbCompareGreyscale.Checked = True
         Me.cbCompareGreyscale.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbCompareGreyscale.Location = New System.Drawing.Point(244, 30)
-        Me.cbCompareGreyscale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbCompareGreyscale.Margin = New System.Windows.Forms.Padding(4)
         Me.cbCompareGreyscale.Name = "cbCompareGreyscale"
         Me.cbCompareGreyscale.Size = New System.Drawing.Size(106, 24)
         Me.cbCompareGreyscale.TabIndex = 3
@@ -4816,7 +4817,7 @@ Partial Class Form1
         '
         Me.cbCompareBlue.AutoSize = True
         Me.cbCompareBlue.Location = New System.Drawing.Point(177, 30)
-        Me.cbCompareBlue.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbCompareBlue.Margin = New System.Windows.Forms.Padding(4)
         Me.cbCompareBlue.Name = "cbCompareBlue"
         Me.cbCompareBlue.Size = New System.Drawing.Size(67, 24)
         Me.cbCompareBlue.TabIndex = 2
@@ -4827,7 +4828,7 @@ Partial Class Form1
         '
         Me.cbCompareGreen.AutoSize = True
         Me.cbCompareGreen.Location = New System.Drawing.Point(90, 30)
-        Me.cbCompareGreen.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbCompareGreen.Margin = New System.Windows.Forms.Padding(4)
         Me.cbCompareGreen.Name = "cbCompareGreen"
         Me.cbCompareGreen.Size = New System.Drawing.Size(80, 24)
         Me.cbCompareGreen.TabIndex = 1
@@ -4838,7 +4839,7 @@ Partial Class Form1
         '
         Me.cbCompareRed.AutoSize = True
         Me.cbCompareRed.Location = New System.Drawing.Point(21, 30)
-        Me.cbCompareRed.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbCompareRed.Margin = New System.Windows.Forms.Padding(4)
         Me.cbCompareRed.Name = "cbCompareRed"
         Me.cbCompareRed.Size = New System.Drawing.Size(65, 24)
         Me.cbCompareRed.TabIndex = 0
@@ -4849,7 +4850,7 @@ Partial Class Form1
         '
         Me.cbMotDetEnabled.AutoSize = True
         Me.cbMotDetEnabled.Location = New System.Drawing.Point(22, 27)
-        Me.cbMotDetEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMotDetEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMotDetEnabled.Name = "cbMotDetEnabled"
         Me.cbMotDetEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbMotDetEnabled.TabIndex = 4
@@ -4868,9 +4869,9 @@ Partial Class Form1
         Me.tabPage2.Controls.Add(Me.cbStretch)
         Me.tabPage2.Controls.Add(Me.groupBox13)
         Me.tabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage2.Name = "tabPage2"
-        Me.tabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage2.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage2.Size = New System.Drawing.Size(457, 717)
         Me.tabPage2.TabIndex = 6
         Me.tabPage2.Text = "Display"
@@ -4892,7 +4893,7 @@ Partial Class Form1
         Me.cbDirect2DRotate.FormattingEnabled = True
         Me.cbDirect2DRotate.Items.AddRange(New Object() {"0", "90", "180", "270"})
         Me.cbDirect2DRotate.Location = New System.Drawing.Point(43, 367)
-        Me.cbDirect2DRotate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDirect2DRotate.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDirect2DRotate.Name = "cbDirect2DRotate"
         Me.cbDirect2DRotate.Size = New System.Drawing.Size(181, 28)
         Me.cbDirect2DRotate.TabIndex = 74
@@ -4902,7 +4903,7 @@ Partial Class Form1
         Me.pnVideoRendererBGColor.BackColor = System.Drawing.Color.Black
         Me.pnVideoRendererBGColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnVideoRendererBGColor.Location = New System.Drawing.Point(199, 220)
-        Me.pnVideoRendererBGColor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnVideoRendererBGColor.Margin = New System.Windows.Forms.Padding(4)
         Me.pnVideoRendererBGColor.Name = "pnVideoRendererBGColor"
         Me.pnVideoRendererBGColor.Size = New System.Drawing.Size(35, 34)
         Me.pnVideoRendererBGColor.TabIndex = 73
@@ -4920,7 +4921,7 @@ Partial Class Form1
         'btFullScreen
         '
         Me.btFullScreen.Location = New System.Drawing.Point(283, 367)
-        Me.btFullScreen.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btFullScreen.Margin = New System.Windows.Forms.Padding(4)
         Me.btFullScreen.Name = "btFullScreen"
         Me.btFullScreen.Size = New System.Drawing.Size(135, 33)
         Me.btFullScreen.TabIndex = 71
@@ -4931,7 +4932,7 @@ Partial Class Form1
         '
         Me.cbScreenFlipVertical.AutoSize = True
         Me.cbScreenFlipVertical.Location = New System.Drawing.Point(283, 254)
-        Me.cbScreenFlipVertical.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbScreenFlipVertical.Margin = New System.Windows.Forms.Padding(4)
         Me.cbScreenFlipVertical.Name = "cbScreenFlipVertical"
         Me.cbScreenFlipVertical.Size = New System.Drawing.Size(113, 24)
         Me.cbScreenFlipVertical.TabIndex = 70
@@ -4942,7 +4943,7 @@ Partial Class Form1
         '
         Me.cbScreenFlipHorizontal.AutoSize = True
         Me.cbScreenFlipHorizontal.Location = New System.Drawing.Point(283, 222)
-        Me.cbScreenFlipHorizontal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbScreenFlipHorizontal.Margin = New System.Windows.Forms.Padding(4)
         Me.cbScreenFlipHorizontal.Name = "cbScreenFlipHorizontal"
         Me.cbScreenFlipHorizontal.Size = New System.Drawing.Size(133, 24)
         Me.cbScreenFlipHorizontal.TabIndex = 69
@@ -4953,7 +4954,7 @@ Partial Class Form1
         '
         Me.cbStretch.AutoSize = True
         Me.cbStretch.Location = New System.Drawing.Point(283, 290)
-        Me.cbStretch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbStretch.Margin = New System.Windows.Forms.Padding(4)
         Me.cbStretch.Name = "cbStretch"
         Me.cbStretch.Size = New System.Drawing.Size(128, 24)
         Me.cbStretch.TabIndex = 68
@@ -4967,9 +4968,9 @@ Partial Class Form1
         Me.groupBox13.Controls.Add(Me.rbEVR)
         Me.groupBox13.Controls.Add(Me.rbVMR9)
         Me.groupBox13.Location = New System.Drawing.Point(14, 22)
-        Me.groupBox13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox13.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox13.Name = "groupBox13"
-        Me.groupBox13.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox13.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox13.Size = New System.Drawing.Size(424, 179)
         Me.groupBox13.TabIndex = 67
         Me.groupBox13.TabStop = False
@@ -4979,7 +4980,7 @@ Partial Class Form1
         '
         Me.rbDirect2D.AutoSize = True
         Me.rbDirect2D.Location = New System.Drawing.Point(18, 106)
-        Me.rbDirect2D.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDirect2D.Margin = New System.Windows.Forms.Padding(4)
         Me.rbDirect2D.Name = "rbDirect2D"
         Me.rbDirect2D.Size = New System.Drawing.Size(97, 24)
         Me.rbDirect2D.TabIndex = 4
@@ -4991,7 +4992,7 @@ Partial Class Form1
         '
         Me.rbNone.AutoSize = True
         Me.rbNone.Location = New System.Drawing.Point(18, 139)
-        Me.rbNone.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNone.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNone.Name = "rbNone"
         Me.rbNone.Size = New System.Drawing.Size(72, 24)
         Me.rbNone.TabIndex = 3
@@ -5003,7 +5004,7 @@ Partial Class Form1
         '
         Me.rbEVR.AutoSize = True
         Me.rbEVR.Location = New System.Drawing.Point(18, 73)
-        Me.rbEVR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEVR.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEVR.Name = "rbEVR"
         Me.rbEVR.Size = New System.Drawing.Size(286, 24)
         Me.rbEVR.TabIndex = 2
@@ -5015,7 +5016,7 @@ Partial Class Form1
         Me.rbVMR9.AutoSize = True
         Me.rbVMR9.Checked = True
         Me.rbVMR9.Location = New System.Drawing.Point(18, 40)
-        Me.rbVMR9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbVMR9.Margin = New System.Windows.Forms.Padding(4)
         Me.rbVMR9.Name = "rbVMR9"
         Me.rbVMR9.Size = New System.Drawing.Size(207, 24)
         Me.rbVMR9.TabIndex = 1
@@ -5035,7 +5036,7 @@ Partial Class Form1
         Me.TabPage23.Controls.Add(Me.cbBarcodeDetectionEnabled)
         Me.TabPage23.Location = New System.Drawing.Point(4, 29)
         Me.TabPage23.Name = "TabPage23"
-        Me.TabPage23.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage23.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage23.Size = New System.Drawing.Size(457, 717)
         Me.TabPage23.TabIndex = 8
         Me.TabPage23.Text = "Barcode reader"
@@ -5106,7 +5107,7 @@ Partial Class Form1
         '
         Me.cbBarcodeDetectionEnabled.AutoSize = True
         Me.cbBarcodeDetectionEnabled.Location = New System.Drawing.Point(18, 21)
-        Me.cbBarcodeDetectionEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbBarcodeDetectionEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled"
         Me.cbBarcodeDetectionEnabled.Size = New System.Drawing.Size(94, 24)
         Me.cbBarcodeDetectionEnabled.TabIndex = 17
@@ -5121,7 +5122,7 @@ Partial Class Form1
         Me.TabPage24.Controls.Add(Me.cbNetworkStreaming)
         Me.TabPage24.Location = New System.Drawing.Point(4, 29)
         Me.TabPage24.Name = "TabPage24"
-        Me.TabPage24.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage24.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage24.Size = New System.Drawing.Size(457, 717)
         Me.TabPage24.TabIndex = 9
         Me.TabPage24.Text = "Network streaming"
@@ -5133,7 +5134,7 @@ Partial Class Form1
         Me.cbNetworkStreamingMode.FormattingEnabled = True
         Me.cbNetworkStreamingMode.Items.AddRange(New Object() {"Windows Media Video", "RTSP", "RTMP (including YouTube and Facebook)", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "Output to external virtual devices"})
         Me.cbNetworkStreamingMode.Location = New System.Drawing.Point(21, 54)
-        Me.cbNetworkStreamingMode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbNetworkStreamingMode.Margin = New System.Windows.Forms.Padding(4)
         Me.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode"
         Me.cbNetworkStreamingMode.Size = New System.Drawing.Size(412, 28)
         Me.cbNetworkStreamingMode.TabIndex = 33
@@ -5148,7 +5149,7 @@ Partial Class Form1
         Me.tabControl5.Controls.Add(Me.TabPage49)
         Me.tabControl5.Controls.Add(Me.TabPage56)
         Me.tabControl5.Location = New System.Drawing.Point(3, 102)
-        Me.tabControl5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl5.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl5.Name = "tabControl5"
         Me.tabControl5.SelectedIndex = 0
         Me.tabControl5.Size = New System.Drawing.Size(438, 555)
@@ -5172,9 +5173,9 @@ Partial Class Form1
         Me.TabPage25.Controls.Add(Me.edNetworkStreamingWMVProfile)
         Me.TabPage25.Controls.Add(Me.Label19)
         Me.TabPage25.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage25.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage25.Name = "TabPage25"
-        Me.TabPage25.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage25.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage25.Size = New System.Drawing.Size(430, 522)
         Me.TabPage25.TabIndex = 0
         Me.TabPage25.Text = "WMV"
@@ -5193,7 +5194,7 @@ Partial Class Form1
         'edNetworkURL
         '
         Me.edNetworkURL.Location = New System.Drawing.Point(22, 465)
-        Me.edNetworkURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkURL.Name = "edNetworkURL"
         Me.edNetworkURL.ReadOnly = True
         Me.edNetworkURL.Size = New System.Drawing.Size(380, 26)
@@ -5202,7 +5203,7 @@ Partial Class Form1
         'edWMVNetworkPort
         '
         Me.edWMVNetworkPort.Location = New System.Drawing.Point(354, 174)
-        Me.edWMVNetworkPort.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edWMVNetworkPort.Margin = New System.Windows.Forms.Padding(4)
         Me.edWMVNetworkPort.Name = "edWMVNetworkPort"
         Me.edWMVNetworkPort.Size = New System.Drawing.Size(49, 26)
         Me.edWMVNetworkPort.TabIndex = 30
@@ -5221,7 +5222,7 @@ Partial Class Form1
         'btRefreshClients
         '
         Me.btRefreshClients.Location = New System.Drawing.Point(309, 342)
-        Me.btRefreshClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btRefreshClients.Margin = New System.Windows.Forms.Padding(4)
         Me.btRefreshClients.Name = "btRefreshClients"
         Me.btRefreshClients.Size = New System.Drawing.Size(96, 33)
         Me.btRefreshClients.TabIndex = 28
@@ -5233,7 +5234,7 @@ Partial Class Form1
         Me.lbNetworkClients.FormattingEnabled = True
         Me.lbNetworkClients.ItemHeight = 20
         Me.lbNetworkClients.Location = New System.Drawing.Point(22, 252)
-        Me.lbNetworkClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbNetworkClients.Margin = New System.Windows.Forms.Padding(4)
         Me.lbNetworkClients.Name = "lbNetworkClients"
         Me.lbNetworkClients.Size = New System.Drawing.Size(380, 24)
         Me.lbNetworkClients.TabIndex = 27
@@ -5242,7 +5243,7 @@ Partial Class Form1
         '
         Me.rbNetworkStreamingUseExternalProfile.AutoSize = True
         Me.rbNetworkStreamingUseExternalProfile.Location = New System.Drawing.Point(22, 54)
-        Me.rbNetworkStreamingUseExternalProfile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkStreamingUseExternalProfile.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkStreamingUseExternalProfile.Name = "rbNetworkStreamingUseExternalProfile"
         Me.rbNetworkStreamingUseExternalProfile.Size = New System.Drawing.Size(170, 24)
         Me.rbNetworkStreamingUseExternalProfile.TabIndex = 26
@@ -5254,7 +5255,7 @@ Partial Class Form1
         Me.rbNetworkStreamingUseMainWMVSettings.AutoSize = True
         Me.rbNetworkStreamingUseMainWMVSettings.Checked = True
         Me.rbNetworkStreamingUseMainWMVSettings.Location = New System.Drawing.Point(22, 21)
-        Me.rbNetworkStreamingUseMainWMVSettings.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkStreamingUseMainWMVSettings.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkStreamingUseMainWMVSettings.Name = "rbNetworkStreamingUseMainWMVSettings"
         Me.rbNetworkStreamingUseMainWMVSettings.Size = New System.Drawing.Size(287, 24)
         Me.rbNetworkStreamingUseMainWMVSettings.TabIndex = 25
@@ -5285,7 +5286,7 @@ Partial Class Form1
         'edMaximumClients
         '
         Me.edMaximumClients.Location = New System.Drawing.Point(164, 174)
-        Me.edMaximumClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMaximumClients.Margin = New System.Windows.Forms.Padding(4)
         Me.edMaximumClients.Name = "edMaximumClients"
         Me.edMaximumClients.Size = New System.Drawing.Size(49, 26)
         Me.edMaximumClients.TabIndex = 22
@@ -5304,7 +5305,7 @@ Partial Class Form1
         'btSelectWMVProfileNetwork
         '
         Me.btSelectWMVProfileNetwork.Location = New System.Drawing.Point(369, 118)
-        Me.btSelectWMVProfileNetwork.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btSelectWMVProfileNetwork.Margin = New System.Windows.Forms.Padding(4)
         Me.btSelectWMVProfileNetwork.Name = "btSelectWMVProfileNetwork"
         Me.btSelectWMVProfileNetwork.Size = New System.Drawing.Size(36, 33)
         Me.btSelectWMVProfileNetwork.TabIndex = 20
@@ -5314,7 +5315,7 @@ Partial Class Form1
         'edNetworkStreamingWMVProfile
         '
         Me.edNetworkStreamingWMVProfile.Location = New System.Drawing.Point(56, 122)
-        Me.edNetworkStreamingWMVProfile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkStreamingWMVProfile.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile"
         Me.edNetworkStreamingWMVProfile.Size = New System.Drawing.Size(307, 26)
         Me.edNetworkStreamingWMVProfile.TabIndex = 19
@@ -5336,9 +5337,9 @@ Partial Class Form1
         Me.TabPage47.Controls.Add(Me.label367)
         Me.TabPage47.Controls.Add(Me.label366)
         Me.TabPage47.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage47.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage47.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage47.Name = "TabPage47"
-        Me.TabPage47.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage47.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage47.Size = New System.Drawing.Size(430, 522)
         Me.TabPage47.TabIndex = 2
         Me.TabPage47.Text = "RTSP"
@@ -5347,7 +5348,7 @@ Partial Class Form1
         'edNetworkRTSPURL
         '
         Me.edNetworkRTSPURL.Location = New System.Drawing.Point(30, 54)
-        Me.edNetworkRTSPURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkRTSPURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkRTSPURL.Name = "edNetworkRTSPURL"
         Me.edNetworkRTSPURL.Size = New System.Drawing.Size(368, 26)
         Me.edNetworkRTSPURL.TabIndex = 14
@@ -5382,9 +5383,9 @@ Partial Class Form1
         Me.TabPage48.Controls.Add(Me.label368)
         Me.TabPage48.Controls.Add(Me.label369)
         Me.TabPage48.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage48.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage48.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage48.Name = "TabPage48"
-        Me.TabPage48.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage48.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage48.Size = New System.Drawing.Size(430, 522)
         Me.TabPage48.TabIndex = 3
         Me.TabPage48.Text = "RTMP"
@@ -5405,7 +5406,7 @@ Partial Class Form1
         '
         Me.rbNetworkRTMPFFMPEGCustom.AutoSize = True
         Me.rbNetworkRTMPFFMPEGCustom.Location = New System.Drawing.Point(30, 60)
-        Me.rbNetworkRTMPFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkRTMPFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkRTMPFFMPEGCustom.Name = "rbNetworkRTMPFFMPEGCustom"
         Me.rbNetworkRTMPFFMPEGCustom.Size = New System.Drawing.Size(299, 24)
         Me.rbNetworkRTMPFFMPEGCustom.TabIndex = 21
@@ -5417,7 +5418,7 @@ Partial Class Form1
         Me.rbNetworkRTMPFFMPEG.AutoSize = True
         Me.rbNetworkRTMPFFMPEG.Checked = True
         Me.rbNetworkRTMPFFMPEG.Location = New System.Drawing.Point(30, 27)
-        Me.rbNetworkRTMPFFMPEG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkRTMPFFMPEG.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkRTMPFFMPEG.Name = "rbNetworkRTMPFFMPEG"
         Me.rbNetworkRTMPFFMPEG.Size = New System.Drawing.Size(268, 24)
         Me.rbNetworkRTMPFFMPEG.TabIndex = 20
@@ -5428,7 +5429,7 @@ Partial Class Form1
         'edNetworkRTMPURL
         '
         Me.edNetworkRTMPURL.Location = New System.Drawing.Point(30, 423)
-        Me.edNetworkRTMPURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkRTMPURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkRTMPURL.Name = "edNetworkRTMPURL"
         Me.edNetworkRTMPURL.Size = New System.Drawing.Size(368, 26)
         Me.edNetworkRTMPURL.TabIndex = 19
@@ -5463,9 +5464,9 @@ Partial Class Form1
         Me.TabPage5.Controls.Add(Me.edNDIName)
         Me.TabPage5.Controls.Add(Me.label13)
         Me.TabPage5.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage5.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage5.Size = New System.Drawing.Size(430, 522)
         Me.TabPage5.TabIndex = 6
         Me.TabPage5.Text = "NDI"
@@ -5505,7 +5506,7 @@ Partial Class Form1
         'edNDIURL
         '
         Me.edNDIURL.Location = New System.Drawing.Point(27, 130)
-        Me.edNDIURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNDIURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNDIURL.Name = "edNDIURL"
         Me.edNDIURL.ReadOnly = True
         Me.edNDIURL.Size = New System.Drawing.Size(362, 26)
@@ -5514,7 +5515,7 @@ Partial Class Form1
         'edNDIName
         '
         Me.edNDIName.Location = New System.Drawing.Point(27, 52)
-        Me.edNDIName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNDIName.Margin = New System.Windows.Forms.Padding(4)
         Me.edNDIName.Name = "edNDIName"
         Me.edNDIName.Size = New System.Drawing.Size(362, 26)
         Me.edNDIName.TabIndex = 97
@@ -5542,9 +5543,9 @@ Partial Class Form1
         Me.TabPage67.Controls.Add(Me.rbNetworkUDPFFMPEGCustom)
         Me.TabPage67.Controls.Add(Me.rbNetworkUDPFFMPEG)
         Me.TabPage67.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage67.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage67.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage67.Name = "TabPage67"
-        Me.TabPage67.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage67.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage67.Size = New System.Drawing.Size(430, 522)
         Me.TabPage67.TabIndex = 5
         Me.TabPage67.Text = "UDP"
@@ -5593,7 +5594,7 @@ Partial Class Form1
         'edNetworkUDPURL
         '
         Me.edNetworkUDPURL.Location = New System.Drawing.Point(30, 136)
-        Me.edNetworkUDPURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkUDPURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkUDPURL.Name = "edNetworkUDPURL"
         Me.edNetworkUDPURL.Size = New System.Drawing.Size(368, 26)
         Me.edNetworkUDPURL.TabIndex = 23
@@ -5623,7 +5624,7 @@ Partial Class Form1
         '
         Me.rbNetworkUDPFFMPEGCustom.AutoSize = True
         Me.rbNetworkUDPFFMPEGCustom.Location = New System.Drawing.Point(30, 57)
-        Me.rbNetworkUDPFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkUDPFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkUDPFFMPEGCustom.Name = "rbNetworkUDPFFMPEGCustom"
         Me.rbNetworkUDPFFMPEGCustom.Size = New System.Drawing.Size(299, 24)
         Me.rbNetworkUDPFFMPEGCustom.TabIndex = 18
@@ -5635,7 +5636,7 @@ Partial Class Form1
         Me.rbNetworkUDPFFMPEG.AutoSize = True
         Me.rbNetworkUDPFFMPEG.Checked = True
         Me.rbNetworkUDPFFMPEG.Location = New System.Drawing.Point(30, 24)
-        Me.rbNetworkUDPFFMPEG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkUDPFFMPEG.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkUDPFFMPEG.Name = "rbNetworkUDPFFMPEG"
         Me.rbNetworkUDPFFMPEG.Size = New System.Drawing.Size(268, 24)
         Me.rbNetworkUDPFFMPEG.TabIndex = 17
@@ -5653,9 +5654,9 @@ Partial Class Form1
         Me.TabPage49.Controls.Add(Me.label371)
         Me.TabPage49.Controls.Add(Me.rbNetworkSSSoftware)
         Me.TabPage49.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage49.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage49.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage49.Name = "TabPage49"
-        Me.TabPage49.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage49.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage49.Size = New System.Drawing.Size(430, 522)
         Me.TabPage49.TabIndex = 4
         Me.TabPage49.Text = "IIS Smooth Streaming"
@@ -5665,7 +5666,7 @@ Partial Class Form1
         '
         Me.rbNetworkSSFFMPEGCustom.AutoSize = True
         Me.rbNetworkSSFFMPEGCustom.Location = New System.Drawing.Point(30, 93)
-        Me.rbNetworkSSFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkSSFFMPEGCustom.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkSSFFMPEGCustom.Name = "rbNetworkSSFFMPEGCustom"
         Me.rbNetworkSSFFMPEGCustom.Size = New System.Drawing.Size(299, 24)
         Me.rbNetworkSSFFMPEGCustom.TabIndex = 27
@@ -5676,7 +5677,7 @@ Partial Class Form1
         '
         Me.rbNetworkSSFFMPEGDefault.AutoSize = True
         Me.rbNetworkSSFFMPEGDefault.Location = New System.Drawing.Point(30, 60)
-        Me.rbNetworkSSFFMPEGDefault.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkSSFFMPEGDefault.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkSSFFMPEGDefault.Name = "rbNetworkSSFFMPEGDefault"
         Me.rbNetworkSSFFMPEGDefault.Size = New System.Drawing.Size(268, 24)
         Me.rbNetworkSSFFMPEGDefault.TabIndex = 26
@@ -5697,7 +5698,7 @@ Partial Class Form1
         'edNetworkSSURL
         '
         Me.edNetworkSSURL.Location = New System.Drawing.Point(30, 220)
-        Me.edNetworkSSURL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edNetworkSSURL.Margin = New System.Windows.Forms.Padding(4)
         Me.edNetworkSSURL.Name = "edNetworkSSURL"
         Me.edNetworkSSURL.Size = New System.Drawing.Size(368, 26)
         Me.edNetworkSSURL.TabIndex = 24
@@ -5728,7 +5729,7 @@ Partial Class Form1
         Me.rbNetworkSSSoftware.AutoSize = True
         Me.rbNetworkSSSoftware.Checked = True
         Me.rbNetworkSSSoftware.Location = New System.Drawing.Point(30, 27)
-        Me.rbNetworkSSSoftware.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbNetworkSSSoftware.Margin = New System.Windows.Forms.Padding(4)
         Me.rbNetworkSSSoftware.Name = "rbNetworkSSSoftware"
         Me.rbNetworkSSSoftware.Size = New System.Drawing.Size(354, 24)
         Me.rbNetworkSSSoftware.TabIndex = 20
@@ -5740,9 +5741,9 @@ Partial Class Form1
         '
         Me.TabPage56.Controls.Add(Me.LinkLabel4)
         Me.TabPage56.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage56.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage56.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage56.Name = "TabPage56"
-        Me.TabPage56.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage56.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage56.Size = New System.Drawing.Size(430, 522)
         Me.TabPage56.TabIndex = 1
         Me.TabPage56.Text = "External"
@@ -5763,7 +5764,7 @@ Partial Class Form1
         '
         Me.cbNetworkStreamingAudioEnabled.AutoSize = True
         Me.cbNetworkStreamingAudioEnabled.Location = New System.Drawing.Point(21, 666)
-        Me.cbNetworkStreamingAudioEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbNetworkStreamingAudioEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbNetworkStreamingAudioEnabled.Name = "cbNetworkStreamingAudioEnabled"
         Me.cbNetworkStreamingAudioEnabled.Size = New System.Drawing.Size(130, 24)
         Me.cbNetworkStreamingAudioEnabled.TabIndex = 31
@@ -5774,7 +5775,7 @@ Partial Class Form1
         '
         Me.cbNetworkStreaming.AutoSize = True
         Me.cbNetworkStreaming.Location = New System.Drawing.Point(21, 21)
-        Me.cbNetworkStreaming.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbNetworkStreaming.Margin = New System.Windows.Forms.Padding(4)
         Me.cbNetworkStreaming.Name = "cbNetworkStreaming"
         Me.cbNetworkStreaming.Size = New System.Drawing.Size(228, 24)
         Me.cbNetworkStreaming.TabIndex = 28
@@ -5789,9 +5790,9 @@ Partial Class Form1
         Me.TabPage32.Controls.Add(Me.label325)
         Me.TabPage32.Controls.Add(Me.cbVirtualCamera)
         Me.TabPage32.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage32.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage32.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage32.Name = "TabPage32"
-        Me.TabPage32.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage32.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage32.Size = New System.Drawing.Size(457, 717)
         Me.TabPage32.TabIndex = 10
         Me.TabPage32.Text = "Virtual camera"
@@ -5841,7 +5842,7 @@ Partial Class Form1
         '
         Me.cbVirtualCamera.AutoSize = True
         Me.cbVirtualCamera.Location = New System.Drawing.Point(30, 27)
-        Me.cbVirtualCamera.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbVirtualCamera.Margin = New System.Windows.Forms.Padding(4)
         Me.cbVirtualCamera.Name = "cbVirtualCamera"
         Me.cbVirtualCamera.Size = New System.Drawing.Size(159, 24)
         Me.cbVirtualCamera.TabIndex = 3
@@ -5870,9 +5871,9 @@ Partial Class Form1
         Me.TabPage34.Controls.Add(Me.cbDecklinkDV)
         Me.TabPage34.Controls.Add(Me.cbDecklinkOutput)
         Me.TabPage34.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage34.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage34.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage34.Name = "TabPage34"
-        Me.TabPage34.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage34.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage34.Size = New System.Drawing.Size(457, 717)
         Me.TabPage34.TabIndex = 11
         Me.TabPage34.Text = "Decklink output"
@@ -5882,7 +5883,7 @@ Partial Class Form1
         '
         Me.cbDecklinkOutputDownConversionAnalogOutput.AutoSize = True
         Me.cbDecklinkOutputDownConversionAnalogOutput.Location = New System.Drawing.Point(39, 357)
-        Me.cbDecklinkOutputDownConversionAnalogOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputDownConversionAnalogOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputDownConversionAnalogOutput.Name = "cbDecklinkOutputDownConversionAnalogOutput"
         Me.cbDecklinkOutputDownConversionAnalogOutput.Size = New System.Drawing.Size(174, 24)
         Me.cbDecklinkOutputDownConversionAnalogOutput.TabIndex = 52
@@ -5895,7 +5896,7 @@ Partial Class Form1
         Me.cbDecklinkOutputDownConversion.FormattingEnabled = True
         Me.cbDecklinkOutputDownConversion.Items.AddRange(New Object() {"Default", "Disabled", "Letterbox 16:9", "Anamorphic", "Anamorphic center"})
         Me.cbDecklinkOutputDownConversion.Location = New System.Drawing.Point(39, 321)
-        Me.cbDecklinkOutputDownConversion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputDownConversion.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputDownConversion.Name = "cbDecklinkOutputDownConversion"
         Me.cbDecklinkOutputDownConversion.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputDownConversion.TabIndex = 51
@@ -5916,7 +5917,7 @@ Partial Class Form1
         Me.cbDecklinkOutputHDTVPulldown.FormattingEnabled = True
         Me.cbDecklinkOutputHDTVPulldown.Items.AddRange(New Object() {"Default", "Enabled", "Disabled"})
         Me.cbDecklinkOutputHDTVPulldown.Location = New System.Drawing.Point(39, 423)
-        Me.cbDecklinkOutputHDTVPulldown.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputHDTVPulldown.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputHDTVPulldown.Name = "cbDecklinkOutputHDTVPulldown"
         Me.cbDecklinkOutputHDTVPulldown.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputHDTVPulldown.TabIndex = 49
@@ -5937,7 +5938,7 @@ Partial Class Form1
         Me.cbDecklinkOutputBlackToDeck.FormattingEnabled = True
         Me.cbDecklinkOutputBlackToDeck.Items.AddRange(New Object() {"Default", "None", "Digital", "Analogue"})
         Me.cbDecklinkOutputBlackToDeck.Location = New System.Drawing.Point(39, 254)
-        Me.cbDecklinkOutputBlackToDeck.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputBlackToDeck.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputBlackToDeck.Name = "cbDecklinkOutputBlackToDeck"
         Me.cbDecklinkOutputBlackToDeck.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputBlackToDeck.TabIndex = 47
@@ -5958,7 +5959,7 @@ Partial Class Form1
         Me.cbDecklinkOutputSingleField.FormattingEnabled = True
         Me.cbDecklinkOutputSingleField.Items.AddRange(New Object() {"Default", "Enabled", "Disabled"})
         Me.cbDecklinkOutputSingleField.Location = New System.Drawing.Point(39, 189)
-        Me.cbDecklinkOutputSingleField.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputSingleField.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputSingleField.Name = "cbDecklinkOutputSingleField"
         Me.cbDecklinkOutputSingleField.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputSingleField.TabIndex = 45
@@ -5979,7 +5980,7 @@ Partial Class Form1
         Me.cbDecklinkOutputComponentLevels.FormattingEnabled = True
         Me.cbDecklinkOutputComponentLevels.Items.AddRange(New Object() {"SMPTE", "Betacam"})
         Me.cbDecklinkOutputComponentLevels.Location = New System.Drawing.Point(243, 254)
-        Me.cbDecklinkOutputComponentLevels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputComponentLevels.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputComponentLevels.Name = "cbDecklinkOutputComponentLevels"
         Me.cbDecklinkOutputComponentLevels.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputComponentLevels.TabIndex = 43
@@ -6000,7 +6001,7 @@ Partial Class Form1
         Me.cbDecklinkOutputNTSC.FormattingEnabled = True
         Me.cbDecklinkOutputNTSC.Items.AddRange(New Object() {"USA", "Japan"})
         Me.cbDecklinkOutputNTSC.Location = New System.Drawing.Point(243, 189)
-        Me.cbDecklinkOutputNTSC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputNTSC.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputNTSC.Name = "cbDecklinkOutputNTSC"
         Me.cbDecklinkOutputNTSC.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputNTSC.TabIndex = 41
@@ -6021,7 +6022,7 @@ Partial Class Form1
         Me.cbDecklinkOutputDualLink.FormattingEnabled = True
         Me.cbDecklinkOutputDualLink.Items.AddRange(New Object() {"Default", "Enabled", "Disabled"})
         Me.cbDecklinkOutputDualLink.Location = New System.Drawing.Point(39, 123)
-        Me.cbDecklinkOutputDualLink.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputDualLink.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputDualLink.Name = "cbDecklinkOutputDualLink"
         Me.cbDecklinkOutputDualLink.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputDualLink.TabIndex = 39
@@ -6042,7 +6043,7 @@ Partial Class Form1
         Me.cbDecklinkOutputAnalog.FormattingEnabled = True
         Me.cbDecklinkOutputAnalog.Items.AddRange(New Object() {"Auto", "Component", "Composite", "S-Video"})
         Me.cbDecklinkOutputAnalog.Location = New System.Drawing.Point(243, 123)
-        Me.cbDecklinkOutputAnalog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutputAnalog.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutputAnalog.Name = "cbDecklinkOutputAnalog"
         Me.cbDecklinkOutputAnalog.Size = New System.Drawing.Size(180, 28)
         Me.cbDecklinkOutputAnalog.TabIndex = 37
@@ -6061,7 +6062,7 @@ Partial Class Form1
         '
         Me.cbDecklinkDV.AutoSize = True
         Me.cbDecklinkDV.Location = New System.Drawing.Point(52, 57)
-        Me.cbDecklinkDV.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkDV.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkDV.Name = "cbDecklinkDV"
         Me.cbDecklinkDV.Size = New System.Drawing.Size(108, 24)
         Me.cbDecklinkDV.TabIndex = 3
@@ -6072,7 +6073,7 @@ Partial Class Form1
         '
         Me.cbDecklinkOutput.AutoSize = True
         Me.cbDecklinkOutput.Location = New System.Drawing.Point(26, 24)
-        Me.cbDecklinkOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDecklinkOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.cbDecklinkOutput.Name = "cbDecklinkOutput"
         Me.cbDecklinkOutput.Size = New System.Drawing.Size(252, 24)
         Me.cbDecklinkOutput.TabIndex = 2
@@ -6085,9 +6086,9 @@ Partial Class Form1
         Me.TabPage43.Controls.Add(Me.groupBox47)
         Me.TabPage43.Controls.Add(Me.groupBox43)
         Me.TabPage43.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage43.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage43.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage43.Name = "TabPage43"
-        Me.TabPage43.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage43.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage43.Size = New System.Drawing.Size(457, 717)
         Me.TabPage43.TabIndex = 12
         Me.TabPage43.Text = "Encryption"
@@ -6104,9 +6105,9 @@ Partial Class Form1
         Me.groupBox48.Controls.Add(Me.edEncryptionKeyString)
         Me.groupBox48.Controls.Add(Me.rbEncryptionKeyString)
         Me.groupBox48.Location = New System.Drawing.Point(24, 279)
-        Me.groupBox48.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox48.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox48.Name = "groupBox48"
-        Me.groupBox48.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox48.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox48.Size = New System.Drawing.Size(404, 324)
         Me.groupBox48.TabIndex = 14
         Me.groupBox48.TabStop = False
@@ -6125,7 +6126,7 @@ Partial Class Form1
         'edEncryptionKeyHEX
         '
         Me.edEncryptionKeyHEX.Location = New System.Drawing.Point(54, 254)
-        Me.edEncryptionKeyHEX.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edEncryptionKeyHEX.Margin = New System.Windows.Forms.Padding(4)
         Me.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX"
         Me.edEncryptionKeyHEX.Size = New System.Drawing.Size(319, 26)
         Me.edEncryptionKeyHEX.TabIndex = 9
@@ -6135,7 +6136,7 @@ Partial Class Form1
         '
         Me.rbEncryptionKeyBinary.AutoSize = True
         Me.rbEncryptionKeyBinary.Location = New System.Drawing.Point(21, 220)
-        Me.rbEncryptionKeyBinary.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptionKeyBinary.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptionKeyBinary.Name = "rbEncryptionKeyBinary"
         Me.rbEncryptionKeyBinary.Size = New System.Drawing.Size(181, 24)
         Me.rbEncryptionKeyBinary.TabIndex = 8
@@ -6145,7 +6146,7 @@ Partial Class Form1
         'btEncryptionOpenFile
         '
         Me.btEncryptionOpenFile.Location = New System.Drawing.Point(340, 165)
-        Me.btEncryptionOpenFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btEncryptionOpenFile.Margin = New System.Windows.Forms.Padding(4)
         Me.btEncryptionOpenFile.Name = "btEncryptionOpenFile"
         Me.btEncryptionOpenFile.Size = New System.Drawing.Size(34, 33)
         Me.btEncryptionOpenFile.TabIndex = 7
@@ -6155,7 +6156,7 @@ Partial Class Form1
         'edEncryptionKeyFile
         '
         Me.edEncryptionKeyFile.Location = New System.Drawing.Point(54, 168)
-        Me.edEncryptionKeyFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edEncryptionKeyFile.Margin = New System.Windows.Forms.Padding(4)
         Me.edEncryptionKeyFile.Name = "edEncryptionKeyFile"
         Me.edEncryptionKeyFile.Size = New System.Drawing.Size(276, 26)
         Me.edEncryptionKeyFile.TabIndex = 6
@@ -6165,7 +6166,7 @@ Partial Class Form1
         '
         Me.rbEncryptionKeyFile.AutoSize = True
         Me.rbEncryptionKeyFile.Location = New System.Drawing.Point(21, 135)
-        Me.rbEncryptionKeyFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptionKeyFile.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptionKeyFile.Name = "rbEncryptionKeyFile"
         Me.rbEncryptionKeyFile.Size = New System.Drawing.Size(126, 24)
         Me.rbEncryptionKeyFile.TabIndex = 5
@@ -6175,7 +6176,7 @@ Partial Class Form1
         'edEncryptionKeyString
         '
         Me.edEncryptionKeyString.Location = New System.Drawing.Point(54, 81)
-        Me.edEncryptionKeyString.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edEncryptionKeyString.Margin = New System.Windows.Forms.Padding(4)
         Me.edEncryptionKeyString.Name = "edEncryptionKeyString"
         Me.edEncryptionKeyString.Size = New System.Drawing.Size(319, 26)
         Me.edEncryptionKeyString.TabIndex = 4
@@ -6186,7 +6187,7 @@ Partial Class Form1
         Me.rbEncryptionKeyString.AutoSize = True
         Me.rbEncryptionKeyString.Checked = True
         Me.rbEncryptionKeyString.Location = New System.Drawing.Point(21, 40)
-        Me.rbEncryptionKeyString.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptionKeyString.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptionKeyString.Name = "rbEncryptionKeyString"
         Me.rbEncryptionKeyString.Size = New System.Drawing.Size(76, 24)
         Me.rbEncryptionKeyString.TabIndex = 0
@@ -6199,9 +6200,9 @@ Partial Class Form1
         Me.groupBox47.Controls.Add(Me.rbEncryptionModeAES256)
         Me.groupBox47.Controls.Add(Me.rbEncryptionModeAES128)
         Me.groupBox47.Location = New System.Drawing.Point(24, 21)
-        Me.groupBox47.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox47.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox47.Name = "groupBox47"
-        Me.groupBox47.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox47.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox47.Size = New System.Drawing.Size(404, 120)
         Me.groupBox47.TabIndex = 13
         Me.groupBox47.TabStop = False
@@ -6212,7 +6213,7 @@ Partial Class Form1
         Me.rbEncryptionModeAES256.AutoSize = True
         Me.rbEncryptionModeAES256.Checked = True
         Me.rbEncryptionModeAES256.Location = New System.Drawing.Point(21, 74)
-        Me.rbEncryptionModeAES256.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptionModeAES256.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptionModeAES256.Name = "rbEncryptionModeAES256"
         Me.rbEncryptionModeAES256.Size = New System.Drawing.Size(293, 24)
         Me.rbEncryptionModeAES256.TabIndex = 1
@@ -6224,7 +6225,7 @@ Partial Class Form1
         '
         Me.rbEncryptionModeAES128.AutoSize = True
         Me.rbEncryptionModeAES128.Location = New System.Drawing.Point(21, 40)
-        Me.rbEncryptionModeAES128.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptionModeAES128.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptionModeAES128.Name = "rbEncryptionModeAES128"
         Me.rbEncryptionModeAES128.Size = New System.Drawing.Size(293, 24)
         Me.rbEncryptionModeAES128.TabIndex = 0
@@ -6236,9 +6237,9 @@ Partial Class Form1
         Me.groupBox43.Controls.Add(Me.rbEncryptedH264CUDA)
         Me.groupBox43.Controls.Add(Me.rbEncryptedH264SW)
         Me.groupBox43.Location = New System.Drawing.Point(24, 150)
-        Me.groupBox43.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox43.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox43.Name = "groupBox43"
-        Me.groupBox43.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox43.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox43.Size = New System.Drawing.Size(404, 120)
         Me.groupBox43.TabIndex = 12
         Me.groupBox43.TabStop = False
@@ -6249,7 +6250,7 @@ Partial Class Form1
         Me.rbEncryptedH264CUDA.AutoSize = True
         Me.rbEncryptedH264CUDA.Enabled = False
         Me.rbEncryptedH264CUDA.Location = New System.Drawing.Point(21, 74)
-        Me.rbEncryptedH264CUDA.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptedH264CUDA.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptedH264CUDA.Name = "rbEncryptedH264CUDA"
         Me.rbEncryptedH264CUDA.Size = New System.Drawing.Size(383, 24)
         Me.rbEncryptedH264CUDA.TabIndex = 7
@@ -6261,7 +6262,7 @@ Partial Class Form1
         Me.rbEncryptedH264SW.AutoSize = True
         Me.rbEncryptedH264SW.Checked = True
         Me.rbEncryptedH264SW.Location = New System.Drawing.Point(21, 40)
-        Me.rbEncryptedH264SW.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbEncryptedH264SW.Margin = New System.Windows.Forms.Padding(4)
         Me.rbEncryptedH264SW.Name = "rbEncryptedH264SW"
         Me.rbEncryptedH264SW.Size = New System.Drawing.Size(287, 24)
         Me.rbEncryptedH264SW.TabIndex = 6
@@ -6274,9 +6275,9 @@ Partial Class Form1
         Me.TabPage78.Controls.Add(Me.TabControl32)
         Me.TabPage78.Controls.Add(Me.cbTagEnabled)
         Me.TabPage78.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage78.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage78.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage78.Name = "TabPage78"
-        Me.TabPage78.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage78.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage78.Size = New System.Drawing.Size(457, 717)
         Me.TabPage78.TabIndex = 14
         Me.TabPage78.Text = "Tags"
@@ -6285,7 +6286,7 @@ Partial Class Form1
         'TabControl32
         '
         Me.TabControl32.Location = New System.Drawing.Point(8, 66)
-        Me.TabControl32.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl32.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl32.Name = "TabControl32"
         Me.TabControl32.SelectedIndex = 0
         Me.TabControl32.Size = New System.Drawing.Size(438, 624)
@@ -6295,7 +6296,7 @@ Partial Class Form1
         '
         Me.cbTagEnabled.AutoSize = True
         Me.cbTagEnabled.Location = New System.Drawing.Point(21, 24)
-        Me.cbTagEnabled.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbTagEnabled.Margin = New System.Windows.Forms.Padding(4)
         Me.cbTagEnabled.Name = "cbTagEnabled"
         Me.cbTagEnabled.Size = New System.Drawing.Size(199, 24)
         Me.cbTagEnabled.TabIndex = 2
@@ -6316,9 +6317,9 @@ Partial Class Form1
         Me.TabPage22.Controls.Add(Me.peakMeterCtrl1)
         Me.TabPage22.Controls.Add(Me.cbVUMeter)
         Me.TabPage22.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage22.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage22.Name = "TabPage22"
-        Me.TabPage22.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage22.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage22.Size = New System.Drawing.Size(457, 717)
         Me.TabPage22.TabIndex = 16
         Me.TabPage22.Text = "Audio output"
@@ -6327,7 +6328,7 @@ Partial Class Form1
         'tbVUMeterBoost
         '
         Me.tbVUMeterBoost.Location = New System.Drawing.Point(256, 369)
-        Me.tbVUMeterBoost.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbVUMeterBoost.Margin = New System.Windows.Forms.Padding(4)
         Me.tbVUMeterBoost.Maximum = 30
         Me.tbVUMeterBoost.Name = "tbVUMeterBoost"
         Me.tbVUMeterBoost.Size = New System.Drawing.Size(156, 69)
@@ -6357,7 +6358,7 @@ Partial Class Form1
         'tbVUMeterAmplification
         '
         Me.tbVUMeterAmplification.Location = New System.Drawing.Point(34, 369)
-        Me.tbVUMeterAmplification.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbVUMeterAmplification.Margin = New System.Windows.Forms.Padding(4)
         Me.tbVUMeterAmplification.Maximum = 100
         Me.tbVUMeterAmplification.Name = "tbVUMeterAmplification"
         Me.tbVUMeterAmplification.Size = New System.Drawing.Size(158, 69)
@@ -6368,7 +6369,7 @@ Partial Class Form1
         '
         Me.cbVUMeterPro.AutoSize = True
         Me.cbVUMeterPro.Location = New System.Drawing.Point(18, 126)
-        Me.cbVUMeterPro.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbVUMeterPro.Margin = New System.Windows.Forms.Padding(4)
         Me.cbVUMeterPro.Name = "cbVUMeterPro"
         Me.cbVUMeterPro.Size = New System.Drawing.Size(185, 24)
         Me.cbVUMeterPro.TabIndex = 126
@@ -6379,7 +6380,7 @@ Partial Class Form1
         '
         Me.waveformPainter2.Boost = 1.0!
         Me.waveformPainter2.Location = New System.Drawing.Point(152, 252)
-        Me.waveformPainter2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.waveformPainter2.Margin = New System.Windows.Forms.Padding(4)
         Me.waveformPainter2.Name = "waveformPainter2"
         Me.waveformPainter2.Size = New System.Drawing.Size(261, 87)
         Me.waveformPainter2.TabIndex = 131
@@ -6389,7 +6390,7 @@ Partial Class Form1
         '
         Me.waveformPainter1.Boost = 1.0!
         Me.waveformPainter1.Location = New System.Drawing.Point(152, 156)
-        Me.waveformPainter1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.waveformPainter1.Margin = New System.Windows.Forms.Padding(4)
         Me.waveformPainter1.Name = "waveformPainter1"
         Me.waveformPainter1.Size = New System.Drawing.Size(261, 87)
         Me.waveformPainter1.TabIndex = 130
@@ -6401,7 +6402,7 @@ Partial Class Form1
         Me.volumeMeter2.BackColor = System.Drawing.Color.LightGray
         Me.volumeMeter2.Boost = 1.0!
         Me.volumeMeter2.Location = New System.Drawing.Point(76, 156)
-        Me.volumeMeter2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.volumeMeter2.Margin = New System.Windows.Forms.Padding(4)
         Me.volumeMeter2.MaxDb = 18.0!
         Me.volumeMeter2.MinDb = -60.0!
         Me.volumeMeter2.Name = "volumeMeter2"
@@ -6414,7 +6415,7 @@ Partial Class Form1
         Me.volumeMeter1.BackColor = System.Drawing.Color.LightGray
         Me.volumeMeter1.Boost = 1.0!
         Me.volumeMeter1.Location = New System.Drawing.Point(34, 156)
-        Me.volumeMeter1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.volumeMeter1.Margin = New System.Windows.Forms.Padding(4)
         Me.volumeMeter1.MaxDb = 18.0!
         Me.volumeMeter1.MinDb = -60.0!
         Me.volumeMeter1.Name = "volumeMeter1"
@@ -6432,7 +6433,7 @@ Partial Class Form1
         Me.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(180, Byte), Integer))
         Me.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro
         Me.peakMeterCtrl1.Location = New System.Drawing.Point(188, 18)
-        Me.peakMeterCtrl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.peakMeterCtrl1.Margin = New System.Windows.Forms.Padding(4)
         Me.peakMeterCtrl1.Name = "peakMeterCtrl1"
         Me.peakMeterCtrl1.Size = New System.Drawing.Size(158, 87)
         Me.peakMeterCtrl1.TabIndex = 104
@@ -6442,7 +6443,7 @@ Partial Class Form1
         '
         Me.cbVUMeter.AutoSize = True
         Me.cbVUMeter.Location = New System.Drawing.Point(18, 18)
-        Me.cbVUMeter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbVUMeter.Margin = New System.Windows.Forms.Padding(4)
         Me.cbVUMeter.Name = "cbVUMeter"
         Me.cbVUMeter.Size = New System.Drawing.Size(157, 24)
         Me.cbVUMeter.TabIndex = 103
@@ -6465,7 +6466,7 @@ Partial Class Form1
         Me.btStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStop.Location = New System.Drawing.Point(1047, 900)
-        Me.btStop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStop.Margin = New System.Windows.Forms.Padding(4)
         Me.btStop.Name = "btStop"
         Me.btStop.Size = New System.Drawing.Size(87, 33)
         Me.btStop.TabIndex = 88
@@ -6477,7 +6478,7 @@ Partial Class Form1
         Me.btStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.btStart.Location = New System.Drawing.Point(946, 900)
-        Me.btStart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStart.Margin = New System.Windows.Forms.Padding(4)
         Me.btStart.Name = "btStart"
         Me.btStart.Size = New System.Drawing.Size(87, 33)
         Me.btStart.TabIndex = 87
@@ -6488,7 +6489,7 @@ Partial Class Form1
         '
         Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.ProgressBar1.Location = New System.Drawing.Point(662, 900)
-        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(276, 33)
         Me.ProgressBar1.TabIndex = 86
@@ -6497,7 +6498,7 @@ Partial Class Form1
         '
         Me.tbSeeking.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.tbSeeking.Location = New System.Drawing.Point(490, 900)
-        Me.tbSeeking.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbSeeking.Margin = New System.Windows.Forms.Padding(4)
         Me.tbSeeking.Name = "tbSeeking"
         Me.tbSeeking.Size = New System.Drawing.Size(162, 69)
         Me.tbSeeking.TabIndex = 89
@@ -6514,7 +6515,7 @@ Partial Class Form1
         Me.tabControl3.Controls.Add(Me.tabPage54)
         Me.tabControl3.Controls.Add(Me.TabPage74)
         Me.tabControl3.Location = New System.Drawing.Point(496, 18)
-        Me.tabControl3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabControl3.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl3.Name = "tabControl3"
         Me.tabControl3.SelectedIndex = 0
         Me.tabControl3.Size = New System.Drawing.Size(638, 438)
@@ -6522,6 +6523,7 @@ Partial Class Form1
         '
         'tabPage52
         '
+        Me.tabPage52.Controls.Add(Me.llDecoders)
         Me.tabPage52.Controls.Add(Me.groupBox7)
         Me.tabPage52.Controls.Add(Me.label50)
         Me.tabPage52.Controls.Add(Me.groupBox6)
@@ -6530,9 +6532,9 @@ Partial Class Form1
         Me.tabPage52.Controls.Add(Me.lbFiles)
         Me.tabPage52.Controls.Add(Me.label10)
         Me.tabPage52.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage52.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage52.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage52.Name = "tabPage52"
-        Me.tabPage52.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage52.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage52.Size = New System.Drawing.Size(630, 405)
         Me.tabPage52.TabIndex = 0
         Me.tabPage52.Text = "Edit"
@@ -6545,9 +6547,9 @@ Partial Class Form1
         Me.groupBox7.Controls.Add(Me.label73)
         Me.groupBox7.Controls.Add(Me.cbInsertAfterPreviousFile)
         Me.groupBox7.Location = New System.Drawing.Point(380, 165)
-        Me.groupBox7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox7.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox7.Name = "groupBox7"
-        Me.groupBox7.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox7.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox7.Size = New System.Drawing.Size(220, 189)
         Me.groupBox7.TabIndex = 56
         Me.groupBox7.TabStop = False
@@ -6566,7 +6568,7 @@ Partial Class Form1
         'edInsertTime
         '
         Me.edInsertTime.Location = New System.Drawing.Point(114, 60)
-        Me.edInsertTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edInsertTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edInsertTime.Name = "edInsertTime"
         Me.edInsertTime.Size = New System.Drawing.Size(49, 26)
         Me.edInsertTime.TabIndex = 41
@@ -6588,7 +6590,7 @@ Partial Class Form1
         Me.cbInsertAfterPreviousFile.Checked = True
         Me.cbInsertAfterPreviousFile.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbInsertAfterPreviousFile.Location = New System.Drawing.Point(18, 27)
-        Me.cbInsertAfterPreviousFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbInsertAfterPreviousFile.Margin = New System.Windows.Forms.Padding(4)
         Me.cbInsertAfterPreviousFile.Name = "cbInsertAfterPreviousFile"
         Me.cbInsertAfterPreviousFile.Size = New System.Drawing.Size(200, 24)
         Me.cbInsertAfterPreviousFile.TabIndex = 39
@@ -6618,9 +6620,9 @@ Partial Class Form1
         Me.groupBox6.Controls.Add(Me.cbAddFullFile)
         Me.groupBox6.Controls.Add(Me.tbSpeed)
         Me.groupBox6.Location = New System.Drawing.Point(14, 165)
-        Me.groupBox6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.groupBox6.Name = "groupBox6"
-        Me.groupBox6.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.groupBox6.Padding = New System.Windows.Forms.Padding(4)
         Me.groupBox6.Size = New System.Drawing.Size(357, 189)
         Me.groupBox6.TabIndex = 54
         Me.groupBox6.TabStop = False
@@ -6659,7 +6661,7 @@ Partial Class Form1
         'edStopTime
         '
         Me.edStopTime.Location = New System.Drawing.Point(267, 60)
-        Me.edStopTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edStopTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edStopTime.Name = "edStopTime"
         Me.edStopTime.Size = New System.Drawing.Size(46, 26)
         Me.edStopTime.TabIndex = 40
@@ -6688,7 +6690,7 @@ Partial Class Form1
         'edStartTime
         '
         Me.edStartTime.Location = New System.Drawing.Point(100, 60)
-        Me.edStartTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edStartTime.Margin = New System.Windows.Forms.Padding(4)
         Me.edStartTime.Name = "edStartTime"
         Me.edStartTime.Size = New System.Drawing.Size(31, 26)
         Me.edStartTime.TabIndex = 37
@@ -6710,7 +6712,7 @@ Partial Class Form1
         Me.cbAddFullFile.Checked = True
         Me.cbAddFullFile.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbAddFullFile.Location = New System.Drawing.Point(18, 27)
-        Me.cbAddFullFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbAddFullFile.Margin = New System.Windows.Forms.Padding(4)
         Me.cbAddFullFile.Name = "cbAddFullFile"
         Me.cbAddFullFile.Size = New System.Drawing.Size(112, 24)
         Me.cbAddFullFile.TabIndex = 35
@@ -6720,7 +6722,7 @@ Partial Class Form1
         'tbSpeed
         '
         Me.tbSpeed.Location = New System.Drawing.Point(152, 99)
-        Me.tbSpeed.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbSpeed.Margin = New System.Windows.Forms.Padding(4)
         Me.tbSpeed.Maximum = 400
         Me.tbSpeed.Minimum = 10
         Me.tbSpeed.Name = "tbSpeed"
@@ -6731,7 +6733,7 @@ Partial Class Form1
         'btClearList
         '
         Me.btClearList.Location = New System.Drawing.Point(504, 81)
-        Me.btClearList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btClearList.Margin = New System.Windows.Forms.Padding(4)
         Me.btClearList.Name = "btClearList"
         Me.btClearList.Size = New System.Drawing.Size(96, 33)
         Me.btClearList.TabIndex = 53
@@ -6741,7 +6743,7 @@ Partial Class Form1
         'btAddInputFile
         '
         Me.btAddInputFile.Location = New System.Drawing.Point(504, 39)
-        Me.btAddInputFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAddInputFile.Margin = New System.Windows.Forms.Padding(4)
         Me.btAddInputFile.Name = "btAddInputFile"
         Me.btAddInputFile.Size = New System.Drawing.Size(96, 33)
         Me.btAddInputFile.TabIndex = 52
@@ -6753,7 +6755,7 @@ Partial Class Form1
         Me.lbFiles.FormattingEnabled = True
         Me.lbFiles.ItemHeight = 20
         Me.lbFiles.Location = New System.Drawing.Point(14, 39)
-        Me.lbFiles.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbFiles.Margin = New System.Windows.Forms.Padding(4)
         Me.lbFiles.Name = "lbFiles"
         Me.lbFiles.Size = New System.Drawing.Size(480, 64)
         Me.lbFiles.TabIndex = 51
@@ -6787,9 +6789,9 @@ Partial Class Form1
         Me.tabPage53.Controls.Add(Me.edStartTimeCut)
         Me.tabPage53.Controls.Add(Me.label29)
         Me.tabPage53.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage53.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage53.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage53.Name = "tabPage53"
-        Me.tabPage53.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage53.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage53.Size = New System.Drawing.Size(630, 405)
         Me.tabPage53.TabIndex = 1
         Me.tabPage53.Text = "Cut file (w/o reencoding)"
@@ -6808,7 +6810,7 @@ Partial Class Form1
         'btSelectOutputCut
         '
         Me.btSelectOutputCut.Location = New System.Drawing.Point(552, 156)
-        Me.btSelectOutputCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btSelectOutputCut.Margin = New System.Windows.Forms.Padding(4)
         Me.btSelectOutputCut.Name = "btSelectOutputCut"
         Me.btSelectOutputCut.Size = New System.Drawing.Size(36, 33)
         Me.btSelectOutputCut.TabIndex = 71
@@ -6818,7 +6820,7 @@ Partial Class Form1
         'edOutputFileCut
         '
         Me.edOutputFileCut.Location = New System.Drawing.Point(124, 159)
-        Me.edOutputFileCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edOutputFileCut.Margin = New System.Windows.Forms.Padding(4)
         Me.edOutputFileCut.Name = "edOutputFileCut"
         Me.edOutputFileCut.Size = New System.Drawing.Size(416, 26)
         Me.edOutputFileCut.TabIndex = 70
@@ -6837,7 +6839,7 @@ Partial Class Form1
         'btStopCut
         '
         Me.btStopCut.Location = New System.Drawing.Point(150, 220)
-        Me.btStopCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStopCut.Margin = New System.Windows.Forms.Padding(4)
         Me.btStopCut.Name = "btStopCut"
         Me.btStopCut.Size = New System.Drawing.Size(112, 33)
         Me.btStopCut.TabIndex = 68
@@ -6847,7 +6849,7 @@ Partial Class Form1
         'btStartCut
         '
         Me.btStartCut.Location = New System.Drawing.Point(28, 220)
-        Me.btStartCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStartCut.Margin = New System.Windows.Forms.Padding(4)
         Me.btStartCut.Name = "btStartCut"
         Me.btStartCut.Size = New System.Drawing.Size(112, 33)
         Me.btStartCut.TabIndex = 67
@@ -6867,7 +6869,7 @@ Partial Class Form1
         'btAddInputFile2
         '
         Me.btAddInputFile2.Location = New System.Drawing.Point(552, 18)
-        Me.btAddInputFile2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAddInputFile2.Margin = New System.Windows.Forms.Padding(4)
         Me.btAddInputFile2.Name = "btAddInputFile2"
         Me.btAddInputFile2.Size = New System.Drawing.Size(36, 33)
         Me.btAddInputFile2.TabIndex = 65
@@ -6877,7 +6879,7 @@ Partial Class Form1
         'edSourceFileToCut
         '
         Me.edSourceFileToCut.Location = New System.Drawing.Point(124, 21)
-        Me.edSourceFileToCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edSourceFileToCut.Margin = New System.Windows.Forms.Padding(4)
         Me.edSourceFileToCut.Name = "edSourceFileToCut"
         Me.edSourceFileToCut.Size = New System.Drawing.Size(416, 26)
         Me.edSourceFileToCut.TabIndex = 64
@@ -6905,7 +6907,7 @@ Partial Class Form1
         'edStopTimeCut
         '
         Me.edStopTimeCut.Location = New System.Drawing.Point(358, 69)
-        Me.edStopTimeCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edStopTimeCut.Margin = New System.Windows.Forms.Padding(4)
         Me.edStopTimeCut.Name = "edStopTimeCut"
         Me.edStopTimeCut.Size = New System.Drawing.Size(67, 26)
         Me.edStopTimeCut.TabIndex = 61
@@ -6934,7 +6936,7 @@ Partial Class Form1
         'edStartTimeCut
         '
         Me.edStartTimeCut.Location = New System.Drawing.Point(124, 69)
-        Me.edStartTimeCut.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edStartTimeCut.Margin = New System.Windows.Forms.Padding(4)
         Me.edStartTimeCut.Name = "edStartTimeCut"
         Me.edStartTimeCut.Size = New System.Drawing.Size(67, 26)
         Me.edStartTimeCut.TabIndex = 58
@@ -6963,9 +6965,9 @@ Partial Class Form1
         Me.tabPage54.Controls.Add(Me.lbFiles2)
         Me.tabPage54.Controls.Add(Me.label32)
         Me.tabPage54.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage54.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage54.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage54.Name = "tabPage54"
-        Me.tabPage54.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabPage54.Padding = New System.Windows.Forms.Padding(4)
         Me.tabPage54.Size = New System.Drawing.Size(630, 405)
         Me.tabPage54.TabIndex = 2
         Me.tabPage54.Text = "Join files (w/o reencoding)"
@@ -6984,7 +6986,7 @@ Partial Class Form1
         'btSelectOutputJoin
         '
         Me.btSelectOutputJoin.Location = New System.Drawing.Point(548, 153)
-        Me.btSelectOutputJoin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btSelectOutputJoin.Margin = New System.Windows.Forms.Padding(4)
         Me.btSelectOutputJoin.Name = "btSelectOutputJoin"
         Me.btSelectOutputJoin.Size = New System.Drawing.Size(36, 33)
         Me.btSelectOutputJoin.TabIndex = 71
@@ -6994,7 +6996,7 @@ Partial Class Form1
         'edOutputFileJoin
         '
         Me.edOutputFileJoin.Location = New System.Drawing.Point(130, 156)
-        Me.edOutputFileJoin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edOutputFileJoin.Margin = New System.Windows.Forms.Padding(4)
         Me.edOutputFileJoin.Name = "edOutputFileJoin"
         Me.edOutputFileJoin.Size = New System.Drawing.Size(406, 26)
         Me.edOutputFileJoin.TabIndex = 70
@@ -7013,7 +7015,7 @@ Partial Class Form1
         'btStopJoin
         '
         Me.btStopJoin.Location = New System.Drawing.Point(148, 222)
-        Me.btStopJoin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStopJoin.Margin = New System.Windows.Forms.Padding(4)
         Me.btStopJoin.Name = "btStopJoin"
         Me.btStopJoin.Size = New System.Drawing.Size(112, 33)
         Me.btStopJoin.TabIndex = 68
@@ -7023,7 +7025,7 @@ Partial Class Form1
         'btStartJoin
         '
         Me.btStartJoin.Location = New System.Drawing.Point(27, 222)
-        Me.btStartJoin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStartJoin.Margin = New System.Windows.Forms.Padding(4)
         Me.btStartJoin.Name = "btStartJoin"
         Me.btStartJoin.Size = New System.Drawing.Size(112, 33)
         Me.btStartJoin.TabIndex = 67
@@ -7033,7 +7035,7 @@ Partial Class Form1
         'btClearList3
         '
         Me.btClearList3.Location = New System.Drawing.Point(488, 90)
-        Me.btClearList3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btClearList3.Margin = New System.Windows.Forms.Padding(4)
         Me.btClearList3.Name = "btClearList3"
         Me.btClearList3.Size = New System.Drawing.Size(96, 33)
         Me.btClearList3.TabIndex = 66
@@ -7043,7 +7045,7 @@ Partial Class Form1
         'btAddInputFile3
         '
         Me.btAddInputFile3.Location = New System.Drawing.Point(488, 48)
-        Me.btAddInputFile3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btAddInputFile3.Margin = New System.Windows.Forms.Padding(4)
         Me.btAddInputFile3.Name = "btAddInputFile3"
         Me.btAddInputFile3.Size = New System.Drawing.Size(96, 33)
         Me.btAddInputFile3.TabIndex = 65
@@ -7055,7 +7057,7 @@ Partial Class Form1
         Me.lbFiles2.FormattingEnabled = True
         Me.lbFiles2.ItemHeight = 20
         Me.lbFiles2.Location = New System.Drawing.Point(27, 48)
-        Me.lbFiles2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbFiles2.Margin = New System.Windows.Forms.Padding(4)
         Me.lbFiles2.Name = "lbFiles2"
         Me.lbFiles2.Size = New System.Drawing.Size(450, 24)
         Me.lbFiles2.TabIndex = 64
@@ -7088,9 +7090,9 @@ Partial Class Form1
         Me.TabPage74.Controls.Add(Me.lbMuxStreamsList)
         Me.TabPage74.Controls.Add(Me.label166)
         Me.TabPage74.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage74.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage74.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage74.Name = "TabPage74"
-        Me.TabPage74.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage74.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage74.Size = New System.Drawing.Size(630, 405)
         Me.TabPage74.TabIndex = 3
         Me.TabPage74.Text = "Mux streams (w/o reencoding)"
@@ -7110,7 +7112,7 @@ Partial Class Form1
         '
         Me.cbMuxStreamsShortest.AutoSize = True
         Me.cbMuxStreamsShortest.Location = New System.Drawing.Point(21, 201)
-        Me.cbMuxStreamsShortest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMuxStreamsShortest.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMuxStreamsShortest.Name = "cbMuxStreamsShortest"
         Me.cbMuxStreamsShortest.Size = New System.Drawing.Size(279, 24)
         Me.cbMuxStreamsShortest.TabIndex = 90
@@ -7123,7 +7125,7 @@ Partial Class Form1
         Me.cbMuxStreamsType.FormattingEnabled = True
         Me.cbMuxStreamsType.Items.AddRange(New Object() {"Video", "Audio", "0", "1", "2", "3", "4", "5", "6", "7"})
         Me.cbMuxStreamsType.Location = New System.Drawing.Point(405, 39)
-        Me.cbMuxStreamsType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbMuxStreamsType.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMuxStreamsType.Name = "cbMuxStreamsType"
         Me.cbMuxStreamsType.Size = New System.Drawing.Size(112, 28)
         Me.cbMuxStreamsType.TabIndex = 89
@@ -7131,7 +7133,7 @@ Partial Class Form1
         'btMuxStreamsSelectFile
         '
         Me.btMuxStreamsSelectFile.Location = New System.Drawing.Point(362, 38)
-        Me.btMuxStreamsSelectFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btMuxStreamsSelectFile.Margin = New System.Windows.Forms.Padding(4)
         Me.btMuxStreamsSelectFile.Name = "btMuxStreamsSelectFile"
         Me.btMuxStreamsSelectFile.Size = New System.Drawing.Size(34, 33)
         Me.btMuxStreamsSelectFile.TabIndex = 88
@@ -7141,7 +7143,7 @@ Partial Class Form1
         'edMuxStreamsSourceFile
         '
         Me.edMuxStreamsSourceFile.Location = New System.Drawing.Point(21, 40)
-        Me.edMuxStreamsSourceFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMuxStreamsSourceFile.Margin = New System.Windows.Forms.Padding(4)
         Me.edMuxStreamsSourceFile.Name = "edMuxStreamsSourceFile"
         Me.edMuxStreamsSourceFile.Size = New System.Drawing.Size(330, 26)
         Me.edMuxStreamsSourceFile.TabIndex = 87
@@ -7159,7 +7161,7 @@ Partial Class Form1
         'btMuxStreamsSelectOutput
         '
         Me.btMuxStreamsSelectOutput.Location = New System.Drawing.Point(570, 260)
-        Me.btMuxStreamsSelectOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btMuxStreamsSelectOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.btMuxStreamsSelectOutput.Name = "btMuxStreamsSelectOutput"
         Me.btMuxStreamsSelectOutput.Size = New System.Drawing.Size(36, 33)
         Me.btMuxStreamsSelectOutput.TabIndex = 85
@@ -7169,7 +7171,7 @@ Partial Class Form1
         'edMuxStreamsOutputFile
         '
         Me.edMuxStreamsOutputFile.Location = New System.Drawing.Point(124, 262)
-        Me.edMuxStreamsOutputFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.edMuxStreamsOutputFile.Margin = New System.Windows.Forms.Padding(4)
         Me.edMuxStreamsOutputFile.Name = "edMuxStreamsOutputFile"
         Me.edMuxStreamsOutputFile.Size = New System.Drawing.Size(434, 26)
         Me.edMuxStreamsOutputFile.TabIndex = 84
@@ -7188,7 +7190,7 @@ Partial Class Form1
         'btStopMux
         '
         Me.btStopMux.Location = New System.Drawing.Point(142, 328)
-        Me.btStopMux.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStopMux.Margin = New System.Windows.Forms.Padding(4)
         Me.btStopMux.Name = "btStopMux"
         Me.btStopMux.Size = New System.Drawing.Size(112, 33)
         Me.btStopMux.TabIndex = 82
@@ -7198,7 +7200,7 @@ Partial Class Form1
         'btStartMux
         '
         Me.btStartMux.Location = New System.Drawing.Point(21, 328)
-        Me.btStartMux.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btStartMux.Margin = New System.Windows.Forms.Padding(4)
         Me.btStartMux.Name = "btStartMux"
         Me.btStartMux.Size = New System.Drawing.Size(112, 33)
         Me.btStartMux.TabIndex = 81
@@ -7208,7 +7210,7 @@ Partial Class Form1
         'btMuxStreamsClear
         '
         Me.btMuxStreamsClear.Location = New System.Drawing.Point(510, 201)
-        Me.btMuxStreamsClear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btMuxStreamsClear.Margin = New System.Windows.Forms.Padding(4)
         Me.btMuxStreamsClear.Name = "btMuxStreamsClear"
         Me.btMuxStreamsClear.Size = New System.Drawing.Size(96, 33)
         Me.btMuxStreamsClear.TabIndex = 80
@@ -7218,7 +7220,7 @@ Partial Class Form1
         'btMuxStreamsAdd
         '
         Me.btMuxStreamsAdd.Location = New System.Drawing.Point(528, 38)
-        Me.btMuxStreamsAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btMuxStreamsAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btMuxStreamsAdd.Name = "btMuxStreamsAdd"
         Me.btMuxStreamsAdd.Size = New System.Drawing.Size(78, 33)
         Me.btMuxStreamsAdd.TabIndex = 79
@@ -7230,7 +7232,7 @@ Partial Class Form1
         Me.lbMuxStreamsList.FormattingEnabled = True
         Me.lbMuxStreamsList.ItemHeight = 20
         Me.lbMuxStreamsList.Location = New System.Drawing.Point(21, 110)
-        Me.lbMuxStreamsList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbMuxStreamsList.Margin = New System.Windows.Forms.Padding(4)
         Me.lbMuxStreamsList.Name = "lbMuxStreamsList"
         Me.lbMuxStreamsList.Size = New System.Drawing.Size(583, 24)
         Me.lbMuxStreamsList.TabIndex = 78
@@ -7249,7 +7251,7 @@ Partial Class Form1
         '
         Me.cbLicensing.AutoSize = True
         Me.cbLicensing.Location = New System.Drawing.Point(224, 826)
-        Me.cbLicensing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbLicensing.Margin = New System.Windows.Forms.Padding(4)
         Me.cbLicensing.Name = "cbLicensing"
         Me.cbLicensing.Size = New System.Drawing.Size(132, 24)
         Me.cbLicensing.TabIndex = 93
@@ -7465,7 +7467,7 @@ Partial Class Form1
         Me.cbTelemetry.Checked = True
         Me.cbTelemetry.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbTelemetry.Location = New System.Drawing.Point(374, 786)
-        Me.cbTelemetry.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbTelemetry.Margin = New System.Windows.Forms.Padding(4)
         Me.cbTelemetry.Name = "cbTelemetry"
         Me.cbTelemetry.Size = New System.Drawing.Size(104, 24)
         Me.cbTelemetry.TabIndex = 94
@@ -7476,11 +7478,22 @@ Partial Class Form1
         '
         Me.VideoView1.BackColor = System.Drawing.Color.Black
         Me.VideoView1.Location = New System.Drawing.Point(502, 465)
-        Me.VideoView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.VideoView1.Margin = New System.Windows.Forms.Padding(4)
         Me.VideoView1.Name = "VideoView1"
         Me.VideoView1.Size = New System.Drawing.Size(626, 426)
         Me.VideoView1.StatusOverlay = Nothing
         Me.VideoView1.TabIndex = 95
+        '
+        'llDecoders
+        '
+        Me.llDecoders.AutoSize = True
+        Me.llDecoders.Location = New System.Drawing.Point(7, 374)
+        Me.llDecoders.Name = "llDecoders"
+        Me.llDecoders.Size = New System.Drawing.Size(619, 20)
+        Me.llDecoders.TabIndex = 57
+        Me.llDecoders.TabStop = True
+        Me.llDecoders.Text = "[NuGet only] Install decoders to edit MP4 files, or if you can see errors while a" &
+    "dding files"
         '
         'Form1
         '
@@ -7503,7 +7516,7 @@ Partial Class Form1
         Me.Controls.Add(Me.cbTelemetry)
         Me.Controls.Add(Me.cbLicensing)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form1"
         Me.Text = "VisioForge Video Edit SDK .Net - Main Demo"
         Me.tabControl1.ResumeLayout(False)
@@ -8297,4 +8310,5 @@ End Sub
     Private WithEvents label68 As Label
     Private WithEvents label67 As Label
     Friend WithEvents VideoView1 As VisioForge.Core.UI.WinForms.VideoView
+    Friend WithEvents llDecoders As LinkLabel
 End Class

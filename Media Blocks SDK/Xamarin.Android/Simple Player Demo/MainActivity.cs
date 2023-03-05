@@ -250,7 +250,7 @@ namespace Simple_Player_Demo
 
             isSeeking = false;
 
-            var mediaInfo = new MediaInfoReaderX(context: null, this);
+            var mediaInfo = new MediaInfoReaderX(this, context: null);
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edURL.Text)))

@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -84,7 +85,7 @@ namespace Live_Video_Compositor_Demo
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
                         if (formatItem != null)
                         {
-                            settings = new VideoCaptureDeviceSourceSettings(device.Name)
+                            settings = new VideoCaptureDeviceSourceSettings(device)
                             {
                                 Format = formatItem.ToFormat()
                             };
@@ -191,7 +192,7 @@ namespace Live_Video_Compositor_Demo
             await _compositor.Video_Output_AddAsync(_videoRendererOutput, true);
 
             // add audio renderer
-            var audioRenderer = new AudioRendererBlock();
+            var audioRenderer = new AudioRendererBlock(); // <- TODO replace with dialog 
             _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer);
             await _compositor.Audio_Output_AddAsync(_audioRendererOutput, true);
 

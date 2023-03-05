@@ -3439,6 +3439,12 @@ namespace Main_Demo
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming);
             Process.Start(startInfo);
         }
+
+        private void llDecoders_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub);
+            Process.Start(startInfo);
+        }
     }
 }
 

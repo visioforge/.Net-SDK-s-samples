@@ -3459,6 +3459,12 @@ namespace VideoEdit_CS_Demo
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming);
             Process.Start(startInfo);
         }
+
+        private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub);
+            Process.Start(startInfo);
+        }
     }
 }
 

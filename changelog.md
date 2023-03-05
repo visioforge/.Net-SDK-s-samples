@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.43
+* [ALL] Added WASAPI 2 support.
+* [Media Blocks SDK .Net] Updated Video Effects API. Added Grayscale media block.
+
 ## 15.5.42
 * [Media Blocks SDK .Net] Added Live Video Compositor API and sample.
 

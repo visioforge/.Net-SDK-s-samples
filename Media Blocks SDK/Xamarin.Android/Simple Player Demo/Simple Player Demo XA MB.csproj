@@ -127,8 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.42" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.5.42" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.5.43" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

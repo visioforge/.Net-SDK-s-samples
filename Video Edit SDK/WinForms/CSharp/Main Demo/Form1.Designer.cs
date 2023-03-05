@@ -83,8352 +83,8270 @@ namespace VideoEdit_CS_Demo
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage30 = new System.Windows.Forms.TabPage();
-            this.llXiphX64 = new System.Windows.Forms.LinkLabel();
-            this.llXiphX86 = new System.Windows.Forms.LinkLabel();
-            this.label68 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
-            this.lbInfo = new System.Windows.Forms.Label();
-            this.btConfigure = new System.Windows.Forms.Button();
-            this.btSelectOutput = new System.Windows.Forms.Button();
-            this.edOutput = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.cbOutputVideoFormat = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tabPage48 = new System.Windows.Forms.TabPage();
-            this.edCropRight = new System.Windows.Forms.TextBox();
-            this.label176 = new System.Windows.Forms.Label();
-            this.edCropBottom = new System.Windows.Forms.TextBox();
-            this.label252 = new System.Windows.Forms.Label();
-            this.edCropLeft = new System.Windows.Forms.TextBox();
-            this.label270 = new System.Windows.Forms.Label();
-            this.edCropTop = new System.Windows.Forms.TextBox();
-            this.label272 = new System.Windows.Forms.Label();
-            this.cbCrop = new System.Windows.Forms.CheckBox();
-            this.label92 = new System.Windows.Forms.Label();
-            this.cbRotate = new System.Windows.Forms.ComboBox();
-            this.cbFrameRate = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.edHeight = new System.Windows.Forms.TextBox();
-            this.edWidth = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbResize = new System.Windows.Forms.CheckBox();
-            this.tabPage31 = new System.Windows.Forms.TabPage();
-            this.tabControl17 = new System.Windows.Forms.TabControl();
-            this.tabPage68 = new System.Windows.Forms.TabPage();
-            this.cbFlipY = new System.Windows.Forms.CheckBox();
-            this.cbFlipX = new System.Windows.Forms.CheckBox();
-            this.label201 = new System.Windows.Forms.Label();
-            this.label200 = new System.Windows.Forms.Label();
-            this.label199 = new System.Windows.Forms.Label();
-            this.label198 = new System.Windows.Forms.Label();
-            this.tabControl7 = new System.Windows.Forms.TabControl();
-            this.tabPage29 = new System.Windows.Forms.TabPage();
-            this.btTextLogoRemove = new System.Windows.Forms.Button();
-            this.btTextLogoEdit = new System.Windows.Forms.Button();
-            this.lbTextLogos = new System.Windows.Forms.ListBox();
-            this.btTextLogoAdd = new System.Windows.Forms.Button();
-            this.tabPage42 = new System.Windows.Forms.TabPage();
-            this.btImageLogoRemove = new System.Windows.Forms.Button();
-            this.btImageLogoEdit = new System.Windows.Forms.Button();
-            this.lbImageLogos = new System.Windows.Forms.ListBox();
-            this.btImageLogoAdd = new System.Windows.Forms.Button();
-            this.tabPage22 = new System.Windows.Forms.TabPage();
-            this.groupBox37 = new System.Windows.Forms.GroupBox();
-            this.btEffZoomRight = new System.Windows.Forms.Button();
-            this.btEffZoomLeft = new System.Windows.Forms.Button();
-            this.btEffZoomOut = new System.Windows.Forms.Button();
-            this.btEffZoomIn = new System.Windows.Forms.Button();
-            this.btEffZoomDown = new System.Windows.Forms.Button();
-            this.btEffZoomUp = new System.Windows.Forms.Button();
-            this.cbZoom = new System.Windows.Forms.CheckBox();
-            this.tabPage23 = new System.Windows.Forms.TabPage();
-            this.groupBox40 = new System.Windows.Forms.GroupBox();
-            this.edPanDestHeight = new System.Windows.Forms.TextBox();
-            this.label302 = new System.Windows.Forms.Label();
-            this.edPanDestWidth = new System.Windows.Forms.TextBox();
-            this.label303 = new System.Windows.Forms.Label();
-            this.edPanDestTop = new System.Windows.Forms.TextBox();
-            this.label304 = new System.Windows.Forms.Label();
-            this.edPanDestLeft = new System.Windows.Forms.TextBox();
-            this.label305 = new System.Windows.Forms.Label();
-            this.groupBox39 = new System.Windows.Forms.GroupBox();
-            this.edPanSourceHeight = new System.Windows.Forms.TextBox();
-            this.label298 = new System.Windows.Forms.Label();
-            this.edPanSourceWidth = new System.Windows.Forms.TextBox();
-            this.label299 = new System.Windows.Forms.Label();
-            this.edPanSourceTop = new System.Windows.Forms.TextBox();
-            this.label300 = new System.Windows.Forms.Label();
-            this.edPanSourceLeft = new System.Windows.Forms.TextBox();
-            this.label301 = new System.Windows.Forms.Label();
-            this.groupBox38 = new System.Windows.Forms.GroupBox();
-            this.edPanStopTime = new System.Windows.Forms.TextBox();
-            this.label296 = new System.Windows.Forms.Label();
-            this.edPanStartTime = new System.Windows.Forms.TextBox();
-            this.label297 = new System.Windows.Forms.Label();
-            this.cbPan = new System.Windows.Forms.CheckBox();
-            this.tabPage43 = new System.Windows.Forms.TabPage();
-            this.rbVideoFadeOut = new System.Windows.Forms.RadioButton();
-            this.rbVideoFadeIn = new System.Windows.Forms.RadioButton();
-            this.groupBox45 = new System.Windows.Forms.GroupBox();
-            this.edVideoFadeInOutStopTime = new System.Windows.Forms.TextBox();
-            this.label329 = new System.Windows.Forms.Label();
-            this.edVideoFadeInOutStartTime = new System.Windows.Forms.TextBox();
-            this.label330 = new System.Windows.Forms.Label();
-            this.cbVideoFadeInOut = new System.Windows.Forms.CheckBox();
-            this.tbContrast = new System.Windows.Forms.TrackBar();
-            this.tbDarkness = new System.Windows.Forms.TrackBar();
-            this.tbLightness = new System.Windows.Forms.TrackBar();
-            this.tbSaturation = new System.Windows.Forms.TrackBar();
-            this.cbInvert = new System.Windows.Forms.CheckBox();
-            this.cbGreyscale = new System.Windows.Forms.CheckBox();
-            this.cbEffects = new System.Windows.Forms.CheckBox();
-            this.tabPage69 = new System.Windows.Forms.TabPage();
-            this.label211 = new System.Windows.Forms.Label();
-            this.edDeintTriangleWeight = new System.Windows.Forms.TextBox();
-            this.label212 = new System.Windows.Forms.Label();
-            this.label210 = new System.Windows.Forms.Label();
-            this.label209 = new System.Windows.Forms.Label();
-            this.label206 = new System.Windows.Forms.Label();
-            this.edDeintBlendConstants2 = new System.Windows.Forms.TextBox();
-            this.label207 = new System.Windows.Forms.Label();
-            this.edDeintBlendConstants1 = new System.Windows.Forms.TextBox();
-            this.label208 = new System.Windows.Forms.Label();
-            this.label204 = new System.Windows.Forms.Label();
-            this.edDeintBlendThreshold2 = new System.Windows.Forms.TextBox();
-            this.label205 = new System.Windows.Forms.Label();
-            this.edDeintBlendThreshold1 = new System.Windows.Forms.TextBox();
-            this.label203 = new System.Windows.Forms.Label();
-            this.label202 = new System.Windows.Forms.Label();
-            this.edDeintCAVTThreshold = new System.Windows.Forms.TextBox();
-            this.label104 = new System.Windows.Forms.Label();
-            this.rbDeintTriangleEnabled = new System.Windows.Forms.RadioButton();
-            this.rbDeintBlendEnabled = new System.Windows.Forms.RadioButton();
-            this.rbDeintCAVTEnabled = new System.Windows.Forms.RadioButton();
-            this.cbDeinterlace = new System.Windows.Forms.CheckBox();
-            this.tabPage59 = new System.Windows.Forms.TabPage();
-            this.rbDenoiseCAST = new System.Windows.Forms.RadioButton();
-            this.rbDenoiseMosquito = new System.Windows.Forms.RadioButton();
-            this.cbDenoise = new System.Windows.Forms.CheckBox();
-            this.tabPage15 = new System.Windows.Forms.TabPage();
-            this.tabControl15 = new System.Windows.Forms.TabControl();
-            this.tabPage21 = new System.Windows.Forms.TabPage();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.pbAFMotionLevel = new System.Windows.Forms.ProgressBar();
-            this.cbAFMotionHighlight = new System.Windows.Forms.CheckBox();
-            this.cbAFMotionDetection = new System.Windows.Forms.CheckBox();
-            this.tabPage26 = new System.Windows.Forms.TabPage();
-            this.label171 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.tabPage20 = new System.Windows.Forms.TabPage();
-            this.pnChromaKeyColor = new System.Windows.Forms.Panel();
-            this.btChromaKeySelectBGImage = new System.Windows.Forms.Button();
-            this.edChromaKeyImage = new System.Windows.Forms.TextBox();
-            this.label216 = new System.Windows.Forms.Label();
-            this.label215 = new System.Windows.Forms.Label();
-            this.tbChromaKeySmoothing = new System.Windows.Forms.TrackBar();
-            this.label214 = new System.Windows.Forms.Label();
-            this.tbChromaKeyThresholdSensitivity = new System.Windows.Forms.TrackBar();
-            this.label213 = new System.Windows.Forms.Label();
-            this.cbChromaKeyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage70 = new System.Windows.Forms.TabPage();
-            this.btFilterDeleteAll = new System.Windows.Forms.Button();
-            this.btFilterSettings2 = new System.Windows.Forms.Button();
-            this.lbFilters = new System.Windows.Forms.ListBox();
-            this.label106 = new System.Windows.Forms.Label();
-            this.btFilterSettings = new System.Windows.Forms.Button();
-            this.btFilterAdd = new System.Windows.Forms.Button();
-            this.cbFilters = new System.Windows.Forms.ComboBox();
-            this.label105 = new System.Windows.Forms.Label();
-            this.tabPage82 = new System.Windows.Forms.TabPage();
-            this.label177 = new System.Windows.Forms.Label();
-            this.label129 = new System.Windows.Forms.Label();
-            this.btSubtitlesSelectFile = new System.Windows.Forms.Button();
-            this.edSubtitlesFilename = new System.Windows.Forms.TextBox();
-            this.label114 = new System.Windows.Forms.Label();
-            this.cbSubtitlesEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage83 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbGPUBlur = new System.Windows.Forms.TrackBar();
-            this.cbVideoEffectsGPUEnabled = new System.Windows.Forms.CheckBox();
-            this.cbGPUOldMovie = new System.Windows.Forms.CheckBox();
-            this.cbGPUDeinterlace = new System.Windows.Forms.CheckBox();
-            this.cbGPUDenoise = new System.Windows.Forms.CheckBox();
-            this.cbGPUPixelate = new System.Windows.Forms.CheckBox();
-            this.cbGPUNightVision = new System.Windows.Forms.CheckBox();
-            this.label383 = new System.Windows.Forms.Label();
-            this.label384 = new System.Windows.Forms.Label();
-            this.label385 = new System.Windows.Forms.Label();
-            this.label386 = new System.Windows.Forms.Label();
-            this.tbGPUContrast = new System.Windows.Forms.TrackBar();
-            this.tbGPUDarkness = new System.Windows.Forms.TrackBar();
-            this.tbGPULightness = new System.Windows.Forms.TrackBar();
-            this.tbGPUSaturation = new System.Windows.Forms.TrackBar();
-            this.cbGPUInvert = new System.Windows.Forms.CheckBox();
-            this.cbGPUGreyscale = new System.Windows.Forms.CheckBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label47 = new System.Windows.Forms.Label();
-            this.edTransStopTime = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.edTransStartTime = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.btAddTransition = new System.Windows.Forms.Button();
-            this.cbTransitionName = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.lbTransitions = new System.Windows.Forms.ListBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.tabPage66 = new System.Windows.Forms.TabPage();
-            this.lbAudioTimeshift = new System.Windows.Forms.Label();
-            this.tbAudioTimeshift = new System.Windows.Forms.TrackBar();
-            this.label115 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbAudioOutputGainLFE = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainLFE = new System.Windows.Forms.TrackBar();
-            this.label116 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainSR = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainSR = new System.Windows.Forms.TrackBar();
-            this.label117 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainSL = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainSL = new System.Windows.Forms.TrackBar();
-            this.label118 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainR = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainR = new System.Windows.Forms.TrackBar();
-            this.label119 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainC = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainC = new System.Windows.Forms.TrackBar();
-            this.label121 = new System.Windows.Forms.Label();
-            this.lbAudioOutputGainL = new System.Windows.Forms.Label();
-            this.tbAudioOutputGainL = new System.Windows.Forms.TrackBar();
-            this.label122 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbAudioInputGainLFE = new System.Windows.Forms.Label();
-            this.tbAudioInputGainLFE = new System.Windows.Forms.TrackBar();
-            this.label123 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainSR = new System.Windows.Forms.Label();
-            this.tbAudioInputGainSR = new System.Windows.Forms.TrackBar();
-            this.label124 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainSL = new System.Windows.Forms.Label();
-            this.tbAudioInputGainSL = new System.Windows.Forms.TrackBar();
-            this.label125 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainR = new System.Windows.Forms.Label();
-            this.tbAudioInputGainR = new System.Windows.Forms.TrackBar();
-            this.label126 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainC = new System.Windows.Forms.Label();
-            this.tbAudioInputGainC = new System.Windows.Forms.TrackBar();
-            this.label127 = new System.Windows.Forms.Label();
-            this.lbAudioInputGainL = new System.Windows.Forms.Label();
-            this.tbAudioInputGainL = new System.Windows.Forms.TrackBar();
-            this.label128 = new System.Windows.Forms.Label();
-            this.cbAudioAutoGain = new System.Windows.Forms.CheckBox();
-            this.cbAudioNormalize = new System.Windows.Forms.CheckBox();
-            this.cbAudioEnhancementEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label133 = new System.Windows.Forms.Label();
-            this.tabControl18 = new System.Windows.Forms.TabControl();
-            this.tabPage71 = new System.Windows.Forms.TabPage();
-            this.label231 = new System.Windows.Forms.Label();
-            this.label230 = new System.Windows.Forms.Label();
-            this.tbAudAmplifyAmp = new System.Windows.Forms.TrackBar();
-            this.label95 = new System.Windows.Forms.Label();
-            this.cbAudAmplifyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage72 = new System.Windows.Forms.TabPage();
-            this.btAudEqRefresh = new System.Windows.Forms.Button();
-            this.cbAudEqualizerPreset = new System.Windows.Forms.ComboBox();
-            this.label243 = new System.Windows.Forms.Label();
-            this.label242 = new System.Windows.Forms.Label();
-            this.label241 = new System.Windows.Forms.Label();
-            this.label240 = new System.Windows.Forms.Label();
-            this.label239 = new System.Windows.Forms.Label();
-            this.label238 = new System.Windows.Forms.Label();
-            this.label237 = new System.Windows.Forms.Label();
-            this.label236 = new System.Windows.Forms.Label();
-            this.label235 = new System.Windows.Forms.Label();
-            this.label234 = new System.Windows.Forms.Label();
-            this.label233 = new System.Windows.Forms.Label();
-            this.label232 = new System.Windows.Forms.Label();
-            this.tbAudEq9 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq8 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq7 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq6 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq5 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq4 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq3 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq2 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq1 = new System.Windows.Forms.TrackBar();
-            this.tbAudEq0 = new System.Windows.Forms.TrackBar();
-            this.cbAudEqualizerEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage73 = new System.Windows.Forms.TabPage();
-            this.tbAudRelease = new System.Windows.Forms.TrackBar();
-            this.label248 = new System.Windows.Forms.Label();
-            this.label249 = new System.Windows.Forms.Label();
-            this.label246 = new System.Windows.Forms.Label();
-            this.tbAudAttack = new System.Windows.Forms.TrackBar();
-            this.label247 = new System.Windows.Forms.Label();
-            this.label244 = new System.Windows.Forms.Label();
-            this.tbAudDynAmp = new System.Windows.Forms.TrackBar();
-            this.label245 = new System.Windows.Forms.Label();
-            this.cbAudDynamicAmplifyEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage75 = new System.Windows.Forms.TabPage();
-            this.tbAud3DSound = new System.Windows.Forms.TrackBar();
-            this.label253 = new System.Windows.Forms.Label();
-            this.cbAudSound3DEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage76 = new System.Windows.Forms.TabPage();
-            this.tbAudTrueBass = new System.Windows.Forms.TrackBar();
-            this.label254 = new System.Windows.Forms.Label();
-            this.cbAudTrueBassEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.cbFadeOutEnabled = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.edFadeOutStopTime = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.edFadeOutStartTime = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbFadeInEnabled = new System.Windows.Forms.CheckBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.edFadeInStopTime = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.edFadeInStartTime = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cbAudioEffectsEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage81 = new System.Windows.Forms.TabPage();
-            this.btAudioChannelMapperClear = new System.Windows.Forms.Button();
-            this.groupBox41 = new System.Windows.Forms.GroupBox();
-            this.btAudioChannelMapperAddNewRoute = new System.Windows.Forms.Button();
-            this.label311 = new System.Windows.Forms.Label();
-            this.tbAudioChannelMapperVolume = new System.Windows.Forms.TrackBar();
-            this.label310 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperTargetChannel = new System.Windows.Forms.TextBox();
-            this.label309 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperSourceChannel = new System.Windows.Forms.TextBox();
-            this.label308 = new System.Windows.Forms.Label();
-            this.label307 = new System.Windows.Forms.Label();
-            this.edAudioChannelMapperOutputChannels = new System.Windows.Forms.TextBox();
-            this.label306 = new System.Windows.Forms.Label();
-            this.lbAudioChannelMapperRoutes = new System.Windows.Forms.ListBox();
-            this.cbAudioChannelMapperEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage27 = new System.Windows.Forms.TabPage();
-            this.tabControl9 = new System.Windows.Forms.TabControl();
-            this.tabPage44 = new System.Windows.Forms.TabPage();
-            this.pbMotionLevel = new System.Windows.Forms.ProgressBar();
-            this.label158 = new System.Windows.Forms.Label();
-            this.mmMotDetMatrix = new System.Windows.Forms.TextBox();
-            this.tabPage45 = new System.Windows.Forms.TabPage();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.cbMotDetHLColor = new System.Windows.Forms.ComboBox();
-            this.label161 = new System.Windows.Forms.Label();
-            this.label160 = new System.Windows.Forms.Label();
-            this.cbMotDetHLEnabled = new System.Windows.Forms.CheckBox();
-            this.tbMotDetHLThreshold = new System.Windows.Forms.TrackBar();
-            this.btMotDetUpdateSettings = new System.Windows.Forms.Button();
-            this.groupBox27 = new System.Windows.Forms.GroupBox();
-            this.edMotDetMatrixHeight = new System.Windows.Forms.TextBox();
-            this.label163 = new System.Windows.Forms.Label();
-            this.edMotDetMatrixWidth = new System.Windows.Forms.TextBox();
-            this.label164 = new System.Windows.Forms.Label();
-            this.groupBox26 = new System.Windows.Forms.GroupBox();
-            this.label162 = new System.Windows.Forms.Label();
-            this.tbMotDetDropFramesThreshold = new System.Windows.Forms.TrackBar();
-            this.cbMotDetDropFramesEnabled = new System.Windows.Forms.CheckBox();
-            this.groupBox24 = new System.Windows.Forms.GroupBox();
-            this.edMotDetFrameInterval = new System.Windows.Forms.TextBox();
-            this.label159 = new System.Windows.Forms.Label();
-            this.cbCompareGreyscale = new System.Windows.Forms.CheckBox();
-            this.cbCompareBlue = new System.Windows.Forms.CheckBox();
-            this.cbCompareGreen = new System.Windows.Forms.CheckBox();
-            this.cbCompareRed = new System.Windows.Forms.CheckBox();
-            this.cbMotDetEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label393 = new System.Windows.Forms.Label();
-            this.cbDirect2DRotate = new System.Windows.Forms.ComboBox();
-            this.pnVideoRendererBGColor = new System.Windows.Forms.Panel();
-            this.label394 = new System.Windows.Forms.Label();
-            this.btFullScreen = new System.Windows.Forms.Button();
-            this.cbScreenFlipVertical = new System.Windows.Forms.CheckBox();
-            this.cbScreenFlipHorizontal = new System.Windows.Forms.CheckBox();
-            this.cbStretch = new System.Windows.Forms.CheckBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.rbDirect2D = new System.Windows.Forms.RadioButton();
-            this.rbNone = new System.Windows.Forms.RadioButton();
-            this.rbEVR = new System.Windows.Forms.RadioButton();
-            this.rbVMR9 = new System.Windows.Forms.RadioButton();
-            this.tabPage25 = new System.Windows.Forms.TabPage();
-            this.edBarcodeMetadata = new System.Windows.Forms.TextBox();
-            this.label91 = new System.Windows.Forms.Label();
-            this.cbBarcodeType = new System.Windows.Forms.ComboBox();
-            this.label90 = new System.Windows.Forms.Label();
-            this.btBarcodeReset = new System.Windows.Forms.Button();
-            this.edBarcode = new System.Windows.Forms.TextBox();
-            this.label89 = new System.Windows.Forms.Label();
-            this.cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage28 = new System.Windows.Forms.TabPage();
-            this.cbNetworkStreamingMode = new System.Windows.Forms.ComboBox();
-            this.tabControl5 = new System.Windows.Forms.TabControl();
-            this.tabPage32 = new System.Windows.Forms.TabPage();
-            this.label24 = new System.Windows.Forms.Label();
-            this.edNetworkURL = new System.Windows.Forms.TextBox();
-            this.edWMVNetworkPort = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.btRefreshClients = new System.Windows.Forms.Button();
-            this.lbNetworkClients = new System.Windows.Forms.ListBox();
-            this.rbNetworkStreamingUseExternalProfile = new System.Windows.Forms.RadioButton();
-            this.rbNetworkStreamingUseMainWMVSettings = new System.Windows.Forms.RadioButton();
-            this.label81 = new System.Windows.Forms.Label();
-            this.label80 = new System.Windows.Forms.Label();
-            this.edMaximumClients = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.btSelectWMVProfileNetwork = new System.Windows.Forms.Button();
-            this.edNetworkStreamingWMVProfile = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tabPage49 = new System.Windows.Forms.TabPage();
-            this.edNetworkRTSPURL = new System.Windows.Forms.TextBox();
-            this.label367 = new System.Windows.Forms.Label();
-            this.label366 = new System.Windows.Forms.Label();
-            this.tabPage50 = new System.Windows.Forms.TabPage();
-            this.linkLabel11 = new System.Windows.Forms.LinkLabel();
-            this.rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
-            this.rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
-            this.edNetworkRTMPURL = new System.Windows.Forms.TextBox();
-            this.label368 = new System.Windows.Forms.Label();
-            this.label369 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.lbNDI = new System.Windows.Forms.LinkLabel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.edNDIURL = new System.Windows.Forms.TextBox();
-            this.edNDIName = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.tabPage77 = new System.Windows.Forms.TabPage();
-            this.label484 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label314 = new System.Windows.Forms.Label();
-            this.label313 = new System.Windows.Forms.Label();
-            this.edNetworkUDPURL = new System.Windows.Forms.TextBox();
-            this.label372 = new System.Windows.Forms.Label();
-            this.rbNetworkUDPFFMPEGCustom = new System.Windows.Forms.RadioButton();
-            this.rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
-            this.tabPage51 = new System.Windows.Forms.TabPage();
-            this.rbNetworkSSFFMPEGCustom = new System.Windows.Forms.RadioButton();
-            this.rbNetworkSSFFMPEGDefault = new System.Windows.Forms.RadioButton();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.edNetworkSSURL = new System.Windows.Forms.TextBox();
-            this.label370 = new System.Windows.Forms.Label();
-            this.label371 = new System.Windows.Forms.Label();
-            this.rbNetworkSSSoftware = new System.Windows.Forms.RadioButton();
-            this.tabPage33 = new System.Windows.Forms.TabPage();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.edHLSURL = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.edHLSEmbeddedHTTPServerPort = new System.Windows.Forms.TextBox();
-            this.cbHLSEmbeddedHTTPServerEnabled = new System.Windows.Forms.CheckBox();
-            this.cbHLSMode = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lbHLSConfigure = new System.Windows.Forms.LinkLabel();
-            this.label532 = new System.Windows.Forms.Label();
-            this.label531 = new System.Windows.Forms.Label();
-            this.label530 = new System.Windows.Forms.Label();
-            this.label529 = new System.Windows.Forms.Label();
-            this.edHLSSegmentCount = new System.Windows.Forms.TextBox();
-            this.label519 = new System.Windows.Forms.Label();
-            this.edHLSSegmentDuration = new System.Windows.Forms.TextBox();
-            this.btSelectHLSOutputFolder = new System.Windows.Forms.Button();
-            this.edHLSOutputFolder = new System.Windows.Forms.TextBox();
-            this.label380 = new System.Windows.Forms.Label();
-            this.cbNetworkStreamingAudioEnabled = new System.Windows.Forms.CheckBox();
-            this.cbNetworkStreaming = new System.Windows.Forms.CheckBox();
-            this.tabPage34 = new System.Windows.Forms.TabPage();
-            this.label328 = new System.Windows.Forms.Label();
-            this.label327 = new System.Windows.Forms.Label();
-            this.label326 = new System.Windows.Forms.Label();
-            this.label325 = new System.Windows.Forms.Label();
-            this.cbVirtualCamera = new System.Windows.Forms.CheckBox();
-            this.tabPage46 = new System.Windows.Forms.TabPage();
-            this.cbDecklinkOutputDownConversionAnalogOutput = new System.Windows.Forms.CheckBox();
-            this.cbDecklinkOutputDownConversion = new System.Windows.Forms.ComboBox();
-            this.label337 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputHDTVPulldown = new System.Windows.Forms.ComboBox();
-            this.label336 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputBlackToDeck = new System.Windows.Forms.ComboBox();
-            this.label335 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputSingleField = new System.Windows.Forms.ComboBox();
-            this.label334 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputComponentLevels = new System.Windows.Forms.ComboBox();
-            this.label333 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputNTSC = new System.Windows.Forms.ComboBox();
-            this.label332 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputDualLink = new System.Windows.Forms.ComboBox();
-            this.label331 = new System.Windows.Forms.Label();
-            this.cbDecklinkOutputAnalog = new System.Windows.Forms.ComboBox();
-            this.label87 = new System.Windows.Forms.Label();
-            this.cbDecklinkDV = new System.Windows.Forms.CheckBox();
-            this.cbDecklinkOutput = new System.Windows.Forms.CheckBox();
-            this.tabPage47 = new System.Windows.Forms.TabPage();
-            this.groupBox48 = new System.Windows.Forms.GroupBox();
-            this.label343 = new System.Windows.Forms.Label();
-            this.edEncryptionKeyHEX = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyBinary = new System.Windows.Forms.RadioButton();
-            this.btEncryptionOpenFile = new System.Windows.Forms.Button();
-            this.edEncryptionKeyFile = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyFile = new System.Windows.Forms.RadioButton();
-            this.edEncryptionKeyString = new System.Windows.Forms.TextBox();
-            this.rbEncryptionKeyString = new System.Windows.Forms.RadioButton();
-            this.groupBox47 = new System.Windows.Forms.GroupBox();
-            this.rbEncryptionModeAES256 = new System.Windows.Forms.RadioButton();
-            this.rbEncryptionModeAES128 = new System.Windows.Forms.RadioButton();
-            this.groupBox43 = new System.Windows.Forms.GroupBox();
-            this.rbEncryptedH264CUDA = new System.Windows.Forms.RadioButton();
-            this.rbEncryptedH264SW = new System.Windows.Forms.RadioButton();
-            this.tabPage79 = new System.Windows.Forms.TabPage();
-            this.TabControl32 = new System.Windows.Forms.TabControl();
-            this.TabPage142 = new System.Windows.Forms.TabPage();
-            this.edTagTrackID = new System.Windows.Forms.TextBox();
-            this.Label496 = new System.Windows.Forms.Label();
-            this.edTagYear = new System.Windows.Forms.TextBox();
-            this.Label495 = new System.Windows.Forms.Label();
-            this.edTagComment = new System.Windows.Forms.TextBox();
-            this.Label493 = new System.Windows.Forms.Label();
-            this.edTagAlbum = new System.Windows.Forms.TextBox();
-            this.Label491 = new System.Windows.Forms.Label();
-            this.edTagArtists = new System.Windows.Forms.TextBox();
-            this.label494 = new System.Windows.Forms.Label();
-            this.edTagCopyright = new System.Windows.Forms.TextBox();
-            this.label497 = new System.Windows.Forms.Label();
-            this.edTagTitle = new System.Windows.Forms.TextBox();
-            this.label498 = new System.Windows.Forms.Label();
-            this.TabPage143 = new System.Windows.Forms.TabPage();
-            this.imgTagCover = new System.Windows.Forms.PictureBox();
-            this.Label499 = new System.Windows.Forms.Label();
-            this.label500 = new System.Windows.Forms.Label();
-            this.edTagLyrics = new System.Windows.Forms.TextBox();
-            this.label501 = new System.Windows.Forms.Label();
-            this.cbTagGenre = new System.Windows.Forms.ComboBox();
-            this.label502 = new System.Windows.Forms.Label();
-            this.edTagComposers = new System.Windows.Forms.TextBox();
-            this.label503 = new System.Windows.Forms.Label();
-            this.cbTagEnabled = new System.Windows.Forms.CheckBox();
-            this.tabPage24 = new System.Windows.Forms.TabPage();
-            this.cbVUMeter = new System.Windows.Forms.CheckBox();
-            this.tbVUMeterBoost = new System.Windows.Forms.TrackBar();
-            this.label382 = new System.Windows.Forms.Label();
-            this.label381 = new System.Windows.Forms.Label();
-            this.tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
-            this.cbVUMeterPro = new System.Windows.Forms.CheckBox();
-            this.peakMeterCtrl1 = new VisioForge.Core.UI.WinForms.PeakMeterCtrl();
-            this.waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
-            this.volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
-            this.btStart = new System.Windows.Forms.Button();
-            this.btStop = new System.Windows.Forms.Button();
-            this.OpenDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.SaveDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.FontDialog1 = new System.Windows.Forms.FontDialog();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.tbSeeking = new System.Windows.Forms.TrackBar();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.ProgressBar1 = new System.Windows.Forms.ProgressBar();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage52 = new System.Windows.Forms.TabPage();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label72 = new System.Windows.Forms.Label();
-            this.edInsertTime = new System.Windows.Forms.TextBox();
-            this.label73 = new System.Windows.Forms.Label();
-            this.cbInsertAfterPreviousFile = new System.Windows.Forms.CheckBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.lbSpeed = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.edStopTime = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.edStartTime = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.cbAddFullFile = new System.Windows.Forms.CheckBox();
-            this.tbSpeed = new System.Windows.Forms.TrackBar();
-            this.btClearList = new System.Windows.Forms.Button();
-            this.btAddInputFile = new System.Windows.Forms.Button();
-            this.lbFiles = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tabPage53 = new System.Windows.Forms.TabPage();
-            this.label134 = new System.Windows.Forms.Label();
-            this.btSelectOutputCut = new System.Windows.Forms.Button();
-            this.edOutputFileCut = new System.Windows.Forms.TextBox();
-            this.label131 = new System.Windows.Forms.Label();
-            this.btStopCut = new System.Windows.Forms.Button();
-            this.btStartCut = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.btAddInputFile2 = new System.Windows.Forms.Button();
-            this.edSourceFileToCut = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.edStopTimeCut = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.edStartTimeCut = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.tabPage54 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btSelectOutputJoin = new System.Windows.Forms.Button();
-            this.edOutputFileJoin = new System.Windows.Forms.TextBox();
-            this.label132 = new System.Windows.Forms.Label();
-            this.btStopJoin = new System.Windows.Forms.Button();
-            this.btStartJoin = new System.Windows.Forms.Button();
-            this.btClearList3 = new System.Windows.Forms.Button();
-            this.btAddInputFile3 = new System.Windows.Forms.Button();
-            this.lbFiles2 = new System.Windows.Forms.ListBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.tabPage74 = new System.Windows.Forms.TabPage();
-            this.label168 = new System.Windows.Forms.Label();
-            this.cbMuxStreamsShortest = new System.Windows.Forms.CheckBox();
-            this.cbMuxStreamsType = new System.Windows.Forms.ComboBox();
-            this.btMuxStreamsSelectFile = new System.Windows.Forms.Button();
-            this.edMuxStreamsSourceFile = new System.Windows.Forms.TextBox();
-            this.label167 = new System.Windows.Forms.Label();
-            this.btMuxStreamsSelectOutput = new System.Windows.Forms.Button();
-            this.edMuxStreamsOutputFile = new System.Windows.Forms.TextBox();
-            this.label165 = new System.Windows.Forms.Label();
-            this.btStopMux = new System.Windows.Forms.Button();
-            this.btStartMux = new System.Windows.Forms.Button();
-            this.btMuxStreamsClear = new System.Windows.Forms.Button();
-            this.btMuxStreamsAdd = new System.Windows.Forms.Button();
-            this.lbMuxStreamsList = new System.Windows.Forms.ListBox();
-            this.label166 = new System.Windows.Forms.Label();
-            this.cbMode = new System.Windows.Forms.ComboBox();
-            this.label130 = new System.Windows.Forms.Label();
-            this.openFileDialogSubtitles = new System.Windows.Forms.OpenFileDialog();
-            this.cbTelemetry = new System.Windows.Forms.CheckBox();
-            this.cbLicensing = new System.Windows.Forms.CheckBox();
-            this.cbDebugMode = new System.Windows.Forms.CheckBox();
-            this.mmLog = new System.Windows.Forms.TextBox();
-            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage30.SuspendLayout();
-            this.tabPage48.SuspendLayout();
-            this.tabPage31.SuspendLayout();
-            this.tabControl17.SuspendLayout();
-            this.tabPage68.SuspendLayout();
-            this.tabControl7.SuspendLayout();
-            this.tabPage29.SuspendLayout();
-            this.tabPage42.SuspendLayout();
-            this.tabPage22.SuspendLayout();
-            this.groupBox37.SuspendLayout();
-            this.tabPage23.SuspendLayout();
-            this.groupBox40.SuspendLayout();
-            this.groupBox39.SuspendLayout();
-            this.groupBox38.SuspendLayout();
-            this.tabPage43.SuspendLayout();
-            this.groupBox45.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaturation)).BeginInit();
-            this.tabPage69.SuspendLayout();
-            this.tabPage59.SuspendLayout();
-            this.tabPage15.SuspendLayout();
-            this.tabControl15.SuspendLayout();
-            this.tabPage21.SuspendLayout();
-            this.tabPage26.SuspendLayout();
-            this.tabPage20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeySmoothing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeyThresholdSensitivity)).BeginInit();
-            this.tabPage70.SuspendLayout();
-            this.tabPage82.SuspendLayout();
-            this.tabPage83.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUBlur)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUDarkness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPULightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUSaturation)).BeginInit();
-            this.tabPage9.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.tabPage66.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioTimeshift)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainLFE)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainL)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainLFE)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainC)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainL)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.tabControl18.SuspendLayout();
-            this.tabPage71.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).BeginInit();
-            this.tabPage72.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).BeginInit();
-            this.tabPage73.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudRelease)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudDynAmp)).BeginInit();
-            this.tabPage75.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAud3DSound)).BeginInit();
-            this.tabPage76.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudTrueBass)).BeginInit();
-            this.tabPage16.SuspendLayout();
-            this.tabPage81.SuspendLayout();
-            this.groupBox41.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioChannelMapperVolume)).BeginInit();
-            this.tabPage27.SuspendLayout();
-            this.tabControl9.SuspendLayout();
-            this.tabPage44.SuspendLayout();
-            this.tabPage45.SuspendLayout();
-            this.groupBox25.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetHLThreshold)).BeginInit();
-            this.groupBox27.SuspendLayout();
-            this.groupBox26.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetDropFramesThreshold)).BeginInit();
-            this.groupBox24.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.tabPage25.SuspendLayout();
-            this.tabPage28.SuspendLayout();
-            this.tabControl5.SuspendLayout();
-            this.tabPage32.SuspendLayout();
-            this.tabPage49.SuspendLayout();
-            this.tabPage50.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage77.SuspendLayout();
-            this.tabPage51.SuspendLayout();
-            this.tabPage33.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage34.SuspendLayout();
-            this.tabPage46.SuspendLayout();
-            this.tabPage47.SuspendLayout();
-            this.groupBox48.SuspendLayout();
-            this.groupBox47.SuspendLayout();
-            this.groupBox43.SuspendLayout();
-            this.tabPage79.SuspendLayout();
-            this.TabControl32.SuspendLayout();
-            this.TabPage142.SuspendLayout();
-            this.TabPage143.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgTagCover)).BeginInit();
-            this.tabPage24.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterBoost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterAmplification)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSeeking)).BeginInit();
-            this.tabControl3.SuspendLayout();
-            this.tabPage52.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
-            this.tabPage53.SuspendLayout();
-            this.tabPage54.SuspendLayout();
-            this.tabPage74.SuspendLayout();
-            this.SuspendLayout();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            tabControl2 = new System.Windows.Forms.TabControl();
+            tabPage30 = new System.Windows.Forms.TabPage();
+            llXiphX64 = new System.Windows.Forms.LinkLabel();
+            llXiphX86 = new System.Windows.Forms.LinkLabel();
+            label68 = new System.Windows.Forms.Label();
+            label67 = new System.Windows.Forms.Label();
+            lbInfo = new System.Windows.Forms.Label();
+            btConfigure = new System.Windows.Forms.Button();
+            btSelectOutput = new System.Windows.Forms.Button();
+            edOutput = new System.Windows.Forms.TextBox();
+            label15 = new System.Windows.Forms.Label();
+            cbOutputVideoFormat = new System.Windows.Forms.ComboBox();
+            label9 = new System.Windows.Forms.Label();
+            tabPage48 = new System.Windows.Forms.TabPage();
+            edCropRight = new System.Windows.Forms.TextBox();
+            label176 = new System.Windows.Forms.Label();
+            edCropBottom = new System.Windows.Forms.TextBox();
+            label252 = new System.Windows.Forms.Label();
+            edCropLeft = new System.Windows.Forms.TextBox();
+            label270 = new System.Windows.Forms.Label();
+            edCropTop = new System.Windows.Forms.TextBox();
+            label272 = new System.Windows.Forms.Label();
+            cbCrop = new System.Windows.Forms.CheckBox();
+            label92 = new System.Windows.Forms.Label();
+            cbRotate = new System.Windows.Forms.ComboBox();
+            cbFrameRate = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
+            edHeight = new System.Windows.Forms.TextBox();
+            edWidth = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            cbResize = new System.Windows.Forms.CheckBox();
+            tabPage31 = new System.Windows.Forms.TabPage();
+            tabControl17 = new System.Windows.Forms.TabControl();
+            tabPage68 = new System.Windows.Forms.TabPage();
+            cbFlipY = new System.Windows.Forms.CheckBox();
+            cbFlipX = new System.Windows.Forms.CheckBox();
+            label201 = new System.Windows.Forms.Label();
+            label200 = new System.Windows.Forms.Label();
+            label199 = new System.Windows.Forms.Label();
+            label198 = new System.Windows.Forms.Label();
+            tabControl7 = new System.Windows.Forms.TabControl();
+            tabPage29 = new System.Windows.Forms.TabPage();
+            btTextLogoRemove = new System.Windows.Forms.Button();
+            btTextLogoEdit = new System.Windows.Forms.Button();
+            lbTextLogos = new System.Windows.Forms.ListBox();
+            btTextLogoAdd = new System.Windows.Forms.Button();
+            tabPage42 = new System.Windows.Forms.TabPage();
+            btImageLogoRemove = new System.Windows.Forms.Button();
+            btImageLogoEdit = new System.Windows.Forms.Button();
+            lbImageLogos = new System.Windows.Forms.ListBox();
+            btImageLogoAdd = new System.Windows.Forms.Button();
+            tabPage22 = new System.Windows.Forms.TabPage();
+            groupBox37 = new System.Windows.Forms.GroupBox();
+            btEffZoomRight = new System.Windows.Forms.Button();
+            btEffZoomLeft = new System.Windows.Forms.Button();
+            btEffZoomOut = new System.Windows.Forms.Button();
+            btEffZoomIn = new System.Windows.Forms.Button();
+            btEffZoomDown = new System.Windows.Forms.Button();
+            btEffZoomUp = new System.Windows.Forms.Button();
+            cbZoom = new System.Windows.Forms.CheckBox();
+            tabPage23 = new System.Windows.Forms.TabPage();
+            groupBox40 = new System.Windows.Forms.GroupBox();
+            edPanDestHeight = new System.Windows.Forms.TextBox();
+            label302 = new System.Windows.Forms.Label();
+            edPanDestWidth = new System.Windows.Forms.TextBox();
+            label303 = new System.Windows.Forms.Label();
+            edPanDestTop = new System.Windows.Forms.TextBox();
+            label304 = new System.Windows.Forms.Label();
+            edPanDestLeft = new System.Windows.Forms.TextBox();
+            label305 = new System.Windows.Forms.Label();
+            groupBox39 = new System.Windows.Forms.GroupBox();
+            edPanSourceHeight = new System.Windows.Forms.TextBox();
+            label298 = new System.Windows.Forms.Label();
+            edPanSourceWidth = new System.Windows.Forms.TextBox();
+            label299 = new System.Windows.Forms.Label();
+            edPanSourceTop = new System.Windows.Forms.TextBox();
+            label300 = new System.Windows.Forms.Label();
+            edPanSourceLeft = new System.Windows.Forms.TextBox();
+            label301 = new System.Windows.Forms.Label();
+            groupBox38 = new System.Windows.Forms.GroupBox();
+            edPanStopTime = new System.Windows.Forms.TextBox();
+            label296 = new System.Windows.Forms.Label();
+            edPanStartTime = new System.Windows.Forms.TextBox();
+            label297 = new System.Windows.Forms.Label();
+            cbPan = new System.Windows.Forms.CheckBox();
+            tabPage43 = new System.Windows.Forms.TabPage();
+            rbVideoFadeOut = new System.Windows.Forms.RadioButton();
+            rbVideoFadeIn = new System.Windows.Forms.RadioButton();
+            groupBox45 = new System.Windows.Forms.GroupBox();
+            edVideoFadeInOutStopTime = new System.Windows.Forms.TextBox();
+            label329 = new System.Windows.Forms.Label();
+            edVideoFadeInOutStartTime = new System.Windows.Forms.TextBox();
+            label330 = new System.Windows.Forms.Label();
+            cbVideoFadeInOut = new System.Windows.Forms.CheckBox();
+            tbContrast = new System.Windows.Forms.TrackBar();
+            tbDarkness = new System.Windows.Forms.TrackBar();
+            tbLightness = new System.Windows.Forms.TrackBar();
+            tbSaturation = new System.Windows.Forms.TrackBar();
+            cbInvert = new System.Windows.Forms.CheckBox();
+            cbGreyscale = new System.Windows.Forms.CheckBox();
+            cbEffects = new System.Windows.Forms.CheckBox();
+            tabPage69 = new System.Windows.Forms.TabPage();
+            label211 = new System.Windows.Forms.Label();
+            edDeintTriangleWeight = new System.Windows.Forms.TextBox();
+            label212 = new System.Windows.Forms.Label();
+            label210 = new System.Windows.Forms.Label();
+            label209 = new System.Windows.Forms.Label();
+            label206 = new System.Windows.Forms.Label();
+            edDeintBlendConstants2 = new System.Windows.Forms.TextBox();
+            label207 = new System.Windows.Forms.Label();
+            edDeintBlendConstants1 = new System.Windows.Forms.TextBox();
+            label208 = new System.Windows.Forms.Label();
+            label204 = new System.Windows.Forms.Label();
+            edDeintBlendThreshold2 = new System.Windows.Forms.TextBox();
+            label205 = new System.Windows.Forms.Label();
+            edDeintBlendThreshold1 = new System.Windows.Forms.TextBox();
+            label203 = new System.Windows.Forms.Label();
+            label202 = new System.Windows.Forms.Label();
+            edDeintCAVTThreshold = new System.Windows.Forms.TextBox();
+            label104 = new System.Windows.Forms.Label();
+            rbDeintTriangleEnabled = new System.Windows.Forms.RadioButton();
+            rbDeintBlendEnabled = new System.Windows.Forms.RadioButton();
+            rbDeintCAVTEnabled = new System.Windows.Forms.RadioButton();
+            cbDeinterlace = new System.Windows.Forms.CheckBox();
+            tabPage59 = new System.Windows.Forms.TabPage();
+            rbDenoiseCAST = new System.Windows.Forms.RadioButton();
+            rbDenoiseMosquito = new System.Windows.Forms.RadioButton();
+            cbDenoise = new System.Windows.Forms.CheckBox();
+            tabPage15 = new System.Windows.Forms.TabPage();
+            tabControl15 = new System.Windows.Forms.TabControl();
+            tabPage21 = new System.Windows.Forms.TabPage();
+            label64 = new System.Windows.Forms.Label();
+            label65 = new System.Windows.Forms.Label();
+            pbAFMotionLevel = new System.Windows.Forms.ProgressBar();
+            cbAFMotionHighlight = new System.Windows.Forms.CheckBox();
+            cbAFMotionDetection = new System.Windows.Forms.CheckBox();
+            tabPage26 = new System.Windows.Forms.TabPage();
+            label171 = new System.Windows.Forms.Label();
+            label66 = new System.Windows.Forms.Label();
+            label16 = new System.Windows.Forms.Label();
+            tabPage20 = new System.Windows.Forms.TabPage();
+            pnChromaKeyColor = new System.Windows.Forms.Panel();
+            btChromaKeySelectBGImage = new System.Windows.Forms.Button();
+            edChromaKeyImage = new System.Windows.Forms.TextBox();
+            label216 = new System.Windows.Forms.Label();
+            label215 = new System.Windows.Forms.Label();
+            tbChromaKeySmoothing = new System.Windows.Forms.TrackBar();
+            label214 = new System.Windows.Forms.Label();
+            tbChromaKeyThresholdSensitivity = new System.Windows.Forms.TrackBar();
+            label213 = new System.Windows.Forms.Label();
+            cbChromaKeyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage70 = new System.Windows.Forms.TabPage();
+            btFilterDeleteAll = new System.Windows.Forms.Button();
+            btFilterSettings2 = new System.Windows.Forms.Button();
+            lbFilters = new System.Windows.Forms.ListBox();
+            label106 = new System.Windows.Forms.Label();
+            btFilterSettings = new System.Windows.Forms.Button();
+            btFilterAdd = new System.Windows.Forms.Button();
+            cbFilters = new System.Windows.Forms.ComboBox();
+            label105 = new System.Windows.Forms.Label();
+            tabPage82 = new System.Windows.Forms.TabPage();
+            label177 = new System.Windows.Forms.Label();
+            label129 = new System.Windows.Forms.Label();
+            btSubtitlesSelectFile = new System.Windows.Forms.Button();
+            edSubtitlesFilename = new System.Windows.Forms.TextBox();
+            label114 = new System.Windows.Forms.Label();
+            cbSubtitlesEnabled = new System.Windows.Forms.CheckBox();
+            tabPage83 = new System.Windows.Forms.TabPage();
+            label8 = new System.Windows.Forms.Label();
+            tbGPUBlur = new System.Windows.Forms.TrackBar();
+            cbVideoEffectsGPUEnabled = new System.Windows.Forms.CheckBox();
+            cbGPUOldMovie = new System.Windows.Forms.CheckBox();
+            cbGPUDeinterlace = new System.Windows.Forms.CheckBox();
+            cbGPUDenoise = new System.Windows.Forms.CheckBox();
+            cbGPUPixelate = new System.Windows.Forms.CheckBox();
+            cbGPUNightVision = new System.Windows.Forms.CheckBox();
+            label383 = new System.Windows.Forms.Label();
+            label384 = new System.Windows.Forms.Label();
+            label385 = new System.Windows.Forms.Label();
+            label386 = new System.Windows.Forms.Label();
+            tbGPUContrast = new System.Windows.Forms.TrackBar();
+            tbGPUDarkness = new System.Windows.Forms.TrackBar();
+            tbGPULightness = new System.Windows.Forms.TrackBar();
+            tbGPUSaturation = new System.Windows.Forms.TrackBar();
+            cbGPUInvert = new System.Windows.Forms.CheckBox();
+            cbGPUGreyscale = new System.Windows.Forms.CheckBox();
+            tabPage9 = new System.Windows.Forms.TabPage();
+            groupBox5 = new System.Windows.Forms.GroupBox();
+            label47 = new System.Windows.Forms.Label();
+            edTransStopTime = new System.Windows.Forms.TextBox();
+            label48 = new System.Windows.Forms.Label();
+            label46 = new System.Windows.Forms.Label();
+            edTransStartTime = new System.Windows.Forms.TextBox();
+            label45 = new System.Windows.Forms.Label();
+            btAddTransition = new System.Windows.Forms.Button();
+            cbTransitionName = new System.Windows.Forms.ComboBox();
+            label44 = new System.Windows.Forms.Label();
+            lbTransitions = new System.Windows.Forms.ListBox();
+            label43 = new System.Windows.Forms.Label();
+            tabPage66 = new System.Windows.Forms.TabPage();
+            lbAudioTimeshift = new System.Windows.Forms.Label();
+            tbAudioTimeshift = new System.Windows.Forms.TrackBar();
+            label115 = new System.Windows.Forms.Label();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            lbAudioOutputGainLFE = new System.Windows.Forms.Label();
+            tbAudioOutputGainLFE = new System.Windows.Forms.TrackBar();
+            label116 = new System.Windows.Forms.Label();
+            lbAudioOutputGainSR = new System.Windows.Forms.Label();
+            tbAudioOutputGainSR = new System.Windows.Forms.TrackBar();
+            label117 = new System.Windows.Forms.Label();
+            lbAudioOutputGainSL = new System.Windows.Forms.Label();
+            tbAudioOutputGainSL = new System.Windows.Forms.TrackBar();
+            label118 = new System.Windows.Forms.Label();
+            lbAudioOutputGainR = new System.Windows.Forms.Label();
+            tbAudioOutputGainR = new System.Windows.Forms.TrackBar();
+            label119 = new System.Windows.Forms.Label();
+            lbAudioOutputGainC = new System.Windows.Forms.Label();
+            tbAudioOutputGainC = new System.Windows.Forms.TrackBar();
+            label121 = new System.Windows.Forms.Label();
+            lbAudioOutputGainL = new System.Windows.Forms.Label();
+            tbAudioOutputGainL = new System.Windows.Forms.TrackBar();
+            label122 = new System.Windows.Forms.Label();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            lbAudioInputGainLFE = new System.Windows.Forms.Label();
+            tbAudioInputGainLFE = new System.Windows.Forms.TrackBar();
+            label123 = new System.Windows.Forms.Label();
+            lbAudioInputGainSR = new System.Windows.Forms.Label();
+            tbAudioInputGainSR = new System.Windows.Forms.TrackBar();
+            label124 = new System.Windows.Forms.Label();
+            lbAudioInputGainSL = new System.Windows.Forms.Label();
+            tbAudioInputGainSL = new System.Windows.Forms.TrackBar();
+            label125 = new System.Windows.Forms.Label();
+            lbAudioInputGainR = new System.Windows.Forms.Label();
+            tbAudioInputGainR = new System.Windows.Forms.TrackBar();
+            label126 = new System.Windows.Forms.Label();
+            lbAudioInputGainC = new System.Windows.Forms.Label();
+            tbAudioInputGainC = new System.Windows.Forms.TrackBar();
+            label127 = new System.Windows.Forms.Label();
+            lbAudioInputGainL = new System.Windows.Forms.Label();
+            tbAudioInputGainL = new System.Windows.Forms.TrackBar();
+            label128 = new System.Windows.Forms.Label();
+            cbAudioAutoGain = new System.Windows.Forms.CheckBox();
+            cbAudioNormalize = new System.Windows.Forms.CheckBox();
+            cbAudioEnhancementEnabled = new System.Windows.Forms.CheckBox();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            label133 = new System.Windows.Forms.Label();
+            tabControl18 = new System.Windows.Forms.TabControl();
+            tabPage71 = new System.Windows.Forms.TabPage();
+            label231 = new System.Windows.Forms.Label();
+            label230 = new System.Windows.Forms.Label();
+            tbAudAmplifyAmp = new System.Windows.Forms.TrackBar();
+            label95 = new System.Windows.Forms.Label();
+            cbAudAmplifyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage72 = new System.Windows.Forms.TabPage();
+            btAudEqRefresh = new System.Windows.Forms.Button();
+            cbAudEqualizerPreset = new System.Windows.Forms.ComboBox();
+            label243 = new System.Windows.Forms.Label();
+            label242 = new System.Windows.Forms.Label();
+            label241 = new System.Windows.Forms.Label();
+            label240 = new System.Windows.Forms.Label();
+            label239 = new System.Windows.Forms.Label();
+            label238 = new System.Windows.Forms.Label();
+            label237 = new System.Windows.Forms.Label();
+            label236 = new System.Windows.Forms.Label();
+            label235 = new System.Windows.Forms.Label();
+            label234 = new System.Windows.Forms.Label();
+            label233 = new System.Windows.Forms.Label();
+            label232 = new System.Windows.Forms.Label();
+            tbAudEq9 = new System.Windows.Forms.TrackBar();
+            tbAudEq8 = new System.Windows.Forms.TrackBar();
+            tbAudEq7 = new System.Windows.Forms.TrackBar();
+            tbAudEq6 = new System.Windows.Forms.TrackBar();
+            tbAudEq5 = new System.Windows.Forms.TrackBar();
+            tbAudEq4 = new System.Windows.Forms.TrackBar();
+            tbAudEq3 = new System.Windows.Forms.TrackBar();
+            tbAudEq2 = new System.Windows.Forms.TrackBar();
+            tbAudEq1 = new System.Windows.Forms.TrackBar();
+            tbAudEq0 = new System.Windows.Forms.TrackBar();
+            cbAudEqualizerEnabled = new System.Windows.Forms.CheckBox();
+            tabPage73 = new System.Windows.Forms.TabPage();
+            tbAudRelease = new System.Windows.Forms.TrackBar();
+            label248 = new System.Windows.Forms.Label();
+            label249 = new System.Windows.Forms.Label();
+            label246 = new System.Windows.Forms.Label();
+            tbAudAttack = new System.Windows.Forms.TrackBar();
+            label247 = new System.Windows.Forms.Label();
+            label244 = new System.Windows.Forms.Label();
+            tbAudDynAmp = new System.Windows.Forms.TrackBar();
+            label245 = new System.Windows.Forms.Label();
+            cbAudDynamicAmplifyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage75 = new System.Windows.Forms.TabPage();
+            tbAud3DSound = new System.Windows.Forms.TrackBar();
+            label253 = new System.Windows.Forms.Label();
+            cbAudSound3DEnabled = new System.Windows.Forms.CheckBox();
+            tabPage76 = new System.Windows.Forms.TabPage();
+            tbAudTrueBass = new System.Windows.Forms.TrackBar();
+            label254 = new System.Windows.Forms.Label();
+            cbAudTrueBassEnabled = new System.Windows.Forms.CheckBox();
+            tabPage16 = new System.Windows.Forms.TabPage();
+            cbFadeOutEnabled = new System.Windows.Forms.CheckBox();
+            label4 = new System.Windows.Forms.Label();
+            edFadeOutStopTime = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            edFadeOutStartTime = new System.Windows.Forms.TextBox();
+            label7 = new System.Windows.Forms.Label();
+            cbFadeInEnabled = new System.Windows.Forms.CheckBox();
+            label19 = new System.Windows.Forms.Label();
+            edFadeInStopTime = new System.Windows.Forms.TextBox();
+            label20 = new System.Windows.Forms.Label();
+            label18 = new System.Windows.Forms.Label();
+            edFadeInStartTime = new System.Windows.Forms.TextBox();
+            label17 = new System.Windows.Forms.Label();
+            cbAudioEffectsEnabled = new System.Windows.Forms.CheckBox();
+            tabPage81 = new System.Windows.Forms.TabPage();
+            btAudioChannelMapperClear = new System.Windows.Forms.Button();
+            groupBox41 = new System.Windows.Forms.GroupBox();
+            btAudioChannelMapperAddNewRoute = new System.Windows.Forms.Button();
+            label311 = new System.Windows.Forms.Label();
+            tbAudioChannelMapperVolume = new System.Windows.Forms.TrackBar();
+            label310 = new System.Windows.Forms.Label();
+            edAudioChannelMapperTargetChannel = new System.Windows.Forms.TextBox();
+            label309 = new System.Windows.Forms.Label();
+            edAudioChannelMapperSourceChannel = new System.Windows.Forms.TextBox();
+            label308 = new System.Windows.Forms.Label();
+            label307 = new System.Windows.Forms.Label();
+            edAudioChannelMapperOutputChannels = new System.Windows.Forms.TextBox();
+            label306 = new System.Windows.Forms.Label();
+            lbAudioChannelMapperRoutes = new System.Windows.Forms.ListBox();
+            cbAudioChannelMapperEnabled = new System.Windows.Forms.CheckBox();
+            tabPage27 = new System.Windows.Forms.TabPage();
+            tabControl9 = new System.Windows.Forms.TabControl();
+            tabPage44 = new System.Windows.Forms.TabPage();
+            pbMotionLevel = new System.Windows.Forms.ProgressBar();
+            label158 = new System.Windows.Forms.Label();
+            mmMotDetMatrix = new System.Windows.Forms.TextBox();
+            tabPage45 = new System.Windows.Forms.TabPage();
+            groupBox25 = new System.Windows.Forms.GroupBox();
+            cbMotDetHLColor = new System.Windows.Forms.ComboBox();
+            label161 = new System.Windows.Forms.Label();
+            label160 = new System.Windows.Forms.Label();
+            cbMotDetHLEnabled = new System.Windows.Forms.CheckBox();
+            tbMotDetHLThreshold = new System.Windows.Forms.TrackBar();
+            btMotDetUpdateSettings = new System.Windows.Forms.Button();
+            groupBox27 = new System.Windows.Forms.GroupBox();
+            edMotDetMatrixHeight = new System.Windows.Forms.TextBox();
+            label163 = new System.Windows.Forms.Label();
+            edMotDetMatrixWidth = new System.Windows.Forms.TextBox();
+            label164 = new System.Windows.Forms.Label();
+            groupBox26 = new System.Windows.Forms.GroupBox();
+            label162 = new System.Windows.Forms.Label();
+            tbMotDetDropFramesThreshold = new System.Windows.Forms.TrackBar();
+            cbMotDetDropFramesEnabled = new System.Windows.Forms.CheckBox();
+            groupBox24 = new System.Windows.Forms.GroupBox();
+            edMotDetFrameInterval = new System.Windows.Forms.TextBox();
+            label159 = new System.Windows.Forms.Label();
+            cbCompareGreyscale = new System.Windows.Forms.CheckBox();
+            cbCompareBlue = new System.Windows.Forms.CheckBox();
+            cbCompareGreen = new System.Windows.Forms.CheckBox();
+            cbCompareRed = new System.Windows.Forms.CheckBox();
+            cbMotDetEnabled = new System.Windows.Forms.CheckBox();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            label393 = new System.Windows.Forms.Label();
+            cbDirect2DRotate = new System.Windows.Forms.ComboBox();
+            pnVideoRendererBGColor = new System.Windows.Forms.Panel();
+            label394 = new System.Windows.Forms.Label();
+            btFullScreen = new System.Windows.Forms.Button();
+            cbScreenFlipVertical = new System.Windows.Forms.CheckBox();
+            cbScreenFlipHorizontal = new System.Windows.Forms.CheckBox();
+            cbStretch = new System.Windows.Forms.CheckBox();
+            groupBox13 = new System.Windows.Forms.GroupBox();
+            rbDirect2D = new System.Windows.Forms.RadioButton();
+            rbNone = new System.Windows.Forms.RadioButton();
+            rbEVR = new System.Windows.Forms.RadioButton();
+            rbVMR9 = new System.Windows.Forms.RadioButton();
+            tabPage25 = new System.Windows.Forms.TabPage();
+            edBarcodeMetadata = new System.Windows.Forms.TextBox();
+            label91 = new System.Windows.Forms.Label();
+            cbBarcodeType = new System.Windows.Forms.ComboBox();
+            label90 = new System.Windows.Forms.Label();
+            btBarcodeReset = new System.Windows.Forms.Button();
+            edBarcode = new System.Windows.Forms.TextBox();
+            label89 = new System.Windows.Forms.Label();
+            cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
+            tabPage28 = new System.Windows.Forms.TabPage();
+            cbNetworkStreamingMode = new System.Windows.Forms.ComboBox();
+            tabControl5 = new System.Windows.Forms.TabControl();
+            tabPage32 = new System.Windows.Forms.TabPage();
+            label24 = new System.Windows.Forms.Label();
+            edNetworkURL = new System.Windows.Forms.TextBox();
+            edWMVNetworkPort = new System.Windows.Forms.TextBox();
+            label21 = new System.Windows.Forms.Label();
+            btRefreshClients = new System.Windows.Forms.Button();
+            lbNetworkClients = new System.Windows.Forms.ListBox();
+            rbNetworkStreamingUseExternalProfile = new System.Windows.Forms.RadioButton();
+            rbNetworkStreamingUseMainWMVSettings = new System.Windows.Forms.RadioButton();
+            label81 = new System.Windows.Forms.Label();
+            label80 = new System.Windows.Forms.Label();
+            edMaximumClients = new System.Windows.Forms.TextBox();
+            label22 = new System.Windows.Forms.Label();
+            btSelectWMVProfileNetwork = new System.Windows.Forms.Button();
+            edNetworkStreamingWMVProfile = new System.Windows.Forms.TextBox();
+            label23 = new System.Windows.Forms.Label();
+            tabPage49 = new System.Windows.Forms.TabPage();
+            edNetworkRTSPURL = new System.Windows.Forms.TextBox();
+            label367 = new System.Windows.Forms.Label();
+            label366 = new System.Windows.Forms.Label();
+            tabPage50 = new System.Windows.Forms.TabPage();
+            linkLabel11 = new System.Windows.Forms.LinkLabel();
+            rbNetworkRTMPFFMPEGCustom = new System.Windows.Forms.RadioButton();
+            rbNetworkRTMPFFMPEG = new System.Windows.Forms.RadioButton();
+            edNetworkRTMPURL = new System.Windows.Forms.TextBox();
+            label368 = new System.Windows.Forms.Label();
+            label369 = new System.Windows.Forms.Label();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            lbNDI = new System.Windows.Forms.LinkLabel();
+            label11 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            edNDIURL = new System.Windows.Forms.TextBox();
+            edNDIName = new System.Windows.Forms.TextBox();
+            label13 = new System.Windows.Forms.Label();
+            tabPage77 = new System.Windows.Forms.TabPage();
+            label484 = new System.Windows.Forms.Label();
+            label63 = new System.Windows.Forms.Label();
+            label62 = new System.Windows.Forms.Label();
+            label314 = new System.Windows.Forms.Label();
+            label313 = new System.Windows.Forms.Label();
+            edNetworkUDPURL = new System.Windows.Forms.TextBox();
+            label372 = new System.Windows.Forms.Label();
+            rbNetworkUDPFFMPEGCustom = new System.Windows.Forms.RadioButton();
+            rbNetworkUDPFFMPEG = new System.Windows.Forms.RadioButton();
+            tabPage51 = new System.Windows.Forms.TabPage();
+            rbNetworkSSFFMPEGCustom = new System.Windows.Forms.RadioButton();
+            rbNetworkSSFFMPEGDefault = new System.Windows.Forms.RadioButton();
+            linkLabel6 = new System.Windows.Forms.LinkLabel();
+            edNetworkSSURL = new System.Windows.Forms.TextBox();
+            label370 = new System.Windows.Forms.Label();
+            label371 = new System.Windows.Forms.Label();
+            rbNetworkSSSoftware = new System.Windows.Forms.RadioButton();
+            tabPage33 = new System.Windows.Forms.TabPage();
+            linkLabel4 = new System.Windows.Forms.LinkLabel();
+            linkLabel5 = new System.Windows.Forms.LinkLabel();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            edHLSURL = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            edHLSEmbeddedHTTPServerPort = new System.Windows.Forms.TextBox();
+            cbHLSEmbeddedHTTPServerEnabled = new System.Windows.Forms.CheckBox();
+            cbHLSMode = new System.Windows.Forms.ComboBox();
+            label25 = new System.Windows.Forms.Label();
+            lbHLSConfigure = new System.Windows.Forms.LinkLabel();
+            label532 = new System.Windows.Forms.Label();
+            label531 = new System.Windows.Forms.Label();
+            label530 = new System.Windows.Forms.Label();
+            label529 = new System.Windows.Forms.Label();
+            edHLSSegmentCount = new System.Windows.Forms.TextBox();
+            label519 = new System.Windows.Forms.Label();
+            edHLSSegmentDuration = new System.Windows.Forms.TextBox();
+            btSelectHLSOutputFolder = new System.Windows.Forms.Button();
+            edHLSOutputFolder = new System.Windows.Forms.TextBox();
+            label380 = new System.Windows.Forms.Label();
+            cbNetworkStreamingAudioEnabled = new System.Windows.Forms.CheckBox();
+            cbNetworkStreaming = new System.Windows.Forms.CheckBox();
+            tabPage34 = new System.Windows.Forms.TabPage();
+            label328 = new System.Windows.Forms.Label();
+            label327 = new System.Windows.Forms.Label();
+            label326 = new System.Windows.Forms.Label();
+            label325 = new System.Windows.Forms.Label();
+            cbVirtualCamera = new System.Windows.Forms.CheckBox();
+            tabPage46 = new System.Windows.Forms.TabPage();
+            cbDecklinkOutputDownConversionAnalogOutput = new System.Windows.Forms.CheckBox();
+            cbDecklinkOutputDownConversion = new System.Windows.Forms.ComboBox();
+            label337 = new System.Windows.Forms.Label();
+            cbDecklinkOutputHDTVPulldown = new System.Windows.Forms.ComboBox();
+            label336 = new System.Windows.Forms.Label();
+            cbDecklinkOutputBlackToDeck = new System.Windows.Forms.ComboBox();
+            label335 = new System.Windows.Forms.Label();
+            cbDecklinkOutputSingleField = new System.Windows.Forms.ComboBox();
+            label334 = new System.Windows.Forms.Label();
+            cbDecklinkOutputComponentLevels = new System.Windows.Forms.ComboBox();
+            label333 = new System.Windows.Forms.Label();
+            cbDecklinkOutputNTSC = new System.Windows.Forms.ComboBox();
+            label332 = new System.Windows.Forms.Label();
+            cbDecklinkOutputDualLink = new System.Windows.Forms.ComboBox();
+            label331 = new System.Windows.Forms.Label();
+            cbDecklinkOutputAnalog = new System.Windows.Forms.ComboBox();
+            label87 = new System.Windows.Forms.Label();
+            cbDecklinkDV = new System.Windows.Forms.CheckBox();
+            cbDecklinkOutput = new System.Windows.Forms.CheckBox();
+            tabPage47 = new System.Windows.Forms.TabPage();
+            groupBox48 = new System.Windows.Forms.GroupBox();
+            label343 = new System.Windows.Forms.Label();
+            edEncryptionKeyHEX = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyBinary = new System.Windows.Forms.RadioButton();
+            btEncryptionOpenFile = new System.Windows.Forms.Button();
+            edEncryptionKeyFile = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyFile = new System.Windows.Forms.RadioButton();
+            edEncryptionKeyString = new System.Windows.Forms.TextBox();
+            rbEncryptionKeyString = new System.Windows.Forms.RadioButton();
+            groupBox47 = new System.Windows.Forms.GroupBox();
+            rbEncryptionModeAES256 = new System.Windows.Forms.RadioButton();
+            rbEncryptionModeAES128 = new System.Windows.Forms.RadioButton();
+            groupBox43 = new System.Windows.Forms.GroupBox();
+            rbEncryptedH264CUDA = new System.Windows.Forms.RadioButton();
+            rbEncryptedH264SW = new System.Windows.Forms.RadioButton();
+            tabPage79 = new System.Windows.Forms.TabPage();
+            TabControl32 = new System.Windows.Forms.TabControl();
+            TabPage142 = new System.Windows.Forms.TabPage();
+            edTagTrackID = new System.Windows.Forms.TextBox();
+            Label496 = new System.Windows.Forms.Label();
+            edTagYear = new System.Windows.Forms.TextBox();
+            Label495 = new System.Windows.Forms.Label();
+            edTagComment = new System.Windows.Forms.TextBox();
+            Label493 = new System.Windows.Forms.Label();
+            edTagAlbum = new System.Windows.Forms.TextBox();
+            Label491 = new System.Windows.Forms.Label();
+            edTagArtists = new System.Windows.Forms.TextBox();
+            label494 = new System.Windows.Forms.Label();
+            edTagCopyright = new System.Windows.Forms.TextBox();
+            label497 = new System.Windows.Forms.Label();
+            edTagTitle = new System.Windows.Forms.TextBox();
+            label498 = new System.Windows.Forms.Label();
+            TabPage143 = new System.Windows.Forms.TabPage();
+            imgTagCover = new System.Windows.Forms.PictureBox();
+            Label499 = new System.Windows.Forms.Label();
+            label500 = new System.Windows.Forms.Label();
+            edTagLyrics = new System.Windows.Forms.TextBox();
+            label501 = new System.Windows.Forms.Label();
+            cbTagGenre = new System.Windows.Forms.ComboBox();
+            label502 = new System.Windows.Forms.Label();
+            edTagComposers = new System.Windows.Forms.TextBox();
+            label503 = new System.Windows.Forms.Label();
+            cbTagEnabled = new System.Windows.Forms.CheckBox();
+            tabPage24 = new System.Windows.Forms.TabPage();
+            cbVUMeter = new System.Windows.Forms.CheckBox();
+            tbVUMeterBoost = new System.Windows.Forms.TrackBar();
+            label382 = new System.Windows.Forms.Label();
+            label381 = new System.Windows.Forms.Label();
+            tbVUMeterAmplification = new System.Windows.Forms.TrackBar();
+            cbVUMeterPro = new System.Windows.Forms.CheckBox();
+            peakMeterCtrl1 = new VisioForge.Core.UI.WinForms.PeakMeterCtrl();
+            waveformPainter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            waveformPainter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter();
+            volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            btStart = new System.Windows.Forms.Button();
+            btStop = new System.Windows.Forms.Button();
+            OpenDialog1 = new System.Windows.Forms.OpenFileDialog();
+            SaveDialog1 = new System.Windows.Forms.SaveFileDialog();
+            FontDialog1 = new System.Windows.Forms.FontDialog();
+            openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            colorDialog1 = new System.Windows.Forms.ColorDialog();
+            tbSeeking = new System.Windows.Forms.TrackBar();
+            linkLabel1 = new System.Windows.Forms.LinkLabel();
+            openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            ProgressBar1 = new System.Windows.Forms.ProgressBar();
+            tabControl3 = new System.Windows.Forms.TabControl();
+            tabPage52 = new System.Windows.Forms.TabPage();
+            linkLabelDecoders = new System.Windows.Forms.LinkLabel();
+            groupBox7 = new System.Windows.Forms.GroupBox();
+            label72 = new System.Windows.Forms.Label();
+            edInsertTime = new System.Windows.Forms.TextBox();
+            label73 = new System.Windows.Forms.Label();
+            cbInsertAfterPreviousFile = new System.Windows.Forms.CheckBox();
+            label50 = new System.Windows.Forms.Label();
+            groupBox6 = new System.Windows.Forms.GroupBox();
+            lbSpeed = new System.Windows.Forms.Label();
+            label42 = new System.Windows.Forms.Label();
+            label37 = new System.Windows.Forms.Label();
+            edStopTime = new System.Windows.Forms.TextBox();
+            label38 = new System.Windows.Forms.Label();
+            label36 = new System.Windows.Forms.Label();
+            edStartTime = new System.Windows.Forms.TextBox();
+            label35 = new System.Windows.Forms.Label();
+            cbAddFullFile = new System.Windows.Forms.CheckBox();
+            tbSpeed = new System.Windows.Forms.TrackBar();
+            btClearList = new System.Windows.Forms.Button();
+            btAddInputFile = new System.Windows.Forms.Button();
+            lbFiles = new System.Windows.Forms.ListBox();
+            label10 = new System.Windows.Forms.Label();
+            tabPage53 = new System.Windows.Forms.TabPage();
+            label134 = new System.Windows.Forms.Label();
+            btSelectOutputCut = new System.Windows.Forms.Button();
+            edOutputFileCut = new System.Windows.Forms.TextBox();
+            label131 = new System.Windows.Forms.Label();
+            btStopCut = new System.Windows.Forms.Button();
+            btStartCut = new System.Windows.Forms.Button();
+            label31 = new System.Windows.Forms.Label();
+            btAddInputFile2 = new System.Windows.Forms.Button();
+            edSourceFileToCut = new System.Windows.Forms.TextBox();
+            label30 = new System.Windows.Forms.Label();
+            label26 = new System.Windows.Forms.Label();
+            edStopTimeCut = new System.Windows.Forms.TextBox();
+            label27 = new System.Windows.Forms.Label();
+            label28 = new System.Windows.Forms.Label();
+            edStartTimeCut = new System.Windows.Forms.TextBox();
+            label29 = new System.Windows.Forms.Label();
+            tabPage54 = new System.Windows.Forms.TabPage();
+            label1 = new System.Windows.Forms.Label();
+            btSelectOutputJoin = new System.Windows.Forms.Button();
+            edOutputFileJoin = new System.Windows.Forms.TextBox();
+            label132 = new System.Windows.Forms.Label();
+            btStopJoin = new System.Windows.Forms.Button();
+            btStartJoin = new System.Windows.Forms.Button();
+            btClearList3 = new System.Windows.Forms.Button();
+            btAddInputFile3 = new System.Windows.Forms.Button();
+            lbFiles2 = new System.Windows.Forms.ListBox();
+            label32 = new System.Windows.Forms.Label();
+            tabPage74 = new System.Windows.Forms.TabPage();
+            label168 = new System.Windows.Forms.Label();
+            cbMuxStreamsShortest = new System.Windows.Forms.CheckBox();
+            cbMuxStreamsType = new System.Windows.Forms.ComboBox();
+            btMuxStreamsSelectFile = new System.Windows.Forms.Button();
+            edMuxStreamsSourceFile = new System.Windows.Forms.TextBox();
+            label167 = new System.Windows.Forms.Label();
+            btMuxStreamsSelectOutput = new System.Windows.Forms.Button();
+            edMuxStreamsOutputFile = new System.Windows.Forms.TextBox();
+            label165 = new System.Windows.Forms.Label();
+            btStopMux = new System.Windows.Forms.Button();
+            btStartMux = new System.Windows.Forms.Button();
+            btMuxStreamsClear = new System.Windows.Forms.Button();
+            btMuxStreamsAdd = new System.Windows.Forms.Button();
+            lbMuxStreamsList = new System.Windows.Forms.ListBox();
+            label166 = new System.Windows.Forms.Label();
+            cbMode = new System.Windows.Forms.ComboBox();
+            label130 = new System.Windows.Forms.Label();
+            openFileDialogSubtitles = new System.Windows.Forms.OpenFileDialog();
+            cbTelemetry = new System.Windows.Forms.CheckBox();
+            cbLicensing = new System.Windows.Forms.CheckBox();
+            cbDebugMode = new System.Windows.Forms.CheckBox();
+            mmLog = new System.Windows.Forms.TextBox();
+            VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabPage30.SuspendLayout();
+            tabPage48.SuspendLayout();
+            tabPage31.SuspendLayout();
+            tabControl17.SuspendLayout();
+            tabPage68.SuspendLayout();
+            tabControl7.SuspendLayout();
+            tabPage29.SuspendLayout();
+            tabPage42.SuspendLayout();
+            tabPage22.SuspendLayout();
+            groupBox37.SuspendLayout();
+            tabPage23.SuspendLayout();
+            groupBox40.SuspendLayout();
+            groupBox39.SuspendLayout();
+            groupBox38.SuspendLayout();
+            tabPage43.SuspendLayout();
+            groupBox45.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbDarkness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbLightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSaturation).BeginInit();
+            tabPage69.SuspendLayout();
+            tabPage59.SuspendLayout();
+            tabPage15.SuspendLayout();
+            tabControl15.SuspendLayout();
+            tabPage21.SuspendLayout();
+            tabPage26.SuspendLayout();
+            tabPage20.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeySmoothing).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeyThresholdSensitivity).BeginInit();
+            tabPage70.SuspendLayout();
+            tabPage82.SuspendLayout();
+            tabPage83.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGPUBlur).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUDarkness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPULightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUSaturation).BeginInit();
+            tabPage9.SuspendLayout();
+            groupBox5.SuspendLayout();
+            tabPage66.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioTimeshift).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainLFE).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainC).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainL).BeginInit();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainLFE).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainC).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainL).BeginInit();
+            tabPage3.SuspendLayout();
+            tabControl18.SuspendLayout();
+            tabPage71.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).BeginInit();
+            tabPage72.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).BeginInit();
+            tabPage73.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudRelease).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudAttack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudDynAmp).BeginInit();
+            tabPage75.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAud3DSound).BeginInit();
+            tabPage76.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudTrueBass).BeginInit();
+            tabPage16.SuspendLayout();
+            tabPage81.SuspendLayout();
+            groupBox41.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioChannelMapperVolume).BeginInit();
+            tabPage27.SuspendLayout();
+            tabControl9.SuspendLayout();
+            tabPage44.SuspendLayout();
+            tabPage45.SuspendLayout();
+            groupBox25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetHLThreshold).BeginInit();
+            groupBox27.SuspendLayout();
+            groupBox26.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetDropFramesThreshold).BeginInit();
+            groupBox24.SuspendLayout();
+            tabPage2.SuspendLayout();
+            groupBox13.SuspendLayout();
+            tabPage25.SuspendLayout();
+            tabPage28.SuspendLayout();
+            tabControl5.SuspendLayout();
+            tabPage32.SuspendLayout();
+            tabPage49.SuspendLayout();
+            tabPage50.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tabPage77.SuspendLayout();
+            tabPage51.SuspendLayout();
+            tabPage33.SuspendLayout();
+            tabPage5.SuspendLayout();
+            tabPage34.SuspendLayout();
+            tabPage46.SuspendLayout();
+            tabPage47.SuspendLayout();
+            groupBox48.SuspendLayout();
+            groupBox47.SuspendLayout();
+            groupBox43.SuspendLayout();
+            tabPage79.SuspendLayout();
+            TabControl32.SuspendLayout();
+            TabPage142.SuspendLayout();
+            TabPage143.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)imgTagCover).BeginInit();
+            tabPage24.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterBoost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterAmplification).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbSeeking).BeginInit();
+            tabControl3.SuspendLayout();
+            tabPage52.SuspendLayout();
+            groupBox7.SuspendLayout();
+            groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
+            tabPage53.SuspendLayout();
+            tabPage54.SuspendLayout();
+            tabPage74.SuspendLayout();
+            SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage31);
-            this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Controls.Add(this.tabPage66);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage81);
-            this.tabControl1.Controls.Add(this.tabPage27);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage25);
-            this.tabControl1.Controls.Add(this.tabPage28);
-            this.tabControl1.Controls.Add(this.tabPage34);
-            this.tabControl1.Controls.Add(this.tabPage46);
-            this.tabControl1.Controls.Add(this.tabPage47);
-            this.tabControl1.Controls.Add(this.tabPage79);
-            this.tabControl1.Controls.Add(this.tabPage24);
-            this.tabControl1.Location = new System.Drawing.Point(18, 18);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(465, 800);
-            this.tabControl1.TabIndex = 0;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage31);
+            tabControl1.Controls.Add(tabPage9);
+            tabControl1.Controls.Add(tabPage66);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage81);
+            tabControl1.Controls.Add(tabPage27);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage25);
+            tabControl1.Controls.Add(tabPage28);
+            tabControl1.Controls.Add(tabPage34);
+            tabControl1.Controls.Add(tabPage46);
+            tabControl1.Controls.Add(tabPage47);
+            tabControl1.Controls.Add(tabPage79);
+            tabControl1.Controls.Add(tabPage24);
+            tabControl1.Location = new System.Drawing.Point(20, 22);
+            tabControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(517, 1000);
+            tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.tabControl2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(457, 767);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Output";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(tabControl2);
+            tabPage1.Location = new System.Drawing.Point(4, 34);
+            tabPage1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage1.Size = new System.Drawing.Size(509, 962);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Output";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabPage30);
-            this.tabControl2.Controls.Add(this.tabPage48);
-            this.tabControl2.Location = new System.Drawing.Point(6, 9);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(438, 742);
-            this.tabControl2.TabIndex = 10;
+            tabControl2.Controls.Add(tabPage30);
+            tabControl2.Controls.Add(tabPage48);
+            tabControl2.Location = new System.Drawing.Point(7, 11);
+            tabControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new System.Drawing.Size(487, 928);
+            tabControl2.TabIndex = 10;
             // 
             // tabPage30
             // 
-            this.tabPage30.Controls.Add(this.llXiphX64);
-            this.tabPage30.Controls.Add(this.llXiphX86);
-            this.tabPage30.Controls.Add(this.label68);
-            this.tabPage30.Controls.Add(this.label67);
-            this.tabPage30.Controls.Add(this.lbInfo);
-            this.tabPage30.Controls.Add(this.btConfigure);
-            this.tabPage30.Controls.Add(this.btSelectOutput);
-            this.tabPage30.Controls.Add(this.edOutput);
-            this.tabPage30.Controls.Add(this.label15);
-            this.tabPage30.Controls.Add(this.cbOutputVideoFormat);
-            this.tabPage30.Controls.Add(this.label9);
-            this.tabPage30.Location = new System.Drawing.Point(4, 29);
-            this.tabPage30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage30.Name = "tabPage30";
-            this.tabPage30.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage30.Size = new System.Drawing.Size(430, 709);
-            this.tabPage30.TabIndex = 6;
-            this.tabPage30.Text = "Main";
-            this.tabPage30.UseVisualStyleBackColor = true;
+            tabPage30.Controls.Add(llXiphX64);
+            tabPage30.Controls.Add(llXiphX86);
+            tabPage30.Controls.Add(label68);
+            tabPage30.Controls.Add(label67);
+            tabPage30.Controls.Add(lbInfo);
+            tabPage30.Controls.Add(btConfigure);
+            tabPage30.Controls.Add(btSelectOutput);
+            tabPage30.Controls.Add(edOutput);
+            tabPage30.Controls.Add(label15);
+            tabPage30.Controls.Add(cbOutputVideoFormat);
+            tabPage30.Controls.Add(label9);
+            tabPage30.Location = new System.Drawing.Point(4, 34);
+            tabPage30.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage30.Name = "tabPage30";
+            tabPage30.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage30.Size = new System.Drawing.Size(479, 890);
+            tabPage30.TabIndex = 6;
+            tabPage30.Text = "Main";
+            tabPage30.UseVisualStyleBackColor = true;
             // 
             // llXiphX64
             // 
-            this.llXiphX64.AutoSize = true;
-            this.llXiphX64.Location = new System.Drawing.Point(224, 345);
-            this.llXiphX64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.llXiphX64.Name = "llXiphX64";
-            this.llXiphX64.Size = new System.Drawing.Size(34, 20);
-            this.llXiphX64.TabIndex = 59;
-            this.llXiphX64.TabStop = true;
-            this.llXiphX64.Text = "x64";
-            this.llXiphX64.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX64_LinkClicked);
+            llXiphX64.AutoSize = true;
+            llXiphX64.Location = new System.Drawing.Point(249, 431);
+            llXiphX64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            llXiphX64.Name = "llXiphX64";
+            llXiphX64.Size = new System.Drawing.Size(40, 25);
+            llXiphX64.TabIndex = 59;
+            llXiphX64.TabStop = true;
+            llXiphX64.Text = "x64";
+            llXiphX64.LinkClicked += llXiphX64_LinkClicked;
             // 
             // llXiphX86
             // 
-            this.llXiphX86.AutoSize = true;
-            this.llXiphX86.Location = new System.Drawing.Point(178, 345);
-            this.llXiphX86.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.llXiphX86.Name = "llXiphX86";
-            this.llXiphX86.Size = new System.Drawing.Size(34, 20);
-            this.llXiphX86.TabIndex = 58;
-            this.llXiphX86.TabStop = true;
-            this.llXiphX86.Text = "x86";
-            this.llXiphX86.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llXiphX86_LinkClicked);
+            llXiphX86.AutoSize = true;
+            llXiphX86.Location = new System.Drawing.Point(198, 431);
+            llXiphX86.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            llXiphX86.Name = "llXiphX86";
+            llXiphX86.Size = new System.Drawing.Size(40, 25);
+            llXiphX86.TabIndex = 58;
+            llXiphX86.TabStop = true;
+            llXiphX86.Text = "x86";
+            llXiphX86.LinkClicked += llXiphX86_LinkClicked;
             // 
             // label68
             // 
-            this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(0, 345);
-            this.label68.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(169, 20);
-            this.label68.TabIndex = 57;
-            this.label68.Text = "and Ogg Vorbis output";
+            label68.AutoSize = true;
+            label68.Location = new System.Drawing.Point(0, 431);
+            label68.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label68.Name = "label68";
+            label68.Size = new System.Drawing.Size(197, 25);
+            label68.TabIndex = 57;
+            label68.Text = "and Ogg Vorbis output";
             // 
             // label67
             // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(0, 311);
-            this.label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(411, 20);
-            this.label67.TabIndex = 56;
-            this.label67.Text = "Additional redist required to be installed for FLAC, Speex,";
+            label67.AutoSize = true;
+            label67.Location = new System.Drawing.Point(0, 389);
+            label67.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label67.Name = "label67";
+            label67.Size = new System.Drawing.Size(465, 25);
+            label67.TabIndex = 56;
+            label67.Text = "Additional redist required to be installed for FLAC, Speex,";
             // 
             // lbInfo
             // 
-            this.lbInfo.AutoSize = true;
-            this.lbInfo.Location = new System.Drawing.Point(12, 98);
-            this.lbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(399, 20);
-            this.lbInfo.TabIndex = 52;
-            this.lbInfo.Text = "You can use dialog or code to configure format settings";
+            lbInfo.AutoSize = true;
+            lbInfo.Location = new System.Drawing.Point(13, 122);
+            lbInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbInfo.Name = "lbInfo";
+            lbInfo.Size = new System.Drawing.Size(454, 25);
+            lbInfo.TabIndex = 52;
+            lbInfo.Text = "You can use dialog or code to configure format settings";
             // 
             // btConfigure
             // 
-            this.btConfigure.Location = new System.Drawing.Point(16, 132);
-            this.btConfigure.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btConfigure.Name = "btConfigure";
-            this.btConfigure.Size = new System.Drawing.Size(92, 35);
-            this.btConfigure.TabIndex = 32;
-            this.btConfigure.Text = "Configure";
-            this.btConfigure.UseVisualStyleBackColor = true;
-            this.btConfigure.Click += new System.EventHandler(this.btConfigure_Click);
+            btConfigure.Location = new System.Drawing.Point(18, 165);
+            btConfigure.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btConfigure.Name = "btConfigure";
+            btConfigure.Size = new System.Drawing.Size(102, 44);
+            btConfigure.TabIndex = 32;
+            btConfigure.Text = "Configure";
+            btConfigure.UseVisualStyleBackColor = true;
+            btConfigure.Click += btConfigure_Click;
             // 
             // btSelectOutput
             // 
-            this.btSelectOutput.Location = new System.Drawing.Point(366, 232);
-            this.btSelectOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSelectOutput.Name = "btSelectOutput";
-            this.btSelectOutput.Size = new System.Drawing.Size(39, 35);
-            this.btSelectOutput.TabIndex = 31;
-            this.btSelectOutput.Text = "...";
-            this.btSelectOutput.UseVisualStyleBackColor = true;
-            this.btSelectOutput.Click += new System.EventHandler(this.btSelectOutput_Click);
+            btSelectOutput.Location = new System.Drawing.Point(407, 290);
+            btSelectOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectOutput.Name = "btSelectOutput";
+            btSelectOutput.Size = new System.Drawing.Size(43, 44);
+            btSelectOutput.TabIndex = 31;
+            btSelectOutput.Text = "...";
+            btSelectOutput.UseVisualStyleBackColor = true;
+            btSelectOutput.Click += btSelectOutput_Click;
             // 
             // edOutput
             // 
-            this.edOutput.Location = new System.Drawing.Point(16, 235);
-            this.edOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edOutput.Name = "edOutput";
-            this.edOutput.Size = new System.Drawing.Size(338, 26);
-            this.edOutput.TabIndex = 30;
-            this.edOutput.Text = "c:\\vf\\video_edit_output.avi";
+            edOutput.Location = new System.Drawing.Point(18, 294);
+            edOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOutput.Name = "edOutput";
+            edOutput.Size = new System.Drawing.Size(375, 31);
+            edOutput.TabIndex = 30;
+            edOutput.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 208);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(78, 20);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "File name";
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(13, 260);
+            label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(87, 25);
+            label15.TabIndex = 29;
+            label15.Text = "File name";
             // 
             // cbOutputVideoFormat
             // 
-            this.cbOutputVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbOutputVideoFormat.FormattingEnabled = true;
-            this.cbOutputVideoFormat.Items.AddRange(new object[] {
-            "AVI",
-            "MKV (Matroska)",
-            "WMV (Windows Media Video)",
-            "DV",
-            "PCM/ACM",
-            "MP3",
-            "M4A (AAC)",
-            "WMA (Windows Media Audio)",
-            "Ogg Vorbis",
-            "FLAC",
-            "Speex",
-            "Custom format",
-            "WebM",
-            "FFMPEG",
-            "FFMPEG (external exe)",
-            "MP4 (CPU)",
-            "MP4 (GPU: Intel, Nvidia, AMD/ATI)",
-            "Animated GIF",
-            "Encrypted video"});
-            this.cbOutputVideoFormat.Location = new System.Drawing.Point(16, 52);
-            this.cbOutputVideoFormat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbOutputVideoFormat.Name = "cbOutputVideoFormat";
-            this.cbOutputVideoFormat.Size = new System.Drawing.Size(386, 28);
-            this.cbOutputVideoFormat.TabIndex = 28;
-            this.cbOutputVideoFormat.SelectedIndexChanged += new System.EventHandler(this.cbOutputVideoFormat_SelectedIndexChanged);
+            cbOutputVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbOutputVideoFormat.FormattingEnabled = true;
+            cbOutputVideoFormat.Items.AddRange(new object[] { "AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video" });
+            cbOutputVideoFormat.Location = new System.Drawing.Point(18, 65);
+            cbOutputVideoFormat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbOutputVideoFormat.Name = "cbOutputVideoFormat";
+            cbOutputVideoFormat.Size = new System.Drawing.Size(428, 33);
+            cbOutputVideoFormat.TabIndex = 28;
+            cbOutputVideoFormat.SelectedIndexChanged += cbOutputVideoFormat_SelectedIndexChanged;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 25);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 20);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "Format";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(13, 31);
+            label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(69, 25);
+            label9.TabIndex = 27;
+            label9.Text = "Format";
             // 
             // tabPage48
             // 
-            this.tabPage48.Controls.Add(this.edCropRight);
-            this.tabPage48.Controls.Add(this.label176);
-            this.tabPage48.Controls.Add(this.edCropBottom);
-            this.tabPage48.Controls.Add(this.label252);
-            this.tabPage48.Controls.Add(this.edCropLeft);
-            this.tabPage48.Controls.Add(this.label270);
-            this.tabPage48.Controls.Add(this.edCropTop);
-            this.tabPage48.Controls.Add(this.label272);
-            this.tabPage48.Controls.Add(this.cbCrop);
-            this.tabPage48.Controls.Add(this.label92);
-            this.tabPage48.Controls.Add(this.cbRotate);
-            this.tabPage48.Controls.Add(this.cbFrameRate);
-            this.tabPage48.Controls.Add(this.label3);
-            this.tabPage48.Controls.Add(this.edHeight);
-            this.tabPage48.Controls.Add(this.edWidth);
-            this.tabPage48.Controls.Add(this.label2);
-            this.tabPage48.Controls.Add(this.cbResize);
-            this.tabPage48.Location = new System.Drawing.Point(4, 29);
-            this.tabPage48.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage48.Name = "tabPage48";
-            this.tabPage48.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage48.Size = new System.Drawing.Size(430, 709);
-            this.tabPage48.TabIndex = 14;
-            this.tabPage48.Text = "Resolution / frame rate";
-            this.tabPage48.UseVisualStyleBackColor = true;
+            tabPage48.Controls.Add(edCropRight);
+            tabPage48.Controls.Add(label176);
+            tabPage48.Controls.Add(edCropBottom);
+            tabPage48.Controls.Add(label252);
+            tabPage48.Controls.Add(edCropLeft);
+            tabPage48.Controls.Add(label270);
+            tabPage48.Controls.Add(edCropTop);
+            tabPage48.Controls.Add(label272);
+            tabPage48.Controls.Add(cbCrop);
+            tabPage48.Controls.Add(label92);
+            tabPage48.Controls.Add(cbRotate);
+            tabPage48.Controls.Add(cbFrameRate);
+            tabPage48.Controls.Add(label3);
+            tabPage48.Controls.Add(edHeight);
+            tabPage48.Controls.Add(edWidth);
+            tabPage48.Controls.Add(label2);
+            tabPage48.Controls.Add(cbResize);
+            tabPage48.Location = new System.Drawing.Point(4, 34);
+            tabPage48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage48.Name = "tabPage48";
+            tabPage48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage48.Size = new System.Drawing.Size(479, 890);
+            tabPage48.TabIndex = 14;
+            tabPage48.Text = "Resolution / frame rate";
+            tabPage48.UseVisualStyleBackColor = true;
             // 
             // edCropRight
             // 
-            this.edCropRight.Location = new System.Drawing.Point(273, 337);
-            this.edCropRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edCropRight.Name = "edCropRight";
-            this.edCropRight.Size = new System.Drawing.Size(52, 26);
-            this.edCropRight.TabIndex = 174;
-            this.edCropRight.Text = "0";
+            edCropRight.Location = new System.Drawing.Point(303, 421);
+            edCropRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCropRight.Name = "edCropRight";
+            edCropRight.Size = new System.Drawing.Size(57, 31);
+            edCropRight.TabIndex = 174;
+            edCropRight.Text = "0";
             // 
             // label176
             // 
-            this.label176.AutoSize = true;
-            this.label176.Location = new System.Drawing.Point(212, 343);
-            this.label176.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label176.Name = "label176";
-            this.label176.Size = new System.Drawing.Size(47, 20);
-            this.label176.TabIndex = 173;
-            this.label176.Text = "Right";
+            label176.AutoSize = true;
+            label176.Location = new System.Drawing.Point(236, 429);
+            label176.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label176.Name = "label176";
+            label176.Size = new System.Drawing.Size(54, 25);
+            label176.TabIndex = 173;
+            label176.Text = "Right";
             // 
             // edCropBottom
             // 
-            this.edCropBottom.Location = new System.Drawing.Point(130, 337);
-            this.edCropBottom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edCropBottom.Name = "edCropBottom";
-            this.edCropBottom.Size = new System.Drawing.Size(52, 26);
-            this.edCropBottom.TabIndex = 172;
-            this.edCropBottom.Text = "0";
+            edCropBottom.Location = new System.Drawing.Point(144, 421);
+            edCropBottom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCropBottom.Name = "edCropBottom";
+            edCropBottom.Size = new System.Drawing.Size(57, 31);
+            edCropBottom.TabIndex = 172;
+            edCropBottom.Text = "0";
             // 
             // label252
             // 
-            this.label252.AutoSize = true;
-            this.label252.Location = new System.Drawing.Point(62, 343);
-            this.label252.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label252.Name = "label252";
-            this.label252.Size = new System.Drawing.Size(61, 20);
-            this.label252.TabIndex = 171;
-            this.label252.Text = "Bottom";
+            label252.AutoSize = true;
+            label252.Location = new System.Drawing.Point(69, 429);
+            label252.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label252.Name = "label252";
+            label252.Size = new System.Drawing.Size(72, 25);
+            label252.TabIndex = 171;
+            label252.Text = "Bottom";
             // 
             // edCropLeft
             // 
-            this.edCropLeft.Location = new System.Drawing.Point(273, 297);
-            this.edCropLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edCropLeft.Name = "edCropLeft";
-            this.edCropLeft.Size = new System.Drawing.Size(52, 26);
-            this.edCropLeft.TabIndex = 170;
-            this.edCropLeft.Text = "0";
+            edCropLeft.Location = new System.Drawing.Point(303, 371);
+            edCropLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCropLeft.Name = "edCropLeft";
+            edCropLeft.Size = new System.Drawing.Size(57, 31);
+            edCropLeft.TabIndex = 170;
+            edCropLeft.Text = "0";
             // 
             // label270
             // 
-            this.label270.AutoSize = true;
-            this.label270.Location = new System.Drawing.Point(212, 303);
-            this.label270.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label270.Name = "label270";
-            this.label270.Size = new System.Drawing.Size(37, 20);
-            this.label270.TabIndex = 169;
-            this.label270.Text = "Left";
+            label270.AutoSize = true;
+            label270.Location = new System.Drawing.Point(236, 379);
+            label270.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label270.Name = "label270";
+            label270.Size = new System.Drawing.Size(41, 25);
+            label270.TabIndex = 169;
+            label270.Text = "Left";
             // 
             // edCropTop
             // 
-            this.edCropTop.Location = new System.Drawing.Point(130, 297);
-            this.edCropTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edCropTop.Name = "edCropTop";
-            this.edCropTop.Size = new System.Drawing.Size(52, 26);
-            this.edCropTop.TabIndex = 168;
-            this.edCropTop.Text = "0";
+            edCropTop.Location = new System.Drawing.Point(144, 371);
+            edCropTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCropTop.Name = "edCropTop";
+            edCropTop.Size = new System.Drawing.Size(57, 31);
+            edCropTop.TabIndex = 168;
+            edCropTop.Text = "0";
             // 
             // label272
             // 
-            this.label272.AutoSize = true;
-            this.label272.Location = new System.Drawing.Point(62, 303);
-            this.label272.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label272.Name = "label272";
-            this.label272.Size = new System.Drawing.Size(36, 20);
-            this.label272.TabIndex = 167;
-            this.label272.Text = "Top";
+            label272.AutoSize = true;
+            label272.Location = new System.Drawing.Point(69, 379);
+            label272.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label272.Name = "label272";
+            label272.Size = new System.Drawing.Size(41, 25);
+            label272.TabIndex = 167;
+            label272.Text = "Top";
             // 
             // cbCrop
             // 
-            this.cbCrop.AutoSize = true;
-            this.cbCrop.Location = new System.Drawing.Point(21, 263);
-            this.cbCrop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCrop.Name = "cbCrop";
-            this.cbCrop.Size = new System.Drawing.Size(69, 24);
-            this.cbCrop.TabIndex = 166;
-            this.cbCrop.Text = "Crop";
-            this.cbCrop.UseVisualStyleBackColor = true;
+            cbCrop.AutoSize = true;
+            cbCrop.Location = new System.Drawing.Point(23, 329);
+            cbCrop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCrop.Name = "cbCrop";
+            cbCrop.Size = new System.Drawing.Size(77, 29);
+            cbCrop.TabIndex = 166;
+            cbCrop.Text = "Crop";
+            cbCrop.UseVisualStyleBackColor = true;
             // 
             // label92
             // 
-            this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(16, 215);
-            this.label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(58, 20);
-            this.label92.TabIndex = 165;
-            this.label92.Text = "Rotate";
+            label92.AutoSize = true;
+            label92.Location = new System.Drawing.Point(18, 269);
+            label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label92.Name = "label92";
+            label92.Size = new System.Drawing.Size(63, 25);
+            label92.TabIndex = 165;
+            label92.Text = "Rotate";
             // 
             // cbRotate
             // 
-            this.cbRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRotate.FormattingEnabled = true;
-            this.cbRotate.Items.AddRange(new object[] {
-            "0",
-            "90",
-            "180",
-            "270"});
-            this.cbRotate.Location = new System.Drawing.Point(130, 211);
-            this.cbRotate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbRotate.Name = "cbRotate";
-            this.cbRotate.Size = new System.Drawing.Size(178, 28);
-            this.cbRotate.TabIndex = 164;
+            cbRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbRotate.FormattingEnabled = true;
+            cbRotate.Items.AddRange(new object[] { "0", "90", "180", "270" });
+            cbRotate.Location = new System.Drawing.Point(144, 264);
+            cbRotate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbRotate.Name = "cbRotate";
+            cbRotate.Size = new System.Drawing.Size(197, 33);
+            cbRotate.TabIndex = 164;
             // 
             // cbFrameRate
             // 
-            this.cbFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFrameRate.FormattingEnabled = true;
-            this.cbFrameRate.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "5",
-            "10",
-            "12",
-            "15",
-            "20",
-            "25",
-            "30"});
-            this.cbFrameRate.Location = new System.Drawing.Point(21, 97);
-            this.cbFrameRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFrameRate.Name = "cbFrameRate";
-            this.cbFrameRate.Size = new System.Drawing.Size(85, 28);
-            this.cbFrameRate.TabIndex = 163;
+            cbFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbFrameRate.FormattingEnabled = true;
+            cbFrameRate.Items.AddRange(new object[] { "0", "1", "2", "5", "10", "12", "15", "20", "25", "30" });
+            cbFrameRate.Location = new System.Drawing.Point(23, 121);
+            cbFrameRate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFrameRate.Name = "cbFrameRate";
+            cbFrameRate.Size = new System.Drawing.Size(94, 33);
+            cbFrameRate.TabIndex = 163;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 72);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(417, 20);
-            this.label3.TabIndex = 162;
-            this.label3.Text = "Frame rate (Use 0 to have original, set before adding files)";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(18, 90);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(469, 25);
+            label3.TabIndex = 162;
+            label3.Text = "Frame rate (Use 0 to have original, set before adding files)";
             // 
             // edHeight
             // 
-            this.edHeight.Location = new System.Drawing.Point(238, 20);
-            this.edHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHeight.Name = "edHeight";
-            this.edHeight.Size = new System.Drawing.Size(70, 26);
-            this.edHeight.TabIndex = 161;
-            this.edHeight.Text = "576";
+            edHeight.Location = new System.Drawing.Point(264, 25);
+            edHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHeight.Name = "edHeight";
+            edHeight.Size = new System.Drawing.Size(77, 31);
+            edHeight.TabIndex = 161;
+            edHeight.Text = "576";
             // 
             // edWidth
             // 
-            this.edWidth.Location = new System.Drawing.Point(130, 20);
-            this.edWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edWidth.Name = "edWidth";
-            this.edWidth.Size = new System.Drawing.Size(70, 26);
-            this.edWidth.TabIndex = 160;
-            this.edWidth.Text = "768";
+            edWidth.Location = new System.Drawing.Point(144, 25);
+            edWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edWidth.Name = "edWidth";
+            edWidth.Size = new System.Drawing.Size(77, 31);
+            edWidth.TabIndex = 160;
+            edWidth.Text = "768";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(212, 25);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(16, 20);
-            this.label2.TabIndex = 159;
-            this.label2.Text = "x";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(236, 31);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(20, 25);
+            label2.TabIndex = 159;
+            label2.Text = "x";
             // 
             // cbResize
             // 
-            this.cbResize.AutoSize = true;
-            this.cbResize.Location = new System.Drawing.Point(21, 25);
-            this.cbResize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbResize.Name = "cbResize";
-            this.cbResize.Size = new System.Drawing.Size(84, 24);
-            this.cbResize.TabIndex = 158;
-            this.cbResize.Text = "Resize";
-            this.cbResize.UseVisualStyleBackColor = true;
+            cbResize.AutoSize = true;
+            cbResize.Location = new System.Drawing.Point(23, 31);
+            cbResize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbResize.Name = "cbResize";
+            cbResize.Size = new System.Drawing.Size(86, 29);
+            cbResize.TabIndex = 158;
+            cbResize.Text = "Resize";
+            cbResize.UseVisualStyleBackColor = true;
             // 
             // tabPage31
             // 
-            this.tabPage31.Controls.Add(this.tabControl17);
-            this.tabPage31.Location = new System.Drawing.Point(4, 29);
-            this.tabPage31.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage31.Name = "tabPage31";
-            this.tabPage31.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage31.Size = new System.Drawing.Size(457, 767);
-            this.tabPage31.TabIndex = 4;
-            this.tabPage31.Text = "Video processing";
-            this.tabPage31.UseVisualStyleBackColor = true;
+            tabPage31.Controls.Add(tabControl17);
+            tabPage31.Location = new System.Drawing.Point(4, 34);
+            tabPage31.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage31.Name = "tabPage31";
+            tabPage31.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage31.Size = new System.Drawing.Size(509, 962);
+            tabPage31.TabIndex = 4;
+            tabPage31.Text = "Video processing";
+            tabPage31.UseVisualStyleBackColor = true;
             // 
             // tabControl17
             // 
-            this.tabControl17.Controls.Add(this.tabPage68);
-            this.tabControl17.Controls.Add(this.tabPage69);
-            this.tabControl17.Controls.Add(this.tabPage59);
-            this.tabControl17.Controls.Add(this.tabPage15);
-            this.tabControl17.Controls.Add(this.tabPage20);
-            this.tabControl17.Controls.Add(this.tabPage70);
-            this.tabControl17.Controls.Add(this.tabPage82);
-            this.tabControl17.Controls.Add(this.tabPage83);
-            this.tabControl17.Location = new System.Drawing.Point(2, 9);
-            this.tabControl17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl17.Name = "tabControl17";
-            this.tabControl17.SelectedIndex = 0;
-            this.tabControl17.Size = new System.Drawing.Size(447, 746);
-            this.tabControl17.TabIndex = 37;
+            tabControl17.Controls.Add(tabPage68);
+            tabControl17.Controls.Add(tabPage69);
+            tabControl17.Controls.Add(tabPage59);
+            tabControl17.Controls.Add(tabPage15);
+            tabControl17.Controls.Add(tabPage20);
+            tabControl17.Controls.Add(tabPage70);
+            tabControl17.Controls.Add(tabPage82);
+            tabControl17.Controls.Add(tabPage83);
+            tabControl17.Location = new System.Drawing.Point(2, 11);
+            tabControl17.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl17.Name = "tabControl17";
+            tabControl17.SelectedIndex = 0;
+            tabControl17.Size = new System.Drawing.Size(497, 932);
+            tabControl17.TabIndex = 37;
             // 
             // tabPage68
             // 
-            this.tabPage68.Controls.Add(this.cbFlipY);
-            this.tabPage68.Controls.Add(this.cbFlipX);
-            this.tabPage68.Controls.Add(this.label201);
-            this.tabPage68.Controls.Add(this.label200);
-            this.tabPage68.Controls.Add(this.label199);
-            this.tabPage68.Controls.Add(this.label198);
-            this.tabPage68.Controls.Add(this.tabControl7);
-            this.tabPage68.Controls.Add(this.tbContrast);
-            this.tabPage68.Controls.Add(this.tbDarkness);
-            this.tabPage68.Controls.Add(this.tbLightness);
-            this.tabPage68.Controls.Add(this.tbSaturation);
-            this.tabPage68.Controls.Add(this.cbInvert);
-            this.tabPage68.Controls.Add(this.cbGreyscale);
-            this.tabPage68.Controls.Add(this.cbEffects);
-            this.tabPage68.Location = new System.Drawing.Point(4, 29);
-            this.tabPage68.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage68.Name = "tabPage68";
-            this.tabPage68.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage68.Size = new System.Drawing.Size(439, 713);
-            this.tabPage68.TabIndex = 0;
-            this.tabPage68.Text = "Effects";
-            this.tabPage68.UseVisualStyleBackColor = true;
+            tabPage68.Controls.Add(cbFlipY);
+            tabPage68.Controls.Add(cbFlipX);
+            tabPage68.Controls.Add(label201);
+            tabPage68.Controls.Add(label200);
+            tabPage68.Controls.Add(label199);
+            tabPage68.Controls.Add(label198);
+            tabPage68.Controls.Add(tabControl7);
+            tabPage68.Controls.Add(tbContrast);
+            tabPage68.Controls.Add(tbDarkness);
+            tabPage68.Controls.Add(tbLightness);
+            tabPage68.Controls.Add(tbSaturation);
+            tabPage68.Controls.Add(cbInvert);
+            tabPage68.Controls.Add(cbGreyscale);
+            tabPage68.Controls.Add(cbEffects);
+            tabPage68.Location = new System.Drawing.Point(4, 34);
+            tabPage68.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage68.Name = "tabPage68";
+            tabPage68.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage68.Size = new System.Drawing.Size(489, 894);
+            tabPage68.TabIndex = 0;
+            tabPage68.Text = "Effects";
+            tabPage68.UseVisualStyleBackColor = true;
             // 
             // cbFlipY
             // 
-            this.cbFlipY.AutoSize = true;
-            this.cbFlipY.Location = new System.Drawing.Point(315, 243);
-            this.cbFlipY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFlipY.Name = "cbFlipY";
-            this.cbFlipY.Size = new System.Drawing.Size(75, 24);
-            this.cbFlipY.TabIndex = 69;
-            this.cbFlipY.Text = "Flip Y";
-            this.cbFlipY.UseVisualStyleBackColor = true;
-            this.cbFlipY.CheckedChanged += new System.EventHandler(this.cbFlipY_CheckedChanged);
+            cbFlipY.AutoSize = true;
+            cbFlipY.Location = new System.Drawing.Point(350, 304);
+            cbFlipY.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipY.Name = "cbFlipY";
+            cbFlipY.Size = new System.Drawing.Size(81, 29);
+            cbFlipY.TabIndex = 69;
+            cbFlipY.Text = "Flip Y";
+            cbFlipY.UseVisualStyleBackColor = true;
+            cbFlipY.CheckedChanged += cbFlipY_CheckedChanged;
             // 
             // cbFlipX
             // 
-            this.cbFlipX.AutoSize = true;
-            this.cbFlipX.Location = new System.Drawing.Point(225, 243);
-            this.cbFlipX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFlipX.Name = "cbFlipX";
-            this.cbFlipX.Size = new System.Drawing.Size(75, 24);
-            this.cbFlipX.TabIndex = 68;
-            this.cbFlipX.Text = "Flip X";
-            this.cbFlipX.UseVisualStyleBackColor = true;
-            this.cbFlipX.CheckedChanged += new System.EventHandler(this.cbFlipX_CheckedChanged);
+            cbFlipX.AutoSize = true;
+            cbFlipX.Location = new System.Drawing.Point(250, 304);
+            cbFlipX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFlipX.Name = "cbFlipX";
+            cbFlipX.Size = new System.Drawing.Size(82, 29);
+            cbFlipX.TabIndex = 68;
+            cbFlipX.Text = "Flip X";
+            cbFlipX.UseVisualStyleBackColor = true;
+            cbFlipX.CheckedChanged += cbFlipX_CheckedChanged;
             // 
             // label201
             // 
-            this.label201.AutoSize = true;
-            this.label201.Location = new System.Drawing.Point(213, 135);
-            this.label201.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label201.Name = "label201";
-            this.label201.Size = new System.Drawing.Size(77, 20);
-            this.label201.TabIndex = 63;
-            this.label201.Text = "Darkness";
+            label201.AutoSize = true;
+            label201.Location = new System.Drawing.Point(237, 169);
+            label201.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label201.Name = "label201";
+            label201.Size = new System.Drawing.Size(84, 25);
+            label201.TabIndex = 63;
+            label201.Text = "Darkness";
             // 
             // label200
             // 
-            this.label200.AutoSize = true;
-            this.label200.Location = new System.Drawing.Point(9, 135);
-            this.label200.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label200.Name = "label200";
-            this.label200.Size = new System.Drawing.Size(70, 20);
-            this.label200.TabIndex = 62;
-            this.label200.Text = "Contrast";
+            label200.AutoSize = true;
+            label200.Location = new System.Drawing.Point(10, 169);
+            label200.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label200.Name = "label200";
+            label200.Size = new System.Drawing.Size(79, 25);
+            label200.TabIndex = 62;
+            label200.Text = "Contrast";
             // 
             // label199
             // 
-            this.label199.AutoSize = true;
-            this.label199.Location = new System.Drawing.Point(213, 55);
-            this.label199.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label199.Name = "label199";
-            this.label199.Size = new System.Drawing.Size(83, 20);
-            this.label199.TabIndex = 61;
-            this.label199.Text = "Saturation";
+            label199.AutoSize = true;
+            label199.Location = new System.Drawing.Point(237, 69);
+            label199.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label199.Name = "label199";
+            label199.Size = new System.Drawing.Size(93, 25);
+            label199.TabIndex = 61;
+            label199.Text = "Saturation";
             // 
             // label198
             // 
-            this.label198.AutoSize = true;
-            this.label198.Location = new System.Drawing.Point(9, 55);
-            this.label198.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label198.Name = "label198";
-            this.label198.Size = new System.Drawing.Size(78, 20);
-            this.label198.TabIndex = 60;
-            this.label198.Text = "Lightness";
+            label198.AutoSize = true;
+            label198.Location = new System.Drawing.Point(10, 69);
+            label198.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label198.Name = "label198";
+            label198.Size = new System.Drawing.Size(86, 25);
+            label198.TabIndex = 60;
+            label198.Text = "Lightness";
             // 
             // tabControl7
             // 
-            this.tabControl7.Controls.Add(this.tabPage29);
-            this.tabControl7.Controls.Add(this.tabPage42);
-            this.tabControl7.Controls.Add(this.tabPage22);
-            this.tabControl7.Controls.Add(this.tabPage23);
-            this.tabControl7.Controls.Add(this.tabPage43);
-            this.tabControl7.Location = new System.Drawing.Point(4, 285);
-            this.tabControl7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl7.Name = "tabControl7";
-            this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(424, 422);
-            this.tabControl7.TabIndex = 59;
+            tabControl7.Controls.Add(tabPage29);
+            tabControl7.Controls.Add(tabPage42);
+            tabControl7.Controls.Add(tabPage22);
+            tabControl7.Controls.Add(tabPage23);
+            tabControl7.Controls.Add(tabPage43);
+            tabControl7.Location = new System.Drawing.Point(4, 356);
+            tabControl7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl7.Name = "tabControl7";
+            tabControl7.SelectedIndex = 0;
+            tabControl7.Size = new System.Drawing.Size(471, 528);
+            tabControl7.TabIndex = 59;
             // 
             // tabPage29
             // 
-            this.tabPage29.Controls.Add(this.btTextLogoRemove);
-            this.tabPage29.Controls.Add(this.btTextLogoEdit);
-            this.tabPage29.Controls.Add(this.lbTextLogos);
-            this.tabPage29.Controls.Add(this.btTextLogoAdd);
-            this.tabPage29.Location = new System.Drawing.Point(4, 29);
-            this.tabPage29.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage29.Size = new System.Drawing.Size(416, 389);
-            this.tabPage29.TabIndex = 0;
-            this.tabPage29.Text = "Text logo";
-            this.tabPage29.UseVisualStyleBackColor = true;
+            tabPage29.Controls.Add(btTextLogoRemove);
+            tabPage29.Controls.Add(btTextLogoEdit);
+            tabPage29.Controls.Add(lbTextLogos);
+            tabPage29.Controls.Add(btTextLogoAdd);
+            tabPage29.Location = new System.Drawing.Point(4, 34);
+            tabPage29.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage29.Name = "tabPage29";
+            tabPage29.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage29.Size = new System.Drawing.Size(463, 490);
+            tabPage29.TabIndex = 0;
+            tabPage29.Text = "Text logo";
+            tabPage29.UseVisualStyleBackColor = true;
             // 
             // btTextLogoRemove
             // 
-            this.btTextLogoRemove.Location = new System.Drawing.Point(309, 331);
-            this.btTextLogoRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btTextLogoRemove.Name = "btTextLogoRemove";
-            this.btTextLogoRemove.Size = new System.Drawing.Size(88, 35);
-            this.btTextLogoRemove.TabIndex = 7;
-            this.btTextLogoRemove.Text = "Remove";
-            this.btTextLogoRemove.UseVisualStyleBackColor = true;
-            this.btTextLogoRemove.Click += new System.EventHandler(this.btTextLogoRemove_Click);
+            btTextLogoRemove.Location = new System.Drawing.Point(343, 414);
+            btTextLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoRemove.Name = "btTextLogoRemove";
+            btTextLogoRemove.Size = new System.Drawing.Size(98, 44);
+            btTextLogoRemove.TabIndex = 7;
+            btTextLogoRemove.Text = "Remove";
+            btTextLogoRemove.UseVisualStyleBackColor = true;
+            btTextLogoRemove.Click += btTextLogoRemove_Click;
             // 
             // btTextLogoEdit
             // 
-            this.btTextLogoEdit.Location = new System.Drawing.Point(111, 331);
-            this.btTextLogoEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btTextLogoEdit.Name = "btTextLogoEdit";
-            this.btTextLogoEdit.Size = new System.Drawing.Size(88, 35);
-            this.btTextLogoEdit.TabIndex = 6;
-            this.btTextLogoEdit.Text = "Edit";
-            this.btTextLogoEdit.UseVisualStyleBackColor = true;
-            this.btTextLogoEdit.Click += new System.EventHandler(this.btTextLogoEdit_Click);
+            btTextLogoEdit.Location = new System.Drawing.Point(123, 414);
+            btTextLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoEdit.Name = "btTextLogoEdit";
+            btTextLogoEdit.Size = new System.Drawing.Size(98, 44);
+            btTextLogoEdit.TabIndex = 6;
+            btTextLogoEdit.Text = "Edit";
+            btTextLogoEdit.UseVisualStyleBackColor = true;
+            btTextLogoEdit.Click += btTextLogoEdit_Click;
             // 
             // lbTextLogos
             // 
-            this.lbTextLogos.FormattingEnabled = true;
-            this.lbTextLogos.ItemHeight = 20;
-            this.lbTextLogos.Location = new System.Drawing.Point(15, 18);
-            this.lbTextLogos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbTextLogos.Name = "lbTextLogos";
-            this.lbTextLogos.Size = new System.Drawing.Size(384, 304);
-            this.lbTextLogos.TabIndex = 5;
+            lbTextLogos.FormattingEnabled = true;
+            lbTextLogos.ItemHeight = 25;
+            lbTextLogos.Location = new System.Drawing.Point(17, 22);
+            lbTextLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbTextLogos.Name = "lbTextLogos";
+            lbTextLogos.Size = new System.Drawing.Size(426, 379);
+            lbTextLogos.TabIndex = 5;
             // 
             // btTextLogoAdd
             // 
-            this.btTextLogoAdd.Location = new System.Drawing.Point(12, 331);
-            this.btTextLogoAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btTextLogoAdd.Name = "btTextLogoAdd";
-            this.btTextLogoAdd.Size = new System.Drawing.Size(88, 35);
-            this.btTextLogoAdd.TabIndex = 4;
-            this.btTextLogoAdd.Text = "Add";
-            this.btTextLogoAdd.UseVisualStyleBackColor = true;
-            this.btTextLogoAdd.Click += new System.EventHandler(this.btTextLogoAdd_Click);
+            btTextLogoAdd.Location = new System.Drawing.Point(13, 414);
+            btTextLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btTextLogoAdd.Name = "btTextLogoAdd";
+            btTextLogoAdd.Size = new System.Drawing.Size(98, 44);
+            btTextLogoAdd.TabIndex = 4;
+            btTextLogoAdd.Text = "Add";
+            btTextLogoAdd.UseVisualStyleBackColor = true;
+            btTextLogoAdd.Click += btTextLogoAdd_Click;
             // 
             // tabPage42
             // 
-            this.tabPage42.Controls.Add(this.btImageLogoRemove);
-            this.tabPage42.Controls.Add(this.btImageLogoEdit);
-            this.tabPage42.Controls.Add(this.lbImageLogos);
-            this.tabPage42.Controls.Add(this.btImageLogoAdd);
-            this.tabPage42.Location = new System.Drawing.Point(4, 29);
-            this.tabPage42.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage42.Name = "tabPage42";
-            this.tabPage42.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage42.Size = new System.Drawing.Size(416, 389);
-            this.tabPage42.TabIndex = 1;
-            this.tabPage42.Text = "Image logo";
-            this.tabPage42.UseVisualStyleBackColor = true;
+            tabPage42.Controls.Add(btImageLogoRemove);
+            tabPage42.Controls.Add(btImageLogoEdit);
+            tabPage42.Controls.Add(lbImageLogos);
+            tabPage42.Controls.Add(btImageLogoAdd);
+            tabPage42.Location = new System.Drawing.Point(4, 34);
+            tabPage42.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage42.Name = "tabPage42";
+            tabPage42.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage42.Size = new System.Drawing.Size(463, 490);
+            tabPage42.TabIndex = 1;
+            tabPage42.Text = "Image logo";
+            tabPage42.UseVisualStyleBackColor = true;
             // 
             // btImageLogoRemove
             // 
-            this.btImageLogoRemove.Location = new System.Drawing.Point(309, 331);
-            this.btImageLogoRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btImageLogoRemove.Name = "btImageLogoRemove";
-            this.btImageLogoRemove.Size = new System.Drawing.Size(88, 35);
-            this.btImageLogoRemove.TabIndex = 11;
-            this.btImageLogoRemove.Text = "Remove";
-            this.btImageLogoRemove.UseVisualStyleBackColor = true;
-            this.btImageLogoRemove.Click += new System.EventHandler(this.btImageLogoRemove_Click);
+            btImageLogoRemove.Location = new System.Drawing.Point(343, 414);
+            btImageLogoRemove.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoRemove.Name = "btImageLogoRemove";
+            btImageLogoRemove.Size = new System.Drawing.Size(98, 44);
+            btImageLogoRemove.TabIndex = 11;
+            btImageLogoRemove.Text = "Remove";
+            btImageLogoRemove.UseVisualStyleBackColor = true;
+            btImageLogoRemove.Click += btImageLogoRemove_Click;
             // 
             // btImageLogoEdit
             // 
-            this.btImageLogoEdit.Location = new System.Drawing.Point(111, 331);
-            this.btImageLogoEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btImageLogoEdit.Name = "btImageLogoEdit";
-            this.btImageLogoEdit.Size = new System.Drawing.Size(88, 35);
-            this.btImageLogoEdit.TabIndex = 10;
-            this.btImageLogoEdit.Text = "Edit";
-            this.btImageLogoEdit.UseVisualStyleBackColor = true;
-            this.btImageLogoEdit.Click += new System.EventHandler(this.btImageLogoEdit_Click);
+            btImageLogoEdit.Location = new System.Drawing.Point(123, 414);
+            btImageLogoEdit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoEdit.Name = "btImageLogoEdit";
+            btImageLogoEdit.Size = new System.Drawing.Size(98, 44);
+            btImageLogoEdit.TabIndex = 10;
+            btImageLogoEdit.Text = "Edit";
+            btImageLogoEdit.UseVisualStyleBackColor = true;
+            btImageLogoEdit.Click += btImageLogoEdit_Click;
             // 
             // lbImageLogos
             // 
-            this.lbImageLogos.FormattingEnabled = true;
-            this.lbImageLogos.ItemHeight = 20;
-            this.lbImageLogos.Location = new System.Drawing.Point(15, 18);
-            this.lbImageLogos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbImageLogos.Name = "lbImageLogos";
-            this.lbImageLogos.Size = new System.Drawing.Size(384, 304);
-            this.lbImageLogos.TabIndex = 9;
+            lbImageLogos.FormattingEnabled = true;
+            lbImageLogos.ItemHeight = 25;
+            lbImageLogos.Location = new System.Drawing.Point(17, 22);
+            lbImageLogos.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbImageLogos.Name = "lbImageLogos";
+            lbImageLogos.Size = new System.Drawing.Size(426, 379);
+            lbImageLogos.TabIndex = 9;
             // 
             // btImageLogoAdd
             // 
-            this.btImageLogoAdd.Location = new System.Drawing.Point(12, 331);
-            this.btImageLogoAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btImageLogoAdd.Name = "btImageLogoAdd";
-            this.btImageLogoAdd.Size = new System.Drawing.Size(88, 35);
-            this.btImageLogoAdd.TabIndex = 8;
-            this.btImageLogoAdd.Text = "Add";
-            this.btImageLogoAdd.UseVisualStyleBackColor = true;
-            this.btImageLogoAdd.Click += new System.EventHandler(this.btImageLogoAdd_Click);
+            btImageLogoAdd.Location = new System.Drawing.Point(13, 414);
+            btImageLogoAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btImageLogoAdd.Name = "btImageLogoAdd";
+            btImageLogoAdd.Size = new System.Drawing.Size(98, 44);
+            btImageLogoAdd.TabIndex = 8;
+            btImageLogoAdd.Text = "Add";
+            btImageLogoAdd.UseVisualStyleBackColor = true;
+            btImageLogoAdd.Click += btImageLogoAdd_Click;
             // 
             // tabPage22
             // 
-            this.tabPage22.Controls.Add(this.groupBox37);
-            this.tabPage22.Controls.Add(this.cbZoom);
-            this.tabPage22.Location = new System.Drawing.Point(4, 29);
-            this.tabPage22.Name = "tabPage22";
-            this.tabPage22.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage22.Size = new System.Drawing.Size(416, 389);
-            this.tabPage22.TabIndex = 2;
-            this.tabPage22.Text = "Zoom";
-            this.tabPage22.UseVisualStyleBackColor = true;
+            tabPage22.Controls.Add(groupBox37);
+            tabPage22.Controls.Add(cbZoom);
+            tabPage22.Location = new System.Drawing.Point(4, 34);
+            tabPage22.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage22.Name = "tabPage22";
+            tabPage22.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage22.Size = new System.Drawing.Size(463, 490);
+            tabPage22.TabIndex = 2;
+            tabPage22.Text = "Zoom";
+            tabPage22.UseVisualStyleBackColor = true;
             // 
             // groupBox37
             // 
-            this.groupBox37.Controls.Add(this.btEffZoomRight);
-            this.groupBox37.Controls.Add(this.btEffZoomLeft);
-            this.groupBox37.Controls.Add(this.btEffZoomOut);
-            this.groupBox37.Controls.Add(this.btEffZoomIn);
-            this.groupBox37.Controls.Add(this.btEffZoomDown);
-            this.groupBox37.Controls.Add(this.btEffZoomUp);
-            this.groupBox37.Location = new System.Drawing.Point(129, 78);
-            this.groupBox37.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox37.Name = "groupBox37";
-            this.groupBox37.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox37.Size = new System.Drawing.Size(178, 160);
-            this.groupBox37.TabIndex = 18;
-            this.groupBox37.TabStop = false;
-            this.groupBox37.Text = "Zoom";
+            groupBox37.Controls.Add(btEffZoomRight);
+            groupBox37.Controls.Add(btEffZoomLeft);
+            groupBox37.Controls.Add(btEffZoomOut);
+            groupBox37.Controls.Add(btEffZoomIn);
+            groupBox37.Controls.Add(btEffZoomDown);
+            groupBox37.Controls.Add(btEffZoomUp);
+            groupBox37.Location = new System.Drawing.Point(143, 98);
+            groupBox37.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox37.Name = "groupBox37";
+            groupBox37.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox37.Size = new System.Drawing.Size(198, 200);
+            groupBox37.TabIndex = 18;
+            groupBox37.TabStop = false;
+            groupBox37.Text = "Zoom";
             // 
             // btEffZoomRight
             // 
-            this.btEffZoomRight.Location = new System.Drawing.Point(128, 51);
-            this.btEffZoomRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomRight.Name = "btEffZoomRight";
-            this.btEffZoomRight.Size = new System.Drawing.Size(32, 74);
-            this.btEffZoomRight.TabIndex = 5;
-            this.btEffZoomRight.Text = "R";
-            this.btEffZoomRight.UseVisualStyleBackColor = true;
-            this.btEffZoomRight.Click += new System.EventHandler(this.btEffZoomRight_Click);
+            btEffZoomRight.Location = new System.Drawing.Point(142, 64);
+            btEffZoomRight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomRight.Name = "btEffZoomRight";
+            btEffZoomRight.Size = new System.Drawing.Size(36, 92);
+            btEffZoomRight.TabIndex = 5;
+            btEffZoomRight.Text = "R";
+            btEffZoomRight.UseVisualStyleBackColor = true;
+            btEffZoomRight.Click += btEffZoomRight_Click;
             // 
             // btEffZoomLeft
             // 
-            this.btEffZoomLeft.Location = new System.Drawing.Point(20, 49);
-            this.btEffZoomLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomLeft.Name = "btEffZoomLeft";
-            this.btEffZoomLeft.Size = new System.Drawing.Size(32, 74);
-            this.btEffZoomLeft.TabIndex = 4;
-            this.btEffZoomLeft.Text = "L";
-            this.btEffZoomLeft.UseVisualStyleBackColor = true;
-            this.btEffZoomLeft.Click += new System.EventHandler(this.btEffZoomLeft_Click);
+            btEffZoomLeft.Location = new System.Drawing.Point(22, 61);
+            btEffZoomLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomLeft.Name = "btEffZoomLeft";
+            btEffZoomLeft.Size = new System.Drawing.Size(36, 92);
+            btEffZoomLeft.TabIndex = 4;
+            btEffZoomLeft.Text = "L";
+            btEffZoomLeft.UseVisualStyleBackColor = true;
+            btEffZoomLeft.Click += btEffZoomLeft_Click;
             // 
             // btEffZoomOut
             // 
-            this.btEffZoomOut.Location = new System.Drawing.Point(92, 69);
-            this.btEffZoomOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomOut.Name = "btEffZoomOut";
-            this.btEffZoomOut.Size = new System.Drawing.Size(34, 35);
-            this.btEffZoomOut.TabIndex = 3;
-            this.btEffZoomOut.Text = "-";
-            this.btEffZoomOut.UseVisualStyleBackColor = true;
-            this.btEffZoomOut.Click += new System.EventHandler(this.btEffZoomOut_Click);
+            btEffZoomOut.Location = new System.Drawing.Point(102, 86);
+            btEffZoomOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomOut.Name = "btEffZoomOut";
+            btEffZoomOut.Size = new System.Drawing.Size(38, 44);
+            btEffZoomOut.TabIndex = 3;
+            btEffZoomOut.Text = "-";
+            btEffZoomOut.UseVisualStyleBackColor = true;
+            btEffZoomOut.Click += btEffZoomOut_Click;
             // 
             // btEffZoomIn
             // 
-            this.btEffZoomIn.Location = new System.Drawing.Point(52, 69);
-            this.btEffZoomIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomIn.Name = "btEffZoomIn";
-            this.btEffZoomIn.Size = new System.Drawing.Size(33, 35);
-            this.btEffZoomIn.TabIndex = 2;
-            this.btEffZoomIn.Text = "+";
-            this.btEffZoomIn.UseVisualStyleBackColor = true;
-            this.btEffZoomIn.Click += new System.EventHandler(this.btEffZoomIn_Click);
+            btEffZoomIn.Location = new System.Drawing.Point(58, 86);
+            btEffZoomIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomIn.Name = "btEffZoomIn";
+            btEffZoomIn.Size = new System.Drawing.Size(37, 44);
+            btEffZoomIn.TabIndex = 2;
+            btEffZoomIn.Text = "+";
+            btEffZoomIn.UseVisualStyleBackColor = true;
+            btEffZoomIn.Click += btEffZoomIn_Click;
             // 
             // btEffZoomDown
             // 
-            this.btEffZoomDown.Location = new System.Drawing.Point(51, 106);
-            this.btEffZoomDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomDown.Name = "btEffZoomDown";
-            this.btEffZoomDown.Size = new System.Drawing.Size(76, 35);
-            this.btEffZoomDown.TabIndex = 1;
-            this.btEffZoomDown.Text = "Down";
-            this.btEffZoomDown.UseVisualStyleBackColor = true;
-            this.btEffZoomDown.Click += new System.EventHandler(this.btEffZoomDown_Click);
+            btEffZoomDown.Location = new System.Drawing.Point(57, 132);
+            btEffZoomDown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomDown.Name = "btEffZoomDown";
+            btEffZoomDown.Size = new System.Drawing.Size(84, 44);
+            btEffZoomDown.TabIndex = 1;
+            btEffZoomDown.Text = "Down";
+            btEffZoomDown.UseVisualStyleBackColor = true;
+            btEffZoomDown.Click += btEffZoomDown_Click;
             // 
             // btEffZoomUp
             // 
-            this.btEffZoomUp.Location = new System.Drawing.Point(51, 31);
-            this.btEffZoomUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEffZoomUp.Name = "btEffZoomUp";
-            this.btEffZoomUp.Size = new System.Drawing.Size(76, 35);
-            this.btEffZoomUp.TabIndex = 0;
-            this.btEffZoomUp.Text = "Up";
-            this.btEffZoomUp.UseVisualStyleBackColor = true;
-            this.btEffZoomUp.Click += new System.EventHandler(this.btEffZoomUp_Click);
+            btEffZoomUp.Location = new System.Drawing.Point(57, 39);
+            btEffZoomUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEffZoomUp.Name = "btEffZoomUp";
+            btEffZoomUp.Size = new System.Drawing.Size(84, 44);
+            btEffZoomUp.TabIndex = 0;
+            btEffZoomUp.Text = "Up";
+            btEffZoomUp.UseVisualStyleBackColor = true;
+            btEffZoomUp.Click += btEffZoomUp_Click;
             // 
             // cbZoom
             // 
-            this.cbZoom.AutoSize = true;
-            this.cbZoom.Location = new System.Drawing.Point(18, 23);
-            this.cbZoom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(94, 24);
-            this.cbZoom.TabIndex = 17;
-            this.cbZoom.Text = "Enabled";
-            this.cbZoom.UseVisualStyleBackColor = true;
-            this.cbZoom.CheckedChanged += new System.EventHandler(this.cbZoom_CheckedChanged);
+            cbZoom.AutoSize = true;
+            cbZoom.Location = new System.Drawing.Point(20, 29);
+            cbZoom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbZoom.Name = "cbZoom";
+            cbZoom.Size = new System.Drawing.Size(101, 29);
+            cbZoom.TabIndex = 17;
+            cbZoom.Text = "Enabled";
+            cbZoom.UseVisualStyleBackColor = true;
+            cbZoom.CheckedChanged += cbZoom_CheckedChanged;
             // 
             // tabPage23
             // 
-            this.tabPage23.Controls.Add(this.groupBox40);
-            this.tabPage23.Controls.Add(this.groupBox39);
-            this.tabPage23.Controls.Add(this.groupBox38);
-            this.tabPage23.Controls.Add(this.cbPan);
-            this.tabPage23.Location = new System.Drawing.Point(4, 29);
-            this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage23.Size = new System.Drawing.Size(416, 389);
-            this.tabPage23.TabIndex = 3;
-            this.tabPage23.Text = "Pan";
-            this.tabPage23.UseVisualStyleBackColor = true;
+            tabPage23.Controls.Add(groupBox40);
+            tabPage23.Controls.Add(groupBox39);
+            tabPage23.Controls.Add(groupBox38);
+            tabPage23.Controls.Add(cbPan);
+            tabPage23.Location = new System.Drawing.Point(4, 34);
+            tabPage23.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage23.Name = "tabPage23";
+            tabPage23.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage23.Size = new System.Drawing.Size(463, 490);
+            tabPage23.TabIndex = 3;
+            tabPage23.Text = "Pan";
+            tabPage23.UseVisualStyleBackColor = true;
             // 
             // groupBox40
             // 
-            this.groupBox40.Controls.Add(this.edPanDestHeight);
-            this.groupBox40.Controls.Add(this.label302);
-            this.groupBox40.Controls.Add(this.edPanDestWidth);
-            this.groupBox40.Controls.Add(this.label303);
-            this.groupBox40.Controls.Add(this.edPanDestTop);
-            this.groupBox40.Controls.Add(this.label304);
-            this.groupBox40.Controls.Add(this.edPanDestLeft);
-            this.groupBox40.Controls.Add(this.label305);
-            this.groupBox40.Location = new System.Drawing.Point(18, 249);
-            this.groupBox40.Name = "groupBox40";
-            this.groupBox40.Size = new System.Drawing.Size(252, 118);
-            this.groupBox40.TabIndex = 58;
-            this.groupBox40.TabStop = false;
-            this.groupBox40.Text = "Destination rect";
+            groupBox40.Controls.Add(edPanDestHeight);
+            groupBox40.Controls.Add(label302);
+            groupBox40.Controls.Add(edPanDestWidth);
+            groupBox40.Controls.Add(label303);
+            groupBox40.Controls.Add(edPanDestTop);
+            groupBox40.Controls.Add(label304);
+            groupBox40.Controls.Add(edPanDestLeft);
+            groupBox40.Controls.Add(label305);
+            groupBox40.Location = new System.Drawing.Point(20, 311);
+            groupBox40.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox40.Name = "groupBox40";
+            groupBox40.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox40.Size = new System.Drawing.Size(280, 148);
+            groupBox40.TabIndex = 58;
+            groupBox40.TabStop = false;
+            groupBox40.Text = "Destination rect";
             // 
             // edPanDestHeight
             // 
-            this.edPanDestHeight.Location = new System.Drawing.Point(184, 78);
-            this.edPanDestHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanDestHeight.Name = "edPanDestHeight";
-            this.edPanDestHeight.Size = new System.Drawing.Size(48, 26);
-            this.edPanDestHeight.TabIndex = 17;
-            this.edPanDestHeight.Text = "240";
+            edPanDestHeight.Location = new System.Drawing.Point(204, 98);
+            edPanDestHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestHeight.Name = "edPanDestHeight";
+            edPanDestHeight.Size = new System.Drawing.Size(53, 31);
+            edPanDestHeight.TabIndex = 17;
+            edPanDestHeight.Text = "240";
             // 
             // label302
             // 
-            this.label302.AutoSize = true;
-            this.label302.Location = new System.Drawing.Point(122, 83);
-            this.label302.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label302.Name = "label302";
-            this.label302.Size = new System.Drawing.Size(56, 20);
-            this.label302.TabIndex = 16;
-            this.label302.Text = "Height";
+            label302.AutoSize = true;
+            label302.Location = new System.Drawing.Point(136, 104);
+            label302.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label302.Name = "label302";
+            label302.Size = new System.Drawing.Size(65, 25);
+            label302.TabIndex = 16;
+            label302.Text = "Height";
             // 
             // edPanDestWidth
             // 
-            this.edPanDestWidth.Location = new System.Drawing.Point(184, 38);
-            this.edPanDestWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanDestWidth.Name = "edPanDestWidth";
-            this.edPanDestWidth.Size = new System.Drawing.Size(48, 26);
-            this.edPanDestWidth.TabIndex = 15;
-            this.edPanDestWidth.Text = "320";
+            edPanDestWidth.Location = new System.Drawing.Point(204, 48);
+            edPanDestWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestWidth.Name = "edPanDestWidth";
+            edPanDestWidth.Size = new System.Drawing.Size(53, 31);
+            edPanDestWidth.TabIndex = 15;
+            edPanDestWidth.Text = "320";
             // 
             // label303
             // 
-            this.label303.AutoSize = true;
-            this.label303.Location = new System.Drawing.Point(122, 43);
-            this.label303.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label303.Name = "label303";
-            this.label303.Size = new System.Drawing.Size(50, 20);
-            this.label303.TabIndex = 14;
-            this.label303.Text = "Width";
+            label303.AutoSize = true;
+            label303.Location = new System.Drawing.Point(136, 54);
+            label303.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label303.Name = "label303";
+            label303.Size = new System.Drawing.Size(60, 25);
+            label303.TabIndex = 14;
+            label303.Text = "Width";
             // 
             // edPanDestTop
             // 
-            this.edPanDestTop.Location = new System.Drawing.Point(64, 80);
-            this.edPanDestTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanDestTop.Name = "edPanDestTop";
-            this.edPanDestTop.Size = new System.Drawing.Size(48, 26);
-            this.edPanDestTop.TabIndex = 12;
-            this.edPanDestTop.Text = "0";
+            edPanDestTop.Location = new System.Drawing.Point(71, 100);
+            edPanDestTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestTop.Name = "edPanDestTop";
+            edPanDestTop.Size = new System.Drawing.Size(53, 31);
+            edPanDestTop.TabIndex = 12;
+            edPanDestTop.Text = "0";
             // 
             // label304
             // 
-            this.label304.AutoSize = true;
-            this.label304.Location = new System.Drawing.Point(20, 83);
-            this.label304.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label304.Name = "label304";
-            this.label304.Size = new System.Drawing.Size(36, 20);
-            this.label304.TabIndex = 11;
-            this.label304.Text = "Top";
+            label304.AutoSize = true;
+            label304.Location = new System.Drawing.Point(22, 104);
+            label304.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label304.Name = "label304";
+            label304.Size = new System.Drawing.Size(41, 25);
+            label304.TabIndex = 11;
+            label304.Text = "Top";
             // 
             // edPanDestLeft
             // 
-            this.edPanDestLeft.Location = new System.Drawing.Point(64, 40);
-            this.edPanDestLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanDestLeft.Name = "edPanDestLeft";
-            this.edPanDestLeft.Size = new System.Drawing.Size(48, 26);
-            this.edPanDestLeft.TabIndex = 10;
-            this.edPanDestLeft.Text = "0";
+            edPanDestLeft.Location = new System.Drawing.Point(71, 50);
+            edPanDestLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanDestLeft.Name = "edPanDestLeft";
+            edPanDestLeft.Size = new System.Drawing.Size(53, 31);
+            edPanDestLeft.TabIndex = 10;
+            edPanDestLeft.Text = "0";
             // 
             // label305
             // 
-            this.label305.AutoSize = true;
-            this.label305.Location = new System.Drawing.Point(20, 43);
-            this.label305.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label305.Name = "label305";
-            this.label305.Size = new System.Drawing.Size(37, 20);
-            this.label305.TabIndex = 9;
-            this.label305.Text = "Left";
+            label305.AutoSize = true;
+            label305.Location = new System.Drawing.Point(22, 54);
+            label305.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label305.Name = "label305";
+            label305.Size = new System.Drawing.Size(41, 25);
+            label305.TabIndex = 9;
+            label305.Text = "Left";
             // 
             // groupBox39
             // 
-            this.groupBox39.Controls.Add(this.edPanSourceHeight);
-            this.groupBox39.Controls.Add(this.label298);
-            this.groupBox39.Controls.Add(this.edPanSourceWidth);
-            this.groupBox39.Controls.Add(this.label299);
-            this.groupBox39.Controls.Add(this.edPanSourceTop);
-            this.groupBox39.Controls.Add(this.label300);
-            this.groupBox39.Controls.Add(this.edPanSourceLeft);
-            this.groupBox39.Controls.Add(this.label301);
-            this.groupBox39.Location = new System.Drawing.Point(18, 123);
-            this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Size = new System.Drawing.Size(252, 118);
-            this.groupBox39.TabIndex = 57;
-            this.groupBox39.TabStop = false;
-            this.groupBox39.Text = "Source rect";
+            groupBox39.Controls.Add(edPanSourceHeight);
+            groupBox39.Controls.Add(label298);
+            groupBox39.Controls.Add(edPanSourceWidth);
+            groupBox39.Controls.Add(label299);
+            groupBox39.Controls.Add(edPanSourceTop);
+            groupBox39.Controls.Add(label300);
+            groupBox39.Controls.Add(edPanSourceLeft);
+            groupBox39.Controls.Add(label301);
+            groupBox39.Location = new System.Drawing.Point(20, 154);
+            groupBox39.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox39.Name = "groupBox39";
+            groupBox39.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            groupBox39.Size = new System.Drawing.Size(280, 148);
+            groupBox39.TabIndex = 57;
+            groupBox39.TabStop = false;
+            groupBox39.Text = "Source rect";
             // 
             // edPanSourceHeight
             // 
-            this.edPanSourceHeight.Location = new System.Drawing.Point(184, 78);
-            this.edPanSourceHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanSourceHeight.Name = "edPanSourceHeight";
-            this.edPanSourceHeight.Size = new System.Drawing.Size(48, 26);
-            this.edPanSourceHeight.TabIndex = 17;
-            this.edPanSourceHeight.Text = "480";
+            edPanSourceHeight.Location = new System.Drawing.Point(204, 98);
+            edPanSourceHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceHeight.Name = "edPanSourceHeight";
+            edPanSourceHeight.Size = new System.Drawing.Size(53, 31);
+            edPanSourceHeight.TabIndex = 17;
+            edPanSourceHeight.Text = "480";
             // 
             // label298
             // 
-            this.label298.AutoSize = true;
-            this.label298.Location = new System.Drawing.Point(122, 83);
-            this.label298.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label298.Name = "label298";
-            this.label298.Size = new System.Drawing.Size(56, 20);
-            this.label298.TabIndex = 16;
-            this.label298.Text = "Height";
+            label298.AutoSize = true;
+            label298.Location = new System.Drawing.Point(136, 104);
+            label298.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label298.Name = "label298";
+            label298.Size = new System.Drawing.Size(65, 25);
+            label298.TabIndex = 16;
+            label298.Text = "Height";
             // 
             // edPanSourceWidth
             // 
-            this.edPanSourceWidth.Location = new System.Drawing.Point(184, 38);
-            this.edPanSourceWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanSourceWidth.Name = "edPanSourceWidth";
-            this.edPanSourceWidth.Size = new System.Drawing.Size(48, 26);
-            this.edPanSourceWidth.TabIndex = 15;
-            this.edPanSourceWidth.Text = "640";
+            edPanSourceWidth.Location = new System.Drawing.Point(204, 48);
+            edPanSourceWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceWidth.Name = "edPanSourceWidth";
+            edPanSourceWidth.Size = new System.Drawing.Size(53, 31);
+            edPanSourceWidth.TabIndex = 15;
+            edPanSourceWidth.Text = "640";
             // 
             // label299
             // 
-            this.label299.AutoSize = true;
-            this.label299.Location = new System.Drawing.Point(122, 43);
-            this.label299.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label299.Name = "label299";
-            this.label299.Size = new System.Drawing.Size(50, 20);
-            this.label299.TabIndex = 14;
-            this.label299.Text = "Width";
+            label299.AutoSize = true;
+            label299.Location = new System.Drawing.Point(136, 54);
+            label299.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label299.Name = "label299";
+            label299.Size = new System.Drawing.Size(60, 25);
+            label299.TabIndex = 14;
+            label299.Text = "Width";
             // 
             // edPanSourceTop
             // 
-            this.edPanSourceTop.Location = new System.Drawing.Point(64, 80);
-            this.edPanSourceTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanSourceTop.Name = "edPanSourceTop";
-            this.edPanSourceTop.Size = new System.Drawing.Size(48, 26);
-            this.edPanSourceTop.TabIndex = 12;
-            this.edPanSourceTop.Text = "0";
+            edPanSourceTop.Location = new System.Drawing.Point(71, 100);
+            edPanSourceTop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceTop.Name = "edPanSourceTop";
+            edPanSourceTop.Size = new System.Drawing.Size(53, 31);
+            edPanSourceTop.TabIndex = 12;
+            edPanSourceTop.Text = "0";
             // 
             // label300
             // 
-            this.label300.AutoSize = true;
-            this.label300.Location = new System.Drawing.Point(20, 83);
-            this.label300.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label300.Name = "label300";
-            this.label300.Size = new System.Drawing.Size(36, 20);
-            this.label300.TabIndex = 11;
-            this.label300.Text = "Top";
+            label300.AutoSize = true;
+            label300.Location = new System.Drawing.Point(22, 104);
+            label300.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label300.Name = "label300";
+            label300.Size = new System.Drawing.Size(41, 25);
+            label300.TabIndex = 11;
+            label300.Text = "Top";
             // 
             // edPanSourceLeft
             // 
-            this.edPanSourceLeft.Location = new System.Drawing.Point(64, 40);
-            this.edPanSourceLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanSourceLeft.Name = "edPanSourceLeft";
-            this.edPanSourceLeft.Size = new System.Drawing.Size(48, 26);
-            this.edPanSourceLeft.TabIndex = 10;
-            this.edPanSourceLeft.Text = "0";
+            edPanSourceLeft.Location = new System.Drawing.Point(71, 50);
+            edPanSourceLeft.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanSourceLeft.Name = "edPanSourceLeft";
+            edPanSourceLeft.Size = new System.Drawing.Size(53, 31);
+            edPanSourceLeft.TabIndex = 10;
+            edPanSourceLeft.Text = "0";
             // 
             // label301
             // 
-            this.label301.AutoSize = true;
-            this.label301.Location = new System.Drawing.Point(20, 43);
-            this.label301.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label301.Name = "label301";
-            this.label301.Size = new System.Drawing.Size(37, 20);
-            this.label301.TabIndex = 9;
-            this.label301.Text = "Left";
+            label301.AutoSize = true;
+            label301.Location = new System.Drawing.Point(22, 54);
+            label301.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label301.Name = "label301";
+            label301.Size = new System.Drawing.Size(41, 25);
+            label301.TabIndex = 9;
+            label301.Text = "Left";
             // 
             // groupBox38
             // 
-            this.groupBox38.Controls.Add(this.edPanStopTime);
-            this.groupBox38.Controls.Add(this.label296);
-            this.groupBox38.Controls.Add(this.edPanStartTime);
-            this.groupBox38.Controls.Add(this.label297);
-            this.groupBox38.Location = new System.Drawing.Point(18, 45);
-            this.groupBox38.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox38.Name = "groupBox38";
-            this.groupBox38.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox38.Size = new System.Drawing.Size(252, 71);
-            this.groupBox38.TabIndex = 56;
-            this.groupBox38.TabStop = false;
-            this.groupBox38.Text = "Duration";
+            groupBox38.Controls.Add(edPanStopTime);
+            groupBox38.Controls.Add(label296);
+            groupBox38.Controls.Add(edPanStartTime);
+            groupBox38.Controls.Add(label297);
+            groupBox38.Location = new System.Drawing.Point(20, 56);
+            groupBox38.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox38.Name = "groupBox38";
+            groupBox38.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox38.Size = new System.Drawing.Size(280, 89);
+            groupBox38.TabIndex = 56;
+            groupBox38.TabStop = false;
+            groupBox38.Text = "Duration";
             // 
             // edPanStopTime
             // 
-            this.edPanStopTime.Location = new System.Drawing.Point(176, 29);
-            this.edPanStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanStopTime.Name = "edPanStopTime";
-            this.edPanStopTime.Size = new System.Drawing.Size(56, 26);
-            this.edPanStopTime.TabIndex = 34;
-            this.edPanStopTime.Text = "15000";
-            this.edPanStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edPanStopTime.Location = new System.Drawing.Point(196, 36);
+            edPanStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanStopTime.Name = "edPanStopTime";
+            edPanStopTime.Size = new System.Drawing.Size(62, 31);
+            edPanStopTime.TabIndex = 34;
+            edPanStopTime.Text = "15000";
+            edPanStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label296
             // 
-            this.label296.AutoSize = true;
-            this.label296.Location = new System.Drawing.Point(132, 34);
-            this.label296.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label296.Name = "label296";
-            this.label296.Size = new System.Drawing.Size(43, 20);
-            this.label296.TabIndex = 33;
-            this.label296.Text = "Stop";
+            label296.AutoSize = true;
+            label296.Location = new System.Drawing.Point(147, 42);
+            label296.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label296.Name = "label296";
+            label296.Size = new System.Drawing.Size(49, 25);
+            label296.TabIndex = 33;
+            label296.Text = "Stop";
             // 
             // edPanStartTime
             // 
-            this.edPanStartTime.Location = new System.Drawing.Point(64, 29);
-            this.edPanStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edPanStartTime.Name = "edPanStartTime";
-            this.edPanStartTime.Size = new System.Drawing.Size(56, 26);
-            this.edPanStartTime.TabIndex = 32;
-            this.edPanStartTime.Text = "5000";
-            this.edPanStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edPanStartTime.Location = new System.Drawing.Point(71, 36);
+            edPanStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edPanStartTime.Name = "edPanStartTime";
+            edPanStartTime.Size = new System.Drawing.Size(62, 31);
+            edPanStartTime.TabIndex = 32;
+            edPanStartTime.Text = "5000";
+            edPanStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label297
             // 
-            this.label297.AutoSize = true;
-            this.label297.Location = new System.Drawing.Point(15, 34);
-            this.label297.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label297.Name = "label297";
-            this.label297.Size = new System.Drawing.Size(44, 20);
-            this.label297.TabIndex = 31;
-            this.label297.Text = "Start";
+            label297.AutoSize = true;
+            label297.Location = new System.Drawing.Point(17, 42);
+            label297.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label297.Name = "label297";
+            label297.Size = new System.Drawing.Size(48, 25);
+            label297.TabIndex = 31;
+            label297.Text = "Start";
             // 
             // cbPan
             // 
-            this.cbPan.AutoSize = true;
-            this.cbPan.Location = new System.Drawing.Point(18, 9);
-            this.cbPan.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbPan.Name = "cbPan";
-            this.cbPan.Size = new System.Drawing.Size(94, 24);
-            this.cbPan.TabIndex = 55;
-            this.cbPan.Text = "Enabled";
-            this.cbPan.UseVisualStyleBackColor = true;
-            this.cbPan.CheckedChanged += new System.EventHandler(this.cbPan_CheckedChanged);
+            cbPan.AutoSize = true;
+            cbPan.Location = new System.Drawing.Point(20, 11);
+            cbPan.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbPan.Name = "cbPan";
+            cbPan.Size = new System.Drawing.Size(101, 29);
+            cbPan.TabIndex = 55;
+            cbPan.Text = "Enabled";
+            cbPan.UseVisualStyleBackColor = true;
+            cbPan.CheckedChanged += cbPan_CheckedChanged;
             // 
             // tabPage43
             // 
-            this.tabPage43.Controls.Add(this.rbVideoFadeOut);
-            this.tabPage43.Controls.Add(this.rbVideoFadeIn);
-            this.tabPage43.Controls.Add(this.groupBox45);
-            this.tabPage43.Controls.Add(this.cbVideoFadeInOut);
-            this.tabPage43.Location = new System.Drawing.Point(4, 29);
-            this.tabPage43.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage43.Name = "tabPage43";
-            this.tabPage43.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage43.Size = new System.Drawing.Size(416, 389);
-            this.tabPage43.TabIndex = 4;
-            this.tabPage43.Text = "Fade-in/out";
-            this.tabPage43.UseVisualStyleBackColor = true;
+            tabPage43.Controls.Add(rbVideoFadeOut);
+            tabPage43.Controls.Add(rbVideoFadeIn);
+            tabPage43.Controls.Add(groupBox45);
+            tabPage43.Controls.Add(cbVideoFadeInOut);
+            tabPage43.Location = new System.Drawing.Point(4, 34);
+            tabPage43.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage43.Name = "tabPage43";
+            tabPage43.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage43.Size = new System.Drawing.Size(463, 490);
+            tabPage43.TabIndex = 4;
+            tabPage43.Text = "Fade-in/out";
+            tabPage43.UseVisualStyleBackColor = true;
             // 
             // rbVideoFadeOut
             // 
-            this.rbVideoFadeOut.AutoSize = true;
-            this.rbVideoFadeOut.Location = new System.Drawing.Point(160, 160);
-            this.rbVideoFadeOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbVideoFadeOut.Name = "rbVideoFadeOut";
-            this.rbVideoFadeOut.Size = new System.Drawing.Size(99, 24);
-            this.rbVideoFadeOut.TabIndex = 60;
-            this.rbVideoFadeOut.TabStop = true;
-            this.rbVideoFadeOut.Text = "Fade-out";
-            this.rbVideoFadeOut.UseVisualStyleBackColor = true;
+            rbVideoFadeOut.AutoSize = true;
+            rbVideoFadeOut.Location = new System.Drawing.Point(178, 200);
+            rbVideoFadeOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoFadeOut.Name = "rbVideoFadeOut";
+            rbVideoFadeOut.Size = new System.Drawing.Size(108, 29);
+            rbVideoFadeOut.TabIndex = 60;
+            rbVideoFadeOut.TabStop = true;
+            rbVideoFadeOut.Text = "Fade-out";
+            rbVideoFadeOut.UseVisualStyleBackColor = true;
             // 
             // rbVideoFadeIn
             // 
-            this.rbVideoFadeIn.AutoSize = true;
-            this.rbVideoFadeIn.Checked = true;
-            this.rbVideoFadeIn.Location = new System.Drawing.Point(24, 160);
-            this.rbVideoFadeIn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbVideoFadeIn.Name = "rbVideoFadeIn";
-            this.rbVideoFadeIn.Size = new System.Drawing.Size(88, 24);
-            this.rbVideoFadeIn.TabIndex = 59;
-            this.rbVideoFadeIn.TabStop = true;
-            this.rbVideoFadeIn.Text = "Fade-in";
-            this.rbVideoFadeIn.UseVisualStyleBackColor = true;
+            rbVideoFadeIn.AutoSize = true;
+            rbVideoFadeIn.Checked = true;
+            rbVideoFadeIn.Location = new System.Drawing.Point(27, 200);
+            rbVideoFadeIn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVideoFadeIn.Name = "rbVideoFadeIn";
+            rbVideoFadeIn.Size = new System.Drawing.Size(95, 29);
+            rbVideoFadeIn.TabIndex = 59;
+            rbVideoFadeIn.TabStop = true;
+            rbVideoFadeIn.Text = "Fade-in";
+            rbVideoFadeIn.UseVisualStyleBackColor = true;
             // 
             // groupBox45
             // 
-            this.groupBox45.Controls.Add(this.edVideoFadeInOutStopTime);
-            this.groupBox45.Controls.Add(this.label329);
-            this.groupBox45.Controls.Add(this.edVideoFadeInOutStartTime);
-            this.groupBox45.Controls.Add(this.label330);
-            this.groupBox45.Location = new System.Drawing.Point(24, 80);
-            this.groupBox45.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox45.Size = new System.Drawing.Size(252, 71);
-            this.groupBox45.TabIndex = 58;
-            this.groupBox45.TabStop = false;
-            this.groupBox45.Text = "Duration";
+            groupBox45.Controls.Add(edVideoFadeInOutStopTime);
+            groupBox45.Controls.Add(label329);
+            groupBox45.Controls.Add(edVideoFadeInOutStartTime);
+            groupBox45.Controls.Add(label330);
+            groupBox45.Location = new System.Drawing.Point(27, 100);
+            groupBox45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox45.Name = "groupBox45";
+            groupBox45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox45.Size = new System.Drawing.Size(280, 89);
+            groupBox45.TabIndex = 58;
+            groupBox45.TabStop = false;
+            groupBox45.Text = "Duration";
             // 
             // edVideoFadeInOutStopTime
             // 
-            this.edVideoFadeInOutStopTime.Location = new System.Drawing.Point(176, 29);
-            this.edVideoFadeInOutStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edVideoFadeInOutStopTime.Name = "edVideoFadeInOutStopTime";
-            this.edVideoFadeInOutStopTime.Size = new System.Drawing.Size(56, 26);
-            this.edVideoFadeInOutStopTime.TabIndex = 34;
-            this.edVideoFadeInOutStopTime.Text = "15000";
-            this.edVideoFadeInOutStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edVideoFadeInOutStopTime.Location = new System.Drawing.Point(196, 36);
+            edVideoFadeInOutStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edVideoFadeInOutStopTime.Name = "edVideoFadeInOutStopTime";
+            edVideoFadeInOutStopTime.Size = new System.Drawing.Size(62, 31);
+            edVideoFadeInOutStopTime.TabIndex = 34;
+            edVideoFadeInOutStopTime.Text = "15000";
+            edVideoFadeInOutStopTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label329
             // 
-            this.label329.AutoSize = true;
-            this.label329.Location = new System.Drawing.Point(132, 34);
-            this.label329.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label329.Name = "label329";
-            this.label329.Size = new System.Drawing.Size(43, 20);
-            this.label329.TabIndex = 33;
-            this.label329.Text = "Stop";
+            label329.AutoSize = true;
+            label329.Location = new System.Drawing.Point(147, 42);
+            label329.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label329.Name = "label329";
+            label329.Size = new System.Drawing.Size(49, 25);
+            label329.TabIndex = 33;
+            label329.Text = "Stop";
             // 
             // edVideoFadeInOutStartTime
             // 
-            this.edVideoFadeInOutStartTime.Location = new System.Drawing.Point(64, 29);
-            this.edVideoFadeInOutStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edVideoFadeInOutStartTime.Name = "edVideoFadeInOutStartTime";
-            this.edVideoFadeInOutStartTime.Size = new System.Drawing.Size(56, 26);
-            this.edVideoFadeInOutStartTime.TabIndex = 32;
-            this.edVideoFadeInOutStartTime.Text = "5000";
-            this.edVideoFadeInOutStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            edVideoFadeInOutStartTime.Location = new System.Drawing.Point(71, 36);
+            edVideoFadeInOutStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edVideoFadeInOutStartTime.Name = "edVideoFadeInOutStartTime";
+            edVideoFadeInOutStartTime.Size = new System.Drawing.Size(62, 31);
+            edVideoFadeInOutStartTime.TabIndex = 32;
+            edVideoFadeInOutStartTime.Text = "5000";
+            edVideoFadeInOutStartTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label330
             // 
-            this.label330.AutoSize = true;
-            this.label330.Location = new System.Drawing.Point(15, 34);
-            this.label330.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label330.Name = "label330";
-            this.label330.Size = new System.Drawing.Size(44, 20);
-            this.label330.TabIndex = 31;
-            this.label330.Text = "Start";
+            label330.AutoSize = true;
+            label330.Location = new System.Drawing.Point(17, 42);
+            label330.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label330.Name = "label330";
+            label330.Size = new System.Drawing.Size(48, 25);
+            label330.TabIndex = 31;
+            label330.Text = "Start";
             // 
             // cbVideoFadeInOut
             // 
-            this.cbVideoFadeInOut.AutoSize = true;
-            this.cbVideoFadeInOut.Location = new System.Drawing.Point(24, 28);
-            this.cbVideoFadeInOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVideoFadeInOut.Name = "cbVideoFadeInOut";
-            this.cbVideoFadeInOut.Size = new System.Drawing.Size(94, 24);
-            this.cbVideoFadeInOut.TabIndex = 57;
-            this.cbVideoFadeInOut.Text = "Enabled";
-            this.cbVideoFadeInOut.UseVisualStyleBackColor = true;
-            this.cbVideoFadeInOut.CheckedChanged += new System.EventHandler(this.cbFadeInOut_CheckedChanged);
+            cbVideoFadeInOut.AutoSize = true;
+            cbVideoFadeInOut.Location = new System.Drawing.Point(27, 35);
+            cbVideoFadeInOut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVideoFadeInOut.Name = "cbVideoFadeInOut";
+            cbVideoFadeInOut.Size = new System.Drawing.Size(101, 29);
+            cbVideoFadeInOut.TabIndex = 57;
+            cbVideoFadeInOut.Text = "Enabled";
+            cbVideoFadeInOut.UseVisualStyleBackColor = true;
+            cbVideoFadeInOut.CheckedChanged += cbFadeInOut_CheckedChanged;
             // 
             // tbContrast
             // 
-            this.tbContrast.BackColor = System.Drawing.SystemColors.Window;
-            this.tbContrast.Location = new System.Drawing.Point(4, 165);
-            this.tbContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbContrast.Maximum = 255;
-            this.tbContrast.Name = "tbContrast";
-            this.tbContrast.Size = new System.Drawing.Size(195, 69);
-            this.tbContrast.TabIndex = 49;
-            this.tbContrast.Scroll += new System.EventHandler(this.tbContrast_Scroll);
+            tbContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbContrast.Location = new System.Drawing.Point(4, 206);
+            tbContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbContrast.Maximum = 255;
+            tbContrast.Name = "tbContrast";
+            tbContrast.Size = new System.Drawing.Size(217, 69);
+            tbContrast.TabIndex = 49;
+            tbContrast.Scroll += tbContrast_Scroll;
             // 
             // tbDarkness
             // 
-            this.tbDarkness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbDarkness.Location = new System.Drawing.Point(213, 165);
-            this.tbDarkness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbDarkness.Maximum = 255;
-            this.tbDarkness.Name = "tbDarkness";
-            this.tbDarkness.Size = new System.Drawing.Size(195, 69);
-            this.tbDarkness.TabIndex = 46;
-            this.tbDarkness.Scroll += new System.EventHandler(this.tbDarkness_Scroll);
+            tbDarkness.BackColor = System.Drawing.SystemColors.Window;
+            tbDarkness.Location = new System.Drawing.Point(237, 206);
+            tbDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbDarkness.Maximum = 255;
+            tbDarkness.Name = "tbDarkness";
+            tbDarkness.Size = new System.Drawing.Size(217, 69);
+            tbDarkness.TabIndex = 46;
+            tbDarkness.Scroll += tbDarkness_Scroll;
             // 
             // tbLightness
             // 
-            this.tbLightness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbLightness.Location = new System.Drawing.Point(4, 78);
-            this.tbLightness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbLightness.Maximum = 255;
-            this.tbLightness.Name = "tbLightness";
-            this.tbLightness.Size = new System.Drawing.Size(195, 69);
-            this.tbLightness.TabIndex = 45;
-            this.tbLightness.Scroll += new System.EventHandler(this.tbLightness_Scroll);
+            tbLightness.BackColor = System.Drawing.SystemColors.Window;
+            tbLightness.Location = new System.Drawing.Point(4, 98);
+            tbLightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbLightness.Maximum = 255;
+            tbLightness.Name = "tbLightness";
+            tbLightness.Size = new System.Drawing.Size(217, 69);
+            tbLightness.TabIndex = 45;
+            tbLightness.Scroll += tbLightness_Scroll;
             // 
             // tbSaturation
             // 
-            this.tbSaturation.BackColor = System.Drawing.SystemColors.Window;
-            this.tbSaturation.Location = new System.Drawing.Point(213, 78);
-            this.tbSaturation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbSaturation.Maximum = 255;
-            this.tbSaturation.Name = "tbSaturation";
-            this.tbSaturation.Size = new System.Drawing.Size(195, 69);
-            this.tbSaturation.TabIndex = 43;
-            this.tbSaturation.Value = 255;
-            this.tbSaturation.Scroll += new System.EventHandler(this.tbSaturation_Scroll);
+            tbSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbSaturation.Location = new System.Drawing.Point(237, 98);
+            tbSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbSaturation.Maximum = 255;
+            tbSaturation.Name = "tbSaturation";
+            tbSaturation.Size = new System.Drawing.Size(217, 69);
+            tbSaturation.TabIndex = 43;
+            tbSaturation.Value = 255;
+            tbSaturation.Scroll += tbSaturation_Scroll;
             // 
             // cbInvert
             // 
-            this.cbInvert.AutoSize = true;
-            this.cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbInvert.Location = new System.Drawing.Point(135, 243);
-            this.cbInvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbInvert.Name = "cbInvert";
-            this.cbInvert.Size = new System.Drawing.Size(75, 24);
-            this.cbInvert.TabIndex = 41;
-            this.cbInvert.Text = "Invert";
-            this.cbInvert.UseVisualStyleBackColor = true;
-            this.cbInvert.CheckedChanged += new System.EventHandler(this.cbInvert_CheckedChanged);
+            cbInvert.AutoSize = true;
+            cbInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbInvert.Location = new System.Drawing.Point(150, 304);
+            cbInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbInvert.Name = "cbInvert";
+            cbInvert.Size = new System.Drawing.Size(83, 29);
+            cbInvert.TabIndex = 41;
+            cbInvert.Text = "Invert";
+            cbInvert.UseVisualStyleBackColor = true;
+            cbInvert.CheckedChanged += cbInvert_CheckedChanged;
             // 
             // cbGreyscale
             // 
-            this.cbGreyscale.AutoSize = true;
-            this.cbGreyscale.Location = new System.Drawing.Point(14, 243);
-            this.cbGreyscale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGreyscale.Name = "cbGreyscale";
-            this.cbGreyscale.Size = new System.Drawing.Size(106, 24);
-            this.cbGreyscale.TabIndex = 39;
-            this.cbGreyscale.Text = "Greyscale";
-            this.cbGreyscale.UseVisualStyleBackColor = true;
-            this.cbGreyscale.CheckedChanged += new System.EventHandler(this.cbGreyscale_CheckedChanged);
+            cbGreyscale.AutoSize = true;
+            cbGreyscale.Location = new System.Drawing.Point(16, 304);
+            cbGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGreyscale.Name = "cbGreyscale";
+            cbGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbGreyscale.TabIndex = 39;
+            cbGreyscale.Text = "Greyscale";
+            cbGreyscale.UseVisualStyleBackColor = true;
+            cbGreyscale.CheckedChanged += cbGreyscale_CheckedChanged;
             // 
             // cbEffects
             // 
-            this.cbEffects.AutoSize = true;
-            this.cbEffects.Checked = true;
-            this.cbEffects.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbEffects.Location = new System.Drawing.Point(12, 12);
-            this.cbEffects.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbEffects.Name = "cbEffects";
-            this.cbEffects.Size = new System.Drawing.Size(94, 24);
-            this.cbEffects.TabIndex = 37;
-            this.cbEffects.Text = "Enabled";
-            this.cbEffects.UseVisualStyleBackColor = true;
+            cbEffects.AutoSize = true;
+            cbEffects.Checked = true;
+            cbEffects.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbEffects.Location = new System.Drawing.Point(13, 15);
+            cbEffects.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbEffects.Name = "cbEffects";
+            cbEffects.Size = new System.Drawing.Size(101, 29);
+            cbEffects.TabIndex = 37;
+            cbEffects.Text = "Enabled";
+            cbEffects.UseVisualStyleBackColor = true;
             // 
             // tabPage69
             // 
-            this.tabPage69.Controls.Add(this.label211);
-            this.tabPage69.Controls.Add(this.edDeintTriangleWeight);
-            this.tabPage69.Controls.Add(this.label212);
-            this.tabPage69.Controls.Add(this.label210);
-            this.tabPage69.Controls.Add(this.label209);
-            this.tabPage69.Controls.Add(this.label206);
-            this.tabPage69.Controls.Add(this.edDeintBlendConstants2);
-            this.tabPage69.Controls.Add(this.label207);
-            this.tabPage69.Controls.Add(this.edDeintBlendConstants1);
-            this.tabPage69.Controls.Add(this.label208);
-            this.tabPage69.Controls.Add(this.label204);
-            this.tabPage69.Controls.Add(this.edDeintBlendThreshold2);
-            this.tabPage69.Controls.Add(this.label205);
-            this.tabPage69.Controls.Add(this.edDeintBlendThreshold1);
-            this.tabPage69.Controls.Add(this.label203);
-            this.tabPage69.Controls.Add(this.label202);
-            this.tabPage69.Controls.Add(this.edDeintCAVTThreshold);
-            this.tabPage69.Controls.Add(this.label104);
-            this.tabPage69.Controls.Add(this.rbDeintTriangleEnabled);
-            this.tabPage69.Controls.Add(this.rbDeintBlendEnabled);
-            this.tabPage69.Controls.Add(this.rbDeintCAVTEnabled);
-            this.tabPage69.Controls.Add(this.cbDeinterlace);
-            this.tabPage69.Location = new System.Drawing.Point(4, 29);
-            this.tabPage69.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage69.Name = "tabPage69";
-            this.tabPage69.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage69.Size = new System.Drawing.Size(439, 713);
-            this.tabPage69.TabIndex = 1;
-            this.tabPage69.Text = "Deinterlace";
-            this.tabPage69.UseVisualStyleBackColor = true;
+            tabPage69.Controls.Add(label211);
+            tabPage69.Controls.Add(edDeintTriangleWeight);
+            tabPage69.Controls.Add(label212);
+            tabPage69.Controls.Add(label210);
+            tabPage69.Controls.Add(label209);
+            tabPage69.Controls.Add(label206);
+            tabPage69.Controls.Add(edDeintBlendConstants2);
+            tabPage69.Controls.Add(label207);
+            tabPage69.Controls.Add(edDeintBlendConstants1);
+            tabPage69.Controls.Add(label208);
+            tabPage69.Controls.Add(label204);
+            tabPage69.Controls.Add(edDeintBlendThreshold2);
+            tabPage69.Controls.Add(label205);
+            tabPage69.Controls.Add(edDeintBlendThreshold1);
+            tabPage69.Controls.Add(label203);
+            tabPage69.Controls.Add(label202);
+            tabPage69.Controls.Add(edDeintCAVTThreshold);
+            tabPage69.Controls.Add(label104);
+            tabPage69.Controls.Add(rbDeintTriangleEnabled);
+            tabPage69.Controls.Add(rbDeintBlendEnabled);
+            tabPage69.Controls.Add(rbDeintCAVTEnabled);
+            tabPage69.Controls.Add(cbDeinterlace);
+            tabPage69.Location = new System.Drawing.Point(4, 34);
+            tabPage69.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage69.Name = "tabPage69";
+            tabPage69.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage69.Size = new System.Drawing.Size(489, 894);
+            tabPage69.TabIndex = 1;
+            tabPage69.Text = "Deinterlace";
+            tabPage69.UseVisualStyleBackColor = true;
             // 
             // label211
             // 
-            this.label211.AutoSize = true;
-            this.label211.Location = new System.Drawing.Point(150, 452);
-            this.label211.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(58, 20);
-            this.label211.TabIndex = 28;
-            this.label211.Text = "[0-255]";
+            label211.AutoSize = true;
+            label211.Location = new System.Drawing.Point(167, 565);
+            label211.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label211.Name = "label211";
+            label211.Size = new System.Drawing.Size(69, 25);
+            label211.TabIndex = 28;
+            label211.Text = "[0-255]";
             // 
             // edDeintTriangleWeight
             // 
-            this.edDeintTriangleWeight.Location = new System.Drawing.Point(154, 415);
-            this.edDeintTriangleWeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintTriangleWeight.Name = "edDeintTriangleWeight";
-            this.edDeintTriangleWeight.Size = new System.Drawing.Size(46, 26);
-            this.edDeintTriangleWeight.TabIndex = 27;
-            this.edDeintTriangleWeight.Text = "180";
+            edDeintTriangleWeight.Location = new System.Drawing.Point(171, 519);
+            edDeintTriangleWeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintTriangleWeight.Name = "edDeintTriangleWeight";
+            edDeintTriangleWeight.Size = new System.Drawing.Size(51, 31);
+            edDeintTriangleWeight.TabIndex = 27;
+            edDeintTriangleWeight.Text = "180";
             // 
             // label212
             // 
-            this.label212.AutoSize = true;
-            this.label212.Location = new System.Drawing.Point(51, 420);
-            this.label212.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label212.Name = "label212";
-            this.label212.Size = new System.Drawing.Size(59, 20);
-            this.label212.TabIndex = 26;
-            this.label212.Text = "Weight";
+            label212.AutoSize = true;
+            label212.Location = new System.Drawing.Point(57, 525);
+            label212.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label212.Name = "label212";
+            label212.Size = new System.Drawing.Size(68, 25);
+            label212.TabIndex = 26;
+            label212.Text = "Weight";
             // 
             // label210
             // 
-            this.label210.AutoSize = true;
-            this.label210.Location = new System.Drawing.Point(386, 295);
-            this.label210.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label210.Name = "label210";
-            this.label210.Size = new System.Drawing.Size(35, 20);
-            this.label210.TabIndex = 25;
-            this.label210.Text = "/ 10";
+            label210.AutoSize = true;
+            label210.Location = new System.Drawing.Point(429, 369);
+            label210.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label210.Name = "label210";
+            label210.Size = new System.Drawing.Size(44, 25);
+            label210.TabIndex = 25;
+            label210.Text = "/ 10";
             // 
             // label209
             // 
-            this.label209.AutoSize = true;
-            this.label209.Location = new System.Drawing.Point(386, 245);
-            this.label209.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label209.Name = "label209";
-            this.label209.Size = new System.Drawing.Size(35, 20);
-            this.label209.TabIndex = 24;
-            this.label209.Text = "/ 10";
+            label209.AutoSize = true;
+            label209.Location = new System.Drawing.Point(429, 306);
+            label209.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label209.Name = "label209";
+            label209.Size = new System.Drawing.Size(44, 25);
+            label209.TabIndex = 24;
+            label209.Text = "/ 10";
             // 
             // label206
             // 
-            this.label206.AutoSize = true;
-            this.label206.Location = new System.Drawing.Point(327, 328);
-            this.label206.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label206.Name = "label206";
-            this.label206.Size = new System.Drawing.Size(66, 20);
-            this.label206.TabIndex = 23;
-            this.label206.Text = "[0.0-1.0]";
+            label206.AutoSize = true;
+            label206.Location = new System.Drawing.Point(363, 410);
+            label206.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label206.Name = "label206";
+            label206.Size = new System.Drawing.Size(77, 25);
+            label206.TabIndex = 23;
+            label206.Text = "[0.0-1.0]";
             // 
             // edDeintBlendConstants2
             // 
-            this.edDeintBlendConstants2.Location = new System.Drawing.Point(332, 291);
-            this.edDeintBlendConstants2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintBlendConstants2.Name = "edDeintBlendConstants2";
-            this.edDeintBlendConstants2.Size = new System.Drawing.Size(46, 26);
-            this.edDeintBlendConstants2.TabIndex = 22;
-            this.edDeintBlendConstants2.Text = "9";
+            edDeintBlendConstants2.Location = new System.Drawing.Point(369, 364);
+            edDeintBlendConstants2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendConstants2.Name = "edDeintBlendConstants2";
+            edDeintBlendConstants2.Size = new System.Drawing.Size(51, 31);
+            edDeintBlendConstants2.TabIndex = 22;
+            edDeintBlendConstants2.Text = "9";
             // 
             // label207
             // 
-            this.label207.AutoSize = true;
-            this.label207.Location = new System.Drawing.Point(228, 295);
-            this.label207.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label207.Name = "label207";
-            this.label207.Size = new System.Drawing.Size(95, 20);
-            this.label207.TabIndex = 21;
-            this.label207.Text = "Constants 2";
+            label207.AutoSize = true;
+            label207.Location = new System.Drawing.Point(253, 369);
+            label207.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label207.Name = "label207";
+            label207.Size = new System.Drawing.Size(106, 25);
+            label207.TabIndex = 21;
+            label207.Text = "Constants 2";
             // 
             // edDeintBlendConstants1
             // 
-            this.edDeintBlendConstants1.Location = new System.Drawing.Point(332, 240);
-            this.edDeintBlendConstants1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintBlendConstants1.Name = "edDeintBlendConstants1";
-            this.edDeintBlendConstants1.Size = new System.Drawing.Size(46, 26);
-            this.edDeintBlendConstants1.TabIndex = 20;
-            this.edDeintBlendConstants1.Text = "3";
+            edDeintBlendConstants1.Location = new System.Drawing.Point(369, 300);
+            edDeintBlendConstants1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendConstants1.Name = "edDeintBlendConstants1";
+            edDeintBlendConstants1.Size = new System.Drawing.Size(51, 31);
+            edDeintBlendConstants1.TabIndex = 20;
+            edDeintBlendConstants1.Text = "3";
             // 
             // label208
             // 
-            this.label208.AutoSize = true;
-            this.label208.Location = new System.Drawing.Point(228, 245);
-            this.label208.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label208.Name = "label208";
-            this.label208.Size = new System.Drawing.Size(95, 20);
-            this.label208.TabIndex = 19;
-            this.label208.Text = "Constants 1";
+            label208.AutoSize = true;
+            label208.Location = new System.Drawing.Point(253, 306);
+            label208.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label208.Name = "label208";
+            label208.Size = new System.Drawing.Size(106, 25);
+            label208.TabIndex = 19;
+            label208.Text = "Constants 1";
             // 
             // label204
             // 
-            this.label204.AutoSize = true;
-            this.label204.Location = new System.Drawing.Point(150, 328);
-            this.label204.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label204.Name = "label204";
-            this.label204.Size = new System.Drawing.Size(58, 20);
-            this.label204.TabIndex = 18;
-            this.label204.Text = "[0-255]";
+            label204.AutoSize = true;
+            label204.Location = new System.Drawing.Point(167, 410);
+            label204.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label204.Name = "label204";
+            label204.Size = new System.Drawing.Size(69, 25);
+            label204.TabIndex = 18;
+            label204.Text = "[0-255]";
             // 
             // edDeintBlendThreshold2
             // 
-            this.edDeintBlendThreshold2.Location = new System.Drawing.Point(154, 291);
-            this.edDeintBlendThreshold2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintBlendThreshold2.Name = "edDeintBlendThreshold2";
-            this.edDeintBlendThreshold2.Size = new System.Drawing.Size(46, 26);
-            this.edDeintBlendThreshold2.TabIndex = 17;
-            this.edDeintBlendThreshold2.Text = "9";
+            edDeintBlendThreshold2.Location = new System.Drawing.Point(171, 364);
+            edDeintBlendThreshold2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendThreshold2.Name = "edDeintBlendThreshold2";
+            edDeintBlendThreshold2.Size = new System.Drawing.Size(51, 31);
+            edDeintBlendThreshold2.TabIndex = 17;
+            edDeintBlendThreshold2.Text = "9";
             // 
             // label205
             // 
-            this.label205.AutoSize = true;
-            this.label205.Location = new System.Drawing.Point(51, 295);
-            this.label205.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label205.Name = "label205";
-            this.label205.Size = new System.Drawing.Size(92, 20);
-            this.label205.TabIndex = 16;
-            this.label205.Text = "Threshold 2";
+            label205.AutoSize = true;
+            label205.Location = new System.Drawing.Point(57, 369);
+            label205.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label205.Name = "label205";
+            label205.Size = new System.Drawing.Size(105, 25);
+            label205.TabIndex = 16;
+            label205.Text = "Threshold 2";
             // 
             // edDeintBlendThreshold1
             // 
-            this.edDeintBlendThreshold1.Location = new System.Drawing.Point(154, 240);
-            this.edDeintBlendThreshold1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintBlendThreshold1.Name = "edDeintBlendThreshold1";
-            this.edDeintBlendThreshold1.Size = new System.Drawing.Size(46, 26);
-            this.edDeintBlendThreshold1.TabIndex = 15;
-            this.edDeintBlendThreshold1.Text = "5";
+            edDeintBlendThreshold1.Location = new System.Drawing.Point(171, 300);
+            edDeintBlendThreshold1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintBlendThreshold1.Name = "edDeintBlendThreshold1";
+            edDeintBlendThreshold1.Size = new System.Drawing.Size(51, 31);
+            edDeintBlendThreshold1.TabIndex = 15;
+            edDeintBlendThreshold1.Text = "5";
             // 
             // label203
             // 
-            this.label203.AutoSize = true;
-            this.label203.Location = new System.Drawing.Point(51, 245);
-            this.label203.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label203.Name = "label203";
-            this.label203.Size = new System.Drawing.Size(92, 20);
-            this.label203.TabIndex = 14;
-            this.label203.Text = "Threshold 1";
+            label203.AutoSize = true;
+            label203.Location = new System.Drawing.Point(57, 306);
+            label203.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label203.Name = "label203";
+            label203.Size = new System.Drawing.Size(105, 25);
+            label203.TabIndex = 14;
+            label203.Text = "Threshold 1";
             // 
             // label202
             // 
-            this.label202.AutoSize = true;
-            this.label202.Location = new System.Drawing.Point(150, 158);
-            this.label202.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label202.Name = "label202";
-            this.label202.Size = new System.Drawing.Size(58, 20);
-            this.label202.TabIndex = 13;
-            this.label202.Text = "[0-255]";
+            label202.AutoSize = true;
+            label202.Location = new System.Drawing.Point(167, 198);
+            label202.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label202.Name = "label202";
+            label202.Size = new System.Drawing.Size(69, 25);
+            label202.TabIndex = 13;
+            label202.Text = "[0-255]";
             // 
             // edDeintCAVTThreshold
             // 
-            this.edDeintCAVTThreshold.Location = new System.Drawing.Point(154, 122);
-            this.edDeintCAVTThreshold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edDeintCAVTThreshold.Name = "edDeintCAVTThreshold";
-            this.edDeintCAVTThreshold.Size = new System.Drawing.Size(46, 26);
-            this.edDeintCAVTThreshold.TabIndex = 12;
-            this.edDeintCAVTThreshold.Text = "20";
+            edDeintCAVTThreshold.Location = new System.Drawing.Point(171, 152);
+            edDeintCAVTThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edDeintCAVTThreshold.Name = "edDeintCAVTThreshold";
+            edDeintCAVTThreshold.Size = new System.Drawing.Size(51, 31);
+            edDeintCAVTThreshold.TabIndex = 12;
+            edDeintCAVTThreshold.Text = "20";
             // 
             // label104
             // 
-            this.label104.AutoSize = true;
-            this.label104.Location = new System.Drawing.Point(51, 126);
-            this.label104.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(79, 20);
-            this.label104.TabIndex = 11;
-            this.label104.Text = "Threshold";
+            label104.AutoSize = true;
+            label104.Location = new System.Drawing.Point(57, 158);
+            label104.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label104.Name = "label104";
+            label104.Size = new System.Drawing.Size(90, 25);
+            label104.TabIndex = 11;
+            label104.Text = "Threshold";
             // 
             // rbDeintTriangleEnabled
             // 
-            this.rbDeintTriangleEnabled.AutoSize = true;
-            this.rbDeintTriangleEnabled.Location = new System.Drawing.Point(27, 374);
-            this.rbDeintTriangleEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDeintTriangleEnabled.Name = "rbDeintTriangleEnabled";
-            this.rbDeintTriangleEnabled.Size = new System.Drawing.Size(90, 24);
-            this.rbDeintTriangleEnabled.TabIndex = 10;
-            this.rbDeintTriangleEnabled.Text = "Triangle";
-            this.rbDeintTriangleEnabled.UseVisualStyleBackColor = true;
+            rbDeintTriangleEnabled.AutoSize = true;
+            rbDeintTriangleEnabled.Location = new System.Drawing.Point(30, 468);
+            rbDeintTriangleEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintTriangleEnabled.Name = "rbDeintTriangleEnabled";
+            rbDeintTriangleEnabled.Size = new System.Drawing.Size(97, 29);
+            rbDeintTriangleEnabled.TabIndex = 10;
+            rbDeintTriangleEnabled.Text = "Triangle";
+            rbDeintTriangleEnabled.UseVisualStyleBackColor = true;
             // 
             // rbDeintBlendEnabled
             // 
-            this.rbDeintBlendEnabled.AutoSize = true;
-            this.rbDeintBlendEnabled.Location = new System.Drawing.Point(27, 195);
-            this.rbDeintBlendEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDeintBlendEnabled.Name = "rbDeintBlendEnabled";
-            this.rbDeintBlendEnabled.Size = new System.Drawing.Size(75, 24);
-            this.rbDeintBlendEnabled.TabIndex = 9;
-            this.rbDeintBlendEnabled.Text = "Blend";
-            this.rbDeintBlendEnabled.UseVisualStyleBackColor = true;
+            rbDeintBlendEnabled.AutoSize = true;
+            rbDeintBlendEnabled.Location = new System.Drawing.Point(30, 244);
+            rbDeintBlendEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintBlendEnabled.Name = "rbDeintBlendEnabled";
+            rbDeintBlendEnabled.Size = new System.Drawing.Size(81, 29);
+            rbDeintBlendEnabled.TabIndex = 9;
+            rbDeintBlendEnabled.Text = "Blend";
+            rbDeintBlendEnabled.UseVisualStyleBackColor = true;
             // 
             // rbDeintCAVTEnabled
             // 
-            this.rbDeintCAVTEnabled.AutoSize = true;
-            this.rbDeintCAVTEnabled.Checked = true;
-            this.rbDeintCAVTEnabled.Location = new System.Drawing.Point(27, 80);
-            this.rbDeintCAVTEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDeintCAVTEnabled.Name = "rbDeintCAVTEnabled";
-            this.rbDeintCAVTEnabled.Size = new System.Drawing.Size(340, 24);
-            this.rbDeintCAVTEnabled.TabIndex = 8;
-            this.rbDeintCAVTEnabled.TabStop = true;
-            this.rbDeintCAVTEnabled.Text = "Content Adaptive Vertical Temporal (CAVT)";
-            this.rbDeintCAVTEnabled.UseVisualStyleBackColor = true;
+            rbDeintCAVTEnabled.AutoSize = true;
+            rbDeintCAVTEnabled.Checked = true;
+            rbDeintCAVTEnabled.Location = new System.Drawing.Point(30, 100);
+            rbDeintCAVTEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDeintCAVTEnabled.Name = "rbDeintCAVTEnabled";
+            rbDeintCAVTEnabled.Size = new System.Drawing.Size(372, 29);
+            rbDeintCAVTEnabled.TabIndex = 8;
+            rbDeintCAVTEnabled.TabStop = true;
+            rbDeintCAVTEnabled.Text = "Content Adaptive Vertical Temporal (CAVT)";
+            rbDeintCAVTEnabled.UseVisualStyleBackColor = true;
             // 
             // cbDeinterlace
             // 
-            this.cbDeinterlace.AutoSize = true;
-            this.cbDeinterlace.Location = new System.Drawing.Point(27, 25);
-            this.cbDeinterlace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDeinterlace.Name = "cbDeinterlace";
-            this.cbDeinterlace.Size = new System.Drawing.Size(94, 24);
-            this.cbDeinterlace.TabIndex = 7;
-            this.cbDeinterlace.Text = "Enabled";
-            this.cbDeinterlace.UseVisualStyleBackColor = true;
+            cbDeinterlace.AutoSize = true;
+            cbDeinterlace.Location = new System.Drawing.Point(30, 31);
+            cbDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDeinterlace.Name = "cbDeinterlace";
+            cbDeinterlace.Size = new System.Drawing.Size(101, 29);
+            cbDeinterlace.TabIndex = 7;
+            cbDeinterlace.Text = "Enabled";
+            cbDeinterlace.UseVisualStyleBackColor = true;
             // 
             // tabPage59
             // 
-            this.tabPage59.Controls.Add(this.rbDenoiseCAST);
-            this.tabPage59.Controls.Add(this.rbDenoiseMosquito);
-            this.tabPage59.Controls.Add(this.cbDenoise);
-            this.tabPage59.Location = new System.Drawing.Point(4, 29);
-            this.tabPage59.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage59.Name = "tabPage59";
-            this.tabPage59.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage59.Size = new System.Drawing.Size(439, 713);
-            this.tabPage59.TabIndex = 4;
-            this.tabPage59.Text = "Denoise";
-            this.tabPage59.UseVisualStyleBackColor = true;
+            tabPage59.Controls.Add(rbDenoiseCAST);
+            tabPage59.Controls.Add(rbDenoiseMosquito);
+            tabPage59.Controls.Add(cbDenoise);
+            tabPage59.Location = new System.Drawing.Point(4, 34);
+            tabPage59.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage59.Name = "tabPage59";
+            tabPage59.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage59.Size = new System.Drawing.Size(489, 894);
+            tabPage59.TabIndex = 4;
+            tabPage59.Text = "Denoise";
+            tabPage59.UseVisualStyleBackColor = true;
             // 
             // rbDenoiseCAST
             // 
-            this.rbDenoiseCAST.AutoSize = true;
-            this.rbDenoiseCAST.Location = new System.Drawing.Point(27, 122);
-            this.rbDenoiseCAST.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDenoiseCAST.Name = "rbDenoiseCAST";
-            this.rbDenoiseCAST.Size = new System.Drawing.Size(334, 24);
-            this.rbDenoiseCAST.TabIndex = 10;
-            this.rbDenoiseCAST.Text = "Content Adaptive Spatio-Temporal (CAST)";
-            this.rbDenoiseCAST.UseVisualStyleBackColor = true;
+            rbDenoiseCAST.AutoSize = true;
+            rbDenoiseCAST.Location = new System.Drawing.Point(30, 152);
+            rbDenoiseCAST.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDenoiseCAST.Name = "rbDenoiseCAST";
+            rbDenoiseCAST.Size = new System.Drawing.Size(369, 29);
+            rbDenoiseCAST.TabIndex = 10;
+            rbDenoiseCAST.Text = "Content Adaptive Spatio-Temporal (CAST)";
+            rbDenoiseCAST.UseVisualStyleBackColor = true;
             // 
             // rbDenoiseMosquito
             // 
-            this.rbDenoiseMosquito.AutoSize = true;
-            this.rbDenoiseMosquito.Checked = true;
-            this.rbDenoiseMosquito.Location = new System.Drawing.Point(27, 80);
-            this.rbDenoiseMosquito.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDenoiseMosquito.Name = "rbDenoiseMosquito";
-            this.rbDenoiseMosquito.Size = new System.Drawing.Size(99, 24);
-            this.rbDenoiseMosquito.TabIndex = 9;
-            this.rbDenoiseMosquito.TabStop = true;
-            this.rbDenoiseMosquito.Text = "Mosquito";
-            this.rbDenoiseMosquito.UseVisualStyleBackColor = true;
+            rbDenoiseMosquito.AutoSize = true;
+            rbDenoiseMosquito.Checked = true;
+            rbDenoiseMosquito.Location = new System.Drawing.Point(30, 100);
+            rbDenoiseMosquito.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDenoiseMosquito.Name = "rbDenoiseMosquito";
+            rbDenoiseMosquito.Size = new System.Drawing.Size(114, 29);
+            rbDenoiseMosquito.TabIndex = 9;
+            rbDenoiseMosquito.TabStop = true;
+            rbDenoiseMosquito.Text = "Mosquito";
+            rbDenoiseMosquito.UseVisualStyleBackColor = true;
             // 
             // cbDenoise
             // 
-            this.cbDenoise.AutoSize = true;
-            this.cbDenoise.Location = new System.Drawing.Point(27, 25);
-            this.cbDenoise.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDenoise.Name = "cbDenoise";
-            this.cbDenoise.Size = new System.Drawing.Size(94, 24);
-            this.cbDenoise.TabIndex = 8;
-            this.cbDenoise.Text = "Enabled";
-            this.cbDenoise.UseVisualStyleBackColor = true;
+            cbDenoise.AutoSize = true;
+            cbDenoise.Location = new System.Drawing.Point(30, 31);
+            cbDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDenoise.Name = "cbDenoise";
+            cbDenoise.Size = new System.Drawing.Size(101, 29);
+            cbDenoise.TabIndex = 8;
+            cbDenoise.Text = "Enabled";
+            cbDenoise.UseVisualStyleBackColor = true;
             // 
             // tabPage15
             // 
-            this.tabPage15.Controls.Add(this.tabControl15);
-            this.tabPage15.Controls.Add(this.label16);
-            this.tabPage15.Location = new System.Drawing.Point(4, 29);
-            this.tabPage15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage15.Size = new System.Drawing.Size(439, 713);
-            this.tabPage15.TabIndex = 5;
-            this.tabPage15.Text = "Object detection";
-            this.tabPage15.UseVisualStyleBackColor = true;
+            tabPage15.Controls.Add(tabControl15);
+            tabPage15.Controls.Add(label16);
+            tabPage15.Location = new System.Drawing.Point(4, 34);
+            tabPage15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage15.Name = "tabPage15";
+            tabPage15.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage15.Size = new System.Drawing.Size(489, 894);
+            tabPage15.TabIndex = 5;
+            tabPage15.Text = "Object detection";
+            tabPage15.UseVisualStyleBackColor = true;
             // 
             // tabControl15
             // 
-            this.tabControl15.Controls.Add(this.tabPage21);
-            this.tabControl15.Controls.Add(this.tabPage26);
-            this.tabControl15.Location = new System.Drawing.Point(14, 9);
-            this.tabControl15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl15.Name = "tabControl15";
-            this.tabControl15.SelectedIndex = 0;
-            this.tabControl15.Size = new System.Drawing.Size(417, 594);
-            this.tabControl15.TabIndex = 3;
+            tabControl15.Controls.Add(tabPage21);
+            tabControl15.Controls.Add(tabPage26);
+            tabControl15.Location = new System.Drawing.Point(16, 11);
+            tabControl15.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl15.Name = "tabControl15";
+            tabControl15.SelectedIndex = 0;
+            tabControl15.Size = new System.Drawing.Size(463, 742);
+            tabControl15.TabIndex = 3;
             // 
             // tabPage21
             // 
-            this.tabPage21.Controls.Add(this.label64);
-            this.tabPage21.Controls.Add(this.label65);
-            this.tabPage21.Controls.Add(this.pbAFMotionLevel);
-            this.tabPage21.Controls.Add(this.cbAFMotionHighlight);
-            this.tabPage21.Controls.Add(this.cbAFMotionDetection);
-            this.tabPage21.Location = new System.Drawing.Point(4, 29);
-            this.tabPage21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage21.Name = "tabPage21";
-            this.tabPage21.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage21.Size = new System.Drawing.Size(409, 561);
-            this.tabPage21.TabIndex = 0;
-            this.tabPage21.Text = "Motion detection";
-            this.tabPage21.UseVisualStyleBackColor = true;
+            tabPage21.Controls.Add(label64);
+            tabPage21.Controls.Add(label65);
+            tabPage21.Controls.Add(pbAFMotionLevel);
+            tabPage21.Controls.Add(cbAFMotionHighlight);
+            tabPage21.Controls.Add(cbAFMotionDetection);
+            tabPage21.Location = new System.Drawing.Point(4, 34);
+            tabPage21.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage21.Name = "tabPage21";
+            tabPage21.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage21.Size = new System.Drawing.Size(455, 704);
+            tabPage21.TabIndex = 0;
+            tabPage21.Text = "Motion detection";
+            tabPage21.UseVisualStyleBackColor = true;
             // 
             // label64
             // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(9, 140);
-            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(377, 20);
-            this.label64.TabIndex = 4;
-            this.label64.Text = "Much more motion detection options available in API";
+            label64.AutoSize = true;
+            label64.Location = new System.Drawing.Point(10, 175);
+            label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label64.Name = "label64";
+            label64.Size = new System.Drawing.Size(435, 25);
+            label64.TabIndex = 4;
+            label64.Text = "Much more motion detection options available in API";
             // 
             // label65
             // 
-            this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(9, 485);
-            this.label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(92, 20);
-            this.label65.TabIndex = 3;
-            this.label65.Text = "Motion level";
+            label65.AutoSize = true;
+            label65.Location = new System.Drawing.Point(10, 606);
+            label65.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label65.Name = "label65";
+            label65.Size = new System.Drawing.Size(110, 25);
+            label65.TabIndex = 3;
+            label65.Text = "Motion level";
             // 
             // pbAFMotionLevel
             // 
-            this.pbAFMotionLevel.Location = new System.Drawing.Point(9, 509);
-            this.pbAFMotionLevel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pbAFMotionLevel.Name = "pbAFMotionLevel";
-            this.pbAFMotionLevel.Size = new System.Drawing.Size(387, 35);
-            this.pbAFMotionLevel.TabIndex = 2;
+            pbAFMotionLevel.Location = new System.Drawing.Point(10, 636);
+            pbAFMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pbAFMotionLevel.Name = "pbAFMotionLevel";
+            pbAFMotionLevel.Size = new System.Drawing.Size(430, 44);
+            pbAFMotionLevel.TabIndex = 2;
             // 
             // cbAFMotionHighlight
             // 
-            this.cbAFMotionHighlight.AutoSize = true;
-            this.cbAFMotionHighlight.Location = new System.Drawing.Point(22, 69);
-            this.cbAFMotionHighlight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAFMotionHighlight.Name = "cbAFMotionHighlight";
-            this.cbAFMotionHighlight.Size = new System.Drawing.Size(97, 24);
-            this.cbAFMotionHighlight.TabIndex = 1;
-            this.cbAFMotionHighlight.Text = "Highlight";
-            this.cbAFMotionHighlight.UseVisualStyleBackColor = true;
-            this.cbAFMotionHighlight.CheckedChanged += new System.EventHandler(this.cbAFMotionHighlight_CheckedChanged);
+            cbAFMotionHighlight.AutoSize = true;
+            cbAFMotionHighlight.Location = new System.Drawing.Point(24, 86);
+            cbAFMotionHighlight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAFMotionHighlight.Name = "cbAFMotionHighlight";
+            cbAFMotionHighlight.Size = new System.Drawing.Size(111, 29);
+            cbAFMotionHighlight.TabIndex = 1;
+            cbAFMotionHighlight.Text = "Highlight";
+            cbAFMotionHighlight.UseVisualStyleBackColor = true;
+            cbAFMotionHighlight.CheckedChanged += cbAFMotionHighlight_CheckedChanged;
             // 
             // cbAFMotionDetection
             // 
-            this.cbAFMotionDetection.AutoSize = true;
-            this.cbAFMotionDetection.Location = new System.Drawing.Point(22, 29);
-            this.cbAFMotionDetection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAFMotionDetection.Name = "cbAFMotionDetection";
-            this.cbAFMotionDetection.Size = new System.Drawing.Size(202, 24);
-            this.cbAFMotionDetection.TabIndex = 0;
-            this.cbAFMotionDetection.Text = "Enabled, detect objects";
-            this.cbAFMotionDetection.UseVisualStyleBackColor = true;
-            this.cbAFMotionDetection.CheckedChanged += new System.EventHandler(this.cbAFMotionDetection_CheckedChanged);
+            cbAFMotionDetection.AutoSize = true;
+            cbAFMotionDetection.Location = new System.Drawing.Point(24, 36);
+            cbAFMotionDetection.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAFMotionDetection.Name = "cbAFMotionDetection";
+            cbAFMotionDetection.Size = new System.Drawing.Size(221, 29);
+            cbAFMotionDetection.TabIndex = 0;
+            cbAFMotionDetection.Text = "Enabled, detect objects";
+            cbAFMotionDetection.UseVisualStyleBackColor = true;
+            cbAFMotionDetection.CheckedChanged += cbAFMotionDetection_CheckedChanged;
             // 
             // tabPage26
             // 
-            this.tabPage26.Controls.Add(this.label171);
-            this.tabPage26.Controls.Add(this.label66);
-            this.tabPage26.Location = new System.Drawing.Point(4, 29);
-            this.tabPage26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage26.Name = "tabPage26";
-            this.tabPage26.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage26.Size = new System.Drawing.Size(409, 561);
-            this.tabPage26.TabIndex = 1;
-            this.tabPage26.Text = "Effects";
-            this.tabPage26.UseVisualStyleBackColor = true;
+            tabPage26.Controls.Add(label171);
+            tabPage26.Controls.Add(label66);
+            tabPage26.Location = new System.Drawing.Point(4, 34);
+            tabPage26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage26.Name = "tabPage26";
+            tabPage26.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage26.Size = new System.Drawing.Size(455, 704);
+            tabPage26.TabIndex = 1;
+            tabPage26.Text = "Effects";
+            tabPage26.UseVisualStyleBackColor = true;
             // 
             // label171
             // 
-            this.label171.AutoSize = true;
-            this.label171.Location = new System.Drawing.Point(15, 62);
-            this.label171.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label171.Name = "label171";
-            this.label171.Size = new System.Drawing.Size(212, 20);
-            this.label171.TabIndex = 1;
-            this.label171.Text = "OnVideoFrameBuffer event. ";
+            label171.AutoSize = true;
+            label171.Location = new System.Drawing.Point(17, 78);
+            label171.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label171.Name = "label171";
+            label171.Size = new System.Drawing.Size(235, 25);
+            label171.TabIndex = 1;
+            label171.Text = "OnVideoFrameBuffer event. ";
             // 
             // label66
             // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(15, 28);
-            this.label66.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(252, 20);
-            this.label66.TabIndex = 0;
-            this.label66.Text = "You can add various effects using ";
+            label66.AutoSize = true;
+            label66.Location = new System.Drawing.Point(17, 35);
+            label66.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label66.Name = "label66";
+            label66.Size = new System.Drawing.Size(281, 25);
+            label66.TabIndex = 0;
+            label66.Text = "You can add various effects using ";
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(150, 35);
-            this.label16.TabIndex = 4;
+            label16.Location = new System.Drawing.Point(0, 0);
+            label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(167, 44);
+            label16.TabIndex = 4;
             // 
             // tabPage20
             // 
-            this.tabPage20.Controls.Add(this.pnChromaKeyColor);
-            this.tabPage20.Controls.Add(this.btChromaKeySelectBGImage);
-            this.tabPage20.Controls.Add(this.edChromaKeyImage);
-            this.tabPage20.Controls.Add(this.label216);
-            this.tabPage20.Controls.Add(this.label215);
-            this.tabPage20.Controls.Add(this.tbChromaKeySmoothing);
-            this.tabPage20.Controls.Add(this.label214);
-            this.tabPage20.Controls.Add(this.tbChromaKeyThresholdSensitivity);
-            this.tabPage20.Controls.Add(this.label213);
-            this.tabPage20.Controls.Add(this.cbChromaKeyEnabled);
-            this.tabPage20.Location = new System.Drawing.Point(4, 29);
-            this.tabPage20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage20.Name = "tabPage20";
-            this.tabPage20.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage20.Size = new System.Drawing.Size(439, 713);
-            this.tabPage20.TabIndex = 6;
-            this.tabPage20.Text = "Chroma key";
-            this.tabPage20.UseVisualStyleBackColor = true;
+            tabPage20.Controls.Add(pnChromaKeyColor);
+            tabPage20.Controls.Add(btChromaKeySelectBGImage);
+            tabPage20.Controls.Add(edChromaKeyImage);
+            tabPage20.Controls.Add(label216);
+            tabPage20.Controls.Add(label215);
+            tabPage20.Controls.Add(tbChromaKeySmoothing);
+            tabPage20.Controls.Add(label214);
+            tabPage20.Controls.Add(tbChromaKeyThresholdSensitivity);
+            tabPage20.Controls.Add(label213);
+            tabPage20.Controls.Add(cbChromaKeyEnabled);
+            tabPage20.Location = new System.Drawing.Point(4, 34);
+            tabPage20.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage20.Name = "tabPage20";
+            tabPage20.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage20.Size = new System.Drawing.Size(489, 894);
+            tabPage20.TabIndex = 6;
+            tabPage20.Text = "Chroma key";
+            tabPage20.UseVisualStyleBackColor = true;
             // 
             // pnChromaKeyColor
             // 
-            this.pnChromaKeyColor.BackColor = System.Drawing.Color.Lime;
-            this.pnChromaKeyColor.ForeColor = System.Drawing.SystemColors.Control;
-            this.pnChromaKeyColor.Location = new System.Drawing.Point(82, 308);
-            this.pnChromaKeyColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pnChromaKeyColor.Name = "pnChromaKeyColor";
-            this.pnChromaKeyColor.Size = new System.Drawing.Size(39, 37);
-            this.pnChromaKeyColor.TabIndex = 43;
-            this.pnChromaKeyColor.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnChromaKeyColor_MouseDown);
+            pnChromaKeyColor.BackColor = System.Drawing.Color.Lime;
+            pnChromaKeyColor.ForeColor = System.Drawing.SystemColors.Control;
+            pnChromaKeyColor.Location = new System.Drawing.Point(91, 385);
+            pnChromaKeyColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnChromaKeyColor.Name = "pnChromaKeyColor";
+            pnChromaKeyColor.Size = new System.Drawing.Size(43, 46);
+            pnChromaKeyColor.TabIndex = 43;
+            pnChromaKeyColor.MouseDown += pnChromaKeyColor_MouseDown;
             // 
             // btChromaKeySelectBGImage
             // 
-            this.btChromaKeySelectBGImage.Location = new System.Drawing.Point(382, 403);
-            this.btChromaKeySelectBGImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btChromaKeySelectBGImage.Name = "btChromaKeySelectBGImage";
-            this.btChromaKeySelectBGImage.Size = new System.Drawing.Size(36, 35);
-            this.btChromaKeySelectBGImage.TabIndex = 42;
-            this.btChromaKeySelectBGImage.Text = "...";
-            this.btChromaKeySelectBGImage.UseVisualStyleBackColor = true;
-            this.btChromaKeySelectBGImage.Click += new System.EventHandler(this.btChromaKeySelectBGImage_Click);
+            btChromaKeySelectBGImage.Location = new System.Drawing.Point(424, 504);
+            btChromaKeySelectBGImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btChromaKeySelectBGImage.Name = "btChromaKeySelectBGImage";
+            btChromaKeySelectBGImage.Size = new System.Drawing.Size(40, 44);
+            btChromaKeySelectBGImage.TabIndex = 42;
+            btChromaKeySelectBGImage.Text = "...";
+            btChromaKeySelectBGImage.UseVisualStyleBackColor = true;
+            btChromaKeySelectBGImage.Click += btChromaKeySelectBGImage_Click;
             // 
             // edChromaKeyImage
             // 
-            this.edChromaKeyImage.Location = new System.Drawing.Point(20, 406);
-            this.edChromaKeyImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edChromaKeyImage.Name = "edChromaKeyImage";
-            this.edChromaKeyImage.Size = new System.Drawing.Size(350, 26);
-            this.edChromaKeyImage.TabIndex = 41;
-            this.edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
+            edChromaKeyImage.Location = new System.Drawing.Point(22, 508);
+            edChromaKeyImage.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edChromaKeyImage.Name = "edChromaKeyImage";
+            edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
+            edChromaKeyImage.TabIndex = 41;
+            edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
             // 
             // label216
             // 
-            this.label216.AutoSize = true;
-            this.label216.Location = new System.Drawing.Point(15, 382);
-            this.label216.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label216.Name = "label216";
-            this.label216.Size = new System.Drawing.Size(166, 20);
-            this.label216.TabIndex = 40;
-            this.label216.Text = "Image background file";
+            label216.AutoSize = true;
+            label216.Location = new System.Drawing.Point(17, 478);
+            label216.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label216.Name = "label216";
+            label216.Size = new System.Drawing.Size(191, 25);
+            label216.TabIndex = 40;
+            label216.Text = "Image background file";
             // 
             // label215
             // 
-            this.label215.AutoSize = true;
-            this.label215.Location = new System.Drawing.Point(15, 314);
-            this.label215.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label215.Name = "label215";
-            this.label215.Size = new System.Drawing.Size(46, 20);
-            this.label215.TabIndex = 39;
-            this.label215.Text = "Color";
+            label215.AutoSize = true;
+            label215.Location = new System.Drawing.Point(17, 392);
+            label215.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label215.Name = "label215";
+            label215.Size = new System.Drawing.Size(55, 25);
+            label215.TabIndex = 39;
+            label215.Text = "Color";
             // 
             // tbChromaKeySmoothing
             // 
-            this.tbChromaKeySmoothing.BackColor = System.Drawing.SystemColors.Window;
-            this.tbChromaKeySmoothing.Location = new System.Drawing.Point(20, 223);
-            this.tbChromaKeySmoothing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbChromaKeySmoothing.Maximum = 1000;
-            this.tbChromaKeySmoothing.Name = "tbChromaKeySmoothing";
-            this.tbChromaKeySmoothing.Size = new System.Drawing.Size(231, 69);
-            this.tbChromaKeySmoothing.TabIndex = 38;
-            this.tbChromaKeySmoothing.Value = 80;
-            this.tbChromaKeySmoothing.Scroll += new System.EventHandler(this.tbChromaKeySmoothing_Scroll);
+            tbChromaKeySmoothing.BackColor = System.Drawing.SystemColors.Window;
+            tbChromaKeySmoothing.Location = new System.Drawing.Point(22, 279);
+            tbChromaKeySmoothing.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbChromaKeySmoothing.Maximum = 1000;
+            tbChromaKeySmoothing.Name = "tbChromaKeySmoothing";
+            tbChromaKeySmoothing.Size = new System.Drawing.Size(257, 69);
+            tbChromaKeySmoothing.TabIndex = 38;
+            tbChromaKeySmoothing.Value = 80;
+            tbChromaKeySmoothing.Scroll += tbChromaKeySmoothing_Scroll;
             // 
             // label214
             // 
-            this.label214.AutoSize = true;
-            this.label214.Location = new System.Drawing.Point(15, 195);
-            this.label214.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label214.Name = "label214";
-            this.label214.Size = new System.Drawing.Size(86, 20);
-            this.label214.TabIndex = 37;
-            this.label214.Text = "Smoothing";
+            label214.AutoSize = true;
+            label214.Location = new System.Drawing.Point(17, 244);
+            label214.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label214.Name = "label214";
+            label214.Size = new System.Drawing.Size(101, 25);
+            label214.TabIndex = 37;
+            label214.Text = "Smoothing";
             // 
             // tbChromaKeyThresholdSensitivity
             // 
-            this.tbChromaKeyThresholdSensitivity.BackColor = System.Drawing.SystemColors.Window;
-            this.tbChromaKeyThresholdSensitivity.Location = new System.Drawing.Point(20, 111);
-            this.tbChromaKeyThresholdSensitivity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbChromaKeyThresholdSensitivity.Maximum = 200;
-            this.tbChromaKeyThresholdSensitivity.Name = "tbChromaKeyThresholdSensitivity";
-            this.tbChromaKeyThresholdSensitivity.Size = new System.Drawing.Size(231, 69);
-            this.tbChromaKeyThresholdSensitivity.TabIndex = 36;
-            this.tbChromaKeyThresholdSensitivity.Value = 180;
-            this.tbChromaKeyThresholdSensitivity.Scroll += new System.EventHandler(this.tbChromaKeyThresholdSensitivity_Scroll);
+            tbChromaKeyThresholdSensitivity.BackColor = System.Drawing.SystemColors.Window;
+            tbChromaKeyThresholdSensitivity.Location = new System.Drawing.Point(22, 139);
+            tbChromaKeyThresholdSensitivity.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbChromaKeyThresholdSensitivity.Maximum = 200;
+            tbChromaKeyThresholdSensitivity.Name = "tbChromaKeyThresholdSensitivity";
+            tbChromaKeyThresholdSensitivity.Size = new System.Drawing.Size(257, 69);
+            tbChromaKeyThresholdSensitivity.TabIndex = 36;
+            tbChromaKeyThresholdSensitivity.Value = 180;
+            tbChromaKeyThresholdSensitivity.Scroll += tbChromaKeyThresholdSensitivity_Scroll;
             // 
             // label213
             // 
-            this.label213.AutoSize = true;
-            this.label213.Location = new System.Drawing.Point(15, 83);
-            this.label213.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label213.Name = "label213";
-            this.label213.Size = new System.Drawing.Size(150, 20);
-            this.label213.TabIndex = 35;
-            this.label213.Text = "Threshold sensitivity";
+            label213.AutoSize = true;
+            label213.Location = new System.Drawing.Point(17, 104);
+            label213.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label213.Name = "label213";
+            label213.Size = new System.Drawing.Size(172, 25);
+            label213.TabIndex = 35;
+            label213.Text = "Threshold sensitivity";
             // 
             // cbChromaKeyEnabled
             // 
-            this.cbChromaKeyEnabled.AutoSize = true;
-            this.cbChromaKeyEnabled.Location = new System.Drawing.Point(20, 23);
-            this.cbChromaKeyEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbChromaKeyEnabled.Name = "cbChromaKeyEnabled";
-            this.cbChromaKeyEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbChromaKeyEnabled.TabIndex = 34;
-            this.cbChromaKeyEnabled.Text = "Enabled";
-            this.cbChromaKeyEnabled.UseVisualStyleBackColor = true;
+            cbChromaKeyEnabled.AutoSize = true;
+            cbChromaKeyEnabled.Location = new System.Drawing.Point(22, 29);
+            cbChromaKeyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbChromaKeyEnabled.Name = "cbChromaKeyEnabled";
+            cbChromaKeyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbChromaKeyEnabled.TabIndex = 34;
+            cbChromaKeyEnabled.Text = "Enabled";
+            cbChromaKeyEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage70
             // 
-            this.tabPage70.Controls.Add(this.btFilterDeleteAll);
-            this.tabPage70.Controls.Add(this.btFilterSettings2);
-            this.tabPage70.Controls.Add(this.lbFilters);
-            this.tabPage70.Controls.Add(this.label106);
-            this.tabPage70.Controls.Add(this.btFilterSettings);
-            this.tabPage70.Controls.Add(this.btFilterAdd);
-            this.tabPage70.Controls.Add(this.cbFilters);
-            this.tabPage70.Controls.Add(this.label105);
-            this.tabPage70.Location = new System.Drawing.Point(4, 29);
-            this.tabPage70.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage70.Name = "tabPage70";
-            this.tabPage70.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage70.Size = new System.Drawing.Size(439, 713);
-            this.tabPage70.TabIndex = 3;
-            this.tabPage70.Text = "3rd-party filters";
-            this.tabPage70.UseVisualStyleBackColor = true;
+            tabPage70.Controls.Add(btFilterDeleteAll);
+            tabPage70.Controls.Add(btFilterSettings2);
+            tabPage70.Controls.Add(lbFilters);
+            tabPage70.Controls.Add(label106);
+            tabPage70.Controls.Add(btFilterSettings);
+            tabPage70.Controls.Add(btFilterAdd);
+            tabPage70.Controls.Add(cbFilters);
+            tabPage70.Controls.Add(label105);
+            tabPage70.Location = new System.Drawing.Point(4, 34);
+            tabPage70.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage70.Name = "tabPage70";
+            tabPage70.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage70.Size = new System.Drawing.Size(489, 894);
+            tabPage70.TabIndex = 3;
+            tabPage70.Text = "3rd-party filters";
+            tabPage70.UseVisualStyleBackColor = true;
             // 
             // btFilterDeleteAll
             // 
-            this.btFilterDeleteAll.Location = new System.Drawing.Point(315, 442);
-            this.btFilterDeleteAll.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btFilterDeleteAll.Name = "btFilterDeleteAll";
-            this.btFilterDeleteAll.Size = new System.Drawing.Size(102, 35);
-            this.btFilterDeleteAll.TabIndex = 16;
-            this.btFilterDeleteAll.Text = "Delete all";
-            this.btFilterDeleteAll.UseVisualStyleBackColor = true;
-            this.btFilterDeleteAll.Click += new System.EventHandler(this.btFilterDeleteAll_Click);
+            btFilterDeleteAll.Location = new System.Drawing.Point(350, 552);
+            btFilterDeleteAll.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterDeleteAll.Name = "btFilterDeleteAll";
+            btFilterDeleteAll.Size = new System.Drawing.Size(113, 44);
+            btFilterDeleteAll.TabIndex = 16;
+            btFilterDeleteAll.Text = "Delete all";
+            btFilterDeleteAll.UseVisualStyleBackColor = true;
+            btFilterDeleteAll.Click += btFilterDeleteAll_Click;
             // 
             // btFilterSettings2
             // 
-            this.btFilterSettings2.Location = new System.Drawing.Point(27, 442);
-            this.btFilterSettings2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btFilterSettings2.Name = "btFilterSettings2";
-            this.btFilterSettings2.Size = new System.Drawing.Size(98, 35);
-            this.btFilterSettings2.TabIndex = 15;
-            this.btFilterSettings2.Text = "Settings";
-            this.btFilterSettings2.UseVisualStyleBackColor = true;
-            this.btFilterSettings2.Click += new System.EventHandler(this.btFilterSettings2_Click);
+            btFilterSettings2.Location = new System.Drawing.Point(30, 552);
+            btFilterSettings2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterSettings2.Name = "btFilterSettings2";
+            btFilterSettings2.Size = new System.Drawing.Size(109, 44);
+            btFilterSettings2.TabIndex = 15;
+            btFilterSettings2.Text = "Settings";
+            btFilterSettings2.UseVisualStyleBackColor = true;
+            btFilterSettings2.Click += btFilterSettings2_Click;
             // 
             // lbFilters
             // 
-            this.lbFilters.FormattingEnabled = true;
-            this.lbFilters.ItemHeight = 20;
-            this.lbFilters.Location = new System.Drawing.Point(27, 186);
-            this.lbFilters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbFilters.Name = "lbFilters";
-            this.lbFilters.Size = new System.Drawing.Size(388, 244);
-            this.lbFilters.TabIndex = 14;
-            this.lbFilters.SelectedIndexChanged += new System.EventHandler(this.lbFilters_SelectedIndexChanged);
+            lbFilters.FormattingEnabled = true;
+            lbFilters.ItemHeight = 25;
+            lbFilters.Location = new System.Drawing.Point(30, 232);
+            lbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbFilters.Name = "lbFilters";
+            lbFilters.Size = new System.Drawing.Size(431, 304);
+            lbFilters.TabIndex = 14;
+            lbFilters.SelectedIndexChanged += lbFilters_SelectedIndexChanged;
             // 
             // label106
             // 
-            this.label106.AutoSize = true;
-            this.label106.Location = new System.Drawing.Point(22, 162);
-            this.label106.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label106.Name = "label106";
-            this.label106.Size = new System.Drawing.Size(104, 20);
-            this.label106.TabIndex = 13;
-            this.label106.Text = "Current filters";
+            label106.AutoSize = true;
+            label106.Location = new System.Drawing.Point(24, 202);
+            label106.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label106.Name = "label106";
+            label106.Size = new System.Drawing.Size(118, 25);
+            label106.TabIndex = 13;
+            label106.Text = "Current filters";
             // 
             // btFilterSettings
             // 
-            this.btFilterSettings.Location = new System.Drawing.Point(315, 88);
-            this.btFilterSettings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btFilterSettings.Name = "btFilterSettings";
-            this.btFilterSettings.Size = new System.Drawing.Size(102, 35);
-            this.btFilterSettings.TabIndex = 12;
-            this.btFilterSettings.Text = "Settings";
-            this.btFilterSettings.UseVisualStyleBackColor = true;
-            this.btFilterSettings.Click += new System.EventHandler(this.btFilterSettings_Click);
+            btFilterSettings.Location = new System.Drawing.Point(350, 110);
+            btFilterSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterSettings.Name = "btFilterSettings";
+            btFilterSettings.Size = new System.Drawing.Size(113, 44);
+            btFilterSettings.TabIndex = 12;
+            btFilterSettings.Text = "Settings";
+            btFilterSettings.UseVisualStyleBackColor = true;
+            btFilterSettings.Click += btFilterSettings_Click;
             // 
             // btFilterAdd
             // 
-            this.btFilterAdd.Location = new System.Drawing.Point(27, 88);
-            this.btFilterAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btFilterAdd.Name = "btFilterAdd";
-            this.btFilterAdd.Size = new System.Drawing.Size(58, 35);
-            this.btFilterAdd.TabIndex = 11;
-            this.btFilterAdd.Text = "Add";
-            this.btFilterAdd.UseVisualStyleBackColor = true;
-            this.btFilterAdd.Click += new System.EventHandler(this.btFilterAdd_Click);
+            btFilterAdd.Location = new System.Drawing.Point(30, 110);
+            btFilterAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFilterAdd.Name = "btFilterAdd";
+            btFilterAdd.Size = new System.Drawing.Size(64, 44);
+            btFilterAdd.TabIndex = 11;
+            btFilterAdd.Text = "Add";
+            btFilterAdd.UseVisualStyleBackColor = true;
+            btFilterAdd.Click += btFilterAdd_Click;
             // 
             // cbFilters
             // 
-            this.cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilters.FormattingEnabled = true;
-            this.cbFilters.Location = new System.Drawing.Point(27, 46);
-            this.cbFilters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFilters.Name = "cbFilters";
-            this.cbFilters.Size = new System.Drawing.Size(388, 28);
-            this.cbFilters.TabIndex = 10;
-            this.cbFilters.SelectedIndexChanged += new System.EventHandler(this.cbFilters_SelectedIndexChanged);
+            cbFilters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbFilters.FormattingEnabled = true;
+            cbFilters.Location = new System.Drawing.Point(30, 58);
+            cbFilters.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFilters.Name = "cbFilters";
+            cbFilters.Size = new System.Drawing.Size(431, 33);
+            cbFilters.TabIndex = 10;
+            cbFilters.SelectedIndexChanged += cbFilters_SelectedIndexChanged;
             // 
             // label105
             // 
-            this.label105.AutoSize = true;
-            this.label105.Location = new System.Drawing.Point(22, 22);
-            this.label105.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(52, 20);
-            this.label105.TabIndex = 9;
-            this.label105.Text = "Filters";
+            label105.AutoSize = true;
+            label105.Location = new System.Drawing.Point(24, 28);
+            label105.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label105.Name = "label105";
+            label105.Size = new System.Drawing.Size(58, 25);
+            label105.TabIndex = 9;
+            label105.Text = "Filters";
             // 
             // tabPage82
             // 
-            this.tabPage82.Controls.Add(this.label177);
-            this.tabPage82.Controls.Add(this.label129);
-            this.tabPage82.Controls.Add(this.btSubtitlesSelectFile);
-            this.tabPage82.Controls.Add(this.edSubtitlesFilename);
-            this.tabPage82.Controls.Add(this.label114);
-            this.tabPage82.Controls.Add(this.cbSubtitlesEnabled);
-            this.tabPage82.Location = new System.Drawing.Point(4, 29);
-            this.tabPage82.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage82.Name = "tabPage82";
-            this.tabPage82.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage82.Size = new System.Drawing.Size(439, 713);
-            this.tabPage82.TabIndex = 7;
-            this.tabPage82.Text = "Subtitles";
-            this.tabPage82.UseVisualStyleBackColor = true;
+            tabPage82.Controls.Add(label177);
+            tabPage82.Controls.Add(label129);
+            tabPage82.Controls.Add(btSubtitlesSelectFile);
+            tabPage82.Controls.Add(edSubtitlesFilename);
+            tabPage82.Controls.Add(label114);
+            tabPage82.Controls.Add(cbSubtitlesEnabled);
+            tabPage82.Location = new System.Drawing.Point(4, 34);
+            tabPage82.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage82.Name = "tabPage82";
+            tabPage82.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage82.Size = new System.Drawing.Size(489, 894);
+            tabPage82.TabIndex = 7;
+            tabPage82.Text = "Subtitles";
+            tabPage82.UseVisualStyleBackColor = true;
             // 
             // label177
             // 
-            this.label177.AutoSize = true;
-            this.label177.Location = new System.Drawing.Point(16, 162);
-            this.label177.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(121, 20);
-            this.label177.TabIndex = 5;
-            this.label177.Text = " using interface.";
+            label177.AutoSize = true;
+            label177.Location = new System.Drawing.Point(18, 202);
+            label177.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label177.Name = "label177";
+            label177.Size = new System.Drawing.Size(136, 25);
+            label177.TabIndex = 5;
+            label177.Text = " using interface.";
             // 
             // label129
             // 
-            this.label129.AutoSize = true;
-            this.label129.Location = new System.Drawing.Point(16, 132);
-            this.label129.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label129.Name = "label129";
-            this.label129.Size = new System.Drawing.Size(364, 20);
-            this.label129.TabIndex = 4;
-            this.label129.Text = "Use OnSubtitleSettings event to set other settings";
+            label129.AutoSize = true;
+            label129.Location = new System.Drawing.Point(18, 165);
+            label129.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label129.Name = "label129";
+            label129.Size = new System.Drawing.Size(406, 25);
+            label129.TabIndex = 4;
+            label129.Text = "Use OnSubtitleSettings event to set other settings";
             // 
             // btSubtitlesSelectFile
             // 
-            this.btSubtitlesSelectFile.Location = new System.Drawing.Point(376, 86);
-            this.btSubtitlesSelectFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSubtitlesSelectFile.Name = "btSubtitlesSelectFile";
-            this.btSubtitlesSelectFile.Size = new System.Drawing.Size(34, 35);
-            this.btSubtitlesSelectFile.TabIndex = 3;
-            this.btSubtitlesSelectFile.Text = "...";
-            this.btSubtitlesSelectFile.UseVisualStyleBackColor = true;
-            this.btSubtitlesSelectFile.Click += new System.EventHandler(this.btSubtitlesSelectFile_Click);
+            btSubtitlesSelectFile.Location = new System.Drawing.Point(418, 108);
+            btSubtitlesSelectFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSubtitlesSelectFile.Name = "btSubtitlesSelectFile";
+            btSubtitlesSelectFile.Size = new System.Drawing.Size(38, 44);
+            btSubtitlesSelectFile.TabIndex = 3;
+            btSubtitlesSelectFile.Text = "...";
+            btSubtitlesSelectFile.UseVisualStyleBackColor = true;
+            btSubtitlesSelectFile.Click += btSubtitlesSelectFile_Click;
             // 
             // edSubtitlesFilename
             // 
-            this.edSubtitlesFilename.Location = new System.Drawing.Point(21, 89);
-            this.edSubtitlesFilename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edSubtitlesFilename.Name = "edSubtitlesFilename";
-            this.edSubtitlesFilename.Size = new System.Drawing.Size(346, 26);
-            this.edSubtitlesFilename.TabIndex = 2;
+            edSubtitlesFilename.Location = new System.Drawing.Point(23, 111);
+            edSubtitlesFilename.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edSubtitlesFilename.Name = "edSubtitlesFilename";
+            edSubtitlesFilename.Size = new System.Drawing.Size(384, 31);
+            edSubtitlesFilename.TabIndex = 2;
             // 
             // label114
             // 
-            this.label114.AutoSize = true;
-            this.label114.Location = new System.Drawing.Point(16, 65);
-            this.label114.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label114.Name = "label114";
-            this.label114.Size = new System.Drawing.Size(78, 20);
-            this.label114.TabIndex = 1;
-            this.label114.Text = "File name";
+            label114.AutoSize = true;
+            label114.Location = new System.Drawing.Point(18, 81);
+            label114.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label114.Name = "label114";
+            label114.Size = new System.Drawing.Size(87, 25);
+            label114.TabIndex = 1;
+            label114.Text = "File name";
             // 
             // cbSubtitlesEnabled
             // 
-            this.cbSubtitlesEnabled.AutoSize = true;
-            this.cbSubtitlesEnabled.Location = new System.Drawing.Point(21, 26);
-            this.cbSubtitlesEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbSubtitlesEnabled.Name = "cbSubtitlesEnabled";
-            this.cbSubtitlesEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbSubtitlesEnabled.TabIndex = 0;
-            this.cbSubtitlesEnabled.Text = "Enabled";
-            this.cbSubtitlesEnabled.UseVisualStyleBackColor = true;
+            cbSubtitlesEnabled.AutoSize = true;
+            cbSubtitlesEnabled.Location = new System.Drawing.Point(23, 32);
+            cbSubtitlesEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbSubtitlesEnabled.Name = "cbSubtitlesEnabled";
+            cbSubtitlesEnabled.Size = new System.Drawing.Size(101, 29);
+            cbSubtitlesEnabled.TabIndex = 0;
+            cbSubtitlesEnabled.Text = "Enabled";
+            cbSubtitlesEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage83
             // 
-            this.tabPage83.Controls.Add(this.label8);
-            this.tabPage83.Controls.Add(this.tbGPUBlur);
-            this.tabPage83.Controls.Add(this.cbVideoEffectsGPUEnabled);
-            this.tabPage83.Controls.Add(this.cbGPUOldMovie);
-            this.tabPage83.Controls.Add(this.cbGPUDeinterlace);
-            this.tabPage83.Controls.Add(this.cbGPUDenoise);
-            this.tabPage83.Controls.Add(this.cbGPUPixelate);
-            this.tabPage83.Controls.Add(this.cbGPUNightVision);
-            this.tabPage83.Controls.Add(this.label383);
-            this.tabPage83.Controls.Add(this.label384);
-            this.tabPage83.Controls.Add(this.label385);
-            this.tabPage83.Controls.Add(this.label386);
-            this.tabPage83.Controls.Add(this.tbGPUContrast);
-            this.tabPage83.Controls.Add(this.tbGPUDarkness);
-            this.tabPage83.Controls.Add(this.tbGPULightness);
-            this.tabPage83.Controls.Add(this.tbGPUSaturation);
-            this.tabPage83.Controls.Add(this.cbGPUInvert);
-            this.tabPage83.Controls.Add(this.cbGPUGreyscale);
-            this.tabPage83.Location = new System.Drawing.Point(4, 29);
-            this.tabPage83.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage83.Name = "tabPage83";
-            this.tabPage83.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage83.Size = new System.Drawing.Size(439, 713);
-            this.tabPage83.TabIndex = 8;
-            this.tabPage83.Text = "GPU effects";
-            this.tabPage83.UseVisualStyleBackColor = true;
+            tabPage83.Controls.Add(label8);
+            tabPage83.Controls.Add(tbGPUBlur);
+            tabPage83.Controls.Add(cbVideoEffectsGPUEnabled);
+            tabPage83.Controls.Add(cbGPUOldMovie);
+            tabPage83.Controls.Add(cbGPUDeinterlace);
+            tabPage83.Controls.Add(cbGPUDenoise);
+            tabPage83.Controls.Add(cbGPUPixelate);
+            tabPage83.Controls.Add(cbGPUNightVision);
+            tabPage83.Controls.Add(label383);
+            tabPage83.Controls.Add(label384);
+            tabPage83.Controls.Add(label385);
+            tabPage83.Controls.Add(label386);
+            tabPage83.Controls.Add(tbGPUContrast);
+            tabPage83.Controls.Add(tbGPUDarkness);
+            tabPage83.Controls.Add(tbGPULightness);
+            tabPage83.Controls.Add(tbGPUSaturation);
+            tabPage83.Controls.Add(cbGPUInvert);
+            tabPage83.Controls.Add(cbGPUGreyscale);
+            tabPage83.Location = new System.Drawing.Point(4, 34);
+            tabPage83.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage83.Name = "tabPage83";
+            tabPage83.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage83.Size = new System.Drawing.Size(489, 894);
+            tabPage83.TabIndex = 8;
+            tabPage83.Text = "GPU effects";
+            tabPage83.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 415);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 20);
-            this.label8.TabIndex = 100;
-            this.label8.Text = "Blur";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(20, 519);
+            label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(42, 25);
+            label8.TabIndex = 100;
+            label8.Text = "Blur";
             // 
             // tbGPUBlur
             // 
-            this.tbGPUBlur.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUBlur.Location = new System.Drawing.Point(14, 440);
-            this.tbGPUBlur.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbGPUBlur.Maximum = 30;
-            this.tbGPUBlur.Name = "tbGPUBlur";
-            this.tbGPUBlur.Size = new System.Drawing.Size(195, 69);
-            this.tbGPUBlur.TabIndex = 99;
-            this.tbGPUBlur.Scroll += new System.EventHandler(this.tbGPUBlur_Scroll);
+            tbGPUBlur.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUBlur.Location = new System.Drawing.Point(16, 550);
+            tbGPUBlur.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUBlur.Maximum = 30;
+            tbGPUBlur.Name = "tbGPUBlur";
+            tbGPUBlur.Size = new System.Drawing.Size(217, 69);
+            tbGPUBlur.TabIndex = 99;
+            tbGPUBlur.Scroll += tbGPUBlur_Scroll;
             // 
             // cbVideoEffectsGPUEnabled
             // 
-            this.cbVideoEffectsGPUEnabled.AutoSize = true;
-            this.cbVideoEffectsGPUEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbVideoEffectsGPUEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVideoEffectsGPUEnabled.Name = "cbVideoEffectsGPUEnabled";
-            this.cbVideoEffectsGPUEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbVideoEffectsGPUEnabled.TabIndex = 97;
-            this.cbVideoEffectsGPUEnabled.Text = "Enabled";
-            this.cbVideoEffectsGPUEnabled.UseVisualStyleBackColor = true;
+            cbVideoEffectsGPUEnabled.AutoSize = true;
+            cbVideoEffectsGPUEnabled.Location = new System.Drawing.Point(27, 31);
+            cbVideoEffectsGPUEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVideoEffectsGPUEnabled.Name = "cbVideoEffectsGPUEnabled";
+            cbVideoEffectsGPUEnabled.Size = new System.Drawing.Size(101, 29);
+            cbVideoEffectsGPUEnabled.TabIndex = 97;
+            cbVideoEffectsGPUEnabled.Text = "Enabled";
+            cbVideoEffectsGPUEnabled.UseVisualStyleBackColor = true;
             // 
             // cbGPUOldMovie
             // 
-            this.cbGPUOldMovie.AutoSize = true;
-            this.cbGPUOldMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUOldMovie.Location = new System.Drawing.Point(214, 362);
-            this.cbGPUOldMovie.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUOldMovie.Name = "cbGPUOldMovie";
-            this.cbGPUOldMovie.Size = new System.Drawing.Size(104, 24);
-            this.cbGPUOldMovie.TabIndex = 96;
-            this.cbGPUOldMovie.Text = "Old movie";
-            this.cbGPUOldMovie.UseVisualStyleBackColor = true;
-            this.cbGPUOldMovie.CheckedChanged += new System.EventHandler(this.cbGPUOldMovie_CheckedChanged);
+            cbGPUOldMovie.AutoSize = true;
+            cbGPUOldMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUOldMovie.Location = new System.Drawing.Point(238, 452);
+            cbGPUOldMovie.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUOldMovie.Name = "cbGPUOldMovie";
+            cbGPUOldMovie.Size = new System.Drawing.Size(121, 29);
+            cbGPUOldMovie.TabIndex = 96;
+            cbGPUOldMovie.Text = "Old movie";
+            cbGPUOldMovie.UseVisualStyleBackColor = true;
+            cbGPUOldMovie.CheckedChanged += cbGPUOldMovie_CheckedChanged;
             // 
             // cbGPUDeinterlace
             // 
-            this.cbGPUDeinterlace.AutoSize = true;
-            this.cbGPUDeinterlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUDeinterlace.Location = new System.Drawing.Point(214, 325);
-            this.cbGPUDeinterlace.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUDeinterlace.Name = "cbGPUDeinterlace";
-            this.cbGPUDeinterlace.Size = new System.Drawing.Size(116, 24);
-            this.cbGPUDeinterlace.TabIndex = 94;
-            this.cbGPUDeinterlace.Text = "Deinterlace";
-            this.cbGPUDeinterlace.UseVisualStyleBackColor = true;
-            this.cbGPUDeinterlace.CheckedChanged += new System.EventHandler(this.cbGPUDeinterlace_CheckedChanged);
+            cbGPUDeinterlace.AutoSize = true;
+            cbGPUDeinterlace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUDeinterlace.Location = new System.Drawing.Point(238, 406);
+            cbGPUDeinterlace.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUDeinterlace.Name = "cbGPUDeinterlace";
+            cbGPUDeinterlace.Size = new System.Drawing.Size(125, 29);
+            cbGPUDeinterlace.TabIndex = 94;
+            cbGPUDeinterlace.Text = "Deinterlace";
+            cbGPUDeinterlace.UseVisualStyleBackColor = true;
+            cbGPUDeinterlace.CheckedChanged += cbGPUDeinterlace_CheckedChanged;
             // 
             // cbGPUDenoise
             // 
-            this.cbGPUDenoise.AutoSize = true;
-            this.cbGPUDenoise.Location = new System.Drawing.Point(22, 325);
-            this.cbGPUDenoise.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUDenoise.Name = "cbGPUDenoise";
-            this.cbGPUDenoise.Size = new System.Drawing.Size(94, 24);
-            this.cbGPUDenoise.TabIndex = 93;
-            this.cbGPUDenoise.Text = "Denoise";
-            this.cbGPUDenoise.UseVisualStyleBackColor = true;
-            this.cbGPUDenoise.CheckedChanged += new System.EventHandler(this.cbGPUDenoise_CheckedChanged);
+            cbGPUDenoise.AutoSize = true;
+            cbGPUDenoise.Location = new System.Drawing.Point(24, 406);
+            cbGPUDenoise.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUDenoise.Name = "cbGPUDenoise";
+            cbGPUDenoise.Size = new System.Drawing.Size(102, 29);
+            cbGPUDenoise.TabIndex = 93;
+            cbGPUDenoise.Text = "Denoise";
+            cbGPUDenoise.UseVisualStyleBackColor = true;
+            cbGPUDenoise.CheckedChanged += cbGPUDenoise_CheckedChanged;
             // 
             // cbGPUPixelate
             // 
-            this.cbGPUPixelate.AutoSize = true;
-            this.cbGPUPixelate.Location = new System.Drawing.Point(214, 289);
-            this.cbGPUPixelate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUPixelate.Name = "cbGPUPixelate";
-            this.cbGPUPixelate.Size = new System.Drawing.Size(90, 24);
-            this.cbGPUPixelate.TabIndex = 92;
-            this.cbGPUPixelate.Text = "Pixelate";
-            this.cbGPUPixelate.UseVisualStyleBackColor = true;
-            this.cbGPUPixelate.CheckedChanged += new System.EventHandler(this.cbGPUPixelate_CheckedChanged);
+            cbGPUPixelate.AutoSize = true;
+            cbGPUPixelate.Location = new System.Drawing.Point(238, 361);
+            cbGPUPixelate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUPixelate.Name = "cbGPUPixelate";
+            cbGPUPixelate.Size = new System.Drawing.Size(97, 29);
+            cbGPUPixelate.TabIndex = 92;
+            cbGPUPixelate.Text = "Pixelate";
+            cbGPUPixelate.UseVisualStyleBackColor = true;
+            cbGPUPixelate.CheckedChanged += cbGPUPixelate_CheckedChanged;
             // 
             // cbGPUNightVision
             // 
-            this.cbGPUNightVision.AutoSize = true;
-            this.cbGPUNightVision.Location = new System.Drawing.Point(22, 289);
-            this.cbGPUNightVision.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUNightVision.Name = "cbGPUNightVision";
-            this.cbGPUNightVision.Size = new System.Drawing.Size(115, 24);
-            this.cbGPUNightVision.TabIndex = 91;
-            this.cbGPUNightVision.Text = "Night vision";
-            this.cbGPUNightVision.UseVisualStyleBackColor = true;
-            this.cbGPUNightVision.CheckedChanged += new System.EventHandler(this.cbGPUNightVision_CheckedChanged);
+            cbGPUNightVision.AutoSize = true;
+            cbGPUNightVision.Location = new System.Drawing.Point(24, 361);
+            cbGPUNightVision.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUNightVision.Name = "cbGPUNightVision";
+            cbGPUNightVision.Size = new System.Drawing.Size(133, 29);
+            cbGPUNightVision.TabIndex = 91;
+            cbGPUNightVision.Text = "Night vision";
+            cbGPUNightVision.UseVisualStyleBackColor = true;
+            cbGPUNightVision.CheckedChanged += cbGPUNightVision_CheckedChanged;
             // 
             // label383
             // 
-            this.label383.AutoSize = true;
-            this.label383.Location = new System.Drawing.Point(222, 146);
-            this.label383.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label383.Name = "label383";
-            this.label383.Size = new System.Drawing.Size(77, 20);
-            this.label383.TabIndex = 90;
-            this.label383.Text = "Darkness";
+            label383.AutoSize = true;
+            label383.Location = new System.Drawing.Point(247, 182);
+            label383.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label383.Name = "label383";
+            label383.Size = new System.Drawing.Size(84, 25);
+            label383.TabIndex = 90;
+            label383.Text = "Darkness";
             // 
             // label384
             // 
-            this.label384.AutoSize = true;
-            this.label384.Location = new System.Drawing.Point(18, 146);
-            this.label384.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label384.Name = "label384";
-            this.label384.Size = new System.Drawing.Size(70, 20);
-            this.label384.TabIndex = 89;
-            this.label384.Text = "Contrast";
+            label384.AutoSize = true;
+            label384.Location = new System.Drawing.Point(20, 182);
+            label384.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label384.Name = "label384";
+            label384.Size = new System.Drawing.Size(79, 25);
+            label384.TabIndex = 89;
+            label384.Text = "Contrast";
             // 
             // label385
             // 
-            this.label385.AutoSize = true;
-            this.label385.Location = new System.Drawing.Point(222, 66);
-            this.label385.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label385.Name = "label385";
-            this.label385.Size = new System.Drawing.Size(83, 20);
-            this.label385.TabIndex = 88;
-            this.label385.Text = "Saturation";
+            label385.AutoSize = true;
+            label385.Location = new System.Drawing.Point(247, 82);
+            label385.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label385.Name = "label385";
+            label385.Size = new System.Drawing.Size(93, 25);
+            label385.TabIndex = 88;
+            label385.Text = "Saturation";
             // 
             // label386
             // 
-            this.label386.AutoSize = true;
-            this.label386.Location = new System.Drawing.Point(18, 66);
-            this.label386.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label386.Name = "label386";
-            this.label386.Size = new System.Drawing.Size(78, 20);
-            this.label386.TabIndex = 87;
-            this.label386.Text = "Lightness";
+            label386.AutoSize = true;
+            label386.Location = new System.Drawing.Point(20, 82);
+            label386.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label386.Name = "label386";
+            label386.Size = new System.Drawing.Size(86, 25);
+            label386.TabIndex = 87;
+            label386.Text = "Lightness";
             // 
             // tbGPUContrast
             // 
-            this.tbGPUContrast.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUContrast.Location = new System.Drawing.Point(14, 175);
-            this.tbGPUContrast.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbGPUContrast.Maximum = 255;
-            this.tbGPUContrast.Name = "tbGPUContrast";
-            this.tbGPUContrast.Size = new System.Drawing.Size(195, 69);
-            this.tbGPUContrast.TabIndex = 86;
-            this.tbGPUContrast.Value = 255;
-            this.tbGPUContrast.Scroll += new System.EventHandler(this.tbGPUContrast_Scroll);
+            tbGPUContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUContrast.Location = new System.Drawing.Point(16, 219);
+            tbGPUContrast.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUContrast.Maximum = 255;
+            tbGPUContrast.Name = "tbGPUContrast";
+            tbGPUContrast.Size = new System.Drawing.Size(217, 69);
+            tbGPUContrast.TabIndex = 86;
+            tbGPUContrast.Value = 255;
+            tbGPUContrast.Scroll += tbGPUContrast_Scroll;
             // 
             // tbGPUDarkness
             // 
-            this.tbGPUDarkness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUDarkness.Location = new System.Drawing.Point(222, 175);
-            this.tbGPUDarkness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbGPUDarkness.Maximum = 255;
-            this.tbGPUDarkness.Name = "tbGPUDarkness";
-            this.tbGPUDarkness.Size = new System.Drawing.Size(195, 69);
-            this.tbGPUDarkness.TabIndex = 85;
-            this.tbGPUDarkness.Scroll += new System.EventHandler(this.tbGPUDarkness_Scroll);
+            tbGPUDarkness.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUDarkness.Location = new System.Drawing.Point(247, 219);
+            tbGPUDarkness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUDarkness.Maximum = 255;
+            tbGPUDarkness.Name = "tbGPUDarkness";
+            tbGPUDarkness.Size = new System.Drawing.Size(217, 69);
+            tbGPUDarkness.TabIndex = 85;
+            tbGPUDarkness.Scroll += tbGPUDarkness_Scroll;
             // 
             // tbGPULightness
             // 
-            this.tbGPULightness.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPULightness.Location = new System.Drawing.Point(14, 89);
-            this.tbGPULightness.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbGPULightness.Maximum = 255;
-            this.tbGPULightness.Name = "tbGPULightness";
-            this.tbGPULightness.Size = new System.Drawing.Size(195, 69);
-            this.tbGPULightness.TabIndex = 84;
-            this.tbGPULightness.Scroll += new System.EventHandler(this.tbGPULightness_Scroll);
+            tbGPULightness.BackColor = System.Drawing.SystemColors.Window;
+            tbGPULightness.Location = new System.Drawing.Point(16, 111);
+            tbGPULightness.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPULightness.Maximum = 255;
+            tbGPULightness.Name = "tbGPULightness";
+            tbGPULightness.Size = new System.Drawing.Size(217, 69);
+            tbGPULightness.TabIndex = 84;
+            tbGPULightness.Scroll += tbGPULightness_Scroll;
             // 
             // tbGPUSaturation
             // 
-            this.tbGPUSaturation.BackColor = System.Drawing.SystemColors.Window;
-            this.tbGPUSaturation.Location = new System.Drawing.Point(222, 89);
-            this.tbGPUSaturation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbGPUSaturation.Maximum = 255;
-            this.tbGPUSaturation.Name = "tbGPUSaturation";
-            this.tbGPUSaturation.Size = new System.Drawing.Size(195, 69);
-            this.tbGPUSaturation.TabIndex = 83;
-            this.tbGPUSaturation.Value = 255;
-            this.tbGPUSaturation.Scroll += new System.EventHandler(this.tbGPUSaturation_Scroll);
+            tbGPUSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbGPUSaturation.Location = new System.Drawing.Point(247, 111);
+            tbGPUSaturation.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbGPUSaturation.Maximum = 255;
+            tbGPUSaturation.Name = "tbGPUSaturation";
+            tbGPUSaturation.Size = new System.Drawing.Size(217, 69);
+            tbGPUSaturation.TabIndex = 83;
+            tbGPUSaturation.Value = 255;
+            tbGPUSaturation.Scroll += tbGPUSaturation_Scroll;
             // 
             // cbGPUInvert
             // 
-            this.cbGPUInvert.AutoSize = true;
-            this.cbGPUInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.cbGPUInvert.Location = new System.Drawing.Point(214, 254);
-            this.cbGPUInvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUInvert.Name = "cbGPUInvert";
-            this.cbGPUInvert.Size = new System.Drawing.Size(75, 24);
-            this.cbGPUInvert.TabIndex = 82;
-            this.cbGPUInvert.Text = "Invert";
-            this.cbGPUInvert.UseVisualStyleBackColor = true;
-            this.cbGPUInvert.CheckedChanged += new System.EventHandler(this.cbGPUInvert_CheckedChanged);
+            cbGPUInvert.AutoSize = true;
+            cbGPUInvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            cbGPUInvert.Location = new System.Drawing.Point(238, 318);
+            cbGPUInvert.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUInvert.Name = "cbGPUInvert";
+            cbGPUInvert.Size = new System.Drawing.Size(83, 29);
+            cbGPUInvert.TabIndex = 82;
+            cbGPUInvert.Text = "Invert";
+            cbGPUInvert.UseVisualStyleBackColor = true;
+            cbGPUInvert.CheckedChanged += cbGPUInvert_CheckedChanged;
             // 
             // cbGPUGreyscale
             // 
-            this.cbGPUGreyscale.AutoSize = true;
-            this.cbGPUGreyscale.Location = new System.Drawing.Point(22, 254);
-            this.cbGPUGreyscale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbGPUGreyscale.Name = "cbGPUGreyscale";
-            this.cbGPUGreyscale.Size = new System.Drawing.Size(106, 24);
-            this.cbGPUGreyscale.TabIndex = 81;
-            this.cbGPUGreyscale.Text = "Greyscale";
-            this.cbGPUGreyscale.UseVisualStyleBackColor = true;
-            this.cbGPUGreyscale.CheckedChanged += new System.EventHandler(this.cbGPUGreyscale_CheckedChanged);
+            cbGPUGreyscale.AutoSize = true;
+            cbGPUGreyscale.Location = new System.Drawing.Point(24, 318);
+            cbGPUGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbGPUGreyscale.Name = "cbGPUGreyscale";
+            cbGPUGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbGPUGreyscale.TabIndex = 81;
+            cbGPUGreyscale.Text = "Greyscale";
+            cbGPUGreyscale.UseVisualStyleBackColor = true;
+            cbGPUGreyscale.CheckedChanged += cbGPUGreyscale_CheckedChanged;
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.groupBox5);
-            this.tabPage9.Controls.Add(this.lbTransitions);
-            this.tabPage9.Controls.Add(this.label43);
-            this.tabPage9.Location = new System.Drawing.Point(4, 29);
-            this.tabPage9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage9.Size = new System.Drawing.Size(457, 767);
-            this.tabPage9.TabIndex = 3;
-            this.tabPage9.Text = "Transitions";
-            this.tabPage9.UseVisualStyleBackColor = true;
+            tabPage9.Controls.Add(groupBox5);
+            tabPage9.Controls.Add(lbTransitions);
+            tabPage9.Controls.Add(label43);
+            tabPage9.Location = new System.Drawing.Point(4, 34);
+            tabPage9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage9.Name = "tabPage9";
+            tabPage9.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage9.Size = new System.Drawing.Size(509, 962);
+            tabPage9.TabIndex = 3;
+            tabPage9.Text = "Transitions";
+            tabPage9.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.label47);
-            this.groupBox5.Controls.Add(this.edTransStopTime);
-            this.groupBox5.Controls.Add(this.label48);
-            this.groupBox5.Controls.Add(this.label46);
-            this.groupBox5.Controls.Add(this.edTransStartTime);
-            this.groupBox5.Controls.Add(this.label45);
-            this.groupBox5.Controls.Add(this.btAddTransition);
-            this.groupBox5.Controls.Add(this.cbTransitionName);
-            this.groupBox5.Controls.Add(this.label44);
-            this.groupBox5.Location = new System.Drawing.Point(30, 189);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox5.Size = new System.Drawing.Size(376, 222);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Add transition";
+            groupBox5.Controls.Add(label47);
+            groupBox5.Controls.Add(edTransStopTime);
+            groupBox5.Controls.Add(label48);
+            groupBox5.Controls.Add(label46);
+            groupBox5.Controls.Add(edTransStartTime);
+            groupBox5.Controls.Add(label45);
+            groupBox5.Controls.Add(btAddTransition);
+            groupBox5.Controls.Add(cbTransitionName);
+            groupBox5.Controls.Add(label44);
+            groupBox5.Location = new System.Drawing.Point(33, 236);
+            groupBox5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox5.Size = new System.Drawing.Size(418, 278);
+            groupBox5.TabIndex = 2;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Add transition";
             // 
             // label47
             // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(200, 169);
-            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(30, 20);
-            this.label47.TabIndex = 8;
-            this.label47.Text = "ms";
+            label47.AutoSize = true;
+            label47.Location = new System.Drawing.Point(222, 211);
+            label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label47.Name = "label47";
+            label47.Size = new System.Drawing.Size(36, 25);
+            label47.TabIndex = 8;
+            label47.Text = "ms";
             // 
             // edTransStopTime
             // 
-            this.edTransStopTime.Location = new System.Drawing.Point(126, 165);
-            this.edTransStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTransStopTime.Name = "edTransStopTime";
-            this.edTransStopTime.Size = new System.Drawing.Size(62, 26);
-            this.edTransStopTime.TabIndex = 7;
-            this.edTransStopTime.Text = "5000";
+            edTransStopTime.Location = new System.Drawing.Point(140, 206);
+            edTransStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTransStopTime.Name = "edTransStopTime";
+            edTransStopTime.Size = new System.Drawing.Size(68, 31);
+            edTransStopTime.TabIndex = 7;
+            edTransStopTime.Text = "5000";
             // 
             // label48
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(18, 169);
-            this.label48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(77, 20);
-            this.label48.TabIndex = 6;
-            this.label48.Text = "Stop time";
+            label48.AutoSize = true;
+            label48.Location = new System.Drawing.Point(20, 211);
+            label48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label48.Name = "label48";
+            label48.Size = new System.Drawing.Size(89, 25);
+            label48.TabIndex = 6;
+            label48.Text = "Stop time";
             // 
             // label46
             // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(200, 129);
-            this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(30, 20);
-            this.label46.TabIndex = 5;
-            this.label46.Text = "ms";
+            label46.AutoSize = true;
+            label46.Location = new System.Drawing.Point(222, 161);
+            label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label46.Name = "label46";
+            label46.Size = new System.Drawing.Size(36, 25);
+            label46.TabIndex = 5;
+            label46.Text = "ms";
             // 
             // edTransStartTime
             // 
-            this.edTransStartTime.Location = new System.Drawing.Point(126, 125);
-            this.edTransStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTransStartTime.Name = "edTransStartTime";
-            this.edTransStartTime.Size = new System.Drawing.Size(62, 26);
-            this.edTransStartTime.TabIndex = 4;
-            this.edTransStartTime.Text = "4000";
+            edTransStartTime.Location = new System.Drawing.Point(140, 156);
+            edTransStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTransStartTime.Name = "edTransStartTime";
+            edTransStartTime.Size = new System.Drawing.Size(68, 31);
+            edTransStartTime.TabIndex = 4;
+            edTransStartTime.Text = "4000";
             // 
             // label45
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(18, 129);
-            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(78, 20);
-            this.label45.TabIndex = 3;
-            this.label45.Text = "Start time";
+            label45.AutoSize = true;
+            label45.Location = new System.Drawing.Point(20, 161);
+            label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label45.Name = "label45";
+            label45.Size = new System.Drawing.Size(88, 25);
+            label45.TabIndex = 3;
+            label45.Text = "Start time";
             // 
             // btAddTransition
             // 
-            this.btAddTransition.Location = new System.Drawing.Point(304, 65);
-            this.btAddTransition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAddTransition.Name = "btAddTransition";
-            this.btAddTransition.Size = new System.Drawing.Size(63, 35);
-            this.btAddTransition.TabIndex = 2;
-            this.btAddTransition.Text = "Add";
-            this.btAddTransition.UseVisualStyleBackColor = true;
-            this.btAddTransition.Click += new System.EventHandler(this.btAddTransition_Click);
+            btAddTransition.Location = new System.Drawing.Point(338, 81);
+            btAddTransition.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAddTransition.Name = "btAddTransition";
+            btAddTransition.Size = new System.Drawing.Size(70, 44);
+            btAddTransition.TabIndex = 2;
+            btAddTransition.Text = "Add";
+            btAddTransition.UseVisualStyleBackColor = true;
+            btAddTransition.Click += btAddTransition_Click;
             // 
             // cbTransitionName
             // 
-            this.cbTransitionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTransitionName.FormattingEnabled = true;
-            this.cbTransitionName.Location = new System.Drawing.Point(22, 68);
-            this.cbTransitionName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbTransitionName.Name = "cbTransitionName";
-            this.cbTransitionName.Size = new System.Drawing.Size(271, 28);
-            this.cbTransitionName.TabIndex = 1;
+            cbTransitionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTransitionName.FormattingEnabled = true;
+            cbTransitionName.Location = new System.Drawing.Point(24, 85);
+            cbTransitionName.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbTransitionName.Name = "cbTransitionName";
+            cbTransitionName.Size = new System.Drawing.Size(301, 33);
+            cbTransitionName.TabIndex = 1;
             // 
             // label44
             // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(18, 43);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(51, 20);
-            this.label44.TabIndex = 0;
-            this.label44.Text = "Name";
+            label44.AutoSize = true;
+            label44.Location = new System.Drawing.Point(20, 54);
+            label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label44.Name = "label44";
+            label44.Size = new System.Drawing.Size(59, 25);
+            label44.TabIndex = 0;
+            label44.Text = "Name";
             // 
             // lbTransitions
             // 
-            this.lbTransitions.FormattingEnabled = true;
-            this.lbTransitions.ItemHeight = 20;
-            this.lbTransitions.Location = new System.Drawing.Point(30, 54);
-            this.lbTransitions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbTransitions.Name = "lbTransitions";
-            this.lbTransitions.Size = new System.Drawing.Size(374, 124);
-            this.lbTransitions.TabIndex = 1;
+            lbTransitions.FormattingEnabled = true;
+            lbTransitions.ItemHeight = 25;
+            lbTransitions.Location = new System.Drawing.Point(33, 68);
+            lbTransitions.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbTransitions.Name = "lbTransitions";
+            lbTransitions.Size = new System.Drawing.Size(415, 154);
+            lbTransitions.TabIndex = 1;
             // 
             // label43
             // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(26, 29);
-            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(72, 20);
-            this.label43.TabIndex = 0;
-            this.label43.Text = "Selected";
+            label43.AutoSize = true;
+            label43.Location = new System.Drawing.Point(29, 36);
+            label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label43.Name = "label43";
+            label43.Size = new System.Drawing.Size(78, 25);
+            label43.TabIndex = 0;
+            label43.Text = "Selected";
             // 
             // tabPage66
             // 
-            this.tabPage66.Controls.Add(this.lbAudioTimeshift);
-            this.tabPage66.Controls.Add(this.tbAudioTimeshift);
-            this.tabPage66.Controls.Add(this.label115);
-            this.tabPage66.Controls.Add(this.groupBox1);
-            this.tabPage66.Controls.Add(this.groupBox2);
-            this.tabPage66.Controls.Add(this.cbAudioAutoGain);
-            this.tabPage66.Controls.Add(this.cbAudioNormalize);
-            this.tabPage66.Controls.Add(this.cbAudioEnhancementEnabled);
-            this.tabPage66.Location = new System.Drawing.Point(4, 29);
-            this.tabPage66.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage66.Name = "tabPage66";
-            this.tabPage66.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage66.Size = new System.Drawing.Size(457, 767);
-            this.tabPage66.TabIndex = 13;
-            this.tabPage66.Text = "Audio enhancement";
-            this.tabPage66.UseVisualStyleBackColor = true;
+            tabPage66.Controls.Add(lbAudioTimeshift);
+            tabPage66.Controls.Add(tbAudioTimeshift);
+            tabPage66.Controls.Add(label115);
+            tabPage66.Controls.Add(groupBox1);
+            tabPage66.Controls.Add(groupBox2);
+            tabPage66.Controls.Add(cbAudioAutoGain);
+            tabPage66.Controls.Add(cbAudioNormalize);
+            tabPage66.Controls.Add(cbAudioEnhancementEnabled);
+            tabPage66.Location = new System.Drawing.Point(4, 34);
+            tabPage66.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage66.Name = "tabPage66";
+            tabPage66.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage66.Size = new System.Drawing.Size(509, 962);
+            tabPage66.TabIndex = 13;
+            tabPage66.Text = "Audio enhancement";
+            tabPage66.UseVisualStyleBackColor = true;
             // 
             // lbAudioTimeshift
             // 
-            this.lbAudioTimeshift.AutoSize = true;
-            this.lbAudioTimeshift.Location = new System.Drawing.Point(261, 694);
-            this.lbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioTimeshift.Name = "lbAudioTimeshift";
-            this.lbAudioTimeshift.Size = new System.Drawing.Size(43, 20);
-            this.lbAudioTimeshift.TabIndex = 12;
-            this.lbAudioTimeshift.Text = "0 ms";
+            lbAudioTimeshift.AutoSize = true;
+            lbAudioTimeshift.Location = new System.Drawing.Point(290, 868);
+            lbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioTimeshift.Name = "lbAudioTimeshift";
+            lbAudioTimeshift.Size = new System.Drawing.Size(51, 25);
+            lbAudioTimeshift.TabIndex = 12;
+            lbAudioTimeshift.Text = "0 ms";
             // 
             // tbAudioTimeshift
             // 
-            this.tbAudioTimeshift.Location = new System.Drawing.Point(96, 677);
-            this.tbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioTimeshift.Maximum = 3000;
-            this.tbAudioTimeshift.Name = "tbAudioTimeshift";
-            this.tbAudioTimeshift.Size = new System.Drawing.Size(156, 69);
-            this.tbAudioTimeshift.SmallChange = 10;
-            this.tbAudioTimeshift.TabIndex = 11;
-            this.tbAudioTimeshift.TickFrequency = 100;
-            this.tbAudioTimeshift.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioTimeshift.Scroll += new System.EventHandler(this.tbAudioTimeshift_Scroll);
+            tbAudioTimeshift.Location = new System.Drawing.Point(107, 846);
+            tbAudioTimeshift.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioTimeshift.Maximum = 3000;
+            tbAudioTimeshift.Name = "tbAudioTimeshift";
+            tbAudioTimeshift.Size = new System.Drawing.Size(173, 69);
+            tbAudioTimeshift.SmallChange = 10;
+            tbAudioTimeshift.TabIndex = 11;
+            tbAudioTimeshift.TickFrequency = 100;
+            tbAudioTimeshift.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioTimeshift.Scroll += tbAudioTimeshift_Scroll;
             // 
             // label115
             // 
-            this.label115.AutoSize = true;
-            this.label115.Location = new System.Drawing.Point(4, 694);
-            this.label115.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label115.Name = "label115";
-            this.label115.Size = new System.Drawing.Size(77, 20);
-            this.label115.TabIndex = 10;
-            this.label115.Text = "Time shift";
+            label115.AutoSize = true;
+            label115.Location = new System.Drawing.Point(4, 868);
+            label115.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label115.Name = "label115";
+            label115.Size = new System.Drawing.Size(89, 25);
+            label115.TabIndex = 10;
+            label115.Text = "Time shift";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainLFE);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainLFE);
-            this.groupBox1.Controls.Add(this.label116);
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainSR);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainSR);
-            this.groupBox1.Controls.Add(this.label117);
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainSL);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainSL);
-            this.groupBox1.Controls.Add(this.label118);
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainR);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainR);
-            this.groupBox1.Controls.Add(this.label119);
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainC);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainC);
-            this.groupBox1.Controls.Add(this.label121);
-            this.groupBox1.Controls.Add(this.lbAudioOutputGainL);
-            this.groupBox1.Controls.Add(this.tbAudioOutputGainL);
-            this.groupBox1.Controls.Add(this.label122);
-            this.groupBox1.Location = new System.Drawing.Point(9, 400);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(434, 265);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Output gains (dB)";
+            groupBox1.Controls.Add(lbAudioOutputGainLFE);
+            groupBox1.Controls.Add(tbAudioOutputGainLFE);
+            groupBox1.Controls.Add(label116);
+            groupBox1.Controls.Add(lbAudioOutputGainSR);
+            groupBox1.Controls.Add(tbAudioOutputGainSR);
+            groupBox1.Controls.Add(label117);
+            groupBox1.Controls.Add(lbAudioOutputGainSL);
+            groupBox1.Controls.Add(tbAudioOutputGainSL);
+            groupBox1.Controls.Add(label118);
+            groupBox1.Controls.Add(lbAudioOutputGainR);
+            groupBox1.Controls.Add(tbAudioOutputGainR);
+            groupBox1.Controls.Add(label119);
+            groupBox1.Controls.Add(lbAudioOutputGainC);
+            groupBox1.Controls.Add(tbAudioOutputGainC);
+            groupBox1.Controls.Add(label121);
+            groupBox1.Controls.Add(lbAudioOutputGainL);
+            groupBox1.Controls.Add(tbAudioOutputGainL);
+            groupBox1.Controls.Add(label122);
+            groupBox1.Location = new System.Drawing.Point(10, 500);
+            groupBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox1.Size = new System.Drawing.Size(482, 331);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Output gains (dB)";
             // 
             // lbAudioOutputGainLFE
             // 
-            this.lbAudioOutputGainLFE.AutoSize = true;
-            this.lbAudioOutputGainLFE.Location = new System.Drawing.Point(374, 228);
-            this.lbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainLFE.Name = "lbAudioOutputGainLFE";
-            this.lbAudioOutputGainLFE.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainLFE.TabIndex = 17;
-            this.lbAudioOutputGainLFE.Text = "0.0";
+            lbAudioOutputGainLFE.AutoSize = true;
+            lbAudioOutputGainLFE.Location = new System.Drawing.Point(416, 285);
+            lbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainLFE.Name = "lbAudioOutputGainLFE";
+            lbAudioOutputGainLFE.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainLFE.TabIndex = 17;
+            lbAudioOutputGainLFE.Text = "0.0";
             // 
             // tbAudioOutputGainLFE
             // 
-            this.tbAudioOutputGainLFE.Location = new System.Drawing.Point(363, 63);
-            this.tbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainLFE.Maximum = 200;
-            this.tbAudioOutputGainLFE.Minimum = -200;
-            this.tbAudioOutputGainLFE.Name = "tbAudioOutputGainLFE";
-            this.tbAudioOutputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainLFE.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainLFE.TabIndex = 16;
-            this.tbAudioOutputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainLFE.Scroll += new System.EventHandler(this.tbAudioOutputGainLFE_Scroll);
+            tbAudioOutputGainLFE.Location = new System.Drawing.Point(403, 79);
+            tbAudioOutputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainLFE.Maximum = 200;
+            tbAudioOutputGainLFE.Minimum = -200;
+            tbAudioOutputGainLFE.Name = "tbAudioOutputGainLFE";
+            tbAudioOutputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainLFE.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainLFE.TabIndex = 16;
+            tbAudioOutputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainLFE.Scroll += tbAudioOutputGainLFE_Scroll;
             // 
             // label116
             // 
-            this.label116.AutoSize = true;
-            this.label116.Location = new System.Drawing.Point(375, 38);
-            this.label116.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label116.Name = "label116";
-            this.label116.Size = new System.Drawing.Size(39, 20);
-            this.label116.TabIndex = 15;
-            this.label116.Text = "LFE";
+            label116.AutoSize = true;
+            label116.Location = new System.Drawing.Point(417, 48);
+            label116.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label116.Name = "label116";
+            label116.Size = new System.Drawing.Size(38, 25);
+            label116.TabIndex = 15;
+            label116.Text = "LFE";
             // 
             // lbAudioOutputGainSR
             // 
-            this.lbAudioOutputGainSR.AutoSize = true;
-            this.lbAudioOutputGainSR.Location = new System.Drawing.Point(302, 228);
-            this.lbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainSR.Name = "lbAudioOutputGainSR";
-            this.lbAudioOutputGainSR.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainSR.TabIndex = 14;
-            this.lbAudioOutputGainSR.Text = "0.0";
+            lbAudioOutputGainSR.AutoSize = true;
+            lbAudioOutputGainSR.Location = new System.Drawing.Point(336, 285);
+            lbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainSR.Name = "lbAudioOutputGainSR";
+            lbAudioOutputGainSR.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainSR.TabIndex = 14;
+            lbAudioOutputGainSR.Text = "0.0";
             // 
             // tbAudioOutputGainSR
             // 
-            this.tbAudioOutputGainSR.Location = new System.Drawing.Point(291, 63);
-            this.tbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainSR.Maximum = 200;
-            this.tbAudioOutputGainSR.Minimum = -200;
-            this.tbAudioOutputGainSR.Name = "tbAudioOutputGainSR";
-            this.tbAudioOutputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainSR.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainSR.TabIndex = 13;
-            this.tbAudioOutputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainSR.Scroll += new System.EventHandler(this.tbAudioOutputGainSR_Scroll);
+            tbAudioOutputGainSR.Location = new System.Drawing.Point(323, 79);
+            tbAudioOutputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainSR.Maximum = 200;
+            tbAudioOutputGainSR.Minimum = -200;
+            tbAudioOutputGainSR.Name = "tbAudioOutputGainSR";
+            tbAudioOutputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainSR.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainSR.TabIndex = 13;
+            tbAudioOutputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainSR.Scroll += tbAudioOutputGainSR_Scroll;
             // 
             // label117
             // 
-            this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(308, 38);
-            this.label117.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label117.Name = "label117";
-            this.label117.Size = new System.Drawing.Size(32, 20);
-            this.label117.TabIndex = 12;
-            this.label117.Text = "SR";
+            label117.AutoSize = true;
+            label117.Location = new System.Drawing.Point(342, 48);
+            label117.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label117.Name = "label117";
+            label117.Size = new System.Drawing.Size(33, 25);
+            label117.TabIndex = 12;
+            label117.Text = "SR";
             // 
             // lbAudioOutputGainSL
             // 
-            this.lbAudioOutputGainSL.AutoSize = true;
-            this.lbAudioOutputGainSL.Location = new System.Drawing.Point(230, 228);
-            this.lbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainSL.Name = "lbAudioOutputGainSL";
-            this.lbAudioOutputGainSL.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainSL.TabIndex = 11;
-            this.lbAudioOutputGainSL.Text = "0.0";
+            lbAudioOutputGainSL.AutoSize = true;
+            lbAudioOutputGainSL.Location = new System.Drawing.Point(256, 285);
+            lbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainSL.Name = "lbAudioOutputGainSL";
+            lbAudioOutputGainSL.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainSL.TabIndex = 11;
+            lbAudioOutputGainSL.Text = "0.0";
             // 
             // tbAudioOutputGainSL
             // 
-            this.tbAudioOutputGainSL.Location = new System.Drawing.Point(219, 63);
-            this.tbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainSL.Maximum = 200;
-            this.tbAudioOutputGainSL.Minimum = -200;
-            this.tbAudioOutputGainSL.Name = "tbAudioOutputGainSL";
-            this.tbAudioOutputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainSL.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainSL.TabIndex = 10;
-            this.tbAudioOutputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainSL.Scroll += new System.EventHandler(this.tbAudioOutputGainSL_Scroll);
+            tbAudioOutputGainSL.Location = new System.Drawing.Point(243, 79);
+            tbAudioOutputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainSL.Maximum = 200;
+            tbAudioOutputGainSL.Minimum = -200;
+            tbAudioOutputGainSL.Name = "tbAudioOutputGainSL";
+            tbAudioOutputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainSL.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainSL.TabIndex = 10;
+            tbAudioOutputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainSL.Scroll += tbAudioOutputGainSL_Scroll;
             // 
             // label118
             // 
-            this.label118.AutoSize = true;
-            this.label118.Location = new System.Drawing.Point(237, 38);
-            this.label118.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label118.Name = "label118";
-            this.label118.Size = new System.Drawing.Size(29, 20);
-            this.label118.TabIndex = 9;
-            this.label118.Text = "SL";
+            label118.AutoSize = true;
+            label118.Location = new System.Drawing.Point(263, 48);
+            label118.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label118.Name = "label118";
+            label118.Size = new System.Drawing.Size(30, 25);
+            label118.TabIndex = 9;
+            label118.Text = "SL";
             // 
             // lbAudioOutputGainR
             // 
-            this.lbAudioOutputGainR.AutoSize = true;
-            this.lbAudioOutputGainR.Location = new System.Drawing.Point(158, 228);
-            this.lbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainR.Name = "lbAudioOutputGainR";
-            this.lbAudioOutputGainR.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainR.TabIndex = 8;
-            this.lbAudioOutputGainR.Text = "0.0";
+            lbAudioOutputGainR.AutoSize = true;
+            lbAudioOutputGainR.Location = new System.Drawing.Point(176, 285);
+            lbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainR.Name = "lbAudioOutputGainR";
+            lbAudioOutputGainR.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainR.TabIndex = 8;
+            lbAudioOutputGainR.Text = "0.0";
             // 
             // tbAudioOutputGainR
             // 
-            this.tbAudioOutputGainR.Location = new System.Drawing.Point(147, 63);
-            this.tbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainR.Maximum = 200;
-            this.tbAudioOutputGainR.Minimum = -200;
-            this.tbAudioOutputGainR.Name = "tbAudioOutputGainR";
-            this.tbAudioOutputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainR.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainR.TabIndex = 7;
-            this.tbAudioOutputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainR.Location = new System.Drawing.Point(163, 79);
+            tbAudioOutputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainR.Maximum = 200;
+            tbAudioOutputGainR.Minimum = -200;
+            tbAudioOutputGainR.Name = "tbAudioOutputGainR";
+            tbAudioOutputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainR.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainR.TabIndex = 7;
+            tbAudioOutputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
             // 
             // label119
             // 
-            this.label119.AutoSize = true;
-            this.label119.Location = new System.Drawing.Point(171, 38);
-            this.label119.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label119.Name = "label119";
-            this.label119.Size = new System.Drawing.Size(21, 20);
-            this.label119.TabIndex = 6;
-            this.label119.Text = "R";
+            label119.AutoSize = true;
+            label119.Location = new System.Drawing.Point(190, 48);
+            label119.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label119.Name = "label119";
+            label119.Size = new System.Drawing.Size(23, 25);
+            label119.TabIndex = 6;
+            label119.Text = "R";
             // 
             // lbAudioOutputGainC
             // 
-            this.lbAudioOutputGainC.AutoSize = true;
-            this.lbAudioOutputGainC.Location = new System.Drawing.Point(86, 228);
-            this.lbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainC.Name = "lbAudioOutputGainC";
-            this.lbAudioOutputGainC.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainC.TabIndex = 5;
-            this.lbAudioOutputGainC.Text = "0.0";
+            lbAudioOutputGainC.AutoSize = true;
+            lbAudioOutputGainC.Location = new System.Drawing.Point(96, 285);
+            lbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainC.Name = "lbAudioOutputGainC";
+            lbAudioOutputGainC.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainC.TabIndex = 5;
+            lbAudioOutputGainC.Text = "0.0";
             // 
             // tbAudioOutputGainC
             // 
-            this.tbAudioOutputGainC.Location = new System.Drawing.Point(75, 63);
-            this.tbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainC.Maximum = 200;
-            this.tbAudioOutputGainC.Minimum = -200;
-            this.tbAudioOutputGainC.Name = "tbAudioOutputGainC";
-            this.tbAudioOutputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainC.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainC.TabIndex = 4;
-            this.tbAudioOutputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainC.Scroll += new System.EventHandler(this.tbAudioOutputGainC_Scroll);
+            tbAudioOutputGainC.Location = new System.Drawing.Point(83, 79);
+            tbAudioOutputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainC.Maximum = 200;
+            tbAudioOutputGainC.Minimum = -200;
+            tbAudioOutputGainC.Name = "tbAudioOutputGainC";
+            tbAudioOutputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainC.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainC.TabIndex = 4;
+            tbAudioOutputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainC.Scroll += tbAudioOutputGainC_Scroll;
             // 
             // label121
             // 
-            this.label121.AutoSize = true;
-            this.label121.Location = new System.Drawing.Point(99, 38);
-            this.label121.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label121.Name = "label121";
-            this.label121.Size = new System.Drawing.Size(20, 20);
-            this.label121.TabIndex = 3;
-            this.label121.Text = "C";
+            label121.AutoSize = true;
+            label121.Location = new System.Drawing.Point(110, 48);
+            label121.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label121.Name = "label121";
+            label121.Size = new System.Drawing.Size(23, 25);
+            label121.TabIndex = 3;
+            label121.Text = "C";
             // 
             // lbAudioOutputGainL
             // 
-            this.lbAudioOutputGainL.AutoSize = true;
-            this.lbAudioOutputGainL.Location = new System.Drawing.Point(14, 228);
-            this.lbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioOutputGainL.Name = "lbAudioOutputGainL";
-            this.lbAudioOutputGainL.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioOutputGainL.TabIndex = 2;
-            this.lbAudioOutputGainL.Text = "0.0";
+            lbAudioOutputGainL.AutoSize = true;
+            lbAudioOutputGainL.Location = new System.Drawing.Point(16, 285);
+            lbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioOutputGainL.Name = "lbAudioOutputGainL";
+            lbAudioOutputGainL.Size = new System.Drawing.Size(36, 25);
+            lbAudioOutputGainL.TabIndex = 2;
+            lbAudioOutputGainL.Text = "0.0";
             // 
             // tbAudioOutputGainL
             // 
-            this.tbAudioOutputGainL.Location = new System.Drawing.Point(3, 63);
-            this.tbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioOutputGainL.Maximum = 200;
-            this.tbAudioOutputGainL.Minimum = -200;
-            this.tbAudioOutputGainL.Name = "tbAudioOutputGainL";
-            this.tbAudioOutputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioOutputGainL.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioOutputGainL.TabIndex = 1;
-            this.tbAudioOutputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioOutputGainL.Scroll += new System.EventHandler(this.tbAudioOutputGainL_Scroll);
+            tbAudioOutputGainL.Location = new System.Drawing.Point(3, 79);
+            tbAudioOutputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioOutputGainL.Maximum = 200;
+            tbAudioOutputGainL.Minimum = -200;
+            tbAudioOutputGainL.Name = "tbAudioOutputGainL";
+            tbAudioOutputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioOutputGainL.Size = new System.Drawing.Size(69, 200);
+            tbAudioOutputGainL.TabIndex = 1;
+            tbAudioOutputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioOutputGainL.Scroll += tbAudioOutputGainL_Scroll;
             // 
             // label122
             // 
-            this.label122.AutoSize = true;
-            this.label122.Location = new System.Drawing.Point(27, 38);
-            this.label122.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label122.Name = "label122";
-            this.label122.Size = new System.Drawing.Size(18, 20);
-            this.label122.TabIndex = 0;
-            this.label122.Text = "L";
+            label122.AutoSize = true;
+            label122.Location = new System.Drawing.Point(30, 48);
+            label122.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label122.Name = "label122";
+            label122.Size = new System.Drawing.Size(20, 25);
+            label122.TabIndex = 0;
+            label122.Text = "L";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.lbAudioInputGainLFE);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainLFE);
-            this.groupBox2.Controls.Add(this.label123);
-            this.groupBox2.Controls.Add(this.lbAudioInputGainSR);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainSR);
-            this.groupBox2.Controls.Add(this.label124);
-            this.groupBox2.Controls.Add(this.lbAudioInputGainSL);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainSL);
-            this.groupBox2.Controls.Add(this.label125);
-            this.groupBox2.Controls.Add(this.lbAudioInputGainR);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainR);
-            this.groupBox2.Controls.Add(this.label126);
-            this.groupBox2.Controls.Add(this.lbAudioInputGainC);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainC);
-            this.groupBox2.Controls.Add(this.label127);
-            this.groupBox2.Controls.Add(this.lbAudioInputGainL);
-            this.groupBox2.Controls.Add(this.tbAudioInputGainL);
-            this.groupBox2.Controls.Add(this.label128);
-            this.groupBox2.Location = new System.Drawing.Point(9, 126);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(434, 265);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Input gains (dB)";
+            groupBox2.Controls.Add(lbAudioInputGainLFE);
+            groupBox2.Controls.Add(tbAudioInputGainLFE);
+            groupBox2.Controls.Add(label123);
+            groupBox2.Controls.Add(lbAudioInputGainSR);
+            groupBox2.Controls.Add(tbAudioInputGainSR);
+            groupBox2.Controls.Add(label124);
+            groupBox2.Controls.Add(lbAudioInputGainSL);
+            groupBox2.Controls.Add(tbAudioInputGainSL);
+            groupBox2.Controls.Add(label125);
+            groupBox2.Controls.Add(lbAudioInputGainR);
+            groupBox2.Controls.Add(tbAudioInputGainR);
+            groupBox2.Controls.Add(label126);
+            groupBox2.Controls.Add(lbAudioInputGainC);
+            groupBox2.Controls.Add(tbAudioInputGainC);
+            groupBox2.Controls.Add(label127);
+            groupBox2.Controls.Add(lbAudioInputGainL);
+            groupBox2.Controls.Add(tbAudioInputGainL);
+            groupBox2.Controls.Add(label128);
+            groupBox2.Location = new System.Drawing.Point(10, 158);
+            groupBox2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox2.Size = new System.Drawing.Size(482, 331);
+            groupBox2.TabIndex = 8;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Input gains (dB)";
             // 
             // lbAudioInputGainLFE
             // 
-            this.lbAudioInputGainLFE.AutoSize = true;
-            this.lbAudioInputGainLFE.Location = new System.Drawing.Point(374, 228);
-            this.lbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainLFE.Name = "lbAudioInputGainLFE";
-            this.lbAudioInputGainLFE.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainLFE.TabIndex = 17;
-            this.lbAudioInputGainLFE.Text = "0.0";
+            lbAudioInputGainLFE.AutoSize = true;
+            lbAudioInputGainLFE.Location = new System.Drawing.Point(416, 285);
+            lbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainLFE.Name = "lbAudioInputGainLFE";
+            lbAudioInputGainLFE.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainLFE.TabIndex = 17;
+            lbAudioInputGainLFE.Text = "0.0";
             // 
             // tbAudioInputGainLFE
             // 
-            this.tbAudioInputGainLFE.Location = new System.Drawing.Point(363, 63);
-            this.tbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainLFE.Maximum = 200;
-            this.tbAudioInputGainLFE.Minimum = -200;
-            this.tbAudioInputGainLFE.Name = "tbAudioInputGainLFE";
-            this.tbAudioInputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainLFE.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainLFE.TabIndex = 16;
-            this.tbAudioInputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainLFE.Scroll += new System.EventHandler(this.tbAudioInputGainLFE_Scroll);
+            tbAudioInputGainLFE.Location = new System.Drawing.Point(403, 79);
+            tbAudioInputGainLFE.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainLFE.Maximum = 200;
+            tbAudioInputGainLFE.Minimum = -200;
+            tbAudioInputGainLFE.Name = "tbAudioInputGainLFE";
+            tbAudioInputGainLFE.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainLFE.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainLFE.TabIndex = 16;
+            tbAudioInputGainLFE.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainLFE.Scroll += tbAudioInputGainLFE_Scroll;
             // 
             // label123
             // 
-            this.label123.AutoSize = true;
-            this.label123.Location = new System.Drawing.Point(375, 38);
-            this.label123.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label123.Name = "label123";
-            this.label123.Size = new System.Drawing.Size(39, 20);
-            this.label123.TabIndex = 15;
-            this.label123.Text = "LFE";
+            label123.AutoSize = true;
+            label123.Location = new System.Drawing.Point(417, 48);
+            label123.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label123.Name = "label123";
+            label123.Size = new System.Drawing.Size(38, 25);
+            label123.TabIndex = 15;
+            label123.Text = "LFE";
             // 
             // lbAudioInputGainSR
             // 
-            this.lbAudioInputGainSR.AutoSize = true;
-            this.lbAudioInputGainSR.Location = new System.Drawing.Point(302, 228);
-            this.lbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainSR.Name = "lbAudioInputGainSR";
-            this.lbAudioInputGainSR.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainSR.TabIndex = 14;
-            this.lbAudioInputGainSR.Text = "0.0";
+            lbAudioInputGainSR.AutoSize = true;
+            lbAudioInputGainSR.Location = new System.Drawing.Point(336, 285);
+            lbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainSR.Name = "lbAudioInputGainSR";
+            lbAudioInputGainSR.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainSR.TabIndex = 14;
+            lbAudioInputGainSR.Text = "0.0";
             // 
             // tbAudioInputGainSR
             // 
-            this.tbAudioInputGainSR.Location = new System.Drawing.Point(291, 63);
-            this.tbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainSR.Maximum = 200;
-            this.tbAudioInputGainSR.Minimum = -200;
-            this.tbAudioInputGainSR.Name = "tbAudioInputGainSR";
-            this.tbAudioInputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainSR.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainSR.TabIndex = 13;
-            this.tbAudioInputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainSR.Scroll += new System.EventHandler(this.tbAudioInputGainSR_Scroll);
+            tbAudioInputGainSR.Location = new System.Drawing.Point(323, 79);
+            tbAudioInputGainSR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainSR.Maximum = 200;
+            tbAudioInputGainSR.Minimum = -200;
+            tbAudioInputGainSR.Name = "tbAudioInputGainSR";
+            tbAudioInputGainSR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainSR.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainSR.TabIndex = 13;
+            tbAudioInputGainSR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainSR.Scroll += tbAudioInputGainSR_Scroll;
             // 
             // label124
             // 
-            this.label124.AutoSize = true;
-            this.label124.Location = new System.Drawing.Point(308, 38);
-            this.label124.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(32, 20);
-            this.label124.TabIndex = 12;
-            this.label124.Text = "SR";
+            label124.AutoSize = true;
+            label124.Location = new System.Drawing.Point(342, 48);
+            label124.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label124.Name = "label124";
+            label124.Size = new System.Drawing.Size(33, 25);
+            label124.TabIndex = 12;
+            label124.Text = "SR";
             // 
             // lbAudioInputGainSL
             // 
-            this.lbAudioInputGainSL.AutoSize = true;
-            this.lbAudioInputGainSL.Location = new System.Drawing.Point(230, 228);
-            this.lbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainSL.Name = "lbAudioInputGainSL";
-            this.lbAudioInputGainSL.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainSL.TabIndex = 11;
-            this.lbAudioInputGainSL.Text = "0.0";
+            lbAudioInputGainSL.AutoSize = true;
+            lbAudioInputGainSL.Location = new System.Drawing.Point(256, 285);
+            lbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainSL.Name = "lbAudioInputGainSL";
+            lbAudioInputGainSL.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainSL.TabIndex = 11;
+            lbAudioInputGainSL.Text = "0.0";
             // 
             // tbAudioInputGainSL
             // 
-            this.tbAudioInputGainSL.Location = new System.Drawing.Point(219, 63);
-            this.tbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainSL.Maximum = 200;
-            this.tbAudioInputGainSL.Minimum = -200;
-            this.tbAudioInputGainSL.Name = "tbAudioInputGainSL";
-            this.tbAudioInputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainSL.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainSL.TabIndex = 10;
-            this.tbAudioInputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainSL.Scroll += new System.EventHandler(this.tbAudioInputGainSL_Scroll);
+            tbAudioInputGainSL.Location = new System.Drawing.Point(243, 79);
+            tbAudioInputGainSL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainSL.Maximum = 200;
+            tbAudioInputGainSL.Minimum = -200;
+            tbAudioInputGainSL.Name = "tbAudioInputGainSL";
+            tbAudioInputGainSL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainSL.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainSL.TabIndex = 10;
+            tbAudioInputGainSL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainSL.Scroll += tbAudioInputGainSL_Scroll;
             // 
             // label125
             // 
-            this.label125.AutoSize = true;
-            this.label125.Location = new System.Drawing.Point(237, 38);
-            this.label125.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label125.Name = "label125";
-            this.label125.Size = new System.Drawing.Size(29, 20);
-            this.label125.TabIndex = 9;
-            this.label125.Text = "SL";
+            label125.AutoSize = true;
+            label125.Location = new System.Drawing.Point(263, 48);
+            label125.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label125.Name = "label125";
+            label125.Size = new System.Drawing.Size(30, 25);
+            label125.TabIndex = 9;
+            label125.Text = "SL";
             // 
             // lbAudioInputGainR
             // 
-            this.lbAudioInputGainR.AutoSize = true;
-            this.lbAudioInputGainR.Location = new System.Drawing.Point(158, 228);
-            this.lbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainR.Name = "lbAudioInputGainR";
-            this.lbAudioInputGainR.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainR.TabIndex = 8;
-            this.lbAudioInputGainR.Text = "0.0";
+            lbAudioInputGainR.AutoSize = true;
+            lbAudioInputGainR.Location = new System.Drawing.Point(176, 285);
+            lbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainR.Name = "lbAudioInputGainR";
+            lbAudioInputGainR.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainR.TabIndex = 8;
+            lbAudioInputGainR.Text = "0.0";
             // 
             // tbAudioInputGainR
             // 
-            this.tbAudioInputGainR.Location = new System.Drawing.Point(147, 63);
-            this.tbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainR.Maximum = 200;
-            this.tbAudioInputGainR.Minimum = -200;
-            this.tbAudioInputGainR.Name = "tbAudioInputGainR";
-            this.tbAudioInputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainR.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainR.TabIndex = 7;
-            this.tbAudioInputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainR.Scroll += new System.EventHandler(this.tbAudioInputGainR_Scroll);
+            tbAudioInputGainR.Location = new System.Drawing.Point(163, 79);
+            tbAudioInputGainR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainR.Maximum = 200;
+            tbAudioInputGainR.Minimum = -200;
+            tbAudioInputGainR.Name = "tbAudioInputGainR";
+            tbAudioInputGainR.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainR.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainR.TabIndex = 7;
+            tbAudioInputGainR.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainR.Scroll += tbAudioInputGainR_Scroll;
             // 
             // label126
             // 
-            this.label126.AutoSize = true;
-            this.label126.Location = new System.Drawing.Point(171, 38);
-            this.label126.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label126.Name = "label126";
-            this.label126.Size = new System.Drawing.Size(21, 20);
-            this.label126.TabIndex = 6;
-            this.label126.Text = "R";
+            label126.AutoSize = true;
+            label126.Location = new System.Drawing.Point(190, 48);
+            label126.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label126.Name = "label126";
+            label126.Size = new System.Drawing.Size(23, 25);
+            label126.TabIndex = 6;
+            label126.Text = "R";
             // 
             // lbAudioInputGainC
             // 
-            this.lbAudioInputGainC.AutoSize = true;
-            this.lbAudioInputGainC.Location = new System.Drawing.Point(86, 228);
-            this.lbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainC.Name = "lbAudioInputGainC";
-            this.lbAudioInputGainC.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainC.TabIndex = 5;
-            this.lbAudioInputGainC.Text = "0.0";
+            lbAudioInputGainC.AutoSize = true;
+            lbAudioInputGainC.Location = new System.Drawing.Point(96, 285);
+            lbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainC.Name = "lbAudioInputGainC";
+            lbAudioInputGainC.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainC.TabIndex = 5;
+            lbAudioInputGainC.Text = "0.0";
             // 
             // tbAudioInputGainC
             // 
-            this.tbAudioInputGainC.Location = new System.Drawing.Point(75, 63);
-            this.tbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainC.Maximum = 200;
-            this.tbAudioInputGainC.Minimum = -200;
-            this.tbAudioInputGainC.Name = "tbAudioInputGainC";
-            this.tbAudioInputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainC.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainC.TabIndex = 4;
-            this.tbAudioInputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainC.Scroll += new System.EventHandler(this.tbAudioInputGainC_Scroll);
+            tbAudioInputGainC.Location = new System.Drawing.Point(83, 79);
+            tbAudioInputGainC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainC.Maximum = 200;
+            tbAudioInputGainC.Minimum = -200;
+            tbAudioInputGainC.Name = "tbAudioInputGainC";
+            tbAudioInputGainC.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainC.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainC.TabIndex = 4;
+            tbAudioInputGainC.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainC.Scroll += tbAudioInputGainC_Scroll;
             // 
             // label127
             // 
-            this.label127.AutoSize = true;
-            this.label127.Location = new System.Drawing.Point(99, 38);
-            this.label127.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label127.Name = "label127";
-            this.label127.Size = new System.Drawing.Size(20, 20);
-            this.label127.TabIndex = 3;
-            this.label127.Text = "C";
+            label127.AutoSize = true;
+            label127.Location = new System.Drawing.Point(110, 48);
+            label127.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label127.Name = "label127";
+            label127.Size = new System.Drawing.Size(23, 25);
+            label127.TabIndex = 3;
+            label127.Text = "C";
             // 
             // lbAudioInputGainL
             // 
-            this.lbAudioInputGainL.AutoSize = true;
-            this.lbAudioInputGainL.Location = new System.Drawing.Point(14, 228);
-            this.lbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbAudioInputGainL.Name = "lbAudioInputGainL";
-            this.lbAudioInputGainL.Size = new System.Drawing.Size(31, 20);
-            this.lbAudioInputGainL.TabIndex = 2;
-            this.lbAudioInputGainL.Text = "0.0";
+            lbAudioInputGainL.AutoSize = true;
+            lbAudioInputGainL.Location = new System.Drawing.Point(16, 285);
+            lbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbAudioInputGainL.Name = "lbAudioInputGainL";
+            lbAudioInputGainL.Size = new System.Drawing.Size(36, 25);
+            lbAudioInputGainL.TabIndex = 2;
+            lbAudioInputGainL.Text = "0.0";
             // 
             // tbAudioInputGainL
             // 
-            this.tbAudioInputGainL.Location = new System.Drawing.Point(3, 63);
-            this.tbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioInputGainL.Maximum = 200;
-            this.tbAudioInputGainL.Minimum = -200;
-            this.tbAudioInputGainL.Name = "tbAudioInputGainL";
-            this.tbAudioInputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudioInputGainL.Size = new System.Drawing.Size(69, 160);
-            this.tbAudioInputGainL.TabIndex = 1;
-            this.tbAudioInputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbAudioInputGainL.Scroll += new System.EventHandler(this.tbAudioInputGainL_Scroll);
+            tbAudioInputGainL.Location = new System.Drawing.Point(3, 79);
+            tbAudioInputGainL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioInputGainL.Maximum = 200;
+            tbAudioInputGainL.Minimum = -200;
+            tbAudioInputGainL.Name = "tbAudioInputGainL";
+            tbAudioInputGainL.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudioInputGainL.Size = new System.Drawing.Size(69, 200);
+            tbAudioInputGainL.TabIndex = 1;
+            tbAudioInputGainL.TickStyle = System.Windows.Forms.TickStyle.Both;
+            tbAudioInputGainL.Scroll += tbAudioInputGainL_Scroll;
             // 
             // label128
             // 
-            this.label128.AutoSize = true;
-            this.label128.Location = new System.Drawing.Point(27, 38);
-            this.label128.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label128.Name = "label128";
-            this.label128.Size = new System.Drawing.Size(18, 20);
-            this.label128.TabIndex = 0;
-            this.label128.Text = "L";
+            label128.AutoSize = true;
+            label128.Location = new System.Drawing.Point(30, 48);
+            label128.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label128.Name = "label128";
+            label128.Size = new System.Drawing.Size(20, 25);
+            label128.TabIndex = 0;
+            label128.Text = "L";
             // 
             // cbAudioAutoGain
             // 
-            this.cbAudioAutoGain.AutoSize = true;
-            this.cbAudioAutoGain.Location = new System.Drawing.Point(200, 74);
-            this.cbAudioAutoGain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudioAutoGain.Name = "cbAudioAutoGain";
-            this.cbAudioAutoGain.Size = new System.Drawing.Size(103, 24);
-            this.cbAudioAutoGain.TabIndex = 5;
-            this.cbAudioAutoGain.Text = "Auto gain";
-            this.cbAudioAutoGain.UseVisualStyleBackColor = true;
-            this.cbAudioAutoGain.CheckedChanged += new System.EventHandler(this.cbAudioAutoGain_CheckedChanged);
+            cbAudioAutoGain.AutoSize = true;
+            cbAudioAutoGain.Location = new System.Drawing.Point(222, 92);
+            cbAudioAutoGain.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioAutoGain.Name = "cbAudioAutoGain";
+            cbAudioAutoGain.Size = new System.Drawing.Size(116, 29);
+            cbAudioAutoGain.TabIndex = 5;
+            cbAudioAutoGain.Text = "Auto gain";
+            cbAudioAutoGain.UseVisualStyleBackColor = true;
+            cbAudioAutoGain.CheckedChanged += cbAudioAutoGain_CheckedChanged;
             // 
             // cbAudioNormalize
             // 
-            this.cbAudioNormalize.AutoSize = true;
-            this.cbAudioNormalize.Location = new System.Drawing.Point(58, 74);
-            this.cbAudioNormalize.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudioNormalize.Name = "cbAudioNormalize";
-            this.cbAudioNormalize.Size = new System.Drawing.Size(105, 24);
-            this.cbAudioNormalize.TabIndex = 4;
-            this.cbAudioNormalize.Text = "Normalize";
-            this.cbAudioNormalize.UseVisualStyleBackColor = true;
-            this.cbAudioNormalize.CheckedChanged += new System.EventHandler(this.cbAudioNormalize_CheckedChanged);
+            cbAudioNormalize.AutoSize = true;
+            cbAudioNormalize.Location = new System.Drawing.Point(64, 92);
+            cbAudioNormalize.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioNormalize.Name = "cbAudioNormalize";
+            cbAudioNormalize.Size = new System.Drawing.Size(118, 29);
+            cbAudioNormalize.TabIndex = 4;
+            cbAudioNormalize.Text = "Normalize";
+            cbAudioNormalize.UseVisualStyleBackColor = true;
+            cbAudioNormalize.CheckedChanged += cbAudioNormalize_CheckedChanged;
             // 
             // cbAudioEnhancementEnabled
             // 
-            this.cbAudioEnhancementEnabled.AutoSize = true;
-            this.cbAudioEnhancementEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudioEnhancementEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudioEnhancementEnabled.Name = "cbAudioEnhancementEnabled";
-            this.cbAudioEnhancementEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudioEnhancementEnabled.TabIndex = 3;
-            this.cbAudioEnhancementEnabled.Text = "Enabled";
-            this.cbAudioEnhancementEnabled.UseVisualStyleBackColor = true;
+            cbAudioEnhancementEnabled.AutoSize = true;
+            cbAudioEnhancementEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudioEnhancementEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioEnhancementEnabled.Name = "cbAudioEnhancementEnabled";
+            cbAudioEnhancementEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioEnhancementEnabled.TabIndex = 3;
+            cbAudioEnhancementEnabled.Text = "Enabled";
+            cbAudioEnhancementEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label133);
-            this.tabPage3.Controls.Add(this.tabControl18);
-            this.tabPage3.Controls.Add(this.cbAudioEffectsEnabled);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Size = new System.Drawing.Size(457, 767);
-            this.tabPage3.TabIndex = 5;
-            this.tabPage3.Text = "Audio effects";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(label133);
+            tabPage3.Controls.Add(tabControl18);
+            tabPage3.Controls.Add(cbAudioEffectsEnabled);
+            tabPage3.Location = new System.Drawing.Point(4, 34);
+            tabPage3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage3.Size = new System.Drawing.Size(509, 962);
+            tabPage3.TabIndex = 5;
+            tabPage3.Text = "Audio effects";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // label133
             // 
-            this.label133.AutoSize = true;
-            this.label133.Location = new System.Drawing.Point(152, 25);
-            this.label133.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(278, 20);
-            this.label133.TabIndex = 4;
-            this.label133.Text = "Much more effects available using API";
+            label133.AutoSize = true;
+            label133.Location = new System.Drawing.Point(169, 31);
+            label133.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label133.Name = "label133";
+            label133.Size = new System.Drawing.Size(313, 25);
+            label133.TabIndex = 4;
+            label133.Text = "Much more effects available using API";
             // 
             // tabControl18
             // 
-            this.tabControl18.Controls.Add(this.tabPage71);
-            this.tabControl18.Controls.Add(this.tabPage72);
-            this.tabControl18.Controls.Add(this.tabPage73);
-            this.tabControl18.Controls.Add(this.tabPage75);
-            this.tabControl18.Controls.Add(this.tabPage76);
-            this.tabControl18.Controls.Add(this.tabPage16);
-            this.tabControl18.Location = new System.Drawing.Point(15, 58);
-            this.tabControl18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl18.Name = "tabControl18";
-            this.tabControl18.SelectedIndex = 0;
-            this.tabControl18.Size = new System.Drawing.Size(424, 680);
-            this.tabControl18.TabIndex = 3;
+            tabControl18.Controls.Add(tabPage71);
+            tabControl18.Controls.Add(tabPage72);
+            tabControl18.Controls.Add(tabPage73);
+            tabControl18.Controls.Add(tabPage75);
+            tabControl18.Controls.Add(tabPage76);
+            tabControl18.Controls.Add(tabPage16);
+            tabControl18.Location = new System.Drawing.Point(17, 72);
+            tabControl18.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl18.Name = "tabControl18";
+            tabControl18.SelectedIndex = 0;
+            tabControl18.Size = new System.Drawing.Size(471, 850);
+            tabControl18.TabIndex = 3;
             // 
             // tabPage71
             // 
-            this.tabPage71.Controls.Add(this.label231);
-            this.tabPage71.Controls.Add(this.label230);
-            this.tabPage71.Controls.Add(this.tbAudAmplifyAmp);
-            this.tabPage71.Controls.Add(this.label95);
-            this.tabPage71.Controls.Add(this.cbAudAmplifyEnabled);
-            this.tabPage71.Location = new System.Drawing.Point(4, 29);
-            this.tabPage71.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage71.Name = "tabPage71";
-            this.tabPage71.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage71.Size = new System.Drawing.Size(416, 647);
-            this.tabPage71.TabIndex = 0;
-            this.tabPage71.Text = "Amplify";
-            this.tabPage71.UseVisualStyleBackColor = true;
+            tabPage71.Controls.Add(label231);
+            tabPage71.Controls.Add(label230);
+            tabPage71.Controls.Add(tbAudAmplifyAmp);
+            tabPage71.Controls.Add(label95);
+            tabPage71.Controls.Add(cbAudAmplifyEnabled);
+            tabPage71.Location = new System.Drawing.Point(4, 34);
+            tabPage71.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage71.Name = "tabPage71";
+            tabPage71.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage71.Size = new System.Drawing.Size(463, 812);
+            tabPage71.TabIndex = 0;
+            tabPage71.Text = "Amplify";
+            tabPage71.UseVisualStyleBackColor = true;
             // 
             // label231
             // 
-            this.label231.AutoSize = true;
-            this.label231.Location = new System.Drawing.Point(320, 82);
-            this.label231.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label231.Name = "label231";
-            this.label231.Size = new System.Drawing.Size(50, 20);
-            this.label231.TabIndex = 5;
-            this.label231.Text = "400%";
+            label231.AutoSize = true;
+            label231.Location = new System.Drawing.Point(356, 102);
+            label231.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label231.Name = "label231";
+            label231.Size = new System.Drawing.Size(57, 25);
+            label231.TabIndex = 5;
+            label231.Text = "400%";
             // 
             // label230
             // 
-            this.label230.AutoSize = true;
-            this.label230.Location = new System.Drawing.Point(102, 82);
-            this.label230.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label230.Name = "label230";
-            this.label230.Size = new System.Drawing.Size(50, 20);
-            this.label230.TabIndex = 4;
-            this.label230.Text = "100%";
+            label230.AutoSize = true;
+            label230.Location = new System.Drawing.Point(113, 102);
+            label230.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label230.Name = "label230";
+            label230.Size = new System.Drawing.Size(57, 25);
+            label230.TabIndex = 4;
+            label230.Text = "100%";
             // 
             // tbAudAmplifyAmp
             // 
-            this.tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudAmplifyAmp.Location = new System.Drawing.Point(24, 106);
-            this.tbAudAmplifyAmp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudAmplifyAmp.Maximum = 4000;
-            this.tbAudAmplifyAmp.Name = "tbAudAmplifyAmp";
-            this.tbAudAmplifyAmp.Size = new System.Drawing.Size(345, 69);
-            this.tbAudAmplifyAmp.TabIndex = 3;
-            this.tbAudAmplifyAmp.TickFrequency = 50;
-            this.tbAudAmplifyAmp.Value = 1000;
-            this.tbAudAmplifyAmp.Scroll += new System.EventHandler(this.tbAudAmplifyAmp_Scroll);
+            tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window;
+            tbAudAmplifyAmp.Location = new System.Drawing.Point(27, 132);
+            tbAudAmplifyAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudAmplifyAmp.Maximum = 4000;
+            tbAudAmplifyAmp.Name = "tbAudAmplifyAmp";
+            tbAudAmplifyAmp.Size = new System.Drawing.Size(383, 69);
+            tbAudAmplifyAmp.TabIndex = 3;
+            tbAudAmplifyAmp.TickFrequency = 50;
+            tbAudAmplifyAmp.Value = 1000;
+            tbAudAmplifyAmp.Scroll += tbAudAmplifyAmp_Scroll;
             // 
             // label95
             // 
-            this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(20, 82);
-            this.label95.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(63, 20);
-            this.label95.TabIndex = 2;
-            this.label95.Text = "Volume";
+            label95.AutoSize = true;
+            label95.Location = new System.Drawing.Point(22, 102);
+            label95.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label95.Name = "label95";
+            label95.Size = new System.Drawing.Size(72, 25);
+            label95.TabIndex = 2;
+            label95.Text = "Volume";
             // 
             // cbAudAmplifyEnabled
             // 
-            this.cbAudAmplifyEnabled.AutoSize = true;
-            this.cbAudAmplifyEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled";
-            this.cbAudAmplifyEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudAmplifyEnabled.TabIndex = 1;
-            this.cbAudAmplifyEnabled.Text = "Enabled";
-            this.cbAudAmplifyEnabled.UseVisualStyleBackColor = true;
-            this.cbAudAmplifyEnabled.CheckedChanged += new System.EventHandler(this.cbAudAmplifyEnabled_CheckedChanged);
+            cbAudAmplifyEnabled.AutoSize = true;
+            cbAudAmplifyEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled";
+            cbAudAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudAmplifyEnabled.TabIndex = 1;
+            cbAudAmplifyEnabled.Text = "Enabled";
+            cbAudAmplifyEnabled.UseVisualStyleBackColor = true;
+            cbAudAmplifyEnabled.CheckedChanged += cbAudAmplifyEnabled_CheckedChanged;
             // 
             // tabPage72
             // 
-            this.tabPage72.Controls.Add(this.btAudEqRefresh);
-            this.tabPage72.Controls.Add(this.cbAudEqualizerPreset);
-            this.tabPage72.Controls.Add(this.label243);
-            this.tabPage72.Controls.Add(this.label242);
-            this.tabPage72.Controls.Add(this.label241);
-            this.tabPage72.Controls.Add(this.label240);
-            this.tabPage72.Controls.Add(this.label239);
-            this.tabPage72.Controls.Add(this.label238);
-            this.tabPage72.Controls.Add(this.label237);
-            this.tabPage72.Controls.Add(this.label236);
-            this.tabPage72.Controls.Add(this.label235);
-            this.tabPage72.Controls.Add(this.label234);
-            this.tabPage72.Controls.Add(this.label233);
-            this.tabPage72.Controls.Add(this.label232);
-            this.tabPage72.Controls.Add(this.tbAudEq9);
-            this.tabPage72.Controls.Add(this.tbAudEq8);
-            this.tabPage72.Controls.Add(this.tbAudEq7);
-            this.tabPage72.Controls.Add(this.tbAudEq6);
-            this.tabPage72.Controls.Add(this.tbAudEq5);
-            this.tabPage72.Controls.Add(this.tbAudEq4);
-            this.tabPage72.Controls.Add(this.tbAudEq3);
-            this.tabPage72.Controls.Add(this.tbAudEq2);
-            this.tabPage72.Controls.Add(this.tbAudEq1);
-            this.tabPage72.Controls.Add(this.tbAudEq0);
-            this.tabPage72.Controls.Add(this.cbAudEqualizerEnabled);
-            this.tabPage72.Location = new System.Drawing.Point(4, 29);
-            this.tabPage72.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage72.Name = "tabPage72";
-            this.tabPage72.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage72.Size = new System.Drawing.Size(416, 647);
-            this.tabPage72.TabIndex = 1;
-            this.tabPage72.Text = "Equalizer";
-            this.tabPage72.UseVisualStyleBackColor = true;
+            tabPage72.Controls.Add(btAudEqRefresh);
+            tabPage72.Controls.Add(cbAudEqualizerPreset);
+            tabPage72.Controls.Add(label243);
+            tabPage72.Controls.Add(label242);
+            tabPage72.Controls.Add(label241);
+            tabPage72.Controls.Add(label240);
+            tabPage72.Controls.Add(label239);
+            tabPage72.Controls.Add(label238);
+            tabPage72.Controls.Add(label237);
+            tabPage72.Controls.Add(label236);
+            tabPage72.Controls.Add(label235);
+            tabPage72.Controls.Add(label234);
+            tabPage72.Controls.Add(label233);
+            tabPage72.Controls.Add(label232);
+            tabPage72.Controls.Add(tbAudEq9);
+            tabPage72.Controls.Add(tbAudEq8);
+            tabPage72.Controls.Add(tbAudEq7);
+            tabPage72.Controls.Add(tbAudEq6);
+            tabPage72.Controls.Add(tbAudEq5);
+            tabPage72.Controls.Add(tbAudEq4);
+            tabPage72.Controls.Add(tbAudEq3);
+            tabPage72.Controls.Add(tbAudEq2);
+            tabPage72.Controls.Add(tbAudEq1);
+            tabPage72.Controls.Add(tbAudEq0);
+            tabPage72.Controls.Add(cbAudEqualizerEnabled);
+            tabPage72.Location = new System.Drawing.Point(4, 34);
+            tabPage72.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage72.Name = "tabPage72";
+            tabPage72.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage72.Size = new System.Drawing.Size(463, 812);
+            tabPage72.TabIndex = 1;
+            tabPage72.Text = "Equalizer";
+            tabPage72.UseVisualStyleBackColor = true;
             // 
             // btAudEqRefresh
             // 
-            this.btAudEqRefresh.Location = new System.Drawing.Point(262, 337);
-            this.btAudEqRefresh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAudEqRefresh.Name = "btAudEqRefresh";
-            this.btAudEqRefresh.Size = new System.Drawing.Size(112, 35);
-            this.btAudEqRefresh.TabIndex = 26;
-            this.btAudEqRefresh.Text = "Refresh";
-            this.btAudEqRefresh.UseVisualStyleBackColor = true;
-            this.btAudEqRefresh.Click += new System.EventHandler(this.btAudEqRefresh_Click);
+            btAudEqRefresh.Location = new System.Drawing.Point(291, 421);
+            btAudEqRefresh.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudEqRefresh.Name = "btAudEqRefresh";
+            btAudEqRefresh.Size = new System.Drawing.Size(124, 44);
+            btAudEqRefresh.TabIndex = 26;
+            btAudEqRefresh.Text = "Refresh";
+            btAudEqRefresh.UseVisualStyleBackColor = true;
+            btAudEqRefresh.Click += btAudEqRefresh_Click;
             // 
             // cbAudEqualizerPreset
             // 
-            this.cbAudEqualizerPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAudEqualizerPreset.FormattingEnabled = true;
-            this.cbAudEqualizerPreset.Location = new System.Drawing.Point(92, 277);
-            this.cbAudEqualizerPreset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudEqualizerPreset.Name = "cbAudEqualizerPreset";
-            this.cbAudEqualizerPreset.Size = new System.Drawing.Size(282, 28);
-            this.cbAudEqualizerPreset.TabIndex = 25;
-            this.cbAudEqualizerPreset.SelectedIndexChanged += new System.EventHandler(this.cbAudEqualizerPreset_SelectedIndexChanged);
+            cbAudEqualizerPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAudEqualizerPreset.FormattingEnabled = true;
+            cbAudEqualizerPreset.Location = new System.Drawing.Point(102, 346);
+            cbAudEqualizerPreset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudEqualizerPreset.Name = "cbAudEqualizerPreset";
+            cbAudEqualizerPreset.Size = new System.Drawing.Size(313, 33);
+            cbAudEqualizerPreset.TabIndex = 25;
+            cbAudEqualizerPreset.SelectedIndexChanged += cbAudEqualizerPreset_SelectedIndexChanged;
             // 
             // label243
             // 
-            this.label243.AutoSize = true;
-            this.label243.Location = new System.Drawing.Point(21, 282);
-            this.label243.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label243.Name = "label243";
-            this.label243.Size = new System.Drawing.Size(55, 20);
-            this.label243.TabIndex = 24;
-            this.label243.Text = "Preset";
+            label243.AutoSize = true;
+            label243.Location = new System.Drawing.Point(23, 352);
+            label243.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label243.Name = "label243";
+            label243.Size = new System.Drawing.Size(60, 25);
+            label243.TabIndex = 24;
+            label243.Text = "Preset";
             // 
             // label242
             // 
-            this.label242.AutoSize = true;
-            this.label242.Location = new System.Drawing.Point(309, 240);
-            this.label242.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label242.Name = "label242";
-            this.label242.Size = new System.Drawing.Size(37, 20);
-            this.label242.TabIndex = 23;
-            this.label242.Text = "16K";
+            label242.AutoSize = true;
+            label242.Location = new System.Drawing.Point(343, 300);
+            label242.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label242.Name = "label242";
+            label242.Size = new System.Drawing.Size(42, 25);
+            label242.TabIndex = 23;
+            label242.Text = "16K";
             // 
             // label241
             // 
-            this.label241.AutoSize = true;
-            this.label241.Location = new System.Drawing.Point(276, 240);
-            this.label241.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label241.Name = "label241";
-            this.label241.Size = new System.Drawing.Size(37, 20);
-            this.label241.TabIndex = 22;
-            this.label241.Text = "14K";
+            label241.AutoSize = true;
+            label241.Location = new System.Drawing.Point(307, 300);
+            label241.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label241.Name = "label241";
+            label241.Size = new System.Drawing.Size(42, 25);
+            label241.TabIndex = 22;
+            label241.Text = "14K";
             // 
             // label240
             // 
-            this.label240.AutoSize = true;
-            this.label240.Location = new System.Drawing.Point(243, 240);
-            this.label240.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label240.Name = "label240";
-            this.label240.Size = new System.Drawing.Size(37, 20);
-            this.label240.TabIndex = 21;
-            this.label240.Text = "12K";
+            label240.AutoSize = true;
+            label240.Location = new System.Drawing.Point(270, 300);
+            label240.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label240.Name = "label240";
+            label240.Size = new System.Drawing.Size(42, 25);
+            label240.TabIndex = 21;
+            label240.Text = "12K";
             // 
             // label239
             // 
-            this.label239.AutoSize = true;
-            this.label239.Location = new System.Drawing.Point(214, 240);
-            this.label239.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label239.Name = "label239";
-            this.label239.Size = new System.Drawing.Size(28, 20);
-            this.label239.TabIndex = 20;
-            this.label239.Text = "6K";
+            label239.AutoSize = true;
+            label239.Location = new System.Drawing.Point(238, 300);
+            label239.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label239.Name = "label239";
+            label239.Size = new System.Drawing.Size(32, 25);
+            label239.TabIndex = 20;
+            label239.Text = "6K";
             // 
             // label238
             // 
-            this.label238.AutoSize = true;
-            this.label238.Location = new System.Drawing.Point(182, 240);
-            this.label238.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label238.Name = "label238";
-            this.label238.Size = new System.Drawing.Size(28, 20);
-            this.label238.TabIndex = 19;
-            this.label238.Text = "3K";
+            label238.AutoSize = true;
+            label238.Location = new System.Drawing.Point(202, 300);
+            label238.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label238.Name = "label238";
+            label238.Size = new System.Drawing.Size(32, 25);
+            label238.TabIndex = 19;
+            label238.Text = "3K";
             // 
             // label237
             // 
-            this.label237.AutoSize = true;
-            this.label237.Location = new System.Drawing.Point(153, 240);
-            this.label237.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label237.Name = "label237";
-            this.label237.Size = new System.Drawing.Size(28, 20);
-            this.label237.TabIndex = 18;
-            this.label237.Text = "1K";
+            label237.AutoSize = true;
+            label237.Location = new System.Drawing.Point(170, 300);
+            label237.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label237.Name = "label237";
+            label237.Size = new System.Drawing.Size(32, 25);
+            label237.TabIndex = 18;
+            label237.Text = "1K";
             // 
             // label236
             // 
-            this.label236.AutoSize = true;
-            this.label236.Location = new System.Drawing.Point(120, 240);
-            this.label236.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label236.Name = "label236";
-            this.label236.Size = new System.Drawing.Size(36, 20);
-            this.label236.TabIndex = 17;
-            this.label236.Text = "600";
+            label236.AutoSize = true;
+            label236.Location = new System.Drawing.Point(133, 300);
+            label236.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label236.Name = "label236";
+            label236.Size = new System.Drawing.Size(42, 25);
+            label236.TabIndex = 17;
+            label236.Text = "600";
             // 
             // label235
             // 
-            this.label235.AutoSize = true;
-            this.label235.Location = new System.Drawing.Point(87, 240);
-            this.label235.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label235.Name = "label235";
-            this.label235.Size = new System.Drawing.Size(36, 20);
-            this.label235.TabIndex = 16;
-            this.label235.Text = "310";
+            label235.AutoSize = true;
+            label235.Location = new System.Drawing.Point(97, 300);
+            label235.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label235.Name = "label235";
+            label235.Size = new System.Drawing.Size(42, 25);
+            label235.TabIndex = 16;
+            label235.Text = "310";
             // 
             // label234
             // 
-            this.label234.AutoSize = true;
-            this.label234.Location = new System.Drawing.Point(54, 240);
-            this.label234.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label234.Name = "label234";
-            this.label234.Size = new System.Drawing.Size(36, 20);
-            this.label234.TabIndex = 15;
-            this.label234.Text = "170";
+            label234.AutoSize = true;
+            label234.Location = new System.Drawing.Point(60, 300);
+            label234.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label234.Name = "label234";
+            label234.Size = new System.Drawing.Size(42, 25);
+            label234.TabIndex = 15;
+            label234.Text = "170";
             // 
             // label233
             // 
-            this.label233.AutoSize = true;
-            this.label233.Location = new System.Drawing.Point(27, 240);
-            this.label233.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label233.Name = "label233";
-            this.label233.Size = new System.Drawing.Size(27, 20);
-            this.label233.TabIndex = 14;
-            this.label233.Text = "60";
+            label233.AutoSize = true;
+            label233.Location = new System.Drawing.Point(30, 300);
+            label233.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label233.Name = "label233";
+            label233.Size = new System.Drawing.Size(32, 25);
+            label233.TabIndex = 14;
+            label233.Text = "60";
             // 
             // label232
             // 
-            this.label232.AutoSize = true;
-            this.label232.Location = new System.Drawing.Point(177, 51);
-            this.label232.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label232.Name = "label232";
-            this.label232.Size = new System.Drawing.Size(18, 20);
-            this.label232.TabIndex = 13;
-            this.label232.Text = "0";
+            label232.AutoSize = true;
+            label232.Location = new System.Drawing.Point(197, 64);
+            label232.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label232.Name = "label232";
+            label232.Size = new System.Drawing.Size(22, 25);
+            label232.TabIndex = 13;
+            label232.Text = "0";
             // 
             // tbAudEq9
             // 
-            this.tbAudEq9.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq9.Location = new System.Drawing.Point(308, 75);
-            this.tbAudEq9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq9.Maximum = 100;
-            this.tbAudEq9.Minimum = -100;
-            this.tbAudEq9.Name = "tbAudEq9";
-            this.tbAudEq9.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq9.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq9.TabIndex = 12;
-            this.tbAudEq9.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq9.Scroll += new System.EventHandler(this.tbAudEq9_Scroll);
+            tbAudEq9.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq9.Location = new System.Drawing.Point(342, 94);
+            tbAudEq9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq9.Maximum = 100;
+            tbAudEq9.Minimum = -100;
+            tbAudEq9.Name = "tbAudEq9";
+            tbAudEq9.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq9.Size = new System.Drawing.Size(69, 200);
+            tbAudEq9.TabIndex = 12;
+            tbAudEq9.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq9.Scroll += tbAudEq9_Scroll;
             // 
             // tbAudEq8
             // 
-            this.tbAudEq8.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq8.Location = new System.Drawing.Point(276, 75);
-            this.tbAudEq8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq8.Maximum = 100;
-            this.tbAudEq8.Minimum = -100;
-            this.tbAudEq8.Name = "tbAudEq8";
-            this.tbAudEq8.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq8.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq8.TabIndex = 11;
-            this.tbAudEq8.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq8.Scroll += new System.EventHandler(this.tbAudEq8_Scroll);
+            tbAudEq8.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq8.Location = new System.Drawing.Point(307, 94);
+            tbAudEq8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq8.Maximum = 100;
+            tbAudEq8.Minimum = -100;
+            tbAudEq8.Name = "tbAudEq8";
+            tbAudEq8.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq8.Size = new System.Drawing.Size(69, 200);
+            tbAudEq8.TabIndex = 11;
+            tbAudEq8.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq8.Scroll += tbAudEq8_Scroll;
             // 
             // tbAudEq7
             // 
-            this.tbAudEq7.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq7.Location = new System.Drawing.Point(243, 75);
-            this.tbAudEq7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq7.Maximum = 100;
-            this.tbAudEq7.Minimum = -100;
-            this.tbAudEq7.Name = "tbAudEq7";
-            this.tbAudEq7.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq7.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq7.TabIndex = 10;
-            this.tbAudEq7.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq7.Scroll += new System.EventHandler(this.tbAudEq7_Scroll);
+            tbAudEq7.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq7.Location = new System.Drawing.Point(270, 94);
+            tbAudEq7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq7.Maximum = 100;
+            tbAudEq7.Minimum = -100;
+            tbAudEq7.Name = "tbAudEq7";
+            tbAudEq7.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq7.Size = new System.Drawing.Size(69, 200);
+            tbAudEq7.TabIndex = 10;
+            tbAudEq7.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq7.Scroll += tbAudEq7_Scroll;
             // 
             // tbAudEq6
             // 
-            this.tbAudEq6.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq6.Location = new System.Drawing.Point(212, 75);
-            this.tbAudEq6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq6.Maximum = 100;
-            this.tbAudEq6.Minimum = -100;
-            this.tbAudEq6.Name = "tbAudEq6";
-            this.tbAudEq6.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq6.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq6.TabIndex = 9;
-            this.tbAudEq6.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq6.Scroll += new System.EventHandler(this.tbAudEq6_Scroll);
+            tbAudEq6.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq6.Location = new System.Drawing.Point(236, 94);
+            tbAudEq6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq6.Maximum = 100;
+            tbAudEq6.Minimum = -100;
+            tbAudEq6.Name = "tbAudEq6";
+            tbAudEq6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq6.Size = new System.Drawing.Size(69, 200);
+            tbAudEq6.TabIndex = 9;
+            tbAudEq6.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq6.Scroll += tbAudEq6_Scroll;
             // 
             // tbAudEq5
             // 
-            this.tbAudEq5.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq5.Location = new System.Drawing.Point(180, 75);
-            this.tbAudEq5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq5.Maximum = 100;
-            this.tbAudEq5.Minimum = -100;
-            this.tbAudEq5.Name = "tbAudEq5";
-            this.tbAudEq5.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq5.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq5.TabIndex = 8;
-            this.tbAudEq5.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq5.Scroll += new System.EventHandler(this.tbAudEq5_Scroll);
+            tbAudEq5.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq5.Location = new System.Drawing.Point(200, 94);
+            tbAudEq5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq5.Maximum = 100;
+            tbAudEq5.Minimum = -100;
+            tbAudEq5.Name = "tbAudEq5";
+            tbAudEq5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq5.Size = new System.Drawing.Size(69, 200);
+            tbAudEq5.TabIndex = 8;
+            tbAudEq5.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq5.Scroll += tbAudEq5_Scroll;
             // 
             // tbAudEq4
             // 
-            this.tbAudEq4.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq4.Location = new System.Drawing.Point(150, 75);
-            this.tbAudEq4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq4.Maximum = 100;
-            this.tbAudEq4.Minimum = -100;
-            this.tbAudEq4.Name = "tbAudEq4";
-            this.tbAudEq4.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq4.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq4.TabIndex = 7;
-            this.tbAudEq4.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq4.Scroll += new System.EventHandler(this.tbAudEq4_Scroll);
+            tbAudEq4.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq4.Location = new System.Drawing.Point(167, 94);
+            tbAudEq4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq4.Maximum = 100;
+            tbAudEq4.Minimum = -100;
+            tbAudEq4.Name = "tbAudEq4";
+            tbAudEq4.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq4.Size = new System.Drawing.Size(69, 200);
+            tbAudEq4.TabIndex = 7;
+            tbAudEq4.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq4.Scroll += tbAudEq4_Scroll;
             // 
             // tbAudEq3
             // 
-            this.tbAudEq3.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq3.Location = new System.Drawing.Point(118, 75);
-            this.tbAudEq3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq3.Maximum = 100;
-            this.tbAudEq3.Minimum = -100;
-            this.tbAudEq3.Name = "tbAudEq3";
-            this.tbAudEq3.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq3.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq3.TabIndex = 6;
-            this.tbAudEq3.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq3.Scroll += new System.EventHandler(this.tbAudEq3_Scroll);
+            tbAudEq3.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq3.Location = new System.Drawing.Point(131, 94);
+            tbAudEq3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq3.Maximum = 100;
+            tbAudEq3.Minimum = -100;
+            tbAudEq3.Name = "tbAudEq3";
+            tbAudEq3.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq3.Size = new System.Drawing.Size(69, 200);
+            tbAudEq3.TabIndex = 6;
+            tbAudEq3.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq3.Scroll += tbAudEq3_Scroll;
             // 
             // tbAudEq2
             // 
-            this.tbAudEq2.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq2.Location = new System.Drawing.Point(87, 75);
-            this.tbAudEq2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq2.Maximum = 100;
-            this.tbAudEq2.Minimum = -100;
-            this.tbAudEq2.Name = "tbAudEq2";
-            this.tbAudEq2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq2.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq2.TabIndex = 5;
-            this.tbAudEq2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq2.Scroll += new System.EventHandler(this.tbAudEq2_Scroll);
+            tbAudEq2.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq2.Location = new System.Drawing.Point(97, 94);
+            tbAudEq2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq2.Maximum = 100;
+            tbAudEq2.Minimum = -100;
+            tbAudEq2.Name = "tbAudEq2";
+            tbAudEq2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq2.Size = new System.Drawing.Size(69, 200);
+            tbAudEq2.TabIndex = 5;
+            tbAudEq2.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq2.Scroll += tbAudEq2_Scroll;
             // 
             // tbAudEq1
             // 
-            this.tbAudEq1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq1.Location = new System.Drawing.Point(56, 75);
-            this.tbAudEq1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq1.Maximum = 100;
-            this.tbAudEq1.Minimum = -100;
-            this.tbAudEq1.Name = "tbAudEq1";
-            this.tbAudEq1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq1.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq1.TabIndex = 4;
-            this.tbAudEq1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq1.Scroll += new System.EventHandler(this.tbAudEq1_Scroll);
+            tbAudEq1.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq1.Location = new System.Drawing.Point(62, 94);
+            tbAudEq1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq1.Maximum = 100;
+            tbAudEq1.Minimum = -100;
+            tbAudEq1.Name = "tbAudEq1";
+            tbAudEq1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq1.Size = new System.Drawing.Size(69, 200);
+            tbAudEq1.TabIndex = 4;
+            tbAudEq1.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq1.Scroll += tbAudEq1_Scroll;
             // 
             // tbAudEq0
             // 
-            this.tbAudEq0.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudEq0.Location = new System.Drawing.Point(26, 75);
-            this.tbAudEq0.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudEq0.Maximum = 100;
-            this.tbAudEq0.Minimum = -100;
-            this.tbAudEq0.Name = "tbAudEq0";
-            this.tbAudEq0.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbAudEq0.Size = new System.Drawing.Size(69, 160);
-            this.tbAudEq0.TabIndex = 3;
-            this.tbAudEq0.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.tbAudEq0.Scroll += new System.EventHandler(this.tbAudEq0_Scroll);
+            tbAudEq0.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq0.Location = new System.Drawing.Point(29, 94);
+            tbAudEq0.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudEq0.Maximum = 100;
+            tbAudEq0.Minimum = -100;
+            tbAudEq0.Name = "tbAudEq0";
+            tbAudEq0.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq0.Size = new System.Drawing.Size(69, 200);
+            tbAudEq0.TabIndex = 3;
+            tbAudEq0.TickStyle = System.Windows.Forms.TickStyle.None;
+            tbAudEq0.Scroll += tbAudEq0_Scroll;
             // 
             // cbAudEqualizerEnabled
             // 
-            this.cbAudEqualizerEnabled.AutoSize = true;
-            this.cbAudEqualizerEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudEqualizerEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled";
-            this.cbAudEqualizerEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudEqualizerEnabled.TabIndex = 2;
-            this.cbAudEqualizerEnabled.Text = "Enabled";
-            this.cbAudEqualizerEnabled.UseVisualStyleBackColor = true;
-            this.cbAudEqualizerEnabled.CheckedChanged += new System.EventHandler(this.cbAudEqualizerEnabled_CheckedChanged);
+            cbAudEqualizerEnabled.AutoSize = true;
+            cbAudEqualizerEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudEqualizerEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled";
+            cbAudEqualizerEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudEqualizerEnabled.TabIndex = 2;
+            cbAudEqualizerEnabled.Text = "Enabled";
+            cbAudEqualizerEnabled.UseVisualStyleBackColor = true;
+            cbAudEqualizerEnabled.CheckedChanged += cbAudEqualizerEnabled_CheckedChanged;
             // 
             // tabPage73
             // 
-            this.tabPage73.Controls.Add(this.tbAudRelease);
-            this.tabPage73.Controls.Add(this.label248);
-            this.tabPage73.Controls.Add(this.label249);
-            this.tabPage73.Controls.Add(this.label246);
-            this.tabPage73.Controls.Add(this.tbAudAttack);
-            this.tabPage73.Controls.Add(this.label247);
-            this.tabPage73.Controls.Add(this.label244);
-            this.tabPage73.Controls.Add(this.tbAudDynAmp);
-            this.tabPage73.Controls.Add(this.label245);
-            this.tabPage73.Controls.Add(this.cbAudDynamicAmplifyEnabled);
-            this.tabPage73.Location = new System.Drawing.Point(4, 29);
-            this.tabPage73.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage73.Name = "tabPage73";
-            this.tabPage73.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage73.Size = new System.Drawing.Size(416, 647);
-            this.tabPage73.TabIndex = 2;
-            this.tabPage73.Text = "Dynamic amplify";
-            this.tabPage73.UseVisualStyleBackColor = true;
+            tabPage73.Controls.Add(tbAudRelease);
+            tabPage73.Controls.Add(label248);
+            tabPage73.Controls.Add(label249);
+            tabPage73.Controls.Add(label246);
+            tabPage73.Controls.Add(tbAudAttack);
+            tabPage73.Controls.Add(label247);
+            tabPage73.Controls.Add(label244);
+            tabPage73.Controls.Add(tbAudDynAmp);
+            tabPage73.Controls.Add(label245);
+            tabPage73.Controls.Add(cbAudDynamicAmplifyEnabled);
+            tabPage73.Location = new System.Drawing.Point(4, 34);
+            tabPage73.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage73.Name = "tabPage73";
+            tabPage73.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage73.Size = new System.Drawing.Size(463, 812);
+            tabPage73.TabIndex = 2;
+            tabPage73.Text = "Dynamic amplify";
+            tabPage73.UseVisualStyleBackColor = true;
             // 
             // tbAudRelease
             // 
-            this.tbAudRelease.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudRelease.Location = new System.Drawing.Point(24, 322);
-            this.tbAudRelease.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudRelease.Maximum = 10000;
-            this.tbAudRelease.Minimum = 10;
-            this.tbAudRelease.Name = "tbAudRelease";
-            this.tbAudRelease.Size = new System.Drawing.Size(345, 69);
-            this.tbAudRelease.TabIndex = 15;
-            this.tbAudRelease.TickFrequency = 250;
-            this.tbAudRelease.Value = 10;
-            this.tbAudRelease.Scroll += new System.EventHandler(this.tbAudRelease_Scroll);
+            tbAudRelease.BackColor = System.Drawing.SystemColors.Window;
+            tbAudRelease.Location = new System.Drawing.Point(27, 402);
+            tbAudRelease.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudRelease.Maximum = 10000;
+            tbAudRelease.Minimum = 10;
+            tbAudRelease.Name = "tbAudRelease";
+            tbAudRelease.Size = new System.Drawing.Size(383, 69);
+            tbAudRelease.TabIndex = 15;
+            tbAudRelease.TickFrequency = 250;
+            tbAudRelease.Value = 10;
+            tbAudRelease.Scroll += tbAudRelease_Scroll;
             // 
             // label248
             // 
-            this.label248.AutoSize = true;
-            this.label248.Location = new System.Drawing.Point(350, 297);
-            this.label248.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label248.Name = "label248";
-            this.label248.Size = new System.Drawing.Size(18, 20);
-            this.label248.TabIndex = 14;
-            this.label248.Text = "0";
+            label248.AutoSize = true;
+            label248.Location = new System.Drawing.Point(389, 371);
+            label248.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label248.Name = "label248";
+            label248.Size = new System.Drawing.Size(22, 25);
+            label248.TabIndex = 14;
+            label248.Text = "0";
             // 
             // label249
             // 
-            this.label249.AutoSize = true;
-            this.label249.Location = new System.Drawing.Point(20, 297);
-            this.label249.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label249.Name = "label249";
-            this.label249.Size = new System.Drawing.Size(102, 20);
-            this.label249.TabIndex = 12;
-            this.label249.Text = "Release time";
+            label249.AutoSize = true;
+            label249.Location = new System.Drawing.Point(22, 371);
+            label249.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label249.Name = "label249";
+            label249.Size = new System.Drawing.Size(110, 25);
+            label249.TabIndex = 12;
+            label249.Text = "Release time";
             // 
             // label246
             // 
-            this.label246.AutoSize = true;
-            this.label246.Location = new System.Drawing.Point(350, 186);
-            this.label246.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label246.Name = "label246";
-            this.label246.Size = new System.Drawing.Size(18, 20);
-            this.label246.TabIndex = 11;
-            this.label246.Text = "0";
+            label246.AutoSize = true;
+            label246.Location = new System.Drawing.Point(389, 232);
+            label246.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label246.Name = "label246";
+            label246.Size = new System.Drawing.Size(22, 25);
+            label246.TabIndex = 11;
+            label246.Text = "0";
             // 
             // tbAudAttack
             // 
-            this.tbAudAttack.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudAttack.Location = new System.Drawing.Point(24, 211);
-            this.tbAudAttack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudAttack.Maximum = 10000;
-            this.tbAudAttack.Minimum = 10;
-            this.tbAudAttack.Name = "tbAudAttack";
-            this.tbAudAttack.Size = new System.Drawing.Size(345, 69);
-            this.tbAudAttack.TabIndex = 10;
-            this.tbAudAttack.TickFrequency = 250;
-            this.tbAudAttack.Value = 10;
-            this.tbAudAttack.Scroll += new System.EventHandler(this.tbAudAttack_Scroll);
+            tbAudAttack.BackColor = System.Drawing.SystemColors.Window;
+            tbAudAttack.Location = new System.Drawing.Point(27, 264);
+            tbAudAttack.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudAttack.Maximum = 10000;
+            tbAudAttack.Minimum = 10;
+            tbAudAttack.Name = "tbAudAttack";
+            tbAudAttack.Size = new System.Drawing.Size(383, 69);
+            tbAudAttack.TabIndex = 10;
+            tbAudAttack.TickFrequency = 250;
+            tbAudAttack.Value = 10;
+            tbAudAttack.Scroll += tbAudAttack_Scroll;
             // 
             // label247
             // 
-            this.label247.AutoSize = true;
-            this.label247.Location = new System.Drawing.Point(20, 186);
-            this.label247.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label247.Name = "label247";
-            this.label247.Size = new System.Drawing.Size(55, 20);
-            this.label247.TabIndex = 9;
-            this.label247.Text = "Attack";
+            label247.AutoSize = true;
+            label247.Location = new System.Drawing.Point(22, 232);
+            label247.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label247.Name = "label247";
+            label247.Size = new System.Drawing.Size(62, 25);
+            label247.TabIndex = 9;
+            label247.Text = "Attack";
             // 
             // label244
             // 
-            this.label244.AutoSize = true;
-            this.label244.Location = new System.Drawing.Point(350, 82);
-            this.label244.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label244.Name = "label244";
-            this.label244.Size = new System.Drawing.Size(18, 20);
-            this.label244.TabIndex = 8;
-            this.label244.Text = "0";
+            label244.AutoSize = true;
+            label244.Location = new System.Drawing.Point(389, 102);
+            label244.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label244.Name = "label244";
+            label244.Size = new System.Drawing.Size(22, 25);
+            label244.TabIndex = 8;
+            label244.Text = "0";
             // 
             // tbAudDynAmp
             // 
-            this.tbAudDynAmp.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudDynAmp.Location = new System.Drawing.Point(24, 106);
-            this.tbAudDynAmp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudDynAmp.Maximum = 2000;
-            this.tbAudDynAmp.Minimum = 100;
-            this.tbAudDynAmp.Name = "tbAudDynAmp";
-            this.tbAudDynAmp.Size = new System.Drawing.Size(345, 69);
-            this.tbAudDynAmp.TabIndex = 7;
-            this.tbAudDynAmp.TickFrequency = 50;
-            this.tbAudDynAmp.Value = 1000;
-            this.tbAudDynAmp.Scroll += new System.EventHandler(this.tbAudDynAmp_Scroll);
+            tbAudDynAmp.BackColor = System.Drawing.SystemColors.Window;
+            tbAudDynAmp.Location = new System.Drawing.Point(27, 132);
+            tbAudDynAmp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudDynAmp.Maximum = 2000;
+            tbAudDynAmp.Minimum = 100;
+            tbAudDynAmp.Name = "tbAudDynAmp";
+            tbAudDynAmp.Size = new System.Drawing.Size(383, 69);
+            tbAudDynAmp.TabIndex = 7;
+            tbAudDynAmp.TickFrequency = 50;
+            tbAudDynAmp.Value = 1000;
+            tbAudDynAmp.Scroll += tbAudDynAmp_Scroll;
             // 
             // label245
             // 
-            this.label245.AutoSize = true;
-            this.label245.Location = new System.Drawing.Point(20, 82);
-            this.label245.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label245.Name = "label245";
-            this.label245.Size = new System.Drawing.Size(168, 20);
-            this.label245.TabIndex = 6;
-            this.label245.Text = "Maximum amplification";
+            label245.AutoSize = true;
+            label245.Location = new System.Drawing.Point(22, 102);
+            label245.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label245.Name = "label245";
+            label245.Size = new System.Drawing.Size(198, 25);
+            label245.TabIndex = 6;
+            label245.Text = "Maximum amplification";
             // 
             // cbAudDynamicAmplifyEnabled
             // 
-            this.cbAudDynamicAmplifyEnabled.AutoSize = true;
-            this.cbAudDynamicAmplifyEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudDynamicAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudDynamicAmplifyEnabled.Name = "cbAudDynamicAmplifyEnabled";
-            this.cbAudDynamicAmplifyEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudDynamicAmplifyEnabled.TabIndex = 2;
-            this.cbAudDynamicAmplifyEnabled.Text = "Enabled";
-            this.cbAudDynamicAmplifyEnabled.UseVisualStyleBackColor = true;
-            this.cbAudDynamicAmplifyEnabled.CheckedChanged += new System.EventHandler(this.cbAudDynamicAmplifyEnabled_CheckedChanged);
+            cbAudDynamicAmplifyEnabled.AutoSize = true;
+            cbAudDynamicAmplifyEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudDynamicAmplifyEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudDynamicAmplifyEnabled.Name = "cbAudDynamicAmplifyEnabled";
+            cbAudDynamicAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudDynamicAmplifyEnabled.TabIndex = 2;
+            cbAudDynamicAmplifyEnabled.Text = "Enabled";
+            cbAudDynamicAmplifyEnabled.UseVisualStyleBackColor = true;
+            cbAudDynamicAmplifyEnabled.CheckedChanged += cbAudDynamicAmplifyEnabled_CheckedChanged;
             // 
             // tabPage75
             // 
-            this.tabPage75.Controls.Add(this.tbAud3DSound);
-            this.tabPage75.Controls.Add(this.label253);
-            this.tabPage75.Controls.Add(this.cbAudSound3DEnabled);
-            this.tabPage75.Location = new System.Drawing.Point(4, 29);
-            this.tabPage75.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage75.Name = "tabPage75";
-            this.tabPage75.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage75.Size = new System.Drawing.Size(416, 647);
-            this.tabPage75.TabIndex = 4;
-            this.tabPage75.Text = "Sound 3D";
-            this.tabPage75.UseVisualStyleBackColor = true;
+            tabPage75.Controls.Add(tbAud3DSound);
+            tabPage75.Controls.Add(label253);
+            tabPage75.Controls.Add(cbAudSound3DEnabled);
+            tabPage75.Location = new System.Drawing.Point(4, 34);
+            tabPage75.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage75.Name = "tabPage75";
+            tabPage75.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage75.Size = new System.Drawing.Size(463, 812);
+            tabPage75.TabIndex = 4;
+            tabPage75.Text = "Sound 3D";
+            tabPage75.UseVisualStyleBackColor = true;
             // 
             // tbAud3DSound
             // 
-            this.tbAud3DSound.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAud3DSound.Location = new System.Drawing.Point(24, 106);
-            this.tbAud3DSound.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAud3DSound.Maximum = 10000;
-            this.tbAud3DSound.Name = "tbAud3DSound";
-            this.tbAud3DSound.Size = new System.Drawing.Size(345, 69);
-            this.tbAud3DSound.TabIndex = 19;
-            this.tbAud3DSound.TickFrequency = 250;
-            this.tbAud3DSound.Value = 500;
-            this.tbAud3DSound.Scroll += new System.EventHandler(this.tbAud3DSound_Scroll);
+            tbAud3DSound.BackColor = System.Drawing.SystemColors.Window;
+            tbAud3DSound.Location = new System.Drawing.Point(27, 132);
+            tbAud3DSound.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAud3DSound.Maximum = 10000;
+            tbAud3DSound.Name = "tbAud3DSound";
+            tbAud3DSound.Size = new System.Drawing.Size(383, 69);
+            tbAud3DSound.TabIndex = 19;
+            tbAud3DSound.TickFrequency = 250;
+            tbAud3DSound.Value = 500;
+            tbAud3DSound.Scroll += tbAud3DSound_Scroll;
             // 
             // label253
             // 
-            this.label253.AutoSize = true;
-            this.label253.Location = new System.Drawing.Point(20, 82);
-            this.label253.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label253.Name = "label253";
-            this.label253.Size = new System.Drawing.Size(122, 20);
-            this.label253.TabIndex = 18;
-            this.label253.Text = "3D amplification";
+            label253.AutoSize = true;
+            label253.Location = new System.Drawing.Point(22, 102);
+            label253.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label253.Name = "label253";
+            label253.Size = new System.Drawing.Size(142, 25);
+            label253.TabIndex = 18;
+            label253.Text = "3D amplification";
             // 
             // cbAudSound3DEnabled
             // 
-            this.cbAudSound3DEnabled.AutoSize = true;
-            this.cbAudSound3DEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudSound3DEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudSound3DEnabled.Name = "cbAudSound3DEnabled";
-            this.cbAudSound3DEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudSound3DEnabled.TabIndex = 2;
-            this.cbAudSound3DEnabled.Text = "Enabled";
-            this.cbAudSound3DEnabled.UseVisualStyleBackColor = true;
-            this.cbAudSound3DEnabled.CheckedChanged += new System.EventHandler(this.cbAudSound3DEnabled_CheckedChanged);
+            cbAudSound3DEnabled.AutoSize = true;
+            cbAudSound3DEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudSound3DEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudSound3DEnabled.Name = "cbAudSound3DEnabled";
+            cbAudSound3DEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudSound3DEnabled.TabIndex = 2;
+            cbAudSound3DEnabled.Text = "Enabled";
+            cbAudSound3DEnabled.UseVisualStyleBackColor = true;
+            cbAudSound3DEnabled.CheckedChanged += cbAudSound3DEnabled_CheckedChanged;
             // 
             // tabPage76
             // 
-            this.tabPage76.Controls.Add(this.tbAudTrueBass);
-            this.tabPage76.Controls.Add(this.label254);
-            this.tabPage76.Controls.Add(this.cbAudTrueBassEnabled);
-            this.tabPage76.Location = new System.Drawing.Point(4, 29);
-            this.tabPage76.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage76.Name = "tabPage76";
-            this.tabPage76.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage76.Size = new System.Drawing.Size(416, 647);
-            this.tabPage76.TabIndex = 5;
-            this.tabPage76.Text = "True Bass";
-            this.tabPage76.UseVisualStyleBackColor = true;
+            tabPage76.Controls.Add(tbAudTrueBass);
+            tabPage76.Controls.Add(label254);
+            tabPage76.Controls.Add(cbAudTrueBassEnabled);
+            tabPage76.Location = new System.Drawing.Point(4, 34);
+            tabPage76.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage76.Name = "tabPage76";
+            tabPage76.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage76.Size = new System.Drawing.Size(463, 812);
+            tabPage76.TabIndex = 5;
+            tabPage76.Text = "True Bass";
+            tabPage76.UseVisualStyleBackColor = true;
             // 
             // tbAudTrueBass
             // 
-            this.tbAudTrueBass.BackColor = System.Drawing.SystemColors.Window;
-            this.tbAudTrueBass.Location = new System.Drawing.Point(24, 106);
-            this.tbAudTrueBass.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudTrueBass.Maximum = 10000;
-            this.tbAudTrueBass.Name = "tbAudTrueBass";
-            this.tbAudTrueBass.Size = new System.Drawing.Size(345, 69);
-            this.tbAudTrueBass.TabIndex = 21;
-            this.tbAudTrueBass.TickFrequency = 250;
-            this.tbAudTrueBass.Scroll += new System.EventHandler(this.tbAudTrueBass_Scroll);
+            tbAudTrueBass.BackColor = System.Drawing.SystemColors.Window;
+            tbAudTrueBass.Location = new System.Drawing.Point(27, 132);
+            tbAudTrueBass.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudTrueBass.Maximum = 10000;
+            tbAudTrueBass.Name = "tbAudTrueBass";
+            tbAudTrueBass.Size = new System.Drawing.Size(383, 69);
+            tbAudTrueBass.TabIndex = 21;
+            tbAudTrueBass.TickFrequency = 250;
+            tbAudTrueBass.Scroll += tbAudTrueBass_Scroll;
             // 
             // label254
             // 
-            this.label254.AutoSize = true;
-            this.label254.Location = new System.Drawing.Point(20, 82);
-            this.label254.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label254.Name = "label254";
-            this.label254.Size = new System.Drawing.Size(63, 20);
-            this.label254.TabIndex = 20;
-            this.label254.Text = "Volume";
+            label254.AutoSize = true;
+            label254.Location = new System.Drawing.Point(22, 102);
+            label254.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label254.Name = "label254";
+            label254.Size = new System.Drawing.Size(72, 25);
+            label254.TabIndex = 20;
+            label254.Text = "Volume";
             // 
             // cbAudTrueBassEnabled
             // 
-            this.cbAudTrueBassEnabled.AutoSize = true;
-            this.cbAudTrueBassEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbAudTrueBassEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudTrueBassEnabled.Name = "cbAudTrueBassEnabled";
-            this.cbAudTrueBassEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudTrueBassEnabled.TabIndex = 2;
-            this.cbAudTrueBassEnabled.Text = "Enabled";
-            this.cbAudTrueBassEnabled.UseVisualStyleBackColor = true;
-            this.cbAudTrueBassEnabled.CheckedChanged += new System.EventHandler(this.cbAudTrueBassEnabled_CheckedChanged);
+            cbAudTrueBassEnabled.AutoSize = true;
+            cbAudTrueBassEnabled.Location = new System.Drawing.Point(27, 31);
+            cbAudTrueBassEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudTrueBassEnabled.Name = "cbAudTrueBassEnabled";
+            cbAudTrueBassEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudTrueBassEnabled.TabIndex = 2;
+            cbAudTrueBassEnabled.Text = "Enabled";
+            cbAudTrueBassEnabled.UseVisualStyleBackColor = true;
+            cbAudTrueBassEnabled.CheckedChanged += cbAudTrueBassEnabled_CheckedChanged;
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.cbFadeOutEnabled);
-            this.tabPage16.Controls.Add(this.label4);
-            this.tabPage16.Controls.Add(this.edFadeOutStopTime);
-            this.tabPage16.Controls.Add(this.label5);
-            this.tabPage16.Controls.Add(this.label6);
-            this.tabPage16.Controls.Add(this.edFadeOutStartTime);
-            this.tabPage16.Controls.Add(this.label7);
-            this.tabPage16.Controls.Add(this.cbFadeInEnabled);
-            this.tabPage16.Controls.Add(this.label19);
-            this.tabPage16.Controls.Add(this.edFadeInStopTime);
-            this.tabPage16.Controls.Add(this.label20);
-            this.tabPage16.Controls.Add(this.label18);
-            this.tabPage16.Controls.Add(this.edFadeInStartTime);
-            this.tabPage16.Controls.Add(this.label17);
-            this.tabPage16.Location = new System.Drawing.Point(4, 29);
-            this.tabPage16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage16.Size = new System.Drawing.Size(416, 647);
-            this.tabPage16.TabIndex = 6;
-            this.tabPage16.Text = "Fade-In/Fade-Out";
-            this.tabPage16.UseVisualStyleBackColor = true;
+            tabPage16.Controls.Add(cbFadeOutEnabled);
+            tabPage16.Controls.Add(label4);
+            tabPage16.Controls.Add(edFadeOutStopTime);
+            tabPage16.Controls.Add(label5);
+            tabPage16.Controls.Add(label6);
+            tabPage16.Controls.Add(edFadeOutStartTime);
+            tabPage16.Controls.Add(label7);
+            tabPage16.Controls.Add(cbFadeInEnabled);
+            tabPage16.Controls.Add(label19);
+            tabPage16.Controls.Add(edFadeInStopTime);
+            tabPage16.Controls.Add(label20);
+            tabPage16.Controls.Add(label18);
+            tabPage16.Controls.Add(edFadeInStartTime);
+            tabPage16.Controls.Add(label17);
+            tabPage16.Location = new System.Drawing.Point(4, 34);
+            tabPage16.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage16.Name = "tabPage16";
+            tabPage16.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage16.Size = new System.Drawing.Size(463, 812);
+            tabPage16.TabIndex = 6;
+            tabPage16.Text = "Fade-In/Fade-Out";
+            tabPage16.UseVisualStyleBackColor = true;
             // 
             // cbFadeOutEnabled
             // 
-            this.cbFadeOutEnabled.AutoSize = true;
-            this.cbFadeOutEnabled.Location = new System.Drawing.Point(24, 172);
-            this.cbFadeOutEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFadeOutEnabled.Name = "cbFadeOutEnabled";
-            this.cbFadeOutEnabled.Size = new System.Drawing.Size(100, 24);
-            this.cbFadeOutEnabled.TabIndex = 13;
-            this.cbFadeOutEnabled.Text = "Fade-out";
-            this.cbFadeOutEnabled.UseVisualStyleBackColor = true;
-            this.cbFadeOutEnabled.CheckedChanged += new System.EventHandler(this.cbFadeOutEnabled_CheckedChanged);
+            cbFadeOutEnabled.AutoSize = true;
+            cbFadeOutEnabled.Location = new System.Drawing.Point(27, 215);
+            cbFadeOutEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFadeOutEnabled.Name = "cbFadeOutEnabled";
+            cbFadeOutEnabled.Size = new System.Drawing.Size(109, 29);
+            cbFadeOutEnabled.TabIndex = 13;
+            cbFadeOutEnabled.Text = "Fade-out";
+            cbFadeOutEnabled.UseVisualStyleBackColor = true;
+            cbFadeOutEnabled.CheckedChanged += cbFadeOutEnabled_CheckedChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(216, 257);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 20);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "ms";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(240, 321);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(36, 25);
+            label4.TabIndex = 12;
+            label4.Text = "ms";
             // 
             // edFadeOutStopTime
             // 
-            this.edFadeOutStopTime.Location = new System.Drawing.Point(135, 252);
-            this.edFadeOutStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edFadeOutStopTime.Name = "edFadeOutStopTime";
-            this.edFadeOutStopTime.Size = new System.Drawing.Size(70, 26);
-            this.edFadeOutStopTime.TabIndex = 11;
-            this.edFadeOutStopTime.Text = "5000";
+            edFadeOutStopTime.Location = new System.Drawing.Point(150, 315);
+            edFadeOutStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeOutStopTime.Name = "edFadeOutStopTime";
+            edFadeOutStopTime.Size = new System.Drawing.Size(77, 31);
+            edFadeOutStopTime.TabIndex = 11;
+            edFadeOutStopTime.Text = "5000";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 257);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 20);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Stop time";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(42, 321);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(89, 25);
+            label5.TabIndex = 10;
+            label5.Text = "Stop time";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(216, 217);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(30, 20);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "ms";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(240, 271);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(36, 25);
+            label6.TabIndex = 9;
+            label6.Text = "ms";
             // 
             // edFadeOutStartTime
             // 
-            this.edFadeOutStartTime.Location = new System.Drawing.Point(135, 212);
-            this.edFadeOutStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edFadeOutStartTime.Name = "edFadeOutStartTime";
-            this.edFadeOutStartTime.Size = new System.Drawing.Size(70, 26);
-            this.edFadeOutStartTime.TabIndex = 8;
-            this.edFadeOutStartTime.Text = "0";
+            edFadeOutStartTime.Location = new System.Drawing.Point(150, 265);
+            edFadeOutStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeOutStartTime.Name = "edFadeOutStartTime";
+            edFadeOutStartTime.Size = new System.Drawing.Size(77, 31);
+            edFadeOutStartTime.TabIndex = 8;
+            edFadeOutStartTime.Text = "0";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(38, 217);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 20);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Start time";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(42, 271);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(88, 25);
+            label7.TabIndex = 7;
+            label7.Text = "Start time";
             // 
             // cbFadeInEnabled
             // 
-            this.cbFadeInEnabled.AutoSize = true;
-            this.cbFadeInEnabled.Location = new System.Drawing.Point(24, 25);
-            this.cbFadeInEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbFadeInEnabled.Name = "cbFadeInEnabled";
-            this.cbFadeInEnabled.Size = new System.Drawing.Size(89, 24);
-            this.cbFadeInEnabled.TabIndex = 6;
-            this.cbFadeInEnabled.Text = "Fade-in";
-            this.cbFadeInEnabled.UseVisualStyleBackColor = true;
-            this.cbFadeInEnabled.CheckedChanged += new System.EventHandler(this.cbFadeInEnabled_CheckedChanged);
+            cbFadeInEnabled.AutoSize = true;
+            cbFadeInEnabled.Location = new System.Drawing.Point(27, 31);
+            cbFadeInEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbFadeInEnabled.Name = "cbFadeInEnabled";
+            cbFadeInEnabled.Size = new System.Drawing.Size(96, 29);
+            cbFadeInEnabled.TabIndex = 6;
+            cbFadeInEnabled.Text = "Fade-in";
+            cbFadeInEnabled.UseVisualStyleBackColor = true;
+            cbFadeInEnabled.CheckedChanged += cbFadeInEnabled_CheckedChanged;
             // 
             // label19
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(216, 109);
-            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(30, 20);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "ms";
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(240, 136);
+            label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(36, 25);
+            label19.TabIndex = 5;
+            label19.Text = "ms";
             // 
             // edFadeInStopTime
             // 
-            this.edFadeInStopTime.Location = new System.Drawing.Point(135, 105);
-            this.edFadeInStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edFadeInStopTime.Name = "edFadeInStopTime";
-            this.edFadeInStopTime.Size = new System.Drawing.Size(70, 26);
-            this.edFadeInStopTime.TabIndex = 4;
-            this.edFadeInStopTime.Text = "5000";
+            edFadeInStopTime.Location = new System.Drawing.Point(150, 131);
+            edFadeInStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeInStopTime.Name = "edFadeInStopTime";
+            edFadeInStopTime.Size = new System.Drawing.Size(77, 31);
+            edFadeInStopTime.TabIndex = 4;
+            edFadeInStopTime.Text = "5000";
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(38, 109);
-            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 20);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Stop time";
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(42, 136);
+            label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(89, 25);
+            label20.TabIndex = 3;
+            label20.Text = "Stop time";
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(216, 69);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(30, 20);
-            this.label18.TabIndex = 2;
-            this.label18.Text = "ms";
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(240, 86);
+            label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(36, 25);
+            label18.TabIndex = 2;
+            label18.Text = "ms";
             // 
             // edFadeInStartTime
             // 
-            this.edFadeInStartTime.Location = new System.Drawing.Point(135, 65);
-            this.edFadeInStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edFadeInStartTime.Name = "edFadeInStartTime";
-            this.edFadeInStartTime.Size = new System.Drawing.Size(70, 26);
-            this.edFadeInStartTime.TabIndex = 1;
-            this.edFadeInStartTime.Text = "0";
+            edFadeInStartTime.Location = new System.Drawing.Point(150, 81);
+            edFadeInStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edFadeInStartTime.Name = "edFadeInStartTime";
+            edFadeInStartTime.Size = new System.Drawing.Size(77, 31);
+            edFadeInStartTime.TabIndex = 1;
+            edFadeInStartTime.Text = "0";
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(38, 69);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(78, 20);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Start time";
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(42, 86);
+            label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(88, 25);
+            label17.TabIndex = 0;
+            label17.Text = "Start time";
             // 
             // cbAudioEffectsEnabled
             // 
-            this.cbAudioEffectsEnabled.AutoSize = true;
-            this.cbAudioEffectsEnabled.Location = new System.Drawing.Point(15, 23);
-            this.cbAudioEffectsEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudioEffectsEnabled.Name = "cbAudioEffectsEnabled";
-            this.cbAudioEffectsEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudioEffectsEnabled.TabIndex = 2;
-            this.cbAudioEffectsEnabled.Text = "Enabled";
-            this.cbAudioEffectsEnabled.UseVisualStyleBackColor = true;
+            cbAudioEffectsEnabled.AutoSize = true;
+            cbAudioEffectsEnabled.Location = new System.Drawing.Point(17, 29);
+            cbAudioEffectsEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioEffectsEnabled.Name = "cbAudioEffectsEnabled";
+            cbAudioEffectsEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioEffectsEnabled.TabIndex = 2;
+            cbAudioEffectsEnabled.Text = "Enabled";
+            cbAudioEffectsEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage81
             // 
-            this.tabPage81.Controls.Add(this.btAudioChannelMapperClear);
-            this.tabPage81.Controls.Add(this.groupBox41);
-            this.tabPage81.Controls.Add(this.label307);
-            this.tabPage81.Controls.Add(this.edAudioChannelMapperOutputChannels);
-            this.tabPage81.Controls.Add(this.label306);
-            this.tabPage81.Controls.Add(this.lbAudioChannelMapperRoutes);
-            this.tabPage81.Controls.Add(this.cbAudioChannelMapperEnabled);
-            this.tabPage81.Location = new System.Drawing.Point(4, 29);
-            this.tabPage81.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage81.Name = "tabPage81";
-            this.tabPage81.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage81.Size = new System.Drawing.Size(457, 767);
-            this.tabPage81.TabIndex = 15;
-            this.tabPage81.Text = "Audio channel mapper";
-            this.tabPage81.UseVisualStyleBackColor = true;
+            tabPage81.Controls.Add(btAudioChannelMapperClear);
+            tabPage81.Controls.Add(groupBox41);
+            tabPage81.Controls.Add(label307);
+            tabPage81.Controls.Add(edAudioChannelMapperOutputChannels);
+            tabPage81.Controls.Add(label306);
+            tabPage81.Controls.Add(lbAudioChannelMapperRoutes);
+            tabPage81.Controls.Add(cbAudioChannelMapperEnabled);
+            tabPage81.Location = new System.Drawing.Point(4, 34);
+            tabPage81.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage81.Name = "tabPage81";
+            tabPage81.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage81.Size = new System.Drawing.Size(509, 962);
+            tabPage81.TabIndex = 15;
+            tabPage81.Text = "Audio channel mapper";
+            tabPage81.UseVisualStyleBackColor = true;
             // 
             // btAudioChannelMapperClear
             // 
-            this.btAudioChannelMapperClear.Location = new System.Drawing.Point(310, 346);
-            this.btAudioChannelMapperClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAudioChannelMapperClear.Name = "btAudioChannelMapperClear";
-            this.btAudioChannelMapperClear.Size = new System.Drawing.Size(112, 35);
-            this.btAudioChannelMapperClear.TabIndex = 21;
-            this.btAudioChannelMapperClear.Text = "Clear";
-            this.btAudioChannelMapperClear.UseVisualStyleBackColor = true;
-            this.btAudioChannelMapperClear.Click += new System.EventHandler(this.btAudioChannelMapperClear_Click);
+            btAudioChannelMapperClear.Location = new System.Drawing.Point(344, 432);
+            btAudioChannelMapperClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudioChannelMapperClear.Name = "btAudioChannelMapperClear";
+            btAudioChannelMapperClear.Size = new System.Drawing.Size(124, 44);
+            btAudioChannelMapperClear.TabIndex = 21;
+            btAudioChannelMapperClear.Text = "Clear";
+            btAudioChannelMapperClear.UseVisualStyleBackColor = true;
+            btAudioChannelMapperClear.Click += btAudioChannelMapperClear_Click;
             // 
             // groupBox41
             // 
-            this.groupBox41.Controls.Add(this.btAudioChannelMapperAddNewRoute);
-            this.groupBox41.Controls.Add(this.label311);
-            this.groupBox41.Controls.Add(this.tbAudioChannelMapperVolume);
-            this.groupBox41.Controls.Add(this.label310);
-            this.groupBox41.Controls.Add(this.edAudioChannelMapperTargetChannel);
-            this.groupBox41.Controls.Add(this.label309);
-            this.groupBox41.Controls.Add(this.edAudioChannelMapperSourceChannel);
-            this.groupBox41.Controls.Add(this.label308);
-            this.groupBox41.Location = new System.Drawing.Point(6, 391);
-            this.groupBox41.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox41.Name = "groupBox41";
-            this.groupBox41.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox41.Size = new System.Drawing.Size(438, 263);
-            this.groupBox41.TabIndex = 20;
-            this.groupBox41.TabStop = false;
-            this.groupBox41.Text = "Add new route";
+            groupBox41.Controls.Add(btAudioChannelMapperAddNewRoute);
+            groupBox41.Controls.Add(label311);
+            groupBox41.Controls.Add(tbAudioChannelMapperVolume);
+            groupBox41.Controls.Add(label310);
+            groupBox41.Controls.Add(edAudioChannelMapperTargetChannel);
+            groupBox41.Controls.Add(label309);
+            groupBox41.Controls.Add(edAudioChannelMapperSourceChannel);
+            groupBox41.Controls.Add(label308);
+            groupBox41.Location = new System.Drawing.Point(7, 489);
+            groupBox41.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox41.Name = "groupBox41";
+            groupBox41.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox41.Size = new System.Drawing.Size(487, 329);
+            groupBox41.TabIndex = 20;
+            groupBox41.TabStop = false;
+            groupBox41.Text = "Add new route";
             // 
             // btAudioChannelMapperAddNewRoute
             // 
-            this.btAudioChannelMapperAddNewRoute.Location = new System.Drawing.Point(162, 202);
-            this.btAudioChannelMapperAddNewRoute.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAudioChannelMapperAddNewRoute.Name = "btAudioChannelMapperAddNewRoute";
-            this.btAudioChannelMapperAddNewRoute.Size = new System.Drawing.Size(112, 35);
-            this.btAudioChannelMapperAddNewRoute.TabIndex = 20;
-            this.btAudioChannelMapperAddNewRoute.Text = "Add";
-            this.btAudioChannelMapperAddNewRoute.UseVisualStyleBackColor = true;
-            this.btAudioChannelMapperAddNewRoute.Click += new System.EventHandler(this.btAudioChannelMapperAddNewRoute_Click);
+            btAudioChannelMapperAddNewRoute.Location = new System.Drawing.Point(180, 252);
+            btAudioChannelMapperAddNewRoute.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAudioChannelMapperAddNewRoute.Name = "btAudioChannelMapperAddNewRoute";
+            btAudioChannelMapperAddNewRoute.Size = new System.Drawing.Size(124, 44);
+            btAudioChannelMapperAddNewRoute.TabIndex = 20;
+            btAudioChannelMapperAddNewRoute.Text = "Add";
+            btAudioChannelMapperAddNewRoute.UseVisualStyleBackColor = true;
+            btAudioChannelMapperAddNewRoute.Click += btAudioChannelMapperAddNewRoute_Click;
             // 
             // label311
             // 
-            this.label311.AutoSize = true;
-            this.label311.Location = new System.Drawing.Point(308, 137);
-            this.label311.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label311.Name = "label311";
-            this.label311.Size = new System.Drawing.Size(95, 20);
-            this.label311.TabIndex = 19;
-            this.label311.Text = "10% - 200%";
+            label311.AutoSize = true;
+            label311.Location = new System.Drawing.Point(342, 171);
+            label311.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label311.Name = "label311";
+            label311.Size = new System.Drawing.Size(109, 25);
+            label311.TabIndex = 19;
+            label311.Text = "10% - 200%";
             // 
             // tbAudioChannelMapperVolume
             // 
-            this.tbAudioChannelMapperVolume.Location = new System.Drawing.Point(312, 63);
-            this.tbAudioChannelMapperVolume.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbAudioChannelMapperVolume.Maximum = 2000;
-            this.tbAudioChannelMapperVolume.Minimum = 100;
-            this.tbAudioChannelMapperVolume.Name = "tbAudioChannelMapperVolume";
-            this.tbAudioChannelMapperVolume.Size = new System.Drawing.Size(111, 69);
-            this.tbAudioChannelMapperVolume.TabIndex = 18;
-            this.tbAudioChannelMapperVolume.Value = 1000;
+            tbAudioChannelMapperVolume.Location = new System.Drawing.Point(347, 79);
+            tbAudioChannelMapperVolume.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbAudioChannelMapperVolume.Maximum = 2000;
+            tbAudioChannelMapperVolume.Minimum = 100;
+            tbAudioChannelMapperVolume.Name = "tbAudioChannelMapperVolume";
+            tbAudioChannelMapperVolume.Size = new System.Drawing.Size(123, 69);
+            tbAudioChannelMapperVolume.TabIndex = 18;
+            tbAudioChannelMapperVolume.Value = 1000;
             // 
             // label310
             // 
-            this.label310.AutoSize = true;
-            this.label310.Location = new System.Drawing.Point(308, 38);
-            this.label310.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label310.Name = "label310";
-            this.label310.Size = new System.Drawing.Size(63, 20);
-            this.label310.TabIndex = 17;
-            this.label310.Text = "Volume";
+            label310.AutoSize = true;
+            label310.Location = new System.Drawing.Point(342, 48);
+            label310.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label310.Name = "label310";
+            label310.Size = new System.Drawing.Size(72, 25);
+            label310.TabIndex = 17;
+            label310.Text = "Volume";
             // 
             // edAudioChannelMapperTargetChannel
             // 
-            this.edAudioChannelMapperTargetChannel.Location = new System.Drawing.Point(162, 63);
-            this.edAudioChannelMapperTargetChannel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edAudioChannelMapperTargetChannel.Name = "edAudioChannelMapperTargetChannel";
-            this.edAudioChannelMapperTargetChannel.Size = new System.Drawing.Size(74, 26);
-            this.edAudioChannelMapperTargetChannel.TabIndex = 16;
-            this.edAudioChannelMapperTargetChannel.Text = "0";
+            edAudioChannelMapperTargetChannel.Location = new System.Drawing.Point(180, 79);
+            edAudioChannelMapperTargetChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperTargetChannel.Name = "edAudioChannelMapperTargetChannel";
+            edAudioChannelMapperTargetChannel.Size = new System.Drawing.Size(82, 31);
+            edAudioChannelMapperTargetChannel.TabIndex = 16;
+            edAudioChannelMapperTargetChannel.Text = "0";
             // 
             // label309
             // 
-            this.label309.AutoSize = true;
-            this.label309.Location = new System.Drawing.Point(158, 38);
-            this.label309.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label309.Name = "label309";
-            this.label309.Size = new System.Drawing.Size(115, 20);
-            this.label309.TabIndex = 15;
-            this.label309.Text = "Target channel";
+            label309.AutoSize = true;
+            label309.Location = new System.Drawing.Point(176, 48);
+            label309.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label309.Name = "label309";
+            label309.Size = new System.Drawing.Size(125, 25);
+            label309.TabIndex = 15;
+            label309.Text = "Target channel";
             // 
             // edAudioChannelMapperSourceChannel
             // 
-            this.edAudioChannelMapperSourceChannel.Location = new System.Drawing.Point(22, 63);
-            this.edAudioChannelMapperSourceChannel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edAudioChannelMapperSourceChannel.Name = "edAudioChannelMapperSourceChannel";
-            this.edAudioChannelMapperSourceChannel.Size = new System.Drawing.Size(74, 26);
-            this.edAudioChannelMapperSourceChannel.TabIndex = 14;
-            this.edAudioChannelMapperSourceChannel.Text = "0";
+            edAudioChannelMapperSourceChannel.Location = new System.Drawing.Point(24, 79);
+            edAudioChannelMapperSourceChannel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperSourceChannel.Name = "edAudioChannelMapperSourceChannel";
+            edAudioChannelMapperSourceChannel.Size = new System.Drawing.Size(82, 31);
+            edAudioChannelMapperSourceChannel.TabIndex = 14;
+            edAudioChannelMapperSourceChannel.Text = "0";
             // 
             // label308
             // 
-            this.label308.AutoSize = true;
-            this.label308.Location = new System.Drawing.Point(18, 38);
-            this.label308.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label308.Name = "label308";
-            this.label308.Size = new System.Drawing.Size(120, 20);
-            this.label308.TabIndex = 13;
-            this.label308.Text = "Source channel";
+            label308.AutoSize = true;
+            label308.Location = new System.Drawing.Point(20, 48);
+            label308.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label308.Name = "label308";
+            label308.Size = new System.Drawing.Size(131, 25);
+            label308.TabIndex = 13;
+            label308.Text = "Source channel";
             // 
             // label307
             // 
-            this.label307.AutoSize = true;
-            this.label307.Location = new System.Drawing.Point(18, 163);
-            this.label307.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label307.Name = "label307";
-            this.label307.Size = new System.Drawing.Size(61, 20);
-            this.label307.TabIndex = 19;
-            this.label307.Text = "Routes";
+            label307.AutoSize = true;
+            label307.Location = new System.Drawing.Point(20, 204);
+            label307.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label307.Name = "label307";
+            label307.Size = new System.Drawing.Size(66, 25);
+            label307.TabIndex = 19;
+            label307.Text = "Routes";
             // 
             // edAudioChannelMapperOutputChannels
             // 
-            this.edAudioChannelMapperOutputChannels.Location = new System.Drawing.Point(22, 103);
-            this.edAudioChannelMapperOutputChannels.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edAudioChannelMapperOutputChannels.Name = "edAudioChannelMapperOutputChannels";
-            this.edAudioChannelMapperOutputChannels.Size = new System.Drawing.Size(61, 26);
-            this.edAudioChannelMapperOutputChannels.TabIndex = 18;
-            this.edAudioChannelMapperOutputChannels.Text = "0";
+            edAudioChannelMapperOutputChannels.Location = new System.Drawing.Point(24, 129);
+            edAudioChannelMapperOutputChannels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edAudioChannelMapperOutputChannels.Name = "edAudioChannelMapperOutputChannels";
+            edAudioChannelMapperOutputChannels.Size = new System.Drawing.Size(67, 31);
+            edAudioChannelMapperOutputChannels.TabIndex = 18;
+            edAudioChannelMapperOutputChannels.Text = "0";
             // 
             // label306
             // 
-            this.label306.AutoSize = true;
-            this.label306.Location = new System.Drawing.Point(18, 78);
-            this.label306.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label306.Name = "label306";
-            this.label306.Size = new System.Drawing.Size(407, 20);
-            this.label306.TabIndex = 17;
-            this.label306.Text = "Output channels count (0 to use original channels count)";
+            label306.AutoSize = true;
+            label306.Location = new System.Drawing.Point(20, 98);
+            label306.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label306.Name = "label306";
+            label306.Size = new System.Drawing.Size(458, 25);
+            label306.TabIndex = 17;
+            label306.Text = "Output channels count (0 to use original channels count)";
             // 
             // lbAudioChannelMapperRoutes
             // 
-            this.lbAudioChannelMapperRoutes.FormattingEnabled = true;
-            this.lbAudioChannelMapperRoutes.ItemHeight = 20;
-            this.lbAudioChannelMapperRoutes.Location = new System.Drawing.Point(22, 191);
-            this.lbAudioChannelMapperRoutes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbAudioChannelMapperRoutes.Name = "lbAudioChannelMapperRoutes";
-            this.lbAudioChannelMapperRoutes.Size = new System.Drawing.Size(398, 144);
-            this.lbAudioChannelMapperRoutes.TabIndex = 16;
+            lbAudioChannelMapperRoutes.FormattingEnabled = true;
+            lbAudioChannelMapperRoutes.ItemHeight = 25;
+            lbAudioChannelMapperRoutes.Location = new System.Drawing.Point(24, 239);
+            lbAudioChannelMapperRoutes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbAudioChannelMapperRoutes.Name = "lbAudioChannelMapperRoutes";
+            lbAudioChannelMapperRoutes.Size = new System.Drawing.Size(442, 179);
+            lbAudioChannelMapperRoutes.TabIndex = 16;
             // 
             // cbAudioChannelMapperEnabled
             // 
-            this.cbAudioChannelMapperEnabled.AutoSize = true;
-            this.cbAudioChannelMapperEnabled.Location = new System.Drawing.Point(22, 26);
-            this.cbAudioChannelMapperEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAudioChannelMapperEnabled.Name = "cbAudioChannelMapperEnabled";
-            this.cbAudioChannelMapperEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbAudioChannelMapperEnabled.TabIndex = 15;
-            this.cbAudioChannelMapperEnabled.Text = "Enabled";
-            this.cbAudioChannelMapperEnabled.UseVisualStyleBackColor = true;
+            cbAudioChannelMapperEnabled.AutoSize = true;
+            cbAudioChannelMapperEnabled.Location = new System.Drawing.Point(24, 32);
+            cbAudioChannelMapperEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAudioChannelMapperEnabled.Name = "cbAudioChannelMapperEnabled";
+            cbAudioChannelMapperEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudioChannelMapperEnabled.TabIndex = 15;
+            cbAudioChannelMapperEnabled.Text = "Enabled";
+            cbAudioChannelMapperEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage27
             // 
-            this.tabPage27.Controls.Add(this.tabControl9);
-            this.tabPage27.Controls.Add(this.cbMotDetEnabled);
-            this.tabPage27.Location = new System.Drawing.Point(4, 29);
-            this.tabPage27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage27.Size = new System.Drawing.Size(457, 767);
-            this.tabPage27.TabIndex = 7;
-            this.tabPage27.Text = "Motion detection";
-            this.tabPage27.UseVisualStyleBackColor = true;
+            tabPage27.Controls.Add(tabControl9);
+            tabPage27.Controls.Add(cbMotDetEnabled);
+            tabPage27.Location = new System.Drawing.Point(4, 34);
+            tabPage27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage27.Name = "tabPage27";
+            tabPage27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage27.Size = new System.Drawing.Size(509, 962);
+            tabPage27.TabIndex = 7;
+            tabPage27.Text = "Motion detection";
+            tabPage27.UseVisualStyleBackColor = true;
             // 
             // tabControl9
             // 
-            this.tabControl9.Controls.Add(this.tabPage44);
-            this.tabControl9.Controls.Add(this.tabPage45);
-            this.tabControl9.Location = new System.Drawing.Point(21, 66);
-            this.tabControl9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl9.Name = "tabControl9";
-            this.tabControl9.SelectedIndex = 0;
-            this.tabControl9.Size = new System.Drawing.Size(402, 635);
-            this.tabControl9.TabIndex = 3;
+            tabControl9.Controls.Add(tabPage44);
+            tabControl9.Controls.Add(tabPage45);
+            tabControl9.Location = new System.Drawing.Point(23, 82);
+            tabControl9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl9.Name = "tabControl9";
+            tabControl9.SelectedIndex = 0;
+            tabControl9.Size = new System.Drawing.Size(447, 794);
+            tabControl9.TabIndex = 3;
             // 
             // tabPage44
             // 
-            this.tabPage44.Controls.Add(this.pbMotionLevel);
-            this.tabPage44.Controls.Add(this.label158);
-            this.tabPage44.Controls.Add(this.mmMotDetMatrix);
-            this.tabPage44.Location = new System.Drawing.Point(4, 29);
-            this.tabPage44.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage44.Name = "tabPage44";
-            this.tabPage44.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage44.Size = new System.Drawing.Size(394, 602);
-            this.tabPage44.TabIndex = 0;
-            this.tabPage44.Text = "Output matrix";
-            this.tabPage44.UseVisualStyleBackColor = true;
+            tabPage44.Controls.Add(pbMotionLevel);
+            tabPage44.Controls.Add(label158);
+            tabPage44.Controls.Add(mmMotDetMatrix);
+            tabPage44.Location = new System.Drawing.Point(4, 34);
+            tabPage44.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage44.Name = "tabPage44";
+            tabPage44.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage44.Size = new System.Drawing.Size(439, 756);
+            tabPage44.TabIndex = 0;
+            tabPage44.Text = "Output matrix";
+            tabPage44.UseVisualStyleBackColor = true;
             // 
             // pbMotionLevel
             // 
-            this.pbMotionLevel.Location = new System.Drawing.Point(28, 489);
-            this.pbMotionLevel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pbMotionLevel.Name = "pbMotionLevel";
-            this.pbMotionLevel.Size = new System.Drawing.Size(338, 29);
-            this.pbMotionLevel.TabIndex = 2;
+            pbMotionLevel.Location = new System.Drawing.Point(31, 611);
+            pbMotionLevel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pbMotionLevel.Name = "pbMotionLevel";
+            pbMotionLevel.Size = new System.Drawing.Size(376, 36);
+            pbMotionLevel.TabIndex = 2;
             // 
             // label158
             // 
-            this.label158.AutoSize = true;
-            this.label158.Location = new System.Drawing.Point(24, 458);
-            this.label158.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label158.Name = "label158";
-            this.label158.Size = new System.Drawing.Size(92, 20);
-            this.label158.TabIndex = 1;
-            this.label158.Text = "Motion level";
+            label158.AutoSize = true;
+            label158.Location = new System.Drawing.Point(27, 572);
+            label158.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label158.Name = "label158";
+            label158.Size = new System.Drawing.Size(110, 25);
+            label158.TabIndex = 1;
+            label158.Text = "Motion level";
             // 
             // mmMotDetMatrix
             // 
-            this.mmMotDetMatrix.Location = new System.Drawing.Point(9, 9);
-            this.mmMotDetMatrix.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.mmMotDetMatrix.Multiline = true;
-            this.mmMotDetMatrix.Name = "mmMotDetMatrix";
-            this.mmMotDetMatrix.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmMotDetMatrix.Size = new System.Drawing.Size(370, 381);
-            this.mmMotDetMatrix.TabIndex = 0;
+            mmMotDetMatrix.Location = new System.Drawing.Point(10, 11);
+            mmMotDetMatrix.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            mmMotDetMatrix.Multiline = true;
+            mmMotDetMatrix.Name = "mmMotDetMatrix";
+            mmMotDetMatrix.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmMotDetMatrix.Size = new System.Drawing.Size(411, 475);
+            mmMotDetMatrix.TabIndex = 0;
             // 
             // tabPage45
             // 
-            this.tabPage45.Controls.Add(this.groupBox25);
-            this.tabPage45.Controls.Add(this.btMotDetUpdateSettings);
-            this.tabPage45.Controls.Add(this.groupBox27);
-            this.tabPage45.Controls.Add(this.groupBox26);
-            this.tabPage45.Controls.Add(this.groupBox24);
-            this.tabPage45.Location = new System.Drawing.Point(4, 29);
-            this.tabPage45.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage45.Name = "tabPage45";
-            this.tabPage45.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage45.Size = new System.Drawing.Size(394, 602);
-            this.tabPage45.TabIndex = 1;
-            this.tabPage45.Text = "Settings";
-            this.tabPage45.UseVisualStyleBackColor = true;
+            tabPage45.Controls.Add(groupBox25);
+            tabPage45.Controls.Add(btMotDetUpdateSettings);
+            tabPage45.Controls.Add(groupBox27);
+            tabPage45.Controls.Add(groupBox26);
+            tabPage45.Controls.Add(groupBox24);
+            tabPage45.Location = new System.Drawing.Point(4, 34);
+            tabPage45.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage45.Name = "tabPage45";
+            tabPage45.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage45.Size = new System.Drawing.Size(439, 756);
+            tabPage45.TabIndex = 1;
+            tabPage45.Text = "Settings";
+            tabPage45.UseVisualStyleBackColor = true;
             // 
             // groupBox25
             // 
-            this.groupBox25.Controls.Add(this.cbMotDetHLColor);
-            this.groupBox25.Controls.Add(this.label161);
-            this.groupBox25.Controls.Add(this.label160);
-            this.groupBox25.Controls.Add(this.cbMotDetHLEnabled);
-            this.groupBox25.Controls.Add(this.tbMotDetHLThreshold);
-            this.groupBox25.Location = new System.Drawing.Point(18, 158);
-            this.groupBox25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox25.Size = new System.Drawing.Size(350, 132);
-            this.groupBox25.TabIndex = 1;
-            this.groupBox25.TabStop = false;
-            this.groupBox25.Text = "Color highlight";
+            groupBox25.Controls.Add(cbMotDetHLColor);
+            groupBox25.Controls.Add(label161);
+            groupBox25.Controls.Add(label160);
+            groupBox25.Controls.Add(cbMotDetHLEnabled);
+            groupBox25.Controls.Add(tbMotDetHLThreshold);
+            groupBox25.Location = new System.Drawing.Point(20, 198);
+            groupBox25.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox25.Name = "groupBox25";
+            groupBox25.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox25.Size = new System.Drawing.Size(389, 165);
+            groupBox25.TabIndex = 1;
+            groupBox25.TabStop = false;
+            groupBox25.Text = "Color highlight";
             // 
             // cbMotDetHLColor
             // 
-            this.cbMotDetHLColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMotDetHLColor.FormattingEnabled = true;
-            this.cbMotDetHLColor.Items.AddRange(new object[] {
-            "Red",
-            "Green",
-            "Blue"});
-            this.cbMotDetHLColor.Location = new System.Drawing.Point(230, 91);
-            this.cbMotDetHLColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMotDetHLColor.Name = "cbMotDetHLColor";
-            this.cbMotDetHLColor.Size = new System.Drawing.Size(103, 28);
-            this.cbMotDetHLColor.TabIndex = 5;
+            cbMotDetHLColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbMotDetHLColor.FormattingEnabled = true;
+            cbMotDetHLColor.Items.AddRange(new object[] { "Red", "Green", "Blue" });
+            cbMotDetHLColor.Location = new System.Drawing.Point(256, 114);
+            cbMotDetHLColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetHLColor.Name = "cbMotDetHLColor";
+            cbMotDetHLColor.Size = new System.Drawing.Size(114, 33);
+            cbMotDetHLColor.TabIndex = 5;
             // 
             // label161
             // 
-            this.label161.AutoSize = true;
-            this.label161.Location = new System.Drawing.Point(222, 65);
-            this.label161.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label161.Name = "label161";
-            this.label161.Size = new System.Drawing.Size(46, 20);
-            this.label161.TabIndex = 4;
-            this.label161.Text = "Color";
+            label161.AutoSize = true;
+            label161.Location = new System.Drawing.Point(247, 81);
+            label161.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label161.Name = "label161";
+            label161.Size = new System.Drawing.Size(55, 25);
+            label161.TabIndex = 4;
+            label161.Text = "Color";
             // 
             // label160
             // 
-            this.label160.AutoSize = true;
-            this.label160.Location = new System.Drawing.Point(45, 65);
-            this.label160.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(79, 20);
-            this.label160.TabIndex = 2;
-            this.label160.Text = "Threshold";
+            label160.AutoSize = true;
+            label160.Location = new System.Drawing.Point(50, 81);
+            label160.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label160.Name = "label160";
+            label160.Size = new System.Drawing.Size(90, 25);
+            label160.TabIndex = 2;
+            label160.Text = "Threshold";
             // 
             // cbMotDetHLEnabled
             // 
-            this.cbMotDetHLEnabled.AutoSize = true;
-            this.cbMotDetHLEnabled.Checked = true;
-            this.cbMotDetHLEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbMotDetHLEnabled.Location = new System.Drawing.Point(21, 34);
-            this.cbMotDetHLEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMotDetHLEnabled.Name = "cbMotDetHLEnabled";
-            this.cbMotDetHLEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbMotDetHLEnabled.TabIndex = 1;
-            this.cbMotDetHLEnabled.Text = "Enabled";
-            this.cbMotDetHLEnabled.UseVisualStyleBackColor = true;
+            cbMotDetHLEnabled.AutoSize = true;
+            cbMotDetHLEnabled.Checked = true;
+            cbMotDetHLEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbMotDetHLEnabled.Location = new System.Drawing.Point(23, 42);
+            cbMotDetHLEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetHLEnabled.Name = "cbMotDetHLEnabled";
+            cbMotDetHLEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetHLEnabled.TabIndex = 1;
+            cbMotDetHLEnabled.Text = "Enabled";
+            cbMotDetHLEnabled.UseVisualStyleBackColor = true;
             // 
             // tbMotDetHLThreshold
             // 
-            this.tbMotDetHLThreshold.BackColor = System.Drawing.SystemColors.Window;
-            this.tbMotDetHLThreshold.Location = new System.Drawing.Point(46, 89);
-            this.tbMotDetHLThreshold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbMotDetHLThreshold.Maximum = 255;
-            this.tbMotDetHLThreshold.Name = "tbMotDetHLThreshold";
-            this.tbMotDetHLThreshold.Size = new System.Drawing.Size(156, 69);
-            this.tbMotDetHLThreshold.TabIndex = 3;
-            this.tbMotDetHLThreshold.TickFrequency = 5;
-            this.tbMotDetHLThreshold.Value = 25;
+            tbMotDetHLThreshold.BackColor = System.Drawing.SystemColors.Window;
+            tbMotDetHLThreshold.Location = new System.Drawing.Point(51, 111);
+            tbMotDetHLThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbMotDetHLThreshold.Maximum = 255;
+            tbMotDetHLThreshold.Name = "tbMotDetHLThreshold";
+            tbMotDetHLThreshold.Size = new System.Drawing.Size(173, 69);
+            tbMotDetHLThreshold.TabIndex = 3;
+            tbMotDetHLThreshold.TickFrequency = 5;
+            tbMotDetHLThreshold.Value = 25;
             // 
             // btMotDetUpdateSettings
             // 
-            this.btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btMotDetUpdateSettings.Location = new System.Drawing.Point(207, 551);
-            this.btMotDetUpdateSettings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btMotDetUpdateSettings.Name = "btMotDetUpdateSettings";
-            this.btMotDetUpdateSettings.Size = new System.Drawing.Size(160, 35);
-            this.btMotDetUpdateSettings.TabIndex = 4;
-            this.btMotDetUpdateSettings.Text = "Update settings";
-            this.btMotDetUpdateSettings.UseVisualStyleBackColor = true;
-            this.btMotDetUpdateSettings.Click += new System.EventHandler(this.btMotDetUpdateSettings_Click);
+            btMotDetUpdateSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btMotDetUpdateSettings.Location = new System.Drawing.Point(230, 689);
+            btMotDetUpdateSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMotDetUpdateSettings.Name = "btMotDetUpdateSettings";
+            btMotDetUpdateSettings.Size = new System.Drawing.Size(178, 44);
+            btMotDetUpdateSettings.TabIndex = 4;
+            btMotDetUpdateSettings.Text = "Update settings";
+            btMotDetUpdateSettings.UseVisualStyleBackColor = true;
+            btMotDetUpdateSettings.Click += btMotDetUpdateSettings_Click;
             // 
             // groupBox27
             // 
-            this.groupBox27.Controls.Add(this.edMotDetMatrixHeight);
-            this.groupBox27.Controls.Add(this.label163);
-            this.groupBox27.Controls.Add(this.edMotDetMatrixWidth);
-            this.groupBox27.Controls.Add(this.label164);
-            this.groupBox27.Location = new System.Drawing.Point(18, 409);
-            this.groupBox27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox27.Size = new System.Drawing.Size(350, 91);
-            this.groupBox27.TabIndex = 3;
-            this.groupBox27.TabStop = false;
-            this.groupBox27.Text = "Matrix";
+            groupBox27.Controls.Add(edMotDetMatrixHeight);
+            groupBox27.Controls.Add(label163);
+            groupBox27.Controls.Add(edMotDetMatrixWidth);
+            groupBox27.Controls.Add(label164);
+            groupBox27.Location = new System.Drawing.Point(20, 511);
+            groupBox27.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox27.Name = "groupBox27";
+            groupBox27.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox27.Size = new System.Drawing.Size(389, 114);
+            groupBox27.TabIndex = 3;
+            groupBox27.TabStop = false;
+            groupBox27.Text = "Matrix";
             // 
             // edMotDetMatrixHeight
             // 
-            this.edMotDetMatrixHeight.Location = new System.Drawing.Point(218, 35);
-            this.edMotDetMatrixHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMotDetMatrixHeight.Name = "edMotDetMatrixHeight";
-            this.edMotDetMatrixHeight.Size = new System.Drawing.Size(52, 26);
-            this.edMotDetMatrixHeight.TabIndex = 75;
-            this.edMotDetMatrixHeight.Text = "10";
+            edMotDetMatrixHeight.Location = new System.Drawing.Point(242, 44);
+            edMotDetMatrixHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetMatrixHeight.Name = "edMotDetMatrixHeight";
+            edMotDetMatrixHeight.Size = new System.Drawing.Size(57, 31);
+            edMotDetMatrixHeight.TabIndex = 75;
+            edMotDetMatrixHeight.Text = "10";
             // 
             // label163
             // 
-            this.label163.AutoSize = true;
-            this.label163.Location = new System.Drawing.Point(147, 40);
-            this.label163.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label163.Name = "label163";
-            this.label163.Size = new System.Drawing.Size(56, 20);
-            this.label163.TabIndex = 74;
-            this.label163.Text = "Height";
+            label163.AutoSize = true;
+            label163.Location = new System.Drawing.Point(163, 50);
+            label163.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label163.Name = "label163";
+            label163.Size = new System.Drawing.Size(65, 25);
+            label163.TabIndex = 74;
+            label163.Text = "Height";
             // 
             // edMotDetMatrixWidth
             // 
-            this.edMotDetMatrixWidth.Location = new System.Drawing.Point(84, 35);
-            this.edMotDetMatrixWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMotDetMatrixWidth.Name = "edMotDetMatrixWidth";
-            this.edMotDetMatrixWidth.Size = new System.Drawing.Size(52, 26);
-            this.edMotDetMatrixWidth.TabIndex = 73;
-            this.edMotDetMatrixWidth.Text = "10";
+            edMotDetMatrixWidth.Location = new System.Drawing.Point(93, 44);
+            edMotDetMatrixWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetMatrixWidth.Name = "edMotDetMatrixWidth";
+            edMotDetMatrixWidth.Size = new System.Drawing.Size(57, 31);
+            edMotDetMatrixWidth.TabIndex = 73;
+            edMotDetMatrixWidth.Text = "10";
             // 
             // label164
             // 
-            this.label164.AutoSize = true;
-            this.label164.Location = new System.Drawing.Point(21, 40);
-            this.label164.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label164.Name = "label164";
-            this.label164.Size = new System.Drawing.Size(50, 20);
-            this.label164.TabIndex = 72;
-            this.label164.Text = "Width";
+            label164.AutoSize = true;
+            label164.Location = new System.Drawing.Point(23, 50);
+            label164.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label164.Name = "label164";
+            label164.Size = new System.Drawing.Size(60, 25);
+            label164.TabIndex = 72;
+            label164.Text = "Width";
             // 
             // groupBox26
             // 
-            this.groupBox26.Controls.Add(this.label162);
-            this.groupBox26.Controls.Add(this.tbMotDetDropFramesThreshold);
-            this.groupBox26.Controls.Add(this.cbMotDetDropFramesEnabled);
-            this.groupBox26.Location = new System.Drawing.Point(18, 294);
-            this.groupBox26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox26.Size = new System.Drawing.Size(350, 106);
-            this.groupBox26.TabIndex = 2;
-            this.groupBox26.TabStop = false;
-            this.groupBox26.Text = "Drop frames";
+            groupBox26.Controls.Add(label162);
+            groupBox26.Controls.Add(tbMotDetDropFramesThreshold);
+            groupBox26.Controls.Add(cbMotDetDropFramesEnabled);
+            groupBox26.Location = new System.Drawing.Point(20, 368);
+            groupBox26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox26.Name = "groupBox26";
+            groupBox26.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox26.Size = new System.Drawing.Size(389, 132);
+            groupBox26.TabIndex = 2;
+            groupBox26.TabStop = false;
+            groupBox26.Text = "Drop frames";
             // 
             // label162
             // 
-            this.label162.AutoSize = true;
-            this.label162.Location = new System.Drawing.Point(141, 32);
-            this.label162.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label162.Name = "label162";
-            this.label162.Size = new System.Drawing.Size(79, 20);
-            this.label162.TabIndex = 4;
-            this.label162.Text = "Threshold";
+            label162.AutoSize = true;
+            label162.Location = new System.Drawing.Point(157, 40);
+            label162.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label162.Name = "label162";
+            label162.Size = new System.Drawing.Size(90, 25);
+            label162.TabIndex = 4;
+            label162.Text = "Threshold";
             // 
             // tbMotDetDropFramesThreshold
             // 
-            this.tbMotDetDropFramesThreshold.BackColor = System.Drawing.SystemColors.Window;
-            this.tbMotDetDropFramesThreshold.Location = new System.Drawing.Point(142, 57);
-            this.tbMotDetDropFramesThreshold.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbMotDetDropFramesThreshold.Maximum = 255;
-            this.tbMotDetDropFramesThreshold.Name = "tbMotDetDropFramesThreshold";
-            this.tbMotDetDropFramesThreshold.Size = new System.Drawing.Size(156, 69);
-            this.tbMotDetDropFramesThreshold.TabIndex = 5;
-            this.tbMotDetDropFramesThreshold.TickFrequency = 5;
-            this.tbMotDetDropFramesThreshold.Value = 5;
+            tbMotDetDropFramesThreshold.BackColor = System.Drawing.SystemColors.Window;
+            tbMotDetDropFramesThreshold.Location = new System.Drawing.Point(158, 71);
+            tbMotDetDropFramesThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbMotDetDropFramesThreshold.Maximum = 255;
+            tbMotDetDropFramesThreshold.Name = "tbMotDetDropFramesThreshold";
+            tbMotDetDropFramesThreshold.Size = new System.Drawing.Size(173, 69);
+            tbMotDetDropFramesThreshold.TabIndex = 5;
+            tbMotDetDropFramesThreshold.TickFrequency = 5;
+            tbMotDetDropFramesThreshold.Value = 5;
             // 
             // cbMotDetDropFramesEnabled
             // 
-            this.cbMotDetDropFramesEnabled.AutoSize = true;
-            this.cbMotDetDropFramesEnabled.Location = new System.Drawing.Point(21, 29);
-            this.cbMotDetDropFramesEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMotDetDropFramesEnabled.Name = "cbMotDetDropFramesEnabled";
-            this.cbMotDetDropFramesEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbMotDetDropFramesEnabled.TabIndex = 1;
-            this.cbMotDetDropFramesEnabled.Text = "Enabled";
-            this.cbMotDetDropFramesEnabled.UseVisualStyleBackColor = true;
+            cbMotDetDropFramesEnabled.AutoSize = true;
+            cbMotDetDropFramesEnabled.Location = new System.Drawing.Point(23, 36);
+            cbMotDetDropFramesEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetDropFramesEnabled.Name = "cbMotDetDropFramesEnabled";
+            cbMotDetDropFramesEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetDropFramesEnabled.TabIndex = 1;
+            cbMotDetDropFramesEnabled.Text = "Enabled";
+            cbMotDetDropFramesEnabled.UseVisualStyleBackColor = true;
             // 
             // groupBox24
             // 
-            this.groupBox24.Controls.Add(this.edMotDetFrameInterval);
-            this.groupBox24.Controls.Add(this.label159);
-            this.groupBox24.Controls.Add(this.cbCompareGreyscale);
-            this.groupBox24.Controls.Add(this.cbCompareBlue);
-            this.groupBox24.Controls.Add(this.cbCompareGreen);
-            this.groupBox24.Controls.Add(this.cbCompareRed);
-            this.groupBox24.Location = new System.Drawing.Point(18, 18);
-            this.groupBox24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox24.Size = new System.Drawing.Size(350, 126);
-            this.groupBox24.TabIndex = 0;
-            this.groupBox24.TabStop = false;
-            this.groupBox24.Text = "Compare settings";
+            groupBox24.Controls.Add(edMotDetFrameInterval);
+            groupBox24.Controls.Add(label159);
+            groupBox24.Controls.Add(cbCompareGreyscale);
+            groupBox24.Controls.Add(cbCompareBlue);
+            groupBox24.Controls.Add(cbCompareGreen);
+            groupBox24.Controls.Add(cbCompareRed);
+            groupBox24.Location = new System.Drawing.Point(20, 22);
+            groupBox24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox24.Name = "groupBox24";
+            groupBox24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox24.Size = new System.Drawing.Size(389, 158);
+            groupBox24.TabIndex = 0;
+            groupBox24.TabStop = false;
+            groupBox24.Text = "Compare settings";
             // 
             // edMotDetFrameInterval
             // 
-            this.edMotDetFrameInterval.Location = new System.Drawing.Point(142, 78);
-            this.edMotDetFrameInterval.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMotDetFrameInterval.Name = "edMotDetFrameInterval";
-            this.edMotDetFrameInterval.Size = new System.Drawing.Size(46, 26);
-            this.edMotDetFrameInterval.TabIndex = 5;
-            this.edMotDetFrameInterval.Text = "2";
+            edMotDetFrameInterval.Location = new System.Drawing.Point(158, 98);
+            edMotDetFrameInterval.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMotDetFrameInterval.Name = "edMotDetFrameInterval";
+            edMotDetFrameInterval.Size = new System.Drawing.Size(51, 31);
+            edMotDetFrameInterval.TabIndex = 5;
+            edMotDetFrameInterval.Text = "2";
             // 
             // label159
             // 
-            this.label159.AutoSize = true;
-            this.label159.Location = new System.Drawing.Point(16, 83);
-            this.label159.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label159.Name = "label159";
-            this.label159.Size = new System.Drawing.Size(109, 20);
-            this.label159.TabIndex = 4;
-            this.label159.Text = "Frame interval";
+            label159.AutoSize = true;
+            label159.Location = new System.Drawing.Point(18, 104);
+            label159.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label159.Name = "label159";
+            label159.Size = new System.Drawing.Size(123, 25);
+            label159.TabIndex = 4;
+            label159.Text = "Frame interval";
             // 
             // cbCompareGreyscale
             // 
-            this.cbCompareGreyscale.AutoSize = true;
-            this.cbCompareGreyscale.Checked = true;
-            this.cbCompareGreyscale.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCompareGreyscale.Location = new System.Drawing.Point(244, 32);
-            this.cbCompareGreyscale.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCompareGreyscale.Name = "cbCompareGreyscale";
-            this.cbCompareGreyscale.Size = new System.Drawing.Size(106, 24);
-            this.cbCompareGreyscale.TabIndex = 3;
-            this.cbCompareGreyscale.Text = "Greyscale";
-            this.cbCompareGreyscale.UseVisualStyleBackColor = true;
+            cbCompareGreyscale.AutoSize = true;
+            cbCompareGreyscale.Checked = true;
+            cbCompareGreyscale.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbCompareGreyscale.Location = new System.Drawing.Point(271, 40);
+            cbCompareGreyscale.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareGreyscale.Name = "cbCompareGreyscale";
+            cbCompareGreyscale.Size = new System.Drawing.Size(112, 29);
+            cbCompareGreyscale.TabIndex = 3;
+            cbCompareGreyscale.Text = "Greyscale";
+            cbCompareGreyscale.UseVisualStyleBackColor = true;
             // 
             // cbCompareBlue
             // 
-            this.cbCompareBlue.AutoSize = true;
-            this.cbCompareBlue.Location = new System.Drawing.Point(177, 32);
-            this.cbCompareBlue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCompareBlue.Name = "cbCompareBlue";
-            this.cbCompareBlue.Size = new System.Drawing.Size(67, 24);
-            this.cbCompareBlue.TabIndex = 2;
-            this.cbCompareBlue.Text = "Blue";
-            this.cbCompareBlue.UseVisualStyleBackColor = true;
+            cbCompareBlue.AutoSize = true;
+            cbCompareBlue.Location = new System.Drawing.Point(197, 40);
+            cbCompareBlue.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareBlue.Name = "cbCompareBlue";
+            cbCompareBlue.Size = new System.Drawing.Size(71, 29);
+            cbCompareBlue.TabIndex = 2;
+            cbCompareBlue.Text = "Blue";
+            cbCompareBlue.UseVisualStyleBackColor = true;
             // 
             // cbCompareGreen
             // 
-            this.cbCompareGreen.AutoSize = true;
-            this.cbCompareGreen.Location = new System.Drawing.Point(90, 32);
-            this.cbCompareGreen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCompareGreen.Name = "cbCompareGreen";
-            this.cbCompareGreen.Size = new System.Drawing.Size(80, 24);
-            this.cbCompareGreen.TabIndex = 1;
-            this.cbCompareGreen.Text = "Green";
-            this.cbCompareGreen.UseVisualStyleBackColor = true;
+            cbCompareGreen.AutoSize = true;
+            cbCompareGreen.Location = new System.Drawing.Point(100, 40);
+            cbCompareGreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareGreen.Name = "cbCompareGreen";
+            cbCompareGreen.Size = new System.Drawing.Size(84, 29);
+            cbCompareGreen.TabIndex = 1;
+            cbCompareGreen.Text = "Green";
+            cbCompareGreen.UseVisualStyleBackColor = true;
             // 
             // cbCompareRed
             // 
-            this.cbCompareRed.AutoSize = true;
-            this.cbCompareRed.Location = new System.Drawing.Point(21, 32);
-            this.cbCompareRed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbCompareRed.Name = "cbCompareRed";
-            this.cbCompareRed.Size = new System.Drawing.Size(65, 24);
-            this.cbCompareRed.TabIndex = 0;
-            this.cbCompareRed.Text = "Red";
-            this.cbCompareRed.UseVisualStyleBackColor = true;
+            cbCompareRed.AutoSize = true;
+            cbCompareRed.Location = new System.Drawing.Point(23, 40);
+            cbCompareRed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCompareRed.Name = "cbCompareRed";
+            cbCompareRed.Size = new System.Drawing.Size(68, 29);
+            cbCompareRed.TabIndex = 0;
+            cbCompareRed.Text = "Red";
+            cbCompareRed.UseVisualStyleBackColor = true;
             // 
             // cbMotDetEnabled
             // 
-            this.cbMotDetEnabled.AutoSize = true;
-            this.cbMotDetEnabled.Location = new System.Drawing.Point(21, 25);
-            this.cbMotDetEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMotDetEnabled.Name = "cbMotDetEnabled";
-            this.cbMotDetEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbMotDetEnabled.TabIndex = 2;
-            this.cbMotDetEnabled.Text = "Enabled";
-            this.cbMotDetEnabled.UseVisualStyleBackColor = true;
+            cbMotDetEnabled.AutoSize = true;
+            cbMotDetEnabled.Location = new System.Drawing.Point(23, 31);
+            cbMotDetEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMotDetEnabled.Name = "cbMotDetEnabled";
+            cbMotDetEnabled.Size = new System.Drawing.Size(101, 29);
+            cbMotDetEnabled.TabIndex = 2;
+            cbMotDetEnabled.Text = "Enabled";
+            cbMotDetEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label393);
-            this.tabPage2.Controls.Add(this.cbDirect2DRotate);
-            this.tabPage2.Controls.Add(this.pnVideoRendererBGColor);
-            this.tabPage2.Controls.Add(this.label394);
-            this.tabPage2.Controls.Add(this.btFullScreen);
-            this.tabPage2.Controls.Add(this.cbScreenFlipVertical);
-            this.tabPage2.Controls.Add(this.cbScreenFlipHorizontal);
-            this.tabPage2.Controls.Add(this.cbStretch);
-            this.tabPage2.Controls.Add(this.groupBox13);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(457, 767);
-            this.tabPage2.TabIndex = 6;
-            this.tabPage2.Text = "Display";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(label393);
+            tabPage2.Controls.Add(cbDirect2DRotate);
+            tabPage2.Controls.Add(pnVideoRendererBGColor);
+            tabPage2.Controls.Add(label394);
+            tabPage2.Controls.Add(btFullScreen);
+            tabPage2.Controls.Add(cbScreenFlipVertical);
+            tabPage2.Controls.Add(cbScreenFlipHorizontal);
+            tabPage2.Controls.Add(cbStretch);
+            tabPage2.Controls.Add(groupBox13);
+            tabPage2.Location = new System.Drawing.Point(4, 34);
+            tabPage2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage2.Size = new System.Drawing.Size(509, 962);
+            tabPage2.TabIndex = 6;
+            tabPage2.Text = "Display";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // label393
             // 
-            this.label393.AutoSize = true;
-            this.label393.Location = new System.Drawing.Point(35, 355);
-            this.label393.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label393.Name = "label393";
-            this.label393.Size = new System.Drawing.Size(118, 20);
-            this.label393.TabIndex = 65;
-            this.label393.Text = "Direct2D rotate";
+            label393.AutoSize = true;
+            label393.Location = new System.Drawing.Point(39, 444);
+            label393.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label393.Name = "label393";
+            label393.Size = new System.Drawing.Size(133, 25);
+            label393.TabIndex = 65;
+            label393.Text = "Direct2D rotate";
             // 
             // cbDirect2DRotate
             // 
-            this.cbDirect2DRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDirect2DRotate.FormattingEnabled = true;
-            this.cbDirect2DRotate.Items.AddRange(new object[] {
-            "0",
-            "90",
-            "180",
-            "270"});
-            this.cbDirect2DRotate.Location = new System.Drawing.Point(39, 379);
-            this.cbDirect2DRotate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDirect2DRotate.Name = "cbDirect2DRotate";
-            this.cbDirect2DRotate.Size = new System.Drawing.Size(181, 28);
-            this.cbDirect2DRotate.TabIndex = 64;
-            this.cbDirect2DRotate.SelectedIndexChanged += new System.EventHandler(this.cbDirect2DRotate_SelectedIndexChanged);
+            cbDirect2DRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDirect2DRotate.FormattingEnabled = true;
+            cbDirect2DRotate.Items.AddRange(new object[] { "0", "90", "180", "270" });
+            cbDirect2DRotate.Location = new System.Drawing.Point(43, 474);
+            cbDirect2DRotate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDirect2DRotate.Name = "cbDirect2DRotate";
+            cbDirect2DRotate.Size = new System.Drawing.Size(201, 33);
+            cbDirect2DRotate.TabIndex = 64;
+            cbDirect2DRotate.SelectedIndexChanged += cbDirect2DRotate_SelectedIndexChanged;
             // 
             // pnVideoRendererBGColor
             // 
-            this.pnVideoRendererBGColor.BackColor = System.Drawing.Color.Black;
-            this.pnVideoRendererBGColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnVideoRendererBGColor.Location = new System.Drawing.Point(195, 223);
-            this.pnVideoRendererBGColor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pnVideoRendererBGColor.Name = "pnVideoRendererBGColor";
-            this.pnVideoRendererBGColor.Size = new System.Drawing.Size(35, 36);
-            this.pnVideoRendererBGColor.TabIndex = 63;
-            this.pnVideoRendererBGColor.Click += new System.EventHandler(this.pnVideoRendererBGColor_Click);
+            pnVideoRendererBGColor.BackColor = System.Drawing.Color.Black;
+            pnVideoRendererBGColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnVideoRendererBGColor.Location = new System.Drawing.Point(217, 279);
+            pnVideoRendererBGColor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            pnVideoRendererBGColor.Name = "pnVideoRendererBGColor";
+            pnVideoRendererBGColor.Size = new System.Drawing.Size(39, 44);
+            pnVideoRendererBGColor.TabIndex = 63;
+            pnVideoRendererBGColor.Click += pnVideoRendererBGColor_Click;
             // 
             // label394
             // 
-            this.label394.AutoSize = true;
-            this.label394.Location = new System.Drawing.Point(35, 230);
-            this.label394.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label394.Name = "label394";
-            this.label394.Size = new System.Drawing.Size(133, 20);
-            this.label394.TabIndex = 62;
-            this.label394.Text = "Background color";
+            label394.AutoSize = true;
+            label394.Location = new System.Drawing.Point(39, 288);
+            label394.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label394.Name = "label394";
+            label394.Size = new System.Drawing.Size(152, 25);
+            label394.TabIndex = 62;
+            label394.Text = "Background color";
             // 
             // btFullScreen
             // 
-            this.btFullScreen.Location = new System.Drawing.Point(279, 379);
-            this.btFullScreen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btFullScreen.Name = "btFullScreen";
-            this.btFullScreen.Size = new System.Drawing.Size(135, 35);
-            this.btFullScreen.TabIndex = 61;
-            this.btFullScreen.Text = "Full screen";
-            this.btFullScreen.UseVisualStyleBackColor = true;
-            this.btFullScreen.Click += new System.EventHandler(this.btFullScreen_Click);
+            btFullScreen.Location = new System.Drawing.Point(310, 474);
+            btFullScreen.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btFullScreen.Name = "btFullScreen";
+            btFullScreen.Size = new System.Drawing.Size(150, 44);
+            btFullScreen.TabIndex = 61;
+            btFullScreen.Text = "Full screen";
+            btFullScreen.UseVisualStyleBackColor = true;
+            btFullScreen.Click += btFullScreen_Click;
             // 
             // cbScreenFlipVertical
             // 
-            this.cbScreenFlipVertical.AutoSize = true;
-            this.cbScreenFlipVertical.Location = new System.Drawing.Point(279, 259);
-            this.cbScreenFlipVertical.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbScreenFlipVertical.Name = "cbScreenFlipVertical";
-            this.cbScreenFlipVertical.Size = new System.Drawing.Size(113, 24);
-            this.cbScreenFlipVertical.TabIndex = 59;
-            this.cbScreenFlipVertical.Text = "Flip vertical";
-            this.cbScreenFlipVertical.UseVisualStyleBackColor = true;
-            this.cbScreenFlipVertical.CheckedChanged += new System.EventHandler(this.cbScreenFlipVertical_CheckedChanged);
+            cbScreenFlipVertical.AutoSize = true;
+            cbScreenFlipVertical.Location = new System.Drawing.Point(310, 324);
+            cbScreenFlipVertical.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbScreenFlipVertical.Name = "cbScreenFlipVertical";
+            cbScreenFlipVertical.Size = new System.Drawing.Size(126, 29);
+            cbScreenFlipVertical.TabIndex = 59;
+            cbScreenFlipVertical.Text = "Flip vertical";
+            cbScreenFlipVertical.UseVisualStyleBackColor = true;
+            cbScreenFlipVertical.CheckedChanged += cbScreenFlipVertical_CheckedChanged;
             // 
             // cbScreenFlipHorizontal
             // 
-            this.cbScreenFlipHorizontal.AutoSize = true;
-            this.cbScreenFlipHorizontal.Location = new System.Drawing.Point(279, 224);
-            this.cbScreenFlipHorizontal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbScreenFlipHorizontal.Name = "cbScreenFlipHorizontal";
-            this.cbScreenFlipHorizontal.Size = new System.Drawing.Size(133, 24);
-            this.cbScreenFlipHorizontal.TabIndex = 58;
-            this.cbScreenFlipHorizontal.Text = "Flip horizontal";
-            this.cbScreenFlipHorizontal.UseVisualStyleBackColor = true;
-            this.cbScreenFlipHorizontal.CheckedChanged += new System.EventHandler(this.cbScreenFlipHorizontal_CheckedChanged);
+            cbScreenFlipHorizontal.AutoSize = true;
+            cbScreenFlipHorizontal.Location = new System.Drawing.Point(310, 280);
+            cbScreenFlipHorizontal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbScreenFlipHorizontal.Name = "cbScreenFlipHorizontal";
+            cbScreenFlipHorizontal.Size = new System.Drawing.Size(150, 29);
+            cbScreenFlipHorizontal.TabIndex = 58;
+            cbScreenFlipHorizontal.Text = "Flip horizontal";
+            cbScreenFlipHorizontal.UseVisualStyleBackColor = true;
+            cbScreenFlipHorizontal.CheckedChanged += cbScreenFlipHorizontal_CheckedChanged;
             // 
             // cbStretch
             // 
-            this.cbStretch.AutoSize = true;
-            this.cbStretch.Location = new System.Drawing.Point(279, 293);
-            this.cbStretch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbStretch.Name = "cbStretch";
-            this.cbStretch.Size = new System.Drawing.Size(128, 24);
-            this.cbStretch.TabIndex = 57;
-            this.cbStretch.Text = "Stretch video";
-            this.cbStretch.UseVisualStyleBackColor = true;
-            this.cbStretch.CheckedChanged += new System.EventHandler(this.cbStretch_CheckedChanged);
+            cbStretch.AutoSize = true;
+            cbStretch.Location = new System.Drawing.Point(310, 366);
+            cbStretch.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbStretch.Name = "cbStretch";
+            cbStretch.Size = new System.Drawing.Size(141, 29);
+            cbStretch.TabIndex = 57;
+            cbStretch.Text = "Stretch video";
+            cbStretch.UseVisualStyleBackColor = true;
+            cbStretch.CheckedChanged += cbStretch_CheckedChanged;
             // 
             // groupBox13
             // 
-            this.groupBox13.Controls.Add(this.rbDirect2D);
-            this.groupBox13.Controls.Add(this.rbNone);
-            this.groupBox13.Controls.Add(this.rbEVR);
-            this.groupBox13.Controls.Add(this.rbVMR9);
-            this.groupBox13.Location = new System.Drawing.Point(20, 16);
-            this.groupBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox13.Size = new System.Drawing.Size(413, 189);
-            this.groupBox13.TabIndex = 56;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Video Renderer";
+            groupBox13.Controls.Add(rbDirect2D);
+            groupBox13.Controls.Add(rbNone);
+            groupBox13.Controls.Add(rbEVR);
+            groupBox13.Controls.Add(rbVMR9);
+            groupBox13.Location = new System.Drawing.Point(22, 20);
+            groupBox13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox13.Name = "groupBox13";
+            groupBox13.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox13.Size = new System.Drawing.Size(459, 236);
+            groupBox13.TabIndex = 56;
+            groupBox13.TabStop = false;
+            groupBox13.Text = "Video Renderer";
             // 
             // rbDirect2D
             // 
-            this.rbDirect2D.AutoSize = true;
-            this.rbDirect2D.Location = new System.Drawing.Point(22, 108);
-            this.rbDirect2D.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbDirect2D.Name = "rbDirect2D";
-            this.rbDirect2D.Size = new System.Drawing.Size(97, 24);
-            this.rbDirect2D.TabIndex = 4;
-            this.rbDirect2D.Text = "Direct2D";
-            this.rbDirect2D.UseVisualStyleBackColor = true;
-            this.rbDirect2D.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbDirect2D.AutoSize = true;
+            rbDirect2D.Location = new System.Drawing.Point(24, 135);
+            rbDirect2D.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbDirect2D.Name = "rbDirect2D";
+            rbDirect2D.Size = new System.Drawing.Size(106, 29);
+            rbDirect2D.TabIndex = 4;
+            rbDirect2D.Text = "Direct2D";
+            rbDirect2D.UseVisualStyleBackColor = true;
+            rbDirect2D.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbNone
             // 
-            this.rbNone.AutoSize = true;
-            this.rbNone.Location = new System.Drawing.Point(22, 144);
-            this.rbNone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNone.Name = "rbNone";
-            this.rbNone.Size = new System.Drawing.Size(72, 24);
-            this.rbNone.TabIndex = 3;
-            this.rbNone.Text = "None";
-            this.rbNone.UseVisualStyleBackColor = true;
-            this.rbNone.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbNone.AutoSize = true;
+            rbNone.Location = new System.Drawing.Point(24, 180);
+            rbNone.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNone.Name = "rbNone";
+            rbNone.Size = new System.Drawing.Size(80, 29);
+            rbNone.TabIndex = 3;
+            rbNone.Text = "None";
+            rbNone.UseVisualStyleBackColor = true;
+            rbNone.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbEVR
             // 
-            this.rbEVR.AutoSize = true;
-            this.rbEVR.Checked = true;
-            this.rbEVR.Location = new System.Drawing.Point(22, 73);
-            this.rbEVR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEVR.Name = "rbEVR";
-            this.rbEVR.Size = new System.Drawing.Size(286, 24);
-            this.rbEVR.TabIndex = 2;
-            this.rbEVR.TabStop = true;
-            this.rbEVR.Text = "Enhanced Video Renderer (default)";
-            this.rbEVR.UseVisualStyleBackColor = true;
-            this.rbEVR.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbEVR.AutoSize = true;
+            rbEVR.Checked = true;
+            rbEVR.Location = new System.Drawing.Point(24, 91);
+            rbEVR.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEVR.Name = "rbEVR";
+            rbEVR.Size = new System.Drawing.Size(309, 29);
+            rbEVR.TabIndex = 2;
+            rbEVR.TabStop = true;
+            rbEVR.Text = "Enhanced Video Renderer (default)";
+            rbEVR.UseVisualStyleBackColor = true;
+            rbEVR.CheckedChanged += rbVR_CheckedChanged;
             // 
             // rbVMR9
             // 
-            this.rbVMR9.AutoSize = true;
-            this.rbVMR9.Location = new System.Drawing.Point(22, 38);
-            this.rbVMR9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbVMR9.Name = "rbVMR9";
-            this.rbVMR9.Size = new System.Drawing.Size(207, 24);
-            this.rbVMR9.TabIndex = 1;
-            this.rbVMR9.Text = "Video Mixing Renderer 9";
-            this.rbVMR9.UseVisualStyleBackColor = true;
-            this.rbVMR9.CheckedChanged += new System.EventHandler(this.rbVR_CheckedChanged);
+            rbVMR9.AutoSize = true;
+            rbVMR9.Location = new System.Drawing.Point(24, 48);
+            rbVMR9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbVMR9.Name = "rbVMR9";
+            rbVMR9.Size = new System.Drawing.Size(231, 29);
+            rbVMR9.TabIndex = 1;
+            rbVMR9.Text = "Video Mixing Renderer 9";
+            rbVMR9.UseVisualStyleBackColor = true;
+            rbVMR9.CheckedChanged += rbVR_CheckedChanged;
             // 
             // tabPage25
             // 
-            this.tabPage25.Controls.Add(this.edBarcodeMetadata);
-            this.tabPage25.Controls.Add(this.label91);
-            this.tabPage25.Controls.Add(this.cbBarcodeType);
-            this.tabPage25.Controls.Add(this.label90);
-            this.tabPage25.Controls.Add(this.btBarcodeReset);
-            this.tabPage25.Controls.Add(this.edBarcode);
-            this.tabPage25.Controls.Add(this.label89);
-            this.tabPage25.Controls.Add(this.cbBarcodeDetectionEnabled);
-            this.tabPage25.Location = new System.Drawing.Point(4, 29);
-            this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage25.Size = new System.Drawing.Size(457, 767);
-            this.tabPage25.TabIndex = 8;
-            this.tabPage25.Text = "Barcode reader";
-            this.tabPage25.UseVisualStyleBackColor = true;
+            tabPage25.Controls.Add(edBarcodeMetadata);
+            tabPage25.Controls.Add(label91);
+            tabPage25.Controls.Add(cbBarcodeType);
+            tabPage25.Controls.Add(label90);
+            tabPage25.Controls.Add(btBarcodeReset);
+            tabPage25.Controls.Add(edBarcode);
+            tabPage25.Controls.Add(label89);
+            tabPage25.Controls.Add(cbBarcodeDetectionEnabled);
+            tabPage25.Location = new System.Drawing.Point(4, 34);
+            tabPage25.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage25.Name = "tabPage25";
+            tabPage25.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage25.Size = new System.Drawing.Size(509, 962);
+            tabPage25.TabIndex = 8;
+            tabPage25.Text = "Barcode reader";
+            tabPage25.UseVisualStyleBackColor = true;
             // 
             // edBarcodeMetadata
             // 
-            this.edBarcodeMetadata.Location = new System.Drawing.Point(21, 248);
-            this.edBarcodeMetadata.Multiline = true;
-            this.edBarcodeMetadata.Name = "edBarcodeMetadata";
-            this.edBarcodeMetadata.Size = new System.Drawing.Size(421, 146);
-            this.edBarcodeMetadata.TabIndex = 24;
+            edBarcodeMetadata.Location = new System.Drawing.Point(23, 310);
+            edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edBarcodeMetadata.Multiline = true;
+            edBarcodeMetadata.Name = "edBarcodeMetadata";
+            edBarcodeMetadata.Size = new System.Drawing.Size(467, 182);
+            edBarcodeMetadata.TabIndex = 24;
             // 
             // label91
             // 
-            this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(16, 218);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(77, 20);
-            this.label91.TabIndex = 23;
-            this.label91.Text = "Metadata";
+            label91.AutoSize = true;
+            label91.Location = new System.Drawing.Point(18, 272);
+            label91.Name = "label91";
+            label91.Size = new System.Drawing.Size(87, 25);
+            label91.TabIndex = 23;
+            label91.Text = "Metadata";
             // 
             // cbBarcodeType
             // 
-            this.cbBarcodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBarcodeType.FormattingEnabled = true;
-            this.cbBarcodeType.Items.AddRange(new object[] {
-            "Autodetect",
-            "UPC-A",
-            "UPC-E",
-            "EAN-8",
-            "EAN-13",
-            "Code 39",
-            "Code 93",
-            "Code 128",
-            "ITF",
-            "CodaBar",
-            "RSS-14",
-            "Data matrix",
-            "Aztec",
-            "QR",
-            "PDF-417"});
-            this.cbBarcodeType.Location = new System.Drawing.Point(21, 100);
-            this.cbBarcodeType.Name = "cbBarcodeType";
-            this.cbBarcodeType.Size = new System.Drawing.Size(238, 28);
-            this.cbBarcodeType.TabIndex = 22;
+            cbBarcodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbBarcodeType.FormattingEnabled = true;
+            cbBarcodeType.Items.AddRange(new object[] { "Autodetect", "UPC-A", "UPC-E", "EAN-8", "EAN-13", "Code 39", "Code 93", "Code 128", "ITF", "CodaBar", "RSS-14", "Data matrix", "Aztec", "QR", "PDF-417" });
+            cbBarcodeType.Location = new System.Drawing.Point(23, 125);
+            cbBarcodeType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbBarcodeType.Name = "cbBarcodeType";
+            cbBarcodeType.Size = new System.Drawing.Size(264, 33);
+            cbBarcodeType.TabIndex = 22;
             // 
             // label90
             // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(16, 75);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(103, 20);
-            this.label90.TabIndex = 21;
-            this.label90.Text = "Barcode type";
+            label90.AutoSize = true;
+            label90.Location = new System.Drawing.Point(18, 94);
+            label90.Name = "label90";
+            label90.Size = new System.Drawing.Size(116, 25);
+            label90.TabIndex = 21;
+            label90.Text = "Barcode type";
             // 
             // btBarcodeReset
             // 
-            this.btBarcodeReset.Location = new System.Drawing.Point(21, 414);
-            this.btBarcodeReset.Name = "btBarcodeReset";
-            this.btBarcodeReset.Size = new System.Drawing.Size(93, 35);
-            this.btBarcodeReset.TabIndex = 20;
-            this.btBarcodeReset.Text = "Restart";
-            this.btBarcodeReset.UseVisualStyleBackColor = true;
-            this.btBarcodeReset.Click += new System.EventHandler(this.btBarcodeReset_Click);
+            btBarcodeReset.Location = new System.Drawing.Point(23, 518);
+            btBarcodeReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btBarcodeReset.Name = "btBarcodeReset";
+            btBarcodeReset.Size = new System.Drawing.Size(103, 44);
+            btBarcodeReset.TabIndex = 20;
+            btBarcodeReset.Text = "Restart";
+            btBarcodeReset.UseVisualStyleBackColor = true;
+            btBarcodeReset.Click += btBarcodeReset_Click;
             // 
             // edBarcode
             // 
-            this.edBarcode.Location = new System.Drawing.Point(21, 174);
-            this.edBarcode.Name = "edBarcode";
-            this.edBarcode.Size = new System.Drawing.Size(421, 26);
-            this.edBarcode.TabIndex = 19;
+            edBarcode.Location = new System.Drawing.Point(23, 218);
+            edBarcode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edBarcode.Name = "edBarcode";
+            edBarcode.Size = new System.Drawing.Size(467, 31);
+            edBarcode.TabIndex = 19;
             // 
             // label89
             // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(16, 149);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(137, 20);
-            this.label89.TabIndex = 18;
-            this.label89.Text = "Detected barcode";
+            label89.AutoSize = true;
+            label89.Location = new System.Drawing.Point(18, 186);
+            label89.Name = "label89";
+            label89.Size = new System.Drawing.Size(153, 25);
+            label89.TabIndex = 18;
+            label89.Text = "Detected barcode";
             // 
             // cbBarcodeDetectionEnabled
             // 
-            this.cbBarcodeDetectionEnabled.AutoSize = true;
-            this.cbBarcodeDetectionEnabled.Location = new System.Drawing.Point(21, 29);
-            this.cbBarcodeDetectionEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled";
-            this.cbBarcodeDetectionEnabled.Size = new System.Drawing.Size(94, 24);
-            this.cbBarcodeDetectionEnabled.TabIndex = 17;
-            this.cbBarcodeDetectionEnabled.Text = "Enabled";
-            this.cbBarcodeDetectionEnabled.UseVisualStyleBackColor = true;
+            cbBarcodeDetectionEnabled.AutoSize = true;
+            cbBarcodeDetectionEnabled.Location = new System.Drawing.Point(23, 36);
+            cbBarcodeDetectionEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled";
+            cbBarcodeDetectionEnabled.Size = new System.Drawing.Size(101, 29);
+            cbBarcodeDetectionEnabled.TabIndex = 17;
+            cbBarcodeDetectionEnabled.Text = "Enabled";
+            cbBarcodeDetectionEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage28
             // 
-            this.tabPage28.Controls.Add(this.cbNetworkStreamingMode);
-            this.tabPage28.Controls.Add(this.tabControl5);
-            this.tabPage28.Controls.Add(this.cbNetworkStreamingAudioEnabled);
-            this.tabPage28.Controls.Add(this.cbNetworkStreaming);
-            this.tabPage28.Location = new System.Drawing.Point(4, 29);
-            this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage28.Size = new System.Drawing.Size(457, 767);
-            this.tabPage28.TabIndex = 9;
-            this.tabPage28.Text = "Network streaming";
-            this.tabPage28.UseVisualStyleBackColor = true;
+            tabPage28.Controls.Add(cbNetworkStreamingMode);
+            tabPage28.Controls.Add(tabControl5);
+            tabPage28.Controls.Add(cbNetworkStreamingAudioEnabled);
+            tabPage28.Controls.Add(cbNetworkStreaming);
+            tabPage28.Location = new System.Drawing.Point(4, 34);
+            tabPage28.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage28.Name = "tabPage28";
+            tabPage28.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tabPage28.Size = new System.Drawing.Size(509, 962);
+            tabPage28.TabIndex = 9;
+            tabPage28.Text = "Network streaming";
+            tabPage28.UseVisualStyleBackColor = true;
             // 
             // cbNetworkStreamingMode
             // 
-            this.cbNetworkStreamingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbNetworkStreamingMode.FormattingEnabled = true;
-            this.cbNetworkStreamingMode.Items.AddRange(new object[] {
-            "Windows Media Video",
-            "RTSP",
-            "RTMP (including YouTube and Facebook)",
-            "NDI",
-            "UDP",
-            "Smooth Streaming to Microsoft IIS",
-            "Output to external virtual devices",
-            "HTTP Live Streaming (HLS)"});
-            this.cbNetworkStreamingMode.Location = new System.Drawing.Point(24, 60);
-            this.cbNetworkStreamingMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbNetworkStreamingMode.Name = "cbNetworkStreamingMode";
-            this.cbNetworkStreamingMode.Size = new System.Drawing.Size(412, 28);
-            this.cbNetworkStreamingMode.TabIndex = 26;
+            cbNetworkStreamingMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbNetworkStreamingMode.FormattingEnabled = true;
+            cbNetworkStreamingMode.Items.AddRange(new object[] { "Windows Media Video", "RTSP", "RTMP (including YouTube and Facebook)", "NDI", "UDP", "Smooth Streaming to Microsoft IIS", "Output to external virtual devices", "HTTP Live Streaming (HLS)" });
+            cbNetworkStreamingMode.Location = new System.Drawing.Point(27, 75);
+            cbNetworkStreamingMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbNetworkStreamingMode.Name = "cbNetworkStreamingMode";
+            cbNetworkStreamingMode.Size = new System.Drawing.Size(457, 33);
+            cbNetworkStreamingMode.TabIndex = 26;
             // 
             // tabControl5
             // 
-            this.tabControl5.Controls.Add(this.tabPage32);
-            this.tabControl5.Controls.Add(this.tabPage49);
-            this.tabControl5.Controls.Add(this.tabPage50);
-            this.tabControl5.Controls.Add(this.tabPage4);
-            this.tabControl5.Controls.Add(this.tabPage77);
-            this.tabControl5.Controls.Add(this.tabPage51);
-            this.tabControl5.Controls.Add(this.tabPage33);
-            this.tabControl5.Controls.Add(this.tabPage5);
-            this.tabControl5.Location = new System.Drawing.Point(6, 112);
-            this.tabControl5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl5.Name = "tabControl5";
-            this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(438, 582);
-            this.tabControl5.TabIndex = 25;
+            tabControl5.Controls.Add(tabPage32);
+            tabControl5.Controls.Add(tabPage49);
+            tabControl5.Controls.Add(tabPage50);
+            tabControl5.Controls.Add(tabPage4);
+            tabControl5.Controls.Add(tabPage77);
+            tabControl5.Controls.Add(tabPage51);
+            tabControl5.Controls.Add(tabPage33);
+            tabControl5.Controls.Add(tabPage5);
+            tabControl5.Location = new System.Drawing.Point(7, 140);
+            tabControl5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl5.Name = "tabControl5";
+            tabControl5.SelectedIndex = 0;
+            tabControl5.Size = new System.Drawing.Size(487, 728);
+            tabControl5.TabIndex = 25;
             // 
             // tabPage32
             // 
-            this.tabPage32.Controls.Add(this.label24);
-            this.tabPage32.Controls.Add(this.edNetworkURL);
-            this.tabPage32.Controls.Add(this.edWMVNetworkPort);
-            this.tabPage32.Controls.Add(this.label21);
-            this.tabPage32.Controls.Add(this.btRefreshClients);
-            this.tabPage32.Controls.Add(this.lbNetworkClients);
-            this.tabPage32.Controls.Add(this.rbNetworkStreamingUseExternalProfile);
-            this.tabPage32.Controls.Add(this.rbNetworkStreamingUseMainWMVSettings);
-            this.tabPage32.Controls.Add(this.label81);
-            this.tabPage32.Controls.Add(this.label80);
-            this.tabPage32.Controls.Add(this.edMaximumClients);
-            this.tabPage32.Controls.Add(this.label22);
-            this.tabPage32.Controls.Add(this.btSelectWMVProfileNetwork);
-            this.tabPage32.Controls.Add(this.edNetworkStreamingWMVProfile);
-            this.tabPage32.Controls.Add(this.label23);
-            this.tabPage32.Location = new System.Drawing.Point(4, 29);
-            this.tabPage32.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage32.Name = "tabPage32";
-            this.tabPage32.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage32.Size = new System.Drawing.Size(430, 549);
-            this.tabPage32.TabIndex = 0;
-            this.tabPage32.Text = "WMV";
-            this.tabPage32.UseVisualStyleBackColor = true;
+            tabPage32.Controls.Add(label24);
+            tabPage32.Controls.Add(edNetworkURL);
+            tabPage32.Controls.Add(edWMVNetworkPort);
+            tabPage32.Controls.Add(label21);
+            tabPage32.Controls.Add(btRefreshClients);
+            tabPage32.Controls.Add(lbNetworkClients);
+            tabPage32.Controls.Add(rbNetworkStreamingUseExternalProfile);
+            tabPage32.Controls.Add(rbNetworkStreamingUseMainWMVSettings);
+            tabPage32.Controls.Add(label81);
+            tabPage32.Controls.Add(label80);
+            tabPage32.Controls.Add(edMaximumClients);
+            tabPage32.Controls.Add(label22);
+            tabPage32.Controls.Add(btSelectWMVProfileNetwork);
+            tabPage32.Controls.Add(edNetworkStreamingWMVProfile);
+            tabPage32.Controls.Add(label23);
+            tabPage32.Location = new System.Drawing.Point(4, 34);
+            tabPage32.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage32.Name = "tabPage32";
+            tabPage32.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage32.Size = new System.Drawing.Size(479, 690);
+            tabPage32.TabIndex = 0;
+            tabPage32.Text = "WMV";
+            tabPage32.UseVisualStyleBackColor = true;
             // 
             // label24
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(20, 460);
-            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(127, 20);
-            this.label24.TabIndex = 32;
-            this.label24.Text = "Connection URL";
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(22, 575);
+            label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(138, 25);
+            label24.TabIndex = 32;
+            label24.Text = "Connection URL";
             // 
             // edNetworkURL
             // 
-            this.edNetworkURL.Location = new System.Drawing.Point(22, 485);
-            this.edNetworkURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkURL.Name = "edNetworkURL";
-            this.edNetworkURL.ReadOnly = true;
-            this.edNetworkURL.Size = new System.Drawing.Size(390, 26);
-            this.edNetworkURL.TabIndex = 31;
+            edNetworkURL.Location = new System.Drawing.Point(24, 606);
+            edNetworkURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkURL.Name = "edNetworkURL";
+            edNetworkURL.ReadOnly = true;
+            edNetworkURL.Size = new System.Drawing.Size(433, 31);
+            edNetworkURL.TabIndex = 31;
             // 
             // edWMVNetworkPort
             // 
-            this.edWMVNetworkPort.Location = new System.Drawing.Point(354, 185);
-            this.edWMVNetworkPort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edWMVNetworkPort.Name = "edWMVNetworkPort";
-            this.edWMVNetworkPort.Size = new System.Drawing.Size(49, 26);
-            this.edWMVNetworkPort.TabIndex = 30;
-            this.edWMVNetworkPort.Text = "100";
+            edWMVNetworkPort.Location = new System.Drawing.Point(393, 231);
+            edWMVNetworkPort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edWMVNetworkPort.Name = "edWMVNetworkPort";
+            edWMVNetworkPort.Size = new System.Drawing.Size(54, 31);
+            edWMVNetworkPort.TabIndex = 30;
+            edWMVNetworkPort.Text = "100";
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(243, 189);
-            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(99, 20);
-            this.label21.TabIndex = 29;
-            this.label21.Text = "Network port";
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(270, 236);
+            label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(118, 25);
+            label21.TabIndex = 29;
+            label21.Text = "Network port";
             // 
             // btRefreshClients
             // 
-            this.btRefreshClients.Location = new System.Drawing.Point(309, 365);
-            this.btRefreshClients.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btRefreshClients.Name = "btRefreshClients";
-            this.btRefreshClients.Size = new System.Drawing.Size(96, 35);
-            this.btRefreshClients.TabIndex = 28;
-            this.btRefreshClients.Text = "Refresh";
-            this.btRefreshClients.UseVisualStyleBackColor = true;
-            this.btRefreshClients.Click += new System.EventHandler(this.btRefreshClients_Click);
+            btRefreshClients.Location = new System.Drawing.Point(343, 456);
+            btRefreshClients.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btRefreshClients.Name = "btRefreshClients";
+            btRefreshClients.Size = new System.Drawing.Size(107, 44);
+            btRefreshClients.TabIndex = 28;
+            btRefreshClients.Text = "Refresh";
+            btRefreshClients.UseVisualStyleBackColor = true;
+            btRefreshClients.Click += btRefreshClients_Click;
             // 
             // lbNetworkClients
             // 
-            this.lbNetworkClients.FormattingEnabled = true;
-            this.lbNetworkClients.ItemHeight = 20;
-            this.lbNetworkClients.Location = new System.Drawing.Point(22, 269);
-            this.lbNetworkClients.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbNetworkClients.Name = "lbNetworkClients";
-            this.lbNetworkClients.Size = new System.Drawing.Size(380, 84);
-            this.lbNetworkClients.TabIndex = 27;
+            lbNetworkClients.FormattingEnabled = true;
+            lbNetworkClients.ItemHeight = 25;
+            lbNetworkClients.Location = new System.Drawing.Point(24, 336);
+            lbNetworkClients.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbNetworkClients.Name = "lbNetworkClients";
+            lbNetworkClients.Size = new System.Drawing.Size(422, 104);
+            lbNetworkClients.TabIndex = 27;
             // 
             // rbNetworkStreamingUseExternalProfile
             // 
-            this.rbNetworkStreamingUseExternalProfile.AutoSize = true;
-            this.rbNetworkStreamingUseExternalProfile.Location = new System.Drawing.Point(22, 58);
-            this.rbNetworkStreamingUseExternalProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkStreamingUseExternalProfile.Name = "rbNetworkStreamingUseExternalProfile";
-            this.rbNetworkStreamingUseExternalProfile.Size = new System.Drawing.Size(170, 24);
-            this.rbNetworkStreamingUseExternalProfile.TabIndex = 26;
-            this.rbNetworkStreamingUseExternalProfile.Text = "Use external profile";
-            this.rbNetworkStreamingUseExternalProfile.UseVisualStyleBackColor = true;
+            rbNetworkStreamingUseExternalProfile.AutoSize = true;
+            rbNetworkStreamingUseExternalProfile.Location = new System.Drawing.Point(24, 72);
+            rbNetworkStreamingUseExternalProfile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkStreamingUseExternalProfile.Name = "rbNetworkStreamingUseExternalProfile";
+            rbNetworkStreamingUseExternalProfile.Size = new System.Drawing.Size(188, 29);
+            rbNetworkStreamingUseExternalProfile.TabIndex = 26;
+            rbNetworkStreamingUseExternalProfile.Text = "Use external profile";
+            rbNetworkStreamingUseExternalProfile.UseVisualStyleBackColor = true;
             // 
             // rbNetworkStreamingUseMainWMVSettings
             // 
-            this.rbNetworkStreamingUseMainWMVSettings.AutoSize = true;
-            this.rbNetworkStreamingUseMainWMVSettings.Checked = true;
-            this.rbNetworkStreamingUseMainWMVSettings.Location = new System.Drawing.Point(22, 23);
-            this.rbNetworkStreamingUseMainWMVSettings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkStreamingUseMainWMVSettings.Name = "rbNetworkStreamingUseMainWMVSettings";
-            this.rbNetworkStreamingUseMainWMVSettings.Size = new System.Drawing.Size(287, 24);
-            this.rbNetworkStreamingUseMainWMVSettings.TabIndex = 25;
-            this.rbNetworkStreamingUseMainWMVSettings.TabStop = true;
-            this.rbNetworkStreamingUseMainWMVSettings.Text = "Use WMV settings from capture tab";
-            this.rbNetworkStreamingUseMainWMVSettings.UseVisualStyleBackColor = true;
+            rbNetworkStreamingUseMainWMVSettings.AutoSize = true;
+            rbNetworkStreamingUseMainWMVSettings.Checked = true;
+            rbNetworkStreamingUseMainWMVSettings.Location = new System.Drawing.Point(24, 29);
+            rbNetworkStreamingUseMainWMVSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkStreamingUseMainWMVSettings.Name = "rbNetworkStreamingUseMainWMVSettings";
+            rbNetworkStreamingUseMainWMVSettings.Size = new System.Drawing.Size(321, 29);
+            rbNetworkStreamingUseMainWMVSettings.TabIndex = 25;
+            rbNetworkStreamingUseMainWMVSettings.TabStop = true;
+            rbNetworkStreamingUseMainWMVSettings.Text = "Use WMV settings from capture tab";
+            rbNetworkStreamingUseMainWMVSettings.UseVisualStyleBackColor = true;
             // 
             // label81
             // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(51, 418);
-            this.label81.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(339, 20);
-            this.label81.TabIndex = 24;
-            this.label81.Text = "You can use Windows Media Player for testing.";
+            label81.AutoSize = true;
+            label81.Location = new System.Drawing.Point(57, 522);
+            label81.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label81.Name = "label81";
+            label81.Size = new System.Drawing.Size(381, 25);
+            label81.TabIndex = 24;
+            label81.Text = "You can use Windows Media Player for testing.";
             // 
             // label80
             // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(20, 245);
-            this.label80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(57, 20);
-            this.label80.TabIndex = 23;
-            this.label80.Text = "Clients";
+            label80.AutoSize = true;
+            label80.Location = new System.Drawing.Point(22, 306);
+            label80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label80.Name = "label80";
+            label80.Size = new System.Drawing.Size(64, 25);
+            label80.TabIndex = 23;
+            label80.Text = "Clients";
             // 
             // edMaximumClients
             // 
-            this.edMaximumClients.Location = new System.Drawing.Point(164, 185);
-            this.edMaximumClients.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMaximumClients.Name = "edMaximumClients";
-            this.edMaximumClients.Size = new System.Drawing.Size(49, 26);
-            this.edMaximumClients.TabIndex = 22;
-            this.edMaximumClients.Text = "10";
+            edMaximumClients.Location = new System.Drawing.Point(182, 231);
+            edMaximumClients.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMaximumClients.Name = "edMaximumClients";
+            edMaximumClients.Size = new System.Drawing.Size(54, 31);
+            edMaximumClients.TabIndex = 22;
+            edMaximumClients.Text = "10";
             // 
             // label22
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(20, 189);
-            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(125, 20);
-            this.label22.TabIndex = 21;
-            this.label22.Text = "Maximum clients";
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(22, 236);
+            label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(145, 25);
+            label22.TabIndex = 21;
+            label22.Text = "Maximum clients";
             // 
             // btSelectWMVProfileNetwork
             // 
-            this.btSelectWMVProfileNetwork.Location = new System.Drawing.Point(369, 126);
-            this.btSelectWMVProfileNetwork.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSelectWMVProfileNetwork.Name = "btSelectWMVProfileNetwork";
-            this.btSelectWMVProfileNetwork.Size = new System.Drawing.Size(36, 35);
-            this.btSelectWMVProfileNetwork.TabIndex = 20;
-            this.btSelectWMVProfileNetwork.Text = "...";
-            this.btSelectWMVProfileNetwork.UseVisualStyleBackColor = true;
-            this.btSelectWMVProfileNetwork.Click += new System.EventHandler(this.btSelectWMVProfileNetwork_Click);
+            btSelectWMVProfileNetwork.Location = new System.Drawing.Point(410, 158);
+            btSelectWMVProfileNetwork.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectWMVProfileNetwork.Name = "btSelectWMVProfileNetwork";
+            btSelectWMVProfileNetwork.Size = new System.Drawing.Size(40, 44);
+            btSelectWMVProfileNetwork.TabIndex = 20;
+            btSelectWMVProfileNetwork.Text = "...";
+            btSelectWMVProfileNetwork.UseVisualStyleBackColor = true;
+            btSelectWMVProfileNetwork.Click += btSelectWMVProfileNetwork_Click;
             // 
             // edNetworkStreamingWMVProfile
             // 
-            this.edNetworkStreamingWMVProfile.Location = new System.Drawing.Point(56, 129);
-            this.edNetworkStreamingWMVProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile";
-            this.edNetworkStreamingWMVProfile.Size = new System.Drawing.Size(307, 26);
-            this.edNetworkStreamingWMVProfile.TabIndex = 19;
-            this.edNetworkStreamingWMVProfile.Text = "c:\\WM.prx";
+            edNetworkStreamingWMVProfile.Location = new System.Drawing.Point(62, 161);
+            edNetworkStreamingWMVProfile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile";
+            edNetworkStreamingWMVProfile.Size = new System.Drawing.Size(341, 31);
+            edNetworkStreamingWMVProfile.TabIndex = 19;
+            edNetworkStreamingWMVProfile.Text = "c:\\WM.prx";
             // 
             // label23
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(51, 105);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(78, 20);
-            this.label23.TabIndex = 18;
-            this.label23.Text = "File name";
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(57, 131);
+            label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(87, 25);
+            label23.TabIndex = 18;
+            label23.Text = "File name";
             // 
             // tabPage49
             // 
-            this.tabPage49.Controls.Add(this.edNetworkRTSPURL);
-            this.tabPage49.Controls.Add(this.label367);
-            this.tabPage49.Controls.Add(this.label366);
-            this.tabPage49.Location = new System.Drawing.Point(4, 29);
-            this.tabPage49.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage49.Name = "tabPage49";
-            this.tabPage49.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage49.Size = new System.Drawing.Size(430, 549);
-            this.tabPage49.TabIndex = 2;
-            this.tabPage49.Text = "RTSP";
-            this.tabPage49.UseVisualStyleBackColor = true;
+            tabPage49.Controls.Add(edNetworkRTSPURL);
+            tabPage49.Controls.Add(label367);
+            tabPage49.Controls.Add(label366);
+            tabPage49.Location = new System.Drawing.Point(4, 34);
+            tabPage49.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage49.Name = "tabPage49";
+            tabPage49.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage49.Size = new System.Drawing.Size(479, 690);
+            tabPage49.TabIndex = 2;
+            tabPage49.Text = "RTSP";
+            tabPage49.UseVisualStyleBackColor = true;
             // 
             // edNetworkRTSPURL
             // 
-            this.edNetworkRTSPURL.Location = new System.Drawing.Point(30, 54);
-            this.edNetworkRTSPURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkRTSPURL.Name = "edNetworkRTSPURL";
-            this.edNetworkRTSPURL.Size = new System.Drawing.Size(368, 26);
-            this.edNetworkRTSPURL.TabIndex = 9;
-            this.edNetworkRTSPURL.Text = "rtsp://localhost:5554/vfstream";
+            edNetworkRTSPURL.Location = new System.Drawing.Point(33, 68);
+            edNetworkRTSPURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkRTSPURL.Name = "edNetworkRTSPURL";
+            edNetworkRTSPURL.Size = new System.Drawing.Size(408, 31);
+            edNetworkRTSPURL.TabIndex = 9;
+            edNetworkRTSPURL.Text = "rtsp://localhost:5554/vfstream";
             // 
             // label367
             // 
-            this.label367.AutoSize = true;
-            this.label367.Location = new System.Drawing.Point(26, 29);
-            this.label367.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label367.Name = "label367";
-            this.label367.Size = new System.Drawing.Size(42, 20);
-            this.label367.TabIndex = 8;
-            this.label367.Text = "URL";
+            label367.AutoSize = true;
+            label367.Location = new System.Drawing.Point(29, 36);
+            label367.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label367.Name = "label367";
+            label367.Size = new System.Drawing.Size(43, 25);
+            label367.TabIndex = 8;
+            label367.Text = "URL";
             // 
             // label366
             // 
-            this.label366.AutoSize = true;
-            this.label366.Location = new System.Drawing.Point(26, 498);
-            this.label366.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label366.Name = "label366";
-            this.label366.Size = new System.Drawing.Size(236, 20);
-            this.label366.TabIndex = 7;
-            this.label366.Text = "MP4 output settings will be used";
+            label366.AutoSize = true;
+            label366.Location = new System.Drawing.Point(29, 622);
+            label366.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label366.Name = "label366";
+            label366.Size = new System.Drawing.Size(272, 25);
+            label366.TabIndex = 7;
+            label366.Text = "MP4 output settings will be used";
             // 
             // tabPage50
             // 
-            this.tabPage50.Controls.Add(this.linkLabel11);
-            this.tabPage50.Controls.Add(this.rbNetworkRTMPFFMPEGCustom);
-            this.tabPage50.Controls.Add(this.rbNetworkRTMPFFMPEG);
-            this.tabPage50.Controls.Add(this.edNetworkRTMPURL);
-            this.tabPage50.Controls.Add(this.label368);
-            this.tabPage50.Controls.Add(this.label369);
-            this.tabPage50.Location = new System.Drawing.Point(4, 29);
-            this.tabPage50.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage50.Name = "tabPage50";
-            this.tabPage50.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage50.Size = new System.Drawing.Size(430, 549);
-            this.tabPage50.TabIndex = 3;
-            this.tabPage50.Text = "RTMP";
-            this.tabPage50.UseVisualStyleBackColor = true;
+            tabPage50.Controls.Add(linkLabel11);
+            tabPage50.Controls.Add(rbNetworkRTMPFFMPEGCustom);
+            tabPage50.Controls.Add(rbNetworkRTMPFFMPEG);
+            tabPage50.Controls.Add(edNetworkRTMPURL);
+            tabPage50.Controls.Add(label368);
+            tabPage50.Controls.Add(label369);
+            tabPage50.Location = new System.Drawing.Point(4, 34);
+            tabPage50.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage50.Name = "tabPage50";
+            tabPage50.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage50.Size = new System.Drawing.Size(479, 690);
+            tabPage50.TabIndex = 3;
+            tabPage50.Text = "RTMP";
+            tabPage50.UseVisualStyleBackColor = true;
             // 
             // linkLabel11
             // 
-            this.linkLabel11.AutoSize = true;
-            this.linkLabel11.Location = new System.Drawing.Point(26, 169);
-            this.linkLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel11.Name = "linkLabel11";
-            this.linkLabel11.Size = new System.Drawing.Size(228, 20);
-            this.linkLabel11.TabIndex = 19;
-            this.linkLabel11.TabStop = true;
-            this.linkLabel11.Text = "Network streaming to YouTube";
-            this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel11_LinkClicked);
+            linkLabel11.AutoSize = true;
+            linkLabel11.Location = new System.Drawing.Point(29, 211);
+            linkLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel11.Name = "linkLabel11";
+            linkLabel11.Size = new System.Drawing.Size(258, 25);
+            linkLabel11.TabIndex = 19;
+            linkLabel11.TabStop = true;
+            linkLabel11.Text = "Network streaming to YouTube";
+            linkLabel11.LinkClicked += linkLabel11_LinkClicked;
             // 
             // rbNetworkRTMPFFMPEGCustom
             // 
-            this.rbNetworkRTMPFFMPEGCustom.AutoSize = true;
-            this.rbNetworkRTMPFFMPEGCustom.Location = new System.Drawing.Point(30, 65);
-            this.rbNetworkRTMPFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkRTMPFFMPEGCustom.Name = "rbNetworkRTMPFFMPEGCustom";
-            this.rbNetworkRTMPFFMPEGCustom.Size = new System.Drawing.Size(299, 24);
-            this.rbNetworkRTMPFFMPEGCustom.TabIndex = 17;
-            this.rbNetworkRTMPFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
-            this.rbNetworkRTMPFFMPEGCustom.UseVisualStyleBackColor = true;
+            rbNetworkRTMPFFMPEGCustom.AutoSize = true;
+            rbNetworkRTMPFFMPEGCustom.Location = new System.Drawing.Point(33, 81);
+            rbNetworkRTMPFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkRTMPFFMPEGCustom.Name = "rbNetworkRTMPFFMPEGCustom";
+            rbNetworkRTMPFFMPEGCustom.Size = new System.Drawing.Size(318, 29);
+            rbNetworkRTMPFFMPEGCustom.TabIndex = 17;
+            rbNetworkRTMPFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
+            rbNetworkRTMPFFMPEGCustom.UseVisualStyleBackColor = true;
             // 
             // rbNetworkRTMPFFMPEG
             // 
-            this.rbNetworkRTMPFFMPEG.AutoSize = true;
-            this.rbNetworkRTMPFFMPEG.Checked = true;
-            this.rbNetworkRTMPFFMPEG.Location = new System.Drawing.Point(30, 29);
-            this.rbNetworkRTMPFFMPEG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkRTMPFFMPEG.Name = "rbNetworkRTMPFFMPEG";
-            this.rbNetworkRTMPFFMPEG.Size = new System.Drawing.Size(268, 24);
-            this.rbNetworkRTMPFFMPEG.TabIndex = 16;
-            this.rbNetworkRTMPFFMPEG.TabStop = true;
-            this.rbNetworkRTMPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
-            this.rbNetworkRTMPFFMPEG.UseVisualStyleBackColor = true;
+            rbNetworkRTMPFFMPEG.AutoSize = true;
+            rbNetworkRTMPFFMPEG.Checked = true;
+            rbNetworkRTMPFFMPEG.Location = new System.Drawing.Point(33, 36);
+            rbNetworkRTMPFFMPEG.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkRTMPFFMPEG.Name = "rbNetworkRTMPFFMPEG";
+            rbNetworkRTMPFFMPEG.Size = new System.Drawing.Size(284, 29);
+            rbNetworkRTMPFFMPEG.TabIndex = 16;
+            rbNetworkRTMPFFMPEG.TabStop = true;
+            rbNetworkRTMPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
+            rbNetworkRTMPFFMPEG.UseVisualStyleBackColor = true;
             // 
             // edNetworkRTMPURL
             // 
-            this.edNetworkRTMPURL.Location = new System.Drawing.Point(30, 451);
-            this.edNetworkRTMPURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkRTMPURL.Name = "edNetworkRTMPURL";
-            this.edNetworkRTMPURL.Size = new System.Drawing.Size(368, 26);
-            this.edNetworkRTMPURL.TabIndex = 15;
-            this.edNetworkRTMPURL.Text = "rtmp://localhost:5554/live/Stream";
+            edNetworkRTMPURL.Location = new System.Drawing.Point(33, 564);
+            edNetworkRTMPURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkRTMPURL.Name = "edNetworkRTMPURL";
+            edNetworkRTMPURL.Size = new System.Drawing.Size(408, 31);
+            edNetworkRTMPURL.TabIndex = 15;
+            edNetworkRTMPURL.Text = "rtmp://localhost:5554/live/Stream";
             // 
             // label368
             // 
-            this.label368.AutoSize = true;
-            this.label368.Location = new System.Drawing.Point(26, 426);
-            this.label368.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label368.Name = "label368";
-            this.label368.Size = new System.Drawing.Size(42, 20);
-            this.label368.TabIndex = 14;
-            this.label368.Text = "URL";
+            label368.AutoSize = true;
+            label368.Location = new System.Drawing.Point(29, 532);
+            label368.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label368.Name = "label368";
+            label368.Size = new System.Drawing.Size(43, 25);
+            label368.TabIndex = 14;
+            label368.Text = "URL";
             // 
             // label369
             // 
-            this.label369.AutoSize = true;
-            this.label369.Location = new System.Drawing.Point(26, 498);
-            this.label369.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label369.Name = "label369";
-            this.label369.Size = new System.Drawing.Size(325, 20);
-            this.label369.TabIndex = 13;
-            this.label369.Text = "Format settings located on output format tab";
+            label369.AutoSize = true;
+            label369.Location = new System.Drawing.Point(29, 622);
+            label369.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label369.Name = "label369";
+            label369.Size = new System.Drawing.Size(374, 25);
+            label369.TabIndex = 13;
+            label369.Text = "Format settings located on output format tab";
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.lbNDI);
-            this.tabPage4.Controls.Add(this.label11);
-            this.tabPage4.Controls.Add(this.label12);
-            this.tabPage4.Controls.Add(this.edNDIURL);
-            this.tabPage4.Controls.Add(this.edNDIName);
-            this.tabPage4.Controls.Add(this.label13);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage4.Size = new System.Drawing.Size(430, 549);
-            this.tabPage4.TabIndex = 6;
-            this.tabPage4.Text = "NDI";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            tabPage4.Controls.Add(lbNDI);
+            tabPage4.Controls.Add(label11);
+            tabPage4.Controls.Add(label12);
+            tabPage4.Controls.Add(edNDIURL);
+            tabPage4.Controls.Add(edNDIName);
+            tabPage4.Controls.Add(label13);
+            tabPage4.Location = new System.Drawing.Point(4, 34);
+            tabPage4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage4.Size = new System.Drawing.Size(479, 690);
+            tabPage4.TabIndex = 6;
+            tabPage4.Text = "NDI";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // lbNDI
             // 
-            this.lbNDI.AutoSize = true;
-            this.lbNDI.Location = new System.Drawing.Point(22, 208);
-            this.lbNDI.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbNDI.Name = "lbNDI";
-            this.lbNDI.Size = new System.Drawing.Size(126, 20);
-            this.lbNDI.TabIndex = 95;
-            this.lbNDI.TabStop = true;
-            this.lbNDI.Text = "vendor\'s website";
-            this.lbNDI.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbNDI_LinkClicked);
+            lbNDI.AutoSize = true;
+            lbNDI.Location = new System.Drawing.Point(24, 260);
+            lbNDI.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbNDI.Name = "lbNDI";
+            lbNDI.Size = new System.Drawing.Size(145, 25);
+            lbNDI.TabIndex = 95;
+            lbNDI.TabStop = true;
+            lbNDI.Text = "vendor's website";
+            lbNDI.LinkClicked += lbNDI_LinkClicked;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(22, 188);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(380, 20);
-            this.label11.TabIndex = 94;
-            this.label11.Text = "To use NDI please install NDI SDK for Windows from";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(24, 235);
+            label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(428, 25);
+            label11.TabIndex = 94;
+            label11.Text = "To use NDI please install NDI SDK for Windows from";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 109);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(127, 20);
-            this.label12.TabIndex = 93;
-            this.label12.Text = "Connection URL";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(24, 136);
+            label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(138, 25);
+            label12.TabIndex = 93;
+            label12.Text = "Connection URL";
             // 
             // edNDIURL
             // 
-            this.edNDIURL.Location = new System.Drawing.Point(27, 134);
-            this.edNDIURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNDIURL.Name = "edNDIURL";
-            this.edNDIURL.ReadOnly = true;
-            this.edNDIURL.Size = new System.Drawing.Size(362, 26);
-            this.edNDIURL.TabIndex = 92;
+            edNDIURL.Location = new System.Drawing.Point(30, 168);
+            edNDIURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNDIURL.Name = "edNDIURL";
+            edNDIURL.ReadOnly = true;
+            edNDIURL.Size = new System.Drawing.Size(402, 31);
+            edNDIURL.TabIndex = 92;
             // 
             // edNDIName
             // 
-            this.edNDIName.Location = new System.Drawing.Point(27, 54);
-            this.edNDIName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNDIName.Name = "edNDIName";
-            this.edNDIName.Size = new System.Drawing.Size(362, 26);
-            this.edNDIName.TabIndex = 91;
-            this.edNDIName.Text = "Main";
+            edNDIName.Location = new System.Drawing.Point(30, 68);
+            edNDIName.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNDIName.Name = "edNDIName";
+            edNDIName.Size = new System.Drawing.Size(402, 31);
+            edNDIName.TabIndex = 91;
+            edNDIName.Text = "Main";
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 29);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 20);
-            this.label13.TabIndex = 90;
-            this.label13.Text = "Name";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(24, 36);
+            label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(59, 25);
+            label13.TabIndex = 90;
+            label13.Text = "Name";
             // 
             // tabPage77
             // 
-            this.tabPage77.Controls.Add(this.label484);
-            this.tabPage77.Controls.Add(this.label63);
-            this.tabPage77.Controls.Add(this.label62);
-            this.tabPage77.Controls.Add(this.label314);
-            this.tabPage77.Controls.Add(this.label313);
-            this.tabPage77.Controls.Add(this.edNetworkUDPURL);
-            this.tabPage77.Controls.Add(this.label372);
-            this.tabPage77.Controls.Add(this.rbNetworkUDPFFMPEGCustom);
-            this.tabPage77.Controls.Add(this.rbNetworkUDPFFMPEG);
-            this.tabPage77.Location = new System.Drawing.Point(4, 29);
-            this.tabPage77.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage77.Name = "tabPage77";
-            this.tabPage77.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage77.Size = new System.Drawing.Size(430, 549);
-            this.tabPage77.TabIndex = 5;
-            this.tabPage77.Text = "UDP";
-            this.tabPage77.UseVisualStyleBackColor = true;
+            tabPage77.Controls.Add(label484);
+            tabPage77.Controls.Add(label63);
+            tabPage77.Controls.Add(label62);
+            tabPage77.Controls.Add(label314);
+            tabPage77.Controls.Add(label313);
+            tabPage77.Controls.Add(edNetworkUDPURL);
+            tabPage77.Controls.Add(label372);
+            tabPage77.Controls.Add(rbNetworkUDPFFMPEGCustom);
+            tabPage77.Controls.Add(rbNetworkUDPFFMPEG);
+            tabPage77.Location = new System.Drawing.Point(4, 34);
+            tabPage77.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage77.Name = "tabPage77";
+            tabPage77.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage77.Size = new System.Drawing.Size(479, 690);
+            tabPage77.TabIndex = 5;
+            tabPage77.Text = "UDP";
+            tabPage77.UseVisualStyleBackColor = true;
             // 
             // label484
             // 
-            this.label484.AutoSize = true;
-            this.label484.Location = new System.Drawing.Point(40, 503);
-            this.label484.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label484.Name = "label484";
-            this.label484.Size = new System.Drawing.Size(326, 20);
-            this.label484.TabIndex = 24;
-            this.label484.Text = "Specify settings located on output format tab";
+            label484.AutoSize = true;
+            label484.Location = new System.Drawing.Point(44, 629);
+            label484.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label484.Name = "label484";
+            label484.Size = new System.Drawing.Size(374, 25);
+            label484.TabIndex = 24;
+            label484.Text = "Specify settings located on output format tab";
             // 
             // label63
             // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(22, 391);
-            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(163, 20);
-            this.label63.TabIndex = 23;
-            this.label63.Text = "instead of IP address.";
+            label63.AutoSize = true;
+            label63.Location = new System.Drawing.Point(24, 489);
+            label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label63.Name = "label63";
+            label63.Size = new System.Drawing.Size(182, 25);
+            label63.TabIndex = 23;
+            label63.Text = "instead of IP address.";
             // 
             // label62
             // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(22, 371);
-            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(352, 20);
-            this.label62.TabIndex = 22;
-            this.label62.Text = "To open the stream in VLC on a local PC, use @ ";
+            label62.AutoSize = true;
+            label62.Location = new System.Drawing.Point(24, 464);
+            label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label62.Name = "label62";
+            label62.Size = new System.Drawing.Size(388, 25);
+            label62.TabIndex = 22;
+            label62.Text = "To open the stream in VLC on a local PC, use @ ";
             // 
             // label314
             // 
-            this.label314.AutoSize = true;
-            this.label314.Location = new System.Drawing.Point(22, 292);
-            this.label314.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label314.Name = "label314";
-            this.label314.Size = new System.Drawing.Size(332, 20);
-            this.label314.TabIndex = 21;
-            this.label314.Text = "For multicast UDP streaming, use an URL like";
+            label314.AutoSize = true;
+            label314.Location = new System.Drawing.Point(24, 365);
+            label314.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label314.Name = "label314";
+            label314.Size = new System.Drawing.Size(365, 25);
+            label314.TabIndex = 21;
+            label314.Text = "For multicast UDP streaming, use an URL like";
             // 
             // label313
             // 
-            this.label313.AutoSize = true;
-            this.label313.Location = new System.Drawing.Point(22, 312);
-            this.label313.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label313.Name = "label313";
-            this.label313.Size = new System.Drawing.Size(334, 20);
-            this.label313.TabIndex = 20;
-            this.label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316";
+            label313.AutoSize = true;
+            label313.Location = new System.Drawing.Point(24, 390);
+            label313.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label313.Name = "label313";
+            label313.Size = new System.Drawing.Size(378, 25);
+            label313.TabIndex = 20;
+            label313.Text = "udp://239.101.101.1:1234?ttl=1&pkt_size=1316";
             // 
             // edNetworkUDPURL
             // 
-            this.edNetworkUDPURL.Location = new System.Drawing.Point(27, 257);
-            this.edNetworkUDPURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkUDPURL.Name = "edNetworkUDPURL";
-            this.edNetworkUDPURL.Size = new System.Drawing.Size(368, 26);
-            this.edNetworkUDPURL.TabIndex = 19;
-            this.edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316";
+            edNetworkUDPURL.Location = new System.Drawing.Point(30, 321);
+            edNetworkUDPURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkUDPURL.Name = "edNetworkUDPURL";
+            edNetworkUDPURL.Size = new System.Drawing.Size(408, 31);
+            edNetworkUDPURL.TabIndex = 19;
+            edNetworkUDPURL.Text = "udp://127.0.0.1:10000?pkt_size=1316";
             // 
             // label372
             // 
-            this.label372.AutoSize = true;
-            this.label372.Location = new System.Drawing.Point(22, 232);
-            this.label372.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label372.Name = "label372";
-            this.label372.Size = new System.Drawing.Size(42, 20);
-            this.label372.TabIndex = 18;
-            this.label372.Text = "URL";
+            label372.AutoSize = true;
+            label372.Location = new System.Drawing.Point(24, 290);
+            label372.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label372.Name = "label372";
+            label372.Size = new System.Drawing.Size(43, 25);
+            label372.TabIndex = 18;
+            label372.Text = "URL";
             // 
             // rbNetworkUDPFFMPEGCustom
             // 
-            this.rbNetworkUDPFFMPEGCustom.AutoSize = true;
-            this.rbNetworkUDPFFMPEGCustom.Location = new System.Drawing.Point(27, 65);
-            this.rbNetworkUDPFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkUDPFFMPEGCustom.Name = "rbNetworkUDPFFMPEGCustom";
-            this.rbNetworkUDPFFMPEGCustom.Size = new System.Drawing.Size(299, 24);
-            this.rbNetworkUDPFFMPEGCustom.TabIndex = 12;
-            this.rbNetworkUDPFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
-            this.rbNetworkUDPFFMPEGCustom.UseVisualStyleBackColor = true;
+            rbNetworkUDPFFMPEGCustom.AutoSize = true;
+            rbNetworkUDPFFMPEGCustom.Location = new System.Drawing.Point(30, 81);
+            rbNetworkUDPFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkUDPFFMPEGCustom.Name = "rbNetworkUDPFFMPEGCustom";
+            rbNetworkUDPFFMPEGCustom.Size = new System.Drawing.Size(318, 29);
+            rbNetworkUDPFFMPEGCustom.TabIndex = 12;
+            rbNetworkUDPFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
+            rbNetworkUDPFFMPEGCustom.UseVisualStyleBackColor = true;
             // 
             // rbNetworkUDPFFMPEG
             // 
-            this.rbNetworkUDPFFMPEG.AutoSize = true;
-            this.rbNetworkUDPFFMPEG.Checked = true;
-            this.rbNetworkUDPFFMPEG.Location = new System.Drawing.Point(27, 29);
-            this.rbNetworkUDPFFMPEG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkUDPFFMPEG.Name = "rbNetworkUDPFFMPEG";
-            this.rbNetworkUDPFFMPEG.Size = new System.Drawing.Size(268, 24);
-            this.rbNetworkUDPFFMPEG.TabIndex = 11;
-            this.rbNetworkUDPFFMPEG.TabStop = true;
-            this.rbNetworkUDPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
-            this.rbNetworkUDPFFMPEG.UseVisualStyleBackColor = true;
+            rbNetworkUDPFFMPEG.AutoSize = true;
+            rbNetworkUDPFFMPEG.Checked = true;
+            rbNetworkUDPFFMPEG.Location = new System.Drawing.Point(30, 36);
+            rbNetworkUDPFFMPEG.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkUDPFFMPEG.Name = "rbNetworkUDPFFMPEG";
+            rbNetworkUDPFFMPEG.Size = new System.Drawing.Size(284, 29);
+            rbNetworkUDPFFMPEG.TabIndex = 11;
+            rbNetworkUDPFFMPEG.TabStop = true;
+            rbNetworkUDPFFMPEG.Text = "H264 / AAC using FFMPEG EXE";
+            rbNetworkUDPFFMPEG.UseVisualStyleBackColor = true;
             // 
             // tabPage51
             // 
-            this.tabPage51.Controls.Add(this.rbNetworkSSFFMPEGCustom);
-            this.tabPage51.Controls.Add(this.rbNetworkSSFFMPEGDefault);
-            this.tabPage51.Controls.Add(this.linkLabel6);
-            this.tabPage51.Controls.Add(this.edNetworkSSURL);
-            this.tabPage51.Controls.Add(this.label370);
-            this.tabPage51.Controls.Add(this.label371);
-            this.tabPage51.Controls.Add(this.rbNetworkSSSoftware);
-            this.tabPage51.Location = new System.Drawing.Point(4, 29);
-            this.tabPage51.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage51.Name = "tabPage51";
-            this.tabPage51.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage51.Size = new System.Drawing.Size(430, 549);
-            this.tabPage51.TabIndex = 4;
-            this.tabPage51.Text = "IIS Smooth Streaming";
-            this.tabPage51.UseVisualStyleBackColor = true;
+            tabPage51.Controls.Add(rbNetworkSSFFMPEGCustom);
+            tabPage51.Controls.Add(rbNetworkSSFFMPEGDefault);
+            tabPage51.Controls.Add(linkLabel6);
+            tabPage51.Controls.Add(edNetworkSSURL);
+            tabPage51.Controls.Add(label370);
+            tabPage51.Controls.Add(label371);
+            tabPage51.Controls.Add(rbNetworkSSSoftware);
+            tabPage51.Location = new System.Drawing.Point(4, 34);
+            tabPage51.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage51.Name = "tabPage51";
+            tabPage51.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage51.Size = new System.Drawing.Size(479, 690);
+            tabPage51.TabIndex = 4;
+            tabPage51.Text = "IIS Smooth Streaming";
+            tabPage51.UseVisualStyleBackColor = true;
             // 
             // rbNetworkSSFFMPEGCustom
             // 
-            this.rbNetworkSSFFMPEGCustom.AutoSize = true;
-            this.rbNetworkSSFFMPEGCustom.Location = new System.Drawing.Point(30, 94);
-            this.rbNetworkSSFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkSSFFMPEGCustom.Name = "rbNetworkSSFFMPEGCustom";
-            this.rbNetworkSSFFMPEGCustom.Size = new System.Drawing.Size(299, 24);
-            this.rbNetworkSSFFMPEGCustom.TabIndex = 22;
-            this.rbNetworkSSFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
-            this.rbNetworkSSFFMPEGCustom.UseVisualStyleBackColor = true;
+            rbNetworkSSFFMPEGCustom.AutoSize = true;
+            rbNetworkSSFFMPEGCustom.Location = new System.Drawing.Point(33, 118);
+            rbNetworkSSFFMPEGCustom.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkSSFFMPEGCustom.Name = "rbNetworkSSFFMPEGCustom";
+            rbNetworkSSFFMPEGCustom.Size = new System.Drawing.Size(318, 29);
+            rbNetworkSSFFMPEGCustom.TabIndex = 22;
+            rbNetworkSSFFMPEGCustom.Text = "Custom settings using FFMPEG EXE";
+            rbNetworkSSFFMPEGCustom.UseVisualStyleBackColor = true;
             // 
             // rbNetworkSSFFMPEGDefault
             // 
-            this.rbNetworkSSFFMPEGDefault.AutoSize = true;
-            this.rbNetworkSSFFMPEGDefault.Location = new System.Drawing.Point(30, 58);
-            this.rbNetworkSSFFMPEGDefault.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkSSFFMPEGDefault.Name = "rbNetworkSSFFMPEGDefault";
-            this.rbNetworkSSFFMPEGDefault.Size = new System.Drawing.Size(268, 24);
-            this.rbNetworkSSFFMPEGDefault.TabIndex = 21;
-            this.rbNetworkSSFFMPEGDefault.Text = "H264 / AAC using FFMPEG EXE";
-            this.rbNetworkSSFFMPEGDefault.UseVisualStyleBackColor = true;
+            rbNetworkSSFFMPEGDefault.AutoSize = true;
+            rbNetworkSSFFMPEGDefault.Location = new System.Drawing.Point(33, 72);
+            rbNetworkSSFFMPEGDefault.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkSSFFMPEGDefault.Name = "rbNetworkSSFFMPEGDefault";
+            rbNetworkSSFFMPEGDefault.Size = new System.Drawing.Size(284, 29);
+            rbNetworkSSFFMPEGDefault.TabIndex = 21;
+            rbNetworkSSFFMPEGDefault.Text = "H264 / AAC using FFMPEG EXE";
+            rbNetworkSSFFMPEGDefault.UseVisualStyleBackColor = true;
             // 
             // linkLabel6
             // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.Location = new System.Drawing.Point(26, 365);
-            this.linkLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(271, 20);
-            this.linkLabel6.TabIndex = 20;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "IIS Smooth Streaming usage manual";
-            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
+            linkLabel6.AutoSize = true;
+            linkLabel6.Location = new System.Drawing.Point(29, 456);
+            linkLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel6.Name = "linkLabel6";
+            linkLabel6.Size = new System.Drawing.Size(301, 25);
+            linkLabel6.TabIndex = 20;
+            linkLabel6.TabStop = true;
+            linkLabel6.Text = "IIS Smooth Streaming usage manual";
+            linkLabel6.LinkClicked += linkLabel6_LinkClicked;
             // 
             // edNetworkSSURL
             // 
-            this.edNetworkSSURL.Location = new System.Drawing.Point(30, 292);
-            this.edNetworkSSURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edNetworkSSURL.Name = "edNetworkSSURL";
-            this.edNetworkSSURL.Size = new System.Drawing.Size(368, 26);
-            this.edNetworkSSURL.TabIndex = 19;
-            this.edNetworkSSURL.Text = "http://localhost/LiveStream.isml";
+            edNetworkSSURL.Location = new System.Drawing.Point(33, 365);
+            edNetworkSSURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edNetworkSSURL.Name = "edNetworkSSURL";
+            edNetworkSSURL.Size = new System.Drawing.Size(408, 31);
+            edNetworkSSURL.TabIndex = 19;
+            edNetworkSSURL.Text = "http://localhost/LiveStream.isml";
             // 
             // label370
             // 
-            this.label370.AutoSize = true;
-            this.label370.Location = new System.Drawing.Point(26, 268);
-            this.label370.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label370.Name = "label370";
-            this.label370.Size = new System.Drawing.Size(157, 20);
-            this.label370.TabIndex = 18;
-            this.label370.Text = "Publishing point URL";
+            label370.AutoSize = true;
+            label370.Location = new System.Drawing.Point(29, 335);
+            label370.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label370.Name = "label370";
+            label370.Size = new System.Drawing.Size(177, 25);
+            label370.TabIndex = 18;
+            label370.Text = "Publishing point URL";
             // 
             // label371
             // 
-            this.label371.AutoSize = true;
-            this.label371.Location = new System.Drawing.Point(26, 498);
-            this.label371.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label371.Name = "label371";
-            this.label371.Size = new System.Drawing.Size(325, 20);
-            this.label371.TabIndex = 17;
-            this.label371.Text = "Format settings located on output format tab";
+            label371.AutoSize = true;
+            label371.Location = new System.Drawing.Point(29, 622);
+            label371.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label371.Name = "label371";
+            label371.Size = new System.Drawing.Size(374, 25);
+            label371.TabIndex = 17;
+            label371.Text = "Format settings located on output format tab";
             // 
             // rbNetworkSSSoftware
             // 
-            this.rbNetworkSSSoftware.AutoSize = true;
-            this.rbNetworkSSSoftware.Checked = true;
-            this.rbNetworkSSSoftware.Location = new System.Drawing.Point(30, 23);
-            this.rbNetworkSSSoftware.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbNetworkSSSoftware.Name = "rbNetworkSSSoftware";
-            this.rbNetworkSSSoftware.Size = new System.Drawing.Size(287, 24);
-            this.rbNetworkSSSoftware.TabIndex = 15;
-            this.rbNetworkSSSoftware.TabStop = true;
-            this.rbNetworkSSSoftware.Text = "H264 / AAC using software encoder";
-            this.rbNetworkSSSoftware.UseVisualStyleBackColor = true;
+            rbNetworkSSSoftware.AutoSize = true;
+            rbNetworkSSSoftware.Checked = true;
+            rbNetworkSSSoftware.Location = new System.Drawing.Point(33, 29);
+            rbNetworkSSSoftware.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbNetworkSSSoftware.Name = "rbNetworkSSSoftware";
+            rbNetworkSSSoftware.Size = new System.Drawing.Size(322, 29);
+            rbNetworkSSSoftware.TabIndex = 15;
+            rbNetworkSSSoftware.TabStop = true;
+            rbNetworkSSSoftware.Text = "H264 / AAC using software encoder";
+            rbNetworkSSSoftware.UseVisualStyleBackColor = true;
             // 
             // tabPage33
             // 
-            this.tabPage33.Controls.Add(this.linkLabel4);
-            this.tabPage33.Controls.Add(this.linkLabel5);
-            this.tabPage33.Location = new System.Drawing.Point(4, 29);
-            this.tabPage33.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage33.Name = "tabPage33";
-            this.tabPage33.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage33.Size = new System.Drawing.Size(430, 549);
-            this.tabPage33.TabIndex = 1;
-            this.tabPage33.Text = "External";
-            this.tabPage33.UseVisualStyleBackColor = true;
+            tabPage33.Controls.Add(linkLabel4);
+            tabPage33.Controls.Add(linkLabel5);
+            tabPage33.Location = new System.Drawing.Point(4, 34);
+            tabPage33.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage33.Name = "tabPage33";
+            tabPage33.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage33.Size = new System.Drawing.Size(479, 690);
+            tabPage33.TabIndex = 1;
+            tabPage33.Text = "External";
+            tabPage33.UseVisualStyleBackColor = true;
             // 
             // linkLabel4
             // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(39, 75);
-            this.linkLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(339, 20);
-            this.linkLabel4.TabIndex = 3;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "Streaming using Microsoft Expression Encoder";
-            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            linkLabel4.AutoSize = true;
+            linkLabel4.Location = new System.Drawing.Point(43, 94);
+            linkLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel4.Name = "linkLabel4";
+            linkLabel4.Size = new System.Drawing.Size(379, 25);
+            linkLabel4.TabIndex = 3;
+            linkLabel4.TabStop = true;
+            linkLabel4.Text = "Streaming using Microsoft Expression Encoder";
+            linkLabel4.LinkClicked += linkLabel4_LinkClicked;
             // 
             // linkLabel5
             // 
-            this.linkLabel5.AutoSize = true;
-            this.linkLabel5.Location = new System.Drawing.Point(39, 35);
-            this.linkLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(291, 20);
-            this.linkLabel5.TabIndex = 2;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "Streaming to Adobe Flash Media Server";
-            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+            linkLabel5.AutoSize = true;
+            linkLabel5.Location = new System.Drawing.Point(43, 44);
+            linkLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel5.Name = "linkLabel5";
+            linkLabel5.Size = new System.Drawing.Size(326, 25);
+            linkLabel5.TabIndex = 2;
+            linkLabel5.TabStop = true;
+            linkLabel5.Text = "Streaming to Adobe Flash Media Server";
+            linkLabel5.LinkClicked += linkLabel5_LinkClicked;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.edHLSURL);
-            this.tabPage5.Controls.Add(this.label14);
-            this.tabPage5.Controls.Add(this.edHLSEmbeddedHTTPServerPort);
-            this.tabPage5.Controls.Add(this.cbHLSEmbeddedHTTPServerEnabled);
-            this.tabPage5.Controls.Add(this.cbHLSMode);
-            this.tabPage5.Controls.Add(this.label25);
-            this.tabPage5.Controls.Add(this.lbHLSConfigure);
-            this.tabPage5.Controls.Add(this.label532);
-            this.tabPage5.Controls.Add(this.label531);
-            this.tabPage5.Controls.Add(this.label530);
-            this.tabPage5.Controls.Add(this.label529);
-            this.tabPage5.Controls.Add(this.edHLSSegmentCount);
-            this.tabPage5.Controls.Add(this.label519);
-            this.tabPage5.Controls.Add(this.edHLSSegmentDuration);
-            this.tabPage5.Controls.Add(this.btSelectHLSOutputFolder);
-            this.tabPage5.Controls.Add(this.edHLSOutputFolder);
-            this.tabPage5.Controls.Add(this.label380);
-            this.tabPage5.Location = new System.Drawing.Point(4, 29);
-            this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage5.Size = new System.Drawing.Size(430, 549);
-            this.tabPage5.TabIndex = 7;
-            this.tabPage5.Text = "HLS";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            tabPage5.Controls.Add(edHLSURL);
+            tabPage5.Controls.Add(label14);
+            tabPage5.Controls.Add(edHLSEmbeddedHTTPServerPort);
+            tabPage5.Controls.Add(cbHLSEmbeddedHTTPServerEnabled);
+            tabPage5.Controls.Add(cbHLSMode);
+            tabPage5.Controls.Add(label25);
+            tabPage5.Controls.Add(lbHLSConfigure);
+            tabPage5.Controls.Add(label532);
+            tabPage5.Controls.Add(label531);
+            tabPage5.Controls.Add(label530);
+            tabPage5.Controls.Add(label529);
+            tabPage5.Controls.Add(edHLSSegmentCount);
+            tabPage5.Controls.Add(label519);
+            tabPage5.Controls.Add(edHLSSegmentDuration);
+            tabPage5.Controls.Add(btSelectHLSOutputFolder);
+            tabPage5.Controls.Add(edHLSOutputFolder);
+            tabPage5.Controls.Add(label380);
+            tabPage5.Location = new System.Drawing.Point(4, 34);
+            tabPage5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage5.Size = new System.Drawing.Size(479, 690);
+            tabPage5.TabIndex = 7;
+            tabPage5.Text = "HLS";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
             // edHLSURL
             // 
-            this.edHLSURL.Location = new System.Drawing.Point(21, 443);
-            this.edHLSURL.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHLSURL.Name = "edHLSURL";
-            this.edHLSURL.Size = new System.Drawing.Size(376, 26);
-            this.edHLSURL.TabIndex = 33;
-            this.edHLSURL.Text = "http://localhost:81/playlist.m3u8";
+            edHLSURL.Location = new System.Drawing.Point(23, 554);
+            edHLSURL.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHLSURL.Name = "edHLSURL";
+            edHLSURL.Size = new System.Drawing.Size(417, 31);
+            edHLSURL.TabIndex = 33;
+            edHLSURL.Text = "http://localhost:81/playlist.m3u8";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(16, 482);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(23, 20);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "or";
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(18, 602);
+            label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(29, 25);
+            label14.TabIndex = 32;
+            label14.Text = "or";
             // 
             // edHLSEmbeddedHTTPServerPort
             // 
-            this.edHLSEmbeddedHTTPServerPort.Location = new System.Drawing.Point(338, 405);
-            this.edHLSEmbeddedHTTPServerPort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHLSEmbeddedHTTPServerPort.Name = "edHLSEmbeddedHTTPServerPort";
-            this.edHLSEmbeddedHTTPServerPort.Size = new System.Drawing.Size(60, 26);
-            this.edHLSEmbeddedHTTPServerPort.TabIndex = 31;
-            this.edHLSEmbeddedHTTPServerPort.Text = "81";
+            edHLSEmbeddedHTTPServerPort.Location = new System.Drawing.Point(376, 506);
+            edHLSEmbeddedHTTPServerPort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHLSEmbeddedHTTPServerPort.Name = "edHLSEmbeddedHTTPServerPort";
+            edHLSEmbeddedHTTPServerPort.Size = new System.Drawing.Size(66, 31);
+            edHLSEmbeddedHTTPServerPort.TabIndex = 31;
+            edHLSEmbeddedHTTPServerPort.Text = "81";
             // 
             // cbHLSEmbeddedHTTPServerEnabled
             // 
-            this.cbHLSEmbeddedHTTPServerEnabled.AutoSize = true;
-            this.cbHLSEmbeddedHTTPServerEnabled.Location = new System.Drawing.Point(21, 408);
-            this.cbHLSEmbeddedHTTPServerEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbHLSEmbeddedHTTPServerEnabled.Name = "cbHLSEmbeddedHTTPServerEnabled";
-            this.cbHLSEmbeddedHTTPServerEnabled.Size = new System.Drawing.Size(299, 24);
-            this.cbHLSEmbeddedHTTPServerEnabled.TabIndex = 30;
-            this.cbHLSEmbeddedHTTPServerEnabled.Text = "Use embedded HTTP server with port";
-            this.cbHLSEmbeddedHTTPServerEnabled.UseVisualStyleBackColor = true;
+            cbHLSEmbeddedHTTPServerEnabled.AutoSize = true;
+            cbHLSEmbeddedHTTPServerEnabled.Location = new System.Drawing.Point(23, 510);
+            cbHLSEmbeddedHTTPServerEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbHLSEmbeddedHTTPServerEnabled.Name = "cbHLSEmbeddedHTTPServerEnabled";
+            cbHLSEmbeddedHTTPServerEnabled.Size = new System.Drawing.Size(334, 29);
+            cbHLSEmbeddedHTTPServerEnabled.TabIndex = 30;
+            cbHLSEmbeddedHTTPServerEnabled.Text = "Use embedded HTTP server with port";
+            cbHLSEmbeddedHTTPServerEnabled.UseVisualStyleBackColor = true;
             // 
             // cbHLSMode
             // 
-            this.cbHLSMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbHLSMode.FormattingEnabled = true;
-            this.cbHLSMode.Items.AddRange(new object[] {
-            "Live",
-            "VOD",
-            "Event"});
-            this.cbHLSMode.Location = new System.Drawing.Point(21, 349);
-            this.cbHLSMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbHLSMode.Name = "cbHLSMode";
-            this.cbHLSMode.Size = new System.Drawing.Size(180, 28);
-            this.cbHLSMode.TabIndex = 29;
+            cbHLSMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbHLSMode.FormattingEnabled = true;
+            cbHLSMode.Items.AddRange(new object[] { "Live", "VOD", "Event" });
+            cbHLSMode.Location = new System.Drawing.Point(23, 436);
+            cbHLSMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbHLSMode.Name = "cbHLSMode";
+            cbHLSMode.Size = new System.Drawing.Size(200, 33);
+            cbHLSMode.TabIndex = 29;
             // 
             // label25
             // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(16, 325);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(144, 20);
-            this.label25.TabIndex = 28;
-            this.label25.Text = "Mode (playlist type)";
+            label25.AutoSize = true;
+            label25.Location = new System.Drawing.Point(18, 406);
+            label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label25.Name = "label25";
+            label25.Size = new System.Drawing.Size(169, 25);
+            label25.TabIndex = 28;
+            label25.Text = "Mode (playlist type)";
             // 
             // lbHLSConfigure
             // 
-            this.lbHLSConfigure.AutoSize = true;
-            this.lbHLSConfigure.Location = new System.Drawing.Point(16, 502);
-            this.lbHLSConfigure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbHLSConfigure.Name = "lbHLSConfigure";
-            this.lbHLSConfigure.Size = new System.Drawing.Size(279, 20);
-            this.lbHLSConfigure.TabIndex = 27;
-            this.lbHLSConfigure.TabStop = true;
-            this.lbHLSConfigure.Text = "How to configure HTTP server for HLS";
-            this.lbHLSConfigure.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbHLSConfigure_LinkClicked);
+            lbHLSConfigure.AutoSize = true;
+            lbHLSConfigure.Location = new System.Drawing.Point(18, 628);
+            lbHLSConfigure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbHLSConfigure.Name = "lbHLSConfigure";
+            lbHLSConfigure.Size = new System.Drawing.Size(313, 25);
+            lbHLSConfigure.TabIndex = 27;
+            lbHLSConfigure.TabStop = true;
+            lbHLSConfigure.Text = "How to configure HTTP server for HLS";
+            lbHLSConfigure.LinkClicked += lbHLSConfigure_LinkClicked;
             // 
             // label532
             // 
-            this.label532.AutoSize = true;
-            this.label532.Location = new System.Drawing.Point(16, 278);
-            this.label532.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label532.Name = "label532";
-            this.label532.Size = new System.Drawing.Size(60, 20);
-            this.label532.TabIndex = 26;
-            this.label532.Text = "in code";
+            label532.AutoSize = true;
+            label532.Location = new System.Drawing.Point(18, 348);
+            label532.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label532.Name = "label532";
+            label532.Size = new System.Drawing.Size(70, 25);
+            label532.TabIndex = 26;
+            label532.Text = "in code";
             // 
             // label531
             // 
-            this.label531.AutoSize = true;
-            this.label531.Location = new System.Drawing.Point(16, 258);
-            this.label531.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label531.Name = "label531";
-            this.label531.Size = new System.Drawing.Size(369, 20);
-            this.label531.TabIndex = 25;
-            this.label531.Text = "You can set video (H264) and audio (AAC) settings";
+            label531.AutoSize = true;
+            label531.Location = new System.Drawing.Point(18, 322);
+            label531.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label531.Name = "label531";
+            label531.Size = new System.Drawing.Size(410, 25);
+            label531.TabIndex = 25;
+            label531.Text = "You can set video (H264) and audio (AAC) settings";
             // 
             // label530
             // 
-            this.label530.AutoSize = true;
-            this.label530.Location = new System.Drawing.Point(93, 205);
-            this.label530.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label530.Name = "label530";
-            this.label530.Size = new System.Drawing.Size(199, 20);
-            this.label530.TabIndex = 24;
-            this.label530.Text = "Use 0 to save all segments";
+            label530.AutoSize = true;
+            label530.Location = new System.Drawing.Point(103, 256);
+            label530.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label530.Name = "label530";
+            label530.Size = new System.Drawing.Size(222, 25);
+            label530.TabIndex = 24;
+            label530.Text = "Use 0 to save all segments";
             // 
             // label529
             // 
-            this.label529.AutoSize = true;
-            this.label529.Location = new System.Drawing.Point(16, 175);
-            this.label529.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label529.Name = "label529";
-            this.label529.Size = new System.Drawing.Size(364, 20);
-            this.label529.TabIndex = 23;
-            this.label529.Text = "Segment count that will be saved during streaming";
+            label529.AutoSize = true;
+            label529.Location = new System.Drawing.Point(18, 219);
+            label529.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label529.Name = "label529";
+            label529.Size = new System.Drawing.Size(416, 25);
+            label529.TabIndex = 23;
+            label529.Text = "Segment count that will be saved during streaming";
             // 
             // edHLSSegmentCount
             // 
-            this.edHLSSegmentCount.Location = new System.Drawing.Point(21, 200);
-            this.edHLSSegmentCount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHLSSegmentCount.Name = "edHLSSegmentCount";
-            this.edHLSSegmentCount.Size = new System.Drawing.Size(61, 26);
-            this.edHLSSegmentCount.TabIndex = 22;
-            this.edHLSSegmentCount.Text = "20";
+            edHLSSegmentCount.Location = new System.Drawing.Point(23, 250);
+            edHLSSegmentCount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHLSSegmentCount.Name = "edHLSSegmentCount";
+            edHLSSegmentCount.Size = new System.Drawing.Size(67, 31);
+            edHLSSegmentCount.TabIndex = 22;
+            edHLSSegmentCount.Text = "20";
             // 
             // label519
             // 
-            this.label519.AutoSize = true;
-            this.label519.Location = new System.Drawing.Point(16, 100);
-            this.label519.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label519.Name = "label519";
-            this.label519.Size = new System.Drawing.Size(175, 20);
-            this.label519.TabIndex = 21;
-            this.label519.Text = "Segment duration (sec)";
+            label519.AutoSize = true;
+            label519.Location = new System.Drawing.Point(18, 125);
+            label519.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label519.Name = "label519";
+            label519.Size = new System.Drawing.Size(195, 25);
+            label519.TabIndex = 21;
+            label519.Text = "Segment duration (sec)";
             // 
             // edHLSSegmentDuration
             // 
-            this.edHLSSegmentDuration.Location = new System.Drawing.Point(21, 125);
-            this.edHLSSegmentDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHLSSegmentDuration.Name = "edHLSSegmentDuration";
-            this.edHLSSegmentDuration.Size = new System.Drawing.Size(61, 26);
-            this.edHLSSegmentDuration.TabIndex = 20;
-            this.edHLSSegmentDuration.Text = "10";
+            edHLSSegmentDuration.Location = new System.Drawing.Point(23, 156);
+            edHLSSegmentDuration.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHLSSegmentDuration.Name = "edHLSSegmentDuration";
+            edHLSSegmentDuration.Size = new System.Drawing.Size(67, 31);
+            edHLSSegmentDuration.TabIndex = 20;
+            edHLSSegmentDuration.Text = "10";
             // 
             // btSelectHLSOutputFolder
             // 
-            this.btSelectHLSOutputFolder.Location = new System.Drawing.Point(375, 48);
-            this.btSelectHLSOutputFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSelectHLSOutputFolder.Name = "btSelectHLSOutputFolder";
-            this.btSelectHLSOutputFolder.Size = new System.Drawing.Size(34, 35);
-            this.btSelectHLSOutputFolder.TabIndex = 19;
-            this.btSelectHLSOutputFolder.Text = "...";
-            this.btSelectHLSOutputFolder.UseVisualStyleBackColor = true;
-            this.btSelectHLSOutputFolder.Click += new System.EventHandler(this.btSelectHLSOutputFolder_Click);
+            btSelectHLSOutputFolder.Location = new System.Drawing.Point(417, 60);
+            btSelectHLSOutputFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectHLSOutputFolder.Name = "btSelectHLSOutputFolder";
+            btSelectHLSOutputFolder.Size = new System.Drawing.Size(38, 44);
+            btSelectHLSOutputFolder.TabIndex = 19;
+            btSelectHLSOutputFolder.Text = "...";
+            btSelectHLSOutputFolder.UseVisualStyleBackColor = true;
+            btSelectHLSOutputFolder.Click += btSelectHLSOutputFolder_Click;
             // 
             // edHLSOutputFolder
             // 
-            this.edHLSOutputFolder.Location = new System.Drawing.Point(21, 51);
-            this.edHLSOutputFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edHLSOutputFolder.Name = "edHLSOutputFolder";
-            this.edHLSOutputFolder.Size = new System.Drawing.Size(343, 26);
-            this.edHLSOutputFolder.TabIndex = 18;
-            this.edHLSOutputFolder.Text = "c:\\inetpub\\wwwroot\\hls\\";
+            edHLSOutputFolder.Location = new System.Drawing.Point(23, 64);
+            edHLSOutputFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edHLSOutputFolder.Name = "edHLSOutputFolder";
+            edHLSOutputFolder.Size = new System.Drawing.Size(381, 31);
+            edHLSOutputFolder.TabIndex = 18;
+            edHLSOutputFolder.Text = "c:\\inetpub\\wwwroot\\hls\\";
             // 
             // label380
             // 
-            this.label380.AutoSize = true;
-            this.label380.Location = new System.Drawing.Point(16, 22);
-            this.label380.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label380.Name = "label380";
-            this.label380.Size = new System.Drawing.Size(280, 20);
-            this.label380.TabIndex = 17;
-            this.label380.Text = "Output folder for video files and playlist";
+            label380.AutoSize = true;
+            label380.Location = new System.Drawing.Point(18, 28);
+            label380.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label380.Name = "label380";
+            label380.Size = new System.Drawing.Size(329, 25);
+            label380.TabIndex = 17;
+            label380.Text = "Output folder for video files and playlist";
             // 
             // cbNetworkStreamingAudioEnabled
             // 
-            this.cbNetworkStreamingAudioEnabled.AutoSize = true;
-            this.cbNetworkStreamingAudioEnabled.Location = new System.Drawing.Point(24, 703);
-            this.cbNetworkStreamingAudioEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbNetworkStreamingAudioEnabled.Name = "cbNetworkStreamingAudioEnabled";
-            this.cbNetworkStreamingAudioEnabled.Size = new System.Drawing.Size(130, 24);
-            this.cbNetworkStreamingAudioEnabled.TabIndex = 24;
-            this.cbNetworkStreamingAudioEnabled.Text = "Stream audio";
-            this.cbNetworkStreamingAudioEnabled.UseVisualStyleBackColor = true;
+            cbNetworkStreamingAudioEnabled.AutoSize = true;
+            cbNetworkStreamingAudioEnabled.Location = new System.Drawing.Point(27, 879);
+            cbNetworkStreamingAudioEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbNetworkStreamingAudioEnabled.Name = "cbNetworkStreamingAudioEnabled";
+            cbNetworkStreamingAudioEnabled.Size = new System.Drawing.Size(143, 29);
+            cbNetworkStreamingAudioEnabled.TabIndex = 24;
+            cbNetworkStreamingAudioEnabled.Text = "Stream audio";
+            cbNetworkStreamingAudioEnabled.UseVisualStyleBackColor = true;
             // 
             // cbNetworkStreaming
             // 
-            this.cbNetworkStreaming.AutoSize = true;
-            this.cbNetworkStreaming.Location = new System.Drawing.Point(24, 25);
-            this.cbNetworkStreaming.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbNetworkStreaming.Name = "cbNetworkStreaming";
-            this.cbNetworkStreaming.Size = new System.Drawing.Size(228, 24);
-            this.cbNetworkStreaming.TabIndex = 21;
-            this.cbNetworkStreaming.Text = "Network streaming enabled";
-            this.cbNetworkStreaming.UseVisualStyleBackColor = true;
+            cbNetworkStreaming.AutoSize = true;
+            cbNetworkStreaming.Location = new System.Drawing.Point(27, 31);
+            cbNetworkStreaming.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbNetworkStreaming.Name = "cbNetworkStreaming";
+            cbNetworkStreaming.Size = new System.Drawing.Size(257, 29);
+            cbNetworkStreaming.TabIndex = 21;
+            cbNetworkStreaming.Text = "Network streaming enabled";
+            cbNetworkStreaming.UseVisualStyleBackColor = true;
             // 
             // tabPage34
             // 
-            this.tabPage34.Controls.Add(this.label328);
-            this.tabPage34.Controls.Add(this.label327);
-            this.tabPage34.Controls.Add(this.label326);
-            this.tabPage34.Controls.Add(this.label325);
-            this.tabPage34.Controls.Add(this.cbVirtualCamera);
-            this.tabPage34.Location = new System.Drawing.Point(4, 29);
-            this.tabPage34.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage34.Name = "tabPage34";
-            this.tabPage34.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage34.Size = new System.Drawing.Size(457, 767);
-            this.tabPage34.TabIndex = 10;
-            this.tabPage34.Text = "Virtual camera";
-            this.tabPage34.UseVisualStyleBackColor = true;
+            tabPage34.Controls.Add(label328);
+            tabPage34.Controls.Add(label327);
+            tabPage34.Controls.Add(label326);
+            tabPage34.Controls.Add(label325);
+            tabPage34.Controls.Add(cbVirtualCamera);
+            tabPage34.Location = new System.Drawing.Point(4, 34);
+            tabPage34.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage34.Name = "tabPage34";
+            tabPage34.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage34.Size = new System.Drawing.Size(509, 962);
+            tabPage34.TabIndex = 10;
+            tabPage34.Text = "Virtual camera";
+            tabPage34.UseVisualStyleBackColor = true;
             // 
             // label328
             // 
-            this.label328.AutoSize = true;
-            this.label328.Location = new System.Drawing.Point(20, 195);
-            this.label328.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label328.Name = "label328";
-            this.label328.Size = new System.Drawing.Size(298, 20);
-            this.label328.TabIndex = 7;
-            this.label328.Text = "TRIAL limitation - 5000 frames to stream.";
+            label328.AutoSize = true;
+            label328.Location = new System.Drawing.Point(22, 244);
+            label328.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label328.Name = "label328";
+            label328.Size = new System.Drawing.Size(337, 25);
+            label328.TabIndex = 7;
+            label328.Text = "TRIAL limitation - 5000 frames to stream.";
             // 
             // label327
             // 
-            this.label327.AutoSize = true;
-            this.label327.Location = new System.Drawing.Point(20, 162);
-            this.label327.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label327.Name = "label327";
-            this.label327.Size = new System.Drawing.Size(270, 20);
-            this.label327.TabIndex = 6;
-            this.label327.Text = "Virtual Camera SDK license required.";
+            label327.AutoSize = true;
+            label327.Location = new System.Drawing.Point(22, 202);
+            label327.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label327.Name = "label327";
+            label327.Size = new System.Drawing.Size(297, 25);
+            label327.TabIndex = 6;
+            label327.Text = "Virtual Camera SDK license required.";
             // 
             // label326
             // 
-            this.label326.AutoSize = true;
-            this.label326.Location = new System.Drawing.Point(20, 109);
-            this.label326.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label326.Name = "label326";
-            this.label326.Size = new System.Drawing.Size(165, 20);
-            this.label326.TabIndex = 5;
-            this.label326.Text = "to see streamed video";
+            label326.AutoSize = true;
+            label326.Location = new System.Drawing.Point(22, 136);
+            label326.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label326.Name = "label326";
+            label326.Size = new System.Drawing.Size(188, 25);
+            label326.TabIndex = 5;
+            label326.Text = "to see streamed video";
             // 
             // label325
             // 
-            this.label325.AutoSize = true;
-            this.label325.Location = new System.Drawing.Point(20, 78);
-            this.label325.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label325.Name = "label325";
-            this.label325.Size = new System.Drawing.Size(363, 20);
-            this.label325.TabIndex = 4;
-            this.label325.Text = "You are can use VisioForge Virtual Camera device";
+            label325.AutoSize = true;
+            label325.Location = new System.Drawing.Point(22, 98);
+            label325.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label325.Name = "label325";
+            label325.Size = new System.Drawing.Size(398, 25);
+            label325.TabIndex = 4;
+            label325.Text = "You are can use VisioForge Virtual Camera device";
             // 
             // cbVirtualCamera
             // 
-            this.cbVirtualCamera.AutoSize = true;
-            this.cbVirtualCamera.Location = new System.Drawing.Point(24, 26);
-            this.cbVirtualCamera.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVirtualCamera.Name = "cbVirtualCamera";
-            this.cbVirtualCamera.Size = new System.Drawing.Size(159, 24);
-            this.cbVirtualCamera.TabIndex = 3;
-            this.cbVirtualCamera.Text = "Enable streaming";
-            this.cbVirtualCamera.UseVisualStyleBackColor = true;
+            cbVirtualCamera.AutoSize = true;
+            cbVirtualCamera.Location = new System.Drawing.Point(27, 32);
+            cbVirtualCamera.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVirtualCamera.Name = "cbVirtualCamera";
+            cbVirtualCamera.Size = new System.Drawing.Size(174, 29);
+            cbVirtualCamera.TabIndex = 3;
+            cbVirtualCamera.Text = "Enable streaming";
+            cbVirtualCamera.UseVisualStyleBackColor = true;
             // 
             // tabPage46
             // 
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputDownConversionAnalogOutput);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputDownConversion);
-            this.tabPage46.Controls.Add(this.label337);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputHDTVPulldown);
-            this.tabPage46.Controls.Add(this.label336);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputBlackToDeck);
-            this.tabPage46.Controls.Add(this.label335);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputSingleField);
-            this.tabPage46.Controls.Add(this.label334);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputComponentLevels);
-            this.tabPage46.Controls.Add(this.label333);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputNTSC);
-            this.tabPage46.Controls.Add(this.label332);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputDualLink);
-            this.tabPage46.Controls.Add(this.label331);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutputAnalog);
-            this.tabPage46.Controls.Add(this.label87);
-            this.tabPage46.Controls.Add(this.cbDecklinkDV);
-            this.tabPage46.Controls.Add(this.cbDecklinkOutput);
-            this.tabPage46.Location = new System.Drawing.Point(4, 29);
-            this.tabPage46.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage46.Name = "tabPage46";
-            this.tabPage46.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage46.Size = new System.Drawing.Size(457, 767);
-            this.tabPage46.TabIndex = 11;
-            this.tabPage46.Text = "Decklink output";
-            this.tabPage46.UseVisualStyleBackColor = true;
+            tabPage46.Controls.Add(cbDecklinkOutputDownConversionAnalogOutput);
+            tabPage46.Controls.Add(cbDecklinkOutputDownConversion);
+            tabPage46.Controls.Add(label337);
+            tabPage46.Controls.Add(cbDecklinkOutputHDTVPulldown);
+            tabPage46.Controls.Add(label336);
+            tabPage46.Controls.Add(cbDecklinkOutputBlackToDeck);
+            tabPage46.Controls.Add(label335);
+            tabPage46.Controls.Add(cbDecklinkOutputSingleField);
+            tabPage46.Controls.Add(label334);
+            tabPage46.Controls.Add(cbDecklinkOutputComponentLevels);
+            tabPage46.Controls.Add(label333);
+            tabPage46.Controls.Add(cbDecklinkOutputNTSC);
+            tabPage46.Controls.Add(label332);
+            tabPage46.Controls.Add(cbDecklinkOutputDualLink);
+            tabPage46.Controls.Add(label331);
+            tabPage46.Controls.Add(cbDecklinkOutputAnalog);
+            tabPage46.Controls.Add(label87);
+            tabPage46.Controls.Add(cbDecklinkDV);
+            tabPage46.Controls.Add(cbDecklinkOutput);
+            tabPage46.Location = new System.Drawing.Point(4, 34);
+            tabPage46.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage46.Name = "tabPage46";
+            tabPage46.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage46.Size = new System.Drawing.Size(509, 962);
+            tabPage46.TabIndex = 11;
+            tabPage46.Text = "Decklink output";
+            tabPage46.UseVisualStyleBackColor = true;
             // 
             // cbDecklinkOutputDownConversionAnalogOutput
             // 
-            this.cbDecklinkOutputDownConversionAnalogOutput.AutoSize = true;
-            this.cbDecklinkOutputDownConversionAnalogOutput.Location = new System.Drawing.Point(36, 380);
-            this.cbDecklinkOutputDownConversionAnalogOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputDownConversionAnalogOutput.Name = "cbDecklinkOutputDownConversionAnalogOutput";
-            this.cbDecklinkOutputDownConversionAnalogOutput.Size = new System.Drawing.Size(174, 24);
-            this.cbDecklinkOutputDownConversionAnalogOutput.TabIndex = 35;
-            this.cbDecklinkOutputDownConversionAnalogOutput.Text = "Analog output used";
-            this.cbDecklinkOutputDownConversionAnalogOutput.UseVisualStyleBackColor = true;
+            cbDecklinkOutputDownConversionAnalogOutput.AutoSize = true;
+            cbDecklinkOutputDownConversionAnalogOutput.Location = new System.Drawing.Point(40, 475);
+            cbDecklinkOutputDownConversionAnalogOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputDownConversionAnalogOutput.Name = "cbDecklinkOutputDownConversionAnalogOutput";
+            cbDecklinkOutputDownConversionAnalogOutput.Size = new System.Drawing.Size(197, 29);
+            cbDecklinkOutputDownConversionAnalogOutput.TabIndex = 35;
+            cbDecklinkOutputDownConversionAnalogOutput.Text = "Analog output used";
+            cbDecklinkOutputDownConversionAnalogOutput.UseVisualStyleBackColor = true;
             // 
             // cbDecklinkOutputDownConversion
             // 
-            this.cbDecklinkOutputDownConversion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputDownConversion.FormattingEnabled = true;
-            this.cbDecklinkOutputDownConversion.Items.AddRange(new object[] {
-            "Default",
-            "Disabled",
-            "Letterbox 16:9",
-            "Anamorphic",
-            "Anamorphic center"});
-            this.cbDecklinkOutputDownConversion.Location = new System.Drawing.Point(36, 343);
-            this.cbDecklinkOutputDownConversion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputDownConversion.Name = "cbDecklinkOutputDownConversion";
-            this.cbDecklinkOutputDownConversion.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputDownConversion.TabIndex = 34;
+            cbDecklinkOutputDownConversion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputDownConversion.FormattingEnabled = true;
+            cbDecklinkOutputDownConversion.Items.AddRange(new object[] { "Default", "Disabled", "Letterbox 16:9", "Anamorphic", "Anamorphic center" });
+            cbDecklinkOutputDownConversion.Location = new System.Drawing.Point(40, 429);
+            cbDecklinkOutputDownConversion.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputDownConversion.Name = "cbDecklinkOutputDownConversion";
+            cbDecklinkOutputDownConversion.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputDownConversion.TabIndex = 34;
             // 
             // label337
             // 
-            this.label337.AutoSize = true;
-            this.label337.Location = new System.Drawing.Point(32, 318);
-            this.label337.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label337.Name = "label337";
-            this.label337.Size = new System.Drawing.Size(174, 20);
-            this.label337.TabIndex = 33;
-            this.label337.Text = "Down conversion mode";
+            label337.AutoSize = true;
+            label337.Location = new System.Drawing.Point(36, 398);
+            label337.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label337.Name = "label337";
+            label337.Size = new System.Drawing.Size(202, 25);
+            label337.TabIndex = 33;
+            label337.Text = "Down conversion mode";
             // 
             // cbDecklinkOutputHDTVPulldown
             // 
-            this.cbDecklinkOutputHDTVPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputHDTVPulldown.FormattingEnabled = true;
-            this.cbDecklinkOutputHDTVPulldown.Items.AddRange(new object[] {
-            "Default",
-            "Enabled",
-            "Disabled"});
-            this.cbDecklinkOutputHDTVPulldown.Location = new System.Drawing.Point(36, 452);
-            this.cbDecklinkOutputHDTVPulldown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputHDTVPulldown.Name = "cbDecklinkOutputHDTVPulldown";
-            this.cbDecklinkOutputHDTVPulldown.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputHDTVPulldown.TabIndex = 32;
+            cbDecklinkOutputHDTVPulldown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputHDTVPulldown.FormattingEnabled = true;
+            cbDecklinkOutputHDTVPulldown.Items.AddRange(new object[] { "Default", "Enabled", "Disabled" });
+            cbDecklinkOutputHDTVPulldown.Location = new System.Drawing.Point(40, 565);
+            cbDecklinkOutputHDTVPulldown.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputHDTVPulldown.Name = "cbDecklinkOutputHDTVPulldown";
+            cbDecklinkOutputHDTVPulldown.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputHDTVPulldown.TabIndex = 32;
             // 
             // label336
             // 
-            this.label336.AutoSize = true;
-            this.label336.Location = new System.Drawing.Point(32, 428);
-            this.label336.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label336.Name = "label336";
-            this.label336.Size = new System.Drawing.Size(119, 20);
-            this.label336.TabIndex = 31;
-            this.label336.Text = "HDTV pulldown";
+            label336.AutoSize = true;
+            label336.Location = new System.Drawing.Point(36, 535);
+            label336.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label336.Name = "label336";
+            label336.Size = new System.Drawing.Size(136, 25);
+            label336.TabIndex = 31;
+            label336.Text = "HDTV pulldown";
             // 
             // cbDecklinkOutputBlackToDeck
             // 
-            this.cbDecklinkOutputBlackToDeck.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputBlackToDeck.FormattingEnabled = true;
-            this.cbDecklinkOutputBlackToDeck.Items.AddRange(new object[] {
-            "Default",
-            "None",
-            "Digital",
-            "Analogue"});
-            this.cbDecklinkOutputBlackToDeck.Location = new System.Drawing.Point(36, 271);
-            this.cbDecklinkOutputBlackToDeck.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputBlackToDeck.Name = "cbDecklinkOutputBlackToDeck";
-            this.cbDecklinkOutputBlackToDeck.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputBlackToDeck.TabIndex = 30;
+            cbDecklinkOutputBlackToDeck.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputBlackToDeck.FormattingEnabled = true;
+            cbDecklinkOutputBlackToDeck.Items.AddRange(new object[] { "Default", "None", "Digital", "Analogue" });
+            cbDecklinkOutputBlackToDeck.Location = new System.Drawing.Point(40, 339);
+            cbDecklinkOutputBlackToDeck.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputBlackToDeck.Name = "cbDecklinkOutputBlackToDeck";
+            cbDecklinkOutputBlackToDeck.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputBlackToDeck.TabIndex = 30;
             // 
             // label335
             // 
-            this.label335.AutoSize = true;
-            this.label335.Location = new System.Drawing.Point(32, 246);
-            this.label335.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label335.Name = "label335";
-            this.label335.Size = new System.Drawing.Size(104, 20);
-            this.label335.TabIndex = 29;
-            this.label335.Text = "Black to deck";
+            label335.AutoSize = true;
+            label335.Location = new System.Drawing.Point(36, 308);
+            label335.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label335.Name = "label335";
+            label335.Size = new System.Drawing.Size(116, 25);
+            label335.TabIndex = 29;
+            label335.Text = "Black to deck";
             // 
             // cbDecklinkOutputSingleField
             // 
-            this.cbDecklinkOutputSingleField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputSingleField.FormattingEnabled = true;
-            this.cbDecklinkOutputSingleField.Items.AddRange(new object[] {
-            "Default",
-            "Enabled",
-            "Disabled"});
-            this.cbDecklinkOutputSingleField.Location = new System.Drawing.Point(36, 202);
-            this.cbDecklinkOutputSingleField.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputSingleField.Name = "cbDecklinkOutputSingleField";
-            this.cbDecklinkOutputSingleField.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputSingleField.TabIndex = 28;
+            cbDecklinkOutputSingleField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputSingleField.FormattingEnabled = true;
+            cbDecklinkOutputSingleField.Items.AddRange(new object[] { "Default", "Enabled", "Disabled" });
+            cbDecklinkOutputSingleField.Location = new System.Drawing.Point(40, 252);
+            cbDecklinkOutputSingleField.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputSingleField.Name = "cbDecklinkOutputSingleField";
+            cbDecklinkOutputSingleField.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputSingleField.TabIndex = 28;
             // 
             // label334
             // 
-            this.label334.AutoSize = true;
-            this.label334.Location = new System.Drawing.Point(32, 177);
-            this.label334.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label334.Name = "label334";
-            this.label334.Size = new System.Drawing.Size(136, 20);
-            this.label334.TabIndex = 27;
-            this.label334.Text = "Single field output";
+            label334.AutoSize = true;
+            label334.Location = new System.Drawing.Point(36, 221);
+            label334.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label334.Name = "label334";
+            label334.Size = new System.Drawing.Size(158, 25);
+            label334.TabIndex = 27;
+            label334.Text = "Single field output";
             // 
             // cbDecklinkOutputComponentLevels
             // 
-            this.cbDecklinkOutputComponentLevels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputComponentLevels.FormattingEnabled = true;
-            this.cbDecklinkOutputComponentLevels.Items.AddRange(new object[] {
-            "SMPTE",
-            "Betacam"});
-            this.cbDecklinkOutputComponentLevels.Location = new System.Drawing.Point(240, 271);
-            this.cbDecklinkOutputComponentLevels.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputComponentLevels.Name = "cbDecklinkOutputComponentLevels";
-            this.cbDecklinkOutputComponentLevels.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputComponentLevels.TabIndex = 26;
+            cbDecklinkOutputComponentLevels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputComponentLevels.FormattingEnabled = true;
+            cbDecklinkOutputComponentLevels.Items.AddRange(new object[] { "SMPTE", "Betacam" });
+            cbDecklinkOutputComponentLevels.Location = new System.Drawing.Point(267, 339);
+            cbDecklinkOutputComponentLevels.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputComponentLevels.Name = "cbDecklinkOutputComponentLevels";
+            cbDecklinkOutputComponentLevels.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputComponentLevels.TabIndex = 26;
             // 
             // label333
             // 
-            this.label333.AutoSize = true;
-            this.label333.Location = new System.Drawing.Point(236, 246);
-            this.label333.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label333.Name = "label333";
-            this.label333.Size = new System.Drawing.Size(135, 20);
-            this.label333.TabIndex = 25;
-            this.label333.Text = "Component levels";
+            label333.AutoSize = true;
+            label333.Location = new System.Drawing.Point(262, 308);
+            label333.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label333.Name = "label333";
+            label333.Size = new System.Drawing.Size(155, 25);
+            label333.TabIndex = 25;
+            label333.Text = "Component levels";
             // 
             // cbDecklinkOutputNTSC
             // 
-            this.cbDecklinkOutputNTSC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputNTSC.FormattingEnabled = true;
-            this.cbDecklinkOutputNTSC.Items.AddRange(new object[] {
-            "USA",
-            "Japan"});
-            this.cbDecklinkOutputNTSC.Location = new System.Drawing.Point(240, 202);
-            this.cbDecklinkOutputNTSC.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputNTSC.Name = "cbDecklinkOutputNTSC";
-            this.cbDecklinkOutputNTSC.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputNTSC.TabIndex = 24;
+            cbDecklinkOutputNTSC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputNTSC.FormattingEnabled = true;
+            cbDecklinkOutputNTSC.Items.AddRange(new object[] { "USA", "Japan" });
+            cbDecklinkOutputNTSC.Location = new System.Drawing.Point(267, 252);
+            cbDecklinkOutputNTSC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputNTSC.Name = "cbDecklinkOutputNTSC";
+            cbDecklinkOutputNTSC.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputNTSC.TabIndex = 24;
             // 
             // label332
             // 
-            this.label332.AutoSize = true;
-            this.label332.Location = new System.Drawing.Point(236, 177);
-            this.label332.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label332.Name = "label332";
-            this.label332.Size = new System.Drawing.Size(118, 20);
-            this.label332.TabIndex = 23;
-            this.label332.Text = "NTSC standard";
+            label332.AutoSize = true;
+            label332.Location = new System.Drawing.Point(262, 221);
+            label332.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label332.Name = "label332";
+            label332.Size = new System.Drawing.Size(130, 25);
+            label332.TabIndex = 23;
+            label332.Text = "NTSC standard";
             // 
             // cbDecklinkOutputDualLink
             // 
-            this.cbDecklinkOutputDualLink.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputDualLink.FormattingEnabled = true;
-            this.cbDecklinkOutputDualLink.Items.AddRange(new object[] {
-            "Default",
-            "Enabled",
-            "Disabled"});
-            this.cbDecklinkOutputDualLink.Location = new System.Drawing.Point(36, 132);
-            this.cbDecklinkOutputDualLink.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputDualLink.Name = "cbDecklinkOutputDualLink";
-            this.cbDecklinkOutputDualLink.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputDualLink.TabIndex = 22;
+            cbDecklinkOutputDualLink.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputDualLink.FormattingEnabled = true;
+            cbDecklinkOutputDualLink.Items.AddRange(new object[] { "Default", "Enabled", "Disabled" });
+            cbDecklinkOutputDualLink.Location = new System.Drawing.Point(40, 165);
+            cbDecklinkOutputDualLink.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputDualLink.Name = "cbDecklinkOutputDualLink";
+            cbDecklinkOutputDualLink.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputDualLink.TabIndex = 22;
             // 
             // label331
             // 
-            this.label331.AutoSize = true;
-            this.label331.Location = new System.Drawing.Point(32, 108);
-            this.label331.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label331.Name = "label331";
-            this.label331.Size = new System.Drawing.Size(113, 20);
-            this.label331.TabIndex = 21;
-            this.label331.Text = "Dual link mode";
+            label331.AutoSize = true;
+            label331.Location = new System.Drawing.Point(36, 135);
+            label331.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label331.Name = "label331";
+            label331.Size = new System.Drawing.Size(132, 25);
+            label331.TabIndex = 21;
+            label331.Text = "Dual link mode";
             // 
             // cbDecklinkOutputAnalog
             // 
-            this.cbDecklinkOutputAnalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDecklinkOutputAnalog.FormattingEnabled = true;
-            this.cbDecklinkOutputAnalog.Items.AddRange(new object[] {
-            "Auto",
-            "Component",
-            "Composite",
-            "S-Video"});
-            this.cbDecklinkOutputAnalog.Location = new System.Drawing.Point(240, 132);
-            this.cbDecklinkOutputAnalog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutputAnalog.Name = "cbDecklinkOutputAnalog";
-            this.cbDecklinkOutputAnalog.Size = new System.Drawing.Size(180, 28);
-            this.cbDecklinkOutputAnalog.TabIndex = 20;
+            cbDecklinkOutputAnalog.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDecklinkOutputAnalog.FormattingEnabled = true;
+            cbDecklinkOutputAnalog.Items.AddRange(new object[] { "Auto", "Component", "Composite", "S-Video" });
+            cbDecklinkOutputAnalog.Location = new System.Drawing.Point(267, 165);
+            cbDecklinkOutputAnalog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutputAnalog.Name = "cbDecklinkOutputAnalog";
+            cbDecklinkOutputAnalog.Size = new System.Drawing.Size(200, 33);
+            cbDecklinkOutputAnalog.TabIndex = 20;
             // 
             // label87
             // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(236, 108);
-            this.label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(109, 20);
-            this.label87.TabIndex = 19;
-            this.label87.Text = "Analog output";
+            label87.AutoSize = true;
+            label87.Location = new System.Drawing.Point(262, 135);
+            label87.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label87.Name = "label87";
+            label87.Size = new System.Drawing.Size(128, 25);
+            label87.TabIndex = 19;
+            label87.Text = "Analog output";
             // 
             // cbDecklinkDV
             // 
-            this.cbDecklinkDV.AutoSize = true;
-            this.cbDecklinkDV.Location = new System.Drawing.Point(50, 58);
-            this.cbDecklinkDV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkDV.Name = "cbDecklinkDV";
-            this.cbDecklinkDV.Size = new System.Drawing.Size(108, 24);
-            this.cbDecklinkDV.TabIndex = 3;
-            this.cbDecklinkDV.Text = "DV output";
-            this.cbDecklinkDV.UseVisualStyleBackColor = true;
+            cbDecklinkDV.AutoSize = true;
+            cbDecklinkDV.Location = new System.Drawing.Point(56, 72);
+            cbDecklinkDV.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkDV.Name = "cbDecklinkDV";
+            cbDecklinkDV.Size = new System.Drawing.Size(121, 29);
+            cbDecklinkDV.TabIndex = 3;
+            cbDecklinkDV.Text = "DV output";
+            cbDecklinkDV.UseVisualStyleBackColor = true;
             // 
             // cbDecklinkOutput
             // 
-            this.cbDecklinkOutput.AutoSize = true;
-            this.cbDecklinkOutput.Location = new System.Drawing.Point(22, 23);
-            this.cbDecklinkOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDecklinkOutput.Name = "cbDecklinkOutput";
-            this.cbDecklinkOutput.Size = new System.Drawing.Size(252, 24);
-            this.cbDecklinkOutput.TabIndex = 2;
-            this.cbDecklinkOutput.Text = "Enable output to Decklink card";
-            this.cbDecklinkOutput.UseVisualStyleBackColor = true;
+            cbDecklinkOutput.AutoSize = true;
+            cbDecklinkOutput.Location = new System.Drawing.Point(24, 29);
+            cbDecklinkOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDecklinkOutput.Name = "cbDecklinkOutput";
+            cbDecklinkOutput.Size = new System.Drawing.Size(281, 29);
+            cbDecklinkOutput.TabIndex = 2;
+            cbDecklinkOutput.Text = "Enable output to Decklink card";
+            cbDecklinkOutput.UseVisualStyleBackColor = true;
             // 
             // tabPage47
             // 
-            this.tabPage47.Controls.Add(this.groupBox48);
-            this.tabPage47.Controls.Add(this.groupBox47);
-            this.tabPage47.Controls.Add(this.groupBox43);
-            this.tabPage47.Location = new System.Drawing.Point(4, 29);
-            this.tabPage47.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage47.Name = "tabPage47";
-            this.tabPage47.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage47.Size = new System.Drawing.Size(457, 767);
-            this.tabPage47.TabIndex = 12;
-            this.tabPage47.Text = "Encryption";
-            this.tabPage47.UseVisualStyleBackColor = true;
+            tabPage47.Controls.Add(groupBox48);
+            tabPage47.Controls.Add(groupBox47);
+            tabPage47.Controls.Add(groupBox43);
+            tabPage47.Location = new System.Drawing.Point(4, 34);
+            tabPage47.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage47.Name = "tabPage47";
+            tabPage47.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage47.Size = new System.Drawing.Size(509, 962);
+            tabPage47.TabIndex = 12;
+            tabPage47.Text = "Encryption";
+            tabPage47.UseVisualStyleBackColor = true;
             // 
             // groupBox48
             // 
-            this.groupBox48.Controls.Add(this.label343);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyHEX);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyBinary);
-            this.groupBox48.Controls.Add(this.btEncryptionOpenFile);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyFile);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyFile);
-            this.groupBox48.Controls.Add(this.edEncryptionKeyString);
-            this.groupBox48.Controls.Add(this.rbEncryptionKeyString);
-            this.groupBox48.Location = new System.Drawing.Point(24, 298);
-            this.groupBox48.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox48.Size = new System.Drawing.Size(404, 345);
-            this.groupBox48.TabIndex = 11;
-            this.groupBox48.TabStop = false;
-            this.groupBox48.Text = "Encryption key type";
+            groupBox48.Controls.Add(label343);
+            groupBox48.Controls.Add(edEncryptionKeyHEX);
+            groupBox48.Controls.Add(rbEncryptionKeyBinary);
+            groupBox48.Controls.Add(btEncryptionOpenFile);
+            groupBox48.Controls.Add(edEncryptionKeyFile);
+            groupBox48.Controls.Add(rbEncryptionKeyFile);
+            groupBox48.Controls.Add(edEncryptionKeyString);
+            groupBox48.Controls.Add(rbEncryptionKeyString);
+            groupBox48.Location = new System.Drawing.Point(27, 372);
+            groupBox48.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox48.Name = "groupBox48";
+            groupBox48.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox48.Size = new System.Drawing.Size(449, 431);
+            groupBox48.TabIndex = 11;
+            groupBox48.TabStop = false;
+            groupBox48.Text = "Encryption key type";
             // 
             // label343
             // 
-            this.label343.AutoSize = true;
-            this.label343.Location = new System.Drawing.Point(50, 306);
-            this.label343.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label343.Name = "label343";
-            this.label343.Size = new System.Drawing.Size(232, 20);
-            this.label343.TabIndex = 10;
-            this.label343.Text = "You can assign byte[] using API";
+            label343.AutoSize = true;
+            label343.Location = new System.Drawing.Point(56, 382);
+            label343.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label343.Name = "label343";
+            label343.Size = new System.Drawing.Size(258, 25);
+            label343.TabIndex = 10;
+            label343.Text = "You can assign byte[] using API";
             // 
             // edEncryptionKeyHEX
             // 
-            this.edEncryptionKeyHEX.Location = new System.Drawing.Point(54, 271);
-            this.edEncryptionKeyHEX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
-            this.edEncryptionKeyHEX.Size = new System.Drawing.Size(319, 26);
-            this.edEncryptionKeyHEX.TabIndex = 9;
-            this.edEncryptionKeyHEX.Text = "enter hex data";
+            edEncryptionKeyHEX.Location = new System.Drawing.Point(60, 339);
+            edEncryptionKeyHEX.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
+            edEncryptionKeyHEX.Size = new System.Drawing.Size(354, 31);
+            edEncryptionKeyHEX.TabIndex = 9;
+            edEncryptionKeyHEX.Text = "enter hex data";
             // 
             // rbEncryptionKeyBinary
             // 
-            this.rbEncryptionKeyBinary.AutoSize = true;
-            this.rbEncryptionKeyBinary.Location = new System.Drawing.Point(21, 235);
-            this.rbEncryptionKeyBinary.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptionKeyBinary.Name = "rbEncryptionKeyBinary";
-            this.rbEncryptionKeyBinary.Size = new System.Drawing.Size(181, 24);
-            this.rbEncryptionKeyBinary.TabIndex = 8;
-            this.rbEncryptionKeyBinary.Text = "Binary data (v9 SDK)";
-            this.rbEncryptionKeyBinary.UseVisualStyleBackColor = true;
+            rbEncryptionKeyBinary.AutoSize = true;
+            rbEncryptionKeyBinary.Location = new System.Drawing.Point(23, 294);
+            rbEncryptionKeyBinary.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyBinary.Name = "rbEncryptionKeyBinary";
+            rbEncryptionKeyBinary.Size = new System.Drawing.Size(197, 29);
+            rbEncryptionKeyBinary.TabIndex = 8;
+            rbEncryptionKeyBinary.Text = "Binary data (v9 SDK)";
+            rbEncryptionKeyBinary.UseVisualStyleBackColor = true;
             // 
             // btEncryptionOpenFile
             // 
-            this.btEncryptionOpenFile.Location = new System.Drawing.Point(340, 175);
-            this.btEncryptionOpenFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btEncryptionOpenFile.Name = "btEncryptionOpenFile";
-            this.btEncryptionOpenFile.Size = new System.Drawing.Size(34, 35);
-            this.btEncryptionOpenFile.TabIndex = 7;
-            this.btEncryptionOpenFile.Text = "...";
-            this.btEncryptionOpenFile.UseVisualStyleBackColor = true;
-            this.btEncryptionOpenFile.Click += new System.EventHandler(this.btEncryptionOpenFile_Click);
+            btEncryptionOpenFile.Location = new System.Drawing.Point(378, 219);
+            btEncryptionOpenFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btEncryptionOpenFile.Name = "btEncryptionOpenFile";
+            btEncryptionOpenFile.Size = new System.Drawing.Size(38, 44);
+            btEncryptionOpenFile.TabIndex = 7;
+            btEncryptionOpenFile.Text = "...";
+            btEncryptionOpenFile.UseVisualStyleBackColor = true;
+            btEncryptionOpenFile.Click += btEncryptionOpenFile_Click;
             // 
             // edEncryptionKeyFile
             // 
-            this.edEncryptionKeyFile.Location = new System.Drawing.Point(54, 178);
-            this.edEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edEncryptionKeyFile.Name = "edEncryptionKeyFile";
-            this.edEncryptionKeyFile.Size = new System.Drawing.Size(276, 26);
-            this.edEncryptionKeyFile.TabIndex = 6;
-            this.edEncryptionKeyFile.Text = "c:\\keyfile.txt";
+            edEncryptionKeyFile.Location = new System.Drawing.Point(60, 222);
+            edEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyFile.Name = "edEncryptionKeyFile";
+            edEncryptionKeyFile.Size = new System.Drawing.Size(306, 31);
+            edEncryptionKeyFile.TabIndex = 6;
+            edEncryptionKeyFile.Text = "c:\\keyfile.txt";
             // 
             // rbEncryptionKeyFile
             // 
-            this.rbEncryptionKeyFile.AutoSize = true;
-            this.rbEncryptionKeyFile.Location = new System.Drawing.Point(21, 143);
-            this.rbEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptionKeyFile.Name = "rbEncryptionKeyFile";
-            this.rbEncryptionKeyFile.Size = new System.Drawing.Size(126, 24);
-            this.rbEncryptionKeyFile.TabIndex = 5;
-            this.rbEncryptionKeyFile.Text = "File (v9 SDK)";
-            this.rbEncryptionKeyFile.UseVisualStyleBackColor = true;
+            rbEncryptionKeyFile.AutoSize = true;
+            rbEncryptionKeyFile.Location = new System.Drawing.Point(23, 179);
+            rbEncryptionKeyFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyFile.Name = "rbEncryptionKeyFile";
+            rbEncryptionKeyFile.Size = new System.Drawing.Size(135, 29);
+            rbEncryptionKeyFile.TabIndex = 5;
+            rbEncryptionKeyFile.Text = "File (v9 SDK)";
+            rbEncryptionKeyFile.UseVisualStyleBackColor = true;
             // 
             // edEncryptionKeyString
             // 
-            this.edEncryptionKeyString.Location = new System.Drawing.Point(54, 86);
-            this.edEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edEncryptionKeyString.Name = "edEncryptionKeyString";
-            this.edEncryptionKeyString.Size = new System.Drawing.Size(319, 26);
-            this.edEncryptionKeyString.TabIndex = 4;
-            this.edEncryptionKeyString.Text = "100";
+            edEncryptionKeyString.Location = new System.Drawing.Point(60, 108);
+            edEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edEncryptionKeyString.Name = "edEncryptionKeyString";
+            edEncryptionKeyString.Size = new System.Drawing.Size(354, 31);
+            edEncryptionKeyString.TabIndex = 4;
+            edEncryptionKeyString.Text = "100";
             // 
             // rbEncryptionKeyString
             // 
-            this.rbEncryptionKeyString.AutoSize = true;
-            this.rbEncryptionKeyString.Checked = true;
-            this.rbEncryptionKeyString.Location = new System.Drawing.Point(21, 43);
-            this.rbEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptionKeyString.Name = "rbEncryptionKeyString";
-            this.rbEncryptionKeyString.Size = new System.Drawing.Size(76, 24);
-            this.rbEncryptionKeyString.TabIndex = 0;
-            this.rbEncryptionKeyString.TabStop = true;
-            this.rbEncryptionKeyString.Text = "String";
-            this.rbEncryptionKeyString.UseVisualStyleBackColor = true;
+            rbEncryptionKeyString.AutoSize = true;
+            rbEncryptionKeyString.Checked = true;
+            rbEncryptionKeyString.Location = new System.Drawing.Point(23, 54);
+            rbEncryptionKeyString.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionKeyString.Name = "rbEncryptionKeyString";
+            rbEncryptionKeyString.Size = new System.Drawing.Size(83, 29);
+            rbEncryptionKeyString.TabIndex = 0;
+            rbEncryptionKeyString.TabStop = true;
+            rbEncryptionKeyString.Text = "String";
+            rbEncryptionKeyString.UseVisualStyleBackColor = true;
             // 
             // groupBox47
             // 
-            this.groupBox47.Controls.Add(this.rbEncryptionModeAES256);
-            this.groupBox47.Controls.Add(this.rbEncryptionModeAES128);
-            this.groupBox47.Location = new System.Drawing.Point(24, 25);
-            this.groupBox47.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox47.Size = new System.Drawing.Size(404, 128);
-            this.groupBox47.TabIndex = 10;
-            this.groupBox47.TabStop = false;
-            this.groupBox47.Text = "Method";
+            groupBox47.Controls.Add(rbEncryptionModeAES256);
+            groupBox47.Controls.Add(rbEncryptionModeAES128);
+            groupBox47.Location = new System.Drawing.Point(27, 31);
+            groupBox47.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox47.Name = "groupBox47";
+            groupBox47.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox47.Size = new System.Drawing.Size(449, 160);
+            groupBox47.TabIndex = 10;
+            groupBox47.TabStop = false;
+            groupBox47.Text = "Method";
             // 
             // rbEncryptionModeAES256
             // 
-            this.rbEncryptionModeAES256.AutoSize = true;
-            this.rbEncryptionModeAES256.Checked = true;
-            this.rbEncryptionModeAES256.Location = new System.Drawing.Point(21, 78);
-            this.rbEncryptionModeAES256.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptionModeAES256.Name = "rbEncryptionModeAES256";
-            this.rbEncryptionModeAES256.Size = new System.Drawing.Size(293, 24);
-            this.rbEncryptionModeAES256.TabIndex = 1;
-            this.rbEncryptionModeAES256.TabStop = true;
-            this.rbEncryptionModeAES256.Text = "AES-256 (v9 encryption SDK output)";
-            this.rbEncryptionModeAES256.UseVisualStyleBackColor = true;
+            rbEncryptionModeAES256.AutoSize = true;
+            rbEncryptionModeAES256.Checked = true;
+            rbEncryptionModeAES256.Location = new System.Drawing.Point(23, 98);
+            rbEncryptionModeAES256.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionModeAES256.Name = "rbEncryptionModeAES256";
+            rbEncryptionModeAES256.Size = new System.Drawing.Size(325, 29);
+            rbEncryptionModeAES256.TabIndex = 1;
+            rbEncryptionModeAES256.TabStop = true;
+            rbEncryptionModeAES256.Text = "AES-256 (v9 encryption SDK output)";
+            rbEncryptionModeAES256.UseVisualStyleBackColor = true;
             // 
             // rbEncryptionModeAES128
             // 
-            this.rbEncryptionModeAES128.AutoSize = true;
-            this.rbEncryptionModeAES128.Location = new System.Drawing.Point(21, 43);
-            this.rbEncryptionModeAES128.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptionModeAES128.Name = "rbEncryptionModeAES128";
-            this.rbEncryptionModeAES128.Size = new System.Drawing.Size(293, 24);
-            this.rbEncryptionModeAES128.TabIndex = 0;
-            this.rbEncryptionModeAES128.Text = "AES-128 (v8 encryption SDK output)";
-            this.rbEncryptionModeAES128.UseVisualStyleBackColor = true;
+            rbEncryptionModeAES128.AutoSize = true;
+            rbEncryptionModeAES128.Location = new System.Drawing.Point(23, 54);
+            rbEncryptionModeAES128.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptionModeAES128.Name = "rbEncryptionModeAES128";
+            rbEncryptionModeAES128.Size = new System.Drawing.Size(325, 29);
+            rbEncryptionModeAES128.TabIndex = 0;
+            rbEncryptionModeAES128.Text = "AES-128 (v8 encryption SDK output)";
+            rbEncryptionModeAES128.UseVisualStyleBackColor = true;
             // 
             // groupBox43
             // 
-            this.groupBox43.Controls.Add(this.rbEncryptedH264CUDA);
-            this.groupBox43.Controls.Add(this.rbEncryptedH264SW);
-            this.groupBox43.Location = new System.Drawing.Point(24, 162);
-            this.groupBox43.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox43.Name = "groupBox43";
-            this.groupBox43.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox43.Size = new System.Drawing.Size(404, 128);
-            this.groupBox43.TabIndex = 9;
-            this.groupBox43.TabStop = false;
-            this.groupBox43.Text = "Video / audio format";
+            groupBox43.Controls.Add(rbEncryptedH264CUDA);
+            groupBox43.Controls.Add(rbEncryptedH264SW);
+            groupBox43.Location = new System.Drawing.Point(27, 202);
+            groupBox43.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox43.Name = "groupBox43";
+            groupBox43.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox43.Size = new System.Drawing.Size(449, 160);
+            groupBox43.TabIndex = 9;
+            groupBox43.TabStop = false;
+            groupBox43.Text = "Video / audio format";
             // 
             // rbEncryptedH264CUDA
             // 
-            this.rbEncryptedH264CUDA.AutoSize = true;
-            this.rbEncryptedH264CUDA.Enabled = false;
-            this.rbEncryptedH264CUDA.Location = new System.Drawing.Point(21, 78);
-            this.rbEncryptedH264CUDA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptedH264CUDA.Name = "rbEncryptedH264CUDA";
-            this.rbEncryptedH264CUDA.Size = new System.Drawing.Size(383, 24);
-            this.rbEncryptedH264CUDA.TabIndex = 7;
-            this.rbEncryptedH264CUDA.Text = "[Deprecated] Use MP4 H264 CUDA / AAC format";
-            this.rbEncryptedH264CUDA.UseVisualStyleBackColor = true;
+            rbEncryptedH264CUDA.AutoSize = true;
+            rbEncryptedH264CUDA.Enabled = false;
+            rbEncryptedH264CUDA.Location = new System.Drawing.Point(23, 98);
+            rbEncryptedH264CUDA.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptedH264CUDA.Name = "rbEncryptedH264CUDA";
+            rbEncryptedH264CUDA.Size = new System.Drawing.Size(425, 29);
+            rbEncryptedH264CUDA.TabIndex = 7;
+            rbEncryptedH264CUDA.Text = "[Deprecated] Use MP4 H264 CUDA / AAC format";
+            rbEncryptedH264CUDA.UseVisualStyleBackColor = true;
             // 
             // rbEncryptedH264SW
             // 
-            this.rbEncryptedH264SW.AutoSize = true;
-            this.rbEncryptedH264SW.Checked = true;
-            this.rbEncryptedH264SW.Location = new System.Drawing.Point(21, 43);
-            this.rbEncryptedH264SW.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.rbEncryptedH264SW.Name = "rbEncryptedH264SW";
-            this.rbEncryptedH264SW.Size = new System.Drawing.Size(287, 24);
-            this.rbEncryptedH264SW.TabIndex = 6;
-            this.rbEncryptedH264SW.TabStop = true;
-            this.rbEncryptedH264SW.Text = "Use MP4 H264 / ACC output format";
-            this.rbEncryptedH264SW.UseVisualStyleBackColor = true;
+            rbEncryptedH264SW.AutoSize = true;
+            rbEncryptedH264SW.Checked = true;
+            rbEncryptedH264SW.Location = new System.Drawing.Point(23, 54);
+            rbEncryptedH264SW.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            rbEncryptedH264SW.Name = "rbEncryptedH264SW";
+            rbEncryptedH264SW.Size = new System.Drawing.Size(324, 29);
+            rbEncryptedH264SW.TabIndex = 6;
+            rbEncryptedH264SW.TabStop = true;
+            rbEncryptedH264SW.Text = "Use MP4 H264 / ACC output format";
+            rbEncryptedH264SW.UseVisualStyleBackColor = true;
             // 
             // tabPage79
             // 
-            this.tabPage79.Controls.Add(this.TabControl32);
-            this.tabPage79.Controls.Add(this.cbTagEnabled);
-            this.tabPage79.Location = new System.Drawing.Point(4, 29);
-            this.tabPage79.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage79.Name = "tabPage79";
-            this.tabPage79.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage79.Size = new System.Drawing.Size(457, 767);
-            this.tabPage79.TabIndex = 14;
-            this.tabPage79.Text = "Tags";
-            this.tabPage79.UseVisualStyleBackColor = true;
+            tabPage79.Controls.Add(TabControl32);
+            tabPage79.Controls.Add(cbTagEnabled);
+            tabPage79.Location = new System.Drawing.Point(4, 34);
+            tabPage79.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage79.Name = "tabPage79";
+            tabPage79.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage79.Size = new System.Drawing.Size(509, 962);
+            tabPage79.TabIndex = 14;
+            tabPage79.Text = "Tags";
+            tabPage79.UseVisualStyleBackColor = true;
             // 
             // TabControl32
             // 
-            this.TabControl32.Controls.Add(this.TabPage142);
-            this.TabControl32.Controls.Add(this.TabPage143);
-            this.TabControl32.Location = new System.Drawing.Point(8, 71);
-            this.TabControl32.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabControl32.Name = "TabControl32";
-            this.TabControl32.SelectedIndex = 0;
-            this.TabControl32.Size = new System.Drawing.Size(438, 665);
-            this.TabControl32.TabIndex = 5;
+            TabControl32.Controls.Add(TabPage142);
+            TabControl32.Controls.Add(TabPage143);
+            TabControl32.Location = new System.Drawing.Point(9, 89);
+            TabControl32.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            TabControl32.Name = "TabControl32";
+            TabControl32.SelectedIndex = 0;
+            TabControl32.Size = new System.Drawing.Size(487, 831);
+            TabControl32.TabIndex = 5;
             // 
             // TabPage142
             // 
-            this.TabPage142.Controls.Add(this.edTagTrackID);
-            this.TabPage142.Controls.Add(this.Label496);
-            this.TabPage142.Controls.Add(this.edTagYear);
-            this.TabPage142.Controls.Add(this.Label495);
-            this.TabPage142.Controls.Add(this.edTagComment);
-            this.TabPage142.Controls.Add(this.Label493);
-            this.TabPage142.Controls.Add(this.edTagAlbum);
-            this.TabPage142.Controls.Add(this.Label491);
-            this.TabPage142.Controls.Add(this.edTagArtists);
-            this.TabPage142.Controls.Add(this.label494);
-            this.TabPage142.Controls.Add(this.edTagCopyright);
-            this.TabPage142.Controls.Add(this.label497);
-            this.TabPage142.Controls.Add(this.edTagTitle);
-            this.TabPage142.Controls.Add(this.label498);
-            this.TabPage142.Location = new System.Drawing.Point(4, 29);
-            this.TabPage142.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage142.Name = "TabPage142";
-            this.TabPage142.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage142.Size = new System.Drawing.Size(430, 632);
-            this.TabPage142.TabIndex = 0;
-            this.TabPage142.Text = "Common";
-            this.TabPage142.UseVisualStyleBackColor = true;
+            TabPage142.Controls.Add(edTagTrackID);
+            TabPage142.Controls.Add(Label496);
+            TabPage142.Controls.Add(edTagYear);
+            TabPage142.Controls.Add(Label495);
+            TabPage142.Controls.Add(edTagComment);
+            TabPage142.Controls.Add(Label493);
+            TabPage142.Controls.Add(edTagAlbum);
+            TabPage142.Controls.Add(Label491);
+            TabPage142.Controls.Add(edTagArtists);
+            TabPage142.Controls.Add(label494);
+            TabPage142.Controls.Add(edTagCopyright);
+            TabPage142.Controls.Add(label497);
+            TabPage142.Controls.Add(edTagTitle);
+            TabPage142.Controls.Add(label498);
+            TabPage142.Location = new System.Drawing.Point(4, 34);
+            TabPage142.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            TabPage142.Name = "TabPage142";
+            TabPage142.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            TabPage142.Size = new System.Drawing.Size(479, 793);
+            TabPage142.TabIndex = 0;
+            TabPage142.Text = "Common";
+            TabPage142.UseVisualStyleBackColor = true;
             // 
             // edTagTrackID
             // 
-            this.edTagTrackID.Location = new System.Drawing.Point(24, 318);
-            this.edTagTrackID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagTrackID.Name = "edTagTrackID";
-            this.edTagTrackID.Size = new System.Drawing.Size(92, 26);
-            this.edTagTrackID.TabIndex = 13;
-            this.edTagTrackID.Text = "1";
+            edTagTrackID.Location = new System.Drawing.Point(27, 398);
+            edTagTrackID.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagTrackID.Name = "edTagTrackID";
+            edTagTrackID.Size = new System.Drawing.Size(102, 31);
+            edTagTrackID.TabIndex = 13;
+            edTagTrackID.Text = "1";
             // 
             // Label496
             // 
-            this.Label496.AutoSize = true;
-            this.Label496.Location = new System.Drawing.Point(20, 295);
-            this.Label496.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label496.Name = "Label496";
-            this.Label496.Size = new System.Drawing.Size(69, 20);
-            this.Label496.TabIndex = 12;
-            this.Label496.Text = "Track ID";
+            Label496.AutoSize = true;
+            Label496.Location = new System.Drawing.Point(22, 369);
+            Label496.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            Label496.Name = "Label496";
+            Label496.Size = new System.Drawing.Size(74, 25);
+            Label496.TabIndex = 12;
+            Label496.Text = "Track ID";
             // 
             // edTagYear
             // 
-            this.edTagYear.Location = new System.Drawing.Point(24, 463);
-            this.edTagYear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagYear.Name = "edTagYear";
-            this.edTagYear.Size = new System.Drawing.Size(92, 26);
-            this.edTagYear.TabIndex = 11;
-            this.edTagYear.Text = "2015";
+            edTagYear.Location = new System.Drawing.Point(27, 579);
+            edTagYear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagYear.Name = "edTagYear";
+            edTagYear.Size = new System.Drawing.Size(102, 31);
+            edTagYear.TabIndex = 11;
+            edTagYear.Text = "2015";
             // 
             // Label495
             // 
-            this.Label495.AutoSize = true;
-            this.Label495.Location = new System.Drawing.Point(20, 440);
-            this.Label495.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label495.Name = "Label495";
-            this.Label495.Size = new System.Drawing.Size(43, 20);
-            this.Label495.TabIndex = 10;
-            this.Label495.Text = "Year";
+            Label495.AutoSize = true;
+            Label495.Location = new System.Drawing.Point(22, 550);
+            Label495.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            Label495.Name = "Label495";
+            Label495.Size = new System.Drawing.Size(44, 25);
+            Label495.TabIndex = 10;
+            Label495.Text = "Year";
             // 
             // edTagComment
             // 
-            this.edTagComment.Location = new System.Drawing.Point(24, 246);
-            this.edTagComment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagComment.Name = "edTagComment";
-            this.edTagComment.Size = new System.Drawing.Size(361, 26);
-            this.edTagComment.TabIndex = 9;
-            this.edTagComment.Text = "No comments";
+            edTagComment.Location = new System.Drawing.Point(27, 308);
+            edTagComment.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagComment.Name = "edTagComment";
+            edTagComment.Size = new System.Drawing.Size(401, 31);
+            edTagComment.TabIndex = 9;
+            edTagComment.Text = "No comments";
             // 
             // Label493
             // 
-            this.Label493.AutoSize = true;
-            this.Label493.Location = new System.Drawing.Point(20, 223);
-            this.Label493.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label493.Name = "Label493";
-            this.Label493.Size = new System.Drawing.Size(78, 20);
-            this.Label493.TabIndex = 8;
-            this.Label493.Text = "Comment";
+            Label493.AutoSize = true;
+            Label493.Location = new System.Drawing.Point(22, 279);
+            Label493.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            Label493.Name = "Label493";
+            Label493.Size = new System.Drawing.Size(91, 25);
+            Label493.TabIndex = 8;
+            Label493.Text = "Comment";
             // 
             // edTagAlbum
             // 
-            this.edTagAlbum.Location = new System.Drawing.Point(24, 178);
-            this.edTagAlbum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagAlbum.Name = "edTagAlbum";
-            this.edTagAlbum.Size = new System.Drawing.Size(361, 26);
-            this.edTagAlbum.TabIndex = 7;
-            this.edTagAlbum.Text = "Sample album";
+            edTagAlbum.Location = new System.Drawing.Point(27, 222);
+            edTagAlbum.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagAlbum.Name = "edTagAlbum";
+            edTagAlbum.Size = new System.Drawing.Size(401, 31);
+            edTagAlbum.TabIndex = 7;
+            edTagAlbum.Text = "Sample album";
             // 
             // Label491
             // 
-            this.Label491.AutoSize = true;
-            this.Label491.Location = new System.Drawing.Point(20, 155);
-            this.Label491.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label491.Name = "Label491";
-            this.Label491.Size = new System.Drawing.Size(54, 20);
-            this.Label491.TabIndex = 6;
-            this.Label491.Text = "Album";
+            Label491.AutoSize = true;
+            Label491.Location = new System.Drawing.Point(22, 194);
+            Label491.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            Label491.Name = "Label491";
+            Label491.Size = new System.Drawing.Size(65, 25);
+            Label491.TabIndex = 6;
+            Label491.Text = "Album";
             // 
             // edTagArtists
             // 
-            this.edTagArtists.Location = new System.Drawing.Point(24, 111);
-            this.edTagArtists.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagArtists.Name = "edTagArtists";
-            this.edTagArtists.Size = new System.Drawing.Size(361, 26);
-            this.edTagArtists.TabIndex = 5;
-            this.edTagArtists.Text = "Sample artist";
+            edTagArtists.Location = new System.Drawing.Point(27, 139);
+            edTagArtists.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagArtists.Name = "edTagArtists";
+            edTagArtists.Size = new System.Drawing.Size(401, 31);
+            edTagArtists.TabIndex = 5;
+            edTagArtists.Text = "Sample artist";
             // 
             // label494
             // 
-            this.label494.AutoSize = true;
-            this.label494.Location = new System.Drawing.Point(20, 88);
-            this.label494.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label494.Name = "label494";
-            this.label494.Size = new System.Drawing.Size(54, 20);
-            this.label494.TabIndex = 4;
-            this.label494.Text = "Artists";
+            label494.AutoSize = true;
+            label494.Location = new System.Drawing.Point(22, 110);
+            label494.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label494.Name = "label494";
+            label494.Size = new System.Drawing.Size(62, 25);
+            label494.TabIndex = 4;
+            label494.Text = "Artists";
             // 
             // edTagCopyright
             // 
-            this.edTagCopyright.Location = new System.Drawing.Point(24, 392);
-            this.edTagCopyright.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagCopyright.Name = "edTagCopyright";
-            this.edTagCopyright.Size = new System.Drawing.Size(361, 26);
-            this.edTagCopyright.TabIndex = 3;
-            this.edTagCopyright.Text = "VisioForge";
+            edTagCopyright.Location = new System.Drawing.Point(27, 490);
+            edTagCopyright.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagCopyright.Name = "edTagCopyright";
+            edTagCopyright.Size = new System.Drawing.Size(401, 31);
+            edTagCopyright.TabIndex = 3;
+            edTagCopyright.Text = "VisioForge";
             // 
             // label497
             // 
-            this.label497.AutoSize = true;
-            this.label497.Location = new System.Drawing.Point(20, 369);
-            this.label497.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label497.Name = "label497";
-            this.label497.Size = new System.Drawing.Size(76, 20);
-            this.label497.TabIndex = 2;
-            this.label497.Text = "Copyright";
+            label497.AutoSize = true;
+            label497.Location = new System.Drawing.Point(22, 461);
+            label497.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label497.Name = "label497";
+            label497.Size = new System.Drawing.Size(91, 25);
+            label497.TabIndex = 2;
+            label497.Text = "Copyright";
             // 
             // edTagTitle
             // 
-            this.edTagTitle.Location = new System.Drawing.Point(24, 45);
-            this.edTagTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagTitle.Name = "edTagTitle";
-            this.edTagTitle.Size = new System.Drawing.Size(361, 26);
-            this.edTagTitle.TabIndex = 1;
-            this.edTagTitle.Text = "Sample output file";
+            edTagTitle.Location = new System.Drawing.Point(27, 56);
+            edTagTitle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagTitle.Name = "edTagTitle";
+            edTagTitle.Size = new System.Drawing.Size(401, 31);
+            edTagTitle.TabIndex = 1;
+            edTagTitle.Text = "Sample output file";
             // 
             // label498
             // 
-            this.label498.AutoSize = true;
-            this.label498.Location = new System.Drawing.Point(20, 22);
-            this.label498.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label498.Name = "label498";
-            this.label498.Size = new System.Drawing.Size(38, 20);
-            this.label498.TabIndex = 0;
-            this.label498.Text = "Title";
+            label498.AutoSize = true;
+            label498.Location = new System.Drawing.Point(22, 28);
+            label498.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label498.Name = "label498";
+            label498.Size = new System.Drawing.Size(44, 25);
+            label498.TabIndex = 0;
+            label498.Text = "Title";
             // 
             // TabPage143
             // 
-            this.TabPage143.Controls.Add(this.imgTagCover);
-            this.TabPage143.Controls.Add(this.Label499);
-            this.TabPage143.Controls.Add(this.label500);
-            this.TabPage143.Controls.Add(this.edTagLyrics);
-            this.TabPage143.Controls.Add(this.label501);
-            this.TabPage143.Controls.Add(this.cbTagGenre);
-            this.TabPage143.Controls.Add(this.label502);
-            this.TabPage143.Controls.Add(this.edTagComposers);
-            this.TabPage143.Controls.Add(this.label503);
-            this.TabPage143.Location = new System.Drawing.Point(4, 29);
-            this.TabPage143.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage143.Name = "TabPage143";
-            this.TabPage143.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.TabPage143.Size = new System.Drawing.Size(430, 632);
-            this.TabPage143.TabIndex = 1;
-            this.TabPage143.Text = "Special";
-            this.TabPage143.UseVisualStyleBackColor = true;
+            TabPage143.Controls.Add(imgTagCover);
+            TabPage143.Controls.Add(Label499);
+            TabPage143.Controls.Add(label500);
+            TabPage143.Controls.Add(edTagLyrics);
+            TabPage143.Controls.Add(label501);
+            TabPage143.Controls.Add(cbTagGenre);
+            TabPage143.Controls.Add(label502);
+            TabPage143.Controls.Add(edTagComposers);
+            TabPage143.Controls.Add(label503);
+            TabPage143.Location = new System.Drawing.Point(4, 34);
+            TabPage143.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            TabPage143.Name = "TabPage143";
+            TabPage143.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            TabPage143.Size = new System.Drawing.Size(479, 793);
+            TabPage143.TabIndex = 1;
+            TabPage143.Text = "Special";
+            TabPage143.UseVisualStyleBackColor = true;
             // 
             // imgTagCover
             // 
-            this.imgTagCover.BackColor = System.Drawing.Color.DimGray;
-            this.imgTagCover.Location = new System.Drawing.Point(22, 274);
-            this.imgTagCover.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.imgTagCover.Name = "imgTagCover";
-            this.imgTagCover.Size = new System.Drawing.Size(252, 211);
-            this.imgTagCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgTagCover.TabIndex = 16;
-            this.imgTagCover.TabStop = false;
-            this.imgTagCover.Click += new System.EventHandler(this.imgTagCover_Click);
+            imgTagCover.BackColor = System.Drawing.Color.DimGray;
+            imgTagCover.Location = new System.Drawing.Point(24, 342);
+            imgTagCover.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            imgTagCover.Name = "imgTagCover";
+            imgTagCover.Size = new System.Drawing.Size(280, 264);
+            imgTagCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            imgTagCover.TabIndex = 16;
+            imgTagCover.TabStop = false;
+            imgTagCover.Click += imgTagCover_Click;
             // 
             // Label499
             // 
-            this.Label499.AutoSize = true;
-            this.Label499.Location = new System.Drawing.Point(18, 249);
-            this.Label499.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Label499.Name = "Label499";
-            this.Label499.Size = new System.Drawing.Size(158, 20);
-            this.Label499.TabIndex = 15;
-            this.Label499.Text = "Cover (click to select)";
+            Label499.AutoSize = true;
+            Label499.Location = new System.Drawing.Point(20, 311);
+            Label499.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            Label499.Name = "Label499";
+            Label499.Size = new System.Drawing.Size(177, 25);
+            Label499.TabIndex = 15;
+            Label499.Text = "Cover (click to select)";
             // 
             // label500
             // 
-            this.label500.AutoSize = true;
-            this.label500.Location = new System.Drawing.Point(64, 514);
-            this.label500.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label500.Name = "label500";
-            this.label500.Size = new System.Drawing.Size(287, 20);
-            this.label500.TabIndex = 14;
-            this.label500.Text = "Many other tags are available using API";
+            label500.AutoSize = true;
+            label500.Location = new System.Drawing.Point(71, 642);
+            label500.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label500.Name = "label500";
+            label500.Size = new System.Drawing.Size(324, 25);
+            label500.TabIndex = 14;
+            label500.Text = "Many other tags are available using API";
             // 
             // edTagLyrics
             // 
-            this.edTagLyrics.Location = new System.Drawing.Point(22, 195);
-            this.edTagLyrics.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagLyrics.Name = "edTagLyrics";
-            this.edTagLyrics.Size = new System.Drawing.Size(361, 26);
-            this.edTagLyrics.TabIndex = 13;
-            this.edTagLyrics.Text = "Yo-ho-ho and the buttle of rum";
+            edTagLyrics.Location = new System.Drawing.Point(24, 244);
+            edTagLyrics.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagLyrics.Name = "edTagLyrics";
+            edTagLyrics.Size = new System.Drawing.Size(401, 31);
+            edTagLyrics.TabIndex = 13;
+            edTagLyrics.Text = "Yo-ho-ho and the buttle of rum";
             // 
             // label501
             // 
-            this.label501.AutoSize = true;
-            this.label501.Location = new System.Drawing.Point(18, 172);
-            this.label501.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label501.Name = "label501";
-            this.label501.Size = new System.Drawing.Size(49, 20);
-            this.label501.TabIndex = 12;
-            this.label501.Text = "Lyrics";
+            label501.AutoSize = true;
+            label501.Location = new System.Drawing.Point(20, 215);
+            label501.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label501.Name = "label501";
+            label501.Size = new System.Drawing.Size(54, 25);
+            label501.TabIndex = 12;
+            label501.Text = "Lyrics";
             // 
             // cbTagGenre
             // 
-            this.cbTagGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTagGenre.FormattingEnabled = true;
-            this.cbTagGenre.Location = new System.Drawing.Point(22, 117);
-            this.cbTagGenre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbTagGenre.Name = "cbTagGenre";
-            this.cbTagGenre.Size = new System.Drawing.Size(361, 28);
-            this.cbTagGenre.TabIndex = 11;
+            cbTagGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTagGenre.FormattingEnabled = true;
+            cbTagGenre.Location = new System.Drawing.Point(24, 146);
+            cbTagGenre.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbTagGenre.Name = "cbTagGenre";
+            cbTagGenre.Size = new System.Drawing.Size(401, 33);
+            cbTagGenre.TabIndex = 11;
             // 
             // label502
             // 
-            this.label502.AutoSize = true;
-            this.label502.Location = new System.Drawing.Point(18, 92);
-            this.label502.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label502.Name = "label502";
-            this.label502.Size = new System.Drawing.Size(54, 20);
-            this.label502.TabIndex = 10;
-            this.label502.Text = "Genre";
+            label502.AutoSize = true;
+            label502.Location = new System.Drawing.Point(20, 115);
+            label502.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label502.Name = "label502";
+            label502.Size = new System.Drawing.Size(58, 25);
+            label502.TabIndex = 10;
+            label502.Text = "Genre";
             // 
             // edTagComposers
             // 
-            this.edTagComposers.Location = new System.Drawing.Point(22, 45);
-            this.edTagComposers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edTagComposers.Name = "edTagComposers";
-            this.edTagComposers.Size = new System.Drawing.Size(361, 26);
-            this.edTagComposers.TabIndex = 9;
-            this.edTagComposers.Text = "Sample composer";
+            edTagComposers.Location = new System.Drawing.Point(24, 56);
+            edTagComposers.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edTagComposers.Name = "edTagComposers";
+            edTagComposers.Size = new System.Drawing.Size(401, 31);
+            edTagComposers.TabIndex = 9;
+            edTagComposers.Text = "Sample composer";
             // 
             // label503
             // 
-            this.label503.AutoSize = true;
-            this.label503.Location = new System.Drawing.Point(18, 22);
-            this.label503.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label503.Name = "label503";
-            this.label503.Size = new System.Drawing.Size(90, 20);
-            this.label503.TabIndex = 8;
-            this.label503.Text = "Composers";
+            label503.AutoSize = true;
+            label503.Location = new System.Drawing.Point(20, 28);
+            label503.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label503.Name = "label503";
+            label503.Size = new System.Drawing.Size(103, 25);
+            label503.TabIndex = 8;
+            label503.Text = "Composers";
             // 
             // cbTagEnabled
             // 
-            this.cbTagEnabled.AutoSize = true;
-            this.cbTagEnabled.Location = new System.Drawing.Point(21, 25);
-            this.cbTagEnabled.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbTagEnabled.Name = "cbTagEnabled";
-            this.cbTagEnabled.Size = new System.Drawing.Size(199, 24);
-            this.cbTagEnabled.TabIndex = 4;
-            this.cbTagEnabled.Text = "Write tags to output file";
-            this.cbTagEnabled.UseVisualStyleBackColor = true;
+            cbTagEnabled.AutoSize = true;
+            cbTagEnabled.Location = new System.Drawing.Point(23, 31);
+            cbTagEnabled.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbTagEnabled.Name = "cbTagEnabled";
+            cbTagEnabled.Size = new System.Drawing.Size(228, 29);
+            cbTagEnabled.TabIndex = 4;
+            cbTagEnabled.Text = "Write tags to output file";
+            cbTagEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage24
             // 
-            this.tabPage24.Controls.Add(this.cbVUMeter);
-            this.tabPage24.Controls.Add(this.tbVUMeterBoost);
-            this.tabPage24.Controls.Add(this.label382);
-            this.tabPage24.Controls.Add(this.label381);
-            this.tabPage24.Controls.Add(this.tbVUMeterAmplification);
-            this.tabPage24.Controls.Add(this.cbVUMeterPro);
-            this.tabPage24.Controls.Add(this.peakMeterCtrl1);
-            this.tabPage24.Controls.Add(this.waveformPainter2);
-            this.tabPage24.Controls.Add(this.waveformPainter1);
-            this.tabPage24.Controls.Add(this.volumeMeter2);
-            this.tabPage24.Controls.Add(this.volumeMeter1);
-            this.tabPage24.Location = new System.Drawing.Point(4, 29);
-            this.tabPage24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage24.Size = new System.Drawing.Size(457, 767);
-            this.tabPage24.TabIndex = 16;
-            this.tabPage24.Text = "Audio output";
-            this.tabPage24.UseVisualStyleBackColor = true;
+            tabPage24.Controls.Add(cbVUMeter);
+            tabPage24.Controls.Add(tbVUMeterBoost);
+            tabPage24.Controls.Add(label382);
+            tabPage24.Controls.Add(label381);
+            tabPage24.Controls.Add(tbVUMeterAmplification);
+            tabPage24.Controls.Add(cbVUMeterPro);
+            tabPage24.Controls.Add(peakMeterCtrl1);
+            tabPage24.Controls.Add(waveformPainter2);
+            tabPage24.Controls.Add(waveformPainter1);
+            tabPage24.Controls.Add(volumeMeter2);
+            tabPage24.Controls.Add(volumeMeter1);
+            tabPage24.Location = new System.Drawing.Point(4, 34);
+            tabPage24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage24.Name = "tabPage24";
+            tabPage24.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage24.Size = new System.Drawing.Size(509, 962);
+            tabPage24.TabIndex = 16;
+            tabPage24.Text = "Audio output";
+            tabPage24.UseVisualStyleBackColor = true;
             // 
             // cbVUMeter
             // 
-            this.cbVUMeter.AutoSize = true;
-            this.cbVUMeter.Location = new System.Drawing.Point(27, 23);
-            this.cbVUMeter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVUMeter.Name = "cbVUMeter";
-            this.cbVUMeter.Size = new System.Drawing.Size(157, 24);
-            this.cbVUMeter.TabIndex = 125;
-            this.cbVUMeter.Text = "Enable VU Meter";
-            this.cbVUMeter.UseVisualStyleBackColor = true;
+            cbVUMeter.AutoSize = true;
+            cbVUMeter.Location = new System.Drawing.Point(30, 29);
+            cbVUMeter.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVUMeter.Name = "cbVUMeter";
+            cbVUMeter.Size = new System.Drawing.Size(169, 29);
+            cbVUMeter.TabIndex = 125;
+            cbVUMeter.Text = "Enable VU Meter";
+            cbVUMeter.UseVisualStyleBackColor = true;
             // 
             // tbVUMeterBoost
             // 
-            this.tbVUMeterBoost.Location = new System.Drawing.Point(266, 468);
-            this.tbVUMeterBoost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbVUMeterBoost.Maximum = 30;
-            this.tbVUMeterBoost.Minimum = 1;
-            this.tbVUMeterBoost.Name = "tbVUMeterBoost";
-            this.tbVUMeterBoost.Size = new System.Drawing.Size(156, 69);
-            this.tbVUMeterBoost.TabIndex = 124;
-            this.tbVUMeterBoost.Value = 10;
+            tbVUMeterBoost.Location = new System.Drawing.Point(296, 585);
+            tbVUMeterBoost.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVUMeterBoost.Maximum = 30;
+            tbVUMeterBoost.Minimum = 1;
+            tbVUMeterBoost.Name = "tbVUMeterBoost";
+            tbVUMeterBoost.Size = new System.Drawing.Size(173, 69);
+            tbVUMeterBoost.TabIndex = 124;
+            tbVUMeterBoost.Value = 10;
             // 
             // label382
             // 
-            this.label382.AutoSize = true;
-            this.label382.Location = new System.Drawing.Point(261, 443);
-            this.label382.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label382.Name = "label382";
-            this.label382.Size = new System.Drawing.Size(102, 20);
-            this.label382.TabIndex = 123;
-            this.label382.Text = "Meters boost";
+            label382.AutoSize = true;
+            label382.Location = new System.Drawing.Point(290, 554);
+            label382.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label382.Name = "label382";
+            label382.Size = new System.Drawing.Size(118, 25);
+            label382.TabIndex = 123;
+            label382.Text = "Meters boost";
             // 
             // label381
             // 
-            this.label381.AutoSize = true;
-            this.label381.Location = new System.Drawing.Point(39, 443);
-            this.label381.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label381.Name = "label381";
-            this.label381.Size = new System.Drawing.Size(183, 20);
-            this.label381.TabIndex = 119;
-            this.label381.Text = "Volume amplification (%)";
+            label381.AutoSize = true;
+            label381.Location = new System.Drawing.Point(43, 554);
+            label381.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label381.Name = "label381";
+            label381.Size = new System.Drawing.Size(209, 25);
+            label381.TabIndex = 119;
+            label381.Text = "Volume amplification (%)";
             // 
             // tbVUMeterAmplification
             // 
-            this.tbVUMeterAmplification.Location = new System.Drawing.Point(44, 468);
-            this.tbVUMeterAmplification.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbVUMeterAmplification.Maximum = 100;
-            this.tbVUMeterAmplification.Name = "tbVUMeterAmplification";
-            this.tbVUMeterAmplification.Size = new System.Drawing.Size(158, 69);
-            this.tbVUMeterAmplification.TabIndex = 118;
-            this.tbVUMeterAmplification.Value = 100;
+            tbVUMeterAmplification.Location = new System.Drawing.Point(49, 585);
+            tbVUMeterAmplification.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbVUMeterAmplification.Maximum = 100;
+            tbVUMeterAmplification.Name = "tbVUMeterAmplification";
+            tbVUMeterAmplification.Size = new System.Drawing.Size(176, 69);
+            tbVUMeterAmplification.TabIndex = 118;
+            tbVUMeterAmplification.Value = 100;
             // 
             // cbVUMeterPro
             // 
-            this.cbVUMeterPro.AutoSize = true;
-            this.cbVUMeterPro.Location = new System.Drawing.Point(27, 205);
-            this.cbVUMeterPro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbVUMeterPro.Name = "cbVUMeterPro";
-            this.cbVUMeterPro.Size = new System.Drawing.Size(185, 24);
-            this.cbVUMeterPro.TabIndex = 117;
-            this.cbVUMeterPro.Text = "Enable VU meter Pro";
-            this.cbVUMeterPro.UseVisualStyleBackColor = true;
+            cbVUMeterPro.AutoSize = true;
+            cbVUMeterPro.Location = new System.Drawing.Point(30, 256);
+            cbVUMeterPro.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbVUMeterPro.Name = "cbVUMeterPro";
+            cbVUMeterPro.Size = new System.Drawing.Size(201, 29);
+            cbVUMeterPro.TabIndex = 117;
+            cbVUMeterPro.Text = "Enable VU meter Pro";
+            cbVUMeterPro.UseVisualStyleBackColor = true;
             // 
             // peakMeterCtrl1
             // 
-            this.peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
-            this.peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
-            this.peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
-            this.peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(150)))));
-            this.peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
-            this.peakMeterCtrl1.Location = new System.Drawing.Point(206, 23);
-            this.peakMeterCtrl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.peakMeterCtrl1.Name = "peakMeterCtrl1";
-            this.peakMeterCtrl1.Size = new System.Drawing.Size(158, 94);
-            this.peakMeterCtrl1.TabIndex = 126;
-            this.peakMeterCtrl1.Text = "peakMeterCtrl1";
+            peakMeterCtrl1.ColorHigh = System.Drawing.Color.Red;
+            peakMeterCtrl1.ColorHighBack = System.Drawing.Color.FromArgb(255, 150, 150);
+            peakMeterCtrl1.ColorMedium = System.Drawing.Color.Yellow;
+            peakMeterCtrl1.ColorMediumBack = System.Drawing.Color.FromArgb(255, 255, 150);
+            peakMeterCtrl1.ColorNormal = System.Drawing.Color.Green;
+            peakMeterCtrl1.ColorNormalBack = System.Drawing.Color.FromArgb(150, 255, 150);
+            peakMeterCtrl1.FalloffColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            peakMeterCtrl1.GridColor = System.Drawing.Color.Gainsboro;
+            peakMeterCtrl1.Location = new System.Drawing.Point(229, 29);
+            peakMeterCtrl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            peakMeterCtrl1.Name = "peakMeterCtrl1";
+            peakMeterCtrl1.Size = new System.Drawing.Size(176, 118);
+            peakMeterCtrl1.TabIndex = 126;
+            peakMeterCtrl1.Text = "peakMeterCtrl1";
             // 
             // waveformPainter2
             // 
-            this.waveformPainter2.Boost = 1F;
-            this.waveformPainter2.Location = new System.Drawing.Point(160, 342);
-            this.waveformPainter2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.waveformPainter2.Name = "waveformPainter2";
-            this.waveformPainter2.Size = new System.Drawing.Size(261, 92);
-            this.waveformPainter2.TabIndex = 122;
-            this.waveformPainter2.Text = "waveformPainter2";
+            waveformPainter2.Boost = 1F;
+            waveformPainter2.Location = new System.Drawing.Point(178, 428);
+            waveformPainter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            waveformPainter2.Name = "waveformPainter2";
+            waveformPainter2.Size = new System.Drawing.Size(290, 115);
+            waveformPainter2.TabIndex = 122;
+            waveformPainter2.Text = "waveformPainter2";
             // 
             // waveformPainter1
             // 
-            this.waveformPainter1.Boost = 1F;
-            this.waveformPainter1.Location = new System.Drawing.Point(160, 240);
-            this.waveformPainter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.waveformPainter1.Name = "waveformPainter1";
-            this.waveformPainter1.Size = new System.Drawing.Size(261, 92);
-            this.waveformPainter1.TabIndex = 121;
-            this.waveformPainter1.Text = "waveformPainter1";
+            waveformPainter1.Boost = 1F;
+            waveformPainter1.Location = new System.Drawing.Point(178, 300);
+            waveformPainter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            waveformPainter1.Name = "waveformPainter1";
+            waveformPainter1.Size = new System.Drawing.Size(290, 115);
+            waveformPainter1.TabIndex = 121;
+            waveformPainter1.Text = "waveformPainter1";
             // 
             // volumeMeter2
             // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter2.Boost = 1F;
-            this.volumeMeter2.Location = new System.Drawing.Point(86, 240);
-            this.volumeMeter2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.volumeMeter2.MaxDb = 18F;
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Size = new System.Drawing.Size(33, 194);
-            this.volumeMeter2.TabIndex = 120;
+            volumeMeter2.Amplitude = 0F;
+            volumeMeter2.BackColor = System.Drawing.Color.LightGray;
+            volumeMeter2.Boost = 1F;
+            volumeMeter2.Location = new System.Drawing.Point(96, 300);
+            volumeMeter2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            volumeMeter2.MaxDb = 18F;
+            volumeMeter2.MinDb = -60F;
+            volumeMeter2.Name = "volumeMeter2";
+            volumeMeter2.Size = new System.Drawing.Size(37, 242);
+            volumeMeter2.TabIndex = 120;
             // 
             // volumeMeter1
             // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.BackColor = System.Drawing.Color.LightGray;
-            this.volumeMeter1.Boost = 1F;
-            this.volumeMeter1.Location = new System.Drawing.Point(44, 240);
-            this.volumeMeter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.volumeMeter1.MaxDb = 18F;
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Size = new System.Drawing.Size(33, 194);
-            this.volumeMeter1.TabIndex = 116;
+            volumeMeter1.Amplitude = 0F;
+            volumeMeter1.BackColor = System.Drawing.Color.LightGray;
+            volumeMeter1.Boost = 1F;
+            volumeMeter1.Location = new System.Drawing.Point(49, 300);
+            volumeMeter1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            volumeMeter1.MaxDb = 18F;
+            volumeMeter1.MinDb = -60F;
+            volumeMeter1.Name = "volumeMeter1";
+            volumeMeter1.Size = new System.Drawing.Size(37, 242);
+            volumeMeter1.TabIndex = 116;
             // 
             // btStart
             // 
-            this.btStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStart.Location = new System.Drawing.Point(958, 957);
-            this.btStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(87, 35);
-            this.btStart.TabIndex = 25;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            btStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStart.Location = new System.Drawing.Point(1064, 1196);
+            btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(97, 44);
+            btStart.TabIndex = 25;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // btStop
             // 
-            this.btStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStop.Location = new System.Drawing.Point(1059, 957);
-            this.btStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(87, 35);
-            this.btStop.TabIndex = 26;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.btStop_Click);
+            btStop.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStop.Location = new System.Drawing.Point(1177, 1196);
+            btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(97, 44);
+            btStop.TabIndex = 26;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // OpenDialog1
             // 
-            this.OpenDialog1.Filter = resources.GetString("OpenDialog1.Filter");
+            OpenDialog1.Filter = resources.GetString("OpenDialog1.Filter");
             // 
             // SaveDialog1
             // 
-            this.SaveDialog1.Filter = "AVI  (*.avi) | *.avi|Windows Media Video (*.wmv)| *.wmv|Matroska  (*.mkv)| *.mkv|" +
-    "All files  (*.*)| *.*";
+            SaveDialog1.Filter = "AVI  (*.avi) | *.avi|Windows Media Video (*.wmv)| *.wmv|Matroska  (*.mkv)| *.mkv|All files  (*.*)| *.*";
             // 
             // FontDialog1
             // 
-            this.FontDialog1.Color = System.Drawing.Color.White;
-            this.FontDialog1.Font = new System.Drawing.Font("Arial", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FontDialog1.ShowColor = true;
+            FontDialog1.Color = System.Drawing.Color.White;
+            FontDialog1.Font = new System.Drawing.Font("Arial", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            FontDialog1.ShowColor = true;
             // 
             // openFileDialog2
             // 
-            this.openFileDialog2.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
+            openFileDialog2.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
             // 
             // tbSeeking
             // 
-            this.tbSeeking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSeeking.Location = new System.Drawing.Point(501, 957);
-            this.tbSeeking.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbSeeking.Name = "tbSeeking";
-            this.tbSeeking.Size = new System.Drawing.Size(202, 69);
-            this.tbSeeking.TabIndex = 46;
-            this.tbSeeking.Scroll += new System.EventHandler(this.tbSeeking_Scroll);
+            tbSeeking.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            tbSeeking.Location = new System.Drawing.Point(557, 1196);
+            tbSeeking.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbSeeking.Name = "tbSeeking";
+            tbSeeking.Size = new System.Drawing.Size(224, 69);
+            tbSeeking.TabIndex = 46;
+            tbSeeking.Scroll += tbSeeking_Scroll;
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(366, 835);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(115, 20);
-            this.linkLabel1.TabIndex = 77;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Watch tutorials";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new System.Drawing.Point(407, 1044);
+            linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new System.Drawing.Size(130, 25);
+            linkLabel1.TabIndex = 77;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Watch tutorials";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // openFileDialog3
             // 
-            this.openFileDialog3.FileName = "openFileDialog3";
-            this.openFileDialog3.Filter = "Windows Media profile|*.prx";
+            openFileDialog3.FileName = "openFileDialog3";
+            openFileDialog3.Filter = "Windows Media profile|*.prx";
             // 
             // ProgressBar1
             // 
-            this.ProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar1.Location = new System.Drawing.Point(712, 957);
-            this.ProgressBar1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ProgressBar1.Name = "ProgressBar1";
-            this.ProgressBar1.Size = new System.Drawing.Size(237, 34);
-            this.ProgressBar1.TabIndex = 9;
+            ProgressBar1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            ProgressBar1.Location = new System.Drawing.Point(791, 1196);
+            ProgressBar1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            ProgressBar1.Name = "ProgressBar1";
+            ProgressBar1.Size = new System.Drawing.Size(263, 42);
+            ProgressBar1.TabIndex = 9;
             // 
             // tabControl3
             // 
-            this.tabControl3.Controls.Add(this.tabPage52);
-            this.tabControl3.Controls.Add(this.tabPage53);
-            this.tabControl3.Controls.Add(this.tabPage54);
-            this.tabControl3.Controls.Add(this.tabPage74);
-            this.tabControl3.Location = new System.Drawing.Point(496, 18);
-            this.tabControl3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(656, 468);
-            this.tabControl3.TabIndex = 80;
+            tabControl3.Controls.Add(tabPage52);
+            tabControl3.Controls.Add(tabPage53);
+            tabControl3.Controls.Add(tabPage54);
+            tabControl3.Controls.Add(tabPage74);
+            tabControl3.Location = new System.Drawing.Point(551, 22);
+            tabControl3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabControl3.Name = "tabControl3";
+            tabControl3.SelectedIndex = 0;
+            tabControl3.Size = new System.Drawing.Size(729, 585);
+            tabControl3.TabIndex = 80;
             // 
             // tabPage52
             // 
-            this.tabPage52.Controls.Add(this.groupBox7);
-            this.tabPage52.Controls.Add(this.label50);
-            this.tabPage52.Controls.Add(this.groupBox6);
-            this.tabPage52.Controls.Add(this.btClearList);
-            this.tabPage52.Controls.Add(this.btAddInputFile);
-            this.tabPage52.Controls.Add(this.lbFiles);
-            this.tabPage52.Controls.Add(this.label10);
-            this.tabPage52.Location = new System.Drawing.Point(4, 29);
-            this.tabPage52.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage52.Name = "tabPage52";
-            this.tabPage52.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage52.Size = new System.Drawing.Size(648, 435);
-            this.tabPage52.TabIndex = 0;
-            this.tabPage52.Text = "Edit";
-            this.tabPage52.UseVisualStyleBackColor = true;
+            tabPage52.Controls.Add(linkLabelDecoders);
+            tabPage52.Controls.Add(groupBox7);
+            tabPage52.Controls.Add(label50);
+            tabPage52.Controls.Add(groupBox6);
+            tabPage52.Controls.Add(btClearList);
+            tabPage52.Controls.Add(btAddInputFile);
+            tabPage52.Controls.Add(lbFiles);
+            tabPage52.Controls.Add(label10);
+            tabPage52.Location = new System.Drawing.Point(4, 34);
+            tabPage52.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage52.Name = "tabPage52";
+            tabPage52.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage52.Size = new System.Drawing.Size(721, 547);
+            tabPage52.TabIndex = 0;
+            tabPage52.Text = "Edit";
+            tabPage52.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelDecoders
+            // 
+            linkLabelDecoders.AutoSize = true;
+            linkLabelDecoders.Location = new System.Drawing.Point(3, 500);
+            linkLabelDecoders.Name = "linkLabelDecoders";
+            linkLabelDecoders.Size = new System.Drawing.Size(706, 25);
+            linkLabelDecoders.TabIndex = 57;
+            linkLabelDecoders.TabStop = true;
+            linkLabelDecoders.Text = "[NuGet only] Install decoders to edit MP4 files, or if you can see errors while adding files";
+            linkLabelDecoders.LinkClicked += linkLabelDecoders_LinkClicked;
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.label72);
-            this.groupBox7.Controls.Add(this.edInsertTime);
-            this.groupBox7.Controls.Add(this.label73);
-            this.groupBox7.Controls.Add(this.cbInsertAfterPreviousFile);
-            this.groupBox7.Location = new System.Drawing.Point(380, 175);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox7.Size = new System.Drawing.Size(230, 212);
-            this.groupBox7.TabIndex = 56;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Timeline";
+            groupBox7.Controls.Add(label72);
+            groupBox7.Controls.Add(edInsertTime);
+            groupBox7.Controls.Add(label73);
+            groupBox7.Controls.Add(cbInsertAfterPreviousFile);
+            groupBox7.Location = new System.Drawing.Point(422, 219);
+            groupBox7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox7.Size = new System.Drawing.Size(256, 265);
+            groupBox7.TabIndex = 56;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Timeline";
             // 
             // label72
             // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(174, 69);
-            this.label72.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(30, 20);
-            this.label72.TabIndex = 42;
-            this.label72.Text = "ms";
+            label72.AutoSize = true;
+            label72.Location = new System.Drawing.Point(193, 86);
+            label72.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label72.Name = "label72";
+            label72.Size = new System.Drawing.Size(36, 25);
+            label72.TabIndex = 42;
+            label72.Text = "ms";
             // 
             // edInsertTime
             // 
-            this.edInsertTime.Location = new System.Drawing.Point(114, 65);
-            this.edInsertTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edInsertTime.Name = "edInsertTime";
-            this.edInsertTime.Size = new System.Drawing.Size(49, 26);
-            this.edInsertTime.TabIndex = 41;
-            this.edInsertTime.Text = "4000";
+            edInsertTime.Location = new System.Drawing.Point(127, 81);
+            edInsertTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edInsertTime.Name = "edInsertTime";
+            edInsertTime.Size = new System.Drawing.Size(54, 31);
+            edInsertTime.TabIndex = 41;
+            edInsertTime.Text = "4000";
             // 
             // label73
             // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(18, 69);
-            this.label73.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(84, 20);
-            this.label73.TabIndex = 40;
-            this.label73.Text = "Insert time";
+            label73.AutoSize = true;
+            label73.Location = new System.Drawing.Point(20, 86);
+            label73.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label73.Name = "label73";
+            label73.Size = new System.Drawing.Size(96, 25);
+            label73.TabIndex = 40;
+            label73.Text = "Insert time";
             // 
             // cbInsertAfterPreviousFile
             // 
-            this.cbInsertAfterPreviousFile.AutoSize = true;
-            this.cbInsertAfterPreviousFile.Checked = true;
-            this.cbInsertAfterPreviousFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbInsertAfterPreviousFile.Location = new System.Drawing.Point(18, 29);
-            this.cbInsertAfterPreviousFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbInsertAfterPreviousFile.Name = "cbInsertAfterPreviousFile";
-            this.cbInsertAfterPreviousFile.Size = new System.Drawing.Size(200, 24);
-            this.cbInsertAfterPreviousFile.TabIndex = 39;
-            this.cbInsertAfterPreviousFile.Text = "Insert after previous file";
-            this.cbInsertAfterPreviousFile.UseVisualStyleBackColor = true;
+            cbInsertAfterPreviousFile.AutoSize = true;
+            cbInsertAfterPreviousFile.Checked = true;
+            cbInsertAfterPreviousFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbInsertAfterPreviousFile.Location = new System.Drawing.Point(20, 36);
+            cbInsertAfterPreviousFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbInsertAfterPreviousFile.Name = "cbInsertAfterPreviousFile";
+            cbInsertAfterPreviousFile.Size = new System.Drawing.Size(224, 29);
+            cbInsertAfterPreviousFile.TabIndex = 39;
+            cbInsertAfterPreviousFile.Text = "Insert after previous file";
+            cbInsertAfterPreviousFile.UseVisualStyleBackColor = true;
             // 
             // label50
             // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(9, 142);
-            this.label50.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(378, 20);
-            this.label50.TabIndex = 55;
-            this.label50.Text = "You must set this parameters before you add the file";
+            label50.AutoSize = true;
+            label50.Location = new System.Drawing.Point(10, 178);
+            label50.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label50.Name = "label50";
+            label50.Size = new System.Drawing.Size(427, 25);
+            label50.TabIndex = 55;
+            label50.Text = "You must set this parameters before you add the file";
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.lbSpeed);
-            this.groupBox6.Controls.Add(this.label42);
-            this.groupBox6.Controls.Add(this.label37);
-            this.groupBox6.Controls.Add(this.edStopTime);
-            this.groupBox6.Controls.Add(this.label38);
-            this.groupBox6.Controls.Add(this.label36);
-            this.groupBox6.Controls.Add(this.edStartTime);
-            this.groupBox6.Controls.Add(this.label35);
-            this.groupBox6.Controls.Add(this.cbAddFullFile);
-            this.groupBox6.Controls.Add(this.tbSpeed);
-            this.groupBox6.Location = new System.Drawing.Point(14, 175);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox6.Size = new System.Drawing.Size(357, 212);
-            this.groupBox6.TabIndex = 54;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Input file";
+            groupBox6.Controls.Add(lbSpeed);
+            groupBox6.Controls.Add(label42);
+            groupBox6.Controls.Add(label37);
+            groupBox6.Controls.Add(edStopTime);
+            groupBox6.Controls.Add(label38);
+            groupBox6.Controls.Add(label36);
+            groupBox6.Controls.Add(edStartTime);
+            groupBox6.Controls.Add(label35);
+            groupBox6.Controls.Add(cbAddFullFile);
+            groupBox6.Controls.Add(tbSpeed);
+            groupBox6.Location = new System.Drawing.Point(16, 219);
+            groupBox6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            groupBox6.Size = new System.Drawing.Size(397, 265);
+            groupBox6.TabIndex = 54;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Input file";
             // 
             // lbSpeed
             // 
-            this.lbSpeed.AutoSize = true;
-            this.lbSpeed.Location = new System.Drawing.Point(300, 114);
-            this.lbSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbSpeed.Name = "lbSpeed";
-            this.lbSpeed.Size = new System.Drawing.Size(50, 20);
-            this.lbSpeed.TabIndex = 44;
-            this.lbSpeed.Text = "100%";
+            lbSpeed.AutoSize = true;
+            lbSpeed.Location = new System.Drawing.Point(333, 142);
+            lbSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbSpeed.Name = "lbSpeed";
+            lbSpeed.Size = new System.Drawing.Size(57, 25);
+            lbSpeed.TabIndex = 44;
+            lbSpeed.Text = "100%";
             // 
             // label42
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(9, 114);
-            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(120, 20);
-            this.label42.TabIndex = 42;
-            this.label42.Text = "Playback speed";
+            label42.AutoSize = true;
+            label42.Location = new System.Drawing.Point(10, 142);
+            label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label42.Name = "label42";
+            label42.Size = new System.Drawing.Size(134, 25);
+            label42.TabIndex = 42;
+            label42.Text = "Playback speed";
             // 
             // label37
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(327, 69);
-            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(30, 20);
-            this.label37.TabIndex = 41;
-            this.label37.Text = "ms";
+            label37.AutoSize = true;
+            label37.Location = new System.Drawing.Point(363, 86);
+            label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label37.Name = "label37";
+            label37.Size = new System.Drawing.Size(36, 25);
+            label37.TabIndex = 41;
+            label37.Text = "ms";
             // 
             // edStopTime
             // 
-            this.edStopTime.Location = new System.Drawing.Point(262, 65);
-            this.edStopTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edStopTime.Name = "edStopTime";
-            this.edStopTime.Size = new System.Drawing.Size(58, 26);
-            this.edStopTime.TabIndex = 40;
-            this.edStopTime.Text = "5000";
+            edStopTime.Location = new System.Drawing.Point(291, 81);
+            edStopTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edStopTime.Name = "edStopTime";
+            edStopTime.Size = new System.Drawing.Size(64, 31);
+            edStopTime.TabIndex = 40;
+            edStopTime.Text = "5000";
             // 
             // label38
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(186, 69);
-            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(77, 20);
-            this.label38.TabIndex = 39;
-            this.label38.Text = "Stop time";
+            label38.AutoSize = true;
+            label38.Location = new System.Drawing.Point(207, 86);
+            label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label38.Name = "label38";
+            label38.Size = new System.Drawing.Size(89, 25);
+            label38.TabIndex = 39;
+            label38.Text = "Stop time";
             // 
             // label36
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(158, 69);
-            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(30, 20);
-            this.label36.TabIndex = 38;
-            this.label36.Text = "ms";
+            label36.AutoSize = true;
+            label36.Location = new System.Drawing.Point(176, 86);
+            label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label36.Name = "label36";
+            label36.Size = new System.Drawing.Size(36, 25);
+            label36.TabIndex = 38;
+            label36.Text = "ms";
             // 
             // edStartTime
             // 
-            this.edStartTime.Location = new System.Drawing.Point(94, 65);
-            this.edStartTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edStartTime.Name = "edStartTime";
-            this.edStartTime.Size = new System.Drawing.Size(58, 26);
-            this.edStartTime.TabIndex = 37;
-            this.edStartTime.Text = "0";
+            edStartTime.Location = new System.Drawing.Point(104, 81);
+            edStartTime.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edStartTime.Name = "edStartTime";
+            edStartTime.Size = new System.Drawing.Size(64, 31);
+            edStartTime.TabIndex = 37;
+            edStartTime.Text = "0";
             // 
             // label35
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(9, 69);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(78, 20);
-            this.label35.TabIndex = 36;
-            this.label35.Text = "Start time";
+            label35.AutoSize = true;
+            label35.Location = new System.Drawing.Point(10, 86);
+            label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label35.Name = "label35";
+            label35.Size = new System.Drawing.Size(88, 25);
+            label35.TabIndex = 36;
+            label35.Text = "Start time";
             // 
             // cbAddFullFile
             // 
-            this.cbAddFullFile.AutoSize = true;
-            this.cbAddFullFile.Checked = true;
-            this.cbAddFullFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAddFullFile.Location = new System.Drawing.Point(18, 29);
-            this.cbAddFullFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbAddFullFile.Name = "cbAddFullFile";
-            this.cbAddFullFile.Size = new System.Drawing.Size(112, 24);
-            this.cbAddFullFile.TabIndex = 35;
-            this.cbAddFullFile.Text = "Add full file";
-            this.cbAddFullFile.UseVisualStyleBackColor = true;
+            cbAddFullFile.AutoSize = true;
+            cbAddFullFile.Checked = true;
+            cbAddFullFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbAddFullFile.Location = new System.Drawing.Point(20, 36);
+            cbAddFullFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbAddFullFile.Name = "cbAddFullFile";
+            cbAddFullFile.Size = new System.Drawing.Size(129, 29);
+            cbAddFullFile.TabIndex = 35;
+            cbAddFullFile.Text = "Add full file";
+            cbAddFullFile.UseVisualStyleBackColor = true;
             // 
             // tbSpeed
             // 
-            this.tbSpeed.Location = new System.Drawing.Point(152, 105);
-            this.tbSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbSpeed.Maximum = 400;
-            this.tbSpeed.Minimum = 10;
-            this.tbSpeed.Name = "tbSpeed";
-            this.tbSpeed.Size = new System.Drawing.Size(148, 69);
-            this.tbSpeed.TabIndex = 43;
-            this.tbSpeed.Value = 100;
-            this.tbSpeed.Scroll += new System.EventHandler(this.tbSpeed_Scroll);
+            tbSpeed.Location = new System.Drawing.Point(169, 131);
+            tbSpeed.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbSpeed.Maximum = 400;
+            tbSpeed.Minimum = 10;
+            tbSpeed.Name = "tbSpeed";
+            tbSpeed.Size = new System.Drawing.Size(164, 69);
+            tbSpeed.TabIndex = 43;
+            tbSpeed.Value = 100;
+            tbSpeed.Scroll += tbSpeed_Scroll;
             // 
             // btClearList
             // 
-            this.btClearList.Location = new System.Drawing.Point(504, 86);
-            this.btClearList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btClearList.Name = "btClearList";
-            this.btClearList.Size = new System.Drawing.Size(96, 35);
-            this.btClearList.TabIndex = 53;
-            this.btClearList.Text = "Clear";
-            this.btClearList.UseVisualStyleBackColor = true;
-            this.btClearList.Click += new System.EventHandler(this.btClearList_Click);
+            btClearList.Location = new System.Drawing.Point(560, 108);
+            btClearList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btClearList.Name = "btClearList";
+            btClearList.Size = new System.Drawing.Size(107, 44);
+            btClearList.TabIndex = 53;
+            btClearList.Text = "Clear";
+            btClearList.UseVisualStyleBackColor = true;
+            btClearList.Click += btClearList_Click;
             // 
             // btAddInputFile
             // 
-            this.btAddInputFile.Location = new System.Drawing.Point(504, 42);
-            this.btAddInputFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAddInputFile.Name = "btAddInputFile";
-            this.btAddInputFile.Size = new System.Drawing.Size(96, 35);
-            this.btAddInputFile.TabIndex = 52;
-            this.btAddInputFile.Text = "Add";
-            this.btAddInputFile.UseVisualStyleBackColor = true;
-            this.btAddInputFile.Click += new System.EventHandler(this.btAddInputFile_Click);
+            btAddInputFile.Location = new System.Drawing.Point(560, 52);
+            btAddInputFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAddInputFile.Name = "btAddInputFile";
+            btAddInputFile.Size = new System.Drawing.Size(107, 44);
+            btAddInputFile.TabIndex = 52;
+            btAddInputFile.Text = "Add";
+            btAddInputFile.UseVisualStyleBackColor = true;
+            btAddInputFile.Click += btAddInputFile_Click;
             // 
             // lbFiles
             // 
-            this.lbFiles.FormattingEnabled = true;
-            this.lbFiles.ItemHeight = 20;
-            this.lbFiles.Location = new System.Drawing.Point(14, 42);
-            this.lbFiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbFiles.Name = "lbFiles";
-            this.lbFiles.Size = new System.Drawing.Size(480, 84);
-            this.lbFiles.TabIndex = 51;
+            lbFiles.FormattingEnabled = true;
+            lbFiles.ItemHeight = 25;
+            lbFiles.Location = new System.Drawing.Point(16, 52);
+            lbFiles.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbFiles.Name = "lbFiles";
+            lbFiles.Size = new System.Drawing.Size(533, 104);
+            lbFiles.TabIndex = 51;
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 9);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(78, 20);
-            this.label10.TabIndex = 50;
-            this.label10.Text = "Input files";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(10, 11);
+            label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(90, 25);
+            label10.TabIndex = 50;
+            label10.Text = "Input files";
             // 
             // tabPage53
             // 
-            this.tabPage53.Controls.Add(this.label134);
-            this.tabPage53.Controls.Add(this.btSelectOutputCut);
-            this.tabPage53.Controls.Add(this.edOutputFileCut);
-            this.tabPage53.Controls.Add(this.label131);
-            this.tabPage53.Controls.Add(this.btStopCut);
-            this.tabPage53.Controls.Add(this.btStartCut);
-            this.tabPage53.Controls.Add(this.label31);
-            this.tabPage53.Controls.Add(this.btAddInputFile2);
-            this.tabPage53.Controls.Add(this.edSourceFileToCut);
-            this.tabPage53.Controls.Add(this.label30);
-            this.tabPage53.Controls.Add(this.label26);
-            this.tabPage53.Controls.Add(this.edStopTimeCut);
-            this.tabPage53.Controls.Add(this.label27);
-            this.tabPage53.Controls.Add(this.label28);
-            this.tabPage53.Controls.Add(this.edStartTimeCut);
-            this.tabPage53.Controls.Add(this.label29);
-            this.tabPage53.Location = new System.Drawing.Point(4, 29);
-            this.tabPage53.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage53.Name = "tabPage53";
-            this.tabPage53.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage53.Size = new System.Drawing.Size(648, 435);
-            this.tabPage53.TabIndex = 1;
-            this.tabPage53.Text = "Cut file (w/o reencoding)";
-            this.tabPage53.UseVisualStyleBackColor = true;
+            tabPage53.Controls.Add(label134);
+            tabPage53.Controls.Add(btSelectOutputCut);
+            tabPage53.Controls.Add(edOutputFileCut);
+            tabPage53.Controls.Add(label131);
+            tabPage53.Controls.Add(btStopCut);
+            tabPage53.Controls.Add(btStartCut);
+            tabPage53.Controls.Add(label31);
+            tabPage53.Controls.Add(btAddInputFile2);
+            tabPage53.Controls.Add(edSourceFileToCut);
+            tabPage53.Controls.Add(label30);
+            tabPage53.Controls.Add(label26);
+            tabPage53.Controls.Add(edStopTimeCut);
+            tabPage53.Controls.Add(label27);
+            tabPage53.Controls.Add(label28);
+            tabPage53.Controls.Add(edStartTimeCut);
+            tabPage53.Controls.Add(label29);
+            tabPage53.Location = new System.Drawing.Point(4, 34);
+            tabPage53.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage53.Name = "tabPage53";
+            tabPage53.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage53.Size = new System.Drawing.Size(721, 547);
+            tabPage53.TabIndex = 1;
+            tabPage53.Text = "Cut file (w/o reencoding)";
+            tabPage53.UseVisualStyleBackColor = true;
             // 
             // label134
             // 
-            this.label134.AutoSize = true;
-            this.label134.Location = new System.Drawing.Point(27, 323);
-            this.label134.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label134.Name = "label134";
-            this.label134.Size = new System.Drawing.Size(333, 20);
-            this.label134.TabIndex = 57;
-            this.label134.Text = "Better to specify start time based on keyframe";
+            label134.AutoSize = true;
+            label134.Location = new System.Drawing.Point(30, 404);
+            label134.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label134.Name = "label134";
+            label134.Size = new System.Drawing.Size(377, 25);
+            label134.TabIndex = 57;
+            label134.Text = "Better to specify start time based on keyframe";
             // 
             // btSelectOutputCut
             // 
-            this.btSelectOutputCut.Location = new System.Drawing.Point(554, 165);
-            this.btSelectOutputCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSelectOutputCut.Name = "btSelectOutputCut";
-            this.btSelectOutputCut.Size = new System.Drawing.Size(36, 35);
-            this.btSelectOutputCut.TabIndex = 56;
-            this.btSelectOutputCut.Text = "...";
-            this.btSelectOutputCut.UseVisualStyleBackColor = true;
-            this.btSelectOutputCut.Click += new System.EventHandler(this.btSelectOutputCut_Click);
+            btSelectOutputCut.Location = new System.Drawing.Point(616, 206);
+            btSelectOutputCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectOutputCut.Name = "btSelectOutputCut";
+            btSelectOutputCut.Size = new System.Drawing.Size(40, 44);
+            btSelectOutputCut.TabIndex = 56;
+            btSelectOutputCut.Text = "...";
+            btSelectOutputCut.UseVisualStyleBackColor = true;
+            btSelectOutputCut.Click += btSelectOutputCut_Click;
             // 
             // edOutputFileCut
             // 
-            this.edOutputFileCut.Location = new System.Drawing.Point(126, 168);
-            this.edOutputFileCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edOutputFileCut.Name = "edOutputFileCut";
-            this.edOutputFileCut.Size = new System.Drawing.Size(416, 26);
-            this.edOutputFileCut.TabIndex = 55;
-            this.edOutputFileCut.Text = "c:\\vf\\video_edit_output.avi";
+            edOutputFileCut.Location = new System.Drawing.Point(140, 210);
+            edOutputFileCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOutputFileCut.Name = "edOutputFileCut";
+            edOutputFileCut.Size = new System.Drawing.Size(462, 31);
+            edOutputFileCut.TabIndex = 55;
+            edOutputFileCut.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label131
             // 
-            this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(27, 172);
-            this.label131.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label131.Name = "label131";
-            this.label131.Size = new System.Drawing.Size(82, 20);
-            this.label131.TabIndex = 54;
-            this.label131.Text = "Output file";
+            label131.AutoSize = true;
+            label131.Location = new System.Drawing.Point(30, 215);
+            label131.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label131.Name = "label131";
+            label131.Size = new System.Drawing.Size(97, 25);
+            label131.TabIndex = 54;
+            label131.Text = "Output file";
             // 
             // btStopCut
             // 
-            this.btStopCut.Location = new System.Drawing.Point(150, 257);
-            this.btStopCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStopCut.Name = "btStopCut";
-            this.btStopCut.Size = new System.Drawing.Size(112, 35);
-            this.btStopCut.TabIndex = 53;
-            this.btStopCut.Text = "Stop";
-            this.btStopCut.UseVisualStyleBackColor = true;
-            this.btStopCut.Click += new System.EventHandler(this.btStopCut_Click);
+            btStopCut.Location = new System.Drawing.Point(167, 321);
+            btStopCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStopCut.Name = "btStopCut";
+            btStopCut.Size = new System.Drawing.Size(124, 44);
+            btStopCut.TabIndex = 53;
+            btStopCut.Text = "Stop";
+            btStopCut.UseVisualStyleBackColor = true;
+            btStopCut.Click += btStopCut_Click;
             // 
             // btStartCut
             // 
-            this.btStartCut.Location = new System.Drawing.Point(28, 257);
-            this.btStartCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStartCut.Name = "btStartCut";
-            this.btStartCut.Size = new System.Drawing.Size(112, 35);
-            this.btStartCut.TabIndex = 52;
-            this.btStartCut.Text = "Start";
-            this.btStartCut.UseVisualStyleBackColor = true;
-            this.btStartCut.Click += new System.EventHandler(this.btStartCut_Click);
+            btStartCut.Location = new System.Drawing.Point(31, 321);
+            btStartCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStartCut.Name = "btStartCut";
+            btStartCut.Size = new System.Drawing.Size(124, 44);
+            btStartCut.TabIndex = 52;
+            btStartCut.Text = "Start";
+            btStartCut.UseVisualStyleBackColor = true;
+            btStartCut.Click += btStartCut_Click;
             // 
             // label31
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(122, 117);
-            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(273, 20);
-            this.label31.TabIndex = 51;
-            this.label31.Text = "Specify time before adding source file";
+            label31.AutoSize = true;
+            label31.Location = new System.Drawing.Point(136, 146);
+            label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label31.Name = "label31";
+            label31.Size = new System.Drawing.Size(312, 25);
+            label31.TabIndex = 51;
+            label31.Text = "Specify time before adding source file";
             // 
             // btAddInputFile2
             // 
-            this.btAddInputFile2.Location = new System.Drawing.Point(554, 17);
-            this.btAddInputFile2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAddInputFile2.Name = "btAddInputFile2";
-            this.btAddInputFile2.Size = new System.Drawing.Size(36, 35);
-            this.btAddInputFile2.TabIndex = 50;
-            this.btAddInputFile2.Text = "...";
-            this.btAddInputFile2.UseVisualStyleBackColor = true;
-            this.btAddInputFile2.Click += new System.EventHandler(this.btAddInputFile2_Click);
+            btAddInputFile2.Location = new System.Drawing.Point(616, 21);
+            btAddInputFile2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAddInputFile2.Name = "btAddInputFile2";
+            btAddInputFile2.Size = new System.Drawing.Size(40, 44);
+            btAddInputFile2.TabIndex = 50;
+            btAddInputFile2.Text = "...";
+            btAddInputFile2.UseVisualStyleBackColor = true;
+            btAddInputFile2.Click += btAddInputFile2_Click;
             // 
             // edSourceFileToCut
             // 
-            this.edSourceFileToCut.Location = new System.Drawing.Point(126, 20);
-            this.edSourceFileToCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edSourceFileToCut.Name = "edSourceFileToCut";
-            this.edSourceFileToCut.Size = new System.Drawing.Size(416, 26);
-            this.edSourceFileToCut.TabIndex = 49;
+            edSourceFileToCut.Location = new System.Drawing.Point(140, 25);
+            edSourceFileToCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edSourceFileToCut.Name = "edSourceFileToCut";
+            edSourceFileToCut.Size = new System.Drawing.Size(462, 31);
+            edSourceFileToCut.TabIndex = 49;
             // 
             // label30
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(27, 25);
-            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(84, 20);
-            this.label30.TabIndex = 48;
-            this.label30.Text = "Source file";
+            label30.AutoSize = true;
+            label30.Location = new System.Drawing.Point(30, 31);
+            label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label30.Name = "label30";
+            label30.Size = new System.Drawing.Size(94, 25);
+            label30.TabIndex = 48;
+            label30.Text = "Source file";
             // 
             // label26
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(438, 75);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(30, 20);
-            this.label26.TabIndex = 47;
-            this.label26.Text = "ms";
+            label26.AutoSize = true;
+            label26.Location = new System.Drawing.Point(487, 94);
+            label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label26.Name = "label26";
+            label26.Size = new System.Drawing.Size(36, 25);
+            label26.TabIndex = 47;
+            label26.Text = "ms";
             // 
             // edStopTimeCut
             // 
-            this.edStopTimeCut.Location = new System.Drawing.Point(360, 72);
-            this.edStopTimeCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edStopTimeCut.Name = "edStopTimeCut";
-            this.edStopTimeCut.Size = new System.Drawing.Size(67, 26);
-            this.edStopTimeCut.TabIndex = 46;
-            this.edStopTimeCut.Text = "5000";
+            edStopTimeCut.Location = new System.Drawing.Point(400, 90);
+            edStopTimeCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edStopTimeCut.Name = "edStopTimeCut";
+            edStopTimeCut.Size = new System.Drawing.Size(74, 31);
+            edStopTimeCut.TabIndex = 46;
+            edStopTimeCut.Text = "5000";
             // 
             // label27
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(274, 77);
-            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(77, 20);
-            this.label27.TabIndex = 45;
-            this.label27.Text = "Stop time";
+            label27.AutoSize = true;
+            label27.Location = new System.Drawing.Point(304, 96);
+            label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label27.Name = "label27";
+            label27.Size = new System.Drawing.Size(89, 25);
+            label27.TabIndex = 45;
+            label27.Text = "Stop time";
             // 
             // label28
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(204, 77);
-            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(30, 20);
-            this.label28.TabIndex = 44;
-            this.label28.Text = "ms";
+            label28.AutoSize = true;
+            label28.Location = new System.Drawing.Point(227, 96);
+            label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label28.Name = "label28";
+            label28.Size = new System.Drawing.Size(36, 25);
+            label28.TabIndex = 44;
+            label28.Text = "ms";
             // 
             // edStartTimeCut
             // 
-            this.edStartTimeCut.Location = new System.Drawing.Point(126, 72);
-            this.edStartTimeCut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edStartTimeCut.Name = "edStartTimeCut";
-            this.edStartTimeCut.Size = new System.Drawing.Size(67, 26);
-            this.edStartTimeCut.TabIndex = 43;
-            this.edStartTimeCut.Text = "0";
+            edStartTimeCut.Location = new System.Drawing.Point(140, 90);
+            edStartTimeCut.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edStartTimeCut.Name = "edStartTimeCut";
+            edStartTimeCut.Size = new System.Drawing.Size(74, 31);
+            edStartTimeCut.TabIndex = 43;
+            edStartTimeCut.Text = "0";
             // 
             // label29
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(27, 77);
-            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(78, 20);
-            this.label29.TabIndex = 42;
-            this.label29.Text = "Start time";
+            label29.AutoSize = true;
+            label29.Location = new System.Drawing.Point(30, 96);
+            label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label29.Name = "label29";
+            label29.Size = new System.Drawing.Size(88, 25);
+            label29.TabIndex = 42;
+            label29.Text = "Start time";
             // 
             // tabPage54
             // 
-            this.tabPage54.Controls.Add(this.label1);
-            this.tabPage54.Controls.Add(this.btSelectOutputJoin);
-            this.tabPage54.Controls.Add(this.edOutputFileJoin);
-            this.tabPage54.Controls.Add(this.label132);
-            this.tabPage54.Controls.Add(this.btStopJoin);
-            this.tabPage54.Controls.Add(this.btStartJoin);
-            this.tabPage54.Controls.Add(this.btClearList3);
-            this.tabPage54.Controls.Add(this.btAddInputFile3);
-            this.tabPage54.Controls.Add(this.lbFiles2);
-            this.tabPage54.Controls.Add(this.label32);
-            this.tabPage54.Location = new System.Drawing.Point(4, 29);
-            this.tabPage54.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage54.Name = "tabPage54";
-            this.tabPage54.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage54.Size = new System.Drawing.Size(648, 435);
-            this.tabPage54.TabIndex = 2;
-            this.tabPage54.Text = "Join files (w/o reencoding)";
-            this.tabPage54.UseVisualStyleBackColor = true;
+            tabPage54.Controls.Add(label1);
+            tabPage54.Controls.Add(btSelectOutputJoin);
+            tabPage54.Controls.Add(edOutputFileJoin);
+            tabPage54.Controls.Add(label132);
+            tabPage54.Controls.Add(btStopJoin);
+            tabPage54.Controls.Add(btStartJoin);
+            tabPage54.Controls.Add(btClearList3);
+            tabPage54.Controls.Add(btAddInputFile3);
+            tabPage54.Controls.Add(lbFiles2);
+            tabPage54.Controls.Add(label32);
+            tabPage54.Location = new System.Drawing.Point(4, 34);
+            tabPage54.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage54.Name = "tabPage54";
+            tabPage54.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage54.Size = new System.Drawing.Size(721, 547);
+            tabPage54.TabIndex = 2;
+            tabPage54.Text = "Join files (w/o reencoding)";
+            tabPage54.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 309);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(496, 20);
-            this.label1.TabIndex = 63;
-            this.label1.Text = "Source files should have identical video and audio stream parameters";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(30, 386);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(560, 25);
+            label1.TabIndex = 63;
+            label1.Text = "Source files should have identical video and audio stream parameters";
             // 
             // btSelectOutputJoin
             // 
-            this.btSelectOutputJoin.Location = new System.Drawing.Point(552, 162);
-            this.btSelectOutputJoin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btSelectOutputJoin.Name = "btSelectOutputJoin";
-            this.btSelectOutputJoin.Size = new System.Drawing.Size(36, 35);
-            this.btSelectOutputJoin.TabIndex = 62;
-            this.btSelectOutputJoin.Text = "...";
-            this.btSelectOutputJoin.UseVisualStyleBackColor = true;
-            this.btSelectOutputJoin.Click += new System.EventHandler(this.btSelectOutputJoin_Click);
+            btSelectOutputJoin.Location = new System.Drawing.Point(613, 202);
+            btSelectOutputJoin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btSelectOutputJoin.Name = "btSelectOutputJoin";
+            btSelectOutputJoin.Size = new System.Drawing.Size(40, 44);
+            btSelectOutputJoin.TabIndex = 62;
+            btSelectOutputJoin.Text = "...";
+            btSelectOutputJoin.UseVisualStyleBackColor = true;
+            btSelectOutputJoin.Click += btSelectOutputJoin_Click;
             // 
             // edOutputFileJoin
             // 
-            this.edOutputFileJoin.Location = new System.Drawing.Point(135, 165);
-            this.edOutputFileJoin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edOutputFileJoin.Name = "edOutputFileJoin";
-            this.edOutputFileJoin.Size = new System.Drawing.Size(406, 26);
-            this.edOutputFileJoin.TabIndex = 61;
-            this.edOutputFileJoin.Text = "c:\\vf\\video_edit_output.avi";
+            edOutputFileJoin.Location = new System.Drawing.Point(150, 206);
+            edOutputFileJoin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edOutputFileJoin.Name = "edOutputFileJoin";
+            edOutputFileJoin.Size = new System.Drawing.Size(451, 31);
+            edOutputFileJoin.TabIndex = 61;
+            edOutputFileJoin.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label132
             // 
-            this.label132.AutoSize = true;
-            this.label132.Location = new System.Drawing.Point(27, 169);
-            this.label132.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label132.Name = "label132";
-            this.label132.Size = new System.Drawing.Size(82, 20);
-            this.label132.TabIndex = 60;
-            this.label132.Text = "Output file";
+            label132.AutoSize = true;
+            label132.Location = new System.Drawing.Point(30, 211);
+            label132.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label132.Name = "label132";
+            label132.Size = new System.Drawing.Size(97, 25);
+            label132.TabIndex = 60;
+            label132.Text = "Output file";
             // 
             // btStopJoin
             // 
-            this.btStopJoin.Location = new System.Drawing.Point(153, 235);
-            this.btStopJoin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStopJoin.Name = "btStopJoin";
-            this.btStopJoin.Size = new System.Drawing.Size(112, 35);
-            this.btStopJoin.TabIndex = 59;
-            this.btStopJoin.Text = "Stop";
-            this.btStopJoin.UseVisualStyleBackColor = true;
-            this.btStopJoin.Click += new System.EventHandler(this.btStopJoin_Click);
+            btStopJoin.Location = new System.Drawing.Point(170, 294);
+            btStopJoin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStopJoin.Name = "btStopJoin";
+            btStopJoin.Size = new System.Drawing.Size(124, 44);
+            btStopJoin.TabIndex = 59;
+            btStopJoin.Text = "Stop";
+            btStopJoin.UseVisualStyleBackColor = true;
+            btStopJoin.Click += btStopJoin_Click;
             // 
             // btStartJoin
             // 
-            this.btStartJoin.Location = new System.Drawing.Point(32, 235);
-            this.btStartJoin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStartJoin.Name = "btStartJoin";
-            this.btStartJoin.Size = new System.Drawing.Size(112, 35);
-            this.btStartJoin.TabIndex = 58;
-            this.btStartJoin.Text = "Start";
-            this.btStartJoin.UseVisualStyleBackColor = true;
-            this.btStartJoin.Click += new System.EventHandler(this.btStartJoin_Click);
+            btStartJoin.Location = new System.Drawing.Point(36, 294);
+            btStartJoin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStartJoin.Name = "btStartJoin";
+            btStartJoin.Size = new System.Drawing.Size(124, 44);
+            btStartJoin.TabIndex = 58;
+            btStartJoin.Text = "Start";
+            btStartJoin.UseVisualStyleBackColor = true;
+            btStartJoin.Click += btStartJoin_Click;
             // 
             // btClearList3
             // 
-            this.btClearList3.Location = new System.Drawing.Point(492, 94);
-            this.btClearList3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btClearList3.Name = "btClearList3";
-            this.btClearList3.Size = new System.Drawing.Size(96, 35);
-            this.btClearList3.TabIndex = 57;
-            this.btClearList3.Text = "Clear";
-            this.btClearList3.UseVisualStyleBackColor = true;
-            this.btClearList3.Click += new System.EventHandler(this.btClearList3_Click);
+            btClearList3.Location = new System.Drawing.Point(547, 118);
+            btClearList3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btClearList3.Name = "btClearList3";
+            btClearList3.Size = new System.Drawing.Size(107, 44);
+            btClearList3.TabIndex = 57;
+            btClearList3.Text = "Clear";
+            btClearList3.UseVisualStyleBackColor = true;
+            btClearList3.Click += btClearList3_Click;
             // 
             // btAddInputFile3
             // 
-            this.btAddInputFile3.Location = new System.Drawing.Point(492, 49);
-            this.btAddInputFile3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btAddInputFile3.Name = "btAddInputFile3";
-            this.btAddInputFile3.Size = new System.Drawing.Size(96, 35);
-            this.btAddInputFile3.TabIndex = 56;
-            this.btAddInputFile3.Text = "Add";
-            this.btAddInputFile3.UseVisualStyleBackColor = true;
-            this.btAddInputFile3.Click += new System.EventHandler(this.btAddInputFile3_Click);
+            btAddInputFile3.Location = new System.Drawing.Point(547, 61);
+            btAddInputFile3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btAddInputFile3.Name = "btAddInputFile3";
+            btAddInputFile3.Size = new System.Drawing.Size(107, 44);
+            btAddInputFile3.TabIndex = 56;
+            btAddInputFile3.Text = "Add";
+            btAddInputFile3.UseVisualStyleBackColor = true;
+            btAddInputFile3.Click += btAddInputFile3_Click;
             // 
             // lbFiles2
             // 
-            this.lbFiles2.FormattingEnabled = true;
-            this.lbFiles2.ItemHeight = 20;
-            this.lbFiles2.Location = new System.Drawing.Point(32, 49);
-            this.lbFiles2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbFiles2.Name = "lbFiles2";
-            this.lbFiles2.Size = new System.Drawing.Size(450, 84);
-            this.lbFiles2.TabIndex = 55;
+            lbFiles2.FormattingEnabled = true;
+            lbFiles2.ItemHeight = 25;
+            lbFiles2.Location = new System.Drawing.Point(36, 61);
+            lbFiles2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbFiles2.Name = "lbFiles2";
+            lbFiles2.Size = new System.Drawing.Size(500, 104);
+            lbFiles2.TabIndex = 55;
             // 
             // label32
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(27, 25);
-            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(78, 20);
-            this.label32.TabIndex = 54;
-            this.label32.Text = "Input files";
+            label32.AutoSize = true;
+            label32.Location = new System.Drawing.Point(30, 31);
+            label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label32.Name = "label32";
+            label32.Size = new System.Drawing.Size(90, 25);
+            label32.TabIndex = 54;
+            label32.Text = "Input files";
             // 
             // tabPage74
             // 
-            this.tabPage74.Controls.Add(this.label168);
-            this.tabPage74.Controls.Add(this.cbMuxStreamsShortest);
-            this.tabPage74.Controls.Add(this.cbMuxStreamsType);
-            this.tabPage74.Controls.Add(this.btMuxStreamsSelectFile);
-            this.tabPage74.Controls.Add(this.edMuxStreamsSourceFile);
-            this.tabPage74.Controls.Add(this.label167);
-            this.tabPage74.Controls.Add(this.btMuxStreamsSelectOutput);
-            this.tabPage74.Controls.Add(this.edMuxStreamsOutputFile);
-            this.tabPage74.Controls.Add(this.label165);
-            this.tabPage74.Controls.Add(this.btStopMux);
-            this.tabPage74.Controls.Add(this.btStartMux);
-            this.tabPage74.Controls.Add(this.btMuxStreamsClear);
-            this.tabPage74.Controls.Add(this.btMuxStreamsAdd);
-            this.tabPage74.Controls.Add(this.lbMuxStreamsList);
-            this.tabPage74.Controls.Add(this.label166);
-            this.tabPage74.Location = new System.Drawing.Point(4, 29);
-            this.tabPage74.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage74.Name = "tabPage74";
-            this.tabPage74.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage74.Size = new System.Drawing.Size(648, 435);
-            this.tabPage74.TabIndex = 3;
-            this.tabPage74.Text = "Mux streams (w/o reencoding)";
-            this.tabPage74.UseVisualStyleBackColor = true;
+            tabPage74.Controls.Add(label168);
+            tabPage74.Controls.Add(cbMuxStreamsShortest);
+            tabPage74.Controls.Add(cbMuxStreamsType);
+            tabPage74.Controls.Add(btMuxStreamsSelectFile);
+            tabPage74.Controls.Add(edMuxStreamsSourceFile);
+            tabPage74.Controls.Add(label167);
+            tabPage74.Controls.Add(btMuxStreamsSelectOutput);
+            tabPage74.Controls.Add(edMuxStreamsOutputFile);
+            tabPage74.Controls.Add(label165);
+            tabPage74.Controls.Add(btStopMux);
+            tabPage74.Controls.Add(btStartMux);
+            tabPage74.Controls.Add(btMuxStreamsClear);
+            tabPage74.Controls.Add(btMuxStreamsAdd);
+            tabPage74.Controls.Add(lbMuxStreamsList);
+            tabPage74.Controls.Add(label166);
+            tabPage74.Location = new System.Drawing.Point(4, 34);
+            tabPage74.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage74.Name = "tabPage74";
+            tabPage74.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tabPage74.Size = new System.Drawing.Size(721, 547);
+            tabPage74.TabIndex = 3;
+            tabPage74.Text = "Mux streams (w/o reencoding)";
+            tabPage74.UseVisualStyleBackColor = true;
             // 
             // label168
             // 
-            this.label168.AutoSize = true;
-            this.label168.Location = new System.Drawing.Point(411, 18);
-            this.label168.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label168.Name = "label168";
-            this.label168.Size = new System.Drawing.Size(102, 20);
-            this.label168.TabIndex = 77;
-            this.label168.Text = "Type or index";
+            label168.AutoSize = true;
+            label168.Location = new System.Drawing.Point(457, 22);
+            label168.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label168.Name = "label168";
+            label168.Size = new System.Drawing.Size(118, 25);
+            label168.TabIndex = 77;
+            label168.Text = "Type or index";
             // 
             // cbMuxStreamsShortest
             // 
-            this.cbMuxStreamsShortest.AutoSize = true;
-            this.cbMuxStreamsShortest.Location = new System.Drawing.Point(32, 215);
-            this.cbMuxStreamsShortest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMuxStreamsShortest.Name = "cbMuxStreamsShortest";
-            this.cbMuxStreamsShortest.Size = new System.Drawing.Size(279, 24);
-            this.cbMuxStreamsShortest.TabIndex = 76;
-            this.cbMuxStreamsShortest.Text = "Set file duration to shortest stream";
-            this.cbMuxStreamsShortest.UseVisualStyleBackColor = true;
+            cbMuxStreamsShortest.AutoSize = true;
+            cbMuxStreamsShortest.Location = new System.Drawing.Point(36, 269);
+            cbMuxStreamsShortest.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMuxStreamsShortest.Name = "cbMuxStreamsShortest";
+            cbMuxStreamsShortest.Size = new System.Drawing.Size(313, 29);
+            cbMuxStreamsShortest.TabIndex = 76;
+            cbMuxStreamsShortest.Text = "Set file duration to shortest stream";
+            cbMuxStreamsShortest.UseVisualStyleBackColor = true;
             // 
             // cbMuxStreamsType
             // 
-            this.cbMuxStreamsType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMuxStreamsType.FormattingEnabled = true;
-            this.cbMuxStreamsType.Items.AddRange(new object[] {
-            "Video",
-            "Audio",
-            "Subtitle",
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"});
-            this.cbMuxStreamsType.Location = new System.Drawing.Point(416, 42);
-            this.cbMuxStreamsType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMuxStreamsType.Name = "cbMuxStreamsType";
-            this.cbMuxStreamsType.Size = new System.Drawing.Size(112, 28);
-            this.cbMuxStreamsType.TabIndex = 75;
+            cbMuxStreamsType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbMuxStreamsType.FormattingEnabled = true;
+            cbMuxStreamsType.Items.AddRange(new object[] { "Video", "Audio", "Subtitle", "0", "1", "2", "3", "4", "5", "6", "7" });
+            cbMuxStreamsType.Location = new System.Drawing.Point(462, 52);
+            cbMuxStreamsType.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMuxStreamsType.Name = "cbMuxStreamsType";
+            cbMuxStreamsType.Size = new System.Drawing.Size(124, 33);
+            cbMuxStreamsType.TabIndex = 75;
             // 
             // btMuxStreamsSelectFile
             // 
-            this.btMuxStreamsSelectFile.Location = new System.Drawing.Point(372, 40);
-            this.btMuxStreamsSelectFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btMuxStreamsSelectFile.Name = "btMuxStreamsSelectFile";
-            this.btMuxStreamsSelectFile.Size = new System.Drawing.Size(34, 35);
-            this.btMuxStreamsSelectFile.TabIndex = 74;
-            this.btMuxStreamsSelectFile.Text = "...";
-            this.btMuxStreamsSelectFile.UseVisualStyleBackColor = true;
-            this.btMuxStreamsSelectFile.Click += new System.EventHandler(this.btMuxStreamsSelectFile_Click);
+            btMuxStreamsSelectFile.Location = new System.Drawing.Point(413, 50);
+            btMuxStreamsSelectFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMuxStreamsSelectFile.Name = "btMuxStreamsSelectFile";
+            btMuxStreamsSelectFile.Size = new System.Drawing.Size(38, 44);
+            btMuxStreamsSelectFile.TabIndex = 74;
+            btMuxStreamsSelectFile.Text = "...";
+            btMuxStreamsSelectFile.UseVisualStyleBackColor = true;
+            btMuxStreamsSelectFile.Click += btMuxStreamsSelectFile_Click;
             // 
             // edMuxStreamsSourceFile
             // 
-            this.edMuxStreamsSourceFile.Location = new System.Drawing.Point(32, 43);
-            this.edMuxStreamsSourceFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMuxStreamsSourceFile.Name = "edMuxStreamsSourceFile";
-            this.edMuxStreamsSourceFile.Size = new System.Drawing.Size(330, 26);
-            this.edMuxStreamsSourceFile.TabIndex = 73;
+            edMuxStreamsSourceFile.Location = new System.Drawing.Point(36, 54);
+            edMuxStreamsSourceFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMuxStreamsSourceFile.Name = "edMuxStreamsSourceFile";
+            edMuxStreamsSourceFile.Size = new System.Drawing.Size(366, 31);
+            edMuxStreamsSourceFile.TabIndex = 73;
             // 
             // label167
             // 
-            this.label167.AutoSize = true;
-            this.label167.Location = new System.Drawing.Point(27, 18);
-            this.label167.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label167.Name = "label167";
-            this.label167.Size = new System.Drawing.Size(84, 20);
-            this.label167.TabIndex = 72;
-            this.label167.Text = "Source file";
+            label167.AutoSize = true;
+            label167.Location = new System.Drawing.Point(30, 22);
+            label167.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label167.Name = "label167";
+            label167.Size = new System.Drawing.Size(94, 25);
+            label167.TabIndex = 72;
+            label167.Text = "Source file";
             // 
             // btMuxStreamsSelectOutput
             // 
-            this.btMuxStreamsSelectOutput.Location = new System.Drawing.Point(580, 277);
-            this.btMuxStreamsSelectOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btMuxStreamsSelectOutput.Name = "btMuxStreamsSelectOutput";
-            this.btMuxStreamsSelectOutput.Size = new System.Drawing.Size(36, 35);
-            this.btMuxStreamsSelectOutput.TabIndex = 71;
-            this.btMuxStreamsSelectOutput.Text = "...";
-            this.btMuxStreamsSelectOutput.UseVisualStyleBackColor = true;
-            this.btMuxStreamsSelectOutput.Click += new System.EventHandler(this.btMuxStreamsSelectOutput_Click);
+            btMuxStreamsSelectOutput.Location = new System.Drawing.Point(644, 346);
+            btMuxStreamsSelectOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMuxStreamsSelectOutput.Name = "btMuxStreamsSelectOutput";
+            btMuxStreamsSelectOutput.Size = new System.Drawing.Size(40, 44);
+            btMuxStreamsSelectOutput.TabIndex = 71;
+            btMuxStreamsSelectOutput.Text = "...";
+            btMuxStreamsSelectOutput.UseVisualStyleBackColor = true;
+            btMuxStreamsSelectOutput.Click += btMuxStreamsSelectOutput_Click;
             // 
             // edMuxStreamsOutputFile
             // 
-            this.edMuxStreamsOutputFile.Location = new System.Drawing.Point(135, 280);
-            this.edMuxStreamsOutputFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edMuxStreamsOutputFile.Name = "edMuxStreamsOutputFile";
-            this.edMuxStreamsOutputFile.Size = new System.Drawing.Size(434, 26);
-            this.edMuxStreamsOutputFile.TabIndex = 70;
-            this.edMuxStreamsOutputFile.Text = "c:\\vf\\video_edit_output.avi";
+            edMuxStreamsOutputFile.Location = new System.Drawing.Point(150, 350);
+            edMuxStreamsOutputFile.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edMuxStreamsOutputFile.Name = "edMuxStreamsOutputFile";
+            edMuxStreamsOutputFile.Size = new System.Drawing.Size(482, 31);
+            edMuxStreamsOutputFile.TabIndex = 70;
+            edMuxStreamsOutputFile.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label165
             // 
-            this.label165.AutoSize = true;
-            this.label165.Location = new System.Drawing.Point(27, 285);
-            this.label165.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label165.Name = "label165";
-            this.label165.Size = new System.Drawing.Size(82, 20);
-            this.label165.TabIndex = 69;
-            this.label165.Text = "Output file";
+            label165.AutoSize = true;
+            label165.Location = new System.Drawing.Point(30, 356);
+            label165.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label165.Name = "label165";
+            label165.Size = new System.Drawing.Size(97, 25);
+            label165.TabIndex = 69;
+            label165.Text = "Output file";
             // 
             // btStopMux
             // 
-            this.btStopMux.Location = new System.Drawing.Point(153, 351);
-            this.btStopMux.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStopMux.Name = "btStopMux";
-            this.btStopMux.Size = new System.Drawing.Size(112, 35);
-            this.btStopMux.TabIndex = 68;
-            this.btStopMux.Text = "Stop";
-            this.btStopMux.UseVisualStyleBackColor = true;
-            this.btStopMux.Click += new System.EventHandler(this.btStopMux_Click);
+            btStopMux.Location = new System.Drawing.Point(170, 439);
+            btStopMux.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStopMux.Name = "btStopMux";
+            btStopMux.Size = new System.Drawing.Size(124, 44);
+            btStopMux.TabIndex = 68;
+            btStopMux.Text = "Stop";
+            btStopMux.UseVisualStyleBackColor = true;
+            btStopMux.Click += btStopMux_Click;
             // 
             // btStartMux
             // 
-            this.btStartMux.Location = new System.Drawing.Point(32, 351);
-            this.btStartMux.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStartMux.Name = "btStartMux";
-            this.btStartMux.Size = new System.Drawing.Size(112, 35);
-            this.btStartMux.TabIndex = 67;
-            this.btStartMux.Text = "Start";
-            this.btStartMux.UseVisualStyleBackColor = true;
-            this.btStartMux.Click += new System.EventHandler(this.btStartMux_Click);
+            btStartMux.Location = new System.Drawing.Point(36, 439);
+            btStartMux.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStartMux.Name = "btStartMux";
+            btStartMux.Size = new System.Drawing.Size(124, 44);
+            btStartMux.TabIndex = 67;
+            btStartMux.Text = "Start";
+            btStartMux.UseVisualStyleBackColor = true;
+            btStartMux.Click += btStartMux_Click;
             // 
             // btMuxStreamsClear
             // 
-            this.btMuxStreamsClear.Location = new System.Drawing.Point(520, 215);
-            this.btMuxStreamsClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btMuxStreamsClear.Name = "btMuxStreamsClear";
-            this.btMuxStreamsClear.Size = new System.Drawing.Size(96, 35);
-            this.btMuxStreamsClear.TabIndex = 66;
-            this.btMuxStreamsClear.Text = "Clear";
-            this.btMuxStreamsClear.UseVisualStyleBackColor = true;
-            this.btMuxStreamsClear.Click += new System.EventHandler(this.btMuxStreamsClear_Click);
+            btMuxStreamsClear.Location = new System.Drawing.Point(578, 269);
+            btMuxStreamsClear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMuxStreamsClear.Name = "btMuxStreamsClear";
+            btMuxStreamsClear.Size = new System.Drawing.Size(107, 44);
+            btMuxStreamsClear.TabIndex = 66;
+            btMuxStreamsClear.Text = "Clear";
+            btMuxStreamsClear.UseVisualStyleBackColor = true;
+            btMuxStreamsClear.Click += btMuxStreamsClear_Click;
             // 
             // btMuxStreamsAdd
             // 
-            this.btMuxStreamsAdd.Location = new System.Drawing.Point(538, 40);
-            this.btMuxStreamsAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btMuxStreamsAdd.Name = "btMuxStreamsAdd";
-            this.btMuxStreamsAdd.Size = new System.Drawing.Size(78, 35);
-            this.btMuxStreamsAdd.TabIndex = 65;
-            this.btMuxStreamsAdd.Text = "Add";
-            this.btMuxStreamsAdd.UseVisualStyleBackColor = true;
-            this.btMuxStreamsAdd.Click += new System.EventHandler(this.btMuxStreamsAdd_Click);
+            btMuxStreamsAdd.Location = new System.Drawing.Point(598, 50);
+            btMuxStreamsAdd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btMuxStreamsAdd.Name = "btMuxStreamsAdd";
+            btMuxStreamsAdd.Size = new System.Drawing.Size(87, 44);
+            btMuxStreamsAdd.TabIndex = 65;
+            btMuxStreamsAdd.Text = "Add";
+            btMuxStreamsAdd.UseVisualStyleBackColor = true;
+            btMuxStreamsAdd.Click += btMuxStreamsAdd_Click;
             // 
             // lbMuxStreamsList
             // 
-            this.lbMuxStreamsList.FormattingEnabled = true;
-            this.lbMuxStreamsList.ItemHeight = 20;
-            this.lbMuxStreamsList.Location = new System.Drawing.Point(32, 117);
-            this.lbMuxStreamsList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lbMuxStreamsList.Name = "lbMuxStreamsList";
-            this.lbMuxStreamsList.Size = new System.Drawing.Size(583, 84);
-            this.lbMuxStreamsList.TabIndex = 64;
+            lbMuxStreamsList.FormattingEnabled = true;
+            lbMuxStreamsList.ItemHeight = 25;
+            lbMuxStreamsList.Location = new System.Drawing.Point(36, 146);
+            lbMuxStreamsList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            lbMuxStreamsList.Name = "lbMuxStreamsList";
+            lbMuxStreamsList.Size = new System.Drawing.Size(647, 104);
+            lbMuxStreamsList.TabIndex = 64;
             // 
             // label166
             // 
-            this.label166.AutoSize = true;
-            this.label166.Location = new System.Drawing.Point(27, 92);
-            this.label166.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label166.Name = "label166";
-            this.label166.Size = new System.Drawing.Size(107, 20);
-            this.label166.TabIndex = 63;
-            this.label166.Text = "Input streams";
+            label166.AutoSize = true;
+            label166.Location = new System.Drawing.Point(30, 115);
+            label166.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label166.Name = "label166";
+            label166.Size = new System.Drawing.Size(121, 25);
+            label166.TabIndex = 63;
+            label166.Text = "Input streams";
             // 
             // cbMode
             // 
-            this.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMode.FormattingEnabled = true;
-            this.cbMode.Items.AddRange(new object[] {
-            "Convert",
-            "Preview"});
-            this.cbMode.Location = new System.Drawing.Point(80, 831);
-            this.cbMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbMode.Name = "cbMode";
-            this.cbMode.Size = new System.Drawing.Size(276, 28);
-            this.cbMode.TabIndex = 81;
+            cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbMode.FormattingEnabled = true;
+            cbMode.Items.AddRange(new object[] { "Convert", "Preview" });
+            cbMode.Location = new System.Drawing.Point(89, 1039);
+            cbMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbMode.Name = "cbMode";
+            cbMode.Size = new System.Drawing.Size(306, 33);
+            cbMode.TabIndex = 81;
             // 
             // label130
             // 
-            this.label130.AutoSize = true;
-            this.label130.Location = new System.Drawing.Point(14, 835);
-            this.label130.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label130.Name = "label130";
-            this.label130.Size = new System.Drawing.Size(49, 20);
-            this.label130.TabIndex = 82;
-            this.label130.Text = "Mode";
+            label130.AutoSize = true;
+            label130.Location = new System.Drawing.Point(16, 1044);
+            label130.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label130.Name = "label130";
+            label130.Size = new System.Drawing.Size(59, 25);
+            label130.TabIndex = 82;
+            label130.Text = "Mode";
             // 
             // openFileDialogSubtitles
             // 
-            this.openFileDialogSubtitles.FileName = "openFileDialog4";
-            this.openFileDialogSubtitles.Filter = "Subtitle files|*.srt;*.ssa;*.ass;*.sub|All files|*.*";
+            openFileDialogSubtitles.FileName = "openFileDialog4";
+            openFileDialogSubtitles.Filter = "Subtitle files|*.srt;*.ssa;*.ass;*.sub|All files|*.*";
             // 
             // cbTelemetry
             // 
-            this.cbTelemetry.AutoSize = true;
-            this.cbTelemetry.Checked = true;
-            this.cbTelemetry.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbTelemetry.Location = new System.Drawing.Point(230, 882);
-            this.cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbTelemetry.Name = "cbTelemetry";
-            this.cbTelemetry.Size = new System.Drawing.Size(104, 24);
-            this.cbTelemetry.TabIndex = 86;
-            this.cbTelemetry.Text = "Telemetry";
-            this.cbTelemetry.UseVisualStyleBackColor = true;
+            cbTelemetry.AutoSize = true;
+            cbTelemetry.Checked = true;
+            cbTelemetry.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbTelemetry.Location = new System.Drawing.Point(256, 1102);
+            cbTelemetry.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbTelemetry.Name = "cbTelemetry";
+            cbTelemetry.Size = new System.Drawing.Size(113, 29);
+            cbTelemetry.TabIndex = 86;
+            cbTelemetry.Text = "Telemetry";
+            cbTelemetry.UseVisualStyleBackColor = true;
             // 
             // cbLicensing
             // 
-            this.cbLicensing.AutoSize = true;
-            this.cbLicensing.Location = new System.Drawing.Point(114, 882);
-            this.cbLicensing.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbLicensing.Name = "cbLicensing";
-            this.cbLicensing.Size = new System.Drawing.Size(102, 24);
-            this.cbLicensing.TabIndex = 85;
-            this.cbLicensing.Text = "Licensing";
-            this.cbLicensing.UseVisualStyleBackColor = true;
+            cbLicensing.AutoSize = true;
+            cbLicensing.Location = new System.Drawing.Point(127, 1102);
+            cbLicensing.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbLicensing.Name = "cbLicensing";
+            cbLicensing.Size = new System.Drawing.Size(110, 29);
+            cbLicensing.TabIndex = 85;
+            cbLicensing.Text = "Licensing";
+            cbLicensing.UseVisualStyleBackColor = true;
             // 
             // cbDebugMode
             // 
-            this.cbDebugMode.AutoSize = true;
-            this.cbDebugMode.Location = new System.Drawing.Point(18, 882);
-            this.cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbDebugMode.Name = "cbDebugMode";
-            this.cbDebugMode.Size = new System.Drawing.Size(83, 24);
-            this.cbDebugMode.TabIndex = 84;
-            this.cbDebugMode.Text = "Debug";
-            this.cbDebugMode.UseVisualStyleBackColor = true;
+            cbDebugMode.AutoSize = true;
+            cbDebugMode.Location = new System.Drawing.Point(20, 1102);
+            cbDebugMode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbDebugMode.Name = "cbDebugMode";
+            cbDebugMode.Size = new System.Drawing.Size(92, 29);
+            cbDebugMode.TabIndex = 84;
+            cbDebugMode.Text = "Debug";
+            cbDebugMode.UseVisualStyleBackColor = true;
             // 
             // mmLog
             // 
-            this.mmLog.Location = new System.Drawing.Point(18, 917);
-            this.mmLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.mmLog.Multiline = true;
-            this.mmLog.Name = "mmLog";
-            this.mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mmLog.Size = new System.Drawing.Size(457, 67);
-            this.mmLog.TabIndex = 83;
+            mmLog.Location = new System.Drawing.Point(20, 1146);
+            mmLog.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            mmLog.Multiline = true;
+            mmLog.Name = "mmLog";
+            mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            mmLog.Size = new System.Drawing.Size(507, 83);
+            mmLog.TabIndex = 83;
             // 
             // VideoView1
             // 
-            this.VideoView1.BackColor = System.Drawing.Color.Black;
-            this.VideoView1.Location = new System.Drawing.Point(496, 495);
-            this.VideoView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.VideoView1.Name = "VideoView1";
-            this.VideoView1.Size = new System.Drawing.Size(648, 445);
-            this.VideoView1.StatusOverlay = null;
-            this.VideoView1.TabIndex = 87;
+            VideoView1.BackColor = System.Drawing.Color.Black;
+            VideoView1.Location = new System.Drawing.Point(551, 619);
+            VideoView1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            VideoView1.Name = "VideoView1";
+            VideoView1.Size = new System.Drawing.Size(720, 556);
+            VideoView1.StatusOverlay = null;
+            VideoView1.TabIndex = 87;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 1005);
-            this.Controls.Add(this.VideoView1);
-            this.Controls.Add(this.btStop);
-            this.Controls.Add(this.btStart);
-            this.Controls.Add(this.ProgressBar1);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.tbSeeking);
-            this.Controls.Add(this.tabControl3);
-            this.Controls.Add(this.cbTelemetry);
-            this.Controls.Add(this.cbLicensing);
-            this.Controls.Add(this.cbDebugMode);
-            this.Controls.Add(this.mmLog);
-            this.Controls.Add(this.label130);
-            this.Controls.Add(this.cbMode);
-            this.Controls.Add(this.linkLabel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
-            this.Text = "VisioForge Video Edit SDK .Net - Main Demo";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage30.ResumeLayout(false);
-            this.tabPage30.PerformLayout();
-            this.tabPage48.ResumeLayout(false);
-            this.tabPage48.PerformLayout();
-            this.tabPage31.ResumeLayout(false);
-            this.tabControl17.ResumeLayout(false);
-            this.tabPage68.ResumeLayout(false);
-            this.tabPage68.PerformLayout();
-            this.tabControl7.ResumeLayout(false);
-            this.tabPage29.ResumeLayout(false);
-            this.tabPage42.ResumeLayout(false);
-            this.tabPage22.ResumeLayout(false);
-            this.tabPage22.PerformLayout();
-            this.groupBox37.ResumeLayout(false);
-            this.tabPage23.ResumeLayout(false);
-            this.tabPage23.PerformLayout();
-            this.groupBox40.ResumeLayout(false);
-            this.groupBox40.PerformLayout();
-            this.groupBox39.ResumeLayout(false);
-            this.groupBox39.PerformLayout();
-            this.groupBox38.ResumeLayout(false);
-            this.groupBox38.PerformLayout();
-            this.tabPage43.ResumeLayout(false);
-            this.tabPage43.PerformLayout();
-            this.groupBox45.ResumeLayout(false);
-            this.groupBox45.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbDarkness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSaturation)).EndInit();
-            this.tabPage69.ResumeLayout(false);
-            this.tabPage69.PerformLayout();
-            this.tabPage59.ResumeLayout(false);
-            this.tabPage59.PerformLayout();
-            this.tabPage15.ResumeLayout(false);
-            this.tabControl15.ResumeLayout(false);
-            this.tabPage21.ResumeLayout(false);
-            this.tabPage21.PerformLayout();
-            this.tabPage26.ResumeLayout(false);
-            this.tabPage26.PerformLayout();
-            this.tabPage20.ResumeLayout(false);
-            this.tabPage20.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeySmoothing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbChromaKeyThresholdSensitivity)).EndInit();
-            this.tabPage70.ResumeLayout(false);
-            this.tabPage70.PerformLayout();
-            this.tabPage82.ResumeLayout(false);
-            this.tabPage82.PerformLayout();
-            this.tabPage83.ResumeLayout(false);
-            this.tabPage83.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUBlur)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUDarkness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPULightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbGPUSaturation)).EndInit();
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.tabPage66.ResumeLayout(false);
-            this.tabPage66.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioTimeshift)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainLFE)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioOutputGainL)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainLFE)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainSL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainC)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioInputGainL)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabControl18.ResumeLayout(false);
-            this.tabPage71.ResumeLayout(false);
-            this.tabPage71.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).EndInit();
-            this.tabPage72.ResumeLayout(false);
-            this.tabPage72.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).EndInit();
-            this.tabPage73.ResumeLayout(false);
-            this.tabPage73.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudRelease)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudDynAmp)).EndInit();
-            this.tabPage75.ResumeLayout(false);
-            this.tabPage75.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAud3DSound)).EndInit();
-            this.tabPage76.ResumeLayout(false);
-            this.tabPage76.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudTrueBass)).EndInit();
-            this.tabPage16.ResumeLayout(false);
-            this.tabPage16.PerformLayout();
-            this.tabPage81.ResumeLayout(false);
-            this.tabPage81.PerformLayout();
-            this.groupBox41.ResumeLayout(false);
-            this.groupBox41.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbAudioChannelMapperVolume)).EndInit();
-            this.tabPage27.ResumeLayout(false);
-            this.tabPage27.PerformLayout();
-            this.tabControl9.ResumeLayout(false);
-            this.tabPage44.ResumeLayout(false);
-            this.tabPage44.PerformLayout();
-            this.tabPage45.ResumeLayout(false);
-            this.groupBox25.ResumeLayout(false);
-            this.groupBox25.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetHLThreshold)).EndInit();
-            this.groupBox27.ResumeLayout(false);
-            this.groupBox27.PerformLayout();
-            this.groupBox26.ResumeLayout(false);
-            this.groupBox26.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbMotDetDropFramesThreshold)).EndInit();
-            this.groupBox24.ResumeLayout(false);
-            this.groupBox24.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
-            this.tabPage25.ResumeLayout(false);
-            this.tabPage25.PerformLayout();
-            this.tabPage28.ResumeLayout(false);
-            this.tabPage28.PerformLayout();
-            this.tabControl5.ResumeLayout(false);
-            this.tabPage32.ResumeLayout(false);
-            this.tabPage32.PerformLayout();
-            this.tabPage49.ResumeLayout(false);
-            this.tabPage49.PerformLayout();
-            this.tabPage50.ResumeLayout(false);
-            this.tabPage50.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage77.ResumeLayout(false);
-            this.tabPage77.PerformLayout();
-            this.tabPage51.ResumeLayout(false);
-            this.tabPage51.PerformLayout();
-            this.tabPage33.ResumeLayout(false);
-            this.tabPage33.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.tabPage34.ResumeLayout(false);
-            this.tabPage34.PerformLayout();
-            this.tabPage46.ResumeLayout(false);
-            this.tabPage46.PerformLayout();
-            this.tabPage47.ResumeLayout(false);
-            this.groupBox48.ResumeLayout(false);
-            this.groupBox48.PerformLayout();
-            this.groupBox47.ResumeLayout(false);
-            this.groupBox47.PerformLayout();
-            this.groupBox43.ResumeLayout(false);
-            this.groupBox43.PerformLayout();
-            this.tabPage79.ResumeLayout(false);
-            this.tabPage79.PerformLayout();
-            this.TabControl32.ResumeLayout(false);
-            this.TabPage142.ResumeLayout(false);
-            this.TabPage142.PerformLayout();
-            this.TabPage143.ResumeLayout(false);
-            this.TabPage143.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgTagCover)).EndInit();
-            this.tabPage24.ResumeLayout(false);
-            this.tabPage24.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterBoost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVUMeterAmplification)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSeeking)).EndInit();
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage52.ResumeLayout(false);
-            this.tabPage52.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
-            this.tabPage53.ResumeLayout(false);
-            this.tabPage53.PerformLayout();
-            this.tabPage54.ResumeLayout(false);
-            this.tabPage54.PerformLayout();
-            this.tabPage74.ResumeLayout(false);
-            this.tabPage74.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1289, 1256);
+            Controls.Add(VideoView1);
+            Controls.Add(btStop);
+            Controls.Add(btStart);
+            Controls.Add(ProgressBar1);
+            Controls.Add(tabControl1);
+            Controls.Add(tbSeeking);
+            Controls.Add(tabControl3);
+            Controls.Add(cbTelemetry);
+            Controls.Add(cbLicensing);
+            Controls.Add(cbDebugMode);
+            Controls.Add(mmLog);
+            Controls.Add(label130);
+            Controls.Add(cbMode);
+            Controls.Add(linkLabel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            Name = "Form1";
+            Text = "VisioForge Video Edit SDK .Net - Main Demo";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabControl2.ResumeLayout(false);
+            tabPage30.ResumeLayout(false);
+            tabPage30.PerformLayout();
+            tabPage48.ResumeLayout(false);
+            tabPage48.PerformLayout();
+            tabPage31.ResumeLayout(false);
+            tabControl17.ResumeLayout(false);
+            tabPage68.ResumeLayout(false);
+            tabPage68.PerformLayout();
+            tabControl7.ResumeLayout(false);
+            tabPage29.ResumeLayout(false);
+            tabPage42.ResumeLayout(false);
+            tabPage22.ResumeLayout(false);
+            tabPage22.PerformLayout();
+            groupBox37.ResumeLayout(false);
+            tabPage23.ResumeLayout(false);
+            tabPage23.PerformLayout();
+            groupBox40.ResumeLayout(false);
+            groupBox40.PerformLayout();
+            groupBox39.ResumeLayout(false);
+            groupBox39.PerformLayout();
+            groupBox38.ResumeLayout(false);
+            groupBox38.PerformLayout();
+            tabPage43.ResumeLayout(false);
+            tabPage43.PerformLayout();
+            groupBox45.ResumeLayout(false);
+            groupBox45.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbDarkness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbLightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSaturation).EndInit();
+            tabPage69.ResumeLayout(false);
+            tabPage69.PerformLayout();
+            tabPage59.ResumeLayout(false);
+            tabPage59.PerformLayout();
+            tabPage15.ResumeLayout(false);
+            tabControl15.ResumeLayout(false);
+            tabPage21.ResumeLayout(false);
+            tabPage21.PerformLayout();
+            tabPage26.ResumeLayout(false);
+            tabPage26.PerformLayout();
+            tabPage20.ResumeLayout(false);
+            tabPage20.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeySmoothing).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbChromaKeyThresholdSensitivity).EndInit();
+            tabPage70.ResumeLayout(false);
+            tabPage70.PerformLayout();
+            tabPage82.ResumeLayout(false);
+            tabPage82.PerformLayout();
+            tabPage83.ResumeLayout(false);
+            tabPage83.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGPUBlur).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUDarkness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPULightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbGPUSaturation).EndInit();
+            tabPage9.ResumeLayout(false);
+            tabPage9.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            tabPage66.ResumeLayout(false);
+            tabPage66.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioTimeshift).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainLFE).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainSL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainC).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioOutputGainL).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainLFE).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainSL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainC).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudioInputGainL).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            tabControl18.ResumeLayout(false);
+            tabPage71.ResumeLayout(false);
+            tabPage71.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).EndInit();
+            tabPage72.ResumeLayout(false);
+            tabPage72.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).EndInit();
+            tabPage73.ResumeLayout(false);
+            tabPage73.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudRelease).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudAttack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudDynAmp).EndInit();
+            tabPage75.ResumeLayout(false);
+            tabPage75.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAud3DSound).EndInit();
+            tabPage76.ResumeLayout(false);
+            tabPage76.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudTrueBass).EndInit();
+            tabPage16.ResumeLayout(false);
+            tabPage16.PerformLayout();
+            tabPage81.ResumeLayout(false);
+            tabPage81.PerformLayout();
+            groupBox41.ResumeLayout(false);
+            groupBox41.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudioChannelMapperVolume).EndInit();
+            tabPage27.ResumeLayout(false);
+            tabPage27.PerformLayout();
+            tabControl9.ResumeLayout(false);
+            tabPage44.ResumeLayout(false);
+            tabPage44.PerformLayout();
+            tabPage45.ResumeLayout(false);
+            groupBox25.ResumeLayout(false);
+            groupBox25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetHLThreshold).EndInit();
+            groupBox27.ResumeLayout(false);
+            groupBox27.PerformLayout();
+            groupBox26.ResumeLayout(false);
+            groupBox26.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbMotDetDropFramesThreshold).EndInit();
+            groupBox24.ResumeLayout(false);
+            groupBox24.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            groupBox13.ResumeLayout(false);
+            groupBox13.PerformLayout();
+            tabPage25.ResumeLayout(false);
+            tabPage25.PerformLayout();
+            tabPage28.ResumeLayout(false);
+            tabPage28.PerformLayout();
+            tabControl5.ResumeLayout(false);
+            tabPage32.ResumeLayout(false);
+            tabPage32.PerformLayout();
+            tabPage49.ResumeLayout(false);
+            tabPage49.PerformLayout();
+            tabPage50.ResumeLayout(false);
+            tabPage50.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            tabPage77.ResumeLayout(false);
+            tabPage77.PerformLayout();
+            tabPage51.ResumeLayout(false);
+            tabPage51.PerformLayout();
+            tabPage33.ResumeLayout(false);
+            tabPage33.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            tabPage34.ResumeLayout(false);
+            tabPage34.PerformLayout();
+            tabPage46.ResumeLayout(false);
+            tabPage46.PerformLayout();
+            tabPage47.ResumeLayout(false);
+            groupBox48.ResumeLayout(false);
+            groupBox48.PerformLayout();
+            groupBox47.ResumeLayout(false);
+            groupBox47.PerformLayout();
+            groupBox43.ResumeLayout(false);
+            groupBox43.PerformLayout();
+            tabPage79.ResumeLayout(false);
+            tabPage79.PerformLayout();
+            TabControl32.ResumeLayout(false);
+            TabPage142.ResumeLayout(false);
+            TabPage142.PerformLayout();
+            TabPage143.ResumeLayout(false);
+            TabPage143.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)imgTagCover).EndInit();
+            tabPage24.ResumeLayout(false);
+            tabPage24.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterBoost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVUMeterAmplification).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbSeeking).EndInit();
+            tabControl3.ResumeLayout(false);
+            tabPage52.ResumeLayout(false);
+            tabPage52.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
+            tabPage53.ResumeLayout(false);
+            tabPage53.PerformLayout();
+            tabPage54.ResumeLayout(false);
+            tabPage54.PerformLayout();
+            tabPage74.ResumeLayout(false);
+            tabPage74.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -9067,6 +8985,7 @@ namespace VideoEdit_CS_Demo
         private System.Windows.Forms.TextBox edHLSOutputFolder;
         private System.Windows.Forms.Label label380;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.LinkLabel linkLabelDecoders;
     }
 }
 
