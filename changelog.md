@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.45
+* [Video Capture SDK .Net] Added MJPEG network streamer.
+
 ## 15.5.43
 * [ALL] Added WASAPI 2 support.
 * [Media Blocks SDK .Net] Updated Video Effects API. Added Grayscale media block.

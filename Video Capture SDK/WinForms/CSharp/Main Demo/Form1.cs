@@ -2155,6 +2155,14 @@ namespace VideoCapture_CSharp_Demo
 
                 case 1:
                     {
+                        VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.HTTP_MJPEG;
+                        VideoCapture1.Network_Streaming_Output = new MJPEGOutput(Convert.ToInt32(edMJPEGPort.Text));
+
+                        break;
+                    }
+
+                case 2:
+                    {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW;
 
                         var mp4Output = new MP4Output();
@@ -2166,7 +2174,7 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 2:
+                case 3:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.RTMP_FFMPEG_EXE;
 
@@ -2210,11 +2218,11 @@ namespace VideoCapture_CSharp_Demo
                         {
                             VideoCapture1.Network_Streaming_URL = edNetworkRTMPURL.Text;
                         }
-                        
+
                         break;
                     }
 
-                case 3:
+                case 4:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.NDI;
 
@@ -2225,7 +2233,7 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 4:
+                case 5:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.UDP_FFMPEG_EXE;
 
@@ -2249,7 +2257,7 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 5:
+                case 6:
                     {
                         if (rbNetworkSSSoftware.Checked)
                         {
@@ -2284,7 +2292,7 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 6:
+                case 7:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.HLS;
 
@@ -2315,14 +2323,14 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 7:
+                case 8:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.External;
 
                         break;
                     }
 
-                case 8:
+                case 9:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.Icecast_FFMPEG_EXE;
 

@@ -476,6 +476,14 @@
                                 <TextBox Height="23" HorizontalAlignment="Left" x:Name="edNetworkURL" VerticalAlignment="Top" Width="337" Margin="11,336.04,0,0" />
                             </Grid>
                         </TabItem>
+                        <TabItem Header="MJPEG">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" Margin="16,16,0,0" VerticalAlignment="Top">
+                                    <Label Content="Port" HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                                    <TextBox x:Name="edMJPEGPort" Margin="10,0,0,0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="8090" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
                         <TabItem Header="RTSP">
                             <Grid>
                                 <Label Content="MP4 output settings will be used" HorizontalAlignment="Left" Margin="22,319.04,0,0" VerticalAlignment="Top"/>
@@ -576,6 +584,7 @@
                     <ComboBox x:Name="cbNetworkStreamingMode" HorizontalAlignment="Left" Margin="20,37,0,0" 
                               VerticalAlignment="Top" Width="346">
                         <ComboBoxItem Content="Windows Media Video"/>
+                        <ComboBoxItem Content="HTTP MJPEG"/>
                         <ComboBoxItem Content="RTSP"/>
                         <ComboBoxItem Content="RTMP (including YouTube and Facebook)"/>
                         <ComboBoxItem Content="NDI"/>
