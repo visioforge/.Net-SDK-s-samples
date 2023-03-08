@@ -1,6 +1,4 @@
 ﻿using Gst;
-using Gst.App;
-using Serilog.Sinks.File;
 using System;
 
 using System.IO;
@@ -8,7 +6,6 @@ using System.Linq;
 using System.Windows.Forms;
 
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -560,7 +557,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             //_videoTee.Outputs[1].ConnectLive(_videoRenderer2.Input);
             //_videoRenderer2.GetElement().SetState(State.Playing);
 
-            _mp4Muxer.UpdateFilename(edFilename.Text + $"{System.DateTime.Now.Millisecond}.mp4");
+            _mp4Muxer.SetFilenameOrURL(edFilename.Text + $"{System.DateTime.Now.Millisecond}.mp4");
             _videoTee.Outputs[1].ConnectLive(_h264Encoder.Input);
             _h264Encoder.GetElement().SetState(State.Playing);
         }
