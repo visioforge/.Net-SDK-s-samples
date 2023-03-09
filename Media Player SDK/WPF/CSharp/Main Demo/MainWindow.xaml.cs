@@ -961,6 +961,12 @@ namespace Main_Demo
                 MediaPlayer1.Encryption_Key = MediaPlayer1.ConvertHexStringToByteArray(edEncryptionKeyHEX.Text);
             }
 
+            if (cbAdditionalVideoView.IsChecked == true)
+            {
+                MediaPlayer1.OnVideoFrameBufferWPF -= MediaPlayer1_OnVideoFrameBufferWPF;
+                MediaPlayer1.OnVideoFrameBufferWPF += MediaPlayer1_OnVideoFrameBufferWPF;
+            }
+
             await MediaPlayer1.PlayAsync().ConfigureAwait(true);
 
             // set audio volume for each stream
@@ -1017,6 +1023,11 @@ namespace Main_Demo
             }
 
             timer.Start();
+        }
+
+        private void MediaPlayer1_OnVideoFrameBufferWPF(object sender, VideoFrameBufferEventArgs e)
+        {
+            videoViewAdditional.PushFrame(e.Frame);
         }
 
         private void AddVideoEffects()

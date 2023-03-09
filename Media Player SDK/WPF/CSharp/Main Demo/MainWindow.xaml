@@ -547,9 +547,9 @@
                     </TabControl>
                 </Grid>
             </TabItem>
-            <TabItem Header="Display" x:Name="tabItem1">
+            <TabItem Header="Display">
                 <Grid>
-                    <Button x:Name="btFullScreen" Content="Full screen" HorizontalAlignment="Left" Margin="54.163,320.21,0,0" VerticalAlignment="Top" Width="75" Height="28.96" Click="btFullScreen_Click"/>
+                    <Button x:Name="btFullScreen" Content="Full screen" HorizontalAlignment="Left" Margin="53,297,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="btFullScreen_Click"/>
                     <GroupBox Header="Video Renderer" Height="144" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="groupBox26" VerticalAlignment="Top" Width="237">
                         <Grid>
                             <RadioButton Content="WPF" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="rbWPF" VerticalAlignment="Top" IsChecked="True" Checked="rbVR_Checked" />
@@ -571,7 +571,7 @@
                     </ComboBox>
                     <Rectangle Fill="Black" Height="29" HorizontalAlignment="Left" Margin="312,205,0,0" x:Name="pnVideoRendererBGColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnVideoRendererBGColor_MouseDown" />
                     <Label Content="Background color" Height="28" HorizontalAlignment="Left" Margin="193,205,0,0" VerticalAlignment="Top" />
-                    <GroupBox x:Name="pnZoom" Header="Zoom" HorizontalAlignment="Left" Margin="10,193.25,0,0" VerticalAlignment="Top" Height="121.96" Width="161" IsEnabled="False">
+                    <GroupBox x:Name="pnZoom" Header="Zoom" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Height="122" Width="161" IsEnabled="False">
                         <Grid>
                             <Button x:Name="btZoomShiftUp" Content="Up" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Width="69" Click="btZoomShiftUp_Click"/>
                             <Button x:Name="btZoomShiftDown" Content="Down" HorizontalAlignment="Left" Margin="42,72.96,0,0" VerticalAlignment="Top" Width="69" Click="btZoomShiftDown_Click"/>
@@ -581,6 +581,11 @@
                             <Button x:Name="btZoomOut" Content="-" HorizontalAlignment="Left" Margin="79,35.96,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btZoomOut_Click"/>
                         </Grid>
                     </GroupBox>
+
+                    <wpf:VideoView x:Name="videoViewAdditional" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="141" Margin="164,342,0,0">
+
+                    </wpf:VideoView>
+                    <CheckBox x:Name="cbAdditionalVideoView" Content="Play video on additiona video view" HorizontalAlignment="Left" Margin="164,322,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Barcode reader" >
