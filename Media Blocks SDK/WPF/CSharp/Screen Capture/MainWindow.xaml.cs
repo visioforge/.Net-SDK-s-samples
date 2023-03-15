@@ -146,7 +146,7 @@ namespace Screen_Capture_MB_WPF
             if (cbRecordAudio.IsChecked == true)
             {
                 _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
-                _audioRenderer = new AudioRendererBlock(DeviceEnumerator.AudioOutputs.Where(device => device.Name == cbAudioOutputDevice.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
+                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutputDevice.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
             }
 
             if (rbPreview.IsChecked == true)
@@ -231,7 +231,7 @@ namespace Screen_Capture_MB_WPF
             DestroyEngine();
         }
 
-        private void Form1_Load(object sender, RoutedEventArgs e)
+        private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             CreateEngine();
 
@@ -239,7 +239,7 @@ namespace Screen_Capture_MB_WPF
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            foreach (var device in SystemAudioSourceBlock.GetDevices())
+            foreach (var device in await SystemAudioSourceBlock.GetDevicesAsync())
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -250,7 +250,7 @@ namespace Screen_Capture_MB_WPF
                 //cbAudioInputDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in AudioRendererBlock.GetDevices())
+            foreach (var device in await AudioRendererBlock.GetDevicesAsync())
             {
                 cbAudioOutputDevice.Items.Add(device);
             }

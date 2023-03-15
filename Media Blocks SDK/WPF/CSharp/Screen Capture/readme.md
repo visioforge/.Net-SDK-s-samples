@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Simple Capture Demo (WPF)
 
-Screen Capture Demo is an application that uses the Media Blocks SDK .Net to capture video from screen in WPF applications.
+Screen Capture Demo is an application that uses the Media Blocks SDK .Net to capture video from the screen in WPF applications.
 
 ## Features
 
@@ -13,6 +13,7 @@ Screen Capture Demo is an application that uses the Media Blocks SDK .Net to cap
 - .Net Core 3.1
 - .Net 5
 - .Net 6
+- .Net 7
 
 ---
 

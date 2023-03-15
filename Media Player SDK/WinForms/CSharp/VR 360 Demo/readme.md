@@ -2,9 +2,9 @@
 
 ## VR 360 Demo (C#/WinForms)
 
-The demo app shows how to play VR 360 degree files.
+The demo app shows how to play VR 360-degree files.
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo app shows how to play VR 360 degree files.
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

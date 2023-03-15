@@ -4,7 +4,7 @@
 
 The code snippet shows how to preview a video from a webcam with frame capture to a JPEG file.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The code snippet shows how to preview a video from a webcam with frame capture t
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

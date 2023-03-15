@@ -4,7 +4,7 @@
 
 The demo app shows how to switch between video files seamlessly with a pause.
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo app shows how to switch between video files seamlessly with a pause.
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

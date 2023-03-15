@@ -4,4 +4,4 @@
 
 Demo app for Avalonia.
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

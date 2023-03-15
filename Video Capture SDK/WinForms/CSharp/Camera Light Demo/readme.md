@@ -4,4 +4,4 @@
 
 Camera Light control demo for Windows 10+ tablets.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

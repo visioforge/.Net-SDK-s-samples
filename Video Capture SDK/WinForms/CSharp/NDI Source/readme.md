@@ -2,9 +2,9 @@
 
 ## NDI Source Demo (C#/WinForms)
 
-The demo shows how to play video from the NDI source.
+The demo shows how to play videos from the NDI source.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 

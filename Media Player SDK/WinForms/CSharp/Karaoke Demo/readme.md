@@ -4,4 +4,4 @@
 
 Karaoke audio files playback demo application.
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

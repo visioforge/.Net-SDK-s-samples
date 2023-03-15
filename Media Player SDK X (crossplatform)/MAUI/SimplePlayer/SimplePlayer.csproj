@@ -39,9 +39,9 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.0.5" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.0.5" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.0.5" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.1.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.1.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.1.2" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />

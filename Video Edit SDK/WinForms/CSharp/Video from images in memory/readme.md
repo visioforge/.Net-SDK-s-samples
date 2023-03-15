@@ -4,7 +4,7 @@
 
 The demo shows how to create a video file from images located in memory.
 
-[Visit product page.](https://www.visioforge.com/video-edit-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo shows how to create a video file from images located in memory.
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

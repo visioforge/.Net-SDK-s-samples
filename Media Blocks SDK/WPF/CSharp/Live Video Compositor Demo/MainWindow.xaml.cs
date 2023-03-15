@@ -79,7 +79,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -300,7 +300,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.ToString() == deviceName);
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.ToString() == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);

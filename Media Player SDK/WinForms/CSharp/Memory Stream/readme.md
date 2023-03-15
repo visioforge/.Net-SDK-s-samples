@@ -4,4 +4,4 @@
 
 The demo app shows a video/audio playback from a memory buffer/stream.
 
-[Visit product page.](https://www.visioforge.com/media-player-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

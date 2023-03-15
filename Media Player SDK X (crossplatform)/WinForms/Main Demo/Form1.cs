@@ -334,7 +334,7 @@ namespace Main_Demo
             tbSpeed.Value = 10;
             _player.Debug_Mode = cbDebugMode.Checked;
             _player.Audio_Play = cbPlayAudio.Checked;
-            _player.Audio_OutputDevice = cbAudioOutputDevice.Text;
+            _player.Audio_OutputDevice = _player.Audio_OutputDevices.Where(device => device.ToString() == cbAudioOutputDevice.Text).FirstOrDefault();
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
 
             //_player.Segment_Start = TimeSpan.FromMilliseconds(12000);

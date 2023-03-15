@@ -4,7 +4,7 @@
 
 The demo shows how to preview or capture video from IP cameras to various file formats. 
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo shows how to preview or capture video from IP cameras to various file f
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

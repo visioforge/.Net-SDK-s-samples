@@ -38,12 +38,12 @@
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.2" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.0.5" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.0.5" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.0.5" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.1.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.1.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.45" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.45" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.46" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.46" />
   </ItemGroup>
 </Project>

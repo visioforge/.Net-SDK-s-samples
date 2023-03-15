@@ -15,6 +15,7 @@ RTSP MultiView Demo is an application that uses the Media Blocks SDK .Net to pla
 - .Net Core 3.1
 - .Net 5
 - .Net 6
+- .Net 7
 
 ---
 

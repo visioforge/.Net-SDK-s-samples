@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Simple Player Demo (WinForms)
 
-Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in WinForms applications. It is a good starting point for building your own media player application.
+Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in WinForms applications. It is a good starting point for building your media player application.
 
 ## Features
 
@@ -13,6 +13,7 @@ Simple Player Demo is a media player application that uses the Media Blocks SDK 
 - .Net Core 3.1
 - .Net 5
 - .Net 6
+- .Net 7
 
 ---
 

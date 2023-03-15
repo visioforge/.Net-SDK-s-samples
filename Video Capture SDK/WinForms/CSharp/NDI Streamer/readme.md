@@ -2,9 +2,9 @@
 
 ## NDI Streamer Demo (C#/WinForms)
 
-The demo shows how to stream video from the webcam using a NDI protocol.
+The demo shows how to stream video from the webcam using an NDI protocol.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 

@@ -4,7 +4,7 @@
 
 The demo shows how to add Nvidia Maxine SDK effects to a video from the video source.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 

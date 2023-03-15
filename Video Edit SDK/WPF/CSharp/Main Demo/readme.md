@@ -15,7 +15,7 @@ You can:
 * detect motion
 * many other features are available
 
-[Visit product page.](https://www.visioforge.com/video-edit-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)
 
 ## Supported frameworks
 
@@ -23,3 +23,4 @@ You can:
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

@@ -75,7 +75,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }));
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
@@ -85,7 +85,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices();
+            var videoCaptureDevices = await SystemVideoSourceBlock.GetDevicesAsync();
+            cbVideoInput.Items.Clear();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -96,7 +97,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices();
+            var audioCaptureDevices = await SystemAudioSourceBlock.GetDevicesAsync();
+            cbAudioInput.Items.Clear();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -107,7 +109,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = AudioRendererBlock.GetDevices().Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
+            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync()).Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
+            cbAudioOutput.Items.Clear();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -140,7 +143,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -165,7 +168,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -182,7 +185,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock(DeviceEnumerator.AudioOutputs.Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
 
             // capture
             if (capture)
@@ -273,7 +276,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
-        private void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
@@ -283,7 +286,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -300,7 +303,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
-        private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
 
@@ -310,7 +313,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -333,7 +336,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
-        private void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
@@ -342,7 +345,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

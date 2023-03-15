@@ -373,6 +373,7 @@ namespace IP_MJPEG_Restreamer
             {
                 if (disposing)
                 {
+                    // TODO: dispose managed state (managed objects)
                     if (onvifControl != null)
                     {
                         onvifControl.Dispose();
@@ -386,6 +387,8 @@ namespace IP_MJPEG_Restreamer
                     VideoCapture1 = null;
                 }
 
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
                 disposedValue = true;
             }
         }

@@ -5,7 +5,7 @@
 The demo shows how to capture audio from audio capture sources to audio files in various formats.
 You can add audio processing and use an equalizer. 
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -13,3 +13,4 @@ You can add audio processing and use an equalizer.
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

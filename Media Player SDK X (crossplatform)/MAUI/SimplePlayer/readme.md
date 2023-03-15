@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - MAUI Simple Player Demo
 
-Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in MAUI applications. It is a good starting point for building your own media player application.
+Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in MAUI applications. It is a good starting point for building your media player application.
 
 ## Features
 
@@ -11,6 +11,7 @@ Simple Player Demo is a media player application that uses the Media Blocks SDK 
 ## Supported frameworks
 
 - .Net 6
+- .Net 7
 
 ---
 

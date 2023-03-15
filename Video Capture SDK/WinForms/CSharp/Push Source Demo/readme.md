@@ -4,7 +4,7 @@
 
 The demo shows how to push images to SDK, preview them and create an output video file.
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo shows how to push images to SDK, preview them and create an output vide
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

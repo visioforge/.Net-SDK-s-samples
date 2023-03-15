@@ -2,9 +2,9 @@
 
 ## Separate Capture Demo (C#/WinForms)
 
-The demo shows how to preview video from source and capture it without stopping preview, with split by button click, by file size, or by file duration.  
+The demo shows how to preview video from the source and capture it without stopping the preview, split by button click, by file size, or by file duration.  
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -12,3 +12,4 @@ The demo shows how to preview video from source and capture it without stopping 
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

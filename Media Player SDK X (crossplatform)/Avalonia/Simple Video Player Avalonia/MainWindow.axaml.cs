@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
@@ -202,7 +203,7 @@ namespace Simple_Video_Player_Avalonia
 
             _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
-            _player.Audio_OutputDevice = cbAudioOutputDevice.SelectedItem.ToString();
+            _player.Audio_OutputDevice = _player.Audio_OutputDevices.FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
 
             await _player.OpenAsync(new Uri(source));
             await _player.PlayAsync();

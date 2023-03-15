@@ -5,7 +5,7 @@
 The demo shows how to capture the content of a specified window to a video file. 
 The window can be set by title or handle (HWND).
 
-[Visit product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -13,3 +13,4 @@ The window can be set by title or handle (HWND).
 * .Net Core 3.1
 * .Net 5
 * .Net 6
+* .Net 7

@@ -96,7 +96,7 @@ namespace Video_Compositor_Demo
             }
         }
 
-        private void btAddCamera_Click(object sender, RoutedEventArgs e)
+        private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new VideoCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
@@ -109,7 +109,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);

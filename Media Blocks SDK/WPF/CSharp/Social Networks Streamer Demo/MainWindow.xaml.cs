@@ -68,7 +68,7 @@ namespace Social_Networks_Streamer_Demo
             }));
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
@@ -78,7 +78,7 @@ namespace Social_Networks_Streamer_Demo
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            var videoCaptureDevices = SystemVideoSourceBlock.GetDevices();
+            var videoCaptureDevices = (await SystemVideoSourceBlock.GetDevicesAsync());
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -89,7 +89,7 @@ namespace Social_Networks_Streamer_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = SystemAudioSourceBlock.GetDevices();
+            var audioCaptureDevices = (await SystemAudioSourceBlock.GetDevicesAsync());
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -128,7 +128,7 @@ namespace Social_Networks_Streamer_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -153,7 +153,7 @@ namespace Social_Networks_Streamer_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -246,7 +246,7 @@ namespace Social_Networks_Streamer_Demo
             }
         }
 
-        private void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
@@ -256,7 +256,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -273,7 +273,7 @@ namespace Social_Networks_Streamer_Demo
             }
         }
 
-        private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
 
@@ -283,7 +283,7 @@ namespace Social_Networks_Streamer_Demo
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = SystemVideoSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -306,7 +306,7 @@ namespace Social_Networks_Streamer_Demo
             }
         }
 
-        private void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {
@@ -315,7 +315,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = SystemAudioSourceBlock.GetDevices().FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)
