@@ -300,7 +300,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.ToString() == deviceName);
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.ToString() == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);

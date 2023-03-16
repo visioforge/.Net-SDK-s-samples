@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>Screen_Capture_X</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.46" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.46" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.47" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.47" />
   </ItemGroup>
 </Project>

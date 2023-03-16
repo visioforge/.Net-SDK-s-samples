@@ -13,6 +13,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.UI.Avalonia;
 
 namespace MediaBlocks_Simple_Player_Demo_Avalonia
@@ -40,7 +41,10 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             this.AttachDevTools();
 #endif
 
+            MediaBlocksPipeline.InitSDK();
+
             InitControls();
+
             Activated += MainWindow_Activated;
             Closing += MainWindow_Closing;
 
@@ -92,6 +96,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
         }
 
         private volatile bool _tbTimelineApplyingValue;
+
         private bool disposedValue;
 
         private void InitControls()
@@ -136,6 +141,21 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             _tmPosition = new System.Timers.Timer(1000);
             _tmPosition.Elapsed += tmPosition_Elapsed;
+
+            cbAudioOutput = this.FindControl<ComboBox>("cbAudioOutput");
+
+            var cbAudioOutputItems = new ObservableCollection<string>();
+            foreach (var device in AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result)
+            {
+                cbAudioOutputItems.Add(device.Name);
+            }
+
+            cbAudioOutput.Items = cbAudioOutputItems;
+
+            if (cbAudioOutputItems.Count > 0)
+            {
+                cbAudioOutput.SelectedIndex = 0;
+            }
         }
 
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)

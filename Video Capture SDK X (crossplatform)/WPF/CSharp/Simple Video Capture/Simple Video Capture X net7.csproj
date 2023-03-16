@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Decklink_Demo_X</RootNamespace>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Simple_Video_Capture</RootNamespace>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
@@ -17,7 +17,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.46" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.46" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.47" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.47" />
   </ItemGroup>
 </Project>

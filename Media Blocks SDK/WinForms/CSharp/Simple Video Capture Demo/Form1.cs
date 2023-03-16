@@ -14,6 +14,7 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
@@ -72,7 +73,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = await SystemAudioSourceBlock.GetDevicesAsync();
+            var audioCaptureDevices = await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound);
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -83,7 +84,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = await AudioRendererBlock.GetDevicesAsync();
+            var audioOutputDevices = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -149,7 +150,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -319,7 +320,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             {
                 cbAudioFormat.Items.Clear();
 
-                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     foreach (var format in device.Formats)

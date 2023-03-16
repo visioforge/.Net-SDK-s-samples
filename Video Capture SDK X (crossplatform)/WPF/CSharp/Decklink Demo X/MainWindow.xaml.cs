@@ -116,7 +116,7 @@ namespace Decklink_Demo_X
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await DeviceEnumerator.AudioOutputsAsync()).Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
+            var audioOutputDevices = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -180,7 +180,7 @@ namespace Decklink_Demo_X
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First();
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First();
 
             VideoCapture1.Audio_Record = true;
             VideoCapture1.Audio_Play = true;

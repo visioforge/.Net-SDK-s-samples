@@ -144,7 +144,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkAudioOutput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync()).Where(device => device.API == AudioOutputDeviceAPI.DirectSound).ToArray();
+            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -274,7 +274,7 @@ namespace Decklink_MB_Demo
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutput.Text && device.API == AudioOutputDeviceAPI.DirectSound).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First());
 
             // effects
             _videoEffects = new VideoEffectsWinBlock();

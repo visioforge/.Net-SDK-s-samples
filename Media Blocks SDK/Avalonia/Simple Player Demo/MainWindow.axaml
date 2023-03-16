@@ -6,7 +6,8 @@
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="MediaBlocks_Simple_Player_Demo_Avalonia.MainWindow"
         Title="Media Player SDK .Net Main Demo (Avalonia)"
-        Width="1280" Height="720">
+        Width="1280" Height="720"
+		>
 		<!--Icon="visioforge_main_icon.ico">-->
 	<Grid ColumnDefinitions="16,0.5*,1, 0.5*">
 		<TextBlock Grid.Column="1" Text="File name or URL" Margin="0,20,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -27,9 +28,11 @@
 		<Button Grid.Column="1" Height="32" Width="70" Margin="150,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Pause" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btPause"/>
 		<Button Grid.Column="1" Height="32" Width="70" Margin="225,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Stop" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btStop"/>
 		<Button Grid.Column="1" Height="32" Width="120" Margin="320,530,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Next frame" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="btNextFrame"/>
-		
-		<TextBlock Grid.Column="3" Text="Volume" Margin="20,260,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
-		<Slider Grid.Column="3" Margin="20,260,0,0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="tbVolume" Minimum="0" Maximum="100" Value="85" />
+
+		<TextBlock Grid.Column="3" Text="Audio output device" Margin="0,260,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<ComboBox Grid.Column="3" x:Name="cbAudioOutput" Margin="0,280,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" />
+		<TextBlock Grid.Column="3" Text="Volume" Margin="280,260,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<Slider Grid.Column="3" Margin="280,265,0,0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="tbVolume" Minimum="0" Maximum="100" Value="85" />
 
 		<CheckBox Grid.Column="3" Content="Debug mode" Margin="0,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" IsChecked="false" x:Name="cbDebugMode"/>
 		<ListBox Grid.Column="3" Margin="0,48,16,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="200" x:Name="mmLog" Items="{Binding Log}"/>
