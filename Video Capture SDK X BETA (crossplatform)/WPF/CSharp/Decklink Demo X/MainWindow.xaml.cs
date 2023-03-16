@@ -197,7 +197,7 @@ namespace Decklink_Demo_X
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device)
                     {
-                        Mode = Enum.Parse<DecklinkMode>(mode)
+                        Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), mode, true)
                     };
                 }
             }
