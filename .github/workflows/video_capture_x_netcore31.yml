@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Video Capture SDK X BETA (crossplatform)/VisioForge.VideoCaptureX.Demos.CS netcore31.sln"
+      Solution_Name: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS netcore31.sln"
     
     runs-on: windows-2019
 
