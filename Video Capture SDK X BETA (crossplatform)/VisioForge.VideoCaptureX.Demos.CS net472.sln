@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F434-47CE-A231-2FC3F089F75B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Demo X net472", "WPF\CSharp\Decklink Demo X\Decklink Demo X net472.csproj", "{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture X Demo WPF net472", "WPF\CSharp\Screen_Capture\Screen Capture X Demo WPF net472.csproj", "{59A0AD25-50DD-48F0-B7DE-BD30C877168C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture X net472", "WPF\CSharp\Simple Video Capture\Simple Video Capture X net472.csproj", "{5FC51610-2C06-4D07-9163-FD326B65C3B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59A0AD25-50DD-48F0-B7DE-BD30C877168C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A0AD25-50DD-48F0-B7DE-BD30C877168C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A0AD25-50DD-48F0-B7DE-BD30C877168C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A0AD25-50DD-48F0-B7DE-BD30C877168C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC51610-2C06-4D07-9163-FD326B65C3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC51610-2C06-4D07-9163-FD326B65C3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC51610-2C06-4D07-9163-FD326B65C3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC51610-2C06-4D07-9163-FD326B65C3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7CE89AA-4C57-4CFD-9371-E80ED0F8D225} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{59A0AD25-50DD-48F0-B7DE-BD30C877168C} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{5FC51610-2C06-4D07-9163-FD326B65C3B7} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
+	EndGlobalSection
+EndGlobal
