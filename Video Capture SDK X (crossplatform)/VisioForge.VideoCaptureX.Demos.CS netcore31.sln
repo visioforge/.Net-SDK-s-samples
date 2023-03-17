@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture X Demo WPF n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture X netcore31", "WPF\CSharp\Simple Video Capture\Simple Video Capture X netcore31.csproj", "{5E57DF75-C4D6-4E5A-BD69-89BDE3FCE951}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer netcore31", "WPF\CSharp\Social Networks Streamer\Social Networks Streamer netcore31.csproj", "{81F17EA4-72C2-437D-9F1F-7BFE14D66418}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{5E57DF75-C4D6-4E5A-BD69-89BDE3FCE951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E57DF75-C4D6-4E5A-BD69-89BDE3FCE951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E57DF75-C4D6-4E5A-BD69-89BDE3FCE951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F17EA4-72C2-437D-9F1F-7BFE14D66418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F17EA4-72C2-437D-9F1F-7BFE14D66418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F17EA4-72C2-437D-9F1F-7BFE14D66418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F17EA4-72C2-437D-9F1F-7BFE14D66418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{4FBAE614-E164-4C44-8F99-F4D2A9B9AE84} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{707D821A-3C60-4213-BDEA-60805C6FFD3F} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{5E57DF75-C4D6-4E5A-BD69-89BDE3FCE951} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{81F17EA4-72C2-437D-9F1F-7BFE14D66418} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

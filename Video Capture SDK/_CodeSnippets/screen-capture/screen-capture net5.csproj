@@ -9,8 +9,8 @@
     <AssemblyTitle>screen-capture</AssemblyTitle>
     <Product>screen-capture</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.47.0</AssemblyVersion>
-    <FileVersion>15.5.47.0</FileVersion>
+    <AssemblyVersion>15.5.48.0</AssemblyVersion>
+    <FileVersion>15.5.48.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -58,7 +58,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.47" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.48" />
   </ItemGroup>
 </Project>

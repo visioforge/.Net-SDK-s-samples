@@ -431,7 +431,7 @@ namespace Screen_Capture_X
         {
             CreateEngine();
 
-            Title += $" (SDK v{VideoCapture1.SDK_Version})";
+            Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
