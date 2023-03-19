@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture X net7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer net7", "WPF\CSharp\Social Networks Streamer\Social Networks Streamer net7.csproj", "{03E4634F-D117-46FC-AB86-0AB2664BBA06}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo net7", "WPF\CSharp\Video Compositor Demo\Video Compositor Demo net7.csproj", "{92127659-DAE3-4472-84A9-FCE7DE962EF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{03E4634F-D117-46FC-AB86-0AB2664BBA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03E4634F-D117-46FC-AB86-0AB2664BBA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03E4634F-D117-46FC-AB86-0AB2664BBA06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92127659-DAE3-4472-84A9-FCE7DE962EF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92127659-DAE3-4472-84A9-FCE7DE962EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92127659-DAE3-4472-84A9-FCE7DE962EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92127659-DAE3-4472-84A9-FCE7DE962EF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{9BD4267A-89FD-47A1-A1F6-A03342586031} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{071E9843-A4D4-407E-9982-515D959AAF92} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{03E4634F-D117-46FC-AB86-0AB2664BBA06} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{92127659-DAE3-4472-84A9-FCE7DE962EF0} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
