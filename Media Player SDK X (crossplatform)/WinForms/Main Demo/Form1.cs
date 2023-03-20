@@ -406,7 +406,7 @@ namespace Main_Demo
 
                 foreach (var item in _player.Audio_OutputDevices)
                 {
-                    cbAudioOutputDevice.Items.Add(item);
+                    cbAudioOutputDevice.Items.Add(item.Name);
                 }
 
                 if (cbAudioOutputDevice.Items.Count > 0)
@@ -650,7 +650,6 @@ namespace Main_Demo
             cbTextOverlayMode.SelectedIndex = 0;
             cbTextOverlayFontSize.SelectedIndex = 14;
 
-
             cbRTSPProtocol.SelectedIndex = 0;
             rbMotionDetectionProcessor.SelectedIndex = 1;
             rbMotionDetectionDetector.SelectedIndex = 1;
@@ -764,6 +763,11 @@ namespace Main_Demo
             tbSpeed.Value = (int)(_player.Rate_Get() * 10);
             var speed = tbSpeed.Value / 10.0;
             lbSpeed.Text = $"Speed: {speed:F1}";
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
