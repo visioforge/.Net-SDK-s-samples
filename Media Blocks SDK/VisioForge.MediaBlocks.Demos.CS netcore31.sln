@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Face Detector Live netcore3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Live Video Compositor Demo netcore31", "WPF\CSharp\Live Video Compositor Demo\Live Video Compositor Demo netcore31.csproj", "{36A413B0-AF2C-4AA3-960D-BC5D165BC1AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLV Demo netcore31", "WPF\CSharp\KLV Demo\KLV Demo netcore31.csproj", "{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{36A413B0-AF2C-4AA3-960D-BC5D165BC1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A413B0-AF2C-4AA3-960D-BC5D165BC1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36A413B0-AF2C-4AA3-960D-BC5D165BC1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{C3F461D0-9F4D-4B1F-9956-884665B1B652} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{CBA4A447-8489-430F-A5DC-F5EC658D556D} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{36A413B0-AF2C-4AA3-960D-BC5D165BC1AD} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

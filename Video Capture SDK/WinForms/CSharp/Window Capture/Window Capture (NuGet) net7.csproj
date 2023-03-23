@@ -9,8 +9,8 @@
     <AssemblyTitle>Window Capture</AssemblyTitle>
     <Product>Window Capture</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.49.0</AssemblyVersion>
-    <FileVersion>15.5.49.0</FileVersion>
+    <AssemblyVersion>15.5.50.0</AssemblyVersion>
+    <FileVersion>15.5.50.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,10 +61,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.49" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.49" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.49" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.49" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.50" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.50" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.50" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.50" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

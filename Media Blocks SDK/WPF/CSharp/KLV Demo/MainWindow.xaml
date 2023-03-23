@@ -1,0 +1,84 @@
+﻿<Window x:Class="KLV_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KLV_Demo"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - KLV Demo" Height="391" Width="440" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <TabControl Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Extractor">
+                <Grid>
+                    <StackPanel Orientation="Vertical" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock>Extract KLV metadata from video file</TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Source TS file" Width="100"/>
+                            <TextBox Width="200" x:Name="edSrcTSFile" Text="c:\samples\!KLV.ts" VerticalContentAlignment="Center"/>
+                            <Button Content="Open" Margin="10,0,0,0" Width="50" Click="btOpenTSFile_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Output KLV file" Width="100" />
+                            <TextBox Width="200" x:Name="edOutputKLVFile" Text="c:\samples\!KLV.bin" VerticalContentAlignment="Center"/>
+                            <Button Content="Save" Margin="10,0,0,0" Width="50" Click="btSaveKLVFile_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Button Content="Start" Width="50" Click="btStartExtract_Click"/>
+                            <Button Content="Stop" Margin="10,0,0,0" Width="50" Click="btStopExtract_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!--<TabItem Header="Adder">
+                <Grid>
+                    <StackPanel Orientation="Vertical" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <TextBlock>Add KLV metadata to MPEG-TS file</TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Source TS file" Width="100"/>
+                            <TextBox Width="200" x:Name="edSrcTSFile2" Text="c:\samples\!KLVnone.ts" VerticalContentAlignment="Center"/>
+                            <Button Content="Open" Margin="10,0,0,0" Width="50" Click="btOpenTSFile2_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Source KLV file" Width="100" />
+                            <TextBox Width="200" x:Name="edSrcKLVFile" Text="c:\samples\!KLV.bin" VerticalContentAlignment="Center"/>
+                            <Button Content="Open" Margin="10,0,0,0" Width="50" Click="btOpenSrcKLVFile_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Content="Output TS file" Width="100" />
+                            <TextBox Width="200" x:Name="edOutputTSFile" Text="c:\samples\!KLVx.ts" VerticalContentAlignment="Center"/>
+                            <Button Content="Save" Margin="10,0,0,0" Width="50" Click="btSaveTSFile_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <Button Content="Start" Width="50" Click="btStartRemux_Click"/>
+                            <Button Content="Stop" Margin="10,0,0,0" Width="50" Click="btStopRemux_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>-->
+
+            <TabItem Header="Viewer">
+                <Grid>
+                    <StackPanel Orientation="Vertical" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="File" Width="40" />
+                            <TextBox Width="210" x:Name="edViewerKLVFile" Text="c:\samples\!KLV.bin" VerticalContentAlignment="Center"/>
+                            <Button Content="..." Margin="10,0,0,0" Width="24" Click="btOpenViewerSrcKLVFile_Click"/>
+                            <Button Content="Parse" Margin="10,0,0,0" Width="75" Click="btViewerParse_Click"/>
+                        </StackPanel>
+
+                        <Label Margin="0,8,0,0"  Content="First 100 items shown" />
+                        <TextBox x:Name="edViewerData" HorizontalAlignment="Stretch" Height="240" TextWrapping="NoWrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
