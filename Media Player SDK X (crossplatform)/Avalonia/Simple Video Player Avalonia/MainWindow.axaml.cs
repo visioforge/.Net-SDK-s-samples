@@ -11,6 +11,7 @@ using System.Linq;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.UI.Avalonia;
 // ReSharper disable MemberCanBeMadeStatic.Local
 
@@ -96,7 +97,7 @@ namespace Simple_Video_Player_Avalonia
             messageBoxStandardWindow.Show(this);
         }
 
-        private void MainWindow_Activated(object sender, EventArgs e)
+        private async void MainWindow_Activated(object sender, EventArgs e)
         {
             if (_initialized)
             {
@@ -110,7 +111,17 @@ namespace Simple_Video_Player_Avalonia
             Title += $" (SDK v{_player.SDK_Version})";
             _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            foreach (var item in _player.Audio_OutputDevices)
+            AudioOutputDeviceInfo[] audioOutputs;
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                audioOutputs = await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
+            }
+            else
+            {
+                audioOutputs = await _player.Audio_OutputDevicesAsync(null);
+            }
+
+            foreach (var item in audioOutputs)
             {
                 AudioOutputDevices.Add(item.Name);
             }
@@ -203,7 +214,14 @@ namespace Simple_Video_Player_Avalonia
 
             _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
-            _player.Audio_OutputDevice = _player.Audio_OutputDevices.FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
+
+            AudioOutputDeviceAPI? api = null;
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                api = AudioOutputDeviceAPI.DirectSound;
+            }
+
+            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(api)).FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
 
             await _player.OpenAsync(new Uri(source));
             await _player.PlayAsync();

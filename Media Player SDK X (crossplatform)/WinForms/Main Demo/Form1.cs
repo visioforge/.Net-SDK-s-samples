@@ -22,6 +22,7 @@ namespace Main_Demo
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types.X.MediaPlayer;
     using VisioForge.Core.Types.X.Sources;
+    using VisioForge.Core.Types.X.Output;
 
     public partial class Form1 : Form
     {
@@ -334,7 +335,7 @@ namespace Main_Demo
             tbSpeed.Value = 10;
             _player.Debug_Mode = cbDebugMode.Checked;
             _player.Audio_Play = cbPlayAudio.Checked;
-            _player.Audio_OutputDevice = _player.Audio_OutputDevices.Where(device => device.ToString() == cbAudioOutputDevice.Text).FirstOrDefault();
+            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.Text);
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
 
             //_player.Segment_Start = TimeSpan.FromMilliseconds(12000);
@@ -384,7 +385,7 @@ namespace Main_Demo
             tmPosition.Start();
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
+        private async void Form1_Shown(object sender, EventArgs e)
         {
             if (_player == null)
             {
@@ -404,7 +405,7 @@ namespace Main_Demo
                     cbTextOverlayFontName.SelectedIndex = 0;
                 }
 
-                foreach (var item in _player.Audio_OutputDevices)
+                foreach (var item in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
                 {
                     cbAudioOutputDevice.Items.Add(item.Name);
                 }
@@ -436,9 +437,10 @@ namespace Main_Demo
             Invoke(
                 (Action)(() =>
                 {
+                    cbAudioStream.Items.Clear();
                     foreach (var item in _player.Audio_Streams)
                     {
-                        cbAudioStream.Items.Add(item.Name);
+                        cbAudioStream.Items.Add(item);
                     }
 
                     if (cbAudioStream.Items.Count > 0)

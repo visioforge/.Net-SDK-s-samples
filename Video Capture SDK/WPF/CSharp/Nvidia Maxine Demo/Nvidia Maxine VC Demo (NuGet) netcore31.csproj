@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Simple Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.50.0</AssemblyVersion>
-    <FileVersion>15.5.50.0</FileVersion>
+    <AssemblyVersion>15.5.51.0</AssemblyVersion>
+    <FileVersion>15.5.51.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -52,11 +52,11 @@
     <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.NvidiaMaxine" Version="15.5.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.50" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.51" />
+    <PackageReference Include="VisioForge.DotNet.Core.NvidiaMaxine" Version="15.5.51" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.51" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.51" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.51" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
