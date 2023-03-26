@@ -31,73 +31,89 @@ namespace Two_Windows_Demo
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbLicensing = new System.Windows.Forms.CheckBox();
-            this.mmError = new System.Windows.Forms.TextBox();
-            this.pnScreen = new System.Windows.Forms.Panel();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            cbDebugMode = new System.Windows.Forms.CheckBox();
+            cbLicensing = new System.Windows.Forms.CheckBox();
+            mmError = new System.Windows.Forms.TextBox();
+            pnScreen = new System.Windows.Forms.Panel();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.cbLicensing);
-            this.groupBox1.Controls.Add(this.mmError);
-            this.groupBox1.Location = new System.Drawing.Point(12, 483);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(640, 119);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Errors and warnings";
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(cbDebugMode);
+            groupBox1.Controls.Add(cbLicensing);
+            groupBox1.Controls.Add(mmError);
+            groupBox1.Location = new System.Drawing.Point(20, 929);
+            groupBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox1.Size = new System.Drawing.Size(1067, 229);
+            groupBox1.TabIndex = 33;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Errors and warnings";
+            // 
+            // cbDebugMode
+            // 
+            cbDebugMode.AutoSize = true;
+            cbDebugMode.Checked = true;
+            cbDebugMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbDebugMode.Location = new System.Drawing.Point(791, 37);
+            cbDebugMode.Name = "cbDebugMode";
+            cbDebugMode.Size = new System.Drawing.Size(92, 29);
+            cbDebugMode.TabIndex = 5;
+            cbDebugMode.Text = "Debug";
+            cbDebugMode.UseVisualStyleBackColor = true;
             // 
             // cbLicensing
             // 
-            this.cbLicensing.AutoSize = true;
-            this.cbLicensing.Location = new System.Drawing.Point(543, 19);
-            this.cbLicensing.Name = "cbLicensing";
-            this.cbLicensing.Size = new System.Drawing.Size(91, 17);
-            this.cbLicensing.TabIndex = 4;
-            this.cbLicensing.Text = "Licensing info";
-            this.cbLicensing.UseVisualStyleBackColor = true;
+            cbLicensing.AutoSize = true;
+            cbLicensing.Location = new System.Drawing.Point(905, 37);
+            cbLicensing.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbLicensing.Name = "cbLicensing";
+            cbLicensing.Size = new System.Drawing.Size(146, 29);
+            cbLicensing.TabIndex = 4;
+            cbLicensing.Text = "Licensing info";
+            cbLicensing.UseVisualStyleBackColor = true;
             // 
             // mmError
             // 
-            this.mmError.Location = new System.Drawing.Point(6, 42);
-            this.mmError.Multiline = true;
-            this.mmError.Name = "mmError";
-            this.mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmError.Size = new System.Drawing.Size(628, 67);
-            this.mmError.TabIndex = 3;
+            mmError.Location = new System.Drawing.Point(10, 81);
+            mmError.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            mmError.Multiline = true;
+            mmError.Name = "mmError";
+            mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmError.Size = new System.Drawing.Size(1044, 125);
+            mmError.TabIndex = 3;
             // 
             // pnScreen
             // 
-            this.pnScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnScreen.BackColor = System.Drawing.Color.Black;
-            this.pnScreen.Location = new System.Drawing.Point(12, 12);
-            this.pnScreen.Name = "pnScreen";
-            this.pnScreen.Size = new System.Drawing.Size(639, 458);
-            this.pnScreen.TabIndex = 34;
+            pnScreen.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            pnScreen.BackColor = System.Drawing.Color.Black;
+            pnScreen.Location = new System.Drawing.Point(20, 23);
+            pnScreen.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            pnScreen.Name = "pnScreen";
+            pnScreen.Size = new System.Drawing.Size(1065, 881);
+            pnScreen.TabIndex = 34;
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 604);
-            this.Controls.Add(this.pnScreen);
-            this.Controls.Add(this.groupBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "Form2";
-            this.Text = "Media Player SDK - Two Windows Demo - Window 2";
-            this.Load += new System.EventHandler(this.Form2_Load);
-            this.SizeChanged += new System.EventHandler(this.Form2_SizeChanged);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1107, 1162);
+            Controls.Add(pnScreen);
+            Controls.Add(groupBox1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            MaximizeBox = false;
+            Name = "Form2";
+            Text = "Media Player SDK - Two Windows Demo - Window 2";
+            Load += Form2_Load;
+            SizeChanged += Form2_SizeChanged;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -106,6 +122,7 @@ namespace Two_Windows_Demo
         private System.Windows.Forms.TextBox mmError;
         private System.Windows.Forms.CheckBox cbLicensing;
         private System.Windows.Forms.Panel pnScreen;
+        private System.Windows.Forms.CheckBox cbDebugMode;
     }
 }
 

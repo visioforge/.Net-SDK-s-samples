@@ -20,38 +20,38 @@
                 components.Dispose();
             }
 
-            mp4SettingsDialog?.Dispose();
-            mp4SettingsDialog = null;
+            _mp4SettingsDialog?.Dispose();
+            _mp4SettingsDialog = null;
 
-            mp4HWSettingsDialog?.Dispose();
-            mp4HWSettingsDialog = null;
+            _mp4HWSettingsDialog?.Dispose();
+            _mp4HWSettingsDialog = null;
 
-            webmSettingsDialog?.Dispose();
-            webmSettingsDialog = null;
+            _webmSettingsDialog?.Dispose();
+            _webmSettingsDialog = null;
 
-            mp3SettingsDialog?.Dispose();
-            mp3SettingsDialog = null;
+            _mp3SettingsDialog?.Dispose();
+            _mp3SettingsDialog = null;
 
-            aviSettingsDialog?.Dispose();
-            aviSettingsDialog = null;
+            _aviSettingsDialog?.Dispose();
+            _aviSettingsDialog = null;
 
-            wmvSettingsDialog?.Dispose();
-            wmvSettingsDialog = null;
+            _wmvSettingsDialog?.Dispose();
+            _wmvSettingsDialog = null;
 
-            gifSettingsDialog?.Dispose();
-            gifSettingsDialog = null;
+            _gifSettingsDialog?.Dispose();
+            _gifSettingsDialog = null;
 
-            ffmpegEXESettingsDialog?.Dispose();
-            ffmpegEXESettingsDialog = null;
+            _ffmpegEXESettingsDialog?.Dispose();
+            _ffmpegEXESettingsDialog = null;
 
-            ffmpegSettingsDialog?.Dispose();
-            ffmpegSettingsDialog = null;
+            _ffmpegSettingsDialog?.Dispose();
+            _ffmpegSettingsDialog = null;
 
-            dvSettingsDialog?.Dispose();
-            dvSettingsDialog = null;
+            _dvSettingsDialog?.Dispose();
+            _dvSettingsDialog = null;
 
-            loadedImage?.Dispose();
-            loadedImage = null;
+            _loadedImage?.Dispose();
+            _loadedImage = null;
 
             VideoEdit1?.Dispose();
             VideoEdit1 = null;

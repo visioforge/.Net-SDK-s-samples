@@ -9,9 +9,9 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.51" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.51" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.51" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.52" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.52" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.52" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.7.1" />

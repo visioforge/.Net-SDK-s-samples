@@ -52,7 +52,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
-        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
             {
@@ -60,7 +60,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }));
         }
 
-        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
+        private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
             {
@@ -71,8 +71,8 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline(false);
-            _pipeline.OnError += MediaPlayer1_OnError;
-            _pipeline.OnStop += MediaPlayer1_OnStop;
+            _pipeline.OnError += Pipeline_OnError;
+            _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             _fileSource = new FileSourceBlock(edFilename.Text);
@@ -110,8 +110,8 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
         {
             if (_pipeline != null)
             {
-                _pipeline.OnError -= MediaPlayer1_OnError;
-                _pipeline.OnStop -= MediaPlayer1_OnStop;
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
 
                 _pipeline.Dispose();
                 _pipeline = null;

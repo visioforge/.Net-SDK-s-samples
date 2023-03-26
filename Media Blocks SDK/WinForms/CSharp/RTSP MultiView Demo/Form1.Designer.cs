@@ -29,468 +29,485 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.edURL = new System.Windows.Forms.TextBox();
-            this.edLogin = new System.Windows.Forms.TextBox();
-            this.edPassword = new System.Windows.Forms.TextBox();
-            this.cbCameraIndex = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btStop = new System.Windows.Forms.Button();
-            this.btStart = new System.Windows.Forms.Button();
-            this.cbAudioEnabled = new System.Windows.Forms.CheckBox();
-            this.cbUseMJPEG = new System.Windows.Forms.CheckBox();
-            this.cbUseGPU = new System.Windows.Forms.CheckBox();
-            this.cbGPUDecoder = new System.Windows.Forms.ComboBox();
-            this.edLog = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbCompatibilityMode = new System.Windows.Forms.CheckBox();
-            this.btReadInfo = new System.Windows.Forms.Button();
-            this.btStartRecord = new System.Windows.Forms.Button();
-            this.btStopRecord = new System.Windows.Forms.Button();
-            this.videoView9 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView8 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView7 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView6 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView5 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView4 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView3 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.edFilename = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.cbReencodeAudio = new System.Windows.Forms.CheckBox();
-            this.cbRAWEvents = new System.Windows.Forms.CheckBox();
-            this.rbMPEGTSOutput = new System.Windows.Forms.RadioButton();
-            this.rbMP4Output = new System.Windows.Forms.RadioButton();
-            this.btONVIF = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            edURL = new System.Windows.Forms.TextBox();
+            edLogin = new System.Windows.Forms.TextBox();
+            edPassword = new System.Windows.Forms.TextBox();
+            cbCameraIndex = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            btStop = new System.Windows.Forms.Button();
+            btStart = new System.Windows.Forms.Button();
+            cbAudioEnabled = new System.Windows.Forms.CheckBox();
+            cbUseMJPEG = new System.Windows.Forms.CheckBox();
+            cbUseGPU = new System.Windows.Forms.CheckBox();
+            cbGPUDecoder = new System.Windows.Forms.ComboBox();
+            edLog = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            cbCompatibilityMode = new System.Windows.Forms.CheckBox();
+            btReadInfo = new System.Windows.Forms.Button();
+            btStartRecord = new System.Windows.Forms.Button();
+            btStopRecord = new System.Windows.Forms.Button();
+            videoView9 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView8 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView7 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView6 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView5 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView4 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView3 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView2 = new VisioForge.Core.UI.WinForms.VideoView();
+            videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            label6 = new System.Windows.Forms.Label();
+            edFilename = new System.Windows.Forms.TextBox();
+            button1 = new System.Windows.Forms.Button();
+            saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            cbReencodeAudio = new System.Windows.Forms.CheckBox();
+            cbRAWEvents = new System.Windows.Forms.CheckBox();
+            rbMPEGTSOutput = new System.Windows.Forms.RadioButton();
+            rbMP4Output = new System.Windows.Forms.RadioButton();
+            btONVIF = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1483, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 20);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Camera index";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(1648, 20);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(119, 25);
+            label1.TabIndex = 8;
+            label1.Text = "Camera index";
             // 
             // edURL
             // 
-            this.edURL.Location = new System.Drawing.Point(1487, 76);
-            this.edURL.Name = "edURL";
-            this.edURL.Size = new System.Drawing.Size(412, 26);
-            this.edURL.TabIndex = 9;
-            this.edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unic" +
-    "ast&profile=Profile_1";
+            edURL.Location = new System.Drawing.Point(1652, 95);
+            edURL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edURL.Name = "edURL";
+            edURL.Size = new System.Drawing.Size(457, 31);
+            edURL.TabIndex = 9;
+            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
             // 
             // edLogin
             // 
-            this.edLogin.Location = new System.Drawing.Point(1487, 140);
-            this.edLogin.Name = "edLogin";
-            this.edLogin.Size = new System.Drawing.Size(122, 26);
-            this.edLogin.TabIndex = 11;
+            edLogin.Location = new System.Drawing.Point(1652, 175);
+            edLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edLogin.Name = "edLogin";
+            edLogin.Size = new System.Drawing.Size(135, 31);
+            edLogin.TabIndex = 11;
             // 
             // edPassword
             // 
-            this.edPassword.Location = new System.Drawing.Point(1615, 142);
-            this.edPassword.Name = "edPassword";
-            this.edPassword.Size = new System.Drawing.Size(122, 26);
-            this.edPassword.TabIndex = 12;
+            edPassword.Location = new System.Drawing.Point(1794, 178);
+            edPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edPassword.Name = "edPassword";
+            edPassword.Size = new System.Drawing.Size(135, 31);
+            edPassword.TabIndex = 12;
             // 
             // cbCameraIndex
             // 
-            this.cbCameraIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCameraIndex.FormattingEnabled = true;
-            this.cbCameraIndex.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.cbCameraIndex.Location = new System.Drawing.Point(1615, 13);
-            this.cbCameraIndex.Name = "cbCameraIndex";
-            this.cbCameraIndex.Size = new System.Drawing.Size(80, 28);
-            this.cbCameraIndex.TabIndex = 13;
-            this.cbCameraIndex.SelectedIndexChanged += new System.EventHandler(this.cbCameraIndex_SelectedIndexChanged);
+            cbCameraIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbCameraIndex.FormattingEnabled = true;
+            cbCameraIndex.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+            cbCameraIndex.Location = new System.Drawing.Point(1794, 16);
+            cbCameraIndex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbCameraIndex.Name = "cbCameraIndex";
+            cbCameraIndex.Size = new System.Drawing.Size(88, 33);
+            cbCameraIndex.TabIndex = 13;
+            cbCameraIndex.SelectedIndexChanged += cbCameraIndex_SelectedIndexChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1483, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 20);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "URL";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(1648, 66);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(43, 25);
+            label2.TabIndex = 14;
+            label2.Text = "URL";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1483, 117);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 20);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Login";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(1648, 146);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(56, 25);
+            label3.TabIndex = 15;
+            label3.Text = "Login";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1611, 117);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 20);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Password";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(1790, 146);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(87, 25);
+            label4.TabIndex = 16;
+            label4.Text = "Password";
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(1607, 351);
-            this.btStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(112, 35);
-            this.btStop.TabIndex = 19;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.btStop_Click);
+            btStop.Location = new System.Drawing.Point(1786, 439);
+            btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(124, 44);
+            btStop.TabIndex = 19;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // btStart
             // 
-            this.btStart.Location = new System.Drawing.Point(1487, 351);
-            this.btStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(112, 35);
-            this.btStart.TabIndex = 18;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            btStart.Location = new System.Drawing.Point(1652, 439);
+            btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(124, 44);
+            btStart.TabIndex = 18;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // cbAudioEnabled
             // 
-            this.cbAudioEnabled.AutoSize = true;
-            this.cbAudioEnabled.Checked = true;
-            this.cbAudioEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAudioEnabled.Location = new System.Drawing.Point(1487, 186);
-            this.cbAudioEnabled.Name = "cbAudioEnabled";
-            this.cbAudioEnabled.Size = new System.Drawing.Size(128, 24);
-            this.cbAudioEnabled.TabIndex = 20;
-            this.cbAudioEnabled.Text = "Enable audio";
-            this.cbAudioEnabled.UseVisualStyleBackColor = true;
+            cbAudioEnabled.AutoSize = true;
+            cbAudioEnabled.Checked = true;
+            cbAudioEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbAudioEnabled.Location = new System.Drawing.Point(1652, 232);
+            cbAudioEnabled.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbAudioEnabled.Name = "cbAudioEnabled";
+            cbAudioEnabled.Size = new System.Drawing.Size(140, 29);
+            cbAudioEnabled.TabIndex = 20;
+            cbAudioEnabled.Text = "Enable audio";
+            cbAudioEnabled.UseVisualStyleBackColor = true;
             // 
             // cbUseMJPEG
             // 
-            this.cbUseMJPEG.AutoSize = true;
-            this.cbUseMJPEG.Location = new System.Drawing.Point(1487, 216);
-            this.cbUseMJPEG.Name = "cbUseMJPEG";
-            this.cbUseMJPEG.Size = new System.Drawing.Size(219, 24);
-            this.cbUseMJPEG.TabIndex = 21;
-            this.cbUseMJPEG.Text = "Use HTTP MJPEG source";
-            this.cbUseMJPEG.UseVisualStyleBackColor = true;
+            cbUseMJPEG.AutoSize = true;
+            cbUseMJPEG.Location = new System.Drawing.Point(1652, 270);
+            cbUseMJPEG.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbUseMJPEG.Name = "cbUseMJPEG";
+            cbUseMJPEG.Size = new System.Drawing.Size(228, 29);
+            cbUseMJPEG.TabIndex = 21;
+            cbUseMJPEG.Text = "Use HTTP MJPEG source";
+            cbUseMJPEG.UseVisualStyleBackColor = true;
             // 
             // cbUseGPU
             // 
-            this.cbUseGPU.AutoSize = true;
-            this.cbUseGPU.Enabled = false;
-            this.cbUseGPU.Location = new System.Drawing.Point(1487, 246);
-            this.cbUseGPU.Name = "cbUseGPU";
-            this.cbUseGPU.Size = new System.Drawing.Size(223, 24);
-            this.cbUseGPU.TabIndex = 22;
-            this.cbUseGPU.Text = "Use custom video decoder";
-            this.cbUseGPU.UseVisualStyleBackColor = true;
+            cbUseGPU.AutoSize = true;
+            cbUseGPU.Enabled = false;
+            cbUseGPU.Location = new System.Drawing.Point(1652, 308);
+            cbUseGPU.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbUseGPU.Name = "cbUseGPU";
+            cbUseGPU.Size = new System.Drawing.Size(250, 29);
+            cbUseGPU.TabIndex = 22;
+            cbUseGPU.Text = "Use custom video decoder";
+            cbUseGPU.UseVisualStyleBackColor = true;
             // 
             // cbGPUDecoder
             // 
-            this.cbGPUDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbGPUDecoder.Enabled = false;
-            this.cbGPUDecoder.FormattingEnabled = true;
-            this.cbGPUDecoder.Location = new System.Drawing.Point(1515, 276);
-            this.cbGPUDecoder.Name = "cbGPUDecoder";
-            this.cbGPUDecoder.Size = new System.Drawing.Size(384, 28);
-            this.cbGPUDecoder.TabIndex = 24;
+            cbGPUDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbGPUDecoder.Enabled = false;
+            cbGPUDecoder.FormattingEnabled = true;
+            cbGPUDecoder.Location = new System.Drawing.Point(1683, 345);
+            cbGPUDecoder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbGPUDecoder.Name = "cbGPUDecoder";
+            cbGPUDecoder.Size = new System.Drawing.Size(426, 33);
+            cbGPUDecoder.TabIndex = 24;
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(1487, 614);
-            this.edLog.Multiline = true;
-            this.edLog.Name = "edLog";
-            this.edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edLog.Size = new System.Drawing.Size(412, 368);
-            this.edLog.TabIndex = 25;
+            edLog.Location = new System.Drawing.Point(1652, 768);
+            edLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edLog.Multiline = true;
+            edLog.Name = "edLog";
+            edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            edLog.Size = new System.Drawing.Size(457, 459);
+            edLog.TabIndex = 25;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1483, 591);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 20);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Error / info log";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(1648, 739);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(129, 25);
+            label5.TabIndex = 26;
+            label5.Text = "Error / info log";
             // 
             // cbCompatibilityMode
             // 
-            this.cbCompatibilityMode.AutoSize = true;
-            this.cbCompatibilityMode.Location = new System.Drawing.Point(1487, 319);
-            this.cbCompatibilityMode.Name = "cbCompatibilityMode";
-            this.cbCompatibilityMode.Size = new System.Drawing.Size(168, 24);
-            this.cbCompatibilityMode.TabIndex = 27;
-            this.cbCompatibilityMode.Text = "Compatibility mode";
-            this.cbCompatibilityMode.UseVisualStyleBackColor = true;
+            cbCompatibilityMode.AutoSize = true;
+            cbCompatibilityMode.Location = new System.Drawing.Point(1652, 399);
+            cbCompatibilityMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbCompatibilityMode.Name = "cbCompatibilityMode";
+            cbCompatibilityMode.Size = new System.Drawing.Size(196, 29);
+            cbCompatibilityMode.TabIndex = 27;
+            cbCompatibilityMode.Text = "Compatibility mode";
+            cbCompatibilityMode.UseVisualStyleBackColor = true;
             // 
             // btReadInfo
             // 
-            this.btReadInfo.Location = new System.Drawing.Point(1763, 137);
-            this.btReadInfo.Name = "btReadInfo";
-            this.btReadInfo.Size = new System.Drawing.Size(136, 36);
-            this.btReadInfo.TabIndex = 28;
-            this.btReadInfo.Text = "Read info";
-            this.btReadInfo.UseVisualStyleBackColor = true;
-            this.btReadInfo.Click += new System.EventHandler(this.btReadInfo_Click);
+            btReadInfo.Location = new System.Drawing.Point(1959, 171);
+            btReadInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btReadInfo.Name = "btReadInfo";
+            btReadInfo.Size = new System.Drawing.Size(151, 45);
+            btReadInfo.TabIndex = 28;
+            btReadInfo.Text = "Read info";
+            btReadInfo.UseVisualStyleBackColor = true;
+            btReadInfo.Click += btReadInfo_Click;
             // 
             // btStartRecord
             // 
-            this.btStartRecord.Location = new System.Drawing.Point(1487, 522);
-            this.btStartRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStartRecord.Name = "btStartRecord";
-            this.btStartRecord.Size = new System.Drawing.Size(112, 35);
-            this.btStartRecord.TabIndex = 29;
-            this.btStartRecord.Text = "Start record";
-            this.btStartRecord.UseVisualStyleBackColor = true;
-            this.btStartRecord.Click += new System.EventHandler(this.btStartRecord_Click);
+            btStartRecord.Location = new System.Drawing.Point(1652, 652);
+            btStartRecord.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStartRecord.Name = "btStartRecord";
+            btStartRecord.Size = new System.Drawing.Size(124, 44);
+            btStartRecord.TabIndex = 29;
+            btStartRecord.Text = "Start record";
+            btStartRecord.UseVisualStyleBackColor = true;
+            btStartRecord.Click += btStartRecord_Click;
             // 
             // btStopRecord
             // 
-            this.btStopRecord.Location = new System.Drawing.Point(1607, 522);
-            this.btStopRecord.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btStopRecord.Name = "btStopRecord";
-            this.btStopRecord.Size = new System.Drawing.Size(112, 35);
-            this.btStopRecord.TabIndex = 30;
-            this.btStopRecord.Text = "Stop record";
-            this.btStopRecord.UseVisualStyleBackColor = true;
-            this.btStopRecord.Click += new System.EventHandler(this.btStopRecord_Click);
+            btStopRecord.Location = new System.Drawing.Point(1786, 652);
+            btStopRecord.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btStopRecord.Name = "btStopRecord";
+            btStopRecord.Size = new System.Drawing.Size(124, 44);
+            btStopRecord.TabIndex = 30;
+            btStopRecord.Text = "Stop record";
+            btStopRecord.UseVisualStyleBackColor = true;
+            btStopRecord.Click += btStopRecord_Click;
             // 
             // videoView9
             // 
-            this.videoView9.BackColor = System.Drawing.Color.Black;
-            this.videoView9.Location = new System.Drawing.Point(984, 664);
-            this.videoView9.Name = "videoView9";
-            this.videoView9.Size = new System.Drawing.Size(480, 320);
-            this.videoView9.StatusOverlay = null;
-            this.videoView9.TabIndex = 7;
+            videoView9.BackColor = System.Drawing.Color.Black;
+            videoView9.Location = new System.Drawing.Point(1093, 830);
+            videoView9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView9.Name = "videoView9";
+            videoView9.Size = new System.Drawing.Size(533, 400);
+            videoView9.StatusOverlay = null;
+            videoView9.TabIndex = 7;
             // 
             // videoView8
             // 
-            this.videoView8.BackColor = System.Drawing.Color.Black;
-            this.videoView8.Location = new System.Drawing.Point(498, 664);
-            this.videoView8.Name = "videoView8";
-            this.videoView8.Size = new System.Drawing.Size(480, 320);
-            this.videoView8.StatusOverlay = null;
-            this.videoView8.TabIndex = 6;
+            videoView8.BackColor = System.Drawing.Color.Black;
+            videoView8.Location = new System.Drawing.Point(553, 830);
+            videoView8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView8.Name = "videoView8";
+            videoView8.Size = new System.Drawing.Size(533, 400);
+            videoView8.StatusOverlay = null;
+            videoView8.TabIndex = 6;
             // 
             // videoView7
             // 
-            this.videoView7.BackColor = System.Drawing.Color.Black;
-            this.videoView7.Location = new System.Drawing.Point(12, 664);
-            this.videoView7.Name = "videoView7";
-            this.videoView7.Size = new System.Drawing.Size(480, 320);
-            this.videoView7.StatusOverlay = null;
-            this.videoView7.TabIndex = 1;
+            videoView7.BackColor = System.Drawing.Color.Black;
+            videoView7.Location = new System.Drawing.Point(13, 830);
+            videoView7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView7.Name = "videoView7";
+            videoView7.Size = new System.Drawing.Size(533, 400);
+            videoView7.StatusOverlay = null;
+            videoView7.TabIndex = 1;
             // 
             // videoView6
             // 
-            this.videoView6.BackColor = System.Drawing.Color.Black;
-            this.videoView6.Location = new System.Drawing.Point(984, 338);
-            this.videoView6.Name = "videoView6";
-            this.videoView6.Size = new System.Drawing.Size(480, 320);
-            this.videoView6.StatusOverlay = null;
-            this.videoView6.TabIndex = 5;
+            videoView6.BackColor = System.Drawing.Color.Black;
+            videoView6.Location = new System.Drawing.Point(1093, 422);
+            videoView6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView6.Name = "videoView6";
+            videoView6.Size = new System.Drawing.Size(533, 400);
+            videoView6.StatusOverlay = null;
+            videoView6.TabIndex = 5;
             // 
             // videoView5
             // 
-            this.videoView5.BackColor = System.Drawing.Color.Black;
-            this.videoView5.Location = new System.Drawing.Point(498, 338);
-            this.videoView5.Name = "videoView5";
-            this.videoView5.Size = new System.Drawing.Size(480, 320);
-            this.videoView5.StatusOverlay = null;
-            this.videoView5.TabIndex = 4;
+            videoView5.BackColor = System.Drawing.Color.Black;
+            videoView5.Location = new System.Drawing.Point(553, 422);
+            videoView5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView5.Name = "videoView5";
+            videoView5.Size = new System.Drawing.Size(533, 400);
+            videoView5.StatusOverlay = null;
+            videoView5.TabIndex = 4;
             // 
             // videoView4
             // 
-            this.videoView4.BackColor = System.Drawing.Color.Black;
-            this.videoView4.Location = new System.Drawing.Point(12, 338);
-            this.videoView4.Name = "videoView4";
-            this.videoView4.Size = new System.Drawing.Size(480, 320);
-            this.videoView4.StatusOverlay = null;
-            this.videoView4.TabIndex = 3;
+            videoView4.BackColor = System.Drawing.Color.Black;
+            videoView4.Location = new System.Drawing.Point(13, 422);
+            videoView4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView4.Name = "videoView4";
+            videoView4.Size = new System.Drawing.Size(533, 400);
+            videoView4.StatusOverlay = null;
+            videoView4.TabIndex = 3;
             // 
             // videoView3
             // 
-            this.videoView3.BackColor = System.Drawing.Color.Black;
-            this.videoView3.Location = new System.Drawing.Point(984, 12);
-            this.videoView3.Name = "videoView3";
-            this.videoView3.Size = new System.Drawing.Size(480, 320);
-            this.videoView3.StatusOverlay = null;
-            this.videoView3.TabIndex = 2;
+            videoView3.BackColor = System.Drawing.Color.Black;
+            videoView3.Location = new System.Drawing.Point(1093, 15);
+            videoView3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView3.Name = "videoView3";
+            videoView3.Size = new System.Drawing.Size(533, 400);
+            videoView3.StatusOverlay = null;
+            videoView3.TabIndex = 2;
             // 
             // videoView2
             // 
-            this.videoView2.BackColor = System.Drawing.Color.Black;
-            this.videoView2.Location = new System.Drawing.Point(498, 12);
-            this.videoView2.Name = "videoView2";
-            this.videoView2.Size = new System.Drawing.Size(480, 320);
-            this.videoView2.StatusOverlay = null;
-            this.videoView2.TabIndex = 1;
+            videoView2.BackColor = System.Drawing.Color.Black;
+            videoView2.Location = new System.Drawing.Point(553, 15);
+            videoView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView2.Name = "videoView2";
+            videoView2.Size = new System.Drawing.Size(533, 400);
+            videoView2.StatusOverlay = null;
+            videoView2.TabIndex = 1;
             // 
             // videoView1
             // 
-            this.videoView1.BackColor = System.Drawing.Color.Black;
-            this.videoView1.Location = new System.Drawing.Point(12, 12);
-            this.videoView1.Name = "videoView1";
-            this.videoView1.Size = new System.Drawing.Size(480, 320);
-            this.videoView1.StatusOverlay = null;
-            this.videoView1.TabIndex = 0;
+            videoView1.BackColor = System.Drawing.Color.Black;
+            videoView1.Location = new System.Drawing.Point(13, 15);
+            videoView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            videoView1.Name = "videoView1";
+            videoView1.Size = new System.Drawing.Size(533, 400);
+            videoView1.StatusOverlay = null;
+            videoView1.TabIndex = 0;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1483, 417);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(328, 20);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Record original video to MPEG-TS or MP4 file";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(1648, 521);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(371, 25);
+            label6.TabIndex = 31;
+            label6.Text = "Record original video to MPEG-TS or MP4 file";
             // 
             // edFilename
             // 
-            this.edFilename.Location = new System.Drawing.Point(1487, 440);
-            this.edFilename.Name = "edFilename";
-            this.edFilename.Size = new System.Drawing.Size(371, 26);
-            this.edFilename.TabIndex = 32;
-            this.edFilename.Text = "c:\\vf\\_ipcamoutput.ts";
+            edFilename.Location = new System.Drawing.Point(1652, 550);
+            edFilename.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edFilename.Name = "edFilename";
+            edFilename.Size = new System.Drawing.Size(412, 31);
+            edFilename.TabIndex = 32;
+            edFilename.Text = "c:\\vf\\_ipcamoutput.ts";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1864, 436);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(35, 35);
-            this.button1.TabIndex = 33;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new System.Drawing.Point(2071, 545);
+            button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(39, 44);
+            button1.TabIndex = 33;
+            button1.Text = "...";
+            button1.UseVisualStyleBackColor = true;
             // 
             // saveFileDialog1
             // 
-            this.saveFileDialog1.DefaultExt = "ts";
-            this.saveFileDialog1.Filter = "MPEG-TS files|*.ts";
+            saveFileDialog1.DefaultExt = "ts";
+            saveFileDialog1.Filter = "MPEG-TS files|*.ts";
             // 
             // cbReencodeAudio
             // 
-            this.cbReencodeAudio.AutoSize = true;
-            this.cbReencodeAudio.Checked = true;
-            this.cbReencodeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbReencodeAudio.Location = new System.Drawing.Point(1747, 482);
-            this.cbReencodeAudio.Name = "cbReencodeAudio";
-            this.cbReencodeAudio.Size = new System.Drawing.Size(152, 24);
-            this.cbReencodeAudio.TabIndex = 34;
-            this.cbReencodeAudio.Text = "Reencode audio";
-            this.cbReencodeAudio.UseVisualStyleBackColor = true;
+            cbReencodeAudio.AutoSize = true;
+            cbReencodeAudio.Checked = true;
+            cbReencodeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbReencodeAudio.Location = new System.Drawing.Point(1941, 602);
+            cbReencodeAudio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbReencodeAudio.Name = "cbReencodeAudio";
+            cbReencodeAudio.Size = new System.Drawing.Size(165, 29);
+            cbReencodeAudio.TabIndex = 34;
+            cbReencodeAudio.Text = "Reencode audio";
+            cbReencodeAudio.UseVisualStyleBackColor = true;
             // 
             // cbRAWEvents
             // 
-            this.cbRAWEvents.AutoSize = true;
-            this.cbRAWEvents.Checked = true;
-            this.cbRAWEvents.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbRAWEvents.Location = new System.Drawing.Point(1633, 186);
-            this.cbRAWEvents.Name = "cbRAWEvents";
-            this.cbRAWEvents.Size = new System.Drawing.Size(208, 24);
-            this.cbRAWEvents.TabIndex = 35;
-            this.cbRAWEvents.Text = "RAW video/audio events";
-            this.cbRAWEvents.UseVisualStyleBackColor = true;
+            cbRAWEvents.AutoSize = true;
+            cbRAWEvents.Checked = true;
+            cbRAWEvents.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbRAWEvents.Location = new System.Drawing.Point(1814, 232);
+            cbRAWEvents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbRAWEvents.Name = "cbRAWEvents";
+            cbRAWEvents.Size = new System.Drawing.Size(234, 29);
+            cbRAWEvents.TabIndex = 35;
+            cbRAWEvents.Text = "RAW video/audio events";
+            cbRAWEvents.UseVisualStyleBackColor = true;
             // 
             // rbMPEGTSOutput
             // 
-            this.rbMPEGTSOutput.AutoSize = true;
-            this.rbMPEGTSOutput.Checked = true;
-            this.rbMPEGTSOutput.Location = new System.Drawing.Point(1487, 481);
-            this.rbMPEGTSOutput.Name = "rbMPEGTSOutput";
-            this.rbMPEGTSOutput.Size = new System.Drawing.Size(106, 24);
-            this.rbMPEGTSOutput.TabIndex = 36;
-            this.rbMPEGTSOutput.TabStop = true;
-            this.rbMPEGTSOutput.Text = "MPEG-TS";
-            this.rbMPEGTSOutput.UseVisualStyleBackColor = true;
+            rbMPEGTSOutput.AutoSize = true;
+            rbMPEGTSOutput.Checked = true;
+            rbMPEGTSOutput.Location = new System.Drawing.Point(1652, 601);
+            rbMPEGTSOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            rbMPEGTSOutput.Name = "rbMPEGTSOutput";
+            rbMPEGTSOutput.Size = new System.Drawing.Size(110, 29);
+            rbMPEGTSOutput.TabIndex = 36;
+            rbMPEGTSOutput.TabStop = true;
+            rbMPEGTSOutput.Text = "MPEG-TS";
+            rbMPEGTSOutput.UseVisualStyleBackColor = true;
             // 
             // rbMP4Output
             // 
-            this.rbMP4Output.AutoSize = true;
-            this.rbMP4Output.Location = new System.Drawing.Point(1609, 481);
-            this.rbMP4Output.Name = "rbMP4Output";
-            this.rbMP4Output.Size = new System.Drawing.Size(66, 24);
-            this.rbMP4Output.TabIndex = 37;
-            this.rbMP4Output.Text = "MP4";
-            this.rbMP4Output.UseVisualStyleBackColor = true;
+            rbMP4Output.AutoSize = true;
+            rbMP4Output.Location = new System.Drawing.Point(1788, 601);
+            rbMP4Output.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            rbMP4Output.Name = "rbMP4Output";
+            rbMP4Output.Size = new System.Drawing.Size(73, 29);
+            rbMP4Output.TabIndex = 37;
+            rbMP4Output.Text = "MP4";
+            rbMP4Output.UseVisualStyleBackColor = true;
             // 
             // btONVIF
             // 
-            this.btONVIF.Location = new System.Drawing.Point(1763, 6);
-            this.btONVIF.Name = "btONVIF";
-            this.btONVIF.Size = new System.Drawing.Size(136, 46);
-            this.btONVIF.TabIndex = 38;
-            this.btONVIF.Text = "ONVIF discovery";
-            this.btONVIF.UseVisualStyleBackColor = true;
-            this.btONVIF.Click += new System.EventHandler(this.btONVIF_Click);
+            btONVIF.Location = new System.Drawing.Point(1959, 8);
+            btONVIF.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btONVIF.Name = "btONVIF";
+            btONVIF.Size = new System.Drawing.Size(151, 58);
+            btONVIF.TabIndex = 38;
+            btONVIF.Text = "ONVIF discovery";
+            btONVIF.UseVisualStyleBackColor = true;
+            btONVIF.Click += btONVIF_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1918, 994);
-            this.Controls.Add(this.btONVIF);
-            this.Controls.Add(this.rbMP4Output);
-            this.Controls.Add(this.rbMPEGTSOutput);
-            this.Controls.Add(this.cbRAWEvents);
-            this.Controls.Add(this.cbReencodeAudio);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.edFilename);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btStopRecord);
-            this.Controls.Add(this.btStartRecord);
-            this.Controls.Add(this.btReadInfo);
-            this.Controls.Add(this.cbCompatibilityMode);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.edLog);
-            this.Controls.Add(this.cbGPUDecoder);
-            this.Controls.Add(this.cbUseGPU);
-            this.Controls.Add(this.cbUseMJPEG);
-            this.Controls.Add(this.cbAudioEnabled);
-            this.Controls.Add(this.btStop);
-            this.Controls.Add(this.btStart);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cbCameraIndex);
-            this.Controls.Add(this.edPassword);
-            this.Controls.Add(this.edLogin);
-            this.Controls.Add(this.edURL);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.videoView9);
-            this.Controls.Add(this.videoView8);
-            this.Controls.Add(this.videoView7);
-            this.Controls.Add(this.videoView6);
-            this.Controls.Add(this.videoView5);
-            this.Controls.Add(this.videoView4);
-            this.Controls.Add(this.videoView3);
-            this.Controls.Add(this.videoView2);
-            this.Controls.Add(this.videoView1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "RTSP MultiView Demo";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(2131, 1242);
+            Controls.Add(btONVIF);
+            Controls.Add(rbMP4Output);
+            Controls.Add(rbMPEGTSOutput);
+            Controls.Add(cbRAWEvents);
+            Controls.Add(cbReencodeAudio);
+            Controls.Add(button1);
+            Controls.Add(edFilename);
+            Controls.Add(label6);
+            Controls.Add(btStopRecord);
+            Controls.Add(btStartRecord);
+            Controls.Add(btReadInfo);
+            Controls.Add(cbCompatibilityMode);
+            Controls.Add(label5);
+            Controls.Add(edLog);
+            Controls.Add(cbGPUDecoder);
+            Controls.Add(cbUseGPU);
+            Controls.Add(cbUseMJPEG);
+            Controls.Add(cbAudioEnabled);
+            Controls.Add(btStop);
+            Controls.Add(btStart);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(cbCameraIndex);
+            Controls.Add(edPassword);
+            Controls.Add(edLogin);
+            Controls.Add(edURL);
+            Controls.Add(label1);
+            Controls.Add(videoView9);
+            Controls.Add(videoView8);
+            Controls.Add(videoView7);
+            Controls.Add(videoView6);
+            Controls.Add(videoView5);
+            Controls.Add(videoView4);
+            Controls.Add(videoView3);
+            Controls.Add(videoView2);
+            Controls.Add(videoView1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "Form1";
+            Text = "RTSP MultiView Demo";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

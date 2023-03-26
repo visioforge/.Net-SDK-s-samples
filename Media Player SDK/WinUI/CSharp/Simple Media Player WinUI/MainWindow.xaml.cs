@@ -43,7 +43,7 @@ namespace Simple_Media_Player_WinUI
 
             _videoViewBackgroud = ((SolidColorBrush)videoView.Background).Color;
 
-            SetIcon();
+            // SetIcon();
 
             InitTimer();
         }

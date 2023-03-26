@@ -148,7 +148,7 @@ namespace MediaBlocks_Player_Demo
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
 
             tbTimeline.Value = 0;

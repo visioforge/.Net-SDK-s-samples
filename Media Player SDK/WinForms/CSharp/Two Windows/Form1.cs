@@ -22,6 +22,7 @@ namespace Two_Windows_Demo
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
+            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
         private void DestroyEngine()
@@ -88,6 +89,8 @@ namespace Two_Windows_Demo
             MediaPlayer1.MultiScreen_Enabled = true;
             MediaPlayer1.MultiScreen_Clear();
             MediaPlayer1.MultiScreen_AddScreen(form2.Screen.Handle, form2.Screen.Width, form2.Screen.Height);
+
+            MediaPlayer1.Debug_Mode = form2.Debug_Mode;
 
             await MediaPlayer1.PlayAsync();
 

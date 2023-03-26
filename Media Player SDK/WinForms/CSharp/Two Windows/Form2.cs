@@ -7,6 +7,14 @@ namespace Two_Windows_Demo
 
     public partial class Form2 : Form
     {
+        public bool Debug_Mode
+        {
+            get
+            {
+                return cbDebugMode.Checked;
+            }
+        }
+
         public Control Screen
         {
             get
@@ -15,7 +23,7 @@ namespace Two_Windows_Demo
             }
         }
 
-        public event EventHandler<EventArgs> OnWindowSizeChanged; 
+        public event EventHandler<EventArgs> OnWindowSizeChanged;
 
         public void LogLicense(string message)
         {

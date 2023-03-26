@@ -22,33 +22,33 @@ namespace Video_From_Images
 
     public partial class Form1 : Form
     {
-        private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
+        private HWEncodersOutputSettingsDialog _mp4HWSettingsDialog;
 
-        private MP4SettingsDialog mp4SettingsDialog;
+        private MP4SettingsDialog _mp4SettingsDialog;
 
-        private AVISettingsDialog aviSettingsDialog;
+        private AVISettingsDialog _aviSettingsDialog;
 
-        private MP3SettingsDialog mp3SettingsDialog;
+        private MP3SettingsDialog _mp3SettingsDialog;
 
-        private WMVSettingsDialog wmvSettingsDialog;
+        private WMVSettingsDialog _wmvSettingsDialog;
 
-        private DVSettingsDialog dvSettingsDialog;
+        private DVSettingsDialog _dvSettingsDialog;
 
-        private WebMSettingsDialog webmSettingsDialog;
+        private WebMSettingsDialog _webmSettingsDialog;
 
-        private FFMPEGSettingsDialog ffmpegSettingsDialog;
+        private FFMPEGSettingsDialog _ffmpegSettingsDialog;
 
-        private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
+        private FFMPEGEXESettingsDialog _ffmpegEXESettingsDialog;
 
-        private GIFSettingsDialog gifSettingsDialog;
+        private GIFSettingsDialog _gifSettingsDialog;
 
-        private bool predefinedImagesUsed;
+        private bool _predefinedImagesUsed;
 
-        private Bitmap loadedImage;
+        private Bitmap _loadedImage;
 
-        private string loadedImageFilename;
+        private string _loadedImageFilename;
 
-        private string[] loadedFiles;
+        private string[] _loadedFiles;
 
         private VideoEditCore VideoEdit1;
 
@@ -64,6 +64,7 @@ namespace Video_From_Images
             VideoEdit1.OnError += VideoEdit1_OnError;
             VideoEdit1.OnStop += VideoEdit1_OnStop;
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
+            VideoEdit1.OnVideoFrameBitmap += VideoEdit1_OnVideoFrameBitmap;
         }
 
         private void DestroyEngine()
@@ -73,6 +74,7 @@ namespace Video_From_Images
                 VideoEdit1.OnError -= VideoEdit1_OnError;
                 VideoEdit1.OnStop -= VideoEdit1_OnStop;
                 VideoEdit1.OnProgress -= VideoEdit1_OnProgress;
+                VideoEdit1.OnVideoFrameBitmap -= VideoEdit1_OnVideoFrameBitmap;
 
                 VideoEdit1.Dispose();
                 VideoEdit1 = null;
@@ -108,93 +110,93 @@ namespace Video_From_Images
 
         private void SetMP4Output(ref MP4Output mp4Output)
         {
-            if (this.mp4SettingsDialog == null)
+            if (this._mp4SettingsDialog == null)
             {
-                this.mp4SettingsDialog = new MP4SettingsDialog();
+                this._mp4SettingsDialog = new MP4SettingsDialog();
             }
 
-            this.mp4SettingsDialog.SaveSettings(ref mp4Output);
+            this._mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
-            if (ffmpegEXESettingsDialog == null)
+            if (_ffmpegEXESettingsDialog == null)
             {
-                ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
+                _ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
             }
 
-            ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
+            _ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
-            if (wmvSettingsDialog == null)
+            if (_wmvSettingsDialog == null)
             {
-                wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
+                _wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
             }
 
-            wmvSettingsDialog.WMA = false;
-            wmvSettingsDialog.SaveSettings(ref wmvOutput);
+            _wmvSettingsDialog.WMA = false;
+            _wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
         private void SetWebMOutput(ref WebMOutput webmOutput)
         {
-            if (webmSettingsDialog == null)
+            if (_webmSettingsDialog == null)
             {
-                webmSettingsDialog = new WebMSettingsDialog();
+                _webmSettingsDialog = new WebMSettingsDialog();
             }
 
-            webmSettingsDialog.SaveSettings(ref webmOutput);
+            _webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
         private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
-            if (ffmpegSettingsDialog == null)
+            if (_ffmpegSettingsDialog == null)
             {
-                ffmpegSettingsDialog = new FFMPEGSettingsDialog();
+                _ffmpegSettingsDialog = new FFMPEGSettingsDialog();
             }
 
-            ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
+            _ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
-            if (mp4HWSettingsDialog == null)
+            if (_mp4HWSettingsDialog == null)
             {
-                mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
+                _mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
             }
 
-            mp4HWSettingsDialog.SaveSettings(ref mp4Output);
+            _mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
-            if (gifSettingsDialog == null)
+            if (_gifSettingsDialog == null)
             {
-                gifSettingsDialog = new GIFSettingsDialog();
+                _gifSettingsDialog = new GIFSettingsDialog();
             }
 
-            gifSettingsDialog.SaveSettings(ref gifOutput);
+            _gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
         private void SetDVOutput(ref DVOutput dvOutput)
         {
-            if (dvSettingsDialog == null)
+            if (_dvSettingsDialog == null)
             {
-                dvSettingsDialog = new DVSettingsDialog();
+                _dvSettingsDialog = new DVSettingsDialog();
             }
 
-            dvSettingsDialog.SaveSettings(ref dvOutput);
+            _dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
-            if (aviSettingsDialog == null)
+            if (_aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
+                _aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
-            aviSettingsDialog.SaveSettings(ref aviOutput);
+            _aviSettingsDialog.SaveSettings(ref aviOutput);
 
             if (aviOutput.Audio_UseMP3Encoder)
             {
@@ -206,22 +208,22 @@ namespace Video_From_Images
 
         private void SetMP3Output(ref MP3Output mp3Output)
         {
-            if (mp3SettingsDialog == null)
+            if (_mp3SettingsDialog == null)
             {
-                mp3SettingsDialog = new MP3SettingsDialog();
+                _mp3SettingsDialog = new MP3SettingsDialog();
             }
 
-            mp3SettingsDialog.SaveSettings(ref mp3Output);
+            _mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
         private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
-            if (aviSettingsDialog == null)
+            if (_aviSettingsDialog == null)
             {
-                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
+                _aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
             }
 
-            aviSettingsDialog.SaveSettings(ref mkvOutput);
+            _aviSettingsDialog.SaveSettings(ref mkvOutput);
 
             if (mkvOutput.Audio_UseMP3Encoder)
             {
@@ -365,7 +367,7 @@ namespace Video_From_Images
 
             if (rbImagesPredefined.Checked)
             {
-                predefinedImagesUsed = true;
+                _predefinedImagesUsed = true;
 
                 await VideoEdit1.Input_AddVideoBlankAsync(
                     TimeSpan.FromMilliseconds(10000),
@@ -376,7 +378,7 @@ namespace Video_From_Images
             }
             else
             {
-                predefinedImagesUsed = false;
+                _predefinedImagesUsed = false;
 
                 if (!Directory.Exists(edImagesFolder.Text))
                 {
@@ -384,20 +386,20 @@ namespace Video_From_Images
                     return;
                 }
 
-                loadedFiles = EnumerateImageFiles(edImagesFolder.Text);
+                _loadedFiles = EnumerateImageFiles(edImagesFolder.Text);
 
                 int width = Convert.ToInt32(edWidth.Text);
                 int height = Convert.ToInt32(edHeight.Text);
 
-                loadedImageFilename = null;
-                if (loadedImage != null)
+                _loadedImageFilename = null;
+                if (_loadedImage != null)
                 {
-                    loadedImage.Dispose();
-                    loadedImage = null;
+                    _loadedImage.Dispose();
+                    _loadedImage = null;
                 }
 
                 await VideoEdit1.Input_AddVideoBlankAsync(
-                    TimeSpan.FromSeconds(loadedFiles.Length * 2),
+                    TimeSpan.FromSeconds(_loadedFiles.Length * 2),
                     TimeSpan.FromMilliseconds(0),
                     width,
                     height,
@@ -431,7 +433,7 @@ namespace Video_From_Images
         {
             Bitmap frame;
 
-            if (predefinedImagesUsed)
+            if (_predefinedImagesUsed)
             {
                 if (e.Timestamp.TotalMilliseconds < 2000)
                 {
@@ -457,17 +459,17 @@ namespace Video_From_Images
             else
             {
                 int index = (int)Math.Truncate(e.Timestamp.TotalMilliseconds / 2000);
-                if (loadedImageFilename == loadedFiles[index])
+                if (_loadedImageFilename == _loadedFiles[index])
                 {
-                    frame = loadedImage;
+                    frame = _loadedImage;
                 }
                 else
                 {
-                    loadedImageFilename = loadedFiles[index];
-                    loadedImage?.Dispose();
-                    loadedImage = new Bitmap(loadedFiles[index]);
+                    _loadedImageFilename = _loadedFiles[index];
+                    _loadedImage?.Dispose();
+                    _loadedImage = new Bitmap(_loadedFiles[index]);
 
-                    frame = loadedImage;
+                    frame = _loadedImage;
                 }
             }
 
@@ -475,6 +477,11 @@ namespace Video_From_Images
             {
                 g.DrawImage(frame, new RectangleF(0, 0, e.Frame.Width, e.Frame.Height), new RectangleF(0, 0, frame.Width, frame.Height), GraphicsUnit.Pixel);
                 e.UpdateData = true;
+            }
+
+            if (_predefinedImagesUsed)
+            {
+                frame?.Dispose();
             }
         }
 
@@ -566,102 +573,102 @@ namespace Video_From_Images
                 case 0:
                 case 1:
                     {
-                        if (aviSettingsDialog == null)
+                        if (_aviSettingsDialog == null)
                         {
-                            aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
+                            _aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
 
-                        aviSettingsDialog.ShowDialog(this);
+                        _aviSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 2:
                     {
-                        if (wmvSettingsDialog == null)
+                        if (_wmvSettingsDialog == null)
                         {
-                            wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
+                            _wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1);
                         }
 
-                        wmvSettingsDialog.WMA = false;
-                        wmvSettingsDialog.ShowDialog(this);
+                        _wmvSettingsDialog.WMA = false;
+                        _wmvSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 3:
                     {
-                        if (dvSettingsDialog == null)
+                        if (_dvSettingsDialog == null)
                         {
-                            dvSettingsDialog = new DVSettingsDialog();
+                            _dvSettingsDialog = new DVSettingsDialog();
                         }
 
-                        dvSettingsDialog.ShowDialog(this);
+                        _dvSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 4:
                     {
-                        if (webmSettingsDialog == null)
+                        if (_webmSettingsDialog == null)
                         {
-                            webmSettingsDialog = new WebMSettingsDialog();
+                            _webmSettingsDialog = new WebMSettingsDialog();
                         }
 
-                        webmSettingsDialog.ShowDialog(this);
+                        _webmSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 5:
                     {
-                        if (ffmpegSettingsDialog == null)
+                        if (_ffmpegSettingsDialog == null)
                         {
-                            ffmpegSettingsDialog = new FFMPEGSettingsDialog();
+                            _ffmpegSettingsDialog = new FFMPEGSettingsDialog();
                         }
 
-                        ffmpegSettingsDialog.ShowDialog(this);
+                        _ffmpegSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 6:
                     {
-                        if (ffmpegEXESettingsDialog == null)
+                        if (_ffmpegEXESettingsDialog == null)
                         {
-                            ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
+                            _ffmpegEXESettingsDialog = new FFMPEGEXESettingsDialog();
                         }
 
-                        ffmpegEXESettingsDialog.ShowDialog(this);
+                        _ffmpegEXESettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 7:
                 case 10:
                     {
-                        if (this.mp4SettingsDialog == null)
+                        if (this._mp4SettingsDialog == null)
                         {
-                            this.mp4SettingsDialog = new MP4SettingsDialog();
+                            this._mp4SettingsDialog = new MP4SettingsDialog();
                         }
 
-                        this.mp4SettingsDialog.ShowDialog(this);
+                        this._mp4SettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 8:
                     {
-                        if (mp4HWSettingsDialog == null)
+                        if (_mp4HWSettingsDialog == null)
                         {
-                            mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
+                            _mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4);
                         }
 
-                        mp4HWSettingsDialog.ShowDialog(this);
+                        _mp4HWSettingsDialog.ShowDialog(this);
 
                         break;
                     }
                 case 9:
                     {
-                        if (gifSettingsDialog == null)
+                        if (_gifSettingsDialog == null)
                         {
-                            gifSettingsDialog = new GIFSettingsDialog();
+                            _gifSettingsDialog = new GIFSettingsDialog();
                         }
 
-                        gifSettingsDialog.ShowDialog(this);
+                        _gifSettingsDialog.ShowDialog(this);
 
                         break;
                     }

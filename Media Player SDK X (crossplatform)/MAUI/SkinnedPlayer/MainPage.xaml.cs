@@ -14,6 +14,7 @@ using VisioForge.Core.UI.Skins;
 using Stream = System.IO.Stream;
 using System.Reflection;
 using System.Drawing.Printing;
+using VisioForge.Core.Types.X.Output;
 
 #if ANDROID
 using Android.Runtime;
@@ -92,6 +93,7 @@ namespace SkinnedPlayer_MAUI
             _player = new MediaPlayerCoreX(imgVideo);
 #endif
             _player.OnError += _player_OnError;
+            _player.Audio_OutputDevice = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result[0];
 
             pbPanel.Player = _player;
 

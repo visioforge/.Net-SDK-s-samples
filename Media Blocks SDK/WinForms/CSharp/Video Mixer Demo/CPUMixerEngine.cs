@@ -74,7 +74,7 @@ namespace MediaBlocks_Video_Mixer_Demo
         {
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
 
             if (_pipeline != null)

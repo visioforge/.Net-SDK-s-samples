@@ -9,6 +9,7 @@ using VisioForge.Core.Types;
 using Microsoft.Maui.Storage;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using System;
+using VisioForge.Core.Types.X.Output;
 
 #if ANDROID
 using Android.Runtime;
@@ -59,6 +60,8 @@ namespace Simple_Player_MAUI
 #endif
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
+
+            _player.Audio_OutputDevice = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result[0];
 
             Window.Destroying += Window_Destroying;
         }

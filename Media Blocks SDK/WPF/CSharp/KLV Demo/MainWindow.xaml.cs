@@ -24,7 +24,6 @@ using VisioForge.Core.Metadata.KLV;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Metadata;
 using VisioForge.Core.Types.X.Sinks;
-using VisioForge.Libs.DirectShowLib;
 
 namespace KLV_Demo
 {
