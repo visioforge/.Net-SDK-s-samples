@@ -31,177 +31,189 @@ namespace Audio_Extractor
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.edSourceFile = new System.Windows.Forms.TextBox();
-            this.btSelectOutput = new System.Windows.Forms.Button();
-            this.btSelectInput = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.edOutputFile = new System.Windows.Forms.TextBox();
-            this.rbReencodeMP3 = new System.Windows.Forms.RadioButton();
-            this.rbExtract = new System.Windows.Forms.RadioButton();
-            this.rbReencodeM4A = new System.Windows.Forms.RadioButton();
-            this.btStart = new System.Windows.Forms.Button();
-            this.btStop = new System.Windows.Forms.Button();
-            this.OpenDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.SaveDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.pbProgress = new System.Windows.Forms.ProgressBar();
-            this.edLog = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            label1 = new Label();
+            edSourceFile = new TextBox();
+            btSelectOutput = new Button();
+            btSelectInput = new Button();
+            label2 = new Label();
+            edOutputFile = new TextBox();
+            rbReencodeMP3 = new RadioButton();
+            rbExtract = new RadioButton();
+            rbReencodeM4A = new RadioButton();
+            btStart = new Button();
+            btStop = new Button();
+            OpenDialog1 = new OpenFileDialog();
+            SaveDialog1 = new SaveFileDialog();
+            pbProgress = new ProgressBar();
+            edLog = new TextBox();
+            linkLabelDecoders = new LinkLabel();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Source file";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(16, 16);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(94, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Source file";
             // 
             // edSourceFile
             // 
-            this.edSourceFile.Location = new System.Drawing.Point(16, 44);
-            this.edSourceFile.Name = "edSourceFile";
-            this.edSourceFile.Size = new System.Drawing.Size(683, 31);
-            this.edSourceFile.TabIndex = 1;
-            this.edSourceFile.Text = "c:\\Samples\\!video.mp4";
+            edSourceFile.Location = new System.Drawing.Point(16, 44);
+            edSourceFile.Name = "edSourceFile";
+            edSourceFile.Size = new System.Drawing.Size(683, 31);
+            edSourceFile.TabIndex = 1;
+            edSourceFile.Text = "c:\\Samples\\!video.mp4";
             // 
             // btSelectOutput
             // 
-            this.btSelectOutput.Location = new System.Drawing.Point(706, 124);
-            this.btSelectOutput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btSelectOutput.Name = "btSelectOutput";
-            this.btSelectOutput.Size = new System.Drawing.Size(32, 32);
-            this.btSelectOutput.TabIndex = 32;
-            this.btSelectOutput.Text = "...";
-            this.btSelectOutput.UseVisualStyleBackColor = true;
-            this.btSelectOutput.Click += new System.EventHandler(this.btSelectOutput_Click);
+            btSelectOutput.Location = new System.Drawing.Point(706, 124);
+            btSelectOutput.Margin = new Padding(4, 6, 4, 6);
+            btSelectOutput.Name = "btSelectOutput";
+            btSelectOutput.Size = new System.Drawing.Size(32, 32);
+            btSelectOutput.TabIndex = 32;
+            btSelectOutput.Text = "...";
+            btSelectOutput.UseVisualStyleBackColor = true;
+            btSelectOutput.Click += btSelectOutput_Click;
             // 
             // btSelectInput
             // 
-            this.btSelectInput.Location = new System.Drawing.Point(706, 44);
-            this.btSelectInput.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btSelectInput.Name = "btSelectInput";
-            this.btSelectInput.Size = new System.Drawing.Size(32, 32);
-            this.btSelectInput.TabIndex = 33;
-            this.btSelectInput.Text = "...";
-            this.btSelectInput.UseVisualStyleBackColor = true;
-            this.btSelectInput.Click += new System.EventHandler(this.btSelectInput_Click);
+            btSelectInput.Location = new System.Drawing.Point(706, 44);
+            btSelectInput.Margin = new Padding(4, 6, 4, 6);
+            btSelectInput.Name = "btSelectInput";
+            btSelectInput.Size = new System.Drawing.Size(32, 32);
+            btSelectInput.TabIndex = 33;
+            btSelectInput.Text = "...";
+            btSelectInput.UseVisualStyleBackColor = true;
+            btSelectInput.Click += btSelectInput_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 25);
-            this.label2.TabIndex = 34;
-            this.label2.Text = "Output file";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(16, 97);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(97, 25);
+            label2.TabIndex = 34;
+            label2.Text = "Output file";
             // 
             // edOutputFile
             // 
-            this.edOutputFile.Location = new System.Drawing.Point(16, 125);
-            this.edOutputFile.Name = "edOutputFile";
-            this.edOutputFile.Size = new System.Drawing.Size(683, 31);
-            this.edOutputFile.TabIndex = 35;
+            edOutputFile.Location = new System.Drawing.Point(16, 125);
+            edOutputFile.Name = "edOutputFile";
+            edOutputFile.Size = new System.Drawing.Size(683, 31);
+            edOutputFile.TabIndex = 35;
             // 
             // rbReencodeMP3
             // 
-            this.rbReencodeMP3.AutoSize = true;
-            this.rbReencodeMP3.Checked = true;
-            this.rbReencodeMP3.Location = new System.Drawing.Point(16, 189);
-            this.rbReencodeMP3.Name = "rbReencodeMP3";
-            this.rbReencodeMP3.Size = new System.Drawing.Size(177, 29);
-            this.rbReencodeMP3.TabIndex = 36;
-            this.rbReencodeMP3.TabStop = true;
-            this.rbReencodeMP3.Text = "Reencode to MP3";
-            this.rbReencodeMP3.UseVisualStyleBackColor = true;
+            rbReencodeMP3.AutoSize = true;
+            rbReencodeMP3.Checked = true;
+            rbReencodeMP3.Location = new System.Drawing.Point(16, 189);
+            rbReencodeMP3.Name = "rbReencodeMP3";
+            rbReencodeMP3.Size = new System.Drawing.Size(177, 29);
+            rbReencodeMP3.TabIndex = 36;
+            rbReencodeMP3.TabStop = true;
+            rbReencodeMP3.Text = "Reencode to MP3";
+            rbReencodeMP3.UseVisualStyleBackColor = true;
             // 
             // rbExtract
             // 
-            this.rbExtract.AutoSize = true;
-            this.rbExtract.Location = new System.Drawing.Point(412, 189);
-            this.rbExtract.Name = "rbExtract";
-            this.rbExtract.Size = new System.Drawing.Size(326, 29);
-            this.rbExtract.TabIndex = 37;
-            this.rbExtract.Text = "Extract (specify correct file extension)";
-            this.rbExtract.UseVisualStyleBackColor = true;
+            rbExtract.AutoSize = true;
+            rbExtract.Location = new System.Drawing.Point(412, 189);
+            rbExtract.Name = "rbExtract";
+            rbExtract.Size = new System.Drawing.Size(326, 29);
+            rbExtract.TabIndex = 37;
+            rbExtract.Text = "Extract (specify correct file extension)";
+            rbExtract.UseVisualStyleBackColor = true;
             // 
             // rbReencodeM4A
             // 
-            this.rbReencodeM4A.AutoSize = true;
-            this.rbReencodeM4A.Location = new System.Drawing.Point(215, 189);
-            this.rbReencodeM4A.Name = "rbReencodeM4A";
-            this.rbReencodeM4A.Size = new System.Drawing.Size(179, 29);
-            this.rbReencodeM4A.TabIndex = 38;
-            this.rbReencodeM4A.Text = "Reencode to M4A";
-            this.rbReencodeM4A.UseVisualStyleBackColor = true;
+            rbReencodeM4A.AutoSize = true;
+            rbReencodeM4A.Location = new System.Drawing.Point(215, 189);
+            rbReencodeM4A.Name = "rbReencodeM4A";
+            rbReencodeM4A.Size = new System.Drawing.Size(179, 29);
+            rbReencodeM4A.TabIndex = 38;
+            rbReencodeM4A.Text = "Reencode to M4A";
+            rbReencodeM4A.UseVisualStyleBackColor = true;
             // 
             // btStart
             // 
-            this.btStart.Location = new System.Drawing.Point(16, 240);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(84, 34);
-            this.btStart.TabIndex = 39;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            btStart.Location = new System.Drawing.Point(16, 240);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(84, 34);
+            btStart.TabIndex = 39;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(106, 240);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(84, 34);
-            this.btStop.TabIndex = 40;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
+            btStop.Location = new System.Drawing.Point(106, 240);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(84, 34);
+            btStop.TabIndex = 40;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
             // 
             // OpenDialog1
             // 
-            this.OpenDialog1.Filter = resources.GetString("OpenDialog1.Filter");
+            OpenDialog1.Filter = resources.GetString("OpenDialog1.Filter");
             // 
             // SaveDialog1
             // 
-            this.SaveDialog1.Filter = "MP3| *.mp3|M4A| *.m4a|All files  (*.*)| *.*";
+            SaveDialog1.Filter = "MP3| *.mp3|M4A| *.m4a|All files  (*.*)| *.*";
             // 
             // pbProgress
             // 
-            this.pbProgress.Location = new System.Drawing.Point(215, 240);
-            this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(523, 34);
-            this.pbProgress.TabIndex = 41;
+            pbProgress.Location = new System.Drawing.Point(215, 240);
+            pbProgress.Name = "pbProgress";
+            pbProgress.Size = new System.Drawing.Size(523, 34);
+            pbProgress.TabIndex = 41;
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(16, 306);
-            this.edLog.Multiline = true;
-            this.edLog.Name = "edLog";
-            this.edLog.Size = new System.Drawing.Size(722, 265);
-            this.edLog.TabIndex = 42;
+            edLog.Location = new System.Drawing.Point(16, 306);
+            edLog.Multiline = true;
+            edLog.Name = "edLog";
+            edLog.Size = new System.Drawing.Size(722, 265);
+            edLog.TabIndex = 42;
+            // 
+            // linkLabelDecoders
+            // 
+            linkLabelDecoders.AutoSize = true;
+            linkLabelDecoders.Location = new System.Drawing.Point(106, 593);
+            linkLabelDecoders.Name = "linkLabelDecoders";
+            linkLabelDecoders.Size = new System.Drawing.Size(546, 25);
+            linkLabelDecoders.TabIndex = 58;
+            linkLabelDecoders.TabStop = true;
+            linkLabelDecoders.Text = "[NuGet only] Install decoders if you can see errors while adding files";
+            linkLabelDecoders.LinkClicked += linkLabelDecoders_LinkClicked;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 596);
-            this.Controls.Add(this.edLog);
-            this.Controls.Add(this.pbProgress);
-            this.Controls.Add(this.btStop);
-            this.Controls.Add(this.btStart);
-            this.Controls.Add(this.rbReencodeM4A);
-            this.Controls.Add(this.rbExtract);
-            this.Controls.Add(this.rbReencodeMP3);
-            this.Controls.Add(this.edOutputFile);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btSelectInput);
-            this.Controls.Add(this.btSelectOutput);
-            this.Controls.Add(this.edSourceFile);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "Video Edit SDK .Net - Audio Extractor Demo";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(766, 641);
+            Controls.Add(linkLabelDecoders);
+            Controls.Add(edLog);
+            Controls.Add(pbProgress);
+            Controls.Add(btStop);
+            Controls.Add(btStart);
+            Controls.Add(rbReencodeM4A);
+            Controls.Add(rbExtract);
+            Controls.Add(rbReencodeMP3);
+            Controls.Add(edOutputFile);
+            Controls.Add(label2);
+            Controls.Add(btSelectInput);
+            Controls.Add(btSelectOutput);
+            Controls.Add(edSourceFile);
+            Controls.Add(label1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Name = "Form1";
+            Text = "Video Edit SDK .Net - Audio Extractor Demo";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -221,5 +233,6 @@ namespace Audio_Extractor
         private SaveFileDialog SaveDialog1;
         private ProgressBar pbProgress;
         private TextBox edLog;
+        private LinkLabel linkLabelDecoders;
     }
 }

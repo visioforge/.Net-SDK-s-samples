@@ -28,208 +28,230 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.edInputFile = new System.Windows.Forms.TextBox();
-            this.btInputFile = new System.Windows.Forms.Button();
-            this.btOutputFile = new System.Windows.Forms.Button();
-            this.edOutputFile = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btStart = new System.Windows.Forms.Button();
-            this.btStop = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.edLog = new System.Windows.Forms.TextBox();
-            this.pbProgress = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.edKey = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.tmProgress = new System.Windows.Forms.Timer(this.components);
-            this.cbForceRecompress = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            edInputFile = new System.Windows.Forms.TextBox();
+            btInputFile = new System.Windows.Forms.Button();
+            btOutputFile = new System.Windows.Forms.Button();
+            edOutputFile = new System.Windows.Forms.TextBox();
+            label3 = new System.Windows.Forms.Label();
+            btStart = new System.Windows.Forms.Button();
+            btStop = new System.Windows.Forms.Button();
+            label4 = new System.Windows.Forms.Label();
+            edLog = new System.Windows.Forms.TextBox();
+            pbProgress = new System.Windows.Forms.ProgressBar();
+            label5 = new System.Windows.Forms.Label();
+            edKey = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            tmProgress = new System.Windows.Forms.Timer(components);
+            cbForceRecompress = new System.Windows.Forms.CheckBox();
+            linkLabelDecoders = new System.Windows.Forms.LinkLabel();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(740, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "File will be encrypted without reencoding for H264 video and AAC audio, otherwise" +
-    " file will be reencoded.";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(29, 35);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(847, 25);
+            label1.TabIndex = 0;
+            label1.Text = "File will be encrypted without reencoding for H264 video and AAC audio, otherwise file will be reencoded.";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Input file";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(29, 90);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(82, 25);
+            label2.TabIndex = 1;
+            label2.Text = "Input file";
             // 
             // edInputFile
             // 
-            this.edInputFile.Location = new System.Drawing.Point(30, 95);
-            this.edInputFile.Name = "edInputFile";
-            this.edInputFile.Size = new System.Drawing.Size(698, 26);
-            this.edInputFile.TabIndex = 2;
+            edInputFile.Location = new System.Drawing.Point(33, 119);
+            edInputFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edInputFile.Name = "edInputFile";
+            edInputFile.Size = new System.Drawing.Size(775, 31);
+            edInputFile.TabIndex = 2;
             // 
             // btInputFile
             // 
-            this.btInputFile.Location = new System.Drawing.Point(734, 92);
-            this.btInputFile.Name = "btInputFile";
-            this.btInputFile.Size = new System.Drawing.Size(32, 32);
-            this.btInputFile.TabIndex = 3;
-            this.btInputFile.Text = "...";
-            this.btInputFile.UseVisualStyleBackColor = true;
-            this.btInputFile.Click += new System.EventHandler(this.btInputFile_Click);
+            btInputFile.Location = new System.Drawing.Point(816, 115);
+            btInputFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btInputFile.Name = "btInputFile";
+            btInputFile.Size = new System.Drawing.Size(36, 40);
+            btInputFile.TabIndex = 3;
+            btInputFile.Text = "...";
+            btInputFile.UseVisualStyleBackColor = true;
+            btInputFile.Click += btInputFile_Click;
             // 
             // btOutputFile
             // 
-            this.btOutputFile.Location = new System.Drawing.Point(734, 165);
-            this.btOutputFile.Name = "btOutputFile";
-            this.btOutputFile.Size = new System.Drawing.Size(32, 32);
-            this.btOutputFile.TabIndex = 6;
-            this.btOutputFile.Text = "...";
-            this.btOutputFile.UseVisualStyleBackColor = true;
-            this.btOutputFile.Click += new System.EventHandler(this.btOutputFile_Click);
+            btOutputFile.Location = new System.Drawing.Point(816, 206);
+            btOutputFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btOutputFile.Name = "btOutputFile";
+            btOutputFile.Size = new System.Drawing.Size(36, 40);
+            btOutputFile.TabIndex = 6;
+            btOutputFile.Text = "...";
+            btOutputFile.UseVisualStyleBackColor = true;
+            btOutputFile.Click += btOutputFile_Click;
             // 
             // edOutputFile
             // 
-            this.edOutputFile.Location = new System.Drawing.Point(30, 168);
-            this.edOutputFile.Name = "edOutputFile";
-            this.edOutputFile.Size = new System.Drawing.Size(698, 26);
-            this.edOutputFile.TabIndex = 5;
+            edOutputFile.Location = new System.Drawing.Point(33, 210);
+            edOutputFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edOutputFile.Name = "edOutputFile";
+            edOutputFile.Size = new System.Drawing.Size(775, 31);
+            edOutputFile.TabIndex = 5;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 145);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Output file";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(29, 181);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(97, 25);
+            label3.TabIndex = 4;
+            label3.Text = "Output file";
             // 
             // btStart
             // 
-            this.btStart.Location = new System.Drawing.Point(566, 555);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(97, 41);
-            this.btStart.TabIndex = 7;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            btStart.Location = new System.Drawing.Point(629, 694);
+            btStart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(108, 51);
+            btStart.TabIndex = 7;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // btStop
             // 
-            this.btStop.Location = new System.Drawing.Point(669, 555);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(97, 41);
-            this.btStop.TabIndex = 8;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.btStop_Click);
+            btStop.Location = new System.Drawing.Point(743, 694);
+            btStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(108, 51);
+            btStop.TabIndex = 8;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 217);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Log";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(29, 271);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(42, 25);
+            label4.TabIndex = 9;
+            label4.Text = "Log";
             // 
             // edLog
             // 
-            this.edLog.Location = new System.Drawing.Point(30, 240);
-            this.edLog.Multiline = true;
-            this.edLog.Name = "edLog";
-            this.edLog.Size = new System.Drawing.Size(348, 356);
-            this.edLog.TabIndex = 10;
+            edLog.Location = new System.Drawing.Point(33, 300);
+            edLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edLog.Multiline = true;
+            edLog.Name = "edLog";
+            edLog.Size = new System.Drawing.Size(386, 444);
+            edLog.TabIndex = 10;
             // 
             // pbProgress
             // 
-            this.pbProgress.Location = new System.Drawing.Point(395, 564);
-            this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(151, 23);
-            this.pbProgress.TabIndex = 11;
+            pbProgress.Location = new System.Drawing.Point(439, 705);
+            pbProgress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            pbProgress.Name = "pbProgress";
+            pbProgress.Size = new System.Drawing.Size(168, 29);
+            pbProgress.TabIndex = 11;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(391, 217);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Key";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(434, 271);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(40, 25);
+            label5.TabIndex = 12;
+            label5.Text = "Key";
             // 
             // edKey
             // 
-            this.edKey.Location = new System.Drawing.Point(395, 240);
-            this.edKey.Name = "edKey";
-            this.edKey.Size = new System.Drawing.Size(371, 26);
-            this.edKey.TabIndex = 13;
-            this.edKey.Text = "somepassword";
+            edKey.Location = new System.Drawing.Point(439, 300);
+            edKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            edKey.Name = "edKey";
+            edKey.Size = new System.Drawing.Size(412, 31);
+            edKey.TabIndex = 13;
+            edKey.Text = "somepassword";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(391, 282);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(280, 20);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Also, you can use the binary key or file.";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(434, 352);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(320, 25);
+            label6.TabIndex = 14;
+            label6.Text = "Also, you can use the binary key or file.";
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // tmProgress
             // 
-            this.tmProgress.Interval = 500;
-            this.tmProgress.Tick += new System.EventHandler(this.tmProgress_Tick);
+            tmProgress.Interval = 500;
+            tmProgress.Tick += tmProgress_Tick;
             // 
             // cbForceRecompress
             // 
-            this.cbForceRecompress.AutoSize = true;
-            this.cbForceRecompress.Location = new System.Drawing.Point(395, 325);
-            this.cbForceRecompress.Name = "cbForceRecompress";
-            this.cbForceRecompress.Size = new System.Drawing.Size(163, 24);
-            this.cbForceRecompress.TabIndex = 15;
-            this.cbForceRecompress.Text = "Force recompress";
-            this.cbForceRecompress.UseVisualStyleBackColor = true;
+            cbForceRecompress.AutoSize = true;
+            cbForceRecompress.Location = new System.Drawing.Point(439, 406);
+            cbForceRecompress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            cbForceRecompress.Name = "cbForceRecompress";
+            cbForceRecompress.Size = new System.Drawing.Size(178, 29);
+            cbForceRecompress.TabIndex = 15;
+            cbForceRecompress.Text = "Force recompress";
+            cbForceRecompress.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelDecoders
+            // 
+            linkLabelDecoders.AutoSize = true;
+            linkLabelDecoders.Location = new System.Drawing.Point(305, 86);
+            linkLabelDecoders.Name = "linkLabelDecoders";
+            linkLabelDecoders.Size = new System.Drawing.Size(546, 25);
+            linkLabelDecoders.TabIndex = 58;
+            linkLabelDecoders.TabStop = true;
+            linkLabelDecoders.Text = "[NuGet only] Install decoders if you can see errors while adding files";
+            linkLabelDecoders.LinkClicked += linkLabelDecoders_LinkClicked;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 608);
-            this.Controls.Add(this.cbForceRecompress);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.edKey);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.pbProgress);
-            this.Controls.Add(this.edLog);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.btStop);
-            this.Controls.Add(this.btStart);
-            this.Controls.Add(this.btOutputFile);
-            this.Controls.Add(this.edOutputFile);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btInputFile);
-            this.Controls.Add(this.edInputFile);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "Video Encryptor Demo";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(880, 760);
+            Controls.Add(linkLabelDecoders);
+            Controls.Add(cbForceRecompress);
+            Controls.Add(label6);
+            Controls.Add(edKey);
+            Controls.Add(label5);
+            Controls.Add(pbProgress);
+            Controls.Add(edLog);
+            Controls.Add(label4);
+            Controls.Add(btStop);
+            Controls.Add(btStart);
+            Controls.Add(btOutputFile);
+            Controls.Add(edOutputFile);
+            Controls.Add(label3);
+            Controls.Add(btInputFile);
+            Controls.Add(edInputFile);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            Name = "Form1";
+            Text = "Video Encryptor Demo";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -253,5 +275,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Timer tmProgress;
         private System.Windows.Forms.CheckBox cbForceRecompress;
+        private System.Windows.Forms.LinkLabel linkLabelDecoders;
     }
 }

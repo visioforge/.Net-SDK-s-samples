@@ -2891,7 +2891,7 @@ Public Class Form1
     End Sub
 
     Private Sub llDecoders_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llDecoders.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub)
+        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64)
         Process.Start(startInfo)
     End Sub
 End Class

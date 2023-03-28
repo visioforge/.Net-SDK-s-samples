@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.Output;
+using VisioForge.Core.UI;
 using VisioForge.Core.VideoEdit;
 
 namespace Audio_Extractor
@@ -102,9 +103,15 @@ namespace Audio_Extractor
                 {
                     _core.Output_Format = new M4AOutput();
                 }
-                
+
                 await _core.StartAsync();
             }
+        }
+
+        private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
+            Process.Start(startInfo);
         }
     }
 }

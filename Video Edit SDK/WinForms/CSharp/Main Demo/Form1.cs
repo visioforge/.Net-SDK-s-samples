@@ -3462,7 +3462,7 @@ namespace VideoEdit_CS_Demo
 
         private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub);
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
             Process.Start(startInfo);
         }
     }

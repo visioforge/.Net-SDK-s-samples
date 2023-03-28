@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using VisioForge.Core.MediaInfo;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoEdit;
+using VisioForge.Core.UI;
 using VisioForge.Core.VideoEdit;
 
 namespace File_Encryptor
@@ -156,6 +158,12 @@ namespace File_Encryptor
             {
                 pbProgress.Value = _videoEdit.GetProgress();
             }
+        }
+
+        private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
+            Process.Start(startInfo);
         }
     }
 }

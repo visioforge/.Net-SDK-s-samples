@@ -902,6 +902,12 @@ namespace Video_From_Images
         {
             DestroyEngine();
         }
+
+        private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
+            Process.Start(startInfo);
+        }
     }
 }
 

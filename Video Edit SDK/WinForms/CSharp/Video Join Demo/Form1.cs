@@ -7,10 +7,12 @@ using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 
 namespace Video_Join_Demo
 {
+    using System.Diagnostics;
     using System.IO;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoEdit;
+    using VisioForge.Core.UI;
     using VisioForge.Core.VideoEdit;
 
     public partial class Form1 : Form
@@ -863,6 +865,12 @@ namespace Video_Join_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
+        }
+
+        private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
+            Process.Start(startInfo);
         }
     }
 }
