@@ -3442,7 +3442,7 @@ namespace Main_Demo
 
         private void llDecoders_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.LAVGitHub);
+            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
             Process.Start(startInfo);
         }
     }
