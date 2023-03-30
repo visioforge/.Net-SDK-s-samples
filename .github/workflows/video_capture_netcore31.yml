@@ -11,8 +11,11 @@ jobs:
       Solution_Name_1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) netcore31.sln"
       Solution_Name_2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia (NuGet) netcore31.sln"
       Solution_Name_3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) netcore31.sln"
+      Solution_Name_4: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS netcore31.sln"
+      Solution_Name_5: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia netcore31.sln"
+      Solution_Name_6: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV netcore31.sln"
     
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +29,7 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
         
+    
     - name: Restore dependencies 1
       run: dotnet restore $env:Solution_Name_1 
 
@@ -43,3 +47,21 @@ jobs:
 
     - name: Build app for release 3
       run: msbuild $env:Solution_Name_3 -t:rebuild -verbosity:diag -property:Configuration=Release
+      
+    - name: Restore dependencies 4
+      run: dotnet restore $env:Solution_Name_4
+
+    - name: Build app for release 4
+      run: msbuild $env:Solution_Name_4 -t:rebuild -verbosity:diag -property:Configuration=Release
+      
+    - name: Restore dependencies 5
+      run: dotnet restore $env:Solution_Name_5 
+
+    - name: Build app for release 5
+      run: msbuild $env:Solution_Name_5 -t:rebuild -verbosity:diag -property:Configuration=Release
+      
+    - name: Restore dependencies 6
+      run: dotnet restore $env:Solution_Name_6 
+
+    - name: Build app for release 6
+      run: msbuild $env:Solution_Name_6 -t:rebuild -verbosity:diag -property:Configuration=Release
