@@ -12,8 +12,7 @@ jobs:
       Solution_Name_2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia (NuGet) net7.sln"
       Solution_Name_3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln"
       Solution_Name_4: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS net7.sln"
-      Solution_Name_5: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia net7.sln"
-      Solution_Name_6: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV net7.sln"
+      Solution_Name_5: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV net7.sln"
     
     runs-on: windows-2022
 
@@ -56,17 +55,11 @@ jobs:
     - name: (MAIN 2) Build app for release
       run: msbuild $env:Solution_Name_4 -t:rebuild -verbosity:diag -property:Configuration=Release
 
-    - name: (Avalonia 2) Restore dependencies
+    - name: (CV 2) Restore dependencies
       run: dotnet restore $env:Solution_Name_5
 
-    - name: (Avalonia 2) Build app for release
-      run: msbuild $env:Solution_Name_5 -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: (CV 2) Restore dependencies
-      run: dotnet restore $env:Solution_Name_6
-
     - name: (CV 2) Build app for release
-      run: msbuild $env:Solution_Name_6 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: msbuild $env:Solution_Name_5 -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
