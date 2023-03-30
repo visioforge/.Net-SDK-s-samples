@@ -9,6 +9,7 @@ jobs:
   build:
     env:
       Solution_Name: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln"
+      Solution_Name_2: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS net7.sln"
     
     runs-on: windows-2022
 
@@ -26,11 +27,17 @@ jobs:
       with:
         vs-prerelease: true
         
-    - name: Restore dependencies
+    - name: Restore dependencies 1
       run: dotnet restore $env:Solution_Name
 
-    - name: Build app for release
+    - name: Build app for release 1
       run: msbuild $env:Solution_Name -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies 2
+      run: dotnet restore $env:Solution_Name_2
+
+    - name: Build app for release 2
+      run: msbuild $env:Solution_Name_2 -t:rebuild -verbosity:diag -property:Configuration=Release  
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
