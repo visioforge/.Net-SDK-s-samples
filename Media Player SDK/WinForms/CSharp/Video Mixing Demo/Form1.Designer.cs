@@ -38,8 +38,6 @@
             btAddFileToPlaylist = new System.Windows.Forms.Button();
             label30 = new System.Windows.Forms.Label();
             lbSourceFiles = new System.Windows.Forms.ListBox();
-            cbSourceMode = new System.Windows.Forms.ComboBox();
-            label29 = new System.Windows.Forms.Label();
             tabControl3 = new System.Windows.Forms.TabControl();
             tabPage10 = new System.Windows.Forms.TabPage();
             cbLicensing = new System.Windows.Forms.CheckBox();
@@ -153,31 +151,11 @@
             lbSourceFiles.TabIndex = 28;
             lbSourceFiles.SelectedIndexChanged += lbSourceFiles_SelectedIndexChanged;
             // 
-            // cbSourceMode
-            // 
-            cbSourceMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cbSourceMode.FormattingEnabled = true;
-            cbSourceMode.Items.AddRange(new object[] { "File / Network stream (decode using LAV) ", "File (decode using FFMPEG)", "File (decode using DirectShow)", "File (decode using VLC)" });
-            cbSourceMode.Location = new System.Drawing.Point(717, 242);
-            cbSourceMode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            cbSourceMode.Name = "cbSourceMode";
-            cbSourceMode.Size = new System.Drawing.Size(521, 33);
-            cbSourceMode.TabIndex = 27;
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new System.Drawing.Point(542, 248);
-            label29.Name = "label29";
-            label29.Size = new System.Drawing.Size(118, 25);
-            label29.TabIndex = 26;
-            label29.Text = "Source mode";
-            // 
             // tabControl3
             // 
             tabControl3.Controls.Add(tabPage10);
             tabControl3.Controls.Add(tabPage9);
-            tabControl3.Location = new System.Drawing.Point(17, 921);
+            tabControl3.Location = new System.Drawing.Point(18, 663);
             tabControl3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             tabControl3.Name = "tabControl3";
             tabControl3.SelectedIndex = 0;
@@ -442,7 +420,7 @@
             groupBox2.Controls.Add(label16);
             groupBox2.Controls.Add(lbTime);
             groupBox2.Controls.Add(tbTimeline);
-            groupBox2.Location = new System.Drawing.Point(547, 921);
+            groupBox2.Location = new System.Drawing.Point(547, 771);
             groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -761,17 +739,17 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new System.Drawing.Size(508, 217);
+            textBox1.Size = new System.Drawing.Size(508, 64);
             textBox1.TabIndex = 74;
             textBox1.Text = "First file will cover entire screen by default. You can set position for each stream independently.";
             // 
             // VideoView1
             // 
             VideoView1.BackColor = System.Drawing.Color.Black;
-            VideoView1.Location = new System.Drawing.Point(547, 313);
+            VideoView1.Location = new System.Drawing.Point(547, 254);
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
-            VideoView1.Size = new System.Drawing.Size(693, 596);
+            VideoView1.Size = new System.Drawing.Size(693, 502);
             VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 75;
             // 
@@ -779,7 +757,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1258, 1225);
+            ClientSize = new System.Drawing.Size(1258, 959);
             Controls.Add(VideoView1);
             Controls.Add(textBox1);
             Controls.Add(label4);
@@ -795,8 +773,6 @@
             Controls.Add(btAddFileToPlaylist);
             Controls.Add(label30);
             Controls.Add(lbSourceFiles);
-            Controls.Add(cbSourceMode);
-            Controls.Add(label29);
             Controls.Add(tabControl3);
             Controls.Add(groupBox2);
             Controls.Add(btSelectFile);
@@ -836,8 +812,6 @@
         private System.Windows.Forms.Button btAddFileToPlaylist;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ListBox lbSourceFiles;
-        private System.Windows.Forms.ComboBox cbSourceMode;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.CheckBox cbLicensing;

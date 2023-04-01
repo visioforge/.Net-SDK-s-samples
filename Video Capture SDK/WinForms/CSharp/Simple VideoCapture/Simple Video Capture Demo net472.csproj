@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Video Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.58.0</AssemblyVersion>
-    <FileVersion>15.5.58.0</FileVersion>
+    <AssemblyVersion>15.5.59.0</AssemblyVersion>
+    <FileVersion>15.5.59.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -65,8 +65,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.58" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.58" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.59" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.59" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

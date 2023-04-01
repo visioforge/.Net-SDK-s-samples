@@ -565,28 +565,6 @@ namespace Media_Player_Demo
             this.label16 = (new global::System.Windows.Forms.Label());
             this.lbTime = (new global::System.Windows.Forms.Label());
             this.tbTimeline = (new global::System.Windows.Forms.TrackBar());
-            this.tabControl3 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage10 = (new global::System.Windows.Forms.TabPage());
-            this.cbTelemetry = (new global::System.Windows.Forms.CheckBox());
-            this.mmLog = (new global::System.Windows.Forms.TextBox());
-            this.cbDebugMode = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage9 = (new global::System.Windows.Forms.TabPage());
-            this.tabControl13 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage54 = (new global::System.Windows.Forms.TabPage());
-            this.cbImageType = (new global::System.Windows.Forms.ComboBox());
-            this.lbJPEGQuality = (new global::System.Windows.Forms.Label());
-            this.label38 = (new global::System.Windows.Forms.Label());
-            this.btSaveScreenshot = (new global::System.Windows.Forms.Button());
-            this.btSelectScreenshotsFolder = (new global::System.Windows.Forms.Button());
-            this.label63 = (new global::System.Windows.Forms.Label());
-            this.edScreenshotsFolder = (new global::System.Windows.Forms.TextBox());
-            this.tbJPEGQuality = (new global::System.Windows.Forms.TrackBar());
-            this.tabPage55 = (new global::System.Windows.Forms.TabPage());
-            this.edScreenshotHeight = (new global::System.Windows.Forms.TextBox());
-            this.label176 = (new global::System.Windows.Forms.Label());
-            this.edScreenshotWidth = (new global::System.Windows.Forms.TextBox());
-            this.label177 = (new global::System.Windows.Forms.Label());
-            this.cbScreenshotResize = (new global::System.Windows.Forms.CheckBox());
             this.openFileDialog1 = (new global::System.Windows.Forms.OpenFileDialog());
             this.fontDialog1 = (new global::System.Windows.Forms.FontDialog());
             this.openFileDialog2 = (new global::System.Windows.Forms.OpenFileDialog());
@@ -602,9 +580,11 @@ namespace Media_Player_Demo
             this.label30 = (new global::System.Windows.Forms.Label());
             this.btAddFileToPlaylist = (new global::System.Windows.Forms.Button());
             this.linkLabel1 = (new global::System.Windows.Forms.LinkLabel());
-            this.label37 = (new global::System.Windows.Forms.Label());
-            this.edCustomSourceFilter = (new global::System.Windows.Forms.TextBox());
             this.VideoView1 = (new global::VisioForge.Core.UI.WinForms.VideoView());
+            this.cbTelemetry = (new global::System.Windows.Forms.CheckBox());
+            this.mmLog = (new global::System.Windows.Forms.TextBox());
+            this.cbDebugMode = (new global::System.Windows.Forms.CheckBox());
+            this.btSaveSnapshot = (new global::System.Windows.Forms.Button());
             this.tabControl1.SuspendLayout();
             this.tabPage20.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -744,13 +724,6 @@ namespace Media_Player_Demo
             this.groupBox2.SuspendLayout();
             ((global::System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
-            this.tabControl3.SuspendLayout();
-            this.tabPage10.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.tabControl13.SuspendLayout();
-            this.tabPage54.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbJPEGQuality)).BeginInit();
-            this.tabPage55.SuspendLayout();
             this.mnPlaylist.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -6840,7 +6813,7 @@ namespace Media_Player_Demo
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.lbTime);
             this.groupBox2.Controls.Add(this.tbTimeline);
-            this.groupBox2.Location = (new global::System.Drawing.Point(550, 969));
+            this.groupBox2.Location = (new global::System.Drawing.Point(550, 757));
             this.groupBox2.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
             this.groupBox2.Name = ("groupBox2");
             this.groupBox2.Padding = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
@@ -6969,257 +6942,6 @@ namespace Media_Player_Demo
             this.tbTimeline.TabIndex = (0);
             this.tbTimeline.Scroll += (this.tbTimeline_Scroll);
             // 
-            // tabControl3
-            // 
-            this.tabControl3.Controls.Add(this.tabPage10);
-            this.tabControl3.Controls.Add(this.tabPage9);
-            this.tabControl3.Location = (new global::System.Drawing.Point(20, 1022));
-            this.tabControl3.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabControl3.Name = ("tabControl3");
-            this.tabControl3.SelectedIndex = (0);
-            this.tabControl3.Size = (new global::System.Drawing.Size(516, 281));
-            this.tabControl3.TabIndex = (9);
-            // 
-            // tabPage10
-            // 
-            this.tabPage10.Controls.Add(this.cbTelemetry);
-            this.tabPage10.Controls.Add(this.mmLog);
-            this.tabPage10.Controls.Add(this.cbDebugMode);
-            this.tabPage10.Location = (new global::System.Drawing.Point(4, 34));
-            this.tabPage10.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage10.Name = ("tabPage10");
-            this.tabPage10.Padding = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage10.Size = (new global::System.Drawing.Size(508, 243));
-            this.tabPage10.TabIndex = (2);
-            this.tabPage10.Text = ("Debug");
-            this.tabPage10.UseVisualStyleBackColor = (true);
-            // 
-            // cbTelemetry
-            // 
-            this.cbTelemetry.AutoSize = (true);
-            this.cbTelemetry.Checked = (true);
-            this.cbTelemetry.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.cbTelemetry.Location = (new global::System.Drawing.Point(132, 25));
-            this.cbTelemetry.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.cbTelemetry.Name = ("cbTelemetry");
-            this.cbTelemetry.Size = (new global::System.Drawing.Size(113, 29));
-            this.cbTelemetry.TabIndex = (4);
-            this.cbTelemetry.Text = ("Telemetry");
-            this.cbTelemetry.UseVisualStyleBackColor = (true);
-            // 
-            // mmLog
-            // 
-            this.mmLog.Location = (new global::System.Drawing.Point(28, 69));
-            this.mmLog.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.mmLog.Multiline = (true);
-            this.mmLog.Name = ("mmLog");
-            this.mmLog.ScrollBars = (global::System.Windows.Forms.ScrollBars.Both);
-            this.mmLog.Size = (new global::System.Drawing.Size(436, 146));
-            this.mmLog.TabIndex = (1);
-            // 
-            // cbDebugMode
-            // 
-            this.cbDebugMode.AutoSize = (true);
-            this.cbDebugMode.Location = (new global::System.Drawing.Point(28, 25));
-            this.cbDebugMode.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.cbDebugMode.Name = ("cbDebugMode");
-            this.cbDebugMode.Size = (new global::System.Drawing.Size(92, 29));
-            this.cbDebugMode.TabIndex = (0);
-            this.cbDebugMode.Text = ("Debug");
-            this.cbDebugMode.UseVisualStyleBackColor = (true);
-            // 
-            // tabPage9
-            // 
-            this.tabPage9.Controls.Add(this.tabControl13);
-            this.tabPage9.Location = (new global::System.Drawing.Point(4, 34));
-            this.tabPage9.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage9.Name = ("tabPage9");
-            this.tabPage9.Padding = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage9.Size = (new global::System.Drawing.Size(508, 243));
-            this.tabPage9.TabIndex = (1);
-            this.tabPage9.Text = ("Snapshot");
-            this.tabPage9.UseVisualStyleBackColor = (true);
-            // 
-            // tabControl13
-            // 
-            this.tabControl13.Controls.Add(this.tabPage54);
-            this.tabControl13.Controls.Add(this.tabPage55);
-            this.tabControl13.Location = (new global::System.Drawing.Point(2, 5));
-            this.tabControl13.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabControl13.Name = ("tabControl13");
-            this.tabControl13.SelectedIndex = (0);
-            this.tabControl13.Size = (new global::System.Drawing.Size(489, 214));
-            this.tabControl13.TabIndex = (27);
-            // 
-            // tabPage54
-            // 
-            this.tabPage54.Controls.Add(this.cbImageType);
-            this.tabPage54.Controls.Add(this.lbJPEGQuality);
-            this.tabPage54.Controls.Add(this.label38);
-            this.tabPage54.Controls.Add(this.btSaveScreenshot);
-            this.tabPage54.Controls.Add(this.btSelectScreenshotsFolder);
-            this.tabPage54.Controls.Add(this.label63);
-            this.tabPage54.Controls.Add(this.edScreenshotsFolder);
-            this.tabPage54.Controls.Add(this.tbJPEGQuality);
-            this.tabPage54.Location = (new global::System.Drawing.Point(4, 34));
-            this.tabPage54.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage54.Name = ("tabPage54");
-            this.tabPage54.Padding = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage54.Size = (new global::System.Drawing.Size(481, 176));
-            this.tabPage54.TabIndex = (0);
-            this.tabPage54.Text = ("Main");
-            this.tabPage54.UseVisualStyleBackColor = (true);
-            // 
-            // cbImageType
-            // 
-            this.cbImageType.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbImageType.FormattingEnabled = (true);
-            this.cbImageType.Items.AddRange(new global::System.Object[] { "BMP", "JPEG", "GIF", "PNG", "TIFF" });
-            this.cbImageType.Location = (new global::System.Drawing.Point(18, 114));
-            this.cbImageType.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.cbImageType.Name = ("cbImageType");
-            this.cbImageType.Size = (new global::System.Drawing.Size(120, 33));
-            this.cbImageType.TabIndex = (33);
-            // 
-            // lbJPEGQuality
-            // 
-            this.lbJPEGQuality.AutoSize = (true);
-            this.lbJPEGQuality.Location = (new global::System.Drawing.Point(436, 119));
-            this.lbJPEGQuality.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbJPEGQuality.Name = ("lbJPEGQuality");
-            this.lbJPEGQuality.Size = (new global::System.Drawing.Size(32, 25));
-            this.lbJPEGQuality.TabIndex = (32);
-            this.lbJPEGQuality.Text = ("85");
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = (true);
-            this.label38.Location = (new global::System.Drawing.Point(198, 119));
-            this.label38.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label38.Name = ("label38");
-            this.label38.Size = (new global::System.Drawing.Size(107, 25));
-            this.label38.TabIndex = (31);
-            this.label38.Text = ("JPEG quality");
-            // 
-            // btSaveScreenshot
-            // 
-            this.btSaveScreenshot.Location = (new global::System.Drawing.Point(378, 28));
-            this.btSaveScreenshot.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.btSaveScreenshot.Name = ("btSaveScreenshot");
-            this.btSaveScreenshot.Size = (new global::System.Drawing.Size(92, 44));
-            this.btSaveScreenshot.TabIndex = (29);
-            this.btSaveScreenshot.Text = ("Save");
-            this.btSaveScreenshot.UseVisualStyleBackColor = (true);
-            this.btSaveScreenshot.Click += (this.btSaveScreenshot_Click);
-            // 
-            // btSelectScreenshotsFolder
-            // 
-            this.btSelectScreenshotsFolder.Location = (new global::System.Drawing.Point(330, 28));
-            this.btSelectScreenshotsFolder.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.btSelectScreenshotsFolder.Name = ("btSelectScreenshotsFolder");
-            this.btSelectScreenshotsFolder.Size = (new global::System.Drawing.Size(38, 44));
-            this.btSelectScreenshotsFolder.TabIndex = (28);
-            this.btSelectScreenshotsFolder.Text = ("...");
-            this.btSelectScreenshotsFolder.UseVisualStyleBackColor = (true);
-            this.btSelectScreenshotsFolder.Click += (this.btSelectScreenshotsFolder_Click);
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = (true);
-            this.label63.Location = (new global::System.Drawing.Point(12, 36));
-            this.label63.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label63.Name = ("label63");
-            this.label63.Size = (new global::System.Drawing.Size(62, 25));
-            this.label63.TabIndex = (27);
-            this.label63.Text = ("Folder");
-            // 
-            // edScreenshotsFolder
-            // 
-            this.edScreenshotsFolder.Location = (new global::System.Drawing.Point(89, 31));
-            this.edScreenshotsFolder.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.edScreenshotsFolder.Name = ("edScreenshotsFolder");
-            this.edScreenshotsFolder.Size = (new global::System.Drawing.Size(228, 31));
-            this.edScreenshotsFolder.TabIndex = (26);
-            this.edScreenshotsFolder.Text = ("c:\\");
-            // 
-            // tbJPEGQuality
-            // 
-            this.tbJPEGQuality.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbJPEGQuality.Location = (new global::System.Drawing.Point(320, 92));
-            this.tbJPEGQuality.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tbJPEGQuality.Maximum = (100);
-            this.tbJPEGQuality.Name = ("tbJPEGQuality");
-            this.tbJPEGQuality.Size = (new global::System.Drawing.Size(108, 69));
-            this.tbJPEGQuality.TabIndex = (30);
-            this.tbJPEGQuality.TickFrequency = (5);
-            this.tbJPEGQuality.Value = (85);
-            this.tbJPEGQuality.Scroll += (this.tbJPEGQuality_Scroll);
-            // 
-            // tabPage55
-            // 
-            this.tabPage55.Controls.Add(this.edScreenshotHeight);
-            this.tabPage55.Controls.Add(this.label176);
-            this.tabPage55.Controls.Add(this.edScreenshotWidth);
-            this.tabPage55.Controls.Add(this.label177);
-            this.tabPage55.Controls.Add(this.cbScreenshotResize);
-            this.tabPage55.Location = (new global::System.Drawing.Point(4, 34));
-            this.tabPage55.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage55.Name = ("tabPage55");
-            this.tabPage55.Padding = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.tabPage55.Size = (new global::System.Drawing.Size(481, 176));
-            this.tabPage55.TabIndex = (1);
-            this.tabPage55.Text = ("Resize");
-            this.tabPage55.UseVisualStyleBackColor = (true);
-            // 
-            // edScreenshotHeight
-            // 
-            this.edScreenshotHeight.Location = (new global::System.Drawing.Point(271, 84));
-            this.edScreenshotHeight.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.edScreenshotHeight.Name = ("edScreenshotHeight");
-            this.edScreenshotHeight.Size = (new global::System.Drawing.Size(56, 31));
-            this.edScreenshotHeight.TabIndex = (128);
-            this.edScreenshotHeight.Text = ("576");
-            // 
-            // label176
-            // 
-            this.label176.AutoSize = (true);
-            this.label176.Location = (new global::System.Drawing.Point(192, 91));
-            this.label176.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label176.Name = ("label176");
-            this.label176.Size = (new global::System.Drawing.Size(65, 25));
-            this.label176.TabIndex = (127);
-            this.label176.Text = ("Height");
-            // 
-            // edScreenshotWidth
-            // 
-            this.edScreenshotWidth.Location = (new global::System.Drawing.Point(122, 84));
-            this.edScreenshotWidth.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.edScreenshotWidth.Name = ("edScreenshotWidth");
-            this.edScreenshotWidth.Size = (new global::System.Drawing.Size(56, 31));
-            this.edScreenshotWidth.TabIndex = (126);
-            this.edScreenshotWidth.Text = ("768");
-            // 
-            // label177
-            // 
-            this.label177.AutoSize = (true);
-            this.label177.Location = (new global::System.Drawing.Point(52, 91));
-            this.label177.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label177.Name = ("label177");
-            this.label177.Size = (new global::System.Drawing.Size(60, 25));
-            this.label177.TabIndex = (125);
-            this.label177.Text = ("Width");
-            // 
-            // cbScreenshotResize
-            // 
-            this.cbScreenshotResize.AutoSize = (true);
-            this.cbScreenshotResize.Location = (new global::System.Drawing.Point(28, 34));
-            this.cbScreenshotResize.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.cbScreenshotResize.Name = ("cbScreenshotResize");
-            this.cbScreenshotResize.Size = (new global::System.Drawing.Size(101, 29));
-            this.cbScreenshotResize.TabIndex = (0);
-            this.cbScreenshotResize.Text = ("Enabled");
-            this.cbScreenshotResize.UseVisualStyleBackColor = (true);
-            // 
             // fontDialog1
             // 
             this.fontDialog1.Color = (global::System.Drawing.Color.White);
@@ -7239,7 +6961,7 @@ namespace Media_Player_Demo
             // label29
             // 
             this.label29.AutoSize = (true);
-            this.label29.Location = (new global::System.Drawing.Point(544, 245));
+            this.label29.Location = (new global::System.Drawing.Point(548, 217));
             this.label29.Margin = (new global::System.Windows.Forms.Padding(2, 0, 2, 0));
             this.label29.Name = ("label29");
             this.label29.Size = (new global::System.Drawing.Size(118, 25));
@@ -7251,11 +6973,11 @@ namespace Media_Player_Demo
             this.cbSourceMode.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
             this.cbSourceMode.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
             this.cbSourceMode.FormattingEnabled = (true);
-            this.cbSourceMode.Items.AddRange(new global::System.Object[] { "File / Network stream (decode using LAV) ", "File / Network stream (decode using GPU) ", "File / Network stream (decode using FFMPEG)", "File (decode using DirectShow)", "File (decode using VLC)", "Blu-Ray", "File from memory (decode using DirectShow)", "MMS / WMV (network stream)", "HTTP / RTSP / RTMP (decoding using VLC)", "Encrypted file (decode using DirectShow)", "Custom source filter (specified by CLSID)", "MIDI / KAR" });
-            this.cbSourceMode.Location = (new global::System.Drawing.Point(720, 241));
+            this.cbSourceMode.Items.AddRange(new global::System.Object[] { "File / Network stream (decode using LAV) ", "File / Network stream (decode using GPU) ", "File / Network stream (decode using FFMPEG)", "File (decode using DirectShow)", "File (decode using VLC)", "Blu-Ray", "File from memory (decode using DirectShow)", "MMS / WMV (network stream)", "HTTP / RTSP / RTMP (decoding using VLC)", "Encrypted file (decode using DirectShow)", "MIDI / KAR" });
+            this.cbSourceMode.Location = (new global::System.Drawing.Point(720, 214));
             this.cbSourceMode.Margin = (new global::System.Windows.Forms.Padding(2, 5, 2, 5));
             this.cbSourceMode.Name = ("cbSourceMode");
-            this.cbSourceMode.Size = (new global::System.Drawing.Size(516, 33));
+            this.cbSourceMode.Size = (new global::System.Drawing.Size(524, 33));
             this.cbSourceMode.TabIndex = (15);
             // 
             // lbSourceFiles
@@ -7267,7 +6989,7 @@ namespace Media_Player_Demo
             this.lbSourceFiles.Location = (new global::System.Drawing.Point(550, 125));
             this.lbSourceFiles.Margin = (new global::System.Windows.Forms.Padding(2, 5, 2, 5));
             this.lbSourceFiles.Name = ("lbSourceFiles");
-            this.lbSourceFiles.Size = (new global::System.Drawing.Size(686, 104));
+            this.lbSourceFiles.Size = (new global::System.Drawing.Size(692, 79));
             this.lbSourceFiles.TabIndex = (16);
             // 
             // mnPlaylist
@@ -7325,50 +7047,76 @@ namespace Media_Player_Demo
             this.linkLabel1.Text = ("Watch video tutorials!");
             this.linkLabel1.LinkClicked += (this.linkLabel1_LinkClicked);
             // 
-            // label37
-            // 
-            this.label37.AutoSize = (true);
-            this.label37.Location = (new global::System.Drawing.Point(548, 305));
-            this.label37.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label37.Name = ("label37");
-            this.label37.Size = (new global::System.Drawing.Size(166, 25));
-            this.label37.TabIndex = (21);
-            this.label37.Text = ("Custom filter CLSID");
-            // 
-            // edCustomSourceFilter
-            // 
-            this.edCustomSourceFilter.Anchor = ((global::System.Windows.Forms.AnchorStyles)(((global::System.Windows.Forms.AnchorStyles.Top) | (global::System.Windows.Forms.AnchorStyles.Left)) | (global::System.Windows.Forms.AnchorStyles.Right)));
-            this.edCustomSourceFilter.Location = (new global::System.Drawing.Point(720, 298));
-            this.edCustomSourceFilter.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
-            this.edCustomSourceFilter.Name = ("edCustomSourceFilter");
-            this.edCustomSourceFilter.Size = (new global::System.Drawing.Size(516, 31));
-            this.edCustomSourceFilter.TabIndex = (22);
-            // 
             // VideoView1
             // 
             this.VideoView1.BackColor = (global::System.Drawing.Color.Black);
-            this.VideoView1.Location = (new global::System.Drawing.Point(550, 352));
+            this.VideoView1.Location = (new global::System.Drawing.Point(550, 269));
             this.VideoView1.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
             this.VideoView1.Name = ("VideoView1");
-            this.VideoView1.Size = (new global::System.Drawing.Size(691, 591));
+            this.VideoView1.Size = (new global::System.Drawing.Size(692, 476));
             this.VideoView1.StatusOverlay = (null);
             this.VideoView1.TabIndex = (23);
+            // 
+            // cbTelemetry
+            // 
+            this.cbTelemetry.AutoSize = (true);
+            this.cbTelemetry.Checked = (true);
+            this.cbTelemetry.CheckState = (global::System.Windows.Forms.CheckState.Checked);
+            this.cbTelemetry.Location = (new global::System.Drawing.Point(1129, 941));
+            this.cbTelemetry.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
+            this.cbTelemetry.Name = ("cbTelemetry");
+            this.cbTelemetry.Size = (new global::System.Drawing.Size(113, 29));
+            this.cbTelemetry.TabIndex = (26);
+            this.cbTelemetry.Text = ("Telemetry");
+            this.cbTelemetry.UseVisualStyleBackColor = (true);
+            // 
+            // mmLog
+            // 
+            this.mmLog.Location = (new global::System.Drawing.Point(550, 989));
+            this.mmLog.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
+            this.mmLog.Multiline = (true);
+            this.mmLog.Name = ("mmLog");
+            this.mmLog.ScrollBars = (global::System.Windows.Forms.ScrollBars.Both);
+            this.mmLog.Size = (new global::System.Drawing.Size(690, 139));
+            this.mmLog.TabIndex = (25);
+            // 
+            // cbDebugMode
+            // 
+            this.cbDebugMode.AutoSize = (true);
+            this.cbDebugMode.Location = (new global::System.Drawing.Point(1029, 941));
+            this.cbDebugMode.Margin = (new global::System.Windows.Forms.Padding(4, 6, 4, 6));
+            this.cbDebugMode.Name = ("cbDebugMode");
+            this.cbDebugMode.Size = (new global::System.Drawing.Size(92, 29));
+            this.cbDebugMode.TabIndex = (24);
+            this.cbDebugMode.Text = ("Debug");
+            this.cbDebugMode.UseVisualStyleBackColor = (true);
+            // 
+            // btSaveSnapshot
+            // 
+            this.btSaveSnapshot.Location = (new global::System.Drawing.Point(548, 938));
+            this.btSaveSnapshot.Name = ("btSaveSnapshot");
+            this.btSaveSnapshot.Size = (new global::System.Drawing.Size(193, 42));
+            this.btSaveSnapshot.TabIndex = (27);
+            this.btSaveSnapshot.Text = ("Save snapshot");
+            this.btSaveSnapshot.UseVisualStyleBackColor = (true);
+            this.btSaveSnapshot.Click += (this.btSaveSnapshot_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = (new global::System.Drawing.SizeF(10F, 25F));
             this.AutoScaleMode = (global::System.Windows.Forms.AutoScaleMode.Font);
-            this.ClientSize = (new global::System.Drawing.Size(1262, 1330));
+            this.ClientSize = (new global::System.Drawing.Size(1262, 1148));
+            this.Controls.Add(this.btSaveSnapshot);
+            this.Controls.Add(this.cbTelemetry);
+            this.Controls.Add(this.mmLog);
+            this.Controls.Add(this.cbDebugMode);
             this.Controls.Add(this.VideoView1);
-            this.Controls.Add(this.edCustomSourceFilter);
-            this.Controls.Add(this.label37);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btAddFileToPlaylist);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.lbSourceFiles);
             this.Controls.Add(this.cbSourceMode);
             this.Controls.Add(this.label29);
-            this.Controls.Add(this.tabControl3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btSelectFile);
             this.Controls.Add(this.edFilenameOrURL);
@@ -7575,16 +7323,6 @@ namespace Media_Player_Demo
             this.groupBox2.PerformLayout();
             ((global::System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.tbTimeline)).EndInit();
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage10.ResumeLayout(false);
-            this.tabPage10.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            this.tabControl13.ResumeLayout(false);
-            this.tabPage54.ResumeLayout(false);
-            this.tabPage54.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbJPEGQuality)).EndInit();
-            this.tabPage55.ResumeLayout(false);
-            this.tabPage55.PerformLayout();
             this.mnPlaylist.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -7676,16 +7414,11 @@ namespace Media_Player_Demo
         private System.Windows.Forms.Button btResume;
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Button btNextFrame;
-        private System.Windows.Forms.TabControl tabControl3;
-        private System.Windows.Forms.TabPage tabPage9;
-        private System.Windows.Forms.TabPage tabPage10;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.TextBox mmLog;
-        private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabControl tabControl18;
@@ -7784,22 +7517,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.RadioButton rbDenoiseCAST;
         private System.Windows.Forms.RadioButton rbDenoiseMosquito;
         private System.Windows.Forms.CheckBox cbDenoise;
-        private System.Windows.Forms.TabControl tabControl13;
-        private System.Windows.Forms.TabPage tabPage54;
-        private System.Windows.Forms.ComboBox cbImageType;
-        private System.Windows.Forms.Label lbJPEGQuality;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button btSaveScreenshot;
-        private System.Windows.Forms.Button btSelectScreenshotsFolder;
-        private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.TextBox edScreenshotsFolder;
-        private System.Windows.Forms.TrackBar tbJPEGQuality;
-        private System.Windows.Forms.TabPage tabPage55;
-        private System.Windows.Forms.TextBox edScreenshotHeight;
-        private System.Windows.Forms.Label label176;
-        private System.Windows.Forms.TextBox edScreenshotWidth;
-        private System.Windows.Forms.Label label177;
-        private System.Windows.Forms.CheckBox cbScreenshotResize;
         private System.Windows.Forms.CheckBox cbLoop;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.TabPage tabPage8;
@@ -7949,8 +7666,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.TrackBar tbAudPitchShift;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.CheckBox cbAudPitchShiftEnabled;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.TextBox edCustomSourceFilter;
         private System.Windows.Forms.TabPage tabPage28;
         private System.Windows.Forms.CheckBox cbVUMeterPro;
         private VisioForge.Core.UI.WinForms.VolumeMeterPro.WaveformPainter waveformPainter2;
@@ -8134,7 +7849,6 @@ namespace Media_Player_Demo
         private System.Windows.Forms.Button btImageLogoAdd;
         private System.Windows.Forms.CheckBox cbFlipY;
         private System.Windows.Forms.CheckBox cbFlipX;
-        private System.Windows.Forms.CheckBox cbTelemetry;
         private System.Windows.Forms.TabPage tabPage20;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.RadioButton rbGPUDirect3D;
@@ -8159,5 +7873,9 @@ namespace Media_Player_Demo
         private System.Windows.Forms.RadioButton rbNDIStreaming;
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.CheckBox cbScrollingText;
+        private global::System.Windows.Forms.CheckBox cbTelemetry;
+        private global::System.Windows.Forms.TextBox mmLog;
+        private global::System.Windows.Forms.CheckBox cbDebugMode;
+        private global::System.Windows.Forms.Button btSaveSnapshot;
     }
 }

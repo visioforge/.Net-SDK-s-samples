@@ -275,49 +275,6 @@ namespace Media_Player_Demo
             MediaPlayer1.OSD_Layers_Render();
         }
 
-        private void btSelectScreenshotsFolder_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                edScreenshotsFolder.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
-        private async void btSaveScreenshot_Click(object sender, EventArgs e)
-        {
-            DateTime dt = DateTime.Now;
-
-            string s = dt.Hour + "_" + dt.Minute + "_" + dt.Second + "_" + dt.Millisecond;
-
-            int customWidth = 0;
-            int customHeight = 0;
-
-            if (cbScreenshotResize.Checked)
-            {
-                customWidth = Convert.ToInt32(edScreenshotWidth.Text);
-                customHeight = Convert.ToInt32(edScreenshotHeight.Text);
-            }
-
-            switch (cbImageType.SelectedIndex)
-            {
-                case 0:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight);
-                    break;
-                case 1:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".jpg"), ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight);
-                    break;
-                case 2:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".gif"), ImageFormat.Gif, 0, customWidth, customHeight);
-                    break;
-                case 3:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".png"), ImageFormat.Png, 0, customWidth, customHeight);
-                    break;
-                case 4:
-                    await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight);
-                    break;
-            }
-        }
-
         private void tbBalance1_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream1.Checked || MediaPlayer1.Audio_Streams_AllInOne())
@@ -830,16 +787,6 @@ namespace Media_Player_Demo
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS;
                     break;
                 case 10:
-                    MediaPlayer1.Source_Mode = MediaPlayerSourceMode.CustomSource;
-
-                    if (!string.IsNullOrEmpty(edCustomSourceFilter.Text))
-                    {
-                        MediaPlayer1.Source_Custom_CLSID = edCustomSourceFilter.Text.Trim();
-                    }
-
-                    break;
-
-                case 11:
                     MediaPlayer1.Source_Mode = MediaPlayerSourceMode.MIDI;
                     break;
             }
@@ -1698,11 +1645,6 @@ namespace Media_Player_Demo
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, tbAudTrueBass.Value);
-        }
-
-        private void tbJPEGQuality_Scroll(object sender, EventArgs e)
-        {
-            lbJPEGQuality.Text = tbJPEGQuality.Value.ToString(CultureInfo.InvariantCulture);
         }
 
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
@@ -2833,7 +2775,7 @@ namespace Media_Player_Demo
 
         private void MediaPlayer1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
         {
-            Invoke((Action) (() =>
+            Invoke((Action)(() =>
             {
                 pbAFMotionLevel.Value = Math.Min(100, (int)(e.Level * 100));
             }));
@@ -2870,7 +2812,6 @@ namespace Media_Player_Demo
 
             // set combobox indexes
             cbSourceMode.SelectedIndex = 0;
-            cbImageType.SelectedIndex = 1;
             cbMotDetHLColor.SelectedIndex = 1;
             cbBarcodeType.SelectedIndex = 0;
             cbDirect2DRotate.SelectedIndex = 0;
@@ -2925,7 +2866,6 @@ namespace Media_Player_Demo
             cbAudEqualizerPreset.Items.AddRange(MediaPlayer1.Audio_Effects_Equalizer_Presets().ToArray());
             cbAudEqualizerPreset.SelectedIndex = 0;
 
-            edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
@@ -3141,6 +3081,33 @@ namespace Media_Player_Demo
                 {
                     textLogo.Enabled = cbScrollingText.Checked;
                     textLogo.Reset();
+                }
+            }
+        }
+
+        private async void btSaveSnapshot_Click(global::System.Object sender, global::System.EventArgs e)
+        {
+            var dlg = new SaveFileDialog();
+            dlg.Filter = "JPEG files (*.jpg)|*.jpg|PNG files (*.png)|*.png|BMP files (*.bmp)|*.bmp";
+            dlg.FilterIndex = 1;
+            dlg.RestoreDirectory = true;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {                
+                var filename = dlg.FileName;
+                var ext = Path.GetExtension(filename).ToLower();
+                
+                switch (ext)
+                {
+                    case ".jpg":
+                        await MediaPlayer1.Frame_SaveAsync(filename, ImageFormat.Jpeg, 90);
+                        break;
+                    case ".png":
+                        await MediaPlayer1.Frame_SaveAsync(filename, ImageFormat.Png);
+                        break;
+                    case ".bmp":
+                        await MediaPlayer1.Frame_SaveAsync(filename, ImageFormat.Bmp);
+                        break;
                 }
             }
         }

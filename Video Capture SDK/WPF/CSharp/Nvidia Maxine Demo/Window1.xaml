@@ -95,8 +95,8 @@
                         <Label Margin="10,45,0,0">Background image</Label>
                         <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24">c:\Samples\pics\5.jpg</TextBox>
                     </Grid>
-                    
-                    <Label Content="Nvidia Maxine Video Effects SDK or redist required" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top"/>
+
+                    <Label Content="Nvidia Maxine Video Effects SDK or redist is required" HorizontalAlignment="Left" Margin="44,251,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Log">

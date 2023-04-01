@@ -195,6 +195,11 @@ namespace VideoCapture_CSharp_Demo
         /// </param>
         private async void Form1_Load(object sender, EventArgs e)
         {
+            float dpiScale = this.DeviceDpi / 96.0f;
+            Width = (int)(910 * dpiScale);
+            Height = (int)(880 * dpiScale);
+            //950; 800
+
             CreateEngine();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
@@ -6191,6 +6196,11 @@ namespace VideoCapture_CSharp_Demo
                     textLogo.Reset();
                 }
             }
+        }
+
+        private void Form1_SizeChanged(global::System.Object sender, global::System.EventArgs e)
+        {
+            // xx
         }
     }
 }

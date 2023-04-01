@@ -224,8 +224,6 @@
             CreateEngine();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
-
-            cbSourceMode.SelectedIndex = 0;
         }
 
         private void tbStreamTransparency_Scroll(object sender, EventArgs e)
