@@ -41,7 +41,7 @@
                         <Label Content="Format" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="51" />
 
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Height="23" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" SelectedIndex="0" SelectionChanged="cbOutputFormat_SelectionChanged">
+                            <ComboBox Height="23" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" SelectedIndex="0" SelectionChanged="cbOutputFormat_SelectionChanged">
                                 <ComboBoxItem Content="MP4" />
                                 <ComboBoxItem Content="AVI" />
                                 <ComboBoxItem Content="WebM" />
@@ -54,7 +54,7 @@
                         <Label Content="File name" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" />
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Height="23" HorizontalAlignment="Left" x:Name="edOutput" VerticalAlignment="Top" Width="350" Text="c:\capture.avi" />
+                            <TextBox Height="23" HorizontalAlignment="Left" x:Name="edOutput" VerticalAlignment="Top" Width="290" Text="c:\capture.avi" />
                             <Button Content="..." Margin="5,0,0,0" Height="23" HorizontalAlignment="Right" x:Name="btSelectOutput" VerticalAlignment="Top" Width="25" Click="btSelectOutput_Click" />
                         </StackPanel>
 

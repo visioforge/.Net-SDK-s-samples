@@ -352,7 +352,7 @@ namespace Media_Player_Demo
 
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-                await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
+            await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
         }
 
         private void tbVolume1_Scroll(object sender, EventArgs e)
@@ -2827,7 +2827,16 @@ namespace Media_Player_Demo
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
+            MediaPlayer1.OnMotionDetectionEx += MediaPlayer1_OnMotionDetectionEx;
             MediaPlayer1.OnPlaylistFinished += MediaPlayer1_OnPlaylistFinished;
+        }
+
+        private void MediaPlayer1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
+        {
+            Invoke((Action) (() =>
+            {
+                pbAFMotionLevel.Value = Math.Min(100, (int)(e.Level * 100));
+            }));
         }
 
         private void MediaPlayer1_OnPlaylistFinished(object sender, EventArgs e)
@@ -3114,18 +3123,6 @@ namespace Media_Player_Demo
                 pnChromaKeyColor.BackColor = colorDialog1.Color;
                 ConfigureChromaKey();
             }
-        }
-
-        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
 
         private void cbScrollingText_CheckedChanged(object sender, EventArgs e)

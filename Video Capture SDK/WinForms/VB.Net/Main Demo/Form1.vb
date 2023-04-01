@@ -659,7 +659,7 @@ Public Class Form1
         VideoCapture1.Video_Renderer.Zoom_ShiftX = 0
         VideoCapture1.Video_Renderer.Zoom_ShiftY = 0
 
-        VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH")
+        'VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH")
 
         VideoCapture1.Video_Effects_Clear()
         lbTextLogos.Items.Clear()
@@ -5068,16 +5068,6 @@ Public Class Form1
             edChromaKeyImage.Text = openFileDialog1.FileName
             ConfigureChromaKey()
         End If
-    End Sub
-
-    Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
-        Process.Start(startInfo)
-    End Sub
-
-    Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
-        Process.Start(startInfo)
     End Sub
 
     Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked, linkLabel6.LinkClicked

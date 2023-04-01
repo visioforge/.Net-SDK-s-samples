@@ -19,10 +19,6 @@
                             <RadioButton x:Name="rbGPUDirect3D" Content="Direct3D 11" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
                         </Grid>
                     </GroupBox>
-
-                    <Label x:Name="label211" Content="Please install VLC redist EXE or NuGet package to use VLC engine " HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="lbVLCRedist" Content="x86" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist_MouseLeftButtonDown"/>
-                    <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="45,159,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Info" x:Name="tabItem2">

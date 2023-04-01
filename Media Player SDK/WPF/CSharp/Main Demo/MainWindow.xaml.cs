@@ -139,9 +139,18 @@ namespace Main_Demo
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
             MediaPlayer1.OnMIDIFileInfo += MediaPlayer1_OnMIDIFileInfo;
             MediaPlayer1.OnMotion += MediaPlayer1_OnMotion;
+            MediaPlayer1.OnMotionDetectionEx += MediaPlayer1_OnMotionDetectionEx;
             MediaPlayer1.OnAudioVUMeterProFFTCalculated += MediaPlayer1_OnAudioVUMeterProFFTCalculated;
             MediaPlayer1.OnAudioVUMeterProMaximumCalculated += MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
 
+        }
+
+        private void MediaPlayer1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
+        {
+            Dispatcher.Invoke((Action)(() =>
+            {
+                pbAFMotionLevel.Value = Math.Min(100, e.Level * 100);
+            }));
         }
 
         private void DestroyEngine()
@@ -2872,18 +2881,6 @@ namespace Main_Demo
         private void tbChromaKeySmoothing_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ConfigureChromaKey();
-        }
-
-        private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
     }
 }

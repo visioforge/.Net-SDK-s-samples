@@ -194,18 +194,6 @@ namespace Video_Player_Demo
 
             DestroyEngine();
         }
-
-        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
-        }
     }
 }
 

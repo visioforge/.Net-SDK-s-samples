@@ -325,12 +325,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             Log(e.Message);
         }
 
-        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
         private async void btONVIFConnect_Click(object sender, EventArgs e)
         {
             if (btONVIFConnect.Text == "Connect")
@@ -1055,12 +1049,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     darkness.Value = tbDarkness.Value;
                 }
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
 
         private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

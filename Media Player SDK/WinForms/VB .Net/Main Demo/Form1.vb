@@ -2793,16 +2793,6 @@ Public Class Form1
             ConfigureChromaKey()
         End If
     End Sub
-
-    Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
-        Process.Start(startInfo)
-    End Sub
-
-    Private Sub linkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel2.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
-        Process.Start(startInfo)
-    End Sub
 End Class
 
 ' ReSharper restore InconsistentNaming

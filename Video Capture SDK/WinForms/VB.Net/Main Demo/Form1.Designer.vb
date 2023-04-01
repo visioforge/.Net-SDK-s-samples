@@ -328,9 +328,6 @@ Partial Class Form1
         Me.btListNDISources = New System.Windows.Forms.Button()
         Me.lbNDI = New System.Windows.Forms.LinkLabel()
         Me.label25 = New System.Windows.Forms.Label()
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.linkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.label165 = New System.Windows.Forms.Label()
         Me.cbIPCameraONVIF = New System.Windows.Forms.CheckBox()
         Me.cbIPDisconnect = New System.Windows.Forms.CheckBox()
@@ -1117,6 +1114,10 @@ Partial Class Form1
         Me.label325 = New System.Windows.Forms.Label()
         Me.cbVirtualCamera = New System.Windows.Forms.CheckBox()
         Me.TabPage102 = New System.Windows.Forms.TabPage()
+        Me.label71 = New System.Windows.Forms.Label()
+        Me.label70 = New System.Windows.Forms.Label()
+        Me.cbDecklinkOutputAudioRenderer = New System.Windows.Forms.ComboBox()
+        Me.cbDecklinkOutputVideoRenderer = New System.Windows.Forms.ComboBox()
         Me.cbDecklinkOutputDownConversionAnalogOutput = New System.Windows.Forms.CheckBox()
         Me.cbDecklinkOutputDownConversion = New System.Windows.Forms.ComboBox()
         Me.label337 = New System.Windows.Forms.Label()
@@ -1200,10 +1201,6 @@ Partial Class Form1
         Me.btSaveScreenshot = New System.Windows.Forms.Button()
         Me.lbTimestamp = New System.Windows.Forms.Label()
         Me.VideoView1 = New VisioForge.Core.UI.WinForms.VideoView()
-        Me.label71 = New System.Windows.Forms.Label()
-        Me.label70 = New System.Windows.Forms.Label()
-        Me.cbDecklinkOutputAudioRenderer = New System.Windows.Forms.ComboBox()
-        Me.cbDecklinkOutputVideoRenderer = New System.Windows.Forms.ComboBox()
         Me.tabControl12.SuspendLayout
         Me.tabPage53.SuspendLayout
         Me.tabControl10.SuspendLayout
@@ -3933,9 +3930,6 @@ Partial Class Form1
         Me.tabPage144.Controls.Add(Me.btListNDISources)
         Me.tabPage144.Controls.Add(Me.lbNDI)
         Me.tabPage144.Controls.Add(Me.label25)
-        Me.tabPage144.Controls.Add(Me.LinkLabel3)
-        Me.tabPage144.Controls.Add(Me.Label2)
-        Me.tabPage144.Controls.Add(Me.linkLabel7)
         Me.tabPage144.Controls.Add(Me.label165)
         Me.tabPage144.Controls.Add(Me.cbIPCameraONVIF)
         Me.tabPage144.Controls.Add(Me.cbIPDisconnect)
@@ -4009,38 +4003,6 @@ Partial Class Form1
         Me.label25.Size = New System.Drawing.Size(380, 20)
         Me.label25.TabIndex = 89
         Me.label25.Text = "To use NDI please install NDI SDK for Windows from"
-        '
-        'LinkLabel3
-        '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Location = New System.Drawing.Point(564, 228)
-        Me.LinkLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(34, 20)
-        Me.LinkLabel3.TabIndex = 88
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "x64"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(20, 228)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(489, 20)
-        Me.Label2.TabIndex = 87
-        Me.Label2.Text = "Please install VLC redist EXE or NuGet package to use VLC engine "
-        '
-        'linkLabel7
-        '
-        Me.linkLabel7.AutoSize = True
-        Me.linkLabel7.Location = New System.Drawing.Point(519, 228)
-        Me.linkLabel7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.linkLabel7.Name = "linkLabel7"
-        Me.linkLabel7.Size = New System.Drawing.Size(34, 20)
-        Me.linkLabel7.TabIndex = 86
-        Me.linkLabel7.TabStop = True
-        Me.linkLabel7.Text = "x86"
         '
         'label165
         '
@@ -12874,6 +12836,42 @@ Partial Class Form1
         Me.TabPage102.Text = "Decklink output"
         Me.TabPage102.UseVisualStyleBackColor = True
         '
+        'label71
+        '
+        Me.label71.AutoSize = True
+        Me.label71.Location = New System.Drawing.Point(20, 139)
+        Me.label71.Name = "label71"
+        Me.label71.Size = New System.Drawing.Size(114, 20)
+        Me.label71.TabIndex = 39
+        Me.label71.Text = "Audio renderer"
+        '
+        'label70
+        '
+        Me.label70.AutoSize = True
+        Me.label70.Location = New System.Drawing.Point(20, 67)
+        Me.label70.Name = "label70"
+        Me.label70.Size = New System.Drawing.Size(114, 20)
+        Me.label70.TabIndex = 38
+        Me.label70.Text = "Video renderer"
+        '
+        'cbDecklinkOutputAudioRenderer
+        '
+        Me.cbDecklinkOutputAudioRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDecklinkOutputAudioRenderer.FormattingEnabled = True
+        Me.cbDecklinkOutputAudioRenderer.Location = New System.Drawing.Point(24, 162)
+        Me.cbDecklinkOutputAudioRenderer.Name = "cbDecklinkOutputAudioRenderer"
+        Me.cbDecklinkOutputAudioRenderer.Size = New System.Drawing.Size(386, 28)
+        Me.cbDecklinkOutputAudioRenderer.TabIndex = 37
+        '
+        'cbDecklinkOutputVideoRenderer
+        '
+        Me.cbDecklinkOutputVideoRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDecklinkOutputVideoRenderer.FormattingEnabled = True
+        Me.cbDecklinkOutputVideoRenderer.Location = New System.Drawing.Point(24, 90)
+        Me.cbDecklinkOutputVideoRenderer.Name = "cbDecklinkOutputVideoRenderer"
+        Me.cbDecklinkOutputVideoRenderer.Size = New System.Drawing.Size(386, 28)
+        Me.cbDecklinkOutputVideoRenderer.TabIndex = 36
+        '
         'cbDecklinkOutputDownConversionAnalogOutput
         '
         Me.cbDecklinkOutputDownConversionAnalogOutput.AutoSize = True
@@ -13782,42 +13780,6 @@ Partial Class Form1
         Me.VideoView1.Size = New System.Drawing.Size(693, 466)
         Me.VideoView1.StatusOverlay = Nothing
         Me.VideoView1.TabIndex = 97
-        '
-        'label71
-        '
-        Me.label71.AutoSize = True
-        Me.label71.Location = New System.Drawing.Point(20, 139)
-        Me.label71.Name = "label71"
-        Me.label71.Size = New System.Drawing.Size(114, 20)
-        Me.label71.TabIndex = 39
-        Me.label71.Text = "Audio renderer"
-        '
-        'label70
-        '
-        Me.label70.AutoSize = True
-        Me.label70.Location = New System.Drawing.Point(20, 67)
-        Me.label70.Name = "label70"
-        Me.label70.Size = New System.Drawing.Size(114, 20)
-        Me.label70.TabIndex = 38
-        Me.label70.Text = "Video renderer"
-        '
-        'cbDecklinkOutputAudioRenderer
-        '
-        Me.cbDecklinkOutputAudioRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDecklinkOutputAudioRenderer.FormattingEnabled = True
-        Me.cbDecklinkOutputAudioRenderer.Location = New System.Drawing.Point(24, 162)
-        Me.cbDecklinkOutputAudioRenderer.Name = "cbDecklinkOutputAudioRenderer"
-        Me.cbDecklinkOutputAudioRenderer.Size = New System.Drawing.Size(386, 28)
-        Me.cbDecklinkOutputAudioRenderer.TabIndex = 37
-        '
-        'cbDecklinkOutputVideoRenderer
-        '
-        Me.cbDecklinkOutputVideoRenderer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDecklinkOutputVideoRenderer.FormattingEnabled = True
-        Me.cbDecklinkOutputVideoRenderer.Location = New System.Drawing.Point(24, 90)
-        Me.cbDecklinkOutputVideoRenderer.Name = "cbDecklinkOutputVideoRenderer"
-        Me.cbDecklinkOutputVideoRenderer.Size = New System.Drawing.Size(386, 28)
-        Me.cbDecklinkOutputVideoRenderer.TabIndex = 36
         '
         'Form1
         '
@@ -15238,9 +15200,6 @@ End Sub
     Private WithEvents tbChromaKeyThresholdSensitivity As TrackBar
     Private WithEvents label213 As Label
     Private WithEvents cbChromaKeyEnabled As CheckBox
-    Private WithEvents LinkLabel3 As LinkLabel
-    Private WithEvents Label2 As Label
-    Private WithEvents linkLabel7 As LinkLabel
     Private WithEvents lbNDI As LinkLabel
     Private WithEvents label25 As Label
     Friend WithEvents tpNDI As TabPage

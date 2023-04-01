@@ -97,11 +97,6 @@ namespace IP_Capture
             }
         }
 
-        private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
 
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
@@ -1056,12 +1051,6 @@ namespace IP_Capture
                 VideoCapture1.Video_Effects_Remove((string)lbLogos.SelectedItem);
                 lbLogos.Items.Remove(lbLogos.SelectedItem);
             }
-        }
-
-        private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
 
         private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

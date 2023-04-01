@@ -310,13 +310,6 @@ Public Class Form1
         Log(e.Message)
     End Sub
 
-    Private Sub linkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel7.LinkClicked
-
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI)
-        Process.Start(startInfo)
-
-    End Sub
-
     Private Async Sub btONVIFConnect_Click(sender As Object, e As EventArgs) Handles btONVIFConnect.Click
 
         If (btONVIFConnect.Text = "Connect") Then
@@ -825,11 +818,6 @@ Public Class Form1
             VideoCapture1.Video_Effects_Remove(lbLogos.SelectedItem)
             lbLogos.Items.Remove(lbLogos.SelectedItem)
         End If
-    End Sub
-
-    Private Sub linkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
-        Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI)
-        Process.Start(startInfo)
     End Sub
 
     Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked

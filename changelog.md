@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.57
+
+* [ALL] Resolved issue with NDI sources detection in local network
+
 ## 15.5.50
 
 * [ALL] Added KLVParser class to read and decode data from KLV binary files.

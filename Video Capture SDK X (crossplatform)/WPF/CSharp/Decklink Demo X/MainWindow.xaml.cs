@@ -261,8 +261,6 @@ namespace Decklink_Demo_X
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
-
-            //VideoCapture1.Debug_SavePipeline("videocapturex");
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)

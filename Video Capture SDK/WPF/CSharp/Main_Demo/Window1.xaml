@@ -1202,9 +1202,6 @@
                                 <TextBox x:Name="edIPForcedFramerate" HorizontalAlignment="Left" Height="23" Margin="126,137,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
                                 <Label Content="Force frame rate ID" HorizontalAlignment="Left" Margin="189,135,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edIPForcedFramerateID" HorizontalAlignment="Left" Height="23" Margin="303,138,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
-                                <Label x:Name="label2" Content="Please install VLC redist EXE or NuGet package to use VLC engine " HorizontalAlignment="Left" Margin="10,199,0,0" VerticalAlignment="Top"/>
-                                <Label x:Name="lbVLCRedist" Content="x86" HorizontalAlignment="Left" Margin="372,199,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist_MouseLeftButtonDown"/>
-                                <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="407,199,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="291,230,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
                                 <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="53,10,0,0" VerticalAlignment="Top" Width="444" Text="http://192.168.1.64/onvif/device_service" IsEditable="True"/>

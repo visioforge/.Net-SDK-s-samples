@@ -758,7 +758,7 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.Video_Renderer.Zoom_ShiftX = 0;
             VideoCapture1.Video_Renderer.Zoom_ShiftY = 0;
 
-            VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
+            //VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLC64");
 
             VideoCapture1.Video_Effects_Clear();
             lbTextLogos.Items.Clear();
@@ -6082,18 +6082,6 @@ namespace VideoCapture_CSharp_Demo
                 pnChromaKeyColor.BackColor = colorDialog1.Color;
                 ConfigureChromaKey();
             }
-        }
-
-        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
         }
 
         private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

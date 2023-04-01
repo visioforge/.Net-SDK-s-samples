@@ -1071,7 +1071,7 @@ namespace Main_Demo
             }
 
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
+            //VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
 
             VideoCapture1.Video_Renderer.Zoom_Ratio = 0;
             VideoCapture1.Video_Renderer.Zoom_ShiftX = 0;
@@ -5821,19 +5821,7 @@ namespace Main_Demo
             ConfigureChromaKey();
         }
 
-        private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
-            Process.Start(startInfo);
-        }
-
-        private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
-            Process.Start(startInfo);
-        }
-
-        private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+      private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
