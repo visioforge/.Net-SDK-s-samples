@@ -1152,18 +1152,20 @@ Public Class Form1
         If cbResize.Checked Then
             VideoCapture1.Video_ResizeOrCrop_Enabled = True
 
-            VideoCapture1.Video_Resize = New VideoResizeSettings()
+            Dim resizeSettings As VideoResizeSettings = New VideoResizeSettings()
 
-            VideoCapture1.Video_Resize.Width = Convert.ToInt32(edResizeWidth.Text)
-            VideoCapture1.Video_Resize.Height = Convert.ToInt32(edResizeHeight.Text)
-            VideoCapture1.Video_Resize.LetterBox = cbResizeLetterbox.Checked
+            resizeSettings.Width = Convert.ToInt32(edResizeWidth.Text)
+            resizeSettings.Height = Convert.ToInt32(edResizeHeight.Text)
+            resizeSettings.LetterBox = cbResizeLetterbox.Checked
 
             Select Case cbResizeMode.SelectedIndex
-                Case 0 : VideoCapture1.Video_Resize.Mode = VideoResizeMode.NearestNeighbor
-                Case 1 : VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bilinear
-                Case 2 : VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bicubic
-                Case 3 : VideoCapture1.Video_Resize.Mode = VideoResizeMode.Lancroz
+                Case 0 : resizeSettings.Mode = VideoResizeMode.NearestNeighbor
+                Case 1 : resizeSettings.Mode = VideoResizeMode.Bilinear
+                Case 2 : resizeSettings.Mode = VideoResizeMode.Bicubic
+                Case 3 : resizeSettings.Mode = VideoResizeMode.Lancroz
             End Select
+
+            VideoCapture1.Video_Resize = resizeSettings
         Else
             VideoCapture1.Video_Resize = Nothing
         End If

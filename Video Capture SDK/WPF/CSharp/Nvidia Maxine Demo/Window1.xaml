@@ -46,7 +46,7 @@
                         <ComboBoxItem>Artifact Reduction</ComboBoxItem>
                         <ComboBoxItem>Upscale</ComboBoxItem>
                         <ComboBoxItem>Super Resolution</ComboBoxItem>
-                        <ComboBoxItem>AI Green Screen</ComboBoxItem>
+                        <!--<ComboBoxItem>AI Green Screen</ComboBoxItem>-->
                     </ComboBox>
 
                     <Grid x:Name="gdDenoise" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
@@ -81,7 +81,7 @@
                         <TextBox x:Name="edSuperResolutionHeight" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="24">1080</TextBox>
                     </Grid>
 
-                    <Grid x:Name="gdAIGS" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                    <!--<Grid x:Name="gdAIGS" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
                         <Label Margin="10,0,0,0">Mode</Label>
                         <ComboBox x:Name="cbAIGSMode" Margin="15,25,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectedIndex="0">
                             <ComboBoxItem>Matte</ComboBoxItem>
@@ -94,7 +94,7 @@
 
                         <Label Margin="10,45,0,0">Background image</Label>
                         <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24">c:\Samples\pics\5.jpg</TextBox>
-                    </Grid>
+                    </Grid>-->
 
                     <Label Content="Nvidia Maxine Video Effects SDK or redist is required" HorizontalAlignment="Left" Margin="44,251,0,0" VerticalAlignment="Top"/>
                 </Grid>
@@ -109,7 +109,7 @@
         <Button Name="btStop" Height="23" Width="62" TabIndex="54" Click="btStop_Click" Margin="0,0,295,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" >Stop</Button>
         <Button Name="btStart" Height="23" Width="62" TabIndex="53" Click="btStart_Click" Margin="0,0,362,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" >Start</Button>
         <Grid Margin="434,33,10,145" Background="Black">
-            <Image x:Name="pnScreen" Stretch="Fill" />
+            <my:VideoView x:Name="VideoView1" />
         </Grid>
         <Label Content="View video tutorials" Height="28" HorizontalAlignment="Right" Margin="0,0,17,0" Name="lbViewVideoTutorials" VerticalAlignment="Top" 
                Foreground="Blue" MouseLeftButtonDown="lbViewVideoTutorials_MouseLeftButtonDown" FontWeight="Bold" />

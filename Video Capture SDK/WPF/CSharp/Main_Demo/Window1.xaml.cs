@@ -1939,7 +1939,7 @@ namespace Main_Demo
             {
                 VideoCapture1.Video_ResizeOrCrop_Enabled = true;
 
-                VideoCapture1.Video_Resize = new VideoResizeSettings
+                var resizeSettings = new VideoResizeSettings
                 {
                     Width = Convert.ToInt32(edResizeWidth.Text),
                     Height = Convert.ToInt32(edResizeHeight.Text),
@@ -1949,18 +1949,20 @@ namespace Main_Demo
                 switch (cbResizeMode.SelectedIndex)
                 {
                     case 0:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.NearestNeighbor;
+                        resizeSettings.Mode = VideoResizeMode.NearestNeighbor;
                         break;
                     case 1:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bilinear;
+                        resizeSettings.Mode = VideoResizeMode.Bilinear;
                         break;
                     case 2:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bicubic;
+                        resizeSettings.Mode = VideoResizeMode.Bicubic;
                         break;
                     case 3:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Lancroz;
+                        resizeSettings.Mode = VideoResizeMode.Lancroz;
                         break;
                 }
+
+                VideoCapture1.Video_Resize = resizeSettings;
             }
             else
             {

@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.5.60
+
+* [Video Capture SDK .Net] Video_Resize property has been changed to IVideoResizeSettings type. You can use VideoResizeSettings class to perform classic resize the same as before or use MaxineUpscaleSettings/MaxineSuperResSettings to perform AI resing on Nvidia GPU using Nvidia Maxine SDK (SDK or SDK models are required to deploy).
+
 ## 15.5.57
 
-* [ALL] Resolved issue with NDI sources detection in local network
+* [ALL] Resolved issues with NDI sources detection in the local network
 
 ## 15.5.50
 

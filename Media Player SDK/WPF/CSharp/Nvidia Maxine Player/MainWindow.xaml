@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Nvidia_Maxine_Player"
+        xmlns:local="clr-namespace:Nvidia_Maxine_Player" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         mc:Ignorable="d"
         Title="Media Player SDK .Net - Nvidia Maxine Player Demo" Height="600" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
@@ -11,7 +11,7 @@
         <TextBox x:Name="edFilename" Margin="10,36,328,0" TextWrapping="Wrap" Text="C:\samples\!video.avi" VerticalAlignment="Top"/>
         <Button x:Name="btOpenFile" Content="..." HorizontalAlignment="Right" Margin="0,35,303,0" VerticalAlignment="Top" Width="20" Height="20" Click="btOpenFile_Click"/>
         <Grid Background="Black" Margin="10,60,303,125">
-            <Image x:Name="pnScreen" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <GroupBox Header="Controls" Margin="10,0,303,31" Height="89" VerticalAlignment="Bottom">
             <Grid>
@@ -44,7 +44,7 @@
                     <ComboBoxItem>Artifact Reduction</ComboBoxItem>
                     <ComboBoxItem>Upscale</ComboBoxItem>
                     <ComboBoxItem>Super Resolution</ComboBoxItem>
-                    <ComboBoxItem>AI Green Screen</ComboBoxItem>
+                    <!--<ComboBoxItem>AI Green Screen</ComboBoxItem>-->
                 </ComboBox>
 
                 <Grid x:Name="gdDenoise" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
@@ -79,7 +79,7 @@
                     <TextBox x:Name="edSuperResolutionHeight" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="24">1080</TextBox>
                 </Grid>
 
-                <Grid x:Name="gdAIGS" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                <!--<Grid x:Name="gdAIGS" Margin="0,110,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
                     <Label Margin="10,0,0,0">Mode</Label>
                     <ComboBox x:Name="cbAIGSMode" Margin="15,25,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectedIndex="0">
                         <ComboBoxItem>Matte</ComboBoxItem>
@@ -92,7 +92,7 @@
 
                     <Label Margin="10,45,0,0">Background image</Label>
                     <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24">c:\Samples\pics\5.jpg</TextBox>
-                </Grid>
+                </Grid>-->
             </Grid>
         </GroupBox>
         <Label Content="Nvidia Maxine Video Effects SDK or redist required" HorizontalAlignment="Right" Margin="0,472,13,0" VerticalAlignment="Top"/>

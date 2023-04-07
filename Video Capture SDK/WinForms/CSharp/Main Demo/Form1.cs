@@ -1374,7 +1374,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 VideoCapture1.Video_ResizeOrCrop_Enabled = true;
 
-                VideoCapture1.Video_Resize = new VideoResizeSettings
+                var resize = new VideoResizeSettings
                 {
                     Width = Convert.ToInt32(edResizeWidth.Text),
                     Height = Convert.ToInt32(edResizeHeight.Text),
@@ -1384,18 +1384,20 @@ namespace VideoCapture_CSharp_Demo
                 switch (cbResizeMode.SelectedIndex)
                 {
                     case 0:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.NearestNeighbor;
+                        resize.Mode = VideoResizeMode.NearestNeighbor;
                         break;
                     case 1:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bilinear;
+                        resize.Mode = VideoResizeMode.Bilinear;
                         break;
                     case 2:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Bicubic;
+                        resize.Mode = VideoResizeMode.Bicubic;
                         break;
                     case 3:
-                        VideoCapture1.Video_Resize.Mode = VideoResizeMode.Lancroz;
+                        resize.Mode = VideoResizeMode.Lancroz;
                         break;
                 }
+
+                VideoCapture1.Video_Resize = resize;
             }
             else
             {

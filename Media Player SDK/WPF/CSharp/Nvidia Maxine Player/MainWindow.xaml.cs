@@ -1,14 +1,13 @@
-﻿using NvidiaMaxine.VideoEffects.Effects;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer;
 using System.Windows.Threading;
+using VisioForge.Core.Types.VideoEffects.NvidiaMaxine;
+using VisioForge.Core.Types.VideoEffects;
 
 namespace Nvidia_Maxine_Player
 {
@@ -24,97 +23,17 @@ namespace Nvidia_Maxine_Player
 
         private MediaPlayerCore MediaPlayer1;
 
-        private BaseEffect _videoEffect;
-
         private int _effectID = 0;
 
         private string _modelsPath;
 
-        private AIGSEffectMode _aigsMode;
-
-        private string _aigsBackgroundImage;
-
         private readonly DispatcherTimer _timer = new DispatcherTimer();
-
-        private WriteableBitmap _previewBitmap;
 
         private void CreateEngine()
         {
-            MediaPlayer1 = new MediaPlayerCore();
-            MediaPlayer1.OnVideoFrameBuffer += MediaPlayer1_OnVideoFrameBuffer;
+            MediaPlayer1 = new MediaPlayerCore(VideoView1);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
-        }
-
-        private void MediaPlayer1_OnVideoFrameBuffer(object sender, VideoFrameBufferEventArgs e)
-        {
-            var videoFrame = new NvidiaMaxine.VideoEffects.VideoFrame(e.Frame, false);
-            if (_videoEffect == null)
-            {
-                switch (_effectID)
-                {
-                    case 0:
-                        _videoEffect = null;
-                        break;
-                    case 1:
-                        _videoEffect = new DenoiseEffect(_modelsPath, videoFrame);
-                        break;
-                    case 2:
-                        _videoEffect = new ArtifactReductionEffect(_modelsPath, videoFrame);
-                        break;
-                    case 3:
-                        _videoEffect = new UpscaleEffect(_modelsPath, videoFrame);
-                        break;
-                    case 4:
-                        _videoEffect = new SuperResolutionEffect(_modelsPath, videoFrame);
-                        break;
-                    case 5:
-                        _videoEffect = new AIGSEffect(_modelsPath, videoFrame, _aigsMode);
-                        (_videoEffect as AIGSEffect).BackgroundImage = _aigsBackgroundImage;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                _videoEffect?.Init(e.Frame.Info.Width, e.Frame.Info.Height);
-            }
-
-            if (_videoEffect != null)
-            {
-                var resFrame = _videoEffect.Process();
-                if (resFrame != null)
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        RenderFrame(resFrame);
-                    });
-                }
-            }
-            else
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    RenderFrame(videoFrame);
-                });
-            }
-        }
-
-        private void RenderFrame(NvidiaMaxine.VideoEffects.VideoFrame frame)
-        {
-            if (_previewBitmap == null || _previewBitmap.PixelWidth != frame.Width || _previewBitmap.PixelHeight != frame.Height || pnScreen.Source == null)
-            {
-                var dpi = VisualTreeHelper.GetDpi(pnScreen);
-                _previewBitmap = new WriteableBitmap(frame.Width, frame.Height, dpi.PixelsPerInchX, dpi.PixelsPerInchY, PixelFormats.Bgr24, null);
-
-                pnScreen.BeginInit();
-                pnScreen.Source = this._previewBitmap;
-                pnScreen.EndInit();
-            }
-            
-            pnScreen.BeginInit();
-            int lineStep = (((frame.Width * 24) + 31) / 32) * 4;
-            _previewBitmap.WritePixels(new Int32Rect(0, 0, frame.Width, frame.Height), frame.Data, lineStep * frame.Height, lineStep);
-            pnScreen.EndInit();
         }
 
         private void DestroyEngine()
@@ -123,7 +42,6 @@ namespace Nvidia_Maxine_Player
             {
                 MediaPlayer1.OnError -= MediaPlayer1_OnError;
                 MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
-                MediaPlayer1.OnVideoFrameBuffer -= MediaPlayer1_OnVideoFrameBuffer;
                 
                 MediaPlayer1.Dispose();
                 MediaPlayer1 = null;
@@ -152,15 +70,60 @@ namespace Nvidia_Maxine_Player
             MediaPlayer1.Info_UseLibMediaInfo = true;
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
-
             MediaPlayer1.Debug_Mode = cbDebug.IsChecked == true;
 
             _effectID = cbVideoEffect.SelectedIndex;
             _modelsPath = edModels.Text;
-            _aigsMode = (AIGSEffectMode)cbAIGSMode.SelectedIndex;
-            _aigsBackgroundImage = edAIGSBackground.Text;
-            
+            MediaPlayer1.Video_Effects_Enabled = true;
+
+            // add effects
+            MediaPlayer1.Video_Effects_Clear();
+            MediaPlayer1.Video_Resize = null;
+
+            switch (cbVideoEffect.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    {
+                        var videoEffect = new MaxineDenoiseVideoEffect(
+                            edModels.Text,
+                            strength: (float)(slDenoiseStrength.Value / 10.0f));
+                        MediaPlayer1.Video_Effects_Add(videoEffect);
+                    }
+
+                    break;
+                case 2:
+                    {
+                        var videoEffect = new MaxineArtifactReductionVideoEffect(
+                            edModels.Text,
+                            mode: (MaxineArtifactReductionEffectMode)cbArtifactReductionMode.SelectedIndex);
+                        MediaPlayer1.Video_Effects_Add(videoEffect);
+                    }
+
+                    break;
+                case 3:
+                    {
+                        MediaPlayer1.Video_Resize = new MaxineUpscaleSettings(
+                            edModels.Text,
+                            height: Convert.ToInt32(edUpscaleHeight.Text),
+                            strength: (float)(slUpscaleStrength.Value / 10.0f));
+                    }
+
+                    break;
+                case 4:
+                    MediaPlayer1.Video_Resize = new MaxineSuperResSettings(
+                            edModels.Text,
+                            height: Convert.ToInt32(edSuperResolutionHeight.Text));
+
+                    break;
+                //case 5:
+                //    _videoEffect = new AIGSVideoEffect(mode: (AIGSEffectMode)cbAIGSMode.SelectedIndex, backgroundImage: edAIGSBackground.Text);
+                //    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             await MediaPlayer1.PlayAsync();
 
             _timer.Start();
@@ -182,16 +145,7 @@ namespace Nvidia_Maxine_Player
 
             await MediaPlayer1.StopAsync();
 
-            _videoEffect?.Dispose();
-            _videoEffect = null;
-
             tbTimeline.Value = 0;
-
-            pnScreen.BeginInit();
-            pnScreen.Source = null;
-            pnScreen.EndInit();
-
-            _previewBitmap = null;
         }
 
         private void btOpenFile_Click(object sender, RoutedEventArgs e)
@@ -275,7 +229,7 @@ namespace Nvidia_Maxine_Player
                         gdArtifactReduction.Visibility = Visibility.Collapsed;
                         gdSuperResolution.Visibility = Visibility.Collapsed;
                         gdUpscale.Visibility = Visibility.Collapsed;
-                        gdAIGS.Visibility = Visibility.Collapsed;
+                        // gdAIGS.Visibility = Visibility.Collapsed;
                     }
                     break;
                 case 1:
@@ -284,7 +238,7 @@ namespace Nvidia_Maxine_Player
                         gdArtifactReduction.Visibility = Visibility.Collapsed;
                         gdSuperResolution.Visibility = Visibility.Collapsed;
                         gdUpscale.Visibility = Visibility.Collapsed;
-                        gdAIGS.Visibility = Visibility.Collapsed;
+                        // gdAIGS.Visibility = Visibility.Collapsed;
                     }
                     break;
                 case 2:
@@ -293,7 +247,7 @@ namespace Nvidia_Maxine_Player
                         gdArtifactReduction.Visibility = Visibility.Visible;
                         gdSuperResolution.Visibility = Visibility.Collapsed;
                         gdUpscale.Visibility = Visibility.Collapsed;
-                        gdAIGS.Visibility = Visibility.Collapsed;
+                        // gdAIGS.Visibility = Visibility.Collapsed;
                     }
                     break;
                 case 3:
@@ -302,7 +256,7 @@ namespace Nvidia_Maxine_Player
                         gdArtifactReduction.Visibility = Visibility.Collapsed;
                         gdSuperResolution.Visibility = Visibility.Visible;
                         gdUpscale.Visibility = Visibility.Collapsed;
-                        gdAIGS.Visibility = Visibility.Collapsed;
+                        // gdAIGS.Visibility = Visibility.Collapsed;
                     }
                     break;
                 case 4:
@@ -311,18 +265,18 @@ namespace Nvidia_Maxine_Player
                         gdArtifactReduction.Visibility = Visibility.Collapsed;
                         gdSuperResolution.Visibility = Visibility.Collapsed;
                         gdUpscale.Visibility = Visibility.Visible;
-                        gdAIGS.Visibility = Visibility.Collapsed;
+                        // gdAIGS.Visibility = Visibility.Collapsed;
                     }
                     break;
-                case 5:
-                    {
-                        gdDenoise.Visibility = Visibility.Collapsed;
-                        gdArtifactReduction.Visibility = Visibility.Collapsed;
-                        gdSuperResolution.Visibility = Visibility.Collapsed;
-                        gdUpscale.Visibility = Visibility.Collapsed;
-                        gdAIGS.Visibility = Visibility.Visible;
-                    }
-                    break;
+                //case 5:
+                //    {
+                //        gdDenoise.Visibility = Visibility.Collapsed;
+                //        gdArtifactReduction.Visibility = Visibility.Collapsed;
+                //        gdSuperResolution.Visibility = Visibility.Collapsed;
+                //        gdUpscale.Visibility = Visibility.Collapsed;
+                //        gdAIGS.Visibility = Visibility.Visible;
+                //    }
+                //    break;
 
                 default:
                     break;
