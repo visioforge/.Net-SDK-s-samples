@@ -1,0 +1,35 @@
+﻿<Window x:Class="VNC_Source_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VNC_Source_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="VNC Source Demo - Video Capture SDK .Net X" Height="304" Width="733" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Width="250" Margin="10,10,0,0">
+            <RadioButton x:Name="rbHost" Content="Host and port" IsChecked="True"  />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,5,10,0">
+                <TextBox x:Name="edHost" Text="localhost" HorizontalAlignment="Stretch" Margin="10,5,0,0" Width="170" />
+                <TextBox x:Name="edPort" Text="5900" HorizontalAlignment="Stretch" Margin="10,5,0,0" Width="50" />
+            </StackPanel>
+            <RadioButton x:Name="rbURL" Content="URL" IsChecked="True" Margin="0,10,10,0" />
+            <TextBox x:Name="edURL" HorizontalAlignment="Stretch" Margin="10,5,10,0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,15,10,0">
+                <Button x:Name="btStart" Content="Start" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStart_Click" />
+                <Button x:Name="btStop" Content="Stop" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStop_Click" />
+                <TextBlock x:Name="lbTimestamp" Text="00:00:00" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="Password"  Margin="0,10,0,0" HorizontalAlignment="Left" />
+            <TextBox x:Name="edPassword" Width="105" Margin="0,5,0,0" HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <wpf:VideoView Grid.Column="1" Margin="10,10,0,0" Width="420" Height="240" Name="VideoView1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" />
+    </Grid>
+</Window>

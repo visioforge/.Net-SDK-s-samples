@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Live Video Compositor Demo 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLV Demo net5", "WPF\CSharp\KLV Demo\KLV Demo net5.csproj", "{90E29E4B-9DE5-4AD1-9955-0B0A6EAF0699}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VNC Source Demo net5", "WPF\CSharp\VNC Source Demo\VNC Source Demo net5.csproj", "{01097E92-62D5-45C4-81E7-8311321A99CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{90E29E4B-9DE5-4AD1-9955-0B0A6EAF0699}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90E29E4B-9DE5-4AD1-9955-0B0A6EAF0699}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90E29E4B-9DE5-4AD1-9955-0B0A6EAF0699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01097E92-62D5-45C4-81E7-8311321A99CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01097E92-62D5-45C4-81E7-8311321A99CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01097E92-62D5-45C4-81E7-8311321A99CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01097E92-62D5-45C4-81E7-8311321A99CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{65DB41C3-C073-4FA4-9BBA-72CC8B78E3EC} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{83258ACE-954A-4ABE-A13E-8F763C7CA5E0} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{90E29E4B-9DE5-4AD1-9955-0B0A6EAF0699} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
+		{01097E92-62D5-45C4-81E7-8311321A99CF} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

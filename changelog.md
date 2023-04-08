@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.5.61
+
+* [Video Capture SDK .Net] Added VNC source support for the VideoCaptureCoreX engine. You can use VNCSourceSettings class to configure Video_Source.
+* [Media Blocks SDK .Net] Added VNC source support. You can use VNCSourceBlock class as a video source block.
+
 ## 15.5.60
 
 * [Video Capture SDK .Net] Video_Resize property has been changed to IVideoResizeSettings type. You can use VideoResizeSettings class to perform classic resize the same as before or use MaxineUpscaleSettings/MaxineSuperResSettings to perform AI resing on Nvidia GPU using Nvidia Maxine SDK (SDK or SDK models are required to deploy).
