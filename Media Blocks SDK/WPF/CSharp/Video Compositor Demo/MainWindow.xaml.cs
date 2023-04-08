@@ -322,9 +322,12 @@ namespace Video_Compositor_Demo
                     Convert.ToInt32(edRectRight.Text),
                     Convert.ToInt32(edRectBottom.Text));
 
-                var stream = _videoMixer.Input_Get(index);
-                stream.Rectangle = _sources[index].Rectangle;
-                _videoMixer.Input_Update(index, stream);
+                if (_videoMixer != null)
+                {
+                    var stream = _videoMixer.Input_Get(index);
+                    stream.Rectangle = _sources[index].Rectangle;
+                    _videoMixer.Input_Update(index, stream);
+                }
             }
         }
 

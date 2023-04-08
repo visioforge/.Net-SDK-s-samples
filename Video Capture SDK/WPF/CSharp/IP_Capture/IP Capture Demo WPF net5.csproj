@@ -46,7 +46,4 @@
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.5.61" />
-  </ItemGroup>
 </Project>
