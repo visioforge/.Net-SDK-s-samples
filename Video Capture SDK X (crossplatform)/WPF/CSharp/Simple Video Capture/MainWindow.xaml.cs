@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -395,7 +397,7 @@ namespace Simple_Video_Capture
                 }
             }
 
-            ConfigureVideoEffects();
+            await ConfigureVideoEffectsAsync();
 
             await VideoCapture1.StartAsync();
 
@@ -405,14 +407,14 @@ namespace Simple_Video_Capture
             //VideoCapture1.Debug_SavePipeline("videocapturex");
         }
 
-        private void ConfigureVideoEffects()
+        private async Task ConfigureVideoEffectsAsync()
         {
             VideoCapture1.Video_Effects_Clear();
 
             if (cbVideoBalance.IsChecked == true)
             {
                 var balance = new VideoBalanceVideoEffect();
-                VideoCapture1.Video_Effects_AddOrUpdate(balance);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(balance);
 
                 tbBrightness_Scroll(null, null);
                 tbSaturation_Scroll(null, null);
@@ -676,12 +678,12 @@ namespace Simple_Video_Capture
             }));
         }
 
-        private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
+        private async void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (cbGreyscale.IsChecked == true)
             {
                 var grayscale = new GrayscaleVideoEffect();
-                VideoCapture1.Video_Effects_AddOrUpdate(grayscale);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(grayscale);
             }
             else
             {
@@ -745,7 +747,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void cbSepia_CheckedChanged(object sender, RoutedEventArgs e)
+        private async void cbSepia_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
             {
@@ -755,7 +757,7 @@ namespace Simple_Video_Capture
             if (cbSepia.IsChecked == true)
             {
                 var effect = new ColorEffectsVideoEffect(ColorEffectsPreset.Sepia);
-                VideoCapture1.Video_Effects_AddOrUpdate(effect);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(effect);
             }
             else
             {
@@ -763,7 +765,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void cbFlipX_Checked(object sender, RoutedEventArgs e)
+        private async void cbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
             {
@@ -773,7 +775,7 @@ namespace Simple_Video_Capture
             if (cbFlipX.IsChecked == true)
             {
                 var flip = new FlipRotateVideoEffect(VideoFlipRotateMethod.MethodHorizontal, "flipx");
-                VideoCapture1.Video_Effects_AddOrUpdate(flip);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(flip);
             }
             else
             {
@@ -781,7 +783,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void cbFlipY_Checked(object sender, RoutedEventArgs e)
+        private async void cbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
             {
@@ -791,7 +793,7 @@ namespace Simple_Video_Capture
             if (cbFlipY.IsChecked == true)
             {
                 var flip = new FlipRotateVideoEffect(VideoFlipRotateMethod.MethodVertical, "flipy");
-                VideoCapture1.Video_Effects_AddOrUpdate(flip);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(flip);
             }
             else
             {
@@ -814,7 +816,7 @@ namespace Simple_Video_Capture
             await VideoCapture1.StopCaptureAsync(0);
         }
 
-        private void cbTextLogo_Click(object sender, RoutedEventArgs e)
+        private async void cbTextLogo_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
             {
@@ -824,7 +826,7 @@ namespace Simple_Video_Capture
             if (cbTextLogo.IsChecked == true)
             {
                 var effect = new TextOverlayVideoEffect();
-                VideoCapture1.Video_Effects_AddOrUpdate(effect);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(effect);
             }
             else
             {
@@ -832,7 +834,7 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void cbImageLogo_Click(object sender, RoutedEventArgs e)
+        private async void cbImageLogo_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
             {
@@ -842,7 +844,7 @@ namespace Simple_Video_Capture
             if (cbImageLogo.IsChecked == true)
             {
                 var effect = new ImageOverlayVideoEffect("logo.png");
-                VideoCapture1.Video_Effects_AddOrUpdate(effect);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(effect);
             }
             else
             {
@@ -850,12 +852,12 @@ namespace Simple_Video_Capture
             }
         }
 
-        private void cbVideoBalance_Click(object sender, RoutedEventArgs e)
+        private async void cbVideoBalance_Click(object sender, RoutedEventArgs e)
         {
             if (cbVideoBalance.IsChecked == true)
             {
                 var effect = new VideoBalanceVideoEffect();
-                VideoCapture1.Video_Effects_AddOrUpdate(effect);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(effect);
 
                 tbBrightness_Scroll(null, null);
                 tbSaturation_Scroll(null, null);

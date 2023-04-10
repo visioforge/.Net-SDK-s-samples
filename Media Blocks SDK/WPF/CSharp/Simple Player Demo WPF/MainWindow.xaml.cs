@@ -37,7 +37,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
         private AudioRendererBlock _audioRenderer;
 
-        private FileSourceBlock _fileSource;
+        private UniversalSourceBlock _fileSource;
 
         public MainWindow()
         {
@@ -75,7 +75,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _fileSource = new FileSourceBlock(edFilename.Text);
+            _fileSource = new UniversalSourceBlock(new Uri(edFilename.Text));
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);

@@ -34,7 +34,7 @@ namespace MediaBlocks_Player_Demo
 
         private AudioRendererBlock _audioRenderer;
 
-        private FileSourceBlock _fileSource;
+        private UniversalSourceBlock _fileSource;
 
         private void CreateEngine()
         {
@@ -112,7 +112,7 @@ namespace MediaBlocks_Player_Demo
                 }
             }
 
-            _fileSource = new FileSourceBlock(edFilename.Text, renderVideo: videoStream, renderAudio: audioStream);
+            _fileSource = new UniversalSourceBlock(edFilename.Text, renderVideo: videoStream, renderAudio: audioStream);
 
             if (videoStream)
             {

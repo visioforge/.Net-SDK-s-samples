@@ -26,7 +26,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
         private AudioRendererBlock _audioRenderer;
 
-        private FileSourceBlock _fileSource;
+        private UniversalSourceBlock _fileSource;
 
         private System.Timers.Timer _tmPosition;
 
@@ -193,7 +193,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
                 }
             }
 
-            _fileSource = new FileSourceBlock(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream);
+            _fileSource = new UniversalSourceBlock(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream);
 
             if (videoStream)
             {

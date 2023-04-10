@@ -18,7 +18,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private AudioRendererBlock _audioRenderer;
 
-        private FileSourceBlock _source;
+        private UniversalSourceBlock _source;
 
         private bool disposedValue;
 
@@ -54,7 +54,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 urix = new UriBuilder(uri1) { UserName = login, Password = password }.Uri.ToString();
             }
 
-            _source = new FileSourceBlock(urix);
+            _source = new UniversalSourceBlock(urix);
 
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 

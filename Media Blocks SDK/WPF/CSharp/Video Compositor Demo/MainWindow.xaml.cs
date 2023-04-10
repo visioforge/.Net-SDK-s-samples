@@ -168,7 +168,7 @@ namespace Video_Compositor_Demo
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
-                src.Source = new FileSourceBlock(dlg.FileName);
+                src.Source = new UniversalSourceBlock(dlg.FileName);
                 src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
 
                 _sources.Add(src);

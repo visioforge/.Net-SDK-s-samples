@@ -21,9 +21,9 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         private VideoRendererBlock _videoRenderer;
 
-        private FileSourceBlock _source1;
+        private UniversalSourceBlock _source1;
 
-        private FileSourceBlock _source2;
+        private UniversalSourceBlock _source2;
 
         private VideoMixerBlock _videoMixer;
 
@@ -45,8 +45,8 @@ namespace MediaBlocks_Video_Mixer_Demo
             _pipeline = new MediaBlocksPipeline(false);
             _pipeline.OnError += _pipeline_OnError;
 
-            _source1 = new FileSourceBlock(filename1);
-            _source2 = new FileSourceBlock(filename2) { Name = "Source2" };
+            _source1 = new UniversalSourceBlock(filename1);
+            _source2 = new UniversalSourceBlock(filename2) { Name = "Source2" };
 
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 
