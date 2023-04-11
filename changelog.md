@@ -2,7 +2,7 @@
 
 ## 15.5.63
 
-* [Video Capture SDK .Net] Improved VNC source support for the VideoCaptureCoreX engine.
+* [Video Capture SDK .Net] Improved VNC source support for the VideoCaptureCoreX engine
 
 ## 15.5.61
 
