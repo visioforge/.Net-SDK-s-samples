@@ -4,14 +4,15 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Face_Detector_Live</RootNamespace>
     <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.62" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.62" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.62" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.63" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.63" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.63" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.1.3" />
