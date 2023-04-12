@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.65
+
+* WinUI VideoView updated to fix issues during audio files playback
+
 ## 15.5.63
 
 * [Video Capture SDK .Net] Improved VNC source support for the VideoCaptureCoreX engine.

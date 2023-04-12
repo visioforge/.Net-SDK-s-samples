@@ -8,23 +8,27 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1024" Height="720" Spacing="16" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,16,16,0" Spacing="15">
-                <TextBlock VerticalAlignment="Center">File name or URL</TextBlock>
-                <TextBox x:Name="edFilename" Width="600" VerticalAlignment="Center" />
-                <Button x:Name="btOpenFile" Click="btOpenFile_Click" Width="32">...</Button>
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <winui:VideoView x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1024" Height="560" Background="Gray" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,16,16,0" Spacing="15">
+            <TextBlock VerticalAlignment="Center">File name or URL</TextBlock>
+            <TextBox x:Name="edFilename" Width="600" VerticalAlignment="Center" />
+            <Button x:Name="btOpenFile" Click="btOpenFile_Click" Width="32">...</Button>
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,0,16,0" Spacing="15">
-                <Button x:Name="btPlay" Click="btPlay_Click" Width="80" VerticalAlignment="Center" >Play</Button>
-                <Button x:Name="btPause" Click="btPause_Click" Width="80" VerticalAlignment="Center" >Pause</Button>
-                <Button x:Name="btResume" Click="btResume_Click" Width="80" VerticalAlignment="Center" >Resume</Button>
-                <Button x:Name="btStop" Click="btStop_Click" Width="80" VerticalAlignment="Center" >Stop</Button>
-                <Slider x:Name="slPosition" Width="480" VerticalAlignment="Center" ValueChanged="slPosition_ValueChanged"></Slider>
-                <TextBlock x:Name="lbPosition" VerticalAlignment="Center">00:00:00 / 00:00:00</TextBlock>
-            </StackPanel>
+        <winui:VideoView  Grid.Row="1" Margin="16,16,16,0" x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1024" Height="460" Background="Gray" />
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16,16,16,0"  Spacing="15">
+            <Button x:Name="btPlay" Click="btPlay_Click" Width="80" VerticalAlignment="Center" >Play</Button>
+            <Button x:Name="btPause" Click="btPause_Click" Width="80" VerticalAlignment="Center" >Pause</Button>
+            <Button x:Name="btResume" Click="btResume_Click" Width="80" VerticalAlignment="Center" >Resume</Button>
+            <Button x:Name="btStop" Click="btStop_Click" Width="80" VerticalAlignment="Center" >Stop</Button>
+            <Slider x:Name="slPosition" Width="480" VerticalAlignment="Center" ValueChanged="slPosition_ValueChanged"></Slider>
+            <TextBlock x:Name="lbPosition" VerticalAlignment="Center">00:00:00 / 00:00:00</TextBlock>
         </StackPanel>
     </Grid>
 
