@@ -490,10 +490,10 @@ namespace Main_Demo
 
             videoView1.Invalidate();
 
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 MessageBox.Show(this, "Playback complete.");
-            });
+            }));
         }
 
         private async void btPause_Click(object sender, EventArgs e)

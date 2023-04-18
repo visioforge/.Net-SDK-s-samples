@@ -35,10 +35,10 @@ namespace File_Encryptor
 
         private void _videoEdit_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
         {
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 MessageBox.Show(this, "Complete");
-            });
+            }));
         }
 
         private void _videoEdit_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
