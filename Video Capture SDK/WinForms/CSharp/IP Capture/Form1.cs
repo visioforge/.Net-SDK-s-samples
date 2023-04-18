@@ -343,7 +343,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
-                        MessageBox.Show("Please specify IP camera user name and password.");
+                        MessageBox.Show(this, "Please specify IP camera user name and password.");
                         return;
                     }
 
@@ -352,7 +352,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     if (!result)
                     {
                         onvifControl = null;
-                        MessageBox.Show("Unable to connect to ONVIF camera.");
+                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
@@ -1096,7 +1096,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                                    {
                                        await VideoCapture1.StopAsync();
 
-                                       MessageBox.Show("Network source stopped or disconnected!");
+                                       MessageBox.Show(this, "Network source stopped or disconnected!");
                                    }));
         }
 

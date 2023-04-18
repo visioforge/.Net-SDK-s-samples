@@ -602,7 +602,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                     }
                 case 1:
                     {
-                        MessageBox.Show("No settings available for selected output format.");
+                        MessageBox.Show(this, "No settings available for selected output format.");
 
                         break;
                     }

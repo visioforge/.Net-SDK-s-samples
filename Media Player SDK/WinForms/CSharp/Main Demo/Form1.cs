@@ -694,7 +694,7 @@ namespace Media_Player_Demo
             {
                 if (!File.Exists(edChromaKeyImage.Text))
                 {
-                    MessageBox.Show("Chroma-key background file doesn't exists.");
+                    MessageBox.Show(this, "Chroma-key background file doesn't exists.");
                     return;
                 }
 
@@ -820,7 +820,7 @@ namespace Media_Player_Demo
 
                     if (blend == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace blend effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace blend effect.");
                         return;
                     }
 
@@ -845,7 +845,7 @@ namespace Media_Player_Demo
 
                     if (cavt == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace CAVT effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace CAVT effect.");
                         return;
                     }
 
@@ -867,7 +867,7 @@ namespace Media_Player_Demo
 
                     if (triangle == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace triangle effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace triangle effect.");
                         return;
                     }
 
@@ -895,7 +895,7 @@ namespace Media_Player_Demo
 
                     if (cast == null)
                     {
-                        MessageBox.Show("Unable to configure denoise CAST effect.");
+                        MessageBox.Show(this, "Unable to configure denoise CAST effect.");
                         return;
                     }
                 }
@@ -915,7 +915,7 @@ namespace Media_Player_Demo
 
                     if (mosquito == null)
                     {
-                        MessageBox.Show("Unable to configure denoise mosquito effect.");
+                        MessageBox.Show(this, "Unable to configure denoise mosquito effect.");
                         return;
                     }
                 }
@@ -1048,7 +1048,7 @@ namespace Media_Player_Demo
 
             if (lbSourceFiles.Items.Count == 0)
             {
-                MessageBox.Show("Playlist is empty!");
+                MessageBox.Show(this, "Playlist is empty!");
                 return;
             }
 
@@ -1884,7 +1884,7 @@ namespace Media_Player_Demo
 
             if (zoomEffect == null)
             {
-                MessageBox.Show("Unable to configure zoom effect.");
+                MessageBox.Show(this, "Unable to configure zoom effect.");
                 return;
             }
 
@@ -1955,7 +1955,7 @@ namespace Media_Player_Demo
 
             if (pan == null)
             {
-                MessageBox.Show("Unable to configure pan effect.");
+                MessageBox.Show(this, "Unable to configure pan effect.");
                 return;
             }
 
@@ -2025,7 +2025,7 @@ namespace Media_Player_Demo
 
                 if (fadeIn == null)
                 {
-                    MessageBox.Show("Unable to configure fade-in effect.");
+                    MessageBox.Show(this, "Unable to configure fade-in effect.");
                     return;
                 }
 
@@ -2049,7 +2049,7 @@ namespace Media_Player_Demo
 
                 if (fadeOut == null)
                 {
-                    MessageBox.Show("Unable to configure fade-out effect.");
+                    MessageBox.Show(this, "Unable to configure fade-out effect.");
                     return;
                 }
 
@@ -2242,7 +2242,7 @@ namespace Media_Player_Demo
 
             if (rotate == null)
             {
-                MessageBox.Show("Unable to configure rotate effect.");
+                MessageBox.Show(this, "Unable to configure rotate effect.");
                 return;
             }
 

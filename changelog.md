@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.5.66
+
+* [Media Blocks SDK .Net/Media Player SDK .Net (crossplatform)] Added MP3+CDG Karaoke Player demo
+* [Media Blocks SDK .Net] Added CDGSourceBlock for MP3+CDG karaoke files playback
+* [ALL] Improved madVR support
+
 ## 15.5.65
 
 * WinUI VideoView updated to fix issues during audio files playback

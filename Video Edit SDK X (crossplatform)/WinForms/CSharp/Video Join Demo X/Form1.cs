@@ -223,16 +223,16 @@ namespace Video_Join_Demo
                                    {
                                        ProgressBar1.Value = 0;
                                        lbFiles.Items.Clear();
-                                   }));
 
-            if (e.Successful)
+                                         if (e.Successful)
             {
-                MessageBox.Show("Completed successfully", string.Empty, MessageBoxButtons.OK);
+                MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("Stopped with error", string.Empty, MessageBoxButtons.OK);
+                MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
             }
+                                   }));          
         }
 
         private void Form1_Load(object sender, EventArgs e)

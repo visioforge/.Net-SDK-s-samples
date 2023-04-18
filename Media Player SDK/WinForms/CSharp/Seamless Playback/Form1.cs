@@ -152,7 +152,7 @@
         {
             if (lbSourceFiles.Items.Count < 2)
             {
-                MessageBox.Show("You must add 2 or more files to test seamless playback.");
+                MessageBox.Show(this, "You must add 2 or more files to test seamless playback.");
                 return;
             }
 

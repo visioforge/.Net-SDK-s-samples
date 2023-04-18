@@ -229,7 +229,7 @@ Public Class Form1
 
             Try
                 If (windowCaptureForm Is Nothing) Then
-                    MessageBox.Show("Window for screen capture is not specified.")
+                    MessageBox.Show(Me, "Window for screen capture is not specified.")
                     Return Nothing
                 End If
 
@@ -238,7 +238,7 @@ Public Class Form1
             End Try
 
             If (source.WindowHandle = IntPtr.Zero) Then
-                MessageBox.Show("Incorrect window title for screen capture.")
+                MessageBox.Show(Me, "Incorrect window title for screen capture.")
                 Return Nothing
             End If
         Else

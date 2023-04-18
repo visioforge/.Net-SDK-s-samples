@@ -456,7 +456,7 @@
             this.edFilenameOrURL.Name = ("edFilenameOrURL");
             this.edFilenameOrURL.Size = (new global::System.Drawing.Size(639, 31));
             this.edFilenameOrURL.TabIndex = (19);
-            this.edFilenameOrURL.Text = ("c:\\samples\\!videox.mp4");
+            this.edFilenameOrURL.Text = ("c:\\samples\\!video.mp4");
             // 
             // label14
             // 
@@ -2248,6 +2248,7 @@
             this.cbImageOverlayEnabled.TabIndex = (2);
             this.cbImageOverlayEnabled.Text = ("Enabled");
             this.cbImageOverlayEnabled.UseVisualStyleBackColor = (true);
+            this.cbImageOverlayEnabled.Click += (this.cbImageOverlayEnabled_Click);
             // 
             // tabPage12
             // 

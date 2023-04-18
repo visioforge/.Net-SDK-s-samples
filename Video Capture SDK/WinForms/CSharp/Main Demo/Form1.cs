@@ -1483,7 +1483,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 if (!File.Exists(edChromaKeyImage.Text))
                 {
-                    MessageBox.Show("Chroma-key background file doesn't exists.");
+                    MessageBox.Show(this, "Chroma-key background file doesn't exists.");
                     return;
                 }
 
@@ -1589,7 +1589,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (blend == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace blend effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace blend effect.");
                         return;
                     }
 
@@ -1614,7 +1614,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (cavt == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace CAVT effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace CAVT effect.");
                         return;
                     }
 
@@ -1636,7 +1636,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (triangle == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace triangle effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace triangle effect.");
                         return;
                     }
 
@@ -1664,7 +1664,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (cast == null)
                     {
-                        MessageBox.Show("Unable to configure denoise CAST effect.");
+                        MessageBox.Show(this, "Unable to configure denoise CAST effect.");
                         return;
                     }
                 }
@@ -1684,7 +1684,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (mosquito == null)
                     {
-                        MessageBox.Show("Unable to configure denoise mosquito effect.");
+                        MessageBox.Show(this, "Unable to configure denoise mosquito effect.");
                         return;
                     }
                 }
@@ -2207,7 +2207,7 @@ namespace VideoCapture_CSharp_Demo
 
                             if (!cbNetworkStreamingAudioEnabled.Checked || !cbPlayAudio.Checked)
                             {
-                                MessageBox.Show("Audio streaming should be enabled to stream to YouTube.");
+                                MessageBox.Show(this, "Audio streaming should be enabled to stream to YouTube.");
                                 cbNetworkStreamingAudioEnabled.Checked = true;
                             }
                         }
@@ -2217,7 +2217,7 @@ namespace VideoCapture_CSharp_Demo
 
                             if (!cbNetworkStreamingAudioEnabled.Checked || !cbPlayAudio.Checked)
                             {
-                                MessageBox.Show("Audio streaming should be enabled to stream to Facebook Live.");
+                                MessageBox.Show(this, "Audio streaming should be enabled to stream to Facebook Live.");
                                 cbNetworkStreamingAudioEnabled.Checked = true;
                             }
                         }
@@ -2550,7 +2550,7 @@ namespace VideoCapture_CSharp_Demo
                 {
                     if (windowCaptureForm == null)
                     {
-                        MessageBox.Show("Window for screen capture is not specified.");
+                        MessageBox.Show(this, "Window for screen capture is not specified.");
                         return;
                     }
 
@@ -2563,7 +2563,7 @@ namespace VideoCapture_CSharp_Demo
 
                 if (settings.WindowHandle == IntPtr.Zero)
                 {
-                    MessageBox.Show("Incorrect window title for screen capture.");
+                    MessageBox.Show(this, "Incorrect window title for screen capture.");
                     return;
                 }
             }
@@ -3409,7 +3409,7 @@ namespace VideoCapture_CSharp_Demo
         {
             if (!File.Exists(edOSDImageFilename.Text))
             {
-                MessageBox.Show("OSD image file does not exist.");
+                MessageBox.Show(this, "OSD image file does not exist.");
                 return;
             }
 
@@ -3606,11 +3606,11 @@ namespace VideoCapture_CSharp_Demo
         {
             if (await VideoCapture1.Video_CaptureDevice_SignalPresentAsync())
             {
-                MessageBox.Show("Signal present");
+                MessageBox.Show(this, "Signal present");
             }
             else
             {
-                MessageBox.Show("Signal not present");
+                MessageBox.Show(this, "Signal not present");
             }
         }
 
@@ -3950,7 +3950,7 @@ namespace VideoCapture_CSharp_Demo
                 if (e.Channel == -1)
                 {
                     pbChannels.Value = 0;
-                    MessageBox.Show("AutoTune complete");
+                    MessageBox.Show(this, "AutoTune complete");
                 }
 
                 Application.DoEvents();
@@ -4170,7 +4170,7 @@ namespace VideoCapture_CSharp_Demo
             }
             else
             {
-                MessageBox.Show("Select device!");
+                MessageBox.Show(this, "Select device!");
             }
         }
 
@@ -4182,7 +4182,7 @@ namespace VideoCapture_CSharp_Demo
             }
             else
             {
-                MessageBox.Show("Select device!");
+                MessageBox.Show(this, "Select device!");
             }
         }
 
@@ -4233,7 +4233,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (zoomEffect == null)
             {
-                MessageBox.Show("Unable to configure zoom effect.");
+                MessageBox.Show(this, "Unable to configure zoom effect.");
                 return;
             }
 
@@ -4304,7 +4304,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (pan == null)
             {
-                MessageBox.Show("Unable to configure pan effect.");
+                MessageBox.Show(this, "Unable to configure pan effect.");
                 return;
             }
 
@@ -4371,7 +4371,7 @@ namespace VideoCapture_CSharp_Demo
 
                 if (fadeIn == null)
                 {
-                    MessageBox.Show("Unable to configure fade-in effect.");
+                    MessageBox.Show(this, "Unable to configure fade-in effect.");
                     return;
                 }
 
@@ -4395,7 +4395,7 @@ namespace VideoCapture_CSharp_Demo
 
                 if (fadeOut == null)
                 {
-                    MessageBox.Show("Unable to configure fade-out effect.");
+                    MessageBox.Show(this, "Unable to configure fade-out effect.");
                     return;
                 }
 
@@ -4571,7 +4571,7 @@ namespace VideoCapture_CSharp_Demo
                     {
                         await VideoCapture1.StopAsync();
 
-                        MessageBox.Show("Network source stopped or disconnected!");
+                        MessageBox.Show(this, "Network source stopped or disconnected!");
                     }));
         }
 
@@ -4623,7 +4623,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (rotate == null)
             {
-                MessageBox.Show("Unable to configure rotate effect.");
+                MessageBox.Show(this, "Unable to configure rotate effect.");
                 return;
             }
 
@@ -5231,7 +5231,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
-                        MessageBox.Show("Please specify IP camera user name and password.");
+                        MessageBox.Show(this, "Please specify IP camera user name and password.");
                         return;
                     }
 
@@ -5240,7 +5240,7 @@ namespace VideoCapture_CSharp_Demo
                     if (!result)
                     {
                         onvifControl = null;
-                        MessageBox.Show("Unable to connect to ONVIF camera.");
+                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
@@ -5580,7 +5580,7 @@ namespace VideoCapture_CSharp_Demo
                 case 14:
                 case 15:
                     {
-                        MessageBox.Show("No settings available for selected output format.");
+                        MessageBox.Show(this, "No settings available for selected output format.");
 
                         break;
                     }

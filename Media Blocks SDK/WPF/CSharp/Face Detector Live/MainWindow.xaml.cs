@@ -157,7 +157,7 @@ namespace Face_Detector_Live
 
             if (cbVideoInput.SelectedIndex < 0)
             {
-                MessageBox.Show("Select video input device");
+                MessageBox.Show(this, "Select video input device");
                 return;
             }
 

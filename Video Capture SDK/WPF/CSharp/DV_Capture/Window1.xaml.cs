@@ -4,6 +4,7 @@ using System.Globalization;
 
 namespace DVCapture
 {
+    using Microsoft.Win32;
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -12,7 +13,6 @@ namespace DVCapture
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Forms;
     using System.Windows.Input;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
@@ -25,7 +25,6 @@ namespace DVCapture
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.UI.WPF;
     using VisioForge.Core.VideoCapture;
-    using MessageBox = System.Windows.Forms.MessageBox;
 
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public partial class Window1
@@ -140,7 +139,7 @@ namespace DVCapture
 
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
-            if (screenshotSaveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (screenshotSaveDialog.ShowDialog() == true)
             {
                 var filename = screenshotSaveDialog.FileName;
                 var ext = Path.GetExtension(filename)?.ToLowerInvariant();
@@ -644,7 +643,7 @@ namespace DVCapture
                     }
                 case 1:
                     {
-                        MessageBox.Show("No settings available for selected output format.");
+                        MessageBox.Show(this, "No settings available for selected output format.");
 
                         break;
                     }

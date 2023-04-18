@@ -442,16 +442,16 @@ namespace Video_From_Images
             {
                 ProgressBar1.Value = 0;
                 lbFiles.Items.Clear();
-            }));
 
-            if (e.Successful)
-            {
-                MessageBox.Show("Completed successfully", string.Empty, MessageBoxButtons.OK);
-            }
-            else
-            {
-                MessageBox.Show("Stopped with error", string.Empty, MessageBoxButtons.OK);
-            }
+                if (e.Successful)
+                {
+                    MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
+                }
+            }));
         }
 
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)

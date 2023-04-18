@@ -403,7 +403,7 @@ Public Class Form1
 
                 dvSettingsDialog.ShowDialog(Me)
             Case 1
-                MessageBox.Show("No settings available for selected output format.")
+                MessageBox.Show(Me, "No settings available for selected output format.")
             Case 2
                 If (aviSettingsDialog Is Nothing) Then
                     aviSettingsDialog = New AVISettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray())

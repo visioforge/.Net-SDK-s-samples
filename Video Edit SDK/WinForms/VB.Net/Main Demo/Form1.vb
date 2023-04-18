@@ -291,9 +291,9 @@ Public Class Form1
         VideoEdit1.Video_Effects_Clear()
 
         If (e.Successful) Then
-            MessageBox.Show("Completed successfully", String.Empty, MessageBoxButtons.OK)
+            MessageBox.Show(Me, "Completed successfully", String.Empty, MessageBoxButtons.OK)
         Else
-            MessageBox.Show("Stopped with error", String.Empty, MessageBoxButtons.OK)
+            MessageBox.Show(Me, "Stopped with error", String.Empty, MessageBoxButtons.OK)
         End If
     End Sub
 
@@ -997,7 +997,7 @@ Public Class Form1
 
                 If (IsNothing(blend)) Then
 
-                    MessageBox.Show("Unable to configure deinterlace blend effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace blend effect.")
                     Return
                 End If
 
@@ -1016,7 +1016,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(cavt)) Then
-                    MessageBox.Show("Unable to configure deinterlace CAVT effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace CAVT effect.")
                     Return
                 End If
 
@@ -1032,7 +1032,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(triangle)) Then
-                    MessageBox.Show("Unable to configure deinterlace triangle effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace triangle effect.")
                     Return
                 End If
 
@@ -1055,7 +1055,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(cast)) Then
-                    MessageBox.Show("Unable to configure denoise CAST effect.")
+                    MessageBox.Show(Me, "Unable to configure denoise CAST effect.")
                     Return
                 End If
             Else
@@ -1069,7 +1069,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(mosquito)) Then
-                    MessageBox.Show("Unable to configure denoise mosquito effect.")
+                    MessageBox.Show(Me, "Unable to configure denoise mosquito effect.")
                     Return
                 End If
             End If
@@ -1661,7 +1661,7 @@ Public Class Form1
         End If
 
         If (IsNothing(zoomEffect)) Then
-            MessageBox.Show("Unable to configure zoom effect.")
+            MessageBox.Show(Me, "Unable to configure zoom effect.")
             Return
         End If
 
@@ -1735,7 +1735,7 @@ Public Class Form1
         End If
 
         If (IsNothing(pan)) Then
-            MessageBox.Show("Unable to configure pan effect.")
+            MessageBox.Show(Me, "Unable to configure pan effect.")
             Return
         End If
 
@@ -1822,7 +1822,7 @@ Public Class Form1
             End If
 
             If (IsNothing(fadeIn)) Then
-                MessageBox.Show("Unable to configure fade-in effect.")
+                MessageBox.Show(Me, "Unable to configure fade-in effect.")
                 Return
             End If
 
@@ -1840,7 +1840,7 @@ Public Class Form1
             End If
 
             If (IsNothing(fadeOut)) Then
-                MessageBox.Show("Unable to configure fade-out effect.")
+                MessageBox.Show(Me, "Unable to configure fade-out effect.")
                 Return
             End If
 
@@ -2839,7 +2839,7 @@ Public Class Form1
 
         If (cbChromaKeyEnabled.Checked) Then
             If (Not File.Exists(edChromaKeyImage.Text)) Then
-                MessageBox.Show("Chroma-key background file doesn't exists.")
+                MessageBox.Show(Me, "Chroma-key background file doesn't exists.")
                 Return
             End If
 

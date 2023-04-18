@@ -4,9 +4,6 @@ using System.IO;
 using System.Windows;
 
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.AudioRendering;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
@@ -27,9 +24,6 @@ namespace VNC_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            _videoCapture = new VideoCaptureCoreX(VideoView1);
-            _videoCapture.OnError += VideoCapture_OnError;
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)

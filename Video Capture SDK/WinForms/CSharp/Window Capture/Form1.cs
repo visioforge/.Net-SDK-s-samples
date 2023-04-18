@@ -157,7 +157,7 @@
             {
                 if (windowCaptureForm == null)
                 {
-                    MessageBox.Show("Window for screen capture is not specified.");
+                    MessageBox.Show(this, "Window for screen capture is not specified.");
                     return null;
                 }
 
@@ -170,7 +170,7 @@
 
             if (source.WindowHandle == IntPtr.Zero)
             {
-                MessageBox.Show("Incorrect window title for screen capture.");
+                MessageBox.Show(this, "Incorrect window title for screen capture.");
                 return null;
             }
 

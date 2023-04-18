@@ -35,7 +35,10 @@ namespace File_Encryptor
 
         private void _videoEdit_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
         {
-            MessageBox.Show("Complete");
+            Invoke(() =>
+            {
+                MessageBox.Show(this, "Complete");
+            });
         }
 
         private void _videoEdit_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
@@ -50,7 +53,7 @@ namespace File_Encryptor
         {
             if (!File.Exists(edInputFile.Text))
             {
-                MessageBox.Show("Inout file does not exists.");
+                MessageBox.Show(this, "Inout file does not exists.");
                 return;
             }
 

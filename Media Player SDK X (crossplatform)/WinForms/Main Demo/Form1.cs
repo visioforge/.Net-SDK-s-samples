@@ -23,6 +23,7 @@ namespace Main_Demo
     using VisioForge.Core.Types.X.MediaPlayer;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.Output;
+    using System.Threading.Tasks;
 
     public partial class Form1 : Form
     {
@@ -96,7 +97,7 @@ namespace Main_Demo
             AudioEffectUpdateEqualizer();
         }
 
-        private void AddVideoEffects()
+        private async Task AddVideoEffectsAsync()
         {
             if (cbResizeEnabled.Checked)
             {
@@ -107,59 +108,60 @@ namespace Main_Demo
                     Letterbox = cbResizeLetterbox.Checked,
                     Method = (VideoScaleMethod)cbResizeMethod.SelectedIndex
                 };
-                _player.Video_Effects_AddOrUpdate(resize);
+
+                await _player.Video_Effects_AddOrUpdateAsync(resize);
             }
 
             if (cbDeinterlaceEnabled.Checked)
             {
-                UpdateDeinterlace();
+                await UpdateDeinterlaceAsync();
             }
 
             if (cbVideoBalanceEnabled.Checked)
             {
-                UpdateColorBalance();
+                await UpdateColorBalanceAsync();
             }
 
             if (cbColorEffectEnabled.Checked)
             {
-                UpdateColorEffect();
+                await UpdateColorEffectAsync();
             }
 
             if (cbFlipRotateEnabled.Checked)
             {
-                UpdateFlipRotate();
+                await UpdateFlipRotateAsync();
             }
 
             if (cbGaussianBlurEnabled.Checked)
             {
-                UpdateGaussianBlur();
+                await UpdateGaussianBlurAsync();
             }
 
             if (cbFishEyeEnabled.Checked)
             {
                 var fishEye = new FishEyeVideoEffect();
-                _player.Video_Effects_AddOrUpdate(fishEye);
+                await _player.Video_Effects_AddOrUpdateAsync(fishEye);
             }
 
             if (cbTextOverlayEnabled.Checked)
             {
-                UpdateTextOverlay();
+                await UpdateTextOverlayAsync();
             }
 
             if (cbImageOverlayEnabled.Checked)
             {
-                UpdateImageOverlay();
+                await UpdateImageOverlayAsync();
             }
         }
 
-        private void UpdateImageOverlay()
+        private async Task UpdateImageOverlayAsync()
         {
             if (cbImageOverlayEnabled.Checked)
             {
                 var filename = edImageOverlayFilename.Text;
                 if (!File.Exists(filename))
                 {
-                    MessageBox.Show("Image logo file not found.");
+                    MessageBox.Show(this, "Image logo file not found.");
                     return;
                 }
 
@@ -175,20 +177,24 @@ namespace Main_Demo
                 imageOverlay.Height = bmp.Height;
                 bmp.Dispose();
 
-                _player.Video_Effects_AddOrUpdate(imageOverlay);
+                await _player.Video_Effects_AddOrUpdateAsync(imageOverlay);
+            }
+            else
+            {
+                await _player.Video_Effects_RemoveAsync(ImageOverlayVideoEffect.DefaultName);
             }
         }
 
-        private void UpdateGaussianBlur()
+        private async Task UpdateGaussianBlurAsync()
         {
             if (cbGaussianBlurEnabled.Checked)
             {
                 var blur = new GaussianBlurVideoEffect(tbGaussianBlur.Value / 10.0);
-                _player.Video_Effects_AddOrUpdate(blur);
+                await _player.Video_Effects_AddOrUpdateAsync(blur);
             }
         }
 
-        private void UpdateColorBalance()
+        private async Task UpdateColorBalanceAsync()
         {
             if (cbVideoBalanceEnabled.Checked)
             {
@@ -200,29 +206,29 @@ namespace Main_Demo
                     Hue = tbVideoHue.Value / 100.0
                 };
 
-                _player.Video_Effects_AddOrUpdate(colorBalance);
+                await _player.Video_Effects_AddOrUpdateAsync(colorBalance);
             }
         }
 
-        private void UpdateColorEffect()
+        private async Task UpdateColorEffectAsync()
         {
             if (cbColorEffectEnabled.Checked)
             {
                 var colorEffect = new ColorEffectsVideoEffect((ColorEffectsPreset)cbColorEffect.SelectedIndex);
-                _player.Video_Effects_AddOrUpdate(colorEffect);
+                await _player.Video_Effects_AddOrUpdateAsync(colorEffect);
             }
         }
 
-        private void UpdateFlipRotate()
+        private async Task UpdateFlipRotateAsync()
         {
             if (cbFlipRotateEnabled.Checked)
             {
                 var flipRotate = new FlipRotateVideoEffect((VideoFlipRotateMethod)cbFlipRotate.SelectedIndex);
-                _player.Video_Effects_AddOrUpdate(flipRotate);
+                await _player.Video_Effects_AddOrUpdateAsync(flipRotate);
             }
         }
 
-        private void UpdateDeinterlace()
+        private async Task UpdateDeinterlaceAsync()
         {
             if (cbDeinterlaceEnabled.Checked)
             {
@@ -237,11 +243,11 @@ namespace Main_Demo
                     Mode = (DeinterlaceMode)cbDeinterlaceMode.SelectedIndex
                 };
 
-                _player.Video_Effects_AddOrUpdate(deinterlace);
+                await _player.Video_Effects_AddOrUpdateAsync(deinterlace);
             }
         }
 
-        private void UpdateTextOverlay()
+        private async Task UpdateTextOverlayAsync()
         {
             if (cbTextOverlayEnabled.Checked)
             {
@@ -276,7 +282,11 @@ namespace Main_Demo
 
                 textOverlay.TimeFormat = "%H:%M";
 
-                _player.Video_Effects_AddOrUpdate(textOverlay);
+                await _player.Video_Effects_AddOrUpdateAsync(textOverlay);
+            }
+            else
+            {
+                await _player.Video_Effects_RemoveAsync(TextOverlayVideoEffect.DefaultName);
             }
         }
 
@@ -342,7 +352,7 @@ namespace Main_Demo
             //_player.Segment_Stop = TimeSpan.FromMilliseconds(20000);
 
             AddAudioEffects();
-            AddVideoEffects();
+            await AddVideoEffectsAsync();
             AddMotionDetection();
             AddBarcodeReader();
 
@@ -479,7 +489,11 @@ namespace Main_Demo
             tmPosition.Stop();
 
             videoView1.Invalidate();
-            MessageBox.Show("Playback complete.");
+
+            Invoke(() =>
+            {
+                MessageBox.Show(this, "Playback complete.");
+            });
         }
 
         private async void btPause_Click(object sender, EventArgs e)
@@ -590,44 +604,44 @@ namespace Main_Demo
             AudioEffectUpdateEqualizer();
         }
 
-        private void tbVideoBrightness_Scroll(object sender, EventArgs e)
+        private async void tbVideoBrightness_Scroll(object sender, EventArgs e)
         {
-            UpdateColorBalance();
+            await UpdateColorBalanceAsync();
         }
 
-        private void tbVideoSaturation_Scroll(object sender, EventArgs e)
+        private async void tbVideoSaturation_Scroll(object sender, EventArgs e)
         {
-            UpdateColorBalance();
+            await UpdateColorBalanceAsync();
         }
 
-        private void tbVideoContrast_Scroll(object sender, EventArgs e)
+        private async void tbVideoContrast_Scroll(object sender, EventArgs e)
         {
-            UpdateColorBalance();
+            await UpdateColorBalanceAsync();
         }
 
-        private void tbVideoHue_Scroll(object sender, EventArgs e)
+        private async void tbVideoHue_Scroll(object sender, EventArgs e)
         {
-            UpdateColorBalance();
+            await UpdateColorBalanceAsync();
         }
 
-        private void cbColorEffect_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbColorEffect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateColorEffect();
+            await UpdateColorEffectAsync();
         }
 
-        private void cbFlipRotate_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbFlipRotate_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateFlipRotate();
+            await UpdateFlipRotateAsync();
         }
 
-        private void tbGaussianBlur_Scroll(object sender, EventArgs e)
+        private async void tbGaussianBlur_Scroll(object sender, EventArgs e)
         {
-            UpdateGaussianBlur();
+            await UpdateGaussianBlurAsync();
         }
 
-        private void btTextOverlayUpdate_Click(object sender, EventArgs e)
+        private async void btTextOverlayUpdate_Click(object sender, EventArgs e)
         {
-            UpdateTextOverlay();
+            await UpdateTextOverlayAsync();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -714,14 +728,16 @@ namespace Main_Demo
 
         private void btSaveSnapshot_Click(object sender, EventArgs e)
         {
-            using (var dlg = new SaveFileDialog())
-            {
-                dlg.FileName = "snap.jpg";
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    _player.Snapshot_Save(dlg.FileName, ImageFormat.Jpeg);
-                }
-            }
+            MessageBox.Show(this, _player.State.ToString());
+
+            //using (var dlg = new SaveFileDialog())
+            //{
+            //    dlg.FileName = "snap.jpg";
+            //    if (dlg.ShowDialog() == DialogResult.OK)
+            //    {
+            //        await _player.Snapshot_SaveAsync(dlg.FileName, ImageFormat.Jpeg);
+            //    }
+            //}
         }
 
         private void cbAudioStream_SelectedIndexChanged(object sender, EventArgs e)
@@ -770,6 +786,11 @@ namespace Main_Demo
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private async void cbImageOverlayEnabled_Click(object sender, EventArgs e)
+        {
+            await UpdateImageOverlayAsync();
         }
     }
 }

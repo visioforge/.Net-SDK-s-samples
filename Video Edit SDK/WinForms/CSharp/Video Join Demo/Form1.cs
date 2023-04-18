@@ -599,7 +599,7 @@ namespace Video_Join_Demo
                         break;
                     }
                 case 18:
-                    MessageBox.Show("Please use Main Demo to create encrypted files.");
+                    MessageBox.Show(this, "Please use Main Demo to create encrypted files.");
                     return;
             }
 
@@ -634,18 +634,20 @@ namespace Video_Join_Demo
         {
             Invoke((Action)(() =>
                                    {
-                                       ProgressBar1.Value = 0;
-                                       lbFiles.Items.Clear();
-                                   }));
+                                        ProgressBar1.Value = 0;
+                                        lbFiles.Items.Clear();
 
-            if (e.Successful)
+                                        if (e.Successful)
             {
-                MessageBox.Show("Completed successfully", string.Empty, MessageBoxButtons.OK);
+                MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("Stopped with error", string.Empty, MessageBoxButtons.OK);
+                MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
             }
+                                   }));
+
+          
 
             VideoEdit1.Input_Clear_List();
 

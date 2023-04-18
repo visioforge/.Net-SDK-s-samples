@@ -69,7 +69,7 @@ namespace KLV_Demo
         {
             Dispatcher.Invoke((Action)(() =>
             {
-                MessageBox.Show("Complete");                
+                MessageBox.Show(this, "Complete");                
             }));
 
             _pipeline.Close();

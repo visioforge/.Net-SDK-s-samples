@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Karaoke_Demo</RootNamespace>
+    <TargetFrameworks>net472</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>Karaoke Demo</AssemblyTitle>
+    <Product>Karaoke Demo</Product>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.5.66.0</AssemblyVersion>
+    <AssemblyName>Media Blocks SDK - WinForms Karaoke Demo</AssemblyName>
+    <FileVersion>15.5.66.0</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.1.3" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.1.3" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.1.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.66" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.66" />
+  </ItemGroup>
+</Project>

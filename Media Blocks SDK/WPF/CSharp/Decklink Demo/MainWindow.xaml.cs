@@ -235,7 +235,7 @@ namespace Decklink_MB_Demo
 
             if (cbVideoInput.SelectedIndex < 0)
             {
-                MessageBox.Show("Select video input device");
+                MessageBox.Show(this, "Select video input device");
                 return;
             }
 

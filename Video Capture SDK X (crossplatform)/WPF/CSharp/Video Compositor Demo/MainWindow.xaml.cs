@@ -90,7 +90,7 @@ namespace Video_Compositor_Demo
 
                 if (settings == null)
                 {
-                    MessageBox.Show("Unable to configure video capture device.");
+                    MessageBox.Show(this, "Unable to configure video capture device.");
                     return;
                 }
 

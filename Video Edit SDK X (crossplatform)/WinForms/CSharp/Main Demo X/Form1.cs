@@ -516,11 +516,11 @@ namespace VideoEdit_CS_Demo
 
                                        if (e.Successful)
                                        {
-                                           MessageBox.Show("Completed successfully", string.Empty, MessageBoxButtons.OK);
+                                           MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
                                        }
                                        else
                                        {
-                                           MessageBox.Show("Stopped with error", string.Empty, MessageBoxButtons.OK);
+                                           MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
                                        }
 
                                        // DestroyEngine();

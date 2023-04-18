@@ -230,7 +230,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 {
                     if (windowCaptureForm == null)
                     {
-                        MessageBox.Show("Window for screen capture is not specified.");
+                        MessageBox.Show(this, "Window for screen capture is not specified.");
                         return null;
                     }
 
@@ -243,7 +243,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
                 if (source.WindowHandle == IntPtr.Zero)
                 {
-                    MessageBox.Show("Incorrect window title for screen capture.");
+                    MessageBox.Show(this, "Incorrect window title for screen capture.");
                     return null;
                 }
             }

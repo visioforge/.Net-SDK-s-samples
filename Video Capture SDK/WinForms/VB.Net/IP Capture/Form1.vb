@@ -326,7 +326,7 @@ Public Class Form1
                 End If
 
                 If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
-                    MessageBox.Show("Please specify IP camera user name and password.")
+                    MessageBox.Show(Me, "Please specify IP camera user name and password.")
                     Exit Sub
                 End If
 
@@ -335,7 +335,7 @@ Public Class Form1
 
                 If (Not result) Then
                     onvifControl = Nothing
-                    MessageBox.Show("Unable to connect to ONVIF camera.")
+                    MessageBox.Show(Me, "Unable to connect to ONVIF camera.")
                     Exit Sub
                 End If
 
@@ -854,7 +854,7 @@ Public Class Form1
     Private Sub VideoCapture1_OnNetworkSourceDisconnect(sender As Object, e As EventArgs) Handles VideoCapture1.OnNetworkSourceDisconnect
         Invoke(Async Sub()
                    Await VideoCapture1.StopAsync()
-                   MessageBox.Show("Network source stopped or disconnected!")
+                   MessageBox.Show(Me, "Network source stopped or disconnected!")
                End Sub)
     End Sub
 

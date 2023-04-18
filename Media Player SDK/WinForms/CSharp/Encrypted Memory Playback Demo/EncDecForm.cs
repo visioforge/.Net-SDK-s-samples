@@ -58,7 +58,7 @@ namespace Encrypted_Memory_Playback_Demo
 
             pbProgress.Value = 0;
 
-            MessageBox.Show("Complete");
+            MessageBox.Show(this, "Complete");
         }
 
         private async void btDecrypt_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Encrypted_Memory_Playback_Demo
 
             pbProgress.Value = 0;
 
-            MessageBox.Show("Complete");
+            MessageBox.Show(this, "Complete");
         }
     }
 }

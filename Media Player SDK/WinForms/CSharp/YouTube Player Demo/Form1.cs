@@ -51,7 +51,7 @@
 
             if (_videoInfoList.Count == 0)
             {
-                MessageBox.Show("Please read formats first.");
+                MessageBox.Show(this, "Please read formats first.");
                 return;
             }
 

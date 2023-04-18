@@ -687,7 +687,7 @@ namespace Main_Demo
                 {
                     if (windowCaptureForm == null)
                     {
-                        MessageBox.Show("Window for screen capture is not specified.");
+                        MessageBox.Show(this, "Window for screen capture is not specified.");
                         return;
                     }
 
@@ -695,13 +695,13 @@ namespace Main_Demo
                 }
                 catch
                 {
-                    System.Windows.Forms.MessageBox.Show("Incorrect window title for screen capture.");
+                    MessageBox.Show(this, "Incorrect window title for screen capture.");
                     return;
                 }
 
                 if (settings.WindowHandle == IntPtr.Zero)
                 {
-                    System.Windows.Forms.MessageBox.Show("Incorrect window title for screen capture.");
+                    MessageBox.Show(this, "Incorrect window title for screen capture.");
                     return;
                 }
             }
@@ -1216,7 +1216,7 @@ namespace Main_Demo
 
                                 if (cbNetworkStreamingAudioEnabled.IsChecked == false || cbPlayAudio.IsChecked == false)
                                 {
-                                    MessageBox.Show("Audio streaming should be enabled to stream to YouTube.");
+                                    MessageBox.Show(this, "Audio streaming should be enabled to stream to YouTube.");
                                     cbNetworkStreamingAudioEnabled.IsChecked = true;
                                 }
                             }
@@ -1226,7 +1226,7 @@ namespace Main_Demo
 
                                 if (cbNetworkStreamingAudioEnabled.IsChecked == false || cbPlayAudio.IsChecked == false)
                                 {
-                                    MessageBox.Show("Audio streaming should be enabled to stream to Facebook Live.");
+                                    MessageBox.Show(this, "Audio streaming should be enabled to stream to Facebook Live.");
                                     cbNetworkStreamingAudioEnabled.IsChecked = true;
                                 }
                             }
@@ -2181,7 +2181,7 @@ namespace Main_Demo
             {
                 if (!File.Exists(edChromaKeyImage.Text))
                 {
-                    MessageBox.Show("Chroma-key background file doesn't exists.");
+                    MessageBox.Show(this, "Chroma-key background file doesn't exists.");
                     return;
                 }
 
@@ -2225,7 +2225,7 @@ namespace Main_Demo
 
                     if (blend == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace blend effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace blend effect.");
                         return;
                     }
 
@@ -2250,7 +2250,7 @@ namespace Main_Demo
 
                     if (cavt == null)
                     {
-                        System.Windows.Forms.MessageBox.Show("Unable to configure deinterlace CAVT effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace CAVT effect.");
                         return;
                     }
 
@@ -2272,7 +2272,7 @@ namespace Main_Demo
 
                     if (triangle == null)
                     {
-                        MessageBox.Show("Unable to configure deinterlace triangle effect.");
+                        MessageBox.Show(this, "Unable to configure deinterlace triangle effect.");
                         return;
                     }
 
@@ -2300,7 +2300,7 @@ namespace Main_Demo
 
                     if (cast == null)
                     {
-                        MessageBox.Show("Unable to configure denoise CAST effect.");
+                        MessageBox.Show(this, "Unable to configure denoise CAST effect.");
                         return;
                     }
                 }
@@ -2320,7 +2320,7 @@ namespace Main_Demo
 
                     if (mosquito == null)
                     {
-                        MessageBox.Show("Unable to configure denoise mosquito effect.");
+                        MessageBox.Show(this, "Unable to configure denoise mosquito effect.");
                         return;
                     }
                 }
@@ -3107,7 +3107,7 @@ namespace Main_Demo
             }
             else
             {
-                MessageBox.Show("Select device!");
+                MessageBox.Show(this, "Select device!");
             }
         }
 
@@ -3241,11 +3241,11 @@ namespace Main_Demo
         {
             if (await VideoCapture1.Video_CaptureDevice_SignalPresentAsync())
             {
-                MessageBox.Show("Signal present");
+                MessageBox.Show(this, "Signal present");
             }
             else
             {
-                MessageBox.Show("Signal not present");
+                MessageBox.Show(this, "Signal not present");
             }
         }
 
@@ -3521,7 +3521,7 @@ namespace Main_Demo
                 if (e.Channel == -1)
                 {
                     pbChannels.Value = 0;
-                    MessageBox.Show("AutoTune complete");
+                    MessageBox.Show(this, "AutoTune complete");
                 }
 
                 DoEvents();
@@ -3633,7 +3633,7 @@ namespace Main_Demo
             }
             else
             {
-                MessageBox.Show("Select device!");
+                MessageBox.Show(this, "Select device!");
             }
         }
 
@@ -3679,7 +3679,7 @@ namespace Main_Demo
 
             if (zoomEffect == null)
             {
-                MessageBox.Show("Unable to configure zoom effect.");
+                MessageBox.Show(this, "Unable to configure zoom effect.");
                 return;
             }
 
@@ -3750,7 +3750,7 @@ namespace Main_Demo
 
             if (pan == null)
             {
-                MessageBox.Show("Unable to configure pan effect.");
+                MessageBox.Show(this, "Unable to configure pan effect.");
                 return;
             }
 
@@ -3840,7 +3840,7 @@ namespace Main_Demo
 
                 if (fadeIn == null)
                 {
-                    MessageBox.Show("Unable to configure fade-in effect.");
+                    MessageBox.Show(this, "Unable to configure fade-in effect.");
                     return;
                 }
 
@@ -3864,7 +3864,7 @@ namespace Main_Demo
 
                 if (fadeOut == null)
                 {
-                    MessageBox.Show("Unable to configure fade-out effect.");
+                    MessageBox.Show(this, "Unable to configure fade-out effect.");
                     return;
                 }
 
@@ -4087,7 +4087,7 @@ namespace Main_Demo
 
                 if (rotate == null)
                 {
-                    MessageBox.Show("Unable to configure rotate effect.");
+                    MessageBox.Show(this, "Unable to configure rotate effect.");
                     return;
                 }
 
@@ -4575,7 +4575,7 @@ namespace Main_Demo
             {
                 await VideoCapture1.StopAsync();
 
-                MessageBox.Show("Network source stopped or disconnected!");
+                MessageBox.Show(this, "Network source stopped or disconnected!");
             }));
         }
 
@@ -4837,7 +4837,7 @@ namespace Main_Demo
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
-                        MessageBox.Show("Please specify IP camera user name and password.");
+                        MessageBox.Show(this, "Please specify IP camera user name and password.");
                         return;
                     }
 
@@ -4846,7 +4846,7 @@ namespace Main_Demo
                     if (!result)
                     {
                         onvifControl = null;
-                        MessageBox.Show("Unable to connect to ONVIF camera.");
+                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
@@ -5332,7 +5332,7 @@ namespace Main_Demo
                 case 14:
                 case 15:
                     {
-                        MessageBox.Show("No settings available for selected output format.");
+                        MessageBox.Show(this, "No settings available for selected output format.");
 
                         break;
                     }

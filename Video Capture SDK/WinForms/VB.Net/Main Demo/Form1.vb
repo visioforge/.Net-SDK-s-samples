@@ -1254,7 +1254,7 @@ Public Class Form1
 
         If (cbChromaKeyEnabled.Checked) Then
             If (Not File.Exists(edChromaKeyImage.Text)) Then
-                MessageBox.Show("Chroma-key background file doesn't exists.")
+                MessageBox.Show(Me, "Chroma-key background file doesn't exists.")
                 Return
             End If
 
@@ -1311,7 +1311,7 @@ Public Class Form1
 
                 If (IsNothing(blend)) Then
 
-                    MessageBox.Show("Unable to configure deinterlace blend effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace blend effect.")
                     Return
                 End If
 
@@ -1330,7 +1330,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(cavt)) Then
-                    MessageBox.Show("Unable to configure deinterlace CAVT effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace CAVT effect.")
                     Return
                 End If
 
@@ -1346,7 +1346,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(triangle)) Then
-                    MessageBox.Show("Unable to configure deinterlace triangle effect.")
+                    MessageBox.Show(Me, "Unable to configure deinterlace triangle effect.")
                     Return
                 End If
 
@@ -1369,7 +1369,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(cast)) Then
-                    MessageBox.Show("Unable to configure denoise CAST effect.")
+                    MessageBox.Show(Me, "Unable to configure denoise CAST effect.")
                     Return
                 End If
             Else
@@ -1383,7 +1383,7 @@ Public Class Form1
                 End If
 
                 If (IsNothing(mosquito)) Then
-                    MessageBox.Show("Unable to configure denoise mosquito effect.")
+                    MessageBox.Show(Me, "Unable to configure denoise mosquito effect.")
                     Return
                 End If
             End If
@@ -1964,7 +1964,7 @@ Public Class Form1
 
             Try
                 If (windowCaptureForm Is Nothing) Then
-                    MessageBox.Show("Window for screen capture is not specified.")
+                    MessageBox.Show(Me, "Window for screen capture is not specified.")
                     Return Nothing
                 End If
 
@@ -1974,7 +1974,7 @@ Public Class Form1
             End Try
 
             If (settings.WindowHandle = IntPtr.Zero) Then
-                MessageBox.Show("Incorrect window title for screen capture.")
+                MessageBox.Show(Me, "Incorrect window title for screen capture.")
                 Return Nothing
             End If
         Else
@@ -2546,7 +2546,7 @@ Public Class Form1
     Private Sub btOSDImageDraw_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDImageDraw.Click
 
         If (Not System.IO.File.Exists(edOSDImageFilename.Text)) Then
-            MessageBox.Show("OSD image file does not exist.")
+            MessageBox.Show(Me, "OSD image file does not exist.")
             Return
         End If
 
@@ -2782,9 +2782,9 @@ Public Class Form1
     Private Async Sub btSignal_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSignal.Click
 
         If Await VideoCapture1.Video_CaptureDevice_SignalPresentAsync() Then
-            MessageBox.Show("Signal present")
+            MessageBox.Show(Me, "Signal present")
         Else
-            MessageBox.Show("Signal not present")
+            MessageBox.Show(Me, "Signal not present")
         End If
 
     End Sub
@@ -3122,7 +3122,7 @@ Public Class Form1
                             If e.Channel = -1 Then
 
                                 pbChannels.Value = 0
-                                MessageBox.Show("AutoTune complete")
+                                MessageBox.Show(Me, "AutoTune complete")
 
                             End If
                         End If
@@ -3277,7 +3277,7 @@ Public Class Form1
                 Convert.ToInt32(edPIPHeight.Text))
             Await VideoCapture1.PIP_Sources_SetSourcePositionAsync(cbPIPDevices.SelectedIndex, rect)
         Else
-            MessageBox.Show("Select device!")
+            MessageBox.Show(Me, "Select device!")
         End If
 
     End Sub
@@ -3293,7 +3293,7 @@ Public Class Form1
         If (cbPIPDevices.SelectedIndex <> -1) Then
             Await VideoCapture1.PIP_Sources_SetSourceSettingsAsync(cbPIPDevices.SelectedIndex, tbPIPTransparency.Value, False, False)
         Else
-            MessageBox.Show("Select device!")
+            MessageBox.Show(Me, "Select device!")
         End If
 
     End Sub
@@ -3339,7 +3339,7 @@ Public Class Form1
         End If
 
         If (IsNothing(zoomEffect)) Then
-            MessageBox.Show("Unable to configure zoom effect.")
+            MessageBox.Show(Me, "Unable to configure zoom effect.")
             Return
         End If
 
@@ -3414,7 +3414,7 @@ Public Class Form1
         End If
 
         If (IsNothing(pan)) Then
-            MessageBox.Show("Unable to configure pan effect.")
+            MessageBox.Show(Me, "Unable to configure pan effect.")
             Return
         End If
 
@@ -3505,7 +3505,7 @@ Public Class Form1
             End If
 
             If (IsNothing(fadeIn)) Then
-                MessageBox.Show("Unable to configure fade-in effect.")
+                MessageBox.Show(Me, "Unable to configure fade-in effect.")
                 Return
             End If
 
@@ -3523,7 +3523,7 @@ Public Class Form1
             End If
 
             If (IsNothing(fadeOut)) Then
-                MessageBox.Show("Unable to configure fade-out effect.")
+                MessageBox.Show(Me, "Unable to configure fade-out effect.")
                 Return
             End If
 
@@ -3730,7 +3730,7 @@ Public Class Form1
         End If
 
         If (IsNothing(rotate)) Then
-            MessageBox.Show("Unable to configure rotate effect.")
+            MessageBox.Show(Me, "Unable to configure rotate effect.")
             Return
         End If
 
@@ -4134,7 +4134,7 @@ Public Class Form1
 
         Await VideoCapture1.StopAsync()
 
-        MessageBox.Show("Network source stopped or disconnected!")
+        MessageBox.Show(Me, "Network source stopped or disconnected!")
 
     End Sub
 
@@ -4348,7 +4348,7 @@ Public Class Form1
                 End If
 
                 If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
-                    MessageBox.Show("Please specify IP camera user name and password.")
+                    MessageBox.Show(Me, "Please specify IP camera user name and password.")
                     Exit Sub
                 End If
 
@@ -4357,7 +4357,7 @@ Public Class Form1
 
                 If (Not result) Then
                     onvifControl = Nothing
-                    MessageBox.Show("Unable to connect to ONVIF camera.")
+                    MessageBox.Show(Me, "Unable to connect to ONVIF camera.")
                     Exit Sub
                 End If
 
@@ -4697,7 +4697,7 @@ Public Class Form1
             Case 13
             Case 14
             Case 15
-                MessageBox.Show("No settings available for selected output format.")
+                MessageBox.Show(Me, "No settings available for selected output format.")
             Case 16
             Case 17
             Case 18

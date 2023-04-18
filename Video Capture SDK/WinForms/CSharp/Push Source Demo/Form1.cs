@@ -143,7 +143,7 @@ namespace Push_Source_Demo
 
                          tmRecording.Stop();
 
-                         MessageBox.Show("Done!");
+                         MessageBox.Show(this, "Done!");
                      });
         }
 

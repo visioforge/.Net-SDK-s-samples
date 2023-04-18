@@ -55,7 +55,7 @@ namespace Audio_Extractor
 
                 pbProgress.Value = 0;
 
-                MessageBox.Show("Finished!");
+                MessageBox.Show(this, "Finished!");
             }));
         }
 

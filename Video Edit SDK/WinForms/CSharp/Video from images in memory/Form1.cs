@@ -492,16 +492,19 @@ namespace Video_From_Images
 
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
-            Invoke((Action)(() => { ProgressBar1.Value = 0; }));
-
-            if (e.Successful)
+            Invoke((Action)(() =>
             {
-                MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
-            }
-            else
-            {
-                MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
-            }
+                ProgressBar1.Value = 0;
+                 
+                if (e.Successful)
+                {
+                    MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
+                }
+            }));      
         }
 
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
