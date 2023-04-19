@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.67
+
+* [ALL] Resolve "image not found" issue with WinUI NuGet package
+
 ## 15.5.66
 
 * [Media Blocks SDK .Net/Media Player SDK .Net (crossplatform)] Added MP3+CDG Karaoke Player demo
