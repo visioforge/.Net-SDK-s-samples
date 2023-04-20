@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.5.68
+
+* [Media Blocks SDK .Net] Added NDI Source demo
+* [Video Capture SDK .Net] Added NDI support for cross-platform engine
+
 ## 15.5.67
 
 * [ALL] Resolve "image not found" issue with WinUI NuGet package

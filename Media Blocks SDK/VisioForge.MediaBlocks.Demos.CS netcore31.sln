@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VNC Source Demo netcore31",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Karaoke Demo MB netcore31", "WinForms\CSharp\Karaoke Demo\Karaoke Demo MB netcore31.csproj", "{08094339-258E-4B6F-8845-3340E00CD971}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Source Demo netcore31", "WPF\CSharp\NDI Source Demo\NDI Source Demo netcore31.csproj", "{341299FF-FB46-4473-B902-31C700F1EFB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{08094339-258E-4B6F-8845-3340E00CD971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08094339-258E-4B6F-8845-3340E00CD971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08094339-258E-4B6F-8845-3340E00CD971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341299FF-FB46-4473-B902-31C700F1EFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341299FF-FB46-4473-B902-31C700F1EFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341299FF-FB46-4473-B902-31C700F1EFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341299FF-FB46-4473-B902-31C700F1EFB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{5FCDD2C8-B102-4F8D-BA36-CA9A954B1A93} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{E2896641-00F8-47FB-99AA-8104725F31B3} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{08094339-258E-4B6F-8845-3340E00CD971} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{341299FF-FB46-4473-B902-31C700F1EFB3} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

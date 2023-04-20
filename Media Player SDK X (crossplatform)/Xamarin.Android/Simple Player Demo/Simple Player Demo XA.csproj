@@ -115,7 +115,7 @@
       <Version>1.18.5.2</Version>
     </PackageReference>
     <PackageReference Include="VisioForge.DotNet.Core.UI.Android">
-      <Version>15.5.67</Version>
+      <Version>15.5.68</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.5.1" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.1.1" />
