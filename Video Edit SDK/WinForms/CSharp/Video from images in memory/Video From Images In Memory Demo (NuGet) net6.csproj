@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>Video From Images.2010.SDK</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.68.0</AssemblyVersion>
-    <FileVersion>15.5.68.0</FileVersion>
+    <AssemblyVersion>15.5.69.0</AssemblyVersion>
+    <FileVersion>15.5.69.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -61,13 +61,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.5.68" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.5.69" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\1.jpg" />

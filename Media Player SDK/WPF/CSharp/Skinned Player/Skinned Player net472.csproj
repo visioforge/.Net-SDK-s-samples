@@ -11,8 +11,8 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.68" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.68" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.69" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

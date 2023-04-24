@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.5.69
+
+* [Media Player SDK .Net] Added madVR Demo
+* [Video Capture SDK .Net] Added madVR Demo
+* [ALL] Resolved madVR issues in all SDKs
+
 ## 15.5.68
 
 * [Media Blocks SDK .Net] Added NDI Source demo
@@ -7,7 +13,7 @@
 
 ## 15.5.67
 
-* [ALL] Resolve "image not found" issue with WinUI NuGet package
+* [ALL] Resolve the "image not found" issue with the WinUI NuGet package
 
 ## 15.5.66
 

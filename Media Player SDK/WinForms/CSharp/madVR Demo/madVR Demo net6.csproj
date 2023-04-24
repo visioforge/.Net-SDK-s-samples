@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion />
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Video_Player_Demo</RootNamespace>
+    <AssemblyName>Media Player SDK - WinForms madVR Demo</AssemblyName>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>Video_Player_Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.5.69.0</AssemblyVersion>
+    <FileVersion>15.5.69.0</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.69" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

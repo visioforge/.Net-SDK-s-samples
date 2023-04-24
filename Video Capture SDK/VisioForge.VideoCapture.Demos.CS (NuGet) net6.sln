@@ -103,6 +103,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Source (NuGet) net6", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP MJPEG Restreamer (NuGet) net6", "WPF\CSharp\IP MJPEG Restreamer\IP MJPEG Restreamer (NuGet) net6.csproj", "{C0E2B0EF-D99C-4408-BC92-D755E3DFE9FA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo (NuGet) net6", "WinForms\CSharp\madVR demo\madVR Demo (NuGet) net6.csproj", "{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -479,6 +481,14 @@ Global
 		{C0E2B0EF-D99C-4408-BC92-D755E3DFE9FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0E2B0EF-D99C-4408-BC92-D755E3DFE9FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0E2B0EF-D99C-4408-BC92-D755E3DFE9FA}.Release|x86.Build.0 = Release|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Debug|x86.Build.0 = Debug|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -530,6 +540,7 @@ Global
 		{7509269F-6AD9-4747-BA4A-182B2E132AFD} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{8659F46E-0BFE-4B24-9CC4-AE0AFFC397D6} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{C0E2B0EF-D99C-4408-BC92-D755E3DFE9FA} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{B1D4B4A0-8FC6-43EB-B8F4-DA8531E78440} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
