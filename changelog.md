@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.70
+
+* [Video Capture SDK .Net] Resolved NDI enumerating issue in the VideoCaptureCore engine
+
 ## 15.5.69
 
 * [Media Player SDK .Net] Added madVR Demo

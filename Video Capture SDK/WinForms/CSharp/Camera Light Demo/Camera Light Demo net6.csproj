@@ -17,9 +17,9 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.69" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.69" />
-    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="15.5.69" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.70" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.70" />
+    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="15.5.70" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
