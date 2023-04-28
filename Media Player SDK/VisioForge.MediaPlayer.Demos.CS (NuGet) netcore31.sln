@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo (NuGet) netcore3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo (NuGet) netcore31", "WPF\CSharp\madVR Demo\madVR Demo (NuGet) netcore31.csproj", "{BD71398A-C0EC-4D28-966C-E37BB0FF4EE5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-playback netcore31 (NuGet)", "_CodeSnippets\memory-playback\memory-playback netcore31 (NuGet).csproj", "{8600C6DA-7EAC-4843-9323-115F998C234D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,14 @@ Global
 		{BD71398A-C0EC-4D28-966C-E37BB0FF4EE5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD71398A-C0EC-4D28-966C-E37BB0FF4EE5}.Release|x86.ActiveCfg = Release|Any CPU
 		{BD71398A-C0EC-4D28-966C-E37BB0FF4EE5}.Release|x86.Build.0 = Release|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Debug|x86.Build.0 = Debug|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Release|x86.ActiveCfg = Release|Any CPU
+		{8600C6DA-7EAC-4843-9323-115F998C234D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +219,7 @@ Global
 		{E306FC9E-3A17-4431-8A82-34925869A22D} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{4745703B-746F-4851-B48F-E214A7BA528E} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{BD71398A-C0EC-4D28-966C-E37BB0FF4EE5} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
+		{8600C6DA-7EAC-4843-9323-115F998C234D} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net6", "WinForms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net6", "WPF\CSharp\madVR Demo\madVR Demo net6.csproj", "{BC0B4398-4FBE-4A44-A8FE-66A4753C6A5F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-playback net6", "_CodeSnippets\memory-playback\memory-playback net6.csproj", "{085479AF-1275-41AD-B57B-8F3B6C218813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,14 @@ Global
 		{BC0B4398-4FBE-4A44-A8FE-66A4753C6A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC0B4398-4FBE-4A44-A8FE-66A4753C6A5F}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC0B4398-4FBE-4A44-A8FE-66A4753C6A5F}.Release|x86.Build.0 = Release|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Debug|x86.Build.0 = Debug|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Release|x86.ActiveCfg = Release|Any CPU
+		{085479AF-1275-41AD-B57B-8F3B6C218813}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +230,7 @@ Global
 		{73CADE50-0441-4D7F-8BAF-6AF5EE2E19A0} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{B1492918-5B9E-460D-9F01-807B11EB4788} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{BC0B4398-4FBE-4A44-A8FE-66A4753C6A5F} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
+		{085479AF-1275-41AD-B57B-8F3B6C218813} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

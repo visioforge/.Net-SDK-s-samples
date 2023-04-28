@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net7", "WPF\CSha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net7", "WinForms\CSharp\madVR Demo\madVR Demo net7.csproj", "{F80A549E-069E-4108-895E-BC546C490031}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-playback net7", "_CodeSnippets\memory-playback\memory-playback net7.csproj", "{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,14 @@ Global
 		{F80A549E-069E-4108-895E-BC546C490031}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F80A549E-069E-4108-895E-BC546C490031}.Release|x86.ActiveCfg = Release|Any CPU
 		{F80A549E-069E-4108-895E-BC546C490031}.Release|x86.Build.0 = Release|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Debug|x86.Build.0 = Debug|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +230,7 @@ Global
 		{647B290B-D3A1-4A04-A1AE-0197591C8846} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{622AB79A-EE74-4217-AAC7-F55B2CD0238D} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{F80A549E-069E-4108-895E-BC546C490031} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{DB27E8B6-73EA-497F-8D13-3DF3D1E245D4} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net472", "WinFor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net472", "WPF\CSharp\madVR Demo\madVR Demo net472.csproj", "{9AAA91C9-E22C-4AEE-9566-D7F869FDDC23}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-playback net472", "_CodeSnippets\memory-playback\memory-playback net472.csproj", "{48439107-4C40-4706-AD1A-557F86D6400B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,14 @@ Global
 		{9AAA91C9-E22C-4AEE-9566-D7F869FDDC23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9AAA91C9-E22C-4AEE-9566-D7F869FDDC23}.Release|x86.ActiveCfg = Release|Any CPU
 		{9AAA91C9-E22C-4AEE-9566-D7F869FDDC23}.Release|x86.Build.0 = Release|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Debug|x86.Build.0 = Debug|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Release|x86.ActiveCfg = Release|Any CPU
+		{48439107-4C40-4706-AD1A-557F86D6400B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +230,7 @@ Global
 		{04B0E7DA-9B9C-45C7-BDCA-08EE01067410} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{9EE45A1D-9195-4FD8-8C47-CE54E9DFC6B4} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{9AAA91C9-E22C-4AEE-9566-D7F869FDDC23} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
+		{48439107-4C40-4706-AD1A-557F86D6400B} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
