@@ -18,9 +18,6 @@
                 components.Dispose();
             }
 
-            _pipeline?.Dispose();
-            _pipeline = null;
-
             base.Dispose(disposing);
         }
 

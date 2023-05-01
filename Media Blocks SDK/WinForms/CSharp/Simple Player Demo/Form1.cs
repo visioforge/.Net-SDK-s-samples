@@ -25,6 +25,7 @@ namespace MediaBlocks_Player_Demo
     using VisioForge.Core.Types.X.VideoEncoders;
     using VisioForge.Core.Types.X.MediaPlayer;
     using VisioForge.Core.UI;
+    using System.Threading.Tasks;
 
     public partial class Form1 : Form
     {
@@ -44,14 +45,13 @@ namespace MediaBlocks_Player_Demo
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
                 _pipeline.OnStop -= Pipeline_OnStop;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -155,7 +155,7 @@ namespace MediaBlocks_Player_Demo
 
             VideoView1.Invalidate();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private async void btPause_Click(object sender, EventArgs e)
@@ -213,11 +213,16 @@ namespace MediaBlocks_Player_Demo
                                    }));
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            _tmPosition.Stop();
 
-            DestroyEngine();
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync(true);
+            }
+
+            await DestroyEngineAsync();
         }
     }
 }

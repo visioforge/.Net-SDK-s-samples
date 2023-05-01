@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
-using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
@@ -41,13 +39,13 @@ namespace NDI_Source_Demo
             _videoCapture.OnError += VideoCapture_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_videoCapture != null)
             {
                 _videoCapture.OnError -= VideoCapture_OnError;
 
-                _videoCapture.Dispose();
+                await _videoCapture.DisposeAsync();
                 _videoCapture = null;
             }
         }
@@ -93,14 +91,14 @@ namespace NDI_Source_Demo
 
             await _videoCapture.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
         }
@@ -120,6 +118,11 @@ namespace NDI_Source_Demo
             {
                 cbNDISources.SelectedIndex = 0;
             }
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            await DestroyEngineAsync();
         }
     }
 }

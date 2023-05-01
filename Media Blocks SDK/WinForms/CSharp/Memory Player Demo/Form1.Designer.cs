@@ -20,9 +20,6 @@ namespace MediaBlocks_Memory_Player_Demo
                 components.Dispose();
             }
 
-            _pipeline?.Dispose();
-            _pipeline = null;
-
             base.Dispose(disposing);
         }
 

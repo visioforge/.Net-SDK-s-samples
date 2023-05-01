@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -47,13 +49,13 @@ namespace NDI_Source_Demo
             _pipeline.OnError += Pipeline_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
 
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -102,7 +104,7 @@ namespace NDI_Source_Demo
 
             await _pipeline.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -129,6 +131,15 @@ namespace NDI_Source_Demo
             {
                 cbNDISources.SelectedIndex = 0;
             }
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            tmRecording?.Stop();
+
+            Thread.Sleep(500);
+
+            await DestroyEngineAsync();
         }
     }
 }

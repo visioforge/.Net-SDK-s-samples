@@ -54,13 +54,13 @@ namespace Decklink_Demo_X
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
             {
                 VideoCapture1.OnError -= VideoCapture1_OnError;
 
-                VideoCapture1.Dispose();
+                await VideoCapture1.DisposeAsync();
                 VideoCapture1 = null;
             }
         }
@@ -348,9 +348,9 @@ namespace Decklink_Demo_X
             }));
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private async void btStartCapture(object sender, RoutedEventArgs e)
@@ -362,8 +362,7 @@ namespace Decklink_Demo_X
         {
             await VideoCapture1.StopCaptureAsync(0);
         }
-
-        
+                
         #region Dispose
 
         protected virtual void Dispose(bool disposing)
@@ -374,9 +373,6 @@ namespace Decklink_Demo_X
                 {
                     tmRecording?.Dispose();
                     tmRecording = null;
-
-                    VideoCapture1?.Dispose();
-                    VideoCapture1 = null;
                 }
 
                 disposedValue = true;

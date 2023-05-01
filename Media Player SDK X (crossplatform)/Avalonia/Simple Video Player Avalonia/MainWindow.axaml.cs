@@ -79,9 +79,11 @@ namespace Simple_Video_Player_Avalonia
             DataContext = this;
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _player.Stop();
+            await _player.StopAsync();
+            await _player.DisposeAsync();
+            _player = null;
         }
 
         private void InitializeComponent()
@@ -108,7 +110,7 @@ namespace Simple_Video_Player_Avalonia
 
             InitPlayer();
 
-            Title += $" (SDK v{_player.SDK_Version})";
+            Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
             _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             AudioOutputDeviceInfo[] audioOutputs;
@@ -360,9 +362,6 @@ namespace Simple_Video_Player_Avalonia
 
                 VideoView1?.Dispose();
                 VideoView1 = null;
-
-                _player?.Dispose();
-                _player = null;
 
                 disposedValue = true;
             }

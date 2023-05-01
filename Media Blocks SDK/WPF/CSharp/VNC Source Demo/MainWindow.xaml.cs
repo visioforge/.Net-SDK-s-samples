@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 using VisioForge.Core.MediaBlocks;
@@ -48,13 +49,13 @@ namespace VNC_Source_Demo
             _pipeline.OnError += Pipeline_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
+                await _pipeline.StopAsync();
                 _pipeline.OnError -= Pipeline_OnError;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -111,11 +112,9 @@ namespace VNC_Source_Demo
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            tmRecording.Stop();            
 
-            await _pipeline.StopAsync();
-
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

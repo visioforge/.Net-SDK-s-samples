@@ -10,6 +10,7 @@ namespace Screen_Capture_X
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Forms;
@@ -58,13 +59,13 @@ namespace Screen_Capture_X
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
             {
                 VideoCapture1.OnError -= VideoCapture1_OnError;
 
-                VideoCapture1.Dispose();
+                await VideoCapture1.DisposeAsync();
                 VideoCapture1 = null;
             }
         }
@@ -510,9 +511,9 @@ namespace Screen_Capture_X
             Process.Start(startInfo);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -523,9 +524,6 @@ namespace Screen_Capture_X
                 {
                     tmRecording?.Dispose();
                     tmRecording = null;
-
-                    VideoCapture1?.Dispose();
-                    VideoCapture1 = null;
                 }
 
                 disposedValue = true;

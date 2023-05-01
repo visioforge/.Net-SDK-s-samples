@@ -12,7 +12,7 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
-    public class RTSPRecordEngine : IDisposable
+    public class RTSPRecordEngine : IAsyncDisposable
     {
         public MediaBlocksPipeline Pipeline { get; private set; }
 
@@ -104,18 +104,14 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         }
 
-        protected virtual void Dispose(bool disposing)
+        public async ValueTask DisposeAsync()
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                }
-
                 if (Pipeline != null)
                 {
                     Pipeline.OnError -= OnError;
-                    Pipeline.Dispose();
+                    await Pipeline.DisposeAsync();
                     Pipeline = null;
                 }
 
@@ -136,18 +132,6 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
                 disposedValue = true;
             }
-        }
-        ~RTSPRecordEngine()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: false);
-        }
-
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
     }
 }

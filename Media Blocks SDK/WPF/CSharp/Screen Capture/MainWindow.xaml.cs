@@ -22,6 +22,7 @@ using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core;
 using System.Linq;
 using VisioForge.Core.Types.X.Output;
+using System.Threading.Tasks;
 
 namespace Screen_Capture_MB_WPF
 {
@@ -79,13 +80,12 @@ namespace Screen_Capture_MB_WPF
             _pipeline.OnError += Pipeline_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -228,7 +228,7 @@ namespace Screen_Capture_MB_WPF
 
             await _pipeline.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
@@ -280,9 +280,9 @@ namespace Screen_Capture_MB_WPF
             Process.Start(startInfo);
         }
        
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEngine();
+            await DestroyEngineAsync();
             
             tmRecording?.Dispose();
             tmRecording = null;

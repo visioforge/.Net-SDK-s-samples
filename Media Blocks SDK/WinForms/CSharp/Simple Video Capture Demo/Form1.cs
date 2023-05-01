@@ -219,9 +219,11 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         {
             timer1.Stop();
 
-            await _pipeline?.StopAsync();
-
-            _pipeline?.ClearBlocks();
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                _pipeline.ClearBlocks();
+            }
 
             VideoView1.Invalidate();
         }
@@ -247,17 +249,19 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             timer1.Tag = 0;
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            timer1.Stop();
 
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
-
-                _pipeline.Dispose();
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
+
+            VideoView1.Invalidate();           
         }
 
         private async void cbVideoInput_SelectedIndexChanged(object sender, EventArgs e)

@@ -85,13 +85,12 @@ namespace Video_Compositor_Demo
             _pipeline.OnError += Pipeline_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -308,7 +307,7 @@ namespace Video_Compositor_Demo
                 await _pipeline.StopAsync(true);
             }
             
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
@@ -338,6 +337,11 @@ namespace Video_Compositor_Demo
             {
                 edOutputFilename.Text = dlg.FileName;
             }
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            await DestroyEngineAsync();
         }
     }
 }

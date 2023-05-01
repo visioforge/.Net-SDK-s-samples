@@ -27,7 +27,7 @@
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
 
-            Text += $" (SDK v{MediaPlayer1.SDK_Version})";
+            Text += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
@@ -141,9 +141,13 @@
                                    }));
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            timer1.Enabled = false;
+
+            await MediaPlayer1.StopAsync();
+
+            await MediaPlayer1.DisposeAsync();            
         }
     }
 }

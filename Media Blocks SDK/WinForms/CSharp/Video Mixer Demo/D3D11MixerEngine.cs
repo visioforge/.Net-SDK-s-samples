@@ -80,7 +80,7 @@ namespace MediaBlocks_Video_Mixer_Demo
             if (_pipeline != null)
             {
                 _pipeline.OnError -= _pipeline_OnError;
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }

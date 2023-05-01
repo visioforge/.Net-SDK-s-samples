@@ -13,6 +13,7 @@ using VisioForge.Core.VideoCaptureX;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core;
+using System.Threading.Tasks;
 
 namespace Video_Compositor_Demo
 {
@@ -50,13 +51,13 @@ namespace Video_Compositor_Demo
             _videoCapture.OnError += VideoCapture_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_videoCapture != null)
             {
                 _videoCapture.OnError -= VideoCapture_OnError;
 
-                _videoCapture.Dispose();
+                await _videoCapture.DisposeAsync();
                 _videoCapture = null;
             }
         }
@@ -216,7 +217,7 @@ namespace Video_Compositor_Demo
 
             await _videoCapture?.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
@@ -248,6 +249,13 @@ namespace Video_Compositor_Demo
             {
                 edOutputFilename.Text = dlg.FileName;
             }
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            tmRecording.Stop();
+
+            await DestroyEngineAsync();
         }
     }
 }

@@ -78,17 +78,22 @@ namespace Face_Detector_Live
             });
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            _timer.Stop();
 
             if (_pipeline != null)
             {
+                await _pipeline.StopAsync();
+
                 _pipeline.OnError -= Pipeline_OnError;
 
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
+
                 _pipeline = null;
             }
+
+            VideoView1.CallRefresh();
         }
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)

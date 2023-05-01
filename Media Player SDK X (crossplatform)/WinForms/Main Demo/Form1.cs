@@ -29,6 +29,8 @@ namespace Main_Demo
     {
         private MediaPlayerCoreX _player;
 
+        private volatile bool _closing;
+
         public Form1()
         {
             InitializeComponent();
@@ -488,7 +490,12 @@ namespace Main_Demo
         {
             tmPosition.Stop();
 
-            videoView1.Invalidate();
+            if (_closing)
+            {
+                return;
+            }
+
+            videoView1.Invalidate();                       
 
             Invoke((Action)(() =>
             {
@@ -726,18 +733,16 @@ namespace Main_Demo
             }
         }
 
-        private void btSaveSnapshot_Click(object sender, EventArgs e)
+        private async void btSaveSnapshot_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, _player.State.ToString());
-
-            //using (var dlg = new SaveFileDialog())
-            //{
-            //    dlg.FileName = "snap.jpg";
-            //    if (dlg.ShowDialog() == DialogResult.OK)
-            //    {
-            //        await _player.Snapshot_SaveAsync(dlg.FileName, ImageFormat.Jpeg);
-            //    }
-            //}
+            using (var dlg = new SaveFileDialog())
+            {
+                dlg.FileName = "snap.jpg";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    await _player.Snapshot_SaveAsync(dlg.FileName, ImageFormat.Jpeg);
+                }
+            }
         }
 
         private void cbAudioStream_SelectedIndexChanged(object sender, EventArgs e)
@@ -783,14 +788,17 @@ namespace Main_Demo
             lbSpeed.Text = $"Speed: {speed:F1}";
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private async void cbImageOverlayEnabled_Click(object sender, EventArgs e)
         {
             await UpdateImageOverlayAsync();
+        }
+
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _closing = true;
+
+            await _player.StopAsync();
+            await _player.DisposeAsync();
         }
     }
 }

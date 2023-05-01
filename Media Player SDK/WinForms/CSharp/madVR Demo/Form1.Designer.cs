@@ -306,7 +306,7 @@ namespace madVR_Player_Demo
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(642, 31);
             edFilename.TabIndex = 27;
-            edFilename.Text = "C:\\samples\\!video.mp4";
+            edFilename.Text = "C:\\samples\\!videobb.mp4";
             // 
             // label14
             // 
@@ -373,7 +373,7 @@ namespace madVR_Player_Demo
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             Name = "Form1";
-            Text = "Media Player SDK .Net - Simple Video Player Demo";
+            Text = "Media Player SDK .Net - madVR Demo";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             groupBox4.ResumeLayout(false);

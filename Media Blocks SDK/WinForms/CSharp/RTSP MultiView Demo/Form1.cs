@@ -98,7 +98,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             if (_playEngines[id] != null)
             {
                 await _playEngines[id].StopAsync();
-                _playEngines[id].Dispose();
+                await _playEngines[id].DisposeAsync();
                 _playEngines[id] = null;
             }
 
@@ -188,7 +188,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 await _playEngines[id].StopAsync();
 
                 _playEngines[id].OnError -= Engine_OnError;
-                _playEngines[id].Dispose();
+                await _playEngines[id].DisposeAsync();
                 _playEngines[id] = null;
             }
 
@@ -218,12 +218,15 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             for (int i = 0; i < _playEngines.Length; i++)
             {
-                _playEngines[i]?.Dispose();
-                _playEngines[i] = null;
+                if (_playEngines[i] != null)
+                {
+                    await _playEngines[i].DisposeAsync();
+                    _playEngines[i] = null;
+                }
             }
         }
 
@@ -272,7 +275,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             if (_recordEngines[id] != null)
             {
                 await _recordEngines[id].StopAsync();
-                _recordEngines[id].Dispose();
+                await _recordEngines[id].DisposeAsync();
                 _recordEngines[id] = null;
             }
 
@@ -300,7 +303,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 await _recordEngines[id].StopAsync();
 
                 _recordEngines[id].OnError -= Engine_OnError;
-                _recordEngines[id].Dispose();
+                await _recordEngines[id].DisposeAsync();
                 _recordEngines[id] = null;
             }
         }

@@ -185,15 +185,15 @@ namespace Social_Networks_Streamer_Demo
             VideoView1.CallRefresh();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            _timer.Stop();
 
             if (_videoCapture != null)
             {
+                await _videoCapture?.StopAsync();
                 _videoCapture.OnError -= VideoCapture_OnError;
-
-                _videoCapture.Dispose();
+                await _videoCapture.DisposeAsync();
                 _videoCapture = null;
             }
         }

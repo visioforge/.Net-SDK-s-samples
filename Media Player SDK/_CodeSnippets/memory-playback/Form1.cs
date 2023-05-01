@@ -1,8 +1,10 @@
+using SkiaSharp;
 using System;
 using System.IO;
 using System.Windows.Forms;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayer;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer;
 
 namespace memory_playback
@@ -35,6 +37,14 @@ namespace memory_playback
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                    _player.Dispose();
+                }
+
+                _memoryStream?.Dispose();
+
                 var bytes = File.ReadAllBytes(dlg.FileName);
                 _player = new MediaPlayerCore(videoView1);
 
@@ -42,13 +52,30 @@ namespace memory_playback
                 _stream = new ManagedIStream(_memoryStream);
 
                 // specifying settings
-                _player.Source_MemoryStream = new MemoryStreamSource(_stream, true, true, _memoryStream.Length);
+                bool video = rbVideoAudio.Checked || rbVideoNoAudio.Checked;
+                bool audio = rbVideoAudio.Checked || rbAudio.Checked;
+                _player.Source_MemoryStream = new MemoryStreamSource(_stream, video, audio, _memoryStream.Length);
 
                 _player.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
-                _player.Audio_OutputDevice = "Default DirectSound Device";
+                if (audio)
+                {
+                    _player.Audio_PlayAudio = true;
+                    _player.Audio_OutputDevice = "Default DirectSound Device";
+                }
+                else
+                {
+                    _player.Audio_PlayAudio = false;
+                }
 
-                _player.Video_Renderer_SetAuto();
+                if (video)
+                {
+                    _player.Video_Renderer_SetAuto();
+                }
+                else
+                {
+                    _player.Video_Renderer.VideoRenderer = VideoRendererMode.None;
+                }
 
                 await _player.PlayAsync();
             }

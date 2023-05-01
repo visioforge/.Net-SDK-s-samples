@@ -108,18 +108,17 @@ namespace KLV_Demo
         //    _pipeline.Connect(_demux.VideoOutput, _sink.CreateNewInput(MediaBlockPadMediaType.Video));
         //}
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
                 _pipeline.OnStop -= Pipeline_OnStop;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
-                
+
         private void btOpenTSFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -140,7 +139,7 @@ namespace KLV_Demo
 
         private async void btStartExtract_Click(object sender, RoutedEventArgs e)
         {
-            DestroyEngine();
+            await DestroyEngineAsync();
             CreateExtractEngine();
 
             await _pipeline.StartAsync();
@@ -155,7 +154,7 @@ namespace KLV_Demo
 
             await _pipeline.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         //private async void btStartRemux_Click(object sender, RoutedEventArgs e)

@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -55,27 +56,26 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
         {
             _pipeline = new MediaBlocksPipeline(false);
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _pipeline.OnError += MediaPlayer1_OnError;
-            _pipeline.OnStop += MediaPlayer1_OnStop;
+            _pipeline.OnError += Pipeline_OnError;
+            _pipeline.OnStop += Pipeline_OnStop;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
-                _pipeline.OnError -= MediaPlayer1_OnError;
-                _pipeline.OnStop -= MediaPlayer1_OnStop;
-
-                _pipeline.Dispose();
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             btStop_Click(null, null);
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void InitializeComponent()
@@ -225,7 +225,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             VideoView1?.InvalidateVisual();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
             lbTimeline.Text = "00:00:00 / 00:00:00";
         }
 
@@ -244,12 +244,12 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             _pipeline.NextFrame(1);
         }
 
-        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Add(e.Message);
         }
 
-        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
+        private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             _tmPosition.Stop();
 

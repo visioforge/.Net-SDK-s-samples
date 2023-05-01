@@ -13,11 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Output;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MediaBlocks_Simple_Player_Demo_WPF
@@ -44,10 +46,24 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            MediaBlocksPipeline.InitSDK();
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
+
+            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
+            cbAudioOutput.Items.Clear();
+            if (audioOutputDevices.Length > 0)
+            {
+                foreach (var item in audioOutputDevices)
+                {
+                    cbAudioOutput.Items.Add(item.Name);
+                }
+
+                cbAudioOutput.SelectedIndex = 0;
+            }
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
@@ -68,7 +84,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }));
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline(false);
             _pipeline.OnError += Pipeline_OnError;
@@ -80,7 +96,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
-            _audioRenderer = new AudioRendererBlock();
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First());
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
@@ -106,14 +122,13 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _timerFlag = false;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
                 _pipeline.OnStop -= Pipeline_OnStop;
-
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
@@ -139,7 +154,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
         {
             edLog.Clear();
 
-            CreateEngine();
+            await CreateEngineAsync();
 
             //_pipeline.Loop = cbLoop.Checked;
             //_pipeline.Audio_PlayAudio = true;
@@ -200,11 +215,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            _timer.Stop();
 
-            DestroyEngine();
+            await DestroyEngineAsync();            
         }
     }
 }

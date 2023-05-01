@@ -1,5 +1,13 @@
 # Changelog
 
+## 15.5.72
+
+* [ALL] Added IAsyncDisposable interface support for cross-platform core classes. It should be used to dispose of the core objects in async methods.
+
+## 15.5.71
+
+* [Video Capture SDK .Net] Added madVR support for mutiscreen
+
 ## 15.5.70
 
 * [Video Capture SDK .Net] Resolved NDI enumerating issue in the VideoCaptureCore engine

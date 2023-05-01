@@ -11,7 +11,7 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
-    internal class RTSPPlayEngine : IDisposable, IPlayEngine
+    internal class RTSPPlayEngine : IAsyncDisposable, IPlayEngine
     {
         private MediaBlocksPipeline _pipeline;
 
@@ -86,18 +86,14 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             return _pipeline.State == PlaybackState.Play;
         }
 
-        protected virtual void Dispose(bool disposing)
+        public async ValueTask DisposeAsync()
         {
             if (!disposedValue)
             {
-                if (disposing)
-                {
-                }
-
                 if (_pipeline != null)
                 {
                     _pipeline.OnError -= _pipeline_OnError;
-                    _pipeline.Dispose();
+                    await _pipeline.DisposeAsync();
                     _pipeline = null;
                 }
 
@@ -112,17 +108,6 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
                 disposedValue = true;
             }
-        }
-
-        ~RTSPPlayEngine()
-        {
-            Dispose(disposing: false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
     }
 }

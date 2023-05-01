@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 using VisioForge.Core.MediaBlocks;
@@ -37,13 +38,13 @@ namespace VNC_Source_Demo
             _videoCapture.OnError += VideoCapture_OnError;
         }
 
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (_videoCapture != null)
             {
                 _videoCapture.OnError -= VideoCapture_OnError;
 
-                _videoCapture.Dispose();
+                await _videoCapture.DisposeAsync();
                 _videoCapture = null;
             }
         }
@@ -99,7 +100,7 @@ namespace VNC_Source_Demo
 
             await _videoCapture.StopAsync();
 
-            DestroyEngine();
+            await DestroyEngineAsync();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -109,6 +110,13 @@ namespace VNC_Source_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            tmRecording.Stop();
+
+            await DestroyEngineAsync();
         }
     }
 }

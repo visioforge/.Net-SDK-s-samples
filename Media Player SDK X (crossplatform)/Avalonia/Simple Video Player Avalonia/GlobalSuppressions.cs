@@ -5,6 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Major Code Smell", "S1118:Utility classes should not have public constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Simple_Video_Player_Avalonia.Program")]
 [assembly: SuppressMessage("Major Bug", "S3168:\"async\" methods should not return \"void\"", Justification = "<Pending>", Scope = "member", Target = "~M:Simple_Video_Player_Avalonia.MainWindow.tbTimeline_Scroll")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Simple_Video_Player_Avalonia.MainWindow.tbSpeed_Scroll")]
 [assembly: SuppressMessage("Major Bug", "S3168:\"async\" methods should not return \"void\"", Justification = "<Pending>", Scope = "member", Target = "~M:Simple_Video_Player_Avalonia.MainWindow.tbSpeed_Scroll")]
+[assembly: SuppressMessage("Major Code Smell", "S1118:Utility classes should not have public constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Simple_Video_Player_Avalonia.Program")]

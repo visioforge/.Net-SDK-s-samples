@@ -7,7 +7,7 @@ using VisioForge.Core.Types.Events;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
-    internal interface IPlayEngine : IDisposable
+    internal interface IPlayEngine : IAsyncDisposable
     {
         string URL { get; set; }
 

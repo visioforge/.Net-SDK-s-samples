@@ -11,8 +11,8 @@
     <Company>VisioForge</Company>
     <Product>madVR Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.70.0</AssemblyVersion>
-    <FileVersion>15.5.70.0</FileVersion>
+    <AssemblyVersion>15.5.71.0</AssemblyVersion>
+    <FileVersion>15.5.71.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
@@ -21,8 +21,8 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.70" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.70" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.71" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.71" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

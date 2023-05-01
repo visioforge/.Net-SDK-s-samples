@@ -431,17 +431,22 @@ namespace Decklink_MB_Demo
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            _timer.Stop();
 
             if (_pipeline != null)
             {
+                await _pipeline.StopAsync();
+
                 _pipeline.OnError -= Pipeline_OnError;
 
-                _pipeline.Dispose();
+                await _pipeline.DisposeAsync();
+
                 _pipeline = null;
             }
+
+            VideoView1.CallRefresh();         
         }
 
         private void cbAddTextOverlay_Checked(object sender, RoutedEventArgs e)
