@@ -69,9 +69,6 @@
                             Command="{Binding ConfigureAudioInputDeviceCommand}"
                             Content="Settings"/>
 
-                    <CheckBox Height="16" Margin="161,145,0,0" Name="cbUseAudioInputFromVideoCaptureDevice" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"
-                              IsEnabled="{Binding SelectedVideoInputDevice.AudioOutput}"
-                              IsChecked="{Binding UseAudioInputFromVideoSource, Mode=TwoWay}">Use audio input from video source</CheckBox>
                     <Label Style="{StaticResource DefaultLabelStyle}"
                            Margin="6,191,0,0" Name="label6" Width="120" >Audio input line</Label>
                     <ComboBox Style="{StaticResource DefaultComboBoxStyle}"

@@ -119,12 +119,12 @@ namespace Simple_Video_Capture
             {
                 if (SetProperty(ref this.selectedVideoFormat, value))
                 {
-                    SelectedFrameRate = SelectedVideoFormat?.FrameRates.FirstOrDefault().Value;
+                    SelectedFrameRate = SelectedVideoFormat?.FrameRates.FirstOrDefault();
                 }
             }
         }
 
-        public double? SelectedFrameRate
+        public VideoFrameRate? SelectedFrameRate
         {
             get => this.selectedFrameRate;
             set => SetProperty(ref this.selectedFrameRate, value);
@@ -642,11 +642,11 @@ namespace Simple_Video_Capture
             var videoSource = new VideoCaptureSource(SelectedVideoInputDevice.Name);
             videoSource.Format = SelectedVideoFormat.Name;
             videoSource.Format_UseBest = UseBestVideoInputFormat;
-            videoSource.FrameRate = new VideoFrameRate(SelectedFrameRate.GetValueOrDefault(0));
+            videoSource.FrameRate = SelectedFrameRate.GetValueOrDefault(VideoFrameRate.FPS_25);
 
             var audioSource = new AudioCaptureSource(SelectedAudioInputDevice.Name);
-            videoSource.Format = SelectedAudioInputFormat;
-            videoSource.Format_UseBest = UseBestAudioInputFormat;
+            audioSource.Format = SelectedAudioInputFormat;
+            audioSource.Format_UseBest = UseBestAudioInputFormat;
 
             VideoCaptureStartParams startParams = new VideoCaptureStartParams
             {
@@ -762,7 +762,7 @@ namespace Simple_Video_Capture
         private string title;
         private VideoCaptureDeviceInfo selectedVideoInputDevice;
         private VideoCaptureDeviceFormat selectedVideoFormat;
-        private double? selectedFrameRate;
+        private VideoFrameRate? selectedFrameRate;
         private AudioCaptureDeviceInfo selectedAudioInputDevice;
         private string selectedAudioInputFormat;
         private string selectedAudioInputLine;
