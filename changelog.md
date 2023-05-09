@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.5.72
+
+* [Cross-platform SDKs] Resolved issue with VU Meter (event not fired)
+* [Media Player SDK .Net] Updated memory playback
+
 ## 15.5.71
 
 * [ALL] Added IAsyncDisposable interface support for cross-platform core classes. It should be used to dispose of the core objects in async methods.

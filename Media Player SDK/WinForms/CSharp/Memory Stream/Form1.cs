@@ -12,6 +12,7 @@ namespace Memory_Stream_Demo
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
+    using VisioForge.Core.MediaInfo;
 
     public partial class Form1 : Form
     {
@@ -72,33 +73,18 @@ namespace Memory_Stream_Demo
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Text = string.Empty;
-
-            // video and audio present in file. tune this settings to play audio files or video files without audio
-            bool videoPresent;
-            bool audioPresent;
-            if (rbVideoWithAudio.Checked)
-            {
-                videoPresent = true;
-                audioPresent = true;
-            }
-            else if (rbVideoWithoutAudio.Checked)
-            {
-                videoPresent = true;
-                audioPresent = false;
-            }
-            else
-            {
-                videoPresent = false;
-                audioPresent = true;
-            }
+            bool videoAvailable;
+            bool audioAvailable;
 
             if (rbSTreamTypeFile.Checked)
             {
                 _fileStream = new FileStream(edFilename.Text, FileMode.Open);
                 _stream = new ManagedIStream(_fileStream);
 
+                MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, out videoAvailable, out audioAvailable);
+
                 // specifying settings
-                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length);
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _fileStream.Length);
             }
             else
             {
@@ -106,15 +92,32 @@ namespace Memory_Stream_Demo
                 _memoryStream = new MemoryStream(_memorySource);
                 _stream = new ManagedIStream(_memoryStream);
 
+                MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _memoryStream.Length, out videoAvailable, out audioAvailable);
+
                 // specifying settings
-                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, _memoryStream.Length);
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _memoryStream.Length);
             }
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
-            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+            if (audioAvailable)
+            {
+                MediaPlayer1.Audio_PlayAudio = true;
+                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+            }
+            else
+            {
+                MediaPlayer1.Audio_PlayAudio = false;
+            }
 
-            MediaPlayer1.Video_Renderer_SetAuto();
+            if (videoAvailable)
+            {
+                MediaPlayer1.Video_Renderer_SetAuto();
+            }
+            else
+            {
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
+            }
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
             await MediaPlayer1.PlayAsync();

@@ -8,6 +8,7 @@ Imports VisioForge.Core.MediaPlayer
 Imports VisioForge.Core.Types.Events
 Imports VisioForge.Core.Types.MediaPlayer
 Imports VisioForge.Core.DirectShow.Helpers
+Imports VisioForge.Core.MediaInfo
 
 Public Class Form1
     Private _stream As ManagedIStream
@@ -45,42 +46,41 @@ Public Class Form1
         Dim audioPresent As Boolean
         Dim videoPresent As Boolean
 
-        If (rbVideoWithAudio.Checked) Then
-            videoPresent = True
-            videoPresent = True
-        ElseIf (rbVideoWithoutAudio.Checked) Then
-            videoPresent = True
-            videoPresent = False
-        Else
-            videoPresent = False
-            videoPresent = True
-        End If
-
         If (rbSTreamTypeFile.Checked) Then
             _fileStream = New FileStream(edFilename.Text, FileMode.Open)
             _stream = New ManagedIStream(_fileStream)
 
+            MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, videoPresent, audioPresent)
             MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length)
         Else
             _memorySource = File.ReadAllBytes(edFilename.Text)
             _memoryStream = New MemoryStream(_memorySource)
             _stream = New ManagedIStream(_memoryStream)
 
+            MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, videoPresent, audioPresent)
             MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length)
         End If
 
         MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS
 
-        MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
+        If (audioPresent) Then
+            MediaPlayer1.Audio_PlayAudio = True
+            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device"
+        Else
+            MediaPlayer1.Audio_PlayAudio = False
+        End If
 
-        MediaPlayer1.Video_Renderer_SetAuto()
+        If (videoPresent) Then
+            MediaPlayer1.Video_Renderer_SetAuto()
+        Else
+            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None
+        End If
 
         MediaPlayer1.Debug_Mode = cbDebugMode.Checked
         Await MediaPlayer1.PlayAsync()
 
         tbTimeline.Maximum = (Await MediaPlayer1.Duration_TimeAsync()).TotalSeconds
         timer1.Enabled = True
-
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load

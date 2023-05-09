@@ -33,14 +33,11 @@ namespace memory_playback
         {
             btOpen = new Button();
             videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            rbAudio = new RadioButton();
-            rbVideoAudio = new RadioButton();
-            rbVideoNoAudio = new RadioButton();
             SuspendLayout();
             // 
             // btOpen
             // 
-            btOpen.Location = new Point(12, 452);
+            btOpen.Location = new Point(12, 400);
             btOpen.Name = "btOpen";
             btOpen.Size = new Size(539, 46);
             btOpen.TabIndex = 1;
@@ -57,61 +54,22 @@ namespace memory_playback
             videoView1.StatusOverlay = null;
             videoView1.TabIndex = 2;
             // 
-            // rbAudio
-            // 
-            rbAudio.AutoSize = true;
-            rbAudio.Location = new Point(12, 411);
-            rbAudio.Name = "rbAudio";
-            rbAudio.Size = new Size(95, 24);
-            rbAudio.TabIndex = 3;
-            rbAudio.Text = "Audio file";
-            rbAudio.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoAudio
-            // 
-            rbVideoAudio.AutoSize = true;
-            rbVideoAudio.Checked = true;
-            rbVideoAudio.Location = new Point(153, 411);
-            rbVideoAudio.Name = "rbVideoAudio";
-            rbVideoAudio.Size = new Size(168, 24);
-            rbVideoAudio.TabIndex = 4;
-            rbVideoAudio.TabStop = true;
-            rbVideoAudio.Text = "Video file with audio";
-            rbVideoAudio.UseVisualStyleBackColor = true;
-            // 
-            // rbVideoNoAudio
-            // 
-            rbVideoNoAudio.AutoSize = true;
-            rbVideoNoAudio.Location = new Point(361, 411);
-            rbVideoNoAudio.Name = "rbVideoNoAudio";
-            rbVideoNoAudio.Size = new Size(190, 24);
-            rbVideoNoAudio.TabIndex = 5;
-            rbVideoNoAudio.Text = "Video file without audio";
-            rbVideoNoAudio.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(571, 512);
-            Controls.Add(rbVideoNoAudio);
-            Controls.Add(rbVideoAudio);
-            Controls.Add(rbAudio);
+            ClientSize = new Size(571, 472);
             Controls.Add(videoView1);
             Controls.Add(btOpen);
             Name = "Form1";
             Text = "Media Player SDK .Net - Memory Playback code snippet";
             Load += Form1_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Button btOpen;
         private VisioForge.Core.UI.WinForms.VideoView videoView1;
-        private RadioButton rbAudio;
-        private RadioButton rbVideoAudio;
-        private RadioButton rbVideoNoAudio;
     }
 }

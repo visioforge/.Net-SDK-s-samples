@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using VisioForge.Core;
+using VisioForge.Core.MediaInfo;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.MediaPlayer;
@@ -51,14 +52,14 @@ namespace memory_playback
                 _memoryStream = new MemoryStream(bytes);
                 _stream = new ManagedIStream(_memoryStream);
 
-                // specifying settings
-                bool video = rbVideoAudio.Checked || rbVideoNoAudio.Checked;
-                bool audio = rbVideoAudio.Checked || rbAudio.Checked;
-                _player.Source_MemoryStream = new MemoryStreamSource(_stream, video, audio, _memoryStream.Length);
+                // read info about file into memory
+                MediaInfoReader.GetStreamAvailabilityFromMemoryStream(_player.GetContext(), _stream, _memoryStream.Length, out var videoAvailable, out var audioAvailable);
+
+                _player.Source_MemoryStream = new MemoryStreamSource(_stream, _memoryStream.Length);
 
                 _player.Source_Mode = MediaPlayerSourceMode.Memory_DS;
 
-                if (audio)
+                if (audioAvailable)
                 {
                     _player.Audio_PlayAudio = true;
                     _player.Audio_OutputDevice = "Default DirectSound Device";
@@ -68,7 +69,7 @@ namespace memory_playback
                     _player.Audio_PlayAudio = false;
                 }
 
-                if (video)
+                if (videoAvailable)
                 {
                     _player.Video_Renderer_SetAuto();
                 }

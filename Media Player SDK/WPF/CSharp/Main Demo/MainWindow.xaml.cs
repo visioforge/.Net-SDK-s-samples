@@ -699,8 +699,7 @@ namespace Main_Demo
             ManagedIStream stream = new ManagedIStream(memoryFileStream);
 
             // specifing settings
-            // video and audio present in file. tune this settings to play audio files or video files without audio
-            MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(stream, true, true, memoryFileStream.Length);
+            MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(stream, memoryFileStream.Length);
         }
 
         private void SetSourceMode()
