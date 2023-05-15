@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.73
+
+* [Video Capture SDK .Net] Resolved issue with VU meter in cross-platform engine
+
 ## 15.5.72
 
 * [Cross-platform SDKs] Resolved issue with VU Meter (event not fired)
