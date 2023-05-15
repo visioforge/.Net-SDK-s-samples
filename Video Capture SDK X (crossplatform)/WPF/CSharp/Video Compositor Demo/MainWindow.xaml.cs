@@ -257,5 +257,23 @@ namespace Video_Compositor_Demo
 
             await DestroyEngineAsync();
         }
+
+        private void btTransparency_Click(object sender, RoutedEventArgs e)
+        {
+            int index = cbSources.SelectedIndex;
+            if (index != -1)
+            {
+                var mixer = _videoCapture.GetSourceMixerControl();
+                if (mixer != null)
+                {
+                    var stream = mixer.Input_Get(index);
+                    if (stream != null)
+                    {
+                        stream.Alpha = slTransparency.Value / 100.0;
+                        mixer.Input_Update(index, stream);
+                    }
+                }
+            }
+        }
     }
 }

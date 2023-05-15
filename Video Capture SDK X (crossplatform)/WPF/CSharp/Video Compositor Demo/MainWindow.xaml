@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Video_Compositor_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         mc:Ignorable="d"
-        Title="Video Capture SDK .Net X - Video Compositor Demo" Height="692" Width="1143" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+        Title="Video Capture SDK .Net X - Video Compositor Demo" Height="710" Width="1143" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
@@ -55,6 +55,12 @@
                         <TextBox x:Name="edRectBottom" Text="480" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
                     </StackPanel>
                     <Button x:Name="btUpdateRect" Content="Update rect" Height="25" Margin="0,7,0,0" Width="100" Click="btUpdateRect_Click"/>
+                    <Label Margin="0,17,0,0" HorizontalAlignment="Left">Transparency</Label>
+                    <StackPanel Orientation="Horizontal" Margin="0,1,0,0" >
+                        <Slider Width="100" Maximum="100" Minimum="0" Value="100" x:Name="slTransparency" VerticalAlignment="Center" />
+                        <Label Width="40" VerticalAlignment="Center" Margin="5,0,0,0">1.00</Label>
+                        <Button x:Name="btTransparency" Content="Update" Width="50" VerticalAlignment="Center" Click="btTransparency_Click" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
 
@@ -73,7 +79,7 @@
             <TextBox x:Name="edOutputFacebookKey" Text="STREAMING KEY" Margin="15,10,10,0" VerticalContentAlignment="Center"/>
 
             <Label Margin="0,10,0,0" Content="Log"/>
-            <TextBox x:Name="mmLog" Text="" Margin="0,5,10,10" TextWrapping="Wrap" Height="115" VerticalContentAlignment="Stretch"/>
+            <TextBox x:Name="mmLog" Text="" Margin="0,5,10,10" TextWrapping="Wrap" Height="62" VerticalContentAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Window>
