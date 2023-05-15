@@ -65,6 +65,17 @@ namespace Simple_Video_Capture
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnAudioVUMeter += VideoCapture1_OnAudioVUMeter;
+        }
+
+        private void VideoCapture1_OnAudioVUMeter(object sender, VisioForge.Core.Types.X.VUMeterXEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                vumeter.Amplitude = (float)e.MeterData.Peak[0];
+                vumeter.Update();
+                Debug.WriteLine($"VU: {e.MeterData.Peak[0]}");
+            });
         }
 
         private async Task DestroyEngineAsync()
@@ -72,6 +83,7 @@ namespace Simple_Video_Capture
             if (VideoCapture1 != null)
             {
                 VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.OnAudioVUMeter -= VideoCapture1_OnAudioVUMeter;
 
                 await VideoCapture1.DisposeAsync();
                 VideoCapture1 = null;
@@ -398,6 +410,17 @@ namespace Simple_Video_Capture
             }
 
             await ConfigureVideoEffectsAsync();
+
+            // VU meter
+            if (cbVUMeter.IsChecked == true)
+            {
+                VideoCapture1.Audio_VU_Meter_Enabled = true;
+                vumeter.Start();
+            }
+            else
+            {
+                VideoCapture1.Audio_VU_Meter_Enabled = false;
+            }
 
             await VideoCapture1.StartAsync();
 
