@@ -2031,11 +2031,13 @@ Public Class Form1
         volumeMeter1.Clear()
         volumeMeter2.Clear()
 
-        If Not IsNothing(memoryFileStream) Then
+        If Not MediaPlayer1.Loop Then
+            If Not IsNothing(memoryFileStream) Then
 
-            memoryFileStream.Dispose()
-            memoryFileStream = Nothing
+                memoryFileStream.Dispose()
+                memoryFileStream = Nothing
 
+            End If
         End If
 
     End Sub

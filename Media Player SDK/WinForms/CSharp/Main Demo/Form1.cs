@@ -1669,10 +1669,13 @@ namespace Media_Player_Demo
             volumeMeter1.Clear();
             volumeMeter2.Clear();
 
-            if (memoryFileStream != null)
+            if (!MediaPlayer1.Loop)
             {
-                memoryFileStream.Dispose();
-                memoryFileStream = null;
+                if (memoryFileStream != null)
+                {
+                    memoryFileStream.Dispose();
+                    memoryFileStream = null;
+                }
             }
         }
 
