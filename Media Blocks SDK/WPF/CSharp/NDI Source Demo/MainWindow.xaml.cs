@@ -28,6 +28,8 @@ namespace NDI_Source_Demo
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        private DeviceEnumerator _deviceEnumerator;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace NDI_Source_Demo
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -118,7 +122,7 @@ namespace NDI_Source_Demo
 
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
-            _ndiSources = await DeviceEnumerator.NDISourcesAsync();
+            _ndiSources = await _deviceEnumerator.NDISourcesAsync();
 
             cbNDISources.Items.Clear();
 
@@ -140,6 +144,8 @@ namespace NDI_Source_Demo
             Thread.Sleep(500);
 
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
     }
 }

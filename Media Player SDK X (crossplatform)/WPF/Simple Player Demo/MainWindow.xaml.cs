@@ -136,7 +136,7 @@ namespace Simple_Player_Demo_X
 
             CreateEngine();
 
-            _player.Audio_OutputDevice = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
+            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
 
             await _player.OpenAsync(new Uri(edFilename.Text));
 

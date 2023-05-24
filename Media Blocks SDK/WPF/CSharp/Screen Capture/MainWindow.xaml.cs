@@ -50,12 +50,14 @@ namespace Screen_Capture_MB_WPF
         private AACEncoderBlock _audioEncoder;
 
         private MP4SinkBlock _sink;
-        
+
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        private DeviceEnumerator _deviceEnumerator;
 
         // Dialogs
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -64,6 +66,8 @@ namespace Screen_Capture_MB_WPF
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -73,7 +77,7 @@ namespace Screen_Capture_MB_WPF
                 mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
             }));
         }
-        
+
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline(true);
@@ -97,11 +101,11 @@ namespace Screen_Capture_MB_WPF
                 edOutput.Text = saveFileDialog1.FileName;
             }
         }
-        
+
         private ScreenCaptureDX9SourceSettings CreateScreenCaptureSource()
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
-            
+
             var source = new ScreenCaptureDX9SourceSettings();
 
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
@@ -124,7 +128,7 @@ namespace Screen_Capture_MB_WPF
                     Convert.ToInt32(edScreenRight.Text),
                     Convert.ToInt32(edScreenBottom.Text));
             }
-            
+
             source.CaptureCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
             source.Monitor = screenID;
 
@@ -146,7 +150,7 @@ namespace Screen_Capture_MB_WPF
             if (cbRecordAudio.IsChecked == true)
             {
                 _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
-                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutputDevice.Text).First());
+                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutputDevice.Text).First());
             }
 
             if (rbPreview.IsChecked == true)
@@ -159,7 +163,7 @@ namespace Screen_Capture_MB_WPF
                 }
             }
             else
-            {   
+            {
                 // create video tee
                 _videoTee = new TeeBlock(2);
                 _pipeline.Connect(_screenSource.Output, _videoTee.Input);
@@ -179,7 +183,7 @@ namespace Screen_Capture_MB_WPF
                     // create audio tee
                     _audioTee = new TeeBlock(2);
                     _pipeline.Connect(_audioInput.Output, _audioTee.Input);
-                    
+
                     // connect audio renderer for preview
                     _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
 
@@ -196,7 +200,7 @@ namespace Screen_Capture_MB_WPF
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
         }
-        
+
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
@@ -239,7 +243,7 @@ namespace Screen_Capture_MB_WPF
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            foreach (var device in await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound))
+            foreach (var device in await SystemAudioSourceBlock.GetDevicesAsync(_deviceEnumerator, AudioCaptureDeviceAPI.DirectSound))
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -250,7 +254,7 @@ namespace Screen_Capture_MB_WPF
                 //cbAudioInputDevice_SelectedIndexChanged(null, null);
             }
 
-            foreach (var device in await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+            foreach (var device in await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound))
             {
                 cbAudioOutputDevice.Items.Add(device);
             }
@@ -265,12 +269,12 @@ namespace Screen_Capture_MB_WPF
             {
                 cbScreenCaptureDisplayIndex.Items.Add(i.ToString());
             }
-            
+
             if (cbScreenCaptureDisplayIndex.Items.Count > 0)
             {
                 cbScreenCaptureDisplayIndex.SelectedIndex = 0;
             }
-            
+
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
@@ -279,13 +283,15 @@ namespace Screen_Capture_MB_WPF
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
-       
+
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
-            
+
             tmRecording?.Dispose();
             tmRecording = null;
+
+            _deviceEnumerator?.Dispose();
         }
     }
 }

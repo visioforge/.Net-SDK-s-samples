@@ -26,6 +26,7 @@ namespace MediaBlocks_Player_Demo
     using VisioForge.Core.Types.X.MediaPlayer;
     using VisioForge.Core.UI;
     using System.Threading.Tasks;
+    using VisioForge.Core;
 
     public partial class Form1 : Form
     {
@@ -36,6 +37,8 @@ namespace MediaBlocks_Player_Demo
         private AudioRendererBlock _audioRenderer;
 
         private UniversalSourceBlock _fileSource;
+
+        private DeviceEnumerator _deviceEnumerator;
 
         private void CreateEngine()
         {
@@ -59,6 +62,8 @@ namespace MediaBlocks_Player_Demo
         public Form1()
         {
             InitializeComponent();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -122,7 +127,7 @@ namespace MediaBlocks_Player_Demo
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 
@@ -223,6 +228,8 @@ namespace MediaBlocks_Player_Demo
             }
 
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
     }
 }

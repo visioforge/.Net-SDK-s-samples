@@ -16,13 +16,17 @@ namespace Social_Networks_Streamer_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DeviceEnumerator _deviceEnumerator;
+
         private VideoCaptureCoreX _videoCapture;
 
         private System.Timers.Timer _timer;
 
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();     
+            
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -43,7 +47,7 @@ namespace Social_Networks_Streamer_Demo
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-            var videoCaptureDevices = (await DeviceEnumerator.VideoSourcesAsync());
+            var videoCaptureDevices = (await _deviceEnumerator.VideoSourcesAsync());
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -54,7 +58,7 @@ namespace Social_Networks_Streamer_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = (await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound));
+            var audioCaptureDevices = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound));
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -65,7 +69,7 @@ namespace Social_Networks_Streamer_Demo
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound));
+            var audioOutputDevices = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound));
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -104,7 +108,7 @@ namespace Social_Networks_Streamer_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await DeviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -129,7 +133,7 @@ namespace Social_Networks_Streamer_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -145,7 +149,7 @@ namespace Social_Networks_Streamer_Demo
             // audio output
             if (!string.IsNullOrEmpty(cbAudioOutput.Text))
             {
-                var device = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     _videoCapture.Audio_OutputDevice = device;                    
@@ -196,6 +200,8 @@ namespace Social_Networks_Streamer_Demo
                 await _videoCapture.DisposeAsync();
                 _videoCapture = null;
             }
+
+            _deviceEnumerator?.Dispose();
         }
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -208,7 +214,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = (await DeviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -235,7 +241,7 @@ namespace Social_Networks_Streamer_Demo
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await DeviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -267,7 +273,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = (await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

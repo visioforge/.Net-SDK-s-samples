@@ -27,6 +27,8 @@ namespace Screen_Capture_X
 
     public partial class Window1 : IDisposable
     {
+        private DeviceEnumerator _deviceEnumerator;
+
         private const AudioCaptureDeviceAPI AUDIO_API = AudioCaptureDeviceAPI.DirectSound;
 
         private UniversalOutputDialog mpegTSSettingsDialog;
@@ -50,6 +52,8 @@ namespace Screen_Capture_X
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void CreateEngine()
@@ -309,7 +313,7 @@ namespace Screen_Capture_X
                     var format = cbAudioInputFormat.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var sources = await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound);
+                        var sources = await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound);
                         var device = sources.FirstOrDefault(x => x.Name == deviceName && x.API == AUDIO_API);
                         if (device != null)
                         {
@@ -437,7 +441,7 @@ namespace Screen_Capture_X
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
             // audio input
-            foreach (var device in (await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).Where(device => device.API == AUDIO_API))
+            foreach (var device in (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).Where(device => device.API == AUDIO_API))
             {
                 cbAudioInputDevice.Items.Add(device.Name);
             }
@@ -465,7 +469,7 @@ namespace Screen_Capture_X
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await DeviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString() && device.API == AUDIO_API);
+                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString() && device.API == AUDIO_API);
                 if (deviceItem == null)
                 {
                     return;
@@ -514,6 +518,8 @@ namespace Screen_Capture_X
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
 
         protected virtual void Dispose(bool disposing)

@@ -63,7 +63,7 @@
             mmError.Clear();
 
             MediaPlayer1.Audio_Play = true;
-            MediaPlayer1.Audio_OutputDevice = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text);
+            MediaPlayer1.Audio_OutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text);
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 

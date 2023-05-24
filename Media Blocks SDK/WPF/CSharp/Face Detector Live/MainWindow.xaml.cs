@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
@@ -30,12 +31,16 @@ namespace Face_Detector_Live
 
         private System.Timers.Timer _timer;
 
+        private DeviceEnumerator _deviceEnumerator;
+
         public MainWindow()
         {
             InitializeComponent();
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -56,7 +61,7 @@ namespace Face_Detector_Live
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            var videoCaptureDevices = await SystemVideoSourceBlock.GetDevicesAsync();
+            var videoCaptureDevices = await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator);
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -94,6 +99,8 @@ namespace Face_Detector_Live
             }
 
             VideoView1.CallRefresh();
+
+            _deviceEnumerator.Dispose();
         }
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -106,7 +113,7 @@ namespace Face_Detector_Live
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -133,7 +140,7 @@ namespace Face_Detector_Live
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -173,7 +180,7 @@ namespace Face_Detector_Live
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);

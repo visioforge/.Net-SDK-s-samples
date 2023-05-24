@@ -32,6 +32,7 @@ using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.UI.WPF.Dialogs.Sources;
+using VisioForge.Core;
 
 namespace Video_Compositor_Demo
 {
@@ -60,6 +61,8 @@ namespace Video_Compositor_Demo
 
         private VirtualAudioSourceBlock _fakeAudioSource;
 
+        private DeviceEnumerator _deviceEnumerator;
+
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public MainWindow()
@@ -70,6 +73,8 @@ namespace Video_Compositor_Demo
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
@@ -97,7 +102,7 @@ namespace Video_Compositor_Demo
 
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog();
+            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
@@ -108,7 +113,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -342,6 +347,8 @@ namespace Video_Compositor_Demo
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
+
+            _deviceEnumerator?.Dispose();
         }
     }
 }

@@ -10,6 +10,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.MediaPlayer;
 using System.Linq;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
@@ -21,12 +22,16 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         private List<Tuple<string, string>> _customDecoders;
 
+        private DeviceEnumerator _deviceEnumerator;
+
         public Form1()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
             MediaBlocksPipeline.InitSDK();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -104,7 +109,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             if (cbUseMJPEG.Checked)
             {
-                _playEngines[id] = new HTTPPlayEngine(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+                _playEngines[id] = new HTTPPlayEngine(_deviceEnumerator, edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
             }
             else
             {
@@ -122,7 +127,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
                 }
 
-                var engine = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
+                var engine = new RTSPPlayEngine(_deviceEnumerator, rtspSettings, GetVideoViewByIndex(id));
                 _playEngines[id] = engine;
 
                 if (rtspSettings.EnableRAWVideoAudioEvents)
@@ -228,6 +233,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     _playEngines[i] = null;
                 }
             }
+
+            _deviceEnumerator.Dispose();
         }
 
         private async void btReadInfo_Click(object sender, EventArgs e)

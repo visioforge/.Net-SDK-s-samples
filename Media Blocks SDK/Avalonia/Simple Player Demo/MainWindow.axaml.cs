@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -33,6 +34,8 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
         private bool _initialized;
 
+        private DeviceEnumerator _deviceEnumerator;
+
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
         public MainWindow()
@@ -50,6 +53,8 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             Closing += MainWindow_Closing;
 
             DataContext = this;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void CreateEngine()
@@ -76,6 +81,8 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             btStop_Click(null, null);
 
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
 
         private void InitializeComponent()
@@ -145,7 +152,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             cbAudioOutput = this.FindControl<ComboBox>("cbAudioOutput");
 
             var cbAudioOutputItems = new ObservableCollection<string>();
-            foreach (var device in AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result)
+            foreach (var device in AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound).Result)
             {
                 cbAudioOutputItems.Add(device.Name);
             }
@@ -203,7 +210,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 

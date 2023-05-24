@@ -22,6 +22,8 @@ namespace Video_Compositor_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DeviceEnumerator _deviceEnumerator;
+
         private VideoCaptureCoreX _videoCapture;
 
         private VideoMixerSourceSettings _videoMixerSourceSettings = new VideoMixerSourceSettings();
@@ -36,6 +38,8 @@ namespace Video_Compositor_Demo
 
             _videoCapture = new VideoCaptureCoreX(VideoView1);
             _videoCapture.OnError += VideoCapture_OnError;
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
@@ -64,7 +68,7 @@ namespace Video_Compositor_Demo
 
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog();
+            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
             if (dlg.ShowDialog() == true)
             {
                 VideoCaptureDeviceSourceSettings settings = null;
@@ -73,7 +77,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await DeviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -256,6 +260,8 @@ namespace Video_Compositor_Demo
             tmRecording.Stop();
 
             await DestroyEngineAsync();
+
+            _deviceEnumerator?.Dispose();
         }
 
         private void btTransparency_Click(object sender, RoutedEventArgs e)

@@ -15,6 +15,8 @@ namespace NDI_Source_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DeviceEnumerator _deviceEnumerator;
+
         private VideoCaptureCoreX _videoCapture;
 
         private NDISourceInfo[] _ndiSources;
@@ -26,6 +28,8 @@ namespace NDI_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -105,7 +109,7 @@ namespace NDI_Source_Demo
 
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
-            _ndiSources = await DeviceEnumerator.NDISourcesAsync();
+            _ndiSources = await _deviceEnumerator.NDISourcesAsync();
 
             cbNDISources.Items.Clear();
 
@@ -123,6 +127,8 @@ namespace NDI_Source_Demo
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
     }
 }

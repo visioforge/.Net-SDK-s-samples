@@ -26,11 +26,15 @@
 
         private TimeSpan _duration;
 
-       // private AudioRendererBlock _audioRenderer;
+        // private AudioRendererBlock _audioRenderer;
+
+        private DeviceEnumerator _deviceEnumerator;
 
         public Form1()
         {
             InitializeComponent();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -44,7 +48,7 @@
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
-            foreach (var item in await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
+            foreach (var item in await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
             {
                 cbAudioOutputDevice.Items.Add(item.Name);
             }
@@ -182,6 +186,8 @@
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
+
+            _deviceEnumerator.Dispose();
         }
     }
 }

@@ -10,6 +10,7 @@
         Height="980"
         Width="1920" 
         Loaded="Window_Loaded" 
+        Closing="Window_Closing"
         Icon="visioforge_main_icon.ico"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

@@ -25,6 +25,8 @@ namespace Decklink_Demo_X
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DeviceEnumerator _deviceEnumerator;
+
         private UniversalOutputDialog mp4SettingsDialog;
                 
         private UniversalOutputDialog webMSettingsDialog;
@@ -45,6 +47,8 @@ namespace Decklink_Demo_X
         public MainWindow()
         {
             InitializeComponent();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void CreateEngine()
@@ -94,7 +98,7 @@ namespace Decklink_Demo_X
 
             cbOutputFormat.SelectedIndex = 0;
 
-            var videoCaptureDevices = await DeviceEnumerator.DecklinkVideoSourcesAsync();
+            var videoCaptureDevices = await _deviceEnumerator.DecklinkVideoSourcesAsync();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -105,7 +109,7 @@ namespace Decklink_Demo_X
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = await DeviceEnumerator.DecklinkAudioSourcesAsync();
+            var audioCaptureDevices = await _deviceEnumerator.DecklinkAudioSourcesAsync();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -116,7 +120,7 @@ namespace Decklink_Demo_X
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
+            var audioOutputDevices = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -180,7 +184,7 @@ namespace Decklink_Demo_X
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First();
+            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First();
 
             VideoCapture1.Audio_Record = true;
             VideoCapture1.Audio_Play = true;
@@ -192,7 +196,7 @@ namespace Decklink_Demo_X
             var mode = cbVideoMode.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(mode))
             {
-                var device = (await DeviceEnumerator.DecklinkVideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.DecklinkVideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device)
@@ -210,7 +214,7 @@ namespace Decklink_Demo_X
             deviceName = cbAudioInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await DeviceEnumerator.DecklinkAudioSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.DecklinkAudioSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     audioSourceSettings = new DecklinkAudioSourceSettings(device);
@@ -351,6 +355,8 @@ namespace Decklink_Demo_X
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
+
+            _deviceEnumerator.Dispose();
         }
 
         private async void btStartCapture(object sender, RoutedEventArgs e)

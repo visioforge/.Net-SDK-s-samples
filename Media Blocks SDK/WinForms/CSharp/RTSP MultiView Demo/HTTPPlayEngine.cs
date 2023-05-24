@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -32,7 +33,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
-        public HTTPPlayEngine(string url, string login, string password, IVideoView videoView, bool audioEnabled)
+        public HTTPPlayEngine(DeviceEnumerator deviceEnumerator, string url, string login, string password, IVideoView videoView, bool audioEnabled)
         {
             URL = url;
             Login = login;
@@ -62,7 +63,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             if (audioEnabled)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock(deviceEnumerator);
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
         }

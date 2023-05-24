@@ -36,11 +36,15 @@ namespace Live_Video_Compositor_Demo
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        private DeviceEnumerator _deviceEnumerator;
+
         public MainWindow()
         {
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            _deviceEnumerator = new DeviceEnumerator();
         }
                 
         private void Compositor_OnError(object sender, ErrorsEventArgs e)
@@ -70,7 +74,7 @@ namespace Live_Video_Compositor_Demo
 
         private async Task AddCameraSourceAsync()
         {
-            var dlg = new VideoCaptureSourceDialog();
+            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
             if (dlg.ShowDialog() == true)
             {
                 VideoCaptureDeviceSourceSettings settings = null;
@@ -79,7 +83,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -192,7 +196,7 @@ namespace Live_Video_Compositor_Demo
             await _compositor.Video_Output_AddAsync(_videoRendererOutput, true);
 
             // add audio renderer
-            var audioRenderer = new AudioRendererBlock(); // <- TODO replace with dialog 
+            var audioRenderer = new AudioRendererBlock(_deviceEnumerator); // <- TODO replace with dialog 
             _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer);
             await _compositor.Audio_Output_AddAsync(_audioRendererOutput, true);
 
@@ -291,7 +295,7 @@ namespace Live_Video_Compositor_Demo
 
         private async Task AddAudioSourceAsync()
         {
-            var dlg = new AudioCaptureSourceDialog();
+            var dlg = new AudioCaptureSourceDialog(_deviceEnumerator);
             if (dlg.ShowDialog() == true)
             {
                 DSAudioCaptureDeviceSourceSettings settings = null;
@@ -300,7 +304,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemAudioSourceBlock.GetDevicesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.ToString() == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.ToString() == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -475,6 +479,11 @@ namespace Live_Video_Compositor_Demo
                 lbOutputs.Items.RemoveAt(lbOutputs.SelectedIndex);
                 lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _deviceEnumerator.Dispose();
         }
     }
 }
