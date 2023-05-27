@@ -50,7 +50,7 @@
             // audio output
             foreach (var item in await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
             {
-                cbAudioOutputDevice.Items.Add(item.Name);
+                cbAudioOutputDevice.Items.Add(item.DisplayName);
             }
 
             if (cbAudioOutputDevice.Items.Count > 0)

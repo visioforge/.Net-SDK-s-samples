@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.75
+
+* [Cross-platform SDKs] Updated device enumerator
+
 ## 15.5.73
 
 * [Video Capture SDK .Net] Resolved issue with VU meter in cross-platform engine

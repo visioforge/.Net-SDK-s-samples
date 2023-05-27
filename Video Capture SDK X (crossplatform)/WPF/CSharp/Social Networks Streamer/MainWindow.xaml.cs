@@ -52,7 +52,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 foreach (var item in videoCaptureDevices)
                 {
-                    cbVideoInput.Items.Add(item.Name);
+                    cbVideoInput.Items.Add(item.DisplayName);
                 }
 
                 cbVideoInput.SelectedIndex = 0;
@@ -63,7 +63,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 foreach (var item in audioCaptureDevices)
                 {
-                    cbAudioInput.Items.Add(item.Name);
+                    cbAudioInput.Items.Add(item.DisplayName);
                 }
 
                 cbAudioInput.SelectedIndex = 0;
@@ -74,7 +74,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 foreach (var item in audioOutputDevices)
                 {
-                    cbAudioOutput.Items.Add(item.Name);
+                    cbAudioOutput.Items.Add(item.DisplayName);
                 }
 
                 cbAudioOutput.SelectedIndex = 0;
@@ -108,7 +108,7 @@ namespace Social_Networks_Streamer_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -133,7 +133,7 @@ namespace Social_Networks_Streamer_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -149,7 +149,7 @@ namespace Social_Networks_Streamer_Demo
             // audio output
             if (!string.IsNullOrEmpty(cbAudioOutput.Text))
             {
-                var device = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     _videoCapture.Audio_OutputDevice = device;                    
@@ -214,7 +214,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -241,7 +241,7 @@ namespace Social_Networks_Streamer_Demo
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -273,7 +273,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

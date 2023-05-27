@@ -124,7 +124,7 @@ namespace Simple_Video_Capture
             // video input
             foreach (var device in await _deviceEnumerator.VideoSourcesAsync())
             {
-                cbVideoInputDevice.Items.Add(device.Name);
+                cbVideoInputDevice.Items.Add(device.DisplayName);
             }
 
             if (cbVideoInputDevice.Items.Count > 0)
@@ -137,7 +137,7 @@ namespace Simple_Video_Capture
             // audio input
             foreach (var device in (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)))
             {
-                cbAudioInputDevice.Items.Add(device.Name);
+                cbAudioInputDevice.Items.Add(device.DisplayName);
             }
 
             if (cbAudioInputDevice.Items.Count > 0)
@@ -150,11 +150,11 @@ namespace Simple_Video_Capture
             string defaultAudioRenderer = string.Empty;
             foreach (var audioOutputDevice in (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)))
             {
-                cbAudioOutputDevice.Items.Add(audioOutputDevice.Name);
+                cbAudioOutputDevice.Items.Add(audioOutputDevice.DisplayName);
 
-                if (audioOutputDevice.Name.Contains("Default"))
+                if (audioOutputDevice.DisplayName.Contains("Default"))
                 {
-                    defaultAudioRenderer = audioOutputDevice.Name;
+                    defaultAudioRenderer = audioOutputDevice.DisplayName;
                 }
             }
 
@@ -215,7 +215,7 @@ namespace Simple_Video_Capture
                 cbVideoInputFormat.Items.Clear();
 
                 var deviceItem =
-                    (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                    (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -240,7 +240,7 @@ namespace Simple_Video_Capture
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString());
+                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -277,7 +277,7 @@ namespace Simple_Video_Capture
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutputDevice.Text).First(); 
+            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First(); 
 
             if (cbRecordAudio.IsChecked == true)
             {
@@ -297,7 +297,7 @@ namespace Simple_Video_Capture
             var format = cbVideoInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -322,7 +322,7 @@ namespace Simple_Video_Capture
             format = cbAudioInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -508,7 +508,7 @@ namespace Simple_Video_Capture
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.Name == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;

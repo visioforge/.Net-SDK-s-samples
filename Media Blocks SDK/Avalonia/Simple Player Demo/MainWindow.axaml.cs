@@ -154,7 +154,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             var cbAudioOutputItems = new ObservableCollection<string>();
             foreach (var device in AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound).Result)
             {
-                cbAudioOutputItems.Add(device.Name);
+                cbAudioOutputItems.Add(device.DisplayName);
             }
 
             cbAudioOutput.Items = cbAudioOutputItems;

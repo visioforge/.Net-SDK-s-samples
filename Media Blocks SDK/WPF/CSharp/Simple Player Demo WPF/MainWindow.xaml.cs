@@ -63,7 +63,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             {
                 foreach (var item in audioOutputDevices)
                 {
-                    cbAudioOutput.Items.Add(item.Name);
+                    cbAudioOutput.Items.Add(item.DisplayName);
                 }
 
                 cbAudioOutput.SelectedIndex = 0;
@@ -100,7 +100,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
-            _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutput.Text).First());
+            _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 

@@ -149,8 +149,9 @@ namespace Screen_Capture_MB_WPF
 
             if (cbRecordAudio.IsChecked == true)
             {
-                _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(cbAudioInputDevice.Text));
-                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.Name == cbAudioOutputDevice.Text).First());
+                var audioInputDevice = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioInputDevice.Text).First();
+                _audioInput = new SystemAudioSourceBlock(new DSAudioCaptureDeviceSourceSettings(audioInputDevice, null));
+                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First());
             }
 
             if (rbPreview.IsChecked == true)
@@ -245,7 +246,7 @@ namespace Screen_Capture_MB_WPF
 
             foreach (var device in await SystemAudioSourceBlock.GetDevicesAsync(_deviceEnumerator, AudioCaptureDeviceAPI.DirectSound))
             {
-                cbAudioInputDevice.Items.Add(device.Name);
+                cbAudioInputDevice.Items.Add(device.DisplayName);
             }
 
             if (cbAudioInputDevice.Items.Count > 0)
