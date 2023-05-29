@@ -1,0 +1,72 @@
+﻿<Window x:Class="Multiple_Audio_Tracks_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Multiple_Audio_Tracks_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="Video Edit SDK .Net - Multiple Audio Tracks Demo" Height="436" Width="800" Icon="visioforge_main_icon.ico"
+        Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="10,10,0,0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <TextBlock Text="Video file"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="edVideoFile" Width="350" Margin="0,0,10,0" Text="c:\Samples\!video.avi"/>
+                    <Button Content="..." Width="20" Click="btOpenVideoFile_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <TextBlock Text="Audio file 1"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="edAudioFile1" Width="350" Margin="0,0,10,0" Text="c:\Samples\!audio.mp3"/>
+                    <Button Content="..." Width="20" Click="btOpenAudioFile1_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <TextBlock Text="Audio file 2"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="edAudioFile2" Width="350" Margin="0,0,10,0" Text="c:\Samples\!audio.wav"/>
+                    <Button Content="..." Width="20" Click="btOpenAudioFile2_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <TextBlock Text="Output file"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <TextBox x:Name="edOutputFile" Width="350" Margin="0,0,10,0" Text="output.mp4"/>
+                    <Button Content="..." Width="20" Click="btSelectOutputFile_Click"/>
+                </StackPanel>
+
+                <TextBlock Margin="0,10,0,0" Text="MP4 output format with default settings will be used"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,10,0,0">
+                <TextBlock Text="Error log"/>
+             
+                <TextBox x:Name="edLog" Width="380" Height="150" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </StackPanel>
+
+        <wpf:VideoView x:Name="videoView" Grid.Column="1" Width="380" Height="260" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,0" />
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10,280,10,0" VerticalAlignment="Top">
+            <Button x:Name="btStart" Width="50" Content="Start" Click="btStart_Click"/>
+            <Button x:Name="btStop" Width="50" Content="Stop" Margin="10,0,0,0" Click="btStop_Click"/>
+            <ProgressBar x:Name="pbProgress"  Width="260" Height="20" Margin="10,0,0,0"/>
+        </StackPanel>
+        
+
+    </Grid>
+</Window>

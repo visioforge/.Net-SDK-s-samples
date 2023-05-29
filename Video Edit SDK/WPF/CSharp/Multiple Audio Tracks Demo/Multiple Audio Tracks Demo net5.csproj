@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <PlatformTarget>x64</PlatformTarget>
+    <RootNamespace>Multiple_Audio_Tracks_Demo</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.76" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

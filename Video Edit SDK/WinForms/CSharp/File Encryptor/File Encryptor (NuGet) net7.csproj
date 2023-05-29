@@ -8,10 +8,10 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.75" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.75" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.5.75" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.75" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.75" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.76" />
   </ItemGroup>
 </Project>

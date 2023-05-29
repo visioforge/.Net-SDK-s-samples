@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File Encryptor net5", "WinF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Extractor net5", "WinForms\CSharp\Audio Extractor\Audio Extractor net5.csproj", "{3B7C8236-12D1-4BCF-BA51-64E652990C0C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Audio Tracks Demo net5", "WPF\CSharp\Multiple Audio Tracks Demo\Multiple Audio Tracks Demo net5.csproj", "{9959617A-6148-4E1B-B1D6-EBF064F3C94F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,14 @@ Global
 		{3B7C8236-12D1-4BCF-BA51-64E652990C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B7C8236-12D1-4BCF-BA51-64E652990C0C}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B7C8236-12D1-4BCF-BA51-64E652990C0C}.Release|x86.Build.0 = Release|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Debug|x86.Build.0 = Debug|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +131,7 @@ Global
 		{8FAFA52C-9BE5-4D7A-8279-8A0C7B3B59C6} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{65022A77-DD85-4748-BC95-51FC84898F2F} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{3B7C8236-12D1-4BCF-BA51-64E652990C0C} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{9959617A-6148-4E1B-B1D6-EBF064F3C94F} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

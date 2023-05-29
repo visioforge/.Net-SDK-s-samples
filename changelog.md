@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.76
+* [Video Edit SDK .Net] Added Multiple Audio Tracks Demo (WPF)
+* [Video Edit SDK .Net] Updated MP4 output for multiple audio tracks
+
 ## 15.5.75
 
 * [Cross-platform SDKs] Updated device enumerator
