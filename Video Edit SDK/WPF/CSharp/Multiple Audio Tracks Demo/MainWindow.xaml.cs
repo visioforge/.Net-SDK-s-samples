@@ -81,7 +81,7 @@ namespace Multiple_Audio_Tracks_Demo
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
-        private void VideoEdit1_OnStop(object? sender, StopEventArgs e)
+        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher?.Invoke(() => {
                 pbProgress.Value = 0;
@@ -111,7 +111,7 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
-        private void VideoEdit1_OnProgress(object? sender, ProgressEventArgs e)
+        private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Dispatcher?.Invoke(() => { pbProgress.Value = e.Progress; });
         }
