@@ -63,7 +63,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.1.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.76" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.76" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.77" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.5.77" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{06
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo X WPF netcore31", "WPF\Simple Player Demo\Simple Player Demo X WPF netcore31.csproj", "{ED8D9FD7-4873-4EF3-B9C8-479B55622EC0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Output Player Demo X netcore31", "WPF\Decklink Output Player Demo\Decklink Output Player Demo X netcore31.csproj", "{B617C702-883D-45BA-A9BF-3832AB062E36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,14 @@ Global
 		{ED8D9FD7-4873-4EF3-B9C8-479B55622EC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED8D9FD7-4873-4EF3-B9C8-479B55622EC0}.Release|x64.ActiveCfg = Release|Any CPU
 		{ED8D9FD7-4873-4EF3-B9C8-479B55622EC0}.Release|x64.Build.0 = Release|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Debug|x64.Build.0 = Debug|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Release|x64.ActiveCfg = Release|Any CPU
+		{B617C702-883D-45BA-A9BF-3832AB062E36}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +63,7 @@ Global
 		{DABA9589-73B1-4B46-89AC-32228B54DB12} = {06EFF40A-FF02-41EA-A57B-9EC3DDD2C64C}
 		{01D2DE87-B1B4-4E8B-AA01-0CF934634EA8} = {06EFF40A-FF02-41EA-A57B-9EC3DDD2C64C}
 		{ED8D9FD7-4873-4EF3-B9C8-479B55622EC0} = {C45D7C26-B274-44DB-B35E-E0FF570A150A}
+		{B617C702-883D-45BA-A9BF-3832AB062E36} = {C45D7C26-B274-44DB-B35E-E0FF570A150A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

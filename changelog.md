@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.77
+* [Media Player SDK .Net] MediaPlayerCoreX: Added Custom_Video_Outputs/Custom_Audio_Outputs properties to set custom video/audio renderers
+* [Media Player SDK .Net] MediaPlayerCoreX: Added Decklink Output Player Demo (WPF)
+
 ## 15.5.76
 * [Video Edit SDK .Net] Added Multiple Audio Tracks Demo (WPF)
 * [Video Edit SDK .Net] Updated MP4 output for multiple audio tracks
