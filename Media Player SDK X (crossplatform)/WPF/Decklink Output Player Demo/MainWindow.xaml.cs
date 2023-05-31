@@ -5,12 +5,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks.Decklink;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.VideoEffects;
 
 namespace Decklink_Player_Demo_X
 {
@@ -76,6 +79,13 @@ namespace Decklink_Player_Demo_X
             {
                 cbDecklinkAudioOutput.SelectedIndex = 0;
             }
+
+            foreach (var name in Enum.GetNames(typeof(DecklinkMode)))
+            {
+                cbDecklinkVideoMode.Items.Add(name);
+            }
+
+            cbDecklinkVideoMode.SelectedIndex = 10;
         }
 
         private void Player_OnError(object sender, ErrorsEventArgs e)
@@ -172,16 +182,27 @@ namespace Decklink_Player_Demo_X
             if (cbDecklinkVideoOutput.Items.Count > 0)
             {
                 var device = (await _deviceEnumerator.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
-                var videoOutput = new DecklinkVideoSinkBlock(new DecklinkVideoSinkSettings(device));
+                var videoSettings = new DecklinkVideoSinkSettings(device);
+                
+                videoSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
+
+                if (cbDecklinkVideoOutputResize.IsChecked == true)
+                {
+                    DecklinkHelper.GetVideoInfoFromMode(videoSettings.Mode, out var width, out var height, out var framerate);
+                    videoSettings.CustomVideoSize = new ResizeVideoEffect(width, height);
+                    videoSettings.CustomFrameRate = framerate;
+                }
+
+                var videoOutput = new DecklinkVideoSinkBlock(videoSettings);
                 _player.Custom_Video_Outputs.Add(videoOutput);
             }
 
-            if (cbDecklinkAudioOutput.Items.Count > 0)
-            {
-                var device = (await _deviceEnumerator.DecklinkAudioSinksAsync()).First(x => x.Name == cbDecklinkAudioOutput.Text);
-                var audioOutput = new DecklinkAudioSinkBlock(new DecklinkAudioSinkSettings(device));
-                _player.Custom_Audio_Outputs.Add(audioOutput);
-            }
+            //if (cbDecklinkAudioOutput.Items.Count > 0)
+            //{
+            //    var device = (await _deviceEnumerator.DecklinkAudioSinksAsync()).First(x => x.Name == cbDecklinkAudioOutput.Text);
+            //    var audioOutput = new DecklinkAudioSinkBlock(new DecklinkAudioSinkSettings(device));
+            //    _player.Custom_Audio_Outputs.Add(audioOutput);
+            //}
 
             await _player.OpenAsync(new Uri(edFilename.Text));
 

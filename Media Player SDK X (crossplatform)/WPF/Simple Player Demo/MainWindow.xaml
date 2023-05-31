@@ -22,7 +22,7 @@
         <Button x:Name="btPause" Content="Pause" HorizontalAlignment="Left" Margin="126,328,0,0" VerticalAlignment="Top" Width="53" Click="btPause_Click"/>
         <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="184,328,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="343,143,0,0" TextWrapping="Wrap" Text="Output device" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="343,143,0,0" TextWrapping="Wrap" Text="Audio output device" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Left" Margin="343,159,0,0" VerticalAlignment="Top" Width="220"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="343,193,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
