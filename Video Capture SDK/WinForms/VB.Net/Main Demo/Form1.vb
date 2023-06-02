@@ -383,13 +383,12 @@ Public Class Form1
         cbDVBCModulation.SelectedIndex = 4
 
         ' Decklink
-        For Each device As DecklinkDeviceInfo In VideoCapture1.Decklink_CaptureDevices
+        For Each device As DecklinkDeviceInfo In Await VideoCapture1.Decklink_CaptureDevicesAsync
             cbDecklinkCaptureDevice.Items.Add(device.Name)
         Next
 
         If (cbDecklinkCaptureDevice.Items.Count > 0) Then
             cbDecklinkCaptureDevice.SelectedIndex = 0
-            cbDecklinkCaptureDevice_SelectedIndexChanged(Nothing, Nothing)
         End If
 
         btVirtualCameraRegister.Enabled = Not VideoCapture1.DirectShow_Filters.Contains("VisioForge Virtual Camera")
@@ -4074,13 +4073,13 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cbDecklinkCaptureDevice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDecklinkCaptureDevice.SelectedIndexChanged
+    Private Async Sub cbDecklinkCaptureDevice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDecklinkCaptureDevice.SelectedIndexChanged
 
         cbDecklinkCaptureVideoFormat.Items.Clear()
 
-        Dim deviceItem = (From device In VideoCapture1.Decklink_CaptureDevices Where device.Name = cbDecklinkCaptureDevice.Text)?.FirstOrDefault()
+        Dim deviceItem = (From device In Await VideoCapture1.Decklink_CaptureDevicesAsync Where device.Name = cbDecklinkCaptureDevice.Text)?.FirstOrDefault()
         If Not IsNothing(deviceItem) Then
-            Dim formats = deviceItem.VideoFormats
+            Dim formats = Await deviceItem.GetVideoFormatsAsync
 
             For Each format As DecklinkVideoFormat In formats
 

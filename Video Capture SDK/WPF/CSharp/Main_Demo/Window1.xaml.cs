@@ -440,30 +440,18 @@ namespace Main_Demo
 
             cbAudEqualizerPreset.SelectedIndex = 0;
 
-            // Decklink enumerating can be slow. We'll run it in an independent thread.
-#pragma warning disable CS4014 
-            Task.Run(AddDecklinkSources);
-#pragma warning restore CS4014 
+            foreach (var device in await VideoCapture1.Decklink_CaptureDevicesAsync())
+            {
+                cbDecklinkCaptureDevice.Items.Add(device.Name);
+            }
+
+            if (cbDecklinkCaptureDevice.Items.Count > 0)
+            {
+                cbDecklinkCaptureDevice.SelectedIndex = 0;
+                cbDecklinkCaptureDevice_SelectionChanged(null, null);
+            }
 
             btVirtualCameraRegister.IsEnabled = !VideoCapture1.DirectShow_Filters().Contains("VisioForge Virtual Camera");
-        }
-
-        private void AddDecklinkSources()
-        {
-            var devices = VideoCapture1.Decklink_CaptureDevices();
-            Dispatcher.Invoke((Action)(() =>
-            {
-                foreach (var device in devices)
-                {
-                    cbDecklinkCaptureDevice.Items.Add(device.Name);
-                }
-
-                if (cbDecklinkCaptureDevice.Items.Count > 0)
-                {
-                    cbDecklinkCaptureDevice.SelectedIndex = 0;
-                    cbDecklinkCaptureDevice_SelectionChanged(null, null);
-                }
-            }));
         }
 
         private async void cbVideoInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
@@ -4513,7 +4501,7 @@ namespace Main_Demo
             }
         }
 
-        private void cbDecklinkCaptureDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbDecklinkCaptureDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string value;
             if (cbDecklinkCaptureDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -4527,10 +4515,10 @@ namespace Main_Demo
 
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = VideoCapture1.Decklink_CaptureDevices().FirstOrDefault(device => device.Name == value);
+            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).FirstOrDefault(device => device.Name == value);
             if (deviceItem != null)
             {
-                foreach (var format in deviceItem.VideoFormats)
+                foreach (var format in (await deviceItem.GetVideoFormatsAsync()))
                 {
                     cbDecklinkCaptureVideoFormat.Items.Add(format.Name);
                 }

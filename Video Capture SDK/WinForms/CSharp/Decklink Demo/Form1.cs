@@ -71,7 +71,7 @@ namespace Decklink_Demo
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
 
@@ -114,7 +114,7 @@ namespace Decklink_Demo
                 }
             }
 
-            foreach (var device in VideoCapture1.Decklink_CaptureDevices())
+            foreach (var device in (await VideoCapture1.Decklink_CaptureDevicesAsync()))
             {
                 cbDecklinkCaptureDevice.Items.Add(device.Name);
             }
@@ -122,7 +122,6 @@ namespace Decklink_Demo
             if (cbDecklinkCaptureDevice.Items.Count > 0)
             {
                 cbDecklinkCaptureDevice.SelectedIndex = 0;
-                cbDecklinkCaptureDevice_SelectedIndexChanged(null, null);
             }
 
             VideoCapture1.Video_Renderer_SetAuto();
@@ -796,14 +795,14 @@ namespace Decklink_Demo
             }
         }
 
-        private void cbDecklinkCaptureDevice_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cbDecklinkCaptureDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = VideoCapture1.Decklink_CaptureDevices().FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
-                foreach (var format in deviceItem.VideoFormats)
+                foreach (var format in (await deviceItem.GetVideoFormatsAsync()))
                 {
                     cbDecklinkCaptureVideoFormat.Items.Add(format.Name);
                 }
