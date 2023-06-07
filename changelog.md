@@ -1,9 +1,13 @@
 # Changelog
 
+## 15.5.80
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with OnAudioFrameBuffer event. 
+
 ## 15.5.78
 
 * [Video Capture SDK .Net] Decklink source changed to improve startup speed. Decklink_CaptureDevices method has been replaced by async Decklink_CaptureDevicesAsync.
-* 
+
 ## 15.5.77
 * [Media Player SDK .Net] MediaPlayerCoreX: Added Custom_Video_Outputs/Custom_Audio_Outputs properties to set custom video/audio renderers
 * [Media Player SDK .Net] MediaPlayerCoreX: Added Decklink Output Player Demo (WPF)
