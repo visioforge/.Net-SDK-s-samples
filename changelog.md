@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.5.81
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with multiple outputs used. 
+
 ## 15.5.80
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with OnAudioFrameBuffer event. 
