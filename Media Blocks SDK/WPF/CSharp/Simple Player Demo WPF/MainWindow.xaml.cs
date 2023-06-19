@@ -19,7 +19,9 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Libs.DirectShowLib;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace MediaBlocks_Simple_Player_Demo_WPF
@@ -84,6 +86,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
         {
             Dispatcher.Invoke((Action)(() =>
             {
+                _timer.Stop();
                 tbTimeline.Value = 0;
             }));
         }
@@ -98,6 +101,9 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _fileSource = new UniversalSourceBlock(new Uri(edFilename.Text));
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+            //VideoView1.SetNativeRendering(true);            
+
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
             _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
@@ -160,31 +166,9 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
             await CreateEngineAsync();
 
-            //_pipeline.Loop = cbLoop.Checked;
-            //_pipeline.Audio_PlayAudio = true;
-            //_pipeline.Info_UseLibMediaInfo = true;
-            //_pipeline.Audio_OutputDevice = "Default DirectSound Device";
-
-            //if (FilterHelpers.Filter_Supported_EVR())
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            //}
-            //else if (FilterHelpers.Filter_Supported_VMR9())
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            //}
-            //else
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            //}
-
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
 
             await _pipeline.StartAsync();
-
-            // set audio volume for each stream
-            // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
             _timer.Start();
         }

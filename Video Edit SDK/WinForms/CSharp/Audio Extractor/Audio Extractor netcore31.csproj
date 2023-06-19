@@ -14,7 +14,7 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.81" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.81" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.82" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.82" />
   </ItemGroup>
 </Project>

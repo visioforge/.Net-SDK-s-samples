@@ -78,7 +78,7 @@ namespace Simple_Video_Capture
             {
                 vumeter.Amplitude = (float)e.MeterData.Peak[0];
                 vumeter.Update();
-                Debug.WriteLine($"VU: {e.MeterData.Peak[0]}");
+                //Debug.WriteLine($"VU: {e.MeterData.Peak[0]}");
             });
         }
 

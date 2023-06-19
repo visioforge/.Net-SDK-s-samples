@@ -2126,24 +2126,25 @@ namespace VideoCapture_CSharp_Demo
                 case 0:
                     {
                         VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.WMV;
+                        WMVOutput wmvOutput;
 
                         if (rbNetworkStreamingUseMainWMVSettings.Checked)
                         {
-                            var wmvOutput = new WMVOutput();
-                            SetWMVOutput(ref wmvOutput);
-                            VideoCapture1.Network_Streaming_Output = wmvOutput;
+                            wmvOutput = new WMVOutput();
+                            SetWMVOutput(ref wmvOutput);                            
                         }
                         else
                         {
-                            var wmvOutput = new WMVOutput
+                            wmvOutput = new WMVOutput
                             {
                                 Mode = WMVMode.ExternalProfile,
                                 External_Profile_FileName = edNetworkStreamingWMVProfile.Text
                             };
-                            VideoCapture1.Network_Streaming_Output = wmvOutput;
                         }
 
-                        VideoCapture1.Network_Streaming_WMV_Maximum_Clients = Convert.ToInt32(edMaximumClients.Text);
+                        wmvOutput.Network_Streaming_WMV_Maximum_Clients = Convert.ToInt32(edMaximumClients.Text);
+                        VideoCapture1.Network_Streaming_Output = wmvOutput;
+
                         VideoCapture1.Network_Streaming_Network_Port = Convert.ToInt32(edWMVNetworkPort.Text);
 
                         break;

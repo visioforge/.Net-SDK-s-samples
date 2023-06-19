@@ -24,6 +24,7 @@ namespace Main_Demo
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.Output;
     using System.Threading.Tasks;
+    using VisioForge.Core.MediaBlocks;
 
     public partial class Form1 : Form
     {
@@ -346,8 +347,9 @@ namespace Main_Demo
 
             tbSpeed.Value = 10;
             _player.Debug_Mode = cbDebugMode.Checked;
+            _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _player.Audio_Play = cbPlayAudio.Checked;
-            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.Text);
+            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
 
             //_player.Segment_Start = TimeSpan.FromMilliseconds(12000);

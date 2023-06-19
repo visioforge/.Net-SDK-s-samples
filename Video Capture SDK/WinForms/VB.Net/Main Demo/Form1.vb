@@ -1713,18 +1713,18 @@ Public Class Form1
             Case 0
                 VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.WMV
 
+                Dim wmvOutput As WMVOutput = New WMVOutput()
                 If (rbNetworkStreamingUseMainWMVSettings.Checked) Then
-                    Dim wmvOutput As WMVOutput = New WMVOutput()
                     SetWMVOutput(wmvOutput)
-                    VideoCapture1.Network_Streaming_Output = wmvOutput
                 Else
-                    Dim wmvOutput As WMVOutput = New WMVOutput()
                     wmvOutput.Mode = WMVMode.ExternalProfile
                     wmvOutput.External_Profile_FileName = edNetworkStreamingWMVProfile.Text
                     VideoCapture1.Network_Streaming_Output = wmvOutput
                 End If
 
-                VideoCapture1.Network_Streaming_WMV_Maximum_Clients = Convert.ToInt32(edMaximumClients.Text)
+                wmvOutput.Network_Streaming_WMV_Maximum_Clients = Convert.ToInt32(edMaximumClients.Text)
+                VideoCapture1.Network_Streaming_Output = wmvOutput
+
                 VideoCapture1.Network_Streaming_Network_Port = Convert.ToInt32(edWMVNetworkPort.Text)
             Case 1
                 VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW

@@ -1,0 +1,109 @@
+﻿<Window x:Class="IP_Capture.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="IP Capture Demo - Video Capture SDK .Net" Height="458.476" Width="1041.571" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        Icon="visioforge_main_icon.ico" Closing="Window_Closing">
+    <Grid>
+        <TabControl Margin="7,7,0,0" Name="tcMain" Height="379" VerticalAlignment="Top" HorizontalAlignment="Left" Width="540" Grid.ColumnSpan="2">
+            <TabItem Header="Input" IsSelected="True">
+                <Grid>
+                    <TabControl HorizontalAlignment="Left" Height="331" Margin="10,10,0,0" VerticalAlignment="Top" Width="514">
+                        <TabItem Header="Main">
+                            <Grid>
+                                <Label Content="URL" Height="23" HorizontalAlignment="Left" Margin="16,10,0,0" Name="label220" VerticalAlignment="Top" Width="55" />
+
+                                <Label Content="Engine" Height="35" HorizontalAlignment="Left" Margin="20,67,0,0" Name="label223" VerticalAlignment="Top" Width="55" />
+                                <CheckBox Content="Capture audio" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="350,85,0,0" Name="cbIPAudioCapture" VerticalAlignment="Top" Width="107" />
+                                <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="16,102,0,0" Name="label221" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="20,126,0,0" Name="edIPLogin" VerticalAlignment="Top" Width="150" Text="admin" />
+                                <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="187,102,0,0" Name="label222" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="185,126,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" Text="dancer23" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="71,70,0,0" Name="cbIPCameraType" VerticalAlignment="Top" Width="264">
+                                    <ComboBoxItem Content="Auto" />
+                                    <ComboBoxItem Content="RTSP" />
+                                    <ComboBoxItem Content="NDI (URL)" />
+                                    <ComboBoxItem Content="NDI (Name)" />
+                                </ComboBox>
+                                <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="350,65,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="350,106,0,0" VerticalAlignment="Top"/>
+                                <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.50.64/onvif/device_service" IsEditable="True"/>
+                                <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="20,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
+                                <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="137,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="ONVIF">
+                            <Grid>
+                                <Button x:Name="btONVIFConnect" Content="Connect" HorizontalAlignment="Left" Margin="423,10,0,0" VerticalAlignment="Top" Width="75" Click="btONVIFConnect_Click"/>
+                                <GroupBox Header="PTZ" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Height="122" Width="488">
+                                    <Grid>
+                                        <Button x:Name="btONVIFUp" Content="Up" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Width="69" Click="btONVIFUp_Click"/>
+                                        <Button x:Name="btONVIFDown" Content="Down" HorizontalAlignment="Left" Margin="42,72.96,0,0" VerticalAlignment="Top" Width="69" Click="btONVIFDown_Click"/>
+                                        <Button x:Name="btONVIFLeft" Content="L" HorizontalAlignment="Left" Margin="11,11,0,0" VerticalAlignment="Top" Width="26" Height="81.92" Click="btONVIFLeft_Click"/>
+                                        <Button x:Name="btONVIFRight" Content="R" HorizontalAlignment="Left" Margin="116,11,0,0" VerticalAlignment="Top" Width="26" Height="81.92" Click="btONVIFRight_Click"/>
+                                        <Button x:Name="btONVIFZoomIn" Content="+" HorizontalAlignment="Left" Margin="42,35.96,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btONVIFZoomIn_Click"/>
+                                        <Button x:Name="btONVIFZoomOut" Content="-" HorizontalAlignment="Left" Margin="79,35.96,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btONVIFZoomOut_Click"/>
+                                        <Button x:Name="btONVIFPTZSetDefault" Content="Set default position" HorizontalAlignment="Left" Margin="179,36,0,0" VerticalAlignment="Top" Width="153" Click="btONVIFPTZSetDefault_Click"/>
+                                    </Grid>
+                                </GroupBox>
+                                <Label x:Name="lbONVIFCameraInfo" Content="Status: None" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Profile" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
+                                <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.50.64/onvif/device_service" VerticalAlignment="Top" Width="408"/>
+                                <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="admin" />
+                                <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" Text="dancer23" />
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem IsSelected="True" Header="Output" >
+                <Grid>
+                    <Label Content="Format" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" />
+                    <ComboBox Height="23" Margin="10,33,0,0" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" SelectionChanged="cbOutputFormat_SelectionChanged">
+                        <ComboBoxItem Content="MP4" />
+                        <ComboBoxItem Content="AVI" />
+                        <ComboBoxItem Content="WebM" />
+                        <ComboBoxItem Content="MPEG-TS" />
+                        <ComboBoxItem Content="MOV" />
+                    </ComboBox>
+                    <CheckBox Content="Record audio" Height="16" HorizontalAlignment="Left" Margin="10,127,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="109" />
+                    <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,148,0,0" x:Name="label22" VerticalAlignment="Top" Width="62" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="485" Text="c:\capture.avi" />
+                    <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,176,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
+                    <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="btOutputConfigure_Click"/>
+                    <Label Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
+
+                    <Label HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" Width="120">Audio output device</Label>
+                    <ComboBox Margin="10,289,36,0" Width="300" Name="cbAudioOutputDevice" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                </Grid>
+            </TabItem>           
+            <TabItem Header="Log" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Grid>
+                    <TextBox Margin="10,31,10,0" Name="mmLog" TextWrapping="Wrap" Height="310" VerticalAlignment="Top" />
+                    <CheckBox Height="16" HorizontalAlignment="Right" Margin="0,10,432,0" Name="cbDebugMode" VerticalAlignment="Top" Width="92">Debug Mode</CheckBox>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="10,0,0,10" Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True">Preview</RadioButton>
+        <RadioButton Height="16" HorizontalAlignment="Left" Margin="104,0,0,10" Name="rbCapture" VerticalAlignment="Bottom" Width="112">Capture</RadioButton>
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,399,10" Name="btStart" VerticalAlignment="Bottom" Width="75" Click="btStart_Click" FontWeight="Bold">Start</Button>
+        <Button HorizontalAlignment="Right" Margin="0,0,319,10" Name="btStop" Width="75" Click="btStop_Click" Height="23" VerticalAlignment="Bottom" FontWeight="Bold">Stop</Button>
+        <Label Content="Video tutorial" Height="26" Margin="0,0,9,0" Name="label11" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Foreground="#FF0035BC"
+               FontWeight="Bold" MouseUp="llVideoTutorials_LinkClicked" Grid.Column="1" />
+
+        <my:VideoView Margin="560,31,10,41" Background="Black" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+        <Label Content="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,0,122,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="279,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
+        <Button Content="Resume" Margin="0,0,133,10" x:Name="btResume" Click="btResume_Click"  Grid.Column="1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
+        <Button Content="Pause" Margin="0,0,196,10" x:Name="btPause" Click="btPause_Click"  Grid.Column="1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
+        <Button Content="Save snapshot" IsDefault="False" IsEnabled="True" Margin="0,0,10,10" x:Name="btSaveScreenshot_Copy" Click="btSaveScreenshot_Click" Grid.Column="1" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="118" />
+    </Grid>
+</Window>

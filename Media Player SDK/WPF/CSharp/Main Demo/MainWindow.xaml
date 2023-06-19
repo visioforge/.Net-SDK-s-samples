@@ -742,6 +742,6 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-        <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="304" Margin="407,171,0,0" VerticalAlignment="Top" Width="411"/>
+        <wpf:VideoView x:Name="VideoView1" Margin="407,171,25,311"/>
     </Grid>
 </Window>

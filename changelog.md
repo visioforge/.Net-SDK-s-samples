@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.5.82
+
+* [Video Capture SDK .Net] VideoCaptureCore: Network_Streaming_WMV_Maximum_Clients property moved to WMVOutput class. You can set the maximum number of clients for network WMV output.
+* [All] Updated WPF rendering. Improved performance for 4K and 8K videos.
+* 
 ## 15.5.81
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with multiple outputs used. 

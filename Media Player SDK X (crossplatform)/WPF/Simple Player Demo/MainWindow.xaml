@@ -10,22 +10,22 @@
     <Grid>
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="295"/>
-        <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="240" Margin="10,59,0,0" VerticalAlignment="Top" Width="320"/>
+        <WPF:VideoView x:Name="VideoView1" Margin="10,59,260,76"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="310,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
-        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="473,11,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Log" HorizontalAlignment="Left" Margin="343,5,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edLog" HorizontalAlignment="Left" Margin="343,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="98"/>
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="220" ValueChanged="tbTimeline_ValueChanged"/>
-        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="235,304,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
-        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,328,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click"/>
-        <Button x:Name="btResume" Content="Resume" HorizontalAlignment="Left" Margin="68,328,0,0" VerticalAlignment="Top" Width="53" Click="btResume_Click"/>
-        <Button x:Name="btPause" Content="Pause" HorizontalAlignment="Left" Margin="126,328,0,0" VerticalAlignment="Top" Width="53" Click="btPause_Click"/>
-        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="184,328,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click"/>
+        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Right" Margin="0,11,27,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Log" HorizontalAlignment="Right" Margin="0,5,217,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edLog" HorizontalAlignment="Right" Margin="0,35,27,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="98"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,53" VerticalAlignment="Bottom" Width="220" ValueChanged="tbTimeline_ValueChanged"/>
+        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="235,0,0,55" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Bottom"/>
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,27" VerticalAlignment="Bottom" Width="53" Click="btStart_Click"/>
+        <Button x:Name="btResume" Content="Resume" HorizontalAlignment="Left" Margin="68,0,0,27" VerticalAlignment="Bottom" Width="53" Click="btResume_Click"/>
+        <Button x:Name="btPause" Content="Pause" HorizontalAlignment="Left" Margin="126,0,0,27" VerticalAlignment="Bottom" Width="53" Click="btPause_Click"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="184,0,0,27" VerticalAlignment="Bottom" Width="53" Click="btStop_Click"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="343,143,0,0" TextWrapping="Wrap" Text="Audio output device" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Left" Margin="343,159,0,0" VerticalAlignment="Top" Width="220"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,143,139,0" TextWrapping="Wrap" Text="Audio output device" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Right" Margin="0,159,27,0" VerticalAlignment="Top" Width="220"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="343,193,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
-        <Slider x:Name="tbVolume" HorizontalAlignment="Left" Margin="343,206,0,0" VerticalAlignment="Top" Width="220" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,193,207,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
+        <Slider x:Name="tbVolume" HorizontalAlignment="Right" Margin="0,206,27,0" VerticalAlignment="Top" Width="220" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged"/>
     </Grid>
 </Window>

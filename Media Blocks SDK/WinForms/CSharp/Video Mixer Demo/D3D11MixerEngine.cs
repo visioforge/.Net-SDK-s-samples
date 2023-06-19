@@ -19,7 +19,7 @@ namespace MediaBlocks_Video_Mixer_Demo
     {
         private MediaBlocksPipeline _pipeline;
 
-        private D3D11VideoRendererBlock _videoRenderer;
+        private VideoRendererBlock _videoRenderer;
 
         private UniversalSourceBlock _source1;
 
@@ -47,8 +47,8 @@ namespace MediaBlocks_Video_Mixer_Demo
 
             _source1 = new UniversalSourceBlock(filename1);
             _source2 = new UniversalSourceBlock(filename2) { Name = "Source2" };
-
-            _videoRenderer = new D3D11VideoRendererBlock(videoView);
+            
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 
             _videoMixer = new D3D11VideoCompositorBlock(_settings);
 

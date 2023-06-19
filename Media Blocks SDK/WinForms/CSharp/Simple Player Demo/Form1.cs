@@ -214,6 +214,7 @@ namespace MediaBlocks_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
+                                       _tmPosition.Stop();
                                        tbTimeline.Value = 0;
                                    }));
         }
