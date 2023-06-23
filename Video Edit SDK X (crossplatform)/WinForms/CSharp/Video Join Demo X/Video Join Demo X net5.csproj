@@ -9,8 +9,8 @@
     <AssemblyTitle>Video Join Demo</AssemblyTitle>
     <Product>Video Join Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.82.0</AssemblyVersion>
-    <FileVersion>15.5.82.0</FileVersion>
+    <AssemblyVersion>15.5.83.0</AssemblyVersion>
+    <FileVersion>15.5.83.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,8 +61,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.82" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.82" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.83" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.83" />
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.1.3" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.1.3" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.1.3" />

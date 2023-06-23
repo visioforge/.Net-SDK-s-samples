@@ -161,7 +161,7 @@ namespace Audio_Capture_Demo_X_WPF
             }
 
             AudioCaptureDeviceFormat format = null;
-            var formats = deviceItem.Formats.Where(format => format.Name == cbAudioInputFormat.Text).ToList();
+            var formats = deviceItem.Formats.Where(fmt => fmt.Name == cbAudioInputFormat.Text).ToList();
             if (formats.Count > 0)
             {
                 format = formats[0].ToFormat();

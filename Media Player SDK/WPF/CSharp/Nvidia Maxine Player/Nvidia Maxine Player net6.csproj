@@ -8,8 +8,8 @@
     <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.82" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.82" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.83" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.83" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
