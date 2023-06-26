@@ -10,8 +10,8 @@
     <AssemblyTitle>multiple_ap_cams</AssemblyTitle>
     <Product>multiple_ap_cams</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.84.0</AssemblyVersion>
-    <FileVersion>15.5.84.0</FileVersion>
+    <AssemblyVersion>15.5.85.0</AssemblyVersion>
+    <FileVersion>15.5.85.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -59,10 +59,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.84" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.84" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.84" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.84" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.85" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.85" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.85" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.85" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
