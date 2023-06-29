@@ -10,6 +10,7 @@ using Microsoft.Maui.Storage;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using System;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 
 #if ANDROID
 using Android.Runtime;
@@ -61,7 +62,11 @@ namespace Simple_Player_MAUI
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
 
-            _player.Audio_OutputDevice = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result[0];
+            var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;
+            if (audioOutputs.Length > 0)
+            {
+                _player.Audio_OutputDevice = audioOutputs[0];
+            }            
 
             Window.Destroying += Window_Destroying;
         }
@@ -245,7 +250,12 @@ namespace Simple_Player_MAUI
                             return;
                         }
 
-                        await _player.OpenAsync(new Uri(_filename));
+                        await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(
+#if __ANDROID__
+                            Microsoft.Maui.ApplicationModel.Platform.CurrentActivity,
+#endif
+                            new Uri(_filename))
+                            );
                         await _player.PlayAsync();
 
                         _tmPosition.Start();

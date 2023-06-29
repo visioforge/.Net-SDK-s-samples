@@ -12,6 +12,7 @@ using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
 // ReSharper disable MemberCanBeMadeStatic.Local
 
@@ -225,7 +226,7 @@ namespace Simple_Video_Player_Avalonia
 
             _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(api)).FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
 
-            await _player.OpenAsync(new Uri(source));
+            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(source)));
             await _player.PlayAsync();
 
             _tmPosition.Start();

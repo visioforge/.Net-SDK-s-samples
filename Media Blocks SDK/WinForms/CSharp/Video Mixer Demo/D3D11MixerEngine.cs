@@ -11,6 +11,7 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
 
 namespace MediaBlocks_Video_Mixer_Demo
@@ -43,10 +44,10 @@ namespace MediaBlocks_Video_Mixer_Demo
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
         {
             _pipeline = new MediaBlocksPipeline(false);
-            _pipeline.OnError += _pipeline_OnError; ;
+            _pipeline.OnError += _pipeline_OnError; 
 
-            _source1 = new UniversalSourceBlock(filename1);
-            _source2 = new UniversalSourceBlock(filename2) { Name = "Source2" };
+            _source1 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename1));
+            _source2 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename2)) { Name = "Source2" };
             
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 

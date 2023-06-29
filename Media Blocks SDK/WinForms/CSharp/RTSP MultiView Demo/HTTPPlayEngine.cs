@@ -33,7 +33,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
-        public HTTPPlayEngine(DeviceEnumerator deviceEnumerator, string url, string login, string password, IVideoView videoView, bool audioEnabled)
+        public async Task CreateAsync(DeviceEnumerator deviceEnumerator, string url, string login, string password, IVideoView videoView, bool audioEnabled)
         {
             URL = url;
             Login = login;
@@ -55,7 +55,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 urix = new UriBuilder(uri1) { UserName = login, Password = password }.Uri.ToString();
             }
 
-            _source = new UniversalSourceBlock(urix);
+            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(urix)));
 
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 

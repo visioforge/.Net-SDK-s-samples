@@ -21,6 +21,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Libs.DirectShowLib;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -98,7 +99,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _fileSource = new UniversalSourceBlock(new Uri(edFilename.Text));
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 

@@ -93,7 +93,11 @@ namespace SkinnedPlayer_MAUI
             _player = new MediaPlayerCoreX(imgVideo);
 #endif
             _player.OnError += _player_OnError;
-            _player.Audio_OutputDevice = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound).Result[0];
+            var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;
+            if (audioOutputs.Length > 0)
+            {
+                _player.Audio_OutputDevice = audioOutputs[0];
+            }
 
             pbPanel.Player = _player;
 

@@ -16,6 +16,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
 
 namespace MediaBlocks_Simple_Player_Demo_Avalonia
@@ -200,7 +201,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
                 }
             }
 
-            _fileSource = new UniversalSourceBlock(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream);
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream));
 
             if (videoStream)
             {

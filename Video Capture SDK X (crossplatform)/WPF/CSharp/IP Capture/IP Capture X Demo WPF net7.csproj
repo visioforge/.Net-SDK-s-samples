@@ -10,8 +10,8 @@
     <Company>VisioForge</Company>
     <Product>IP Capture Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.85.0</AssemblyVersion>
-    <FileVersion>15.5.85.0</FileVersion>
+    <AssemblyVersion>15.5.86.0</AssemblyVersion>
+    <FileVersion>15.5.86.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
@@ -28,8 +28,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="1.22.1.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.85" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.85" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.5.86" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.86" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

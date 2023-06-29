@@ -166,13 +166,13 @@ namespace Video_Compositor_Demo
             }
         }
 
-        private void btAddFile_Click(object sender, RoutedEventArgs e)
+        private async void btAddFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
-                src.Source = new UniversalSourceBlock(dlg.FileName);
+                src.Source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(dlg.FileName));
                 src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
 
                 _sources.Add(src);

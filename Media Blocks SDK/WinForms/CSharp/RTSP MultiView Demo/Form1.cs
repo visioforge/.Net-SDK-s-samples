@@ -109,7 +109,8 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             if (cbUseMJPEG.Checked)
             {
-                _playEngines[id] = new HTTPPlayEngine(_deviceEnumerator, edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
+                _playEngines[id] = new HTTPPlayEngine();
+                await ((HTTPPlayEngine)_playEngines[id]).CreateAsync(_deviceEnumerator, edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
             }
             else
             {

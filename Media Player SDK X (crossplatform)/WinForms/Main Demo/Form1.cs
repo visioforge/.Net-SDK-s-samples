@@ -390,7 +390,7 @@ namespace Main_Demo
             }
             else
             {
-                var uniSource = new UniversalSourceSettings(new Uri(source));
+                var uniSource = await UniversalSourceSettings.CreateAsync(new Uri(source));
                 await _player.OpenAsync(uniSource);
             }
 

@@ -101,7 +101,7 @@ namespace MediaBlocks_Player_Demo
 
             _pipeline.Debug_Mode = cbDebugMode.Checked;
 
-            var mediaInfo = new MediaInfoReaderX();
+            var mediaInfo = new MediaInfoReaderX(_pipeline.GetContext());
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
@@ -117,7 +117,7 @@ namespace MediaBlocks_Player_Demo
                 }
             }
 
-            _fileSource = new UniversalSourceBlock(edFilename.Text, renderVideo: videoStream, renderAudio: audioStream);
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text), renderVideo: videoStream, renderAudio: audioStream));
 
             if (videoStream)
             {

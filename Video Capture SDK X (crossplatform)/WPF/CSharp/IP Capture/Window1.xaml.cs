@@ -132,7 +132,7 @@ namespace IP_Capture
                 }
                 else
                 {
-                    cbAudioOutputDevice.Text = defaultAudioRenderer;
+                    cbAudioOutputDevice.Text = defaultAudioRenderer;                                              
                 }
             }
 
@@ -187,11 +187,12 @@ namespace IP_Capture
 
             mmLog.Clear();
 
+            var audioEnabled = cbIPAudioCapture.IsChecked == true; 
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_Record = cbIPAudioCapture.IsChecked == true;
-            VideoCapture1.Audio_Play = cbIPAudioCapture.IsChecked == true;
+            VideoCapture1.Audio_Record = audioEnabled;
+            VideoCapture1.Audio_Play = audioEnabled;
             VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
 
             var login = edIPLogin.Text;
@@ -209,7 +210,7 @@ namespace IP_Capture
                             uri = new UriBuilder(uri) { UserName = login, Password = password }.Uri;
                         }
 
-                        var uni = new UniversalSourceSettings(uri, renderAudio: audio);
+                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio);
 
                         VideoCapture1.Video_Source = uni;
                     }
@@ -221,7 +222,7 @@ namespace IP_Capture
                         var rtsp = new RTSPSourceSettings(new Uri(cbIPURL.Text), cbIPAudioCapture.IsChecked == true);
                         rtsp.Login = edIPLogin.Text;
                         rtsp.Password = edIPPassword.Text;
-                        
+
                         VideoCapture1.Video_Source = rtsp;
                     }
 
@@ -265,11 +266,11 @@ namespace IP_Capture
                         {
                             if (mp4SettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new MP4Output(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new MP4Output(edOutput.Text), true);
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), false);
+                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), true);
                             }
 
                             break;
@@ -278,11 +279,11 @@ namespace IP_Capture
                         {
                             if (aviSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), true);
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(aviSettingsDialog.GetOutputVC(), false);
+                                VideoCapture1.Outputs_Add(aviSettingsDialog.GetOutputVC(), true);
                             }
 
                             break;
@@ -291,11 +292,11 @@ namespace IP_Capture
                         {
                             if (webMSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text), true);
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(webMSettingsDialog.GetOutputVC(), false);
+                                VideoCapture1.Outputs_Add(webMSettingsDialog.GetOutputVC(), true);
                             }
 
                             break;
@@ -304,11 +305,11 @@ namespace IP_Capture
                         {
                             if (mpegTSSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text), true);
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(mpegTSSettingsDialog.GetOutputVC(), false);
+                                VideoCapture1.Outputs_Add(mpegTSSettingsDialog.GetOutputVC(), true);
                             }
 
 
@@ -318,11 +319,11 @@ namespace IP_Capture
                         {
                             if (movSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text), true);
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(movSettingsDialog.GetOutputVC(), false);
+                                VideoCapture1.Outputs_Add(movSettingsDialog.GetOutputVC(), true);
                             }
 
                             break;
@@ -334,10 +335,10 @@ namespace IP_Capture
 
             await VideoCapture1.StartAsync();
 
-            if (rbCapture.IsChecked == true)
-            {
-                await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
-            }
+            //if (rbCapture.IsChecked == true)
+            //{
+            //    await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
+            //}
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();

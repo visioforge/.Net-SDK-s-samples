@@ -8,6 +8,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 
 namespace Simple_Player_Demo_X
 {
@@ -138,7 +139,7 @@ namespace Simple_Player_Demo_X
 
             _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
 
-            await _player.OpenAsync(new Uri(edFilename.Text));
+            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
             await _player.PlayAsync();
 

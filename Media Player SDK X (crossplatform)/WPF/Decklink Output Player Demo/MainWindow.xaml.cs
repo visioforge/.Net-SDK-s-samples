@@ -13,6 +13,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
 
 namespace Decklink_Player_Demo_X
@@ -204,7 +205,7 @@ namespace Decklink_Player_Demo_X
             //    _player.Custom_Audio_Outputs.Add(audioOutput);
             //}
 
-            await _player.OpenAsync(new Uri(edFilename.Text));
+            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
             await _player.PlayAsync();
 

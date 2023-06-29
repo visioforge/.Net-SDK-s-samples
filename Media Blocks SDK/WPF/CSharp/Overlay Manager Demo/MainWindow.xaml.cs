@@ -12,6 +12,7 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
+using VisioForge.Core.Types.X.Sources;
 
 namespace Overlay_Manager_Demo
 {
@@ -76,7 +77,7 @@ namespace Overlay_Manager_Demo
             _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _fileSource = new UniversalSourceBlock(edFilename.Text);
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 

@@ -13,7 +13,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 x:Name="imgVideo"
-                Background="Gray"/>
+                Background="Black"/>
 
             <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
                 <Slider 
@@ -36,6 +36,7 @@
                     x:Name="lbPosition" 
                     VerticalOptions="Center"
                     HorizontalOptions="Start"
+                    TextColor="White"
                     Margin="5, 0, 5, 0" />
 
                     <Label 
@@ -44,6 +45,7 @@
                     x:Name="lbFilename" 
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    TextColor="White"
                     Margin="0"
                     IsVisible="false" />
 
@@ -53,27 +55,49 @@
                     x:Name="lbDuration" 
                     VerticalOptions="Center"
                     HorizontalOptions="End"
+                    TextColor="White"
                     Margin="5, 0, 5, 0" />
                 </Grid>
 
-                <Grid
-                Margin="16,16,16,16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                <StackLayout 
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="16, 0, 5, 0">
 
-                    <StackLayout
+                    <Button  
+                        x:Name="btOpen"
+                        Text="OPEN FILE" 
+                        Margin="5" 
+                        VerticalOptions="Center" 
+                        Clicked="btOpen_Clicked" />
+
+                    <Button  
+                        x:Name="btPlayPause"   
+                        Text="PLAY" 
+                        Margin="5" 
+                        Clicked="btPlayPause_Clicked" />
+
+                    <Button  
+                        x:Name="btStop"   
+                        Text="STOP" 
+                        Margin="5" 
+                        Clicked="btStop_Clicked" />
+
+                </StackLayout>
+
+                <StackLayout
                     Grid.Column="0"
                     Orientation="Horizontal"
-                    HorizontalOptions="Start">
+                    HorizontalOptions="Start"
+                    Margin="16, 0, 5, 5" >
 
-                        <Label  
+                    <Label  
                         Text="Volume"
+                        TextColor="White"
                         VerticalOptions="Center" />
 
-                        <Slider 
+                    <Slider 
                         x:Name="slVolume"
                         HorizontalOptions="Fill"
                         Margin="15, 0, 5, 0"
@@ -84,48 +108,12 @@
                         VerticalOptions="Center"
                         ValueChanged="slVolume_ValueChanged" />
 
-                    </StackLayout>
-
-                    <StackLayout 
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    HorizontalOptions="Center">
-
-                        <Button  
-                        x:Name="btOpen"
-                        Text="OPEN FILE" 
-                        Margin="5" 
-                        VerticalOptions="Center" 
-                        Clicked="btOpen_Clicked" />
-
-                        <Button  
-                        x:Name="btPlayPause"   
-                        Text="PLAY" 
-                        Margin="5" 
-                        Clicked="btPlayPause_Clicked" />
-
-                        <Button  
-                        x:Name="btStop"   
-                        Text="STOP" 
-                        Margin="5" 
-                        Clicked="btStop_Clicked" />
-
-                    </StackLayout>
-
-                    <StackLayout 
-                    Grid.Column="2"
-                    Orientation="Horizontal"
-                    HorizontalOptions="End">
-
-                        <Button  
+                    <Button  
                         x:Name="btSpeed"                   
                         Margin="5,5,5,5" 
                         Text="SPEED: 1X"
                         Clicked="btSpeed_Clicked" />
-
-                    </StackLayout>
-                </Grid>
-
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ScrollView>
