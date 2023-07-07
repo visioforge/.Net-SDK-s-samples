@@ -207,7 +207,7 @@ namespace DVCapture
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat.SelectedValue.ToString());
                 if (videoFormat == null)
                 {
                     return;

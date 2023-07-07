@@ -230,8 +230,7 @@ namespace IP_Capture
                 case 2:
                     {
                         // NDI URL
-                        var ndiSettings = new NDISourceSettings();
-                        ndiSettings.URL = cbIPURL.Text;
+                        var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), null, cbIPURL.Text);
                         VideoCapture1.Video_Source = ndiSettings;
                     }
 
@@ -239,8 +238,7 @@ namespace IP_Capture
                 case 3:
                     {
                         // NDI Name
-                        var ndiSettings = new NDISourceSettings();
-                        ndiSettings.SourceName = cbIPURL.Text;
+                        var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), cbIPURL.Text, null);
                         VideoCapture1.Video_Source = ndiSettings;
                     }
 

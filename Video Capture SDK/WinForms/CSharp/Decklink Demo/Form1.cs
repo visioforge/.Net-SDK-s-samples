@@ -799,7 +799,7 @@ namespace Decklink_Demo
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).Find(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
                 foreach (var format in (await deviceItem.GetVideoFormatsAsync()))

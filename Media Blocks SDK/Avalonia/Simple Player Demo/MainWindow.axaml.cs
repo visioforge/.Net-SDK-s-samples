@@ -48,14 +48,14 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             MediaBlocksPipeline.InitSDK();
 
+            _deviceEnumerator = new DeviceEnumerator();
+            
             InitControls();
 
             Activated += MainWindow_Activated;
             Closing += MainWindow_Closing;
 
             DataContext = this;
-
-            _deviceEnumerator = new DeviceEnumerator();
         }
 
         private void CreateEngine()
@@ -153,9 +153,9 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             cbAudioOutput = this.FindControl<ComboBox>("cbAudioOutput");
 
             var cbAudioOutputItems = new ObservableCollection<string>();
-            foreach (var device in AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound).Result)
+            foreach (var device in AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.Default).Result)
             {
-                cbAudioOutputItems.Add(device.DisplayName);
+                cbAudioOutputItems.Add(device.Name);
             }
 
             cbAudioOutput.Items = cbAudioOutputItems;
@@ -211,7 +211,8 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
+                var audioOutputDevice = AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.Default).Result[cbAudioOutput.SelectedIndex];
+                _audioRenderer = new AudioRendererBlock(audioOutputDevice);
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 
@@ -226,7 +227,7 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
 
             tbTimeline.Value = 0;

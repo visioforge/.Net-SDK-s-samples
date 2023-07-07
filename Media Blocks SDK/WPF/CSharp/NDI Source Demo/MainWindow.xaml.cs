@@ -91,7 +91,8 @@ namespace NDI_Source_Demo
 
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            var ndiSettings = new NDISourceSettings(_ndiSources[cbNDISources.SelectedIndex]); 
+            var ndiSettings = await NDISourceSettings.CreateAsync(_pipeline.GetContext(), _ndiSources[cbNDISources.SelectedIndex]); 
+
             _ndiSource = new NDISourceBlock(ndiSettings);
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 

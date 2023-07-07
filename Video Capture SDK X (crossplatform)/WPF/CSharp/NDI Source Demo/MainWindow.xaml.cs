@@ -81,7 +81,7 @@ namespace NDI_Source_Demo
 
             _videoCapture.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            var ndiSettings = new NDISourceSettings(_ndiSources[cbNDISources.SelectedIndex]); 
+            var ndiSettings = await NDISourceSettings.CreateAsync(_videoCapture.GetContext(), _ndiSources[cbNDISources.SelectedIndex]); 
             _videoCapture.Video_Source = ndiSettings;
 
             await _videoCapture.StartAsync();

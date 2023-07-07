@@ -313,7 +313,7 @@ namespace multiple_ap_cams
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat1.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat1.Text);
                 if (videoFormat == null)
                 {
                     return;
@@ -347,7 +347,7 @@ namespace multiple_ap_cams
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat2.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat2.Text);
                 if (videoFormat == null)
                 {
                     return;

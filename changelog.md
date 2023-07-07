@@ -1,8 +1,11 @@
 # Changelog
 
+## 15.5.87
+* [Cross-platform SDKs] Updated Avalonia VideoView. Resolved issue with VideoView recreation.
+
 ## 15.5.86
 * [Media Player SDK .Net] MediaPlayerCoreX: Resolved startup issue with the Android version of the MediaPlayerCoreX engine.
-* 
+
 ## 15.5.84
 
 * [Media Player SDK .Net] MediaPlayerCore: Video_Stream_Index property has been replace to Video_Stream_Select/Video_Stream_SelectAsync methods.

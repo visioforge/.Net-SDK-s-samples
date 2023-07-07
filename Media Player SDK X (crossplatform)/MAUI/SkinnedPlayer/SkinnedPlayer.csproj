@@ -58,10 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.4" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.4" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.4" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.86" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.86" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.5.87" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.5.87" />
   </ItemGroup>
   <!--<ItemGroup>
 		<PackageReference Include="VisioForge.DotNet.Core" Version="15.4.23"/>

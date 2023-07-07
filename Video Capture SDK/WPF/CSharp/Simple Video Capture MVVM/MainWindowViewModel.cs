@@ -142,7 +142,7 @@ namespace Simple_Video_Capture
                     this.videoCaptureAccessor.Audio_CaptureDevice = new AudioCaptureSource(SelectedAudioInputDevice.Name);
 
                     SelectedAudioInputFormat =
-                        SelectedAudioInputDevice.Formats.FirstOrDefault(_ => _ == "PCM, 44100 Hz, 16 Bits, 2 Channels") ??
+                        SelectedAudioInputDevice.Formats.Find(_ => _ == "PCM, 44100 Hz, 16 Bits, 2 Channels") ??
                         SelectedAudioInputDevice.Formats.FirstOrDefault();
 
                     SelectedAudioInputLine = SelectedAudioInputDevice.Lines.FirstOrDefault();

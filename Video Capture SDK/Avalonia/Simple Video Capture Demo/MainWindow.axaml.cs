@@ -850,7 +850,7 @@ namespace Simple_Video_Capture_Demo_Avalonia
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.SelectedItem.ToString());
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat.SelectedItem.ToString());
                 if (videoFormat == null)
                 {
                     return;

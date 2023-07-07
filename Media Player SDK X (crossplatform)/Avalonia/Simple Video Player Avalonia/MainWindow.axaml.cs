@@ -117,7 +117,7 @@ namespace Simple_Video_Player_Avalonia
             AudioOutputDeviceInfo[] audioOutputs;
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                audioOutputs = await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
+                audioOutputs = await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default);
             }
             else
             {
@@ -218,13 +218,8 @@ namespace Simple_Video_Player_Avalonia
             _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
 
-            AudioOutputDeviceAPI? api = null;
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                api = AudioOutputDeviceAPI.DirectSound;
-            }
-
-            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(api)).FirstOrDefault(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
+            AudioOutputDeviceAPI? api = AudioOutputDeviceAPI.Default;
+            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(api)).First(device => device.ToString() == cbAudioOutputDevice.SelectedItem.ToString());
 
             await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(source)));
             await _player.PlayAsync();

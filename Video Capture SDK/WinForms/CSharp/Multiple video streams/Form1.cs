@@ -232,7 +232,7 @@ namespace multiple_video_streams
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat1.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoFormat1.Text);
                 if (videoFormat == null)
                 {
                     return;
@@ -266,7 +266,7 @@ namespace multiple_video_streams
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoFormat2.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoFormat2.Text);
                 if (videoFormat == null)
                 {
                     return;

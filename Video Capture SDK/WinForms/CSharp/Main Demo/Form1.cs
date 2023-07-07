@@ -2736,7 +2736,7 @@ namespace VideoCapture_CSharp_Demo
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbVideoInputFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat.Text);
                 if (videoFormat == null)
                 {
                     return;
@@ -4937,7 +4937,7 @@ namespace VideoCapture_CSharp_Demo
         {
             cbDecklinkCaptureVideoFormat.Items.Clear();
 
-            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).FirstOrDefault(device => device.Name == cbDecklinkCaptureDevice.Text);
+            var deviceItem = (await VideoCapture1.Decklink_CaptureDevicesAsync()).Find(device => device.Name == cbDecklinkCaptureDevice.Text);
             if (deviceItem != null)
             {
                 foreach (var format in (await deviceItem.GetVideoFormatsAsync()))
@@ -6151,7 +6151,7 @@ namespace VideoCapture_CSharp_Demo
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.FirstOrDefault(format => format.Name == cbPIPFormat.Text);
+                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbPIPFormat.Text);
                 if (videoFormat == null)
                 {
                     return;
