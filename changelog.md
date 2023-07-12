@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.88
+* [Video Capture SDK .Net] Improved HW encoders detection. If you have several GPUs sometimes only major GPU can be used for video encoding.
+  
 ## 15.5.87
 * [Cross-platform SDKs] Updated Avalonia VideoView. Resolved issue with VideoView recreation.
 

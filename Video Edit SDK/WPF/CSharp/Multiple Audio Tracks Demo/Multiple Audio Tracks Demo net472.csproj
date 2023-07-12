@@ -11,8 +11,8 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.87" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.87" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.5.88" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.5.88" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
