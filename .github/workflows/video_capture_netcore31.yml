@@ -11,8 +11,6 @@ jobs:
       Solution_Name_1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) netcore31.sln"
       Solution_Name_2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia (NuGet) netcore31.sln"
       Solution_Name_3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) netcore31.sln"
-      Solution_Name_4: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS netcore31.sln"
-      Solution_Name_5: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV netcore31.sln"
     
     runs-on: windows-2022
 
@@ -45,16 +43,4 @@ jobs:
       run: dotnet restore $env:Solution_Name_3 
 
     - name: Build app for release 3
-      run: msbuild $env:Solution_Name_3 -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-    - name: Restore dependencies 4
-      run: dotnet restore $env:Solution_Name_4
-
-    - name: Build app for release 4
-      run: msbuild $env:Solution_Name_4 -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-    - name: Restore dependencies 5
-      run: dotnet restore $env:Solution_Name_5 
-
-    - name: Build app for release 5
-      run: msbuild $env:Solution_Name_5 -t:rebuild -verbosity:diag -property:Configuration=Release      
+      run: msbuild $env:Solution_Name_3 -t:rebuild -verbosity:diag -property:Configuration=Release     
