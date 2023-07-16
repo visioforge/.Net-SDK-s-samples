@@ -9,9 +9,7 @@ jobs:
   build:
     env:
       Solution_Name_CS: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net472.sln"
-      Solution_Name_CS_2: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS net472.sln"
       Solution_Name_VB: "Video Edit SDK/VisioForge.VideoEdit.Demos.VB (NuGet) net472.sln"
-      Solution_Name_VB_2: "Video Edit SDK/VisioForge.VideoEdit.Demos.VB net472.sln"
     
     runs-on: windows-2022
 
@@ -35,19 +33,6 @@ jobs:
 
     - name: Build app for release VB
       run: msbuild $env:Solution_Name_VB -t:rebuild -verbosity:diag -property:Configuration=Release
-
-
-    - name: Restore dependencies CS 2
-      run: dotnet restore $env:Solution_Name_CS_2
-
-    - name: Build app for release CS 2
-      run: msbuild $env:Solution_Name_CS_2 -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: Restore dependencies VB 2
-      run: dotnet restore $env:Solution_Name_VB_2
-
-    - name: Build app for release VB 2
-      run: msbuild $env:Solution_Name_VB_2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
