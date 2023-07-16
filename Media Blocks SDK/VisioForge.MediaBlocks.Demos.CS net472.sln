@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Source Demo net472", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay Manager Demo net472", "WPF\CSharp\Overlay Manager Demo\Overlay Manager Demo net472.csproj", "{74F81CF9-ABA0-4321-9794-DFFB5F4C890D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Core Demo net472", "WPF\CSharp\Simple Player Core Demo\Simple Player Core Demo net472.csproj", "{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{74F81CF9-ABA0-4321-9794-DFFB5F4C890D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F81CF9-ABA0-4321-9794-DFFB5F4C890D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F81CF9-ABA0-4321-9794-DFFB5F4C890D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{482D3672-9834-4009-992B-C990EFC1484E} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{0020F7FE-B685-43A5-B6FD-E85C62F524E3} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{74F81CF9-ABA0-4321-9794-DFFB5F4C890D} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
