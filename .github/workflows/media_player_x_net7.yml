@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     env:
-      Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.WinForms net7.sln"
+      Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
     
     runs-on: windows-2022
 
