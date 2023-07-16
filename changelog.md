@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.90
+* [Video Capture SDK .Net] VideoCaptureCoreX: Added video overlays API. Overlay Manager Demo shows how to use it.
+  
 ## 15.5.88
 * [Video Capture SDK .Net] Improved HW encoders detection. If you have several GPUs sometimes only major GPU can be used for video encoding.
   
