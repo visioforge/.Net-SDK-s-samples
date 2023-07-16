@@ -10,8 +10,6 @@ jobs:
     env:
       Solution_Name_CS: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net472.sln"
       Solution_Name_VB: "Media Player SDK/VisioForge.MediaPlayer.Demos.VB (NuGet) net472.sln"
-      Solution_Name_CS_2: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS net472.sln"
-      Solution_Name_VB_2: "Media Player SDK/VisioForge.MediaPlayer.Demos.VB net472.sln"
     
     runs-on: windows-2022
 
@@ -30,23 +28,11 @@ jobs:
     - name: Build app for release CS 1
       run: msbuild $env:Solution_Name_CS -t:rebuild -verbosity:diag -property:Configuration=Release
 
-    - name: Restore dependencies CS 2
-      run: dotnet restore $env:Solution_Name_CS_2
-
-    - name: Build app for release CS 2
-      run: msbuild $env:Solution_Name_CS_2 -t:rebuild -verbosity:diag -property:Configuration=Release
-
     - name: Restore dependencies VB 1
       run: dotnet restore $env:Solution_Name_VB
 
     - name: Build app for release VB 1
       run: msbuild $env:Solution_Name_VB -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: Restore dependencies VB 2
-      run: dotnet restore $env:Solution_Name_VB_2
-
-    - name: Build app for release VB 2
-      run: msbuild $env:Solution_Name_VB_2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
