@@ -11,10 +11,7 @@ jobs:
       Solution_Name_CS_1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net472.sln"
       Solution_Name_CS_2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net472.sln"
       Solution_Name_CS_3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.Avalonia (NuGet) net472.sln"
-      Solution_Name_CS_4: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS net472.sln"
-      Solution_Name_CS_5: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV net472.sln"
       Solution_Name_VB: "Video Capture SDK/VisioForge.VideoCapture.Demos.VB (NuGet) net472.sln"
-      Solution_Name_VB_2: "Video Capture SDK/VisioForge.VideoCapture.Demos.VB net472.sln"
     
     runs-on: windows-2022
 
@@ -45,29 +42,11 @@ jobs:
     - name: Build app for release CS 3
       run: msbuild $env:Solution_Name_CS_3 -t:rebuild -verbosity:diag -property:Configuration=Release
 
-    - name: (MAIN 2) Restore dependencies
-      run: dotnet restore $env:Solution_Name_CS_4
-
-    - name: (MAIN 2) Build app for release
-      run: msbuild $env:Solution_Name_CS_4 -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: (CV 2) Restore dependencies
-      run: dotnet restore $env:Solution_Name_CS_5
-
-    - name: (CV 2) Build app for release
-      run: msbuild $env:Solution_Name_CS_5 -t:rebuild -verbosity:diag -property:Configuration=Release
-
     - name: Restore dependencies VB
       run: dotnet restore $env:Solution_Name_VB
 
     - name: Build app for release VB
       run: msbuild $env:Solution_Name_VB -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: Restore dependencies VB 2
-      run: dotnet restore $env:Solution_Name_VB_2
-
-    - name: Build app for release VB 2
-      run: msbuild $env:Solution_Name_VB_2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
