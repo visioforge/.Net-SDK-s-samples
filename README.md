@@ -12,15 +12,15 @@ Most demo applications contain NuGet unmanaged redist packages, specific to used
 
 [Media Player SDK .Net](https://www.visioforge.com/media-player-sdk-net)
 
+[Media Blocks SDK .Net](https://www.visioforge.com/media-blocks-sdk-net)
+
 # Helpful links
 
-[NuGet packages that contains required assemblies](https://www.nuget.org/packages?q=visioforge)
+[NuGet packages that contain required assemblies](https://www.nuget.org/packages?q=visioforge)
 
-[Online help](http://www.visioforge.com/online_help/sdks_net/index.html)
+[Online help](https://www.visioforge.com/help/docs/dotnet/)
 
 [Support portal](https://visioforge.com/support/)
-
-[Forum](https://visioforge.com/support/379431-Forum)
 
 [Website](https://visioforge.com/)
 
