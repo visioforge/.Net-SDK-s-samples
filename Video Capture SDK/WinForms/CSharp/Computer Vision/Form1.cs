@@ -43,13 +43,13 @@ namespace Computer_Vision_Demo
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            VideoCapture1 = new VideoCaptureCore(VideoCaptureView as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoCaptureView as IVideoView);
             VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
             VideoCapture1.OnError += VideoCapture1_OnError;
 
-            MediaPlayer1 = new MediaPlayerCore(MediaPlayerView as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(MediaPlayerView as IVideoView);
             MediaPlayer1.OnVideoFrameBuffer += MediaPlayer1_OnVideoFrameBuffer;
             MediaPlayer1.OnError += MediaPlayer1_OnError;
 

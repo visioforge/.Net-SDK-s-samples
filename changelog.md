@@ -1,13 +1,16 @@
 # Changelog
 
+## 15.5.92
+* [ALL] VideoCaptureCore, MediaPlayerCore, VideoEditCore: Added the static CreateAsync method that can be used instead of the constructor to create engines without UI lag.
+
 ## 15.5.91
 * [Video Capture SDK .Net] VideoCaptureCore: Resolved issues with video crop.
     
 ## 15.5.90
-* [Video Capture SDK .Net] VideoCaptureCoreX: Added video overlays API. Overlay Manager Demo shows how to use it.
+* [Video Capture SDK .Net] VideoCaptureCoreX: Added video overlays API. The Overlay Manager Demo shows how to use it.
   
 ## 15.5.88
-* [Video Capture SDK .Net] Improved HW encoders detection. If you have several GPUs sometimes only major GPU can be used for video encoding.
+* [Video Capture SDK .Net] Improved HW encoder detection. If you have several GPUs sometimes only major GPU can be used for video encoding.
   
 ## 15.5.87
 * [Cross-platform SDKs] Updated Avalonia VideoView. Resolved issue with VideoView recreation.
@@ -35,7 +38,7 @@
 
 ## 15.5.78
 
-* [Video Capture SDK .Net] Decklink source changed to improve startup speed. Decklink_CaptureDevices method has been replaced by async Decklink_CaptureDevicesAsync.
+* [Video Capture SDK .Net] Decklink source changed to improve startup speed. The Decklink_CaptureDevices method has been replaced by async Decklink_CaptureDevicesAsync.
 
 ## 15.5.77
 * [Media Player SDK .Net] MediaPlayerCoreX: Added Custom_Video_Outputs/Custom_Audio_Outputs properties to set custom video/audio renderers
@@ -84,7 +87,7 @@
 
 ## 15.5.66
 
-* [Media Blocks SDK .Net/Media Player SDK .Net (crossplatform)] Added MP3+CDG Karaoke Player demo
+* [Media Blocks SDK .Net/Media Player SDK .Net (cross-platform)] Added MP3+CDG Karaoke Player demo
 * [Media Blocks SDK .Net] Added CDGSourceBlock for MP3+CDG karaoke files playback
 * [ALL] Improved madVR support
 
@@ -103,7 +106,7 @@
 
 ## 15.5.60
 
-* [Video Capture SDK .Net] Video_Resize property has been changed to IVideoResizeSettings type. You can use VideoResizeSettings class to perform classic resize the same as before or use MaxineUpscaleSettings/MaxineSuperResSettings to perform AI resing on Nvidia GPU using Nvidia Maxine SDK (SDK or SDK models are required to deploy).
+* [Video Capture SDK .Net] Video_Resize property has been changed to IVideoResizeSettings type. You can use VideoResizeSettings class to perform classic resize the same as before or use MaxineUpscaleSettings/MaxineSuperResSettings to perform AI resizing on Nvidia GPU using Nvidia Maxine SDK (SDK or SDK models are required to deploy).
 
 ## 15.5.57
 

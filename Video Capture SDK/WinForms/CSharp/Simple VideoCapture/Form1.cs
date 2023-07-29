@@ -14,6 +14,7 @@ namespace VisioForge_SDK_Video_Capture_Demo
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
@@ -65,9 +66,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
@@ -468,9 +469,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             await VideoCapture1.StopAsync();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 

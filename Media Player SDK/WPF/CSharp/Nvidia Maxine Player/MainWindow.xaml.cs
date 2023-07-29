@@ -29,9 +29,9 @@ namespace Nvidia_Maxine_Player
 
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
@@ -157,9 +157,9 @@ namespace Nvidia_Maxine_Player
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             this.Title += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");

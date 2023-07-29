@@ -10,6 +10,7 @@ namespace IP_Capture
     using System.Diagnostics;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Timers;
     using System.Windows;
     using System.Windows.Controls;
@@ -77,9 +78,9 @@ namespace IP_Capture
             Application.EnableVisualStyles();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
@@ -98,9 +99,9 @@ namespace IP_Capture
         }
 
 
-        private void Form1_Load(object sender, RoutedEventArgs e)
+        private async void Form1_Load(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 

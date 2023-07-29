@@ -23,6 +23,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Helpers;
+    using System.Threading.Tasks;
 
     public partial class Form1 : Form
     {
@@ -66,9 +67,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
@@ -86,9 +87,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 

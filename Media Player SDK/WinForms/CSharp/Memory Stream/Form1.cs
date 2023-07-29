@@ -13,6 +13,7 @@ namespace Memory_Stream_Demo
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.MediaInfo;
+    using System.Threading.Tasks;
 
     public partial class Form1 : Form
     {
@@ -31,9 +32,9 @@ namespace Memory_Stream_Demo
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
         }
 
@@ -126,9 +127,9 @@ namespace Memory_Stream_Demo
             timer1.Enabled = true;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");

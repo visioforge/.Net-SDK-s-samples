@@ -34,18 +34,18 @@ namespace Multiple_IP_Cameras_Demo_WPF
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
             VideoCapture1.OnError += VideoCapture_OnError;
 
-            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
+            VideoCapture2 = await VideoCaptureCore.CreateAsync(VideoView2 as IVideoView);
             VideoCapture2.OnError += VideoCapture_OnError;
 
-            VideoCapture3 = new VideoCaptureCore(VideoView3 as IVideoView);
+            VideoCapture3 = await VideoCaptureCore.CreateAsync(VideoView3 as IVideoView);
             VideoCapture3.OnError += VideoCapture_OnError;
 
-            VideoCapture4 = new VideoCaptureCore(VideoView4 as IVideoView);
+            VideoCapture4 = await VideoCaptureCore.CreateAsync(VideoView4 as IVideoView);
             VideoCapture4.OnError += VideoCapture_OnError;
         }
 
@@ -53,30 +53,30 @@ namespace Multiple_IP_Cameras_Demo_WPF
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture_OnError;
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.OnError -= VideoCapture_OnError;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
 
             if (VideoCapture2 != null)
             {
-            VideoCapture2.OnError -= VideoCapture_OnError;
-            VideoCapture2.Dispose();
-            VideoCapture2 = null;
+                VideoCapture2.OnError -= VideoCapture_OnError;
+                VideoCapture2.Dispose();
+                VideoCapture2 = null;
             }
 
             if (VideoCapture3 != null)
             {
-            VideoCapture3.OnError -= VideoCapture_OnError;
-            VideoCapture3.Dispose();
-            VideoCapture3 = null;
+                VideoCapture3.OnError -= VideoCapture_OnError;
+                VideoCapture3.Dispose();
+                VideoCapture3 = null;
             }
 
             if (VideoCapture4 != null)
             {
-            VideoCapture4.OnError -= VideoCapture_OnError;
-            VideoCapture4.Dispose();
-            VideoCapture4 = null;
+                VideoCapture4.OnError -= VideoCapture_OnError;
+                VideoCapture4.Dispose();
+                VideoCapture4 = null;
             }
         }
 
@@ -147,9 +147,9 @@ namespace Multiple_IP_Cameras_Demo_WPF
             await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, VideoCapture1, 1, cbONVIF1.IsChecked == true);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
         }

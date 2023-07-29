@@ -5,6 +5,7 @@ namespace Video_Player_Demo
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -16,9 +17,9 @@ namespace Video_Player_Demo
     {
         private MediaPlayerCore MediaPlayer1;
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
@@ -142,9 +143,9 @@ namespace Video_Player_Demo
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");

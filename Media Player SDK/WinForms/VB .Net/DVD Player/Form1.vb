@@ -1,6 +1,7 @@
 ' ReSharper disable InconsistentNaming
 
 Imports System.IO
+Imports System.Threading.Tasks
 Imports VisioForge.Core.MediaInfo
 Imports VisioForge.Core.MediaPlayer
 Imports VisioForge.Core.Types
@@ -15,10 +16,10 @@ Public Class Form1
 
     Private WithEvents MediaPlayer1 As MediaPlayerCore
 
-    Private Sub CreateEngine()
-        Dim vv As IVideoView = VideoView1
-        MediaPlayer1 = New MediaPlayerCore(vv)
-    End Sub
+    Private Async Function CreateEngineAsync() As Task(Of MediaPlayerCore)
+        MediaPlayer1 = Await MediaPlayerCore.CreateAsync(VideoView1)
+        Return MediaPlayer1
+    End Function
 
     Private Sub DestroyEngine()
         MediaPlayer1.Dispose()
@@ -254,9 +255,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        CreateEngine()
+        Await CreateEngineAsync()
 
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")

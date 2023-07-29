@@ -143,9 +143,9 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoView1.MouseClick += VideoView1_MouseClick;
@@ -200,7 +200,7 @@ namespace VideoCapture_CSharp_Demo
             Height = (int)(880 * dpiScale);
             //950; 800
 
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 

@@ -5,6 +5,7 @@ namespace Audio_Player_Demo
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -18,11 +19,14 @@ namespace Audio_Player_Demo
 
         public Form1()
         {
-            MediaPlayer1 = new MediaPlayerCore();
+            InitializeComponent();
+        }
+
+        private async Task CreateEngineAsync()
+        {
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync();
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
-
-            InitializeComponent();
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -92,8 +96,10 @@ namespace Audio_Player_Demo
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            await CreateEngineAsync();
+
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }

@@ -10,6 +10,7 @@ namespace MultipleWebCameras
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
+    using System.Threading.Tasks;
 
 
     /// <summary>
@@ -30,12 +31,12 @@ namespace MultipleWebCameras
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
             VideoCapture1.OnError += VideoCapture1_OnError;
 
-            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
+            VideoCapture2 = await VideoCaptureCore.CreateAsync(VideoView2 as IVideoView);
             VideoCapture2.OnError += VideoCapture2_OnError;
         }
 
@@ -43,22 +44,22 @@ namespace MultipleWebCameras
         {
             if (VideoCapture1 != null)
             {
-            VideoCapture1.OnError -= VideoCapture1_OnError;
-            VideoCapture1.Dispose();
-            VideoCapture1 = null;
+                VideoCapture1.OnError -= VideoCapture1_OnError;
+                VideoCapture1.Dispose();
+                VideoCapture1 = null;
             }
 
             if (VideoCapture2 != null)
             {
-            VideoCapture2.OnError -= VideoCapture2_OnError;
-            VideoCapture2.Dispose();
-            VideoCapture2 = null;
+                VideoCapture2.OnError -= VideoCapture2_OnError;
+                VideoCapture2.Dispose();
+                VideoCapture2 = null;
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 

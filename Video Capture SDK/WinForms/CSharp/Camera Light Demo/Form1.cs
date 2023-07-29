@@ -8,7 +8,7 @@ namespace Camera_Light_Demo
 {
     public partial class Form1 : Form
     {
-        private VideoCaptureCore VideoCapture1 = new VideoCaptureCore();
+        private VideoCaptureCore VideoCapture1;
 
         private string[] _devices;
 
@@ -44,6 +44,8 @@ namespace Camera_Light_Demo
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            VideoCapture1 = await VideoCaptureCore.CreateAsync();
+
             _devices = await VideoCapture1.TorchControl_GetDevicesAsync();
             lbDeviceCount.Text = $"Devices found: {_devices.Length}.";
         }

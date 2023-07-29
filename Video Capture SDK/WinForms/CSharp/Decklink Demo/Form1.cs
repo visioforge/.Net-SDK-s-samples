@@ -16,6 +16,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core.Types.VideoEffects;
+using System.Threading.Tasks;
 
 namespace Decklink_Demo
 {
@@ -53,9 +54,9 @@ namespace Decklink_Demo
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
@@ -73,7 +74,7 @@ namespace Decklink_Demo
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 

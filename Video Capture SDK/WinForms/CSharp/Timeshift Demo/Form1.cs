@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -25,9 +26,9 @@
             InitializeComponent();
         }
 
-        private void CreateEngineCapture()
+        private async Task CreateEngineCaptureAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoViewCapture as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoViewCapture as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnTimeshiftFileCreated += VideoCapture1_OnTimeshiftFileCreated;
@@ -45,9 +46,9 @@
             }
         }
 
-        private void CreateEnginePlayer()
+        private async Task CreateEnginePlayerAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoViewPlayer as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoViewPlayer as IVideoView);
 
             MediaPlayer1.OnError += MediaPlayer1_OnError;
         }
@@ -60,10 +61,10 @@
             MediaPlayer1 = null;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngineCapture();
-            CreateEnginePlayer();
+            await CreateEngineCaptureAsync();
+            await CreateEnginePlayerAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 

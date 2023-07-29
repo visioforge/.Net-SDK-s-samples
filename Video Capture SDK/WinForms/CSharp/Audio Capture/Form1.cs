@@ -52,15 +52,15 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
 
         public Form1()
         {
-            VideoCapture1 = new VideoCaptureCore();
-            VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnStop += VideoCapture1_OnStop;
-
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            VideoCapture1 = await VideoCaptureCore.CreateAsync();
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnStop += VideoCapture1_OnStop;
+
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
             cbMode.SelectedIndex = 0;
 

@@ -5,6 +5,7 @@ namespace Two_Windows_Demo
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -18,9 +19,9 @@ namespace Two_Windows_Demo
 
         public Form2 form2 = new Form2();
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
@@ -47,9 +48,9 @@ namespace Two_Windows_Demo
             Process.Start(startInfo);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             form2 = new Form2();
             form2.OnWindowSizeChanged += Form2_OnWindowSizeChanged;

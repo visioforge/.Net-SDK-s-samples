@@ -15,6 +15,7 @@ Imports VisioForge.Core.Types.MediaPlayer
 Imports System.Drawing.Imaging
 Imports VisioForge.Core.Helpers
 Imports System.Linq
+Imports System.Threading.Tasks
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
@@ -47,18 +48,18 @@ Public Class Form1
 
     Dim WithEvents VideoCapture1 As VideoCaptureCore
 
-    Private Sub CreateEngine()
-        Dim vv As IVideoView = VideoView1
-        VideoCapture1 = New VideoCaptureCore(vv)
-    End Sub
+    Private Async Function CreateEngineAsync() As Task(Of VideoCaptureCore)
+        VideoCapture1 = Await VideoCaptureCore.CreateAsync(VideoView1)
+        Return VideoCapture1
+    End Function
 
     Private Sub DestroyEngine()
         VideoCapture1.Dispose()
         VideoCapture1 = Nothing
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
-        CreateEngine()
+    Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+        Await CreateEngineAsync()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
 

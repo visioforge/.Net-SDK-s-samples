@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
@@ -33,9 +34,9 @@
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
@@ -143,9 +144,9 @@
             await VideoCapture1.StartAsync();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
             edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");

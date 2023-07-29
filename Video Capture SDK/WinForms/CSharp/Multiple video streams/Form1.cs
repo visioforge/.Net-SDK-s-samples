@@ -12,6 +12,7 @@ namespace multiple_video_streams
     using System;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
@@ -32,9 +33,9 @@ namespace multiple_video_streams
             InitializeComponent();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
@@ -104,9 +105,9 @@ namespace multiple_video_streams
             videoScreen2.Image = null;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             videoCaptureHelper = new VideoCaptureCore();
             Text += $" (SDK v{videoCaptureHelper.SDK_Version()})";

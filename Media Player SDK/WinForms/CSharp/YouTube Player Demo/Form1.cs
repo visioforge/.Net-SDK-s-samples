@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -21,9 +22,9 @@
 
         private MediaPlayerCore MediaPlayer1;
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
         }
 
@@ -131,9 +132,9 @@
             cbAudioStream.SelectedIndex = 0;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 

@@ -11,6 +11,7 @@ namespace Nvidia_Maxine_Demo
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Forms;
@@ -44,9 +45,9 @@ namespace Nvidia_Maxine_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
             VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
@@ -127,9 +128,9 @@ namespace Nvidia_Maxine_Demo
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 

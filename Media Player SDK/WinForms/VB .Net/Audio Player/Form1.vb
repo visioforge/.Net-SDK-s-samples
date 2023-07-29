@@ -85,9 +85,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        MediaPlayer1 = New MediaPlayerCore()
+        MediaPlayer1 = Await MediaPlayerCore.CreateAsync()
 
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")

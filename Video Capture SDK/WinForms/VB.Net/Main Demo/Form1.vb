@@ -103,10 +103,10 @@ Public Class Form1
 
     Dim WithEvents VideoCapture1 As VideoCaptureCore
 
-    Private Sub CreateEngine()
-        Dim vv As IVideoView = VideoView1
-        VideoCapture1 = New VideoCaptureCore(vv)
-    End Sub
+    Private Async Function CreateEngineAsync() As Task(Of VideoCaptureCore)
+        VideoCapture1 = Await VideoCaptureCore.CreateAsync(VideoView1)
+        Return VideoCapture1
+    End Function
 
     Private Sub DestroyEngine()
         VideoCapture1.Dispose()
@@ -126,7 +126,7 @@ Public Class Form1
 
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        CreateEngine()
+        Await CreateEngineAsync()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
 

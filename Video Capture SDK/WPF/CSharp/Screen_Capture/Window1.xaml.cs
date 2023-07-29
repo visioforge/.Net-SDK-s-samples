@@ -11,6 +11,7 @@ namespace Screen_Capture
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -68,9 +69,9 @@ namespace Screen_Capture
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
@@ -509,9 +510,9 @@ namespace Screen_Capture
             await VideoCapture1.StopAsync();
         }
 
-        private void Form1_Load(object sender, RoutedEventArgs e)
+        private async void Form1_Load(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
 

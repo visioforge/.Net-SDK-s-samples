@@ -43,8 +43,8 @@ Public Class Form1
 
     Dim wmvSettingsDialog As WMVSettingsDialog
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
-        VideoCapture1 = New VideoCaptureCore()
+    Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+        VideoCapture1 = Await VideoCaptureCore.CreateAsync()
 
         AddHandler VideoCapture1.OnError, AddressOf VideoCapture1_OnError
         AddHandler VideoCapture1.OnAudioFrameBuffer, AddressOf VideoCapture1_OnAudioFrameBuffer

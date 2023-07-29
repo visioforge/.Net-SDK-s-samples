@@ -86,9 +86,9 @@ namespace Skinned_Player
             playerControls.SkinName = "Default";
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            await CreateEngineAsync();
 
             CaptionBlock.Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
@@ -100,9 +100,9 @@ namespace Skinned_Player
             playlist.AttachPlayerControls(playerControls);
         }
 
-        private void CreateEngine()
+        private async Task CreateEngineAsync()
         {
-            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
+            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.WPF_WinUI_Callback;
             MediaPlayer1.Audio_PlayAudio = true;

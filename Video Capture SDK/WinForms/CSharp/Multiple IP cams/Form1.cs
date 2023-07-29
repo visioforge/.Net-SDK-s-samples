@@ -10,6 +10,7 @@ namespace multiple_ap_cams
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
+    using System.Threading.Tasks;
 
     public partial class Form1 : Form
     {
@@ -26,16 +27,16 @@ namespace multiple_ap_cams
             InitializeComponent();
         }
 
-        private void CreateEngine1()
+        private async Task CreateEngine1Async()
         {
-            VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+            VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
 
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
-        private void CreateEngine2()
+        private async Task CreateEngine2Async()
         {
-            VideoCapture2 = new VideoCaptureCore(VideoView2 as IVideoView);
+            VideoCapture2 = await VideoCaptureCore.CreateAsync(VideoView2 as IVideoView);
 
             VideoCapture2.OnError += VideoCapture2_OnError;
         }
@@ -130,10 +131,10 @@ namespace multiple_ap_cams
             await VideoCapture2.StopAsync();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            CreateEngine1();
-            CreateEngine2();
+            await CreateEngine1Async();
+            await CreateEngine2Async();
 
             Text += $" (SDK v{VideoCapture2.SDK_Version()})";
 

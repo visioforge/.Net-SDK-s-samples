@@ -54,18 +54,18 @@ namespace Audio_Capture
 
         public Window1()
         {
-            VideoCapture1 = new VideoCaptureCore();
-            VideoCapture1.OnError += VideoCapture1_OnError;
-            VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
-            VideoCapture1.OnStop += VideoCapture1_OnStop;
-
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
-        private void Form1_Load(object sender, RoutedEventArgs e)
+        private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            VideoCapture1 = await VideoCaptureCore.CreateAsync();
+            VideoCapture1.OnError += VideoCapture1_OnError;
+            VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
+            VideoCapture1.OnStop += VideoCapture1_OnStop;
+
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
             cbMode.SelectedIndex = 0;
 
