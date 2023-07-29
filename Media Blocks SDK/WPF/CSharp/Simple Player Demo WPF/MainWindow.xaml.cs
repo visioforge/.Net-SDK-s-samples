@@ -181,6 +181,8 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             if (_pipeline != null)
             {
                 await _pipeline.StopAsync();
+
+                await DestroyEngineAsync();
             }
 
             tbTimeline.Value = 0;

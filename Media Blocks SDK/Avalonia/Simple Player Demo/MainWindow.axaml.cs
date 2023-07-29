@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
@@ -163,6 +164,13 @@ namespace MediaBlocks_Simple_Player_Demo_Avalonia
             if (cbAudioOutputItems.Count > 0)
             {
                 cbAudioOutput.SelectedIndex = 0;
+            }
+
+
+            var audioInput = _deviceEnumerator.AudioSourcesAsync(null).Result;
+            foreach (var device in audioInput)
+            {
+                Debug.WriteLine(device);
             }
         }
 

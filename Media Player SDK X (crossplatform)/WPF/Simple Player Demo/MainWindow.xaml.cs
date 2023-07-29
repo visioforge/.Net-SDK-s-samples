@@ -125,7 +125,7 @@ namespace Simple_Player_Demo_X
 
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag)
+            if (!_timerFlag && _player != null)
             {
                 await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
@@ -157,6 +157,8 @@ namespace Simple_Player_Demo_X
             if (_player != null)
             {
                 await _player.StopAsync();
+                await DestroyEngineAsync();
+                _player = null;
             }
 
             tbTimeline.Value = 0;

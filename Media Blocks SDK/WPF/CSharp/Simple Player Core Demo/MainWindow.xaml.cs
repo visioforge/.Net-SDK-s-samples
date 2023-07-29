@@ -163,7 +163,7 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             {
                 //_simplePlayer.Debug_SavePipeline("before-stop");
                 await _simplePlayer.StopAsync();
-                await _simplePlayer.DisposeAsync();
+                await DestroyEngineAsync();
 
                 _simplePlayer = null;
             }            

@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.91
+* [Video Capture SDK .Net] VideoCaptureCore: Resolved issues with video crop.
+    
 ## 15.5.90
 * [Video Capture SDK .Net] VideoCaptureCoreX: Added video overlays API. Overlay Manager Demo shows how to use it.
   
