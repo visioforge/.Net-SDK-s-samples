@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.93
+* [Video Capture SDK .Net] VideoCaptureCore: Improved video crop performance on modern CPUs
+    
 ## 15.5.92
 * [ALL] VideoCaptureCore, MediaPlayerCore, VideoEditCore: Added the static CreateAsync method that can be used instead of the constructor to create engines without UI lag.
 

@@ -38,13 +38,13 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.92" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="15.5.92" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.93" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="15.5.93" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.92" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.92" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.92" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.93" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.93" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.5.93" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\LogoOverlay.png">
