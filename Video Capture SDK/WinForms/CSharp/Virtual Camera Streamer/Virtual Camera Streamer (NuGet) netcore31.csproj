@@ -60,8 +60,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.93" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.93" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.94" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.5.94" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

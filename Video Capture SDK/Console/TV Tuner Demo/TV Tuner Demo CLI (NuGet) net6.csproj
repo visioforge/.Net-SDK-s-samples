@@ -28,9 +28,9 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.93" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.93" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.93" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.5.94" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.5.94" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.5.94" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
