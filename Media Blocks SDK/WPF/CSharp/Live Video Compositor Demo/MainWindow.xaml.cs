@@ -44,6 +44,9 @@ namespace Live_Video_Compositor_Demo
 
             System.Windows.Forms.Application.EnableVisualStyles();
 
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
+
             _deviceEnumerator = new DeviceEnumerator();
         }
                 

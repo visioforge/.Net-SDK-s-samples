@@ -66,6 +66,7 @@ namespace Decklink_MB_Demo
         public MainWindow()
         {
             InitializeComponent();
+
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.Debug_Mode = false;
             _pipeline.Debug_Dir = @"c:\vf\";

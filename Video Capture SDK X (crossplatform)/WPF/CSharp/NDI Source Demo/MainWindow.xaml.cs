@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
+using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
@@ -28,6 +29,9 @@ namespace NDI_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
         }

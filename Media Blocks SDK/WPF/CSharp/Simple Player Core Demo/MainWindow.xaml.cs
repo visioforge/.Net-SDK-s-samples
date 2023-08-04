@@ -34,6 +34,7 @@ namespace MediaBlocks_Simple_Player_Core_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
             MediaBlocksPipeline.InitSDK();
 
             _timer = new System.Timers.Timer(500);

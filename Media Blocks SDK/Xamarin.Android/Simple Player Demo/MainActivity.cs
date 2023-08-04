@@ -20,6 +20,7 @@ namespace Simple_Player_Demo
     using VisioForge.Core.MediaBlocks.VideoRendering;
     using VisioForge.Core.MediaInfoReaderX;
     using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.X.Sources;
     using Xamarin.Essentials;
 
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -55,7 +56,7 @@ namespace Simple_Player_Demo
 
         private AudioRendererBlock _audioRenderer;
 
-        private FileSourceBlock _fileSource;
+        private UniversalSourceBlock _fileSource;
 
         private StreamSourceBlock _memorySource;
 
@@ -272,7 +273,7 @@ namespace Simple_Player_Demo
             //_decodeBin = new DecodeBinBlock(true, true, false);
             //_pipeline.Connect(_memorySource.Output, _decodeBin.Input);
 
-            _fileSource = new FileSourceBlock(edURL.Text, renderVideo: videoStream, renderAudio: audioStream);
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(this, edURL.Text, renderVideo: videoStream, renderAudio: audioStream));
 
             if (videoStream)
             {

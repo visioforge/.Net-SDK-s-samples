@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
@@ -72,6 +73,9 @@ namespace Simple_Video_Player_Avalonia
 #if DEBUG
             this.AttachDevTools();
 #endif
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
 
             InitControls();
             Activated += MainWindow_Activated;

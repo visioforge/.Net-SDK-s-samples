@@ -16,6 +16,7 @@ namespace Audio_Capture_Demo_X_WPF
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core;
+    using VisioForge.Core.MediaBlocks;
 
     public partial class MainWindow : Window
     {
@@ -50,6 +51,9 @@ namespace Audio_Capture_Demo_X_WPF
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
         }

@@ -41,6 +41,9 @@ namespace Overlay_Manager_Demo
         {
             InitializeComponent();
 
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
+
             _deviceEnumerator = new DeviceEnumerator();
         }
 

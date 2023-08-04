@@ -12,6 +12,9 @@ namespace MediaBlocks_Video_Mixer_Demo
         public Form1()
         {
             InitializeComponent();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
         }
 
         private void Form1_Load(object sender, System.EventArgs e)

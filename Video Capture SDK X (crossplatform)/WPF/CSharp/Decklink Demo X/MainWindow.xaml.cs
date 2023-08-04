@@ -17,6 +17,7 @@ using VisioForge.Core.Helpers;
 using System.IO;
 using VisioForge.Core.UI;
 using System.Windows.Controls;
+using VisioForge.Core.MediaBlocks;
 
 namespace Decklink_Demo_X
 {
@@ -47,6 +48,9 @@ namespace Decklink_Demo_X
         public MainWindow()
         {
             InitializeComponent();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
         }

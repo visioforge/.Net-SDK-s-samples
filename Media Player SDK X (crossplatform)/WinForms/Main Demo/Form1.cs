@@ -35,6 +35,9 @@ namespace Main_Demo
         public Form1()
         {
             InitializeComponent();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
         }
 
         private void AudioEffectUpdateAmplify()

@@ -42,12 +42,6 @@ namespace Video_Join_Demo
             }
         }
 
-        private static string GetFileExt(string filename)
-        {
-            int k = filename.LastIndexOf('.');
-            return filename.Substring(k, filename.Length - k);
-        }
-
         private void btAddInputFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)

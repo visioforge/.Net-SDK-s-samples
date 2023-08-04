@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core;
+using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
@@ -25,6 +26,9 @@ namespace Social_Networks_Streamer_Demo
         public MainWindow()
         {
             InitializeComponent();     
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
             
             _deviceEnumerator = new DeviceEnumerator();
         }

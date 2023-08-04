@@ -45,6 +45,9 @@ namespace KLV_Demo
         public MainWindow()
         {
             InitializeComponent();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

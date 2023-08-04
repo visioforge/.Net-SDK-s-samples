@@ -17,6 +17,7 @@ namespace Screen_Capture_X
     using System.Windows.Input;
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.MediaBlocks;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.Output;
@@ -52,6 +53,9 @@ namespace Screen_Capture_X
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
+
+            // We have to initialize the engine on start
+            MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
         }
