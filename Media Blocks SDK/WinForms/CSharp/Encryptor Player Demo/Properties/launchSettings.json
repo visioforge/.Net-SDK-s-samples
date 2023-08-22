@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MediaBlocks Encryptor Player Demo": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

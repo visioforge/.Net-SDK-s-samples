@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleCapture.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <ScrollView>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowSpacing="10" RowDefinitions="*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+
+            <my:VideoView Grid.Row="0"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="videoView"
+                Background="Black"/>
+
+            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+
+                <Grid Margin="8,5,8,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Picker 
+                        Grid.Column="0"
+                        Title="CAMERA"
+                        x:Name="pkCamera" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        MinimumWidthRequest="200"
+                        Margin="5, 0, 5, 0"/> 
+
+                    <Picker 
+                        Grid.Column="1"
+                        Title="MICROPHONE"
+                        x:Name="pkMic" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        MinimumWidthRequest="200"
+                        Margin="5, 0, 5, 0" />
+                    
+                    <Picker 
+                        Grid.Column="2"
+                        Title="SPEAKERS"
+                        x:Name="pkSpeakers" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        MinimumWidthRequest="200"
+                        Margin="5, 0, 5, 0" />
+                </Grid>
+
+                <StackLayout 
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="16, 0, 5, 0">
+
+                    <Button  
+                        x:Name="btPlayPause"   
+                        Text="PLAY" 
+                        Margin="5" 
+                        Clicked="btPlayPause_Clicked" />
+
+                    <Button  
+                        x:Name="btStop"   
+                        Text="STOP" 
+                        Margin="5" 
+                        Clicked="btStop_Clicked" />
+                </StackLayout>
+
+                <!--<StackLayout
+                    Grid.Column="0"
+                    Orientation="Horizontal"
+                    HorizontalOptions="Start"
+                    Margin="16, 0, 5, 5" >
+
+                    <Label  
+                        Text="Volume"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+
+                    <Slider 
+                        x:Name="slVolume"
+                        HorizontalOptions="Fill"
+                        Margin="15, 0, 5, 0"
+                        Minimum="0"
+                        Maximum="100"
+                        Value="25"
+                        WidthRequest="150"                        
+                        VerticalOptions="Center"
+                        ValueChanged="slVolume_ValueChanged" />
+
+                    <Button  
+                        x:Name="btSpeed"                   
+                        Margin="5,5,5,5" 
+                        Text="SPEED: 1X"
+                        Clicked="btSpeed_Clicked" />
+                </StackLayout>-->
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

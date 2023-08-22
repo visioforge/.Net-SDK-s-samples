@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using VisioForge.Core;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
@@ -11,7 +12,7 @@ namespace QRReader
     {
         private VideoCaptureCoreX _core;
 
-        private DeviceEnumerator _deviceEnumerator = new DeviceEnumerator();
+        private DeviceEnumerator _deviceEnumerator;
 
         private VideoCaptureDeviceInfo[] _cameras;
 
@@ -34,30 +35,44 @@ namespace QRReader
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
+            _deviceEnumerator = new DeviceEnumerator(
+#if __ANDROID__
+                Microsoft.Maui.ApplicationModel.Platform.CurrentActivity
+#endif
+                );
+
 #if __ANDROID__
             await RequestCameraPermissionAsync();
 #endif
 
-#if ANDROID
-            var activity = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; 
-            _core = new VideoCaptureCoreX(videoView, activity, VisioForge.Core.Types.PlatformType.Android);
+            //var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
+
+#if __ANDROID__
+            _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
 #else
-            _core = new VideoCaptureCoreX(videoView);
+            var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
+            _core = new VideoCaptureCoreX(handler.VideoView);
 #endif
+
             _core.OnError += Core_OnError;
             _core.OnBarcodeDetected += Core_OnBarcodeDetected;
-            _core.Barcode_Reader_Enabled = true;            
+          //  _core.Barcode_Reader_Enabled = true;
 
             // cameras
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
             pkCamera.ItemsSource = _cameras.Select(x => x.DisplayName).ToList();
 
             if (_cameras.Length > 0)
-            {                
+            {
                 pkCamera.SelectedIndex = 0;
             }
 
             Window.Destroying += Window_Destroying;
+        }
+
+        private void Core_OnVideoFrameBuffer(object sender, VideoFrameXBufferEventArgs e)
+        {
+            Debug.WriteLine($"Video frame received: {e.Frame.Timestamp}");
         }
 
         private void Core_OnBarcodeDetected(object sender, BarcodeDetectorEventArgs e)
@@ -76,7 +91,7 @@ namespace QRReader
 
             // Check result from permission request. If it is allowed by the user, connect to scanner
             if (result == PermissionStatus.Granted)
-            {                
+            {
             }
             else
             {
@@ -88,7 +103,7 @@ namespace QRReader
             }
         }
 
-        private async void btPlayPause_Clicked(object sender, EventArgs e)
+        private async void btPlayStop_Clicked(object sender, EventArgs e)
         {
             if (_core == null)
             {
@@ -98,18 +113,11 @@ namespace QRReader
             switch (_core.State)
             {
                 case PlaybackState.Play:
-                    {
-                        await _core.PauseAsync();
-
-                        btPlayPause.Text = "PLAY";
-                    }
-
-                    break;
                 case PlaybackState.Pause:
                     {
-                        await _core.ResumeAsync();
+                        await _core.StopAsync();
 
-                        btPlayPause.Text = "PAUSE";
+                        btPlayStop.Text = "PLAY";
                     }
 
                     break;
@@ -151,7 +159,7 @@ namespace QRReader
 
                         await _core.StartAsync();
 
-                        btPlayPause.Text = "PAUSE";
+                        btPlayStop.Text = "STOP";
                     }
 
                     break;
@@ -186,32 +194,5 @@ namespace QRReader
             Debug.WriteLine(e.Message);
         }
 
-        private async Task StopAllAsync()
-        {
-            if (_core == null)
-            {
-                return;
-            }
-
-            if (_core != null)
-            {
-                await _core.StopAsync();
-            }
-        }
-
-        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            if (_core != null)
-            {
-                _core.Audio_OutputDevice_Volume = e.NewValue / 100.0;
-            }
-        }
-
-        private async void btStop_Clicked(object sender, EventArgs e)
-        {
-            await StopAllAsync();
-
-            btPlayPause.Text = "PLAY";
-        }
-    }    
+    }
 }

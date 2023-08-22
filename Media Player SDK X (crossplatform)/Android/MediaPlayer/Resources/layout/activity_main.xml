@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/relativeLayout1">
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/pnScreen"
+        android:layout_above="@id/layoutURL">
+
+        <VisioForge.Core.UI.Android.VideoView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/videoView" 
+  />
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutURL"
+        android:layout_above="@id/layoutSeeking"
+        android:layout_marginTop="5px">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_toLeftOf="@+id/btOpenFile"
+            android:inputType="text|textUri"
+            android:text="SELECT FILE"
+            android:id="@+id/edURL" >
+        </EditText>
+        <Button
+            android:text="..."
+            android:id="@+id/btOpenFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="5px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutSeeking"
+        android:layout_above="@id/layoutControls"
+        android:layout_marginTop="5px">
+        <SeekBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10px"
+            android:layout_toLeftOf="@+id/lbPosition"
+            android:id="@+id/sbTimeline" >
+        </SeekBar>
+        <TextView
+            android:id="@+id/lbPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="00:00:00/00:00:00"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutControls"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5px">
+        <Button
+            android:text="Start"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btStart" />
+        <Button
+            android:text="Pause"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btPause" />
+        <Button
+            android:text="Stop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btStop" />
+    </LinearLayout>
+</RelativeLayout >

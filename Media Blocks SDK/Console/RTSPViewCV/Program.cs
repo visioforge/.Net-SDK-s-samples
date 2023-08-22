@@ -4,6 +4,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPViewCV
@@ -68,7 +69,7 @@ namespace RTSPViewCV
 
             _videoRenderer = new VideoRendererBlock(_pipeline, null);
 
-            _sampleGrabber = new VideoSampleGrabberBlock(VisioForge.Core.GStreamer.SampleFormat.RGB);
+            _sampleGrabber = new VideoSampleGrabberBlock(VideoFormatX.RGB);
             _sampleGrabber.OnVideoFrameBuffer += _sampleGrabber_OnVideoFrameBuffer; ;
 
             _pipeline.Connect(_source.VideoOutput, _sampleGrabber.Input);
@@ -94,7 +95,7 @@ namespace RTSPViewCV
             Console.WriteLine($"Face detected at [{e.TimeStamp}]");
         }
 
-        private static void _sampleGrabber_OnVideoFrameBuffer(object sender, VisioForge.Core.Types.Events.VideoFrameBufferEventArgs e)
+        private static void _sampleGrabber_OnVideoFrameBuffer(object sender, VisioForge.Core.Types.Events.VideoFrameXBufferEventArgs e)
         {
             //Console.WriteLine($"Video frame received. [{e.Frame.Timestamp}]");
 

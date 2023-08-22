@@ -12,7 +12,7 @@
             <my:VideoView Grid.Row="0"               
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                x:Name="imgVideo"
+                x:Name="videoView"
                 Background="Gray"/>
 
             <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="1" SkinName="Default" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" Padding="0" Margin="0" />

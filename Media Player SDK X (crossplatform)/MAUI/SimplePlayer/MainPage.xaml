@@ -12,7 +12,7 @@
             <my:VideoView Grid.Row="0"               
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                x:Name="imgVideo"
+                x:Name="videoView"
                 Background="Black"/>
 
             <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">

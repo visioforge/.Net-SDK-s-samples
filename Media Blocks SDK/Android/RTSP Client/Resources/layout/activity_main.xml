@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/relativeLayout1">
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/pnScreen"
+        android:layout_above="@id/layoutLogin">
+
+        <VisioForge.Core.UI.Android.VideoView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/videoView" 
+  />
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutURL"
+        android:layout_above="@id/layoutControls"
+        android:layout_marginTop="5px">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:inputType="text|textUri"
+            android:text=""
+            android:id="@+id/edURL" >
+        </EditText>
+    </RelativeLayout>
+
+     <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutLogin"
+        android:layout_above="@id/layoutURL"       
+        android:layout_marginTop="5px">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:inputType="text|textUri"
+            android:hint="login"
+            android:id="@+id/edLogin" >
+        </EditText>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:inputType="text|textUri"
+            android:hint="password"
+            android:id="@+id/edPassword" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutControls"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5px">
+        <Button
+            android:text="Start"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btStart" />
+        <Button
+            android:text="Pause"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btPause" />
+        <Button
+            android:text="Stop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btStop" />
+    </LinearLayout>
+</RelativeLayout >

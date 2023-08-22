@@ -51,18 +51,17 @@ namespace Simple_Player_MAUI
 
         private void MainPage_Loaded(object sender, EventArgs e)
         {
-#if ANDROID
-            //var view = (Android.Views.ViewGroup)this.Handler.PlatformView;
-            //var context = view.Context;
-            var activity = Microsoft.Maui.ApplicationModel.Platform.CurrentActivity; //(Android.App.Activity)context;
-            _player = new MediaPlayerCoreX(imgVideo, activity, VisioForge.Core.Types.PlatformType.Android);
+#if __ANDROID__
+            _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
 #else
-            _player = new MediaPlayerCoreX(imgVideo);
+            var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
+            _player = new MediaPlayerCoreX(handler.VideoView);
 #endif
+
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
 
-            var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;
+            var audioOutputs = _player.Audio_OutputDevicesAsync(null).Result;
             if (audioOutputs.Length > 0)
             {
                 _player.Audio_OutputDevice = audioOutputs[0];

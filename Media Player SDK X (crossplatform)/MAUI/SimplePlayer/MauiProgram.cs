@@ -1,4 +1,5 @@
 ﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+using VisioForge.Core.UI.MAUI;
 
 namespace Simple_Player_MAUI
 {
@@ -10,6 +11,7 @@ namespace Simple_Player_MAUI
             builder
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
+                .ConfigureMauiHandlers(handlers => handlers.AddVisioForgeHandlers())
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
