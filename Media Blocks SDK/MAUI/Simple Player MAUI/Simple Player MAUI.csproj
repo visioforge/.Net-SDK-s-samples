@@ -42,7 +42,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.4" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.18.5.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Default.vfskin" />
