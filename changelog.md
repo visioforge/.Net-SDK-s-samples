@@ -1,6 +1,10 @@
 # Changelog
 
-## 15.6
+## 15.6.4
+
+* [Video Capture SDK .Net] VideoCaptureCore: Updated FFMPEG.exe output. Improved support of x264 and x265 encoders of custom FFMPEG builds.
+
+## 15.6.0
 
 * [Video Capture SDK .Net] VideoCaptureCore: Improved video crop performance on modern CPUs
 * [ALL] VideoCaptureCore, MediaPlayerCore, VideoEditCore: Added the static CreateAsync method that can be used instead of the constructor to create engines without UI lag.
