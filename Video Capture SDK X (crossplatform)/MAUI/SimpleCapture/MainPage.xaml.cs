@@ -46,7 +46,7 @@ namespace SimpleCapture
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-#if __ANDROID__
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__
             await RequestCameraPermissionAsync();
 #endif
 
@@ -56,10 +56,10 @@ namespace SimpleCapture
 #endif
                 );
 
-            //VideoView imgVideo = null;
-
 #if __ANDROID__
             _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
+#elif __MACCATALYST__
+            _core = new VideoCaptureCoreX(videoView);
 #else
             var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
             _core = new VideoCaptureCoreX(handler.VideoView);
@@ -178,9 +178,6 @@ namespace SimpleCapture
 
                         await _core.StartAsync();
 
-                        //_core.Debug_Dir = @"c:\vf";
-                        //_core.Debug_SavePipeline("ppp");
-
                         _tmPosition.Start();
 
                         btPlayPause.Text = "PAUSE";
@@ -192,24 +189,15 @@ namespace SimpleCapture
             }
         }
 
-        private void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object sender, EventArgs e)
         {
             if (_core != null)
             {
                 _core.OnError -= Core_OnError;
-                _core.Stop();
+                await _core.StopAsync();
 
                 _core.Dispose();
                 _core = null;
-            }
-        }
-
-        private void OnStop(object sender, EventArgs e)
-        {
-            if (_core != null)
-            {
-                _core.OnError -= Core_OnError;
-                _core.Stop();
             }
         }
 
@@ -295,29 +283,5 @@ namespace SimpleCapture
 
             btPlayPause.Text = "PLAY";
         }
-
-        //private void btPrev_Clicked(object sender, EventArgs e)
-        //{
-        //    _camerasIndex--;
-
-        //    if (_camerasIndex < 0)
-        //    {
-        //        _camerasIndex = _cameras.Length - 1;
-        //    }
-
-        //    lbCamera.Text = _cameras[_camerasIndex].DisplayName;
-        //}
-
-        //private void btNext_Clicked(object sender, EventArgs e)
-        //{
-        //    _camerasIndex++;
-
-        //    if (_camerasIndex >= _cameras.Length)
-        //    {
-        //        _camerasIndex = 0;
-        //    }
-
-        //    lbCamera.Text = _cameras[_camerasIndex].DisplayName;
-        //}
     }
 }

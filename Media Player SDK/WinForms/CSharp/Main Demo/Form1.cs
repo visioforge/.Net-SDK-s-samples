@@ -2762,9 +2762,9 @@ namespace Media_Player_Demo
             MediaPlayer1.PreviousFrame();
         }
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             VideoView1.MouseClick += VideoView1_MouseClick;
             MediaPlayer1.OnBarcodeDetected += MediaPlayer1_OnBarcodeDetected;
@@ -2807,9 +2807,9 @@ namespace Media_Player_Demo
             }
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 

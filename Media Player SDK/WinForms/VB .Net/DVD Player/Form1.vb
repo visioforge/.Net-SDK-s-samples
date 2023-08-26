@@ -16,10 +16,9 @@ Public Class Form1
 
     Private WithEvents MediaPlayer1 As MediaPlayerCore
 
-    Private Async Function CreateEngineAsync() As Task(Of MediaPlayerCore)
-        MediaPlayer1 = Await MediaPlayerCore.CreateAsync(VideoView1)
-        Return MediaPlayer1
-    End Function
+    Private Sub CreateEngine()
+        MediaPlayer1 = New MediaPlayerCore(VideoView1)
+    End Sub
 
     Private Sub DestroyEngine()
         MediaPlayer1.Dispose()
@@ -255,9 +254,9 @@ Public Class Form1
 
     End Sub
 
-    Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
-        Await CreateEngineAsync()
+        CreateEngine()
 
         Text += $" (SDK v{MediaPlayer1.SDK_Version})"
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")

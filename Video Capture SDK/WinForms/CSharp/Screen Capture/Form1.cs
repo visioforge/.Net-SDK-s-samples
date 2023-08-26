@@ -15,6 +15,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.FFMPEGEXE;
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.Types.VideoEffects;
@@ -51,6 +52,36 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        public void Configura_Streaming_MF()
+        {
+            VideoCapture1.Network_Streaming_Enabled = true;
+            VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.RTMP_FFMPEG_EXE;
+            var ffmpegOutput = new FFMPEGEXEOutput();
+            ffmpegOutput.FillDefaults(DefaultsProfile.MP4_H264_AAC, true);
+
+
+            ffmpegOutput.UsePipe = true;
+            ffmpegOutput.OutputMuxer = OutputMuxer.FLV;
+            ffmpegOutput.RtBufferSize = "100M";
+            ffmpegOutput.Video.Width = 1440; // 720 '800  '1440
+            ffmpegOutput.Video.Height = 960; // 480 '600  '960
+            ffmpegOutput.Video.Quality = 17; // 95
+
+            //ffmpegOutput.Video.RateControl = 0;
+
+            //ffmpegOutput.Video.Scenario = 4; // livestream
+
+
+            ffmpegOutput.Video.BasicMode = 0;
+            ffmpegOutput.Audio.Bitrate = 96000; // 128000
+            ffmpegOutput.Audio.Encoder = AudioEncoder.AAC;
+            //UrlConexion = "rtmps://live-api-s.facebook.com:443/rtmp/" + Tx_ClaveFacebookLive.Text;
+            VideoCapture1.Network_Streaming_URL = "xx"; // UrlConexion;
+            //destino.Text = VideoCapture1.Network_Streaming_URL;
+            VideoCapture1.Network_Streaming_Audio_Enabled = true;
+            VideoCapture1.Network_Streaming_Output = ffmpegOutput;
+        }
 
         public Form1()
         {

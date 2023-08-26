@@ -13,9 +13,9 @@
     {
         private MediaPlayerCore MediaPlayer1;
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
@@ -45,6 +45,7 @@
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Bug", "S2583:Conditionally executed code should be reachable", Justification = "<Pending>")]
         private async void btStart_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -65,13 +66,9 @@
             MediaPlayer1.Multiple_Video_Streams_Mappings_Clear();
             if (info.VideoStreams.Count > 1)
             {
-                for (int i = 0; i < info.VideoStreams.Count - 1; i++)
+                int count = Math.Min(info.VideoStreams.Count, 4);
+                for (int i = 0; i < count; i++)
                 {
-                    if (i > 3)
-                    {
-                        break;
-                    }
-
                     Panel panel = null;
                     switch (i)
                     {
@@ -167,9 +164,9 @@
             timer1.Tag = 0;
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }

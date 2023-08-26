@@ -481,7 +481,7 @@ namespace Video_From_Images
 
             if (_predefinedImagesUsed)
             {
-                frame?.Dispose();
+                frame.Dispose();
             }
         }
 

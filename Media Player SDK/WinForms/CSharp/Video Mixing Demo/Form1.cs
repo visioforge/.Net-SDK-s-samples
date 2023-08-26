@@ -21,9 +21,9 @@
 
         private MediaPlayerCore MediaPlayer1;
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
@@ -220,9 +220,9 @@
             }
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }

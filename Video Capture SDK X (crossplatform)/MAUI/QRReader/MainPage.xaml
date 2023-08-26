@@ -4,18 +4,11 @@
              x:Class="QRReader.MainPage"
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
 
-
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowSpacing="10" RowDefinitions="*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+        <Grid RowSpacing="10" RowDefinitions="Auto,*" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
 
-            <my:VideoView Grid.Row="0"               
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
-                x:Name="videoView"
-                Background="Black"/>
-
-            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+            <StackLayout Grid.Row="0" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 
                 <Grid Margin="8,5,8,0">
                     <Grid.ColumnDefinitions>
@@ -50,6 +43,12 @@
                         Clicked="btPlayStop_Clicked" />                    
                 </Grid>
             </StackLayout>
+
+            <my:VideoView Grid.Row="1"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="videoView"
+                Background="Black"/>
         </Grid>
     </ScrollView>
 

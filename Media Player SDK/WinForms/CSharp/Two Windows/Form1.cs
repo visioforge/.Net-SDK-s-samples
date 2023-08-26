@@ -19,9 +19,9 @@ namespace Two_Windows_Demo
 
         public Form2 form2 = new Form2();
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
@@ -48,9 +48,9 @@ namespace Two_Windows_Demo
             Process.Start(startInfo);
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             form2 = new Form2();
             form2.OnWindowSizeChanged += Form2_OnWindowSizeChanged;

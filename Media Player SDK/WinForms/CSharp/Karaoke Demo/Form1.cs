@@ -23,16 +23,16 @@
             InitializeComponent();
         }
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync();
+            MediaPlayer1 = new MediaPlayerCore();
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");

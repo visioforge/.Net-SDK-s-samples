@@ -57,6 +57,7 @@
                 <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
                     <ComboBoxItem>YouTube</ComboBoxItem>
                     <ComboBoxItem>Facebook</ComboBoxItem>
+                    <ComboBoxItem>Generic RTMP (set URL instead of key)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

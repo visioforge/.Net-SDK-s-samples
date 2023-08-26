@@ -22,16 +22,16 @@
 
         private MediaPlayerCore MediaPlayer2;
 
-        private async Task CreateEngine1Async()
+        private void CreateEngine1()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
-        private async Task CreateEngine2Async()
+        private void CreateEngine2()
         {
-            MediaPlayer2 = await MediaPlayerCore.CreateAsync(VideoView2 as IVideoView);
+            MediaPlayer2 = new MediaPlayerCore(VideoView2 as IVideoView);
             MediaPlayer2.OnError += MediaPlayer_OnError;
             MediaPlayer2.OnStop += MediaPlayer2_OnStop;
         }
@@ -266,10 +266,10 @@
                                    }));
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            await CreateEngine1Async();
-            await CreateEngine2Async();
+            CreateEngine1();
+            CreateEngine2();
 
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }

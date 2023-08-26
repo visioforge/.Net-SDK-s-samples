@@ -177,7 +177,13 @@ namespace Social_Networks_Streamer_Demo
                 var facebookOutput = new FacebookLiveOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(facebookOutput, true);
             }
-        
+            // generic RTMP
+            else if (cbPlatform.SelectedIndex == 2)
+            {
+                var rtmpOutput = new RTMPOutput(edStreamingKey.Text);
+                _videoCapture.Outputs_Add(rtmpOutput, true);
+            }
+
             // start
             await _videoCapture.StartAsync();
 

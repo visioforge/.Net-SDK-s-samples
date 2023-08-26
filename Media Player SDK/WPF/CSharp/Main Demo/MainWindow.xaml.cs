@@ -129,9 +129,9 @@ namespace Main_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
         }
 
-        private async Task CreateEngineAsync()
+        private void CreateEngine()
         {
-            MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoView1 as IVideoView);
+            MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             VideoView1.MouseDown += MediaPlayer1_MouseDown;
             MediaPlayer1.OnBarcodeDetected += MediaPlayer1_OnBarcodeDetected;
@@ -142,7 +142,6 @@ namespace Main_Demo
             MediaPlayer1.OnMotionDetectionEx += MediaPlayer1_OnMotionDetectionEx;
             MediaPlayer1.OnAudioVUMeterProFFTCalculated += MediaPlayer1_OnAudioVUMeterProFFTCalculated;
             MediaPlayer1.OnAudioVUMeterProMaximumCalculated += MediaPlayer1_OnAudioVUMeterProMaximumCalculated;
-
         }
 
         private void MediaPlayer1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
@@ -172,9 +171,9 @@ namespace Main_Demo
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await CreateEngineAsync();
+            CreateEngine();
 
             Title += $" (SDK v{MediaPlayer1.SDK_Version()})";
 

@@ -35,6 +35,10 @@ namespace QRReader
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__
+            await RequestCameraPermissionAsync();
+#endif
+
             _deviceEnumerator = new DeviceEnumerator(
 #if __ANDROID__
                 Microsoft.Maui.ApplicationModel.Platform.CurrentActivity
@@ -42,21 +46,17 @@ namespace QRReader
                 );
 
 #if __ANDROID__
-            await RequestCameraPermissionAsync();
-#endif
-
-            //var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
-
-#if __ANDROID__
             _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
+#elif __MACCATALYST__
+            _core = new VideoCaptureCoreX(videoView);
 #else
             var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
-            _core = new VideoCaptureCoreX(handler.VideoView);
+            _core = new VideoCaptureCoreX(handler.VideoView);            
 #endif
 
             _core.OnError += Core_OnError;
             _core.OnBarcodeDetected += Core_OnBarcodeDetected;
-          //  _core.Barcode_Reader_Enabled = true;
+            //_core.Barcode_Reader_Enabled = true;
 
             // cameras
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
@@ -68,11 +68,6 @@ namespace QRReader
             }
 
             Window.Destroying += Window_Destroying;
-        }
-
-        private void Core_OnVideoFrameBuffer(object sender, VideoFrameXBufferEventArgs e)
-        {
-            Debug.WriteLine($"Video frame received: {e.Frame.Timestamp}");
         }
 
         private void Core_OnBarcodeDetected(object sender, BarcodeDetectorEventArgs e)
@@ -168,24 +163,15 @@ namespace QRReader
             }
         }
 
-        private void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object sender, EventArgs e)
         {
             if (_core != null)
             {
                 _core.OnError -= Core_OnError;
-                _core.Stop();
+                await _core.StopAsync();
 
                 _core.Dispose();
                 _core = null;
-            }
-        }
-
-        private void OnStop(object sender, EventArgs e)
-        {
-            if (_core != null)
-            {
-                _core.OnError -= Core_OnError;
-                _core.Stop();
             }
         }
 
@@ -193,6 +179,5 @@ namespace QRReader
         {
             Debug.WriteLine(e.Message);
         }
-
     }
 }
