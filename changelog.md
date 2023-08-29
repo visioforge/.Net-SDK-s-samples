@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.7
+
+* [ALL] VideoCaptureCore: Resolved rare crash issue with WinUI VideoView
+
 ## 15.6.4
 
 * [Video Capture SDK .Net] VideoCaptureCore: Updated FFMPEG.exe output. Improved support of x264 and x265 encoders of custom FFMPEG builds.
