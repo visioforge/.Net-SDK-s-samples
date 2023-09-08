@@ -20,6 +20,8 @@ using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core;
+using VisioForge.Core.MediaBlocks.VideoProcessing;
+using VisioForge.Core.Types.X.VideoEffects;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -110,7 +112,7 @@ namespace Live_Video_Compositor_Demo
 
                 var name = $"Camera [{dlg.Device}]";
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-                var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), rect);
+                var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), rect, true);
 
                 if (await _compositor.Video_Input_AddAsync(src))
                 {
@@ -137,7 +139,7 @@ namespace Live_Video_Compositor_Demo
 
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var name = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
-                var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), rect);
+                var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), rect, true);
 
                 if (await _compositor.Video_Input_AddAsync(src))
                 {
@@ -195,15 +197,15 @@ namespace Live_Video_Compositor_Demo
         {
             // add video renderer
             var name = "[VideoView] Preview";
-            _videoRendererOutput = new LVCVideoViewOutput(name, _compositor, VideoView1);
-            await _compositor.Video_Output_AddAsync(_videoRendererOutput, true);
+            _videoRendererOutput = new LVCVideoViewOutput(name, _compositor, VideoView1, true);
+            await _compositor.Video_Output_AddAsync(_videoRendererOutput);
 
             // add audio renderer
-            var audioRenderer = new AudioRendererBlock(_deviceEnumerator); // <- TODO replace with dialog 
-            _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer);
+            var audioRenderer = new AudioRendererBlock(_deviceEnumerator); // <- TODO replace with a dialog 
+            _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer, true);
             await _compositor.Audio_Output_AddAsync(_audioRendererOutput, true);
 
-            await _compositor.StartAsync(true);
+            await _compositor.StartAsync();
 
             //_pipeline.SavePipeline("compositor");
 
@@ -245,9 +247,12 @@ namespace Live_Video_Compositor_Demo
             var name = $"output_{now.Year}_{now.Month}_{now.Day}_{now.Hour}_{now.Minute}_{now.Second}.mp4";
             var outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), name);
             var mp4Output = new MP4OutputBlock(new MP4SinkSettings(outputFile), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
-            var output = new LVCVideoAudioOutput(name, _compositor, mp4Output);
 
-            if (await _compositor.VideoAudio_Output_AddAsync(output, true))
+            //var videoResizeBlock = new VideoResizeBlock(new ResizeVideoEffect(640, 480));
+
+            var output = new LVCVideoAudioOutput(name, _compositor, mp4Output, false); //, processingVideoBlock: videoResizeBlock);
+
+            if (await _compositor.VideoAudio_Output_AddAsync(output))
             {
                 lbOutputs.Items.Add(outputFile);
                 lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
@@ -264,9 +269,9 @@ namespace Live_Video_Compositor_Demo
             var name = $"output_{now.Year}_{now.Month}_{now.Day}_{now.Hour}_{now.Minute}_{now.Second}.webm";
             var outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), name);
             var webmOutput = new WebMOutputBlock(new WebMSinkSettings(outputFile), new VP8EncoderSettings(), new VorbisEncoderSettings());
-            var output = new LVCVideoAudioOutput(name, _compositor, webmOutput);
+            var output = new LVCVideoAudioOutput(name, _compositor, webmOutput, false);
 
-            if (await _compositor.VideoAudio_Output_AddAsync(output, true))
+            if (await _compositor.VideoAudio_Output_AddAsync(output))
             {
                 lbOutputs.Items.Add(outputFile);
                 lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
@@ -283,9 +288,9 @@ namespace Live_Video_Compositor_Demo
             var name = $"output_{now.Year}_{now.Month}_{now.Day}_{now.Hour}_{now.Minute}_{now.Second}.mp3";
             var outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), name);
             var mp3Output = new MP3OutputBlock(outputFile, new MP3EncoderSettings());
-            var output = new LVCAudioOutput(name, _compositor, mp3Output);
+            var output = new LVCAudioOutput(name, _compositor, mp3Output, false);
 
-            if (await _compositor.Audio_Output_AddAsync(output, true))
+            if (await _compositor.Audio_Output_AddAsync(output))
             {
                 lbOutputs.Items.Add(outputFile);
                 lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
@@ -325,7 +330,7 @@ namespace Live_Video_Compositor_Demo
                 }
 
                 var name = $"Audio source [{dlg.Device}]";
-                var src = new LVCAudioInput(name, _compositor, new SystemAudioSourceBlock(settings));
+                var src = new LVCAudioInput(name, _compositor, new SystemAudioSourceBlock(settings), true);
                 if (await _compositor.Audio_Input_AddAsync(src))
                 {
                     lbSources.Items.Add(name);
@@ -341,7 +346,7 @@ namespace Live_Video_Compositor_Demo
         private async Task AddAudioVirtualAsync()
         {
             var name = "Audio source [Virtual]";
-            var src = new LVCAudioInput(name, _compositor, new VirtualAudioSourceBlock(new VirtualAudioSourceSettings()));            
+            var src = new LVCAudioInput(name, _compositor, new VirtualAudioSourceBlock(new VirtualAudioSourceSettings()), true);            
             if (await _compositor.Audio_Input_AddAsync(src))
             {
                 lbSources.Items.Add(name);
@@ -362,7 +367,7 @@ namespace Live_Video_Compositor_Demo
                    Convert.ToInt32(edRectBottom.Text));
 
             var name = "Video source [Virtual]";
-            var src = new LVCVideoInput(name, _compositor, new VirtualVideoSourceBlock(new VirtualVideoSourceSettings()), rect);
+            var src = new LVCVideoInput(name, _compositor, new VirtualVideoSourceBlock(new VirtualVideoSourceSettings()), rect, true);
             if (await _compositor.Video_Input_AddAsync(src))
             {
                 lbSources.Items.Add(name);
@@ -487,6 +492,24 @@ namespace Live_Video_Compositor_Demo
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _deviceEnumerator.Dispose();
+        }
+
+        private async void btStartOutput_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbOutputs.SelectedIndex != -1)
+            {
+                var output = _compositor.VideoAudio_Output_Get(lbOutputs.SelectedIndex);
+                await output.StartAsync();
+            }
+        }
+
+        private async void btStopOutput_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbOutputs.SelectedIndex != -1)
+            {
+                var output = _compositor.VideoAudio_Output_Get(lbOutputs.SelectedIndex);
+                await output.StopAsync();
+            }
         }
     }
 }

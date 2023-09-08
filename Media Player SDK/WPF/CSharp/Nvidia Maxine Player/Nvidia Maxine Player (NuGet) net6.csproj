@@ -9,10 +9,10 @@
     <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.6.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.6.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.6.7" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.6.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.6.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.6.8" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

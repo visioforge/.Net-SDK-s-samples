@@ -115,6 +115,9 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" HorizontalAlignment="Stretch">
                         <Button x:Name="btAddOutput" Margin="5,0,0,0" Click="btAddOutput_Click">Add</Button>
                         <Button x:Name="btRemoveOutput" Margin="5,0,0,0" Click="btRemoveOutput_Click">Remove</Button>
+
+                        <Button x:Name="btStartOutput" Width="75" Margin="25,0,0,0" Click="btStartOutput_Click">Start</Button>
+                        <Button x:Name="btStopOutput" Width="75" Margin="5,0,0,0" Click="btStopOutput_Click">Stop</Button>
                     </StackPanel>
                 </Grid>
             </Border>
