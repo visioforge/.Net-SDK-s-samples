@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay Manager Demo net472
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Core Demo net472", "WPF\CSharp\Simple Player Core Demo\Simple Player Core Demo net472.csproj", "{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTTP MJPEG Source Demo net472", "WPF\CSharp\HTTP MJPEG Source Demo\HTTP MJPEG Source Demo net472.csproj", "{5FFC3CF7-A108-4230-BB81-D2FAA9734879}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,10 @@ Global
 		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFC3CF7-A108-4230-BB81-D2FAA9734879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFC3CF7-A108-4230-BB81-D2FAA9734879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFC3CF7-A108-4230-BB81-D2FAA9734879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFC3CF7-A108-4230-BB81-D2FAA9734879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +157,7 @@ Global
 		{0020F7FE-B685-43A5-B6FD-E85C62F524E3} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{74F81CF9-ABA0-4321-9794-DFFB5F4C890D} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{2E204E1D-94FF-4FBA-9CFC-498AD9FB883E} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{5FFC3CF7-A108-4230-BB81-D2FAA9734879} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

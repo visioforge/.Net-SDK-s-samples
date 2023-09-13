@@ -68,7 +68,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="1.22.4" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="1.22.4" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="1.22.4" />
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.6.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.6.9" />
   </ItemGroup>
 </Project>

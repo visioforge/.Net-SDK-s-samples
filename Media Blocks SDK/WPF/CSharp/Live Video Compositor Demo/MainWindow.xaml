@@ -66,7 +66,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="160" />
+                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="160" SelectionChanged="lbSources_SelectionChanged" />
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" HorizontalAlignment="Stretch">
                             <Button x:Name="btAddSource" Margin="5,0,0,0" Click="btAddSource_Click">Add</Button>
