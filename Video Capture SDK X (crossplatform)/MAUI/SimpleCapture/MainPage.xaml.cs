@@ -1,6 +1,10 @@
 ﻿using System.Diagnostics;
 
 using VisioForge.Core;
+using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.MediaBlocks.VideoProcessing;
+using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;

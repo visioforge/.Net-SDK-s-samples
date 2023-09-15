@@ -149,12 +149,15 @@ namespace Live_Video_Compositor_Demo
             //    src.Dispose();
             //}
 
-            //var dlg = new OpenFileDialog();
-            //if (dlg.ShowDialog() == true)
-            //{
-                var filename = @"c:\Samples\XXX\!videoonly.mp4";
+            var dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == true)
+            {
+                //var filename = @"c:\Samples\XXX\!videoonly.mp4";
+                // var filename = @"c:\Samples\!video.mp4";
+                var filename = dlg.FileName;
                 var name = $"File [{filename}]";
-                var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text),
+                    Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var settings = await UniversalSourceSettings.CreateAsync(filename);
                 var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), rect, true);
 
@@ -167,7 +170,7 @@ namespace Live_Video_Compositor_Demo
                 {
                     src.Dispose();
                 }
-            //}
+            }
         }
 
         private async Task AddScreenSourceAsync()
