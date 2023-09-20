@@ -21,11 +21,11 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.6.18" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.6.18" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.6.19" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.6.19" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.6.18" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.6.19" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -84,30 +84,8 @@ namespace Overlay_Manager_Demo
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-            //_overlayManager.Elements.Add(new OverlayManagerImage(@"c:\samples\!rgb2.png", 100, 100));
-            //_overlayManager.Elements.Add(new OverlayManagerImage(@"c:\samples\!logo.png", 0, 100));
-            //_overlayManager.Elements.Add(new OverlayManagerImage(@"c:\samples\!logo.png", 100, 0));
-            //_overlayManager.Elements.Add(new OverlayManagerImage(@"c:\samples\!logo.png", 0, 0));
-
-            // _overlayManager.Elements.Add(new OverlayManagerSVG(@"c:\samples\!logo.svg", 100, 200));
-
-            //var txt = new OverlayManagerText(@"Hello world", 100, 200) { Color = SKColors.IndianRed };
-            //txt.Font.Size = 72;
-            //txt.Font.Style = VisioForge.Core.Types.X.VideoEffects.FontStyle.Italic;
-            //_overlayManager.Elements.Add(txt);
-
-            //_overlayManager.Elements.Add(new OverlayManagerLine());
-            //_overlayManager.Elements.Add(new OverlayManagerRectangle());
-            //_overlayManager.Elements.Add(new OverlayManagerTriangle());
-            //_overlayManager.Elements.Add(new OverlayManagerCircle());
-
-            //_overlayManager.Elements.Add(new OverlayManagerGIF(@"C:\samples\!anim.gif"));
-            //_overlayManager.Elements.Add(new OverlayManagerImage(@"c:\samples\!rgb.png", 100, 100));
-
             _pipeline.Connect(_fileSource.VideoOutput, _overlayManager.Input);
             _pipeline.Connect(_overlayManager.Output, _videoRenderer.Input);
-
-            //_pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
             var audioOutputs = await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound);
             _audioRenderer = new AudioRendererBlock(audioOutputs[0]);
@@ -170,31 +148,9 @@ namespace Overlay_Manager_Demo
 
             await CreateEngineAsync();
 
-            //_pipeline.Loop = cbLoop.Checked;
-            //_pipeline.Audio_PlayAudio = true;
-            //_pipeline.Info_UseLibMediaInfo = true;
-            //_pipeline.Audio_OutputDevice = "Default DirectSound Device";
-
-            //if (FilterHelpers.Filter_Supported_EVR())
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.EVR;
-            //}
-            //else if (FilterHelpers.Filter_Supported_VMR9())
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            //}
-            //else
-            //{
-            //    _pipeline.Video_Renderer.VideoRenderer = VideoRendererMode.VideoRenderer;
-            //}
-
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
 
             await _pipeline.StartAsync();
-
-            // set audio volume for each stream
-            // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
             _timer.Start();
         }
