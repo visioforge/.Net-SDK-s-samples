@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.20
+
+* [Cross-platform SDKs] Updated OverlayManagerImage. Resolved issue with System.Drawing.Bitmap usage.
+
 ## 15.6.7
 
 * [ALL] VideoCaptureCore: Resolved rare crash issue with WinUI VideoView
