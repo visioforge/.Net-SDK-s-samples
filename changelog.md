@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.23
+
+* [Cross-platform SDKs] Updated Overlay Manager. Added OverlayManagerDateTime class to draw current date time and custom text.
+
 ## 15.6.20
 
 * [Cross-platform SDKs] Updated OverlayManagerImage. Resolved issue with System.Drawing.Bitmap usage.
