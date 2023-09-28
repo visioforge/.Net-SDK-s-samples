@@ -427,41 +427,35 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
-        private async Task AddDecklinkAsync()
+        private async Task AddDecklinkVideoSourceAsync()
         {
             // Decklink video source
-            var rect = new Rect(
+            var dlg = new DecklinkVideoSourceDialog(_deviceEnumerator);
+            if (dlg.ShowDialog() == true)
+            {               
+                var rect = new Rect(
                    Convert.ToInt32(edRectLeft.Text),
                    Convert.ToInt32(edRectTop.Text),
                    Convert.ToInt32(edRectRight.Text),
                    Convert.ToInt32(edRectBottom.Text));
 
-            var videoName = "Decklink video source [0]";
-            var videoSrc = new LVCVideoInput(videoName, _compositor, new DecklinkVideoSourceBlock(new DecklinkVideoSourceSettings(1)), rect, true);
-            if (await _compositor.Input_AddAsync(videoSrc))
-            {
-                lbSources.Items.Add(videoName);
-                lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                var videoSettings = await dlg.GetVideoDeviceSettingsAsync();
+                var audioSettings = await dlg.GetAudioDeviceSettingsAsync();
+                var name = $"Decklink source [{videoSettings.DeviceNumber}]";
 
-                //await videoSrc.StartAsync();
-            }
-            else
-            {
-                videoSrc.Dispose();
-            }
+                var sourceBlock = new DecklinkVideoAudioSourceBlock(videoSettings, audioSettings);
 
-            //// Decklink audio source
-            //var audioName = "Decklink audio source [0]";
-            //var audioSrc = new LVCAudioInput(audioName, _compositor, new DecklinkAudioSourceBlock(new DecklinkAudioSourceSettings(0)), true);
-            //if (await _compositor.Input_AddAsync(audioSrc))
-            //{
-            //    lbSources.Items.Add(audioName);
-            //    lbSources.SelectedIndex = lbSources.Items.Count - 1;
-            //}
-            //else
-            //{
-            //    audioSrc.Dispose();
-            //}
+                var videoSrc = new LVCVideoAudioInput(name, _compositor, sourceBlock, rect, true);
+                if (await _compositor.Input_AddAsync(videoSrc))
+                {
+                    lbSources.Items.Add(name);
+                    lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                }
+                else
+                {
+                    videoSrc.Dispose();
+                }
+            }
         }
 
         private void btAddSource_Click(object sender, RoutedEventArgs e)
@@ -504,10 +498,10 @@ namespace Live_Video_Compositor_Demo
                 await AddVideoVirtualAsync();
             };
 
-            var miDecklink = new MenuItem() { Header = "Decklink source" };
-            miDecklink.Click += async (senderm, args) =>
+            var miDecklinkSource = new MenuItem() { Header = "Decklink source" };
+            miDecklinkSource.Click += async (senderm, args) =>
             {
-                await AddDecklinkAsync();
+                await AddDecklinkVideoSourceAsync();
             };
 
             ctx.Items.Add(miScreen);
@@ -518,7 +512,7 @@ namespace Live_Video_Compositor_Demo
             ctx.Items.Add(miAudioSource);
             ctx.Items.Add(miAudioVirtual);
             ctx.Items.Add(new Separator());
-            ctx.Items.Add(miDecklink);
+            ctx.Items.Add(miDecklinkSource);
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
