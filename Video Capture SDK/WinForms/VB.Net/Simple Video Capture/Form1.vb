@@ -445,9 +445,28 @@ Public Class Form1
         lbLogos.Items.Clear()
         ' ConfigureVideoEffects()
 
+        ' Separate capture
+        If cbSeparateCapture.Checked Then
+            VideoCapture1.SeparateCapture_Enabled = True
+            If (rbSeparateCaptureStartManually.Checked) Then
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.Normal
+                VideoCapture1.SeparateCapture_AutostartCapture = False
+            ElseIf (rbSeparateCaptureSplitByDuration.Checked) Then
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.SplitByDuration
+                VideoCapture1.SeparateCapture_AutostartCapture = True
+                VideoCapture1.SeparateCapture_TimeThreshold = TimeSpan.FromMilliseconds(Convert.ToInt32(edSeparateCaptureDuration.Text))
+            ElseIf (rbSeparateCaptureSplitBySize.Checked) Then
+                VideoCapture1.SeparateCapture_Mode = SeparateCaptureMode.SplitByFileSize
+                VideoCapture1.SeparateCapture_AutostartCapture = True
+                VideoCapture1.SeparateCapture_FileSizeThreshold = Convert.ToInt32(edSeparateCaptureFileSize.Text) * 1024 * 1024
+            End If
+        Else
+            VideoCapture1.SeparateCapture_Enabled = False
+        End If
+
         Await VideoCapture1.StartAsync()
 
-        tcMain.SelectedIndex = 4
+        tcMain.SelectedIndex = 5
         tmRecording.Start()
     End Sub
 
@@ -876,6 +895,26 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         DestroyEngine()
+    End Sub
+
+    Private Async Sub btSeparateCaptureStart_Click(sender As Object, e As EventArgs) Handles btSeparateCaptureStart.Click
+        Await VideoCapture1.SeparateCapture_StartAsync(edOutput.Text)
+    End Sub
+
+    Private Async Sub btSeparateCapturePause_Click(sender As Object, e As EventArgs) Handles btSeparateCapturePause.Click
+        Await VideoCapture1.SeparateCapture_PauseAsync()
+    End Sub
+
+    Private Async Sub btSeparateCaptureResume_Click(sender As Object, e As EventArgs) Handles btSeparateCaptureResume.Click
+        Await VideoCapture1.SeparateCapture_ResumeAsync()
+    End Sub
+
+    Private Async Sub btSeparateCaptureStop_Click(sender As Object, e As EventArgs) Handles btSeparateCaptureStop.Click
+        Await VideoCapture1.SeparateCapture_StopAsync()
+    End Sub
+
+    Private Async Sub btSeparateCaptureChangeFilename_Click(sender As Object, e As EventArgs) Handles btSeparateCaptureChangeFilename.Click
+        Await VideoCapture1.SeparateCapture_ChangeFilenameOnTheFlyAsync(edNewFilename.Text)
     End Sub
 End Class
 
