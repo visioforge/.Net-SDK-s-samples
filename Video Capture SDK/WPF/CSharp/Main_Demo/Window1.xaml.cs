@@ -759,7 +759,7 @@ namespace Main_Demo
             settings.AudioCapture = cbIPAudioCapture.IsChecked == true;
             settings.Login = edIPLogin.Text;
             settings.Password = edIPPassword.Text;
-            settings.ForcedFramerate = Convert.ToDouble(edIPForcedFramerate.Text);
+            settings.ForcedFramerate = new VideoFrameRate(Convert.ToInt32(edIPForcedFramerate.Text));
             settings.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text[0];
             settings.Debug_Enabled = cbDebugMode.IsChecked == true;
             settings.Debug_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "ip_cam_log.txt");

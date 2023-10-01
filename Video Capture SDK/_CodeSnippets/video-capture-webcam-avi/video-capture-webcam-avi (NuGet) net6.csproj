@@ -17,7 +17,7 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.6.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.6.24" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.6.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.6.25" />
   </ItemGroup>
 </Project>

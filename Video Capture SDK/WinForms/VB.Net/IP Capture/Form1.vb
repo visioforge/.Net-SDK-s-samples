@@ -214,7 +214,7 @@ Public Class Form1
         VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text
         VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked
         VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text)
-        VideoCapture1.IP_Camera_Source.ForcedFramerate = Convert.ToInt32(edIPForcedFramerate.Text)
+        VideoCapture1.IP_Camera_Source.ForcedFramerate = New VideoFrameRate(Convert.ToInt32(edIPForcedFramerate.Text))
         VideoCapture1.IP_Camera_Source.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text(0)
 
         If VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV Then
