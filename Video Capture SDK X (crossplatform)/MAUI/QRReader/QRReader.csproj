@@ -63,7 +63,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.6.27" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.6.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.6.31" />
   </ItemGroup>
 </Project>

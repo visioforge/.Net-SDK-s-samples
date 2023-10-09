@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.6.29
+
+* [Video Capture SDK] Updated ONVIF engine.
+* [Cross-platform SDKs] Updated Decklink source. Resolved issue with incorrect device name.
+
 ## 15.6.24
 
 * [All] SkiaSharp security update.

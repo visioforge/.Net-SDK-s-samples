@@ -4365,8 +4365,8 @@ Public Class Form1
 
                 cbONVIFProfile.Items.Clear()
 
-                Dim profiles As VisioForge.Core.ONVIF.Profile() = Await onvifControl.GetProfilesAsync()
-                For Each profile As VisioForge.Core.ONVIF.Profile In profiles
+                Dim profiles As VisioForge.Libs.External.ONVIF.Media.Profile() = Await onvifControl.GetProfilesAsync()
+                For Each profile As VisioForge.Libs.External.ONVIF.Media.Profile In profiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 

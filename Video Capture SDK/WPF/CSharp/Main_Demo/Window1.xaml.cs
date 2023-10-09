@@ -4831,7 +4831,7 @@ namespace Main_Demo
                     }
 
                     onvifControl = new ONVIFControl();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    var result = await onvifControl.ConnectAsync(new Uri(edONVIFURL.Text), edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
                         onvifControl = null;
