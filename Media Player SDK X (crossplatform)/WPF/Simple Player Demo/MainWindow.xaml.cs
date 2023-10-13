@@ -9,6 +9,7 @@ using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoEffects;
 
 namespace Simple_Player_Demo_X
 {
@@ -123,6 +124,15 @@ namespace Simple_Player_Demo_X
             }
         }
 
+        private void btSelectSubFile_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                edSubFilename.Text = dialog.FileName;
+            }
+        }
+
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _player != null)
@@ -138,6 +148,17 @@ namespace Simple_Player_Demo_X
             CreateEngine();
 
             _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
+
+            if (string.IsNullOrEmpty(edSubFilename.Text))
+            {
+                _player.Subtitles_Enabled = false;
+            }
+            else
+            {
+                _player.Subtitles_Enabled = true;
+                _player.Subtitles_ExternalFile = edSubFilename.Text;
+                _player.Subtitles_Settings = new SubtitleOverlaySettings();
+            }
 
             await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
