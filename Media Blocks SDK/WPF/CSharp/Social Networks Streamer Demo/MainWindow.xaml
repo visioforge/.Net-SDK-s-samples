@@ -52,7 +52,8 @@
                 <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
                     <ComboBoxItem>YouTube</ComboBoxItem>
                     <ComboBoxItem>Facebook</ComboBoxItem>
-                    <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>
+                    <ComboBoxItem>HLS</ComboBoxItem>
+                    <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>                   
                 </ComboBox>
             </StackPanel>
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.33
+
+* [All] Updated FFMPEG source and encoders. Resolved issue with missed MSVC dependencies.
+
 ## 15.6.29
 
 * [Video Capture SDK] Updated ONVIF engine.

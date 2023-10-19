@@ -680,7 +680,7 @@
                                 <TextBox x:Name="edHLSSegmentCount" HorizontalAlignment="Left" Height="23" Margin="10,129,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="67"/>
                                 <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="84,130,0,0" TextWrapping="Wrap" Text="Use 0 to save all segments" VerticalAlignment="Top"/>
                                 <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="You can set video (H264) and audio (AAC) settings in code" VerticalAlignment="Top"/>
-                                <Label x:Name="lbHLSConfigure" Content="How to configure HTTP server for HLS" Height="29" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF" MouseDown="lbHLSConfigure_MouseDown" />
+                                <Label x:Name="lbHLSConfigure" Content="How to configure HTTP server for HLS" Height="29" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF" MouseDown="lbHLSConfigure_MouseDown" />
                                 <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,200,0,0" TextWrapping="Wrap" Text="Mode (playlist type)" VerticalAlignment="Top"/>
                                 <ComboBox x:Name="cbHLSMode" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                                     <ComboBoxItem>Live</ComboBoxItem>
@@ -689,8 +689,9 @@
                                 </ComboBox>
                                 <CheckBox x:Name="cbHLSEmbeddedHTTPServerEnabled" Content="Use embedded HTTP server with port" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edHLSEmbeddedHTTPServerPort" HorizontalAlignment="Left" Height="23" Margin="252,257,0,0" TextWrapping="Wrap" Text="81" VerticalAlignment="Top" Width="40"/>
-                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,284,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
+                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,346,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,311,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
+                                <Label x:Name="label2_Copy" Content="(put the index.htm with your player inside the output folder)" HorizontalAlignment="Left" Margin="8,279,0,0" VerticalAlignment="Top" FontSize="9"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="UDP">

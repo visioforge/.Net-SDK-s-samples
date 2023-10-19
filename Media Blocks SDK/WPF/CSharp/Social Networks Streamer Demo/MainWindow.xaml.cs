@@ -42,6 +42,8 @@ namespace Social_Networks_Streamer_Demo
 
         private HTTPMJPEGLiveSinkBlock _mjpegSink;
 
+        private HLSSinkBlock _hlsSink;
+
         private H264EncoderBlock _h264Encoder;
 
         private TeeBlock _videoTee;
@@ -187,7 +189,7 @@ namespace Social_Networks_Streamer_Demo
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
 
-            if (cbPlatform.SelectedIndex == 0 || cbPlatform.SelectedIndex == 1)
+            if (cbPlatform.SelectedIndex == 0 || cbPlatform.SelectedIndex == 1 || cbPlatform.SelectedIndex == 2)
             {
                 // H264/AAC encoders
                 var h264Settings = new OpenH264EncoderSettings();
@@ -211,14 +213,21 @@ namespace Social_Networks_Streamer_Demo
                     _pipeline.Connect(_h264Encoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Video));
                     _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                 }
+                // HLS
+                else
+                {
+                    _hlsSink = new HLSSinkBlock(new HLSSinkSettings());
+                    _pipeline.Connect(_h264Encoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_aacEncoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
             }
             // MJPEG
-            else
+            else if (cbPlatform.SelectedIndex == 3)
             {
                 _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
                 _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
                 edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
-            }
+            }            
 
             // start
             await _pipeline.StartAsync();

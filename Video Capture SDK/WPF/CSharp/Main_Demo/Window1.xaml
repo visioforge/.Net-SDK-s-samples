@@ -455,8 +455,8 @@
             <TabItem Header="Network streaming" x:Name="tabItem35">
                 <Grid>
                     <CheckBox Content="Network streaming enabled" Height="16" HorizontalAlignment="Left" Margin="20,16,0,0" x:Name="cbNetworkStreaming" VerticalAlignment="Top" />
-                    <CheckBox Content="Stream audio" Height="16" HorizontalAlignment="Left" Margin="20,488,0,0" x:Name="cbNetworkStreamingAudioEnabled" VerticalAlignment="Top" />
-                    <TabControl Height="419" HorizontalAlignment="Left" Margin="6,64,0,0" x:Name="tabControl20" VerticalAlignment="Top" Width="360">
+                    <CheckBox Content="Stream audio" Height="16" HorizontalAlignment="Left" Margin="10,538,0,0" x:Name="cbNetworkStreamingAudioEnabled" VerticalAlignment="Top" />
+                    <TabControl Height="460" HorizontalAlignment="Left" Margin="6,64,0,0" x:Name="tabControl20" VerticalAlignment="Top" Width="360">
                         <TabItem Header="Windows Media Video">
                             <Grid>
                                 <RadioButton Content="Use external profile" Height="16" HorizontalAlignment="Left" Margin="10,33,0,0" x:Name="rbNetworkStreamingUseExternalProfile" VerticalAlignment="Top" />
@@ -503,12 +503,12 @@
                                     <TextBox Margin="20,5,10,0" x:Name="edNetworkRTMPYouTube">KEY</TextBox>
                                     <RadioButton Margin="0,10,0,0" x:Name="rbNetworkRTMPFacebook" GroupName="RTMP_TARGET">Facebook Live</RadioButton>
                                     <TextBox Margin="20,5,10,0" x:Name="edNetworkRTMPFacebook">KEY</TextBox>
-                                    <RadioButton Margin="0,10,0,0" x:Name="rbNetworkRTMPGeneric" GroupName="RTMP_TARGET">Generic</RadioButton>                                    
+                                    <RadioButton Margin="0,10,0,0" x:Name="rbNetworkRTMPGeneric" GroupName="RTMP_TARGET">Generic</RadioButton>
                                     <Label Content="URL" HorizontalAlignment="Left" Margin="15,0,0,0" VerticalAlignment="Top"/>
                                     <TextBox x:Name="edNetworkRTMPURL" Margin="20,0,10,0" TextWrapping="Wrap" Text="rtmp://localhost:5554/live/Stream" />
 
                                     <Label Content="Format settings located on output format tab" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top"/>
-                                </StackPanel>                               
+                                </StackPanel>
                             </Grid>
                         </TabItem>
                         <TabItem Header="NDI">
@@ -559,7 +559,7 @@
                                 <TextBox x:Name="edHLSSegmentCount" HorizontalAlignment="Left" Height="23" Margin="10,129,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="67"/>
                                 <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="84,130,0,0" TextWrapping="Wrap" Text="Use 0 to save all segments" VerticalAlignment="Top"/>
                                 <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="You can set video (H264) and audio (AAC) settings in code" VerticalAlignment="Top"/>
-                                <Label x:Name="lbHLSConfigure" Content="How to configure HTTP server for HLS" Height="29" HorizontalAlignment="Left" Margin="10,323,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF" MouseDown="lbHLSConfigure_MouseDown" />
+                                <Label x:Name="lbHLSConfigure" Content="How to configure HTTP server for HLS" Height="29" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF0016CF" MouseDown="lbHLSConfigure_MouseDown" />
                                 <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,200,0,0" TextWrapping="Wrap" Text="Mode (playlist type)" VerticalAlignment="Top"/>
                                 <ComboBox x:Name="cbHLSMode" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
                                     <ComboBoxItem>Live</ComboBoxItem>
@@ -568,8 +568,9 @@
                                 </ComboBox>
                                 <CheckBox x:Name="cbHLSEmbeddedHTTPServerEnabled" Content="Use embedded HTTP server with port" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edHLSEmbeddedHTTPServerPort" HorizontalAlignment="Left" Height="23" Margin="252,257,0,0" TextWrapping="Wrap" Text="81" VerticalAlignment="Top" Width="40"/>
-                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,307,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,284,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
+                                <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="10,349,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top"/>
+                                <TextBox x:Name="edHLSURL" HorizontalAlignment="Left" Height="23" Margin="10,306,0,0" TextWrapping="Wrap" Text="http://localhost:81/playlist.m3u8" VerticalAlignment="Top" Width="282"/>
+                                <Label x:Name="label2" Content="(put the index.htm with your player inside the output folder)" HorizontalAlignment="Left" Margin="8,279,0,0" VerticalAlignment="Top" FontSize="9"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="External">

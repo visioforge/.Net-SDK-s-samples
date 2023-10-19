@@ -2131,7 +2131,7 @@ namespace VideoCapture_CSharp_Demo
                         if (rbNetworkStreamingUseMainWMVSettings.Checked)
                         {
                             wmvOutput = new WMVOutput();
-                            SetWMVOutput(ref wmvOutput);                            
+                            SetWMVOutput(ref wmvOutput);
                         }
                         else
                         {
