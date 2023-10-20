@@ -7,6 +7,7 @@ Imports System.IO
 Imports System.Linq
 Imports System.Threading.Tasks
 Imports VisioForge.Core.Helpers
+Imports VisioForge.Core.ONVIF.Legacy
 Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.AudioEffects
 Imports VisioForge.Core.Types.Decklink
@@ -4365,8 +4366,8 @@ Public Class Form1
 
                 cbONVIFProfile.Items.Clear()
 
-                Dim profiles As VisioForge.Libs.External.ONVIF.Media.Profile() = Await onvifControl.GetProfilesAsync()
-                For Each profile As VisioForge.Libs.External.ONVIF.Media.Profile In profiles
+                Dim profiles As VisioForge.Libs.External.ONVIFLegacy.Profile() = Await onvifControl.GetProfilesAsync()
+                For Each profile As VisioForge.Libs.External.ONVIFLegacy.Profile In profiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 

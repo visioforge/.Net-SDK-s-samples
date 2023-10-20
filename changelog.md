@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.34
+
+* [All] Updated VLC source (libVLC 3.0.19).
+
 ## 15.6.33
 
 * [All] Updated FFMPEG source and encoders. Resolved issue with missed MSVC dependencies.

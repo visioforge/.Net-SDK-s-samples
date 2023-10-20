@@ -19,6 +19,7 @@ namespace IP_Capture
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;

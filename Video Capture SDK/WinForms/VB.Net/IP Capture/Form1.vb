@@ -16,6 +16,7 @@ Imports System.Drawing.Imaging
 Imports VisioForge.Core.Helpers
 Imports System.Linq
 Imports System.Threading.Tasks
+Imports VisioForge.Core.ONVIF.Legacy
 
 Public Class Form1
     Dim mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
@@ -345,8 +346,8 @@ Public Class Form1
 
                 cbONVIFProfile.Items.Clear()
 
-                Dim profiles As VisioForge.Libs.External.ONVIF.Media.Profile() = Await onvifControl.GetProfilesAsync()
-                For Each profile As VisioForge.Libs.External.ONVIF.Media.Profile In profiles
+                Dim profiles As VisioForge.Libs.External.ONVIFLegacy.Profile() = Await onvifControl.GetProfilesAsync()
+                For Each profile As VisioForge.Libs.External.ONVIFLegacy.Profile In profiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 

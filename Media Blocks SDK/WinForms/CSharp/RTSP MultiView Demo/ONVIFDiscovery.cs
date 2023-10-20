@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VisioForge.Core.ONVIF.Legacy;
 using VisioForge.Core.ONVIFDiscovery;
 using VisioForge.Core.VideoCapture;
 

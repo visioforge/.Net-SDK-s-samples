@@ -24,6 +24,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Helpers;
     using System.Threading.Tasks;
+    using VisioForge.Core.ONVIF.Legacy;
 
     public partial class Form1 : Form
     {

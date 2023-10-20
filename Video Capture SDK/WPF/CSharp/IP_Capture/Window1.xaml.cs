@@ -17,6 +17,7 @@ namespace IP_Capture
     using System.Windows.Input;
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;

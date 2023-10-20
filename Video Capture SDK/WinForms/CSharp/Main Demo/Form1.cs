@@ -19,6 +19,7 @@ namespace VideoCapture_CSharp_Demo
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.Helpers;
+    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Decklink;

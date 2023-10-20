@@ -11,6 +11,7 @@ namespace IP_MJPEG_Restreamer
     using System.Timers;
     using System.Windows;
     using System.Windows.Input;
+    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
