@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.35
+
+* [Video Capture SDK .Net] VideoCaptureCore: Start/StartAsync method will return false if the video capture device used already by another application.
+
 ## 15.6.34
 
 * [All] Updated VLC source (libVLC 3.0.19).

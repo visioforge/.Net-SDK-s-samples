@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using VisioForge.Core.UI.MAUI;
 
 namespace SimpleCapture
 {
@@ -11,6 +12,7 @@ namespace SimpleCapture
             builder
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
+                .ConfigureMauiHandlers(handlers => handlers.AddVisioForgeHandlers())
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
