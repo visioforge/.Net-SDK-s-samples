@@ -456,7 +456,11 @@ namespace VisioForge_SDK_Video_Capture_Demo
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.Equalizer, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
             VideoCapture1.Audio_Effects_Add(-1, AudioEffectType.TrueBass, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked, TimeSpan.Zero, TimeSpan.Zero);
 
-            await VideoCapture1.StartAsync();
+            var res = await VideoCapture1.StartAsync();
+            if (!res)
+            {
+                MessageBox.Show(@"Unable to start capture. Please check your devices and settings.");
+            }
 
             tcMain.SelectedIndex = 4;
             tmRecording.Start();

@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.36
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved licensing issues.
+
 ## 15.6.35
 
 * [Video Capture SDK .Net] VideoCaptureCore: Start/StartAsync method will return false if the video capture device used already by another application.
