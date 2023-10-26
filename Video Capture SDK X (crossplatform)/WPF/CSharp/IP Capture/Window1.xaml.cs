@@ -49,7 +49,7 @@ namespace IP_Capture
         private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog
         {
             FileName = "image.jpg",
-            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
+            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif",
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
@@ -153,19 +153,16 @@ namespace IP_Capture
                 switch (ext)
                 {
                     case ".bmp":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, ImageFormat.Bmp);
+                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Bmp);
                         break;
                     case ".jpg":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, ImageFormat.Jpeg, 85);
+                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg, 85);
                         break;
                     case ".gif":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, ImageFormat.Gif);
+                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
                         break;
                     case ".png":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, ImageFormat.Png);
-                        break;
-                    case ".tiff":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, ImageFormat.Tiff);
+                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
                         break;
                 }
             }
