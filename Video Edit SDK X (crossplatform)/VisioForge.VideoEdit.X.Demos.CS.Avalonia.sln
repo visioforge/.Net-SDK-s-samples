@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo X AV", "Avalonia\Video Join Demo X AV\Video Join Demo X AV.csproj", "{726060B8-8B46-4BE8-895C-0E4ED79FE713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV\VideoJoinDemoAV.csproj", "{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV.Desktop", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV.Desktop\VideoJoinDemoAV.Desktop.csproj", "{56CB7BFC-2CB6-457C-8EF9-145A54302FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{726060B8-8B46-4BE8-895C-0E4ED79FE713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{726060B8-8B46-4BE8-895C-0E4ED79FE713}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{726060B8-8B46-4BE8-895C-0E4ED79FE713}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{726060B8-8B46-4BE8-895C-0E4ED79FE713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56CB7BFC-2CB6-457C-8EF9-145A54302FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56CB7BFC-2CB6-457C-8EF9-145A54302FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56CB7BFC-2CB6-457C-8EF9-145A54302FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56CB7BFC-2CB6-457C-8EF9-145A54302FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

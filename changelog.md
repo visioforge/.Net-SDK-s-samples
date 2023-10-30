@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.37
+
+* [All] Avalonia 11.0.5 support.
+
 ## 15.6.36
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved licensing issues.
