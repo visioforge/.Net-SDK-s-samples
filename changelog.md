@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.38
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved WPF native rendering issue with a pop-up window.
+
 ## 15.6.37
 
 * [All] Avalonia 11.0.5 support.
