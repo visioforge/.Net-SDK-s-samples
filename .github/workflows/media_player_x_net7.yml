@@ -9,6 +9,7 @@ jobs:
   build:
     env:
       Solution_Name: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
+      Solution_Name2: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
     
     runs-on: windows-2022
 
@@ -31,6 +32,12 @@ jobs:
 
     - name: Build app for release
       run: msbuild $env:Solution_Name -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies 2
+      run: dotnet restore $env:Solution_Name2
+
+    - name: Build app for release 2
+      run: msbuild $env:Solution_Name2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
