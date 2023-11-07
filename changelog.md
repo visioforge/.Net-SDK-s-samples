@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.6.41
+
+* [X-engines] Resolved Decklink enumeration issues.
+* [X-engines] Default VP8/VP9 settings changed to live recording.
+* [X-engines] Added DNxHD video encoder support.
+
 ## 15.6.40
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Fixed problem with audio source format setting (regression).

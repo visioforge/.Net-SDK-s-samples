@@ -173,6 +173,8 @@ namespace Decklink_Player_Demo_X
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
+
+            await DestroyEngineAsync();
                         
             CreateEngine();
 

@@ -1,10 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using VisioForge.Core;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
+using VisioForge.Core.MediaBlocks.AudioProcessing;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Decklink;
 using VisioForge.Core.MediaBlocks.Sinks;
@@ -13,7 +16,7 @@ using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.Types.X.AudioEncoders;
@@ -45,15 +48,15 @@ namespace Decklink_MB_Demo
 
         private VideoEffectsWinBlock _videoEffects;
 
-        private MP4SinkBlock _mp4Muxer;
+        private MediaBlock _muxer;
 
-        private H264EncoderBlock _h264Encoder;
+        private MediaBlock _videoEncoder;
 
         private TeeBlock _videoTee;
 
         private TeeBlock _audioTee;
 
-        private AACEncoderBlock _aacEncoder;
+        private MediaBlock _audioEncoder;
 
         private DecklinkAudioSinkBlock _decklinkAudioSink;
 
@@ -67,9 +70,7 @@ namespace Decklink_MB_Demo
         {
             InitializeComponent();
 
-            _pipeline = new MediaBlocksPipeline(true);
-            _pipeline.Debug_Mode = false;
-            _pipeline.Debug_Dir = @"c:\vf\";
+            _pipeline = new MediaBlocksPipeline(true);      
             _pipeline.OnError += Pipeline_OnError;
 
             _deviceEnumerator = new DeviceEnumerator();
@@ -230,9 +231,80 @@ namespace Decklink_MB_Demo
             _videoEffects.Video_Effects_Remove("ImageLogo");
         }
 
+        private void CreateMP4Output()
+        {
+            var h264settings = new MFH264EncoderSettings();
+
+            // GOP size
+            h264settings.GOPSize = 25;
+
+            // quality
+            h264settings.RateControl = MFH264EncoderRCMode.QVBR;
+            h264settings.QP = 15;
+            h264settings.QPB = 15;
+            h264settings.QPP = 15;
+            h264settings.QPI = 15;
+
+            _videoEncoder = new H264EncoderBlock(h264settings);
+
+            _audioEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+
+            var mp4Settings = new MP4SinkSettings(edFilename.Text);
+            _muxer = new MP4SinkBlock(mp4Settings);
+
+            (_muxer as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video);
+            (_muxer as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
+        }
+
+        private void CreateWebMOutput()
+        {
+            var vpxSettings = new VP8EncoderSettings();
+            _videoEncoder = new VPXEncoderBlock(vpxSettings);
+
+            _audioEncoder = new VorbisEncoderBlock(new VorbisEncoderSettings());
+
+            var webMSettings = new WebMSinkSettings(edFilename.Text);
+            _muxer = new WebMSinkBlock(webMSettings);
+
+            (_muxer as WebMSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video);
+            (_muxer as WebMSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
+        }
+
+        private void CreateMXFOutput()
+        {
+            var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+            DecklinkHelper.GetVideoInfoFromMode(decklinkFormat, out var width, out var height, out var frameRate);
+
+            var format = DNxHDEncoderSettings.GetFormatByResolution(width, height);
+
+            var vpxSettings = new DNxHDEncoderSettings(format);
+            _videoEncoder = new DNxHDEncoderBlock(vpxSettings);
+
+            _audioEncoder = new AudioConverterBlock();
+
+            var mxfSettings = new MXFSinkSettings(edFilename.Text, MXFVideoStreamType.DNxHD, MXFAudioStreamType.Uncompressed);
+            _muxer = new MXFSinkBlock(mxfSettings);
+
+            (_muxer as MXFSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video);
+            (_muxer as MXFSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
+        }
+
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                        
             bool capture = cbOutputFormat.SelectedIndex > 0;
+            if (capture)
+            {
+                var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                if (decklinkFormat == DecklinkMode.Auto)
+                {
+                    MessageBox.Show(this, "Decklink mode must be set to a specific value if you want to capture to the output file.");
+                    return;
+                }
+            }
+
             bool decklinkOutput = cbDecklinkOutput.IsChecked == true;
             bool tee = capture || decklinkOutput;
 
@@ -322,8 +394,8 @@ namespace Decklink_MB_Demo
                 _videoTee = new TeeBlock(k);
                 _audioTee = new TeeBlock(k);
 
+                _pipeline.Connect(_videoSource.Output, _videoEffects.Input);
                 _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
-                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
                 _pipeline.Connect(_audioSource.Output, _audioTee.Input);
 
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
@@ -333,24 +405,20 @@ namespace Decklink_MB_Demo
             // capture
             if (capture)
             {
-                var h264settings = new MFH264EncoderSettings();
-
-                // GOP size
-                h264settings.GOPSize = 25;
-
-                // quality
-                h264settings.RateControl = MFH264EncoderRCMode.QVBR;
-                h264settings.QP = 15;
-                h264settings.QPB = 15;
-                h264settings.QPP = 15;
-                h264settings.QPI = 15;
-
-                _h264Encoder = new H264EncoderBlock(h264settings);
-
-                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
-
-                var mp4Settings = new MP4SinkSettings(edFilename.Text);
-                _mp4Muxer = new MP4SinkBlock(mp4Settings);
+                switch (cbOutputFormat.SelectedIndex)
+                {
+                    case 1:
+                        CreateMP4Output();
+                        break;
+                    case 2:
+                        CreateWebMOutput();
+                        break;
+                    case 3:
+                        CreateMXFOutput();
+                        break;
+                    default:
+                        break;
+                }
 
                 if (cbResizeVideo.IsChecked == true)
                 {
@@ -366,17 +434,17 @@ namespace Decklink_MB_Demo
                     if (cbResizeVideo.IsChecked == true)
                     {
                         _pipeline.Connect(_videoTee.Outputs[captureID], _videoResize.Input);
-                        _pipeline.Connect(_videoResize.Output, _h264Encoder.Input);
+                        _pipeline.Connect(_videoResize.Output, _videoEncoder.Input);
                     }
                     else
                     {
-                        _pipeline.Connect(_videoTee.Outputs[captureID], _h264Encoder.Input);
+                        _pipeline.Connect(_videoTee.Outputs[captureID], _videoEncoder.Input);
                     }      
                         
-                    _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_videoEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Video));
 
-                    _pipeline.Connect(_audioTee.Outputs[captureID], _aacEncoder.Input);
-                    _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    _pipeline.Connect(_audioTee.Outputs[captureID], _audioEncoder.Input);
+                    _pipeline.Connect(_audioEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Audio));
                 }
 
                 if (decklinkOutput)

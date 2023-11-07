@@ -77,8 +77,8 @@ namespace Simple_Player_Demo_X
             _player = new MediaPlayerCoreX(VideoView1);
             _player.OnError += Player_OnError;
             _player.OnStop += Player_OnStop;
-            _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _player.Debug_Mode = cbDebugMode.IsChecked == true;
+            //_player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            //_player.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -144,6 +144,8 @@ namespace Simple_Player_Demo_X
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
+
+            await DestroyEngineAsync();
 
             CreateEngine();
 
