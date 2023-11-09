@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.6.42
+
+* [X-engines] Added the MPEG-2 video encoder.
+* [X-engines] Added the MP2 audio encoder.
+
 ## 15.6.41
 
 * [X-engines] Resolved Decklink enumeration issues.

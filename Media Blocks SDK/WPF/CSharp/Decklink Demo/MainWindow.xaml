@@ -52,6 +52,7 @@
                         <ComboBoxItem>MP4</ComboBoxItem>
                         <ComboBoxItem>WebM</ComboBoxItem>
                         <ComboBoxItem>MXF DNxHD</ComboBoxItem>
+                        <ComboBoxItem>MPEG-2</ComboBoxItem>
                     </ComboBox>
 
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >

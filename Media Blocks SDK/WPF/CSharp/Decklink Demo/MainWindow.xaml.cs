@@ -270,6 +270,22 @@ namespace Decklink_MB_Demo
             (_muxer as WebMSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
         }
 
+        private void CreateMPEG2Output()
+        {
+            var videoSettings = new MPEG2VideoEncoderSettings();
+            videoSettings.Bitrate = 15_000;
+            _videoEncoder = new MPEG2EncoderBlock(videoSettings);
+
+            _audioEncoder = new MP2EncoderBlock(new MP2EncoderSettings());
+
+            var muxSettings = new MPEGTSSinkSettings(edFilename.Text);
+            _muxer = new MPEGTSSinkBlock(muxSettings);
+
+            (_muxer as MPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video);
+            (_muxer as MPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
+        }
+
+
         private void CreateMXFOutput()
         {
             var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
@@ -415,6 +431,9 @@ namespace Decklink_MB_Demo
                         break;
                     case 3:
                         CreateMXFOutput();
+                        break;
+                    case 4:
+                        CreateMPEG2Output();
                         break;
                     default:
                         break;
