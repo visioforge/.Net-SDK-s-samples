@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.6.43
+
+* [Video Capture SDK .Net] VideoCaptureCore: Fixed problem with the OnNetworkSourceDisconnect event being called twice.
+
 ## 15.6.42
 
 * [X-engines] Added the MPEG-2 video encoder.
