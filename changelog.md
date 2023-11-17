@@ -1,71 +1,31 @@
 # Changelog
 
-## 15.6.43
+## 15.7.6
 
+* [Video Capture SDK .Net] VideoCaptureCore: Added WASAPI audio renderer support for the VideoCaptureCore engine.
+
+## 15.7.0
+
+* [ALL] .Net 8 support
 * [Video Capture SDK .Net] VideoCaptureCore: Fixed problem with the OnNetworkSourceDisconnect event being called twice.
-
-## 15.6.42
-
 * [X-engines] Added the MPEG-2 video encoder.
 * [X-engines] Added the MP2 audio encoder.
-
-## 15.6.41
-
 * [X-engines] Resolved Decklink enumeration issues.
 * [X-engines] Default VP8/VP9 settings changed to live recording.
 * [X-engines] Added DNxHD video encoder support.
-
-## 15.6.40
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Fixed problem with audio source format setting (regression).
-
-## 15.6.38
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved WPF native rendering issue with a pop-up window.
-
-## 15.6.37
-
 * [All] Avalonia 11.0.5 support.
-
-## 15.6.36
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved licensing issues.
-
-## 15.6.35
-
 * [Video Capture SDK .Net] VideoCaptureCore: Start/StartAsync method will return false if the video capture device is used already by another application.
-
-## 15.6.34
-
 * [All] Updated VLC source (libVLC 3.0.19).
-
-## 15.6.33
-
 * [All] Updated FFMPEG sources and encoders. Resolved issue with missed MSVC dependencies.
-
-## 15.6.29
-
 * [Video Capture SDK] Updated ONVIF engine.
 * [Cross-platform SDKs] Updated Decklink source. Resolved the issue with the incorrect device name.
-
-## 15.6.24
-
 * [All] SkiaSharp security updates.
-
-## 15.6.23
-
 * [Cross-platform SDKs] Updated Overlay Manager. Added OverlayManagerDateTime class to draw current date time and custom text.
-
-## 15.6.20
-
 * [Cross-platform SDKs] Updated OverlayManagerImage. Resolved issue with System.Drawing.Bitmap usage.
-
-## 15.6.7
-
 * [ALL] VideoCaptureCore: Resolved rare crash issue with WinUI VideoView
-
-## 15.6.4
-
 * [Video Capture SDK .Net] VideoCaptureCore: Updated FFMPEG.exe output. Improved support of x264 and x265 encoders of custom FFMPEG builds.
 
 ## 15.6.0
