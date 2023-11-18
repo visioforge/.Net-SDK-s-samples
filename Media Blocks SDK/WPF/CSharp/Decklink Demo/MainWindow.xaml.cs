@@ -74,6 +74,8 @@ namespace Decklink_MB_Demo
             _pipeline.OnError += Pipeline_OnError;
 
             _deviceEnumerator = new DeviceEnumerator();
+
+            _videoEffects = new VideoEffectsWinBlock();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -189,6 +191,11 @@ namespace Decklink_MB_Demo
             _pipeline?.ClearBlocks();
 
             VideoView1.CallRefresh();
+
+            _videoEffects?.Dispose();
+            _videoEffects = new VideoEffectsWinBlock();
+
+            AddVideoEffects();
         }
 
         private void AddTextLogo()
@@ -370,22 +377,7 @@ namespace Decklink_MB_Demo
             _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
 
             // effects
-            _videoEffects = new VideoEffectsWinBlock();
-
-            if (cbAddTextOverlay.IsChecked == true)
-            {
-                AddTextLogo();
-            }
-            
-            if (cbAddScrollingTextOverlay.IsChecked == true)
-            {
-                AddScrollingTextLogo();
-            }
-            
-            if (cbAddImageOverlay.IsChecked == true)
-            {
-                AddImageLogo();
-            }
+            AddVideoEffects();
 
             _pipeline.Connect(_videoSource.Output, _videoEffects.Input);
 
@@ -511,6 +503,24 @@ namespace Decklink_MB_Demo
             await _pipeline.StartAsync();
 
             _timer.Start();
+        }
+
+        private void AddVideoEffects()
+        {
+            if (cbAddTextOverlay.IsChecked == true)
+            {
+                AddTextLogo();
+            }
+
+            if (cbAddScrollingTextOverlay.IsChecked == true)
+            {
+                AddScrollingTextLogo();
+            }
+
+            if (cbAddImageOverlay.IsChecked == true)
+            {
+                AddImageLogo();
+            }
         }
 
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
