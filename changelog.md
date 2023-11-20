@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.8
+
+* [All] Resolved an issue with the Tempo audio effect.
+
 ## 15.7.6
 
 * [Video Capture SDK .Net] VideoCaptureCore: Added WASAPI audio renderer support for the VideoCaptureCore engine.
