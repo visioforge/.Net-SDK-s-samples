@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.7.10
+
+* [Media Blocks SDK .Net] Added VideoCropBlock and VideoAspectRatioCropBlock blocks to crop video frames.
+* [Media Blocks SDK .Net] Resolved wrong frame rate issue with VideoRateBlock.
+
 ## 15.7.8
 
 * [All] Resolved an issue with the Tempo audio effect.
