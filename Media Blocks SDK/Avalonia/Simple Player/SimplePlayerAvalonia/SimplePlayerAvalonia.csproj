@@ -25,7 +25,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.14" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.7.14" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.7.15" />
   </ItemGroup>
 </Project>
