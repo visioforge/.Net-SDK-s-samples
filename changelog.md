@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.7.16
+
+* [X-engines] Updated device enumerator. Removed unwanted firewall dialog when listing NDI sources.
+* [X-engines] Fixed an issue with the video mixer when adding/removing video sources.
+
 ## 15.7.10
 
 * [Media Blocks SDK .Net] Added VideoCropBlock and VideoAspectRatioCropBlock blocks to crop video frames.

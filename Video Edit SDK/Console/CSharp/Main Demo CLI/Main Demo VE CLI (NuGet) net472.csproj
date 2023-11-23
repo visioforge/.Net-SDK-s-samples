@@ -28,12 +28,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.7.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.7.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.7.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.7.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.7.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.7.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.7.16" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -29,7 +29,7 @@
                     <Label HorizontalAlignment="Left" Margin="12,141,0,0" Name="label27" Width="67" Height="28" VerticalAlignment="Top">Frame rate</Label>
                     <Label Margin="0,141,0,0" Name="label28" Height="28" VerticalAlignment="Top" HorizontalAlignment="Center" Width="47">fps</Label>
                     <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,231,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
-                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,261,0,0" Name="cbRecordAudio" VerticalAlignment="Top" Width="131">Record Audio</CheckBox>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,261,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="131" Content="Record audio"/>
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
                     <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,187,0,0" Name="label55" VerticalAlignment="Top" />
                     <Label Height="28" HorizontalAlignment="Left" Margin="10,337,0,0" x:Name="label23_Copy" VerticalAlignment="Top" Width="120" Content="Audio output device"/>
@@ -57,7 +57,5 @@
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="10,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True" Content="Preview"/>
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="108,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"/>
         <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="218,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
-        <Button Content="Resume" Margin="0,0,165,10" x:Name="btResume" Click="btResume_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="58"  />
-        <Button Content="Pause" Margin="0,0,228,10" x:Name="btPause" Click="btPause_Click" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="62"  />
     </Grid>
 </Window>
