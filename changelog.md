@@ -1,5 +1,13 @@
 # Changelog
 
+## 15.7.18
+
+* [Media Blocks SDK .Net] Added the UpdateChannel method to update the channel of the bridge source or sink.
+
+## 15.7.17
+
+* [Media Player SDK .Net] MediaPlayerCore: Updated Tempo effect.
+
 ## 15.7.16
 
 * [X-engines] Updated device enumerator. Removed unwanted firewall dialog when listing NDI sources.
