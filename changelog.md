@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.20
+
+* [Media Blocks SDK .Net] Added the CustomMediaBlock class to create custom media blocks for any GStreamer element.
+
 ## 15.7.18
 
 * [Media Blocks SDK .Net] Added the UpdateChannel method to update the channel of the bridge source or sink.

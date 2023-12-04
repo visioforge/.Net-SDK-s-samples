@@ -318,7 +318,7 @@ namespace Screen_Capture_X
                     if (!string.IsNullOrEmpty(deviceName))
                     {
                         var sources = await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound);
-                        var device = sources.FirstOrDefault(x => x.DisplayName == deviceName && x.API == AUDIO_API);
+                        var device = sources.FirstOrDefault(x => x.Name == deviceName && x.API == AUDIO_API);
                         if (device != null)
                         {
                             var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -447,7 +447,7 @@ namespace Screen_Capture_X
             // audio input
             foreach (var device in (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).Where(device => device.API == AUDIO_API))
             {
-                cbAudioInputDevice.Items.Add(device.DisplayName);
+                cbAudioInputDevice.Items.Add(device.Name);
             }
 
             if (cbAudioInputDevice.Items.Count > 0)
@@ -473,7 +473,7 @@ namespace Screen_Capture_X
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString() && device.API == AUDIO_API);
+                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString() && device.API == AUDIO_API);
                 if (deviceItem == null)
                 {
                     return;

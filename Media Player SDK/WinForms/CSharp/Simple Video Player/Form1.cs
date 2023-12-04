@@ -9,6 +9,7 @@ namespace Video_Player_Demo
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
+    using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.UI;
