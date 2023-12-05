@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer net8", "Android\MediaPlayer\MediaPlayer net8.csproj", "{547031F9-88C7-46C2-9CA8-863E12A3DA53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP Client net8", "Android\RTSP Client\RTSP Client net8.csproj", "{E98FED37-746A-45D6-B76A-68A0C2408C0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X", "..\AndroidDependency\VisioForge.Core.Android.X.csproj", "{C05F34D1-46DF-4372-B002-3E08E3C925B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture net8", "Android\Simple Video Capture\Simple Video Capture net8.csproj", "{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{547031F9-88C7-46C2-9CA8-863E12A3DA53}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E98FED37-746A-45D6-B76A-68A0C2408C0D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C05F34D1-46DF-4372-B002-3E08E3C925B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05F34D1-46DF-4372-B002-3E08E3C925B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05F34D1-46DF-4372-B002-3E08E3C925B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05F34D1-46DF-4372-B002-3E08E3C925B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
+	EndGlobalSection
+EndGlobal

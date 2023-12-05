@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.21
+
+* [Media Blocks SDK .Net] Added the BufferSink block to get video/audio frames from the pipeline.
+
 ## 15.7.20
 
 * [Media Blocks SDK .Net] Added the CustomMediaBlock class to create custom media blocks for any GStreamer element.
