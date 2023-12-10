@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo X WPF ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay Manager Demo X net5", "WPF\CSharp\Overlay Manager Demo\Overlay Manager Demo X net5.csproj", "{A0B03261-2FE8-4B8E-AFCB-5B75EDFFAFC2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer Demo net5", "WPF\CSharp\NDI Streamer Demo\NDI Streamer Demo net5.csproj", "{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{A0B03261-2FE8-4B8E-AFCB-5B75EDFFAFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0B03261-2FE8-4B8E-AFCB-5B75EDFFAFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0B03261-2FE8-4B8E-AFCB-5B75EDFFAFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{A74583FD-BCFD-4A21-AED9-794AFCFF1D8F} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{6D927F81-6938-4B90-8993-5494EDAE087E} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{A0B03261-2FE8-4B8E-AFCB-5B75EDFFAFC2} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{197DF2A7-F3D5-47BF-996E-6DE5B5FE233A} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
