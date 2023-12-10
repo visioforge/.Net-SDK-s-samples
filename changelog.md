@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.22
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Added NDI streaming support and sample app.
+
 ## 15.7.21
 
 * [Media Blocks SDK .Net] Added the BufferSink block to get video/audio frames from the pipeline.
