@@ -10,6 +10,8 @@ using VisioForge.Core.VideoCaptureX;
 using VisioForge.Core;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.X.Sinks;
+using System.Linq;
+using System;
 
 namespace NDI_Streamer_Demo
 {

@@ -4,7 +4,6 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>NDI_Streamer_Demo</RootNamespace>
     <Nullable>disable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
