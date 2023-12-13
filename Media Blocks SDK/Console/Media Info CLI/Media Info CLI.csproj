@@ -23,6 +23,6 @@
     <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.23" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.24" />
   </ItemGroup>
 </Project>
