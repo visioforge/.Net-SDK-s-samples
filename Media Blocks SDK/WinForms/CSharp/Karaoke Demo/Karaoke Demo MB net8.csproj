@@ -2,16 +2,15 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Karaoke_Demo</RootNamespace>
-    <TargetFrameworks>net8.0-windows</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>   
     <PlatformTarget>x64</PlatformTarget>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Karaoke Demo</AssemblyTitle>
     <Product>Karaoke Demo</Product>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.7.23.0</AssemblyVersion>
+    <AssemblyVersion>15.7.26.0</AssemblyVersion>
     <AssemblyName>Media Blocks SDK - WinForms Karaoke Demo</AssemblyName>
-    <FileVersion>15.7.23.0</FileVersion>
+    <FileVersion>15.7.26.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
@@ -25,7 +24,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.25" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.25" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.26" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.26" />
   </ItemGroup>
 </Project>
