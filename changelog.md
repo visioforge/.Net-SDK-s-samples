@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.7.27
+
+* [Video Capture SDK .Net] VideoCaptureCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
+* [Video Edit SDK .Net] VideoEditCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
+* [Media Player SDK .Net] MediaPlayerCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
+
 ## 15.7.22
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Added NDI streaming support and sample app.

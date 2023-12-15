@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Karaoke_Demo</RootNamespace>
-    <TargetFrameworks>net8.0-windows</TargetFrameworks>   
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <PlatformTarget>x64</PlatformTarget>
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Karaoke Demo</AssemblyTitle>
@@ -24,7 +24,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.26" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.26" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.27" />
   </ItemGroup>
 </Project>
