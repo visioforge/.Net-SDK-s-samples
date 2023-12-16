@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.22
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with incorrect device index error for KS video sources (Windows)
+
 ## 15.7.27
 
 * [Video Capture SDK .Net] VideoCaptureCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
