@@ -1,6 +1,12 @@
 # Changelog
 
-## 15.7.22
+## 15.7.29
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: WASAPI and WASAPI2 audio sources can be used now with the VideoCaptureCoreX engine
+* [X-engines] DeviceEnumerator got events to notify about devices added/removed: OnVideoSourceAdded, OnVideoSourceRemoved, OnAudioSourceAdded, OnAudioSourceRemoved, OnAudioSinkAdded, OnAudioSinkRemoved
+* [X-engines] Added custom error handler support for MediaBlocks, VideoCaptureCoreX, and MediaPlayerCoreX engines. Use the IMediaBlocksPipelineCustomErrorHandler interface and the SetCustomErrorHandler method to set a custom error handler.
+
+## 15.7.28
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with incorrect device index error for KS video sources (Windows)
 
