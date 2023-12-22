@@ -123,6 +123,11 @@ namespace Decklink_Player_Demo_X
         {
             _timerFlag = true;
 
+            if (_player == null)
+            {
+                return;
+            }
+
             var position = await _player.Position_GetAsync();
             var duration = await _player.DurationAsync();
 

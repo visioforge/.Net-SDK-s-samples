@@ -22,6 +22,7 @@ namespace Screen_Capture_X
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
+    using VisioForge.Core.Types.X.VideoCapture;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCaptureX;
@@ -29,8 +30,6 @@ namespace Screen_Capture_X
     public partial class Window1 : IDisposable
     {
         private DeviceEnumerator _deviceEnumerator;
-
-        private const AudioCaptureDeviceAPI AUDIO_API = AudioCaptureDeviceAPI.DirectSound;
 
         private UniversalOutputDialog mpegTSSettingsDialog;
 
@@ -58,6 +57,20 @@ namespace Screen_Capture_X
             MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+        }
+
+        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioInputDevice.Items.Add(e.DisplayName);
+
+                if (cbAudioInputDevice.Items.Count == 1)
+                {
+                    cbAudioInputDevice.SelectedIndex = 0;
+                }
+            });
         }
 
         private void CreateEngine()
@@ -311,20 +324,20 @@ namespace Screen_Capture_X
                 // audio source
                 if (VideoCapture1.Audio_Record)
                 {
-                    DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+                    IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
                     var deviceName = cbAudioInputDevice.Text;
                     var format = cbAudioInputFormat.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var sources = await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound);
-                        var device = sources.FirstOrDefault(x => x.Name == deviceName && x.API == AUDIO_API);
+                        var sources = await _deviceEnumerator.AudioSourcesAsync();
+                        var device = sources.FirstOrDefault(x => x.DisplayName == deviceName);
                         if (device != null)
                         {
                             var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                             if (formatItem != null)
                             {
-                                audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                                audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
                             }
                         }
                     }
@@ -445,16 +458,7 @@ namespace Screen_Capture_X
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
             // audio input
-            foreach (var device in (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).Where(device => device.API == AUDIO_API))
-            {
-                cbAudioInputDevice.Items.Add(device.Name);
-            }
-
-            if (cbAudioInputDevice.Items.Count > 0)
-            {
-                cbAudioInputDevice.SelectedIndex = 0;
-                cbAudioInputDevice_SelectionChanged(null, null);
-            }
+            await _deviceEnumerator.StartAudioSourceMonitorAsync();
 
             // monitors
             foreach (var screen in Screen.AllScreens)
@@ -473,7 +477,7 @@ namespace Screen_Capture_X
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == e.AddedItems[0].ToString() && device.API == AUDIO_API);
+                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;

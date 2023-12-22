@@ -1,6 +1,6 @@
-# Media Blocks SDK .Net - Social Networks Streamer Demo (WPF)
+# Video Capture SDK .Net - Social Networks Streamer Demo (WPF)
 
-Social Networks Streamer Demo is an application that uses the Media Blocks SDK .Net to stream from webcams to YouTube or Facebook Live in WPF applications.
+Social Networks Streamer Demo is an application that uses the Video Capture SDK .Net (crossplatform engine) to stream from webcams to YouTube or Facebook Live in WPF applications.
 
 ## Features
 
@@ -15,7 +15,8 @@ Social Networks Streamer Demo is an application that uses the Media Blocks SDK .
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Video Capture SDK .Net product page](https://www.visioforge.com/video-capture-sdk-net)

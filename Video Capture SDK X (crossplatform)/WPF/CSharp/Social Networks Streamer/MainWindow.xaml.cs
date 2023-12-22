@@ -8,6 +8,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.VideoCaptureX;
 
 namespace Social_Networks_Streamer_Demo
@@ -29,8 +30,50 @@ namespace Social_Networks_Streamer_Demo
 
             // We have to initialize the engine on start
             MediaBlocksPipeline.InitSDK();
-            
+
             _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+        }
+
+        private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioOutput.Items.Add(e.DisplayName);
+
+                if (cbAudioOutput.Items.Count == 1)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioInput.Items.Add(e.DisplayName);
+
+                if (cbAudioInput.Items.Count == 1)
+                {
+                    cbAudioInput.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbVideoInput.Items.Add(e.DisplayName);
+
+                if (cbVideoInput.Items.Count == 1)
+                {
+                    cbVideoInput.SelectedIndex = 0;
+                }
+            });
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -51,38 +94,9 @@ namespace Social_Networks_Streamer_Demo
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-            var videoCaptureDevices = (await _deviceEnumerator.VideoSourcesAsync());
-            if (videoCaptureDevices.Length > 0)
-            {
-                foreach (var item in videoCaptureDevices)
-                {
-                    cbVideoInput.Items.Add(item.DisplayName);
-                }
-
-                cbVideoInput.SelectedIndex = 0;
-            }
-
-            var audioCaptureDevices = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound));
-            if (audioCaptureDevices.Length > 0)
-            {
-                foreach (var item in audioCaptureDevices)
-                {
-                    cbAudioInput.Items.Add(item.DisplayName);
-                }
-
-                cbAudioInput.SelectedIndex = 0;
-            }
-
-            var audioOutputDevices = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound));
-            if (audioOutputDevices.Length > 0)
-            {
-                foreach (var item in audioOutputDevices)
-                {
-                    cbAudioOutput.Items.Add(item.DisplayName);
-                }
-
-                cbAudioOutput.SelectedIndex = 0;
-            }
+            await _deviceEnumerator.StartVideoSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSinkMonitorAsync();
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -131,19 +145,19 @@ namespace Social_Networks_Streamer_Demo
             _videoCapture.Video_Source = videoSourceSettings;
 
             // audio source
-            DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+            IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
             deviceName = cbAudioInput.Text;
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                        audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
                     }
                 }
             }
@@ -153,7 +167,7 @@ namespace Social_Networks_Streamer_Demo
             // audio output
             if (!string.IsNullOrEmpty(cbAudioOutput.Text))
             {
-                var device = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await _deviceEnumerator.AudioOutputsAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     _videoCapture.Audio_OutputDevice = device;                    
@@ -283,7 +297,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

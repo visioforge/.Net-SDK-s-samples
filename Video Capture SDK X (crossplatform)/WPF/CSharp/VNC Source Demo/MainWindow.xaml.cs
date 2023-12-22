@@ -92,8 +92,6 @@ namespace VNC_Source_Demo
 
             await _videoCapture.StartAsync();
 
-            //_pipeline.SavePipeline("ndi_source");
-
             tmRecording.Start();
         }
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.30
+
+* [Media Blocks SDK .Net] Resolve issue with the VideoSampleGrabberBlock, SetLastFrame option
+
 ## 15.7.29
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: WASAPI and WASAPI2 audio sources can be used now with the VideoCaptureCoreX engine

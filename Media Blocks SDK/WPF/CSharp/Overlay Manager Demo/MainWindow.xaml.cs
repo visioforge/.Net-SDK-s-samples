@@ -157,19 +157,6 @@ namespace Overlay_Manager_Demo
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            //var res = new GIFDecoder(@"C:\samples\!anim.gif");
-
-            //int i = 0;
-            //foreach (var frame in res.Frames)
-            //{
-            //    using var image = SKImage.FromBitmap(frame.Image);
-            //    using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-            //    using var stream = File.OpenWrite("C:\\samples\\!anim_" + i + ".png");
-            //    data.SaveTo(stream);
-
-            //    i++;
-            //}
-
             _timer.Stop();
 
             if (_pipeline != null)

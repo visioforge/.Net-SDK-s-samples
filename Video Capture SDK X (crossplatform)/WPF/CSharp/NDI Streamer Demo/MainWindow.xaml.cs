@@ -12,6 +12,7 @@ using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.X.Sinks;
 using System.Linq;
 using System;
+using VisioForge.Core.Types.X.VideoCapture;
 
 namespace NDI_Streamer_Demo
 {
@@ -34,6 +35,34 @@ namespace NDI_Streamer_Demo
             MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+        }
+
+        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioInput.Items.Add(e.DisplayName);
+
+                if (cbAudioInput.Items.Count == 1)
+                {
+                    cbAudioInput.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbVideoInput.Items.Add(e.DisplayName);
+
+                if (cbVideoInput.Items.Count == 1)
+                {
+                    cbVideoInput.SelectedIndex = 0;
+                }
+            });
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -54,27 +83,8 @@ namespace NDI_Streamer_Demo
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-            var videoCaptureDevices = (await _deviceEnumerator.VideoSourcesAsync());
-            if (videoCaptureDevices.Length > 0)
-            {
-                foreach (var item in videoCaptureDevices)
-                {
-                    cbVideoInput.Items.Add(item.DisplayName);
-                }
-
-                cbVideoInput.SelectedIndex = 0;
-            }
-
-            var audioCaptureDevices = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound));
-            if (audioCaptureDevices.Length > 0)
-            {
-                foreach (var item in audioCaptureDevices)
-                {
-                    cbAudioInput.Items.Add(item.Name);
-                }
-
-                cbAudioInput.SelectedIndex = 0;
-            }
+            await _deviceEnumerator.StartVideoSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSourceMonitorAsync();
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -123,19 +133,19 @@ namespace NDI_Streamer_Demo
             _videoCapture.Video_Source = videoSourceSettings;
 
             // audio source
-            DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+            IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
             deviceName = cbAudioInput.Text;
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                        audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
                     }
                 }
             }
@@ -249,7 +259,7 @@ namespace NDI_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

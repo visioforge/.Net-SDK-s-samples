@@ -2,21 +2,17 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-using VisioForge.Core.MediaBlocks.AudioRendering;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types.Events;
 using Microsoft.Win32;
-using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.Types.X.VideoEffects;
-using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
 using System.Linq;
 using System.Windows.Controls;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.Output;
 
 namespace Overlay_Manager_Demo
 {
@@ -39,6 +35,22 @@ namespace Overlay_Manager_Demo
 
             // We have to initialize the engine on start
             MediaBlocksPipeline.InitSDK();
+
+            _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+        }
+
+        private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbVideoInputDevice.Items.Add(e.DisplayName);
+
+                if (cbVideoInputDevice.Items.Count == 1)
+                {
+                    cbVideoInputDevice.SelectedIndex = 0;
+                }
+            });
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -48,20 +60,8 @@ namespace Overlay_Manager_Demo
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-            _deviceEnumerator = new DeviceEnumerator();
-
             // video input
-            foreach (var device in await _deviceEnumerator.VideoSourcesAsync())
-            {
-                cbVideoInputDevice.Items.Add(device.DisplayName);
-            }
-
-            if (cbVideoInputDevice.Items.Count > 0)
-            {
-                cbVideoInputDevice.SelectedIndex = 0;
-            }
-
-            cbVideoInputDevice_SelectionChanged(null, null);
+            await _deviceEnumerator.StartVideoSourceMonitorAsync();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

@@ -56,6 +56,5 @@
         <Label Content="Much more features available in Main Demo" HorizontalAlignment="Left" Margin="370,3,0,0" VerticalAlignment="Top"/>
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="10,0,0,10" x:Name="rbPreview" VerticalAlignment="Bottom" Width="77" IsChecked="True" Content="Preview"/>
         <RadioButton Height="16" HorizontalAlignment="Left" Margin="108,0,0,10" x:Name="rbCapture" VerticalAlignment="Bottom" Width="112" Content="Capture"/>
-        <TextBlock x:Name="lbTimestamp" HorizontalAlignment="Left" Margin="218,0,0,10" TextWrapping="Wrap" Text="Recording time: 00:00:00" VerticalAlignment="Bottom" Width="139"/>
     </Grid>
 </Window>

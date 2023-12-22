@@ -16,11 +16,13 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
 using VisioForge.Core.VideoCaptureX;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Simple_Video_Capture
 {
@@ -30,8 +32,6 @@ namespace Simple_Video_Capture
     public partial class MainWindow : IDisposable
     {
         private DeviceEnumerator _deviceEnumerator;
-
-        private const AudioCaptureDeviceAPI AUDIO_API = AudioCaptureDeviceAPI.DirectSound;
 
         private UniversalOutputDialog mpegTSSettingsDialog;
 
@@ -66,6 +66,48 @@ namespace Simple_Video_Capture
             MediaBlocksPipeline.InitSDK();
 
             _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+        }
+
+        private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioOutputDevice.Items.Add(e.DisplayName);
+
+                if (cbAudioOutputDevice.Items.Count == 1)
+                {
+                    cbAudioOutputDevice.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioInputDevice.Items.Add(e.DisplayName);
+
+                if (cbAudioInputDevice.Items.Count == 1)
+                {
+                    cbAudioInputDevice.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbVideoInputDevice.Items.Add(e.DisplayName);
+
+                if (cbVideoInputDevice.Items.Count == 1)
+                {
+                    cbVideoInputDevice.SelectedIndex = 0;
+                }
+            });
         }
 
         private void CreateEngine()
@@ -124,55 +166,10 @@ namespace Simple_Video_Capture
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-            
-            // video input
-            foreach (var device in await _deviceEnumerator.VideoSourcesAsync())
-            {
-                cbVideoInputDevice.Items.Add(device.DisplayName);
-            }
 
-            if (cbVideoInputDevice.Items.Count > 0)
-            {
-                cbVideoInputDevice.SelectedIndex = 0;
-            }
-
-            cbVideoInputDevice_SelectionChanged(null, null);
-
-            // audio input
-            foreach (var device in (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)))
-            {
-                cbAudioInputDevice.Items.Add(device.DisplayName);
-            }
-
-            if (cbAudioInputDevice.Items.Count > 0)
-            {
-                cbAudioInputDevice.SelectedIndex = 0;
-                cbAudioInputDevice_SelectionChanged(null, null);
-            }
-
-            // audio output
-            string defaultAudioRenderer = string.Empty;
-            foreach (var audioOutputDevice in (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)))
-            {
-                cbAudioOutputDevice.Items.Add(audioOutputDevice.DisplayName);
-
-                if (audioOutputDevice.DisplayName.Contains("Default"))
-                {
-                    defaultAudioRenderer = audioOutputDevice.DisplayName;
-                }
-            }
-
-            if (cbAudioOutputDevice.Items.Count > 0)
-            {
-                if (string.IsNullOrEmpty(defaultAudioRenderer))
-                {
-                    cbAudioOutputDevice.SelectedIndex = 0;
-                }
-                else
-                {
-                    cbAudioOutputDevice.Text = defaultAudioRenderer;
-                }
-            }
+            await _deviceEnumerator.StartVideoSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSinkMonitorAsync();
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
@@ -244,7 +241,7 @@ namespace Simple_Video_Capture
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -281,7 +278,7 @@ namespace Simple_Video_Capture
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First(); 
+            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First(); 
 
             if (cbRecordAudio.IsChecked == true)
             {
@@ -320,19 +317,19 @@ namespace Simple_Video_Capture
             VideoCapture1.Video_Source = videoSourceSettings;
 
             // audio source
-            DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+            IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
             deviceName = cbAudioInputDevice.Text;
             format = cbAudioInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync(AUDIO_API)).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                     if (formatItem != null)
                     {
-                        audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                        audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
                     }
                 }
             }

@@ -17,7 +17,6 @@ using VisioForge.Core.Types.X.Output;
 using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.Types.X;
-using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -25,8 +24,8 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.AudioEncoders;
-using Gst.Audio;
 using System.Linq;
+using VisioForge.Core.Types.X.VideoCapture;
 
 namespace Screen_Capture_MB_WPF
 {
@@ -53,9 +52,7 @@ namespace Screen_Capture_MB_WPF
 
         private AACEncoderBlock _audioEncoder;
 
-       private MP4SinkBlock _sink;
-
-        private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+        private MP4SinkBlock _sink;
 
         private DeviceEnumerator _deviceEnumerator;
 
@@ -69,6 +66,34 @@ namespace Screen_Capture_MB_WPF
             System.Windows.Forms.Application.EnableVisualStyles();
 
             _deviceEnumerator = new DeviceEnumerator();
+            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+        }
+
+        private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioOutputDevice.Items.Add(e.DisplayName);
+
+                if (cbAudioOutputDevice.Items.Count == 1)
+                {
+                    cbAudioOutputDevice.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                cbAudioInputDevice.Items.Add(e.DisplayName);
+
+                if (cbAudioInputDevice.Items.Count == 1)
+                {
+                    cbAudioInputDevice.SelectedIndex = 0;
+                }
+            });
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -174,22 +199,22 @@ namespace Screen_Capture_MB_WPF
             if (cbRecordAudio.IsChecked == true)
             {
                 // audio source
-                DSAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+                IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
 
                 var deviceName = cbAudioInputDevice.Text;
                 if (!string.IsNullOrEmpty(deviceName))
                 {
-                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == deviceName);
+                    var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
-                        audioSourceSettings = new DSAudioCaptureDeviceSourceSettings(device, device.GetDefaultFormat());
+                        audioSourceSettings = device.CreateSourceSettings();
                     }
                 }
 
                 _audioInput = new SystemAudioSourceBlock(audioSourceSettings);
 
                 // audio renderer
-                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(x => x.Name == cbAudioOutputDevice.Text).First());
+                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First());
 
                 if (rbPreview.IsChecked == true)
                 {
@@ -212,28 +237,10 @@ namespace Screen_Capture_MB_WPF
             await _pipeline.StartAsync();
 
             tcMain.SelectedIndex = 3;
-            tmRecording.Start();
-        }
-
-        private void UpdateRecordingTime()
-        {
-            var ts = _pipeline.Duration();
-
-            if (Math.Abs(ts.TotalMilliseconds) < 0.01)
-            {
-                return;
-            }
-
-            Dispatcher.BeginInvoke((Action)(() =>
-            {
-                lbTimestamp.Text = "Recording time: " + ts.ToString(@"hh\:mm\:ss");
-            }));
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
-
             await _pipeline.StopAsync();
 
             await DestroyEnginesAsync();
@@ -245,29 +252,8 @@ namespace Screen_Capture_MB_WPF
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-
-            foreach (var device in await SystemAudioSourceBlock.GetDevicesAsync(_deviceEnumerator, AudioCaptureDeviceAPI.DirectSound))
-            {
-                cbAudioInputDevice.Items.Add(device.Name);
-            }
-
-            if (cbAudioInputDevice.Items.Count > 0)
-            {
-                cbAudioInputDevice.SelectedIndex = 0;
-                //cbAudioInputDevice_SelectedIndexChanged(null, null);
-            }
-
-            foreach (var device in await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound))
-            {
-                cbAudioOutputDevice.Items.Add(device.Name);
-            }
-
-            if (cbAudioOutputDevice.Items.Count > 0)
-            {
-                cbAudioOutputDevice.SelectedIndex = 0;
-                //cbAudioInputDevice_SelectedIndexChanged(null, null);
-            }
+            await _deviceEnumerator.StartAudioSourceMonitorAsync();
+            await _deviceEnumerator.StartAudioSinkMonitorAsync();
 
             for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
             {
@@ -291,9 +277,6 @@ namespace Screen_Capture_MB_WPF
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEnginesAsync();
-
-            tmRecording?.Dispose();
-            tmRecording = null;
 
             _deviceEnumerator?.Dispose();
         }
