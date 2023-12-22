@@ -183,12 +183,12 @@ namespace Overlay_Manager_Demo
             {
                 if (dlg.FileName.ToLowerInvariant().EndsWith(".gif"))
                 {
-                    _overlayManager.Elements.Add(new OverlayManagerGIF(dlg.FileName, new SkiaSharp.SKPoint(150, 150)));
+                    _overlayManager.Video_Overlay_Add(new OverlayManagerGIF(dlg.FileName, new SkiaSharp.SKPoint(150, 150)));
                     lbOverlays.Items.Add($"[GIF] {dlg.FileName}");
                 }
                 else
                 {
-                    _overlayManager.Elements.Add(new OverlayManagerImage(dlg.FileName, 100, 100));
+                    _overlayManager.Video_Overlay_Add(new OverlayManagerImage(dlg.FileName, 100, 100));
                     lbOverlays.Items.Add($"[Image] {dlg.FileName}");
                 }
             }
@@ -200,7 +200,7 @@ namespace Overlay_Manager_Demo
             text.Color = SkiaSharp.SKColors.Red;
             text.Font.Size = 32;
             text.Font.Style = VisioForge.Core.Types.X.VideoEffects.FontStyle.Italic;
-            _overlayManager.Elements.Add(text);
+            _overlayManager.Video_Overlay_Add(text);
             lbOverlays.Items.Add($"[Text] {text.Text}");
         }
 
@@ -208,7 +208,7 @@ namespace Overlay_Manager_Demo
         {
             var line = new OverlayManagerLine(new SkiaSharp.SKPoint(100, 100), new SkiaSharp.SKPoint(200, 200));
             line.Color = SkiaSharp.SKColors.Red;
-            _overlayManager.Elements.Add(line);
+            _overlayManager.Video_Overlay_Add(line);
             lbOverlays.Items.Add($"[Line] {line.Start.X}x{line.Start.Y} - {line.End.X}x{line.End.Y}");
         }
 
@@ -216,7 +216,7 @@ namespace Overlay_Manager_Demo
         {
             var rect = new OverlayManagerRectangle(new SkiaSharp.SKRect(100, 100, 200, 200));
             rect.Color = SkiaSharp.SKColors.Red;
-            _overlayManager.Elements.Add(rect);
+            _overlayManager.Video_Overlay_Add(rect);
             lbOverlays.Items.Add($"[Rectangle] {rect.Rectangle.Left}x{rect.Rectangle.Top} - {rect.Rectangle.Right}x{rect.Rectangle.Bottom}");
         }
 
@@ -224,7 +224,7 @@ namespace Overlay_Manager_Demo
         {
             var circle = new OverlayManagerCircle(new SkiaSharp.SKPoint(150, 150), 50);
             circle.Color = SkiaSharp.SKColors.Red;
-            _overlayManager.Elements.Add(circle);
+            _overlayManager.Video_Overlay_Add(circle);
             lbOverlays.Items.Add($"[Circle] {circle.Center.X}x{circle.Center.Y} - {circle.Radius}");
         }
 
@@ -232,7 +232,7 @@ namespace Overlay_Manager_Demo
         {
             if (lbOverlays.SelectedIndex != -1)
             {
-                _overlayManager.Elements.RemoveAt(lbOverlays.SelectedIndex);
+                _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 lbOverlays.Items.RemoveAt(lbOverlays.SelectedIndex);
             }
         }
