@@ -68,7 +68,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 cbAudioOutput.Items.Add(e.Name);
 
@@ -76,12 +76,12 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 {
                     cbAudioOutput.SelectedIndex = 0;
                 }
-            });
+            }));
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 cbAudioInput.Items.Add(e.Name);
 
@@ -89,12 +89,12 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 {
                     cbAudioInput.SelectedIndex = 0;
                 }
-            });
+            }));
         }
 
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 cbVideoInput.Items.Add(e.DisplayName);
 
@@ -102,7 +102,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 {
                     cbVideoInput.SelectedIndex = 0;
                 }
-            });
+            }));
         }
 
         private async void Form1_Load(object sender, EventArgs e)
