@@ -70,7 +70,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         {
             Invoke((Action)(() =>
             {
-                cbAudioOutput.Items.Add(e.Name);
+                cbAudioOutput.Items.Add(e.DisplayName);
 
                 if (cbAudioOutput.Items.Count == 1)
                 {
@@ -83,7 +83,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         {
             Invoke((Action)(() =>
             {
-                cbAudioInput.Items.Add(e.Name);
+                cbAudioInput.Items.Add(e.DisplayName);
 
                 if (cbAudioInput.Items.Count == 1)
                 {
