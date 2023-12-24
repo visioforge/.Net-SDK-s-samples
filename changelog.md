@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.7.31
+
+* [X-engines] Fixed memory leak in the OverlayManager
+
 ## 15.7.30
 
-* [Media Blocks SDK .Net] Resolve issue with the VideoSampleGrabberBlock, SetLastFrame option
+* [Media Blocks SDK .Net] Resolved issue with the VideoSampleGrabberBlock, SetLastFrame option
 
 ## 15.7.29
 
