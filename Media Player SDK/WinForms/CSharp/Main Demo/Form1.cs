@@ -1108,17 +1108,6 @@ namespace Media_Player_Demo
                 MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
             }
 
-            MediaPlayer1.Virtual_Camera_Output_Enabled = rbVirtualCameraOutput.Checked;
-
-            if (rbNDIStreaming.Checked)
-            {
-                MediaPlayer1.NDI_Output = new NDIOutput("Main");
-            }
-            else
-            {
-                MediaPlayer1.NDI_Output = null;
-            }
-
             MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
             MediaPlayer1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
             MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;

@@ -854,8 +854,6 @@ namespace Main_Demo
                 MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
             }
 
-            MediaPlayer1.Virtual_Camera_Output_Enabled = rbVirtualCameraOutput.IsChecked == true;
-
             if (cbStretch.IsChecked == true)
             {
                 MediaPlayer1.Video_Renderer.StretchMode = VideoRendererStretchMode.Stretch;
