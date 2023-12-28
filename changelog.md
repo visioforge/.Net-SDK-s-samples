@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.32
+
+* [ALL] VisioForge MJPEG Decoder filter was removed from the SDK NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
+
 ## 15.7.31
 
 * [X-engines] Fixed memory leak in the OverlayManager
