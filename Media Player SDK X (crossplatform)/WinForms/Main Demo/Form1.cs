@@ -745,7 +745,7 @@ namespace Main_Demo
                 dlg.FileName = "snap.jpg";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    await _player.Snapshot_SaveAsync(dlg.FileName, ImageFormat.Jpeg);
+                    await _player.Video_Renderer_Snapshot_SaveAsync(dlg.FileName, SkiaSharp.SKEncodedImageFormat.Jpeg);
                 }
             }
         }

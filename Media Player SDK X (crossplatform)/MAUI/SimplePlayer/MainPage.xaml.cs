@@ -11,6 +11,7 @@ using Microsoft.Maui.Controls.PlatformConfiguration;
 using System;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core;
 
 #if ANDROID
 using Android.Runtime;
@@ -49,10 +50,12 @@ namespace Simple_Player_MAUI
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
-        private void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object sender, EventArgs e)
         {
 #if __ANDROID__
-            _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
+             _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
+#elif __MACCATALYST__ || __IOS__
+            _player = new MediaPlayerCoreX(videoView);
 #else
             var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
             _player = new MediaPlayerCoreX(handler.VideoView);
@@ -61,11 +64,13 @@ namespace Simple_Player_MAUI
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
 
-            var audioOutputs = _player.Audio_OutputDevicesAsync(null).Result;
+#if !__IOS__ || __MACCATALYST__
+            var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
             {
                 _player.Audio_OutputDevice = audioOutputs[0];
             }            
+#endif
 
             Window.Destroying += Window_Destroying;
         }

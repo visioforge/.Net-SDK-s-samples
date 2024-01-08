@@ -1,18 +1,17 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 
 using VisioForge.Core;
-using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.VideoProcessing;
-using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.VideoCaptureX;
 
 namespace SimpleCapture
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         private VideoCaptureCoreX _core;
 
@@ -20,9 +19,15 @@ namespace SimpleCapture
 
         private VideoCaptureDeviceInfo[] _cameras;
 
+        private int _cameraSelectedIndex = -1;
+
         private AudioCaptureDeviceInfo[] _mics;
 
+        private int _micSelectedIndex = -1;
+
         private AudioOutputDeviceInfo[] _speakers;
+
+        private int _speakerSelectedIndex = -1;
 
         /// <summary>
         /// The position timer.
@@ -35,6 +40,8 @@ namespace SimpleCapture
 
             Loaded += MainPage_Loaded;
             Unloaded += MainPage_Unloaded;
+
+            this.BindingContext = this;
 
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
@@ -62,7 +69,7 @@ namespace SimpleCapture
 
 #if __ANDROID__
             _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#elif __MACCATALYST__
+#elif __MACCATALYST__ || __IOS__
             _core = new VideoCaptureCoreX(videoView);
 #else
             var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
@@ -73,29 +80,23 @@ namespace SimpleCapture
 
             // cameras
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
-            pkCamera.ItemsSource = _cameras.Select(x => x.DisplayName).ToList();
-
             if (_cameras.Length > 0)
             {                
-                pkCamera.SelectedIndex = 0;
+                lbCamera.Text = _cameras[0].DisplayName;
             }
 
             // mics
             _mics = await _deviceEnumerator.AudioSourcesAsync(null);
-            pkMic.ItemsSource = _mics.Select(x => x.DisplayName).ToList();
-
             if (_mics.Length > 0)
-            {                
-                pkMic.SelectedIndex = 0;
+            {      
+                lbMic.Text = _mics[0].DisplayName;
             }
 
             // audio outputs
             _speakers = await _deviceEnumerator.AudioOutputsAsync(null);
-            pkSpeakers.ItemsSource = _speakers.Select(x => x.DisplayName).ToList();
-
             if (_speakers.Length > 0)
             {                
-                pkSpeakers.SelectedIndex = 0;
+                lbSpeakers.Text = _speakers[0].DisplayName;
             }
 
             Window.Destroying += Window_Destroying;
@@ -151,10 +152,14 @@ namespace SimpleCapture
                             return;
                         }
 
+                        // audio output
+                        _core.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == lbSpeakers.Text).First();
+                        _core.Audio_Play = true;
+
                         // video source
                         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
 
-                        var deviceName = pkCamera.SelectedItem.ToString();
+                        var deviceName = lbCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
                             var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
@@ -180,6 +185,26 @@ namespace SimpleCapture
                             await DisplayAlert("Error", "Unable to configure camera settings", "OK");
                         }
 
+                        // audio source
+                        IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
+
+                        deviceName = lbMic.Text;
+                        if (!string.IsNullOrEmpty(deviceName))
+                        {
+                            var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                            if (device != null)
+                            {
+                                var formatItem = device.GetDefaultFormat();
+                                if (formatItem != null)
+                                {
+                                    audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
+                                }
+                            }
+                        }
+
+                        _core.Audio_Source = audioSourceSettings;
+
+                        // start
                         await _core.StartAsync();
 
                         _tmPosition.Start();
@@ -200,7 +225,7 @@ namespace SimpleCapture
                 _core.OnError -= Core_OnError;
                 await _core.StopAsync();
 
-                _core.Dispose();
+                _core?.Dispose();
                 _core = null;
             }
         }
@@ -286,6 +311,108 @@ namespace SimpleCapture
             await StopAllAsync();
 
             btPlayPause.Text = "PLAY";
+        }
+
+        private void btPrevCamera_Clicked(object sender, EventArgs e)
+        {
+            if (_cameras.Length == 0)
+            {
+                return;
+            }
+
+            _cameraSelectedIndex--;
+
+            if (_cameraSelectedIndex < 0)
+            {
+                _cameraSelectedIndex = _cameras.Length - 1;
+            }
+
+            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
+        }
+
+        private void btNextCamera_Clicked(object sender, EventArgs e)
+        {
+            if (_cameras.Length == 0)
+            {
+                return;
+            }
+
+            _cameraSelectedIndex++;
+
+            if (_cameraSelectedIndex >= _cameras.Length)
+            {
+                _cameraSelectedIndex = 0;
+            }
+
+            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
+        }
+
+        private void btNextMic_Clicked(object sender, EventArgs e)
+        {
+            if (_mics.Length == 0)
+            {
+                return;
+            }
+
+            _micSelectedIndex++;
+
+            if (_micSelectedIndex >= _mics.Length)
+            {
+                _micSelectedIndex = 0;
+            }
+
+            lbMic.Text = _mics[_micSelectedIndex].DisplayName;
+        }
+
+        private void btPrevMic_Clicked(object sender, EventArgs e)
+        {
+            if (_mics.Length == 0)
+            {
+                return;
+            }
+
+            _micSelectedIndex--;
+
+            if (_micSelectedIndex < 0)
+            {
+                _micSelectedIndex = _mics.Length - 1;
+            }
+
+            lbMic.Text = _mics[_micSelectedIndex].DisplayName;
+        }
+
+        private void btPrevSpeakers_Clicked(object sender, EventArgs e)
+        {
+            if (_speakers.Length == 0)
+            {
+                return;
+            }
+
+            _speakerSelectedIndex--;
+
+            if (_speakerSelectedIndex < 0)
+            {
+                _speakerSelectedIndex = _speakers.Length - 1;
+            }
+
+            lbSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
+        }
+
+        private void btNextSpeakers_Clicked(object sender, EventArgs e)
+        {
+            if (_speakers.Length == 0)
+            {
+                return;
+            }
+
+            _speakerSelectedIndex++;
+
+            if (_speakerSelectedIndex >= _speakers.Length)
+            {
+                _speakerSelectedIndex = 0;
+            }
+
+            lbSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
         }
     }
 }

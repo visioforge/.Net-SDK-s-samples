@@ -23,33 +23,36 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    
-                    <Picker 
-                        Grid.Column="0"
-                        Title="CAMERA"
-                        x:Name="pkCamera" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start"
-                        MinimumWidthRequest="200"
-                        Margin="5, 0, 5, 0"/> 
 
-                    <Picker 
-                        Grid.Column="1"
-                        Title="MICROPHONE"
-                        x:Name="pkMic" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start"
-                        MinimumWidthRequest="200"
-                        Margin="5, 0, 5, 0" />
-                    
-                    <Picker 
-                        Grid.Column="2"
-                        Title="SPEAKERS"
-                        x:Name="pkSpeakers" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start"
-                        MinimumWidthRequest="200"
-                        Margin="5, 0, 5, 0" />
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" HorizontalOptions="Start" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
+                        <Button Text="&lt;" Margin="5" Clicked="btPrevCamera_Clicked" />
+                        <Label 
+                            Margin="5"
+                            Text="CAMERA"
+                            x:Name="lbCamera"
+                            VerticalOptions="Center"/>
+                        <Button Text=">" Margin="5" Clicked="btNextCamera_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="1" HorizontalOptions="Center" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
+                        <Button Text="&lt;" Margin="5" Clicked="btPrevMic_Clicked" />
+                        <Label 
+                            Margin="5"
+                            Text="MICROPHONE"
+                            x:Name="lbMic"
+                            VerticalOptions="Center"/>
+                        <Button Text=">" Margin="5" Clicked="btNextMic_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="2" HorizontalOptions="End" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
+                        <Button Text="&lt;" Margin="5" Clicked="btPrevSpeakers_Clicked" />
+                        <Label 
+                            Margin="5"
+                            Text="SPEAKERS"
+                            x:Name="lbSpeakers"
+                            VerticalOptions="Center"/>
+                        <Button Text=">" Margin="5" Clicked="btNextSpeakers_Clicked" />
+                    </StackLayout>
                 </Grid>
 
                 <StackLayout 

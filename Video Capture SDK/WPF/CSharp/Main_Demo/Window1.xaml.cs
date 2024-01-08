@@ -172,6 +172,7 @@ namespace Main_Demo
             VideoCapture1.OnBarcodeDetected += VideoCapture1_OnBarcodeDetected;
             VideoCapture1.OnAudioVUMeterProVolume += VideoCapture1_OnAudioVUMeterProVolume;
             VideoCapture1.OnMotion += VideoCapture1_OnMotion;
+            VideoCapture1.OnMotionDetectionEx += VideoCapture1_OnMotionDetectionEx;
             VideoCapture1.OnAudioVUMeterProFFTCalculated += VideoCapture1_OnAudioVUMeterProFFTCalculated;
             VideoCapture1.OnTVTunerTuneChannels += VideoCapture1_OnTVTunerTuneChannels;
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
@@ -188,6 +189,7 @@ namespace Main_Demo
                 VideoCapture1.OnBarcodeDetected -= VideoCapture1_OnBarcodeDetected;
                 VideoCapture1.OnAudioVUMeterProVolume -= VideoCapture1_OnAudioVUMeterProVolume;
                 VideoCapture1.OnMotion -= VideoCapture1_OnMotion;
+                VideoCapture1.OnMotionDetectionEx -= VideoCapture1_OnMotionDetectionEx;
                 VideoCapture1.OnAudioVUMeterProFFTCalculated -= VideoCapture1_OnAudioVUMeterProFFTCalculated;
                 VideoCapture1.OnTVTunerTuneChannels -= VideoCapture1_OnTVTunerTuneChannels;
                 VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
@@ -201,6 +203,14 @@ namespace Main_Demo
 
             tmRecording.Dispose();
             tmRecording = null;
+        }
+
+        private void VideoCapture1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
+        {
+            Dispatcher?.Invoke(() =>
+            {
+                pbAFMotionLevel.Value = e.LevelPercent;
+            });
         }
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
@@ -3183,34 +3193,30 @@ namespace Main_Demo
             ConfigureMotionDetection();
         }
 
-        private delegate void MotionDelegate(MotionDetectionEventArgs e);
-
-        private void MotionDelegateMethod(MotionDetectionEventArgs e)
-        {
-            string s = string.Empty;
-            int k = 0;
-            foreach (byte b in e.Matrix)
-            {
-                s += b.ToString("D3") + " ";
-
-                if (k == VideoCapture1.Motion_Detection.Matrix_Width - 1)
-                {
-                    k = 0;
-                    s += Environment.NewLine;
-                }
-                else
-                {
-                    k++;
-                }
-            }
-
-            mmMotDetMatrix.Text = s.Trim();
-            pbMotionLevel.Value = e.Level;
-        }
-
         private void VideoCapture1_OnMotion(object sender, MotionDetectionEventArgs e)
         {
-            Dispatcher?.BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
+            Dispatcher?.Invoke((Action)(() =>
+            {
+                string s = string.Empty;
+                int k = 0;
+                foreach (byte b in e.Matrix)
+                {
+                    s += b.ToString("D3") + " ";
+
+                    if (k == VideoCapture1.Motion_Detection.Matrix_Width - 1)
+                    {
+                        k = 0;
+                        s += Environment.NewLine;
+                    }
+                    else
+                    {
+                        k++;
+                    }
+                }
+
+                mmMotDetMatrix.Text = s.Trim();
+                pbMotionLevel.Value = e.Level;
+            }));
         }
 
         private void btAudEqRefresh_Click(object sender, RoutedEventArgs e)

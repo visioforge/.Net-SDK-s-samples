@@ -153,16 +153,16 @@ namespace IP_Capture
                 switch (ext)
                 {
                     case ".bmp":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Bmp);
+                        await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Bmp);
                         break;
                     case ".jpg":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg, 85);
+                        await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg, 85);
                         break;
                     case ".gif":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
+                        await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
                         break;
                     case ".png":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
+                        await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
                         break;
                 }
             }

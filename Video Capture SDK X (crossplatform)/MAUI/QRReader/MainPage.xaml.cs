@@ -16,6 +16,8 @@ namespace QRReader
 
         private VideoCaptureDeviceInfo[] _cameras;
 
+        private int _cameraSelectedIndex = 0;
+
         public MainPage()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace QRReader
 
 #if __ANDROID__
             _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#elif __MACCATALYST__
+#elif __MACCATALYST__ || __IOS__
             _core = new VideoCaptureCoreX(videoView);
 #else
             var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
@@ -60,11 +62,9 @@ namespace QRReader
 
             // cameras
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
-            pkCamera.ItemsSource = _cameras.Select(x => x.DisplayName).ToList();
-
             if (_cameras.Length > 0)
             {
-                pkCamera.SelectedIndex = 0;
+                lbCamera.Text = _cameras[0].DisplayName;
             }
 
             Window.Destroying += Window_Destroying;
@@ -112,7 +112,7 @@ namespace QRReader
                     {
                         await _core.StopAsync();
 
-                        btPlayStop.Text = "PLAY";
+                        btPlayStop.Text = "START";
                     }
 
                     break;
@@ -126,7 +126,7 @@ namespace QRReader
                         // video source
                         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
 
-                        var deviceName = pkCamera.SelectedItem.ToString();
+                        var deviceName = lbCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
                             var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
@@ -170,7 +170,7 @@ namespace QRReader
                 _core.OnError -= Core_OnError;
                 await _core.StopAsync();
 
-                _core.Dispose();
+                _core?.Dispose();
                 _core = null;
             }
         }
@@ -178,6 +178,40 @@ namespace QRReader
         private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
+        }
+
+        private void btPrevCamera_Clicked(object sender, EventArgs e)
+        {
+            if (_cameras.Length == 0)
+            {
+                return;
+            }
+
+            _cameraSelectedIndex--;
+
+            if (_cameraSelectedIndex < 0)
+            {
+                _cameraSelectedIndex = _cameras.Length - 1;
+            }
+
+            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
+        }
+
+        private void btNextCamera_Clicked(object sender, EventArgs e)
+        {
+            if (_cameras.Length == 0)
+            {
+                return;
+            }
+
+            _cameraSelectedIndex++;
+
+            if (_cameraSelectedIndex >= _cameras.Length)
+            {
+                _cameraSelectedIndex = 0;
+            }
+
+            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
     }
 }
