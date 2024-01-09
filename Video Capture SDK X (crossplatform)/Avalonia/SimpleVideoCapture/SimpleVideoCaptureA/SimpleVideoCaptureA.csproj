@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('MacOS'))">
+    <TargetFramework>net7.0-macos10.14</TargetFramework>
+    <!-- <RuntimeIdentifiers>osx-arm64</RuntimeIdentifiers>-->
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.7.35" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.7.35" />
+  </ItemGroup>
+</Project>
