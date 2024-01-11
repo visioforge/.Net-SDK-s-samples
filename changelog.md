@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.38
+
+* [X-engines] Added the StartPosition and StopPosition properties to UniversalSourceSettings. You can use these properties to set the start and stop positions for the file source.
+
 ## 15.7.37
 
 * [ALL] Resolved the issue with passwords with special characters used for RTSP sources
