@@ -1,8 +1,16 @@
 # Changelog
 
+## 15.7.37
+
+* [ALL] Resolved the issue with passwords with special characters used for RTSP sources
+
+## 15.7.36
+
+* [ALL] Resolved the rare video flip issue with the Virtual Camera SDK engine
+
 ## 15.7.32
 
-* [ALL] VisioForge MJPEG Decoder filter was removed from the SDK NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
+* [ALL] The VisioForge MJPEG Decoder filter was removed from the SDK NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
 
 ## 15.7.31
 
