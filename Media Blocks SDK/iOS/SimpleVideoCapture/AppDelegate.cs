@@ -176,7 +176,7 @@ public class AppDelegate : UIApplicationDelegate {
         _pipeline.Connect(_videoTee.Outputs[1], _videoSampleGrabberSink.Input);
 
         // audio source
-        _audioSource = new SystemAudioSourceBlock(new OSXAudioSourceSettings());
+        _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
 
         // create audio tee
         _audioTee = new TeeBlock(3);
