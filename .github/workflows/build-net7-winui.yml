@@ -1,0 +1,42 @@
+name: Build ALL (.Net 7 WinUI)
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS WinUI.sln"
+      Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln"
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: | 
+          7.0.x
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+        
+    ## Media Player
+
+    - name: Restore dependencies $env:Solution_Name_MP1
+      run: dotnet restore $env:Solution_Name_MP1
+
+    - name: Build app for release $env:Solution_Name_MP1
+      run: msbuild $env:Solution_Name_MP1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Video Capture
+
+    - name: Restore dependencies $env:Solution_Name_VC1
+      run: dotnet restore $env:Solution_Name_VC1
+
+    - name: Build app for release $env:Solution_Name_VC1
+      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
