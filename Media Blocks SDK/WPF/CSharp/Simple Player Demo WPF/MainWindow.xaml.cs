@@ -22,8 +22,6 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
-using VisioForge.Libs.DirectShowLib;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MediaBlocks_Simple_Player_Demo_WPF
 {

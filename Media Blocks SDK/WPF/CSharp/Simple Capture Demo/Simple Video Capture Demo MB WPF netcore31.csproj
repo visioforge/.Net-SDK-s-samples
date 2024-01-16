@@ -1,25 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<RootNamespace>MediaBlocks_Simple_Video_Capture_Demo_WPF</RootNamespace>
-		<PlatformTarget>x64</PlatformTarget>
-		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+		<Nullable>disable</Nullable>
 		<UseWPF>true</UseWPF>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<Optimize>False</Optimize>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<Optimize>True</Optimize>
+		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 	<ItemGroup>
-		<Content Include="visioforge_main_icon.ico" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
-		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.7.0" />
+		<None Remove="visioforge_main_icon.ico" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.42" />
@@ -27,6 +16,12 @@
 		<PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.7.42" />
 	</ItemGroup>
 	<ItemGroup>
-		<Reference Include="PresentationFramework" />
+		<PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
+		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
+		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="visioforge_main_icon.ico" />
 	</ItemGroup>
 </Project>
