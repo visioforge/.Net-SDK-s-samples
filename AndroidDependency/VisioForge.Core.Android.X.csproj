@@ -8,8 +8,6 @@
     <AssemblyVersion>15.7.21.0</AssemblyVersion>
     <FileVersion>15.7.21.0</FileVersion>
     <Version>15.7.21.0</Version>
-    <BaseIntermediateOutputPath>R:\VSCache\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**</DefaultItemExcludes>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <CheckEolWorkloads>false</CheckEolWorkloads>
   </PropertyGroup>
