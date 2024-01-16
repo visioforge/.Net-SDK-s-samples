@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <PlatformTarget>x64</PlatformTarget>
+    <RootNamespace>ip_camera_capture_mp4</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.7.42" />
+  </ItemGroup>
+</Project>
