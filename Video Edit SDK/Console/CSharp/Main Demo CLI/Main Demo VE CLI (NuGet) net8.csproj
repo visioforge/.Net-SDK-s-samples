@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VE_Main_Demo_CLI</RootNamespace>
+    <AssemblyName>VE Main Demo CLI</AssemblyName>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyTitle>VE Main Demo CLI</AssemblyTitle>
+    <Product>VE Main Demo CLI</Product>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.5.88.0</AssemblyVersion>
+    <FileVersion>15.5.88.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.7.42" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

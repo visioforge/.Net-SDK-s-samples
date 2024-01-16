@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Main_Demo</RootNamespace>
+    <AssemblyName>WPF Main Demo</AssemblyName>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <PlatformTarget>x64</PlatformTarget>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AssemblyTitle>Main Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>Main Demo</Product>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.5.88.0</AssemblyVersion>
+    <FileVersion>15.5.88.0</FileVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.7.42" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.7.42" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64" Version="15.5.36" />
+  </ItemGroup>
+</Project>

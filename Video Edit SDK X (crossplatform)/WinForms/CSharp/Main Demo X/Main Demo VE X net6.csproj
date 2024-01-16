@@ -13,8 +13,8 @@
     <Product>VisioForge Video Edit SDK .Net</Product>
     <Description>VisioForge Video Edit SDK .Net CSharp Demo</Description>
     <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.88.0</AssemblyVersion>
-    <FileVersion>15.5.88.0</FileVersion>
+    <AssemblyVersion>15.7.42.0</AssemblyVersion>
+    <FileVersion>15.7.42.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

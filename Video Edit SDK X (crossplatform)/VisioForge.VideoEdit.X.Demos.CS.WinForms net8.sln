@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE X net8", "WinForms\CSharp\Main Demo X\Main Demo VE X net8.csproj", "{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo X net8", "WinForms\CSharp\Video Join Demo X\Video Join Demo X net8.csproj", "{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images X net8", "WinForms\CSharp\Video from images X\Video From Images X net8.csproj", "{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
+	EndGlobalSection
+EndGlobal
