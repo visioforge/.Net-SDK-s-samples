@@ -7,7 +7,7 @@
         xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
         x:Class="MediaBlocks_Simple_Video_Capture_Demo_WPF.MainWindow"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - Simple Video Capture Demo" Height="453" Width="810" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Media Blocks SDK .Net - Simple Video Capture Demo" Height="453" Width="810" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400" />

@@ -75,8 +75,8 @@
 		<Button x:Name="btStop" TabIndex="54" Margin="0,0,300,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Stop</Button>
 		<Button x:Name="btStart" TabIndex="53" Margin="0,0,360,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Start</Button>
 
-		<Panel  Margin="434,33,10,145" Background="#0C0C0C" x:Name="pnScreen">
-			<avalonia:VideoView x:Name="VideoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C" />
+		<Panel  Margin="434,33,10,145" Background="#0C0C0C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="pnScreen">
+			<avalonia:VideoView x:Name="VideoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#AABBCC" />
 		</Panel>
 
 		<Label Content="View video tutorials" HorizontalAlignment="Right" Margin="0,0,17,0" Name="lbViewVideoTutorials" VerticalAlignment="Top"

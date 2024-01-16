@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.43
+
+* [Avalonia] Resolved an issue with Avalonia VideoView resize
+
 ## 15.7.38
 
 * [X-engines] Added the StartPosition and StopPosition properties to UniversalSourceSettings. You can use these properties to set the start and stop positions for the file source.
