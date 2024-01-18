@@ -40,7 +40,8 @@ jobs:
       run: dotnet restore $env:Solution_Name_MB1
 
     - name: Build app for release $env:Solution_Name_MB1
-      run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MB1 --configuration Release
+      #run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
 
     ## Media Player
 
