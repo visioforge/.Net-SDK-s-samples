@@ -39,4 +39,6 @@ jobs:
       run: dotnet restore $env:Solution_Name_VC1
 
     - name: Build app for release $env:Solution_Name_VC1
-      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VC1 --configuration Release --verbosity diagnostic
+
+# run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
