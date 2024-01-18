@@ -6,7 +6,7 @@
 
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowSpacing="10" RowDefinitions="*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+        <Grid RowDefinitions="*,Auto" >
 
             <my:VideoView Grid.Row="0"               
                 HorizontalOptions="FillAndExpand"
@@ -16,7 +16,7 @@
 
             <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 
-                <Grid Margin="8,5,8,0">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -24,84 +24,42 @@
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" HorizontalOptions="Start" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
-                        <Button Text="&lt;" Margin="5" Clicked="btPrevCamera_Clicked" />
-                        <Label 
-                            Margin="5"
-                            Text="CAMERA"
-                            x:Name="lbCamera"
-                            VerticalOptions="Center"/>
-                        <Button Text=">" Margin="5" Clicked="btNextCamera_Clicked" />
+                    <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="StartAndExpand" Margin="5">
+                        <Label Text="CAMERA" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btCamera" Text="CAMERA" MinimumWidthRequest="200" Clicked="btCamera_Clicked" />
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="1" HorizontalOptions="Center" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
-                        <Button Text="&lt;" Margin="5" Clicked="btPrevMic_Clicked" />
-                        <Label 
-                            Margin="5"
-                            Text="MICROPHONE"
-                            x:Name="lbMic"
-                            VerticalOptions="Center"/>
-                        <Button Text=">" Margin="5" Clicked="btNextMic_Clicked" />
+                    <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="CenterAndExpand" Margin="5">
+                        <Label Text="MICROPHONE" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btMic" Text="MICROPHONE" MinimumWidthRequest="200" Clicked="btMic_Clicked" />
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="2" HorizontalOptions="End" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
-                        <Button Text="&lt;" Margin="5" Clicked="btPrevSpeakers_Clicked" />
-                        <Label 
-                            Margin="5"
-                            Text="SPEAKERS"
-                            x:Name="lbSpeakers"
-                            VerticalOptions="Center"/>
-                        <Button Text=">" Margin="5" Clicked="btNextSpeakers_Clicked" />
+                    <StackLayout Orientation="Vertical" Grid.Column="2" HorizontalOptions="EndAndExpand" Margin="5">
+                        <Label Text="SPEAKERS" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btSpeakers" Text="SPEAKERS" MinimumWidthRequest="200" Clicked="btSpeakers_Clicked" />
                     </StackLayout>
                 </Grid>
 
                 <StackLayout 
                     Grid.Column="1"
                     Orientation="Horizontal"
-                    HorizontalOptions="Center"
-                    Margin="16, 0, 5, 0">
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="5, 0, 5, 0">
 
                     <Button  
                         x:Name="btPlayPause"   
-                        Text="PLAY" 
+                        Text="START" 
                         Margin="5" 
-                        Clicked="btPlayPause_Clicked" />
+                        Clicked="btPlayPause_Clicked"
+                        MinimumWidthRequest="100" />
 
                     <Button  
                         x:Name="btStop"   
                         Text="STOP" 
                         Margin="5" 
-                        Clicked="btStop_Clicked" />
+                        Clicked="btStop_Clicked" 
+                        MinimumWidthRequest="100" />
                 </StackLayout>
-
-                <!--<StackLayout
-                    Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalOptions="Start"
-                    Margin="16, 0, 5, 5" >
-
-                    <Label  
-                        Text="Volume"
-                        TextColor="White"
-                        VerticalOptions="Center" />
-
-                    <Slider 
-                        x:Name="slVolume"
-                        HorizontalOptions="Fill"
-                        Margin="15, 0, 5, 0"
-                        Minimum="0"
-                        Maximum="100"
-                        Value="25"
-                        WidthRequest="150"                        
-                        VerticalOptions="Center"
-                        ValueChanged="slVolume_ValueChanged" />
-
-                    <Button  
-                        x:Name="btSpeed"                   
-                        Margin="5,5,5,5" 
-                        Text="SPEED: 1X"
-                        Clicked="btSpeed_Clicked" />
-                </StackLayout>-->
             </StackLayout>
         </Grid>
     </ScrollView>

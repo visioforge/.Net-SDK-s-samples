@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayer", "MAUI\Simple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkinnedPlayer", "MAUI\SkinnedPlayer\SkinnedPlayer.csproj", "{91282EB3-BB4A-4352-8C9A-405C42E82456}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X7", "..\AndroidDependency\VisioForge.Core.Android.X7.csproj", "{82792F8B-2FE4-4B9F-AF30-B89DE919B661}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{91282EB3-BB4A-4352-8C9A-405C42E82456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91282EB3-BB4A-4352-8C9A-405C42E82456}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91282EB3-BB4A-4352-8C9A-405C42E82456}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{82792F8B-2FE4-4B9F-AF30-B89DE919B661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82792F8B-2FE4-4B9F-AF30-B89DE919B661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82792F8B-2FE4-4B9F-AF30-B89DE919B661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82792F8B-2FE4-4B9F-AF30-B89DE919B661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

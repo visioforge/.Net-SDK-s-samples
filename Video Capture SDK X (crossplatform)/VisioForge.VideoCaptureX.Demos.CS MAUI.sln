@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRReader", "MAUI\QRReader\Q
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCapture", "MAUI\SimpleCapture\SimpleCapture.csproj", "{1A9B8956-BFFC-4777-8916-2D559EE151D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X", "..\AndroidDependency\VisioForge.Core.Android.X.csproj", "{FA322D0F-AB1E-429B-9267-C69A86C14FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X7", "..\AndroidDependency\VisioForge.Core.Android.X7.csproj", "{FA322D0F-AB1E-429B-9267-C69A86C14FF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

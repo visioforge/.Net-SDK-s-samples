@@ -12,11 +12,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.7.43" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.7.45" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.45" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X.csproj" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
   </ItemGroup>
 </Project>

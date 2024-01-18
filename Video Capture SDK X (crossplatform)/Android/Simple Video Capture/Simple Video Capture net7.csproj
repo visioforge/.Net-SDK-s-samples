@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-android</TargetFramework>
+    <TargetFramework>net7.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <RootNamespace>Simple_Video_Capture</RootNamespace>
     <OutputType>Exe</OutputType>
@@ -15,10 +15,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.7.43" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.7.43" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.7.45" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.7.45" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X.csproj" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
   </ItemGroup>
 </Project>

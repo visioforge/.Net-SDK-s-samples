@@ -6,26 +6,24 @@
 
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowSpacing="10" RowDefinitions="Auto,*" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+        <Grid RowDefinitions="Auto,*">
 
             <StackLayout Grid.Row="0" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 
-                <Grid Margin="8,5,8,0">
+                <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal" Grid.Column="0" HorizontalOptions="Start" Margin="5, 0, 5, 0" MinimumWidthRequest="200">
-                        <Button Text="&lt;" Margin="5" Clicked="btPrevCamera_Clicked" />
-                        <Label 
-                            Margin="5"
-                            Text="CAMERA"
-                            x:Name="lbCamera"
-                            VerticalOptions="Center"/>
-                        <Button Text=">" Margin="5" Clicked="btNextCamera_Clicked" />
-                    </StackLayout>
+                    <Button 
+                        x:Name="btCamera" 
+                        Text="CAMERA" 
+                        Grid.Column="0" 
+                        HorizontalOptions="Start" 
+                        Margin="10" 
+                        Clicked="btCamera_Clicked" />
 
                     <Label  
                         Grid.Column="1"
@@ -33,16 +31,16 @@
                         TextColor="White"
                         x:Name="lbBarcode" 
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        WidthRequest="200"/>
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="10" />
 
                     <Button  
                         Grid.Column="2"
                         x:Name="btPlayStop"   
                         Text="START" 
-                        Margin="5" 
+                        Margin="10" 
                         Clicked="btPlayStop_Clicked" 
-                        HorizontalOptions="End"/>                    
+                        HorizontalOptions="EndAndExpand"/>
                 </Grid>
             </StackLayout>
 
@@ -50,6 +48,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 x:Name="videoView"
+                Margin="0" 
                 Background="Black"/>
         </Grid>
     </ScrollView>

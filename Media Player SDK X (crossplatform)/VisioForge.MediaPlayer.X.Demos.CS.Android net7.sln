@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer net7", "Android\MediaPlayer\MediaPlayer net7.csproj", "{3650E895-910B-45C6-8344-941D91A4F653}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X", "..\AndroidDependency\VisioForge.Core.Android.X.csproj", "{95D3F6E3-9727-4A12-B359-09CFD89B21DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X7", "..\AndroidDependency\VisioForge.Core.Android.X7.csproj", "{95D3F6E3-9727-4A12-B359-09CFD89B21DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

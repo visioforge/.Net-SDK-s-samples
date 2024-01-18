@@ -30,7 +30,7 @@ namespace Simple_Player_MAUI
         /// </summary>
         private volatile bool _isTimerUpdate;
 
-#if ANDROID
+#if __ANDROID__
         private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
 #else
         private const string DEFAULT_FILENAME = @"c:\samples\!video.mp4";

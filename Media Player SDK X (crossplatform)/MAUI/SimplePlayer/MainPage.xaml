@@ -7,7 +7,7 @@
 
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowSpacing="10" RowDefinitions="*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+        <Grid RowSpacing="0" RowDefinitions="*,Auto" >
 
             <my:VideoView Grid.Row="0"               
                 HorizontalOptions="FillAndExpand"
@@ -23,7 +23,7 @@
                     VerticalOptions="Center"
                     ValueChanged="slSeeking_ValueChanged" />
 
-                <Grid Margin="8,5,8,0">
+                <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />

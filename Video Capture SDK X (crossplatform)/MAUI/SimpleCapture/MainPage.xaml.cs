@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
-
+using System.Linq;
+using System.Threading.Tasks;
 using VisioForge.Core;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
@@ -59,6 +62,7 @@ namespace SimpleCapture
         {
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__
             await RequestCameraPermissionAsync();
+            await RequestMicPermissionAsync();
 #endif
 
             _deviceEnumerator = new DeviceEnumerator(
@@ -82,21 +86,21 @@ namespace SimpleCapture
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {                
-                lbCamera.Text = _cameras[0].DisplayName;
+                btCamera.Text = _cameras[0].DisplayName;
             }
 
             // mics
             _mics = await _deviceEnumerator.AudioSourcesAsync(null);
             if (_mics.Length > 0)
             {      
-                lbMic.Text = _mics[0].DisplayName;
+                btMic.Text = _mics[0].DisplayName;
             }
 
             // audio outputs
             _speakers = await _deviceEnumerator.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
             {                
-                lbSpeakers.Text = _speakers[0].DisplayName;
+                btSpeakers.Text = _speakers[0].DisplayName;
             }
 
             Window.Destroying += Window_Destroying;
@@ -120,6 +124,24 @@ namespace SimpleCapture
             }
         }
 
+        private async Task RequestMicPermissionAsync()
+        {
+            var result = await Permissions.RequestAsync<Permissions.Microphone>();
+
+            // Check result from permission request. If it is allowed by the user, connect to scanner
+            if (result == PermissionStatus.Granted)
+            {
+            }
+            else
+            {
+                if (Permissions.ShouldShowRationale<Permissions.Microphone>())
+                {
+                    if (await DisplayAlert(null, "You need to allow access to the Microphone", "OK", "Cancel"))
+                        await RequestMicPermissionAsync();
+                }
+            }
+        }
+
         private async void btPlayPause_Clicked(object sender, EventArgs e)
         {
             if (_core == null)
@@ -133,7 +155,7 @@ namespace SimpleCapture
                     {
                         await _core.PauseAsync();
 
-                        btPlayPause.Text = "PLAY";
+                        btPlayPause.Text = "START";
                     }
 
                     break;
@@ -153,13 +175,13 @@ namespace SimpleCapture
                         }
 
                         // audio output
-                        _core.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == lbSpeakers.Text).First();
+                        _core.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
                         _core.Audio_Play = true;
 
                         // video source
                         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
 
-                        var deviceName = lbCamera.Text;
+                        var deviceName = btCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
                             var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
@@ -188,17 +210,14 @@ namespace SimpleCapture
                         // audio source
                         IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
-                        deviceName = lbMic.Text;
+                        deviceName = btMic.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
                             var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                             if (device != null)
                             {
                                 var formatItem = device.GetDefaultFormat();
-                                if (formatItem != null)
-                                {
-                                    audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
-                                }
+                                audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
                             }
                         }
 
@@ -310,29 +329,12 @@ namespace SimpleCapture
         {
             await StopAllAsync();
 
-            btPlayPause.Text = "PLAY";
+            btPlayPause.Text = "START";
         }
 
-        private void btPrevCamera_Clicked(object sender, EventArgs e)
+        private void btCamera_Clicked(object sender, System.EventArgs e)
         {
-            if (_cameras.Length == 0)
-            {
-                return;
-            }
-
-            _cameraSelectedIndex--;
-
-            if (_cameraSelectedIndex < 0)
-            {
-                _cameraSelectedIndex = _cameras.Length - 1;
-            }
-
-            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
-        }
-
-        private void btNextCamera_Clicked(object sender, EventArgs e)
-        {
-            if (_cameras.Length == 0)
+            if (_cameras == null || _cameras.Length == 0)
             {
                 return;
             }
@@ -344,12 +346,12 @@ namespace SimpleCapture
                 _cameraSelectedIndex = 0;
             }
 
-            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
+            btCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
 
-        private void btNextMic_Clicked(object sender, EventArgs e)
+        private void btMic_Clicked(object sender, System.EventArgs e)
         {
-            if (_mics.Length == 0)
+            if (_mics == null || _mics.Length == 0)
             {
                 return;
             }
@@ -361,46 +363,12 @@ namespace SimpleCapture
                 _micSelectedIndex = 0;
             }
 
-            lbMic.Text = _mics[_micSelectedIndex].DisplayName;
+            btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
-        private void btPrevMic_Clicked(object sender, EventArgs e)
+        private void btSpeakers_Clicked(object sender, System.EventArgs e)
         {
-            if (_mics.Length == 0)
-            {
-                return;
-            }
-
-            _micSelectedIndex--;
-
-            if (_micSelectedIndex < 0)
-            {
-                _micSelectedIndex = _mics.Length - 1;
-            }
-
-            lbMic.Text = _mics[_micSelectedIndex].DisplayName;
-        }
-
-        private void btPrevSpeakers_Clicked(object sender, EventArgs e)
-        {
-            if (_speakers.Length == 0)
-            {
-                return;
-            }
-
-            _speakerSelectedIndex--;
-
-            if (_speakerSelectedIndex < 0)
-            {
-                _speakerSelectedIndex = _speakers.Length - 1;
-            }
-
-            lbSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
-        }
-
-        private void btNextSpeakers_Clicked(object sender, EventArgs e)
-        {
-            if (_speakers.Length == 0)
+            if (_speakers == null || _speakers.Length == 0)
             {
                 return;
             }
@@ -412,7 +380,7 @@ namespace SimpleCapture
                 _speakerSelectedIndex = 0;
             }
 
-            lbSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
+            btSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
         }
     }
 }

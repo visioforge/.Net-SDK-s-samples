@@ -64,7 +64,7 @@ namespace QRReader
             _cameras = await _deviceEnumerator.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {
-                lbCamera.Text = _cameras[0].DisplayName;
+                btCamera.Text = _cameras[0].DisplayName;
             }
 
             Window.Destroying += Window_Destroying;
@@ -126,7 +126,7 @@ namespace QRReader
                         // video source
                         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
 
-                        var deviceName = lbCamera.Text;
+                        var deviceName = btCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
                             var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
@@ -180,26 +180,9 @@ namespace QRReader
             Debug.WriteLine(e.Message);
         }
 
-        private void btPrevCamera_Clicked(object sender, EventArgs e)
+        private void btCamera_Clicked(object sender, EventArgs e)
         {
-            if (_cameras.Length == 0)
-            {
-                return;
-            }
-
-            _cameraSelectedIndex--;
-
-            if (_cameraSelectedIndex < 0)
-            {
-                _cameraSelectedIndex = _cameras.Length - 1;
-            }
-
-            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
-        }
-
-        private void btNextCamera_Clicked(object sender, EventArgs e)
-        {
-            if (_cameras.Length == 0)
+            if (_cameras == null || _cameras.Length == 0)
             {
                 return;
             }
@@ -211,7 +194,7 @@ namespace QRReader
                 _cameraSelectedIndex = 0;
             }
 
-            lbCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
+            btCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
     }
 }
