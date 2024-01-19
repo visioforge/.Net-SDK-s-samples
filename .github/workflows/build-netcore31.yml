@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     env:
-      Solution_Name_MB1: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS netcore31.sln"
-
       Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) netcore31.sln"
       Solution_Name_MP2: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows netcore31.sln"
 
@@ -34,15 +32,6 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
         
-    ## Media Blocks
-
-    - name: Restore dependencies $env:Solution_Name_MB1
-      run: dotnet restore $env:Solution_Name_MB1
-
-    - name: Build app for release $env:Solution_Name_MB1
-      run: dotnet build $env:Solution_Name_MB1 --configuration Release
-      #run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
-
     ## Media Player
 
     - name: Restore dependencies $env:Solution_Name_MP1
