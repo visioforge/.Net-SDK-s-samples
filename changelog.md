@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.47
+
+* [Windows] Resolved a CallbackOnCollectedDelegate call issue with the BasicWindow class
+
 ## 15.7.43
 
 * [Avalonia] Resolved an issue with Avalonia VideoView resize
