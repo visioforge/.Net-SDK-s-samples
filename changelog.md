@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.7.48
+
+* [Windows] Added mouse highlight for screen capture sources
+
 ## 15.7.47
 
 * [Windows] Resolved a CallbackOnCollectedDelegate call issue with the BasicWindow class

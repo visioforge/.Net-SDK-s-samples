@@ -715,8 +715,9 @@ namespace Main_Demo
             settings.Bottom = Convert.ToInt32(edScreenBottom.Text);
             settings.Left = Convert.ToInt32(edScreenLeft.Text);
             settings.Right = Convert.ToInt32(edScreenRight.Text);
-            settings.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.IsChecked
-                                                                  == true;
+            settings.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
+            settings.MouseHighlight = cbScreenCapture_HighlightMouseCursor.IsChecked == true;
+
             settings.DisplayIndex = Convert.ToInt32(cbScreenCaptureDisplayIndex.SelectedValue);
             settings.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.IsChecked == true;
         }
@@ -3085,7 +3086,8 @@ namespace Main_Demo
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(
                 Convert.ToInt32(edScreenLeft.Text),
                 Convert.ToInt32(edScreenTop.Text),
-                cbScreenCapture_GrabMouseCursor.IsChecked == true);
+                cbScreenCapture_GrabMouseCursor.IsChecked == true,
+                cbScreenCapture_HighlightMouseCursor.IsChecked == true);
         }
 
         private void cbPIPFormatUseBest_CheckedChanged(object sender, RoutedEventArgs e)

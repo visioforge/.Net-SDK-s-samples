@@ -2584,6 +2584,7 @@ namespace VideoCapture_CSharp_Demo
             settings.FrameRate = new VideoFrameRate(Convert.ToInt32(edScreenFrameRate.Text));
 
             settings.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.Checked;
+            settings.MouseHighlight = cbScreenCapture_HighlightMouseCursor.Checked;
             settings.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.Checked;
         }
 
@@ -3314,7 +3315,8 @@ namespace VideoCapture_CSharp_Demo
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(
                 Convert.ToInt32(edScreenLeft.Text),
                 Convert.ToInt32(edScreenTop.Text),
-                cbScreenCapture_GrabMouseCursor.Checked);
+                cbScreenCapture_GrabMouseCursor.Checked,
+                cbScreenCapture_HighlightMouseCursor.Checked);
         }
 
         private void cbPIPFormatUseBest_CheckedChanged(object sender, EventArgs e)

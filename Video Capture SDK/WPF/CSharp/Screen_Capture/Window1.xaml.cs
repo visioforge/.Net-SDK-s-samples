@@ -95,7 +95,8 @@ namespace Screen_Capture
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(
                 Convert.ToInt32(edScreenLeft.Text),
                 Convert.ToInt32(edScreenTop.Text),
-                cbScreenCapture_GrabMouseCursor.IsChecked == true);
+                cbScreenCapture_GrabMouseCursor.IsChecked == true,
+                cbScreenCapture_HighlightMouseCursor.IsChecked == true);
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
@@ -290,6 +291,7 @@ namespace Screen_Capture
             source.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
             source.DisplayIndex = screenID;
             source.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.IsChecked == true;
+            source.MouseHighlight = cbScreenCapture_HighlightMouseCursor.IsChecked == true;
 
             return source;
         }

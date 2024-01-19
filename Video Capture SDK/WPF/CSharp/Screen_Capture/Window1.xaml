@@ -37,10 +37,11 @@
                     <CheckBox Height="16" HorizontalAlignment="Left" Margin="266,358,0,0" Name="cbUseBestAudioInputFormat" VerticalAlignment="Top" Width="65" Checked="cbUseBestAudioInputFormat_CheckedChanged">Use best</CheckBox>
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
                     <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,189,0,0" Name="label55" VerticalAlignment="Top" />
-                    <CheckBox x:Name="cbScreenCapture_DesktopDuplication" Content="Enable Desktop Duplication" HorizontalAlignment="Left" Margin="12,257,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbScreenCapture_DesktopDuplication" Content="Enable Desktop Duplication" HorizontalAlignment="Left" Margin="165,281,0,0" VerticalAlignment="Top"/>
                     <RadioButton Content="Capture window" Height="16" HorizontalAlignment="Right" Margin="0,183,39,0" x:Name="rbScreenCaptureWindow" VerticalAlignment="Top" />
                     <Button Content="Select" Height="23" HorizontalAlignment="Left" Margin="225,205,0,0" x:Name="btScreenSourceWindowSelect" VerticalAlignment="Top" Width="75" Click="btScreenSourceWindowSelect_Click" />
                     <Label Content="(no window selected)" Height="28" HorizontalAlignment="Left" Margin="200,231,0,0" x:Name="lbScreenSourceWindowText" VerticalAlignment="Top" />
+                    <CheckBox x:Name="cbScreenCapture_HighlightMouseCursor" Content="Highlight mouse cursor" HorizontalAlignment="Left" Margin="12,252,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Output" IsSelected="True">

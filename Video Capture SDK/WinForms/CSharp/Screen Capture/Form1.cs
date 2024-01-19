@@ -10,6 +10,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using System.Drawing.Imaging;
     using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.Helpers;
@@ -108,7 +109,11 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
         private async void btScreenCaptureUpdate_Click(object sender, EventArgs e)
         {
-            await VideoCapture1.Screen_Capture_UpdateParametersAsync(Convert.ToInt32(edScreenLeft.Text), Convert.ToInt32(edScreenTop.Text), cbScreenCapture_GrabMouseCursor.Checked);
+            await VideoCapture1.Screen_Capture_UpdateParametersAsync(
+                Convert.ToInt32(edScreenLeft.Text), 
+                Convert.ToInt32(edScreenTop.Text), 
+                cbScreenCapture_GrabMouseCursor.Checked, 
+                cbScreenCapture_HighlightMouseCursor.Checked);
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -293,6 +298,8 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             source.GrabMouseCursor = cbScreenCapture_GrabMouseCursor.Checked;
             source.DisplayIndex = screenID;
             source.AllowDesktopDuplicationEngine = cbScreenCapture_DesktopDuplication.Checked;
+
+            source.MouseHighlight = cbScreenCapture_HighlightMouseCursor.Checked;
 
             return source;
         }

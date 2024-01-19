@@ -1164,10 +1164,11 @@
                     <ComboBox Height="23" HorizontalAlignment="Left" Margin="126,222,0,0" x:Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
                     <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="47,222,0,0" x:Name="label55" VerticalAlignment="Top" />
                     <RadioButton Content="Capture window" Height="16" HorizontalAlignment="Right" Margin="0,187,99,0" x:Name="rbScreenCaptureWindow" VerticalAlignment="Top" />
-                    <CheckBox x:Name="cbScreenCapture_DesktopDuplication" Content="Allow Desktop Duplication usage" HorizontalAlignment="Left" Margin="47,283,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="cbScreenCapture_DesktopDuplication" Content="Allow Desktop Duplication usage" HorizontalAlignment="Left" Margin="47,311,0,0" VerticalAlignment="Top"/>
                     <Button Content="Select" Height="23" HorizontalAlignment="Left" Margin="445,182,0,0" x:Name="btScreenSourceWindowSelect" VerticalAlignment="Top" Width="75" Click="btScreenSourceWindowSelect_Click" />
                     <Label Content="(no window selected)" Height="28" HorizontalAlignment="Left" Margin="364,210,0,0" x:Name="lbScreenSourceWindowText" VerticalAlignment="Top" />
                     <Label Content="(You can capture background window)" Height="28" HorizontalAlignment="Left" Margin="306,243,0,0" VerticalAlignment="Top" />
+                    <CheckBox x:Name="cbScreenCapture_HighlightMouseCursor" Content="Highlight mouse cursor" HorizontalAlignment="Left" Margin="47,283,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="IP camera" x:Name="tabItem60">
