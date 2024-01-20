@@ -73,11 +73,8 @@ namespace SimpleCapture
 
 #if __ANDROID__
             _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#elif __MACCATALYST__ || __IOS__
-            _core = new VideoCaptureCoreX(videoView);
 #else
-            var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
-            _core = new VideoCaptureCoreX(handler.VideoView);
+            _core = new VideoCaptureCoreX(videoView);
 #endif
 
             _core.OnError += Core_OnError;       

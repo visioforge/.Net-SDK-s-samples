@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.7.50
+
+* [Windows] Improved MAUI video rendering performance in Windows
+
 ## 15.7.48
 
-* [Windows] Added mouse highlight for screen capture sources
+* [Windows] Added a mouse highlight for screen capture sources
 
 ## 15.7.47
 
@@ -26,7 +30,7 @@
 
 ## 15.7.32
 
-* [ALL] The VisioForge MJPEG Decoder filter was removed from the SDK NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
+* [ALL] The VisioForge MJPEG Decoder filter was removed from the SDK's NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
 
 ## 15.7.31
 

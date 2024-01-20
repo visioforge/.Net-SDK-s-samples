@@ -54,11 +54,8 @@ namespace Simple_Player_MAUI
         {
 #if __ANDROID__
              _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#elif __MACCATALYST__ || __IOS__
-            _player = new MediaPlayerCoreX(videoView);
 #else
-            var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
-            _player = new MediaPlayerCoreX(handler.VideoView);
+            _player = new MediaPlayerCoreX(videoView);
 #endif
 
             _player.OnError += _player_OnError;
