@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
@@ -27,7 +27,7 @@ namespace VNC_Source_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -118,6 +118,8 @@ namespace VNC_Source_Demo
             tmRecording.Stop();
 
             await DestroyEngineAsync();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

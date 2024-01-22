@@ -212,6 +212,8 @@ namespace Simple_Player_Demo_X
             _isClosing = true;
 
             await DestroyEngineAsync();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

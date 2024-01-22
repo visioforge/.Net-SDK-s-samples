@@ -30,8 +30,6 @@ namespace Simple_Video_Capture
 
         private VideoCaptureCoreX _core;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private VideoCaptureDeviceInfo[] _cameras;
 
         private AudioCaptureDeviceInfo[] _mics;
@@ -42,18 +40,16 @@ namespace Simple_Video_Capture
 
         private async Task CreateEngineAsync()
         {
-            _deviceEnumerator = new DeviceEnumerator(this);
-
-            _core = new VideoCaptureCoreX(videoView, this);
+            _core = new VideoCaptureCoreX(videoView);
 
             // cameras
-            _cameras = await _deviceEnumerator.VideoSourcesAsync();
+            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
 
             // mics
-            _mics = await _deviceEnumerator.AudioSourcesAsync();
+            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync();
 
             // audio outputs
-            _speakers = await _deviceEnumerator.AudioOutputsAsync();
+            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync();
         }
 
         private async Task DestroyEngineAsync()
@@ -127,6 +123,13 @@ namespace Simple_Video_Capture
             });
         }
 
+        protected override void OnDestroy()
+        {
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
+        }
+
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -170,7 +173,7 @@ namespace Simple_Video_Capture
         {
             await CreateEngineAsync();
 
-            var videoSources = await _deviceEnumerator.VideoSourcesAsync();
+            var videoSources = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (videoSources.Length == 0)
             {
                 Toast.MakeText(this, "No video sources found", ToastLength.Long).Show();

@@ -54,8 +54,6 @@ namespace Screen_Capture_MB_WPF
 
         private MP4SinkBlock _sink;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         // Dialogs
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -65,9 +63,8 @@ namespace Screen_Capture_MB_WPF
 
             System.Windows.Forms.Application.EnableVisualStyles();
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -204,7 +201,7 @@ namespace Screen_Capture_MB_WPF
                 var deviceName = cbAudioInputDevice.Text;
                 if (!string.IsNullOrEmpty(deviceName))
                 {
-                    var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         audioSourceSettings = device.CreateSourceSettings();
@@ -214,7 +211,7 @@ namespace Screen_Capture_MB_WPF
                 _audioInput = new SystemAudioSourceBlock(audioSourceSettings);
 
                 // audio renderer
-                _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First());
+                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First());
 
                 if (rbPreview.IsChecked == true)
                 {
@@ -252,8 +249,8 @@ namespace Screen_Capture_MB_WPF
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            await _deviceEnumerator.StartAudioSourceMonitorAsync();
-            await _deviceEnumerator.StartAudioSinkMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
             for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
             {
@@ -278,7 +275,7 @@ namespace Screen_Capture_MB_WPF
         {
             await DestroyEnginesAsync();
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

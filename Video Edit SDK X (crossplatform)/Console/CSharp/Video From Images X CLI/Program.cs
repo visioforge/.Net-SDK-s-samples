@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+
+using VisioForge.Core;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
@@ -111,6 +113,8 @@ namespace Video_From_Images_CLI
             Console.ReadKey();
 
             videoEdit.Dispose();
+
+            VisioForgeX.DestroySDK();
         }
 
         private static void VideoEdit_OnStop(object sender, StopEventArgs e)

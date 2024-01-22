@@ -1,6 +1,7 @@
 using Android.Runtime;
 using Android.Views;
 using System.Globalization;
+using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using Xamarin.Essentials;
 
@@ -46,7 +47,7 @@ namespace MediaPlayer
 
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
-            _player = new MediaPlayerCoreX(videoView, this);
+            _player = new MediaPlayerCoreX(videoView);
             _player.OnStart += _player_OnStart;
 
             btOpenFile = FindViewById<Button>(Resource.Id.btOpenFile);
@@ -79,6 +80,13 @@ namespace MediaPlayer
             pnScreen = FindViewById<GridLayout>(Resource.Id.pnScreen);
 
             edURL = FindViewById<EditText>(Resource.Id.edURL);
+        }
+
+        protected override void OnDestroy()
+        {
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
         }
 
         private void _player_OnStart(object sender, EventArgs e)

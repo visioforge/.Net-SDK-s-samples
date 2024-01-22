@@ -17,12 +17,9 @@ namespace Audio_Capture_Demo_X_WPF
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core;
     using VisioForge.Core.MediaBlocks;
-    using NAudio.CoreAudioApi;
 
     public partial class MainWindow : Window
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
 
         private UniversalOutputDialog pcmSettingsDialog;
@@ -52,11 +49,10 @@ namespace Audio_Capture_Demo_X_WPF
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -96,8 +92,8 @@ namespace Audio_Capture_Demo_X_WPF
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
             cbMode.SelectedIndex = 0;
 
-            await _deviceEnumerator.StartAudioSourceMonitorAsync();
-            await _deviceEnumerator.StartAudioSinkMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
         }
@@ -108,7 +104,7 @@ namespace Audio_Capture_Demo_X_WPF
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -133,7 +129,7 @@ namespace Audio_Capture_Demo_X_WPF
                 return;
             }
 
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == e.AddedItems[0].ToString()).First();
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == e.AddedItems[0].ToString()).First();
         }
 
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -162,10 +158,10 @@ namespace Audio_Capture_Demo_X_WPF
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
 
             // audio input
-            var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
+            var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
             if (deviceItem == null)
             {
                 return;
@@ -521,7 +517,7 @@ namespace Audio_Capture_Demo_X_WPF
                 VideoCapture1 = null;
             }
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

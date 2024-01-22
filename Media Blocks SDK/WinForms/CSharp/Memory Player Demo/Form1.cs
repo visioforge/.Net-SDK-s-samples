@@ -32,8 +32,6 @@ namespace MediaBlocks_Memory_Player_Demo
 
         private DecodeBinBlock _decodeBin;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline(false);
@@ -58,9 +56,7 @@ namespace MediaBlocks_Memory_Player_Demo
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -124,7 +120,7 @@ namespace MediaBlocks_Memory_Player_Demo
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_decodeBin.AudioOutput, _audioRenderer.Input);
             }
 
@@ -219,7 +215,7 @@ namespace MediaBlocks_Memory_Player_Demo
 
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

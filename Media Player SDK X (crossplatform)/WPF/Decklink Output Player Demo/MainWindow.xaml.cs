@@ -31,8 +31,6 @@ namespace Decklink_Player_Demo_X
 
         private volatile bool _isClosing;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -47,8 +45,6 @@ namespace Decklink_Player_Demo_X
 
             CreateEngine();
 
-            _deviceEnumerator = new DeviceEnumerator();
-
             // audio outputs
             foreach (var device in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
             {
@@ -61,7 +57,7 @@ namespace Decklink_Player_Demo_X
             }
 
             // Decklink outputs
-            foreach (var device in await _deviceEnumerator.DecklinkVideoSinksAsync())
+            foreach (var device in await DeviceEnumerator.Shared.DecklinkVideoSinksAsync())
             {
                 cbDecklinkVideoOutput.Items.Add(device.Name);
             }
@@ -71,7 +67,7 @@ namespace Decklink_Player_Demo_X
                 cbDecklinkVideoOutput.SelectedIndex = 0;
             }
 
-            foreach (var device in await _deviceEnumerator.DecklinkAudioSinksAsync())
+            foreach (var device in await DeviceEnumerator.Shared.DecklinkAudioSinksAsync())
             {
                 cbDecklinkAudioOutput.Items.Add(device.Name);
             }
@@ -189,7 +185,7 @@ namespace Decklink_Player_Demo_X
             _player.Custom_Audio_Outputs.Clear();
             if (cbDecklinkVideoOutput.Items.Count > 0)
             {
-                var device = (await _deviceEnumerator.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
+                var device = (await DeviceEnumerator.Shared.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
                 var videoSettings = new DecklinkVideoSinkSettings(device);
                 
                 videoSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
@@ -257,7 +253,7 @@ namespace Decklink_Player_Demo_X
 
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

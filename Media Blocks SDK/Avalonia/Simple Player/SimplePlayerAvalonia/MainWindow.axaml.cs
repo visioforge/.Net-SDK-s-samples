@@ -41,8 +41,6 @@ public partial class MainWindow : Window, IDisposable
 
     private bool _initialized;
 
-    private DeviceEnumerator _deviceEnumerator;
-
     public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
     public MainWindow()
@@ -52,7 +50,7 @@ public partial class MainWindow : Window, IDisposable
         this.AttachDevTools();
 #endif
 
-        MediaBlocksPipeline.InitSDK();
+        VisioForgeX.InitSDK();
 
         Activated += MainWindow_Activated;
         Closing += MainWindow_Closing;
@@ -85,7 +83,7 @@ public partial class MainWindow : Window, IDisposable
 
         await DestroyEngineAsync();
 
-        _deviceEnumerator.Dispose();
+        VisioForgeX.DestroySDK();
     }
 
     private void InitializeComponent()
@@ -104,10 +102,8 @@ public partial class MainWindow : Window, IDisposable
 
         InitControls();
 
-        _deviceEnumerator = new DeviceEnumerator();
-
         var cbAudioOutputItems = new ObservableCollection<string>();
-        foreach (var device in await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, _audioOutputDeviceAPI))
+        foreach (var device in await AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI))
         {
             cbAudioOutputItems.Add(device.Name);
         }
@@ -119,7 +115,7 @@ public partial class MainWindow : Window, IDisposable
             cbAudioOutput.SelectedIndex = 0;
         }
 
-        var audioInput = await _deviceEnumerator.AudioSourcesAsync(null);
+        var audioInput = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
         foreach (var device in audioInput)
         {
             Debug.WriteLine(device);
@@ -227,7 +223,7 @@ public partial class MainWindow : Window, IDisposable
 
         if (audioStream)
         {
-            var audioOutputDevice = AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, _audioOutputDeviceAPI).Result[cbAudioOutput.SelectedIndex];
+            var audioOutputDevice = AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI).Result[cbAudioOutput.SelectedIndex];
             _audioRenderer = new AudioRendererBlock(audioOutputDevice);
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }

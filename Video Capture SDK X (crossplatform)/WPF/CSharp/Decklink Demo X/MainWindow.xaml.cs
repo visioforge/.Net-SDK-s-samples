@@ -26,8 +26,6 @@ namespace Decklink_Demo_X
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private UniversalOutputDialog mp4SettingsDialog;
                 
         private UniversalOutputDialog webMSettingsDialog;
@@ -50,9 +48,7 @@ namespace Decklink_Demo_X
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private void CreateEngine()
@@ -102,7 +98,7 @@ namespace Decklink_Demo_X
 
             cbOutputFormat.SelectedIndex = 0;
 
-            var videoCaptureDevices = await _deviceEnumerator.DecklinkVideoSourcesAsync();
+            var videoCaptureDevices = await DeviceEnumerator.Shared.DecklinkVideoSourcesAsync();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -113,7 +109,7 @@ namespace Decklink_Demo_X
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = await _deviceEnumerator.DecklinkAudioSourcesAsync();
+            var audioCaptureDevices = await DeviceEnumerator.Shared.DecklinkAudioSourcesAsync();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -124,7 +120,7 @@ namespace Decklink_Demo_X
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
+            var audioOutputDevices = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -188,7 +184,7 @@ namespace Decklink_Demo_X
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First();
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First();
 
             VideoCapture1.Audio_Record = true;
             VideoCapture1.Audio_Play = true;
@@ -200,7 +196,7 @@ namespace Decklink_Demo_X
             var mode = cbVideoMode.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(mode))
             {
-                var device = (await _deviceEnumerator.DecklinkVideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await DeviceEnumerator.Shared.DecklinkVideoSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device)
@@ -218,7 +214,7 @@ namespace Decklink_Demo_X
             deviceName = cbAudioInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.DecklinkAudioSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await DeviceEnumerator.Shared.DecklinkAudioSourcesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     audioSourceSettings = new DecklinkAudioSourceSettings(device);
@@ -360,7 +356,7 @@ namespace Decklink_Demo_X
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private async void btStartCapture(object sender, RoutedEventArgs e)

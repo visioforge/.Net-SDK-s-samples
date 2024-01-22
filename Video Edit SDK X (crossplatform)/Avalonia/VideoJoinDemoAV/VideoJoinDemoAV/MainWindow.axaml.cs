@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+
+using VisioForge.Core;
 using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types;
@@ -49,6 +51,8 @@ public partial class MainWindow : Window
         VideoEdit1.Stop();
 
         DestroyEngine();
+
+        VisioForgeX.DestroySDK();
     }
 
     private void MainWindow_Activated(object sender, EventArgs e)

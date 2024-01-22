@@ -17,6 +17,8 @@ namespace VideoEdit_CS_Demo
     using System.Globalization;
     using System.IO;
     using System.Windows.Forms;
+
+    using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
@@ -467,6 +469,8 @@ namespace VideoEdit_CS_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VideoEdit1.Stop();
+
+            VisioForgeX.DestroySDK();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

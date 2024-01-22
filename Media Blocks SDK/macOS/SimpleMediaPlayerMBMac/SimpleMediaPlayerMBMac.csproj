@@ -18,7 +18,7 @@
     <LinkMode>None</LinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.7.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.7.50" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.8.0" />
   </ItemGroup>
 </Project>

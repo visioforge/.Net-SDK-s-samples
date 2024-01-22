@@ -64,16 +64,12 @@ namespace Decklink_MB_Demo
 
         private System.Timers.Timer _timer;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
 
             _pipeline = new MediaBlocksPipeline(true);      
             _pipeline.OnError += Pipeline_OnError;
-
-            _deviceEnumerator = new DeviceEnumerator();
 
             _videoEffects = new VideoEffectsWinBlock();
         }
@@ -108,7 +104,7 @@ namespace Decklink_MB_Demo
 
             cbOutputFormat.SelectedIndex = 0;
 
-            var videoCaptureDevices = await DecklinkVideoSourceBlock.GetDevicesAsync(_deviceEnumerator);
+            var videoCaptureDevices = await DecklinkVideoSourceBlock.GetDevicesAsync();
             if (videoCaptureDevices.Length > 0)
             {
                 foreach (var item in videoCaptureDevices)
@@ -119,7 +115,7 @@ namespace Decklink_MB_Demo
                 cbVideoInput.SelectedIndex = 0;
             }
 
-            var audioCaptureDevices = await DecklinkAudioSourceBlock.GetDevicesAsync(_deviceEnumerator);
+            var audioCaptureDevices = await DecklinkAudioSourceBlock.GetDevicesAsync();
             if (audioCaptureDevices.Length > 0)
             {
                 foreach (var item in audioCaptureDevices)
@@ -130,7 +126,7 @@ namespace Decklink_MB_Demo
                 cbAudioInput.SelectedIndex = 0;
             }
 
-            var videoSinkDevices = await DecklinkVideoSinkBlock.GetDevicesAsync(_deviceEnumerator);
+            var videoSinkDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
             if (videoSinkDevices.Length > 0)
             {
                 foreach (var item in videoSinkDevices)
@@ -141,7 +137,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkVideoOutput.SelectedIndex = 0;
             }
 
-            var audioSinkDevices = await DecklinkAudioSinkBlock.GetDevicesAsync(_deviceEnumerator);
+            var audioSinkDevices = await DecklinkAudioSinkBlock.GetDevicesAsync();
             if (audioSinkDevices.Length > 0)
             {
                 foreach (var item in audioSinkDevices)
@@ -152,7 +148,7 @@ namespace Decklink_MB_Demo
                 cbDecklinkAudioOutput.SelectedIndex = 0;
             }
 
-            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound)).ToArray();
+            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             if (audioOutputDevices.Length > 0)
             {
                 foreach (var item in audioOutputDevices)
@@ -345,7 +341,7 @@ namespace Decklink_MB_Demo
             var deviceName = cbVideoInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await DecklinkVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await DecklinkVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     videoSourceSettings = new DecklinkVideoSourceSettings(device);
@@ -361,7 +357,7 @@ namespace Decklink_MB_Demo
             deviceName = cbAudioInput.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await DecklinkAudioSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
+                var device = (await DecklinkAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                 if (device != null)
                 {
                     audioSourceSettings = new DecklinkAudioSourceSettings(device);
@@ -374,7 +370,7 @@ namespace Decklink_MB_Demo
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
 
             // effects
             AddVideoEffects();
@@ -465,7 +461,7 @@ namespace Decklink_MB_Demo
                     deviceName = cbDecklinkVideoOutput.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var device = (await DecklinkVideoSinkBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
+                        var device = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                         if (device != null)
                         {
                             videoSinkSettings = new DecklinkVideoSinkSettings(device);
@@ -480,7 +476,7 @@ namespace Decklink_MB_Demo
                     deviceName = cbDecklinkAudioOutput.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var device = (await DecklinkAudioSinkBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.Name == deviceName);
+                        var device = (await DecklinkAudioSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                         if (device != null)
                         {
                             audioSinkSettings = new DecklinkAudioSinkSettings(device);
@@ -550,7 +546,7 @@ namespace Decklink_MB_Demo
 
             VideoView1.CallRefresh();   
             
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private void cbAddTextOverlay_Checked(object sender, RoutedEventArgs e)

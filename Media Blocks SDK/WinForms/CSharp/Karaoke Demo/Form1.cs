@@ -14,7 +14,6 @@
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI;
-    using static Sentry.MeasurementUnit;
 
     public partial class Form1 : Form
     {
@@ -28,16 +27,12 @@
 
         // private AudioRendererBlock _audioRenderer;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public Form1()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -51,7 +46,7 @@
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
-            foreach (var item in await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
+            foreach (var item in await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
             {
                 cbAudioOutputDevice.Items.Add(item.DisplayName);
             }
@@ -190,7 +185,7 @@
                 _pipeline = null;
             }
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

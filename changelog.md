@@ -1,100 +1,40 @@
 # Changelog
 
-## 15.7.50
+## 15.8
 
+* [X-engines] [API breaking change] DeviceEnumerator can now be used only by using `DeviceEnumerator.Shared` property. It is required to have one enumerator per app. DeviceEnumerator objects used by API have been removed
+* [X-engines] [API breaking change] Android Activity is not required anymore to create SDK engines
+* [X-engines] [API breaking change] X-engines require additional initialization and de-initialization steps. To initialize SDK, use the `VisioForge.Core.VisioForgeX.InitSDK()` call. To de-initialize SDK, use the `VisioForge.Core.VisioForgeX.DestroySDK()` call. You need to initialize SDK before any SDK class usage and de-initialize SDK before the application exits.
 * [Windows] Improved MAUI video rendering performance in Windows
-
-## 15.7.48
-
 * [Windows] Added a mouse highlight for screen capture sources
-
-## 15.7.47
-
 * [Windows] Resolved a CallbackOnCollectedDelegate call issue with the BasicWindow class
-
-## 15.7.43
-
 * [Avalonia] Resolved an issue with Avalonia VideoView resize
-
-## 15.7.38
-
 * [X-engines] Added the StartPosition and StopPosition properties to UniversalSourceSettings. You can use these properties to set the start and stop positions for the file source.
-
-## 15.7.37
-
 * [ALL] Resolved the issue with passwords with special characters used for RTSP sources
-
-## 15.7.36
-
 * [ALL] Resolved the rare video flip issue with the Virtual Camera SDK engine
-
-## 15.7.32
-
 * [ALL] The VisioForge MJPEG Decoder filter was removed from the SDK's NuGet packages. You can optionally add it to your project by file copying or COM registration deployment.
-
-## 15.7.31
-
 * [X-engines] Fixed memory leak in the OverlayManager
-
-## 15.7.30
-
 * [Media Blocks SDK .Net] Resolved issue with the VideoSampleGrabberBlock, SetLastFrame option
-
-## 15.7.29
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: WASAPI and WASAPI2 audio sources can be used now with the VideoCaptureCoreX engine
 * [X-engines] DeviceEnumerator got events to notify about devices added/removed: OnVideoSourceAdded, OnVideoSourceRemoved, OnAudioSourceAdded, OnAudioSourceRemoved, OnAudioSinkAdded, OnAudioSinkRemoved
 * [X-engines] Added custom error handler support for MediaBlocks, VideoCaptureCoreX, and MediaPlayerCoreX engines. Use the IMediaBlocksPipelineCustomErrorHandler interface and the SetCustomErrorHandler method to set a custom error handler.
-
-## 15.7.28
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with incorrect device index error for KS video sources (Windows)
-
-## 15.7.27
-
 * [Video Capture SDK .Net] VideoCaptureCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
 * [Video Edit SDK .Net] VideoEditCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
 * [Media Player SDK .Net] MediaPlayerCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
-
-## 15.7.22
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Added NDI streaming support and sample app.
-
-## 15.7.21
-
 * [Media Blocks SDK .Net] Added the BufferSink block to get video/audio frames from the pipeline.
-
-## 15.7.20
-
 * [Media Blocks SDK .Net] Added the CustomMediaBlock class to create custom media blocks for any GStreamer element.
-
-## 15.7.18
-
 * [Media Blocks SDK .Net] Added the UpdateChannel method to update the channel of the bridge source or sink.
-
-## 15.7.17
-
 * [Media Player SDK .Net] MediaPlayerCore: Updated Tempo effect.
-
-## 15.7.16
-
 * [X-engines] Updated device enumerator. Removed unwanted firewall dialog when listing NDI sources.
 * [X-engines] Fixed an issue with the video mixer when adding/removing video sources.
-
-## 15.7.10
-
 * [Media Blocks SDK .Net] Added VideoCropBlock and VideoAspectRatioCropBlock blocks to crop video frames.
 * [Media Blocks SDK .Net] Resolved wrong frame rate issue with VideoRateBlock.
-
-## 15.7.8
-
 * [All] Resolved an issue with the Tempo audio effect.
-
-## 15.7.6
-
 * [Video Capture SDK .Net] VideoCaptureCore: Added WASAPI audio renderer support for the VideoCaptureCore engine.
 
-## 15.7.0
+## 15.7
 
 * [ALL] .Net 8 support
 * [Video Capture SDK .Net] VideoCaptureCore: Fixed problem with the OnNetworkSourceDisconnect event being called twice.
@@ -118,7 +58,7 @@
 * [ALL] VideoCaptureCore: Resolved rare crash issue with WinUI VideoView
 * [Video Capture SDK .Net] VideoCaptureCore: Updated FFMPEG.exe output. Improved support of x264 and x265 encoders of custom FFMPEG builds.
 
-## 15.6.0
+## 15.6
 
 * [Video Capture SDK .Net] VideoCaptureCore: Improved video crop performance on modern CPUs
 * [ALL] VideoCaptureCore, MediaPlayerCore, VideoEditCore: Added the static CreateAsync method that can be used instead of the constructor to create engines without UI lag.

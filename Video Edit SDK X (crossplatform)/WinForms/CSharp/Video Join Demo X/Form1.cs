@@ -1,12 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Forms;
-using VisioForge.Core.Types;
-using VisioForge.Core.Types.X.Output;
-
-namespace Video_Join_Demo
+﻿namespace Video_Join_Demo
 {
     using System.IO;
+    using System;
+    using System.Globalization;
+    using System.Windows.Forms;
+
+    using VisioForge.Core.Types;
+    using VisioForge.Core.Types.X.Output;
+    using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.VideoEditX;
@@ -246,6 +247,8 @@ namespace Video_Join_Demo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

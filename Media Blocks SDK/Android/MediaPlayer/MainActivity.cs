@@ -53,17 +53,13 @@ namespace MediaPlayer
 
         private UniversalSourceBlock _fileSource;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(this, false);
+            _pipeline = new MediaBlocksPipeline(false);
             //_pipeline.Debug_Dir = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += _pipeline_OnError;
             _pipeline.OnStop += _pipeline_OnStop;
             _pipeline.OnStart += _pipeline_OnStart;
-
-            _deviceEnumerator = new DeviceEnumerator(this);
 
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
         }
@@ -98,6 +94,13 @@ namespace MediaPlayer
             {
                 sbTimeline.Progress = 0;
             });
+        }
+
+        protected override void OnDestroy()
+        {
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
         }
 
         protected override void OnCreate(Bundle? savedInstanceState)
@@ -229,7 +232,7 @@ namespace MediaPlayer
 
             isSeeking = false;
 
-            var mediaInfo = new MediaInfoReaderX(this, context: null);
+            var mediaInfo = new MediaInfoReaderX();
             bool videoStream = true;
             bool audioStream = true;
             if (await mediaInfo.OpenAsync(new Uri(edURL.Text)))
@@ -245,7 +248,7 @@ namespace MediaPlayer
                 }
             }
 
-            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(this, edURL.Text, renderVideo: videoStream, renderAudio: audioStream));
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edURL.Text, renderVideo: videoStream, renderAudio: audioStream));
 
             if (videoStream)
             {
@@ -254,7 +257,7 @@ namespace MediaPlayer
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 

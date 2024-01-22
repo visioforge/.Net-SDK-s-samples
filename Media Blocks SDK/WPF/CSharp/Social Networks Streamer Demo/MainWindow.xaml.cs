@@ -55,8 +55,6 @@ namespace Social_Networks_Streamer_Demo
 
         private System.Timers.Timer _timer;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -64,9 +62,8 @@ namespace Social_Networks_Streamer_Demo
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
@@ -113,8 +110,8 @@ namespace Social_Networks_Streamer_Demo
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            await _deviceEnumerator.StartVideoSourceMonitorAsync();
-            await _deviceEnumerator.StartAudioSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -144,7 +141,7 @@ namespace Social_Networks_Streamer_Demo
             var format = cbVideoFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -169,7 +166,7 @@ namespace Social_Networks_Streamer_Demo
             format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -186,7 +183,7 @@ namespace Social_Networks_Streamer_Demo
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
+            _audioRenderer = new AudioRendererBlock();
 
             // capture
             _videoTee = new TeeBlock(2);
@@ -270,7 +267,7 @@ namespace Social_Networks_Streamer_Demo
                 _pipeline = null;
             }
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -283,7 +280,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var item in device.VideoFormats)
@@ -310,7 +307,7 @@ namespace Social_Networks_Streamer_Demo
                 var format = (string)e.AddedItems[0];
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -342,7 +339,7 @@ namespace Social_Networks_Streamer_Demo
                 {
                     cbAudioFormat.Items.Clear();
 
-                    var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         foreach (var format in device.Formats)

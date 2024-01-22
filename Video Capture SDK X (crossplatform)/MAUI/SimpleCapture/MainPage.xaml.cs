@@ -65,17 +65,9 @@ namespace SimpleCapture
             await RequestMicPermissionAsync();
 #endif
 
-            _deviceEnumerator = new DeviceEnumerator(
-#if __ANDROID__
-                Microsoft.Maui.ApplicationModel.Platform.CurrentActivity
-#endif
-                );
+            _deviceEnumerator = DeviceEnumerator.Shared;
 
-#if __ANDROID__
-            _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#else
             _core = new VideoCaptureCoreX(videoView);
-#endif
 
             _core.OnError += Core_OnError;       
 

@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayerX;
     using VisioForge.Core.Types.Events;
@@ -147,7 +148,9 @@
 
             await MediaPlayer1.StopAsync();
 
-            await MediaPlayer1.DisposeAsync();            
+            await MediaPlayer1.DisposeAsync();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

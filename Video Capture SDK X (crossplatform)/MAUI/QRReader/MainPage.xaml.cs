@@ -12,8 +12,6 @@ namespace QRReader
     {
         private VideoCaptureCoreX _core;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private VideoCaptureDeviceInfo[] _cameras;
 
         private int _cameraSelectedIndex = 0;
@@ -31,8 +29,7 @@ namespace QRReader
             _core?.Dispose();
             _core = null;
 
-            _deviceEnumerator?.Dispose();
-            _deviceEnumerator = null;
+            VisioForgeX.DestroySDK();
         }
 
         private async void MainPage_Loaded(object sender, EventArgs e)
@@ -41,24 +38,14 @@ namespace QRReader
             await RequestCameraPermissionAsync();
 #endif
 
-            _deviceEnumerator = new DeviceEnumerator(
-#if __ANDROID__
-                Microsoft.Maui.ApplicationModel.Platform.CurrentActivity
-#endif
-                );
-
-#if __ANDROID__
-            _core = new VideoCaptureCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#else
             _core = new VideoCaptureCoreX(videoView);     
-#endif
 
             _core.OnError += Core_OnError;
             _core.OnBarcodeDetected += Core_OnBarcodeDetected;
             //_core.Barcode_Reader_Enabled = true;
 
             // cameras
-            _cameras = await _deviceEnumerator.VideoSourcesAsync();
+            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {
                 btCamera.Text = _cameras[0].DisplayName;
@@ -126,7 +113,7 @@ namespace QRReader
                         var deviceName = btCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
-                            var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                             if (device != null)
                             {
                                 var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);

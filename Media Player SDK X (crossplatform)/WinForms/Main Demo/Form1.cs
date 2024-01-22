@@ -24,7 +24,7 @@ namespace Main_Demo
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.Output;
     using System.Threading.Tasks;
-    using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core;
 
     public partial class Form1 : Form
     {
@@ -37,7 +37,7 @@ namespace Main_Demo
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
         }
 
         private void AudioEffectUpdateAmplify()
@@ -804,6 +804,8 @@ namespace Main_Demo
 
             await _player.StopAsync();
             await _player.DisposeAsync();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

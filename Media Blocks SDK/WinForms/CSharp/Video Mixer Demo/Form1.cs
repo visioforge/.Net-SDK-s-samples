@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types;
 
@@ -14,7 +15,7 @@ namespace MediaBlocks_Video_Mixer_Demo
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
         }
 
         private void Form1_Load(object sender, System.EventArgs e)
@@ -72,6 +73,11 @@ namespace MediaBlocks_Video_Mixer_Demo
             {
                 edFile2.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VisioForgeX.DestroySDK();
         }
     }
 }

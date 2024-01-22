@@ -52,11 +52,7 @@ namespace Simple_Player_MAUI
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-#if __ANDROID__
-             _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#else
             _player = new MediaPlayerCoreX(videoView);
-#endif
 
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
@@ -252,9 +248,6 @@ namespace Simple_Player_MAUI
                         }
 
                         await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(
-#if __ANDROID__
-                            Microsoft.Maui.ApplicationModel.Platform.CurrentActivity,
-#endif
                             new Uri(_filename))
                             );
                         await _player.PlayAsync();

@@ -41,8 +41,6 @@ namespace Live_Video_Compositor_Demo
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -50,9 +48,7 @@ namespace Live_Video_Compositor_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
                 
         private void Compositor_OnError(object sender, ErrorsEventArgs e)
@@ -82,7 +78,7 @@ namespace Live_Video_Compositor_Demo
 
         private async Task AddCameraSourceAsync()
         {
-            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
+            var dlg = new VideoCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
             {
                 VideoCaptureDeviceSourceSettings settings = null;
@@ -91,7 +87,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -248,7 +244,7 @@ namespace Live_Video_Compositor_Demo
             await _compositor.Output_AddAsync(_videoRendererOutput);
 
             // add audio renderer
-            var audioRenderer = new AudioRendererBlock(_deviceEnumerator); // <- TODO replace with a dialog 
+            var audioRenderer = new AudioRendererBlock(); // <- TODO replace with a dialog 
             _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer, true);
             await _compositor.Output_AddAsync(_audioRendererOutput, true);
 
@@ -351,7 +347,7 @@ namespace Live_Video_Compositor_Demo
 
         private async Task AddAudioSourceAsync()
         {
-            var dlg = new AudioCaptureSourceDialog(_deviceEnumerator);
+            var dlg = new AudioCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
             {
                 DSAudioCaptureDeviceSourceSettings settings = null;
@@ -360,7 +356,7 @@ namespace Live_Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await _deviceEnumerator.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync(AudioCaptureDeviceAPI.DirectSound)).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -430,7 +426,7 @@ namespace Live_Video_Compositor_Demo
         private async Task AddDecklinkVideoSourceAsync()
         {
             // Decklink video source
-            var dlg = new DecklinkVideoSourceDialog(_deviceEnumerator);
+            var dlg = new DecklinkVideoSourceDialog();
             if (dlg.ShowDialog() == true)
             {               
                 var rect = new Rect(
@@ -601,7 +597,7 @@ namespace Live_Video_Compositor_Demo
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private async void btStartOutput_Click(object sender, RoutedEventArgs e)

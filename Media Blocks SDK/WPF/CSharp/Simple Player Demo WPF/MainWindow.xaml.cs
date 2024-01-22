@@ -44,26 +44,20 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
         private UniversalSourceBlock _fileSource;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MediaBlocksPipeline.InitSDK();
-
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
-            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound)).ToArray();
+            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
             cbAudioOutput.Items.Clear();
             if (audioOutputDevices.Length > 0)
             {
@@ -110,7 +104,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
             _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
 
-            _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
@@ -215,7 +209,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
             await DestroyEngineAsync();     
             
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

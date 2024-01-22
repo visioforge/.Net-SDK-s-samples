@@ -16,8 +16,6 @@ namespace NDI_Source_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private VideoCaptureCoreX _videoCapture;
 
         private NDISourceInfo[] _ndiSources;
@@ -31,9 +29,7 @@ namespace NDI_Source_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -113,7 +109,7 @@ namespace NDI_Source_Demo
 
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
-            _ndiSources = await _deviceEnumerator.NDISourcesAsync();
+            _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
 
             cbNDISources.Items.Clear();
 
@@ -132,7 +128,7 @@ namespace NDI_Source_Demo
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

@@ -22,8 +22,6 @@ namespace Video_Compositor_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private VideoCaptureCoreX _videoCapture;
 
         private VideoMixerSourceSettings _videoMixerSourceSettings = new VideoMixerSourceSettings();
@@ -37,12 +35,10 @@ namespace Video_Compositor_Demo
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
             _videoCapture = new VideoCaptureCoreX(VideoView1);
             _videoCapture.OnError += VideoCapture_OnError;
-
-            _deviceEnumerator = new DeviceEnumerator();
         }
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
@@ -71,7 +67,7 @@ namespace Video_Compositor_Demo
 
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
+            var dlg = new VideoCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
             {
                 VideoCaptureDeviceSourceSettings settings = null;
@@ -80,7 +76,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -264,7 +260,7 @@ namespace Video_Compositor_Demo
 
             await DestroyEngineAsync();
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private void btTransparency_Click(object sender, RoutedEventArgs e)

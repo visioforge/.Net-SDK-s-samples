@@ -68,7 +68,7 @@ public partial class MainWindow : Window, IDisposable
         // We have to initialize the engine on start
         MediaBlocksPipeline.InitSDK();
 
-        _deviceEnumerator = new DeviceEnumerator();
+        _deviceEnumerator = DeviceEnumerator.GetShared();
         _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
         _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
         _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;

@@ -32,8 +32,6 @@ namespace Simple_Video_Capture
     /// </summary>
     public partial class MainWindow : IDisposable
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private UniversalOutputDialog mpegTSSettingsDialog;
 
         private UniversalOutputDialog movSettingsDialog;
@@ -64,12 +62,11 @@ namespace Simple_Video_Capture
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -168,9 +165,9 @@ namespace Simple_Video_Capture
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            await _deviceEnumerator.StartVideoSourceMonitorAsync();
-            await _deviceEnumerator.StartAudioSourceMonitorAsync();
-            await _deviceEnumerator.StartAudioSinkMonitorAsync();
+            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
@@ -217,7 +214,7 @@ namespace Simple_Video_Capture
                 cbVideoInputFormat.Items.Clear();
 
                 var deviceItem =
-                    (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                    (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -242,7 +239,7 @@ namespace Simple_Video_Capture
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -279,7 +276,7 @@ namespace Simple_Video_Capture
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First(); 
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First(); 
 
             if (cbRecordAudio.IsChecked == true)
             {
@@ -299,7 +296,7 @@ namespace Simple_Video_Capture
             var format = cbVideoInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -324,7 +321,7 @@ namespace Simple_Video_Capture
             format = cbAudioInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -510,7 +507,7 @@ namespace Simple_Video_Capture
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -831,7 +828,7 @@ namespace Simple_Video_Capture
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private async void btStartCapture(object sender, RoutedEventArgs e)

@@ -10,7 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using VisioForge.Core.MediaBlocks;
+
+using VisioForge.Core;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
@@ -43,6 +44,7 @@ public partial class MainWindow : Window, IDisposable
     public MainWindow()
     {
         InitializeComponent();
+
 #if DEBUG
         this.AttachDevTools();
 #endif
@@ -77,6 +79,8 @@ public partial class MainWindow : Window, IDisposable
 
         await _player.StopAsync();
         await DestroyEngineAsync();
+
+        VisioForgeX.DestroySDK();
     }
 
     private void InitializeComponent()

@@ -35,16 +35,12 @@ namespace Overlay_Manager_Demo
 
         private OverlayManagerBlock _overlayManager;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -87,7 +83,7 @@ namespace Overlay_Manager_Demo
             _pipeline.Connect(_fileSource.VideoOutput, _overlayManager.Input);
             _pipeline.Connect(_overlayManager.Output, _videoRenderer.Input);
 
-            var audioOutputs = await AudioRendererBlock.GetDevicesAsync(_deviceEnumerator, AudioOutputDeviceAPI.DirectSound);
+            var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
             _audioRenderer = new AudioRendererBlock(audioOutputs[0]);
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
@@ -173,7 +169,7 @@ namespace Overlay_Manager_Demo
 
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private void btAddImage_Click(object sender, RoutedEventArgs e)

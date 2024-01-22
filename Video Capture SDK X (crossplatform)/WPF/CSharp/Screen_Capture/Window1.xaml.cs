@@ -29,8 +29,6 @@ namespace Screen_Capture_X
 
     public partial class Window1 : IDisposable
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private UniversalOutputDialog mpegTSSettingsDialog;
 
         private UniversalOutputDialog movSettingsDialog;
@@ -54,10 +52,9 @@ namespace Screen_Capture_X
             System.Windows.Forms.Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
@@ -330,7 +327,7 @@ namespace Screen_Capture_X
                     var format = cbAudioInputFormat.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var sources = await _deviceEnumerator.AudioSourcesAsync();
+                        var sources = await DeviceEnumerator.Shared.AudioSourcesAsync();
                         var device = sources.FirstOrDefault(x => x.DisplayName == deviceName);
                         if (device != null)
                         {
@@ -458,7 +455,7 @@ namespace Screen_Capture_X
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
             // audio input
-            await _deviceEnumerator.StartAudioSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
 
             // monitors
             foreach (var screen in Screen.AllScreens)
@@ -477,7 +474,7 @@ namespace Screen_Capture_X
             {
                 cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -527,7 +524,7 @@ namespace Screen_Capture_X
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         protected virtual void Dispose(bool disposing)

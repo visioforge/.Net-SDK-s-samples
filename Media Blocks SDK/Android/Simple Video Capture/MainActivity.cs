@@ -40,8 +40,6 @@ namespace Simple_Video_Capture
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private MediaBlocksPipeline _pipeline;
 
         private VideoRendererBlock _videoRenderer;
@@ -70,7 +68,7 @@ namespace Simple_Video_Capture
 
         private async Task CreateEngineAsync()
         {
-            _pipeline = new MediaBlocksPipeline(this);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
             _pipeline.OnStop += _pipeline_OnStop;
             _pipeline.OnStart += _pipeline_OnStart;
@@ -78,7 +76,7 @@ namespace Simple_Video_Capture
             // video source
             if (_cameras == null)
             {
-                _cameras = await _deviceEnumerator.VideoSourcesAsync();
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             }
 
             if (_cameras.Length == 0)
@@ -115,7 +113,7 @@ namespace Simple_Video_Capture
                 return;
             }
 
-            _videoSource = new AndroidVideoSourceBlock(this, videoSourceSettings);
+            _videoSource = new AndroidVideoSourceBlock(videoSourceSettings);
 
             // create video tee
             _videoTee = new TeeBlock(2);
@@ -134,7 +132,7 @@ namespace Simple_Video_Capture
             _audioTee = new TeeBlock(2);
 
             // audio renderer
-            var audioSinks = await _deviceEnumerator.AudioOutputsAsync();
+            var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
             _audioRenderer = new AudioRendererBlock(audioSinks[0]);
 
             // connect audio pads
@@ -191,8 +189,6 @@ namespace Simple_Video_Capture
                         Manifest.Permission.WriteExternalStorage
                }, 1004);
 
-            _deviceEnumerator = new DeviceEnumerator(this);
-
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
 
             btStartRecord = FindViewById<Button>(Resource.Id.btStartRecord);
@@ -207,6 +203,13 @@ namespace Simple_Video_Capture
             pnScreen = FindViewById<GridLayout>(Resource.Id.pnScreen);
 
             CheckPermissionsAndStartPreview();
+        }
+
+        protected override void OnDestroy()
+        {
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
         }
 
         private void CheckPermissionsAndStartPreview()

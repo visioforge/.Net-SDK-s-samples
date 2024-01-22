@@ -61,8 +61,6 @@ namespace Video_Compositor_Demo
 
         private VirtualAudioSourceBlock _fakeAudioSource;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public MainWindow()
@@ -73,8 +71,6 @@ namespace Video_Compositor_Demo
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += Pipeline_OnError;
-
-            _deviceEnumerator = new DeviceEnumerator();
         }
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
@@ -102,7 +98,7 @@ namespace Video_Compositor_Demo
 
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog(_deviceEnumerator);
+            var dlg = new VideoCaptureSourceDialog();
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
@@ -113,7 +109,7 @@ namespace Video_Compositor_Demo
                 var format = dlg.Format;
                 if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync(_deviceEnumerator)).FirstOrDefault(x => x.DisplayName == deviceName);
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                     if (device != null)
                     {
                         var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -348,7 +344,7 @@ namespace Video_Compositor_Demo
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
     }
 }

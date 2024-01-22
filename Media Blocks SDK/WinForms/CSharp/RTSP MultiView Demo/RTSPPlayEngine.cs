@@ -38,7 +38,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public event EventHandler<DataFrameEventArgs> OnVideoRAWFrame;
 
-        public RTSPPlayEngine(DeviceEnumerator deviceEnumerator, RTSPSourceSettings rtspSettings, IVideoView videoView)
+        public RTSPPlayEngine(RTSPSourceSettings rtspSettings, IVideoView videoView)
         {
             URL = rtspSettings.Uri.ToString();
             Login = rtspSettings.Login;
@@ -56,7 +56,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             if (rtspSettings.AudioEnabled)
             {
-                _audioRenderer = new AudioRendererBlock(deviceEnumerator);
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
         }

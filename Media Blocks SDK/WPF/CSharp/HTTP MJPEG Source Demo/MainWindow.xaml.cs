@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
@@ -90,6 +91,11 @@ namespace MJPEG_Source_Demo
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            VisioForgeX.DestroySDK();
         }
     }
 }

@@ -4,6 +4,7 @@ using Android.Runtime;
 using Android.Util;
 
 using System;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
@@ -67,6 +68,13 @@ namespace RTSP_Client
             Log.Error("MainActivity", e.Message);
         }
 
+        protected override void OnDestroy()
+        {
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
+        }
+
         //private void _pipeline_OnStop(object sender, StopEventArgs e)
         //{
         //}
@@ -89,7 +97,7 @@ namespace RTSP_Client
 
              videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(RTSP_Client.Resource.Id.videoView);
 
-            _pipeline = new MediaBlocksPipeline(this, true);
+            _pipeline = new MediaBlocksPipeline(true);
             //_pipeline.Debug_Dir = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += _pipeline_OnError;
             // _pipeline.OnStop += _pipeline_OnStop;

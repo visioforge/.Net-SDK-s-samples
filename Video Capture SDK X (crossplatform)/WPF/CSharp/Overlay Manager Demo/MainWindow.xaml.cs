@@ -27,17 +27,14 @@ namespace Overlay_Manager_Demo
 
         private VideoCaptureCoreX _videoCapture;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         public MainWindow()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
-            _deviceEnumerator = new DeviceEnumerator();
-            _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
         }
 
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
@@ -61,7 +58,7 @@ namespace Overlay_Manager_Demo
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             // video input
-            await _deviceEnumerator.StartVideoSourceMonitorAsync();
+            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -121,7 +118,7 @@ namespace Overlay_Manager_Demo
                 cbVideoInputFormat.Items.Clear();
 
                 var deviceItem =
-                    (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                    (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -151,7 +148,7 @@ namespace Overlay_Manager_Demo
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -190,7 +187,7 @@ namespace Overlay_Manager_Demo
             var format = cbVideoInputFormat.Text;
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -232,7 +229,7 @@ namespace Overlay_Manager_Demo
 
             await DestroyEngineAsync();
 
-            _deviceEnumerator?.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         private void btAddImage_Click(object sender, RoutedEventArgs e)

@@ -214,6 +214,8 @@ namespace Video_From_Images
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
+
+            VisioForgeX.DestroySDK();
         }
     }
 }

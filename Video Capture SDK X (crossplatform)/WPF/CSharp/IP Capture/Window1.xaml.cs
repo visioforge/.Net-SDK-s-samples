@@ -34,8 +34,6 @@ namespace IP_Capture
 
     public partial class Window1 : IDisposable
     {
-        private DeviceEnumerator _deviceEnumerator;
-
         private UniversalOutputDialog mpegTSSettingsDialog;
 
         private UniversalOutputDialog movSettingsDialog;
@@ -78,9 +76,7 @@ namespace IP_Capture
             Application.EnableVisualStyles();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
-
-            _deviceEnumerator = new DeviceEnumerator();
+            VisioForgeX.InitSDK();
         }
 
         private void CreateEngine()
@@ -119,7 +115,7 @@ namespace IP_Capture
 
             // audio output
             string defaultAudioRenderer = string.Empty;
-            foreach (var audioOutputDevice in (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)))
+            foreach (var audioOutputDevice in (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)))
             {
                 cbAudioOutputDevice.Items.Add(audioOutputDevice.DisplayName);
 
@@ -195,7 +191,7 @@ namespace IP_Capture
 
             VideoCapture1.Audio_Record = audioEnabled;
             VideoCapture1.Audio_Play = audioEnabled;
-            VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
 
             var login = edIPLogin.Text;
             var password = edIPPassword.Text;
@@ -731,7 +727,7 @@ namespace IP_Capture
         {
             cbIPURL.Items.Clear();
 
-            var lst = await _deviceEnumerator.NDISourcesAsync();
+            var lst = await DeviceEnumerator.Shared.NDISourcesAsync();
             foreach (var uri in lst)
             {
                 cbIPURL.Items.Add(uri.URL);
@@ -747,7 +743,7 @@ namespace IP_Capture
         {
             cbIPURL.Items.Clear();
 
-            var lst = await _deviceEnumerator.ONVIF_ListSourcesAsync(null, null);
+            var lst = await DeviceEnumerator.Shared.ONVIF_ListSourcesAsync(null, null);
             foreach (var uri in lst)
             {
                 cbIPURL.Items.Add(uri);
@@ -774,7 +770,7 @@ namespace IP_Capture
         {
             await DestroyEngineAsync();
 
-            _deviceEnumerator.Dispose();
+            VisioForgeX.DestroySDK();
         }
 
         protected virtual void Dispose(bool disposing)

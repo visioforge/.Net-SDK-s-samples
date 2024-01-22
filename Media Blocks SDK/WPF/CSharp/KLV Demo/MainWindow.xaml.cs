@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VisioForge.Core;
 using VisioForge.Core.Experimental;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -47,7 +48,7 @@ namespace KLV_Demo
             InitializeComponent();
 
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -57,7 +58,7 @@ namespace KLV_Demo
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            VisioForgeX.DestroySDK();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

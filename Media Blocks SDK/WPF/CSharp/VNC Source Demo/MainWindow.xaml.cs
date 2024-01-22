@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -124,6 +125,11 @@ namespace VNC_Source_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+        }
+
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            VisioForgeX.DestroySDK();
         }
     }
 }
