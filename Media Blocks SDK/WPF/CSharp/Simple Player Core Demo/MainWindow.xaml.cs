@@ -35,7 +35,7 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
-            MediaBlocksPipeline.InitSDK();
+            VisioForgeX.InitSDK();
 
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
@@ -187,6 +187,8 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             _timer.Stop();
 
             await DestroyEngineAsync(); 
+
+            VisioForgeX.DestroySDK();
         }
 
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

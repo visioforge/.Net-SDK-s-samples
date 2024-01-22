@@ -10,6 +10,7 @@ public class AppDelegate : NSApplicationDelegate {
 	public override void WillTerminate (NSNotification notification)
 	{
 		// Insert code here to tear down your application
+		VisioForge.Core.VisioForgeX.DestroySDK();
 	}
 }
 

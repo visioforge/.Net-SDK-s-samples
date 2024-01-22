@@ -84,12 +84,7 @@ namespace SkinnedPlayer_MAUI
 
         private void MainPage_Loaded(object sender, EventArgs e)
         {
-#if __ANDROID__
-            _player = new MediaPlayerCoreX(videoView, Microsoft.Maui.ApplicationModel.Platform.CurrentActivity);
-#else
-            var handler = videoView.Handler as VisioForge.Core.UI.MAUI.VideoViewXHandler;
-            _player = new MediaPlayerCoreX(handler.VideoView);
-#endif
+            _player = new MediaPlayerCoreX(videoView);
 
             _player.OnError += _player_OnError;
             var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;

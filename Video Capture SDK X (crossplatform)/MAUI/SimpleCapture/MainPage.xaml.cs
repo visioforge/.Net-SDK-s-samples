@@ -18,8 +18,6 @@ namespace SimpleCapture
     {
         private VideoCaptureCoreX _core;
 
-        private DeviceEnumerator _deviceEnumerator;
-
         private VideoCaptureDeviceInfo[] _cameras;
 
         private int _cameraSelectedIndex = -1;
@@ -54,8 +52,7 @@ namespace SimpleCapture
             _core?.Dispose();
             _core = null;
 
-            _deviceEnumerator?.Dispose();
-            _deviceEnumerator = null;
+            VisioForgeX.DestroySDK();
         }
 
         private async void MainPage_Loaded(object sender, EventArgs e)
@@ -65,28 +62,26 @@ namespace SimpleCapture
             await RequestMicPermissionAsync();
 #endif
 
-            _deviceEnumerator = DeviceEnumerator.Shared;
-
             _core = new VideoCaptureCoreX(videoView);
 
             _core.OnError += Core_OnError;       
 
             // cameras
-            _cameras = await _deviceEnumerator.VideoSourcesAsync();
+            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {                
                 btCamera.Text = _cameras[0].DisplayName;
             }
 
             // mics
-            _mics = await _deviceEnumerator.AudioSourcesAsync(null);
+            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
             if (_mics.Length > 0)
             {      
                 btMic.Text = _mics[0].DisplayName;
             }
 
             // audio outputs
-            _speakers = await _deviceEnumerator.AudioOutputsAsync(null);
+            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
             {                
                 btSpeakers.Text = _speakers[0].DisplayName;
@@ -164,7 +159,7 @@ namespace SimpleCapture
                         }
 
                         // audio output
-                        _core.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
+                        _core.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
                         _core.Audio_Play = true;
 
                         // video source
@@ -173,7 +168,7 @@ namespace SimpleCapture
                         var deviceName = btCamera.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
-                            var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                             if (device != null)
                             {
                                 var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
@@ -202,7 +197,7 @@ namespace SimpleCapture
                         deviceName = btMic.Text;
                         if (!string.IsNullOrEmpty(deviceName))
                         {
-                            var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                            var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                             if (device != null)
                             {
                                 var formatItem = device.GetDefaultFormat();

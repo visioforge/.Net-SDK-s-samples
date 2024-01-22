@@ -24,7 +24,6 @@ namespace madVR_Demo
             InitializeComponent();
         }
 
-
         private void timer1_Tick()
         {
             _timer.Tag = 1;

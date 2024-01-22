@@ -32,8 +32,6 @@ public partial class MainWindow : Window, IDisposable
 
     private VideoCaptureCoreX VideoCapture1;
 
-    private DeviceEnumerator _deviceEnumerator;
-
     private bool disposedValue;
 
     #region Controls
@@ -66,12 +64,11 @@ public partial class MainWindow : Window, IDisposable
 #endif
 
         // We have to initialize the engine on start
-        MediaBlocksPipeline.InitSDK();
+        VisioForgeX.InitSDK();
 
-        _deviceEnumerator = DeviceEnumerator.GetShared();
-        _deviceEnumerator.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-        _deviceEnumerator.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-        _deviceEnumerator.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+        DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+        DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+        DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
 
         InitControls();
 
@@ -364,12 +361,6 @@ public partial class MainWindow : Window, IDisposable
 
             VideoCapture1.Dispose();
             VideoCapture1 = null;
-        }
-
-        if (_deviceEnumerator != null)
-        {
-            _deviceEnumerator.Dispose();
-            _deviceEnumerator = null;
         }
     }
 
@@ -918,6 +909,8 @@ public partial class MainWindow : Window, IDisposable
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         DestroyEngine();
+
+        VisioForgeX.ShutdownSDK();
     }
 
     protected virtual void Dispose(bool disposing)

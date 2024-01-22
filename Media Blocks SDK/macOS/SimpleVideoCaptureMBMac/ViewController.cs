@@ -13,6 +13,7 @@ using VisioForge.Core.UI.Apple;
 namespace SimpleVideoCaptureMBMac;
 
 public partial class ViewController : NSViewController {
+
     private MediaBlocksPipeline _pipeline;
 
     private VideoViewGL _videoView;
@@ -24,8 +25,6 @@ public partial class ViewController : NSViewController {
     private SystemVideoSourceBlock _videoSource;
 
     private SystemAudioSourceBlock _audioSource;
-
-    private DeviceEnumerator _deviceEnumerator;
 
     private Timer _timer;
 
@@ -50,8 +49,6 @@ public partial class ViewController : NSViewController {
             Debug.WriteLine($"Camera access: {granted}");
         });
 
-        //MediaBlocksPipeline.InitSDK();
-
         //_deviceEnumerator = new DeviceEnumerator();
 
         //InvokeOnMainThread((Action)(async () =>
@@ -65,7 +62,7 @@ public partial class ViewController : NSViewController {
     private async Task LoadDevicesAsync()
     {
         // video sources
-        var videoSources = await _deviceEnumerator.VideoSourcesAsync();
+        var videoSources = await DeviceEnumerator.Shared.VideoSourcesAsync();
         cbVideoSource.RemoveAll();
 
         foreach (var item in videoSources)
@@ -84,7 +81,7 @@ public partial class ViewController : NSViewController {
         cbVideoSource_SelectionChanged(cbVideoSource, EventArgs.Empty);
 
         // audio sources
-        var audioSources = await _deviceEnumerator.AudioSourcesAsync();
+        var audioSources = await DeviceEnumerator.Shared.AudioSourcesAsync();
         cbAudioSource.RemoveAll();
 
         foreach (var item in audioSources)
@@ -102,7 +99,7 @@ public partial class ViewController : NSViewController {
         cbAudioSource_SelectionChanged(cbAudioSource, EventArgs.Empty);
 
         // audio outputs
-        var audioOutputs = await _deviceEnumerator.AudioOutputsAsync();
+        var audioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
         cbAudioOutput.RemoveAll();
 
         foreach (var item in audioOutputs)
@@ -126,7 +123,7 @@ public partial class ViewController : NSViewController {
             var format = cbVideoFormat.SelectedValue.ToString();
             if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
             {
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -158,7 +155,7 @@ public partial class ViewController : NSViewController {
             {
                 cbAudioFormat.RemoveAll();
 
-                var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     foreach (var format in device.Formats)
@@ -185,7 +182,7 @@ public partial class ViewController : NSViewController {
             {
                 cbVideoFormat.RemoveAll();
 
-                var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
                     foreach (var item in device.VideoFormats)
@@ -262,7 +259,7 @@ public partial class ViewController : NSViewController {
         var format = cbVideoFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
         {
-            var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
             if (device != null)
             {
                 var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -287,7 +284,7 @@ public partial class ViewController : NSViewController {
         format = cbAudioFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName))
         {
-            var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+            var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
             if (device != null)
             {
                 var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -304,7 +301,7 @@ public partial class ViewController : NSViewController {
         _videoRenderer = new VideoRendererBlock(_pipeline, _videoView);
 
         // audio renderer
-        _audioRenderer = new AudioRendererBlock((await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutput.StringValue).First());
+        _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutput.StringValue).First());
 
         // capture
         if (capture)

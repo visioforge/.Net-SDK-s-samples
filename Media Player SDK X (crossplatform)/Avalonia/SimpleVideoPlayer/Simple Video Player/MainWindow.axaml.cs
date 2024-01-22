@@ -50,8 +50,6 @@ public partial class MainWindow : Window, IDisposable
 #endif
 
         // We have to initialize the engine on start
-       // MediaBlocksPipeline.InitSDK();
-
         Activated += MainWindow_Activated;
         Closing += MainWindow_Closing;
 

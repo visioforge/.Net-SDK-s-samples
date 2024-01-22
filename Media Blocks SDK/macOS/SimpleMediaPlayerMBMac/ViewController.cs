@@ -23,8 +23,6 @@ public partial class ViewController : NSViewController {
 
     private AudioRendererBlock _audioRenderer;
 
-    private DeviceEnumerator _deviceEnumerator;
-
     private Timer _timer;
 
     private bool _timerFlag = false;
@@ -42,9 +40,7 @@ public partial class ViewController : NSViewController {
         _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
         this.videoViewHost.AddSubview(_videoView);
 
-        MediaBlocksPipeline.InitSDK();
-
-        _deviceEnumerator = new DeviceEnumerator();
+        VisioForgeX.InitSDK();
 
         edFilename.StringValue = "/Users/roman/Documents/video.mp4";
 
@@ -125,7 +121,7 @@ public partial class ViewController : NSViewController {
 
         if (sourceSettings.RenderAudio)
         {
-            _audioRenderer = new AudioRendererBlock(_deviceEnumerator);
+            _audioRenderer = new AudioRendererBlock();
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
        

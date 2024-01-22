@@ -1,24 +1,17 @@
-﻿using AVFoundation;
-using Photos;
+﻿using Photos;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using UIKit;
+
 using VisioForge.Core;
-using VisioForge.Core.GStreamer.Base;
-using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
-using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
@@ -29,8 +22,6 @@ namespace SimpleVideoCapture;
 
 [Register ("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate {
-
-    private DeviceEnumerator _deviceEnumerator;
 
     private MediaBlocksPipeline _pipeline;
 
@@ -64,15 +55,7 @@ public class AppDelegate : UIApplicationDelegate {
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private bool _isPreview;
-
     private VideoView _videoView;
-
-   // private SoundRecorder _recorder;
-
-    //private CustomImageView _videoView;
-
-    private BufferSinkBlock _audioSampleGrabber;
 
     public override UIWindow? Window {
 		get;
@@ -104,20 +87,15 @@ public class AppDelegate : UIApplicationDelegate {
 
     private async Task CreateEngineAsync(bool capture)
     {
-        MediaBlocksPipeline.InitSDK();
-
-        if (_deviceEnumerator == null)
-        {
-            _deviceEnumerator = new DeviceEnumerator();
-        }
-
+        VisioForgeX.InitSDK();
+        
         _pipeline = new MediaBlocksPipeline();
         _pipeline.OnError += _pipeline_OnError;
 
         // video source
         if (_cameras == null)
         {
-            _cameras = await _deviceEnumerator.VideoSourcesAsync();
+            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
         }
 
         if (_cameras.Length == 0)
@@ -310,35 +288,6 @@ public class AppDelegate : UIApplicationDelegate {
         };
 
         parent!.AddSubview(btTest);
-    }
-
-    private async Task TestAsync()
-    {
-        await _pipeline.StopAsync();
-
-        //_player = new StreamAudioPlayer();
-        //_player.Start();
-
-        //var data = new byte[1024 * 1024];
-        //Random.Shared.NextBytes(data);
-
-        //_player.PushData(data);
-
-        //_testPlayer = new AppSrcTest();
-        //_testPlayer.Start();
-
-      //    _testSource = new AudioSourceTest();
-      //    await _testSource.StartAsync();
-
-        //   _recorder = new SoundRecorder(48000, 2);
-        //  _recorder.StartRecording();
-
-        Thread.Sleep(1000);
-
-        InvokeOnMainThread(() =>
-        {
-            SaveVideoToPhotoLibrary(_filename); 
-        });        
     }
 
     public void SaveVideoToPhotoLibrary(string filePath)
