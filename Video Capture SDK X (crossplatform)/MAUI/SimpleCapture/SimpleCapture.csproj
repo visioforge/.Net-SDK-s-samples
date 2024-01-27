@@ -74,7 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.8.1" />

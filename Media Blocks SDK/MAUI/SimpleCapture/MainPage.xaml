@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleCapture.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <ScrollView>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowDefinitions="*,Auto" >
+
+            <my:VideoView Grid.Row="0"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="videoView"
+                Background="Black"/>
+
+            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="StartAndExpand" Margin="5">
+                        <Label Text="CAMERA" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btCamera" Text="CAMERA" MinimumWidthRequest="200" Clicked="btCamera_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="CenterAndExpand" Margin="5">
+                        <Label Text="MICROPHONE" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btMic" Text="MICROPHONE" MinimumWidthRequest="200" Clicked="btMic_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="2" HorizontalOptions="EndAndExpand" Margin="5">
+                        <Label Text="SPEAKERS" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btSpeakers" Text="SPEAKERS" MinimumWidthRequest="200" Clicked="btSpeakers_Clicked" />
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout 
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="5, 0, 5, 0">
+
+                    <Button  
+                        x:Name="btStartPreview"   
+                        Text="PREVIEW" 
+                        Margin="5" 
+                        Clicked="btStartPreview_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btStartCapture"   
+                        Text="CAPTURE" 
+                        Margin="5" 
+                        Clicked="btStartCapture_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btStop"   
+                        Text="STOP" 
+                        Margin="5" 
+                        Clicked="btStop_Clicked" 
+                        MinimumWidthRequest="100" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
