@@ -21,7 +21,6 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="StartAndExpand" Margin="5">
@@ -41,16 +40,22 @@
                 </Grid>
 
                 <StackLayout 
-                    Grid.Column="1"
                     Orientation="Horizontal"
-                    HorizontalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
                     Margin="5, 0, 5, 0">
 
                     <Button  
-                        x:Name="btPlayPause"   
-                        Text="START" 
+                        x:Name="btStartPreview"   
+                        Text="PREVIEW" 
                         Margin="5" 
-                        Clicked="btPlayPause_Clicked"
+                        Clicked="btStartPreview_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btStartCapture"   
+                        Text="CAPTURE" 
+                        Margin="5" 
+                        Clicked="btStartCapture_Clicked"
                         MinimumWidthRequest="100" />
 
                     <Button  

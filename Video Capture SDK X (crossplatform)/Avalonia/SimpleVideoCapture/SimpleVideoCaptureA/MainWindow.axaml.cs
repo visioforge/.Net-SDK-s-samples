@@ -164,11 +164,11 @@ public partial class MainWindow : Window, IDisposable
 
         Closing += Window_Closing;
 
-        await _deviceEnumerator.StartVideoSourceMonitorAsync();
-        await _deviceEnumerator.StartAudioSourceMonitorAsync();
+        await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+        await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
         //await _deviceEnumerator.StartAudioSinkMonitorAsync();
 
-        var audioOutputs = await _deviceEnumerator.AudioOutputsAsync();
+        var audioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
 
         CreateEngine();
 
@@ -434,7 +434,7 @@ public partial class MainWindow : Window, IDisposable
             VideoInputFormats.Clear();
 
             var deviceItem =
-                   (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                   (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
             if (deviceItem == null)
             {
                 return;
@@ -459,7 +459,7 @@ public partial class MainWindow : Window, IDisposable
         {
             AudioInputFormats.Clear();
 
-            var deviceItem = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+            var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
             if (deviceItem == null)
             {
                 return;
@@ -495,7 +495,7 @@ public partial class MainWindow : Window, IDisposable
             VideoCapture1.Audio_Play = false;
         }
 
-        VideoCapture1.Audio_OutputDevice = (await _deviceEnumerator.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString()).First();
+        VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString()).First();
 
         // video source
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
@@ -504,7 +504,7 @@ public partial class MainWindow : Window, IDisposable
         var format = cbVideoInputFormat.SelectedItem.ToString();
         if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
         {
-            var device = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
             if (device != null)
             {
                 var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
@@ -529,7 +529,7 @@ public partial class MainWindow : Window, IDisposable
         format = cbAudioInputFormat.SelectedItem.ToString();
         if (!string.IsNullOrEmpty(deviceName))
         {
-            var device = (await _deviceEnumerator.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+            var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
             if (device != null)
             {
                 var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
@@ -638,7 +638,7 @@ public partial class MainWindow : Window, IDisposable
 
             if (cbVideoInputDevice.SelectedIndex != -1)
             {
-                var deviceItem = (await _deviceEnumerator.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
+                var deviceItem = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.SelectedValue.ToString());
                 if (deviceItem == null)
                 {
                     return;
@@ -910,7 +910,7 @@ public partial class MainWindow : Window, IDisposable
     {
         DestroyEngine();
 
-        VisioForgeX.ShutdownSDK();
+        VisioForgeX.DestroySDK();
     }
 
     protected virtual void Dispose(bool disposing)
@@ -928,13 +928,8 @@ public partial class MainWindow : Window, IDisposable
 
                 VideoView1?.Dispose();
                 VideoView1 = null;
-
-                _deviceEnumerator?.Dispose();
-                _deviceEnumerator = null;
             }
 
-            // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-            // TODO: set large fields to null
             disposedValue = true;
         }
     }

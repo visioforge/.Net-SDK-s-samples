@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.1
+
+* [Media Player SDK .Net] MediaPlayerCore: Added growing MPEG-TS files support for the VLC engine. You can play growing MPEG-TS files while it's recorded
+  
 ## 15.8
 
 * [X-engines] [API breaking change] DeviceEnumerator can now be used only by using `DeviceEnumerator.Shared` property. It is required to have one enumerator per app. DeviceEnumerator objects used by API have been removed

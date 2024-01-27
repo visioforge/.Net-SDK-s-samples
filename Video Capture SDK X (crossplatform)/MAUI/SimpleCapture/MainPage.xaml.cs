@@ -10,6 +10,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
+using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.VideoCaptureX;
 
 namespace SimpleCapture
@@ -62,7 +63,12 @@ namespace SimpleCapture
             await RequestMicPermissionAsync();
 #endif
 
+//#if __ANDROID__
+//            var handler = (VisioForge.Core.UI.MAUI.VideoViewXHandler)videoView.Handler;
+//            _core = new VideoCaptureCoreX(handler.VideoView);
+//#else
             _core = new VideoCaptureCoreX(videoView);
+//#endif
 
             _core.OnError += Core_OnError;       
 
@@ -123,101 +129,6 @@ namespace SimpleCapture
                     if (await DisplayAlert(null, "You need to allow access to the Microphone", "OK", "Cancel"))
                         await RequestMicPermissionAsync();
                 }
-            }
-        }
-
-        private async void btPlayPause_Clicked(object sender, EventArgs e)
-        {
-            if (_core == null)
-            {
-                return;
-            }
-
-            switch (_core.State)
-            {
-                case PlaybackState.Play:
-                    {
-                        await _core.PauseAsync();
-
-                        btPlayPause.Text = "START";
-                    }
-
-                    break;
-                case PlaybackState.Pause:
-                    {
-                        await _core.ResumeAsync();
-
-                        btPlayPause.Text = "PAUSE";
-                    }
-
-                    break;
-                case PlaybackState.Free:
-                    {
-                        if (_core.State == PlaybackState.Play || _core.State == PlaybackState.Pause)
-                        {
-                            return;
-                        }
-
-                        // audio output
-                        _core.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
-                        _core.Audio_Play = true;
-
-                        // video source
-                        VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-                        var deviceName = btCamera.Text;
-                        if (!string.IsNullOrEmpty(deviceName))
-                        {
-                            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                            if (device != null)
-                            {
-                                var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
-                                if (formatItem != null)
-                                {
-                                    videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
-                                    {
-                                        Format = formatItem.ToFormat()
-                                    };
-
-                                    videoSourceSettings.Format.FrameRate = frameRate;
-                                }
-                            }
-                        }
-
-                        _core.Video_Source = videoSourceSettings;
-
-                        if (videoSourceSettings == null)
-                        {
-                            await DisplayAlert("Error", "Unable to configure camera settings", "OK");
-                        }
-
-                        // audio source
-                        IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
-
-                        deviceName = btMic.Text;
-                        if (!string.IsNullOrEmpty(deviceName))
-                        {
-                            var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                            if (device != null)
-                            {
-                                var formatItem = device.GetDefaultFormat();
-                                audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
-                            }
-                        }
-
-                        _core.Audio_Source = audioSourceSettings;
-
-                        // start
-                        await _core.StartAsync();
-
-                        _tmPosition.Start();
-
-                        btPlayPause.Text = "PAUSE";
-                    }
-
-                    break;
-                default:
-                    break;
             }
         }
 
@@ -313,7 +224,8 @@ namespace SimpleCapture
         {
             await StopAllAsync();
 
-            btPlayPause.Text = "START";
+            btStartPreview.Text = "PREVIEW";
+            btStartCapture.Text = "CAPTURE";
         }
 
         private void btCamera_Clicked(object sender, System.EventArgs e)
@@ -365,6 +277,171 @@ namespace SimpleCapture
             }
 
             btSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
+        }
+
+        private async Task ConfigurePreviewAsync()
+        {
+            // audio output
+            _core.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
+            _core.Audio_Play = true;
+
+            // video source
+            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+            var deviceName = btCamera.Text;
+            if (!string.IsNullOrEmpty(deviceName))
+            {
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                if (device != null)
+                {
+                    var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
+                    if (formatItem != null)
+                    {
+                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                        {
+                            Format = formatItem.ToFormat()
+                        };
+
+                        videoSourceSettings.Format.FrameRate = frameRate;
+                    }
+                }
+            }
+
+            _core.Video_Source = videoSourceSettings;
+
+            if (videoSourceSettings == null)
+            {
+                await DisplayAlert("Error", "Unable to configure camera settings", "OK");
+            }
+
+            // audio source
+            IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
+
+            deviceName = btMic.Text;
+            if (!string.IsNullOrEmpty(deviceName))
+            {
+                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                if (device != null)
+                {
+                    var formatItem = device.GetDefaultFormat();
+                    audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
+                }
+            }
+
+            _core.Audio_Source = audioSourceSettings;
+        }
+
+        private void ConfigureCapture()
+        {
+            var now = DateTime.Now;
+
+#if __ANDROID__
+            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#else
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#endif
+
+            _core.Outputs_Add(new MP4Output(filename), true);
+        }
+
+        private async void btStartPreview_Clicked(object sender, EventArgs e)
+        {
+            if (_core == null)
+            {
+                return;
+            }
+
+            switch (_core.State)
+            {
+                case PlaybackState.Play:
+                    {
+                        await _core.PauseAsync();
+
+                        btStartPreview.Text = "PREVIEW";
+                    }
+
+                    break;
+                case PlaybackState.Pause:
+                    {
+                        await _core.ResumeAsync();
+
+                        btStartPreview.Text = "PAUSE";
+                    }
+
+                    break;
+                case PlaybackState.Free:
+                    {
+                        if (_core.State == PlaybackState.Play || _core.State == PlaybackState.Pause)
+                        {
+                            return;
+                        }
+
+                        await ConfigurePreviewAsync();
+
+                        // start
+                        await _core.StartAsync();
+
+                        _tmPosition.Start();
+
+                        btStartPreview.Text = "PAUSE";
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async void btStartCapture_Clicked(object sender, EventArgs e)
+        {
+            if (_core == null)
+            {
+                return;
+            }
+
+            switch (_core.State)
+            {
+                case PlaybackState.Play:
+                    {
+                        await _core.PauseAsync();
+
+                        btStartCapture.Text = "CAPTURE";
+                    }
+
+                    break;
+                case PlaybackState.Pause:
+                    {
+                        await _core.ResumeAsync();
+
+                        btStartCapture.Text = "PAUSE";
+                    }
+
+                    break;
+                case PlaybackState.Free:
+                    {
+                        if (_core.State == PlaybackState.Play || _core.State == PlaybackState.Pause)
+                        {
+                            return;
+                        }
+
+                        await ConfigurePreviewAsync();
+
+                        ConfigureCapture();
+
+                        //Gst.Debug.SetDefaultThreshold(Gst.DebugLevel.Debug);
+
+                        // start
+                        await _core.StartAsync();                       
+
+                        _tmPosition.Start();
+
+                        btStartCapture.Text = "PAUSE";
+                    }
+
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
