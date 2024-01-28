@@ -46,7 +46,7 @@ namespace Simple_Video_Capture
 
         private AudioRendererBlock _audioRenderer;
 
-        private AndroidVideoSourceBlock _videoSource;
+        private SystemVideoSourceBlock _videoSource;
 
         private SystemAudioSourceBlock _audioSource;
 
@@ -113,7 +113,7 @@ namespace Simple_Video_Capture
                 return;
             }
 
-            _videoSource = new AndroidVideoSourceBlock(videoSourceSettings);
+            _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // create video tee
             _videoTee = new TeeBlock(2);

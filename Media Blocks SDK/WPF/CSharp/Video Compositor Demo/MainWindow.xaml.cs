@@ -253,7 +253,7 @@ namespace Video_Compositor_Demo
                 if (rbOutputFile.IsChecked == true)
                 {
                     // create and connect MP4 output
-                    _mp4Output = new MP4OutputBlock(new MP4SinkSettings(edOutputFilename.Text), new OpenH264EncoderSettings(), null);
+                    _mp4Output = new MP4OutputBlock(new MP4SinkSettings(edOutputFilename.Text), new OpenH264EncoderSettings(), aacSettings: null);
                     _pipeline.Connect(_videoTee.Outputs[1], _mp4Output.CreateNewInput(MediaBlockPadMediaType.Video));
                 }
                 else if (rbOutputYouTube.IsChecked == true)

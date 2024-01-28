@@ -57,13 +57,6 @@
                         Margin="5" 
                         Clicked="btStartCapture_Clicked"
                         MinimumWidthRequest="100" />
-
-                    <Button  
-                        x:Name="btStop"   
-                        Text="STOP" 
-                        Margin="5" 
-                        Clicked="btStop_Clicked" 
-                        MinimumWidthRequest="100" />
                 </StackLayout>
             </StackLayout>
         </Grid>
