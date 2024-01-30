@@ -77,8 +77,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.3" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
