@@ -20,11 +20,9 @@ using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core;
-using VisioForge.Core.MediaBlocks.VideoProcessing;
-using VisioForge.Core.Types.X.VideoEffects;
 using Microsoft.Win32;
 using VisioForge.Core.MediaBlocks.Decklink;
-using VisioForge.Core.Types.X.Decklink;
+using VisioForge.Core.UI.WPF.Dialogs.Decklink;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -127,24 +125,6 @@ namespace Live_Video_Compositor_Demo
 
         private async Task AddFileSourceAsync()
         {
-            //var rect = new Rect(
-            //       Convert.ToInt32(edRectLeft.Text),
-            //       Convert.ToInt32(edRectTop.Text),
-            //       Convert.ToInt32(edRectRight.Text),
-            //       Convert.ToInt32(edRectBottom.Text));
-
-            //var name = "File source [Fake video]";
-            //var src = new LVCVideoAudioInput(name, _compositor, new VirtualVideoSourceBlock(new VirtualVideoSourceSettings()), rect, true);
-            //if (await _compositor.VideoAudio_Input_AddAsync(src))
-            //{
-            //    lbSources.Items.Add(name);
-            //    lbSources.SelectedIndex = lbSources.Items.Count - 1;
-            //}
-            //else
-            //{
-            //    src.Dispose();
-            //}
-
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == true)
             {
@@ -155,7 +135,7 @@ namespace Live_Video_Compositor_Demo
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text),
                     Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var settings = await UniversalSourceSettings.CreateAsync(filename);
-                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), rect, true);
+                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), rect, true, live: false);
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -194,22 +174,6 @@ namespace Live_Video_Compositor_Demo
                     src.Dispose(); 
                 }
             }
-        }
-
-        private void btAddFile_Click(object sender, RoutedEventArgs e)
-        {
-            //var dlg = new OpenFileDialog();
-            //if (dlg.ShowDialog() == true)
-            //{
-            //    var src = new CompositorSource();
-            //    src.Source = new FileSourceBlock(dlg.FileName);
-            //    src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-
-            //    _sources.Add(src);
-
-            //    cbSources.Items.Add($"File [{dlg.FileName}]");
-            //    cbSources.SelectedIndex = cbSources.Items.Count - 1;
-            //}
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -304,6 +268,40 @@ namespace Live_Video_Compositor_Demo
             else
             {
                 output.Dispose();
+            }
+        }
+
+        private async Task AddDecklinkVideoOutputAsync()
+        {
+            // Decklink video output
+            var dlg = new DecklinkVideoOutputDialog();
+            if (dlg.ShowDialog() == true)
+            {
+                var rect = new Rect(
+                   Convert.ToInt32(edRectLeft.Text),
+                   Convert.ToInt32(edRectTop.Text),
+                   Convert.ToInt32(edRectRight.Text),
+                   Convert.ToInt32(edRectBottom.Text));
+
+               DecklinkVideoAudioSinkBlock _decklinkOutputBlock;
+
+                var videoSettings = await dlg.GetVideoDeviceSettingsAsync();
+                var audioSettings = await dlg.GetAudioDeviceSettingsAsync();
+                var name = $"Decklink output [V{dlg.VideoDevice}:A{dlg.AudioDevice}]";
+
+                _decklinkOutputBlock = new DecklinkVideoAudioSinkBlock(videoSettings, audioSettings);
+
+                var decklinkOutput = new LVCVideoAudioOutput(name, _compositor, _decklinkOutputBlock, false);
+                
+                if (await _compositor.Output_AddAsync(decklinkOutput))
+                {
+                    lbOutputs.Items.Add(name);
+                    lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
+                }
+                else
+                {
+                    decklinkOutput.Dispose();
+                }
             }
         }
 
@@ -522,7 +520,7 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
-        private async void lbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async Task UpdateSourceSelectionAsync()
         {
             if (lbSources.SelectedIndex != -1)
             {
@@ -535,7 +533,36 @@ namespace Live_Video_Compositor_Demo
                     edRectRight.Text = input.Rectangle.Right.ToString();
                     edRectBottom.Text = input.Rectangle.Bottom.ToString();
                 }
+
+                _timelineSeeking = false;
+
+                var inputSource = _compositor.Input_Get(lbSources.SelectedIndex);
+                if (inputSource != null && inputSource is LVCVideoAudioInput vai)
+                {
+                    var duration = await vai.Pipeline.DurationAsync();
+                    var position = await vai.Pipeline.Position_GetAsync();
+                    tbSeeking.IsEnabled = true;
+                    tbSeeking.Maximum = duration.TotalSeconds;
+                    tbSeeking.Value = position.TotalSeconds;
+                }
+                else
+                {
+                    tbSeeking.IsEnabled = false;
+                    tbSeeking.Value = 0;
+                }
+
+                _timelineSeeking = true;
             }
+        }
+
+        private async void lbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await UpdateSourceSelectionAsync();
+        }
+
+        private async void lbSources_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            await UpdateSourceSelectionAsync();
         }
 
         private void btAddOutput_Click(object sender, RoutedEventArgs e)
@@ -560,27 +587,17 @@ namespace Live_Video_Compositor_Demo
                 await AddMP3OutputAsync();
             };
 
-            //var miAudioSource = new MenuItem() { Header = "Audio source" };
-            //miAudioSource.Click += async (sender, e) =>
-            //{
-            //    await AddAudioSourceAsync();
-            //};
-
-            //var miAudioVirtual = new MenuItem() { Header = "Virtual audio" };
-            //miAudioVirtual.Click += async (sender, e) =>
-            //{
-            //    await AddAudioVirtualAsync();
-            //};
-
-            //var miVideoVirtual = new MenuItem() { Header = "Virtual video" };
-            //miVideoVirtual.Click += async (sender, e) =>
-            //{
-            //    await AddVideoVirtualAsync();
-            //};
+            var miDecklink = new MenuItem() { Header = "Decklink device" };
+            miDecklink.Click += async (senderm, args) =>
+            {
+                await AddDecklinkVideoOutputAsync();
+            };
 
             ctx.Items.Add(miMP4);
             ctx.Items.Add(miWebM);
             ctx.Items.Add(miMP3);
+            ctx.Items.Add(new Separator());
+            ctx.Items.Add(miDecklink);
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
@@ -595,8 +612,10 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            await _compositor.DisposeAsync();
+
             VisioForgeX.DestroySDK();
         }
 
@@ -615,6 +634,23 @@ namespace Live_Video_Compositor_Demo
             {
                 var output = _compositor.Output_Get(lbOutputs.SelectedValue.ToString());
                 await output.StopAsync();
+            }
+        }
+
+        private bool _timelineSeeking = true;
+
+        private async void tbSeeking_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!_timelineSeeking)
+            {
+                return;
+            }
+
+            int index = lbSources.SelectedIndex;
+            if (index != -1)
+            {
+                var fileInput = _compositor.Input_VideoAudio_Get(index);
+                await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
             }
         }
     }

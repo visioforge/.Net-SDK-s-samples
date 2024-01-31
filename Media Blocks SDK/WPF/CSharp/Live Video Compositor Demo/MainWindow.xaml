@@ -66,7 +66,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="160" SelectionChanged="lbSources_SelectionChanged" />
+                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="160" SelectionChanged="lbSources_SelectionChanged" PreviewMouseLeftButtonDown="lbSources_PreviewMouseLeftButtonDown" />
 
                         <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" HorizontalAlignment="Stretch">
                             <Button x:Name="btAddSource" Margin="5,0,0,0" Click="btAddSource_Click">Add</Button>
@@ -99,6 +99,9 @@
                             </StackPanel>
 
                             <Button Margin="0,20,0,0" x:Name="btUpdateRect" Content="Update rectangle" HorizontalAlignment="Center" Click="btUpdateRect_Click"/>
+
+                            <Label HorizontalAlignment="Center" Margin="0,10,0,0">Seeking (file source)</Label>
+                            <Slider x:Name="tbSeeking" HorizontalAlignment="Center" Margin="0,6,0,0" Width="150" ValueChanged="tbSeeking_ValueChanged"/>
                         </StackPanel>
                     </Grid>
 

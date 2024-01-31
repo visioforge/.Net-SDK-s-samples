@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.8.4
+
+* [Media Blocks SDK .Net] Added Decklink output into the Live Video Compositor sample
+
 ## 15.8.1
 
-* [Media Player SDK .Net] MediaPlayerCore: Added growing MPEG-TS files support for the VLC engine. You can play growing MPEG-TS files while it's recorded
+* [Media Player SDK .Net] MediaPlayerCore: Added growing MPEG-TS file support for the VLC engine. You can play growing MPEG-TS files while it's recorded
   
 ## 15.8
 
@@ -27,9 +31,9 @@
 * [Video Edit SDK .Net] VideoEditCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
 * [Media Player SDK .Net] MediaPlayerCore: Added Virtual_Camera_Output_AlternativeAudioFilterName property to set a custom audio filter for the Virtual Camera SDK output
 * [Video Capture SDK .Net] VideoCaptureCoreX: Added NDI streaming support and sample app.
-* [Media Blocks SDK .Net] Added the BufferSink block to get video/audio frames from the pipeline.
-* [Media Blocks SDK .Net] Added the CustomMediaBlock class to create custom media blocks for any GStreamer element.
-* [Media Blocks SDK .Net] Added the UpdateChannel method to update the channel of the bridge source or sink.
+* [Media Blocks SDK .Net] Added the BufferSink block to get video/audio frames from the pipeline
+* [Media Blocks SDK .Net] Added the CustomMediaBlock class to create custom media blocks for any GStreamer element
+* [Media Blocks SDK .Net] Added the UpdateChannel method to update the channel of the bridge source or sink
 * [Media Player SDK .Net] MediaPlayerCore: Updated Tempo effect.
 * [X-engines] Updated device enumerator. Removed unwanted firewall dialog when listing NDI sources.
 * [X-engines] Fixed an issue with the video mixer when adding/removing video sources.
