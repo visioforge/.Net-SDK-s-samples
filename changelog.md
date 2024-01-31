@@ -2,7 +2,7 @@
 
 ## 15.8.4
 
-* [Media Blocks SDK .Net] Added Decklink output into the Live Video Compositor sample
+* [Media Blocks SDK .Net] Added Decklink output and file source with seeking into the Live Video Compositor sample
 
 ## 15.8.1
 
