@@ -23,6 +23,7 @@ using VisioForge.Core;
 using Microsoft.Win32;
 using VisioForge.Core.MediaBlocks.Decklink;
 using VisioForge.Core.UI.WPF.Dialogs.Decklink;
+using VisioForge.Core.Types.X.Output;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -176,13 +177,29 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+            DeviceEnumerator.Shared.OnAudioSinkAdded += Shared_OnAudioSinkAdded;
+            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+        }
+
+        private void Shared_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                if (e.API == AudioOutputDeviceAPI.DirectSound)
+                {
+                    cbAudioRenderer.Items.Add(e.Name);
+                }
+
+                cbAudioRenderer.SelectedIndex = 0;
+            }));
         }
 
         private async void UpdateRecordingTime()
@@ -200,17 +217,27 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
-        private async void btStart_Click(object sender, RoutedEventArgs e)
+        private async Task AddVideoRendererAsync()
         {
-            // add video renderer
             var name = "[VideoView] Preview";
             _videoRendererOutput = new LVCVideoViewOutput(name, _compositor, VideoView1, true);
             await _compositor.Output_AddAsync(_videoRendererOutput);
+        }
 
-            // add audio renderer
-            var audioRenderer = new AudioRendererBlock(); // <- TODO replace with a dialog 
+        private async Task AddAudioRendererAsync()
+        {
+            var audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioRenderer.Text)); // <- TODO replace with a dialog 
             _audioRendererOutput = new LVCAudioOutput("Audio renderer", _compositor, audioRenderer, true);
             await _compositor.Output_AddAsync(_audioRendererOutput, true);
+        }
+
+        private async void btStart_Click(object sender, RoutedEventArgs e)
+        {
+            // add video renderer
+            await AddVideoRendererAsync();
+
+            // add audio renderer
+            await AddAudioRendererAsync();
 
             await _compositor.StartAsync();
 

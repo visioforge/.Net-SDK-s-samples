@@ -95,7 +95,7 @@
                                 <StackPanel Orientation="Vertical"  Margin="5,0,0,0" Width="50">
                                     <Label HorizontalAlignment="Left">Bottom</Label>
                                     <TextBox x:Name="edRectBottom" Text="480" Width="35" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
-                                </StackPanel>                               
+                                </StackPanel>
                             </StackPanel>
 
                             <Button Margin="0,20,0,0" x:Name="btUpdateRect" Content="Update rectangle" HorizontalAlignment="Center" Click="btUpdateRect_Click"/>
@@ -127,31 +127,32 @@
 
             <Border Grid.Column="2" BorderBrush="#673ab7" BorderThickness="2" Margin="2,0,0,2">
                 <Grid>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="CONTROLS" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Padding="0,8,0,0" TextAlignment="Center" Background="#673ab7" Foreground="White" />
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="CONTROLS" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Padding="0,8,0,0" TextAlignment="Center" Background="#673ab7" Foreground="White" />
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" HorizontalAlignment="Stretch">                       
-                        <Label Content="Resolution" Width="75" Margin="10,0,10,0" VerticalAlignment="Center" />
-                        <TextBox x:Name="edWidth" VerticalAlignment="Center">1920</TextBox>
-                        <Label Content="x" VerticalAlignment="Center" />
-                        <TextBox x:Name="edHeight" VerticalAlignment="Center">1080</TextBox>
-                        <Label Content="Frame rate" Margin="20,0,10,0" VerticalAlignment="Center" />
-                        <TextBox x:Name="edFrameRate" VerticalAlignment="Center">25</TextBox>
-                        <Label Content="fps" Margin="10,0,0,0" VerticalAlignment="Center" />
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                            <Label Content="Resolution" Width="75" Margin="10,0,10,0" VerticalAlignment="Center" />
+                            <TextBox x:Name="edWidth" VerticalAlignment="Center">1920</TextBox>
+                            <Label Content="x" VerticalAlignment="Center" />
+                            <TextBox x:Name="edHeight" VerticalAlignment="Center">1080</TextBox>
+                            <Label Content="Frame rate" Margin="20,0,10,0" VerticalAlignment="Center" />
+                            <TextBox x:Name="edFrameRate" VerticalAlignment="Center">25</TextBox>
+                            <Label Content="fps" Margin="10,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                            <Label Content="Audio" Margin="10,0,10,0" VerticalAlignment="Center" />
+                            <ComboBox x:Name="cbAudioRenderer" Margin="10,0,10,0" Width="200" VerticalAlignment="Center" />
+                            <Label Content="48000 Hz 16 bit stereo" Margin="-3,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,10,0,0" HorizontalAlignment="Stretch">
-                        <Label Content="Audio" Width="75" Margin="10,0,10,0" VerticalAlignment="Center" />
-                        <Label Content="48000 Hz 16 bit stereo" Margin="-3,0,0,0" VerticalAlignment="Center" />
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                        <Button x:Name="btStart" Content="Start" Width="75" Margin="10,0,0,0" Click="btStart_Click"/>
+                        <Button x:Name="btStop" Content="Stop" Width="75" Margin="10,0,0,0" Click="btStop_Click"/>
+                        <Label Content="DURATION" Margin="30,0,0,0" VerticalAlignment="Center" />
+                        <Label x:Name="lbTimestamp" Content="00:00:00" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" Margin="0,10,0,0" HorizontalAlignment="Stretch">
-                    <Button x:Name="btStart" Content="Start" Width="75" Margin="10,0,0,0" Click="btStart_Click"/>
-                    <Button x:Name="btStop" Content="Stop" Width="75" Margin="10,0,0,0" Click="btStop_Click"/>
-                    <Label Content="DURATION" Margin="30,0,0,0" VerticalAlignment="Center" />
-                    <Label x:Name="lbTimestamp" Content="00:00:00" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                </StackPanel>
                 </Grid>
             </Border>
 

@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.8.5
+
+* [Media Blocks SDK .Net] Resolved a bad audio issue while mixing using the Live Video Compositor engine
+
 ## 15.8.4
 
-* [Media Blocks SDK .Net] Added Decklink output and file source with seeking into the Live Video Compositor sample
+* [Media Blocks SDK .Net] Added Decklink output and file source into the Live Video Compositor sample
 
 ## 15.8.1
 
