@@ -24,6 +24,14 @@ using Microsoft.Win32;
 using VisioForge.Core.MediaBlocks.Decklink;
 using VisioForge.Core.UI.WPF.Dialogs.Decklink;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X;
+using VisioForge.Core.Helpers;
+using VisioForge.Core.MediaBlocks.Bridge;
+using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.MediaBlocks.VideoProcessing;
+using VisioForge.Core.Types.X.VideoEffects;
+using VisioForge.Core.MediaBlocks.Special;
+using System.Diagnostics;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -110,7 +118,8 @@ namespace Live_Video_Compositor_Demo
 
                 var name = $"Camera [{dlg.Device}]";
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-                var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), rect, true);
+                var videoInfo = new VideoFrameInfoX(settings.Format.Width, settings.Format.Height, settings.Format.FrameRate);
+                var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), videoInfo, rect, true);
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -136,7 +145,21 @@ namespace Live_Video_Compositor_Demo
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text),
                     Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var settings = await UniversalSourceSettings.CreateAsync(filename);
-                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), rect, true, live: false);
+                var info = settings.GetInfo();
+
+                VideoFrameInfoX videoInfo = null;
+                if (info.VideoStreams.Count > 0)
+                {
+                    videoInfo = new VideoFrameInfoX(info.VideoStreams[0].Width, info.VideoStreams[0].Height, info.VideoStreams[0].FrameRate);
+                }
+
+                AudioInfoX audioInfo = null;
+                if (info.AudioStreams.Count > 0)
+                {
+                    audioInfo = new AudioInfoX(AudioFormatX.S16LE, info.AudioStreams[0].SampleRate, info.AudioStreams[0].Channels);
+                }
+
+                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), videoInfo, audioInfo, rect, autostart: true, live: false);
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -163,7 +186,8 @@ namespace Live_Video_Compositor_Demo
 
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var name = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
-                var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), rect, true);
+                var info = new VideoFrameInfoX(dlg.Rectangle.Width, dlg.Rectangle.Height, dlg.FrameRate);
+                var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), info, rect, true);
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -231,13 +255,72 @@ namespace Live_Video_Compositor_Demo
             await _compositor.Output_AddAsync(_audioRendererOutput, true);
         }
 
+
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            //string test_stream_mixer_input = "test_stream_mixer_input";
+            //string test_stream_mixer_output = "test_stream_mixer_output";
+
+            //var sourcePipeline = new MediaBlocksPipeline(live: true, name: "Source");
+
+            //Gst.Debug.SetDefaultThreshold(Gst.DebugLevel.Debug);
+            ////Gst.Debug.AddLogFunction((category, level, file, function, line, _object, message) =>
+            ////{
+            ////    Debug.WriteLine($"Gst: {level} {message}");
+            ////});
+
+            //var videoSource = new VirtualVideoSourceBlock(new VirtualVideoSourceSettings());
+            //var videoInfo = new VideoFrameInfoX(videoSource.Settings.Width, videoSource.Settings.Height, videoSource.Settings.Format, videoSource.Settings.FrameRate);
+
+            //var sourceBridgeSink = new BridgeVideoSinkBlock(new VisioForge.Core.Types.X.Bridge.BridgeVideoSinkSettings(test_stream_mixer_input, videoInfo));
+            //sourcePipeline.Connect(videoSource.Output, sourceBridgeSink.Input);
+
+            //var mainPipeline = new MediaBlocksPipeline(live: true, name: "Main");
+            //var mixerBridgeSource = new BridgeVideoSourceBlock(new VisioForge.Core.Types.X.Bridge.BridgeVideoSourceSettings(test_stream_mixer_input, videoInfo));
+
+            //var mixerSettings = new VideoMixerSettings(1920, 1080, VideoFrameRate.FPS_30);
+            //mixerSettings.AddStream(new VideoMixerStream(new Rect(0, 0, 640, 480), 0));
+            //var videoMixer = new VideoMixerBlock(mixerSettings);
+            ////var mixerBridgeSink = new InterPipeSinkBlock(test_stream_mixer_output);
+
+            ////var videoMixer = new CustomMediaBlock(new VisioForge.Core.Types.X.Special.CustomMediaBlockSettings("videomixer"));
+            ////videoMixer.OnElementAdded += (sender, args) =>
+            ////{
+            ////    var pad = videoMixer.GetElement().GetRequestPad("sink_%u");
+            ////    videoMixer.Inputs[0].SetInternalPad(pad);
+            ////};           
+
+            //var videoConvert = new VideoConverterBlock();
+            //mainPipeline.Connect(mixerBridgeSource.Output, videoConvert.Input);
+            //mainPipeline.Connect(videoConvert.Output, videoMixer.Inputs[0]);
+
+            ////var nullRenderer = new NullRendererBlock();
+            ////mainPipeline.Connect(videoMixer.Output, nullRenderer.Input);
+
+            //var videoRenderer = new VideoRendererBlock(mainPipeline, VideoView1);
+            //mainPipeline.Connect(videoMixer.Output, videoRenderer.Input);
+            ////  mainPipeline.Connect(videoMixer.Output, mixerBridgeSink.Input);
+
+            ////var renderPipeline = new MediaBlocksPipeline();
+            ////var bridgeSource = new InterPipeSourceBlock(test_stream_mixer_output);
+            ////var videoRenderer = new VideoRendererBlock(renderPipeline, VideoView1);
+            ////renderPipeline.Connect(bridgeSource, videoRenderer);
+
+            //await sourcePipeline.StartAsync();
+
+            //mainPipeline.Debug_Dir = @"c:\vf\";
+            //mainPipeline.Debug_Mode = true;
+
+            //await mainPipeline.StartAsync();
+            //await renderPipeline.StartAsync();
+
             // add video renderer
             await AddVideoRendererAsync();
 
             // add audio renderer
             await AddAudioRendererAsync();
+
+            //await AddVideoVirtualAsync();
 
             await _compositor.StartAsync();
 
@@ -376,6 +459,7 @@ namespace Live_Video_Compositor_Demo
             if (dlg.ShowDialog() == true)
             {
                 DSAudioCaptureDeviceSourceSettings settings = null;
+                AudioCaptureDeviceFormat deviceFormat = null;
 
                 var deviceName = dlg.Device;
                 var format = dlg.Format;
@@ -387,7 +471,8 @@ namespace Live_Video_Compositor_Demo
                         var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
                         if (formatItem != null)
                         {
-                            settings = new DSAudioCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                            deviceFormat = formatItem.ToFormat();
+                            settings = new DSAudioCaptureDeviceSourceSettings(device, deviceFormat);
                         }
                     }
                 }
@@ -399,7 +484,8 @@ namespace Live_Video_Compositor_Demo
                 }
 
                 var name = $"Audio source [{dlg.Device}]";
-                var src = new LVCAudioInput(name, _compositor, new SystemAudioSourceBlock(settings), true);
+                var info = new AudioInfoX(deviceFormat.Format, deviceFormat.SampleRate, deviceFormat.Channels);
+                var src = new LVCAudioInput(name, _compositor, new SystemAudioSourceBlock(settings), info, true);
                 if (await _compositor.Input_AddAsync(src))
                 {
                     lbSources.Items.Add(name);
@@ -415,7 +501,9 @@ namespace Live_Video_Compositor_Demo
         private async Task AddAudioVirtualAsync()
         {
             var name = "Audio source [Virtual]";
-            var src = new LVCAudioInput(name, _compositor, new VirtualAudioSourceBlock(new VirtualAudioSourceSettings()), true);            
+            var settings = new VirtualAudioSourceSettings();
+            var info = new AudioInfoX(settings.Format, settings.SampleRate, settings.Channels);
+            var src = new LVCAudioInput(name, _compositor, new VirtualAudioSourceBlock(settings), info, true);            
             if (await _compositor.Input_AddAsync(src))
             {
                 lbSources.Items.Add(name);
@@ -436,7 +524,9 @@ namespace Live_Video_Compositor_Demo
                    Convert.ToInt32(edRectBottom.Text));
 
             var name = "Video source [Virtual]";
-            var src = new LVCVideoInput(name, _compositor, new VirtualVideoSourceBlock(new VirtualVideoSourceSettings()), rect, true);
+            var settings = new VirtualVideoSourceSettings();
+            var info = new VideoFrameInfoX(settings.Width, settings.Height, settings.FrameRate);
+            var src = new LVCVideoInput(name, _compositor, new VirtualVideoSourceBlock(settings), info, rect, true);
             if (await _compositor.Input_AddAsync(src))
             {
                 lbSources.Items.Add(name);
@@ -466,7 +556,10 @@ namespace Live_Video_Compositor_Demo
 
                 var sourceBlock = new DecklinkVideoAudioSourceBlock(videoSettings, audioSettings);
 
-                var videoSrc = new LVCVideoAudioInput(name, _compositor, sourceBlock, rect, true);
+                DecklinkHelper.GetVideoInfoFromMode(videoSettings.Mode, out int width, out int height, out VideoFrameRate frameRate);
+                var videoInfo = new VideoFrameInfoX(width, height, frameRate);
+                var audioInfo = new AudioInfoX(DecklinkHelper.ToFormat(audioSettings.Format), audioSettings.SampleRate, (int)audioSettings.Channels);
+                var videoSrc = new LVCVideoAudioInput(name, _compositor, sourceBlock, videoInfo, audioInfo, rect, true);
                 if (await _compositor.Input_AddAsync(videoSrc))
                 {
                     lbSources.Items.Add(name);
@@ -677,6 +770,11 @@ namespace Live_Video_Compositor_Demo
             if (index != -1)
             {
                 var fileInput = _compositor.Input_VideoAudio_Get(index);
+                if (fileInput == null)
+                {
+                    return;
+                }
+
                 await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
             }
         }

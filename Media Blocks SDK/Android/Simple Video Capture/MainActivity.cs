@@ -68,7 +68,7 @@ namespace Simple_Video_Capture
 
         private async Task CreateEngineAsync()
         {
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += _pipeline_OnError;
             _pipeline.OnStop += _pipeline_OnStop;
             _pipeline.OnStart += _pipeline_OnStart;

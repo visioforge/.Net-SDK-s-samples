@@ -237,7 +237,7 @@ public partial class ViewController : NSViewController {
 
     private async Task StartAsync()
     {
-        _pipeline = new MediaBlocksPipeline();
+        _pipeline = new MediaBlocksPipeline(true);
 
         _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
         this.videoViewHost.AddSubview(_videoView);

@@ -109,7 +109,7 @@ public partial class ViewController : NSViewController {
             return;
         }
 
-        _pipeline = new MediaBlocksPipeline();
+        _pipeline = new MediaBlocksPipeline(sourceSettings.GetInfo().IsLive);
 
         _source = new UniversalSourceBlock(sourceSettings);
 

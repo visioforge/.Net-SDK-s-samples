@@ -89,7 +89,7 @@ public class AppDelegate : UIApplicationDelegate {
     {
         VisioForgeX.InitSDK();
         
-        _pipeline = new MediaBlocksPipeline();
+        _pipeline = new MediaBlocksPipeline(true);
         _pipeline.OnError += _pipeline_OnError;
 
         // video source

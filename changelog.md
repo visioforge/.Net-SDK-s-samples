@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.8.7
+
+* [X-engines] Resolved an issue with the H264 webcam sources (sometimes not connected)
+* [X-engines] Resolved an issue with audio streams playback in Live VideoCompositor engine
+
 ## 15.8.5
 
 * [Media Blocks SDK .Net] Resolved a bad audio issue while mixing using the Live Video Compositor engine
