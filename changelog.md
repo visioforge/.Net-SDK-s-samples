@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.10
+
+* [Video Capture SDK .Net] VideoCaptureCore: Resolved crash if the `multiscreen` is enabled and screens added as window's handles (WinForms)
+  
 ## 15.8.9
 
 * [X-engines] Improved MAUI video rendering speed
