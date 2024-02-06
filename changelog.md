@@ -1,9 +1,14 @@
 # Changelog
 
+## 15.8.9
+
+* [X-engines] Improved MAUI video rendering speed
+* [X-engines] Resolved MAUI media playback issues (decoding) in MAUI Android
+
 ## 15.8.7
 
 * [X-engines] Resolved an issue with the H264 webcam sources (sometimes not connected)
-* [X-engines] Resolved an issue with audio streams playback in Live VideoCompositor engine
+* [X-engines] Resolved an issue with audio stream playback in the Live VideoCompositor engine
 
 ## 15.8.5
 

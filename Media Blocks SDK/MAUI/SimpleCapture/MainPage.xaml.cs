@@ -84,7 +84,7 @@ namespace SimpleCapture
             await RequestMicPermissionAsync();
 #endif
 
-            _pipeline = new MediaBlocksPipeline();
+            _pipeline = new MediaBlocksPipeline(live: true);
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 
             _pipeline.OnError += Core_OnError;       
@@ -159,6 +159,8 @@ namespace SimpleCapture
                 _pipeline?.Dispose();
                 _pipeline = null;
             }
+
+            VisioForgeX.DestroySDK();
         }
 
         private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)

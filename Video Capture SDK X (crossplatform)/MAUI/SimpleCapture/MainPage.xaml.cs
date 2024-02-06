@@ -140,6 +140,8 @@ namespace SimpleCapture
                 _core?.Dispose();
                 _core = null;
             }
+
+            VisioForgeX.DestroySDK();
         }
 
         private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)

@@ -26,12 +26,6 @@ using VisioForge.Core.UI.WPF.Dialogs.Decklink;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Helpers;
-using VisioForge.Core.MediaBlocks.Bridge;
-using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.MediaBlocks.VideoProcessing;
-using VisioForge.Core.Types.X.VideoEffects;
-using VisioForge.Core.MediaBlocks.Special;
-using System.Diagnostics;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -145,21 +139,7 @@ namespace Live_Video_Compositor_Demo
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text),
                     Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var settings = await UniversalSourceSettings.CreateAsync(filename);
-                var info = settings.GetInfo();
-
-                VideoFrameInfoX videoInfo = null;
-                if (info.VideoStreams.Count > 0)
-                {
-                    videoInfo = new VideoFrameInfoX(info.VideoStreams[0].Width, info.VideoStreams[0].Height, info.VideoStreams[0].FrameRate);
-                }
-
-                AudioInfoX audioInfo = null;
-                if (info.AudioStreams.Count > 0)
-                {
-                    audioInfo = new AudioInfoX(AudioFormatX.S16LE, info.AudioStreams[0].SampleRate, info.AudioStreams[0].Channels);
-                }
-
-                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), videoInfo, audioInfo, rect, autostart: true, live: false);
+                var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
 
                 if (await _compositor.Input_AddAsync(src))
                 {

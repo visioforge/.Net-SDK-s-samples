@@ -15,6 +15,7 @@ using Stream = System.IO.Stream;
 using System.Reflection;
 using System.Drawing.Printing;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core;
 
 #if ANDROID
 using Android.Runtime;
@@ -80,6 +81,8 @@ namespace SkinnedPlayer_MAUI
                 _player.Dispose();
                 _player = null;
             }
+
+            VisioForgeX.DestroySDK();
         }
 
         private void MainPage_Loaded(object sender, EventArgs e)

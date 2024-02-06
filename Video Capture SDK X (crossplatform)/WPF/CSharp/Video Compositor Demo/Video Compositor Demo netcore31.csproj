@@ -15,8 +15,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.7.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.9" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

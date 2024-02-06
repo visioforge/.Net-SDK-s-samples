@@ -98,6 +98,8 @@ namespace Simple_Player_MAUI
                 _player.Dispose();
                 _player = null;
             }
+
+            VisioForgeX.DestroySDK();
         }
 
         private void OnStop(object sender, EventArgs e)
