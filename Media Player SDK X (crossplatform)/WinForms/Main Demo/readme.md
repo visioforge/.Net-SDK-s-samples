@@ -13,3 +13,4 @@ The Main Demo app with a crossplatform API.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

@@ -1,6 +1,8 @@
 # Media Blocks SDK .Net - Simple Capture Demo (WPF)
 
-Simple Capture Demo is an application that uses the Media Blocks SDK .Net to capture video from webcams in WPF applications.
+This SDK sample demonstrates how to build a simple video capture application using the VisioForge Media Blocks SDK .Net in a WPF environment. The application initializes a media pipeline for capturing video and audio from system devices, rendering them in real-time, and optionally encoding and saving the output to an MP4 file. It showcases device enumeration, video and audio source selection, real-time video and audio rendering, and file output capabilities.
+
+The sample includes error handling and UI elements for device and format selection, demonstrating an integrated approach to media capture and processing with VisioForge's technology.
 
 ## Features
 
@@ -14,6 +16,7 @@ Simple Capture Demo is an application that uses the Media Blocks SDK .Net to cap
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

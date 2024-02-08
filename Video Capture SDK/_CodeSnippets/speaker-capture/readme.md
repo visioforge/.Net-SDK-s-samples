@@ -13,3 +13,4 @@ The code snippet shows how to capture audio from the system audio output to a fi
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

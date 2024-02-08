@@ -1,6 +1,8 @@
 # Media Blocks SDK .Net - Simple Player Demo (WPF)
 
-Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in WPF applications. It is a good starting point for building your media player application.
+The sample demonstrates the integration of the VisioForge Media Blocks SDK .Net within a WPF application to create a simple media player. It showcases how to initialize the SDK, create a media pipeline with audio and video rendering blocks, and handle media source files. The application features a UI for selecting a file, controlling playback (start, stop, pause, resume), adjusting volume, and displaying the current playtime alongside the total duration of the media.
+
+This example highlights the SDK's capabilities for custom media player development, including error handling and asynchronous operations for an enhanced user experience.
 
 ## Features
 
@@ -15,6 +17,7 @@ Simple Player Demo is a media player application that uses the Media Blocks SDK 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

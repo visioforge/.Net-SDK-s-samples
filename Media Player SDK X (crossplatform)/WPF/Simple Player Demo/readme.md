@@ -15,6 +15,7 @@ Simple Player Demo is a media player application that uses the Media Player SDK 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

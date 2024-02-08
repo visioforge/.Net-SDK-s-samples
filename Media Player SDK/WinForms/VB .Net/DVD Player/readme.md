@@ -13,3 +13,4 @@ DVD playback demo application.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

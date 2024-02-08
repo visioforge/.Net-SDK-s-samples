@@ -4,14 +4,15 @@ Simple Player Demo is a media player application that uses the Media Blocks SDK 
 
 ## Features
 
-- Play media files
-- Play network streams
-- Seeking
+* Play media files
+* Play network streams
+* Seeking
 
 ## Supported frameworks
 
-- .Net 6
-- .Net 7
+* .Net 6
+* .Net 7
+* .Net 8
 
 ---
 

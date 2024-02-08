@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - RTSP View CV CLI demo
 
-RTSP View CV CLI demo is a command line application that uses the Media Blocks SDK .Net to play the RTSP stream from the IP camera and perform face detection.
+This SDK sample demonstrates how to create a real-time face detection application using the VisioForge Media Blocks. The program initializes a face detector and configures a media pipeline to process video from an RTSP stream. It showcases how to set up an RTSP source, a video renderer, and a sample grabber block to capture video frames for face detection. Users can start the application with command-line arguments specifying the RTSP stream URL, username, and password. The sample also includes event handlers for detected faces and pipeline errors, providing a comprehensive example of integrating real-time video processing and face detection in .NET applications.
 
 ## Supported frameworks
 
@@ -9,6 +9,7 @@ RTSP View CV CLI demo is a command line application that uses the Media Blocks S
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

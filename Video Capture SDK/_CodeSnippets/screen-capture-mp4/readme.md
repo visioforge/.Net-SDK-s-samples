@@ -13,3 +13,4 @@ The code snippet shows how to capture video to an MP4 file from a screen.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

@@ -2,7 +2,7 @@
 
 ## IP camera capture to MP4 code snippet (C#/WinForms)
 
-The code snippet shows how to capture video to an MP4 file, using IP cameras as a source. 
+The code snippet shows how to capture video to an MP4 file using IP cameras as a source.
 
 [Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
@@ -13,3 +13,4 @@ The code snippet shows how to capture video to an MP4 file, using IP cameras as 
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

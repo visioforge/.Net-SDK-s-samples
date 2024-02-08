@@ -13,6 +13,7 @@ This sample has a skinnable interface.
 
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

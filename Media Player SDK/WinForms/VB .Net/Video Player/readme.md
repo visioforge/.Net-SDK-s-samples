@@ -2,7 +2,7 @@
 
 ## Simple Video Player Demo (VB.Net/WinForms)
 
-The basic video and audio playback demo. 
+The sample shows basic SDK usage for audio and video file playback.
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ The basic video and audio playback demo.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

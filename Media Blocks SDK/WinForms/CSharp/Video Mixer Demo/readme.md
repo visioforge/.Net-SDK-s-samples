@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Video Mixer Demo (WinForms)
 
-Video Mixer Demo is an application that uses the Media Blocks SDK .Net to mix video streams in WinForms applications.
+The provided SDK sample showcases the implementation of a video mixing application using the VisioForge Media Blocks SDK .Net. The application allows users to mix two video streams into one output. It features a CPUMixerEngine class that handles the mixing process, including stream addition and error handling. The main form, Form1, offers a GUI where users can select video files, adjust the position and size of the streams, and start or stop the mixing process. The sample demonstrates initializing the SDK, setting up video streams with user-defined coordinates and dimensions, and managing the video mixing pipeline, including starting, stopping, and error-logging functionalities.
 
 ## Features
 
@@ -14,6 +14,7 @@ Video Mixer Demo is an application that uses the Media Blocks SDK .Net to mix vi
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

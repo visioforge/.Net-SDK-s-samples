@@ -13,3 +13,4 @@ The basic video and audio playback demo for WinUI.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

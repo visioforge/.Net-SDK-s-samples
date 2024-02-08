@@ -2,7 +2,7 @@
 
 ## Face detection code snippet (C#/WinForms)
 
-The code snippet shows how to perform face detection. 
+The code snippet shows how to perform face detection.
 
 [Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
@@ -13,3 +13,4 @@ The code snippet shows how to perform face detection.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

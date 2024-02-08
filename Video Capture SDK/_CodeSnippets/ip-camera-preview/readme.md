@@ -13,3 +13,4 @@ The code snippet shows how to preview video from an IP camera.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

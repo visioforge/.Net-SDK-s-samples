@@ -1,6 +1,10 @@
 # Media Blocks SDK .Net - VNC Source Demo (WPF)
 
-VNC Source Demo is an application that uses the Media Blocks SDK .Net to play video from the VNC/RFB source in WPF applications.
+The provided code sample demonstrates how to integrate VisioForge's MediaBlocks SDK for creating a VNC (Virtual Network Computing) source viewer within a WPF application.
+
+The application initializes a media pipeline, establishes a VNC source connection using user-specified settings (such as host, port, and password), and renders the video output to the UI. It features start and stop functionality for the VNC viewer, along with a basic UI for inputting connection details.
+
+Additionally, the application incorporates error handling within the media pipeline and updates the recording time, showcasing the SDK's capabilities for real-time media processing and display.
 
 ## Features
 
@@ -13,6 +17,7 @@ VNC Source Demo is an application that uses the Media Blocks SDK .Net to play vi
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

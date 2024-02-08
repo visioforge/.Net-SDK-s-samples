@@ -2,9 +2,10 @@
 
 ## Skinned Player Demo (C#/WPF)
 
-The demo shows skinned interface usage of the Media Player SDK .Net. 
+The demo shows skinned interface usage of the Media Player SDK .Net.
 
 You can:
+
 * audio and video files playback
 * network sources playback
 * skinned interface
@@ -18,3 +19,4 @@ You can:
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Live Video Compositor Demo (WPF)
 
-Live Video Compositor Demo is an application that uses the Media Blocks SDK .Net to combine several live sources and optionally outputs on-the-fly (OBS-like).
+This SDK sample demonstrates the use of the Live Video Compositor (part of Media Blocks SDK .Net) for creating a live video mixing application. It includes functionality to add and manage video and audio sources, such as cameras, files, and screen captures, as well as outputs like MP4, WebM, MP3, and Decklink devices. The application allows for real-time composition of multiple sources into a single output stream, featuring UI controls for source configuration, output management, and recording control. It showcases the integration of the VisioForge framework within a WPF application, leveraging asynchronous programming to handle media operations efficiently.
 
 ## Features
 
@@ -16,6 +16,7 @@ Live Video Compositor Demo is an application that uses the Media Blocks SDK .Net
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

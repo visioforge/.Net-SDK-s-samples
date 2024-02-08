@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Memory Player Demo (WinForms)
 
-Memory Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files from memory. It is a good starting point for building your media player application.
+The sample demonstrates the use of the VisioForge Media Blocks SDK to build a custom media player. It showcases initializing the media pipeline, loading media from a file into memory, and then playing it with video and audio rendering capabilities. Users can interact with the media playback through UI controls to start, stop, pause, and resume playback, as well as adjust volume and seek within the media timeline. The example also handles SDK initialization and cleanup, error handling, and dynamically updates the UI to reflect the current playback position and media duration.
 
 ## Features
 
@@ -13,6 +13,7 @@ Memory Player Demo is a media player application that uses the Media Blocks SDK 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

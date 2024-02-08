@@ -2,7 +2,7 @@
 
 ## Seamless Playback Demo (C#/WinForms)
 
-The demo app shows how to switch between video files seamlessly with a pause.
+The demo app shows how to switch between video files seamlessly without a pause.
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ The demo app shows how to switch between video files seamlessly with a pause.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

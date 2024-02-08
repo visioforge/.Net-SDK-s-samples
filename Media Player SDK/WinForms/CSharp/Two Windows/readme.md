@@ -2,7 +2,7 @@
 
 ## Two Windows Demo (C#/WinForms)
 
-The demo app shows how to play a video file in two windows. 
+The demo app shows how to play a video file in two windows.
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ The demo app shows how to play a video file in two windows.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

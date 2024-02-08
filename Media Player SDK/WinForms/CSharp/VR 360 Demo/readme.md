@@ -13,3 +13,4 @@ The demo app shows how to play VR 360-degree files.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

@@ -1,8 +1,8 @@
 ﻿# VisioForge Media Player SDK .Net
 
-## Simple Video Player Demo (C#/WinForms)
+## Nvidia Maxine Player Demo (C#/WinForms)
 
-The basic video and audio playback demo. 
+The sample shows Nvidia Maxine SDK usage for video processing.
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ The basic video and audio playback demo.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

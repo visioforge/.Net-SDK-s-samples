@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - NDI Source Demo (WPF)
 
-NDI Source demo is an application that uses the Media Blocks SDK .Net to capture video from the NDI stream in WPF applications.
+This SDK sample demonstrates how to integrate and manage NDI (Network Device Interface) sources within a WPF application using the VisioForge Media Blocks API. It provides a user interface for selecting NDI sources, starting and stopping the video stream. The application utilizes a MediaBlocksPipeline for handling the video processing and rendering, including error handling and real-time video rendering. Additionally, it features a timer to update the recording time displayed in the UI, showcasing how to asynchronously manage and dispose of media resources within a .NET application.
 
 ## Features
 
@@ -14,6 +14,7 @@ NDI Source demo is an application that uses the Media Blocks SDK .Net to capture
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

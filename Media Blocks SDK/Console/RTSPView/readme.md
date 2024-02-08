@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - RTSP View CLI demo
 
-RTSP View CLI demo is a command line application that uses the Media Blocks SDK .Net to play the RTSP stream from the IP camera.
+This SDK sample demonstrates how to build a simple RTSP viewer using VisioForge's Media Blocks API in C#. It initializes a media pipeline, sets up an RTSP source with user authentication, and renders the video stream. The program accepts three command-line arguments for the RTSP stream URL, username, and password. Audio support is optional and can be enabled by uncommenting the relevant sections. The application showcases error handling and clean resource management with a straightforward interface for stopping the stream and disposing of the pipeline.
 
 ## Supported frameworks
 
@@ -9,6 +9,7 @@ RTSP View CLI demo is a command line application that uses the Media Blocks SDK 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

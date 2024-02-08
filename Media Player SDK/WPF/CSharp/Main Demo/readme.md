@@ -2,15 +2,16 @@
 
 ## Main Demo (C#/WPF)
 
-The demo shows all functionality of Media Player SDK .Net. 
+The demo shows the features and API of Media Player SDK .Net.
 
 You can:
+
 * audio and video files playback
 * network sources playback
 * apply video and audio effects
 * apply OSD
 * detect motion
-* recognize barcodes 
+* recognize barcodes
 * many other features are available
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
@@ -22,3 +23,4 @@ You can:
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

@@ -1,10 +1,8 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Player SDK .Net - madVR Player Demo (C#/WinForms)
 
-## Simple Video Player Demo (C#/WinForms)
+Explore media playback capabilities with the madVR Player SDK sample. This code snippet demonstrates integrating the SDK into a Windows Forms application to enable seamless video playback with features like file selection, audio control, and error handling.
 
-The basic video and audio playback demo. 
-
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
+Experience high-quality video rendering using the madVR video renderer.
 
 ## Supported frameworks
 
@@ -13,3 +11,8 @@ The basic video and audio playback demo.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

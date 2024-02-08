@@ -1,10 +1,10 @@
 # Media Blocks SDK .Net - HTTP MJPEG Source Demo (WPF)
 
-HTTP MJPEG Source Demo is an application that uses the Media Blocks SDK .Net to play video from the MJPEG network source in WPF applications.
+The provided sample demonstrates how to build an application using the VisioForge Media Blocks SDK .Net for streaming MJPEG video from a URL to a WPF application. It initializes a media pipeline with HTTP source, JPEG decoder, and video renderer blocks, offering functionality to start and stop video streaming. Additionally, it includes error handling to debug issues within the media pipeline, showcasing the SDK's capabilities for real-time video processing and rendering in a Windows environment.
 
 ## Features
 
-- Play video from network MJPEG source
+- Play video from the network MJPEG source
 
 ## Supported frameworks
 
@@ -13,6 +13,7 @@ HTTP MJPEG Source Demo is an application that uses the Media Blocks SDK .Net to 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## Audio Player Demo (VB.Net/WinForms)
 
-Audio files playback demo application.
+The sample app shows SDK usage for audio file playback.
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ Audio files playback demo application.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

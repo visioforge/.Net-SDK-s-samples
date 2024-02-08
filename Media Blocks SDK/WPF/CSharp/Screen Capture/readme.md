@@ -1,6 +1,8 @@
 # Media Blocks SDK .Net - Simple Capture Demo (WPF)
 
-Screen Capture Demo is an application that uses the Media Blocks SDK .Net to capture video from the screen in WPF applications.
+This SDK sample demonstrates how to implement a screen capture and recording application using the VisioForge Media Blocks SDK .Net in a WPF environment. The application showcases the setup of a media block pipeline for capturing screen content along with system audio, rendering both to the user interface and encoding them into a file. It highlights the usage of screen and audio source blocks, video and audio renderer blocks, encoding blocks for H264 video and AAC audio, and saving the output to an MP4 file.
+
+Additionally, it includes device enumeration for selecting audio input and output devices, error handling, and the capability to toggle between preview and recording modes.
 
 ## Features
 
@@ -14,6 +16,7 @@ Screen Capture Demo is an application that uses the Media Blocks SDK .Net to cap
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

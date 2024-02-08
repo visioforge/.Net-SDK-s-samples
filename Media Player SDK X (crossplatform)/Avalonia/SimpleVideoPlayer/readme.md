@@ -2,7 +2,7 @@
 
 ## Simple Video Player Avalonia Demo (AvaloniaUI)
 
-The basic video and audio playback demo.  
+The basic video and audio playback demo for Avalonia.  
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
 
@@ -13,3 +13,4 @@ The basic video and audio playback demo.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8

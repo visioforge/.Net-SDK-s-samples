@@ -15,7 +15,7 @@
                 x:Name="videoView"
                 Background="Gray"/>
 
-            <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="1" SkinName="Default" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="200" Padding="0" Margin="0" />
+            <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="1" SkinName="Default" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0" />
         </Grid>
     </ScrollView>
     
