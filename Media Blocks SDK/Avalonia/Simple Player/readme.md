@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Avalonia Simple Player Demo
 
-Simple Player Demo is a media player application that uses the Media Blocks SDK .Net to play media files in Avalonia applications. It is a good starting point for building your media player application.
+The provided code snippet outlines the implementation of a simple media player using Avalonia UI framework and VisioForge's media handling capabilities. This application demonstrates the initialization, configuration, and control of media playback, including video and audio streams, through a user-friendly interface. It showcases key functionalities such as selecting a media file, playing, pausing, resuming, and stopping the media, as well as adjusting volume and playback speed. The application leverages the VisioForge Media Blocks SDK for media operations, including rendering audio and video, handling media sources, and managing playback timelines, providing a comprehensive example of integrating complex media functionalities within an Avalonia-based application.
 
 ## Features
 
@@ -15,6 +15,7 @@ Simple Player Demo is a media player application that uses the Media Blocks SDK 
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

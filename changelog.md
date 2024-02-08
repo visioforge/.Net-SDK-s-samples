@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.8.11
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)
+* [Media Blocks SDK .Net] Added HLS streaming sample
+  
 ## 15.8.10
 
 * [Video Capture SDK .Net] VideoCaptureCore: Resolved crash if the `multiscreen` is enabled and screens added as window's handles (WinForms)

@@ -14,6 +14,7 @@ Media Info CLI demo is a command line application that uses the Media Blocks SDK
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 
