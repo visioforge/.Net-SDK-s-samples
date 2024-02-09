@@ -225,7 +225,12 @@ namespace Overlay_Manager_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            _timer.Stop();
+
+            if (_videoCapture != null)
+            {
+                await _videoCapture.StopAsync();
+            }
 
             await DestroyEngineAsync();
 

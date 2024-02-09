@@ -101,13 +101,18 @@
             await MediaPlayer1.PauseAsync();
         }
 
-        private async void btStop_Click(object sender, EventArgs e)
+        private async Task StopAsync()
         {
             await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
 
             imgScreen.Image = null;
+        }
+
+        private async void btStop_Click(object sender, EventArgs e)
+        {
+            await StopAsync();
         }
 
         private void tbVolume1_Scroll(object sender, EventArgs e)
@@ -165,9 +170,9 @@
                                    }));
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            await StopAsync();
         }
     }
 }

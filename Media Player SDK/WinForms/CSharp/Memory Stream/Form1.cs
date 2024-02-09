@@ -145,7 +145,7 @@ namespace Memory_Stream_Demo
             await MediaPlayer1.PauseAsync();
         }
 
-        private async void btStop_Click(object sender, EventArgs e)
+        private async Task StopAsync()
         {
             await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
@@ -159,6 +159,11 @@ namespace Memory_Stream_Demo
 
             _memorySource = null;
             _stream = null;
+        }
+
+        private async void btStop_Click(object sender, EventArgs e)
+        {
+            await StopAsync();
         }
 
         private void btNextFrame_Click(object sender, EventArgs e)
@@ -205,9 +210,9 @@ namespace Memory_Stream_Demo
                                    }));
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            await StopAsync();
 
             DestroyEngine();
         }

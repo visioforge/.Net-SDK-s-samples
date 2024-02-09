@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.14
+
+* The IAsyncDisposable interface was added to all SDK's core classes. DisposeAsync call should be used to dispose of the core objects in async methods.  
+
 ## 15.8.11
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)

@@ -139,13 +139,18 @@ namespace Nvidia_Maxine_Player
             await MediaPlayer1.ResumeAsync();
         }
 
-        private async void btStop_Click(object sender, RoutedEventArgs e)
+        private async Task StopAsync()
         {
             _timer.Stop();
 
             await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
+        }
+
+        private async void btStop_Click(object sender, RoutedEventArgs e)
+        {
+            await StopAsync();
         }
 
         private void btOpenFile_Click(object sender, RoutedEventArgs e)
@@ -207,9 +212,9 @@ namespace Nvidia_Maxine_Player
             }));
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            await StopAsync();
 
             DestroyEngine();
         }

@@ -1093,7 +1093,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // btStop
             // 
             btStop.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             btStop.Location = new System.Drawing.Point(907, 740);
             btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStop.Name = "btStop";
@@ -1106,7 +1106,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // btStart
             // 
             btStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             btStart.Location = new System.Drawing.Point(798, 740);
             btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStart.Name = "btStart";
@@ -1194,7 +1194,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoView1.Location = new System.Drawing.Point(798, 48);
             VideoView1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             VideoView1.Name = "VideoView1";
-            VideoView1.Size = new System.Drawing.Size(716, 672);
+            VideoView1.Size = new System.Drawing.Size(716, 517);
             VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 103;
             // 

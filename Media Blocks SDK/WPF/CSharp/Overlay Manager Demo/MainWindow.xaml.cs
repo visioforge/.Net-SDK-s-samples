@@ -165,7 +165,10 @@ namespace Overlay_Manager_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            btStop_Click(null, null);
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+            }
 
             await DestroyEngineAsync();
 

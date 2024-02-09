@@ -79,9 +79,7 @@ public partial class MainWindow : Window, IDisposable
 
     private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        btStop_Click(null, null);
-
-        await DestroyEngineAsync();
+        await StopAsync();
 
         VisioForgeX.DestroySDK();
     }
@@ -233,20 +231,26 @@ public partial class MainWindow : Window, IDisposable
         _tmPosition.Start();
     }
 
-    private async void btStop_Click(object sender, RoutedEventArgs e)
+    private async Task StopAsync()
     {
-        _tmPosition?.Stop();
-
         if (_pipeline != null)
         {
             await _pipeline.StopAsync(true);
         }
 
+        await DestroyEngineAsync();
+    }
+
+    private async void btStop_Click(object sender, RoutedEventArgs e)
+    {
+        _tmPosition?.Stop();      
+        
+        await StopAsync();
+
         tbTimeline.Value = 0;
 
-        VideoView1?.InvalidateVisual();
+        VideoView1?.InvalidateVisual();     
 
-        await DestroyEngineAsync();
         lbTimeline.Text = "00:00:00 / 00:00:00";
     }
 

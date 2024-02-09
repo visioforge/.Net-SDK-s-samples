@@ -115,13 +115,18 @@ namespace Video_Player_Demo
             MediaPlayer1.NextFrame();
         }
 
-        private async void btStop_Click(object sender, EventArgs e)
+        private async Task StopAsync()
         {
             timer1.Stop();
 
             await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
+        }
+
+        private async void btStop_Click(object sender, EventArgs e)
+        {
+            await StopAsync();
         }
 
         private async void btPause_Click(object sender, EventArgs e)
@@ -190,9 +195,9 @@ namespace Video_Player_Demo
             MediaPlayer1.PreviousFrame();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            await StopAsync();
 
             DestroyEngine();
         }

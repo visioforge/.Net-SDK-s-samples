@@ -109,6 +109,11 @@ namespace madVR_Player_Demo
 
         private void btStop_Click(object sender, EventArgs e)
         {
+            Stop();
+        }
+
+        private void Stop()
+        {
             timer1.Stop();
 
             MediaPlayer1.Stop();
@@ -184,7 +189,7 @@ namespace madVR_Player_Demo
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btStop_Click(null, null);
+            Stop();
 
             DestroyEngine();
         }
