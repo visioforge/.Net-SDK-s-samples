@@ -1,6 +1,10 @@
 # Media Player SDK .Net - Decklink Output Player Demo (cross-platform WPF)
 
-Decklink Output Player Demo is a media player application that uses the Media Player SDK .Net cross-platform to play media files and send video and audio streams to the Decklink device.
+This SDK sample demonstrates the integration and utilization of VisioForge Media Player SDK .Net in a WPF application, specifically focusing on playback functionalities with advanced audio and video output configurations, including Decklink support.
+
+The code showcases the initialization of the media player, setup of audio and video output devices (with a special emphasis on Decklink video and audio sinks), and controls for media playback such as start, stop, pause, and resume.
+
+It also includes error handling and debugging support, demonstrating a comprehensive approach to building a media playback interface in .NET applications.
 
 ## Features
 

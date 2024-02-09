@@ -1,20 +1,14 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Player SDK .Net - madVR Demo (C#/WPF)
 
-## Main Demo (C#/WPF)
+The provided SDK sample demonstrates the integration and usage of the VisioForge Media Player SDK within a WPF application. It showcases how to implement basic media playback functionalities, including play, stop, and file selection, using the `MediaPlayerCore` class.
 
-The demo shows the features and API of Media Player SDK .Net.
+The sample also illustrates the madVR video renderer usage for enhanced video playback.
 
-You can:
+## Features
 
 * audio and video files playback
 * network sources playback
-* apply video and audio effects
-* apply OSD
-* detect motion
-* recognize barcodes 
-* many other features are available
-
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
+* madVR video renderer usage
 
 ## Supported frameworks
 
@@ -24,3 +18,7 @@ You can:
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

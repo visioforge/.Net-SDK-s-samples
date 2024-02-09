@@ -1,10 +1,8 @@
-﻿# VisioForge Video Capture SDK .Net
+﻿# Video Capture SDK .Net - Screen capture code snippet (C#/WinForms)
 
-## Screen capture code snippet (C#/WinForms)
+This SDK sample demonstrates how to create a screen capture application using the VisioForge Video Capture SDK .Net. The sample includes initializing the video capture engine, configuring screen capture settings (such as selecting the display index and setting the frame rate), handling audio capture, and managing the output format.
 
-The code snippet shows how to capture video from a screen.
-
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+Users can start, pause, resume, and stop the capture process. Additionally, it showcases error handling and debugging options, providing a comprehensive example for developers interested in building screen recording features into their applications.
 
 ## Supported frameworks
 
@@ -14,3 +12,7 @@ The code snippet shows how to capture video from a screen.
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

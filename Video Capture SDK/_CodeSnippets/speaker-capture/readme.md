@@ -1,10 +1,10 @@
-﻿# VisioForge Video Capture SDK .Net
+﻿# Video Capture SDK .Net - Speaker capture code snippet (C#/WinForms)
 
-## Speaker capture code snippet (C#/WinForms)
+This SDK sample demonstrates how to implement audio capture functionality in a .NET Windows Forms application using the VisioForge Video Capture SDK .Net.
 
-The code snippet shows how to capture audio from the system audio output to a file.
+The example showcases how to set up audio capture from a specified device, configure output format and file path, and manage the capture process with start, stop, pause, and resume controls.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It includes event handlers to log errors and update the UI with the current capture timestamp, illustrating a practical approach to integrating audio capture capabilities into .NET applications.
 
 ## Supported frameworks
 
@@ -14,3 +14,7 @@ The code snippet shows how to capture audio from the system audio output to a fi
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

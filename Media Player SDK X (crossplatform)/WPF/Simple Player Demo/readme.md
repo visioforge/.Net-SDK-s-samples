@@ -1,6 +1,10 @@
-# Media Player SDK .Net - Simple Player Demo (cross-platform WPF)
+# Media Player SDK .Net - Simple Player Demo (cross-platform engine, WPF)
 
-Simple Player Demo is a media player application that uses the Media Player SDK .Net cross-platform to play media files in WPF applications.
+This sample demonstrates a simple media player application using the VisioForge Media Player SDK .NET. It uses the `MediaPlayerCoreX` class to play audio and video files, including basic controls for play, pause, stop, and volume adjustment.
+
+The application also features a timeline slider for seeking, dynamic audio output device selection, and subtitle support.
+
+Error handling and logging are incorporated to ensure a smooth user experience. This example provides a practical starting point for developers looking to integrate media playback functionalities into their WPF applications using VisioForge's comprehensive media processing SDK.
 
 ## Features
 

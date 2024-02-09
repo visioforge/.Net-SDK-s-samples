@@ -1,10 +1,12 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Player SDK .Net - Main Demo (VB.Net/WinForms)
 
-## Main Demo (VB.Net/WinForms)
+This software development kit (SDK) sample demonstrates how to utilize the VisioForge Media Player SDK .Net for enhanced media playback and processing in VB.NET applications.
 
-The demo shows extended usage and API of Media Player SDK .Net.
+It showcases advanced features such as audio effects (e.g., equalization, pitch shift), video effects (e.g., zoom, pan), and output settings (e.g., screenshots, OSD).
 
-You can:
+The code also highlights event handling for media playback controls and demonstrates how to apply custom video and audio processing effects, adjust playback settings, and interact with the media player's advanced capabilities.
+
+## Features
 
 * audio and video files playback
 * network sources playback
@@ -14,8 +16,6 @@ You can:
 * recognize barcodes
 * many other features are available
 
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
-
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -24,3 +24,7 @@ You can:
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

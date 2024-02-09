@@ -1,10 +1,10 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Player SDK .Net - Simple Video Player Avalonia Demo (AvaloniaUI)
 
-## Simple Video Player Avalonia Demo (AvaloniaUI)
+This Avalonia-based application showcases the integration of VisioForge's Media Player SDK .Net for video playback and control within a .NET Core application. It demonstrates initializing and disposing of multimedia resources, handling video playback with controls for start, pause, resume, and stop, and adjusting playback settings like volume and speed.
 
-The basic video and audio playback demo for Avalonia.  
+The application also includes features for selecting video files, displaying video information, and illustrating comprehensive media management capabilities.
 
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
+Through its GUI, users can interact with the video playback, making it a practical example of leveraging VisioForge's SDK within an Avalonia application for multimedia projects.
 
 ## Supported frameworks
 
@@ -14,3 +14,7 @@ The basic video and audio playback demo for Avalonia.
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

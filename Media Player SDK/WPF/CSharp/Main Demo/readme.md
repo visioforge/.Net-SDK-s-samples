@@ -1,10 +1,10 @@
-﻿# VisioForge Media Player SDK .Net
+﻿# Media Player SDK .Net - Main Demo (C#/WPF)
 
-## Main Demo (C#/WPF)
+This SDK sample demonstrates how to integrate and utilize the VisioForge Media Player SDK .Net in a WPF application for advanced media playback capabilities. It showcases loading and playing media files, applying various audio and video effects, handling events such as errors and media information, and implementing custom media processing features.
 
-The demo shows the features and API of Media Player SDK .Net.
+The example includes the use of audio effects like EQ and dynamic amplification, video effects, deinterlacing, and motion detection. This comprehensive sample serves as a practical guide for developers to leverage VisioForge's powerful media processing functionalities in their WPF applications.
 
-You can:
+## Features
 
 * audio and video files playback
 * network sources playback
@@ -14,8 +14,6 @@ You can:
 * recognize barcodes
 * many other features are available
 
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
-
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -24,3 +22,7 @@ You can:
 * .Net 6
 * .Net 7
 * .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

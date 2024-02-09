@@ -1,10 +1,10 @@
-﻿# VisioForge Video Capture SDK .Net
+﻿# Video Capture SDK .Net - Video capture to AVI code snippet (C#/WinForms)
 
-## Video capture to AVI code snippet (C#/WinForms)
+This SDK sample demonstrates the implementation of a basic webcam video capture application using VisioForge Video Capture SDK .Net in a Windows Forms application. The code initializes the `VideoCaptureCore` object, sets up the default video and audio sources, and specifies the output file format and location.
 
-The code snippet shows how to capture video to an AVI file from a webcam.
+Users can start and stop video capture with the click of a button, capturing video from the webcam and saving it as an AVI file with MJPEG video compression and PCM audio.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+This example showcases how to use the VisioForge library to capture video from hardware devices, configure capture settings, and manage the capture process asynchronously.
 
 ## Supported frameworks
 
@@ -13,3 +13,8 @@ The code snippet shows how to capture video to an AVI file from a webcam.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
