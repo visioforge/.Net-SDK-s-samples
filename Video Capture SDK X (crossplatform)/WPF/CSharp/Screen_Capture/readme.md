@@ -1,10 +1,10 @@
 ﻿# VisioForge Video Capture SDK .Net
 
-## Screen Capture Demo X (C#/WPF)
+## Screen Capture Demo X (C#/WPF, cross-platform engine)
 
-The demo shows how to capture video from the screen and save it to an output file.
+The provided code showcases a feature-rich Video Capture SDK .Net sample used to capture screen activities, including support for multiple output formats such as MP4, AVI, WebM, MOV, and MPEG-TS.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+Users can configure video and audio source settings, select output formats, and manage screen capture dimensions and cursor visibility. Additionally, it includes functionality for audio capture device selection and format configuration, showcasing an integrated, event-driven architecture for real-time media handling.
 
 ## Supported frameworks
 
@@ -13,3 +13,8 @@ The demo shows how to capture video from the screen and save it to an output fil
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

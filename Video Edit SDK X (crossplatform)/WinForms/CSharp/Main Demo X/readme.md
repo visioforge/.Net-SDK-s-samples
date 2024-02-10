@@ -1,10 +1,9 @@
 ﻿# VisioForge Video Edit SDK .Net
 
-## Main Demo (C#/WinForms)
+## Main Demo (C#/WinForms, cross-platform engine)
 
-The demo shows all functionality of Video Edit SDK .Net. 
+The demo shows the main features of Video Edit SDK .Net:
 
-You can:
 * video preview
 * video editing and conversion
 * apply video and audio effects
@@ -15,8 +14,6 @@ You can:
 * detect motion
 * many other features are available
 
-[Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)
-
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -24,3 +21,8 @@ You can:
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)

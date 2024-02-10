@@ -1,11 +1,14 @@
-# Video Capture SDK .Net - Social Networks Streamer Demo (WPF)
+# Video Capture SDK .Net - Social Networks Streamer Demo (WPF, cross-platform engine)
 
-Social Networks Streamer Demo is an application that uses the Video Capture SDK .Net (crossplatform engine) to stream from webcams to YouTube or Facebook Live in WPF applications.
+This sample showcases the integration of VisioForge Video Capture SDK .Net within a WPF application designed for streaming to social networks. It demonstrates how to enumerate and select video/audio input and output devices, configure video and audio source settings, and stream to platforms like YouTube, Facebook Live, and generic RTMP servers.
+
+The code includes event handling for device enumeration and streaming errors, as well as UI updates for device selection and streaming status. This example is ideal for developers looking to build applications with live streaming to various social media platforms using VisioForge's technology.
 
 ## Features
 
 - Video streaming to YouTube
 - Video streaming to Facebook Live
+- Video streaming to RTMP server
 - Video preview
 
 ## Supported frameworks

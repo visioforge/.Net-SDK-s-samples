@@ -2,9 +2,9 @@
 
 ## Virtual Camera Streamer Demo (C#/WinForms)
 
-The demo shows how to stream video from a webcam to a virtual camera (Virtual Camera SDK).
+The sample offers a comprehensive solution for integrating video/audio streaming to a Virtual Camera SDK virtual devices.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It provides a feature-rich interface for managing video and audio input devices, including the selection of input formats, frame rates, and device-specific settings.
 
 ## Supported frameworks
 
@@ -13,3 +13,8 @@ The demo shows how to stream video from a webcam to a virtual camera (Virtual Ca
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

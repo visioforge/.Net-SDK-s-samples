@@ -2,9 +2,11 @@
 
 ## IP MJPEG Restreamer Demo (C#/WPF)
 
-The demo shows how to restream video from IP cameras using MJPEG over an HTTP stream. 
+The sample provides a comprehensive solution for integrating IP camera streaming and ONVIF support into .NET applications.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It features a customizable window interface for viewing live video feeds, supports various IP camera source types (RTSP, RTMP, HTTP, UDP, HLS) and decoding engines (including VLC and FFMPEG), and offers network streaming capabilities in MJPEG format.
+
+Additionally, the SDK enables ONVIF camera control, allowing for camera discovery, profile selection, and connection management. With features like video capture, error logging, and network source monitoring, developers can easily implement advanced video streaming and control functionalities in their applications.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to restream video from IP cameras using MJPEG over an HTTP st
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+  
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

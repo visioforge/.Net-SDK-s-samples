@@ -2,9 +2,11 @@
 
 ## DV Capture Demo (C#/WPF)
 
-The demo shows how to preview or capture video from DV camcorder cards to various file formats. 
+The provided code snippet is for a Windows application using VisioForge Video Capture SDK .Net, specifically tailored for capturing and processing video streams. This application showcases various features such as video capture from DV camcorders, video effect manipulation, and outputs like MP4, AVI, WMV, GIF, and more.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It includes direct control over video playback and recording features such as play, pause, stop, rewind, and fast forward.
+
+Additionally, the application demonstrates handling of audio and video inputs/outputs, including volume and balance adjustments, selection of video input devices and formats, and real-time video effects such as grayscale, saturation, flip, and deinterlace filters.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to preview or capture video from DV camcorder cards to variou
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

@@ -1,6 +1,10 @@
-# Video Capture SDK .Net - NDI Streamer Demo (WPF)
+# Video Capture SDK .Net - NDI Streamer Demo (WPF, cross-platform engine)
 
-NDI Streamer Demo is an application that uses Video Capture SDK .Net (cross-platform engine) to stream video/audio from webcam using NDI in WPF applications.
+This sample demonstrates the integration and use of the VisioForge Video Capture SDK .Net within a WPF application for streaming video and audio content using the NDI protocol.
+
+It showcases how to enumerate and select video and audio input devices, configure video source settings, and manage audio capture settings. Additionally, the sample includes functionality for starting and stopping video capture, dynamically updating UI elements with device information, and handling errors.
+
+The use of asynchronous programming patterns for device monitoring and capture operations ensures responsiveness and efficiency in media handling.
 
 ## Features
 

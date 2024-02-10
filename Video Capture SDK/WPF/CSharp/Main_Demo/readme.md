@@ -2,9 +2,10 @@
 
 ## Main Demo (C#/WPF)
 
-The demo shows all functionality of Video Capture SDK .Net. 
+The demo shows the most important features of Video Capture SDK .Net.
 
 You can:
+
 * preview or capture video from webcams, IP cameras, screens, Decklink devices, and some other sources
 * apply video and audio effects
 * perform network streaming
@@ -12,10 +13,8 @@ You can:
 * apply OSD
 * use Picture-in-Picture
 * detect motion
-* recognize barcodes 
+* recognize barcodes
 * many other features are available
-
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
 
 ## Supported frameworks
 
@@ -24,3 +23,8 @@ You can:
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+  
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

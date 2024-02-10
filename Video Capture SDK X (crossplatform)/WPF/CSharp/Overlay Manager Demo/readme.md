@@ -1,6 +1,10 @@
-# Media Blocks SDK .Net - Overlay Manager Demo (WPF)
+# Media Blocks SDK .Net - Overlay Manager Demo (WPF, cross-platform engine)
 
-Overlay Manager Demo is an application that uses the Media Blocks SDK .Net to play media files and add image, text and shape overlays in WPF applications.
+The provided sample for the VisioForge Video Capture SDK .Net demonstrates how to implement a video capture and overlay manager in a WPF application.
+
+It covers initializing the SDK, enumerating video devices, configuring video source settings, and managing video overlays like images, text, lines, rectangles, and circles. The sample also handles starting and stopping video capture, dynamically adjusting frame rates, and managing overlays in real-time.
+
+It showcases the SDK's capabilities in handling complex video processing tasks, making it a valuable resource for developers building multimedia applications.
 
 ## Features
 
@@ -14,6 +18,7 @@ Overlay Manager Demo is an application that uses the Media Blocks SDK .Net to pl
 - .Net 5
 - .Net 6
 - .Net 7
+- .Net 8
 
 ---
 

@@ -2,9 +2,11 @@
 
 ## Multiple IP Cameras Demo (C#/WinForms)
 
-The demo shows how to preview video from several IP cameras simultaneously.
+The provided code sample is for a Windows Forms application using the VisioForge Video Capture SDK .Net to manage multiple IP camera streams simultaneously.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+The application showcases how to create, configure, and control video capture instances for two IP cameras, including starting and stopping the video streams, handling errors, and updating UI components with stream information such as recording time.
+
+The code leverages asynchronous programming patterns for initializing and controlling the video capture engines, demonstrating error handling and debug logging capabilities. Additionally, it includes functionality to dispose of resources properly upon closing the application, ensuring clean shutdowns and resource management.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to preview video from several IP cameras simultaneously.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

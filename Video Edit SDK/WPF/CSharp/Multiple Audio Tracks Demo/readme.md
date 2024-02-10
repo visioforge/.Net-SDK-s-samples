@@ -2,9 +2,11 @@
 
 ## Multiple Audio Tracks Demo (C#/WPF)
 
-The demo shows how to create MP4 output file with 1 video and 2 audio streams. 
+The Multiple Audio Tracks Demo, utilizing the VisioForge Video Edit SDK .NET, showcases a WPF application designed to manipulate video and audio files.
 
-[Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)
+This example demonstrates how to open video and audio files, select output destinations, and handle multiple audio tracks in a single video file.
+
+It features an intuitive GUI for adding video and two separate audio tracks, merging them into a single output file with configurable format options. The application also includes real-time progress feedback and error handling, illustrating the SDK's capabilities for complex video editing tasks such as adding, editing, and exporting multimedia content.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to create MP4 output file with 1 video and 2 audio streams.
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+  
+  ---
+
+  [Visit the product page.](https://www.visioforge.com/video-edit-sdk-net)

@@ -19,7 +19,7 @@ namespace TV_Tuner_Demo
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {

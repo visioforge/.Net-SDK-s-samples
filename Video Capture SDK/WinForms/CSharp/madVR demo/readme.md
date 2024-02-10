@@ -2,9 +2,11 @@
 
 ## madVR Demo (C#/WinForms)
 
-The demo shows how to preview a video from the source using madVR as a video renderer.
+The provided code is a comprehensive SDK sample for a video capture application using the VisioForge Video Capture SDK .Net, tailored for integration with madVR for enhanced video rendering.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It demonstrates the initialization and disposal of the video capture engine, device selection (both audio and video), format configuration, and real-time video capture with audio management.
+
+This sample is designed for developers looking to incorporate advanced video capture and rendering features into their .NET applications, showcasing a practical implementation of the SDK's capabilities in managing devices, formats, and capturing parameters.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to preview a video from the source using madVR as a video ren
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

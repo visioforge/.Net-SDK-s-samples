@@ -2,9 +2,11 @@
 
 ## Timeshift Demo (C#/WinForms)
 
-The demo shows how to play the output video file during video capture (timeshift).
+The sample application demonstrates the integration and usage of the VisioForge Video Capture and Media Player SDKs for real-time video capture, playback, and timeshifting.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+It includes asynchronous initialization of video capture and media player engines, event handling for errors and file creation during time-shifting, and UI elements for selecting video/audio input devices and configuring output settings. 
+
+The application showcases features like selecting capture devices, configuring video/audio formats, and capturing to a timeshift buffer for delayed playback, highlighting the SDK's capabilities in handling complex multimedia tasks.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to play the output video file during video capture (timeshift
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

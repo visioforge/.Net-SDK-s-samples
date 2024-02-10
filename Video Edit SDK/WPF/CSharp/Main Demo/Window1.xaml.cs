@@ -18,7 +18,6 @@ namespace Main_Demo
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
-    using VisioForge.Core.DirectShow.Helpers;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;

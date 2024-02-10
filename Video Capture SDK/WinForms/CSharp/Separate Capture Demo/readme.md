@@ -2,9 +2,11 @@
 
 ## Separate Capture Demo (C#/WinForms)
 
-The demo shows how to preview video from the source and capture it without stopping the preview, split by button click, by file size, or by file duration.  
+This SDK sample demonstrates the implementation of a comprehensive video capture application using the VisioForge Video Capture SDK .Net.
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+The application, encapsulated within a Windows Forms interface, allows users to configure and control video recording sessions. Features include selecting video and audio input devices, configuring output formats (such as AVI, WMV, MP4, etc.), handling hardware encoder settings, and supporting dynamic capture adjustments like start, stop, pause, and resume.
+
+Additionally, the application offers advanced settings dialogs for precise control over video and audio parameters, alongside real-time updates on recording duration.
 
 ## Supported frameworks
 
@@ -13,3 +15,8 @@ The demo shows how to preview video from the source and capture it without stopp
 * .Net 5
 * .Net 6
 * .Net 7
+* .Net 8
+
+---
+
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
