@@ -60,10 +60,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.16" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.17" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
