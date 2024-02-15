@@ -1,0 +1,14 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SimpleMediaPlayerMBMac" type="XamarinMacProject" factoryName="Xamarin.Mac">
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/macOS/SimpleMediaPlayerMBMac/SimpleMediaPlayerMBMac.csproj" />
+    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/macOS/SimpleMediaPlayerMBMac/bin/Debug/net7.0-macos" />
+    <option name="PASS_PARENT_ENVS_MAC" value="1" />
+    <envs>
+      <env name="DYLD_LIBRARY_PATH" value="/opt/homebrew/lib/:/opt/homebrew/lib/gio/modules/:$DYLD_LIBRARY_PATH" />
+    </envs>
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

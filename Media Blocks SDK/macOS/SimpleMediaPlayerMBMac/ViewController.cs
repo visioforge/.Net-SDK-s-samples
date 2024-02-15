@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using CoreFoundation;
-using MapKit;
 using ObjCRuntime;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -12,84 +10,78 @@ using VisioForge.Core.UI.Apple;
 
 namespace SimpleMediaPlayerMBMac;
 
-public partial class ViewController : NSViewController {
+public partial class ViewController : NSViewController
+{
+    private AudioRendererBlock _audioRenderer;
     private MediaBlocksPipeline _pipeline;
-
-    private VideoViewGL _videoView;
 
     private UniversalSourceBlock _source;
 
-    private VideoRendererBlock _videoRenderer;
-
-    private AudioRendererBlock _audioRenderer;
-
     private Timer _timer;
 
-    private bool _timerFlag = false;
+    private bool _timerFlag;
 
-    protected ViewController (NativeHandle handle) : base (handle)
-	{
-		// This constructor is required if the view controller is loaded from a xib or a storyboard.
-		// Do not put any initialization here, use ViewDidLoad instead.
-	}
+    private VideoRendererBlock _videoRenderer;
 
-	public override void ViewDidLoad ()
-	{
-		base.ViewDidLoad ();
+    private VideoViewGL _videoView;
+
+    protected ViewController(NativeHandle handle) : base(handle)
+    {
+        // This constructor is required if the view controller is loaded from a xib or a storyboard.
+        // Do not put any initialization here, use ViewDidLoad instead.
+    }
+
+    public override NSObject RepresentedObject
+    {
+        get => base.RepresentedObject;
+        set => base.RepresentedObject = value;
+        // Update the view, if already loaded.
+    }
+
+    public override void ViewDidLoad()
+    {
+        base.ViewDidLoad();
 
         _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
-        this.videoViewHost.AddSubview(_videoView);
+        videoViewHost.AddSubview(_videoView);
 
         VisioForgeX.InitSDK();
 
-        edFilename.StringValue = "/Users/roman/Documents/video.mp4";
+        edFilename.StringValue = "/Users/roman/Documents/samples/video.mp4";
 
         _timer = new Timer(OnTimer);
+
+        InvokeOnMainThread(async () => { View.Window.Delegate = new CustomWindowDelegate(); });
     }
 
-    public async void OnTimer(Object stateInfo)
+    public async void OnTimer(object stateInfo)
     {
-        if (_pipeline == null)
-        {
-            return;
-        }
+        if (_pipeline == null) return;
 
         _timerFlag = true;
 
         var position = await _pipeline.Position_GetAsync();
         var duration = await _pipeline.DurationAsync();
 
-        InvokeOnMainThread((Action)(() =>
+        InvokeOnMainThread(() =>
         {
             slPosition.MaxValue = duration.TotalSeconds;
-                        
-           // lbTimeX.StringValue = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
 
-            if (slPosition.MaxValue >= position.TotalSeconds)
-            {
-                slPosition.DoubleValue = position.TotalSeconds;
-            }
-        }));
+            // lbTimeX.StringValue = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+            if (slPosition.MaxValue >= position.TotalSeconds) slPosition.DoubleValue = position.TotalSeconds;
+        });
 
         _timerFlag = false;
     }
 
-    public override NSObject RepresentedObject {
-		get => base.RepresentedObject;
-		set {
-			base.RepresentedObject = value;
-
-			// Update the view, if already loaded.
-		}
-	}
-
     private void ShowMessage(string text)
     {
-        var alert = new NSAlert()
+        var alert = new NSAlert
         {
             AlertStyle = NSAlertStyle.Informational,
             InformativeText = text,
-            MessageText = "Message",
+            MessageText = "Message"
         };
         alert.RunModal();
     }
@@ -124,7 +116,7 @@ public partial class ViewController : NSViewController {
             _audioRenderer = new AudioRendererBlock();
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
-       
+
         await _pipeline.StartAsync();
 
         _timer.Change(0, 1000);
@@ -134,10 +126,7 @@ public partial class ViewController : NSViewController {
     {
         _timer.Change(0, Timeout.Infinite);
 
-        if (_pipeline == null)
-        {
-            return;
-        }
+        if (_pipeline == null) return;
 
         await _pipeline.StopAsync();
         await _pipeline.DisposeAsync();
@@ -145,49 +134,51 @@ public partial class ViewController : NSViewController {
         _pipeline = null;
     }
 
-    partial void btStart_Click(Foundation.NSObject sender)
+    partial void btStart_Click(NSObject sender)
     {
-        InvokeOnMainThread(async () => {
-            await StartAsync();
-        });
+        InvokeOnMainThread(async () => { await StartAsync(); });
     }
 
-    partial void btStop_Click(Foundation.NSObject sender)
-	{
-        InvokeOnMainThread(async () => {
-            await StopAsync();
-        });
+    partial void btStop_Click(NSObject sender)
+    {
+        InvokeOnMainThread(async () => { await StopAsync(); });
     }
 
-    partial void btOpen_Click(Foundation.NSObject sender)
-	{
+    partial void btOpen_Click(NSObject sender)
+    {
         var dlg = NSOpenPanel.OpenPanel;
         dlg.CanChooseFiles = true;
         dlg.CanChooseDirectories = false;
-        dlg.AllowedFileTypes = new string[] { "mp4", "mov", "webm", "mkv", "mp3", "m4a", "ogg", "wav" };
+        dlg.AllowedFileTypes = new[] { "mp4", "mov", "webm", "mkv", "mp3", "m4a", "ogg", "wav" };
 
         if (dlg.RunModal() == 1)
         {
             // Nab the first file
             var url = dlg.Urls[0].Path;
 
-            if (url != null)
-            {
-				edFilename.StringValue = url;
-            }
+            if (url != null) edFilename.StringValue = url;
         }
     }
 
-    partial void slPositionChanged(Foundation.NSObject sender)
+    partial void slPositionChanged(NSObject sender)
     {
         var value = (sender as NSSlider).FloatValue;
 
-        InvokeOnMainThread(async () => {
-            if (!_timerFlag && _pipeline != null)
-            {
-                await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(value));
-            }
+        InvokeOnMainThread(async () =>
+        {
+            if (!_timerFlag && _pipeline != null) await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(value));
         });
     }
 }
 
+// Custom Window delegate to close the SDK
+public class CustomWindowDelegate : NSWindowDelegate
+{
+    public override bool WindowShouldClose(NSObject sender)
+    {
+        VisioForgeX.DestroySDK();
+
+        // Return true to allow the window to close, false to cancel.
+        return true;
+    }
+}

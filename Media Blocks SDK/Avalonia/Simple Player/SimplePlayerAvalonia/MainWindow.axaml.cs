@@ -36,7 +36,7 @@ public partial class MainWindow : Window, IDisposable
 #if WINDOWS
     private AudioOutputDeviceAPI _audioOutputDeviceAPI = AudioOutputDeviceAPI.DirectSound;
 #else
-    private AudioOutputDeviceAPI _audioOutputDeviceAPI = null;
+    private AudioOutputDeviceAPI _audioOutputDeviceAPI = AudioOutputDeviceAPI.Default;
 #endif
 
     private bool _initialized;

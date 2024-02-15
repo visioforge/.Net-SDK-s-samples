@@ -93,7 +93,7 @@ namespace MJPEG_Source_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }

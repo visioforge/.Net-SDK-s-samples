@@ -28,4 +28,8 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
 	EndGlobalSection
+	GlobalSection(RiderSharedRunConfigurations) = postSolution
+		File = macOS\SimpleVideoCaptureMBMac\SimpleVideoCaptureMBMac.run.xml
+		File = macOS\SimpleMediaPlayerMBMac\SimpleMediaPlayerMBMac.run.xml
+	EndGlobalSection
 EndGlobal

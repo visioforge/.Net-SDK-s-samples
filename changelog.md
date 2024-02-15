@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.18
+
+* [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source
+
 ## 15.8.17
 
 * .Net 7 support returned to the MAUI package (was removed by CI error).

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MJPEG_Source_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         mc:Ignorable="d"
-        Title="HTTP MJPEG Source Demo - Media Blocks SDK .Net" Height="304" Width="733" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded" Unloaded="Window_Unloaded">
+        Title="HTTP MJPEG Source Demo - Media Blocks SDK .Net" Height="304" Width="733" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
