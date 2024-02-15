@@ -76,8 +76,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.18" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.18" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.19" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.19" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

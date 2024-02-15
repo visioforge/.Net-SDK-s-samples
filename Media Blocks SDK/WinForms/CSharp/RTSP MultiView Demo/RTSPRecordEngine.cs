@@ -16,9 +16,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
     {
         public MediaBlocksPipeline Pipeline { get; private set; }
 
-        private MPEGTSSinkBlock _tsMuxer;
-
-        private MP4SinkBlock _mp4Muxer;
+        private MediaBlock _muxer;
 
         private RTSPRAWSourceBlock _rtspRawSource;
 
@@ -49,26 +47,23 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _rtspRawSource = new RTSPRAWSourceBlock(rtspSettings);
 
-            MediaBlockPad inputVideoPad;
-            MediaBlockPad inputAudioPad;
-
             if (MP4)
             {
-                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(Filename));
-                inputVideoPad = _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video);
-                inputAudioPad = _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio);
+                _muxer = new MP4SinkBlock(new MP4SinkSettings(Filename));
             }
             else
             {
-                _tsMuxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(Filename));
-                inputVideoPad = _tsMuxer.CreateNewInput(MediaBlockPadMediaType.Video);
-                inputAudioPad = _tsMuxer.CreateNewInput(MediaBlockPadMediaType.Audio);
+                _muxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(Filename));
             }
+
+            var inputVideoPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
 
             Pipeline.Connect(_rtspRawSource.VideoOutput, inputVideoPad);
 
             if (rtspSettings.AudioEnabled)
             {
+               var inputAudioPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio);
+
                 if (ReencodeAudio)
                 {
                     _decodeBin = new DecodeBinBlock(false, true, false)
@@ -115,11 +110,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     Pipeline = null;
                 }
 
-                _mp4Muxer?.Dispose();
-                _mp4Muxer = null;
+                (_muxer as IDisposable)?.Dispose();
+                _muxer = null;
 
-                _tsMuxer?.Dispose();
-                _tsMuxer = null;
 
                 _rtspRawSource?.Dispose();
                 _rtspRawSource = null;

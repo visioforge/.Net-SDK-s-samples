@@ -206,8 +206,12 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 edLogin.Text = _playEngines[id].Login;
                 edPassword.Text = _playEngines[id].Password;
                 cbAudioEnabled.Checked = _playEngines[id].AudioEnabled;
-                edFilename.Text = _recordEngines[id].Filename;
-                cbReencodeAudio.Checked = _recordEngines[id].ReencodeAudio;
+
+                if (_recordEngines[id] != null)
+                {
+                    edFilename.Text = _recordEngines[id].Filename;
+                    cbReencodeAudio.Checked = _recordEngines[id].ReencodeAudio;
+                }
             }
             else
             {
