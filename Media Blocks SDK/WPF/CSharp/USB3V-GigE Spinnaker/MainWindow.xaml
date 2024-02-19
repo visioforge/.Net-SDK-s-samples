@@ -1,0 +1,38 @@
+﻿<Window x:Class="USB3V_GigE_Spinnaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:USB3V_GigE_Spinnaker"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="USB3V-GigE Spinnaker Source Demo - Media Blocks SDK .Net" Height="304" Width="733" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Width="250" Margin="0,10,0,0">
+            <Label Margin="10,0,0,0">Camera name</Label>
+            <ComboBox x:Name="cbCamera" HorizontalAlignment="Stretch" Margin="10,0,10,0" Text="Aravis-Fake-GV01" />
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,15,10,0">
+                <TextBlock Text="Width" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" />
+                <TextBox Text="640" x:Name="edWidth" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBlock Text="Height" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Text="480" x:Name="edHeight" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBlock Text="Frame rate" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+                <TextBox Text="10" x:Name="edFrameRate" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" />
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10,15,10,0">
+                <Button x:Name="btStart" Content="Start" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStart_Click" />
+                <Button x:Name="btStop" Content="Stop" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStop_Click" />
+                <TextBlock x:Name="lbTimestamp" Text="00:00:00" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+
+        <wpf:VideoView Grid.Column="1" Margin="10,10,0,0" Width="420" Height="240" Name="VideoView1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" />
+    </Grid>
+</Window>

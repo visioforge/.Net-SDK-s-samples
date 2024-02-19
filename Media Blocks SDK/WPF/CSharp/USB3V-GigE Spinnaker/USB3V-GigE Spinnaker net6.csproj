@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>USB3V_GigE_Spinnaker</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <Page Remove="Properties\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.20" />
+    <PackageReference Include="VisioForge.Plugins.Spinnaker" Version="15.8.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.20" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Spinnaker.Windows.x64" Version="15.8.20" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>
