@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.20
+
+* [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK
+
 ## 15.8.18
 
 * [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source

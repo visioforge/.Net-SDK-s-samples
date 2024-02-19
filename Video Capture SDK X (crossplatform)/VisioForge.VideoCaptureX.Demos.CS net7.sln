@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overlay Manager Demo X net7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer Demo net7", "WPF\CSharp\NDI Streamer Demo\NDI Streamer Demo net7.csproj", "{41107665-8B13-4413-93C0-E034968817C1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USB3V-GigE Spinnaker net7", "WPF\CSharp\USB3V-GigE Spinnaker\USB3V-GigE Spinnaker net7.csproj", "{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{41107665-8B13-4413-93C0-E034968817C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41107665-8B13-4413-93C0-E034968817C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41107665-8B13-4413-93C0-E034968817C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{B342D1E9-7CF3-4EBF-9495-1A8C93BEA0AA} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{0F68A6CE-689D-478B-B8D5-6AA3E5B79118} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{41107665-8B13-4413-93C0-E034968817C1} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{AACDCD05-C9DC-4B31-88C6-D6C8BA4A7A7E} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
