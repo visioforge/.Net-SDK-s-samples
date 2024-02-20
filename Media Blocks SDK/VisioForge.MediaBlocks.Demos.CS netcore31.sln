@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTTP MJPEG Source Demo netc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USB3V-GigE Spinnaker netcore31", "WPF\CSharp\USB3V-GigE Spinnaker\USB3V-GigE Spinnaker netcore31.csproj", "{38574086-7DAE-49DF-9327-09D78B02D33E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenICam Source Demo netcore31", "WPF\CSharp\GenICam Source Demo\GenICam Source Demo netcore31.csproj", "{C53F1F95-A799-4060-AC46-336E95B69C4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,10 @@ Global
 		{38574086-7DAE-49DF-9327-09D78B02D33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38574086-7DAE-49DF-9327-09D78B02D33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38574086-7DAE-49DF-9327-09D78B02D33E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53F1F95-A799-4060-AC46-336E95B69C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53F1F95-A799-4060-AC46-336E95B69C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53F1F95-A799-4060-AC46-336E95B69C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53F1F95-A799-4060-AC46-336E95B69C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +171,7 @@ Global
 		{80AC544C-310C-4EA2-BA49-CEE632768DED} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{1CE9ADAD-230C-4AA0-9ECA-07A365605ED4} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{38574086-7DAE-49DF-9327-09D78B02D33E} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{C53F1F95-A799-4060-AC46-336E95B69C4C} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

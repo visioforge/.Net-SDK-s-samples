@@ -67,6 +67,8 @@ namespace SimpleCapture
             this.BindingContext = this;
 
             _tmPosition.Elapsed += tmPosition_Elapsed;
+
+            VisioForgeX.InitSDK();
         }
 
         private void MainPage_Unloaded(object sender, EventArgs e)

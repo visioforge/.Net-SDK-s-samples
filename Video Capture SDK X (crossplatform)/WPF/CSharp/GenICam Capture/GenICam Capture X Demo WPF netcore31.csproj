@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GenICam_Capture</RootNamespace>
+    <AssemblyName>Video Capture SDK - WPF GenICam Capture Demo</AssemblyName>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <AssemblyTitle>IP Capture Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>IP Capture Demo</Product>
+    <Copyright>Copyright (c) 2006-2024</Copyright>
+    <AssemblyVersion>15.8.21.0</AssemblyVersion>
+    <FileVersion>15.8.21.0</FileVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.12.0.78982">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.22" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.22" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="15.8.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>
