@@ -52,10 +52,10 @@
     <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.22" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.22" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.22" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.22" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.23" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

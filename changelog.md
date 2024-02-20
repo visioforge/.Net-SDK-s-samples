@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.23
+
+* [Media Blocks SDK .Net] Added RTSP MultiView in Sync Demo
+
 ## 15.8.20
 
 * [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK

@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USB3V-GigE Spinnaker net5",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenICam Source Demo net5", "WPF\CSharp\GenICam Source Demo\GenICam Source Demo net5.csproj", "{ECFF4960-1469-4CA7-91CA-844C175F2356}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP MultiViewSync Demo net5", "WPF\CSharp\RTSP MultiViewSync Demo\RTSP MultiViewSync Demo net5.csproj", "{12923092-37F7-4CDD-9C23-C01D1CFA7F06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{ECFF4960-1469-4CA7-91CA-844C175F2356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECFF4960-1469-4CA7-91CA-844C175F2356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECFF4960-1469-4CA7-91CA-844C175F2356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12923092-37F7-4CDD-9C23-C01D1CFA7F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12923092-37F7-4CDD-9C23-C01D1CFA7F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12923092-37F7-4CDD-9C23-C01D1CFA7F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12923092-37F7-4CDD-9C23-C01D1CFA7F06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +178,7 @@ Global
 		{FD794A39-AD42-4C51-9ED5-373926D0F893} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{37C077FC-4CA2-4FDE-B3A7-537B10B76DE1} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{ECFF4960-1469-4CA7-91CA-844C175F2356} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
+		{12923092-37F7-4CDD-9C23-C01D1CFA7F06} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

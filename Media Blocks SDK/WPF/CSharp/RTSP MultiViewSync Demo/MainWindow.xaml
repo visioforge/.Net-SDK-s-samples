@@ -1,0 +1,71 @@
+﻿<Window x:Class="RTSP_MultiViewSync_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RTSP_MultiViewSync_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - RTSP MultiView in Sync Demo" Height="589" Width="1069" Closing="Window_Closing" Icon="visioforge_main_icon.ico" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" Width="200" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Camera 1" HorizontalAlignment="Left" />
+                <TextBox x:Name="edURL1" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="User name" Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edUserName1" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Password"  Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edPassword1" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <Label Content="Camera 2" HorizontalAlignment="Left" />
+                <TextBox x:Name="edURL2" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="User name" Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edUserName2" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Password"  Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edPassword2" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <Label Content="Camera 3" HorizontalAlignment="Left" />
+                <TextBox x:Name="edURL3" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="User name" Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edUserName3" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Password"  Width="70" HorizontalAlignment="Left" />
+                    <TextBox x:Name="edPassword3" HorizontalAlignment="Left" Width="130" Margin="0,5,0,5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Width="50" Margin="0,10,0,0" Click="btStart_Click" />
+                <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Width="50" Margin="10,10,0,0" Click="btStop_Click" />
+            </StackPanel>
+        </StackPanel>
+
+        <wpf:VideoView x:Name="videoView1" Grid.Column="1" Background="Black" Width="400" Height="260" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" />
+        <wpf:VideoView x:Name="videoView2" Grid.Column="1" Background="Black" Width="400" Height="260" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="420,10,0,0" />
+        <wpf:VideoView x:Name="videoView3" Grid.Column="1" Background="Black" Width="400" Height="260" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,280,0,0" />
+    </Grid>
+</Window>
