@@ -16,7 +16,7 @@ namespace RTSP_Client
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        private string TEST_URL = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+        private string TEST_URL = "rtsp://";
 
         private VisioForge.Core.UI.Android.VideoView videoView;
 
@@ -123,7 +123,7 @@ namespace RTSP_Client
             edLogin.Text = "admin";
 
             edPassword = FindViewById<EditText>(RTSP_Client.Resource.Id.edPassword);
-            edPassword.Text = "dancer23";
+            edPassword.Text = "";
         }
 
         private async void btStop_Click(object sender, EventArgs e)
@@ -194,7 +194,7 @@ namespace RTSP_Client
 
             var rtspSource = new RTSPSourceSettings(new System.Uri(edURL.Text), true);
             rtspSource.Login = "admin";
-            rtspSource.Password = "dancer23";
+            rtspSource.Password = "";
 
             _source = new RTSPSourceBlock(rtspSource);
 

@@ -35,7 +35,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+            edURL.Text = "rtsp://";
             edFilename.Text = @"c:\vf\outputxx.ts";
 
             // HW decoders

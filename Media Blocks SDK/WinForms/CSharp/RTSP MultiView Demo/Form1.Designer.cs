@@ -86,7 +86,7 @@
             edURL.Name = "edURL";
             edURL.Size = new System.Drawing.Size(366, 27);
             edURL.TabIndex = 9;
-            edURL.Text = "rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
+            edURL.Text = "rtsp://";
             // 
             // edLogin
             // 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.24
+
+* [Windows] Fixed hang problem with the FFMPEG source when network connection is lost
+
 ## 15.8.23
 
 * [Media Blocks SDK .Net] Added RTSP MultiView in Sync Demo
