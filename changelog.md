@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.8.25
+
+* [Video Capture SDK .Net] VideoCaptureCore: Added the FFMPEG_CustomOptions property to the IPCameraSourceSettings class. This property allows you to set custom FFMPEG options for the IP camera source
+
 ## 15.8.24
 
-* [Windows] Fixed hang problem with the FFMPEG source when network connection is lost
+* [Windows] Fixed the hang problem with the FFMPEG source when a network connection is lost
 
 ## 15.8.23
 
