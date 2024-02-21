@@ -412,6 +412,7 @@ public sealed partial class MainWindow : Window
         // apply capture params
         VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.SelectedValue.ToString());
         VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.SelectedValue.ToString();
+        VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
 
         VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.SelectedValue.ToString());
         VideoCapture1.Audio_CaptureDevice.Format = cbAudioInputFormat.SelectedValue.ToString();
