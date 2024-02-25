@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.8.26
+
+* [Media Player SDK .Net] MediaPlayerCore: Added support for data streams in video files using the FFMPEG source engine. Add the OnDataFrameBuffer event to get data frames (KLV or other) from the video file.
+* [Video Capture SDK .Net] VideoCaptureCore: Added support for data streams in video files using the IP Capture FFMPEG source engine. Add the OnDataFrameBuffer event to get data frames (KLV or other) from the MPEG-TS UDP network stream or other supported source.
+
 ## 15.8.25
 
 * [Video Capture SDK .Net] VideoCaptureCore: Added the FFMPEG_CustomOptions property to the IPCameraSourceSettings class. This property allows you to set custom FFMPEG options for the IP camera source
