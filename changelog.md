@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.29
+
+* [X-engines] Resolved memory leak issue for RTSP sources
+
 ## 15.8.26
 
 * [Media Player SDK .Net] MediaPlayerCore: Added support for data streams in video files using the FFMPEG source engine. Add the OnDataFrameBuffer event to get data frames (KLV or other) from the video file.

@@ -60,9 +60,7 @@ namespace RTSPViewCV
             string username = args[1];
             string password = args[2];
 
-            var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
-            rtspSettings.Login = username;
-            rtspSettings.Password = password;
+            var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
 
             _source = new RTSPSourceBlock(rtspSettings);
             //_source = new FileSourceBlock(@"c:\samples\!video.avi");

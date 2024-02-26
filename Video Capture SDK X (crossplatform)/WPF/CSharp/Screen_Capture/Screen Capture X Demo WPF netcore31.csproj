@@ -13,12 +13,12 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.28" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.28" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.29" />
   </ItemGroup>
 </Project>

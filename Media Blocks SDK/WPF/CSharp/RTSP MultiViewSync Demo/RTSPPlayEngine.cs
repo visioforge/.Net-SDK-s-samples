@@ -42,6 +42,13 @@ namespace RTSP_MultiViewSync_Demo
 
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += _pipeline_OnError;
+            _pipeline.OnStop += async (sender, args) =>
+            {
+                if (_pipeline != null)
+                {
+                    await _pipeline.DisposeAsync();
+                }
+            };
 
             _source = new RTSPSourceBlock(rtspSettings);
 

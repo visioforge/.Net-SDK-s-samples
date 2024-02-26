@@ -217,10 +217,7 @@ namespace IP_Capture
                 case 1:
                     {
                         // RTSP
-                        var rtsp = new RTSPSourceSettings(new Uri(cbIPURL.Text), cbIPAudioCapture.IsChecked == true);
-                        rtsp.Login = edIPLogin.Text;
-                        rtsp.Password = edIPPassword.Text;
-
+                        var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true);
                         VideoCapture1.Video_Source = rtsp;
                     }
 

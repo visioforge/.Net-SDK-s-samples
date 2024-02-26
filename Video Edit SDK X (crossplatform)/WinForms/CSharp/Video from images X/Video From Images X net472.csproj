@@ -67,13 +67,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.8.28" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.28" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.8.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.29" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.7.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.7.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.8.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

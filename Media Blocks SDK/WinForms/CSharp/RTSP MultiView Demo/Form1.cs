@@ -110,14 +110,11 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
             else
             {
-                var rtspSettings = new RTSPSourceSettings(new Uri(edURL.Text), cbAudioEnabled.Checked)
-                {
-                    Login = edLogin.Text,
-                    Password = edPassword.Text,
-                    UseGPUDecoder = cbUseGPU.Checked,
-                    CompatibilityMode = cbCompatibilityMode.Checked,
-                    EnableRAWVideoAudioEvents = cbRAWEvents.Checked
-                };
+                var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioEnabled.Checked);
+
+                rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
+                rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
+                rtspSettings.EnableRAWVideoAudioEvents = cbRAWEvents.Checked;
 
                 if (cbGPUDecoder.SelectedIndex > 0)
                 {

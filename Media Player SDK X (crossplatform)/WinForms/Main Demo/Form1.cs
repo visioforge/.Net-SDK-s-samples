@@ -366,14 +366,10 @@ namespace Main_Demo
             string source = edFilenameOrURL.Text;
             if (source.Contains("rtsp://"))
             {
-                var rtspSource = new RTSPSourceSettings(new Uri(source), true)
-                {
-                    Login = edRTSPUserName.Text,
-                    Password = edRTSPPassword.Text,
-                    Latency = tbRTSPLatency.Value,
-                    RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024,
-                    UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024
-                };
+                var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
+                rtspSource.Latency = tbRTSPLatency.Value;
+                rtspSource.RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024;
+                rtspSource.UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024;
 
                 switch (cbRTSPProtocol.SelectedIndex)
                 {

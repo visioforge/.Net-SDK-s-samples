@@ -32,23 +32,14 @@ namespace RTSP_MultiViewSync_Demo
         {
             await DestroyAllAsync();
 
-            _engines[0] = new RTSPPlayEngine(new RTSPSourceSettings(new Uri(edURL1.Text), false)
-            {
-                Login = edUserName1.Text,
-                Password = edPassword1.Text
-            }, videoView1);
+            var settings1 = await RTSPSourceSettings.CreateAsync(new Uri(edURL1.Text), edUserName1.Text, edPassword1.Text, false);
+            _engines[0] = new RTSPPlayEngine(settings1, videoView1);
 
-            _engines[1] = new RTSPPlayEngine(new RTSPSourceSettings(new Uri(edURL2.Text), false)
-            {
-                Login = edUserName2.Text,
-                Password = edPassword2.Text
-            }, videoView2);
+            var settings2 = await RTSPSourceSettings.CreateAsync(new Uri(edURL2.Text), edUserName2.Text, edPassword2.Text, false);
+            _engines[1] = new RTSPPlayEngine(settings2, videoView2);
 
-            _engines[2] = new RTSPPlayEngine(new RTSPSourceSettings(new Uri(edURL3.Text), false)
-            {
-                Login = edUserName3.Text,
-                Password = edPassword3.Text
-            }, videoView3);
+            var settings3 = await RTSPSourceSettings.CreateAsync(new Uri(edURL3.Text), edUserName3.Text, edPassword3.Text, false);
+            _engines[2] = new RTSPPlayEngine(settings3, videoView3);
 
             await _engines[0].PreloadAsync();
             await _engines[1].PreloadAsync();

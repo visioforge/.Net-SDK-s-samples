@@ -1,5 +1,6 @@
 ﻿using System;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.X.Sources;
@@ -21,11 +22,7 @@ namespace RTSPView
 
             VideoRendererBlock _videoRenderer;
 
-            bool audioEnabled = false;
-
-            // Uncomment for audio
-            // AudioRendererBlock _audioRenderer;
-            // audioEnabled = true;
+            bool audioEnabled = true;
 
             RTSPSourceBlock _source;
 
@@ -36,9 +33,8 @@ namespace RTSPView
             string username = args[1];
             string password = args[2];
 
-            var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);
-            rtspSettings.Login = username;
-            rtspSettings.Password = password;
+            var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
+            audioEnabled = rtspSettings.GetInfo().AudioStreams.Count > 0;
 
             _source = new RTSPSourceBlock(rtspSettings);
 
@@ -46,11 +42,11 @@ namespace RTSPView
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 
-            //if (rtspSettings.AudioEnabled)
-            //{
-            //    _audioRenderer = new AudioRendererBlock();
-            //    _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
-            //}
+            if (audioEnabled)
+            {
+                var audioRenderer = new AudioRendererBlock();
+                _pipeline.Connect(_source.AudioOutput, audioRenderer.Input);
+            }
 
             _pipeline.Start();
 
