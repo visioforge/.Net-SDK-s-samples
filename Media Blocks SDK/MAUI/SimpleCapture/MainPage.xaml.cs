@@ -81,7 +81,7 @@ namespace SimpleCapture
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-#if __ANDROID__ || __MACOS__ || __MACCATALYST__
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
             await RequestCameraPermissionAsync();
             await RequestMicPermissionAsync();
 #endif
