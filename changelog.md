@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.31
+
+* [X-engines] iOS support in MAUI samples
+
 ## 15.8.29
 
 * [X-engines] Resolved memory leak issue for RTSP sources

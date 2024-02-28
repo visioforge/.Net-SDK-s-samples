@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <ExternalConsole>true</ExternalConsole>
     <EnvironmentVariables>
       <Variable name="DYLD_PRINT_LIBRARIES" value="0" xmlns="" />
       <Variable name="DYLD_LIBRARY_PATH" value="/usr/local/lib/:/usr/local/lib/gio/modules/:/opt/homebrew/lib/:/opt/homebrew/lib/gio/modules/:$DYLD_LIBRARY_PATH" xmlns="" />
@@ -8,15 +9,30 @@
   </PropertyGroup>
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
-    <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Samsung SM-P610 (Android 13.0 - API 33)</ActiveDebugProfile>
-    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
-    <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
+    <ActiveDebugFramework>net8.0-ios</ActiveDebugFramework>
+    <ActiveDebugProfile>iPad Roma (2)</ActiveDebugProfile>
+    <SelectedPlatformGroup>RemoteDevice</SelectedPlatformGroup>
+    <TargetiOSDevice>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+	&lt;key&gt;device&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;architecture&lt;/key&gt;
+		&lt;string&gt;ARMv6, ARMv7, ARMv7s, ARM64&lt;/string&gt;
+		&lt;key&gt;model&lt;/key&gt;
+		&lt;string&gt;iPad13,4&lt;/string&gt;
+		&lt;key&gt;os-version&lt;/key&gt;
+		&lt;string&gt;17.3.1&lt;/string&gt;
+		&lt;key&gt;os&lt;/key&gt;
+		&lt;string&gt;iOS&lt;/string&gt;
+	&lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</TargetiOSDevice>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
-    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
-    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  <PropertyGroup Condition="'$(TargetPlatformIdentifier)'=='iOS'">
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+    <PlatformTarget>arm64</PlatformTarget>
   </PropertyGroup>
 </Project>

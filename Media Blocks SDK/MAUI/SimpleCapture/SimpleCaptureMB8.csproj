@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-android</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net8.0-maccatalyst</TargetFrameworks>
+    <!-- <TargetFrameworks>$(TargetFrameworks);net8.0-maccatalyst</TargetFrameworks>-->
+    <TargetFrameworks>$(TargetFrameworks);net8.0-ios</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net8.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
     <OutputType>Exe</OutputType>
     <RootNamespace>SimpleCapture</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -28,10 +31,10 @@
     <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</PublishTrimmed>
     <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</PublishTrimmed>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' AND $(TargetFramework.Contains('-maccatalyst'))">
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
     <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64' AND $(TargetFramework.Contains('-maccatalyst'))">
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">
     <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
@@ -39,6 +42,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
     <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+    <ProvisioningType>manual</ProvisioningType>
+    <CodesignKey>Apple Development: Roman Miniailov (X3794432B8)</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -59,12 +72,15 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
+    <ProjectReference Include="..\..\..\..\..\_SETUP\FILES\Demos\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.5.1" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="1.23.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Splash\splash.svg" />
@@ -76,8 +92,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.30" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.30" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.MAUI\VisioForge.Core.UI.MAUI.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Libs\VisioForge.Libs.csproj" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

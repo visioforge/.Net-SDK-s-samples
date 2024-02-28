@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>
+    <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>-->
+    <TargetFrameworks>$(TargetFrameworks);net7.0-ios</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);net7.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>SimpleCapture</RootNamespace>
@@ -59,12 +60,16 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
+    <ProjectReference Include="..\..\..\..\..\_SETUP\FILES\Demos\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.5.1" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="1.23.0" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.Apple\VisioForge.Core.UI.Apple.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Splash\splash.svg" />
@@ -76,8 +81,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.8.30" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.8.30" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.MAUI\VisioForge.Core.UI.MAUI.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Libs\VisioForge.Libs.csproj" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

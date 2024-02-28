@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+
 using VisioForge.Core;
 
 using VisioForge.Core.MediaBlocks.VideoEncoders;
@@ -49,20 +50,31 @@ namespace SimpleCapture
             VisioForgeX.DestroySDK();
         }
 
+#if __IOS__ && !__MACCATALYST__
+        private void RequestPhotoPermission()
+        {
+            Photos.PHPhotoLibrary.RequestAuthorization(status =>
+            {
+                if (status == Photos.PHAuthorizationStatus.Authorized)
+                {
+                    Debug.WriteLine("Photo library access granted.");
+                }
+            });
+        }
+#endif
+
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-#if __ANDROID__ || __MACOS__ || __MACCATALYST__
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
             await RequestCameraPermissionAsync();
             await RequestMicPermissionAsync();
 #endif
 
-//#if __ANDROID__
-//            var handler = (VisioForge.Core.UI.MAUI.VideoViewXHandler)videoView.Handler;
-//            _core = new VideoCaptureCoreX(handler.VideoView);
-//#else
-            _core = new VideoCaptureCoreX(videoView);
-//#endif
+#if __IOS__ && !__MACCATALYST__
+            RequestPhotoPermission();
+#endif
 
+            _core = new VideoCaptureCoreX(videoView);
             _core.OnError += Core_OnError;       
 
             // cameras
@@ -170,8 +182,58 @@ namespace SimpleCapture
             }
         }
 
+#if __IOS__ && !__MACCATALYST__
+        private void AddVideoToPhotosLibrary(string filePath)
+        {
+            var fileUrl = Foundation.NSUrl.FromFilename(filePath);
+
+            Photos.PHPhotoLibrary.RequestAuthorization(status =>
+            {
+                if (status == Photos.PHAuthorizationStatus.Authorized)
+                {
+                    Photos.PHPhotoLibrary.SharedPhotoLibrary.PerformChanges(() =>
+                    {
+                        // This line differs from the previous example
+                        Photos.PHAssetChangeRequest.FromVideo(fileUrl);
+                    }, (success, error) =>
+                    {
+                        if (success)
+                        {
+                            Console.WriteLine("Video saved to Photos library.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error saving video: {error?.LocalizedDescription}");
+                        }
+                    });
+                }
+            });
+        }
+#endif
+
+        private async Task StopCaptureAsync()
+        {
+            System.Diagnostics.Debug.WriteLine("Stop capture");
+            await _core.StopCaptureAsync(0);
+            btStartCapture.BackgroundColor = _defaultButtonColor;
+            btStartCapture.Text = "CAPTURE";
+
+            // save video to iOS photo library
+#if __IOS__ && !__MACCATALYST__
+            string filename = null;
+            var output = _core.Outputs_Get(0);
+            filename = output.GetFilename();
+            AddVideoToPhotosLibrary(filename);            
+#endif
+        }
+
         private async void btStop_Clicked(object sender, EventArgs e)
         {
+            if (_core.IsCaptureStarted(0))
+            {
+                await StopCaptureAsync();
+            }
+
             await StopAllAsync();
 
             btStartPreview.Text = "PREVIEW";
@@ -361,11 +423,8 @@ namespace SimpleCapture
                 btStartCapture.Text = "STOP";
             }
             else
-            {                
-                System.Diagnostics.Debug.WriteLine("Stop capture");
-                await _core.StopCaptureAsync(0);
-                btStartCapture.BackgroundColor = _defaultButtonColor;
-                btStartCapture.Text = "CAPTURE";
+            {
+                await StopCaptureAsync();
             }
         }
     }

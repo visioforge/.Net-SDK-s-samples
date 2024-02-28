@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -52,11 +53,6 @@ namespace SimpleCapture
 
         private int _speakerSelectedIndex = 0;
 
-        /// <summary>
-        /// The position timer.
-        /// </summary>
-        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
-
         public MainPage()
         {
             InitializeComponent();
@@ -65,8 +61,6 @@ namespace SimpleCapture
             Unloaded += MainPage_Unloaded;
 
             this.BindingContext = this;
-
-            _tmPosition.Elapsed += tmPosition_Elapsed;
 
             VisioForgeX.InitSDK();
         }
@@ -79,6 +73,14 @@ namespace SimpleCapture
             VisioForgeX.DestroySDK();
         }
 
+        private void CreateEngine()
+        {
+            _pipeline = new MediaBlocksPipeline(live: true);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+
+            _pipeline.OnError += Core_OnError;
+        }
+
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
@@ -86,10 +88,9 @@ namespace SimpleCapture
             await RequestMicPermissionAsync();
 #endif
 
-            _pipeline = new MediaBlocksPipeline(live: true);
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
-
-            _pipeline.OnError += Core_OnError;       
+#if __IOS__ && !__MACCATALYST__
+            RequestPhotoPermission();
+#endif
 
             // cameras
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
@@ -151,6 +152,19 @@ namespace SimpleCapture
             }
         }
 
+#if __IOS__ && !__MACCATALYST__
+        private void RequestPhotoPermission()
+        {
+            Photos.PHPhotoLibrary.RequestAuthorization(status =>
+            {
+                if (status == Photos.PHAuthorizationStatus.Authorized)
+                {
+                    Debug.WriteLine("Photo library access granted.");
+                }
+            });
+        }
+#endif
+
         private async void Window_Destroying(object sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -177,60 +191,39 @@ namespace SimpleCapture
                 return;
             }
 
-            _tmPosition.Stop();
-
             if (_pipeline != null)
             {
                 await _pipeline.StopAsync();
-            }
-        }
-
-        /// <summary>
-        /// Handles the Elapsed event of the tmPosition control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            if (_pipeline == null)
-            {
-                return;
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
             }
 
-            //var pos = await _core.Position_GetAsync();
-            //var progress = (int)pos.TotalMilliseconds;
+            _h264Encoder?.Dispose();
+            _h264Encoder = null;
 
-            //try
-            //{
-            //    MainThread.BeginInvokeOnMainThread(() =>
-            //    {
-            //        if (_player == null)
-            //        {
-            //            return;
-            //        }
+            _mp4Sink?.Dispose();
+            _mp4Sink = null;
 
-            //        _isTimerUpdate = true;
+            _videoSource?.Dispose();
+            _videoSource = null;
 
-            //        if (progress > slSeeking.Maximum)
-            //        {
-            //            slSeeking.Value = slSeeking.Maximum;
-            //        }
-            //        else
-            //        {
-            //            slSeeking.Value = progress;
-            //        }
+            _audioSource?.Dispose();
+            _audioSource = null;
 
-            //        // This is where the received data is passed
-            //        lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-            //        lbDuration.Text = $"{_player.Duration().ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+            _videoTee?.Dispose();
+            _videoTee = null;
 
-            //        _isTimerUpdate = false;
-            //    });
-            //}
-            //catch (Exception exception)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(exception);
-            //}
+            _audioTee?.Dispose();
+            _audioTee = null;
+
+            _mp3Encoder?.Dispose();
+            _mp3Encoder = null;
+
+            _videoRenderer?.Dispose();
+            _videoRenderer = null;
+
+            _audioOutput?.Dispose();
+            _audioOutput = null;
         }
 
         private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -241,9 +234,55 @@ namespace SimpleCapture
             }
         }
 
+#if __IOS__ && !__MACCATALYST__
+        private void AddVideoToPhotosLibrary(string filePath)
+        {
+            var fileUrl = Foundation.NSUrl.FromFilename(filePath);
+
+            Photos.PHPhotoLibrary.RequestAuthorization(status =>
+            {
+                if (status == Photos.PHAuthorizationStatus.Authorized)
+                {
+                    Photos.PHPhotoLibrary.SharedPhotoLibrary.PerformChanges(() =>
+                    {
+                        // This line differs from the previous example
+                        Photos.PHAssetChangeRequest.FromVideo(fileUrl);
+                    }, (success, error) =>
+                    {
+                        if (success)
+                        {
+                            Console.WriteLine("Video saved to Photos library.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error saving video: {error?.LocalizedDescription}");
+                        }
+                    });
+                }
+            });
+        }
+#endif
+
         private async void btStop_Clicked(object sender, EventArgs e)
         {
+#if __IOS__ && !__MACCATALYST__
+            bool capture = _mp4Sink != null;
+            string filename = null;
+            if (capture)
+            {
+                filename = _mp4Sink.GetFilenameOrURL();
+            }            
+#endif
+
             await StopAllAsync();
+
+            // save video to iOS photo library
+#if __IOS__ && !__MACCATALYST__
+            if (capture)
+            {
+                AddVideoToPhotosLibrary(filename);
+            }
+#endif
 
             btStartPreview.Text = "PREVIEW";
             btStartCapture.Text = "CAPTURE";
@@ -383,9 +422,12 @@ namespace SimpleCapture
 
 #if __ANDROID__
             var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __IOS__ && !__MACCATALYST__
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
+
             var sinkSettings = new MP4SinkSettings(filename);
             _mp4Sink = new MP4SinkBlock(sinkSettings);
             
@@ -395,10 +437,9 @@ namespace SimpleCapture
 
         private async void btStartPreview_Clicked(object sender, EventArgs e)
         {
-            if (_pipeline == null)
-            {
-                return;
-            }
+            await StopAllAsync();
+
+            CreateEngine();
 
             switch (_pipeline.State)
             {
@@ -430,8 +471,6 @@ namespace SimpleCapture
                         // start
                         await _pipeline.StartAsync();
 
-                        _tmPosition.Start();
-
                         btStartPreview.Text = "PAUSE";
                     }
 
@@ -443,10 +482,9 @@ namespace SimpleCapture
 
         private async void btStartCapture_Clicked(object sender, EventArgs e)
         {
-            if (_pipeline == null)
-            {
-                return;
-            }
+            await StopAllAsync();
+
+            CreateEngine();
 
             switch (_pipeline.State)
             {
@@ -477,12 +515,8 @@ namespace SimpleCapture
 
                         ConfigureCapture();
 
-                        //Gst.Debug.SetDefaultThreshold(Gst.DebugLevel.Debug);
-
                         // start
-                        await _pipeline.StartAsync();                       
-
-                        _tmPosition.Start();
+                        await _pipeline.StartAsync();      
 
                         btStartCapture.Text = "PAUSE";
                     }
