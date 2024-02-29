@@ -60,10 +60,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.8.31" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.32" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.32" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.8.32" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.8.32" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.32
+
+* [X-engines] Added API to get snapshots from video files using MediaInfoReaderX: GetFileSnapshotBitmap, GetFileSnapshotSKBitmap, GetFileSnapshotRGB
+
 ## 15.8.31
 
 * [X-engines] iOS support in MAUI samples
