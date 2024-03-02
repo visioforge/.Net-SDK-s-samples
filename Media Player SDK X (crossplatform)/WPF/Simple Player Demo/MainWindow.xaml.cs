@@ -85,6 +85,11 @@ namespace Simple_Player_Demo_X
         {
             _timerFlag = true;
 
+            if (_player == null)
+            {
+                return;
+            }
+
             var position = await _player.Position_GetAsync();
             var duration = await _player.DurationAsync();
 
@@ -165,10 +170,6 @@ namespace Simple_Player_Demo_X
             await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
             await _player.PlayAsync();
-
-            // set audio volume for each stream
-            // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
             _timer.Start();
         }

@@ -32,9 +32,14 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         private NullRendererBlock _nullRenderer2;
 
-        private VideoMixerSettings _settings = new VideoMixerSettings();
+        private VideoMixerSettings _settings;
 
         public event EventHandler<ErrorsEventArgs> OnError;
+
+        public CPUMixerEngine()
+        {
+            _settings = new VideoMixerSettings(0, 0, VideoFrameRate.Empty);
+        }
 
         public void AddStream(Rect rect, int zorder)
         {
@@ -46,8 +51,16 @@ namespace MediaBlocks_Video_Mixer_Demo
             _pipeline = new MediaBlocksPipeline(false);
             _pipeline.OnError += _pipeline_OnError;
 
-            _source1 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename1));
-            _source2 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename2)) { Name = "Source2" };
+            var source1Settings = await UniversalSourceSettings.CreateAsync(filename1);
+            _source1 = new UniversalSourceBlock(source1Settings);
+
+            var source2settings = await UniversalSourceSettings.CreateAsync(filename2);
+            _source2 = new UniversalSourceBlock(source2settings) { Name = "Source2" };
+
+            var info = source1Settings.GetInfo().GetVideoInfo();
+            _settings.Width = info.Width;
+            _settings.Height = info.Height;
+            _settings.FrameRate = info.FrameRate;
 
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 

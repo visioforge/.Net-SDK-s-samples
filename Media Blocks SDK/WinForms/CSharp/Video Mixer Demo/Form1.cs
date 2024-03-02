@@ -9,6 +9,7 @@ namespace MediaBlocks_Video_Mixer_Demo
     public partial class Form1 : Form
     {
         private IMixerEngine _engine;
+                
 
         public Form1()
         {
