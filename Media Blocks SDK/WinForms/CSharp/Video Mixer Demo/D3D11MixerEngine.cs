@@ -26,17 +26,17 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         private UniversalSourceBlock _source2;
 
-        private D3D11VideoCompositorBlock _videoMixer;
+        private VideoMixerBlock _videoMixer;
 
         private NullRendererBlock _nullRenderer1;
 
         private NullRendererBlock _nullRenderer2;
 
-        private D3D11VideoCompositorSettings _settings = new D3D11VideoCompositorSettings();
+        private D3D11VideoCompositorSettings _settings = new D3D11VideoCompositorSettings(0, 0, VideoFrameRate.Empty);
 
         public event EventHandler<ErrorsEventArgs> OnError;
 
-        public void AddStream(Rect rect, int zorder)
+        public void AddStream(Rect rect, uint zorder)
         {
             _settings.Streams.Add(new D3D11VideoCompositorStream(rect, zorder));
         }
@@ -44,14 +44,22 @@ namespace MediaBlocks_Video_Mixer_Demo
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
         {
             _pipeline = new MediaBlocksPipeline(false);
-            _pipeline.OnError += _pipeline_OnError; 
+            _pipeline.OnError += _pipeline_OnError;
 
-            _source1 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename1));
-            _source2 = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(filename2)) { Name = "Source2" };
-            
+            var source1Settings = await UniversalSourceSettings.CreateAsync(filename1);
+            _source1 = new UniversalSourceBlock(source1Settings);
+
+            var source2settings = await UniversalSourceSettings.CreateAsync(filename2);
+            _source2 = new UniversalSourceBlock(source2settings) { Name = "Source2" };
+
+            var info = source1Settings.GetInfo().GetVideoInfo();
+            _settings.Width = info.Width;
+            _settings.Height = info.Height;
+            _settings.FrameRate = info.FrameRate;
+
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 
-            _videoMixer = new D3D11VideoCompositorBlock(_settings);
+            _videoMixer = new VideoMixerBlock(_settings);
 
             _pipeline.Connect(_source1.VideoOutput, _videoMixer.Inputs[0]);
             _pipeline.Connect(_source2.VideoOutput, _videoMixer.Inputs[1]);

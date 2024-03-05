@@ -41,9 +41,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             _settings = new VideoMixerSettings(0, 0, VideoFrameRate.Empty);
         }
 
-        public void AddStream(Rect rect, int zorder)
+        public void AddStream(Rect rect, uint zorder)
         {
-            _settings.AddStream(new VideoMixerStream(rect, (uint)zorder));
+            _settings.AddStream(new VideoMixerStream(rect, zorder));
         }
 
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
