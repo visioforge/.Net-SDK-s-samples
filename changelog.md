@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.41
+
+* [Video Capture SDK .Net] VideoCaptureCore: Added camera-covered detector into the `Computer Vision Demo` and the `VisioForge.Core.CV` package
+
 ## 15.8.32
 
 * [X-engines] Added API to get snapshots from video files using MediaInfoReaderX: GetFileSnapshotBitmap, GetFileSnapshotSKBitmap, GetFileSnapshotRGB

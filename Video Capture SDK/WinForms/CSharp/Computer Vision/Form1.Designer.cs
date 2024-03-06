@@ -41,7 +41,6 @@ namespace Computer_Vision_Demo
             rbVideoFile = new System.Windows.Forms.RadioButton();
             edIPLogin = new System.Windows.Forms.TextBox();
             cbIPCameraONVIF = new System.Windows.Forms.CheckBox();
-            btShowIPCamDatabase = new System.Windows.Forms.Button();
             cbIPCameraType = new System.Windows.Forms.ComboBox();
             edIPPassword = new System.Windows.Forms.TextBox();
             label167 = new System.Windows.Forms.Label();
@@ -110,8 +109,17 @@ namespace Computer_Vision_Demo
             tbPDDownscale = new System.Windows.Forms.TrackBar();
             cbPDDraw = new System.Windows.Forms.CheckBox();
             cbPDEnabled = new System.Windows.Forms.CheckBox();
-            tabPage6 = new System.Windows.Forms.TabPage();
-            cbObjectDetector = new System.Windows.Forms.CheckBox();
+            tabPage7 = new System.Windows.Forms.TabPage();
+            btCCDUpdate = new System.Windows.Forms.Button();
+            lbCCDThreshold = new System.Windows.Forms.Label();
+            label26 = new System.Windows.Forms.Label();
+            tbCCDThreshold = new System.Windows.Forms.TrackBar();
+            lbCCDSkipFrames = new System.Windows.Forms.Label();
+            label24 = new System.Windows.Forms.Label();
+            tbCCDSkipFrames = new System.Windows.Forms.TrackBar();
+            label22 = new System.Windows.Forms.Label();
+            edCCDResults = new System.Windows.Forms.TextBox();
+            cbCameraCovered = new System.Windows.Forms.CheckBox();
             tabPage3 = new System.Windows.Forms.TabPage();
             cbDebugMode = new System.Windows.Forms.CheckBox();
             mmLog = new System.Windows.Forms.TextBox();
@@ -129,15 +137,17 @@ namespace Computer_Vision_Demo
             tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tbPDSkipFrames).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tbPDDownscale).BeginInit();
-            tabPage6.SuspendLayout();
+            tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbCCDThreshold).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbCCDSkipFrames).BeginInit();
             tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // btStop
             // 
             btStop.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btStop.Location = new System.Drawing.Point(1477, 706);
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            btStop.Location = new System.Drawing.Point(1477, 555);
             btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStop.Name = "btStop";
             btStop.Size = new System.Drawing.Size(103, 44);
@@ -149,8 +159,8 @@ namespace Computer_Vision_Demo
             // btStart
             // 
             btStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            btStart.Location = new System.Drawing.Point(1369, 706);
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            btStart.Location = new System.Drawing.Point(1369, 555);
             btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStart.Name = "btStart";
             btStart.Size = new System.Drawing.Size(103, 44);
@@ -166,13 +176,13 @@ namespace Computer_Vision_Demo
             tcMain.Controls.Add(tabPage2);
             tcMain.Controls.Add(tabPage4);
             tcMain.Controls.Add(tabPage5);
-            tcMain.Controls.Add(tabPage6);
+            tcMain.Controls.Add(tabPage7);
             tcMain.Controls.Add(tabPage3);
-            tcMain.Location = new System.Drawing.Point(20, 22);
+            tcMain.Location = new System.Drawing.Point(22, 22);
             tcMain.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new System.Drawing.Size(767, 1265);
+            tcMain.Size = new System.Drawing.Size(767, 1094);
             tcMain.TabIndex = 83;
             // 
             // tabPage1
@@ -183,7 +193,6 @@ namespace Computer_Vision_Demo
             tabPage1.Controls.Add(rbVideoFile);
             tabPage1.Controls.Add(edIPLogin);
             tabPage1.Controls.Add(cbIPCameraONVIF);
-            tabPage1.Controls.Add(btShowIPCamDatabase);
             tabPage1.Controls.Add(cbIPCameraType);
             tabPage1.Controls.Add(edIPPassword);
             tabPage1.Controls.Add(label167);
@@ -205,7 +214,7 @@ namespace Computer_Vision_Demo
             tabPage1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            tabPage1.Size = new System.Drawing.Size(759, 1227);
+            tabPage1.Size = new System.Drawing.Size(759, 1056);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Source";
             tabPage1.UseVisualStyleBackColor = true;
@@ -237,9 +246,9 @@ namespace Computer_Vision_Demo
             label9.Location = new System.Drawing.Point(144, 765);
             label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(432, 25);
+            label9.Size = new System.Drawing.Size(454, 25);
             label9.TabIndex = 142;
-            label9.Text = " (using Media Player SDK instead Video Capture SDK)";
+            label9.Text = " (using Media Player SDK instead of Video Capture SDK)";
             // 
             // rbVideoFile
             // 
@@ -270,16 +279,6 @@ namespace Computer_Vision_Demo
             cbIPCameraONVIF.TabIndex = 139;
             cbIPCameraONVIF.Text = "ONVIF camera";
             cbIPCameraONVIF.UseVisualStyleBackColor = true;
-            // 
-            // btShowIPCamDatabase
-            // 
-            btShowIPCamDatabase.Location = new System.Drawing.Point(509, 585);
-            btShowIPCamDatabase.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            btShowIPCamDatabase.Name = "btShowIPCamDatabase";
-            btShowIPCamDatabase.Size = new System.Drawing.Size(218, 44);
-            btShowIPCamDatabase.TabIndex = 138;
-            btShowIPCamDatabase.Text = "Show IP cam database";
-            btShowIPCamDatabase.UseVisualStyleBackColor = true;
             // 
             // cbIPCameraType
             // 
@@ -376,7 +375,7 @@ namespace Computer_Vision_Demo
             // label28
             // 
             label28.AutoSize = true;
-            label28.Location = new System.Drawing.Point(547, 285);
+            label28.Location = new System.Drawing.Point(547, 258);
             label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label28.Name = "label28";
             label28.Size = new System.Drawing.Size(37, 25);
@@ -386,7 +385,7 @@ namespace Computer_Vision_Demo
             // cbUseBestVideoInputFormat
             // 
             cbUseBestVideoInputFormat.AutoSize = true;
-            cbUseBestVideoInputFormat.Location = new System.Drawing.Point(300, 232);
+            cbUseBestVideoInputFormat.Location = new System.Drawing.Point(300, 205);
             cbUseBestVideoInputFormat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             cbUseBestVideoInputFormat.Name = "cbUseBestVideoInputFormat";
             cbUseBestVideoInputFormat.Size = new System.Drawing.Size(106, 29);
@@ -397,7 +396,7 @@ namespace Computer_Vision_Demo
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(423, 235);
+            label18.Location = new System.Drawing.Point(423, 208);
             label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(96, 25);
@@ -408,7 +407,7 @@ namespace Computer_Vision_Demo
             // 
             cbVideoInputFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbVideoInputFrameRate.FormattingEnabled = true;
-            cbVideoInputFrameRate.Location = new System.Drawing.Point(429, 275);
+            cbVideoInputFrameRate.Location = new System.Drawing.Point(429, 248);
             cbVideoInputFrameRate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             cbVideoInputFrameRate.Name = "cbVideoInputFrameRate";
             cbVideoInputFrameRate.Size = new System.Drawing.Size(106, 33);
@@ -418,7 +417,7 @@ namespace Computer_Vision_Demo
             // 
             cbVideoInputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbVideoInputFormat.FormattingEnabled = true;
-            cbVideoInputFormat.Location = new System.Drawing.Point(71, 275);
+            cbVideoInputFormat.Location = new System.Drawing.Point(71, 248);
             cbVideoInputFormat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             cbVideoInputFormat.Name = "cbVideoInputFormat";
             cbVideoInputFormat.Size = new System.Drawing.Size(344, 33);
@@ -439,7 +438,7 @@ namespace Computer_Vision_Demo
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(67, 235);
+            label13.Location = new System.Drawing.Point(67, 208);
             label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(113, 25);
@@ -494,7 +493,7 @@ namespace Computer_Vision_Demo
             tabPage2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            tabPage2.Size = new System.Drawing.Size(759, 1227);
+            tabPage2.Size = new System.Drawing.Size(759, 1056);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Face detector";
             tabPage2.UseVisualStyleBackColor = true;
@@ -502,7 +501,7 @@ namespace Computer_Vision_Demo
             // cbFDMosaic
             // 
             cbFDMosaic.AutoSize = true;
-            cbFDMosaic.Location = new System.Drawing.Point(377, 594);
+            cbFDMosaic.Location = new System.Drawing.Point(377, 523);
             cbFDMosaic.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             cbFDMosaic.Name = "cbFDMosaic";
             cbFDMosaic.Size = new System.Drawing.Size(211, 29);
@@ -513,7 +512,7 @@ namespace Computer_Vision_Demo
             // label21
             // 
             label21.AutoSize = true;
-            label21.Location = new System.Drawing.Point(442, 450);
+            label21.Location = new System.Drawing.Point(442, 396);
             label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label21.Name = "label21";
             label21.Size = new System.Drawing.Size(20, 25);
@@ -522,7 +521,7 @@ namespace Computer_Vision_Demo
             // 
             // edFDMinFaceHeight
             // 
-            edFDMinFaceHeight.Location = new System.Drawing.Point(463, 444);
+            edFDMinFaceHeight.Location = new System.Drawing.Point(463, 390);
             edFDMinFaceHeight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             edFDMinFaceHeight.Name = "edFDMinFaceHeight";
             edFDMinFaceHeight.Size = new System.Drawing.Size(57, 31);
@@ -531,7 +530,7 @@ namespace Computer_Vision_Demo
             // 
             // edFDMinFaceWidth
             // 
-            edFDMinFaceWidth.Location = new System.Drawing.Point(377, 444);
+            edFDMinFaceWidth.Location = new System.Drawing.Point(377, 390);
             edFDMinFaceWidth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             edFDMinFaceWidth.Name = "edFDMinFaceWidth";
             edFDMinFaceWidth.Size = new System.Drawing.Size(57, 31);
@@ -541,7 +540,7 @@ namespace Computer_Vision_Demo
             // label20
             // 
             label20.AutoSize = true;
-            label20.Location = new System.Drawing.Point(371, 414);
+            label20.Location = new System.Drawing.Point(371, 360);
             label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label20.Name = "label20";
             label20.Size = new System.Drawing.Size(146, 25);
@@ -572,7 +571,7 @@ namespace Computer_Vision_Demo
             // 
             // btFDUpdate
             // 
-            btFDUpdate.Location = new System.Drawing.Point(30, 781);
+            btFDUpdate.Location = new System.Drawing.Point(30, 710);
             btFDUpdate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btFDUpdate.Name = "btFDUpdate";
             btFDUpdate.Size = new System.Drawing.Size(124, 44);
@@ -618,7 +617,7 @@ namespace Computer_Vision_Demo
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(24, 1164);
+            label5.Location = new System.Drawing.Point(198, 1004);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(274, 25);
@@ -628,7 +627,7 @@ namespace Computer_Vision_Demo
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(24, 864);
+            label2.Location = new System.Drawing.Point(24, 793);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(128, 25);
@@ -637,17 +636,17 @@ namespace Computer_Vision_Demo
             // 
             // edFDFaces
             // 
-            edFDFaces.Location = new System.Drawing.Point(30, 894);
+            edFDFaces.Location = new System.Drawing.Point(30, 823);
             edFDFaces.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             edFDFaces.Multiline = true;
             edFDFaces.Name = "edFDFaces";
-            edFDFaces.Size = new System.Drawing.Size(694, 240);
+            edFDFaces.Size = new System.Drawing.Size(694, 165);
             edFDFaces.TabIndex = 143;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(24, 711);
+            label8.Location = new System.Drawing.Point(24, 640);
             label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(548, 25);
@@ -657,7 +656,7 @@ namespace Computer_Vision_Demo
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(24, 536);
+            label7.Location = new System.Drawing.Point(24, 465);
             label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(658, 25);
@@ -667,7 +666,7 @@ namespace Computer_Vision_Demo
             // lbFDScaleFactor
             // 
             lbFDScaleFactor.AutoSize = true;
-            lbFDScaleFactor.Location = new System.Drawing.Point(213, 636);
+            lbFDScaleFactor.Location = new System.Drawing.Point(213, 565);
             lbFDScaleFactor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lbFDScaleFactor.Name = "lbFDScaleFactor";
             lbFDScaleFactor.Size = new System.Drawing.Size(46, 25);
@@ -677,7 +676,7 @@ namespace Computer_Vision_Demo
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(24, 589);
+            label3.Location = new System.Drawing.Point(24, 518);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(103, 25);
@@ -686,7 +685,7 @@ namespace Computer_Vision_Demo
             // 
             // tbFDScaleFactor
             // 
-            tbFDScaleFactor.Location = new System.Drawing.Point(30, 619);
+            tbFDScaleFactor.Location = new System.Drawing.Point(30, 548);
             tbFDScaleFactor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tbFDScaleFactor.Maximum = 150;
             tbFDScaleFactor.Minimum = 101;
@@ -699,7 +698,7 @@ namespace Computer_Vision_Demo
             // lbFDMinNeighbors
             // 
             lbFDMinNeighbors.AutoSize = true;
-            lbFDMinNeighbors.Location = new System.Drawing.Point(213, 461);
+            lbFDMinNeighbors.Location = new System.Drawing.Point(213, 407);
             lbFDMinNeighbors.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lbFDMinNeighbors.Name = "lbFDMinNeighbors";
             lbFDMinNeighbors.Size = new System.Drawing.Size(22, 25);
@@ -709,7 +708,7 @@ namespace Computer_Vision_Demo
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(24, 414);
+            label6.Location = new System.Drawing.Point(24, 360);
             label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(210, 25);
@@ -718,7 +717,7 @@ namespace Computer_Vision_Demo
             // 
             // tbFDMinNeighbors
             // 
-            tbFDMinNeighbors.Location = new System.Drawing.Point(30, 444);
+            tbFDMinNeighbors.Location = new System.Drawing.Point(30, 390);
             tbFDMinNeighbors.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tbFDMinNeighbors.Maximum = 12;
             tbFDMinNeighbors.Minimum = 3;
@@ -849,7 +848,7 @@ namespace Computer_Vision_Demo
             tabPage4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            tabPage4.Size = new System.Drawing.Size(759, 1227);
+            tabPage4.Size = new System.Drawing.Size(759, 1056);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Cars counter";
             tabPage4.UseVisualStyleBackColor = true;
@@ -888,7 +887,7 @@ namespace Computer_Vision_Demo
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(24, 1164);
+            label10.Location = new System.Drawing.Point(221, 457);
             label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(274, 25);
@@ -923,7 +922,7 @@ namespace Computer_Vision_Demo
             tabPage5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            tabPage5.Size = new System.Drawing.Size(759, 1227);
+            tabPage5.Size = new System.Drawing.Size(759, 1056);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Pedestrian detector";
             tabPage5.UseVisualStyleBackColor = true;
@@ -971,7 +970,7 @@ namespace Computer_Vision_Demo
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(24, 1164);
+            label14.Location = new System.Drawing.Point(213, 695);
             label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(274, 25);
@@ -981,7 +980,7 @@ namespace Computer_Vision_Demo
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(24, 864);
+            label15.Location = new System.Drawing.Point(30, 382);
             label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(179, 25);
@@ -990,7 +989,7 @@ namespace Computer_Vision_Demo
             // 
             // edPDDetected
             // 
-            edPDDetected.Location = new System.Drawing.Point(30, 894);
+            edPDDetected.Location = new System.Drawing.Point(30, 413);
             edPDDetected.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             edPDDetected.Multiline = true;
             edPDDetected.Name = "edPDDetected";
@@ -1043,28 +1042,130 @@ namespace Computer_Vision_Demo
             cbPDEnabled.Text = "Enabled";
             cbPDEnabled.UseVisualStyleBackColor = true;
             // 
-            // tabPage6
+            // tabPage7
             // 
-            tabPage6.Controls.Add(cbObjectDetector);
-            tabPage6.Location = new System.Drawing.Point(4, 34);
-            tabPage6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            tabPage6.Size = new System.Drawing.Size(759, 1227);
-            tabPage6.TabIndex = 5;
-            tabPage6.Text = "Object detector";
-            tabPage6.UseVisualStyleBackColor = true;
+            tabPage7.Controls.Add(btCCDUpdate);
+            tabPage7.Controls.Add(lbCCDThreshold);
+            tabPage7.Controls.Add(label26);
+            tabPage7.Controls.Add(tbCCDThreshold);
+            tabPage7.Controls.Add(lbCCDSkipFrames);
+            tabPage7.Controls.Add(label24);
+            tabPage7.Controls.Add(tbCCDSkipFrames);
+            tabPage7.Controls.Add(label22);
+            tabPage7.Controls.Add(edCCDResults);
+            tabPage7.Controls.Add(cbCameraCovered);
+            tabPage7.Location = new System.Drawing.Point(4, 34);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            tabPage7.Size = new System.Drawing.Size(759, 1056);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Camera covered detector";
+            tabPage7.UseVisualStyleBackColor = true;
             // 
-            // cbObjectDetector
+            // btCCDUpdate
             // 
-            cbObjectDetector.AutoSize = true;
-            cbObjectDetector.Location = new System.Drawing.Point(30, 35);
-            cbObjectDetector.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            cbObjectDetector.Name = "cbObjectDetector";
-            cbObjectDetector.Size = new System.Drawing.Size(101, 29);
-            cbObjectDetector.TabIndex = 147;
-            cbObjectDetector.Text = "Enabled";
-            cbObjectDetector.UseVisualStyleBackColor = true;
+            btCCDUpdate.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btCCDUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            btCCDUpdate.Location = new System.Drawing.Point(36, 219);
+            btCCDUpdate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            btCCDUpdate.Name = "btCCDUpdate";
+            btCCDUpdate.Size = new System.Drawing.Size(205, 44);
+            btCCDUpdate.TabIndex = 163;
+            btCCDUpdate.Text = "Update settings";
+            btCCDUpdate.UseVisualStyleBackColor = true;
+            btCCDUpdate.Click += btCCDUpdate_Click;
+            // 
+            // lbCCDThreshold
+            // 
+            lbCCDThreshold.AutoSize = true;
+            lbCCDThreshold.Location = new System.Drawing.Point(577, 148);
+            lbCCDThreshold.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbCCDThreshold.Name = "lbCCDThreshold";
+            lbCCDThreshold.Size = new System.Drawing.Size(52, 25);
+            lbCCDThreshold.TabIndex = 162;
+            lbCCDThreshold.Text = "3000";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new System.Drawing.Point(389, 96);
+            label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label26.Name = "label26";
+            label26.Size = new System.Drawing.Size(90, 25);
+            label26.TabIndex = 161;
+            label26.Text = "Threshold";
+            // 
+            // tbCCDThreshold
+            // 
+            tbCCDThreshold.Location = new System.Drawing.Point(393, 128);
+            tbCCDThreshold.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbCCDThreshold.Maximum = 6000;
+            tbCCDThreshold.Minimum = 1000;
+            tbCCDThreshold.Name = "tbCCDThreshold";
+            tbCCDThreshold.Size = new System.Drawing.Size(173, 69);
+            tbCCDThreshold.TabIndex = 160;
+            tbCCDThreshold.Value = 3000;
+            tbCCDThreshold.Scroll += tbCCDThreshold_Scroll;
+            // 
+            // lbCCDSkipFrames
+            // 
+            lbCCDSkipFrames.AutoSize = true;
+            lbCCDSkipFrames.Location = new System.Drawing.Point(219, 144);
+            lbCCDSkipFrames.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lbCCDSkipFrames.Name = "lbCCDSkipFrames";
+            lbCCDSkipFrames.Size = new System.Drawing.Size(22, 25);
+            lbCCDSkipFrames.TabIndex = 159;
+            lbCCDSkipFrames.Text = "5";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(30, 96);
+            label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(300, 25);
+            label24.TabIndex = 158;
+            label24.Text = "Skip frames (improves performance)";
+            // 
+            // tbCCDSkipFrames
+            // 
+            tbCCDSkipFrames.Location = new System.Drawing.Point(36, 128);
+            tbCCDSkipFrames.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            tbCCDSkipFrames.Name = "tbCCDSkipFrames";
+            tbCCDSkipFrames.Size = new System.Drawing.Size(173, 69);
+            tbCCDSkipFrames.TabIndex = 157;
+            tbCCDSkipFrames.Value = 5;
+            tbCCDSkipFrames.Scroll += tbCCDSkipFrames_Scroll;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(30, 338);
+            label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(139, 25);
+            label22.TabIndex = 153;
+            label22.Text = "Detected events";
+            // 
+            // edCCDResults
+            // 
+            edCCDResults.Location = new System.Drawing.Point(30, 369);
+            edCCDResults.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            edCCDResults.Multiline = true;
+            edCCDResults.Name = "edCCDResults";
+            edCCDResults.Size = new System.Drawing.Size(694, 369);
+            edCCDResults.TabIndex = 152;
+            // 
+            // cbCameraCovered
+            // 
+            cbCameraCovered.AutoSize = true;
+            cbCameraCovered.Location = new System.Drawing.Point(30, 35);
+            cbCameraCovered.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            cbCameraCovered.Name = "cbCameraCovered";
+            cbCameraCovered.Size = new System.Drawing.Size(101, 29);
+            cbCameraCovered.TabIndex = 148;
+            cbCameraCovered.Text = "Enabled";
+            cbCameraCovered.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -1074,7 +1175,7 @@ namespace Computer_Vision_Demo
             tabPage3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            tabPage3.Size = new System.Drawing.Size(759, 1227);
+            tabPage3.Size = new System.Drawing.Size(759, 1056);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Debug";
             tabPage3.UseVisualStyleBackColor = true;
@@ -1109,7 +1210,7 @@ namespace Computer_Vision_Demo
             VideoCaptureView.Location = new System.Drawing.Point(797, 22);
             VideoCaptureView.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             VideoCaptureView.Name = "VideoCaptureView";
-            VideoCaptureView.Size = new System.Drawing.Size(783, 669);
+            VideoCaptureView.Size = new System.Drawing.Size(783, 516);
             VideoCaptureView.StatusOverlay = null;
             VideoCaptureView.TabIndex = 85;
             // 
@@ -1119,7 +1220,7 @@ namespace Computer_Vision_Demo
             MediaPlayerView.Location = new System.Drawing.Point(797, 22);
             MediaPlayerView.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             MediaPlayerView.Name = "MediaPlayerView";
-            MediaPlayerView.Size = new System.Drawing.Size(783, 669);
+            MediaPlayerView.Size = new System.Drawing.Size(783, 516);
             MediaPlayerView.StatusOverlay = null;
             MediaPlayerView.TabIndex = 84;
             // 
@@ -1127,7 +1228,7 @@ namespace Computer_Vision_Demo
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1600, 1314);
+            ClientSize = new System.Drawing.Size(1600, 1147);
             Controls.Add(VideoCaptureView);
             Controls.Add(MediaPlayerView);
             Controls.Add(tcMain);
@@ -1153,8 +1254,10 @@ namespace Computer_Vision_Demo
             tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)tbPDSkipFrames).EndInit();
             ((System.ComponentModel.ISupportInitialize)tbPDDownscale).EndInit();
-            tabPage6.ResumeLayout(false);
-            tabPage6.PerformLayout();
+            tabPage7.ResumeLayout(false);
+            tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbCCDThreshold).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbCCDSkipFrames).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             ResumeLayout(false);
@@ -1180,7 +1283,6 @@ namespace Computer_Vision_Demo
         private System.Windows.Forms.Label label165;
         private System.Windows.Forms.RadioButton rbIPCamera;
         private System.Windows.Forms.CheckBox cbIPCameraONVIF;
-        private System.Windows.Forms.Button btShowIPCamDatabase;
         private System.Windows.Forms.ComboBox cbIPCameraType;
         private System.Windows.Forms.TextBox edIPPassword;
         private System.Windows.Forms.Label label167;
@@ -1247,8 +1349,17 @@ namespace Computer_Vision_Demo
         private System.Windows.Forms.CheckBox cbFDMosaic;
         private VisioForge.Core.UI.WinForms.VideoView MediaPlayerView;
         private VisioForge.Core.UI.WinForms.VideoView VideoCaptureView;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.CheckBox cbObjectDetector;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.CheckBox cbCameraCovered;
+        private System.Windows.Forms.Label lbCCDThreshold;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TrackBar tbCCDThreshold;
+        private System.Windows.Forms.Label lbCCDSkipFrames;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TrackBar tbCCDSkipFrames;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox edCCDResults;
+        private System.Windows.Forms.Button btCCDUpdate;
     }
 }
 

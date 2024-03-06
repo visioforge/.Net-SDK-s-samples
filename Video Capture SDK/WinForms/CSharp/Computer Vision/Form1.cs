@@ -30,13 +30,13 @@ namespace Computer_Vision_Demo
 
         private MediaPlayerCore MediaPlayer1;
 
-        private FaceDetector faceDetector;
+        private FaceDetector _faceDetector;
 
-        private CarCounter carCounter;
+        private CarCounter _carCounter;
 
-        private PedestrianDetector pedestrianDetector;
+        private PedestrianDetector _pedestrianDetector;
 
-        private ObjectDetector objectDetector;
+        private CameraCoveredDetector _coveredDetector;
 
         public Form1()
         {
@@ -78,36 +78,36 @@ namespace Computer_Vision_Demo
 
         private void FaceDetectionAdd()
         {
-            faceDetector = new FaceDetector();
-            faceDetector.OnFaceDetected += OnFaceDetected;
+            _faceDetector = new FaceDetector();
+            _faceDetector.OnFaceDetected += OnFaceDetected;
 
             FaceDetectionUpdate();
         }
 
         private void FaceDetectionUpdate()
         {
-            if (faceDetector == null)
+            if (_faceDetector == null)
             {
                 return;
             }
 
-            faceDetector.DrawEnabled = cbFDDraw.Checked;
-            faceDetector.DrawColor = SKColors.Green;
-            faceDetector.FramesToSkip = tbFDSkipFrames.Value;
-            faceDetector.MinNeighbors = tbFDMinNeighbors.Value;
-            faceDetector.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
-            faceDetector.VideoScale = tbFDDownscale.Value / 10.0f;
+            _faceDetector.DrawEnabled = cbFDDraw.Checked;
+            _faceDetector.DrawColor = SKColors.Green;
+            _faceDetector.FramesToSkip = tbFDSkipFrames.Value;
+            _faceDetector.MinNeighbors = tbFDMinNeighbors.Value;
+            _faceDetector.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
+            _faceDetector.VideoScale = tbFDDownscale.Value / 10.0f;
 
             if (rbFDCircle.Checked)
             {
-                faceDetector.DrawShapeType = CVShapeType.Circle;
+                _faceDetector.DrawShapeType = CVShapeType.Circle;
             }
             else
             {
-                faceDetector.DrawShapeType = CVShapeType.Rectangle;
+                _faceDetector.DrawShapeType = CVShapeType.Rectangle;
             }
 
-            faceDetector.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
+            _faceDetector.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
 
             var path = Path.GetDirectoryName(Application.ExecutablePath);
             string facePath = cbFDFace.Checked ? Path.Combine(path, "haarcascade_frontalface_default.xml") : null;
@@ -115,14 +115,14 @@ namespace Computer_Vision_Demo
             string nosePath = cbFDNose.Checked ? Path.Combine(path, "haarcascade_mcs_nose.xml") : null;
             string mouthPath = cbFDMouth.Checked ? Path.Combine(path, "haarcascade_mcs_mouth.xml") : null;
 
-            faceDetector.Init(
+            _faceDetector.Init(
                 facePath,
                 eyesPath,
                 nosePath,
                 mouthPath,
                 true);
 
-            faceDetector.UpdateSettings();
+            _faceDetector.UpdateSettings();
         }
 
         private void btFDUpdate_Click(object sender, EventArgs e)
@@ -132,11 +132,11 @@ namespace Computer_Vision_Demo
 
         private void FaceDetectionRemove()
         {
-            if (this.faceDetector != null)
+            if (this._faceDetector != null)
             {
-                this.faceDetector.OnFaceDetected -= OnFaceDetected;
-                this.faceDetector.Dispose();
-                this.faceDetector = null;
+                this._faceDetector.OnFaceDetected -= OnFaceDetected;
+                this._faceDetector.Dispose();
+                this._faceDetector = null;
             }
         }
 
@@ -183,7 +183,7 @@ namespace Computer_Vision_Demo
         #region Pedestrian detection
         private void PedestrianDetectionAdd()
         {
-            pedestrianDetector = new PedestrianDetector()
+            _pedestrianDetector = new PedestrianDetector()
             {
                 DrawEnabled = cbPDDraw.Checked,
                 DrawColor = SKColors.Green,
@@ -191,18 +191,18 @@ namespace Computer_Vision_Demo
                 VideoScale = tbPDDownscale.Value / 10.0f
             };
 
-            pedestrianDetector.Init();
+            _pedestrianDetector.Init();
 
-            pedestrianDetector.OnPedestrianDetected += OnPedestrianDetected;
+            _pedestrianDetector.OnPedestrianDetected += OnPedestrianDetected;
         }
 
         private void PedestrianDetectionRemove()
         {
-            if (pedestrianDetector != null)
+            if (_pedestrianDetector != null)
             {
-                pedestrianDetector.OnPedestrianDetected -= OnPedestrianDetected;
-                pedestrianDetector.Dispose();
-                pedestrianDetector = null;
+                _pedestrianDetector.OnPedestrianDetected -= OnPedestrianDetected;
+                _pedestrianDetector.Dispose();
+                _pedestrianDetector = null;
             }
         }
 
@@ -239,15 +239,15 @@ namespace Computer_Vision_Demo
         #region Car counter
         private void CarCounterAdd()
         {
-            carCounter = new CarCounter()
+            _carCounter = new CarCounter()
             {
                 ContoursDraw = cbCCDraw.Checked,
                 TrackingLineDraw = cbCCDraw.Checked,
                 CounterDraw = cbCCDraw.Checked
             };
 
-            carCounter.Init();
-            carCounter.OnCarsDetected += this.OnCarsDetected;
+            _carCounter.Init();
+            _carCounter.OnCarsDetected += this.OnCarsDetected;
         }
 
         private void OnCarsDetected(object sender, CVCarDetectedEventArgs e)
@@ -261,76 +261,68 @@ namespace Computer_Vision_Demo
 
         private void CarCounterRemove()
         {
-            if (carCounter != null)
+            if (_carCounter != null)
             {
-                carCounter.OnCarsDetected -= this.OnCarsDetected;
-                carCounter.Dispose();
-                carCounter = null;
+                _carCounter.OnCarsDetected -= this.OnCarsDetected;
+                _carCounter.Dispose();
+                _carCounter = null;
             }
         }
 
         #endregion
 
+        #region Camera covered detector
 
-        #region Object detector
-        private void ObjectDetectorAdd()
+        private void CameraCoveredDetectorAdd()
         {
-            objectDetector = new ObjectDetector()
+            _coveredDetector = new CameraCoveredDetector()
             {
-                //DrawEnabled = cbObjectDetector.Checked,
-                //DrawColor = Color.Green,
-                // FramesToSkip = tbPDSkipFrames.Value,
-                // VideoScale = tbPDDownscale.Value / 10.0f
+                Threshold = tbCCDThreshold.Value,
+                FramesToSkip = tbCCDSkipFrames.Value
             };
 
-            // objectDetector.Init();
+            _coveredDetector.OnCameraCovered += OnCameraCovered;
+        }
 
-            ///objectDetector.OnPedestrianDetected += OnPedestrianDetected;
+        private void OnCameraCovered(object sender, CameraCoveredDetectorEventArgs e)
+        {
+            BeginInvoke(
+               (Action)(() =>
+               {
+                   edCCDResults.Text += $"Camera covered. Level: {e.Level}" + Environment.NewLine;
+               }));
         }
 
         private void ObjectDetectorRemove()
         {
-            if (objectDetector != null)
+            if (_coveredDetector != null)
             {
-                //objectDetector.OnPedestrianDetected -= OnPedestrianDetected;
-                // objectDetector.Dispose();
-                objectDetector = null;
+                _coveredDetector.OnCameraCovered -= OnCameraCovered;
+                _coveredDetector = null;
             }
         }
 
-        //private void OnPedestrianDetected(object sender, OnCVPedestrianDetectedEventArgs e)
-        //{
-        //    if (e.Items.Length == 0)
-        //    {
-        //        return;
-        //    }
+        private void tbCCDSkipFrames_Scroll(object sender, EventArgs e)
+        {
+            lbCCDSkipFrames.Text = tbCCDSkipFrames.Value.ToString();
+        }
 
-        //    BeginInvoke(
-        //        (Action)(() =>
-        //        {
-        //            edPDDetected.Text = string.Empty;
-        //            foreach (var item in e.Items)
-        //            {
-        //                edPDDetected.Text += $"Object at {item.ToString()}" + Environment.NewLine;
-        //            }
-        //        }));
-        //}
+        private void tbCCDThreshold_Scroll(object sender, EventArgs e)
+        {
+            lbCCDThreshold.Text = tbCCDThreshold.Value.ToString();
+        }
 
-        //private void tbPDDownscale_Scroll(object sender, EventArgs e)
-        //{
-        //    lbPDDownscale.Text = (tbPDDownscale.Value / 10.0).ToString("F2");
-        //}
-
-        //private void tbPDSkipFrames_Scroll(object sender, EventArgs e)
-        //{
-        //    lbPDSkipFrames.Text = tbPDSkipFrames.Value.ToString();
-        //}
+        private void btCCDUpdate_Click(object sender, EventArgs e)
+        {
+            if (_coveredDetector != null)
+            {
+                _coveredDetector.Threshold = tbCCDThreshold.Value;
+                _coveredDetector.FramesToSkip = tbCCDSkipFrames.Value;
+            }
+        }
 
         #endregion
 
-
-
-        //IntPtr pd = IntPtr.Zero;
 
         private void ProcessFrame(VideoFrame frame)
         {
@@ -346,10 +338,10 @@ namespace Computer_Vision_Demo
             //Trace.WriteLine($"Count: {count}, time: {time}");
 
             var image = frame.ToRAWImage();
-            var faces = faceDetector?.Process(image, frame.Timestamp);
-            carCounter?.Process(image);
-            pedestrianDetector?.Process(image);
-            objectDetector?.Process(image);
+            var faces = _faceDetector?.Process(image, frame.Timestamp);
+            _carCounter?.Process(image);
+            _pedestrianDetector?.Process(image);
+            _coveredDetector?.Process(image);
 
             if (cbFDMosaic.Checked)
             {
@@ -567,15 +559,11 @@ namespace Computer_Vision_Demo
                 PedestrianDetectionAdd();
             }
 
-            // add object detector
-            if (cbObjectDetector.Checked)
+            // add camera covered detector
+            if (cbCameraCovered.Checked)
             {
-                ObjectDetectorAdd();
+                CameraCoveredDetectorAdd();
             }
-
-            //this.MediaPlayer1.Video_Effects_Enabled = true;
-            //    this.MediaPlayer1.Video_Effects_Clear();
-            //    this.MediaPlayer1.Video_Effects_Add(new VideoEffectMosaic(true, 500));
 
             if (rbVideoFile.Checked)
             {
