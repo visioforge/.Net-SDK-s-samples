@@ -26,8 +26,6 @@ namespace Simple_Media_Player_WinUI
     {
         private MediaPlayerCoreX MediaPlayer1;
 
-        private Color _videoViewBackgroud;
-
         //timer
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
@@ -45,8 +43,6 @@ namespace Simple_Media_Player_WinUI
             MediaPlayer1.Audio_Play = true;
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             Title = $"Media Player SDK .Net - Simple Media Player for WinUI 3 Desktop (SDK v{MediaPlayerCoreX.SDK_Version})";
-
-            _videoViewBackgroud = ((SolidColorBrush)videoView.Background).Color;
 
             // SetIcon();
 
@@ -129,8 +125,6 @@ namespace Simple_Media_Player_WinUI
         {
             await MediaPlayer1.StopAsync();
 
-            videoView.Background = new SolidColorBrush(_videoViewBackgroud);
-
             _timer.Stop();
         }
 
@@ -146,8 +140,6 @@ namespace Simple_Media_Player_WinUI
 
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
-            videoView.Background = new SolidColorBrush(new Color { A = 0, R = 0, G = 0, B = 0 });
-
             MediaPlayer1.Audio_OutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First();
 
             var fileSource = await UniversalSourceSettings.CreateAsync(edFilename.Text);

@@ -39,8 +39,6 @@ namespace Simple_Video_Capture;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
-    private Color _videoViewBackgroud;
-
     private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
     private VideoCaptureCore VideoCapture1;
@@ -221,8 +219,6 @@ public sealed partial class MainWindow : Window
         tmRecording.Stop();
 
         await VideoCapture1.StopAsync();
-
-        VideoView1.Background = new SolidColorBrush(_videoViewBackgroud);
     }
 
     private async void btResume_Click(object sender, RoutedEventArgs e)
@@ -385,8 +381,6 @@ public sealed partial class MainWindow : Window
 
     private async void btStart_Click(object sender, RoutedEventArgs e)
     {
-        VideoView1.Background = new SolidColorBrush(new Color { A = 0, R = 0, G = 0, B = 0 });
-
         mmLog.Text = string.Empty;
 
         VideoCapture1.Video_Sample_Grabber_Enabled = true;
@@ -732,8 +726,6 @@ public sealed partial class MainWindow : Window
         CreateEngine();
 
         Title = $"Video Capture SDK .Net - Simple Video Capture Demo for WinUI 3 Desktop (SDK v{VideoCapture1.SDK_Version()})";
-
-        _videoViewBackgroud = ((SolidColorBrush)VideoView1.Background).Color;
 
         SetIcon();
 

@@ -264,15 +264,13 @@ namespace Main_Demo
                     VerticalAlignment = (TextOverlayVAlign)cbTextOverlayVAlign.SelectedIndex,
                     LineAignment = (TextOverlayLineAlign)cbTextOverlayLineAlign.SelectedIndex,
                     WrapMode = (TextOverlayWrapMode)(cbTextOverlayFontWrapMode.SelectedIndex - 1),
-                    FontSize = Convert.ToInt32(cbTextOverlayFontSize.Text),
-                    FontStyle = (FontStyle)cbTextOverlayFontStyle.SelectedIndex,
-                    FontWeight = (FontWeight)Enum.Parse(typeof(FontWeight), cbTextOverlayFontWeight.Text, true),
                     AutoAjustSize = cbTextOverlayAutosize.Checked,
                     Color = pnTextOverlayColor.BackColor.ToColor(),
-                    FontName = cbTextOverlayFontName.Text,
                     XPos = tbTextOverlayX.Value / 100.0,
                     YPos = tbTextOverlayY.Value / 100.0
                 };
+
+                textOverlay.Font = new FontSettings(cbTextOverlayFontName.Text, cbTextOverlayFontFace.Text, Convert.ToInt32(cbTextOverlayFontSize.Text));
 
                 switch (cbTextOverlayHAlign.SelectedIndex)
                 {
@@ -408,9 +406,9 @@ namespace Main_Demo
                 _player.OnError += _player_OnError;
                 _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
 
-                foreach (var font in _player.Fonts_Names)
+                foreach (var font in _player.Fonts)
                 {
-                    cbTextOverlayFontName.Items.Add(font);
+                    cbTextOverlayFontName.Items.Add(font.Name);
                 }
 
                 if (cbTextOverlayFontName.Items.Count > 0)
@@ -496,7 +494,7 @@ namespace Main_Demo
                 return;
             }
 
-            videoView1.Invalidate();                       
+            videoView1.Invalidate();
 
             Invoke((Action)(() =>
             {
@@ -665,9 +663,8 @@ namespace Main_Demo
             cbDeinterlaceFields.SelectedIndex = 3;
             cbDeinterlaceMethod.SelectedIndex = 4;
 
-            cbTextOverlayFontStyle.SelectedIndex = 0;
             cbTextOverlayFontWrapMode.SelectedIndex = 0;
-            cbTextOverlayFontWeight.SelectedIndex = 0;
+            cbTextOverlayFontFace.SelectedIndex = 0;
             cbTextOverlayHAlign.SelectedIndex = 0;
             cbTextOverlayVAlign.SelectedIndex = 0;
             cbTextOverlayLineAlign.SelectedIndex = 0;
@@ -757,10 +754,9 @@ namespace Main_Demo
         private void cbSubtitlesCustomSettings_CheckedChanged(object sender, EventArgs e)
         {
             var fontSize = Convert.ToInt32(cbTextOverlayFontSize.Text);
-            var fontStyle = (FontStyle)cbTextOverlayFontStyle.SelectedIndex;
-            var fontWeight = (FontWeight)Enum.Parse(typeof(FontWeight), cbTextOverlayFontWeight.Text, true);
+            var fontFace = cbTextOverlayFontFace.Text;
             var fontName = cbTextOverlayFontName.Text;
-            _player.Subtitles_Settings.Font = new FontSettings(fontName, fontSize, fontStyle, FontStretch.Normal, fontWeight);
+            _player.Subtitles_Settings.Font = new FontSettings(fontName, fontFace, fontSize);
 
             _player.Subtitles_Settings_Update();
         }
@@ -802,6 +798,24 @@ namespace Main_Demo
             await _player.DisposeAsync();
 
             VisioForgeX.DestroySDK();
+        }
+
+        private void cbTextOverlayFontName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var font = _player.Fonts.FirstOrDefault(f => f.Name == cbTextOverlayFontName.Text);
+            if (font != null)
+            {
+                cbTextOverlayFontFace.Items.Clear();
+                foreach (var face in font.Faces)
+                {
+                    cbTextOverlayFontFace.Items.Add(face);
+                }
+
+                if (cbTextOverlayFontFace.Items.Count > 0)
+                {
+                    cbTextOverlayFontFace.SelectedIndex = 0;
+                }
+            }
         }
     }
 }

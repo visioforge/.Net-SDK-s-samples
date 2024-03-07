@@ -29,2897 +29,2879 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = (new global::System.ComponentModel.Container());
-            global::System.ComponentModel.ComponentResourceManager resources = new global::System.ComponentModel.ComponentResourceManager(typeof(global::Main_Demo.Form1));
-            this.tmPosition = (new global::System.Windows.Forms.Timer(this.components));
-            this.groupBox2 = (new global::System.Windows.Forms.GroupBox());
-            this.btPrevFrame = (new global::System.Windows.Forms.Button());
-            this.btNextFrame = (new global::System.Windows.Forms.Button());
-            this.btStop = (new global::System.Windows.Forms.Button());
-            this.btPause = (new global::System.Windows.Forms.Button());
-            this.btResume = (new global::System.Windows.Forms.Button());
-            this.btStart = (new global::System.Windows.Forms.Button());
-            this.tbSpeed = (new global::System.Windows.Forms.TrackBar());
-            this.lbSpeed = (new global::System.Windows.Forms.Label());
-            this.lbTimeline = (new global::System.Windows.Forms.Label());
-            this.tbTimeline = (new global::System.Windows.Forms.TrackBar());
-            this.edFilenameOrURL = (new global::System.Windows.Forms.TextBox());
-            this.label14 = (new global::System.Windows.Forms.Label());
-            this.btSelectFile = (new global::System.Windows.Forms.Button());
-            this.openFileDialog1 = (new global::System.Windows.Forms.OpenFileDialog());
-            this.tabControl1 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage21 = (new global::System.Windows.Forms.TabPage());
-            this.tabControl6 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage24 = (new global::System.Windows.Forms.TabPage());
-            this.cbSubtitlesCustomSettings = (new global::System.Windows.Forms.CheckBox());
-            this.cbSubtitlesEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage22 = (new global::System.Windows.Forms.TabPage());
-            this.cbRTSPProtocol = (new global::System.Windows.Forms.ComboBox());
-            this.label50 = (new global::System.Windows.Forms.Label());
-            this.lbRTSPLatency = (new global::System.Windows.Forms.Label());
-            this.tbRTSPLatency = (new global::System.Windows.Forms.TrackBar());
-            this.label53 = (new global::System.Windows.Forms.Label());
-            this.lbRTSPUDPBufferSize = (new global::System.Windows.Forms.Label());
-            this.tbRTSPUDPBufferSize = (new global::System.Windows.Forms.TrackBar());
-            this.label52 = (new global::System.Windows.Forms.Label());
-            this.lbRTSPRTPBlockSize = (new global::System.Windows.Forms.Label());
-            this.tbRTSPRTPBlockSize = (new global::System.Windows.Forms.TrackBar());
-            this.label49 = (new global::System.Windows.Forms.Label());
-            this.edRTSPPassword = (new global::System.Windows.Forms.TextBox());
-            this.label48 = (new global::System.Windows.Forms.Label());
-            this.edRTSPUserName = (new global::System.Windows.Forms.TextBox());
-            this.label47 = (new global::System.Windows.Forms.Label());
-            this.tabPage23 = (new global::System.Windows.Forms.TabPage());
-            this.tabPage1 = (new global::System.Windows.Forms.TabPage());
-            this.btReadInfo = (new global::System.Windows.Forms.Button());
-            this.mmInfo = (new global::System.Windows.Forms.TextBox());
-            this.btReadTags = (new global::System.Windows.Forms.Button());
-            this.tabPage2 = (new global::System.Windows.Forms.TabPage());
-            this.cbAudioStream = (new global::System.Windows.Forms.ComboBox());
-            this.label8 = (new global::System.Windows.Forms.Label());
-            this.label6 = (new global::System.Windows.Forms.Label());
-            this.tbVolume1 = (new global::System.Windows.Forms.TrackBar());
-            this.cbPlayAudio = (new global::System.Windows.Forms.CheckBox());
-            this.cbAudioOutputDevice = (new global::System.Windows.Forms.ComboBox());
-            this.label5 = (new global::System.Windows.Forms.Label());
-            this.volumeMeter2 = (new global::VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter());
-            this.volumeMeter1 = (new global::VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter());
-            this.tabPage3 = (new global::System.Windows.Forms.TabPage());
-            this.label31 = (new global::System.Windows.Forms.Label());
-            this.tabControl18 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage71 = (new global::System.Windows.Forms.TabPage());
-            this.label231 = (new global::System.Windows.Forms.Label());
-            this.label230 = (new global::System.Windows.Forms.Label());
-            this.tbAudAmplifyAmp = (new global::System.Windows.Forms.TrackBar());
-            this.label95 = (new global::System.Windows.Forms.Label());
-            this.cbAudAmplifyEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage72 = (new global::System.Windows.Forms.TabPage());
-            this.btAudEqUpdate = (new global::System.Windows.Forms.Button());
-            this.label242 = (new global::System.Windows.Forms.Label());
-            this.label241 = (new global::System.Windows.Forms.Label());
-            this.label240 = (new global::System.Windows.Forms.Label());
-            this.label239 = (new global::System.Windows.Forms.Label());
-            this.label238 = (new global::System.Windows.Forms.Label());
-            this.label237 = (new global::System.Windows.Forms.Label());
-            this.label236 = (new global::System.Windows.Forms.Label());
-            this.label235 = (new global::System.Windows.Forms.Label());
-            this.label234 = (new global::System.Windows.Forms.Label());
-            this.label233 = (new global::System.Windows.Forms.Label());
-            this.label232 = (new global::System.Windows.Forms.Label());
-            this.tbAudEq9 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq8 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq7 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq6 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq5 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq4 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq3 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq2 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq1 = (new global::System.Windows.Forms.TrackBar());
-            this.tbAudEq0 = (new global::System.Windows.Forms.TrackBar());
-            this.cbAudEqualizerEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage4 = (new global::System.Windows.Forms.TabPage());
-            this.label1 = (new global::System.Windows.Forms.Label());
-            this.label2 = (new global::System.Windows.Forms.Label());
-            this.tbAudBalanceLevel = (new global::System.Windows.Forms.TrackBar());
-            this.cbAudBalanceEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage5 = (new global::System.Windows.Forms.TabPage());
-            this.lbAudEchoFeedback = (new global::System.Windows.Forms.Label());
-            this.tbAudEchoFeedback = (new global::System.Windows.Forms.TrackBar());
-            this.label19 = (new global::System.Windows.Forms.Label());
-            this.lbAudEchoIntensity = (new global::System.Windows.Forms.Label());
-            this.tbAudEchoIntensity = (new global::System.Windows.Forms.TrackBar());
-            this.label17 = (new global::System.Windows.Forms.Label());
-            this.lbAudEchoDelay = (new global::System.Windows.Forms.Label());
-            this.tbAudEchoDelay = (new global::System.Windows.Forms.TrackBar());
-            this.label4 = (new global::System.Windows.Forms.Label());
-            this.cbAudEchoEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage7 = (new global::System.Windows.Forms.TabPage());
-            this.tabControl4 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage8 = (new global::System.Windows.Forms.TabPage());
-            this.label27 = (new global::System.Windows.Forms.Label());
-            this.cbResizeMethod = (new global::System.Windows.Forms.ComboBox());
-            this.label18 = (new global::System.Windows.Forms.Label());
-            this.cbResizeLetterbox = (new global::System.Windows.Forms.CheckBox());
-            this.label15 = (new global::System.Windows.Forms.Label());
-            this.edResizeHeight = (new global::System.Windows.Forms.TextBox());
-            this.edResizeWidth = (new global::System.Windows.Forms.TextBox());
-            this.cbResizeEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage11 = (new global::System.Windows.Forms.TabPage());
-            this.label201 = (new global::System.Windows.Forms.Label());
-            this.label200 = (new global::System.Windows.Forms.Label());
-            this.label199 = (new global::System.Windows.Forms.Label());
-            this.label198 = (new global::System.Windows.Forms.Label());
-            this.tbVideoContrast = (new global::System.Windows.Forms.TrackBar());
-            this.tbVideoHue = (new global::System.Windows.Forms.TrackBar());
-            this.tbVideoBrightness = (new global::System.Windows.Forms.TrackBar());
-            this.tbVideoSaturation = (new global::System.Windows.Forms.TrackBar());
-            this.cbVideoBalanceEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage17 = (new global::System.Windows.Forms.TabPage());
-            this.btTextOverlayUpdate = (new global::System.Windows.Forms.Button());
-            this.tabControl5 = (new global::System.Windows.Forms.TabControl());
-            this.tabPage18 = (new global::System.Windows.Forms.TabPage());
-            this.tbTextOverlayY = (new global::System.Windows.Forms.TrackBar());
-            this.label42 = (new global::System.Windows.Forms.Label());
-            this.tbTextOverlayX = (new global::System.Windows.Forms.TrackBar());
-            this.label41 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayLineAlign = (new global::System.Windows.Forms.ComboBox());
-            this.label37 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayHAlign = (new global::System.Windows.Forms.ComboBox());
-            this.label33 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayVAlign = (new global::System.Windows.Forms.ComboBox());
-            this.label32 = (new global::System.Windows.Forms.Label());
-            this.edTextOverlayText = (new global::System.Windows.Forms.TextBox());
-            this.label29 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayMode = (new global::System.Windows.Forms.ComboBox());
-            this.label28 = (new global::System.Windows.Forms.Label());
-            this.tabPage19 = (new global::System.Windows.Forms.TabPage());
-            this.cbTextOverlayFontWeight = (new global::System.Windows.Forms.ComboBox());
-            this.label7 = (new global::System.Windows.Forms.Label());
-            this.pnTextOverlayColor = (new global::System.Windows.Forms.Panel());
-            this.label40 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayAutosize = (new global::System.Windows.Forms.CheckBox());
-            this.cbTextOverlayFontStyle = (new global::System.Windows.Forms.ComboBox());
-            this.label39 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayFontWrapMode = (new global::System.Windows.Forms.ComboBox());
-            this.label36 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayFontSize = (new global::System.Windows.Forms.ComboBox());
-            this.label35 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayFontName = (new global::System.Windows.Forms.ComboBox());
-            this.label34 = (new global::System.Windows.Forms.Label());
-            this.cbTextOverlayEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage20 = (new global::System.Windows.Forms.TabPage());
-            this.tbImageOverlayAlpha = (new global::System.Windows.Forms.TrackBar());
-            this.label46 = (new global::System.Windows.Forms.Label());
-            this.label45 = (new global::System.Windows.Forms.Label());
-            this.label44 = (new global::System.Windows.Forms.Label());
-            this.edImageOverlayY = (new global::System.Windows.Forms.TextBox());
-            this.edImageOverlayX = (new global::System.Windows.Forms.TextBox());
-            this.btImageOverlayOpen = (new global::System.Windows.Forms.Button());
-            this.edImageOverlayFilename = (new global::System.Windows.Forms.TextBox());
-            this.label43 = (new global::System.Windows.Forms.Label());
-            this.cbImageOverlayEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage12 = (new global::System.Windows.Forms.TabPage());
-            this.cbColorEffect = (new global::System.Windows.Forms.ComboBox());
-            this.label20 = (new global::System.Windows.Forms.Label());
-            this.cbColorEffectEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage13 = (new global::System.Windows.Forms.TabPage());
-            this.cbFlipRotate = (new global::System.Windows.Forms.ComboBox());
-            this.label21 = (new global::System.Windows.Forms.Label());
-            this.cbFlipRotateEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage14 = (new global::System.Windows.Forms.TabPage());
-            this.cbDeinterlaceDropOrphans = (new global::System.Windows.Forms.CheckBox());
-            this.cbDeinterlaceIgnoreObscure = (new global::System.Windows.Forms.CheckBox());
-            this.cbDeinterlaceLocking = (new global::System.Windows.Forms.ComboBox());
-            this.label26 = (new global::System.Windows.Forms.Label());
-            this.cbDeinterlaceMode = (new global::System.Windows.Forms.ComboBox());
-            this.label25 = (new global::System.Windows.Forms.Label());
-            this.cbDeinterlaceFieldLayout = (new global::System.Windows.Forms.ComboBox());
-            this.label24 = (new global::System.Windows.Forms.Label());
-            this.cbDeinterlaceFields = (new global::System.Windows.Forms.ComboBox());
-            this.label23 = (new global::System.Windows.Forms.Label());
-            this.cbDeinterlaceMethod = (new global::System.Windows.Forms.ComboBox());
-            this.label22 = (new global::System.Windows.Forms.Label());
-            this.cbDeinterlaceEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage15 = (new global::System.Windows.Forms.TabPage());
-            this.tbGaussianBlur = (new global::System.Windows.Forms.TrackBar());
-            this.cbGaussianBlurEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage16 = (new global::System.Windows.Forms.TabPage());
-            this.cbFishEyeEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.label3 = (new global::System.Windows.Forms.Label());
-            this.tabPage6 = (new global::System.Windows.Forms.TabPage());
-            this.label505 = (new global::System.Windows.Forms.Label());
-            this.rbMotionDetectionProcessor = (new global::System.Windows.Forms.ComboBox());
-            this.label389 = (new global::System.Windows.Forms.Label());
-            this.rbMotionDetectionDetector = (new global::System.Windows.Forms.ComboBox());
-            this.label65 = (new global::System.Windows.Forms.Label());
-            this.pbAFMotionLevel = (new global::System.Windows.Forms.ProgressBar());
-            this.cbMotionDetection = (new global::System.Windows.Forms.CheckBox());
-            this.tabPage9 = (new global::System.Windows.Forms.TabPage());
-            this.edBarcodeMetadata = (new global::System.Windows.Forms.TextBox());
-            this.label91 = (new global::System.Windows.Forms.Label());
-            this.cbBarcodeType = (new global::System.Windows.Forms.ComboBox());
-            this.label90 = (new global::System.Windows.Forms.Label());
-            this.btBarcodeReset = (new global::System.Windows.Forms.Button());
-            this.edBarcode = (new global::System.Windows.Forms.TextBox());
-            this.label89 = (new global::System.Windows.Forms.Label());
-            this.cbBarcodeDetectionEnabled = (new global::System.Windows.Forms.CheckBox());
-            this.colorDialog1 = (new global::System.Windows.Forms.ColorDialog());
-            this.btSaveSnapshot = (new global::System.Windows.Forms.Button());
-            this.dlgOpenImage = (new global::System.Windows.Forms.OpenFileDialog());
-            this.videoView1 = (new global::VisioForge.Core.UI.WinForms.VideoView());
-            this.mmLog = (new global::System.Windows.Forms.TextBox());
-            this.cbDebugMode = (new global::System.Windows.Forms.CheckBox());
-            this.label9 = (new global::System.Windows.Forms.Label());
-            this.groupBox2.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
-            this.tabControl1.SuspendLayout();
-            this.tabPage21.SuspendLayout();
-            this.tabControl6.SuspendLayout();
-            this.tabPage24.SuspendLayout();
-            this.tabPage22.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPLatency)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPUDPBufferSize)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPRTPBlockSize)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.tabControl18.SuspendLayout();
-            this.tabPage71.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).BeginInit();
-            this.tabPage72.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudBalanceLevel)).BeginInit();
-            this.tabPage5.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoFeedback)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoIntensity)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoDelay)).BeginInit();
-            this.tabPage7.SuspendLayout();
-            this.tabControl4.SuspendLayout();
-            this.tabPage8.SuspendLayout();
-            this.tabPage11.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoContrast)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoHue)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoBrightness)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoSaturation)).BeginInit();
-            this.tabPage17.SuspendLayout();
-            this.tabControl5.SuspendLayout();
-            this.tabPage18.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTextOverlayY)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTextOverlayX)).BeginInit();
-            this.tabPage19.SuspendLayout();
-            this.tabPage20.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbImageOverlayAlpha)).BeginInit();
-            this.tabPage12.SuspendLayout();
-            this.tabPage13.SuspendLayout();
-            this.tabPage14.SuspendLayout();
-            this.tabPage15.SuspendLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbGaussianBlur)).BeginInit();
-            this.tabPage16.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.tabPage9.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            tmPosition = new System.Windows.Forms.Timer(components);
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            btPrevFrame = new System.Windows.Forms.Button();
+            btNextFrame = new System.Windows.Forms.Button();
+            btStop = new System.Windows.Forms.Button();
+            btPause = new System.Windows.Forms.Button();
+            btResume = new System.Windows.Forms.Button();
+            btStart = new System.Windows.Forms.Button();
+            tbSpeed = new System.Windows.Forms.TrackBar();
+            lbSpeed = new System.Windows.Forms.Label();
+            lbTimeline = new System.Windows.Forms.Label();
+            tbTimeline = new System.Windows.Forms.TrackBar();
+            edFilenameOrURL = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            btSelectFile = new System.Windows.Forms.Button();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage21 = new System.Windows.Forms.TabPage();
+            tabControl6 = new System.Windows.Forms.TabControl();
+            tabPage24 = new System.Windows.Forms.TabPage();
+            cbSubtitlesCustomSettings = new System.Windows.Forms.CheckBox();
+            cbSubtitlesEnabled = new System.Windows.Forms.CheckBox();
+            tabPage22 = new System.Windows.Forms.TabPage();
+            cbRTSPProtocol = new System.Windows.Forms.ComboBox();
+            label50 = new System.Windows.Forms.Label();
+            lbRTSPLatency = new System.Windows.Forms.Label();
+            tbRTSPLatency = new System.Windows.Forms.TrackBar();
+            label53 = new System.Windows.Forms.Label();
+            lbRTSPUDPBufferSize = new System.Windows.Forms.Label();
+            tbRTSPUDPBufferSize = new System.Windows.Forms.TrackBar();
+            label52 = new System.Windows.Forms.Label();
+            lbRTSPRTPBlockSize = new System.Windows.Forms.Label();
+            tbRTSPRTPBlockSize = new System.Windows.Forms.TrackBar();
+            label49 = new System.Windows.Forms.Label();
+            edRTSPPassword = new System.Windows.Forms.TextBox();
+            label48 = new System.Windows.Forms.Label();
+            edRTSPUserName = new System.Windows.Forms.TextBox();
+            label47 = new System.Windows.Forms.Label();
+            tabPage23 = new System.Windows.Forms.TabPage();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            btReadInfo = new System.Windows.Forms.Button();
+            mmInfo = new System.Windows.Forms.TextBox();
+            btReadTags = new System.Windows.Forms.Button();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            cbAudioStream = new System.Windows.Forms.ComboBox();
+            label8 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            tbVolume1 = new System.Windows.Forms.TrackBar();
+            cbPlayAudio = new System.Windows.Forms.CheckBox();
+            cbAudioOutputDevice = new System.Windows.Forms.ComboBox();
+            label5 = new System.Windows.Forms.Label();
+            volumeMeter2 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            volumeMeter1 = new VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            label31 = new System.Windows.Forms.Label();
+            tabControl18 = new System.Windows.Forms.TabControl();
+            tabPage71 = new System.Windows.Forms.TabPage();
+            label231 = new System.Windows.Forms.Label();
+            label230 = new System.Windows.Forms.Label();
+            tbAudAmplifyAmp = new System.Windows.Forms.TrackBar();
+            label95 = new System.Windows.Forms.Label();
+            cbAudAmplifyEnabled = new System.Windows.Forms.CheckBox();
+            tabPage72 = new System.Windows.Forms.TabPage();
+            btAudEqUpdate = new System.Windows.Forms.Button();
+            label242 = new System.Windows.Forms.Label();
+            label241 = new System.Windows.Forms.Label();
+            label240 = new System.Windows.Forms.Label();
+            label239 = new System.Windows.Forms.Label();
+            label238 = new System.Windows.Forms.Label();
+            label237 = new System.Windows.Forms.Label();
+            label236 = new System.Windows.Forms.Label();
+            label235 = new System.Windows.Forms.Label();
+            label234 = new System.Windows.Forms.Label();
+            label233 = new System.Windows.Forms.Label();
+            label232 = new System.Windows.Forms.Label();
+            tbAudEq9 = new System.Windows.Forms.TrackBar();
+            tbAudEq8 = new System.Windows.Forms.TrackBar();
+            tbAudEq7 = new System.Windows.Forms.TrackBar();
+            tbAudEq6 = new System.Windows.Forms.TrackBar();
+            tbAudEq5 = new System.Windows.Forms.TrackBar();
+            tbAudEq4 = new System.Windows.Forms.TrackBar();
+            tbAudEq3 = new System.Windows.Forms.TrackBar();
+            tbAudEq2 = new System.Windows.Forms.TrackBar();
+            tbAudEq1 = new System.Windows.Forms.TrackBar();
+            tbAudEq0 = new System.Windows.Forms.TrackBar();
+            cbAudEqualizerEnabled = new System.Windows.Forms.CheckBox();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            tbAudBalanceLevel = new System.Windows.Forms.TrackBar();
+            cbAudBalanceEnabled = new System.Windows.Forms.CheckBox();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            lbAudEchoFeedback = new System.Windows.Forms.Label();
+            tbAudEchoFeedback = new System.Windows.Forms.TrackBar();
+            label19 = new System.Windows.Forms.Label();
+            lbAudEchoIntensity = new System.Windows.Forms.Label();
+            tbAudEchoIntensity = new System.Windows.Forms.TrackBar();
+            label17 = new System.Windows.Forms.Label();
+            lbAudEchoDelay = new System.Windows.Forms.Label();
+            tbAudEchoDelay = new System.Windows.Forms.TrackBar();
+            label4 = new System.Windows.Forms.Label();
+            cbAudEchoEnabled = new System.Windows.Forms.CheckBox();
+            tabPage7 = new System.Windows.Forms.TabPage();
+            tabControl4 = new System.Windows.Forms.TabControl();
+            tabPage8 = new System.Windows.Forms.TabPage();
+            label27 = new System.Windows.Forms.Label();
+            cbResizeMethod = new System.Windows.Forms.ComboBox();
+            label18 = new System.Windows.Forms.Label();
+            cbResizeLetterbox = new System.Windows.Forms.CheckBox();
+            label15 = new System.Windows.Forms.Label();
+            edResizeHeight = new System.Windows.Forms.TextBox();
+            edResizeWidth = new System.Windows.Forms.TextBox();
+            cbResizeEnabled = new System.Windows.Forms.CheckBox();
+            tabPage11 = new System.Windows.Forms.TabPage();
+            label201 = new System.Windows.Forms.Label();
+            label200 = new System.Windows.Forms.Label();
+            label199 = new System.Windows.Forms.Label();
+            label198 = new System.Windows.Forms.Label();
+            tbVideoContrast = new System.Windows.Forms.TrackBar();
+            tbVideoHue = new System.Windows.Forms.TrackBar();
+            tbVideoBrightness = new System.Windows.Forms.TrackBar();
+            tbVideoSaturation = new System.Windows.Forms.TrackBar();
+            cbVideoBalanceEnabled = new System.Windows.Forms.CheckBox();
+            tabPage17 = new System.Windows.Forms.TabPage();
+            btTextOverlayUpdate = new System.Windows.Forms.Button();
+            tabControl5 = new System.Windows.Forms.TabControl();
+            tabPage18 = new System.Windows.Forms.TabPage();
+            tbTextOverlayY = new System.Windows.Forms.TrackBar();
+            label42 = new System.Windows.Forms.Label();
+            tbTextOverlayX = new System.Windows.Forms.TrackBar();
+            label41 = new System.Windows.Forms.Label();
+            cbTextOverlayLineAlign = new System.Windows.Forms.ComboBox();
+            label37 = new System.Windows.Forms.Label();
+            cbTextOverlayHAlign = new System.Windows.Forms.ComboBox();
+            label33 = new System.Windows.Forms.Label();
+            cbTextOverlayVAlign = new System.Windows.Forms.ComboBox();
+            label32 = new System.Windows.Forms.Label();
+            edTextOverlayText = new System.Windows.Forms.TextBox();
+            label29 = new System.Windows.Forms.Label();
+            cbTextOverlayMode = new System.Windows.Forms.ComboBox();
+            label28 = new System.Windows.Forms.Label();
+            tabPage19 = new System.Windows.Forms.TabPage();
+            pnTextOverlayColor = new System.Windows.Forms.Panel();
+            label40 = new System.Windows.Forms.Label();
+            cbTextOverlayAutosize = new System.Windows.Forms.CheckBox();
+            cbTextOverlayFontFace = new System.Windows.Forms.ComboBox();
+            label39 = new System.Windows.Forms.Label();
+            cbTextOverlayFontWrapMode = new System.Windows.Forms.ComboBox();
+            label36 = new System.Windows.Forms.Label();
+            cbTextOverlayFontSize = new System.Windows.Forms.ComboBox();
+            label35 = new System.Windows.Forms.Label();
+            cbTextOverlayFontName = new System.Windows.Forms.ComboBox();
+            label34 = new System.Windows.Forms.Label();
+            cbTextOverlayEnabled = new System.Windows.Forms.CheckBox();
+            tabPage20 = new System.Windows.Forms.TabPage();
+            tbImageOverlayAlpha = new System.Windows.Forms.TrackBar();
+            label46 = new System.Windows.Forms.Label();
+            label45 = new System.Windows.Forms.Label();
+            label44 = new System.Windows.Forms.Label();
+            edImageOverlayY = new System.Windows.Forms.TextBox();
+            edImageOverlayX = new System.Windows.Forms.TextBox();
+            btImageOverlayOpen = new System.Windows.Forms.Button();
+            edImageOverlayFilename = new System.Windows.Forms.TextBox();
+            label43 = new System.Windows.Forms.Label();
+            cbImageOverlayEnabled = new System.Windows.Forms.CheckBox();
+            tabPage12 = new System.Windows.Forms.TabPage();
+            cbColorEffect = new System.Windows.Forms.ComboBox();
+            label20 = new System.Windows.Forms.Label();
+            cbColorEffectEnabled = new System.Windows.Forms.CheckBox();
+            tabPage13 = new System.Windows.Forms.TabPage();
+            cbFlipRotate = new System.Windows.Forms.ComboBox();
+            label21 = new System.Windows.Forms.Label();
+            cbFlipRotateEnabled = new System.Windows.Forms.CheckBox();
+            tabPage14 = new System.Windows.Forms.TabPage();
+            cbDeinterlaceDropOrphans = new System.Windows.Forms.CheckBox();
+            cbDeinterlaceIgnoreObscure = new System.Windows.Forms.CheckBox();
+            cbDeinterlaceLocking = new System.Windows.Forms.ComboBox();
+            label26 = new System.Windows.Forms.Label();
+            cbDeinterlaceMode = new System.Windows.Forms.ComboBox();
+            label25 = new System.Windows.Forms.Label();
+            cbDeinterlaceFieldLayout = new System.Windows.Forms.ComboBox();
+            label24 = new System.Windows.Forms.Label();
+            cbDeinterlaceFields = new System.Windows.Forms.ComboBox();
+            label23 = new System.Windows.Forms.Label();
+            cbDeinterlaceMethod = new System.Windows.Forms.ComboBox();
+            label22 = new System.Windows.Forms.Label();
+            cbDeinterlaceEnabled = new System.Windows.Forms.CheckBox();
+            tabPage15 = new System.Windows.Forms.TabPage();
+            tbGaussianBlur = new System.Windows.Forms.TrackBar();
+            cbGaussianBlurEnabled = new System.Windows.Forms.CheckBox();
+            tabPage16 = new System.Windows.Forms.TabPage();
+            cbFishEyeEnabled = new System.Windows.Forms.CheckBox();
+            label3 = new System.Windows.Forms.Label();
+            tabPage6 = new System.Windows.Forms.TabPage();
+            label505 = new System.Windows.Forms.Label();
+            rbMotionDetectionProcessor = new System.Windows.Forms.ComboBox();
+            label389 = new System.Windows.Forms.Label();
+            rbMotionDetectionDetector = new System.Windows.Forms.ComboBox();
+            label65 = new System.Windows.Forms.Label();
+            pbAFMotionLevel = new System.Windows.Forms.ProgressBar();
+            cbMotionDetection = new System.Windows.Forms.CheckBox();
+            tabPage9 = new System.Windows.Forms.TabPage();
+            edBarcodeMetadata = new System.Windows.Forms.TextBox();
+            label91 = new System.Windows.Forms.Label();
+            cbBarcodeType = new System.Windows.Forms.ComboBox();
+            label90 = new System.Windows.Forms.Label();
+            btBarcodeReset = new System.Windows.Forms.Button();
+            edBarcode = new System.Windows.Forms.TextBox();
+            label89 = new System.Windows.Forms.Label();
+            cbBarcodeDetectionEnabled = new System.Windows.Forms.CheckBox();
+            colorDialog1 = new System.Windows.Forms.ColorDialog();
+            btSaveSnapshot = new System.Windows.Forms.Button();
+            dlgOpenImage = new System.Windows.Forms.OpenFileDialog();
+            videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            mmLog = new System.Windows.Forms.TextBox();
+            cbDebugMode = new System.Windows.Forms.CheckBox();
+            label9 = new System.Windows.Forms.Label();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
+            tabControl1.SuspendLayout();
+            tabPage21.SuspendLayout();
+            tabControl6.SuspendLayout();
+            tabPage24.SuspendLayout();
+            tabPage22.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPLatency).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPUDPBufferSize).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPRTPBlockSize).BeginInit();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).BeginInit();
+            tabPage3.SuspendLayout();
+            tabControl18.SuspendLayout();
+            tabPage71.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).BeginInit();
+            tabPage72.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudBalanceLevel).BeginInit();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoFeedback).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoIntensity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoDelay).BeginInit();
+            tabPage7.SuspendLayout();
+            tabControl4.SuspendLayout();
+            tabPage8.SuspendLayout();
+            tabPage11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVideoContrast).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoHue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoBrightness).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoSaturation).BeginInit();
+            tabPage17.SuspendLayout();
+            tabControl5.SuspendLayout();
+            tabPage18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbTextOverlayY).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbTextOverlayX).BeginInit();
+            tabPage19.SuspendLayout();
+            tabPage20.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbImageOverlayAlpha).BeginInit();
+            tabPage12.SuspendLayout();
+            tabPage13.SuspendLayout();
+            tabPage14.SuspendLayout();
+            tabPage15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGaussianBlur).BeginInit();
+            tabPage16.SuspendLayout();
+            tabPage6.SuspendLayout();
+            tabPage9.SuspendLayout();
+            SuspendLayout();
             // 
             // tmPosition
             // 
-            this.tmPosition.Interval = (500);
-            this.tmPosition.Tick += (this.tmPosition_Tick);
+            tmPosition.Interval = 500;
+            tmPosition.Tick += tmPosition_Tick;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btPrevFrame);
-            this.groupBox2.Controls.Add(this.btNextFrame);
-            this.groupBox2.Controls.Add(this.btStop);
-            this.groupBox2.Controls.Add(this.btPause);
-            this.groupBox2.Controls.Add(this.btResume);
-            this.groupBox2.Controls.Add(this.btStart);
-            this.groupBox2.Controls.Add(this.tbSpeed);
-            this.groupBox2.Controls.Add(this.lbSpeed);
-            this.groupBox2.Controls.Add(this.lbTimeline);
-            this.groupBox2.Controls.Add(this.tbTimeline);
-            this.groupBox2.Location = (new global::System.Drawing.Point(445, 473));
-            this.groupBox2.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.groupBox2.Name = ("groupBox2");
-            this.groupBox2.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.groupBox2.Size = (new global::System.Drawing.Size(552, 138));
-            this.groupBox2.TabIndex = (20);
-            this.groupBox2.TabStop = (false);
-            this.groupBox2.Text = ("Controls");
+            groupBox2.Controls.Add(btPrevFrame);
+            groupBox2.Controls.Add(btNextFrame);
+            groupBox2.Controls.Add(btStop);
+            groupBox2.Controls.Add(btPause);
+            groupBox2.Controls.Add(btResume);
+            groupBox2.Controls.Add(btStart);
+            groupBox2.Controls.Add(tbSpeed);
+            groupBox2.Controls.Add(lbSpeed);
+            groupBox2.Controls.Add(lbTimeline);
+            groupBox2.Controls.Add(tbTimeline);
+            groupBox2.Location = new System.Drawing.Point(556, 591);
+            groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox2.Size = new System.Drawing.Size(690, 172);
+            groupBox2.TabIndex = 20;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Controls";
             // 
             // btPrevFrame
             // 
-            this.btPrevFrame.Location = (new global::System.Drawing.Point(327, 90));
-            this.btPrevFrame.Margin = (new global::System.Windows.Forms.Padding(2, 2, 2, 2));
-            this.btPrevFrame.Name = ("btPrevFrame");
-            this.btPrevFrame.Size = (new global::System.Drawing.Size(100, 35));
-            this.btPrevFrame.TabIndex = (42);
-            this.btPrevFrame.Text = ("Prev frame");
-            this.btPrevFrame.UseVisualStyleBackColor = (true);
-            this.btPrevFrame.Click += (this.btPrevFrame_Click);
+            btPrevFrame.Location = new System.Drawing.Point(409, 112);
+            btPrevFrame.Margin = new System.Windows.Forms.Padding(2);
+            btPrevFrame.Name = "btPrevFrame";
+            btPrevFrame.Size = new System.Drawing.Size(125, 44);
+            btPrevFrame.TabIndex = 42;
+            btPrevFrame.Text = "Prev frame";
+            btPrevFrame.UseVisualStyleBackColor = true;
+            btPrevFrame.Click += btPrevFrame_Click;
             // 
             // btNextFrame
             // 
-            this.btNextFrame.Location = (new global::System.Drawing.Point(433, 90));
-            this.btNextFrame.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btNextFrame.Name = ("btNextFrame");
-            this.btNextFrame.Size = (new global::System.Drawing.Size(100, 35));
-            this.btNextFrame.TabIndex = (8);
-            this.btNextFrame.Text = ("Next frame");
-            this.btNextFrame.UseVisualStyleBackColor = (true);
-            this.btNextFrame.Click += (this.btNextFrame_Click);
+            btNextFrame.Location = new System.Drawing.Point(541, 112);
+            btNextFrame.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btNextFrame.Name = "btNextFrame";
+            btNextFrame.Size = new System.Drawing.Size(125, 44);
+            btNextFrame.TabIndex = 8;
+            btNextFrame.Text = "Next frame";
+            btNextFrame.UseVisualStyleBackColor = true;
+            btNextFrame.Click += btNextFrame_Click;
             // 
             // btStop
             // 
-            this.btStop.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.btStop.Location = (new global::System.Drawing.Point(240, 90));
-            this.btStop.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btStop.Name = ("btStop");
-            this.btStop.Size = (new global::System.Drawing.Size(61, 35));
-            this.btStop.TabIndex = (7);
-            this.btStop.Text = ("Stop");
-            this.btStop.UseVisualStyleBackColor = (true);
-            this.btStop.Click += (this.btStop_Click);
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            btStop.Location = new System.Drawing.Point(300, 112);
+            btStop.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(76, 44);
+            btStop.TabIndex = 7;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // btPause
             // 
-            this.btPause.Location = (new global::System.Drawing.Point(163, 90));
-            this.btPause.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btPause.Name = ("btPause");
-            this.btPause.Size = (new global::System.Drawing.Size(69, 35));
-            this.btPause.TabIndex = (6);
-            this.btPause.Text = ("Pause");
-            this.btPause.UseVisualStyleBackColor = (true);
-            this.btPause.Click += (this.btPause_Click);
+            btPause.Location = new System.Drawing.Point(204, 112);
+            btPause.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btPause.Name = "btPause";
+            btPause.Size = new System.Drawing.Size(86, 44);
+            btPause.TabIndex = 6;
+            btPause.Text = "Pause";
+            btPause.UseVisualStyleBackColor = true;
+            btPause.Click += btPause_Click;
             // 
             // btResume
             // 
-            this.btResume.Location = (new global::System.Drawing.Point(73, 90));
-            this.btResume.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btResume.Name = ("btResume");
-            this.btResume.Size = (new global::System.Drawing.Size(82, 35));
-            this.btResume.TabIndex = (5);
-            this.btResume.Text = ("Resume");
-            this.btResume.UseVisualStyleBackColor = (true);
-            this.btResume.Click += (this.btResume_Click);
+            btResume.Location = new System.Drawing.Point(91, 112);
+            btResume.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btResume.Name = "btResume";
+            btResume.Size = new System.Drawing.Size(102, 44);
+            btResume.TabIndex = 5;
+            btResume.Text = "Resume";
+            btResume.UseVisualStyleBackColor = true;
+            btResume.Click += btResume_Click;
             // 
             // btStart
             // 
-            this.btStart.Font = (new global::System.Drawing.Font("Microsoft Sans Serif", 8.25F, global::System.Drawing.FontStyle.Bold, global::System.Drawing.GraphicsUnit.Point));
-            this.btStart.Location = (new global::System.Drawing.Point(8, 90));
-            this.btStart.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btStart.Name = ("btStart");
-            this.btStart.Size = (new global::System.Drawing.Size(57, 35));
-            this.btStart.TabIndex = (4);
-            this.btStart.Text = ("Start");
-            this.btStart.UseVisualStyleBackColor = (true);
-            this.btStart.Click += (this.btStart_Click);
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            btStart.Location = new System.Drawing.Point(10, 112);
+            btStart.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(71, 44);
+            btStart.TabIndex = 4;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // tbSpeed
             // 
-            this.tbSpeed.Location = (new global::System.Drawing.Point(428, 42));
-            this.tbSpeed.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbSpeed.Maximum = (35);
-            this.tbSpeed.Minimum = (-25);
-            this.tbSpeed.Name = ("tbSpeed");
-            this.tbSpeed.Size = (new global::System.Drawing.Size(119, 56));
-            this.tbSpeed.TabIndex = (3);
-            this.tbSpeed.Value = (10);
-            this.tbSpeed.Scroll += (this.tbSpeed_Scroll);
+            tbSpeed.Location = new System.Drawing.Point(535, 52);
+            tbSpeed.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbSpeed.Maximum = 35;
+            tbSpeed.Minimum = -25;
+            tbSpeed.Name = "tbSpeed";
+            tbSpeed.Size = new System.Drawing.Size(149, 69);
+            tbSpeed.TabIndex = 3;
+            tbSpeed.Value = 10;
+            tbSpeed.Scroll += tbSpeed_Scroll;
             // 
             // lbSpeed
             // 
-            this.lbSpeed.AutoSize = (true);
-            this.lbSpeed.Location = (new global::System.Drawing.Point(429, 17));
-            this.lbSpeed.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbSpeed.Name = ("lbSpeed");
-            this.lbSpeed.Size = (new global::System.Drawing.Size(77, 20));
-            this.lbSpeed.TabIndex = (2);
-            this.lbSpeed.Text = ("Speed: 1.0");
+            lbSpeed.AutoSize = true;
+            lbSpeed.Location = new System.Drawing.Point(536, 21);
+            lbSpeed.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbSpeed.Name = "lbSpeed";
+            lbSpeed.Size = new System.Drawing.Size(95, 25);
+            lbSpeed.TabIndex = 2;
+            lbSpeed.Text = "Speed: 1.0";
             // 
             // lbTimeline
             // 
-            this.lbTimeline.AutoSize = (true);
-            this.lbTimeline.Location = (new global::System.Drawing.Point(292, 42));
-            this.lbTimeline.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbTimeline.Name = ("lbTimeline");
-            this.lbTimeline.Size = (new global::System.Drawing.Size(123, 20));
-            this.lbTimeline.TabIndex = (1);
-            this.lbTimeline.Text = ("00:00:00/00:00:00");
+            lbTimeline.AutoSize = true;
+            lbTimeline.Location = new System.Drawing.Point(365, 52);
+            lbTimeline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbTimeline.Name = "lbTimeline";
+            lbTimeline.Size = new System.Drawing.Size(155, 25);
+            lbTimeline.TabIndex = 1;
+            lbTimeline.Text = "00:00:00/00:00:00";
             // 
             // tbTimeline
             // 
-            this.tbTimeline.Location = (new global::System.Drawing.Point(8, 30));
-            this.tbTimeline.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbTimeline.Maximum = (100);
-            this.tbTimeline.Name = ("tbTimeline");
-            this.tbTimeline.Size = (new global::System.Drawing.Size(276, 56));
-            this.tbTimeline.TabIndex = (0);
-            this.tbTimeline.Scroll += (this.tbTimeline_Scroll);
+            tbTimeline.Location = new System.Drawing.Point(10, 38);
+            tbTimeline.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTimeline.Maximum = 100;
+            tbTimeline.Name = "tbTimeline";
+            tbTimeline.Size = new System.Drawing.Size(345, 69);
+            tbTimeline.TabIndex = 0;
+            tbTimeline.Scroll += tbTimeline_Scroll;
             // 
             // edFilenameOrURL
             // 
-            this.edFilenameOrURL.Location = (new global::System.Drawing.Point(445, 38));
-            this.edFilenameOrURL.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edFilenameOrURL.Name = ("edFilenameOrURL");
-            this.edFilenameOrURL.Size = (new global::System.Drawing.Size(512, 27));
-            this.edFilenameOrURL.TabIndex = (19);
-            this.edFilenameOrURL.Text = ("c:\\samples\\!video.mp4");
+            edFilenameOrURL.Location = new System.Drawing.Point(556, 48);
+            edFilenameOrURL.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edFilenameOrURL.Name = "edFilenameOrURL";
+            edFilenameOrURL.Size = new System.Drawing.Size(639, 31);
+            edFilenameOrURL.TabIndex = 19;
+            edFilenameOrURL.Text = "c:\\samples\\!video.mp4";
             // 
             // label14
             // 
-            this.label14.AutoSize = (true);
-            this.label14.Location = (new global::System.Drawing.Point(441, 14));
-            this.label14.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label14.Name = ("label14");
-            this.label14.Size = (new global::System.Drawing.Size(121, 20));
-            this.label14.TabIndex = (18);
-            this.label14.Text = ("File name or URL");
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(551, 18);
+            label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(145, 25);
+            label14.TabIndex = 18;
+            label14.Text = "File name or URL";
             // 
             // btSelectFile
             // 
-            this.btSelectFile.Location = (new global::System.Drawing.Point(967, 35));
-            this.btSelectFile.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btSelectFile.Name = ("btSelectFile");
-            this.btSelectFile.Size = (new global::System.Drawing.Size(30, 35));
-            this.btSelectFile.TabIndex = (23);
-            this.btSelectFile.Text = ("...");
-            this.btSelectFile.UseVisualStyleBackColor = (true);
-            this.btSelectFile.Click += (this.btSelectFile_Click);
+            btSelectFile.Location = new System.Drawing.Point(1209, 44);
+            btSelectFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btSelectFile.Name = "btSelectFile";
+            btSelectFile.Size = new System.Drawing.Size(38, 44);
+            btSelectFile.TabIndex = 23;
+            btSelectFile.Text = "...";
+            btSelectFile.UseVisualStyleBackColor = true;
+            btSelectFile.Click += btSelectFile_Click;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage21);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage9);
-            this.tabControl1.Location = (new global::System.Drawing.Point(16, 18));
-            this.tabControl1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabControl1.Name = ("tabControl1");
-            this.tabControl1.SelectedIndex = (0);
-            this.tabControl1.Size = (new global::System.Drawing.Size(418, 800));
-            this.tabControl1.TabIndex = (25);
+            tabControl1.Controls.Add(tabPage21);
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage7);
+            tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage9);
+            tabControl1.Location = new System.Drawing.Point(20, 22);
+            tabControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(522, 1000);
+            tabControl1.TabIndex = 25;
             // 
             // tabPage21
             // 
-            this.tabPage21.Controls.Add(this.tabControl6);
-            this.tabPage21.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage21.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage21.Name = ("tabPage21");
-            this.tabPage21.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage21.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage21.TabIndex = (4);
-            this.tabPage21.Text = ("Source settings");
-            this.tabPage21.UseVisualStyleBackColor = (true);
+            tabPage21.Controls.Add(tabControl6);
+            tabPage21.Location = new System.Drawing.Point(4, 34);
+            tabPage21.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage21.Name = "tabPage21";
+            tabPage21.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage21.Size = new System.Drawing.Size(514, 962);
+            tabPage21.TabIndex = 4;
+            tabPage21.Text = "Source settings";
+            tabPage21.UseVisualStyleBackColor = true;
             // 
             // tabControl6
             // 
-            this.tabControl6.Controls.Add(this.tabPage24);
-            this.tabControl6.Controls.Add(this.tabPage22);
-            this.tabControl6.Controls.Add(this.tabPage23);
-            this.tabControl6.Location = (new global::System.Drawing.Point(8, 10));
-            this.tabControl6.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabControl6.Name = ("tabControl6");
-            this.tabControl6.SelectedIndex = (0);
-            this.tabControl6.Size = (new global::System.Drawing.Size(391, 742));
-            this.tabControl6.TabIndex = (0);
+            tabControl6.Controls.Add(tabPage24);
+            tabControl6.Controls.Add(tabPage22);
+            tabControl6.Controls.Add(tabPage23);
+            tabControl6.Location = new System.Drawing.Point(10, 12);
+            tabControl6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl6.Name = "tabControl6";
+            tabControl6.SelectedIndex = 0;
+            tabControl6.Size = new System.Drawing.Size(489, 928);
+            tabControl6.TabIndex = 0;
             // 
             // tabPage24
             // 
-            this.tabPage24.Controls.Add(this.cbSubtitlesCustomSettings);
-            this.tabPage24.Controls.Add(this.cbSubtitlesEnabled);
-            this.tabPage24.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage24.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage24.Name = ("tabPage24");
-            this.tabPage24.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage24.Size = (new global::System.Drawing.Size(383, 709));
-            this.tabPage24.TabIndex = (2);
-            this.tabPage24.Text = ("Subtitles");
-            this.tabPage24.UseVisualStyleBackColor = (true);
+            tabPage24.Controls.Add(cbSubtitlesCustomSettings);
+            tabPage24.Controls.Add(cbSubtitlesEnabled);
+            tabPage24.Location = new System.Drawing.Point(4, 34);
+            tabPage24.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage24.Name = "tabPage24";
+            tabPage24.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage24.Size = new System.Drawing.Size(481, 890);
+            tabPage24.TabIndex = 2;
+            tabPage24.Text = "Subtitles";
+            tabPage24.UseVisualStyleBackColor = true;
             // 
             // cbSubtitlesCustomSettings
             // 
-            this.cbSubtitlesCustomSettings.AutoSize = (true);
-            this.cbSubtitlesCustomSettings.Location = (new global::System.Drawing.Point(21, 60));
-            this.cbSubtitlesCustomSettings.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbSubtitlesCustomSettings.Name = ("cbSubtitlesCustomSettings");
-            this.cbSubtitlesCustomSettings.Size = (new global::System.Drawing.Size(363, 24));
-            this.cbSubtitlesCustomSettings.TabIndex = (1);
-            this.cbSubtitlesCustomSettings.Text = ("Use custom font settings from the Text overlay tab");
-            this.cbSubtitlesCustomSettings.UseVisualStyleBackColor = (true);
-            this.cbSubtitlesCustomSettings.CheckedChanged += (this.cbSubtitlesCustomSettings_CheckedChanged);
+            cbSubtitlesCustomSettings.AutoSize = true;
+            cbSubtitlesCustomSettings.Location = new System.Drawing.Point(26, 75);
+            cbSubtitlesCustomSettings.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbSubtitlesCustomSettings.Name = "cbSubtitlesCustomSettings";
+            cbSubtitlesCustomSettings.Size = new System.Drawing.Size(438, 29);
+            cbSubtitlesCustomSettings.TabIndex = 1;
+            cbSubtitlesCustomSettings.Text = "Use custom font settings from the Text overlay tab";
+            cbSubtitlesCustomSettings.UseVisualStyleBackColor = true;
+            cbSubtitlesCustomSettings.CheckedChanged += cbSubtitlesCustomSettings_CheckedChanged;
             // 
             // cbSubtitlesEnabled
             // 
-            this.cbSubtitlesEnabled.AutoSize = (true);
-            this.cbSubtitlesEnabled.Checked = (true);
-            this.cbSubtitlesEnabled.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.cbSubtitlesEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbSubtitlesEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbSubtitlesEnabled.Name = ("cbSubtitlesEnabled");
-            this.cbSubtitlesEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbSubtitlesEnabled.TabIndex = (0);
-            this.cbSubtitlesEnabled.Text = ("Enabled");
-            this.cbSubtitlesEnabled.UseVisualStyleBackColor = (true);
-            this.cbSubtitlesEnabled.CheckedChanged += (this.cbSubtitlesEnabled_CheckedChanged);
+            cbSubtitlesEnabled.AutoSize = true;
+            cbSubtitlesEnabled.Checked = true;
+            cbSubtitlesEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbSubtitlesEnabled.Location = new System.Drawing.Point(26, 31);
+            cbSubtitlesEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbSubtitlesEnabled.Name = "cbSubtitlesEnabled";
+            cbSubtitlesEnabled.Size = new System.Drawing.Size(101, 29);
+            cbSubtitlesEnabled.TabIndex = 0;
+            cbSubtitlesEnabled.Text = "Enabled";
+            cbSubtitlesEnabled.UseVisualStyleBackColor = true;
+            cbSubtitlesEnabled.CheckedChanged += cbSubtitlesEnabled_CheckedChanged;
             // 
             // tabPage22
             // 
-            this.tabPage22.Controls.Add(this.cbRTSPProtocol);
-            this.tabPage22.Controls.Add(this.label50);
-            this.tabPage22.Controls.Add(this.lbRTSPLatency);
-            this.tabPage22.Controls.Add(this.tbRTSPLatency);
-            this.tabPage22.Controls.Add(this.label53);
-            this.tabPage22.Controls.Add(this.lbRTSPUDPBufferSize);
-            this.tabPage22.Controls.Add(this.tbRTSPUDPBufferSize);
-            this.tabPage22.Controls.Add(this.label52);
-            this.tabPage22.Controls.Add(this.lbRTSPRTPBlockSize);
-            this.tabPage22.Controls.Add(this.tbRTSPRTPBlockSize);
-            this.tabPage22.Controls.Add(this.label49);
-            this.tabPage22.Controls.Add(this.edRTSPPassword);
-            this.tabPage22.Controls.Add(this.label48);
-            this.tabPage22.Controls.Add(this.edRTSPUserName);
-            this.tabPage22.Controls.Add(this.label47);
-            this.tabPage22.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage22.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage22.Name = ("tabPage22");
-            this.tabPage22.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage22.Size = (new global::System.Drawing.Size(383, 709));
-            this.tabPage22.TabIndex = (0);
-            this.tabPage22.Text = ("RTSP");
-            this.tabPage22.UseVisualStyleBackColor = (true);
+            tabPage22.Controls.Add(cbRTSPProtocol);
+            tabPage22.Controls.Add(label50);
+            tabPage22.Controls.Add(lbRTSPLatency);
+            tabPage22.Controls.Add(tbRTSPLatency);
+            tabPage22.Controls.Add(label53);
+            tabPage22.Controls.Add(lbRTSPUDPBufferSize);
+            tabPage22.Controls.Add(tbRTSPUDPBufferSize);
+            tabPage22.Controls.Add(label52);
+            tabPage22.Controls.Add(lbRTSPRTPBlockSize);
+            tabPage22.Controls.Add(tbRTSPRTPBlockSize);
+            tabPage22.Controls.Add(label49);
+            tabPage22.Controls.Add(edRTSPPassword);
+            tabPage22.Controls.Add(label48);
+            tabPage22.Controls.Add(edRTSPUserName);
+            tabPage22.Controls.Add(label47);
+            tabPage22.Location = new System.Drawing.Point(4, 34);
+            tabPage22.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage22.Name = "tabPage22";
+            tabPage22.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage22.Size = new System.Drawing.Size(481, 890);
+            tabPage22.TabIndex = 0;
+            tabPage22.Text = "RTSP";
+            tabPage22.UseVisualStyleBackColor = true;
             // 
             // cbRTSPProtocol
             // 
-            this.cbRTSPProtocol.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbRTSPProtocol.FormattingEnabled = (true);
-            this.cbRTSPProtocol.Items.AddRange(new global::System.Object[] { "Auto", "TCP", "UDP", "HTTP over RTSP" });
-            this.cbRTSPProtocol.Location = (new global::System.Drawing.Point(21, 537));
-            this.cbRTSPProtocol.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbRTSPProtocol.Name = ("cbRTSPProtocol");
-            this.cbRTSPProtocol.Size = (new global::System.Drawing.Size(335, 28));
-            this.cbRTSPProtocol.TabIndex = (14);
+            cbRTSPProtocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbRTSPProtocol.FormattingEnabled = true;
+            cbRTSPProtocol.Items.AddRange(new object[] { "Auto", "TCP", "UDP", "HTTP over RTSP" });
+            cbRTSPProtocol.Location = new System.Drawing.Point(26, 671);
+            cbRTSPProtocol.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbRTSPProtocol.Name = "cbRTSPProtocol";
+            cbRTSPProtocol.Size = new System.Drawing.Size(418, 33);
+            cbRTSPProtocol.TabIndex = 14;
             // 
             // label50
             // 
-            this.label50.AutoSize = (true);
-            this.label50.Location = (new global::System.Drawing.Point(18, 512));
-            this.label50.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label50.Name = ("label50");
-            this.label50.Size = (new global::System.Drawing.Size(71, 20));
-            this.label50.TabIndex = (13);
-            this.label50.Text = ("Protocols");
+            label50.AutoSize = true;
+            label50.Location = new System.Drawing.Point(22, 640);
+            label50.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label50.Name = "label50";
+            label50.Size = new System.Drawing.Size(87, 25);
+            label50.TabIndex = 13;
+            label50.Text = "Protocols";
             // 
             // lbRTSPLatency
             // 
-            this.lbRTSPLatency.AutoSize = (true);
-            this.lbRTSPLatency.Location = (new global::System.Drawing.Point(285, 397));
-            this.lbRTSPLatency.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbRTSPLatency.Name = ("lbRTSPLatency");
-            this.lbRTSPLatency.Size = (new global::System.Drawing.Size(33, 20));
-            this.lbRTSPLatency.TabIndex = (12);
-            this.lbRTSPLatency.Text = ("200");
+            lbRTSPLatency.AutoSize = true;
+            lbRTSPLatency.Location = new System.Drawing.Point(356, 496);
+            lbRTSPLatency.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbRTSPLatency.Name = "lbRTSPLatency";
+            lbRTSPLatency.Size = new System.Drawing.Size(42, 25);
+            lbRTSPLatency.TabIndex = 12;
+            lbRTSPLatency.Text = "200";
             // 
             // tbRTSPLatency
             // 
-            this.tbRTSPLatency.Location = (new global::System.Drawing.Point(21, 422));
-            this.tbRTSPLatency.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbRTSPLatency.Maximum = (2000);
-            this.tbRTSPLatency.Name = ("tbRTSPLatency");
-            this.tbRTSPLatency.Size = (new global::System.Drawing.Size(336, 56));
-            this.tbRTSPLatency.TabIndex = (11);
-            this.tbRTSPLatency.TickFrequency = (20);
-            this.tbRTSPLatency.Value = (200);
-            this.tbRTSPLatency.Scroll += (this.tbRTSPLatency_Scroll);
+            tbRTSPLatency.Location = new System.Drawing.Point(26, 528);
+            tbRTSPLatency.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbRTSPLatency.Maximum = 2000;
+            tbRTSPLatency.Name = "tbRTSPLatency";
+            tbRTSPLatency.Size = new System.Drawing.Size(420, 69);
+            tbRTSPLatency.TabIndex = 11;
+            tbRTSPLatency.TickFrequency = 20;
+            tbRTSPLatency.Value = 200;
+            tbRTSPLatency.Scroll += tbRTSPLatency_Scroll;
             // 
             // label53
             // 
-            this.label53.AutoSize = (true);
-            this.label53.Location = (new global::System.Drawing.Point(18, 397));
-            this.label53.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label53.Name = ("label53");
-            this.label53.Size = (new global::System.Drawing.Size(92, 20));
-            this.label53.TabIndex = (10);
-            this.label53.Text = ("Latency (ms)");
+            label53.AutoSize = true;
+            label53.Location = new System.Drawing.Point(22, 496);
+            label53.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label53.Name = "label53";
+            label53.Size = new System.Drawing.Size(110, 25);
+            label53.TabIndex = 10;
+            label53.Text = "Latency (ms)";
             // 
             // lbRTSPUDPBufferSize
             // 
-            this.lbRTSPUDPBufferSize.AutoSize = (true);
-            this.lbRTSPUDPBufferSize.Location = (new global::System.Drawing.Point(285, 280));
-            this.lbRTSPUDPBufferSize.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbRTSPUDPBufferSize.Name = ("lbRTSPUDPBufferSize");
-            this.lbRTSPUDPBufferSize.Size = (new global::System.Drawing.Size(33, 20));
-            this.lbRTSPUDPBufferSize.TabIndex = (9);
-            this.lbRTSPUDPBufferSize.Text = ("512");
+            lbRTSPUDPBufferSize.AutoSize = true;
+            lbRTSPUDPBufferSize.Location = new System.Drawing.Point(356, 350);
+            lbRTSPUDPBufferSize.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbRTSPUDPBufferSize.Name = "lbRTSPUDPBufferSize";
+            lbRTSPUDPBufferSize.Size = new System.Drawing.Size(42, 25);
+            lbRTSPUDPBufferSize.TabIndex = 9;
+            lbRTSPUDPBufferSize.Text = "512";
             // 
             // tbRTSPUDPBufferSize
             // 
-            this.tbRTSPUDPBufferSize.Location = (new global::System.Drawing.Point(21, 305));
-            this.tbRTSPUDPBufferSize.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbRTSPUDPBufferSize.Maximum = (512);
-            this.tbRTSPUDPBufferSize.Name = ("tbRTSPUDPBufferSize");
-            this.tbRTSPUDPBufferSize.Size = (new global::System.Drawing.Size(336, 56));
-            this.tbRTSPUDPBufferSize.SmallChange = (4);
-            this.tbRTSPUDPBufferSize.TabIndex = (8);
-            this.tbRTSPUDPBufferSize.TickFrequency = (10);
-            this.tbRTSPUDPBufferSize.Value = (512);
-            this.tbRTSPUDPBufferSize.Scroll += (this.tbRTSPUDPBufferSize_Scroll);
+            tbRTSPUDPBufferSize.Location = new System.Drawing.Point(26, 381);
+            tbRTSPUDPBufferSize.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbRTSPUDPBufferSize.Maximum = 512;
+            tbRTSPUDPBufferSize.Name = "tbRTSPUDPBufferSize";
+            tbRTSPUDPBufferSize.Size = new System.Drawing.Size(420, 69);
+            tbRTSPUDPBufferSize.SmallChange = 4;
+            tbRTSPUDPBufferSize.TabIndex = 8;
+            tbRTSPUDPBufferSize.TickFrequency = 10;
+            tbRTSPUDPBufferSize.Value = 512;
+            tbRTSPUDPBufferSize.Scroll += tbRTSPUDPBufferSize_Scroll;
             // 
             // label52
             // 
-            this.label52.AutoSize = (true);
-            this.label52.Location = (new global::System.Drawing.Point(18, 280));
-            this.label52.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label52.Name = ("label52");
-            this.label52.Size = (new global::System.Drawing.Size(143, 20));
-            this.label52.TabIndex = (7);
-            this.label52.Text = ("UDP buffer size (KB)");
+            label52.AutoSize = true;
+            label52.Location = new System.Drawing.Point(22, 350);
+            label52.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label52.Name = "label52";
+            label52.Size = new System.Drawing.Size(169, 25);
+            label52.TabIndex = 7;
+            label52.Text = "UDP buffer size (KB)";
             // 
             // lbRTSPRTPBlockSize
             // 
-            this.lbRTSPRTPBlockSize.AutoSize = (true);
-            this.lbRTSPRTPBlockSize.Location = (new global::System.Drawing.Point(285, 165));
-            this.lbRTSPRTPBlockSize.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbRTSPRTPBlockSize.Name = ("lbRTSPRTPBlockSize");
-            this.lbRTSPRTPBlockSize.Size = (new global::System.Drawing.Size(17, 20));
-            this.lbRTSPRTPBlockSize.TabIndex = (6);
-            this.lbRTSPRTPBlockSize.Text = ("0");
+            lbRTSPRTPBlockSize.AutoSize = true;
+            lbRTSPRTPBlockSize.Location = new System.Drawing.Point(356, 206);
+            lbRTSPRTPBlockSize.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbRTSPRTPBlockSize.Name = "lbRTSPRTPBlockSize";
+            lbRTSPRTPBlockSize.Size = new System.Drawing.Size(22, 25);
+            lbRTSPRTPBlockSize.TabIndex = 6;
+            lbRTSPRTPBlockSize.Text = "0";
             // 
             // tbRTSPRTPBlockSize
             // 
-            this.tbRTSPRTPBlockSize.Location = (new global::System.Drawing.Point(21, 190));
-            this.tbRTSPRTPBlockSize.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbRTSPRTPBlockSize.Maximum = (64);
-            this.tbRTSPRTPBlockSize.Name = ("tbRTSPRTPBlockSize");
-            this.tbRTSPRTPBlockSize.Size = (new global::System.Drawing.Size(336, 56));
-            this.tbRTSPRTPBlockSize.SmallChange = (4);
-            this.tbRTSPRTPBlockSize.TabIndex = (5);
-            this.tbRTSPRTPBlockSize.TickFrequency = (4);
-            this.tbRTSPRTPBlockSize.Scroll += (this.tbRTSPRTPBlockSize_Scroll);
+            tbRTSPRTPBlockSize.Location = new System.Drawing.Point(26, 238);
+            tbRTSPRTPBlockSize.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbRTSPRTPBlockSize.Maximum = 64;
+            tbRTSPRTPBlockSize.Name = "tbRTSPRTPBlockSize";
+            tbRTSPRTPBlockSize.Size = new System.Drawing.Size(420, 69);
+            tbRTSPRTPBlockSize.SmallChange = 4;
+            tbRTSPRTPBlockSize.TabIndex = 5;
+            tbRTSPRTPBlockSize.TickFrequency = 4;
+            tbRTSPRTPBlockSize.Scroll += tbRTSPRTPBlockSize_Scroll;
             // 
             // label49
             // 
-            this.label49.AutoSize = (true);
-            this.label49.Location = (new global::System.Drawing.Point(18, 165));
-            this.label49.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label49.Name = ("label49");
-            this.label49.Size = (new global::System.Drawing.Size(197, 20));
-            this.label49.TabIndex = (4);
-            this.label49.Text = ("RTP block size (KB, 0 is auto)");
+            label49.AutoSize = true;
+            label49.Location = new System.Drawing.Point(22, 206);
+            label49.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label49.Name = "label49";
+            label49.Size = new System.Drawing.Size(235, 25);
+            label49.TabIndex = 4;
+            label49.Text = "RTP block size (KB, 0 is auto)";
             // 
             // edRTSPPassword
             // 
-            this.edRTSPPassword.Location = (new global::System.Drawing.Point(21, 115));
-            this.edRTSPPassword.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edRTSPPassword.Name = ("edRTSPPassword");
-            this.edRTSPPassword.Size = (new global::System.Drawing.Size(335, 27));
-            this.edRTSPPassword.TabIndex = (3);
+            edRTSPPassword.Location = new System.Drawing.Point(26, 144);
+            edRTSPPassword.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edRTSPPassword.Name = "edRTSPPassword";
+            edRTSPPassword.Size = new System.Drawing.Size(418, 31);
+            edRTSPPassword.TabIndex = 3;
             // 
             // label48
             // 
-            this.label48.AutoSize = (true);
-            this.label48.Location = (new global::System.Drawing.Point(18, 90));
-            this.label48.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label48.Name = ("label48");
-            this.label48.Size = (new global::System.Drawing.Size(70, 20));
-            this.label48.TabIndex = (2);
-            this.label48.Text = ("Password");
+            label48.AutoSize = true;
+            label48.Location = new System.Drawing.Point(22, 112);
+            label48.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label48.Name = "label48";
+            label48.Size = new System.Drawing.Size(87, 25);
+            label48.TabIndex = 2;
+            label48.Text = "Password";
             // 
             // edRTSPUserName
             // 
-            this.edRTSPUserName.Location = (new global::System.Drawing.Point(21, 45));
-            this.edRTSPUserName.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edRTSPUserName.Name = ("edRTSPUserName");
-            this.edRTSPUserName.Size = (new global::System.Drawing.Size(335, 27));
-            this.edRTSPUserName.TabIndex = (1);
+            edRTSPUserName.Location = new System.Drawing.Point(26, 56);
+            edRTSPUserName.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edRTSPUserName.Name = "edRTSPUserName";
+            edRTSPUserName.Size = new System.Drawing.Size(418, 31);
+            edRTSPUserName.TabIndex = 1;
             // 
             // label47
             // 
-            this.label47.AutoSize = (true);
-            this.label47.Location = (new global::System.Drawing.Point(18, 20));
-            this.label47.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label47.Name = ("label47");
-            this.label47.Size = (new global::System.Drawing.Size(79, 20));
-            this.label47.TabIndex = (0);
-            this.label47.Text = ("User name");
+            label47.AutoSize = true;
+            label47.Location = new System.Drawing.Point(22, 25);
+            label47.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label47.Name = "label47";
+            label47.Size = new System.Drawing.Size(96, 25);
+            label47.TabIndex = 0;
+            label47.Text = "User name";
             // 
             // tabPage23
             // 
-            this.tabPage23.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage23.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage23.Name = ("tabPage23");
-            this.tabPage23.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage23.Size = (new global::System.Drawing.Size(383, 709));
-            this.tabPage23.TabIndex = (1);
-            this.tabPage23.Text = ("Other");
-            this.tabPage23.UseVisualStyleBackColor = (true);
+            tabPage23.Location = new System.Drawing.Point(4, 34);
+            tabPage23.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage23.Name = "tabPage23";
+            tabPage23.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage23.Size = new System.Drawing.Size(481, 890);
+            tabPage23.TabIndex = 1;
+            tabPage23.Text = "Other";
+            tabPage23.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btReadInfo);
-            this.tabPage1.Controls.Add(this.mmInfo);
-            this.tabPage1.Controls.Add(this.btReadTags);
-            this.tabPage1.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage1.Name = ("tabPage1");
-            this.tabPage1.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage1.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage1.TabIndex = (0);
-            this.tabPage1.Text = ("Media info");
-            this.tabPage1.UseVisualStyleBackColor = (true);
+            tabPage1.Controls.Add(btReadInfo);
+            tabPage1.Controls.Add(mmInfo);
+            tabPage1.Controls.Add(btReadTags);
+            tabPage1.Location = new System.Drawing.Point(4, 34);
+            tabPage1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage1.Size = new System.Drawing.Size(514, 962);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Media info";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // btReadInfo
             // 
-            this.btReadInfo.Location = (new global::System.Drawing.Point(21, 460));
-            this.btReadInfo.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btReadInfo.Name = ("btReadInfo");
-            this.btReadInfo.Size = (new global::System.Drawing.Size(100, 35));
-            this.btReadInfo.TabIndex = (5);
-            this.btReadInfo.Text = ("Read info");
-            this.btReadInfo.UseVisualStyleBackColor = (true);
-            this.btReadInfo.Click += (this.btReadInfo_Click);
+            btReadInfo.Location = new System.Drawing.Point(26, 575);
+            btReadInfo.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btReadInfo.Name = "btReadInfo";
+            btReadInfo.Size = new System.Drawing.Size(125, 44);
+            btReadInfo.TabIndex = 5;
+            btReadInfo.Text = "Read info";
+            btReadInfo.UseVisualStyleBackColor = true;
+            btReadInfo.Click += btReadInfo_Click;
             // 
             // mmInfo
             // 
-            this.mmInfo.Location = (new global::System.Drawing.Point(21, 28));
-            this.mmInfo.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.mmInfo.Multiline = (true);
-            this.mmInfo.Name = ("mmInfo");
-            this.mmInfo.ScrollBars = (global::System.Windows.Forms.ScrollBars.Both);
-            this.mmInfo.Size = (new global::System.Drawing.Size(360, 421));
-            this.mmInfo.TabIndex = (4);
+            mmInfo.Location = new System.Drawing.Point(26, 35);
+            mmInfo.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            mmInfo.Multiline = true;
+            mmInfo.Name = "mmInfo";
+            mmInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmInfo.Size = new System.Drawing.Size(449, 525);
+            mmInfo.TabIndex = 4;
             // 
             // btReadTags
             // 
-            this.btReadTags.Location = (new global::System.Drawing.Point(130, 460));
-            this.btReadTags.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btReadTags.Name = ("btReadTags");
-            this.btReadTags.Size = (new global::System.Drawing.Size(100, 35));
-            this.btReadTags.TabIndex = (3);
-            this.btReadTags.Text = ("Read tags");
-            this.btReadTags.UseVisualStyleBackColor = (true);
-            this.btReadTags.Click += (this.btReadTags_Click);
+            btReadTags.Location = new System.Drawing.Point(162, 575);
+            btReadTags.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btReadTags.Name = "btReadTags";
+            btReadTags.Size = new System.Drawing.Size(125, 44);
+            btReadTags.TabIndex = 3;
+            btReadTags.Text = "Read tags";
+            btReadTags.UseVisualStyleBackColor = true;
+            btReadTags.Click += btReadTags_Click;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.cbAudioStream);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.tbVolume1);
-            this.tabPage2.Controls.Add(this.cbPlayAudio);
-            this.tabPage2.Controls.Add(this.cbAudioOutputDevice);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.volumeMeter2);
-            this.tabPage2.Controls.Add(this.volumeMeter1);
-            this.tabPage2.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage2.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage2.Name = ("tabPage2");
-            this.tabPage2.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage2.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage2.TabIndex = (1);
-            this.tabPage2.Text = ("Audio output");
-            this.tabPage2.UseVisualStyleBackColor = (true);
+            tabPage2.Controls.Add(cbAudioStream);
+            tabPage2.Controls.Add(label8);
+            tabPage2.Controls.Add(label6);
+            tabPage2.Controls.Add(tbVolume1);
+            tabPage2.Controls.Add(cbPlayAudio);
+            tabPage2.Controls.Add(cbAudioOutputDevice);
+            tabPage2.Controls.Add(label5);
+            tabPage2.Controls.Add(volumeMeter2);
+            tabPage2.Controls.Add(volumeMeter1);
+            tabPage2.Location = new System.Drawing.Point(4, 34);
+            tabPage2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage2.Size = new System.Drawing.Size(514, 962);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Audio output";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // cbAudioStream
             // 
-            this.cbAudioStream.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbAudioStream.FormattingEnabled = (true);
-            this.cbAudioStream.Location = (new global::System.Drawing.Point(21, 192));
-            this.cbAudioStream.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudioStream.Name = ("cbAudioStream");
-            this.cbAudioStream.Size = (new global::System.Drawing.Size(348, 28));
-            this.cbAudioStream.TabIndex = (32);
-            this.cbAudioStream.SelectedIndexChanged += (this.cbAudioStream_SelectedIndexChanged);
+            cbAudioStream.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAudioStream.FormattingEnabled = true;
+            cbAudioStream.Location = new System.Drawing.Point(26, 240);
+            cbAudioStream.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudioStream.Name = "cbAudioStream";
+            cbAudioStream.Size = new System.Drawing.Size(434, 33);
+            cbAudioStream.TabIndex = 32;
+            cbAudioStream.SelectedIndexChanged += cbAudioStream_SelectedIndexChanged;
             // 
             // label8
             // 
-            this.label8.AutoSize = (true);
-            this.label8.Location = (new global::System.Drawing.Point(18, 167));
-            this.label8.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label8.Name = ("label8");
-            this.label8.Size = (new global::System.Drawing.Size(56, 20));
-            this.label8.TabIndex = (31);
-            this.label8.Text = ("Stream");
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(22, 209);
+            label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(67, 25);
+            label8.TabIndex = 31;
+            label8.Text = "Stream";
             // 
             // label6
             // 
-            this.label6.AutoSize = (true);
-            this.label6.Location = (new global::System.Drawing.Point(190, 82));
-            this.label6.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label6.Name = ("label6");
-            this.label6.Size = (new global::System.Drawing.Size(59, 20));
-            this.label6.TabIndex = (28);
-            this.label6.Text = ("Volume");
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(238, 102);
+            label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(72, 25);
+            label6.TabIndex = 28;
+            label6.Text = "Volume";
             // 
             // tbVolume1
             // 
-            this.tbVolume1.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbVolume1.Location = (new global::System.Drawing.Point(190, 106));
-            this.tbVolume1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbVolume1.Maximum = (100);
-            this.tbVolume1.Name = ("tbVolume1");
-            this.tbVolume1.Size = (new global::System.Drawing.Size(114, 56));
-            this.tbVolume1.TabIndex = (27);
-            this.tbVolume1.Value = (85);
-            this.tbVolume1.Scroll += (this.tbVolume1_Scroll);
+            tbVolume1.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume1.Location = new System.Drawing.Point(238, 132);
+            tbVolume1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVolume1.Maximum = 100;
+            tbVolume1.Name = "tbVolume1";
+            tbVolume1.Size = new System.Drawing.Size(142, 69);
+            tbVolume1.TabIndex = 27;
+            tbVolume1.Value = 85;
+            tbVolume1.Scroll += tbVolume1_Scroll;
             // 
             // cbPlayAudio
             // 
-            this.cbPlayAudio.AutoSize = (true);
-            this.cbPlayAudio.Checked = (true);
-            this.cbPlayAudio.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.cbPlayAudio.Location = (new global::System.Drawing.Point(21, 78));
-            this.cbPlayAudio.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbPlayAudio.Name = ("cbPlayAudio");
-            this.cbPlayAudio.Size = (new global::System.Drawing.Size(100, 24));
-            this.cbPlayAudio.TabIndex = (25);
-            this.cbPlayAudio.Text = ("Play audio");
-            this.cbPlayAudio.UseVisualStyleBackColor = (true);
+            cbPlayAudio.AutoSize = true;
+            cbPlayAudio.Checked = true;
+            cbPlayAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbPlayAudio.Location = new System.Drawing.Point(26, 98);
+            cbPlayAudio.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbPlayAudio.Name = "cbPlayAudio";
+            cbPlayAudio.Size = new System.Drawing.Size(120, 29);
+            cbPlayAudio.TabIndex = 25;
+            cbPlayAudio.Text = "Play audio";
+            cbPlayAudio.UseVisualStyleBackColor = true;
             // 
             // cbAudioOutputDevice
             // 
-            this.cbAudioOutputDevice.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbAudioOutputDevice.FormattingEnabled = (true);
-            this.cbAudioOutputDevice.Location = (new global::System.Drawing.Point(21, 37));
-            this.cbAudioOutputDevice.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudioOutputDevice.Name = ("cbAudioOutputDevice");
-            this.cbAudioOutputDevice.Size = (new global::System.Drawing.Size(348, 28));
-            this.cbAudioOutputDevice.TabIndex = (24);
+            cbAudioOutputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbAudioOutputDevice.FormattingEnabled = true;
+            cbAudioOutputDevice.Location = new System.Drawing.Point(26, 46);
+            cbAudioOutputDevice.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudioOutputDevice.Name = "cbAudioOutputDevice";
+            cbAudioOutputDevice.Size = new System.Drawing.Size(434, 33);
+            cbAudioOutputDevice.TabIndex = 24;
             // 
             // label5
             // 
-            this.label5.AutoSize = (true);
-            this.label5.Location = (new global::System.Drawing.Point(18, 15));
-            this.label5.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label5.Name = ("label5");
-            this.label5.Size = (new global::System.Drawing.Size(97, 20));
-            this.label5.TabIndex = (23);
-            this.label5.Text = ("Audio output");
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(22, 19);
+            label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(119, 25);
+            label5.TabIndex = 23;
+            label5.Text = "Audio output";
             // 
             // volumeMeter2
             // 
-            this.volumeMeter2.Amplitude = (-60F);
-            this.volumeMeter2.BackColor = (global::System.Drawing.Color.Gainsboro);
-            this.volumeMeter2.Boost = (1F);
-            this.volumeMeter2.Location = (new global::System.Drawing.Point(71, 486));
-            this.volumeMeter2.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.volumeMeter2.MaxDb = (18F);
-            this.volumeMeter2.MinDb = (-60F);
-            this.volumeMeter2.Name = ("volumeMeter2");
-            this.volumeMeter2.Size = (new global::System.Drawing.Size(30, 225));
-            this.volumeMeter2.TabIndex = (30);
+            volumeMeter2.Amplitude = -60F;
+            volumeMeter2.BackColor = System.Drawing.Color.Gainsboro;
+            volumeMeter2.Boost = 1F;
+            volumeMeter2.Location = new System.Drawing.Point(89, 608);
+            volumeMeter2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            volumeMeter2.MaxDb = 18F;
+            volumeMeter2.MinDb = -60F;
+            volumeMeter2.Name = "volumeMeter2";
+            volumeMeter2.Size = new System.Drawing.Size(38, 281);
+            volumeMeter2.TabIndex = 30;
             // 
             // volumeMeter1
             // 
-            this.volumeMeter1.Amplitude = (-60F);
-            this.volumeMeter1.BackColor = (global::System.Drawing.Color.Gainsboro);
-            this.volumeMeter1.Boost = (1F);
-            this.volumeMeter1.Location = (new global::System.Drawing.Point(32, 486));
-            this.volumeMeter1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.volumeMeter1.MaxDb = (18F);
-            this.volumeMeter1.MinDb = (-60F);
-            this.volumeMeter1.Name = ("volumeMeter1");
-            this.volumeMeter1.Size = (new global::System.Drawing.Size(30, 225));
-            this.volumeMeter1.TabIndex = (29);
+            volumeMeter1.Amplitude = -60F;
+            volumeMeter1.BackColor = System.Drawing.Color.Gainsboro;
+            volumeMeter1.Boost = 1F;
+            volumeMeter1.Location = new System.Drawing.Point(40, 608);
+            volumeMeter1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            volumeMeter1.MaxDb = 18F;
+            volumeMeter1.MinDb = -60F;
+            volumeMeter1.Name = "volumeMeter1";
+            volumeMeter1.Size = new System.Drawing.Size(38, 281);
+            volumeMeter1.TabIndex = 29;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label31);
-            this.tabPage3.Controls.Add(this.tabControl18);
-            this.tabPage3.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage3.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage3.Name = ("tabPage3");
-            this.tabPage3.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage3.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage3.TabIndex = (2);
-            this.tabPage3.Text = ("Audio processing");
-            this.tabPage3.UseVisualStyleBackColor = (true);
+            tabPage3.Controls.Add(label31);
+            tabPage3.Controls.Add(tabControl18);
+            tabPage3.Location = new System.Drawing.Point(4, 34);
+            tabPage3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage3.Size = new System.Drawing.Size(514, 962);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Audio processing";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // label31
             // 
-            this.label31.AutoSize = (true);
-            this.label31.Location = (new global::System.Drawing.Point(8, 20));
-            this.label31.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label31.Name = ("label31");
-            this.label31.Size = (new global::System.Drawing.Size(404, 20));
-            this.label31.TabIndex = (7);
-            this.label31.Text = ("Enable effects before Start. More effects available using API");
+            label31.AutoSize = true;
+            label31.Location = new System.Drawing.Point(10, 25);
+            label31.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label31.Name = "label31";
+            label31.Size = new System.Drawing.Size(480, 25);
+            label31.TabIndex = 7;
+            label31.Text = "Enable effects before Start. More effects available using API";
             // 
             // tabControl18
             // 
-            this.tabControl18.Controls.Add(this.tabPage71);
-            this.tabControl18.Controls.Add(this.tabPage72);
-            this.tabControl18.Controls.Add(this.tabPage4);
-            this.tabControl18.Controls.Add(this.tabPage5);
-            this.tabControl18.Location = (new global::System.Drawing.Point(16, 54));
-            this.tabControl18.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabControl18.Name = ("tabControl18");
-            this.tabControl18.SelectedIndex = (0);
-            this.tabControl18.Size = (new global::System.Drawing.Size(377, 680));
-            this.tabControl18.TabIndex = (6);
+            tabControl18.Controls.Add(tabPage71);
+            tabControl18.Controls.Add(tabPage72);
+            tabControl18.Controls.Add(tabPage4);
+            tabControl18.Controls.Add(tabPage5);
+            tabControl18.Location = new System.Drawing.Point(20, 68);
+            tabControl18.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl18.Name = "tabControl18";
+            tabControl18.SelectedIndex = 0;
+            tabControl18.Size = new System.Drawing.Size(471, 850);
+            tabControl18.TabIndex = 6;
             // 
             // tabPage71
             // 
-            this.tabPage71.Controls.Add(this.label231);
-            this.tabPage71.Controls.Add(this.label230);
-            this.tabPage71.Controls.Add(this.tbAudAmplifyAmp);
-            this.tabPage71.Controls.Add(this.label95);
-            this.tabPage71.Controls.Add(this.cbAudAmplifyEnabled);
-            this.tabPage71.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage71.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage71.Name = ("tabPage71");
-            this.tabPage71.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage71.Size = (new global::System.Drawing.Size(369, 647));
-            this.tabPage71.TabIndex = (0);
-            this.tabPage71.Text = ("Amplify");
-            this.tabPage71.UseVisualStyleBackColor = (true);
+            tabPage71.Controls.Add(label231);
+            tabPage71.Controls.Add(label230);
+            tabPage71.Controls.Add(tbAudAmplifyAmp);
+            tabPage71.Controls.Add(label95);
+            tabPage71.Controls.Add(cbAudAmplifyEnabled);
+            tabPage71.Location = new System.Drawing.Point(4, 34);
+            tabPage71.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage71.Name = "tabPage71";
+            tabPage71.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage71.Size = new System.Drawing.Size(463, 812);
+            tabPage71.TabIndex = 0;
+            tabPage71.Text = "Amplify";
+            tabPage71.UseVisualStyleBackColor = true;
             // 
             // label231
             // 
-            this.label231.AutoSize = (true);
-            this.label231.Location = (new global::System.Drawing.Point(284, 82));
-            this.label231.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label231.Name = ("label231");
-            this.label231.Size = (new global::System.Drawing.Size(45, 20));
-            this.label231.TabIndex = (5);
-            this.label231.Text = ("400%");
+            label231.AutoSize = true;
+            label231.Location = new System.Drawing.Point(355, 102);
+            label231.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label231.Name = "label231";
+            label231.Size = new System.Drawing.Size(57, 25);
+            label231.TabIndex = 5;
+            label231.Text = "400%";
             // 
             // label230
             // 
-            this.label230.AutoSize = (true);
-            this.label230.Location = (new global::System.Drawing.Point(91, 82));
-            this.label230.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label230.Name = ("label230");
-            this.label230.Size = (new global::System.Drawing.Size(45, 20));
-            this.label230.TabIndex = (4);
-            this.label230.Text = ("100%");
+            label230.AutoSize = true;
+            label230.Location = new System.Drawing.Point(114, 102);
+            label230.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label230.Name = "label230";
+            label230.Size = new System.Drawing.Size(57, 25);
+            label230.TabIndex = 4;
+            label230.Text = "100%";
             // 
             // tbAudAmplifyAmp
             // 
-            this.tbAudAmplifyAmp.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudAmplifyAmp.Location = (new global::System.Drawing.Point(21, 106));
-            this.tbAudAmplifyAmp.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudAmplifyAmp.Maximum = (400);
-            this.tbAudAmplifyAmp.Name = ("tbAudAmplifyAmp");
-            this.tbAudAmplifyAmp.Size = (new global::System.Drawing.Size(307, 56));
-            this.tbAudAmplifyAmp.TabIndex = (3);
-            this.tbAudAmplifyAmp.TickFrequency = (50);
-            this.tbAudAmplifyAmp.Value = (100);
-            this.tbAudAmplifyAmp.Scroll += (this.tbAudAmplifyAmp_Scroll);
+            tbAudAmplifyAmp.BackColor = System.Drawing.SystemColors.Window;
+            tbAudAmplifyAmp.Location = new System.Drawing.Point(26, 132);
+            tbAudAmplifyAmp.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudAmplifyAmp.Maximum = 400;
+            tbAudAmplifyAmp.Name = "tbAudAmplifyAmp";
+            tbAudAmplifyAmp.Size = new System.Drawing.Size(384, 69);
+            tbAudAmplifyAmp.TabIndex = 3;
+            tbAudAmplifyAmp.TickFrequency = 50;
+            tbAudAmplifyAmp.Value = 100;
+            tbAudAmplifyAmp.Scroll += tbAudAmplifyAmp_Scroll;
             // 
             // label95
             // 
-            this.label95.AutoSize = (true);
-            this.label95.Location = (new global::System.Drawing.Point(18, 82));
-            this.label95.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label95.Name = ("label95");
-            this.label95.Size = (new global::System.Drawing.Size(82, 20));
-            this.label95.TabIndex = (2);
-            this.label95.Text = ("Boost ratio");
+            label95.AutoSize = true;
+            label95.Location = new System.Drawing.Point(22, 102);
+            label95.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label95.Name = "label95";
+            label95.Size = new System.Drawing.Size(99, 25);
+            label95.TabIndex = 2;
+            label95.Text = "Boost ratio";
             // 
             // cbAudAmplifyEnabled
             // 
-            this.cbAudAmplifyEnabled.AutoSize = (true);
-            this.cbAudAmplifyEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbAudAmplifyEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudAmplifyEnabled.Name = ("cbAudAmplifyEnabled");
-            this.cbAudAmplifyEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbAudAmplifyEnabled.TabIndex = (1);
-            this.cbAudAmplifyEnabled.Text = ("Enabled");
-            this.cbAudAmplifyEnabled.UseVisualStyleBackColor = (true);
+            cbAudAmplifyEnabled.AutoSize = true;
+            cbAudAmplifyEnabled.Location = new System.Drawing.Point(26, 31);
+            cbAudAmplifyEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudAmplifyEnabled.Name = "cbAudAmplifyEnabled";
+            cbAudAmplifyEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudAmplifyEnabled.TabIndex = 1;
+            cbAudAmplifyEnabled.Text = "Enabled";
+            cbAudAmplifyEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage72
             // 
-            this.tabPage72.Controls.Add(this.btAudEqUpdate);
-            this.tabPage72.Controls.Add(this.label242);
-            this.tabPage72.Controls.Add(this.label241);
-            this.tabPage72.Controls.Add(this.label240);
-            this.tabPage72.Controls.Add(this.label239);
-            this.tabPage72.Controls.Add(this.label238);
-            this.tabPage72.Controls.Add(this.label237);
-            this.tabPage72.Controls.Add(this.label236);
-            this.tabPage72.Controls.Add(this.label235);
-            this.tabPage72.Controls.Add(this.label234);
-            this.tabPage72.Controls.Add(this.label233);
-            this.tabPage72.Controls.Add(this.label232);
-            this.tabPage72.Controls.Add(this.tbAudEq9);
-            this.tabPage72.Controls.Add(this.tbAudEq8);
-            this.tabPage72.Controls.Add(this.tbAudEq7);
-            this.tabPage72.Controls.Add(this.tbAudEq6);
-            this.tabPage72.Controls.Add(this.tbAudEq5);
-            this.tabPage72.Controls.Add(this.tbAudEq4);
-            this.tabPage72.Controls.Add(this.tbAudEq3);
-            this.tabPage72.Controls.Add(this.tbAudEq2);
-            this.tabPage72.Controls.Add(this.tbAudEq1);
-            this.tabPage72.Controls.Add(this.tbAudEq0);
-            this.tabPage72.Controls.Add(this.cbAudEqualizerEnabled);
-            this.tabPage72.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage72.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage72.Name = ("tabPage72");
-            this.tabPage72.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage72.Size = (new global::System.Drawing.Size(369, 647));
-            this.tabPage72.TabIndex = (1);
-            this.tabPage72.Text = ("Equalizer");
-            this.tabPage72.UseVisualStyleBackColor = (true);
+            tabPage72.Controls.Add(btAudEqUpdate);
+            tabPage72.Controls.Add(label242);
+            tabPage72.Controls.Add(label241);
+            tabPage72.Controls.Add(label240);
+            tabPage72.Controls.Add(label239);
+            tabPage72.Controls.Add(label238);
+            tabPage72.Controls.Add(label237);
+            tabPage72.Controls.Add(label236);
+            tabPage72.Controls.Add(label235);
+            tabPage72.Controls.Add(label234);
+            tabPage72.Controls.Add(label233);
+            tabPage72.Controls.Add(label232);
+            tabPage72.Controls.Add(tbAudEq9);
+            tabPage72.Controls.Add(tbAudEq8);
+            tabPage72.Controls.Add(tbAudEq7);
+            tabPage72.Controls.Add(tbAudEq6);
+            tabPage72.Controls.Add(tbAudEq5);
+            tabPage72.Controls.Add(tbAudEq4);
+            tabPage72.Controls.Add(tbAudEq3);
+            tabPage72.Controls.Add(tbAudEq2);
+            tabPage72.Controls.Add(tbAudEq1);
+            tabPage72.Controls.Add(tbAudEq0);
+            tabPage72.Controls.Add(cbAudEqualizerEnabled);
+            tabPage72.Location = new System.Drawing.Point(4, 34);
+            tabPage72.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage72.Name = "tabPage72";
+            tabPage72.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage72.Size = new System.Drawing.Size(463, 812);
+            tabPage72.TabIndex = 1;
+            tabPage72.Text = "Equalizer";
+            tabPage72.UseVisualStyleBackColor = true;
             // 
             // btAudEqUpdate
             // 
-            this.btAudEqUpdate.Location = (new global::System.Drawing.Point(233, 295));
-            this.btAudEqUpdate.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btAudEqUpdate.Name = ("btAudEqUpdate");
-            this.btAudEqUpdate.Size = (new global::System.Drawing.Size(100, 35));
-            this.btAudEqUpdate.TabIndex = (26);
-            this.btAudEqUpdate.Text = ("Update");
-            this.btAudEqUpdate.UseVisualStyleBackColor = (true);
-            this.btAudEqUpdate.Click += (this.btAudEqUpdate_Click);
+            btAudEqUpdate.Location = new System.Drawing.Point(291, 369);
+            btAudEqUpdate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btAudEqUpdate.Name = "btAudEqUpdate";
+            btAudEqUpdate.Size = new System.Drawing.Size(125, 44);
+            btAudEqUpdate.TabIndex = 26;
+            btAudEqUpdate.Text = "Update";
+            btAudEqUpdate.UseVisualStyleBackColor = true;
+            btAudEqUpdate.Click += btAudEqUpdate_Click;
             // 
             // label242
             // 
-            this.label242.AutoSize = (true);
-            this.label242.Location = (new global::System.Drawing.Point(281, 240));
-            this.label242.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label242.Name = ("label242");
-            this.label242.Size = (new global::System.Drawing.Size(34, 20));
-            this.label242.TabIndex = (23);
-            this.label242.Text = ("15K");
+            label242.AutoSize = true;
+            label242.Location = new System.Drawing.Point(351, 300);
+            label242.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label242.Name = "label242";
+            label242.Size = new System.Drawing.Size(42, 25);
+            label242.TabIndex = 23;
+            label242.Text = "15K";
             // 
             // label241
             // 
-            this.label241.AutoSize = (true);
-            this.label241.Location = (new global::System.Drawing.Point(248, 240));
-            this.label241.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label241.Name = ("label241");
-            this.label241.Size = (new global::System.Drawing.Size(41, 20));
-            this.label241.TabIndex = (22);
-            this.label241.Text = ("7523");
+            label241.AutoSize = true;
+            label241.Location = new System.Drawing.Point(310, 300);
+            label241.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label241.Name = "label241";
+            label241.Size = new System.Drawing.Size(52, 25);
+            label241.TabIndex = 22;
+            label241.Text = "7523";
             // 
             // label240
             // 
-            this.label240.AutoSize = (true);
-            this.label240.Location = (new global::System.Drawing.Point(215, 240));
-            this.label240.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label240.Name = ("label240");
-            this.label240.Size = (new global::System.Drawing.Size(41, 20));
-            this.label240.TabIndex = (21);
-            this.label240.Text = ("3770");
+            label240.AutoSize = true;
+            label240.Location = new System.Drawing.Point(269, 300);
+            label240.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label240.Name = "label240";
+            label240.Size = new System.Drawing.Size(52, 25);
+            label240.TabIndex = 21;
+            label240.Text = "3770";
             // 
             // label239
             // 
-            this.label239.AutoSize = (true);
-            this.label239.Location = (new global::System.Drawing.Point(179, 240));
-            this.label239.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label239.Name = ("label239");
-            this.label239.Size = (new global::System.Drawing.Size(41, 20));
-            this.label239.TabIndex = (20);
-            this.label239.Text = ("1889");
+            label239.AutoSize = true;
+            label239.Location = new System.Drawing.Point(224, 300);
+            label239.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label239.Name = "label239";
+            label239.Size = new System.Drawing.Size(52, 25);
+            label239.TabIndex = 20;
+            label239.Text = "1889";
             // 
             // label238
             // 
-            this.label238.AutoSize = (true);
-            this.label238.Location = (new global::System.Drawing.Point(153, 240));
-            this.label238.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label238.Name = ("label238");
-            this.label238.Size = (new global::System.Drawing.Size(33, 20));
-            this.label238.TabIndex = (19);
-            this.label238.Text = ("947");
+            label238.AutoSize = true;
+            label238.Location = new System.Drawing.Point(191, 300);
+            label238.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label238.Name = "label238";
+            label238.Size = new System.Drawing.Size(42, 25);
+            label238.TabIndex = 19;
+            label238.Text = "947";
             // 
             // label237
             // 
-            this.label237.AutoSize = (true);
-            this.label237.Location = (new global::System.Drawing.Point(125, 240));
-            this.label237.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label237.Name = ("label237");
-            this.label237.Size = (new global::System.Drawing.Size(33, 20));
-            this.label237.TabIndex = (18);
-            this.label237.Text = ("474");
+            label237.AutoSize = true;
+            label237.Location = new System.Drawing.Point(156, 300);
+            label237.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label237.Name = "label237";
+            label237.Size = new System.Drawing.Size(42, 25);
+            label237.TabIndex = 18;
+            label237.Text = "474";
             // 
             // label236
             // 
-            this.label236.AutoSize = (true);
-            this.label236.Location = (new global::System.Drawing.Point(98, 240));
-            this.label236.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label236.Name = ("label236");
-            this.label236.Size = (new global::System.Drawing.Size(33, 20));
-            this.label236.TabIndex = (17);
-            this.label236.Text = ("237");
+            label236.AutoSize = true;
+            label236.Location = new System.Drawing.Point(122, 300);
+            label236.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label236.Name = "label236";
+            label236.Size = new System.Drawing.Size(42, 25);
+            label236.TabIndex = 17;
+            label236.Text = "237";
             // 
             // label235
             // 
-            this.label235.AutoSize = (true);
-            this.label235.Location = (new global::System.Drawing.Point(69, 240));
-            this.label235.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label235.Name = ("label235");
-            this.label235.Size = (new global::System.Drawing.Size(33, 20));
-            this.label235.TabIndex = (16);
-            this.label235.Text = ("119");
+            label235.AutoSize = true;
+            label235.Location = new System.Drawing.Point(86, 300);
+            label235.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label235.Name = "label235";
+            label235.Size = new System.Drawing.Size(42, 25);
+            label235.TabIndex = 16;
+            label235.Text = "119";
             // 
             // label234
             // 
-            this.label234.AutoSize = (true);
-            this.label234.Location = (new global::System.Drawing.Point(48, 240));
-            this.label234.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label234.Name = ("label234");
-            this.label234.Size = (new global::System.Drawing.Size(25, 20));
-            this.label234.TabIndex = (15);
-            this.label234.Text = ("59");
+            label234.AutoSize = true;
+            label234.Location = new System.Drawing.Point(60, 300);
+            label234.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label234.Name = "label234";
+            label234.Size = new System.Drawing.Size(32, 25);
+            label234.TabIndex = 15;
+            label234.Text = "59";
             // 
             // label233
             // 
-            this.label233.AutoSize = (true);
-            this.label233.Location = (new global::System.Drawing.Point(24, 240));
-            this.label233.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label233.Name = ("label233");
-            this.label233.Size = (new global::System.Drawing.Size(25, 20));
-            this.label233.TabIndex = (14);
-            this.label233.Text = ("29");
+            label233.AutoSize = true;
+            label233.Location = new System.Drawing.Point(30, 300);
+            label233.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label233.Name = "label233";
+            label233.Size = new System.Drawing.Size(32, 25);
+            label233.TabIndex = 14;
+            label233.Text = "29";
             // 
             // label232
             // 
-            this.label232.AutoSize = (true);
-            this.label232.Location = (new global::System.Drawing.Point(157, 50));
-            this.label232.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label232.Name = ("label232");
-            this.label232.Size = (new global::System.Drawing.Size(17, 20));
-            this.label232.TabIndex = (13);
-            this.label232.Text = ("0");
+            label232.AutoSize = true;
+            label232.Location = new System.Drawing.Point(196, 62);
+            label232.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label232.Name = "label232";
+            label232.Size = new System.Drawing.Size(22, 25);
+            label232.TabIndex = 13;
+            label232.Text = "0";
             // 
             // tbAudEq9
             // 
-            this.tbAudEq9.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq9.Location = (new global::System.Drawing.Point(274, 75));
-            this.tbAudEq9.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq9.Maximum = (12);
-            this.tbAudEq9.Minimum = (-24);
-            this.tbAudEq9.Name = ("tbAudEq9");
-            this.tbAudEq9.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq9.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq9.TabIndex = (12);
-            this.tbAudEq9.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq9.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq9.Location = new System.Drawing.Point(342, 94);
+            tbAudEq9.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq9.Maximum = 12;
+            tbAudEq9.Minimum = -24;
+            tbAudEq9.Name = "tbAudEq9";
+            tbAudEq9.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq9.Size = new System.Drawing.Size(69, 200);
+            tbAudEq9.TabIndex = 12;
+            tbAudEq9.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq8
             // 
-            this.tbAudEq8.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq8.Location = (new global::System.Drawing.Point(245, 75));
-            this.tbAudEq8.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq8.Maximum = (12);
-            this.tbAudEq8.Minimum = (-24);
-            this.tbAudEq8.Name = ("tbAudEq8");
-            this.tbAudEq8.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq8.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq8.TabIndex = (11);
-            this.tbAudEq8.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq8.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq8.Location = new System.Drawing.Point(306, 94);
+            tbAudEq8.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq8.Maximum = 12;
+            tbAudEq8.Minimum = -24;
+            tbAudEq8.Name = "tbAudEq8";
+            tbAudEq8.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq8.Size = new System.Drawing.Size(69, 200);
+            tbAudEq8.TabIndex = 11;
+            tbAudEq8.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq7
             // 
-            this.tbAudEq7.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq7.Location = (new global::System.Drawing.Point(216, 75));
-            this.tbAudEq7.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq7.Maximum = (12);
-            this.tbAudEq7.Minimum = (-24);
-            this.tbAudEq7.Name = ("tbAudEq7");
-            this.tbAudEq7.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq7.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq7.TabIndex = (10);
-            this.tbAudEq7.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq7.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq7.Location = new System.Drawing.Point(270, 94);
+            tbAudEq7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq7.Maximum = 12;
+            tbAudEq7.Minimum = -24;
+            tbAudEq7.Name = "tbAudEq7";
+            tbAudEq7.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq7.Size = new System.Drawing.Size(69, 200);
+            tbAudEq7.TabIndex = 10;
+            tbAudEq7.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq6
             // 
-            this.tbAudEq6.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq6.Location = (new global::System.Drawing.Point(188, 75));
-            this.tbAudEq6.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq6.Maximum = (12);
-            this.tbAudEq6.Minimum = (-24);
-            this.tbAudEq6.Name = ("tbAudEq6");
-            this.tbAudEq6.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq6.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq6.TabIndex = (9);
-            this.tbAudEq6.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq6.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq6.Location = new System.Drawing.Point(235, 94);
+            tbAudEq6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq6.Maximum = 12;
+            tbAudEq6.Minimum = -24;
+            tbAudEq6.Name = "tbAudEq6";
+            tbAudEq6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq6.Size = new System.Drawing.Size(69, 200);
+            tbAudEq6.TabIndex = 9;
+            tbAudEq6.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq5
             // 
-            this.tbAudEq5.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq5.Location = (new global::System.Drawing.Point(160, 75));
-            this.tbAudEq5.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq5.Maximum = (12);
-            this.tbAudEq5.Minimum = (-24);
-            this.tbAudEq5.Name = ("tbAudEq5");
-            this.tbAudEq5.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq5.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq5.TabIndex = (8);
-            this.tbAudEq5.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq5.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq5.Location = new System.Drawing.Point(200, 94);
+            tbAudEq5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq5.Maximum = 12;
+            tbAudEq5.Minimum = -24;
+            tbAudEq5.Name = "tbAudEq5";
+            tbAudEq5.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq5.Size = new System.Drawing.Size(69, 200);
+            tbAudEq5.TabIndex = 8;
+            tbAudEq5.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq4
             // 
-            this.tbAudEq4.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq4.Location = (new global::System.Drawing.Point(133, 75));
-            this.tbAudEq4.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq4.Maximum = (12);
-            this.tbAudEq4.Minimum = (-24);
-            this.tbAudEq4.Name = ("tbAudEq4");
-            this.tbAudEq4.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq4.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq4.TabIndex = (7);
-            this.tbAudEq4.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq4.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq4.Location = new System.Drawing.Point(166, 94);
+            tbAudEq4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq4.Maximum = 12;
+            tbAudEq4.Minimum = -24;
+            tbAudEq4.Name = "tbAudEq4";
+            tbAudEq4.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq4.Size = new System.Drawing.Size(69, 200);
+            tbAudEq4.TabIndex = 7;
+            tbAudEq4.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq3
             // 
-            this.tbAudEq3.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq3.Location = (new global::System.Drawing.Point(105, 75));
-            this.tbAudEq3.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq3.Maximum = (12);
-            this.tbAudEq3.Minimum = (-24);
-            this.tbAudEq3.Name = ("tbAudEq3");
-            this.tbAudEq3.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq3.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq3.TabIndex = (6);
-            this.tbAudEq3.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq3.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq3.Location = new System.Drawing.Point(131, 94);
+            tbAudEq3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq3.Maximum = 12;
+            tbAudEq3.Minimum = -24;
+            tbAudEq3.Name = "tbAudEq3";
+            tbAudEq3.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq3.Size = new System.Drawing.Size(69, 200);
+            tbAudEq3.TabIndex = 6;
+            tbAudEq3.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq2
             // 
-            this.tbAudEq2.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq2.Location = (new global::System.Drawing.Point(77, 75));
-            this.tbAudEq2.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq2.Maximum = (12);
-            this.tbAudEq2.Minimum = (-24);
-            this.tbAudEq2.Name = ("tbAudEq2");
-            this.tbAudEq2.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq2.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq2.TabIndex = (5);
-            this.tbAudEq2.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq2.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq2.Location = new System.Drawing.Point(96, 94);
+            tbAudEq2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq2.Maximum = 12;
+            tbAudEq2.Minimum = -24;
+            tbAudEq2.Name = "tbAudEq2";
+            tbAudEq2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq2.Size = new System.Drawing.Size(69, 200);
+            tbAudEq2.TabIndex = 5;
+            tbAudEq2.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq1
             // 
-            this.tbAudEq1.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq1.Location = (new global::System.Drawing.Point(50, 75));
-            this.tbAudEq1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq1.Maximum = (12);
-            this.tbAudEq1.Minimum = (-24);
-            this.tbAudEq1.Name = ("tbAudEq1");
-            this.tbAudEq1.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq1.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq1.TabIndex = (4);
-            this.tbAudEq1.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq1.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq1.Location = new System.Drawing.Point(62, 94);
+            tbAudEq1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq1.Maximum = 12;
+            tbAudEq1.Minimum = -24;
+            tbAudEq1.Name = "tbAudEq1";
+            tbAudEq1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq1.Size = new System.Drawing.Size(69, 200);
+            tbAudEq1.TabIndex = 4;
+            tbAudEq1.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // tbAudEq0
             // 
-            this.tbAudEq0.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEq0.Location = (new global::System.Drawing.Point(23, 75));
-            this.tbAudEq0.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEq0.Maximum = (12);
-            this.tbAudEq0.Minimum = (-24);
-            this.tbAudEq0.Name = ("tbAudEq0");
-            this.tbAudEq0.Orientation = (global::System.Windows.Forms.Orientation.Vertical);
-            this.tbAudEq0.Size = (new global::System.Drawing.Size(56, 160));
-            this.tbAudEq0.TabIndex = (3);
-            this.tbAudEq0.TickStyle = (global::System.Windows.Forms.TickStyle.None);
+            tbAudEq0.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEq0.Location = new System.Drawing.Point(29, 94);
+            tbAudEq0.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEq0.Maximum = 12;
+            tbAudEq0.Minimum = -24;
+            tbAudEq0.Name = "tbAudEq0";
+            tbAudEq0.Orientation = System.Windows.Forms.Orientation.Vertical;
+            tbAudEq0.Size = new System.Drawing.Size(69, 200);
+            tbAudEq0.TabIndex = 3;
+            tbAudEq0.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // cbAudEqualizerEnabled
             // 
-            this.cbAudEqualizerEnabled.AutoSize = (true);
-            this.cbAudEqualizerEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbAudEqualizerEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudEqualizerEnabled.Name = ("cbAudEqualizerEnabled");
-            this.cbAudEqualizerEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbAudEqualizerEnabled.TabIndex = (2);
-            this.cbAudEqualizerEnabled.Text = ("Enabled");
-            this.cbAudEqualizerEnabled.UseVisualStyleBackColor = (true);
+            cbAudEqualizerEnabled.AutoSize = true;
+            cbAudEqualizerEnabled.Location = new System.Drawing.Point(26, 31);
+            cbAudEqualizerEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudEqualizerEnabled.Name = "cbAudEqualizerEnabled";
+            cbAudEqualizerEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudEqualizerEnabled.TabIndex = 2;
+            cbAudEqualizerEnabled.Text = "Enabled";
+            cbAudEqualizerEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.label1);
-            this.tabPage4.Controls.Add(this.label2);
-            this.tabPage4.Controls.Add(this.tbAudBalanceLevel);
-            this.tabPage4.Controls.Add(this.cbAudBalanceEnabled);
-            this.tabPage4.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage4.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage4.Name = ("tabPage4");
-            this.tabPage4.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage4.Size = (new global::System.Drawing.Size(369, 647));
-            this.tabPage4.TabIndex = (2);
-            this.tabPage4.Text = ("Balance");
-            this.tabPage4.UseVisualStyleBackColor = (true);
+            tabPage4.Controls.Add(label1);
+            tabPage4.Controls.Add(label2);
+            tabPage4.Controls.Add(tbAudBalanceLevel);
+            tabPage4.Controls.Add(cbAudBalanceEnabled);
+            tabPage4.Location = new System.Drawing.Point(4, 34);
+            tabPage4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage4.Size = new System.Drawing.Size(463, 812);
+            tabPage4.TabIndex = 2;
+            tabPage4.Text = "Balance";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = (true);
-            this.label1.Location = (new global::System.Drawing.Point(285, 77));
-            this.label1.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label1.Name = ("label1");
-            this.label1.Size = (new global::System.Drawing.Size(44, 20));
-            this.label1.TabIndex = (9);
-            this.label1.Text = ("Right");
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(356, 96);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(54, 25);
+            label1.TabIndex = 9;
+            label1.Text = "Right";
             // 
             // label2
             // 
-            this.label2.AutoSize = (true);
-            this.label2.Location = (new global::System.Drawing.Point(18, 77));
-            this.label2.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label2.Name = ("label2");
-            this.label2.Size = (new global::System.Drawing.Size(34, 20));
-            this.label2.TabIndex = (8);
-            this.label2.Text = ("Left");
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(22, 96);
+            label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(41, 25);
+            label2.TabIndex = 8;
+            label2.Text = "Left";
             // 
             // tbAudBalanceLevel
             // 
-            this.tbAudBalanceLevel.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudBalanceLevel.Location = (new global::System.Drawing.Point(21, 102));
-            this.tbAudBalanceLevel.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudBalanceLevel.Minimum = (-10);
-            this.tbAudBalanceLevel.Name = ("tbAudBalanceLevel");
-            this.tbAudBalanceLevel.Size = (new global::System.Drawing.Size(307, 56));
-            this.tbAudBalanceLevel.TabIndex = (7);
-            this.tbAudBalanceLevel.Scroll += (this.tbAudBalanceLevel_Scroll);
+            tbAudBalanceLevel.BackColor = System.Drawing.SystemColors.Window;
+            tbAudBalanceLevel.Location = new System.Drawing.Point(26, 128);
+            tbAudBalanceLevel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudBalanceLevel.Minimum = -10;
+            tbAudBalanceLevel.Name = "tbAudBalanceLevel";
+            tbAudBalanceLevel.Size = new System.Drawing.Size(384, 69);
+            tbAudBalanceLevel.TabIndex = 7;
+            tbAudBalanceLevel.Scroll += tbAudBalanceLevel_Scroll;
             // 
             // cbAudBalanceEnabled
             // 
-            this.cbAudBalanceEnabled.AutoSize = (true);
-            this.cbAudBalanceEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbAudBalanceEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudBalanceEnabled.Name = ("cbAudBalanceEnabled");
-            this.cbAudBalanceEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbAudBalanceEnabled.TabIndex = (3);
-            this.cbAudBalanceEnabled.Text = ("Enabled");
-            this.cbAudBalanceEnabled.UseVisualStyleBackColor = (true);
+            cbAudBalanceEnabled.AutoSize = true;
+            cbAudBalanceEnabled.Location = new System.Drawing.Point(26, 31);
+            cbAudBalanceEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudBalanceEnabled.Name = "cbAudBalanceEnabled";
+            cbAudBalanceEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudBalanceEnabled.TabIndex = 3;
+            cbAudBalanceEnabled.Text = "Enabled";
+            cbAudBalanceEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.lbAudEchoFeedback);
-            this.tabPage5.Controls.Add(this.tbAudEchoFeedback);
-            this.tabPage5.Controls.Add(this.label19);
-            this.tabPage5.Controls.Add(this.lbAudEchoIntensity);
-            this.tabPage5.Controls.Add(this.tbAudEchoIntensity);
-            this.tabPage5.Controls.Add(this.label17);
-            this.tabPage5.Controls.Add(this.lbAudEchoDelay);
-            this.tabPage5.Controls.Add(this.tbAudEchoDelay);
-            this.tabPage5.Controls.Add(this.label4);
-            this.tabPage5.Controls.Add(this.cbAudEchoEnabled);
-            this.tabPage5.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage5.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage5.Name = ("tabPage5");
-            this.tabPage5.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage5.Size = (new global::System.Drawing.Size(369, 647));
-            this.tabPage5.TabIndex = (3);
-            this.tabPage5.Text = ("Echo");
-            this.tabPage5.UseVisualStyleBackColor = (true);
+            tabPage5.Controls.Add(lbAudEchoFeedback);
+            tabPage5.Controls.Add(tbAudEchoFeedback);
+            tabPage5.Controls.Add(label19);
+            tabPage5.Controls.Add(lbAudEchoIntensity);
+            tabPage5.Controls.Add(tbAudEchoIntensity);
+            tabPage5.Controls.Add(label17);
+            tabPage5.Controls.Add(lbAudEchoDelay);
+            tabPage5.Controls.Add(tbAudEchoDelay);
+            tabPage5.Controls.Add(label4);
+            tabPage5.Controls.Add(cbAudEchoEnabled);
+            tabPage5.Location = new System.Drawing.Point(4, 34);
+            tabPage5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage5.Size = new System.Drawing.Size(463, 812);
+            tabPage5.TabIndex = 3;
+            tabPage5.Text = "Echo";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
             // lbAudEchoFeedback
             // 
-            this.lbAudEchoFeedback.AutoSize = (true);
-            this.lbAudEchoFeedback.Location = (new global::System.Drawing.Point(284, 234));
-            this.lbAudEchoFeedback.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbAudEchoFeedback.Name = ("lbAudEchoFeedback");
-            this.lbAudEchoFeedback.Size = (new global::System.Drawing.Size(17, 20));
-            this.lbAudEchoFeedback.TabIndex = (14);
-            this.lbAudEchoFeedback.Text = ("0");
+            lbAudEchoFeedback.AutoSize = true;
+            lbAudEchoFeedback.Location = new System.Drawing.Point(355, 292);
+            lbAudEchoFeedback.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbAudEchoFeedback.Name = "lbAudEchoFeedback";
+            lbAudEchoFeedback.Size = new System.Drawing.Size(22, 25);
+            lbAudEchoFeedback.TabIndex = 14;
+            lbAudEchoFeedback.Text = "0";
             // 
             // tbAudEchoFeedback
             // 
-            this.tbAudEchoFeedback.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEchoFeedback.Location = (new global::System.Drawing.Point(21, 258));
-            this.tbAudEchoFeedback.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEchoFeedback.Maximum = (100);
-            this.tbAudEchoFeedback.Name = ("tbAudEchoFeedback");
-            this.tbAudEchoFeedback.Size = (new global::System.Drawing.Size(307, 56));
-            this.tbAudEchoFeedback.TabIndex = (13);
-            this.tbAudEchoFeedback.Scroll += (this.tbAudEchoFeedback_Scroll);
+            tbAudEchoFeedback.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEchoFeedback.Location = new System.Drawing.Point(26, 322);
+            tbAudEchoFeedback.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEchoFeedback.Maximum = 100;
+            tbAudEchoFeedback.Name = "tbAudEchoFeedback";
+            tbAudEchoFeedback.Size = new System.Drawing.Size(384, 69);
+            tbAudEchoFeedback.TabIndex = 13;
+            tbAudEchoFeedback.Scroll += tbAudEchoFeedback_Scroll;
             // 
             // label19
             // 
-            this.label19.AutoSize = (true);
-            this.label19.Location = (new global::System.Drawing.Point(18, 234));
-            this.label19.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label19.Name = ("label19");
-            this.label19.Size = (new global::System.Drawing.Size(72, 20));
-            this.label19.TabIndex = (12);
-            this.label19.Text = ("Feedback");
+            label19.AutoSize = true;
+            label19.Location = new System.Drawing.Point(22, 292);
+            label19.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label19.Name = "label19";
+            label19.Size = new System.Drawing.Size(87, 25);
+            label19.TabIndex = 12;
+            label19.Text = "Feedback";
             // 
             // lbAudEchoIntensity
             // 
-            this.lbAudEchoIntensity.AutoSize = (true);
-            this.lbAudEchoIntensity.Location = (new global::System.Drawing.Point(284, 155));
-            this.lbAudEchoIntensity.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbAudEchoIntensity.Name = ("lbAudEchoIntensity");
-            this.lbAudEchoIntensity.Size = (new global::System.Drawing.Size(28, 20));
-            this.lbAudEchoIntensity.TabIndex = (11);
-            this.lbAudEchoIntensity.Text = ("0.8");
+            lbAudEchoIntensity.AutoSize = true;
+            lbAudEchoIntensity.Location = new System.Drawing.Point(355, 194);
+            lbAudEchoIntensity.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbAudEchoIntensity.Name = "lbAudEchoIntensity";
+            lbAudEchoIntensity.Size = new System.Drawing.Size(36, 25);
+            lbAudEchoIntensity.TabIndex = 11;
+            lbAudEchoIntensity.Text = "0.8";
             // 
             // tbAudEchoIntensity
             // 
-            this.tbAudEchoIntensity.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEchoIntensity.Location = (new global::System.Drawing.Point(21, 180));
-            this.tbAudEchoIntensity.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEchoIntensity.Maximum = (100);
-            this.tbAudEchoIntensity.Name = ("tbAudEchoIntensity");
-            this.tbAudEchoIntensity.Size = (new global::System.Drawing.Size(307, 56));
-            this.tbAudEchoIntensity.TabIndex = (10);
-            this.tbAudEchoIntensity.Value = (80);
-            this.tbAudEchoIntensity.Scroll += (this.tbAudEchoIntensity_Scroll);
+            tbAudEchoIntensity.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEchoIntensity.Location = new System.Drawing.Point(26, 225);
+            tbAudEchoIntensity.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEchoIntensity.Maximum = 100;
+            tbAudEchoIntensity.Name = "tbAudEchoIntensity";
+            tbAudEchoIntensity.Size = new System.Drawing.Size(384, 69);
+            tbAudEchoIntensity.TabIndex = 10;
+            tbAudEchoIntensity.Value = 80;
+            tbAudEchoIntensity.Scroll += tbAudEchoIntensity_Scroll;
             // 
             // label17
             // 
-            this.label17.AutoSize = (true);
-            this.label17.Location = (new global::System.Drawing.Point(18, 155));
-            this.label17.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label17.Name = ("label17");
-            this.label17.Size = (new global::System.Drawing.Size(64, 20));
-            this.label17.TabIndex = (9);
-            this.label17.Text = ("Intensity");
+            label17.AutoSize = true;
+            label17.Location = new System.Drawing.Point(22, 194);
+            label17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label17.Name = "label17";
+            label17.Size = new System.Drawing.Size(79, 25);
+            label17.TabIndex = 9;
+            label17.Text = "Intensity";
             // 
             // lbAudEchoDelay
             // 
-            this.lbAudEchoDelay.AutoSize = (true);
-            this.lbAudEchoDelay.Location = (new global::System.Drawing.Point(284, 77));
-            this.lbAudEchoDelay.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.lbAudEchoDelay.Name = ("lbAudEchoDelay");
-            this.lbAudEchoDelay.Size = (new global::System.Drawing.Size(33, 20));
-            this.lbAudEchoDelay.TabIndex = (8);
-            this.lbAudEchoDelay.Text = ("500");
+            lbAudEchoDelay.AutoSize = true;
+            lbAudEchoDelay.Location = new System.Drawing.Point(355, 96);
+            lbAudEchoDelay.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbAudEchoDelay.Name = "lbAudEchoDelay";
+            lbAudEchoDelay.Size = new System.Drawing.Size(42, 25);
+            lbAudEchoDelay.TabIndex = 8;
+            lbAudEchoDelay.Text = "500";
             // 
             // tbAudEchoDelay
             // 
-            this.tbAudEchoDelay.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbAudEchoDelay.Location = (new global::System.Drawing.Point(21, 102));
-            this.tbAudEchoDelay.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbAudEchoDelay.Maximum = (1500);
-            this.tbAudEchoDelay.Minimum = (100);
-            this.tbAudEchoDelay.Name = ("tbAudEchoDelay");
-            this.tbAudEchoDelay.Size = (new global::System.Drawing.Size(307, 56));
-            this.tbAudEchoDelay.TabIndex = (7);
-            this.tbAudEchoDelay.TickFrequency = (50);
-            this.tbAudEchoDelay.Value = (500);
-            this.tbAudEchoDelay.Scroll += (this.tbAudEchoDelay_Scroll);
+            tbAudEchoDelay.BackColor = System.Drawing.SystemColors.Window;
+            tbAudEchoDelay.Location = new System.Drawing.Point(26, 128);
+            tbAudEchoDelay.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbAudEchoDelay.Maximum = 1500;
+            tbAudEchoDelay.Minimum = 100;
+            tbAudEchoDelay.Name = "tbAudEchoDelay";
+            tbAudEchoDelay.Size = new System.Drawing.Size(384, 69);
+            tbAudEchoDelay.TabIndex = 7;
+            tbAudEchoDelay.TickFrequency = 50;
+            tbAudEchoDelay.Value = 500;
+            tbAudEchoDelay.Scroll += tbAudEchoDelay_Scroll;
             // 
             // label4
             // 
-            this.label4.AutoSize = (true);
-            this.label4.Location = (new global::System.Drawing.Point(18, 77));
-            this.label4.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label4.Name = ("label4");
-            this.label4.Size = (new global::System.Drawing.Size(80, 20));
-            this.label4.TabIndex = (6);
-            this.label4.Text = ("Delay (ms)");
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(22, 96);
+            label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(95, 25);
+            label4.TabIndex = 6;
+            label4.Text = "Delay (ms)";
             // 
             // cbAudEchoEnabled
             // 
-            this.cbAudEchoEnabled.AutoSize = (true);
-            this.cbAudEchoEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbAudEchoEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbAudEchoEnabled.Name = ("cbAudEchoEnabled");
-            this.cbAudEchoEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbAudEchoEnabled.TabIndex = (3);
-            this.cbAudEchoEnabled.Text = ("Enabled");
-            this.cbAudEchoEnabled.UseVisualStyleBackColor = (true);
+            cbAudEchoEnabled.AutoSize = true;
+            cbAudEchoEnabled.Location = new System.Drawing.Point(26, 31);
+            cbAudEchoEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbAudEchoEnabled.Name = "cbAudEchoEnabled";
+            cbAudEchoEnabled.Size = new System.Drawing.Size(101, 29);
+            cbAudEchoEnabled.TabIndex = 3;
+            cbAudEchoEnabled.Text = "Enabled";
+            cbAudEchoEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.tabControl4);
-            this.tabPage7.Controls.Add(this.label3);
-            this.tabPage7.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage7.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage7.Name = ("tabPage7");
-            this.tabPage7.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage7.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage7.TabIndex = (3);
-            this.tabPage7.Text = ("Video processing");
-            this.tabPage7.UseVisualStyleBackColor = (true);
+            tabPage7.Controls.Add(tabControl4);
+            tabPage7.Controls.Add(label3);
+            tabPage7.Location = new System.Drawing.Point(4, 34);
+            tabPage7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage7.Size = new System.Drawing.Size(514, 962);
+            tabPage7.TabIndex = 3;
+            tabPage7.Text = "Video processing";
+            tabPage7.UseVisualStyleBackColor = true;
             // 
             // tabControl4
             // 
-            this.tabControl4.Controls.Add(this.tabPage8);
-            this.tabControl4.Controls.Add(this.tabPage11);
-            this.tabControl4.Controls.Add(this.tabPage17);
-            this.tabControl4.Controls.Add(this.tabPage20);
-            this.tabControl4.Controls.Add(this.tabPage12);
-            this.tabControl4.Controls.Add(this.tabPage13);
-            this.tabControl4.Controls.Add(this.tabPage14);
-            this.tabControl4.Controls.Add(this.tabPage15);
-            this.tabControl4.Controls.Add(this.tabPage16);
-            this.tabControl4.Location = (new global::System.Drawing.Point(12, 60));
-            this.tabControl4.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabControl4.Name = ("tabControl4");
-            this.tabControl4.SelectedIndex = (0);
-            this.tabControl4.Size = (new global::System.Drawing.Size(384, 690));
-            this.tabControl4.TabIndex = (9);
+            tabControl4.Controls.Add(tabPage8);
+            tabControl4.Controls.Add(tabPage11);
+            tabControl4.Controls.Add(tabPage17);
+            tabControl4.Controls.Add(tabPage20);
+            tabControl4.Controls.Add(tabPage12);
+            tabControl4.Controls.Add(tabPage13);
+            tabControl4.Controls.Add(tabPage14);
+            tabControl4.Controls.Add(tabPage15);
+            tabControl4.Controls.Add(tabPage16);
+            tabControl4.Location = new System.Drawing.Point(15, 75);
+            tabControl4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl4.Name = "tabControl4";
+            tabControl4.SelectedIndex = 0;
+            tabControl4.Size = new System.Drawing.Size(480, 862);
+            tabControl4.TabIndex = 9;
             // 
             // tabPage8
             // 
-            this.tabPage8.Controls.Add(this.label27);
-            this.tabPage8.Controls.Add(this.cbResizeMethod);
-            this.tabPage8.Controls.Add(this.label18);
-            this.tabPage8.Controls.Add(this.cbResizeLetterbox);
-            this.tabPage8.Controls.Add(this.label15);
-            this.tabPage8.Controls.Add(this.edResizeHeight);
-            this.tabPage8.Controls.Add(this.edResizeWidth);
-            this.tabPage8.Controls.Add(this.cbResizeEnabled);
-            this.tabPage8.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage8.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage8.Name = ("tabPage8");
-            this.tabPage8.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage8.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage8.TabIndex = (0);
-            this.tabPage8.Text = ("Resize");
-            this.tabPage8.UseVisualStyleBackColor = (true);
+            tabPage8.Controls.Add(label27);
+            tabPage8.Controls.Add(cbResizeMethod);
+            tabPage8.Controls.Add(label18);
+            tabPage8.Controls.Add(cbResizeLetterbox);
+            tabPage8.Controls.Add(label15);
+            tabPage8.Controls.Add(edResizeHeight);
+            tabPage8.Controls.Add(edResizeWidth);
+            tabPage8.Controls.Add(cbResizeEnabled);
+            tabPage8.Location = new System.Drawing.Point(4, 34);
+            tabPage8.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage8.Name = "tabPage8";
+            tabPage8.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage8.Size = new System.Drawing.Size(472, 824);
+            tabPage8.TabIndex = 0;
+            tabPage8.Text = "Resize";
+            tabPage8.UseVisualStyleBackColor = true;
             // 
             // label27
             // 
-            this.label27.AutoSize = (true);
-            this.label27.Location = (new global::System.Drawing.Point(18, 77));
-            this.label27.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label27.Name = ("label27");
-            this.label27.Size = (new global::System.Drawing.Size(79, 20));
-            this.label27.TabIndex = (7);
-            this.label27.Text = ("Resolution");
+            label27.AutoSize = true;
+            label27.Location = new System.Drawing.Point(22, 96);
+            label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label27.Name = "label27";
+            label27.Size = new System.Drawing.Size(95, 25);
+            label27.TabIndex = 7;
+            label27.Text = "Resolution";
             // 
             // cbResizeMethod
             // 
-            this.cbResizeMethod.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbResizeMethod.FormattingEnabled = (true);
-            this.cbResizeMethod.Items.AddRange(new global::System.Object[] { "Nearest neighbour scaling (fast and low quality)", "Bilinear 2-tap scaling (slow, middle quality)", "4-tap sinc filter for scaling (slow)", "Lanczos filter for scaling (slow, high quality)", "Bilinear multitap filter", "Multitap sinc filter", "Multitap bicubic Hermite filter", "Multitap bicubic spline filter", "Multitap bicubic Catmull-Rom filter", "Multitap bicubic Mitchell filter" });
-            this.cbResizeMethod.Location = (new global::System.Drawing.Point(21, 183));
-            this.cbResizeMethod.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbResizeMethod.Name = ("cbResizeMethod");
-            this.cbResizeMethod.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbResizeMethod.TabIndex = (6);
+            cbResizeMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbResizeMethod.FormattingEnabled = true;
+            cbResizeMethod.Items.AddRange(new object[] { "Nearest neighbour scaling (fast and low quality)", "Bilinear 2-tap scaling (slow, middle quality)", "4-tap sinc filter for scaling (slow)", "Lanczos filter for scaling (slow, high quality)", "Bilinear multitap filter", "Multitap sinc filter", "Multitap bicubic Hermite filter", "Multitap bicubic spline filter", "Multitap bicubic Catmull-Rom filter", "Multitap bicubic Mitchell filter" });
+            cbResizeMethod.Location = new System.Drawing.Point(26, 229);
+            cbResizeMethod.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbResizeMethod.Name = "cbResizeMethod";
+            cbResizeMethod.Size = new System.Drawing.Size(395, 33);
+            cbResizeMethod.TabIndex = 6;
             // 
             // label18
             // 
-            this.label18.AutoSize = (true);
-            this.label18.Location = (new global::System.Drawing.Point(18, 158));
-            this.label18.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label18.Name = ("label18");
-            this.label18.Size = (new global::System.Drawing.Size(61, 20));
-            this.label18.TabIndex = (5);
-            this.label18.Text = ("Method");
+            label18.AutoSize = true;
+            label18.Location = new System.Drawing.Point(22, 198);
+            label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label18.Name = "label18";
+            label18.Size = new System.Drawing.Size(75, 25);
+            label18.TabIndex = 5;
+            label18.Text = "Method";
             // 
             // cbResizeLetterbox
             // 
-            this.cbResizeLetterbox.AutoSize = (true);
-            this.cbResizeLetterbox.Location = (new global::System.Drawing.Point(187, 105));
-            this.cbResizeLetterbox.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbResizeLetterbox.Name = ("cbResizeLetterbox");
-            this.cbResizeLetterbox.Size = (new global::System.Drawing.Size(94, 24));
-            this.cbResizeLetterbox.TabIndex = (4);
-            this.cbResizeLetterbox.Text = ("Letterbox");
-            this.cbResizeLetterbox.UseVisualStyleBackColor = (true);
+            cbResizeLetterbox.AutoSize = true;
+            cbResizeLetterbox.Location = new System.Drawing.Point(234, 131);
+            cbResizeLetterbox.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbResizeLetterbox.Name = "cbResizeLetterbox";
+            cbResizeLetterbox.Size = new System.Drawing.Size(112, 29);
+            cbResizeLetterbox.TabIndex = 4;
+            cbResizeLetterbox.Text = "Letterbox";
+            cbResizeLetterbox.UseVisualStyleBackColor = true;
             // 
             // label15
             // 
-            this.label15.AutoSize = (true);
-            this.label15.Location = (new global::System.Drawing.Point(84, 106));
-            this.label15.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label15.Name = ("label15");
-            this.label15.Size = (new global::System.Drawing.Size(16, 20));
-            this.label15.TabIndex = (3);
-            this.label15.Text = ("x");
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(105, 132);
+            label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(20, 25);
+            label15.TabIndex = 3;
+            label15.Text = "x";
             // 
             // edResizeHeight
             // 
-            this.edResizeHeight.Location = (new global::System.Drawing.Point(107, 102));
-            this.edResizeHeight.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edResizeHeight.Name = ("edResizeHeight");
-            this.edResizeHeight.Size = (new global::System.Drawing.Size(54, 27));
-            this.edResizeHeight.TabIndex = (2);
-            this.edResizeHeight.Text = ("480");
+            edResizeHeight.Location = new System.Drawing.Point(134, 128);
+            edResizeHeight.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edResizeHeight.Name = "edResizeHeight";
+            edResizeHeight.Size = new System.Drawing.Size(66, 31);
+            edResizeHeight.TabIndex = 2;
+            edResizeHeight.Text = "480";
             // 
             // edResizeWidth
             // 
-            this.edResizeWidth.Location = (new global::System.Drawing.Point(21, 102));
-            this.edResizeWidth.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edResizeWidth.Name = ("edResizeWidth");
-            this.edResizeWidth.Size = (new global::System.Drawing.Size(54, 27));
-            this.edResizeWidth.TabIndex = (1);
-            this.edResizeWidth.Text = ("640");
+            edResizeWidth.Location = new System.Drawing.Point(26, 128);
+            edResizeWidth.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edResizeWidth.Name = "edResizeWidth";
+            edResizeWidth.Size = new System.Drawing.Size(66, 31);
+            edResizeWidth.TabIndex = 1;
+            edResizeWidth.Text = "640";
             // 
             // cbResizeEnabled
             // 
-            this.cbResizeEnabled.AutoSize = (true);
-            this.cbResizeEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbResizeEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbResizeEnabled.Name = ("cbResizeEnabled");
-            this.cbResizeEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbResizeEnabled.TabIndex = (0);
-            this.cbResizeEnabled.Text = ("Enabled");
-            this.cbResizeEnabled.UseVisualStyleBackColor = (true);
+            cbResizeEnabled.AutoSize = true;
+            cbResizeEnabled.Location = new System.Drawing.Point(26, 31);
+            cbResizeEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbResizeEnabled.Name = "cbResizeEnabled";
+            cbResizeEnabled.Size = new System.Drawing.Size(101, 29);
+            cbResizeEnabled.TabIndex = 0;
+            cbResizeEnabled.Text = "Enabled";
+            cbResizeEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage11
             // 
-            this.tabPage11.Controls.Add(this.label201);
-            this.tabPage11.Controls.Add(this.label200);
-            this.tabPage11.Controls.Add(this.label199);
-            this.tabPage11.Controls.Add(this.label198);
-            this.tabPage11.Controls.Add(this.tbVideoContrast);
-            this.tabPage11.Controls.Add(this.tbVideoHue);
-            this.tabPage11.Controls.Add(this.tbVideoBrightness);
-            this.tabPage11.Controls.Add(this.tbVideoSaturation);
-            this.tabPage11.Controls.Add(this.cbVideoBalanceEnabled);
-            this.tabPage11.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage11.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage11.Name = ("tabPage11");
-            this.tabPage11.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage11.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage11.TabIndex = (1);
-            this.tabPage11.Text = ("Color balance");
-            this.tabPage11.UseVisualStyleBackColor = (true);
+            tabPage11.Controls.Add(label201);
+            tabPage11.Controls.Add(label200);
+            tabPage11.Controls.Add(label199);
+            tabPage11.Controls.Add(label198);
+            tabPage11.Controls.Add(tbVideoContrast);
+            tabPage11.Controls.Add(tbVideoHue);
+            tabPage11.Controls.Add(tbVideoBrightness);
+            tabPage11.Controls.Add(tbVideoSaturation);
+            tabPage11.Controls.Add(cbVideoBalanceEnabled);
+            tabPage11.Location = new System.Drawing.Point(4, 34);
+            tabPage11.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage11.Name = "tabPage11";
+            tabPage11.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage11.Size = new System.Drawing.Size(472, 824);
+            tabPage11.TabIndex = 1;
+            tabPage11.Text = "Color balance";
+            tabPage11.UseVisualStyleBackColor = true;
             // 
             // label201
             // 
-            this.label201.AutoSize = (true);
-            this.label201.Location = (new global::System.Drawing.Point(188, 140));
-            this.label201.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label201.Name = ("label201");
-            this.label201.Size = (new global::System.Drawing.Size(36, 20));
-            this.label201.TabIndex = (74);
-            this.label201.Text = ("Hue");
+            label201.AutoSize = true;
+            label201.Location = new System.Drawing.Point(235, 175);
+            label201.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label201.Name = "label201";
+            label201.Size = new System.Drawing.Size(44, 25);
+            label201.TabIndex = 74;
+            label201.Text = "Hue";
             // 
             // label200
             // 
-            this.label200.AutoSize = (true);
-            this.label200.Location = (new global::System.Drawing.Point(7, 140));
-            this.label200.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label200.Name = ("label200");
-            this.label200.Size = (new global::System.Drawing.Size(64, 20));
-            this.label200.TabIndex = (73);
-            this.label200.Text = ("Contrast");
+            label200.AutoSize = true;
+            label200.Location = new System.Drawing.Point(9, 175);
+            label200.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label200.Name = "label200";
+            label200.Size = new System.Drawing.Size(79, 25);
+            label200.TabIndex = 73;
+            label200.Text = "Contrast";
             // 
             // label199
             // 
-            this.label199.AutoSize = (true);
-            this.label199.Location = (new global::System.Drawing.Point(188, 60));
-            this.label199.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label199.Name = ("label199");
-            this.label199.Size = (new global::System.Drawing.Size(77, 20));
-            this.label199.TabIndex = (72);
-            this.label199.Text = ("Saturation");
+            label199.AutoSize = true;
+            label199.Location = new System.Drawing.Point(235, 75);
+            label199.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label199.Name = "label199";
+            label199.Size = new System.Drawing.Size(93, 25);
+            label199.TabIndex = 72;
+            label199.Text = "Saturation";
             // 
             // label198
             // 
-            this.label198.AutoSize = (true);
-            this.label198.Location = (new global::System.Drawing.Point(7, 60));
-            this.label198.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label198.Name = ("label198");
-            this.label198.Size = (new global::System.Drawing.Size(77, 20));
-            this.label198.TabIndex = (71);
-            this.label198.Text = ("Brightness");
+            label198.AutoSize = true;
+            label198.Location = new System.Drawing.Point(9, 75);
+            label198.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label198.Name = "label198";
+            label198.Size = new System.Drawing.Size(94, 25);
+            label198.TabIndex = 71;
+            label198.Text = "Brightness";
             // 
             // tbVideoContrast
             // 
-            this.tbVideoContrast.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbVideoContrast.Location = (new global::System.Drawing.Point(3, 170));
-            this.tbVideoContrast.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbVideoContrast.Maximum = (200);
-            this.tbVideoContrast.Name = ("tbVideoContrast");
-            this.tbVideoContrast.Size = (new global::System.Drawing.Size(173, 56));
-            this.tbVideoContrast.TabIndex = (70);
-            this.tbVideoContrast.Value = (100);
-            this.tbVideoContrast.Scroll += (this.tbVideoContrast_Scroll);
+            tbVideoContrast.BackColor = System.Drawing.SystemColors.Window;
+            tbVideoContrast.Location = new System.Drawing.Point(4, 212);
+            tbVideoContrast.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVideoContrast.Maximum = 200;
+            tbVideoContrast.Name = "tbVideoContrast";
+            tbVideoContrast.Size = new System.Drawing.Size(216, 69);
+            tbVideoContrast.TabIndex = 70;
+            tbVideoContrast.Value = 100;
+            tbVideoContrast.Scroll += tbVideoContrast_Scroll;
             // 
             // tbVideoHue
             // 
-            this.tbVideoHue.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbVideoHue.Location = (new global::System.Drawing.Point(188, 170));
-            this.tbVideoHue.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbVideoHue.Maximum = (100);
-            this.tbVideoHue.Minimum = (-100);
-            this.tbVideoHue.Name = ("tbVideoHue");
-            this.tbVideoHue.Size = (new global::System.Drawing.Size(173, 56));
-            this.tbVideoHue.TabIndex = (69);
-            this.tbVideoHue.Scroll += (this.tbVideoHue_Scroll);
+            tbVideoHue.BackColor = System.Drawing.SystemColors.Window;
+            tbVideoHue.Location = new System.Drawing.Point(235, 212);
+            tbVideoHue.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVideoHue.Maximum = 100;
+            tbVideoHue.Minimum = -100;
+            tbVideoHue.Name = "tbVideoHue";
+            tbVideoHue.Size = new System.Drawing.Size(216, 69);
+            tbVideoHue.TabIndex = 69;
+            tbVideoHue.Scroll += tbVideoHue_Scroll;
             // 
             // tbVideoBrightness
             // 
-            this.tbVideoBrightness.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbVideoBrightness.Location = (new global::System.Drawing.Point(3, 83));
-            this.tbVideoBrightness.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbVideoBrightness.Maximum = (100);
-            this.tbVideoBrightness.Minimum = (-100);
-            this.tbVideoBrightness.Name = ("tbVideoBrightness");
-            this.tbVideoBrightness.Size = (new global::System.Drawing.Size(173, 56));
-            this.tbVideoBrightness.TabIndex = (68);
-            this.tbVideoBrightness.Scroll += (this.tbVideoBrightness_Scroll);
+            tbVideoBrightness.BackColor = System.Drawing.SystemColors.Window;
+            tbVideoBrightness.Location = new System.Drawing.Point(4, 104);
+            tbVideoBrightness.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVideoBrightness.Maximum = 100;
+            tbVideoBrightness.Minimum = -100;
+            tbVideoBrightness.Name = "tbVideoBrightness";
+            tbVideoBrightness.Size = new System.Drawing.Size(216, 69);
+            tbVideoBrightness.TabIndex = 68;
+            tbVideoBrightness.Scroll += tbVideoBrightness_Scroll;
             // 
             // tbVideoSaturation
             // 
-            this.tbVideoSaturation.BackColor = (global::System.Drawing.SystemColors.Window);
-            this.tbVideoSaturation.Location = (new global::System.Drawing.Point(188, 83));
-            this.tbVideoSaturation.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbVideoSaturation.Maximum = (200);
-            this.tbVideoSaturation.Name = ("tbVideoSaturation");
-            this.tbVideoSaturation.Size = (new global::System.Drawing.Size(173, 56));
-            this.tbVideoSaturation.TabIndex = (67);
-            this.tbVideoSaturation.Value = (200);
-            this.tbVideoSaturation.Scroll += (this.tbVideoSaturation_Scroll);
+            tbVideoSaturation.BackColor = System.Drawing.SystemColors.Window;
+            tbVideoSaturation.Location = new System.Drawing.Point(235, 104);
+            tbVideoSaturation.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVideoSaturation.Maximum = 200;
+            tbVideoSaturation.Name = "tbVideoSaturation";
+            tbVideoSaturation.Size = new System.Drawing.Size(216, 69);
+            tbVideoSaturation.TabIndex = 67;
+            tbVideoSaturation.Value = 200;
+            tbVideoSaturation.Scroll += tbVideoSaturation_Scroll;
             // 
             // cbVideoBalanceEnabled
             // 
-            this.cbVideoBalanceEnabled.AutoSize = (true);
-            this.cbVideoBalanceEnabled.Location = (new global::System.Drawing.Point(9, 17));
-            this.cbVideoBalanceEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbVideoBalanceEnabled.Name = ("cbVideoBalanceEnabled");
-            this.cbVideoBalanceEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbVideoBalanceEnabled.TabIndex = (64);
-            this.cbVideoBalanceEnabled.Text = ("Enabled");
-            this.cbVideoBalanceEnabled.UseVisualStyleBackColor = (true);
+            cbVideoBalanceEnabled.AutoSize = true;
+            cbVideoBalanceEnabled.Location = new System.Drawing.Point(11, 21);
+            cbVideoBalanceEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbVideoBalanceEnabled.Name = "cbVideoBalanceEnabled";
+            cbVideoBalanceEnabled.Size = new System.Drawing.Size(101, 29);
+            cbVideoBalanceEnabled.TabIndex = 64;
+            cbVideoBalanceEnabled.Text = "Enabled";
+            cbVideoBalanceEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage17
             // 
-            this.tabPage17.Controls.Add(this.btTextOverlayUpdate);
-            this.tabPage17.Controls.Add(this.tabControl5);
-            this.tabPage17.Controls.Add(this.cbTextOverlayEnabled);
-            this.tabPage17.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage17.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage17.Name = ("tabPage17");
-            this.tabPage17.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage17.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage17.TabIndex = (7);
-            this.tabPage17.Text = ("Text overlay");
-            this.tabPage17.UseVisualStyleBackColor = (true);
+            tabPage17.Controls.Add(btTextOverlayUpdate);
+            tabPage17.Controls.Add(tabControl5);
+            tabPage17.Controls.Add(cbTextOverlayEnabled);
+            tabPage17.Location = new System.Drawing.Point(4, 34);
+            tabPage17.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage17.Name = "tabPage17";
+            tabPage17.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage17.Size = new System.Drawing.Size(472, 824);
+            tabPage17.TabIndex = 7;
+            tabPage17.Text = "Text overlay";
+            tabPage17.UseVisualStyleBackColor = true;
             // 
             // btTextOverlayUpdate
             // 
-            this.btTextOverlayUpdate.Location = (new global::System.Drawing.Point(260, 18));
-            this.btTextOverlayUpdate.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btTextOverlayUpdate.Name = ("btTextOverlayUpdate");
-            this.btTextOverlayUpdate.Size = (new global::System.Drawing.Size(100, 35));
-            this.btTextOverlayUpdate.TabIndex = (9);
-            this.btTextOverlayUpdate.Text = ("Update");
-            this.btTextOverlayUpdate.UseVisualStyleBackColor = (true);
-            this.btTextOverlayUpdate.Click += (this.btTextOverlayUpdate_Click);
+            btTextOverlayUpdate.Location = new System.Drawing.Point(325, 22);
+            btTextOverlayUpdate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btTextOverlayUpdate.Name = "btTextOverlayUpdate";
+            btTextOverlayUpdate.Size = new System.Drawing.Size(125, 44);
+            btTextOverlayUpdate.TabIndex = 9;
+            btTextOverlayUpdate.Text = "Update";
+            btTextOverlayUpdate.UseVisualStyleBackColor = true;
+            btTextOverlayUpdate.Click += btTextOverlayUpdate_Click;
             // 
             // tabControl5
             // 
-            this.tabControl5.Controls.Add(this.tabPage18);
-            this.tabControl5.Controls.Add(this.tabPage19);
-            this.tabControl5.Location = (new global::System.Drawing.Point(12, 60));
-            this.tabControl5.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabControl5.Name = ("tabControl5");
-            this.tabControl5.SelectedIndex = (0);
-            this.tabControl5.Size = (new global::System.Drawing.Size(354, 580));
-            this.tabControl5.TabIndex = (8);
+            tabControl5.Controls.Add(tabPage18);
+            tabControl5.Controls.Add(tabPage19);
+            tabControl5.Location = new System.Drawing.Point(15, 75);
+            tabControl5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl5.Name = "tabControl5";
+            tabControl5.SelectedIndex = 0;
+            tabControl5.Size = new System.Drawing.Size(442, 725);
+            tabControl5.TabIndex = 8;
             // 
             // tabPage18
             // 
-            this.tabPage18.Controls.Add(this.tbTextOverlayY);
-            this.tabPage18.Controls.Add(this.label42);
-            this.tabPage18.Controls.Add(this.tbTextOverlayX);
-            this.tabPage18.Controls.Add(this.label41);
-            this.tabPage18.Controls.Add(this.cbTextOverlayLineAlign);
-            this.tabPage18.Controls.Add(this.label37);
-            this.tabPage18.Controls.Add(this.cbTextOverlayHAlign);
-            this.tabPage18.Controls.Add(this.label33);
-            this.tabPage18.Controls.Add(this.cbTextOverlayVAlign);
-            this.tabPage18.Controls.Add(this.label32);
-            this.tabPage18.Controls.Add(this.edTextOverlayText);
-            this.tabPage18.Controls.Add(this.label29);
-            this.tabPage18.Controls.Add(this.cbTextOverlayMode);
-            this.tabPage18.Controls.Add(this.label28);
-            this.tabPage18.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage18.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage18.Name = ("tabPage18");
-            this.tabPage18.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage18.Size = (new global::System.Drawing.Size(346, 547));
-            this.tabPage18.TabIndex = (0);
-            this.tabPage18.Text = ("Main");
-            this.tabPage18.UseVisualStyleBackColor = (true);
+            tabPage18.Controls.Add(tbTextOverlayY);
+            tabPage18.Controls.Add(label42);
+            tabPage18.Controls.Add(tbTextOverlayX);
+            tabPage18.Controls.Add(label41);
+            tabPage18.Controls.Add(cbTextOverlayLineAlign);
+            tabPage18.Controls.Add(label37);
+            tabPage18.Controls.Add(cbTextOverlayHAlign);
+            tabPage18.Controls.Add(label33);
+            tabPage18.Controls.Add(cbTextOverlayVAlign);
+            tabPage18.Controls.Add(label32);
+            tabPage18.Controls.Add(edTextOverlayText);
+            tabPage18.Controls.Add(label29);
+            tabPage18.Controls.Add(cbTextOverlayMode);
+            tabPage18.Controls.Add(label28);
+            tabPage18.Location = new System.Drawing.Point(4, 34);
+            tabPage18.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage18.Name = "tabPage18";
+            tabPage18.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage18.Size = new System.Drawing.Size(434, 687);
+            tabPage18.TabIndex = 0;
+            tabPage18.Text = "Main";
+            tabPage18.UseVisualStyleBackColor = true;
             // 
             // tbTextOverlayY
             // 
-            this.tbTextOverlayY.Location = (new global::System.Drawing.Point(184, 425));
-            this.tbTextOverlayY.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbTextOverlayY.Maximum = (100);
-            this.tbTextOverlayY.Name = ("tbTextOverlayY");
-            this.tbTextOverlayY.Size = (new global::System.Drawing.Size(139, 56));
-            this.tbTextOverlayY.TabIndex = (23);
-            this.tbTextOverlayY.Value = (20);
+            tbTextOverlayY.Location = new System.Drawing.Point(230, 531);
+            tbTextOverlayY.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTextOverlayY.Maximum = 100;
+            tbTextOverlayY.Name = "tbTextOverlayY";
+            tbTextOverlayY.Size = new System.Drawing.Size(174, 69);
+            tbTextOverlayY.TabIndex = 23;
+            tbTextOverlayY.Value = 20;
             // 
             // label42
             // 
-            this.label42.AutoSize = (true);
-            this.label42.Location = (new global::System.Drawing.Point(180, 395));
-            this.label42.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label42.Name = ("label42");
-            this.label42.Size = (new global::System.Drawing.Size(108, 20));
-            this.label42.TabIndex = (22);
-            this.label42.Text = ("Custom Y align");
+            label42.AutoSize = true;
+            label42.Location = new System.Drawing.Point(225, 494);
+            label42.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label42.Name = "label42";
+            label42.Size = new System.Drawing.Size(132, 25);
+            label42.TabIndex = 22;
+            label42.Text = "Custom Y align";
             // 
             // tbTextOverlayX
             // 
-            this.tbTextOverlayX.Location = (new global::System.Drawing.Point(19, 425));
-            this.tbTextOverlayX.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbTextOverlayX.Maximum = (100);
-            this.tbTextOverlayX.Name = ("tbTextOverlayX");
-            this.tbTextOverlayX.Size = (new global::System.Drawing.Size(139, 56));
-            this.tbTextOverlayX.TabIndex = (21);
-            this.tbTextOverlayX.Value = (20);
+            tbTextOverlayX.Location = new System.Drawing.Point(24, 531);
+            tbTextOverlayX.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTextOverlayX.Maximum = 100;
+            tbTextOverlayX.Name = "tbTextOverlayX";
+            tbTextOverlayX.Size = new System.Drawing.Size(174, 69);
+            tbTextOverlayX.TabIndex = 21;
+            tbTextOverlayX.Value = 20;
             // 
             // label41
             // 
-            this.label41.AutoSize = (true);
-            this.label41.Location = (new global::System.Drawing.Point(14, 395));
-            this.label41.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label41.Name = ("label41");
-            this.label41.Size = (new global::System.Drawing.Size(109, 20));
-            this.label41.TabIndex = (20);
-            this.label41.Text = ("Custom X align");
+            label41.AutoSize = true;
+            label41.Location = new System.Drawing.Point(18, 494);
+            label41.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label41.Name = "label41";
+            label41.Size = new System.Drawing.Size(133, 25);
+            label41.TabIndex = 20;
+            label41.Text = "Custom X align";
             // 
             // cbTextOverlayLineAlign
             // 
-            this.cbTextOverlayLineAlign.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayLineAlign.FormattingEnabled = (true);
-            this.cbTextOverlayLineAlign.Items.AddRange(new global::System.Object[] { "Left", "Center", "Right" });
-            this.cbTextOverlayLineAlign.Location = (new global::System.Drawing.Point(19, 343));
-            this.cbTextOverlayLineAlign.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayLineAlign.Name = ("cbTextOverlayLineAlign");
-            this.cbTextOverlayLineAlign.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayLineAlign.TabIndex = (19);
+            cbTextOverlayLineAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayLineAlign.FormattingEnabled = true;
+            cbTextOverlayLineAlign.Items.AddRange(new object[] { "Left", "Center", "Right" });
+            cbTextOverlayLineAlign.Location = new System.Drawing.Point(24, 429);
+            cbTextOverlayLineAlign.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayLineAlign.Name = "cbTextOverlayLineAlign";
+            cbTextOverlayLineAlign.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayLineAlign.TabIndex = 19;
             // 
             // label37
             // 
-            this.label37.AutoSize = (true);
-            this.label37.Location = (new global::System.Drawing.Point(14, 318));
-            this.label37.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label37.Name = ("label37");
-            this.label37.Size = (new global::System.Drawing.Size(73, 20));
-            this.label37.TabIndex = (18);
-            this.label37.Text = ("Line align");
+            label37.AutoSize = true;
+            label37.Location = new System.Drawing.Point(18, 398);
+            label37.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label37.Name = "label37";
+            label37.Size = new System.Drawing.Size(86, 25);
+            label37.TabIndex = 18;
+            label37.Text = "Line align";
             // 
             // cbTextOverlayHAlign
             // 
-            this.cbTextOverlayHAlign.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayHAlign.FormattingEnabled = (true);
-            this.cbTextOverlayHAlign.Items.AddRange(new global::System.Object[] { "Left", "Center", "Right", "Custom" });
-            this.cbTextOverlayHAlign.Location = (new global::System.Drawing.Point(19, 266));
-            this.cbTextOverlayHAlign.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayHAlign.Name = ("cbTextOverlayHAlign");
-            this.cbTextOverlayHAlign.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayHAlign.TabIndex = (15);
+            cbTextOverlayHAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayHAlign.FormattingEnabled = true;
+            cbTextOverlayHAlign.Items.AddRange(new object[] { "Left", "Center", "Right", "Custom" });
+            cbTextOverlayHAlign.Location = new System.Drawing.Point(24, 332);
+            cbTextOverlayHAlign.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayHAlign.Name = "cbTextOverlayHAlign";
+            cbTextOverlayHAlign.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayHAlign.TabIndex = 15;
             // 
             // label33
             // 
-            this.label33.AutoSize = (true);
-            this.label33.Location = (new global::System.Drawing.Point(14, 242));
-            this.label33.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label33.Name = ("label33");
-            this.label33.Size = (new global::System.Drawing.Size(139, 20));
-            this.label33.TabIndex = (14);
-            this.label33.Text = ("Horizontal align (X)");
+            label33.AutoSize = true;
+            label33.Location = new System.Drawing.Point(18, 302);
+            label33.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label33.Name = "label33";
+            label33.Size = new System.Drawing.Size(163, 25);
+            label33.TabIndex = 14;
+            label33.Text = "Horizontal align (X)";
             // 
             // cbTextOverlayVAlign
             // 
-            this.cbTextOverlayVAlign.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayVAlign.FormattingEnabled = (true);
-            this.cbTextOverlayVAlign.Items.AddRange(new global::System.Object[] { "Baseline", "Bottom", "Top", "Custom", "Center" });
-            this.cbTextOverlayVAlign.Location = (new global::System.Drawing.Point(19, 188));
-            this.cbTextOverlayVAlign.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayVAlign.Name = ("cbTextOverlayVAlign");
-            this.cbTextOverlayVAlign.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayVAlign.TabIndex = (13);
+            cbTextOverlayVAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayVAlign.FormattingEnabled = true;
+            cbTextOverlayVAlign.Items.AddRange(new object[] { "Baseline", "Bottom", "Top", "Custom", "Center" });
+            cbTextOverlayVAlign.Location = new System.Drawing.Point(24, 235);
+            cbTextOverlayVAlign.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayVAlign.Name = "cbTextOverlayVAlign";
+            cbTextOverlayVAlign.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayVAlign.TabIndex = 13;
             // 
             // label32
             // 
-            this.label32.AutoSize = (true);
-            this.label32.Location = (new global::System.Drawing.Point(14, 163));
-            this.label32.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label32.Name = ("label32");
-            this.label32.Size = (new global::System.Drawing.Size(117, 20));
-            this.label32.TabIndex = (12);
-            this.label32.Text = ("Vertical align (Y)");
+            label32.AutoSize = true;
+            label32.Location = new System.Drawing.Point(18, 204);
+            label32.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label32.Name = "label32";
+            label32.Size = new System.Drawing.Size(136, 25);
+            label32.TabIndex = 12;
+            label32.Text = "Vertical align (Y)";
             // 
             // edTextOverlayText
             // 
-            this.edTextOverlayText.Location = (new global::System.Drawing.Point(19, 117));
-            this.edTextOverlayText.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edTextOverlayText.Name = ("edTextOverlayText");
-            this.edTextOverlayText.Size = (new global::System.Drawing.Size(303, 27));
-            this.edTextOverlayText.TabIndex = (11);
-            this.edTextOverlayText.Text = ("Hello!");
+            edTextOverlayText.Location = new System.Drawing.Point(24, 146);
+            edTextOverlayText.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edTextOverlayText.Name = "edTextOverlayText";
+            edTextOverlayText.Size = new System.Drawing.Size(378, 31);
+            edTextOverlayText.TabIndex = 11;
+            edTextOverlayText.Text = "Hello!";
             // 
             // label29
             // 
-            this.label29.AutoSize = (true);
-            this.label29.Location = (new global::System.Drawing.Point(14, 92));
-            this.label29.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label29.Name = ("label29");
-            this.label29.Size = (new global::System.Drawing.Size(36, 20));
-            this.label29.TabIndex = (10);
-            this.label29.Text = ("Text");
+            label29.AutoSize = true;
+            label29.Location = new System.Drawing.Point(18, 115);
+            label29.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label29.Name = "label29";
+            label29.Size = new System.Drawing.Size(42, 25);
+            label29.TabIndex = 10;
+            label29.Text = "Text";
             // 
             // cbTextOverlayMode
             // 
-            this.cbTextOverlayMode.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayMode.FormattingEnabled = (true);
-            this.cbTextOverlayMode.Items.AddRange(new global::System.Object[] { "Custom text", "Timestamp", "System time" });
-            this.cbTextOverlayMode.Location = (new global::System.Drawing.Point(19, 42));
-            this.cbTextOverlayMode.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayMode.Name = ("cbTextOverlayMode");
-            this.cbTextOverlayMode.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayMode.TabIndex = (9);
+            cbTextOverlayMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayMode.FormattingEnabled = true;
+            cbTextOverlayMode.Items.AddRange(new object[] { "Custom text", "Timestamp", "System time" });
+            cbTextOverlayMode.Location = new System.Drawing.Point(24, 52);
+            cbTextOverlayMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayMode.Name = "cbTextOverlayMode";
+            cbTextOverlayMode.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayMode.TabIndex = 9;
             // 
             // label28
             // 
-            this.label28.AutoSize = (true);
-            this.label28.Location = (new global::System.Drawing.Point(14, 17));
-            this.label28.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label28.Name = ("label28");
-            this.label28.Size = (new global::System.Drawing.Size(48, 20));
-            this.label28.TabIndex = (8);
-            this.label28.Text = ("Mode");
+            label28.AutoSize = true;
+            label28.Location = new System.Drawing.Point(18, 21);
+            label28.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label28.Name = "label28";
+            label28.Size = new System.Drawing.Size(59, 25);
+            label28.TabIndex = 8;
+            label28.Text = "Mode";
             // 
             // tabPage19
             // 
-            this.tabPage19.Controls.Add(this.cbTextOverlayFontWeight);
-            this.tabPage19.Controls.Add(this.label7);
-            this.tabPage19.Controls.Add(this.pnTextOverlayColor);
-            this.tabPage19.Controls.Add(this.label40);
-            this.tabPage19.Controls.Add(this.cbTextOverlayAutosize);
-            this.tabPage19.Controls.Add(this.cbTextOverlayFontStyle);
-            this.tabPage19.Controls.Add(this.label39);
-            this.tabPage19.Controls.Add(this.cbTextOverlayFontWrapMode);
-            this.tabPage19.Controls.Add(this.label36);
-            this.tabPage19.Controls.Add(this.cbTextOverlayFontSize);
-            this.tabPage19.Controls.Add(this.label35);
-            this.tabPage19.Controls.Add(this.cbTextOverlayFontName);
-            this.tabPage19.Controls.Add(this.label34);
-            this.tabPage19.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage19.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage19.Name = ("tabPage19");
-            this.tabPage19.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage19.Size = (new global::System.Drawing.Size(346, 547));
-            this.tabPage19.TabIndex = (1);
-            this.tabPage19.Text = ("Font");
-            this.tabPage19.UseVisualStyleBackColor = (true);
-            // 
-            // cbTextOverlayFontWeight
-            // 
-            this.cbTextOverlayFontWeight.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayFontWeight.FormattingEnabled = (true);
-            this.cbTextOverlayFontWeight.Items.AddRange(new global::System.Object[] { "Thin", "UltraLight", "Light", "SemiLight", "Book", "Normal", "Medium", "SemiBold", "Bold", "UltraBold", "Heavy", "UltraHeavy" });
-            this.cbTextOverlayFontWeight.Location = (new global::System.Drawing.Point(19, 255));
-            this.cbTextOverlayFontWeight.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayFontWeight.Name = ("cbTextOverlayFontWeight");
-            this.cbTextOverlayFontWeight.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayFontWeight.TabIndex = (24);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = (true);
-            this.label7.Location = (new global::System.Drawing.Point(14, 230));
-            this.label7.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label7.Name = ("label7");
-            this.label7.Size = (new global::System.Drawing.Size(56, 20));
-            this.label7.TabIndex = (23);
-            this.label7.Text = ("Weight");
+            tabPage19.Controls.Add(pnTextOverlayColor);
+            tabPage19.Controls.Add(label40);
+            tabPage19.Controls.Add(cbTextOverlayAutosize);
+            tabPage19.Controls.Add(cbTextOverlayFontFace);
+            tabPage19.Controls.Add(label39);
+            tabPage19.Controls.Add(cbTextOverlayFontWrapMode);
+            tabPage19.Controls.Add(label36);
+            tabPage19.Controls.Add(cbTextOverlayFontSize);
+            tabPage19.Controls.Add(label35);
+            tabPage19.Controls.Add(cbTextOverlayFontName);
+            tabPage19.Controls.Add(label34);
+            tabPage19.Location = new System.Drawing.Point(4, 34);
+            tabPage19.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage19.Name = "tabPage19";
+            tabPage19.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage19.Size = new System.Drawing.Size(434, 687);
+            tabPage19.TabIndex = 1;
+            tabPage19.Text = "Font";
+            tabPage19.UseVisualStyleBackColor = true;
             // 
             // pnTextOverlayColor
             // 
-            this.pnTextOverlayColor.BackColor = (global::System.Drawing.Color.Green);
-            this.pnTextOverlayColor.Location = (new global::System.Drawing.Point(88, 378));
-            this.pnTextOverlayColor.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.pnTextOverlayColor.Name = ("pnTextOverlayColor");
-            this.pnTextOverlayColor.Size = (new global::System.Drawing.Size(45, 52));
-            this.pnTextOverlayColor.TabIndex = (22);
-            this.pnTextOverlayColor.Click += (this.pnTextOverlayColor_Click);
+            pnTextOverlayColor.BackColor = System.Drawing.Color.Green;
+            pnTextOverlayColor.Location = new System.Drawing.Point(114, 359);
+            pnTextOverlayColor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            pnTextOverlayColor.Name = "pnTextOverlayColor";
+            pnTextOverlayColor.Size = new System.Drawing.Size(56, 65);
+            pnTextOverlayColor.TabIndex = 22;
+            pnTextOverlayColor.Click += pnTextOverlayColor_Click;
             // 
             // label40
             // 
-            this.label40.AutoSize = (true);
-            this.label40.Location = (new global::System.Drawing.Point(14, 394));
-            this.label40.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label40.Name = ("label40");
-            this.label40.Size = (new global::System.Drawing.Size(45, 20));
-            this.label40.TabIndex = (21);
-            this.label40.Text = ("Color");
+            label40.AutoSize = true;
+            label40.Location = new System.Drawing.Point(24, 378);
+            label40.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label40.Name = "label40";
+            label40.Size = new System.Drawing.Size(55, 25);
+            label40.TabIndex = 21;
+            label40.Text = "Color";
             // 
             // cbTextOverlayAutosize
             // 
-            this.cbTextOverlayAutosize.AutoSize = (true);
-            this.cbTextOverlayAutosize.Location = (new global::System.Drawing.Point(19, 317));
-            this.cbTextOverlayAutosize.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayAutosize.Name = ("cbTextOverlayAutosize");
-            this.cbTextOverlayAutosize.Size = (new global::System.Drawing.Size(88, 24));
-            this.cbTextOverlayAutosize.TabIndex = (20);
-            this.cbTextOverlayAutosize.Text = ("Autosize");
-            this.cbTextOverlayAutosize.UseVisualStyleBackColor = (true);
+            cbTextOverlayAutosize.AutoSize = true;
+            cbTextOverlayAutosize.Location = new System.Drawing.Point(24, 292);
+            cbTextOverlayAutosize.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayAutosize.Name = "cbTextOverlayAutosize";
+            cbTextOverlayAutosize.Size = new System.Drawing.Size(106, 29);
+            cbTextOverlayAutosize.TabIndex = 20;
+            cbTextOverlayAutosize.Text = "Autosize";
+            cbTextOverlayAutosize.UseVisualStyleBackColor = true;
             // 
-            // cbTextOverlayFontStyle
+            // cbTextOverlayFontFace
             // 
-            this.cbTextOverlayFontStyle.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayFontStyle.FormattingEnabled = (true);
-            this.cbTextOverlayFontStyle.Items.AddRange(new global::System.Object[] { "Normal", "Oblique", "Italic" });
-            this.cbTextOverlayFontStyle.Location = (new global::System.Drawing.Point(19, 114));
-            this.cbTextOverlayFontStyle.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayFontStyle.Name = ("cbTextOverlayFontStyle");
-            this.cbTextOverlayFontStyle.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayFontStyle.TabIndex = (19);
+            cbTextOverlayFontFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayFontFace.FormattingEnabled = true;
+            cbTextOverlayFontFace.Items.AddRange(new object[] { "Normal", "Oblique", "Italic" });
+            cbTextOverlayFontFace.Location = new System.Drawing.Point(24, 142);
+            cbTextOverlayFontFace.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayFontFace.Name = "cbTextOverlayFontFace";
+            cbTextOverlayFontFace.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayFontFace.TabIndex = 19;
             // 
             // label39
             // 
-            this.label39.AutoSize = (true);
-            this.label39.Location = (new global::System.Drawing.Point(14, 90));
-            this.label39.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label39.Name = ("label39");
-            this.label39.Size = (new global::System.Drawing.Size(41, 20));
-            this.label39.TabIndex = (18);
-            this.label39.Text = ("Style");
+            label39.AutoSize = true;
+            label39.Location = new System.Drawing.Point(18, 112);
+            label39.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label39.Name = "label39";
+            label39.Size = new System.Drawing.Size(46, 25);
+            label39.TabIndex = 18;
+            label39.Text = "Face";
             // 
             // cbTextOverlayFontWrapMode
             // 
-            this.cbTextOverlayFontWrapMode.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayFontWrapMode.FormattingEnabled = (true);
-            this.cbTextOverlayFontWrapMode.Items.AddRange(new global::System.Object[] { "None", "Word", "Char", "Word and char" });
-            this.cbTextOverlayFontWrapMode.Location = (new global::System.Drawing.Point(19, 185));
-            this.cbTextOverlayFontWrapMode.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayFontWrapMode.Name = ("cbTextOverlayFontWrapMode");
-            this.cbTextOverlayFontWrapMode.Size = (new global::System.Drawing.Size(303, 28));
-            this.cbTextOverlayFontWrapMode.TabIndex = (15);
+            cbTextOverlayFontWrapMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayFontWrapMode.FormattingEnabled = true;
+            cbTextOverlayFontWrapMode.Items.AddRange(new object[] { "None", "Word", "Char", "Word and char" });
+            cbTextOverlayFontWrapMode.Location = new System.Drawing.Point(24, 231);
+            cbTextOverlayFontWrapMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayFontWrapMode.Name = "cbTextOverlayFontWrapMode";
+            cbTextOverlayFontWrapMode.Size = new System.Drawing.Size(378, 33);
+            cbTextOverlayFontWrapMode.TabIndex = 15;
             // 
             // label36
             // 
-            this.label36.AutoSize = (true);
-            this.label36.Location = (new global::System.Drawing.Point(14, 160));
-            this.label36.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label36.Name = ("label36");
-            this.label36.Size = (new global::System.Drawing.Size(88, 20));
-            this.label36.TabIndex = (14);
-            this.label36.Text = ("Wrap mode");
+            label36.AutoSize = true;
+            label36.Location = new System.Drawing.Point(18, 200);
+            label36.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label36.Name = "label36";
+            label36.Size = new System.Drawing.Size(107, 25);
+            label36.TabIndex = 14;
+            label36.Text = "Wrap mode";
             // 
             // cbTextOverlayFontSize
             // 
-            this.cbTextOverlayFontSize.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayFontSize.FormattingEnabled = (true);
-            this.cbTextOverlayFontSize.Items.AddRange(new global::System.Object[] { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36", "48", "72" });
-            this.cbTextOverlayFontSize.Location = (new global::System.Drawing.Point(258, 42));
-            this.cbTextOverlayFontSize.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayFontSize.Name = ("cbTextOverlayFontSize");
-            this.cbTextOverlayFontSize.Size = (new global::System.Drawing.Size(64, 28));
-            this.cbTextOverlayFontSize.TabIndex = (13);
+            cbTextOverlayFontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayFontSize.FormattingEnabled = true;
+            cbTextOverlayFontSize.Items.AddRange(new object[] { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36", "48", "72" });
+            cbTextOverlayFontSize.Location = new System.Drawing.Point(322, 52);
+            cbTextOverlayFontSize.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayFontSize.Name = "cbTextOverlayFontSize";
+            cbTextOverlayFontSize.Size = new System.Drawing.Size(79, 33);
+            cbTextOverlayFontSize.TabIndex = 13;
             // 
             // label35
             // 
-            this.label35.AutoSize = (true);
-            this.label35.Location = (new global::System.Drawing.Point(253, 17));
-            this.label35.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label35.Name = ("label35");
-            this.label35.Size = (new global::System.Drawing.Size(36, 20));
-            this.label35.TabIndex = (12);
-            this.label35.Text = ("Size");
+            label35.AutoSize = true;
+            label35.Location = new System.Drawing.Point(316, 21);
+            label35.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label35.Name = "label35";
+            label35.Size = new System.Drawing.Size(43, 25);
+            label35.TabIndex = 12;
+            label35.Text = "Size";
             // 
             // cbTextOverlayFontName
             // 
-            this.cbTextOverlayFontName.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbTextOverlayFontName.FormattingEnabled = (true);
-            this.cbTextOverlayFontName.Location = (new global::System.Drawing.Point(19, 42));
-            this.cbTextOverlayFontName.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayFontName.Name = ("cbTextOverlayFontName");
-            this.cbTextOverlayFontName.Size = (new global::System.Drawing.Size(230, 28));
-            this.cbTextOverlayFontName.TabIndex = (11);
+            cbTextOverlayFontName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTextOverlayFontName.FormattingEnabled = true;
+            cbTextOverlayFontName.Location = new System.Drawing.Point(24, 52);
+            cbTextOverlayFontName.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayFontName.Name = "cbTextOverlayFontName";
+            cbTextOverlayFontName.Size = new System.Drawing.Size(286, 33);
+            cbTextOverlayFontName.TabIndex = 11;
             // 
             // label34
             // 
-            this.label34.AutoSize = (true);
-            this.label34.Location = (new global::System.Drawing.Point(14, 17));
-            this.label34.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label34.Name = ("label34");
-            this.label34.Size = (new global::System.Drawing.Size(49, 20));
-            this.label34.TabIndex = (10);
-            this.label34.Text = ("Name");
+            label34.AutoSize = true;
+            label34.Location = new System.Drawing.Point(18, 21);
+            label34.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label34.Name = "label34";
+            label34.Size = new System.Drawing.Size(59, 25);
+            label34.TabIndex = 10;
+            label34.Text = "Name";
             // 
             // cbTextOverlayEnabled
             // 
-            this.cbTextOverlayEnabled.AutoSize = (true);
-            this.cbTextOverlayEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbTextOverlayEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbTextOverlayEnabled.Name = ("cbTextOverlayEnabled");
-            this.cbTextOverlayEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbTextOverlayEnabled.TabIndex = (1);
-            this.cbTextOverlayEnabled.Text = ("Enabled");
-            this.cbTextOverlayEnabled.UseVisualStyleBackColor = (true);
+            cbTextOverlayEnabled.AutoSize = true;
+            cbTextOverlayEnabled.Location = new System.Drawing.Point(26, 31);
+            cbTextOverlayEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbTextOverlayEnabled.Name = "cbTextOverlayEnabled";
+            cbTextOverlayEnabled.Size = new System.Drawing.Size(101, 29);
+            cbTextOverlayEnabled.TabIndex = 1;
+            cbTextOverlayEnabled.Text = "Enabled";
+            cbTextOverlayEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage20
             // 
-            this.tabPage20.Controls.Add(this.tbImageOverlayAlpha);
-            this.tabPage20.Controls.Add(this.label46);
-            this.tabPage20.Controls.Add(this.label45);
-            this.tabPage20.Controls.Add(this.label44);
-            this.tabPage20.Controls.Add(this.edImageOverlayY);
-            this.tabPage20.Controls.Add(this.edImageOverlayX);
-            this.tabPage20.Controls.Add(this.btImageOverlayOpen);
-            this.tabPage20.Controls.Add(this.edImageOverlayFilename);
-            this.tabPage20.Controls.Add(this.label43);
-            this.tabPage20.Controls.Add(this.cbImageOverlayEnabled);
-            this.tabPage20.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage20.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage20.Name = ("tabPage20");
-            this.tabPage20.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage20.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage20.TabIndex = (8);
-            this.tabPage20.Text = ("Image overlay");
-            this.tabPage20.UseVisualStyleBackColor = (true);
+            tabPage20.Controls.Add(tbImageOverlayAlpha);
+            tabPage20.Controls.Add(label46);
+            tabPage20.Controls.Add(label45);
+            tabPage20.Controls.Add(label44);
+            tabPage20.Controls.Add(edImageOverlayY);
+            tabPage20.Controls.Add(edImageOverlayX);
+            tabPage20.Controls.Add(btImageOverlayOpen);
+            tabPage20.Controls.Add(edImageOverlayFilename);
+            tabPage20.Controls.Add(label43);
+            tabPage20.Controls.Add(cbImageOverlayEnabled);
+            tabPage20.Location = new System.Drawing.Point(4, 34);
+            tabPage20.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage20.Name = "tabPage20";
+            tabPage20.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage20.Size = new System.Drawing.Size(472, 824);
+            tabPage20.TabIndex = 8;
+            tabPage20.Text = "Image overlay";
+            tabPage20.UseVisualStyleBackColor = true;
             // 
             // tbImageOverlayAlpha
             // 
-            this.tbImageOverlayAlpha.Location = (new global::System.Drawing.Point(21, 252));
-            this.tbImageOverlayAlpha.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbImageOverlayAlpha.Maximum = (100);
-            this.tbImageOverlayAlpha.Name = ("tbImageOverlayAlpha");
-            this.tbImageOverlayAlpha.Size = (new global::System.Drawing.Size(139, 56));
-            this.tbImageOverlayAlpha.TabIndex = (23);
-            this.tbImageOverlayAlpha.Value = (100);
+            tbImageOverlayAlpha.Location = new System.Drawing.Point(26, 315);
+            tbImageOverlayAlpha.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbImageOverlayAlpha.Maximum = 100;
+            tbImageOverlayAlpha.Name = "tbImageOverlayAlpha";
+            tbImageOverlayAlpha.Size = new System.Drawing.Size(174, 69);
+            tbImageOverlayAlpha.TabIndex = 23;
+            tbImageOverlayAlpha.Value = 100;
             // 
             // label46
             // 
-            this.label46.AutoSize = (true);
-            this.label46.Location = (new global::System.Drawing.Point(18, 223));
-            this.label46.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label46.Name = ("label46");
-            this.label46.Size = (new global::System.Drawing.Size(48, 20));
-            this.label46.TabIndex = (22);
-            this.label46.Text = ("Alpha");
+            label46.AutoSize = true;
+            label46.Location = new System.Drawing.Point(22, 279);
+            label46.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label46.Name = "label46";
+            label46.Size = new System.Drawing.Size(58, 25);
+            label46.TabIndex = 22;
+            label46.Text = "Alpha";
             // 
             // label45
             // 
-            this.label45.AutoSize = (true);
-            this.label45.Location = (new global::System.Drawing.Point(18, 145));
-            this.label45.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label45.Name = ("label45");
-            this.label45.Size = (new global::System.Drawing.Size(61, 20));
-            this.label45.TabIndex = (9);
-            this.label45.Text = ("Position");
+            label45.AutoSize = true;
+            label45.Location = new System.Drawing.Point(22, 181);
+            label45.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label45.Name = "label45";
+            label45.Size = new System.Drawing.Size(75, 25);
+            label45.TabIndex = 9;
+            label45.Text = "Position";
             // 
             // label44
             // 
-            this.label44.AutoSize = (true);
-            this.label44.Location = (new global::System.Drawing.Point(66, 174));
-            this.label44.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label44.Name = ("label44");
-            this.label44.Size = (new global::System.Drawing.Size(16, 20));
-            this.label44.TabIndex = (8);
-            this.label44.Text = ("x");
+            label44.AutoSize = true;
+            label44.Location = new System.Drawing.Point(82, 218);
+            label44.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label44.Name = "label44";
+            label44.Size = new System.Drawing.Size(20, 25);
+            label44.TabIndex = 8;
+            label44.Text = "x";
             // 
             // edImageOverlayY
             // 
-            this.edImageOverlayY.Location = (new global::System.Drawing.Point(84, 170));
-            this.edImageOverlayY.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edImageOverlayY.Name = ("edImageOverlayY");
-            this.edImageOverlayY.Size = (new global::System.Drawing.Size(38, 27));
-            this.edImageOverlayY.TabIndex = (7);
-            this.edImageOverlayY.Text = ("50");
+            edImageOverlayY.Location = new System.Drawing.Point(105, 212);
+            edImageOverlayY.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edImageOverlayY.Name = "edImageOverlayY";
+            edImageOverlayY.Size = new System.Drawing.Size(46, 31);
+            edImageOverlayY.TabIndex = 7;
+            edImageOverlayY.Text = "50";
             // 
             // edImageOverlayX
             // 
-            this.edImageOverlayX.Location = (new global::System.Drawing.Point(21, 170));
-            this.edImageOverlayX.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edImageOverlayX.Name = ("edImageOverlayX");
-            this.edImageOverlayX.Size = (new global::System.Drawing.Size(38, 27));
-            this.edImageOverlayX.TabIndex = (6);
-            this.edImageOverlayX.Text = ("50");
+            edImageOverlayX.Location = new System.Drawing.Point(26, 212);
+            edImageOverlayX.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edImageOverlayX.Name = "edImageOverlayX";
+            edImageOverlayX.Size = new System.Drawing.Size(46, 31);
+            edImageOverlayX.TabIndex = 6;
+            edImageOverlayX.Text = "50";
             // 
             // btImageOverlayOpen
             // 
-            this.btImageOverlayOpen.Location = (new global::System.Drawing.Point(325, 92));
-            this.btImageOverlayOpen.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btImageOverlayOpen.Name = ("btImageOverlayOpen");
-            this.btImageOverlayOpen.Size = (new global::System.Drawing.Size(30, 35));
-            this.btImageOverlayOpen.TabIndex = (5);
-            this.btImageOverlayOpen.Text = ("...");
-            this.btImageOverlayOpen.UseVisualStyleBackColor = (true);
-            this.btImageOverlayOpen.Click += (this.btImageOverlayOpen_Click);
+            btImageOverlayOpen.Location = new System.Drawing.Point(406, 115);
+            btImageOverlayOpen.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btImageOverlayOpen.Name = "btImageOverlayOpen";
+            btImageOverlayOpen.Size = new System.Drawing.Size(38, 44);
+            btImageOverlayOpen.TabIndex = 5;
+            btImageOverlayOpen.Text = "...";
+            btImageOverlayOpen.UseVisualStyleBackColor = true;
+            btImageOverlayOpen.Click += btImageOverlayOpen_Click;
             // 
             // edImageOverlayFilename
             // 
-            this.edImageOverlayFilename.Location = (new global::System.Drawing.Point(21, 95));
-            this.edImageOverlayFilename.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.edImageOverlayFilename.Name = ("edImageOverlayFilename");
-            this.edImageOverlayFilename.Size = (new global::System.Drawing.Size(295, 27));
-            this.edImageOverlayFilename.TabIndex = (4);
-            this.edImageOverlayFilename.Text = ("c:\\samples\\icon.png");
+            edImageOverlayFilename.Location = new System.Drawing.Point(26, 119);
+            edImageOverlayFilename.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edImageOverlayFilename.Name = "edImageOverlayFilename";
+            edImageOverlayFilename.Size = new System.Drawing.Size(368, 31);
+            edImageOverlayFilename.TabIndex = 4;
+            edImageOverlayFilename.Text = "c:\\samples\\icon.png";
             // 
             // label43
             // 
-            this.label43.AutoSize = (true);
-            this.label43.Location = (new global::System.Drawing.Point(18, 70));
-            this.label43.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label43.Name = ("label43");
-            this.label43.Size = (new global::System.Drawing.Size(73, 20));
-            this.label43.TabIndex = (3);
-            this.label43.Text = ("File name");
+            label43.AutoSize = true;
+            label43.Location = new System.Drawing.Point(22, 88);
+            label43.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label43.Name = "label43";
+            label43.Size = new System.Drawing.Size(87, 25);
+            label43.TabIndex = 3;
+            label43.Text = "File name";
             // 
             // cbImageOverlayEnabled
             // 
-            this.cbImageOverlayEnabled.AutoSize = (true);
-            this.cbImageOverlayEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbImageOverlayEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbImageOverlayEnabled.Name = ("cbImageOverlayEnabled");
-            this.cbImageOverlayEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbImageOverlayEnabled.TabIndex = (2);
-            this.cbImageOverlayEnabled.Text = ("Enabled");
-            this.cbImageOverlayEnabled.UseVisualStyleBackColor = (true);
-            this.cbImageOverlayEnabled.Click += (this.cbImageOverlayEnabled_Click);
+            cbImageOverlayEnabled.AutoSize = true;
+            cbImageOverlayEnabled.Location = new System.Drawing.Point(26, 31);
+            cbImageOverlayEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbImageOverlayEnabled.Name = "cbImageOverlayEnabled";
+            cbImageOverlayEnabled.Size = new System.Drawing.Size(101, 29);
+            cbImageOverlayEnabled.TabIndex = 2;
+            cbImageOverlayEnabled.Text = "Enabled";
+            cbImageOverlayEnabled.UseVisualStyleBackColor = true;
+            cbImageOverlayEnabled.Click += cbImageOverlayEnabled_Click;
             // 
             // tabPage12
             // 
-            this.tabPage12.Controls.Add(this.cbColorEffect);
-            this.tabPage12.Controls.Add(this.label20);
-            this.tabPage12.Controls.Add(this.cbColorEffectEnabled);
-            this.tabPage12.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage12.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage12.Name = ("tabPage12");
-            this.tabPage12.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage12.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage12.TabIndex = (2);
-            this.tabPage12.Text = ("Color effect");
-            this.tabPage12.UseVisualStyleBackColor = (true);
+            tabPage12.Controls.Add(cbColorEffect);
+            tabPage12.Controls.Add(label20);
+            tabPage12.Controls.Add(cbColorEffectEnabled);
+            tabPage12.Location = new System.Drawing.Point(4, 34);
+            tabPage12.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage12.Name = "tabPage12";
+            tabPage12.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage12.Size = new System.Drawing.Size(472, 824);
+            tabPage12.TabIndex = 2;
+            tabPage12.Text = "Color effect";
+            tabPage12.UseVisualStyleBackColor = true;
             // 
             // cbColorEffect
             // 
-            this.cbColorEffect.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbColorEffect.FormattingEnabled = (true);
-            this.cbColorEffect.Items.AddRange(new global::System.Object[] { "None", "Heat", "Sepia", "X-ray", "X-pro", "Yellow-blue" });
-            this.cbColorEffect.Location = (new global::System.Drawing.Point(21, 95));
-            this.cbColorEffect.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbColorEffect.Name = ("cbColorEffect");
-            this.cbColorEffect.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbColorEffect.TabIndex = (9);
-            this.cbColorEffect.SelectedIndexChanged += (this.cbColorEffect_SelectedIndexChanged);
+            cbColorEffect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbColorEffect.FormattingEnabled = true;
+            cbColorEffect.Items.AddRange(new object[] { "None", "Heat", "Sepia", "X-ray", "X-pro", "Yellow-blue" });
+            cbColorEffect.Location = new System.Drawing.Point(26, 119);
+            cbColorEffect.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbColorEffect.Name = "cbColorEffect";
+            cbColorEffect.Size = new System.Drawing.Size(395, 33);
+            cbColorEffect.TabIndex = 9;
+            cbColorEffect.SelectedIndexChanged += cbColorEffect_SelectedIndexChanged;
             // 
             // label20
             // 
-            this.label20.AutoSize = (true);
-            this.label20.Location = (new global::System.Drawing.Point(18, 70));
-            this.label20.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label20.Name = ("label20");
-            this.label20.Size = (new global::System.Drawing.Size(47, 20));
-            this.label20.TabIndex = (8);
-            this.label20.Text = ("Effect");
+            label20.AutoSize = true;
+            label20.Location = new System.Drawing.Point(22, 88);
+            label20.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label20.Name = "label20";
+            label20.Size = new System.Drawing.Size(56, 25);
+            label20.TabIndex = 8;
+            label20.Text = "Effect";
             // 
             // cbColorEffectEnabled
             // 
-            this.cbColorEffectEnabled.AutoSize = (true);
-            this.cbColorEffectEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbColorEffectEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbColorEffectEnabled.Name = ("cbColorEffectEnabled");
-            this.cbColorEffectEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbColorEffectEnabled.TabIndex = (7);
-            this.cbColorEffectEnabled.Text = ("Enabled");
-            this.cbColorEffectEnabled.UseVisualStyleBackColor = (true);
+            cbColorEffectEnabled.AutoSize = true;
+            cbColorEffectEnabled.Location = new System.Drawing.Point(26, 31);
+            cbColorEffectEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbColorEffectEnabled.Name = "cbColorEffectEnabled";
+            cbColorEffectEnabled.Size = new System.Drawing.Size(101, 29);
+            cbColorEffectEnabled.TabIndex = 7;
+            cbColorEffectEnabled.Text = "Enabled";
+            cbColorEffectEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage13
             // 
-            this.tabPage13.Controls.Add(this.cbFlipRotate);
-            this.tabPage13.Controls.Add(this.label21);
-            this.tabPage13.Controls.Add(this.cbFlipRotateEnabled);
-            this.tabPage13.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage13.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage13.Name = ("tabPage13");
-            this.tabPage13.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage13.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage13.TabIndex = (3);
-            this.tabPage13.Text = ("Flip / rotate");
-            this.tabPage13.UseVisualStyleBackColor = (true);
+            tabPage13.Controls.Add(cbFlipRotate);
+            tabPage13.Controls.Add(label21);
+            tabPage13.Controls.Add(cbFlipRotateEnabled);
+            tabPage13.Location = new System.Drawing.Point(4, 34);
+            tabPage13.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage13.Name = "tabPage13";
+            tabPage13.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage13.Size = new System.Drawing.Size(472, 824);
+            tabPage13.TabIndex = 3;
+            tabPage13.Text = "Flip / rotate";
+            tabPage13.UseVisualStyleBackColor = true;
             // 
             // cbFlipRotate
             // 
-            this.cbFlipRotate.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbFlipRotate.FormattingEnabled = (true);
-            this.cbFlipRotate.Items.AddRange(new global::System.Object[] { "0", "90", "180,", "-90", "Horizontal flip", "Vertical flip" });
-            this.cbFlipRotate.Location = (new global::System.Drawing.Point(21, 95));
-            this.cbFlipRotate.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbFlipRotate.Name = ("cbFlipRotate");
-            this.cbFlipRotate.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbFlipRotate.TabIndex = (12);
-            this.cbFlipRotate.SelectedIndexChanged += (this.cbFlipRotate_SelectedIndexChanged);
+            cbFlipRotate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbFlipRotate.FormattingEnabled = true;
+            cbFlipRotate.Items.AddRange(new object[] { "0", "90", "180,", "-90", "Horizontal flip", "Vertical flip" });
+            cbFlipRotate.Location = new System.Drawing.Point(26, 119);
+            cbFlipRotate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbFlipRotate.Name = "cbFlipRotate";
+            cbFlipRotate.Size = new System.Drawing.Size(395, 33);
+            cbFlipRotate.TabIndex = 12;
+            cbFlipRotate.SelectedIndexChanged += cbFlipRotate_SelectedIndexChanged;
             // 
             // label21
             // 
-            this.label21.AutoSize = (true);
-            this.label21.Location = (new global::System.Drawing.Point(18, 70));
-            this.label21.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label21.Name = ("label21");
-            this.label21.Size = (new global::System.Drawing.Size(61, 20));
-            this.label21.TabIndex = (11);
-            this.label21.Text = ("Method");
+            label21.AutoSize = true;
+            label21.Location = new System.Drawing.Point(22, 88);
+            label21.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label21.Name = "label21";
+            label21.Size = new System.Drawing.Size(75, 25);
+            label21.TabIndex = 11;
+            label21.Text = "Method";
             // 
             // cbFlipRotateEnabled
             // 
-            this.cbFlipRotateEnabled.AutoSize = (true);
-            this.cbFlipRotateEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbFlipRotateEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbFlipRotateEnabled.Name = ("cbFlipRotateEnabled");
-            this.cbFlipRotateEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbFlipRotateEnabled.TabIndex = (10);
-            this.cbFlipRotateEnabled.Text = ("Enabled");
-            this.cbFlipRotateEnabled.UseVisualStyleBackColor = (true);
+            cbFlipRotateEnabled.AutoSize = true;
+            cbFlipRotateEnabled.Location = new System.Drawing.Point(26, 31);
+            cbFlipRotateEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbFlipRotateEnabled.Name = "cbFlipRotateEnabled";
+            cbFlipRotateEnabled.Size = new System.Drawing.Size(101, 29);
+            cbFlipRotateEnabled.TabIndex = 10;
+            cbFlipRotateEnabled.Text = "Enabled";
+            cbFlipRotateEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage14
             // 
-            this.tabPage14.Controls.Add(this.cbDeinterlaceDropOrphans);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceIgnoreObscure);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceLocking);
-            this.tabPage14.Controls.Add(this.label26);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceMode);
-            this.tabPage14.Controls.Add(this.label25);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceFieldLayout);
-            this.tabPage14.Controls.Add(this.label24);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceFields);
-            this.tabPage14.Controls.Add(this.label23);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceMethod);
-            this.tabPage14.Controls.Add(this.label22);
-            this.tabPage14.Controls.Add(this.cbDeinterlaceEnabled);
-            this.tabPage14.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage14.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage14.Name = ("tabPage14");
-            this.tabPage14.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage14.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage14.TabIndex = (4);
-            this.tabPage14.Text = ("Deinterlace");
-            this.tabPage14.UseVisualStyleBackColor = (true);
+            tabPage14.Controls.Add(cbDeinterlaceDropOrphans);
+            tabPage14.Controls.Add(cbDeinterlaceIgnoreObscure);
+            tabPage14.Controls.Add(cbDeinterlaceLocking);
+            tabPage14.Controls.Add(label26);
+            tabPage14.Controls.Add(cbDeinterlaceMode);
+            tabPage14.Controls.Add(label25);
+            tabPage14.Controls.Add(cbDeinterlaceFieldLayout);
+            tabPage14.Controls.Add(label24);
+            tabPage14.Controls.Add(cbDeinterlaceFields);
+            tabPage14.Controls.Add(label23);
+            tabPage14.Controls.Add(cbDeinterlaceMethod);
+            tabPage14.Controls.Add(label22);
+            tabPage14.Controls.Add(cbDeinterlaceEnabled);
+            tabPage14.Location = new System.Drawing.Point(4, 34);
+            tabPage14.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage14.Name = "tabPage14";
+            tabPage14.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage14.Size = new System.Drawing.Size(472, 824);
+            tabPage14.TabIndex = 4;
+            tabPage14.Text = "Deinterlace";
+            tabPage14.UseVisualStyleBackColor = true;
             // 
             // cbDeinterlaceDropOrphans
             // 
-            this.cbDeinterlaceDropOrphans.AutoSize = (true);
-            this.cbDeinterlaceDropOrphans.Checked = (true);
-            this.cbDeinterlaceDropOrphans.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.cbDeinterlaceDropOrphans.Location = (new global::System.Drawing.Point(21, 490));
-            this.cbDeinterlaceDropOrphans.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceDropOrphans.Name = ("cbDeinterlaceDropOrphans");
-            this.cbDeinterlaceDropOrphans.Size = (new global::System.Drawing.Size(122, 24));
-            this.cbDeinterlaceDropOrphans.TabIndex = (25);
-            this.cbDeinterlaceDropOrphans.Text = ("Drop orphans");
-            this.cbDeinterlaceDropOrphans.UseVisualStyleBackColor = (true);
+            cbDeinterlaceDropOrphans.AutoSize = true;
+            cbDeinterlaceDropOrphans.Checked = true;
+            cbDeinterlaceDropOrphans.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbDeinterlaceDropOrphans.Location = new System.Drawing.Point(26, 612);
+            cbDeinterlaceDropOrphans.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceDropOrphans.Name = "cbDeinterlaceDropOrphans";
+            cbDeinterlaceDropOrphans.Size = new System.Drawing.Size(149, 29);
+            cbDeinterlaceDropOrphans.TabIndex = 25;
+            cbDeinterlaceDropOrphans.Text = "Drop orphans";
+            cbDeinterlaceDropOrphans.UseVisualStyleBackColor = true;
             // 
             // cbDeinterlaceIgnoreObscure
             // 
-            this.cbDeinterlaceIgnoreObscure.AutoSize = (true);
-            this.cbDeinterlaceIgnoreObscure.Checked = (true);
-            this.cbDeinterlaceIgnoreObscure.CheckState = (global::System.Windows.Forms.CheckState.Checked);
-            this.cbDeinterlaceIgnoreObscure.Location = (new global::System.Drawing.Point(21, 454));
-            this.cbDeinterlaceIgnoreObscure.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceIgnoreObscure.Name = ("cbDeinterlaceIgnoreObscure");
-            this.cbDeinterlaceIgnoreObscure.Size = (new global::System.Drawing.Size(130, 24));
-            this.cbDeinterlaceIgnoreObscure.TabIndex = (24);
-            this.cbDeinterlaceIgnoreObscure.Text = ("Ignore obscure");
-            this.cbDeinterlaceIgnoreObscure.UseVisualStyleBackColor = (true);
+            cbDeinterlaceIgnoreObscure.AutoSize = true;
+            cbDeinterlaceIgnoreObscure.Checked = true;
+            cbDeinterlaceIgnoreObscure.CheckState = System.Windows.Forms.CheckState.Checked;
+            cbDeinterlaceIgnoreObscure.Location = new System.Drawing.Point(26, 568);
+            cbDeinterlaceIgnoreObscure.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceIgnoreObscure.Name = "cbDeinterlaceIgnoreObscure";
+            cbDeinterlaceIgnoreObscure.Size = new System.Drawing.Size(158, 29);
+            cbDeinterlaceIgnoreObscure.TabIndex = 24;
+            cbDeinterlaceIgnoreObscure.Text = "Ignore obscure";
+            cbDeinterlaceIgnoreObscure.UseVisualStyleBackColor = true;
             // 
             // cbDeinterlaceLocking
             // 
-            this.cbDeinterlaceLocking.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbDeinterlaceLocking.FormattingEnabled = (true);
-            this.cbDeinterlaceLocking.Items.AddRange(new global::System.Object[] { "None", "Auto", "Active", "Passive" });
-            this.cbDeinterlaceLocking.Location = (new global::System.Drawing.Point(21, 392));
-            this.cbDeinterlaceLocking.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceLocking.Name = ("cbDeinterlaceLocking");
-            this.cbDeinterlaceLocking.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbDeinterlaceLocking.TabIndex = (23);
+            cbDeinterlaceLocking.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDeinterlaceLocking.FormattingEnabled = true;
+            cbDeinterlaceLocking.Items.AddRange(new object[] { "None", "Auto", "Active", "Passive" });
+            cbDeinterlaceLocking.Location = new System.Drawing.Point(26, 490);
+            cbDeinterlaceLocking.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceLocking.Name = "cbDeinterlaceLocking";
+            cbDeinterlaceLocking.Size = new System.Drawing.Size(395, 33);
+            cbDeinterlaceLocking.TabIndex = 23;
             // 
             // label26
             // 
-            this.label26.AutoSize = (true);
-            this.label26.Location = (new global::System.Drawing.Point(18, 368));
-            this.label26.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label26.Name = ("label26");
-            this.label26.Size = (new global::System.Drawing.Size(60, 20));
-            this.label26.TabIndex = (22);
-            this.label26.Text = ("Locking");
+            label26.AutoSize = true;
+            label26.Location = new System.Drawing.Point(22, 460);
+            label26.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label26.Name = "label26";
+            label26.Size = new System.Drawing.Size(73, 25);
+            label26.TabIndex = 22;
+            label26.Text = "Locking";
             // 
             // cbDeinterlaceMode
             // 
-            this.cbDeinterlaceMode.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbDeinterlaceMode.FormattingEnabled = (true);
-            this.cbDeinterlaceMode.Items.AddRange(new global::System.Object[] { "Auto", "Interlaced", "Disabled", "Auto (strict)" });
-            this.cbDeinterlaceMode.Location = (new global::System.Drawing.Point(21, 317));
-            this.cbDeinterlaceMode.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceMode.Name = ("cbDeinterlaceMode");
-            this.cbDeinterlaceMode.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbDeinterlaceMode.TabIndex = (21);
+            cbDeinterlaceMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDeinterlaceMode.FormattingEnabled = true;
+            cbDeinterlaceMode.Items.AddRange(new object[] { "Auto", "Interlaced", "Disabled", "Auto (strict)" });
+            cbDeinterlaceMode.Location = new System.Drawing.Point(26, 396);
+            cbDeinterlaceMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceMode.Name = "cbDeinterlaceMode";
+            cbDeinterlaceMode.Size = new System.Drawing.Size(395, 33);
+            cbDeinterlaceMode.TabIndex = 21;
             // 
             // label25
             // 
-            this.label25.AutoSize = (true);
-            this.label25.Location = (new global::System.Drawing.Point(18, 292));
-            this.label25.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label25.Name = ("label25");
-            this.label25.Size = (new global::System.Drawing.Size(48, 20));
-            this.label25.TabIndex = (20);
-            this.label25.Text = ("Mode");
+            label25.AutoSize = true;
+            label25.Location = new System.Drawing.Point(22, 365);
+            label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label25.Name = "label25";
+            label25.Size = new System.Drawing.Size(59, 25);
+            label25.TabIndex = 20;
+            label25.Text = "Mode";
             // 
             // cbDeinterlaceFieldLayout
             // 
-            this.cbDeinterlaceFieldLayout.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbDeinterlaceFieldLayout.FormattingEnabled = (true);
-            this.cbDeinterlaceFieldLayout.Items.AddRange(new global::System.Object[] { "Automatically detect", "Top fields first", "Bottom fields first" });
-            this.cbDeinterlaceFieldLayout.Location = (new global::System.Drawing.Point(21, 243));
-            this.cbDeinterlaceFieldLayout.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceFieldLayout.Name = ("cbDeinterlaceFieldLayout");
-            this.cbDeinterlaceFieldLayout.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbDeinterlaceFieldLayout.TabIndex = (19);
+            cbDeinterlaceFieldLayout.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDeinterlaceFieldLayout.FormattingEnabled = true;
+            cbDeinterlaceFieldLayout.Items.AddRange(new object[] { "Automatically detect", "Top fields first", "Bottom fields first" });
+            cbDeinterlaceFieldLayout.Location = new System.Drawing.Point(26, 304);
+            cbDeinterlaceFieldLayout.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceFieldLayout.Name = "cbDeinterlaceFieldLayout";
+            cbDeinterlaceFieldLayout.Size = new System.Drawing.Size(395, 33);
+            cbDeinterlaceFieldLayout.TabIndex = 19;
             // 
             // label24
             // 
-            this.label24.AutoSize = (true);
-            this.label24.Location = (new global::System.Drawing.Point(18, 218));
-            this.label24.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label24.Name = ("label24");
-            this.label24.Size = (new global::System.Drawing.Size(86, 20));
-            this.label24.TabIndex = (18);
-            this.label24.Text = ("Field layout");
+            label24.AutoSize = true;
+            label24.Location = new System.Drawing.Point(22, 272);
+            label24.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label24.Name = "label24";
+            label24.Size = new System.Drawing.Size(103, 25);
+            label24.TabIndex = 18;
+            label24.Text = "Field layout";
             // 
             // cbDeinterlaceFields
             // 
-            this.cbDeinterlaceFields.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbDeinterlaceFields.FormattingEnabled = (true);
-            this.cbDeinterlaceFields.Items.AddRange(new global::System.Object[] { "All", "Top fields only", "Bottom fields only", "Automatically detect" });
-            this.cbDeinterlaceFields.Location = (new global::System.Drawing.Point(21, 168));
-            this.cbDeinterlaceFields.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceFields.Name = ("cbDeinterlaceFields");
-            this.cbDeinterlaceFields.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbDeinterlaceFields.TabIndex = (17);
+            cbDeinterlaceFields.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDeinterlaceFields.FormattingEnabled = true;
+            cbDeinterlaceFields.Items.AddRange(new object[] { "All", "Top fields only", "Bottom fields only", "Automatically detect" });
+            cbDeinterlaceFields.Location = new System.Drawing.Point(26, 210);
+            cbDeinterlaceFields.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceFields.Name = "cbDeinterlaceFields";
+            cbDeinterlaceFields.Size = new System.Drawing.Size(395, 33);
+            cbDeinterlaceFields.TabIndex = 17;
             // 
             // label23
             // 
-            this.label23.AutoSize = (true);
-            this.label23.Location = (new global::System.Drawing.Point(18, 143));
-            this.label23.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label23.Name = ("label23");
-            this.label23.Size = (new global::System.Drawing.Size(47, 20));
-            this.label23.TabIndex = (16);
-            this.label23.Text = ("Fields");
+            label23.AutoSize = true;
+            label23.Location = new System.Drawing.Point(22, 179);
+            label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label23.Name = "label23";
+            label23.Size = new System.Drawing.Size(57, 25);
+            label23.TabIndex = 16;
+            label23.Text = "Fields";
             // 
             // cbDeinterlaceMethod
             // 
-            this.cbDeinterlaceMethod.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbDeinterlaceMethod.FormattingEnabled = (true);
-            this.cbDeinterlaceMethod.Items.AddRange(new global::System.Object[] { "Motion adaptive: motion search", "Motion adaptive: advanced detection", "Motion adaptive: simple detection", "Blur vertical", "Linear interpolation", "Linear interpolation in time domain (Low quality)", "Double lines" });
-            this.cbDeinterlaceMethod.Location = (new global::System.Drawing.Point(21, 95));
-            this.cbDeinterlaceMethod.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceMethod.Name = ("cbDeinterlaceMethod");
-            this.cbDeinterlaceMethod.Size = (new global::System.Drawing.Size(317, 28));
-            this.cbDeinterlaceMethod.TabIndex = (15);
+            cbDeinterlaceMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbDeinterlaceMethod.FormattingEnabled = true;
+            cbDeinterlaceMethod.Items.AddRange(new object[] { "Motion adaptive: motion search", "Motion adaptive: advanced detection", "Motion adaptive: simple detection", "Blur vertical", "Linear interpolation", "Linear interpolation in time domain (Low quality)", "Double lines" });
+            cbDeinterlaceMethod.Location = new System.Drawing.Point(26, 119);
+            cbDeinterlaceMethod.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceMethod.Name = "cbDeinterlaceMethod";
+            cbDeinterlaceMethod.Size = new System.Drawing.Size(395, 33);
+            cbDeinterlaceMethod.TabIndex = 15;
             // 
             // label22
             // 
-            this.label22.AutoSize = (true);
-            this.label22.Location = (new global::System.Drawing.Point(18, 70));
-            this.label22.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label22.Name = ("label22");
-            this.label22.Size = (new global::System.Drawing.Size(61, 20));
-            this.label22.TabIndex = (14);
-            this.label22.Text = ("Method");
+            label22.AutoSize = true;
+            label22.Location = new System.Drawing.Point(22, 88);
+            label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label22.Name = "label22";
+            label22.Size = new System.Drawing.Size(75, 25);
+            label22.TabIndex = 14;
+            label22.Text = "Method";
             // 
             // cbDeinterlaceEnabled
             // 
-            this.cbDeinterlaceEnabled.AutoSize = (true);
-            this.cbDeinterlaceEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbDeinterlaceEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDeinterlaceEnabled.Name = ("cbDeinterlaceEnabled");
-            this.cbDeinterlaceEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbDeinterlaceEnabled.TabIndex = (13);
-            this.cbDeinterlaceEnabled.Text = ("Enabled");
-            this.cbDeinterlaceEnabled.UseVisualStyleBackColor = (true);
+            cbDeinterlaceEnabled.AutoSize = true;
+            cbDeinterlaceEnabled.Location = new System.Drawing.Point(26, 31);
+            cbDeinterlaceEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDeinterlaceEnabled.Name = "cbDeinterlaceEnabled";
+            cbDeinterlaceEnabled.Size = new System.Drawing.Size(101, 29);
+            cbDeinterlaceEnabled.TabIndex = 13;
+            cbDeinterlaceEnabled.Text = "Enabled";
+            cbDeinterlaceEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage15
             // 
-            this.tabPage15.Controls.Add(this.tbGaussianBlur);
-            this.tabPage15.Controls.Add(this.cbGaussianBlurEnabled);
-            this.tabPage15.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage15.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage15.Name = ("tabPage15");
-            this.tabPage15.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage15.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage15.TabIndex = (5);
-            this.tabPage15.Text = ("Blur / sharpen");
-            this.tabPage15.UseVisualStyleBackColor = (true);
+            tabPage15.Controls.Add(tbGaussianBlur);
+            tabPage15.Controls.Add(cbGaussianBlurEnabled);
+            tabPage15.Location = new System.Drawing.Point(4, 34);
+            tabPage15.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage15.Name = "tabPage15";
+            tabPage15.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage15.Size = new System.Drawing.Size(472, 824);
+            tabPage15.TabIndex = 5;
+            tabPage15.Text = "Blur / sharpen";
+            tabPage15.UseVisualStyleBackColor = true;
             // 
             // tbGaussianBlur
             // 
-            this.tbGaussianBlur.Location = (new global::System.Drawing.Point(21, 60));
-            this.tbGaussianBlur.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tbGaussianBlur.Maximum = (200);
-            this.tbGaussianBlur.Minimum = (-200);
-            this.tbGaussianBlur.Name = ("tbGaussianBlur");
-            this.tbGaussianBlur.Size = (new global::System.Drawing.Size(334, 56));
-            this.tbGaussianBlur.TabIndex = (1);
-            this.tbGaussianBlur.Value = (12);
-            this.tbGaussianBlur.Scroll += (this.tbGaussianBlur_Scroll);
+            tbGaussianBlur.Location = new System.Drawing.Point(26, 75);
+            tbGaussianBlur.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbGaussianBlur.Maximum = 200;
+            tbGaussianBlur.Minimum = -200;
+            tbGaussianBlur.Name = "tbGaussianBlur";
+            tbGaussianBlur.Size = new System.Drawing.Size(418, 69);
+            tbGaussianBlur.TabIndex = 1;
+            tbGaussianBlur.Value = 12;
+            tbGaussianBlur.Scroll += tbGaussianBlur_Scroll;
             // 
             // cbGaussianBlurEnabled
             // 
-            this.cbGaussianBlurEnabled.AutoSize = (true);
-            this.cbGaussianBlurEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbGaussianBlurEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbGaussianBlurEnabled.Name = ("cbGaussianBlurEnabled");
-            this.cbGaussianBlurEnabled.Size = (new global::System.Drawing.Size(119, 24));
-            this.cbGaussianBlurEnabled.TabIndex = (0);
-            this.cbGaussianBlurEnabled.Text = ("Gaussian blur");
-            this.cbGaussianBlurEnabled.UseVisualStyleBackColor = (true);
+            cbGaussianBlurEnabled.AutoSize = true;
+            cbGaussianBlurEnabled.Location = new System.Drawing.Point(26, 31);
+            cbGaussianBlurEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbGaussianBlurEnabled.Name = "cbGaussianBlurEnabled";
+            cbGaussianBlurEnabled.Size = new System.Drawing.Size(144, 29);
+            cbGaussianBlurEnabled.TabIndex = 0;
+            cbGaussianBlurEnabled.Text = "Gaussian blur";
+            cbGaussianBlurEnabled.UseVisualStyleBackColor = true;
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.cbFishEyeEnabled);
-            this.tabPage16.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage16.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage16.Name = ("tabPage16");
-            this.tabPage16.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage16.Size = (new global::System.Drawing.Size(376, 657));
-            this.tabPage16.TabIndex = (6);
-            this.tabPage16.Text = ("Other");
-            this.tabPage16.UseVisualStyleBackColor = (true);
+            tabPage16.Controls.Add(cbFishEyeEnabled);
+            tabPage16.Location = new System.Drawing.Point(4, 34);
+            tabPage16.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage16.Name = "tabPage16";
+            tabPage16.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage16.Size = new System.Drawing.Size(472, 824);
+            tabPage16.TabIndex = 6;
+            tabPage16.Text = "Other";
+            tabPage16.UseVisualStyleBackColor = true;
             // 
             // cbFishEyeEnabled
             // 
-            this.cbFishEyeEnabled.AutoSize = (true);
-            this.cbFishEyeEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbFishEyeEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbFishEyeEnabled.Name = ("cbFishEyeEnabled");
-            this.cbFishEyeEnabled.Size = (new global::System.Drawing.Size(83, 24));
-            this.cbFishEyeEnabled.TabIndex = (0);
-            this.cbFishEyeEnabled.Text = ("Fish eye");
-            this.cbFishEyeEnabled.UseVisualStyleBackColor = (true);
+            cbFishEyeEnabled.AutoSize = true;
+            cbFishEyeEnabled.Location = new System.Drawing.Point(26, 31);
+            cbFishEyeEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbFishEyeEnabled.Name = "cbFishEyeEnabled";
+            cbFishEyeEnabled.Size = new System.Drawing.Size(101, 29);
+            cbFishEyeEnabled.TabIndex = 0;
+            cbFishEyeEnabled.Text = "Fish eye";
+            cbFishEyeEnabled.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
-            this.label3.AutoSize = (true);
-            this.label3.Location = (new global::System.Drawing.Point(8, 20));
-            this.label3.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label3.Name = ("label3");
-            this.label3.Size = (new global::System.Drawing.Size(404, 20));
-            this.label3.TabIndex = (8);
-            this.label3.Text = ("Enable effects before Start. More effects available using API");
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(10, 25);
+            label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(480, 25);
+            label3.TabIndex = 8;
+            label3.Text = "Enable effects before Start. More effects available using API";
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.label505);
-            this.tabPage6.Controls.Add(this.rbMotionDetectionProcessor);
-            this.tabPage6.Controls.Add(this.label389);
-            this.tabPage6.Controls.Add(this.rbMotionDetectionDetector);
-            this.tabPage6.Controls.Add(this.label65);
-            this.tabPage6.Controls.Add(this.pbAFMotionLevel);
-            this.tabPage6.Controls.Add(this.cbMotionDetection);
-            this.tabPage6.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage6.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage6.Name = ("tabPage6");
-            this.tabPage6.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage6.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage6.TabIndex = (5);
-            this.tabPage6.Text = ("Motion detection");
-            this.tabPage6.UseVisualStyleBackColor = (true);
+            tabPage6.Controls.Add(label505);
+            tabPage6.Controls.Add(rbMotionDetectionProcessor);
+            tabPage6.Controls.Add(label389);
+            tabPage6.Controls.Add(rbMotionDetectionDetector);
+            tabPage6.Controls.Add(label65);
+            tabPage6.Controls.Add(pbAFMotionLevel);
+            tabPage6.Controls.Add(cbMotionDetection);
+            tabPage6.Location = new System.Drawing.Point(4, 34);
+            tabPage6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage6.Size = new System.Drawing.Size(514, 962);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Motion detection";
+            tabPage6.UseVisualStyleBackColor = true;
             // 
             // label505
             // 
-            this.label505.AutoSize = (true);
-            this.label505.Location = (new global::System.Drawing.Point(18, 160));
-            this.label505.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label505.Name = ("label505");
-            this.label505.Size = (new global::System.Drawing.Size(72, 20));
-            this.label505.TabIndex = (37);
-            this.label505.Text = ("Processor");
+            label505.AutoSize = true;
+            label505.Location = new System.Drawing.Point(22, 200);
+            label505.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label505.Name = "label505";
+            label505.Size = new System.Drawing.Size(89, 25);
+            label505.TabIndex = 37;
+            label505.Text = "Processor";
             // 
             // rbMotionDetectionProcessor
             // 
-            this.rbMotionDetectionProcessor.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.rbMotionDetectionProcessor.FormattingEnabled = (true);
-            this.rbMotionDetectionProcessor.Items.AddRange(new global::System.Object[] { "None", "Blob counting objects", "GridMotionAreaProcessing", "Motion area highlighting", "Motion border highlighting" });
-            this.rbMotionDetectionProcessor.Location = (new global::System.Drawing.Point(18, 185));
-            this.rbMotionDetectionProcessor.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.rbMotionDetectionProcessor.Name = ("rbMotionDetectionProcessor");
-            this.rbMotionDetectionProcessor.Size = (new global::System.Drawing.Size(343, 28));
-            this.rbMotionDetectionProcessor.TabIndex = (36);
+            rbMotionDetectionProcessor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            rbMotionDetectionProcessor.FormattingEnabled = true;
+            rbMotionDetectionProcessor.Items.AddRange(new object[] { "None", "Blob counting objects", "GridMotionAreaProcessing", "Motion area highlighting", "Motion border highlighting" });
+            rbMotionDetectionProcessor.Location = new System.Drawing.Point(22, 231);
+            rbMotionDetectionProcessor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbMotionDetectionProcessor.Name = "rbMotionDetectionProcessor";
+            rbMotionDetectionProcessor.Size = new System.Drawing.Size(428, 33);
+            rbMotionDetectionProcessor.TabIndex = 36;
             // 
             // label389
             // 
-            this.label389.AutoSize = (true);
-            this.label389.Location = (new global::System.Drawing.Point(18, 83));
-            this.label389.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label389.Name = ("label389");
-            this.label389.Size = (new global::System.Drawing.Size(67, 20));
-            this.label389.TabIndex = (35);
-            this.label389.Text = ("Detector");
+            label389.AutoSize = true;
+            label389.Location = new System.Drawing.Point(22, 104);
+            label389.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label389.Name = "label389";
+            label389.Size = new System.Drawing.Size(80, 25);
+            label389.TabIndex = 35;
+            label389.Text = "Detector";
             // 
             // rbMotionDetectionDetector
             // 
-            this.rbMotionDetectionDetector.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.rbMotionDetectionDetector.FormattingEnabled = (true);
-            this.rbMotionDetectionDetector.Items.AddRange(new global::System.Object[] { "Custom frame difference", "Simple background modeling", "Two frames difference" });
-            this.rbMotionDetectionDetector.Location = (new global::System.Drawing.Point(18, 108));
-            this.rbMotionDetectionDetector.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.rbMotionDetectionDetector.Name = ("rbMotionDetectionDetector");
-            this.rbMotionDetectionDetector.Size = (new global::System.Drawing.Size(343, 28));
-            this.rbMotionDetectionDetector.TabIndex = (34);
+            rbMotionDetectionDetector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            rbMotionDetectionDetector.FormattingEnabled = true;
+            rbMotionDetectionDetector.Items.AddRange(new object[] { "Custom frame difference", "Simple background modeling", "Two frames difference" });
+            rbMotionDetectionDetector.Location = new System.Drawing.Point(22, 135);
+            rbMotionDetectionDetector.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbMotionDetectionDetector.Name = "rbMotionDetectionDetector";
+            rbMotionDetectionDetector.Size = new System.Drawing.Size(428, 33);
+            rbMotionDetectionDetector.TabIndex = 34;
             // 
             // label65
             // 
-            this.label65.AutoSize = (true);
-            this.label65.Location = (new global::System.Drawing.Point(18, 250));
-            this.label65.Margin = (new global::System.Windows.Forms.Padding(4, 0, 4, 0));
-            this.label65.Name = ("label65");
-            this.label65.Size = (new global::System.Drawing.Size(92, 20));
-            this.label65.TabIndex = (33);
-            this.label65.Text = ("Motion level");
+            label65.AutoSize = true;
+            label65.Location = new System.Drawing.Point(22, 312);
+            label65.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label65.Name = "label65";
+            label65.Size = new System.Drawing.Size(110, 25);
+            label65.TabIndex = 33;
+            label65.Text = "Motion level";
             // 
             // pbAFMotionLevel
             // 
-            this.pbAFMotionLevel.Location = (new global::System.Drawing.Point(18, 274));
-            this.pbAFMotionLevel.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.pbAFMotionLevel.Name = ("pbAFMotionLevel");
-            this.pbAFMotionLevel.Size = (new global::System.Drawing.Size(344, 35));
-            this.pbAFMotionLevel.TabIndex = (32);
+            pbAFMotionLevel.Location = new System.Drawing.Point(22, 342);
+            pbAFMotionLevel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            pbAFMotionLevel.Name = "pbAFMotionLevel";
+            pbAFMotionLevel.Size = new System.Drawing.Size(430, 44);
+            pbAFMotionLevel.TabIndex = 32;
             // 
             // cbMotionDetection
             // 
-            this.cbMotionDetection.AutoSize = (true);
-            this.cbMotionDetection.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbMotionDetection.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbMotionDetection.Name = ("cbMotionDetection");
-            this.cbMotionDetection.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbMotionDetection.TabIndex = (0);
-            this.cbMotionDetection.Text = ("Enabled");
-            this.cbMotionDetection.UseVisualStyleBackColor = (true);
+            cbMotionDetection.AutoSize = true;
+            cbMotionDetection.Location = new System.Drawing.Point(26, 31);
+            cbMotionDetection.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbMotionDetection.Name = "cbMotionDetection";
+            cbMotionDetection.Size = new System.Drawing.Size(101, 29);
+            cbMotionDetection.TabIndex = 0;
+            cbMotionDetection.Text = "Enabled";
+            cbMotionDetection.UseVisualStyleBackColor = true;
             // 
             // tabPage9
             // 
-            this.tabPage9.Controls.Add(this.edBarcodeMetadata);
-            this.tabPage9.Controls.Add(this.label91);
-            this.tabPage9.Controls.Add(this.cbBarcodeType);
-            this.tabPage9.Controls.Add(this.label90);
-            this.tabPage9.Controls.Add(this.btBarcodeReset);
-            this.tabPage9.Controls.Add(this.edBarcode);
-            this.tabPage9.Controls.Add(this.label89);
-            this.tabPage9.Controls.Add(this.cbBarcodeDetectionEnabled);
-            this.tabPage9.Location = (new global::System.Drawing.Point(4, 29));
-            this.tabPage9.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage9.Name = ("tabPage9");
-            this.tabPage9.Padding = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.tabPage9.Size = (new global::System.Drawing.Size(410, 767));
-            this.tabPage9.TabIndex = (6);
-            this.tabPage9.Text = ("Barcode reader");
-            this.tabPage9.UseVisualStyleBackColor = (true);
+            tabPage9.Controls.Add(edBarcodeMetadata);
+            tabPage9.Controls.Add(label91);
+            tabPage9.Controls.Add(cbBarcodeType);
+            tabPage9.Controls.Add(label90);
+            tabPage9.Controls.Add(btBarcodeReset);
+            tabPage9.Controls.Add(edBarcode);
+            tabPage9.Controls.Add(label89);
+            tabPage9.Controls.Add(cbBarcodeDetectionEnabled);
+            tabPage9.Location = new System.Drawing.Point(4, 34);
+            tabPage9.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage9.Name = "tabPage9";
+            tabPage9.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage9.Size = new System.Drawing.Size(514, 962);
+            tabPage9.TabIndex = 6;
+            tabPage9.Text = "Barcode reader";
+            tabPage9.UseVisualStyleBackColor = true;
             // 
             // edBarcodeMetadata
             // 
-            this.edBarcodeMetadata.Location = (new global::System.Drawing.Point(21, 246));
-            this.edBarcodeMetadata.Multiline = (true);
-            this.edBarcodeMetadata.Name = ("edBarcodeMetadata");
-            this.edBarcodeMetadata.Size = (new global::System.Drawing.Size(361, 146));
-            this.edBarcodeMetadata.TabIndex = (24);
+            edBarcodeMetadata.Location = new System.Drawing.Point(26, 308);
+            edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            edBarcodeMetadata.Multiline = true;
+            edBarcodeMetadata.Name = "edBarcodeMetadata";
+            edBarcodeMetadata.Size = new System.Drawing.Size(450, 182);
+            edBarcodeMetadata.TabIndex = 24;
             // 
             // label91
             // 
-            this.label91.AutoSize = (true);
-            this.label91.Location = (new global::System.Drawing.Point(19, 217));
-            this.label91.Name = ("label91");
-            this.label91.Size = (new global::System.Drawing.Size(73, 20));
-            this.label91.TabIndex = (23);
-            this.label91.Text = ("Metadata");
+            label91.AutoSize = true;
+            label91.Location = new System.Drawing.Point(24, 271);
+            label91.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label91.Name = "label91";
+            label91.Size = new System.Drawing.Size(87, 25);
+            label91.TabIndex = 23;
+            label91.Text = "Metadata";
             // 
             // cbBarcodeType
             // 
-            this.cbBarcodeType.DropDownStyle = (global::System.Windows.Forms.ComboBoxStyle.DropDownList);
-            this.cbBarcodeType.FormattingEnabled = (true);
-            this.cbBarcodeType.Items.AddRange(new global::System.Object[] { "Autodetect", "UPC-A", "UPC-E", "EAN-8", "EAN-13", "Code 39", "Code 93", "Code 128", "ITF", "CodaBar", "RSS-14", "Data matrix", "Aztec", "QR", "PDF-417" });
-            this.cbBarcodeType.Location = (new global::System.Drawing.Point(21, 98));
-            this.cbBarcodeType.Name = ("cbBarcodeType");
-            this.cbBarcodeType.Size = (new global::System.Drawing.Size(212, 28));
-            this.cbBarcodeType.TabIndex = (22);
+            cbBarcodeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbBarcodeType.FormattingEnabled = true;
+            cbBarcodeType.Items.AddRange(new object[] { "Autodetect", "UPC-A", "UPC-E", "EAN-8", "EAN-13", "Code 39", "Code 93", "Code 128", "ITF", "CodaBar", "RSS-14", "Data matrix", "Aztec", "QR", "PDF-417" });
+            cbBarcodeType.Location = new System.Drawing.Point(26, 122);
+            cbBarcodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            cbBarcodeType.Name = "cbBarcodeType";
+            cbBarcodeType.Size = new System.Drawing.Size(264, 33);
+            cbBarcodeType.TabIndex = 22;
             // 
             // label90
             // 
-            this.label90.AutoSize = (true);
-            this.label90.Location = (new global::System.Drawing.Point(19, 74));
-            this.label90.Name = ("label90");
-            this.label90.Size = (new global::System.Drawing.Size(97, 20));
-            this.label90.TabIndex = (21);
-            this.label90.Text = ("Barcode type");
+            label90.AutoSize = true;
+            label90.Location = new System.Drawing.Point(24, 92);
+            label90.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label90.Name = "label90";
+            label90.Size = new System.Drawing.Size(116, 25);
+            label90.TabIndex = 21;
+            label90.Text = "Barcode type";
             // 
             // btBarcodeReset
             // 
-            this.btBarcodeReset.Location = (new global::System.Drawing.Point(21, 412));
-            this.btBarcodeReset.Name = ("btBarcodeReset");
-            this.btBarcodeReset.Size = (new global::System.Drawing.Size(83, 35));
-            this.btBarcodeReset.TabIndex = (20);
-            this.btBarcodeReset.Text = ("Restart");
-            this.btBarcodeReset.UseVisualStyleBackColor = (true);
+            btBarcodeReset.Location = new System.Drawing.Point(26, 515);
+            btBarcodeReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            btBarcodeReset.Name = "btBarcodeReset";
+            btBarcodeReset.Size = new System.Drawing.Size(104, 44);
+            btBarcodeReset.TabIndex = 20;
+            btBarcodeReset.Text = "Restart";
+            btBarcodeReset.UseVisualStyleBackColor = true;
             // 
             // edBarcode
             // 
-            this.edBarcode.Location = (new global::System.Drawing.Point(21, 172));
-            this.edBarcode.Name = ("edBarcode");
-            this.edBarcode.Size = (new global::System.Drawing.Size(361, 27));
-            this.edBarcode.TabIndex = (19);
+            edBarcode.Location = new System.Drawing.Point(26, 215);
+            edBarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            edBarcode.Name = "edBarcode";
+            edBarcode.Size = new System.Drawing.Size(450, 31);
+            edBarcode.TabIndex = 19;
             // 
             // label89
             // 
-            this.label89.AutoSize = (true);
-            this.label89.Location = (new global::System.Drawing.Point(19, 148));
-            this.label89.Name = ("label89");
-            this.label89.Size = (new global::System.Drawing.Size(129, 20));
-            this.label89.TabIndex = (18);
-            this.label89.Text = ("Detected barcode");
+            label89.AutoSize = true;
+            label89.Location = new System.Drawing.Point(24, 185);
+            label89.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label89.Name = "label89";
+            label89.Size = new System.Drawing.Size(153, 25);
+            label89.TabIndex = 18;
+            label89.Text = "Detected barcode";
             // 
             // cbBarcodeDetectionEnabled
             // 
-            this.cbBarcodeDetectionEnabled.AutoSize = (true);
-            this.cbBarcodeDetectionEnabled.Location = (new global::System.Drawing.Point(21, 25));
-            this.cbBarcodeDetectionEnabled.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbBarcodeDetectionEnabled.Name = ("cbBarcodeDetectionEnabled");
-            this.cbBarcodeDetectionEnabled.Size = (new global::System.Drawing.Size(85, 24));
-            this.cbBarcodeDetectionEnabled.TabIndex = (17);
-            this.cbBarcodeDetectionEnabled.Text = ("Enabled");
-            this.cbBarcodeDetectionEnabled.UseVisualStyleBackColor = (true);
+            cbBarcodeDetectionEnabled.AutoSize = true;
+            cbBarcodeDetectionEnabled.Location = new System.Drawing.Point(26, 31);
+            cbBarcodeDetectionEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbBarcodeDetectionEnabled.Name = "cbBarcodeDetectionEnabled";
+            cbBarcodeDetectionEnabled.Size = new System.Drawing.Size(101, 29);
+            cbBarcodeDetectionEnabled.TabIndex = 17;
+            cbBarcodeDetectionEnabled.Text = "Enabled";
+            cbBarcodeDetectionEnabled.UseVisualStyleBackColor = true;
             // 
             // btSaveSnapshot
             // 
-            this.btSaveSnapshot.Location = (new global::System.Drawing.Point(837, 628));
-            this.btSaveSnapshot.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.btSaveSnapshot.Name = ("btSaveSnapshot");
-            this.btSaveSnapshot.Size = (new global::System.Drawing.Size(155, 35));
-            this.btSaveSnapshot.TabIndex = (38);
-            this.btSaveSnapshot.Text = ("Save snapshot");
-            this.btSaveSnapshot.UseVisualStyleBackColor = (true);
-            this.btSaveSnapshot.Click += (this.btSaveSnapshot_Click);
+            btSaveSnapshot.Location = new System.Drawing.Point(1046, 785);
+            btSaveSnapshot.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btSaveSnapshot.Name = "btSaveSnapshot";
+            btSaveSnapshot.Size = new System.Drawing.Size(194, 44);
+            btSaveSnapshot.TabIndex = 38;
+            btSaveSnapshot.Text = "Save snapshot";
+            btSaveSnapshot.UseVisualStyleBackColor = true;
+            btSaveSnapshot.Click += btSaveSnapshot_Click;
             // 
             // dlgOpenImage
             // 
-            this.dlgOpenImage.Filter = ("Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*");
+            dlgOpenImage.Filter = "Pictures|*.bmp; *.jpg; *.jpeg; *.jpe; *.png; *.gif; *.tiff;|All files|*.*";
             // 
             // videoView1
             // 
-            this.videoView1.BackColor = (global::System.Drawing.Color.Black);
-            this.videoView1.Location = (new global::System.Drawing.Point(445, 78));
-            this.videoView1.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.videoView1.Name = ("videoView1");
-            this.videoView1.Size = (new global::System.Drawing.Size(552, 378));
-            this.videoView1.StatusOverlay = (null);
-            this.videoView1.TabIndex = (39);
+            videoView1.BackColor = System.Drawing.Color.Black;
+            videoView1.Location = new System.Drawing.Point(556, 98);
+            videoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            videoView1.Name = "videoView1";
+            videoView1.Size = new System.Drawing.Size(690, 472);
+            videoView1.StatusOverlay = null;
+            videoView1.TabIndex = 39;
             // 
             // mmLog
             // 
-            this.mmLog.Location = (new global::System.Drawing.Point(445, 673));
-            this.mmLog.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.mmLog.Multiline = (true);
-            this.mmLog.Name = ("mmLog");
-            this.mmLog.ScrollBars = (global::System.Windows.Forms.ScrollBars.Both);
-            this.mmLog.Size = (new global::System.Drawing.Size(554, 143));
-            this.mmLog.TabIndex = (41);
+            mmLog.Location = new System.Drawing.Point(556, 841);
+            mmLog.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            mmLog.Multiline = true;
+            mmLog.Name = "mmLog";
+            mmLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmLog.Size = new System.Drawing.Size(692, 178);
+            mmLog.TabIndex = 41;
             // 
             // cbDebugMode
             // 
-            this.cbDebugMode.AutoSize = (true);
-            this.cbDebugMode.Location = (new global::System.Drawing.Point(500, 648));
-            this.cbDebugMode.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.cbDebugMode.Name = ("cbDebugMode");
-            this.cbDebugMode.Size = (new global::System.Drawing.Size(119, 24));
-            this.cbDebugMode.TabIndex = (40);
-            this.cbDebugMode.Text = ("Debug mode");
-            this.cbDebugMode.UseVisualStyleBackColor = (true);
+            cbDebugMode.AutoSize = true;
+            cbDebugMode.Location = new System.Drawing.Point(625, 810);
+            cbDebugMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDebugMode.Name = "cbDebugMode";
+            cbDebugMode.Size = new System.Drawing.Size(144, 29);
+            cbDebugMode.TabIndex = 40;
+            cbDebugMode.Text = "Debug mode";
+            cbDebugMode.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
-            this.label9.AutoSize = (true);
-            this.label9.Location = (new global::System.Drawing.Point(445, 648));
-            this.label9.Margin = (new global::System.Windows.Forms.Padding(2, 0, 2, 0));
-            this.label9.Name = ("label9");
-            this.label9.Size = (new global::System.Drawing.Size(34, 20));
-            this.label9.TabIndex = (42);
-            this.label9.Text = ("Log");
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(556, 810);
+            label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(42, 25);
+            label9.TabIndex = 42;
+            label9.Text = "Log";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = (new global::System.Drawing.SizeF(8F, 20F));
-            this.AutoScaleMode = (global::System.Windows.Forms.AutoScaleMode.Font);
-            this.ClientSize = (new global::System.Drawing.Size(1017, 833));
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.mmLog);
-            this.Controls.Add(this.cbDebugMode);
-            this.Controls.Add(this.videoView1);
-            this.Controls.Add(this.btSaveSnapshot);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btSelectFile);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.edFilenameOrURL);
-            this.Controls.Add(this.label14);
-            this.Icon = ((global::System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = (new global::System.Windows.Forms.Padding(4, 5, 4, 5));
-            this.Name = ("Form1");
-            this.Text = ("Media Player SDK .Net (Cross-platform) - Main Demo");
-            this.FormClosing += (this.Form1_FormClosing);
-            this.Load += (this.Form1_Load);
-            this.Shown += (this.Form1_Shown);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTimeline)).EndInit();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage21.ResumeLayout(false);
-            this.tabControl6.ResumeLayout(false);
-            this.tabPage24.ResumeLayout(false);
-            this.tabPage24.PerformLayout();
-            this.tabPage22.ResumeLayout(false);
-            this.tabPage22.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPLatency)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPUDPBufferSize)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbRTSPRTPBlockSize)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVolume1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabControl18.ResumeLayout(false);
-            this.tabPage71.ResumeLayout(false);
-            this.tabPage71.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudAmplifyAmp)).EndInit();
-            this.tabPage72.ResumeLayout(false);
-            this.tabPage72.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq9)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq8)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq7)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq6)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq5)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq4)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq3)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq2)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq1)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEq0)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudBalanceLevel)).EndInit();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoFeedback)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoIntensity)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbAudEchoDelay)).EndInit();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.tabControl4.ResumeLayout(false);
-            this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage11.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoContrast)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoHue)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoBrightness)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbVideoSaturation)).EndInit();
-            this.tabPage17.ResumeLayout(false);
-            this.tabPage17.PerformLayout();
-            this.tabControl5.ResumeLayout(false);
-            this.tabPage18.ResumeLayout(false);
-            this.tabPage18.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTextOverlayY)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbTextOverlayX)).EndInit();
-            this.tabPage19.ResumeLayout(false);
-            this.tabPage19.PerformLayout();
-            this.tabPage20.ResumeLayout(false);
-            this.tabPage20.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbImageOverlayAlpha)).EndInit();
-            this.tabPage12.ResumeLayout(false);
-            this.tabPage12.PerformLayout();
-            this.tabPage13.ResumeLayout(false);
-            this.tabPage13.PerformLayout();
-            this.tabPage14.ResumeLayout(false);
-            this.tabPage14.PerformLayout();
-            this.tabPage15.ResumeLayout(false);
-            this.tabPage15.PerformLayout();
-            ((global::System.ComponentModel.ISupportInitialize)(this.tbGaussianBlur)).EndInit();
-            this.tabPage16.ResumeLayout(false);
-            this.tabPage16.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1271, 1041);
+            Controls.Add(label9);
+            Controls.Add(mmLog);
+            Controls.Add(cbDebugMode);
+            Controls.Add(videoView1);
+            Controls.Add(btSaveSnapshot);
+            Controls.Add(tabControl1);
+            Controls.Add(btSelectFile);
+            Controls.Add(groupBox2);
+            Controls.Add(edFilenameOrURL);
+            Controls.Add(label14);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            Name = "Form1";
+            Text = "Media Player SDK .Net (Cross-platform) - Main Demo";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
+            Shown += Form1_Shown;
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabPage21.ResumeLayout(false);
+            tabControl6.ResumeLayout(false);
+            tabPage24.ResumeLayout(false);
+            tabPage24.PerformLayout();
+            tabPage22.ResumeLayout(false);
+            tabPage22.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPLatency).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPUDPBufferSize).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbRTSPRTPBlockSize).EndInit();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            tabControl18.ResumeLayout(false);
+            tabPage71.ResumeLayout(false);
+            tabPage71.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudAmplifyAmp).EndInit();
+            tabPage72.ResumeLayout(false);
+            tabPage72.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEq0).EndInit();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudBalanceLevel).EndInit();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoFeedback).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoIntensity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbAudEchoDelay).EndInit();
+            tabPage7.ResumeLayout(false);
+            tabPage7.PerformLayout();
+            tabControl4.ResumeLayout(false);
+            tabPage8.ResumeLayout(false);
+            tabPage8.PerformLayout();
+            tabPage11.ResumeLayout(false);
+            tabPage11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbVideoContrast).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoHue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoBrightness).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVideoSaturation).EndInit();
+            tabPage17.ResumeLayout(false);
+            tabPage17.PerformLayout();
+            tabControl5.ResumeLayout(false);
+            tabPage18.ResumeLayout(false);
+            tabPage18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbTextOverlayY).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbTextOverlayX).EndInit();
+            tabPage19.ResumeLayout(false);
+            tabPage19.PerformLayout();
+            tabPage20.ResumeLayout(false);
+            tabPage20.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbImageOverlayAlpha).EndInit();
+            tabPage12.ResumeLayout(false);
+            tabPage12.PerformLayout();
+            tabPage13.ResumeLayout(false);
+            tabPage13.PerformLayout();
+            tabPage14.ResumeLayout(false);
+            tabPage14.PerformLayout();
+            tabPage15.ResumeLayout(false);
+            tabPage15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbGaussianBlur).EndInit();
+            tabPage16.ResumeLayout(false);
+            tabPage16.PerformLayout();
+            tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
+            tabPage9.ResumeLayout(false);
+            tabPage9.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -3057,7 +3039,7 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TabPage tabPage19;
         private System.Windows.Forms.CheckBox cbTextOverlayAutosize;
-        private System.Windows.Forms.ComboBox cbTextOverlayFontStyle;
+        private System.Windows.Forms.ComboBox cbTextOverlayFontFace;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.ComboBox cbTextOverlayFontWrapMode;
         private System.Windows.Forms.Label label36;
@@ -3109,8 +3091,6 @@
         private System.Windows.Forms.Button btReadInfo;
         private System.Windows.Forms.TextBox mmInfo;
         private System.Windows.Forms.Button btReadTags;
-        private System.Windows.Forms.ComboBox cbTextOverlayFontWeight;
-        private System.Windows.Forms.Label label7;
         private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter2;
         private VisioForge.Core.UI.WinForms.VolumeMeterPro.VolumeMeter volumeMeter1;
         private System.Windows.Forms.Button btSaveSnapshot;

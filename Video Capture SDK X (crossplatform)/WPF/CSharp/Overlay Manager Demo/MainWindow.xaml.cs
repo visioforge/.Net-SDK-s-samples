@@ -261,7 +261,6 @@ namespace Overlay_Manager_Demo
             var text = new OverlayManagerText("Hello world!", 100, 100);
             text.Color = SkiaSharp.SKColors.Red;
             text.Font.Size = 32;
-            text.Font.Style = VisioForge.Core.Types.X.VideoEffects.FontStyle.Italic;
             _videoCapture.Video_Overlay_Add(text);
             lbOverlays.Items.Add($"[Text] {text.Text}");
         }

@@ -20,7 +20,7 @@
             <Button x:Name="btOpenFile" Click="btOpenFile_Click" Width="32">...</Button>
         </StackPanel>
 
-        <winui:VideoView  Grid.Row="1" Margin="16" x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="Gray" />
+        <winui:VideoView  Grid.Row="1" Margin="16" x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="Black" />
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16"  Spacing="15">
             <Button x:Name="btPlay" Click="btPlay_Click" Width="80" VerticalAlignment="Center" >Play</Button>

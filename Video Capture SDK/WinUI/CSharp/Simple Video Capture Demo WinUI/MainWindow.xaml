@@ -87,7 +87,7 @@
             </PivotItem>
         </Pivot>
 
-        <winui:VideoView Name="VideoView1" Margin="450,33,16,145" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <winui:VideoView Name="VideoView1" Margin="450,33,16,145" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         <TextBlock Text="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,8,16,0" VerticalAlignment="Top"/>
 
