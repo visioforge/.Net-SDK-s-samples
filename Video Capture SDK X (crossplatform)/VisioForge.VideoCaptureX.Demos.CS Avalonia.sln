@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA", "Aval
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleVideoCapture", "SimpleVideoCapture", "{4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.Desktop", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.Desktop\SimpleVideoCaptureA.Desktop.csproj", "{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.Linux", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.Linux\SimpleVideoCaptureA.Linux.csproj", "{18CD09CF-9DE3-4909-ADE6-F40A24E88670}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.MacOS", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.MacOS\SimpleVideoCaptureA.MacOS.csproj", "{AA329A66-106A-4B3C-9F36-2546DBB838FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.Windows", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.Windows\SimpleVideoCaptureA.Windows.csproj", "{59BFF25F-CE53-49A2-88CC-311557E4CE60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +23,27 @@ Global
 		{28B6B493-BC5E-4ACE-86E0-4966C7522790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28B6B493-BC5E-4ACE-86E0-4966C7522790}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28B6B493-BC5E-4ACE-86E0-4966C7522790}.Release|Any CPU.Build.0 = Release|Any CPU
-		{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18CD09CF-9DE3-4909-ADE6-F40A24E88670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CD09CF-9DE3-4909-ADE6-F40A24E88670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CD09CF-9DE3-4909-ADE6-F40A24E88670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CD09CF-9DE3-4909-ADE6-F40A24E88670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA329A66-106A-4B3C-9F36-2546DBB838FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA329A66-106A-4B3C-9F36-2546DBB838FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA329A66-106A-4B3C-9F36-2546DBB838FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA329A66-106A-4B3C-9F36-2546DBB838FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59BFF25F-CE53-49A2-88CC-311557E4CE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59BFF25F-CE53-49A2-88CC-311557E4CE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59BFF25F-CE53-49A2-88CC-311557E4CE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59BFF25F-CE53-49A2-88CC-311557E4CE60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{28B6B493-BC5E-4ACE-86E0-4966C7522790} = {4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}
-		{139BD63C-7BFF-4E89-AFD6-0B0697EAAF18} = {4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}
+		{18CD09CF-9DE3-4909-ADE6-F40A24E88670} = {4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}
+		{AA329A66-106A-4B3C-9F36-2546DBB838FB} = {4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}
+		{59BFF25F-CE53-49A2-88CC-311557E4CE60} = {4D1DCE7A-6A34-4D2D-BFFC-471B1318D552}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
