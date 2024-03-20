@@ -6,7 +6,6 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <!-- <ApplicationId>com.visioforge.simplevideocaptureax</ApplicationId>-->
-
     <TargetFramework>net7.0</TargetFramework>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>

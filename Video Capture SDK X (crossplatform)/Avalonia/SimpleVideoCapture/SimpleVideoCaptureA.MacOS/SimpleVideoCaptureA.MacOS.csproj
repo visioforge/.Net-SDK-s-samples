@@ -10,7 +10,6 @@
     <OutputType>Exe</OutputType>
     <RuntimeIdentifiers>osx-arm64</RuntimeIdentifiers>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
     <UseSGen>false</UseSGen>

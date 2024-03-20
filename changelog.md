@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.47
+
+* [X-engines] Updated Live Video Compositor engine, which improved support of the file sources
+
 ## 15.8.41
 
 * [Video Capture SDK .Net] VideoCaptureCore: Added camera-covered detector into the `Computer Vision Demo` and the `VisioForge.Core.CV` package

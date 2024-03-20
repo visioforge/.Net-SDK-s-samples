@@ -6,12 +6,10 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <!-- <ApplicationId>com.visioforge.simplevideocaptureax</ApplicationId>-->
-
     <TargetFramework>net7.0-windows</TargetFramework>
     <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CreatePackage>false</CreatePackage>
     <UseSGen>false</UseSGen>
