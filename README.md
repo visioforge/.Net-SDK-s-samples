@@ -1,8 +1,8 @@
 # NuGet usage
 
-Call Build on the required project to restore NuGet packages for the project and build it. Or call build for the entire solution.
+Run build on the desired project to restore NuGet packages for the project and build it. Or run build for the entire solution.
 
-Most demo applications contain NuGet unmanaged redist packages, specific to used SDK and platform.
+Most demo applications contain unmanaged NuGet redist packages specific to the SDK and platform used.
 
 # Product pages
 
@@ -16,7 +16,7 @@ Most demo applications contain NuGet unmanaged redist packages, specific to used
 
 # Helpful links
 
-[NuGet packages that contain required assemblies](https://www.nuget.org/packages?q=visioforge)
+[NuGet packages that contain the required assemblies](https://www.nuget.org/packages?q=visioforge)
 
 [Online help](https://www.visioforge.com/help/docs/dotnet/)
 
