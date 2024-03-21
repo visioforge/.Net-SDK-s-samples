@@ -23,7 +23,7 @@
     <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.47" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.48" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.8.0" />

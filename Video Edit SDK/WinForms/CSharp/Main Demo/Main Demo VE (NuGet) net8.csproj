@@ -65,13 +65,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.8.47" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.8.47" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.8.48" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.8.48" />
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64" Version="15.5.36" />
   </ItemGroup>
   <ItemGroup>

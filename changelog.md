@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.8.48
+
+* [Windows] Added Stream support in MediaInfoReader. You can get video/audio file information from a stream (DB, network, memory, etc.).
+
 ## 15.8.47
 
 * [X-engines] Updated Live Video Compositor engine, which improved support of the file sources
