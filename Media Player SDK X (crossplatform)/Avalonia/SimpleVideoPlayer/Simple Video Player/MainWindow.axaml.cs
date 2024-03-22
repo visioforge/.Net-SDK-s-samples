@@ -32,7 +32,7 @@ public partial class MainWindow : Window, IDisposable
 #if WINDOWS
     private AudioOutputDeviceAPI _audioOutputDeviceAPI = AudioOutputDeviceAPI.DirectSound;
 #else
-    private AudioOutputDeviceAPI _audioOutputDeviceAPI = null;
+    private AudioOutputDeviceAPI _audioOutputDeviceAPI;
 #endif
 
     public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();

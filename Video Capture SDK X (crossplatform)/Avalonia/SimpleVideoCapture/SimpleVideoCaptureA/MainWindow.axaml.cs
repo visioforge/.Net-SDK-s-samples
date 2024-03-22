@@ -515,7 +515,11 @@ public partial class MainWindow : Window, IDisposable
                         Format = formatItem.ToFormat()
                     };
 
-                    videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.SelectedItem.ToString()));
+                    if (cbVideoInputFrameRate.SelectedIndex != -1)
+                    {
+                        videoSourceSettings.Format.FrameRate =
+                            new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.SelectedItem.ToString()));
+                    }
                 }
             }
         }

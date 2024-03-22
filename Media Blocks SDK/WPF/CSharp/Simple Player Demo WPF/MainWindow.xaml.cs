@@ -5,25 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
-using VisioForge.Libs.DirectShowLib;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace MediaBlocks_Simple_Player_Demo_WPF
 {

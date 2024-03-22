@@ -18,7 +18,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.50" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.50" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.51" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.51" />
   </ItemGroup>
 </Project>

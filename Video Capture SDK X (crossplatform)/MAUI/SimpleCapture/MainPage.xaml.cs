@@ -227,19 +227,6 @@ namespace SimpleCapture
 #endif
         }
 
-        private async void btStop_Clicked(object sender, EventArgs e)
-        {
-            if (_core.IsCaptureStarted(0))
-            {
-                await StopCaptureAsync();
-            }
-
-            await StopAllAsync();
-
-            btStartPreview.Text = "PREVIEW";
-            btStartCapture.Text = "CAPTURE";
-        }
-
         private async void btCamera_Clicked(object sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length < 2)
@@ -262,7 +249,7 @@ namespace SimpleCapture
 #endif
         }
 
-        private void btMic_Clicked(object sender, System.EventArgs e)
+        private async void btMic_Clicked(object sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length < 2)
             {
