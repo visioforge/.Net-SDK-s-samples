@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMediaPlayerMBMac", "m
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureMBMac", "macOS\SimpleVideoCaptureMBMac\SimpleVideoCaptureMBMac.csproj", "{F9792036-7323-42CF-B8EF-B6AE1380D4D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenCaptureMB", "macOS\ScreenCaptureMB\ScreenCaptureMB.csproj", "{1FEDE295-F8AC-440C-B541-1719FDE97DFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F9792036-7323-42CF-B8EF-B6AE1380D4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9792036-7323-42CF-B8EF-B6AE1380D4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9792036-7323-42CF-B8EF-B6AE1380D4D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FEDE295-F8AC-440C-B541-1719FDE97DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FEDE295-F8AC-440C-B541-1719FDE97DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FEDE295-F8AC-440C-B541-1719FDE97DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FEDE295-F8AC-440C-B541-1719FDE97DFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -31,5 +37,6 @@ Global
 	GlobalSection(RiderSharedRunConfigurations) = postSolution
 		File = macOS\SimpleVideoCaptureMBMac\SimpleVideoCaptureMBMac.run.xml
 		File = macOS\SimpleMediaPlayerMBMac\SimpleMediaPlayerMBMac.run.xml
+		File = macOS\ScreenCaptureMB\ScreenCaptureMB.run.xml
 	EndGlobalSection
 EndGlobal
