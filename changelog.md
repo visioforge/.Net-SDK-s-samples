@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.8.53
+
+* [Video Edit SDK .Net] VideoEditCoreX: The TextOverlay class changed to use SkiaSharp-based font settings. Additionally, you can set the custom font file name or configure all rendering parameters using custom SKPaint.
+
 ## 15.8.48
 
-* [Windows] Added Stream support in MediaInfoReader. You can get video/audio file information from a stream (DB, network, memory, etc.).
+* [Windows] Added Stream support in `MediaInfoReader`. You can get the video/audio file information from a stream (DB, network, memory, etc.).
 
 ## 15.8.47
 
