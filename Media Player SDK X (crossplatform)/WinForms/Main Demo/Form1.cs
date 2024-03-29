@@ -352,9 +352,7 @@ namespace Main_Demo
             _player.Audio_Play = cbPlayAudio.Checked;
             _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
-
-            //_player.Segment_Start = TimeSpan.FromMilliseconds(12000);
-            //_player.Segment_Stop = TimeSpan.FromMilliseconds(20000);
+            _player.Snapshot_Grabber_Enabled = true;
 
             AddAudioEffects();
             await AddVideoEffectsAsync();
@@ -738,7 +736,7 @@ namespace Main_Demo
                 dlg.FileName = "snap.jpg";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    await _player.Video_Renderer_Snapshot_SaveAsync(dlg.FileName, SkiaSharp.SKEncodedImageFormat.Jpeg);
+                    await _player.Snapshot_SaveAsync(dlg.FileName, SkiaSharp.SKEncodedImageFormat.Jpeg);
                 }
             }
         }

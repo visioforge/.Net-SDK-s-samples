@@ -546,22 +546,11 @@ public partial class MainWindow : Window, IDisposable
 
         VideoCapture1.Audio_Source = audioSourceSettings;
 
-
-        //if (rbPreview.IsChecked == true)
-        //{
-        //    VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
-        //}
-        //else
-        //{
-        //    VideoCapture1.Mode = VideoCaptureMode.VideoCapture;
-        //    var mp4Output = new MP4Output();
-        //    VideoCapture1.Output_Format = mp4Output;
-        //    VideoCapture1.Output_Filename = edOutput.Text;
-        //}
-
         VideoCapture1.Video_Effects_Clear();
         Logos.Clear();
         ConfigureVideoEffects();
+
+        VideoCapture1.Snapshot_Grabber_Enabled = true;
 
         await VideoCapture1.StartAsync();
 
@@ -693,16 +682,16 @@ public partial class MainWindow : Window, IDisposable
             switch (ext)
             {
                 case ".bmp":
-                    await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Bmp);
+                    await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Bmp);
                     break;
                 case ".jpg":
-                    await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg);
+                    await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg);
                     break;
                 case ".gif":
-                    await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
+                    await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
                     break;
                 case ".png":
-                    await VideoCapture1.Video_Renderer_Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
+                    await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
                     break;
             }
         }

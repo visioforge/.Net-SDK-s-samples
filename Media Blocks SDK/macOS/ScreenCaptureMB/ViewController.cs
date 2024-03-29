@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Timers;
 using ObjCRuntime;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -8,36 +9,44 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.UI.Apple;
+using Timer = System.Timers.Timer;
 
 namespace ScreenCaptureMB;
 
 public partial class ViewController : NSViewController
 {
+    /// <summary>
+    ///     The position timer.
+    /// </summary>
+    private readonly Timer _tmPosition = new(500);
+
+    private H264EncoderBlock _h264Encoder;
+
+    private MP4SinkBlock _mp4Sink;
     private MediaBlocksPipeline _pipeline;
 
     private ScreenSourceBlock _source;
 
     private VideoRendererBlock _videoRenderer;
 
-    private VideoViewGL _videoView;
-
     private TeeBlock _videoTee;
 
-    private MP4SinkBlock _mp4Sink;
-
-    private H264EncoderBlock _h264Encoder;
-
-    /// <summary>
-    /// The position timer.
-    /// </summary>
-    private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
+    private VideoViewGL _videoView;
 
     protected ViewController(NativeHandle handle) : base(handle)
     {
         // This constructor is required if the view controller is loaded from a xib or a storyboard.
         // Do not put any initialization here, use ViewDidLoad instead.
+    }
+
+    public override NSObject RepresentedObject
+    {
+        get => base.RepresentedObject;
+        set => base.RepresentedObject = value;
+        // Update the view, if already loaded.
     }
 
     public override void ViewDidLoad()
@@ -57,7 +66,8 @@ public partial class ViewController : NSViewController
 
     private string GenerateFilename()
     {
-        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"capture_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.mp4");
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+            $"capture_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.mp4");
     }
 
     private async Task CreateEngineAsync()
@@ -91,17 +101,6 @@ public partial class ViewController : NSViewController
         _pipeline.Connect(_h264Encoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
     }
 
-    public override NSObject RepresentedObject
-    {
-        get => base.RepresentedObject;
-        set
-        {
-            base.RepresentedObject = value;
-
-            // Update the view, if already loaded.
-        }
-    }
-
     private async void OnStop(object sender, EventArgs e)
     {
         if (_pipeline != null)
@@ -111,59 +110,49 @@ public partial class ViewController : NSViewController
         }
     }
 
-    private void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+    private void _pipeline_OnError(object sender, ErrorsEventArgs e)
     {
         Debug.WriteLine(e.Message);
     }
 
     private async Task StopAllAsync()
     {
-        if (_pipeline == null)
-        {
-            return;
-        }
+        if (_pipeline == null) return;
 
         _tmPosition.Stop();
 
-        if (_pipeline != null)
-        {
-            await _pipeline.StopAsync();
-        }
+        if (_pipeline != null) await _pipeline.StopAsync();
     }
 
     /// <summary>
-    /// Handles the Elapsed event of the tmPosition control.
+    ///     Handles the Elapsed event of the tmPosition control.
     /// </summary>
     /// <param name="sender">The source of the event.</param>
-    /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-    private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs" /> instance containing the event data.</param>
+    private async void tmPosition_Elapsed(object sender, ElapsedEventArgs e)
     {
-        if (_pipeline == null)
-        {
-            return;
-        }
+        if (_pipeline == null) return;
 
         try
         {
             InvokeOnMainThread(async () =>
             {
-                if (_pipeline == null)
-                {
-                    return;
-                }
+                if (_pipeline == null) return;
 
-                lbDurationX.StringValue = $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                lbDurationX.StringValue =
+                    $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
             });
         }
         catch (Exception exception)
         {
-            System.Diagnostics.Debug.WriteLine(exception);
+            Debug.WriteLine(exception);
         }
     }
 
-    partial void btStartClickX(Foundation.NSObject sender)
+    partial void btStartClickX(NSObject sender)
     {
-        InvokeOnMainThread(async () => {
+        InvokeOnMainThread(async () =>
+        {
             await CreateEngineAsync();
 
             await _pipeline.StartAsync();
@@ -172,14 +161,11 @@ public partial class ViewController : NSViewController
         });
     }
 
-    partial void btStopClickX(Foundation.NSObject sender)
+    partial void btStopClickX(NSObject sender)
     {
-        InvokeOnMainThread(async () => {
-            await StopAllAsync();
-        });
+        InvokeOnMainThread(async () => { await StopAllAsync(); });
     }
 }
-
 
 // Custom Window delegate to close the SDK
 public class CustomWindowDelegate : NSWindowDelegate
