@@ -81,7 +81,8 @@ namespace Basler_Source_Demo
 
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _source = new BaslerSourceBlock(new BaslerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(), 15));
+            var device = (await DeviceEnumerator.Shared.BaslerSourcesAsync()).First(x => x.Name == cbCamera.Text);
+            _source = new BaslerSourceBlock(new BaslerSourceSettings(device));
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             _pipeline.Connect(_source.Output, _videoRenderer.Input);
