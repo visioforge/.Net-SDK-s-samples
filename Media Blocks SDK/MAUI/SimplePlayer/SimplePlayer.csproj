@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
-	<ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
