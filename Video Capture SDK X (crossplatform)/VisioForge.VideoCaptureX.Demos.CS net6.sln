@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USB3V-GigE Spinnaker net6",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenICam Capture X Demo WPF net6", "WPF\CSharp\GenICam Capture\GenICam Capture X Demo WPF net6.csproj", "{BB7EAD62-E33A-445E-AFD5-0C3803D79E53}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basler Camera Demo net6", "WPF\CSharp\Basler Camera Demo\Basler Camera Demo net6.csproj", "{9C76908A-EF02-462D-B373-D3B5B1F9EB84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{BB7EAD62-E33A-445E-AFD5-0C3803D79E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7EAD62-E33A-445E-AFD5-0C3803D79E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7EAD62-E33A-445E-AFD5-0C3803D79E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C76908A-EF02-462D-B373-D3B5B1F9EB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C76908A-EF02-462D-B373-D3B5B1F9EB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C76908A-EF02-462D-B373-D3B5B1F9EB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C76908A-EF02-462D-B373-D3B5B1F9EB84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{DB730055-9A0B-40D7-9F69-A9E89E57BE33} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{4A364A37-8738-4843-9EF6-B1C005B69831} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{BB7EAD62-E33A-445E-AFD5-0C3803D79E53} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{9C76908A-EF02-462D-B373-D3B5B1F9EB84} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

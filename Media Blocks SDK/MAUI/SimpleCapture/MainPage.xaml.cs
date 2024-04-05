@@ -172,7 +172,7 @@ namespace SimpleCapture
                 _pipeline.OnError -= Core_OnError;
                 await _pipeline.StopAsync();
 
-                _pipeline?.Dispose();
+                _pipeline.Dispose();
                 _pipeline = null;
             }
 
@@ -265,6 +265,8 @@ namespace SimpleCapture
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
+            _pipeline.Debug_SavePipeline("main");
+
 #if __IOS__ && !__MACCATALYST__
             bool capture = _mp4Sink != null;
             string filename = null;
@@ -353,7 +355,7 @@ namespace SimpleCapture
                 var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
+                    var formatItem = device.VideoFormats.Find(x => (x.Width == 1920 && x.Height == 1080)); //device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
@@ -361,7 +363,7 @@ namespace SimpleCapture
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = frameRate;
+                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(120); //frameRate;
                     }
                 }
             }
@@ -371,6 +373,10 @@ namespace SimpleCapture
                 await DisplayAlert("Error", "Unable to configure camera settings", "OK");
             }
 
+            #if __IOS__ && !__MACCATALYST__
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+            #endif
+            
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // audio source

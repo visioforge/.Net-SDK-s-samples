@@ -23,11 +23,10 @@
     <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.8.54" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.8.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.8.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.9.0" />
   </ItemGroup>
 </Project>

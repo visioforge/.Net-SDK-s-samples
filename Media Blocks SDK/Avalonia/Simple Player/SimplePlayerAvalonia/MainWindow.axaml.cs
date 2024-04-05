@@ -286,7 +286,7 @@ public partial class MainWindow : Window, IDisposable
 
     private async void tbTimeline_Scroll()
     {
-        if (_tbTimelineApplyingValue)
+        if (_tbTimelineApplyingValue && _pipeline != null)
         {
             await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
         }

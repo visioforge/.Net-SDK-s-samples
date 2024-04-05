@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.9.0
+
+* [X-engines] Resolved wrong aspect ratio with video resize effect/block
+* [X-engines] Updated GStreamer redist
+* [X-engines] Added Basler USB3/GigE cameras support in Media Blocks SDK .Net and Video Capture SDK .Net
+
 ## 15.8.53
 
 * [Video Edit SDK .Net] VideoEditCoreX: The TextOverlay class changed to use SkiaSharp-based font settings. Additionally, you can set the custom font file name or configure all rendering parameters using custom SKPaint.

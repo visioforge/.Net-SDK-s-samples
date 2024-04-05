@@ -31,13 +31,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.8.54" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.8.54" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Codecs.Windows.x64" Version="15.8.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.8.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.0" />
     <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="15.8.0" />
   </ItemGroup>
   <ItemGroup>

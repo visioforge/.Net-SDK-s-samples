@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenICam Source Demo netcore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP MultiViewSync Demo netcore31", "WPF\CSharp\RTSP MultiViewSync Demo\RTSP MultiViewSync Demo netcore31.csproj", "{A59BECEE-36D0-48FD-A81B-FDE6C3E3970C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basler Source Demo netcore31", "WPF\CSharp\Basler Source Demo\Basler Source Demo netcore31.csproj", "{4AADA3D3-9B34-431C-9C73-23F0A9196D50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,10 @@ Global
 		{A59BECEE-36D0-48FD-A81B-FDE6C3E3970C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A59BECEE-36D0-48FD-A81B-FDE6C3E3970C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A59BECEE-36D0-48FD-A81B-FDE6C3E3970C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AADA3D3-9B34-431C-9C73-23F0A9196D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AADA3D3-9B34-431C-9C73-23F0A9196D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AADA3D3-9B34-431C-9C73-23F0A9196D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AADA3D3-9B34-431C-9C73-23F0A9196D50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,6 +185,7 @@ Global
 		{38574086-7DAE-49DF-9327-09D78B02D33E} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{C53F1F95-A799-4060-AC46-336E95B69C4C} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{A59BECEE-36D0-48FD-A81B-FDE6C3E3970C} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{4AADA3D3-9B34-431C-9C73-23F0A9196D50} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

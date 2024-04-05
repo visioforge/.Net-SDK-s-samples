@@ -5,7 +5,7 @@
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
              xmlns:skins="clr-namespace:VisioForge.Core.UI.MAUI.Skins;assembly=VisioForge.Core.UI.MAUI" >
 
-    <ScrollView>
+    <Grid>
         <!--WidthRequest="1280" HeightRequest="720"-->
         <Grid RowSpacing="0" RowDefinitions="*,Auto" >
 
@@ -116,5 +116,5 @@
                 </StackLayout>
             </StackLayout>
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>
