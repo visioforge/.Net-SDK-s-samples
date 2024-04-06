@@ -79,8 +79,8 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.7" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.1" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

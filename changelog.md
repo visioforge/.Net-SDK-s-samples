@@ -1,101 +1,35 @@
 # Changelog
 
-## 15.9.0
+## 15.9
 
 * [X-engines] Resolved wrong aspect ratio with video resize effect/block
 * [X-engines] Updated GStreamer redist
 * [X-engines] Added Basler USB3/GigE cameras support in Media Blocks SDK .Net and Video Capture SDK .Net
-
-## 15.8.53
-
 * [Video Edit SDK .Net] VideoEditCoreX: The TextOverlay class changed to use SkiaSharp-based font settings. Additionally, you can set the custom font file name or configure all rendering parameters using custom SKPaint.
-
-## 15.8.48
-
 * [Windows] Added Stream support in `MediaInfoReader`. You can get the video/audio file information from a stream (DB, network, memory, etc.).
-
-## 15.8.47
-
 * [X-engines] Updated Live Video Compositor engine, which improved support of the file sources
-
-## 15.8.41
-
 * [Video Capture SDK .Net] VideoCaptureCore: Added camera-covered detector into the `Computer Vision Demo` and the `VisioForge.Core.CV` package
-
-## 15.8.32
-
 * [X-engines] Added API to get snapshots from video files using MediaInfoReaderX: GetFileSnapshotBitmap, GetFileSnapshotSKBitmap, GetFileSnapshotRGB
-
-## 15.8.31
-
 * [X-engines] iOS support in MAUI samples
-
-## 15.8.29
-
 * [X-engines] Resolved memory leak issue for RTSP sources
-
-## 15.8.26
-
 * [Media Player SDK .Net] MediaPlayerCore: Added support for data streams in video files using the FFMPEG source engine. Add the OnDataFrameBuffer event to get data frames (KLV or other) from the video file.
 * [Video Capture SDK .Net] VideoCaptureCore: Added support for data streams in video files using the IP Capture FFMPEG source engine. Add the OnDataFrameBuffer event to get data frames (KLV or other) from the MPEG-TS UDP network stream or other supported source.
-
-## 15.8.25
-
 * [Video Capture SDK .Net] VideoCaptureCore: Added the FFMPEG_CustomOptions property to the IPCameraSourceSettings class. This property allows you to set custom FFMPEG options for the IP camera source
-
-## 15.8.24
-
 * [Windows] Fixed the hang problem with the FFMPEG source when a network connection is lost
-
-## 15.8.23
-
 * [Media Blocks SDK .Net] Added RTSP MultiView in Sync Demo
-
-## 15.8.20
-
 * [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK
-
-## 15.8.18
-
 * [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source
-
-## 15.8.17
-
 * .Net 7 support returned to the MAUI package (was removed by CI error).
-
-## 15.8.14
-
 * The IAsyncDisposable interface was added to all SDK's core classes. DisposeAsync call should be used to dispose of the core objects in async methods.  
-
-## 15.8.11
-
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)
 * [Media Blocks SDK .Net] Added HLS streaming sample
-  
-## 15.8.10
-
 * [Video Capture SDK .Net] VideoCaptureCore: Resolved crash if the `multiscreen` is enabled and screens added as window's handles (WinForms)
-  
-## 15.8.9
-
 * [X-engines] Improved MAUI video rendering speed
 * [X-engines] Resolved MAUI media playback issues (decoding) in MAUI Android
-
-## 15.8.7
-
 * [X-engines] Resolved an issue with the H264 webcam sources (sometimes not connected)
 * [X-engines] Resolved an issue with audio stream playback in the Live VideoCompositor engine
-
-## 15.8.5
-
 * [Media Blocks SDK .Net] Resolved a bad audio issue while mixing using the Live Video Compositor engine
-
-## 15.8.4
-
 * [Media Blocks SDK .Net] Added Decklink output and file source into the Live Video Compositor sample
-
-## 15.8.1
-
 * [Media Player SDK .Net] MediaPlayerCore: Added growing MPEG-TS file support for the VLC engine. You can play growing MPEG-TS files while it's recorded
   
 ## 15.8
