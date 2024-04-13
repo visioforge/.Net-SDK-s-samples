@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.3
+
+* [X-engines] Added Allied Vision USB3/GigE cameras support in Media Blocks SDK .Net and Video Capture SDK .Net
+
 ## 15.9
 
 * [X-engines] Resolved wrong aspect ratio with video resize effect/block

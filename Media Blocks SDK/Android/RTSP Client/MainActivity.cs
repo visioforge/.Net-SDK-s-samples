@@ -192,9 +192,7 @@ namespace RTSP_Client
             //_decodeBin = new DecodeBinBlock(true, true, false);
             //_pipeline.Connect(_memorySource.Output, _decodeBin.Input);
 
-            var rtspSource = new RTSPSourceSettings(new System.Uri(edURL.Text), true);
-            rtspSource.Login = "admin";
-            rtspSource.Password = "";
+            var rtspSource = await RTSPSourceSettings.CreateAsync(new System.Uri(edURL.Text), "admin", "password", audioEnabled: true);
 
             _source = new RTSPSourceBlock(rtspSource);
 
