@@ -262,7 +262,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             cbIPURL.Name = "cbIPURL";
             cbIPURL.Size = new System.Drawing.Size(597, 33);
             cbIPURL.TabIndex = 86;
-            cbIPURL.Text = "http://192.168.1.64/onvif/device_service";
+            cbIPURL.Text = "udp://239.1.1.140:1234";
             // 
             // btListNDISources
             // 

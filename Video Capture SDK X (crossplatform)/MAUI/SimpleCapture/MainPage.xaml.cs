@@ -74,7 +74,14 @@ namespace SimpleCapture
             RequestPhotoPermission();
 #endif
 
-            _core = new VideoCaptureCoreX(videoView);
+            IVideoView vv;
+#if __IOS__ && !__MACCATALYST__
+            vv = (IVideoView)videoView.Handler.PlatformView;
+#else
+            vv = videoView;
+#endif
+            
+            _core = new VideoCaptureCoreX(vv);
             _core.OnError += Core_OnError;       
 
             // cameras
@@ -249,7 +256,7 @@ namespace SimpleCapture
 #endif
         }
 
-        private async void btMic_Clicked(object sender, System.EventArgs e)
+        private void btMic_Clicked(object sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length < 2)
             {
@@ -303,7 +310,7 @@ namespace SimpleCapture
                 var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
+                    var formatItem = device.VideoFormats.Find(x => x.Width == 1920);
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
@@ -311,7 +318,7 @@ namespace SimpleCapture
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = frameRate;
+                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
                     }
                 }
             }
@@ -343,7 +350,7 @@ namespace SimpleCapture
             _core.Audio_Record = true;
 
             _core.Outputs_Clear();
-            _core.Outputs_Add(new MP4Output(GenerateFilename(), H264EncoderBlock.GetDefaultSettings(), new MP3EncoderSettings()), false);
+            _core.Outputs_Add(new MP4Output(GenerateFilename(), H264EncoderBlock.GetDefaultSettings(), new OPUSEncoderSettings()), false);
 
             // start
             await _core.StartAsync();

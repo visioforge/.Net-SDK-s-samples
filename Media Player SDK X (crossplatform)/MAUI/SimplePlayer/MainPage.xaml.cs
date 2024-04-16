@@ -52,7 +52,14 @@ namespace Simple_Player_MAUI
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-            _player = new MediaPlayerCoreX(videoView);
+            IVideoView vv;
+#if __IOS__ && !__MACCATALYST__
+            vv = (IVideoView)videoView.Handler.PlatformView;
+#else
+            vv = videoView;
+#endif
+
+            _player = new MediaPlayerCoreX(vv);
 
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
