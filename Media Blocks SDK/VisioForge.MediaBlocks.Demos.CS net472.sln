@@ -57,6 +57,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basler Source Demo net472",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlliedVision Source Demo net472", "WPF\CSharp\AlliedVision Source Demo\AlliedVision Source Demo net472.csproj", "{5EB1C113-C329-4D8C-8282-0BE946A4A7C2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MultiOutput net472", "WPF\CSharp\Decklink MultiOutput\Decklink MultiOutput net472.csproj", "{EC2F0907-E431-44F1-AC28-956CD0700B23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{5EB1C113-C329-4D8C-8282-0BE946A4A7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EB1C113-C329-4D8C-8282-0BE946A4A7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EB1C113-C329-4D8C-8282-0BE946A4A7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2F0907-E431-44F1-AC28-956CD0700B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2F0907-E431-44F1-AC28-956CD0700B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2F0907-E431-44F1-AC28-956CD0700B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2F0907-E431-44F1-AC28-956CD0700B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{9CEB9630-CFB9-41E7-ACDD-E9C50C07FE0E} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{A508DA23-7AF6-41D5-A04C-9F7D4C7405AD} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{5EB1C113-C329-4D8C-8282-0BE946A4A7C2} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{EC2F0907-E431-44F1-AC28-956CD0700B23} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
