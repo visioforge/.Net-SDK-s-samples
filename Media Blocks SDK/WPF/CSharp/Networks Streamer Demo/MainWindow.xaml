@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Social_Networks_Streamer_Demo"
+        xmlns:local="clr-namespace:Networks_Streamer_Demo"
         xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
-        x:Class="Social_Networks_Streamer_Demo.MainWindow"
+        x:Class="Networks_Streamer_Demo.MainWindow"
         mc:Ignorable="d"
-        Title="Video Capture SDK X .Net - Social Networks Streamer Demo" Height="613" Width="1031" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+        Title="Media Blocks SDK .Net - Networks Streamer Demo" Height="613" Width="1031" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
 
         <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="360" Margin="366,10,0,0" VerticalAlignment="Top" Width="640"/>
@@ -45,11 +45,6 @@
                 <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Width="250" VerticalContentAlignment="Center"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Label Content="Audio output" HorizontalAlignment="Left" Width="90"/>
-                <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Left" Width="250" VerticalContentAlignment="Center" />
-            </StackPanel>
-
             <Separator Margin="0,10,0,0"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -57,7 +52,9 @@
                 <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
                     <ComboBoxItem>YouTube</ComboBoxItem>
                     <ComboBoxItem>Facebook</ComboBoxItem>
-                    <ComboBoxItem>Generic RTMP (set URL instead of key)</ComboBoxItem>
+                    <ComboBoxItem>HLS</ComboBoxItem>
+                    <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>
+                    <ComboBoxItem>AWS S3 (configure in code)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

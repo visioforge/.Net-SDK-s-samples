@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Social_Networks_Streamer_Demo
+namespace Networks_Streamer_Demo
 {
     /// <summary>
     /// Interaction logic for App.xaml

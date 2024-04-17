@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo MB WPF n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MB Demo net472", "WPF\CSharp\Decklink Demo\Decklink MB Demo net472.csproj", "{0A60B45C-D64F-4C82-B908-D2BD64BA73F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer Demo MB net472", "WPF\CSharp\Social Networks Streamer Demo\Social Networks Streamer Demo MB net472.csproj", "{26C31395-5835-42F1-8CBA-187DA0A53ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networks Streamer Demo MB net472", "WPF\CSharp\Networks Streamer Demo\Networks Streamer Demo MB net472.csproj", "{26C31395-5835-42F1-8CBA-187DA0A53ACB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo net472", "WPF\CSharp\Video Compositor Demo\Video Compositor Demo net472.csproj", "{6C2073EA-5519-492F-B536-BF0511BC6994}"
 EndProject

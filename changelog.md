@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.6
+
+* [X-engines] Improved iOS video rendering performance and stability
+* [X-engines] Added AWS S3 Sink output for Media Blocks SDK .Net
+
 ## 15.9.3
 
 * [X-engines] Added Allied Vision USB3/GigE cameras support in Media Blocks SDK .Net and Video Capture SDK .Net

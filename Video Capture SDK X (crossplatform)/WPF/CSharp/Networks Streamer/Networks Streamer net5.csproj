@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net7.0-windows</TargetFrameworks>
-    <RootNamespace>Social_Networks_Streamer_Demo</RootNamespace>
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>
+    <RootNamespace>Networks_Streamer_Demo</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PlatformTarget>x64</PlatformTarget>
@@ -21,8 +21,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.5" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.5" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.6" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

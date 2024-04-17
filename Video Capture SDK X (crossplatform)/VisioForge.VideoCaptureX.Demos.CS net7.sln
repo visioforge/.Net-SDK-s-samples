@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture X Demo WPF n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture X net7", "WPF\CSharp\Simple Video Capture\Simple Video Capture X net7.csproj", "{071E9843-A4D4-407E-9982-515D959AAF92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social Networks Streamer net7", "WPF\CSharp\Social Networks Streamer\Social Networks Streamer net7.csproj", "{03E4634F-D117-46FC-AB86-0AB2664BBA06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networks Streamer net7", "WPF\CSharp\Networks Streamer\Networks Streamer net7.csproj", "{03E4634F-D117-46FC-AB86-0AB2664BBA06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo net7", "WPF\CSharp\Video Compositor Demo\Video Compositor Demo net7.csproj", "{92127659-DAE3-4472-84A9-FCE7DE962EF0}"
 EndProject

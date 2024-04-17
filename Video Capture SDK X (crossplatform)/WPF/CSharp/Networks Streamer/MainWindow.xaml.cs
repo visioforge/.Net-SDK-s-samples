@@ -4,14 +4,19 @@ using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.AudioEncoders;
+using VisioForge.Core.MediaBlocks.Sinks;
+using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.VideoCaptureX;
+using Rect = VisioForge.Core.Types.Rect;
 
-namespace Social_Networks_Streamer_Demo
+namespace Networks_Streamer_Demo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -40,7 +45,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 cbAudioOutput.Items.Add(e.DisplayName);
 
-                if (cbAudioOutput.Items.Count == 1)
+                if (cbAudioOutput.Items.Count > 0)
                 {
                     cbAudioOutput.SelectedIndex = 0;
                 }
@@ -53,7 +58,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 cbAudioInput.Items.Add(e.DisplayName);
 
-                if (cbAudioInput.Items.Count == 1)
+                if (cbAudioInput.Items.Count > 0)
                 {
                     cbAudioInput.SelectedIndex = 0;
                 }
@@ -66,7 +71,7 @@ namespace Social_Networks_Streamer_Demo
             {
                 cbVideoInput.Items.Add(e.DisplayName);
 
-                if (cbVideoInput.Items.Count == 1)
+                if (cbVideoInput.Items.Count > 0)
                 {
                     cbVideoInput.SelectedIndex = 0;
                 }
@@ -90,6 +95,8 @@ namespace Social_Networks_Streamer_Demo
             _videoCapture.OnError += VideoCapture_OnError;
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
+
+            cbVideoInput.Items.Add("Screen capture");
 
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
@@ -117,35 +124,46 @@ namespace Social_Networks_Streamer_Demo
             }
 
             // video source
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-            var deviceName = cbVideoInput.Text;
-            var format = cbVideoFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            if (cbVideoInput.SelectedIndex == 0)
             {
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
-                {
-                    var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                    if (formatItem != null)
-                    {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
-                        {
-                            Format = formatItem.ToFormat()
-                        };
+                var screenCaptureSourceSettings = new ScreenCaptureD3D11SourceSettings();
+                screenCaptureSourceSettings.Rectangle = new Rect(0, 0, 1920, 1080);
+                screenCaptureSourceSettings.FrameRate = new VideoFrameRate(30);
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                _videoCapture.Video_Source = screenCaptureSourceSettings;
+            }
+            else
+            {
+                VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+                var videoDeviceName = cbVideoInput.Text;
+                var videoFormat = cbVideoFormat.Text;
+                if (!string.IsNullOrEmpty(videoDeviceName) && !string.IsNullOrEmpty(videoFormat))
+                {
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == videoDeviceName);
+                    if (device != null)
+                    {
+                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == videoFormat);
+                        if (formatItem != null)
+                        {
+                            videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                            {
+                                Format = formatItem.ToFormat()
+                            };
+
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                        }
                     }
                 }
-            }
 
-            _videoCapture.Video_Source = videoSourceSettings;
+                _videoCapture.Video_Source = videoSourceSettings;
+            }
 
             // audio source
             IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
 
-            deviceName = cbAudioInput.Text;
-            format = cbAudioFormat.Text;
+            var deviceName = cbAudioInput.Text;
+            var format = cbAudioFormat.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
                 var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
@@ -194,6 +212,20 @@ namespace Social_Networks_Streamer_Demo
                 var rtmpOutput = new RTMPOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(rtmpOutput, true);
             }
+            // AWS S3
+            else if (cbPlatform.SelectedIndex == 3)
+            {
+                var s3settings = new AWSS3SinkSettings();
+                s3settings.Region = "us-west-2";
+                s3settings.ContentType = "video/mp4";
+                s3settings.Uri = "s3://us-west-2/visioforge-test/output.mp4";
+
+                s3settings.AccessKey = "#####";
+                s3settings.SecretAccessKey = "#####";
+
+                var s3Output = new AWSS3Output(s3settings, H264EncoderBlock.GetDefaultSettings(), AACEncoderBlock.GetDefaultSettings(), new MP4SinkSettings() { MuxOnly = true });
+                _videoCapture.Outputs_Add(s3Output, true);
+            }
 
             // start
             await _videoCapture.StartAsync();
@@ -227,7 +259,9 @@ namespace Social_Networks_Streamer_Demo
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            cbVideoFormat.Items.Clear();
+
+            if (cbVideoInput.SelectedIndex > 0 && e != null && e.AddedItems.Count > 0)
             {
                 var deviceName = (string)e.AddedItems[0];
 
@@ -256,7 +290,7 @@ namespace Social_Networks_Streamer_Demo
         {
             cbVideoFrameRate.Items.Clear();
 
-            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            if (cbVideoInput.SelectedIndex > 0 && e != null && e.AddedItems.Count > 0)
             {
                 var deviceName = cbVideoInput.SelectedValue.ToString();
                 var format = (string)e.AddedItems[0];

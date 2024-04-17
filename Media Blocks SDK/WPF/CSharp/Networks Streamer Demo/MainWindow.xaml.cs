@@ -20,7 +20,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
 
-namespace Social_Networks_Streamer_Demo
+namespace Networks_Streamer_Demo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -40,6 +40,10 @@ namespace Social_Networks_Streamer_Demo
         private YouTubeSinkBlock _youtubeSink;
         
         private FacebookLiveSinkBlock _facebookSink;
+
+        private AWSS3SinkBlock _awsS3Sink;
+
+        private MP4SinkBlock _mp4Sink;
 
         private HTTPMJPEGLiveSinkBlock _mjpegSink;
 
@@ -196,7 +200,7 @@ namespace Social_Networks_Streamer_Demo
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
 
-            if (cbPlatform.SelectedIndex == 0 || cbPlatform.SelectedIndex == 1 || cbPlatform.SelectedIndex == 2)
+            if (cbPlatform.SelectedIndex != 3)
             {
                 // H264/AAC encoders
                 var h264Settings = new OpenH264EncoderSettings();
@@ -221,11 +225,35 @@ namespace Social_Networks_Streamer_Demo
                     _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                 }
                 // HLS
-                else
+                else if (cbPlatform.SelectedIndex == 2)
                 {
                     _hlsSink = new HLSSinkBlock(new HLSSinkSettings());
                     _pipeline.Connect(_h264Encoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Video));
                     _pipeline.Connect(_aacEncoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+                // AWS S3
+                else if (cbPlatform.SelectedIndex == 4)
+                {
+                    // mux into MP4 stream
+                    var mp4Settings = new MP4SinkSettings() { MuxOnly = true };
+                    _mp4Sink = new MP4SinkBlock(mp4Settings);
+
+                    _pipeline.Connect(_h264Encoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_aacEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+
+                    // S3 sink
+                    var s3settings = new AWSS3SinkSettings();
+                    s3settings.Region = "us-west-2";
+                    s3settings.ContentType = "video/mp4";
+                    s3settings.Uri = "s3://us-west-2/my-bucket-name/output.mp4";
+
+                    s3settings.AccessKey = "#####";
+                    s3settings.SecretAccessKey = "#####";
+
+                    _awsS3Sink = new AWSS3SinkBlock(s3settings);
+
+                    // connect
+                    _pipeline.Connect(_mp4Sink.Output, _awsS3Sink.Input);
                 }
             }
             // MJPEG
@@ -234,8 +262,8 @@ namespace Social_Networks_Streamer_Demo
                 _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
                 _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
                 edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
-            }            
-
+            }
+          
             // start
             await _pipeline.StartAsync();
 
