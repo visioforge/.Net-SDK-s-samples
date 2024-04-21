@@ -24,6 +24,7 @@ using System.IO;
 using VisioForge.Core.Types;
 using Rect = VisioForge.Core.Types.Rect;
 using System.Linq;
+using System.Windows.Media;
 
 namespace Decklink_MultiOutput
 {
@@ -35,6 +36,8 @@ namespace Decklink_MultiOutput
         private MediaBlocksPipeline _pipeline;
 
         private MediaBlock _videoSource;
+
+        private MediaBlock _videoResize;
 
         private VideoRendererBlock _videoRenderer;
 
@@ -120,25 +123,56 @@ namespace Decklink_MultiOutput
 
             mmLog.Clear();
 
-            if (rbVirtualSource.IsChecked == true)
-            {
-                _videoSource = new VirtualVideoSourceBlock(new VirtualVideoSourceSettings(1920, 1080, new VideoFrameRate(30)));
-            }
-            else
-            {
-                var screenSource = new ScreenCaptureD3D11SourceSettings();
-                screenSource.Rectangle = new Rect(0, 0, 1920, 1080);
-                screenSource.FrameRate = new VideoFrameRate(30);
-                _videoSource = new ScreenSourceBlock(screenSource);
-            }
-
             // video renderer
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // tees
             _videoTee = new TeeBlock(3);
 
-            _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+            // sources
+            if (rbVirtualSource.IsChecked == true)
+            {
+                _videoSource = new VirtualVideoSourceBlock(new VirtualVideoSourceSettings(1920, 1080, new VideoFrameRate(30)));
+
+                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+            }
+            else if (rbScreenSource.IsChecked == true)
+            {
+                var screenSource = new ScreenCaptureD3D11SourceSettings();
+                screenSource.Rectangle = new Rect(0, 0, 1920, 1080);
+                screenSource.FrameRate = new VideoFrameRate(30);
+                _videoSource = new ScreenSourceBlock(screenSource);
+
+                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+            }
+            else
+            {
+                var screenSource = new ScreenCaptureD3D11SourceSettings();
+
+                var wih = new System.Windows.Interop.WindowInteropHelper(this);
+                var dpi = VisualTreeHelper.GetDpi(this);
+
+                screenSource.WindowHandle = wih.Handle;
+                screenSource.FrameRate = new VideoFrameRate(30);
+                screenSource.API = D3D11ScreenCaptureAPI.WGC;
+
+                if (dpi.DpiScaleX > 1.01 || dpi.DpiScaleY > 1.01)
+                {
+                    screenSource.Rectangle = new Rect(0, 0, (int)(Width * dpi.DpiScaleX) - (int)(dpi.DpiScaleX * 15), (int)(Height * dpi.DpiScaleY) - (int)(dpi.DpiScaleY * 15));
+                }
+                else
+                {
+                    screenSource.Rectangle = new Rect(0, 0, (int)Width, (int)Height);
+                }
+                
+                _videoSource = new ScreenSourceBlock(screenSource);
+
+                _videoResize = new VideoResizeBlock(new ResizeVideoEffect(1920, 1080));
+
+                _pipeline.Connect(_videoSource.Output, _videoResize.Input);
+                _pipeline.Connect(_videoResize.Output, _videoTee.Input);
+            }
+           
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
             // create Decklink outputs

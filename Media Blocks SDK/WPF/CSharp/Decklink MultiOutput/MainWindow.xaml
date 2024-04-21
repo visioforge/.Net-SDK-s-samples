@@ -19,8 +19,9 @@
         <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
             <TabItem Header="Source">
                 <StackPanel Orientation="Vertical" Margin="10,10,0,0">
-                    <RadioButton x:Name="rbVirtualSource" Content="Use virtual source" IsChecked="True" />
+                    <RadioButton x:Name="rbVirtualSource" Content="Use virtual source" />
                     <RadioButton x:Name="rbScreenSource" Content="Use screen source" IsChecked="True" Margin="0,10,0,0" />
+                    <RadioButton x:Name="rbWindowSource" Content="Use window source" Margin="0,10,0,0" />
                 </StackPanel>
             </TabItem>
 
