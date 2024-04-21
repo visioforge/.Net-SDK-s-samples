@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -77,7 +76,7 @@ namespace SimpleCapture
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline(live: true);
-            
+
 #if __IOS__ && !__MACCATALYST__
             var vv = videoView.Handler.PlatformView;
             _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
@@ -102,21 +101,21 @@ namespace SimpleCapture
             // cameras
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
-            {                
+            {
                 btCamera.Text = _cameras[0].DisplayName;
             }
 
             // mics
             _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
             if (_mics.Length > 0)
-            {      
+            {
                 btMic.Text = _mics[0].DisplayName;
             }
 
             // audio outputs
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
-            {                
+            {
                 btSpeakers.Text = _speakers[0].DisplayName;
             }
 
@@ -264,7 +263,7 @@ namespace SimpleCapture
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
-            // _pipeline.Debug_SavePipeline("main");
+            var dot = _pipeline.Debug_GetPipeline();
 
 #if __IOS__ && !__MACCATALYST__
             bool capture = _mp4Sink != null;
@@ -272,7 +271,7 @@ namespace SimpleCapture
             if (capture)
             {
                 filename = _mp4Sink.GetFilenameOrURL();
-            }            
+            }
 #endif
 
             await StopAllAsync();
@@ -284,7 +283,7 @@ namespace SimpleCapture
                 AddVideoToPhotosLibrary(filename);
             }
 #endif
-            
+
             btStartPreview.Text = "PREVIEW";
             btStartCapture.Text = "CAPTURE";
         }
@@ -343,7 +342,7 @@ namespace SimpleCapture
         private async Task ConfigurePreviewAsync(bool connect)
         {
             // audio output
-            _audioOutput = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First());
+            _audioOutput = new AudioRendererBlock(_speakers.First(device => device.DisplayName == btSpeakers.Text));
 
             // video source
             VideoCaptureDeviceSourceSettings videoSourceSettings = null;
@@ -351,10 +350,10 @@ namespace SimpleCapture
             var deviceName = btCamera.Text;
             if (!string.IsNullOrEmpty(deviceName))
             {
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                var device = _cameras.FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.VideoFormats.Find(x => (x.Width == 1920)); 
+                    var formatItem = device.VideoFormats.Find(x => (x.Width == 1920 && x.Height == 1440));
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
@@ -362,7 +361,8 @@ namespace SimpleCapture
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(30); //frameRate;
+                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
+                        ;
                     }
                 }
             }
@@ -370,23 +370,27 @@ namespace SimpleCapture
             if (videoSourceSettings == null)
             {
                 await DisplayAlert("Error", "Unable to configure camera settings", "OK");
+                return;
             }
 
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-             // audio source
-             IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
-            
-             deviceName = btMic.Text;
-             if (!string.IsNullOrEmpty(deviceName))
-             {
-                 var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                 if (device != null)
-                 {
-                     var formatItem = device.GetDefaultFormat();
-                     audioSourceSettings = device.CreateSourceSettings(formatItem);
-                 }
-             }
+            // audio source
+            IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+
+            deviceName = btMic.Text;
+            if (!string.IsNullOrEmpty(deviceName))
+            {
+                var device =
+                    (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x =>
+                        x.DisplayName == deviceName);
+                if (device != null)
+                {
+                    var formatItem = device.GetDefaultFormat();
+                    audioSourceSettings = device.CreateSourceSettings(formatItem);
+                }
+            }
 
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
@@ -412,6 +416,7 @@ namespace SimpleCapture
 
             // add video encoder
             _videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
+            _pipeline.Connect(_videoSource.Output, _videoEncoder.Input);
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
             // add audio encoder
@@ -422,16 +427,19 @@ namespace SimpleCapture
             var now = DateTime.Now;
 
 #if __ANDROID__
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename =
+ Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #elif __IOS__ && !__MACCATALYST__
-            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
+                "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
-            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename =
+ Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
 
             var sinkSettings = new MP4SinkSettings(filename);
             _mp4Sink = new MP4SinkBlock(sinkSettings);
-            
+
             _pipeline.Connect(_videoEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
             _pipeline.Connect(_audioEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
         }
@@ -445,35 +453,35 @@ namespace SimpleCapture
             switch (_pipeline.State)
             {
                 case PlaybackState.Play:
-                    {
-                        await _pipeline.PauseAsync();
+                {
+                    await _pipeline.PauseAsync();
 
-                        btStartPreview.Text = "PREVIEW";
-                    }
+                    btStartPreview.Text = "PREVIEW";
+                }
 
                     break;
                 case PlaybackState.Pause:
-                    {
-                        await _pipeline.ResumeAsync();
+                {
+                    await _pipeline.ResumeAsync();
 
-                        btStartPreview.Text = "PAUSE";
-                    }
+                    btStartPreview.Text = "PAUSE";
+                }
 
                     break;
                 case PlaybackState.Free:
+                {
+                    if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
                     {
-                        if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
-                        {
-                            return;
-                        }
-
-                        await ConfigurePreviewAsync(true);
-
-                        // start
-                        await _pipeline.StartAsync();
-
-                        btStartPreview.Text = "PAUSE";
+                        return;
                     }
+
+                    await ConfigurePreviewAsync(true);
+
+                    // start
+                    await _pipeline.StartAsync();
+
+                    btStartPreview.Text = "PAUSE";
+                }
 
                     break;
                 default:
@@ -484,44 +492,44 @@ namespace SimpleCapture
         private async void btStartCapture_Clicked(object sender, EventArgs e)
         {
             await StopAllAsync();
-            
+
             CreateEngine();
-            
+
             switch (_pipeline.State)
             {
                 case PlaybackState.Play:
-                    {
-                        await _pipeline.PauseAsync();
-            
-                        btStartCapture.Text = "CAPTURE";
-                    }
-            
+                {
+                    await _pipeline.PauseAsync();
+
+                    btStartCapture.Text = "CAPTURE";
+                }
+
                     break;
                 case PlaybackState.Pause:
-                    {
-                        await _pipeline.ResumeAsync();
-            
-                        btStartCapture.Text = "PAUSE";
-                    }
-            
+                {
+                    await _pipeline.ResumeAsync();
+
+                    btStartCapture.Text = "PAUSE";
+                }
+
                     break;
                 case PlaybackState.Free:
+                {
+                    if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
                     {
-                        if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
-                        {
-                            return;
-                        }
-            
-                        await ConfigurePreviewAsync(false);
-            
-                        ConfigureCapture();
-            
-                        // start
-                        await _pipeline.StartAsync();      
-            
-                        btStartCapture.Text = "PAUSE";
+                        return;
                     }
-            
+
+                    await ConfigurePreviewAsync(false);
+
+                    ConfigureCapture();
+
+                    // start
+                    await _pipeline.StartAsync();
+
+                    btStartCapture.Text = "PAUSE";
+                }
+
                     break;
                 default:
                     break;
