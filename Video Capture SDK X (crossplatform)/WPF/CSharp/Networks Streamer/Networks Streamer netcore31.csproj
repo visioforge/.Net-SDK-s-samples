@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.0" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.10" />
