@@ -59,6 +59,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlliedVision Source Demo ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MultiOutput netcore31", "WPF\CSharp\Decklink MultiOutput\Decklink MultiOutput netcore31.csproj", "{5DB2C71E-DB8F-4ECD-BD5D-F4361A4813D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo MB netcore31", "WPF\CSharp\Audio Capture Demo\Audio Capture Demo MB netcore31.csproj", "{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{5DB2C71E-DB8F-4ECD-BD5D-F4361A4813D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DB2C71E-DB8F-4ECD-BD5D-F4361A4813D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DB2C71E-DB8F-4ECD-BD5D-F4361A4813D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +206,7 @@ Global
 		{4AADA3D3-9B34-431C-9C73-23F0A9196D50} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{4E1F869D-9FA5-4D7B-B8B9-B1BAD5AE9612} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{5DB2C71E-DB8F-4ECD-BD5D-F4361A4813D4} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{C201FA26-0C9A-41B6-9746-8EAD67E9FBBB} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

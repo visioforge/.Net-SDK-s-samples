@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.11
+
+* [X-engines] Resolved an issue with `WASAPI/WASAPI2` audio renderer usage
+* [X-engines] Resolved an issue with the audio loopback audio source on Windows
+
 ## 15.9.6
 
 * [X-engines] Improved iOS video rendering performance and stability
