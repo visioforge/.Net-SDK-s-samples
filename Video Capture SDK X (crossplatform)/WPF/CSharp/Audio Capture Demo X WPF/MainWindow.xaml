@@ -10,10 +10,13 @@
         <TabControl Margin="15,12,0,0" Name="tabControl1" HorizontalAlignment="Left" Width="391" Height="544" VerticalAlignment="Top">
             <TabItem Header="Input &amp; output devices" IsEnabled="True" Name="tabPage1" IsSelected="True">
                 <StackPanel Orientation="Vertical" Margin="10">
-                    <Label VerticalAlignment="Top" HorizontalAlignment="Left" Content="Input device"/>
-                    <ComboBox Name="cbAudioInputDevice" VerticalAlignment="Top" Width="350" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" />
+                    <RadioButton Name="rbSystemAudio" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Input device" IsChecked="True" />
+                    <ComboBox Name="cbAudioInputDevice" Margin="0,5,0,0" VerticalAlignment="Top" Width="350" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" />
                     <Label VerticalAlignment="Top" HorizontalAlignment="Left">Input format</Label>
                     <ComboBox Name="cbAudioInputFormat" VerticalAlignment="Top" StaysOpenOnEdit="True" HorizontalAlignment="Left" Width="350" />
+
+                    <RadioButton Name="rbLoopback" VerticalAlignment="Top" Margin="0,16,0,0" HorizontalAlignment="Left" Content="Loopback capture from output device" />
+                    <ComboBox Name="cbAudioLoopbackDevice" Margin="0,5,0,0" VerticalAlignment="Top" Width="350" HorizontalAlignment="Left" />
 
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <Label HorizontalAlignment="Left" Width="120" VerticalAlignment="Center" VerticalContentAlignment="Center">Audio output device</Label>

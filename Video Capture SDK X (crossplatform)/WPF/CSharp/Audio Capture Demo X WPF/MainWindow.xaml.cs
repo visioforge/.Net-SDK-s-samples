@@ -17,6 +17,8 @@ namespace Audio_Capture_Demo_X_WPF
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core;
     using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core.MediaBlocks.Sources;
+    using VisioForge.Core.Types.X.VideoCapture;
 
     public partial class MainWindow : Window
     {
@@ -50,37 +52,8 @@ namespace Audio_Capture_Demo_X_WPF
 
             // We have to initialize the engine on start
             VisioForgeX.InitSDK();
-
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
-
-        private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                cbAudioOutputDevice.Items.Add(e.DisplayName);
-
-                if (cbAudioOutputDevice.Items.Count == 1)
-                {
-                    cbAudioOutputDevice.SelectedIndex = 0;
-                }
-            });
-        }
-
-        private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                cbAudioInputDevice.Items.Add(e.DisplayName);
-
-                if (cbAudioInputDevice.Items.Count == 1)
-                {
-                    cbAudioInputDevice.SelectedIndex = 0;
-                }
-            });
-        }
-
+           
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
@@ -92,8 +65,40 @@ namespace Audio_Capture_Demo_X_WPF
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
             cbMode.SelectedIndex = 0;
 
-            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+            // enumerate audio sources
+            var audioSources = await DeviceEnumerator.Shared.AudioSourcesAsync();
+
+            foreach (var source in audioSources)
+            {
+                cbAudioInputDevice.Items.Add(source.DisplayName);
+
+                if (cbAudioInputDevice.Items.Count == 1)
+                {
+                    cbAudioInputDevice.SelectedIndex = 0;
+                }
+            }
+
+            // enumerate audio sinks
+            var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
+            foreach (var sink in audioSinks)
+            {
+                cbAudioOutputDevice.Items.Add(sink.DisplayName);
+
+                if (cbAudioOutputDevice.Items.Count == 1)
+                {
+                    cbAudioOutputDevice.SelectedIndex = 0;
+                }
+
+                if (sink.API == AudioOutputDeviceAPI.WASAPI2)
+                {
+                    cbAudioLoopbackDevice.Items.Add(sink.Name);
+
+                    if (cbAudioLoopbackDevice.Items.Count == 1)
+                    {
+                        cbAudioLoopbackDevice.SelectedIndex = 0;
+                    }
+                }
+            }
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
         }
@@ -158,23 +163,38 @@ namespace Audio_Capture_Demo_X_WPF
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
+            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
 
             // audio input
-            var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
-            if (deviceItem == null)
+            IVideoCaptureBaseAudioSourceSettings audioSource = null;
+            if (rbSystemAudio.IsChecked == true)
             {
-                return;
+                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                AudioCaptureDeviceFormat format = null;
+                var formats = deviceItem.Formats.Where(fmt => fmt.Name == cbAudioInputFormat.Text).ToList();
+                if (formats.Count > 0)
+                {
+                    format = formats[0].ToFormat();
+                }
+
+                audioSource = deviceItem.CreateSourceSettingsVC(format);
+            }
+            else
+            {
+                var deviceItem = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.WASAPI2)).FirstOrDefault(device => device.Name == cbAudioLoopbackDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
             }
 
-            AudioCaptureDeviceFormat format = null;
-            var formats = deviceItem.Formats.Where(fmt => fmt.Name == cbAudioInputFormat.Text).ToList();
-            if (formats.Count > 0)
-            {
-                format = formats[0].ToFormat();
-            }
-
-            var audioSource = deviceItem.CreateSourceSettingsVC(format);
             VideoCapture1.Audio_Source = audioSource;
 
             VideoCapture1.Audio_Play = cbPlayAudio.IsChecked == true;
