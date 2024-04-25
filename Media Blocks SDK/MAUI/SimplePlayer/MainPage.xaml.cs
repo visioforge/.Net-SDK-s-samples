@@ -63,7 +63,14 @@ namespace Simple_Player_MB_MAUI
             _audioRenderer = new AudioRendererBlock();
 
             _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(_filename));
+
+#if __IOS__ && !__MACCATALYST__ || __ANDROID__
+            var vv = videoView.Handler.PlatformView;
+            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
+#else
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+#endif
+
             _audioRenderer = new AudioRendererBlock();
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);

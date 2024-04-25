@@ -75,7 +75,7 @@ namespace SimpleCapture
 #endif
 
             IVideoView vv;
-#if __IOS__ && !__MACCATALYST__
+#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
             vv = (IVideoView)videoView.Handler.PlatformView;
 #else
             vv = videoView;

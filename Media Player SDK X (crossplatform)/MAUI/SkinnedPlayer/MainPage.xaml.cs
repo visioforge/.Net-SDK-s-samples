@@ -16,6 +16,8 @@ using System.Reflection;
 using System.Drawing.Printing;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
+using VisioForge.Core.Types;
+
 
 #if ANDROID
 using Android.Runtime;
@@ -87,7 +89,14 @@ namespace SkinnedPlayer_MAUI
 
         private void MainPage_Loaded(object sender, EventArgs e)
         {
-            _player = new MediaPlayerCoreX(videoView);
+            IVideoView vv;
+#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+            vv = (IVideoView)videoView.Handler.PlatformView;
+#else
+            vv = videoView;
+#endif
+
+            _player = new MediaPlayerCoreX(vv);
 
             _player.OnError += _player_OnError;
             var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;

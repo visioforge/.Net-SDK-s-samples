@@ -53,8 +53,8 @@ namespace Simple_Player_MAUI
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
             IVideoView vv;
-#if __IOS__ && !__MACCATALYST__
-            vv = (IVideoView)videoView.Handler.PlatformView;
+#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+            vv = videoView.GetVideoView();
 #else
             vv = videoView;
 #endif

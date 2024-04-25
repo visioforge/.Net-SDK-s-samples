@@ -77,7 +77,7 @@ namespace SimpleCapture
         {
             _pipeline = new MediaBlocksPipeline(live: true);
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__ && !__MACCATALYST__ || __ANDROID__
             var vv = videoView.Handler.PlatformView;
             _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
 #else
@@ -263,8 +263,6 @@ namespace SimpleCapture
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
-            var dot = _pipeline.Debug_GetPipeline();
-
 #if __IOS__ && !__MACCATALYST__
             bool capture = _mp4Sink != null;
             string filename = null;
@@ -373,7 +371,10 @@ namespace SimpleCapture
                 return;
             }
 
+#if __IOS__ && !__MACCATALYST__
             videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+#endif
+
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // audio source

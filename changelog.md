@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.17
+
+* [X-engines] Fixed rare crashes in RTSP source when camera information is not available for some reason (network issue)
+
 ## 15.9.11
 
 * [X-engines] Resolved an issue with `WASAPI/WASAPI2` audio renderer usage
@@ -33,7 +37,7 @@
 * [Media Blocks SDK .Net] Added RTSP MultiView in Sync Demo
 * [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK
 * [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source
-* .Net 7 support returned to the MAUI package (was removed by CI error).
+* .Net 7 support returned to the MAUI package (it was removed by CI error).
 * The IAsyncDisposable interface was added to all SDK's core classes. DisposeAsync call should be used to dispose of the core objects in async methods.  
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)
 * [Media Blocks SDK .Net] Added HLS streaming sample

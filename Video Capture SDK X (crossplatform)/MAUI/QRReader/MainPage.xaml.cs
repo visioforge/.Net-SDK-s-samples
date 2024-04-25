@@ -38,7 +38,14 @@ namespace QRReader
             await RequestCameraPermissionAsync();
 #endif
 
-            _core = new VideoCaptureCoreX(videoView);     
+            IVideoView vv = null;
+#if __IOS__ && !__MACCATALYST__ || __ANDROID__
+            vv = (IVideoView)videoView.Handler.PlatformView;
+#else
+            vv = videoView;
+#endif
+
+            _core = new VideoCaptureCoreX(vv);     
 
             _core.OnError += Core_OnError;
             _core.OnBarcodeDetected += Core_OnBarcodeDetected;
