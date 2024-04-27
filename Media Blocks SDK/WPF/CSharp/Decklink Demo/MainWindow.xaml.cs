@@ -66,6 +66,8 @@ namespace Decklink_MB_Demo
 
         private System.Timers.Timer _timer;
 
+        private bool _started;
+
         public MainWindow()
         {
             InitializeComponent();           
@@ -75,10 +77,18 @@ namespace Decklink_MB_Demo
 
         private void CreatePipeline(bool live)
         {
+            _started = false;
+
             _pipeline = new MediaBlocksPipeline(live);
             _pipeline.OnError += Pipeline_OnError;
+            _pipeline.OnStart += Pipeline_OnStart;
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+        }
+
+        private void Pipeline_OnStart(object sender, EventArgs e)
+        {
+            _started = true;
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -175,6 +185,21 @@ namespace Decklink_MB_Demo
             cbVideoMode.SelectedIndex = 0;
 
             edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+
+            DeviceEnumerator.Shared.OnDecklinkSignalLost += DeviceEnumerator_OnDecklinkSignalLost;
+        }
+
+        private void DeviceEnumerator_OnDecklinkSignalLost(object sender, EventArgs e)
+        {
+            if (!_started)
+            {
+                return;
+            }
+
+            Dispatcher.Invoke(() =>
+            {
+                mmLog.Text = mmLog.Text + "Decklink signal lost." + Environment.NewLine;
+            });
         }
 
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

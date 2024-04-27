@@ -15,7 +15,7 @@
         <StackPanel Orientation="Vertical" Grid.Column="0" Width="200" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <StackPanel Orientation="Vertical">
                 <Label Content="Camera 1" HorizontalAlignment="Left" />
-                <TextBox x:Name="edURL1" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+                <TextBox x:Name="edURL1" HorizontalAlignment="Left" Text="rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="User name" Width="70" HorizontalAlignment="Left" />
@@ -30,7 +30,7 @@
 
             <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                 <Label Content="Camera 2" HorizontalAlignment="Left" />
-                <TextBox x:Name="edURL2" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+                <TextBox x:Name="edURL2" HorizontalAlignment="Left" Text="rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="User name" Width="70" HorizontalAlignment="Left" />
@@ -45,7 +45,7 @@
 
             <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                 <Label Content="Camera 3" HorizontalAlignment="Left" />
-                <TextBox x:Name="edURL3" HorizontalAlignment="Left" Text="rtsp://admin:dancer23@192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
+                <TextBox x:Name="edURL3" HorizontalAlignment="Left" Text="rtsp://192.168.50.64:554/Streaming/Channels/101?transportmode=unicast&amp;profile=Profile_1" Width="200" />
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="User name" Width="70" HorizontalAlignment="Left" />
