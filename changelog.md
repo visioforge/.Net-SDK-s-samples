@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.18
+
+* [Windows] FFMPEG outputs and source updated to FFMPEG v7.0.
+
 ## 15.9.17
 
 * [X-engines] Fixed rare crashes in RTSP source when camera information is not available for some reason (network issue)
