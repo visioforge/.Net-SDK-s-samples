@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink MultiOutput net5",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo MB net5", "WPF\CSharp\Audio Capture Demo\Audio Capture Demo MB net5.csproj", "{9AD67B7B-2DF6-418D-B892-D16E65A4E07A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP Preview Demo MB WPF net5", "WPF\CSharp\RTSP Preview Demo\RTSP Preview Demo MB WPF net5.csproj", "{CF67688E-5524-490E-9CCE-14FF451D6318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +177,10 @@ Global
 		{9AD67B7B-2DF6-418D-B892-D16E65A4E07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AD67B7B-2DF6-418D-B892-D16E65A4E07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AD67B7B-2DF6-418D-B892-D16E65A4E07A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF67688E-5524-490E-9CCE-14FF451D6318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF67688E-5524-490E-9CCE-14FF451D6318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF67688E-5524-490E-9CCE-14FF451D6318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF67688E-5524-490E-9CCE-14FF451D6318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,6 +213,7 @@ Global
 		{B342CF26-E8E8-4062-88DA-2CFD253273D4} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{9A4ED061-38CA-4FF7-B7CC-82CDFCB5CC06} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{9AD67B7B-2DF6-418D-B892-D16E65A4E07A} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
+		{CF67688E-5524-490E-9CCE-14FF451D6318} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

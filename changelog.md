@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.22
+
+* [X-engines] Resolved RTSP source problems with audio connection in some situations
+* [X-engines] Added the RTSP Preview Demo to Media Blocks SDK .Net
+
 ## 15.9.18
 
 * [Windows] FFMPEG outputs and source updated to FFMPEG v7.0.

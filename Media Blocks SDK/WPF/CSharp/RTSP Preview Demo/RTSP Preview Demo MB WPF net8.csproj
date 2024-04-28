@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RTSP_Preview</RootNamespace>
+    <AssemblyName>Media Blocks SDK - WPF RTSP Preview Demo</AssemblyName>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyTitle>RTSP Preview Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>RTSP Preview Demo</Product>
+    <Copyright>Copyright (c) 2006-2023</Copyright>
+    <AssemblyVersion>15.9.21.0</AssemblyVersion>
+    <FileVersion>15.9.21.0</FileVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.22" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.22" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>
