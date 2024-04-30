@@ -100,6 +100,13 @@ namespace RTSP_Preview
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled);
+            var info = rtsp.GetInfo();
+
+            if (info == null)
+            {
+                MessageBox.Show(this, "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF");
+                return;
+            }
 
             _rtspSource = new RTSPSourceBlock(rtsp);
 
@@ -107,7 +114,7 @@ namespace RTSP_Preview
 
             _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
 
-            if (audioEnabled && rtsp.GetInfo().AudioStreams.Count > 0)
+            if (audioEnabled && info.AudioStreams.Count > 0)
             {
                 _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);

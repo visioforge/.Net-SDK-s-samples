@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RTSPViewer.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowSpacing="0" RowDefinitions="*,Auto" >
+
+            <!--<my:VideoView Grid.Row="0"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="videoView"
+                Background="Black"/>-->
+
+            <Grid x:Name="videoViewHost"
+                  Grid.Row="0"               
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  Background="Black">
+                <my:VideoView 
+                    x:Name="videoView"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+            </Grid>
+
+            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+
+                <Entry 
+                    x:Name="edURL"
+                    Placeholder="RTSP URL (not HTTP or ONVIF)"
+                    HorizontalOptions="FillAndExpand" />
+
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Entry  
+                        Grid.Column="0"
+                        x:Name="edUsername"
+                        Placeholder="User name" />
+
+                    <Entry 
+                        Grid.Column="1"
+                        x:Name="edPassword"
+                        Placeholder="Password" />
+
+                    <Button  
+                        Grid.Column="2"
+                        x:Name="btPlay"
+                        Text="PLAY" 
+                        VerticalOptions="Center" 
+                        Clicked="btPlay_Clicked" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X8"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCaptureMB8", "MAUI\SimpleCapture\SimpleCaptureMB8.csproj", "{F9102788-2140-4A5F-970B-5CC507D21810}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayer8", "MAUI\SimplePlayer\SimplePlayer8.csproj", "{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerMB8", "MAUI\SimplePlayer\SimplePlayerMB8.csproj", "{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPViewerMB8", "MAUI\RTSPViewer\RTSPViewerMB8.csproj", "{2DA8BD79-846C-4794-B932-31BE44386930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,12 @@ Global
 		{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
