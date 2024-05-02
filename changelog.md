@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.25
+
+* [X-engines] `Breaking API change`. Starting with this update, the SDK uses `IAudioRendererSettings` interface implementations for audio output configuration. WASAPI output got the custom configuration classes. Output_AudioDevice properties of `VideoCaptureCoreX`/`MediaPlayerCoreX` type have been changed to `IAudioRendererSettings`. You can create the `AudioRendererSettings` class instance from `AudioOutputDeviceInfo` using the default constructor.
+* [X-engines] Resolved problem with missed Media Foundation sources during device enumeration
+
 ## 15.9.22
 
 * [X-engines] Resolved RTSP source problems with audio connection in some situations

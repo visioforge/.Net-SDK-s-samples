@@ -25,6 +25,7 @@ namespace Main_Demo
     using VisioForge.Core.Types.X.Output;
     using System.Threading.Tasks;
     using VisioForge.Core;
+    using VisioForge.Core.Types.X.AudioRenderers;
 
     public partial class Form1 : Form
     {
@@ -350,7 +351,8 @@ namespace Main_Demo
             _player.Debug_Mode = cbDebugMode.Checked;
             _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _player.Audio_Play = cbPlayAudio.Checked;
-            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
+            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
+            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
             _player.Snapshot_Grabber_Enabled = true;
 

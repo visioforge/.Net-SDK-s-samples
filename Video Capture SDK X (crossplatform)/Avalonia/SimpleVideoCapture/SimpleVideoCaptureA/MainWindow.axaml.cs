@@ -15,6 +15,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
@@ -495,7 +496,8 @@ public partial class MainWindow : Window, IDisposable
             VideoCapture1.Audio_Play = false;
         }
 
-        VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString()).First();
+        var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString()).First(); 
+        VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
         // video source
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;

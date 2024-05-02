@@ -9,6 +9,7 @@
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayerX;
     using VisioForge.Core.Types.Events;
+    using VisioForge.Core.Types.X.AudioRenderers;
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI;
@@ -64,7 +65,8 @@
             mmError.Clear();
 
             MediaPlayer1.Audio_Play = true;
-            MediaPlayer1.Audio_OutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text);
+            var audioOutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text);
+            MediaPlayer1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 

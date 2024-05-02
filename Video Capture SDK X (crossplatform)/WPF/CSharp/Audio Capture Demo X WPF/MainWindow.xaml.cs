@@ -19,6 +19,7 @@ namespace Audio_Capture_Demo_X_WPF
     using VisioForge.Core.MediaBlocks;
     using VisioForge.Core.MediaBlocks.Sources;
     using VisioForge.Core.Types.X.VideoCapture;
+    using VisioForge.Core.Types.X.AudioRenderers;
 
     public partial class MainWindow : Window
     {
@@ -127,16 +128,6 @@ namespace Audio_Capture_Demo_X_WPF
             }
         }
 
-        private async void cbAudioOutputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e == null || e.AddedItems.Count == 0)
-            {
-                return;
-            }
-
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == e.AddedItems[0].ToString()).First();
-        }
-
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -163,7 +154,8 @@ namespace Audio_Capture_Demo_X_WPF
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
+            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
+            VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             // audio input
             IVideoCaptureBaseAudioSourceSettings audioSource = null;

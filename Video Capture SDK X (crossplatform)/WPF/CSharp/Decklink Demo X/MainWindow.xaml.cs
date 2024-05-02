@@ -18,6 +18,7 @@ using System.IO;
 using VisioForge.Core.UI;
 using System.Windows.Controls;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.Types.X.AudioRenderers;
 
 namespace Decklink_Demo_X
 {
@@ -184,7 +185,8 @@ namespace Decklink_Demo_X
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First();
+            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First();
+            VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             VideoCapture1.Audio_Record = true;
             VideoCapture1.Audio_Play = true;

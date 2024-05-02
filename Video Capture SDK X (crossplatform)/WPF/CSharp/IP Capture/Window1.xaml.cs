@@ -23,6 +23,7 @@ namespace IP_Capture
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.VideoCapture;
+    using VisioForge.Core.Types.X.AudioRenderers;
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.VideoEffects;
@@ -191,7 +192,9 @@ namespace IP_Capture
 
             VideoCapture1.Audio_Record = audioEnabled;
             VideoCapture1.Audio_Play = audioEnabled;
-            VideoCapture1.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
+
+            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
+            VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice); 
 
             var login = edIPLogin.Text;
             var password = edIPPassword.Text;

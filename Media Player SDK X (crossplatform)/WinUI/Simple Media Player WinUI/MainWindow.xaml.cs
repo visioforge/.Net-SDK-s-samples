@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using Windows.ApplicationModel;
@@ -140,7 +141,8 @@ namespace Simple_Media_Player_WinUI
 
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Audio_OutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First();
+            var audioOutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First();
+            MediaPlayer1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             var fileSource = await UniversalSourceSettings.CreateAsync(edFilename.Text);
             await MediaPlayer1.OpenAsync(fileSource);

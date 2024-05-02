@@ -11,10 +11,10 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.9.23" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.9.25" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

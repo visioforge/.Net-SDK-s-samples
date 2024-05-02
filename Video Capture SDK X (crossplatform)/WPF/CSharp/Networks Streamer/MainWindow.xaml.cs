@@ -9,6 +9,7 @@ using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
@@ -185,7 +186,7 @@ namespace Networks_Streamer_Demo
                 var device = (await DeviceEnumerator.Shared.AudioOutputsAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    _videoCapture.Audio_OutputDevice = device;                    
+                    _videoCapture.Audio_OutputDevice = new AudioRendererSettings(device);                    
                 }
             }
 

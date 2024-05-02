@@ -15,6 +15,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
@@ -209,7 +210,8 @@ public partial class MainWindow : Window, IDisposable
         _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
         var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-        _player.Audio_OutputDevice = audioOutputs.First(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString());
+        var audioOutputDevice = audioOutputs.First(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString());
+        _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
         await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(source)));
         await _player.PlayAsync();

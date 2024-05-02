@@ -11,6 +11,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
@@ -179,7 +180,8 @@ namespace Decklink_Player_Demo_X
                         
             CreateEngine();
 
-            _player.Audio_OutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
+            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text); 
+            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             _player.Custom_Video_Outputs.Clear();
             _player.Custom_Audio_Outputs.Clear();

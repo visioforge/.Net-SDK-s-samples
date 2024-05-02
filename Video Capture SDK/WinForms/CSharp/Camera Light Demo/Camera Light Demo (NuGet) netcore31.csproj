@@ -17,10 +17,10 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="15.9.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.23" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="15.9.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.25" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
