@@ -24,6 +24,7 @@ namespace Main_Demo
     using System.Windows.Threading;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.ONVIF.Legacy;
+    using VisioForge.Core.ONVIFDiscovery.Models;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.AudioEffects;
     using VisioForge.Core.Types.Decklink;
@@ -5846,17 +5847,21 @@ namespace Main_Demo
         private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
+            Action<DiscoveryDevice> onDeviceDiscovered = AddONVIFSource;
+            await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsyncEx(onDeviceDiscovered, null, null);
+        }
 
-            var lst = await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(null, null);
-            foreach (var uri in lst)
+        private void AddONVIFSource(DiscoveryDevice discoveryDevice)
+        {
+            Dispatcher.Invoke((Action)(() =>
             {
-                cbIPURL.Items.Add(uri);
-            }
+                cbIPURL.Items.Add(discoveryDevice.XAdresses.FirstOrDefault());
 
-            if (cbIPURL.Items.Count > 0)
-            {
-                cbIPURL.SelectedIndex = 0;
-            }
+                if (cbIPURL.Items.Count == 1)
+                {
+                    cbIPURL.SelectedIndex = 0;
+                }
+            }));
         }
 
         private void btVirtualCameraRegister_Click(object sender, RoutedEventArgs e)

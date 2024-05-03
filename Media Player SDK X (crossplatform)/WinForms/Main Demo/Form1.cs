@@ -365,7 +365,7 @@ namespace Main_Demo
             if (source.Contains("rtsp://"))
             {
                 var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
-                rtspSource.Latency = tbRTSPLatency.Value;
+                rtspSource.Latency = TimeSpan.FromMilliseconds(tbRTSPLatency.Value);
                 rtspSource.RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024;
                 rtspSource.UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024;
 

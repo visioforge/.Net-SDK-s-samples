@@ -25,6 +25,8 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using VisioForge.Core.Helpers;
     using System.Threading.Tasks;
     using VisioForge.Core.ONVIF.Legacy;
+    using VisioForge.Core.ONVIFDiscovery.Models;
+    using System.Linq;
 
     public partial class Form1 : Form
     {
@@ -1078,17 +1080,21 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         private async void btListONVIFSources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
+            Action<DiscoveryDevice> onDeviceDiscovered = AddONVIFSource;
+            await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsyncEx(onDeviceDiscovered, null, null);
+        }
 
-            var lst = await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsync(null, null);
-            foreach (var uri in lst)
-            {
-                cbIPURL.Items.Add(uri);
-            }
+        private void AddONVIFSource(DiscoveryDevice discoveryDevice)
+        {
+            Invoke((Action)(() => 
+            { 
+                cbIPURL.Items.Add(discoveryDevice.XAdresses.FirstOrDefault());
 
-            if (cbIPURL.Items.Count > 0)
-            {
-                cbIPURL.SelectedIndex = 0;
-            }
+                if (cbIPURL.Items.Count == 1)
+                {
+                    cbIPURL.SelectedIndex = 0;
+                }
+            }));
         }
 
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
