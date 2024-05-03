@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.26
+
+* [Video Capture SDK .Net] VideoCaptureCore: The `IP_Camera_ONVIF_ListSourcesAsyncEx` method got an overload version with a callback for a more responsible UI
+* [X-engines] RTSP source compatibility update
+
 ## 15.9.25
 
 * [X-engines] `Breaking API change`. Starting with this update, the SDK uses `IAudioRendererSettings` interface implementations for audio output configuration. WASAPI output got the custom configuration classes. Output_AudioDevice properties of `VideoCaptureCoreX`/`MediaPlayerCoreX` type have been changed to `IAudioRendererSettings`. You can create the `AudioRendererSettings` class instance from `AudioOutputDeviceInfo` using the default constructor.
