@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-
 using System.Windows;
 using System.Windows.Controls;
+
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -15,7 +15,6 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioEncoders;
-using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
@@ -48,6 +47,8 @@ namespace Networks_Streamer_Demo
         private HTTPMJPEGLiveSinkBlock _mjpegSink;
 
         private HLSSinkBlock _hlsSink;
+
+        private SRTMPEGTSSinkBlock _srtSink;
 
         private H264EncoderBlock _h264Encoder;
 
@@ -196,7 +197,7 @@ namespace Networks_Streamer_Demo
             // connect inputs
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-            
+
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
 
@@ -209,7 +210,7 @@ namespace Networks_Streamer_Demo
 
                 _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
                 _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
-                
+
                 // YouTube
                 if (cbPlatform.SelectedIndex == 0)
                 {
@@ -255,6 +256,14 @@ namespace Networks_Streamer_Demo
                     // connect
                     _pipeline.Connect(_mp4Sink.Output, _awsS3Sink.Input);
                 }
+                // HLS
+                else if (cbPlatform.SelectedIndex == 5)
+                {
+                    _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
+                    _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
+                    _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_aacEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
             }
             // MJPEG
             else if (cbPlatform.SelectedIndex == 3)
@@ -263,7 +272,7 @@ namespace Networks_Streamer_Demo
                 _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
                 edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
             }
-          
+
             // start
             await _pipeline.StartAsync();
 

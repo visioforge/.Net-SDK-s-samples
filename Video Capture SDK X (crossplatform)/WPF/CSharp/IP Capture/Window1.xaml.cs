@@ -241,6 +241,14 @@ namespace IP_Capture
                     }
 
                     break;
+                case 4:
+                    {
+                        // SRT
+                        var srt = await SRTSourceSettings.CreateAsync(cbIPURL.Text);
+                        VideoCapture1.Video_Source = srt;
+                    }
+
+                    break;
             }
 
             //if (cbIPDisconnect.IsChecked == true)

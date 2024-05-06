@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.27
+
+* [X-engines] Added SRT source and sink support in Media Blocks SDK .Net and Video Capture SDK .Net
+
 ## 15.9.26
 
 * [Video Capture SDK .Net] VideoCaptureCore: The `IP_Camera_ONVIF_ListSourcesAsyncEx` method got an overload version with a callback for a more responsible UI

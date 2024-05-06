@@ -55,6 +55,7 @@
                     <ComboBoxItem>HLS</ComboBoxItem>
                     <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>
                     <ComboBoxItem>AWS S3 (configure in code)</ComboBoxItem>
+                    <ComboBoxItem>SRT (server, port 8888)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

@@ -23,6 +23,7 @@
                                     <ComboBoxItem Content="RTSP" />
                                     <ComboBoxItem Content="NDI (URL)" />
                                     <ComboBoxItem Content="NDI (Name)" />
+                                    <ComboBoxItem Content="SRT" />
                                 </ComboBox>
                                 <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="350,65,0,0" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="350,106,0,0" VerticalAlignment="Top"/>
