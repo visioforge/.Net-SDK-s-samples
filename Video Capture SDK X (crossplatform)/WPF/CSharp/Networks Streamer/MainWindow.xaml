@@ -58,6 +58,7 @@
                     <ComboBoxItem>Facebook</ComboBoxItem>
                     <ComboBoxItem>Generic RTMP (set URL instead of key)</ComboBoxItem>
                     <ComboBoxItem>AWS S3 (settings in code)</ComboBoxItem>
+                    <ComboBoxItem>SRT (set URL instead of key)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

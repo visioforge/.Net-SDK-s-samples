@@ -227,6 +227,12 @@ namespace Networks_Streamer_Demo
                 var s3Output = new AWSS3Output(s3settings, H264EncoderBlock.GetDefaultSettings(), AACEncoderBlock.GetDefaultSettings(), new MP4SinkSettings() { MuxOnly = true });
                 _videoCapture.Outputs_Add(s3Output, true);
             }
+            // SRT (muxed into MPEG-TS)
+            else if (cbPlatform.SelectedIndex == 4)
+            {
+                var srtOutput = new SRTOutput(edStreamingKey.Text);
+                _videoCapture.Outputs_Add(srtOutput, true);
+            }
 
             // start
             await _videoCapture.StartAsync();

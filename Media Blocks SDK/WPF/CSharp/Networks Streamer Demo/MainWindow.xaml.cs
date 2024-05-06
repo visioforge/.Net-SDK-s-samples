@@ -259,6 +259,7 @@ namespace Networks_Streamer_Demo
                 // HLS
                 else if (cbPlatform.SelectedIndex == 5)
                 {
+                    //_srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://192.168.50.131:9001", StreamID = "streamkey1ABC", Mode = SRTConnectionMode.Caller });
                     _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
                     _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
                     _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
