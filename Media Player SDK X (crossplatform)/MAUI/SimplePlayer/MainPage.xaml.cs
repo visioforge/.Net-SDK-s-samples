@@ -12,6 +12,7 @@ using System;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core;
+using VisioForge.Core.Types.X.AudioRenderers;
 
 #if ANDROID
 using Android.Runtime;
@@ -68,7 +69,7 @@ namespace Simple_Player_MAUI
             var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
             {
-                _player.Audio_OutputDevice = audioOutputs[0];
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputs[0]);
             }            
 #endif
 

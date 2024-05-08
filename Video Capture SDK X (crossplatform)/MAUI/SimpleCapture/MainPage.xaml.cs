@@ -7,6 +7,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
@@ -298,7 +299,8 @@ namespace SimpleCapture
             }
 
             // audio output
-            _core.Audio_OutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
+            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
+            _core.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
             _core.Audio_Play = true;
 
             // video source

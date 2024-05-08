@@ -17,6 +17,7 @@ using System.Drawing.Printing;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.AudioRenderers;
 
 
 #if ANDROID
@@ -102,7 +103,7 @@ namespace SkinnedPlayer_MAUI
             var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;
             if (audioOutputs.Length > 0)
             {
-                _player.Audio_OutputDevice = audioOutputs[0];
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputs[0]);
             }
 
             pbPanel.Player = _player;
