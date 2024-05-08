@@ -28,7 +28,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _onvifDiscoveryX.OnDeviceFound += async (senderx, args) =>
             {
-                Invoke(() =>
+                Invoke((Action)(() =>
                 {
                     cbSources.Items.Add(args.Address);
 
@@ -36,7 +36,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     {
                         cbSources.SelectedIndex = 0;
                     }
-                });
+                }));
             };
             _onvifDiscoveryX.Start();
         }
