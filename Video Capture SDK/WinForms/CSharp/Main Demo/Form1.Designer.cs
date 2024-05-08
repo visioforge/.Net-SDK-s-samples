@@ -23,10 +23,10 @@ namespace VideoCapture_CSharp_Demo
                 components.Dispose();
             }
 
-            if (onvifControl != null)
+            if (onvifDevice != null)
             {
-                onvifControl.Dispose();
-                onvifControl = null;
+                onvifDevice.Dispose();
+                onvifDevice = null;
             }
 
             mpegTSSettingsDialog?.Dispose();

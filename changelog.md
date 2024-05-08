@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.29
+
+* [X-engines] Resolved issue with loopback audio source using VideoCaptureCoreX and audio capture to file
+
 ## 15.9.27
 
 * [X-engines] Added SRT source and sink support in Media Blocks SDK .Net and Video Capture SDK .Net

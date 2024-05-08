@@ -322,21 +322,35 @@ namespace Screen_Capture_X
                 if (VideoCapture1.Audio_Record)
                 {
                     IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
-
-                    var deviceName = cbAudioInputDevice.Text;
-                    var format = cbAudioInputFormat.Text;
-                    if (!string.IsNullOrEmpty(deviceName))
+                    if (rbSystemAudio.IsChecked == true)
                     {
-                        var sources = await DeviceEnumerator.Shared.AudioSourcesAsync();
-                        var device = sources.FirstOrDefault(x => x.DisplayName == deviceName);
-                        if (device != null)
+                       
+
+                        var deviceName = cbAudioInputDevice.Text;
+                        var format = cbAudioInputFormat.Text;
+                        if (!string.IsNullOrEmpty(deviceName))
                         {
-                            var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
-                            if (formatItem != null)
+                            var sources = await DeviceEnumerator.Shared.AudioSourcesAsync();
+                            var device = sources.FirstOrDefault(x => x.DisplayName == deviceName);
+                            if (device != null)
                             {
-                                audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
+                                var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
+                                if (formatItem != null)
+                                {
+                                    audioSourceSettings = device.CreateSourceSettingsVC(formatItem.ToFormat());
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        var deviceItem = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.WASAPI2)).FirstOrDefault(device => device.Name == cbAudioLoopbackDevice.Text);
+                        if (deviceItem == null)
+                        {
+                            return;
+                        }
+
+                        audioSourceSettings = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
                     }
 
                     VideoCapture1.Audio_Source = audioSourceSettings;
@@ -463,12 +477,28 @@ namespace Screen_Capture_X
                 cbScreenCaptureDisplayIndex.Items.Add(screen.DeviceName.Replace(@"\\.\DISPLAY", string.Empty));
             }
 
+            // enumerate audio sinks
+            var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
+            foreach (var sink in audioSinks)
+            {
+                if (sink.API == AudioOutputDeviceAPI.WASAPI2)
+                {
+                    cbAudioLoopbackDevice.Items.Add(sink.Name);
+
+                    if (cbAudioLoopbackDevice.Items.Count == 1)
+                    {
+                        cbAudioLoopbackDevice.SelectedIndex = 0;
+                    }
+                }
+            }
+
             cbScreenCaptureDisplayIndex.SelectedIndex = 0;
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
         }
 
-        private async void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
             {

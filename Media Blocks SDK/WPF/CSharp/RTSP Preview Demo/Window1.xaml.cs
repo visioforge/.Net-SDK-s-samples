@@ -13,6 +13,7 @@ namespace RTSP_Preview
     using System.Windows.Input;
 
     using VisioForge.Core;
+    using VisioForge.Core.ONVIFX;
     using VisioForge.Core.MediaBlocks;
     using VisioForge.Core.MediaBlocks.AudioRendering;
     using VisioForge.Core.MediaBlocks.Sources;
@@ -30,7 +31,9 @@ namespace RTSP_Preview
     {
         private Timer tmRecording = new Timer(1000);
 
-        private ONVIFControl onvifControl;
+        private ONVIFDeviceX onvifDevice;
+
+        private ONVIFDiscoveryX _onvifDiscoveryX = new ONVIFDiscoveryX();
 
         private MediaBlocksPipeline _pipeline;
 
@@ -84,11 +87,11 @@ namespace RTSP_Preview
         {
             CreateEngine();
 
-            if (onvifControl != null)
+            if (onvifDevice != null)
             {
-                onvifControl.Disconnect();
-                onvifControl.Dispose();
-                onvifControl = null;
+                onvifDevice.Disconnect();
+                onvifDevice.Dispose();
+                onvifDevice = null;
 
                 btONVIFConnect.Content = "Connect";
             }
@@ -158,11 +161,11 @@ namespace RTSP_Preview
                     btONVIFConnect.IsEnabled = false;
                     btONVIFConnect.Content = "Connecting";
 
-                    if (onvifControl != null)
+                    if (onvifDevice != null)
                     {
-                        onvifControl.Disconnect();
-                        onvifControl.Dispose();
-                        onvifControl = null;
+                        onvifDevice.Disconnect();
+                        onvifDevice.Dispose();
+                        onvifDevice = null;
                     }
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
@@ -171,23 +174,19 @@ namespace RTSP_Preview
                         return;
                     }
 
-                    onvifControl = new ONVIFControl();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    onvifDevice = new ONVIFDeviceX();
+                    var result = await onvifDevice.ConnectAsync(new Uri(edONVIFURL.Text), edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
-                        onvifControl = null;
+                        onvifDevice = null;
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
-                    var deviceInfo = await onvifControl.GetDeviceInformationAsync();
-                    if (deviceInfo != null)
-                    {
-                        lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
-                    }
+                    lbONVIFCameraInfo.Content = $"Camera name {onvifDevice.CameraName}, serial number {onvifDevice.SerialNumber}";                    
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = await onvifControl.GetProfilesAsync();
+                    var profiles = onvifDevice.GetProfiles();
                     foreach (var profile in profiles)
                     {
                         cbONVIFProfile.Items.Add($"{profile.Name}");
@@ -198,28 +197,29 @@ namespace RTSP_Preview
                         cbONVIFProfile.SelectedIndex = 0;
                     }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = await onvifControl.GetVideoURLAsync();
+                    edONVIFLiveVideoURL.Text = cbIPURL.Text = profiles[0].RTSPUrl.ToString();
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
 
                     btONVIFConnect.Content = "Disconnect";
                 }
-                finally
-                {
-                    btONVIFConnect.IsEnabled = true;
+                catch
+                {                    
                     btONVIFConnect.Content = "Connect";
                 }
+
+                btONVIFConnect.IsEnabled = true;
             }
             else
             {
                 btONVIFConnect.Content = "Connect";
 
-                if (onvifControl != null)
+                if (onvifDevice != null)
                 {
-                    onvifControl.Disconnect();
-                    onvifControl.Dispose();
-                    onvifControl = null;
+                    onvifDevice.Disconnect();
+                    onvifDevice.Dispose();
+                    onvifDevice = null;
                 }
             }
         }
@@ -249,20 +249,23 @@ namespace RTSP_Preview
             }));
         }
 
-        private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
+        private void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
 
-            var lst = await DeviceEnumerator.Shared.ONVIF_ListSourcesAsync(null, null);
-            foreach (var uri in lst)
+            _onvifDiscoveryX.OnDeviceFound += async (senderx, args) =>
             {
-                cbIPURL.Items.Add(uri);
-            }
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    cbIPURL.Items.Add(args.Address);
 
-            if (cbIPURL.Items.Count > 0)
-            {
-                cbIPURL.SelectedIndex = 0;
-            }
+                    if (cbIPURL.Items.Count == 1)
+                    {
+                        cbIPURL.SelectedIndex = 0;
+                    }
+                });
+            };
+            _onvifDiscoveryX.Start();
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -278,10 +281,10 @@ namespace RTSP_Preview
             {
                 if (disposing)
                 {
-                    if (onvifControl != null)
+                    if (onvifDevice != null)
                     {
-                        onvifControl.Dispose();
-                        onvifControl = null;
+                        onvifDevice.Dispose();
+                        onvifDevice = null;
                     }
 
                     tmRecording?.Dispose();

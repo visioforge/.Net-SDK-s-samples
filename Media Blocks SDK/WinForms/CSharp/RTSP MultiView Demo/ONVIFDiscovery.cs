@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VisioForge.Core.ONVIF.Legacy;
-using VisioForge.Core.ONVIFDiscovery;
-using VisioForge.Core.VideoCapture;
+using VisioForge.Core.ONVIFX;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
     public partial class ONVIFDiscovery : Form
     {
+        private ONVIFDiscoveryX _onvifDiscoveryX = new ONVIFDiscoveryX();
+
         public ONVIFDiscovery()
         {
             InitializeComponent();
@@ -26,46 +26,38 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         {
             cbSources.Items.Clear();
 
-            // Create a Discovery instance
-            var onvifDiscovery = new Discovery();
-
-            // Call the asynchronous method Discover with a timeout of 1 second
-            var list = await onvifDiscovery.Discover(2);
-            foreach (var item in list)
+            _onvifDiscoveryX.OnDeviceFound += async (senderx, args) =>
             {
-                if (item.XAdresses.Any())
+                Invoke(() =>
                 {
-                    cbSources.Items.Add(item.XAdresses.FirstOrDefault());
-                }
-            }
+                    cbSources.Items.Add(args.Address);
 
-            if (cbSources.Items.Count > 0)
-            {
-                cbSources.SelectedIndex = 0;
-            }
+                    if (cbSources.Items.Count == 1)
+                    {
+                        cbSources.SelectedIndex = 0;
+                    }
+                });
+            };
+            _onvifDiscoveryX.Start();
         }
 
         private async void btReadProfiles_Click(object sender, EventArgs e)
         {
-            var onvifControl = new ONVIFControl();
-            var result = await onvifControl.ConnectAsync(cbSources.Text, edUsername.Text, edPassword.Text);
+            var onvifDevice = new ONVIFDeviceX();
+            var result = await onvifDevice.ConnectAsync(cbSources.Text, edUsername.Text, edPassword.Text);
             if (!result)
             {
                 MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                 return;
             }
 
-            var deviceInfo = await onvifControl.GetDeviceInformationAsync();
-            if (deviceInfo != null)
-            {
-                Debug.WriteLine($"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}");
-            }
-
+            Debug.WriteLine($"Name {onvifDevice.Model}, s/n {onvifDevice.SerialNumber}");
+            
             cbProfiles.Items.Clear();
-            var profiles = await onvifControl.GetProfilesAsync();
+            var profiles = onvifDevice.GetProfiles();
             for (int i = 0; i < profiles.Length; i++)
             {
-                var url = await onvifControl.GetVideoURLAsync(i);
+                var url = profiles[i].RTSPUrl;
                 cbProfiles.Items.Add(url);
                 Debug.WriteLine($"{profiles[i].Name} {url}");
             }

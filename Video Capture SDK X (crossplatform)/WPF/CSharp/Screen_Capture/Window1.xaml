@@ -8,8 +8,6 @@
         <TabControl Margin="10,10,0,0" x:Name="tcMain" HorizontalAlignment="Left" Width="347" Height="437" VerticalAlignment="Top">
             <TabItem Header="Input" IsSelected="True" Name="tabPage1">
                 <Grid>
-                    <Label HorizontalAlignment="Left" Margin="12,279,0,0" VerticalAlignment="Top" Width="120">Audio input device</Label>
-                    <ComboBox Margin="12,300,0,0" Name="cbAudioInputDevice" VerticalAlignment="Top" SelectionChanged="cbAudioInputDevice_SelectionChanged" HorizontalAlignment="Left" Width="321" />
                     <RadioButton HorizontalAlignment="Left" Margin="12,15,0,0" Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True">Full Screen</RadioButton>
                     <RadioButton HorizontalAlignment="Left" Margin="12,41,0,0" Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89">Custom Area</RadioButton>
                     <Label Margin="138,10,26,0" VerticalAlignment="Top">You can update left/top position</Label>
@@ -27,12 +25,20 @@
                     <Label HorizontalAlignment="Left" Margin="32,153,0,0" Width="67" VerticalAlignment="Top">Frame rate</Label>
                     <Label Margin="149,153,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="47">fps</Label>
                     <Button HorizontalAlignment="Left" Margin="235,62,0,0" Name="btScreenCaptureUpdate" Width="75" VerticalAlignment="Top" Click="btScreenCaptureUpdate_Click">Update</Button>
-                    <CheckBox HorizontalAlignment="Left" Margin="12,231,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
-                    <CheckBox HorizontalAlignment="Left" Margin="12,252,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="131" Content="Record audio"/>
-                    <Label Margin="12,323,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76">Input format</Label>
-                    <ComboBox Margin="12,346,0,0" Name="cbAudioInputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177" />
+                    <CheckBox HorizontalAlignment="Left" Margin="170,192,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
+                    <CheckBox HorizontalAlignment="Left" Margin="12,219,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="131" Content="Record audio"/>
                     <ComboBox HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
                     <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,186,0,0" VerticalAlignment="Top" />
+
+                    <StackPanel Orientation="Vertical" Margin="12,251,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <RadioButton Name="rbSystemAudio" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Audio input device" IsChecked="True" />
+                        <ComboBox Name="cbAudioInputDevice" Margin="10,5,0,0" Width="305" SelectionChanged="cbAudioInputDevice_SelectedIndexChanged" HorizontalAlignment="Left" />
+                        <Label VerticalAlignment="Top" Margin="10,0,0,0" HorizontalAlignment="Left">Format</Label>
+                        <ComboBox Name="cbAudioInputFormat" Margin="10,0,0,0" StaysOpenOnEdit="True" HorizontalAlignment="Left" Width="305" />
+
+                        <RadioButton Name="rbLoopback" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Left" Content="Loopback capture from output device" />
+                        <ComboBox Name="cbAudioLoopbackDevice" Margin="10,5,0,0" Width="305" HorizontalAlignment="Left" />
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Output" IsSelected="True">

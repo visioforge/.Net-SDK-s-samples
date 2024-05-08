@@ -24,9 +24,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.Helpers;
     using System.Threading.Tasks;
-    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.ONVIFDiscovery.Models;
     using System.Linq;
+    using VisioForge.Core.ONVIFX;
 
     public partial class Form1 : Form
     {
@@ -51,15 +51,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
-        private ONVIFControl onvifControl;
-
-        private ONVIFPTZRanges onvifPtzRanges;
-
-        private float onvifPtzX;
-
-        private float onvifPtzY;
-
-        private float onvifPtzZoom;
+        private ONVIFDeviceX onvifDeviceX;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
@@ -117,11 +109,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
         private async void btStart_Click(object sender, EventArgs e)
         {
-            if (onvifControl != null)
+            if (onvifDeviceX != null)
             {
-                onvifControl.Disconnect();
-                onvifControl.Dispose();
-                onvifControl = null;
+                onvifDeviceX.Disconnect();
+                onvifDeviceX.Dispose();
+                onvifDeviceX = null;
 
                 btONVIFConnect.Text = "Connect";
             }
@@ -338,11 +330,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     btONVIFConnect.Enabled = false;
                     btONVIFConnect.Text = "Connecting";
 
-                    if (onvifControl != null)
+                    if (onvifDeviceX != null)
                     {
-                        onvifControl.Disconnect();
-                        onvifControl.Dispose();
-                        onvifControl = null;
+                        onvifDeviceX.Disconnect();
+                        onvifDeviceX.Dispose();
+                        onvifDeviceX = null;
                     }
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
@@ -351,23 +343,19 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                         return;
                     }
 
-                    onvifControl = new ONVIFControl();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    onvifDeviceX = new ONVIFDeviceX();
+                    var result = await onvifDeviceX.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
-                        onvifControl = null;
+                        onvifDeviceX = null;
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
-                    var deviceInfo = await onvifControl.GetDeviceInformationAsync();
-                    if (deviceInfo != null)
-                    {
-                        lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
-                    }
+                    lbONVIFCameraInfo.Text = $"Model {onvifDeviceX.CameraName}, Serial number {onvifDeviceX.SerialNumber}";
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = await onvifControl.GetProfilesAsync();
+                    var profiles = onvifDeviceX.GetProfiles();
                     foreach (var profile in profiles)
                     {
                         cbONVIFProfile.Items.Add($"{profile.Name}");
@@ -378,17 +366,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                         cbONVIFProfile.SelectedIndex = 0;
                     }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = await onvifControl.GetVideoURLAsync();
+                    edONVIFLiveVideoURL.Text = cbIPURL.Text = profiles[0].RTSPUrl.ToString();
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
-
-                    onvifPtzRanges = await onvifControl.PTZ_GetRangesAsync();
-                    await onvifControl.PTZ_SetAbsoluteAsync(0, 0, 0);
-
-                    onvifPtzX = 0;
-                    onvifPtzY = 0;
-                    onvifPtzZoom = 0;
 
                     btONVIFConnect.Text = "Disconnect";
                 }
@@ -402,131 +383,84 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             {
                 btONVIFConnect.Text = "Connect";
 
-                if (onvifControl != null)
+                if (onvifDeviceX != null)
                 {
-                    onvifControl.Disconnect();
-                    onvifControl.Dispose();
-                    onvifControl = null;
+                    onvifDeviceX.Disconnect();
+                    onvifDeviceX.Dispose();
+                    onvifDeviceX = null;
                 }
             }
         }
 
         private void cbONVIFProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            edONVIFLiveVideoURL.Text = cbIPURL.Text = onvifControl?.GetVideoURL(cbONVIFProfile.SelectedIndex);
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
+            {
+                return;
+            }
+
+            var profiles = onvifDeviceX.GetProfiles();
+            edONVIFLiveVideoURL.Text = cbIPURL.Text = profiles[cbONVIFProfile.SelectedIndex].RTSPUrl.ToString();
         }
 
         private void btONVIFRight_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
             {
                 return;
             }
 
-            var step = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30;
-            onvifPtzX = onvifPtzX - step;
-
-            if (onvifPtzX < onvifPtzRanges.MinX)
-            {
-                onvifPtzX = onvifPtzRanges.MinX;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(0.5f, 0, 0);
         }
 
         private void btONVIFPTZSetDefault_Click(object sender, EventArgs e)
         {
-            onvifControl?.PTZ_SetAbsolute(0, 0, 0);
+            onvifDeviceX?.PTZ_GoHome();
         }
 
         private void btONVIFLeft_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30;
-            onvifPtzX = onvifPtzX + step;
-
-            if (onvifPtzX > onvifPtzRanges.MaxX)
-            {
-                onvifPtzX = onvifPtzRanges.MaxX;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(-0.5f, 0, 0);
         }
 
         private void btONVIFUp_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
-            {
-                return;
-            }
-
-            float step = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30;
-            onvifPtzY = onvifPtzY - step;
-
-            if (onvifPtzY < onvifPtzRanges.MinY)
-            {
-                onvifPtzY = onvifPtzRanges.MinY;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(0, 0.5f, 0);
         }
 
         private void btONVIFDown_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30;
-            onvifPtzY = onvifPtzY + step;
-
-            if (onvifPtzY > onvifPtzRanges.MaxY)
-            {
-                onvifPtzY = onvifPtzRanges.MaxY;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(0, -0.5f, 0);
         }
 
         private void btONVIFZoomIn_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100;
-            onvifPtzZoom = onvifPtzZoom + step;
-
-            if (onvifPtzZoom > onvifPtzRanges.MaxZoom)
-            {
-                onvifPtzZoom = onvifPtzRanges.MaxZoom;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(0, 0, 0.5f);
         }
 
         private void btONVIFZoomOut_Click(object sender, EventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifDeviceX == null || !onvifDeviceX.IsConnected())
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100;
-            onvifPtzZoom = onvifPtzZoom - step;
-
-            if (onvifPtzZoom < onvifPtzRanges.MinZoom)
-            {
-                onvifPtzZoom = onvifPtzRanges.MinZoom;
-            }
-
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            onvifDeviceX.PTZ_Move(0, 0, -0.5f);
         }
 
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
