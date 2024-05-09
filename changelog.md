@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.31
+
+* [Windows] Resolved FFMPEG stability issues
+
 ## 15.9.29
 
 * [X-engines] Resolved issue with loopback audio source using VideoCaptureCoreX and audio capture to file
