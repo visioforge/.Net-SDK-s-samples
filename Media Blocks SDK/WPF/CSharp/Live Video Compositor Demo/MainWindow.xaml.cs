@@ -238,73 +238,13 @@ namespace Live_Video_Compositor_Demo
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            //string test_stream_mixer_input = "test_stream_mixer_input";
-            //string test_stream_mixer_output = "test_stream_mixer_output";
-
-            //var sourcePipeline = new MediaBlocksPipeline(live: true, name: "Source");
-
-            //Gst.Debug.SetDefaultThreshold(Gst.DebugLevel.Debug);
-            ////Gst.Debug.AddLogFunction((category, level, file, function, line, _object, message) =>
-            ////{
-            ////    Debug.WriteLine($"Gst: {level} {message}");
-            ////});
-
-            //var videoSource = new VirtualVideoSourceBlock(new VirtualVideoSourceSettings());
-            //var videoInfo = new VideoFrameInfoX(videoSource.Settings.Width, videoSource.Settings.Height, videoSource.Settings.Format, videoSource.Settings.FrameRate);
-
-            //var sourceBridgeSink = new BridgeVideoSinkBlock(new VisioForge.Core.Types.X.Bridge.BridgeVideoSinkSettings(test_stream_mixer_input, videoInfo));
-            //sourcePipeline.Connect(videoSource.Output, sourceBridgeSink.Input);
-
-            //var mainPipeline = new MediaBlocksPipeline(live: true, name: "Main");
-            //var mixerBridgeSource = new BridgeVideoSourceBlock(new VisioForge.Core.Types.X.Bridge.BridgeVideoSourceSettings(test_stream_mixer_input, videoInfo));
-
-            //var mixerSettings = new VideoMixerSettings(1920, 1080, VideoFrameRate.FPS_30);
-            //mixerSettings.AddStream(new VideoMixerStream(new Rect(0, 0, 640, 480), 0));
-            //var videoMixer = new VideoMixerBlock(mixerSettings);
-            ////var mixerBridgeSink = new InterPipeSinkBlock(test_stream_mixer_output);
-
-            ////var videoMixer = new CustomMediaBlock(new VisioForge.Core.Types.X.Special.CustomMediaBlockSettings("videomixer"));
-            ////videoMixer.OnElementAdded += (sender, args) =>
-            ////{
-            ////    var pad = videoMixer.GetElement().GetRequestPad("sink_%u");
-            ////    videoMixer.Inputs[0].SetInternalPad(pad);
-            ////};           
-
-            //var videoConvert = new VideoConverterBlock();
-            //mainPipeline.Connect(mixerBridgeSource.Output, videoConvert.Input);
-            //mainPipeline.Connect(videoConvert.Output, videoMixer.Inputs[0]);
-
-            ////var nullRenderer = new NullRendererBlock();
-            ////mainPipeline.Connect(videoMixer.Output, nullRenderer.Input);
-
-            //var videoRenderer = new VideoRendererBlock(mainPipeline, VideoView1);
-            //mainPipeline.Connect(videoMixer.Output, videoRenderer.Input);
-            ////  mainPipeline.Connect(videoMixer.Output, mixerBridgeSink.Input);
-
-            ////var renderPipeline = new MediaBlocksPipeline();
-            ////var bridgeSource = new InterPipeSourceBlock(test_stream_mixer_output);
-            ////var videoRenderer = new VideoRendererBlock(renderPipeline, VideoView1);
-            ////renderPipeline.Connect(bridgeSource, videoRenderer);
-
-            //await sourcePipeline.StartAsync();
-
-            //mainPipeline.Debug_Dir = @"c:\vf\";
-            //mainPipeline.Debug_Mode = true;
-
-            //await mainPipeline.StartAsync();
-            //await renderPipeline.StartAsync();
-
             // add video renderer
             await AddVideoRendererAsync();
 
             // add audio renderer
             await AddAudioRendererAsync();
 
-            //await AddVideoVirtualAsync();
-
             await _compositor.StartAsync();
-
-            //_pipeline.SavePipeline("compositor");
 
             tmRecording.Start();
         }
@@ -334,8 +274,30 @@ namespace Live_Video_Compositor_Demo
                     Convert.ToInt32(edRectBottom.Text));
 
                 var stream = _compositor.Input_VideoStream_Get(index);
-                stream.Rectangle = rect;
-                _compositor.Input_VideoStream_Update(index, stream);
+
+                if (stream != null)
+                {
+                    // we have playback started and can change the rect
+                    stream.Rectangle = rect;
+                    _compositor.Input_VideoStream_Update(index, stream);
+                }
+                else
+                {
+                    // we have playback stopped and can change the rect
+                    var input = _compositor.Input_Get(index);
+                    if (input is LVCVideoAudioInput vai)
+                    {
+                        vai.Rectangle = rect;
+                    }
+                    else if (input is LVCVideoInput vi)
+                    {
+                        vi.Rectangle = rect;
+                    }
+                    else if (input is LVCFileVideoAudioInput fvai)
+                    {
+                        fvai.Rectangle = rect;
+                    }
+                }
             }
         }
 
