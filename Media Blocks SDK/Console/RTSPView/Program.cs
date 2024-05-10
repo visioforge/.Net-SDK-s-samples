@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.ONVIFX;
 using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPView
@@ -10,7 +12,7 @@ namespace RTSPView
     internal class Program
     {      
         static void Main(string[] args)
-        {
+        {        
             if (args.Length != 3)
             {
                 Console.WriteLine("RTSPView sample.");
@@ -29,7 +31,7 @@ namespace RTSPView
             _pipeline = new MediaBlocksPipeline(true);
             _pipeline.OnError += _pipeline_OnError;
 
-            string url = args[0]; 
+            string url = args[0];
             string username = args[1];
             string password = args[2];
 

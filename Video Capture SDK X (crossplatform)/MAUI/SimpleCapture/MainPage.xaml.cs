@@ -312,7 +312,7 @@ namespace SimpleCapture
                 var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.VideoFormats.Find(x => x.Width == 1920);
+                    var formatItem = device.GetHDVideoFormatAndFrameRate(out var frameRate);
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
@@ -320,7 +320,7 @@ namespace SimpleCapture
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
+                        videoSourceSettings.Format.FrameRate = frameRate;
                     }
                 }
             }
@@ -352,7 +352,7 @@ namespace SimpleCapture
             _core.Audio_Record = true;
 
             _core.Outputs_Clear();
-            _core.Outputs_Add(new MP4Output(GenerateFilename(), H264EncoderBlock.GetDefaultSettings(), new OPUSEncoderSettings()), false);
+            _core.Outputs_Add(new MP4Output(GenerateFilename(), H264EncoderBlock.GetDefaultSettings(), new MP3EncoderSettings()), false);
 
             // start
             await _core.StartAsync();
@@ -367,7 +367,7 @@ namespace SimpleCapture
 #if __ANDROID__
             return Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
         }
 
@@ -385,6 +385,7 @@ namespace SimpleCapture
                         await StopAllAsync();
 
                         btStartPreview.Text = "PREVIEW";
+                        btStartCapture.IsEnabled = false;
                     }
 
                     break;
@@ -396,6 +397,7 @@ namespace SimpleCapture
                         }
 
                         await StartPreview();
+                        btStartCapture.IsEnabled = true;
                     }
 
                     break;

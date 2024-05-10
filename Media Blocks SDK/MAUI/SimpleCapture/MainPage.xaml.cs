@@ -351,7 +351,7 @@ namespace SimpleCapture
                 var device = _cameras.FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.VideoFormats.Find(x => (x.Width == 1920 && x.Height == 1440));
+                    var formatItem = device.GetHDVideoFormatAndFrameRate(out var frameRate);
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
@@ -359,8 +359,7 @@ namespace SimpleCapture
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
-                        ;
+                        videoSourceSettings.Format.FrameRate = frameRate;
                     }
                 }
             }
@@ -435,7 +434,7 @@ namespace SimpleCapture
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
             var filename =
- Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+ Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
 
             var sinkSettings = new MP4SinkSettings(filename);

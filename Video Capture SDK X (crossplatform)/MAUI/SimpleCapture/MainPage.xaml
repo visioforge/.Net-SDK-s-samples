@@ -55,6 +55,7 @@
                         x:Name="btStartCapture"   
                         Text="CAPTURE" 
                         Margin="5" 
+                        IsEnabled="False"
                         Clicked="btStartCapture_Clicked"
                         MinimumWidthRequest="100" />
                 </StackLayout>
