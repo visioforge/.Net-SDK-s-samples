@@ -13,6 +13,12 @@ Furthermore, the application features error management within the media pipeline
 
 - Play video from SRT source
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [SRTSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SRTSourceBlock/) - reads and decodes video/audio from an SRT source
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+
 ## Supported frameworks
 
 - .Net 4.7.2

@@ -6,6 +6,11 @@ GenICam Source Demo is an application that uses the Media Blocks SDK .Net to pre
 
 - Play video from GenICam source
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [GenICamSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/GenICamSourceBlock/) - captures video from GenICam source
+
 ## Supported frameworks
 
 - .Net 4.7.2

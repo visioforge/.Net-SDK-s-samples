@@ -204,7 +204,7 @@ namespace IP_Capture
                             uri = new UriBuilder(uri) { UserName = login, Password = password }.Uri;
                         }
 
-                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio);
+                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio, ignoreMediaInfoReader: true);
 
                         VideoCapture1.Video_Source = uni;
                     }
@@ -220,13 +220,21 @@ namespace IP_Capture
                     break;
                 case 2:
                     {
+                        // HTTP MJPEG
+                        var mjpeg = await HTTPMJPEGSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text);
+                        VideoCapture1.Video_Source = mjpeg;
+                    }
+
+                    break;
+                case 3:
+                    {
                         // NDI URL
                         var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), null, cbIPURL.Text);
                         VideoCapture1.Video_Source = ndiSettings;
                     }
 
                     break;
-                case 3:
+                case 4:
                     {
                         // NDI Name
                         var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), cbIPURL.Text, null);
@@ -234,7 +242,7 @@ namespace IP_Capture
                     }
 
                     break;
-                case 4:
+                case 5:
                     {
                         // SRT
                         var srt = await SRTSourceSettings.CreateAsync(cbIPURL.Text);

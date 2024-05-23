@@ -7,6 +7,13 @@ This SDK sample demonstrates the implementation of a live face detection and blu
 - Face detection
 - Video preview
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [SystemVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemVideoSourceBlock/) - captures video from a video capture device
+- `CVFaceDetectBlock` - detects faces in video frames
+- `CVFaceBlurBlock` - blurs detected faces in video frames
+
 ## Supported frameworks
 
 - .Net 4.7.2

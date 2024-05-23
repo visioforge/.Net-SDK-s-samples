@@ -6,6 +6,13 @@ The sample demonstrates the use of the VisioForge Media Blocks SDK to build a cu
 
 - Play media files from memory
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+- `StreamSourceBlock` - reads media from memory
+- `DecodeBinBlock` - decodes media files
+
 ## Supported frameworks
 
 - .Net 4.7.2

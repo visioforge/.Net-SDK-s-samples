@@ -330,8 +330,8 @@ namespace Decklink_MB_Demo
 
             var format = DNxHDEncoderSettings.GetFormatByResolution(width, height);
 
-            var vpxSettings = new DNxHDEncoderSettings(format);
-            _videoEncoder = new DNxHDEncoderBlock(vpxSettings);
+            var dnxSettings = new DNxHDEncoderSettings(format);
+            _videoEncoder = new DNxHDEncoderBlock(dnxSettings);
 
             _audioEncoder = new AudioConverterBlock();
 

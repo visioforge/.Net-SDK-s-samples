@@ -14,6 +14,21 @@ The application allows users to select their input devices, configure source set
 - Video streaming to AWS S3 bucket
 - Video preview
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+- [SystemVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemVideoSourceBlock/) - captures video from a device
+- [SystemAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemAudioSourceBlock/) - captures audio from a device
+- [YouTubeSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/YouTubeSinkBlock/) - streams video to YouTube
+- [FacebookLiveSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/FacebookLiveSinkBlock/) - streams video to Facebook Live
+- `AWSS3SinkBlock` - streams video to AWS S3 bucket
+- [MP4SinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/MP4SinkBlock/) - saves video to an MP4 file
+- [HTTPMJPEGLiveSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/HTTPMJPEGLiveSinkBlock/) - streams video using the MJPEG over HTTP protocol
+- [HLSSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/HLSSinkBlock/) - streams video using the HLS protocol
+- [SRTMPEGTSSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/SRTMPEGTSSinkBlock/) - streams video using the SRT protocol with MPEG-TS muxer
+- [H264EncoderBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoEncoders/H264EncoderBlock/) - encodes video using H.264
+
 ## Supported frameworks
 
 - .Net 4.7.2

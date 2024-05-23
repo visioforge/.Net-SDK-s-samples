@@ -8,6 +8,12 @@ The provided code snippet outlines the implementation of a simple media player u
 - Play network streams
 - Seeking
 
+## Used blocks
+
+- [UniversalSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/UniversalSourceBlock/) - decodes media files
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+
 ## Supported frameworks
 
 - .Net 4.7.2

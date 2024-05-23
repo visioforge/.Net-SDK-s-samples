@@ -6,6 +6,16 @@ The HLS Streamer app, built using VisioForge's Media Blocks SDK, showcases a str
 
 - HLS streaming
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+- [HLSSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/HLSSinkBlock/) - streams video using the HLS protocol
+- [H264EncoderBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoEncoders/H264EncoderBlock/) - encodes a video stream using H264
+- [AACEncoderBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioEncoders/AACEncoderBlock/) - encodes an audio stream using AAC
+- [VirtualVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/VirtualVideoSourceBlock/) - generates a video stream
+- [VirtualAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/VirtualAudioSourceBlock/) - generates an audio stream
+
 ## Supported frameworks
 
 - .Net 4.7.2

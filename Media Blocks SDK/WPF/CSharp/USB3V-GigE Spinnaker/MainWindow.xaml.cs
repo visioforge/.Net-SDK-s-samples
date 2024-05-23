@@ -24,7 +24,7 @@ namespace USB3V_GigE_Spinnaker
 
         private VideoRendererBlock _videoRenderer;
 
-        private MediaBlock _source;
+        private SpinnakerSourceBlock _source;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 

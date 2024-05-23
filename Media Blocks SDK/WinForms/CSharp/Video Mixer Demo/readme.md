@@ -7,6 +7,13 @@ The provided SDK sample showcases the implementation of a video mixing applicati
 - Play multiple video streams from video files
 - Mix video streams using CPU or GPU
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [VideoMixerBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoProcessing/VideoMixerBlock/) - mixes video streams
+- [NullRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Special/NullRendererBlock/) - discards video and audio data
+- [UniversalSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/UniversalSourceBlock/) - reads video files
+
 ## Supported frameworks
 
 - .Net 4.7.2

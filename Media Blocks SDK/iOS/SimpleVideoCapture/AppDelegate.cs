@@ -122,7 +122,7 @@ public class AppDelegate : UIApplicationDelegate {
                     Format = formatItem.ToFormat()
                 };
 
-                videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
+                videoSourceSettings.Format.FrameRate = new VideoFrameRate(60);
             }
         }
 

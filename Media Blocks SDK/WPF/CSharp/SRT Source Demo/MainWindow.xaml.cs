@@ -26,9 +26,7 @@ namespace SRT_Source_Demo
         private VideoRendererBlock _videoRenderer;
 
         private AudioRendererBlock _audioRenderer;
-
-        //private DecodeBinBlock _decodeBin;
-
+        
         private SRTSourceBlock _source;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);

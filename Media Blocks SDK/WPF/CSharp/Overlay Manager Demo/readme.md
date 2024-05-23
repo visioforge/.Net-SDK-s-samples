@@ -7,6 +7,13 @@ This SDK sample demonstrates how to create a multimedia application using the Vi
 - Play media files
 - Add overlays to the video
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+- [UniversalSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/UniversalSourceBlock/) - decodes media files
+- `OverlayManagerBlock` - manages overlays
+
 ## Supported frameworks
 
 - .Net 4.7.2

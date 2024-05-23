@@ -6,6 +6,12 @@ The provided sample demonstrates how to build an application using the VisioForg
 
 - Play video from the network MJPEG source
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [HTTPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/HTTPSourceBlock/) - reads HTTP data from the network
+- `JPEGDecoderBlock` - decodes JPEG frames
+
 ## Supported frameworks
 
 - .Net 4.7.2

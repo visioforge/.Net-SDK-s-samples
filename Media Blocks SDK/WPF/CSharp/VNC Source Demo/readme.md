@@ -10,6 +10,11 @@ Additionally, the application incorporates error handling within the media pipel
 
 - Play video from VNC/RFB source
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- `VNCSourceBlock` - reads and decodes video/audio from a VNC/RFB source
+
 ## Supported frameworks
 
 - .Net 4.7.2

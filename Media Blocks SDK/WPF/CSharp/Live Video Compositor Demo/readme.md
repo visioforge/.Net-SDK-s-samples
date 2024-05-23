@@ -9,6 +9,12 @@ This SDK sample demonstrates the use of the Live Video Compositor (part of Media
 - Video and audio mixing
 - Video preview
 
+## Used blocks
+
+- [LiveVideoCompositor](https://www.visioforge.com/help/docs/dotnet/mediablocks/LiveVideoCompositor/) - composes video and audio sources using one pipeline
+- [LVCVideoViewOutput](https://www.visioforge.com/help/docs/dotnet/mediablocks/LiveVideoCompositor/LVCVideoViewOutput/) - displays video output
+- [LVCAudioOutput](https://www.visioforge.com/help/docs/dotnet/mediablocks/LiveVideoCompositor/LVCAudioOutput/) - outputs audio
+
 ## Supported frameworks
 
 - .Net 4.7.2

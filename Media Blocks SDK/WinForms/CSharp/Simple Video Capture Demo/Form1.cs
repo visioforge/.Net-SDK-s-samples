@@ -207,8 +207,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
 
             // create video sample grabber
-               _videoSampleGrabberSink = new VideoSampleGrabberBlock();
-              _videoSampleGrabberSink.OnVideoFrameBuffer += _videoSampleGrabber_OnVideoFrameBuffer;
+            _videoSampleGrabberSink = new VideoSampleGrabberBlock();
+            _videoSampleGrabberSink.OnVideoFrameBuffer += _videoSampleGrabber_OnVideoFrameBuffer;
 
             // audio sample grabber
             _audioSampleGrabberSink = new AudioSampleGrabberBlock();

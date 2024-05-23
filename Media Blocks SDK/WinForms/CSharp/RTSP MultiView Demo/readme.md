@@ -9,6 +9,12 @@ This SDK sample demonstrates how to create a multi-view RTSP streaming applicati
 - Capture reencoded streams to disk
 - RAW video and audio frames access
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video frames
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio frames
+- [RTSPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/RTSPSourceBlock/) - reads RTSP streams
+
 ## Supported frameworks
 
 - .Net 4.7.2

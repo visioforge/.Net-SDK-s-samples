@@ -9,6 +9,19 @@ It also illustrates how to configure output streams for different platforms, inc
 - Video mixing of several video sources
 - Video preview
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+- [MP4OutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/MP4SinkBlock/) - saves video to an MP4 file
+- [YouTubeOutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/YouTubeSinkBlock/) - streams video to YouTube
+- [FacebookLiveOutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/FacebookLiveSinkBlock/) - streams video to Facebook Live
+- [SystemVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemVideoSourceBlock/) - captures video from a device
+- [SystemAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemAudioSourceBlock/) - captures audio from a device
+- [NDISinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/NDISinkBlock/) - sends video using NDI
+- [VideoMixerBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoProcessing/VideoMixerBlock/) - mixes video streams
+- [VirtualAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/VirtualAudioSourceBlock/) - creates an audio source
+  
 ## Supported frameworks
 
 - .Net 4.7.2

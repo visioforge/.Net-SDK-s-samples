@@ -6,6 +6,11 @@ This SDK sample demonstrates how to build an RTSP client for Android using the V
 
 - Play RTSP streams
 
+## Used blocks
+
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [RTSPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/RTSPSourceBlock/) - captures video from an RTSP stream
+
 ## Supported frameworks
 
 - .Net 4.7.2

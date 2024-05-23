@@ -7,6 +7,12 @@ The sample project demonstrates the capabilities of the VisioForge Media Blocks 
 - Play media files
 - Play network streams
 
+## Used blocks
+
+- [UniversalSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/UniversalSourceBlock/) - decodes media files
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+
 ## Supported frameworks
 
 - .Net 4.7.2

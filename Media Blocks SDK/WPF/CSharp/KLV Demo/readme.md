@@ -6,6 +6,12 @@ This SDK sample demonstrates the integration and usage of the VisioForge Media B
 
 - Demux and mux KLV data into MPEG-TS files
 
+## Used blocks
+
+- `BasicFileSourceBlock` - reads data from a file without decoding
+- `MPEGTSDemuxBlock` - demultiplexes MPEG-TS streams
+- `KLVFileSinkBlock` - writes KLV data to a file
+
 ## Supported frameworks
 
 - .Net 4.7.2

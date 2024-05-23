@@ -6,6 +6,11 @@ Spinnaker Source Demo is an application that uses the Media Blocks SDK .Net to p
 
 - Play video from Spinnaker SDK-supported source
 
+## Used blocks
+
+- `SpinnakerSourceBlock` - captures video from a Spinnaker SDK-supported source
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
+
 ## Supported frameworks
 
 - .Net 4.7.2

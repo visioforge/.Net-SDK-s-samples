@@ -21,6 +21,7 @@
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="71,70,0,0" Name="cbIPCameraType" VerticalAlignment="Top" Width="264">
                                     <ComboBoxItem Content="Auto" />
                                     <ComboBoxItem Content="RTSP" />
+                                    <ComboBoxItem Content="HTTP MJPEG" />
                                     <ComboBoxItem Content="NDI (URL)" />
                                     <ComboBoxItem Content="NDI (Name)" />
                                     <ComboBoxItem Content="SRT" />
