@@ -1,0 +1,17 @@
+﻿<Window x:Class="Bridge_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bridge_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Bridge Demo" Height="354" Width="391" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Label x:Name="label" Content="Output file" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="26"/>
+        <TextBox x:Name="edFilename" Margin="15,268,0,0" TextWrapping="Wrap" Text="C:\samples\!video.webm" VerticalAlignment="Top" HorizontalAlignment="Left" Width="330"/>
+        <wpf:VideoView x:Name="VideoView1" Margin="10,10,0,0" Height="223" VerticalAlignment="Top" HorizontalAlignment="Left" Width="360"/>
+        <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="350,267,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="15,291,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="72,291,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click"/>
+    </Grid>
+</Window>

@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP Preview Demo MB WPF ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRT Source Demo net7", "WPF\CSharp\SRT Source Demo\SRT Source Demo net7.csproj", "{967F7881-4438-46AE-A86C-ADAD317EC33F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bridge Demo net7", "WPF\CSharp\Bridge Demo\Bridge Demo net7.csproj", "{FF0EAE82-16B2-4525-B6E6-8FD69369F455}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{967F7881-4438-46AE-A86C-ADAD317EC33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{967F7881-4438-46AE-A86C-ADAD317EC33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{967F7881-4438-46AE-A86C-ADAD317EC33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0EAE82-16B2-4525-B6E6-8FD69369F455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0EAE82-16B2-4525-B6E6-8FD69369F455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0EAE82-16B2-4525-B6E6-8FD69369F455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0EAE82-16B2-4525-B6E6-8FD69369F455}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -221,6 +227,7 @@ Global
 		{EBE1D124-6C59-4A47-BDBB-882AF5FFE58F} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{93BCB93A-DA0B-473C-8BA4-DCA55A6005E5} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{967F7881-4438-46AE-A86C-ADAD317EC33F} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{FF0EAE82-16B2-4525-B6E6-8FD69369F455} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
