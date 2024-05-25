@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.40" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -83,8 +83,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.39" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.40" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

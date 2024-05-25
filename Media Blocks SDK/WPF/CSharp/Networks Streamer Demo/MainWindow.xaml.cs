@@ -256,7 +256,7 @@ namespace Networks_Streamer_Demo
                     // connect
                     _pipeline.Connect(_mp4Sink.Output, _awsS3Sink.Input);
                 }
-                // HLS
+                // SRT
                 else if (cbPlatform.SelectedIndex == 5)
                 {
                     //_srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://192.168.50.131:9001", StreamID = "streamkey1ABC", Mode = SRTConnectionMode.Caller });

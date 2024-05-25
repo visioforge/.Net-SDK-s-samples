@@ -84,7 +84,6 @@ namespace SRT_Source_Demo
 
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            //var settings = new SRTSourceSettings(edURL.Text);
             var settings = await SRTSourceSettings.CreateAsync(edURL.Text);
             _source = new SRTSourceBlock(settings);
 
@@ -114,8 +113,6 @@ namespace SRT_Source_Demo
             }
 
             await _pipeline.StartAsync();
-
-            //_pipeline.SavePipeline("ndi_source");
 
             tmRecording.Start();
         }

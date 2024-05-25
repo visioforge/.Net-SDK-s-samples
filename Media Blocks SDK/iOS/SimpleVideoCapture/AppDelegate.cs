@@ -1,11 +1,9 @@
 ﻿using Photos;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-
 using VisioForge.Core;
-using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
+using VisioForge.Core.MediaBlocks.AudioProcessing;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
@@ -14,13 +12,15 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.UI.Apple;
 
-namespace SimpleVideoCapture;
+namespace SimpleVideoCaptureMB;
 
 [Register ("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate {
@@ -30,8 +30,6 @@ public class AppDelegate : UIApplicationDelegate {
     private string _filename;
 
     private MediaBlock _videoRenderer;
-
-    private MediaBlock _audioRenderer;
 
     private MediaBlock _videoSource;
 
@@ -44,8 +42,6 @@ public class AppDelegate : UIApplicationDelegate {
     private MediaBlock _sink;
 
     private TeeBlock _videoTee;
-
-    private TeeBlock _audioTee;
 
     private int _cameraIndex = 0;
 
@@ -64,10 +60,10 @@ public class AppDelegate : UIApplicationDelegate {
         if (residualView != null)
             residualView.RemoveFromSuperview();
 
-        var viewBack = new UIView(new CoreGraphics.CGRect(83, 0, 300, 100));
+        var viewBack = new UIView(new CGRect(83, 0, 300, 100));
         viewBack.BackgroundColor = UIColor.Black;
         viewBack.Tag = 1989;
-        UILabel lblMsg = new UILabel(new CoreGraphics.CGRect(0, 20, 300, 60));
+        UILabel lblMsg = new UILabel(new CGRect(0, 20, 300, 60));
         lblMsg.Lines = 2;
         lblMsg.Text = message;
         lblMsg.TextColor = UIColor.White;
@@ -97,41 +93,41 @@ public class AppDelegate : UIApplicationDelegate {
         {
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
         }
-
+        
         if (_cameras.Length == 0)
         {
             ShowToast(Window, "No video sources found");
             return;
         }
-
+        
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
+        
         if (_cameraIndex >= _cameras.Length)
         {
-            _cameraIndex = 1;
+            _cameraIndex = 0;
         }
-
+        
         var device = _cameras[_cameraIndex];
         if (device != null)
         {
-            var formatItem = device.VideoFormats.First(x => x.Width == 1920);
+            var formatItem = device.VideoFormats.First(x => x.Width == 1920 && x.Height == 1080);
             if (formatItem != null)
             {
                 videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
                 {
                     Format = formatItem.ToFormat()
                 };
-
-                videoSourceSettings.Format.FrameRate = new VideoFrameRate(60);
+        
+                videoSourceSettings.Format.FrameRate = new VideoFrameRate(120);
             }
         }
-
+        
         if (videoSourceSettings == null)
         {
             ShowToast(Window, "Unable to configure camera settings");
             return;
         }
-
+        
         videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
@@ -140,26 +136,15 @@ public class AppDelegate : UIApplicationDelegate {
 
         // video renderer
         _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
-           
+
         // connect video pads
         _pipeline.Connect(_videoSource.Output, _videoTee.Input);
         _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
-        // audio source
-        _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
-
-        // create audio tee
-        _audioTee = new TeeBlock(2);
-
-        // audio renderer
-        _audioRenderer = new IOSAudioSinkBlock(new VisioForge.Core.Types.X.AudioInfoX(VisioForge.Core.Types.X.AudioFormatX.S16LE, 44100, 2));
-        
-        _pipeline.Connect(_audioSource.Output, _audioTee.Input);
-        _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-
         // optional capture
         if (capture)
         {
+            // video
             _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
@@ -175,9 +160,11 @@ public class AppDelegate : UIApplicationDelegate {
             _sink = new MP4SinkBlock(new MP4SinkSettings(_filename));
             _pipeline.Connect(_videoEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
 
-            // _audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
-            _audioEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
-            _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+            // audio
+            _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
+            
+            _audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+            _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
             _pipeline.Connect(_audioEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
         }
     }
@@ -209,7 +196,7 @@ public class AppDelegate : UIApplicationDelegate {
     private void AddButtons(UIView parent)
     {
         // select camera
-        var btSelectCamera = new UIButton(new CGRect(20, 20, 200, 50))
+        var btSelectCamera = new UIButton(new CGRect(20, 20, 200, 70))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
@@ -234,7 +221,7 @@ public class AppDelegate : UIApplicationDelegate {
         parent!.AddSubview(btSelectCamera);
 
         // start preview
-        var btStartPreview = new UIButton(new CGRect(240, 20, 200, 50))
+        var btStartPreview = new UIButton(new CGRect(240, 20, 200, 70))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
@@ -250,7 +237,7 @@ public class AppDelegate : UIApplicationDelegate {
         parent!.AddSubview(btStartPreview);
 
         // start capture
-        var btStartCapture = new UIButton(new CGRect(460, 20, 200, 50))
+        var btStartCapture = new UIButton(new CGRect(460, 20, 200, 70))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
@@ -275,7 +262,7 @@ public class AppDelegate : UIApplicationDelegate {
         parent!.AddSubview(btStartCapture);
     }
 
-    public void SaveVideoToPhotoLibrary(string filePath)
+    private void SaveVideoToPhotoLibrary(string filePath)
     {
         PHPhotoLibrary.SharedPhotoLibrary.PerformChanges(() =>
         {
@@ -285,7 +272,7 @@ public class AppDelegate : UIApplicationDelegate {
         {
             if (success)
             {
-                // Video was successfully saved in the photo library
+                Debug.WriteLine("Video was successfully saved in the photo library");
             }
             else
             {
@@ -347,10 +334,15 @@ public class AppDelegate : UIApplicationDelegate {
             _videoView = null;
         }
 
-        var rect = new CGRect(0, 50, Window!.Frame.Width, Window!.Frame.Height - 50);
+        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height );
         _videoView = new VideoViewGL(rect);
 
         view!.AddSubview(_videoView);
+    }
+
+    public override void ReceiveMemoryWarning(UIKit.UIApplication application)
+    {
+        Debug.WriteLine("Memory warning!!!");
     }
 
     public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)

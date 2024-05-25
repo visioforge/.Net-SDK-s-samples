@@ -1,9 +1,13 @@
 # Changelog
 
+## 15.9.40
+
+* [X-engines] iOS camera source update for high frame rate support
+
 ## 15.9.35
 
 * [Windows] Updated VLC source - improved file loading speed
-* [Media Blocks SDK .Net]: Added the `UniversalDemuxBlock` allows to demux video and audio streams from a file in MP4, MKV, AVI, MOV, TS, VOB, FLV, OGG and WebM formats
+* [Media Blocks SDK .Net]: Added the `UniversalDemuxBlock` allows to demux video and audio streams from a file in MP4, MKV, AVI, MOV, TS, VOB, FLV, OGG, and WebM formats
 
 ## 15.9.31
 

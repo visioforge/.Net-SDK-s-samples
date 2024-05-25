@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bridge_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - Bridge Demo" Height="354" Width="391" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Media Blocks SDK .Net - Bridge Demo" Height="354" Width="391" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
         <Label x:Name="label" Content="Output file" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="26"/>
         <TextBox x:Name="edFilename" Margin="15,268,0,0" TextWrapping="Wrap" Text="C:\samples\!video.webm" VerticalAlignment="Top" HorizontalAlignment="Left" Width="330"/>
