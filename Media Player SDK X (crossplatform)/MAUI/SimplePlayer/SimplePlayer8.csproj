@@ -80,8 +80,8 @@
 	  </AndroidNativeLibrary>
 	</ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.40" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.40" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.41" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.41" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
