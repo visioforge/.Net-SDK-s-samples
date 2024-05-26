@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/pnScreen"
+        android:layout_above="@id/layoutControls">
+
+        <VisioForge.Core.UI.Android.VideoView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minWidth="25px"
+            android:minHeight="25px"            
+            android:id="@+id/videoView" 
+  />
+    </GridLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutControls"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5px">
+        <Button
+            android:text="Start stream"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btStart" />
+       
+          <Button
+            android:text="SWITCH cam"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5px"
+            android:id="@+id/btSwitchCam" />
+    </LinearLayout>
+</RelativeLayout >

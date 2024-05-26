@@ -340,11 +340,6 @@ public class AppDelegate : UIApplicationDelegate {
         view!.AddSubview(_videoView);
     }
 
-    public override void ReceiveMemoryWarning(UIKit.UIApplication application)
-    {
-        Debug.WriteLine("Memory warning!!!");
-    }
-
     public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 	{
 		// create a new window instance based on the screen size
