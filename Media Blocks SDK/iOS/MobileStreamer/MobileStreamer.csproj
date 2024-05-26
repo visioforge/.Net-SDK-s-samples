@@ -1,35 +1,40 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0-ios</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <Nullable>disable</Nullable>
-    <ImplicitUsings>true</ImplicitUsings>
-    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <CodesignKey>iPhone Developer</CodesignKey>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CreatePackage>false</CreatePackage>
-    <WarningLevel>4</WarningLevel>
-    <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchInterpreter>all</MtouchInterpreter>
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-    <MtouchDebug>True</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <CreatePackage>false</CreatePackage>
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-    <MtouchDebug>True</MtouchDebug>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\VisioForge.Libs\VisioForge.Libs.csproj" />
-    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj" />
-    <ProjectReference Include="..\..\..\..\VisioForge.Core.UI.Apple\VisioForge.Core.UI.Apple.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0-ios</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>true</ImplicitUsings>
+		<SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<CodesignKey>iPhone Developer</CodesignKey>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<CreatePackage>false</CreatePackage>
+		<WarningLevel>4</WarningLevel>
+		<MtouchLink>SdkOnly</MtouchLink>
+		<MtouchInterpreter>all</MtouchInterpreter>
+		<MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+		<MtouchDebug>True</MtouchDebug>
+		<CodesignKey>iPhone Developer</CodesignKey>
+		<DeviceSpecificBuild>true</DeviceSpecificBuild>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<CreatePackage>false</CreatePackage>
+		<MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+		<MtouchDebug>True</MtouchDebug>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.42" />
+		<PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.42" />
+	</ItemGroup>
+	<!--  <ItemGroup>
+    <NativeReference Include="..\..\..\..\..\_SETUP\NuGet\ios\GStreamerX.framework">
+      <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
+    </NativeReference>
+  </ItemGroup>-->
+	<ItemGroup>
+		<PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
+	</ItemGroup>
 </Project>
