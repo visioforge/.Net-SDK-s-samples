@@ -1,69 +1,68 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFrameworks>net8.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TargetFrameworks);net8.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
-		<RootNamespace>SkinnedPlayer_MAUI</RootNamespace>
-		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<!-- Display name -->
-		<ApplicationTitle>SkinnedPlayer_MAUI</ApplicationTitle>
-		<!-- App Identifier -->
-		<ApplicationId>com.companyname.skinned_player_maui</ApplicationId>
-		<ApplicationIdGuid>121C1A4C-06F2-480A-8102-59C9604FF0F1</ApplicationIdGuid>
-		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<PublishReadyToRun>false</PublishReadyToRun>
-	</PropertyGroup>
-	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
-		<MauiFont Include="Resources\Fonts\*" />
-		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.25" />
-		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.25" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
-		<ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-		<!-- Required - WinUI does not yet have buildTransitive for everything -->
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
-		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Remove="Resources\Default.vfskin" />
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Include="Default.vfskin" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.42" />
-		<PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.42" />
-
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('OSX'))">$(TargetFrameworks);net8.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SkinnedPlayer_MAUI</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Display name -->
+    <ApplicationTitle>SkinnedPlayer_MAUI</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.companyname.skinned_player_maui</ApplicationId>
+    <ApplicationIdGuid>121C1A4C-06F2-480A-8102-59C9604FF0F1</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiFont Include="Resources\Fonts\*" />
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.25" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <!-- Required - WinUI does not yet have buildTransitive for everything -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.43" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+  </ItemGroup>
 </Project>

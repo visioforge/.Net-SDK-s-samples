@@ -1,4 +1,4 @@
-﻿namespace SimpleVideoCaptureMBMac;
+﻿namespace SimpleVideoCaptureMB;
 
 [Register ("AppDelegate")]
 public class AppDelegate : NSApplicationDelegate {

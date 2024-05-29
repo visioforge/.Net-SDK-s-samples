@@ -1,6 +1,7 @@
 ﻿using Photos;
 using System.Diagnostics;
 using VisioForge.Core;
+using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioProcessing;
@@ -22,9 +23,9 @@ using VisioForge.Core.UI.Apple;
 
 namespace SimpleVideoCaptureMB;
 
-[Register ("AppDelegate")]
-public class AppDelegate : UIApplicationDelegate {
-
+[Register("AppDelegate")]
+public class AppDelegate : UIApplicationDelegate
+{
     private MediaBlocksPipeline _pipeline;
 
     private string _filename;
@@ -37,7 +38,7 @@ public class AppDelegate : UIApplicationDelegate {
 
     private MediaBlock _videoEncoder;
 
-    private MediaBlock _audioEncoder;
+    private AACEncoderBlock _audioEncoder;
 
     private MediaBlock _sink;
 
@@ -47,44 +48,12 @@ public class AppDelegate : UIApplicationDelegate {
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private UIView _videoView;
+    private VideoViewGL _videoView;
 
-    public override UIWindow? Window {
-		get;
-		set;
-	}
-
-    private void ShowToast(UIView view, string message)
-    {
-        UIView residualView = view.ViewWithTag(1989);
-        if (residualView != null)
-            residualView.RemoveFromSuperview();
-
-        var viewBack = new UIView(new CGRect(83, 0, 300, 100));
-        viewBack.BackgroundColor = UIColor.Black;
-        viewBack.Tag = 1989;
-        UILabel lblMsg = new UILabel(new CGRect(0, 20, 300, 60));
-        lblMsg.Lines = 2;
-        lblMsg.Text = message;
-        lblMsg.TextColor = UIColor.White;
-        lblMsg.TextAlignment = UITextAlignment.Center;
-        viewBack.Center = view.Center;
-        viewBack.AddSubview(lblMsg);
-        view.AddSubview(viewBack);
-        UIView.BeginAnimations("Toast");
-        UIView.SetAnimationDuration(3.0f);
-        viewBack.Alpha = 0.0f;
-        UIView.CommitAnimations();
-    }
+    public override UIWindow? Window { get; set; }
 
     private async Task CreateEngineAsync(bool capture)
     {
-        //var elements = ElementEnumerator.GetAllElements();
-        //foreach (var el in elements)
-        //{
-        //    Debug.WriteLine(el.Item1 + " | " + el.Item2);
-        //}
-
         _pipeline = new MediaBlocksPipeline(true);
         _pipeline.OnError += _pipeline_OnError;
 
@@ -93,20 +62,20 @@ public class AppDelegate : UIApplicationDelegate {
         {
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
         }
-        
+
         if (_cameras.Length == 0)
         {
-            ShowToast(Window, "No video sources found");
+            Toast.Show("No video sources found", Window.RootViewController);
             return;
         }
-        
+
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-        
+
         if (_cameraIndex >= _cameras.Length)
         {
             _cameraIndex = 0;
         }
-        
+
         var device = _cameras[_cameraIndex];
         if (device != null)
         {
@@ -117,17 +86,17 @@ public class AppDelegate : UIApplicationDelegate {
                 {
                     Format = formatItem.ToFormat()
                 };
-        
-                videoSourceSettings.Format.FrameRate = new VideoFrameRate(120);
+
+                videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
             }
         }
-        
+
         if (videoSourceSettings == null)
         {
-            ShowToast(Window, "Unable to configure camera settings");
+            Toast.Show("Unable to configure camera settings", Window.RootViewController);
             return;
         }
-        
+
         videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
@@ -148,7 +117,8 @@ public class AppDelegate : UIApplicationDelegate {
             _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
-            var libraryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library");
+            var libraryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
+                "Library");
             if (!Directory.Exists(libraryPath))
             {
                 Directory.CreateDirectory(libraryPath);
@@ -158,23 +128,22 @@ public class AppDelegate : UIApplicationDelegate {
             _filename = Path.Combine(libraryPath, fileName);
 
             _sink = new MP4SinkBlock(new MP4SinkSettings(_filename));
-            _pipeline.Connect(_videoEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+            _pipeline.Connect(_videoEncoder.Output,
+                (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
 
             // audio
             _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
-            
-            _audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+
+            _audioEncoder = new AACEncoderBlock();
             _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
-            _pipeline.Connect(_audioEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+            _pipeline.Connect(_audioEncoder.Output,
+                (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
         }
     }
 
     private void RequestPhotoLibraryPermissions(Action<PHAuthorizationStatus> completionHandler)
     {
-        PHPhotoLibrary.RequestAuthorization((status) =>
-        {
-            completionHandler(status);
-        });
+        PHPhotoLibrary.RequestAuthorization((status) => { completionHandler(status); });
     }
 
     private async Task DestroyEngineAsync()
@@ -231,7 +200,16 @@ public class AppDelegate : UIApplicationDelegate {
         btStartPreview.SetTitle("START PREVIEW", UIControlState.Normal);
         btStartPreview.TouchUpInside += async (sender, e) =>
         {
-            await StartPreview();
+            if (_pipeline != null)
+            {
+                await StopCamera();
+                btStartPreview.SetTitle("START PREVIEW", UIControlState.Normal);
+            }
+            else
+            {
+                await StartPreview();
+                btStartPreview.SetTitle("STOP PREVIEW", UIControlState.Normal);
+            }
         };
 
         parent!.AddSubview(btStartPreview);
@@ -245,7 +223,7 @@ public class AppDelegate : UIApplicationDelegate {
             HorizontalAlignment = UIControlContentHorizontalAlignment.Left
         };
         btStartCapture.SetTitle("START CAPTURE", UIControlState.Normal);
-        btStartCapture.TouchUpInside += async (sender, e) => 
+        btStartCapture.TouchUpInside += async (sender, e) =>
         {
             if (_pipeline != null)
             {
@@ -327,26 +305,19 @@ public class AppDelegate : UIApplicationDelegate {
 
     private void CreateVideoView(UIView view)
     {
-        if (_videoView != null)
-        {
-            _videoView.RemoveFromSuperview();
-            _videoView.Dispose();
-            _videoView = null;
-        }
-
-        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height );
+        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height);
         _videoView = new VideoViewGL(rect);
 
         view!.AddSubview(_videoView);
     }
 
-    public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
-	{
-		// create a new window instance based on the screen size
-		Window = new UIWindow (UIScreen.MainScreen.Bounds);
+    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        // create a new window instance based on the screen size
+        Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-		// create a UIViewController with a single UILabel
-		var vc = new UIViewController ();
+        // create a UIViewController with a single UILabel
+        var vc = new UIViewController();
 
         CreateVideoView(vc.View);
 
@@ -371,14 +342,6 @@ public class AppDelegate : UIApplicationDelegate {
 
         VisioForgeX.InitSDK();
 
-        //InvokeOnMainThread(async () =>
-        //{
-        //    Thread.Sleep(500);
-
-        //    await StartPreview();
-        //});
-
         return true;
     }
 }
-

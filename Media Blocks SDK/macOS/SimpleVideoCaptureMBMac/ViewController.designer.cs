@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace SimpleVideoCaptureMBMac
+namespace SimpleVideoCaptureMB
 {
 	[Register ("ViewController")]
 	partial class ViewController

@@ -1,11 +1,10 @@
-using Photos;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
-using VisioForge.Core.MediaBlocks.AudioProcessing;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
@@ -14,7 +13,6 @@ using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
@@ -24,13 +22,15 @@ using VisioForge.Core.UI.Apple;
 
 namespace MobileStreamer;
 
-[Register ("AppDelegate")]
+[Register("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate
 {
     private const string SRT_URL = "srt://:8888";
-    
-    private string RTMP_URL = "";
-    
+
+    private string FACEBOOK_LIVE_KEY = "";
+
+    private string YOUTUBE_LIVE_KEY = "";
+
     private MediaBlocksPipeline _pipeline;
 
     private MediaBlock _videoRenderer;
@@ -51,36 +51,10 @@ public class AppDelegate : UIApplicationDelegate
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private UIView _videoView;
+    private VideoViewGL _videoView;
 
-    public override UIWindow? Window {
-		get;
-		set;
-	}
+    public override UIWindow? Window { get; set; }
 
-    private void ShowToast(UIView view, string message)
-    {
-        UIView residualView = view.ViewWithTag(1989);
-        if (residualView != null)
-            residualView.RemoveFromSuperview();
-
-        var viewBack = new UIView(new CGRect(83, 0, 300, 100));
-        viewBack.BackgroundColor = UIColor.Black;
-        viewBack.Tag = 1989;
-        UILabel lblMsg = new UILabel(new CGRect(0, 20, 300, 60));
-        lblMsg.Lines = 2;
-        lblMsg.Text = message;
-        lblMsg.TextColor = UIColor.White;
-        lblMsg.TextAlignment = UITextAlignment.Center;
-        viewBack.Center = view.Center;
-        viewBack.AddSubview(lblMsg);
-        view.AddSubview(viewBack);
-        UIView.BeginAnimations("Toast");
-        UIView.SetAnimationDuration(3.0f);
-        viewBack.Alpha = 0.0f;
-        UIView.CommitAnimations();
-    }
-    
     public string GetLocalIpAddress()
     {
         foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces())
@@ -96,42 +70,61 @@ public class AppDelegate : UIApplicationDelegate
                 }
             }
         }
-        
+
         return string.Empty;
     }
-    
+
     private void AddSRTSink()
     {
         // video encoder
         _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
         _videoEncoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
         _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-        
+
         // audio encoder
         _audioEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
         _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
-        
+
         // sink
         _sink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = SRT_URL });
-        _pipeline.Connect(_videoEncoder.Output, (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
-        _pipeline.Connect(_audioEncoder.Output, (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+        _pipeline.Connect(_videoEncoder.Output,
+            (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+        _pipeline.Connect(_audioEncoder.Output,
+            (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
-    
-    private void AddRTMPSink()
+
+    private void AddFacebookSink()
     {
         // video encoder
         _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
         _videoEncoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
         _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-        
+
         // audio encoder
-        _audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+        _audioEncoder = new AACEncoderBlock();
         _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
-        
+
         // sink
-        _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = RTMP_URL });
-        _pipeline.Connect(_videoEncoder.Output, (_sink as RTMPSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
-        _pipeline.Connect(_audioEncoder.Output, (_sink as RTMPSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+        _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(FACEBOOK_LIVE_KEY));
+        _pipeline.Connect(_videoEncoder.Output, (_sink as FacebookLiveSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+        _pipeline.Connect(_audioEncoder.Output, (_sink as FacebookLiveSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+    }
+    
+    private void AddYouTubeSink()
+    {
+        // video encoder
+        _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
+        _videoEncoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
+        _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+
+        // audio encoder
+        _audioEncoder = new AACEncoderBlock();
+        _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
+
+        // sink
+        _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(YOUTUBE_LIVE_KEY));
+        _pipeline.Connect(_videoEncoder.Output, (_sink as YouTubeSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+        _pipeline.Connect(_audioEncoder.Output, (_sink as YouTubeSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
 
     private async Task CreateEngineAsync()
@@ -144,20 +137,20 @@ public class AppDelegate : UIApplicationDelegate
         {
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
         }
-        
+
         if (_cameras.Length == 0)
         {
-            ShowToast(Window, "No video sources found");
+            Toast.Show("No video sources found", Window.RootViewController);
             return;
         }
-        
+
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-        
+
         if (_cameraIndex >= _cameras.Length)
         {
             _cameraIndex = 0;
         }
-        
+
         var device = _cameras[_cameraIndex];
         if (device != null)
         {
@@ -168,17 +161,17 @@ public class AppDelegate : UIApplicationDelegate
                 {
                     Format = formatItem.ToFormat()
                 };
-        
-                videoSourceSettings.Format.FrameRate = new VideoFrameRate(120);
+
+                videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
             }
         }
-        
+
         if (videoSourceSettings == null)
         {
-            ShowToast(Window, "Unable to configure camera settings");
+            Toast.Show("Unable to configure camera settings", Window.RootViewController);
             return;
         }
-        
+
         videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
@@ -191,7 +184,7 @@ public class AppDelegate : UIApplicationDelegate
         // connect video pads
         _pipeline.Connect(_videoSource.Output, _videoTee.Input);
         _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-        
+
         // audio source
         _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
     }
@@ -239,45 +232,80 @@ public class AppDelegate : UIApplicationDelegate
 
         parent!.AddSubview(btSelectCamera);
 
-        // start RTMP
-        var btStartRTMP = new UIButton(new CGRect(240, 20, 200, 70))
+        // start Facebook
+        var btStartFacebook = new UIButton(new CGRect(240, 20, 200, 70))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
             VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
             HorizontalAlignment = UIControlContentHorizontalAlignment.Left
         };
-        btStartRTMP.SetTitle("START RTMP", UIControlState.Normal);
-        btStartRTMP.TouchUpInside += async (sender, e) =>
+        btStartFacebook.SetTitle("START FACEBOOK", UIControlState.Normal);
+        btStartFacebook.TouchUpInside += async (sender, e) =>
         {
             if (_pipeline != null)
             {
                 await StopCamera();
-                btStartRTMP.SetTitle("START RTMP", UIControlState.Normal);
+                btStartFacebook.SetTitle("START FACEBOOK", UIControlState.Normal);
             }
             else
             {
-                RTMP_URL = "rtmp://localhost/live/stream";
-                if (string.IsNullOrEmpty(RTMP_URL))
+                if (string.IsNullOrEmpty(FACEBOOK_LIVE_KEY))
                 {
-                    ShowToast(this.Window, "RTMP URL is empty. Please set it in code.");
+                    Toast.Show("Facebook Live Key is empty. Please set it in code.", Window.RootViewController);
                     return;
                 }
-                
+
                 await CreateEngineAsync();
-                
-                AddRTMPSink();
+
+                AddFacebookSink();
 
                 await _pipeline.StartAsync();
-                
-                btStartRTMP.SetTitle("STOP RTMP", UIControlState.Normal);
+
+                btStartFacebook.SetTitle("STOP FACEBOOK", UIControlState.Normal);
             }
         };
 
-        parent!.AddSubview(btStartRTMP);
+        parent!.AddSubview(btStartFacebook);
+        
+        // start YouTube 
+        var btStartYouTube = new UIButton(new CGRect(460, 20, 200, 70))
+        {
+            BackgroundColor = UIColor.Gray,
+            AutoresizingMask = UIViewAutoresizing.All,
+            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        };
+        btStartYouTube.SetTitle("START YOUTUBE", UIControlState.Normal);
+        btStartYouTube.TouchUpInside += async (sender, e) =>
+        {
+            if (_pipeline != null)
+            {
+                await StopCamera();
+                btStartYouTube.SetTitle("START YOUTUBE", UIControlState.Normal);
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(YOUTUBE_LIVE_KEY))
+                {
+                    Toast.Show("YouTube Live Key is empty. Please set it in code.", Window.RootViewController);
+                    return;
+                }
+
+                await CreateEngineAsync();
+
+                AddYouTubeSink();
+
+                await _pipeline.StartAsync();
+
+                btStartYouTube.SetTitle("STOP YOUTUBE", UIControlState.Normal);
+            }
+        };
+
+        parent!.AddSubview(btStartYouTube);
 
         // start SRT
-        var btStartSRT = new UIButton(new CGRect(460, 20, 200, 70))
+        var btStartSRT = new UIButton(new CGRect(680, 20, 200, 70))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
@@ -285,7 +313,7 @@ public class AppDelegate : UIApplicationDelegate
             HorizontalAlignment = UIControlContentHorizontalAlignment.Left
         };
         btStartSRT.SetTitle("START SRT", UIControlState.Normal);
-        btStartSRT.TouchUpInside += async (sender, e) => 
+        btStartSRT.TouchUpInside += async (sender, e) =>
         {
             if (_pipeline != null)
             {
@@ -295,19 +323,19 @@ public class AppDelegate : UIApplicationDelegate
             else
             {
                 await CreateEngineAsync();
-                
+
                 AddSRTSink();
 
                 await _pipeline.StartAsync();
-                
+
                 var ip = GetLocalIpAddress();
                 if (!string.IsNullOrEmpty(ip))
                 {
                     var msg = "SRT URL: srt://" + ip + ":8888";
                     Debug.WriteLine(msg);
-                    ShowToast(Window, msg);
-                }    
-                
+                    Toast.Show(msg, Window.RootViewController);
+                }
+
                 btStartSRT.SetTitle("STOP SRT", UIControlState.Normal);
             }
         };
@@ -322,33 +350,26 @@ public class AppDelegate : UIApplicationDelegate
             return;
         }
 
-        await _pipeline.StopAsync();
+        await _pipeline.StopAsync(true);
 
         await DestroyEngineAsync();
     }
 
     private void CreateVideoView(UIView view)
     {
-        if (_videoView != null)
-        {
-            _videoView.RemoveFromSuperview();
-            _videoView.Dispose();
-            _videoView = null;
-        }
-
-        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height );
+        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height);
         _videoView = new VideoViewGL(rect);
 
         view!.AddSubview(_videoView);
     }
 
-    public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
-	{
-		// create a new window instance based on the screen size
-		Window = new UIWindow (UIScreen.MainScreen.Bounds);
+    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        // create a new window instance based on the screen size
+        Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-		// create a UIViewController with a single UILabel
-		var vc = new UIViewController ();
+        // create a UIViewController with a single UILabel
+        var vc = new UIViewController();
 
         CreateVideoView(vc.View);
 
@@ -363,4 +384,3 @@ public class AppDelegate : UIApplicationDelegate
         return true;
     }
 }
-

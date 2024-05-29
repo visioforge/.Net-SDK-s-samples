@@ -10,7 +10,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Apple;
 
-namespace SimpleVideoCaptureMBMac;
+namespace SimpleVideoCaptureMB;
 
 public partial class ViewController : NSViewController
 {
@@ -22,7 +22,7 @@ public partial class ViewController : NSViewController
 
     private VideoRendererBlock _videoRenderer;
 
-    private SystemVideoSourceBlock _videoSource;
+    private MediaBlock _videoSource;
 
     private VideoViewGL _videoView;
 
@@ -177,7 +177,7 @@ public partial class ViewController : NSViewController
 
         // video source
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
+        
         var deviceName = cbVideoSource.StringValue;
         var format = cbVideoFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
@@ -193,18 +193,18 @@ public partial class ViewController : NSViewController
                     {
                         Format = formatItem.ToFormat()
                     };
-
+        
                     videoSourceSettings.Format.FrameRate =
                         new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.StringValue));
                 }
             }
         }
-
+        
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
-
+        
         // audio source
         IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
-
+        
         deviceName = cbAudioSource.StringValue;
         format = cbAudioFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName))
@@ -217,11 +217,11 @@ public partial class ViewController : NSViewController
                 if (formatItem != null) audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
             }
         }
-
+        
         _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
         // video renderer
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView);
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
 
         // audio renderer
         _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync())

@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.43
+
+* [X-engines] iOS crash fixed during VideoViewGL usage
+* [X-engines] Added default AAC encoder for iOS
+
 ## 15.9.40
 
 * [X-engines] iOS camera source update for high frame rate support

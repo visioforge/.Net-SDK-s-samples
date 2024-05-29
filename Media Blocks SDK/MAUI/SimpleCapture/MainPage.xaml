@@ -5,20 +5,12 @@
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
 
     <Grid>
-        <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowDefinitions="*,Auto" >
-            <Grid x:Name="videoViewHost"
-                  Grid.Row="0"               
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand"
-                  Background="Black">
-                <my:VideoView 
+            <my:VideoView 
                     x:Name="videoView"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
-            </Grid>
-            
-            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+                   
+            <StackLayout x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" VerticalOptions="End" Background="#1e1e1e">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -71,6 +63,5 @@
                 </StackLayout>
             </StackLayout>
         </Grid>
-    </Grid>
 
 </ContentPage>
