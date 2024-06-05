@@ -11,12 +11,12 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.9.45" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.43" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.9.43" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.45" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.9.45" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />

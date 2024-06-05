@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.45
+
+* [X-engines] Resolved video rendering issues on Android and iOS
+
 ## 15.9.43
 
 * [X-engines] iOS crash fixed during VideoViewGL usage

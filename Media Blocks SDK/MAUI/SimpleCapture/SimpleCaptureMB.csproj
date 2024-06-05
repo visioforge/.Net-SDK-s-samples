@@ -61,12 +61,12 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.25" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="1.22.5.10" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.9.45" />
     <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.43" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.45" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -83,8 +83,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.43" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.43" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.45" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.45" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
