@@ -6,11 +6,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.45" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.46" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.25" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.9.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.46" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.9.46" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

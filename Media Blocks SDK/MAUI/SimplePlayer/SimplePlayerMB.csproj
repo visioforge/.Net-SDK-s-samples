@@ -56,8 +56,8 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.25" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.46" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.9.46" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.9.45" />
@@ -82,8 +82,8 @@
 	  </AndroidNativeLibrary>
 	</ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.45" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.45" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.46" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.46" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
