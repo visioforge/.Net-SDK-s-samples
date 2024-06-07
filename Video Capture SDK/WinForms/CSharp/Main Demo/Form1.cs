@@ -1450,7 +1450,7 @@ namespace VideoCapture_CSharp_Demo
 
             VideoCapture1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
 
-            VideoCapture1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
+            VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
             VideoCapture1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
             VideoCapture1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
         }
@@ -4643,7 +4643,7 @@ namespace VideoCapture_CSharp_Demo
             {
                 pnVideoRendererBGColor.BackColor = colorDialog1.Color;
 
-                VideoCapture1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
+                VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
                 await VideoCapture1.Video_Renderer_UpdateAsync();
             }
         }

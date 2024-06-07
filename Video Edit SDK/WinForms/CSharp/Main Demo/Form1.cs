@@ -2115,7 +2115,7 @@ namespace VideoEdit_CS_Demo
 
             VideoEdit1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
 
-            VideoEdit1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
+            VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
             VideoEdit1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
             VideoEdit1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
         }
@@ -2364,7 +2364,7 @@ namespace VideoEdit_CS_Demo
             {
                 pnVideoRendererBGColor.BackColor = colorDialog1.Color;
 
-                VideoEdit1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
+                VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
                 await VideoEdit1.Video_Renderer_UpdateAsync();
             }
         }

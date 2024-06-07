@@ -1,5 +1,13 @@
 # Changelog
 
+## 15.9.47
+
+* [ALL] Video renderer settings class no longer contains background color. Use the VideoView background color property instead.
+
+## 15.9.46
+
+* [X-engines] Updated GStreamer libraries
+
 ## 15.9.45
 
 * [X-engines] Resolved video rendering issues on Android and iOS

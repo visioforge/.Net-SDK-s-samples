@@ -1214,7 +1214,7 @@ Public Class Form1
 
         VideoCapture1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text)
 
-        VideoCapture1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor
+        VideoView1.BackColor = pnVideoRendererBGColor.BackColor
         VideoCapture1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked
         VideoCapture1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked
     End Sub
@@ -3761,7 +3761,7 @@ Public Class Form1
 
             pnVideoRendererBGColor.BackColor = colorDialog1.Color
 
-            VideoCapture1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor
+            VideoView1.BackColor = pnVideoRendererBGColor.BackColor
             Await VideoCapture1.Video_Renderer_UpdateAsync()
 
         End If

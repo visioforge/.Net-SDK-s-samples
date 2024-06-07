@@ -3,6 +3,7 @@ using Android.Content.Res;
 using Android.Runtime;
 using Android.Util;
 using VisioForge.Core;
+using VisioForge.Core.GStreamer.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioProcessing;
@@ -21,6 +22,7 @@ using VisioForge.Core.Types.X.OpenGL;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
+using VisioForge.Core.Types.X.VideoEncoders;
 using static Android.Renderscripts.ScriptGroup;
 
 namespace Simple_Video_Capture
@@ -323,7 +325,7 @@ namespace Simple_Video_Capture
             _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
 
             // create audio encoder
-            _audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+            _audioEncoder = new AACEncoderBlock();
 
             // connect audio pads
             _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);

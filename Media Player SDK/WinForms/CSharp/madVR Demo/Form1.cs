@@ -90,13 +90,8 @@ namespace madVR_Player_Demo
             MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.MadVR;
-            MediaPlayer1.Video_Renderer.BackgroundColor = System.Drawing.Color.Green;
-            VideoView1.BackColor = System.Drawing.Color.Blue;
-            VideoView1.ForeColor = System.Drawing.Color.Blue;
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-
-            MediaPlayer1.SetLicenseKey("1DD3-9064-A016-7B30-8D79-2813", "", "");
 
             MediaPlayer1.Play();
 

@@ -1109,7 +1109,7 @@ namespace Media_Player_Demo
             }
 
             MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
-            MediaPlayer1.Video_Renderer.BackgroundColor = pnVideoRendererBGColor.BackColor;
+            VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
             MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
             MediaPlayer1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
 
@@ -2261,7 +2261,7 @@ namespace Media_Player_Demo
             {
                 pnVideoRendererBGColor.BackColor = colorDialog1.Color;
 
-                MediaPlayer1.Video_Renderer.BackgroundColor = colorDialog1.Color;
+                VideoView1.BackColor = colorDialog1.Color;
                 await MediaPlayer1.Video_Renderer_UpdateAsync();
             }
         }

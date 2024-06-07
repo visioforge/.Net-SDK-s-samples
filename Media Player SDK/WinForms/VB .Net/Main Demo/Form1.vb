@@ -2148,7 +2148,7 @@ Public Class Form1
 
             pnVideoRendererBGColor.BackColor = colorDialog1.Color
 
-            MediaPlayer1.Video_Renderer.BackgroundColor = colorDialog1.Color
+            VideoView1.BackColor = colorDialog1.Color
             Await MediaPlayer1.Video_Renderer_UpdateAsync()
         End If
     End Sub

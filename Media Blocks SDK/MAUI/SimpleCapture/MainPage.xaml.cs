@@ -39,7 +39,7 @@ namespace SimpleCapture
 
         private H264EncoderBlock _videoEncoder;
 
-        private OPUSEncoderBlock _audioEncoder;
+        private AACEncoderBlock _audioEncoder;
 
         private VideoCaptureDeviceInfo[] _cameras;
 
@@ -420,7 +420,7 @@ namespace SimpleCapture
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
             // add audio encoder
-            _audioEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
+            _audioEncoder = new AACEncoderBlock(AACEncoderBlock.GetDefaultSettings());
             _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
 
             // add sink
