@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.9.50
+
+* [Windows] Updated KLV support in MPEG-TS output
+* [Windows] Resolved MediaPlayerCore serialization issue
+
 ## 15.9.47
 
 * [ALL] Video renderer settings class no longer contains background color. Use the VideoView background color property instead.
