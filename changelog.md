@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.51
+
+* [ALL] Resolved issue with `VideoFrameX.ToBitmap()` call (wrong color space)
+
 ## 15.9.50
 
 * [Windows] Updated KLV support in MPEG-TS output
