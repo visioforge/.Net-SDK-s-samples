@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.52
+
+* [Media Blocks SDK .Net] `RTSPSourceBlock`: If RTSP source has audio but you've disabled audio stream in `RTSPSourceSettings`, SDK will add null renderer automatically to prevent warnings.
+
 ## 15.9.51
 
 * [ALL] Resolved issue with `VideoFrameX.ToBitmap()` call (wrong color space)
