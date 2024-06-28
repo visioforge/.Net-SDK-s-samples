@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileStreamer.MainPage"
+            xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowDefinitions="*,Auto" >
+            <Grid x:Name="videoViewHost"
+                  Grid.Row="0"               
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  Background="Black">
+                <my:VideoView 
+                    x:Name="videoView"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+            </Grid>
+
+            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="StartAndExpand" Margin="5">
+                        <Label Text="CAMERA" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btCamera" Text="CAMERA" MinimumWidthRequest="200" Clicked="btCamera_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="CenterAndExpand" Margin="5">
+                        <Label Text="MICROPHONE" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
+                        <Button x:Name="btMic" Text="MICROPHONE" MinimumWidthRequest="200" Clicked="btMic_Clicked" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical" Grid.Column="2" HorizontalOptions="EndAndExpand" Margin="5">
+                        <Entry x:Name="edKey" Text="Enter YouTube/Facebook key" />
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout 
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="5, 0, 5, 0">
+
+                    <Button  
+                        x:Name="btStartYouTube"   
+                        Text="START YOUTUBE" 
+                        Margin="5" 
+                        Clicked="btStartYouTube_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btStartFacebook"   
+                        Text="START FACEBOOK" 
+                        Margin="5" 
+                        Clicked="btStartFacebook_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btStop"   
+                        Text="STOP" 
+                        Margin="5" 
+                        Clicked="btStop_Clicked" 
+                        MinimumWidthRequest="100" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

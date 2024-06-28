@@ -2,7 +2,7 @@
 
 ## 15.9.52
 
-* [Media Blocks SDK .Net] `RTSPSourceBlock`: If RTSP source has audio but you've disabled audio stream in `RTSPSourceSettings`, SDK will add null renderer automatically to prevent warnings.
+* [Media Blocks SDK .Net] `RTSPSourceBlock`: If the RTSP source has audio but you've disabled the audio stream in `RTSPSourceSettings`, SDK will add a null renderer automatically to prevent warnings.
 
 ## 15.9.51
 
@@ -96,7 +96,7 @@
 * [Video Edit SDK .Net] VideoEditCoreX: The TextOverlay class changed to use SkiaSharp-based font settings. Additionally, you can set the custom font file name or configure all rendering parameters using custom SKPaint.
 * [Windows] Added Stream support in `MediaInfoReader`. You can get the video/audio file information from a stream (DB, network, memory, etc.).
 * [X-engines] Updated Live Video Compositor engine, which improved support of the file sources
-* [Video Capture SDK .Net] VideoCaptureCore: Added camera-covered detector into the `Computer Vision Demo` and the `VisioForge.Core.CV` package
+* [Video Capture SDK .Net] Added camera-covered detector into the `Computer Vision Demo` and the `VisioForge.Core.CV` package
 * [X-engines] Added API to get snapshots from video files using MediaInfoReaderX: GetFileSnapshotBitmap, GetFileSnapshotSKBitmap, GetFileSnapshotRGB
 * [X-engines] iOS support in MAUI samples
 * [X-engines] Resolved memory leak issue for RTSP sources
@@ -108,7 +108,7 @@
 * [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK
 * [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source
 * .Net 7 support returned to the MAUI package (it was removed by CI error).
-* The IAsyncDisposable interface was added to all SDK's core classes. DisposeAsync call should be used to dispose of the core objects in async methods.  
+* The IAsyncDisposable interface was added to all SDK's core classes. The `DisposeAsync` call should be used to dispose of the core objects using async methods.  
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)
 * [Media Blocks SDK .Net] Added HLS streaming sample
 * [Video Capture SDK .Net] VideoCaptureCore: Resolved crash if the `multiscreen` is enabled and screens added as window's handles (WinForms)
@@ -122,7 +122,7 @@
   
 ## 15.8
 
-* [X-engines] [API breaking change] DeviceEnumerator can now be used only by using `DeviceEnumerator.Shared` property. It is required to have one enumerator per app. DeviceEnumerator objects used by API have been removed
+* [X-engines] [API breaking change] DeviceEnumerator can now be used only by using `DeviceEnumerator.Shared` property. One enumerator per app is required. DeviceEnumerator objects used by API have been removed
 * [X-engines] [API breaking change] Android Activity is not required anymore to create SDK engines
 * [X-engines] [API breaking change] X-engines require additional initialization and de-initialization steps. To initialize SDK, use the `VisioForge.Core.VisioForgeX.InitSDK()` call. To de-initialize SDK, use the `VisioForge.Core.VisioForgeX.DestroySDK()` call. You need to initialize SDK before any SDK class usage and de-initialize SDK before the application exits.
 * [Windows] Improved MAUI video rendering performance in Windows
@@ -167,7 +167,7 @@
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved WPF native rendering issue with a pop-up window.
 * [All] Avalonia 11.0.5 support.
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved licensing issues.
-* [Video Capture SDK .Net] VideoCaptureCore: Start/StartAsync method will return false if the video capture device is used already by another application.
+* [Video Capture SDK .Net] VideoCaptureCore: Start/StartAsync method will return false if the video capture device is already used by another application.
 * [All] Updated VLC source (libVLC 3.0.19).
 * [All] Updated FFMPEG sources and encoders. Resolved issue with missed MSVC dependencies.
 * [Video Capture SDK] Updated ONVIF engine.
@@ -184,7 +184,7 @@
 * [ALL] VideoCaptureCore, MediaPlayerCore, VideoEditCore: Added the static CreateAsync method that can be used instead of the constructor to create engines without UI lag.
 * [Video Capture SDK .Net] VideoCaptureCore: Resolved issues with video crop.
 * [Video Capture SDK .Net] VideoCaptureCoreX: Added video overlays API. The Overlay Manager Demo shows how to use it.
-* [Video Capture SDK .Net] Improved HW encoder detection. If you have several GPUs sometimes only major GPU can be used for video encoding.
+* [Video Capture SDK .Net] Improved HW encoder detection. If you have several GPUs, sometimes only the major GPU can be used for video encoding.
 * [Cross-platform SDKs] Updated Avalonia VideoView. Resolved issue with VideoView recreation.
 * [Media Player SDK .Net] MediaPlayerCoreX: Resolved startup issue with the Android version of the MediaPlayerCoreX engine.
 * [Media Player SDK .Net] MediaPlayerCore: Video_Stream_Index property has been replaced with Video_Stream_Select/Video_Stream_SelectAsync methods.
@@ -244,22 +244,22 @@
 * [Media Blocks SDK .Net] Added MJPEG HTTP Live streaming sink block.
 * [ALL] Resolved MP4 HW QSV H264 regression.
 * [ALL] WinForms and WPF VideoView stability updates.
-* [Media Player SDK .Net] Removed FilenamesOrURL legacy property. Please use Playlist_... API instead.
+* [Media Player SDK .Net] Removed FilenamesOrURL legacy property. Please use the `Playlist` API instead.
 * [Media Blocks SDK .Net] Added fade-in/out feature for image overlay block.
 * [ALL] Telemetry update
-* [ALL] SDKs updated to use the ObservableCollection instead of List in public API.
+* [ALL] SDKs updated to use the `ObservableCollection` instead of the `List` in public API.
 * [ALL] Updated MP4 HW output. Improved NVENC performance.
 * [Media Blocks SDK .Net] Added Video Compositor sample.
-* [Media Blocks SDK .Net] Added YouTubeSink and FacebookLiveSink blocks with custom YouTube/Facebook configurations. RTMPSink can stream to YouTube/Facebook the same as before.
+* [Media Blocks SDK .Net] Added YouTubeSink and FacebookLiveSink blocks with custom YouTube/Facebook configurations. The `RTMPSink` can stream to YouTube/Facebook in the same way as before.
 * [Media Blocks SDK .Net] Added SqueezeBack video mixer block.
-* [ALL] Updated scrolling text logo. Added the Preload method to render a text overlay before playback.
+* [ALL] Updated scrolling text logo. We've added the Preload method to render a text overlay before playback.
 * [ALL] Updated scrolling text logo (performance)
 * [Media Blocks SDK .Net] Updated Decklink sink blocks
 * [ALL] Resolved crashes with a text logo with a custom resolution
-* [Media Blocks SDK .Net] Added Intel QuickSync H264, HEVC, VP9 and MJPEG encoders support.
+* [Media Blocks SDK .Net] Added Intel QuickSync H264, HEVC, VP9, and MJPEG encoders support.
 * [Video Edit SDK .Net] Added FastEdit_ExtractAudioStreamAsync method to extract the audio stream from the video file.
 * [Video Edit SDK .Net] Added "Audio Extractor" WinForms sample.
-* [Media Blocks SDK .Net] Updated MP4SinkBlock. The sink can split output files by duration, file size or timecode. Use MP4SplitSinkSettings instead of MP4SinkSettings to configure.
+* [Media Blocks SDK .Net] Updated MP4SinkBlock. The sink can split output files by duration, file size, or timecode. Use MP4SplitSinkSettings instead of MP4SinkSettings to configure.
 * [Video Capture SDK .Net] Added the OnMJPEGLowLatencyRAWFrame event that fired when the MJPEG low latency engine received a RAW frame from a camera.
 * [Media Blocks SDK .Net] Added VideoEffectsBlock to use video effects, available in Windows SDKs
 * [Media Blocks SDK .Net] Updated Decklink source
@@ -337,7 +337,7 @@
 * SDK migrated to System.Text.Json from NewtonsoftJson
 * Updated DirectCapture output for IP cameras
 * Video processing performance optimizations
-* IPCameraSourceSettings.URL property type changed from string to a "System.Uri"
+* IPCameraSourceSettings.URL property type changed from string to a `System.Uri`
 * Added DirectCapture ASF output for IP cameras
 
 ## 15.1
@@ -346,14 +346,14 @@
 * Added Icecast streaming
 * VideoStreamInfo.FrameRate property type changed to VideoFrameRate (with numerator and denominator) from double
 * Updated WPF VideoView, resolved the issue for IP camera stream playback
-* API breaking change: VisioForge.Controls, VisioForge.Controls.UI, VisioForge.Controls.UI.Dialogs, and VisioForge.Tools merged inside VisioForge.Core
+* API breaking change: `VisioForge.Controls`, `VisioForge.Controls.UI`, `VisioForge.Controls.UI.Dialogs`, and `VisioForge.Tools` assemblies are merged inside the `VisioForge.Core` assembly
 * Audio effect API now uses string name instead of index
 * Added Android support in Media Player SDK .Net
 * Added a new GStreamer-based cross-platform engine to support Windows and other platforms within the v15 development cycle
 
 ## 15.0
 
-* Added StatusOverlay property for VideoCapture class. Assign TextStatusOverlay object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
+* Added StatusOverlay property for VideoCapture class. Assign the `TextStatusOverlay` object to this property to add text status overlay, for example, to show "Connecting..." text during IP camera connecting.
 * RTSP Live555 IP camera engine has been removed. Please use RTSP Low Latency or FFMPEG engines.
 * Resolved SDK_Version possible issue.
 * Added Settings_Load API. You can load the settings file saved by Settings_JSON. Be sure that device names are correct.
@@ -361,16 +361,16 @@
 * RTP support for the VLC source engine.
 * API breaking change: SDK_State property has been removed. We do not have TRIAL and FULL SDK versions anymore.
 * API breaking change: DirectShow_Filters_Show_Dialog, DirectShow_Filters_Has_Dialog, Audio_Codec_HasDialog, Audio_Codec_ShowDialog, Video_Codec_HasDialog, Video_Codec_ShowDialog, Filter_Supported_LAV, Filter_Exists_MatroskaMuxer, Filter_Exists_OGGMuxer, Filter_Exists_VorbisEncoder, Filter_Supported_EVR, Filter_Supported_VMR9 and Filter_Supported_NVENC has been moved to VisioForge.Tools.FilterHelpers class.
-* VFAudioStreamInfo/VFVideoStreamInfo duration type changed to Timespan.
+* The `VFAudioStreamInfo`/`VFVideoStreamInfo` classes use the `Timespan` for the duration.
 * Decklink types from VisioForge.Types assembly moved to VisioForge.Types.Decklink namespace.
 * Telemetry updated.
 * Custom redist loader updated.
 * NDI update.
-* API breaking change: Status property changes to State, type is PlaybackState in all SDKs.
+* API breaking change: The `Status` property was renamed to the `State`. The property type is `PlaybackState` in all SDKs.
 * API breaking change: UI controls split into Core (VideoCaptureCore, MediaPlayerCore, VideoEditCore) and VideoView.
 * API breaking change: Video_CaptureDevice... properties merged into Video_CaptureDevice property of VideoCaptureSource type.
 * API breaking change: Audio_CaptureDevice... properties merged into Audio_CaptureDevice property of AudioCaptureSource type.
-* API breaking change: In Media Player SDK Source_Stream... properties were merged into the Source_MemoryStream property of MemoryStreamSource type
+* API breaking change: In the Media Player SDK, the `Source_Stream` API properties were merged into the `Source_MemoryStream` property of the `MemoryStreamSource` type
 * Updated DVD playback
 * Updated FFMPEG source
 * API breaking change: Media Player SDK types moved from VisioForge.Types namespace to VisioForge.Types.MediaPlayer
@@ -470,7 +470,7 @@
 
 * Migrated to .Net 4.6
 * Added Debug_DisableMessageDialogs property to disable error dialog if OnError event is not implemented.
-* Fixed issue with resizing on pause for WPF controls.
+* Fixed issue with resizing on the pause for WPF controls.
 * Updated ONVIF engine in Video Capture SDK .Net
 * Updated What You Hear source in Video Capture SDK .Net
 * Added OnPause/OnResume events
@@ -481,7 +481,7 @@
 * One installer for TRIAL and FULL versions
 * Same NuGet packages for TRIAL and FULL versions
 * .Net Core NuGet packaged merged with .Net Framework package
-* Added NuGet redists. Deployment never was so simple!
+* Added NuGet redists. Deployment was never so simple!
 
 ## 12.0
 
@@ -493,7 +493,7 @@
 * Improved .Net Core compatibility
 * Virtual Camera SDK output added to Media Player SDK .Net (as one of the video renderers)
 * NewTek NDI devices support added to Video Capture SDK .Net as a new engine for IP cameras
-* Added Video_Effects_MergeImageLogos and Video_Effects_MergeTextLogos properties. If you have 3 or more logos you can set these properties to true to optimize video effects' performance
+* Added Video_Effects_MergeImageLogos and Video_Effects_MergeTextLogos properties. If you have three or more logos, you can set these properties to true to optimize video effects' performance
 * Added playlist type option for HLS network streaming
 * Added integrated lightweight HTTP server for HLS network streaming
 * Added VR 360° video support in Media Player SDK .Net
@@ -561,20 +561,20 @@
 * Improved barcode detection quality for rotated images
 * The minimal .Net Framework version is .Net 4.5 now
 * Improved YouTube playback in Media Player SDK. Added OnYouTubeVideoPlayback event to select video quality for playback
-* Added Play_PauseAtFirstFrame property in Media Player SDK .Net. If true playback will be paused on the first frame
+* Added the `Play_PauseAtFirstFrame` property to the Media Player SDK .Net. If true playback will be paused on the first frame
 * Multiple screen support in Screen Capture demo in Video Capture SDK .Net
 * Resolved issue with network stream playback in Media Player SDK .Net WPF applications
 * Added low latency HTTP MJPEG stream playback (IP cameras or other sources) in Video Capture SDK .Net
 * Added Fake Audio Source DirectShow filter, which produces a tone signal
 * Updated Computer Vision demo in Video Capture SDK .Net
-* Added Frame_GetCurrentFromRenderer method to all SDKs. Using this method you can get the currently rendered video frame directly from the video renderer.
+* Added Frame_GetCurrentFromRenderer method to all SDKs. Using this method, you can get the currently rendered video frame directly from the video renderer.
 * Added low latency RTSP source playback in Video Capture SDK .Net
 
 ## 11.0
 
 * Fixed bug with MP4 v11 output, custom GOP settings
 * Updated MJPEG Decoder
-* Fixed bug with MP4 v11 output, Windows 7 now fully supported
+* Fixed bug with MP4 v11 output. Added Windows 7 full support
 * OnStop event of Video Edit SDK returns a successful status
 * Video Capture SDK Main Demo update - multiscreen can automatically use connected external displays
 * Media Player SDK Main Demo update - multiscreen can automatically use connected external displays

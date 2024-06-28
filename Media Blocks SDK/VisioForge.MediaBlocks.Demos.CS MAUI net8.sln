@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerMB8", "MAUI\Sim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPViewerMB8", "MAUI\RTSPViewer\RTSPViewerMB8.csproj", "{2DA8BD79-846C-4794-B932-31BE44386930}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileStreamerMB8", "MAUI\MobileStreamer\MobileStreamerMB8.csproj", "{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DA8BD79-846C-4794-B932-31BE44386930}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,34 +22,37 @@
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Video source" HorizontalAlignment="Left" Width="90"/>
+            <RadioButton x:Name="rbCameraSource" IsChecked="true" Content="Camera source" />
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <Label Content="Device" HorizontalAlignment="Left" Width="90"/>
                 <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" Width="250" VerticalContentAlignment="Center" SelectionChanged="cbVideoInput_SelectionChanged"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Label Content="Format" HorizontalAlignment="Left" Margin="10,0,0,0" Width="80"/>
-                <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Width="160" VerticalContentAlignment="Center" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <Label Content="Format" HorizontalAlignment="Left" Width="80"/>
+                <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Margin="10,0,0,0" Width="160" VerticalContentAlignment="Center" SelectionChanged="cbVideoFormat_SelectionChanged"/>
 
                 <ComboBox x:Name="cbVideoFrameRate" HorizontalAlignment="Left" Margin="10,0,0,0" Width="50" VerticalContentAlignment="Center"/>
                 <Label Content="fps" HorizontalAlignment="Left" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Label Content="Audio source" HorizontalAlignment="Left" Width="90"/>
-                <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" Width="250" VerticalContentAlignment="Center" SelectionChanged="cbAudioInput_SelectionChanged"/>
+            <RadioButton x:Name="rbScreenSource" IsChecked="false" Margin="0,10,0,0" Content="Screen source" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Audio source" HorizontalAlignment="Left" Width="90" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250" VerticalContentAlignment="Center" SelectionChanged="cbAudioInput_SelectionChanged"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Format" HorizontalAlignment="Left" Margin="10,0,0,0" Width="80"/>
-                <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Width="250" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <Separator Margin="0,10,0,0"/>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Platform" HorizontalAlignment="Left" Width="90"/>
-                <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
+                <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
                     <ComboBoxItem>YouTube</ComboBoxItem>
                     <ComboBoxItem>Facebook</ComboBoxItem>
                     <ComboBoxItem>HLS</ComboBoxItem>
@@ -61,7 +64,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Streaming key" HorizontalAlignment="Left" Width="90"/>
-                <TextBox x:Name="edStreamingKey" HorizontalAlignment="Left" Width="250" Text="KEY" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="edStreamingKey" HorizontalAlignment="Left" Margin="10,0,0,0" Width="250" Text="KEY" VerticalContentAlignment="Center"/>
             </StackPanel>
         </StackPanel>
     </Grid>
