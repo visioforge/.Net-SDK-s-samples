@@ -7,6 +7,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioRendering;
+using VisioForge.Core.MediaBlocks.AWS;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
