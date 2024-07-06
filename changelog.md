@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.56
+
+* [Video Capture SDK .Net] VideoCaptureCore: Added the `VLC_CustomDefaultFrameRate` property to `IPCameraSourceSettings` to set a custom frame rate for the VLC IP camera source, if the source does not provide the correct frame rate.
+
 ## 15.9.52
 
 * [Media Blocks SDK .Net] `RTSPSourceBlock`: If the RTSP source has audio but you've disabled the audio stream in `RTSPSourceSettings`, SDK will add a null renderer automatically to prevent warnings.
