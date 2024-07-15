@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScreenCaptureMB.MainPage"             
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <ScrollView>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowSpacing="0" RowDefinitions="*,Auto" >
+
+            <my:VideoView Grid.Row="0"               
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             x:Name="videoView"
+             Background="Black"/>
+
+            <StackLayout 
+                 Grid.Row="1"
+                 Orientation="Horizontal"
+                 HorizontalOptions="Center"
+                 Margin="16, 0, 5, 0">
+
+                <Button  
+                    x:Name="btStart"   
+                    Text="START" 
+                    Margin="5" 
+                    Clicked="btStart_Clicked"
+                    VerticalOptions="Center" />
+
+                <Button  
+                    x:Name="btStop"   
+                    Text="STOP" 
+                    Margin="5" 
+                    Clicked="btStop_Clicked"
+                    VerticalOptions="Center"/>
+
+                <Label 
+                    Text="00:00:00" 
+                    x:Name="lbDuration"
+                    TextColor="White"
+                    Margin="5"
+                    VerticalOptions="Center" />
+                
+                <Label 
+                    Text="FILENAME" 
+                    x:Name="lbFilename"
+                    TextColor="White"
+                    Margin="5"
+                    IsVisible="false"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
