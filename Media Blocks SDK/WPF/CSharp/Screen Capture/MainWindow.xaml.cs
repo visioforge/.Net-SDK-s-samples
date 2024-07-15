@@ -26,6 +26,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.AudioEncoders;
 using System.Linq;
 using VisioForge.Core.Types.X.VideoCapture;
+using System.Windows.Media;
 
 namespace Screen_Capture_MB_WPF
 {
@@ -125,7 +126,22 @@ namespace Screen_Capture_MB_WPF
             }
         }
 
-        private ScreenCaptureDX9SourceSettings CreateScreenCaptureSource()
+        private IScreenCaptureSourceSettings CreateWindowCaptureSource()
+        { 
+            // create Direct3D11 source
+            var source = new ScreenCaptureD3D11SourceSettings();
+
+            // set frame rate
+            source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
+
+            // get handle of the window
+            var wih = new System.Windows.Interop.WindowInteropHelper(this);
+            source.WindowHandle = wih.Handle;
+
+            return source;
+        }
+
+        private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
 
@@ -168,8 +184,18 @@ namespace Screen_Capture_MB_WPF
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // screen source
-            var screenSettings = CreateScreenCaptureSource();
-            _screenSource = new ScreenSourceBlock(screenSettings);
+
+            if (rbWindow.IsChecked == true)
+            {
+                var windowSettings = CreateWindowCaptureSource();
+                _screenSource = new ScreenSourceBlock(windowSettings);
+            }
+            else
+            {
+                // screen source
+                var screenSettings = CreateScreenCaptureSource();
+                _screenSource = new ScreenSourceBlock(screenSettings);
+            }
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 

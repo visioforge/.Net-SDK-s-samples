@@ -1,8 +1,13 @@
 # Changelog
 
+## 15.9.58
+
+* [X-engines] Resolved issue with window capture using `ScreenCaptureD3D11SourceSettings` class. If the rectangle was incorrect or not specified, it caused an error.
+
 ## 15.9.57
 
-* [X-engines] Added a `Metal` renderer for Apple devices. It is used by default for iOS and MAUI.
+* [X-engines] `Metal` renderer was added to SDK for Apple devices and used by default for iOS and MAUI.
+* [Media Blocks SDK .Net] Added the MAUI Screen Capture sample.
 
 ## 15.9.56
 
@@ -115,7 +120,6 @@
 * [Media Blocks SDK .Net] Added RTSP MultiView in Sync Demo
 * [X-engines] Added support for FLIR/Teledyne cameras (USB3Vision/GigE) using the Spinnaker SDK
 * [Video Edit SDK .Net] VideoEditCoreX: Added support for .Net Stream usage as an input source
-* .Net 7 support returned to the MAUI package (it was removed by CI error).
 * The IAsyncDisposable interface was added to all SDK's core classes. The `DisposeAsync` call should be used to dispose of the core objects using async methods.  
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issues with Android video capture (sometimes started only one time)
 * [Media Blocks SDK .Net] Added HLS streaming sample

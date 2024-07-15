@@ -16,6 +16,7 @@
                     <Label Height="28" HorizontalAlignment="Left" Margin="10,281,0,0" Name="label23" VerticalAlignment="Top" Width="120">Audio input device</Label>
                     <ComboBox Height="23" Margin="0,309,0,0" Name="cbAudioInputDevice" VerticalAlignment="Top" HorizontalAlignment="Center" Width="321" />
                     <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,15,0,0" Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True">Full Screen</RadioButton>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="183,15,0,0" Name="rbWindow" VerticalAlignment="Top" Width="89">This window</RadioButton>
                     <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,41,0,0" Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89">Custom Area</RadioButton>
                     <TextBox Margin="103,64,0,0" Name="edScreenLeft" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39" Text="0" />
                     <Label Height="28" Margin="32,62,0,0" Name="label15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Left</Label>

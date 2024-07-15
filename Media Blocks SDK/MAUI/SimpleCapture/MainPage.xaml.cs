@@ -404,6 +404,24 @@ namespace SimpleCapture
             }
         }
 
+        private string GenerateFilename()
+        {
+            DateTime now = DateTime.Now;
+#if __ANDROID__
+            var filename =
+ Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __IOS__ && !__MACCATALYST__
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
+                "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __MACCATALYST__
+            var filename = Path.Combine("/tmp", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#else
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#endif
+
+            return filename;
+        }
+
         private void ConfigureCapture()
         {
             // add tee and connect
@@ -427,20 +445,7 @@ namespace SimpleCapture
             _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
 
             // add sink
-            var now = DateTime.Now;
-
-#if __ANDROID__
-            var filename =
- Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#elif __IOS__ && !__MACCATALYST__
-            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
-                "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#elif __MACCATALYST__
-            var filename = Path.Combine("/tmp",$"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#else
-            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#endif
-
+            var filename = GenerateFilename();
             var sinkSettings = new MP4SinkSettings(filename);
             _mp4Sink = new MP4SinkBlock(sinkSettings);
 
