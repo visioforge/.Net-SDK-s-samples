@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using Sentry.Protocol;
+using System.Security.Policy;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -16,6 +18,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.MAUI;
+using System.Text;
 
 namespace SimpleCapture
 {
@@ -432,9 +435,10 @@ namespace SimpleCapture
 #elif __IOS__ && !__MACCATALYST__
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __MACCATALYST__
+            var filename = Path.Combine("/tmp",$"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
-            var filename =
- Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
 
             var sinkSettings = new MP4SinkSettings(filename);

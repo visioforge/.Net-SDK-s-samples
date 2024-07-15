@@ -233,7 +233,7 @@ namespace IP_Capture
         {
             if (onvifControl != null)
             {
-                onvifControl.Disconnect();
+                await onvifControl.DisconnectAsync();
                 onvifControl.Dispose();
                 onvifControl = null;
 
@@ -494,7 +494,7 @@ namespace IP_Capture
 
                     if (onvifControl != null)
                     {
-                        onvifControl.Disconnect();
+                        await onvifControl.DisconnectAsync();
                         onvifControl.Dispose();
                         onvifControl = null;
                     }
@@ -558,7 +558,7 @@ namespace IP_Capture
 
                 if (onvifControl != null)
                 {
-                    onvifControl.Disconnect();
+                    await onvifControl.DisconnectAsync();
                     onvifControl.Dispose();
                     onvifControl = null;
                 }

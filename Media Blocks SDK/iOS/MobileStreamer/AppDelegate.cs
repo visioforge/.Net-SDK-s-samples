@@ -51,7 +51,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private VideoViewGL _videoView;
+    private VideoView _videoView;
 
     public override UIWindow? Window { get; set; }
 
@@ -172,7 +172,7 @@ public class AppDelegate : UIApplicationDelegate
             return;
         }
 
-        videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+        videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
         // create video tee
@@ -208,12 +208,12 @@ public class AppDelegate : UIApplicationDelegate
     private void AddButtons(UIView parent)
     {
         // select camera
-        var btSelectCamera = new UIButton(new CGRect(20, 20, 200, 70))
+        var btSelectCamera = new UIButton(new CGRect(20, 20, 200, 50))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btSelectCamera.SetTitle("BACK", UIControlState.Normal);
         btSelectCamera.TouchUpInside += async (sender, e) =>
@@ -233,12 +233,12 @@ public class AppDelegate : UIApplicationDelegate
         parent!.AddSubview(btSelectCamera);
 
         // start Facebook
-        var btStartFacebook = new UIButton(new CGRect(240, 20, 200, 70))
+        var btStartFacebook = new UIButton(new CGRect(240, 20, 200, 50))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btStartFacebook.SetTitle("START FACEBOOK", UIControlState.Normal);
         btStartFacebook.TouchUpInside += async (sender, e) =>
@@ -255,13 +255,13 @@ public class AppDelegate : UIApplicationDelegate
                     Toast.Show("Facebook Live Key is empty. Please set it in code.", Window.RootViewController);
                     return;
                 }
-
+            
                 await CreateEngineAsync();
-
+            
                 AddFacebookSink();
-
+            
                 await _pipeline.StartAsync();
-
+            
                 btStartFacebook.SetTitle("STOP FACEBOOK", UIControlState.Normal);
             }
         };
@@ -269,12 +269,12 @@ public class AppDelegate : UIApplicationDelegate
         parent!.AddSubview(btStartFacebook);
         
         // start YouTube 
-        var btStartYouTube = new UIButton(new CGRect(460, 20, 200, 70))
+        var btStartYouTube = new UIButton(new CGRect(460, 20, 200, 50))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btStartYouTube.SetTitle("START YOUTUBE", UIControlState.Normal);
         btStartYouTube.TouchUpInside += async (sender, e) =>
@@ -305,12 +305,12 @@ public class AppDelegate : UIApplicationDelegate
         parent!.AddSubview(btStartYouTube);
 
         // start SRT
-        var btStartSRT = new UIButton(new CGRect(680, 20, 200, 70))
+        var btStartSRT = new UIButton(new CGRect(680, 20, 200, 50))
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btStartSRT.SetTitle("START SRT", UIControlState.Normal);
         btStartSRT.TouchUpInside += async (sender, e) =>
@@ -355,10 +355,10 @@ public class AppDelegate : UIApplicationDelegate
         await DestroyEngineAsync();
     }
 
-    private void CreateVideoView(UIView view)
+    private void AddVideoView(UIView view)
     {
-        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height);
-        _videoView = new VideoViewGL(rect);
+        var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
+        _videoView = new VideoView(rect);
 
         view!.AddSubview(_videoView);
     }
@@ -371,7 +371,7 @@ public class AppDelegate : UIApplicationDelegate
         // create a UIViewController with a single UILabel
         var vc = new UIViewController();
 
-        CreateVideoView(vc.View);
+        AddVideoView(vc.View);
 
         AddButtons(vc.View);
 

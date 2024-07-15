@@ -103,8 +103,6 @@ namespace MobileStreamer
             }
 
             Window.Destroying += Window_Destroying;
-
-            //var aacs = ElementEnumerator.GetElements("aac");
         }
 
         private async Task RequestCameraPermissionAsync()
@@ -281,7 +279,7 @@ namespace MobileStreamer
             }
 
 #if __IOS__ && !__MACCATALYST__
-            videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
 #endif
 
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
@@ -339,17 +337,16 @@ namespace MobileStreamer
             CreateEngine();
 
             await ConfigurePreviewAsync();
+
             _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(edKey.Text));
 
             ConfigureCapture();
-
+            
             await _pipeline.StartAsync();
         }
 
         private async void btStartFacebook_Clicked(object sender, EventArgs e)
         {
-            edKey.Text = "FB-7523224911080379-0-AbxO9RedUC9__ESh";
-
             await StopAllAsync();
 
             CreateEngine();

@@ -726,7 +726,7 @@ namespace VideoCapture_CSharp_Demo
 
             if (onvifDevice != null)
             {
-                onvifDevice.Disconnect();
+                await onvifDevice.DisconnectAsync();
                 onvifDevice.Dispose();
                 onvifDevice = null;
 
@@ -5211,7 +5211,7 @@ namespace VideoCapture_CSharp_Demo
 
                     if (onvifDevice != null)
                     {
-                        onvifDevice.Disconnect();
+                        await onvifDevice.DisconnectAsync();
                         onvifDevice.Dispose();
                         onvifDevice = null;
                     }
@@ -5234,7 +5234,7 @@ namespace VideoCapture_CSharp_Demo
                     lbONVIFCameraInfo.Text = $"{onvifDevice.CameraName}, s/n {onvifDevice.SerialNumber}";
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = onvifDevice.GetProfiles();
+                    var profiles = await onvifDevice.GetProfilesAsync();
                     foreach (var profile in profiles)
                     {
                         cbONVIFProfile.Items.Add($"{profile.Name}");
@@ -5266,7 +5266,7 @@ namespace VideoCapture_CSharp_Demo
 
                 if (onvifDevice != null)
                 {
-                    onvifDevice.Disconnect();
+                    await onvifDevice.DisconnectAsync();
                     onvifDevice.Dispose();
                     onvifDevice = null;
                 }

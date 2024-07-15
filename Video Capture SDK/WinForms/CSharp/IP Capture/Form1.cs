@@ -111,7 +111,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             if (onvifDeviceX != null)
             {
-                onvifDeviceX.Disconnect();
+                await onvifDeviceX.DisconnectAsync();
                 onvifDeviceX.Dispose();
                 onvifDeviceX = null;
 
@@ -332,7 +332,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
                     if (onvifDeviceX != null)
                     {
-                        onvifDeviceX.Disconnect();
+                        await onvifDeviceX.DisconnectAsync();
                         onvifDeviceX.Dispose();
                         onvifDeviceX = null;
                     }
@@ -355,7 +355,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     lbONVIFCameraInfo.Text = $"Model {onvifDeviceX.CameraName}, Serial number {onvifDeviceX.SerialNumber}";
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = onvifDeviceX.GetProfiles();
+                    var profiles = await onvifDeviceX.GetProfilesAsync();
                     foreach (var profile in profiles)
                     {
                         cbONVIFProfile.Items.Add($"{profile.Name}");
@@ -385,7 +385,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
                 if (onvifDeviceX != null)
                 {
-                    onvifDeviceX.Disconnect();
+                    await onvifDeviceX.DisconnectAsync();
                     onvifDeviceX.Dispose();
                     onvifDeviceX = null;
                 }

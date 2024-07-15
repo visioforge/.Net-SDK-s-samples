@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240627000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +60,9 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.56" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.56" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.40" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.40" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.57" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.57" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
   </ItemGroup>
 </Project>

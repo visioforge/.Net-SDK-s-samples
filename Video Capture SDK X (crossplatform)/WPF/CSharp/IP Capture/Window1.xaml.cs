@@ -170,7 +170,7 @@ namespace IP_Capture
         {
             if (onvifDevice != null)
             {
-                onvifDevice.Disconnect();
+                await onvifDevice.DisconnectAsync();
                 onvifDevice.Dispose();
                 onvifDevice = null;
 
@@ -390,7 +390,7 @@ namespace IP_Capture
 
                     if (onvifDevice != null)
                     {
-                        onvifDevice.Disconnect();
+                        await onvifDevice.DisconnectAsync();
                         onvifDevice.Dispose();
                         onvifDevice = null;
                     }
@@ -413,7 +413,7 @@ namespace IP_Capture
                     lbONVIFCameraInfo.Content = $"{onvifDevice.CameraName}, s/n {onvifDevice.SerialNumber}";
                     
                     cbONVIFProfile.Items.Clear();
-                    var profiles = onvifDevice.GetProfiles();
+                    var profiles = await onvifDevice.GetProfilesAsync();
                     foreach (var profile in profiles)
                     {
                         cbONVIFProfile.Items.Add($"{profile.Name}");
@@ -444,7 +444,7 @@ namespace IP_Capture
 
                 if (onvifDevice != null)
                 {
-                    onvifDevice.Disconnect();
+                    await onvifDevice.DisconnectAsync();
                     onvifDevice.Dispose();
                     onvifDevice = null;
                 }
@@ -664,7 +664,7 @@ namespace IP_Capture
                 return;
             }
 
-            Dispatcher.Invoke((Action)(() =>
+            await Dispatcher.InvokeAsync((Action)(() =>
             {
                 lbTimestamp.Text = "Duration: " + ts.ToString(@"hh\:mm\:ss");
             }));

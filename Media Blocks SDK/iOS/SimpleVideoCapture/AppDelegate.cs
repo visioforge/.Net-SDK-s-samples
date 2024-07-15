@@ -1,4 +1,5 @@
-﻿using Photos;
+﻿
+using Photos;
 using System.Diagnostics;
 using VisioForge.Core;
 using VisioForge.Core.GStreamer.Helpers;
@@ -48,7 +49,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private VideoViewGL _videoView;
+    private VideoView _videoView;
 
     public override UIWindow? Window { get; set; }
 
@@ -97,7 +98,7 @@ public class AppDelegate : UIApplicationDelegate
             return;
         }
 
-        videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+        videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
         // create video tee
@@ -169,8 +170,8 @@ public class AppDelegate : UIApplicationDelegate
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btSelectCamera.SetTitle("BACK", UIControlState.Normal);
         btSelectCamera.TouchUpInside += async (sender, e) =>
@@ -194,8 +195,8 @@ public class AppDelegate : UIApplicationDelegate
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btStartPreview.SetTitle("START PREVIEW", UIControlState.Normal);
         btStartPreview.TouchUpInside += async (sender, e) =>
@@ -219,8 +220,8 @@ public class AppDelegate : UIApplicationDelegate
         {
             BackgroundColor = UIColor.Gray,
             AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Bottom,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Left
+            VerticalAlignment = UIControlContentVerticalAlignment.Center,
+            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
         };
         btStartCapture.SetTitle("START CAPTURE", UIControlState.Normal);
         btStartCapture.TouchUpInside += async (sender, e) =>
@@ -305,8 +306,8 @@ public class AppDelegate : UIApplicationDelegate
 
     private void CreateVideoView(UIView view)
     {
-        var rect = new CGRect(0, 100, Window!.Frame.Width, Window!.Frame.Height);
-        _videoView = new VideoViewGL(rect);
+        var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
+        _videoView = new VideoView(rect);
 
         view!.AddSubview(_videoView);
     }
