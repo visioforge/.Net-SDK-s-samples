@@ -1,8 +1,12 @@
 # Changelog
 
+## 15.9.59
+
+* [X-engines] `IVideoEncoder` interface added to the `MPEG2VideoEncoder` class. It allows the use of `MPEG2VideoEncoder` with `MPEGTSOutput`, `AVIOutput`, and other output classes.
+
 ## 15.9.58
 
-* [X-engines] Resolved issue with window capture using `ScreenCaptureD3D11SourceSettings` class. If the rectangle was incorrect or not specified, it caused an error.
+* [X-engines] Resolved the issue with window capture using the `ScreenCaptureD3D11SourceSettings` class. If the rectangle was incorrect or not specified, it caused an error.
 
 ## 15.9.57
 

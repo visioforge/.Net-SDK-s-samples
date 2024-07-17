@@ -29,9 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser19" Version="1.9.74" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.58" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.58" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.9.58" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.59" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.59" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.9.59" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
