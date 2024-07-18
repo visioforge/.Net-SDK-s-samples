@@ -89,7 +89,7 @@ namespace Memory_Stream_Demo
             }
             else
             {
-                _memorySource = File.ReadAllBytes(edFilename.Text);
+                _memorySource = await File.ReadAllBytesAsync(edFilename.Text);
                 _memoryStream = new MemoryStream(_memorySource);
                 _stream = new ManagedIStream(_memoryStream);
 
@@ -151,11 +151,17 @@ namespace Memory_Stream_Demo
             timer1.Enabled = false;
             tbTimeline.Value = 0;
 
-            _fileStream?.Dispose();
-            _fileStream = null;
+            if (_fileStream != null)
+            {
+                await _fileStream.DisposeAsync();
+                _fileStream = null;
+            }
 
-            _memoryStream?.Dispose();
-            _memoryStream = null;
+            if (_memoryStream != null)
+            {
+                await _memoryStream.DisposeAsync();
+                _memoryStream = null;
+            }
 
             _memorySource = null;
             _stream = null;

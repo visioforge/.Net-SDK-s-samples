@@ -124,9 +124,9 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.59" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.9.59" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.59" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.9.60" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.9.60" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.9.60" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

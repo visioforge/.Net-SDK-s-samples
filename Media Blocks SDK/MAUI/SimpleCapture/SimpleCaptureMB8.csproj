@@ -91,8 +91,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.59" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.59" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.60" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.60" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
   </ItemGroup>
