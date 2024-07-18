@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.61
+
+* [X-engines] Resolved `VideoViewTX` crash in MAUI Android applications.
+
 ## 15.9.59
 
 * [X-engines] `IVideoEncoder` interface added to the `MPEG2VideoEncoder` class. It allows the use of `MPEG2VideoEncoder` with `MPEGTSOutput`, `AVIOutput`, and other output classes.

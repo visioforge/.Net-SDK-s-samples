@@ -8,11 +8,11 @@
         <!--WidthRequest="1280" HeightRequest="720"-->
         <Grid RowDefinitions="*,Auto" >
 
-            <my:VideoView Grid.Row="0"               
+            <my:VideoView 
+                Grid.Row="0"               
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                x:Name="videoView"
-                Background="Black"/>
+                x:Name="videoView"/>
 
             <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 

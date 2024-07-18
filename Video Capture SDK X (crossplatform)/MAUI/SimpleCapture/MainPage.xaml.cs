@@ -110,6 +110,14 @@ namespace SimpleCapture
             Window.Destroying += Window_Destroying;
 
 #if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+            if (_cameras.Length > 1)
+            {
+                btCamera.Text = _cameras[1].DisplayName;
+                _cameraSelectedIndex = 1;
+            }
+#endif
+
+#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
             await StartPreview();
 #endif
         }
