@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#define MOBILE
+#endif
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -118,6 +122,7 @@ namespace SimpleCapture
 #endif
 
 #if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+            btStartCapture.IsEnabled = true;
             await StartPreview();
 #endif
         }
@@ -307,9 +312,14 @@ namespace SimpleCapture
             }
 
             // audio output
+#if MOBILE
+            _core.Audio_Play = false;
+#else
+            
             var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
             _core.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
             _core.Audio_Play = true;
+#endif
 
             // video source
             VideoCaptureDeviceSourceSettings videoSourceSettings = null;
@@ -334,6 +344,10 @@ namespace SimpleCapture
             }
 
             _core.Video_Source = videoSourceSettings;
+
+#if __IOS__ && !__MACCATALYST__
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
+#endif
 
             if (videoSourceSettings == null)
             {
@@ -370,13 +384,20 @@ namespace SimpleCapture
 
         private string GenerateFilename()
         {
-            var now = DateTime.Now;
-
+            DateTime now = DateTime.Now;
 #if __ANDROID__
-            return Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename =
+ Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __IOS__ && !__MACCATALYST__
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
+                "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+#elif __MACCATALYST__
+            var filename = Path.Combine("/tmp", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif
+
+            return filename;
         }
 
         private async void btStartPreview_Clicked(object sender, EventArgs e)

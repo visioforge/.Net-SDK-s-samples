@@ -1,8 +1,10 @@
-﻿using System;
+﻿#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#define MOBILE
+#endif
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using Sentry.Protocol;
-using System.Security.Policy;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
@@ -13,12 +15,9 @@ using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
-using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
-using VisioForge.Core.UI.MAUI;
-using System.Text;
 
 namespace SimpleCapture
 {
@@ -28,11 +27,13 @@ namespace SimpleCapture
 
         private SystemVideoSourceBlock _videoSource;
 
-        private SystemAudioSourceBlock _audioSource;
+        private MediaBlock _audioSource;
 
+#if !MOBILE
         private AudioRendererBlock _audioOutput;
+#endif
 
-        private VideoRendererBlock _videoRenderer;
+        private MediaBlock _videoRenderer;
 
         private TeeBlock _videoTee;
 
@@ -231,8 +232,10 @@ namespace SimpleCapture
             _videoRenderer?.Dispose();
             _videoRenderer = null;
 
+#if !MOBILE
             _audioOutput?.Dispose();
             _audioOutput = null;
+#endif
         }
 
 #if __IOS__ && !__MACCATALYST__
@@ -342,8 +345,10 @@ namespace SimpleCapture
 
         private async Task ConfigurePreviewAsync(bool connect)
         {
+#if !MOBILE
             // audio output
             _audioOutput = new AudioRendererBlock(_speakers.First(device => device.DisplayName == btSpeakers.Text));
+#endif
 
             // video source
             VideoCaptureDeviceSourceSettings videoSourceSettings = null;
@@ -374,7 +379,7 @@ namespace SimpleCapture
             }
 
 #if __IOS__ && !__MACCATALYST__
-            videoSourceSettings.Orientation = IOSVideoSourceOrientation.Portrait;
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
 #endif
 
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
@@ -395,12 +400,16 @@ namespace SimpleCapture
                 }
             }
 
+            //_audioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
             if (connect)
             {
                 _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
+
+#if !MOBILE
                 _pipeline.Connect(_audioSource.Output, _audioOutput.Input);
+#endif
             }
         }
 
@@ -433,7 +442,10 @@ namespace SimpleCapture
 
             // add preview
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+#if !MOBILE
             _pipeline.Connect(_audioTee.Outputs[0], _audioOutput.Input);
+#endif
 
             // add video encoder
             _videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
