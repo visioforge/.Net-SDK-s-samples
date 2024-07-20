@@ -40,7 +40,7 @@ namespace RTSP_MultiViewSync_Demo
             Password = rtspSettings.Password;
             AudioEnabled = rtspSettings.AudioEnabled;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
             _pipeline.OnStop += async (sender, args) =>
             {
