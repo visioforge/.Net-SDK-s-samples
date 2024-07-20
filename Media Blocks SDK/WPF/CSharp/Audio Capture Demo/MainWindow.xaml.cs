@@ -54,7 +54,7 @@ namespace Audio_Capture_Demo_MB
 
         private void CreatePipeline()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;
         }

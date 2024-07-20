@@ -44,7 +44,7 @@ namespace USB3V_GigE_Spinnaker
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 

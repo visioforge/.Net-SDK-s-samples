@@ -40,7 +40,7 @@ namespace MediaBlocks_Player_Demo
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(false);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;

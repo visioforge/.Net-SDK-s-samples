@@ -54,8 +54,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.63" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.63" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.64" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.64" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />

@@ -123,7 +123,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
             bool capture = cbCapture.Checked;

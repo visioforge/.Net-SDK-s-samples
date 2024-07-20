@@ -37,7 +37,7 @@
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline(false);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.OnStart += Pipeline_OnStart;

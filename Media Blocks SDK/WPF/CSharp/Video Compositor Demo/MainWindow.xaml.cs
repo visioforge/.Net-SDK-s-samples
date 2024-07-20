@@ -69,7 +69,7 @@ namespace Video_Compositor_Demo
 
             System.Windows.Forms.Application.EnableVisualStyles();
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -82,7 +82,7 @@ namespace Video_Compositor_Demo
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 

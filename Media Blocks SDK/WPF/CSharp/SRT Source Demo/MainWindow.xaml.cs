@@ -37,7 +37,7 @@ namespace SRT_Source_Demo
 
             System.Windows.Forms.Application.EnableVisualStyles();
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
@@ -48,7 +48,7 @@ namespace SRT_Source_Demo
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 

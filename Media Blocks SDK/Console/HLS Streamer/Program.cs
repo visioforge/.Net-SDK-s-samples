@@ -18,7 +18,7 @@ namespace HLSStreamer
             Console.WriteLine("The HLS Streamer app can stream sample video and audio sources using the HLS protocol. You can open localhost IP with port 8080 in your browser. H264 and AAC encoders were used.");
 
             // Pipeline
-            var pipeline = new MediaBlocksPipeline(true);
+            var pipeline = new MediaBlocksPipeline();
             pipeline.OnError += Pipeline_OnError;
 
             // video and audio sources

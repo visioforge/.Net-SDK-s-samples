@@ -54,9 +54,9 @@ namespace Decklink_MultiOutput
             InitializeComponent();
         }
 
-        private void CreatePipeline(bool live)
+        private void CreatePipeline()
         {
-            _pipeline = new MediaBlocksPipeline(live);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -119,7 +119,7 @@ namespace Decklink_MultiOutput
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreatePipeline(true);
+            CreatePipeline();
 
             mmLog.Clear();
 

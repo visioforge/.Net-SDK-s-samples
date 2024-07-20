@@ -36,7 +36,7 @@ namespace Face_Detector_Live
         {
             InitializeComponent();
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
@@ -53,7 +53,7 @@ namespace Face_Detector_Live
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

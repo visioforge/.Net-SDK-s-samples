@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.64
+
+* [X-engines] The `MediaBlocksPipeline` constructor no longer has the `live` parameter. For more customizable pipelines, video and audio renderers got the `IsSync` property (`true` by default).
+
 ## 15.9.61
 
 * [X-engines] Resolved `VideoViewTX` crash in MAUI Android applications.

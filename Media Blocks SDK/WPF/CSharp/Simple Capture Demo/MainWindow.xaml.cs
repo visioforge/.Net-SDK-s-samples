@@ -63,7 +63,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         {
             InitializeComponent();
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
             DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
@@ -123,7 +123,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

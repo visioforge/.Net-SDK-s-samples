@@ -57,7 +57,7 @@ namespace RTSP_Preview
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
 
             _pipeline.OnError += VideoCapture1_OnError;
         }

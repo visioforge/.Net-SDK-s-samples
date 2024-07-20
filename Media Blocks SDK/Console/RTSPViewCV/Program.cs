@@ -53,7 +53,7 @@ namespace RTSPViewCV
 
             InitFaceDetector();
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
             string url = args[0]; 

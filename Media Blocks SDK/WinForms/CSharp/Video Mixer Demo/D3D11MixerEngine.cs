@@ -43,7 +43,7 @@ namespace MediaBlocks_Video_Mixer_Demo
 
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
         {
-            _pipeline = new MediaBlocksPipeline(false);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
             var source1Settings = await UniversalSourceSettings.CreateAsync(filename1);

@@ -79,7 +79,7 @@ namespace Decklink_MB_Demo
         {
             _started = false;
 
-            _pipeline = new MediaBlocksPipeline(live);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStart += Pipeline_OnStart;
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;

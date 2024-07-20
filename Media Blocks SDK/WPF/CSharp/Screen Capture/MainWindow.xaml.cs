@@ -104,7 +104,7 @@ namespace Screen_Capture_MB_WPF
 
         private void CreateEngines()
         {
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 

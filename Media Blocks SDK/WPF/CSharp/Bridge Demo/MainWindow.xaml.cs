@@ -82,7 +82,7 @@ namespace Bridge_Demo
 
         private async Task CreateSourceEngineAsync()
         {
-            _pipelineSource = new MediaBlocksPipeline(false, name: "SOURCE");
+            _pipelineSource = new MediaBlocksPipeline(name: "SOURCE");
             _pipelineSource.OnError += Pipeline_OnError;
             
             // video
@@ -94,7 +94,8 @@ namespace Bridge_Demo
             _videoTee = new TeeBlock(2);
             
             _videoRenderer = new VideoRendererBlock(_pipelineSource, VideoView1);
-            
+            _videoRenderer.IsSync = false;
+
             _pipelineSource.Connect(_videoSource.Output, _videoTee.Input);
             _pipelineSource.Connect(_videoTee.Outputs[0], _videoBridgeSink.Input);
             _pipelineSource.Connect(_videoTee.Outputs[1], _videoRenderer.Input);
@@ -116,7 +117,7 @@ namespace Bridge_Demo
 
         private void CreateFileOutputEngine()
         {
-            _pipelineFileOutput = new MediaBlocksPipeline(true, name: "FILE_OUTPUT");
+            _pipelineFileOutput = new MediaBlocksPipeline(name: "FILE_OUTPUT");
             _pipelineFileOutput.OnError += Pipeline_OnError;
             
             // video bridge source

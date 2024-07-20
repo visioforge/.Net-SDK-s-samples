@@ -41,7 +41,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public Task<bool> StartAsync(RTSPRAWSourceSettings rtspSettings)
         {
-            Pipeline = new MediaBlocksPipeline(true);
+            Pipeline = new MediaBlocksPipeline();
             Pipeline.OnError += OnError;
             // Pipeline.Debug_Mode = true;
 

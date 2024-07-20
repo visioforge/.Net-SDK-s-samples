@@ -45,7 +45,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Password = rtspSettings.Password;
             AudioEnabled = rtspSettings.AudioEnabled;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
             _source = new RTSPSourceBlock(rtspSettings);

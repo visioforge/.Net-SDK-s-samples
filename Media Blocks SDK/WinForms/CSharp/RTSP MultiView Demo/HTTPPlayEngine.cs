@@ -40,7 +40,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Password = password;
             AudioEnabled = audioEnabled;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
             //var rtspSettings = new RTSPSourceSettings(new Uri(url), audioEnabled);

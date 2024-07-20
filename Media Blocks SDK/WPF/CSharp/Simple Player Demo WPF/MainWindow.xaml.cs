@@ -82,7 +82,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
         private async Task CreateEngineAsync()
         {
-            _pipeline = new MediaBlocksPipeline(false);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
