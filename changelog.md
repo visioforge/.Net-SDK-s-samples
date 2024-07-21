@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.65
+
+* [Video Capture SDK .Net] Resolved the issue with the `SeparateCapture` API if no `VideoView` was used
+
 ## 15.9.64
 
 * [X-engines] The `MediaBlocksPipeline` constructor no longer has the `live` parameter. For more customizable pipelines, video and audio renderers got the `IsSync` property (`true` by default).
