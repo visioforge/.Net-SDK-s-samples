@@ -97,7 +97,7 @@ namespace RTSP_Client
 
              videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(RTSP_Client.Resource.Id.videoView);
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             //_pipeline.Debug_Dir = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += _pipeline_OnError;
             // _pipeline.OnStop += _pipeline_OnStop;

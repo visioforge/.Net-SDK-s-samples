@@ -55,7 +55,7 @@ namespace Simple_Player_MB_MAUI
                 await _pipeline.DisposeAsync();
             }
 
-            _pipeline = new MediaBlocksPipeline(false);
+            _pipeline = new MediaBlocksPipeline();
 
             _pipeline.OnError += _player_OnError;
             _pipeline.OnStart += _player_OnStart;

@@ -129,7 +129,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private async Task CreateEngineAsync()
     {
-        _pipeline = new MediaBlocksPipeline(true);
+        _pipeline = new MediaBlocksPipeline();
         _pipeline.OnError += _pipeline_OnError;
 
         // video source

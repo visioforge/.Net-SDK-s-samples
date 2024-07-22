@@ -66,7 +66,7 @@ namespace ScreenCaptureMB
                 await _pipeline.DisposeAsync();
             }
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
 
             _pipeline.OnError += _player_OnError;
 

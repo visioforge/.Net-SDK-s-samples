@@ -78,7 +78,7 @@ public partial class ViewController : NSViewController
             await _pipeline.DisposeAsync();
         }
 
-        _pipeline = new MediaBlocksPipeline(true);
+        _pipeline = new MediaBlocksPipeline();
 
         _videoView = new VideoViewGL(new CGRect(0, 0, pnVideoViewX.Bounds.Width, pnVideoViewX.Bounds.Height));
         pnVideoViewX.AddSubview(_videoView);

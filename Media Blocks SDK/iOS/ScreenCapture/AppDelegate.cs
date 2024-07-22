@@ -50,7 +50,7 @@ namespace ScreenCapture
         {
             //capture = false;
 
-            _pipeline = new MediaBlocksPipeline(true);
+            _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
             // video source

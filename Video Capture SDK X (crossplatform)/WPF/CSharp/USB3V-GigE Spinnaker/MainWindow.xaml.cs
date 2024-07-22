@@ -10,9 +10,8 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCaptureX;
-using VisioForge.Plugins.Spinnaker;
-using VisioForge.Plugins.Spinnaker.MediaBlocks.Sources;
 
 namespace USB3V_GigE_Spinnaker
 {
@@ -75,7 +74,8 @@ namespace USB3V_GigE_Spinnaker
         {
             CreateEngine();
 
-            var sourceInfo = SpinnakerEnumerator.Cameras.ToList().Find(x => x.Name == cbCamera.Text);
+            var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
+            var sourceInfo = sources.ToList().Find(x => x.Name == cbCamera.Text);
             var sourceSettings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text))); 
             _core.Video_Source = sourceSettings;
 
@@ -101,9 +101,9 @@ namespace USB3V_GigE_Spinnaker
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            await SpinnakerEnumerator.EnumerateAsync();
+            var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
 
-            foreach (var device in SpinnakerEnumerator.Cameras)
+            foreach (var device in sources)
             {
                 cbCamera.Items.Add(device.Name);
             }

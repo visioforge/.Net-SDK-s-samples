@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.66
+
+* [X-engines] The `Spinnaker` source for `FLIR`/`Teledyne` cameras is included in the main package and no longer requires an additional plugin.
+
 ## 15.9.65
 
 * [Video Capture SDK .Net] Resolved the issue with the `SeparateCapture` API if no `VideoView` was used

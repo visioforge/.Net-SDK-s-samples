@@ -65,7 +65,7 @@ namespace MobileStreamer
 
         private void CreateEngine()
         {
-            _pipeline = new MediaBlocksPipeline(live: true);
+            _pipeline = new MediaBlocksPipeline();
 
 #if __IOS__ && !__MACCATALYST__ || __ANDROID__
             var vv = videoView.Handler.PlatformView;
