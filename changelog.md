@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.69
+
+* [X-engines] Resolved an issue with two or more VU meters in the same pipeline.
+
 ## 15.9.68
 
 * [X-engines] Resolved volume/mute error issue with audio mixer in Live Video Compositor engine.
@@ -10,7 +14,7 @@
 
 ## 15.9.65
 
-* [Video Capture SDK .Net] Resolved the issue with the `SeparateCapture` API if no `VideoView` was used
+* [Video Capture SDK .Net] Resolved the issue with the `SeparateCapture` API if no `VideoView` was used.
 
 ## 15.9.64
 
