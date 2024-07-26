@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.68
+
+* [X-engines] Resolved volume/mute error issue with audio mixer in Live Video Compositor engine.
+
 ## 15.9.66
 
 * [X-engines] The `Spinnaker` source for `FLIR`/`Teledyne` cameras is included in the main package and no longer requires an additional plugin.
