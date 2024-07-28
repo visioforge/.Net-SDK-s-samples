@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.72
+
+* [X-engines] Better support for video source size dynamic changing in MAUI applications.
+
 ## 15.9.69
 
 * [X-engines] Resolved an issue with two or more VU meters in the same pipeline.
