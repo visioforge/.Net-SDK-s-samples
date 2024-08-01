@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.9.73
+
+* [Media Blocks SDK .Net] Added the `MKVOutputBlock` to save video and audio streams to the MKV file format.
+
 ## 15.9.72
 
 * [X-engines] Better support for video source size dynamic changing in MAUI applications.

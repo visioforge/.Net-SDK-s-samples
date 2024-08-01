@@ -33,6 +33,8 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.UI.WPF.Dialogs.Sources;
 using VisioForge.Core;
+using VisioForge.Core.Types.X.OpenGL;
+using VisioForge.Libs.DirectShowLib;
 
 namespace Video_Compositor_Demo
 {
@@ -198,7 +200,7 @@ namespace Video_Compositor_Demo
        
         private void UpdateRecordingTime()
         {
-            var ts = _pipeline.Duration();
+            var ts = _pipeline.Position_Get();
 
             if (Math.Abs(ts.TotalMilliseconds) < 0.01)
             {
@@ -218,8 +220,22 @@ namespace Video_Compositor_Demo
             CreateEngine();
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer.IsSync = false;
 
-            var videoMixerSettings = new VideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text), 1));
+            VideoMixerBaseSettings videoMixerSettings;
+
+            if (cbMixerType.SelectedIndex == 0)
+            {
+                videoMixerSettings = new VideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
+            }
+            else if (cbMixerType.SelectedIndex == 1)
+            {
+                videoMixerSettings = new D3D11VideoCompositorSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
+            }
+            else
+            {
+                videoMixerSettings = new GLVideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
+            }
 
             uint i = 0;
             foreach (var source in _sources)
@@ -246,7 +262,7 @@ namespace Video_Compositor_Demo
                 // create video tee
                 _videoTee = new TeeBlock(2);
                 _pipeline.Connect(_videoMixer.Output, _videoTee.Input);
-                
+
                 // connect video renderer for preview
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
                 

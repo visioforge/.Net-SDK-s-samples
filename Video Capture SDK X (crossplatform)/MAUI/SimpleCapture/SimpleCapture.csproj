@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.72" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.9.73" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Splash\splash.svg" />
@@ -80,8 +80,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.72" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.72" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.9.73" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.73" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
