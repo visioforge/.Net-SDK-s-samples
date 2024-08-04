@@ -1,5 +1,5 @@
 ﻿using System;
-using VisioForge.Core.CVD;
+using VisioForge.Core.CV;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
@@ -11,30 +11,13 @@ namespace RTSPViewCV
 {
     internal class Program
     {
-        static FaceDetector _faceDetector;
+        static DNNFaceDetectorBlock _faceDetector;
 
         static MediaBlocksPipeline _pipeline;
 
-        //static NullRendererBlock _videoRenderer;
-
         static VideoRendererBlock _videoRenderer;
 
-        static VideoSampleGrabberBlock _sampleGrabber;
-
         static RTSPSourceBlock _source;
-
-        //static FileSourceBlock _source;
-
-        static void InitFaceDetector(bool eyes = false, bool nose = false, bool mouth = false)
-        {
-            _faceDetector = new FaceDetector();
-            _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
-
-            _faceDetector.Init();
-
-            _faceDetector.DrawEnabled = true;
-            _faceDetector.UpdateSettings();
-        }
 
         static void Main(string[] args)
         {
@@ -51,8 +34,6 @@ namespace RTSPViewCV
             // AudioRendererBlock _audioRenderer;
             // audioEnabled = true;
 
-            InitFaceDetector();
-
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
@@ -67,11 +48,11 @@ namespace RTSPViewCV
 
             _videoRenderer = new VideoRendererBlock(_pipeline, null);
 
-            _sampleGrabber = new VideoSampleGrabberBlock(VideoFormatX.RGB);
-            _sampleGrabber.OnVideoFrameBuffer += _sampleGrabber_OnVideoFrameBuffer; ;
+            _faceDetector = new DNNFaceDetectorBlock();
+            _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
 
-            _pipeline.Connect(_source.VideoOutput, _sampleGrabber.Input);
-            _pipeline.Connect(_sampleGrabber.Output, _videoRenderer.Input);
+            _pipeline.Connect(_source.VideoOutput, _faceDetector.Input);
+            _pipeline.Connect(_faceDetector.Output, _videoRenderer.Input);
 
             //if (rtspSettings.AudioEnabled)
             //{
@@ -91,13 +72,6 @@ namespace RTSPViewCV
         private static void FaceDetector_OnFaceDetected(object sender, VisioForge.Core.Types.Events.CVFaceDetectedEventArgs e)
         {
             Console.WriteLine($"Face detected at [{e.TimeStamp}]");
-        }
-
-        private static void _sampleGrabber_OnVideoFrameBuffer(object sender, VisioForge.Core.Types.Events.VideoFrameXBufferEventArgs e)
-        {
-            //Console.WriteLine($"Video frame received. [{e.Frame.Timestamp}]");
-
-            _faceDetector?.Process(e.Frame);            
         }
 
         private static void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)

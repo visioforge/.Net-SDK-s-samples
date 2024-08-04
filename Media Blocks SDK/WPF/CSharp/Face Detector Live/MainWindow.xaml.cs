@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core;
+using VisioForge.Core.CV;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.OpenCV;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -26,9 +27,7 @@ namespace Face_Detector_Live
 
         private SystemVideoSourceBlock _videoSource;
 
-        private CVFaceDetectBlock _detector;
-
-        private CVFaceBlurBlock _blurer;
+        private DNNFaceDetectorBlock _faceDetect;
 
         private System.Timers.Timer _timer;
 
@@ -199,22 +198,14 @@ namespace Face_Detector_Live
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // detector/blurrer
-            MediaBlock detectOrBlur;
-            if (rbDetectFaces.IsChecked == true)
-            {
-                _detector = new CVFaceDetectBlock(new CVFaceDetectSettings());
-                _detector.FaceDetected += _detector_FaceDetected;
-                detectOrBlur = _detector;
-            }
-            else
-            {
-                _blurer = new CVFaceBlurBlock(new CVFaceBlurSettings());
-                detectOrBlur = _blurer;
-            }
+            var detectSettings = new DNNFaceDetectorSettings();
+            detectSettings.Blur = rbBlurFaces.IsChecked == true;
+            _faceDetect = new DNNFaceDetectorBlock(detectSettings);
+            _faceDetect.OnFaceDetected += _detector_FaceDetected;
             
             // connect all
-            _pipeline.Connect(_videoSource.Output, detectOrBlur.Input);
-            _pipeline.Connect(detectOrBlur.Output, _videoRenderer.Input);
+            _pipeline.Connect(_videoSource.Output, _faceDetect.Input);
+            _pipeline.Connect(_faceDetect.Output, _videoRenderer.Input);
 
             // start
             await _pipeline.StartAsync();
@@ -242,9 +233,9 @@ namespace Face_Detector_Live
         {
             _timer.Stop();
 
-            if (_detector != null)
+            if (_faceDetect != null)
             {
-                _detector.FaceDetected -= _detector_FaceDetected;
+                _faceDetect.OnFaceDetected -= _detector_FaceDetected;
             }
 
             await _pipeline?.StopAsync();

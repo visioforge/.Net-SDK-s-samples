@@ -64,12 +64,8 @@ namespace Computer_Vision_Demo
             edFDMinFaceHeight = new System.Windows.Forms.TextBox();
             edFDMinFaceWidth = new System.Windows.Forms.TextBox();
             label20 = new System.Windows.Forms.Label();
-            cbFDEyes = new System.Windows.Forms.CheckBox();
-            cbFDNose = new System.Windows.Forms.CheckBox();
             btFDUpdate = new System.Windows.Forms.Button();
-            cbFDMouth = new System.Windows.Forms.CheckBox();
             cbFDFace = new System.Windows.Forms.CheckBox();
-            label17 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             edFDFaces = new System.Windows.Forms.TextBox();
@@ -462,12 +458,8 @@ namespace Computer_Vision_Demo
             tabPage2.Controls.Add(edFDMinFaceHeight);
             tabPage2.Controls.Add(edFDMinFaceWidth);
             tabPage2.Controls.Add(label20);
-            tabPage2.Controls.Add(cbFDEyes);
-            tabPage2.Controls.Add(cbFDNose);
             tabPage2.Controls.Add(btFDUpdate);
-            tabPage2.Controls.Add(cbFDMouth);
             tabPage2.Controls.Add(cbFDFace);
-            tabPage2.Controls.Add(label17);
             tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(label2);
             tabPage2.Controls.Add(edFDFaces);
@@ -547,28 +539,6 @@ namespace Computer_Vision_Demo
             label20.TabIndex = 152;
             label20.Text = "Minimal face size";
             // 
-            // cbFDEyes
-            // 
-            cbFDEyes.AutoSize = true;
-            cbFDEyes.Location = new System.Drawing.Point(463, 110);
-            cbFDEyes.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            cbFDEyes.Name = "cbFDEyes";
-            cbFDEyes.Size = new System.Drawing.Size(73, 29);
-            cbFDEyes.TabIndex = 151;
-            cbFDEyes.Text = "Eyes";
-            cbFDEyes.UseVisualStyleBackColor = true;
-            // 
-            // cbFDNose
-            // 
-            cbFDNose.AutoSize = true;
-            cbFDNose.Location = new System.Drawing.Point(330, 110);
-            cbFDNose.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            cbFDNose.Name = "cbFDNose";
-            cbFDNose.Size = new System.Drawing.Size(79, 29);
-            cbFDNose.TabIndex = 150;
-            cbFDNose.Text = "Nose";
-            cbFDNose.UseVisualStyleBackColor = true;
-            // 
             // btFDUpdate
             // 
             btFDUpdate.Location = new System.Drawing.Point(30, 710);
@@ -579,17 +549,6 @@ namespace Computer_Vision_Demo
             btFDUpdate.Text = "Update";
             btFDUpdate.UseVisualStyleBackColor = true;
             btFDUpdate.Click += btFDUpdate_Click;
-            // 
-            // cbFDMouth
-            // 
-            cbFDMouth.AutoSize = true;
-            cbFDMouth.Location = new System.Drawing.Point(177, 110);
-            cbFDMouth.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            cbFDMouth.Name = "cbFDMouth";
-            cbFDMouth.Size = new System.Drawing.Size(91, 29);
-            cbFDMouth.TabIndex = 148;
-            cbFDMouth.Text = "Mouth";
-            cbFDMouth.UseVisualStyleBackColor = true;
             // 
             // cbFDFace
             // 
@@ -603,16 +562,6 @@ namespace Computer_Vision_Demo
             cbFDFace.TabIndex = 147;
             cbFDFace.Text = "Face";
             cbFDFace.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(198, 36);
-            label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(371, 25);
-            label17.TabIndex = 146;
-            label17.Text = "Face, eyes, nose and mouth tracking available";
             // 
             // label5
             // 
@@ -1336,12 +1285,8 @@ namespace Computer_Vision_Demo
         private System.Windows.Forms.Label lbPDSkipFrames;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TrackBar tbPDSkipFrames;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.CheckBox cbFDMouth;
         private System.Windows.Forms.CheckBox cbFDFace;
-        private System.Windows.Forms.CheckBox cbFDNose;
         private System.Windows.Forms.Button btFDUpdate;
-        private System.Windows.Forms.CheckBox cbFDEyes;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox edFDMinFaceHeight;
         private System.Windows.Forms.TextBox edFDMinFaceWidth;

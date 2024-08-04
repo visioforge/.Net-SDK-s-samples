@@ -30,7 +30,7 @@ namespace Computer_Vision_Demo
 
         private MediaPlayerCore MediaPlayer1;
 
-        private FaceDetector _faceDetector;
+        private DNNFaceDetector _faceDetector;
 
         private CarCounter _carCounter;
 
@@ -78,7 +78,7 @@ namespace Computer_Vision_Demo
 
         private void FaceDetectionAdd()
         {
-            _faceDetector = new FaceDetector();
+            _faceDetector = new DNNFaceDetector();
             _faceDetector.OnFaceDetected += OnFaceDetected;
 
             FaceDetectionUpdate();
@@ -91,38 +91,23 @@ namespace Computer_Vision_Demo
                 return;
             }
 
-            _faceDetector.DrawEnabled = cbFDDraw.Checked;
-            _faceDetector.DrawColor = SKColors.Green;
-            _faceDetector.FramesToSkip = tbFDSkipFrames.Value;
-            _faceDetector.MinNeighbors = tbFDMinNeighbors.Value;
-            _faceDetector.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
-            _faceDetector.VideoScale = tbFDDownscale.Value / 10.0f;
+            _faceDetector.Settings.DrawEnabled = cbFDDraw.Checked;
+            _faceDetector.Settings.DrawColor = SKColors.Green;
+            _faceDetector.Settings.FramesToSkip = tbFDSkipFrames.Value;
+            _faceDetector.Settings.MinNeighbors = tbFDMinNeighbors.Value;
+            _faceDetector.Settings.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
+            _faceDetector.Settings.VideoScale = tbFDDownscale.Value / 10.0f;
 
             if (rbFDCircle.Checked)
             {
-                _faceDetector.DrawShapeType = CVShapeType.Circle;
+                _faceDetector.Settings.DrawShapeType = CVShapeType.Circle;
             }
             else
             {
-                _faceDetector.DrawShapeType = CVShapeType.Rectangle;
+                _faceDetector.Settings.DrawShapeType = CVShapeType.Rectangle;
             }
 
-            _faceDetector.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
-
-            var path = Path.GetDirectoryName(Application.ExecutablePath);
-            string facePath = cbFDFace.Checked ? Path.Combine(path, "haarcascade_frontalface_default.xml") : null;
-            string eyesPath = cbFDEyes.Checked ? Path.Combine(path, "haarcascade_eye.xml") : null;
-            string nosePath = cbFDNose.Checked ? Path.Combine(path, "haarcascade_mcs_nose.xml") : null;
-            string mouthPath = cbFDMouth.Checked ? Path.Combine(path, "haarcascade_mcs_mouth.xml") : null;
-
-            _faceDetector.Init(
-                facePath,
-                eyesPath,
-                nosePath,
-                mouthPath,
-                true);
-
-            _faceDetector.UpdateSettings();
+            _faceDetector.Settings.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
         }
 
         private void btFDUpdate_Click(object sender, EventArgs e)
