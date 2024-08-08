@@ -12,6 +12,10 @@ Changes and updates for all .Net SDKs
 
 ## 15.9.x
 
+### 15.9.83
+
+* [X-engines] Better AOT compatibility for default MAUI settings in iOS.
+
 ### 15.9.81
 
 * [Media Blocks SDK .Net] Added the `DNNFaceDetectorBlock` to detect faces and blur/pixelate them using OpenCV and DNN models.

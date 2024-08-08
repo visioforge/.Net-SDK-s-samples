@@ -68,7 +68,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.82" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.82" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.9.83" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.9.83" />
   </ItemGroup>
 </Project>
