@@ -39,7 +39,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private MediaBlock _videoEncoder;
 
-    private AACEncoderBlock _audioEncoder;
+    private MediaBlock _audioEncoder;
 
     private MediaBlock _sink;
 
@@ -129,16 +129,7 @@ public class AppDelegate : UIApplicationDelegate
             _filename = Path.Combine(libraryPath, fileName);
 
             _sink = new MP4SinkBlock(new MP4SinkSettings(_filename));
-            _pipeline.Connect(_videoEncoder.Output,
-                (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
-
-            // audio
-            _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
-
-            _audioEncoder = new AACEncoderBlock();
-            _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
-            _pipeline.Connect(_audioEncoder.Output,
-                (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+            _pipeline.Connect(_videoEncoder.Output,(_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
         }
     }
 

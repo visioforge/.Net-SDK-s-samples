@@ -821,6 +821,7 @@ namespace Main_Demo
             if (lbSourceFiles.Items.Count == 0)
             {
                 MessageBox.Show(this, "Playlist is empty!");
+                return;
             }
 
             foreach (var item in lbSourceFiles.Items)
