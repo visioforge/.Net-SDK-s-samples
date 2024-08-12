@@ -8,27 +8,7 @@
         <TabControl Margin="10,10,0,0" x:Name="tcMain" HorizontalAlignment="Left" Width="347" Height="437" VerticalAlignment="Top">
             <TabItem Header="Input" IsSelected="True" Name="tabPage1">
                 <Grid>
-                    <RadioButton HorizontalAlignment="Left" Margin="12,15,0,0" Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True">Full Screen</RadioButton>
-                    <RadioButton HorizontalAlignment="Left" Margin="12,41,0,0" Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89">Custom Area</RadioButton>
-                    <Label Margin="138,10,26,0" VerticalAlignment="Top">You can update left/top position</Label>
-                    <Label Margin="138,29,35,0" VerticalAlignment="Top">and mouse cursor  capturing</Label>
-                    <Label Margin="138,47,81,0" VerticalAlignment="Top">on-the-fly</Label>
-                    <TextBox Margin="103,96,0,0" Name="edScreenLeft" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39" Text="0" />
-                    <Label Margin="32,92,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Left</Label>
-                    <TextBox HorizontalAlignment="Left" Margin="103,121,0,0" Name="edScreenRight" VerticalAlignment="Top" Width="39" Text="640" />
-                    <Label HorizontalAlignment="Left" Margin="32,117,0,0" VerticalAlignment="Top" Width="41">Right</Label>
-                    <TextBox HorizontalAlignment="Left" Margin="200,96,0,0" Name="edScreenTop" VerticalAlignment="Top" Width="39" Text="0" />
-                    <Label Margin="149,92,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Top</Label>
-                    <TextBox HorizontalAlignment="Left" Margin="200,121,0,0" Name="edScreenBottom" VerticalAlignment="Top" Width="39" Text="480" />
-                    <Label Margin="149,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54">Bottom</Label>
-                    <TextBox HorizontalAlignment="Left" Margin="103,157,0,0" Name="edScreenFrameRate" Width="39" VerticalAlignment="Top" Text="10" />
-                    <Label HorizontalAlignment="Left" Margin="32,153,0,0" Width="67" VerticalAlignment="Top">Frame rate</Label>
-                    <Label Margin="149,153,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="47">fps</Label>
-                    <Button HorizontalAlignment="Left" Margin="235,62,0,0" Name="btScreenCaptureUpdate" Width="75" VerticalAlignment="Top" Click="btScreenCaptureUpdate_Click">Update</Button>
-                    <CheckBox HorizontalAlignment="Left" Margin="170,192,0,0" Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146">Capture mouse cursor</CheckBox>
                     <CheckBox HorizontalAlignment="Left" Margin="12,219,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="131" Content="Record audio"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="103,189,0,0" Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
-                    <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,186,0,0" VerticalAlignment="Top" />
 
                     <StackPanel Orientation="Vertical" Margin="12,251,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <RadioButton Name="rbSystemAudio" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Audio input device" IsChecked="True" />
@@ -39,6 +19,24 @@
                         <RadioButton Name="rbLoopback" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Left" Content="Loopback capture from output device" />
                         <ComboBox Name="cbAudioLoopbackDevice" Margin="10,5,0,0" Width="305" HorizontalAlignment="Left" />
                     </StackPanel>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,15,0,0" x:Name="rbScreenFullScreen" VerticalAlignment="Top" Width="89" IsChecked="True" Content="Full Screen"/>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="183,15,0,0" x:Name="rbWindow" VerticalAlignment="Top" Width="89" Content="Window"/>
+                    <RadioButton Height="16" HorizontalAlignment="Left" Margin="12,41,0,0" x:Name="rbScreenCustomArea" VerticalAlignment="Top" Width="89" Content="Custom Area"/>
+                    <TextBox Margin="103,64,0,0" x:Name="edScreenLeft" Height="23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="39" Text="0" />
+                    <Label Height="28" Margin="32,62,0,0" x:Name="label15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Content="Left"/>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="103,89,0,0" x:Name="edScreenRight" VerticalAlignment="Top" Width="39" Text="640" />
+                    <Label Height="28" HorizontalAlignment="Left" Margin="32,89,0,0" x:Name="label22" VerticalAlignment="Top" Width="41" Content="Right"/>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="200,64,0,0" x:Name="edScreenTop" VerticalAlignment="Top" Width="39" Text="0" />
+                    <Label Height="28" Margin="149,62,0,0" x:Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Content="Top"/>
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="200,89,0,0" x:Name="edScreenBottom" VerticalAlignment="Top" Width="39" Text="480" />
+                    <Label Height="28" Margin="149,89,0,0" x:Name="label26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54" Content="Bottom"/>
+                    <TextBox HorizontalAlignment="Left" Margin="103,134,0,0" x:Name="edScreenFrameRate" Width="39" Height="22" VerticalAlignment="Top" Text="10" />
+                    <Label HorizontalAlignment="Left" Margin="12,131,0,0" x:Name="label27" Width="67" Height="28" VerticalAlignment="Top" Content="Frame rate"/>
+                    <Label Margin="149,131,0,0" x:Name="label28" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="47" Content="fps"/>
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="103,189,0,0" x:Name="cbScreenCaptureDisplayIndex" VerticalAlignment="Top" Width="39" />
+                    <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,187,0,0" x:Name="label55" VerticalAlignment="Top" />
+                    <Button x:Name="btSelectWindow" Content="Select window" HorizontalAlignment="Left" Margin="183,39,0,0" VerticalAlignment="Top" Width="116" Click="btSelectWindow_Click"/>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,164,0,0" x:Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146" Content="Capture mouse cursor"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Output" IsSelected="True">

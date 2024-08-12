@@ -18,12 +18,14 @@ namespace Screen_Capture_X
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core.MediaBlocks.Sources;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.VideoCapture;
     using VisioForge.Core.UI;
+    using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCaptureX;
 
@@ -42,6 +44,8 @@ namespace Screen_Capture_X
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         private VideoCaptureCoreX VideoCapture1;
+
+        private WindowCaptureForm windowCaptureForm;
 
         private bool disposedValue;
 
@@ -127,20 +131,38 @@ namespace Screen_Capture_X
             }
         }
 
-        private ScreenCaptureDX9SourceSettings CreateScreenCaptureSource(int screenID)
+        private IScreenCaptureSourceSettings CreateWindowCaptureSource()
         {
+            // create Direct3D11 source
+            var source = new ScreenCaptureD3D11SourceSettings();
+            source.API = D3D11ScreenCaptureAPI.WGC;
+
+            // set frame rate
+            source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
+
+            // get handle of the window
+            source.WindowHandle = windowCaptureForm.CapturedWindowHandle;
+
+            return source;
+        }
+
+        private IScreenCaptureSourceSettings CreateScreenCaptureSource()
+        {
+            var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
+
             var source = new ScreenCaptureDX9SourceSettings();
 
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
             if (rbScreenFullScreen.IsChecked == true)
             {
-                var screen = Screen.AllScreens[cbScreenCaptureDisplayIndex.SelectedIndex];
-                source.Rectangle = new VisioForge.Core.Types.Rect(
-                                       screen.Bounds.Left,
-                                       screen.Bounds.Top,
-                                       screen.Bounds.Right,
-                                       screen.Bounds.Bottom);
+                for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
+                {
+                    if (i == screenID)
+                    {
+                        source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[i].Bounds);
+                    }
+                }
             }
             else
             {
@@ -314,7 +336,15 @@ namespace Screen_Capture_X
             }
 
             // video source
-            VideoCapture1.Video_Source = CreateScreenCaptureSource(cbScreenCaptureDisplayIndex.SelectedIndex);
+            if (rbWindow.IsChecked == true)
+            {
+                VideoCapture1.Video_Source = CreateWindowCaptureSource();
+            }
+            else
+            {
+                // screen source
+                VideoCapture1.Video_Source = CreateScreenCaptureSource();
+            }
 
             if (rbCapture.IsChecked == true)
             {
@@ -324,8 +354,6 @@ namespace Screen_Capture_X
                     IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
                     if (rbSystemAudio.IsChecked == true)
                     {
-                       
-
                         var deviceName = cbAudioInputDevice.Text;
                         var format = cbAudioInputFormat.Text;
                         if (!string.IsNullOrEmpty(deviceName))
@@ -472,9 +500,9 @@ namespace Screen_Capture_X
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
 
             // monitors
-            foreach (var screen in Screen.AllScreens)
+            for (int i = 0; i < Screen.AllScreens.Length; i++)
             {
-                cbScreenCaptureDisplayIndex.Items.Add(screen.DeviceName.Replace(@"\\.\DISPLAY", string.Empty));
+                cbScreenCaptureDisplayIndex.Items.Add(i.ToString());
             }
 
             // enumerate audio sinks
@@ -548,6 +576,25 @@ namespace Screen_Capture_X
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
+        }
+
+        private void btSelectWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowCaptureForm == null)
+            {
+                windowCaptureForm = new WindowCaptureForm();
+                windowCaptureForm.OnCaptureHotkey += WindowCaptureForm_OnCaptureHotkey;
+            }
+
+            windowCaptureForm.StartCapture();
+        }
+
+        private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
+        {
+            windowCaptureForm.StopCapture();
+            windowCaptureForm.Hide();
+
+            rbWindow.Content = "Window: " + e.Caption;
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -27,6 +27,8 @@ using VisioForge.Core.Types.X.AudioEncoders;
 using System.Linq;
 using VisioForge.Core.Types.X.VideoCapture;
 using System.Windows.Media;
+using VisioForge.Core.UI.WinForms.Dialogs;
+using System.Runtime.InteropServices;
 
 namespace Screen_Capture_MB_WPF
 {
@@ -54,6 +56,8 @@ namespace Screen_Capture_MB_WPF
         private AACEncoderBlock _audioEncoder;
 
         private MP4SinkBlock _sink;
+
+        private WindowCaptureForm windowCaptureForm;
 
         // Dialogs
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -130,13 +134,13 @@ namespace Screen_Capture_MB_WPF
         { 
             // create Direct3D11 source
             var source = new ScreenCaptureD3D11SourceSettings();
+            source.API = D3D11ScreenCaptureAPI.WGC;
 
             // set frame rate
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
             // get handle of the window
-            var wih = new System.Windows.Interop.WindowInteropHelper(this);
-            source.WindowHandle = wih.Handle;
+            source.WindowHandle = windowCaptureForm.CapturedWindowHandle;
 
             return source;
         }
@@ -302,6 +306,25 @@ namespace Screen_Capture_MB_WPF
             await DestroyEnginesAsync();
 
             VisioForgeX.DestroySDK();
+        }
+
+        private void btSelectWindow_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowCaptureForm == null)
+            {
+                windowCaptureForm = new WindowCaptureForm();
+                windowCaptureForm.OnCaptureHotkey += WindowCaptureForm_OnCaptureHotkey;
+            }
+
+            windowCaptureForm.StartCapture();
+        }
+
+        private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
+        {
+            windowCaptureForm.StopCapture();
+            windowCaptureForm.Hide();
+
+            rbWindow.Content = "Window: " + e.Caption;
         }
     }
 }
