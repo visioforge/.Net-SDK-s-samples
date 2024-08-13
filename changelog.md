@@ -12,6 +12,10 @@ Changes and updates for all .Net SDKs
 
 ## 15.9.x
 
+### 15.9.88
+
+* [Windows] Updated window capture API to capture only the specified parent window by default.
+
 ### 15.9.83
 
 * [X-engines] Better AOT compatibility for default MAUI settings in iOS.
