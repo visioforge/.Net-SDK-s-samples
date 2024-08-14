@@ -12,9 +12,9 @@ Changes and updates for all .Net SDKs
 
 ## 15.9.x
 
-### 15.9.88
+### 15.9.89
 
-* [Windows] Updated window capture API to capture only the specified parent window by default.
+* [Windows] Updated window capture API to capture only the specified parent window by default. Added the `UpdateHotkey` method to the `WindowCaptureForm` class to update the hotkey for the window capture form.
 
 ### 15.9.83
 
