@@ -33,7 +33,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private MediaBlocksPipeline _pipeline;
 
-    private MediaBlock _videoRenderer;
+    private VideoRendererBlock _videoRenderer;
 
     private MediaBlock _videoSource;
 
@@ -51,7 +51,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private VideoView _videoView;
+    private VideoViewGL _videoView;
 
     public override UIWindow? Window { get; set; }
 
@@ -180,6 +180,7 @@ public class AppDelegate : UIApplicationDelegate
 
         // video renderer
         _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
+        _videoRenderer.IsSync = false;
 
         // connect video pads
         _pipeline.Connect(_videoSource.Output, _videoTee.Input);
@@ -358,7 +359,7 @@ public class AppDelegate : UIApplicationDelegate
     private void AddVideoView(UIView view)
     {
         var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
-        _videoView = new VideoView(rect);
+        _videoView = new VideoViewGL(rect);
 
         view!.AddSubview(_videoView);
     }

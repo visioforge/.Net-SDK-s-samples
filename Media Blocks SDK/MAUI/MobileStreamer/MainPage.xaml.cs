@@ -74,6 +74,8 @@ namespace MobileStreamer
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
 #endif
 
+            _videoRenderer.IsSync = false;
+
             _pipeline.OnError += Core_OnError;
         }
 

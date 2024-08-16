@@ -1,4 +1,3 @@
-
 ---
 title: VisioForge .Net SDKs changelog
 description: All changes and updates for .Net SDKs (Video Capture SDK .Net, Video Edit SDK .Net, Media Player SDK .Net, Media Blocks SDK .Net)
