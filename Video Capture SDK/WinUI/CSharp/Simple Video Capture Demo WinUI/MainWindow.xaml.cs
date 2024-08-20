@@ -29,6 +29,7 @@ using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.ApplicationModel;
 using Microsoft.UI.Windowing;
+using VisioForge.Core.UI.WinUI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -42,6 +43,8 @@ public sealed partial class MainWindow : Window
     private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
     private VideoCaptureCore VideoCapture1;
+
+    private VisioForge.Core.UI.WinUI.VideoView _videoView;
 
     private bool disposedValue;
 
@@ -252,7 +255,7 @@ public sealed partial class MainWindow : Window
 
     private void CreateEngine()
     {
-        VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
+        VideoCapture1 = new VideoCaptureCore(_videoView as IVideoView);
 
         VideoCapture1.OnError += VideoCapture1_OnError;
     }
@@ -716,12 +719,19 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    private bool _isInitiated = false;
+
     private void Window_Activated(object sender, WindowActivatedEventArgs args)
     {
-        if (VideoCapture1 != null)
+        if (_isInitiated)
         {
             return;
         }
+
+        _isInitiated = true;
+
+        _videoView = new VideoView() { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Colors.Black) };
+        gdVideoView.Children.Add(_videoView);
 
         CreateEngine();
 
