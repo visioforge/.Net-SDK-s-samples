@@ -67,9 +67,6 @@ namespace Screen_Capture_MB_WPF
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -201,7 +198,7 @@ namespace Screen_Capture_MB_WPF
                 _screenSource = new ScreenSourceBlock(screenSettings);
             }
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             if (rbPreview.IsChecked == true)
             {
@@ -209,7 +206,7 @@ namespace Screen_Capture_MB_WPF
             }
             else
             {
-                _videoTee = new TeeBlock(2);
+                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
                 _pipeline.Connect(_screenSource.Output, _videoTee.Input);
 
@@ -241,7 +238,7 @@ namespace Screen_Capture_MB_WPF
                 _audioInput = new SystemAudioSourceBlock(audioSourceSettings);
 
                 // audio renderer
-                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First());
+                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First()) { IsSync = false };
 
                 if (rbPreview.IsChecked == true)
                 {
@@ -249,7 +246,7 @@ namespace Screen_Capture_MB_WPF
                 }
                 else
                 {
-                    _audioTee = new TeeBlock(2);
+                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
 
                     _pipeline.Connect(_audioInput.Output, _audioTee.Input);
 
@@ -275,6 +272,16 @@ namespace Screen_Capture_MB_WPF
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+
             CreateEngines();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

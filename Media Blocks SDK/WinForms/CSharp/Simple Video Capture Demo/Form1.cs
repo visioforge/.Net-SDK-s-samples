@@ -54,13 +54,6 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         public Form1()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
-
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -104,7 +97,18 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
 
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
@@ -182,11 +186,11 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // audio renderer
             var audioOutputDevice = (await AudioRendererBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == cbAudioOutput.Text);
-            _audioRenderer = new AudioRendererBlock(audioOutputDevice);
+            _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
 
             // tees
             int num = 2;
@@ -195,8 +199,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 num++;
             }
 
-            _videoTee = new TeeBlock(num);
-            _audioTee = new TeeBlock(num);
+            _videoTee = new TeeBlock(num, MediaBlockPadMediaType.Video);
+            _audioTee = new TeeBlock(num, MediaBlockPadMediaType.Audio);
 
             // capture
             if (capture)

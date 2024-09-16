@@ -30,14 +30,7 @@ namespace Networks_Streamer_Demo
 
         public MainWindow()
         {
-            InitializeComponent();     
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
-
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+            InitializeComponent(); 
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -89,6 +82,17 @@ namespace Networks_Streamer_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 

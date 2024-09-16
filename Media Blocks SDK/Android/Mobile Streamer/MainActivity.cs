@@ -177,10 +177,10 @@ namespace Mobile_Streamer
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // create video tee
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 
             // connect video pads
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
@@ -190,11 +190,11 @@ namespace Mobile_Streamer
             _audioSource = new SystemAudioSourceBlock(new AndroidAudioSourceSettings());
 
             // create audio tee
-            _audioTee = new TeeBlock(2);
+            _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
 
             // audio renderer
             var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            _audioRenderer = new AudioRendererBlock(audioSinks[0]);
+            _audioRenderer = new AudioRendererBlock(audioSinks[0]) { IsSync = false };
 
             // connect audio pads
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);

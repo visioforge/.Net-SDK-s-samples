@@ -40,13 +40,13 @@ namespace RTSPView
 
             _source = new RTSPSourceBlock(rtspSettings);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, null);
+            _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 
             if (audioEnabled)
             {
-                var audioRenderer = new AudioRendererBlock();
+                var audioRenderer = new AudioRendererBlock() { IsSync = false };
                 _pipeline.Connect(_source.AudioOutput, audioRenderer.Input);
             }
 

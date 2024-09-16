@@ -103,7 +103,7 @@ namespace RTSP_Client
             // _pipeline.OnStop += _pipeline_OnStop;
             // _pipeline.OnStart += _pipeline_OnStart;
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 
             btStart = FindViewById<Button>(RTSP_Client.Resource.Id.btStart);
             btStart.Click += btStart_Click;

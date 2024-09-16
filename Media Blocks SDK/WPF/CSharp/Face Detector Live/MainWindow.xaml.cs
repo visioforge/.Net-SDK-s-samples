@@ -34,9 +34,6 @@ namespace Face_Detector_Live
         public MainWindow()
         {
             InitializeComponent();
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -49,6 +46,13 @@ namespace Face_Detector_Live
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -195,7 +199,7 @@ namespace Face_Detector_Live
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // detector/blurrer
             var detectSettings = new DNNFaceDetectorSettings();

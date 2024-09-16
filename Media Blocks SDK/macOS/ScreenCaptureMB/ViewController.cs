@@ -86,12 +86,12 @@ public partial class ViewController : NSViewController
         _pipeline.OnError += _pipeline_OnError;
 
         _source = new ScreenSourceBlock();
-        _videoTee = new TeeBlock(2);
+        _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
         var filename = GenerateFilename();
         _mp4Sink = new MP4SinkBlock(new MP4SinkSettings(filename));
         _h264Encoder = new H264EncoderBlock();
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView);
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView) { IsSync = false };
 
         _pipeline.Connect(_source.Output, _videoTee.Input);
 

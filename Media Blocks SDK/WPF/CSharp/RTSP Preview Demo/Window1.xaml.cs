@@ -50,9 +50,6 @@ namespace RTSP_Preview
             InitializeComponent();
 
             Application.EnableVisualStyles();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void CreateEngine()
@@ -73,8 +70,15 @@ namespace RTSP_Preview
             }
         }
 
-        private void Form1_Load(object sender, RoutedEventArgs e)
+        private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             tmRecording.Elapsed += async (senderx, args) =>
@@ -113,13 +117,13 @@ namespace RTSP_Preview
 
             _rtspSource = new RTSPSourceBlock(rtsp);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
 
             if (audioEnabled && info.AudioStreams.Count > 0)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock() { IsSync = false };
                 _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);
             }
 

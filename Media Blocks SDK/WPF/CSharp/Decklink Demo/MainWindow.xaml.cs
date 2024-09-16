@@ -114,6 +114,13 @@ namespace Decklink_MB_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -418,10 +425,10 @@ namespace Decklink_MB_Demo
             }
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First()) { IsSync = false };
 
             // effects
             AddVideoEffects();
@@ -446,8 +453,8 @@ namespace Decklink_MB_Demo
                     k++;
                 }
 
-                _videoTee = new TeeBlock(k);
-                _audioTee = new TeeBlock(k);
+                _videoTee = new TeeBlock(k, MediaBlockPadMediaType.Video);
+                _audioTee = new TeeBlock(k, MediaBlockPadMediaType.Audio);
 
                 _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);

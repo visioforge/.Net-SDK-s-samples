@@ -32,8 +32,6 @@ namespace GenICam_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            CreateEngine();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -89,7 +87,7 @@ namespace GenICam_Source_Demo
 
             var settings = new GenICamSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, 512, 512), 15, GenICamPixelFormat.Mono8); 
             _source = new GenICamSourceBlock(settings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             _pipeline.Connect(_source.Output, _videoRenderer.Input);
 
@@ -107,6 +105,13 @@ namespace GenICam_Source_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

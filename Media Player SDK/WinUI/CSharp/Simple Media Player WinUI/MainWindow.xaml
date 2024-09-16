@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Simple_Media_Player_WinUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:winui="using:VisioForge.Core.UI.WinUI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:VisioForge.Core.UI.WinUI"
+    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
 
     <Grid>
@@ -20,7 +22,7 @@
             <Button x:Name="btOpenFile" Click="btOpenFile_Click" Width="32">...</Button>
         </StackPanel>
 
-        <winui:VideoView  Grid.Row="1" Margin="16" x:Name="videoView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="Black" />
+        <win2d:CanvasControl x:Name="canvasControl"  Grid.Row="1" Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="Black" />
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="16"  Spacing="15">
             <Button x:Name="btPlay" Click="btPlay_Click" Width="80" VerticalAlignment="Center" >Play</Button>

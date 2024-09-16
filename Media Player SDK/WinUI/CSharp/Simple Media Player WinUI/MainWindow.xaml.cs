@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types.MediaPlayer;
+using VisioForge.Core.UI.WinUI;
 using Windows.ApplicationModel;
 using Windows.Storage.Pickers;
 using Windows.UI;
@@ -24,6 +25,8 @@ namespace Simple_Media_Player_WinUI
     {
         private MediaPlayerCore MediaPlayer1;
 
+        private VideoView _videoView;
+
         //timer
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
@@ -35,7 +38,9 @@ namespace Simple_Media_Player_WinUI
 
             edFilename.Text = @"c:\samples\!video.mp4";
 
-            MediaPlayer1 = new MediaPlayerCore(videoView);
+            _videoView = new VideoView(canvasControl);
+
+            MediaPlayer1 = new MediaPlayerCore(_videoView);
             MediaPlayer1.Audio_PlayAudio = true;
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
             MediaPlayer1.OnError += MediaPlayer1_OnError;

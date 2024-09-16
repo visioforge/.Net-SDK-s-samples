@@ -50,13 +50,13 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             _source = new RTSPSourceBlock(rtspSettings);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
 
             if (rtspSettings.AudioEnabled)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock() { IsSync = false };
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
         }

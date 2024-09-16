@@ -64,12 +64,6 @@ namespace Networks_Streamer_Demo
         public MainWindow()
         {
             InitializeComponent();
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
-
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
@@ -103,6 +97,16 @@ namespace Networks_Streamer_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -199,20 +203,20 @@ namespace Networks_Streamer_Demo
             }
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // audio renderer
             if (audioEnabled)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock() { IsSync = false };
             }
 
             // capture
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
             if (audioEnabled)
             {
-                _audioTee = new TeeBlock(2);
+                _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
             }
 
             // connect inputs

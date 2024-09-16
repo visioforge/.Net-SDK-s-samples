@@ -30,11 +30,6 @@ namespace Overlay_Manager_Demo
         public MainWindow()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
-
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
         }
 
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
@@ -52,6 +47,15 @@ namespace Overlay_Manager_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 

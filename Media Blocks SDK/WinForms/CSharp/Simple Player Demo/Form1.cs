@@ -60,9 +60,6 @@ namespace MediaBlocks_Player_Demo
         public Form1()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
@@ -120,13 +117,13 @@ namespace MediaBlocks_Player_Demo
 
             if (videoStream)
             {
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock();
+                _audioRenderer = new AudioRendererBlock() { IsSync = false };
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 
@@ -177,8 +174,15 @@ namespace MediaBlocks_Player_Demo
             _audioRenderer.Volume = tbVolume1.Value / 100.0;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 

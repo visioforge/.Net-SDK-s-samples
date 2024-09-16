@@ -46,7 +46,7 @@ namespace RTSPViewCV
             _source = new RTSPSourceBlock(rtspSettings);
             //_source = new FileSourceBlock(@"c:\samples\!video.avi");
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, null);
+            _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
 
             _faceDetector = new DNNFaceDetectorBlock();
             _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;

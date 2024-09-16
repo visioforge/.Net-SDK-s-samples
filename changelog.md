@@ -9,6 +9,22 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 15.10.0
+
+* [Media Blocks SDK .Net] Added `AVIOutputBlock` to save video and audio streams to the AVI file format
+* [Media Blocks SDK .Net] `TeeBlock` constructor now accepts the media type as a parameter
+* [Video Capture SDK .Net] Added `Video_CaptureDevice_SetDefault` and `Audio_CaptureDevice_SetDefault` methods to the `VideoCaptureCore` class. You can use this method to set the default video and audio capture devices
+* [Cross-platform] Improved `Metal` video rendering performance on Apple devices
+* [All] Improved performance of common video processing operations in Windows classic SDKs
+* [CV] Added DNN face detectors for the `Media Blocks SDK .Net` and `Video Capture SDK .Net`
+* [Mobile] Improved AOT compatibility for iOS and Android
+* [WinUI] Improved performance of the `WinUI` video rendering
+* [Media Blocks SDK .Net] Added the `GetLastFrameAsSKBitmap` and `GetLastFrameAsBitmap` methods to `VideoSampleGrabberBlock` to get the last frame as a `SkiaSharp.SKBitmap` or `System.Drawing.Bitmap`
+* [VideoCaptureCore] Added the `AddFakeAudioSource` property to `FFMPEGEXEOutput`. The `Network_Streaming_Audio_Enabled` property of `VideoCaptureCore` should be set to false to use this fake audio.
+* [ALL] Improved WinUI (and MAUI on Windows) VideoView performance
+* [VideoCaptureCore] Added the `PIP_Video_CaptureDevice_CameraControl_` API to control the camera settings for the Picture-in-Picture mode
+* [X-engines] Added the headers support for the HTTP sources created using the `HTTPSourceSettings` class
+
 ## 15.9.x
 
 ### 15.9.89

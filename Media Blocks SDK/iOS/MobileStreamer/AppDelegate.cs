@@ -47,7 +47,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private TeeBlock _videoTee;
 
-    private int _cameraIndex = 0;
+    private int _cameraIndex = 1;
 
     private VideoCaptureDeviceInfo[] _cameras;
 
@@ -176,10 +176,10 @@ public class AppDelegate : UIApplicationDelegate
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
         // create video tee
-        _videoTee = new TeeBlock(2);
+        _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
         // video renderer
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView) { IsSync = false };
         _videoRenderer.IsSync = false;
 
         // connect video pads

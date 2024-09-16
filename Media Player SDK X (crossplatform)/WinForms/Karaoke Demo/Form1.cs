@@ -25,6 +25,13 @@
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             MediaPlayer1 = new MediaPlayerCoreX(VideoView1);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;

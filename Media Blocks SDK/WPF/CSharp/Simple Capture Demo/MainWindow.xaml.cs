@@ -62,13 +62,6 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         public MainWindow()
         {
             InitializeComponent();
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
-
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -120,6 +113,17 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -193,16 +197,16 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutput.Text).First());
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutput.Text).First()) { IsSync = false };
 
             // capture
             if (capture)
             {
-                _videoTee = new TeeBlock(2);
-                _audioTee = new TeeBlock(2);
+                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
                 _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
                 _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
                 _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));

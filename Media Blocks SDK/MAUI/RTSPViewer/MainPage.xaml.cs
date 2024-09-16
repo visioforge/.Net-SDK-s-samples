@@ -63,9 +63,9 @@ namespace RTSPViewer
 
 #if __IOS__ && !__MACCATALYST__ || __ANDROID__
             var vv = videoView.Handler.PlatformView;
-            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
+            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv) { IsSync = false };
 #else
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 #endif
 
             _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);

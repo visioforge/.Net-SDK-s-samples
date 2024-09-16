@@ -221,11 +221,12 @@ public partial class ViewController : NSViewController
         _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
         // video renderer
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView) { IsSync = false };
 
         // audio renderer
         _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync())
-            .Where(device => device.DisplayName == cbAudioOutput.StringValue).First());
+            .Where(device => device.DisplayName == cbAudioOutput.StringValue).First())
+        { IsSync = false };
 
         // connect all
         _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);

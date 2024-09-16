@@ -30,13 +30,17 @@
         public Form1()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;

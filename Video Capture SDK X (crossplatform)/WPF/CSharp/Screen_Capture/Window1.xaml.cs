@@ -54,11 +54,6 @@ namespace Screen_Capture_X
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
-
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
@@ -490,6 +485,15 @@ namespace Screen_Capture_X
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+
             CreateEngine();
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";

@@ -47,9 +47,6 @@ namespace Decklink_Demo_X
         public MainWindow()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void CreateEngine()
@@ -91,6 +88,13 @@ namespace Decklink_Demo_X
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";

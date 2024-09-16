@@ -5,6 +5,7 @@
     xmlns:local="using:Simple_Video_Capture"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
     Activated="Window_Activated">
 
@@ -88,7 +89,7 @@
             </PivotItem>
         </Pivot>
 
-        <Grid Name="gdVideoView" Margin="450,33,16,145" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <win2d:CanvasControl x:Name="canvasControl" Margin="450,33,16,145" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         <TextBlock Text="Much more features available in Main Demo" HorizontalAlignment="Right" Margin="0,8,16,0" VerticalAlignment="Top"/>
 

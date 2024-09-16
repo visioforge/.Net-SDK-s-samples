@@ -71,7 +71,7 @@ namespace ScreenCaptureMB
             _pipeline.OnError += _player_OnError;
 
             _source = new ScreenSourceBlock();
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
             var filename = GenerateFilename();
             lbFilename.Text = $"FILENAME: {filename}";
@@ -81,9 +81,9 @@ namespace ScreenCaptureMB
 
 #if __IOS__ && !__MACCATALYST__ || __ANDROID__
             var vv = videoView.Handler.PlatformView;
-            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
+            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv) { IsSync = false };
 #else
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 #endif
 
             _pipeline.Connect(_source.Output, _videoTee.Input);

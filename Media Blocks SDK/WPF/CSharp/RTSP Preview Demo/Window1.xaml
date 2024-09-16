@@ -4,7 +4,7 @@
     Title="RTSP Preview Demo - Video Capture SDK .Net" Height="458.476" Width="1041.571" Loaded="Form1_Load" xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>
-        <TabControl Margin="7,7,0,0" Name="tcMain" Height="379" VerticalAlignment="Top" HorizontalAlignment="Left" Width="540" Grid.ColumnSpan="2">
+        <TabControl Margin="7,7,0,0" Name="tcMain" Height="379" VerticalAlignment="Top" HorizontalAlignment="Left" Width="540">
             <TabItem Header="Input" IsSelected="True">
                 <Grid>
                     <TabControl HorizontalAlignment="Left" Height="331" Margin="10,10,0,0" VerticalAlignment="Top" Width="514">
@@ -23,16 +23,15 @@
                         <TabItem Header="ONVIF">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="389*"/>
-                                    <ColumnDefinition Width="119*"/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="btONVIFConnect" Content="Connect" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Width="75" Click="btONVIFConnect_Click" Grid.Column="1"/>
+                                <Button x:Name="btONVIFConnect" Content="Connect" HorizontalAlignment="Left" Margin="423,10,0,0" VerticalAlignment="Top" Width="75" Click="btONVIFConnect_Click"/>
                                 <Label x:Name="lbONVIFCameraInfo" Content="Status: None" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
                                 <Label Content="Profile" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                                <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0" Grid.ColumnSpan="2"/>
-                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.50.185:2020/onvif/device_service" VerticalAlignment="Top" Width="408" Grid.ColumnSpan="2"/>
+                                <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.50.64/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />

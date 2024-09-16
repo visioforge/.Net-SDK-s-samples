@@ -1,4 +1,6 @@
-﻿using Microsoft.UI;
+﻿using Microsoft.Graphics.Canvas.UI.Xaml;
+using Microsoft.Graphics.Canvas;
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -14,6 +16,8 @@ using VisioForge.Core.Types.X.Sources;
 using Windows.ApplicationModel;
 using Windows.Storage.Pickers;
 using Windows.UI;
+using VisioForge.Core.UI.WinUI;
+
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,7 +34,53 @@ namespace Simple_Media_Player_WinUI
         //timer
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
+        private VideoView _videoView;
+
         private volatile byte _timerTag = 0;
+
+        // Example frame dimensions
+       // private int frameWidth = 800;
+       // private int frameHeight = 450;
+
+        //private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        //{
+        //    // Example: Generate a test RGB frame (you would replace this with your actual frame data)
+        //    byte[] rgbFrame = GenerateTestRGBFrame(frameWidth, frameHeight);
+
+        //    // Convert the byte array to a CanvasBitmap
+        //    using (var bitmap = CanvasBitmap.CreateFromBytes(sender, rgbFrame, frameWidth, frameHeight, Windows.Graphics.DirectX.DirectXPixelFormat.B8G8R8A8UIntNormalized))
+        //    {
+        //        // Draw the bitmap to the CanvasControl
+        //        args.DrawingSession.DrawImage(bitmap);
+        //    }
+        //}
+
+        //// This method generates a test RGB frame with a simple gradient pattern
+        //private byte[] GenerateTestRGBFrame(int width, int height)
+        //{
+        //    byte[] rgbFrame = new byte[width * height * 4]; // 4 bytes per pixel (BGRA format)
+
+        //    for (int y = 0; y < height; y++)
+        //    {
+        //        for (int x = 0; x < width; x++)
+        //        {
+        //            int index = (y * width + x) * 4;
+        //            rgbFrame[index] = (byte)(x % 256);       // Blue
+        //            rgbFrame[index + 1] = (byte)(y % 256);   // Green
+        //            rgbFrame[index + 2] = 0;                // Red
+        //            rgbFrame[index + 3] = 255;              // Alpha (fully opaque)
+        //        }
+        //    }
+
+        //    return rgbFrame;
+        //}
+
+        //// Important: Dispose the CanvasControl to free resources
+        //private void CanvasControl_Unloaded(object sender, RoutedEventArgs e)
+        //{
+        //    canvasControl.RemoveFromVisualTree();
+        //    canvasControl = null;
+        //}
 
         public MainWindow()
         {
@@ -40,7 +90,8 @@ namespace Simple_Media_Player_WinUI
 
             edFilename.Text = @"c:\samples\!video.mp4";
 
-            MediaPlayer1 = new MediaPlayerCoreX(videoView);
+            _videoView = new VideoView(canvasControl);
+            MediaPlayer1 = new MediaPlayerCoreX(_videoView);
             MediaPlayer1.Audio_Play = true;
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             Title = $"Media Player SDK .Net - Simple Media Player for WinUI 3 Desktop (SDK v{MediaPlayerCoreX.SDK_Version})";
@@ -131,6 +182,7 @@ namespace Simple_Media_Player_WinUI
 
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
+            //canvasControl.Invalidate();
             await MediaPlayer1.ResumeAsync();
         }
 

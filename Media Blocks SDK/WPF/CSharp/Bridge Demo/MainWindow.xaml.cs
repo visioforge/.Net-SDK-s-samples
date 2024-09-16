@@ -60,13 +60,17 @@ namespace Bridge_Demo
         public MainWindow()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
             edFilename.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\output.mp4";
 
@@ -91,9 +95,9 @@ namespace Bridge_Demo
             var videoInfo = new VideoFrameInfoX(_videoSource.Settings.Width, _videoSource.Settings.Height, _videoSource.Settings.FrameRate);
             _videoBridgeSink = new BridgeVideoSinkBlock(new BridgeVideoSinkSettings(VIDEO_ID, videoInfo));
            
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
             
-            _videoRenderer = new VideoRendererBlock(_pipelineSource, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipelineSource, VideoView1) { IsSync = false };
             _videoRenderer.IsSync = false;
 
             _pipelineSource.Connect(_videoSource.Output, _videoTee.Input);
@@ -106,9 +110,9 @@ namespace Bridge_Demo
             var audioInfo = new AudioInfoX(_audioSource.Settings.Format, _audioSource.Settings.SampleRate, _audioSource.Settings.Channels);
             _audioBridgeSink = new BridgeAudioSinkBlock(new BridgeAudioSinkSettings(AUDIO_ID, audioInfo));
 
-            _audioTee = new TeeBlock(2);
+            _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
 
-            _audioRenderer = new AudioRendererBlock();
+            _audioRenderer = new AudioRendererBlock() { IsSync = false };
 
             _pipelineSource.Connect(_audioSource.Output, _audioTee.Input);
             _pipelineSource.Connect(_audioTee.Outputs[0], _audioBridgeSink.Input);

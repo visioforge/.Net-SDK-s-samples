@@ -70,9 +70,6 @@ namespace Video_Compositor_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
         }
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
@@ -189,8 +186,15 @@ namespace Video_Compositor_Demo
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
@@ -219,7 +223,7 @@ namespace Video_Compositor_Demo
 
             CreateEngine();
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
             _videoRenderer.IsSync = false;
 
             VideoMixerBaseSettings videoMixerSettings;
@@ -260,7 +264,7 @@ namespace Video_Compositor_Demo
             else
             {
                 // create video tee
-                _videoTee = new TeeBlock(2);
+                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
                 _pipeline.Connect(_videoMixer.Output, _videoTee.Input);
 
                 // connect video renderer for preview

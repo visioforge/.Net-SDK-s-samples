@@ -35,7 +35,11 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;

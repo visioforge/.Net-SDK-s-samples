@@ -57,10 +57,10 @@ namespace ScreenCapture
             _videoSource = new ScreenSourceBlock(new IOSScreenSourceSettings());
 
             // create video tee
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView) { IsSync = false };
 
             // connect video pads
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);

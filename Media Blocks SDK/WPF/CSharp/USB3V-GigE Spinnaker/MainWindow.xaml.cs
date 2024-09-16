@@ -31,10 +31,6 @@ namespace USB3V_GigE_Spinnaker
         public MainWindow()
         {
             InitializeComponent();
-
-            //System.Windows.Forms.Application.EnableVisualStyles();
-
-            CreateEngine();        
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -86,7 +82,7 @@ namespace USB3V_GigE_Spinnaker
             var settings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
             _source = new SpinnakerSourceBlock(settings);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             _pipeline.Connect(_source.Output, _videoRenderer.Input);
 
@@ -104,6 +100,13 @@ namespace USB3V_GigE_Spinnaker
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

@@ -85,6 +85,13 @@ namespace Decklink_MultiOutput
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
@@ -124,10 +131,10 @@ namespace Decklink_MultiOutput
             mmLog.Clear();
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             // tees
-            _videoTee = new TeeBlock(3);
+            _videoTee = new TeeBlock(3, MediaBlockPadMediaType.Video);
 
             // sources
             if (rbVirtualSource.IsChecked == true)

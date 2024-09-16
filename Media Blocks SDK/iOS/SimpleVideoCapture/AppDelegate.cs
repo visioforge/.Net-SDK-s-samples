@@ -1,4 +1,5 @@
 ﻿
+using AudioToolbox;
 using Photos;
 using System.Diagnostics;
 using VisioForge.Core;
@@ -18,6 +19,7 @@ using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Special;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.UI.Apple;
@@ -45,7 +47,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private TeeBlock _videoTee;
 
-    private int _cameraIndex = 0;
+    private int _cameraIndex = 1;
 
     private VideoCaptureDeviceInfo[] _cameras;
 
@@ -55,81 +57,94 @@ public class AppDelegate : UIApplicationDelegate
 
     private async Task CreateEngineAsync(bool capture)
     {
-        _pipeline = new MediaBlocksPipeline();
-        _pipeline.OnError += _pipeline_OnError;
-
-        // video source
-        if (_cameras == null)
+        try
         {
-            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-        }
+            _pipeline = new MediaBlocksPipeline();
+            _pipeline.OnError += _pipeline_OnError;
 
-        if (_cameras.Length == 0)
-        {
-            Toast.Show("No video sources found", Window.RootViewController);
-            return;
-        }
-
-        VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-        if (_cameraIndex >= _cameras.Length)
-        {
-            _cameraIndex = 0;
-        }
-
-        var device = _cameras[_cameraIndex];
-        if (device != null)
-        {
-            var formatItem = device.VideoFormats.First(x => x.Width == 1920 && x.Height == 1080);
-            if (formatItem != null)
+            // video source
+            if (_cameras == null)
             {
-                videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+            }
+
+            if (_cameras.Length == 0)
+            {
+                Toast.Show("No video sources found", Window.RootViewController);
+                return;
+            }
+
+            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+            if (_cameraIndex >= _cameras.Length)
+            {
+                _cameraIndex = 0;
+            }
+
+            var device = _cameras[_cameraIndex];
+            if (device != null)
+            {
+                var formatItem = device.VideoFormats.First(x => x.Width == 1920 && x.Height == 1080);
+                if (formatItem != null)
                 {
-                    Format = formatItem.ToFormat()
-                };
+                    videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                    {
+                        Format = formatItem.ToFormat()
+                    };
 
-                videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
+                    videoSourceSettings.Format.FrameRate = new VideoFrameRate(30);
+                }
             }
-        }
 
-        if (videoSourceSettings == null)
-        {
-            Toast.Show("Unable to configure camera settings", Window.RootViewController);
-            return;
-        }
-
-        videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
-        _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
-
-        // create video tee
-        _videoTee = new TeeBlock(2);
-
-        // video renderer
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView);
-
-        // connect video pads
-        _pipeline.Connect(_videoSource.Output, _videoTee.Input);
-        _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
-        // optional capture
-        if (capture)
-        {
-            // video
-            _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
-            _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-
-            var libraryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
-                "Library");
-            if (!Directory.Exists(libraryPath))
+            if (videoSourceSettings == null)
             {
-                Directory.CreateDirectory(libraryPath);
+                Toast.Show("Unable to configure camera settings", Window.RootViewController);
+                return;
             }
 
-            var fileName = $"video_{DateTime.Now.Ticks}.mp4";
-            _filename = Path.Combine(libraryPath, fileName);
+            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
+            _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-            _sink = new MP4SinkBlock(new MP4SinkSettings(_filename));
-            _pipeline.Connect(_videoEncoder.Output,(_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+            // create video tee
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+
+            // video renderer
+            _videoRenderer = new VideoRendererBlock(_pipeline, _videoView as IVideoView) { IsSync = false };
+
+            // connect video pads
+            _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+            _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+            // optional capture
+            if (capture)
+            {
+                // video
+                _videoEncoder = new H264EncoderBlock(new AppleMediaH264EncoderSettings());
+                _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+
+                var libraryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
+                    "Library");
+                if (!Directory.Exists(libraryPath))
+                {
+                    Directory.CreateDirectory(libraryPath);
+                }
+
+                var fileName = $"video_{DateTime.Now.Ticks}.mp4";
+                _filename = Path.Combine(libraryPath, fileName);
+
+                _sink = new MP4SinkBlock(new MP4SinkSettings(_filename));
+                _pipeline.Connect(_videoEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
+
+                // audio source
+                _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
+                _audioEncoder = new AACEncoderBlock();
+                _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
+                _pipeline.Connect(_audioEncoder.Output, (_sink as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
         }
     }
 
@@ -169,12 +184,12 @@ public class AppDelegate : UIApplicationDelegate
         {
             if (btSelectCamera.CurrentTitle == "BACK")
             {
-                _cameraIndex = 1;
+                //_cameraIndex = 1;
                 btSelectCamera.SetTitle("FRONT", UIControlState.Normal);
             }
             else
             {
-                _cameraIndex = 0;
+                //_cameraIndex = 0;
                 btSelectCamera.SetTitle("BACK", UIControlState.Normal);
             }
         };

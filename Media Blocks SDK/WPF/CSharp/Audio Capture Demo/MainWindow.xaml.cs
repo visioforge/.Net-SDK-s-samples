@@ -47,9 +47,6 @@ namespace Audio_Capture_Demo_MB
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void CreatePipeline()
@@ -72,6 +69,13 @@ namespace Audio_Capture_Demo_MB
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
@@ -168,7 +172,7 @@ namespace Audio_Capture_Demo_MB
 
             // audio output
             var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
-            _audioRenderer = new AudioRendererBlock(audioOutputDevice);
+            _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
 
             // audio input
             if (rbSystemAudio.IsChecked == true)
@@ -207,7 +211,7 @@ namespace Audio_Capture_Demo_MB
             }
             else
             {
-                _tee = new TeeBlock(2);
+                _tee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
                 _mp3Output = new MP3OutputBlock(edOutput.Text, new MP3EncoderSettings());
 
                 _pipeline.Connect(_audioSource.Output, _tee.Input);

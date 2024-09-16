@@ -11,6 +11,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AlliedVision_Source_Demo
 {
@@ -32,8 +33,6 @@ namespace AlliedVision_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            CreateEngine();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -86,7 +85,7 @@ namespace AlliedVision_Source_Demo
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             _source = new AlliedVisionSourceBlock(new AlliedVisionSourceSettings(camera, 640, 480));
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             _pipeline.Connect(_source.Output, _videoRenderer.Input);
 
@@ -104,6 +103,13 @@ namespace AlliedVision_Source_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

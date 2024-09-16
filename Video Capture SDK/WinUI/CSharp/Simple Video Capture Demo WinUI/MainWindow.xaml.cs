@@ -730,8 +730,7 @@ public sealed partial class MainWindow : Window
 
         _isInitiated = true;
 
-        _videoView = new VideoView() { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Background = new SolidColorBrush(Colors.Black) };
-        gdVideoView.Children.Add(_videoView);
+        _videoView = new VideoView(canvasControl);
 
         CreateEngine();
 

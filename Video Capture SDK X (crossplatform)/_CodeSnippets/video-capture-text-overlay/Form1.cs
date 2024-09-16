@@ -1,0 +1,69 @@
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using VisioForge.Core;
+using VisioForge.Core.VideoCaptureX;
+using System.Linq;
+using VisioForge.Core.Types.X.AudioRenderers;
+using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.VideoEffects;
+
+namespace video_capture_text_overlay
+{
+    public partial class Form1 : Form
+    {
+        private VideoCaptureCoreX videoCapture1;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private async void btStart_Click(object sender, EventArgs e)
+        {
+            videoCapture1 = new VideoCaptureCoreX(VideoView1);
+
+            // default video and audio sources will be used
+            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+            videoCapture1.Video_Source = new VideoCaptureDeviceSourceSettings(videoSources[0]);
+            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
+            videoCapture1.Audio_Source = audioSources[0].CreateSourceSettingsVC();
+
+            // default audio sink
+            var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
+            videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioRenderers[0]);
+
+            videoCapture1.Audio_Play = true;
+            videoCapture1.Audio_Record = true;
+
+            // configure MP4 output
+            var output = new MP4Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
+            videoCapture1.Outputs_Add(output);
+
+            // text overlay
+            await videoCapture1.Video_Effects_AddOrUpdateAsync(new TextOverlayVideoEffect() { Text = "Hello World!" });
+
+            // start
+            await videoCapture1.StartAsync();
+        }
+
+        private async void btStop_Click(object sender, EventArgs e)
+        {
+            await videoCapture1.StopAsync();
+
+            await videoCapture1.DisposeAsync();
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await VisioForgeX.InitSDKAsync();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            VisioForgeX.DestroySDK();
+        }
+    }
+}

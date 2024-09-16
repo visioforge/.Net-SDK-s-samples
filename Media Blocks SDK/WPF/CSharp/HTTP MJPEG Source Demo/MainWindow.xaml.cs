@@ -11,7 +11,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 
-namespace MJPEG_Source_Demo
+namespace HTTP_Source_Demo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -36,9 +36,6 @@ namespace Main_Demo
         public Form1()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void AudioEffectUpdateAmplify()
@@ -266,7 +263,7 @@ namespace Main_Demo
                     LineAignment = (TextOverlayLineAlign)cbTextOverlayLineAlign.SelectedIndex,
                     WrapMode = (TextOverlayWrapMode)(cbTextOverlayFontWrapMode.SelectedIndex - 1),
                     AutoAjustSize = cbTextOverlayAutosize.Checked,
-                    Color = pnTextOverlayColor.BackColor.ToColor(),
+                    Color = pnTextOverlayColor.BackColor.ToSKColor(),
                     XPos = tbTextOverlayX.Value / 100.0,
                     YPos = tbTextOverlayY.Value / 100.0
                 };
@@ -650,8 +647,15 @@ namespace Main_Demo
             await UpdateTextOverlayAsync();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             cbBarcodeType.SelectedIndex = 0;
             cbResizeMethod.SelectedIndex = 0;
             cbColorEffect.SelectedIndex = 0;

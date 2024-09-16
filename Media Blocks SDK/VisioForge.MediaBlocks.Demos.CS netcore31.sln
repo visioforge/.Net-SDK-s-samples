@@ -67,6 +67,34 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRT Source Demo netcore31",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bridge Demo netcore31", "WPF\CSharp\Bridge Demo\Bridge Demo netcore31.csproj", "{F047F1EE-A122-4155-8A47-244988A55FED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HTTP Source Demo netcore31", "WPF\CSharp\HTTP Source Demo\HTTP Source Demo netcore31.csproj", "{4559AD34-C91E-4F33-9B9B-D2F9F1457642}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Snippets", "Code Snippets", "{7E273D64-7973-42BB-980F-F8F6585280C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4-mb netcore31", "_CodeSnippets\ip-camera-capture-mp4\ip-camera-capture-mp4-mb netcore31.csproj", "{EE83DF87-19AE-4341-A2A1-D942BE8FA763}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-preview-mb netcore31", "_CodeSnippets\ip-camera-preview\ip-camera-preview-mb netcore31.csproj", "{45D04D51-DAAC-434E-A663-B4896DD2DC9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-avi-mb netcore31", "_CodeSnippets\screen-capture-avi\screen-capture-avi-mb netcore31.csproj", "{0AF1A9B2-2557-4916-8FE4-220C506EFFDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4-mb netcore31", "_CodeSnippets\screen-capture-mp4\screen-capture-mp4-mb netcore31.csproj", "{4CBA3D0A-00F2-43D9-A200-F08CA4B72781}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture-mb netcore31", "_CodeSnippets\speaker-capture\speaker-capture-mb netcore31.csproj", "{32BF0642-8735-44BD-8A11-E306F6D5AF0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-text-overlay-mb netcore31", "_CodeSnippets\video-capture-text-overlay\video-capture-text-overlay-mb netcore31.csproj", "{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-avi-mb netcore31", "_CodeSnippets\video-capture-webcam-avi\video-capture-webcam-avi-mb netcore31.csproj", "{5B4412FC-7F78-474F-A2BF-CB7654BE0532}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-mp4-mb netcore31", "_CodeSnippets\video-capture-webcam-mp4\video-capture-webcam-mp4-mb netcore31.csproj", "{A8AE6510-EDE3-490C-81CD-06F36A3C1602}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-capture-mb netcore31", "_CodeSnippets\video-preview-webcam-frame-capture\video-preview-webcam-frame-capture-mb netcore31.csproj", "{96B8DD65-CF0F-4A39-A87A-7BE8106742B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview-mb netcore31", "_CodeSnippets\webcam-preview\webcam-preview-mb netcore31.csproj", "{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-image-overlay-mb netcore31", "_CodeSnippets\video-capture-image-overlay\video-capture-image-overlay-mb netcore31.csproj", "{B254558F-20CD-4458-BDD7-32B1C388496D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "media-player-mb netcore31", "_CodeSnippets\media-player\media-player-mb netcore31.csproj", "{7642AF51-7717-4C3A-AE02-5CE4383F826B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +221,58 @@ Global
 		{F047F1EE-A122-4155-8A47-244988A55FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F047F1EE-A122-4155-8A47-244988A55FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F047F1EE-A122-4155-8A47-244988A55FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4559AD34-C91E-4F33-9B9B-D2F9F1457642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4559AD34-C91E-4F33-9B9B-D2F9F1457642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4559AD34-C91E-4F33-9B9B-D2F9F1457642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4559AD34-C91E-4F33-9B9B-D2F9F1457642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE83DF87-19AE-4341-A2A1-D942BE8FA763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE83DF87-19AE-4341-A2A1-D942BE8FA763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE83DF87-19AE-4341-A2A1-D942BE8FA763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE83DF87-19AE-4341-A2A1-D942BE8FA763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D04D51-DAAC-434E-A663-B4896DD2DC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D04D51-DAAC-434E-A663-B4896DD2DC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D04D51-DAAC-434E-A663-B4896DD2DC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D04D51-DAAC-434E-A663-B4896DD2DC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF1A9B2-2557-4916-8FE4-220C506EFFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF1A9B2-2557-4916-8FE4-220C506EFFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF1A9B2-2557-4916-8FE4-220C506EFFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF1A9B2-2557-4916-8FE4-220C506EFFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBA3D0A-00F2-43D9-A200-F08CA4B72781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBA3D0A-00F2-43D9-A200-F08CA4B72781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBA3D0A-00F2-43D9-A200-F08CA4B72781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBA3D0A-00F2-43D9-A200-F08CA4B72781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BF0642-8735-44BD-8A11-E306F6D5AF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BF0642-8735-44BD-8A11-E306F6D5AF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BF0642-8735-44BD-8A11-E306F6D5AF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BF0642-8735-44BD-8A11-E306F6D5AF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4412FC-7F78-474F-A2BF-CB7654BE0532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4412FC-7F78-474F-A2BF-CB7654BE0532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4412FC-7F78-474F-A2BF-CB7654BE0532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4412FC-7F78-474F-A2BF-CB7654BE0532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8AE6510-EDE3-490C-81CD-06F36A3C1602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AE6510-EDE3-490C-81CD-06F36A3C1602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AE6510-EDE3-490C-81CD-06F36A3C1602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AE6510-EDE3-490C-81CD-06F36A3C1602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B8DD65-CF0F-4A39-A87A-7BE8106742B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B8DD65-CF0F-4A39-A87A-7BE8106742B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B8DD65-CF0F-4A39-A87A-7BE8106742B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B8DD65-CF0F-4A39-A87A-7BE8106742B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B254558F-20CD-4458-BDD7-32B1C388496D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B254558F-20CD-4458-BDD7-32B1C388496D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B254558F-20CD-4458-BDD7-32B1C388496D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B254558F-20CD-4458-BDD7-32B1C388496D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7642AF51-7717-4C3A-AE02-5CE4383F826B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7642AF51-7717-4C3A-AE02-5CE4383F826B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7642AF51-7717-4C3A-AE02-5CE4383F826B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7642AF51-7717-4C3A-AE02-5CE4383F826B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -228,6 +308,19 @@ Global
 		{35382D1B-3DD4-47B0-9ADA-3B3068D4E695} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{90D6C205-9D0A-427D-9E2E-CF935F177042} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{F047F1EE-A122-4155-8A47-244988A55FED} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{4559AD34-C91E-4F33-9B9B-D2F9F1457642} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{EE83DF87-19AE-4341-A2A1-D942BE8FA763} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{45D04D51-DAAC-434E-A663-B4896DD2DC9F} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{0AF1A9B2-2557-4916-8FE4-220C506EFFDF} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{4CBA3D0A-00F2-43D9-A200-F08CA4B72781} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{32BF0642-8735-44BD-8A11-E306F6D5AF0C} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{F8AF72D6-59F2-4262-87DD-BDFCF48C4CD1} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{5B4412FC-7F78-474F-A2BF-CB7654BE0532} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{A8AE6510-EDE3-490C-81CD-06F36A3C1602} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{96B8DD65-CF0F-4A39-A87A-7BE8106742B1} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{0E15A492-DFFE-4817-9CE1-CA9AA52F5CCA} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{B254558F-20CD-4458-BDD7-32B1C388496D} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{7642AF51-7717-4C3A-AE02-5CE4383F826B} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

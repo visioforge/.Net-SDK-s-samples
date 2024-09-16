@@ -57,7 +57,7 @@ namespace MediaBlocks_Video_Mixer_Demo
             _settings.Height = info.Height;
             _settings.FrameRate = info.FrameRate;
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 
             _videoMixer = new VideoMixerBlock(_settings);
 

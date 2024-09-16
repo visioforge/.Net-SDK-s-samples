@@ -33,9 +33,6 @@ namespace NDI_Source_Demo
             InitializeComponent();
 
             System.Windows.Forms.Application.EnableVisualStyles();
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -90,7 +87,7 @@ namespace NDI_Source_Demo
             var ndiSettings = await NDISourceSettings.CreateAsync(_pipeline.GetContext(), _ndiSources[cbNDISources.SelectedIndex]); 
 
             _ndiSource = new NDISourceBlock(ndiSettings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
             _pipeline.Connect(_ndiSource.VideoOutput, _videoRenderer.Input);
 
@@ -108,8 +105,15 @@ namespace NDI_Source_Demo
             await DestroyEngineAsync();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";

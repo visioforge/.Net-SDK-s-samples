@@ -68,9 +68,6 @@ namespace IP_Capture
             InitializeComponent();
 
             Application.EnableVisualStyles();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
         private void CreateEngine()
@@ -95,6 +92,13 @@ namespace IP_Capture
 
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             CreateEngine();
 
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RTSP_MultiViewSync_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - RTSP MultiView in Sync Demo" Height="589" Width="1069" Closing="Window_Closing" Icon="visioforge_main_icon.ico" >
+        Title="Media Blocks SDK .Net - RTSP MultiView in Sync Demo" Height="589" Width="1069" Closing="Window_Closing" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>

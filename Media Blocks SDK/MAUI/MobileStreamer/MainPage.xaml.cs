@@ -69,9 +69,9 @@ namespace MobileStreamer
 
 #if __IOS__ && !__MACCATALYST__ || __ANDROID__
             var vv = videoView.Handler.PlatformView;
-            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv);
+            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv) { IsSync = false };
 #else
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView);
+            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 #endif
 
             _videoRenderer.IsSync = false;
@@ -308,7 +308,7 @@ namespace MobileStreamer
         private void ConfigureCapture()
         {
             // add tee and connect
-            _videoTee = new TeeBlock(2);
+            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
 

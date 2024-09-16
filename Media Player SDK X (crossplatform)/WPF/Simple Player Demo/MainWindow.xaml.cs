@@ -34,10 +34,19 @@ namespace Simple_Player_Demo_X
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
             Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
+
+            await VisioForgeX.InitSDKAsync();
 
             CreateEngine();
 

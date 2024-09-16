@@ -14,13 +14,17 @@ namespace MediaBlocks_Video_Mixer_Demo
         public Form1()
         {
             InitializeComponent();
-
-            // We have to initialize the engine on start
-            VisioForgeX.InitSDK();
         }
 
-        private void Form1_Load(object sender, System.EventArgs e)
+        private async void Form1_Load(object sender, System.EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
