@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture net7",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X7", "..\AndroidDependency\VisioForge.Core.Android.X7.csproj", "{EF80D735-7DE2-4E67-9F68-9055CC497E1B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoCapture net7", "Android\PhotoCapture\PhotoCapture net7.csproj", "{47DE2943-3AB9-4C31-AABF-57CE07662425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,12 @@ Global
 		{EF80D735-7DE2-4E67-9F68-9055CC497E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF80D735-7DE2-4E67-9F68-9055CC497E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF80D735-7DE2-4E67-9F68-9055CC497E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47DE2943-3AB9-4C31-AABF-57CE07662425}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

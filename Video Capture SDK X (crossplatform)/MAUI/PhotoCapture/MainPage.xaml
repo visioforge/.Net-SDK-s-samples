@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PhotoCapture.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI" Loaded="ContentPage_Loaded" Unloaded="ContentPage_Unloaded">
+
+    <ScrollView>
+        <!--WidthRequest="1280" HeightRequest="720"-->
+        <Grid RowDefinitions="*,Auto" >
+
+            <my:PhotoCaptureView 
+                Grid.Row="0"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="photoCaptureView"/>
+            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+                <StackLayout 
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="5, 0, 5, 0">
+
+                    <Button  
+                        x:Name="btCamera"   
+                        Text="SWITCH CAMERA" 
+                        Margin="5" 
+                        Clicked="btCamera_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
+                        x:Name="btPhoto"   
+                        Text="SAVE PHOTO" 
+                        Margin="5" 
+                        Clicked="btPhoto_Clicked"
+                        MinimumWidthRequest="100" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
