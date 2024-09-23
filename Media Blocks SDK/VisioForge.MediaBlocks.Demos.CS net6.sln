@@ -95,6 +95,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-image-overlay
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "media-player-mb net6", "_CodeSnippets\media-player\media-player-mb net6.csproj", "{114639F7-A916-4767-8908-531276374EBA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-to-decklink-mb net6", "_CodeSnippets\screen-to-decklink\screen-to-decklink-mb net6.csproj", "{737D7FBE-81EA-4AEA-A642-E43E075DE16A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -273,6 +275,10 @@ Global
 		{114639F7-A916-4767-8908-531276374EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{114639F7-A916-4767-8908-531276374EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{114639F7-A916-4767-8908-531276374EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737D7FBE-81EA-4AEA-A642-E43E075DE16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737D7FBE-81EA-4AEA-A642-E43E075DE16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737D7FBE-81EA-4AEA-A642-E43E075DE16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737D7FBE-81EA-4AEA-A642-E43E075DE16A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -321,6 +327,7 @@ Global
 		{0AF30955-E2BF-4F8C-B9E2-E049231936DA} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
 		{ECD380F1-0A93-4CC4-8DF1-7878358FAA50} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
 		{114639F7-A916-4767-8908-531276374EBA} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
+		{737D7FBE-81EA-4AEA-A642-E43E075DE16A} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
