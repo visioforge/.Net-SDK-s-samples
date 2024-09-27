@@ -12,16 +12,13 @@ jobs:
 
       Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln"
       Solution_Name_MP2: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
-      Solution_Name_MP3: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
 
       Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net7.sln"
-      Solution_Name_VC2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS Avalonia.sln"
       Solution_Name_VC3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln"
       Solution_Name_VC4: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS net7.sln"
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net7.sln"
       Solution_Name_VE2: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.WinForms net7.sln"
-      Solution_Name_VE3: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.Avalonia.sln"
 
     runs-on: windows-2022
 
@@ -61,12 +58,6 @@ jobs:
     - name: Build app for release $env:Solution_Name_MP2
       run: msbuild $env:Solution_Name_MP2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
-    - name: Restore dependencies $env:Solution_Name_MP3
-      run: dotnet restore $env:Solution_Name_MP3
-
-    - name: Build app for release $env:Solution_Name_MP3
-      run: msbuild $env:Solution_Name_MP3 -t:rebuild -verbosity:diag -property:Configuration=Release
-
     ## Video Capture
 
     - name: Restore dependencies $env:Solution_Name_VC1
@@ -74,12 +65,6 @@ jobs:
 
     - name: Build app for release $env:Solution_Name_VC1
       run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: Restore dependencies $env:Solution_Name_VC2
-      run: dotnet restore $env:Solution_Name_VC2
-
-    - name: Build app for release $env:Solution_Name_VC2
-      run: msbuild $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release
 
     - name: Restore dependencies $env:Solution_Name_VC3
       run: dotnet restore $env:Solution_Name_VC3
@@ -106,12 +91,6 @@ jobs:
 
     - name: Build app for release $env:Solution_Name_VE2
       run: msbuild $env:Solution_Name_VE2 -t:rebuild -verbosity:diag -property:Configuration=Release
-
-    - name: Restore dependencies $env:Solution_Name_VE3
-      run: dotnet restore $env:Solution_Name_VE3
-
-    - name: Build app for release $env:Solution_Name_VE3
-      run: msbuild $env:Solution_Name_VE3 -t:rebuild -verbosity:diag -property:Configuration=Release   
 
 #    - name: Build
 #      run: dotnet build --no-restore _SOURCE\VisioForge.MediaFramework.Solution.sln
