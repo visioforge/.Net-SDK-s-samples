@@ -9,6 +9,7 @@ jobs:
   build:
     env:
       Solution_Name_MB1: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net8.sln"
+      Solution_Name_MB2: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.sln"
 
       Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net8.sln"
       Solution_Name_MP2: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows net8.sln"
@@ -41,6 +42,12 @@ jobs:
 
     - name: Build app for release $env:Solution_Name_MB1
       run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_MB2
+      run: dotnet restore $env:Solution_Name_MB2
+
+    - name: Build app for release $env:Solution_Name_MB2
+      run: msbuild $env:Solution_Name_MB2 -t:rebuild -verbosity:diag -property:Configuration=Release
       
     ## Media Player
 
