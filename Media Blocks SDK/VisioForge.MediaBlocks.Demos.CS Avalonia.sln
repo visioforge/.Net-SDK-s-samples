@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia.MacOS"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia.Windows", "Avalonia\Simple Player\SimplePlayerAvalonia.Windows\SimplePlayerAvalonia.Windows.csproj", "{721F605B-7201-4BCF-8843-C12F45563D34}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimplePlayer", "SimplePlayer", "{5B29813C-F5F7-4D68-AE31-34C7254A47E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F} = {5B29813C-F5F7-4D68-AE31-34C7254A47E7}
+		{91D066D1-71A2-4E2D-BA95-61DF38E112B1} = {5B29813C-F5F7-4D68-AE31-34C7254A47E7}
+		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0} = {5B29813C-F5F7-4D68-AE31-34C7254A47E7}
+		{721F605B-7201-4BCF-8843-C12F45563D34} = {5B29813C-F5F7-4D68-AE31-34C7254A47E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
