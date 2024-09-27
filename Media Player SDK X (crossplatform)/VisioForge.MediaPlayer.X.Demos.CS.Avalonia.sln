@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player", "Avalonia\SimpleVideoPlayer\Simple Video Player\Simple Video Player.csproj", "{071CE028-C6A0-4A87-BF26-3606DEE42309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoPlayer", "Avalonia\SimpleVideoPlayer\SimpleVideoPlayer\SimpleVideoPlayer.csproj", "{D35A54E0-FCA4-40A3-A47D-3F54262B653C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Player.Desktop", "Avalonia\SimpleVideoPlayer\Simple Video Player.Desktop\Simple Video Player.Desktop.csproj", "{F3B25826-C790-46CA-A6C0-A7ED177DD7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoPlayer.Linux", "Avalonia\SimpleVideoPlayer\SimpleVideoPlayer.Linux\SimpleVideoPlayer.Linux.csproj", "{04F30EA4-6BD7-4F6D-88EB-39ADBFEB02DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoPlayer.MacOS", "Avalonia\SimpleVideoPlayer\SimpleVideoPlayer.MacOS\SimpleVideoPlayer.MacOS.csproj", "{B8B3EEAA-FF98-43E4-8C04-867D82E9C260}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoPlayer.Windows", "Avalonia\SimpleVideoPlayer\SimpleVideoPlayer.Windows\SimpleVideoPlayer.Windows.csproj", "{8D63A64D-8D9F-435A-A945-A74207B357A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{071CE028-C6A0-4A87-BF26-3606DEE42309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{071CE028-C6A0-4A87-BF26-3606DEE42309}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{071CE028-C6A0-4A87-BF26-3606DEE42309}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{071CE028-C6A0-4A87-BF26-3606DEE42309}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3B25826-C790-46CA-A6C0-A7ED177DD7EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3B25826-C790-46CA-A6C0-A7ED177DD7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3B25826-C790-46CA-A6C0-A7ED177DD7EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3B25826-C790-46CA-A6C0-A7ED177DD7EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35A54E0-FCA4-40A3-A47D-3F54262B653C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35A54E0-FCA4-40A3-A47D-3F54262B653C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35A54E0-FCA4-40A3-A47D-3F54262B653C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35A54E0-FCA4-40A3-A47D-3F54262B653C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F30EA4-6BD7-4F6D-88EB-39ADBFEB02DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F30EA4-6BD7-4F6D-88EB-39ADBFEB02DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F30EA4-6BD7-4F6D-88EB-39ADBFEB02DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F30EA4-6BD7-4F6D-88EB-39ADBFEB02DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B3EEAA-FF98-43E4-8C04-867D82E9C260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B3EEAA-FF98-43E4-8C04-867D82E9C260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B3EEAA-FF98-43E4-8C04-867D82E9C260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B3EEAA-FF98-43E4-8C04-867D82E9C260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D63A64D-8D9F-435A-A945-A74207B357A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D63A64D-8D9F-435A-A945-A74207B357A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D63A64D-8D9F-435A-A945-A74207B357A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D63A64D-8D9F-435A-A945-A74207B357A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

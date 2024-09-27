@@ -81,8 +81,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.12" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.70" />
   </ItemGroup>
@@ -91,4 +91,24 @@
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSimpleCaptureHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
+  <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="15.10.11" />
+  </ItemGroup>
+  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+    <PropertyGroup>
+      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+    </PropertyGroup>
+    <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
+    <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
+    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+    </Copy>
+    <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text=" - %(CopiedNativeFiles.Identity)" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text="Finished CopyNativeLibrariesToMonoBundle target." Importance="High" />
+  </Target>
 </Project>

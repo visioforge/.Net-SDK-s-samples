@@ -24,7 +24,7 @@ public partial class ViewController : NSViewController
 
     private MediaBlock _videoSource;
 
-    private VideoViewGL _videoView;
+    private VideoView _videoView;
 
     protected ViewController(NativeHandle handle) : base(handle)
     {
@@ -55,6 +55,20 @@ public partial class ViewController : NSViewController
             await LoadDevicesAsync();
 
             View.Window.Delegate = new CustomWindowDelegate();
+        });
+    }
+
+    private void ShowMessage(string text)
+    {
+        InvokeOnMainThread(async () =>
+        {
+        var alert = new NSAlert
+        {
+            AlertStyle = NSAlertStyle.Informational,
+            InformativeText = text,
+            MessageText = "Message"
+        };
+        alert.RunModal();
         });
     }
 
@@ -170,9 +184,18 @@ public partial class ViewController : NSViewController
 
     private async Task StartAsync()
     {
+        // Do any additional setup after loading the view.
+        AVCaptureDevice.RequestAccessForMediaType(AVAuthorizationMediaType.Video, granted =>
+        {
+            if (!granted)
+            {
+                ShowMessage("Please allow camera access.");
+            }
+        });
+
         _pipeline = new MediaBlocksPipeline();
 
-        _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
+        _videoView = new VideoView(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
         videoViewHost.AddSubview(_videoView);
 
         // video source

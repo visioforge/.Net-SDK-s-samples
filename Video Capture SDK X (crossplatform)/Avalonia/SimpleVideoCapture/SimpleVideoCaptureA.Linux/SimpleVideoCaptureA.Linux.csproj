@@ -6,7 +6,7 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <!-- <ApplicationId>com.visioforge.simplevideocaptureax</ApplicationId>-->
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
-    <!-- <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.7.1" />-->
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleVideoCaptureA\SimpleVideoCaptureA.csproj" />

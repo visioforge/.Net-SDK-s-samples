@@ -2,16 +2,15 @@
   <PropertyGroup>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net8.0-macos14.0;net8.0-windows;net8.0</TargetFrameworks>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('MacOS'))">
-    <TargetFramework>net7.0-macos10.14</TargetFramework>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
   </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <TargetFramework>net7.0-windows7.0</TargetFramework>
-    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <TargetFramework>net7.0</TargetFramework>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -25,7 +24,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.10.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.10.12" />
   </ItemGroup>
 </Project>

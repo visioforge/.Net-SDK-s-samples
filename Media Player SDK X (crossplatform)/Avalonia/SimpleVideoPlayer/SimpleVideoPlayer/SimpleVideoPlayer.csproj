@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!--<TargetFramework>net7.0</TargetFramework>-->
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TargetFrameworks>net8.0-macos14.0;net8.0-windows;net8.0</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.10.12" />
+  </ItemGroup>
+</Project>

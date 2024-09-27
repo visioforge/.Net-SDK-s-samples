@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
+    One for Windows with net7.0-windows TFM, one for MacOS with net7.0-macos and one with net7.0 TFM for Linux.-->
+    <Nullable>disable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- <ApplicationId>com.visioforge.simplevideocaptureax</ApplicationId>-->
+    <TargetFramework>net8.0-macos14.00</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifiers>osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <WarningLevel>4</WarningLevel>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleVideoPlayer\SimpleVideoPlayer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
+  </ItemGroup>
+</Project>

@@ -24,6 +24,8 @@ Changes and updates for all .Net SDKs
 * [ALL] Improved WinUI (and MAUI on Windows) VideoView performance
 * [VideoCaptureCore] Added the `PIP_Video_CaptureDevice_CameraControl_` API to control the camera settings for the Picture-in-Picture mode
 * [X-engines] Added the headers support for the HTTP sources created using the `HTTPSourceSettings` class
+* [X-engines] Updated Avalonia samples, with projects for macOS, Linux, and Windows
+* [X-engines] Added NuGet redist packages for macOS
 
 ## 15.9.x
 

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-macos</TargetFramework>
+    <RuntimeIdentifiers>osx-arm64;osx-x64</RuntimeIdentifiers>
+    <OutputType>Exe</OutputType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <SupportedOSPlatformVersion>14.00</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
+  </ItemGroup>
+</Project>

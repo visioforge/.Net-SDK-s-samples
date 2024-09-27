@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
-    <EnvironmentVariables>
-      <Variable name="DYLD_LIBRARY_PATH" value="/usr/local/lib/:/usr/local/lib/gio/modules/:/opt/homebrew/lib/:/opt/homebrew/lib/gio/modules/:$DYLD_LIBRARY_PATH" xmlns="" />
-    </EnvironmentVariables>
-  </PropertyGroup>
-</Project>

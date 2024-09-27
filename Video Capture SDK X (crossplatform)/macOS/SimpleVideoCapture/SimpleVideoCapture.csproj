@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-macos</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <SupportedOSPlatformVersion>14.00</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
+  </ItemGroup>
+</Project>

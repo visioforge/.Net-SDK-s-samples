@@ -23,7 +23,7 @@ public partial class ViewController : NSViewController
 
     private VideoRendererBlock _videoRenderer;
 
-    private VideoViewGL _videoView;
+    private VideoView _videoView;
 
     protected ViewController(NativeHandle handle) : base(handle)
     {
@@ -42,16 +42,14 @@ public partial class ViewController : NSViewController
     {
         base.ViewDidLoad();
 
-        _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
+        _videoView = new VideoView(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
         videoViewHost.AddSubview(_videoView);
 
         VisioForgeX.InitSDK();
 
-        edFilename.StringValue = "/Users/roman/Documents/samples/video.mp4";
+        edFilename.StringValue = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "video.mp4");
 
         _timer = new Timer(OnTimer);
-
-        InvokeOnMainThread(async () => { View.Window.Delegate = new CustomWindowDelegate(); });
     }
 
     public async void OnTimer(object stateInfo)
@@ -77,17 +75,25 @@ public partial class ViewController : NSViewController
 
     private void ShowMessage(string text)
     {
-        var alert = new NSAlert
+        InvokeOnMainThread(async () =>
         {
-            AlertStyle = NSAlertStyle.Informational,
-            InformativeText = text,
-            MessageText = "Message"
-        };
-        alert.RunModal();
+            var alert = new NSAlert
+            {
+                AlertStyle = NSAlertStyle.Informational,
+                InformativeText = text,
+                MessageText = "Message"
+            };
+            alert.RunModal();
+        });
     }
 
     private async Task StartAsync()
     {
+        if (View.Window.Delegate == null)
+        {
+            View.Window.Delegate = new CustomWindowDelegate();
+        }
+
         if (!File.Exists(edFilename.StringValue))
         {
             Debug.WriteLine("Input file is not found!");
