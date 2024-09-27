@@ -26,6 +26,9 @@ jobs:
       with:
         dotnet-version: | 
           8.0.x
+
+    - name: Install macos workload
+      run: dotnet workload install macos
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
