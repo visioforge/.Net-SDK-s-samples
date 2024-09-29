@@ -97,6 +97,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "media-player-mb net7", "_Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-to-decklink-mb net7", "_CodeSnippets\screen-to-decklink\screen-to-decklink-mb net7.csproj", "{B14F7380-9DCD-4B2D-AFBD-4F0ECF45997D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "h264-data-player net7", "_CodeSnippets\h264-data-player\h264-data-player net7.csproj", "{C50409C9-B247-459D-BDA8-72B6FE89748A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -279,6 +281,10 @@ Global
 		{B14F7380-9DCD-4B2D-AFBD-4F0ECF45997D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B14F7380-9DCD-4B2D-AFBD-4F0ECF45997D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B14F7380-9DCD-4B2D-AFBD-4F0ECF45997D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C50409C9-B247-459D-BDA8-72B6FE89748A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50409C9-B247-459D-BDA8-72B6FE89748A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50409C9-B247-459D-BDA8-72B6FE89748A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50409C9-B247-459D-BDA8-72B6FE89748A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -328,6 +334,7 @@ Global
 		{6C09C54D-40F5-4C5F-BC9F-6852B7694876} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{D7CAFE8E-4A05-4A51-A0C4-2CCF14EF19CF} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{B14F7380-9DCD-4B2D-AFBD-4F0ECF45997D} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
+		{C50409C9-B247-459D-BDA8-72B6FE89748A} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
