@@ -68,8 +68,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.14" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.14" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.16" />
   </ItemGroup>
   <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
   <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">

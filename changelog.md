@@ -20,13 +20,15 @@ Changes and updates for all .Net SDKs
 * [Mobile] Improved AOT compatibility for iOS and Android
 * [WinUI] Improved performance of the `WinUI` video rendering
 * [Media Blocks SDK .Net] Added the `GetLastFrameAsSKBitmap` and `GetLastFrameAsBitmap` methods to `VideoSampleGrabberBlock` to get the last frame as a `SkiaSharp.SKBitmap` or `System.Drawing.Bitmap`
-* [VideoCaptureCore] Added the `AddFakeAudioSource` property to `FFMPEGEXEOutput`. The `Network_Streaming_Audio_Enabled` property of `VideoCaptureCore` should be set to false to use this fake audio.
+* [Video Capture SDK .Net] `VideoCaptureCore`: Added the `AddFakeAudioSource` property to `FFMPEGEXEOutput`. The `Network_Streaming_Audio_Enabled` property of `VideoCaptureCore` should be set to false to use this fake audio.
 * [ALL] Improved WinUI (and MAUI on Windows) VideoView performance
-* [VideoCaptureCore] Added the `PIP_Video_CaptureDevice_CameraControl_` API to control the camera settings for the Picture-in-Picture mode
+* [Video Capture SDK .Net] `VideoCaptureCore`: Added the `PIP_Video_CaptureDevice_CameraControl_` API to control the camera settings for the Picture-in-Picture mode
 * [X-engines] Added the headers support for the HTTP sources created using the `HTTPSourceSettings` class
 * [X-engines] Updated Avalonia samples, with projects for macOS, Linux, and Windows
 * [X-engines] Added NuGet redist packages for macOS and MacCatalyst (including MAUI)
-* [Video Capture SDK .Net] Added device path support for `PIP_Video_CaptureDevice_CameraControl` API
+* [Video Capture SDK .Net] `VideoCaptureCore`: Added device path support for `PIP_Video_CaptureDevice_CameraControl` API
+* [Video Capture SDK .Net] `VideoCaptureCore`: Added the `FFMPEG_MaxLoadTimeout` property for IP camera sources. It allows you to set the maximum time to wait for the FFMPEG source to load the stream
+  
 
 ## 15.9.x
 
