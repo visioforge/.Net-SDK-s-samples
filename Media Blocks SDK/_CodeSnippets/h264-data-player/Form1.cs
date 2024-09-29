@@ -77,7 +77,7 @@ namespace media_player
 
             // Create MediaBlocks pipeline
             _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += (sender, args) =>
+            _pipeline.OnStop += (sender2, args) =>
             {
                 _stopFlag = true;
             };
