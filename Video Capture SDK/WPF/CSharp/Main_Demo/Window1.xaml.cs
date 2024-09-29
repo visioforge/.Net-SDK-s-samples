@@ -2138,7 +2138,7 @@ namespace Main_Demo
             await VideoCapture1.StartAsync();
 
             edNetworkURL.Text = VideoCapture1.Network_Streaming_URL;
-
+                 
             tmRecording.Start();
         }
 
@@ -2985,17 +2985,6 @@ namespace Main_Demo
                         cbPIPFormat.SelectedIndex = 0;
                     }
 
-                    //cbPIPFrameRate.Items.Clear();
-                    //foreach (string frameRate in deviceItem.VideoFrameRates)
-                    //{
-                    //    cbPIPFrameRate.Items.Add(frameRate);
-                    //}
-
-                    //if (cbPIPFrameRate.Items.Count > 0)
-                    //{
-                    //    cbPIPFrameRate.SelectedIndex = 0;
-                    //}
-
                     cbPIPInput.Items.Clear();
 
                     VideoCapture1.PIP_Sources_Device_GetCrossbar(e.AddedItems[0].ToString());
@@ -3620,11 +3609,11 @@ namespace Main_Demo
         {
             if (cbPIPDevices.SelectedIndex != -1)
             {
-                await VideoCapture1.PIP_Sources_SetSourceSettingsAsync(cbPIPDevices.SelectedIndex, (int)tbPIPTransparency.Value, false, false);
+                await VideoCapture1.PIP_Sources_SetTransparencySettingsAsync(cbPIPDevices.SelectedIndex, tbPIPTransparency.Value / 255);
             }
             else
             {
-                MessageBox.Show(this, "Select device!");
+                MessageBox.Show(this, "Select PIP device!");
             }
         }
 
@@ -5870,6 +5859,39 @@ namespace Main_Demo
                     textLogo.Reset();
                 }
             }
+        }
+
+        private async void cbPIPCheckZoom_Click(object sender, RoutedEventArgs e)
+        {
+            // check zoom
+            var range = await VideoCapture1.PIP_Video_CaptureDevice_CameraControl_GetRangeAsync(cbPIPDevice.Text, CameraControlProperty.Zoom);
+            if (range != null)
+            {
+                slPIPCameraZoom.Maximum = range.Max;
+                slPIPCameraZoom.Minimum = range.Min;
+                slPIPCameraZoom.Value = range.Default;
+                slPIPCameraZoom.IsEnabled = true;
+            }
+        }
+
+        private async void slPIPCameraZoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            await VideoCapture1.PIP_Video_CaptureDevice_CameraControl_SetAsync(
+                cbPIPDevice.Text, 
+                CameraControlProperty.Zoom, 
+                new VideoCaptureDeviceCameraControlValue((int)slPIPCameraZoom.Value, CameraControlFlags.Manual));
+        }
+
+        private async void cbPIPFlip_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbPIPDevices.SelectedIndex != -1)
+            {
+                await VideoCapture1.PIP_Sources_SetFlipSettingsAsync(cbPIPDevices.SelectedIndex, cbPIPFlipHorizontal.IsChecked == true, cbPIPFlipVertical.IsChecked == true);
+            }
+            else
+            {
+                MessageBox.Show(this, "Select PIP device!");
+            }            
         }
     }
 }

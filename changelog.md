@@ -25,7 +25,8 @@ Changes and updates for all .Net SDKs
 * [VideoCaptureCore] Added the `PIP_Video_CaptureDevice_CameraControl_` API to control the camera settings for the Picture-in-Picture mode
 * [X-engines] Added the headers support for the HTTP sources created using the `HTTPSourceSettings` class
 * [X-engines] Updated Avalonia samples, with projects for macOS, Linux, and Windows
-* [X-engines] Added NuGet redist packages for macOS
+* [X-engines] Added NuGet redist packages for macOS and MacCatalyst (including MAUI)
+* [Video Capture SDK .Net] Added device path support for `PIP_Video_CaptureDevice_CameraControl` API
 
 ## 15.9.x
 

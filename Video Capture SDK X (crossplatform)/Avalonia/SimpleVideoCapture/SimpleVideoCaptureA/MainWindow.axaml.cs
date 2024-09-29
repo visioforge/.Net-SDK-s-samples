@@ -53,8 +53,6 @@ public partial class MainWindow : Window, IDisposable
 
     public ObservableCollection<string> AudioOutputDevices { get; set; } = new ObservableCollection<string>();
 
-    public ObservableCollection<string> Logos { get; set; } = new ObservableCollection<string>();
-
     #endregion
 
     public MainWindow()
@@ -254,9 +252,6 @@ public partial class MainWindow : Window, IDisposable
         cbVideoInputDevice = this.FindControl<ComboBox>("cbVideoInputDevice");
         cbVideoInputDevice.SelectionChanged += cbVideoInputDevice_SelectionChanged;
 
-        btVideoCaptureDeviceSettings = this.FindControl<Button>("btVideoCaptureDeviceSettings");
-        btVideoCaptureDeviceSettings.Click += btVideoCaptureDeviceSettings_Click;
-
         cbVideoInputFormat = this.FindControl<ComboBox>("cbVideoInputFormat");
         cbVideoInputFormat.SelectionChanged += cbVideoInputFormat_SelectionChanged;
 
@@ -264,9 +259,6 @@ public partial class MainWindow : Window, IDisposable
 
         cbAudioInputDevice = this.FindControl<ComboBox>("cbAudioInputDevice");
         cbAudioInputDevice.SelectionChanged += cbAudioInputDevice_SelectionChanged;
-
-        btAudioInputDeviceSettings = this.FindControl<Button>("btAudioInputDeviceSettings");
-        btAudioInputDeviceSettings.Click += btAudioInputDeviceSettings_Click;
 
         cbAudioInputFormat = this.FindControl<ComboBox>("cbAudioInputFormat");
 
@@ -285,42 +277,11 @@ public partial class MainWindow : Window, IDisposable
         lbViewVideoTutorials = this.FindControl<Label>("lbViewVideoTutorials");
         lbViewVideoTutorials.PointerPressed += LbViewVideoTutorials_PointerPressed;
 
-        tbLightness = this.FindControl<Slider>("tbLightness");
-        tbLightness.PropertyChanged += tbLightness_PropertyChanged;
-
-        tbSaturation = this.FindControl<Slider>("tbSaturation");
-        tbSaturation.PropertyChanged += tbSaturation_PropertyChanged;
-
-        tbContrast = this.FindControl<Slider>("tbContrast");
-        tbContrast.PropertyChanged += tbContrast_PropertyChanged;
-
-        tbDarkness = this.FindControl<Slider>("tbDarkness");
-        tbDarkness.PropertyChanged += tbDarkness_PropertyChanged;
-
-        cbGreyscale = this.FindControl<CheckBox>("cbGreyscale");
-        cbGreyscale.Checked += cbGreyscale_CheckedChanged;
-        cbGreyscale.Unchecked += cbGreyscale_CheckedChanged;
-
-        cbInvert = this.FindControl<CheckBox>("cbInvert");
-        cbInvert.Checked += cbInvert_CheckedChanged;
-        cbInvert.Unchecked += cbInvert_CheckedChanged;
-
-        cbFlipX = this.FindControl<CheckBox>("cbFlipX");
-        cbFlipX.Checked += cbFlipX_Checked;
-        cbFlipX.Unchecked += cbFlipX_Checked;
-
-        cbFlipY = this.FindControl<CheckBox>("cbFlipY");
-        cbFlipY.Checked += cbFlipY_Checked;
-        cbFlipY.Unchecked += cbFlipY_Checked;
-
         cbDebugMode = this.FindControl<CheckBox>("cbDebugMode");
 
         rbPreview = this.FindControl<RadioButton>("rbPreview");
 
         lbTimestamp = this.FindControl<TextBlock>("lbTimestamp");
-
-        btSaveSnapshot = this.FindControl<Button>("btSaveSnapshot");
-        btSaveSnapshot.Click += btSaveSnapshot_Click;
 
         btStart = this.FindControl<Button>("btStart");
         btStart.Click += btStart_Click;
@@ -333,8 +294,6 @@ public partial class MainWindow : Window, IDisposable
 
         btPause = this.FindControl<Button>("btPause");
         btPause.Click += btPause_Click;
-
-        btSaveSnapshot = this.FindControl<Button>("btSaveSnapshot");
 
         cbDebugMode = this.FindControl<CheckBox>("cbDebugMode");
 
@@ -383,11 +342,6 @@ public partial class MainWindow : Window, IDisposable
         return await sfd.ShowAsync(this);
     }
 
-    private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
-    {
-        //VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.SelectedItem.ToString());
-    }
-
     private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
     {
         string filename = await SaveVideoFileDialogAsync();
@@ -395,11 +349,6 @@ public partial class MainWindow : Window, IDisposable
         {
             edOutput.Text = filename;
         }
-    }
-
-    private void btVideoCaptureDeviceSettings_Click(object sender, RoutedEventArgs e)
-    {
-       // VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.SelectedItem.ToString());
     }
 
     private void Log(string txt)
@@ -418,14 +367,6 @@ public partial class MainWindow : Window, IDisposable
         {
             VideoCapture1.Audio_OutputDevice_Volume = ((int)tbAudioVolume.Value);
         }
-    }
-
-    private void tbAudioBalance_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        //if (e.Property.ToString() == "Value")
-        //{
-        //    VideoCapture1.Audio_Output((int)tbAudioBalance.Value);
-        //}
     }
 
     private async void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -548,59 +489,12 @@ public partial class MainWindow : Window, IDisposable
 
         VideoCapture1.Audio_Source = audioSourceSettings;
 
-        VideoCapture1.Video_Effects_Clear();
-        Logos.Clear();
-        ConfigureVideoEffects();
-
         VideoCapture1.Snapshot_Grabber_Enabled = true;
 
         await VideoCapture1.StartAsync();
 
         tcMain.SelectedIndex = 3;
         tmRecording.Start();
-    }
-
-    private void ConfigureVideoEffects()
-    {
-        if (tbLightness.Value > 0)
-        {
-            UpdateLightness();
-        }
-
-        if (tbSaturation.Value < 255)
-        {
-            UpdateSaturation();
-        }
-
-        if (tbContrast.Value > 0)
-        {
-            UpdateContrast();
-        }
-
-        if (tbDarkness.Value > 0)
-        {
-            UpdateDarkness();
-        }
-
-        if (cbGreyscale.IsChecked == true)
-        {
-            cbGreyscale_CheckedChanged(null, null);
-        }
-
-        if (cbInvert.IsChecked == true)
-        {
-            cbInvert_CheckedChanged(null, null);
-        }
-
-        if (cbFlipX.IsChecked == true)
-        {
-            cbFlipX_Checked(null, null);
-        }
-
-        if (cbFlipY.IsChecked == true)
-        {
-            cbFlipY_Checked(null, null);
-        }
     }
 
     private async void btResume_Click(object sender, RoutedEventArgs e)
@@ -712,193 +606,6 @@ public partial class MainWindow : Window, IDisposable
         {
             lbTimestamp.Text = "Recording time: " + ts.ToString(@"hh\:mm\:ss");
         }));
-    }
-
-    private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
-    {
-        //IVideoEffectGrayscale grayscale;
-        //var effect = VideoCapture1.Video_Effects_Get("Grayscale");
-        //if (effect == null)
-        //{
-        //    grayscale = new VideoEffectGrayscale(cbGreyscale.IsChecked == true);
-        //    VideoCapture1.Video_Effects_Add(grayscale);
-        //}
-        //else
-        //{
-        //    grayscale = effect as IVideoEffectGrayscale;
-        //    if (grayscale != null)
-        //    {
-        //        grayscale.Enabled = cbGreyscale.IsChecked == true;
-        //    }
-        //}
-    }
-
-    private void UpdateContrast()
-    {
-        //IVideoEffectContrast contrast;
-        //var effect = VideoCapture1.Video_Effects_Get("Contrast");
-        //if (effect == null)
-        //{
-        //    contrast = new VideoEffectContrast(true, (int)tbContrast.Value);
-        //    VideoCapture1.Video_Effects_Add(contrast);
-        //}
-        //else
-        //{
-        //    contrast = effect as IVideoEffectContrast;
-        //    if (contrast != null)
-        //    {
-        //        contrast.Value = (int)tbContrast.Value;
-        //    }
-        //}
-    }
-
-    private void tbContrast_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property.ToString() == "Value")
-        {
-            UpdateContrast();
-        }
-    }
-
-    private void UpdateDarkness()
-    {
-        //IVideoEffectDarkness darkness;
-        //var effect = VideoCapture1.Video_Effects_Get("Darkness");
-        //if (effect == null)
-        //{
-        //    darkness = new VideoEffectDarkness(true, (int)tbDarkness.Value);
-        //    VideoCapture1.Video_Effects_Add(darkness);
-        //}
-        //else
-        //{
-        //    darkness = effect as IVideoEffectDarkness;
-        //    if (darkness != null)
-        //    {
-        //        darkness.Value = (int)tbDarkness.Value;
-        //    }
-        //}
-    }
-
-    private void tbDarkness_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property.ToString() == "Value")
-        {
-            UpdateDarkness();
-        }
-    }
-
-    private void UpdateLightness()
-    {
-        //IVideoEffectLightness lightness;
-        //var effect = VideoCapture1.Video_Effects_Get("Lightness");
-        //if (effect == null)
-        //{
-        //    lightness = new VideoEffectLightness(true, (int)tbLightness.Value);
-        //    VideoCapture1.Video_Effects_Add(lightness);
-        //}
-        //else
-        //{
-        //    lightness = effect as IVideoEffectLightness;
-        //    if (lightness != null)
-        //    {
-        //        lightness.Value = (int)tbLightness.Value;
-        //    }
-        //}
-    }
-
-    private void tbLightness_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property.ToString() == "Value")
-        {
-            UpdateLightness();
-        }
-    }
-
-    private void UpdateSaturation()
-    {
-        //if (VideoCapture1 != null)
-        //{
-        //    IVideoEffectSaturation saturation;
-        //    var effect = VideoCapture1.Video_Effects_Get("Saturation");
-        //    if (effect == null)
-        //    {
-        //        saturation = new VideoEffectSaturation((int)tbSaturation.Value);
-        //        VideoCapture1.Video_Effects_Add(saturation);
-        //    }
-        //    else
-        //    {
-        //        saturation = effect as IVideoEffectSaturation;
-        //        if (saturation != null)
-        //        {
-        //            saturation.Value = (int)tbSaturation.Value;
-        //        }
-        //    }
-        //}
-    }
-
-    private void tbSaturation_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
-    {
-        if (e.Property.ToString() == "Value")
-        {
-            UpdateSaturation();
-        }
-    }
-
-    private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
-    {
-        //IVideoEffectInvert invert;
-        //var effect = VideoCapture1.Video_Effects_Get("Invert");
-        //if (effect == null)
-        //{
-        //    invert = new VideoEffectInvert(cbInvert.IsChecked == true);
-        //    VideoCapture1.Video_Effects_Add(invert);
-        //}
-        //else
-        //{
-        //    invert = effect as IVideoEffectInvert;
-        //    if (invert != null)
-        //    {
-        //        invert.Enabled = cbInvert.IsChecked == true;
-        //    }
-        //}
-    }
-
-    private void cbFlipX_Checked(object sender, RoutedEventArgs e)
-    {
-        //IVideoEffectFlipDown flip;
-        //var effect = VideoCapture1.Video_Effects_Get("FlipDown");
-        //if (effect == null)
-        //{
-        //    flip = new VideoEffectFlipHorizontal(cbFlipX.IsChecked == true);
-        //    VideoCapture1.Video_Effects_Add(flip);
-        //}
-        //else
-        //{
-        //    flip = effect as IVideoEffectFlipDown;
-        //    if (flip != null)
-        //    {
-        //        flip.Enabled = cbFlipX.IsChecked == true;
-        //    }
-        //}
-    }
-
-    private void cbFlipY_Checked(object sender, RoutedEventArgs e)
-    {
-        //IVideoEffectFlipRight flip;
-        //var effect = VideoCapture1.Video_Effects_Get("FlipRight");
-        //if (effect == null)
-        //{
-        //    flip = new VideoEffectFlipVertical(cbFlipY.IsChecked == true);
-        //    VideoCapture1.Video_Effects_Add(flip);
-        //}
-        //else
-        //{
-        //    flip = effect as IVideoEffectFlipRight;
-        //    if (flip != null)
-        //    {
-        //        flip.Enabled = cbFlipY.IsChecked == true;
-        //    }
-        //}
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

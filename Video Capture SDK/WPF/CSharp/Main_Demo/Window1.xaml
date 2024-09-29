@@ -1392,13 +1392,12 @@
                                         <Grid>
                                             <Label Content="Device name" Height="28" HorizontalAlignment="Left" Margin="10,33,0,0" x:Name="label225" VerticalAlignment="Top" Width="93" />
                                             <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,38,0,0" x:Name="cbPIPDevice" VerticalAlignment="Top" Width="200" SelectionChanged="cbPIPDevice_SelectedIndexChanged" />
-                                            <CheckBox Content="Use best" Height="16" HorizontalAlignment="Left" Margin="320,79,0,0" x:Name="cbPIPFormatUseBest" VerticalAlignment="Top" Checked="cbPIPFormatUseBest_CheckedChanged" Unchecked="cbPIPFormatUseBest_CheckedChanged" />
+                                            <CheckBox Content="Use best" Height="16" HorizontalAlignment="Left" Margin="426,76,0,0" x:Name="cbPIPFormatUseBest" VerticalAlignment="Top" Checked="cbPIPFormatUseBest_CheckedChanged" Unchecked="cbPIPFormatUseBest_CheckedChanged" />
                                             <Label Content="Don't add main video capture device!" Height="28" HorizontalAlignment="Left" Margin="10,9,0,0" x:Name="label226" VerticalAlignment="Top" Width="216" />
                                             <Label Content="Video format" Height="28" HorizontalAlignment="Left" Margin="10,67,0,0" x:Name="label227" VerticalAlignment="Top" Width="81" />
                                             <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,72,0,0" x:Name="cbPIPFormat" VerticalAlignment="Top" Width="200" SelectionChanged="cbPIPFormat_SelectionChanged" />
-                                            <Label Content="Frame rate" Height="28" HorizontalAlignment="Left" Margin="10,136,0,0" x:Name="label228" VerticalAlignment="Top" Width="81" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,141,0,0" x:Name="cbPIPFrameRate" VerticalAlignment="Top" Width="90" />
-                                            <Label Content="fps" Height="28" HorizontalAlignment="Left" Margin="210,136,0,0" x:Name="label229" VerticalAlignment="Top" Width="81" />
+                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="319,72,0,0" x:Name="cbPIPFrameRate" VerticalAlignment="Top" Width="73" />
+                                            <Label Content="fps" Height="28" HorizontalAlignment="Left" Margin="397,70,0,0" x:Name="label229" VerticalAlignment="Top" Width="29" />
                                             <Label Content="Input" Height="28" HorizontalAlignment="Left" Margin="10,102,0,0" x:Name="label230" VerticalAlignment="Top" Width="81" />
                                             <ComboBox Height="23" HorizontalAlignment="Left" Margin="114,107,0,0" x:Name="cbPIPInput" VerticalAlignment="Top" Width="200" />
                                             <Button Content="Add" FontWeight="Bold" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="10,222,0,0" x:Name="btPIPAddDevice" VerticalAlignment="Top" Width="62" Click="btPIPAddDevice_Click" />
@@ -1414,6 +1413,8 @@
                                                     <Label Content="Height" Height="28" HorizontalAlignment="Left" Margin="98,34,0,0" x:Name="label235" VerticalAlignment="Top" Width="47" />
                                                 </Grid>
                                             </GroupBox>
+                                            <Slider x:Name="slPIPCameraZoom" HorizontalAlignment="Left" Margin="114,155,0,0" VerticalAlignment="Top" Width="120" ValueChanged="slPIPCameraZoom_ValueChanged" IsEnabled="False"/>
+                                            <Button x:Name="cbPIPCheckZoom" Content="Check zoom" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="77" Height="36" Click="cbPIPCheckZoom_Click"/>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="IP camera" x:Name="tabItem68">
@@ -1510,12 +1511,6 @@
                                         <Button Content="Set" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="52,62,0,0" x:Name="btPIPSetOutputSize" VerticalAlignment="Top" Width="109" Click="btPIPSetOutputSize_Click" />
                                     </Grid>
                                 </GroupBox>
-                                <GroupBox Header="Transparency" Height="95" HorizontalAlignment="Left" Margin="15,201,0,0" x:Name="groupBox29" VerticalAlignment="Top" Width="206">
-                                    <Grid>
-                                        <Slider Height="23" HorizontalAlignment="Left" Margin="19,6,0,0" x:Name="tbPIPTransparency" VerticalAlignment="Top" Width="159" Maximum="255" Value="255" />
-                                        <Button Content="Set" Height="23" HorizontalAlignment="Left" Margin="52,39,0,0" x:Name="btPIPSet" VerticalAlignment="Top" Width="109" Click="btPIPSet_Click" />
-                                    </Grid>
-                                </GroupBox>
                                 <Label Content="Resize type" HorizontalAlignment="Left" Margin="240,209,0,0" VerticalAlignment="Top"/>
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="240,235,0,0" x:Name="cbPIPResizeMode" VerticalAlignment="Top" Width="230" >
                                     <ComboBoxItem Content="Nearest neighbor" />
@@ -1523,6 +1518,11 @@
                                     <ComboBoxItem Content="Cubic" />
                                     <ComboBoxItem Content="Lanczos" />
                                 </ComboBox>
+                                <Slider Height="23" HorizontalAlignment="Left" Margin="15,235,0,0" x:Name="tbPIPTransparency" VerticalAlignment="Top" Width="156" Maximum="255" Value="255" />
+                                <Button Content="Set" Height="23" HorizontalAlignment="Left" Margin="176,235,0,0" x:Name="btPIPSet" VerticalAlignment="Top" Width="35" Click="btPIPSet_Click" />
+                                <Label x:Name="label8" Content="Transparency" HorizontalAlignment="Left" Margin="15,209,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbPIPFlipVertical" Content="Flip vertical" HorizontalAlignment="Left" Margin="15,271,0,0" VerticalAlignment="Top" Click="cbPIPFlip_Click"/>
+                                <CheckBox x:Name="cbPIPFlipHorizontal" Content="Flip horizontal" HorizontalAlignment="Left" Margin="116,271,0,0" VerticalAlignment="Top" Click="cbPIPFlip_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Chroma-key">
