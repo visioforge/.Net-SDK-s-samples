@@ -99,6 +99,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-to-decklink-mb net5"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "h264-data-player net5", "_CodeSnippets\h264-data-player\h264-data-player net5.csproj", "{7A79B568-8C18-4ED5-A960-ABB6CE121E80}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-player-mb net5", "_CodeSnippets\memory-player\memory-player-mb net5.csproj", "{F7E475DF-14EB-4BFB-BE3D-70E88A72328E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -285,6 +287,10 @@ Global
 		{7A79B568-8C18-4ED5-A960-ABB6CE121E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A79B568-8C18-4ED5-A960-ABB6CE121E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A79B568-8C18-4ED5-A960-ABB6CE121E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E475DF-14EB-4BFB-BE3D-70E88A72328E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E475DF-14EB-4BFB-BE3D-70E88A72328E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E475DF-14EB-4BFB-BE3D-70E88A72328E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E475DF-14EB-4BFB-BE3D-70E88A72328E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -335,6 +341,7 @@ Global
 		{02423F6F-371C-4E8E-ADB7-D2B33E8ED9D4} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 		{D2009CAD-FBEF-43BD-B7DF-DAC1602AA829} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 		{7A79B568-8C18-4ED5-A960-ABB6CE121E80} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
+		{F7E475DF-14EB-4BFB-BE3D-70E88A72328E} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
