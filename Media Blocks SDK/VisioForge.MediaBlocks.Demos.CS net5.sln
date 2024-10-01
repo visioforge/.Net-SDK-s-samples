@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo net5", "Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo net5", "WinForms\CSharp\Simple Player Demo\Simple Player Demo net5.csproj", "{F8CDDEA5-0F1F-4C31-B840-33587993DC7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory Player Demo net5", "WinForms\CSharp\Memory Player Demo\Memory Player Demo net5.csproj", "{30B1BD62-A790-465F-A03E-793159115156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stream Player Demo net5", "WinForms\CSharp\Stream Player Demo\Stream Player Demo net5.csproj", "{30B1BD62-A790-465F-A03E-793159115156}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{27B355AB-D859-4D48-9F24-BA7E237779F9}"
 EndProject

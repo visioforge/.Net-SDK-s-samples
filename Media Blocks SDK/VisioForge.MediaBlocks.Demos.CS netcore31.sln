@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Mixer Demo netcore31"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo netcore31", "WinForms\CSharp\Simple Player Demo\Simple Player Demo netcore31.csproj", "{599FDF28-7930-49EB-9B57-6417B64274AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory Player Demo netcore31", "WinForms\CSharp\Memory Player Demo\Memory Player Demo netcore31.csproj", "{323B0BC0-334C-445C-89B9-7E0DB79F577E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stream Player Demo netcore31", "WinForms\CSharp\Stream Player Demo\Stream Player Demo netcore31.csproj", "{323B0BC0-334C-445C-89B9-7E0DB79F577E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{ADBE7D51-E255-42D4-A4A9-77901508B53D}"
 EndProject
