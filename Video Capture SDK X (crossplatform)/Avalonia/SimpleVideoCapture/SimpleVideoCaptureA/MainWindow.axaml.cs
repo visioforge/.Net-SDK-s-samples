@@ -164,7 +164,7 @@ public partial class MainWindow : Window, IDisposable
         Closing += Window_Closing;
 
         await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
-        await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+        //await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
         //await _deviceEnumerator.StartAudioSinkMonitorAsync();
 
         var audioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
@@ -188,36 +188,17 @@ public partial class MainWindow : Window, IDisposable
 
         //cbVideoInputDevice_SelectionChanged(null, null);
 
-        //foreach (var device in VideoCapture1.Audio_CaptureDevices())
-        //{
-        //    AudioInputDevices.Add(device.Name);
-        //}
+        var audioInputs = await DeviceEnumerator.Shared.AudioSourcesAsync();
+        foreach (var device in audioInputs)
+        {
+            AudioInputDevices.Add(device.Name);
+        }
 
-        //if (AudioInputDevices.Count > 0)
-        //{
-        //    cbAudioInputDevice.SelectedIndex = 0;
-        //    cbAudioInputDevice_SelectionChanged(null, null);
-        //}
-
-        //AudioInputLines.Clear();
-
-        //if (!string.IsNullOrEmpty(cbAudioInputDevice.SelectedItem.ToString()))
-        //{
-        //    var deviceItem =
-        //        VideoCapture1.Audio_CaptureDevices().FirstOrDefault(device => device.Name == cbAudioInputDevice.SelectedItem.ToString());
-        //    if (deviceItem != null)
-        //    {
-        //        foreach (var line in deviceItem.Lines)
-        //        {
-        //            AudioInputLines.Add(line);
-        //        }
-
-        //        if (AudioInputLines.Count > 0)
-        //        {
-        //            cbAudioInputLine.SelectedIndex = 0;
-        //        }
-        //    }
-        //}
+        if (AudioInputDevices.Count > 0)
+        {
+            cbAudioInputDevice.SelectedIndex = 0;
+            cbAudioInputDevice_SelectionChanged(null, null);
+        }
 
         //string defaultAudioRenderer = string.Empty;
         //foreach (string audioOutputDevice in VideoCapture1.Audio_OutputDevices())

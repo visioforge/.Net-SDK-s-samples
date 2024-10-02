@@ -101,6 +101,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "h264-data-player netcore31"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-player-mb netcore31", "_CodeSnippets\memory-player\memory-player-mb netcore31.csproj", "{D45290EC-2476-4566-86EB-CA58C9FCC17B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info-mb netcore31", "_CodeSnippets\read-file-info\read-file-info-mb netcore31.csproj", "{A9735057-C147-4AC8-85F8-3A191B48A30D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +293,10 @@ Global
 		{D45290EC-2476-4566-86EB-CA58C9FCC17B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D45290EC-2476-4566-86EB-CA58C9FCC17B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D45290EC-2476-4566-86EB-CA58C9FCC17B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9735057-C147-4AC8-85F8-3A191B48A30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9735057-C147-4AC8-85F8-3A191B48A30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9735057-C147-4AC8-85F8-3A191B48A30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9735057-C147-4AC8-85F8-3A191B48A30D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -342,6 +348,7 @@ Global
 		{2CF6BC49-C859-4FD2-8A7E-9685D6528F54} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 		{749D40CC-AD0C-47CC-9F7E-D344DF80BDA0} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 		{D45290EC-2476-4566-86EB-CA58C9FCC17B} = {7E273D64-7973-42BB-980F-F8F6585280C1}
+		{A9735057-C147-4AC8-85F8-3A191B48A30D} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

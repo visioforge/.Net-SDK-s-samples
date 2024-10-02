@@ -7,20 +7,16 @@ using VisioForge.Core.VideoCaptureX;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
-using System.Linq;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.AudioRendering;
-using Gst.App;
-using VisioForge.Core.MediaBlocks.Parsers;
-using VisioForge.Core.Types.X.VideoEncoders;
+
 using System.Threading;
 using System.Timers;
 using System.IO;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Threading.Tasks;
+
 using VisioForge.Core.MediaBlocks.Special;
 
 namespace media_player
@@ -29,19 +25,15 @@ namespace media_player
     {
         private MediaBlocksPipeline _pipeline;
 
-        private PushSourceBlock _source;
+        private StreamSourceBlock _source;
+
+        private Stream _stream;
 
         private DecodeBinBlock _decoder;
 
         private VideoRendererBlock _videoRenderer;
 
-        private Thread _pushThread;
-
         private System.Timers.Timer _tmPosition;
-
-        private const int CHUNK_SIZE = 4096;
-
-        private volatile bool _stopFlag;
 
         public Form1()
         {
@@ -76,23 +68,10 @@ namespace media_player
 
             // Create MediaBlocks pipeline
             _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += (sender2, args) =>
-            {
-                _stopFlag = true;
-            };
 
             // Add source
-            var sourceSettings = new PushDataSourceSettings();
-           // var caps = new Gst.Caps("video/x-h264");
-           // caps.SetValue("stream-format", new GLib.Value("byte-stream"));
-           // sourceSettings.Caps = caps;
-            sourceSettings.PushFormat = PushSourceFormat.Bytes;
-            sourceSettings.StreamType = PushSourceStreamType.Stream;
-            sourceSettings.IsLive = true;
-            sourceSettings.PadMediaType = MediaBlockPadMediaType.Video;
-            sourceSettings.BlockPushData = true;
-
-            _source = new PushSourceBlock(sourceSettings);
+            _stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            _source = new StreamSourceBlock(_stream);
 
             // Add decoder and parser
             _decoder = new DecodeBinBlock(renderAudio: false);
@@ -104,47 +83,8 @@ namespace media_player
             _pipeline.Connect(_source.Output, _decoder.Input);
             _pipeline.Connect(_decoder.VideoOutput, _videoRenderer.Input);
 
-            _stopFlag = false;
-
             // Create pipeline and configure elements
             await _pipeline.StartAsync(onlyPreload: true);
-
-            // Push data loop
-            _pushThread = new Thread(async () =>
-            {
-                Stream stream = null;
-                HttpClient httpClient = null;
-                HttpResponseMessage response = null;
-
-                if (httpSource)
-                {
-                    httpClient = new HttpClient();
-                    response = await httpClient.GetAsync(edFilename.Text, HttpCompletionOption.ResponseHeadersRead);
-                    response.EnsureSuccessStatusCode();
-
-                    stream = await response.Content.ReadAsStreamAsync();
-                }
-                else
-                {
-                    stream = System.IO.File.OpenRead(edFilename.Text);
-                }
-
-                var buffer = new byte[CHUNK_SIZE];
-                int len = 0;
-                while ((len = stream.Read(buffer, 0, CHUNK_SIZE)) > 0 && !_stopFlag)
-                {
-                    _source.PushData(buffer, len);
-                }
-
-                stream.Close();
-
-                response?.Dispose();
-                httpClient?.Dispose();
-
-                _source.SendEOS();
-            });
-
-            _pushThread.Start();
 
             // Start playback
             await _pipeline.ResumeAsync();
@@ -154,7 +94,7 @@ namespace media_player
 
         private async void btStop_Click(object sender, EventArgs e)
         {
-            _stopFlag = true;
+            //_stopFlag = true;
 
             _tmPosition.Stop();
 

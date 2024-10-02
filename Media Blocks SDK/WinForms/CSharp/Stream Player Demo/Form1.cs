@@ -28,7 +28,7 @@ namespace MediaBlocks_Memory_Player_Demo
 
         private StreamSourceBlock _source;
 
-        private byte[] _sourceData;
+        private Stream _sourceStream;
 
         private DecodeBinBlock _decodeBin;
 
@@ -102,8 +102,8 @@ namespace MediaBlocks_Memory_Player_Demo
                 }
             }
 
-            _sourceData = File.ReadAllBytes(edFilename.Text);
-            _source = new StreamSourceBlock(new MemorySourceSettings(_sourceData));
+            _sourceStream = new FileStream(edFilename.Text, FileMode.Open, FileAccess.Read);
+            _source = new StreamSourceBlock(_sourceStream);
 
             _decodeBin = new DecodeBinBlock(renderVideo: videoStream, renderAudio: audioStream);
 
@@ -144,6 +144,9 @@ namespace MediaBlocks_Memory_Player_Demo
             VideoView1.Invalidate();
 
             await DestroyEngineAsync();
+
+            _sourceStream?.Dispose();
+            _sourceStream = null;
         }
 
         private async void btPause_Click(object sender, EventArgs e)

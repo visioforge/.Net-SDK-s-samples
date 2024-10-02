@@ -101,6 +101,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "h264-data-player net472", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-player-mb net472", "_CodeSnippets\memory-player\memory-player-mb net472.csproj", "{6FB93EE8-C884-4431-AC8D-615777E75451}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info-mb net472", "_CodeSnippets\read-file-info\read-file-info-mb net472.csproj", "{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +293,10 @@ Global
 		{6FB93EE8-C884-4431-AC8D-615777E75451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FB93EE8-C884-4431-AC8D-615777E75451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FB93EE8-C884-4431-AC8D-615777E75451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -342,6 +348,7 @@ Global
 		{E18BD1BE-3F6B-41F7-843C-84382DC8ECEA} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 		{F4E5C981-65CA-4AC5-9F19-AF4602089733} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 		{6FB93EE8-C884-4431-AC8D-615777E75451} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
+		{0318E7FF-4B77-43DA-BC4E-5C4CBA07BC91} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

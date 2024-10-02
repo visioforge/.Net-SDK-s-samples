@@ -71,8 +71,8 @@ namespace MediaBlocks_Video_Mixer_Demo
 
             _pipeline.Connect(_videoMixer.Output, _videoRenderer.Input);
 
-            _nullRenderer1 = new NullRendererBlock();
-            _nullRenderer2 = new NullRendererBlock();
+            _nullRenderer1 = new NullRendererBlock(MediaBlockPadMediaType.Video);
+            _nullRenderer2 = new NullRendererBlock(MediaBlockPadMediaType.Video);
             _pipeline.Connect(_source1.AudioOutput, _nullRenderer1.Input);
             _pipeline.Connect(_source2.AudioOutput, _nullRenderer2.Input);
 

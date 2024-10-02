@@ -72,8 +72,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.17" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.17" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.18" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.18" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.70" />

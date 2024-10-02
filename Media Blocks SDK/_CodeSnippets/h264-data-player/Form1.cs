@@ -95,7 +95,7 @@ namespace media_player
             _source = new PushSourceBlock(sourceSettings);
 
             // Add decoder and parser
-            _decoder = new H264DecoderBlock(new OpenH264DecoderSettings());
+            _decoder = new H264DecoderBlock(new FFMPEGH264DecoderSettings());
             _parse = new H264ParseBlock();
 
             // Add video renderer
