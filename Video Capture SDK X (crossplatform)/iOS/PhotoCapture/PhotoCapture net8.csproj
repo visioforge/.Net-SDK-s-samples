@@ -11,8 +11,8 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.18" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.18" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.19" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.19" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />

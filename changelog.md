@@ -28,7 +28,9 @@ Changes and updates for all .Net SDKs
 * [X-engines] Added NuGet redist packages for macOS and MacCatalyst (including MAUI)
 * [Video Capture SDK .Net] `VideoCaptureCore`: Added device path support for `PIP_Video_CaptureDevice_CameraControl` API
 * [Video Capture SDK .Net] `VideoCaptureCore`: Added the `FFMPEG_MaxLoadTimeout` property for IP camera sources. It allows you to set the maximum time to wait for the FFMPEG source to load the stream
-  
+* [X-engines] Updated Linux support for `ALSA`, `PulseAudio` and `PipeWire` audio devices
+* [X-engines] Updated Linux support for `V4L2` devices
+* [X-engines] Avalonia samples has be changed to a modern 1-project structure
 
 ## 15.9.x
 

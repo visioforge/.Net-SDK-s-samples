@@ -3,25 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia", "Avalonia\Simple Player\SimplePlayerAvalonia\SimplePlayerAvalonia.csproj", "{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAMB", "Avalonia\Simple Player\SimplePlayerAMB.csproj", "{3CDF5691-F641-47D5-B25F-0BA3C7CF9151}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia.Linux", "Avalonia\Simple Player\SimplePlayerAvalonia.Linux\SimplePlayerAvalonia.Linux.csproj", "{91D066D1-71A2-4E2D-BA95-61DF38E112B1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia.MacOS", "Avalonia\Simple Player\SimplePlayerAvalonia.MacOS\SimplePlayerAvalonia.MacOS.csproj", "{7C56DEF3-E89E-431E-AE96-93ADDAE938B0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAvalonia.Windows", "Avalonia\Simple Player\SimplePlayerAvalonia.Windows\SimplePlayerAvalonia.Windows.csproj", "{721F605B-7201-4BCF-8843-C12F45563D34}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimplePlayer", "SimplePlayer", "{959AFAEB-E79D-4EC5-A83A-236EB2744C24}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpleCapture", "SimpleCapture", "{6590245E-FDE1-4459-A7BA-BEE3E68DD478}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA\SimpleVideoCaptureA.csproj", "{9A7D6196-C929-4675-B839-1E2CC95DFC03}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.Linux", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.Linux\SimpleVideoCaptureA.Linux.csproj", "{A255FA2A-2277-401A-884D-0F2CCBD12749}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.MacOS", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.MacOS\SimpleVideoCaptureA.MacOS.csproj", "{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA.Windows", "Avalonia\SimpleVideoCapture\SimpleVideoCaptureA.Windows\SimpleVideoCaptureA.Windows.csproj", "{F318ECFD-4D8A-4977-BB57-3862E6EC12CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureAMB", "Avalonia\Simple Video Capture\SimpleVideoCaptureAMB.csproj", "{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,51 +13,17 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91D066D1-71A2-4E2D-BA95-61DF38E112B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91D066D1-71A2-4E2D-BA95-61DF38E112B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91D066D1-71A2-4E2D-BA95-61DF38E112B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91D066D1-71A2-4E2D-BA95-61DF38E112B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{721F605B-7201-4BCF-8843-C12F45563D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{721F605B-7201-4BCF-8843-C12F45563D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{721F605B-7201-4BCF-8843-C12F45563D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{721F605B-7201-4BCF-8843-C12F45563D34}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A7D6196-C929-4675-B839-1E2CC95DFC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A7D6196-C929-4675-B839-1E2CC95DFC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A7D6196-C929-4675-B839-1E2CC95DFC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A7D6196-C929-4675-B839-1E2CC95DFC03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A255FA2A-2277-401A-884D-0F2CCBD12749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A255FA2A-2277-401A-884D-0F2CCBD12749}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A255FA2A-2277-401A-884D-0F2CCBD12749}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A255FA2A-2277-401A-884D-0F2CCBD12749}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F318ECFD-4D8A-4977-BB57-3862E6EC12CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F318ECFD-4D8A-4977-BB57-3862E6EC12CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F318ECFD-4D8A-4977-BB57-3862E6EC12CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F318ECFD-4D8A-4977-BB57-3862E6EC12CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CDF5691-F641-47D5-B25F-0BA3C7CF9151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CDF5691-F641-47D5-B25F-0BA3C7CF9151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CDF5691-F641-47D5-B25F-0BA3C7CF9151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CDF5691-F641-47D5-B25F-0BA3C7CF9151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EC0AA52D-6B0E-4776-A879-1BFF2F406D8F} = {959AFAEB-E79D-4EC5-A83A-236EB2744C24}
-		{91D066D1-71A2-4E2D-BA95-61DF38E112B1} = {959AFAEB-E79D-4EC5-A83A-236EB2744C24}
-		{7C56DEF3-E89E-431E-AE96-93ADDAE938B0} = {959AFAEB-E79D-4EC5-A83A-236EB2744C24}
-		{721F605B-7201-4BCF-8843-C12F45563D34} = {959AFAEB-E79D-4EC5-A83A-236EB2744C24}
-		{9A7D6196-C929-4675-B839-1E2CC95DFC03} = {6590245E-FDE1-4459-A7BA-BEE3E68DD478}
-		{A255FA2A-2277-401A-884D-0F2CCBD12749} = {6590245E-FDE1-4459-A7BA-BEE3E68DD478}
-		{6A6BA9B0-F2CF-4567-A366-2A4063BBFC41} = {6590245E-FDE1-4459-A7BA-BEE3E68DD478}
-		{F318ECFD-4D8A-4977-BB57-3862E6EC12CA} = {6590245E-FDE1-4459-A7BA-BEE3E68DD478}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

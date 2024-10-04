@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV\VideoJoinDemoAV.csproj", "{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV.Linux", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV.Linux\VideoJoinDemoAV.Linux.csproj", "{6352B4E2-65C9-4611-9A51-DFC3B541397C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV.MacOS", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV.MacOS\VideoJoinDemoAV.MacOS.csproj", "{4AB4D7F8-728B-425A-9F41-BBC29E8C6CD8}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinDemoAV.Windows", "Avalonia\VideoJoinDemoAV\VideoJoinDemoAV.Windows\VideoJoinDemoAV.Windows.csproj", "{F2328C76-D2BA-4B12-9890-C61F1483AE3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoJoinA", "Avalonia\VideoJoin\VideoJoinA.csproj", "{655274D7-8AE0-47BA-9164-3707CDFEC5B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,22 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DBE9CC4-06EB-46B3-B8A5-F8D0DC4DE2BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6352B4E2-65C9-4611-9A51-DFC3B541397C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6352B4E2-65C9-4611-9A51-DFC3B541397C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6352B4E2-65C9-4611-9A51-DFC3B541397C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6352B4E2-65C9-4611-9A51-DFC3B541397C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AB4D7F8-728B-425A-9F41-BBC29E8C6CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AB4D7F8-728B-425A-9F41-BBC29E8C6CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AB4D7F8-728B-425A-9F41-BBC29E8C6CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AB4D7F8-728B-425A-9F41-BBC29E8C6CD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2328C76-D2BA-4B12-9890-C61F1483AE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2328C76-D2BA-4B12-9890-C61F1483AE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2328C76-D2BA-4B12-9890-C61F1483AE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2328C76-D2BA-4B12-9890-C61F1483AE3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655274D7-8AE0-47BA-9164-3707CDFEC5B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655274D7-8AE0-47BA-9164-3707CDFEC5B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655274D7-8AE0-47BA-9164-3707CDFEC5B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655274D7-8AE0-47BA-9164-3707CDFEC5B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

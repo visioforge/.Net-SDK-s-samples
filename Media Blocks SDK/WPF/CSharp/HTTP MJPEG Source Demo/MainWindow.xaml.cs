@@ -10,6 +10,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.MediaBlocks.VideoDecoders;
 
 namespace HTTP_Source_Demo
 {
