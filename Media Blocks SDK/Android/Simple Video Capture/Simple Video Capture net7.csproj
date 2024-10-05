@@ -12,8 +12,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.9.45" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.10.19" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.19" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Android" Version="15.10.20" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.20" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>

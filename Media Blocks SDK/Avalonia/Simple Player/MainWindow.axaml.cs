@@ -43,6 +43,8 @@ namespace SimplePlayerAMB
 
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
+        public ObservableCollection<string> AudioOutputs { get; set; } = new ObservableCollection<string>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -100,15 +102,12 @@ namespace SimplePlayerAMB
 
             InitControls();
 
-            var cbAudioOutputItems = new ObservableCollection<string>();
             foreach (var device in await AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI))
             {
-                cbAudioOutputItems.Add(device.Name);
+                AudioOutputs.Add(device.Name);
             }
 
-            cbAudioOutput.ItemsSource = cbAudioOutputItems;
-
-            if (cbAudioOutputItems.Count > 0)
+            if (AudioOutputs.Count > 0)
             {
                 cbAudioOutput.SelectedIndex = 0;
             }
@@ -170,6 +169,7 @@ namespace SimplePlayerAMB
             _tmPosition.Elapsed += tmPosition_Elapsed;
 
             cbAudioOutput = this.FindControl<ComboBox>("cbAudioOutput");
+            cbAudioOutput.ItemsSource = AudioOutputs;
 
             mmLog = this.FindControl<ListBox>("mmLog");
             mmLog.Items.Clear();

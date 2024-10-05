@@ -7,15 +7,12 @@ using Avalonia.Threading;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.DirectoryServices.ActiveDirectory;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.AudioProcessing;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -31,7 +28,6 @@ using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.Avalonia;
 using VisioForge.Core.VideoCaptureX;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace SimpleVideoCaptureAMB
 {
@@ -130,31 +126,6 @@ namespace SimpleVideoCaptureAMB
             Debug.WriteLine($"Camera access: {granted}");
             // Handle the response here. 'granted' is true if permission is given.
         });
-
-        //var status = AVFoundation.AVCaptureDevice.GetAuthorizationStatus(AVFoundation.AVAuthorizationMediaType.Video);
-
-        //switch (status)
-        //{
-        //    case AVFoundation.AVAuthorizationStatus.NotDetermined:
-        //        {
-        //            var accessTask = await AVFoundation.AVCaptureDevice.RequestAccessForMediaTypeAsync(AVFoundation.AVAuthorizationMediaType.Video);
-        //            //return accessTask;
-        //        }
-
-        //        break;
-
-        //    case AVFoundation.AVAuthorizationStatus.Restricted:
-        //        //_context?.Error(TAG, "AskCameraPermissions",
-        //        //    "Camera access restricted by user or system settings.");
-        //       // return false;
-        //    case AVFoundation.AVAuthorizationStatus.Denied:
-        //       // _context?.Error(TAG, "AskCameraPermissions", "Camera access denied.");
-        //      //  return false;
-        //    case AVFoundation.AVAuthorizationStatus.Authorized:
-        //      //  return true;
-        //    default:
-        //        throw new ArgumentOutOfRangeException();
-        //}
 #endif
 
             Closing += Window_Closing;
@@ -190,7 +161,7 @@ namespace SimpleVideoCaptureAMB
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTimeAsync(); };
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void InitControls()
@@ -271,7 +242,7 @@ namespace SimpleVideoCaptureAMB
 
         private async Task<string> SaveVideoFileDialogAsync()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
+            var sfd = new SaveFileDialog();
             sfd.InitialFileName = "video.mp4";
             sfd.DefaultExtension = ".mp4";
 

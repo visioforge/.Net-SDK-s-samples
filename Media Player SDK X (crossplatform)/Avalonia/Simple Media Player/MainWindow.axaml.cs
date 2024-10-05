@@ -36,9 +36,9 @@ namespace Simple_Media_Player
         private MediaPlayerCoreX _player;
 
 #if WINDOWS
-        private AudioOutputDeviceAPI _audioOutputDeviceAPI = AudioOutputDeviceAPI.DirectSound;
+        private AudioOutputDeviceAPI? _audioOutputDeviceAPI = AudioOutputDeviceAPI.DirectSound;
 #else
-    private AudioOutputDeviceAPI _audioOutputDeviceAPI;
+        private AudioOutputDeviceAPI? _audioOutputDeviceAPI = null;
 #endif
 
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
@@ -117,7 +117,6 @@ namespace Simple_Media_Player
             _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             AudioOutputDeviceInfo[] audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-
             foreach (var item in audioOutputs)
             {
                 AudioOutputDevices.Add(item.DisplayName);

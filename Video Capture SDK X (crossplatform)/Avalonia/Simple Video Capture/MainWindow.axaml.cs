@@ -203,7 +203,7 @@ namespace SimpleVideoCaptureA
                 cbAudioOutputDevice.SelectedIndex = 0;
             }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void InitControls()
@@ -297,7 +297,7 @@ namespace SimpleVideoCaptureA
 
         private async Task<string> SaveVideoFileDialogAsync()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
+            var sfd = new SaveFileDialog();
             sfd.InitialFileName = "video.mp4";
             sfd.DefaultExtension = ".mp4";
 

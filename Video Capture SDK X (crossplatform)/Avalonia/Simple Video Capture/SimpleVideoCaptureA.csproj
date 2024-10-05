@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -11,6 +10,7 @@
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.9.46" />
@@ -18,6 +18,7 @@
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <TargetFramework>net8.0-macos14.0</TargetFramework>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
@@ -37,8 +38,8 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.10.19" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="15.10.20" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.0" />
