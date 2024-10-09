@@ -24,6 +24,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
 
+using System.Reactive.Linq;
 
 namespace Simple_Media_Player
 {

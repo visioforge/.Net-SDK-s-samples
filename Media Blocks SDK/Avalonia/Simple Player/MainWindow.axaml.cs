@@ -19,6 +19,8 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 
+using System.Reactive.Linq;
+
 namespace SimplePlayerAMB
 {
     public partial class MainWindow : Window

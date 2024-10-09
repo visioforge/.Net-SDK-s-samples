@@ -22,8 +22,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.9.46" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.20" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.20" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.22" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.22" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
