@@ -103,6 +103,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-player-mb net7", "_C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info-mb net7", "_CodeSnippets\read-file-info\read-file-info-mb net7.csproj", "{CDF0E7B8-39CF-452F-A7FF-609354980DBF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo MB net7", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo MB net7.csproj", "{33D3FAC0-623C-4E92-983E-52E29BEDEF38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -297,6 +299,10 @@ Global
 		{CDF0E7B8-39CF-452F-A7FF-609354980DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF0E7B8-39CF-452F-A7FF-609354980DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF0E7B8-39CF-452F-A7FF-609354980DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33D3FAC0-623C-4E92-983E-52E29BEDEF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D3FAC0-623C-4E92-983E-52E29BEDEF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D3FAC0-623C-4E92-983E-52E29BEDEF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D3FAC0-623C-4E92-983E-52E29BEDEF38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,6 +355,7 @@ Global
 		{C50409C9-B247-459D-BDA8-72B6FE89748A} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{370AB0D5-068F-4049-B0B2-4580173DCE10} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{CDF0E7B8-39CF-452F-A7FF-609354980DBF} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
+		{33D3FAC0-623C-4E92-983E-52E29BEDEF38} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
