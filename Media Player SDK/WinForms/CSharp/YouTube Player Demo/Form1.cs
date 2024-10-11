@@ -75,6 +75,11 @@
                 MediaPlayer1.Audio_AdditionalStreams_Add(_audioInfoList[cbAudioStream.SelectedIndex].Url);
             }
 
+            if (MediaPlayer1.Audio_PlayAudio)
+            {
+                MediaPlayer1.Audio_OutputDevice = cbAudioOutput.Text;
+            }
+
             await MediaPlayer1.PlayAsync();
 
             timer1.Start();
@@ -120,7 +125,7 @@
             var audios = streamManifest.GetAudioOnlyStreams();
             foreach (var stream in audios)
             {
-                cbAudioStream.Items.Add(stream.ToString());
+                cbAudioStream.Items.Add($"{stream.ToString()} [{stream.Bitrate.ToString()}]");
                 _audioInfoList.Add(stream);
             }
 
@@ -139,6 +144,18 @@
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
 
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+            // fill audio output devices
+            var audioOutputs = MediaPlayer1.Audio_OutputDevices();
+            foreach (var audioOutput in audioOutputs)
+            {
+                cbAudioOutput.Items.Add(audioOutput);
+            }
+
+            if (cbAudioOutput.Items.Count > 0)
+            {
+                cbAudioOutput.SelectedIndex = 0;
+            }
         }
 
         private async void timer1_Tick(object sender, EventArgs e)

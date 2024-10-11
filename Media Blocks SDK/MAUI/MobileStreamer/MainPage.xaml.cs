@@ -67,13 +67,14 @@ namespace MobileStreamer
         {
             _pipeline = new MediaBlocksPipeline();
 
-#if __IOS__ && !__MACCATALYST__ || __ANDROID__
-            var vv = videoView.Handler.PlatformView;
-            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv) { IsSync = false };
+            IVideoView vv;
+#if __MACCATALYST__
+            vv = videoView;
 #else
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
+            vv = videoView.GetVideoView();
 #endif
 
+            _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = false };
             _videoRenderer.IsSync = false;
 
             _pipeline.OnError += Core_OnError;

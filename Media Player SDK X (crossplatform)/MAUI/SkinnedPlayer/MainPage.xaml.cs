@@ -91,10 +91,10 @@ namespace SkinnedPlayer_MAUI
         private void MainPage_Loaded(object sender, EventArgs e)
         {
             IVideoView vv;
-#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
-            vv = (IVideoView)videoView.Handler.PlatformView;
-#else
+#if __MACCATALYST__
             vv = videoView;
+#else
+            vv = videoView.GetVideoView();
 #endif
 
             _player = new MediaPlayerCoreX(vv);

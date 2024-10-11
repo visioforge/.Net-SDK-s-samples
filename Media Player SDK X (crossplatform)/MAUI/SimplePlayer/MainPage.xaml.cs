@@ -54,10 +54,10 @@ namespace Simple_Player_MAUI
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
             IVideoView vv;
-#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
-            vv = videoView.GetVideoView();
-#else
+#if __MACCATALYST__
             vv = videoView;
+#else
+            vv = videoView.GetVideoView();
 #endif
 
             _player = new MediaPlayerCoreX(vv);

@@ -80,12 +80,12 @@ namespace SimpleCapture
 #endif
 
             IVideoView vv;
-#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
-            vv = (IVideoView)videoView.Handler.PlatformView;
-#else
+#if __MACCATALYST__
             vv = videoView;
+#else
+            vv = videoView.GetVideoView();
 #endif
-            
+
             _core = new VideoCaptureCoreX(vv);
             _core.OnError += Core_OnError;       
 

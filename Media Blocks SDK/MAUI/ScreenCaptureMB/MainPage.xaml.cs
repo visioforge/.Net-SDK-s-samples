@@ -79,12 +79,14 @@ namespace ScreenCaptureMB
             _mp4Sink = new MP4SinkBlock(new MP4SinkSettings(filename));
             _h264Encoder = new H264EncoderBlock();
 
-#if __IOS__ && !__MACCATALYST__ || __ANDROID__
-            var vv = videoView.Handler.PlatformView;
-            _videoRenderer = new VideoRendererBlock(_pipeline, (IVideoView)vv) { IsSync = false };
+            IVideoView vv;
+#if __MACCATALYST__
+            vv = videoView;
 #else
-            _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
+            vv = videoView.GetVideoView();
 #endif
+
+            _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = false };
 
             _pipeline.Connect(_source.Output, _videoTee.Input);
 

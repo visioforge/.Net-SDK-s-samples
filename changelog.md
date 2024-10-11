@@ -31,7 +31,10 @@ Changes and updates for all .Net SDKs
 * [X-engines] Updated Linux support for `ALSA`, `PulseAudio` and `PipeWire` audio devices
 * [X-engines] Updated Linux support for `V4L2` devices
 * [X-engines] Avalonia samples has be changed to a modern 1-project structure
-
+* [X-engines] Resolved issue with `MAUI` crashes on Windows after `SkiaSharp` update
+* [X-engines] Resolved issue with `TextureView` crashes on Android in `MAUI` applications
+* [X-engines] Resolved playback issue for http sources using the `UniversalSourceBlock`
+  
 ## 15.9.x
 
 ### 15.9.89

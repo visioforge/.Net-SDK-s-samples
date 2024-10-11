@@ -38,11 +38,11 @@ namespace QRReader
             await RequestCameraPermissionAsync();
 #endif
 
-            IVideoView vv = null;
-#if __IOS__ && !__MACCATALYST__ || __ANDROID__
-            vv = (IVideoView)videoView.Handler.PlatformView;
-#else
+            IVideoView vv;
+#if __MACCATALYST__
             vv = videoView;
+#else
+            vv = videoView.GetVideoView();
 #endif
 
             _core = new VideoCaptureCoreX(vv);     
