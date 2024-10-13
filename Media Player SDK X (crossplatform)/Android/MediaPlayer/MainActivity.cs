@@ -12,7 +12,7 @@ namespace MediaPlayer
     {
         private MediaPlayerCoreX _player;
 
-        private VisioForge.Core.UI.Android.VideoView videoView;
+        private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
         private Button btOpenFile;
 
@@ -27,8 +27,6 @@ namespace MediaPlayer
         private SeekBar sbTimeline;
 
         private TextView lbPosition;
-
-        private GridLayout pnScreen;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -45,7 +43,7 @@ namespace MediaPlayer
 
             tmPosition.Elapsed += tmPosition_Elapsed;
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(Resource.Id.videoView);
 
             _player = new MediaPlayerCoreX(videoView);
             _player.OnStart += _player_OnStart;
@@ -76,8 +74,6 @@ namespace MediaPlayer
             };
 
             lbPosition = FindViewById<TextView>(Resource.Id.lbPosition);
-
-            pnScreen = FindViewById<GridLayout>(Resource.Id.pnScreen);
 
             edURL = FindViewById<EditText>(Resource.Id.edURL);
         }
@@ -128,10 +124,6 @@ namespace MediaPlayer
             tmPosition.Stop();
 
             await _player.StopAsync();
-
-            // clear screen workaround
-            pnScreen.RemoveView(videoView);
-            pnScreen.AddView(videoView);
         }
 
         private async void btPause_Click(object sender, EventArgs e)

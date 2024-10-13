@@ -4,22 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/relativeLayout1">
-    <GridLayout
+
+    <VisioForge.Core.UI.Android.VideoViewTX
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:id="@+id/pnScreen"
-        android:layout_above="@id/layoutURL">
-
-        <VisioForge.Core.UI.Android.VideoView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:id="@+id/videoView" 
-  />
-    </GridLayout>
+        android:id="@+id/videoView"
+        android:layout_above="@id/layoutURL" />
 
     <RelativeLayout
         android:layout_width="match_parent"

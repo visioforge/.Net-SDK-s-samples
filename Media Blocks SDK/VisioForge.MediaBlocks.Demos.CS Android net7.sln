@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer net7", "Android
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP Client net7", "Android\RTSP Client\RTSP Client net7.csproj", "{E98FED37-746A-45D6-B76A-68A0C2408C0D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X", "..\AndroidDependency\VisioForge.Core.Android.X.csproj", "{C05F34D1-46DF-4372-B002-3E08E3C925B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X7", "..\AndroidDependency\VisioForge.Core.Android.X7.csproj", "{C05F34D1-46DF-4372-B002-3E08E3C925B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture net7", "Android\Simple Video Capture\Simple Video Capture net7.csproj", "{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobile Streamer net7", "Android\Mobile Streamer\Mobile Streamer net7.csproj", "{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{519A2C54-23B7-4BF9-8726-EAA3ACBF1CB5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2BF9D4-23FB-49E0-A9F2-0FB86BA6E048}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

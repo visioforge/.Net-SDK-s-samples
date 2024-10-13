@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<GridLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:id="@+id/pnScreen"
-        android:layout_above="@id/layoutControls">
 
-        <VisioForge.Core.UI.Android.VideoView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:minWidth="25px"
-            android:minHeight="25px"            
-            android:id="@+id/videoView" 
-  />
-    </GridLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
+    <!-- TextView at the top -->
+    <TextView
+        android:id="@+id/topTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Please set the YouTube or Facebook key in the app code"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <VisioForge.Core.UI.Android.VideoViewTX
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topTextView"
+        android:layout_above="@id/layoutControls"
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:id="@+id/videoView"   />
+
+    <!-- Buttons at the bottom -->
+    <LinearLayout
         android:id="@+id/layoutControls"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="5px">
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:minWidth="25dp"
+        android:minHeight="25dp">
+
         <Button
+            android:id="@+id/btStart"
             android:text="Start stream"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btStart" />
-       
-          <Button
+            android:layout_marginHorizontal="5dp"/>
+
+        <Button
+            android:id="@+id/btSwitchCam"
             android:text="SWITCH cam"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btSwitchCam" />
+            android:layout_marginHorizontal="5dp"/>
     </LinearLayout>
-</RelativeLayout >
+
+</RelativeLayout>

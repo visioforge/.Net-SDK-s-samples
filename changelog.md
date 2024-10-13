@@ -34,6 +34,7 @@ Changes and updates for all .Net SDKs
 * [X-engines] Resolved issue with `MAUI` crashes on Windows after `SkiaSharp` update
 * [X-engines] Resolved issue with `TextureView` crashes on Android in `MAUI` applications
 * [X-engines] Resolved playback issue for http sources using the `UniversalSourceBlock`
+* [X-engines] Added Mobile Streamer sample for Android
   
 ## 15.9.x
 

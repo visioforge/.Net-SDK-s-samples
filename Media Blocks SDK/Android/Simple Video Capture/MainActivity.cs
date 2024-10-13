@@ -1,5 +1,8 @@
 using Android;
+using Android.Content;
 using Android.Content.Res;
+using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Util;
 using VisioForge.Core;
@@ -30,15 +33,13 @@ namespace Simple_Video_Capture
     [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
-        private VisioForge.Core.UI.Android.VideoView videoView;
+        private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
         private Button btStartRecord;
 
         private Button btStopRecord;
 
         private Button btSwitchCam;
-
-        private GridLayout pnScreen;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -56,7 +57,7 @@ namespace Simple_Video_Capture
 
         private MediaBlock _audioEncoder;
 
-        private MediaBlock _sink;
+        private MP4SinkBlock _sink;
 
         private TeeBlock _videoTee;
 
@@ -72,8 +73,6 @@ namespace Simple_Video_Capture
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
-            _pipeline.OnStop += _pipeline_OnStop;
-            _pipeline.OnStart += _pipeline_OnStart;
 
             // video source
             if (_cameras == null)
@@ -147,31 +146,15 @@ namespace Simple_Video_Capture
             if (_pipeline != null)
             {
                 _pipeline.OnError -= _pipeline_OnError;
-                _pipeline.OnStop -= _pipeline_OnStop;
-                _pipeline.OnStart -= _pipeline_OnStart;
 
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
 
-        private async void _pipeline_OnStart(object sender, EventArgs e)
-        {
-            // var duration = await _pipeline.DurationAsync();
-            // sbTimeline.Max = (int)duration.TotalMilliseconds;
-        }
-
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
-        }
-
-        private void _pipeline_OnStop(object sender, StopEventArgs e)
-        {
-            RunOnUiThread(() =>
-            {
-                // sbTimeline.Progress = 0;
-            });
         }
 
         protected override void OnCreate(Bundle? savedInstanceState)
@@ -191,7 +174,7 @@ namespace Simple_Video_Capture
                         Manifest.Permission.WriteExternalStorage
                }, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(Resource.Id.videoView);
 
             btStartRecord = FindViewById<Button>(Resource.Id.btStartRecord);
             btStartRecord.Click += btStartRecord_Click;
@@ -201,8 +184,6 @@ namespace Simple_Video_Capture
 
             btSwitchCam = FindViewById<Button>(Resource.Id.btSwitchCam);
             btSwitchCam.Click += btSwitchCam_Click;
-
-            pnScreen = FindViewById<GridLayout>(Resource.Id.pnScreen);
 
             CheckPermissionsAndStartPreview();
         }
@@ -280,15 +261,13 @@ namespace Simple_Video_Capture
             await DestroyEngineAsync();
 
             videoView.Invalidate();
-
-            // clear screen workaround
-            pnScreen.RemoveView(videoView);
-            pnScreen.AddView(videoView);
         }
 
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
             await StopAsync();
+
+            await PhotoGalleryHelper.AddVideoToGalleryAsync(_sink.GetFilenameOrURL());
 
             await StartPreviewAsync();
         }
@@ -313,12 +292,12 @@ namespace Simple_Video_Capture
             await CreateEngineAsync();
 
             // video encoder
-             _videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
+             _videoEncoder = new H264EncoderBlock();
 
             // create MP4 muxer
             var now = DateTime.Now;
             var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-             _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
+            _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
           
             // connect video pads
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);

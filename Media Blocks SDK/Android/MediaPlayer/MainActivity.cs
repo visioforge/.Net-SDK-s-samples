@@ -21,9 +21,7 @@ namespace MediaPlayer
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        private string TEST_URL = "http://test.visioforge.com/video.avi";
-
-        private VisioForge.Core.UI.Android.VideoView videoView;
+        private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
         private Button btOpenFile;
 
@@ -38,8 +36,6 @@ namespace MediaPlayer
         private SeekBar sbTimeline;
 
         private TextView lbPosition;
-
-        private GridLayout pnScreen;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -56,7 +52,6 @@ namespace MediaPlayer
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
-            //_pipeline.Debug_Dir = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.OnError += _pipeline_OnError;
             _pipeline.OnStop += _pipeline_OnStop;
             _pipeline.OnStart += _pipeline_OnStart;
@@ -121,7 +116,7 @@ namespace MediaPlayer
                         Manifest.Permission.AccessWifiState,
                         Manifest.Permission.ModifyAudioSettings}, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(MediaPlayer.Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(MediaPlayer.Resource.Id.videoView);
 
             tmPosition.Elapsed += tmPosition_Elapsed;
 
@@ -151,7 +146,6 @@ namespace MediaPlayer
             };
 
             lbPosition = FindViewById<TextView>(MediaPlayer.Resource.Id.lbPosition);
-            pnScreen = FindViewById<GridLayout>(MediaPlayer.Resource.Id.pnScreen);
             edURL = FindViewById<EditText>(MediaPlayer.Resource.Id.edURL);
         }
 
@@ -201,10 +195,6 @@ namespace MediaPlayer
             });
 
             videoView.Invalidate();
-
-            // clear screen workaround
-            pnScreen.RemoveView(videoView);
-            pnScreen.AddView(videoView);
         }
 
         private async void btPause_Click(object sender, EventArgs e)

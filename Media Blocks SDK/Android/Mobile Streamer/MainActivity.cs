@@ -12,17 +12,19 @@ using Android.Runtime;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.Types.X.Sinks;
+using VisioForge.Core.MediaBlocks.AudioEncoders;
+using VisioForge.Core.Types;
 
 namespace Mobile_Streamer
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
-        private VisioForge.Core.UI.Android.VideoView videoView;
+        private string STREAMING_KEY = "";
+
+        private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
         private Button btStartStreaming;
-
-        private GridLayout pnScreen;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -32,15 +34,15 @@ namespace Mobile_Streamer
 
         private AudioRendererBlock _audioRenderer;
 
-        private SystemVideoSourceBlock _videoSource;
+        private MediaBlock _videoSource;
 
-        private SystemAudioSourceBlock _audioSource;
+        private MediaBlock _audioSource;
 
         private H264EncoderBlock _videoEncoder;
 
         private MediaBlock _audioEncoder;
 
-        private SRTMPEGTSSinkBlock _sink;
+        private MediaBlock _sink;
 
         private TeeBlock _videoTee;
 
@@ -73,15 +75,13 @@ namespace Mobile_Streamer
                         Manifest.Permission.WriteExternalStorage
                }, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoView>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(Resource.Id.videoView);
 
             btStart = FindViewById<Button>(Resource.Id.btStart);
             btStart.Click += btStartRecord_Click;
 
             btSwitchCam = FindViewById<Button>(Resource.Id.btSwitchCam);
             btSwitchCam.Click += btSwitchCam_Click;
-
-            pnScreen = FindViewById<GridLayout>(Resource.Id.pnScreen);
 
             CheckPermissionsAndStartPreview();
         }
@@ -114,7 +114,6 @@ namespace Mobile_Streamer
             {
                 return;
             }
-
 
             Task.Run(async () =>
             {
@@ -247,10 +246,6 @@ namespace Mobile_Streamer
             await DestroyEngineAsync();
 
             videoView.Invalidate();
-
-            // clear screen workaround
-            pnScreen.RemoveView(videoView);
-            pnScreen.AddView(videoView);
         }
 
         private async void btStopRecord_Click(object sender, EventArgs e)
@@ -271,8 +266,14 @@ namespace Mobile_Streamer
             tmPosition.Start();
         }
 
-        private async void btStartRecord_Click(object sender, EventArgs e)
+        private async Task StartRecordAsync()
         {
+            if (string.IsNullOrEmpty(STREAMING_KEY))
+            {
+                Toast.MakeText(this, "Please set the streaming key", ToastLength.Long).Show();
+                return;
+            }
+
             // stop preview
             await StopAsync();
 
@@ -280,26 +281,41 @@ namespace Mobile_Streamer
             await CreateEngineAsync();
 
             // video encoder
-            _videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
+            _videoEncoder = new H264EncoderBlock();
             _videoEncoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
 
-            // create MP4 muxer
-            var sinkSettings = new SRTSinkSettings() { Uri = "srt://178.128.240.203:5005?mode=caller" };
-            _sink = new SRTMPEGTSSinkBlock(sinkSettings);
+            // create sink
+            if (STREAMING_KEY.StartsWith("FB-"))
+            {
+                // Facebook Live
+                var sinkSettings = new FacebookLiveSinkSettings(STREAMING_KEY);
+                _sink = new FacebookLiveSinkBlock(sinkSettings);
+            } 
+            else
+            {
+                // YouTube
+                var sinkSettings = new YouTubeSinkSettings(STREAMING_KEY);
+                _sink = new YouTubeSinkBlock(sinkSettings);
+            }
 
             // connect video pads
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
             _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
 
             // create audio encoder
-            //_audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings());
+            _audioEncoder = new AACEncoderBlock();
 
             // connect audio pads
-            //_pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
-            //_pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
+            _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+            _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
 
             // start pipeline
             await _pipeline.StartAsync();
+        }
+
+        private async void btStartRecord_Click(object sender, EventArgs e)
+        {
+            await StartRecordAsync();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
