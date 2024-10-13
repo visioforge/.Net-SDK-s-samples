@@ -317,15 +317,11 @@ namespace MobileStreamer
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
             // add video encoder
-            var h264Settings = new OpenH264EncoderSettings();
-            _videoEncoder = new H264EncoderBlock(h264Settings);
-            //_videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
+            _videoEncoder = new H264EncoderBlock();
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
             // add audio encoder
             _audioEncoder = new AACEncoderBlock();
-
-            //_audioEncoder = new MP3EncoderBlock(new MP3EncoderSettings(), addParser: true);
             _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
 
             // connect sink
