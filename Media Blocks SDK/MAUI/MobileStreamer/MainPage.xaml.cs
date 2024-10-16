@@ -310,7 +310,6 @@ namespace MobileStreamer
         {
             // add tee and connect
             _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
 
             // add preview
@@ -353,6 +352,22 @@ namespace MobileStreamer
             await ConfigurePreviewAsync();
 
             _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edKey.Text));
+
+            ConfigureCapture();
+
+            await _pipeline.StartAsync();
+        }
+
+        private async void btStartRTMP_Clicked(object sender, EventArgs e)
+        {
+            await StopAllAsync();
+
+            CreateEngine();
+
+            await ConfigurePreviewAsync();
+
+            // streaming to RTMP server
+            _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = edKey.Text });
 
             ConfigureCapture();
 

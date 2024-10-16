@@ -62,6 +62,13 @@
                         MinimumWidthRequest="100" />
 
                     <Button  
+                        x:Name="btStartRTMP"   
+                        Text="START RTMP" 
+                        Margin="5" 
+                        Clicked="btStartRTMP_Clicked"
+                        MinimumWidthRequest="100" />
+
+                    <Button  
                         x:Name="btStop"   
                         Text="STOP" 
                         Margin="5" 
