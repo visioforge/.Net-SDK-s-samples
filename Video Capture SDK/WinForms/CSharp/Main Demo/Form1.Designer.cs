@@ -859,6 +859,7 @@ namespace VideoCapture_CSharp_Demo
             cbAdditionalAudioSource = new System.Windows.Forms.ComboBox();
             label180 = new System.Windows.Forms.Label();
             tabPage47 = new System.Windows.Forms.TabPage();
+            cbScreenCapture_HighlightMouseCursor = new System.Windows.Forms.CheckBox();
             label3 = new System.Windows.Forms.Label();
             textBox1 = new System.Windows.Forms.TextBox();
             lbScreenSourceWindowText = new System.Windows.Forms.Label();
@@ -1220,7 +1221,6 @@ namespace VideoCapture_CSharp_Demo
             cbTelemetry = new System.Windows.Forms.CheckBox();
             cbDebugMode = new System.Windows.Forms.CheckBox();
             mmLog = new System.Windows.Forms.TextBox();
-            cbScreenCapture_HighlightMouseCursor = new System.Windows.Forms.CheckBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -7368,6 +7368,7 @@ namespace VideoCapture_CSharp_Demo
             cbVirtualCamera.TabIndex = 0;
             cbVirtualCamera.Text = "Enable streaming";
             cbVirtualCamera.UseVisualStyleBackColor = true;
+            cbVirtualCamera.CheckedChanged += (this.cbVirtualCamera_CheckedChanged);
             // 
             // tabPage103
             // 
@@ -10113,6 +10114,17 @@ namespace VideoCapture_CSharp_Demo
             tabPage47.TabIndex = 1;
             tabPage47.Text = "Screen source";
             tabPage47.UseVisualStyleBackColor = true;
+            // 
+            // cbScreenCapture_HighlightMouseCursor
+            // 
+            cbScreenCapture_HighlightMouseCursor.AutoSize = true;
+            cbScreenCapture_HighlightMouseCursor.Location = new System.Drawing.Point(31, 460);
+            cbScreenCapture_HighlightMouseCursor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbScreenCapture_HighlightMouseCursor.Name = "cbScreenCapture_HighlightMouseCursor";
+            cbScreenCapture_HighlightMouseCursor.Size = new System.Drawing.Size(224, 29);
+            cbScreenCapture_HighlightMouseCursor.TabIndex = 96;
+            cbScreenCapture_HighlightMouseCursor.Text = "Highlight mouse cursor";
+            cbScreenCapture_HighlightMouseCursor.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -14105,17 +14117,6 @@ namespace VideoCapture_CSharp_Demo
             mmLog.Size = new System.Drawing.Size(513, 191);
             mmLog.TabIndex = 97;
             // 
-            // cbScreenCapture_HighlightMouseCursor
-            // 
-            cbScreenCapture_HighlightMouseCursor.AutoSize = true;
-            cbScreenCapture_HighlightMouseCursor.Location = new System.Drawing.Point(31, 460);
-            cbScreenCapture_HighlightMouseCursor.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            cbScreenCapture_HighlightMouseCursor.Name = "cbScreenCapture_HighlightMouseCursor";
-            cbScreenCapture_HighlightMouseCursor.Size = new System.Drawing.Size(224, 29);
-            cbScreenCapture_HighlightMouseCursor.TabIndex = 96;
-            cbScreenCapture_HighlightMouseCursor.Text = "Highlight mouse cursor";
-            cbScreenCapture_HighlightMouseCursor.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -14141,7 +14142,6 @@ namespace VideoCapture_CSharp_Demo
             this.Name = "Form1";
             this.Text = "Video Capture SDK .Net - Main Demo";
             this.Load += (this.Form1_Load);
-            this.SizeChanged += (this.Form1_SizeChanged);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

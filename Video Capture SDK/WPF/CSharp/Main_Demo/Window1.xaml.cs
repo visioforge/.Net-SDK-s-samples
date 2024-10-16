@@ -14,6 +14,7 @@ namespace Main_Demo
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Security.Principal;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
@@ -5785,9 +5786,27 @@ namespace Main_Demo
             }));
         }
 
+        private static bool IsAdministrator()
+        {
+            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+            {
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+        }
+
         private void btVirtualCameraRegister_Click(object sender, RoutedEventArgs e)
         {
-            btVirtualCameraRegister.IsEnabled = !VideoCapture1.CustomRedist_VirtualCameraRegister();
+            var virtualCameraAvailable = VideoCapture1.Virtual_Camera_Output_IsAvailable();
+            if (!virtualCameraAvailable)
+            {
+                if (!IsAdministrator())
+                {
+                    MessageBox.Show("Admin rights are required to register the camera. App will restart.");
+                }
+
+                VideoCapture1.Virtual_Camera_Output_RegisterAsAdmin(allowAppRestart: true);
+            }
         }
 
         private void llXiphX86_MouseDown(object sender, MouseButtonEventArgs e)
@@ -5892,6 +5911,15 @@ namespace Main_Demo
             {
                 MessageBox.Show(this, "Select PIP device!");
             }            
+        }
+
+        private void cbVirtualCamera_Click(object sender, RoutedEventArgs e)
+        {
+            var virtualCameraAvailable = VideoCapture1.Virtual_Camera_Output_IsAvailable();
+            if (!virtualCameraAvailable)
+            {
+                MessageBox.Show(this, "The virtual camera is not yet registered. Admin rights are required to register the camera to be visible in external applications. Please click the Register Camera button.");
+            }
         }
     }
 }
