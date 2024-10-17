@@ -18,8 +18,8 @@
     <LinkMode>None</LinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.32" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.32" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
