@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-webm-x netco
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-image-overlay-x netcore31", "_CodeSnippets\video-capture-image-overlay\video-capture-image-overlay-x netcore31.csproj", "{16DE3ECD-ACE9-48F7-9B91-D6C31C0581F9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Encoders netcore31", "WPF\CSharp\Multiple Encoders\Multiple Encoders netcore31.csproj", "{E397B81F-E880-4CC7-B398-16AE1446DD9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{16DE3ECD-ACE9-48F7-9B91-D6C31C0581F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DE3ECD-ACE9-48F7-9B91-D6C31C0581F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DE3ECD-ACE9-48F7-9B91-D6C31C0581F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E397B81F-E880-4CC7-B398-16AE1446DD9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E397B81F-E880-4CC7-B398-16AE1446DD9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E397B81F-E880-4CC7-B398-16AE1446DD9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E397B81F-E880-4CC7-B398-16AE1446DD9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -221,6 +227,7 @@ Global
 		{612B57A0-6FE8-40B2-836D-131CB943CA1A} = {FA966037-C2C6-43F9-B094-5B8B34B05728}
 		{597EAF80-296D-4285-AFC7-CA3A9255F9A3} = {FA966037-C2C6-43F9-B094-5B8B34B05728}
 		{16DE3ECD-ACE9-48F7-9B91-D6C31C0581F9} = {FA966037-C2C6-43F9-B094-5B8B34B05728}
+		{E397B81F-E880-4CC7-B398-16AE1446DD9A} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
