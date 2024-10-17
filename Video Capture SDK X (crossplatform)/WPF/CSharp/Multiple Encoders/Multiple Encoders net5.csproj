@@ -4,7 +4,6 @@
 		<LangVersion>10</LangVersion>
 		<TargetFramework>net5.0-windows</TargetFramework>
 		<RootNamespace>Multiple_Encoders</RootNamespace>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>

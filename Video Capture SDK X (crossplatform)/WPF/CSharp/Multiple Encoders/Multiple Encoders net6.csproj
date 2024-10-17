@@ -3,7 +3,6 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<RootNamespace>Multiple_Encoders</RootNamespace>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
