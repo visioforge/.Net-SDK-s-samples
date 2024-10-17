@@ -10,12 +10,12 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.24" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
     <PackageReference Include="VisioForge.CrossPlatform.AlliedVision.Windows.x64" Version="15.9.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.28" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.28" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

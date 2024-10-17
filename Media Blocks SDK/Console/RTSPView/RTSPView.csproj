@@ -9,11 +9,11 @@
     <ApplicationId>com.visioforge.rtspviewcli</ApplicationId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.28" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.24" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.10.24" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.10.31" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <EnableCodeSigning>false</EnableCodeSigning>
