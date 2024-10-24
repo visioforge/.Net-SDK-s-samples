@@ -34,8 +34,8 @@ jobs:
     #- name: Install workloads
     #  run: dotnet workload install macos android maui-android maui-maccatalyst ios
           
-    #- name: Add msbuild to PATH
-    #  uses: microsoft/setup-msbuild@v1.1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
         
     ## Media Blocks
 
