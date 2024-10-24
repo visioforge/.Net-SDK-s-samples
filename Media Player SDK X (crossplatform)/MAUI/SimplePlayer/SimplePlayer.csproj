@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-android;net7.0-windows10.0.19041.0</TargetFrameworks>
-    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+    <TargetFrameworks>net7.0-maccatalyst;net7.0-ios;net7.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+
     <OutputType>Exe</OutputType>
     <RootNamespace>Simple_Player_MAUI</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -53,32 +52,13 @@
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
-  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240627000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
   </ItemGroup>
-  <!--<ItemGroup>
-	  <None Remove="libc++_shared.so" />
-	  <None Remove="libgstreamer_android.so" />
-	</ItemGroup>
 
-	<ItemGroup>
-	  <AndroidNativeLibrary Include="libc++_shared.so" Abi="arm64-v8a">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </AndroidNativeLibrary>
-	  <AndroidNativeLibrary Include="libgstreamer_android.so" Abi ="arm64-v8a">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </AndroidNativeLibrary>
-	</ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="15.10.32" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.32" />
@@ -88,6 +68,20 @@
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSimplePlayerHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
+
+  <!-- VisioForge SDK Deployment -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
+  </ItemGroup>
+
   <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
   <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="15.10.11" />

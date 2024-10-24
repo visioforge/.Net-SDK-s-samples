@@ -61,11 +61,11 @@ namespace SkinnedPlayer_MAUI
                 }
             }
         }
-        
+
         public MainPage()
         {
             LoadSkin();
-            
+
             InitializeComponent();
 
             Loaded += MainPage_Loaded;
@@ -88,7 +88,7 @@ namespace SkinnedPlayer_MAUI
             VisioForgeX.DestroySDK();
         }
 
-        private void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object sender, EventArgs e)
         {
             IVideoView vv;
 #if __MACCATALYST__
@@ -100,11 +100,14 @@ namespace SkinnedPlayer_MAUI
             _player = new MediaPlayerCoreX(vv);
 
             _player.OnError += _player_OnError;
-            var audioOutputs = _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.Default).Result;
+
+#if !__IOS__ || __MACCATALYST__
+            var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
             {
                 _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputs[0]);
             }
+#endif
 
             pbPanel.Player = _player;
 

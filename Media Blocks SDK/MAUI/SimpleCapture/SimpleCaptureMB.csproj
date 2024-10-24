@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- <TargetFrameworks>$(TargetFrameworks);net7.0-maccatalyst</TargetFrameworks>-->
-    <TargetFrameworks>$(TargetFrameworks);net7.0-ios</TargetFrameworks>
-    <TargetFrameworks>$(TargetFrameworks);net7.0-android</TargetFrameworks>
+    <TargetFrameworks>net7.0-maccatalyst;net7.0-ios;net7.0-android</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+
     <OutputType>Exe</OutputType>
     <RootNamespace>SimpleCapture</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -56,23 +55,18 @@
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
-  </ItemGroup>
+
+
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.32" />
   </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240627000" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
   </ItemGroup>
+
   <ItemGroup>
     <None Remove="Resources\Splash\splash.svg" />
   </ItemGroup>
@@ -91,6 +85,20 @@
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSimpleCaptureHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
+
+  <!-- VisioForge SDK Deployment -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
+  </ItemGroup>
+
   <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
   <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="15.10.11" />

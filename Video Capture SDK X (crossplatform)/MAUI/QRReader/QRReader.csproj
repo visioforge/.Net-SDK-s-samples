@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-android;net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-maccatalyst;net7.0-ios;net7.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>QRReader</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -43,14 +43,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
-  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240627000" />
@@ -86,24 +79,38 @@
       <UserProperties XamarinHotReloadDebuggerTimeoutExceptionQRReaderHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
-  <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
-  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="15.10.11" />
-  </ItemGroup>
-  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
-    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
-    <PropertyGroup>
-      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
-      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
-    </PropertyGroup>
-    <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
-    <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
-    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
-    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
-      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
-    </Copy>
-    <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
-    <Message Text=" - %(CopiedNativeFiles.Identity)" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
-    <Message Text="Finished CopyNativeLibrariesToMonoBundle target." Importance="High" />
-  </Target>
+
+ <!-- VisioForge SDK Deployment -->
+<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+	<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
+	<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
+</ItemGroup>
+<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+	<PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
+	<ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X7.csproj" />
+</ItemGroup>
+<ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+	<PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
+</ItemGroup>
+
+<!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
+<ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+	<PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="15.10.11" />
+</ItemGroup>
+<Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+	<Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+	<PropertyGroup>
+		<AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+		<MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+	</PropertyGroup>
+	<Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
+	<Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
+	<MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+	<Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+		<Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+	</Copy>
+	<Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+	<Message Text=" - %(CopiedNativeFiles.Identity)" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+	<Message Text="Finished CopyNativeLibrariesToMonoBundle target." Importance="High" />
+</Target>
 </Project>
