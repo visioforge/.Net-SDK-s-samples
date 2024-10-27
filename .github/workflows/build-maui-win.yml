@@ -31,23 +31,23 @@ jobs:
    ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB1
-      run: 'dotnet restore "$env:Solution_Name_MB1" --runtime win-x64'
+      run: 'dotnet restore "$env:Solution_Name_MB1"
 
     - name: Build app for release $env:Solution_Name_MB1
-      run: 'dotnet build "$env:Solution_Name_MB1" --configuration Release --no-restore --verbosity diag --runtime win-x64'
+      run: 'dotnet build "$env:Solution_Name_MB1" --configuration Release --no-restore --verbosity diag
       
     ## Media Player
 
     - name: Restore dependencies $env:Solution_Name_MP1
-      run: 'dotnet restore "$env:Solution_Name_MP1" --runtime win-x64'
+      run: 'dotnet restore "$env:Solution_Name_MP1"
 
     - name: Build app for release $env:Solution_Name_MP1
-      run: 'dotnet build "$env:Solution_Name_MP1" --configuration Release --no-restore --verbosity diag --runtime win-x64'
+      run: 'dotnet build "$env:Solution_Name_MP1" --configuration Release --no-restore --verbosity diag
 
     ## Video Capture
 
     - name: Restore dependencies $env:Solution_Name_VC1
-      run: 'dotnet restore "$env:Solution_Name_VC1" --runtime win-x64'
+      run: 'dotnet restore "$env:Solution_Name_VC1"
 
     - name: Build app for release $env:Solution_Name_VC1
-      run: 'dotnet build "$env:Solution_Name_VC1" --configuration Release --no-restore --verbosity diag --runtime win-x64'
+      run: 'dotnet build "$env:Solution_Name_VC1" --configuration Release --no-restore --verbosity diag
