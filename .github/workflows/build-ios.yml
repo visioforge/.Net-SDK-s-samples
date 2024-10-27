@@ -29,23 +29,20 @@ jobs:
 
     - name: Install workload
       run: dotnet workload install ios macos maccatalyst
-          
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
-        
+      
     ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB
       run: dotnet restore $env:Solution_Name_MB
 
     - name: Build app for release $env:Solution_Name_MB
-      run: msbuild $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build --no-restore $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release     
 
     - name: Restore dependencies $env:Solution_Name_MB2
       run: dotnet restore $env:Solution_Name_MB2
 
     - name: Build app for release $env:Solution_Name_MB2
-      run: msbuild $env:Solution_Name_MB2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build --no-restore $env:Solution_Name_MB2 -t:rebuild -verbosity:diag -property:Configuration=Release 
 
     ## Media Player
 
@@ -53,7 +50,7 @@ jobs:
       run: dotnet restore $env:Solution_Name_MP
 
     - name: Build app for release $env:Solution_Name_MP
-      run: msbuild $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build --no-restore $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release 
 
     ## Video Capture
 
@@ -61,10 +58,10 @@ jobs:
       run: dotnet restore $env:Solution_Name_VC
 
     - name: Build app for release $env:Solution_Name_VC
-      run: msbuild $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release
-
+      run: dotnet build --no-restore $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release 
+      
     - name: Restore dependencies $env:Solution_Name_VC2
       run: dotnet restore $env:Solution_Name_VC2
 
     - name: Build app for release $env:Solution_Name_VC2
-      run: msbuild $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build --no-restore $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release 
