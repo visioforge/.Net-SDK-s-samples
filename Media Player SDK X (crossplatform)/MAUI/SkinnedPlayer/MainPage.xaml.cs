@@ -61,11 +61,11 @@ namespace SkinnedPlayer_MAUI
                 }
             }
         }
-
+        
         public MainPage()
         {
             LoadSkin();
-
+            
             InitializeComponent();
 
             Loaded += MainPage_Loaded;

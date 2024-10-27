@@ -4,6 +4,7 @@ using Android.Media;
 using Android.Runtime;
 using Android.Util;
 using VisioForge.Core;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;

@@ -9,7 +9,7 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
-## 15.10.0
+## 15.10.+
 
 * [Media Blocks SDK .Net] Added `AVIOutputBlock` to save video and audio streams to the AVI file format
 * [Media Blocks SDK .Net] `TeeBlock` constructor now accepts the media type as a parameter
@@ -36,156 +36,53 @@ Changes and updates for all .Net SDKs
 * [X-engines] Resolved playback issue for http sources using the `UniversalSourceBlock`
 * [X-engines] Added Mobile Streamer sample for Android
 * [X-engines] Added `OverlayManagerBlock` support for Android (now it's available for all platforms)
+* [Video Capture SDK .Net] `VideoCaptureCoreX`: Added `CustomVideoProcessor`/`CustomAudioProcessor` properties for all output formats. You can use these properties to set custom video/audio processing blocks for the output format.
   
-## 15.9.x
-
-### 15.9.89
+## 15.10.0
 
 * [Windows] Updated window capture API to capture only the specified parent window by default. Added the `UpdateHotkey` method to the `WindowCaptureForm` class to update the hotkey for the window capture form.
-
-### 15.9.83
-
 * [X-engines] Better AOT compatibility for default MAUI settings in iOS.
-
-### 15.9.81
-
 * [Media Blocks SDK .Net] Added the `DNNFaceDetectorBlock` to detect faces and blur/pixelate them using OpenCV and DNN models.
-
-### 15.9.73
-
 * [Media Blocks SDK .Net] Added the `MKVOutputBlock` to save video and audio streams to the MKV file format.
-
-### 15.9.72
-
 * [X-engines] Better support for video source size dynamic changing in MAUI applications.
-
-### 15.9.69
-
 * [X-engines] Resolved an issue with two or more VU meters in the same pipeline.
-
-### 15.9.68
-
 * [X-engines] Resolved volume/mute error issue with audio mixer in Live Video Compositor engine.
-
-### 15.9.66
-
 * [X-engines] The `Spinnaker` source for `FLIR`/`Teledyne` cameras is included in the main package and no longer requires an additional plugin.
-
-### 15.9.65
-
 * [Video Capture SDK .Net] Resolved the issue with the `SeparateCapture` API if no `VideoView` was used.
-
-### 15.9.64
-
 * [X-engines] The `MediaBlocksPipeline` constructor no longer has the `live` parameter. For more customizable pipelines, video and audio renderers got the `IsSync` property (`true` by default).
-
-### 15.9.61
-
 * [X-engines] Resolved `VideoViewTX` crash in MAUI Android applications.
-
-### 15.9.59
-
 * [X-engines] `IVideoEncoder` interface added to the `MPEG2VideoEncoder` class. It allows the use of `MPEG2VideoEncoder` with `MPEGTSOutput`, `AVIOutput`, and other output classes.
-
-### 15.9.58
-
 * [X-engines] Resolved the issue with window capture using the `ScreenCaptureD3D11SourceSettings` class. If the rectangle was incorrect or not specified, it caused an error.
-
-### 15.9.57
-
 * [X-engines] `Metal` renderer was added to SDK for Apple devices and used by default for iOS and MAUI.
 * [Media Blocks SDK .Net] Added the MAUI Screen Capture sample.
-
-### 15.9.56
-
 * [Video Capture SDK .Net] VideoCaptureCore: Added the `VLC_CustomDefaultFrameRate` property to `IPCameraSourceSettings` to set a custom frame rate for the VLC IP camera source if the source does not provide the correct frame rate.
-
-### 15.9.52
-
 * [Media Blocks SDK .Net] `RTSPSourceBlock`: If the RTSP source has audio but you've disabled the audio stream in `RTSPSourceSettings`, SDK will add a null renderer automatically to prevent warnings.
-
-### 15.9.51
-
 * [ALL] Resolved issue with `VideoFrameX.ToBitmap()` call (wrong color space)
-
-### 15.9.50
-
 * [Windows] Updated KLV support in MPEG-TS output
 * [Windows] Resolved MediaPlayerCore serialization issue
-
-### 15.9.47
-
 * [ALL] Video renderer settings class no longer contains background color. Use the VideoView background color property instead.
-
-### 15.9.46
-
 * [X-engines] Updated GStreamer libraries
-
-### 15.9.45
-
 * [X-engines] Resolved video rendering issues on Android and iOS
-
-### 15.9.43
-
 * [X-engines] iOS crash fixed during VideoViewGL usage
 * [X-engines] Added default AAC encoder for iOS
-
-### 15.9.40
-
 * [X-engines] iOS camera source update for high frame rate support
-
-### 15.9.35
-
 * [Windows] Updated VLC source - improved file loading speed
 * [Media Blocks SDK .Net]: Added the `UniversalDemuxBlock` allows to demux video and audio streams from a file in MP4, MKV, AVI, MOV, TS, VOB, FLV, OGG, and WebM formats
-
-### 15.9.31
-
 * [Windows] Resolved FFMPEG stability issues
-
-### 15.9.29
-
 * [X-engines] Resolved issue with loopback audio source using VideoCaptureCoreX and audio capture to file
-
-### 15.9.27
-
 * [X-engines] Added SRT source and sink support in Media Blocks SDK .Net and Video Capture SDK .Net
-
-### 15.9.26
-
 * [Video Capture SDK .Net] VideoCaptureCore: The `IP_Camera_ONVIF_ListSourcesAsyncEx` method got an overload version with a callback for a more responsible UI
 * [X-engines] RTSP source compatibility update
-
-### 15.9.25
-
 * [X-engines] `Breaking API change`. Starting with this update, the SDK uses `IAudioRendererSettings` interface implementations for audio output configuration. WASAPI output got the custom configuration classes. Output_AudioDevice properties of `VideoCaptureCoreX`/`MediaPlayerCoreX` type have been changed to `IAudioRendererSettings`. You can create the `AudioRendererSettings` class instance from `AudioOutputDeviceInfo` using the default constructor.
 * [X-engines] Resolved problem with missed Media Foundation sources during device enumeration
-
-### 15.9.22
-
 * [X-engines] Resolved RTSP source problems with audio connection in some situations
 * [X-engines] Added the RTSP Preview Demo to Media Blocks SDK .Net
-
-### 15.9.18
-
 * [Windows] FFMPEG outputs and source updated to FFMPEG v7.0.
-
-### 15.9.17
-
 * [X-engines] Fixed rare crashes in RTSP source when camera information is not available for some reason (network issue)
-
-### 15.9.11
-
 * [X-engines] Resolved an issue with `WASAPI/WASAPI2` audio renderer usage
 * [X-engines] Resolved an issue with the audio loopback audio source on Windows
-
-### 15.9.6
-
 * [X-engines] Improved iOS video rendering performance and stability
 * [X-engines] Added AWS S3 Sink output for Media Blocks SDK .Net
-
-### 15.9.3
-
 * [X-engines] Added Allied Vision USB3/GigE cameras support in Media Blocks SDK .Net and Video Capture SDK .Net
 
 ## 15.9

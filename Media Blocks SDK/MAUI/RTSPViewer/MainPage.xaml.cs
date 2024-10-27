@@ -62,7 +62,6 @@ namespace RTSPViewer
             _rtspSource = new RTSPSourceBlock(rtsp);
 
             IVideoView vv;
-
 #if __MACCATALYST__
             vv = videoView;
 #else

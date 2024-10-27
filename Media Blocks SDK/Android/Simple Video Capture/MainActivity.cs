@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Util;
 using VisioForge.Core;
 using VisioForge.Core.GStreamer.Helpers;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.AudioProcessing;
