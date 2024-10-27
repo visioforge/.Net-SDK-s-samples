@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCapture", "iOS\SimpleVideoCapture\SimpleVideoCapture.csproj", "{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileStreamer", "iOS\MobileStreamer\MobileStreamer.csproj", "{8DE90C11-5AFB-4DFA-BC27-8561C226A5A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCapture", "iOS\ScreenCapture\ScreenCapture.csproj", "{F8F2F3DB-432D-4CC9-85C6-59FBAF43EA9F}"
@@ -15,12 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C5147184-AE0B-43AE-98B0-25AA9BA0FFEC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{8DE90C11-5AFB-4DFA-BC27-8561C226A5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8DE90C11-5AFB-4DFA-BC27-8561C226A5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DE90C11-5AFB-4DFA-BC27-8561C226A5A1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
