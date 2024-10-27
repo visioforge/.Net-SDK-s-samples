@@ -8,3 +8,4 @@ idea
 Media Player SDK X (crossplatform)/MAUI/SimplePlayer/SimplePlayer8.csproj.user
 Media Player SDK X (crossplatform)/MAUI/SimplePlayer/SimplePlayer.csproj.user
 Video Capture SDK X (crossplatform)/MAUI/QRReader/QRReader8.csproj.user
+*.user
