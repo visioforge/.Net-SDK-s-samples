@@ -14,43 +14,40 @@ jobs:
 
       Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
 
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Setup .NET 
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: | 
           8.0.x
 
     - name: Install workloads
-      run: dotnet workload install macos android maui-android maui-maccatalyst ios
-          
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+      run: dotnet workload install macos android maui-android maui-maccatalyst ios          
         
     ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB1
-      run: dotnet restore $env:Solution_Name_MB1
+      run: dotnet restore $env:Solution_Name_MB1 --runtime win-x64
 
     - name: Build app for release $env:Solution_Name_MB1
-      run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build ${{ env.Solution_Name_MB1 }} --configuration Release --no-restore --verbosity diag --runtime win-x64
       
     ## Media Player
 
     - name: Restore dependencies $env:Solution_Name_MP1
-      run: dotnet restore $env:Solution_Name_MP1
+      run: dotnet restore $env:Solution_Name_MP1 --runtime win-x64
 
     - name: Build app for release $env:Solution_Name_MP1
-      run: msbuild $env:Solution_Name_MP1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build ${{ env.Solution_Name_MP1 }} --configuration Release --no-restore --verbosity diag --runtime win-x64
 
     ## Video Capture
 
     - name: Restore dependencies $env:Solution_Name_VC1
-      run: dotnet restore $env:Solution_Name_VC1
+      run: dotnet restore $env:Solution_Name_VC1 --runtime win-x64
 
     - name: Build app for release $env:Solution_Name_VC1
-      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build ${{ env.Solution_Name_VC1 }} --configuration Release --no-restore --verbosity diag --runtime win-x64
