@@ -1,0 +1,56 @@
+name: Build MAUI Windows
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name_MB1: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.sln"
+      
+      Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
+
+      Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: | 
+          8.0.x
+
+    - name: Install workloads
+      run: dotnet workload install macos android maui-android maui-maccatalyst ios
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+        
+    ## Media Blocks
+
+    - name: Restore dependencies $env:Solution_Name_MB1
+      run: dotnet restore $env:Solution_Name_MB1
+
+    - name: Build app for release $env:Solution_Name_MB1
+      run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      
+    ## Media Player
+
+    - name: Restore dependencies $env:Solution_Name_MP1
+      run: dotnet restore $env:Solution_Name_MP1
+
+    - name: Build app for release $env:Solution_Name_MP1
+      run: msbuild $env:Solution_Name_MP1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Video Capture
+
+    - name: Restore dependencies $env:Solution_Name_VC1
+      run: dotnet restore $env:Solution_Name_VC1
+
+    - name: Build app for release $env:Solution_Name_VC1
+      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
