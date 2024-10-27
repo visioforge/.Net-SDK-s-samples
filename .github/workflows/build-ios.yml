@@ -1,0 +1,70 @@
+name: Build iOS/macOS
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"
+      Solution_Name_MB2: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS macOS.sln"
+
+      Solution_Name_MP: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.MacOS.sln"
+
+      Solution_Name_VC: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS iOS.sln"
+      Solution_Name_VC2: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS macOS.sln"
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: | 
+          8.0.x
+
+    - name: Install workload
+      run: dotnet workload install ios macos maccatalyst
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+        
+    ## Media Blocks
+
+    - name: Restore dependencies $env:Solution_Name_MB
+      run: dotnet restore $env:Solution_Name_MB
+
+    - name: Build app for release $env:Solution_Name_MB
+      run: msbuild $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_MB2
+      run: dotnet restore $env:Solution_Name_MB2
+
+    - name: Build app for release $env:Solution_Name_MB2
+      run: msbuild $env:Solution_Name_MB2 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Media Player
+
+    - name: Restore dependencies $env:Solution_Name_MP
+      run: dotnet restore $env:Solution_Name_MP
+
+    - name: Build app for release $env:Solution_Name_MP
+      run: msbuild $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Video Capture
+
+    - name: Restore dependencies $env:Solution_Name_VC
+      run: dotnet restore $env:Solution_Name_VC
+
+    - name: Build app for release $env:Solution_Name_VC
+      run: msbuild $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VC2
+      run: dotnet restore $env:Solution_Name_VC2
+
+    - name: Build app for release $env:Solution_Name_VC2
+      run: msbuild $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release
