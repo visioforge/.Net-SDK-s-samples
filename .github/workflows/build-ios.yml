@@ -8,10 +8,10 @@ on:
 jobs:
   build:
     env:
-      Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"
+      #Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"
       Solution_Name_MB2: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS macOS.sln"
       Solution_Name_MP: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.MacOS.sln"
-      Solution_Name_VC: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS iOS.sln"
+      #Solution_Name_VC: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS iOS.sln"
       Solution_Name_VC2: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS macOS.sln"
 
     runs-on: macos-latest
@@ -29,11 +29,11 @@ jobs:
 
     ## Media Blocks
 
-    - name: Restore dependencies ${{ env.Solution_Name_MB }}
-      run: dotnet restore "${{ env.Solution_Name_MB }}"
+    #- name: Restore dependencies ${{ env.Solution_Name_MB }}
+    #  run: dotnet restore "${{ env.Solution_Name_MB }}"
 
-    - name: Build app for release ${{ env.Solution_Name_MB }}
-      run: dotnet build --no-restore "${{ env.Solution_Name_MB }}" -t:rebuild -verbosity:diag -property:Configuration=Release     
+    #- name: Build app for release ${{ env.Solution_Name_MB }}
+    #  run: dotnet build --no-restore "${{ env.Solution_Name_MB }}" -t:rebuild -verbosity:diag -property:Configuration=Release     
 
     - name: Restore dependencies ${{ env.Solution_Name_MB2 }}
       run: dotnet restore "${{ env.Solution_Name_MB2 }}"
@@ -51,11 +51,11 @@ jobs:
 
     ## Video Capture
 
-    - name: Restore dependencies ${{ env.Solution_Name_VC }}
-      run: dotnet restore "${{ env.Solution_Name_VC }}"
+   # - name: Restore dependencies ${{ env.Solution_Name_VC }}
+   #   run: dotnet restore "${{ env.Solution_Name_VC }}"
 
-    - name: Build app for release ${{ env.Solution_Name_VC }}
-      run: dotnet build --no-restore "${{ env.Solution_Name_VC }}" -t:rebuild -verbosity:diag -property:Configuration=Release 
+   # - name: Build app for release ${{ env.Solution_Name_VC }}
+   #   run: dotnet build --no-restore "${{ env.Solution_Name_VC }}" -t:rebuild -verbosity:diag -property:Configuration=Release 
       
     - name: Restore dependencies ${{ env.Solution_Name_VC2 }}
       run: dotnet restore "${{ env.Solution_Name_VC2 }}"
