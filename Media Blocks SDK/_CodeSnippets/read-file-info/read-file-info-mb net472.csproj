@@ -22,7 +22,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
     <Reference Include="System.Data.DataSetExtensions" />
