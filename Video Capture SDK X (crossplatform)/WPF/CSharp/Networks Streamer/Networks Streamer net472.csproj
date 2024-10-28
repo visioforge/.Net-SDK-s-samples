@@ -19,11 +19,11 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="15.10.31" />
-    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.32" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

@@ -12,7 +12,8 @@
     <AssemblyName>VideoCapture_VBNet_Demo</AssemblyName>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -30,7 +31,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup>
@@ -127,21 +129,22 @@
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64">
       <Version>15.5.36</Version>
     </PackageReference>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.10.32" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.10.32" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

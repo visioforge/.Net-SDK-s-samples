@@ -21,7 +21,7 @@ namespace PhotoCapture
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
-            SetContentView(PhotoCapture.Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.activity_main);
 
             RequestPermissions(
              new String[]{
