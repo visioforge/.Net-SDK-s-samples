@@ -7,8 +7,8 @@
     <SupportedOSPlatformVersion>14.00</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.31" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.35" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.35" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
