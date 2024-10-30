@@ -76,7 +76,7 @@ Public Class Form1
             End If
         End If
 
-        Dim defaultAudioRenderer = String.Empty
+        Dim defaultAudioRenderer As String = String.Empty
         For i = 0 To VideoCapture1.Audio_OutputDevices.Count - 1
             cbAudioOutputDevice.Items.Add(VideoCapture1.Audio_OutputDevices.Item(i))
 
@@ -116,8 +116,8 @@ Public Class Form1
                 Exit Sub
             End If
 
-            Dim defaultValue = "PCM, 44100 Hz, 16 Bits, 2 Channels"
-            Dim defaultValueExists = False
+            Dim defaultValue As String = "PCM, 44100 Hz, 16 Bits, 2 Channels"
+            Dim defaultValueExists As Boolean = False
 
             For Each s As String In deviceItem.Formats
                 cbAudioInputFormat.Items.Add(s)
