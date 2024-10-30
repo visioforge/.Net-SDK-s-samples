@@ -1,55 +1,53 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <RootNamespace>Video_From_Images_CLI</RootNamespace>
-    <AssemblyName>Video From Images CLI</AssemblyName>
-    <AssemblyTitle>Video From Images CLI</AssemblyTitle>
-    <Product>Video From Images CLI</Product>
-    <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.5.88.0</AssemblyVersion>
-    <FileVersion>15.5.88.0</FileVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net6.0-macos10.14</TargetFramework>
-    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Windows'))">net6.0-windows</TargetFramework>
-    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net6.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net472'">
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-  </ItemGroup>
-  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.6" />
-  </ItemGroup>
-  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.10.31" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.10.35" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="visioforge_main_icon.ico" />
-  </ItemGroup>
+	<PropertyGroup>
+		<RootNamespace>Video_From_Images_CLI</RootNamespace>
+		<AssemblyName>Video From Images CLI</AssemblyName>
+		<AssemblyTitle>Video From Images CLI</AssemblyTitle>
+		<Product>Video From Images CLI</Product>
+		<Copyright>Copyright (c) 2006-2024</Copyright>
+		<AssemblyVersion>15.10.35.0</AssemblyVersion>
+		<FileVersion>15.10.35.0</FileVersion>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net8.0-macos14.0</TargetFramework>
+		<TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net8.0-windows</TargetFrameworks>
+		<TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />
+	</ItemGroup>
+	<ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.6" />
+	</ItemGroup>
+	<ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="15.10.31" />
+		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="15.10.31" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.VideoEdit" Version="15.10.35" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="visioforge_main_icon.ico" />
+	</ItemGroup>
 </Project>
