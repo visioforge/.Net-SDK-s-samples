@@ -10,9 +10,9 @@ jobs:
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Android.sln"
 
-      Solution_Name_MP: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Android.sln"
+      Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Android.sln"
 
-      Solution_Name_VC: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS Android.sln"
+      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Android.sln"
 
     runs-on: windows-2022
 
