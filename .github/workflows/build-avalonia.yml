@@ -10,11 +10,11 @@ jobs:
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.sln"
 
-      Solution_Name_MP: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
+      Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
 
-      Solution_Name_VC: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS Avalonia.sln"
+      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Avalonia.sln"
 
-      Solution_Name_VE: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.Avalonia.sln"
+      Solution_Name_VE: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.CS.Avalonia.sln"
 
     runs-on: windows-2022
 
