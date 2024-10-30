@@ -26,7 +26,7 @@ jobs:
           8.0.x
 
     - name: Install workloads
-      run: dotnet workload install macos android maui-android maui-maccatalyst ios          
+      run: dotnet workload install android maui-android maui-desktop maui-windows maui-mobile          
         
    ## Media Blocks
     - name: Restore dependencies $env:Solution_Name_MB1
