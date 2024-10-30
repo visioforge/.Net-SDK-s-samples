@@ -11,14 +11,14 @@ jobs:
       Solution_Name_MB1: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net7.sln"
 
       Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln"
-      Solution_Name_MP2: "Media Player SDK X (crossplatform)/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
+      Solution_Name_MP2: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
 
       Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net7.sln"
       Solution_Name_VC3: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln"
-      Solution_Name_VC4: "Video Capture SDK X (crossplatform)/VisioForge.VideoCaptureX.Demos.CS net7.sln"
+      Solution_Name_VC4: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net7.sln"
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net7.sln"
-      Solution_Name_VE2: "Video Edit SDK X (crossplatform)/VisioForge.VideoEdit.X.Demos.CS.WinForms net7.sln"
+      Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.CS.WinForms net7.sln"
 
     runs-on: windows-2022
 
