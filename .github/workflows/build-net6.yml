@@ -19,7 +19,6 @@ jobs:
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net6.sln"
       Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.CS.WinForms net6.sln"
-      Solution_Name_VE3: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.CS.Console.sln"
 
     runs-on: windows-2022
 
