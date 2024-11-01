@@ -297,9 +297,10 @@ namespace Simple_Video_Capture
 
             // create MP4 muxer
             var now = DateTime.Now;
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+
             _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
-          
+
             // connect video pads
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
             _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));

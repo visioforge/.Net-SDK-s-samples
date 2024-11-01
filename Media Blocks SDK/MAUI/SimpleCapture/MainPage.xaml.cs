@@ -419,8 +419,7 @@ namespace SimpleCapture
         {
             DateTime now = DateTime.Now;
 #if __ANDROID__
-            var filename =
- Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #elif __IOS__ && !__MACCATALYST__
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");

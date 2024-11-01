@@ -181,7 +181,7 @@ namespace Simple_Video_Capture
             }
 
             var now = DateTime.Now;
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
             _core.Outputs_Add(new MP4Output(filename, videoEnc: new OpenH264EncoderSettings()), false);
 
             await _core.StartAsync();
@@ -241,7 +241,7 @@ namespace Simple_Video_Capture
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             var now = DateTime.Now;
-            _filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            _filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
             await _core.StartCaptureAsync(0, _filename);
         }
 

@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 
 using VisioForge.Core;
-
+using VisioForge.Core.Helpers;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.AudioEncoders;
@@ -239,12 +239,12 @@ namespace SimpleCapture
             btStartCapture.BackgroundColor = _defaultButtonColor;
             btStartCapture.Text = "CAPTURE";
 
-            // save video to iOS photo library
-#if __IOS__ && !__MACCATALYST__
+            // save video to photo library
+#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
             string filename = null;
             var output = _core.Outputs_Get(0);
             filename = output.GetFilename();
-            AddVideoToPhotosLibrary(filename);            
+            await PhotoGalleryHelper.AddVideoToGalleryAsync(filename);
 #endif
         }
 
@@ -386,8 +386,7 @@ namespace SimpleCapture
         {
             DateTime now = DateTime.Now;
 #if __ANDROID__
-            var filename =
- Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #elif __IOS__ && !__MACCATALYST__
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
