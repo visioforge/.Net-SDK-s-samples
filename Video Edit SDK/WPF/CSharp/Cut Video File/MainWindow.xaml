@@ -1,0 +1,44 @@
+﻿<Window x:Class="Cut_Video_File.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cut_Video_File"
+        mc:Ignorable="d"
+        Title="Cut Video File - Video Edit SDK .Net" Height="360" Width="470" 
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock Text="Source video file" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="edSourceVideoFile" Width="400" Margin="0,0,10,0" />
+                <Button Content="..." Click="btSelectSourceFile_Click" Width="20" />
+            </StackPanel>
+
+            <TextBlock Text="Output video file" Margin="0,10,0,0" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="edOutputVideoFile" Width="400" Margin="0,0,10,0" />
+                <Button Content="..." Click="btSelectOutputFile_Click" Width="20" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Start position (in seconds)" Margin="0,0,10,0" Width="150" />
+                <TextBox x:Name="edStartTime" Width="50" Text="0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="End position (in seconds)" Margin="0,0,10,0" Width="150" />
+                <TextBox x:Name="edStopTime" Width="50" Text="60" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Start" Click="btStart_Click" Width="75" />
+                <ProgressBar x:Name="ProgressBar1" Width="345" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="Log" Margin="0,10,0,10" />
+            <TextBox x:Name="edLog" HorizontalAlignment="Stretch" Height="100" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
+
+        </StackPanel>
+    </Grid>
+</Window>

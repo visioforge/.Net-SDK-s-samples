@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Extractor (NuGet) net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Audio Tracks Demo (NuGet) net5", "WPF\CSharp\Multiple Audio Tracks Demo\Multiple Audio Tracks Demo (NuGet) net5.csproj", "{A404E9E9-EDCD-452D-BD49-0CD819CF1F14}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cut Video File net5", "WPF\CSharp\Cut Video File\Cut Video File net5.csproj", "{F1DDCC5B-4123-4802-8115-F4C335B819DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,14 @@ Global
 		{A404E9E9-EDCD-452D-BD49-0CD819CF1F14}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A404E9E9-EDCD-452D-BD49-0CD819CF1F14}.Release|x86.ActiveCfg = Release|Any CPU
 		{A404E9E9-EDCD-452D-BD49-0CD819CF1F14}.Release|x86.Build.0 = Release|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +142,7 @@ Global
 		{097C9F81-744A-4B50-AB48-5E23CAF30E67} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{CC5E5BB4-E665-4618-8F79-0B826B464CC1} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{A404E9E9-EDCD-452D-BD49-0CD819CF1F14} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{F1DDCC5B-4123-4802-8115-F4C335B819DC} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
