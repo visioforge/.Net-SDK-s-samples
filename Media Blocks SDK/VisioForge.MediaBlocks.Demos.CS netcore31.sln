@@ -105,6 +105,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "read-file-info-mb netcore31
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo MB netcore31", "WinForms\CSharp\YouTube Player Demo\YouTube Player Demo MB netcore31.csproj", "{8F9F71B5-0494-4677-8229-A553EFD0153B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Key Frame Detector netcore31", "WPF\CSharp\Key Frame Detector\Key Frame Detector netcore31.csproj", "{61CEFEBF-F235-47BC-A73A-3DF9DA147315}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +305,10 @@ Global
 		{8F9F71B5-0494-4677-8229-A553EFD0153B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F9F71B5-0494-4677-8229-A553EFD0153B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F9F71B5-0494-4677-8229-A553EFD0153B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61CEFEBF-F235-47BC-A73A-3DF9DA147315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61CEFEBF-F235-47BC-A73A-3DF9DA147315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61CEFEBF-F235-47BC-A73A-3DF9DA147315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61CEFEBF-F235-47BC-A73A-3DF9DA147315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -356,6 +362,7 @@ Global
 		{D45290EC-2476-4566-86EB-CA58C9FCC17B} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 		{A9735057-C147-4AC8-85F8-3A191B48A30D} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 		{8F9F71B5-0494-4677-8229-A553EFD0153B} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{61CEFEBF-F235-47BC-A73A-3DF9DA147315} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

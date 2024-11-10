@@ -27,8 +27,8 @@
     <MtouchDebug>True</MtouchDebug>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.37" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.37" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.38" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="15.10.38" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
