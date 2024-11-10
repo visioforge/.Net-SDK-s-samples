@@ -46,7 +46,7 @@ namespace key_frame_detector_mb
                     var pos = await _pipeline.Position_GetAsync();
                     var dur = await _pipeline.DurationAsync();
 
-                    var progress = (int)(100 * pos / dur);
+                    var progress = (int)(100 * pos.Ticks / dur.Ticks);
 
                     await Dispatcher.InvokeAsync(() =>
                     {
@@ -82,7 +82,7 @@ namespace key_frame_detector_mb
 
             // create pipeline
             _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += async (sender, e) =>
+            _pipeline.OnStop += async (senderx, ex) =>
             {
                 _timer.Stop();
 
@@ -117,7 +117,7 @@ namespace key_frame_detector_mb
             // add key frame detector and finish pipeline with null renderer
             var keyFrameDetector = new KeyFrameDetectorBlock();
             keyFrameDetector.JSONFilename = jsonFile;
-            keyFrameDetector.OnKeyFrameDetected += (sender, e) =>
+            keyFrameDetector.OnKeyFrameDetected += (senderx, ex) =>
             {
                 Debug.WriteLine($"Key frame detected at {e}");
             };
