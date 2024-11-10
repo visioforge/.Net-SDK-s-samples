@@ -62,9 +62,6 @@ namespace Cut_Video_File
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            _core.Debug_Mode = true;
-            _core.Debug_Dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
             await _core.FastEdit_CutFileAsync(
                 edSourceVideoFile.Text,
                 TimeSpan.FromSeconds(Convert.ToInt32(edStartTime.Text)),
@@ -72,7 +69,7 @@ namespace Cut_Video_File
                 edOutputVideoFile.Text);
         }
 
-        private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
+        private void VideoEdit1_OnProgress(object? sender, ProgressEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
@@ -80,7 +77,7 @@ namespace Cut_Video_File
             });
         }
 
-        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
+        private void VideoEdit1_OnStop(object? sender, StopEventArgs e)
         {
             MessageBox.Show("Completed");
 
@@ -90,7 +87,7 @@ namespace Cut_Video_File
             });
         }
 
-        private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
+        private void VideoEdit1_OnError(object? sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
