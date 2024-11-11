@@ -38,6 +38,7 @@ Changes and updates for all .Net SDKs
 * [X-engines] Added `OverlayManagerBlock` support for Android (now it's available for all platforms)
 * [Video Capture SDK .Net] `VideoCaptureCoreX`: Added `CustomVideoProcessor`/`CustomAudioProcessor` properties for all output formats. You can use these properties to set custom video/audio processing blocks for the output format.
 * [Media Blocks SDK .Net] Added the `KeyFrameDetectorBlock` to detect key frames in video streams (H264, H265, VP8, VP9, AV1, etc.)
+* [Media Blocks SDK .Net] Fixed licensing issue for the `LiveVideoCompositor` class
   
 ## 15.10.0
 
