@@ -69,7 +69,7 @@ namespace Cut_Video_File
                 edOutputVideoFile.Text);
         }
 
-        private void VideoEdit1_OnProgress(object? sender, ProgressEventArgs e)
+        private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
@@ -77,7 +77,7 @@ namespace Cut_Video_File
             });
         }
 
-        private void VideoEdit1_OnStop(object? sender, StopEventArgs e)
+        private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             MessageBox.Show("Completed");
 
@@ -87,7 +87,7 @@ namespace Cut_Video_File
             });
         }
 
-        private void VideoEdit1_OnError(object? sender, ErrorsEventArgs e)
+        private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
