@@ -1,4 +1,5 @@
 ﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+using VisioForge.Core.UI.MAUI;
 
 namespace SkinnedPlayer_MAUI;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseSkiaSharp()
+            .ConfigureMauiHandlers(handlers => handlers.AddVisioForgeHandlers())
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

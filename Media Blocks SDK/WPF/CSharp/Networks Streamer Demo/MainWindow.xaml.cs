@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -272,13 +274,30 @@ namespace Networks_Streamer_Demo
                 // HLS
                 else if (cbPlatform.SelectedIndex == 2)
                 {
-                    _hlsSink = new HLSSinkBlock(new HLSSinkSettings());
+                    const string URL = "http://localhost:8088/";
+                    string serverPath = AppContext.BaseDirectory;
+                    var hlsSettings = new HLSSinkSettings
+                    {
+                        Location = Path.Combine(serverPath, "segment_%05d.ts"),
+                        MaxFiles = 10,
+                        PlaylistLength = 5,
+                        PlaylistLocation = Path.Combine(serverPath, "playlist.m3u8"),
+                        PlaylistRoot = URL,
+                        SendKeyframeRequests = true,
+                        TargetDuration = 5,
+                        Custom_HTTP_Server_Enabled = true,
+                        Custom_HTTP_Server_Port = 8088
+                    };
+
+                    _hlsSink = new HLSSinkBlock(hlsSettings);
                     _pipeline.Connect(_h264Encoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
                     if (audioEnabled)
                     {
                         _pipeline.Connect(_aacEncoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
+
+                    MessageBox.Show($"Open {URL} in your browser to see HLS stream. Open {URL}playlist.m3u8 in VLC or other player.");
                 }
                 // AWS S3
                 else if (cbPlatform.SelectedIndex == 4)
@@ -338,9 +357,6 @@ namespace Networks_Streamer_Demo
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
-
-            _pipeline.Debug_Dir = "c:\\vf\\";
-            _pipeline.Debug_SavePipeline("srt-streaming");
 
             await _pipeline?.StopAsync();
 

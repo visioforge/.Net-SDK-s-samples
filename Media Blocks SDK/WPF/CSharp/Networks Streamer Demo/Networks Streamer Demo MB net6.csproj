@@ -23,4 +23,10 @@
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="index.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

@@ -13,9 +13,11 @@ namespace HLSStreamer
 {
     internal class Program
     {
+        private const string URL = "http://localhost:8088/";
+
         static void Main(string[] args)
-        {
-            Console.WriteLine("The HLS Streamer app can stream sample video and audio sources using the HLS protocol. You can open localhost IP with port 8080 in your browser. H264 and AAC encoders were used.");
+        {           
+            Console.WriteLine("The HLS Streamer app can stream sample video and audio sources using the HLS protocol. You can open localhost IP with port 8088 in your browser. H264 and AAC encoders were used.");
 
             // Pipeline
             var pipeline = new MediaBlocksPipeline();
@@ -51,7 +53,7 @@ namespace HLSStreamer
                 MaxFiles = 10,
                 PlaylistLength = 5,
                 PlaylistLocation = Path.Combine(AppContext.BaseDirectory, "playlist.m3u8"),
-                PlaylistRoot = "http://localhost:8088/",
+                PlaylistRoot = URL,
                 SendKeyframeRequests = true,
                 TargetDuration = 5,
                 Custom_HTTP_Server_Enabled = true,
@@ -70,7 +72,7 @@ namespace HLSStreamer
             // Start
             pipeline.Start();
 
-            Console.WriteLine("Press 'Enter' to stop");
+            Console.WriteLine($"Open {URL} in your web browser. Press 'Enter' to stop");
             Console.ReadLine();
         }
 
