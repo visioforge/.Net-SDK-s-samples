@@ -16,14 +16,13 @@
     <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="15.10.31" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.39" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.39" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="15.10.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="15.10.40" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="15.10.40" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="index.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

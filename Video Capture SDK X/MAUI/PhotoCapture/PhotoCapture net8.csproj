@@ -56,7 +56,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.39" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.39" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="15.10.40" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="15.10.40" />
   </ItemGroup>
 </Project>
