@@ -22,8 +22,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.3" />
   </ItemGroup>
 </Project>

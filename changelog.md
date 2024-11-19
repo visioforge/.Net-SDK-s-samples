@@ -9,8 +9,14 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
-## 15.10.+
+## 2025.0.3
 
+* [MacOS] Resolved wrong stride issue for vertical camera videos on MacOS
+* [Video Capture SDK .Net] Resolved background color issue for the scrolling text overlay
+
+## 2025.0
+
+* [ALL] .Net 9 support
 * [Media Blocks SDK .Net] Added `AVIOutputBlock` to save video and audio streams to the AVI file format
 * [Media Blocks SDK .Net] `TeeBlock` constructor now accepts the media type as a parameter
 * [Video Capture SDK .Net] Added `Video_CaptureDevice_SetDefault` and `Audio_CaptureDevice_SetDefault` methods to the `VideoCaptureCore` class. You can use this method to set the default video and audio capture devices
