@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 2025.0.5
+
+* [iOS] Resolved issues with playback speed for some video files
+* [iOS] Added iOS Simulator support for all SDKs. Camera source is not supported in the simulator.
+
 ## 2025.0.3
 
 * [MacOS] Resolved wrong stride issue for vertical camera videos on MacOS

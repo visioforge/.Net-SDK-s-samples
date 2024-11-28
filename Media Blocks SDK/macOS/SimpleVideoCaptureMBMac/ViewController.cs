@@ -7,6 +7,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Apple;
 
@@ -55,6 +56,9 @@ public partial class ViewController : NSViewController
             await LoadDevicesAsync();
 
             View.Window.Delegate = new CustomWindowDelegate();
+
+            _videoView = new VideoView(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
+            videoViewHost.AddSubview(_videoView);
         });
     }
 
@@ -62,13 +66,13 @@ public partial class ViewController : NSViewController
     {
         InvokeOnMainThread(async () =>
         {
-        var alert = new NSAlert
-        {
-            AlertStyle = NSAlertStyle.Informational,
-            InformativeText = text,
-            MessageText = "Message"
-        };
-        alert.RunModal();
+            var alert = new NSAlert
+            {
+                AlertStyle = NSAlertStyle.Informational,
+                InformativeText = text,
+                MessageText = "Message"
+            };
+            alert.RunModal();
         });
     }
 
@@ -195,12 +199,9 @@ public partial class ViewController : NSViewController
 
         _pipeline = new MediaBlocksPipeline();
 
-        _videoView = new VideoView(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
-        videoViewHost.AddSubview(_videoView);
-
         // video source
         VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-        
+
         var deviceName = cbVideoSource.StringValue;
         var format = cbVideoFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
@@ -216,18 +217,18 @@ public partial class ViewController : NSViewController
                     {
                         Format = formatItem.ToFormat()
                     };
-        
+
                     videoSourceSettings.Format.FrameRate =
                         new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.StringValue));
                 }
             }
         }
-        
+
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
-        
+
         // audio source
         IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
-        
+
         deviceName = cbAudioSource.StringValue;
         format = cbAudioFormat.StringValue;
         if (!string.IsNullOrEmpty(deviceName))
@@ -240,7 +241,7 @@ public partial class ViewController : NSViewController
                 if (formatItem != null) audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
             }
         }
-        
+
         _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
 
         // video renderer
@@ -248,8 +249,8 @@ public partial class ViewController : NSViewController
 
         // audio renderer
         _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync())
-            .Where(device => device.DisplayName == cbAudioOutput.StringValue).First())
-        { IsSync = false };
+                .Where(device => device.DisplayName == cbAudioOutput.StringValue).First())
+            { IsSync = false };
 
         // connect all
         _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);

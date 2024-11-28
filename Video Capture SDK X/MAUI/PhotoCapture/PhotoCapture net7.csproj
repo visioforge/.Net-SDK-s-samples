@@ -49,10 +49,10 @@
     <!--<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />-->
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="15.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.6" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.0.3" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.0.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.6" />
   </ItemGroup>
 </Project>

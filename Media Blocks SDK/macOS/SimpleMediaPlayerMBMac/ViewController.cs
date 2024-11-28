@@ -13,6 +13,7 @@ namespace SimpleMediaPlayerMBMac;
 public partial class ViewController : NSViewController
 {
     private AudioRendererBlock _audioRenderer;
+    
     private MediaBlocksPipeline _pipeline;
 
     private UniversalSourceBlock _source;

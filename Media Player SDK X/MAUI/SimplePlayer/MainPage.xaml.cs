@@ -12,6 +12,7 @@ using System;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core;
+using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
 
 #if ANDROID
@@ -30,12 +31,6 @@ namespace Simple_Player_MAUI
         /// The seeking flag.
         /// </summary>
         private volatile bool _isTimerUpdate;
-
-#if __ANDROID__
-        private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
-#else
-        private const string DEFAULT_FILENAME = @"c:\samples\!video.mp4";
-#endif
 
         /// <summary>
         /// The position timer.
@@ -64,7 +59,8 @@ namespace Simple_Player_MAUI
 
             _player.OnError += _player_OnError;
             _player.OnStart += _player_OnStart;
-
+            _player.OnStop += _player_OnStop;
+            
 #if !__IOS__ || __MACCATALYST__
             var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
@@ -74,6 +70,21 @@ namespace Simple_Player_MAUI
 #endif
 
             Window.Destroying += Window_Destroying;
+        }
+        
+        private async void _player_OnStop(object sender, StopEventArgs e)
+        {
+            await StopAllAsync();
+            
+            // update UI controls using invoke
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                btSpeed.Text = "SPEED: 1X";
+                btPlayPause.Text = "PLAY";
+                slSeeking.Value = 0;
+                lbDuration.Text = "00:00:00";
+                lbPosition.Text = "00:00:00";
+            });
         }
 
         private void _player_OnStart(object sender, EventArgs e)
@@ -108,15 +119,6 @@ namespace Simple_Player_MAUI
             }
 
             VisioForgeX.DestroySDK();
-        }
-
-        private void OnStop(object sender, EventArgs e)
-        {
-            if (_player != null)
-            {
-                _player.OnError -= _player_OnError;
-                _player.Stop();
-            }
         }
 
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)

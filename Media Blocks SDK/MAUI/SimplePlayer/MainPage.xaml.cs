@@ -7,6 +7,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.AudioRendering;
+using VisioForge.Core.Types.Events;
 
 namespace Simple_Player_MB_MAUI
 {
@@ -26,12 +27,6 @@ namespace Simple_Player_MB_MAUI
         /// The seeking flag.
         /// </summary>
         private volatile bool _isTimerUpdate;
-
-#if __ANDROID__
-        private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
-#else
-        private const string DEFAULT_FILENAME = @"c:\samples\!video.mp4";
-#endif
 
         /// <summary>
         /// The position timer.
@@ -59,10 +54,11 @@ namespace Simple_Player_MB_MAUI
 
             _pipeline.OnError += _player_OnError;
             _pipeline.OnStart += _player_OnStart;
+            _pipeline.OnStop += _player_OnStop;
 
             _audioRenderer = new AudioRendererBlock();
-
-            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(_filename));
+            
+            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(_filename)));
 
             IVideoView vv;
 #if __MACCATALYST__
@@ -76,6 +72,21 @@ namespace Simple_Player_MB_MAUI
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+        }
+
+        private async void _player_OnStop(object sender, StopEventArgs e)
+        {
+            await StopAllAsync();
+            
+            // update UI controls using invoke
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                btSpeed.Text = "SPEED: 1X";
+                btPlayPause.Text = "PLAY";
+                slSeeking.Value = 0;
+                lbDuration.Text = "00:00:00";
+                lbPosition.Text = "00:00:00";
+            });
         }
 
         private void MainPage_Loaded(object sender, EventArgs e)
@@ -115,15 +126,6 @@ namespace Simple_Player_MB_MAUI
             }
 
             VisioForgeX.DestroySDK();
-        }
-
-        private async void OnStop(object sender, EventArgs e)
-        {
-            if (_pipeline != null)
-            {
-                _pipeline.OnError -= _player_OnError;
-                await _pipeline.StopAsync();
-            }
         }
 
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
@@ -292,6 +294,9 @@ namespace Simple_Player_MB_MAUI
 
             btSpeed.Text = "SPEED: 1X";
             btPlayPause.Text = "PLAY";
+            slSeeking.Value = 0;
+            lbDuration.Text = "00:00:00";
+            lbPosition.Text = "00:00:00";
         }
     }
 }

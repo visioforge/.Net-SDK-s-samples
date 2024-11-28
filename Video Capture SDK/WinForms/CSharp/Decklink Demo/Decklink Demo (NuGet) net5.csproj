@@ -65,9 +65,9 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.0.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.0.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.0.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.0.6" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System;
+using System.Threading.Tasks;
 
 namespace Media_Info_CLI
 {
@@ -8,7 +9,7 @@ namespace Media_Info_CLI
     {
         //static System.Uri filename = new System.Uri("/Users/roman/Desktop/video.mp4");
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (args.Length == 0)
             {
@@ -17,7 +18,7 @@ namespace Media_Info_CLI
             }
 
             var mediaInfo = new VisioForge.Core.MediaInfoReaderX.MediaInfoReaderX();
-            if (mediaInfo.Open(args[0]))
+            if (await mediaInfo.OpenAsync(args[0]))
             {
                 var info = mediaInfo.Info.ToString();
                 Console.WriteLine(info);
