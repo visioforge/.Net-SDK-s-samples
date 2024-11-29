@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 2025.0.7
+
+* [ALL] Resolved window capture issues in cross-platform SDKs
+
 ## 2025.0.5
 
 * [iOS] Resolved issues with playback speed for some video files
