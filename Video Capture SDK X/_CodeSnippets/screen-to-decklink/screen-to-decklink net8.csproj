@@ -4,8 +4,6 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
     <RootNamespace>screen_to_decklink</RootNamespace>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
@@ -14,6 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.7" />
   </ItemGroup>
 </Project>
