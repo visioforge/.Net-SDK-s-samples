@@ -5,8 +5,8 @@
     <AssemblyTitle>Video From Images CLI</AssemblyTitle>
     <Product>Video From Images CLI</Product>
     <Copyright>Copyright (c) 2006-2024</Copyright>
-    <AssemblyVersion>15.10.35.0</AssemblyVersion>
-    <FileVersion>15.10.35.0</FileVersion>
+    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
+    <FileVersion>2025.0.7.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>

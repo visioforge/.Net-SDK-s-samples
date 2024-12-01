@@ -8,9 +8,9 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyTitle>Main Demo</AssemblyTitle>
     <Product>Main Demo</Product>
-    <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.7.42.0</AssemblyVersion>
-    <FileVersion>15.7.42.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2024</Copyright>
+    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
+    <FileVersion>2025.0.7.0</FileVersion>
     <Platforms>x64</Platforms>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>

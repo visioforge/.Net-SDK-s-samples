@@ -2,13 +2,14 @@
   <PropertyGroup>
     <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
-    <RootNamespace>PhotoCapture</RootNamespace>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
+    <RootNamespace>PhotoCapture</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationId>com.visioforge.photocapture</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <RootNamespace>PhotoCapture</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />

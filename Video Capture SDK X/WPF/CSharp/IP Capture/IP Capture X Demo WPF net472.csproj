@@ -9,9 +9,9 @@
     <AssemblyTitle>IP Capture Demo</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>IP Capture Demo</Product>
-    <Copyright>Copyright (c) 2006-2023</Copyright>
-    <AssemblyVersion>15.7.42.0</AssemblyVersion>
-    <FileVersion>15.7.42.0</FileVersion>
+    <Copyright>Copyright (c) 2006-2024</Copyright>
+    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
+    <FileVersion>2025.0.7.0</FileVersion>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
