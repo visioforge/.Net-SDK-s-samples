@@ -119,7 +119,7 @@ namespace key_frame_detector_mb
             keyFrameDetector.JSONFilename = jsonFile;
             keyFrameDetector.OnKeyFrameDetected += (senderx, ex) =>
             {
-                Debug.WriteLine($"Key frame detected at {e}");
+                Debug.WriteLine($"Key frame detected at {ex}");
             };
 
             // link blocks
