@@ -12,6 +12,7 @@ Changes and updates for all .Net SDKs
 ## 2025.0.7
 
 * [ALL] Resolved window capture issues in cross-platform SDKs
+* [Media Blocks SDK .Net] Added the Bridge Source Switch sample
 
 ## 2025.0.5
 

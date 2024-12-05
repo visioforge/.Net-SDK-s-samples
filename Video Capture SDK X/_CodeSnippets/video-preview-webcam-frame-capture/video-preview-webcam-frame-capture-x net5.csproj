@@ -20,7 +20,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.8" />
   </ItemGroup>
 </Project>
