@@ -33,7 +33,7 @@ namespace ip_camera_capture_mp4
             var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // RTSP camera source
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioStream.Checked);
+            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
             var rtspSource = new RTSPSourceBlock(rtsp);
                   
             // configure MP4 output
@@ -48,7 +48,7 @@ namespace ip_camera_capture_mp4
             _pipeline.Connect(videoTee, mp4Output);
 
             // audio output
-            if (cbAudioStream.Checked)
+            if (rtsp.IsAudioAvailable())
             {
                 var audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
 

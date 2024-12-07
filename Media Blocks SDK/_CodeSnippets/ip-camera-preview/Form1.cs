@@ -33,13 +33,13 @@ namespace ip_camera_preview
             var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // Add RTSP camera source
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: cbAudioStream.Checked);
+            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
             var rtspSource = new RTSPSourceBlock(rtsp);
 
             _pipeline.Connect(rtspSource, videoRenderer);
 
             // Add audio output (if required)
-            if (cbAudioStream.Checked && rtsp.IsAudioAvailable())
+            if (rtsp.IsAudioAvailable())
             {
                 var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
                 var audioOutput = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));

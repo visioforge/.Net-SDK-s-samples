@@ -117,23 +117,19 @@ namespace MediaBlocks_Player_Demo
 
             if (videoStream)
             {
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
             if (audioStream)
             {
-                _audioRenderer = new AudioRendererBlock() { IsSync = false };
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
 
             _pipeline.Loop = cbLoop.Checked;
 
             await _pipeline.StartAsync();
-
-            // set audio volume for each stream
-            // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
             _tmPosition.Start();
         }
@@ -228,7 +224,9 @@ namespace MediaBlocks_Player_Demo
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync(true);
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+                _pipeline.Stop(true);
             }
 
             await DestroyEngineAsync();

@@ -13,9 +13,9 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.0.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.0.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.0.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.0.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.0.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.0.10" />
   </ItemGroup>
 </Project>

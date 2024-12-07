@@ -82,7 +82,7 @@ namespace Simple_Media_Player
                 return;
             }
 
-            await _player.StopAsync();
+            _player.Stop();
             await DestroyEngineAsync();
 
             VisioForgeX.DestroySDK();

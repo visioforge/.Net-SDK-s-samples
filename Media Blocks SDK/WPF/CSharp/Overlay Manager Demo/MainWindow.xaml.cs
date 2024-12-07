@@ -13,6 +13,7 @@ using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
 using VisioForge.Core.Types.X.Sources;
+using System.Threading;
 
 namespace Overlay_Manager_Demo
 {
@@ -169,9 +170,15 @@ namespace Overlay_Manager_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            _timer.Stop();
+
+            Thread.Sleep(100);
+
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                _pipeline.OnStop -= Pipeline_OnStop;
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.Stop();
             }
 
             await DestroyEngineAsync();

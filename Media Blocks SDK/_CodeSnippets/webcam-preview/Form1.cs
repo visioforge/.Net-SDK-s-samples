@@ -57,8 +57,6 @@ namespace webcam_preview
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            CreateEngine();
-
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
@@ -126,6 +124,8 @@ namespace webcam_preview
 
         private async void btStart_Click(object sender, EventArgs e)
         {
+            CreateEngine();
+
             // set debug settings
             _pipeline.Debug_Mode = cbDebugMode.Checked;
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -243,16 +243,31 @@ namespace webcam_preview
 
         private async void btStop_Click(object sender, EventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.StopAsync();
         }
 
         private async void btPause_Click(object sender, EventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.PauseAsync();
         }
 
         private async void btResume_Click(object sender, EventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.ResumeAsync();
         }
 

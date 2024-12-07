@@ -39,7 +39,6 @@
             label3 = new System.Windows.Forms.Label();
             edLogin = new System.Windows.Forms.TextBox();
             edPassword = new System.Windows.Forms.TextBox();
-            cbAudioStream = new System.Windows.Forms.CheckBox();
             SuspendLayout();
             // 
             // VideoView1
@@ -49,7 +48,6 @@
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
             VideoView1.Size = new System.Drawing.Size(1067, 609);
-            VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 0;
             // 
             // btStart
@@ -122,22 +120,11 @@
             edPassword.Size = new System.Drawing.Size(150, 31);
             edPassword.TabIndex = 8;
             // 
-            // cbAudioStream
-            // 
-            cbAudioStream.AutoSize = true;
-            cbAudioStream.Location = new System.Drawing.Point(650, 66);
-            cbAudioStream.Name = "cbAudioStream";
-            cbAudioStream.Size = new System.Drawing.Size(159, 29);
-            cbAudioStream.TabIndex = 9;
-            cbAudioStream.Text = "Audio available";
-            cbAudioStream.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1123, 804);
-            Controls.Add(cbAudioStream);
             Controls.Add(edPassword);
             Controls.Add(edLogin);
             Controls.Add(label3);
@@ -168,6 +155,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox edLogin;
         private System.Windows.Forms.TextBox edPassword;
-        private System.Windows.Forms.CheckBox cbAudioStream;
     }
 }

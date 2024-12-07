@@ -74,16 +74,20 @@ namespace SimplePlayerAMB
         {
             if (_pipeline != null)
             {
-                _pipeline.OnError -= Pipeline_OnError;
-                _pipeline.OnStop -= Pipeline_OnStop;
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
         }
 
-        private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await StopAsync();
+            if (_pipeline != null)
+            {
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+
+                _pipeline.Stop(true);
+            }
 
             VisioForgeX.DestroySDK();
         }
@@ -237,6 +241,9 @@ namespace SimplePlayerAMB
         {
             if (_pipeline != null)
             {
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+
                 await _pipeline.StopAsync(true);
             }
 

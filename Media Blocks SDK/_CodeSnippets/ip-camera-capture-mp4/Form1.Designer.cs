@@ -33,7 +33,6 @@
             VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             btStart = new System.Windows.Forms.Button();
             btStop = new System.Windows.Forms.Button();
-            cbAudioStream = new System.Windows.Forms.CheckBox();
             edPassword = new System.Windows.Forms.TextBox();
             edLogin = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
@@ -49,7 +48,6 @@
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
             VideoView1.Size = new System.Drawing.Size(1067, 602);
-            VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 0;
             // 
             // btStart
@@ -73,16 +71,6 @@
             btStop.Text = "Stop";
             btStop.UseVisualStyleBackColor = true;
             btStop.Click += btStop_Click;
-            // 
-            // cbAudioStream
-            // 
-            cbAudioStream.AutoSize = true;
-            cbAudioStream.Location = new System.Drawing.Point(650, 70);
-            cbAudioStream.Name = "cbAudioStream";
-            cbAudioStream.Size = new System.Drawing.Size(159, 29);
-            cbAudioStream.TabIndex = 16;
-            cbAudioStream.Text = "Audio available";
-            cbAudioStream.UseVisualStyleBackColor = true;
             // 
             // edPassword
             // 
@@ -137,7 +125,6 @@
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1123, 804);
-            Controls.Add(cbAudioStream);
             Controls.Add(edPassword);
             Controls.Add(edLogin);
             Controls.Add(label3);
@@ -162,7 +149,6 @@
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Button btStop;
-        private System.Windows.Forms.CheckBox cbAudioStream;
         private System.Windows.Forms.TextBox edPassword;
         private System.Windows.Forms.TextBox edLogin;
         private System.Windows.Forms.Label label3;

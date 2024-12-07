@@ -65,6 +65,8 @@ namespace RTSP_Preview
             {
                 _pipeline.OnError -= VideoCapture1_OnError;
 
+                _pipeline.Stop();
+
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
@@ -117,13 +119,13 @@ namespace RTSP_Preview
 
             _rtspSource = new RTSPSourceBlock(rtsp);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
 
             if (audioEnabled && info.AudioStreams.Count > 0)
             {
-                _audioRenderer = new AudioRendererBlock() { IsSync = false };
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);
             }
 

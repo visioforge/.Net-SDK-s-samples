@@ -17,6 +17,7 @@ using Windows.ApplicationModel;
 using Windows.Storage.Pickers;
 using Windows.UI;
 using VisioForge.Core.UI.WinUI;
+using VisioForge.Core;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -113,9 +114,11 @@ namespace Simple_Media_Player_WinUI
 
         private async void MainWindow_Closed(object sender, WindowEventArgs args)
         {
-            await MediaPlayer1.StopAsync();
+            MediaPlayer1.Stop();
 
             await MediaPlayer1.DisposeAsync();
+
+            VisioForgeX.DestroySDK();
         }
 
         private void SetIcon()

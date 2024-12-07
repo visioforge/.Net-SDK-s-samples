@@ -125,13 +125,26 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _timerFlag = false;
         }
 
-        private async Task DestroyEngineAsync()
+        private async Task StopEngineAsync()
         {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= Pipeline_OnError;
                 _pipeline.OnStop -= Pipeline_OnStop;
+                await _pipeline.StopAsync(true);
                 await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+        }
+
+        private void DestroyEngine()
+        {
+            if (_pipeline != null)
+            {
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+                _pipeline.Stop(true);
+                _pipeline.Dispose();
                 _pipeline = null;
             }
         }
@@ -147,7 +160,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag)
+            if (!_timerFlag && _pipeline != null)
             {
                 await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
@@ -172,9 +185,7 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
-
-                await DestroyEngineAsync();
+                await StopEngineAsync();
             }
 
             tbTimeline.Value = 0;
@@ -198,12 +209,15 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
 
-            await DestroyEngineAsync();     
-            
+            if (_pipeline != null)
+            {
+                DestroyEngine();
+            }
+
             VisioForgeX.DestroySDK();
         }
     }
