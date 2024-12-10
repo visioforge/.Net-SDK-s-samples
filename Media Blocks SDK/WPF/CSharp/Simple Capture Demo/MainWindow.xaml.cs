@@ -207,7 +207,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             {
                 _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
                 _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-                _h264Encoder = new H264EncoderBlock(new MFH264EncoderSettings());
+                _h264Encoder = new H264EncoderBlock();
                 _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
                 _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
             }
