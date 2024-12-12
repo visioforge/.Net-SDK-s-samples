@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 2025.0.14
+
+* [Media Blocks SDK .Net] Added the "PushJPEGSourceSettings" class to configure the JPEG source for the "PushSourceBlock". You can use this class to set the JPEG source settings for the "PushSourceBlock". Also "video-from-images" sample added.
+
 ## 2025.0.7
 
 * [ALL] Resolved window capture issues in cross-platform SDKs

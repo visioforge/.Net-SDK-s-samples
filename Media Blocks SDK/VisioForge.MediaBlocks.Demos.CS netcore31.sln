@@ -109,6 +109,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Key Frame Detector netcore3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge Source Switch netcore31", "WPF\CSharp\Bridge Source Switch\Bridge Source Switch netcore31.csproj", "{CF94E1E4-26BD-4E69-9EE6-1718C0AE7ADB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "video_from_images netcore31", "_CodeSnippets\video-from-images\video_from_images netcore31.csproj", "{3DE7BA39-AE64-4667-8987-1F976D6855EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -315,6 +317,10 @@ Global
 		{CF94E1E4-26BD-4E69-9EE6-1718C0AE7ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF94E1E4-26BD-4E69-9EE6-1718C0AE7ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF94E1E4-26BD-4E69-9EE6-1718C0AE7ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE7BA39-AE64-4667-8987-1F976D6855EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE7BA39-AE64-4667-8987-1F976D6855EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE7BA39-AE64-4667-8987-1F976D6855EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE7BA39-AE64-4667-8987-1F976D6855EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -370,6 +376,7 @@ Global
 		{8F9F71B5-0494-4677-8229-A553EFD0153B} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{61CEFEBF-F235-47BC-A73A-3DF9DA147315} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
 		{CF94E1E4-26BD-4E69-9EE6-1718C0AE7ADB} = {ADBE7D51-E255-42D4-A4A9-77901508B53D}
+		{3DE7BA39-AE64-4667-8987-1F976D6855EF} = {7E273D64-7973-42BB-980F-F8F6585280C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

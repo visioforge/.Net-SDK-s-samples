@@ -1,0 +1,23 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:video_from_images"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" x:Class="video_from_images.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Video from JPEG images" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <WPF:VideoView x:Name="videoView1" Margin="16,16,16,50"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+            <TextBlock VerticalAlignment="Center" Margin="0,0,10,0">Folder with JPEG images</TextBlock>
+            <TextBox Text="" VerticalAlignment="Center" Margin="0,0,10,0" Width="200" x:Name="edSourceFolder"/>
+            <Button x:Name="btSelectFolder" Content="..." Width="20" Click="btSelectFolder_Click" Margin="0,0,10,0"/>
+            <Button x:Name="btStart" Content="Start" Width="50" Click="btStart_Click" Margin="0,0,10,0"/>
+            <Button x:Name="btStop" Content="Stop" Width="50" Click="btStop_Click" Margin="0,0,10,0"/>
+            <TextBlock VerticalAlignment="Center">Images should have the same resolution.</TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Window>
