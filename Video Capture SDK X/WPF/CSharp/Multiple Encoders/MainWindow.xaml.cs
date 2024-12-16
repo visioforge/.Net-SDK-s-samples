@@ -44,37 +44,37 @@ namespace Multiple_Encoders
             if (NVENCH264EncoderSettings.IsAvailable())
             {
                 encoders.Add("NVIDIA H.264");
-                _encoders.Add("NVIDIA H.264", new NVENCH264EncoderSettings());
+                _encoders.Add("NVIDIA H.264", new NVENCH264EncoderSettings(VideoQuality.High));
             }
 
             if (NVENCHEVCEncoderSettings.IsAvailable())
             {
                 encoders.Add("NVIDIA H.265");
-                _encoders.Add("NVIDIA H.265", new NVENCHEVCEncoderSettings());
+                _encoders.Add("NVIDIA H.265", new NVENCHEVCEncoderSettings(VideoQuality.High));
             }
 
             if (QSVH264EncoderSettings.IsAvailable())
             {
                 encoders.Add("Intel Quick Sync H.264");
-                _encoders.Add("Intel Quick Sync H.264", new QSVH264EncoderSettings());
+                _encoders.Add("Intel Quick Sync H.264", new QSVH264EncoderSettings(VideoQuality.High));
             }
 
             if (QSVHEVCEncoderSettings.IsAvailable())
             {
                 encoders.Add("Intel Quick Sync H.265");
-                _encoders.Add("Intel Quick Sync H.265", new QSVHEVCEncoderSettings());
+                _encoders.Add("Intel Quick Sync H.265", new QSVHEVCEncoderSettings(VideoQuality.High));
             }
 
             if (AMFH264EncoderSettings.IsAvailable())
             {
                 encoders.Add("AMD H.264");
-                _encoders.Add("AMD H.264", new AMFH264EncoderSettings());
+                _encoders.Add("AMD H.264", new AMFH264EncoderSettings(VideoQuality.High));
             }
 
             if (AMFHEVCEncoderSettings.IsAvailable())
             {
                 encoders.Add("AMD H.265");
-                _encoders.Add("AMD H.265", new AMFHEVCEncoderSettings());
+                _encoders.Add("AMD H.265", new AMFHEVCEncoderSettings(VideoQuality.High));
             }
 
             return encoders.ToArray();

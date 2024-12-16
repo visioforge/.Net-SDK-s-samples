@@ -83,13 +83,13 @@ namespace Overlay_Manager_Demo
 
             _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             _pipeline.Connect(_fileSource.VideoOutput, _overlayManager.Input);
             _pipeline.Connect(_overlayManager.Output, _videoRenderer.Input);
 
             var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
-            _audioRenderer = new AudioRendererBlock(audioOutputs[0]) { IsSync = false };
+            _audioRenderer = new AudioRendererBlock(audioOutputs[0]);
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
