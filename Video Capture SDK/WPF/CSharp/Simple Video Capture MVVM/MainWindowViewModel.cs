@@ -45,7 +45,7 @@ namespace Simple_Video_Capture
             ConfigureAudioInputDeviceCommand = new DelegateCommand(ConfigureAudioInputDevice);
             ConfigureVideoInputDeviceCommand = new DelegateCommand(ConfigureVideoInputDevice);
 
-            OutputFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            OutputFileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             SelectedOutputFormat =
                 OutputFormats.FirstOrDefault(_ => _.Description == "MP4") ??
                 OutputFormats.FirstOrDefault();
@@ -693,7 +693,7 @@ namespace Simple_Video_Capture
             {
                 FileName = "image.jpg",
                 Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
             };
 
             if (screenshotSaveDialog.ShowDialog() == true)

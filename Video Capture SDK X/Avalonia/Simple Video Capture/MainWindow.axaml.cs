@@ -530,7 +530,7 @@ namespace SimpleVideoCaptureA
             var sfd = new SaveFileDialog();
             sfd.InitialFileName = "image.jpg";
             sfd.DefaultExtension = ".jpg";
-            sfd.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            sfd.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "VisioForge");
 
             var exts = new string[] { "jpg", "bmp", "png", "gif" };
             foreach (var extension in exts)

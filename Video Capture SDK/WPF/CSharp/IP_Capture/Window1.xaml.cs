@@ -52,7 +52,7 @@ namespace IP_Capture
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private Timer tmRecording = new Timer(1000);
@@ -113,7 +113,7 @@ namespace IP_Capture
             cbOutputFormat.SelectedIndex = 2;
             cbIPCameraType.SelectedIndex = 2;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)

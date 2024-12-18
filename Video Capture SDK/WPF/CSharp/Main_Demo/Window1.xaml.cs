@@ -119,7 +119,7 @@ namespace Main_Demo
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -296,8 +296,8 @@ namespace Main_Demo
 
             cbScreenCaptureDisplayIndex.SelectedIndex = 0;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
-            edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output_new.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output_new.mp4");
 
             await VideoCapture1.TVTuner_ReadAsync();
 

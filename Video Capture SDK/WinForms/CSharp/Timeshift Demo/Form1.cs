@@ -70,7 +70,7 @@
 
             cbIPCameraType.SelectedIndex = 2;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.avi");
 
             foreach (var device in VideoCapture1.Video_CaptureDevices())
             {

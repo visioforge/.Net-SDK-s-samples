@@ -35,7 +35,7 @@ namespace Decklink_Demo_X
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -144,7 +144,7 @@ namespace Decklink_Demo_X
 
             cbVideoMode.SelectedIndex = 0;
 
-            edOutput.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)

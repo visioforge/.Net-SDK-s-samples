@@ -191,7 +191,7 @@ namespace Decklink_MB_Demo
 
             cbVideoMode.SelectedIndex = 0;
 
-            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             DeviceEnumerator.Shared.OnDecklinkSignalLost += DeviceEnumerator_OnDecklinkSignalLost;
         }
@@ -357,7 +357,7 @@ namespace Decklink_MB_Demo
             if (capture)
             {
                 var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
-                if (decklinkFormat == DecklinkMode.Auto)
+                if (decklinkFormat == DecklinkMode.Unknown)
                 {
                     MessageBox.Show(this, "Decklink mode must be set to a specific value if you want to capture to the output file.");
                     return;

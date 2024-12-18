@@ -59,8 +59,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.0.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.0.16" />
   </ItemGroup>
 </Project>

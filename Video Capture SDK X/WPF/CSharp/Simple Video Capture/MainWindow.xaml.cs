@@ -174,7 +174,7 @@ namespace Simple_Video_Capture
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)

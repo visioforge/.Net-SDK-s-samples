@@ -26,7 +26,7 @@ namespace File_Encryptor
         {
             Text += $" (SDK v{VideoEditCore.GetVersion()})";
 
-            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.enc");
+            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.enc");
             _videoEdit.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             _videoEdit.OnError += _videoEdit_OnError;

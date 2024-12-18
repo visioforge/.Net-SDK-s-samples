@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 2025.0.16
+
+* [Media Blocks SDK .Net] Resolved issue with adding several AudioRendererBlocks to the pipeline
+
 ## 2025.0.14
 
 * [Media Blocks SDK .Net] Added the "PushJPEGSourceSettings" class to configure the JPEG source for the "PushSourceBlock". You can use this class to set the JPEG source settings for the "PushSourceBlock". Also "video-from-images" sample added.

@@ -160,7 +160,7 @@ namespace Video_Capture_Demo
             {
                 case 0:
                     {
-                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.avi");
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.avi");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 
@@ -170,7 +170,7 @@ namespace Video_Capture_Demo
                     break;
                 case 1:
                     {
-                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+                        string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
                         videoCapture.Output_Filename = outputFile;
                         Console.WriteLine(@"Output file: " + outputFile);
 

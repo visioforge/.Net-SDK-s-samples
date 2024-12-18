@@ -52,7 +52,7 @@ namespace DVCapture
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -135,7 +135,7 @@ namespace DVCapture
                 }
             }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)

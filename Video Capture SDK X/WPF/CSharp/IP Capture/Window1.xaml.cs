@@ -135,7 +135,7 @@ namespace IP_Capture
                 }
             }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)

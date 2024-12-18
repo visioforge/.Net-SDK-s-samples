@@ -64,7 +64,7 @@
 
             cbOutputFormat.SelectedIndex = 2;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             VideoCapture1.Video_Renderer_SetAuto();
         }

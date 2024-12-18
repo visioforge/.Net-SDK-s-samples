@@ -124,7 +124,7 @@ namespace multiple_video_streams
                 cbCamera2.SelectedIndex = 0;
             }
 
-            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "multiple_video_streams.wmv");
+            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "multiple_video_streams.wmv");
 
             VideoCapture1.Video_Renderer_SetAuto();
 

@@ -112,7 +112,7 @@ namespace VideoCapture_CSharp_Demo
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -296,8 +296,8 @@ namespace VideoCapture_CSharp_Demo
 
             cbTagGenre.SelectedIndex = 0;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
-            edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output_new.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output_new.mp4");
 
             await VideoCapture1.TVTuner_ReadAsync();
 
@@ -2481,7 +2481,7 @@ namespace VideoCapture_CSharp_Demo
             settings.ForcedFramerate = new VideoFrameRate(Convert.ToInt32(edIPForcedFramerate.Text));
             settings.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text[0];
             settings.Debug_Enabled = cbDebugMode.Checked;
-            settings.Debug_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "ip_cam_log.txt");
+            settings.Debug_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "ip_cam_log.txt");
             settings.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.Checked;
             settings.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
 

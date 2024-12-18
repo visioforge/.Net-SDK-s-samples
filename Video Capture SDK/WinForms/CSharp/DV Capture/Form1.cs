@@ -129,7 +129,7 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
                 }
             }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)

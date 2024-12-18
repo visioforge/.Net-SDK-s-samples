@@ -215,7 +215,7 @@ namespace VideoEdit_CS_Demo
 
             Text += $" (SDK v{VideoEditCoreX.SDK_Version})";
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             cbMode.SelectedIndex = 1;
             cbFrameRate.SelectedIndex = 0;

@@ -114,7 +114,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

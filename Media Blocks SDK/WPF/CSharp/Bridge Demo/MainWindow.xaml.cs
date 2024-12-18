@@ -72,7 +72,7 @@ namespace Bridge_Demo
             Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-            edFilename.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\output.mp4";
+            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             await CreateSourceEngineAsync();
 

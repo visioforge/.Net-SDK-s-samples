@@ -133,7 +133,7 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             cbAudEqualizerPreset.SelectedIndex = 0;
             cbAudEqualizerPreset_SelectedIndexChanged(null, null);
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)

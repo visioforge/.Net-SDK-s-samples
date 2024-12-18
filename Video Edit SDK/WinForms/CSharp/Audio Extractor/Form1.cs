@@ -37,7 +37,7 @@ namespace Audio_Extractor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
+            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
 
             _core = new VideoEditCore();
             _core.Video_Renderer.VideoRenderer = VideoRendererMode.None;

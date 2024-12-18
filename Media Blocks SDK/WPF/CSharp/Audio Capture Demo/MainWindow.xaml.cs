@@ -116,7 +116,7 @@ namespace Audio_Capture_Demo_MB
                 }
             }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)

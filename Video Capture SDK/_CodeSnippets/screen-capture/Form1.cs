@@ -46,7 +46,7 @@ namespace screen_capture
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             foreach (var screen in Screen.AllScreens)
             {

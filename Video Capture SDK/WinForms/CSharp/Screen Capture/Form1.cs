@@ -49,7 +49,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -454,7 +454,7 @@ namespace VisioForge_SDK_Screen_Capture_Demo
 
             cbOutputFormat.SelectedIndex = 2;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             VideoCapture1.Video_Renderer_SetAuto();
         }

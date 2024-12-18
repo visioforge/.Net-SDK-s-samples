@@ -21,7 +21,7 @@
 
                     <Label Content="Video input device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" />
-                    <Label Content="Mode (we are strongly recommend to set for recording)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+                    <Label Content="Mode (select correct)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
                     <ComboBox x:Name="cbVideoMode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" Margin="10,0,0,0" />
                     <Label Content="Audio input device" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
                     <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" />

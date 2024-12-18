@@ -50,11 +50,11 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.0.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.0.16" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="2025.0.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="2025.0.16" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -71,7 +71,7 @@
     <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.6" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
   </ItemGroup>
   <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
   <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">

@@ -526,7 +526,7 @@ namespace Screen_Capture_X
 
             cbScreenCaptureDisplayIndex.SelectedIndex = 0;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
 

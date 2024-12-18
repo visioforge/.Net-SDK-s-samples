@@ -48,7 +48,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         {
             FileName = "image.jpg",
             Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif|TIFF|*.tiff",
-            InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
         private ONVIFDeviceX onvifDeviceX;
@@ -96,7 +96,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             cbIPCameraType.SelectedIndex = 2;
             cbOutputFormat.SelectedIndex = 2;
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4");
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void btSelectOutput_Click(object sender, EventArgs e)
