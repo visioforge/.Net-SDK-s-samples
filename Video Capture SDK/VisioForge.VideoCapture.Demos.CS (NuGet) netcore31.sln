@@ -109,6 +109,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-text-overlay 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "virtual-camera-streaming netcore31", "_CodeSnippets\virtual-camera-streaming\virtual-camera-streaming netcore31.csproj", "{A61985F1-B444-4B02-B171-CB534005EF89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Streamer netcore31", "WinForms\CSharp\RTSP Streamer\RTSP Streamer netcore31.csproj", "{518352D3-210E-473F-AC91-4E584EA245B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -509,6 +511,14 @@ Global
 		{A61985F1-B444-4B02-B171-CB534005EF89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A61985F1-B444-4B02-B171-CB534005EF89}.Release|x86.ActiveCfg = Release|Any CPU
 		{A61985F1-B444-4B02-B171-CB534005EF89}.Release|x86.Build.0 = Release|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Debug|x86.Build.0 = Debug|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{518352D3-210E-473F-AC91-4E584EA245B7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -563,6 +573,7 @@ Global
 		{CF487381-ADBF-4CB0-A3C0-53BDEDDFB561} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{7397FFE2-45A1-40D3-A642-F9A80CA309CF} = {7251110F-2127-4FF3-89B5-9A1F3165B3C2}
 		{A61985F1-B444-4B02-B171-CB534005EF89} = {7251110F-2127-4FF3-89B5-9A1F3165B3C2}
+		{518352D3-210E-473F-AC91-4E584EA245B7} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
