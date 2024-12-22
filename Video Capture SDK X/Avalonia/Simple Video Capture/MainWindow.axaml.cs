@@ -462,6 +462,13 @@ namespace SimpleVideoCaptureA
 
             VideoCapture1.Snapshot_Grabber_Enabled = true;
 
+            if (rbPreview.IsChecked == false)
+            {
+                // add MP4 output with default parameters
+                var mp4output = new MP4Output(edOutput.Text);
+                VideoCapture1.Outputs_Add(mp4output, autostart: true);
+            }
+
             await VideoCapture1.StartAsync();
 
             tcMain.SelectedIndex = 3;

@@ -10,14 +10,14 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.12" />
-    <PackageReference Include="VisioForge.CrossPlatform.Basler.Windows.x64" Version="2025.0.12" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.12" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Basler.Windows.x64" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.25" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

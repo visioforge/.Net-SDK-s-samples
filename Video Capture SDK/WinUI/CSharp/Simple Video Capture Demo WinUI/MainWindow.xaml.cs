@@ -112,7 +112,7 @@ public sealed partial class MainWindow : Window
 
     private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
     {
-        string filename = await SaveFileDialog(this, "*");
+        string filename = await SaveFileDialog(new List<string>() { ".mp4", ".avi", ".wmv", ".ts", ".mov", ".gif" });
         if (!string.IsNullOrEmpty(filename))
         {
             edOutput.Text = filename;
@@ -271,22 +271,26 @@ public sealed partial class MainWindow : Window
         }
     }
 
-    private static async Task<string> SaveFileDialog(Window window, string defaultExt)
+    private async Task<string> SaveFileDialog(List<string> defaultExts)    
     {
-        FileSavePicker save = new FileSavePicker();
-        save.SuggestedStartLocation = PickerLocationId.VideosLibrary;
-        // save.FileTypeChoices = defaultExt;
+        var picker = new FileSavePicker
+        {
+            SuggestedStartLocation = PickerLocationId.VideosLibrary,
+            SuggestedFileName = "output",
+            DefaultFileExtension = ".mp4"
+        };
+        picker.FileTypeChoices.Add("Video", defaultExts);
 
-        var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
-        WinRT.Interop.InitializeWithWindow.Initialize(save, m_hwnd);
+        var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, m_hwnd);
 
-        var file = await save.PickSaveFileAsync();
+        var file = await picker.PickSaveFileAsync();
         if (file != null)
         {
             return file.Path;
         }
 
-        return null;
+        return string.Empty;
     }
 
     private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)

@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs
 
+## 2025.0.17
+
+* [Media Blocks SDK .Net] Added libCamera source support (can be used on Raspberry Pi)
+
 ## 2025.0.16
 
 * [Media Blocks SDK .Net] Resolved issue with adding several AudioRendererBlocks to the pipeline

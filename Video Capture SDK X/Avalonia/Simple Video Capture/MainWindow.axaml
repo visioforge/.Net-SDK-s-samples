@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
         x:Class="SimpleVideoCaptureA.MainWindow"
         Icon="/Assets/visioforge_main_icon.ico"
-        Title="Simple Video Capture Demo - Media Blocks SDK .Net"  Height="550" Width="864">
+        Title="Simple Video Capture Demo - Video Capture SDK .Net (cross-platform)"  Height="550" Width="864">
 
 	<Grid>
 		<TabControl HorizontalAlignment="Left" Margin="12,12,0,0" Name="tcMain" Width="408" Height="419" VerticalAlignment="Top">
