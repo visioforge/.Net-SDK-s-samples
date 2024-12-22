@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Simple Video Capture (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Simple Video Capture (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
