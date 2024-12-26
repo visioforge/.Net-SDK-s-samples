@@ -111,6 +111,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge Source Switch net6",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "video_from_images net6", "_CodeSnippets\video-from-images\video_from_images net6.csproj", "{5D8FFFB8-F24E-45C3-9E26-ED132B679DA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Face AI MB Demo net6", "WPF\CSharp\Face AI MB Demo\Face AI MB Demo net6.csproj", "{8FD8D8D3-E1A4-442F-877A-4F0A474EF090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live Source Switch Demo net6", "WPF\CSharp\Live Source Switch Demo\Live Source Switch Demo net6.csproj", "{37C5D530-2BD9-4AED-B3A3-1007A4BC558D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "h264-capture-webcam-mb net6", "_CodeSnippets\h264-capture-webcam\h264-capture-webcam-mb net6.csproj", "{3FAE9570-67A5-4B40-B2C8-FFA162B821C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -321,6 +327,18 @@ Global
 		{5D8FFFB8-F24E-45C3-9E26-ED132B679DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D8FFFB8-F24E-45C3-9E26-ED132B679DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D8FFFB8-F24E-45C3-9E26-ED132B679DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD8D8D3-E1A4-442F-877A-4F0A474EF090}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{8FD8D8D3-E1A4-442F-877A-4F0A474EF090}.Debug|Any CPU.Build.0 = Debug|x64
+		{8FD8D8D3-E1A4-442F-877A-4F0A474EF090}.Release|Any CPU.ActiveCfg = Release|x64
+		{8FD8D8D3-E1A4-442F-877A-4F0A474EF090}.Release|Any CPU.Build.0 = Release|x64
+		{37C5D530-2BD9-4AED-B3A3-1007A4BC558D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C5D530-2BD9-4AED-B3A3-1007A4BC558D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C5D530-2BD9-4AED-B3A3-1007A4BC558D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C5D530-2BD9-4AED-B3A3-1007A4BC558D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FAE9570-67A5-4B40-B2C8-FFA162B821C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FAE9570-67A5-4B40-B2C8-FFA162B821C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FAE9570-67A5-4B40-B2C8-FFA162B821C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FAE9570-67A5-4B40-B2C8-FFA162B821C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -377,6 +395,9 @@ Global
 		{E1BD1729-4E0F-4507-B8AF-806BBD50E820} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{25FF48B8-3068-45AA-BB40-29A5AF680ADA} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{5D8FFFB8-F24E-45C3-9E26-ED132B679DA7} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
+		{8FD8D8D3-E1A4-442F-877A-4F0A474EF090} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{37C5D530-2BD9-4AED-B3A3-1007A4BC558D} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{3FAE9570-67A5-4B40-B2C8-FFA162B821C8} = {ED8FF03B-2D67-40FD-80C2-A665599719A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

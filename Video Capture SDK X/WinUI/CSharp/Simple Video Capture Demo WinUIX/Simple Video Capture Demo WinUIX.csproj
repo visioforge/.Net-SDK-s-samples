@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -37,19 +37,18 @@
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
   </ItemGroup>
-	<!--<ItemGroup>
+  <!--<ItemGroup>
 		<None Include="bin\$(Platform)\$(Configuration)\$(TargetFramework)\runtimes\win-$(Platform)\native\*.*">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>-->
-
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.25" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.0.26" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.0.26" />
   </ItemGroup>
   <ItemGroup>
-	<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
-	<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\LogoOverlay.png">

@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo X WPF ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Output Player Demo X net472", "WPF\Decklink Output Player Demo\Decklink Output Player Demo X net472.csproj", "{76E07B6E-4F3F-4997-8D2B-8A741D3780F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Mixer Player net472", "WinForms\Video Mixer Player\Video Mixer Player net472.csproj", "{009E49C8-DF3D-48C8-9F04-2D24914DDE89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,14 @@ Global
 		{76E07B6E-4F3F-4997-8D2B-8A741D3780F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76E07B6E-4F3F-4997-8D2B-8A741D3780F8}.Release|x64.ActiveCfg = Release|Any CPU
 		{76E07B6E-4F3F-4997-8D2B-8A741D3780F8}.Release|x64.Build.0 = Release|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Debug|x64.Build.0 = Debug|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Release|x64.ActiveCfg = Release|Any CPU
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +74,7 @@ Global
 		{9C0E2B13-5228-44A2-897A-1AC6A32F4A36} = {61B10DAA-194E-4450-877B-B39D7120E963}
 		{C6979135-F6EF-4967-B9F8-95E426C9C2E2} = {22F3B0A1-AA83-4A41-A9B3-01DB4B0A005A}
 		{76E07B6E-4F3F-4997-8D2B-8A741D3780F8} = {22F3B0A1-AA83-4A41-A9B3-01DB4B0A005A}
+		{009E49C8-DF3D-48C8-9F04-2D24914DDE89} = {61B10DAA-194E-4450-877B-B39D7120E963}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
