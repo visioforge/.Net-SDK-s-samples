@@ -277,21 +277,9 @@ namespace Decklink_MB_Demo
 
         private void CreateMP4Output()
         {
-            var h264settings = new MFH264EncoderSettings();
+            _videoEncoder = new H264EncoderBlock();
 
-            // GOP size
-            h264settings.GOPSize = 25;
-
-            // quality
-            h264settings.RateControl = MFH264EncoderRCMode.QVBR;
-            h264settings.QP = 15;
-            h264settings.QPB = 15;
-            h264settings.QPP = 15;
-            h264settings.QPI = 15;
-
-            _videoEncoder = new H264EncoderBlock(h264settings);
-
-            _audioEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+            _audioEncoder = new AACEncoderBlock();
 
             var mp4Settings = new MP4SinkSettings(edFilename.Text);
             _muxer = new MP4SinkBlock(mp4Settings);

@@ -234,7 +234,7 @@ namespace Networks_Streamer_Demo
             if (cbPlatform.SelectedIndex != 3)
             {
                 // H264/AAC encoders
-                var h264Settings = new MFH264EncoderSettings() { LowLatency = true, GOPSize = 10 };
+                var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10 };
                 _h264Encoder = new H264EncoderBlock(h264Settings);
 
                 if (audioEnabled)

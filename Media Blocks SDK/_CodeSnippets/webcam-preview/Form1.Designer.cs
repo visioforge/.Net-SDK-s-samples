@@ -39,7 +39,6 @@
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             label28 = new System.Windows.Forms.Label();
-            cbUseBestVideoInputFormat = new System.Windows.Forms.CheckBox();
             label18 = new System.Windows.Forms.Label();
             cbVideoInputFrameRate = new System.Windows.Forms.ComboBox();
             cbVideoInputFormat = new System.Windows.Forms.ComboBox();
@@ -129,7 +128,6 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(label28);
-            tabPage1.Controls.Add(cbUseBestVideoInputFormat);
             tabPage1.Controls.Add(label18);
             tabPage1.Controls.Add(cbVideoInputFrameRate);
             tabPage1.Controls.Add(cbVideoInputFormat);
@@ -154,17 +152,6 @@
             label28.Size = new System.Drawing.Size(37, 25);
             label28.TabIndex = 127;
             label28.Text = "fps";
-            // 
-            // cbUseBestVideoInputFormat
-            // 
-            cbUseBestVideoInputFormat.AutoSize = true;
-            cbUseBestVideoInputFormat.Location = new System.Drawing.Point(260, 131);
-            cbUseBestVideoInputFormat.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            cbUseBestVideoInputFormat.Name = "cbUseBestVideoInputFormat";
-            cbUseBestVideoInputFormat.Size = new System.Drawing.Size(106, 29);
-            cbUseBestVideoInputFormat.TabIndex = 126;
-            cbUseBestVideoInputFormat.Text = "Use best";
-            cbUseBestVideoInputFormat.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -360,7 +347,6 @@
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
             VideoView1.Size = new System.Drawing.Size(667, 579);
-            VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 78;
             // 
             // Form1
@@ -399,7 +385,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.CheckBox cbUseBestVideoInputFormat;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cbVideoInputFrameRate;
         private System.Windows.Forms.ComboBox cbVideoInputFormat;
