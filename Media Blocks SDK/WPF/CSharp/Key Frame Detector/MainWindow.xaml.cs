@@ -46,6 +46,11 @@ namespace key_frame_detector_mb
                     var pos = await _pipeline.Position_GetAsync();
                     var dur = await _pipeline.DurationAsync();
 
+                    if (dur.Ticks == 0)
+                    {
+                        return;
+                    }
+
                     var progress = (int)(100 * pos.Ticks / dur.Ticks);
 
                     await Dispatcher.InvokeAsync(() =>
