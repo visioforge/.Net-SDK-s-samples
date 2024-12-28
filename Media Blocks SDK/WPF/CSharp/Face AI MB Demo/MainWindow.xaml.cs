@@ -4,14 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using System.Diagnostics;
 
@@ -20,6 +12,7 @@ using VisioForge.Core.Types.X;
 using VisioForge.Core.FaceAI;
 using VisioForge.Core.UI.WPF.Dialogs.Sources;
 using VisioForge.Core;
+using System.IO;
 
 namespace Face_AI_MB_Demo
 {
@@ -67,8 +60,11 @@ namespace Face_AI_MB_Demo
             var files = System.IO.Directory.GetFiles(edImagesKnown.Text);
             await _core.AddKnownPersonsAsync(files);
 
-            // load images to detect
-            files = System.IO.Directory.GetFiles(edImagesToDetect.Text);
+            // load images to detect (JPEG, PNG, BMP)
+            var exts = new string[] { ".jpg", ".png", ".bmp", "*.jpeg" };
+            files = Directory.GetFiles(edImagesToDetect.Text, "*.*", SearchOption.AllDirectories)
+                .Where(s => exts.Contains(Path.GetExtension(s).ToLower())).ToArray();
+
             var unknownPersons = new List<Person>();
             foreach (var file in files)
             {

@@ -14,7 +14,8 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.0.28" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.0.28" />
-    <PackageReference Include="VisioForge.DotNet.Core.FaceAI" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.FaceAI" Version="2025.0.28" />
+    <PackageReference Include="VisioForge.FaceAI.Models" Version="2025.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
