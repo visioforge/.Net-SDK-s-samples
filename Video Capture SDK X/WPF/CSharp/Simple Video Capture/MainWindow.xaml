@@ -38,6 +38,7 @@
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Height="23" x:Name="cbOutputFormat" VerticalAlignment="Top" HorizontalAlignment="Left" Width="300" SelectedIndex="0" SelectionChanged="cbOutputFormat_SelectionChanged">
                                 <ComboBoxItem Content="MP4" />
+                                <ComboBoxItem Content="MP4 (Fragmented, 10 sec)" />
                                 <ComboBoxItem Content="AVI" />
                                 <ComboBoxItem Content="WebM" />
                                 <ComboBoxItem Content="MPEG-TS" />

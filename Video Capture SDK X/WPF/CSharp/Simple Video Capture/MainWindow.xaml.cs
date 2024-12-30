@@ -17,6 +17,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.VideoEffects;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.Types.X.VideoEffects;
@@ -364,6 +365,21 @@ namespace Simple_Video_Capture
                         }
                     case 1:
                         {
+                            if (mp4SettingsDialog == null)
+                            {
+                                var mp4 = new MP4Output(edOutput.Text);
+                                mp4.Sink = new MP4SplitSinkSettings(edOutput.Text) { SplitDuration = TimeSpan.FromSeconds(10)};
+                                VideoCapture1.Outputs_Add(mp4, false);
+                            }
+                            else
+                            {
+                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), false);
+                            }
+
+                            break;
+                        }
+                    case 2:
+                        {
                             if (aviSettingsDialog == null)
                             {
                                 VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), false);
@@ -375,7 +391,7 @@ namespace Simple_Video_Capture
 
                             break;
                         }
-                    case 2:
+                    case 3:
                         {
                             if (webMSettingsDialog == null)
                             {
@@ -388,7 +404,7 @@ namespace Simple_Video_Capture
                             
                             break;
                         }
-                    case 3:
+                    case 4:
                         {
                             if (mpegTSSettingsDialog == null)
                             {
@@ -402,7 +418,7 @@ namespace Simple_Video_Capture
 
                             break;
                         }
-                    case 4:
+                    case 5:
                         {
                             if (movSettingsDialog == null)
                             {
@@ -570,6 +586,7 @@ namespace Simple_Video_Capture
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
+                case 1:
                     {
                         MP4Output mp4;
                         if (mp4SettingsDialog == null)
@@ -586,7 +603,7 @@ namespace Simple_Video_Capture
 
                         break;
                     }
-                case 1:
+                case 2:
                     {
                         AVIOutput avi;
                         if (aviSettingsDialog == null)
@@ -603,7 +620,7 @@ namespace Simple_Video_Capture
 
                         break;
                     }
-                case 2:
+                case 3:
                     {
                         WebMOutput webm;
                         if (webMSettingsDialog == null)
@@ -620,7 +637,7 @@ namespace Simple_Video_Capture
 
                         break;
                     }
-                case 3:
+                case 4:
                     {
                         MPEGTSOutput ts;
                         if (mpegTSSettingsDialog == null)
@@ -637,7 +654,7 @@ namespace Simple_Video_Capture
                         
                         break;
                     }
-                case 4:
+                case 5:
                     {
                         MOVOutput mov;
                         if (movSettingsDialog == null)
@@ -667,26 +684,27 @@ namespace Simple_Video_Capture
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
+                case 1:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
-                case 1:
+                case 2:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
-                case 2:
+                case 3:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm"); 
                         break;
                     }
-                case 3:
+                case 4:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ts");
                         break;
                     }
-                case 4:
+                case 5:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mov");
                         break;
@@ -841,7 +859,30 @@ namespace Simple_Video_Capture
 
         private async void btStartCapture(object sender, RoutedEventArgs e)
         {
-            await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
+            if (VideoCapture1 == null)
+            {
+                return;
+            }
+
+            if (VideoCapture1.Outputs_Count() == 0)
+            {
+                MessageBox.Show("Please add output first.");
+                return;
+            }
+
+            var output = VideoCapture1.Outputs_Get(0);
+
+            // check if it is split MP4 sink to create segmented file
+            if (output is MP4Output mp4 && mp4.Sink is MP4SplitSinkSettings)
+            {
+                var filename = Path.Combine(Path.GetDirectoryName(edOutput.Text), Path.GetFileNameWithoutExtension(edOutput.Text) + "_%02d.mp4");
+                await VideoCapture1.StartCaptureAsync(0, filename);
+            }
+            else
+            {
+                await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
+            }
+            
         }
 
         private async void btStopCapture(object sender, RoutedEventArgs e)
