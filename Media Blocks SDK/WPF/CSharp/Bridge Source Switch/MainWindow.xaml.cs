@@ -126,7 +126,7 @@ namespace Bridge_Source_Switch
                 new BridgeVideoSinkSettings(VIDEO_ID, new VideoFrameInfoX(VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FRAME_RATE)));
             _pipelineSource1.Connect(_videoSource1, _videoBridgeSink1);
 
-            _audioSource1 = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings(AUDIO_SAMPLE_RATE, AUDIO_CHANNELS, AUDIO_FORMAT));
+            _audioSource1 = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings(VirtualAudioSourceSettingsWave.Sine, AUDIO_SAMPLE_RATE, AUDIO_CHANNELS, AUDIO_FORMAT));
             _audioBridgeSink1 = new BridgeAudioSinkBlock(
                 new BridgeAudioSinkSettings(AUDIO_ID, new AudioInfoX(AUDIO_FORMAT, AUDIO_SAMPLE_RATE, AUDIO_CHANNELS)));
             _pipelineSource1.Connect(_audioSource1, _audioBridgeSink1);
@@ -140,7 +140,7 @@ namespace Bridge_Source_Switch
                 new BridgeVideoSinkSettings(VIDEO_ID, new VideoFrameInfoX(VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FRAME_RATE)));
             _pipelineSource2.Connect(_videoSource2, _videoBridgeSink2);
 
-            _audioSource2 = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings(AUDIO_SAMPLE_RATE, AUDIO_CHANNELS, AUDIO_FORMAT));
+            _audioSource2 = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings(VirtualAudioSourceSettingsWave.Sine, AUDIO_SAMPLE_RATE, AUDIO_CHANNELS, AUDIO_FORMAT));
             _audioSource2.Settings.Wave = VirtualAudioSourceSettingsWave.Ticks;
             _audioBridgeSink2 = new BridgeAudioSinkBlock(
                 new BridgeAudioSinkSettings(AUDIO_ID, new AudioInfoX(AUDIO_FORMAT, AUDIO_SAMPLE_RATE, AUDIO_CHANNELS)));
