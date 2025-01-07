@@ -7,7 +7,15 @@ hide_table_of_contents: true
 
 # Changelog
 
-Changes and updates for all .Net SDKs
+Changes and updates for all .Net SDKs.
+
+## 2025.1.0
+
+* [Cross-platform] Updated Live Video Compositor engine. Improved Decklink support for input and output. Improved performance. The new engine classes are located in the `VisioForge.Core.LiveVideoCompositorV2` namespace.
+
+## 2025.0.29
+
+* [Cross-platform] Default video renderer on Windows has been changed to Direct 11
 
 ## 2025.0.17
 
