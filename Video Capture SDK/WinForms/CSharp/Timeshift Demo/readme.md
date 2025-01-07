@@ -16,6 +16,7 @@ The application showcases features like selecting capture devices, configuring v
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

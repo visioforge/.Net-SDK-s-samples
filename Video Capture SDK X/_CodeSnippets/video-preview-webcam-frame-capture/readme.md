@@ -10,6 +10,7 @@ This code snippet demonstrates how to preview video from a webcam and capture fr
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

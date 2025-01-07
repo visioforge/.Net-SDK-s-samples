@@ -14,6 +14,7 @@ It supports displaying up to four video streams simultaneously on different pane
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

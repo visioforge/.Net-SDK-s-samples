@@ -16,6 +16,7 @@ Este ejemplo muestra la integración de las potentes capacidades de captura de v
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -12,6 +12,7 @@ Muestra cómo configurar el SDK, abrir un cuadro de diálogo de archivo, leer y 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

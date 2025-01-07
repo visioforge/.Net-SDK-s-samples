@@ -12,6 +12,7 @@ Muestra cómo manejar la selección de archivos multimedia, implementar operacio
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

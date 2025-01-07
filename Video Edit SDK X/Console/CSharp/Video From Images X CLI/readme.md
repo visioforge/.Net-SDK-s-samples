@@ -16,6 +16,7 @@ The process involves initializing the video editor, configuring video properties
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

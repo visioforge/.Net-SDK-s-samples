@@ -14,6 +14,7 @@ It includes handling channel tuning and allows for user interaction to select de
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

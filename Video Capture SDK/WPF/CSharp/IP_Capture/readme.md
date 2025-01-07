@@ -18,6 +18,7 @@ The code demonstrates asynchronous task management for initializing the video ca
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ The application allows users to add input files, configure output settings, and 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

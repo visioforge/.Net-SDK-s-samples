@@ -14,6 +14,7 @@ This example showcases how to use the VisioForge library to capture video from h
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ La interfaz de usuario incluye opciones para seleccionar imágenes de entrada, a
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

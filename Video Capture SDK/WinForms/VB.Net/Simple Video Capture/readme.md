@@ -16,6 +16,7 @@ The sample also showcases how to apply video effects, handle video capture setti
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

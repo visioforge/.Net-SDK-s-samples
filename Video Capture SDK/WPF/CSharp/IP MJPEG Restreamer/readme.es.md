@@ -16,6 +16,7 @@ Además, el SDK habilita el control de cámaras ONVIF, lo que permite el descubr
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

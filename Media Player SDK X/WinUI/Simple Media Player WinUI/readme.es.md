@@ -12,6 +12,7 @@ Cuenta con una interfaz fácil de usar que permite a los usuarios abrir, reprodu
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

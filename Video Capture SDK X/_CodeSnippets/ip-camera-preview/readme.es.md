@@ -10,6 +10,7 @@ Este fragmento de código muestra cómo previsualizar vídeo de una cámara IP u
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

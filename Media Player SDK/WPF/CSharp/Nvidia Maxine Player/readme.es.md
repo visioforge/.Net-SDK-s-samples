@@ -14,6 +14,7 @@ El código incluye la gestión de eventos para errores de reproducción y evento
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

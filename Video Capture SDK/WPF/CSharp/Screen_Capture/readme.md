@@ -18,6 +18,7 @@ This example is designed for developers looking to integrate advanced screen cap
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

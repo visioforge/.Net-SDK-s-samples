@@ -14,6 +14,7 @@ The application allows for real-time face detection within the video stream, dis
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

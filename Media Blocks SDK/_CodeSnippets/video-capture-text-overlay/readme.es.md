@@ -20,6 +20,7 @@ Este ejemplo del SDK muestra cómo capturar vídeo de una cámara web, superpone
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

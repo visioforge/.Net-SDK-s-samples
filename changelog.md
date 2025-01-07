@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.1
+
+* [Cross-platform] Resolved memory leak in `OverlayManagerImage`
+
 ## 2025.1.0
 
 * [Cross-platform] Updated Live Video Compositor engine. Improved Decklink support for input and output. Improved performance. The new engine classes are located in the `VisioForge.Core.LiveVideoCompositorV2` namespace.

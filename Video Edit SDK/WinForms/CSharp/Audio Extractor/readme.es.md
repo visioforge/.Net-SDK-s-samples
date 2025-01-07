@@ -16,6 +16,7 @@ La aplicación ofrece una interfaz de usuario con opciones para iniciar y detene
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -14,6 +14,7 @@ Esta aplicación permite a los usuarios unir múltiples archivos de vídeo, ofre
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

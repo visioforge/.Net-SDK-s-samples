@@ -14,6 +14,7 @@ It includes functionality to start and stop video capture asynchronously, showca
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

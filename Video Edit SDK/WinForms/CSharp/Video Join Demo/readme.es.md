@@ -16,6 +16,7 @@ La aplicación permite a los usuarios añadir archivos de entrada, configurar lo
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

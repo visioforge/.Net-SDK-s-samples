@@ -16,6 +16,7 @@ El proceso incluye la inicialización del editor de vídeo, la configuración de
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ The code leverages asynchronous programming patterns for initializing and contro
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

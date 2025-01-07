@@ -14,6 +14,7 @@ It leverages VisioForge's capabilities for memory stream playback, demonstrating
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

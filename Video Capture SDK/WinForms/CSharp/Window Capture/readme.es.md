@@ -16,6 +16,7 @@ El código también demuestra la integración de cuadros de diálogo personaliza
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

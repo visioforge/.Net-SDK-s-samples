@@ -14,6 +14,7 @@ The code encapsulates various features such as real-time video preview ad record
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

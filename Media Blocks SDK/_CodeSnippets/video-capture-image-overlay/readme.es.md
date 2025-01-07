@@ -10,6 +10,7 @@ Este fragmento de código muestra cómo capturar vídeo de una cámara web y sup
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

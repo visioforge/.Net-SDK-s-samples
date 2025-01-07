@@ -16,6 +16,7 @@ La muestra también muestra cómo aplicar efectos de vídeo, manejar los ajustes
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -10,6 +10,7 @@ This code snippet demonstrates how to capture audio from a speaker using Video C
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

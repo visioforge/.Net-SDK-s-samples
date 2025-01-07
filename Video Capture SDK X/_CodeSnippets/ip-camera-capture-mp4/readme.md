@@ -10,6 +10,7 @@ This code snippet demonstrates how to capture video from an IP camera and save i
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

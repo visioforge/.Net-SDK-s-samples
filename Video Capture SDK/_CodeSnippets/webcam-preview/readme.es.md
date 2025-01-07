@@ -12,6 +12,7 @@ Incluye el manejo de eventos para iniciar, detener, pausar y reanudar el flujo d
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

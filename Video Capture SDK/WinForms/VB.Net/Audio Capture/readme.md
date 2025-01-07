@@ -14,6 +14,7 @@ It supports multiple output formats, including MP3, WMA, OGG, FLAC, and M4A, wit
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -12,6 +12,7 @@ It initializes the video capture component, configures screen capture settings f
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

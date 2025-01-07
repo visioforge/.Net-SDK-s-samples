@@ -16,6 +16,7 @@ Además, gestiona la inicialización asíncrona del motor de captura de vídeo, 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -12,6 +12,7 @@ It includes event handling for starting, stopping, pausing, and resuming the vid
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

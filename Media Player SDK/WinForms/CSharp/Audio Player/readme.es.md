@@ -14,3 +14,4 @@ El código destaca el uso de operaciones asíncronas para el control de la repro
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9

@@ -14,6 +14,7 @@ This application allows users to join multiple video files, offering features su
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

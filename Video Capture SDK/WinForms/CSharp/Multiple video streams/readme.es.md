@@ -16,6 +16,7 @@ Además, el código incluye la gestión de errores y el registro, demuestra cóm
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -17,6 +17,7 @@ This SDK sample shows how to capture the screen and save it to an AVI file.
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

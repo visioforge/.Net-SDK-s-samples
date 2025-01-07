@@ -18,6 +18,7 @@ The sample is structured within a `MainWindowViewModel` class, leveraging Prism'
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

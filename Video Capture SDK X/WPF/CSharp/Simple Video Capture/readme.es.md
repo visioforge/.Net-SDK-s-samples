@@ -16,6 +16,7 @@ La interfaz de usuario ofrece opciones para iniciar, pausar, reanudar y detener 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

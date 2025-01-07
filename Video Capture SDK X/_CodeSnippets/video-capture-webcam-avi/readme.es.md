@@ -10,6 +10,7 @@ Este fragmento de código demuestra cómo capturar vídeo desde un dispositivo d
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

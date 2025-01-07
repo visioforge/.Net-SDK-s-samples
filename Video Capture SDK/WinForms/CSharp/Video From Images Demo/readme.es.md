@@ -16,6 +16,7 @@ Incluye la gestión de eventos para errores y el procesamiento de mapas de bits 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

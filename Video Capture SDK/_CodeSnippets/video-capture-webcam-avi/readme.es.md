@@ -14,6 +14,7 @@ Este ejemplo muestra cómo utilizar la librería VisioForge para capturar vídeo
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

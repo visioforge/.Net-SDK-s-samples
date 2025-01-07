@@ -14,6 +14,7 @@ It includes event handlers to log errors and update the UI with the current capt
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

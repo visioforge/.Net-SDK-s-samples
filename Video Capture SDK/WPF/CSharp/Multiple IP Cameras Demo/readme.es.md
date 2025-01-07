@@ -18,6 +18,7 @@ La aplicación incluye la gestión de errores para registrar los problemas duran
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

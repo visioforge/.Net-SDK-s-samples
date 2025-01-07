@@ -16,6 +16,7 @@ Los usuarios pueden personalizar los parámetros de salida, como la resolución,
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

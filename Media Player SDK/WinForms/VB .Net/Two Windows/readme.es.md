@@ -12,6 +12,7 @@ Muestra funcionalidades como reproducir, pausar, reanudar y detener archivos mul
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

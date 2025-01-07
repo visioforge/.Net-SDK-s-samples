@@ -14,6 +14,7 @@ Incluye el manejo de la sintonización de canales y permite la interacción del 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

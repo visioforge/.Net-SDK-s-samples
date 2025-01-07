@@ -14,6 +14,7 @@ Los usuarios pueden interactuar con los controles PTZ de la cámara (si están d
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

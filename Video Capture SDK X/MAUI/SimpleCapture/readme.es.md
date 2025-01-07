@@ -12,6 +12,7 @@ El código incluye la gestión de eventos para iniciar y detener la previsualiza
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

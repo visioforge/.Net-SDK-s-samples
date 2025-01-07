@@ -12,6 +12,7 @@ El programa ofrece la opción de capturar los medios en formato AVI o MP4, segú
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

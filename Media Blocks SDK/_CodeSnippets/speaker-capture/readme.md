@@ -15,6 +15,7 @@ This SDK sample shows how to capture the speaker audio stream and save it to an 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

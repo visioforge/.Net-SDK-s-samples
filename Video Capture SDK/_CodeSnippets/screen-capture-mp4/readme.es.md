@@ -12,6 +12,7 @@ Inicializa el componente de captura de vídeo, configura los ajustes de captura 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

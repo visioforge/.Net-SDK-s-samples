@@ -10,6 +10,7 @@ This code snippet demonstrates how to capture the screen and save it to a WMV fi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

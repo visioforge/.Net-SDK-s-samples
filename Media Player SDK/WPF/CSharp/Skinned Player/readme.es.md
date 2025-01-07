@@ -16,6 +16,7 @@ Este ejemplo de SDK muestra cómo crear una aplicación de reproductor multimedi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

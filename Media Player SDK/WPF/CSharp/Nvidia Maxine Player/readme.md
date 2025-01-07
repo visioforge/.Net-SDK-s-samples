@@ -14,6 +14,7 @@ The code includes event handling for media playback errors and stop events, UI i
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -12,6 +12,7 @@ It provides functionality to start and stop video preview from a selected webcam
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

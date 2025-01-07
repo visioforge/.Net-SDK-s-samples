@@ -10,6 +10,7 @@ Este fragmento de código demuestra cómo capturar audio de un altavoz utilizand
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ Los desarrolladores pueden integrar fácilmente la selección de entrada de arch
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

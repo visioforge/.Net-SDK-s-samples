@@ -14,6 +14,7 @@ La aplicación está diseñada para proporcionar una rica experiencia multimedia
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

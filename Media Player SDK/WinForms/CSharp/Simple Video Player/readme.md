@@ -10,6 +10,7 @@ This sample SDK describes a simple video player application developed using the 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

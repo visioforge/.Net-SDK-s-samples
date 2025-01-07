@@ -17,6 +17,7 @@ Este ejemplo del SDK muestra cómo capturar la pantalla y guardarla en un archiv
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

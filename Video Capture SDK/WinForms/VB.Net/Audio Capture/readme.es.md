@@ -14,6 +14,7 @@ Admite varios formatos de salida, como MP3, WMA, OGG, FLAC y M4A, con ajustes pe
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

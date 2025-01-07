@@ -14,6 +14,7 @@ Presenta una interfaz fácil de usar que permite seleccionar los archivos de ent
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

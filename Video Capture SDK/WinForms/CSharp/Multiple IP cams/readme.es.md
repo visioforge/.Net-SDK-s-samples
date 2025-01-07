@@ -16,6 +16,7 @@ El código aprovecha los patrones de programación asíncrona para inicializar y
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

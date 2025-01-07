@@ -14,6 +14,7 @@ Additionally, it showcases the handling of media playback events such as play, p
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

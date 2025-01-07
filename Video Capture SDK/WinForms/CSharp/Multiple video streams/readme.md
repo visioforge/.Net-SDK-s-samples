@@ -16,6 +16,7 @@ Additionally, the code includes error handling and logging, demonstrates how to 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

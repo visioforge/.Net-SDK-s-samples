@@ -14,6 +14,7 @@ Además, la aplicación demuestra cómo enumerar las cámaras IP en la red local
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

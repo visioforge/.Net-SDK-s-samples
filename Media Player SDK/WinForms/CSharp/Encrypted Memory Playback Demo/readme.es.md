@@ -10,6 +10,7 @@ Explore la reproducción de memoria cifrada con este ejemplo del SDK. Utilizando
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

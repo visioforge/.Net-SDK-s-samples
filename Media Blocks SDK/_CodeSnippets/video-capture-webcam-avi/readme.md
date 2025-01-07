@@ -19,6 +19,7 @@ This SDK sample shows how to capture video from a webcam and save it to an AVI f
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

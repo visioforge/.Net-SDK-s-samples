@@ -19,6 +19,7 @@ The sample, powered by the VisioForge Media Blocks SDK .Net, showcases a compreh
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

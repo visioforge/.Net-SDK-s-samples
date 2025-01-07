@@ -17,6 +17,7 @@ This SDK sample shows how to play RAW H264 data from file or network stream usin
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -14,6 +14,7 @@ El código encapsula varias funciones, como la previsualización y grabación de
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -12,6 +12,7 @@ Configura la captura de vídeo utilizando el códec MJPEG para vídeo y PCM para
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

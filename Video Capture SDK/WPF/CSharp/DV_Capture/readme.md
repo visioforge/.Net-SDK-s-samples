@@ -16,6 +16,7 @@ Additionally, the application demonstrates handling of audio and video inputs/ou
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

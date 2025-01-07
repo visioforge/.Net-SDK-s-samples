@@ -12,6 +12,7 @@ Además, cubre la gestión del ciclo de vida de la sesión de captura de vídeo,
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

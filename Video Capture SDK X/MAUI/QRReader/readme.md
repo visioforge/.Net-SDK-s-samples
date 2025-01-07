@@ -12,6 +12,7 @@ Additionally, it covers the lifecycle management of the video capture session, i
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

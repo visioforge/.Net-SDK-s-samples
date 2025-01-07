@@ -14,6 +14,7 @@ Users can configure video and audio source settings, select output formats, and 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

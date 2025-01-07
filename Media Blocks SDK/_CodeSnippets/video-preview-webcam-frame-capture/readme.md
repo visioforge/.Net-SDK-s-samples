@@ -18,6 +18,7 @@ This SDK sample shows how to capture video from a webcam and display it in a win
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

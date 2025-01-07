@@ -14,6 +14,7 @@ Users can interact with the camera's PTZ controls (if available), configure vide
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

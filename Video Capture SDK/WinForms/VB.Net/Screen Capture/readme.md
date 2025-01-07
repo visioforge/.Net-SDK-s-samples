@@ -16,6 +16,7 @@ The application provides functionality for starting, pausing, resuming, and stop
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

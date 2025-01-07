@@ -24,6 +24,7 @@ The code also highlights event handling for media playback controls and demonstr
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

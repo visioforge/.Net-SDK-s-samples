@@ -16,6 +16,7 @@ It features a graphical user interface for user interactions, such as choosing a
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

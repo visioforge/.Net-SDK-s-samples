@@ -18,6 +18,7 @@ Además, ofrece soporte para diferentes formatos de salida como AVI, WMV, MP4 y 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

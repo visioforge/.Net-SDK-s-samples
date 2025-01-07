@@ -12,6 +12,7 @@ La demo muestra cómo previsualizar o capturar vídeo de cámaras que soportan e
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

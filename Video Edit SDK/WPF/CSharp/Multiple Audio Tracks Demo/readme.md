@@ -16,6 +16,7 @@ It features an intuitive GUI for adding video and two separate audio tracks, mer
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
   ---
 

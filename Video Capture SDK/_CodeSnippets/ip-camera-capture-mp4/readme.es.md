@@ -14,6 +14,7 @@ Incluye funcionalidad para iniciar y detener la captura de vídeo de forma asín
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

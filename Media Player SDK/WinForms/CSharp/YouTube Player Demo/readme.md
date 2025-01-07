@@ -12,6 +12,7 @@ The sample includes error handling to improve reliability and user experience.
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

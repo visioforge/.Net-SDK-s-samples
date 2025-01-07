@@ -12,6 +12,7 @@ It also includes functionalities for selecting video files, adjusting volume and
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

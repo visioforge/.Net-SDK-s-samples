@@ -18,6 +18,7 @@ El ejemplo muestra cómo capturar vídeo de una cámara IP y guardarlo en un arc
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

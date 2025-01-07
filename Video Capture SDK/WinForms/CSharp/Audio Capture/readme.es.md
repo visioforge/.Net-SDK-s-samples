@@ -18,6 +18,7 @@ Este SDK es ideal para desarrolladores que deseen añadir funciones avanzadas de
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

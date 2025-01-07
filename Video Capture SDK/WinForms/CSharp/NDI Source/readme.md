@@ -16,6 +16,7 @@ Additionally, the application demonstrates how to update UI elements with record
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

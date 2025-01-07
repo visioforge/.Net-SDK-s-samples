@@ -16,6 +16,7 @@ Esta muestra está diseñada para desarrolladores que buscan incorporar funcione
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

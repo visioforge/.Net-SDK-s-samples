@@ -18,6 +18,7 @@ It leverages the VisioForge SDK's capabilities for video capture, processing, an
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

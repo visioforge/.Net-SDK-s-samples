@@ -16,6 +16,7 @@ It features event handling for errors and video frame bitmap processing, allowin
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -18,6 +18,7 @@ La muestra está estructurada dentro de una clase `MainWindowViewModel`, aprovec
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

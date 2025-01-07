@@ -19,6 +19,7 @@ Traducción realizada con la versión gratuita del traductor DeepL.com
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

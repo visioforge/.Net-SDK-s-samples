@@ -14,6 +14,7 @@ A través de su interfaz gráfica de usuario, los usuarios pueden interactuar co
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

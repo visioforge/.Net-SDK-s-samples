@@ -12,6 +12,7 @@ It features a user-friendly interface that allows users to open, play, pause, re
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -14,6 +14,7 @@ Este ejemplo está diseñado para formar parte de una aplicación Windows Forms,
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

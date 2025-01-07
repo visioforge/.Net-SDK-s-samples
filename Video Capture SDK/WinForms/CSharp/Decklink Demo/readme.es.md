@@ -18,6 +18,7 @@ Además, muestra cómo manejar la amplificación de audio y la selección de dis
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

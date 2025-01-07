@@ -16,6 +16,7 @@ Presenta una GUI intuitiva para añadir vídeo y dos pistas de audio separadas, 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
   ---
 

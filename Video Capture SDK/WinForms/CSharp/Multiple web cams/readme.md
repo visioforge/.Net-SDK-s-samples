@@ -16,6 +16,7 @@ The application supports selecting different video devices and configurations, s
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

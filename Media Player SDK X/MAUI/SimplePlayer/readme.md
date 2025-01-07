@@ -15,6 +15,7 @@ The code also includes loading media from a file picker, displaying media durati
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

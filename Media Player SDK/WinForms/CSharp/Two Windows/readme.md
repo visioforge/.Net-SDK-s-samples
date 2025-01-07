@@ -12,6 +12,7 @@ It showcases the use of the `MediaPlayerCore` class to handle media playback, in
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

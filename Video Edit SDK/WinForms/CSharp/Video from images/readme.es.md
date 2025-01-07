@@ -16,6 +16,7 @@ La aplicación ofrece una interfaz gráfica de usuario para añadir archivos de 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

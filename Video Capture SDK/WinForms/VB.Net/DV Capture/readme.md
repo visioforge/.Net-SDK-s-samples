@@ -16,6 +16,7 @@ Users can customize output settings through dialogs for specific formats, includ
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

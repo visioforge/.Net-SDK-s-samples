@@ -16,6 +16,7 @@ La aplicación permite seleccionar diferentes dispositivos de vídeo y configura
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

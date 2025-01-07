@@ -16,6 +16,7 @@ This SDK sample demonstrates how to create a skinned media player application us
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

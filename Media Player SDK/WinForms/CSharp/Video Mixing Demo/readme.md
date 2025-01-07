@@ -12,6 +12,7 @@ The code covers initializing and disposing of the media player, handling playbac
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

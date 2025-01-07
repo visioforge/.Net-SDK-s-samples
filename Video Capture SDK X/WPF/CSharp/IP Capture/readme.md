@@ -16,6 +16,7 @@ It also includes dialogs for configuring encoding settings for different output 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

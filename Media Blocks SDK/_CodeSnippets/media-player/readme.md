@@ -16,6 +16,7 @@ This SDK sample shows how to create a simple media player application using Medi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

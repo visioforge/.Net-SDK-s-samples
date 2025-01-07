@@ -12,6 +12,7 @@ Proporciona funcionalidad para iniciar y detener la previsualización de vídeo 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

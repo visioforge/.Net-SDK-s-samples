@@ -16,6 +16,7 @@ The sample also demonstrates handling user interactions for starting, pausing, r
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

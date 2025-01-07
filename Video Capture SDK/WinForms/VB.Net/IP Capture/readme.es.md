@@ -18,6 +18,7 @@ También demuestra la integración de la gestión de fuentes de red, incluyendo 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

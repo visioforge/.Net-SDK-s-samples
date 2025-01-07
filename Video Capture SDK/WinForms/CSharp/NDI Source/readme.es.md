@@ -16,6 +16,7 @@ Además, la aplicación demuestra cómo actualizar los elementos de la interfaz 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

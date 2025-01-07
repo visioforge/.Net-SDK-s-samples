@@ -10,6 +10,7 @@ Explore encrypted memory playback with this SDK sample. Utilizing VisioForge's c
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

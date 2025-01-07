@@ -18,6 +18,7 @@ Additionally, it showcases how to handle audio amplification and selection of au
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

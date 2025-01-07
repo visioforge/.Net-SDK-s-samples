@@ -18,6 +18,7 @@ Aprovecha las capacidades del SDK de VisioForge para la captura, el procesamient
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

@@ -12,6 +12,7 @@ It configures the video capture using the MJPEG codec for video, and PCM for aud
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

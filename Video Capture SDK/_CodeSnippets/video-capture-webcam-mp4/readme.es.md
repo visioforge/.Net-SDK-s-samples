@@ -12,6 +12,7 @@ El ejemplo incluye la inicialización del núcleo de captura de vídeo, la confi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

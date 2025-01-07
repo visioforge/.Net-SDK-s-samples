@@ -14,6 +14,7 @@ Además, muestra el manejo de eventos de reproducción multimedia como reproducc
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

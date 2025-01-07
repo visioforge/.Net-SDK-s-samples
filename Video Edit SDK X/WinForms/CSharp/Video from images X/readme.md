@@ -16,6 +16,7 @@ The UI includes options to select input images, adjust video settings, and start
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

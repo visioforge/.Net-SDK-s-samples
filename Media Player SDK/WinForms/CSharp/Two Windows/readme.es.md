@@ -12,6 +12,7 @@ Muestra el uso de la clase `MediaPlayerCore` para manejar la reproducción multi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ Además, incluye una configuración de transmisión en red con RTMP y FFMPEG, lo
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

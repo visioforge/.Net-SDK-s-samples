@@ -12,6 +12,7 @@ Experience high-quality video rendering using the madVR video renderer.
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

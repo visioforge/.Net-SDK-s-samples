@@ -14,6 +14,7 @@ It features a user-friendly interface allowing for the selection of input and ou
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   
 ---
 

@@ -14,4 +14,5 @@ The demo shows how to preview or capture video from cameras that support GenICam
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
   

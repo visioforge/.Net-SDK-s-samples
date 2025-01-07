@@ -12,6 +12,7 @@ El ejemplo destaca la facilidad de integrar la funcionalidad de captura de panta
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

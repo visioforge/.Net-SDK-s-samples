@@ -18,6 +18,7 @@ This SDK is ideal for developers looking to add advanced audio recording and pro
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

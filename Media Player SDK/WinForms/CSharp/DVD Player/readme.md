@@ -12,6 +12,7 @@ The sample provides intuitive controls for playback manipulation, such as play, 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

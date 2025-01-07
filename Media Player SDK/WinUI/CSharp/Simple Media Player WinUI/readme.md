@@ -12,6 +12,7 @@ The application also includes a custom video background setting and periodically
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

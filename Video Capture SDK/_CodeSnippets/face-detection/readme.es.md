@@ -14,6 +14,7 @@ La aplicación permite la detección de rostros en tiempo real dentro del flujo 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

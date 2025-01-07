@@ -16,6 +16,7 @@ Cuenta con una interfaz gráfica de usuario para interacciones con el usuario, c
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

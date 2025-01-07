@@ -18,6 +18,7 @@ El ejemplo también ilustra el uso del renderizador de vídeo madVR para mejorar
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

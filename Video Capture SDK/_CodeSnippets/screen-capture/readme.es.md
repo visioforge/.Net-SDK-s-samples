@@ -12,6 +12,7 @@ Los usuarios pueden iniciar, pausar, reanudar y detener el proceso de captura. A
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -18,6 +18,7 @@ It also demonstrates the integration of network source management, including ONV
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -10,6 +10,7 @@ Este SDK de ejemplo describe una sencilla aplicación de reproducción de vídeo
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

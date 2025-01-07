@@ -12,6 +12,7 @@ El ejemplo incluye la gestión de errores para mejorar la fiabilidad y la experi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

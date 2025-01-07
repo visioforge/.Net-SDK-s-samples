@@ -16,6 +16,7 @@ Presenta características avanzadas como soporte de aceleración por hardware, e
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

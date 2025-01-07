@@ -18,6 +18,7 @@ The sample shows how to capture video from an IP camera and save it to an MP4 fi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

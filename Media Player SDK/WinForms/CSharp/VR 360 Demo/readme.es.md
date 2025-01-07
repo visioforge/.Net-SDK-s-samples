@@ -12,6 +12,7 @@ También incluye funcionalidades para seleccionar archivos de vídeo, ajustar el
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

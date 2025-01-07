@@ -18,6 +18,7 @@ The sample also illustrates the madVR video renderer usage for enhanced video pl
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ También incluye cuadros de diálogo para configurar los ajustes de codificació
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

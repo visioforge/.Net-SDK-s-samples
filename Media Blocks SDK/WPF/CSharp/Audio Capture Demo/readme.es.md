@@ -12,6 +12,7 @@ La muestra, desarrollada por VisioForge Media Blocks SDK .Net, muestra un ejempl
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

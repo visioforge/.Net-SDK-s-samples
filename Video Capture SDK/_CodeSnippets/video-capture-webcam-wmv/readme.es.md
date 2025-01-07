@@ -14,6 +14,7 @@ El ejemplo es ideal para desarrolladores que deseen implementar funciones de cap
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

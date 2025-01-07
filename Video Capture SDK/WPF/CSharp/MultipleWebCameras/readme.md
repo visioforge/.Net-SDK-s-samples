@@ -18,6 +18,7 @@ The code provides a practical example of managing multiple video capture sources
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

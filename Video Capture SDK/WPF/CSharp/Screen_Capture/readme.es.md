@@ -18,6 +18,7 @@ Este ejemplo está diseñado para desarrolladores que buscan integrar capacidade
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

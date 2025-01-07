@@ -12,6 +12,7 @@ It supports starting and stopping the camera preview asynchronously with buttons
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

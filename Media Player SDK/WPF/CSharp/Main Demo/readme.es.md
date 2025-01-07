@@ -22,6 +22,7 @@ El ejemplo incluye el uso de efectos de audio como ecualizador y amplificación 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

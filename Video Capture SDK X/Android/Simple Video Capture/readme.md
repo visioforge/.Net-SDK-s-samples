@@ -16,6 +16,7 @@ This example showcases the integration of VisioForge's powerful video capture ca
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

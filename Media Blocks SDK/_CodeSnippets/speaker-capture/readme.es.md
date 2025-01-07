@@ -15,6 +15,7 @@ Este ejemplo del SDK muestra cómo capturar el flujo de audio del altavoz y guar
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

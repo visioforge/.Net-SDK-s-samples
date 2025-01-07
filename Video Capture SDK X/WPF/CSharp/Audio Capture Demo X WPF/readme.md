@@ -18,6 +18,7 @@ This sample demonstrates how to enumerate audio devices, select input and output
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

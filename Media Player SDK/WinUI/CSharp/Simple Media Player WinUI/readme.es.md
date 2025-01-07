@@ -12,6 +12,7 @@ La aplicación también incluye una configuración personalizada del fondo de v�
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

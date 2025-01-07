@@ -16,6 +16,7 @@ The user interface provides options for starting, pausing, resuming, and stoppin
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

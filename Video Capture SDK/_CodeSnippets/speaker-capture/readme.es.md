@@ -14,6 +14,7 @@ Incluye controladores de eventos para registrar errores y actualizar la interfaz
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

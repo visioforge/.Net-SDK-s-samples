@@ -14,6 +14,7 @@ Los usuarios pueden configurar las fuentes de vídeo y audio, seleccionar los fo
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

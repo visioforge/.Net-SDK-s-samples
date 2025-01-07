@@ -22,6 +22,7 @@ This SDK sample demonstrates how to create a media player application using vari
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

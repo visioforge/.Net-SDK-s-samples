@@ -16,6 +16,7 @@ The code also demonstrates the integration of custom dialogs for configuring spe
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

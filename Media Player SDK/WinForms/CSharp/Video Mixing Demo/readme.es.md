@@ -12,6 +12,7 @@ El código cubre la inicialización y eliminación del reproductor multimedia, e
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

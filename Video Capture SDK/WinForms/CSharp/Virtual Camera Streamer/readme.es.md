@@ -14,6 +14,7 @@ Proporciona una interfaz rica en funciones para gestionar dispositivos de entrad
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

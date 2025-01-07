@@ -16,6 +16,7 @@ La aplicación permite iniciar, pausar, reanudar y detener la captura de vídeo,
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

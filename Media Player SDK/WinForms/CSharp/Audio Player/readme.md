@@ -14,3 +14,4 @@ The code highlights the use of asynchronous operations for media playback contro
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9

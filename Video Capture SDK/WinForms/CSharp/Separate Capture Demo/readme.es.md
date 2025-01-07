@@ -16,6 +16,7 @@ Además, la aplicación ofrece diálogos de configuración avanzada para un cont
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

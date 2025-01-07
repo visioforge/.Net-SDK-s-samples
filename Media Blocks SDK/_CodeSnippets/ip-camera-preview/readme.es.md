@@ -16,6 +16,7 @@ Este ejemplo del SDK muestra cómo previsualizar vídeo de una cámara IP.
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

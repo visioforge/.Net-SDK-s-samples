@@ -16,6 +16,7 @@ It showcases how to initiate and stop video capture, adjust volume, and save rec
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -24,6 +24,7 @@ El código también destaca el manejo de eventos para los controles de reproducc
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

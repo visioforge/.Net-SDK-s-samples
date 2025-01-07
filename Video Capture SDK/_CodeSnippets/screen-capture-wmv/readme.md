@@ -12,6 +12,7 @@ The example highlights the ease of integrating screen capture functionality into
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

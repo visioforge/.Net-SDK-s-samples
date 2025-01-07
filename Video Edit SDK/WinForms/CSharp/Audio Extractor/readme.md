@@ -16,6 +16,7 @@ The application provides a user interface with options to start and stop the ext
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

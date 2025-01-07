@@ -10,6 +10,7 @@ This code snippet demonstrates how to preview video from a webcam using Video Ca
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -10,6 +10,7 @@ This code snippet demonstrates how to capture the screen and save it to an MP4 f
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

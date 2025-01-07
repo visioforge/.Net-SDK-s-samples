@@ -12,6 +12,7 @@ Users can start, pause, resume, and stop the capture process. Additionally, it s
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

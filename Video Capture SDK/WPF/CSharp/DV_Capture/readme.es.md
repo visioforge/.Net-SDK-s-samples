@@ -16,6 +16,7 @@ Además, la aplicación muestra el manejo de entradas/salidas de audio y vídeo,
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ Además, incorpora funciones para iniciar, detener y supervisar el progreso de l
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

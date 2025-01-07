@@ -18,6 +18,7 @@ The application includes error handling to log issues during capture and provide
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ Proporciona una interfaz de usuario para seleccionar los formatos de salida, con
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

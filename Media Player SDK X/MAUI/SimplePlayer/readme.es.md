@@ -15,6 +15,7 @@ El código también incluye la carga de medios desde un selector de archivos, la
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

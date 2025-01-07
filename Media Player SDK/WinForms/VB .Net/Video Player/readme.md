@@ -12,6 +12,7 @@ It showcases how to handle media file selection, implement asynchronous operatio
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

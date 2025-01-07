@@ -20,6 +20,7 @@ This SDK sample shows how to capture video from a webcam, overlay text on it, an
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

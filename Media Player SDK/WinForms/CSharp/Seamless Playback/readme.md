@@ -12,6 +12,7 @@ It demonstrates the initialization and management of two media player engines to
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

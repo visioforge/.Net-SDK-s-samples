@@ -16,6 +16,7 @@ Muestra cómo iniciar y detener la captura de vídeo, ajustar el volumen y guard
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

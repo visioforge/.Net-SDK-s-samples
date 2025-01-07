@@ -14,6 +14,7 @@ The sample is ideal for developers looking to implement webcam video capture and
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

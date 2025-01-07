@@ -14,6 +14,7 @@ Additionally, it includes features for adjusting the volume and balance of the a
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

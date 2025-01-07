@@ -16,6 +16,7 @@ Additionally, it features a network streaming setup with RTMP and FFMPEG, demons
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

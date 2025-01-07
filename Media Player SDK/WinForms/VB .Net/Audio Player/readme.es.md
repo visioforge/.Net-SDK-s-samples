@@ -14,6 +14,7 @@ Además, incluye funciones para ajustar el volumen y el balance de la salida de 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -16,6 +16,7 @@ The application offers a GUI for adding input files, configuring output settings
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

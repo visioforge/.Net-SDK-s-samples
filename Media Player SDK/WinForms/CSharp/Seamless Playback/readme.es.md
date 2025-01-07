@@ -12,6 +12,7 @@ Demuestra la inicialización y gestión de dos motores de reproducción multimed
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

@@ -22,6 +22,7 @@ The example includes the use of audio effects like EQ and dynamic amplification,
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

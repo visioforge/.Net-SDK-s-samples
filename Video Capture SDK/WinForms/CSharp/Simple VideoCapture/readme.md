@@ -16,6 +16,7 @@ It showcases advanced features like hardware acceleration support, audio effects
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

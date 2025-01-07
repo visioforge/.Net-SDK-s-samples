@@ -12,6 +12,7 @@ It showcases how to configure the SDK, open a file dialog, read and display medi
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

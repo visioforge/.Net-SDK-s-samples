@@ -12,6 +12,7 @@ The code includes event handling for starting and stopping the video preview and
 
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

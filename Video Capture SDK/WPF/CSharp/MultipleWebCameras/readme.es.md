@@ -18,6 +18,7 @@ El código proporciona un ejemplo práctico de gestión de múltiples fuentes de
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

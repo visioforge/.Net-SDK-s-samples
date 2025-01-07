@@ -12,6 +12,7 @@ The sample includes initializing the video capture core, setting the video and a
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

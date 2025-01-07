@@ -14,6 +14,7 @@ Through its GUI, users can interact with the video playback, making it a practic
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

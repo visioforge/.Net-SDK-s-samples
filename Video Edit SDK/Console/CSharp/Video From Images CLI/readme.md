@@ -16,6 +16,7 @@ Users can customize output settings such as resolution, format (MP4, AVI, WMV), 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

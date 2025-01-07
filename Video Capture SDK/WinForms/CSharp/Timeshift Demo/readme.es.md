@@ -16,6 +16,7 @@ La aplicación muestra funciones como la selección de dispositivos de captura, 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

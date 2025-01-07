@@ -16,6 +16,7 @@ Additionally, the application offers advanced settings dialogs for precise contr
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

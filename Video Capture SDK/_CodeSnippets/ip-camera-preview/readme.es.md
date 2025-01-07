@@ -12,6 +12,7 @@ Soporta iniciar y detener la vista previa de la cámara de forma asíncrona con 
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 

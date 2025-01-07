@@ -16,6 +16,7 @@ Developers can easily integrate file input selection, real-time progress feedbac
 * .Net 6
 * .Net 7
 * .Net 8
+* .Net 9
 
 ---
 
