@@ -37,6 +37,7 @@ The application allows users to select their input devices, configure source set
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -20,6 +20,7 @@ It also includes error handling and debugging support, demonstrating a comprehen
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

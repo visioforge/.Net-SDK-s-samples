@@ -12,6 +12,7 @@ Este ejemplo del SDK muestra cómo integrar funciones de reproducción de audio 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

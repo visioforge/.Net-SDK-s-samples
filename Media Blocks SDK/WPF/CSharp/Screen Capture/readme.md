@@ -28,6 +28,7 @@ Additionally, it includes device enumeration for selecting audio input and outpu
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

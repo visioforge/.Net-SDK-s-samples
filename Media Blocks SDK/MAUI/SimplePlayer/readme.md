@@ -19,6 +19,7 @@ The project showcases a cross-platform media player application built using the 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

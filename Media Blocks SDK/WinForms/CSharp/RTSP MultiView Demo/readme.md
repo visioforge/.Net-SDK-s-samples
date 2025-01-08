@@ -23,6 +23,7 @@ This SDK sample demonstrates how to create a multi-view RTSP streaming applicati
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

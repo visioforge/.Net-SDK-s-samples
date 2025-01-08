@@ -17,6 +17,7 @@ Este ejemplo del SDK demuestra el uso del Compositor de vídeo en directo (parte
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

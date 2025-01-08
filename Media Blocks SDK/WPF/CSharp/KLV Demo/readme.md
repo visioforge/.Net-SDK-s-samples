@@ -20,6 +20,7 @@ This SDK sample demonstrates the integration and usage of the VisioForge Media B
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

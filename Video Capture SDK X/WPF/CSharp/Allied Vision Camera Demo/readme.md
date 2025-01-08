@@ -14,6 +14,7 @@ Allied Vision Camera Demo is an application that uses the Video Capture SDK .Net
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -10,6 +10,7 @@ Este ejemplo del SDK muestra cómo crear una aplicación de detección de rostro
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

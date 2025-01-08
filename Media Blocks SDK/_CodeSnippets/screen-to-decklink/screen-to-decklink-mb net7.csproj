@@ -13,8 +13,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.2" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

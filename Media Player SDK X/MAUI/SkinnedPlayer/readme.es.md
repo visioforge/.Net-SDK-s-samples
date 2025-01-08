@@ -15,6 +15,7 @@ El código muestra la carga de skins a partir de recursos incrustados, la config
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

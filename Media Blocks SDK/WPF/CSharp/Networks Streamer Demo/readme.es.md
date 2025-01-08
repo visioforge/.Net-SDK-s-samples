@@ -22,6 +22,7 @@ La aplicación permite a los usuarios seleccionar sus dispositivos de entrada, c
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

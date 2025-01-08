@@ -19,6 +19,7 @@ El fragmento de código cubre la configuración del motor de captura de vídeo, 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -22,6 +22,7 @@ This SDK sample demonstrates the implementation of a live face detection and blu
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

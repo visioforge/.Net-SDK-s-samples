@@ -10,6 +10,7 @@ El código proporcionado es para una aplicación de demostración utilizando el 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

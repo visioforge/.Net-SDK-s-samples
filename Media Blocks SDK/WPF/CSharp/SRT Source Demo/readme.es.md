@@ -20,6 +20,7 @@ Además, la aplicación cuenta con gestión de errores dentro de la canalizació
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

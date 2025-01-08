@@ -14,6 +14,7 @@ Este ejemplo del SDK muestra cómo crear un cliente RTSP para Android utilizando
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

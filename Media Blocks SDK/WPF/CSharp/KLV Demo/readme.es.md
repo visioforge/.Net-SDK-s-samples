@@ -14,6 +14,7 @@ Este ejemplo de SDK muestra la integración y el uso de VisioForge Media Blocks 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

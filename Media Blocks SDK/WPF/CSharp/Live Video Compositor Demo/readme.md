@@ -23,6 +23,7 @@ This SDK sample demonstrates the use of the Live Video Compositor (part of Media
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -19,6 +19,7 @@ It showcases the SDK's capabilities in handling complex video processing tasks, 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

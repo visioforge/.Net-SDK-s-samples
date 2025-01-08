@@ -12,6 +12,7 @@ Users can control playback through UI elements like play, pause, stop, resume, a
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

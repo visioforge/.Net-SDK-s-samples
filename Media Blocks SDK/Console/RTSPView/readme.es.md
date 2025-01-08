@@ -10,6 +10,7 @@ Este ejemplo del SDK muestra cómo crear un sencillo visor RTSP utilizando la Me
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

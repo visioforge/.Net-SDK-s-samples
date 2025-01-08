@@ -14,6 +14,7 @@ El ejemplo muestra el uso de VisioForge Media Blocks SDK para crear un reproduct
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

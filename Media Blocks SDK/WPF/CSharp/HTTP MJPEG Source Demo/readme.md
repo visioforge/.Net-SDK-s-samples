@@ -20,6 +20,7 @@ The provided sample demonstrates how to build an application using the VisioForg
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

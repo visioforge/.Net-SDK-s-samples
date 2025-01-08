@@ -14,6 +14,7 @@ La aplicación HLS Streamer, creada con el SDK Media Blocks de VisioForge, muest
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

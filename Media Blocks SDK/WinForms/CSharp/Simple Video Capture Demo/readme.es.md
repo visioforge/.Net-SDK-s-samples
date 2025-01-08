@@ -15,6 +15,7 @@ El código proporcionado es un ejemplo completo de cómo crear una sencilla apli
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

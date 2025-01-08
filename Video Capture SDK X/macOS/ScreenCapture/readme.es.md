@@ -17,6 +17,7 @@ Además, la muestra incluye opciones para seleccionar dispositivos de entrada y 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

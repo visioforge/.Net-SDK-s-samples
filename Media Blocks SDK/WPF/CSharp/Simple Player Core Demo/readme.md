@@ -20,6 +20,7 @@ It's designed for developers looking to integrate media playback functionalities
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

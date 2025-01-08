@@ -15,6 +15,7 @@ El ejemplo del SDK Media Info CLI muestra una sencilla aplicación de consola qu
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

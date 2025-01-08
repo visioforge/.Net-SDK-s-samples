@@ -15,6 +15,7 @@ Este ejemplo del SDK muestra la implementación de una aplicación de detección
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

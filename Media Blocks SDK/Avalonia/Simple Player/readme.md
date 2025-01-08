@@ -22,6 +22,7 @@ The provided code snippet outlines the implementation of a simple media player u
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -17,6 +17,7 @@ La muestra incluye la gestión de errores y elementos de interfaz de usuario par
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -20,6 +20,7 @@ Error handling and logging are incorporated to ensure a smooth user experience. 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

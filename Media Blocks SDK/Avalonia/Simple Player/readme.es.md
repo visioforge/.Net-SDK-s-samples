@@ -16,6 +16,7 @@ El fragmento de código proporcionado esboza la implementación de un sencillo r
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

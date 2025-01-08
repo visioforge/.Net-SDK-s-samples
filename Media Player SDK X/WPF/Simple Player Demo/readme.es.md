@@ -20,6 +20,7 @@ La gestión de errores y el registro se incorporan para garantizar una experienc
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

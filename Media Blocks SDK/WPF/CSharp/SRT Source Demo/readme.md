@@ -27,6 +27,7 @@ Furthermore, the application features error management within the media pipeline
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

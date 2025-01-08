@@ -21,6 +21,7 @@ It initializes a media pipeline with HTTP source, universal demuxer+decoder, and
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

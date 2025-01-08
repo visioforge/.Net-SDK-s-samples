@@ -19,6 +19,7 @@ Muestra las capacidades del SDK para gestionar tareas complejas de procesamiento
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

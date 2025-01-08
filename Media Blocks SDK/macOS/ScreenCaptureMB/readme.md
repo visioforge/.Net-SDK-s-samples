@@ -28,6 +28,7 @@ Furthermore, the sample includes options for selecting audio input and output de
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

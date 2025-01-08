@@ -18,6 +18,7 @@ La aplicación incluye controles de interfaz de usuario para iniciar/detener la 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

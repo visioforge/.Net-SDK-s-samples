@@ -18,6 +18,7 @@ The application includes UI controls for starting/stopping recording, adjusting 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

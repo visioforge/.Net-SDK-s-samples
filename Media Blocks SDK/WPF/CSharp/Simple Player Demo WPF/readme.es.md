@@ -18,6 +18,7 @@ Este ejemplo destaca las capacidades del SDK para el desarrollo de reproductores
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

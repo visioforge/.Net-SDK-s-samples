@@ -14,6 +14,7 @@ Spinnaker Source Demo es una aplicación que utiliza Media Blocks SDK .Net para 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

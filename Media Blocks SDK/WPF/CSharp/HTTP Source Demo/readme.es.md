@@ -15,6 +15,7 @@ Inicializa una canalización de medios con bloques de origen HTTP, demuxer+decod
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

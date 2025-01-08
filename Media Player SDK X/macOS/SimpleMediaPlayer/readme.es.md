@@ -16,6 +16,7 @@ El ejemplo SimpleMediaPlayerMBMac SDK demuestra la integración del SDK Media Bl
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

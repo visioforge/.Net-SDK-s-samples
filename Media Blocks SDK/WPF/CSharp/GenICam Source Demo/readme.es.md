@@ -14,6 +14,7 @@ GenICam Source Demo es una aplicación que utiliza el SDK .Net de Media Blocks p
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

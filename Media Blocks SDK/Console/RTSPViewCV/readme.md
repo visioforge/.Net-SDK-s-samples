@@ -16,6 +16,7 @@ This SDK sample demonstrates how to create a real-time face detection applicatio
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

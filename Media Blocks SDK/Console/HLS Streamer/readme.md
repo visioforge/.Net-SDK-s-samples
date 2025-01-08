@@ -24,6 +24,7 @@ The HLS Streamer app, built using VisioForge's Media Blocks SDK, showcases a str
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

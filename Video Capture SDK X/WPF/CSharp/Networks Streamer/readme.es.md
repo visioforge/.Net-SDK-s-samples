@@ -19,6 +19,7 @@ El código incluye la gestión de eventos para la enumeración de dispositivos y
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

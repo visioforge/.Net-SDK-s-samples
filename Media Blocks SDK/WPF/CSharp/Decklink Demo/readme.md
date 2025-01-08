@@ -51,6 +51,7 @@ The provided code is for a demo application using the VisioForge Media Blocks SD
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

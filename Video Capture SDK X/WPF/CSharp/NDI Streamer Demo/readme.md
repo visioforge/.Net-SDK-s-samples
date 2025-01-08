@@ -18,6 +18,7 @@ The use of asynchronous programming patterns for device monitoring and capture o
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

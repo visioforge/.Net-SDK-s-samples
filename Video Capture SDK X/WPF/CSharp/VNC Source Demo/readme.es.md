@@ -16,6 +16,7 @@ Inicializa el SDK de VisioForge, configura la captura de vídeo con gestión de 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
   
 ---
 

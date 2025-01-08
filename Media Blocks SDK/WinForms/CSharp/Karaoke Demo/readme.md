@@ -15,5 +15,6 @@ The Karaoke_Demo SDK sample demonstrates how to build a karaoke application usin
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 [Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

@@ -18,6 +18,7 @@ Además, destaca las prácticas recomendadas para gestionar los recursos del rep
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -15,6 +15,7 @@ El código proporcionado es un ejemplo para crear una sencilla aplicación de ca
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

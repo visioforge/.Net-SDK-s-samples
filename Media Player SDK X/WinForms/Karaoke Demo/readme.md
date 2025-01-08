@@ -12,6 +12,7 @@ This SDK sample showcases how to integrate audio and video playback functionalit
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

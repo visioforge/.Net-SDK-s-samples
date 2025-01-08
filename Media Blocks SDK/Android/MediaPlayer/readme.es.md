@@ -18,6 +18,7 @@ Explora las capacidades de la tecnología Media Blocks de VisioForge con nuestra
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

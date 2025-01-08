@@ -20,6 +20,7 @@ Decklink cards are professional video capture and playback cards from Blackmagic
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

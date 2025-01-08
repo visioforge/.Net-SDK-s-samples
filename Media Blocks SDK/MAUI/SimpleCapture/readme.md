@@ -27,6 +27,7 @@ This SDK sample demonstrates how to create a cross-platform MAUI simple media ca
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

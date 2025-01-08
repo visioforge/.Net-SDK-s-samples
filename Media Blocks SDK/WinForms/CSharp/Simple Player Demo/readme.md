@@ -21,6 +21,7 @@ The sample project demonstrates the capabilities of the VisioForge Media Blocks 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

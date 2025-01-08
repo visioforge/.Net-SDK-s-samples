@@ -12,6 +12,7 @@ Explore cómo reproducir, ajustar el audio y visualizar archivos CDG en una senc
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -21,6 +21,7 @@ The sample demonstrates the use of the VisioForge Media Blocks SDK to build a cu
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

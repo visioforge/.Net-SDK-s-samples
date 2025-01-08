@@ -15,6 +15,7 @@ The Media Info CLI SDK sample demonstrates a simple console application that use
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -18,6 +18,7 @@ El uso de patrones de programación asíncronos para la supervisión de disposit
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

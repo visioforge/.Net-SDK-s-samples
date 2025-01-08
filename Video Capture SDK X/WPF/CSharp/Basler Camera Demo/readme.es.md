@@ -15,6 +15,7 @@ Basler Camera Demo es una aplicación que utiliza Video Capture SDK .Net para pr
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

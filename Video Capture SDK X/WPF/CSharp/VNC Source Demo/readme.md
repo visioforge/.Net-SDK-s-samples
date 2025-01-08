@@ -16,6 +16,7 @@ It initializes the VisioForge SDK, sets up video capture with error handling, an
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
   
 ---
 

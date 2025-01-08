@@ -12,6 +12,7 @@ Los usuarios pueden controlar la reproducción a través de elementos de interfa
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -10,6 +10,7 @@ El código proporcionado es un ejemplo completo de la integración de las capaci
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

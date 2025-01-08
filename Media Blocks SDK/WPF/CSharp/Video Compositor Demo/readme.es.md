@@ -17,6 +17,7 @@ También ilustra cómo configurar flujos de salida para diferentes plataformas, 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

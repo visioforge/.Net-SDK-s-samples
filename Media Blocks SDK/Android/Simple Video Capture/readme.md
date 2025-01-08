@@ -26,6 +26,7 @@ This SDK sample demonstrates how to create a simple video capture application on
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

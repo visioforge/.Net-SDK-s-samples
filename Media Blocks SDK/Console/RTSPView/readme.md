@@ -16,6 +16,7 @@ This SDK sample demonstrates how to build a simple RTSP viewer using VisioForge'
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

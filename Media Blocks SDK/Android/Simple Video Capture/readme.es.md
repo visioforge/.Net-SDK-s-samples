@@ -15,6 +15,7 @@ Este ejemplo del SDK muestra cómo crear una sencilla aplicación de captura de 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

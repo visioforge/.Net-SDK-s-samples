@@ -20,6 +20,7 @@ También incluye gestión de errores y soporte de depuración, lo que demuestra 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

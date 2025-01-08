@@ -15,6 +15,7 @@ La muestra SDK proporcionada muestra la implementación de una aplicación de me
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

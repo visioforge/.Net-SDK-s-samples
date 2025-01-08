@@ -19,6 +19,7 @@ The code includes event handling for device enumeration and streaming errors, as
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

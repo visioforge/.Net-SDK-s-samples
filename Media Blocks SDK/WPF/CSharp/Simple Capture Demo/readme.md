@@ -28,6 +28,7 @@ The sample includes error handling and UI elements for device and format selecti
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

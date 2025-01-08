@@ -15,6 +15,7 @@ Este ejemplo del SDK muestra cómo integrar y gestionar fuentes NDI (Network Dev
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

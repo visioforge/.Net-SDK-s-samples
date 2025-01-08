@@ -15,6 +15,7 @@ Allied Vision Source Demo es una aplicación que utiliza Media Blocks SDK .Net p
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

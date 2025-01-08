@@ -22,6 +22,7 @@ The SimpleMediaPlayerMBMac SDK sample demonstrates the integration of VisioForge
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

@@ -18,6 +18,7 @@ Additionally, it highlights best practices for managing media player resources, 
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

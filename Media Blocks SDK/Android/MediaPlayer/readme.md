@@ -22,6 +22,7 @@ Explore the capabilities of VisioForge's Media Blocks technology with our Androi
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

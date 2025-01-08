@@ -20,6 +20,7 @@ This SDK sample demonstrates how to integrate and manage NDI (Network Device Int
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

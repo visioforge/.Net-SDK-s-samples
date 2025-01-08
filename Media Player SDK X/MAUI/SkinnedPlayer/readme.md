@@ -15,6 +15,7 @@ The code demonstrates loading skins from embedded resources, setting up media pl
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

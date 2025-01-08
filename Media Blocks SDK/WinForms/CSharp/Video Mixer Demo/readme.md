@@ -22,6 +22,7 @@ The provided SDK sample showcases the implementation of a video mixing applicati
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

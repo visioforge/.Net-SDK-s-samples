@@ -12,6 +12,7 @@ Las tarjetas Decklink son tarjetas profesionales de captura y reproducción de v
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

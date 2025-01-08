@@ -14,6 +14,7 @@ El ejemplo proporcionado muestra cómo crear una aplicación utilizando VisioFor
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

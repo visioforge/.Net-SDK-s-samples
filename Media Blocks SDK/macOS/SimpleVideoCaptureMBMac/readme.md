@@ -26,6 +26,7 @@ The provided code is a sample for creating a simple video capture application us
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

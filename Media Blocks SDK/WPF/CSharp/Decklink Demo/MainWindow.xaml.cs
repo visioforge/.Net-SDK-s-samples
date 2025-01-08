@@ -413,10 +413,10 @@ namespace Decklink_MB_Demo
             }
 
             // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
             // audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First()) { IsSync = false };
+            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
 
             // effects
             AddVideoEffects();

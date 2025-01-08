@@ -23,6 +23,7 @@ Additionally, the application incorporates error handling within the media pipel
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 

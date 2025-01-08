@@ -18,6 +18,7 @@ Además, la aplicación incorpora la gestión de errores dentro de la canalizaci
 - .Net 6
 - .Net 7
 - .Net 8
+- .Net 9
 
 ---
 
