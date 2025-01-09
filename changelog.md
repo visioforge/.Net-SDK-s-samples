@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.4
+
+* [Cross-platform] Resolved issue with AMD AMF plugin initialization
+
 ## 2025.1.1
 
 * [Cross-platform] Resolved memory leak in `OverlayManagerImage`
