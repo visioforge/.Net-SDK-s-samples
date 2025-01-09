@@ -154,6 +154,8 @@ namespace Simple_Video_Capture
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+
             // We have to initialize the engine on start
             Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
             this.IsEnabled = false;
@@ -174,8 +176,6 @@ namespace Simple_Video_Capture
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
-
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)

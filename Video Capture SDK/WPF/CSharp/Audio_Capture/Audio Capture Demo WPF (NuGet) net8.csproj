@@ -38,10 +38,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.1.2" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.1.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.1.3" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
