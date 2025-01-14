@@ -255,7 +255,7 @@ namespace Simple_Media_Player
 
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
-            _player.NextFrame(1);
+            _player.NextFrame();
         }
 
         private void Player_OnError(object sender, ErrorsEventArgs e)

@@ -25,7 +25,6 @@ using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
 using VisioForge.Core.VideoCaptureX;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Simple_Video_Capture
 {

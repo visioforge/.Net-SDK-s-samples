@@ -275,7 +275,7 @@ namespace SimplePlayerAMB
 
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
-            _pipeline.NextFrame(1);
+            _pipeline.NextFrame();
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

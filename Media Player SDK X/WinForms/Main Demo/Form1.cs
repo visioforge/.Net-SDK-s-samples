@@ -562,7 +562,7 @@ namespace Main_Demo
 
         private void btNextFrame_Click(object sender, EventArgs e)
         {
-            _player.NextFrame(1);
+            _player.NextFrame();
 
             tbSpeed.Value = (int)(_player.Rate_Get() * 10);
             var speed = tbSpeed.Value / 10.0;
@@ -782,7 +782,7 @@ namespace Main_Demo
 
         private void btPrevFrame_Click(object sender, EventArgs e)
         {
-            _player.PrevFrame(1);
+            _player.PrevFrame();
 
             tbSpeed.Value = (int)(_player.Rate_Get() * 10);
             var speed = tbSpeed.Value / 10.0;

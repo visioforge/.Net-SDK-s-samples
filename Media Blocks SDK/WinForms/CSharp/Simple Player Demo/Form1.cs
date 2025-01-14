@@ -136,7 +136,7 @@ namespace MediaBlocks_Player_Demo
 
         private void btNextFrame_Click(object sender, EventArgs e)
         {
-            _pipeline.NextFrame(1);
+            _pipeline.NextFrame();
         }
 
         private async void btStop_Click(object sender, EventArgs e)
