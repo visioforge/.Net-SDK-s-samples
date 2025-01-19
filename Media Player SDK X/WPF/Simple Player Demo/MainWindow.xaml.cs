@@ -178,11 +178,47 @@ namespace Simple_Player_Demo_X
                 _player.Subtitles_Settings = new SubtitleOverlaySettings();
             }
 
-            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
+
+            _player.OnStart += _player_OnStart;
+
+            var source = await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text));
+            await _player.OpenAsync(source);
 
             await _player.PlayAsync();
 
             _timer.Start();
+        }
+
+        private void _player_OnStart(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke((Action)(() =>
+            {
+                var videoStreams = _player.Video_Streams;
+                cbVideoStream.Items.Clear();
+
+                for (int i = 0; i < videoStreams.Count; i++)
+                {
+                    cbVideoStream.Items.Add($"[{i}] {videoStreams[i]}");
+                }
+
+                if (cbVideoStream.Items.Count > 0)
+                {
+                    cbVideoStream.SelectedIndex = 0;
+                }
+
+                var audioStreams = _player.Audio_Streams;
+                cbAudioStream.Items.Clear();
+
+                for (int i = 0; i < audioStreams.Count; i++)
+                {
+                    cbAudioStream.Items.Add($"[{i}] {audioStreams[i]}");
+                }
+
+                if (cbAudioStream.Items.Count > 0)
+                {
+                    cbAudioStream.SelectedIndex = 0;
+                }
+            }));           
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
@@ -198,6 +234,7 @@ namespace Simple_Player_Demo_X
 
             tbTimeline.Value = 0;
         }
+
 
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
@@ -226,6 +263,16 @@ namespace Simple_Player_Demo_X
             await DestroyEngineAsync();
 
             VisioForgeX.DestroySDK();
+        }
+
+        private void cbVideoStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            _player.Video_Stream_Select(_player.Video_Streams[cbVideoStream.SelectedIndex]);
+        }
+
+        private void cbAudioStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            _player.Audio_Stream_Select(_player.Audio_Streams[cbAudioStream.SelectedIndex]);
         }
     }
 }
