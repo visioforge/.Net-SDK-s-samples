@@ -23,9 +23,9 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.1.8" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.1.8" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.1.8" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.9" />
