@@ -117,6 +117,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live Source Switch Demo net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "h264-capture-webcam-mb net9", "_CodeSnippets\h264-capture-webcam\h264-capture-webcam-mb net9.csproj", "{7245DEC7-8DF1-40A6-AC85-CB1F6F4FF168}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPEG-TS Player Demo MB net9", "WPF\CSharp\MPEG-TS Player Demo\MPEG-TS Player Demo MB net9.csproj", "{B617E541-4B12-4383-B7E5-A1C85566CD51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -339,6 +341,10 @@ Global
 		{7245DEC7-8DF1-40A6-AC85-CB1F6F4FF168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7245DEC7-8DF1-40A6-AC85-CB1F6F4FF168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7245DEC7-8DF1-40A6-AC85-CB1F6F4FF168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B617E541-4B12-4383-B7E5-A1C85566CD51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B617E541-4B12-4383-B7E5-A1C85566CD51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B617E541-4B12-4383-B7E5-A1C85566CD51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B617E541-4B12-4383-B7E5-A1C85566CD51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -398,6 +404,7 @@ Global
 		{7CB73F54-4B0B-4773-9BC6-BBD4BF450B40} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{EC069782-0D35-45DA-9B7A-892EBCD51D9C} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{7245DEC7-8DF1-40A6-AC85-CB1F6F4FF168} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
+		{B617E541-4B12-4383-B7E5-A1C85566CD51} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -57,8 +57,6 @@ namespace SimpleVideoCaptureAMB
 
         #region Controls
 
-        public ObservableCollection<string> Logs { get; set; } = new ObservableCollection<string>();
-
         public ObservableCollection<string> VideoInputDevices { get; set; } = new ObservableCollection<string>();
 
         public ObservableCollection<string> VideoInputFormats { get; set; } = new ObservableCollection<string>();
@@ -225,8 +223,7 @@ namespace SimpleVideoCaptureAMB
 
             tcMain = this.FindControl<TabControl>("tcMain");
 
-            mmLog = this.FindControl<ListBox>("mmLog");
-            mmLog.ItemsSource = Logs;
+            edLog = this.FindControl<TextBox>("edLog");
         }
 
         private void LbViewVideoTutorials_PointerPressed(object sender, Avalonia.Input.PointerPressedEventArgs e)
@@ -269,7 +266,7 @@ namespace SimpleVideoCaptureAMB
 
         private void Log(string txt)
         {
-            Logs.Add(txt);
+            Dispatcher.UIThread.InvokeAsync(() => { edLog.Text += txt + Environment.NewLine; });
         }
 
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
@@ -337,7 +334,7 @@ namespace SimpleVideoCaptureAMB
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            Logs.Clear();
+            edLog.Text = string.Empty;
 
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += VideoCapture1_OnError;

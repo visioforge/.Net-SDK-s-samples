@@ -141,6 +141,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+            _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
             bool capture = cbOutputFormat.SelectedIndex > 0;
 
             mmLog.Clear();

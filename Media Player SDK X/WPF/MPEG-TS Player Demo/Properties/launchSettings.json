@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Simple Player Demo MB WPF": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

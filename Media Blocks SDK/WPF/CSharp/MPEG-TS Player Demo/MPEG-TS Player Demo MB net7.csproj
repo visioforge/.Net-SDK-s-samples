@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
+    <RootNamespace>MPEG_TS_Player_Demo</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+    <UseWPF>true</UseWPF>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.0.25" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.0.25" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.1.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.9" />
+  </ItemGroup>
+</Project>

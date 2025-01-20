@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
+using VisioForge.Core.MediaInfo;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
@@ -87,8 +88,9 @@ namespace Simple_Player_Demo_X
             _player = new MediaPlayerCoreX(VideoView1);
             _player.OnError += Player_OnError;
             _player.OnStop += Player_OnStop;
-            //_player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            //_player.Debug_Mode = cbDebugMode.IsChecked == true;
+
+            _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            _player.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -164,7 +166,7 @@ namespace Simple_Player_Demo_X
 
             CreateEngine();
 
-            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text); 
+            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
             _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             if (string.IsNullOrEmpty(edSubFilename.Text))
@@ -178,8 +180,10 @@ namespace Simple_Player_Demo_X
                 _player.Subtitles_Settings = new SubtitleOverlaySettings();
             }
 
+            _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
 
-            _player.OnStart += _player_OnStart;
+            cbVideoStream.Items.Clear();
+            cbAudioStream.Items.Clear();
 
             var source = await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text));
             await _player.OpenAsync(source);
@@ -189,7 +193,7 @@ namespace Simple_Player_Demo_X
             _timer.Start();
         }
 
-        private void _player_OnStart(object sender, EventArgs e)
+        private void _player_OnStreamsInfoAvailable(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
             {
@@ -203,7 +207,9 @@ namespace Simple_Player_Demo_X
 
                 if (cbVideoStream.Items.Count > 0)
                 {
+                    cbVideoStream.Tag = true;
                     cbVideoStream.SelectedIndex = 0;
+                    cbVideoStream.Tag = false;
                 }
 
                 var audioStreams = _player.Audio_Streams;
@@ -216,9 +222,11 @@ namespace Simple_Player_Demo_X
 
                 if (cbAudioStream.Items.Count > 0)
                 {
+                    cbAudioStream.Tag = true;
                     cbAudioStream.SelectedIndex = 0;
+                    cbAudioStream.Tag = false;
                 }
-            }));           
+            }));
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
@@ -267,12 +275,18 @@ namespace Simple_Player_Demo_X
 
         private void cbVideoStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            _player.Video_Stream_Select(_player.Video_Streams[cbVideoStream.SelectedIndex]);
+            if (cbVideoStream.SelectedIndex != -1 && !(bool)cbVideoStream.Tag)
+            {
+                _player.Video_Stream_Select(_player.Video_Streams[cbVideoStream.SelectedIndex]);
+            }
         }
 
         private void cbAudioStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            _player.Audio_Stream_Select(_player.Audio_Streams[cbAudioStream.SelectedIndex]);
+            if (cbAudioStream.SelectedIndex != -1 && !(bool)cbAudioStream.Tag)
+            {
+                _player.Audio_Stream_Select(_player.Audio_Streams[cbAudioStream.SelectedIndex]);
+            }
         }
     }
 }

@@ -43,7 +43,7 @@
 			<TabItem Header="Log">
 				<Grid>
 					<CheckBox x:Name="cbDebugMode" TabIndex="75" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Debug mode"/>
-					<ListBox x:Name="mmLog" Margin="10,42,10,10" Height="300" />
+					<TextBox x:Name="edLog" Margin="10,42,10,10" Height="300" />
 				</Grid>
 			</TabItem>
 		</TabControl>

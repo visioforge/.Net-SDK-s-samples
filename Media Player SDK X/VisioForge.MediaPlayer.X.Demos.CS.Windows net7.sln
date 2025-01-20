@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Output Player Demo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Mixer Player net7", "WinForms\Video Mixer Player\Video Mixer Player net7.csproj", "{D3565CC1-822A-42B9-9F5C-D24489E48892}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPEG-TS Player Demo net7", "WPF\MPEG-TS Player Demo\MPEG-TS Player Demo net7.csproj", "{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,14 @@ Global
 		{D3565CC1-822A-42B9-9F5C-D24489E48892}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3565CC1-822A-42B9-9F5C-D24489E48892}.Release|x64.ActiveCfg = Release|Any CPU
 		{D3565CC1-822A-42B9-9F5C-D24489E48892}.Release|x64.Build.0 = Release|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Debug|x64.Build.0 = Debug|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Release|x64.ActiveCfg = Release|Any CPU
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +85,7 @@ Global
 		{7C45156D-113B-4CFE-BD9B-A7F642E3E7BC} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{3ED6CFC1-65A8-422C-8164-311471DD6A63} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{D3565CC1-822A-42B9-9F5C-D24489E48892} = {93D76926-A533-42E0-948B-4AF31A38F20A}
+		{6AC7A4DD-D67A-42D4-8517-F60A0C71CC35} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
