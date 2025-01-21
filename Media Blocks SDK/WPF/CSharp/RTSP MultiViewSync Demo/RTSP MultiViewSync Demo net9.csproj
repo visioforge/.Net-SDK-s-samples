@@ -10,8 +10,8 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.9" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WPF" Version="2025.1.10" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.1.8" />
