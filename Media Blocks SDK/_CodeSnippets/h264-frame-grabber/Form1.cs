@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using VisioForge.Core.Types.VideoCapture;
 using VisioForge.Core;
-using VisioForge.Core.VideoCaptureX;
-using VisioForge.Core.Types.X.AudioRenderers;
-using VisioForge.Core.Types.X.Output;
-using VisioForge.Core.Types.X.Sources;
-using System.Linq;
+
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Parsers;
-using VisioForge.Core.MediaBlocks.VideoDecoders;
-using VisioForge.Core.Types.X.VideoDecoders;
-using System.Threading;
+
 using System.Timers;
 using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
+
 using VisioForge.Core.MediaBlocks.Special;
-using VisioForge.Core.MediaBlocks.VideoProcessing;
-using System.Diagnostics;
-using System.Windows.Threading;
 
 namespace media_player
 {
