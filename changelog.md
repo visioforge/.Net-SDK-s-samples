@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.11
+
+* [Video Capture SDK .Net] Resolved QSV H264 FFMPEG encoder issue with the wrong symbols in parameters
+
 ## 2025.1.7
 
 * [Cross-platform] Added `libcamera` source support for Linux/Raspberry Pi.
@@ -31,7 +35,7 @@ Changes and updates for all .Net SDKs.
 
 ## 2025.0.29
 
-* [Cross-platform] Default video renderer on Windows has been changed to Direct 11
+* [Cross-platform] Default video renderer on Windows has been changed to DirectX 11
 
 ## 2025.0.17
 
