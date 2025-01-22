@@ -36,8 +36,6 @@ namespace Simple_Player_Demo
 
             Title += $" (SDK v{VisioForge.Core.MediaPlayerX.MediaPlayerCoreX.SDK_Version})";
 
-            await VisioForgeX.InitSDKAsync();
-
             CreateEngine();
 
             foreach (var device in _player.Audio_OutputDevices())
