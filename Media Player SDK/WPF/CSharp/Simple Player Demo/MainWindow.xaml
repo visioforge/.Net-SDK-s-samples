@@ -1,0 +1,33 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Simple_Player_Demo"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" x:Class="Simple_Player_Demo.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Player SDK .Net - Simple Video Player Demo" Height="368" Width="590" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="285"/>
+        <WPF:VideoView x:Name="VideoView1" Margin="10,60,270,70"/>
+        <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="300,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
+        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Right" Margin="0,11,27,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Log" HorizontalAlignment="Right" Margin="0,5,217,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edLog" HorizontalAlignment="Right" Margin="0,35,27,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="98"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,47" VerticalAlignment="Bottom" Width="209" ValueChanged="tbTimeline_ValueChanged"/>
+        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="225,0,0,49" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Bottom"/>
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btStart_Click"/>
+        <Button x:Name="btResume" Content="Resume" HorizontalAlignment="Left" Margin="68,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btResume_Click"/>
+        <Button x:Name="btPause" Content="Pause" HorizontalAlignment="Left" Margin="126,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btPause_Click"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="184,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btStop_Click"/>
+
+        <StackPanel Orientation="Vertical" Margin="0,143,25,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBlock Text="Audio output device" />
+            <ComboBox x:Name="cbAudioOutput" Width="220" Margin="0,5,0,0" />
+
+            <TextBlock Text="Volume"  Margin="0,5,0,0"/>
+            <Slider x:Name="tbVolume" Width="220" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged"  Margin="0,5,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
