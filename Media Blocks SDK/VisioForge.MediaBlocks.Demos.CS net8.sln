@@ -121,6 +121,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPEG-TS Player Demo MB net8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "h264-frame-grabber net8", "_CodeSnippets\h264-frame-grabber\h264-frame-grabber net8.csproj", "{C4651171-A4FF-4508-A88F-B8BA6237E4ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ndi-streamer-mb net8", "_CodeSnippets\ndi-streamer\ndi-streamer-mb net8.csproj", "{4E05E065-BBF2-467E-912F-7AEA0D96802D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +353,10 @@ Global
 		{C4651171-A4FF-4508-A88F-B8BA6237E4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4651171-A4FF-4508-A88F-B8BA6237E4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4651171-A4FF-4508-A88F-B8BA6237E4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E05E065-BBF2-467E-912F-7AEA0D96802D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E05E065-BBF2-467E-912F-7AEA0D96802D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E05E065-BBF2-467E-912F-7AEA0D96802D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E05E065-BBF2-467E-912F-7AEA0D96802D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -412,6 +418,7 @@ Global
 		{6FFBA457-2BD1-4AF1-AD3E-2C3F6132C812} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{5C4BB6A5-3EB0-4271-9777-E89D7CB4C947} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{C4651171-A4FF-4508-A88F-B8BA6237E4ED} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
+		{4E05E065-BBF2-467E-912F-7AEA0D96802D} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
