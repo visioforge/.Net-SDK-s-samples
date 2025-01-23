@@ -5,13 +5,13 @@
     <PlatformTarget>x64</PlatformTarget>
     <RootNamespace>screen_to_decklink</RootNamespace>
     <UseWPF>true</UseWPF>
-	<UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.1.8" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.1.8" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.16" />
   </ItemGroup>
 </Project>

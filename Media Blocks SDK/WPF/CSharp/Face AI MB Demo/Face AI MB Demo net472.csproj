@@ -5,7 +5,7 @@
     <RootNamespace>Face_AI_MB_Demo</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
-	<UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64</Platforms>
   </PropertyGroup>
@@ -13,7 +13,7 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.1.16" />
     <PackageReference Include="VisioForge.DotNet.Core.FaceAI" Version="2025.0.28" />
     <PackageReference Include="VisioForge.FaceAI.Models" Version="2025.0.0" />
   </ItemGroup>

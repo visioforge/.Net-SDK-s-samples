@@ -123,6 +123,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "h264-frame-grabber net472",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ndi-streamer-mb net472", "_CodeSnippets\ndi-streamer\ndi-streamer-mb net472.csproj", "{CC5D07E1-4F72-473E-AB47-C5938863AEF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "replace_audio net472", "_CodeSnippets\replace-audio\replace_audio net472.csproj", "{167C4470-2CC7-49F4-A919-5DBC14D282B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -357,6 +359,10 @@ Global
 		{CC5D07E1-4F72-473E-AB47-C5938863AEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC5D07E1-4F72-473E-AB47-C5938863AEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC5D07E1-4F72-473E-AB47-C5938863AEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{167C4470-2CC7-49F4-A919-5DBC14D282B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{167C4470-2CC7-49F4-A919-5DBC14D282B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{167C4470-2CC7-49F4-A919-5DBC14D282B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{167C4470-2CC7-49F4-A919-5DBC14D282B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -419,6 +425,7 @@ Global
 		{75B7F54F-E07D-45D1-8EB6-29C7A78666C1} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{42EC38EF-2DBA-45D6-AD91-756A54B64C10} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 		{CC5D07E1-4F72-473E-AB47-C5938863AEF2} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
+		{167C4470-2CC7-49F4-A919-5DBC14D282B7} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

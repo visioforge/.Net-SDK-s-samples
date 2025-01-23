@@ -4,7 +4,7 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>Screen_Capture_X</RootNamespace>
     <UseWPF>true</UseWPF>
-	  <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
@@ -18,6 +18,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.1.8" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.16" />
   </ItemGroup>
 </Project>
