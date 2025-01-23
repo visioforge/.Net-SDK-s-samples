@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Decklink_MultiOutput"
-        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
         Title="Media Blocks SDK .Net - Decklink MultiOutput Demo"
         Height="410" Width="820" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">

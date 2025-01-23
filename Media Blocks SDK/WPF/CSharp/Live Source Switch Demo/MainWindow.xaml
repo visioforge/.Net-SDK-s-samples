@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Live Source Switch Demo - Media Blocks SDK .Net" 
         Height="476" Width="859" Loaded="Form1_Load"
-        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" 
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" 
         Icon="visioforge_main_icon.ico" Closing="Window_Closing" >
     <Grid>
         <Button Height="23" HorizontalAlignment="Right" Margin="0,0,90,10" Name="btStart" VerticalAlignment="Bottom" Width="75" Click="btStart_Click" FontWeight="Bold">Start</Button>

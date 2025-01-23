@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simple_Video_Capture" 
-        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core.UI.WPF" x:Class="Simple_Video_Capture.MainWindow"
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core.UI.WPF" x:Class="Simple_Video_Capture.MainWindow"
         mc:Ignorable="d"
         Title="Simple Video Capture Demo - Video Capture SDK .Net" Height="512" Width="864" 
         Loaded="Window_Loaded" Icon="visioforge_main_icon.ico" Closing="Window_Closing">

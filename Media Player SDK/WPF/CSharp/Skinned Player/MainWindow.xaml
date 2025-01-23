@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Skinned_Player"
         xmlns:skins="clr-namespace:VisioForge.Core.UI.WPF.Skins;assembly=VisioForge.Core.UI.WPF" 
-        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
         Title="Media Player SDK .Net - Skinned Player" Height="1080" Width="1920" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged"
         Background="Green" Icon="visioforge_main_icon.ico">

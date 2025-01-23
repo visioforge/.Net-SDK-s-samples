@@ -1,7 +1,7 @@
 ﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"        
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"        
         xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core.UI.WPF" x:Class="Main_Demo.Window1"
     Title="Video Capture SDK .Net - Main Demo" Height="845" Width="975" Loaded="Form1_Load" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>

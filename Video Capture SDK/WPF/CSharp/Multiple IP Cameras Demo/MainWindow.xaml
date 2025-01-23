@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Multiple_IP_Cameras_Demo_WPF"
-        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
         Title="Video Capture SDK .Net - Multiple IP Cameras Demo" Height="727" Width="1209" Loaded="Window_Loaded" Icon="visioforge_main_icon.ico" Closing="Window_Closing">
     <Grid>

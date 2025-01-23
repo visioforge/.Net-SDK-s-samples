@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MPEG_TS_Player_Demo"
-        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" x:Class="MPEG_TS_Player_Demo.MainWindow"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="MPEG_TS_Player_Demo.MainWindow"
         mc:Ignorable="d"
         Title="Media BLocks SDK .Net - MPEG-TS Video Player Demo" Height="425" Width="590" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>

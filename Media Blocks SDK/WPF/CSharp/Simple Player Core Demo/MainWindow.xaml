@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaBlocks_Simple_Player_Core_Demo"
-        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" x:Class="MediaBlocks_Simple_Player_Core_Demo.MainWindow"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="MediaBlocks_Simple_Player_Core_Demo.MainWindow"
         mc:Ignorable="d"
         Title="Media Blocks SDK .Net - Simple Video Player Demo" Height="391" Width="590" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ndi_streamer_mb"
-        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core.UI.WPF" x:Class="ndi_streamer_mb.MainWindow"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="ndi_streamer_mb.MainWindow"
         mc:Ignorable="d"
         Title="Media Blocks SDK .Net - Screen source to NDI output sample" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
