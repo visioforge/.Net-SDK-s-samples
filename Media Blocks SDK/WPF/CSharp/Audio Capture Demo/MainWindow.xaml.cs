@@ -46,7 +46,7 @@ namespace Audio_Capture_Demo_MB
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void CreatePipeline()

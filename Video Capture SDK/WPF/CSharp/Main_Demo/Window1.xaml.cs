@@ -145,7 +145,7 @@ namespace Main_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void AddAudioEffects()

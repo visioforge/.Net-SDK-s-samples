@@ -66,7 +66,7 @@ namespace Screen_Capture
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private async Task CreateEngineAsync()

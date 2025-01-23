@@ -53,7 +53,7 @@ namespace Screen_Capture_X
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)

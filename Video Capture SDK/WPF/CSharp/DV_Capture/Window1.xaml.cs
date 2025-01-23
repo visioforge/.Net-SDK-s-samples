@@ -63,7 +63,7 @@ namespace DVCapture
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private async Task CreateEngineAsync()

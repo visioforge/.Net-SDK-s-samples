@@ -53,7 +53,7 @@ namespace Live_Video_Compositor_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
                 
         private void Compositor_OnError(object sender, ErrorsEventArgs e)

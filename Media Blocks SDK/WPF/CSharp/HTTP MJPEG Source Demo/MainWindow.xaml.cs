@@ -31,7 +31,7 @@ namespace HTTP_Source_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
 
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;

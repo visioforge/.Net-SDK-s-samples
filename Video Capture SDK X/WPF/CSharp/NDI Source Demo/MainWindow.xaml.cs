@@ -26,7 +26,7 @@ namespace NDI_Source_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)

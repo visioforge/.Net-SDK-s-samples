@@ -11,7 +11,7 @@ namespace Simple_Video_Capture
         public MainWindow(IRegionManager regionManager, IVideoCaptureAccessor videoCaptureAccessor)
         {
             InitializeComponent();
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
 
             this.regionManager = regionManager;
             this.videoCaptureAccessor = videoCaptureAccessor;

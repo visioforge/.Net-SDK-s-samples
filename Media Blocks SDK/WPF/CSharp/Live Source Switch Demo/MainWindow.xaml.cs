@@ -47,7 +47,7 @@ namespace Live_Source_Switch_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void Shared_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)

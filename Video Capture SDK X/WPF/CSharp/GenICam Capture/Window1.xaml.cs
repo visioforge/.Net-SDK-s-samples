@@ -28,7 +28,7 @@ namespace GenICam_Capture
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

@@ -56,7 +56,7 @@ namespace Audio_Capture
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private async void Form1_Load(object sender, RoutedEventArgs e)

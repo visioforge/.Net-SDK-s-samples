@@ -32,7 +32,7 @@ namespace AlliedVision_Source_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

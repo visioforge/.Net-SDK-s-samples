@@ -30,7 +30,7 @@ namespace AlliedVision_Camera_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private void Core_OnError(object sender, ErrorsEventArgs e)

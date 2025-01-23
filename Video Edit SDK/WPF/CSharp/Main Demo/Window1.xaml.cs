@@ -121,7 +121,7 @@ namespace Main_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
 
             fontDialog = new FontDialog();
             saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();

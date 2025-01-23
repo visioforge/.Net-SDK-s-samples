@@ -28,7 +28,7 @@ namespace MultipleWebCameras
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private async Task CreateEngineAsync()

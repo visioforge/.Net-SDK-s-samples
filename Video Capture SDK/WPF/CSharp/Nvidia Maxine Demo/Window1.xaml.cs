@@ -42,7 +42,7 @@ namespace Nvidia_Maxine_Demo
         {
             InitializeComponent();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
+            
         }
 
         private async Task CreateEngineAsync()
