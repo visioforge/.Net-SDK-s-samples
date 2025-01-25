@@ -96,9 +96,14 @@
                                     <Label HorizontalAlignment="Left">Bottom</Label>
                                     <TextBox x:Name="edRectBottom" Text="480" Width="35" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                                 </StackPanel>
+
+                                <StackPanel Orientation="Vertical"  Margin="5,0,0,0" Width="50">
+                                    <Label HorizontalAlignment="Left">Z-order</Label>
+                                    <TextBox x:Name="edZOrder" Text="0" Width="35" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                                </StackPanel>
                             </StackPanel>
 
-                            <Button Margin="0,20,0,0" x:Name="btUpdateRect" Content="Update rectangle" HorizontalAlignment="Center" Click="btUpdateRect_Click"/>
+                            <Button Margin="0,20,0,0" x:Name="btUpdateSource" Content="Update source" HorizontalAlignment="Center" Click="btUpdateSource_Click"/>
 
                             <Label HorizontalAlignment="Center" Margin="0,10,0,0">Seeking (file source)</Label>
                             <Slider x:Name="tbSeeking" HorizontalAlignment="Center" Margin="0,6,0,0" Width="150" ValueChanged="tbSeeking_ValueChanged"/>

@@ -123,6 +123,7 @@ namespace Live_Video_Compositor_Demo
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var videoInfo = new VideoFrameInfoX(settings.Format.Width, settings.Format.Height, settings.Format.FrameRate);
                 var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), videoInfo, rect, true);
+                src.ZOrder = (uint)_compositor.Input_Count();
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -149,6 +150,7 @@ namespace Live_Video_Compositor_Demo
                     Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
                 var settings = await UniversalSourceSettings.CreateAsync(filename);
                 var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
+                src.ZOrder = (uint)_compositor.Input_Count();
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -177,6 +179,7 @@ namespace Live_Video_Compositor_Demo
                 var name = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
                 var info = new VideoFrameInfoX(dlg.Rectangle.Width, dlg.Rectangle.Height, dlg.FrameRate);
                 var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), info, rect, true);
+                src.ZOrder = (uint)_compositor.Input_Count();
 
                 if (await _compositor.Input_AddAsync(src))
                 {
@@ -274,7 +277,7 @@ namespace Live_Video_Compositor_Demo
             lbSources.Items.Clear();
         }
 
-        private void btUpdateRect_Click(object sender, RoutedEventArgs e)
+        private void btUpdateSource_Click(object sender, RoutedEventArgs e)
         {
             int index = lbSources.SelectedIndex;
             if (index != -1)
@@ -285,6 +288,8 @@ namespace Live_Video_Compositor_Demo
                     Convert.ToInt32(edRectRight.Text),
                     Convert.ToInt32(edRectBottom.Text));
 
+                var zOrder = Convert.ToUInt32(edZOrder.Text);
+
                 var input = _compositor.Input_Get(index);
 
                 var stream = _compositor.Input_VideoStream_Get(input);
@@ -293,6 +298,7 @@ namespace Live_Video_Compositor_Demo
                 {
                     // we have playback started and can change the rect
                     stream.Rectangle = rect;
+                    stream.ZOrder = zOrder;
                     _compositor.Input_VideoStream_Update(stream);
                 }
                 else
@@ -482,6 +488,7 @@ namespace Live_Video_Compositor_Demo
             var settings = new VirtualVideoSourceSettings();
             var info = new VideoFrameInfoX(settings.Width, settings.Height, settings.FrameRate);
             var src = new LVCVideoInput(name, _compositor, new VirtualVideoSourceBlock(settings), info, rect, true);   
+            src.ZOrder = (uint)_compositor.Input_Count();
 
             if (await _compositor.Input_AddAsync(src))
             {
@@ -491,6 +498,36 @@ namespace Live_Video_Compositor_Demo
             else
             {
                 src.Dispose();
+            }
+        }
+
+        private async Task AddVideoStaticImageAsync()
+        {
+            var dlg = new OpenFileDialog();
+            dlg.Filter = "Image files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            if (dlg.ShowDialog(this) == true)
+            {
+                var rect = new Rect(
+                  Convert.ToInt32(edRectLeft.Text),
+                  Convert.ToInt32(edRectTop.Text),
+                  Convert.ToInt32(edRectRight.Text),
+                  Convert.ToInt32(edRectBottom.Text));
+
+                var name = $"Video source [Static image] {_compositor.Input_Count()}";
+                var settings = new ImageVideoSourceSettings(dlg.FileName);
+                var info = new VideoFrameInfoX(settings.Width, settings.Height, settings.FrameRate);
+                var src = new LVCVideoInput(name, _compositor, new ImageVideoSourceBlock(settings), info, rect, true);
+                src.ZOrder = (uint)_compositor.Input_Count();
+
+                if (await _compositor.Input_AddAsync(src))
+                {
+                    lbSources.Items.Add(name);
+                    lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                }
+                else
+                {
+                    src.Dispose();
+                }
             }
         }
 
@@ -520,6 +557,8 @@ namespace Live_Video_Compositor_Demo
                 var videoInfo = new VideoFrameInfoX(width, height, frameRate);
                 var audioInfo = new AudioInfoX(DecklinkHelper.ToFormat(audioSettings.Format), audioSettings.SampleRate, (int)audioSettings.Channels);
                 var videoSrc = new LVCVideoAudioInput(name, _compositor, sourceBlock, videoInfo, audioInfo, rect, true);
+                videoSrc.ZOrder = (uint)_compositor.Input_Count();
+
                 if (await _compositor.Input_AddAsync(videoSrc))
                 {
                     lbSources.Items.Add(name);
@@ -572,6 +611,12 @@ namespace Live_Video_Compositor_Demo
                 await AddVideoVirtualAsync();
             };
 
+            var miStaticImage = new MenuItem() { Header = "Static image" };
+            miStaticImage.Click += async (senderm, args) =>
+            {
+                await AddVideoStaticImageAsync();
+            };
+
             var miDecklinkSource = new MenuItem() { Header = "Decklink source" };
             miDecklinkSource.Click += async (senderm, args) =>
             {
@@ -582,6 +627,7 @@ namespace Live_Video_Compositor_Demo
             ctx.Items.Add(miCamera);
             ctx.Items.Add(miFile);
             ctx.Items.Add(miVideoVirtual);
+            ctx.Items.Add(miStaticImage);
             ctx.Items.Add(new Separator());
             ctx.Items.Add(miAudioSource);
             ctx.Items.Add(miAudioVirtual);
@@ -616,6 +662,7 @@ namespace Live_Video_Compositor_Demo
                     edRectTop.Text = input.Rectangle.Top.ToString();
                     edRectRight.Text = input.Rectangle.Right.ToString();
                     edRectBottom.Text = input.Rectangle.Bottom.ToString();
+                    edZOrder.Text = input.ZOrder.ToString();
                 }
 
                 _timelineSeeking = false;

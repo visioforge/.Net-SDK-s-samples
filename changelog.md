@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.18
+
+* [NuGet] `VisioForge.Core.UI.Apple`, `VisioForge.Core.UI.Android`, and `VisioForge.Core.UI.WinUI` packages are merged into the `VisioForge.DotNet.Core` package. All namespaces are the same.
+* [Media Blocks SDK .Net] Added the `ZOrder` property to `LVCVideoInput` and `LVCVideoAudioInput` classes. You can use this property to set the Z-order for the video input.
+
 ## 2025.1.14
 
 * [NuGet] `VisioForge.Core.UI.WPF` and `VisioForge.Core.UI.WinForms` packages are merged into the `VisioForge.DotNet.Core` package. In WPF projects you have to update the XAML code if the assembly names are used. All namespaces are the same.
