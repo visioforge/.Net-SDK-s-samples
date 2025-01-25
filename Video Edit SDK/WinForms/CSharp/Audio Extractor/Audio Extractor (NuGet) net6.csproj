@@ -15,10 +15,10 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.1.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.1.19" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.1.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.1.20" />
   </ItemGroup>
 </Project>
