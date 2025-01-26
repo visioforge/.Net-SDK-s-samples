@@ -39,7 +39,12 @@ namespace replace_audio
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
             await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
             
         private async void btStart_Click(object sender, RoutedEventArgs e)
@@ -64,6 +69,10 @@ namespace replace_audio
             _videoSourceFile = new BasicFileSourceBlock(edSourceVideoFile.Text);
             _videoSource = new ParseBinBlock();
 
+            // MP4 output
+            _outputFile = Path.Combine(Path.GetDirectoryName(edSourceVideoFile.Text), "new_output.mp4");
+            _mp4Sink = new MP4SinkBlock(_outputFile);
+
             // Create audio source
             if (cbRemoveAudio.IsChecked == false)
             {
@@ -79,14 +88,18 @@ namespace replace_audio
                     _audioSource = new ParseBinBlock();
                 }
             }
-
-            // MP4 output
-            _outputFile = Path.Combine(Path.GetDirectoryName(edSourceVideoFile.Text), "new_output.mp4");
-            _mp4Sink = new MP4SinkBlock(_outputFile);
-
+         
             // Connect everything
             _pipeline.Connect(_videoSourceFile.Output, _videoSource.Input);
-            _pipeline.Connect(_videoSource.GetOutputPadByType(MediaBlockPadMediaType.Video), _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
+                        
+            var videoInputPad = _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video);
+
+            // Catch EOS for video stream, to prevent creation of files with long audio and short video. File duration = video duration.
+            videoInputPad.OnEOS += async (sender, args) => { 
+                _pipeline.SendEOS();
+            };
+
+            _pipeline.Connect(_videoSource.GetOutputPadByType(MediaBlockPadMediaType.Video), videoInputPad);
 
             if (cbRemoveAudio.IsChecked == false)
             {

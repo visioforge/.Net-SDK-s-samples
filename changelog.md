@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.22
+
+* [Windows] Resolved issue with missed ONVIF sources while enumerating on PC with multiple network interfaces
+* [Media Blocks SDK .Net] Added the `OnEOS` event to `MediaBlockPad` class. You can use this event to get the EOS (End of Stream) event from the media block. It can be useful if you have several file sources with a different duration and you need to stop the pipeline when the first source ends.
+* [Media Blocks SDK .Net] Added the `SendEOS` method to `MediaBlocksPipeline` class. You can use this method to send the EOS (End of Stream) event to the pipeline.
+  
 ## 2025.1.18
 
 * [NuGet] `VisioForge.Core.UI.Apple`, `VisioForge.Core.UI.Android`, and `VisioForge.Core.UI.WinUI` packages are merged into the `VisioForge.DotNet.Core` package. All namespaces are the same.

@@ -17,7 +17,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Text="Source audio file" Width="100" />
-                <TextBox Text="c:\vf\Test-VisioForge.m4a" VerticalAlignment="Center" Margin="0,0,10,0" Width="200" x:Name="edSourceAudioFile"/>
+                <TextBox Text="c:\vf\!audio.mp3" VerticalAlignment="Center" Margin="0,0,10,0" Width="200" x:Name="edSourceAudioFile"/>
                 <Button x:Name="btSelectAudio" Content="..." Click="btSelectAudio_Click" Width="20" />
             </StackPanel>
 
