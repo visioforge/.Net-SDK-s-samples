@@ -95,7 +95,7 @@ namespace replace_audio
             var videoInputPad = _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video);
 
             // Catch EOS for video stream, to prevent creation of files with long audio and short video. File duration = video duration.
-            videoInputPad.OnEOS += async (sender, args) => { 
+            videoInputPad.OnEOS += async (senderX, argsX) => { 
                 _pipeline.SendEOS();
             };
 
