@@ -15,6 +15,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.1.21" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.1.24" />
   </ItemGroup>
 </Project>
