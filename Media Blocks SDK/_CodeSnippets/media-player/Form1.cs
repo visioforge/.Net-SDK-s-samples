@@ -12,7 +12,6 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.AudioRendering;
-using System.Windows.Media;
 
 namespace media_player
 {
