@@ -47,7 +47,12 @@ namespace video_capture_webcam_mp4
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
             await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
         private async void btStop_Click(object sender, EventArgs e)

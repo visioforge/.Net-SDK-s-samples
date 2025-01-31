@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             btStart = new System.Windows.Forms.Button();
@@ -37,6 +38,10 @@
             edFilename = new System.Windows.Forms.TextBox();
             btOpenFile = new System.Windows.Forms.Button();
             openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            lbTime = new System.Windows.Forms.Label();
+            tbTimeline = new System.Windows.Forms.TrackBar();
+            timer1 = new System.Windows.Forms.Timer(components);
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
             SuspendLayout();
             // 
             // VideoView1
@@ -46,7 +51,6 @@
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
             VideoView1.Size = new System.Drawing.Size(1067, 662);
-            VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 0;
             // 
             // btStart
@@ -102,11 +106,37 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // lbTime
+            // 
+            lbTime.AutoSize = true;
+            lbTime.Location = new System.Drawing.Point(939, 745);
+            lbTime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbTime.Name = "lbTime";
+            lbTime.Size = new System.Drawing.Size(155, 25);
+            lbTime.TabIndex = 7;
+            lbTime.Text = "00:00:00/00:00:00";
+            // 
+            // tbTimeline
+            // 
+            tbTimeline.Location = new System.Drawing.Point(584, 731);
+            tbTimeline.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTimeline.Maximum = 100;
+            tbTimeline.Name = "tbTimeline";
+            tbTimeline.Size = new System.Drawing.Size(345, 69);
+            tbTimeline.TabIndex = 6;
+            tbTimeline.Scroll += tbTimeline_Scroll;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1123, 804);
+            ClientSize = new System.Drawing.Size(1123, 794);
+            Controls.Add(lbTime);
+            Controls.Add(tbTimeline);
             Controls.Add(btOpenFile);
             Controls.Add(edFilename);
             Controls.Add(label1);
@@ -119,6 +149,7 @@
             Text = "Media Blocks SDK .Net - Media player code snippet";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,5 +163,8 @@
         private System.Windows.Forms.TextBox edFilename;
         private System.Windows.Forms.Button btOpenFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label lbTime;
+        private System.Windows.Forms.TrackBar tbTimeline;
+        private System.Windows.Forms.Timer timer1;
     }
 }

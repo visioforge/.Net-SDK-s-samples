@@ -15,6 +15,7 @@ namespace Screen_Capture_X
     using System.Windows.Controls;
     using System.Windows.Forms;
     using System.Windows.Input;
+    using System.Windows.Threading;
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaBlocks;
@@ -51,9 +52,7 @@ namespace Screen_Capture_X
 
         public Window1()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
@@ -145,7 +144,8 @@ namespace Screen_Capture_X
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
 
-            var source = new ScreenCaptureDX9SourceSettings();
+            var source = new ScreenCaptureD3D11SourceSettings();
+            source.API = D3D11ScreenCaptureAPI.WGC;
 
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
@@ -169,7 +169,7 @@ namespace Screen_Capture_X
             }
 
             source.CaptureCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
-            source.Monitor = screenID;
+            source.MonitorIndex = screenID;
 
             return source;
         }

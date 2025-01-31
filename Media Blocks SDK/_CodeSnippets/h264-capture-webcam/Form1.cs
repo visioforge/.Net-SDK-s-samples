@@ -34,7 +34,12 @@ namespace h264_capture_webcam
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            // We have to initialize the engine on start
+            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.Enabled = false;
             await VisioForgeX.InitSDKAsync();
+            this.Enabled = true;
+            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
             edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 

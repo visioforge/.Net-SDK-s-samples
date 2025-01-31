@@ -67,6 +67,7 @@
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             Name = "Form1";
             Text = "Read File Info Code Snippet";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

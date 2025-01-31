@@ -16,9 +16,9 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.22" />
-    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="2025.1.22" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.1.22" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="2025.1.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.1.23" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>

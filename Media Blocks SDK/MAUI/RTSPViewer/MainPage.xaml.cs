@@ -4,6 +4,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.ONVIF;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
@@ -50,12 +51,47 @@ namespace RTSPViewer
         {
             CreateEngine();
 
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edUsername.Text, edPassword.Text, true);
+            var uri = new Uri(edURL.Text);
+            if (uri.Scheme == "http" || uri.Scheme == "https")
+            {
+                // Get RTSP URL from ONVIF
+                var onvifDevice = new ONVIFDevice();
+                var result = await onvifDevice.ConnectAsync(uri, edUsername.Text, edPassword.Text);
+                if (result)
+                {
+                    var deviceInfo = onvifDevice.GetDeviceInformation();
+                    if (deviceInfo != null)
+                    {
+                        Debug.WriteLine($"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}");
+                    }
+
+                    var endPoints = onvifDevice.MediaEndpoints;
+                    if (endPoints.Length > 0)
+                    {
+                        var rtspUri = endPoints[0].Uri.Uri;
+                        if (rtspUri != null)
+                        {
+                            uri = new Uri(rtspUri);
+                        }
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Alert", "Unable to get RTSP source info from ONVIF URL.", "OK");
+                    return;
+                }
+            }
+            else if (uri.Scheme != "rtsp")
+            {
+                await DisplayAlert("Alert", "Unsupported URL", "OK");
+            }
+
+            var rtsp = await RTSPSourceSettings.CreateAsync(uri, edUsername.Text, edPassword.Text, true);
             var info = rtsp.GetInfo();
 
             if (info == null)
             {
-                await DisplayAlert("Alert", "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF", "OK");
+                await DisplayAlert("Alert", "Unable to get RTSP source info.", "OK");
                 return;
             }
 

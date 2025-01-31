@@ -49,7 +49,12 @@ namespace ndi_streamer_mb
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await VisioForgeX.InitSDKAsync();         
+            // We have to initialize the engine on start
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            this.IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            this.IsEnabled = true;
+            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
