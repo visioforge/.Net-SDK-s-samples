@@ -126,8 +126,8 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.1.24" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.1.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.1.25" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

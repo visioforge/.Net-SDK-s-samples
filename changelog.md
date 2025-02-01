@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.1.25
+
+* [Windows] Resolved HTTPS issue with the not loaded SSL certificates
+
 ## 2025.1.22
 
 * [Windows] Resolved issue with missed ONVIF sources while enumerating on PC with multiple network interfaces
