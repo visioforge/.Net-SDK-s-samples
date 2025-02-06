@@ -18,7 +18,7 @@ jobs:
       Solution_Name_VC3: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net5.sln"
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net5.sln"
-      Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.CS.WinForms net5.sln"
+      Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln"
 
     runs-on: windows-2022
 
