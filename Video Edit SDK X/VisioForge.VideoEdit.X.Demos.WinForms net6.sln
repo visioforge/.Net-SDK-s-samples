@@ -5,11 +5,13 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE X net9", "WinForms\CSharp\Main Demo X\Main Demo VE X net9.csproj", "{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE X net6", "WinForms\CSharp\Main Demo X\Main Demo VE X net6.csproj", "{C0F8B56A-C7E5-41A0-BA4E-D293278316AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo X net9", "WinForms\CSharp\Video Join Demo X\Video Join Demo X net9.csproj", "{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo X net6", "WinForms\CSharp\Video Join Demo X\Video Join Demo X net6.csproj", "{C05BB2C6-CD4F-4397-9C00-657F8ABA017D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images X net9", "WinForms\CSharp\Video from images X\Video From Images X net9.csproj", "{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images X net6", "WinForms\CSharp\Video from images X\Video From Images X net6.csproj", "{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Video From Images X VB net6", "WinForms\VB\Video From Images X VB\Video From Images X VB net6.vbproj", "{4BDC9A62-C284-4846-973C-0A700F6F9200}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BDC9A62-C284-4846-973C-0A700F6F9200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDC9A62-C284-4846-973C-0A700F6F9200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDC9A62-C284-4846-973C-0A700F6F9200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDC9A62-C284-4846-973C-0A700F6F9200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{C0F8B56A-C7E5-41A0-BA4E-D293278316AC} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{C05BB2C6-CD4F-4397-9C00-657F8ABA017D} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 		{BE1D248D-C170-4FAD-8B09-16F003BC2ABB} = {12FCD389-3B42-46FC-9956-076CF43F2600}
+		{4BDC9A62-C284-4846-973C-0A700F6F9200} = {12FCD389-3B42-46FC-9956-076CF43F2600}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
