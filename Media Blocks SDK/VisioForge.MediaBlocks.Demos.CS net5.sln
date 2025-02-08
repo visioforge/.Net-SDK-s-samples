@@ -125,6 +125,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ndi-streamer-mb net5", "_Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "replace_audio net5", "_CodeSnippets\replace-audio\replace_audio net5.csproj", "{ED768C2C-3C47-4100-84A8-875904BD8240}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Restreamer net5", "WPF\CSharp\RTSP Restreamer\RTSP Restreamer net5.csproj", "{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -363,6 +365,10 @@ Global
 		{ED768C2C-3C47-4100-84A8-875904BD8240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED768C2C-3C47-4100-84A8-875904BD8240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED768C2C-3C47-4100-84A8-875904BD8240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -426,6 +432,7 @@ Global
 		{27EE38E0-4944-42B3-ADCE-19C6BA81C006} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 		{167D6A95-8AA3-440F-B8FC-B4DA6905BECD} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 		{ED768C2C-3C47-4100-84A8-875904BD8240} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
+		{5F996BBC-8D9C-4BFB-B197-FB1FE96223F5} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
