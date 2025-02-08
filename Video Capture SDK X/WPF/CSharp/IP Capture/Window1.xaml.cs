@@ -208,7 +208,7 @@ namespace IP_Capture
                             uri = new UriBuilder(uri) { UserName = login, Password = password }.Uri;
                         }
 
-                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio, ignoreMediaInfoReader: true);
+                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio);
 
                         VideoCapture1.Video_Source = uni;
                     }

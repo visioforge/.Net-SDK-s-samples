@@ -32,435 +32,480 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbBalance1 = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbVolume1 = new System.Windows.Forms.TrackBar();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbLicensing = new System.Windows.Forms.CheckBox();
-            this.mmError = new System.Windows.Forms.TextBox();
-            this.cbDebugMode = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btStop = new System.Windows.Forms.Button();
-            this.btPause = new System.Windows.Forms.Button();
-            this.btResume = new System.Windows.Forms.Button();
-            this.btStart = new System.Windows.Forms.Button();
-            this.lbTime = new System.Windows.Forms.Label();
-            this.tbTimeline = new System.Windows.Forms.TrackBar();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.btSelectFile = new System.Windows.Forms.Button();
-            this.edFilename = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rbVRCubemap = new System.Windows.Forms.RadioButton();
-            this.rbVREquire = new System.Windows.Forms.RadioButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.bt360Right = new System.Windows.Forms.Button();
-            this.bt360Left = new System.Windows.Forms.Button();
-            this.bt360Down = new System.Windows.Forms.Button();
-            this.bt360Up = new System.Windows.Forms.Button();
-            this.btZoomOut = new System.Windows.Forms.Button();
-            this.btZoomIn = new System.Windows.Forms.Button();
-            this.tbRoll = new System.Windows.Forms.TrackBar();
-            this.VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRoll)).BeginInit();
-            this.SuspendLayout();
+            groupBox4 = new System.Windows.Forms.GroupBox();
+            label7 = new System.Windows.Forms.Label();
+            tbBalance1 = new System.Windows.Forms.TrackBar();
+            label6 = new System.Windows.Forms.Label();
+            tbVolume1 = new System.Windows.Forms.TrackBar();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            cbLicensing = new System.Windows.Forms.CheckBox();
+            mmError = new System.Windows.Forms.TextBox();
+            cbDebugMode = new System.Windows.Forms.CheckBox();
+            label1 = new System.Windows.Forms.Label();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            btStop = new System.Windows.Forms.Button();
+            btPause = new System.Windows.Forms.Button();
+            btResume = new System.Windows.Forms.Button();
+            btStart = new System.Windows.Forms.Button();
+            lbTime = new System.Windows.Forms.Label();
+            tbTimeline = new System.Windows.Forms.TrackBar();
+            linkLabel1 = new System.Windows.Forms.LinkLabel();
+            btSelectFile = new System.Windows.Forms.Button();
+            edFilename = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            rbVRCubemap = new System.Windows.Forms.RadioButton();
+            rbVREquire = new System.Windows.Forms.RadioButton();
+            openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            timer1 = new System.Windows.Forms.Timer(components);
+            bt360Right = new System.Windows.Forms.Button();
+            bt360Left = new System.Windows.Forms.Button();
+            bt360Down = new System.Windows.Forms.Button();
+            bt360Up = new System.Windows.Forms.Button();
+            btZoomOut = new System.Windows.Forms.Button();
+            btZoomIn = new System.Windows.Forms.Button();
+            tbRoll = new System.Windows.Forms.TrackBar();
+            VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
+            groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbBalance1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).BeginInit();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tbRoll).BeginInit();
+            SuspendLayout();
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.tbBalance1);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.tbVolume1);
-            this.groupBox4.Location = new System.Drawing.Point(435, 147);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(221, 107);
-            this.groupBox4.TabIndex = 59;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Audio output";
+            groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            groupBox4.Controls.Add(label7);
+            groupBox4.Controls.Add(tbBalance1);
+            groupBox4.Controls.Add(label6);
+            groupBox4.Controls.Add(tbVolume1);
+            groupBox4.Location = new System.Drawing.Point(725, 283);
+            groupBox4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox4.Size = new System.Drawing.Size(368, 206);
+            groupBox4.TabIndex = 59;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Audio output";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(109, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Balance";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(182, 54);
+            label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(71, 25);
+            label7.TabIndex = 11;
+            label7.Text = "Balance";
             // 
             // tbBalance1
             // 
-            this.tbBalance1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbBalance1.Location = new System.Drawing.Point(112, 44);
-            this.tbBalance1.Maximum = 100;
-            this.tbBalance1.Minimum = -100;
-            this.tbBalance1.Name = "tbBalance1";
-            this.tbBalance1.Size = new System.Drawing.Size(85, 45);
-            this.tbBalance1.TabIndex = 10;
-            this.tbBalance1.Scroll += new System.EventHandler(this.tbBalance1_Scroll);
+            tbBalance1.BackColor = System.Drawing.SystemColors.Window;
+            tbBalance1.Location = new System.Drawing.Point(187, 85);
+            tbBalance1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbBalance1.Maximum = 100;
+            tbBalance1.Minimum = -100;
+            tbBalance1.Name = "tbBalance1";
+            tbBalance1.Size = new System.Drawing.Size(142, 69);
+            tbBalance1.TabIndex = 10;
+            tbBalance1.Scroll += tbBalance1_Scroll;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Volume";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(27, 54);
+            label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(72, 25);
+            label6.TabIndex = 9;
+            label6.Text = "Volume";
             // 
             // tbVolume1
             // 
-            this.tbVolume1.BackColor = System.Drawing.SystemColors.Window;
-            this.tbVolume1.Location = new System.Drawing.Point(19, 44);
-            this.tbVolume1.Maximum = 100;
-            this.tbVolume1.Name = "tbVolume1";
-            this.tbVolume1.Size = new System.Drawing.Size(85, 45);
-            this.tbVolume1.TabIndex = 8;
-            this.tbVolume1.Value = 80;
-            this.tbVolume1.Scroll += new System.EventHandler(this.tbVolume1_Scroll);
+            tbVolume1.BackColor = System.Drawing.SystemColors.Window;
+            tbVolume1.Location = new System.Drawing.Point(32, 85);
+            tbVolume1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbVolume1.Maximum = 100;
+            tbVolume1.Name = "tbVolume1";
+            tbVolume1.Size = new System.Drawing.Size(142, 69);
+            tbVolume1.TabIndex = 8;
+            tbVolume1.Value = 80;
+            tbVolume1.Scroll += tbVolume1_Scroll;
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.cbLicensing);
-            this.groupBox1.Controls.Add(this.mmError);
-            this.groupBox1.Controls.Add(this.cbDebugMode);
-            this.groupBox1.Location = new System.Drawing.Point(435, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(221, 126);
-            this.groupBox1.TabIndex = 58;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Errors and warnings";
+            groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            groupBox1.Controls.Add(cbLicensing);
+            groupBox1.Controls.Add(mmError);
+            groupBox1.Controls.Add(cbDebugMode);
+            groupBox1.Location = new System.Drawing.Point(725, 29);
+            groupBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox1.Size = new System.Drawing.Size(368, 242);
+            groupBox1.TabIndex = 58;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Errors and warnings";
             // 
             // cbLicensing
             // 
-            this.cbLicensing.AutoSize = true;
-            this.cbLicensing.Location = new System.Drawing.Point(99, 19);
-            this.cbLicensing.Name = "cbLicensing";
-            this.cbLicensing.Size = new System.Drawing.Size(91, 17);
-            this.cbLicensing.TabIndex = 4;
-            this.cbLicensing.Text = "Licensing info";
-            this.cbLicensing.UseVisualStyleBackColor = true;
+            cbLicensing.AutoSize = true;
+            cbLicensing.Location = new System.Drawing.Point(165, 37);
+            cbLicensing.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbLicensing.Name = "cbLicensing";
+            cbLicensing.Size = new System.Drawing.Size(146, 29);
+            cbLicensing.TabIndex = 4;
+            cbLicensing.Text = "Licensing info";
+            cbLicensing.UseVisualStyleBackColor = true;
             // 
             // mmError
             // 
-            this.mmError.Location = new System.Drawing.Point(6, 42);
-            this.mmError.Multiline = true;
-            this.mmError.Name = "mmError";
-            this.mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mmError.Size = new System.Drawing.Size(209, 78);
-            this.mmError.TabIndex = 3;
+            mmError.Location = new System.Drawing.Point(10, 81);
+            mmError.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            mmError.Multiline = true;
+            mmError.Name = "mmError";
+            mmError.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            mmError.Size = new System.Drawing.Size(346, 146);
+            mmError.TabIndex = 3;
             // 
             // cbDebugMode
             // 
-            this.cbDebugMode.AutoSize = true;
-            this.cbDebugMode.Location = new System.Drawing.Point(6, 19);
-            this.cbDebugMode.Name = "cbDebugMode";
-            this.cbDebugMode.Size = new System.Drawing.Size(87, 17);
-            this.cbDebugMode.TabIndex = 2;
-            this.cbDebugMode.Text = "Debug mode";
-            this.cbDebugMode.UseVisualStyleBackColor = true;
+            cbDebugMode.AutoSize = true;
+            cbDebugMode.Location = new System.Drawing.Point(10, 37);
+            cbDebugMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbDebugMode.Name = "cbDebugMode";
+            cbDebugMode.Size = new System.Drawing.Size(144, 29);
+            cbDebugMode.TabIndex = 2;
+            cbDebugMode.Text = "Debug mode";
+            cbDebugMode.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(84, 476);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(244, 13);
-            this.label1.TabIndex = 57;
-            this.label1.Text = "Much more features are shown in Main Demo!";
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label1.Location = new System.Drawing.Point(140, 915);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(397, 20);
+            label1.TabIndex = 57;
+            label1.Text = "Much more features are shown in Main Demo!";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox2.Controls.Add(this.btStop);
-            this.groupBox2.Controls.Add(this.btPause);
-            this.groupBox2.Controls.Add(this.btResume);
-            this.groupBox2.Controls.Add(this.btStart);
-            this.groupBox2.Controls.Add(this.lbTime);
-            this.groupBox2.Controls.Add(this.tbTimeline);
-            this.groupBox2.Location = new System.Drawing.Point(13, 369);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(416, 90);
-            this.groupBox2.TabIndex = 56;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Controls";
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            groupBox2.Controls.Add(btStop);
+            groupBox2.Controls.Add(btPause);
+            groupBox2.Controls.Add(btResume);
+            groupBox2.Controls.Add(btStart);
+            groupBox2.Controls.Add(lbTime);
+            groupBox2.Controls.Add(tbTimeline);
+            groupBox2.Location = new System.Drawing.Point(22, 710);
+            groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox2.Size = new System.Drawing.Size(693, 173);
+            groupBox2.TabIndex = 56;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Controls";
             // 
             // btStop
             // 
-            this.btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStop.Location = new System.Drawing.Point(180, 58);
-            this.btStop.Name = "btStop";
-            this.btStop.Size = new System.Drawing.Size(46, 23);
-            this.btStop.TabIndex = 7;
-            this.btStop.Text = "Stop";
-            this.btStop.UseVisualStyleBackColor = true;
-            this.btStop.Click += new System.EventHandler(this.btStop_Click);
+            btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            btStop.Location = new System.Drawing.Point(300, 112);
+            btStop.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btStop.Name = "btStop";
+            btStop.Size = new System.Drawing.Size(77, 44);
+            btStop.TabIndex = 7;
+            btStop.Text = "Stop";
+            btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // btPause
             // 
-            this.btPause.Location = new System.Drawing.Point(122, 58);
-            this.btPause.Name = "btPause";
-            this.btPause.Size = new System.Drawing.Size(52, 23);
-            this.btPause.TabIndex = 6;
-            this.btPause.Text = "Pause";
-            this.btPause.UseVisualStyleBackColor = true;
-            this.btPause.Click += new System.EventHandler(this.btPause_Click);
+            btPause.Location = new System.Drawing.Point(203, 112);
+            btPause.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btPause.Name = "btPause";
+            btPause.Size = new System.Drawing.Size(87, 44);
+            btPause.TabIndex = 6;
+            btPause.Text = "Pause";
+            btPause.UseVisualStyleBackColor = true;
+            btPause.Click += btPause_Click;
             // 
             // btResume
             // 
-            this.btResume.Location = new System.Drawing.Point(55, 58);
-            this.btResume.Name = "btResume";
-            this.btResume.Size = new System.Drawing.Size(61, 23);
-            this.btResume.TabIndex = 5;
-            this.btResume.Text = "Resume";
-            this.btResume.UseVisualStyleBackColor = true;
-            this.btResume.Click += new System.EventHandler(this.btResume_Click);
+            btResume.Location = new System.Drawing.Point(92, 112);
+            btResume.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btResume.Name = "btResume";
+            btResume.Size = new System.Drawing.Size(102, 44);
+            btResume.TabIndex = 5;
+            btResume.Text = "Resume";
+            btResume.UseVisualStyleBackColor = true;
+            btResume.Click += btResume_Click;
             // 
             // btStart
             // 
-            this.btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btStart.Location = new System.Drawing.Point(6, 58);
-            this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(43, 23);
-            this.btStart.TabIndex = 4;
-            this.btStart.Text = "Start";
-            this.btStart.UseVisualStyleBackColor = true;
-            this.btStart.Click += new System.EventHandler(this.btStart_Click);
+            btStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            btStart.Location = new System.Drawing.Point(10, 112);
+            btStart.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btStart.Name = "btStart";
+            btStart.Size = new System.Drawing.Size(72, 44);
+            btStart.TabIndex = 4;
+            btStart.Text = "Start";
+            btStart.UseVisualStyleBackColor = true;
+            btStart.Click += btStart_Click;
             // 
             // lbTime
             // 
-            this.lbTime.AutoSize = true;
-            this.lbTime.Location = new System.Drawing.Point(306, 32);
-            this.lbTime.Name = "lbTime";
-            this.lbTime.Size = new System.Drawing.Size(96, 13);
-            this.lbTime.TabIndex = 1;
-            this.lbTime.Text = "00:00:00/00:00:00";
+            lbTime.AutoSize = true;
+            lbTime.Location = new System.Drawing.Point(510, 62);
+            lbTime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbTime.Name = "lbTime";
+            lbTime.Size = new System.Drawing.Size(155, 25);
+            lbTime.TabIndex = 1;
+            lbTime.Text = "00:00:00/00:00:00";
             // 
             // tbTimeline
             // 
-            this.tbTimeline.Location = new System.Drawing.Point(6, 19);
-            this.tbTimeline.Maximum = 100;
-            this.tbTimeline.Name = "tbTimeline";
-            this.tbTimeline.Size = new System.Drawing.Size(294, 45);
-            this.tbTimeline.TabIndex = 0;
-            this.tbTimeline.Scroll += new System.EventHandler(this.tbTimeline_Scroll);
+            tbTimeline.Location = new System.Drawing.Point(10, 37);
+            tbTimeline.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTimeline.Maximum = 100;
+            tbTimeline.Name = "tbTimeline";
+            tbTimeline.Size = new System.Drawing.Size(490, 69);
+            tbTimeline.TabIndex = 0;
+            tbTimeline.Scroll += tbTimeline_Scroll;
             // 
             // linkLabel1
             // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(319, 9);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(110, 13);
-            this.linkLabel1.TabIndex = 55;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Watch video tutorials!";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            linkLabel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new System.Drawing.Point(532, 17);
+            linkLabel1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new System.Drawing.Size(184, 25);
+            linkLabel1.TabIndex = 55;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Watch video tutorials!";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // btSelectFile
             // 
-            this.btSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSelectFile.Location = new System.Drawing.Point(406, 26);
-            this.btSelectFile.Name = "btSelectFile";
-            this.btSelectFile.Size = new System.Drawing.Size(23, 23);
-            this.btSelectFile.TabIndex = 54;
-            this.btSelectFile.Text = "...";
-            this.btSelectFile.UseVisualStyleBackColor = true;
-            this.btSelectFile.Click += new System.EventHandler(this.btSelectFile_Click);
+            btSelectFile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btSelectFile.Location = new System.Drawing.Point(677, 50);
+            btSelectFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btSelectFile.Name = "btSelectFile";
+            btSelectFile.Size = new System.Drawing.Size(38, 44);
+            btSelectFile.TabIndex = 54;
+            btSelectFile.Text = "...";
+            btSelectFile.UseVisualStyleBackColor = true;
+            btSelectFile.Click += btSelectFile_Click;
             // 
             // edFilename
             // 
-            this.edFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edFilename.Location = new System.Drawing.Point(13, 28);
-            this.edFilename.Name = "edFilename";
-            this.edFilename.Size = new System.Drawing.Size(387, 20);
-            this.edFilename.TabIndex = 53;
-            this.edFilename.Text = "C:\\samples\\!video.mp4";
+            edFilename.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            edFilename.Location = new System.Drawing.Point(22, 54);
+            edFilename.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edFilename.Name = "edFilename";
+            edFilename.Size = new System.Drawing.Size(642, 31);
+            edFilename.TabIndex = 53;
+            edFilename.Text = "c:\\Samples\\360\\equirectangular4.MP4";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(10, 12);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(52, 13);
-            this.label14.TabIndex = 52;
-            this.label14.Text = "File name";
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(17, 23);
+            label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(87, 25);
+            label14.TabIndex = 52;
+            label14.Text = "File name";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.rbVRCubemap);
-            this.groupBox3.Controls.Add(this.rbVREquire);
-            this.groupBox3.Location = new System.Drawing.Point(435, 263);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(221, 62);
-            this.groupBox3.TabIndex = 63;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "VR type";
+            groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(rbVRCubemap);
+            groupBox3.Controls.Add(rbVREquire);
+            groupBox3.Location = new System.Drawing.Point(725, 506);
+            groupBox3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            groupBox3.Size = new System.Drawing.Size(368, 119);
+            groupBox3.TabIndex = 63;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "VR type";
             // 
             // rbVRCubemap
             // 
-            this.rbVRCubemap.AutoSize = true;
-            this.rbVRCubemap.Location = new System.Drawing.Point(127, 26);
-            this.rbVRCubemap.Name = "rbVRCubemap";
-            this.rbVRCubemap.Size = new System.Drawing.Size(70, 17);
-            this.rbVRCubemap.TabIndex = 1;
-            this.rbVRCubemap.Text = "Cubemap";
-            this.rbVRCubemap.UseVisualStyleBackColor = true;
+            rbVRCubemap.AutoSize = true;
+            rbVRCubemap.Location = new System.Drawing.Point(212, 50);
+            rbVRCubemap.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbVRCubemap.Name = "rbVRCubemap";
+            rbVRCubemap.Size = new System.Drawing.Size(114, 29);
+            rbVRCubemap.TabIndex = 1;
+            rbVRCubemap.Text = "Cubemap";
+            rbVRCubemap.UseVisualStyleBackColor = true;
             // 
             // rbVREquire
             // 
-            this.rbVREquire.AutoSize = true;
-            this.rbVREquire.Checked = true;
-            this.rbVREquire.Location = new System.Drawing.Point(16, 26);
-            this.rbVREquire.Name = "rbVREquire";
-            this.rbVREquire.Size = new System.Drawing.Size(99, 17);
-            this.rbVREquire.TabIndex = 0;
-            this.rbVREquire.TabStop = true;
-            this.rbVREquire.Text = "Equirectangular";
-            this.rbVREquire.UseVisualStyleBackColor = true;
+            rbVREquire.AutoSize = true;
+            rbVREquire.Checked = true;
+            rbVREquire.Location = new System.Drawing.Point(27, 50);
+            rbVREquire.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbVREquire.Name = "rbVREquire";
+            rbVREquire.Size = new System.Drawing.Size(159, 29);
+            rbVREquire.TabIndex = 0;
+            rbVREquire.TabStop = true;
+            rbVREquire.Text = "Equirectangular";
+            rbVREquire.UseVisualStyleBackColor = true;
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            timer1.Tick += timer1_Tick;
             // 
             // bt360Right
             // 
-            this.bt360Right.Location = new System.Drawing.Point(569, 353);
-            this.bt360Right.Name = "bt360Right";
-            this.bt360Right.Size = new System.Drawing.Size(21, 48);
-            this.bt360Right.TabIndex = 67;
-            this.bt360Right.Text = "R";
-            this.bt360Right.UseVisualStyleBackColor = true;
-            this.bt360Right.Click += new System.EventHandler(this.bt360Right_Click);
+            bt360Right.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            bt360Right.Location = new System.Drawing.Point(948, 679);
+            bt360Right.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            bt360Right.Name = "bt360Right";
+            bt360Right.Size = new System.Drawing.Size(35, 92);
+            bt360Right.TabIndex = 67;
+            bt360Right.Text = "R";
+            bt360Right.UseVisualStyleBackColor = true;
+            bt360Right.Click += bt360Right_Click;
             // 
             // bt360Left
             // 
-            this.bt360Left.Location = new System.Drawing.Point(497, 352);
-            this.bt360Left.Name = "bt360Left";
-            this.bt360Left.Size = new System.Drawing.Size(21, 48);
-            this.bt360Left.TabIndex = 66;
-            this.bt360Left.Text = "L";
-            this.bt360Left.UseVisualStyleBackColor = true;
-            this.bt360Left.Click += new System.EventHandler(this.bt360Left_Click);
+            bt360Left.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            bt360Left.Location = new System.Drawing.Point(828, 677);
+            bt360Left.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            bt360Left.Name = "bt360Left";
+            bt360Left.Size = new System.Drawing.Size(35, 92);
+            bt360Left.TabIndex = 66;
+            bt360Left.Text = "L";
+            bt360Left.UseVisualStyleBackColor = true;
+            bt360Left.Click += bt360Left_Click;
             // 
             // bt360Down
             // 
-            this.bt360Down.Location = new System.Drawing.Point(518, 390);
-            this.bt360Down.Name = "bt360Down";
-            this.bt360Down.Size = new System.Drawing.Size(51, 23);
-            this.bt360Down.TabIndex = 65;
-            this.bt360Down.Text = "Down";
-            this.bt360Down.UseVisualStyleBackColor = true;
-            this.bt360Down.Click += new System.EventHandler(this.bt360Down_Click);
+            bt360Down.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            bt360Down.Location = new System.Drawing.Point(863, 750);
+            bt360Down.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            bt360Down.Name = "bt360Down";
+            bt360Down.Size = new System.Drawing.Size(85, 44);
+            bt360Down.TabIndex = 65;
+            bt360Down.Text = "Down";
+            bt360Down.UseVisualStyleBackColor = true;
+            bt360Down.Click += bt360Down_Click;
             // 
             // bt360Up
             // 
-            this.bt360Up.Location = new System.Drawing.Point(518, 340);
-            this.bt360Up.Name = "bt360Up";
-            this.bt360Up.Size = new System.Drawing.Size(51, 23);
-            this.bt360Up.TabIndex = 64;
-            this.bt360Up.Text = "Up";
-            this.bt360Up.UseVisualStyleBackColor = true;
-            this.bt360Up.Click += new System.EventHandler(this.bt360Up_Click);
+            bt360Up.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            bt360Up.Location = new System.Drawing.Point(863, 654);
+            bt360Up.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            bt360Up.Name = "bt360Up";
+            bt360Up.Size = new System.Drawing.Size(85, 44);
+            bt360Up.TabIndex = 64;
+            bt360Up.Text = "Up";
+            bt360Up.UseVisualStyleBackColor = true;
+            bt360Up.Click += bt360Up_Click;
             // 
             // btZoomOut
             // 
-            this.btZoomOut.Location = new System.Drawing.Point(546, 365);
-            this.btZoomOut.Name = "btZoomOut";
-            this.btZoomOut.Size = new System.Drawing.Size(23, 23);
-            this.btZoomOut.TabIndex = 69;
-            this.btZoomOut.Text = "-";
-            this.btZoomOut.UseVisualStyleBackColor = true;
-            this.btZoomOut.Click += new System.EventHandler(this.btZoomOut_Click);
+            btZoomOut.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btZoomOut.Location = new System.Drawing.Point(910, 702);
+            btZoomOut.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btZoomOut.Name = "btZoomOut";
+            btZoomOut.Size = new System.Drawing.Size(38, 44);
+            btZoomOut.TabIndex = 69;
+            btZoomOut.Text = "-";
+            btZoomOut.UseVisualStyleBackColor = true;
+            btZoomOut.Click += btZoomOut_Click;
             // 
             // btZoomIn
             // 
-            this.btZoomIn.Location = new System.Drawing.Point(518, 365);
-            this.btZoomIn.Name = "btZoomIn";
-            this.btZoomIn.Size = new System.Drawing.Size(22, 23);
-            this.btZoomIn.TabIndex = 68;
-            this.btZoomIn.Text = "+";
-            this.btZoomIn.UseVisualStyleBackColor = true;
-            this.btZoomIn.Click += new System.EventHandler(this.btZoomIn_Click);
+            btZoomIn.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            btZoomIn.Location = new System.Drawing.Point(863, 702);
+            btZoomIn.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btZoomIn.Name = "btZoomIn";
+            btZoomIn.Size = new System.Drawing.Size(37, 44);
+            btZoomIn.TabIndex = 68;
+            btZoomIn.Text = "+";
+            btZoomIn.UseVisualStyleBackColor = true;
+            btZoomIn.Click += btZoomIn_Click;
             // 
             // tbRoll
             // 
-            this.tbRoll.Location = new System.Drawing.Point(497, 419);
-            this.tbRoll.Maximum = 180;
-            this.tbRoll.Minimum = -180;
-            this.tbRoll.Name = "tbRoll";
-            this.tbRoll.Size = new System.Drawing.Size(93, 45);
-            this.tbRoll.TabIndex = 70;
-            this.tbRoll.Scroll += new System.EventHandler(this.tbRoll_Scroll);
+            tbRoll.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tbRoll.Location = new System.Drawing.Point(828, 806);
+            tbRoll.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbRoll.Maximum = 180;
+            tbRoll.Minimum = -180;
+            tbRoll.Name = "tbRoll";
+            tbRoll.Size = new System.Drawing.Size(155, 69);
+            tbRoll.TabIndex = 70;
+            tbRoll.Scroll += tbRoll_Scroll;
             // 
             // VideoView1
             // 
-            this.VideoView1.BackColor = System.Drawing.Color.Black;
-            this.VideoView1.Location = new System.Drawing.Point(13, 57);
-            this.VideoView1.Name = "VideoView1";
-            this.VideoView1.Size = new System.Drawing.Size(416, 306);
-            this.VideoView1.StatusOverlay = null;
-            this.VideoView1.TabIndex = 71;
+            VideoView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            VideoView1.BackColor = System.Drawing.Color.Black;
+            VideoView1.Location = new System.Drawing.Point(22, 110);
+            VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            VideoView1.Name = "VideoView1";
+            VideoView1.Size = new System.Drawing.Size(693, 588);
+            VideoView1.TabIndex = 71;
+            VideoView1.MouseDown += VideoView1_MouseDown;
+            VideoView1.MouseMove += VideoView1_MouseMove;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 499);
-            this.Controls.Add(this.VideoView1);
-            this.Controls.Add(this.tbRoll);
-            this.Controls.Add(this.btZoomOut);
-            this.Controls.Add(this.btZoomIn);
-            this.Controls.Add(this.bt360Right);
-            this.Controls.Add(this.bt360Left);
-            this.Controls.Add(this.bt360Down);
-            this.Controls.Add(this.bt360Up);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.btSelectFile);
-            this.Controls.Add(this.edFilename);
-            this.Controls.Add(this.label14);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "Media Player SDK .Net - VR 360 Demo";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbBalance1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbVolume1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbTimeline)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRoll)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1110, 960);
+            Controls.Add(VideoView1);
+            Controls.Add(tbRoll);
+            Controls.Add(btZoomOut);
+            Controls.Add(btZoomIn);
+            Controls.Add(bt360Right);
+            Controls.Add(bt360Left);
+            Controls.Add(bt360Down);
+            Controls.Add(bt360Up);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox4);
+            Controls.Add(groupBox1);
+            Controls.Add(label1);
+            Controls.Add(groupBox2);
+            Controls.Add(linkLabel1);
+            Controls.Add(btSelectFile);
+            Controls.Add(edFilename);
+            Controls.Add(label14);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            Name = "Form1";
+            Text = "Media Player SDK .Net - VR 360 Demo";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbBalance1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbVolume1).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tbRoll).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

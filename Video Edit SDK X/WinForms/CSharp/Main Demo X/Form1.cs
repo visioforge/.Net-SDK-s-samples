@@ -113,7 +113,7 @@ namespace VideoEdit_CS_Demo
                         }
                         else
                         {
-                            VideoEdit1.Input_AddAudioFile(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                            VideoEdit1.Input_AddAudioFile(audioFile, insertTime: TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
                         }
                     }
                     else
@@ -128,7 +128,7 @@ namespace VideoEdit_CS_Demo
                         }
                         else
                         {
-                            VideoEdit1.Input_AddAudioFile(audioFile, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                            VideoEdit1.Input_AddAudioFile(audioFile, insertTime: TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
                         }
                     }
                 }
@@ -138,11 +138,11 @@ namespace VideoEdit_CS_Demo
                     {
                         if (cbInsertAfterPreviousFile.Checked)
                         {
-                            VideoEdit1.Input_AddAudioVideoFile(s, null);
+                            VideoEdit1.Input_AddVideoFile(s, null);
                         }
                         else
                         {
-                            VideoEdit1.Input_AddAudioVideoFile(s, TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
+                            VideoEdit1.Input_AddAudioVideoFile(s, insertTime: TimeSpan.FromMilliseconds(Convert.ToInt32(edInsertTime.Text)));
                         }
                     }
                     else
@@ -288,7 +288,7 @@ namespace VideoEdit_CS_Demo
                         }
                     case 3:
                         {
-                            var wmvOutput = new WMV1Output(edOutput.Text);
+                            var wmvOutput = new WMVOutput(edOutput.Text);
                             VideoEdit1.Output_Format = wmvOutput;
 
                             break;
@@ -316,7 +316,7 @@ namespace VideoEdit_CS_Demo
                         }
                     case 7:
                         {
-                            var wmaOutput = new WMA1Output(edOutput.Text);
+                            var wmaOutput = new WMAOutput(edOutput.Text);
                             VideoEdit1.Output_Format = wmaOutput;
 
                             break;

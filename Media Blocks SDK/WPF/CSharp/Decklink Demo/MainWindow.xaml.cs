@@ -323,10 +323,7 @@ namespace Decklink_MB_Demo
             var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
             DecklinkHelper.GetVideoInfoFromMode(decklinkFormat, out var width, out var height, out var frameRate);
 
-            var format = DNxHDEncoderSettings.GetFormatByResolution(width, height);
-
-            var dnxSettings = new DNxHDEncoderSettings(format);
-            _videoEncoder = new DNxHDEncoderBlock(dnxSettings);
+            _videoEncoder = new H264EncoderBlock();
 
             _audioEncoder = new AudioConverterBlock();
 

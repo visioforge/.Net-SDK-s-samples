@@ -237,7 +237,7 @@ namespace Audio_Capture_Demo_X_WPF
                         {
                             if (wmaSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new WMA1Output(edOutput.Text), true);
+                                VideoCapture1.Outputs_Add(new WMAOutput(edOutput.Text), true);
                             }
                             else
                             {
@@ -384,14 +384,14 @@ namespace Audio_Capture_Demo_X_WPF
                     }
                 case 2:
                     {
-                        WMA1Output wma1;
+                        WMAOutput wma1;
                         if (wmaSettingsDialog == null)
                         {
-                            wma1 = new WMA1Output(edOutput.Text);
+                            wma1 = new WMAOutput(edOutput.Text);
                         }
                         else
                         {
-                            wma1 = (WMA1Output)wmaSettingsDialog.GetOutput();
+                            wma1 = (WMAOutput)wmaSettingsDialog.GetOutput();
                         }
 
                         wmaSettingsDialog = new UniversalOutputDialog(wma1);

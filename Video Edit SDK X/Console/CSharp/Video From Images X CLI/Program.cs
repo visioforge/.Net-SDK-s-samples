@@ -92,7 +92,7 @@ namespace Video_From_Images_CLI
                     videoEdit.Output_Format = new AVIOutput(options.OutputFile);
                     break;
                 case "wmv":
-                    videoEdit.Output_Format = new WMV1Output(options.OutputFile);
+                    videoEdit.Output_Format = new WMVOutput(options.OutputFile);
                     break;
                 default:
                     Console.WriteLine("Wrong output format. MP4 will be used.");

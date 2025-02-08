@@ -18,6 +18,10 @@
 
         private MediaPlayerCore MediaPlayer1;
 
+        private int _x = 0;
+
+        private int _y = 0;
+
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
@@ -66,6 +70,9 @@
 
         private async void btStart_Click(object sender, EventArgs e)
         {
+            _x = 0;
+            _y = 0;
+
             mmError.Clear();
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
@@ -220,6 +227,34 @@
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
+        }
+
+        private void VideoView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button.HasFlag(MouseButtons.Left))
+            {
+                _x = e.X;
+                _y = e.Y;
+            }
+        }
+
+        private void VideoView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (VideoView1 is null)
+            {
+                return;
+            }
+
+            if (e.Button.HasFlag(MouseButtons.Left))
+            {
+                vr.Yaw += (e.X - _x) * 2;
+                _x = e.X;
+
+                vr.Pitch += (e.Y - _y) * 2;
+                _y = e.Y;
+
+                vr.UpdateRequired = true;
+            }
         }
     }
 }

@@ -132,7 +132,7 @@
                         }
                     case 4:
                         {
-                            var wmvOutput = new WMV1Output(edOutput.Text);
+                            var wmvOutput = new WMVOutput(edOutput.Text);
                             VideoEdit1.Output_Format = wmvOutput;
                             break;
                         }
@@ -162,7 +162,7 @@
                         }
                     case 9:
                         {
-                            var wmaOutput = new WMA1Output(edOutput.Text);
+                            var wmaOutput = new WMAOutput(edOutput.Text);
                             VideoEdit1.Output_Format = wmaOutput;
                             break;
                         }

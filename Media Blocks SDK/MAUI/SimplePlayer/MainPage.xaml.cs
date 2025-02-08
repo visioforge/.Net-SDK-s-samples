@@ -228,7 +228,7 @@ namespace Simple_Player_MB_MAUI
                     lbFilename.IsVisible = true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 // The user canceled or something went wrong
             }

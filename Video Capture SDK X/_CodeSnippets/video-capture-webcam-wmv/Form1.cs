@@ -38,7 +38,7 @@ namespace video_capture_webcam_wmv
             videoCapture1.Audio_Record = true;
 
             // configure WMV output
-            var output = new WMV2Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.wmv"));
+            var output = new WMVOutput(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.wmv"));
             videoCapture1.Outputs_Add(output);
 
             // start
