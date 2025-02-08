@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.2.1
+
+* [X-engines] Added NVENC and AMF AV1 encoders support
+
 ## 2025.1.25
 
 * [Windows] Resolved HTTPS issue with the not loaded SSL certificates

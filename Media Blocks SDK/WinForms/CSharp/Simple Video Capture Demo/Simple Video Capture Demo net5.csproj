@@ -18,11 +18,11 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.1.21" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.1.21" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.3" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
