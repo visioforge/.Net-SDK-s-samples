@@ -9,7 +9,7 @@
     <ApplicationId>com.visioforge.rtspviewcli</ApplicationId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.4" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.5" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.0" />
