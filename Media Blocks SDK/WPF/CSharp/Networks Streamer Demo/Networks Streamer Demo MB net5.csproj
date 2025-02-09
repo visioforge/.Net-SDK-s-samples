@@ -11,13 +11,13 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="2025.2.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.2.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.6" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.6" />
+    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="2025.2.6" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.2.6" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.6" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
