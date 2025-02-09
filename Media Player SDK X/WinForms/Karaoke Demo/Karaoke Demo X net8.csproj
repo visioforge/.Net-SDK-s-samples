@@ -22,7 +22,7 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.2.3" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.2.4" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.0" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.2.0" />
   </ItemGroup>

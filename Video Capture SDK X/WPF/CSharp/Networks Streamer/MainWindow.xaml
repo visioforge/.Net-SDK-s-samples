@@ -53,10 +53,11 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Label Content="Platform" HorizontalAlignment="Left" Width="90"/>
-                <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center">
+                <ComboBox x:Name="cbPlatform" HorizontalAlignment="Left" Width="250" SelectedIndex="0" VerticalContentAlignment="Center" SelectionChanged="cbPlatform_SelectionChanged">
                     <ComboBoxItem>YouTube</ComboBoxItem>
                     <ComboBoxItem>Facebook</ComboBoxItem>
                     <ComboBoxItem>Generic RTMP (set URL instead of key)</ComboBoxItem>
+                    <ComboBoxItem>RTSP (create server)</ComboBoxItem>
                     <ComboBoxItem>AWS S3 (settings in code)</ComboBoxItem>
                     <ComboBoxItem>SRT (set URL instead of key)</ComboBoxItem>
                 </ComboBox>

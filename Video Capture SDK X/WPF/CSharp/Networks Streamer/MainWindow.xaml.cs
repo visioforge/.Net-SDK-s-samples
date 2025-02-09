@@ -9,11 +9,13 @@ using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
+using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.VideoCaptureX;
 using Rect = VisioForge.Core.Types.Rect;
 
@@ -217,8 +219,15 @@ namespace Networks_Streamer_Demo
                 var rtmpOutput = new RTMPOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(rtmpOutput, true);
             }
-            // AWS S3
+            // RTSP server
             else if (cbPlatform.SelectedIndex == 3)
+            {
+                var rtspSettings = new RTSPServerSettings(new Uri(edStreamingKey.Text), new OpenH264EncoderSettings(), new VOAACEncoderSettings());
+                var rtspOutput = new RTSPServerOutput(rtspSettings);
+                _videoCapture.Outputs_Add(rtspOutput, true);
+            }
+            // AWS S3
+            else if (cbPlatform.SelectedIndex == 4)
             {
                 var s3settings = new AWSS3SinkSettings();
                 s3settings.Region = "us-west-2";
@@ -232,7 +241,7 @@ namespace Networks_Streamer_Demo
                 _videoCapture.Outputs_Add(s3Output, true);
             }
             // SRT (muxed into MPEG-TS)
-            else if (cbPlatform.SelectedIndex == 4)
+            else if (cbPlatform.SelectedIndex == 5)
             {
                 var srtOutput = new SRTOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(srtOutput, true);
@@ -353,6 +362,36 @@ namespace Networks_Streamer_Demo
                         }
                     }
                 }
+            }
+        }
+
+        private void cbPlatform_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (edStreamingKey == null)
+            {
+                return;
+            }
+
+            switch (cbPlatform.SelectedIndex)
+            {
+                case 0:
+                    edStreamingKey.Text = "YouTube streaming key";
+                    break;
+                case 1:
+                    edStreamingKey.Text = "Facebook streaming key";
+                    break;
+                case 2:
+                    edStreamingKey.Text = "RTMP streaming key";
+                    break;
+                case 3:
+                    edStreamingKey.Text = "rtsp://127.0.0.1:7777/live";
+                    break;
+                case 4:
+                    edStreamingKey.Text = "AWS S3 URL";
+                    break;
+                case 5:
+                    edStreamingKey.Text = "SRT streaming URL";
+                    break;
             }
         }
     }
