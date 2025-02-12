@@ -28,14 +28,17 @@ jobs:
     - name: Setup .NET 
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
-
-
-    #- name: Install workloads
-    #  run: dotnet workload install macos android maui-android maui-maccatalyst ios
+        dotnet-version: '9.0.200'
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v2
+      with:
+        vs-version: '17.9'
+
+    - name: Verify environment
+      run: |
+        dotnet --info
+        msbuild -version
         
     ## Media Blocks
 
