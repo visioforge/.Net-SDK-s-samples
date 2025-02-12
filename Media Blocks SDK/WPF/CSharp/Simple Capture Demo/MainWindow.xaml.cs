@@ -24,6 +24,8 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.Output;
+using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
@@ -233,7 +235,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
                 _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
             }
-
+            
             // start
             await _pipeline.StartAsync();
 

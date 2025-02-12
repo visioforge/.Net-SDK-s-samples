@@ -55,6 +55,8 @@ namespace Networks_Streamer_Demo
 
         private H264EncoderBlock _h264Encoder;
 
+        private NDISinkBlock _ndiSink;
+
         private TeeBlock _videoTee;
 
         private TeeBlock _audioTee;
@@ -231,14 +233,34 @@ namespace Networks_Streamer_Demo
                 _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
             }
 
-            if (cbPlatform.SelectedIndex != 3)
+            // MJPEG
+            if (cbPlatform.SelectedIndex == 3)
             {
-                // H264/AAC encoders
+                _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
+                _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
+                edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
+            }
+            // NDI
+            else if (cbPlatform.SelectedIndex == 6)
+            {
+                _ndiSink = new NDISinkBlock(edStreamingKey.Text);
+                _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                if (audioEnabled)
+                {
+                    _pipeline.Connect(_audioTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+            }
+            // Streaming with H264/AAC encoders
+            else
+            {
+                // Create H264 encoder
                 var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10 };
                 _h264Encoder = new H264EncoderBlock(h264Settings);
 
                 if (audioEnabled)
                 {
+                    // Create AAC encoder
                     _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
                 }
 
@@ -339,14 +361,7 @@ namespace Networks_Streamer_Demo
                         _pipeline.Connect(_aacEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
                 }
-            }
-            // MJPEG
-            else if (cbPlatform.SelectedIndex == 3)
-            {
-                _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
-                _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
-                edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
-            }
+            }            
 
             // start
             await _pipeline.StartAsync();

@@ -59,6 +59,7 @@
                     <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>
                     <ComboBoxItem>AWS S3 (configure in code)</ComboBoxItem>
                     <ComboBoxItem>SRT (configure in code)</ComboBoxItem>
+                    <ComboBoxItem>NDI (set the name)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

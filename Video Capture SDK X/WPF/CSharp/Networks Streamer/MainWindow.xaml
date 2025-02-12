@@ -60,6 +60,7 @@
                     <ComboBoxItem>RTSP (create server)</ComboBoxItem>
                     <ComboBoxItem>AWS S3 (settings in code)</ComboBoxItem>
                     <ComboBoxItem>SRT (set URL instead of key)</ComboBoxItem>
+                    <ComboBoxItem>NDI (set the name)</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

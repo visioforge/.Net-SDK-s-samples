@@ -32,7 +32,7 @@ namespace Networks_Streamer_Demo
 
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
@@ -192,7 +192,7 @@ namespace Networks_Streamer_Demo
                 var device = (await DeviceEnumerator.Shared.AudioOutputsAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    _videoCapture.Audio_OutputDevice = new AudioRendererSettings(device);                    
+                    _videoCapture.Audio_OutputDevice = new AudioRendererSettings(device);
                 }
             }
 
@@ -245,6 +245,12 @@ namespace Networks_Streamer_Demo
             {
                 var srtOutput = new SRTOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(srtOutput, true);
+            }
+            // NDI
+            else if (cbPlatform.SelectedIndex == 6)
+            {
+                var ndiOutput = new NDIOutput(edStreamingKey.Text);
+                _videoCapture.Outputs_Add(ndiOutput, true);
             }
 
             // start
@@ -391,6 +397,9 @@ namespace Networks_Streamer_Demo
                     break;
                 case 5:
                     edStreamingKey.Text = "SRT streaming URL";
+                    break;
+                case 6:
+                    edStreamingKey.Text = "NDI name";
                     break;
             }
         }
