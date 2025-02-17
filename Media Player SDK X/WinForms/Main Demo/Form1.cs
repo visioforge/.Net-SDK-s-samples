@@ -141,10 +141,10 @@ namespace Main_Demo
                 await UpdateGaussianBlurAsync();
             }
 
-            if (cbFishEyeEnabled.Checked)
+            if (cbLUT.Checked)
             {
-                var fishEye = new FishEyeVideoEffect();
-                await _player.Video_Effects_AddOrUpdateAsync(fishEye);
+                var lut = new LUTVideoEffect(edLUTFilename.Text);
+                await _player.Video_Effects_AddOrUpdateAsync(lut);
             }
 
             if (cbTextOverlayEnabled.Checked)
@@ -819,6 +819,15 @@ namespace Main_Demo
                 {
                     cbTextOverlayFontFace.SelectedIndex = 0;
                 }
+            }
+        }
+
+        private void btSelectLUTFile_Click(object sender, EventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                edLUTFilename.Text = dlg.FileName;
             }
         }
     }

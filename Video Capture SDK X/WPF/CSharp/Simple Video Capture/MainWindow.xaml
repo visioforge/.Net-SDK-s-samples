@@ -96,6 +96,12 @@
                             </StackPanel>
                         </StackPanel>
 
+                        <StackPanel Orientation="Horizontal" Margin="10,25,0,0">
+                            <CheckBox Content="LUT" Width="45" HorizontalAlignment="Left" Margin="0,0,0,0" x:Name="cbLUT" VerticalAlignment="Center" Click="cbLUT_CheckedChanged" />
+                            <TextBox x:Name="edLUTPath" Width="260" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Text="3dl, cube, dat, m3d, csp are supported" />
+                            <Button Content="..." Width="25" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="btSelectLUT_Click" />
+                        </StackPanel>
+
                         <Label Content="More effects and settings available in Main Demo" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top"/>
                     </StackPanel>
                 </Grid>

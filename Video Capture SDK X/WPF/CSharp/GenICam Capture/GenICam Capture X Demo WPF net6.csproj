@@ -25,12 +25,12 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.8" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.9" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.6" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.2.6" />
-    <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="2025.2.6" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="2025.2.11" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

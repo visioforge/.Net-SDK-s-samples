@@ -943,6 +943,32 @@ namespace Simple_Video_Capture
             }
         }
 
+        private void btSelectLUT_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                edLUTPath.Text = dlg.FileName;
+            }
+        }
+        
+        private async void cbLUT_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (cbLUT.IsChecked == true)
+            {
+                var effect = new LUTVideoEffect(edLUTPath.Text);
+                await VideoCapture1.Video_Effects_AddOrUpdateAsync(effect);
+            }
+            else
+            {
+                VideoCapture1.Video_Effects_Remove(LUTVideoEffect.DefaultName);
+            }
+        }
+
         #region Dispose
 
         protected virtual void Dispose(bool disposing)

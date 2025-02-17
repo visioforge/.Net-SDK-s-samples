@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPEG-TS Player Demo net6", 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Simple Player Demo X VB net6", "WinForms\Simple Player Demo X VB\Simple Player Demo X VB net6.vbproj", "{A85CEF36-4939-42C8-B844-ADFAD4CE24F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sync Playback X WPF net6", "WPF\Sync Playback\Sync Playback X WPF net6.csproj", "{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,14 @@ Global
 		{A85CEF36-4939-42C8-B844-ADFAD4CE24F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A85CEF36-4939-42C8-B844-ADFAD4CE24F0}.Release|x64.ActiveCfg = Release|Any CPU
 		{A85CEF36-4939-42C8-B844-ADFAD4CE24F0}.Release|x64.Build.0 = Release|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Debug|x64.Build.0 = Debug|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Release|x64.ActiveCfg = Release|Any CPU
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +107,7 @@ Global
 		{A73F18C2-98DB-4106-ADE9-9F7BF6CCC5CE} = {9544FC23-09DE-4A70-9CA3-F6A0EED32B77}
 		{434F97AB-6F37-49E5-9A86-CB5B68D09867} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
 		{A85CEF36-4939-42C8-B844-ADFAD4CE24F0} = {9544FC23-09DE-4A70-9CA3-F6A0EED32B77}
+		{1714EEC0-C234-42DD-B3A8-6BA74A0D90F2} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

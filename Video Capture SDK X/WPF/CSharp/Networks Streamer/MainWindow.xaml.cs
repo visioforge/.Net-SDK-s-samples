@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core;
@@ -252,6 +253,18 @@ namespace Networks_Streamer_Demo
                 var ndiOutput = new NDIOutput(edStreamingKey.Text);
                 _videoCapture.Outputs_Add(ndiOutput, true);
             }
+            // MJPEG
+            else if (cbPlatform.SelectedIndex == 7)
+            {
+                int port = 8090;
+                var mjpegOutput = new HTTPMJPEGLiveOutput(port);
+                _videoCapture.Outputs_Add(mjpegOutput, true);
+
+                edStreamingKey.Text = $"IMG tag URL is http://127.0.0.1:{port}";
+
+                _videoCapture.Audio_Record = false;
+                _videoCapture.Audio_Play = false;
+            }
 
             // start
             await _videoCapture.StartAsync();
@@ -400,6 +413,9 @@ namespace Networks_Streamer_Demo
                     break;
                 case 6:
                     edStreamingKey.Text = "NDI name";
+                    break;
+                case 7:
+                    edStreamingKey.Text = "";
                     break;
             }
         }

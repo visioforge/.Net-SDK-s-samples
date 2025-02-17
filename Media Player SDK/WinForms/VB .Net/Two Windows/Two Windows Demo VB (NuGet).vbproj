@@ -120,10 +120,10 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.2.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.2.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.2.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.2.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.2.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.2.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.2.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.2.9" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

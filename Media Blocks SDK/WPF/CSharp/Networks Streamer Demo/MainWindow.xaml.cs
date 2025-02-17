@@ -18,9 +18,11 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioEncoders;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
+using VisioForge.Libs.NDI;
 
 namespace Networks_Streamer_Demo
 {
@@ -52,6 +54,8 @@ namespace Networks_Streamer_Demo
         private HLSSinkBlock _hlsSink;
 
         private SRTMPEGTSSinkBlock _srtSink;
+
+        private RTSPServerBlock _rtspSink;
 
         private H264EncoderBlock _h264Encoder;
 
@@ -249,6 +253,24 @@ namespace Networks_Streamer_Demo
                 if (audioEnabled)
                 {
                     _pipeline.Connect(_audioTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+            }
+            // RTSP
+            else if (cbPlatform.SelectedIndex == 7)
+            {
+                IVideoEncoder videoEncoder = new OpenH264EncoderSettings();
+                IAudioEncoder audioEncoder = null;
+                if (audioEnabled)
+                {
+                    audioEncoder = new VOAACEncoderSettings();
+                }
+
+                _rtspSink = new RTSPServerBlock(new RTSPServerSettings(new Uri("rtsp://127.0.0.1/live"), videoEncoder, audioEncoder));
+                _pipeline.Connect(_videoTee.Outputs[1], _rtspSink.VideoInput);
+
+                if (audioEnabled)
+                {
+                    _pipeline.Connect(_audioTee.Outputs[1], _rtspSink.AudioInput);
                 }
             }
             // Streaming with H264/AAC encoders
@@ -480,6 +502,42 @@ namespace Networks_Streamer_Demo
                         }
                     }
                 }
+            }
+        }
+
+        private void cbPlatform_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (edStreamingKey == null)
+            {
+                return;
+            }
+
+            switch (cbPlatform.SelectedIndex)
+            {
+                case 0:
+                    edStreamingKey.Text = "YouTube streaming key";
+                    break;
+                case 1:
+                    edStreamingKey.Text = "Facebook streaming key";
+                    break;
+                case 2:
+                    edStreamingKey.Text = "HLS URL";
+                    break;
+                case 3:
+                    edStreamingKey.Text = "";
+                    break;
+                case 4:
+                    edStreamingKey.Text = "AWS S3 URL";
+                    break;
+                case 5:
+                    edStreamingKey.Text = "SRT streaming URL";
+                    break;
+                case 6:
+                    edStreamingKey.Text = "NDI name";
+                    break;
+                case 7:
+                    edStreamingKey.Text = "rtsp://127.0.0.1:7777/live";
+                    break;
             }
         }
     }

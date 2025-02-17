@@ -222,7 +222,11 @@
             tbGaussianBlur = new System.Windows.Forms.TrackBar();
             cbGaussianBlurEnabled = new System.Windows.Forms.CheckBox();
             tabPage16 = new System.Windows.Forms.TabPage();
-            cbFishEyeEnabled = new System.Windows.Forms.CheckBox();
+            btSelectLUTFile = new System.Windows.Forms.Button();
+            edLUTFilename = new System.Windows.Forms.TextBox();
+            label10 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            cbLUT = new System.Windows.Forms.CheckBox();
             label3 = new System.Windows.Forms.Label();
             tabPage6 = new System.Windows.Forms.TabPage();
             label505 = new System.Windows.Forms.Label();
@@ -316,6 +320,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.Controls.Add(btPrevFrame);
             groupBox2.Controls.Add(btNextFrame);
             groupBox2.Controls.Add(btStop);
@@ -2521,26 +2526,64 @@
             // 
             // tabPage16
             // 
-            tabPage16.Controls.Add(cbFishEyeEnabled);
+            tabPage16.Controls.Add(btSelectLUTFile);
+            tabPage16.Controls.Add(edLUTFilename);
+            tabPage16.Controls.Add(label10);
+            tabPage16.Controls.Add(label7);
+            tabPage16.Controls.Add(cbLUT);
             tabPage16.Location = new System.Drawing.Point(4, 34);
             tabPage16.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             tabPage16.Name = "tabPage16";
             tabPage16.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
             tabPage16.Size = new System.Drawing.Size(472, 824);
             tabPage16.TabIndex = 6;
-            tabPage16.Text = "Other";
+            tabPage16.Text = "LUT";
             tabPage16.UseVisualStyleBackColor = true;
             // 
-            // cbFishEyeEnabled
+            // btSelectLUTFile
             // 
-            cbFishEyeEnabled.AutoSize = true;
-            cbFishEyeEnabled.Location = new System.Drawing.Point(26, 31);
-            cbFishEyeEnabled.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            cbFishEyeEnabled.Name = "cbFishEyeEnabled";
-            cbFishEyeEnabled.Size = new System.Drawing.Size(101, 29);
-            cbFishEyeEnabled.TabIndex = 0;
-            cbFishEyeEnabled.Text = "Fish eye";
-            cbFishEyeEnabled.UseVisualStyleBackColor = true;
+            btSelectLUTFile.Location = new System.Drawing.Point(418, 112);
+            btSelectLUTFile.Name = "btSelectLUTFile";
+            btSelectLUTFile.Size = new System.Drawing.Size(32, 32);
+            btSelectLUTFile.TabIndex = 4;
+            btSelectLUTFile.Text = "...";
+            btSelectLUTFile.UseVisualStyleBackColor = true;
+            btSelectLUTFile.Click += btSelectLUTFile_Click;
+            // 
+            // edLUTFilename
+            // 
+            edLUTFilename.Location = new System.Drawing.Point(26, 113);
+            edLUTFilename.Name = "edLUTFilename";
+            edLUTFilename.Size = new System.Drawing.Size(386, 31);
+            edLUTFilename.TabIndex = 3;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(26, 196);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(362, 25);
+            label10.TabIndex = 2;
+            label10.Text = "Supported formats: 3dl, cube, dat, m3d, csp";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(26, 85);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(87, 25);
+            label7.TabIndex = 1;
+            label7.Text = "File name";
+            // 
+            // cbLUT
+            // 
+            cbLUT.AutoSize = true;
+            cbLUT.Location = new System.Drawing.Point(26, 31);
+            cbLUT.Name = "cbLUT";
+            cbLUT.Size = new System.Drawing.Size(101, 29);
+            cbLUT.TabIndex = 0;
+            cbLUT.Text = "Enabled";
+            cbLUT.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -2663,7 +2706,7 @@
             // edBarcodeMetadata
             // 
             edBarcodeMetadata.Location = new System.Drawing.Point(26, 308);
-            edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            edBarcodeMetadata.Margin = new System.Windows.Forms.Padding(4);
             edBarcodeMetadata.Multiline = true;
             edBarcodeMetadata.Name = "edBarcodeMetadata";
             edBarcodeMetadata.Size = new System.Drawing.Size(450, 182);
@@ -2685,7 +2728,7 @@
             cbBarcodeType.FormattingEnabled = true;
             cbBarcodeType.Items.AddRange(new object[] { "Autodetect", "UPC-A", "UPC-E", "EAN-8", "EAN-13", "Code 39", "Code 93", "Code 128", "ITF", "CodaBar", "RSS-14", "Data matrix", "Aztec", "QR", "PDF-417" });
             cbBarcodeType.Location = new System.Drawing.Point(26, 122);
-            cbBarcodeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            cbBarcodeType.Margin = new System.Windows.Forms.Padding(4);
             cbBarcodeType.Name = "cbBarcodeType";
             cbBarcodeType.Size = new System.Drawing.Size(264, 33);
             cbBarcodeType.TabIndex = 22;
@@ -2703,7 +2746,7 @@
             // btBarcodeReset
             // 
             btBarcodeReset.Location = new System.Drawing.Point(26, 515);
-            btBarcodeReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            btBarcodeReset.Margin = new System.Windows.Forms.Padding(4);
             btBarcodeReset.Name = "btBarcodeReset";
             btBarcodeReset.Size = new System.Drawing.Size(104, 44);
             btBarcodeReset.TabIndex = 20;
@@ -2713,7 +2756,7 @@
             // edBarcode
             // 
             edBarcode.Location = new System.Drawing.Point(26, 215);
-            edBarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            edBarcode.Margin = new System.Windows.Forms.Padding(4);
             edBarcode.Name = "edBarcode";
             edBarcode.Size = new System.Drawing.Size(450, 31);
             edBarcode.TabIndex = 19;
@@ -2741,6 +2784,7 @@
             // 
             // btSaveSnapshot
             // 
+            btSaveSnapshot.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             btSaveSnapshot.Location = new System.Drawing.Point(1046, 785);
             btSaveSnapshot.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             btSaveSnapshot.Name = "btSaveSnapshot";
@@ -2756,16 +2800,17 @@
             // 
             // videoView1
             // 
+            videoView1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             videoView1.BackColor = System.Drawing.Color.Black;
             videoView1.Location = new System.Drawing.Point(556, 98);
             videoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             videoView1.Name = "videoView1";
             videoView1.Size = new System.Drawing.Size(690, 472);
-            videoView1.StatusOverlay = null;
             videoView1.TabIndex = 39;
             // 
             // mmLog
             // 
+            mmLog.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             mmLog.Location = new System.Drawing.Point(556, 841);
             mmLog.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             mmLog.Multiline = true;
@@ -2776,6 +2821,7 @@
             // 
             // cbDebugMode
             // 
+            cbDebugMode.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             cbDebugMode.AutoSize = true;
             cbDebugMode.Location = new System.Drawing.Point(625, 810);
             cbDebugMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -2787,6 +2833,7 @@
             // 
             // label9
             // 
+            label9.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             label9.AutoSize = true;
             label9.Location = new System.Drawing.Point(556, 810);
             label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -3024,7 +3071,6 @@
         private System.Windows.Forms.TrackBar tbGaussianBlur;
         private System.Windows.Forms.CheckBox cbGaussianBlurEnabled;
         private System.Windows.Forms.TabPage tabPage16;
-        private System.Windows.Forms.CheckBox cbFishEyeEnabled;
         private System.Windows.Forms.TabPage tabPage17;
         private System.Windows.Forms.CheckBox cbTextOverlayEnabled;
         private System.Windows.Forms.TabControl tabControl5;
@@ -3122,6 +3168,11 @@
         private System.Windows.Forms.TextBox mmLog;
         private System.Windows.Forms.CheckBox cbDebugMode;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox cbLUT;
+        private System.Windows.Forms.Button btSelectLUTFile;
+        private System.Windows.Forms.TextBox edLUTFilename;
+        private System.Windows.Forms.Label label10;
     }
 }
 

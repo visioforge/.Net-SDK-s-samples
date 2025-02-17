@@ -174,7 +174,7 @@
                                 </TabControl>
                                 <CheckBox Content="Enabled" Height="16" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="cbEffects" VerticalAlignment="Top" />
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="78,43,0,0" Maximum="255" x:Name="tbLightness" ValueChanged="tbLightness_Scroll" VerticalAlignment="Top" Width="100" />
-                                <Label Content="Lightness" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label92" VerticalAlignment="Top" />
+                                <Label Content="Brightness" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label92" VerticalAlignment="Top" />
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="256,43,0,0" Maximum="255" x:Name="tbSaturation" Value="255" ValueChanged="tbSaturation_Scroll" VerticalAlignment="Top" Width="100" />
                                 <Label Content="Saturation" Height="28" HorizontalAlignment="Left" Margin="192,38,0,0" x:Name="label93" VerticalAlignment="Top" />
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="78,76,0,0" Maximum="255" x:Name="tbContrast" ValueChanged="tbContrast_Scroll" VerticalAlignment="Top" Width="100" />
