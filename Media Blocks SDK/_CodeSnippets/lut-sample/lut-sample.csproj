@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>lut_sample</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net8.0-macos14.0</TargetFramework> -->
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net8.0-windows</TargetFrameworks>
+    <!-- <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework> -->
+  </PropertyGroup>
+  <!-- <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.x64" Version="15.10.30" />
+  </ItemGroup> -->
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.11" />
+  </ItemGroup>
+  <!-- <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
+  </ItemGroup> -->
+  <ItemGroup>
+    <None Update="BW.cube">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.10" />
+  </ItemGroup>
+</Project>

@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.2.9
+
+* [X-engines] Updated NDI connection speed
+
 ## 2025.2.4
 
 * [X-engines] RTSP Server Media Block and RTSPServerOutput added to Video Capture SDK. You can use the RTSPServerBlock to create an RTSP server and stream video and audio to it.
