@@ -31,8 +31,6 @@ namespace NDI_Source_Demo
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)

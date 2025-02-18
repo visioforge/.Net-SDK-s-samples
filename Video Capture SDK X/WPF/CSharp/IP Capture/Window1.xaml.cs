@@ -687,7 +687,7 @@ namespace IP_Capture
             var lst = await DeviceEnumerator.Shared.NDISourcesAsync();
             foreach (var uri in lst)
             {
-                cbIPURL.Items.Add(uri.URL);
+                cbIPURL.Items.Add(uri.Name);
             }
 
             if (cbIPURL.Items.Count > 0)

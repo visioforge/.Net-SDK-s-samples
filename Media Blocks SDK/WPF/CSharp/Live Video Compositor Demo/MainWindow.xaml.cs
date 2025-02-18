@@ -641,7 +641,8 @@ namespace Live_Video_Compositor_Demo
         {
             if (lbSources.SelectedIndex != -1)
             {
-                await _compositor.Input_RemoveAtAsync(lbSources.SelectedIndex);
+                var name = lbSources.SelectedValue.ToString();
+                await _compositor.Input_RemoveAsync(name);
                 lbSources.Items.RemoveAt(lbSources.SelectedIndex);
             }
         }
