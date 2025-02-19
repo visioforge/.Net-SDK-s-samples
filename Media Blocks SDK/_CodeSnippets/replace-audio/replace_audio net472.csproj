@@ -13,6 +13,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.11" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.12" />
   </ItemGroup>
 </Project>

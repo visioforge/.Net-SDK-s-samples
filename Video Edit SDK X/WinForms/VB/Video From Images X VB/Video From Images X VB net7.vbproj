@@ -35,6 +35,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.11" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.2.12" />
   </ItemGroup>
 </Project>
