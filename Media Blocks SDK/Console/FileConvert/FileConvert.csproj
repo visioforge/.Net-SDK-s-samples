@@ -9,8 +9,8 @@
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.12" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.11" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.11" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.14" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.2.14" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="15.10.11" />
