@@ -13,7 +13,7 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.10" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.11" />
     <PackageReference Include="VisioForge.DotNet.Core.FaceAI" Version="2025.0.28" />
     <PackageReference Include="VisioForge.FaceAI.Models" Version="2025.0.0" />
   </ItemGroup>
