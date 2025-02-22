@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Encoders net9", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-to-decklink net9", "_CodeSnippets\screen-to-decklink\screen-to-decklink net9.csproj", "{E52F02B6-95CC-46A7-8A02-95ED5CC39A00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Mixer net9", "WPF\CSharp\Audio Mixer\Audio Mixer net9.csproj", "{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -199,6 +201,10 @@ Global
 		{E52F02B6-95CC-46A7-8A02-95ED5CC39A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E52F02B6-95CC-46A7-8A02-95ED5CC39A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E52F02B6-95CC-46A7-8A02-95ED5CC39A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -235,6 +241,7 @@ Global
 		{34E63337-4CA7-447A-A694-7CBE38175B46} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
 		{DEFC2871-EED4-4B75-BB6A-01C75F7F9065} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{E52F02B6-95CC-46A7-8A02-95ED5CC39A00} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
+		{9F3CE8C3-2DA8-0ECE-B006-A316AADE0C33} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

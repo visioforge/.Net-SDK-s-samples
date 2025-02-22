@@ -95,7 +95,7 @@ public partial class ViewController : NSViewController
 
         _source = new ScreenSourceBlock();
 
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView) { IsSync = false };
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView);
 
         _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
@@ -106,7 +106,7 @@ public partial class ViewController : NSViewController
         _mp4Sink = new MP4SinkBlock(new MP4SinkSettings(filename));
         _h264Encoder = new H264EncoderBlock();
 
-        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView) { IsSync = false };
+        _videoRenderer = new VideoRendererBlock(_pipeline, _videoView);
 
         _pipeline.Connect(_source.Output, _videoResize.Input);
         _pipeline.Connect(_videoResize.Output, _videoTee.Input);
