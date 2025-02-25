@@ -25,8 +25,8 @@
     <MtouchDebug>True</MtouchDebug>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.16" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="2025.2.16" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.2.18" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="2025.2.18" />
   </ItemGroup>
   <!--  <ItemGroup>
     <NativeReference Include="..\..\..\..\..\_SETUP\NuGet\ios\GStreamerX.framework">

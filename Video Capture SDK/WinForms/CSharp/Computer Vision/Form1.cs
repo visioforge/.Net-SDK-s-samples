@@ -79,7 +79,7 @@ namespace Computer_Vision_Demo
         private void FaceDetectionAdd()
         {
             _faceDetector = new DNNFaceDetector();
-            _faceDetector.OnFaceDetected += OnFaceDetected;
+            _faceDetector.FacesDetected += OnFaceDetected;
 
             FaceDetectionUpdate();
         }
@@ -97,6 +97,7 @@ namespace Computer_Vision_Demo
             _faceDetector.Settings.MinNeighbors = tbFDMinNeighbors.Value;
             _faceDetector.Settings.ScaleFactor = tbFDScaleFactor.Value / 100.0f;
             _faceDetector.Settings.VideoScale = tbFDDownscale.Value / 10.0f;
+            _faceDetector.Settings.Pixelate = cbFDMosaic.Checked;
 
             if (rbFDCircle.Checked)
             {
@@ -119,7 +120,7 @@ namespace Computer_Vision_Demo
         {
             if (this._faceDetector != null)
             {
-                this._faceDetector.OnFaceDetected -= OnFaceDetected;
+                this._faceDetector.FacesDetected -= OnFaceDetected;
                 this._faceDetector.Dispose();
                 this._faceDetector = null;
             }
@@ -311,58 +312,10 @@ namespace Computer_Vision_Demo
 
         private void ProcessFrame(VideoFrame frame)
         {
-            //if (pd == IntPtr.Zero)
-            //{
-            //    pd = CV.PedestrianDetectorInit();
-            //    CV.PedestrianDetectorSetEngineSettings(pd, 0.5, 5, true, Color.YellowGreen);
-            //}
-
-            //long time;
-            //CVPedestrians items = new CVPedestrians();
-            //int count = CV.PedestrianDetectorProcess(pd, frame, ref items, out time);
-            //Trace.WriteLine($"Count: {count}, time: {time}");
-
-            var image = frame.ToRAWImage();
-            var faces = _faceDetector?.Process(image, frame.Timestamp);
-            _carCounter?.Process(image);
-            _pedestrianDetector?.Process(image);
-            _coveredDetector?.Process(image);
-
-            if (cbFDMosaic.Checked)
-            {
-                if (faces != null)
-                {
-                    foreach (var face in faces)
-                    {
-                        var rect = new VFRectIntl(face.Position.Left, face.Position.Top, face.Position.Right, face.Position.Bottom);
-                        rect.Top -= 10;
-                        if (rect.Top < 0)
-                        {
-                            rect.Top = 0;
-                        }
-
-                        rect.Left -= 10;
-                        if (rect.Left < 0)
-                        {
-                            rect.Left = 0;
-                        }
-
-                        rect.Bottom += 10;
-                        if (rect.Bottom > image.Height)
-                        {
-                            rect.Bottom = image.Height;
-                        }
-
-                        rect.Right += 10;
-                        if (rect.Right > image.Width)
-                        {
-                            rect.Right = image.Width;
-                        }
-
-                        VisioForge.Core.FastImageProcessing.MosaicROI(frame.Data, image.Width, image.Height, 45, rect);
-                    }
-                }
-            }
+            _faceDetector?.ProcessFrame(frame);
+            _carCounter?.ProcessFrame(frame);
+            _pedestrianDetector?.ProcessFrame(frame);
+            _coveredDetector?.ProcessFrame(frame);
         }
 
         #region Video capture source

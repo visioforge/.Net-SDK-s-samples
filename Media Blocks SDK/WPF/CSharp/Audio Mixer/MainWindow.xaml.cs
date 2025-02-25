@@ -48,9 +48,7 @@ namespace Audio_Mixer_MB
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
         private void CreatePipeline()

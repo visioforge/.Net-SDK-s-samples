@@ -9,6 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.2.18
+
+* [Media Player SDK.Net] Added loop support for the cross-platform engine.
+* [ALL] Updated RTSP-X engine output, fixed crash issue with RTSP output and VLC player frequent reconnects
+* [X-engines] Changed face detector support to use IFaceDetector interface
+* [Live Video Compositor] Fixed registration issues with custom video view attached to video input
+  
 ## 2025.2.9
 
 * [X-engines] Updated NDI connection speed
