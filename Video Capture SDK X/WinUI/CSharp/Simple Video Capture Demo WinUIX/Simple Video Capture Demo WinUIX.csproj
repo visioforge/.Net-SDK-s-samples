@@ -43,8 +43,8 @@
 		</None>
 	</ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.19" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.2.19" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.20" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.2.20" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.2.15" />
