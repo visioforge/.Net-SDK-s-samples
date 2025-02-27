@@ -18,6 +18,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.2.15" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.20" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.2.21" />
   </ItemGroup>
 </Project>

@@ -129,6 +129,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Restreamer net7", "WPF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Mixer MB net7", "WPF\CSharp\Audio Mixer\Audio Mixer MB net7.csproj", "{17BAEB8C-6144-864D-A0D7-8BE7BC59A888}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectShow To X Bridge net7", "WPF\CSharp\DirectShow To X Bridge\DirectShow To X Bridge net7.csproj", "{8E2C1F40-5974-BC2F-102C-B594BD6C2738}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -375,6 +377,10 @@ Global
 		{17BAEB8C-6144-864D-A0D7-8BE7BC59A888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17BAEB8C-6144-864D-A0D7-8BE7BC59A888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17BAEB8C-6144-864D-A0D7-8BE7BC59A888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2C1F40-5974-BC2F-102C-B594BD6C2738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2C1F40-5974-BC2F-102C-B594BD6C2738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2C1F40-5974-BC2F-102C-B594BD6C2738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2C1F40-5974-BC2F-102C-B594BD6C2738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -440,6 +446,7 @@ Global
 		{BC9D7CCE-B661-4FE0-86B1-2A4C98DA33B3} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{6FE7EF4F-64B7-471B-9A5E-FB8F2680C48D} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{17BAEB8C-6144-864D-A0D7-8BE7BC59A888} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{8E2C1F40-5974-BC2F-102C-B594BD6C2738} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
