@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Mixer net8", "WPF\CSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "two-video-views net8", "_CodeSnippets\two-video-views\two-video-views net8.csproj", "{3AADFCBF-EB89-FE94-77F1-8E618D9C430A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Preview Blazor Hybrid net8", "WPF\CSharp\Blazor Hybrid Video Preview\Video Preview Blazor Hybrid net8.csproj", "{756A506D-2146-6F49-A3CF-AA47DE763EFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -211,6 +213,10 @@ Global
 		{3AADFCBF-EB89-FE94-77F1-8E618D9C430A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AADFCBF-EB89-FE94-77F1-8E618D9C430A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AADFCBF-EB89-FE94-77F1-8E618D9C430A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756A506D-2146-6F49-A3CF-AA47DE763EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756A506D-2146-6F49-A3CF-AA47DE763EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756A506D-2146-6F49-A3CF-AA47DE763EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756A506D-2146-6F49-A3CF-AA47DE763EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +255,7 @@ Global
 		{E52F02B6-95CC-46A7-8A02-95ED5CC39A00} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
 		{B5C92216-09EE-5E68-4596-E785D1437ED6} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{3AADFCBF-EB89-FE94-77F1-8E618D9C430A} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
+		{756A506D-2146-6F49-A3CF-AA47DE763EFB} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

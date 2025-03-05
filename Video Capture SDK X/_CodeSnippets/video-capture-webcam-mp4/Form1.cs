@@ -13,6 +13,7 @@ namespace video_capture_webcam_mp4
 {
     public partial class Form1 : Form
     {
+        // Core Video Capture object
         private VideoCaptureCoreX videoCapture1;
 
         public Form1()
@@ -25,23 +26,30 @@ namespace video_capture_webcam_mp4
             // Create VideoCaptureCoreX instance and set VideoView for video rendering
             videoCapture1 = new VideoCaptureCoreX(VideoView1);
 
-            // Set default video and audio sources
-            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+            // Enumerate video and audio sources
+            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync());
+            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync());
+
+            // Set default video source
             videoCapture1.Video_Source = new VideoCaptureDeviceSourceSettings(videoSources[0]);
-            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
+
+            // Set default audio source
             videoCapture1.Audio_Source = audioSources[0].CreateSourceSettingsVC();
 
             // Set default audio sink
-            var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
+            var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync());
             videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioRenderers[0]);
             videoCapture1.Audio_Play = true;
-
-            // Configure MP4 output
-            var mp4Output = new MP4Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
-            videoCapture1.Outputs_Add(mp4Output);
             videoCapture1.Audio_Record = true;
 
-            // Start
+            // Configure MP4 output. Default video and audio encoders will be used. GPU encoders will be used if available.
+            var mp4Output = new MP4Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
+            videoCapture1.Outputs_Add(mp4Output);
+
+            // Enable video sample grabber to make snapshots
+            videoCapture1.Snapshot_Grabber_Enabled = true;
+
+            // Start capture
             await videoCapture1.StartAsync();
         }
 
@@ -57,14 +65,22 @@ namespace video_capture_webcam_mp4
 
         private async void btStop_Click(object sender, EventArgs e)
         {
+            // Stop capture
             await videoCapture1.StopAsync();
 
+            // Release resources
             await videoCapture1.DisposeAsync();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Release SDK
             VisioForgeX.DestroySDK();
+        }
+
+        private async void btSaveSnapshot_Click(object sender, EventArgs e)
+        {
+            await videoCapture1.Snapshot_SaveAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "snapshot.jpg"), SkiaSharp.SKEncodedImageFormat.Jpeg);
         }
     }
 }

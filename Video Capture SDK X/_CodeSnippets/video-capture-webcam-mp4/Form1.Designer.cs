@@ -36,6 +36,7 @@
             VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             btStart = new System.Windows.Forms.Button();
             btStop = new System.Windows.Forms.Button();
+            btSaveSnapshot = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // VideoView1
@@ -45,7 +46,6 @@
             VideoView1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             VideoView1.Name = "VideoView1";
             VideoView1.Size = new System.Drawing.Size(1067, 692);
-            VideoView1.StatusOverlay = null;
             VideoView1.TabIndex = 0;
             // 
             // btStart
@@ -70,11 +70,22 @@
             btStop.UseVisualStyleBackColor = true;
             btStop.Click += btStop_Click;
             // 
+            // btSaveSnapshot
+            // 
+            btSaveSnapshot.Location = new System.Drawing.Point(922, 731);
+            btSaveSnapshot.Name = "btSaveSnapshot";
+            btSaveSnapshot.Size = new System.Drawing.Size(172, 44);
+            btSaveSnapshot.TabIndex = 3;
+            btSaveSnapshot.Text = "Save snapshot";
+            btSaveSnapshot.UseVisualStyleBackColor = true;
+            btSaveSnapshot.Click += btSaveSnapshot_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1123, 804);
+            Controls.Add(btSaveSnapshot);
             Controls.Add(btStop);
             Controls.Add(btStart);
             Controls.Add(VideoView1);
@@ -92,5 +103,6 @@
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.Button btStart;
         private System.Windows.Forms.Button btStop;
+        private System.Windows.Forms.Button btSaveSnapshot;
     }
 }

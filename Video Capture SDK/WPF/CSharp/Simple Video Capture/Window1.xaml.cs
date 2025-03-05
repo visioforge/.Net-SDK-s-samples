@@ -403,8 +403,6 @@ namespace Simple_Video_Capture
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_OutputDevice = "Default DirectSound Device";
-
             if (cbRecordAudio.IsChecked == true)
             {
                 VideoCapture1.Audio_RecordAudio = true;

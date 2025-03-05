@@ -51,6 +51,8 @@ namespace webcam_preview
             this.Enabled = true;
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
+            CreateEngine();
+
             DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
             DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
             DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
@@ -58,8 +60,6 @@ namespace webcam_preview
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
-
-            CreateEngine();
 
             Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
         }

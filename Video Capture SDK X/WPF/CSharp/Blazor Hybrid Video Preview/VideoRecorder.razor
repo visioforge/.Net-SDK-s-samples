@@ -1,0 +1,143 @@
+@using System.IO
+@inject VideoRecordingService VideoService
+@implements IDisposable
+
+<h3>WPF Blazor Video Recorder</h3>
+
+<div class="camera-container">
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <div class="alert alert-danger">@_errorMessage</div>
+    }
+
+    <div class="video-feed">
+        @if (_imageData != null)
+        {
+            <img src="@_imageData" style="width: 640px; height: 480px;" />
+        }
+        else
+        {
+            <div class="no-camera">Camera not initialized</div>
+        }
+    </div>
+
+    <div class="controls mt-3">
+        <button class="btn btn-primary me-2" @onclick="InitializeCamera" disabled="@(_isCameraInitialized)">
+            Initialize Camera
+        </button>
+
+        <button class="btn btn-success me-2" @onclick="StartRecording" disabled="@(!_isCameraInitialized || _isRecording)">
+            Start Recording
+        </button>
+
+        <button class="btn btn-danger me-2" @onclick="StopRecording" disabled="@(!_isRecording)">
+            Stop Recording
+        </button>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(_lastRecordingPath))
+{
+    <div class="mt-4">
+        <h4>Last Recording</h4>
+        <p>Saved to: @_lastRecordingPath</p>
+
+        <button class="btn btn-info" @onclick="PlayLastRecording">
+            Play Recording
+        </button>
+    </div>
+}
+
+@code {
+    private string _imageData;
+    private string _errorMessage;
+    private bool _isCameraInitialized;
+    private bool _isRecording;
+    private string _lastRecordingPath;
+    private readonly System.Timers.Timer _refreshTimer = new System.Timers.Timer(500);
+
+    protected override void OnInitialized()
+    {
+        VideoService.FrameCaptured += OnFrameCaptured;
+        VideoService.RecordingCompleted += OnRecordingCompleted;
+    }
+
+    private void InitializeCamera()
+    {
+        _errorMessage = string.Empty;
+        _isCameraInitialized = VideoService.InitializeCamera();
+
+        if (!_isCameraInitialized)
+        {
+            _errorMessage = "Failed to initialize camera. Check permissions and connections.";
+        }
+    }
+
+    private void StartRecording()
+    {
+        var path = VideoService.StartRecording();
+        if (string.IsNullOrEmpty(path))
+        {
+            _errorMessage = "Failed to start recording.";
+            return;
+        }
+
+        _isRecording = true;
+        _errorMessage = string.Empty;
+    }
+
+    private void StopRecording()
+    {
+        var path = VideoService.StopRecording();
+        if (string.IsNullOrEmpty(path))
+        {
+            _errorMessage = "Error stopping recording.";
+            return;
+        }
+
+        _isRecording = false;
+        _lastRecordingPath = path;
+    }
+
+    private void PlayLastRecording()
+    {
+        if (File.Exists(_lastRecordingPath))
+        {
+            // Use WPF to launch the video player
+            var processStartInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = _lastRecordingPath,
+                    UseShellExecute = true
+                };
+
+            System.Diagnostics.Process.Start(processStartInfo);
+        }
+        else
+        {
+            _errorMessage = "Recording file not found.";
+        }
+    }
+
+    private void OnFrameCaptured(byte[] png)
+    {
+        var imageBytes = png;
+        var base64 = Convert.ToBase64String(imageBytes);
+        _imageData = $"data:image/jpeg;base64,{base64}";
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnRecordingCompleted(string path)
+    {
+        _lastRecordingPath = path;
+        _isRecording = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        VideoService.FrameCaptured -= OnFrameCaptured;
+        VideoService.RecordingCompleted -= OnRecordingCompleted;
+        _refreshTimer.Dispose();
+    }
+}
