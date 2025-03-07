@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.2.24
+
+* [X-engine] By default, Media Foundation device enumeration is disabled. You can enable it using the `DeviceEnumerator.Shared.IsEnumerateMediaFoundationDevices` property.
+
 ## 2025.2.18
 
 * [Media Player SDK.Net] Added loop support for the cross-platform engine.
