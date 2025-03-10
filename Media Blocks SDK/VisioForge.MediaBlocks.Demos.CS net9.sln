@@ -131,6 +131,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Mixer MB net9", "WPF\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectShow To X Bridge net9", "WPF\CSharp\DirectShow To X Bridge\DirectShow To X Bridge net9.csproj", "{BCC7858C-683A-727B-31CC-05B28156806F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vr360-media-player net9", "_CodeSnippets\vr360-media-player\vr360-media-player net9.csproj", "{324DAC23-7F72-3745-7142-BBDC5972EAAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -381,6 +383,10 @@ Global
 		{BCC7858C-683A-727B-31CC-05B28156806F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC7858C-683A-727B-31CC-05B28156806F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC7858C-683A-727B-31CC-05B28156806F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324DAC23-7F72-3745-7142-BBDC5972EAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324DAC23-7F72-3745-7142-BBDC5972EAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324DAC23-7F72-3745-7142-BBDC5972EAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324DAC23-7F72-3745-7142-BBDC5972EAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -447,6 +453,7 @@ Global
 		{E1A2D71F-0D2D-4635-9F2C-B06D2A82E43E} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{62CE9882-C1DC-F782-F2E7-D8368563D1D6} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{BCC7858C-683A-727B-31CC-05B28156806F} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{324DAC23-7F72-3745-7142-BBDC5972EAAB} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

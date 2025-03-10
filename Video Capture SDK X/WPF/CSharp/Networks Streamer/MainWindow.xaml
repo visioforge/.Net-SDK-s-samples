@@ -62,6 +62,7 @@
                     <ComboBoxItem>SRT (set URL instead of key)</ComboBoxItem>
                     <ComboBoxItem>NDI (set the name)</ComboBoxItem>
                     <ComboBoxItem>MJPEG (HTML IMG tag)</ComboBoxItem>
+                    <ComboBoxItem>HLS</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

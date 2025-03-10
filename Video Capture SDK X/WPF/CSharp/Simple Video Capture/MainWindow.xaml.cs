@@ -58,9 +58,7 @@ namespace Simple_Video_Capture
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)

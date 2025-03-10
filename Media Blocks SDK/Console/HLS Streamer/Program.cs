@@ -1,4 +1,5 @@
-﻿using VisioForge.Core.MediaBlocks;
+﻿using VisioForge.Core;
+using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -17,6 +18,10 @@ namespace HLSStreamer
 
         static void Main(string[] args)
         {           
+            VisioForgeX.InitSDK();
+
+            Console.Clear();
+
             Console.WriteLine("The HLS Streamer app can stream sample video and audio sources using the HLS protocol. You can open localhost IP with port 8088 in your browser. H264 and AAC encoders were used.");
 
             // Pipeline

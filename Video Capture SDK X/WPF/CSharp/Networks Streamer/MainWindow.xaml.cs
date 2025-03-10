@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core;
@@ -16,6 +18,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.VideoCaptureX;
 using Rect = VisioForge.Core.Types.Rect;
@@ -135,10 +138,12 @@ namespace Networks_Streamer_Demo
             if (cbVideoInput.SelectedIndex == 0)
             {
                 var screenCaptureSourceSettings = new ScreenCaptureD3D11SourceSettings();
-                screenCaptureSourceSettings.Rectangle = new Rect(0, 0, 1920, 1080);
                 screenCaptureSourceSettings.FrameRate = new VideoFrameRate(30);
 
                 _videoCapture.Video_Source = screenCaptureSourceSettings;
+
+             //   _videoCapture.Video_Effects_Clear();
+              //  await _videoCapture.Video_Effects_AddOrUpdateAsync(new ResizeVideoEffect(1920, 1080));
             }
             else
             {
@@ -264,6 +269,26 @@ namespace Networks_Streamer_Demo
 
                 _videoCapture.Audio_Record = false;
                 _videoCapture.Audio_Play = false;
+            }
+            // HLS
+            else if (cbPlatform.SelectedIndex == 8)
+            {
+                // HLS sink
+                var settings = new HLSSinkSettings
+                {
+                    Location = Path.Combine(AppContext.BaseDirectory, "segment_%05d.ts"),
+                    MaxFiles = 10,
+                    PlaylistLength = 5,
+                    PlaylistLocation = Path.Combine(AppContext.BaseDirectory, "playlist.m3u8"),
+                    PlaylistRoot = edStreamingKey.Text,
+                    SendKeyframeRequests = true,
+                    TargetDuration = 5,
+                    Custom_HTTP_Server_Enabled = true,
+                    Custom_HTTP_Server_Port = new Uri(edStreamingKey.Text).Port
+                };
+
+                var hlsOutput = new HLSOutput(settings);
+                _videoCapture.Outputs_Add(hlsOutput, true);
             }
 
             // start
@@ -416,6 +441,9 @@ namespace Networks_Streamer_Demo
                     break;
                 case 7:
                     edStreamingKey.Text = "";
+                    break;
+                case 8:
+                    edStreamingKey.Text = "http://localhost:8088/";
                     break;
             }
         }
