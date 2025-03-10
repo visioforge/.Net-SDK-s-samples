@@ -6,8 +6,8 @@
     <RootNamespace>vr360_media_player</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-    <BaseIntermediateOutputPath>R:\VSCache\Demos\VideoCapture\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**</DefaultItemExcludes>
+    
+    
   </PropertyGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
