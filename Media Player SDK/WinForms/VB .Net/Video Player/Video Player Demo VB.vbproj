@@ -3,7 +3,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion></ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5BE06D8E-8DB9-48C2-8D77-0A4506B87A7D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -13,7 +14,8 @@
     <MyType>WindowsForms</MyType>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup>
@@ -105,8 +107,8 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.3.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.3.6" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.3.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.3.7" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

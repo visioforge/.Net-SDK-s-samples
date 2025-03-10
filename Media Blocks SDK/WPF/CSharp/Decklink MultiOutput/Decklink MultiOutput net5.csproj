@@ -22,6 +22,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.3.6" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.3.7" />
   </ItemGroup>
 </Project>
