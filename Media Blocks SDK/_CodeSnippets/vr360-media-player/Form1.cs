@@ -9,9 +9,8 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.AudioRendering;
-using VisioForge.Core.MediaBlocks.OpenGL;
-using VisioForge.Core.Types.X.OpenGL;
-using VisioForge.Core.OpenGL;
+using VisioForge.Core.MediaBlocks.VideoProcessing;
+using VisioForge.Core.Types.X._Windows.VideoEffects;
 
 namespace vr360_media_player
 {
@@ -19,7 +18,7 @@ namespace vr360_media_player
     {
         private MediaBlocksPipeline _pipeline;
 
-        private EquirectangularViewBlock _view;
+        private VR360ProcessorBlock _view;
 
         private int _x = 0;
 
@@ -52,9 +51,7 @@ namespace vr360_media_player
             // Add video renderer
             if (videoStreamAvailable)
             {
-                // OpenGL elements
-                var glViewSettings = new GLEquirectangularViewSettings(info.VideoStreams[0].Width, info.VideoStreams[0].Height);
-                _view = new EquirectangularViewBlock(glViewSettings);
+                _view = new VR360ProcessorBlock(new D3D11VR360RendererSettings());
 
                 var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
@@ -191,6 +188,7 @@ namespace vr360_media_player
 
                 _view.Settings.Pitch += (e.Y - _y) * 2;
                 _y = e.Y;
+
                 _view.Update();
             }
         }

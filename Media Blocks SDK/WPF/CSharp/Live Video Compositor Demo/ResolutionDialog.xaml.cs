@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VisioForge.Core.LiveVideoCompositorV2;
 using VisioForge.Core.Types;
 
 namespace Live_Video_Compositor_Demo
@@ -23,6 +24,19 @@ namespace Live_Video_Compositor_Demo
         public int GetWidth() => Convert.ToInt32(edWidth.Text);
 
         public int GetHeight() => Convert.ToInt32(edHeight.Text);
+
+        public LVCMixerType GetMixerType()
+        {
+            switch (cbMixerEngine.SelectedIndex)
+            {
+                case 0:
+                    return LVCMixerType.CPU;
+                case 1:
+                    return LVCMixerType.D3D11;
+                default:
+                    return LVCMixerType.OpenGL;
+            }
+        }
 
         public VideoFrameRate GetFrameRate()
         {

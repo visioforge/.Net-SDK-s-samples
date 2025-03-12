@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Select resolution and frame rate" Height="130" Width="360"
+        Title="Select resolution and frame rate" Height="130" Width="580"
         WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
@@ -41,6 +41,12 @@
                 <Label Content="Frame rate" Margin="20,0,10,0" VerticalAlignment="Center" />
                 <TextBox x:Name="edFrameRate" VerticalAlignment="Center">25</TextBox>
                 <Label Content="fps" Margin="10,0,0,0" VerticalAlignment="Center" />
+                <Label Content="Mixer engine" Margin="20,0,10,0" VerticalAlignment="Center" />
+                <ComboBox x:Name="cbMixerEngine" VerticalAlignment="Center" Width="100" SelectedIndex="0" >
+                    <ComboBoxItem Content="CPU" />
+                    <ComboBoxItem Content="D3D11" />
+                    <ComboBoxItem Content="OpenGL" />
+                </ComboBox>
             </StackPanel>
 
             <Button x:Name="btOK" Content="OK" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Center" Width="75" Click="btOK_Click"/>

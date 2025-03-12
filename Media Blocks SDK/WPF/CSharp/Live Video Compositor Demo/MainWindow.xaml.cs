@@ -47,6 +47,8 @@ namespace Live_Video_Compositor_Demo
 
         private VideoFrameRate _videoFrameRate;
 
+        private LVCMixerType _mixerType;
+
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public MainWindow()
@@ -68,7 +70,7 @@ namespace Live_Video_Compositor_Demo
         {
             var settings =
                 new LiveVideoCompositorSettings(_videoWidth, _videoHeight, _videoFrameRate);
-            settings.MixerType = LVCMixerType.D3D11; // <<-- TODO BUG???
+            settings.MixerType = _mixerType;
             settings.AudioEnabled = true;
 
             _compositor = new LiveVideoCompositor(settings);
@@ -142,8 +144,6 @@ namespace Live_Video_Compositor_Demo
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == true)
             {
-                //var filename = @"c:\Samples\XXX\!videoonly.mp4";
-                // var filename = @"c:\Samples\!video.mp4";
                 var filename = dlg.FileName;
                 var name = $"File [{filename}]";
                 var rect = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text),
@@ -202,6 +202,7 @@ namespace Live_Video_Compositor_Demo
             _videoWidth = resDialog.GetWidth();
             _videoHeight = resDialog.GetHeight();
             _videoFrameRate = resDialog.GetFrameRate();
+            _mixerType = resDialog.GetMixerType();
 
             lbResolution.Content = $"Video: {_videoWidth}x{_videoHeight}@{_videoFrameRate}fps";
 

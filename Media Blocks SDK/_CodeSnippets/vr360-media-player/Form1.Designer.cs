@@ -102,7 +102,7 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(914, 31);
             edFilename.TabIndex = 4;
-            edFilename.Text = "c:\\Samples\\360\\equirectangular4.MP4";
+            edFilename.Text = "c:\\Samples\\360\\equirectangular.MP4";
             // 
             // btOpenFile
             // 
