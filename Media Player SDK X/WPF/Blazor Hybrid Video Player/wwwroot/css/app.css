@@ -1,0 +1,94 @@
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.camera-container {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.video-feed {
+    background-color: #000;
+    position: relative;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.no-camera {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.player-controls {
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Custom styling for the range slider */
+.form-range::-webkit-slider-thumb {
+    background: #dc3545;
+}
+
+.form-range::-moz-range-thumb {
+    background: #dc3545;
+}
+
+.form-range::-ms-thumb {
+    background: #dc3545;
+}
+
+/* Improve visibility of the time display */
+.player-controls span {
+    font-family: monospace;
+    font-size: 0.9rem;
+    min-width: 50px;
+}

@@ -1,0 +1,242 @@
+@using System.IO
+@using Microsoft.Win32
+@inject VideoPlayerService VideoService
+@implements IDisposable
+
+<div class="camera-container">
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <div class="alert alert-danger">@_errorMessage</div>
+    }
+    <div class="video-feed">
+        @if (_imageData != null)
+        {
+            <img src="@_imageData" style="@_videoStyle" />
+        }
+        else
+        {
+            <div class="no-camera">Open the file</div>
+        }
+    </div>
+
+    @if (_isPlayerInitialized)
+    {
+        <div class="player-controls mt-2">
+            <div class="d-flex align-items-center">
+                <span class="me-2">@FormatTime(_currentPosition)</span>
+            </div>
+
+            <div class="btn-group mt-2">
+                <button class="btn btn-sm btn-outline-secondary" @onclick="SeekBackward">
+                    <i class="oi oi-media-skip-backward"></i> -10s
+                </button>
+                <button class="btn btn-sm @(_isPlaying ? "btn-danger" : "btn-success")" @onclick="TogglePlayPause">
+                    <i class="oi @(_isPlaying ? "oi-media-pause" : "oi-media-play")"></i>
+                    @(_isPlaying ? "Pause" : "Play")
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" @onclick="SeekForward">
+                    <i class="oi oi-media-skip-forward"></i> +10s
+                </button>
+            </div>
+        </div>
+    }
+
+    <div class="controls mt-3">
+        <button class="btn btn-primary me-2" @onclick="OpenFileAsync" disabled="@(_isPlayerInitialized && _isPlaying)">
+            Open File
+        </button>
+    </div>
+</div>
+
+@code {
+    private string _imageData;
+    private string _errorMessage;
+    private bool _isPlayerInitialized;
+    private bool _isPlaying;
+    private double _currentPosition;
+    private double _duration;
+    private readonly System.Timers.Timer _refreshTimer = new System.Timers.Timer(500);
+    private readonly System.Timers.Timer _positionUpdateTimer = new System.Timers.Timer(250);
+
+    private int _videoWidth;
+    private int _videoHeight;
+    private string _videoStyle = "max-width: 100%; height: auto;";
+
+    protected override void OnInitialized()
+    {
+        VideoService.FrameCaptured += OnFrameCaptured;
+        VideoService.PlayerStateChanged += OnPlayerStateChanged;
+
+        _positionUpdateTimer.Elapsed += async (sender, e) =>
+        {
+            if (_isPlaying)
+            {
+                _currentPosition = await VideoService.GetCurrentPositionAsync();
+                await InvokeAsync(StateHasChanged);
+            }
+        };
+        _positionUpdateTimer.Start();
+
+        _duration = 100;
+        InvokeAsync(StateHasChanged);
+
+        _currentPosition = 0;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void OnPlayerStateChanged(bool isPlaying)
+    {
+        _isPlaying = isPlaying;
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OpenFileAsync()
+    {
+        // open file using dialog
+        var fd = new OpenFileDialog();
+        fd.Filter = "Video files (*.mp4;*.avi;*.mkv)|*.mp4;*.avi;*.mkv|All files (*.*)|*.*";
+        if (fd.ShowDialog() == false)
+        {
+            return;
+        }
+
+        _errorMessage = string.Empty;
+        _isPlayerInitialized = await VideoService.InitializePlayerAsync(fd.FileName);
+
+        if (!_isPlayerInitialized)
+        {
+            _errorMessage = "Failed to initialize player. Check permissions and connections.";
+            return;
+        }
+
+        _duration = await VideoService.GetDurationAsync();
+        await InvokeAsync(StateHasChanged);
+
+        _currentPosition = 0;
+        await InvokeAsync(StateHasChanged);
+
+        UpdateVideoResolution();
+
+        // Automatically start playing the file
+        await PlayVideoAsync();
+    }
+
+    private void OnFrameCaptured(byte[] png)
+    {
+        var imageBytes = png;
+        var base64 = Convert.ToBase64String(imageBytes);
+        _imageData = $"data:image/jpeg;base64,{base64}";
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task TogglePlayPause()
+    {
+        if (_isPlaying)
+        {
+            await PauseVideoAsync();
+        }
+        else
+        {
+            await PlayVideoAsync();
+        }
+    }
+
+    private async Task PlayVideoAsync()
+    {
+        if (_isPlayerInitialized)
+        {
+            _isPlaying = await VideoService.PlayAsync();
+        }
+    }
+
+    private async Task PauseVideoAsync()
+    {
+        if (_isPlayerInitialized)
+        {
+            _isPlaying = false;
+            await VideoService.PauseAsync();
+        }
+    }
+
+    private async Task OnSliderChange(ChangeEventArgs e)
+    {
+        if (_isPlayerInitialized && e.Value != null)
+        {
+            if (double.TryParse(e.Value.ToString(), out double position))
+            {
+                _currentPosition = position;
+                await VideoService.SeekAsync(_currentPosition);
+
+                // If video was paused, maintain the paused state
+                if (!_isPlaying)
+                {
+                    await VideoService.PauseAsync();
+                }
+            }
+        }
+    }
+
+    private async Task SeekForward()
+    {
+        if (_isPlayerInitialized)
+        {
+            _currentPosition = Math.Min(_duration, _currentPosition + 10);
+            await VideoService.SeekAsync(_currentPosition);
+        }
+    }
+
+    private async Task SeekBackward()
+    {
+        if (_isPlayerInitialized)
+        {
+            _currentPosition = Math.Max(0, _currentPosition - 10);
+            await VideoService.SeekAsync(_currentPosition);
+        }
+    }
+
+    private string FormatTime(double seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        return time.Hours > 0
+            ? $"{time.Hours:D1}:{time.Minutes:D2}:{time.Seconds:D2}"
+            : $"{time.Minutes:D2}:{time.Seconds:D2}";
+    }
+
+    private void UpdateVideoResolution()
+    {
+        // Get dimensions from VideoService
+        var (width, height) = VideoService.GetVideoSize();
+        _videoWidth = width;
+        _videoHeight = height;
+
+        // Update style based on actual dimensions
+        UpdateVideoStyle();
+    }
+
+    private void UpdateVideoStyle()
+    {
+        if (_videoWidth > 0 && _videoHeight > 0)
+        {
+            const int maxContainerWidth = 800;
+
+            int displayWidth = Math.Min(_videoWidth, maxContainerWidth);
+            int displayHeight = (int)(displayWidth * ((double)_videoHeight / _videoWidth));
+
+            _videoStyle = $"width: {displayWidth}px; height: {displayHeight}px; object-fit: contain;";
+        }
+        else
+        {
+            // Fallback to responsive style
+            _videoStyle = "max-width: 100%; height: auto;";
+        }
+    }
+
+    public void Dispose()
+    {
+        VideoService.FrameCaptured -= OnFrameCaptured;
+        VideoService.PlayerStateChanged -= OnPlayerStateChanged;
+        _refreshTimer.Dispose();
+        _positionUpdateTimer.Dispose();
+    }
+}
