@@ -12,7 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.3.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.3.16" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
