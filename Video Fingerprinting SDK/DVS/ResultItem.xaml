@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="DVS.ResultItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="88" Width="900">
+    <Grid x:Name="grid" HorizontalAlignment="Stretch" SizeChanged="Grid_SizeChanged">
+        <StackPanel x:Name="stackPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="4" SizeChanged="StackPanel_SizeChanged" >
+            <CheckBox Width="20" x:Name="Checked"></CheckBox>
+            <Image Width="80" Height="80" x:Name="Screenshot"></Image>
+            <TextBlock Height="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="780" x:Name="Text" Margin="10,0,0,0"></TextBlock>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
