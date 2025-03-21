@@ -1,27 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<UseWindowsForms>true</UseWindowsForms>
-		<TargetFramework>net8.0-windows</TargetFramework>
-		<PlatformTarget>x64</PlatformTarget>
-		<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-		<AssemblyTitle>DVS</AssemblyTitle>
-		<Product>DVS</Product>
-		<Copyright>Copyright (c) 2025</Copyright>
-		<UseWPF>true</UseWPF>
-	</PropertyGroup>
-	<PropertyGroup>
-		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.3.14" />
-		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.3.14" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.17" />
-		<PackageReference Include="VisioForge.DotNet.Core" Version="2025.3.18" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="visioforge_main_icon.ico" />
-	</ItemGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AssemblyTitle>DVS</AssemblyTitle>
+    <Product>DVS</Product>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.3.14" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.3.14" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.17" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.3.21" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
 </Project>

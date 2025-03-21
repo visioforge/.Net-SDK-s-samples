@@ -1,28 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<RootNamespace>VisioForge_MMT_Live</RootNamespace>
-		<AssemblyName>VisioForge_MMT_Live</AssemblyName>
-		<TargetFramework>net8.0-windows</TargetFramework>
-		<PlatformTarget>x64</PlatformTarget>
-		<UseWindowsForms>true</UseWindowsForms>
-		<AssemblyTitle>VisioForge_MMT_Live</AssemblyTitle>
-		<Product>VisioForge_MMT_Live</Product>
-		<Copyright>Copyright (c) 2025</Copyright>
-		<UseWPF>true</UseWPF>
-	</PropertyGroup>
-	<PropertyGroup>
-		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.3.14" />
-		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.3.14" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.17" />
-		<PackageReference Include="VisioForge.DotNet.Core" Version="2025.3.18" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="visioforge_main_icon.ico" />
-	</ItemGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>VisioForge_MMT_Live</RootNamespace>
+    <AssemblyName>VisioForge_MMT_Live</AssemblyName>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>VisioForge_MMT_Live</AssemblyTitle>
+    <Product>VisioForge_MMT_Live</Product>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.3.14" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.3.14" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.17" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.3.21" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
 </Project>
