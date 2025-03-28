@@ -143,9 +143,7 @@ namespace Main_Demo
 
         public Window1()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
         private void AddAudioEffects()

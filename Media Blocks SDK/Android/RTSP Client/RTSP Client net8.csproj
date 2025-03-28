@@ -11,8 +11,8 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.24" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.3.27" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.3.28" />
     <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>

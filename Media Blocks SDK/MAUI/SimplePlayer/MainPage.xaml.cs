@@ -59,14 +59,8 @@ namespace Simple_Player_MB_MAUI
             _audioRenderer = new AudioRendererBlock();
             
             _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(_filename)));
-
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
-
+            
+            var vv = videoView.GetVideoView();
             _videoRenderer = new VideoRendererBlock(_pipeline, vv);
             _audioRenderer = new AudioRendererBlock();
 
@@ -173,6 +167,8 @@ namespace Simple_Player_MB_MAUI
                     }
 
                     _isTimerUpdate = true;
+
+                    slSeeking.Maximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
 
                     if (progress > slSeeking.Maximum)
                     {

@@ -59,61 +59,71 @@
                     Margin="5, 0, 5, 0" />
                 </Grid>
 
-                <StackLayout 
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    HorizontalOptions="Center"
-                    Margin="16, 0, 5, 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                    <Button  
-                        x:Name="btOpen"
-                        Text="OPEN FILE" 
-                        Margin="5" 
-                        VerticalOptions="Center" 
-                        Clicked="btOpen_Clicked" />
+                    <StackLayout
+         Grid.Column="1"
+         Orientation="Horizontal"
+         HorizontalOptions="Center"
+         Margin="16, 0, 5, 0"
+         VerticalOptions="Center">
 
-                    <Button  
-                        x:Name="btPlayPause"   
-                        Text="PLAY" 
-                        Margin="5" 
-                        Clicked="btPlayPause_Clicked" />
+                        <Button
+             x:Name="btOpen"
+             Text="OPEN FILE"
+             Margin="5"
+             VerticalOptions="Center"
+             Clicked="btOpen_Clicked" />
 
-                    <Button  
-                        x:Name="btStop"   
-                        Text="STOP" 
-                        Margin="5" 
-                        Clicked="btStop_Clicked" />
+                        <Button
+             x:Name="btPlayPause"
+             Text="PLAY"
+             Margin="5"
+             Clicked="btPlayPause_Clicked" />
 
-                </StackLayout>
+                        <Button
+             x:Name="btStop"
+             Text="STOP"
+             Margin="5"
+             Clicked="btStop_Clicked" />
 
-                <StackLayout
-                    Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalOptions="Start"
-                    Margin="16, 0, 5, 5" >
+                    </StackLayout>
 
-                    <Label  
-                        Text="Volume"
-                        TextColor="White"
-                        VerticalOptions="Center" />
+                    <StackLayout
+         Grid.Column="2"
+         Orientation="Horizontal"
+         HorizontalOptions="Start"
+         Margin="16, 0, 5, 5"
+         VerticalOptions="Center">
 
-                    <Slider 
-                        x:Name="slVolume"
-                        HorizontalOptions="Fill"
-                        Margin="15, 0, 5, 0"
-                        Minimum="0"
-                        Maximum="100"
-                        Value="25"
-                        WidthRequest="150"                        
-                        VerticalOptions="Center"
-                        ValueChanged="slVolume_ValueChanged" />
+                        <Label
+             Text="Volume"
+             TextColor="White"
+             VerticalOptions="Center" />
 
-                    <Button  
-                        x:Name="btSpeed"                   
-                        Margin="5,5,5,5" 
-                        Text="SPEED: 1X"
-                        Clicked="btSpeed_Clicked" />
-                </StackLayout>
+                        <Slider
+             x:Name="slVolume"
+             HorizontalOptions="Fill"
+             Margin="15, 0, 5, 0"
+             Minimum="0"
+             Maximum="100"
+             Value="25"
+             WidthRequest="150"
+             VerticalOptions="Center"
+             ValueChanged="slVolume_ValueChanged" />
+
+                        <Button  
+    x:Name="btSpeed"                   
+    Margin="5,5,5,5" 
+    Text="SPEED: 1X"
+    Clicked="btSpeed_Clicked" />
+                    </StackLayout>
+                </Grid>
             </StackLayout>
         </Grid>
     </Grid>

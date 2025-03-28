@@ -23,6 +23,7 @@ namespace SimpleCapture
     {
         private VideoCaptureCoreX _core;
 
+
         private VideoCaptureDeviceInfo[] _cameras;
 
         private int _cameraSelectedIndex = 0;
@@ -34,6 +35,7 @@ namespace SimpleCapture
         private AudioOutputDeviceInfo[] _speakers;
 
         private int _speakerSelectedIndex = 0;
+
 
         private Color _defaultButtonColor;
 
@@ -49,9 +51,11 @@ namespace SimpleCapture
 
         private void MainPage_Unloaded(object sender, EventArgs e)
         {
+            // Dispose core object
             _core?.Dispose();
             _core = null;
 
+            // Destroy SDK
             VisioForgeX.DestroySDK();
         }
 
@@ -67,65 +71,6 @@ namespace SimpleCapture
             });
         }
 #endif
-
-        private async void MainPage_Loaded(object sender, EventArgs e)
-        {
-#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
-            await RequestCameraPermissionAsync();
-            await RequestMicPermissionAsync();
-#endif
-
-#if __IOS__ && !__MACCATALYST__
-            RequestPhotoPermission();
-#endif
-
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
-
-            _core = new VideoCaptureCoreX(vv);
-            _core.OnError += Core_OnError;       
-
-            // cameras
-            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            if (_cameras.Length > 0)
-            {                
-                btCamera.Text = _cameras[0].DisplayName;
-            }
-
-            // mics
-            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
-            if (_mics.Length > 0)
-            {      
-                btMic.Text = _mics[0].DisplayName;
-            }
-            Window.Destroying += Window_Destroying;
-
-            // audio outputs
-            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
-            if (_speakers.Length > 0)
-            {                
-                btSpeakers.Text = _speakers[0].DisplayName;
-            }
-
-            Window.Destroying += Window_Destroying;
-
-#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
-            if (_cameras.Length > 1)
-            {
-                btCamera.Text = _cameras[1].DisplayName;
-                _cameraSelectedIndex = 1;
-            }
-#endif
-
-#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
-            btStartCapture.IsEnabled = true;
-            await StartPreview();
-#endif
-        }
 
         private async Task RequestCameraPermissionAsync()
         {
@@ -161,6 +106,66 @@ namespace SimpleCapture
                         await RequestMicPermissionAsync();
                 }
             }
+        }
+
+        private async void MainPage_Loaded(object sender, EventArgs e)
+        {
+            // Ask for permissions
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
+            await RequestCameraPermissionAsync();
+            await RequestMicPermissionAsync();
+#endif
+
+#if __IOS__ && !__MACCATALYST__
+            RequestPhotoPermission();
+#endif
+
+            // Get IVideoView interface
+            IVideoView vv = videoView.GetVideoView();
+
+            // Create core object with IVideoView interface
+            _core = new VideoCaptureCoreX(vv);
+
+            // Add event handlers
+            _core.OnError += Core_OnError;
+
+            // Enumerate cameras
+            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+            if (_cameras.Length > 0)
+            {                
+                btCamera.Text = _cameras[0].DisplayName;
+            }
+
+            // Enumerate microphones and other audio sources
+            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
+            if (_mics.Length > 0)
+            {      
+                btMic.Text = _mics[0].DisplayName;
+            }
+            Window.Destroying += Window_Destroying;
+
+            // Enumerate audio outputs
+            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
+            if (_speakers.Length > 0)
+            {                
+                btSpeakers.Text = _speakers[0].DisplayName;
+            }
+
+            // Add Destroying event handler
+            Window.Destroying += Window_Destroying;
+
+#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+            // Select second camera if available for mobile platforms
+            if (_cameras.Length > 1)
+            {
+                btCamera.Text = _cameras[1].DisplayName;
+                _cameraSelectedIndex = 1;
+            }
+
+            // Start preview
+            btStartCapture.IsEnabled = true;
+            await StartPreview();
+#endif
         }
 
         private async void Window_Destroying(object sender, EventArgs e)

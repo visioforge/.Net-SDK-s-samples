@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:id="@+id/relativeLayout1">
 
-    <VisioForge.Core.UI.Android.VideoViewTX
+	<VisioForge.Core.UI.Android.VideoViewGL
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:minWidth="25px"

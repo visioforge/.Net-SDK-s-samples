@@ -1,7 +1,7 @@
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.Special;
+
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaInfoReaderX;
 using VisioForge.Core.Types.Events;
@@ -10,18 +10,18 @@ using VisioForge.Core;
 
 using Android.Util;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+
 using System.Globalization;
 using Xamarin.Essentials;
 using Android;
+
 
 namespace MediaPlayer
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        private VisioForge.Core.UI.Android.VideoViewTX videoView;
+        private VisioForge.Core.UI.Android.VideoViewGL videoView;
 
         private Button btOpenFile;
 
@@ -116,7 +116,7 @@ namespace MediaPlayer
                         Manifest.Permission.AccessWifiState,
                         Manifest.Permission.ModifyAudioSettings}, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(MediaPlayer.Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewGL>(MediaPlayer.Resource.Id.videoView);
 
             tmPosition.Elapsed += tmPosition_Elapsed;
 
@@ -193,8 +193,6 @@ namespace MediaPlayer
             {
                 sbTimeline.Progress = 0;
             });
-
-            videoView.Invalidate();
         }
 
         private async void btPause_Click(object sender, EventArgs e)
@@ -280,6 +278,8 @@ namespace MediaPlayer
                     {
                         return;
                     }
+
+                    sbTimeline.Max = (int)duration.TotalMilliseconds;
 
                     if (progress > sbTimeline.Max)
                     {
