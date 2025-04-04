@@ -292,32 +292,29 @@ namespace Live_Video_Compositor_Demo
                 var zOrder = Convert.ToUInt32(edZOrder.Text);
 
                 var input = _compositor.Input_Get(index);
+                if (input == null)
+                {
+                    return;
+                }
 
+                // Update rectangles
+                if (input is LVCVideoAudioInput vai)
+                {
+                    vai.Rectangle = rect;
+                }
+                else if (input is LVCVideoInput vi)
+                {
+                    vi.Rectangle = rect;
+                }
+
+                // Update live stream if available
                 var stream = _compositor.Input_VideoStream_Get(input);
-
                 if (stream != null)
                 {
                     // we have playback started and can change the rect
                     stream.Rectangle = rect;
                     stream.ZOrder = zOrder;
                     _compositor.Input_VideoStream_Update(stream);
-                }
-                else
-                {
-                    // we have playback stopped and can change the rect
-                  
-                    if (input is LVCVideoAudioInput vai)
-                    {
-                        vai.Rectangle = rect;
-                    }
-                    else if (input is LVCVideoInput vi)
-                    {
-                        vi.Rectangle = rect;
-                    }
-                    //else if (input is LVCFileVideoAudioInput fvai)
-                    //{
-                    //    fvai.Rectangle = rect;
-                    //}
                 }
             }
         }
