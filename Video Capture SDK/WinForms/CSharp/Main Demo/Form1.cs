@@ -5220,6 +5220,7 @@ namespace VideoCapture_CSharp_Demo
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Text = "Connect";
                         return;
                     }
 
@@ -5228,6 +5229,7 @@ namespace VideoCapture_CSharp_Demo
                     if (!result)
                     {
                         onvifDevice = null;
+                        btONVIFConnect.Text = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -5258,8 +5260,10 @@ namespace VideoCapture_CSharp_Demo
                     MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                     btONVIFConnect.Text = "Connect";
                 }
-
-                btONVIFConnect.Enabled = true;
+                finally
+                {
+                    btONVIFConnect.Enabled = true;
+                }
             }
             else
             {

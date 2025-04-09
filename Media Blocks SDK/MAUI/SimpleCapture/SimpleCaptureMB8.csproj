@@ -78,8 +78,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.4.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.4.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.4.9" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.92" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
   </ItemGroup>
@@ -90,8 +90,8 @@
   </ProjectExtensions>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.3.14" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.3.14" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.4.9" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.4.9" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
