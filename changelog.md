@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.4.8
+
+* [ALL] Added Absolute Move API to the `ONVIFDeviceX` class. You can use this API to move the ONVIF camera to the specified absolute position.
+
 ## 2025.2.24
 
 * [X-engine] By default, Media Foundation device enumeration is disabled. You can enable it using the `DeviceEnumerator.Shared.IsEnumerateMediaFoundationDevices` property.
