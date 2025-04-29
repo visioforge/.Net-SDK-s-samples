@@ -17,7 +17,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.4.9" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.4.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.4.12" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
