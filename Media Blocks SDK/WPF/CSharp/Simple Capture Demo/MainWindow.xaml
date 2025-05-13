@@ -50,6 +50,7 @@
                     <ComboBox x:Name="cbOutputFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectedIndex="0">
                         <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem>MP4</ComboBoxItem>
+                        <ComboBoxItem>MPEG-TS</ComboBoxItem>
                         <ComboBoxItem>WebM</ComboBoxItem>
                     </ComboBox>
                     <Label Content="Filename" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>

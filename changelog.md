@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.5.1
+
+* [ALL] Update NuGet dependency packages to the latest versions
+* [X-engines] Resolved issue with RTMP network streaming to a custom server
+
 ## 2025.4.8
 
 * [ALL] Added Absolute Move API to the `ONVIFDeviceX` class. You can use this API to move the ONVIF camera to the specified absolute position.

@@ -49,15 +49,15 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
         private SystemAudioSourceBlock _audioSource;
 
-        private MP4SinkBlock _mp4Muxer;
+        private MediaBlock _muxer;
 
-        private H264EncoderBlock _h264Encoder;
+        private MediaBlock _videoEncoder;
 
         private TeeBlock _videoTee;
 
         private TeeBlock _audioTee;
 
-        private AACEncoderBlock _aacEncoder;
+        private MediaBlock _audioEncoder;
 
         private System.Timers.Timer _timer;
 
@@ -212,9 +212,27 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             {
                 _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
                 _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-                _h264Encoder = new H264EncoderBlock();
-                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
-                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+
+                switch (cbOutputFormat.SelectedIndex)
+                {
+                    case 1: // MP4
+                        _muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+                        _videoEncoder = new H264EncoderBlock();
+                        _audioEncoder = new AACEncoderBlock();
+                        break;
+                    case 2: // MPEG-TS
+                        _muxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(edFilename.Text));
+                        _videoEncoder = new H264EncoderBlock();
+                        _audioEncoder = new AACEncoderBlock();
+                        break;
+                    case 3: // WebM
+                        _muxer = new WebMSinkBlock(new WebMSinkSettings(edFilename.Text));
+                        _videoEncoder = new VPXEncoderBlock(new VP8EncoderSettings());
+                        _audioEncoder = new VorbisEncoderBlock(new VorbisEncoderSettings());
+                        break;
+                    default:
+                        break;
+                }
             }
 
             // connect all
@@ -222,13 +240,13 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             {
                 _pipeline.Connect(_videoSource.Output, _videoTee.Input);
                 _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
-                _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
+                _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+                _pipeline.Connect(_videoEncoder.Output, (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
 
                 _pipeline.Connect(_audioSource.Output, _audioTee.Input);
                 _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-                _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
-                _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
+                _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+                _pipeline.Connect(_audioEncoder.Output, (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
             }
             else
             {

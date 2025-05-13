@@ -11,7 +11,7 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.9.0.115408">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -21,7 +21,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.4.9" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.4.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.5.1" />
     <PackageReference Include="VisioForge.DotNet.OpenGL" Version="2025.3.7" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
+using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.X.AudioEncoders;
@@ -90,7 +91,7 @@ namespace RTSP_Restreamer
             IVideoEncoder videoEncoder = null;
             if (videoAvailable)
             {
-                videoEncoder = new OpenH264EncoderSettings();
+                videoEncoder = H264EncoderBlock.GetDefaultSettings(); 
             }
 
             IAudioEncoder audioEncoder = null;

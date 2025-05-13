@@ -23,8 +23,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.241114003" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.3916" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.4.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.4.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.5.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.5.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.5.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.5.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\visioforge_main_icon.ico">
