@@ -4,20 +4,14 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
   build:
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.sln"
-
       Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
-
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Avalonia.sln"
-
       Solution_Name_VE: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Avalonia.sln"
-
     runs-on: windows-2022
-
     steps:
     - uses: actions/checkout@v2
     
@@ -26,41 +20,46 @@ jobs:
       with:
         dotnet-version: | 
           8.0.x
-
-    - name: Install macos workload
-      run: dotnet workload install macos
+          
+    # Install required workloads
+    - name: Install .NET workloads
+      run: |
+        dotnet workload install ios
+        dotnet workload install android
+        dotnet workload install macos
+        dotnet workload install windows
+        
+        # Install all MAUI-related workloads
+        dotnet workload install maui
+        dotnet workload install maui-android
+        dotnet workload install maui-ios
+        dotnet workload install maui-maccatalyst
+        dotnet workload install maui-windows
+        dotnet workload install maui-desktop
           
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
         
     ## Media Blocks
-
     - name: Restore dependencies $env:Solution_Name_MB
       run: dotnet restore $env:Solution_Name_MB
-
     - name: Build app for release $env:Solution_Name_MB
       run: msbuild $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release
-
+      
     ## Media Player
-
     - name: Restore dependencies $env:Solution_Name_MP
       run: dotnet restore $env:Solution_Name_MP
-
     - name: Build app for release $env:Solution_Name_MP
       run: msbuild $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release
-
+      
     ## Video Capture
-
     - name: Restore dependencies $env:Solution_Name_VC
       run: dotnet restore $env:Solution_Name_VC
-
     - name: Build app for release $env:Solution_Name_VC
       run: msbuild $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release
-
+      
     ## Video Edit
-
     - name: Restore dependencies $env:Solution_Name_VE
       run: dotnet restore $env:Solution_Name_VE
-
     - name: Build app for release $env:Solution_Name_VE
       run: msbuild $env:Solution_Name_VE -t:rebuild -verbosity:diag -property:Configuration=Release
