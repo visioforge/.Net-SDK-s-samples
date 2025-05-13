@@ -7,6 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerAMB", "Avalonia
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureAMB", "Avalonia\Simple Video Capture\SimpleVideoCaptureAMB.csproj", "{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimplePlayerMVVM", "SimplePlayerMVVM", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM\SimplePlayerMVVMMB.csproj", "{CFD9BD01-45F8-2678-FB97-6CDAF6557906}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB.Android", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM.Android\SimplePlayerMVVMMB.Android.csproj", "{CD819989-BF76-4286-4494-A8802325DE10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB.Desktop", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM.Desktop\SimplePlayerMVVMMB.Desktop.csproj", "{44998C6D-49F9-A145-904F-44E599B13E08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB.iOS", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM.iOS\SimplePlayerMVVMMB.iOS.csproj", "{EA59AEBF-A327-C717-5D97-68B27E912B30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X8", "..\AndroidDependency\VisioForge.Core.Android.X8.csproj", "{30B2D325-5C2F-14EB-8114-FB8A0DCECB18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +33,40 @@ Global
 		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D6A9E3E-A074-49AA-85C0-EDAC06811C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD9BD01-45F8-2678-FB97-6CDAF6557906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD9BD01-45F8-2678-FB97-6CDAF6557906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD9BD01-45F8-2678-FB97-6CDAF6557906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD9BD01-45F8-2678-FB97-6CDAF6557906}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD819989-BF76-4286-4494-A8802325DE10}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{44998C6D-49F9-A145-904F-44E599B13E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44998C6D-49F9-A145-904F-44E599B13E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44998C6D-49F9-A145-904F-44E599B13E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44998C6D-49F9-A145-904F-44E599B13E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA59AEBF-A327-C717-5D97-68B27E912B30}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{30B2D325-5C2F-14EB-8114-FB8A0DCECB18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B2D325-5C2F-14EB-8114-FB8A0DCECB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B2D325-5C2F-14EB-8114-FB8A0DCECB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B2D325-5C2F-14EB-8114-FB8A0DCECB18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CFD9BD01-45F8-2678-FB97-6CDAF6557906} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CD819989-BF76-4286-4494-A8802325DE10} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{44998C6D-49F9-A145-904F-44E599B13E08} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EA59AEBF-A327-C717-5D97-68B27E912B30} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{30B2D325-5C2F-14EB-8114-FB8A0DCECB18} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

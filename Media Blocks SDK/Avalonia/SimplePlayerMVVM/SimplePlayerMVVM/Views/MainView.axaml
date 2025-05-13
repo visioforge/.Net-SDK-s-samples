@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Simple_Player_MVVM.ViewModels"
+			 xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Simple_Player_MVVM.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+	<Grid RowDefinitions="*,Auto" ColumnDefinitions="*">
+		<!-- Video View Placeholder -->
+		<Border Grid.Row="0" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<avalonia:VideoView x:Name="videoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C"  />
+		</Border>
+
+		<!-- Controls -->
+		<StackPanel Grid.Row="1" Background="#1e1e1e" Orientation="Vertical">
+
+			<!-- Slider for seeking -->
+			<Slider Name="slSeeking" Margin="16,16,16,0" VerticalAlignment="Center" Maximum="{Binding SeekingMaximum}" Value="{Binding SeekingValue}"/>
+
+			<!-- Time and filename display -->
+			<Grid Margin="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+
+				<!-- Position -->
+				<TextBlock Grid.Column="0" Text="{Binding Position}" Foreground="White" VerticalAlignment="Center" Margin="5,0,5,0"/>
+
+				<!-- Filename -->
+				<TextBlock Grid.Column="1" Text="{Binding Filename}" Foreground="White" HorizontalAlignment="Center" />
+
+				<!-- Duration -->
+				<TextBlock Grid.Column="2" Text="{Binding Duration}" Foreground="White" VerticalAlignment="Center" Margin="5,0,5,0"/>
+			</Grid>
+
+			<!-- Playback Controls -->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16,0,5,0">
+				<Button Command="{Binding OpenFileCommand}" Content="OPEN FILE" Margin="5" VerticalAlignment="Center"/>
+				<Button Name="btPlayPause" Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseText}" Margin="5"/>
+				<Button Name="btStop" Command="{Binding StopCommand}" Content="STOP" Margin="5"/>
+			</StackPanel>
+
+			<!-- Volume and Speed Controls -->
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="16,0,5,5">
+				<TextBlock Text="Volume" Foreground="White" VerticalAlignment="Center"/>
+				<Slider Value="{Binding VolumeValue}" Minimum="0" Maximum="100" Width="150" Margin="15,0,5,0" VerticalAlignment="Center"/>
+				<Button Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="5"/>
+			</StackPanel>
+		</StackPanel>
+
+	</Grid>
+</UserControl>
