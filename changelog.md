@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.1
+
+* [Live Video Compositor] Resolved issue with file sources paused on start, and resumed with error
+
 ## 2025.5.1
 
 * [ALL] Update NuGet dependency packages to the latest versions
