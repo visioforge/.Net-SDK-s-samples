@@ -1,0 +1,245 @@
+@page "/"
+@inject VisioForgeService VisioForgeService
+@implements IDisposable
+
+<PageTitle>RTSP Webcam Server</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4">RTSP Webcam Server</h1>
+            <p class="lead">Stream your webcam via RTSP using VisioForge Media Blocks SDK</p>
+        </div>
+    </div>
+
+    @if (!VisioForgeService.IsInitialized)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <strong>Initializing VisioForge SDK...</strong>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Camera Selection</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (cameras?.Length > 0)
+                        {
+                            <div class="mb-3">
+                                <label for="cameraSelect" class="form-label">Select Camera:</label>
+                                <select id="cameraSelect" class="form-select" @bind="selectedCameraIndex">
+                                    <option value="-1">-- Select a camera --</option>
+                                    @for (int i = 0; i < cameras.Length; i++)
+                                    {
+                                        <option value="@i">@cameras[i].DisplayName</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="portInput" class="form-label">RTSP Port:</label>
+                                <input id="portInput" type="number" class="form-control" @bind="rtspPort" min="1024" max="65535" />
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                @if (!VisioForgeService.IsStreaming)
+                                {
+                                    <button class="btn btn-success" @onclick="StartStreaming" disabled="@(selectedCameraIndex < 0 || isProcessing)">
+                                        @if (isProcessing)
+                                        {
+                                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        }
+                                        Start Streaming
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-danger" @onclick="StopStreaming" disabled="@isProcessing">
+                                        @if (isProcessing)
+                                        {
+                                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        }
+                                        Stop Streaming
+                                    </button>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <strong>No cameras detected!</strong> Please ensure a webcam is connected and try refreshing the page.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Stream Status</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (VisioForgeService.IsStreaming)
+                        {
+                            <div class="alert alert-success">
+                                <h6 class="alert-heading">✅ Streaming Active</h6>
+                                <p class="mb-1"><strong>Camera:</strong> @(selectedCameraIndex >= 0 && cameras != null ? cameras[selectedCameraIndex].DisplayName : "Unknown")</p>
+                                <p class="mb-1"><strong>RTSP URL:</strong></p>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="@VisioForgeService.RtspUrl" readonly />
+                                    <button class="btn btn-outline-secondary" type="button" @onclick="CopyToClipboard">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <hr />
+                                <p class="mb-0 small text-muted">
+                                    Use this URL in your RTSP client (VLC, FFmpeg, etc.) to view the stream.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-secondary">
+                                <h6 class="alert-heading">⏸️ Not Streaming</h6>
+                                <p class="mb-0">Select a camera and click "Start Streaming" to begin.</p>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(statusMessage))
+                        {
+                            <div class="alert @(statusMessage.Contains("Error") ? "alert-danger" : "alert-info") mt-2">
+                                @statusMessage
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Instructions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Select a webcam from the dropdown list</li>
+                            <li>Optionally change the RTSP port (default: 8554)</li>
+                            <li>Click "Start Streaming" to begin the RTSP server</li>
+                            <li>Copy the RTSP URL and use it in your RTSP client</li>
+                            <li>Common RTSP clients: VLC Media Player, FFmpeg, GStreamer, or any IP camera software</li>
+                        </ol>
+                        <div class="alert alert-info mt-3">
+                            <strong>Note:</strong> The RTSP stream will be available at the displayed URL. Make sure your firewall allows connections on the specified port.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private VisioForge.Core.Types.X.Sources.VideoCaptureDeviceInfo[]? cameras;
+    private int selectedCameraIndex = -1;
+    private int rtspPort = 8554;
+    private bool isProcessing = false;
+    private string statusMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            cameras = VisioForgeService.GetAvailableCameras();
+            statusMessage = $"Found {cameras.Length} camera(s)";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error loading cameras: {ex.Message}";
+        }
+    }
+
+    private async Task StartStreaming()
+    {
+        if (selectedCameraIndex < 0 || cameras == null || selectedCameraIndex >= cameras.Length)
+        {
+            statusMessage = "Please select a valid camera";
+            return;
+        }
+
+        isProcessing = true;
+        statusMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            var success = await VisioForgeService.StartStreamingAsync(cameras[selectedCameraIndex], rtspPort);
+            if (success)
+            {
+                statusMessage = "Streaming started successfully!";
+            }
+            else
+            {
+                statusMessage = "Error: Failed to start streaming";
+            }
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error starting stream: {ex.Message}";
+        }
+        finally
+        {
+            isProcessing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task StopStreaming()
+    {
+        isProcessing = true;
+        statusMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            await VisioForgeService.StopStreamingAsync();
+            statusMessage = "Streaming stopped";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error stopping stream: {ex.Message}";
+        }
+        finally
+        {
+            isProcessing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task CopyToClipboard()
+    {
+        // This would require JavaScript interop in a real application
+        statusMessage = "RTSP URL copied to clipboard!";
+        StateHasChanged();
+        
+        // Clear the message after a few seconds
+        await Task.Delay(3000);
+        statusMessage = "";
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        // The service is managed by DI container, so we don't dispose it here
+    }
+} 

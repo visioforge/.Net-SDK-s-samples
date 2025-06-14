@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RTSP Webcam Blazor Server": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:32629;http://localhost:32630"
+    }
+  }
+}

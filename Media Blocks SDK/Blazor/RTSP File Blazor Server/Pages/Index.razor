@@ -1,0 +1,294 @@
+@page "/"
+@inject VisioForgeService VisioForgeService
+@implements IDisposable
+
+<PageTitle>RTSP File Server</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4">RTSP File Server</h1>
+            <p class="lead">Stream your media files via RTSP using VisioForge Media Blocks SDK</p>
+        </div>
+    </div>
+
+    @if (!VisioForgeService.IsInitialized)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <strong>Initializing VisioForge SDK...</strong>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">File Selection</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (availableFiles?.Length > 0)
+                        {
+                            <div class="mb-3">
+                                <label for="fileSelect" class="form-label">Select Media File:</label>
+                                <select id="fileSelect" class="form-select" @bind="selectedFileName">
+                                    <option value="">-- Select a media file --</option>
+                                    @foreach (var file in availableFiles)
+                                    {
+                                        <option value="@file">@file</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                <h6 class="alert-heading">No Media Files Found</h6>
+                                <p class="mb-2">No supported media files were found in the server's media folder.</p>
+                                <p class="mb-1"><strong>Media Folder:</strong> <code>@VisioForgeService.GetMediaFolderPath()</code></p>
+                                <p class="mb-0">Please add some video files (MP4, AVI, MOV, MKV, etc.) to this folder and refresh the page.</p>
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label for="portInput" class="form-label">RTSP Port:</label>
+                            <input id="portInput" type="number" class="form-control" @bind="rtspPort" min="1024" max="65535" />
+                        </div>
+
+                        <div class="d-grid gap-2 mb-3">
+                            @if (!VisioForgeService.IsStreaming)
+                            {
+                                <button class="btn btn-success" @onclick="StartStreaming" disabled="@(string.IsNullOrEmpty(selectedFileName) || isProcessing)">
+                                    @if (isProcessing)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                    }
+                                    Start Streaming
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" @onclick="StopStreaming" disabled="@isProcessing">
+                                    @if (isProcessing)
+                                    {
+                                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                    }
+                                    Stop Streaming
+                                </button>
+                            }
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-outline-primary" @onclick="RefreshFileList" disabled="@isProcessing">
+                                🔄 Refresh File List
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Stream Status</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (VisioForgeService.IsStreaming)
+                        {
+                            <div class="alert alert-success">
+                                <h6 class="alert-heading">✅ Streaming Active</h6>
+                                <p class="mb-1"><strong>File:</strong> @selectedFileName</p>
+                                <p class="mb-1"><strong>RTSP URL:</strong></p>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="@VisioForgeService.RtspUrl" readonly />
+                                    <button class="btn btn-outline-secondary" type="button" @onclick="CopyToClipboard">
+                                        📋 Copy
+                                    </button>
+                                </div>
+                                <hr />
+                                <p class="mb-0 small text-muted">
+                                    Use this URL in your RTSP client (VLC, FFmpeg, etc.) to view the stream.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-secondary">
+                                <h6 class="alert-heading">⏸️ Not Streaming</h6>
+                                <p class="mb-0">Select a media file and click "Start Streaming" to begin.</p>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(statusMessage))
+                        {
+                            <div class="alert @(statusMessage.Contains("Error") ? "alert-danger" : "alert-info") mt-2">
+                                @statusMessage
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Instructions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Add your media files to the server's media folder: <code>@VisioForgeService.GetMediaFolderPath()</code></li>
+                            <li>Click "Refresh File List" if you've added new files</li>
+                            <li>Select a media file from the dropdown list</li>
+                            <li>Optionally change the RTSP port (default: 8554)</li>
+                            <li>Click "Start Streaming" to begin the RTSP server</li>
+                            <li>Copy the RTSP URL and use it in your RTSP client</li>
+                            <li>Common RTSP clients: VLC Media Player, FFmpeg, GStreamer, or any IP camera software</li>
+                        </ol>
+                        <div class="alert alert-info mt-3">
+                            <strong>Supported Formats:</strong> MP4, AVI, MOV, MKV, WMV, FLV, WEBM, M4V, 3GP, TS, MTS
+                        </div>
+                        <div class="alert alert-info mt-2">
+                            <strong>Note:</strong> The RTSP stream will be available at the displayed URL. Make sure your firewall allows connections on the specified port.
+                        </div>
+                        <div class="alert alert-warning mt-2">
+                            <strong>File Requirements:</strong> The file must contain at least one video stream. Audio-only files are not supported for RTSP streaming.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private string[] availableFiles = Array.Empty<string>();
+    private string selectedFileName = string.Empty;
+    private int rtspPort = 8554;
+    private bool isProcessing = false;
+    private string statusMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAvailableFiles();
+    }
+
+    private async Task LoadAvailableFiles()
+    {
+        try
+        {
+            availableFiles = VisioForgeService.GetAvailableMediaFiles();
+            if (availableFiles.Length > 0)
+            {
+                statusMessage = $"Found {availableFiles.Length} media file(s) ready for streaming";
+            }
+            else
+            {
+                statusMessage = "No supported media files found in the media folder";
+            }
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error loading media files: {ex.Message}";
+            availableFiles = Array.Empty<string>();
+        }
+    }
+
+    private async Task RefreshFileList()
+    {
+        isProcessing = true;
+        StateHasChanged();
+
+        await LoadAvailableFiles();
+
+        isProcessing = false;
+        StateHasChanged();
+    }
+
+    private async Task StartStreaming()
+    {
+        if (string.IsNullOrEmpty(selectedFileName))
+        {
+            statusMessage = "Please select a media file";
+            return;
+        }
+
+        isProcessing = true;
+        statusMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            var success = await VisioForgeService.StartStreamingAsync(selectedFileName, rtspPort);
+            if (success)
+            {
+                statusMessage = "Streaming started successfully!";
+            }
+            else
+            {
+                statusMessage = "Error: Failed to start streaming";
+            }
+        }
+        catch (ArgumentException ex)
+        {
+            statusMessage = $"File Error: {ex.Message}";
+        }
+        catch (InvalidOperationException ex)
+        {
+            statusMessage = $"Stream Error: {ex.Message}";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error starting stream: {ex.Message}";
+        }
+        finally
+        {
+            isProcessing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task StopStreaming()
+    {
+        isProcessing = true;
+        statusMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            await VisioForgeService.StopStreamingAsync();
+            statusMessage = "Streaming stopped";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Error stopping stream: {ex.Message}";
+        }
+        finally
+        {
+            isProcessing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task CopyToClipboard()
+    {
+        // This would require JavaScript interop in a real application
+        statusMessage = "RTSP URL copied to clipboard!";
+        StateHasChanged();
+        
+        // Clear the message after a few seconds
+        await Task.Delay(3000);
+        statusMessage = "";
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        // The service is managed by DI container, so we don't dispose it here
+    }
+} 

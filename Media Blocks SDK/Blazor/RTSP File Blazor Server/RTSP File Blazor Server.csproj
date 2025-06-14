@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net8.0-macos14.0</TargetFramework>
+		<TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net8.0-windows</TargetFrameworks>
+		<TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
+		<RootNamespace>RTSP_Webcam_Server</RootNamespace>
+		<PlatformTarget>x64</PlatformTarget>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.1" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.4.9" />
+		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.4.9" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+		<PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />
+	</ItemGroup>
+
+</Project>

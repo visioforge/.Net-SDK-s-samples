@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP File Blazor Server", "Blazor\RTSP File Blazor Server\RTSP File Blazor Server.csproj", "{09AF15E4-A6ED-8FFE-34A7-F1E522EDB6B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Webcam Blazor Server", "Blazor\RTSP Webcam Blazor Server\RTSP Webcam Blazor Server.csproj", "{BCBD9CA5-81F5-2EFF-9E72-FC4E38E040D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09AF15E4-A6ED-8FFE-34A7-F1E522EDB6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AF15E4-A6ED-8FFE-34A7-F1E522EDB6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AF15E4-A6ED-8FFE-34A7-F1E522EDB6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AF15E4-A6ED-8FFE-34A7-F1E522EDB6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCBD9CA5-81F5-2EFF-9E72-FC4E38E040D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBD9CA5-81F5-2EFF-9E72-FC4E38E040D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBD9CA5-81F5-2EFF-9E72-FC4E38E040D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBD9CA5-81F5-2EFF-9E72-FC4E38E040D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
+	EndGlobalSection
+EndGlobal

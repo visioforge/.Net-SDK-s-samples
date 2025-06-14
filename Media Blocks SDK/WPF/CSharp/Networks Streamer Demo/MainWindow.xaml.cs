@@ -22,7 +22,6 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
-using VisioForge.Libs.NDI;
 
 namespace Networks_Streamer_Demo
 {

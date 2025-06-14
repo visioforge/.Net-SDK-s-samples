@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lut-sample", "_CodeSnippets
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Capture Original", "Console\RTSP Capture Original\RTSP Capture Original.csproj", "{F1CD46A9-9867-6AA5-B9DA-9B8E19C23543}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Webcam Server", "Console\RTSP Webcam Server\RTSP Webcam Server.csproj", "{438055A6-F768-243B-3359-E74A1853FA1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F1CD46A9-9867-6AA5-B9DA-9B8E19C23543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1CD46A9-9867-6AA5-B9DA-9B8E19C23543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1CD46A9-9867-6AA5-B9DA-9B8E19C23543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{438055A6-F768-243B-3359-E74A1853FA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{438055A6-F768-243B-3359-E74A1853FA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{438055A6-F768-243B-3359-E74A1853FA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{438055A6-F768-243B-3359-E74A1853FA1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

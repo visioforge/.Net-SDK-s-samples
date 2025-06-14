@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.2
+
+* [X-engines] Added deinterlace support for interlaced Decklink video sources
+
 ## 2025.6.1
 
 * [Live Video Compositor] Resolved issue with file sources paused on start, and resumed with error
