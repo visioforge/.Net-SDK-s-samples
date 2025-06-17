@@ -1,27 +1,219 @@
-﻿<Window x:Class="GenICam_Source_Demo.MainWindow"
+<Window x:Class="GenICam_Source_Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GenICam_Source_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
-        Title="GenICam Source Demo - Media Blocks SDK .Net" Height="304" Width="733" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="GenICam Source Demo - Media Blocks SDK .Net" Height="700" Width="1200" Icon="visioforge_main_icon.ico" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="400"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Column="0" Width="250" Margin="10,10,0,0">
-            <Label>Camera name</Label>
-            <ComboBox x:Name="cbCamera" HorizontalAlignment="Stretch" Margin="10,5,10,0" Text="Aravis-Fake-GV01" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10,15,10,0">
-                <Button x:Name="btStart" Content="Start" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStart_Click" />
-                <Button x:Name="btStop" Content="Stop" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStop_Click" />
-                <TextBlock x:Name="lbTimestamp" Text="00:00:00" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" />
-            </StackPanel>
-        </StackPanel>
+        <!-- Left Panel - Camera Selection and Information -->
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <!-- Camera Selection -->
+                <GroupBox Header="Camera Selection" Margin="0,0,0,10">
+                    <StackPanel Margin="5">
+                        <Label Content="Camera:" FontWeight="Bold"/>
+                        <ComboBox x:Name="cbCamera" HorizontalAlignment="Stretch" Margin="0,5,0,10" 
+                                  Text="Aravis-Fake-GV01" SelectionChanged="cbCamera_SelectionChanged"/>
+                        
+                        <!-- GenTL Path Display -->
+                        <Label Content="GenTL Path:" FontWeight="Bold" Margin="0,5,0,0"/>
+                        <TextBlock x:Name="tbGenTLPath" Text="GENICAM_GENTL64_PATH" 
+                                   Margin="0,2,0,10" TextWrapping="Wrap" FontSize="10" 
+                                   Foreground="Gray"/>
+                        
+                        <!-- Mode Selection -->
+                        <Label Content="Mode:" FontWeight="Bold" Margin="0,10,0,5"/>
+                        <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                            <RadioButton x:Name="rbPreview" Content="Preview Only" IsChecked="True" Margin="0,2"/>
+                            <RadioButton x:Name="rbCapture" Content="Capture to MP4" Margin="0,2"/>
+                        </StackPanel>
+                        
+                        <!-- MP4 File Settings -->
+                        <StackPanel x:Name="panelMp4Settings" Margin="0,5,0,10">
+                            <Label Content="MP4 Output File:" FontWeight="Bold"/>
+                            <DockPanel Margin="0,5,0,0">
+                                <Button x:Name="btBrowse" Content="Browse..." Width="70" DockPanel.Dock="Right" 
+                                        Margin="5,0,0,0" Click="btBrowse_Click"/>
+                                <TextBox x:Name="tbFilename" />
+                            </DockPanel>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
+                            <Button x:Name="btStart" Content="Start" Width="60" Margin="0,0,5,0" Click="btStart_Click" />
+                            <Button x:Name="btStop" Content="Stop" Width="60" Margin="0,0,5,0" Click="btStop_Click" />
+                            <Button x:Name="btRefresh" Content="Refresh" Width="60" Margin="5,0,0,0" Click="btRefresh_Click" />
+                        </StackPanel>
+                        
+                        <TextBlock x:Name="lbTimestamp" Text="00:00:00" HorizontalAlignment="Center" 
+                                   Margin="0,10,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </GroupBox>
 
-        <wpf:VideoView Grid.Column="1" Margin="10,10,0,0" Width="420" Height="240" Name="VideoView1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black" />
+                <!-- Camera Information Tabs -->
+                <TabControl x:Name="tcCameraInfo" Height="500">
+                    <!-- Basic Information Tab -->
+                    <TabItem Header="Basic Info">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="5">
+                                <Label Content="Camera Details" FontWeight="Bold" FontSize="14"/>
+                                
+                                <Grid Margin="0,5,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Vendor:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="tbVendor" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Model:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tbModel" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Serial:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="tbSerial" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Device ID:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="tbDeviceId" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Protocol:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="tbProtocol" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="5" Grid.Column="0" Content="Address:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="tbAddress" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="6" Grid.Column="0" Content="Sensor Size:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="1" x:Name="tbSensorSize" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="7" Grid.Column="0" Content="Status:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="1" x:Name="tbStatus" Text="-" Margin="5,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- Technical Specifications Tab -->
+                    <TabItem Header="Technical Specs">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="5">
+                                <Label Content="Supported Formats" FontWeight="Bold" FontSize="14"/>
+                                <ListBox x:Name="lbPixelFormats" Height="100" Margin="0,5,0,10"/>
+                                
+                                <Label Content="Resolution Capabilities" FontWeight="Bold" FontSize="14"/>
+                                <Grid Margin="0,5,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Width Range:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="tbWidthRange" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Height Range:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tbHeightRange" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Frame Rate:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="tbFrameRate" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Binning:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="tbBinning" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                </Grid>
+                                
+                                <Label Content="Feature Availability" FontWeight="Bold" FontSize="14"/>
+                                <StackPanel Margin="0,5,0,0">
+                                    <CheckBox x:Name="cbExposureAvailable" Content="Exposure Control" IsEnabled="False"/>
+                                    <CheckBox x:Name="cbGainAvailable" Content="Gain Control" IsEnabled="False"/>
+                                    <CheckBox x:Name="cbFrameRateAvailable" Content="Frame Rate Control" IsEnabled="False"/>
+                                    <CheckBox x:Name="cbBinningAvailable" Content="Binning Support" IsEnabled="False"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+
+                    <!-- Current Settings Tab -->
+                    <TabItem Header="Current Settings">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="5">
+                                <Label Content="Current Camera Settings" FontWeight="Bold" FontSize="14"/>
+                                
+                                <Grid Margin="0,5,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Current Region:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="tbCurrentRegion" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Pixel Format:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="tbCurrentPixelFormat" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Exposure Time:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="tbCurrentExposure" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Gain:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="tbCurrentGain" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Frame Rate:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="tbCurrentFrameRate" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="5" Grid.Column="0" Content="Binning:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="tbCurrentBinning" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="6" Grid.Column="0" Content="Acquisition:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="1" x:Name="tbAcquisitionStatus" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                    
+                                    <Label Grid.Row="7" Grid.Column="0" Content="Connection:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="7" Grid.Column="1" x:Name="tbConnectionStatus" Text="-" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                                </Grid>
+                                
+                                <Button x:Name="btUpdateSettings" Content="Update Current Settings" Margin="0,10,0,0" 
+                                        Click="btUpdateSettings_Click"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right Panel - Video Display -->
+        <DockPanel Grid.Column="1" Margin="10">
+            <Label Content="Video Stream" FontWeight="Bold" FontSize="14" DockPanel.Dock="Top" Margin="0,0,0,5"/>
+            <wpf:VideoView Name="VideoView1" 
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                           Background="Black" DockPanel.Dock="Top"/>
+        </DockPanel>
     </Grid>
-</Window>
+</Window> 
