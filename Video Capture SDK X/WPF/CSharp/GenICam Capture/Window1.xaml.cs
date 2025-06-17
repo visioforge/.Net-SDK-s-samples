@@ -74,10 +74,10 @@ namespace GenICam_Capture
 
             _core.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            var sourceInfo = (await DeviceEnumerator.Shared.GenICamSourcesAsync()).ToList().Find(x => x.Name == cbCamera.Text);
+            var sourceInfo = (await DeviceEnumerator.Shared.GenICamSourcesAsync()).ToList().Find(x => x.CameraName == cbCamera.Text);
             sourceInfo.ReadInfo();
 
-            var sourceSettings = new GenICamSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, 512, 512), 15, GenICamPixelFormat.Mono8);
+            var sourceSettings = new GenICamSourceSettings(cbCamera.Text);
 
             _core.Video_Source = sourceSettings;
             _core.Audio_Play = false;
@@ -112,7 +112,7 @@ namespace GenICam_Capture
             var devices = await DeviceEnumerator.Shared.GenICamSourcesAsync();
             foreach (var device in devices)
             {
-                cbCamera.Items.Add(device.Name);
+                cbCamera.Items.Add(device.CameraName);
             }
 
             if (cbCamera.Items.Count > 0)
