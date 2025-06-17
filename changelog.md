@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.3
+
+* [X-engines] Updated GenICam source support for USB Vision cameras. Added GenTL source support.
+
 ## 2025.6.2
 
 * [X-engines] Added deinterlace support for interlaced Decklink video sources

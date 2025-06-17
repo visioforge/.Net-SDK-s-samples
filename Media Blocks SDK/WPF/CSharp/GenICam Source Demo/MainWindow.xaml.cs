@@ -770,7 +770,7 @@ namespace GenICam_Source_Demo
                 // Current Frame Rate
                 if (_currentCamera.FrameRateAvailable)
                 {
-                    var frameRate = _currentCamera.CurrentFrameRate > 0 ? _currentCamera.CurrentFrameRate : _currentCamera.GetFrameRate();
+                    var frameRate = !_currentCamera.CurrentFrameRate.IsEmpty ? _currentCamera.CurrentFrameRate : _currentCamera.GetFrameRate();
                     tbCurrentFrameRate.Text = $"{frameRate:F2} FPS";
                     
                     // Show frame rate bounds
