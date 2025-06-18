@@ -23,6 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.18" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.6.3" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.6.4" />
   </ItemGroup>
 </Project>
