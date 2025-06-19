@@ -16,6 +16,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.4.9" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.7" />
   </ItemGroup>
 </Project>

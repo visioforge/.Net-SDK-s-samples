@@ -7,7 +7,9 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.VideoCaptureX;
+using VisioForge.Core.Types.X.AudioRenderers;
 
 namespace NDI_Source_Demo
 {
@@ -19,6 +21,8 @@ namespace NDI_Source_Demo
         private VideoCaptureCoreX _videoCapture;
 
         private NDISourceInfo[] _ndiSources;
+
+        private AudioOutputDeviceInfo[] _audioOutputDevices;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
@@ -85,6 +89,16 @@ namespace NDI_Source_Demo
 
             _videoCapture.Video_Source = ndiSettings;
 
+            // Set audio output device if one is selected
+            if (ndiSettings.GetInfo().AudioStreams.Count > 0 && cbAudioOutputDevices.SelectedIndex >= 0 && _audioOutputDevices != null && _audioOutputDevices.Length > cbAudioOutputDevices.SelectedIndex)
+            {
+                var audioOutputSettings = new AudioRendererSettings(_audioOutputDevices[cbAudioOutputDevices.SelectedIndex]);
+                _videoCapture.Audio_OutputDevice = audioOutputSettings;
+
+              //  _videoCapture.Audio_Source = ndiSettings;
+                _videoCapture.Audio_Play = true;
+            }
+
             await _videoCapture.StartAsync();
 
             tmRecording.Start();
@@ -113,6 +127,33 @@ namespace NDI_Source_Demo
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+            // Load audio output devices
+            await LoadAudioOutputDevicesAsync();
+        }
+
+        private async Task LoadAudioOutputDevicesAsync()
+        {
+            try
+            {
+                _audioOutputDevices = await DeviceEnumerator.Shared.AudioOutputsAsync();
+
+                cbAudioOutputDevices.Items.Clear();
+
+                foreach (var audioDevice in _audioOutputDevices)
+                {
+                    cbAudioOutputDevices.Items.Add(audioDevice.DisplayName);
+                }
+
+                if (cbAudioOutputDevices.Items.Count > 0)
+                {
+                    cbAudioOutputDevices.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading audio output devices: {ex.Message}");
+            }
         }
 
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
