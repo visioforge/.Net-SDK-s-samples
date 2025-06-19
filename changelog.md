@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.5
+
+* [X-engines] Resolved issue with NDI sources playback without audio streams
+
 ## 2025.6.3
 
 * [X-engines] Updated GenICam source support for USB Vision cameras. Added GenTL source support.

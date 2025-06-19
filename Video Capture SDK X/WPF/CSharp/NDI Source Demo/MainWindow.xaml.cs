@@ -25,8 +25,6 @@ namespace NDI_Source_Demo
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
@@ -79,6 +77,12 @@ namespace NDI_Source_Demo
             _videoCapture.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             var ndiSettings = await NDISourceSettings.CreateAsync(_videoCapture.GetContext(), _ndiSources[cbNDISources.SelectedIndex]); 
+            if (ndiSettings == null || !ndiSettings.IsValid())
+            {
+                MessageBox.Show("Selected NDI source is not valid.");
+                return;
+            }
+
             _videoCapture.Video_Source = ndiSettings;
 
             await _videoCapture.StartAsync();
