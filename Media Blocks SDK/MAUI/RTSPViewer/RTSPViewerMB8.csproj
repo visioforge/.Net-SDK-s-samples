@@ -53,9 +53,6 @@
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.7" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.6.7" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Apple" Version="2025.6.7" />
-  </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250401001" />
