@@ -1,0 +1,154 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaBlocks_ChromaKey_Demo_WPF"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" 
+        x:Class="MediaBlocks_ChromaKey_Demo_WPF.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - ChromaKey Demo" Height="700" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Video Preview -->
+        <WPF:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="400" Margin="10,10,10,0" Width="780"/>
+
+        <!-- Control Panel -->
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            
+            <!-- Video Source Tab -->
+            <TabItem Header="Video Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Video source type" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoSourceType" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbVideoSourceType_SelectionChanged">
+                        <ComboBoxItem IsSelected="True">Camera/Capture Device</ComboBoxItem>
+                        <ComboBoxItem>Video File</ComboBoxItem>
+                    </ComboBox>
+
+                    <!-- Camera Source Settings -->
+                    <StackPanel x:Name="pnCameraSource" Orientation="Vertical" Margin="0,10,0,0">
+                        <Label Content="Video input device (for chroma video)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                        
+                        <Label Content="Video format and frame rate" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cbVideoFormat" Width="280" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                            <ComboBox x:Name="cbVideoFrameRate" Margin="10,0,0,0" Width="50"/>
+                            <Label Content="fps" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Video File Source Settings -->
+                    <StackPanel x:Name="pnVideoFileSource" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="Video file (for chroma video)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edVideoFile" Width="330" Text="c:\Samples\chroma\chroma.mp4"/>
+                            <Button x:Name="btSelectVideoFile" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectVideoFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Background Image Tab -->
+            <TabItem Header="Background">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Background image file" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edBackgroundImage" Width="330" Text="c:\Samples\pics\image.jpg"/>
+                        <Button x:Name="btSelectBackground" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectBackground_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <!-- ChromaKey Settings Tab -->
+            <TabItem Header="ChromaKey">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <Label Content="Chroma color" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cbChromaColor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbChromaColor_SelectionChanged">
+                            <ComboBoxItem IsSelected="True">Green</ComboBoxItem>
+                            <ComboBoxItem>Blue</ComboBoxItem>
+                            <ComboBoxItem>Custom</ComboBoxItem>
+                        </ComboBox>
+
+                        <StackPanel x:Name="pnCustomColor" Orientation="Horizontal" Margin="0,10,0,0" Visibility="Collapsed">
+                            <Label Content="Custom color:" Width="100"/>
+                            <Button x:Name="btCustomColor" Width="50" Height="25" Click="btCustomColor_Click">
+                                <Rectangle Fill="Lime" Width="40" Height="20"/>
+                            </Button>
+                        </StackPanel>
+
+                        <Label Content="Alpha (Overall Transparency)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="slAlpha" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="1" Value="1" ValueChanged="slAlpha_ValueChanged" />
+                            <Label x:Name="lbAlpha" Content="1.0" Width="50"/>
+                        </StackPanel>
+
+                        <Label Content="Sensitivity (Angle)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="slSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="180" Value="20" ValueChanged="slSensitivity_ValueChanged" />
+                            <Label x:Name="lbSensitivity" Content="20.0" Width="50"/>
+                        </StackPanel>
+
+                        <Label Content="Noise Level" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="slNoiseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="64" Value="2" ValueChanged="slNoiseLevel_ValueChanged" />
+                            <Label x:Name="lbNoiseLevel" Content="2.0" Width="50"/>
+                        </StackPanel>
+
+                        <Label Content="Black Sensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="slBlackSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="255" Value="100" ValueChanged="slBlackSensitivity_ValueChanged" />
+                            <Label x:Name="lbBlackSensitivity" Content="100" Width="50"/>
+                        </StackPanel>
+
+                        <Label Content="White Sensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="slWhiteSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="255" Value="100" ValueChanged="slWhiteSensitivity_ValueChanged" />
+                            <Label x:Name="lbWhiteSensitivity" Content="100" Width="50"/>
+                        </StackPanel>
+
+                        <CheckBox x:Name="cbPreferPassthrough" Content="Prefer Passthrough (Performance optimization)" Margin="0,10,0,0" Checked="cbPreferPassthrough_Changed" Unchecked="cbPreferPassthrough_Changed"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Audio Tab -->
+            <TabItem Header="Audio">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Audio input device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbAudioInput_SelectionChanged"/>
+                    <Label Content="Audio format" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360"/>
+
+                    <Label Content="Audio output device" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <ComboBox x:Name="cbAudioOutput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360"/>
+                    <Label Content="Volume" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <Slider x:Name="slVolume" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Minimum="0" Maximum="100" Value="80" ValueChanged="slVolume_ValueChanged" />
+                </StackPanel>
+            </TabItem>
+
+            <!-- Log Tab -->
+            <TabItem Header="Log">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="cbDebugMode" Width="110">Debug mode</CheckBox>
+                        <CheckBox x:Name="cbTelemetry">Telemetry</CheckBox>
+                    </StackPanel>
+
+                    <TextBox x:Name="mmLog" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,40,0,10" TextWrapping="Wrap" Width="360"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Control Buttons -->
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,420,0,0">
+            <Button x:Name="btStart" Content="Start Preview" Width="100" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click"/>
+        </StackPanel>
+    </Grid>
+</Window> 

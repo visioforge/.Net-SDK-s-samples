@@ -133,6 +133,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectShow To X Bridge net7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vr360-media-player net7", "_CodeSnippets\vr360-media-player\vr360-media-player net7.csproj", "{82E265FF-2072-25E4-C004-606CC927650C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaKey Demo MB WPF net7", "WPF\CSharp\ChromaKey\ChromaKey Demo MB WPF net7.csproj", "{CBAB72C4-148D-DF71-E4C9-2E01402365C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -387,6 +389,10 @@ Global
 		{82E265FF-2072-25E4-C004-606CC927650C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E265FF-2072-25E4-C004-606CC927650C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E265FF-2072-25E4-C004-606CC927650C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBAB72C4-148D-DF71-E4C9-2E01402365C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBAB72C4-148D-DF71-E4C9-2E01402365C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBAB72C4-148D-DF71-E4C9-2E01402365C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBAB72C4-148D-DF71-E4C9-2E01402365C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -454,6 +460,7 @@ Global
 		{17BAEB8C-6144-864D-A0D7-8BE7BC59A888} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{8E2C1F40-5974-BC2F-102C-B594BD6C2738} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{82E265FF-2072-25E4-C004-606CC927650C} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
+		{CBAB72C4-148D-DF71-E4C9-2E01402365C4} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
