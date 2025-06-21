@@ -4,6 +4,7 @@
     <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>Video_Compositor_Demo</RootNamespace>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
@@ -17,6 +18,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.4.9" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.9" />
   </ItemGroup>
 </Project>

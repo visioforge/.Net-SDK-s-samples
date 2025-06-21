@@ -5,81 +5,287 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Video_Compositor_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
-        Title="Video Capture SDK .Net X - Video Compositor Demo" Height="710" Width="1143" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+        Title="Video Capture SDK .Net - Video Compositor Demo" Height="850" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <wpf:VideoView x:Name="VideoView1" Grid.Column="1" Width="800" Height="600" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <wpf:VideoView x:Name="VideoView1" Grid.Column="2" Width="800" Height="600" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="10,620,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
-            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
-            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="10,620,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25">
+            <Button x:Name="btStart" Content="Start" Width="50" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="50" Margin="10,0,0,0" Click="btStop_Click"/>
             <Label x:Name="lbTimestamp" Content="00:00:00" Margin="10,0,0,0"/>
         </StackPanel>
-        
-        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,10,0,0">
-            <Label Content="Resolution and frame rate"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="edWidth" Text="1920" Width="40" VerticalContentAlignment="Center"/>
-                <Label Content="x" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="edHeight" Text="1080" Width="40" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="edFrameRate" Text="25" Width="25" Margin="15,0,0,0" VerticalContentAlignment="Center"/>
-                <Label Content="fps" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-            </StackPanel>
 
-            <Separator Margin="0,10,0,0"/>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="10,10,10,10">
+            <!-- Global Settings -->
+            <GroupBox Header="Global Settings" Margin="0,0,0,10">
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <Label Content="Resolution and frame rate"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edWidth" Text="1920" Width="50" VerticalContentAlignment="Center"/>
+                        <Label Content="x" Margin="5,0,5,0" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="edHeight" Text="1080" Width="50" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="edFrameRate" Text="25" Width="35" Margin="15,0,0,0" VerticalContentAlignment="Center"/>
+                        <Label Content="fps" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                    </StackPanel>
 
-            <Label Content="Sources"/>
-            <ComboBox x:Name="cbSources"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                <StackPanel Orientation="Vertical" Width="75">
-                    <Button x:Name="btAddCamera" Content="Add camera" Height="25" Margin="0,10,0,0" Click="btAddCamera_Click"/>
-                    <Button x:Name="btAddScreen" Content="Add screen" Height="25" Margin="0,10,0,0" Click="btAddScreen_Click"/>
-                    <Button x:Name="btRemove" Content="Remove" Height="25" Margin="0,10,0,0" Click="btRemove_Click"/>
+                    <Label Content="Mixer type" Margin="0,8,0,0"/>
+                    <ComboBox x:Name="cbMixerType" SelectedIndex="0">
+                        <ComboBoxItem Content="Standard"/>
+                        <ComboBoxItem Content="Direct3D 11"/>
+                        <ComboBoxItem Content="OpenGL"/>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="10,0,0,0">
-                    <Label Margin="0,10,0,0">Rectangle will be used while adding</Label>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                        <Label Width="40" Margin="10,0,0,0">Left</Label>
-                        <TextBox x:Name="edRectLeft" Text="0" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                        <Label Width="50" Margin="10,0,0,0">Top</Label>
-                        <TextBox x:Name="edRectTop" Text="0" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                        <Label Width="40" Margin="10,0,0,0">Right</Label>
-                        <TextBox x:Name="edRectRight" Text="640" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                        <Label Width="50" Margin="10,0,0,0">Bottom</Label>
-                        <TextBox x:Name="edRectBottom" Text="480" Width="35" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
-                    </StackPanel>
-                    <Button x:Name="btUpdateRect" Content="Update rect" Height="25" Margin="0,7,0,0" Width="100" Click="btUpdateRect_Click"/>
-                    <Label Margin="0,17,0,0" HorizontalAlignment="Left">Transparency</Label>
-                    <StackPanel Orientation="Horizontal" Margin="0,1,0,0" >
-                        <Slider Width="100" Maximum="100" Minimum="0" Value="100" x:Name="slTransparency" VerticalAlignment="Center" />
-                        <Label Width="40" VerticalAlignment="Center" Margin="5,0,0,0">1.00</Label>
-                        <Button x:Name="btTransparency" Content="Update" Width="50" VerticalAlignment="Center" Click="btTransparency_Click" />
-                    </StackPanel>
-                </StackPanel>
-            </StackPanel>
+            </GroupBox>
 
-            <Separator Margin="0,10,0,0"/>
+            <!-- Tab Control -->
+            <TabControl>
+                <!-- Inputs Tab -->
+                <TabItem Header="Inputs">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <!-- Sources Management -->
+                            <GroupBox Header="Source Management">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <Label Content="Current Sources"/>
+                                    <ComboBox x:Name="cbSources" Margin="0,0,0,10"/>
 
-            <Label Content="Output"/>
-            <RadioButton x:Name="rbOutputNone" Content="No output (preview only)" Margin="0,5,0,0" VerticalContentAlignment="Center" IsChecked="True"/>
-            <RadioButton x:Name="rbOutputFile" Content="Output to the file" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                <TextBox x:Name="edOutputFilename" Text="C:\vf\output.mp4" Margin="15,0,0,0" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" Width="230"/>
-                <Button x:Name="btSelectFile" Content="..." Margin="10,0,10,0" Width="25" VerticalContentAlignment="Top" Click="btSelectFile_Click"/>
-            </StackPanel>
-            <RadioButton x:Name="rbOutputYouTube" Content="YouTube streaming" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="edOutputYouTubeKey" Text="STREAMING KEY" Margin="15,10,10,0" VerticalContentAlignment="Center"/>
-            <RadioButton x:Name="rbOutputFacebook" Content="Facebook streaming" Margin="0,10,0,0" VerticalContentAlignment="Center"/>
-            <TextBox x:Name="edOutputFacebookKey" Text="STREAMING KEY" Margin="15,10,10,0" VerticalContentAlignment="Center"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-            <Label Margin="0,10,0,0" Content="Log"/>
-            <TextBox x:Name="mmLog" Text="" Margin="0,5,10,10" TextWrapping="Wrap" Height="62" VerticalContentAlignment="Stretch"/>
+                                        <!-- Add/Remove Buttons -->
+                                        <StackPanel Grid.Column="0" Orientation="Vertical" Width="85">
+                                            <Button x:Name="btAddCamera" Content="Add Camera" Height="28" Margin="0,2" Click="btAddCamera_Click"/>
+                                            <Button x:Name="btAddScreen" Content="Add Screen" Height="28" Margin="0,2" Click="btAddScreen_Click"/>
+                                            <Button x:Name="btAddFile" Content="Add File" Height="28" Margin="0,2" Click="btAddFile_Click"/>
+                                            <Button x:Name="btAddImage" Content="Add Image" Height="28" Margin="0,2" Click="btAddImage_Click"/>
+                                            <Button x:Name="btRemove" Content="Remove" Height="28" Margin="0,2" Click="btRemove_Click"/>
+                                        </StackPanel>
+
+                                        <!-- Rectangle Settings -->
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+                                            <Label Content="Position/Size (for new sources)" FontWeight="Bold"/>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+
+                                                <Label Grid.Row="0" Grid.Column="0" Content="Left:" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="edRectLeft" Grid.Row="0" Grid.Column="1" Text="0" Margin="5,2" VerticalContentAlignment="Center"/>
+                                                <Label Grid.Row="0" Grid.Column="2" Content="Top:" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="edRectTop" Grid.Row="0" Grid.Column="3" Text="0" Margin="5,2" VerticalContentAlignment="Center"/>
+
+                                                <Label Grid.Row="1" Grid.Column="0" Content="Right:" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="edRectRight" Grid.Row="1" Grid.Column="1" Text="640" Margin="5,2" VerticalContentAlignment="Center"/>
+                                                <Label Grid.Row="1" Grid.Column="2" Content="Bottom:" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <TextBox x:Name="edRectBottom" Grid.Row="1" Grid.Column="3" Text="480" Margin="5,2" VerticalContentAlignment="Center"/>
+                                            </Grid>
+                                            <Button x:Name="btUpdateRect" Content="Update Selected Source Rect" Height="25" Margin="0,10,0,0" Click="btUpdateRect_Click"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- Z-Order Management -->
+                            <GroupBox Header="Z-Order (Layer Order)" Margin="0,10,0,0">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Content="Z-Order:" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="edZOrder" Grid.Column="1" Text="0" Width="60" Margin="5,0" 
+                                                 VerticalContentAlignment="Center" TextChanged="edZOrder_TextChanged"/>
+                                        <Button x:Name="btMoveUp" Grid.Column="2" Content="Move Up" Width="70" Margin="5,0" 
+                                                Height="25" Click="btMoveUp_Click"/>
+                                        <Button x:Name="btMoveDown" Grid.Column="3" Content="Move Down" Width="70" Margin="5,0" 
+                                                Height="25" Click="btMoveDown_Click"/>
+                                    </Grid>
+                                    <Button x:Name="btUpdateZOrder" Content="Apply Z-Order" Height="25" Margin="0,10,0,0" 
+                                            Click="btUpdateZOrder_Click"/>
+                                    <Button x:Name="btSortByZOrder" Content="Sort Sources by Z-Order" Height="25" Margin="0,5,0,0" 
+                                            Click="btSortByZOrder_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- Chroma Key Settings -->
+                            <GroupBox Header="Chroma Key Settings" Margin="0,10,0,0">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <CheckBox x:Name="cbEnableChromaKey" Content="Enable Chroma Key for Selected Source" Margin="0,5,0,10" 
+                                              Checked="cbEnableChromaKey_Checked" Unchecked="cbEnableChromaKey_Unchecked"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Content="Color:" VerticalAlignment="Center"/>
+                                        <ComboBox x:Name="cbChromaColor" Grid.Row="0" Grid.Column="1" SelectedIndex="0" Margin="5,2" 
+                                                  SelectionChanged="cbChromaColor_SelectionChanged">
+                                            <ComboBoxItem Content="Green"/>
+                                            <ComboBoxItem Content="Blue"/>
+                                            <ComboBoxItem Content="Custom"/>
+                                        </ComboBox>
+                                        <Button x:Name="btCustomColor" Grid.Row="0" Grid.Column="2" Content="Pick Color" 
+                                                Margin="5,2" Click="btCustomColor_Click" IsEnabled="False"/>
+
+                                        <Label Grid.Row="1" Grid.Column="0" Content="Sensitivity:" VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5,2">
+                                            <Slider x:Name="slSensitivity" Width="120" Minimum="0" Maximum="180" Value="20" 
+                                                    ValueChanged="slSensitivity_ValueChanged" VerticalAlignment="Center"/>
+                                            <Label x:Name="lblSensitivity" Content="20" Width="30" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <Label Grid.Row="2" Grid.Column="0" Content="Noise Level:" VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5,2">
+                                            <Slider x:Name="slNoiseLevel" Width="120" Minimum="0" Maximum="64" Value="2" 
+                                                    ValueChanged="slNoiseLevel_ValueChanged" VerticalAlignment="Center"/>
+                                            <Label x:Name="lblNoiseLevel" Content="2" Width="30" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Button x:Name="btUpdateChromaKey" Content="Apply Chroma Key Settings" Height="28" Margin="0,10,0,0" 
+                                            Click="btUpdateChromaKey_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <!-- Outputs Tab -->
+                <TabItem Header="Outputs">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <GroupBox Header="Output Configuration">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <RadioButton x:Name="rbOutputNone" Content="Preview Only (No Output)" 
+                                                 Margin="0,5,0,5" VerticalContentAlignment="Center" IsChecked="True"/>
+
+                                    <!-- File Output -->
+                                    <RadioButton x:Name="rbOutputFile" Content="Save to File" 
+                                                 Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical" Margin="20,0,0,10">
+                                        <Label Content="Output File Path:"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox x:Name="edOutputFilename" Grid.Column="0" Text="C:\vf\output.mp4" 
+                                                     VerticalContentAlignment="Center" Margin="0,0,5,0"/>
+                                            <Button x:Name="btSelectFile" Grid.Column="1" Content="Browse..." Width="60" 
+                                                    Click="btSelectFile_Click"/>
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <!-- YouTube Streaming -->
+                                    <RadioButton x:Name="rbOutputYouTube" Content="YouTube Live Streaming" 
+                                                 Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical" Margin="20,0,0,10">
+                                        <Label Content="YouTube Stream Key:"/>
+                                        <TextBox x:Name="edOutputYouTubeKey" Text="STREAMING KEY" 
+                                                 VerticalContentAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!-- Facebook Streaming -->
+                                    <RadioButton x:Name="rbOutputFacebook" Content="Facebook Live Streaming" 
+                                                 Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical" Margin="20,0,0,10">
+                                        <Label Content="Facebook Stream Key:"/>
+                                        <TextBox x:Name="edOutputFacebookKey" Text="STREAMING KEY" 
+                                                 VerticalContentAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!-- NDI Streaming -->
+                                    <RadioButton x:Name="rbOutputNDI" Content="NDI Streaming" 
+                                                 Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical" Margin="20,0,0,10">
+                                        <Label Content="NDI Stream Name:"/>
+                                        <TextBox x:Name="edOutputNDIName" Text="Sample NDI Stream" 
+                                                 VerticalContentAlignment="Center"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <!-- Log Tab -->
+                <TabItem Header="Log">
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                            <Label Content="Application Log:" FontWeight="Bold"/>
+                            <Button x:Name="btClearLog" Content="Clear Log" Width="70" Height="25" 
+                                     Margin="10,0,0,0" Click="btClearLog_Click"/>
+                            <CheckBox x:Name="cbAutoScroll" Content="Auto-scroll" IsChecked="True" 
+                                       Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1" x:Name="logScrollViewer" 
+                                       VerticalScrollBarVisibility="Auto" 
+                                       HorizontalScrollBarVisibility="Auto"
+                                       Background="Black">
+                            <TextBox x:Name="mmLog" 
+                                      Background="Black" 
+                                      Foreground="LightGreen" 
+                                      FontFamily="Consolas" 
+                                      FontSize="11"
+                                      IsReadOnly="True" 
+                                      TextWrapping="Wrap"
+                                      BorderThickness="0"
+                                      Padding="5"
+                                      VerticalAlignment="Stretch"
+                                      AcceptsReturn="True"
+                                      VerticalScrollBarVisibility="Disabled"
+                                      HorizontalScrollBarVisibility="Disabled"/>
+                        </ScrollViewer>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                            <Label Content="Log Level:" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="cbLogLevel" SelectedIndex="1" Width="80" Margin="5,0">
+                                <ComboBoxItem Content="Error"/>
+                                <ComboBoxItem Content="Warning"/>
+                                <ComboBoxItem Content="Info"/>
+                                <ComboBoxItem Content="Debug"/>
+                            </ComboBox>
+                            <CheckBox x:Name="cbShowTimestamp" Content="Show Timestamp" IsChecked="True" 
+                                       Margin="15,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </StackPanel>
     </Grid>
 </Window>

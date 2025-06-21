@@ -38,12 +38,7 @@ namespace QRReader
             await RequestCameraPermissionAsync();
 #endif
 
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
+            IVideoView vv = videoView.GetVideoView();
 
             _core = new VideoCaptureCoreX(vv);     
 
