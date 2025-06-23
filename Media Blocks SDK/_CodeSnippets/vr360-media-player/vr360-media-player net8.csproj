@@ -4,7 +4,7 @@
     <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <PlatformTarget>x64</PlatformTarget>
     <RootNamespace>vr360_media_player</RootNamespace>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
@@ -17,11 +17,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\VisioForge.Core.OpenGL\VisioForge.Core.OpenGL.csproj" />
+    <ProjectReference Include="..\..\..\..\VisioForge.Core\VisioForge.Core.csproj" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.4.9" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.4.9" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.9" />
-    <PackageReference Include="VisioForge.DotNet.OpenGL" Version="2025.3.7" />
   </ItemGroup>
 </Project>

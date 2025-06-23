@@ -121,7 +121,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.6.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.6.10" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.WinForms" Version="2025.4.8" />
   </ItemGroup>
   <ItemGroup>
