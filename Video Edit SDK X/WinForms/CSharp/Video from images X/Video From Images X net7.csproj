@@ -71,7 +71,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.6.10" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.6.11" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.4.9" />
