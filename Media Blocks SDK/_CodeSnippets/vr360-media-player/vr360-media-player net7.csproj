@@ -17,11 +17,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.4.9" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.4.9" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.6.27" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.11" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.27" />
     <PackageReference Include="VisioForge.DotNet.OpenGL" Version="2025.6.10" />
   </ItemGroup>
 </Project>

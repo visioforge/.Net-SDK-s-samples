@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.27
+
+* [Video Capture SDK] Resolved issue with RTSP Low Latency engine with some cameras
+
 ## 2025.6.5
 
 * [X-engines] Resolved issue with NDI sources playback without audio streams
