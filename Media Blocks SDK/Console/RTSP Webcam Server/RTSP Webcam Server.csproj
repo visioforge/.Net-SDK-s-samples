@@ -8,11 +8,11 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.6.29" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.0" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />

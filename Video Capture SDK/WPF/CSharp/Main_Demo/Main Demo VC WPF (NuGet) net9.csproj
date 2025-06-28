@@ -40,18 +40,18 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.6.29" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2025.6.29" />
     <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64" Version="15.5.36" />
   </ItemGroup>
 </Project>

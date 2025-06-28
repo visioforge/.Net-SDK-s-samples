@@ -23,8 +23,8 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.6.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.7.0" />
   </ItemGroup>
 </Project>

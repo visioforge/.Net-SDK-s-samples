@@ -14,12 +14,12 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.6.27" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.3.17" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.6.27" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.6.29" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
