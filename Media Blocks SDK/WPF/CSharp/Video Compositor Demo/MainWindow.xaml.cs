@@ -71,7 +71,7 @@ namespace Video_Compositor_Demo
         {
             InitializeComponent();
 
-            
+
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -86,7 +86,7 @@ namespace Video_Compositor_Demo
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
-            
+
             LogMessage("Media pipeline created", LogLevel.Info);
         }
 
@@ -218,9 +218,9 @@ namespace Video_Compositor_Demo
                 var sourceName = _sources[cbSources.SelectedIndex].DisplayName;
                 _sources.RemoveAt(cbSources.SelectedIndex);
                 cbSources.Items.RemoveAt(cbSources.SelectedIndex);
-                
+
                 LogMessage($"Removed source: {sourceName}", LogLevel.Info);
-                
+
                 // Reset selection if no items left
                 if (cbSources.Items.Count == 0)
                 {
@@ -233,7 +233,7 @@ namespace Video_Compositor_Demo
         {
             // Initialize logging first
             LogMessage("Application starting up", LogLevel.Info);
-            
+
             // We have to initialize the engine on start
             Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
             this.IsEnabled = false;
@@ -248,14 +248,14 @@ namespace Video_Compositor_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-            
+
             // Initialize chroma key UI
             cbSources.SelectionChanged += CbSources_SelectionChanged;
             UpdateChromaKeyUI();
-            
+
             LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
         }
-       
+
         private void UpdateRecordingTime()
         {
             var ts = _pipeline.Position_Get();
@@ -279,132 +279,139 @@ namespace Video_Compositor_Demo
 
                 CreateEngine();
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-            VideoMixerBaseSettings videoMixerSettings;
+                VideoMixerBaseSettings videoMixerSettings;
 
-            if (cbMixerType.SelectedIndex == 0)
-            {
-                videoMixerSettings = new VideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
-            }
-            else if (cbMixerType.SelectedIndex == 1)
-            {
-                videoMixerSettings = new D3D11VideoCompositorSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
-            }
-            else
-            {
-                videoMixerSettings = new GLVideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
-            }
-
-            // Sort sources by z-order (lower values first, higher values appear on top)
-            var sortedSources = _sources.OrderBy(s => s.ZOrder).ToList();
-            
-            uint i = 0;
-            foreach (var source in sortedSources)
-            {
-                if (source.IsChromaKeyEnabled)
+                if (cbMixerType.SelectedIndex == 0)
                 {
-                    var chromaKeySettings = new ChromaKeySettingsX(
-                        sourceVideoResolution: new Size(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)),
-                        chromaColor: source.ChromaColor,
-                        sensitivity: source.Sensitivity,
-                        noiseLevel: source.NoiseLevel
-                    );
-
-                    if (source.ChromaColor == ChromaKeyColor.Custom)
-                    {
-                        chromaKeySettings.CustomColor = source.CustomColor;
-                    }
-
-                    var chromaStream = new VideoMixerStreamChromaKey(source.Rectangle, i, chromaKeySettings);
-                    videoMixerSettings.AddStream(chromaStream);
+                    videoMixerSettings = new VideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
+                }
+                else if (cbMixerType.SelectedIndex == 1)
+                {
+                    videoMixerSettings = new D3D11VideoCompositorSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
                 }
                 else
                 {
-                    videoMixerSettings.AddStream(new VideoMixerStream(source.Rectangle, i));
+                    videoMixerSettings = new GLVideoMixerSettings(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
                 }
-                i++;
-            }
 
-            _videoMixer = new VideoMixerBlock(videoMixerSettings);
-
-            i = 0;
-            foreach (var source in sortedSources)
-            {
-                _pipeline.Connect(source.Source.Output, _videoMixer.Inputs[i]);
-                i++;
-            }
-
-            if (rbOutputNone.IsChecked == true)
-            {
-                _pipeline.Connect(_videoMixer.Output, _videoRenderer.Input);
-            }
-            else
-            {
-                // create video tee
-                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-                _pipeline.Connect(_videoMixer.Output, _videoTee.Input);
-
-                // connect video renderer for preview
-                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-                
-                if (rbOutputFile.IsChecked == true)
+                uint i = 0;
+                foreach (var source in _sources)
                 {
-                    // create and connect MP4 output
-                    _mp4Output = new MP4OutputBlock(new MP4SinkSettings(edOutputFilename.Text), new OpenH264EncoderSettings(), aacSettings: null);
-                    _pipeline.Connect(_videoTee.Outputs[1], _mp4Output.CreateNewInput(MediaBlockPadMediaType.Video));
+                    if (source.IsChromaKeyEnabled)
+                    {
+                        var chromaKeySettings = new ChromaKeySettingsX(
+                            sourceVideoResolution: new Size(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)),
+                            chromaColor: source.ChromaColor,
+                            sensitivity: source.Sensitivity,
+                            noiseLevel: source.NoiseLevel
+                        );
+
+                        if (source.ChromaColor == ChromaKeyColor.Custom)
+                        {
+                            chromaKeySettings.CustomColor = source.CustomColor;
+                        }
+
+                        var chromaStream = new VideoMixerStreamChromaKey(source.Rectangle, i, chromaKeySettings);
+                        chromaStream.KeepAspectRatio = source.KeepAspectRatio;
+                        source.MixerStream = chromaStream; // Store the chroma key stream in the source for later reference
+                        videoMixerSettings.AddStream(chromaStream);
+                    }
+                    else
+                    {
+                        var stream = new VideoMixerStream(source.Rectangle, i);
+                        stream.KeepAspectRatio = source.KeepAspectRatio;
+                        source.MixerStream = stream; // Store the regular stream in the source for later reference
+                        videoMixerSettings.AddStream(stream);
+                    }
+                    i++;
                 }
-                else if (rbOutputYouTube.IsChecked == true)
+
+                _videoMixer = new VideoMixerBlock(videoMixerSettings);
+
+                i = 0;
+                foreach (var source in _sources)
                 {
-                    // fake audio source 
-                    _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
-
-                    // create and connect YouTube output
-                    _youTubeOutput = new YouTubeOutputBlock(new YouTubeSinkSettings(edOutputYouTubeKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
-                    _pipeline.Connect(_videoTee.Outputs[1], _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Video));
-                    _pipeline.Connect(_fakeAudioSource.Output, _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    _pipeline.Connect(source.Source.Output, _videoMixer.Inputs[i]);
+                    i++;
                 }
-                else if (rbOutputFacebook.IsChecked == true)
+
+                if (rbOutputNone.IsChecked == true)
                 {
-                    // fake audio source 
-                    _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
-
-                    // create and connect Facebook Live output
-                    _facebookOutput = new FacebookLiveOutputBlock(new FacebookLiveSinkSettings(edOutputFacebookKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
-                    _pipeline.Connect(_videoTee.Outputs[1], _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Video));
-                    _pipeline.Connect(_fakeAudioSource.Output, _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    _pipeline.Connect(_videoMixer.Output, _videoRenderer.Input);
                 }
-                else if (rbOutputNDI.IsChecked == true)
+                else
                 {
-                    // fake audio source 
-                    _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
+                    // create video tee
+                    _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                    _pipeline.Connect(_videoMixer.Output, _videoTee.Input);
 
-                    // create and connect Facebook Live output
-                    _ndiSink = new NDISinkBlock(new NDISinkSettings(edOutputNDIName.Text));
-                    _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
-                    _pipeline.Connect(_fakeAudioSource.Output, _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    // connect video renderer for preview
+                    _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+                    if (rbOutputFile.IsChecked == true)
+                    {
+                        // create and connect MP4 output
+                        _mp4Output = new MP4OutputBlock(new MP4SinkSettings(edOutputFilename.Text), new OpenH264EncoderSettings(), aacSettings: null);
+                        _pipeline.Connect(_videoTee.Outputs[1], _mp4Output.CreateNewInput(MediaBlockPadMediaType.Video));
+                    }
+                    else if (rbOutputYouTube.IsChecked == true)
+                    {
+                        // fake audio source 
+                        _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
+
+                        // create and connect YouTube output
+                        _youTubeOutput = new YouTubeOutputBlock(new YouTubeSinkSettings(edOutputYouTubeKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
+                        _pipeline.Connect(_videoTee.Outputs[1], _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Video));
+                        _pipeline.Connect(_fakeAudioSource.Output, _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    }
+                    else if (rbOutputFacebook.IsChecked == true)
+                    {
+                        // fake audio source 
+                        _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
+
+                        // create and connect Facebook Live output
+                        _facebookOutput = new FacebookLiveOutputBlock(new FacebookLiveSinkSettings(edOutputFacebookKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
+                        _pipeline.Connect(_videoTee.Outputs[1], _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Video));
+                        _pipeline.Connect(_fakeAudioSource.Output, _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    }
+                    else if (rbOutputNDI.IsChecked == true)
+                    {
+                        // fake audio source 
+                        _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
+
+                        // create and connect Facebook Live output
+                        _ndiSink = new NDISinkBlock(new NDISinkSettings(edOutputNDIName.Text));
+                        _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                        _pipeline.Connect(_fakeAudioSource.Output, _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                    }
                 }
-            }
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
 
-            //_pipeline.SavePipeline("compositor");
+                //_pipeline.SavePipeline("compositor");
 
-            tmRecording.Start();
-            
-            LogMessage($"Pipeline started successfully with {_sources.Count} sources", LogLevel.Info);
+                tmRecording.Start();
+
+                LogMessage($"Pipeline started successfully with {_sources.Count} sources", LogLevel.Info);
             }
             catch (Exception ex)
             {
                 LogMessage($"Failed to start pipeline: {ex.Message}", LogLevel.Error);
-                MessageBox.Show($"Failed to start pipeline: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"Failed to start pipeline: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             LogMessage("Stopping video compositor pipeline", LogLevel.Info);
-            
+
             tmRecording.Stop();
 
             if (rbOutputFile.IsChecked == true)
@@ -415,16 +422,16 @@ namespace Video_Compositor_Demo
             {
                 await _pipeline.StopAsync(true);
             }
-            
+
             await DestroyEngineAsync();
-            
+
             LogMessage("Pipeline stopped", LogLevel.Info);
         }
 
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
-            if (index != -1)
+            if (index != -1 && index < _sources.Count)
             {
                 _sources[index].Rectangle = new Rect(
                     Convert.ToInt32(edRectLeft.Text),
@@ -432,11 +439,53 @@ namespace Video_Compositor_Demo
                     Convert.ToInt32(edRectRight.Text),
                     Convert.ToInt32(edRectBottom.Text));
 
-                if (_videoMixer != null)
+                if (_videoMixer != null && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
                 {
-                    var stream = _videoMixer.Input_Get(index);
-                    stream.Rectangle = _sources[index].Rectangle;
-                    _videoMixer.Input_Update(index, stream);
+                    var stream = _videoMixer.Input_Get(_sources[index].MixerStream.ID);
+                    if (stream != null)
+                    {
+                        stream.Rectangle = _sources[index].Rectangle;
+                        stream.KeepAspectRatio = _sources[index].KeepAspectRatio;
+                        _videoMixer.Input_Update(stream);
+                    }
+                }
+            }
+        }
+
+        private void cbKeepAspectRatio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (_isUpdatingUI) return;
+
+            int index = cbSources.SelectedIndex;
+            if (index != -1 && index < _sources.Count)
+            {
+                _sources[index].KeepAspectRatio = true;
+                UpdateKeepAspectRatioInMixer(index);
+            }
+        }
+
+        private void cbKeepAspectRatio_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (_isUpdatingUI) return;
+
+            int index = cbSources.SelectedIndex;
+            if (index != -1 && index < _sources.Count)
+            {
+                _sources[index].KeepAspectRatio = false;
+                UpdateKeepAspectRatioInMixer(index);
+            }
+        }
+
+        private void UpdateKeepAspectRatioInMixer(int index)
+        {
+            if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
+            {
+                var stream = _videoMixer.Input_Get(_sources[index].MixerStream.ID);
+                if (stream != null)
+                {
+                    stream.KeepAspectRatio = _sources[index].KeepAspectRatio;
+                    _videoMixer.Input_Update(stream);
+                    LogMessage($"Updated Keep Aspect Ratio to {_sources[index].KeepAspectRatio} for '{_sources[index].DisplayName}'", LogLevel.Info);
                 }
             }
         }
@@ -462,12 +511,13 @@ namespace Video_Compositor_Demo
         private void CbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateChromaKeyUI();
+            UpdateFadeUI();
         }
 
         private void cbEnableChromaKey_Checked(object sender, RoutedEventArgs e)
         {
-            if (_isUpdatingUI) return; 
-            
+            if (_isUpdatingUI) return;
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count)
             {
@@ -478,8 +528,8 @@ namespace Video_Compositor_Demo
 
         private void cbEnableChromaKey_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (_isUpdatingUI) return; 
-            
+            if (_isUpdatingUI) return;
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count)
             {
@@ -491,7 +541,7 @@ namespace Video_Compositor_Demo
         private void cbChromaColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_isUpdatingUI) return;
-            
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count && cbChromaColor.SelectedIndex >= 0)
             {
@@ -521,13 +571,13 @@ namespace Video_Compositor_Demo
 
         private void slSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_isUpdatingUI) return; 
-            
+            if (_isUpdatingUI) return;
+
             if (lblSensitivity != null)
             {
                 lblSensitivity.Content = ((int)slSensitivity.Value).ToString();
             }
-            
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count)
             {
@@ -538,13 +588,13 @@ namespace Video_Compositor_Demo
 
         private void slNoiseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_isUpdatingUI) return; 
-            
+            if (_isUpdatingUI) return;
+
             if (lblNoiseLevel != null)
             {
                 lblNoiseLevel.Content = ((int)slNoiseLevel.Value).ToString();
             }
-            
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count)
             {
@@ -564,10 +614,10 @@ namespace Video_Compositor_Demo
 
         private void UpdateChromaKeyInMixer(int index)
         {
-            if (_videoMixer != null && index < _sources.Count)
+            if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
             {
                 var source = _sources[index];
-                
+
                 if (source.IsChromaKeyEnabled)
                 {
                     var chromaKeySettings = new ChromaKeySettingsX(
@@ -582,10 +632,10 @@ namespace Video_Compositor_Demo
                         chromaKeySettings.CustomColor = source.CustomColor;
                     }
 
-                    _videoMixer.Input_UpdateChromaKeySettings(index, chromaKeySettings);
+                    _videoMixer.Input_UpdateChromaKeySettings(source.MixerStream.ID, chromaKeySettings);
                 }
-                
-                _videoMixer.Input_SetChromaKeyEnabled(index, source.IsChromaKeyEnabled);
+
+                _videoMixer.Input_SetChromaKeyEnabled(source.MixerStream.ID, source.IsChromaKeyEnabled);
             }
         }
 
@@ -609,6 +659,15 @@ namespace Video_Compositor_Demo
                     lblSensitivity.Content = ((int)source.Sensitivity).ToString();
                     lblNoiseLevel.Content = ((int)source.NoiseLevel).ToString();
                     edZOrder.Text = source.ZOrder.ToString();
+                    
+                    // Update rectangle values
+                    edRectLeft.Text = source.Rectangle.Left.ToString();
+                    edRectTop.Text = source.Rectangle.Top.ToString();
+                    edRectRight.Text = source.Rectangle.Right.ToString();
+                    edRectBottom.Text = source.Rectangle.Bottom.ToString();
+                    
+                    // Update keep aspect ratio
+                    cbKeepAspectRatio.IsChecked = source.KeepAspectRatio;
                 }
                 else
                 {
@@ -620,6 +679,15 @@ namespace Video_Compositor_Demo
                     lblSensitivity.Content = "20";
                     lblNoiseLevel.Content = "2";
                     edZOrder.Text = "0";
+                    
+                    // Reset rectangle values
+                    edRectLeft.Text = "0";
+                    edRectTop.Text = "0";
+                    edRectRight.Text = "640";
+                    edRectBottom.Text = "480";
+                    
+                    // Reset keep aspect ratio
+                    cbKeepAspectRatio.IsChecked = false;
                 }
             }
             finally
@@ -634,8 +702,8 @@ namespace Video_Compositor_Demo
 
         private void edZOrder_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (_isUpdatingUI) return; 
-            
+            if (_isUpdatingUI) return;
+
             int index = cbSources.SelectedIndex;
             if (index != -1 && index < _sources.Count && int.TryParse(edZOrder.Text, out int zOrder))
             {
@@ -678,16 +746,16 @@ namespace Video_Compositor_Demo
         {
             // Sort the sources list by z-order and update the combo box
             var selectedSource = cbSources.SelectedIndex >= 0 ? _sources[cbSources.SelectedIndex] : null;
-            
+
             _sources = _sources.OrderBy(s => s.ZOrder).ToList();
-            
+
             // Update combo box items
             cbSources.Items.Clear();
             foreach (var source in _sources)
             {
                 cbSources.Items.Add(source.DisplayName + $" (Z:{source.ZOrder})");
             }
-            
+
             // Try to maintain selection based on the selected source object
             if (selectedSource != null)
             {
@@ -697,7 +765,7 @@ namespace Video_Compositor_Demo
                     cbSources.SelectedIndex = newIndex;
                 }
             }
-            
+
             // No need to update mixer z-order since sources are just reordered in the UI list
             // The actual z-order values in the mixer remain the same
         }
@@ -716,18 +784,18 @@ namespace Video_Compositor_Demo
 
         private void UpdateSingleSourceZOrder(int index)
         {
-            if (_videoMixer != null && index >= 0 && index < _sources.Count)
+            if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
             {
-                var stream = _videoMixer.Input_Get(index);
+                var stream = _videoMixer.Input_Get(_sources[index].MixerStream.ID);
                 if (stream != null)
                 {
                     var oldZOrder = stream.ZOrder;
                     // Update the z-order value
                     stream.ZOrder = (uint)_sources[index].ZOrder;
-                    
+
                     // Apply the update to the mixer
-                    _videoMixer.Input_Update(index, stream);
-                    
+                    _videoMixer.Input_Update(stream);
+
                     LogMessage($"Updated z-order for source {index} ({_sources[index].DisplayName}): {oldZOrder} → {stream.ZOrder}", LogLevel.Debug);
                 }
             }
@@ -735,11 +803,141 @@ namespace Video_Compositor_Demo
 
         private void UpdateSourceDisplayName(int index)
         {
-            if (index >= 0 && index < _sources.Count && index < cbSources.Items.Count)
+            if (index >= 0 && index < _sources.Count)
             {
-                var selectedIndex = cbSources.SelectedIndex;
-                cbSources.Items[index] = _sources[index].DisplayName + $" (Z:{_sources[index].ZOrder})";
-                cbSources.SelectedIndex = selectedIndex; // Maintain selection
+                var source = _sources[index];
+                var displayName = source.DisplayName + $" (Z:{source.ZOrder})";
+                
+                _isUpdatingUI = true;
+                if (index < cbSources.Items.Count)
+                {
+                    cbSources.Items[index] = displayName;
+                }
+                _isUpdatingUI = false;
+            }
+        }
+
+        #endregion
+
+        #region Fade Effects Event Handlers
+
+        private void btFadeIn_Click(object sender, RoutedEventArgs e)
+        {
+            int index = cbSources.SelectedIndex;
+            if (index == -1 || index >= _sources.Count)
+            {
+                MessageBox.Show("Please select a source to fade in.", "No Source Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_videoMixer == null)
+            {
+                MessageBox.Show("Pipeline is not running. Please start the compositor first.", "Pipeline Not Started", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!double.TryParse(edFadeDuration.Text, out double duration) || duration <= 0)
+            {
+                MessageBox.Show("Please enter a valid fade duration in seconds.", "Invalid Duration", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var source = _sources[index];
+            if (source.MixerStream != null && source.MixerStream.ID != Guid.Empty)
+            {
+                _videoMixer.StartFadeIn(source.MixerStream.ID, TimeSpan.FromSeconds(duration));
+                LogMessage($"Started fade in for '{source.DisplayName}' (duration: {duration}s)", LogLevel.Info);
+                
+                // Update alpha slider to reflect final alpha value
+                slAlpha.Value = 1.0;
+            }
+        }
+
+        private void btFadeOut_Click(object sender, RoutedEventArgs e)
+        {
+            int index = cbSources.SelectedIndex;
+            if (index == -1 || index >= _sources.Count)
+            {
+                MessageBox.Show("Please select a source to fade out.", "No Source Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_videoMixer == null)
+            {
+                MessageBox.Show("Pipeline is not running. Please start the compositor first.", "Pipeline Not Started", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!double.TryParse(edFadeDuration.Text, out double duration) || duration <= 0)
+            {
+                MessageBox.Show("Please enter a valid fade duration in seconds.", "Invalid Duration", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var source = _sources[index];
+            if (source.MixerStream != null && source.MixerStream.ID != Guid.Empty)
+            {
+                _videoMixer.StartFadeOut(source.MixerStream.ID, TimeSpan.FromSeconds(duration));
+                LogMessage($"Started fade out for '{source.DisplayName}' (duration: {duration}s)", LogLevel.Info);
+                
+                // Update alpha slider to reflect final alpha value
+                slAlpha.Value = 0.0;
+            }
+        }
+
+        private void slAlpha_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (lblAlpha != null)
+            {
+                lblAlpha.Content = e.NewValue.ToString("F2");
+            }
+        }
+
+        private void btApplyAlpha_Click(object sender, RoutedEventArgs e)
+        {
+            int index = cbSources.SelectedIndex;
+            if (index == -1 || index >= _sources.Count)
+            {
+                MessageBox.Show("Please select a source to apply alpha to.", "No Source Selected", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (_videoMixer == null)
+            {
+                MessageBox.Show("Pipeline is not running. Please start the compositor first.", "Pipeline Not Started", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var source = _sources[index];
+            if (source.MixerStream != null && source.MixerStream.ID != Guid.Empty)
+            {
+                var stream = _videoMixer.Input_Get(source.MixerStream.ID);
+                if (stream != null)
+                {
+                    stream.Alpha = slAlpha.Value;
+                    _videoMixer.Input_Update(stream);
+                    LogMessage($"Applied alpha {slAlpha.Value:F2} to '{source.DisplayName}'", LogLevel.Info);
+                }
+            }
+        }
+
+        private void UpdateFadeUI()
+        {
+            int index = cbSources.SelectedIndex;
+            if (index >= 0 && index < _sources.Count && _videoMixer != null)
+            {
+                var source = _sources[index];
+                if (source.MixerStream != null && source.MixerStream.ID != Guid.Empty)
+                {
+                    var stream = _videoMixer.Input_Get(source.MixerStream.ID);
+                    if (stream != null)
+                    {
+                        _isUpdatingUI = true;
+                        slAlpha.Value = stream.Alpha;
+                        lblAlpha.Content = stream.Alpha.ToString("F2");
+                        _isUpdatingUI = false;
+                    }
+                }
             }
         }
 
@@ -776,7 +974,7 @@ namespace Video_Compositor_Demo
             };
 
             var logEntry = $"{timestamp}[{levelText}] {message}{Environment.NewLine}";
-            
+
             if (mmLog.Text.Length > 50000) // Limit log size
             {
                 var lines = mmLog.Text.Split('\n');

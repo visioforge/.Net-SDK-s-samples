@@ -29,5 +29,9 @@ namespace Video_Compositor_Demo
         public int ZOrder { get; set; } = 0;
 
         public string DisplayName { get; set; } = "";
+
+        public bool KeepAspectRatio { get; set; } = false;
+
+        public VideoMixerStream MixerStream { get; set; }
     }
 }

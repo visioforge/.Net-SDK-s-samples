@@ -66,9 +66,9 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="160" SelectionChanged="lbSources_SelectionChanged" PreviewMouseLeftButtonDown="lbSources_PreviewMouseLeftButtonDown" />
+                        <ListBox Grid.Column="0" x:Name="lbSources" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" SelectionChanged="lbSources_SelectionChanged" PreviewMouseLeftButtonDown="lbSources_PreviewMouseLeftButtonDown" />
 
-                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" HorizontalAlignment="Stretch">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Bottom" Height="40" Margin="0,0,0,10" HorizontalAlignment="Stretch">
                             <Button x:Name="btAddSource" Margin="5,0,0,0" Click="btAddSource_Click">Add</Button>
                             <Button x:Name="btRemoveSource" Margin="5,0,0,0" Click="btRemoveSource_Click">Remove</Button>
                         </StackPanel>

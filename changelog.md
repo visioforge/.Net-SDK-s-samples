@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.6.30
+
+* [X-engines] Added animated GIF support to `ImageVideoSourceBlock`/`ImageVideoSourceSettings` classes
+* [X-engines] Resolved issues with delayed file start in Live Video Compositor
+* [X-engines] Update video mixer API to use GUIDs instead of integer indexes for video sources
+
 ## 2025.6.27
 
 * [Video Capture SDK] Resolved issue with RTSP Low Latency engine with some cameras

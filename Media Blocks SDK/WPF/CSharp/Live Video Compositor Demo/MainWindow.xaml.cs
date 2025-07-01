@@ -639,9 +639,13 @@ namespace Live_Video_Compositor_Demo
         {
             if (lbSources.SelectedIndex != -1)
             {
-                var name = lbSources.SelectedValue.ToString();
-                await _compositor.Input_RemoveAsync(name);
-                lbSources.Items.RemoveAt(lbSources.SelectedIndex);
+                var index = lbSources.SelectedIndex;
+                var input = _compositor.Input_Get(index);
+                if (input != null)
+                {
+                    await _compositor.Input_RemoveAsync(input.ID);
+                }
+                lbSources.Items.RemoveAt(index);
             }
         }
 
@@ -735,8 +739,13 @@ namespace Live_Video_Compositor_Demo
         {
             if (lbOutputs.SelectedIndex != -1)
             {
-                await _compositor.Output_RemoveAsync(lbOutputs.SelectedValue.ToString());
-                lbOutputs.Items.RemoveAt(lbOutputs.SelectedIndex);
+                var index = lbOutputs.SelectedIndex;
+                var output = _compositor.Output_Get(index);
+                if (output != null)
+                {
+                    await _compositor.Output_RemoveAsync(output.ID);
+                }
+                lbOutputs.Items.RemoveAt(index);
                 lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
             }
         }
@@ -752,7 +761,7 @@ namespace Live_Video_Compositor_Demo
         {
             if (lbOutputs.SelectedIndex != -1)
             {
-                var output = _compositor.Output_Get(lbOutputs.SelectedValue.ToString());
+                var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
                 await output.StartAsync();
             }
         }
@@ -761,7 +770,7 @@ namespace Live_Video_Compositor_Demo
         {
             if (lbOutputs.SelectedIndex != -1)
             {
-                var output = _compositor.Output_Get(lbOutputs.SelectedValue.ToString());
+                var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
                 await output.StopAsync();
             }
         }
@@ -785,6 +794,66 @@ namespace Live_Video_Compositor_Demo
                 }
 
                 await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
+            }
+        }
+
+        private async void btAddFile1_Click(object sender, RoutedEventArgs e)
+        {
+            var filename = @"c:\Samples\!video.mp4";
+            var name = $"File [{filename}]";
+            var rect = new Rect(0, 0, 640, 480);
+            var settings = await UniversalSourceSettings.CreateAsync(filename);
+            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
+            src.ZOrder = (uint)_compositor.Input_Count();
+
+            if (await _compositor.Input_AddAsync(src))
+            {
+                lbSources.Items.Add(name);
+                lbSources.SelectedIndex = lbSources.Items.Count - 1;
+            }
+            else
+            {
+                src.Dispose();
+            }
+        }
+
+        private async void btAddFile2_Click(object sender, RoutedEventArgs e)
+        {
+            var filename = @"c:\Samples\anime.mp4";
+            var name = $"File [{filename}]";
+            var rect = new Rect(640, 0, 1280, 480);
+            var settings = await UniversalSourceSettings.CreateAsync(filename);
+            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
+            src.ZOrder = (uint)_compositor.Input_Count();
+
+            if (await _compositor.Input_AddAsync(src))
+            {
+                lbSources.Items.Add(name);
+                lbSources.SelectedIndex = lbSources.Items.Count - 1;
+            }
+            else
+            {
+                src.Dispose();
+            }
+        }
+
+        private async void btAddFile3_Click(object sender, RoutedEventArgs e)
+        {
+            var filename = @"c:\Samples\BigBuckBunny.mp4";
+            var name = $"File [{filename}]";
+            var rect = new Rect(0, 480, 640, 960);
+            var settings = await UniversalSourceSettings.CreateAsync(filename);
+            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
+            src.ZOrder = (uint)_compositor.Input_Count();
+
+            if (await _compositor.Input_AddAsync(src))
+            {
+                lbSources.Items.Add(name);
+                lbSources.SelectedIndex = lbSources.Items.Count - 1;
+            }
+            else
+            {
+                src.Dispose();
             }
         }
     }

@@ -86,6 +86,13 @@ namespace Video_Compositor_Demo
                 _videoCapture.OnError -= VideoCapture_OnError;
                 await _videoCapture.DisposeAsync();
                 _videoCapture = null;
+                
+                // Clear mixer stream references
+                foreach (var source in _sources)
+                {
+                    source.MixerStream = null;
+                }
+                
                 LogMessage("Media pipeline destroyed", LogLevel.Info);
             }
         }
@@ -126,7 +133,7 @@ namespace Video_Compositor_Demo
                 }
 
                 src.Source = settings;
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                src.Rectangle = GetDefaultRectangleForNewSource();
                 src.DisplayName = $"Camera [{dlg.Device}]";
                 src.ZOrder = _sources.Count; // Set default z-order
 
@@ -134,6 +141,8 @@ namespace Video_Compositor_Demo
 
                 cbSources.Items.Add(src.DisplayName + $" (Z:{src.ZOrder})");
                 cbSources.SelectedIndex = cbSources.Items.Count - 1;
+                
+                LogMessage($"Added camera source: {src.DisplayName} at {src.Rectangle}", LogLevel.Info);
             }
         }
 
@@ -149,7 +158,7 @@ namespace Video_Compositor_Demo
                 settings.FrameRate = dlg.FrameRate;
                 settings.Rectangle = dlg.Rectangle;
                 src.Source = settings;
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                src.Rectangle = GetDefaultRectangleForNewSource();
                 src.DisplayName = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
                 src.ZOrder = _sources.Count; // Set default z-order
 
@@ -167,7 +176,7 @@ namespace Video_Compositor_Demo
             {
                 var src = new CompositorSource();
                 src.Source = await UniversalSourceSettings.CreateAsync(dlg.FileName, renderAudio: false);
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                src.Rectangle = GetDefaultRectangleForNewSource();
                 src.DisplayName = $"Video [{System.IO.Path.GetFileName(dlg.FileName)}]";
                 src.ZOrder = _sources.Count; // Set default z-order
 
@@ -188,7 +197,7 @@ namespace Video_Compositor_Demo
                 var imageSettings = new ImageVideoSourceSettings(dlg.FileName);
                 imageSettings.FrameRate = new VideoFrameRate(Convert.ToInt32(edFrameRate.Text));
                 src.Source = imageSettings;
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                src.Rectangle = GetDefaultRectangleForNewSource();
                 src.DisplayName = $"Image [{System.IO.Path.GetFileName(dlg.FileName)}]";
                 src.ZOrder = _sources.Count; // Set default z-order
 
@@ -212,7 +221,7 @@ namespace Video_Compositor_Demo
                 // Reset selection if no items left
                 if (cbSources.Items.Count == 0)
                 {
-                    UpdateChromaKeyUI();
+                    UpdateSourceUI();
                 }
             }
         }
@@ -237,9 +246,9 @@ namespace Video_Compositor_Demo
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            // Initialize chroma key UI
+            // Initialize source UI
             cbSources.SelectionChanged += CbSources_SelectionChanged;
-            UpdateChromaKeyUI();
+            UpdateSourceUI();
 
             LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
         }
@@ -369,6 +378,18 @@ namespace Video_Compositor_Demo
 
                 await _videoCapture.StartAsync();
 
+                // Get the mixer streams and assign them to the sources for GUID-based API usage
+                var mixer = _videoCapture.GetSourceMixerControl();
+                if (mixer != null)
+                {
+                    var streams = mixer.Input_List();
+                    for (int streamIndex = 0; streamIndex < Math.Min(_sources.Count, streams.Length); streamIndex++)
+                    {
+                        _sources[streamIndex].MixerStream = streams[streamIndex];
+                        LogMessage($"Assigned mixer stream ID {streams[streamIndex].ID} to source '{_sources[streamIndex].DisplayName}'", LogLevel.Debug);
+                    }
+                }
+
                 //_pipeline.SavePipeline("compositor");
 
                 tmRecording.Start();
@@ -405,7 +426,7 @@ namespace Video_Compositor_Demo
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
-            if (index != -1)
+            if (index != -1 && index < _sources.Count)
             {
                 _sources[index].Rectangle = new Rect(
                     Convert.ToInt32(edRectLeft.Text),
@@ -414,11 +435,14 @@ namespace Video_Compositor_Demo
                     Convert.ToInt32(edRectBottom.Text));
 
                 var mixer = _videoCapture.GetSourceMixerControl();
-                if (mixer != null)
+                if (mixer != null && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
                 {
-                    var stream = mixer.Input_Get(index);
-                    stream.Rectangle = _sources[index].Rectangle;
-                    mixer.Input_Update(index, stream);
+                    var stream = mixer.Input_Get(_sources[index].MixerStream.ID);
+                    if (stream != null)
+                    {
+                        stream.Rectangle = _sources[index].Rectangle;
+                        mixer.Input_Update(stream);
+                    }
                 }
             }
         }
@@ -443,7 +467,7 @@ namespace Video_Compositor_Demo
 
         private void CbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateChromaKeyUI();
+            UpdateSourceUI();
         }
 
         private void cbEnableChromaKey_Checked(object sender, RoutedEventArgs e)
@@ -552,7 +576,7 @@ namespace Video_Compositor_Demo
             }
 
             var mixer = _videoCapture.GetSourceMixerControl();
-            if (mixer != null && index < _sources.Count)
+            if (mixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
             {
                 var source = _sources[index];
 
@@ -570,14 +594,14 @@ namespace Video_Compositor_Demo
                         chromaKeySettings.CustomColor = source.CustomColor;
                     }
 
-                    mixer.Input_UpdateChromaKeySettings(index, chromaKeySettings);
+                    mixer.Input_UpdateChromaKeySettings(source.MixerStream.ID, chromaKeySettings);
                 }
 
-                mixer.Input_SetChromaKeyEnabled(index, source.IsChromaKeyEnabled);
+                mixer.Input_SetChromaKeyEnabled(source.MixerStream.ID, source.IsChromaKeyEnabled);
             }
         }
 
-        private void UpdateChromaKeyUI()
+        private void UpdateSourceUI()
         {
             if (_isUpdatingUI) return;
 
@@ -589,6 +613,8 @@ namespace Video_Compositor_Demo
                 if (index != -1 && index < _sources.Count)
                 {
                     var source = _sources[index];
+                    
+                    // Update chroma key settings
                     cbEnableChromaKey.IsChecked = source.IsChromaKeyEnabled;
                     cbChromaColor.SelectedIndex = (int)source.ChromaColor;
                     btCustomColor.IsEnabled = source.ChromaColor == ChromaKeyColor.Custom;
@@ -596,10 +622,21 @@ namespace Video_Compositor_Demo
                     slNoiseLevel.Value = source.NoiseLevel;
                     lblSensitivity.Content = ((int)source.Sensitivity).ToString();
                     lblNoiseLevel.Content = ((int)source.NoiseLevel).ToString();
+                    
+                    // Update z-order
                     edZOrder.Text = source.ZOrder.ToString();
+                    
+                    // Update rectangle values
+                    edRectLeft.Text = source.Rectangle.Left.ToString();
+                    edRectTop.Text = source.Rectangle.Top.ToString();
+                    edRectRight.Text = source.Rectangle.Right.ToString();
+                    edRectBottom.Text = source.Rectangle.Bottom.ToString();
+                    
+                    LogMessage($"Updated UI for source: {source.DisplayName} - Rect({source.Rectangle.Left},{source.Rectangle.Top},{source.Rectangle.Right},{source.Rectangle.Bottom})", LogLevel.Debug);
                 }
                 else
                 {
+                    // Reset to default values when no source is selected
                     cbEnableChromaKey.IsChecked = false;
                     cbChromaColor.SelectedIndex = 0;
                     btCustomColor.IsEnabled = false;
@@ -608,6 +645,14 @@ namespace Video_Compositor_Demo
                     lblSensitivity.Content = "20";
                     lblNoiseLevel.Content = "2";
                     edZOrder.Text = "0";
+                    
+                    // Set default rectangle values (typical 720p)
+                    edRectLeft.Text = "0";
+                    edRectTop.Text = "0";
+                    edRectRight.Text = "1280";
+                    edRectBottom.Text = "720";
+                    
+                    LogMessage("UI reset to defaults - no source selected", LogLevel.Debug);
                 }
             }
             finally
@@ -706,9 +751,9 @@ namespace Video_Compositor_Demo
         private void UpdateSingleSourceZOrder(int index)
         {
             var mixer = _videoCapture.GetSourceMixerControl();
-            if (mixer != null && index >= 0 && index < _sources.Count)
+            if (mixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
             {
-                var stream = mixer.Input_Get(index);
+                var stream = mixer.Input_Get(_sources[index].MixerStream.ID);
                 if (stream != null)
                 {
                     var oldZOrder = stream.ZOrder;
@@ -716,7 +761,7 @@ namespace Video_Compositor_Demo
                     stream.ZOrder = (uint)_sources[index].ZOrder;
 
                     // Apply the update to the mixer
-                    mixer.Input_Update(index, stream);
+                    mixer.Input_Update(stream);
 
                     LogMessage($"Updated z-order for source {index} ({_sources[index].DisplayName}): {oldZOrder} → {stream.ZOrder}", LogLevel.Debug);
                 }
@@ -730,6 +775,51 @@ namespace Video_Compositor_Demo
                 var selectedIndex = cbSources.SelectedIndex;
                 cbSources.Items[index] = _sources[index].DisplayName + $" (Z:{_sources[index].ZOrder})";
                 cbSources.SelectedIndex = selectedIndex; // Maintain selection
+            }
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Gets a default rectangle for a new source based on mixer dimensions and existing source count.
+        /// </summary>
+        /// <returns>A reasonable default rectangle for the new source.</returns>
+        private Rect GetDefaultRectangleForNewSource()
+        {
+            int mixerWidth = Convert.ToInt32(edWidth.Text);
+            int mixerHeight = Convert.ToInt32(edHeight.Text);
+            int sourceCount = _sources.Count;
+
+            if (sourceCount == 0)
+            {
+                // First source takes full screen
+                return new Rect(0, 0, mixerWidth, mixerHeight);
+            }
+            else if (sourceCount == 1)
+            {
+                // Second source gets picture-in-picture in top-right corner
+                int pipWidth = mixerWidth / 4;
+                int pipHeight = mixerHeight / 4;
+                return new Rect(mixerWidth - pipWidth, 0, mixerWidth, pipHeight);
+            }
+            else
+            {
+                // Additional sources get arranged in a grid pattern
+                int cols = (int)Math.Ceiling(Math.Sqrt(sourceCount + 1));
+                int rows = (int)Math.Ceiling((double)(sourceCount + 1) / cols);
+                
+                int sourceWidth = mixerWidth / cols;
+                int sourceHeight = mixerHeight / rows;
+                
+                int col = sourceCount % cols;
+                int row = sourceCount / cols;
+                
+                int x = col * sourceWidth;
+                int y = row * sourceHeight;
+                
+                return new Rect(x, y, x + sourceWidth, y + sourceHeight);
             }
         }
 

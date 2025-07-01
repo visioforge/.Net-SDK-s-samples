@@ -95,7 +95,9 @@
                                                 <Label Grid.Row="1" Grid.Column="2" Content="Bottom:" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                                 <TextBox x:Name="edRectBottom" Grid.Row="1" Grid.Column="3" Text="480" Margin="5,2" VerticalContentAlignment="Center"/>
                                             </Grid>
-                                                                                         <Button x:Name="btUpdateRect" Content="Update Selected Source Rect" Height="25" Margin="0,10,0,0" Click="btUpdateRect_Click"/>
+                                            <CheckBox x:Name="cbKeepAspectRatio" Content="Keep Aspect Ratio" Margin="0,8,0,0" 
+                                                      Checked="cbKeepAspectRatio_Checked" Unchecked="cbKeepAspectRatio_Unchecked"/>
+                                            <Button x:Name="btUpdateRect" Content="Update Selected Source Rect" Height="25" Margin="0,10,0,0" Click="btUpdateRect_Click"/>
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
@@ -125,6 +127,58 @@
                                             Click="btUpdateZOrder_Click"/>
                                     <Button x:Name="btSortByZOrder" Content="Sort Sources by Z-Order" Height="25" Margin="0,5,0,0" 
                                             Click="btSortByZOrder_Click"/>
+                                </StackPanel>
+                            </GroupBox>
+
+                            <!-- Fade Controls -->
+                            <GroupBox Header="Fade Effects" Margin="0,10,0,0">
+                                <StackPanel Orientation="Vertical" Margin="5">
+                                    <Label Content="Apply fade in/out effects to the selected source" FontStyle="Italic" Foreground="Gray"/>
+                                    
+                                    <!-- Duration Setting -->
+                                    <Grid Margin="0,5,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Label Grid.Column="0" Content="Duration:" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="edFadeDuration" Grid.Column="1" Text="2" Width="60" Margin="5,0" 
+                                                 VerticalContentAlignment="Center"/>
+                                        <Label Grid.Column="2" Content="seconds" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    
+                                    <!-- Fade Buttons -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Button x:Name="btFadeIn" Grid.Column="0" Content="Fade In" Height="30" 
+                                                Click="btFadeIn_Click"/>
+                                        <Button x:Name="btFadeOut" Grid.Column="2" Content="Fade Out" Height="30" 
+                                                Click="btFadeOut_Click"/>
+                                    </Grid>
+                                    
+                                    <!-- Current Alpha Display -->
+                                    <Grid Margin="0,10,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Label Grid.Column="0" Content="Current Alpha:" VerticalAlignment="Center"/>
+                                        <Slider x:Name="slAlpha" Grid.Column="1" Minimum="0" Maximum="1" Value="1" 
+                                                Margin="5,0" VerticalAlignment="Center" ValueChanged="slAlpha_ValueChanged"/>
+                                        <Label x:Name="lblAlpha" Grid.Column="2" Content="1.0" Width="35" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    
+                                    <Button x:Name="btApplyAlpha" Content="Apply Alpha" Height="25" Margin="0,5,0,0" 
+                                            Click="btApplyAlpha_Click"/>
                                 </StackPanel>
                             </GroupBox>
 
