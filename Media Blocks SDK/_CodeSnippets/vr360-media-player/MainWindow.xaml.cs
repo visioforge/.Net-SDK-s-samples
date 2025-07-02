@@ -15,7 +15,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
-using VisioForge.Core.Types.X._Windows.VideoEffects;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X;
 using System.Diagnostics;
 
