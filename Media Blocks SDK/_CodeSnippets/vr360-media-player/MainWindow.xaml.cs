@@ -15,7 +15,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
-using VisioForge.Core.Types.X._Windows.VideoEffects;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X;
 using System.Diagnostics;
 
@@ -136,6 +136,12 @@ namespace vr360_media_player
 
             _pausedFrame?.Free();
             _pausedFrame = null;
+            
+            // Clean up processor
+            _processor?.Dispose();
+            _processor = null;
+            
+            imgPauseView.Source = null;
             imgPauseView.Visibility = Visibility.Collapsed;
             VideoView1.Visibility = Visibility.Visible;
             btPause.Content = "Pause";
@@ -342,12 +348,17 @@ namespace vr360_media_player
             {
                 await _pipeline.StopAsync(force: true);
                 await _pipeline.DisposeAsync();
+                _pipeline = null;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
-            {
-                UpdatePausedFrame();
-            }
+            _pausedFrame?.Free();
+            _pausedFrame = null;
+            
+            // Clean up processor
+            _processor?.Dispose();
+            _processor = null;
+            
+            imgPauseView.Source = null;
 
             base.OnClosing(e);
         }
@@ -371,6 +382,9 @@ namespace vr360_media_player
 
                 if (_pausedFrame != null)
                 {
+                    // Dispose previous bitmap to prevent memory leak
+                    var previousBitmap = imgPauseView.Source as WriteableBitmap;
+                    
                     var writeableBitmap = VideoFrameToWriteableBitmap(_pausedFrame);
                     if (writeableBitmap != null)
                     {
@@ -378,6 +392,9 @@ namespace vr360_media_player
                         imgPauseView.Visibility = Visibility.Visible;
                         VideoView1.Visibility = Visibility.Collapsed;
                     }
+                    
+                    // Force garbage collection of previous bitmap
+                    previousBitmap = null;
                 }
                 else
                 {
@@ -406,30 +423,38 @@ namespace vr360_media_player
                 // Create WriteableBitmap
                 var writeableBitmap = new WriteableBitmap(frame.Width, frame.Height, 96, 96, PixelFormats.Bgr24, null);
                 
-                // Get frame data as byte array
-                var frameData = frame.ToArray();
-                
-                // Convert RGB to BGR if needed (VideoFrameX is typically RGB, WriteableBitmap expects BGR)
-                var bgrData = new byte[frameData.Length];
-                for (int i = 0; i < frameData.Length; i += 3)
-                {
-                    if (i + 2 < frameData.Length)
-                    {
-                        bgrData[i] = frameData[i + 2];     // B
-                        bgrData[i + 1] = frameData[i + 1]; // G
-                        bgrData[i + 2] = frameData[i];     // R
-                    }
-                }
-
                 // Calculate stride
                 int stride = (frame.Width * writeableBitmap.Format.BitsPerPixel + 7) / 8;
                 
-                // Write pixels to WriteableBitmap
-                writeableBitmap.WritePixels(
-                    new Int32Rect(0, 0, frame.Width, frame.Height),
-                    bgrData,
-                    stride,
-                    0);
+                // Lock the bitmap for direct pixel access
+                writeableBitmap.Lock();
+                
+                try
+                {
+                    unsafe
+                    {
+                        byte* src = (byte*)frame.Data.ToPointer();
+                        byte* dst = (byte*)writeableBitmap.BackBuffer.ToPointer();
+                        int pixelCount = frame.Width * frame.Height;
+                        
+                        // Convert RGB to BGR directly in the bitmap buffer
+                        for (int i = 0; i < pixelCount; i++)
+                        {
+                            int srcIndex = i * 3;
+                            int dstIndex = i * 3;
+                            
+                            dst[dstIndex] = src[srcIndex + 2];     // B
+                            dst[dstIndex + 1] = src[srcIndex + 1]; // G
+                            dst[dstIndex + 2] = src[srcIndex];     // R
+                        }
+                    }
+                    
+                    writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, frame.Width, frame.Height));
+                }
+                finally
+                {
+                    writeableBitmap.Unlock();
+                }
 
                 return writeableBitmap;
             }
