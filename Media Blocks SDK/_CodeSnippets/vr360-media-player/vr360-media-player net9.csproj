@@ -6,6 +6,7 @@
     <RootNamespace>vr360_media_player</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
