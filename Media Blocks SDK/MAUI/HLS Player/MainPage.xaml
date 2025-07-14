@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HLS_Player_MB_MAUI.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             Title="HLS Stream Player">
+
+    <Grid>
+        <Grid RowSpacing="0" RowDefinitions="Auto,*,Auto,Auto">
+            
+            <!-- HLS URL Input Section -->
+            <StackLayout Grid.Row="0" Padding="10" BackgroundColor="#2e2e2e">
+                <Label Text="HLS Stream URL:" TextColor="White" FontSize="16" />
+                <Entry x:Name="txtHLSUrl" 
+                       Text="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+                       TextColor="White"
+                       BackgroundColor="#1e1e1e"
+                       Placeholder="Enter HLS stream URL..."
+                       PlaceholderColor="Gray"
+                       Margin="0,5,0,5" />
+                
+                <!-- Predefined HLS Streams -->
+                <Label Text="Sample Streams:" TextColor="Gray" FontSize="14" Margin="0,10,0,5" />
+                <Picker x:Name="pickerSampleStreams" 
+                        TextColor="White"
+                        BackgroundColor="#1e1e1e"
+                        SelectedIndexChanged="pickerSampleStreams_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Mux Test Stream</x:String>
+                        <x:String>Sintel Movie</x:String>
+                        <x:String>Tears of Steel</x:String>
+                        <x:String>Apple Sample Stream</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+
+            <!-- Video Player -->
+            <my:VideoView Grid.Row="1"               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                x:Name="videoView"
+                Background="Black"/>
+
+            <!-- Stream Info -->
+            <StackLayout Grid.Row="2" Padding="10" BackgroundColor="#2e2e2e">
+                <Label x:Name="lblStreamInfo" 
+                       Text="Stream Status: Not Connected" 
+                       TextColor="White" 
+                       FontSize="14" />
+                <Label x:Name="lblVideoInfo" 
+                       Text="" 
+                       TextColor="Gray" 
+                       FontSize="12" />
+                <Label x:Name="lblAudioInfo" 
+                       Text="" 
+                       TextColor="Gray" 
+                       FontSize="12" />
+            </StackLayout>
+
+            <!-- Player Controls -->
+            <StackLayout Grid.Row="3" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#1e1e1e" Padding="10">
+                
+                <!-- Seek Bar -->
+                <Slider 
+                    x:Name="slSeeking"
+                    HorizontalOptions="Fill"
+                    Margin="0,10,0,0"                    
+                    VerticalOptions="Center"
+                    ValueChanged="slSeeking_ValueChanged" />
+
+                <!-- Time Display -->
+                <Grid Margin="0,5,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
+                        Grid.Column="0"
+                        Text="00:00:00" 
+                        x:Name="lbPosition" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        TextColor="White"
+                        Margin="5,0,5,0" />
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="" 
+                        x:Name="lbStatus" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        TextColor="Yellow"
+                        FontSize="12" />
+
+                    <Label 
+                        Grid.Column="2"
+                        Text="00:00:00" 
+                        x:Name="lbDuration" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        TextColor="White"
+                        Margin="5,0,5,0" />
+                </Grid>
+
+                <!-- Control Buttons -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Connection Status -->
+                    <StackLayout Grid.Column="0" 
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="Center">
+                        <BoxView x:Name="connectionIndicator" 
+                                 WidthRequest="15" 
+                                 HeightRequest="15" 
+                                 CornerRadius="7.5"
+                                 BackgroundColor="Red"
+                                 Margin="5,0,5,0" />
+                        <Label Text="Disconnected" 
+                               x:Name="lblConnectionStatus"
+                               TextColor="White"
+                               VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <!-- Main Control Buttons -->
+                    <StackLayout
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+
+                        <Button
+                            x:Name="btConnect"
+                            Text="CONNECT"
+                            Margin="5"
+                            VerticalOptions="Center"
+                            Clicked="btConnect_Clicked" />
+
+                        <Button
+                            x:Name="btPlayPause"
+                            Text="PLAY"
+                            Margin="5"
+                            IsEnabled="False"
+                            Clicked="btPlayPause_Clicked" />
+
+                        <Button
+                            x:Name="btStop"
+                            Text="STOP"
+                            Margin="5"
+                            IsEnabled="False"
+                            Clicked="btStop_Clicked" />
+
+                    </StackLayout>
+
+                    <!-- Volume Control -->
+                    <StackLayout
+                        Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center">
+
+                        <Label
+                            Text="Volume"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+
+                        <Slider
+                            x:Name="slVolume"
+                            HorizontalOptions="Fill"
+                            Margin="10,0,5,0"
+                            Minimum="0"
+                            Maximum="100"
+                            Value="50"
+                            WidthRequest="100"
+                            VerticalOptions="Center"
+                            ValueChanged="slVolume_ValueChanged" />
+
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
