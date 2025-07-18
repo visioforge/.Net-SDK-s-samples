@@ -72,6 +72,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.7.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.7.8" />
   </ItemGroup>
 </Project>
