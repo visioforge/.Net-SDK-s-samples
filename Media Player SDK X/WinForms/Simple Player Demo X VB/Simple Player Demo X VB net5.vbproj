@@ -34,6 +34,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.7.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.7.9" />
   </ItemGroup>
 </Project>
