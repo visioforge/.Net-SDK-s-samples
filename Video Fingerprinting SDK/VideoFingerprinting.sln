@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVS", "DVS\DVS.csproj", "{25520CC4-D94C-7B63-AC77-522EA42CA9EB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageComparer", "Image Comparer\ImageComparer.csproj", "{C1758FD6-E24A-5572-A44F-19539EF85C15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMT", "MMT\MMT.csproj", "{2A9B8FFD-17B8-A7E4-A55A-B645058BFAA7}"
 EndProject
@@ -29,10 +27,6 @@ Global
 		{25520CC4-D94C-7B63-AC77-522EA42CA9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25520CC4-D94C-7B63-AC77-522EA42CA9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25520CC4-D94C-7B63-AC77-522EA42CA9EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1758FD6-E24A-5572-A44F-19539EF85C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1758FD6-E24A-5572-A44F-19539EF85C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1758FD6-E24A-5572-A44F-19539EF85C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1758FD6-E24A-5572-A44F-19539EF85C15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A9B8FFD-17B8-A7E4-A55A-B645058BFAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A9B8FFD-17B8-A7E4-A55A-B645058BFAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A9B8FFD-17B8-A7E4-A55A-B645058BFAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
