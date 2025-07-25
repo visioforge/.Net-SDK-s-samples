@@ -10,12 +10,12 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="2025.7.1" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.10" />
+    <PackageReference Include="VisioForge.CrossPlatform.GenICam.Windows.x64" Version="2025.7.10" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.10" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.7.9" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.7.10" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
