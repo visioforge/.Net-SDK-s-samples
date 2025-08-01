@@ -15,8 +15,8 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.7.11" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.7.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.7.15" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

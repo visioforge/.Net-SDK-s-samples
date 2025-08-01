@@ -20,10 +20,10 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.10" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.10" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.7.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.7.15" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.7.11" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.7.15" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
