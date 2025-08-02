@@ -135,6 +135,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vr360-media-player net5", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaKey Demo MB WPF net5", "WPF\CSharp\ChromaKey\ChromaKey Demo MB WPF net5.csproj", "{B3FF1C93-E04C-49E8-FB08-E9C94C568B86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTube Streamer with Bridge net5", "WPF\CSharp\YouTube Streamer with Bridge\YouTube Streamer with Bridge net5.csproj", "{56D5B01D-7640-2D3A-C8CB-06EF92D180C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -393,6 +395,10 @@ Global
 		{B3FF1C93-E04C-49E8-FB08-E9C94C568B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3FF1C93-E04C-49E8-FB08-E9C94C568B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3FF1C93-E04C-49E8-FB08-E9C94C568B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D5B01D-7640-2D3A-C8CB-06EF92D180C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56D5B01D-7640-2D3A-C8CB-06EF92D180C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D5B01D-7640-2D3A-C8CB-06EF92D180C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56D5B01D-7640-2D3A-C8CB-06EF92D180C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -461,6 +467,7 @@ Global
 		{C1672276-0184-A72A-6D72-C2FED608E10C} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{A93244A8-2EE9-BB59-BE26-FDFA11A79B32} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 		{B3FF1C93-E04C-49E8-FB08-E9C94C568B86} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
+		{56D5B01D-7640-2D3A-C8CB-06EF92D180C4} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

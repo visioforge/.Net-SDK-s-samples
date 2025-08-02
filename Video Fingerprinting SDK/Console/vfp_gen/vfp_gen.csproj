@@ -16,8 +16,8 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.7.14" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.7.14" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.7.15" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.10" />

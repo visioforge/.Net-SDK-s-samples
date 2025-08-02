@@ -62,6 +62,6 @@
     <NativeLibs Remove="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.7.14" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.7.15" />
   </ItemGroup>
 </Project>

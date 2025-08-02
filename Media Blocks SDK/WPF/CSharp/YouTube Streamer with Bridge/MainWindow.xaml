@@ -1,0 +1,60 @@
+<Window x:Class="YouTube_Streamer_with_Bridge.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YouTube_Streamer_with_Bridge" 
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - YouTube Streamer with Bridge Demo"
+        Height="600" Width="800" 
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing"
+        Icon="visioforge_main_icon.ico">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Main">
+                <Grid>
+                    <Label Content="Video input" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" Margin="15,36,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                    
+                    <Label Content="Video format" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Margin="15,89,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                    
+                    <Label Content="Frame rate" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoFrameRate" HorizontalAlignment="Left" Margin="15,142,0,0" VerticalAlignment="Top" Width="250"/>
+                    
+                    <Label Content="Audio input" HorizontalAlignment="Left" Margin="10,169,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" Margin="15,195,0,0" VerticalAlignment="Top" Width="250" SelectionChanged="cbAudioInput_SelectionChanged"/>
+                    
+                    <Label Content="Audio format" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Margin="15,248,0,0" VerticalAlignment="Top" Width="250"/>
+                    
+                    <Label Content="YouTube Streaming Key" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="edYouTubeKey" HorizontalAlignment="Left" Margin="15,311,0,0" VerticalAlignment="Top" Width="250" Text="Your-YouTube-Streaming-Key"/>
+                    
+                    <wpf:VideoView x:Name="VideoView1" Margin="285,10,10,150" Background="Black"/>
+                    
+                    <Label Content="Local preview (independent from stream)" HorizontalAlignment="Left" Margin="285,0,0,124" VerticalAlignment="Bottom"/>
+                    
+                    <Button x:Name="btStart" Content="Start preview" HorizontalAlignment="Left" Margin="15,356,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="btStart_Click"/>
+                    <Button x:Name="btStop" Content="Stop preview" HorizontalAlignment="Left" Margin="145,356,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="btStop_Click" IsEnabled="False"/>
+                    
+                    <Button x:Name="btStartStreaming" Content="Start streaming" HorizontalAlignment="Left" Margin="15,396,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="btStartStreaming_Click" IsEnabled="False"/>
+                    <Button x:Name="btStopStreaming" Content="Stop streaming" HorizontalAlignment="Left" Margin="145,396,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="btStopStreaming_Click" IsEnabled="False"/>
+                    
+                    <Label Content="Status:" HorizontalAlignment="Left" Margin="10,450,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbStatus" Content="Not started" HorizontalAlignment="Left" Margin="60,450,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    
+                    <Label Content="Time:" HorizontalAlignment="Left" Margin="10,476,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lbTime" Content="00:00:00" HorizontalAlignment="Left" Margin="60,476,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log">
+                <Grid>
+                    <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
