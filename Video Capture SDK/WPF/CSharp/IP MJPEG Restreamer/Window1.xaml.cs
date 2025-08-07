@@ -11,7 +11,9 @@ namespace IP_MJPEG_Restreamer
     using System.Timers;
     using System.Windows;
     using System.Windows.Input;
-    using VisioForge.Core.ONVIF.Legacy;
+    // Legacy ONVIF namespace removed - using new ONVIFX
+    using VisioForge.Core.ONVIFDiscovery.Models;
+    using VisioForge.Core.ONVIFX;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
@@ -25,7 +27,7 @@ namespace IP_MJPEG_Restreamer
     {     
         private Timer tmRecording = new Timer(1000);
 
-        private ONVIFControl onvifControl;
+        private ONVIFClientX onvifControl;
 
         private VideoCaptureCore VideoCapture1;
 
@@ -81,7 +83,6 @@ namespace IP_MJPEG_Restreamer
         {
             if (onvifControl != null)
             {
-                await onvifControl.DisconnectAsync();
                 onvifControl.Dispose();
                 onvifControl = null;
 
@@ -229,7 +230,6 @@ namespace IP_MJPEG_Restreamer
 
                     if (onvifControl != null)
                     {
-                        await onvifControl.DisconnectAsync();
                         onvifControl.Dispose();
                         onvifControl = null;
                     }
@@ -240,8 +240,8 @@ namespace IP_MJPEG_Restreamer
                         return;
                     }
 
-                    onvifControl = new ONVIFControl();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    onvifControl = new ONVIFClientX();
+                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text, OnvifAuthentication.WsUsernameToken);
                     if (!result)
                     {
                         onvifControl = null;
@@ -252,7 +252,7 @@ namespace IP_MJPEG_Restreamer
                     var deviceInfo = await onvifControl.GetDeviceInformationAsync();
                     if (deviceInfo != null)
                     {
-                        lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                        lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.FirmwareVersion}";
                     }
 
                     cbONVIFProfile.Items.Clear();
@@ -267,7 +267,12 @@ namespace IP_MJPEG_Restreamer
                         cbONVIFProfile.SelectedIndex = 0;
                     }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = await onvifControl.GetVideoURLAsync();
+                    // Get stream URI from first profile
+                    if (profiles != null && profiles.Length > 0)
+                    {
+                        var streamUri = await onvifControl.GetStreamUriAsync(profiles[0].token);
+                        edONVIFLiveVideoURL.Text = cbIPURL.Text = streamUri.Uri;
+                    }
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -286,7 +291,6 @@ namespace IP_MJPEG_Restreamer
 
                 if (onvifControl != null)
                 {
-                    await onvifControl.DisconnectAsync();
                     onvifControl.Dispose();
                     onvifControl = null;
                 }

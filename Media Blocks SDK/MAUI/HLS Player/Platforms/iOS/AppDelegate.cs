@@ -1,6 +1,4 @@
-﻿
-using Foundation;
-using HLS_Player_MB_MAUI;
+﻿using Foundation;
 
 namespace Simple_Player_MB_MAUI
 {

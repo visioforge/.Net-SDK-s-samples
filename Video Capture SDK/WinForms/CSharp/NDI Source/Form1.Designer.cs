@@ -259,7 +259,7 @@ namespace NDI_Source
             this.cbIPURL.Name = "cbIPURL";
             this.cbIPURL.Size = new System.Drawing.Size(476, 33);
             this.cbIPURL.TabIndex = 97;
-            this.cbIPURL.Text = "http://192.168.1.64/onvif/device_service";
+            this.cbIPURL.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // btListNDISources
             // 

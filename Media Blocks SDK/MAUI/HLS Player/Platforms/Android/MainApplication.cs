@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Runtime;
-using HLS_Player_MB_MAUI;
 
 namespace Simple_Player_MB_MAUI
 {

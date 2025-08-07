@@ -19,7 +19,6 @@ namespace IP_Capture
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.MediaBlocks;
-    using VisioForge.Core.ONVIF.Legacy;
     using VisioForge.Core.ONVIFX;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
@@ -57,7 +56,7 @@ namespace IP_Capture
 
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-        private ONVIFDeviceX onvifDevice;
+        private ONVIFClientX onvifDevice;
 
         private VideoCaptureCoreX VideoCapture1;
 
@@ -174,7 +173,6 @@ namespace IP_Capture
         {
             if (onvifDevice != null)
             {
-                await onvifDevice.DisconnectAsync();
                 onvifDevice.Dispose();
                 onvifDevice = null;
 
@@ -394,7 +392,6 @@ namespace IP_Capture
 
                     if (onvifDevice != null)
                     {
-                        await onvifDevice.DisconnectAsync();
                         onvifDevice.Dispose();
                         onvifDevice = null;
                     }
@@ -405,7 +402,7 @@ namespace IP_Capture
                         return;
                     }
 
-                    onvifDevice = new ONVIFDeviceX();
+                    onvifDevice = new ONVIFClientX();
                     var result = await onvifDevice.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
@@ -414,7 +411,15 @@ namespace IP_Capture
                         return;
                     }
 
-                    lbONVIFCameraInfo.Content = $"{onvifDevice.CameraName}, s/n {onvifDevice.SerialNumber}";
+                    var deviceInfo = onvifDevice.DeviceInformation;
+                    if (deviceInfo != null)
+                    {
+                        lbONVIFCameraInfo.Content = $"{deviceInfo.Manufacturer} {deviceInfo.Model}, s/n {deviceInfo.SerialNumber}";
+                    }
+                    else
+                    {
+                        lbONVIFCameraInfo.Content = "Device information not available";
+                    }
                     
                     cbONVIFProfile.Items.Clear();
                     var profiles = await onvifDevice.GetProfilesAsync();
@@ -428,7 +433,14 @@ namespace IP_Capture
                         cbONVIFProfile.SelectedIndex = 0;
                     }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = profiles[0].RTSPUrl.ToString();
+                    if (profiles.Length > 0)
+                    {
+                        var streamUri = await onvifDevice.GetStreamUriAsync(profiles[0]);
+                        if (streamUri != null)
+                        {
+                            edONVIFLiveVideoURL.Text = cbIPURL.Text = streamUri.Uri;
+                        }
+                    }
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -448,76 +460,136 @@ namespace IP_Capture
 
                 if (onvifDevice != null)
                 {
-                    await onvifDevice.DisconnectAsync();
                     onvifDevice.Dispose();
                     onvifDevice = null;
                 }
             }
         }
 
-        private void btONVIFRight_Click(object sender, RoutedEventArgs e)
+        private async Task<string> GetCurrentProfileTokenAsync()
         {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null || cbONVIFProfile.SelectedIndex < 0)
+            {
+                return null;
+            }
+
+            var profiles = await onvifDevice.GetProfilesAsync();
+            if (profiles != null && cbONVIFProfile.SelectedIndex < profiles.Length)
+            {
+                return profiles[cbONVIFProfile.SelectedIndex].token;
+            }
+
+            return null;
+        }
+
+        private async void btONVIFRight_Click(object sender, RoutedEventArgs e)
+        {
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(0.5f, 0, 0);
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, new VisioForge.Core.ONVIFX.PTZ.Vector2D { x = 0.5f, y = 0 }, null);
+            }
         }
 
-        private void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
         {
-            onvifDevice?.PTZ_GoHome();
-        }
-
-        private void btONVIFLeft_Click(object sender, RoutedEventArgs e)
-        {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(-0.5f, 0, 0);
+            try
+            {
+                var profileToken = await GetCurrentProfileTokenAsync();
+                if (!string.IsNullOrEmpty(profileToken))
+                {
+                    // Try to go to the first preset, which is often the home position
+                    var presets = await onvifDevice.GetPresetsAsync(profileToken);
+                    if (presets != null && presets.Length > 0)
+                    {
+                        await onvifDevice.GoToPresetAsync(profileToken, presets[0].token, 1.0f, 1.0f, 1.0f);
+                    }
+                }
+            }
+            catch
+            {
+                // Handle exception if needed
+            }
         }
 
-        private void btONVIFUp_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFLeft_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(0, 0.5f, 0);
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, new VisioForge.Core.ONVIFX.PTZ.Vector2D { x = -0.5f, y = 0 }, null);
+            }
         }
 
-        private void btONVIFDown_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFUp_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(0, -0.5f, 0);
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, new VisioForge.Core.ONVIFX.PTZ.Vector2D { x = 0, y = 0.5f }, null);
+            }
         }
 
-        private void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFDown_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(0, 0, 0.5f);
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, new VisioForge.Core.ONVIFX.PTZ.Vector2D { x = 0, y = -0.5f }, null);
+            }
         }
 
-        private void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifDevice == null || !onvifDevice.HasPTZ)
+            if (onvifDevice == null)
             {
                 return;
             }
 
-            onvifDevice.PTZ_Move(0, 0, -0.5f);
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, null, new VisioForge.Core.ONVIFX.PTZ.Vector1D { x = 0.5f });
+            }
+        }
+
+        private async void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            if (onvifDevice == null)
+            {
+                return;
+            }
+
+            var profileToken = await GetCurrentProfileTokenAsync();
+            if (!string.IsNullOrEmpty(profileToken))
+            {
+                await onvifDevice.ContinuousMoveAsync(profileToken, null, new VisioForge.Core.ONVIFX.PTZ.Vector1D { x = -0.5f });
+            }
         }
 
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)

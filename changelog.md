@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.8.1
+
+* [Media Player SDK] Added PauseOnStop property to MediaPlayerCoreX
+
 ## 2025.6.30
 
 * [X-engines] Added animated GIF support to `ImageVideoSourceBlock`/`ImageVideoSourceSettings` classes

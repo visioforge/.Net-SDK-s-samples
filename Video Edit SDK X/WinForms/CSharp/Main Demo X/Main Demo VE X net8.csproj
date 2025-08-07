@@ -71,9 +71,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.7.15" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.10" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.10" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.8.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

@@ -216,8 +216,6 @@ The complete source code is available in the VisioForge demos repository. The SD
 
 - [VisioForge Media Blocks SDK Documentation](https://www.visioforge.com/media-blocks-sdk)
 - [HLS Specification](https://datatracker.ietf.org/doc/html/rfc8216)
-- [.NET MAUI Documentation](https://docs.microsoft.com/en-us/dotnet/maui/)
-- [GStreamer HLS Plugin](https://gstreamer.freedesktop.org/documentation/hls/)
 
 ---
 

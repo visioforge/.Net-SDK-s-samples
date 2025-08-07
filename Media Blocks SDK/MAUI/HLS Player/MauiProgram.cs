@@ -20,9 +20,9 @@ namespace HLS_Player_MB_MAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-// #if DEBUG
-//             builder.Logging.AddDebug();
-// #endif
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
 
             VisioForgeX.InitSDK();
 

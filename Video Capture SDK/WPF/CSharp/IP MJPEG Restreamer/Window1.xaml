@@ -41,7 +41,7 @@
                                 <Label x:Name="lbVLCRedist64" Content="x64" HorizontalAlignment="Left" Margin="416,200,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbVLCRedist64_MouseLeftButtonDown"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.64/onvif/device_service" IsEditable="True"/>
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.22/onvif/device_service" IsEditable="True"/>
                                 <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="20,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="137,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
                             </Grid>

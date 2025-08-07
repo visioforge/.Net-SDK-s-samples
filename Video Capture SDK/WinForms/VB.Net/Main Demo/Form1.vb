@@ -7,7 +7,9 @@ Imports System.IO
 Imports System.Linq
 Imports System.Threading.Tasks
 Imports VisioForge.Core.Helpers
-Imports VisioForge.Core.ONVIF.Legacy
+' Legacy ONVIF namespace removed - using new ONVIFX
+Imports VisioForge.Core.ONVIFDiscovery.Models
+Imports VisioForge.Core.ONVIFX
 Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.AudioEffects
 Imports VisioForge.Core.Types.Decklink
@@ -77,9 +79,15 @@ Public Class Form1
 
     Dim screenshotSaveDialog As SaveFileDialog
 
-    Dim onvifControl As ONVIFControl
+    Dim onvifClient As ONVIFClientX
 
-    Dim onvifPtzRanges As ONVIFPTZRanges
+    ' PTZ ranges now handled differently in ONVIFX
+    Dim onvifPtzMinX As Double
+    Dim onvifPtzMaxX As Double
+    Dim onvifPtzMinY As Double
+    Dim onvifPtzMaxY As Double
+    Dim onvifPtzMinZoom As Double
+    Dim onvifPtzMaxZoom As Double
 
     Dim onvifPtzX As Double
 
@@ -635,10 +643,9 @@ Public Class Form1
 
         VideoView1.StatusOverlay = Nothing
 
-        If (onvifControl IsNot Nothing) Then
-            onvifControl.Disconnect()
-            onvifControl.Dispose()
-            onvifControl = Nothing
+        If (onvifClient IsNot Nothing) Then
+            onvifClient.Dispose()
+            onvifClient = Nothing
 
             btONVIFConnect.Text = "Connect"
         End If
@@ -4341,10 +4348,12 @@ Public Class Form1
                 btONVIFConnect.Enabled = False
                 btONVIFConnect.Text = "Connecting"
 
-                If (onvifControl IsNot Nothing) Then
-                    onvifControl.Disconnect()
-                    onvifControl.Dispose()
-                    onvifControl = Nothing
+                If (onvifClient IsNot Nothing) Then
+                    If onvifClient IsNot Nothing Then
+                        onvifClient.Dispose()
+                        onvifClient = Nothing
+                    End If
+                    onvifClient = Nothing
                 End If
 
                 If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
@@ -4352,22 +4361,22 @@ Public Class Form1
                     Exit Sub
                 End If
 
-                onvifControl = New ONVIFControl()
-                Dim result = Await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text)
+                onvifClient = New ONVIFClientX()
+                Dim result = Await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text, OnvifAuthentication.WsUsernameToken)
 
                 If (Not result) Then
-                    onvifControl = Nothing
+                    onvifClient = Nothing
                     MessageBox.Show(Me, "Unable to connect to ONVIF camera.")
                     Exit Sub
                 End If
 
-                Dim deviceInfo = Await onvifControl.GetDeviceInformationAsync()
-                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}"
+                Dim deviceInfo = Await onvifClient.GetDeviceInformationAsync()
+                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.FirmwareVersion}"
 
                 cbONVIFProfile.Items.Clear()
 
-                Dim profiles As VisioForge.Libs.External.ONVIFLegacy.Profile() = Await onvifControl.GetProfilesAsync()
-                For Each profile As VisioForge.Libs.External.ONVIFLegacy.Profile In profiles
+                Dim profiles As VisioForge.Core.ONVIFX.Media.Profile() = Await onvifClient.GetProfilesAsync()
+                For Each profile As VisioForge.Core.ONVIFX.Media.Profile In profiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 
@@ -4375,14 +4384,25 @@ Public Class Form1
                     cbONVIFProfile.SelectedIndex = 0
                 End If
 
-                edONVIFLiveVideoURL.Text = Await onvifControl.GetVideoURLAsync()
+                ' Get stream URI from first profile
+                If profiles IsNot Nothing AndAlso profiles.Length > 0 Then
+                    Dim streamUri = Await onvifClient.GetStreamUriAsync(profiles(0).token)
+                    edONVIFLiveVideoURL.Text = streamUri.Uri
+                End If
                 cbIPURL.Text = edONVIFLiveVideoURL.Text
 
                 edIPLogin.Text = edONVIFLogin.Text
                 edIPPassword.Text = edONVIFPassword.Text
 
-                onvifPtzRanges = Await onvifControl.PTZ_GetRangesAsync()
-                Await onvifControl.PTZ_SetAbsoluteAsync(0, 0, 0)
+                ' PTZ capabilities are retrieved differently in ONVIFX
+                ' For now, using default ranges
+                onvifPtzMinX = -1.0
+                onvifPtzMaxX = 1.0
+                onvifPtzMinY = -1.0
+                onvifPtzMaxY = 1.0
+                onvifPtzMinZoom = 0.0
+                onvifPtzMaxZoom = 1.0
+                Await onvifClient.AbsoluteMoveAsync(cbONVIFProfile.Text, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
 
                 onvifPtzX = 0
                 onvifPtzY = 0
@@ -4401,119 +4421,121 @@ Public Class Form1
         Else
             btONVIFConnect.Text = "Connect"
 
-            If (onvifControl IsNot Nothing) Then
-                onvifControl.Disconnect()
-                onvifControl.Dispose()
-                onvifControl = Nothing
+            If (onvifClient IsNot Nothing) Then
+                If onvifClient IsNot Nothing Then
+                    onvifClient.Dispose()
+                    onvifClient = Nothing
+                End If
+                onvifClient = Nothing
             End If
         End If
     End Sub
 
     Private Sub btONVIFRight_Click(sender As Object, e As EventArgs) Handles btONVIFRight.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30
+        Dim step_ As Double = (onvifPtzMaxX - onvifPtzMinX) / 30
         onvifPtzX = onvifPtzX - step_
 
-        If (onvifPtzX < onvifPtzRanges.MinX) Then
-            onvifPtzX = onvifPtzRanges.MinX
+        If (onvifPtzX < onvifPtzMinX) Then
+            onvifPtzX = onvifPtzMinX
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFPTZSetDefault_Click(sender As Object, e As EventArgs) Handles btONVIFPTZSetDefault.Click
 
-        onvifControl?.PTZ_SetAbsolute(0, 0, 0)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFLeft_Click(sender As Object, e As EventArgs) Handles btONVIFLeft.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30
+        Dim step_ As Double = (onvifPtzMaxX - onvifPtzMinX) / 30
         onvifPtzX = onvifPtzX + step_
 
-        If (onvifPtzX > onvifPtzRanges.MaxX) Then
-            onvifPtzX = onvifPtzRanges.MaxX
+        If (onvifPtzX > onvifPtzMaxX) Then
+            onvifPtzX = onvifPtzMaxX
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFUp_Click(sender As Object, e As EventArgs) Handles btONVIFUp.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30
+        Dim step_ As Double = (onvifPtzMaxY - onvifPtzMinY) / 30
         onvifPtzY = onvifPtzY - step_
 
-        If (onvifPtzY < onvifPtzRanges.MinY) Then
-            onvifPtzY = onvifPtzRanges.MinY
+        If (onvifPtzY < onvifPtzMinY) Then
+            onvifPtzY = onvifPtzMinY
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFDown_Click(sender As Object, e As EventArgs) Handles btONVIFDown.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30
+        Dim step_ As Double = (onvifPtzMaxY - onvifPtzMinY) / 30
         onvifPtzY = onvifPtzY + step_
 
-        If (onvifPtzY > onvifPtzRanges.MaxY) Then
-            onvifPtzY = onvifPtzRanges.MaxY
+        If (onvifPtzY > onvifPtzMaxY) Then
+            onvifPtzY = onvifPtzMaxY
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFZoomIn_Click(sender As Object, e As EventArgs) Handles btONVIFZoomIn.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100
+        Dim step_ As Double = (onvifPtzMaxZoom - onvifPtzMinZoom) / 100
         onvifPtzZoom = onvifPtzZoom + step_
 
-        If (onvifPtzZoom > onvifPtzRanges.MaxZoom) Then
-            onvifPtzZoom = onvifPtzRanges.MaxZoom
+        If (onvifPtzZoom > onvifPtzMaxZoom) Then
+            onvifPtzZoom = onvifPtzMaxZoom
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 
     Private Sub btONVIFZoomOut_Click(sender As Object, e As EventArgs) Handles btONVIFZoomOut.Click
 
-        If (onvifControl Is Nothing Or onvifPtzRanges Is Nothing) Then
+        If (onvifClient Is Nothing) Then
             Exit Sub
         End If
 
-        Dim step_ As Double = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100
+        Dim step_ As Double = (onvifPtzMaxZoom - onvifPtzMinZoom) / 100
         onvifPtzZoom = onvifPtzZoom - step_
 
-        If (onvifPtzZoom < onvifPtzRanges.MinZoom) Then
-            onvifPtzZoom = onvifPtzRanges.MinZoom
+        If (onvifPtzZoom < onvifPtzMinZoom) Then
+            onvifPtzZoom = onvifPtzMinZoom
         End If
 
-        onvifControl?.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom)
+        onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
 
     End Sub
 

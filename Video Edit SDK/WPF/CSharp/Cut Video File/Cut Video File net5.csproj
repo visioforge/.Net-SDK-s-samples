@@ -13,8 +13,8 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.8.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.8.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.8.1" />
   </ItemGroup>
 </Project>

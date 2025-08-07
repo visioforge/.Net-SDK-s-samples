@@ -23,10 +23,10 @@ namespace VideoCapture_CSharp_Demo
                 components.Dispose();
             }
 
-            if (onvifDevice != null)
+            if (onvifClient != null)
             {
-                onvifDevice.Dispose();
-                onvifDevice = null;
+                onvifClient.Dispose();
+                onvifClient = null;
             }
 
             mpegTSSettingsDialog?.Dispose();
@@ -10789,7 +10789,7 @@ namespace VideoCapture_CSharp_Demo
             edONVIFURL.Name = "edONVIFURL";
             edONVIFURL.Size = new System.Drawing.Size(541, 31);
             edONVIFURL.TabIndex = 29;
-            edONVIFURL.Text = "http://192.168.1.64/onvif/device_service";
+            edONVIFURL.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 

@@ -13,13 +13,13 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.8.1" />
     <PackageReference Include="VisioForge.DotNet.Core.FaceAI" Version="2025.0.28" />
     <PackageReference Include="VisioForge.FaceAI.Models" Version="2025.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.7.10" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.7.10" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

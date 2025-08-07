@@ -138,9 +138,8 @@ namespace HLS_Player_MB_MAUI
                     }
                     
                     // Get stream info
-                    var info =  _source.Settings.GetInfo();
-                    var videoInfo = info.VideoStreams;
-                    var audioInfo = info.AudioStreams;
+                    var videoInfo = await _source.GetVideoInfoAsync();
+                    var audioInfo = await _source.GetAudioInfoAsync();
                     
                     if (videoInfo != null && videoInfo.Count > 0)
                     {

@@ -288,11 +288,20 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 _recordEngines[id] = null;
             }
 
-            var rtspSettings = new RTSPRAWSourceSettings(new Uri(edURL.Text), cbAudioEnabled.Checked)
+            RTSPRAWSourceSettings rtspSettings;
+            try
             {
-                Login = edLogin.Text,
-                Password = edPassword.Text,
-            };
+                rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
+                    new Uri(edURL.Text),
+                    edLogin.Text,
+                    edPassword.Text,
+                    cbAudioEnabled.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to connect to RTSP stream: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             _recordEngines[id] = new RTSPRecordEngine();
             _recordEngines[id].OnError += Engine_OnError;

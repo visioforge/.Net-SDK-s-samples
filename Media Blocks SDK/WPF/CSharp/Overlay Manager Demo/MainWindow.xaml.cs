@@ -14,6 +14,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core;
 using VisioForge.Core.Types.X.Sources;
 using System.Threading;
+using SkiaSharp;
 
 namespace Overlay_Manager_Demo
 {
@@ -35,6 +36,8 @@ namespace Overlay_Manager_Demo
         private UniversalSourceBlock _fileSource;
 
         private OverlayManagerBlock _overlayManager;
+
+        private long _frameCounter = 0;
 
         public MainWindow()
         {
@@ -244,6 +247,111 @@ namespace Overlay_Manager_Demo
                 _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 lbOverlays.Items.RemoveAt(lbOverlays.SelectedIndex);
             }
+        }
+
+        private void btAddFrameCounter_Click(object sender, RoutedEventArgs e)
+        {
+            // Reset frame counter
+            _frameCounter = 0;
+
+            // Create callback overlay for frame counter
+            var frameCounterCallback = new OverlayManagerCallback
+            {
+                Name = "FrameCounter",
+                Enabled = true,
+                ZIndex = 100 // On top
+            };
+
+            // Subscribe to the OnDraw event
+            frameCounterCallback.OnDraw += (sender, e) =>
+            {
+                // Increment frame counter
+                _frameCounter++;
+
+                // Create a bitmap with the frame counter text
+                using (var bitmap = new SKBitmap(200, 50))
+                {
+                    using (var canvas = new SKCanvas(bitmap))
+                    {
+                        // Clear with semi-transparent background
+                        canvas.Clear(new SKColor(0, 0, 0, 128));
+
+                        // Draw frame counter text
+                        using (var paint = new SKPaint())
+                        {
+                            paint.Color = SKColors.White;
+                            paint.TextSize = 24;
+                            paint.IsAntialias = true;
+                            paint.Typeface = SKTypeface.FromFamilyName("Arial");
+
+                            string text = $"Frame: {_frameCounter}";
+                            canvas.DrawText(text, 10, 30, paint);
+                        }
+                    }
+
+                    // Draw the bitmap at position (10, 10)
+                    e.DrawImage(bitmap, 10, 10);
+                }
+            };
+
+            // Add to overlay manager
+            _overlayManager.Video_Overlay_Add(frameCounterCallback);
+            lbOverlays.Items.Add("[Callback] Frame Counter");
+        }
+
+        private void btAddTimeOverlay_Click(object sender, RoutedEventArgs e)
+        {
+            // Create callback overlay for time display
+            var timeOverlay = new OverlayManagerCallback
+            {
+                Name = "TimeOverlay",
+                Enabled = true,
+                ZIndex = 99,
+                Opacity = 0.9
+            };
+
+            // Subscribe to the OnDraw event
+            timeOverlay.OnDraw += (sender, e) =>
+            {
+                // Create a bitmap with the current time
+                using (var bitmap = new SKBitmap(250, 40))
+                {
+                    using (var canvas = new SKCanvas(bitmap))
+                    {
+                        // Clear with semi-transparent dark background
+                        canvas.Clear(new SKColor(0, 0, 0, 200));
+
+                        // Draw border
+                        using (var borderPaint = new SKPaint())
+                        {
+                            borderPaint.Color = SKColors.LightGray;
+                            borderPaint.Style = SKPaintStyle.Stroke;
+                            borderPaint.StrokeWidth = 2;
+                            borderPaint.IsAntialias = true;
+                            canvas.DrawRect(1, 1, bitmap.Width - 2, bitmap.Height - 2, borderPaint);
+                        }
+
+                        // Draw current time text
+                        using (var paint = new SKPaint())
+                        {
+                            paint.Color = SKColors.Yellow;
+                            paint.TextSize = 20;
+                            paint.IsAntialias = true;
+                            paint.Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
+
+                            string timeText = $"Time: {e.Timestamp:mm\\:ss\\.ff}";
+                            canvas.DrawText(timeText, 10, 25, paint);
+                        }
+                    }
+
+                    // Draw the bitmap at bottom right corner
+                    e.DrawImage(bitmap, 260, 370);
+                }
+            };
+
+            // Add to overlay manager
+            _overlayManager.Video_Overlay_Add(timeOverlay);
+            lbOverlays.Items.Add("[Callback] Time Display");
         }
     }
 }

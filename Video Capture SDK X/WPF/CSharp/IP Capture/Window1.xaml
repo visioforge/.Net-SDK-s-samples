@@ -30,7 +30,7 @@
                                 <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="350,106,0,0" VerticalAlignment="Top"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.50.64/onvif/device_service" IsEditable="True"/>
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.22/onvif/device_service" IsEditable="True"/>
                                 <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="20,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="137,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
                             </Grid>
@@ -54,7 +54,7 @@
                                 <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
-                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.50.64/onvif/device_service" VerticalAlignment="Top" Width="408"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.1.22/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="admin" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />

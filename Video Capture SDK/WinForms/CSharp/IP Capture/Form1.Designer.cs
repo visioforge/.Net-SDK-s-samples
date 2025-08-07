@@ -21,10 +21,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             {
                 components.Dispose();
 
-                if (onvifDeviceX != null)
+                if (onvifClient != null)
                 {
-                    onvifDeviceX.Dispose();
-                    onvifDeviceX = null;
+                    onvifClient.Dispose();
+                    onvifClient = null;
                 }
 
                 mpegTSSettingsDialog?.Dispose();

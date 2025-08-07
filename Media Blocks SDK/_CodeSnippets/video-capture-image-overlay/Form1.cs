@@ -66,7 +66,7 @@ namespace video_capture_image_overlay
 
             // Add image overlay
             var imageFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png");
-            var imageOverlay = new ImageOverlayBlock(new ImageOverlaySettings(imageFile) { X = 100, Y = 100 });
+            var imageOverlay = new ImageOverlayCairoBlock(new ImageOverlaySettings(imageFile) { X = 100, Y = 100 });
 
             // connect everything
             _pipeline.Connect(videoSource, imageOverlay);

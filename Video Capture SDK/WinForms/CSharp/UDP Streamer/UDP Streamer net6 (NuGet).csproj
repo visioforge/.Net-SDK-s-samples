@@ -16,11 +16,11 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.8.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.7.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.7.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.8.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.8.1" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>

@@ -7,8 +7,8 @@ Partial Class Form1
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        If onvifControl IsNot Nothing Then
-            onvifControl.Dispose()
+        If onvifClient IsNot Nothing Then
+            onvifClient.Dispose()
         End If
 
         mpegTSSettingsDialog?.Dispose()
@@ -4250,7 +4250,7 @@ Partial Class Form1
         Me.edONVIFURL.Name = "edONVIFURL"
         Me.edONVIFURL.Size = New System.Drawing.Size(487, 26)
         Me.edONVIFURL.TabIndex = 71
-        Me.edONVIFURL.Text = "http://192.168.1.200/onvif/device_service"
+        Me.edONVIFURL.Text = "http://192.168.1.22/onvif/device_service"
         '
         'edONVIFLiveVideoURL
         '

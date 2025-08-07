@@ -18,7 +18,8 @@ namespace RTSP_Preview
     using VisioForge.Core.MediaBlocks.AudioRendering;
     using VisioForge.Core.MediaBlocks.Sources;
     using VisioForge.Core.MediaBlocks.VideoRendering;
-    using VisioForge.Core.ONVIF.Legacy;
+    using VisioForge.Core.ONVIFDiscovery;
+    using VisioForge.Core.ONVIFDiscovery.Models;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI;
@@ -26,14 +27,17 @@ namespace RTSP_Preview
     using Application = System.Windows.Forms.Application;
     using Task = System.Threading.Tasks.Task;
     using Uri = System.Uri;
+    using System.Linq;
 
     public partial class Window1 : IDisposable
     {
         private Timer tmRecording = new Timer(1000);
 
-        private ONVIFDeviceX onvifDevice;
+        private ONVIFClientX onvifClient;
 
-        private ONVIFDiscoveryX _onvifDiscoveryX = new ONVIFDiscoveryX();
+        private Discovery _onvifDiscovery = new Discovery();
+        
+        private System.Threading.CancellationTokenSource _cts;
 
         private MediaBlocksPipeline _pipeline;
 
@@ -93,11 +97,10 @@ namespace RTSP_Preview
         {
             CreateEngine();
 
-            if (onvifDevice != null)
+            if (onvifClient != null)
             {
-                onvifDevice.Disconnect();
-                onvifDevice.Dispose();
-                onvifDevice = null;
+                onvifClient.Dispose();
+                onvifClient = null;
 
                 btONVIFConnect.Content = "Connect";
             }
@@ -167,11 +170,10 @@ namespace RTSP_Preview
                     btONVIFConnect.IsEnabled = false;
                     btONVIFConnect.Content = "Connecting";
 
-                    if (onvifDevice != null)
+                    if (onvifClient != null)
                     {
-                        onvifDevice.Disconnect();
-                        onvifDevice.Dispose();
-                        onvifDevice = null;
+                        onvifClient.Dispose();
+                        onvifClient = null;
                     }
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
@@ -180,30 +182,37 @@ namespace RTSP_Preview
                         return;
                     }
 
-                    onvifDevice = new ONVIFDeviceX();
-                    var result = await onvifDevice.ConnectAsync(new Uri(edONVIFURL.Text), edONVIFLogin.Text, edONVIFPassword.Text);
+                    onvifClient = new ONVIFClientX();
+                    var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
-                        onvifDevice = null;
+                        onvifClient = null;
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
-                    lbONVIFCameraInfo.Content = $"Camera name {onvifDevice.CameraName}, serial number {onvifDevice.SerialNumber}";                    
+                    lbONVIFCameraInfo.Content = $"Camera name {onvifClient.DeviceInformation?.Model}, serial number {onvifClient.DeviceInformation?.SerialNumber}";
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = onvifDevice.GetProfiles();
-                    foreach (var profile in profiles)
+                    var profiles = await onvifClient.GetProfilesAsync();
+                    if (profiles != null && profiles.Length > 0)
                     {
-                        cbONVIFProfile.Items.Add($"{profile.Name}");
-                    }
+                        foreach (var profile in profiles)
+                        {
+                            cbONVIFProfile.Items.Add($"{profile.Name}");
+                        }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-                    }
+                        if (cbONVIFProfile.Items.Count > 0)
+                        {
+                            cbONVIFProfile.SelectedIndex = 0;
+                        }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = profiles[0].RTSPUrl.ToString();
+                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
+                        if (mediaUri != null)
+                        {
+                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
+                        }
+                    }
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -221,11 +230,10 @@ namespace RTSP_Preview
             {
                 btONVIFConnect.Content = "Connect";
 
-                if (onvifDevice != null)
+                if (onvifClient != null)
                 {
-                    onvifDevice.Disconnect();
-                    onvifDevice.Dispose();
-                    onvifDevice = null;
+                    onvifClient.Dispose();
+                    onvifClient = null;
                 }
             }
         }
@@ -259,19 +267,38 @@ namespace RTSP_Preview
         {
             cbIPURL.Items.Clear();
 
-            _onvifDiscoveryX.OnDeviceFound += async (senderx, args) =>
-            {
-                await Dispatcher.InvokeAsync(() =>
-                {
-                    cbIPURL.Items.Add(args.Address);
+            _cts?.Cancel();
+            _cts = new System.Threading.CancellationTokenSource();
 
-                    if (cbIPURL.Items.Count == 1)
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await _onvifDiscovery.Discover(5, (device) =>
                     {
-                        cbIPURL.SelectedIndex = 0;
-                    }
-                });
-            };
-            _onvifDiscoveryX.Start();
+                        if (device.XAdresses?.Any() == true)
+                        {
+                            Dispatcher.Invoke(() =>
+                            {
+                                var address = device.XAdresses.FirstOrDefault();
+                                if (!string.IsNullOrEmpty(address))
+                                {
+                                    cbIPURL.Items.Add(address);
+
+                                    if (cbIPURL.Items.Count == 1)
+                                    {
+                                        cbIPURL.SelectedIndex = 0;
+                                    }
+                                }
+                            });
+                        }
+                    }, _cts.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Discovery cancelled
+                }
+            });
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -287,10 +314,10 @@ namespace RTSP_Preview
             {
                 if (disposing)
                 {
-                    if (onvifDevice != null)
+                    if (onvifClient != null)
                     {
-                        onvifDevice.Dispose();
-                        onvifDevice = null;
+                        onvifClient.Dispose();
+                        onvifClient = null;
                     }
 
                     tmRecording?.Dispose();

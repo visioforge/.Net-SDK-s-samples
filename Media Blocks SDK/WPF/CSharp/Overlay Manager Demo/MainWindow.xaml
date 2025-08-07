@@ -14,10 +14,10 @@
         <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="716,300,0,0" VerticalAlignment="Top"/>
         <Label Content="Log" HorizontalAlignment="Left" Margin="536,294,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="edLog" HorizontalAlignment="Left" Margin="536,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="98"/>
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="539,217,0,0" VerticalAlignment="Top" Width="146" ValueChanged="tbTimeline_ValueChanged"/>
-        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="703,217,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
-        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="539,259,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click" Height="25"/>
-        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="604,259,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click" Height="25"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="536,230,0,0" VerticalAlignment="Top" Width="146" ValueChanged="tbTimeline_ValueChanged"/>
+        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="700,230,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="536,259,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click" Height="25"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="594,259,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click" Height="25"/>
         <Label x:Name="label1" Content="Overlays" HorizontalAlignment="Left" Margin="536,10,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbOverlays" VerticalAlignment="Top" HorizontalAlignment="Left" Width="270" Height="96" Margin="536,36,0,0"/>
         <Button x:Name="btAddImage" Content="Add image" HorizontalAlignment="Left" Margin="536,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddImage_Click"/>
@@ -25,7 +25,9 @@
         <Button x:Name="btAddLine" Content="Add line" HorizontalAlignment="Left" Margin="724,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddLine_Click"/>
         <Button x:Name="btAddRectangle" Content="Add rectangle" HorizontalAlignment="Left" Margin="536,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddRectangle_Click"/>
         <Button x:Name="btAddCircle" Content="Add circle" HorizontalAlignment="Left" Margin="630,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddCircle_Click"/>
-        <Button x:Name="btRemove" Content="Remove" HorizontalAlignment="Left" Margin="724,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btRemove_Click"/>
+        <Button x:Name="btAddFrameCounter" Content="Add frame counter" HorizontalAlignment="Left" Margin="536,197,0,0" VerticalAlignment="Top" Width="176" Height="25" Click="btAddFrameCounter_Click"/>
+        <Button x:Name="btAddTimeOverlay" Content="Add time" HorizontalAlignment="Left" Margin="724,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddTimeOverlay_Click"/>
+        <Button x:Name="btRemove" Content="Remove" HorizontalAlignment="Left" Margin="724,197,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btRemove_Click"/>
 
 
 

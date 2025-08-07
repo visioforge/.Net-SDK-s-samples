@@ -53,9 +53,7 @@ namespace Live_Video_Compositor_Demo
 
         public MainWindow()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
                 
         private void Compositor_OnError(object sender, ErrorsEventArgs e)
@@ -752,7 +750,10 @@ namespace Live_Video_Compositor_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await _compositor.DisposeAsync();
+            if (_compositor != null)
+            {
+                await _compositor.DisposeAsync();
+            }
 
             VisioForgeX.DestroySDK();
         }
@@ -794,66 +795,6 @@ namespace Live_Video_Compositor_Demo
                 }
 
                 await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
-            }
-        }
-
-        private async void btAddFile1_Click(object sender, RoutedEventArgs e)
-        {
-            var filename = @"c:\Samples\!video.mp4";
-            var name = $"File [{filename}]";
-            var rect = new Rect(0, 0, 640, 480);
-            var settings = await UniversalSourceSettings.CreateAsync(filename);
-            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
-            src.ZOrder = (uint)_compositor.Input_Count();
-
-            if (await _compositor.Input_AddAsync(src))
-            {
-                lbSources.Items.Add(name);
-                lbSources.SelectedIndex = lbSources.Items.Count - 1;
-            }
-            else
-            {
-                src.Dispose();
-            }
-        }
-
-        private async void btAddFile2_Click(object sender, RoutedEventArgs e)
-        {
-            var filename = @"c:\Samples\anime.mp4";
-            var name = $"File [{filename}]";
-            var rect = new Rect(640, 0, 1280, 480);
-            var settings = await UniversalSourceSettings.CreateAsync(filename);
-            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
-            src.ZOrder = (uint)_compositor.Input_Count();
-
-            if (await _compositor.Input_AddAsync(src))
-            {
-                lbSources.Items.Add(name);
-                lbSources.SelectedIndex = lbSources.Items.Count - 1;
-            }
-            else
-            {
-                src.Dispose();
-            }
-        }
-
-        private async void btAddFile3_Click(object sender, RoutedEventArgs e)
-        {
-            var filename = @"c:\Samples\BigBuckBunny.mp4";
-            var name = $"File [{filename}]";
-            var rect = new Rect(0, 480, 640, 960);
-            var settings = await UniversalSourceSettings.CreateAsync(filename);
-            var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, autostart: true, live: false);
-            src.ZOrder = (uint)_compositor.Input_Count();
-
-            if (await _compositor.Input_AddAsync(src))
-            {
-                lbSources.Items.Add(name);
-                lbSources.SelectedIndex = lbSources.Items.Count - 1;
-            }
-            else
-            {
-                src.Dispose();
             }
         }
     }

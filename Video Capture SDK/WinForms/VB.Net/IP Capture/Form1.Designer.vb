@@ -10,9 +10,9 @@ Partial Class Form1
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
 
-            If (onvifControl IsNot Nothing) Then
-                onvifControl.Dispose()
-                onvifControl = Nothing
+            If (onvifClient IsNot Nothing) Then
+                onvifClient.Dispose()
+                onvifClient = Nothing
             End If
 
             _mp4SettingsDialog?.Dispose()
@@ -527,7 +527,7 @@ Partial Class Form1
         Me.edONVIFURL.Name = "edONVIFURL"
         Me.edONVIFURL.Size = New System.Drawing.Size(487, 26)
         Me.edONVIFURL.TabIndex = 77
-        Me.edONVIFURL.Text = "http://192.168.1.200/onvif/device_service"
+        Me.edONVIFURL.Text = "http://192.168.1.22/onvif/device_service"
         '
         'lbONVIFCameraInfo
         '

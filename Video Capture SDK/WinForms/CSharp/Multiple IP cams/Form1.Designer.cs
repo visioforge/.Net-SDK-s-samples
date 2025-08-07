@@ -125,7 +125,7 @@ namespace multiple_ap_cams
             this.edURL1.Name = "edURL1";
             this.edURL1.Size = new System.Drawing.Size(260, 20);
             this.edURL1.TabIndex = 7;
-            this.edURL1.Text = "http://192.168.1.64/onvif/device_service";
+            this.edURL1.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // edURL2
             // 
@@ -133,7 +133,7 @@ namespace multiple_ap_cams
             this.edURL2.Name = "edURL2";
             this.edURL2.Size = new System.Drawing.Size(260, 20);
             this.edURL2.TabIndex = 9;
-            this.edURL2.Text = "http://192.168.1.64/onvif/device_service";
+            this.edURL2.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // label2
             // 

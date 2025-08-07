@@ -17,7 +17,10 @@ namespace IP_Capture
     using System.Windows.Input;
     using VisioForge.Core;
     using VisioForge.Core.Helpers;
-    using VisioForge.Core.ONVIF.Legacy;
+    using VisioForge.Core.ONVIFX;
+    using VisioForge.Core.ONVIFDiscovery;
+    using VisioForge.Core.ONVIFDiscovery.Models;
+    using System.Linq;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
@@ -59,15 +62,9 @@ namespace IP_Capture
 
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-        private ONVIFControl onvifControl;
+        private ONVIFClientX onvifClient;
 
-        private ONVIFPTZRanges onvifPtzRanges;
-
-        private float onvifPtzX;
-
-        private float onvifPtzY;
-
-        private float onvifPtzZoom;
+        // PTZ ranges will be handled differently in the new API
 
         private VideoCaptureCore VideoCapture1;
         private bool disposedValue;
@@ -230,11 +227,10 @@ namespace IP_Capture
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl != null)
+            if (onvifClient != null)
             {
-                await onvifControl.DisconnectAsync();
-                onvifControl.Dispose();
-                onvifControl = null;
+                onvifClient.Dispose();
+                onvifClient = null;
 
                 btONVIFConnect.Content = "Connect";
             }
@@ -491,11 +487,10 @@ namespace IP_Capture
                     btONVIFConnect.IsEnabled = false;
                     btONVIFConnect.Content = "Connecting";
 
-                    if (onvifControl != null)
+                    if (onvifClient != null)
                     {
-                        await onvifControl.DisconnectAsync();
-                        onvifControl.Dispose();
-                        onvifControl = null;
+                        onvifClient.Dispose();
+                        onvifClient = null;
                     }
 
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
@@ -504,44 +499,49 @@ namespace IP_Capture
                         return;
                     }
 
-                    onvifControl = new ONVIFControl();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    onvifClient = new ONVIFClientX();
+                    var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
-                        onvifControl = null;
+                        onvifClient = null;
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
 
-                    var deviceInfo = await onvifControl.GetDeviceInformationAsync();
-                    if (deviceInfo != null)
+                    if (onvifClient.DeviceInformation != null)
                     {
-                        lbONVIFCameraInfo.Content = $"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}";
+                        lbONVIFCameraInfo.Content = $"Model {onvifClient.DeviceInformation.Model}, Firmware {onvifClient.DeviceInformation.FirmwareVersion}";
                     }
 
                     cbONVIFProfile.Items.Clear();
-                    var profiles = await onvifControl.GetProfilesAsync();
-                    foreach (var profile in profiles)
+                    var profiles = await onvifClient.GetProfilesAsync();
+                    if (profiles != null && profiles.Length > 0)
                     {
-                        cbONVIFProfile.Items.Add($"{profile.Name}");
-                    }
+                        foreach (var profile in profiles)
+                        {
+                            cbONVIFProfile.Items.Add($"{profile.Name}");
+                        }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-                    }
+                        if (cbONVIFProfile.Items.Count > 0)
+                        {
+                            cbONVIFProfile.SelectedIndex = 0;
+                        }
 
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = await onvifControl.GetVideoURLAsync();
+                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
+                        if (mediaUri != null)
+                        {
+                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
+                        }
+                    }
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
 
-                    onvifPtzRanges = await onvifControl.PTZ_GetRangesAsync();
-                    await onvifControl.PTZ_SetAbsoluteAsync(0, 0, 0);
-
-                    onvifPtzX = 0;
-                    onvifPtzY = 0;
-                    onvifPtzZoom = 0;
+                    // Initialize PTZ to center position
+                    if (profiles != null && profiles.Length > 0)
+                    {
+                        await onvifClient.AbsoluteMoveAsync(profiles[0].token, 0, 0, 0, 1.0f, 1.0f, 1.0f);
+                    }
 
                     btONVIFConnect.Content = "Disconnect";
                 }
@@ -555,126 +555,146 @@ namespace IP_Capture
             {
                 btONVIFConnect.Content = "Connect";
 
-                if (onvifControl != null)
+                if (onvifClient != null)
                 {
-                    await onvifControl.DisconnectAsync();
-                    onvifControl.Dispose();
-                    onvifControl = null;
+                    onvifClient.Dispose();
+                    onvifClient = null;
                 }
             }
         }
 
-        private void btONVIFRight_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFRight_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30;
-            onvifPtzX = onvifPtzX - step;
-
-            if (onvifPtzX < onvifPtzRanges.MinX)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzX = onvifPtzRanges.MinX;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, 0.5f, 0f, 0f);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
-        private void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
         {
-            onvifControl?.PTZ_SetAbsolute(0, 0, 0);
+            if (onvifClient != null)
+            {
+                var profiles = await onvifClient.GetProfilesAsync();
+                if (profiles != null && profiles.Length > 0)
+                {
+                    await onvifClient.GotoHomePositionAsync(profiles[0].token);
+                }
+            }
         }
 
-        private void btONVIFLeft_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFLeft_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxX - onvifPtzRanges.MinX) / 30;
-            onvifPtzX = onvifPtzX + step;
-
-            if (onvifPtzX > onvifPtzRanges.MaxX)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzX = onvifPtzRanges.MaxX;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, -0.5f, 0, 0f);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
-        private void btONVIFUp_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFUp_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30;
-            onvifPtzY = onvifPtzY - step;
-
-            if (onvifPtzY < onvifPtzRanges.MinY)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzY = onvifPtzRanges.MinY;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, 0f, 0.5f, 0.0f);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
-        private void btONVIFDown_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFDown_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxY - onvifPtzRanges.MinY) / 30;
-            onvifPtzY = onvifPtzY + step;
-
-            if (onvifPtzY > onvifPtzRanges.MaxY)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzY = onvifPtzRanges.MaxY;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, 0, -0.5f, 0);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
-        private void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100;
-            onvifPtzZoom = onvifPtzZoom + step;
-
-            if (onvifPtzZoom > onvifPtzRanges.MaxZoom)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzZoom = onvifPtzRanges.MaxZoom;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, 0, 0, 0.5f);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
-        private void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
+        private async void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifControl == null || onvifPtzRanges == null)
+            if (onvifClient == null)
             {
                 return;
             }
 
-            float step = (onvifPtzRanges.MaxZoom - onvifPtzRanges.MinZoom) / 100;
-            onvifPtzZoom = onvifPtzZoom - step;
-
-            if (onvifPtzZoom < onvifPtzRanges.MinZoom)
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
             {
-                onvifPtzZoom = onvifPtzRanges.MinZoom;
+                await onvifClient.ContinuousMoveAsync(profiles[0].token, 0, 0, -0.5f);
             }
 
-            onvifControl.PTZ_SetAbsolute(onvifPtzX, onvifPtzY, onvifPtzZoom);
+            await Task.Delay(500); // Move for 500ms
+
+            await onvifClient.StopMoveAsync(profiles[0].token, true, true);
+        }
+
+        private async Task StopPtzMovementAsync()
+        {
+            if (onvifClient == null)
+            {
+                return;
+            }
+
+            var profiles = await onvifClient.GetProfilesAsync();
+            if (profiles != null && profiles.Length > 0)
+            {
+                await onvifClient.StopMoveAsync(profiles[0].token, true, true);
+            }
         }
 
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1115,10 +1135,10 @@ namespace IP_Capture
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects)
-                    if (onvifControl != null)
+                    if (onvifClient != null)
                     {
-                        onvifControl.Dispose();
-                        onvifControl = null;
+                        onvifClient.Dispose();
+                        onvifClient = null;
                     }
 
                     mpegTSSettingsDialog?.Dispose();
