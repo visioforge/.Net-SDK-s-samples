@@ -131,7 +131,7 @@ namespace RTSP_Capture_Original
 
                 // Create RTSP settings with the provided credentials
                 // The second parameter (true) enables audio if available in the stream
-                var rtspSettings = new RTSPRAWSourceSettings(new Uri(rtspUrl), true);
+                var rtspSettings = await RTSPRAWSourceSettings.CreateAsync(new Uri(rtspUrl), username, password, audioEnabled: true);
                 rtspSettings.Login = username;
                 rtspSettings.Password = password;
 
