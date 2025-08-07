@@ -263,7 +263,7 @@ namespace Overlay_Manager_Demo
             };
 
             // Subscribe to the OnDraw event
-            frameCounterCallback.OnDraw += (sender, e) =>
+            frameCounterCallback.OnDraw += (senderx, ex) =>
             {
                 // Increment frame counter
                 _frameCounter++;
@@ -290,7 +290,7 @@ namespace Overlay_Manager_Demo
                     }
 
                     // Draw the bitmap at position (10, 10)
-                    e.DrawImage(bitmap, 10, 10);
+                    ex.DrawImage(bitmap, 10, 10);
                 }
             };
 
@@ -311,7 +311,7 @@ namespace Overlay_Manager_Demo
             };
 
             // Subscribe to the OnDraw event
-            timeOverlay.OnDraw += (sender, e) =>
+            timeOverlay.OnDraw += (senderx, ex) =>
             {
                 // Create a bitmap with the current time
                 using (var bitmap = new SKBitmap(250, 40))
@@ -339,13 +339,13 @@ namespace Overlay_Manager_Demo
                             paint.IsAntialias = true;
                             paint.Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
 
-                            string timeText = $"Time: {e.Timestamp:mm\\:ss\\.ff}";
+                            string timeText = $"Time: {ex.Timestamp:mm\\:ss\\.ff}";
                             canvas.DrawText(timeText, 10, 25, paint);
                         }
                     }
 
                     // Draw the bitmap at bottom right corner
-                    e.DrawImage(bitmap, 260, 370);
+                    ex.DrawImage(bitmap, 260, 370);
                 }
             };
 
