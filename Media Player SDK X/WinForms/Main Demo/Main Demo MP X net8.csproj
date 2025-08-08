@@ -56,12 +56,12 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.8.2" />
-    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.8.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.8.2" />
   </ItemGroup>
 </Project>
