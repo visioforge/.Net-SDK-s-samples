@@ -1,0 +1,37 @@
+<Window x:Class="Live_Video_Compositor_Demo.NDISourceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Select NDI Source"
+        Height="250"
+        Width="450"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Available NDI Sources:" Margin="0,0,0,5"/>
+        
+        <Button Grid.Row="1" Name="btRefresh" Content="Refresh NDI Sources" Click="btRefresh_Click" HorizontalAlignment="Left" Margin="0,0,0,10" Padding="10,5"/>
+        
+        <ListBox Grid.Row="2" Name="lbNDISources" Margin="0,0,0,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="btOK" Content="OK" Width="75" Margin="0,0,10,0" Click="btOK_Click" IsDefault="True"/>
+            <Button Name="btCancel" Content="Cancel" Width="75" Click="btCancel_Click" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

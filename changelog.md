@@ -9,6 +9,14 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.8.4
+
+* [X-engines] Added NDI source support in Live Video Compositor
+
+## 2025.8.2
+
+* [ALL] New ONVIF manager code in VisioForge.Core.ONVIFX. Full implementation of various ONVIF services including Device Management, Media v1/v2, PTZ, Events, Imaging, Analytics, Recording, and Replay services.
+
 ## 2025.8.1
 
 * [Media Player SDK] Added PauseOnStop property to MediaPlayerCoreX

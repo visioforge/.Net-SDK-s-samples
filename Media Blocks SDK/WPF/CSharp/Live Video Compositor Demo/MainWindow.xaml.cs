@@ -27,6 +27,7 @@ using VisioForge.Core.UI.WPF.Dialogs.Decklink;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Helpers;
+using VisioForge.Core.GStreamer;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -567,6 +568,97 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        private async Task AddNDISourceAsync()
+        {
+            var dlg = new NDISourceDialog();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true && dlg.SelectedSource != null)
+            {
+                var rect = new Rect(
+                    Convert.ToInt32(edRectLeft.Text),
+                    Convert.ToInt32(edRectTop.Text),
+                    Convert.ToInt32(edRectRight.Text),
+                    Convert.ToInt32(edRectBottom.Text));
+
+                // Show progress while retrieving NDI source info
+                this.IsEnabled = false;
+                var originalTitle = this.Title;
+                this.Title = $"{originalTitle} - Connecting to NDI source...";
+
+                try
+                {
+                    // Create a temporary context for NDI source info retrieval
+                    var context = new ContextX();
+                    var ndiSettings = await NDISourceSettings.CreateAsync(context, dlg.SelectedSource);
+                    
+                    if (ndiSettings == null || !ndiSettings.IsValid())
+                    {
+                        MessageBox.Show(this, "Selected NDI source is not valid or not available. Please ensure the NDI source is active and streaming.", "NDI Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                var name = $"NDI [{dlg.SelectedSource.Name}]";
+                var sourceBlock = new NDISourceBlock(ndiSettings);
+                
+                var info = ndiSettings.GetInfo();
+                if (info != null && info.VideoStreams.Count > 0)
+                {
+                    var videoInfo = info.GetVideoInfo();
+                    AudioInfoX audioInfo = null;
+                    
+                    if (info.AudioStreams.Count > 0)
+                    {
+                        audioInfo = info.GetAudioInfo();
+                    }
+
+                    if (audioInfo != null)
+                    {
+                        var src = new LVCVideoAudioInput(name, _compositor, sourceBlock, videoInfo, audioInfo, rect, autostart: true, live: true);
+                        src.ZOrder = (uint)_compositor.Input_Count();
+                        
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            lbSources.Items.Add(name);
+                            lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                        }
+                        else
+                        {
+                            src.Dispose();
+                        }
+                    }
+                    else
+                    {
+                        var src = new LVCVideoInput(name, _compositor, sourceBlock, videoInfo, rect, autostart: true);
+                        src.ZOrder = (uint)_compositor.Input_Count();
+                        
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            lbSources.Items.Add(name);
+                            lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                        }
+                        else
+                        {
+                            src.Dispose();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this, "NDI source does not contain video streams.", "NDI Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, $"Error connecting to NDI source: {ex.Message}", "NDI Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                    this.Title = originalTitle;
+                }
+            }
+        }
+
         private void btAddSource_Click(object sender, RoutedEventArgs e)
         {
             var ctx = new ContextMenu();
@@ -619,6 +711,12 @@ namespace Live_Video_Compositor_Demo
                 await AddDecklinkVideoSourceAsync();
             };
 
+            var miNDISource = new MenuItem() { Header = "NDI source" };
+            miNDISource.Click += async (senderm, args) =>
+            {
+                await AddNDISourceAsync();
+            };
+
             ctx.Items.Add(miScreen);
             ctx.Items.Add(miCamera);
             ctx.Items.Add(miFile);
@@ -629,6 +727,7 @@ namespace Live_Video_Compositor_Demo
             ctx.Items.Add(miAudioVirtual);
             ctx.Items.Add(new Separator());
             ctx.Items.Add(miDecklinkSource);
+            ctx.Items.Add(miNDISource);
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
