@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.8.6
+
+* [X-engines] Updated RTSP RAW source block. Added WaitForKeyframe and SyncAudioWithKeyframe properties. Block can wait for keyframes because some cameras may not send them as first frames.
+
 ## 2025.8.4
 
 * [X-engines] Added NDI source support in Live Video Compositor

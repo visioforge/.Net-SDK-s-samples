@@ -12,6 +12,20 @@ namespace PhotoCapture
         public MainPage()
         {
             InitializeComponent();
+
+            Loaded += MainPage_Loaded;
+        }
+
+        private async void MainPage_Loaded(object sender, EventArgs e)
+        {
+            // Ask for permissions
+#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
+            await RequestCameraPermissionAsync();
+#endif
+
+#if __IOS__ && !__MACCATALYST__
+            //RequestPhotoPermission();
+#endif
         }
 
         private void MainPage_LayoutChanged(object? sender, EventArgs e)
@@ -27,17 +41,19 @@ namespace PhotoCapture
         {
             this.LayoutChanged += MainPage_LayoutChanged;
 
-#if __ANDROID__ || __IOS__
+#if __ANDROID__ || __IOS__ || WINDOWS
             await RequestCameraPermissionAsync();
 #endif
-
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 _photoCaptureCore = (photoCaptureView.Handler as PhotoCaptureViewHandler).Core;
-                _photoCaptureCore.Camera = _photoCaptureCore.Cameras[PhotoConfig.CurrentCamera];
-
-                await _photoCaptureCore.StartCameraAsync();
+                
+                if (_photoCaptureCore != null && _photoCaptureCore.Cameras != null && _photoCaptureCore.Cameras.Count > 0)
+                {
+                    _photoCaptureCore.Camera = _photoCaptureCore.Cameras[PhotoConfig.CurrentCamera];
+                    await _photoCaptureCore.StartCameraAsync();
+                }
             });
         }
 
@@ -93,16 +109,21 @@ namespace PhotoCapture
 
         private async void btPhoto_Clicked(object sender, EventArgs e)
         {
+#if WINDOWS
+            // Windows doesn't require photo permission for saving to Pictures library
+            await photoCaptureView.SavePhotoAsync($"{Guid.NewGuid()}.jpg");
+#else
             var status = await Permissions.RequestAsync<Permissions.Photos>();
             if (status == PermissionStatus.Granted)
             {
                 // Access granted
-                await _photoCaptureCore.SavePhotoAsync($"{Guid.NewGuid()}.jpg");
+                await photoCaptureView.SavePhotoAsync($"{Guid.NewGuid()}.jpg");
             }
             else
             {
                 // Access denied
             }
+#endif
         }
     }
 

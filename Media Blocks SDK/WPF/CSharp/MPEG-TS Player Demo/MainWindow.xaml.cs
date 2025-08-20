@@ -18,6 +18,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.MediaInfo;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Special;
 
 
 namespace MPEG_TS_Player_Demo
@@ -46,6 +47,12 @@ namespace MPEG_TS_Player_Demo
         private MPEGTSDemuxBlock _demux;
 
         private MediaInfoReaderX _infoReader;
+
+        private SourceSwitchBlock _videoSwitch;
+
+        private SourceSwitchBlock _audioSwitch;
+
+        private MediaFileInfo _mediaInfo;
 
         public MainWindow()
         {
@@ -106,18 +113,21 @@ namespace MPEG_TS_Player_Demo
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
 
-            // read media information
+            // read media information with deep discovery to get all streams
             _infoReader = new MediaInfoReaderX(_pipeline.GetContext());
             await _infoReader.OpenAsync(edFilename.Text);
+            _mediaInfo = _infoReader.Info;
 
             // create the file source
             _fileSource = new BasicFileSourceBlock(edFilename.Text);
 
-            bool videoFound = _infoReader.Info.VideoStreams.Any();
-            bool audioFound = _infoReader.Info.AudioStreams.Any();
+            bool videoFound = _mediaInfo.VideoStreams.Any();
+            bool audioFound = _mediaInfo.AudioStreams.Any();
+            int videoStreamCount = _mediaInfo.VideoStreams.Count;
+            int audioStreamCount = _mediaInfo.AudioStreams.Count;
 
-            // create MPEG-TS demux
-            _demux = new MPEGTSDemuxBlock(renderVideo: videoFound, renderAudio: audioFound);
+            // create MPEG-TS demux with MediaFileInfo for multiple stream support
+            _demux = new MPEGTSDemuxBlock(_mediaInfo, renderVideo: videoFound, renderAudio: audioFound);
             if (cbProgramStream.SelectedIndex != -1)
             {
                 _demux.Settings.ProgramNumber = Convert.ToInt32(cbProgramStream.Text);
@@ -134,8 +144,26 @@ namespace MPEG_TS_Player_Demo
                 // create video renderer
                 _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-                // connect demux to video decoder
-                _pipeline.Connect(_demux.VideoOutput, _videoDecoder.Input);
+                if (videoStreamCount > 1)
+                {
+                    // create source switch for multiple video streams
+                    var videoSwitchSettings = new SourceSwitchSettings { PadsCount = videoStreamCount };
+                    _videoSwitch = new SourceSwitchBlock(videoSwitchSettings);
+
+                    // connect all video outputs from demux to switch inputs
+                    for (int i = 0; i < videoStreamCount && i < _demux.VideoOutputs.Count; i++)
+                    {
+                        _pipeline.Connect(_demux.VideoOutputs[i], _videoSwitch.Inputs[i]);
+                    }
+
+                    // connect switch output to video decoder
+                    _pipeline.Connect(_videoSwitch.Output, _videoDecoder.Input);
+                }
+                else
+                {
+                    // single video stream - connect directly
+                    _pipeline.Connect(_demux.VideoOutput, _videoDecoder.Input);
+                }
 
                 // connect video decoder to video renderer
                 _pipeline.Connect(_videoDecoder.Output, _videoRenderer.Input);
@@ -149,8 +177,26 @@ namespace MPEG_TS_Player_Demo
                 // create audio renderer
                 _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
 
-                // connect demux to audio decoder
-                _pipeline.Connect(_demux.AudioOutput, _audioDecoder.Input);
+                if (audioStreamCount > 1)
+                {
+                    // create source switch for multiple audio streams
+                    var audioSwitchSettings = new SourceSwitchSettings { PadsCount = audioStreamCount };
+                    _audioSwitch = new SourceSwitchBlock(audioSwitchSettings);
+
+                    // connect all audio outputs from demux to switch inputs
+                    for (int i = 0; i < audioStreamCount && i < _demux.AudioOutputs.Count; i++)
+                    {
+                        _pipeline.Connect(_demux.AudioOutputs[i], _audioSwitch.Inputs[i]);
+                    }
+
+                    // connect switch output to audio decoder
+                    _pipeline.Connect(_audioSwitch.Output, _audioDecoder.Input);
+                }
+                else
+                {
+                    // single audio stream - connect directly
+                    _pipeline.Connect(_demux.AudioOutput, _audioDecoder.Input);
+                }
 
                 // connect audio decoder to audio renderer
                 _pipeline.Connect(_audioDecoder.Output, _audioRenderer.Input);
@@ -161,34 +207,67 @@ namespace MPEG_TS_Player_Demo
         {
             Dispatcher.Invoke((Action)(() =>
             {
-                var videoStreams = e.Item1;
-                cbVideoStream.Items.Clear();
-
-                for (int i = 0; i < videoStreams.Length; i++)
+                // Use MediaFileInfo for accurate stream information
+                if (_mediaInfo != null)
                 {
-                    cbVideoStream.Items.Add($"Video stream {i}");
+                    cbVideoStream.Items.Clear();
+                    for (int i = 0; i < _mediaInfo.VideoStreams.Count; i++)
+                    {
+                        cbVideoStream.Items.Add($"Video stream {i + 1}");
+                    }
+
+                    if (cbVideoStream.Items.Count > 0)
+                    {
+                        cbVideoStream.Tag = true;
+                        cbVideoStream.SelectedIndex = 0;
+                        cbVideoStream.Tag = false;
+                    }
+
+                    cbAudioStream.Items.Clear();
+                    for (int i = 0; i < _mediaInfo.AudioStreams.Count; i++)
+                    {
+                        cbAudioStream.Items.Add($"Audio stream {i + 1}");
+                    }
+
+                    if (cbAudioStream.Items.Count > 0)
+                    {
+                        cbAudioStream.Tag = true;
+                        cbAudioStream.SelectedIndex = 0;
+                        cbAudioStream.Tag = false;
+                    }
                 }
-
-                if (cbVideoStream.Items.Count > 0)
+                else
                 {
-                    cbVideoStream.Tag = true;
-                    cbVideoStream.SelectedIndex = 0;
-                    cbVideoStream.Tag = false;
-                }
+                    // Fallback to event data if MediaFileInfo is not available
+                    var videoStreams = e.Item1;
+                    cbVideoStream.Items.Clear();
 
-                var audioStreams = e.Item2;
-                cbAudioStream.Items.Clear();
+                    for (int i = 0; i < videoStreams.Length; i++)
+                    {
+                        cbVideoStream.Items.Add($"Video stream {i + 1}");
+                    }
 
-                for (int i = 0; i < audioStreams.Length; i++)
-                {
-                    cbAudioStream.Items.Add($"Audio stream {i}");
-                }
+                    if (cbVideoStream.Items.Count > 0)
+                    {
+                        cbVideoStream.Tag = true;
+                        cbVideoStream.SelectedIndex = 0;
+                        cbVideoStream.Tag = false;
+                    }
 
-                if (cbAudioStream.Items.Count > 0)
-                {
-                    cbAudioStream.Tag = true;
-                    cbAudioStream.SelectedIndex = 0;
-                    cbAudioStream.Tag = false;
+                    var audioStreams = e.Item2;
+                    cbAudioStream.Items.Clear();
+
+                    for (int i = 0; i < audioStreams.Length; i++)
+                    {
+                        cbAudioStream.Items.Add($"Audio stream {i + 1}");
+                    }
+
+                    if (cbAudioStream.Items.Count > 0)
+                    {
+                        cbAudioStream.Tag = true;
+                        cbAudioStream.SelectedIndex = 0;
+                        cbAudioStream.Tag = false;
+                    }
                 }
             }));
         }
@@ -225,6 +304,13 @@ namespace MPEG_TS_Player_Demo
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
+
+            // Clean up switches
+            _videoSwitch?.Dispose();
+            _videoSwitch = null;
+            _audioSwitch?.Dispose();
+            _audioSwitch = null;
+            _mediaInfo = null;
         }
 
         private void DestroyEngine()
@@ -237,6 +323,13 @@ namespace MPEG_TS_Player_Demo
                 _pipeline.Dispose();
                 _pipeline = null;
             }
+
+            // Clean up switches
+            _videoSwitch?.Dispose();
+            _videoSwitch = null;
+            _audioSwitch?.Dispose();
+            _audioSwitch = null;
+            _mediaInfo = null;
         }
 
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
@@ -344,12 +437,32 @@ namespace MPEG_TS_Player_Demo
 
         private void cbVideoStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if (cbVideoStream.SelectedIndex == -1 || (bool)cbVideoStream.Tag)
+            {
+                return;
+            }
 
+            // Switch to the selected video stream
+            if (_videoSwitch != null && _pipeline != null)
+            {
+                _videoSwitch.Switch(cbVideoStream.SelectedIndex);
+                edLog.Text = edLog.Text + $"Switched to video stream {cbVideoStream.SelectedIndex + 1}" + Environment.NewLine;
+            }
         }
 
         private void cbAudioStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if (cbAudioStream.SelectedIndex == -1 || (bool)cbAudioStream.Tag)
+            {
+                return;
+            }
 
+            // Switch to the selected audio stream
+            if (_audioSwitch != null && _pipeline != null)
+            {
+                _audioSwitch.Switch(cbAudioStream.SelectedIndex);
+                edLog.Text = edLog.Text + $"Switched to audio stream {cbAudioStream.SelectedIndex + 1}" + Environment.NewLine;
+            }
         }
     }
 }

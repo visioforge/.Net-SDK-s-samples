@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="481"/>
-        <wpf:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="358" Margin="10,60,0,0" VerticalAlignment="Top" Width="506"/>
+        <wpf:VideoView x:Name="VideoView1" Margin="10,60,321,38"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="496,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
         <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="716,300,0,0" VerticalAlignment="Top"/>
         <Label Content="Log" HorizontalAlignment="Left" Margin="536,294,0,0" VerticalAlignment="Top"/>
