@@ -1,29 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>vfpgen</RootNamespace>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <PlatformTarget>x64</PlatformTarget>
-    <AssemblyTitle>vfpgen</AssemblyTitle>
-    <Company>VisioForge</Company>
-    <Product>vfpgen</Product>
-    <Copyright>Copyright (c) 2025</Copyright>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="CommandLineParser" Version="2.9.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.8.5" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.8.7" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="visioforge_main_icon.ico" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>vfpgen</RootNamespace>
+		<TargetFrameworks>net9.0-windows;net9.0-macos</TargetFrameworks>
+		<PlatformTarget>x64</PlatformTarget>
+		<AssemblyTitle>vfpgen</AssemblyTitle>
+		<Company>VisioForge</Company>
+		<Product>vfpgen</Product>
+		<Copyright>Copyright (c) 2025</Copyright>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
+		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.8.2" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+		<PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.8.7" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="VisioForge.DotNet.Core" Version="2025.8.7" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Content Include="visioforge_main_icon.ico" />
+	</ItemGroup>
 </Project>

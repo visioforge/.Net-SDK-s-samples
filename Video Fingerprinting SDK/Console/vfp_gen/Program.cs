@@ -7,7 +7,6 @@ namespace vfpgen
 {
     using CommandLine;
     using System.IO;
-    using System.Management;
     using System.Threading.Tasks;
     using VisioForge.Core;
     using VisioForge.Core.Types;
