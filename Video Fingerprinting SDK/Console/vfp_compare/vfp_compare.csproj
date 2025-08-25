@@ -20,9 +20,9 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.8.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting.x64" Version="2025.8.6" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.8.7" />
   </ItemGroup>
 </Project>

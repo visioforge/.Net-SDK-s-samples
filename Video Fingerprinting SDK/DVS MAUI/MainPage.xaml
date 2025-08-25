@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DVS_MAUI.MainPage"
+             Title="VisioForge Video Fingerprinting SDK - Video Duplicates Finder">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Source Folders Section -->
+        <Frame Grid.Row="0" Grid.Column="0" Padding="10" Margin="5">
+            <VerticalStackLayout>
+                <Label Text="Source folders" FontAttributes="Bold" Margin="0,0,0,5"/>
+                <CollectionView x:Name="lbSourceFolders" HeightRequest="150" BackgroundColor="#F5F5F5">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding}" Padding="5" TextColor="Black"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <HorizontalStackLayout Margin="0,5,0,0">
+                    <Button x:Name="btAddFolder" Text="Add" Clicked="btAddFolder_Click" WidthRequest="80"/>
+                    <Button x:Name="btRemoveFolder" Text="Remove" Clicked="btRemoveFolder_Click" WidthRequest="80" Margin="10,0,0,0"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Settings Section -->
+        <Frame Grid.Row="1" Grid.Column="0" Padding="10" Margin="5">
+            <ScrollView>
+                <VerticalStackLayout>
+                    <Label Text="Settings" FontAttributes="Bold" Margin="0,0,0,5"/>
+                    
+                    <Label Text="Formats to analyze" Margin="0,5,0,0"/>
+                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" Margin="0,5,0,10">
+                        <CheckBox x:Name="cbFormatAVI" IsChecked="True" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="AVI" Grid.Row="0" Grid.Column="0" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatWMV" IsChecked="True" Grid.Row="0" Grid.Column="1"/>
+                        <Label Text="WMV" Grid.Row="0" Grid.Column="1" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMP4" IsChecked="True" Grid.Row="0" Grid.Column="2"/>
+                        <Label Text="MP4" Grid.Row="0" Grid.Column="2" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMPG" IsChecked="True" Grid.Row="0" Grid.Column="3"/>
+                        <Label Text="MPG" Grid.Row="0" Grid.Column="3" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMOV" IsChecked="True" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="MOV" Grid.Row="1" Grid.Column="0" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatTS" IsChecked="True" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="TS" Grid.Row="1" Grid.Column="1" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatFLV" IsChecked="True" Grid.Row="1" Grid.Column="2"/>
+                        <Label Text="FLV" Grid.Row="1" Grid.Column="2" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMKV" IsChecked="True" Grid.Row="1" Grid.Column="3"/>
+                        <Label Text="MKV" Grid.Row="1" Grid.Column="3" Margin="30,0,0,0" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Label Text="Indexing time" Margin="0,5,0,0"/>
+                    <Picker x:Name="cbIndexingTime">
+                        <Picker.Items>
+                            <x:String>3 seconds</x:String>
+                            <x:String>5 seconds</x:String>
+                            <x:String>10 seconds</x:String>
+                            <x:String>30 seconds</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="Skip first" Margin="0,10,0,0"/>
+                    <Picker x:Name="cbSkipFirst">
+                        <Picker.Items>
+                            <x:String>0 seconds</x:String>
+                            <x:String>10 seconds</x:String>
+                            <x:String>60 seconds</x:String>
+                            <x:String>180 seconds</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="Matching options" FontAttributes="Bold" Margin="0,15,0,5"/>
+                    
+                    <Label Text="Sensitivity" Margin="0,5,0,0"/>
+                    <HorizontalStackLayout>
+                        <Slider x:Name="slSensitivity" Maximum="100" Value="30" WidthRequest="250" ValueChanged="slSensitivity_ValueChanged"/>
+                        <Label x:Name="lbSensitivity" Text="30" Margin="10,0,0,0" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Max shift" Margin="0,10,0,0"/>
+                    <HorizontalStackLayout>
+                        <Slider x:Name="slMaxShift" Maximum="10" Value="0" WidthRequest="250" ValueChanged="slMaxShift_ValueChanged"/>
+                        <Label x:Name="lbMaxShift" Text="0" Margin="10,0,0,0" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Frame>
+
+        <!-- Results Section -->
+        <Frame Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Padding="10" Margin="5">
+            <VerticalStackLayout>
+                <Label Text="Results" FontAttributes="Bold" Margin="0,0,0,5"/>
+                <ScrollView>
+                    <CollectionView x:Name="lbResults" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="5" Margin="2">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <CheckBox x:Name="Checked" IsChecked="{Binding IsChecked}" VerticalOptions="Center"/>
+                                        <Frame BorderColor="LightGray" Padding="2" CornerRadius="4" VerticalOptions="Center">
+                                            <Image Source="{Binding ThumbnailSource}" WidthRequest="120" HeightRequest="90" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Text="{Binding FilePath}" VerticalOptions="Center" LineBreakMode="TailTruncation" MaximumWidthRequest="400"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+                <Button x:Name="btDelete" Text="Delete Selected" Clicked="btDelete_Click" Margin="0,10,0,0" HorizontalOptions="End"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Progress and Search Button -->
+        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Margin="5" Spacing="10">
+            <ProgressBar x:Name="pbProgress" WidthRequest="250" HeightRequest="20" VerticalOptions="Center"/>
+            <Button x:Name="btSearch" Text="Search" Clicked="btSearch_Click" WidthRequest="100"/>
+        </HorizontalStackLayout>
+
+        <!-- Error Log -->
+        <Frame Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Padding="10" Margin="5">
+            <VerticalStackLayout>
+                <Label Text="Error Log" FontAttributes="Bold" Margin="0,0,0,5"/>
+                <Editor x:Name="edErrors" HeightRequest="100" IsReadOnly="True" BackgroundColor="#F5F5F5"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Status Bar -->
+        <Label x:Name="lbStatus" Grid.Row="3" Grid.Column="0" Text="Ready" Margin="10,5" VerticalOptions="Center"/>
+    </Grid>
+
+</ContentPage>

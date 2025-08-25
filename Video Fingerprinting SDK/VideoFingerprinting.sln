@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vfp_gen", "Console\vfp_gen\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vfp_search", "Console\vfp_search\vfp_search.csproj", "{224D3002-F613-6B60-454B-9DAD0C71BBB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVS MAUI", "DVS MAUI\DVS MAUI.csproj", "{1502F3D0-48FC-5488-0A6C-611FAF651A33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMT MAUI", "MMT MAUI\MMT MAUI.csproj", "{DAC47853-CA54-E868-2EA9-337DF4BEC184}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,18 @@ Global
 		{224D3002-F613-6B60-454B-9DAD0C71BBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{224D3002-F613-6B60-454B-9DAD0C71BBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{224D3002-F613-6B60-454B-9DAD0C71BBB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1502F3D0-48FC-5488-0A6C-611FAF651A33}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

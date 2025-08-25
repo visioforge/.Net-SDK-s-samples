@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
     <!-- Note for MacCatalyst:
 		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
 		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
@@ -27,7 +27,7 @@
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
     <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <ItemGroup>
@@ -52,7 +52,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.8.6" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.8.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.8.7" />
   </ItemGroup>
 </Project>

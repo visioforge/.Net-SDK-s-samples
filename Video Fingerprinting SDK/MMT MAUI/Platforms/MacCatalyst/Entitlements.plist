@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <!-- See https://aka.ms/maui-publish-app-store#add-entitlements for more information about adding entitlements.-->
+    <dict>
+        <!-- App Sandbox must be enabled to distribute a MacCatalyst app through the Mac App Store. -->
+        <key>com.apple.security.app-sandbox</key>
+        <true/>
+        <!-- When App Sandbox is enabled, this value is required to open outgoing network connections. -->
+        <key>com.apple.security.network.client</key>
+        <true/>
+        <!-- Allow read access to user-selected files -->
+        <key>com.apple.security.files.user-selected.read-only</key>
+        <true/>
+        <!-- Allow read/write access to user-selected files -->
+        <key>com.apple.security.files.user-selected.read-write</key>
+        <true/>
+        <!-- Allow access to Downloads folder -->
+        <key>com.apple.security.files.downloads.read-write</key>
+        <true/>
+        <!-- Allow access to Movies folder for video files -->
+        <key>com.apple.security.assets.movies.read-only</key>
+        <true/>
+    </dict>
+</plist>
+

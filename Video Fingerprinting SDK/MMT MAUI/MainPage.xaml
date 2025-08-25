@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vf="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             xmlns:local="clr-namespace:MMT_MAUI"
+             xmlns:controls="clr-namespace:MMT_MAUI.Controls"
+             x:Class="MMT_MAUI.MainPage"
+             Title="">
+
+    <!-- Hidden controls used programmatically in code-behind -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Broadcast tab controls -->
+            <VerticalStackLayout x:Key="BroadcastControls" x:Name="lbBroadcastFolders" Padding="5" />
+            <Button x:Key="BroadcastFileButton" x:Name="btAddBroadcastFile" Text="Add file" Clicked="btAddBroadcastFile_Click" />
+            <Button x:Key="BroadcastFolderButton" x:Name="btAddBroadcastFolder" Text="Add folder" Clicked="btAddBroadcastFolder_Click" />
+            <Button x:Key="BroadcastClearButton" x:Name="btClearBroadcast" Text="Clear list" Clicked="btClearBroadcast_Click" />
+            
+            <!-- Ad samples tab controls -->
+            <VerticalStackLayout x:Key="AdControls" x:Name="lbAdFolders" Padding="5" />
+            <Button x:Key="AdFileButton" x:Name="btAddAdFile" Text="Add file" Clicked="btAddAdFile_Click" />
+            <Button x:Key="AdFolderButton" x:Name="btAddAdFolder" Text="Add folder" Clicked="btAddAdFolder_Click" />
+            <Button x:Key="AdClearButton" x:Name="btClearAds" Text="Clear list" Clicked="btClearAds_Click" />
+            
+            <!-- Settings tab controls -->
+            <Slider x:Key="DifferenceSlider" x:Name="slDifference" 
+                    Minimum="200" Maximum="1000" Value="500" WidthRequest="250"
+                    ValueChanged="slDifference_ValueChanged" />
+            <Label x:Key="DifferenceLabel" x:Name="lbDifference" Text="500" TextColor="Black" />
+            <CheckBox x:Key="DebugCheckBox" x:Name="cbDebug" />
+            
+            <!-- Ignored areas tab controls -->
+            <Entry x:Key="IgnoredLeft" x:Name="edIgnoredAreaLeft" Text="20" TextColor="Black" />
+            <Entry x:Key="IgnoredRight" x:Name="edIgnoredAreaRight" Text="50" TextColor="Black" />
+            <Entry x:Key="IgnoredTop" x:Name="edIgnoredAreaTop" Text="20" TextColor="Black" />
+            <Entry x:Key="IgnoredBottom" x:Name="edIgnoredAreaBottom" Text="50" TextColor="Black" />
+            <Button x:Key="IgnoredAddButton" x:Name="btIgnoredAreaAdd" Text="Add" Clicked="btIgnoredAreaAdd_Click" />
+            <VerticalStackLayout x:Key="IgnoredAreasList" x:Name="lbIgnoredAreas" Padding="5" />
+            <Button x:Key="IgnoredRemoveButton" x:Name="btIgnoredAreasRemoveItem" Text="Remove selected" Clicked="btIgnoredAreasRemoveItem_Click" />
+            <Button x:Key="IgnoredRemoveAllButton" x:Name="btIgnoredAreasRemoveAll" Text="Remove all" Clicked="btIgnoredAreasRemoveAll_Click" />
+            
+            <!-- DB tab controls -->
+            <Label x:Key="DBLocationLabel" x:Name="lbDBLocation" Text="DB location: " TextColor="Black"/>
+            <VerticalStackLayout x:Key="DBList" x:Name="lbDB" Padding="5" />
+            <Button x:Key="DBClearButton" x:Name="btDBClear" Text="Clear" Clicked="btDBClear_Click" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="10,-35,10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="550" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Tab Control using Custom TabView -->
+        <controls:CustomTabView x:Name="tabView" 
+                               Grid.Row="1" Grid.Column="0" 
+                               Margin="0,10,0,0"
+                               TabBarPlacement="Top"
+                               TabBarBackground="White"
+                               IndicatorBackground="#007ACC" />
+
+        <!-- Results List -->
+        <CollectionView Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
+                      x:Name="lvResults" 
+                      Margin="10,40,0,0"
+                      BackgroundColor="White">
+            <CollectionView.Header>
+                <Grid BackgroundColor="LightGray" Padding="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Ad file" FontAttributes="Bold" TextColor="Black" />
+                    <Label Grid.Column="1" Text="Position" FontAttributes="Bold" TextColor="Black" />
+                    <Label Grid.Column="2" Text="Broadcast file" FontAttributes="Bold" TextColor="Black" />
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:ResultsViewModel">
+                    <Grid Padding="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Sample}" TextColor="Black" />
+                        <Label Grid.Column="1" Text="{Binding Position}" TextColor="Black" />
+                        <Label Grid.Column="2" Text="{Binding DumpFile}" TextColor="Black" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Control buttons -->
+        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="10" Margin="0,10,0,0">
+            <ProgressBar x:Name="pbProgress" WidthRequest="420" HeightRequest="20" />
+            <Button x:Name="btStart" Text="Start" Clicked="btStart_Click" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="10" 
+                              HorizontalOptions="End" Margin="0,10,10,0">
+            <Button x:Name="btSaveResults" Text="Save results" Clicked="btSaveResults_Click" />
+        </HorizontalStackLayout>
+
+        <!-- Status bar -->
+        <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+               BackgroundColor="LightGray" Padding="5">
+            <Label x:Name="lbStatus" Text="" TextColor="Black" />
+        </Frame>
+    </Grid>
+
+</ContentPage>
