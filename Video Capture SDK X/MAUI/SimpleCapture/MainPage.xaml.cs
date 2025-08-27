@@ -108,12 +108,57 @@ namespace SimpleCapture
             }
         }
 
+#if __ANDROID__
+        private async Task RequestStoragePermissionAsync()
+        {
+            // For Android 13+ (API 33+), we need to request media permissions
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Tiramisu)
+            {
+                // Android 13+ uses granular media permissions
+                var result = await Permissions.RequestAsync<Permissions.Media>();
+                
+                if (result != PermissionStatus.Granted)
+                {
+                    if (Permissions.ShouldShowRationale<Permissions.Media>())
+                    {
+                        if (await DisplayAlert(null, "You need to allow access to save videos", "OK", "Cancel"))
+                            await RequestStoragePermissionAsync();
+                    }
+                }
+            }
+            else if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+            {
+                // Android 10-12 - No need for storage permissions when using app-specific directories
+                // MediaStore access is granted by default
+                return;
+            }
+            else
+            {
+                // Android 9 and below - Request storage permissions
+                var result = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                
+                if (result != PermissionStatus.Granted)
+                {
+                    if (Permissions.ShouldShowRationale<Permissions.StorageWrite>())
+                    {
+                        if (await DisplayAlert(null, "You need to allow storage access to save videos", "OK", "Cancel"))
+                            await RequestStoragePermissionAsync();
+                    }
+                }
+            }
+        }
+#endif
+
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
             // Ask for permissions
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
             await RequestCameraPermissionAsync();
             await RequestMicPermissionAsync();
+#endif
+
+#if __ANDROID__
+            await RequestStoragePermissionAsync();
 #endif
 
 #if __IOS__ && !__MACCATALYST__
@@ -391,7 +436,39 @@ namespace SimpleCapture
         {
             DateTime now = DateTime.Now;
 #if __ANDROID__
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            // For Android 10+ (API 29+), we use app-specific external storage
+            // which doesn't require special permissions and works with scoped storage
+            string filename;
+            
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+            {
+                // Android 10+ - Use app's external files directory for videos
+                // This will be accessible by the app and can be added to gallery
+                var context = Android.App.Application.Context;
+                var moviesDir = context.GetExternalFilesDir(Android.OS.Environment.DirectoryMovies);
+                
+                if (moviesDir != null && !moviesDir.Exists())
+                {
+                    moviesDir.Mkdirs();
+                }
+                
+                filename = Path.Combine(moviesDir?.AbsolutePath ?? context.FilesDir.AbsolutePath, 
+                    $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            }
+            else
+            {
+                // Android 9 and below - Try to use public DCIM directory
+                var dcimDir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
+                var cameraDir = new Java.IO.File(dcimDir, "Camera");
+                
+                // Create the directory if it doesn't exist
+                if (!cameraDir.Exists())
+                {
+                    cameraDir.Mkdirs();
+                }
+                
+                filename = Path.Combine(cameraDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            }
 #elif __IOS__ && !__MACCATALYST__
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");

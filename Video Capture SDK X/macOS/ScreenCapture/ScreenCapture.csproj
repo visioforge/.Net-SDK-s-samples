@@ -18,7 +18,7 @@
     <LinkMode>None</LinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.8.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.8.9" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />

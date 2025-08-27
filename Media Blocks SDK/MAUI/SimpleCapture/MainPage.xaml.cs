@@ -81,12 +81,7 @@ namespace SimpleCapture
         {
             _pipeline = new MediaBlocksPipeline();
 
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
+            IVideoView vv = videoView.GetVideoView();
 
             _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = false };
 
@@ -419,7 +414,39 @@ namespace SimpleCapture
         {
             DateTime now = DateTime.Now;
 #if __ANDROID__
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            // For Android 10+ (API 29+), we use app-specific external storage
+            // which doesn't require special permissions and works with scoped storage
+            string filename;
+            
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.Q)
+            {
+                // Android 10+ - Use app's external files directory for videos
+                // This will be accessible by the app and can be added to gallery
+                var context = Android.App.Application.Context;
+                var moviesDir = context.GetExternalFilesDir(Android.OS.Environment.DirectoryMovies);
+                
+                if (moviesDir != null && !moviesDir.Exists())
+                {
+                    moviesDir.Mkdirs();
+                }
+                
+                filename = Path.Combine(moviesDir?.AbsolutePath ?? context.FilesDir.AbsolutePath, 
+                    $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            }
+            else
+            {
+                // Android 9 and below - Try to use public DCIM directory
+                var dcimDir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
+                var cameraDir = new Java.IO.File(dcimDir, "Camera");
+                
+                // Create the directory if it doesn't exist
+                if (!cameraDir.Exists())
+                {
+                    cameraDir.Mkdirs();
+                }
+                
+                filename = Path.Combine(cameraDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+            }
 #elif __IOS__ && !__MACCATALYST__
             var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
                 "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");

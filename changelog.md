@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.8.9
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with Snapshot_GetSK call on Android (wrong colorspace)
+
 ## 2025.8.6
 
 * [X-engines] Updated RTSP RAW source block. Added WaitForKeyframe and SyncAudioWithKeyframe properties. Block can wait for keyframes because some cameras may not send them as first frames.
