@@ -23,7 +23,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.8.9" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.0" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

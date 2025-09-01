@@ -45,7 +45,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.8.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.9.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

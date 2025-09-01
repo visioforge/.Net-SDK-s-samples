@@ -37,7 +37,7 @@
     <PackageReference Include="System.Reactive" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.8.9" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.8.9" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.9.0" />
   </ItemGroup>
 </Project>
