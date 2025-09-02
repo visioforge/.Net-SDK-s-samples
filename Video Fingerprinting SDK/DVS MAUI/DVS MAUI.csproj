@@ -46,13 +46,13 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.9.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.9.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.9.1" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -61,7 +61,7 @@
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.8.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.9.1" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />

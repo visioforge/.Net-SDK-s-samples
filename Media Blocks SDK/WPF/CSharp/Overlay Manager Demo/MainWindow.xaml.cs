@@ -15,6 +15,8 @@ using VisioForge.Core;
 using VisioForge.Core.Types.X.Sources;
 using System.Threading;
 using SkiaSharp;
+using System.Collections.Generic;
+using VisioForge.Core.Types;
 
 namespace Overlay_Manager_Demo
 {
@@ -39,6 +41,8 @@ namespace Overlay_Manager_Demo
 
         private long _frameCounter = 0;
 
+        private List<OverlayManagerVideo> _videoOverlays = new List<OverlayManagerVideo>();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -156,12 +160,24 @@ namespace Overlay_Manager_Demo
 
             await _pipeline.StartAsync();
 
+            // Start any video overlays that were added before the main pipeline started
+            foreach (var videoOverlay in _videoOverlays)
+            {
+                videoOverlay.Play();
+            }
+
             _timer.Start();
         }
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
+
+            // Pause all video overlays when stopping main pipeline
+            foreach (var videoOverlay in _videoOverlays)
+            {
+                videoOverlay.Pause();
+            }
 
             if (_pipeline != null)
             {
@@ -177,6 +193,13 @@ namespace Overlay_Manager_Demo
 
             Thread.Sleep(100);
 
+            // Dispose video overlays
+            foreach (var videoOverlay in _videoOverlays)
+            {
+                videoOverlay?.Dispose();
+            }
+            _videoOverlays.Clear();
+
             if (_pipeline != null)
             {
                 _pipeline.OnStop -= Pipeline_OnStop;
@@ -191,7 +214,10 @@ namespace Overlay_Manager_Demo
 
         private void btAddImage_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog();
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif"
+            };
             if (dlg.ShowDialog() == true)
             {
                 if (dlg.FileName.ToLowerInvariant().EndsWith(".gif"))
@@ -244,6 +270,19 @@ namespace Overlay_Manager_Demo
         {
             if (lbOverlays.SelectedIndex != -1)
             {
+                // Check if this is a video overlay and dispose it properly
+                var selectedItem = lbOverlays.Items[lbOverlays.SelectedIndex] as string;
+                if (selectedItem != null && selectedItem.StartsWith("[Video]"))
+                {
+                    // Find and dispose the video overlay
+                    var videoOverlay = _videoOverlays.Find(v => selectedItem.Contains(v.Name));
+                    if (videoOverlay != null)
+                    {
+                        _videoOverlays.Remove(videoOverlay);
+                        videoOverlay.Dispose();
+                    }
+                }
+
                 _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 lbOverlays.Items.RemoveAt(lbOverlays.SelectedIndex);
             }
@@ -352,6 +391,186 @@ namespace Overlay_Manager_Demo
             // Add to overlay manager
             _overlayManager.Video_Overlay_Add(timeOverlay);
             lbOverlays.Items.Add("[Callback] Time Display");
+        }
+
+        private void btAddVideo_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv, *.wmv)|*.mp4;*.avi;*.mov;*.mkv;*.wmv|All files (*.*)|*.*",
+                Title = "Select Video File for Overlay"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                // Show options dialog
+                var optionsWindow = new VideoOverlayOptionsWindow();
+                if (optionsWindow.ShowDialog() == true)
+                {
+                    // Create video overlay with specified options
+                    var videoOverlay = new OverlayManagerVideo(
+                        source: dlg.FileName,
+                        x: optionsWindow.X,
+                        y: optionsWindow.Y,
+                        width: optionsWindow.VideoWidth,
+                        height: optionsWindow.VideoHeight
+                    )
+                    {
+                        Loop = optionsWindow.Loop,
+                        Opacity = optionsWindow.Opacity,
+                        StretchMode = optionsWindow.VideoWidth > 0 && optionsWindow.VideoHeight > 0 
+                            ? optionsWindow.StretchMode 
+                            : OverlayManagerImageStretchMode.None,  // Use None only if no dimensions specified
+                        ZIndex = 5,
+                        Name = $"VideoOverlay_{System.IO.Path.GetFileName(dlg.FileName)}"
+                    };
+
+                    // Add shadow if enabled
+                    if (optionsWindow.EnableShadow)
+                    {
+                        videoOverlay.Shadow = new OverlayManagerShadowSettings
+                        {
+                            Enabled = true,
+                            Color = SKColors.Black,
+                            Opacity = 0.5,
+                            BlurRadius = 5,
+                            Depth = 5,
+                            Direction = 45
+                        };
+                    }
+
+                    // Check if main pipeline is already running
+                    bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+                    
+                    // Initialize the video overlay
+                    // Initialize with autoStart based on main pipeline state
+                    bool initialized = videoOverlay.Initialize(autoStart: mainPipelineRunning);
+                    
+                    if (initialized)
+                    {
+                        // Keep track of video overlays for proper disposal
+                        _videoOverlays.Add(videoOverlay);
+
+                        // Add to overlay manager
+                        _overlayManager.Video_Overlay_Add(videoOverlay);
+                        lbOverlays.Items.Add($"[Video] {videoOverlay.Name}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to initialize video overlay. Please check if the file is valid and GStreamer has the required codecs.", 
+                            "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        videoOverlay.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void btAddPictureInPicture_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv)|*.mp4;*.avi;*.mov;*.mkv|All files (*.*)|*.*",
+                Title = "Select Video for Picture-in-Picture"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                // Create a small PiP video in the corner
+                var pipVideo = new OverlayManagerVideo(
+                    source: dlg.FileName,
+                    x: 20,     // 20px from left
+                    y: 20,     // 20px from top
+                    width: 240,  // Small size
+                    height: 135  // 16:9 aspect ratio
+                )
+                {
+                    Loop = true,
+                    Opacity = 0.9,
+                    StretchMode = OverlayManagerImageStretchMode.Letterbox,
+                    ZIndex = 100,  // On top of everything
+                    Name = $"PiP_{System.IO.Path.GetFileName(dlg.FileName)}",
+                    
+                    // Add border effect with shadow
+                    Shadow = new OverlayManagerShadowSettings
+                    {
+                        Enabled = true,
+                        Color = SKColors.DarkGray,
+                        Opacity = 0.7,
+                        BlurRadius = 8,
+                        Depth = 3,
+                        Direction = 45
+                    }
+                };
+
+                // Check if main pipeline is already running
+                bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+                
+                // Initialize the PiP video overlay
+                bool initialized = pipVideo.Initialize(autoStart: mainPipelineRunning);
+                
+                if (initialized)
+                {
+                    // Keep track of video overlays
+                    _videoOverlays.Add(pipVideo);
+
+                    // Add to overlay manager
+                    _overlayManager.Video_Overlay_Add(pipVideo);
+                    lbOverlays.Items.Add($"[Video-PiP] {pipVideo.Name}");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to initialize PiP video overlay.", "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    pipVideo.Dispose();
+                }
+            }
+        }
+
+        private void btAddStreamOverlay_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a simple input dialog for stream URL
+            var inputWindow = new StreamUrlInputWindow();
+            if (inputWindow.ShowDialog() == true)
+            {
+                string streamUrl = inputWindow.StreamUrl;
+                
+                // Create stream overlay
+                var streamOverlay = new OverlayManagerVideo(
+                    source: streamUrl,
+                    x: 400,
+                    y: 50,
+                    width: 320,
+                    height: 240
+                )
+                {
+                    Loop = false,  // Don't loop streams
+                    Opacity = 1.0,
+                    StretchMode = OverlayManagerImageStretchMode.Letterbox,
+                    ZIndex = 10,
+                    Name = $"Stream_{new Uri(streamUrl).Host}"
+                };
+
+                // Check if main pipeline is already running
+                bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+                
+                // Initialize the stream overlay
+                bool initialized = streamOverlay.Initialize(autoStart: mainPipelineRunning);
+                
+                if (initialized)
+                {
+                    // Keep track of video overlays
+                    _videoOverlays.Add(streamOverlay);
+
+                    // Add to overlay manager
+                    _overlayManager.Video_Overlay_Add(streamOverlay);
+                    lbOverlays.Items.Add($"[Stream] {streamOverlay.Name}");
+                }
+                else
+                {
+                    MessageBox.Show($"Failed to initialize stream overlay. Please check if the URL is accessible: {streamUrl}", 
+                        "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    streamOverlay.Dispose();
+                }
+            }
         }
     }
 }

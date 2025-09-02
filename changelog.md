@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.9.1
+
+* [Video Fingerprinting SDK] Improved support for flipped videos
+
 ## 2025.8.9
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Resolved issue with Snapshot_GetSK call on Android (wrong colorspace)

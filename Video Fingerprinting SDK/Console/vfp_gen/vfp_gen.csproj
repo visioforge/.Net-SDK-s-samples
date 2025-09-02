@@ -23,10 +23,10 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.8.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.9.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.9.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

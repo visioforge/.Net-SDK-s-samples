@@ -11,23 +11,26 @@
         <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="481"/>
         <wpf:VideoView x:Name="VideoView1" Margin="10,60,321,38"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="496,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
-        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="716,300,0,0" VerticalAlignment="Top"/>
-        <Label Content="Log" HorizontalAlignment="Left" Margin="536,294,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edLog" HorizontalAlignment="Left" Margin="536,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="98"/>
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="536,230,0,0" VerticalAlignment="Top" Width="146" ValueChanged="tbTimeline_ValueChanged"/>
-        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="700,230,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
-        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="536,259,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click" Height="25"/>
-        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="594,259,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click" Height="25"/>
+        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="716,284,0,0" VerticalAlignment="Top"/>
+        <Label Content="Log" HorizontalAlignment="Left" Margin="536,314,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edLog" HorizontalAlignment="Left" Margin="536,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="78" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="536,259,0,0" VerticalAlignment="Top" Width="146" ValueChanged="tbTimeline_ValueChanged"/>
+        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="700,259,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="536,284,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click" Height="25"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="594,284,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click" Height="25"/>
         <Label x:Name="label1" Content="Overlays" HorizontalAlignment="Left" Margin="536,10,0,0" VerticalAlignment="Top"/>
         <ListBox x:Name="lbOverlays" VerticalAlignment="Top" HorizontalAlignment="Left" Width="270" Height="96" Margin="536,36,0,0"/>
         <Button x:Name="btAddImage" Content="Add image" HorizontalAlignment="Left" Margin="536,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddImage_Click"/>
         <Button x:Name="btAddText" Content="Add text" HorizontalAlignment="Left" Margin="630,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddText_Click"/>
-        <Button x:Name="btAddLine" Content="Add line" HorizontalAlignment="Left" Margin="724,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddLine_Click"/>
-        <Button x:Name="btAddRectangle" Content="Add rectangle" HorizontalAlignment="Left" Margin="536,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddRectangle_Click"/>
-        <Button x:Name="btAddCircle" Content="Add circle" HorizontalAlignment="Left" Margin="630,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddCircle_Click"/>
-        <Button x:Name="btAddFrameCounter" Content="Add frame counter" HorizontalAlignment="Left" Margin="536,197,0,0" VerticalAlignment="Top" Width="176" Height="25" Click="btAddFrameCounter_Click"/>
-        <Button x:Name="btAddTimeOverlay" Content="Add time" HorizontalAlignment="Left" Margin="724,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddTimeOverlay_Click"/>
-        <Button x:Name="btRemove" Content="Remove" HorizontalAlignment="Left" Margin="724,197,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btRemove_Click"/>
+        <Button x:Name="btAddLine" Content="Line" HorizontalAlignment="Left" Margin="724,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddLine_Click"/>
+        <Button x:Name="btAddRectangle" Content="Rectangle" HorizontalAlignment="Left" Margin="536,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddRectangle_Click"/>
+        <Button x:Name="btAddCircle" Content="Circle" HorizontalAlignment="Left" Margin="601,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddCircle_Click"/>
+        <Button x:Name="btAddVideo" Content="Video" HorizontalAlignment="Left" Margin="666,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddVideo_Click" ToolTip="Add video file overlay"/>
+        <Button x:Name="btAddStream" Content="Stream" HorizontalAlignment="Left" Margin="731,167,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btAddStreamOverlay_Click" ToolTip="Add RTSP/HTTP stream overlay"/>
+        <Button x:Name="btAddPiP" Content="PiP" HorizontalAlignment="Left" Margin="536,197,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddPictureInPicture_Click" ToolTip="Add Picture-in-Picture"/>
+        <Button x:Name="btAddFrameCounter" Content="Frame Counter" HorizontalAlignment="Left" Margin="601,197,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btAddFrameCounter_Click"/>
+        <Button x:Name="btAddTimeOverlay" Content="Time" HorizontalAlignment="Left" Margin="706,197,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btAddTimeOverlay_Click"/>
+        <Button x:Name="btRemove" Content="Remove Selected" HorizontalAlignment="Left" Margin="536,227,0,0" VerticalAlignment="Top" Width="270" Height="25" Click="btRemove_Click" FontWeight="Bold"/>
 
 
 
