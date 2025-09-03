@@ -1,29 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows</TargetFramework>
-		<UseWindowsForms>true</UseWindowsForms>
-		<LangVersion>latest</LangVersion>
-		<Nullable>disable</Nullable>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x64</PlatformTarget>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
-		<PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-		<None Update="gaussian_blur_*.glsl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.8.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="gaussian_blur_*.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

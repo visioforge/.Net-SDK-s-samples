@@ -18,7 +18,7 @@
     <LinkMode>None</LinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.9.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.9.2" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.2.15" />

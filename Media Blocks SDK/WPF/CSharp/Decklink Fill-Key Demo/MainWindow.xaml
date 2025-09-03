@@ -1,0 +1,214 @@
+﻿<Window x:Class="DecklinkFillKeyDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DecklinkFillKeyDemo" 
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Decklink Fill+Key Broadcast Demo" Height="650" Width="1200" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Preview Area -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+
+            <!-- Video Background Preview -->
+            <GroupBox Grid.Row="0" Header="Video Background Preview" Margin="10,10,10,5">
+                <wpf:VideoView x:Name="VideoViewBackground" />
+            </GroupBox>
+
+            <!-- Graphics Overlay Preview -->
+            <GroupBox Grid.Row="1" Header="Graphics Overlay Preview (UserControl)" Margin="10,5,10,5">
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <Grid>
+                        <Grid.Background>
+                            <DrawingBrush TileMode="Tile" Viewport="0,0,20,20" ViewportUnits="Absolute">
+                                <DrawingBrush.Drawing>
+                                    <GeometryDrawing>
+                                        <GeometryDrawing.Geometry>
+                                            <GeometryGroup>
+                                                <RectangleGeometry Rect="0,0,10,10"/>
+                                                <RectangleGeometry Rect="10,10,10,10"/>
+                                            </GeometryGroup>
+                                        </GeometryDrawing.Geometry>
+                                        <GeometryDrawing.Brush>
+                                            <SolidColorBrush Color="#FFF0F0F0"/>
+                                        </GeometryDrawing.Brush>
+                                    </GeometryDrawing>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Grid.Background>
+                        <Viewbox x:Name="OverlayViewbox">
+                            <!-- UserControl will be added here dynamically -->
+                        </Viewbox>
+                    </Grid>
+                </Border>
+            </GroupBox>
+
+            <!-- Control Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                <Button x:Name="btStart" Content="Start Broadcast" Width="100" Click="btStart_Click" VerticalAlignment="Center" />
+                <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click" VerticalAlignment="Center" IsEnabled="False" />
+                <TextBlock Margin="20,0,0,0" Text="00:00:00" x:Name="lbTime" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" />
+                <TextBlock Margin="20,0,0,0" x:Name="lbStatus" Text="Ready" VerticalAlignment="Center" FontSize="12" Foreground="Green" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Settings Panel -->
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <!-- Decklink Configuration -->
+            <TabItem Header="Decklink Setup">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <Label Content="Decklink Output Device" FontWeight="Bold"/>
+                        <ComboBox x:Name="cbDecklinkDevice" Width="360" Margin="0,5,0,0"/>
+                        <Button x:Name="btRefreshDevices" Content="Refresh Devices" Width="120" HorizontalAlignment="Left" Margin="0,5,0,0" Click="btRefreshDevices_Click"/>
+
+                        <Label Content="Video Mode" FontWeight="Bold" Margin="0,15,0,0"/>
+                        <ComboBox x:Name="cbVideoMode" Width="360" SelectedIndex="0">
+                            <ComboBoxItem>HD1080p25 (1920x1080 @ 25fps)</ComboBoxItem>
+                            <ComboBoxItem>HD1080p30 (1920x1080 @ 30fps)</ComboBoxItem>
+                            <ComboBoxItem>HD1080p50 (1920x1080 @ 50fps)</ComboBoxItem>
+                            <ComboBoxItem>HD1080p60 (1920x1080 @ 60fps)</ComboBoxItem>
+                            <ComboBoxItem>HD1080i50 (1920x1080 @ 50i)</ComboBoxItem>
+                            <ComboBoxItem>HD1080i60 (1920x1080 @ 60i)</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="Keyer Settings" FontWeight="Bold" Margin="0,15,0,0"/>
+                        <CheckBox x:Name="cbEnableKeyer" Content="Enable Fill+Key Output" IsChecked="True" Margin="0,5,0,0" Checked="cbEnableKeyer_Checked" Unchecked="cbEnableKeyer_Checked"/>
+                        <Label Content="Keyer Level (0-255)"/>
+                        <Slider x:Name="slKeyerLevel" Minimum="0" Maximum="255" Value="255" Width="360" TickFrequency="10" IsSnapToTickEnabled="True"/>
+                        <TextBlock Text="{Binding ElementName=slKeyerLevel, Path=Value, StringFormat=Level: {0:F0}}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+
+                        <Label Content="Video Format" FontWeight="Bold" Margin="0,15,0,0"/>
+                        <ComboBox x:Name="cbVideoFormat" Width="360" SelectedIndex="2" SelectionChanged="cbVideoFormat_SelectionChanged">
+                            <ComboBoxItem>YUV 8-bit</ComboBoxItem>
+                            <ComboBoxItem>YUV 10-bit (Broadcast Quality)</ComboBoxItem>
+                            <ComboBoxItem>ARGB 8-bit (Required for Fill+Key)</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <TextBlock Margin="0,10,10,0" TextWrapping="Wrap" Foreground="DarkBlue" FontStyle="Italic">
+                            <Bold>Fill+Key Mode:</Bold> When enabled with ARGB format, uses External keyer mode.
+                            This sends the Fill signal to the selected device and the Key (alpha) signal to the next device.
+                            For example: Device 0 = Fill, Device 1 = Key.
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Graphics Content -->
+            <TabItem Header="Graphics Content">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <Label Content="Lower Third Settings" FontWeight="Bold"/>
+                        
+                        <Label Content="Title Text" Margin="0,10,0,0"/>
+                        <TextBox x:Name="tbTitle" Text="BREAKING NEWS" Width="360" FontSize="14"/>
+                        
+                        <Label Content="Subtitle Text" Margin="0,10,0,0"/>
+                        <TextBox x:Name="tbSubtitle" Text="Live broadcast system demonstration" Width="360" FontSize="12" TextWrapping="Wrap" Height="40"/>
+
+                        <Label Content="Position" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cbPosition" Width="360" SelectedIndex="0">
+                            <ComboBoxItem>Bottom Left</ComboBoxItem>
+                            <ComboBoxItem>Bottom Center</ComboBoxItem>
+                            <ComboBoxItem>Bottom Right</ComboBoxItem>
+                            <ComboBoxItem>Top Left</ComboBoxItem>
+                            <ComboBoxItem>Top Center</ComboBoxItem>
+                            <ComboBoxItem>Top Right</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="Animation" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cbAnimation" Width="360" SelectedIndex="0">
+                            <ComboBoxItem>None</ComboBoxItem>
+                            <ComboBoxItem>Slide In</ComboBoxItem>
+                            <ComboBoxItem>Fade In</ComboBoxItem>
+                            <ComboBoxItem>Wipe</ComboBoxItem>
+                        </ComboBox>
+
+                        <CheckBox x:Name="cbShowClock" Content="Show Clock" Margin="0,15,0,0"/>
+                        <CheckBox x:Name="cbShowLogo" Content="Show Logo" Margin="0,10,0,0"/>
+                        
+                        <Button x:Name="btUpdateGraphics" Content="Update Graphics" Width="120" HorizontalAlignment="Left" Margin="0,20,0,0" Click="btUpdateGraphics_Click"/>
+                        <Button x:Name="btToggleGraphics" Content="Show/Hide Graphics" Width="120" HorizontalAlignment="Left" Margin="0,10,0,0" Click="btToggleGraphics_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Video Background Source -->
+            <TabItem Header="Background Source">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <Label Content="Background Video Source" FontWeight="Bold"/>
+                        
+                        <RadioButton x:Name="rbNoBackground" Content="No Background (Graphics Only)" IsChecked="True" Margin="0,10,0,0"/>
+                        <RadioButton x:Name="rbFileBackground" Content="Video File" Margin="0,10,0,0"/>
+                        <RadioButton x:Name="rbDecklinkInput" Content="Decklink Input" Margin="0,10,0,0"/>
+                        <RadioButton x:Name="rbTestPattern" Content="Test Pattern" Margin="0,10,0,0"/>
+
+                        <!-- File Source -->
+                        <GroupBox Header="File Source" Margin="0,15,0,0" IsEnabled="{Binding ElementName=rbFileBackground, Path=IsChecked}">
+                            <StackPanel>
+                                <TextBox x:Name="edVideoFile" Width="320" Text="" Margin="0,5,0,0"/>
+                                <Button x:Name="btSelectVideoFile" Content="Browse..." Width="80" HorizontalAlignment="Left" Margin="0,5,0,0" Click="btSelectVideoFile_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Decklink Input -->
+                        <GroupBox Header="Decklink Input" Margin="0,15,0,0" IsEnabled="{Binding ElementName=rbDecklinkInput, Path=IsChecked}">
+                            <StackPanel>
+                                <ComboBox x:Name="cbDecklinkInput" Width="340" Margin="0,5,0,0"/>
+                                <ComboBox x:Name="cbInputMode" Width="340" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Advanced Settings -->
+            <TabItem Header="Advanced">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                        <Label Content="Performance" FontWeight="Bold"/>
+                        <Label Content="Frame Rate"/>
+                        <ComboBox x:Name="cbFrameRate" Width="360" SelectedIndex="0">
+                            <ComboBoxItem>25 fps (PAL)</ComboBoxItem>
+                            <ComboBoxItem>30 fps (NTSC)</ComboBoxItem>
+                            <ComboBoxItem>50 fps</ComboBoxItem>
+                            <ComboBoxItem>60 fps</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="Buffer Size (frames)" Margin="0,10,0,0"/>
+                        <Slider x:Name="slBufferSize" Minimum="1" Maximum="10" Value="5" Width="360" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <TextBlock Text="{Binding ElementName=slBufferSize, Path=Value, StringFormat=Buffer: {0:F0} frames}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+
+                        <Label Content="Alpha Handling" FontWeight="Bold" Margin="0,20,0,0"/>
+                        <CheckBox x:Name="cbPremultipliedAlpha" Content="Use Pre-multiplied Alpha" IsChecked="False" Margin="0,5,0,0"/>
+                        <CheckBox x:Name="cbStraightAlpha" Content="Convert to Straight Alpha" IsChecked="True" Margin="0,5,0,0"/>
+
+                        <Label Content="Debugging" FontWeight="Bold" Margin="0,20,0,0"/>
+                        <CheckBox x:Name="cbDebugMode" Content="Enable Debug Mode" Margin="0,5,0,0"/>
+                        <CheckBox x:Name="cbSaveFrames" Content="Save Captured Frames" Margin="0,5,0,0"/>
+                        <Button x:Name="btClearLog" Content="Clear Log" Width="80" HorizontalAlignment="Left" Margin="0,10,0,0" Click="btClearLog_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Log -->
+            <TabItem Header="Log">
+                <Grid>
+                    <TextBox x:Name="mmLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" FontFamily="Consolas" FontSize="10"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

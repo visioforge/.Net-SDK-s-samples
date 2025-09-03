@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="DecklinkFillKeyDemo.LowerThirdControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="1920" Height="1080"
+             Background="Transparent">
+    
+    <!-- This UserControl is designed for broadcast lower thirds with full transparency -->
+    <Grid>
+        <!-- Lower third container positioned at bottom -->
+        <Grid x:Name="LowerThirdContainer" 
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Bottom"
+              Margin="100,0,0,150">
+            
+            <!-- Main background with gradient and transparency -->
+            <Border x:Name="MainBackground"
+                    Width="900"
+                    Height="180"
+                    CornerRadius="0,8,8,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" Opacity="0.95">
+                        <GradientStop Color="#CC003366" Offset="0"/>
+                        <GradientStop Color="#CC004488" Offset="0.7"/>
+                        <GradientStop Color="#88004488" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+                <!-- Content Grid -->
+                <Grid Margin="30,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Title -->
+                    <TextBlock Grid.Row="0" 
+                               x:Name="TitleText"
+                               Text="BREAKING NEWS"
+                               Foreground="White"
+                               FontSize="48"
+                               FontWeight="Bold"
+                               FontFamily="Segoe UI">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" 
+                                              Direction="315" 
+                                              ShadowDepth="3" 
+                                              Opacity="0.7" 
+                                              BlurRadius="4"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    
+                    <!-- Subtitle -->
+                    <TextBlock Grid.Row="1" 
+                               x:Name="SubtitleText"
+                               Text="Live from the broadcast center"
+                               Foreground="#FFDDDDDD"
+                               FontSize="28"
+                               FontWeight="Normal"
+                               FontFamily="Segoe UI"
+                               Margin="0,8,0,0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="Black" 
+                                              Direction="315" 
+                                              ShadowDepth="2" 
+                                              Opacity="0.5" 
+                                              BlurRadius="2"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    
+                    <!-- Additional Info -->
+                    <TextBlock Grid.Row="2" 
+                               x:Name="InfoText"
+                               Text=""
+                               Foreground="#FFAAAAAA"
+                               FontSize="20"
+                               FontWeight="Normal"
+                               FontFamily="Segoe UI"
+                               VerticalAlignment="Bottom"
+                               Margin="0,0,0,5"/>
+                </Grid>
+            </Border>
+            
+            <!-- Accent bar -->
+            <Rectangle Width="8" 
+                       Height="180" 
+                       HorizontalAlignment="Left">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#FFFF6600" Offset="0"/>
+                        <GradientStop Color="#FFFF3300" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            
+            <!-- Animated highlight -->
+            <Rectangle x:Name="AnimatedHighlight"
+                       Width="900"
+                       Height="2"
+                       VerticalAlignment="Bottom"
+                       Opacity="0">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="Transparent" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+        
+        <!-- Live indicator in top-right -->
+        <Border x:Name="LiveIndicator"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,100,100,0"
+                Background="#CCFF0000"
+                CornerRadius="4"
+                Padding="20,8">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="12" Height="12" Fill="White" Margin="0,0,10,0">
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever">
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                     From="1" To="0.3" Duration="0:0:1"
+                                                     AutoReverse="True"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <TextBlock Text="LIVE" 
+                           Foreground="White" 
+                           FontSize="24" 
+                           FontWeight="Bold"
+                           FontFamily="Segoe UI"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Clock display -->
+        <Border x:Name="ClockDisplay"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Margin="0,0,100,150"
+                Background="#BB000000"
+                CornerRadius="4"
+                Padding="20,10">
+            <TextBlock x:Name="ClockText"
+                       Text="00:00:00"
+                       Foreground="White"
+                       FontSize="32"
+                       FontWeight="Medium"
+                       FontFamily="Consolas"/>
+        </Border>
+        
+        <!-- Network logo/watermark -->
+        <Border x:Name="NetworkLogo"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="100,100,0,0"
+                Width="200"
+                Height="80"
+                Background="#44FFFFFF"
+                CornerRadius="4"
+                Opacity="0.7">
+            <TextBlock Text="NETWORK"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#FF333333"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       FontFamily="Segoe UI"/>
+        </Border>
+    </Grid>
+    
+    <!-- Animations -->
+    <UserControl.Resources>
+        <!-- Slide in animation -->
+        <Storyboard x:Key="SlideIn">
+            <DoubleAnimation Storyboard.TargetName="LowerThirdContainer"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="-1000" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="LowerThirdContainer"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.3"/>
+        </Storyboard>
+        
+        <!-- Slide out animation -->
+        <Storyboard x:Key="SlideOut">
+            <DoubleAnimation Storyboard.TargetName="LowerThirdContainer"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                             From="0" To="-1000" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="LowerThirdContainer"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:0.3"
+                             BeginTime="0:0:0.2"/>
+        </Storyboard>
+        
+        <!-- Highlight sweep animation -->
+        <Storyboard x:Key="HighlightSweep">
+            <DoubleAnimation Storyboard.TargetName="AnimatedHighlight"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="0.8" Duration="0:0:0.2"
+                             AutoReverse="True"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <UserControl.RenderTransform>
+        <TranslateTransform x:Name="ContainerTransform"/>
+    </UserControl.RenderTransform>
+</UserControl>

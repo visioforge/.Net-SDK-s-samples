@@ -137,6 +137,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromaKey Demo MB WPF net7"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTube Streamer with Bridge net7", "WPF\CSharp\YouTube Streamer with Bridge\YouTube Streamer with Bridge net7.csproj", "{73E9F36B-B081-552A-8C82-D54F90E64EF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaussianBlurDemo net7", "_CodeSnippets\gaussian-blur\GaussianBlurDemo net7.csproj", "{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecklinkFillKeyDemo net7", "WPF\CSharp\Decklink Fill-Key Demo\DecklinkFillKeyDemo net7.csproj", "{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -399,6 +403,14 @@ Global
 		{73E9F36B-B081-552A-8C82-D54F90E64EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E9F36B-B081-552A-8C82-D54F90E64EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E9F36B-B081-552A-8C82-D54F90E64EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -468,6 +480,8 @@ Global
 		{82E265FF-2072-25E4-C004-606CC927650C} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{CBAB72C4-148D-DF71-E4C9-2E01402365C4} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{73E9F36B-B081-552A-8C82-D54F90E64EF7} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
+		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

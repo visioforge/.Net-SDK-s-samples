@@ -23,7 +23,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.9.1" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.9.2" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
