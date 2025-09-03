@@ -1,0 +1,26 @@
+# Sample Configuration for Gaussian Blur Demo
+# ============================================
+
+# Sample video files for testing (update with your paths):
+
+# For testing standard videos:
+# C:\Videos\sample_1080p.mp4
+# C:\Videos\sample_720p.mp4
+
+# Test URLs (if network sources are supported):
+# https://www.sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4
+
+# Recommended test settings:
+# - Blur Mode: Two-Pass (Standard) for best performance/quality balance
+# - Blur Radius: 2.0-4.0 for subtle blur, 5.0-8.0 for strong blur
+# - For real-time processing: Use Single-Pass mode with radius < 5.0
+
+# Performance Notes:
+# - Two-Pass Standard: ~60fps at 1080p on modern GPUs
+# - Two-Pass HQ: ~45fps at 1080p on modern GPUs  
+# - Single-Pass: ~90fps at 1080p on modern GPUs
+
+# Shader Uniform Ranges:
+# blur_radius: 0.0 - 10.0
+# blur_strength: 0.0 - 1.0 (for single-pass)
+# tex_width/tex_height: Set automatically from video dimensions
