@@ -141,6 +141,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaussianBlurDemo net7", "_C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecklinkFillKeyDemo net7", "WPF\CSharp\Decklink Fill-Key Demo\DecklinkFillKeyDemo net7.csproj", "{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barcode Detection Demo MB WPF net7", "WPF\CSharp\Barcode Detection Demo\Barcode Detection Demo MB WPF net7.csproj", "{A9B98512-1C83-976D-429B-2A8C7F35A1A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -411,6 +413,10 @@ Global
 		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9B98512-1C83-976D-429B-2A8C7F35A1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B98512-1C83-976D-429B-2A8C7F35A1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B98512-1C83-976D-429B-2A8C7F35A1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B98512-1C83-976D-429B-2A8C7F35A1A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -482,6 +488,7 @@ Global
 		{73E9F36B-B081-552A-8C82-D54F90E64EF7} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{8E572C0D-D70E-790A-C8BF-B2DA07B0D15C} = {B0A77D50-0033-402D-AA20-AA5FF6A9CA4A}
 		{0935BAD8-4EAE-377E-58E9-3A9803A2C6B6} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{A9B98512-1C83-976D-429B-2A8C7F35A1A2} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
