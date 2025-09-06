@@ -50,8 +50,8 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.9.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.9.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.9.3" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -60,8 +60,8 @@
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.8.2" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.8.2" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.9.0" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
@@ -72,7 +72,7 @@
   </ItemGroup>
   <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
   <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.2.15" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.9.1" />
   </ItemGroup>
   <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
     <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />

@@ -35,10 +35,10 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.9.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.9.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.9.2" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.9.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.9.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2025.9.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2025.9.3" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.9.3" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\visioforge_main_icon.ico">
