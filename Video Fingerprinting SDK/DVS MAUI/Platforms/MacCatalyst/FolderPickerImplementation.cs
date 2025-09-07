@@ -14,6 +14,40 @@ namespace DVS_MAUI.Platforms.MacCatalyst;
 public class FolderPickerImplementation : IFolderPicker
 {
     /// <summary>
+    /// Restores security-scoped access to a folder using stored bookmark data.
+    /// </summary>
+    /// <param name="folderPath">The folder path to restore access for.</param>
+    /// <returns>True if access was restored successfully.</returns>
+    public static bool RestoreSecurityScopedAccess(string folderPath)
+    {
+        if (string.IsNullOrEmpty(folderPath))
+            return false;
+
+        try
+        {
+            var defaults = NSUserDefaults.StandardUserDefaults;
+            var key = $"FolderBookmark_{folderPath.GetHashCode()}";
+            var bookmarkData = defaults.DataForKey(key);
+            
+            if (bookmarkData != null)
+            {
+                var url = NSUrl.FromBookmarkData(bookmarkData, NSUrlBookmarkResolutionOptions.WithSecurityScope, null, out var isStale, out var error);
+                
+                if (url != null && error == null && !isStale)
+                {
+                    return url.StartAccessingSecurityScopedResource();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Failed to restore security-scoped access for {folderPath}: {ex.Message}");
+        }
+        
+        return false;
+    }
+
+    /// <summary>
     /// Opens a Mac Catalyst folder picker dialog using UIDocumentPickerViewController and returns the selected folder path.
     /// </summary>
     /// <param name="title">Title for the folder picker dialog.</param>
@@ -84,7 +118,35 @@ public class FolderPickerImplementation : IFolderPicker
             if (urls != null && urls.Length > 0)
             {
                 var url = urls[0];
-                _tcs.SetResult(url?.Path);
+                
+                // Start accessing security-scoped resource for macOS sandboxing
+                if (url != null && url.StartAccessingSecurityScopedResource())
+                {
+                    try
+                    {
+                        // Store the URL in NSUserDefaults so the app can access it later
+                        var defaults = NSUserDefaults.StandardUserDefaults;
+                        var bookmarkData = url.CreateBookmarkData(NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out var error);
+                        
+                        if (bookmarkData != null && error == null)
+                        {
+                            var key = $"FolderBookmark_{url.Path?.GetHashCode()}";
+                            defaults.SetValueForKey(bookmarkData, new NSString(key));
+                            defaults.Synchronize();
+                        }
+                        
+                        _tcs.SetResult(url.Path);
+                    }
+                    finally
+                    {
+                        // Don't stop accessing here - we need continued access
+                        // url.StopAccessingSecurityScopedResource();
+                    }
+                }
+                else
+                {
+                    _tcs.SetResult(url?.Path);
+                }
             }
             else
             {

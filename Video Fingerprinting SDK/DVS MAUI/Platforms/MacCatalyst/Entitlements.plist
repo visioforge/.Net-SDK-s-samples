@@ -9,6 +9,18 @@
         <!-- When App Sandbox is enabled, this value is required to open outgoing network connections. -->
         <key>com.apple.security.network.client</key>
         <true/>
+        <!-- File access permissions for reading/writing user-selected files -->
+        <key>com.apple.security.files.user-selected.read-write</key>
+        <true/>
+        <!-- Allow access to Downloads folder -->
+        <key>com.apple.security.files.downloads.read-write</key>
+        <true/>
+        <!-- Allow access to Documents folder -->
+        <key>com.apple.security.files.documents.read-write</key>
+        <true/>
+        <!-- Allow access to Movies folder for video files -->
+        <key>com.apple.security.assets.movies.read-write</key>
+        <true/>
     </dict>
 </plist>
 

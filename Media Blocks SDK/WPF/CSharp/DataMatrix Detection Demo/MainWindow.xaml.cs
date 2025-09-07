@@ -9,6 +9,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X;
@@ -191,7 +192,7 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version}, LibDMTX v{Dmtx.Version})";
+            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
         }

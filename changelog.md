@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.9.5
+
+* [Video Fingerprinting SDK] Improved support for flipped videos
+
 ## 2025.9.3
 
 * [Media Blocks SDK .Net] Added DataMatrix barcode support using DataMatrixDecoderBlock block

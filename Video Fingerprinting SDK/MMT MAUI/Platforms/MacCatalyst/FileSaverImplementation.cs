@@ -116,7 +116,30 @@ public class FileSaverImplementation : IFileSaver
                 if (urls != null && urls.Length > 0)
                 {
                     var url = urls[0];
-                    _tcs.SetResult(url?.Path);
+                    
+                    // Start accessing security-scoped resource
+                    if (url.StartAccessingSecurityScopedResource())
+                    {
+                        try
+                        {
+                            // Get the selected path
+                            var selectedPath = url.Path;
+                            
+                            // Copy the temp file content to the selected location if needed
+                            // The document picker in export mode should handle this automatically
+                            
+                            _tcs.SetResult(selectedPath);
+                        }
+                        finally
+                        {
+                            // Stop accessing the security-scoped resource
+                            url.StopAccessingSecurityScopedResource();
+                        }
+                    }
+                    else
+                    {
+                        _tcs.SetResult(url?.Path);
+                    }
                 }
                 else
                 {

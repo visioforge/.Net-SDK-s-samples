@@ -16,22 +16,15 @@ namespace DVS_MAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
-
-            // Register pages
-            builder.Services.AddTransient<MainPage>();
-
             // Register platform-specific services
 #if WINDOWS
             builder.Services.AddSingleton<IFolderPicker, Platforms.Windows.FolderPickerImplementation>();
 #elif MACCATALYST
             builder.Services.AddSingleton<IFolderPicker, Platforms.MacCatalyst.FolderPickerImplementation>();
-#elif ANDROID
-            builder.Services.AddSingleton<IFolderPicker, Platforms.Android.FolderPickerImplementation>();
-#elif IOS
-            builder.Services.AddSingleton<IFolderPicker, Platforms.iOS.FolderPickerImplementation>();
+#endif
+
+#if DEBUG
+    		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

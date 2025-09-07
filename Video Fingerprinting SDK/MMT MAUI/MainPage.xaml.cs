@@ -5,8 +5,8 @@ using VisioForge.Core.VideoFingerPrinting;
 using VisioForge.Core.UI.MAUI;
 using Rect = VisioForge.Core.Types.Rect;
 using MMT_MAUI.Services;
-using MMT_MAUI.Controls;
 using VisioForge.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MMT_MAUI;
 
@@ -19,7 +19,6 @@ public partial class MainPage : ContentPage
     private readonly ObservableCollection<string> adFolders = new ObservableCollection<string>();
     private readonly ObservableCollection<string> ignoredAreasList = new ObservableCollection<string>();
     private readonly ObservableCollection<string> dbItems = new ObservableCollection<string>();
-    private readonly IFolderPicker _folderPicker;
     private readonly IFileSaver _fileSaver;
 
     public ObservableCollection<ResultsViewModel> Results { get { return this.results; } }
@@ -35,190 +34,20 @@ public partial class MainPage : ContentPage
         Unloaded += MainPage_Unloaded;
 
         // Get the services from dependency injection
-        _folderPicker = Application.Current.Handler.MauiContext.Services.GetService<IFolderPicker>();
-        _fileSaver = Application.Current.Handler.MauiContext.Services.GetService<IFileSaver>();
-        
-        // Initialize tabs
-        InitializeTabs();
+#if WINDOWS || MACCATALYST
+        try
+        {
+            _fileSaver = Microsoft.Maui.Controls.Application.Current?.Handler?.MauiContext?.Services?.GetService<IFileSaver>();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Failed to get IFileSaver service: {ex.Message}");
+        }
+#endif
         
         LoadDB();
     }
 
-    private void InitializeTabs()
-    {
-        // Broadcast tab
-        var broadcastContent = new Border
-        {
-            Stroke = Color.FromArgb("#E0E0E0"),
-            StrokeThickness = 1,
-            Padding = 10,
-            Content = new VerticalStackLayout
-            {
-                Spacing = 10,
-                VerticalOptions = LayoutOptions.Fill,
-                Children =
-                {
-                    new ScrollView
-                    {
-                        HeightRequest = 390,
-                        BackgroundColor = Colors.LightGray,
-                        VerticalOptions = LayoutOptions.Fill,
-                        Content = lbBroadcastFolders
-                    },
-                    new HorizontalStackLayout
-                    {
-                        Spacing = 5,
-                        Children = { btAddBroadcastFile, btAddBroadcastFolder, btClearBroadcast }
-                    }
-                }
-            }
-        };
-        tabView.AddTab("Broadcast", broadcastContent);
-
-        // Ad samples tab
-        var adSamplesContent = new Border
-        {
-            Stroke = Color.FromArgb("#E0E0E0"),
-            StrokeThickness = 1,
-            Padding = 10,
-            Content = new VerticalStackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    new ScrollView
-                    {
-                        HeightRequest = 390,
-                        BackgroundColor = Colors.LightGray,
-                        VerticalOptions = LayoutOptions.Fill,
-                        Content = lbAdFolders
-                    },
-                    new HorizontalStackLayout
-                    {
-                        Spacing = 5,
-                        Children = { btAddAdFile, btAddAdFolder, btClearAds }
-                    }
-                }
-            }
-        };
-        tabView.AddTab("Ad samples", adSamplesContent);
-
-        // Settings tab
-        var settingsContent = new Border
-        {
-            BackgroundColor = Colors.LightGray,
-            Stroke = Color.FromArgb("#E0E0E0"),
-            StrokeThickness = 1,
-            Padding = 10,
-            Content = new VerticalStackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    new Label { Text = "Difference level", TextColor = Colors.Black },
-                    new HorizontalStackLayout
-                    {
-                        Spacing = 10,
-                        Children = { slDifference, lbDifference }
-                    },
-                    new HorizontalStackLayout
-                    {
-                        Spacing = 5,
-                        Children = 
-                        { 
-                            cbDebug, 
-                            new Label { Text = "Save logs to Documents\\VisioForge\\MMT folder", VerticalOptions = LayoutOptions.Center, TextColor = Colors.Black }
-                        }
-                    }
-                }
-            }
-        };
-        tabView.AddTab("Settings", settingsContent);
-
-        // Ignored areas tab
-        var ignoredAreasGrid = new Grid
-        {
-            RowDefinitions = 
-            {
-                new RowDefinition { Height = GridLength.Auto },
-                new RowDefinition { Height = GridLength.Auto }
-            },
-            ColumnDefinitions = 
-            {
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = 100 },
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = 100 }
-            }
-        };
-        
-        ignoredAreasGrid.Add(new Label { Text = "Left", VerticalOptions = LayoutOptions.Center, TextColor = Colors.Black }, 0, 0);
-        ignoredAreasGrid.Add(edIgnoredAreaLeft, 1, 0);
-        ignoredAreasGrid.Add(new Label { Text = "Right", VerticalOptions = LayoutOptions.Center, TextColor = Colors.Black }, 2, 0);
-        ignoredAreasGrid.Add(edIgnoredAreaRight, 3, 0);
-        ignoredAreasGrid.Add(new Label { Text = "Top", VerticalOptions = LayoutOptions.Center, TextColor = Colors.Black }, 0, 1);
-        ignoredAreasGrid.Add(edIgnoredAreaTop, 1, 1);
-        ignoredAreasGrid.Add(new Label { Text = "Bottom", VerticalOptions = LayoutOptions.Center, TextColor = Colors.Black }, 2, 1);
-        ignoredAreasGrid.Add(edIgnoredAreaBottom, 3, 1);
-
-        var ignoredAreasContent = new Border
-        {
-            BackgroundColor = Colors.LightGray,
-            Stroke = Color.FromArgb("#E0E0E0"),
-            StrokeThickness = 1,
-            Padding = 10,
-            Content = new VerticalStackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    new Label { Text = "Ignored areas (you should add areas before adding ad samples).", TextColor = Colors.Black },
-                    new Label { Text = "Regenerate fingerprint files if ignored areas changed.", TextColor = Colors.Black },
-                    ignoredAreasGrid,
-                    btIgnoredAreaAdd,
-                    new ScrollView
-                    {
-                        HeightRequest = 100,
-                        VerticalOptions = LayoutOptions.Fill,
-                        BackgroundColor = Colors.White,
-                        Content = lbIgnoredAreas
-                    },
-                    new HorizontalStackLayout
-                    {
-                        Spacing = 5,
-                        Children = { btIgnoredAreasRemoveItem, btIgnoredAreasRemoveAll }
-                    }
-                }
-            }
-        };
-        tabView.AddTab("Ignored areas", ignoredAreasContent);
-
-        // DB tab
-        var dbContent = new Border
-        {
-            BackgroundColor = Colors.LightGray,
-            Stroke = Color.FromArgb("#E0E0E0"),
-            StrokeThickness = 1,
-            Padding = 10,
-            Content = new VerticalStackLayout
-            {
-                Spacing = 10,
-                Children =
-                {
-                    lbDBLocation,
-                    new ScrollView
-                    {
-                        HeightRequest = 200,
-                        VerticalOptions = LayoutOptions.Fill,
-                        BackgroundColor = Colors.White,
-                        Content = lbDB
-                    },
-                    btDBClear
-                }
-            }
-        };
-        tabView.AddTab("DB", dbContent);
-    }
 
     private void MainPage_Unloaded(object? sender, EventArgs e)
     {
@@ -226,77 +55,35 @@ public partial class MainPage : ContentPage
         VisioForgeX.DestroySDK();
     }
 
-    private async void btAddBroadcastFolder_Click(object sender, EventArgs e)
-    {
-        if (_folderPicker == null)
-        {
-            // Fallback to file picker if folder picker is not available
-            await DisplayAlert("Select Folder", "Please select any file in the folder you want to add. The folder will be added.", "OK");
-            
-            var result = await FilePicker.Default.PickAsync();
-            if (result != null)
-            {
-                var folderPath = Path.GetDirectoryName(result.FullPath);
-                if (!string.IsNullOrEmpty(folderPath))
-                {
-                    broadcastFolders.Add(folderPath);
-                    Settings.LastPath = folderPath;
-                    
-                    // Add label directly to the UI
-                    var label = new Label 
-                    { 
-                        Text = folderPath,
-                        TextColor = Colors.Black,
-                        Padding = new Thickness(5),
-                        GestureRecognizers = { new TapGestureRecognizer() }
-                    };
-                    lbBroadcastFolders.Children.Add(label);
-                }
-            }
-        }
-        else
-        {
-            // Use the proper folder picker
-            var folderPath = await _folderPicker.PickFolderAsync("Select Broadcast Folder", Settings.LastPath);
-            if (!string.IsNullOrEmpty(folderPath))
-            {
-                broadcastFolders.Add(folderPath);
-                Settings.LastPath = folderPath;
-                
-                // Add label directly to the UI
-                var label = new Label 
-                { 
-                    Text = folderPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbBroadcastFolders.Children.Add(label);
-            }
-        }
-    }
-
     private async void btAddBroadcastFile_Click(object sender, EventArgs e)
     {
         try
         {
 #if MACCATALYST
-            // Workaround for Mac Catalyst file picker hanging issue
-            // Use single file picker
+            // Mac Catalyst specific implementation
+            var customFileType = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4", "public.avi", "public.mpeg" } }
+                });
+            
             var options = new PickOptions
             {
-                PickerTitle = "Select video file",
-                FileTypes = new FilePickerFileType(
-                    new Dictionary<DevicePlatform, IEnumerable<string>>
-                    {
-                        { DevicePlatform.macOS, new[] { "mp4", "mov", "avi", "mkv", "m4v", "wmv", "flv", "webm", "mpg", "mpeg" } },
-                        { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4" } }
-                    })
+                PickerTitle = "Select broadcast video file",
+                FileTypes = customFileType
             };
             
-            // Use MainThread.InvokeOnMainThreadAsync to ensure proper thread handling
-            var file = await MainThread.InvokeOnMainThreadAsync(async () => 
-                await FilePicker.Default.PickAsync(options));
+            // Ensure we're on the main thread
+            FileResult file = null;
+            if (MainThread.IsMainThread)
+            {
+                file = await FilePicker.Default.PickAsync(options);
+            }
+            else
+            {
+                file = await MainThread.InvokeOnMainThreadAsync(async () => 
+                    await FilePicker.Default.PickAsync(options));
+            }
             
             if (file != null)
             {
@@ -310,6 +97,8 @@ public partial class MainPage : ContentPage
                     GestureRecognizers = { new TapGestureRecognizer() }
                 };
                 lbBroadcastFolders.Children.Add(label);
+                
+                Settings.LastPath = Path.GetDirectoryName(file.FullPath);
             }
 #else
             // Use single file picker on all platforms
@@ -350,77 +139,35 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void btAddAdFolder_Click(object sender, EventArgs e)
-    {
-        if (_folderPicker == null)
-        {
-            // Fallback to file picker if folder picker is not available
-            await DisplayAlert("Select Folder", "Please select any file in the folder you want to add. The folder will be added.", "OK");
-            
-            var result = await FilePicker.Default.PickAsync();
-            if (result != null)
-            {
-                var folderPath = Path.GetDirectoryName(result.FullPath);
-                if (!string.IsNullOrEmpty(folderPath))
-                {
-                    adFolders.Add(folderPath);
-                    Settings.LastPath = folderPath;
-                    
-                    // Add label directly to the UI
-                    var label = new Label 
-                    { 
-                        Text = folderPath,
-                        TextColor = Colors.Black,
-                        Padding = new Thickness(5),
-                        GestureRecognizers = { new TapGestureRecognizer() }
-                    };
-                    lbAdFolders.Children.Add(label);
-                }
-            }
-        }
-        else
-        {
-            // Use the proper folder picker
-            var folderPath = await _folderPicker.PickFolderAsync("Select Ad Folder", Settings.LastPath);
-            if (!string.IsNullOrEmpty(folderPath))
-            {
-                adFolders.Add(folderPath);
-                Settings.LastPath = folderPath;
-                
-                // Add label directly to the UI
-                var label = new Label 
-                { 
-                    Text = folderPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbAdFolders.Children.Add(label);
-            }
-        }
-    }
-
     private async void btAddAdFile_Click(object sender, EventArgs e)
     {
         try
         {
 #if MACCATALYST
-            // Workaround for Mac Catalyst file picker hanging issue
-            // Use single file picker
+            // Mac Catalyst specific implementation
+            var customFileType = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4", "public.avi", "public.mpeg" } }
+                });
+            
             var options = new PickOptions
             {
                 PickerTitle = "Select ad video file",
-                FileTypes = new FilePickerFileType(
-                    new Dictionary<DevicePlatform, IEnumerable<string>>
-                    {
-                        { DevicePlatform.macOS, new[] { "mp4", "mov", "avi", "mkv", "m4v", "wmv", "flv", "webm", "mpg", "mpeg" } },
-                        { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4" } }
-                    })
+                FileTypes = customFileType
             };
             
-            // Use MainThread.InvokeOnMainThreadAsync to ensure proper thread handling
-            var file = await MainThread.InvokeOnMainThreadAsync(async () => 
-                await FilePicker.Default.PickAsync(options));
+            // Ensure we're on the main thread
+            FileResult file = null;
+            if (MainThread.IsMainThread)
+            {
+                file = await FilePicker.Default.PickAsync(options);
+            }
+            else
+            {
+                file = await MainThread.InvokeOnMainThreadAsync(async () => 
+                    await FilePicker.Default.PickAsync(options));
+            }
             
             if (file != null)
             {
@@ -434,6 +181,8 @@ public partial class MainPage : ContentPage
                     GestureRecognizers = { new TapGestureRecognizer() }
                 };
                 lbAdFolders.Children.Add(label);
+                
+                Settings.LastPath = Path.GetDirectoryName(file.FullPath);
             }
 #else
             // Use single file picker on all platforms
@@ -672,9 +421,55 @@ public partial class MainPage : ContentPage
                 return;
             }
 
+#if MACCATALYST
+            // For Mac Catalyst, we need to handle file saving differently due to sandboxing
+            try
+            {
+                // First prepare the data in memory
+                var saveOptions = await DisplayActionSheet("Save as", "Cancel", null, "CSV", "XML");
+                if (saveOptions == "Cancel" || string.IsNullOrEmpty(saveOptions))
+                    return;
+
+                string tempFileName;
+                string tempPath;
+                
+                if (saveOptions == "XML")
+                {
+                    tempFileName = "results.xml";
+                    tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
+                    SaveResultsAsXml(tempPath);
+                }
+                else
+                {
+                    tempFileName = "results.csv";
+                    tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
+                    results.ToList().SerializeToCsv(tempPath, ',');
+                }
+
+                // Now use the share/save functionality
+                await Share.Default.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Save Results",
+                    File = new ShareFile(tempPath)
+                });
+
+                // Clean up temp file after a delay
+                await Task.Delay(2000);
+                if (File.Exists(tempPath))
+                {
+                    try { File.Delete(tempPath); } catch { }
+                }
+                
+                await DisplayAlert("Success", "Results exported successfully", "OK");
+            }
+            catch (Exception macEx)
+            {
+                await DisplayAlert("Error", $"Failed to save results: {macEx.Message}", "OK");
+            }
+#else
             string filename = null;
 
-            // Try to use the native file saver first
+            // Use the native file saver service for Windows
             if (_fileSaver != null)
             {
                 var fileTypes = new Dictionary<string, List<string>>
@@ -685,28 +480,6 @@ public partial class MainPage : ContentPage
 
                 filename = await _fileSaver.SaveFileAsync("results", fileTypes);
             }
-            else
-            {
-                // Fallback to file picker if native saver is not available
-                var options = new PickOptions
-                {
-                    PickerTitle = "Save results file"
-                };
-
-                var fileTypes = new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.WinUI, new[] { ".csv", ".xml" } },
-                    { DevicePlatform.macOS, new[] { "csv", "xml" } }
-                };
-
-                options.FileTypes = new FilePickerFileType(fileTypes);
-
-                var result = await FilePicker.Default.PickAsync(options);
-                if (result != null)
-                {
-                    filename = result.FullPath;
-                }
-            }
 
             if (!string.IsNullOrEmpty(filename))
             {
@@ -716,21 +489,48 @@ public partial class MainPage : ContentPage
                     filename += ".csv";
                 }
 
-                if (Path.GetExtension(filename.ToLowerInvariant()) == ".xml")
+                string extension = Path.GetExtension(filename).ToLowerInvariant();
+                
+                if (extension == ".xml")
                 {
-                    await DisplayAlert("Info", "XML export not implemented in MAUI version", "OK");
+                    // Save as XML
+                    SaveResultsAsXml(filename);
+                    await DisplayAlert("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
                 }
                 else
                 {
-                    // Save as CSV
+                    // Save as CSV (default)
                     results.ToList().SerializeToCsv(filename, ',');
-                    await DisplayAlert("Success", $"Results saved to {filename}", "OK");
+                    await DisplayAlert("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
                 }
             }
+#endif
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlert("Error", $"Failed to save results: {ex.Message}", "OK");
+        }
+    }
+
+    private void SaveResultsAsXml(string filename)
+    {
+        using (var writer = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8))
+        {
+            writer.Formatting = System.Xml.Formatting.Indented;
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Results");
+            
+            foreach (var result in results)
+            {
+                writer.WriteStartElement("Result");
+                writer.WriteElementString("Sample", result.Sample ?? string.Empty);
+                writer.WriteElementString("Position", result.Position ?? string.Empty);
+                writer.WriteElementString("DumpFile", result.DumpFile ?? string.Empty);
+                writer.WriteEndElement();
+            }
+            
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
         }
     }
 

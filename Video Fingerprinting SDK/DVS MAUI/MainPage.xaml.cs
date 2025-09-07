@@ -3,10 +3,8 @@
     using System.Collections.ObjectModel;
     using System.Globalization;
     using VisioForge.Core.VideoFingerPrinting;
-    using VisioForge.Core.MediaInfoReaderX;
     using DVS_MAUI.Services;
     using VisioForge.Core;
-    using SkiaSharp;
 
     public partial class MainPage : ContentPage
     {
@@ -154,6 +152,15 @@
                     VFPFingerPrint? fp = null;
                     try
                     {
+#if MACCATALYST
+                        // Restore security-scoped access for the file's directory on macOS
+                        var folderPath = Path.GetDirectoryName(filename);
+                        if (!string.IsNullOrEmpty(folderPath))
+                        {
+                            Platforms.MacCatalyst.FolderPickerImplementation.RestoreSecurityScopedAccess(folderPath);
+                        }
+#endif
+                        
                         var source = new VFPFingerprintSource(filename)
                         {
                             StopTime = TimeSpan.FromSeconds(indexingTime)
@@ -234,7 +241,6 @@
                         IsChecked = false,
                         IsGroupHeader = true
                     };
-                    await LoadThumbnailAsync(groupItem);
                     _results.Add(groupItem);
 
                     foreach (var clone in result.Clones)
@@ -245,7 +251,6 @@
                             IsChecked = true,
                             IsGroupHeader = false
                         };
-                        await LoadThumbnailAsync(cloneItem);
                         _results.Add(cloneItem);
                     }
                 }
@@ -263,57 +268,6 @@
             }
         }
 
-        private async Task LoadThumbnailAsync(ResultItemViewModel item)
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    // Generate thumbnail at 5 seconds into the video (or at start if video is shorter)
-                    var position = TimeSpan.FromSeconds(5);
-                    
-                    // Get snapshot as SKBitmap
-                    var skBitmap = MediaInfoReaderX.GetFileSnapshotSKBitmap(item.FilePath, position);
-                    
-                    if (skBitmap != null)
-                    {
-                        // Resize to thumbnail size (e.g., 120x90)
-                        const int thumbnailWidth = 120;
-                        const int thumbnailHeight = 90;
-                        
-                        using (var resized = skBitmap.Resize(new SKImageInfo(thumbnailWidth, thumbnailHeight), SKFilterQuality.Medium))
-                        {
-                            if (resized != null)
-                            {
-                                // Encode to PNG
-                                using (var image = SKImage.FromBitmap(resized))
-                                using (var data = image.Encode(SKEncodedImageFormat.Png, 80))
-                                {
-                                    var stream = new MemoryStream();
-                                    data.SaveTo(stream);
-                                    stream.Position = 0;
-                                    
-                                    // Update UI on main thread
-                                    MainThread.BeginInvokeOnMainThread(() =>
-                                    {
-                                        item.ThumbnailSource = ImageSource.FromStream(() => new MemoryStream(stream.ToArray()));
-                                    });
-                                }
-                            }
-                        }
-                        
-                        // Dispose original bitmap
-                        skBitmap.Dispose();
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                // Log error but don't crash - thumbnails are non-critical
-                System.Diagnostics.Debug.WriteLine($"Failed to load thumbnail for {item.FilePath}: {ex.Message}");
-                item.ThumbnailSource = null;
-            }
-        }
 
         private async void btDelete_Click(object? sender, EventArgs e)
         {
@@ -339,6 +293,15 @@
                 {
                     if (File.Exists(item.FilePath))
                     {
+#if MACCATALYST
+                        // Restore security-scoped access for the file's directory on macOS
+                        var folderPath = Path.GetDirectoryName(item.FilePath);
+                        if (!string.IsNullOrEmpty(folderPath))
+                        {
+                            Platforms.MacCatalyst.FolderPickerImplementation.RestoreSecurityScopedAccess(folderPath);
+                        }
+#endif
+                        
                         File.Delete(item.FilePath);
                         _results.Remove(item);
                         deletedCount++;
@@ -430,6 +393,5 @@
         public string FilePath { get; set; } = string.Empty;
         public bool IsChecked { get; set; }
         public bool IsGroupHeader { get; set; }
-        public ImageSource? ThumbnailSource { get; set; }
     }
 }

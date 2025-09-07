@@ -34,5 +34,13 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>This app needs access to the Documents folder to scan for duplicate video files.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>This app needs access to the Downloads folder to scan for duplicate video files.</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>This app needs access to the Desktop folder to scan for duplicate video files.</string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>This app needs access to files to scan for duplicate video content.</string>
 </dict>
 </plist>

@@ -3,48 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vf="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
              xmlns:local="clr-namespace:MMT_MAUI"
-             xmlns:controls="clr-namespace:MMT_MAUI.Controls"
              x:Class="MMT_MAUI.MainPage"
              Title="">
-
-    <!-- Hidden controls used programmatically in code-behind -->
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- Broadcast tab controls -->
-            <VerticalStackLayout x:Key="BroadcastControls" x:Name="lbBroadcastFolders" Padding="5" />
-            <Button x:Key="BroadcastFileButton" x:Name="btAddBroadcastFile" Text="Add file" Clicked="btAddBroadcastFile_Click" />
-            <Button x:Key="BroadcastFolderButton" x:Name="btAddBroadcastFolder" Text="Add folder" Clicked="btAddBroadcastFolder_Click" />
-            <Button x:Key="BroadcastClearButton" x:Name="btClearBroadcast" Text="Clear list" Clicked="btClearBroadcast_Click" />
-            
-            <!-- Ad samples tab controls -->
-            <VerticalStackLayout x:Key="AdControls" x:Name="lbAdFolders" Padding="5" />
-            <Button x:Key="AdFileButton" x:Name="btAddAdFile" Text="Add file" Clicked="btAddAdFile_Click" />
-            <Button x:Key="AdFolderButton" x:Name="btAddAdFolder" Text="Add folder" Clicked="btAddAdFolder_Click" />
-            <Button x:Key="AdClearButton" x:Name="btClearAds" Text="Clear list" Clicked="btClearAds_Click" />
-            
-            <!-- Settings tab controls -->
-            <Slider x:Key="DifferenceSlider" x:Name="slDifference" 
-                    Minimum="200" Maximum="1000" Value="500" WidthRequest="250"
-                    ValueChanged="slDifference_ValueChanged" />
-            <Label x:Key="DifferenceLabel" x:Name="lbDifference" Text="500" TextColor="Black" />
-            <CheckBox x:Key="DebugCheckBox" x:Name="cbDebug" />
-            
-            <!-- Ignored areas tab controls -->
-            <Entry x:Key="IgnoredLeft" x:Name="edIgnoredAreaLeft" Text="20" TextColor="Black" />
-            <Entry x:Key="IgnoredRight" x:Name="edIgnoredAreaRight" Text="50" TextColor="Black" />
-            <Entry x:Key="IgnoredTop" x:Name="edIgnoredAreaTop" Text="20" TextColor="Black" />
-            <Entry x:Key="IgnoredBottom" x:Name="edIgnoredAreaBottom" Text="50" TextColor="Black" />
-            <Button x:Key="IgnoredAddButton" x:Name="btIgnoredAreaAdd" Text="Add" Clicked="btIgnoredAreaAdd_Click" />
-            <VerticalStackLayout x:Key="IgnoredAreasList" x:Name="lbIgnoredAreas" Padding="5" />
-            <Button x:Key="IgnoredRemoveButton" x:Name="btIgnoredAreasRemoveItem" Text="Remove selected" Clicked="btIgnoredAreasRemoveItem_Click" />
-            <Button x:Key="IgnoredRemoveAllButton" x:Name="btIgnoredAreasRemoveAll" Text="Remove all" Clicked="btIgnoredAreasRemoveAll_Click" />
-            
-            <!-- DB tab controls -->
-            <Label x:Key="DBLocationLabel" x:Name="lbDBLocation" Text="DB location: " TextColor="Black"/>
-            <VerticalStackLayout x:Key="DBList" x:Name="lbDB" Padding="5" />
-            <Button x:Key="DBClearButton" x:Name="btDBClear" Text="Clear" Clicked="btDBClear_Click" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <Grid Padding="10,-35,10,10">
         <Grid.RowDefinitions>
@@ -58,62 +18,263 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Tab Control using Custom TabView -->
-        <controls:CustomTabView x:Name="tabView" 
-                               Grid.Row="1" Grid.Column="0" 
-                               Margin="0,10,0,0"
-                               TabBarPlacement="Top"
-                               TabBarBackground="White"
-                               IndicatorBackground="#007ACC" />
+        <!-- Main Content Area with Vertical Groups -->
+        <ScrollView Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
+            <VerticalStackLayout Spacing="15">
+                
+                <!-- Broadcast Files Group -->
+                <Border BackgroundColor="White" 
+                        Stroke="#E0E0E0" 
+                        StrokeThickness="1" 
+                        Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Broadcast Files" 
+                               FontAttributes="Bold" 
+                               FontSize="16" 
+                               TextColor="#007ACC" 
+                               Padding="0,0,0,5"/>
+                        <ScrollView HeightRequest="120" BackgroundColor="#F5F5F5">
+                            <VerticalStackLayout x:Name="lbBroadcastFolders" Padding="5" />
+                        </ScrollView>
+                        <HorizontalStackLayout Spacing="5">
+                            <Button x:Name="btAddBroadcastFile" 
+                                    Text="Add File" 
+                                    Clicked="btAddBroadcastFile_Click" />
+                            <Button x:Name="btClearBroadcast" 
+                                    Text="Clear List" 
+                                    Clicked="btClearBroadcast_Click" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Ad Samples Group -->
+                <Border BackgroundColor="White" 
+                        Stroke="#E0E0E0" 
+                        StrokeThickness="1" 
+                        Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Ad Samples" 
+                               FontAttributes="Bold" 
+                               FontSize="16" 
+                               TextColor="#007ACC" 
+                               Padding="0,0,0,5"/>
+                        <ScrollView HeightRequest="120" BackgroundColor="#F5F5F5">
+                            <VerticalStackLayout x:Name="lbAdFolders" Padding="5" />
+                        </ScrollView>
+                        <HorizontalStackLayout Spacing="5">
+                            <Button x:Name="btAddAdFile" 
+                                    Text="Add File" 
+                                    Clicked="btAddAdFile_Click" />
+                            <Button x:Name="btClearAds" 
+                                    Text="Clear List" 
+                                    Clicked="btClearAds_Click" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Settings Group -->
+                <Border BackgroundColor="White" 
+                        Stroke="#E0E0E0" 
+                        StrokeThickness="1" 
+                        Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Settings" 
+                               FontAttributes="Bold" 
+                               FontSize="16" 
+                               TextColor="#007ACC" 
+                               Padding="0,0,0,5"/>
+                        <Label Text="Difference Level" TextColor="Black" />
+                        <HorizontalStackLayout Spacing="10">
+                            <Slider x:Name="slDifference" 
+                                    Minimum="200" 
+                                    Maximum="1000" 
+                                    Value="500" 
+                                    WidthRequest="200"
+                                    ValueChanged="slDifference_ValueChanged" />
+                            <Label x:Name="lbDifference" 
+                                   Text="500" 
+                                   TextColor="Black" 
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="5">
+                            <CheckBox x:Name="cbDebug" />
+                            <Label Text="Save logs to Documents\VisioForge\MMT folder" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Black" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Ignored Areas Group -->
+                <Border BackgroundColor="White" 
+                        Stroke="#E0E0E0" 
+                        StrokeThickness="1" 
+                        Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Ignored Areas" 
+                               FontAttributes="Bold" 
+                               FontSize="16" 
+                               TextColor="#007ACC" 
+                               Padding="0,0,0,5"/>
+                        <Label Text="Ignored areas (you should add areas before adding ad samples)." 
+                               TextColor="Black" 
+                               FontSize="12"/>
+                        <Label Text="Regenerate fingerprint files if ignored areas changed." 
+                               TextColor="Red" 
+                               FontSize="12"/>
+                        <Grid RowDefinitions="Auto,Auto" 
+                              ColumnDefinitions="Auto,100,Auto,100">
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="Left" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Black" />
+                            <Entry Grid.Row="0" Grid.Column="1" 
+                                   x:Name="edIgnoredAreaLeft" 
+                                   Text="20" 
+                                   TextColor="Black" />
+                            <Label Grid.Row="0" Grid.Column="2" 
+                                   Text="Right" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Black" />
+                            <Entry Grid.Row="0" Grid.Column="3" 
+                                   x:Name="edIgnoredAreaRight" 
+                                   Text="50" 
+                                   TextColor="Black" />
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Text="Top" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Black" />
+                            <Entry Grid.Row="1" Grid.Column="1" 
+                                   x:Name="edIgnoredAreaTop" 
+                                   Text="20" 
+                                   TextColor="Black" />
+                            <Label Grid.Row="1" Grid.Column="2" 
+                                   Text="Bottom" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Black" />
+                            <Entry Grid.Row="1" Grid.Column="3" 
+                                   x:Name="edIgnoredAreaBottom" 
+                                   Text="50" 
+                                   TextColor="Black" />
+                        </Grid>
+                        <Button x:Name="btIgnoredAreaAdd" 
+                                Text="Add" 
+                                Clicked="btIgnoredAreaAdd_Click" 
+                                HorizontalOptions="Start"/>
+                        <ScrollView HeightRequest="80" BackgroundColor="#F5F5F5">
+                            <VerticalStackLayout x:Name="lbIgnoredAreas" Padding="5" />
+                        </ScrollView>
+                        <HorizontalStackLayout Spacing="5">
+                            <Button x:Name="btIgnoredAreasRemoveItem" 
+                                    Text="Remove Selected" 
+                                    Clicked="btIgnoredAreasRemoveItem_Click" />
+                            <Button x:Name="btIgnoredAreasRemoveAll" 
+                                    Text="Remove All" 
+                                    Clicked="btIgnoredAreasRemoveAll_Click" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Database Group -->
+                <Border BackgroundColor="White" 
+                        Stroke="#E0E0E0" 
+                        StrokeThickness="1" 
+                        Padding="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Database" 
+                               FontAttributes="Bold" 
+                               FontSize="16" 
+                               TextColor="#007ACC" 
+                               Padding="0,0,0,5"/>
+                        <Label x:Name="lbDBLocation" 
+                               Text="DB location: " 
+                               TextColor="Black" 
+                               FontSize="12"/>
+                        <ScrollView HeightRequest="100" BackgroundColor="#F5F5F5">
+                            <VerticalStackLayout x:Name="lbDB" Padding="5" />
+                        </ScrollView>
+                        <Button x:Name="btDBClear" 
+                                Text="Clear" 
+                                Clicked="btDBClear_Click" 
+                                HorizontalOptions="Start"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
 
         <!-- Results List -->
-        <CollectionView Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
-                      x:Name="lvResults" 
-                      Margin="10,40,0,0"
-                      BackgroundColor="White">
-            <CollectionView.Header>
-                <Grid BackgroundColor="LightGray" Padding="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="Ad file" FontAttributes="Bold" TextColor="Black" />
-                    <Label Grid.Column="1" Text="Position" FontAttributes="Bold" TextColor="Black" />
-                    <Label Grid.Column="2" Text="Broadcast file" FontAttributes="Bold" TextColor="Black" />
-                </Grid>
-            </CollectionView.Header>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="local:ResultsViewModel">
-                    <Grid Padding="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Sample}" TextColor="Black" />
-                        <Label Grid.Column="1" Text="{Binding Position}" TextColor="Black" />
-                        <Label Grid.Column="2" Text="{Binding DumpFile}" TextColor="Black" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" 
+                Margin="10,40,0,0"
+                BackgroundColor="White"
+                Stroke="#E0E0E0"
+                StrokeThickness="1">
+            <VerticalStackLayout>
+                <Label Text="Analysis Results" 
+                       FontAttributes="Bold" 
+                       FontSize="16" 
+                       TextColor="#007ACC" 
+                       Padding="10,10,10,5"/>
+                <CollectionView x:Name="lvResults" BackgroundColor="White">
+                    <CollectionView.Header>
+                        <Grid BackgroundColor="#F0F0F0" Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Ad File" FontAttributes="Bold" TextColor="Black" />
+                            <Label Grid.Column="1" Text="Position" FontAttributes="Bold" TextColor="Black" />
+                            <Label Grid.Column="2" Text="Broadcast File" FontAttributes="Bold" TextColor="Black" />
+                        </Grid>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="local:ResultsViewModel">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" 
+                                       Text="{Binding Sample}" 
+                                       TextColor="Black" 
+                                       FontSize="12"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Grid.Column="1" 
+                                       Text="{Binding Position}" 
+                                       TextColor="Black" 
+                                       FontSize="12"
+                                       HorizontalTextAlignment="Center" />
+                                <Label Grid.Column="2" 
+                                       Text="{Binding DumpFile}" 
+                                       TextColor="Black" 
+                                       FontSize="12"
+                                       LineBreakMode="TailTruncation" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Border>
 
         <!-- Control buttons -->
         <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="10" Margin="0,10,0,0">
             <ProgressBar x:Name="pbProgress" WidthRequest="420" HeightRequest="20" />
-            <Button x:Name="btStart" Text="Start" Clicked="btStart_Click" />
+            <Button x:Name="btStart" Text="Start Analysis" Clicked="btStart_Click" />
         </HorizontalStackLayout>
 
         <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="10" 
                               HorizontalOptions="End" Margin="0,10,10,0">
-            <Button x:Name="btSaveResults" Text="Save results" Clicked="btSaveResults_Click" />
+            <Button x:Name="btSaveResults" Text="Save Results" Clicked="btSaveResults_Click" />
         </HorizontalStackLayout>
 
         <!-- Status bar -->
         <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
-               BackgroundColor="LightGray" Padding="5">
-            <Label x:Name="lbStatus" Text="" TextColor="Black" />
+               BackgroundColor="#F0F0F0" 
+               Padding="5"
+               BorderColor="#E0E0E0">
+            <Label x:Name="lbStatus" Text="Ready" TextColor="Black" FontSize="12" />
         </Frame>
     </Grid>
 

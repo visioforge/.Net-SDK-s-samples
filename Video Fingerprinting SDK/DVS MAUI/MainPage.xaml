@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DVS_MAUI.MainPage"
-             Title="VisioForge Video Fingerprinting SDK - Video Duplicates Finder">
+             Title="">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,23 +41,23 @@
                     <Label Text="Settings" FontAttributes="Bold" Margin="0,0,0,5"/>
                     
                     <Label Text="Formats to analyze" Margin="0,5,0,0"/>
-                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" Margin="0,5,0,10">
-                        <CheckBox x:Name="cbFormatAVI" IsChecked="True" Grid.Row="0" Grid.Column="0"/>
-                        <Label Text="AVI" Grid.Row="0" Grid.Column="0" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatWMV" IsChecked="True" Grid.Row="0" Grid.Column="1"/>
-                        <Label Text="WMV" Grid.Row="0" Grid.Column="1" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatMP4" IsChecked="True" Grid.Row="0" Grid.Column="2"/>
-                        <Label Text="MP4" Grid.Row="0" Grid.Column="2" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatMPG" IsChecked="True" Grid.Row="0" Grid.Column="3"/>
-                        <Label Text="MPG" Grid.Row="0" Grid.Column="3" Margin="30,0,0,0" VerticalOptions="Center"/>
+                    <Grid ColumnDefinitions="35,50,35,50,35,50,35,50" RowDefinitions="Auto,Auto" Margin="0,5,0,10">
+                        <CheckBox x:Name="cbFormatAVI" IsChecked="True" Grid.Row="0" Grid.Column="0" />
+                        <Label Text="AVI" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatWMV" IsChecked="True" Grid.Row="0" Grid.Column="2"/>
+                        <Label Text="WMV" Grid.Row="0" Grid.Column="3" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMP4" IsChecked="True" Grid.Row="0" Grid.Column="4"/>
+                        <Label Text="MP4" Grid.Row="0" Grid.Column="5" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMPG" IsChecked="True" Grid.Row="0" Grid.Column="6"/>
+                        <Label Text="MPG" Grid.Row="0" Grid.Column="7" Margin="0,0,0,0" VerticalOptions="Center"/>
                         <CheckBox x:Name="cbFormatMOV" IsChecked="True" Grid.Row="1" Grid.Column="0"/>
-                        <Label Text="MOV" Grid.Row="1" Grid.Column="0" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatTS" IsChecked="True" Grid.Row="1" Grid.Column="1"/>
-                        <Label Text="TS" Grid.Row="1" Grid.Column="1" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatFLV" IsChecked="True" Grid.Row="1" Grid.Column="2"/>
-                        <Label Text="FLV" Grid.Row="1" Grid.Column="2" Margin="30,0,0,0" VerticalOptions="Center"/>
-                        <CheckBox x:Name="cbFormatMKV" IsChecked="True" Grid.Row="1" Grid.Column="3"/>
-                        <Label Text="MKV" Grid.Row="1" Grid.Column="3" Margin="30,0,0,0" VerticalOptions="Center"/>
+                        <Label Text="MOV" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatTS" IsChecked="True" Grid.Row="1" Grid.Column="2"/>
+                        <Label Text="TS" Grid.Row="1" Grid.Column="3" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatFLV" IsChecked="True" Grid.Row="1" Grid.Column="4"/>
+                        <Label Text="FLV" Grid.Row="1" Grid.Column="5" Margin="0,0,0,0" VerticalOptions="Center"/>
+                        <CheckBox x:Name="cbFormatMKV" IsChecked="True" Grid.Row="1" Grid.Column="6"/>
+                        <Label Text="MKV" Grid.Row="1" Grid.Column="7" Margin="0,0,0,0" VerticalOptions="Center"/>
                     </Grid>
 
                     <Label Text="Indexing time" Margin="0,5,0,0"/>
@@ -108,10 +108,7 @@
                                 <Frame Padding="5" Margin="2">
                                     <HorizontalStackLayout Spacing="10">
                                         <CheckBox x:Name="Checked" IsChecked="{Binding IsChecked}" VerticalOptions="Center"/>
-                                        <Frame BorderColor="LightGray" Padding="2" CornerRadius="4" VerticalOptions="Center">
-                                            <Image Source="{Binding ThumbnailSource}" WidthRequest="120" HeightRequest="90" Aspect="AspectFit"/>
-                                        </Frame>
-                                        <Label Text="{Binding FilePath}" VerticalOptions="Center" LineBreakMode="TailTruncation" MaximumWidthRequest="400"/>
+                                        <Label Text="{Binding FilePath}" VerticalOptions="Center" LineBreakMode="TailTruncation" MaximumWidthRequest="500"/>
                                     </HorizontalStackLayout>
                                 </Frame>
                             </DataTemplate>

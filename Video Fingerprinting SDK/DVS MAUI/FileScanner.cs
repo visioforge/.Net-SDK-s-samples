@@ -14,6 +14,11 @@ namespace DVS_MAUI
             {
                 if (!Directory.Exists(folder))
                     return files;
+
+#if MACCATALYST
+                // Restore security-scoped access for macOS sandboxing
+                Platforms.MacCatalyst.FolderPickerImplementation.RestoreSecurityScopedAccess(folder);
+#endif
                     
                 var fileList = new DirectoryInfo(folder).GetFiles("*", SearchOption.AllDirectories);
                 var fileList2 = fileList.Where(a => 
