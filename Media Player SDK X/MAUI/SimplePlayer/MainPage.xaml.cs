@@ -48,12 +48,7 @@ namespace Simple_Player_MAUI
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
+            IVideoView vv = videoView.GetVideoView();
 
             _player = new MediaPlayerCoreX(vv);
 

@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X8", "..\AndroidDependency\VisioForge.Core.Android.X8.csproj", "{FA322D0F-AB1E-429B-9267-C69A86C14FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCaptureMB", "MAUI\SimpleCapture\SimpleCaptureMB.csproj", "{F9102788-2140-4A5F-970B-5CC507D21810}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCaptureMB8", "MAUI\SimpleCapture\SimpleCaptureMB8.csproj", "{F9102788-2140-4A5F-970B-5CC507D21810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerMB", "MAUI\SimplePlayer\SimplePlayerMB.csproj", "{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerMB8", "MAUI\SimplePlayer\SimplePlayerMB8.csproj", "{F36827D8-D7C8-470D-9CA0-D0C611F1E1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPViewerMB", "MAUI\RTSPViewer\RTSPViewerMB.csproj", "{2DA8BD79-846C-4794-B932-31BE44386930}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSPViewerMB8", "MAUI\RTSPViewer\RTSPViewerMB8.csproj", "{2DA8BD79-846C-4794-B932-31BE44386930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileStreamerMB", "MAUI\MobileStreamer\MobileStreamerMB.csproj", "{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileStreamerMB8", "MAUI\MobileStreamer\MobileStreamerMB8.csproj", "{90ABEAD0-1EF1-46B1-92F8-4167C2952A84}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCaptureMB8", "MAUI\ScreenCaptureMB\ScreenCaptureMB8.csproj", "{B7647997-F44A-4221-A67A-F494FA5CE696}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCaptureMB", "MAUI\ScreenCaptureMB\ScreenCaptureMB.csproj", "{B7647997-F44A-4221-A67A-F494FA5CE696}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLSPlayerMB", "MAUI\HLS Player\HLSPlayerMB.csproj", "{D741B173-2E52-49CA-AA60-0678BE196F8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FA322D0F-AB1E-429B-9267-C69A86C14FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA322D0F-AB1E-429B-9267-C69A86C14FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA322D0F-AB1E-429B-9267-C69A86C14FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA322D0F-AB1E-429B-9267-C69A86C14FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9102788-2140-4A5F-970B-5CC507D21810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9102788-2140-4A5F-970B-5CC507D21810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9102788-2140-4A5F-970B-5CC507D21810}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -61,6 +57,10 @@ Global
 		{D741B173-2E52-49CA-AA60-0678BE196F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D741B173-2E52-49CA-AA60-0678BE196F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D741B173-2E52-49CA-AA60-0678BE196F8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CEB9299-675D-8FAB-0423-1A0209F60B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CEB9299-675D-8FAB-0423-1A0209F60B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CEB9299-675D-8FAB-0423-1A0209F60B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CEB9299-675D-8FAB-0423-1A0209F60B14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

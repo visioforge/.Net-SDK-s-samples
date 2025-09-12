@@ -4,6 +4,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.ONVIFX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
@@ -54,28 +55,31 @@ namespace RTSPViewer
             if (uri.Scheme == "http" || uri.Scheme == "https")
             {
                 // Get RTSP URL from ONVIF
-                var onvifDevice = new ONVIFDevice();
-                var result = await onvifDevice.ConnectAsync(uri, edUsername.Text, edPassword.Text);
+                var onvifClient = new ONVIFClientX();
+                var result = await onvifClient.ConnectAsync(edURL.Text, edUsername.Text, edPassword.Text);
                 if (result)
                 {
-                    var deviceInfo = onvifDevice.GetDeviceInformation();
+                    var deviceInfo = onvifClient.DeviceInformation;
                     if (deviceInfo != null)
                     {
-                        Debug.WriteLine($"Model {deviceInfo.Model}, Firmware {deviceInfo.Firmware}");
+                        Debug.WriteLine($"Model {deviceInfo.Model}, Firmware {deviceInfo.SerialNumber}");
                     }
 
-                    var endPoints = onvifDevice.MediaEndpoints;
-                    if (endPoints.Length > 0)
+                    var profiles = await onvifClient.GetProfilesAsync();
+                    if (profiles != null && profiles.Length > 0)
                     {
-                        var rtspUri = endPoints[0].Uri.Uri;
-                        if (rtspUri != null)
+                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
+                        if (mediaUri != null)
                         {
-                            uri = new Uri(rtspUri);
+                            uri = new Uri(mediaUri.Uri);
                         }
                     }
+
+                    onvifClient.Dispose();
                 }
                 else
                 {
+                    onvifClient.Dispose();
                     await DisplayAlert("Alert", "Unable to get RTSP source info from ONVIF URL.", "OK");
                     return;
                 }
@@ -98,7 +102,7 @@ namespace RTSPViewer
 
             IVideoView vv;
 #if __MACCATALYST__
-            vv = videoView;
+            vv = videoView.GetVideoView();
 #else
             vv = videoView.GetVideoView();
 #endif

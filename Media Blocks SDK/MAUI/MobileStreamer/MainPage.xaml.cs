@@ -67,12 +67,7 @@ namespace MobileStreamer
         {
             _pipeline = new MediaBlocksPipeline();
 
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
+            var vv = videoView.GetVideoView();
 
             _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = false };
             _videoRenderer.IsSync = false;

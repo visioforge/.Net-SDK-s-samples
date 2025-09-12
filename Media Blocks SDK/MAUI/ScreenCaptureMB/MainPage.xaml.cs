@@ -110,12 +110,7 @@ namespace ScreenCaptureMB
             _mp4Sink = new MP4SinkBlock(new MP4SinkSettings(filename));
             _h264Encoder = new H264EncoderBlock();
 
-            IVideoView vv;
-#if __MACCATALYST__
-            vv = videoView;
-#else
-            vv = videoView.GetVideoView();
-#endif
+            IVideoView vv = videoView.GetVideoView();
 
             _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = false };
 
