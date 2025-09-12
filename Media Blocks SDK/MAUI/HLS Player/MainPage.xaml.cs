@@ -47,7 +47,12 @@ namespace HLS_Player_MB_MAUI
         private async void Window_Destroying(object sender, EventArgs e)
         {
             await StopAllAsync();
-            
+            await DisposePipelineAsync();
+            VisioForgeX.DestroySDK();
+        }
+
+        private async Task DisposePipelineAsync()
+        {
             if (_pipeline != null)
             {
                 _pipeline.OnError -= _pipeline_OnError;
@@ -57,17 +62,12 @@ namespace HLS_Player_MB_MAUI
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
-
-            VisioForgeX.DestroySDK();
         }
 
         private async Task CreateEngineAsync(string hlsUrl)
         {
-            if (_pipeline != null)
-            {
-                await _pipeline.StopAsync();
-                await _pipeline.DisposeAsync();
-            }
+            // Clean up any existing pipeline
+            await DisposePipelineAsync();
 
             _pipeline = new MediaBlocksPipeline();
             
@@ -117,9 +117,8 @@ namespace HLS_Player_MB_MAUI
                     return;
 
                 UpdateConnectionStatus(true);
-                btPlayPause.IsEnabled = true;
+                btPlay.IsEnabled = false;
                 btStop.IsEnabled = true;
-                btConnect.Text = "DISCONNECT";
                 
                 try
                 {
@@ -138,18 +137,17 @@ namespace HLS_Player_MB_MAUI
                     }
                     
                     // Get stream info
-                    var videoInfo = await _source.GetVideoInfoAsync();
-                    var audioInfo = await _source.GetAudioInfoAsync();
-                    
-                    if (videoInfo != null && videoInfo.Count > 0)
+                    var info = _source.Settings.GetInfo();
+
+                    if (info != null && info.VideoStreams.Count > 0)
                     {
-                        var vi = videoInfo[0];
+                        var vi = info.VideoStreams[0];
                         lblVideoInfo.Text = $"Video: {vi.Width}x{vi.Height} @ {vi.FrameRate:F2} fps, {vi.Codec}";
                     }
                     
-                    if (audioInfo != null && audioInfo.Count > 0)
+                    if (info != null && info.AudioStreams.Count > 0)
                     {
-                        var ai = audioInfo[0];
+                        var ai = info.AudioStreams[0];
                         lblAudioInfo.Text = $"Audio: {ai.SampleRate} Hz, {ai.Channels} ch, {ai.Codec}";
                     }
                 }
@@ -160,9 +158,9 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
-        private async void _pipeline_OnStop(object sender, StopEventArgs e)
+        private void _pipeline_OnStop(object sender, StopEventArgs e)
         {
-            await StopAllAsync();
+            _tmPosition.Stop();
             
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -191,9 +189,8 @@ namespace HLS_Player_MB_MAUI
 
         private void ResetUI()
         {
-            btConnect.Text = "CONNECT";
-            btPlayPause.Text = "PLAY";
-            btPlayPause.IsEnabled = false;
+            btPlay.Text = "PLAY";
+            btPlay.IsEnabled = true;
             btStop.IsEnabled = false;
             slSeeking.Value = 0;
             slSeeking.IsEnabled = false;
@@ -208,10 +205,17 @@ namespace HLS_Player_MB_MAUI
         {
             _tmPosition.Stop();
 
-            if (_pipeline != null)
+            if (_pipeline != null && _pipeline.State != PlaybackState.Free)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(force: true);
             }
+            
+            // Ensure UI is properly reset after stop
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                UpdateConnectionStatus(false);
+                ResetUI();
+            });
         }
 
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -268,30 +272,26 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
-        private async void btConnect_Clicked(object sender, EventArgs e)
+        private async void btPlay_Clicked(object sender, EventArgs e)
         {
-            if (_pipeline != null && (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause))
-            {
-                // Disconnect
-                await StopAllAsync();
-                return;
-            }
-
-            var hlsUrl = txtHLSUrl.Text?.Trim();
-            if (string.IsNullOrEmpty(hlsUrl))
-            {
-                await DisplayAlert("Error", "Please enter an HLS stream URL", "OK");
-                return;
-            }
-
-            if (!hlsUrl.StartsWith("http://") && !hlsUrl.StartsWith("https://"))
-            {
-                await DisplayAlert("Error", "Please enter a valid HTTP/HTTPS URL", "OK");
-                return;
-            }
-
             try
             {
+                var hlsUrl = txtHLSUrl.Text?.Trim();
+                if (string.IsNullOrEmpty(hlsUrl))
+                {
+                    await DisplayAlert("Error", "Please enter an HLS stream URL", "OK");
+                    return;
+                }
+
+                if (!hlsUrl.StartsWith("http://") && !hlsUrl.StartsWith("https://"))
+                {
+                    await DisplayAlert("Error", "Please enter a valid HTTP/HTTPS URL", "OK");
+                    return;
+                }
+
+                // Start playing
+                btPlay.IsEnabled = false;
+                btPlay.Text = "CONNECTING...";
                 lblStreamInfo.Text = "Connecting...";
                 lblStreamInfo.TextColor = Colors.Yellow;
                 
@@ -299,7 +299,7 @@ namespace HLS_Player_MB_MAUI
                 await _pipeline.StartAsync();
                 
                 _tmPosition.Start();
-                btPlayPause.Text = "PAUSE";
+                btPlay.Text = "PLAY";
             }
             catch (Exception ex)
             {
@@ -307,32 +307,30 @@ namespace HLS_Player_MB_MAUI
                 lblStreamInfo.Text = $"Connection failed: {ex.Message}";
                 lblStreamInfo.TextColor = Colors.Red;
                 UpdateConnectionStatus(false);
+                btPlay.IsEnabled = true;
+                btPlay.Text = "PLAY";
             }
         }
 
-        private async void btPlayPause_Clicked(object sender, EventArgs e)
-        {
-            if (_pipeline == null)
-                return;
-
-            if (_pipeline.State == PlaybackState.Play)
-            {
-                await _pipeline.PauseAsync();
-                btPlayPause.Text = "PLAY";
-                lbStatus.Text = "PAUSED";
-                lbStatus.TextColor = Colors.Yellow;
-            }
-            else if (_pipeline.State == PlaybackState.Pause)
-            {
-                await _pipeline.ResumeAsync();
-                btPlayPause.Text = "PAUSE";
-                lbStatus.Text = "";
-            }
-        }
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                btStop.IsEnabled = false;
+                btStop.Text = "STOPPING...";
+                
+                await StopAllAsync();
+                
+                // Properly dispose the pipeline after stop
+                await DisposePipelineAsync();
+                
+                btStop.Text = "STOP";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error stopping: {ex.Message}");
+            }
         }
 
         private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Simple_Player_MB_MAUI
+namespace HLS_Player_MB_MAUI
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

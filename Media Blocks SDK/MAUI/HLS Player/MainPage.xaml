@@ -137,24 +137,20 @@
                         VerticalOptions="Center">
 
                         <Button
-                            x:Name="btConnect"
-                            Text="CONNECT"
-                            Margin="5"
-                            VerticalOptions="Center"
-                            Clicked="btConnect_Clicked" />
-
-                        <Button
-                            x:Name="btPlayPause"
+                            x:Name="btPlay"
                             Text="PLAY"
-                            Margin="5"
-                            IsEnabled="False"
-                            Clicked="btPlayPause_Clicked" />
+                            Margin="10,5"
+                            WidthRequest="100"
+                            VerticalOptions="Center"
+                            Clicked="btPlay_Clicked" />
 
                         <Button
                             x:Name="btStop"
                             Text="STOP"
-                            Margin="5"
+                            Margin="10,5"
+                            WidthRequest="100"
                             IsEnabled="False"
+                            VerticalOptions="Center"
                             Clicked="btStop_Clicked" />
 
                     </StackLayout>

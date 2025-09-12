@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Simple_Player_MB_MAUI
+namespace HLS_Player_MB_MAUI
 {
     public class Program
     {

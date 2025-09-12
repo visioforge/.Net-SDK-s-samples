@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Simple_Player_MB_MAUI
+namespace HLS_Player_MB_MAUI
 {
     [Application]
     public class MainApplication : MauiApplication
