@@ -1,0 +1,118 @@
+name: Build MAUI Demos (All SDKs)
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-windows-android:
+    name: Build MAUI Demos - Windows/Android
+    runs-on: windows-2022
+    
+    env:
+      # Media Blocks SDK MAUI Demos
+      Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.sln"
+      
+      # Media Player SDK X MAUI Demos  
+      Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
+      
+      # Video Capture SDK X MAUI Demos
+      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
+      
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: | 
+          8.0.x
+          9.0.x
+
+    - name: Install MAUI workloads
+      run: |
+        dotnet workload install maui
+        dotnet workload install maui-android 
+        dotnet workload install maui-windows
+        dotnet workload install maui-desktop
+        dotnet workload install maui-mobile
+        dotnet workload install android
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
+        
+    ## Media Blocks SDK MAUI Demos
+    
+    - name: Restore Media Blocks MAUI demos
+      run: dotnet restore "$env:Solution_Name_MB"
+      
+    - name: Build Media Blocks MAUI demos - Windows
+      run: |
+        msbuild $env:Solution_Name_MB `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-windows10.0.19041.0 `
+          -verbosity:normal
+      continue-on-error: true
+      
+    - name: Build Media Blocks MAUI demos - Android
+      run: |
+        msbuild $env:Solution_Name_MB `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-android `
+          -verbosity:normal
+      continue-on-error: true
+      
+    ## Media Player SDK X MAUI Demos
+    
+    - name: Restore Media Player X MAUI demos
+      run: dotnet restore "$env:Solution_Name_MP"
+      
+    - name: Build Media Player X MAUI demos - Windows
+      run: |
+        msbuild $env:Solution_Name_MP `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-windows10.0.19041.0 `
+          -verbosity:normal
+      continue-on-error: true
+      
+    - name: Build Media Player X MAUI demos - Android
+      run: |
+        msbuild $env:Solution_Name_MP `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-android `
+          -verbosity:normal
+      continue-on-error: true
+      
+    ## Video Capture SDK X MAUI Demos
+    
+    - name: Restore Video Capture X MAUI demos
+      run: dotnet restore "$env:Solution_Name_VC"
+      
+    - name: Build Video Capture X MAUI demos - Windows
+      run: |
+        msbuild $env:Solution_Name_VC `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-windows10.0.19041.0 `
+          -verbosity:normal
+      continue-on-error: true
+      
+    - name: Build Video Capture X MAUI demos - Android
+      run: |
+        msbuild $env:Solution_Name_VC `
+          -t:rebuild `
+          -property:Configuration=Release `
+          -property:TargetFramework=net8.0-android `
+          -verbosity:normal
+      continue-on-error: true
