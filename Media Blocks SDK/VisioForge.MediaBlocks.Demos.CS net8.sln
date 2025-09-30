@@ -143,6 +143,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecklinkFillKeyDemo net8", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barcode Detection Demo MB WPF net8", "WPF\CSharp\Barcode Detection Demo\Barcode Detection Demo MB WPF net8.csproj", "{3F6CE2BE-977A-ABE5-74DC-A067A71254DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMatrix Detection Demo MB WPF net8", "WPF\CSharp\DataMatrix Detection Demo\DataMatrix Detection Demo MB WPF net8.csproj", "{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player 3D Demo MB WPF net8", "WPF\CSharp\Simple Player 3D Demo WPF\Simple Player 3D Demo MB WPF net8.csproj", "{BE507048-AFD8-126D-88BE-717B2266CA49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,6 +421,14 @@ Global
 		{3F6CE2BE-977A-ABE5-74DC-A067A71254DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F6CE2BE-977A-ABE5-74DC-A067A71254DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F6CE2BE-977A-ABE5-74DC-A067A71254DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE507048-AFD8-126D-88BE-717B2266CA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE507048-AFD8-126D-88BE-717B2266CA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE507048-AFD8-126D-88BE-717B2266CA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE507048-AFD8-126D-88BE-717B2266CA49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -489,6 +501,8 @@ Global
 		{73537D2C-49EA-B80E-5B2E-C770A2925472} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{3D3884EE-491F-17FC-D1C7-67DB526C2DDB} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{3F6CE2BE-977A-ABE5-74DC-A067A71254DD} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{2A1D3532-049C-72C8-9DFC-72C7CA4DBB04} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{BE507048-AFD8-126D-88BE-717B2266CA49} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
