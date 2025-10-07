@@ -258,7 +258,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             // Start DirectShow part first
             await VideoCapture1.StartAsync();
 
-            Thread.Sleep(500); // give some time to DirectShow to start
+            await Task.Delay(500); // give some time to DirectShow to start
 
             // Start Media Blocks part
             await _pipeline.StartAsync();

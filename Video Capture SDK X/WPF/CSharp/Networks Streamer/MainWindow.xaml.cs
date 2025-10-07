@@ -282,7 +282,7 @@ namespace Networks_Streamer_Demo
                     PlaylistLocation = Path.Combine(AppContext.BaseDirectory, "playlist.m3u8"),
                     PlaylistRoot = edStreamingKey.Text,
                     SendKeyframeRequests = true,
-                    TargetDuration = 5,
+                    TargetDuration = TimeSpan.FromSeconds(5),
                     Custom_HTTP_Server_Enabled = true,
                     Custom_HTTP_Server_Port = new Uri(edStreamingKey.Text).Port
                 };

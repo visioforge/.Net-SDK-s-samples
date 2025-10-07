@@ -124,7 +124,7 @@ namespace SyncPlayback
             {
                 _player1.OnError -= Player_OnError;
                 _player1.OnStop -= Player1_OnStop;
-                Thread.Sleep(500);
+                await Task.Delay(500);
                 await _player1.DisposeAsync();
                 _player1 = null;
             }
@@ -133,7 +133,7 @@ namespace SyncPlayback
             {
                 _player2.OnError -= Player_OnError;
                 //_player2.OnStop -= Player2_OnStop;
-                Thread.Sleep(500);
+                await Task.Delay(500);
                 await _player2.DisposeAsync();
                 _player2 = null;
             }
@@ -196,7 +196,7 @@ namespace SyncPlayback
         //    _player2.Play_DelayEnabled = true;
             await _player2.PlayAsync(onlyPreload: true);
 
-            Thread.Sleep(500);
+            await Task.Delay(500);
 
             // Start players
             await _player1.ResumeAsync();

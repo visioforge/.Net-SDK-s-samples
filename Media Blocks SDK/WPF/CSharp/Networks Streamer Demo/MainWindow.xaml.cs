@@ -327,7 +327,7 @@ namespace Networks_Streamer_Demo
                         PlaylistLocation = Path.Combine(serverPath, "playlist.m3u8"),
                         PlaylistRoot = URL,
                         SendKeyframeRequests = true,
-                        TargetDuration = 5,
+                        TargetDuration = TimeSpan.FromSeconds(5),
                         Custom_HTTP_Server_Enabled = true,
                         Custom_HTTP_Server_Port = 8088
                     };

@@ -369,8 +369,10 @@ public sealed partial class MainWindow : Window
             var appWindow = AppWindow.GetFromWindowId(windowId);
             appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
         }
-        catch
+        catch (Exception ex)
         {
+            // Ignore icon setting errors - not critical for functionality
+            System.Diagnostics.Debug.WriteLine($"Failed to set window icon: {ex.Message}");
         }
     }
 

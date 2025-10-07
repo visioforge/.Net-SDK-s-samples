@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## Upcoming
+
+* [Media Blocks SDK .Net] Added DASH (Dynamic Adaptive Streaming over HTTP) sink support with DASHSinkBlock and DASHOutput classes
+
 ## 2025.9.5
 
 * [Video Fingerprinting SDK] Improved support for flipped videos

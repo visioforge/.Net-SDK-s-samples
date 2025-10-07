@@ -126,7 +126,7 @@ namespace Simple_Player_Demo_X
             {
                 _player.OnError -= Player_OnError;
                 _player.OnStop -= Player_OnStop;
-                Thread.Sleep(500);
+                await Task.Delay(500);
                 await _player.DisposeAsync();
                 _player = null;
             }

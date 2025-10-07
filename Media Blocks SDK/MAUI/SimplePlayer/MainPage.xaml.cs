@@ -70,17 +70,24 @@ namespace Simple_Player_MB_MAUI
 
         private async void _player_OnStop(object sender, StopEventArgs e)
         {
-            await StopAllAsync();
-            
-            // update UI controls using invoke
-            MainThread.BeginInvokeOnMainThread(async () =>
+            try
             {
-                btSpeed.Text = "SPEED: 1X";
-                btPlayPause.Text = "PLAY";
-                slSeeking.Value = 0;
-                lbDuration.Text = "00:00:00";
-                lbPosition.Text = "00:00:00";
-            });
+                await StopAllAsync();
+                
+                // update UI controls using invoke
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    btSpeed.Text = "SPEED: 1X";
+                    btPlayPause.Text = "PLAY";
+                    slSeeking.Value = 0;
+                    lbDuration.Text = "00:00:00";
+                    lbPosition.Text = "00:00:00";
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in OnStop: {ex.Message}");
+            }
         }
 
         private void MainPage_Loaded(object sender, EventArgs e)
@@ -88,11 +95,11 @@ namespace Simple_Player_MB_MAUI
             Window.Destroying += Window_Destroying;
         }
 
-        private void _player_OnStart(object sender, EventArgs e)
+        private async void _player_OnStart(object sender, EventArgs e)
         {
             try
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     if (_pipeline == null)
                     {
@@ -104,22 +111,29 @@ namespace Simple_Player_MB_MAUI
             }
             catch (Exception exception)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                System.Diagnostics.Debug.WriteLine($"Error in OnStart: {exception.Message}");
             }                      
         }
 
         private async void Window_Destroying(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= _player_OnError;
-                await _pipeline.StopAsync();
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= _player_OnError;
+                    await _pipeline.StopAsync();
 
-                _pipeline.Dispose();
-                _pipeline = null;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during cleanup: {ex.Message}");
+            }
         }
 
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
@@ -154,12 +168,12 @@ namespace Simple_Player_MB_MAUI
                 return;
             }
 
-            var pos = await _pipeline.Position_GetAsync();
-            var progress = (int)pos.TotalMilliseconds;
-
             try
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                var pos = await _pipeline.Position_GetAsync();
+                var progress = (int)pos.TotalMilliseconds;
+
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     if (_pipeline == null)
                     {
@@ -188,15 +202,22 @@ namespace Simple_Player_MB_MAUI
             }
             catch (Exception exception)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                System.Diagnostics.Debug.WriteLine($"Error in timer update: {exception.Message}");
             }
         }
 
         private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            if (!_isTimerUpdate && _pipeline != null)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                if (!_isTimerUpdate && _pipeline != null)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error setting position: {ex.Message}");
             }
         }
 
@@ -210,12 +231,12 @@ namespace Simple_Player_MB_MAUI
 
         private async void btOpen_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
-
-            btPlayPause.Text = "PLAY";
-
             try
             {
+                await StopAllAsync();
+
+                btPlayPause.Text = "PLAY";
+
                 var result = await FilePicker.Default.PickAsync();
                 if (result != null)
                 {
@@ -224,75 +245,101 @@ namespace Simple_Player_MB_MAUI
                     lbFilename.IsVisible = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
                 // The user canceled or something went wrong
             }
         }
 
         private async void btPlayPause_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_filename))
+            try
             {
-                return;
+                if (string.IsNullOrEmpty(_filename))
+                {
+                    return;
+                }
+
+                // START
+                if (_pipeline == null || _pipeline.State == PlaybackState.Free)
+                {
+                    await CreateEngineAsync();
+
+                    await _pipeline.StartAsync();
+
+                    _tmPosition.Start();
+
+                    btPlayPause.Text = "PAUSE";
+                }
+                else if (_pipeline.State == PlaybackState.Play)
+                {
+                    await _pipeline.PauseAsync();
+
+                    btPlayPause.Text = "PLAY";
+                }
+                else if (_pipeline.State == PlaybackState.Pause)
+                {
+                    await _pipeline.ResumeAsync();
+
+                    btPlayPause.Text = "PAUSE";
+                }
             }
-
-            // START
-            if (_pipeline == null || _pipeline.State == PlaybackState.Free)
+            catch (Exception ex)
             {
-                await CreateEngineAsync();
-
-                await _pipeline.StartAsync();
-
-                _tmPosition.Start();
-
-                btPlayPause.Text = "PAUSE";
-            }
-            else if (_pipeline.State == PlaybackState.Play)
-            {
-                await _pipeline.PauseAsync();
-
-                btPlayPause.Text = "PLAY";
-            }
-            else if (_pipeline.State == PlaybackState.Pause)
-            {
-                await _pipeline.ResumeAsync();
-
-                btPlayPause.Text = "PAUSE";
+                System.Diagnostics.Debug.WriteLine($"Error in play/pause: {ex.Message}");
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await DisplayAlert("Error", $"Playback error: {ex.Message}", "OK");
+                });
             }
         }
 
         private async void btSpeed_Clicked(object sender, EventArgs e)
-        {         
-            if (btSpeed.Text == "SPEED: 1X")
+        {
+            try
             {
-                // set 2x
-                btSpeed.Text = "SPEED: 2X";
-                await _pipeline.Rate_SetAsync(2.0);
+                if (btSpeed.Text == "SPEED: 1X")
+                {
+                    // set 2x
+                    btSpeed.Text = "SPEED: 2X";
+                    await _pipeline.Rate_SetAsync(2.0);
+                }
+                else if (btSpeed.Text == "SPEED: 2X")
+                {
+                    // set 0.5x
+                    btSpeed.Text = "SPEED: 0.5X";
+                    await _pipeline.Rate_SetAsync(0.5);
+                }
+                else if (btSpeed.Text == "SPEED: 0.5X")
+                {
+                    // set 1x
+                    btSpeed.Text = "SPEED: 1X";
+                    await _pipeline.Rate_SetAsync(1.0);
+                }
             }
-            else if (btSpeed.Text == "SPEED: 2X")
+            catch (Exception ex)
             {
-                // set 0.5x
-                btSpeed.Text = "SPEED: 0.5X";
-                await _pipeline.Rate_SetAsync(0.5);
-            }
-            else if (btSpeed.Text == "SPEED: 0.5X")
-            {
-                // set 1x
-                btSpeed.Text = "SPEED: 1X";
-                await _pipeline.Rate_SetAsync(1.0);
+                System.Diagnostics.Debug.WriteLine($"Error setting speed: {ex.Message}");
             }
         }
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                await StopAllAsync();
 
-            btSpeed.Text = "SPEED: 1X";
-            btPlayPause.Text = "PLAY";
-            slSeeking.Value = 0;
-            lbDuration.Text = "00:00:00";
-            lbPosition.Text = "00:00:00";
+                btSpeed.Text = "SPEED: 1X";
+                btPlayPause.Text = "PLAY";
+                slSeeking.Value = 0;
+                lbDuration.Text = "00:00:00";
+                lbPosition.Text = "00:00:00";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error stopping playback: {ex.Message}");
+            }
         }
     }
 }

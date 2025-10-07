@@ -1,0 +1,58 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaBlocks_SMPTE_Effects_Demo_WPF"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="MediaBlocks_SMPTE_Effects_Demo_WPF.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - SMPTE Effects Demo" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <!-- File Selection -->
+        <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="edFilename" Margin="10,36,150,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top"/>
+        <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Right" Margin="0,35,125,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
+        
+        <!-- Video Display -->
+        <WPF:VideoView x:Name="VideoView1" Margin="10,70,150,200"/>
+        
+        <!-- SMPTE Effect Controls -->
+        <GroupBox Header="SMPTE Effect Settings" Margin="0,70,10,200" HorizontalAlignment="Right" Width="135">
+            <StackPanel Margin="5">
+                <CheckBox x:Name="cbEnableSMPTE" Content="Enable SMPTE" Checked="cbEnableSMPTE_Changed" Unchecked="cbEnableSMPTE_Changed"/>
+                <CheckBox x:Name="cbUseSMPTEAlpha" Content="Use SMPTE Alpha" Checked="cbUseSMPTEAlpha_Changed" Unchecked="cbUseSMPTEAlpha_Changed"/>
+                
+                <Label Content="Transition Type:" Margin="0,5,0,0"/>
+                <ComboBox x:Name="comboTransitionType" SelectionChanged="comboTransitionType_SelectionChanged"/>
+                
+                <Label Content="Border:" Margin="0,5,0,0"/>
+                <Slider x:Name="sliderBorder" Minimum="0" Maximum="50" Value="0" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="sliderBorder_ValueChanged"/>
+                <TextBlock x:Name="lblBorderValue" Text="0" HorizontalAlignment="Center"/>
+                
+                <Label Content="Depth/Position:" Margin="0,5,0,0"/>
+                <Slider x:Name="sliderDepth" Minimum="0" Maximum="1" Value="0" TickFrequency="0.01" ValueChanged="sliderDepth_ValueChanged"/>
+                <TextBlock x:Name="lblDepthValue" Text="0.00" HorizontalAlignment="Center"/>
+                
+                <CheckBox x:Name="cbInvert" Content="Invert" Checked="cbInvert_Changed" Unchecked="cbInvert_Changed" Margin="0,5,0,0"/>
+            </StackPanel>
+        </GroupBox>
+        
+        <!-- Debug and Log -->
+        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Right" Margin="0,11,27,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Log" Margin="0,0,82,165" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <TextBox x:Name="edLog" HorizontalAlignment="Right" Margin="0,0,10,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="135" Height="110"/>
+        
+        <!-- Timeline and Playback Controls -->
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,25" VerticalAlignment="Bottom" Width="400" ValueChanged="tbTimeline_ValueChanged"/>
+        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="420,0,0,27" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Bottom"/>
+        
+        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,1" VerticalAlignment="Bottom" Width="53" Click="btStart_Click"/>
+        <Button x:Name="btResume" Content="Resume" HorizontalAlignment="Left" Margin="68,0,0,1" VerticalAlignment="Bottom" Width="53" Click="btResume_Click"/>
+        <Button x:Name="btPause" Content="Pause" HorizontalAlignment="Left" Margin="126,0,0,1" VerticalAlignment="Bottom" Width="53" Click="btPause_Click"/>
+        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="184,0,0,1" VerticalAlignment="Bottom" Width="53" Click="btStop_Click"/>
+
+        <!-- Audio Controls -->
+        <TextBlock HorizontalAlignment="Left" Margin="280,0,0,23" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Bottom"/>
+        <Slider x:Name="tbVolume" HorizontalAlignment="Left" Margin="320,0,0,25" VerticalAlignment="Bottom" Width="120" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged"/>
+    </Grid>
+</Window>

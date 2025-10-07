@@ -90,37 +90,45 @@ namespace SimpleCapture
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
+            try
+            {
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
-            await RequestCameraPermissionAsync();
-            await RequestMicPermissionAsync();
+                await RequestCameraPermissionAsync();
+                await RequestMicPermissionAsync();
 #endif
 
 #if __IOS__ && !__MACCATALYST__
-            RequestPhotoPermission();
+                RequestPhotoPermission();
 #endif
 
-            // cameras
-            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            if (_cameras.Length > 0)
-            {
-                btCamera.Text = _cameras[0].DisplayName;
-            }
+                // cameras
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                if (_cameras.Length > 0)
+                {
+                    btCamera.Text = _cameras[0].DisplayName;
+                }
 
-            // mics
-            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
-            if (_mics.Length > 0)
-            {
-                btMic.Text = _mics[0].DisplayName;
-            }
+                // mics
+                _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
+                if (_mics.Length > 0)
+                {
+                    btMic.Text = _mics[0].DisplayName;
+                }
 
-            // audio outputs
-            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
-            if (_speakers.Length > 0)
-            {
-                btSpeakers.Text = _speakers[0].DisplayName;
-            }
+                // audio outputs
+                _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
+                if (_speakers.Length > 0)
+                {
+                    btSpeakers.Text = _speakers[0].DisplayName;
+                }
 
-            Window.Destroying += Window_Destroying;
+                Window.Destroying += Window_Destroying;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading page: {ex.Message}");
+                await DisplayAlert("Error", $"Failed to initialize devices: {ex.Message}", "OK");
+            }
         }
 
         private async Task RequestCameraPermissionAsync()
@@ -174,16 +182,23 @@ namespace SimpleCapture
 
         private async void Window_Destroying(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= Core_OnError;
-                await _pipeline.StopAsync();
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= Core_OnError;
+                    await _pipeline.StopAsync();
 
-                _pipeline.Dispose();
-                _pipeline = null;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during cleanup: {ex.Message}");
+            }
         }
 
         private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
@@ -266,27 +281,35 @@ namespace SimpleCapture
 
         private async void btStop_Clicked(object sender, EventArgs e)
         {
-#if __IOS__ && !__MACCATALYST__
-            bool capture = _mp4Sink != null;
-            string filename = null;
-            if (capture)
+            try
             {
-                filename = _mp4Sink.GetFilenameOrURL();
-            }
+#if __IOS__ && !__MACCATALYST__
+                bool capture = _mp4Sink != null;
+                string filename = null;
+                if (capture)
+                {
+                    filename = _mp4Sink.GetFilenameOrURL();
+                }
 #endif
 
-            await StopAllAsync();
+                await StopAllAsync();
 
-            // save video to iOS photo library
+                // save video to iOS photo library
 #if __IOS__ && !__MACCATALYST__
-            if (capture)
-            {
-                AddVideoToPhotosLibrary(filename);
-            }
+                if (capture)
+                {
+                    AddVideoToPhotosLibrary(filename);
+                }
 #endif
 
-            btStartPreview.Text = "PREVIEW";
-            btStartCapture.Text = "CAPTURE";
+                btStartPreview.Text = "PREVIEW";
+                btStartCapture.Text = "CAPTURE";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error stopping capture: {ex.Message}");
+                await DisplayAlert("Error", $"Failed to stop capture: {ex.Message}", "OK");
+            }
         }
 
         private void btCamera_Clicked(object sender, System.EventArgs e)
@@ -495,93 +518,111 @@ namespace SimpleCapture
 
         private async void btStartPreview_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
-
-            CreateEngine();
-
-            switch (_pipeline.State)
+            try
             {
-                case PlaybackState.Play:
+                await StopAllAsync();
+
+                CreateEngine();
+
+                switch (_pipeline.State)
                 {
-                    await _pipeline.PauseAsync();
-
-                    btStartPreview.Text = "PREVIEW";
-                }
-
-                    break;
-                case PlaybackState.Pause:
-                {
-                    await _pipeline.ResumeAsync();
-
-                    btStartPreview.Text = "PAUSE";
-                }
-
-                    break;
-                case PlaybackState.Free:
-                {
-                    if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
+                    case PlaybackState.Play:
                     {
-                        return;
+                        await _pipeline.PauseAsync();
+
+                        btStartPreview.Text = "PREVIEW";
                     }
 
-                    await ConfigurePreviewAsync(true);
+                        break;
+                    case PlaybackState.Pause:
+                    {
+                        await _pipeline.ResumeAsync();
 
-                    // start
-                    await _pipeline.StartAsync();
+                        btStartPreview.Text = "PAUSE";
+                    }
 
-                    btStartPreview.Text = "PAUSE";
+                        break;
+                    case PlaybackState.Free:
+                    {
+                        if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
+                        {
+                            return;
+                        }
+
+                        await ConfigurePreviewAsync(true);
+
+                        // start
+                        await _pipeline.StartAsync();
+
+                        btStartPreview.Text = "PAUSE";
+                    }
+
+                        break;
+                    default:
+                        break;
                 }
-
-                    break;
-                default:
-                    break;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error starting preview: {ex.Message}");
+                await DisplayAlert("Error", $"Failed to start preview: {ex.Message}", "OK");
+                btStartPreview.Text = "PREVIEW";
             }
         }
 
         private async void btStartCapture_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
-
-            CreateEngine();
-
-            switch (_pipeline.State)
+            try
             {
-                case PlaybackState.Play:
+                await StopAllAsync();
+
+                CreateEngine();
+
+                switch (_pipeline.State)
                 {
-                    await _pipeline.PauseAsync();
-
-                    btStartCapture.Text = "CAPTURE";
-                }
-
-                    break;
-                case PlaybackState.Pause:
-                {
-                    await _pipeline.ResumeAsync();
-
-                    btStartCapture.Text = "PAUSE";
-                }
-
-                    break;
-                case PlaybackState.Free:
-                {
-                    if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
+                    case PlaybackState.Play:
                     {
-                        return;
+                        await _pipeline.PauseAsync();
+
+                        btStartCapture.Text = "CAPTURE";
                     }
 
-                    await ConfigurePreviewAsync(false);
+                        break;
+                    case PlaybackState.Pause:
+                    {
+                        await _pipeline.ResumeAsync();
 
-                    ConfigureCapture();
+                        btStartCapture.Text = "PAUSE";
+                    }
 
-                    // start
-                    await _pipeline.StartAsync();
+                        break;
+                    case PlaybackState.Free:
+                    {
+                        if (_pipeline.State == PlaybackState.Play || _pipeline.State == PlaybackState.Pause)
+                        {
+                            return;
+                        }
 
-                    btStartCapture.Text = "PAUSE";
+                        await ConfigurePreviewAsync(false);
+
+                        ConfigureCapture();
+
+                        // start
+                        await _pipeline.StartAsync();
+
+                        btStartCapture.Text = "PAUSE";
+                    }
+
+                        break;
+                    default:
+                        break;
                 }
-
-                    break;
-                default:
-                    break;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error starting capture: {ex.Message}");
+                await DisplayAlert("Error", $"Failed to start capture: {ex.Message}", "OK");
+                btStartCapture.Text = "CAPTURE";
             }
         }
     }

@@ -48,45 +48,59 @@ namespace Simple_Player_MAUI
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-            IVideoView vv = videoView.GetVideoView();
-
-            _player = new MediaPlayerCoreX(vv);
-
-            _player.OnError += _player_OnError;
-            _player.OnStart += _player_OnStart;
-            _player.OnStop += _player_OnStop;
-            
-#if !__IOS__ || __MACCATALYST__
-            var audioOutputs = await _player.Audio_OutputDevicesAsync();
-            if (audioOutputs.Length > 0)
+            try
             {
-                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputs[0]);
-            }            
-#endif
+                IVideoView vv = videoView.GetVideoView();
 
-            Window.Destroying += Window_Destroying;
+                _player = new MediaPlayerCoreX(vv);
+
+                _player.OnError += _player_OnError;
+                _player.OnStart += _player_OnStart;
+                _player.OnStop += _player_OnStop;
+                
+    #if !__IOS__ || __MACCATALYST__
+                var audioOutputs = await _player.Audio_OutputDevicesAsync();
+                if (audioOutputs.Length > 0)
+                {
+                    _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputs[0]);
+                }            
+    #endif
+
+                Window.Destroying += Window_Destroying;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading page: {ex.Message}");
+            }
         }
         
         private async void _player_OnStop(object sender, StopEventArgs e)
         {
-            await StopAllAsync();
-            
-            // update UI controls using invoke
-            MainThread.BeginInvokeOnMainThread(async () =>
+            try
             {
-                btSpeed.Text = "SPEED: 1X";
-                btPlayPause.Text = "PLAY";
-                slSeeking.Value = 0;
-                lbDuration.Text = "00:00:00";
-                lbPosition.Text = "00:00:00";
-            });
+                await StopAllAsync();
+                
+                // update UI controls using invoke
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    btSpeed.Text = "SPEED: 1X";
+                    btPlayPause.Text = "PLAY";
+                    slSeeking.Value = 0;
+                    lbDuration.Text = "00:00:00";
+                    lbPosition.Text = "00:00:00";
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in OnStop: {ex.Message}");
+            }
         }
 
-        private void _player_OnStart(object sender, EventArgs e)
+        private async void _player_OnStart(object sender, EventArgs e)
         {
             try
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     if (_player == null)
                     {
@@ -98,7 +112,7 @@ namespace Simple_Player_MAUI
             }
             catch (Exception exception)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                System.Diagnostics.Debug.WriteLine($"Error in OnStart: {exception.Message}");
             }                      
         }
 
@@ -148,12 +162,12 @@ namespace Simple_Player_MAUI
                 return;
             }
 
-            var pos = await _player.Position_GetAsync();
-            var progress = (int)pos.TotalMilliseconds;
-
             try
             {
-                MainThread.BeginInvokeOnMainThread(() =>
+                var pos = await _player.Position_GetAsync();
+                var progress = (int)pos.TotalMilliseconds;
+
+                await MainThread.InvokeOnMainThreadAsync(() =>
                 {
                     if (_player == null)
                     {
@@ -180,15 +194,22 @@ namespace Simple_Player_MAUI
             }
             catch (Exception exception)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                System.Diagnostics.Debug.WriteLine($"Error in timer update: {exception.Message}");
             }
         }
 
         private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            if (!_isTimerUpdate && _player != null)
+            try
             {
-                await _player.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                if (!_isTimerUpdate && _player != null)
+                {
+                    await _player.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error setting position: {ex.Message}");
             }
         }
 
@@ -202,12 +223,12 @@ namespace Simple_Player_MAUI
 
         private async void btOpen_Clicked(object sender, EventArgs e)
         {
-            await StopAllAsync();
-
-            btPlayPause.Text = "PLAY";
-
             try
             {
+                await StopAllAsync();
+
+                btPlayPause.Text = "PLAY";
+
                 var result = await FilePicker.Default.PickAsync();
                 if (result != null)
                 {
@@ -216,8 +237,9 @@ namespace Simple_Player_MAUI
                     lbFilename.IsVisible = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
                 // The user canceled or something went wrong
             }
         }

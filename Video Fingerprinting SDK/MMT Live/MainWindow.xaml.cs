@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace VisioForge_MMT_Live
@@ -103,11 +104,11 @@ namespace VisioForge_MMT_Live
             {
                 _stopFlag = true;
 
-                Thread.Sleep(500);
+                await Task.Delay(500);
 
                 _videoCapture?.Stop();
 
-                Thread.Sleep(500);
+                await Task.Delay(500);
 
                 ProcessVideoDelegateMethod();
 
@@ -494,8 +495,10 @@ namespace VisioForge_MMT_Live
                 _frameBitmap.WritePixels(new Int32Rect(0, 0, e.Frame.Width, e.Frame.Height), e.Frame.Data, (int)e.Frame.DataSize, lineStep);
                 pnScreen.EndInit();
             }
-            catch
+            catch (Exception ex)
             {
+                // Ignore frame display errors - not critical for fingerprinting functionality
+                System.Diagnostics.Debug.WriteLine($"Failed to display video frame: {ex.Message}");
             }
         }
 
@@ -581,8 +584,10 @@ namespace VisioForge_MMT_Live
                     Dispatcher.BeginInvoke(new ProcessVideoDelegate(ProcessVideoDelegateMethod));
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                // Ignore fingerprint processing errors
+                System.Diagnostics.Debug.WriteLine($"Failed to process video frame for fingerprinting: {ex.Message}");
             }
         }
 

@@ -79,6 +79,7 @@
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error adding folder: {ex.Message}");
                 await DisplayAlert("Error", $"Failed to add folder: {ex.Message}", "OK");
             }
         }
@@ -93,12 +94,12 @@
 
         private async void btSearch_Click(object? sender, EventArgs e)
         {
-            btSearch.IsEnabled = false;
-            edErrors.Text = string.Empty;
-            _results.Clear();
-
             try
             {
+                btSearch.IsEnabled = false;
+                edErrors.Text = string.Empty;
+                _results.Clear();
+
                 // Settings
                 int indexingTime = cbIndexingTime.SelectedIndex switch
                 {
@@ -136,7 +137,6 @@
                 if (filenames.Count == 0)
                 {
                     await DisplayAlert("Information", "No video files found in the specified folders.", "OK");
-                    btSearch.IsEnabled = true;
                     return;
                 }
 
@@ -259,8 +259,13 @@
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Search error: {ex.Message}");
                 await DisplayAlert("Error", $"Search failed: {ex.Message}", "OK");
-                edErrors.Text += $"Search error: {ex.Message}{Environment.NewLine}";
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    edErrors.Text += $"Search error: {ex.Message}{Environment.NewLine}";
+                    lbStatus.Text = "Search failed.";
+                });
             }
             finally
             {

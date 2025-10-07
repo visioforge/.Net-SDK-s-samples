@@ -132,17 +132,28 @@ namespace RTSPViewer
 
         private async void btPlay_Clicked(object sender, EventArgs e)
         {
-            if (btPlay.Text == "PLAY")
+            try
             {
-                btPlay.Text = "STOP";
+                if (btPlay.Text == "PLAY")
+                {
+                    btPlay.Text = "STOP";
 
-                await OpenAsync();
+                    await OpenAsync();
+                }
+                else
+                {
+                    btPlay.Text = "PLAY";
+
+                    await StopAsync();
+                }
             }
-            else
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error in play/stop: {ex.Message}");
+                await DisplayAlert("Error", $"Operation failed: {ex.Message}", "OK");
+                
+                // Reset button state on error
                 btPlay.Text = "PLAY";
-
-                await StopAsync();
             }
         }
 

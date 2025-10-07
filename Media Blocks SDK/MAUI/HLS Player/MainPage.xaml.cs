@@ -46,9 +46,16 @@ namespace HLS_Player_MB_MAUI
 
         private async void Window_Destroying(object sender, EventArgs e)
         {
-            await StopAllAsync();
-            await DisposePipelineAsync();
-            VisioForgeX.DestroySDK();
+            try
+            {
+                await StopAllAsync();
+                await DisposePipelineAsync();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during cleanup: {ex.Message}");
+            }
         }
 
         private async Task DisposePipelineAsync()
@@ -228,7 +235,7 @@ namespace HLS_Player_MB_MAUI
                 var pos = await _pipeline.Position_GetAsync();
                 var progress = (int)pos.TotalMilliseconds;
 
-                MainThread.BeginInvokeOnMainThread(async () =>
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     if (_pipeline == null)
                         return;
@@ -256,7 +263,7 @@ namespace HLS_Player_MB_MAUI
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Timer error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
             }
         }
 
@@ -303,6 +310,7 @@ namespace HLS_Player_MB_MAUI
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Error playing stream: {ex.Message}");
                 await DisplayAlert("Connection Error", $"Failed to connect: {ex.Message}", "OK");
                 lblStreamInfo.Text = $"Connection failed: {ex.Message}";
                 lblStreamInfo.TextColor = Colors.Red;
@@ -329,15 +337,26 @@ namespace HLS_Player_MB_MAUI
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error stopping: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error stopping: {ex.Message}");
+            }
+            finally
+            {
+                btStop.IsEnabled = true;
             }
         }
 
         private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            if (!_isTimerUpdate && _pipeline != null && slSeeking.IsEnabled)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                if (!_isTimerUpdate && _pipeline != null && slSeeking.IsEnabled)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.NewValue));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error setting position: {ex.Message}");
             }
         }
 

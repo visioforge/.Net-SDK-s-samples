@@ -242,157 +242,168 @@ public partial class MainPage : ContentPage
 
     private async void btStart_Click(object sender, EventArgs e)
     {
-        if (cbDebug.IsChecked == true)
+        try
         {
-            VFPAnalyzer.DebugDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "MMT");
-        }
-
-        btStart.IsEnabled = false;
-
-        results.Clear();
-
-        lbStatus.Text = "Step 1: Searching video files";
-
-        List<string> adList = new List<string>();
-        List<string> broadcastList = new List<string>();
-
-        List<VFPFingerPrint> adVFPList = new List<VFPFingerPrint>();
-        List<VFPFingerPrint> broadcastVFPList = new List<VFPFingerPrint>();
-
-        foreach (string item in adFolders)
-        {
-            if (Directory.Exists(item))
+            if (cbDebug.IsChecked == true)
             {
-                adList.AddRange(FileScanner.SearchVideoFiles(item));
-            }
-            else if (File.Exists(item))
-            {
-                adList.Add(item);
-            }
-        }
-
-        foreach (string item in broadcastFolders)
-        {
-            if (Directory.Exists(item))
-            {
-                broadcastList.AddRange(FileScanner.SearchVideoFiles(item));
-            }
-            else if (File.Exists(item))
-            {
-                broadcastList.Add(item);
-            }
-        }
-
-        lbStatus.Text = "Step 2: Getting fingerprints for ads files";
-
-        int progress = 0;
-        foreach (string filename in adList)
-        {
-            pbProgress.Progress = progress / 100.0;
-
-            var source = new VFPFingerprintSource(filename);
-            foreach (var area in _ignoredAreas)
-            {
-                source.IgnoredAreas.Add(area);
+                VFPAnalyzer.DebugDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "MMT");
             }
 
-            VFPFingerPrint fp = _db.GetFingerprint(source);
+            btStart.IsEnabled = false;
 
-            if (fp == null)
+            results.Clear();
+
+            lbStatus.Text = "Step 1: Searching video files";
+
+            List<string> adList = new List<string>();
+            List<string> broadcastList = new List<string>();
+
+            List<VFPFingerPrint> adVFPList = new List<VFPFingerPrint>();
+            List<VFPFingerPrint> broadcastVFPList = new List<VFPFingerPrint>();
+
+            foreach (string item in adFolders)
             {
-                fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+                if (Directory.Exists(item))
+                {
+                    adList.AddRange(FileScanner.SearchVideoFiles(item));
+                }
+                else if (File.Exists(item))
+                {
+                    adList.Add(item);
+                }
+            }
+
+            foreach (string item in broadcastFolders)
+            {
+                if (Directory.Exists(item))
+                {
+                    broadcastList.AddRange(FileScanner.SearchVideoFiles(item));
+                }
+                else if (File.Exists(item))
+                {
+                    broadcastList.Add(item);
+                }
+            }
+
+            lbStatus.Text = "Step 2: Getting fingerprints for ads files";
+
+            int progress = 0;
+            foreach (string filename in adList)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = progress / 100.0);
+
+                var source = new VFPFingerprintSource(filename);
+                foreach (var area in _ignoredAreas)
+                {
+                    source.IgnoredAreas.Add(area);
+                }
+
+                VFPFingerPrint fp = _db.GetFingerprint(source);
 
                 if (fp == null)
                 {
-                    await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
-                }
-                else
-                {
-                    _db.Items.Add(fp);
-                    AddDBItem(fp);
-                }
-            }
+                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
 
-            adVFPList.Add(fp);
-
-            progress += 100 / adList.Count;
-        }
-
-        pbProgress.Progress = 1.0;
-
-        lbStatus.Text = "Step 3: Getting fingerprints for broadcast files";
-        progress = 0;
-        foreach (string filename in broadcastList)
-        {
-            pbProgress.Progress = progress / 100.0;
-
-            var source = new VFPFingerprintSource(filename);
-            foreach (var area in _ignoredAreas)
-            {
-                source.IgnoredAreas.Add(area);
-            }
-
-            VFPFingerPrint fp = _db.GetFingerprint(source);
-            if (fp == null)
-            {
-                fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
-                if (fp == null)
-                {
-                    await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
-                    return;
-                }
-                else
-                {
-                    _db.Items.Add(fp);
-                    AddDBItem(fp);
-                }
-            }
-
-            broadcastVFPList.Add(fp);
-
-            progress += 100 / broadcastList.Count;
-        }
-
-        pbProgress.Progress = 1.0;
-
-        lbStatus.Text = "Step 4: Analyzing data";
-        progress = 0;
-        int foundCount = 0;
-        foreach (var broadcast in broadcastVFPList)
-        {
-            pbProgress.Progress = progress / 100.0;
-
-            foreach (var ad in adVFPList)
-            {
-                var positions = await VFPAnalyzer.SearchAsync(ad, broadcast, ad.Duration, (int)slDifference.Value, true);
-
-                if (positions.Count > 0)
-                {
-                    foreach (var pos in positions)
+                    if (fp == null)
                     {
-                        foundCount++;
-                        int minutes = (int)(pos.TotalSeconds / 60);
-                        int seconds = (int)(pos.TotalSeconds % 60);
-
-                        results.Add(
-                            new ResultsViewModel()
-                            {
-                                Sample = ad.OriginalFilename,
-                                DumpFile = broadcast.OriginalFilename,
-                                Position = $"{minutes}:{seconds}"
-                            });
+                        await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
+                    }
+                    else
+                    {
+                        _db.Items.Add(fp);
+                        AddDBItem(fp);
                     }
                 }
+
+                adVFPList.Add(fp);
+
+                progress += 100 / adList.Count;
             }
 
-            progress += 100 / broadcastList.Count;
+            await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = 1.0);
+
+            lbStatus.Text = "Step 3: Getting fingerprints for broadcast files";
+            progress = 0;
+            foreach (string filename in broadcastList)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = progress / 100.0);
+
+                var source = new VFPFingerprintSource(filename);
+                foreach (var area in _ignoredAreas)
+                {
+                    source.IgnoredAreas.Add(area);
+                }
+
+                VFPFingerPrint fp = _db.GetFingerprint(source);
+                if (fp == null)
+                {
+                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+                    if (fp == null)
+                    {
+                        await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
+                        return;
+                    }
+                    else
+                    {
+                        _db.Items.Add(fp);
+                        AddDBItem(fp);
+                    }
+                }
+
+                broadcastVFPList.Add(fp);
+
+                progress += 100 / broadcastList.Count;
+            }
+
+            await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = 1.0);
+
+            lbStatus.Text = "Step 4: Analyzing data";
+            progress = 0;
+            int foundCount = 0;
+            foreach (var broadcast in broadcastVFPList)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = progress / 100.0);
+
+                foreach (var ad in adVFPList)
+                {
+                    var positions = await VFPAnalyzer.SearchAsync(ad, broadcast, ad.Duration, (int)slDifference.Value, true);
+
+                    if (positions.Count > 0)
+                    {
+                        foreach (var pos in positions)
+                        {
+                            foundCount++;
+                            int minutes = (int)(pos.TotalSeconds / 60);
+                            int seconds = (int)(pos.TotalSeconds % 60);
+
+                            results.Add(
+                                new ResultsViewModel()
+                                {
+                                    Sample = ad.OriginalFilename,
+                                    DumpFile = broadcast.OriginalFilename,
+                                    Position = $"{minutes}:{seconds}"
+                                });
+                        }
+                    }
+                }
+
+                progress += 100 / broadcastList.Count;
+            }
+
+            await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = 0);
+
+            lbStatus.Text = "Step 5: Done. " + foundCount + " ads found.";
         }
-
-        pbProgress.Progress = 0;
-
-        lbStatus.Text = "Step 5: Done. " + foundCount + " ads found.";
-
-        btStart.IsEnabled = true;
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error in analysis: {ex.Message}");
+            await DisplayAlert("Error", $"Analysis failed: {ex.Message}", "OK");
+            lbStatus.Text = "Error occurred during analysis.";
+        }
+        finally
+        {
+            btStart.IsEnabled = true;
+        }
     }
 
     private async void btPlay_Click(object sender, EventArgs e)
@@ -457,7 +468,14 @@ public partial class MainPage : ContentPage
                 await Task.Delay(2000);
                 if (File.Exists(tempPath))
                 {
-                    try { File.Delete(tempPath); } catch { }
+                    try 
+                    { 
+                        File.Delete(tempPath); 
+                    } 
+                    catch (Exception ex) 
+                    { 
+                        System.Diagnostics.Debug.WriteLine($"Failed to delete temp file: {ex.Message}");
+                    }
                 }
                 
                 await DisplayAlert("Success", "Results exported successfully", "OK");

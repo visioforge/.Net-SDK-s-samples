@@ -278,12 +278,15 @@ namespace Overlay_Manager_Demo
                     var videoOverlay = _videoOverlays.Find(v => selectedItem.Contains(v.Name));
                     if (videoOverlay != null)
                     {
+                        videoOverlay.Stop();
+
                         _videoOverlays.Remove(videoOverlay);
                         videoOverlay.Dispose();
                     }
+
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
 
-                _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 lbOverlays.Items.RemoveAt(lbOverlays.SelectedIndex);
             }
         }

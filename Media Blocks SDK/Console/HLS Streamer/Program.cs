@@ -51,7 +51,7 @@ namespace HLSStreamer
             var h264Encoder = new H264EncoderBlock(h264Settings);
             var aacEncoder = new AACEncoderBlock();
 
-            // HLS sink
+            // HLS sink - automatically uses hlssink3 or hlscmafsink (if available), falls back to hlssink2
             var settings = new HLSSinkSettings
             {
                 Location = Path.Combine(AppContext.BaseDirectory, "segment_%05d.ts"),
@@ -60,7 +60,7 @@ namespace HLSStreamer
                 PlaylistLocation = Path.Combine(AppContext.BaseDirectory, "playlist.m3u8"),
                 PlaylistRoot = URL,
                 SendKeyframeRequests = true,
-                TargetDuration = 5,
+                TargetDuration = TimeSpan.FromSeconds(5),
                 Custom_HTTP_Server_Enabled = true,
                 Custom_HTTP_Server_Port = 8088
             };
