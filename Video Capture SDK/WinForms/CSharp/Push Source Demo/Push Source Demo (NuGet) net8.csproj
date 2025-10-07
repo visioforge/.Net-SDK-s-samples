@@ -60,9 +60,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.9.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.9.11" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.9.11" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.10.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.10.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.10.2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\1.jpg" />
