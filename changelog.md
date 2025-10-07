@@ -9,9 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
-## Upcoming
+## 2025.10.3
 
 * [Media Blocks SDK .Net] Added DASH (Dynamic Adaptive Streaming over HTTP) sink support with DASHSinkBlock and DASHOutput classes
+* [Media Blocks SDK .Net] Added UniversalSourceBlockV2 with improved memory usage and performance
 
 ## 2025.9.5
 

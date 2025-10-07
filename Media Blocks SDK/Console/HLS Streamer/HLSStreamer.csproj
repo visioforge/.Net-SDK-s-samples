@@ -8,7 +8,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.2" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.9.0" />

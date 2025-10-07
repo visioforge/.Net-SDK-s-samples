@@ -185,7 +185,7 @@ namespace Simple_Player_Demo_X
             cbVideoStream.Items.Clear();
             cbAudioStream.Items.Clear();
 
-            var source = await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text));
+            var source = await UniversalSourceSettingsV2.CreateAsync(new Uri(edFilename.Text));
             await _player.OpenAsync(source);
 
             await _player.PlayAsync();
