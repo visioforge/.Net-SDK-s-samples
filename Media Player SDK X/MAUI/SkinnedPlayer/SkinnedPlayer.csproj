@@ -4,15 +4,15 @@
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net9.0-maccatalyst;net9.0-ios</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Simple_Player_MAUI</RootNamespace>
+    <RootNamespace>SkinnedPlayer_MAUI</RootNamespace>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Display name -->
-    <ApplicationTitle>Simple Player MAUI</ApplicationTitle>
+    <ApplicationTitle>SkinnedPlayer_MAUI</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.simple_player_maui</ApplicationId>
-    <ApplicationIdGuid>B1D6D36C-95EA-47C5-8FA2-6B0A1B031632</ApplicationIdGuid>
+    <ApplicationId>com.companyname.skinned_player_maui</ApplicationId>
+    <ApplicationIdGuid>121C1A4C-06F2-480A-8102-59C9604FF0F1</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
@@ -21,23 +21,8 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     <PublishReadyToRun>false</PublishReadyToRun>
-    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</PublishTrimmed>
-    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</PublishTrimmed>
-    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</PublishTrimmed>
-    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</PublishTrimmed>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
-    <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">
-    <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
-    <RunAOTCompilation>False</RunAOTCompilation>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
-    <CreatePackage>false</CreatePackage>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -46,8 +31,6 @@
     <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
     <!-- Images -->
     <MauiImage Include="Resources\Images\*" />
-    <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
-    <!-- Custom Fonts -->
     <MauiFont Include="Resources\Fonts\*" />
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
@@ -58,16 +41,20 @@
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Resources\Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Default.vfskin" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.9" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.10.3" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.10.3" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.82" />
   </ItemGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionSimplePlayerHideInfoBar="True" />
-    </VisualStudio>
-  </ProjectExtensions>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.9.0" />

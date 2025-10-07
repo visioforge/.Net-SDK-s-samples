@@ -71,8 +71,8 @@
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.10.3" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.82" />
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">

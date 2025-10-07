@@ -71,8 +71,8 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.10.3" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.10.3" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.82" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
