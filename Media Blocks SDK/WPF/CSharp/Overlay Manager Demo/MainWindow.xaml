@@ -1,38 +1,259 @@
-﻿<Window x:Class="Overlay_Manager_Demo.MainWindow"
+<Window x:Class="Overlay_Manager_Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Overlay_Manager_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        xmlns:local="clr-namespace:Overlay_Manager_Demo"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - Overlay Manager Demo" Height="472" Width="837" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico" >
-    <Grid>
-        <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="481"/>
-        <wpf:VideoView x:Name="VideoView1" Margin="10,60,321,38"/>
-        <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="496,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
-        <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="716,284,0,0" VerticalAlignment="Top"/>
-        <Label Content="Log" HorizontalAlignment="Left" Margin="536,314,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edLog" HorizontalAlignment="Left" Margin="536,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="78" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="536,259,0,0" VerticalAlignment="Top" Width="146" ValueChanged="tbTimeline_ValueChanged"/>
-        <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="700,259,0,0" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Top"/>
-        <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="536,284,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click" Height="25"/>
-        <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="594,284,0,0" VerticalAlignment="Top" Width="53" Click="btStop_Click" Height="25"/>
-        <Label x:Name="label1" Content="Overlays" HorizontalAlignment="Left" Margin="536,10,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbOverlays" VerticalAlignment="Top" HorizontalAlignment="Left" Width="270" Height="96" Margin="536,36,0,0"/>
-        <Button x:Name="btAddImage" Content="Add image" HorizontalAlignment="Left" Margin="536,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddImage_Click"/>
-        <Button x:Name="btAddText" Content="Add text" HorizontalAlignment="Left" Margin="630,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddText_Click"/>
-        <Button x:Name="btAddLine" Content="Line" HorizontalAlignment="Left" Margin="724,137,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddLine_Click"/>
-        <Button x:Name="btAddRectangle" Content="Rectangle" HorizontalAlignment="Left" Margin="536,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddRectangle_Click"/>
-        <Button x:Name="btAddCircle" Content="Circle" HorizontalAlignment="Left" Margin="601,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddCircle_Click"/>
-        <Button x:Name="btAddVideo" Content="Video" HorizontalAlignment="Left" Margin="666,167,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddVideo_Click" ToolTip="Add video file overlay"/>
-        <Button x:Name="btAddStream" Content="Stream" HorizontalAlignment="Left" Margin="731,167,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btAddStreamOverlay_Click" ToolTip="Add RTSP/HTTP stream overlay"/>
-        <Button x:Name="btAddPiP" Content="PiP" HorizontalAlignment="Left" Margin="536,197,0,0" VerticalAlignment="Top" Width="60" Height="25" Click="btAddPictureInPicture_Click" ToolTip="Add Picture-in-Picture"/>
-        <Button x:Name="btAddFrameCounter" Content="Frame Counter" HorizontalAlignment="Left" Margin="601,197,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btAddFrameCounter_Click"/>
-        <Button x:Name="btAddTimeOverlay" Content="Time" HorizontalAlignment="Left" Margin="706,197,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="btAddTimeOverlay_Click"/>
-        <Button x:Name="btRemove" Content="Remove Selected" HorizontalAlignment="Left" Margin="536,227,0,0" VerticalAlignment="Top" Width="270" Height="25" Click="btRemove_Click" FontWeight="Bold"/>
+        Title="Media Blocks SDK .Net - Overlay Manager Demo"
+        Height="600" Width="900" MinHeight="500" MinWidth="800"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
 
+    <DockPanel LastChildFill="True">
+        <!-- Top: File Selection Panel -->
+        <Border DockPanel.Dock="Top" BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="10,10,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
+                <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,10,0">
+                    <Label Content="File name" Padding="0,0,0,2"/>
+                </StackPanel>
 
-    </Grid>
+                <TextBox Grid.Column="1"
+                         x:Name="edFilename"
+                         Text="C:\samples\!video.mp4"
+                         VerticalAlignment="Center"
+                         Margin="0,0,5,0"/>
+
+                <Button Grid.Column="2"
+                        x:Name="btSelectFile"
+                        Content="Browse..."
+                        Width="75"
+                        Height="24"
+                        VerticalAlignment="Center"
+                        Click="btSelectFile_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="400"/>
+                <ColumnDefinition Width="320" MinWidth="280"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Video View and Controls -->
+            <DockPanel Grid.Column="0" Margin="10,10,5,10">
+                <!-- Playback Controls at Bottom -->
+                <Border DockPanel.Dock="Bottom"
+                        BorderBrush="LightGray"
+                        BorderThickness="0,1,0,0"
+                        Margin="0,10,0,0"
+                        Padding="0,10,0,0">
+                    <StackPanel>
+                        <!-- Timeline -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Slider Grid.Column="0"
+                                    x:Name="tbTimeline"
+                                    VerticalAlignment="Center"
+                                    ValueChanged="tbTimeline_ValueChanged"/>
+
+                            <TextBlock Grid.Column="1"
+                                       x:Name="lbTime"
+                                       Text="00:00:00/00:00:00"
+                                       VerticalAlignment="Center"
+                                       Margin="10,0,0,0"
+                                       MinWidth="120"/>
+                        </Grid>
+
+                        <!-- Control Buttons -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btStart"
+                                    Content="Start"
+                                    Width="80"
+                                    Height="30"
+                                    Margin="0,0,10,0"
+                                    Click="btStart_Click"/>
+
+                            <Button x:Name="btStop"
+                                    Content="Stop"
+                                    Width="80"
+                                    Height="30"
+                                    Click="btStop_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Video View -->
+                <Border BorderBrush="Black" BorderThickness="1">
+                    <wpf:VideoView x:Name="VideoView1"/>
+                </Border>
+            </DockPanel>
+
+            <!-- Right Panel: Overlays Management -->
+            <DockPanel Grid.Column="1" Margin="5,10,10,10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Overlays List Section -->
+                        <GroupBox Header="Active Overlays" Margin="0,0,0,10">
+                            <StackPanel>
+                                <ListBox x:Name="lbOverlays"
+                                         Height="100"
+                                         Margin="5"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+
+                                <Button x:Name="btRemove"
+                                        Content="Remove Selected"
+                                        Height="28"
+                                        Margin="5,5,5,5"
+                                        FontWeight="Bold"
+                                        Click="btRemove_Click"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Add Overlay Buttons Section -->
+                        <GroupBox Header="Add Overlays" Margin="0,0,0,10">
+                            <StackPanel Margin="5">
+                                <!-- Basic Overlays -->
+                                <Label Content="Basic Overlays:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <WrapPanel Margin="0,0,0,10">
+                                    <Button x:Name="btAddText"
+                                            Content="Add Text"
+                                            Width="85"
+                                            Height="25"
+                                            Margin="0,0,5,5"
+                                            Click="btAddText_Click"/>
+
+                                    <Button x:Name="btAddImage"
+                                            Content="Add Image"
+                                            Width="85"
+                                            Height="25"
+                                            Margin="0,0,5,5"
+                                            Click="btAddImage_Click"/>
+                                </WrapPanel>
+
+                                <!-- Shape Overlays -->
+                                <Label Content="Shapes:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Button x:Name="btAddLine"
+                                            Content="Line"
+                                            Width="85"
+                                            Height="25"
+                                            Margin="0,0,5,0"
+                                            Click="btAddLine_Click"/>
+
+                                    <Button x:Name="btAddRectangle"
+                                            Content="Rectangle"
+                                            Width="85"
+                                            Height="25"
+                                            Margin="0,0,5,0"
+                                            Click="btAddRectangle_Click"/>
+
+                                    <Button x:Name="btAddCircle"
+                                            Content="Circle"
+                                            Width="85"
+                                            Height="25"
+                                            Click="btAddCircle_Click"/>
+                                </StackPanel>
+
+                                <!-- Media Source Overlays -->
+                                <Label Content="Media Sources:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <StackPanel Margin="0,0,0,10">
+                                    <!-- First row: 3 buttons -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <Button x:Name="btAddVideo"
+                                                Content="Video"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Add video file overlay"
+                                                Click="btAddVideo_Click"/>
+
+                                        <Button x:Name="btAddStream"
+                                                Content="Stream"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Add RTSP/HTTP stream overlay"
+                                                Click="btAddStreamOverlay_Click"/>
+
+                                        <Button x:Name="btAddDecklink"
+                                                Content="Decklink"
+                                                Width="85"
+                                                Height="25"
+                                                ToolTip="Add Decklink capture device overlay"
+                                                Click="btAddDecklink_Click"/>
+                                    </StackPanel>
+
+                                    <!-- Second row: 1 button -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="btAddNDI"
+                                                Content="NDI"
+                                                Width="85"
+                                                Height="25"
+                                                ToolTip="Add NDI network video source overlay"
+                                                Click="btAddNDI_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Special Overlays -->
+                                <Label Content="Special Effects:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                                <StackPanel Margin="0,0,0,5">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <Button x:Name="btAddPiP"
+                                                Content="Picture in Picture"
+                                                Width="130"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Add Picture-in-Picture"
+                                                Click="btAddPictureInPicture_Click"/>
+
+                                        <Button x:Name="btAddFrameCounter"
+                                                Content="Frame Counter"
+                                                Width="130"
+                                                Height="25"
+                                                Click="btAddFrameCounter_Click"/>
+                                    </StackPanel>
+
+                                    <Button x:Name="btAddTimeOverlay"
+                                            Content="Time Overlay"
+                                            Width="130"
+                                            Height="25"
+                                            Click="btAddTimeOverlay_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Debug Section -->
+                        <GroupBox Header="Debug">
+                            <StackPanel Margin="5">
+                                <CheckBox x:Name="cbDebugMode"
+                                          Content="Enable Debug Mode"
+                                          Margin="0,0,0,5"/>
+
+                                <Label Content="Log Output:" Margin="0,5,0,2"/>
+                                <TextBox x:Name="edLog"
+                                         Height="80"
+                                         TextWrapping="Wrap"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Auto"
+                                         FontFamily="Consolas"
+                                         FontSize="11"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </Window>

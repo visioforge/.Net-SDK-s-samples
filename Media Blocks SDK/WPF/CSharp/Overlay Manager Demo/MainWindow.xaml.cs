@@ -17,6 +17,8 @@ using System.Threading;
 using SkiaSharp;
 using System.Collections.Generic;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.Decklink;
+using VisioForge.Core.MediaBlocks.Decklink;
 
 namespace Overlay_Manager_Demo
 {
@@ -42,6 +44,10 @@ namespace Overlay_Manager_Demo
         private long _frameCounter = 0;
 
         private List<OverlayManagerVideo> _videoOverlays = new List<OverlayManagerVideo>();
+
+        private List<OverlayManagerDecklinkVideo> _decklinkOverlays = new List<OverlayManagerDecklinkVideo>();
+
+        private List<OverlayManagerNDIVideo> _ndiOverlays = new List<OverlayManagerNDIVideo>();
         
         public MainWindow()
         {
@@ -166,6 +172,12 @@ namespace Overlay_Manager_Demo
                 videoOverlay.Play();
             }
 
+            // Start any Decklink overlays that were added before the main pipeline started
+            foreach (var decklinkOverlay in _decklinkOverlays)
+            {
+                decklinkOverlay.Play();
+            }
+
             _timer.Start();
         }
 
@@ -177,6 +189,12 @@ namespace Overlay_Manager_Demo
             foreach (var videoOverlay in _videoOverlays)
             {
                 videoOverlay.Pause();
+            }
+
+            // Pause all Decklink overlays when stopping main pipeline
+            foreach (var decklinkOverlay in _decklinkOverlays)
+            {
+                decklinkOverlay.Pause();
             }
 
             if (_pipeline != null)
@@ -199,6 +217,20 @@ namespace Overlay_Manager_Demo
                 videoOverlay?.Dispose();
             }
             _videoOverlays.Clear();
+
+            // Dispose Decklink overlays
+            foreach (var decklinkOverlay in _decklinkOverlays)
+            {
+                decklinkOverlay?.Dispose();
+            }
+            _decklinkOverlays.Clear();
+
+            // Dispose NDI overlays
+            foreach (var ndiOverlay in _ndiOverlays)
+            {
+                ndiOverlay?.Dispose();
+            }
+            _ndiOverlays.Clear();
 
             if (_pipeline != null)
             {
@@ -282,6 +314,34 @@ namespace Overlay_Manager_Demo
 
                         _videoOverlays.Remove(videoOverlay);
                         videoOverlay.Dispose();
+                    }
+
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[Decklink]"))
+                {
+                    // Find and dispose the Decklink overlay
+                    var decklinkOverlay = _decklinkOverlays.Find(v => selectedItem.Contains(v.Name));
+                    if (decklinkOverlay != null)
+                    {
+                        decklinkOverlay.Stop();
+
+                        _decklinkOverlays.Remove(decklinkOverlay);
+                        decklinkOverlay.Dispose();
+                    }
+
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[NDI]"))
+                {
+                    // Find and dispose the NDI overlay
+                    var ndiOverlay = _ndiOverlays.Find(v => selectedItem.Contains(v.Name));
+                    if (ndiOverlay != null)
+                    {
+                        ndiOverlay.Stop();
+
+                        _ndiOverlays.Remove(ndiOverlay);
+                        ndiOverlay.Dispose();
                     }
 
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
@@ -572,6 +632,147 @@ namespace Overlay_Manager_Demo
                     MessageBox.Show($"Failed to initialize stream overlay. Please check if the URL is accessible: {streamUrl}", 
                         "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     streamOverlay.Dispose();
+                }
+            }
+        }
+
+        private void btAddDecklink_Click(object sender, RoutedEventArgs e)
+        {
+            // Show custom Decklink options dialog
+            var optionsWindow = new DecklinkOverlayOptionsWindow();
+            if (optionsWindow.ShowDialog() == true)
+            {
+                // Create Decklink video source settings with user-selected parameters
+                var decklinkSettings = new DecklinkVideoSourceSettings(optionsWindow.SelectedDevice.DeviceNumber)
+                {
+                    Mode = optionsWindow.SelectedMode,
+                    Connection = optionsWindow.SelectedConnection,
+                    EnableAutoDeinterlacing = optionsWindow.AutoDeinterlace,
+                    BufferSize = optionsWindow.BufferSize
+                };
+
+                // Create Decklink video overlay with specified options
+                var decklinkOverlay = new OverlayManagerDecklinkVideo(
+                    settings: decklinkSettings,
+                    x: optionsWindow.X,
+                    y: optionsWindow.Y,
+                    width: optionsWindow.VideoWidth,
+                    height: optionsWindow.VideoHeight
+                )
+                {
+                    Opacity = optionsWindow.Opacity,
+                    StretchMode = optionsWindow.StretchMode,
+                    ZIndex = 5,
+                    Name = $"DecklinkOverlay_{optionsWindow.SelectedDevice.ModelName}"
+                };
+
+                // Add shadow if enabled
+                if (optionsWindow.EnableShadow)
+                {
+                    decklinkOverlay.Shadow = new OverlayManagerShadowSettings
+                    {
+                        Enabled = true,
+                        Color = SKColors.Black,
+                        Opacity = 0.5,
+                        BlurRadius = 5,
+                        Depth = 5,
+                        Direction = 45
+                    };
+                }
+
+                // Check if main pipeline is already running
+                bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+                
+                // Initialize the Decklink overlay
+                bool initialized = decklinkOverlay.Initialize(autoStart: mainPipelineRunning);
+                
+                if (initialized)
+                {
+                    // Keep track of Decklink overlays for proper disposal
+                    _decklinkOverlays.Add(decklinkOverlay);
+
+                    // Add to overlay manager
+                    _overlayManager.Video_Overlay_Add(decklinkOverlay);
+                    lbOverlays.Items.Add($"[Decklink] {decklinkOverlay.Name}");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to initialize Decklink overlay. Please check if the device is connected and has an active input signal.", 
+                        "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    decklinkOverlay.Dispose();
+                }
+            }
+        }
+
+        private async void btAddNDI_Click(object sender, RoutedEventArgs e)
+        {
+            // Show custom NDI options dialog
+            var optionsWindow = new NDIOverlayOptionsWindow();
+            if (optionsWindow.ShowDialog() == true)
+            {
+                try
+                {
+                    // Create NDI source settings
+                    var ndiSettings = await NDISourceSettings.CreateAsync(
+                        null,
+                        optionsWindow.SelectedSource.Name,
+                        optionsWindow.SelectedSource.URL);
+
+                    // Create NDI video overlay with specified options
+                    var ndiOverlay = new OverlayManagerNDIVideo(
+                        settings: ndiSettings,
+                        x: optionsWindow.X,
+                        y: optionsWindow.Y,
+                        width: optionsWindow.VideoWidth,
+                        height: optionsWindow.VideoHeight
+                    )
+                    {
+                        Opacity = optionsWindow.Opacity,
+                        StretchMode = optionsWindow.StretchMode,
+                        ZIndex = 5,
+                        Name = $"NDIOverlay_{optionsWindow.SelectedSource.Name}"
+                    };
+
+                    // Add shadow if enabled
+                    if (optionsWindow.EnableShadow)
+                    {
+                        ndiOverlay.Shadow = new OverlayManagerShadowSettings
+                        {
+                            Enabled = true,
+                            Color = SKColors.Black,
+                            Opacity = 0.5,
+                            BlurRadius = 5,
+                            Depth = 5,
+                            Direction = 45
+                        };
+                    }
+
+                    // Check if main pipeline is already running
+                    bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+
+                    // Initialize the NDI overlay
+                    bool initialized = ndiOverlay.Initialize(autoStart: mainPipelineRunning);
+
+                    if (initialized)
+                    {
+                        // Keep track of NDI overlays for proper disposal
+                        _ndiOverlays.Add(ndiOverlay);
+
+                        // Add to overlay manager
+                        _overlayManager.Video_Overlay_Add(ndiOverlay);
+                        lbOverlays.Items.Add($"[NDI] {ndiOverlay.Name}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to initialize NDI overlay. Please check if the NDI source is available and the GStreamer NDI plugin is installed.",
+                            "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        ndiOverlay.Dispose();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error creating NDI overlay: {ex.Message}",
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
