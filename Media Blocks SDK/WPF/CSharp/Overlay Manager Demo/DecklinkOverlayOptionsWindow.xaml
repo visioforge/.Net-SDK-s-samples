@@ -1,0 +1,96 @@
+<Window x:Class="Overlay_Manager_Demo.DecklinkOverlayOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Decklink Overlay Options" Height="550" Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Device Selection" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="Device:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbDevice" HorizontalAlignment="Left" Margin="100,42,0,0" VerticalAlignment="Top" Width="270"/>
+        
+        <Label Content="Decklink Settings" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="Mode:" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbMode" HorizontalAlignment="Left" Margin="100,107,0,0" VerticalAlignment="Top" Width="270">
+            <ComboBoxItem Content="NTSC (SD 60i)" Tag="NTSC"/>
+            <ComboBoxItem Content="PAL (SD 50i)" Tag="PAL"/>
+            <ComboBoxItem Content="HD1080p 23.98" Tag="HD1080p2398"/>
+            <ComboBoxItem Content="HD1080p 24" Tag="HD1080p24"/>
+            <ComboBoxItem Content="HD1080p 25" Tag="HD1080p25"/>
+            <ComboBoxItem Content="HD1080p 29.97" Tag="HD1080p2997"/>
+            <ComboBoxItem Content="HD1080p 30" Tag="HD1080p30"/>
+            <ComboBoxItem Content="HD1080i 50" Tag="HD1080i50"/>
+            <ComboBoxItem Content="HD1080i 59.94" Tag="HD1080i5994" IsSelected="True"/>
+            <ComboBoxItem Content="HD1080i 60" Tag="HD1080i60"/>
+            <ComboBoxItem Content="HD1080p 50" Tag="HD1080p50"/>
+            <ComboBoxItem Content="HD1080p 59.94" Tag="HD1080p5994"/>
+            <ComboBoxItem Content="HD1080p 60" Tag="HD1080p60"/>
+            <ComboBoxItem Content="HD720p 50" Tag="HD720p50"/>
+            <ComboBoxItem Content="HD720p 59.94" Tag="HD720p5994"/>
+            <ComboBoxItem Content="HD720p 60" Tag="HD720p60"/>
+            <ComboBoxItem Content="2K DCI 23.98" Tag="DCI2K2398"/>
+            <ComboBoxItem Content="2K DCI 24" Tag="DCI2K24"/>
+            <ComboBoxItem Content="2K DCI 25" Tag="DCI2K25"/>
+            <ComboBoxItem Content="4K UHD 23.98" Tag="UHD4Kp2398"/>
+            <ComboBoxItem Content="4K UHD 24" Tag="UHD4Kp24"/>
+            <ComboBoxItem Content="4K UHD 25" Tag="UHD4Kp25"/>
+            <ComboBoxItem Content="4K UHD 29.97" Tag="UHD4Kp2997"/>
+            <ComboBoxItem Content="4K UHD 30" Tag="UHD4Kp30"/>
+        </ComboBox>
+        
+        <Label Content="Connection:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbConnection" HorizontalAlignment="Left" Margin="100,142,0,0" VerticalAlignment="Top" Width="270">
+            <ComboBoxItem Content="Auto" Tag="Auto"/>
+            <ComboBoxItem Content="SDI" Tag="SDI" IsSelected="True"/>
+            <ComboBoxItem Content="HDMI" Tag="HDMI"/>
+            <ComboBoxItem Content="Optical SDI" Tag="OpticalSDI"/>
+            <ComboBoxItem Content="Component" Tag="Component"/>
+            <ComboBoxItem Content="Composite" Tag="Composite"/>
+            <ComboBoxItem Content="S-Video" Tag="SVideo"/>
+        </ComboBox>
+        
+        <CheckBox x:Name="cbAutoDeinterlace" Content="Enable auto-deinterlacing" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" IsChecked="True"/>
+        
+        <Label Content="Buffer Size:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbBufferSize" HorizontalAlignment="Left" Margin="100,207,0,0" Text="5" VerticalAlignment="Top" Width="60"/>
+        <Label Content="frames" HorizontalAlignment="Left" Margin="165,205,0,0" VerticalAlignment="Top"/>
+        
+        <Label Content="Position and Size" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="X:" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbX" HorizontalAlignment="Left" Margin="100,272,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Y:" HorizontalAlignment="Left" Margin="180,270,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbY" HorizontalAlignment="Left" Margin="260,272,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Width:" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbWidth" HorizontalAlignment="Left" Margin="100,302,0,0" Text="640" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Height:" HorizontalAlignment="Left" Margin="180,300,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbHeight" HorizontalAlignment="Left" Margin="260,302,0,0" Text="480" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Visual Effects" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="Opacity:" HorizontalAlignment="Left" Margin="10,365,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="slOpacity" HorizontalAlignment="Left" Margin="100,369,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="1" Value="1" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+        <Label x:Name="lbOpacityValue" Content="1.0" HorizontalAlignment="Left" Margin="260,365,0,0" VerticalAlignment="Top"/>
+        
+        <Label Content="Stretch Mode:" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbStretchMode" HorizontalAlignment="Left" Margin="100,397,0,0" VerticalAlignment="Top" Width="150">
+            <ComboBoxItem Content="None" IsSelected="True"/>
+            <ComboBoxItem Content="Stretch"/>
+            <ComboBoxItem Content="Letterbox"/>
+            <ComboBoxItem Content="Crop to Fill"/>
+        </ComboBox>
+        
+        <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top"/>
+        
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="100,475,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="200,475,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+    </Grid>
+</Window>

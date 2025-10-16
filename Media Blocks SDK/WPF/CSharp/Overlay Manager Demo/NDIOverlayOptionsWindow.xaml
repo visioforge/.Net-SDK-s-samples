@@ -1,0 +1,50 @@
+<Window x:Class="Overlay_Manager_Demo.NDIOverlayOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="NDI Overlay Options" Height="450" Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="NDI Source Selection" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="NDI Source:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbNDISource" HorizontalAlignment="Left" Margin="100,42,0,0" VerticalAlignment="Top" Width="270"/>
+        <Button x:Name="btRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="100,72,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btRefresh_Click"/>
+        
+        <Label Content="Position and Size" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="X:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbX" HorizontalAlignment="Left" Margin="100,142,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Y:" HorizontalAlignment="Left" Margin="180,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbY" HorizontalAlignment="Left" Margin="260,142,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Width:" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbWidth" HorizontalAlignment="Left" Margin="100,172,0,0" Text="640" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Height:" HorizontalAlignment="Left" Margin="180,170,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbHeight" HorizontalAlignment="Left" Margin="260,172,0,0" Text="480" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="Visual Effects" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <Label Content="Opacity:" HorizontalAlignment="Left" Margin="10,235,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="slOpacity" HorizontalAlignment="Left" Margin="100,239,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="1" Value="1" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+        <Label x:Name="lbOpacityValue" Content="1.0" HorizontalAlignment="Left" Margin="260,235,0,0" VerticalAlignment="Top"/>
+        
+        <Label Content="Stretch Mode:" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbStretchMode" HorizontalAlignment="Left" Margin="100,267,0,0" VerticalAlignment="Top" Width="150">
+            <ComboBoxItem Content="None"/>
+            <ComboBoxItem Content="Stretch"/>
+            <ComboBoxItem Content="Letterbox" IsSelected="True"/>
+            <ComboBoxItem Content="Crop to Fill"/>
+        </ComboBox>
+        
+        <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top"/>
+        
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="100,365,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="200,365,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+    </Grid>
+</Window>
