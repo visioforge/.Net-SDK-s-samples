@@ -199,5 +199,5 @@ This demo requires a valid MediaBlocks SDK license for production use. Trial mod
 For technical support and licensing:
 - MediaBlocks SDK Documentation: https://www.visioforge.com/
 - API Reference: https://api.visioforge.com/dotnet/
-- Discord Community: https://discord.gg/yvXUG56WCH
+- Discord Community: https://discord.com/invite/yvXUG56WCH
 - Decklink Support: https://www.blackmagicdesign.com/support/

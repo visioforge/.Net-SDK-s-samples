@@ -346,6 +346,10 @@ namespace Overlay_Manager_Demo
 
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
+                else
+                {
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
 
                 lbOverlays.Items.RemoveAt(lbOverlays.SelectedIndex);
             }

@@ -59,9 +59,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.10.5" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.10.5" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.10.5" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.10.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.10.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.10.6" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
