@@ -28,6 +28,7 @@
                                 </ComboBox>
                                 <CheckBox x:Name="cbIPCameraONVIF" Content="ONVIF camera" HorizontalAlignment="Left" Margin="350,65,0,0" VerticalAlignment="Top"/>
                                 <CheckBox x:Name="cbIPDisconnect" Content="Notify if connection lost" HorizontalAlignment="Left" Margin="350,106,0,0" VerticalAlignment="Top"/>
+                                <CheckBox x:Name="cbLowLatencyMode" Content="Low latency mode" HorizontalAlignment="Left" Margin="350,127,0,0" VerticalAlignment="Top" ToolTip="Enable ultra-low latency (60-120ms) for real-time surveillance and monitoring"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
                                 <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.22/onvif/device_service" IsEditable="True"/>

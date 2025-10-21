@@ -90,6 +90,13 @@ namespace RTSPViewer
             }
 
             var rtsp = await RTSPSourceSettings.CreateAsync(uri, edUsername.Text, edPassword.Text, true);
+            
+            // Enable low latency mode by default (checkbox is checked by default)
+            if (cbLowLatencyMode.IsChecked)
+            {
+                rtsp.LowLatencyMode = true;
+            }
+            
             var info = rtsp.GetInfo();
 
             if (info == null)

@@ -141,6 +141,9 @@ namespace RTSP_Client
             _pipeline.OnError += _pipeline_OnError;
 
             var rtspSource = await RTSPSourceSettings.CreateAsync(new System.Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
+            
+            // Enable low latency mode by default for Android real-time surveillance (60-120ms latency)
+            rtspSource.LowLatencyMode = true;
 
             _source = new RTSPSourceBlock(rtspSource);
 

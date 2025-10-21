@@ -61,12 +61,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.10.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.10.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.10.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.10.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.10.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2025.10.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.10.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2025.10.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.10.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.10.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.10.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2025.10.7" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\1.jpg" />

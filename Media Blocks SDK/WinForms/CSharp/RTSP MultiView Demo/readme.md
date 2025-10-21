@@ -11,9 +11,19 @@ This SDK sample demonstrates how to create a multi-view RTSP streaming applicati
 
 ## Used blocks
 
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video frames
-- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio frames
-- [RTSPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/RTSPSourceBlock/) - reads RTSP streams
+- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering) - renders video frames
+- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering) - renders audio frames
+- [RTSPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources#rtsp-source-block) - reads RTSP streams
+
+## Low Latency Mode
+
+For real-time surveillance and monitoring, you can now enable low latency mode:
+
+```csharp
+var rtspSettings = await RTSPSourceSettings.CreateAsync(uri, login, password, audioEnabled);
+rtspSettings.LowLatencyMode = true;  // Minimize buffering for real-time streaming
+var rtspSource = new RTSPSourceBlock(rtspSettings);
+```
 
 ## Supported frameworks
 

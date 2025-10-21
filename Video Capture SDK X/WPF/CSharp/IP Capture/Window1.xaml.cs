@@ -216,6 +216,13 @@ namespace IP_Capture
                     {
                         // RTSP
                         var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true);
+                        
+                        // Enable low latency mode if checkbox is checked
+                        if (cbLowLatencyMode.IsChecked == true)
+                        {
+                            rtsp.LowLatencyMode = true;
+                        }
+                        
                         VideoCapture1.Video_Source = rtsp;
                     }
 

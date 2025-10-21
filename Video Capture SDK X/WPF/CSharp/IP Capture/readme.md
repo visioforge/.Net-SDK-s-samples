@@ -8,6 +8,21 @@ The application features a user interface for configuring capture settings, incl
 
 It also includes dialogs for configuring encoding settings for different output formats. The application demonstrates asynchronous programming practices, event handling for capturing errors and network source disconnections, and the use of the VisioForge SDK for video capture tasks.
 
+### Low Latency Mode
+
+For RTSP sources, enable the **"Low latency mode"** checkbox to achieve ultra-low latency (60-120ms) suitable for:
+- Real-time surveillance and monitoring
+- Live security systems  
+- Remote control applications
+- Interactive video applications
+
+**Technical Details:**
+- Reduces RTSP jitter buffer from 1000ms to 80ms
+- Optimizes internal queue buffering (2 frames max)
+- Sets buffer mode to "none" for minimal delay
+
+**Note:** Low latency mode optimizes for speed over stability. Use default settings for recording or unstable networks.
+
 ## Supported frameworks
 
 * .Net 4.7.2

@@ -56,6 +56,16 @@
                         VerticalOptions="Center" 
                         Clicked="btPlay_Clicked" />
                 </Grid>
+                
+                <HorizontalStackLayout Margin="10,5,0,5">
+                    <CheckBox x:Name="cbLowLatencyMode" 
+                              IsChecked="True"
+                              VerticalOptions="Center" />
+                    <Label Text="Low latency mode (60-120ms)" 
+                           VerticalOptions="Center"
+                           Margin="5,0,0,0"
+                           TextColor="White" />
+                </HorizontalStackLayout>
             </StackLayout>
         </Grid>
     </Grid>

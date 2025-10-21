@@ -108,10 +108,19 @@ namespace RTSP_Preview
             mmLog.Clear();
 
             var audioEnabled = cbIPAudioCapture.IsChecked == true; 
+            var lowLatencyMode = cbLowLatencyMode.IsChecked == true;
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled);
+            
+            // Enable low latency mode if checkbox is checked
+            if (lowLatencyMode)
+            {
+                rtsp.LowLatencyMode = true;
+                mmLog.Text += "Low latency mode enabled (latency=80ms, no buffering)" + Environment.NewLine;
+            }
+            
             var info = rtsp.GetInfo();
 
             if (info == null)
@@ -123,6 +132,13 @@ namespace RTSP_Preview
             _rtspSource = new RTSPSourceBlock(rtsp);
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+            
+            // Disable sync for low latency mode to reduce display latency
+            if (lowLatencyMode)
+            {
+                _videoRenderer.IsSync = false;
+                mmLog.Text += "Video renderer sync disabled for low latency" + Environment.NewLine;
+            }
 
             _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
 

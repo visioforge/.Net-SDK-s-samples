@@ -119,6 +119,10 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                 rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
                 rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
                 rtspSettings.EnableRAWVideoAudioEvents = cbRAWEvents.Checked;
+                
+                // Enable low latency mode - optimized for real-time surveillance
+                // This sets latency=80ms, buffer-mode=0, optimized queues for 60-120ms total latency
+                rtspSettings.LowLatencyMode = true;
 
                 if (cbGPUDecoder.SelectedIndex > 0)
                 {
