@@ -43,7 +43,7 @@ namespace RTSP_Preview
 
         private RTSPSourceBlock _rtspSource;
 
-        private MediaBlock _videoRenderer;
+        private VideoRendererBlock _videoRenderer;
 
         private AudioRendererBlock _audioRenderer;
 
