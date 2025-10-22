@@ -147,6 +147,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMatrix Detection Demo M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player 3D Demo MB WPF net7", "WPF\CSharp\Simple Player 3D Demo WPF\Simple Player 3D Demo MB WPF net7.csproj", "{D36031C5-4139-E6F2-8877-9F908683B444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Preview Demo net7", "WinForms\CSharp\RTSP Preview Demo\RTSP Preview Demo net7.csproj", "{FAF718B1-E3BE-2174-95A7-51B3E27F11CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -429,6 +431,10 @@ Global
 		{D36031C5-4139-E6F2-8877-9F908683B444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36031C5-4139-E6F2-8877-9F908683B444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36031C5-4139-E6F2-8877-9F908683B444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF718B1-E3BE-2174-95A7-51B3E27F11CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF718B1-E3BE-2174-95A7-51B3E27F11CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF718B1-E3BE-2174-95A7-51B3E27F11CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF718B1-E3BE-2174-95A7-51B3E27F11CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -503,6 +509,7 @@ Global
 		{A9B98512-1C83-976D-429B-2A8C7F35A1A2} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{1848B86E-48FD-6C0F-897D-FD57F9C5770A} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{D36031C5-4139-E6F2-8877-9F908683B444} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{FAF718B1-E3BE-2174-95A7-51B3E27F11CD} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

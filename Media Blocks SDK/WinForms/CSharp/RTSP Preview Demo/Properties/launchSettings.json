@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RTSP Preview Demo": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
