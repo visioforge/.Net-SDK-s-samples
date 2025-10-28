@@ -40,6 +40,8 @@ namespace RTSP_Preview_WinForms
 
         private AudioRendererBlock _audioRenderer;
 
+        private bool _isClosing = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -149,6 +151,7 @@ namespace RTSP_Preview_WinForms
 
             await _pipeline.StopAsync();
             await _pipeline.DisposeAsync();
+            _pipeline = null;
         }
 
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -232,8 +235,9 @@ namespace RTSP_Preview_WinForms
 
                     btONVIFConnect.Text = "Disconnect";
                 }
-                catch
-                {                    
+                catch (Exception ex)
+                {
+                    Log($"ONVIF connection error: {ex.Message}");
                     btONVIFConnect.Text = "Connect";
                 }
 
@@ -253,16 +257,31 @@ namespace RTSP_Preview_WinForms
 
         private async void btResume_Click(object sender, EventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.ResumeAsync();
         }
 
         private async void btPause_Click(object sender, EventArgs e)
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.PauseAsync();
         }
 
         private async Task UpdateRecordingTime()
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             var ts = await _pipeline.Position_GetAsync();
 
             if (Math.Abs(ts.TotalMilliseconds) < 0.01)
@@ -326,6 +345,16 @@ namespace RTSP_Preview_WinForms
 
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // If already processed closing, allow the form to close
+            if (_isClosing)
+            {
+                return;
+            }
+
+            // Prevent the form from closing until cleanup is complete
+            e.Cancel = true;
+            _isClosing = true;
+
             tmRecording.Stop();
 
             await DestroyEngineAsync();
@@ -337,6 +366,9 @@ namespace RTSP_Preview_WinForms
             }
 
             VisioForgeX.DestroySDK();
+
+            // Now allow the form to close
+            Application.Exit();
         }
 
         protected override void Dispose(bool disposing)
