@@ -19,7 +19,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: | 
-          8.0.x
+          9.0.x
           
     # Install required workloads
     - name: Install .NET workloads
