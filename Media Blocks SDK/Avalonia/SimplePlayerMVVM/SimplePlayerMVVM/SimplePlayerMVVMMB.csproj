@@ -8,13 +8,13 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <TargetFrameworks>net9.0-android;net9.0-ios;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-windows</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-macos15.0</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <TargetFrameworks>net9.0-android;net8.0</TargetFrameworks>
+    <TargetFrameworks>net9.0-android;net9.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.0" />

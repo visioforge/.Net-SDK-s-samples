@@ -9,7 +9,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
@@ -24,7 +24,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>

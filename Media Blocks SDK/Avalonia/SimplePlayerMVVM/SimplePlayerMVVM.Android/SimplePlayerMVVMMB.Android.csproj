@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0-android</TargetFramework>
@@ -20,7 +20,7 @@
     <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />
+    <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X9.csproj" />
     <ProjectReference Include="..\SimplePlayerMVVM\SimplePlayerMVVMMB.csproj" />
   </ItemGroup>
   <ItemGroup>
