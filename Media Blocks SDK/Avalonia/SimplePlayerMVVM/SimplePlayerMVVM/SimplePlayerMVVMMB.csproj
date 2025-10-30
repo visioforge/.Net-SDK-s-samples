@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -28,7 +28,7 @@
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.10.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.10.10" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -36,8 +36,8 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.10.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.10.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2025.10.10" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.0" />

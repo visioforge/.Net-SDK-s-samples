@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.10.10
+
+* [**Windows SDKs**] Updated VideoEffectRotate with no-crop option
+
 ## 2025.10.6
 
 ### 🚀 Major Feature: Ultra-Low Latency RTSP Streaming
