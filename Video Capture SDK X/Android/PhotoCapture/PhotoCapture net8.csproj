@@ -16,7 +16,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.10.11" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X8.csproj" />

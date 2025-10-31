@@ -16,8 +16,8 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.9.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.11.0" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
@@ -26,7 +26,7 @@
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.9.5" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.10.11" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.11.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
