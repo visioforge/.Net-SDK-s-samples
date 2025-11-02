@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Compositor Demo net6"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Face Detector Live net6", "WPF\CSharp\Face Detector Live\Face Detector Live net6.csproj", "{42C42788-D8B9-43EE-BFB9-0430064F13EF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motion Detection Demo net6", "WPF\CSharp\Motion Detection Demo\Motion Detection Demo net6.csproj", "{6DD12585-8E8D-491D-AC0D-262E96F58F5E}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Live Video Compositor Demo net6", "WPF\CSharp\Live Video Compositor Demo\Live Video Compositor Demo net6.csproj", "{854924E7-BBAB-402C-ADFB-077FD19B149A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KLV Demo net6", "WPF\CSharp\KLV Demo\KLV Demo net6.csproj", "{46EF1BC4-2C85-4727-B561-42C788AF84F9}"
@@ -440,6 +442,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6DD12585-8E8D-491D-AC0D-262E96F58F5E} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{473CF44A-6FCE-4553-AE3E-CF056E761095} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{A24ED407-998B-4A6F-83BE-E908DC61758B} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
 		{6072919F-08E7-4842-B541-03ED5B3E56AC} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}

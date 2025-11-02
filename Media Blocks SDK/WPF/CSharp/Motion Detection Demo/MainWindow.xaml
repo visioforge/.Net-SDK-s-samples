@@ -1,0 +1,85 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaBlocks_Motion_Detection_Demo_WPF"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" 
+        x:Class="MediaBlocks_Motion_Detection_Demo_WPF.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Motion Detection Demo" Height="550" Width="810" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <WPF:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="400" Margin="10,10,10,0" Width="400"/>
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Video input device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                    <Label Content="Video format and frame rate" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbVideoFormat" Width="280" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                        <ComboBox x:Name="cbVideoFrameRate" Margin="10,0,0,0" Width="50"/>
+                        <Label Content="fps" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Motion Detection">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <CheckBox x:Name="cbDisplayMotion" Content="Display motion overlay" IsChecked="True" Margin="0,0,0,10"/>
+                    
+                    <Label Content="Grid X (columns)" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="sliderGridX" Width="280" Minimum="4" Maximum="32" Value="8" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <Label x:Name="lblGridX" Content="8" Width="40" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <Label Content="Grid Y (rows)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="sliderGridY" Width="280" Minimum="4" Maximum="24" Value="6" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <Label x:Name="lblGridY" Content="6" Width="40" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <Label Content="Sensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="sliderSensitivity" Width="280" Minimum="0.1" Maximum="1.0" Value="0.5" TickFrequency="0.1"/>
+                        <Label x:Name="lblSensitivity" Content="0.5" Width="40" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <Label Content="Motion Cells Threshold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Slider x:Name="sliderThreshold" Width="280" Minimum="0.01" Maximum="0.5" Value="0.1" TickFrequency="0.01"/>
+                        <Label x:Name="lblThreshold" Content="0.1" Width="40" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="cbDebugMode" Width="110">Debug mode</CheckBox>
+                        <CheckBox x:Name="cbTelemetry">Telemetry</CheckBox>
+                    </StackPanel>
+
+                    <TextBox x:Name="mmLog" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,40,0,10" TextWrapping="Wrap" Width="360" VerticalScrollBarVisibility="Auto"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,420,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,420,10,0" Text="00:00:00" x:Name="lbTime"/>
+        
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,450,0,0" Text="Motion Events: 0" x:Name="lbMotionEvents"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,475,0,0" Text="Motion: No" x:Name="lbMotionLevel"/>
+    </Grid>
+</Window>
