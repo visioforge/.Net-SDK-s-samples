@@ -72,36 +72,36 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(1318, 16);
+            label1.Location = new System.Drawing.Point(1648, 20);
             label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(100, 20);
+            label1.Size = new System.Drawing.Size(119, 25);
             label1.TabIndex = 8;
             label1.Text = "Camera index";
             // 
             // edURL
             // 
-            edURL.Location = new System.Drawing.Point(1322, 76);
-            edURL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            edURL.Location = new System.Drawing.Point(1652, 95);
+            edURL.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             edURL.Name = "edURL";
-            edURL.Size = new System.Drawing.Size(366, 27);
+            edURL.Size = new System.Drawing.Size(456, 31);
             edURL.TabIndex = 9;
             edURL.Text = "rtsp://";
             // 
             // edLogin
             // 
-            edLogin.Location = new System.Drawing.Point(1322, 140);
-            edLogin.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            edLogin.Location = new System.Drawing.Point(1652, 185);
+            edLogin.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             edLogin.Name = "edLogin";
-            edLogin.Size = new System.Drawing.Size(109, 27);
+            edLogin.Size = new System.Drawing.Size(135, 31);
             edLogin.TabIndex = 11;
             // 
             // edPassword
             // 
-            edPassword.Location = new System.Drawing.Point(1435, 142);
-            edPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            edPassword.Location = new System.Drawing.Point(1794, 185);
+            edPassword.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             edPassword.Name = "edPassword";
-            edPassword.Size = new System.Drawing.Size(109, 27);
+            edPassword.Size = new System.Drawing.Size(135, 31);
             edPassword.TabIndex = 12;
             // 
             // cbCameraIndex
@@ -109,49 +109,49 @@
             cbCameraIndex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbCameraIndex.FormattingEnabled = true;
             cbCameraIndex.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
-            cbCameraIndex.Location = new System.Drawing.Point(1435, 13);
-            cbCameraIndex.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbCameraIndex.Location = new System.Drawing.Point(1794, 16);
+            cbCameraIndex.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbCameraIndex.Name = "cbCameraIndex";
-            cbCameraIndex.Size = new System.Drawing.Size(71, 28);
+            cbCameraIndex.Size = new System.Drawing.Size(88, 33);
             cbCameraIndex.TabIndex = 13;
             cbCameraIndex.SelectedIndexChanged += cbCameraIndex_SelectedIndexChanged;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(1318, 53);
+            label2.Location = new System.Drawing.Point(1648, 66);
             label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(35, 20);
+            label2.Size = new System.Drawing.Size(43, 25);
             label2.TabIndex = 14;
             label2.Text = "URL";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(1318, 117);
+            label3.Location = new System.Drawing.Point(1648, 146);
             label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(46, 20);
+            label3.Size = new System.Drawing.Size(56, 25);
             label3.TabIndex = 15;
             label3.Text = "Login";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(1432, 117);
+            label4.Location = new System.Drawing.Point(1790, 146);
             label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(70, 20);
+            label4.Size = new System.Drawing.Size(87, 25);
             label4.TabIndex = 16;
             label4.Text = "Password";
             // 
             // btStop
             // 
-            btStop.Location = new System.Drawing.Point(1429, 351);
-            btStop.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            btStop.Location = new System.Drawing.Point(1786, 439);
+            btStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStop.Name = "btStop";
-            btStop.Size = new System.Drawing.Size(99, 35);
+            btStop.Size = new System.Drawing.Size(124, 44);
             btStop.TabIndex = 19;
             btStop.Text = "Stop";
             btStop.UseVisualStyleBackColor = true;
@@ -159,10 +159,10 @@
             // 
             // btStart
             // 
-            btStart.Location = new System.Drawing.Point(1322, 351);
-            btStart.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            btStart.Location = new System.Drawing.Point(1652, 439);
+            btStart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStart.Name = "btStart";
-            btStart.Size = new System.Drawing.Size(99, 35);
+            btStart.Size = new System.Drawing.Size(124, 44);
             btStart.TabIndex = 18;
             btStart.Text = "Start";
             btStart.UseVisualStyleBackColor = true;
@@ -173,10 +173,10 @@
             cbAudioEnabled.AutoSize = true;
             cbAudioEnabled.Checked = true;
             cbAudioEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            cbAudioEnabled.Location = new System.Drawing.Point(1322, 186);
-            cbAudioEnabled.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbAudioEnabled.Location = new System.Drawing.Point(1652, 232);
+            cbAudioEnabled.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbAudioEnabled.Name = "cbAudioEnabled";
-            cbAudioEnabled.Size = new System.Drawing.Size(118, 24);
+            cbAudioEnabled.Size = new System.Drawing.Size(140, 29);
             cbAudioEnabled.TabIndex = 20;
             cbAudioEnabled.Text = "Enable audio";
             cbAudioEnabled.UseVisualStyleBackColor = true;
@@ -184,10 +184,10 @@
             // cbUseMJPEG
             // 
             cbUseMJPEG.AutoSize = true;
-            cbUseMJPEG.Location = new System.Drawing.Point(1322, 216);
-            cbUseMJPEG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbUseMJPEG.Location = new System.Drawing.Point(1652, 270);
+            cbUseMJPEG.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbUseMJPEG.Name = "cbUseMJPEG";
-            cbUseMJPEG.Size = new System.Drawing.Size(189, 24);
+            cbUseMJPEG.Size = new System.Drawing.Size(228, 29);
             cbUseMJPEG.TabIndex = 21;
             cbUseMJPEG.Text = "Use HTTP MJPEG source";
             cbUseMJPEG.UseVisualStyleBackColor = true;
@@ -196,10 +196,10 @@
             // 
             cbUseGPU.AutoSize = true;
             cbUseGPU.Enabled = false;
-            cbUseGPU.Location = new System.Drawing.Point(1322, 246);
-            cbUseGPU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbUseGPU.Location = new System.Drawing.Point(1652, 308);
+            cbUseGPU.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbUseGPU.Name = "cbUseGPU";
-            cbUseGPU.Size = new System.Drawing.Size(207, 24);
+            cbUseGPU.Size = new System.Drawing.Size(250, 29);
             cbUseGPU.TabIndex = 22;
             cbUseGPU.Text = "Use custom video decoder";
             cbUseGPU.UseVisualStyleBackColor = true;
@@ -209,49 +209,49 @@
             cbGPUDecoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbGPUDecoder.Enabled = false;
             cbGPUDecoder.FormattingEnabled = true;
-            cbGPUDecoder.Location = new System.Drawing.Point(1346, 276);
-            cbGPUDecoder.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbGPUDecoder.Location = new System.Drawing.Point(1682, 345);
+            cbGPUDecoder.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbGPUDecoder.Name = "cbGPUDecoder";
-            cbGPUDecoder.Size = new System.Drawing.Size(342, 28);
+            cbGPUDecoder.Size = new System.Drawing.Size(426, 33);
             cbGPUDecoder.TabIndex = 24;
             // 
             // edLog
             // 
-            edLog.Location = new System.Drawing.Point(1322, 614);
-            edLog.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            edLog.Location = new System.Drawing.Point(1652, 768);
+            edLog.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             edLog.Multiline = true;
             edLog.Name = "edLog";
             edLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            edLog.Size = new System.Drawing.Size(366, 368);
+            edLog.Size = new System.Drawing.Size(456, 459);
             edLog.TabIndex = 25;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(1318, 591);
+            label5.Location = new System.Drawing.Point(1648, 739);
             label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(107, 20);
+            label5.Size = new System.Drawing.Size(129, 25);
             label5.TabIndex = 26;
             label5.Text = "Error / info log";
             // 
             // cbCompatibilityMode
             // 
             cbCompatibilityMode.AutoSize = true;
-            cbCompatibilityMode.Location = new System.Drawing.Point(1322, 319);
-            cbCompatibilityMode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbCompatibilityMode.Location = new System.Drawing.Point(1652, 399);
+            cbCompatibilityMode.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbCompatibilityMode.Name = "cbCompatibilityMode";
-            cbCompatibilityMode.Size = new System.Drawing.Size(164, 24);
+            cbCompatibilityMode.Size = new System.Drawing.Size(196, 29);
             cbCompatibilityMode.TabIndex = 27;
             cbCompatibilityMode.Text = "Compatibility mode";
             cbCompatibilityMode.UseVisualStyleBackColor = true;
             // 
             // btReadInfo
             // 
-            btReadInfo.Location = new System.Drawing.Point(1567, 137);
-            btReadInfo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            btReadInfo.Location = new System.Drawing.Point(1959, 171);
+            btReadInfo.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             btReadInfo.Name = "btReadInfo";
-            btReadInfo.Size = new System.Drawing.Size(121, 36);
+            btReadInfo.Size = new System.Drawing.Size(151, 45);
             btReadInfo.TabIndex = 28;
             btReadInfo.Text = "Read info";
             btReadInfo.UseVisualStyleBackColor = true;
@@ -259,10 +259,10 @@
             // 
             // btStartRecord
             // 
-            btStartRecord.Location = new System.Drawing.Point(1322, 522);
-            btStartRecord.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            btStartRecord.Location = new System.Drawing.Point(1652, 652);
+            btStartRecord.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStartRecord.Name = "btStartRecord";
-            btStartRecord.Size = new System.Drawing.Size(99, 35);
+            btStartRecord.Size = new System.Drawing.Size(124, 44);
             btStartRecord.TabIndex = 29;
             btStartRecord.Text = "Start record";
             btStartRecord.UseVisualStyleBackColor = true;
@@ -270,10 +270,10 @@
             // 
             // btStopRecord
             // 
-            btStopRecord.Location = new System.Drawing.Point(1429, 522);
-            btStopRecord.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            btStopRecord.Location = new System.Drawing.Point(1786, 652);
+            btStopRecord.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             btStopRecord.Name = "btStopRecord";
-            btStopRecord.Size = new System.Drawing.Size(99, 35);
+            btStopRecord.Size = new System.Drawing.Size(124, 44);
             btStopRecord.TabIndex = 30;
             btStopRecord.Text = "Stop record";
             btStopRecord.UseVisualStyleBackColor = true;
@@ -282,118 +282,109 @@
             // videoView9
             // 
             videoView9.BackColor = System.Drawing.Color.Black;
-            videoView9.Location = new System.Drawing.Point(874, 664);
-            videoView9.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView9.Location = new System.Drawing.Point(1092, 830);
+            videoView9.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView9.Name = "videoView9";
-            videoView9.Size = new System.Drawing.Size(426, 320);
-            videoView9.StatusOverlay = null;
+            videoView9.Size = new System.Drawing.Size(532, 400);
             videoView9.TabIndex = 7;
             // 
             // videoView8
             // 
             videoView8.BackColor = System.Drawing.Color.Black;
-            videoView8.Location = new System.Drawing.Point(442, 664);
-            videoView8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView8.Location = new System.Drawing.Point(552, 830);
+            videoView8.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView8.Name = "videoView8";
-            videoView8.Size = new System.Drawing.Size(426, 320);
-            videoView8.StatusOverlay = null;
+            videoView8.Size = new System.Drawing.Size(532, 400);
             videoView8.TabIndex = 6;
             // 
             // videoView7
             // 
             videoView7.BackColor = System.Drawing.Color.Black;
-            videoView7.Location = new System.Drawing.Point(10, 664);
-            videoView7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView7.Location = new System.Drawing.Point(12, 830);
+            videoView7.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView7.Name = "videoView7";
-            videoView7.Size = new System.Drawing.Size(426, 320);
-            videoView7.StatusOverlay = null;
+            videoView7.Size = new System.Drawing.Size(532, 400);
             videoView7.TabIndex = 1;
             // 
             // videoView6
             // 
             videoView6.BackColor = System.Drawing.Color.Black;
-            videoView6.Location = new System.Drawing.Point(874, 338);
-            videoView6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView6.Location = new System.Drawing.Point(1092, 422);
+            videoView6.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView6.Name = "videoView6";
-            videoView6.Size = new System.Drawing.Size(426, 320);
-            videoView6.StatusOverlay = null;
+            videoView6.Size = new System.Drawing.Size(532, 400);
             videoView6.TabIndex = 5;
             // 
             // videoView5
             // 
             videoView5.BackColor = System.Drawing.Color.Black;
-            videoView5.Location = new System.Drawing.Point(442, 338);
-            videoView5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView5.Location = new System.Drawing.Point(552, 422);
+            videoView5.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView5.Name = "videoView5";
-            videoView5.Size = new System.Drawing.Size(426, 320);
-            videoView5.StatusOverlay = null;
+            videoView5.Size = new System.Drawing.Size(532, 400);
             videoView5.TabIndex = 4;
             // 
             // videoView4
             // 
             videoView4.BackColor = System.Drawing.Color.Black;
-            videoView4.Location = new System.Drawing.Point(10, 338);
-            videoView4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView4.Location = new System.Drawing.Point(12, 422);
+            videoView4.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView4.Name = "videoView4";
-            videoView4.Size = new System.Drawing.Size(426, 320);
-            videoView4.StatusOverlay = null;
+            videoView4.Size = new System.Drawing.Size(532, 400);
             videoView4.TabIndex = 3;
             // 
             // videoView3
             // 
             videoView3.BackColor = System.Drawing.Color.Black;
-            videoView3.Location = new System.Drawing.Point(874, 12);
-            videoView3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView3.Location = new System.Drawing.Point(1092, 15);
+            videoView3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView3.Name = "videoView3";
-            videoView3.Size = new System.Drawing.Size(426, 320);
-            videoView3.StatusOverlay = null;
+            videoView3.Size = new System.Drawing.Size(532, 400);
             videoView3.TabIndex = 2;
             // 
             // videoView2
             // 
             videoView2.BackColor = System.Drawing.Color.Black;
-            videoView2.Location = new System.Drawing.Point(442, 12);
-            videoView2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView2.Location = new System.Drawing.Point(552, 15);
+            videoView2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView2.Name = "videoView2";
-            videoView2.Size = new System.Drawing.Size(426, 320);
-            videoView2.StatusOverlay = null;
+            videoView2.Size = new System.Drawing.Size(532, 400);
             videoView2.TabIndex = 1;
             // 
             // videoView1
             // 
             videoView1.BackColor = System.Drawing.Color.Black;
-            videoView1.Location = new System.Drawing.Point(10, 12);
-            videoView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            videoView1.Location = new System.Drawing.Point(12, 15);
+            videoView1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             videoView1.Name = "videoView1";
-            videoView1.Size = new System.Drawing.Size(426, 320);
-            videoView1.StatusOverlay = null;
+            videoView1.Size = new System.Drawing.Size(532, 400);
             videoView1.TabIndex = 0;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(1318, 417);
+            label6.Location = new System.Drawing.Point(1648, 521);
             label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(311, 20);
+            label6.Size = new System.Drawing.Size(371, 25);
             label6.TabIndex = 31;
             label6.Text = "Record original video to MPEG-TS or MP4 file";
             // 
             // edFilename
             // 
-            edFilename.Location = new System.Drawing.Point(1322, 440);
-            edFilename.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            edFilename.Location = new System.Drawing.Point(1652, 550);
+            edFilename.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             edFilename.Name = "edFilename";
-            edFilename.Size = new System.Drawing.Size(330, 27);
+            edFilename.Size = new System.Drawing.Size(412, 31);
             edFilename.TabIndex = 32;
             edFilename.Text = "c:\\vf\\_ipcamoutput.ts";
             // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(1657, 436);
-            button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            button1.Location = new System.Drawing.Point(2071, 545);
+            button1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(31, 35);
+            button1.Size = new System.Drawing.Size(39, 44);
             button1.TabIndex = 33;
             button1.Text = "...";
             button1.UseVisualStyleBackColor = true;
@@ -408,10 +399,10 @@
             cbReencodeAudio.AutoSize = true;
             cbReencodeAudio.Checked = true;
             cbReencodeAudio.CheckState = System.Windows.Forms.CheckState.Checked;
-            cbReencodeAudio.Location = new System.Drawing.Point(1553, 482);
-            cbReencodeAudio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbReencodeAudio.Location = new System.Drawing.Point(1941, 602);
+            cbReencodeAudio.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbReencodeAudio.Name = "cbReencodeAudio";
-            cbReencodeAudio.Size = new System.Drawing.Size(139, 24);
+            cbReencodeAudio.Size = new System.Drawing.Size(165, 29);
             cbReencodeAudio.TabIndex = 34;
             cbReencodeAudio.Text = "Reencode audio";
             cbReencodeAudio.UseVisualStyleBackColor = true;
@@ -421,10 +412,10 @@
             cbRAWEvents.AutoSize = true;
             cbRAWEvents.Checked = true;
             cbRAWEvents.CheckState = System.Windows.Forms.CheckState.Checked;
-            cbRAWEvents.Location = new System.Drawing.Point(1451, 186);
-            cbRAWEvents.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            cbRAWEvents.Location = new System.Drawing.Point(1814, 232);
+            cbRAWEvents.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             cbRAWEvents.Name = "cbRAWEvents";
-            cbRAWEvents.Size = new System.Drawing.Size(194, 24);
+            cbRAWEvents.Size = new System.Drawing.Size(234, 29);
             cbRAWEvents.TabIndex = 35;
             cbRAWEvents.Text = "RAW video/audio events";
             cbRAWEvents.UseVisualStyleBackColor = true;
@@ -433,10 +424,10 @@
             // 
             rbMPEGTSOutput.AutoSize = true;
             rbMPEGTSOutput.Checked = true;
-            rbMPEGTSOutput.Location = new System.Drawing.Point(1322, 481);
-            rbMPEGTSOutput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            rbMPEGTSOutput.Location = new System.Drawing.Point(1652, 601);
+            rbMPEGTSOutput.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             rbMPEGTSOutput.Name = "rbMPEGTSOutput";
-            rbMPEGTSOutput.Size = new System.Drawing.Size(91, 24);
+            rbMPEGTSOutput.Size = new System.Drawing.Size(110, 29);
             rbMPEGTSOutput.TabIndex = 36;
             rbMPEGTSOutput.TabStop = true;
             rbMPEGTSOutput.Text = "MPEG-TS";
@@ -445,20 +436,20 @@
             // rbMP4Output
             // 
             rbMP4Output.AutoSize = true;
-            rbMP4Output.Location = new System.Drawing.Point(1430, 481);
-            rbMP4Output.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            rbMP4Output.Location = new System.Drawing.Point(1788, 601);
+            rbMP4Output.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             rbMP4Output.Name = "rbMP4Output";
-            rbMP4Output.Size = new System.Drawing.Size(59, 24);
+            rbMP4Output.Size = new System.Drawing.Size(73, 29);
             rbMP4Output.TabIndex = 37;
             rbMP4Output.Text = "MP4";
             rbMP4Output.UseVisualStyleBackColor = true;
             // 
             // btONVIF
             // 
-            btONVIF.Location = new System.Drawing.Point(1567, 6);
-            btONVIF.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            btONVIF.Location = new System.Drawing.Point(1959, 8);
+            btONVIF.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             btONVIF.Name = "btONVIF";
-            btONVIF.Size = new System.Drawing.Size(121, 64);
+            btONVIF.Size = new System.Drawing.Size(151, 80);
             btONVIF.TabIndex = 38;
             btONVIF.Text = "ONVIF discovery";
             btONVIF.UseVisualStyleBackColor = true;
@@ -466,9 +457,9 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1705, 994);
+            ClientSize = new System.Drawing.Size(2131, 1242);
             Controls.Add(btONVIF);
             Controls.Add(rbMP4Output);
             Controls.Add(rbMPEGTSOutput);
@@ -507,7 +498,7 @@
             Controls.Add(videoView2);
             Controls.Add(videoView1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
-            Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             Name = "Form1";
             Text = "Media Blocks SDK .Net - MultiView Demo";
             FormClosing += Form1_FormClosing;

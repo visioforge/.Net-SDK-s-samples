@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.11.1
+
+* [Media Blocks SDK .Net] Add synchronized overlay group support for OverlayManagerBlock
+
 ## 2025.10.10
 
 * [**Windows SDKs**] Updated VideoEffectRotate with no-crop option

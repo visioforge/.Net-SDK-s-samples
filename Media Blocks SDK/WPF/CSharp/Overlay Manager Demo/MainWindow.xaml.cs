@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.MediaBlocks.Decklink;
+using MessageBoxResult = System.Windows.MessageBoxResult;
 
 namespace Overlay_Manager_Demo
 {
@@ -48,6 +49,8 @@ namespace Overlay_Manager_Demo
         private List<OverlayManagerDecklinkVideo> _decklinkOverlays = new List<OverlayManagerDecklinkVideo>();
 
         private List<OverlayManagerNDIVideo> _ndiOverlays = new List<OverlayManagerNDIVideo>();
+
+        private List<OverlayManagerGroup> _overlayGroups = new List<OverlayManagerGroup>();
         
         public MainWindow()
         {
@@ -232,6 +235,13 @@ namespace Overlay_Manager_Demo
             }
             _ndiOverlays.Clear();
 
+            // Dispose overlay groups
+            foreach (var overlayGroup in _overlayGroups)
+            {
+                overlayGroup?.Dispose();
+            }
+            _overlayGroups.Clear();
+
             if (_pipeline != null)
             {
                 _pipeline.OnStop -= Pipeline_OnStop;
@@ -342,6 +352,20 @@ namespace Overlay_Manager_Demo
 
                         _ndiOverlays.Remove(ndiOverlay);
                         ndiOverlay.Dispose();
+                    }
+
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[GROUP]"))
+                {
+                    // Find and dispose the overlay group
+                    var overlayGroup = _overlayGroups.Find(g => selectedItem.Contains(g.Name));
+                    if (overlayGroup != null)
+                    {
+                        overlayGroup.Stop();
+
+                        _overlayGroups.Remove(overlayGroup);
+                        overlayGroup.Dispose();
                     }
 
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
@@ -778,6 +802,145 @@ namespace Overlay_Manager_Demo
                     MessageBox.Show($"Error creating NDI overlay: {ex.Message}",
                         "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void btAddSyncGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Create a synchronized overlay group
+                var overlayGroup = new OverlayManagerGroup("SyncGroup_" + (_overlayGroups.Count + 1));
+
+                // Prompt user for video files to add to the group
+                var result = MessageBox.Show(
+                    "This demo will create a synchronized group with:\n" +
+                    "• Two video overlays (you'll select the files)\n" +
+                    "• One text overlay\n" +
+                    "• One image overlay (optional)\n\n" +
+                    "All overlays in the group will start playing at the same time.\n\n" +
+                    "Continue?",
+                    "Create Synchronized Overlay Group",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes)
+                    return;
+
+                // Select first video
+                var dlg1 = new OpenFileDialog()
+                {
+                    Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv, *.wmv)|*.mp4;*.avi;*.mov;*.mkv;*.wmv|All files (*.*)|*.*",
+                    Title = "Select First Video for Group"
+                };
+
+                if (dlg1.ShowDialog() != true)
+                    return;
+
+                // Select second video
+                var dlg2 = new OpenFileDialog()
+                {
+                    Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv, *.wmv)|*.mp4;*.avi;*.mov;*.mkv;*.wmv|All files (*.*)|*.*",
+                    Title = "Select Second Video for Group"
+                };
+
+                if (dlg2.ShowDialog() != true)
+                    return;
+
+                // Create first video overlay (top-left, quarter size)
+                var video1 = new OverlayManagerVideo(
+                    source: dlg1.FileName,
+                    x: 10,
+                    y: 10,
+                    width: 320,
+                    height: 240
+                )
+                {
+                    Loop = true,
+                    ZIndex = 10,
+                    Name = $"GroupVideo1_{System.IO.Path.GetFileName(dlg1.FileName)}"
+                };
+
+                // Create second video overlay (top-right, quarter size)
+                var video2 = new OverlayManagerVideo(
+                    source: dlg2.FileName,
+                    x: 340,
+                    y: 10,
+                    width: 320,
+                    height: 240
+                )
+                {
+                    Loop = true,
+                    ZIndex = 10,
+                    Name = $"GroupVideo2_{System.IO.Path.GetFileName(dlg2.FileName)}"
+                };
+
+                // Create text overlay
+                var text = new OverlayManagerText("SYNCHRONIZED GROUP", 10, 260)
+                {
+                    Color = SKColors.Yellow,
+                    Font = new FontSettings
+                    {
+                        Name = "Arial",
+                        Size = 24,
+                    },
+                    ZIndex = 11
+                };
+
+                // Add all overlays to the group
+                overlayGroup.Add(video1);
+                overlayGroup.Add(video2);
+                overlayGroup.Add(text);
+
+                // Optionally add an image overlay
+                var imageResult = MessageBox.Show(
+                    "Do you want to add an image overlay to the group?",
+                    "Add Image",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (imageResult == MessageBoxResult.Yes)
+                {
+                    var imageDlg = new OpenFileDialog()
+                    {
+                        Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp)|*.jpg;*.jpeg;*.png;*.bmp"
+                    };
+
+                    if (imageDlg.ShowDialog() == true)
+                    {
+                        var imageOverlay = new OverlayManagerImage(imageDlg.FileName, 670, 10)
+                        {
+                            ZIndex = 11
+                        };
+                        overlayGroup.Add(imageOverlay);
+                    }
+                }
+
+                // Add the group to the overlay manager
+                // This automatically initializes all video overlays to PAUSED state
+                _overlayManager.Video_Overlay_Add(overlayGroup);
+                _overlayGroups.Add(overlayGroup);
+
+                // Add to the list
+                lbOverlays.Items.Add($"[GROUP] {overlayGroup.Name} ({overlayGroup.Overlays.Count} overlays)");
+
+                // Show info message
+                MessageBox.Show(
+                    $"Synchronized overlay group created with {overlayGroup.Overlays.Count} overlays.\n\n" +
+                    "The videos are now preloaded and paused.\n" +
+                    "They will start playing when you start the pipeline.\n\n" +
+                    "All overlays in the group will begin at exactly the same time!",
+                    "Group Created",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+
+                // Start the group (this makes videos start playing synchronously)
+                overlayGroup.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating synchronized overlay group: {ex.Message}",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

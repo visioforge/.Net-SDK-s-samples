@@ -231,6 +231,24 @@
                                             Height="25"
                                             Click="btAddTimeOverlay_Click"/>
                                 </StackPanel>
+
+                                <!-- Overlay Groups -->
+                                <Label Content="Overlay Groups:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                                <StackPanel Margin="0,0,0,5">
+                                    <Button x:Name="btAddSyncGroup"
+                                            Content="Synchronized Group"
+                                            Width="180"
+                                            Height="25"
+                                            Margin="0,0,0,5"
+                                            ToolTip="Add a synchronized overlay group"
+                                            Click="btAddSyncGroup_Click"/>
+                                    
+                                    <TextBlock Text="Groups allow multiple overlays to start synchronously"
+                                               TextWrapping="Wrap"
+                                               FontSize="10"
+                                               Foreground="Gray"
+                                               Margin="0,0,0,5"/>
+                                </StackPanel>
                             </StackPanel>
                         </GroupBox>
 
