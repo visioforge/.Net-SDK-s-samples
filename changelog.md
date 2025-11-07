@@ -1,6 +1,6 @@
 ---
 title: .Net SDKs Updates and Release History
-description: Detailed changelog for .Net video processing SDKs, including Video Capture, Media Player, Video Edit and Media Blocks. Track latest features, improvements, and fixes across versions. Essential reference for developers implementing video solutions.
+description: Changelog for .NET video SDKs including Video Capture, Media Player, Video Edit, and Media Blocks with latest features and fixes.
 sidebar_label: Changelog
 hide_table_of_contents: true
 ---
