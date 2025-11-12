@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.11.3
+
+* WPF VideoView update: Added RotationAngle, RotateCrop, and RotationStretch properties to support rotated video rendering 
+
 ## 2025.11.1
 
 * [Media Blocks SDK .Net] Add synchronized overlay group support for OverlayManagerBlock
