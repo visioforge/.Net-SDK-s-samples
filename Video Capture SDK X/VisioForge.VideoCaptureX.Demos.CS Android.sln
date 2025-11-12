@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture net8", "Android\Simple Video Capture\Simple Video Capture net8.csproj", "{839E9F40-ED93-4167-9ADD-CDFBD0AC1455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture", "Android\Simple Video Capture\Simple Video Capture.csproj", "{839E9F40-ED93-4167-9ADD-CDFBD0AC1455}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X8", "..\AndroidDependency\VisioForge.Core.Android.X8.csproj", "{EF80D735-7DE2-4E67-9F68-9055CC497E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{EF80D735-7DE2-4E67-9F68-9055CC497E1B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoCapture net8", "Android\PhotoCapture\PhotoCapture net8.csproj", "{CEC6C1E7-C926-4844-A607-A08D5F8FA0EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoCapture", "Android\PhotoCapture\PhotoCapture.csproj", "{CEC6C1E7-C926-4844-A607-A08D5F8FA0EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
