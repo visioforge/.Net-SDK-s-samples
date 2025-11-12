@@ -16,6 +16,7 @@ namespace Overlay_Manager_Demo
         public double Opacity { get; private set; }
         public OverlayManagerImageStretchMode StretchMode { get; private set; }
         public bool EnableShadow { get; private set; }
+        public bool UseExternalVideoView { get; private set; }
 
         public VideoOverlayOptionsWindow()
         {
@@ -79,6 +80,7 @@ namespace Overlay_Manager_Demo
             Loop = cbLoop.IsChecked == true;
             Opacity = slOpacity.Value;
             EnableShadow = cbEnableShadow.IsChecked == true;
+            UseExternalVideoView = cbUseExternalVideoView.IsChecked == true;
 
             // Get stretch mode
             switch (cbStretchMode.SelectedIndex)

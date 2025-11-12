@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Video Overlay Options" Height="400" Width="350"
+        Title="Video Overlay Options" Height="420" Width="350"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>
@@ -44,7 +44,9 @@
         
         <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
         
-        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="80,320,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
-        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="180,320,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+        <CheckBox x:Name="cbUseExternalVideoView" Content="Use external video view window" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" ToolTip="Opens a separate window to display the video overlay"/>
+        
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="80,340,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="180,340,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
     </Grid>
 </Window>

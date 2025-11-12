@@ -51,6 +51,9 @@ namespace Overlay_Manager_Demo
         private List<OverlayManagerNDIVideo> _ndiOverlays = new List<OverlayManagerNDIVideo>();
 
         private List<OverlayManagerGroup> _overlayGroups = new List<OverlayManagerGroup>();
+
+        // Dictionary to track external VideoView windows for video overlays
+        private Dictionary<OverlayManagerVideo, VideoOverlayViewWindow> _videoOverlayWindows = new Dictionary<OverlayManagerVideo, VideoOverlayViewWindow>();
         
         public MainWindow()
         {
@@ -220,6 +223,13 @@ namespace Overlay_Manager_Demo
                 videoOverlay?.Dispose();
             }
             _videoOverlays.Clear();
+            
+            // Close all external VideoView windows
+            foreach (var window in _videoOverlayWindows.Values)
+            {
+                window?.ForceClose();
+            }
+            _videoOverlayWindows.Clear();
 
             // Dispose Decklink overlays
             foreach (var decklinkOverlay in _decklinkOverlays)
@@ -314,13 +324,20 @@ namespace Overlay_Manager_Demo
             {
                 // Check if this is a video overlay and dispose it properly
                 var selectedItem = lbOverlays.Items[lbOverlays.SelectedIndex] as string;
-                if (selectedItem != null && selectedItem.StartsWith("[Video]"))
+                if (selectedItem != null && (selectedItem.StartsWith("[Video]") || selectedItem.StartsWith("[Video+View]")))
                 {
                     // Find and dispose the video overlay
                     var videoOverlay = _videoOverlays.Find(v => selectedItem.Contains(v.Name));
                     if (videoOverlay != null)
                     {
                         videoOverlay.Stop();
+
+                        // Close external window if exists
+                        if (_videoOverlayWindows.TryGetValue(videoOverlay, out var externalWindow))
+                        {
+                            externalWindow.ForceClose();
+                            _videoOverlayWindows.Remove(videoOverlay);
+                        }
 
                         _videoOverlays.Remove(videoOverlay);
                         videoOverlay.Dispose();
@@ -498,6 +515,15 @@ namespace Overlay_Manager_Demo
                 var optionsWindow = new VideoOverlayOptionsWindow();
                 if (optionsWindow.ShowDialog() == true)
                 {
+                    VideoOverlayViewWindow externalWindow = null;
+                    
+                    // Create external VideoView window if requested
+                    if (optionsWindow.UseExternalVideoView)
+                    {
+                        externalWindow = new VideoOverlayViewWindow($"Video Overlay - {System.IO.Path.GetFileName(dlg.FileName)}");
+                        externalWindow.Show();
+                    }
+                    
                     // Create video overlay with specified options
                     var videoOverlay = new OverlayManagerVideo(
                         source: dlg.FileName,
@@ -513,7 +539,8 @@ namespace Overlay_Manager_Demo
                             ? optionsWindow.StretchMode 
                             : OverlayManagerImageStretchMode.None,  // Use None only if no dimensions specified
                         ZIndex = 5,
-                        Name = $"VideoOverlay_{System.IO.Path.GetFileName(dlg.FileName)}"
+                        Name = $"VideoOverlay_{System.IO.Path.GetFileName(dlg.FileName)}",
+                        VideoView = externalWindow?.VideoView  // Assign external VideoView if created
                     };
 
                     // Add shadow if enabled
@@ -541,16 +568,32 @@ namespace Overlay_Manager_Demo
                     {
                         // Keep track of video overlays for proper disposal
                         _videoOverlays.Add(videoOverlay);
+                        
+                        // Track external window if created
+                        if (externalWindow != null)
+                        {
+                            _videoOverlayWindows[videoOverlay] = externalWindow;
+                        }
 
                         // Add to overlay manager
                         _overlayManager.Video_Overlay_Add(videoOverlay);
-                        lbOverlays.Items.Add($"[Video] {videoOverlay.Name}");
+                        
+                        string displayName = externalWindow != null 
+                            ? $"[Video+View] {videoOverlay.Name}" 
+                            : $"[Video] {videoOverlay.Name}";
+                        lbOverlays.Items.Add(displayName);
                     }
                     else
                     {
                         MessageBox.Show("Failed to initialize video overlay. Please check if the file is valid and GStreamer has the required codecs.", 
                             "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         videoOverlay.Dispose();
+                        
+                        // Close external window if it was created
+                        if (externalWindow != null)
+                        {
+                            externalWindow.ForceClose();
+                        }
                     }
                 }
             }
