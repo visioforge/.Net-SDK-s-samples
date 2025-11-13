@@ -9,9 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.11.4
+
+* .Net 10 support for all SDKs
+
 ## 2025.11.3
 
-* WPF VideoView update: Added RotationAngle, RotateCrop, and RotationStretch properties to support rotated video rendering 
+* WPF VideoView update: Added RotationAngle, RotateCrop, and RotationStretch properties to support rotated video rendering
 
 ## 2025.11.1
 

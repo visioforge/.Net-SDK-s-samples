@@ -17,15 +17,15 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="2025.11.3" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.11.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.4" />
+    <PackageReference Include="VisioForge.DotNet.Core.WindowsExtensions" Version="2025.11.4" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.11.4" />
   </ItemGroup>
   <PropertyGroup>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Condition="'$(TargetFramework)' == 'netcoreapp3.1' or '$(TargetFramework)' == 'net472'" Include="Microsoft.Windows.SDK.Contracts" Version="10.0.26100.3916" />
+    <PackageReference Condition="'$(TargetFramework)' == 'netcoreapp3.1' or '$(TargetFramework)' == 'net472'" Include="Microsoft.Windows.SDK.Contracts" Version="10.0.26100.6901" />
   </ItemGroup>
 </Project>

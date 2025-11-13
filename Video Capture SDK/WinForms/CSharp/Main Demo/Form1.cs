@@ -39,6 +39,7 @@ namespace VideoCapture_CSharp_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
+    using ScreenCaptureMode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode;
 
     /// <summary>
     /// Main form.

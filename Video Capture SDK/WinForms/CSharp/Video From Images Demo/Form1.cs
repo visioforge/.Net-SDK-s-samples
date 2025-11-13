@@ -128,7 +128,7 @@
                 Top = 0,
                 Bottom = _imageHeight,
                 FrameRate = new VideoFrameRate(Convert.ToDouble(edVideoFrameRate.Text)),
-                Mode = ScreenCaptureMode.Color
+                Mode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode.Color
             };
             VideoCapture1.Screen_Capture_Source = source;
 

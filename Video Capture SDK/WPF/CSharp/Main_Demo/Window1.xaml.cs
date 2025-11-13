@@ -47,6 +47,7 @@ namespace Main_Demo
     using Color = System.Windows.Media.Color;
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
     using MessageBox = System.Windows.MessageBox;
+    using ScreenCaptureMode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode;
 
     // ReSharper disable InconsistentNaming
 

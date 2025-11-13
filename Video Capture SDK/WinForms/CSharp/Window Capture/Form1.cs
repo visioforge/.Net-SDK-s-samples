@@ -12,6 +12,7 @@
     using VisioForge.Core.UI.WinForms.Dialogs;
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCapture;
+    using ScreenCaptureMode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode;
 
     public partial class Form1 : Form
     {
