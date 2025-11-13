@@ -8,9 +8,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>speaker-capture</AssemblyTitle>
     <Product>speaker-capture</Product>
-    <Copyright>Copyright (c) 2006-2024</Copyright>
-    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
-    <FileVersion>2025.0.7.0</FileVersion>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>

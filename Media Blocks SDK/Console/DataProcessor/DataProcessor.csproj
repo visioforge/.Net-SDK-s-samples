@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net9.0-macos15.0</TargetFramework>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net8.0-windows</TargetFrameworks>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ApplicationId>com.visioforge.dataprocessor</ApplicationId>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.11.4" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.11.0" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
+  </ItemGroup>
+</Project>

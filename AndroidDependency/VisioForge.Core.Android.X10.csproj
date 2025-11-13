@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
+    <Version>2025.11.4.0</Version>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <CheckEolWorkloads>false</CheckEolWorkloads>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidJavaSource Include="GstAhcCallback.java" />
+    <AndroidJavaSource Include="GstAhsCallback.java" />
+    <AndroidJavaSource Include="GstAmcOnFrameAvailableListener.java" />
+    <AndroidJavaSource Include="GStreamer.java" />
+  </ItemGroup>
+</Project>

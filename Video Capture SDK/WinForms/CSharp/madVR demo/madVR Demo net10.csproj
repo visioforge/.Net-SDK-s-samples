@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>madVR_Demo</RootNamespace>
+    <AssemblyName>Video Capture SDK - WinForms madVR Demo</AssemblyName>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyTitle>madVR Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>madVR Demo</Product>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

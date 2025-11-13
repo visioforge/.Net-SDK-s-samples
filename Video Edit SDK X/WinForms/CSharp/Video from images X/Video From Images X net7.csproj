@@ -11,9 +11,9 @@
     <AssemblyTitle>Video From Images.2010.SDK</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>Video From Images.2010.SDK</Product>
-    <Copyright>Copyright (c) 2006-2024</Copyright>
-    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
-    <FileVersion>2025.0.7.0</FileVersion>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">

@@ -7,10 +7,10 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyTitle>Karaoke Demo</AssemblyTitle>
     <Product>Karaoke Demo</Product>
-    <Copyright>Copyright (c) 2006-2024</Copyright>
-    <AssemblyVersion>2025.0.7.0</AssemblyVersion>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
     <AssemblyName>Media Player SDK - WinForms Karaoke Demo</AssemblyName>
-    <FileVersion>2025.0.7.0</FileVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>

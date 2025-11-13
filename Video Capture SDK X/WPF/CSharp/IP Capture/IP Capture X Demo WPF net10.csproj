@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>IP_Capture</RootNamespace>
+    <AssemblyName>Video Capture SDK - WPF IP Capture Demo</AssemblyName>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <AssemblyTitle>IP Capture Demo</AssemblyTitle>
+    <Company>VisioForge</Company>
+    <Product>IP Capture Demo</Product>
+    <Copyright>Copyright (c) 2025</Copyright>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.11.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+</Project>

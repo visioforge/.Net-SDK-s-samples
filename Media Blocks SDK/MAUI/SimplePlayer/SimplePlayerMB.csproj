@@ -70,6 +70,10 @@
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.11.4" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.11.4" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.11.4" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

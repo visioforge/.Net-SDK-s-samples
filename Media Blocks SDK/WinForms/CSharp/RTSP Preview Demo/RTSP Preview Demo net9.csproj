@@ -12,8 +12,8 @@
     <Company>VisioForge</Company>
     <Product>RTSP Preview Demo</Product>
     <Copyright>Copyright (c) 2025</Copyright>
-    <AssemblyVersion>2025.10.7.0</AssemblyVersion>
-    <FileVersion>2025.10.7.0</FileVersion>
+    <AssemblyVersion>2025.11.4.0</AssemblyVersion>
+    <FileVersion>2025.11.4.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <Optimize>False</Optimize>
