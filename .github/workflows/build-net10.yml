@@ -1,0 +1,98 @@
+name: Build ALL (.Net 10)
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    env:
+      Solution_Name_MB1: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net10.sln"   
+      
+      Solution_Name_MP1: "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net10.sln"
+      Solution_Name_MP2: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net10.sln"    
+
+      Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS net10.sln"
+      Solution_Name_VC2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV net10.sln"
+      Solution_Name_VC3: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net10.sln"
+
+      Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS net10.sln"
+      Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net10.sln"  
+
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+          
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+      with:
+        vs-version: '17.9'
+
+    - name: Verify environment
+      run: |
+        dotnet --info
+        msbuild -version
+        
+    ## Media Blocks
+
+    - name: Restore dependencies $env:Solution_Name_MB1
+      run: dotnet restore $env:Solution_Name_MB1
+
+    - name: Build app for release $env:Solution_Name_MB1
+      run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+            
+    ## Media Player
+
+    - name: Restore dependencies $env:Solution_Name_MP1
+      run: dotnet restore $env:Solution_Name_MP1
+
+    - name: Build app for release $env:Solution_Name_MP1
+      run: msbuild $env:Solution_Name_MP1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_MP2
+      run: dotnet restore $env:Solution_Name_MP2
+
+    - name: Build app for release $env:Solution_Name_MP2
+      run: msbuild $env:Solution_Name_MP2 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Video Capture
+
+    - name: Restore dependencies $env:Solution_Name_VC1
+      run: dotnet restore $env:Solution_Name_VC1
+
+    - name: Build app for release $env:Solution_Name_VC1
+      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VC2
+      run: dotnet restore $env:Solution_Name_VC2
+
+    - name: Build app for release $env:Solution_Name_VC2
+      run: msbuild $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VC3
+      run: dotnet restore $env:Solution_Name_VC3
+
+    - name: Build app for release $env:Solution_Name_VC3
+      run: msbuild $env:Solution_Name_VC3 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    ## Video Edit
+
+    - name: Restore dependencies $env:Solution_Name_VE1
+      run: dotnet restore $env:Solution_Name_VE1
+
+    - name: Build app for release $env:Solution_Name_VE1
+      run: msbuild $env:Solution_Name_VE1 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VE2
+      run: dotnet restore $env:Solution_Name_VE2
+
+    - name: Build app for release $env:Solution_Name_VE2
+      run: msbuild $env:Solution_Name_VE2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      
