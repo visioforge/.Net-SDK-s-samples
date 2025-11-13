@@ -7,29 +7,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F434-47CE-A231-2FC3F089F75B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images net10", "WinForms\CSharp\Video from images\Video From Images net10.csproj", "{C384417A-6BBD-497A-ADF1-4C1A2D8FD05B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images (NuGet) net10", "WinForms\CSharp\Video from images\Video From Images (NuGet) net10.csproj", "{C384417A-6BBD-497A-ADF1-4C1A2D8FD05B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{025921BD-26DB-4C30-9A95-3C545CF0AA33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE CLI net10", "Console\CSharp\Main Demo CLI\Main Demo VE CLI net10.csproj", "{9BBD5871-E18F-4494-82B7-B771774E75EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE CLI (NuGet) net10", "Console\CSharp\Main Demo CLI\Main Demo VE CLI (NuGet) net10.csproj", "{9BBD5871-E18F-4494-82B7-B771774E75EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images VE CLI net10", "Console\CSharp\Video From Images CLI\Video From Images VE CLI net10.csproj", "{0631F2FB-54CB-4E8E-B0D6-D26FBFCDA408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images VE CLI (NuGet) net10", "Console\CSharp\Video From Images CLI\Video From Images VE CLI (NuGet) net10.csproj", "{0631F2FB-54CB-4E8E-B0D6-D26FBFCDA408}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE net10", "WinForms\CSharp\Main Demo\Main Demo VE net10.csproj", "{3EDD8396-3B02-40C2-8C2E-E7F1B361D984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE (NuGet) net10", "WinForms\CSharp\Main Demo\Main Demo VE (NuGet) net10.csproj", "{3EDD8396-3B02-40C2-8C2E-E7F1B361D984}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images In Memory Demo net10", "WinForms\CSharp\Video from images in memory\Video From Images In Memory Demo net10.csproj", "{14581C24-A301-46FE-AEF7-8416CE94D255}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images In Memory Demo (NuGet) net10", "WinForms\CSharp\Video from images in memory\Video From Images In Memory Demo (NuGet) net10.csproj", "{14581C24-A301-46FE-AEF7-8416CE94D255}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE WPF net10", "WPF\CSharp\Main Demo\Main Demo VE WPF net10.csproj", "{A78A3FEC-8284-41F7-9156-5EF8043E012B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VE WPF (NuGet) net10", "WPF\CSharp\Main Demo\Main Demo VE WPF (NuGet) net10.csproj", "{A78A3FEC-8284-41F7-9156-5EF8043E012B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo net10", "WinForms\CSharp\Video Join Demo\Video Join Demo net10.csproj", "{8FAFA52C-9BE5-4D7A-8279-8A0C7B3B59C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Join Demo (NuGet) net10", "WinForms\CSharp\Video Join Demo\Video Join Demo (NuGet) net10.csproj", "{8FAFA52C-9BE5-4D7A-8279-8A0C7B3B59C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File Encryptor net10", "WinForms\CSharp\File Encryptor\File Encryptor net10.csproj", "{CCF6BB97-6C60-452E-8789-8CA14AA4000F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File Encryptor (NuGet) net10", "WinForms\CSharp\File Encryptor\File Encryptor (NuGet) net10.csproj", "{CCF6BB97-6C60-452E-8789-8CA14AA4000F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Extractor net10", "WinForms\CSharp\Audio Extractor\Audio Extractor net10.csproj", "{8FB89D30-86B6-42C2-A096-1E07E093FB5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Extractor (NuGet) net10", "WinForms\CSharp\Audio Extractor\Audio Extractor (NuGet) net10.csproj", "{8FB89D30-86B6-42C2-A096-1E07E093FB5C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Audio Tracks Demo net10", "WPF\CSharp\Multiple Audio Tracks Demo\Multiple Audio Tracks Demo net10.csproj", "{1E03B752-AF8A-44B1-B357-1BE2940FB897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Audio Tracks Demo (NuGet) net10", "WPF\CSharp\Multiple Audio Tracks Demo\Multiple Audio Tracks Demo (NuGet) net10.csproj", "{1E03B752-AF8A-44B1-B357-1BE2940FB897}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cut Video File net10", "WPF\CSharp\Cut Video File\Cut Video File net10.csproj", "{5C904B55-C80B-4DA6-9A54-D39C725F52AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cut Video File (NuGet) net10", "WPF\CSharp\Cut Video File\Cut Video File (NuGet) net10.csproj", "{5C904B55-C80B-4DA6-9A54-D39C725F52AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
