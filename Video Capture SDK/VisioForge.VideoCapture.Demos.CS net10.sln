@@ -7,107 +7,107 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F434-47CE-A231-2FC3F089F75B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Push Source Demo net10", "WinForms\CSharp\Push Source Demo\Push Source Demo net10.csproj", "{49073487-E806-4B3C-9767-EB85E6EA71E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Push Source Demo (NuGet) net10", "WinForms\CSharp\Push Source Demo\Push Source Demo (NuGet) net10.csproj", "{49073487-E806-4B3C-9767-EB85E6EA71E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{B477D9B3-B823-4727-8E81-2DBF9A5FFEAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timeshift Demo net10", "WinForms\CSharp\Timeshift Demo\Timeshift Demo net10.csproj", "{97EC6046-7AFC-46CC-8CAB-116385DF67D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Timeshift Demo (NuGet) net10", "WinForms\CSharp\Timeshift Demo\Timeshift Demo (NuGet) net10.csproj", "{97EC6046-7AFC-46CC-8CAB-116385DF67D4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TV Tuner Demo CLI net10", "Console\TV Tuner Demo\TV Tuner Demo CLI net10.csproj", "{F3D05B45-15CB-412D-83B2-079C45192DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TV Tuner Demo CLI (NuGet) net10", "Console\TV Tuner Demo\TV Tuner Demo CLI (NuGet) net10.csproj", "{F3D05B45-15CB-412D-83B2-079C45192DDD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Capture Demo CLI net10", "Console\Video Capture Demo\Video Capture Demo CLI net10.csproj", "{25B3B9F4-5748-4381-8234-CA4E9FD3D95D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Capture Demo CLI (NuGet) net10", "Console\Video Capture Demo\Video Capture Demo CLI (NuGet) net10.csproj", "{25B3B9F4-5748-4381-8234-CA4E9FD3D95D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo net10", "WinForms\CSharp\Audio Capture\Audio Capture Demo net10.csproj", "{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo (NuGet) net10", "WinForms\CSharp\Audio Capture\Audio Capture Demo (NuGet) net10.csproj", "{B897E0DB-DD7D-4490-A364-C0A9B83D1BF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo net10", "WinForms\CSharp\DV Capture\DV Capture Demo net10.csproj", "{F88E5812-6E94-40C5-A757-65C940C78200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo (NuGet) net10", "WinForms\CSharp\DV Capture\DV Capture Demo (NuGet) net10.csproj", "{F88E5812-6E94-40C5-A757-65C940C78200}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo net10", "WinForms\CSharp\IP Capture\IP Capture Demo net10.csproj", "{7BDA6A81-18C4-467E-BD5D-1C707A59DD64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo (NuGet) net10", "WinForms\CSharp\IP Capture\IP Capture Demo (NuGet) net10.csproj", "{7BDA6A81-18C4-467E-BD5D-1C707A59DD64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC net10", "WinForms\CSharp\Main Demo\Main Demo VC net10.csproj", "{0812A4D7-6293-47FD-A566-86EC2FA36F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC (NuGet) net10", "WinForms\CSharp\Main Demo\Main Demo VC (NuGet) net10.csproj", "{0812A4D7-6293-47FD-A566-86EC2FA36F2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo net10", "WinForms\CSharp\Multiple IP cams\Multiple IP Cameras Demo net10.csproj", "{31ADBBE0-3CC2-4BFA-8C84-9760C63F0D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo (NuGet) net10", "WinForms\CSharp\Multiple IP cams\Multiple IP Cameras Demo (NuGet) net10.csproj", "{31ADBBE0-3CC2-4BFA-8C84-9760C63F0D12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Video Streams Demo VC net10", "WinForms\CSharp\Multiple video streams\Multiple Video Streams Demo VC net10.csproj", "{6C057FC4-6F3F-4887-86AE-FBC77E571F97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Video Streams Demo VC (NuGet) net10", "WinForms\CSharp\Multiple video streams\Multiple Video Streams Demo VC (NuGet) net10.csproj", "{6C057FC4-6F3F-4887-86AE-FBC77E571F97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo net10", "WinForms\CSharp\Multiple web cams\Multiple Web Cameras Demo net10.csproj", "{6F6AC56C-EFC4-4937-A3E4-5DC53C0C1397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo (NuGet) net10", "WinForms\CSharp\Multiple web cams\Multiple Web Cameras Demo (NuGet) net10.csproj", "{6F6AC56C-EFC4-4937-A3E4-5DC53C0C1397}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo net10", "WinForms\CSharp\Simple VideoCapture\Simple Video Capture Demo net10.csproj", "{C511144F-B38D-40BD-973F-DFEE916E5FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo (NuGet) net10", "WinForms\CSharp\Simple VideoCapture\Simple Video Capture Demo (NuGet) net10.csproj", "{C511144F-B38D-40BD-973F-DFEE916E5FC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo net10", "WinForms\CSharp\Screen Capture\Screen Capture Demo net10.csproj", "{4EBA8AEE-1D7A-4305-B6C9-DC29268E60EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo (NuGet) net10", "WinForms\CSharp\Screen Capture\Screen Capture Demo (NuGet) net10.csproj", "{4EBA8AEE-1D7A-4305-B6C9-DC29268E60EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo WPF net10", "WPF\CSharp\Audio_Capture\Audio Capture Demo WPF net10.csproj", "{A7183E5F-CF7E-4E37-BBC2-CB7B01071EE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo WPF (NuGet) net10", "WPF\CSharp\Audio_Capture\Audio Capture Demo WPF (NuGet) net10.csproj", "{A7183E5F-CF7E-4E37-BBC2-CB7B01071EE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo WPF net10", "WPF\CSharp\DV_Capture\DV Capture Demo WPF net10.csproj", "{4FC5DFB2-C163-4D2E-9E74-809F8F9A4389}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DV Capture Demo WPF (NuGet) net10", "WPF\CSharp\DV_Capture\DV Capture Demo WPF (NuGet) net10.csproj", "{4FC5DFB2-C163-4D2E-9E74-809F8F9A4389}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo WPF net10", "WPF\CSharp\IP_Capture\IP Capture Demo WPF net10.csproj", "{3BABFA72-C8F6-417F-9060-2A51FD886E0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP Capture Demo WPF (NuGet) net10", "WPF\CSharp\IP_Capture\IP Capture Demo WPF (NuGet) net10.csproj", "{3BABFA72-C8F6-417F-9060-2A51FD886E0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC WPF net10", "WPF\CSharp\Main_Demo\Main Demo VC WPF net10.csproj", "{17AF8B28-D59C-4159-B028-126440C315E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Main Demo VC WPF (NuGet) net10", "WPF\CSharp\Main_Demo\Main Demo VC WPF (NuGet) net10.csproj", "{17AF8B28-D59C-4159-B028-126440C315E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo WPF net10", "WPF\CSharp\MultipleWebCameras\Multiple Web Cameras Demo WPF net10.csproj", "{B4051FE1-34B9-47D2-9F58-51D962BAC89B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Web Cameras Demo WPF (NuGet) net10", "WPF\CSharp\MultipleWebCameras\Multiple Web Cameras Demo WPF (NuGet) net10.csproj", "{B4051FE1-34B9-47D2-9F58-51D962BAC89B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo WPF net10", "WPF\CSharp\Screen_Capture\Screen Capture Demo WPF net10.csproj", "{05286135-3B62-466A-B51E-91E7315A0C60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Screen Capture Demo WPF (NuGet) net10", "WPF\CSharp\Screen_Capture\Screen Capture Demo WPF (NuGet) net10.csproj", "{05286135-3B62-466A-B51E-91E7315A0C60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF net10", "WPF\CSharp\Simple Video Capture\Simple Video Capture Demo WPF net10.csproj", "{D9E6C5A9-36CF-4F54-A93C-C7635BA4DF03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF (NuGet) net10", "WPF\CSharp\Simple Video Capture\Simple Video Capture Demo WPF (NuGet) net10.csproj", "{D9E6C5A9-36CF-4F54-A93C-C7635BA4DF03}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code snippets", "Code snippets", "{7251110F-2127-4FF3-89B5-9A1F3165B3C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "face-detection net10", "_CodeSnippets\face-detection\face-detection net10.csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "face-detection (NuGet) net10", "_CodeSnippets\face-detection\face-detection (NuGet) net10.csproj", "{1453B197-0CF7-4543-9869-8646AC117446}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture net10", "_CodeSnippets\screen-capture\screen-capture net10.csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture (NuGet) net10", "_CodeSnippets\screen-capture\screen-capture (NuGet) net10.csproj", "{631E4CDE-CB0C-4A85-91EF-C7D926EAFA92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture net10", "_CodeSnippets\speaker-capture\speaker-capture net10.csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "speaker-capture (NuGet) net10", "_CodeSnippets\speaker-capture\speaker-capture (NuGet) net10.csproj", "{48E67CB0-68B5-47F8-B92F-9E0FEA2083A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview net10", "_CodeSnippets\webcam-preview\webcam-preview net10.csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webcam-preview (NuGet) net10", "_CodeSnippets\webcam-preview\webcam-preview (NuGet) net10.csproj", "{66F6A17A-ADD7-4142-B479-17C14807FB28}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Demo net10", "WinForms\CSharp\Decklink Demo\Decklink Demo net10.csproj", "{3BC68568-542F-4C7A-80E2-379EFB06B49B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decklink Demo (NuGet) net10", "WinForms\CSharp\Decklink Demo\Decklink Demo (NuGet) net10.csproj", "{3BC68568-542F-4C7A-80E2-379EFB06B49B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Window Capture net10", "WinForms\CSharp\Window Capture\Window Capture net10.csproj", "{77D9D9C9-C76A-4896-8024-C9413F5A76C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Window Capture (NuGet) net10", "WinForms\CSharp\Window Capture\Window Capture (NuGet) net10.csproj", "{77D9D9C9-C76A-4896-8024-C9413F5A76C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo WPF net10", "WPF\CSharp\Multiple IP Cameras Demo\Multiple IP Cameras Demo WPF net10.csproj", "{9D93AA3F-12F7-46ED-87D3-7BAADDEDDAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple IP Cameras Demo WPF (NuGet) net10", "WPF\CSharp\Multiple IP Cameras Demo\Multiple IP Cameras Demo WPF (NuGet) net10.csproj", "{9D93AA3F-12F7-46ED-87D3-7BAADDEDDAAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images Demo net10", "WinForms\CSharp\Video From Images Demo\Video From Images Demo net10.csproj", "{C19DFDB0-10C3-4E75-A332-0E658A0E9369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images Demo (NuGet) net10", "WinForms\CSharp\Video From Images Demo\Video From Images Demo (NuGet) net10.csproj", "{C19DFDB0-10C3-4E75-A332-0E658A0E9369}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF MVVM net10", "WPF\CSharp\Simple Video Capture MVVM\Simple Video Capture Demo WPF MVVM net10.csproj", "{6A5B62DC-4319-4671-9039-E246913AD5D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF MVVM (NuGet) net10", "WPF\CSharp\Simple Video Capture MVVM\Simple Video Capture Demo WPF MVVM (NuGet) net10.csproj", "{6A5B62DC-4319-4671-9039-E246913AD5D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4 net10", "_CodeSnippets\ip-camera-capture-mp4\ip-camera-capture-mp4 net10.csproj", "{9732A217-AA54-4872-B06D-F8996188E9DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4 (NuGet) net10", "_CodeSnippets\ip-camera-capture-mp4\ip-camera-capture-mp4 (NuGet) net10.csproj", "{9732A217-AA54-4872-B06D-F8996188E9DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-preview net10", "_CodeSnippets\ip-camera-preview\ip-camera-preview net10.csproj", "{2C0A9D2D-8A40-4B30-A7E7-E9DA6A0975D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-preview (NuGet) net10", "_CodeSnippets\ip-camera-preview\ip-camera-preview (NuGet) net10.csproj", "{2C0A9D2D-8A40-4B30-A7E7-E9DA6A0975D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-avi net10", "_CodeSnippets\screen-capture-avi\screen-capture-avi net10.csproj", "{BC4B44DA-DA5E-4D71-BB38-C8CF907A97EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-avi (NuGet) net10", "_CodeSnippets\screen-capture-avi\screen-capture-avi (NuGet) net10.csproj", "{BC4B44DA-DA5E-4D71-BB38-C8CF907A97EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4 net10", "_CodeSnippets\screen-capture-mp4\screen-capture-mp4 net10.csproj", "{6F6D158B-96B3-4166-9A7C-3EE0A570E849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4 (NuGet) net10", "_CodeSnippets\screen-capture-mp4\screen-capture-mp4 (NuGet) net10.csproj", "{6F6D158B-96B3-4166-9A7C-3EE0A570E849}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-wmv net10", "_CodeSnippets\screen-capture-wmv\screen-capture-wmv net10.csproj", "{20B12E7E-69CA-4ED9-BFB4-4D1C3272C86C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-wmv (NuGet) net10", "_CodeSnippets\screen-capture-wmv\screen-capture-wmv (NuGet) net10.csproj", "{20B12E7E-69CA-4ED9-BFB4-4D1C3272C86C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-text-overlay net10", "_CodeSnippets\video-capture-text-overlay\video-capture-text-overlay net10.csproj", "{BE5F1C90-0467-4B10-986A-4695EA6FBDA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-text-overlay (NuGet) net10", "_CodeSnippets\video-capture-text-overlay\video-capture-text-overlay (NuGet) net10.csproj", "{BE5F1C90-0467-4B10-986A-4695EA6FBDA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-avi net10", "_CodeSnippets\video-capture-webcam-avi\video-capture-webcam-avi net10.csproj", "{799577A8-E959-4F5F-9EDC-63207A5546EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-avi (NuGet) net10", "_CodeSnippets\video-capture-webcam-avi\video-capture-webcam-avi (NuGet) net10.csproj", "{799577A8-E959-4F5F-9EDC-63207A5546EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-mp4 net10", "_CodeSnippets\video-capture-webcam-mp4\video-capture-webcam-mp4 net10.csproj", "{9D9D80D1-1945-4B35-AE17-7A106CAEF26B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-mp4 (NuGet) net10", "_CodeSnippets\video-capture-webcam-mp4\video-capture-webcam-mp4 (NuGet) net10.csproj", "{9D9D80D1-1945-4B35-AE17-7A106CAEF26B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-wmv net10", "_CodeSnippets\video-capture-webcam-wmv\video-capture-webcam-wmv net10.csproj", "{2C0B8AC3-6E20-4233-AD04-9126377DA0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-capture-webcam-wmv (NuGet) net10", "_CodeSnippets\video-capture-webcam-wmv\video-capture-webcam-wmv (NuGet) net10.csproj", "{2C0B8AC3-6E20-4233-AD04-9126377DA0C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-capture net10", "_CodeSnippets\video-preview-webcam-frame-capture\video-preview-webcam-frame-capture net10.csproj", "{286C3B4E-C8C4-47F5-9EEA-32A614A4C614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-capture (NuGet) net10", "_CodeSnippets\video-preview-webcam-frame-capture\video-preview-webcam-frame-capture (NuGet) net10.csproj", "{286C3B4E-C8C4-47F5-9EEA-32A614A4C614}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Separate Capture Demo net10", "WinForms\CSharp\Separate Capture Demo\Separate Capture Demo net10.csproj", "{6497F651-D16E-4D0F-93CD-9CBE7AA6F928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Separate Capture Demo (NuGet) net10", "WinForms\CSharp\Separate Capture Demo\Separate Capture Demo (NuGet) net10.csproj", "{6497F651-D16E-4D0F-93CD-9CBE7AA6F928}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer net10", "WinForms\CSharp\NDI Streamer\NDI Streamer net10.csproj", "{3ACABD9F-5F5B-41D9-BE40-2AD1AFD06A87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer (NuGet) net10", "WinForms\CSharp\NDI Streamer\NDI Streamer (NuGet) net10.csproj", "{3ACABD9F-5F5B-41D9-BE40-2AD1AFD06A87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP Streamer net10", "WinForms\CSharp\UDP Streamer\UDP Streamer net10.csproj", "{C574163C-096E-4276-984E-B8F591926F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP Streamer (NuGet) net10", "WinForms\CSharp\UDP Streamer\UDP Streamer (NuGet) net10.csproj", "{C574163C-096E-4276-984E-B8F591926F8E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camera Light Demo net10", "WinForms\CSharp\Camera Light Demo\Camera Light Demo net10.csproj", "{917573C1-9419-46F9-8B9D-710BC24A10EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camera Light Demo (NuGet) net10", "WinForms\CSharp\Camera Light Demo\Camera Light Demo (NuGet) net10.csproj", "{917573C1-9419-46F9-8B9D-710BC24A10EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtual Camera Streamer net10", "WinForms\CSharp\Virtual Camera Streamer\Virtual Camera Streamer net10.csproj", "{5CF90BB4-E26C-46A0-93FF-96E802449588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Virtual Camera Streamer (NuGet) net10", "WinForms\CSharp\Virtual Camera Streamer\Virtual Camera Streamer (NuGet) net10.csproj", "{5CF90BB4-E26C-46A0-93FF-96E802449588}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nvidia Maxine VC Demo net10", "WPF\CSharp\Nvidia Maxine Demo\Nvidia Maxine VC Demo net10.csproj", "{ECA5FB26-3E08-44B9-A7FA-A5FD96648688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nvidia Maxine VC Demo (NuGet) net10", "WPF\CSharp\Nvidia Maxine Demo\Nvidia Maxine VC Demo (NuGet) net10.csproj", "{ECA5FB26-3E08-44B9-A7FA-A5FD96648688}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Source net10", "WinForms\CSharp\NDI Source\NDI Source net10.csproj", "{548AB803-BD00-4D6F-9288-C9AC3016D124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Source (NuGet) net10", "WinForms\CSharp\NDI Source\NDI Source (NuGet) net10.csproj", "{548AB803-BD00-4D6F-9288-C9AC3016D124}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP MJPEG Restreamer net10", "WPF\CSharp\IP MJPEG Restreamer\IP MJPEG Restreamer net10.csproj", "{F00C7829-A3D8-451B-886D-BB9977316DDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP MJPEG Restreamer (NuGet) net10", "WPF\CSharp\IP MJPEG Restreamer\IP MJPEG Restreamer (NuGet) net10.csproj", "{F00C7829-A3D8-451B-886D-BB9977316DDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo net10", "WinForms\CSharp\madVR demo\madVR Demo net10.csproj", "{89F112F3-3B6E-43D7-B3B5-7590201208CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo (NuGet) net10", "WinForms\CSharp\madVR demo\madVR Demo (NuGet) net10.csproj", "{89F112F3-3B6E-43D7-B3B5-7590201208CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "virtual-camera-streaming net10", "_CodeSnippets\virtual-camera-streaming\virtual-camera-streaming net10.csproj", "{7975EA21-57FE-4009-B02E-45F6B33F94C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "virtual-camera-streaming (NuGet) net10", "_CodeSnippets\virtual-camera-streaming\virtual-camera-streaming (NuGet) net10.csproj", "{7975EA21-57FE-4009-B02E-45F6B33F94C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

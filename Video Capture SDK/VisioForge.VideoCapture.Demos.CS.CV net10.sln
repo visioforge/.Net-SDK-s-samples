@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{12FCD389-3B42-46FC-9956-076CF43F2600}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Computer Vision Demo net10", "WinForms\CSharp\Computer Vision\Computer Vision Demo net10.csproj", "{A0627575-676C-4E73-85B5-3E612D85FC2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Computer Vision Demo (NuGet) net10", "WinForms\CSharp\Computer Vision\Computer Vision Demo (NuGet) net10.csproj", "{A0627575-676C-4E73-85B5-3E612D85FC2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
