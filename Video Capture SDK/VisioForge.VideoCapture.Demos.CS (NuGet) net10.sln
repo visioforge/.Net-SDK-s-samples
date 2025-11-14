@@ -91,9 +91,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-preview-webcam-frame-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Separate Capture Demo (NuGet) net10", "WinForms\CSharp\Separate Capture Demo\Separate Capture Demo (NuGet) net10.csproj", "{6497F651-D16E-4D0F-93CD-9CBE7AA6F928}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer (NuGet) net10", "WinForms\CSharp\NDI Streamer\NDI Streamer (NuGet) net10.csproj", "{3ACABD9F-5F5B-41D9-BE40-2AD1AFD06A87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDI Streamer net10", "WinForms\CSharp\NDI Streamer\NDI Streamer net10.csproj", "{3ACABD9F-5F5B-41D9-BE40-2AD1AFD06A87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP Streamer (NuGet) net10", "WinForms\CSharp\UDP Streamer\UDP Streamer (NuGet) net10.csproj", "{C574163C-096E-4276-984E-B8F591926F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP Streamer net10", "WinForms\CSharp\UDP Streamer\UDP Streamer net10.csproj", "{C574163C-096E-4276-984E-B8F591926F8E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camera Light Demo (NuGet) net10", "WinForms\CSharp\Camera Light Demo\Camera Light Demo (NuGet) net10.csproj", "{917573C1-9419-46F9-8B9D-710BC24A10EA}"
 EndProject
@@ -107,7 +107,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IP MJPEG Restreamer (NuGet)
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "madVR Demo (NuGet) net10", "WinForms\CSharp\madVR demo\madVR Demo (NuGet) net10.csproj", "{89F112F3-3B6E-43D7-B3B5-7590201208CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "virtual-camera-streaming (NuGet) net10", "_CodeSnippets\virtual-camera-streaming\virtual-camera-streaming (NuGet) net10.csproj", "{7975EA21-57FE-4009-B02E-45F6B33F94C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "virtual-camera-streaming net10", "_CodeSnippets\virtual-camera-streaming\virtual-camera-streaming net10.csproj", "{7975EA21-57FE-4009-B02E-45F6B33F94C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

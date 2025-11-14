@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Extractor (NuGet) net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multiple Audio Tracks Demo (NuGet) net10", "WPF\CSharp\Multiple Audio Tracks Demo\Multiple Audio Tracks Demo (NuGet) net10.csproj", "{1E03B752-AF8A-44B1-B357-1BE2940FB897}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cut Video File (NuGet) net10", "WPF\CSharp\Cut Video File\Cut Video File (NuGet) net10.csproj", "{5C904B55-C80B-4DA6-9A54-D39C725F52AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cut Video File (NuGet) net10", "WPF\CSharp\Cut Video File\Cut Video File net10.csproj", "{5C904B55-C80B-4DA6-9A54-D39C725F52AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
