@@ -11,7 +11,7 @@ This repository contains sample projects demonstrating the capabilities of Visio
 - **Media Player SDK X** - Cross-platform media player
 - **Video Edit SDK** - Video editing and conversion
 - **Video Edit SDK X** - Cross-platform video editing
-- **Video Fingerprinting SDK** - Audio/video content recognition
+- **Video Fingerprinting SDK** - Video content recognition and fingerprinting
 
 ## Quick Start
 
