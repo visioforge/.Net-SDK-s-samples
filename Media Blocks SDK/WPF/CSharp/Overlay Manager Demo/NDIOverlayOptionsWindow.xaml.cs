@@ -21,7 +21,7 @@ namespace Overlay_Manager_Demo
         public int Y { get; private set; }
         public int VideoWidth { get; private set; }
         public int VideoHeight { get; private set; }
-        public double Opacity { get; private set; }
+        public double OpacityLevel { get; private set; }
         public OverlayManagerImageStretchMode StretchMode { get; private set; }
         public bool EnableShadow { get; private set; }
 
@@ -145,7 +145,7 @@ namespace Overlay_Manager_Demo
             Y = y;
             VideoWidth = width;
             VideoHeight = height;
-            Opacity = slOpacity.Value;
+            OpacityLevel = slOpacity.Value;
             EnableShadow = cbEnableShadow.IsChecked == true;
 
             // Get stretch mode

@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using VisioForge.Core.MediaBlocks.Decklink;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.Types.X.VideoEffects;
+using VisioForge.Core.Types.X.Output;
 
 namespace Overlay_Manager_Demo
 {
@@ -15,6 +17,7 @@ namespace Overlay_Manager_Demo
     public partial class DecklinkOverlayOptionsWindow : Window
     {
         private DecklinkVideoSourceInfo[] _devices;
+        private AudioOutputDeviceInfo[] _audioDevices;
 
         public DecklinkVideoSourceInfo SelectedDevice { get; private set; }
         public DecklinkMode SelectedMode { get; private set; }
@@ -25,9 +28,11 @@ namespace Overlay_Manager_Demo
         public int Y { get; private set; }
         public int VideoWidth { get; private set; }
         public int VideoHeight { get; private set; }
-        public double Opacity { get; private set; }
+        public double OpacityLevel { get; private set; }
         public OverlayManagerImageStretchMode StretchMode { get; private set; }
         public bool EnableShadow { get; private set; }
+        public bool EnableAudio { get; private set; }
+        public int SelectedAudioDeviceIndex { get; private set; } = 0;
 
         public DecklinkOverlayOptionsWindow()
         {
@@ -46,6 +51,9 @@ namespace Overlay_Manager_Demo
         {
             // Load Decklink devices
             await LoadDevicesAsync();
+            
+            // Load audio devices
+            await LoadAudioDevicesAsync();
         }
 
         private async Task LoadDevicesAsync()
@@ -91,6 +99,48 @@ namespace Overlay_Manager_Demo
                 MessageBox.Show($"Error loading Decklink devices: {ex.Message}",
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async Task LoadAudioDevicesAsync()
+        {
+            try
+            {
+                _audioDevices = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
+                
+                cbAudioDevice.Items.Clear();
+                if (_audioDevices != null && _audioDevices.Length > 0)
+                {
+                    foreach (var device in _audioDevices)
+                    {
+                        cbAudioDevice.Items.Add(device.Name);
+                    }
+                    cbAudioDevice.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbAudioDevice.Items.Add("No audio devices found");
+                    cbAudioDevice.SelectedIndex = 0;
+                    cbAudioDevice.IsEnabled = false;
+                    cbEnableAudio.IsChecked = false;
+                    cbEnableAudio.IsEnabled = false;
+                }
+            }
+            catch
+            {
+                cbAudioDevice.Items.Add("Error loading audio devices");
+                cbAudioDevice.SelectedIndex = 0;
+                cbAudioDevice.IsEnabled = false;
+                cbEnableAudio.IsChecked = false;
+                cbEnableAudio.IsEnabled = false;
+            }
+        }
+
+        private void cbEnableAudio_Changed(object sender, RoutedEventArgs e)
+        {
+            if (cbAudioDevice == null)
+                return;
+
+            cbAudioDevice.IsEnabled = cbEnableAudio.IsChecked == true;
         }
 
         private void btOK_Click(object sender, RoutedEventArgs e)
@@ -168,8 +218,10 @@ namespace Overlay_Manager_Demo
             VideoWidth = width;
             VideoHeight = height;
             AutoDeinterlace = cbAutoDeinterlace.IsChecked == true;
-            Opacity = slOpacity.Value;
+            OpacityLevel = slOpacity.Value;
             EnableShadow = cbEnableShadow.IsChecked == true;
+            EnableAudio = cbEnableAudio.IsChecked == true;
+            SelectedAudioDeviceIndex = cbAudioDevice.SelectedIndex;
 
             // Get stretch mode
             switch (cbStretchMode.SelectedIndex)

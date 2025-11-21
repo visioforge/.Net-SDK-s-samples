@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Video Overlay Options" Height="420" Width="350"
+        Title="Video Overlay Options" Height="495" Width="350"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>
@@ -46,7 +46,14 @@
         
         <CheckBox x:Name="cbUseExternalVideoView" Content="Use external video view window" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" ToolTip="Opens a separate window to display the video overlay"/>
         
-        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="80,340,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
-        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="180,340,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+        <Label Content="Audio Options" HorizontalAlignment="Left" Margin="10,325,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        
+        <CheckBox x:Name="cbEnableAudio" Content="Enable audio playback" HorizontalAlignment="Left" Margin="10,355,0,0" VerticalAlignment="Top" IsChecked="True" ToolTip="Routes overlay audio to a separate audio renderer for playback" Checked="cbEnableAudio_Changed" Unchecked="cbEnableAudio_Changed"/>
+        
+        <Label Content="Audio Device:" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbAudioDevice" HorizontalAlignment="Left" Margin="100,382,0,0" VerticalAlignment="Top" Width="220"/>
+        
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="80,415,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="180,415,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
     </Grid>
 </Window>
