@@ -1,13 +1,12 @@
-﻿# Media Blocks SDK .Net - Screen capture to AVI code snippet (C#/WinForms)
+# Media Blocks SDK .Net - screen-capture-avi (C#/Console)
 
-This SDK sample shows how to capture the screen and save it to an AVI file.
+This application captures desktop/screen content, splits video stream for multiple outputs.
 
 ## Used media blocks
 
-* `ScreenSourceBlock` - to capture the screen
-* `AVIOutputBlock` - to save video frames to an AVI file
-* `TeeBlock` - to split the video stream into two streams
-* `VideoRendererBlock` - to display the video stream in a window
+* `ScreenSourceBlock` - Desktop screen capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
 
 ## Supported frameworks
 
@@ -21,4 +20,4 @@ This SDK sample shows how to capture the screen and save it to an AVI file.
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

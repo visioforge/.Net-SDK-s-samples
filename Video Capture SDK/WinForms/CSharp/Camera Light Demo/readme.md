@@ -1,10 +1,16 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Camera Light Demo (C#/WinForms)
 
-## Camera Light Demo
+This application demonstrates the SDK capabilities.
 
-This sample demonstrates how to create a simple Windows Forms application using the VisioForge Video Capture SDK .Net to manage camera torch (flashlight) functionality.
+## Supported frameworks
 
-The application initializes the video capture device and lists available camera devices capable of torch control. Users can turn the camera's torch on or off with the click of a button.
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

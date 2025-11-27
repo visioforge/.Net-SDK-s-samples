@@ -1,8 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture to MP4 code snippet (C#/WinForms)
+# Video Capture SDK .Net - video-capture-webcam-mp4 (C#/Console)
 
-This SDK sample demonstrates how to implement a basic video capture application using the VisioForge Video Capture SDK .Net in C#. The application captures video and audio from the default devices and saves the recording as an MP4 file.
-
-The sample includes initializing the video capture core, setting the video and audio sources, configuring the output format, and starting and stopping the capture process with asynchronous methods. It showcases the ease of integrating VisioForge's capabilities into a Windows Forms application for video capture tasks.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

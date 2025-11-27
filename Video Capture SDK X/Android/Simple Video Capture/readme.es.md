@@ -1,19 +1,13 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK X .Net - Simple Video Capture (C#/Android)
 
-## Simple Video Capture Demo (Android)
+Esta aplicación demuestra las capacidades del SDK.
 
-Este ejemplo del SDK muestra una sencilla aplicación Android para la captura de vídeo utilizando el SDK VisioForge Video Capture .Net.
+## Frameworks soportados
 
-La clase `MainActivity`, que sirve como actividad principal, inicializa el entorno de captura de vídeo, gestiona la enumeración de la cámara y el dispositivo de audio, y permite iniciar y detener la grabación de vídeo.
-
-Incluye elementos de interfaz de usuario para el control de la grabación, como botones de inicio y parada, y un botón de cambio de cámara para alternar entre las fuentes de vídeo disponibles.
-
-La aplicación también gestiona los permisos de acceso a la cámara, grabación de audio y almacenamiento de archivos, garantizando una configuración del usuario sin problemas antes de capturar los vídeos.
-
-Este ejemplo muestra la integración de las potentes capacidades de captura de vídeo de VisioForge en una aplicación Android, permitiendo a los desarrolladores implementar funciones de grabación de vídeo personalizadas con facilidad.
-
-## Versiones de .Net compatibles
-
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
 * .Net 7
 * .Net 8
 * .Net 9

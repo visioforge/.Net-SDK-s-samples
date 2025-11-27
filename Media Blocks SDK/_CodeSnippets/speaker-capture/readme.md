@@ -1,11 +1,10 @@
-﻿# Media Blocks SDK .Net - Speaker capture code snippet (C#/WinForms)
+# Media Blocks SDK .Net - speaker-capture (C#/Console)
 
-This SDK sample shows how to capture the speaker audio stream and save it to an M4A file.
+This application captures system audio output.
 
 ## Used media blocks
 
-* `SystemAudioSourceBlock` - to capture the speaker audio stream using `LoopbackAudioCaptureDeviceSourceSettings` class
-* `M4AOutputBlock` - to save audio frames to an M4A file
+* `SystemAudioSourceBlock` - System audio capture
 
 ## Supported frameworks
 
@@ -19,4 +18,4 @@ This SDK sample shows how to capture the speaker audio stream and save it to an 
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

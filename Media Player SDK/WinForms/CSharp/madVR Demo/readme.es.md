@@ -1,10 +1,8 @@
-﻿# Media Player SDK .Net - madVR Player Demo (C#/WinForms)
+# Media Player SDK .Net - madVR Demo (C#/WinForms)
 
-Explore las capacidades de reproducción multimedia con el ejemplo del SDK de madVR Player. Este fragmento de código demuestra la integración del SDK en una aplicación Windows Forms para permitir la reproducción fluida de vídeo con funciones como la selección de archivos, el control de audio y la gestión de errores.
+Esta aplicación demuestra las capacidades del SDK.
 
-Experimente la renderización de vídeo de alta calidad utilizando el renderizador de vídeo madVR.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

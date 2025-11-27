@@ -1,8 +1,8 @@
-﻿# Video Capture SDK .Net - Captura de vídeo con superposición de imagen fragmento de código (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-image-overlay (C#/Console)
 
-Este fragmento de código muestra cómo capturar vídeo de una cámara web y superponer una imagen sobre el vídeo.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

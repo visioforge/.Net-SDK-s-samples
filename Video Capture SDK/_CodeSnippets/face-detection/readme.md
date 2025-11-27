@@ -1,10 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net - Face detection code snippet (C#/WinForms)
+# Video Capture SDK .Net - face-detection (C#/Console)
 
-The provided code snippet is an example of integrating face detection functionality into a Windows Forms application using the VisioForge Video Capture SDK .Net.
-
-It demonstrates the setup of a video capture environment where a video source is selected, video input formats and frame rates are configured, and face detection settings are applied.
-
-The application allows for real-time face detection within the video stream, displaying detected face coordinates in the interface. Additionally, the code handles events such as errors and face detection results and provides controls for starting, stopping, pausing, and resuming video capture, along with debugging options for developers.
+This application includes AI-powered face detection.
 
 ## Supported frameworks
 

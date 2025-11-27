@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.11.8
+
+* [Media Blocks SDK .Net] OverlayManagerVideo and OverlayManagerDecklinkVideo: Changed AudioOutput property type from MediaBlock to AudioOutputDeviceInfo for direct audio device selection. Audio is now handled internally via AudioRenderer with automatic channel conversion support.
+
 ## 2025.11.4
 
 * .Net 10 support for all SDKs

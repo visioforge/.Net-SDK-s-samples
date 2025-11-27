@@ -1,8 +1,8 @@
-﻿# Video Capture SDK .Net - Video preview from a webcam with a frame capture code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-preview-webcam-frame-capture (C#/Console)
 
-Este fragmento de código muestra cómo previsualizar vídeo de una cámara web y capturar fotogramas del vídeo utilizando Video Capture SDK .Net.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

@@ -1,14 +1,13 @@
-﻿# Media Blocks SDK .Net - Video preview from a webcam with a frame capture code snippet (C#/WinForms)
+# Media Blocks SDK .Net - video-preview-webcam-frame-capture (C#/Console)
 
-This SDK sample shows how to capture video from a webcam and display it in a window. The sample also shows how to capture video frames to JPEG file.
+This application captures system audio output, captures individual video frames for analysis or processing.
 
 ## Used media blocks
 
-* `SystemVideoSourceBlock` - to capture the video stream from a webcam
-* `SystemAudioSourceBlock` - to capture the audio stream from a microphone
-* `VideoRendererBlock` - to display the video stream in a window
-* `AudioRendererBlock` - to play the audio stream
-* `VideoSampleGrabberBlock` - to capture video frames
+* `SystemAudioSourceBlock` - System audio capture
+* `VideoSampleGrabberBlock` - Frame capture/analysis
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -22,4 +21,4 @@ This SDK sample shows how to capture video from a webcam and display it in a win
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

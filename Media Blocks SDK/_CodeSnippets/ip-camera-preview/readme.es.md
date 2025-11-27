@@ -1,14 +1,14 @@
-﻿# Media Blocks SDK .Net - IP camera preview code snippet (C#/WinForms)
+# Media Blocks SDK .Net - ip-camera-preview (C#/Console)
 
-Este ejemplo del SDK muestra cómo previsualizar vídeo de una cámara IP.
+Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en vivo.
 
 ## Bloques de medios utilizados
 
-* `RTSPSourceBlock` - para conectarse a la cámara IP y recibir fotogramas de vídeo
-* `VideoRendererBlock` - para mostrar el flujo de vídeo
-* `AudioRendererBlock` - para reproducir el flujo de audio
+* `RTSPSourceBlock` - RTSP stream input
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -20,4 +20,4 @@ Este ejemplo del SDK muestra cómo previsualizar vídeo de una cámara IP.
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

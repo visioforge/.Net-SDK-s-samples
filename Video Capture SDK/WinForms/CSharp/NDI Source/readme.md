@@ -1,12 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - NDI Source (C#/WinForms)
 
-## NDI Source Demo (C#/WinForms)
-
-The provided code snippet is an example of integrating VisioForge's Video Capture SDK .Net into a Windows Forms application for capturing, recording, and streaming video.
-
-The application initializes the video capture engine asynchronously, supports error handling, and allows users to select NDI sources for video input. It features a GUI for configuring capture settings, such as output format and file location, and includes real-time video preview and recording functionalities.
-
-Additionally, the application demonstrates how to update UI elements with recording time and handle asynchronous start and stop of video capture, showcasing the SDK's capabilities in handling video input and output operations efficiently within a .NET environment.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

@@ -1,14 +1,16 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Computer Vision (C#/WinForms)
 
-## Computer Vision Demo
+This application includes AI-powered face detection.
 
-This SDK sample demonstrates a comprehensive Computer Vision application developed with VisioForge Video Capture SDK .Net technology.
+## Supported frameworks
 
-It showcases the integration of video capture and media playback functionalities alongside advanced computer vision features such as face, pedestrian, and car detection. The application allows for real-time analysis and object detection within video streams. 
-
-Users can select video sources, apply object detection filters, and view the processed video output within a Windows Forms interface.
-
-The code sample includes the detailed implementation for initializing, configuring, and managing the lifecycle of video capture devices, media players, and various detection algorithms.
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

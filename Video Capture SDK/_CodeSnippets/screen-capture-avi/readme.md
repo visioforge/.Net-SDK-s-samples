@@ -1,8 +1,6 @@
-﻿# Video Capture SDK .Net - Screen capture to AVI code snippet (C#/WinForms)
+# Video Capture SDK .Net - screen-capture-avi (C#/Console)
 
-This SDK sample demonstrates how to implement a simple screen recording application using VisioForge's Video Capture SDK .Net in a Windows Forms application. The code initializes a `VideoCaptureCore` object to capture the entire screen and save the recording as an AVI file in the user's "My Videos" folder.
-
-It configures the video capture using the MJPEG codec for video, and PCM for audio in the AVI output format. The application provides basic controls to start and stop the screen capture process asynchronously, showcasing the ease of integrating screen recording functionality into .NET applications with VisioForge's SDK.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

@@ -1,40 +1,27 @@
-# Media Blocks SDK .Net - RTSP MultiView Demo (WinForms)
+# Media Blocks SDK .Net - RTSP MultiView Demo (C#/WinForms)
 
-This SDK sample demonstrates how to create a multi-view RTSP streaming application using the VisioForge Media Blocks SDK. The application supports real-time playback and recording of RTSP streams, with the ability to select different camera feeds and adjust settings such as URL, login credentials, and whether to use hardware or software decoding. Users can also customize GPU decoding options, toggle audio playback, and log video or audio frame reception. The UI provides controls for starting and stopping stream playback and recording, with options for re-encoding audio and choosing output formats. Additionally, the sample includes features for reading media information and discovering ONVIF devices, illustrating the SDK's versatility in handling various media processing tasks.
+This application connects to RTSP/IP cameras for live video streaming, plays media files using the universal source decoder, saves output to MP4 format, supports ONVIF camera discovery and control, supports ultra-low latency streaming.
 
-## Features
+## Used media blocks
 
-- Play multiple RTSP streams
-- Capture original streams to disk
-- Capture reencoded streams to disk
-- RAW video and audio frames access
-
-## Used blocks
-
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering) - renders video frames
-- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering) - renders audio frames
-- [RTSPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources#rtsp-source-block) - reads RTSP streams
-
-## Low Latency Mode
-
-For real-time surveillance and monitoring, you can now enable low latency mode:
-
-```csharp
-var rtspSettings = await RTSPSourceSettings.CreateAsync(uri, login, password, audioEnabled);
-rtspSettings.LowLatencyMode = true;  // Minimize buffering for real-time streaming
-var rtspSource = new RTSPSourceBlock(rtspSettings);
-```
+* `RTSPSourceBlock` - RTSP stream input
+* `UniversalSourceBlock` - Universal media file playback
+* `AACEncoderBlock` - AAC audio encoding
+* `MP3EncoderBlock` - MP3 audio encoding
+* `MP4SinkBlock` - MP4 file output
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

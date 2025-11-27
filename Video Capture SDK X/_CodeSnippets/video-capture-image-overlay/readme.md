@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture with image overlay code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-image-overlay (C#/Console)
 
-This code snippet demonstrates how to capture video from a webcam and overlay an image on top of the video.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

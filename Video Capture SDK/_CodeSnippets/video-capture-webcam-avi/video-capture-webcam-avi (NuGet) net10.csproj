@@ -16,6 +16,6 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.11.8" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,12 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK X .Net - GenICam Capture (C#/WPF)
 
-## GenICam Capture Demo (C#/WPF)
+Esta aplicación demuestra las capacidades del SDK.
 
-La demo muestra cómo previsualizar o capturar vídeo de cámaras que soportan el protocolo GenICam y están conectadas mediante USB 3 o un GigE.
+## Bloques de medios utilizados
 
-## Versiones de .Net compatibles
+* `H264EncoderBlock` - H.264/AVC video encoding
+
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -13,7 +15,7 @@ La demo muestra cómo previsualizar o capturar vídeo de cámaras que soportan e
 * .Net 7
 * .Net 8
 * .Net 9
-  
+
 ---
 
 [Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

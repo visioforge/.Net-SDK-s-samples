@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture to AVI code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-webcam-avi (C#/Console)
 
-This code snippet demonstrates how to capture video from a video capture device and save it to an AVI file using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

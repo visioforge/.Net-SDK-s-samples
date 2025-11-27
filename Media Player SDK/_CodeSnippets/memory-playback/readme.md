@@ -1,10 +1,6 @@
-﻿# Media Player SDK .Net - Memory Playback code snippet (C#/WinForms)
+# Media Player SDK .Net - memory-playback (C#/Console)
 
-This SDK sample demonstrates the integration of VisioForge's media playback capabilities into a Windows Forms application. It showcases how to open a video file, read the file into a byte array, and then play it directly from memory using VisioForge's MediaPlayerCore.
-
-The sample includes handling both audio and video streams, checking for their availability, and setting appropriate playback settings.
-
-It leverages VisioForge's capabilities for memory stream playback, demonstrating how to create a ManagedIStream from a MemoryStream containing the video file's data and then initiating playback within the MediaPlayerCore instance.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

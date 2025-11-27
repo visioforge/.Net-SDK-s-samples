@@ -1,14 +1,13 @@
-﻿# VisioForge Video Capture SDK .Net
+# Media Blocks SDK .Net - Simple Video Capture (C#/Avalonia)
 
-## Simple Video Capture Demo Avalonia (C#/AvaloniaUI)
+This application captures system audio output, splits video stream for multiple outputs.
 
-This SDK sample demonstrates the integration of the VisioForge Video Capture SDK .Net with an Avalonia-based GUI application for capturing video and audio streams.
+## Used media blocks
 
-It showcases the setup and configuration of video and audio input devices, the selection of input formats and frame rates, and the management of device events.
-
-The application also features real-time video effects, audio volume adjustment, recording controls (start, pause, resume, stop), and snapshot functionality.
-
-It leverages the VisioForge SDK's capabilities for video capture, processing, and rendering within a cross-platform Avalonia UI framework, providing a comprehensive example for developers looking to implement media capture and processing functionalities in their .NET applications.
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -19,7 +18,7 @@ It leverages the VisioForge SDK's capabilities for video capture, processing, an
 * .Net 7
 * .Net 8
 * .Net 9
-  
+
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

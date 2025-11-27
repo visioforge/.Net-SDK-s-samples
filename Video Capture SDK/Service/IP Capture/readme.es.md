@@ -1,8 +1,16 @@
-﻿# Video Capture SDK .Net - IP capture service Demo
+# Video Capture SDK .Net - IP Capture
 
-Este ejemplo del SDK para el servicio de captura de vídeo de VisioForge muestra cómo crear un servicio Windows para capturar vídeo de cámaras IP. La clase `Service1` inicializa el proceso de captura de vídeo. Utiliza la clase `VideoCaptureCore` para establecer el modo de captura, la fuente y el formato de salida, específicamente la salida MP4.
+Esta aplicación demuestra las capacidades del SDK.
 
-Además, incluye métodos para iniciar y detener el proceso de captura, junto con la gestión de errores que registra los mensajes en Windows Events. Esta muestra proporciona un ejemplo práctico de la integración de las capacidades de captura de vídeo de VisioForge en una aplicación basada en servicios.
+## Frameworks soportados
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

@@ -1,10 +1,6 @@
-﻿# Media Player SDK .Net - Audio Player Demo (C#/WinForms)
+# Media Player SDK .Net - Audio Player (C#/WinForms)
 
-The provided code sample showcases an audio player application built using the VisioForge Media Player SDK .Net in a Windows Forms environment. The application demonstrates essential functionalities such as selecting audio files, playing, pausing, resuming, and stopping playback. It features a user interface with buttons for control, a timeline slider for seeking, and volume and balance adjustment.
-
-The code highlights the use of asynchronous operations for media playback control, event handling for errors and stopping events, and demonstrates how to interact with the SDK's properties for media source, output devices, and debugging options. This example is a practical demonstration of building a custom audio player with advanced features like playlist management, audio output customization, and debug support for developers.
-
-[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 
@@ -15,3 +11,7 @@ The code highlights the use of asynchronous operations for media playback contro
 * .Net 7
 * .Net 8
 * .Net 9
+
+---
+
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

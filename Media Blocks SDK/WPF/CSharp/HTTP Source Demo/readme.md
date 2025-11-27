@@ -1,28 +1,21 @@
-# Media Blocks SDK .Net - HTTP Source Demo (WPF)
+# Media Blocks SDK .Net - HTTP Source Demo (C#/WPF)
 
-The provided sample demonstrates how to build an application using the VisioForge Media Blocks SDK .Net for playing video from a HTTP URL in a WPF application. 
-It initializes a media pipeline with HTTP source, universal demuxer+decoder, and video renderer blocks, offering functionality to start and stop video streaming.
+This application demonstrates the SDK capabilities.
 
-## Features
+## Used media blocks
 
-- Play video from the network HTTP source
-
-## Used blocks
-
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
-- [HTTPSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/HTTPSourceBlock/) - reads HTTP data from the network
-- `DecodeBinBlock` - demuxes and decodes video data
+* `VideoRendererBlock` - Real-time video display
 
 ## Supported frameworks
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

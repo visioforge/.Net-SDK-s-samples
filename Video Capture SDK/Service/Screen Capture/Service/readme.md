@@ -1,8 +1,16 @@
-﻿# Video Capture SDK .Net - Screen capture service demo
+# Video Capture SDK .Net - Service
 
-The service sample is a Windows service for screen capturing designed using VisioForge Video Capture SDK .Net. This service provides functionality to start and stop video capture sessions programmatically.
+This application demonstrates the SDK capabilities.
 
-It leverages the creation of child processes in a separate thread for efficient operation, avoiding the main thread's blocking. Additionally, the service includes capabilities to log events into Windows Event Log for monitoring and debugging purposes, ensuring a robust and reliable screen capture solution within .NET applications.
+## Supported frameworks
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

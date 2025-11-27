@@ -1,8 +1,8 @@
-﻿# Video Capture SDK .Net - IP camera capture to MP4 code snippet (C#/WinForms)
+# Video Capture SDK X .Net - ip-camera-capture-mp4 (C#/Console)
 
-Este fragmento de código demuestra cómo capturar vídeo de una cámara IP y guardarlo en un archivo MP4 utilizando Video Capture SDK .Net.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

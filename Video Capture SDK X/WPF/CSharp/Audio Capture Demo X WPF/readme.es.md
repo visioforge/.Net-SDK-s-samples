@@ -1,16 +1,8 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK X .Net - Audio Capture Demo X WPF (C#/WPF)
 
-## Audio Capture Demo (C#/WPF, cross-platform)
+Esta aplicación demuestra las capacidades del SDK.
 
-La muestra, desarrollada por VisioForge Video Capture SDK .Net, muestra un ejemplo completo de implementación de la funcionalidad de grabación de audio dentro de una aplicación Windows Presentation Foundation.
-
-Este ejemplo muestra cómo enumerar dispositivos de audio, seleccionar dispositivos de entrada y salida, configurar varios formatos de audio y gestionar el proceso de grabación con información en tiempo real sobre la duración de la grabación.
-
- Utiliza el SDK para gestionar la captura de audio, la enumeración de dispositivos y la configuración del formato de audio, ofreciendo una plataforma versátil para que los desarrolladores integren sofisticadas funciones de grabación de audio en sus aplicaciones.
- 
- Mediante el manejo de eventos y las interacciones de la interfaz de usuario, proporciona una interfaz fácil de usar para la grabación de audio en formatos como MP3, WAV, FLAC, etc., haciendo hincapié en la facilidad de uso y la flexibilidad en las tareas de procesamiento de audio.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

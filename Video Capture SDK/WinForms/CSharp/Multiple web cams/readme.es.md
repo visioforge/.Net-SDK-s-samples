@@ -1,14 +1,8 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Multiple web cams (C#/WinForms)
 
-## Multiple Web Cameras Demo (C#/WinForms)
+Esta aplicación demuestra las capacidades del SDK.
 
-Este ejemplo del SDK muestra cómo crear una aplicación Windows Forms para gestionar múltiples dispositivos de captura de vídeo utilizando el SDK de captura de vídeo VisioForge .Net.
-
-Incluye funciones para inicializar y desechar motores de captura de vídeo, configurar dispositivos de vídeo, iniciar y detener una vista previa de vídeo y gestionar errores.
-
-La aplicación permite seleccionar diferentes dispositivos de vídeo y configuraciones, como el formato de vídeo y la velocidad de fotogramas, para cada instancia de captura de vídeo.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

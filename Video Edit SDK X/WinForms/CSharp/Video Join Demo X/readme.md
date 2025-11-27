@@ -1,12 +1,6 @@
-﻿# VisioForge Video Edit SDK .Net
+# Video Edit SDK X .Net - Video Join Demo X (C#/WinForms)
 
-## Video Join Demo (C#/WinForms, cross-platform engine)
-
-The sample provides a comprehensive solution for editing and joining video, audio, and image files within a Windows Forms application.
-
-Leveraging the VisioForge Video Edit SDK, it offers a rich set of features, including support for multiple file formats, frame rate adjustment, and customizable output settings.
-
-Developers can easily integrate file input selection, real-time progress feedback, and error handling through event-driven programming. The sample demonstrates initializing the editing engine, adding media files, configuring output formats, and controlling the editing process through a user-friendly interface.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

@@ -1,22 +1,17 @@
-# Video Capture SDK .Net - Basler Camera Demo (WPF)
+# Video Capture SDK X .Net - Basler Camera Demo (C#/WPF)
 
-Basler Camera Demo es una aplicación que utiliza Video Capture SDK .Net para previsualizar o capturar vídeo de las cámaras Basler GigE/USB3/GenICam.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Características
+## Frameworks soportados
 
-- Reproducir vídeo desde la fuente de la cámara Basler
-
-
-## Versiones de .Net compatibles
-
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

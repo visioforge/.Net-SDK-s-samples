@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture to WMV code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-webcam-wmv (C#/Console)
 
-This code snippet demonstrates how to capture video from a video capture device and save it to a WMV file using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

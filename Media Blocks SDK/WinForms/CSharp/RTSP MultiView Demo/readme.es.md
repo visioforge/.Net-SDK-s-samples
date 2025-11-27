@@ -1,24 +1,27 @@
-# Media Blocks SDK .Net - RTSP MultiView Demo (WinForms)
+# Media Blocks SDK .Net - RTSP MultiView Demo (C#/WinForms)
 
-Este ejemplo del SDK muestra cómo crear una aplicación de streaming RTSP multivista utilizando el SDK VisioForge Media Blocks. La aplicación admite la reproducción y grabación en tiempo real de secuencias RTSP, con la posibilidad de seleccionar diferentes fuentes de cámara y ajustar parámetros como la URL, las credenciales de inicio de sesión y si se utiliza decodificación por hardware o software. Los usuarios también pueden personalizar las opciones de descodificación de la GPU, alternar la reproducción de audio y registrar la recepción de fotogramas de vídeo o audio. La interfaz de usuario ofrece controles para iniciar y detener la reproducción y grabación de secuencias, con opciones para recodificar el audio y elegir los formatos de salida. Además, la muestra incluye funciones para leer información multimedia y descubrir dispositivos ONVIF, lo que ilustra la versatilidad del SDK para gestionar diversas tareas de procesamiento multimedia.
+Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en vivo, reproduce archivos multimedia usando el decodificador universal, guarda la salida en formato MP4, soporta descubrimiento y control de cámaras ONVIF, soporta transmisión de ultra baja latencia.
 
-## Características
+## Bloques de medios utilizados
 
-- Reproducción de múltiples secuencias RTSP
-- Captura de secuencias originales en disco
-- Captura en disco de secuencias recodificadas
-- Acceso a fotogramas de vídeo y audio RAW
+* `RTSPSourceBlock` - RTSP stream input
+* `UniversalSourceBlock` - Universal media file playback
+* `AACEncoderBlock` - AAC audio encoding
+* `MP3EncoderBlock` - MP3 audio encoding
+* `MP4SinkBlock` - MP4 file output
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

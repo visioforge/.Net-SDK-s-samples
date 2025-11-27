@@ -1,21 +1,21 @@
-# Media Blocks SDK .Net - USB3V-GigE Spinnaker (FLIR/Teledyne) Demo (WPF)
+# Media Blocks SDK .Net - USB3V-GigE Spinnaker (C#/WPF)
 
-Spinnaker Source Demo es una aplicación que utiliza Media Blocks SDK .Net para previsualizar o capturar vídeo desde cámaras que soporten Spinnaker SDK y estén conectadas mediante USB 3 o un GigE.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Características
+## Bloques de medios utilizados
 
-- Reproducir vídeo desde una fuente compatible con Spinnaker SDK
+* `VideoRendererBlock` - Real-time video display
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

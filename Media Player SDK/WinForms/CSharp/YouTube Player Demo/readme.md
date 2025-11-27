@@ -1,8 +1,6 @@
-﻿# Media Player SDK .Net - YouTube Player Demo (C#/WinForms)
+# Media Player SDK .Net - YouTube Player Demo (C#/WinForms)
 
-This SDK sample demonstrates how to create a simple YouTube video player using C#. It leverages the VisioForge Media Player SDK .Net and the YoutubeExplode library to fetch, select, and play video and audio streams from YouTube. Users can select their preferred video and audio formats, start and stop playback, and navigate through the video timeline.
-
-The sample includes error handling to improve reliability and user experience.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

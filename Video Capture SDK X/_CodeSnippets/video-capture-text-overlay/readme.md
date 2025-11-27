@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture with text overlay code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-text-overlay (C#/Console)
 
-This code snippet demonstrates how to capture video from a video capture device and overlay text on the video using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

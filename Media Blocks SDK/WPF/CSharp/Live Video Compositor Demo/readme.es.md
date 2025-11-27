@@ -1,24 +1,26 @@
-# Media Blocks SDK .Net - Live Video Compositor Demo (WPF)
+# Media Blocks SDK .Net - Live Video Compositor Demo (C#/WPF)
 
-Este ejemplo del SDK demuestra el uso del Compositor de vídeo en directo (parte de Media Blocks SDK .Net) para crear una aplicación de mezcla de vídeo en directo. Incluye funciones para añadir y gestionar fuentes de vídeo y audio, como cámaras, archivos y capturas de pantalla, así como salidas como MP4, WebM, MP3 y dispositivos Decklink. La aplicación permite la composición en tiempo real de múltiples fuentes en un único flujo de salida, con controles de interfaz de usuario para la configuración de fuentes, la gestión de salidas y el control de la grabación. Muestra la integración del marco VisioForge en una aplicación WPF, aprovechando la programación asíncrona para gestionar las operaciones multimedia de forma eficaz.
+Esta aplicación reproduce archivos multimedia usando el decodificador universal, genera fotogramas de video sintéticos para pruebas y benchmarking, captura la salida de audio del sistema, captura contenido de escritorio/pantalla, recibe video vía protocolo de red NDI.
 
-## Características
+## Bloques de medios utilizados
 
-- Adición y eliminación de fuentes en tiempo real
-- Añadir y eliminar salidas en directo
-- Mezcla de vídeo y audio
-- Previsualización de vídeo
+* `UniversalSourceBlock` - Universal media file playback
+* `VirtualVideoSourceBlock` - Synthetic video generation
+* `SystemAudioSourceBlock` - System audio capture
+* `ScreenSourceBlock` - Desktop screen capture
+* `NDISourceBlock` - NDI network input
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,10 +1,8 @@
-﻿# Video Capture SDK .Net - Video preview from a webcam code snippet (C#/WinForms)
+# Video Capture SDK .Net - webcam-preview (C#/Console)
 
-Este ejemplo muestra cómo construir una aplicación básica de previsualización de webcam utilizando el SDK VisioForge Video Capture SDK .Net en una aplicación Windows Forms. El código muestra cómo inicializar el motor de captura de vídeo, enumerar los dispositivos de captura de vídeo y audio disponibles y configurarlos para la vista previa.
+Esta aplicación demuestra las capacidades del SDK.
 
-Incluye el manejo de eventos para iniciar, detener, pausar y reanudar el flujo de vídeo, así como ajustar dinámicamente la configuración de vídeo y audio en función de la selección del usuario. Este ejemplo sirve como guía básica para los desarrolladores que deseen integrar la funcionalidad de la cámara web en sus aplicaciones .NET.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

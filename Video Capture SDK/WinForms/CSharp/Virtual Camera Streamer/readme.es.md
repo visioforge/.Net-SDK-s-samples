@@ -1,12 +1,8 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Virtual Camera Streamer (C#/WinForms)
 
-## Virtual Camera Streamer Demo (C#/WinForms)
+Esta aplicación demuestra las capacidades del SDK.
 
-La muestra ofrece una solución completa para integrar la transmisión de vídeo/audio a los dispositivos virtuales de Virtual Camera SDK.
-
-Proporciona una interfaz rica en funciones para gestionar dispositivos de entrada de vídeo y audio, incluida la selección de formatos de entrada, velocidades de fotogramas y ajustes específicos del dispositivo.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

@@ -1,16 +1,15 @@
-﻿# Media Blocks SDK .Net - IP camera capture to MP4 code snippet (C#/WinForms)
+# Media Blocks SDK .Net - ip-camera-capture-mp4 (C#/Console)
 
-El ejemplo muestra cómo capturar vídeo de una cámara IP y guardarlo en un archivo MP4.
+Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en vivo, divide el flujo de video para múltiples salidas.
 
 ## Bloques de medios utilizados
 
-* `RTSPSourceBlock` - para conectarse a la cámara IP y recibir fotogramas de vídeo
-* `MP4OutputBlock` - para guardar los fotogramas de vídeo en un archivo MP4
-* `TeeBlock` - para dividir el flujo de vídeo en dos flujos
-* `VideoRendererBlock` - para mostrar el flujo de vídeo
-* `AudioRendererBlock` - para reproducir el flujo de audio
-  
-## Versiones de .Net compatibles
+* `RTSPSourceBlock` - RTSP stream input
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
+
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -22,4 +21,4 @@ El ejemplo muestra cómo capturar vídeo de una cámara IP y guardarlo en un arc
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

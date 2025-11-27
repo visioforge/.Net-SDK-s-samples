@@ -1,37 +1,26 @@
-# Media Blocks SDK .Net - Video Compositor Demo (WPF)
+# Media Blocks SDK .Net - Video Compositor Demo (C#/WPF)
 
-This SDK sample demonstrates a comprehensive approach to video composition and streaming using the VisioForge Media Blocks SDK .Net in a WPF application. The code showcases the creation and management of a media pipeline capable of capturing video from various sources such as cameras, screens, or files.
+This application plays media files using the universal source decoder, captures desktop/screen content, streams via NDI network protocol, composites multiple video sources into a single output, splits video stream for multiple outputs, applies chroma key (green screen) compositing.
 
-It also illustrates how to configure output streams for different platforms, including MP4 files, YouTube, Facebook Live, and NDI. Furthermore, the sample includes functionality for real-time video mixing, previewing, and the dynamic modification of source properties, demonstrating the API's flexibility in handling complex video processing tasks.
+## Used media blocks
 
-## Features
+* `UniversalSourceBlock` - Universal media file playback
+* `ScreenSourceBlock` - Desktop screen capture
+* `NDISinkBlock` - NDI network output
+* `VideoCompositorBlock` - Multi-source compositing
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
 
-- Video mixing of several video sources
-- Video preview
-
-## Used blocks
-
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
-- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
-- [MP4OutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/MP4SinkBlock/) - saves video to an MP4 file
-- [YouTubeOutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/YouTubeSinkBlock/) - streams video to YouTube
-- [FacebookLiveOutputBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/FacebookLiveSinkBlock/) - streams video to Facebook Live
-- [SystemVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemVideoSourceBlock/) - captures video from a device
-- [SystemAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemAudioSourceBlock/) - captures audio from a device
-- [NDISinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sinks/NDISinkBlock/) - sends video using NDI
-- [VideoMixerBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoProcessing/VideoMixerBlock/) - mixes video streams
-- [VirtualAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/VirtualAudioSourceBlock/) - creates an audio source
-  
 ## Supported frameworks
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

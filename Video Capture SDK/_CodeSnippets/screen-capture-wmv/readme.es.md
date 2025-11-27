@@ -1,10 +1,8 @@
-﻿# Video Capture SDK .Net - Screen capture to WMV code snippet (C#/WinForms)
+# Video Capture SDK .Net - screen-capture-wmv (C#/Console)
 
-Este ejemplo de SDK muestra cómo crear una sencilla aplicación Windows Forms para la captura de pantalla con el SDK de captura de vídeo de VisioForge. Los usuarios pueden iniciar y detener el proceso de captura de pantalla mediante botones, y el resultado se guarda en formato WMV en la carpeta "Mis vídeos" del usuario.
+Esta aplicación demuestra las capacidades del SDK.
 
-El ejemplo destaca la facilidad de integrar la funcionalidad de captura de pantalla en aplicaciones .NET utilizando las completas librerías de VisioForge para la grabación y procesamiento de vídeo.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

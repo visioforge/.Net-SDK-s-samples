@@ -1,12 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - UDP Streamer (C#/WinForms)
 
-## UDP Streamer Demo (C#/WinForms)
-
-This sample SDK demonstrates the integration of VisioForge's Video Capture SDK .Net in a Windows Forms application to create a UDP streamer.
-
-The code showcases initializing the video capture environment, selecting audio and video input devices, configuring input formats, and managing network streaming settings for UDP broadcasting using FFMPEG.
-
-It includes features for starting, stopping, pausing, and resuming video capture, as well as adjusting device-specific settings and displaying the recording time. This example is a comprehensive guide for developers looking to implement real-time video capture and streaming solutions in their .NET applications.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

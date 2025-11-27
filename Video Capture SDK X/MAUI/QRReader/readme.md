@@ -1,15 +1,13 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK X .Net - QRReader (C#/MAUI)
 
-## QR Reader Demo (MAUI)
-
-This SDK sample demonstrates how to implement a cross-platform QR code reader using the VisioForge Video Capture SDK .Net.
-
-It showcases the process of initializing the video capture environment, requesting camera permissions, and handling barcode detection events. The sample includes methods for managing camera devices, capturing video input, and dynamically responding to barcode detections by updating the UI.
-
-Additionally, it covers the lifecycle management of the video capture session, including proper resource disposal to ensure clean shutdowns. This example is designed to work across multiple platforms, including Android and macOS, by leveraging conditional compilation.
+This application performs barcode recognition.
 
 ## Supported frameworks
 
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
 * .Net 7
 * .Net 8
 * .Net 9

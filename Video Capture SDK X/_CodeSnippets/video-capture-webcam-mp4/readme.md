@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture to MP4 code snippet (C#/WinForms)
+# Video Capture SDK X .Net - video-capture-webcam-mp4 (C#/Console)
 
-This code snippet demonstrates how to capture video from a webcam and save it to an MP4 file using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

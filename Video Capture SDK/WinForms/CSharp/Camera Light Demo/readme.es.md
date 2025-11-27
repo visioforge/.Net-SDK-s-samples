@@ -1,10 +1,16 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Camera Light Demo (C#/WinForms)
 
-## Camera Light Demo
+Esta aplicación demuestra las capacidades del SDK.
 
-Este ejemplo muestra cómo crear una sencilla aplicación Windows Forms utilizando el VisioForge Video Capture SDK .Net para gestionar la funcionalidad de la linterna de la cámara.
+## Frameworks soportados
 
-La aplicación inicializa el dispositivo de captura de vídeo y enumera los dispositivos de cámara disponibles capaces de controlar la linterna. Los usuarios pueden encender o apagar la linterna de la cámara con sólo pulsar un botón.
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

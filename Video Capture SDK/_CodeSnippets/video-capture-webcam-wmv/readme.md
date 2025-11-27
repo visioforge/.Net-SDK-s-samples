@@ -1,10 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture to WMV code snippet (C#/WinForms)
+# Video Capture SDK .Net - video-capture-webcam-wmv (C#/Console)
 
-This SDK sample demonstrates how to use the VisioForge Video Capture SDK .Net to create a simple Windows Forms application for capturing video from a webcam and saving it as a WMV file.
-
-The code initializes the video and audio capture devices with their default settings, sets the output file path, and specifies WMV as the output format. It features asynchronous start and stop methods for video capture, showcasing how to integrate video capture functionality into .NET applications with ease.
-
-The sample is ideal for developers looking to implement webcam video capture and processing features in their software projects.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

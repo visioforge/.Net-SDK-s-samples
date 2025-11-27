@@ -1,18 +1,6 @@
-﻿# VisioForge Video Edit SDK .Net
+# Video Edit SDK .Net - Main Demo (C#/WPF)
 
-## Main Demo (C#/WPF)
-
-The demo shows general features of Video Edit SDK .Net:
-
-* video preview
-* video editing and conversion
-* apply video and audio effects
-* network streaming
-* save video and audio to various output formats
-* apply OSD
-* use Picture-in-Picture
-* detect motion
-* many other features are available
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

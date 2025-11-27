@@ -1,10 +1,6 @@
-﻿# Video Capture SDK .Net - Video capture with text overlay code snippet (C#/WinForms)
+# Video Capture SDK .Net - video-capture-text-overlay (C#/Console)
 
-This SDK sample demonstrates how to create a simple video capture application using the VisioForge Video Capture SDK in C#. It showcases initializing video and audio capture devices, setting the capture mode and output format, and adding a text overlay effect to the video stream.
-
-The sample includes methods for starting and stopping the video capture asynchronously. The text overlay feature allows displaying custom text ("Hello World!") on the captured video, with specified position and color settings.
-
-This example is designed to be part of a Windows Forms application, illustrating the integration of video capture and processing functionalities within a GUI environment.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

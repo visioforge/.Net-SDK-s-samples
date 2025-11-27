@@ -1,27 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK X .Net - IP Capture (C#/WPF)
 
-## IP Capture Demo (C#/WPF, cross-platform engine)
-
-The provided code is a comprehensive example of a Windows application developed using the VisioForge Video Capture SDK .Net, which is designed for capturing IP camera streams and recording them in various formats.
-
-The application features a user interface for configuring capture settings, including output format selection (MP4, AVI, WebM, MPEG-TS, MOV), ONVIF camera control for pan, tilt, and zoom, and options for taking snapshots.
-
-It also includes dialogs for configuring encoding settings for different output formats. The application demonstrates asynchronous programming practices, event handling for capturing errors and network source disconnections, and the use of the VisioForge SDK for video capture tasks.
-
-### Low Latency Mode
-
-For RTSP sources, enable the **"Low latency mode"** checkbox to achieve ultra-low latency (60-120ms) suitable for:
-- Real-time surveillance and monitoring
-- Live security systems  
-- Remote control applications
-- Interactive video applications
-
-**Technical Details:**
-- Reduces RTSP jitter buffer from 1000ms to 80ms
-- Optimizes internal queue buffering (2 frames max)
-- Sets buffer mode to "none" for minimal delay
-
-**Note:** Low latency mode optimizes for speed over stability. Use default settings for recording or unstable networks.
+This application supports ONVIF camera discovery and control.
 
 ## Supported frameworks
 

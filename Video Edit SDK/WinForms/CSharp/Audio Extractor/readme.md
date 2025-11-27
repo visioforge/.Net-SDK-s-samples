@@ -1,12 +1,6 @@
-﻿# VisioForge Video Edit SDK .Net
+# Video Edit SDK .Net - Audio Extractor (C#/WinForms)
 
-## Audio Extractor Demo (C#/WinForms)
-
-This SDK sample demonstrates how to create a simple audio extractor application using the VisioForge Video Edit SDK .Net in a Windows Forms application.
-
-It showcases the capabilities for selecting input video files, specifying output audio file locations, and extracting or re-encoding audio streams into popular formats like MP3 or M4A.
-
-The application provides a user interface with options to start and stop the extraction process, display progress, and handle errors gracefully. Additionally, it includes functionality to open links to necessary decoders, ensuring users have the tools needed to process various media types.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

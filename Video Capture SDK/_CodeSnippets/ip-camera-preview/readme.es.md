@@ -1,10 +1,8 @@
-﻿# Video Capture SDK .Net - IP camera preview code snippet (C#/WinForms)
+# Video Capture SDK .Net - ip-camera-preview (C#/Console)
 
-Este ejemplo del SDK muestra cómo crear una sencilla aplicación Windows Forms para previsualizar imágenes de cámaras IP utilizando el SDK VisioForge Video Capture .Net. La aplicación inicializa un componente de captura de vídeo al cargar el formulario y lo configura para conectarse a una cámara IP utilizando una URL especificada.
+Esta aplicación demuestra las capacidades del SDK.
 
-Soporta iniciar y detener la vista previa de la cámara de forma asíncrona con botones. El ejemplo muestra el uso de la API de VisioForge para manejar fuentes de cámaras IP, incluyendo la configuración de la URL de la cámara y la selección del motor de decodificación para un rendimiento óptimo.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

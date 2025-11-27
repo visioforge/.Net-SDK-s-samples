@@ -52,9 +52,6 @@ namespace Overlay_Manager_Demo
 
         private List<OverlayManagerGroup> _overlayGroups = new List<OverlayManagerGroup>();
 
-        // Dictionary to track audio renderers for overlays
-        private Dictionary<object, AudioRendererBlock> _overlayAudioRenderers = new Dictionary<object, AudioRendererBlock>();
-
         // Dictionary to track external VideoView windows for video overlays
         private Dictionary<OverlayManagerVideo, VideoOverlayViewWindow> _videoOverlayWindows = new Dictionary<OverlayManagerVideo, VideoOverlayViewWindow>();
         
@@ -255,13 +252,6 @@ namespace Overlay_Manager_Demo
             }
             _overlayGroups.Clear();
 
-            // Dispose overlay audio renderers
-            foreach (var audioRenderer in _overlayAudioRenderers.Values)
-            {
-                audioRenderer?.Dispose();
-            }
-            _overlayAudioRenderers.Clear();
-
             if (_pipeline != null)
             {
                 _pipeline.OnStop -= Pipeline_OnStop;
@@ -349,13 +339,6 @@ namespace Overlay_Manager_Demo
                             _videoOverlayWindows.Remove(videoOverlay);
                         }
 
-                        // Dispose audio renderer if exists
-                        if (_overlayAudioRenderers.TryGetValue(videoOverlay, out var audioRenderer))
-                        {
-                            audioRenderer.Dispose();
-                            _overlayAudioRenderers.Remove(videoOverlay);
-                        }
-
                         _videoOverlays.Remove(videoOverlay);
                         videoOverlay.Dispose();
                     }
@@ -369,13 +352,6 @@ namespace Overlay_Manager_Demo
                     if (decklinkOverlay != null)
                     {
                         decklinkOverlay.Stop();
-
-                        // Dispose audio renderer if exists
-                        if (_overlayAudioRenderers.TryGetValue(decklinkOverlay, out var audioRenderer))
-                        {
-                            audioRenderer.Dispose();
-                            _overlayAudioRenderers.Remove(decklinkOverlay);
-                        }
 
                         _decklinkOverlays.Remove(decklinkOverlay);
                         decklinkOverlay.Dispose();
@@ -581,8 +557,7 @@ namespace Overlay_Manager_Demo
                         };
                     }
 
-                    // Create audio renderer if enabled
-                    AudioRendererBlock audioRenderer = null;
+                    // Set audio output device if enabled
                     if (optionsWindow.EnableAudio)
                     {
                         try
@@ -591,14 +566,13 @@ namespace Overlay_Manager_Demo
                             if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex 
                                 && optionsWindow.SelectedAudioDeviceIndex >= 0)
                             {
-                                audioRenderer = new AudioRendererBlock(audioOutputs[optionsWindow.SelectedAudioDeviceIndex]);
-                                videoOverlay.AudioOutput = audioRenderer;
+                                videoOverlay.AudioOutput = audioOutputs[optionsWindow.SelectedAudioDeviceIndex];
                             }
                         }
                         catch (Exception ex)
                         {
                             // Log error but continue - video overlay will still work without audio
-                            edLog.Text += $"Warning: Failed to create audio renderer for video overlay: {ex.Message}{Environment.NewLine}";
+                            edLog.Text += $"Warning: Failed to set audio output device for video overlay: {ex.Message}{Environment.NewLine}";
                         }
                     }
 
@@ -614,12 +588,6 @@ namespace Overlay_Manager_Demo
                         // Keep track of video overlays for proper disposal
                         _videoOverlays.Add(videoOverlay);
                         
-                        // Track audio renderer if created
-                        if (audioRenderer != null)
-                        {
-                            _overlayAudioRenderers[videoOverlay] = audioRenderer;
-                        }
-                        
                         // Track external window if created
                         if (externalWindow != null)
                         {
@@ -632,7 +600,7 @@ namespace Overlay_Manager_Demo
                         string displayName = externalWindow != null 
                             ? $"[Video+View] {videoOverlay.Name}" 
                             : $"[Video] {videoOverlay.Name}";
-                        if (audioRenderer != null)
+                        if (videoOverlay.AudioOutput != null)
                         {
                             displayName += " [Audio]";
                         }
@@ -806,8 +774,7 @@ namespace Overlay_Manager_Demo
                     };
                 }
 
-                // Create audio renderer if enabled
-                AudioRendererBlock audioRenderer = null;
+                // Set audio output device if enabled
                 if (optionsWindow.EnableAudio)
                 {
                     try
@@ -816,14 +783,13 @@ namespace Overlay_Manager_Demo
                         if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex 
                             && optionsWindow.SelectedAudioDeviceIndex >= 0)
                         {
-                            audioRenderer = new AudioRendererBlock(audioOutputs[optionsWindow.SelectedAudioDeviceIndex]);
-                            decklinkOverlay.AudioOutput = audioRenderer;
+                            decklinkOverlay.AudioOutput = audioOutputs[optionsWindow.SelectedAudioDeviceIndex];
                         }
                     }
                     catch (Exception ex)
                     {
                         // Log error but continue - video overlay will still work without audio
-                        edLog.Text += $"Warning: Failed to create audio renderer for Decklink overlay: {ex.Message}{Environment.NewLine}";
+                        edLog.Text += $"Warning: Failed to set audio output device for Decklink overlay: {ex.Message}{Environment.NewLine}";
                     }
                 }
 
@@ -837,18 +803,12 @@ namespace Overlay_Manager_Demo
                 {
                     // Keep track of Decklink overlays for proper disposal
                     _decklinkOverlays.Add(decklinkOverlay);
-                    
-                    // Track audio renderer if created
-                    if (audioRenderer != null)
-                    {
-                        _overlayAudioRenderers[decklinkOverlay] = audioRenderer;
-                    }
 
                     // Add to overlay manager
                     _overlayManager.Video_Overlay_Add(decklinkOverlay);
                     
                     string displayName = $"[Decklink] {decklinkOverlay.Name}";
-                    if (audioRenderer != null)
+                    if (decklinkOverlay.AudioOutput != null)
                     {
                         displayName += " [Audio]";
                     }

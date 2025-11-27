@@ -1,15 +1,15 @@
-﻿# Media Blocks SDK .Net - Screen capture to MP4 code snippet (C#/WinForms)
+# Media Blocks SDK .Net - screen-capture-mp4 (C#/Console)
 
-Este ejemplo del SDK muestra cómo capturar la pantalla y guardarla en un archivo MP4.
+Esta aplicación captura la salida de audio del sistema, captura contenido de escritorio/pantalla, divide el flujo de video para múltiples salidas.
 
 ## Bloques de medios utilizados
 
-* `ScreenSourceBlock` - para capturar la pantalla
-* `MP4OutputBlock` - para guardar los fotogramas de vídeo en un archivo MP4
-* `TeeBlock` - para dividir el flujo de vídeo en dos flujos
-* `VideoRendererBlock` - para mostrar el flujo de vídeo en una ventana
+* `SystemAudioSourceBlock` - System audio capture
+* `ScreenSourceBlock` - Desktop screen capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -21,4 +21,4 @@ Este ejemplo del SDK muestra cómo capturar la pantalla y guardarla en un archiv
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

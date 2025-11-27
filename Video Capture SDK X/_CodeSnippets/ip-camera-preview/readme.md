@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - IP camera preview code snippet (C#/WinForms)
+# Video Capture SDK X .Net - ip-camera-preview (C#/Console)
 
-This code snippet demonstrates how to preview video from an IP camera using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

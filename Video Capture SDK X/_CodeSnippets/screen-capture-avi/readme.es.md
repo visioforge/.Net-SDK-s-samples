@@ -1,8 +1,8 @@
-﻿# Video Capture SDK .Net - Screen capture to AVI code snippet (C#/WinForms)
+# Video Capture SDK X .Net - screen-capture-avi (C#/Console)
 
-Este fragmento de código demuestra cómo capturar la pantalla y guardarla en un archivo AVI utilizando Video Capture SDK .Net.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

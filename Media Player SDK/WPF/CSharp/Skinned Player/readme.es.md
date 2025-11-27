@@ -1,14 +1,8 @@
-﻿# Media Player SDK .Net - Skinned Player Demo (C#/WPF)
+# Media Player SDK .Net - Skinned Player (C#/WPF)
 
-Este ejemplo de SDK muestra cómo crear una aplicación de reproductor multimedia con skins utilizando VisioForge Media Player SDK. Muestra la implementación de skins personalizados, controles de reproducción multimedia y la funcionalidad de alternancia de pantalla completa en una aplicación WPF.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Características
-
-* Reproducción de archivos de audio y vídeo
-* Reproducción de fuentes de red
-* interfaz con skins
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

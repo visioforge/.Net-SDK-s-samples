@@ -1,20 +1,23 @@
-# Media Blocks SDK .Net - MAUI Simple Player Demo
+# Media Blocks SDK .Net - SimplePlayer (C#/MAUI)
 
-El proyecto muestra una aplicación de reproducción multimedia multiplataforma creada utilizando el SDK VisioForge Media Blocks, orientado al framework MAUI. Demuestra la configuración y el uso de un canal de reproducción multimedia, incluida la creación de bloques de origen, renderizador de vídeo y renderizador de audio. La aplicación maneja funciones básicas de control de medios como reproducir, pausar, detener y ajustar la velocidad de reproducción, además de mostrar la posición y duración de los medios. También cuenta con controles de interfaz de usuario para seleccionar archivos multimedia, ajustar el volumen y buscar a través de los medios de comunicación. Este ejemplo está diseñado para la compatibilidad entre plataformas, con ajustes específicos para la ruta multimedia por defecto de Android.
+Esta aplicación reproduce archivos multimedia usando el decodificador universal.
 
-## Características
+## Bloques de medios utilizados
 
-- Reproducir archivos multimedia
-- Reproducir flujos de red
-- Búsqueda
+* `UniversalSourceBlock` - Universal media file playback
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

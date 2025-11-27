@@ -1,17 +1,12 @@
-# Media Blocks SDK .Net - MAUI Simple Player Demo
+# Media Player SDK X .Net - SimplePlayer (C#/MAUI)
 
-The provided code outlines the implementation of a simple media player application using VisioForge's Media Player SDK .Net for an MAUI (Multi-platform App UI) project. It demonstrates initializing the media player, handling playback controls like play, pause, stop, and adjusting playback speed.
-
-The code also includes loading media from a file picker, displaying media duration, and updating the UI in response to playback events. Additionally, it showcases handling errors and cleaning up resources upon application closure. This example is tailored for developers looking to integrate multimedia playback functionalities into their cross-platform MAUI applications, leveraging VisioForge's comprehensive media processing capabilities.
-
-## Features
-
-* Play media files
-* Play network streams
-* Seeking
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
 * .Net 6
 * .Net 7
 * .Net 8
@@ -19,4 +14,4 @@ The code also includes loading media from a file picker, displaying media durati
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-player-sdk-net)

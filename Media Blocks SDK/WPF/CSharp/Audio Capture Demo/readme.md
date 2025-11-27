@@ -1,15 +1,12 @@
-﻿# VisioForge Media Blocks SDK .Net
+# Media Blocks SDK .Net - Audio Capture Demo (C#/WPF)
 
-## Audio Capture Demo (C#/WPF, cross-platform)
+This application captures system audio output, splits video stream for multiple outputs.
 
-The sample, powered by the VisioForge Media Blocks SDK .Net, showcases a comprehensive example of implementing audio recording functionality within a WPF application.
+## Used media blocks
 
-## Used blocks
-
-- [SystemAudioSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/SystemAudioSourceBlock/) - captures audio from the system audio input device
-- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
-- [TeeBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Special/TeeBlock/) - duplicates audio stream for recording and previewing
-- `MP3OutputBlock` - encodes and saves audio to an MP3 file
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -23,4 +20,4 @@ The sample, powered by the VisioForge Media Blocks SDK .Net, showcases a compreh
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/media-blocks-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

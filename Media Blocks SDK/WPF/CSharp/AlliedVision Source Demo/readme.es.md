@@ -1,22 +1,21 @@
-# Media Blocks SDK .Net - Allied Vision Source Demo (WPF)
+# Media Blocks SDK .Net - AlliedVision Source Demo (C#/WPF)
 
-Allied Vision Source Demo es una aplicación que utiliza Media Blocks SDK .Net para previsualizar o capturar vídeo de las cámaras Allied Vision GigE/USB3/GenICam.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Características
+## Bloques de medios utilizados
 
-- Reproducir vídeo desde la fuente de la cámara Allied Vision
+* `VideoRendererBlock` - Real-time video display
 
+## Frameworks soportados
 
-## Versiones de .Net compatibles
-
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,29 +1,32 @@
-# Media Blocks SDK .Net - Social Networks Streamer Demo (WPF)
+# Media Blocks SDK .Net - Networks Streamer Demo (C#/WPF)
 
-Este ejemplo del SDK muestra la integración y el uso del SDK VisioForge MediaBlocks en una aplicación WPF para transmitir vídeo y audio a varias plataformas, como YouTube y Facebook Live, o mediante el protocolo HLS.
-También puede transmitir utilizando un flujo HTTP MJPEG o a un cubo de AWS S3.
+Esta aplicación captura la salida de audio del sistema, captura contenido de escritorio/pantalla, guarda la salida en formato MP4, genera segmentos de streaming HLS, transmite vía protocolo de red NDI, transmite a YouTube Live, streams to Facebook Live, divide el flujo de video para múltiples salidas.
 
-Muestra cómo configurar una canalización de medios mediante la enumeración de dispositivos para fuentes de vídeo y audio, bloques de renderización de vídeo y audio, codificación con H.264 y AAC, y el uso de diferentes bloques de sumidero para la transmisión.
+## Bloques de medios utilizados
 
-La aplicación permite a los usuarios seleccionar sus dispositivos de entrada, configurar las fuentes y transmitir a la plataforma elegida con vídeo y audio en tiempo real. También proporciona gestión de errores y actualizaciones dinámicas del estado del streaming.
+* `SystemAudioSourceBlock` - System audio capture
+* `ScreenSourceBlock` - Desktop screen capture
+* `H264EncoderBlock` - H.264/AVC video encoding
+* `AACEncoderBlock` - AAC audio encoding
+* `MP4SinkBlock` - MP4 file output
+* `HLSSinkBlock` - HLS streaming output
+* `NDISinkBlock` - NDI network output
+* `YouTubeSinkBlock` - YouTube Live streaming
+* `FacebookLiveSinkBlock` - Facebook Live streaming
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Características
+## Frameworks soportados
 
-- Transmisión de vídeo a YouTube y Facebook Live
-- Streaming de vídeo mediante protocolos HLS y MJPEG sobre HTTP
-- Transmisión de vídeo a un bucket de AWS S3
-- Previsualización de vídeo
-
-## Versiones de .Net compatibles
-
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Screen capture to MP4 code snippet (C#/WinForms)
+# Video Capture SDK X .Net - screen-capture-webm (C#/Console)
 
-This code snippet demonstrates how to capture the screen and save it to an MP4 file using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

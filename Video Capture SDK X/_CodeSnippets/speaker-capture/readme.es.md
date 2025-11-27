@@ -1,8 +1,8 @@
-﻿# Video Capture SDK .Net - Speaker capture code snippet (C#/WinForms)
+# Video Capture SDK X .Net - speaker-capture (C#/Console)
 
-Este fragmento de código demuestra cómo capturar audio de un altavoz utilizando Video Capture SDK .Net.
+Esta aplicación demuestra las capacidades del SDK.
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

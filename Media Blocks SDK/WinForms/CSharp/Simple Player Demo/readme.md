@@ -1,28 +1,23 @@
-# Media Blocks SDK .Net - Simple Player Demo (WinForms)
+# Media Blocks SDK .Net - Simple Player Demo (C#/WinForms)
 
-The sample project demonstrates the capabilities of the VisioForge Media Blocks SDK for creating a multimedia player application in C#. It showcases how to initialize the media pipeline, handle media files, and perform operations like play, pause, resume, and stop media playback. The application includes features such as video and audio rendering, adjusting playback speed and volume, and navigating through the media timeline. It also provides debugging tools and error-handling mechanisms to ensure a smooth user experience. This example is a comprehensive guide for developers looking to integrate media playback functionalities into their .NET applications using VisioForge's powerful SDK.
+This application plays media files using the universal source decoder.
 
-## Features
+## Used media blocks
 
-- Play media files
-- Play network streams
-
-## Used blocks
-
-- [UniversalSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/UniversalSourceBlock/) - decodes media files
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
-- [AudioRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/AudioRendering/) - renders audio
+* `UniversalSourceBlock` - Universal media file playback
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

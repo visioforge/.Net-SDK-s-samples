@@ -16,7 +16,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoFingerprinting" Version="2025.9.5" />
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.11.7" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.11.8" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

@@ -1,8 +1,16 @@
-﻿# Video Capture SDK .Net - Screen capture service demo
+# Video Capture SDK .Net - Service
 
-El servicio de ejemplo es un servicio de Windows para la captura de pantalla diseñado utilizando VisioForge Video Capture SDK .Net. Este servicio proporciona funcionalidad para iniciar y detener sesiones de captura de vídeo mediante programación.
+Esta aplicación demuestra las capacidades del SDK.
 
-Aprovecha la creación de procesos hijo en un hilo separado para una operación eficiente, evitando el bloqueo del hilo principal. Adicionalmente, el servicio incluye capacidades para registrar eventos en el Registro de Eventos de Windows para propósitos de monitoreo y depuración, asegurando una solución de captura de pantalla robusta y confiable dentro de aplicaciones .NET.
+## Frameworks soportados
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

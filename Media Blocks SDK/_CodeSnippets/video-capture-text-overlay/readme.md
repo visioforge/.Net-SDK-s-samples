@@ -1,16 +1,13 @@
-﻿# Media Blocks SDK .Net - Video capture with text overlay code snippet (C#/WinForms)
+# Media Blocks SDK .Net - video-capture-text-overlay (C#/Console)
 
-This SDK sample shows how to capture video from a webcam, overlay text on it, and display it in a window.
+This application captures system audio output, splits video stream for multiple outputs.
 
 ## Used media blocks
 
-* `SystemVideoSourceBlock` - to capture the video stream from a webcam
-* `SystemAudioSourceBlock` - to capture the audio stream from a microphone
-* `TextOverlayBlock` - to overlay text on the video stream
-* `VideoRendererBlock` - to display the video stream in a window
-* `AudioRendererBlock` - to play the audio stream
-* `TeeBlock` - to split the video stream into two streams
-* `MP4OutputBlock` - to save video frames to an MP4 file
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -24,4 +21,4 @@ This SDK sample shows how to capture video from a webcam, overlay text on it, an
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

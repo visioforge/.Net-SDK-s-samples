@@ -1,13 +1,10 @@
-﻿# Media Blocks SDK .Net - H264 data player code snippet (C#/WinForms)
+# Media Blocks SDK .Net - memory-player (C#/Console)
 
-This SDK sample shows how to play RAW H264 data from file or network stream using Media Blocks SDK for .Net.
+This application demonstrates the SDK capabilities.
 
 ## Used media blocks
 
-* `PushSourceBlock` - push source block to feed the data to the decoder
-* `H264DecoderBlock` - to decode the H264 data
-* `H264ParseBlock` - to parse H264 RAW data
-* `VideoRendererBlock` - to display the video stream
+* `VideoRendererBlock` - Real-time video display
 
 ## Supported frameworks
 
@@ -21,4 +18,4 @@ This SDK sample shows how to play RAW H264 data from file or network stream usin
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

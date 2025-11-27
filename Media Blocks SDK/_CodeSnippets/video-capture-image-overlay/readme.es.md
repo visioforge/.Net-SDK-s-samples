@@ -1,8 +1,15 @@
-﻿# Video Capture SDK .Net - Captura de vídeo con superposición de imagen fragmento de código (C#/WinForms)
+# Media Blocks SDK .Net - video-capture-image-overlay (C#/Console)
 
-Este fragmento de código muestra cómo capturar vídeo de una cámara web y superponer una imagen sobre el vídeo.
+Esta aplicación captura la salida de audio del sistema, divide el flujo de video para múltiples salidas.
 
-## Versiones de .Net compatibles
+## Bloques de medios utilizados
+
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
+
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -14,4 +21,4 @@ Este fragmento de código muestra cómo capturar vídeo de una cámara web y sup
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,6 +1,16 @@
-﻿# Video Capture SDK .Net - Screen capture service demo
+# Video Capture SDK .Net - Helper
 
-La demo muestra cómo crear un servicio de Windows para capturar vídeos de la pantalla.
+Esta aplicación demuestra las capacidades del SDK.
+
+## Frameworks soportados
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 

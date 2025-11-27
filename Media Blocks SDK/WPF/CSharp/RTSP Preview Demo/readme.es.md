@@ -1,12 +1,14 @@
-﻿# VisioForge Media Blocks SDK .Net
+# Media Blocks SDK .Net - RTSP Preview Demo (C#/WPF)
 
-## RTSP Preview Demo (C#/WPF, cross-platform engine)
+Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en vivo, soporta descubrimiento y control de cámaras ONVIF.
 
-El código proporcionado es un ejemplo completo de una aplicación Windows desarrollada utilizando el SDK .Net de VisioForge Media Blocks, que está diseñada para previsualizar secuencias de cámaras IP utilizando el RTSP.
+## Bloques de medios utilizados
 
-Además, la aplicación demuestra cómo enumerar las cámaras IP en la red local utilizando el protocolo ONVIF.
+* `RTSPSourceBlock` - RTSP stream input
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -18,4 +20,4 @@ Además, la aplicación demuestra cómo enumerar las cámaras IP en la red local
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/media-blocks-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,6 +1,13 @@
-﻿# Video Capture SDK .Net - Video capture with image overlay code snippet (C#/WinForms)
+# Media Blocks SDK .Net - video-capture-image-overlay (C#/Console)
 
-This code snippet demonstrates how to capture video from a webcam and overlay an image on top of the video.
+This application captures system audio output, splits video stream for multiple outputs.
+
+## Used media blocks
+
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -14,4 +21,4 @@ This code snippet demonstrates how to capture video from a webcam and overlay an
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

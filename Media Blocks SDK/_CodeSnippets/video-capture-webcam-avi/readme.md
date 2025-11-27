@@ -1,15 +1,13 @@
-﻿# Media Blocks SDK .Net - Video capture to AVI code snippet (C#/WinForms)
+# Media Blocks SDK .Net - video-capture-webcam-avi (C#/Console)
 
-This SDK sample shows how to capture video from a webcam and save it to an AVI file.
+This application captures system audio output, splits video stream for multiple outputs.
 
 ## Used media blocks
 
-* `SystemVideoSourceBlock` - to capture the video stream from a webcam
-* `SystemAudioSourceBlock` - to capture the audio stream from a microphone
-* `VideoRendererBlock` - to display the video stream in a window
-* `AudioRendererBlock` - to play the audio stream
-* `AVIOutputBlock` - to save video frames to an AVI file
-* `TeeBlock` - to split the video stream into two streams
+* `SystemAudioSourceBlock` - System audio capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
 ## Supported frameworks
 
@@ -23,4 +21,4 @@ This SDK sample shows how to capture video from a webcam and save it to an AVI f
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

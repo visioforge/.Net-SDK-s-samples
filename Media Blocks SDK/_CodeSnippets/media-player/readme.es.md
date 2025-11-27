@@ -1,14 +1,14 @@
-﻿# Media Blocks SDK .Net - Fragmento de código de reproductor multimedia (C#/WinForms)
+# Media Blocks SDK .Net - media-player (C#/Console)
 
-Este ejemplo del SDK muestra cómo crear una sencilla aplicación de reproductor multimedia utilizando Media Blocks SDK .Net.
+Esta aplicación reproduce archivos multimedia usando el decodificador universal.
 
-## Bloques multimedia utilizados
+## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - para leer el archivo multimedia y decodificarlo
-* `VideoRendererBlock` - para mostrar el flujo de vídeo
-* `AudioRendererBlock` - para reproducir el flujo de audio
+* `UniversalSourceBlock` - Universal media file playback
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1
@@ -20,4 +20,4 @@ Este ejemplo del SDK muestra cómo crear una sencilla aplicación de reproductor
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

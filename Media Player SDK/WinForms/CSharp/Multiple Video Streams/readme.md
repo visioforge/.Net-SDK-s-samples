@@ -1,10 +1,6 @@
-﻿# Media Player SDK .Net - Multiple Video Streams Demo (C#/WinForms)
+# Media Player SDK .Net - Multiple Video Streams (C#/WinForms)
 
-This SDK sample demonstrates how to create a Windows Forms application using the VisioForge Media Player SDK .Net for handling multiple video streams.
-
-The application allows users to select a file, play it, and manage playback with options to pause, resume, stop, and navigate through the video timeline.
-
-It supports displaying up to four video streams simultaneously on different panels within the interface. The code includes methods for initializing and disposing of the media player, error handling, and updating the UI based on playback events.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

@@ -1,10 +1,6 @@
-﻿# Media Player SDK .Net - Main Demo (C#/WinForms)
+# Media Player SDK X .Net - Main Demo (C#/WinForms)
 
-The provided code demonstrates a comprehensive sample of a multimedia application built using the VisioForge SDK, showcasing a variety of features, including audio and video effects, motion detection, barcode reading, and more.
-
-The sample configures audio and video effects such as amplification, echo, equalizer, resize, deinterlace, color balance, and overlays. It also demonstrates handling media sources, implementing motion detection, barcode detection, and providing UI elements for user interaction.
-
-The application is designed to provide a rich multimedia experience, allowing users to play, pause, stop, and adjust media content dynamically.
+This application performs barcode recognition.
 
 ## Supported frameworks
 

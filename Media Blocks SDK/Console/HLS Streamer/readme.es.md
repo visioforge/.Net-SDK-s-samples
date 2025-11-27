@@ -1,21 +1,24 @@
-# Media Blocks SDK .Net - HLS Streaming Demo
+# Media Blocks SDK .Net - HLS Streamer (C#/Console)
 
-La aplicación HLS Streamer, creada con el SDK Media Blocks de VisioForge, muestra una forma sencilla de transmitir contenidos de vídeo y audio a través del protocolo HLS (HTTP Live Streaming). Utiliza codificadores H264 y AAC para la compresión de vídeo y audio con el fin de crear un canal de streaming virtual que envía los contenidos a un sumidero HLS. La aplicación sirve el contenido en streaming en un servidor HTTP local accesible a través de http://localhost:8088/, demostrando la integración de fuentes de vídeo y audio, codificadores y salida de streaming en un entorno .NET. Este ejemplo es ideal para desarrolladores que deseen implementar el streaming HLS en sus aplicaciones, ya que proporciona una plantilla para el procesamiento y streaming de medios de origen a destino.
+Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmarking, genera segmentos de streaming HLS.
 
-## Características
+## Bloques de medios utilizados
 
-- Streaming HLS
+* `VirtualVideoSourceBlock` - Synthetic video generation
+* `H264EncoderBlock` - H.264/AVC video encoding
+* `AACEncoderBlock` - AAC audio encoding
+* `HLSSinkBlock` - HLS streaming output
 
-## Versiones de .Net compatibles
+## Frameworks soportados
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

@@ -1,14 +1,8 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Video From Images Demo (C#/WinForms)
 
-## Video From Images Demo (C#/WinForms)
+Esta aplicación demuestra las capacidades del SDK.
 
-El ejemplo muestra cómo crear vídeos a partir de una colección de imágenes utilizando VisioForge Video Capture SDK .NET.
-
-Este ejemplo muestra la inicialización del motor de captura de vídeo, la carga de imágenes desde una carpeta especificada y la configuración de los parámetros de salida de vídeo, incluida la resolución y la duración de los fotogramas.
-
-Incluye la gestión de eventos para errores y el procesamiento de mapas de bits de fotogramas de vídeo, lo que permite la composición dinámica de fotogramas de vídeo a partir de imágenes fijas. La interfaz gráfica de usuario ofrece opciones para seleccionar las carpetas de entrada y las rutas de los archivos de salida, lo que facilita la creación de compilaciones de vídeo personalizadas.
-
-## Versiones de .Net compatibles
+## Frameworks soportados
 
 * .Net 4.7.2
 * .Net Core 3.1

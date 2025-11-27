@@ -1,27 +1,24 @@
-# Media Blocks SDK .Net - Decklink MultiOutput Demo (WPF)
+# Media Blocks SDK .Net - Decklink MultiOutput (C#/WPF)
 
-This sample demonstrates how to use the Media Blocks SDK .Net to create a simple app streaming generated video to multiple Decklink outputs.
+This application generates synthetic video frames for testing and benchmarking, captures desktop/screen content, splits video stream for multiple outputs.
 
-Decklink cards are professional video capture and playback cards from Blackmagic Design. They are widely used in the broadcast industry.
+## Used media blocks
 
-## Used blocks
-
-- [VirtualVideoSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/VirtualVideoSourceBlock/) - generates video
-- [ScreenSourceBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Sources/ScreenSourceBlock/) - captures screen or window
-- [DecklinkVideoSinkBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Decklink/DecklinkVideoSinkBlock/) - outputs video to Decklink device
-- [VideoRendererBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/VideoRendering/) - renders video
-- [TeeBlock](https://www.visioforge.com/help/docs/dotnet/mediablocks/Special/TeeBlock/) - duplicates video and audio streams
+* `VirtualVideoSourceBlock` - Synthetic video generation
+* `ScreenSourceBlock` - Desktop screen capture
+* `TeeBlock` - Stream splitting
+* `VideoRendererBlock` - Real-time video display
 
 ## Supported frameworks
 
-- .Net 4.7.2
-- .Net Core 3.1
-- .Net 5
-- .Net 6
-- .Net 7
-- .Net 8
-- .Net 9
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
 
 ---
 
-[Media Blocks SDK .Net product page](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)

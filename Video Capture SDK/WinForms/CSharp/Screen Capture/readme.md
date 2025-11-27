@@ -1,12 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Screen Capture (C#/WinForms)
 
-## Screen Capture Demo (C#/WinForms)
-
-The sample app is a comprehensive example demonstrating the capabilities of the VisioForge Video Capture SDK .Net for screen recording, audio capture, and streaming.
-
-It showcases the integration of various video and audio settings dialogs, such as MP4, AVI, WMV, GIF settings, and hardware encoder configurations. The demo includes functionality for capturing screen activities, including specific windows or the entire screen, with options for including mouse cursor highlights and selecting audio input devices and formats.
-
-Additionally, it features a network streaming setup with RTMP and FFMPEG, demonstrating the SDK's versatility in handling multimedia content creation, manipulation, and distribution tasks.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 

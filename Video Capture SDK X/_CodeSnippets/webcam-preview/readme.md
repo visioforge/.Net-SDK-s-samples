@@ -1,6 +1,6 @@
-﻿# Video Capture SDK .Net - Video preview from a webcam code snippet (C#/WinForms)
+# Video Capture SDK X .Net - webcam-preview (C#/Console)
 
-This code snippet demonstrates how to preview video from a webcam using Video Capture SDK .Net.
+This application demonstrates the SDK capabilities.
 
 ## Supported frameworks
 
