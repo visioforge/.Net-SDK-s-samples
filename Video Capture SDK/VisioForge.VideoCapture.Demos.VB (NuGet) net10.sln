@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Audio Capture Demo VB", "WinForms\VB.Net\Audio Capture\Audio Capture Demo VB.vbproj", "{323591E5-5B6E-9E04-7EE7-3EA2C49E1AD3}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DV Capture Demo VB", "WinForms\VB.Net\DV Capture\DV Capture Demo VB.vbproj", "{866F2339-F77F-7FFF-ED2D-5C5A09A1D5E8}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IP Capture Demo VB", "WinForms\VB.Net\IP Capture\IP Capture Demo VB.vbproj", "{AFBFA95C-F278-9C86-E500-B80F29627C4F}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Main Demo VC VB", "WinForms\VB.Net\Main Demo\Main Demo VC VB.vbproj", "{D666C986-60BC-457B-0F1B-1AFEC8E2F999}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Screen Capture Demo VB", "WinForms\VB.Net\Screen Capture\Screen Capture Demo VB.vbproj", "{3C5D1795-FDB3-7A3B-7704-B6113849C1F3}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Simple Video Capture Demo VB", "WinForms\VB.Net\Simple Video Capture\Simple Video Capture Demo VB.vbproj", "{278D3DDC-953F-03F9-C3A7-A437D6F51DB5}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Snapshot Sample Demo VB", "WinForms\VB.Net\Snapshot Sample\Snapshot Sample Demo VB.vbproj", "{3C870810-3041-7D07-05EF-9C9DFBA52E05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{323591E5-5B6E-9E04-7EE7-3EA2C49E1AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323591E5-5B6E-9E04-7EE7-3EA2C49E1AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323591E5-5B6E-9E04-7EE7-3EA2C49E1AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323591E5-5B6E-9E04-7EE7-3EA2C49E1AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{866F2339-F77F-7FFF-ED2D-5C5A09A1D5E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866F2339-F77F-7FFF-ED2D-5C5A09A1D5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{866F2339-F77F-7FFF-ED2D-5C5A09A1D5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{866F2339-F77F-7FFF-ED2D-5C5A09A1D5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFBFA95C-F278-9C86-E500-B80F29627C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFBFA95C-F278-9C86-E500-B80F29627C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFBFA95C-F278-9C86-E500-B80F29627C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFBFA95C-F278-9C86-E500-B80F29627C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D666C986-60BC-457B-0F1B-1AFEC8E2F999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D666C986-60BC-457B-0F1B-1AFEC8E2F999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D666C986-60BC-457B-0F1B-1AFEC8E2F999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D666C986-60BC-457B-0F1B-1AFEC8E2F999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5D1795-FDB3-7A3B-7704-B6113849C1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5D1795-FDB3-7A3B-7704-B6113849C1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5D1795-FDB3-7A3B-7704-B6113849C1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5D1795-FDB3-7A3B-7704-B6113849C1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278D3DDC-953F-03F9-C3A7-A437D6F51DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278D3DDC-953F-03F9-C3A7-A437D6F51DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278D3DDC-953F-03F9-C3A7-A437D6F51DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278D3DDC-953F-03F9-C3A7-A437D6F51DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C870810-3041-7D07-05EF-9C9DFBA52E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C870810-3041-7D07-05EF-9C9DFBA52E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C870810-3041-7D07-05EF-9C9DFBA52E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C870810-3041-7D07-05EF-9C9DFBA52E05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83E0FE87-A19F-494A-A992-482A3E006CF5}
+		Reflector0SourceLocation = E:\_my_projects\_projects\MediaFramework.Net\vidcap_converted\DirectEncodeNET.dll
+		Reflector0SourceName = DirectEncodeNET
+		Reflector0SourceVersion = 4.51.0.0
+		Reflector0SourceAssemblyName = 
+		Reflector0DestinationLocation = E:\_my_projects\_projects\MediaFramework.Net\VisioForge.MediaFramework\DirectEncodeNET.dll
+		Reflector0DestinationName = DirectEncodeNET
+		Reflector0DestinationVersion = 4.51.0.0
+		Reflector0DestinationAssemblyName = 
+	EndGlobalSection
+EndGlobal

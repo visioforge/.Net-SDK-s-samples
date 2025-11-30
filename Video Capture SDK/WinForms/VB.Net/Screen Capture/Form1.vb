@@ -246,7 +246,7 @@ Public Class Form1
             source.Mode = ScreenCaptureMode.Screen
         End If
 
-        source.FrameRate = Convert.ToDouble(edScreenFrameRate.Text)
+        source.FrameRate = New VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text))
         source.FullScreen = rbScreenFullScreen.Checked Or forcedFullScreen
         source.Top = Convert.ToInt32(edScreenTop.Text)
         source.Bottom = Convert.ToInt32(edScreenBottom.Text)

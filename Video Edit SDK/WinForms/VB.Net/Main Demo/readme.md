@@ -1,6 +1,18 @@
-# Video Edit SDK .Net - Main Demo (VB.NET/WinForms)
+﻿# VisioForge Video Edit SDK .Net
 
-This application performs barcode recognition, applies chroma key (green screen) compositing.
+## Main Demo (VB.Net/WinForms)
+
+The demo shows the major capabilities of Video Edit SDK .Net:
+
+* video preview
+* video editing and conversion
+* apply video and audio effects
+* network streaming
+* save video and audio to various output formats
+* apply OSD
+* use Picture-in-Picture
+* detect motion
+* many other features are available
 
 ## Supported frameworks
 

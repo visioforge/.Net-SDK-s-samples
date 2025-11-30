@@ -1,6 +1,8 @@
-# Media Player SDK .Net - Two Windows (C#/WinForms)
+﻿# Media Player SDK .Net - Two Windows Demo (VB.Net/WinForms)
 
-This application demonstrates the SDK capabilities.
+This sample demonstrates how to integrate a media player into a VB .NET application using VisioForge's Media Player SDK .Net.
+
+It showcases functionalities such as playing, pausing, resuming, and stopping media files, adjusting playback speed, volume, and balance, and handling media file selection through an open file dialog.
 
 ## Supported frameworks
 

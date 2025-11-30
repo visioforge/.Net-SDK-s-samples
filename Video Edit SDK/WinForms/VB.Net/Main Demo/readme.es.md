@@ -1,8 +1,20 @@
-# Video Edit SDK .Net - Main Demo (VB.NET/WinForms)
+﻿# VisioForge Video Edit SDK .Net
 
-Esta aplicación realiza reconocimiento de códigos de barras, aplica composición de croma (pantalla verde).
+## Demo Principal (VB.Net/WinForms)
 
-## Frameworks soportados
+La demo muestra las principales capacidades de Video Edit SDK .Net:
+
+* previsualización de video
+* edición y conversión de video
+* Aplicar efectos de vídeo y audio
+* streaming en red
+* guardar vídeo y audio en varios formatos de salida
+* Aplicar OSD
+* Utilizar Picture-in-Picture
+* Detectar movimiento
+* muchas otras funciones disponibles
+
+## Versiones de .Net compatibles
 
 * .Net 4.7.2
 * .Net Core 3.1
