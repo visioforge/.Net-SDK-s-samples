@@ -1,20 +1,6 @@
-﻿# VisioForge Video Capture SDK .Net
+# Video Capture SDK .Net - Main Demo (VB.NET/WinForms)
 
-## Main Demo (VB.Net/WinForms)
-
-The demo shows the most functionality of Video Capture SDK .Net, using VB.Net.
-
-You can:
-
-* preview or capture video from webcams, IP cameras, screens, Decklink devices, and some other sources
-* apply video and audio effects
-* perform network streaming
-* save video and audio to various output formats
-* apply OSD
-* use Picture-in-Picture
-* detect motion
-* recognize barcodes
-* many other features are available
+This application supports ONVIF camera discovery and control, includes AI-powered face detection, performs barcode recognition, applies chroma key (green screen) compositing.
 
 ## Supported frameworks
 
