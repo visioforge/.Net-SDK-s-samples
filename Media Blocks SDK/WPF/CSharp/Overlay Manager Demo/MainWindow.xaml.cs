@@ -294,6 +294,54 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add($"[Text] {text.Text}");
         }
 
+        private void btAddScrollingText_Click(object sender, RoutedEventArgs e)
+        {
+            var optionsWindow = new ScrollingTextOptionsWindow();
+            if (optionsWindow.ShowDialog() == true)
+            {
+                var scrollingText = new OverlayManagerScrollingText(
+                    optionsWindow.ScrollText,
+                    optionsWindow.X,
+                    optionsWindow.Y,
+                    optionsWindow.Speed,
+                    optionsWindow.Direction)
+                {
+                    Width = optionsWindow.AreaWidth,
+                    Height = optionsWindow.AreaHeight,
+                    DefaultWidth = optionsWindow.AreaWidth > 0 ? optionsWindow.AreaWidth : 1920,
+                    Infinite = optionsWindow.Loop,
+                    Color = optionsWindow.TextColor,
+                    BackgroundTransparent = optionsWindow.TransparentBackground,
+                    BackgroundColor = optionsWindow.BackgroundColor,
+                    ZIndex = 10
+                };
+
+                scrollingText.Font.Size = optionsWindow.FontSize;
+
+                // Add shadow if enabled
+                if (optionsWindow.EnableShadow)
+                {
+                    scrollingText.Shadow = new OverlayManagerShadowSettings
+                    {
+                        Enabled = true,
+                        Color = SKColors.Black,
+                        Opacity = 0.7,
+                        BlurRadius = 3,
+                        Depth = 3,
+                        Direction = 45
+                    };
+                }
+
+                _overlayManager.Video_Overlay_Add(scrollingText);
+                
+                // Truncate text for display if too long
+                var displayText = optionsWindow.ScrollText.Length > 30 
+                    ? optionsWindow.ScrollText.Substring(0, 30) + "..." 
+                    : optionsWindow.ScrollText;
+                lbOverlays.Items.Add($"[Scrolling] {displayText}");
+            }
+        }
+
         private void btAddLine_Click(object sender, RoutedEventArgs e)
         {
             var line = new OverlayManagerLine(new SkiaSharp.SKPoint(100, 100), new SkiaSharp.SKPoint(200, 200));

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Video Overlay Options" Height="495" Width="350"
+        Icon="visioforge_main_icon.ico"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>

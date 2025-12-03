@@ -126,21 +126,29 @@
                             <StackPanel Margin="5">
                                 <!-- Basic Overlays -->
                                 <Label Content="Basic Overlays:" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                                <WrapPanel Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <Button x:Name="btAddText"
-                                            Content="Add Text"
+                                            Content="Text"
                                             Width="85"
                                             Height="25"
                                             Margin="0,0,5,5"
                                             Click="btAddText_Click"/>
 
+                                    <Button x:Name="btAddScrollingText"
+                                            Content="Scrolling Text"
+                                            Width="85"
+                                            Height="25"
+                                            Margin="0,0,5,5"
+                                            ToolTip="Add scrolling text (news ticker style)"
+                                            Click="btAddScrollingText_Click"/>
+
                                     <Button x:Name="btAddImage"
-                                            Content="Add Image"
+                                            Content="Image"
                                             Width="85"
                                             Height="25"
                                             Margin="0,0,5,5"
                                             Click="btAddImage_Click"/>
-                                </WrapPanel>
+                                </StackPanel>
 
                                 <!-- Shape Overlays -->
                                 <Label Content="Shapes:" FontWeight="SemiBold" Margin="0,0,0,5"/>

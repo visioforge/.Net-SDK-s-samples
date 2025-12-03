@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Decklink Overlay Options" Height="625" Width="400"
+        Icon="visioforge_main_icon.ico"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>

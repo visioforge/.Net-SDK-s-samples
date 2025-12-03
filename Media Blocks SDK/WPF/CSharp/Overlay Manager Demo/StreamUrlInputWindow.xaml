@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Enter Stream URL" Height="200" Width="500"
+        Icon="visioforge_main_icon.ico"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>

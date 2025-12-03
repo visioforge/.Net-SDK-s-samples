@@ -6,6 +6,7 @@
         xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
         Title="Video Overlay View" Height="450" Width="600"
+        Icon="visioforge_main_icon.ico"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
     <Grid Background="Black">
