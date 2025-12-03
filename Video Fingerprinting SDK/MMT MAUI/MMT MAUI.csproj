@@ -52,8 +52,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.12.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.12.1" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.12.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2025.12.2" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->

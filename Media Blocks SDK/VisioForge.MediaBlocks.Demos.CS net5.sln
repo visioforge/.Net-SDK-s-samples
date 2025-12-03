@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32421.90
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinForms", "WinForms", "{743796DD-6F87-4CD9-8419-0B8CE16B4CB9}"
 EndProject
@@ -150,6 +150,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player 3D Demo MB WPF net5", "WPF\CSharp\Simple Player 3D Demo WPF\Simple Player 3D Demo MB WPF net5.csproj", "{258B1A23-EB1E-428E-C861-2F2B757E58AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Preview Demo net5", "WinForms\CSharp\RTSP Preview Demo\RTSP Preview Demo net5.csproj", "{7F6AC49F-14D4-43D8-4A45-6838111E0E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scrolling-text net5", "_CodeSnippets\scrolling-text\scrolling-text net5.csproj", "{46DF1707-5573-467E-AF6A-F3B2FF406D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -441,6 +443,10 @@ Global
 		{7F6AC49F-14D4-43D8-4A45-6838111E0E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F6AC49F-14D4-43D8-4A45-6838111E0E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F6AC49F-14D4-43D8-4A45-6838111E0E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46DF1707-5573-467E-AF6A-F3B2FF406D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DF1707-5573-467E-AF6A-F3B2FF406D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DF1707-5573-467E-AF6A-F3B2FF406D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DF1707-5573-467E-AF6A-F3B2FF406D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -517,6 +523,7 @@ Global
 		{C7BE97C1-4009-525A-1B1D-BC2764C976C8} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{258B1A23-EB1E-428E-C861-2F2B757E58AD} = {27B355AB-D859-4D48-9F24-BA7E237779F9}
 		{7F6AC49F-14D4-43D8-4A45-6838111E0E29} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{46DF1707-5573-467E-AF6A-F3B2FF406D67} = {98CE0E4C-3A02-4C23-A681-322BB67597D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
