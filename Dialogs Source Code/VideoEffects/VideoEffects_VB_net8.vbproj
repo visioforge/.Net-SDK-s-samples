@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,23 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="15.12.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="IVideoEffectsSettingsDialog.vb" />
-    <Compile Include="ImageLogoSettingsDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImageLogoSettingsDialog.Designer.vb">
-      <DependentUpon>ImageLogoSettingsDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TextLogoSettingsDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextLogoSettingsDialog.Designer.vb">
-      <DependentUpon>TextLogoSettingsDialog.vb</DependentUpon>
-    </Compile>
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.*" />
   </ItemGroup>
 
 </Project>

@@ -7,11 +7,12 @@
 ' </summary>
 ' --------------------------------------------------------------------------------------------------------------------
 
+Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.VideoCapture
+Imports VisioForge.Core.VideoEdit
+Imports VisioForge.Core.Types.VideoEffects
+
 Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-    Imports VisioForge.Core.MediaPlayer
-    Imports VisioForge.Core.VideoCapture
-    Imports VisioForge.Core.VideoEdit
-    Imports VisioForge.Core.Types.VideoEffects
 
     ''' <summary>
     ''' IVideoEffectsSettingsDialog interface.

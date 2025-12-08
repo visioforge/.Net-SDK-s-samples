@@ -7,17 +7,18 @@
 ' </summary>
 ' --------------------------------------------------------------------------------------------------------------------
 
-Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
-    Imports System
-    Imports System.Diagnostics
-    Imports System.Drawing
-    Imports System.IO
-    Imports System.Windows.Forms
+Imports System
+Imports System.Diagnostics
+Imports System.Drawing
+Imports System.IO
+Imports System.Windows.Forms
 
-    Imports VisioForge.Core.MediaPlayer
-    Imports VisioForge.Core.VideoCapture
-    Imports VisioForge.Core.VideoEdit
-    Imports VisioForge.Core.Types.VideoEffects
+Imports VisioForge.Core.MediaPlayer
+Imports VisioForge.Core.VideoCapture
+Imports VisioForge.Core.VideoEdit
+Imports VisioForge.Core.Types.VideoEffects
+
+Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 
     ''' <summary>
     ''' Image logo settings dialog.
@@ -26,7 +27,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
         Inherits Form
         Implements IVideoEffectsSettingsDialog
 
-        Private Const NAME As String = "ImageLogo"
+        Private Const EFFECT_NAME As String = "ImageLogo"
 
         Private _intf As IVideoEffectImageLogo
 
@@ -95,18 +96,18 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
         ''' <exception cref="Exception">
         ''' Exception.
         ''' </exception>
-        Public Function GenerateNewEffectName(core As IVideoCaptureCore) As String Implements IVideoEffectsSettingsDialog.GenerateNewEffectName
+        Public Overloads Function GenerateNewEffectName(core As IVideoCaptureCore) As String Implements IVideoEffectsSettingsDialog.GenerateNewEffectName
             If core Is Nothing Then
                 Throw New Exception("core is null")
             End If
 
-            Dim name As String = NAME
+            Dim name As String = EFFECT_NAME
 
             Dim eff = core.GetCore()?.Video_Effects_Get(name)
             If eff IsNot Nothing Then
                 Dim k As Integer = 2
                 While eff IsNot Nothing
-                    name = $"{NAME} {k}"
+                    name = $"{EFFECT_NAME} {k}"
                     k += 1
                     eff = core.GetCore().Video_Effects_Get(name)
                 End While
@@ -132,13 +133,13 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
                 Throw New Exception("core is null")
             End If
 
-            Dim name As String = NAME
+            Dim name As String = EFFECT_NAME
 
             Dim eff = core.GetCore()?.Video_Effects_Get(name)
             If eff IsNot Nothing Then
                 Dim k As Integer = 2
                 While eff IsNot Nothing
-                    name = $"{NAME} {k}"
+                    name = $"{EFFECT_NAME} {k}"
                     k += 1
                     eff = core.GetCore().Video_Effects_Get(name)
                 End While
@@ -164,13 +165,13 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
                 Throw New Exception("core is null")
             End If
 
-            Dim name As String = NAME
+            Dim name As String = EFFECT_NAME
 
             Dim eff = core.GetCore()?.Video_Effects_Get(name)
             If eff IsNot Nothing Then
                 Dim k As Integer = 2
                 While eff IsNot Nothing
-                    name = $"{NAME} {k}"
+                    name = $"{EFFECT_NAME} {k}"
                     k += 1
                     eff = core.GetCore().Video_Effects_Get(name)
                 End While

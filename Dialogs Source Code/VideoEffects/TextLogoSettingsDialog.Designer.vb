@@ -145,42 +145,42 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage95.Size = New System.Drawing.Size(386, 148)
             Me.tabPage95.TabIndex = 7
             Me.tabPage95.Text = "Main"
-            Me.tabPage95.UseVisualStyleBackColor = true
-            Me.rbTextLogoDrawFrameNumber.AutoSize = true
+            Me.tabPage95.UseVisualStyleBackColor = True
+            Me.rbTextLogoDrawFrameNumber.AutoSize = True
             Me.rbTextLogoDrawFrameNumber.Location = New System.Drawing.Point(150, 62)
             Me.rbTextLogoDrawFrameNumber.Name = "rbTextLogoDrawFrameNumber"
             Me.rbTextLogoDrawFrameNumber.Size = New System.Drawing.Size(92, 17)
             Me.rbTextLogoDrawFrameNumber.TabIndex = 19
             Me.rbTextLogoDrawFrameNumber.Text = "Frame number"
-            Me.rbTextLogoDrawFrameNumber.UseVisualStyleBackColor = true
-            Me.rbTextLogoDrawTimestamp.AutoSize = true
+            Me.rbTextLogoDrawFrameNumber.UseVisualStyleBackColor = True
+            Me.rbTextLogoDrawTimestamp.AutoSize = True
             Me.rbTextLogoDrawTimestamp.Location = New System.Drawing.Point(11, 85)
             Me.rbTextLogoDrawTimestamp.Name = "rbTextLogoDrawTimestamp"
             Me.rbTextLogoDrawTimestamp.Size = New System.Drawing.Size(104, 17)
             Me.rbTextLogoDrawTimestamp.TabIndex = 18
             Me.rbTextLogoDrawTimestamp.Text = "Frame timestamp"
-            Me.rbTextLogoDrawTimestamp.UseVisualStyleBackColor = true
-            Me.rbTextLogoDrawDate.AutoSize = true
+            Me.rbTextLogoDrawTimestamp.UseVisualStyleBackColor = True
+            Me.rbTextLogoDrawDate.AutoSize = True
             Me.rbTextLogoDrawDate.Location = New System.Drawing.Point(11, 62)
             Me.rbTextLogoDrawDate.Name = "rbTextLogoDrawDate"
             Me.rbTextLogoDrawDate.Size = New System.Drawing.Size(113, 17)
             Me.rbTextLogoDrawDate.TabIndex = 17
             Me.rbTextLogoDrawDate.Text = "Current date / time"
-            Me.rbTextLogoDrawDate.UseVisualStyleBackColor = true
+            Me.rbTextLogoDrawDate.UseVisualStyleBackColor = True
             Me.edTextLogo.Location = New System.Drawing.Point(27, 36)
             Me.edTextLogo.Name = "edTextLogo"
             Me.edTextLogo.Size = New System.Drawing.Size(208, 20)
             Me.edTextLogo.TabIndex = 16
             Me.edTextLogo.Text = "Hello!!!"
-            Me.rbTextLogoDrawText.AutoSize = true
-            Me.rbTextLogoDrawText.Checked = true
+            Me.rbTextLogoDrawText.AutoSize = True
+            Me.rbTextLogoDrawText.Checked = True
             Me.rbTextLogoDrawText.Location = New System.Drawing.Point(11, 13)
             Me.rbTextLogoDrawText.Name = "rbTextLogoDrawText"
             Me.rbTextLogoDrawText.Size = New System.Drawing.Size(70, 17)
             Me.rbTextLogoDrawText.TabIndex = 0
-            Me.rbTextLogoDrawText.TabStop = true
+            Me.rbTextLogoDrawText.TabStop = True
             Me.rbTextLogoDrawText.Text = "Draw text"
-            Me.rbTextLogoDrawText.UseVisualStyleBackColor = true
+            Me.rbTextLogoDrawText.UseVisualStyleBackColor = True
             Me.tabPage35.Controls.Add(Me.edTextLogoSampleText)
             Me.tabPage35.Controls.Add(Me.btFont)
             Me.tabPage35.Controls.Add(Me.label20)
@@ -198,7 +198,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage35.Size = New System.Drawing.Size(386, 148)
             Me.tabPage35.TabIndex = 0
             Me.tabPage35.Text = "Additional"
-            Me.tabPage35.UseVisualStyleBackColor = true
+            Me.tabPage35.UseVisualStyleBackColor = True
             Me.edTextLogoSampleText.Location = New System.Drawing.Point(74, 121)
             Me.edTextLogoSampleText.Name = "edTextLogoSampleText"
             Me.edTextLogoSampleText.Size = New System.Drawing.Size(100, 20)
@@ -209,9 +209,9 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.btFont.Size = New System.Drawing.Size(47, 23)
             Me.btFont.TabIndex = 27
             Me.btFont.Text = "Font"
-            Me.btFont.UseVisualStyleBackColor = true
+            Me.btFont.UseVisualStyleBackColor = True
             AddHandler Me.btFont.Click, AddressOf Me.btFont_Click
-            Me.label20.AutoSize = true
+            Me.label20.AutoSize = True
             Me.label20.Location = New System.Drawing.Point(146, 65)
             Me.label20.Name = "label20"
             Me.label20.Size = New System.Drawing.Size(103, 13)
@@ -224,38 +224,38 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoBGColor.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoBGColor.TabIndex = 25
             AddHandler Me.pnTextLogoBGColor.Click, AddressOf Me.pnTextLogoBGColor_Click
-            Me.label22.AutoSize = true
+            Me.label22.AutoSize = True
             Me.label22.Location = New System.Drawing.Point(45, 88)
             Me.label22.Name = "label22"
             Me.label22.Size = New System.Drawing.Size(31, 13)
             Me.label22.TabIndex = 24
             Me.label22.Text = "Color"
-            Me.cbTextLogoTranspBG.AutoSize = true
-            Me.cbTextLogoTranspBG.Checked = true
+            Me.cbTextLogoTranspBG.AutoSize = True
+            Me.cbTextLogoTranspBG.Checked = True
             Me.cbTextLogoTranspBG.CheckState = System.Windows.Forms.CheckState.Checked
             Me.cbTextLogoTranspBG.Location = New System.Drawing.Point(15, 64)
             Me.cbTextLogoTranspBG.Name = "cbTextLogoTranspBG"
             Me.cbTextLogoTranspBG.Size = New System.Drawing.Size(122, 17)
             Me.cbTextLogoTranspBG.TabIndex = 23
             Me.cbTextLogoTranspBG.Text = "Transp. background"
-            Me.cbTextLogoTranspBG.UseVisualStyleBackColor = true
-            Me.cbTextLogoRightToLeft.AutoSize = true
+            Me.cbTextLogoTranspBG.UseVisualStyleBackColor = True
+            Me.cbTextLogoRightToLeft.AutoSize = True
             Me.cbTextLogoRightToLeft.Location = New System.Drawing.Point(149, 35)
             Me.cbTextLogoRightToLeft.Name = "cbTextLogoRightToLeft"
             Me.cbTextLogoRightToLeft.Size = New System.Drawing.Size(88, 17)
             Me.cbTextLogoRightToLeft.TabIndex = 22
             Me.cbTextLogoRightToLeft.Text = "Right-To-Left"
-            Me.cbTextLogoRightToLeft.UseVisualStyleBackColor = true
-            Me.cbTextLogoVertical.AutoSize = true
+            Me.cbTextLogoRightToLeft.UseVisualStyleBackColor = True
+            Me.cbTextLogoVertical.AutoSize = True
             Me.cbTextLogoVertical.Location = New System.Drawing.Point(149, 16)
             Me.cbTextLogoVertical.Name = "cbTextLogoVertical"
             Me.cbTextLogoVertical.Size = New System.Drawing.Size(61, 17)
             Me.cbTextLogoVertical.TabIndex = 21
             Me.cbTextLogoVertical.Text = "Vertical"
-            Me.cbTextLogoVertical.UseVisualStyleBackColor = true
+            Me.cbTextLogoVertical.UseVisualStyleBackColor = True
             Me.cbTextLogoAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoAlign.FormattingEnabled = true
-            Me.cbTextLogoAlign.Items.AddRange(New object[] {
+            Me.cbTextLogoAlign.FormattingEnabled = True
+            Me.cbTextLogoAlign.Items.AddRange(New Object() {
             "left",
             "center",
             "right"})
@@ -263,7 +263,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.cbTextLogoAlign.Name = "cbTextLogoAlign"
             Me.cbTextLogoAlign.Size = New System.Drawing.Size(71, 21)
             Me.cbTextLogoAlign.TabIndex = 20
-            Me.label25.AutoSize = true
+            Me.label25.AutoSize = True
             Me.label25.Location = New System.Drawing.Point(12, 17)
             Me.label25.Name = "label25"
             Me.label25.Size = New System.Drawing.Size(30, 13)
@@ -289,10 +289,10 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage36.Size = New System.Drawing.Size(386, 148)
             Me.tabPage36.TabIndex = 1
             Me.tabPage36.Text = "Gradient"
-            Me.tabPage36.UseVisualStyleBackColor = true
+            Me.tabPage36.UseVisualStyleBackColor = True
             Me.cbTextLogoGradMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoGradMode.FormattingEnabled = true
-            Me.cbTextLogoGradMode.Items.AddRange(New object[] {
+            Me.cbTextLogoGradMode.FormattingEnabled = True
+            Me.cbTextLogoGradMode.Items.AddRange(New Object() {
             "Horizontal",
             "Vertical",
             "Forward diagonal",
@@ -301,7 +301,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.cbTextLogoGradMode.Name = "cbTextLogoGradMode"
             Me.cbTextLogoGradMode.Size = New System.Drawing.Size(104, 21)
             Me.cbTextLogoGradMode.TabIndex = 31
-            Me.label107.AutoSize = true
+            Me.label107.AutoSize = True
             Me.label107.Location = New System.Drawing.Point(140, 53)
             Me.label107.Name = "label107"
             Me.label107.Size = New System.Drawing.Size(34, 13)
@@ -314,7 +314,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoGradColor2.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoGradColor2.TabIndex = 29
             AddHandler Me.pnTextLogoGradColor2.Click, AddressOf Me.pnTextLogoGradColor2_Click
-            Me.label135.AutoSize = true
+            Me.label135.AutoSize = True
             Me.label135.Location = New System.Drawing.Point(37, 80)
             Me.label135.Name = "label135"
             Me.label135.Size = New System.Drawing.Size(40, 13)
@@ -327,19 +327,19 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoGradColor1.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoGradColor1.TabIndex = 27
             AddHandler Me.pnTextLogoGradColor1.Click, AddressOf Me.pnTextLogoGradColor1_Click
-            Me.label136.AutoSize = true
+            Me.label136.AutoSize = True
             Me.label136.Location = New System.Drawing.Point(37, 48)
             Me.label136.Name = "label136"
             Me.label136.Size = New System.Drawing.Size(40, 13)
             Me.label136.TabIndex = 26
             Me.label136.Text = "Color 1"
-            Me.cbTextLogoGradientEnabled.AutoSize = true
+            Me.cbTextLogoGradientEnabled.AutoSize = True
             Me.cbTextLogoGradientEnabled.Location = New System.Drawing.Point(12, 12)
             Me.cbTextLogoGradientEnabled.Name = "cbTextLogoGradientEnabled"
             Me.cbTextLogoGradientEnabled.Size = New System.Drawing.Size(65, 17)
             Me.cbTextLogoGradientEnabled.TabIndex = 0
             Me.cbTextLogoGradientEnabled.Text = "Enabled"
-            Me.cbTextLogoGradientEnabled.UseVisualStyleBackColor = true
+            Me.cbTextLogoGradientEnabled.UseVisualStyleBackColor = True
             Me.tabPage37.Controls.Add(Me.edTextLogoHeight)
             Me.tabPage37.Controls.Add(Me.label137)
             Me.tabPage37.Controls.Add(Me.edTextLogoWidth)
@@ -355,13 +355,13 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage37.Size = New System.Drawing.Size(386, 148)
             Me.tabPage37.TabIndex = 2
             Me.tabPage37.Text = "Position"
-            Me.tabPage37.UseVisualStyleBackColor = true
+            Me.tabPage37.UseVisualStyleBackColor = True
             Me.edTextLogoHeight.Location = New System.Drawing.Point(193, 71)
             Me.edTextLogoHeight.Name = "edTextLogoHeight"
             Me.edTextLogoHeight.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoHeight.TabIndex = 8
             Me.edTextLogoHeight.Text = "100"
-            Me.label137.AutoSize = true
+            Me.label137.AutoSize = True
             Me.label137.Location = New System.Drawing.Point(151, 74)
             Me.label137.Name = "label137"
             Me.label137.Size = New System.Drawing.Size(38, 13)
@@ -372,25 +372,25 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoWidth.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoWidth.TabIndex = 6
             Me.edTextLogoWidth.Text = "200"
-            Me.label138.AutoSize = true
+            Me.label138.AutoSize = True
             Me.label138.Location = New System.Drawing.Point(151, 48)
             Me.label138.Name = "label138"
             Me.label138.Size = New System.Drawing.Size(35, 13)
             Me.label138.TabIndex = 5
             Me.label138.Text = "Width"
-            Me.cbTextLogoUseRect.AutoSize = true
+            Me.cbTextLogoUseRect.AutoSize = True
             Me.cbTextLogoUseRect.Location = New System.Drawing.Point(132, 18)
             Me.cbTextLogoUseRect.Name = "cbTextLogoUseRect"
             Me.cbTextLogoUseRect.Size = New System.Drawing.Size(66, 17)
             Me.cbTextLogoUseRect.TabIndex = 4
             Me.cbTextLogoUseRect.Text = "Use rect"
-            Me.cbTextLogoUseRect.UseVisualStyleBackColor = true
+            Me.cbTextLogoUseRect.UseVisualStyleBackColor = True
             Me.edTextLogoTop.Location = New System.Drawing.Point(62, 42)
             Me.edTextLogoTop.Name = "edTextLogoTop"
             Me.edTextLogoTop.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoTop.TabIndex = 3
             Me.edTextLogoTop.Text = "50"
-            Me.label139.AutoSize = true
+            Me.label139.AutoSize = True
             Me.label139.Location = New System.Drawing.Point(20, 45)
             Me.label139.Name = "label139"
             Me.label139.Size = New System.Drawing.Size(26, 13)
@@ -401,7 +401,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoLeft.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoLeft.TabIndex = 1
             Me.edTextLogoLeft.Text = "50"
-            Me.label140.AutoSize = true
+            Me.label140.AutoSize = True
             Me.label140.Location = New System.Drawing.Point(20, 19)
             Me.label140.Name = "label140"
             Me.label140.Size = New System.Drawing.Size(25, 13)
@@ -417,10 +417,10 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage38.Size = New System.Drawing.Size(386, 148)
             Me.tabPage38.TabIndex = 3
             Me.tabPage38.Text = "Quality"
-            Me.tabPage38.UseVisualStyleBackColor = true
+            Me.tabPage38.UseVisualStyleBackColor = True
             Me.cbTextLogoDrawMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoDrawMode.FormattingEnabled = true
-            Me.cbTextLogoDrawMode.Items.AddRange(New object[] {
+            Me.cbTextLogoDrawMode.FormattingEnabled = True
+            Me.cbTextLogoDrawMode.Items.AddRange(New Object() {
             "Bicubic HQ",
             "Bilinear HQ",
             "Nearest Neighbor",
@@ -434,8 +434,8 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.cbTextLogoDrawMode.Size = New System.Drawing.Size(121, 21)
             Me.cbTextLogoDrawMode.TabIndex = 3
             Me.cbTextLogoAntialiasing.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoAntialiasing.FormattingEnabled = true
-            Me.cbTextLogoAntialiasing.Items.AddRange(New object[] {
+            Me.cbTextLogoAntialiasing.FormattingEnabled = True
+            Me.cbTextLogoAntialiasing.Items.AddRange(New Object() {
             "System default",
             "Single Bit Per Pixel (Grid Fit)",
             "Single Bit Per Pixel",
@@ -446,13 +446,13 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.cbTextLogoAntialiasing.Name = "cbTextLogoAntialiasing"
             Me.cbTextLogoAntialiasing.Size = New System.Drawing.Size(121, 21)
             Me.cbTextLogoAntialiasing.TabIndex = 2
-            Me.label141.AutoSize = true
+            Me.label141.AutoSize = True
             Me.label141.Location = New System.Drawing.Point(12, 44)
             Me.label141.Name = "label141"
             Me.label141.Size = New System.Drawing.Size(61, 13)
             Me.label141.TabIndex = 1
             Me.label141.Text = "Draw mode"
-            Me.label142.AutoSize = true
+            Me.label142.AutoSize = True
             Me.label142.Location = New System.Drawing.Point(12, 17)
             Me.label142.Name = "label142"
             Me.label142.Size = New System.Drawing.Size(60, 13)
@@ -476,27 +476,27 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage39.Size = New System.Drawing.Size(386, 148)
             Me.tabPage39.TabIndex = 4
             Me.tabPage39.Text = "Effects"
-            Me.tabPage39.UseVisualStyleBackColor = true
-            Me.cbTextLogoFadeOut.AutoSize = true
+            Me.tabPage39.UseVisualStyleBackColor = True
+            Me.cbTextLogoFadeOut.AutoSize = True
             Me.cbTextLogoFadeOut.Location = New System.Drawing.Point(92, 121)
             Me.cbTextLogoFadeOut.Name = "cbTextLogoFadeOut"
             Me.cbTextLogoFadeOut.Size = New System.Drawing.Size(142, 17)
             Me.cbTextLogoFadeOut.TabIndex = 39
             Me.cbTextLogoFadeOut.Text = "Fade-Out (if duration set)"
-            Me.cbTextLogoFadeOut.UseVisualStyleBackColor = true
-            Me.cbTextLogoFadeIn.AutoSize = true
+            Me.cbTextLogoFadeOut.UseVisualStyleBackColor = True
+            Me.cbTextLogoFadeIn.AutoSize = True
             Me.cbTextLogoFadeIn.Location = New System.Drawing.Point(17, 121)
             Me.cbTextLogoFadeIn.Name = "cbTextLogoFadeIn"
             Me.cbTextLogoFadeIn.Size = New System.Drawing.Size(62, 17)
             Me.cbTextLogoFadeIn.TabIndex = 38
             Me.cbTextLogoFadeIn.Text = "Fade-In"
-            Me.cbTextLogoFadeIn.UseVisualStyleBackColor = true
+            Me.cbTextLogoFadeIn.UseVisualStyleBackColor = True
             Me.edTextLogoOuterSize.Location = New System.Drawing.Point(214, 88)
             Me.edTextLogoOuterSize.Name = "edTextLogoOuterSize"
             Me.edTextLogoOuterSize.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoOuterSize.TabIndex = 37
             Me.edTextLogoOuterSize.Text = "1"
-            Me.label143.AutoSize = true
+            Me.label143.AutoSize = True
             Me.label143.Location = New System.Drawing.Point(138, 91)
             Me.label143.Name = "label143"
             Me.label143.Size = New System.Drawing.Size(65, 13)
@@ -507,7 +507,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoInnerSize.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoInnerSize.TabIndex = 35
             Me.edTextLogoInnerSize.Text = "1"
-            Me.label144.AutoSize = true
+            Me.label144.AutoSize = True
             Me.label144.Location = New System.Drawing.Point(14, 91)
             Me.label144.Name = "label144"
             Me.label144.Size = New System.Drawing.Size(47, 13)
@@ -520,7 +520,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoOuterColor.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoOuterColor.TabIndex = 33
             AddHandler Me.pnTextLogoOuterColor.Click, AddressOf Me.pnTextLogoOuterColor_Click
-            Me.label145.AutoSize = true
+            Me.label145.AutoSize = True
             Me.label145.Location = New System.Drawing.Point(138, 54)
             Me.label145.Name = "label145"
             Me.label145.Size = New System.Drawing.Size(70, 13)
@@ -533,15 +533,15 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoInnerColor.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoInnerColor.TabIndex = 31
             AddHandler Me.pnTextLogoInnerColor.Click, AddressOf Me.pnTextLogoInnerColor_Click
-            Me.label146.AutoSize = true
+            Me.label146.AutoSize = True
             Me.label146.Location = New System.Drawing.Point(14, 54)
             Me.label146.Name = "label146"
             Me.label146.Size = New System.Drawing.Size(52, 13)
             Me.label146.TabIndex = 30
             Me.label146.Text = "First color"
             Me.cbTextLogoEffectrMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoEffectrMode.FormattingEnabled = true
-            Me.cbTextLogoEffectrMode.Items.AddRange(New object[] {
+            Me.cbTextLogoEffectrMode.FormattingEnabled = True
+            Me.cbTextLogoEffectrMode.Items.AddRange(New Object() {
             "None",
             "Inner border",
             "Outer border",
@@ -554,7 +554,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.cbTextLogoEffectrMode.Name = "cbTextLogoEffectrMode"
             Me.cbTextLogoEffectrMode.Size = New System.Drawing.Size(166, 21)
             Me.cbTextLogoEffectrMode.TabIndex = 1
-            Me.label147.AutoSize = true
+            Me.label147.AutoSize = True
             Me.label147.Location = New System.Drawing.Point(14, 17)
             Me.label147.Name = "label147"
             Me.label147.Size = New System.Drawing.Size(34, 13)
@@ -568,7 +568,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage40.Size = New System.Drawing.Size(386, 148)
             Me.tabPage40.TabIndex = 5
             Me.tabPage40.Text = "Rotation"
-            Me.tabPage40.UseVisualStyleBackColor = true
+            Me.tabPage40.UseVisualStyleBackColor = True
             Me.groupBox16.Controls.Add(Me.rbTextLogoFlipXY)
             Me.groupBox16.Controls.Add(Me.rbTextLogoFlipY)
             Me.groupBox16.Controls.Add(Me.rbTextLogoFlipX)
@@ -577,41 +577,41 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.groupBox16.Name = "groupBox16"
             Me.groupBox16.Size = New System.Drawing.Size(241, 46)
             Me.groupBox16.TabIndex = 1
-            Me.groupBox16.TabStop = false
+            Me.groupBox16.TabStop = False
             Me.groupBox16.Text = "Flip"
-            Me.rbTextLogoFlipXY.AutoSize = true
+            Me.rbTextLogoFlipXY.AutoSize = True
             Me.rbTextLogoFlipXY.Location = New System.Drawing.Point(190, 19)
             Me.rbTextLogoFlipXY.Name = "rbTextLogoFlipXY"
             Me.rbTextLogoFlipXY.Size = New System.Drawing.Size(51, 17)
             Me.rbTextLogoFlipXY.TabIndex = 3
-            Me.rbTextLogoFlipXY.TabStop = true
+            Me.rbTextLogoFlipXY.TabStop = True
             Me.rbTextLogoFlipXY.Text = "X && Y"
-            Me.rbTextLogoFlipXY.UseVisualStyleBackColor = true
-            Me.rbTextLogoFlipY.AutoSize = true
+            Me.rbTextLogoFlipXY.UseVisualStyleBackColor = True
+            Me.rbTextLogoFlipY.AutoSize = True
             Me.rbTextLogoFlipY.Location = New System.Drawing.Point(125, 19)
             Me.rbTextLogoFlipY.Name = "rbTextLogoFlipY"
             Me.rbTextLogoFlipY.Size = New System.Drawing.Size(32, 17)
             Me.rbTextLogoFlipY.TabIndex = 2
-            Me.rbTextLogoFlipY.TabStop = true
+            Me.rbTextLogoFlipY.TabStop = True
             Me.rbTextLogoFlipY.Text = "Y"
-            Me.rbTextLogoFlipY.UseVisualStyleBackColor = true
-            Me.rbTextLogoFlipX.AutoSize = true
+            Me.rbTextLogoFlipY.UseVisualStyleBackColor = True
+            Me.rbTextLogoFlipX.AutoSize = True
             Me.rbTextLogoFlipX.Location = New System.Drawing.Point(66, 19)
             Me.rbTextLogoFlipX.Name = "rbTextLogoFlipX"
             Me.rbTextLogoFlipX.Size = New System.Drawing.Size(32, 17)
             Me.rbTextLogoFlipX.TabIndex = 1
-            Me.rbTextLogoFlipX.TabStop = true
+            Me.rbTextLogoFlipX.TabStop = True
             Me.rbTextLogoFlipX.Text = "X"
-            Me.rbTextLogoFlipX.UseVisualStyleBackColor = true
-            Me.rbTextLogoFlipNone.AutoSize = true
-            Me.rbTextLogoFlipNone.Checked = true
+            Me.rbTextLogoFlipX.UseVisualStyleBackColor = True
+            Me.rbTextLogoFlipNone.AutoSize = True
+            Me.rbTextLogoFlipNone.Checked = True
             Me.rbTextLogoFlipNone.Location = New System.Drawing.Point(13, 19)
             Me.rbTextLogoFlipNone.Name = "rbTextLogoFlipNone"
             Me.rbTextLogoFlipNone.Size = New System.Drawing.Size(51, 17)
             Me.rbTextLogoFlipNone.TabIndex = 0
-            Me.rbTextLogoFlipNone.TabStop = true
+            Me.rbTextLogoFlipNone.TabStop = True
             Me.rbTextLogoFlipNone.Text = "None"
-            Me.rbTextLogoFlipNone.UseVisualStyleBackColor = true
+            Me.rbTextLogoFlipNone.UseVisualStyleBackColor = True
             Me.groupBox17.Controls.Add(Me.rbTextLogoDegree270)
             Me.groupBox17.Controls.Add(Me.rbTextLogoDegree180)
             Me.groupBox17.Controls.Add(Me.rbTextLogoDegree90)
@@ -620,41 +620,41 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.groupBox17.Name = "groupBox17"
             Me.groupBox17.Size = New System.Drawing.Size(241, 46)
             Me.groupBox17.TabIndex = 0
-            Me.groupBox17.TabStop = false
+            Me.groupBox17.TabStop = False
             Me.groupBox17.Text = "Degree"
-            Me.rbTextLogoDegree270.AutoSize = true
+            Me.rbTextLogoDegree270.AutoSize = True
             Me.rbTextLogoDegree270.Location = New System.Drawing.Point(190, 19)
             Me.rbTextLogoDegree270.Name = "rbTextLogoDegree270"
             Me.rbTextLogoDegree270.Size = New System.Drawing.Size(43, 17)
             Me.rbTextLogoDegree270.TabIndex = 3
-            Me.rbTextLogoDegree270.TabStop = true
+            Me.rbTextLogoDegree270.TabStop = True
             Me.rbTextLogoDegree270.Text = "270"
-            Me.rbTextLogoDegree270.UseVisualStyleBackColor = true
-            Me.rbTextLogoDegree180.AutoSize = true
+            Me.rbTextLogoDegree270.UseVisualStyleBackColor = True
+            Me.rbTextLogoDegree180.AutoSize = True
             Me.rbTextLogoDegree180.Location = New System.Drawing.Point(125, 19)
             Me.rbTextLogoDegree180.Name = "rbTextLogoDegree180"
             Me.rbTextLogoDegree180.Size = New System.Drawing.Size(43, 17)
             Me.rbTextLogoDegree180.TabIndex = 2
-            Me.rbTextLogoDegree180.TabStop = true
+            Me.rbTextLogoDegree180.TabStop = True
             Me.rbTextLogoDegree180.Text = "180"
-            Me.rbTextLogoDegree180.UseVisualStyleBackColor = true
-            Me.rbTextLogoDegree90.AutoSize = true
+            Me.rbTextLogoDegree180.UseVisualStyleBackColor = True
+            Me.rbTextLogoDegree90.AutoSize = True
             Me.rbTextLogoDegree90.Location = New System.Drawing.Point(66, 19)
             Me.rbTextLogoDegree90.Name = "rbTextLogoDegree90"
             Me.rbTextLogoDegree90.Size = New System.Drawing.Size(37, 17)
             Me.rbTextLogoDegree90.TabIndex = 1
-            Me.rbTextLogoDegree90.TabStop = true
+            Me.rbTextLogoDegree90.TabStop = True
             Me.rbTextLogoDegree90.Text = "90"
-            Me.rbTextLogoDegree90.UseVisualStyleBackColor = true
-            Me.rbTextLogoDegree0.AutoSize = true
-            Me.rbTextLogoDegree0.Checked = true
+            Me.rbTextLogoDegree90.UseVisualStyleBackColor = True
+            Me.rbTextLogoDegree0.AutoSize = True
+            Me.rbTextLogoDegree0.Checked = True
             Me.rbTextLogoDegree0.Location = New System.Drawing.Point(13, 19)
             Me.rbTextLogoDegree0.Name = "rbTextLogoDegree0"
             Me.rbTextLogoDegree0.Size = New System.Drawing.Size(31, 17)
             Me.rbTextLogoDegree0.TabIndex = 0
-            Me.rbTextLogoDegree0.TabStop = true
+            Me.rbTextLogoDegree0.TabStop = True
             Me.rbTextLogoDegree0.Text = "0"
-            Me.rbTextLogoDegree0.UseVisualStyleBackColor = true
+            Me.rbTextLogoDegree0.UseVisualStyleBackColor = True
             Me.tabPage41.Controls.Add(Me.edTextLogoShapeHeight)
             Me.tabPage41.Controls.Add(Me.label148)
             Me.tabPage41.Controls.Add(Me.edTextLogoShapeWidth)
@@ -674,13 +674,13 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.tabPage41.Size = New System.Drawing.Size(386, 148)
             Me.tabPage41.TabIndex = 6
             Me.tabPage41.Text = "Shape"
-            Me.tabPage41.UseVisualStyleBackColor = true
+            Me.tabPage41.UseVisualStyleBackColor = True
             Me.edTextLogoShapeHeight.Location = New System.Drawing.Point(201, 88)
             Me.edTextLogoShapeHeight.Name = "edTextLogoShapeHeight"
             Me.edTextLogoShapeHeight.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoShapeHeight.TabIndex = 46
             Me.edTextLogoShapeHeight.Text = "100"
-            Me.label148.AutoSize = true
+            Me.label148.AutoSize = True
             Me.label148.Location = New System.Drawing.Point(154, 91)
             Me.label148.Name = "label148"
             Me.label148.Size = New System.Drawing.Size(38, 13)
@@ -691,7 +691,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoShapeWidth.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoShapeWidth.TabIndex = 44
             Me.edTextLogoShapeWidth.Text = "200"
-            Me.label149.AutoSize = true
+            Me.label149.AutoSize = True
             Me.label149.Location = New System.Drawing.Point(154, 65)
             Me.label149.Name = "label149"
             Me.label149.Size = New System.Drawing.Size(35, 13)
@@ -702,7 +702,7 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoShapeTop.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoShapeTop.TabIndex = 42
             Me.edTextLogoShapeTop.Text = "50"
-            Me.label150.AutoSize = true
+            Me.label150.AutoSize = True
             Me.label150.Location = New System.Drawing.Point(19, 91)
             Me.label150.Name = "label150"
             Me.label150.Size = New System.Drawing.Size(26, 13)
@@ -713,22 +713,22 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.edTextLogoShapeLeft.Size = New System.Drawing.Size(33, 20)
             Me.edTextLogoShapeLeft.TabIndex = 40
             Me.edTextLogoShapeLeft.Text = "50"
-            Me.label151.AutoSize = true
+            Me.label151.AutoSize = True
             Me.label151.Location = New System.Drawing.Point(19, 65)
             Me.label151.Name = "label151"
             Me.label151.Size = New System.Drawing.Size(25, 13)
             Me.label151.TabIndex = 39
             Me.label151.Text = "Left"
             Me.cbTextLogoShapeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            Me.cbTextLogoShapeType.FormattingEnabled = true
-            Me.cbTextLogoShapeType.Items.AddRange(New object[] {
+            Me.cbTextLogoShapeType.FormattingEnabled = True
+            Me.cbTextLogoShapeType.Items.AddRange(New Object() {
             "Rectangle",
             "Ellipse"})
             Me.cbTextLogoShapeType.Location = New System.Drawing.Point(56, 35)
             Me.cbTextLogoShapeType.Name = "cbTextLogoShapeType"
             Me.cbTextLogoShapeType.Size = New System.Drawing.Size(83, 21)
             Me.cbTextLogoShapeType.TabIndex = 38
-            Me.label152.AutoSize = true
+            Me.label152.AutoSize = True
             Me.label152.Location = New System.Drawing.Point(19, 38)
             Me.label152.Name = "label152"
             Me.label152.Size = New System.Drawing.Size(31, 13)
@@ -741,43 +741,43 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.pnTextLogoShapeColor.Size = New System.Drawing.Size(24, 24)
             Me.pnTextLogoShapeColor.TabIndex = 34
             AddHandler Me.pnTextLogoShapeColor.Click, AddressOf Me.pnTextLogoShapeColor_Click
-            Me.label153.AutoSize = true
+            Me.label153.AutoSize = True
             Me.label153.Location = New System.Drawing.Point(154, 38)
             Me.label153.Name = "label153"
             Me.label153.Size = New System.Drawing.Size(31, 13)
             Me.label153.TabIndex = 33
             Me.label153.Text = "Color"
-            Me.cbTextLogoShapeEnabled.AutoSize = true
+            Me.cbTextLogoShapeEnabled.AutoSize = True
             Me.cbTextLogoShapeEnabled.Location = New System.Drawing.Point(12, 12)
             Me.cbTextLogoShapeEnabled.Name = "cbTextLogoShapeEnabled"
             Me.cbTextLogoShapeEnabled.Size = New System.Drawing.Size(65, 17)
             Me.cbTextLogoShapeEnabled.TabIndex = 32
             Me.cbTextLogoShapeEnabled.Text = "Enabled"
-            Me.cbTextLogoShapeEnabled.UseVisualStyleBackColor = true
+            Me.cbTextLogoShapeEnabled.UseVisualStyleBackColor = True
             Me.fontDialog1.Color = System.Drawing.Color.White
             Me.fontDialog1.Font = New System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CByte(204))
-            Me.fontDialog1.FontMustExist = true
-            Me.fontDialog1.ShowColor = true
+            Me.fontDialog1.FontMustExist = True
+            Me.fontDialog1.ShowColor = True
             Me.btUpdate.Location = New System.Drawing.Point(12, 193)
             Me.btUpdate.Name = "btUpdate"
             Me.btUpdate.Size = New System.Drawing.Size(75, 23)
             Me.btUpdate.TabIndex = 22
             Me.btUpdate.Text = "Update"
-            Me.btUpdate.UseVisualStyleBackColor = true
+            Me.btUpdate.UseVisualStyleBackColor = True
             AddHandler Me.btUpdate.Click, AddressOf Me.btUpdate_Click
             Me.btClose.Location = New System.Drawing.Point(327, 193)
             Me.btClose.Name = "btClose"
             Me.btClose.Size = New System.Drawing.Size(75, 23)
             Me.btClose.TabIndex = 23
             Me.btClose.Text = "Close"
-            Me.btClose.UseVisualStyleBackColor = true
+            Me.btClose.UseVisualStyleBackColor = True
             AddHandler Me.btClose.Click, AddressOf Me.btClose_Click
-            Me.linkLabel1.AutoSize = true
+            Me.linkLabel1.AutoSize = True
             Me.linkLabel1.Location = New System.Drawing.Point(152, 198)
             Me.linkLabel1.Name = "linkLabel1"
             Me.linkLabel1.Size = New System.Drawing.Size(117, 13)
             Me.linkLabel1.TabIndex = 69
-            Me.linkLabel1.TabStop = true
+            Me.linkLabel1.TabStop = True
             Me.linkLabel1.Text = "Get dialog source code"
             AddHandler Me.linkLabel1.LinkClicked, AddressOf Me.linkLabel1_LinkClicked
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6F, 13F)
@@ -788,8 +788,8 @@ Namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             Me.Controls.Add(Me.btUpdate)
             Me.Controls.Add(Me.tabControl8)
             Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-            Me.MaximizeBox = false
-            Me.MinimizeBox = false
+            Me.MaximizeBox = False
+            Me.MinimizeBox = False
             Me.Name = "TextLogoSettingsDialog"
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
             Me.Text = "Text logo settings"
