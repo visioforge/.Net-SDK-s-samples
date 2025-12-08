@@ -225,8 +225,8 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             }
             else
             {
-                imageLogo.StartTime = TimeSpan.FromMilliseconds(Convert.ToInt32(edImageLogoStartTime.Text));
-                imageLogo.StopTime = TimeSpan.FromMilliseconds(Convert.ToInt32(edImageLogoStopTime.Text));
+                imageLogo.StartTime = TimeSpan.FromMilliseconds(Convert.ToUInt64(edImageLogoStartTime.Text));
+                imageLogo.StopTime = TimeSpan.FromMilliseconds(Convert.ToUInt64(edImageLogoStopTime.Text));
             }
 
             imageLogo.Update();
@@ -261,7 +261,7 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            const string url = "https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Dialogs%20Source%20Code/OutputFormats";
+            const string url = "https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Dialogs%20Source%20Code";
             var startInfo = new ProcessStartInfo("explorer.exe", url);
             Process.Start(startInfo);
         }

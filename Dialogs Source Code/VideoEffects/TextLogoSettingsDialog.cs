@@ -39,7 +39,7 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
             InitializeComponent();
 
             cbTextLogoAlign.SelectedIndex = 0;
-            cbTextLogoAntialiasing.SelectedIndex = 0;
+            cbTextLogoAntialiasing.SelectedIndex = 4;
             cbTextLogoDrawMode.SelectedIndex = 0;
             cbTextLogoEffectrMode.SelectedIndex = 0;
             cbTextLogoGradMode.SelectedIndex = 0;
@@ -522,7 +522,7 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.VideoEffects
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            const string url = "https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Dialogs%20Source%20Code/OutputFormats";
+            const string url = "https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Dialogs%20Source%20Code";
             var startInfo = new ProcessStartInfo("explorer.exe", url);
             Process.Start(startInfo);
         }
