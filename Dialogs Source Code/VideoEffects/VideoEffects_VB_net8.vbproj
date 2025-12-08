@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>VisioForge.Core.UI.WinForms.Dialogs.VideoEffects</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core" Version="15.12.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="IVideoEffectsSettingsDialog.vb" />
+    <Compile Include="ImageLogoSettingsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageLogoSettingsDialog.Designer.vb">
+      <DependentUpon>ImageLogoSettingsDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TextLogoSettingsDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextLogoSettingsDialog.Designer.vb">
+      <DependentUpon>TextLogoSettingsDialog.vb</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
