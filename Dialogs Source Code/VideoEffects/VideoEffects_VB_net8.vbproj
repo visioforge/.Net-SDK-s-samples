@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -9,15 +9,12 @@
     <LangVersion>latest</LangVersion>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
-
   <ItemGroup>
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.*" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.12.4" />
   </ItemGroup>
-
 </Project>

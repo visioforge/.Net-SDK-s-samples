@@ -60,7 +60,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.4" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\1.jpg" />
