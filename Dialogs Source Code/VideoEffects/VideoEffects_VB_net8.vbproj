@@ -15,6 +15,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.12.4" />
+    <PackageReference Include="VisioForge.DotNet.Core" Version="2025.12.5" />
   </ItemGroup>
 </Project>
