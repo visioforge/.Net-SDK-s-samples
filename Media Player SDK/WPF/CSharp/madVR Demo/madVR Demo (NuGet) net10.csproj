@@ -10,7 +10,7 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.12.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.12.6" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

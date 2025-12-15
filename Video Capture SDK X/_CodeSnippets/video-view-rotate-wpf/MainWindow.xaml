@@ -1,0 +1,59 @@
+<Window x:Class="video_view_rotate_wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:video_view_rotate_wpf"
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="VideoView Rotation Demo - WPF" Height="650" Width="1380"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Margin="12,12,0,0" x:Name="tcMain" Width="658" Height="540" VerticalAlignment="Top">
+            <TabItem Header="Video input">
+                <Grid>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" Width="120" Content="Input device"/>
+                    <ComboBox Height="23" Margin="12,34,36,0" x:Name="cbVideoInputDevice" VerticalAlignment="Top" SelectionChanged="cbVideoInputDevice_SelectionChanged" />
+                    
+                    <Label Height="28" HorizontalAlignment="Left" Margin="6,70,0,0" VerticalAlignment="Top" Width="120" Content="Input format"/>
+                    <ComboBox Height="23" Margin="12,98,120,0" x:Name="cbVideoInputFormat" VerticalAlignment="Top" SelectionChanged="cbVideoInputFormat_SelectionChanged" />
+                    
+                    <Label Height="28" HorizontalAlignment="Right" Margin="0,70,36,0" VerticalAlignment="Top" Width="80" Content="Frame rate"/>
+                    <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,98,36,0" x:Name="cbVideoInputFrameRate" VerticalAlignment="Top" Width="80" />
+                    <Label Height="28" HorizontalAlignment="Right" Margin="0,96,0,0" VerticalAlignment="Top" Width="32" Content="fps"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Rotation">
+                <Grid>
+                    <CheckBox x:Name="cbRotationEnabled" Height="17" Width="120" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Enable rotation" Checked="cbRotationEnabled_Checked" Unchecked="cbRotationEnabled_Checked"/>
+                    
+                    <Label Height="28" HorizontalAlignment="Left" Margin="6,40,0,0" VerticalAlignment="Top" Width="120" Content="Rotation angle"/>
+                    <Slider x:Name="sliderRotation" HorizontalAlignment="Left" Margin="12,68,0,0" VerticalAlignment="Top" Width="250" 
+                            Minimum="0" Maximum="360" Value="0" 
+                            TickFrequency="45" TickPlacement="BottomRight"
+                            ValueChanged="sliderRotation_ValueChanged"/>
+                    <TextBlock x:Name="tbRotationValue" HorizontalAlignment="Left" Margin="270,72,0,0" VerticalAlignment="Top" Text="0°" Width="50"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Width="400">
+                        <Run Text="Tip: Use the slider to rotate the video preview."/><LineBreak/>
+                        <Run Text="Common angles: 0° (normal), 90° (clockwise), 180° (upside-down), 270° (counter-clockwise)"/>
+                    </TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Debug/Log">
+                <Grid>
+                    <CheckBox x:Name="cbDebugMode" Height="17" Width="94" TabIndex="75" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Debug mode"/>
+                    <CheckBox x:Name="cbTelemetry" Height="17" Width="94" TabIndex="76" Margin="120,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Telemetry" IsChecked="True"/>
+                    <TextBox x:Name="mmLog" TabIndex="74" Margin="10,35,10,10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        
+        <Button x:Name="btStart" Height="44" Width="100" Click="btStart_Click" Margin="20,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontWeight="Bold" Content="Start" />
+        <Button x:Name="btStop" Height="44" Width="100" Click="btStop_Click" Margin="130,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontWeight="Bold" Content="Stop" />
+        <Button x:Name="btPause" Height="44" Width="90" Click="btPause_Click" Margin="460,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Pause" />
+        <Button x:Name="btResume" Height="44" Width="90" Click="btResume_Click" Margin="560,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Resume" />
+        
+        <my:VideoView x:Name="VideoView1" Margin="680,33,10,10" Background="Black" />
+    </Grid>
+</Window>

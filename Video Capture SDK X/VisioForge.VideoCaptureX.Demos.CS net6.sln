@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.31911.260
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11304.174 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{BEB35102-F434-47CE-A231-2FC3F089F75B}"
 EndProject
@@ -72,6 +72,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audio Mixer net6", "WPF\CSharp\Audio Mixer\Audio Mixer net6.csproj", "{846C60ED-9495-4042-16E0-147B62ECE3E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "two-video-views net6", "_CodeSnippets\two-video-views\two-video-views net6.csproj", "{B0B7E2F3-32D8-37B4-4A4E-2F178EC3158E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webcam-preview-wpf net6", "_CodeSnippets\webcam-preview-wpf\webcam-preview-wpf net6.csproj", "{61417F5B-40FC-B13B-E1A9-1119A7518715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "video-view-rotate-wpf net6", "_CodeSnippets\video-view-rotate-wpf\video-view-rotate-wpf net6.csproj", "{7921C41C-E5F6-9A09-E92B-372E28A99701}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,6 +215,14 @@ Global
 		{B0B7E2F3-32D8-37B4-4A4E-2F178EC3158E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0B7E2F3-32D8-37B4-4A4E-2F178EC3158E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0B7E2F3-32D8-37B4-4A4E-2F178EC3158E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61417F5B-40FC-B13B-E1A9-1119A7518715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61417F5B-40FC-B13B-E1A9-1119A7518715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61417F5B-40FC-B13B-E1A9-1119A7518715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61417F5B-40FC-B13B-E1A9-1119A7518715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7921C41C-E5F6-9A09-E92B-372E28A99701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7921C41C-E5F6-9A09-E92B-372E28A99701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7921C41C-E5F6-9A09-E92B-372E28A99701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7921C41C-E5F6-9A09-E92B-372E28A99701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +261,8 @@ Global
 		{B0A852EC-E2F8-4B53-B9A7-C38F166A0DE8} = {AFF717C4-56EA-4967-9BE9-D60B6E0CCB20}
 		{846C60ED-9495-4042-16E0-147B62ECE3E8} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{B0B7E2F3-32D8-37B4-4A4E-2F178EC3158E} = {AFF717C4-56EA-4967-9BE9-D60B6E0CCB20}
+		{61417F5B-40FC-B13B-E1A9-1119A7518715} = {AFF717C4-56EA-4967-9BE9-D60B6E0CCB20}
+		{7921C41C-E5F6-9A09-E92B-372E28A99701} = {AFF717C4-56EA-4967-9BE9-D60B6E0CCB20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
