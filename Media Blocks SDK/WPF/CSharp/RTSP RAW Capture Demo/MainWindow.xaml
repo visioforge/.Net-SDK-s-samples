@@ -1,0 +1,109 @@
+<Window x:Class="RTSP_RAW_Capture_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="RTSP RAW Capture Demo - Media Blocks SDK .Net" 
+        Height="700" Width="1200" 
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing"
+        Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel - Controls -->
+        <Grid Grid.Column="0" Margin="10">
+            <TabControl>
+                <TabItem Header="RTSP Settings">
+                    <StackPanel Margin="10">
+                        <Label Content="RTSP URL" FontWeight="Bold"/>
+                        <TextBox x:Name="edURL" Height="23" Text="rtsp://" Margin="0,0,0,10"/>
+                        
+                        <Label Content="Login"/>
+                        <TextBox x:Name="edLogin" Height="23" Margin="0,0,0,10"/>
+                        
+                        <Label Content="Password"/>
+                        <PasswordBox x:Name="edPassword" Height="23" Margin="0,0,0,10"/>
+                        
+                        <CheckBox x:Name="cbAudioEnabled" Content="Enable Audio" IsChecked="True" Margin="0,0,0,10"/>
+                        
+                        <Separator Margin="0,10"/>
+                        
+                        <Label Content="Preview Controls" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Button x:Name="btStartPreview" Content="Start Preview" Width="100" Height="30" Margin="0,0,10,0" Click="btStartPreview_Click" FontWeight="Bold"/>
+                            <Button x:Name="btStopPreview" Content="Stop Preview" Width="100" Height="30" Click="btStopPreview_Click" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Recording">
+                    <StackPanel Margin="10">
+                        <Label Content="Output Settings" FontWeight="Bold"/>
+                        
+                        <Label Content="Output File"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="edFilename" Grid.Column="0" Height="23" Text="c:\vf\output.mp4" Margin="0,0,5,0"/>
+                            <Button x:Name="btBrowse" Grid.Column="1" Content="..." Width="30" Height="23" Click="btBrowse_Click"/>
+                        </Grid>
+                        
+                        <Label Content="Output Format" Margin="0,10,0,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                            <RadioButton x:Name="rbMP4Output" Content="MP4" IsChecked="True" Margin="0,0,20,0" GroupName="OutputFormat"/>
+                            <RadioButton x:Name="rbMPEGTSOutput" Content="MPEG-TS" GroupName="OutputFormat"/>
+                        </StackPanel>
+                        
+                        <CheckBox x:Name="cbReencodeAudio" Content="Re-encode Audio (to AAC)" IsChecked="False" Margin="0,0,0,10" 
+                                  ToolTip="Enable to decode and re-encode audio to AAC. Disable to save audio stream as-is without re-encoding."/>
+                        
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,10" Foreground="Gray">
+                            <Run Text="Video will be saved without re-encoding (H264/HEVC as-is)."/>
+                            <LineBreak/>
+                            <Run Text="Enable 'Re-encode Audio' if audio format is not compatible with output container."/>
+                        </TextBlock>
+                        
+                        <Separator Margin="0,10"/>
+                        
+                        <Label Content="Recording Controls" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Button x:Name="btStartRecord" Content="Start Record" Width="100" Height="30" Margin="0,0,10,0" Click="btStartRecord_Click" FontWeight="Bold"/>
+                            <Button x:Name="btStopRecord" Content="Stop Record" Width="100" Height="30" Click="btStopRecord_Click" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Log">
+                    <Grid Margin="10">
+                        <TextBox x:Name="mmLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                                 IsReadOnly="True" FontFamily="Consolas" FontSize="11"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!-- Right Panel - Video View -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="2" Background="Black">
+                <my:VideoView x:Name="VideoView1" Background="Black"/>
+            </Border>
+            
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <TextBlock x:Name="lbStatus" Text="Status: Ready" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="lbVideoTutorial" Text="Video tutorial" Foreground="Blue" 
+                           TextDecorations="Underline" Cursor="Hand" HorizontalAlignment="Center" 
+                           MouseLeftButtonUp="lbVideoTutorial_MouseLeftButtonUp" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

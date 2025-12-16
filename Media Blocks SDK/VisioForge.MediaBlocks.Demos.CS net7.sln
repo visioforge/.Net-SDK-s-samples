@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audio Capture Demo MB net7"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP Preview Demo MB WPF net7", "WPF\CSharp\RTSP Preview Demo\RTSP Preview Demo MB WPF net7.csproj", "{93BCB93A-DA0B-473C-8BA4-DCA55A6005E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTSP RAW Capture Demo net7", "WPF\CSharp\RTSP RAW Capture Demo\RTSP RAW Capture Demo net7.csproj", "{E372B7B2-7757-4A48-96F7-1064806EF142}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRT Source Demo net7", "WPF\CSharp\SRT Source Demo\SRT Source Demo net7.csproj", "{967F7881-4438-46AE-A86C-ADAD317EC33F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bridge Demo net7", "WPF\CSharp\Bridge Demo\Bridge Demo net7.csproj", "{FF0EAE82-16B2-4525-B6E6-8FD69369F455}"
