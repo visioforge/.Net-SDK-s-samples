@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32421.90
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11304.174 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Media Info CLI", "Console\Media Info CLI\Media Info CLI.csproj", "{60892F01-E9A8-463F-86BA-A9381FE4CE2E}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Capture Original", "Console\RTSP Capture Original\RTSP Capture Original.csproj", "{F1CD46A9-9867-6AA5-B9DA-9B8E19C23543}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Webcam Server", "Console\RTSP Webcam Server\RTSP Webcam Server.csproj", "{438055A6-F768-243B-3359-E74A1853FA1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Image Server", "Console\RTSP Image Server\RTSP Image Server.csproj", "{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{438055A6-F768-243B-3359-E74A1853FA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{438055A6-F768-243B-3359-E74A1853FA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{438055A6-F768-243B-3359-E74A1853FA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
