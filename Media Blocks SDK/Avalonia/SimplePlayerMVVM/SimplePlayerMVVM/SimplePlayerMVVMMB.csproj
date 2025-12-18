@@ -8,13 +8,13 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>net9.0-android35.0;net10.0-ios;net10.0-windows</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
-    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-macos15.0</TargetFrameworks>
+    <TargetFrameworks>net9.0-android35.0;net10.0-ios;net10.0-macos26.2</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <TargetFrameworks>net9.0-android;net9.0</TargetFrameworks>
+    <TargetFrameworks>net9.0-android35.0;net10.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.8" />
@@ -24,7 +24,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.8" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android35.0'">
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
