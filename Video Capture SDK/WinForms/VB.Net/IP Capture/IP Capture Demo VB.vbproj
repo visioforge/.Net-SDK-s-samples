@@ -30,11 +30,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.12.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.12.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.12.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.12.6" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="2025.12.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2025.12.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2025.12.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2025.12.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2025.12.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VLC.x64" Version="2025.12.7" />
   </ItemGroup>
 </Project>

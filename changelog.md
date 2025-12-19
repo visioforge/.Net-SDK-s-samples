@@ -84,6 +84,7 @@ Changes and updates for all .Net SDKs.
 
 * [Media Blocks SDK .Net] Added DASH (Dynamic Adaptive Streaming over HTTP) sink support with DASHSinkBlock and DASHOutput classes
 * [Media Blocks SDK .Net] Added UniversalSourceBlockV2 with improved memory usage and performance
+* [X-engines] Fixed uvch264src not starting on Linux by properly selecting the appropriate source pad based on video format (vidsrc for H264, vfsrc for raw/MJPEG)
 
 ## 2025.9.5
 
