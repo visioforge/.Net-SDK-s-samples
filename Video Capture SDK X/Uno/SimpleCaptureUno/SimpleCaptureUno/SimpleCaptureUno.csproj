@@ -1,4 +1,4 @@
-﻿<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">net10.0-windows10.0.19041;net10.0-android</TargetFrameworks>
@@ -12,13 +12,14 @@
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationPublisher>SimpleCaptureUno</ApplicationPublisher>
     <Description>SimpleCaptureUno powered by Uno Platform.</Description>
-    <UnoFeatures></UnoFeatures>
+    <UnoFeatures>
+    </UnoFeatures>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CodesignKey>Apple Development</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.8" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.9" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2025.12.8" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
@@ -43,7 +44,7 @@
       <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
     </PropertyGroup>
     <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
-    <Copy SourceFiles="@(None->'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
       <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
     </Copy>
   </Target>

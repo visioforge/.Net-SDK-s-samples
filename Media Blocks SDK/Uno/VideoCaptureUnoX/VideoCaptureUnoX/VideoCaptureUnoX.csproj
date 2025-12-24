@@ -1,0 +1,51 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">net10.0-windows10.0.19041;net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">net10.0-maccatalyst;net10.0-ios;net10.0-android</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+    <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
+    <ApplicationTitle>VideoCaptureUnoX</ApplicationTitle>
+    <ApplicationId>com.companyname.videocaptureunox</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationPublisher>VideoCaptureUnoX</ApplicationPublisher>
+    <Description>VideoCaptureUnoX powered by Uno Platform.</Description>
+    <UnoFeatures>
+    </UnoFeatures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CodesignKey>Apple Development</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2025.12.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2025.12.8" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2025.11.0" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
+    <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.9.1" />
+  </ItemGroup>
+  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+    <PropertyGroup>
+      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+    </Copy>
+  </Target>
+</Project>

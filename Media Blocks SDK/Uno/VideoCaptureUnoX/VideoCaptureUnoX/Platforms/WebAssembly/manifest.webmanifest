@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "VideoCaptureUnoX",
+  "display": "standalone",
+  "name": "VideoCaptureUnoX",
+  "short_name": "VideoCaptureUnoX",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

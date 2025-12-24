@@ -1,0 +1,71 @@
+﻿<Page x:Class="SimplePlayerUno.Template.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vf="using:VisioForge.Core.UI.Uno"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <vf:VideoView x:Name="videoView"
+                  Grid.Row="0"
+                  Margin="12"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch" />
+
+    <Grid Grid.Row="1"
+          Padding="12">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <TextBlock x:Name="txtCurrentPosition"
+                 Text="00:00"
+                 VerticalAlignment="Center"
+                 Margin="0,0,12,0" />
+
+      <Slider x:Name="timelineSlider"
+              Grid.Column="1"
+              Minimum="0"
+              Maximum="1"
+              IsEnabled="False"
+              ValueChanged="TimelineSlider_ValueChanged"
+              PointerPressed="TimelineSlider_PointerPressed"
+              PointerReleased="TimelineSlider_PointerReleased"
+              PointerCaptureLost="TimelineSlider_PointerCaptureLost" />
+
+      <TextBlock x:Name="txtTotalDuration"
+                 Grid.Column="2"
+                 Text="00:00"
+                 VerticalAlignment="Center"
+                 Margin="12,0,0,0" />
+    </Grid>
+
+    <Grid Grid.Row="2"
+          Padding="12">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <TextBox x:Name="txtMediaUrl"
+               Grid.Column="0"
+               PlaceholderText="Enter media URL or file path..."
+               Text="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+               VerticalAlignment="Center" />
+
+      <Button x:Name="btnPlayStop"
+              Grid.Column="1"
+              Content="▶"
+              Click="BtnPlayStop_Click"
+              MinWidth="60"
+              FontSize="20"
+              Margin="12,0,0,0" />
+    </Grid>
+  </Grid>
+</Page>

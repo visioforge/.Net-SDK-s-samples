@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "SimplePlayerUno.Template",
+  "display": "standalone",
+  "name": "SimplePlayerUno.Template",
+  "short_name": "SimplePlayerUno.Template",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
