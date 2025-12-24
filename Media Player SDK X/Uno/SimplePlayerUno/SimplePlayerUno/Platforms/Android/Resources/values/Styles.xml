@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="AppTheme" parent="Theme.MaterialComponents.Light">
+
+		<!-- This removes the ActionBar -->
+		<item name="windowActionBar">false</item>
+		<item name="android:windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<item name="android:windowNoTitle">true</item>
+
+		<!-- Use plain colors instead of Uno.Resizetizer generated resources -->
+		<item name="android:windowSplashScreenBackground">@color/colorPrimary</item>
+		<item name="android:windowBackground">@color/colorPrimary</item>
+	</style>
+	<style name="Theme.AppCompat.Translucent">
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation</item>
+	</style>
+
+	<color name="colorPrimary">#FF0078D7</color>
+
+</resources>

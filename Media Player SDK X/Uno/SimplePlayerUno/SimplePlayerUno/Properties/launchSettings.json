@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SimplePlayerUno (WinAppSDK Unpackaged)": {
+      "commandName": "Project",
+      "compatibleTargetFramework": "windows"
+    },
+    "SimplePlayerUno (WinAppSDK Packaged)": {
+      "commandName": "MsixPackage",
+      "compatibleTargetFramework": "windows"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32210.308
+MinimumVisualStudioVersion = 15.0.26124.0
+
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayerUnoMPX", "Uno\SimplePlayerUno\SimplePlayerUno\SimplePlayerUnoMPX.csproj", "{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}"
+EndProject
+
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Debug|x64.Build.0 = Debug|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|ARM64.Build.0 = Release|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|x64.ActiveCfg = Release|Any CPU
+		{C3AF9BE4-3750-42DE-A2AC-78DB242783F4}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2C3D4E5-F6A7-8901-BCDE-F23456789012}
+	EndGlobalSection
+EndGlobal
