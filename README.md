@@ -64,6 +64,7 @@ Most demo applications contain unmanaged NuGet redist packages specific to the S
 | VisioForge.DotNet.Core.UI.WinUI | WinUI 3 | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.Core.UI.WinUI.svg)](https://www.nuget.org/packages/VisioForge.DotNet.Core.UI.WinUI/) |
 | VisioForge.DotNet.Core.UI.MAUI | .NET MAUI | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.Core.UI.MAUI.svg)](https://www.nuget.org/packages/VisioForge.DotNet.Core.UI.MAUI/) |
 | VisioForge.DotNet.Core.UI.Avalonia | Avalonia UI | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.Core.UI.Avalonia.svg)](https://www.nuget.org/packages/VisioForge.DotNet.Core.UI.Avalonia/) |
+| VisioForge.DotNet.Core.UI.Uno | Uno Platform | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.Core.UI.Uno.svg)](https://www.nuget.org/packages/VisioForge.DotNet.Core.UI.Uno/) |
 
 ### Specialty Packages
 
