@@ -1,6 +1,8 @@
 using System.Windows;
 using SkiaSharp;
 using VisioForge.Core.Types.X.VideoEffects;
+using FontStyle = VisioForge.Core.Types.X.VideoEffects.FontStyle;
+using FontWeight = VisioForge.Core.Types.X.VideoEffects.FontWeight;
 
 namespace Overlay_Manager_Demo
 {
@@ -18,6 +20,9 @@ namespace Overlay_Manager_Demo
         public int Speed { get; private set; }
         public bool Loop { get; private set; }
         public int FontSize { get; private set; }
+        public FontStyle FontStyle { get; private set; }
+        public FontWeight FontWeight { get; private set; }
+        public bool Underline { get; private set; }
         public SKColor TextColor { get; private set; }
         public bool TransparentBackground { get; private set; }
         public SKColor BackgroundColor { get; private set; }
@@ -93,8 +98,46 @@ namespace Overlay_Manager_Demo
             Speed = (int)slSpeed.Value;
             Loop = cbLoop.IsChecked == true;
             FontSize = fontSize;
+            Underline = cbUnderline.IsChecked == true;
             TransparentBackground = cbTransparentBackground.IsChecked == true;
             EnableShadow = cbEnableShadow.IsChecked == true;
+
+            // Get font style
+            switch (cbFontStyle.SelectedIndex)
+            {
+                case 0:
+                    FontStyle = FontStyle.Normal;
+                    break;
+                case 1:
+                    FontStyle = FontStyle.Italic;
+                    break;
+                case 2:
+                    FontStyle = FontStyle.Oblique;
+                    break;
+                default:
+                    FontStyle = FontStyle.Normal;
+                    break;
+            }
+
+            // Get font weight
+            switch (cbFontWeight.SelectedIndex)
+            {
+                case 0:
+                    FontWeight = FontWeight.Normal;
+                    break;
+                case 1:
+                    FontWeight = FontWeight.Bold;
+                    break;
+                case 2:
+                    FontWeight = FontWeight.Light;
+                    break;
+                case 3:
+                    FontWeight = FontWeight.SemiBold;
+                    break;
+                default:
+                    FontWeight = FontWeight.Normal;
+                    break;
+            }
 
             // Get direction
             switch (cbDirection.SelectedIndex)

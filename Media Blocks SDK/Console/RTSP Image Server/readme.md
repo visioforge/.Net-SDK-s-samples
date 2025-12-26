@@ -60,9 +60,8 @@ gst-launch-1.0 rtspsrc location=rtsp://localhost:8554/stream ! decodebin ! autov
 
 ## Supported frameworks
 
-* .Net 8
-* .Net 9
-* .Net 10
+* .Net Framework 4.7.2
+* .Net 5 and later
 
 ## Supported platforms
 

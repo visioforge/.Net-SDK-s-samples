@@ -19,7 +19,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 
-namespace SimpleCapture
+namespace SimpleCaptureMB
 {
     public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
@@ -379,7 +379,7 @@ namespace SimpleCapture
                 var device = _cameras.FirstOrDefault(x => x.DisplayName == deviceName);
                 if (device != null)
                 {
-                    var formatItem = device.GetHDVideoFormatAndFrameRate(out var frameRate);
+                    var formatItem = device.GetVideoFormatAndFrameRate(1280, 720, out var frameRate);
                     if (formatItem != null)
                     {
                         videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)

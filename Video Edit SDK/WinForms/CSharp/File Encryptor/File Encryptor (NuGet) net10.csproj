@@ -7,6 +7,6 @@
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.10" />
   </ItemGroup>
 </Project>

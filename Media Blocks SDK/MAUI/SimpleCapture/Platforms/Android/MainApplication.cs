@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace SimpleCapture
+namespace SimpleCaptureMB
 {
     [Application]
     public class MainApplication : MauiApplication

@@ -2,7 +2,7 @@
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using VisioForge.Core.UI.MAUI;
 
-namespace SimpleCapture
+namespace SimpleCaptureMB
 {
     public static class MauiProgram
     {

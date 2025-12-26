@@ -317,6 +317,9 @@ namespace Overlay_Manager_Demo
                 };
 
                 scrollingText.Font.Size = optionsWindow.FontSize;
+                scrollingText.Font.Style = optionsWindow.FontStyle;
+                scrollingText.Font.Weight = optionsWindow.FontWeight;
+                scrollingText.Font.Underline = optionsWindow.Underline;
 
                 // Add shadow if enabled
                 if (optionsWindow.EnableShadow)

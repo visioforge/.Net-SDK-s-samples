@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace SimpleCapture
+namespace SimpleCaptureMB
 {
     public class Program
     {

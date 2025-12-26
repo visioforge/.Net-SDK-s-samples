@@ -1,4 +1,4 @@
-﻿namespace SimpleCapture
+﻿namespace SimpleCaptureMB
 {
     public partial class AppShell : Shell
     {

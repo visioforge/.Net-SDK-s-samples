@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace SimpleCapture
+namespace SimpleCaptureMB
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

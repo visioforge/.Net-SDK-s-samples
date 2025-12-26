@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Scrolling Text Options" Height="540" Width="400"
+        Title="Scrolling Text Options" Height="600" Width="400"
         WindowStartupLocation="CenterOwner"
         Icon="visioforge_main_icon.ico"
         ResizeMode="NoResize">
@@ -68,12 +68,30 @@
             <ComboBoxItem Content="Orange"/>
         </ComboBox>
         
+        <!-- Font Style Options -->
+        <Label Content="Style:" HorizontalAlignment="Left" Margin="10,390,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbFontStyle" HorizontalAlignment="Left" Margin="80,392,0,0" VerticalAlignment="Top" Width="90">
+            <ComboBoxItem Content="Normal" IsSelected="True"/>
+            <ComboBoxItem Content="Italic"/>
+            <ComboBoxItem Content="Oblique"/>
+        </ComboBox>
+        
+        <Label Content="Weight:" HorizontalAlignment="Left" Margin="180,390,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbFontWeight" HorizontalAlignment="Left" Margin="240,392,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Normal" IsSelected="True"/>
+            <ComboBoxItem Content="Bold"/>
+            <ComboBoxItem Content="Light"/>
+            <ComboBoxItem Content="SemiBold"/>
+        </ComboBox>
+        
+        <CheckBox x:Name="cbUnderline" Content="Underline" HorizontalAlignment="Left" Margin="10,422,0,0" VerticalAlignment="Top"/>
+        
         <!-- Background Options -->
-        <CheckBox x:Name="cbTransparentBackground" Content="Transparent background" HorizontalAlignment="Left" Margin="10,395,0,0" 
+        <CheckBox x:Name="cbTransparentBackground" Content="Transparent background" HorizontalAlignment="Left" Margin="10,455,0,0" 
                   VerticalAlignment="Top" IsChecked="True" Checked="cbTransparentBackground_Changed" Unchecked="cbTransparentBackground_Changed"/>
         
-        <Label Content="Background:" HorizontalAlignment="Left" Margin="200,393,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbBackgroundColor" HorizontalAlignment="Left" Margin="280,395,0,0" VerticalAlignment="Top" Width="90" IsEnabled="False">
+        <Label Content="Background:" HorizontalAlignment="Left" Margin="200,453,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbBackgroundColor" HorizontalAlignment="Left" Margin="280,455,0,0" VerticalAlignment="Top" Width="90" IsEnabled="False">
             <ComboBoxItem Content="Black" IsSelected="True"/>
             <ComboBoxItem Content="DarkBlue"/>
             <ComboBoxItem Content="DarkRed"/>
@@ -81,10 +99,10 @@
         </ComboBox>
         
         <!-- Shadow -->
-        <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,425,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,485,0,0" VerticalAlignment="Top"/>
         
         <!-- Buttons -->
-        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="110,460,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
-        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="200,460,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="110,520,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="200,520,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
     </Grid>
 </Window>

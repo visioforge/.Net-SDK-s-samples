@@ -13,6 +13,6 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2025.12.10" />
   </ItemGroup>
 </Project>
